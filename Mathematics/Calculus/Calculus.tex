@@ -116,22 +116,25 @@ where
 \subsection{Continuity (連續性)}
 \begin{itemize}
 \item If $\exists \lim_{x\to a} f(x)$ and $\lim_{x\to a} f(x)=f(a)$, we say $f(x)$ is continuous (連續的) at $x=a$; otherwise, we say $f(x)$ is discontinuous (不連續的) at $x=a$.
+\item if $\exists\lim_{x\to a}f(x)\land\exists\lim_{x\to a}f(x)\neq f(a)$, we call $f(a)$ removable discontinuity.
+\item if $\exists\lim_{x\to a^-}f(x)\land\exists\lim_{x\to a^+}f(x)\land\lim_{x\to a^-}f(x)\neq\lim_{x\to a^+}f(x)$, we call $f(a)$ jump discontinuity.
+\item At least one of $\lim_{x\to a^-}f(x)$ and $\exists\lim_{x\to a^+}f(x)$ doesn't exist in $\mathbb{R}$, we call $f(a)$ essential discontinuity.
 \item If $f(x)$ is continuous at all points in a open interval $(a,b)$, we say $f(x)$ is continuous on $(a,b)$.
 \item If $f(x)$ is continuous on a open interval $(a,b)$, and $\lim_{x\to a^+}=f(a)$, we say $f(x)$ is continuous on the right-open interval $[a,b)$.
 \item If $f(x)$ is continuous on a open interval $(a,b)$, and $\lim_{x\to b^-}=f(b)$, we say $f(x)$ is continuous on the left-open interval $(a,b]$.
 \item If $f(x)$ is continuous on a open interval $(a,b)$, and $\lim_{x\to a^+}=f(a)\land\lim_{x\to b^-}=f(b)$, we say $f(x)$ is continuous on the closed interval $[a,b]$.
 \item If $f(x)$ is continuous at all points in its domain, we say $f(x)$ is a continuous function (連續函數).
-\item If both $f(x)$ and $g(x)$ are continuous at $x=a$, then $f(x)+g(x)$, $f(x)-g(x)$, and $f(x)\cdot g(x)$ are continuous at $x=a$.
-\item If both $f(x)$ and $g(x)$ are continuous at $x=a$ and $g(a)\neq 0$, then $\frac{f(x)}{g(x)}$ is continuous at $x=a$.
 \item If both $f(x)$ and $g(x)$ are continuous at $x=a$ and $g(a)\in D_f$, then $(f\circ g)(x)$ is continuous at $x=a$, namely, $\lim_{x\to a}\qty((f\circ g))(x))=f\qty(\lim_{x\to a} g(x))=(f\circ g)(a)$.
 \end{itemize}
+\subsection{Indicator function (指示函數或示性函數) or characteristic function (特徵函數)}
+An indicator function or a characteristic function of a subset $A$ of a set $X$ is a function that maps elements of the subset to one, and all other elements to zero, often denoted as $1_A$.
 
 
 
 \section{Sequences and Series (數列與級數)}
 \ssc{Sequence}
 \begin{itemize}
-\item\textbf{Sequence}: A sequence is a function of which the domain is a set $\{x\in\mathbb{Z}\land l\leq x\leq m\}$, in which $l$ usually equals to $0$ or $1$, usually denoted as $\langle a_n\rangle$, $\{a_n\}$, or $(a_n)$, sometimes denoted with domain as $\langle a_n\rangle_{n=l}^m$, $\{a_n\}_{n=l}^m$, or $(a_n)_{n=l}^m$, where the subscript $n$ refers to the $n$th element of the sequence, that is, the function value when the independent variable is $n$.
+\item\textbf{Sequence}: A sequence is a function of which the domain is a set $\{x\in\mathbb{Z}\land l\leq x\leq m\}$, in which $l$ usually equals to $0$ or $1$, usually denoted as $\langle a_n\rangle$, $\{a_n\}$, or $(a_n)$, sometimes denoted with domain as $\langle a_n\rangle_{n=l}^m$, $\{a_n\}_{n=l}^m$, or $(a_n)_{n=l}^m$, where the subscript $n$ refers to the $n$th element of the sequence, that is, the function value when the  independent variable is $n$. Below assume $l=1$.
 \item\textbf{Finite Sequence (有限數列)}: A finite sequence is a sequence with finite terms, i.e. $l,m\in\mathbb{Z}$.
 \item\textbf{Infinite sequence (無窮數列)}: An infinite sequence is a sequence with infinite terms, sometimes denoted with domain as $\langle a_n\rangle_{n=l}^\infty$. Unless otherwise specified, sequences usually refer to infinite sequences.
 \item\textbf{Upper Bound (上界)}: $M$ is an upper bound of sequence $\langle a_n\rangle$ if and only if $\forall n\text{\ s.t.\ }\exists a_n\colon a_n\leq M$. We say $\langle a_n\rangle$ is bounded-above if it has a upper bound.
@@ -210,8 +213,10 @@ Let:
 \[S_n = \sum_{i=1}^n a_i,\]
 where \(a_i\) are terms of a sequence. The limit of \(S_n\), denoted as \(\lim_{n\to\infty}S_n\) or \(\sum_{i=1}^{\infty}a_i\), is defined as the following:
 \[\sum_{i=1}^{\infty}a_i = L \equiv \forall \epsilon > 0:\, \exists N \in\mathbb{N}\text{\ s.t.\ } n \geq N\implies |S_n - L| < \epsilon.\]
-\subsubsection{Convergence (收斂) and Divergence (發散)}
+\subsubsection{Convergence and Divergence}
 A series \(S_n\) converges to \(L\) if \(\exists \lim_{n \to \infty} S_n \land \lim_{n \to \infty} S_n = L\). If no such \(L\) exists, we say the series does not converge, namely, the series diverges.
+
+A series $S_n=\sum_{i=1}^{\infty}a_i$ converges absolutely to $L$ if $\exists\lim_{n\to\infty}\sum_{i=1}^{\infty}\abs{a_1}\land\lim_{n\to\infty}\sum_{i=1}^{\infty}\abs{a_1}=L$. If $S_n$ is convergent but not convergent absolutely, we say $S_n$ converges conditionally.
 \subsubsection{Limit Laws}
 Given series $\sum_{i=1}^na_i$ and $\sum_{i=1}^nb_i$ such that:
 \[\exists\lim_{n\to\infty}\sum_{i=1}^na_i\land\exists\lim_{n\to\infty}\sum_{i=1}^nb_i\]
@@ -228,10 +233,10 @@ In other words, as \(x\) becomes arbitrarily close to \(a\), \(f(x)\) gets arbit
 \begin{itemize}
 \item Let \(I\) be a left-bounded, right-unbounded interval with the point \(a\) being its endpoint on the left. Let \( f(x) \) be a function defined on \(I\). The limit of \( f(x) \) as \( x \) approaches \( \infty \) is defined as follows:
 \[\lim_{x \to \infty} f(x) = L \equiv \forall \epsilon > 0: \, \exists M > a \text{\ s.t.\ } x > M \implies |f(x) - L| < \epsilon.\]
-In other words, as \(x\) becomes arbitrarily close to \(\infty\), \(f(x)\) gets arbitrarily close to \(L\).
+In other words, as \(x\) becomes arbitrarily big, \(f(x)\) gets arbitrarily close to \(L\). We say $f(x)$ converge to $L$ as $x\to\infty$ if $\lim_{x \to \infty} f(x) = L$.
 \item Let \(I\) be a right-bounded, left-unbounded interval with the point \(a\) being its endpoint on the right. Let \( f(x) \) be a function defined on \(I\). The limit of \( f(x) \) as \( x \) approaches \( -\infty \) is defined as follows:
 \[\lim_{x \to -\infty} f(x) = L \equiv \forall \epsilon > 0: \, \exists M < a \text{\ s.t.\ } x < M \implies |f(x) - L| < \epsilon.\]
-In other words, as \(x\) becomes arbitrarily close to \(-\infty\), \(f(x)\) gets arbitrarily close to \(L\).
+In other words, as \(x\) becomes arbitrarily small, \(f(x)\) gets arbitrarily close to \(L\). We say $f(x)$ converge to $L$ as $x\to-\infty$ if $\lim_{x \to -\infty} f(x) = L$.
 \end{itemize}
 \subsubsection{Horizontal asymptote (水平漸近線)}
 \[ \qty(\lim_{x \to \infty} f(x)=L \lor\lim_{x \to -\infty} f(x)=L) \iff \qty(y=L\tx{ is a horizontal asymptote of $y=f(x)$}).\]
@@ -391,13 +396,35 @@ The Darboux integral of $f$ exists and equals $s$ if for all $\varepsilon > 0$, 
 \[\abs{U(f,P)-s}<\varepsilon \land \abs{L(f,P)-s}<\varepsilon.\]
 \subsubsection{Integrability}
 A function is Riemann-integrable if and only if it is Darboux-integrable.
-\subsection{Indicator function (指示函數或示性函數) or characteristic function (特徵函數)}
-An indicator function or a characteristic function of a subset $A$ of a set $X$ is a function that maps elements of the subset to one, and all other elements to zero, often denoted as $1_A$.
+\subsubsection{Improper integral (瑕積分)}
+In the simplest case of a real-valued function of a single variable integrated in the sense of Riemann or Darboux over a single interval, $\int _{a}^{b}f(x)\dd{x}$ is an improper integrals if one or more of below conditions occur: 
+\ben
+\item$a=-\infty$
+\item$b=\infty$
+\item$f(x)$ is undefined or discontinuous somewhere on $[a,b]$
+\een
+If only the first or/and second condition occurs, we call the improper integral to be of the first type; if only the third condition occurs, we call the improper integral to be of the second type; otherwise, we call the improper integral to be of the third type.
+
+The improper integral is defined with:
+\bit
+\item $a=-\infty$:
+\[\int _{-\infty }^bf(x)\dd{x}=\lim _{a\to -\infty }\int _{a}^{b}f(x)\dd{x}.\]
+\item $b=\infty$:
+\[\int _{a}^{\infty }f(x)\dd{x}=\lim _{b\to \infty }\int _{a}^{b}f(x)\dd{x}.\]
+\item $f(x)$ is undefined or discontinuous at $c$, in which $a<c<b$:
+\[\int _{a}^{b}f(x)\dd{x}=\lim_{t\to c^-}\int _{a}^{t}f(x)\dd{x}+\lim_{t\to c^+}\int _{t}^{b}f(x)\dd{x}.\]
+\eit
+
+$\lim _{a\to -\infty }\int _{a}^{b}f(x)\dd{x}$ converges absolutely to $L$ if $\exists\lim _{a\to -\infty }\int _{a}^{b}\abs{f(x)}\dd{x}\land\lim _{a\to -\infty }\int _{a}^{b}\abs{f(x)}\dd{x}=L$.
+
+$\lim _{b\to \infty }\int _{a}^{b}f(x)\dd{x}$ converges absolutely to $L$ if $\exists\lim _{b\to \infty }\int _{a}^{b}f(x)\dd{x}\dd{x}\land\lim _{b\to \infty }\int _{a}^{b}f(x)\dd{x}=L$.
+
+If an improper integral is convergent but not convergent absolutely, we say it converges conditionally.
 \subsection{Lebesgue integral (勒貝格積分)}
 A definition of definite integral.
 
 Below, we will define the Lebesgue integral of measurable functions from a measure space $(E,\Sigma,\mu)$ into $\mathbb{R}\cup\{-\infty,\infty\}$.
-\subsubsection{Indicator functions}
+\subsubsection{Of an Indicator functions}
 The integral of an indicator function of a measurable set $S$ is defined to be
 \[\int 1_{S}\,\mathrm{d}{\mu} =\mu (S).\]
 \paragraph{Simple functions}
@@ -804,6 +831,31 @@ where:
 \item \( f(x_n) \) is the value of the function at \( x_n \),
 \item \( f'(x_n) \) is the derivative of \( f(x) \) evaluated at \( x_n \).
 \end{itemize}
+\ssc{(Unilateral or One-sided) Laplace Transform (（單邊）拉普拉斯變換)}
+The (unilateral or one-sided) Laplace transform is an integral transform that converts a function of a real variable (usually $t$, in the time domain) to a function of a complex variable (usually $s$, in the complex-valued frequency domain, also known as $s$-domain, or $s$-plane). The functions are often denoted in lowercase for the time-domain representation and uppercase for the frequency-domain.
+
+The Laplace transform, denoted as $\mathcal{L}\{f(t)\}(s)$ or $F(s)$ is defined (for suitable functions $f$) by the improper integral
+\[\mathcal{L}\{f(t)\}(s) = F(s) = \int_0^{\infty} e^{-st} f(t)\,\mathrm{d}t.\]
+
+If $f$ is integrable function, the Laplace transform $F(s)$ of $f$ converges provided that the limit 
+\[\lim _{R\to \infty }\int _{0}^{R}e^{-st}f(t)\dd{t}\]
+exists.
+
+The Laplace transform converges absolutely if the integral
+\[\int_0^{\infty} \abs{e^{-st} f(t)}\,\mathrm{d}t\]
+exists as a proper Lebesgue integral.
+
+The set of values for which $F(s)$ converges absolutely, called region of convergence (ROC), is either of the form $\Re(s) > a$ or $\Re(s) \geq a$, where $a$ is an extended real constant, i.e. $-\infty\leq a\leq\infty$.
+\ssc{(Bilateral or Two-sided) Laplace Transform (（雙邊）拉普拉斯變換)}
+The (bilateral or two-sided) Laplace transform is an integral transform that converts a function of a real variable (usually $t$, in the time domain) to a function of a complex variable (usually $s$, in the complex-valued angular frequency domain, also known as $s$-domain or $s$-plane). The functions are often denoted in lowercase for the time-domain representation and uppercase for the frequency-domain.
+
+The Laplace transform, denoted as $\mathcal{B}\{f(t)\}(s)$ is defined (for suitable functions $f$) by the improper integral
+\[\mathcal{B}\{f(t)\}(s) = \int_{-\infty}^{\infty} e^{-st} f(t)\,\mathrm{d}t.\]
+\ssc{Fourier Transform (FT) (傅立葉變換)}
+Fourier transform is an integral transform that converts a function of a real variable (usually $t$, in the time domain) to a function of another real variable (usually $\omega$, in the real-valued angular frequency domain). The functions are often denoted in lowercase for the time-domain representation and uppercase for the frequency-domain.
+
+The Fourier transform, denoted as $\mathcal{F}\{f(t)\}(\omega)$ or $F(\omega)$ is defined (for suitable functions $f$) by the improper integral
+\[\mathcal{F}\{f(t)\}(\omega) = F(\omega) = \int_{-\infty}^{\infty} e^{-i\omega t} f(t)\,\mathrm{d}t.\]
 
 
 
@@ -824,56 +876,6 @@ The error is defined as
 \[E_n=\int_a^bf(x)\,\mathrm{d}x-\frac{b-a}{3n}\left(2\left(\sum_{i=0}^nf(a+\frac{i}{n}(b-a))\right)+2\left(\sum_{i=1}^{\frac{n}{2}}f(a+\frac{2i-1}{n}(b-a))\right)-f(a)-f(b)\right).\]
 When $\frac{\mathrm{d}^4f(x)}{\mathrm{d}x^4}$ is continuous on $[a,b]$, the error satisfies that
 \[\abs{E_n}\leq\frac{(b-a)^5}{180n^4}\max_{a\leq x\leq b}\left(\abs{\frac{\mathrm{d}^4f(x)}{\mathrm{d}x^4}}\right).\]
-
-
-
-\section{Laplace Transform (拉普拉斯變換) and Fourier Transform (傅立葉變換)}
-\ssc{(Unilateral) Laplace Transform}
-The (unilateral) Laplace transform is an integral transform that converts a function of a real variable (usually $t$, in the time domain) to a function of a complex variable (usually $s$, in the complex-valued frequency domain, also known as $s$-domain, or $s$-plane). The functions are often denoted in lowercase for the time-domain representation and uppercase for the frequency-domain.
-
-The Laplace transform is defined (for suitable functions $f$ by the integral
-\[\mathcal{L}\{f(t)\}(s) = F(s) = \int_0^{\infty} e^{-st} f(t)\,\mathrm{d}t.\]
-
-The Laplace transform converges absolutely if the integral
-\[\int_0^{\infty} \abs{e^{-st} f(t)}\,\mathrm{d}t\]
-exists as a proper Lebesgue integral.
-
-The set of values for which $F(s)$ converges absolutely, called region of convergence (ROC), is either of the form Re(s) > a or Re(s) ≥ a, where a is an extended real constant with −∞ ≤ a ≤ ∞ 
-.
-
----
-
-Would you like me to also explain **how this differs from the Fourier transform** (since Laplace is kind of a generalization of Fourier)?
-
-The **Fourier transform** is another integral transform, closely related to the Laplace transform. Formally, for a function $f : \mathbb{R} \to \mathbb{C}$, its Fourier transform is defined as
-
-$$
-\mathcal{F}\{f(t)\}(\omega) \;=\; F(\omega) \;=\; \int_{-\infty}^{\infty} f(t)\, e^{-i \omega t}\, dt,
-$$
-
-where
-
-* $t \in \mathbb{R}$ is the **time (or space) variable**,
-* $\omega \in \mathbb{R}$ is the **angular frequency variable**,
-* the integral is understood in the sense of convergence (absolutely, in $L^1$, or in the distributional sense for broader classes of functions).
-
----
-
-### Convergence conditions
-
-* If $f \in L^1(\mathbb{R})$ (i.e. $\int_{-\infty}^\infty |f(t)|\, dt < \infty$), then $F(\omega)$ exists and is bounded and continuous.
-* More generally, the Fourier transform can be extended to square-integrable functions $f \in L^2(\mathbb{R})$ (using Plancherel’s theorem).
-* In advanced theory, it is even extended to **tempered distributions**.
-
----
-
-🔑 Difference from Laplace:
-
-* Fourier uses $e^{-i \omega t}$ (purely oscillatory kernel).
-* Laplace uses $e^{-st}$ with $s = \sigma + i\omega$, which includes a **decay/growth factor** $e^{-\sigma t}$ for convergence control.
-
-Do you want me to also write the **inverse Fourier transform** (the formal recovery formula)?
-
 
 
 
@@ -943,8 +945,11 @@ and function $f\in A$. Then:
 \[ \lim_{x \to \infty}\frac{n^{af\left(x\right)}}{bf\left(x\right)} = 0, \quad a,b > 0 \land  0\leq n<1 \]
 \[ \lim_{x \to \infty}\frac{af\left(x\right)}{b\log_n f\left(x\right)} = \infty, \quad a,b > 0 \land  n > 1 \]
 \ssc{Heaviside step function (黑維塞階躍函數)/unit step function (單位階躍函數)}
-\[H(x)=\begin{cases}0,\quad &x<0\\\frac{1}{2},\quad &x=0\\1,\quad &x>0\end{cases},\]
-where $H(0)$ is sometimes defined to be 1 or other values instead.
+\[H(x)=
+\begin{cases}0,\quad &x<0\\
+1,\quad &x\geq 0
+\end{cases},\]
+where $H(0)$ is sometimes defined to be $\frac{1}{2}$ or other values instead.
 \[H'(x)=\delta(x).\]
 \ssc{Dirac delta function (狄拉克 δ 函數)}
 \[
