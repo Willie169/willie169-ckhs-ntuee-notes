@@ -1,4 +1,4 @@
-\documentclass[a4paper,12pt]{article}
+\documentclass[a4paper,12pt]{report}
 \setcounter{secnumdepth}{5}
 \setcounter{tocdepth}{3}
 \input{/usr/share/latex-toolkit/template.tex}
@@ -7,7 +7,9 @@
 \author{沈威宇}
 \date{\temtoday}
 \titletocdoc
-\section{Digital Systems and Switching Circuits}
+\chapter{Switching Circuits and Logic Design}
+\section{Introduction: Number Systems and Conversion}
+\subsection{Digital Systems and Switching Circuits}
 \begin{itemize}
 \item\textbf{Digital system}: Deals with signals that have discrete values. Theoretically, for a given input, the output is exactly correct.
 \item\textbf{Analog system}: Deals with signals that vary continuously over time. The output might have an error depending on the accuracy of the components used.
@@ -19,3 +21,244 @@
 \item\textbf{Sequential circuit}: A circuit whose output value depends on the present input value and past input values.
 \item\textbf{Logic gate}: An electronic device that performs a basic Boolean operation on one or more binary inputs (0 or 1) to produce a single binary output (0 or 1).
 \end{itemize}
+\subsection{Number Systems}
+\subsubsection{Definition}
+Let $b\in\mathbb{N}\land b>1$. A number with digits $d_n d_{n-1} \dots d_1 d_0$ in base (or radix) $b$ represents the value:
+\[N = d_n \cdot b^n + d_{n-1} \cdot b^{n-1} + \dots + d_1 \cdot b^1 + d_0 \cdot b^0\]
+where each $d_i \in \mathbb{Z}\land 0\leq d_i<b$.
+\subsubsection{Conversion}
+Suppose you have a number written in base $N$ (with $N\in\mathbb{N}\land N>1$):
+\[(d_k d_{k-1} \dots d_1 d_0)_N\]
+To convert it into base $M$ (with $M\in\mathbb{N}\land M>1$), we can repeatedly divide the number by $M$ and record the remainders until the quotient is $0$, then the digits in base $M$ are the remainders read from last to first.
+\sssc{Special cases}
+There is an easier way for conversion Between base $b$ and base $b^n$ (with $b\in\mathbb{N}\land b>1$):
+\ben
+\item Base $b$ to Base $b^n$:
+\ben
+\item Group the digits of the base-$b$ number into blocks of $n$ digits, starting from the LSB.
+\item Convert each block to its equivalent single digit in base $b^n$.
+\item Concatenate the bits.
+\een
+\item Base $b^n$ to Base $b$:
+\ben
+\item Convert each digit of the base-$b^n$ number to $n$ digits in base $b$.
+\item Concatenate the $n$-digit blocks.
+\een
+\subsection{Binary}
+A binary digit is called a bit, which is either $0$ or $1$. Binary arithmetic is the same as decimals, except that "invert" or "flip" means converting $0$ to $1$ and $1$ to $0$, and "complement" means inverting all bits.
+
+The most significant bit (MSB) or most significant digit is the bit with the highest value place in a binary number and is the leftmost bit in standard binary notation; the least significant bit (LSB) or least significant digit is the bit with the lowest value place in a binary number and is the rightmost bit in standard binary notation.
+
+$4$ bits is called a nibble; $8$ bits is called a byte.
+
+A binary prefix is a unit prefix that indicates a multiple of a unit of measurement by an integer power of two. They are most often used in information technology as multipliers of bit and byte, in which the short prefixes are prefixed before b (representing bits) or B (representing bytes), and the long prefixes are prefixed before bits or bytes.
+\begin{longtable}[c]{|c|c|c|}
+\hline
+Value & IEC (short) & IEC (long) & JEDEC (short) & JEDEC (long)\\\hline
+$1024$ & Ki & kibi & K & kilo\\\hline
+$1024^2$ & Mi & mebi & M & mega\\\hline
+$1024^3$ & Gi & gibi & G & giga\\\hline
+$1024^4$ & Ti & tebi & T & tera\\\hline
+$1024^5$ & Pi & pebi & —\\\hline
+$1024^6$ & Ei & exbi & —\\\hline
+$1024^7$ & Zi & zebi & —\\\hline
+$1024^8$ & Yi & yobi & —\\\hline
+$1024^9$ & Ri & robi & —\\\hline
+$1024^10$ & Qi & quebi & —\\\hline
+\end{longtable}\FB
+\subsection{Signed Number}
+Suppose you have $N$ bit, to present a signed number, there's three common method:
+\sssc{Sign and magnitude}
+The MSB represents sign, in which $0$ represents positive and $1$ represents negative; the remaining represents magnitude. 
+
+It can represent numbers range from $-(2^{N-1}-1)$ to $2^{N-1}-1$. It has two zero ($+0$ and $-0$).
+
+It is the easiest to read, but its arithmetic is the hardest to compute.
+\sssc{1’s complement}
+The nonnegative numbers are the same as those in sign and magnitude; the negative numbers invert all bits of its absolute value. 
+
+It can represent numbers range from $-(2^{N-1}-1)$ to $2^{N-1}-1$. It has two zero ($+0$ and $-0$). 
+
+Its arithmetic is easier than sign and magnitude and harder than 2’s complement to compute. 
+
+The addition can be computed the same as unsigned numbers; however, if the sum had a carry out from the MSB, we must add it back to the LSB, called the "end-around carry".
+\begin{proof}\mbox{}\\
+Assume no overflow conditions.
+
+An $n$-bit negative number $X$ is represent as $2^n-1-|X|$ in 1’s complement.
+
+When we add two $n$-bit numbers $A$ and $B$, with 1’s complement representations $A_1$ and $B_1$.
+
+Let:
+\[S = A_1 + B_1,\quad R=S \mod 2^n, \quad C=\left\lfloor \frac{S}{2^n} \right\rfloor,\]
+and $S_c$ be the correct sum of $A$ and $B$ in 1’s complement.
+
+Case 0: $A>B\geq 0$
+\[S = A_1 + B_1 = A +B =S_c\]
+
+Case 1: $A\geq 0>B\land |B|<A$
+\[S = A_1 + B_1 = 2^n-1+A-|B|\]
+\[R=A-|B|,\quad C=1\]
+\[S_c=A-|B|=R+C\]
+
+Case 2: $0\geq A>B$
+\[S=A_1+B_1=2^{n+1}-2-|A|-|B|\]
+\[R=2^n-2-|A|-|B|,\quad C=1\]
+\[S_c=2^n-1-|A|-|B|=R+C\]
+\end{proof}
+
+If the sum of two positive numbers exceeds $2^{N-1}-1$, it overflows into the negative range; if the sum of two negative numbers is less than $-2^{N-1}$, it overflows into the positive range. This makes overflow detection straightforward. 
+\sssc{2’s complement}
+The nonnegative numbers are the same as those in sign and magnitude; the negative numbers invert all bits of its absolute value and add $1$. 
+
+It can represent numbers range from $-2^{N-1}$ to $2^{N-1}-1$. It has only one zero.
+
+The arithmetic is the easiest to compute.
+
+The addition can be computed the same as unsigned numbers. If the sum of two positive numbers exceeds $2^{N-1}-1$, it overflows into the negative range; if the sum of two negative numbers is less than $-2^{N-1}$, it overflows into the positive range. This makes overflow detection straightforward. 
+
+It is the most commonly used representation for signed numbers in computers.
+\ssc{Binary Codes}
+\sssc{Binary-coded decimal (BCD)}
+Binary-coded decimal (BCD), or more explicitly 8-4-2-1 BCD, is a way to represent decimal digits ($0$ to $9$) in binary, in which each decimal digit is encoded separately using 4 bits (a nibble).
+
+There are several other possible sets of binary codes for the ten decimal digits. A $k$-bit ($k\geq 4$) weighted code (in decimal) has the property that if the weights are $w_{k-1}, w_{k-2}, \ldots w_0$ (where for all $0\leq i<j<k$, $w_i<w_j$), the code $a_{k-1}a_{k-2}\ldots a_0$ represents a decimal number $N$, then
+\[N = \sum_{n=0}^{k-1}w_na_n.\]
+
+Below shows the BCD and other commonly used binary codes:
+\begin{longtable}[c]{|c|c|c|c|c|c|}
+\hline
+Decimal Digit & 8-4-2-1 Code (BCD) & 6-3-1-1 Code & Excess-3 Code & 2-out-of-5 Code & Gray Code\\\hline
+0 & 0000 & 0000 & 0011 & 00011 & 0000\\\hline
+1 & 0001 & 0001 & 0100 & 00101 & 0001\\\hline
+2 & 0010 & 0011 & 0101 & 00110 & 0011\\\hline
+3 & 0011 & 0100 & 0110 & 01001 & 0010\\\hline
+4 & 0100 & 0101 & 0111 & 01010 & 0110\\\hline
+5 & 0101 & 0111 & 1000 & 01100 & 1110\\\hline
+6 & 0110 & 1000 & 1001 & 10001 & 1010\\\hline
+7 & 0111 & 1001 & 1010 & 10010 & 1011\\\hline
+8 & 1000 & 1011 & 1011 & 10100 & 1001\\\hline
+9 & 1001 & 1100 & 1100 & 11000 & 1000\\\hline
+\end{longtable}\FB
+
+\begin{itemize}
+\item\tb{8-4-2-1 Code (BCD)}: Each decimal digit is directly mapped to its binary form, which makes it easy to convert between decimal numbers and binary.
+\item\tb{6-3-1-1 Code}: Sometimes makes it easier to design display drivers or simplify logic circuits.
+\item\tb{Excess-3 Code}: It's sefl-complementing, i.e. the complement of it is the 9’s complement of the number. 
+\item\tb{2-out-of-5 Code}: Always has exactly 2 ones.
+\item\tb{Gray Code}: Each step changes only one bit, which minimizes transition errors for sensors, counters, or rotary encoders.
+\eit
+\sssc{Character Encoding}
+Many applications of computers require the processing of data which contains numbers, letters, and other symbols. In order to transmit such data to or from a computer or store it internally in a computer, each character must be represented by a binary code.
+
+Common character encodings:
+\bit
+\item\tb{ASCII code (American Standard Code for Information Interchange)}: A 7-bit code, so 128 different code combinations are available.
+\item\tb{Unicode / The Unicode Standard (TUS) / UTF-8}: For international characters (like 中文, emojis, etc.). The Unicode Standard itself defines three encodings: UTF-8, UTF-16, and UTF-32, which represent characters in 8, 16, 32 bytes respectively. UTF-8 is the most widely used, in part due to its backwards-compatibility with ASCII.
+\eit
+\section{Boolean Algebra}
+\subsection{Introduction}
+The basic mathematics needed for the study of logic design of digital systems is Boolean algebra. Boolean algebra was introduced by George Boole in his first book The Mathematical Analysis of Logic (1847), and set forth more fully in his An Investigation of the Laws of Thought (1854).
+
+Switching devices are essentially two-state devices (e.g. switches which are open or closed and transistors with high or low output voltages). Consequently, we will emphasize the special case of Boolean algebra in which all of the variables assume only one of two values, 0 (false) or 1 (true), called Boolean variables; this two-valued Boolean algebra is also called switching algebra.
+
+In a switch circuit, 0 (usually) represents an open switch, and 1 represents a closed circuit. In general, 0 and 1 can be used to represent the two states in any binary-valued system.
+\subsection{Basic operations}
+\sssc{NOT (Negation / Inversion / Complement)}
+\begin{itemize}
+\item Symbol: $\overline{A}$ or $A'$
+\item Meaning: Flip the value.
+\item Truth Table:
+\begin{longtable}[c]{|m|m|}
+\hline
+A & A'\\\hline
+0 & 1\\\hline
+1 & 0\\\hline
+\end{longtable}
+\item 
+\sssc{AND (Conjunction / Multiplication)}
+\begin{itemize}
+\item Symbol: $A \cdot B$, $A*B$, or $AB$
+\item Meaning: True only if both inputs are true.
+\item Truth Table:
+\begin{longtable}[c]{|m|m|m|}
+\hline
+A & B & A\cdot B\\\hline
+0 & 0 & 0\\\hline
+1 & 0 & 0\\\hline
+0 & 1 & 0\\\hline
+1 & 1 & 1\\\hline
+\end{longtable}
+\sssc{OR (Disjunction / Addition / Inclusive OR)}
+\begin{itemize}
+\item Symbol: $A + B$
+\item Meaning: True if at least one input is true.
+\item Truth Table:
+\begin{longtable}[c]{|m|m|m|}
+\hline
+A & B & A\cdot B\\\hline
+0 & 0 & 0\\\hline
+1 & 0 & 1\\\hline
+0 & 1 & 1\\\hline
+1 & 1 & 1\\\hline
+\end{longtable}
+\ssc{Boolean Expressions and Truth Tables}
+Boolean expressions are formed by application of the basic operations to one or more variables or constants. The simplest expressions consist of a single constant or variable or its complement, such as 0, X, or Y′, which are called "literals". More complicated expressions are formed by combining two or more other expressions using AND or OR, or by complementing another expression.
+
+Parentheses are added as needed to specify the order in which the operations are performed. When parentheses are omitted, complementation is performed first and then AND and then OR.
+
+A truth table, also called a table of combinations, specifies the corresponding output values for all possible combinations of input values for a binary expression. A truth table for an $n$-variable expression will have $2^n$ rows.
+\ssc{Theorems}
+\sssc{Basic theorems}
+\bit
+\item Idempotent laws:
+\[X + X = X,\quad X·X = X.\]
+\item Involution law:
+\[(X′)′ = X.\]
+\item Laws of complementarity:
+\[X + X′ = 1 ,\quad X·X′ = 0 .\]
+\item AND is commutative:
+\[XY=YX.\]
+\item OR is commutative:
+\[X+Y=Y+X.\]
+\item AND is associative:
+\[XYZ=X(YZ).\]
+\item OR is associative:
+\[X+Y+Z=X+(Y+Z).\]
+\item AND is distributive over OR:
+\[X(Y+Z)=XY+XZ.\]
+\item OR is distributive over AND:
+\[X+YZ=(X+Y)(X+Z).\]
+\item DeMorgan’s Laws:
+\[(\sum_{i=1}^nX_i)′=\prod_{i=1}^nX_i',\quad (\prod_{i=1}^nX_i)'=\sum_{i=1}^nX_i'.\]
+\item Duality Principle: If a Boolean equation is true, you can get another true equation, called its dual, by interchanging AND and OR and interchanging 0 and 1 everywhere.
+\eit
+\sssc{Simplification theorems}
+\bit
+\item Uniting:
+\[XY+XY'=X,\quad (X+Y)(X+Y')=X.\]
+\item Absorption:
+\[X+XY=X,\quad X(X+Y)=X.\]
+\item Elimination:
+\[X+X'Y=X+Y,\quad X(X'+Y)=XY.\]
+\item Consensus:
+\[XY+X′Z+YZ=XY+X′Z.\]
+\begin{proof}
+\[\begin{aligned}
+XY+X′Z+YZ&=XY+X'Z+(X+X')YZ\\
+&=XY+X'Z+XYZ+X'YZ\\
+&=XY+X′Z.
+\end{aligned}\]
+\end{proof}
+\[(X+Y)(X′+Z)(Y+Z)=(X+Y)(X′+Z).\]
+\begin{proof}
+\[\begin{aligned}
+(X+Y)(X′+Z)(Y+Z)&=(X+Y)(X'+Z)(X+X')(Y+Z)\\
+&=(X+Y)(X'+Z)(X+Y+Z)(X'+Y+Z)\\
+&=(X+Y)(X′+Z).
+\end{aligned}\]
+\end{proof}
+
+
+A logic gate is a device that performs a Boolean function, a logical operation performed on one or more binary inputs that produces a single binary output.
+{{{logic gates symbol 待
