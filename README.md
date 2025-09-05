@@ -13,8 +13,8 @@ Copyright (c) 2025，沈威宇。保留所有權利。
 
 ### Convention
 
-- The primary languages used in the notes are Traditional Chinese and English. Where regional Chinese terms differ, Taiwanese usage is often used. In the context of Chinese text, if the specific location or subject of an event is not specified but necessary, it is generally assumed to be in Taiwan or the Republic of China.
-- When not specified: spaces are Euclidean vector spaces; in Euclidean vector spaces, the coordinate system used is the Cartesian coordinate system, where right-hand one is used in three dimensional Euclidean vector space, and the norm or distance used is the Euclidean distance; fields are the field of real numbers; and the units of physical quantities are SI units.
+- The primary languages used in the notes are Traditional Chinese and English. Where regional Chinese terms differ, Taiwanese usage is often used if not otherwise specified.
+- If not otherwise specified: variables in bold math font are vectors, variables in normal math font are scalar; spaces are Euclidean vector spaces; in Euclidean vector spaces, the coordinate system used is the Cartesian coordinate system, where right-hand one is used in three dimensional Euclidean vector space, and the norm or distance used is the Euclidean distance; fields are the field of real numbers; and the units of physical quantities are SI units.
 
 ### Download
 
