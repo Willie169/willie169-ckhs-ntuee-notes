@@ -19,11 +19,14 @@ A function $f$ that satisfies the above is denoted as:
 \[f\colon X\to Y.\]
 in which the domain $X$ is also denoted as $D_f$.
 
-The range (值域), denoted as $R_f$ or $f(X)$, is defined as:
+The range (值域) or image (像), denoted as $R_f$ or $f(X)$, is defined as:
 \[\{ y \mid \exists x \in X, (x, y) \in R \}.\]
 
 If $x\in X$ and $(x, y) \in R$, we write $y = f(x)$, in which $f(x)$ is called the image of $x$ under $f$, $x$ is called the independent variable (自變數 or 獨立變數), and $y$ is called the dependent variable (應變數 or 依賴變數); and the function $f$ is also denoted as:
 \[f \colon X \to Y;\, x \mapsto y.\]
+
+If $I$ is a subset of the domain of $f$, $f(I)$ is defined as
+\[f(I)\coloneq\{y\mid\exists x\in I \tx{\ s.t.\ }f(x)=y\}.\]
 \ssc{Type of Functions}
 Consider a function $f$:
 \[f\colon X\to Y;\,x\mapsto y.\]
@@ -38,7 +41,7 @@ Injective and surjective function.
 \ssc{Increasing and Decreasing}
 Consider a function $f$:
 \[f\colon X\to Y;\,x\mapsto y,\]
-such that $Y$ is a totally ordered set.
+in which $Y$ is a preordered set.
 \sssc{Non-Decreasing (非遞減) or Monotone Increasing (單調遞增) function}
 $f$ is non-decreasing on $I\subseteq X$ if and only if
 \[\forall a,b\in I\colon a<b\implies f(a)\leq f(b).\]
@@ -59,27 +62,13 @@ $f$ is strictly decreasing on $I\subseteq X$ if and only if
 \[\forall a,b\in I\colon a<b\implies f(a)>f(b).\]
 $f$ is strictly decreasing if and only if
 \[\forall a,b\in X\colon a<b\implies f(a)>f(b).\]
-\sssc{Monotone (單調) function}
+\sssc{Monotone (單調) or Order-preserving function or Order homomorphism}
 $f$ is monotone on $I\subseteq X$ if and only if it is either non-increasing or non-decreasing on $I$.
 
 $f$ is monotone if and only if it is either non-increasing or non-decreasing.
-\ssc{Bound}
-\sssc{Upper Bound (上界)}
-$M$ is an upper bound of a function $f$ on a subset $I$ of its domain if for any $x\in I$, $f(x)<M$. We say a function is bounded-above (有上界的) on a subset $I$ of its domain if it has an upper bound on $I$.
-
-$M$ is an upper bound of a function $f$ if for any $x$ in its domain, $f(x)<M$. We say a function is bounded-above if it has an upper bound.
-\sssc{Lower Bound (下界)}
-$m$ is a lower bound of a function $f$ on a subset $I$ of its domain if for any $x\in I$, $f(x)>m$. We say a function is bounded-below (有下界的) on a subset $I$ of its domain if it has a lower bound on $I$.
-
-$m$ is an upper bound of a function $f$ if for any $x$ in its domain, $f(x)>m$. We say a function is bounded-below if it has a lower bound.
-\sssc{Supremum or Least Upper Bound (最小上界)}
-The supremum or least upper bound of a function $f$, denoted as $\sup_xf(x)$, is defined as $M_0$ in the set $\mathcal{M}$ of all upper bounds of $f$ such that $\forall M\in\mathcal{M}\colon M_0\leq M$.
-\sssc{Infimum or Greatest Lower Bound (最大下界)}
-The infimum or greatest lower bound of a function $f$, denoted as $\sup_xf(x)$, is defined as $m_0$ in the set $\mathcal{M}$ of all lower bounds of $f$ such that $\forall m\in\mathcal{M}\colon m_0\geq m$.
-\sssc{Bounded (有界的)}
-We say a function is bounded on a subset $I$ of its domain if it is bounded-above and bounded-below on $I$.
-
-We say a function is bounded if it is bounded-above and bounded-below.
+\ssc{Of Exponential Order}
+A function $f\colon\mathbb{R}_{\geq 0}\to\mathbb{R}$ or $f\colon\mathbb{R}_{>0}\to\mathbb{R}$ is considered of exponential order $\alpha\in\mathbb{R}_{>0}$ if there exists $M>0$ and $T>0$ such that:
+\[|f(t)|\leq Me^{\alpha t}\quad \forall t>T.\]
 \ssc{Symmetry}
 Given a function $f\colon X\to Y$ such that $\forall x\in X\colon -x\in X$.
 \sssc{Even Function (偶函數)}
@@ -97,6 +86,9 @@ For two functions $f\colon X\to Y$ and $g\colon V\to W$ such that $g(V)\subseteq
 \ssc{Inverse function (反函數)}
 For a bijective function $f\colon X\to Y$, the inverse of it, denoted as $f^{-1}$, is defined as:
 \[f^{-1}\colon Y\to X;\,f(x)\mapsto x\]
+\sssc{Preimage or Inverse image}
+Given an open subset $B$ of the codomain of a function $f$ the preimage or inverse image of $f$ on $B$, denoted as $f^{-1}(B)$ is defined as
+\[f^{-1}(B)=\{x\in X|f(x)\in B\}.\]
 \ssc{Piecewise function (分段函數)}
 A piecewise function is a function defined in the form:
 \[f(x) =
@@ -120,16 +112,16 @@ A reciprocal function is function $f(x)=\frac{1}{x}$.
 \sssc{Polynomial (多項式)}
 A polynomial is a function $P(x)=\sum_{k=0}^na_kx^k$ where $a_k\in\mathbb{R}$ or $\mathbb{C}$ are constants called coefficients and $n$ is a nonnegative integer called the degree of $P$.
 \sssc{Rational Function (有理函數)}
-A function $f$ is called an algebraic function if there exists two polynomials $P(x)$ and $Q(x)$ such that $f(x)=\frac{P(x)}{Q(x)}$ for all $x$ in the domain.
+A function $f$ is called a rational function if there exists two polynomials $P(x)$ and $Q(x)$ such that $f(x)=\frac{P(x)}{Q(x)}$ for all $x$ in the domain.
 \sssc{Algebraic Function (代數函數)}
 A function $f$ is called an algebraic function if there exists a polynomial $P(y,x)$ in two variables such that $P(f(x),x)=0$ for all $x$ in the domain.
-\sssc{Heaviside step function (黑維塞階躍函數)/unit step function (單位階躍函數)}
-\[H(x)=
+\sssc{Heaviside step function (黑維塞階躍函數) or Unit step function (單位階躍函數)}
+\[H(x)=u(x)=
 \begin{cases}0,\quad &x<0\\
 1,\quad &x\geq 0
 \end{cases},\]
-where $H(0)$ is sometimes defined to be $\frac{1}{2}$ or other values instead.
-\[H'(x)=\delta(x).\]
+where $H(0)=u(0)$ is sometimes defined to be $\frac{1}{2}$ or other values instead.
+\[H'(x)=u'(x)=\delta(x).\]
 \sssc{Dirac delta function (狄拉克 δ 函數)}
 \[
 \delta(x) =
@@ -165,26 +157,25 @@ where $H(0)$ is sometimes defined to be $\frac{1}{2}$ or other values instead.
 
 
 \section{Limit (極限)}
-\subsection{Limit of Sequence}
+\subsection{Limits of Real Sequences}
+Below, we are discussing limits of sequences in the set of real number and $\mathbb{N}$ denotes the domain of them.
 \subsubsection{Definition}
-For a sequence \(\langle a_n\rangle\), the limit of \(\langle a_n\rangle\) as \( n \) approaches \( \infty \) is defined as follows:
-\[\lim_{n \to \infty} a_n = L \equiv \forall \epsilon > 0:\, \exists N \in\mathbb{N}\text{\ s.t.\ } n \geq N\implies |a_n - L| < \epsilon.\]
+For a real sequence \(\langle a_n\rangle\), the limit of \(\langle a_n\rangle\), denoted as $\lim_{n \to \infty} a_n$ or $\lim_n a_n$, is defined as follows:
+\[\lim_{n \to \infty} a_n = L \equiv \forall \epsilon > 0:\, \exists N \in\mathbb{N}\text{\ s.t.\ } n\in\mathbb{N}\land n \geq N\implies |a_n - L| < \epsilon.\]
 In other words, as \(n\) becomes arbitrarily large, \(a_n\) gets arbitrarily close to \(L\).
+
+If such $N$ exists, we say the limit exists or the sequence converges (收斂) to $L$; otherwise, we say the limit doesn't exist or the sequence diverge (發散).
 \subsubsection{Infinite Limits}
-\[\lim_{n\to \infty}a_n=\infty \equiv \forall M > 0, \exists N \in\mathbb{N} \text{\ s.t.\ } n > N \implies a_n > M.\]
-\[\lim_{n\to \infty}a_n=-\infty \equiv \forall M < 0, \exists N \in\mathbb{N} \text{\ s.t.\ } n > N \implies a_n < M.\]
-\subsubsection{Existence of a Limit}
-\[\exists\lim_{n\to \infty}a_n\iff\exists \,\text{finite}\,L\text{\ s.t.\ } \forall \epsilon > 0:\, \exists N \in\mathbb{N}\text{\ s.t.\ } n \geq N\implies |a_n - L| < \epsilon.\]
-\subsubsection{Convergence (收斂) and Divergence (發散)}
-A sequence \(\langle a_n\rangle\) converges to \(L\) if \(\exists \lim_{n \to \infty} a_n \land \lim_{n \to \infty} a_n = L\). If no such \(L\) exists, we say the sequence does not converge, namely, the sequence diverges.
+\[\lim_{n\to \infty}a_n=\infty \equiv \forall M > 0, \exists N \in\mathbb{N} \text{\ s.t.\ } n\in\mathbb{N}\land n \geq N \implies a_n > M.\]
+\[\lim_{n\to \infty}a_n=-\infty \equiv \forall M < 0, \exists N \in\mathbb{N} \text{\ s.t.\ } n\in\mathbb{N}\land n \geq N \implies a_n < M.\]
 \sssc{Preservation of equal to}
-Given sequences $\langle a_n\rangle$ and $\langle b_n\rangle$ which for all $k$ that is greater than a specific positive integer $j$, $a_k=b_k$ and that $\lim_{n\to\infty}a_n$ exists, then $\lim_{n\to\infty}b_n$ exists and that:
+Given real sequences $\langle a_n\rangle$ and $\langle b_n\rangle$ which for all $k$ that is greater than or equal to a specific $j\in \mathbb{N}$, $a_k=b_k$ and that $\lim_{n\to\infty}a_n$ exists, then $\lim_{n\to\infty}b_n$ exists and that:
 \[\lim_{n\to\infty}a_n=\lim_{n\to\infty}b_n.\]
 \sssc{Preservation of less than or equal to}
-Given sequences $\langle a_n\rangle$ and $\langle b_n\rangle$ which for all $k$ that is greater than a specific positive integer $j$, $a_k\leq b_k$ and that both $\lim_{n\to\infty}a_n$ and $\lim_{n\to\infty}b_n$ exist, then:
+Given real sequences $\langle a_n\rangle$ and $\langle b_n\rangle$ which for all $k$ that is greater than or equal to a specific $j\in \mathbb{N}$, $a_k\leq b_k$ and that both $\lim_{n\to\infty}a_n$ and $\lim_{n\to\infty}b_n$ exist, then:
 \[\lim_{n\to\infty}a_n\leq\lim_{n\to\infty}b_n.\]
-\sssc{Squeeze (夾擠) or Sandwich (三明治) theorem}
-Given sequences $\langle a_n\rangle$, $\langle b_n\rangle$, and $\langle c_n\rangle$ which for all $k$ that is greater than a specific positive integer $j$:
+\sssc{Squeeze (夾擠) theorem or Sandwich (三明治) theorem}
+Given real sequences $\langle a_n\rangle$, $\langle b_n\rangle$, and $\langle c_n\rangle$ which for all $k$ that is greater than or equal to a specific $j\in \mathbb{N}$:
 \[a_k\leq c_k\leq b_k\]
 and
 \[\lim_{n\to\infty}a_n=\lim_{n\to\infty}b_n=L,\]
@@ -204,7 +195,7 @@ Let $\{a_{n}\}_{n\in\mathbb {N}}$ be the set of values of $\langle a_n\rangle$. 
 since otherwise $c-\epsilon$ is a strictly smaller upper bound of $\langle a_n\rangle$, contradicting the definition of the supremum. 
 
 Then since $\langle a_n\rangle$ is non decreasing, and $c$ is an upper bound:
-\[\forall\epsilon>0:\,\exists N\text{\ s.t.\ }\forall n>N:\,|c-a_n|=c-a_n\leq c-a_N=|c-a_N|<\epsilon.\]
+\[\forall\epsilon>0:\,\exists N\text{\ s.t.\ }\forall n\geq N:\,|c-a_n|=c-a_n\leq c-a_N=|c-a_N|<\epsilon.\]
 The proof of the (B) part is analogous or follows from (A) by considering $\langle -a_{n}\rangle_{n\in \mathbb{N}}$.
 \end{proof}
 \textit{Statement.}
@@ -230,28 +221,28 @@ Given $a$ and $b$, $\pm\sqrt{ab}$ is called the median of an geometric sequence 
 \[\nexists\lim_{n\to\infty}a_n,\quad |d|\geq 1\land d\neq 1\]
 \[\lim_{n\to\infty}a_n=a_1,\quad d=1\]
 \[\lim_{n\to\infty}a_n=0,\quad |d|<1\]
-\subsection{A Limit for a Series (級數)}
+\subsection{Limits of Real Series}
 \subsubsection{Definition}
 Let:
 \[S_n = \sum_{i=1}^n a_i,\]
-where \(a_i\) are terms of a sequence. The limit of \(S_n\), denoted as \(\lim_{n\to\infty}S_n\) or \(\sum_{i=1}^{\infty}a_i\), is defined as the following:
+where \(a_i\) are terms of a real sequence. The limit of \(S_n\), denoted as \(\lim_{n\to\infty}S_n\) or \(\sum_{i=1}^{\infty}a_i\), is defined as the following:
 \[\sum_{i=1}^{\infty}a_i = L \equiv \forall \epsilon > 0:\, \exists N \in\mathbb{N}\text{\ s.t.\ } n \geq N\implies |S_n - L| < \epsilon.\]
-\subsubsection{Convergence and Divergence}
-A series \(S_n\) converges to \(L\) if \(\exists \lim_{n \to \infty} S_n \land \lim_{n \to \infty} S_n = L\). If no such \(L\) exists, we say the series does not converge, namely, the series diverges.
 
+If such $N$ exists, we say the limit exists or the series converges to $L$; otherwise, we say the limit doesn't exist or the series diverge.
+\subsubsection{Absolute convergence and conditional convergence}
 A series $S_n=\sum_{i=1}^{\infty}a_i$ converges absolutely to $L$ if $\exists\lim_{n\to\infty}\sum_{i=1}^{\infty}\abs{a_1}\land\lim_{n\to\infty}\sum_{i=1}^{\infty}\abs{a_1}=L$. If $S_n$ is convergent but not convergent absolutely, we say $S_n$ converges conditionally.
 \sssc{Preservation of equal to}
-Given sequences $\langle a_n\rangle$ and $\langle b_n\rangle$ which for all $k$ that is greater than a specific positive integer $j$:
+Given real sequences $\langle a_n\rangle$ and $\langle b_n\rangle$ which for all $k$ that is greater than or equal to a specific $j\in \mathbb{N}$:
 \[\sum_{i=1}^ka_i=\sum_{i=1}^kb_i\]
 and that $\sum_{i=1}^{\infty}a_i$ exists, then $\sum_{i=1}^{\infty}b_i$ exists and that
 \[\sum_{i=1}^{\infty}a_i=\sum_{i=1}^{\infty}b_i.\]
 \sssc{Preservation of less than or equal to}
-Given sequences $\langle a_n\rangle$ and $\langle b_n\rangle$ which for all $k$ that is greater than a specific positive integer $j$:
+Given real sequences $\langle a_n\rangle$ and $\langle b_n\rangle$ which for all $k$ that is greater than or equal to a specific $j\in \mathbb{N}$:
 \[\sum_{i=1}^ka_i\leq\sum_{i=1}^kb_i\]
 and that both $\sum_{i=1}^{\infty}a_i$ and $\sum_{i=1}^{\infty}b_i$ exist, then
 \[\sum_{i=1}^{\infty}a_i\leq\sum_{i=1}^{\infty}b_i.\]
-\sssc{Squeeze or Sandwich theorem}
-Given sequences $\langle a_n\rangle$, $\langle b_n\rangle$, and $\langle c_n\rangle$ which for all $k$ that is greater than a specific positive integer $j$:
+\sssc{Squeeze theorem or Sandwich theorem}
+Given real sequences $\langle a_n\rangle$, $\langle b_n\rangle$, and $\langle c_n\rangle$ which for all $k$ that is greater than or equal to a specific $j\in \mathbb{N}$:
 \[\sum_{i=1}^ka_i\leq\sum_{i=1}^kc_i\leq\sum_{i=1}^kb_i\]
 and
 \[\sum_{i=1}^{\infty}a_i=\sum_{i=1}^{\infty}b_i=L,\]
@@ -305,12 +296,35 @@ Infinity:
 \sum_{i=1}^ni^r &= n + \sum_{k=1}^{n-1} (n-k)((k+1)^r - k^r)\\
 &= n + \sum_{k=1}^{n-1} (n-k)\sum_{j=0}^{r-1}\binom{r}{j}k^{j}
 \end{aligned}\]
-\subsection{A Limit for a Real-domain Function}
-\subsubsection{Limit at Finity}
+\subsection{Limits of Real Nets}
+Below, we are discussing limits of nets in the set of real number.
+\subsubsection{Definition}
+For a real net $\langle x_a\rangle_{a\in A}$ in which $A$ is a directed set, the limit of $\langle x_a\rangle_{a\in A}$, denoted as $\lim_{a\in A} x_a$ or $\lim_a x_a$, is defined as follows:
+\[\lim_ax_a = L \equiv \forall \epsilon > 0:\, \exists a_0 \in A\text{\ s.t.\ } a\in A\land a\ge a_0\implies |x_a - L| < \epsilon.\]
+
+If such $N$ exists, we say the limit exists or the net converges to $L$; otherwise, we say the limit doesn't exist.
+\subsubsection{Infinite Limits}
+\[\lim_{a}x_a=\infty \equiv \forall M > 0, \exists a_0 \in A \text{\ s.t.\ } a\in A\land a\geq a_0 \implies x_a > M.\]
+\[\lim_{a}x_a=-\infty \equiv \forall M < 0, \exists a_0 \in A \text{\ s.t.\ } a\in A\land a\geq a_0 \implies x_a < M.\]
+\sssc{Preservation of equal to}
+Let $A$ be a directed set. Given real nets $\langle x_a\rangle_{a\in A}$ and $\langle b_n\rangle_{a\in A}$ which for all $k$ that is greater than or equal to a specific $j\in A$, $a_k=b_k$ and that $\lim_{a}x_a$ exists, then $\lim_{a}b_n$ exists and that:
+\[\lim_{a}x_a=\lim_{a}b_n.\]
+\sssc{Preservation of less than or equal to}
+Let $A$ be a directed set. Given real nets $\langle x_a\rangle_{a\in A}$ and $\langle b_n\rangle_{a\in A}$ which for all $k$ that is greater than or equal to a specific $j\in A$, $a_k\leq b_k$ and that both $\lim_{a}x_a$ and $\lim_{a}b_n$ exist, then:
+\[\lim_{a}x_a\leq\lim_{a}b_n.\]
+\sssc{Squeeze theorem or Sandwich theorem}
+Let $A$ be a directed set. Given real nets $\langle x_a\rangle_{a\in A}$, $\langle b_n\rangle_{a\in A}$, and $\langle c_n\rangle_{a\in A}$ which for all $k$ that is greater than or equal to a specific $j\in A$:
+\[a_k\leq c_k\leq b_k\]
+and
+\[\lim_{a}x_a=\lim_{a}b_n=L,\]
+then: 
+\[\lim_{a}c_n=L.\]
+\subsection{Limits of Functions with Real Domains}
+\subsubsection{Definition at Finity}
 Let \(I\) be an interval containing the point \(a\). Let \( f(x) \) be a function defined on \(I\), except possibly at \(a\) itself. The limit of \( f(x) \) as \( x \) approaches \( a \) is defined as follows:
 \[\lim_{x \to a} f(x) = L \equiv \forall \epsilon > 0:\, \exists \delta > 0 \text{\ s.t.\ } 0 < |x - a| < \delta \implies |f(x) - L| < \epsilon.\]
 In other words, as \(x\) becomes arbitrarily close to \(a\), \(f(x)\) gets arbitrarily close to \(L\).
-\subsubsection{Limit at Infinity}
+\subsubsection{Definition at Infinity}
 \begin{itemize}
 \item Let \(I\) be a left-bounded, right-unbounded interval with the point \(a\) being its endpoint on the left. Let \( f(x) \) be a function defined on \(I\). The limit of \( f(x) \) as \( x \) approaches \( \infty \) is defined as follows:
 \[\lim_{x \to \infty} f(x) = L \equiv \forall \epsilon > 0: \, \exists M > a \text{\ s.t.\ } x > M \implies |f(x) - L| < \epsilon.\]
@@ -328,9 +342,13 @@ In other words, as \(x\) becomes arbitrarily small, \(f(x)\) gets arbitrarily cl
 \item \tb{Right-hand Limit (右極限)}: Let \(I\) be a left-open interval with the point \(a\) being its endpoint on the left. Let \( f(x) \) be a function defined on \(I\). The right-hand limit of \( f(x) \) as \( x \) approaches \( a \) is defined as follows:
 \[\lim_{x \to a^+} f(x) = L \equiv \forall \epsilon > 0 :\,\exists \delta > 0 \text{\ s.t.\ } 0 < x - a < \delta \implies |f(x) - L| < \epsilon.\]
 In other words, as \(x\) becomes arbitrarily close to \(a\) and is greater than \(a\), \(f(x)\) gets arbitrarily close to \(L\).
+
+For a function $f(x)$, $\lim_{x\to a^+}f(x)$ can also be denoted as $f(a^+)$.
 \item \tb{Left-hand Limit (左極限)}: Let \(I\) be a right-open interval with the point \(a\) being its endpoint on the right. Let \( f(x) \) be a function defined on \(I\). The left-hand limit of \( f(x) \) as \( x \) approaches \( a \) is defined as follows:
 \[\lim_{x \to a^-} f(x) = L \equiv \forall \epsilon > 0 :\,\exists \delta > 0 \text{\ s.t.\ } 0 < a - x < \delta \implies |f(x) - L| < \epsilon.\]
 In other words, as \(x\) becomes arbitrarily close to \(a\) and is less than \(a\), \(f(x)\) gets arbitrarily close to \(L\).
+
+For a function $f(x)$, $\lim_{x\to a^-}f(x)$ can also be denoted as $f(a^-)$.
 \end{itemize}
 \subsubsection{Infinite Limits}
 \[\lim_{x\to a}f(x)=\infty \equiv \forall M > 0, \exists \delta > 0 \text{\ s.t.\ } 0 < |x - a| < \delta \implies f(x) > M.\]
@@ -351,7 +369,7 @@ Let \(I\) be an interval containing the point \(a\). Let $f(x)$ and $g(x)$ be fu
 \sssc{Preservation of less than or equal to at finity}
 Let \(I\) be an interval containing the point \(a\). Let $f(x)$ and $g(x)$ be functions defined on \(I\), except possibly at \(a\) itself, which for all $x\in I\land x\neq a$, $f(x)\leq g(x)$, and that both $\lim_{x\to a}f(x)$ and $\lim_{x\to a}g(x)$ exist, then
 \[\lim_{x\to a}f(x)\leq\lim_{x\to a}g(x).\]
-\subsubsection{Squeeze or Sandwich theorem at finity}
+\subsubsection{Squeeze theorem or Sandwich theorem at finity}
 Let \(I\) be an interval containing the point \(a\). Let $f(x)$, $g(x)$, and $h(x)$ be functions defined on \(I\), except possibly at \(a\) itself, which for all $x\in I\land x\neq a$:
 \[f(x)\leq h(x)\leq g(x)\]
 and
@@ -370,7 +388,7 @@ Let \(I\) be an interval \((a,b)\) in which $a<b$. Let $f(x)$ and $g(x)$ be func
 
 Let \(I\) be an interval \((b,a)\) in which $a>b$. Let $f(x)$ and $g(x)$ be functions defined on \(I\), which for all $x\in I$, $f(x)\leq g(x)$, and that both $\lim_{x\to a^-}f(x)$ and $\lim_{x\to a^-}g(x)$ exist, then
 \[\lim_{x\to a^-}f(x)\leq\lim_{x\to a^-}g(x).\]
-\subsubsection{Squeeze or Sandwich theorem at finity of one-sided limit}
+\subsubsection{Squeeze theorem or Sandwich theorem at finity of one-sided limit}
 Let \(I\) be an interval \((a,b)\) in which $a<b$. Let $f(x)$, $g(x)$, and $h(x)$ be functions defined on \(I\), which for all $x\in I$:
 \[f(x)\leq h(x)\leq g(x)\]
 and
@@ -390,7 +408,7 @@ Let \(I\) be an interval $(a,\infty)$. Let $f(x)$ and $g(x)$ be functions define
 
 Let \(I\) be an interval $(-\infty,a)$. Let $f(x)$ and $g(x)$ be functions defined on \(I\), which for all $x\in I\land x\neq a$, $f(x)\leq g(x)$, and that both $\lim_{x\to-\infty}f(x)$ and $\lim_{x\to-\infty}g(x)$ exist, then
 \[\lim_{x\to-\infty}f(x)\leq\lim_{x\to-\infty}g(x).\]
-\subsubsection{Squeeze or Sandwich theorem at infinity}
+\subsubsection{Squeeze theorem or Sandwich theorem at infinity}
 Let \(I\) be an interval $(a,\infty)$. Let $f(x)$, $g(x)$, and $h(x)$ be functions defined on \(I\), which for all $x\in I$:
 \[f(x)\leq h(x)\leq g(x)\]
 and
@@ -435,42 +453,50 @@ The limit of the $n$th root of a function, in which $n$ is a positive integer, i
 \sssc{The Uniqueness of Limits}
 If a limit exists, it is unique.
 \ssc{Pointwise Convergence (逐點收斂)}
-Let $X$ be a set and $Y$ be topological space. A sequence of functions $f_n$ all having the same domain $X$ and codomain $Y$ is said to converge pointwise to a given function $f\colon X\to Y$, denoted as 
+Let $X$ be a set and $Y$ be topological space. A net of functions $f_n$ all having the same domain $X$ and codomain $Y$ is said to converge pointwise to a given function $f\colon X\to Y$, denoted as 
 \[\lim _{n\to \infty }f_{n}=f\tx{\ pointwise},\]
 if and only if the limit of the sequence $f_{n}(x)$ evaluated at each point $x\in X$ is equal to $f(x)$, that is
 \[\forall x\in X,\lim _{n\to \infty }f_{n}(x)=f(x).\]
 The function $f$ is said to be the pointwise limit function of $f_n$.
-\subsection{Continuity (連續性) of real functions}
-\sssc{Definition}
+\subsection{Continuity (連續性)}
+\sssc{Definition for real functions}
 \begin{itemize}
-\item If $\exists \lim_{x\to a} f(x)$ and $\lim_{x\to a} f(x)=f(a)$, we say $f(x)$ is continuous (連續的) at $a$; otherwise, we say $f(x)$ is discontinuous (不連續的) at $a$. A point that $f$ is discontinuous at is sometimes called a singularity (奇點).
-\item If $\exists \lim_{x\to a^+} f(x)$ and $\lim_{x\to a^+} f(x)=f(a)$, we say $f(x)$ is continuous from the right at $a$; if $\exists \lim_{x\to a^-} f(x)$ and $\lim_{x\to a^-} f(x)=f(a)$, we say $f(x)$ is continuous from the left at $a$.
-\item If $f(x)$ is continuous at all points in a open interval $(a,b)$, we say $f(x)$ is continuous on $(a,b)$.
-\item If $f(x)$ is continuous on a open interval $(a,b)$, and $\lim_{x\to a^+}=f(a)$, we say $f(x)$ is continuous on the right-open interval $[a,b)$.
-\item If $f(x)$ is continuous on a open interval $(a,b)$, and $\lim_{x\to b^-}=f(b)$, we say $f(x)$ is continuous on the left-open interval $(a,b]$.
-\item If $f(x)$ is continuous on a open interval $(a,b)$, and $\lim_{x\to a^+}=f(a)\land\lim_{x\to b^-}=f(b)$, we say $f(x)$ is continuous on the closed interval $[a,b]$.
-\item If $f(x)$ is continuous at all points in its domain, we say $f(x)$ is a continuous function (連續函數).
+\item For a point $a$ in the domain of a function $f$, if and only if $\exists\lim_{x\to a}f(x)$ and $\lim_{x\to a}f(x)=f(a)$, we say $f(x)$ is continuous (連續的) at $a$; otherwise, we say $f(x)$ is discontinuous (不連續的) at $a$. A point that $f$ is discontinuous at is called a singularity or singular point (奇點).
+\item For a point $a$ in the domain of a function $f$, if and only if $\exists\lim_{x\to a^+}f(x)$ and $\lim_{x\to a^+}f(x)=f(a)$, we say $f(x)$ is continuous from the right at $a$; if and only if $\exists \lim_{x\to a^-} f(x)$ and $\lim_{x\to a^-} f(x)=f(a)$, we say $f(x)$ is continuous from the left at $a$.
+\item For an open interval $I$ that is a subset of the domain of a function $f$, if and only if $f(x)$ is continuous at all points in $I$, we say $f(x)$ is continuous on $I$; otherwise, we say $f(x)$ is discontinuous on $I$.
+\item For an right-open interval $[a,b)$ that is a subset of the domain of a function $f$, if and only if $f(x)$ is continuous on $(a,b)$ and continuous from the right at $a$, we say $f(x)$ is continuous on $[a,b)$; otherwise, we say $f(x)$ is discontinuous on $[a,b).
+\item For an left-open interval $(a,b]$ that is a subset of the domain of a function $f$, if and only if $f(x)$ is continuous on $(a,b)$ and continuous from the left at $b$, we say $f(x)$ is continuous on $(a,b]$; otherwise, we say $f(x)$ is discontinuous on $(a,b].
+\item For an closed interval $[a,b]$ that is a subset of the domain of a function $f$, if and only if $f(x)$ is continuous on both $[a,b)$ and $(a,b]$, we say $f(x)$ is continuous on $[a,b]$; otherwise, we say $f(x)$ is discontinuous on $[a,b].
+\item if and only if $f(x)$ is continuous at all points in its domain, we say $f(x)$ is continuous.
 \eit
-\sssc{Type of discontinuity}
+\sssc{Definition for functions between topological spaces}
+\begin{itemize}
+\item A function $f\colon I\subeteq X\to Y$ where $X$ and $Y$ are topological spaces is continuous at a point $x\in I$ if and only if for any neighborhood $V$ of $f(x)$ in $Y$, there is a neighborhood $U$ of $x$ such that $f(U)\subseteq V$.
+\item A function $f\colon I\subeteq X\to Y$ where $X$ and $Y$ are topological spaces is continuous if and only if for any open subset $V$ of $Y$, the preimage of $f$ on $V$ is an open subset of $X$.
+\item A function $f\colon I\subeteq X\to Y$ where $X$ and $Y$ are topological spaces is continuous on a subset $J$ of $I$ if and only if for any open subset $V$ of $Y$, the joint set of the preimage of $f$ on $V$ and $J$ is open in the subspace topology of $X$ in $J$.
+\eit
+\sssc{Type of discontinuity for real functions}
 \bit
-\item \tb{Removable discontinuity}: If $\exists\lim_{x\to a}f(x)\land\exists\lim_{x\to a}f(x)\neq f(a)$, we call $f(a)$ removable discontinuity.
+\item \tb{Removable discontinuity}: If $\exists\lim_{x\to a}f(x)\land\lim_{x\to a}f(x)\neq f(a)$, we call $f(a)$ removable discontinuity.
 \item \tb{Jump discontinuity}: If $\exists\lim_{x\to a^-}f(x)\land\exists\lim_{x\to a^+}f(x)\land\lim_{x\to a^-}f(x)\neq\lim_{x\to a^+}f(x)$, we call $f(a)$ jump discontinuity.
 \item \tb{Type I discontinuity}: Removable discontinuity and jump discontinuity are collectively called type I discontinuity.
 \item \tb{Essential discontinuity or type II discontinuity}: At least one of $\lim_{x\to a^-}f(x)$ and $\lim_{x\to a^+}f(x)$ doesn't exist in $\mathbb{R}$, we call $f(a)$ essential discontinuity or type II discontinuity.
 \item\tb{Infinite discontinuity}: If at least one of $\lim_{x\to a^-}f(x)$ and $\lim_{x\to a^+}f(x)$ does not exist and those in $\lim_{x\to a^-}f(x)$ and $\lim_{x\to a^+}f(x)$ that do not exist are either $\infty$ or $-\infty$, we call $f(a)$ infinite discontinuity.
 \item\tb{Essential singularity}: An essential discontinuity that is not an infinite discontinuity is called an essential singularity.
 \eit
-\sssc{Piecewise continuity}
-For a function $f$ defined on an interval $I$, if there is a finite set $J$ (i.e. $n(J)\in\mathbb{N}) of open subintervals of $I$ such that $n(I\setminus\bigcup_{j\in J}j)\in\mathbb{N}_0$ and that $f$ is continuous on each $j\in J$, we say $f$ is piecewise-continuous.
+\sssc{Piecewise continuity for real functions}
+For a real function $f$ defined on an interval $I$, if there is a finite set $J$ (i.e. $n(J)\in\mathbb{N}$) of subintervals of $I$ such that $n(I\setminus\bigcup_{j\in J}j)\in\mathbb{N}_0$ and that $f$ is continuous on each $j\in J$, we say $f$ is piecewise-continuous.
+\sssc{Piecewise continuity for functions between topological spaces}
+For a function $f\colon I\subeteq X\to Y$ where $X$ and $Y$ are topological spaces, if there is a finite set $J$ (i.e. $n(J)\in\mathbb{N}$) of subsets of $I$ that are connected, such that $n(I\setminus\bigcup_{j\in J}j)\in\mathbb{N}_0$ and that $f$ is continuous on each $j\in J$, we say $f$ is piecewise-continuous.
 \sssc{Arithmetic Laws}
 If $f$ and $g$ are continuous at $a$ and $c$ is a constant, then the following functions are also continuous at $a$:
 \[f+g;\quad f-g;\quad cf;\quad fg;\]
 \[\frac{f}{g}\text{\ if\ }g(a)\neq 0.\]
 \sssc{Composte Laws}
 If $g$ is continuous at $a$ and $f$ is continuous at $g(a)$, then the composite function $f\circ g$ is continuous at $a$.
-\sssc{Examples of continuous functions}
-The following types of functions are continuous at every number in their domain: rational functions, trigonometric functions, inverse trigonometric functions, exponential functions, logarithmic functions.
-\sssc{Intermediate Value Theorem, IVT (中間值定理)}
+\sssc{Examples of continuous real functions}
+The following types of functions are continuous at every number in their domains: algebraic functions, trigonometric functions, inverse trigonometric functions, exponential functions, logarithmic functions.
+\sssc{Intermediate Value Theorem, IVT (中間值定理) for real functions}
 Let $f:\, I\subseteq\mathbb{R}\to\mathbb{R}$ be a continuous function, then
 \[\forall [a,b]\subseteq I \text{\ s.t.\ } f(a)\neq f(b):\,k\in (f(a), f(b))\implies (\exists c\in (a,b) \text{\ s.t.\ }f(c)=k).\]
 
@@ -617,17 +643,22 @@ Let $f:\,I\subseteq\mathbb{R}\to\mathbb{R}$ be a continuous function and be diff
 \subsection{Riemann integral (黎曼積分) and Darboux integral (達布積分)}
 Two equivalent definitions of definite integral (定積分).
 \subsubsection{Partition of an interval}
-A partition $P(x, n)$ of an interval $[a, b]$ is a finite sequence of numbers of the form
-\[P(x, n):=\{x_i:\,a=x_0,b=x_n,\forall 1\leq i<j\leq n:\,x_i<x_j\}_{i=0}^n.\]
-Each $[x_i, x_{i+1}]$ is called a sub-interval of the partition. The mesh or norm of a partition is defined to be the length of the longest sub-interval, that is,
+A partition $P(x, n)$ of an integral interval $(a,b)$ is a finite sequence of numbers of the form
+\[P(x, n):=\{x_i\colon x_0=a^+\land x_n=b^-\land\forall 1\leq i<j\leq n\colon x_i<x_j\}_{i=0}^n,\]
+in which when $a^+$ is in an expression, we define the expression as 
+\[\lim_{x\to a^+}\qty(\tx{the expression with $a^+$ replaced with $x$});\]
+when $b^-$ is in an expression, we define the expression as 
+\[\lim_{y\to b^-}\qty(\tx{the expression with $b^+$ replaced with $y$}).\]
+
+Each $[x_i, x_{i+1}]$ is called a sub-interval of the partition, in which $[a^+,x_1]$ is defined as $(a,x_1)$, and $[x_{n-1},b^-]$ is defined as $[x_{n-1},b)$. The mesh or norm of a partition is defined to be the length of the longest sub-interval, that is,
 \[\max\left(x_{i+1}-x_{i}\right),\quad i\in [0,n-1].\]
 A tagged partition $P(x,n,\xi)$ of an interval $[a,b]$ is a partition together with a choice of a sample point within each of all $n$ sub-intervals, that is, numbers $\{\xi_i\}_{i=0}^{n-1}$ with $\xi_i\in [x_i,x_{i+1}]$ for each $i\in [0,n-1]$. The mesh of a tagged partition is the same as that of an ordinary partition.
 
-Suppose that two tagged partitions $P(x,n,\xi)$ and $Q(y,m,\zeta)$ are both partitions of the interval $[a,b]$. We say that $Q(y,m,\zeta)$ is a refinement of $P(x,n,\xi)$ if for each integer $i\in [0,n]$, there exists an integer $r(i)\in [0,m]$ such that $x_i = y_{r(i)}$ and that $\forall i\in [0,n-1]:\,\exists j\in [r(i),r(i + 1)] \text{\ s.t.\ }\xi_i = \zeta_j$. That is, a tagged partition breaks up some of the sub-intervals and adds sample points where necessary, "refining" the accuracy of the partition.
+Suppose that two tagged partitions $P(x,n,\xi)$ and $Q(y,m,\zeta)$ are both partitions of the integral interval $(a,b)$. We say that $Q(y,m,\zeta)$ is a refinement of $P(x,n,\xi)$ if for each integer $i\in [0,n]$, there exists an integer $r(i)\in [0,m]$ such that $x_i = y_{r(i)}$ and that $\forall i\in [0,n-1]:\,\exists j\in [r(i),r(i + 1)] \text{\ s.t.\ }\xi_i = \zeta_j$. That is, a tagged partition breaks up some of the sub-intervals and adds sample points where necessary, "refining" the accuracy of the partition.
 
 We can turn the set of all tagged partitions into a directed set by saying that one tagged partition is greater than or equal to another if the former is a refinement of the latter.
 \subsubsection{Riemann sum}
-Let $f$ be a real-valued function defined on the interval $[a,b]$. The Riemann sum of $f$ with respect to the tagged partition $P(x,n,\xi)$ is defined to be
+Let $f$ be a real-valued function defined on the integral interval $(a,b)$. The Riemann sum of $f$ with respect to the tagged partition $P(x,n,\xi)$ is defined to be
 \[R(f,P):=\sum_{i=0}^{n-1}f(\xi_i)\left(x_{i+1}-x_i\right).\]
 Each term in the sum is the product of the value of the function at a given point and the length of an interval. Consequently, each term represents the (signed) area of a rectangle with height $f(\xi_i)$ and width $x_{i + 1} − x_i$. The Riemann sum is the (signed) area of all the rectangles.
 \subsubsection{Darboux sum}
@@ -649,7 +680,7 @@ In the simplest case of a real-valued function of a single variable integrated i
 \ben
 \item$a=-\infty$
 \item$b=\infty$
-\item$f(x)$ is undefined or discontinuous somewhere on $[a,b]$
+\item$f(x)$ is undefined or discontinuous somewhere on $(a,b)$
 \een
 
 The improper integrals are defined with:
@@ -939,6 +970,7 @@ The generalized Stokes theorem says that the integral of a differential form $\o
 Differentiation is distributive over addition and subtraction.
 \ssc{Product rule (乘法定則)}
 \[\dv{x}\qty(f(x)g(x))=f'(x)g(x)+f(x)g'(x).\]
+\ssc{General Leibniz rule}{{{
 \ssc{Quotient rule (除法定則)}
 \[\dv{x}\qty(\frac{f(x)}{g(x)})=\frac{f'(x)g(x)-f(x)g'(x)}{\qty(g(x))^2}.\]
 \ssc{Chain rule (連鎖律)}
@@ -1073,6 +1105,8 @@ Furthermore, there exists some Borel measurable function $g$ such that
 \subsection{Integration by parts (分部積分法) or partial integration (部分積分法)}
 \subsubsection{Theorem}
 \[\frac{\mathrm{d}}{\mathrm{d}x}\prod_{i=1}^nf_i(x)=\sum_{j=1}^n\left(\frac{\mathrm{d}f_j(x)}{\mathrm{d}x}\frac{\prod_{\substack{i=1\\i\neq j}}^n f_i(x)}{f_j(x)}\right)\]
+For example,
+\[\int_a^b u\dd{v} = \qty(u v)\big\vert_a^b - \int_a^b v\dd{u}.\]
 \subsubsection{Application}
 Integration by parts is a heuristic rather than a purely mechanical process for solving integrals; given a single function to integrate, the typical strategy is to carefully separate this single function into a product of two functions such that the residual integral from the integration by parts formula is easier to evaluate than the single function.
 
@@ -1080,52 +1114,279 @@ The DETAIL rule or the LIATE rule is a rule of thumb for integration by parts. I
 \begin{itemize}
 \item L: Logarithmic function
 \item I: Inverse trigonometric function
-\item A: Algebraic function (such as polynomial function)
+\item A: Algebraic function
 \item T: Trigonometric function
 \item E: Exponential function
 \end{itemize}
-
+\ssc{Leibniz integral rule (萊布尼茲積分法則)}{{{
+\ssc{Fubini's theorem (富比尼定理)}{{{
+\ssc{Lebesgue’s Dominated convergence theorem (勒貝格控制收斂定理 or 勒貝格受制收斂定理)}{{{
 
 
 \sct{Integral Transform}
-\ssc{(Unilateral or One-sided) Laplace Transform (（單邊）拉普拉斯變換)}
+\ssc{Laplace Transform (拉普拉斯變換)}
+\sssc{(Unilateral or One-sided) Laplace Transform (（單邊）拉普拉斯變換)}
 The (unilateral or one-sided) Laplace transform is an integral transform that converts a function of a real variable (usually $t$, in the time domain) to a function of a complex variable (usually $s$, in the complex-valued frequency domain, also known as $s$-domain, or $s$-plane). The functions are often denoted in lowercase for the time-domain representation and uppercase for the frequency-domain.
 
 The Laplace transform of a real function $f(t)$, denoted as $\mathcal{L}\{f(t)\}(s)$ or $F(s)$ is defined by the improper integral
-\[\mathcal{L}\{f(t)\}(s) = F(s) = \int_0^{\infty} e^{-st} f(t)\,\mathrm{d}t.\]
+\[\mathcal{L}\{f(t)\}(s) = F(s) = \int_0^{\infty} e^{-st} f(t)\dd{t}.\]
 
-If $f$ is integrable function, the Laplace transform $F(s)$ of $f$ converges provided that the limit 
-\[\lim _{R\to \infty }\int _{0}^{R}e^{-st}f(t)\dd{t}\]
-exists.
+In the context of Laplace transform, convergence refers to absolute convergence, that is, we say $F(s)$ converges or $f(t)$ is Laplace-transformable if the improper integral
+\[\int_0^{\infty} \abs{e^{-st} f(t)}\dd{t}\]
+converges absolutely for some real $s$.
 
-The Laplace transform converges absolutely if the integral
-\[\int_0^{\infty} \abs{e^{-st} f(t)}\,\mathrm{d}t\]
-exists as a proper Lebesgue integral.
+The set of values for which $F(s)$ converges, called region of convergence (ROC), is either of the form $\Re(s) > a$ or $\Re(s) \geq a$, where $a$ is an extended real constant, i.e. $-\infty\leq a\leq\infty$.
+\sssc{Laplace transformability}
+A real function is Laplace-transformable if and only if it is piecewise continuous and of exponential order.
+\begin{proof}{{{
 
-The set of values for which $F(s)$ converges absolutely, called region of convergence (ROC), is either of the form $\Re(s) > a$ or $\Re(s) \geq a$, where $a$ is an extended real constant, i.e. $-\infty\leq a\leq\infty$.
-\ssc{(Bilateral or Two-sided) Laplace Transform (（雙邊）拉普拉斯變換)}
+**Assume:** $f(t)$ is piecewise continuous and of exponential order $\alpha$.
+
+We want to show: $\mathcal{L}\{f\}(s)$ converges for all $s > \alpha$.
+
+### Proof:
+
+For $s > \alpha$, we estimate:
+
+$$
+\int_0^\infty |f(t)| e^{-st}\, dt = \int_0^{t_0} |f(t)| e^{-st}\, dt + \int_{t_0}^\infty |f(t)| e^{-st}\, dt.
+$$
+
+1. The first integral is over a finite interval. Since $f(t)$ is piecewise continuous, it is bounded on $[0,t_0]$, so
+
+$$
+\int_0^{t_0} |f(t)| e^{-st}\, dt < \infty.
+$$
+
+2. For the second integral, since $|f(t)| \le M e^{\alpha t}$, we have
+
+$$
+\int_{t_0}^\infty |f(t)| e^{-st}\, dt \le \int_{t_0}^\infty M e^{\alpha t} e^{-st}\, dt = M \int_{t_0}^\infty e^{-(s-\alpha)t}\, dt.
+$$
+
+Since $s > \alpha$, the integral converges:
+
+$$
+\int_{t_0}^\infty e^{-(s-\alpha)t}\, dt = \frac{e^{-(s-\alpha)t_0}}{s-\alpha} < \infty.
+$$
+
+✅ Hence, $\mathcal{L}\{f\}(s)$ exists for $s > \alpha$.
+
+---
+
+## 3. "Only if" Direction
+
+**Assume:** $f(t)$ is Laplace-transformable, i.e., there exists some $s_0$ such that
+
+$$
+\int_0^\infty |f(t)| e^{-s_0 t} dt < \infty.
+$$
+
+We want to show: $f(t)$ is piecewise continuous and of exponential order.
+
+### Piecewise continuity
+
+* If $f(t)$ is not piecewise continuous on some interval $[0,T]$, it must have infinitely many discontinuities of unbounded size, which would make
+  $\int_0^T |f(t)| e^{-s_0 t} dt$ diverge.
+* But the integral is finite by assumption, so $f(t)$ must be piecewise continuous on every finite interval.
+
+### Exponential order
+
+* From Laplace-transformability at $s_0$:
+
+$$
+\int_0^\infty |f(t)| e^{-s_0 t} dt < \infty.
+$$
+
+* Let $F(t) = |f(t)| e^{-s_0 t}$. The integral $\int_0^\infty F(t) dt$ converges, so $F(t)$ is **bounded** for large $t$.
+* That is, there exists $M > 0$ such that
+
+$$
+|f(t)| e^{-s_0 t} \le M \quad \text{for } t \ge t_0.
+$$
+
+* Multiply both sides by $e^{s_0 t}$:
+
+$$
+|f(t)| \le M e^{s_0 t}, \quad t \ge t_0.
+$$
+
+ So $f(t)$ is of exponential order $\alpha = s_0$.
+
+---
+
+## 4. Conclusion
+
+$$
+\boxed{f(t) \text{ is Laplace-transformable } \iff f(t) \text{ is piecewise continuous and of exponential order.}}
+$$
+
+* **Intuition:**
+
+  * Piecewise continuity ensures the integral over finite intervals converges.
+  * Exponential order ensures the integral over $[t_0, \infty)$ converges.
+
+---
+
+If you want, I can **draw a small diagram showing how the function is bounded by an exponential for Laplace convergence**, which often makes the intuition much clearer.
+
+Do you want me to do that?
+
+\sssc{Linearity}
+\[\mathcal{L}\{af(t)+bg(t)\}=a\mathcal{L}\{f(t)\}+b\mathcal{L}\{g(t)\}.\]
+\sssc{First shifting theorem or Time shift}
+\[\mathcal{L}\{f(t-a)u(t-a)\}=e^{-as}F(s), \quad a > 0,\]
+where $u(t)$ is the unit step function.
+\sssc{Second shifting theorem or Frequency shift}
+\[\mathcal{L}\{e^{at} f(t)\}(s) = F(s-a).\]
+\sssc{Differentiation in Time Domain}
+\[\mathcal{L}\{f'(t)\}(s) = sF(s) - f\qty(0^+).\]
+\[\mathcal{L}\{f^{(n)}(t)\}(s) = s^n F(s) - \sum_{i=0}^{n-1}s^{n-1-i}f^{(i)}\qty(0^+).\]
+\begin{proof}
+\[\mathcal{L}\{f'(t)\}(s) = \int_0^\infty e^{-st} f'(t)\dd{t}.\]
+\[u = e^{-st} \quad \Rightarrow \quad \dd{u} = -s e^{-st} \dd{t}.\]
+\[dv = f'(t)\dd{t} \quad \Rightarrow \quad v = f(t).\]
+Integral by parts.
+\[\int_0^\infty u\dd{v} = (u v)\big\vert_0^\infty - \int_0^\infty v\dd{u}.\]
+\bma
+\int_0^\infty e^{-st} f'(t)\dd{t}&=\qty(e^{-st}f(t))\big\vert_0^\infty+\int_0^\infty f(t)se^{-st}\dd{t}\\
+&=-f\qty(0^+)+\int_0^\infty f(t)se^{-st}\dd{t}\\
+&=s\mathcal{L}\{f(t)\}(s)-f\qty(0^+)
+\end{proof}
+\sssc{Integration in Time Domain}
+\[\mathcal{L}\left\{\int_0^t f(\tau)\dd{\tau}\right\}(s) = \frac{1}{s} F(s).\]
+\begin{proof}
+\bma
+\mathcal{L}\{\int_0^t f(\tau)\dd{\tau}\}(s) &= \int_0^{\infty} e^{-st} \int_0^t f(\tau)\dd{\tau}\dd{t}\\
+&=\qty(-\frac{1}{s}e^{-st}\int_0^t f(\tau)\dd{\tau})\big\vert_0^\infty+\int_0^{\infty} \frac{1}{s}e^{-st}f(t)\dd{t}\\
+&=\frac{1}{s}\int_0^{\infty} e^{-st}f(t)\dd{t}.
+\eam
+\end{proof}
+\sssc{Differentiation in Frequency Domain}
+\[\mathcal{L}\{t f(t)\}(s) = -\dv{}{s} F(s).\]
+\[\mathcal{L}\{t^n f(t)\}(s) = (-1)^n \dv[n]{}{s} F(s).\]
+\begin{proof}
+By Leibniz integral rule,
+\bma
+-\dv{}{s} F(s)&=-\dv{}{s}\int_0^{\infty} e^{-st} f(t)\,\mathrm{d}t\\
+&=-\int_0^{\infty} \pdv{}{s}\qty(e^{-st} f(t))\,\mathrm{d}t\\
+&=-\int_0^{\infty} -te^{-st} f(t)\,\mathrm{d}t\\
+&=\int_0^{\infty} te^{-st} f(t)\,\mathrm{d}t\\
+&=\mathcal{L}\{t f(t)\}(s)
+\eam
+\end{proof}
+\sssc{Scaling in Time Domain}
+\[\mathcal{L}\{f(at)\}(s) = \frac{1}{a} F\left(\frac{s}{a}\right), \quad a>0.\]
+\sssc{Convolution Theorem}
+If $h(t) = (f * g)(t) = \int_0^t f(\tau)g(t-\tau)\dd{\tau}$, then
+\[\mathcal{L}\{h(t)\}(s) = F(s)G(s).\]
+\begin{proof}
+\[\mathcal{L}\{h(t)\}(s)=\int_0^{\infty} e^{-st} \qty(\int_0^t f(\tau)g(t-\tau)\dd{\tau})\dd{t}\]
+By Fubini's theorem,
+\[\mathcal{L}\{h(t)\}(s)=\int_0^\infty\int_\tau^\infty e^{-st} f(\tau)g(t-\tau)\dd{t}\dd{\tau}\]
+Let $u=t-\tau$. $\dd{t}=\dd{u}$.
+\bma
+\mathcal{L}\{h(t)\}(s)&=\int_0^\infty f(\tau)\int_0^\infty e^{-s(u+\tau)} g(u)\dd{u}\dd{\tau}\\
+&=\int_0^\infty f(\tau)e^{-s\tau}\int_0^\infty e^{-su} g(u)\dd{u}\dd{\tau}\\
+&=F(s)G(s)
+\eam
+\sssc{Initial Value Theorem}
+If $f(t)$ and $f'(t)$ are Laplace-transformable:
+\[\lim_{t \to 0^+} f(t) = \lim_{s \to \infty} s F(s).\]
+\begin{proof}
+\[s F(s) = \int_0^\infty s f(t) e^{-st} \dd{t}.\]
+Let $u = st$. $\dd{t) = \frac{\dd{u}}{s}$.
+\[s F(s) = \int_0^\infty f\qty(\frac{u}{s}) e^{-u} \dd{u}.\]
+\[\lim_{s \to \infty}s F(s)=\int_0^\infty f\qty(\frac{u}{s}) e^{-u} \dd{u}.\]
+
+We define a sequence of functions $f_n$ as 
+\[\int_0^\infty f\qty(\frac{u}{s_n}) e^{-u} \dd{u},\]
+where $\lim_{n\to\infty}s_n=\infty$.
+
+For fixed $u \ge 0$, $\frac{u}{s_n} \to 0^+$ as $n\to\infty$, so $f_n\qty(\frac{u}{s})$ pointwise converges to $f(0^+)$.
+
+For dominated convergence theorem, we require an integrable function $g(u)$ such that
+\[\abs{f\qty(\frac{u}{s}) e^{-u}} \le g(u), \quad \forall s > 0.\]
+
+Since $f(t)$ is Laplace-transformable, it is of exponential order, that is, there exists $\alpha>0$, $M>0$, and $T>0$ such that:
+\[|f(t)|\leq Me^{\alpha t}\quad \forall t>T.\]
+\[M e^{\alpha \frac{u}{s}} e^{-u} = M e^{-u\qty(1 - \frac{\alpha}{s})}\le M e^{-\frac{u}{2}}, \quad \forall s > 2\alpha.\]
+
+By dominated convergence theorem, we obtain:
+\[\lim_{n\to\infty
+\int_0^\infty f(0^+) e^{-u} \dd{u}
+
+
+### Step 4: Evaluate the integral
+
+$$
+\int_0^\infty f(0^+) e^{-u} du = f(0^+) \int_0^\infty e^{-u} du = f(0^+).
+$$
+
+---
+
+### ✅ Step 5: Conclude
+
+$$
+\lim_{s \to \infty} s F(s) = f(0^+),
+$$
+
+which is exactly the **initial value theorem**.
+
+---
+
+This is fully rigorous: the change of variables plus the dominated convergence theorem justifies the exchange of limit and integral.
+
+---
+
+If you want, I can also give the **rigorous proof using $f'(t)$** directly without the change of variables—it’s another standard way. It’s actually a bit shorter. Do you want me to show that too?
+
+
+
+
+### 10. **Final Value Theorem**
+
+If poles of $sF(s)$ are in the left half-plane (except possibly at $s=0$):
+
+$$
+\lim_{t \to \infty} f(t) = \lim_{s \to 0} s F(s).
+$$
+
+---
+
+Do you want me to also make a **summary table of these properties** (with formula + short description) for quick reference?
+
+{{{
+\sssc{Mellin's inverse formula, Bromwich integral, or Fourier–Mellin integral of Inverse Laplace transform (反拉普拉斯變換)}
+The inverse Laplace transform of a complex function $F(s)$, denoted as $\mathcal{L}^{-1}\{F(s)\}(t)$ or $f(t)$, is defined as a real function such that
+\[\mathcal{L}\{f(t)\}(s) = F(s),\]
+where $\mathcal {L}$ denotes the Laplace transform.
+
+Mellin's inverse formula, Bromwich integral, or Fourier–Mellin integral states that, the inverse Laplace transform of a complex function $F(s)$ is given by the line integral:
+\[\mathcal{L}^{-1}\{F(s)\}(t)=f(t)=\frac{1}{2\pi i}\lim_{T\to\infty}\int_{\gamma-iT}^{\gamma+iT}e^{st}F(s)\dd{s},\]
+where $\gamma$ is a real number such that it is greater than the real part of all singularities of $F$ and that $F$ is bounded on the line $s=\gamma$.
+\sssc{(Bilateral or Two-sided) Laplace Transform (（雙邊）拉普拉斯變換)}
 The (bilateral or two-sided) Laplace transform is an integral transform that converts a function of a real variable (usually $t$, in the time domain) to a function of a complex variable (usually $s$, in the complex-valued angular frequency domain, also known as $s$-domain or $s$-plane). The functions are often denoted in lowercase for the time-domain representation and uppercase for the frequency-domain.
 
 The Laplace transform of a real function $f(t)$, denoted as $\mathcal{B}\{f(t)\}(s)$, is defined by the improper integral
 \[\mathcal{B}\{f(t)\}(s) = \int_{-\infty}^{\infty} e^{-st} f(t)\,\mathrm{d}t.\]
-\ssc{Inverse Laplace transform (反拉普拉斯變換)}
-The inverse Laplace transform of a complex function $F(s)$, denoted as $\mathrm{L}^{-1}\{F(s)\}(t)$ or $f(t)$, is defined as a real function such that
-\[\mathcal{L}\{f(t)\}(s) = F(s),\]
-where $\mathcal {L}$ denotes the Laplace transform.
-\sssc{Mellin's inverse formula, Bromwich integral, or Fourier–Mellin integral}
-The inverse Laplace transform of a complex function $F(s)$ is given by the line integral:
-\[\mathrm{L}^{-1}\{F(s)\}(t)=f(t)=\frac{1}{2\pi i}\lim_{T\to\infty}\int_{\gamma-iT}^{\gamma+iT}e^{st}F(s)\dd{s},\]
-where $\gamma$ is a real number such that it is greater than the real part of all singularities of $F$ and that $F$ is bounded on the line $s=\gamma$.
 \ssc{Fourier Transform (FT) (傅立葉變換)}
+\sssc{Fourier Transform (FT)}
 Fourier transform is an integral transform that converts a function of a real variable (usually $t$, in the time domain) to a function of another real variable (usually $\omega$, in the real-valued angular frequency domain). The functions are often denoted in lowercase for the time-domain representation and uppercase for the frequency-domain.
 
-The Fourier transform, denoted as $\mathcal{F}\{f(t)\}(\omega)$ or $F(\omega)$ is defined (for suitable functions $f$) by the improper integral
+The Fourier transform, denoted as $\mathcal{F}\{f(t)\}(\omega)$ or $F(\omega)$, is defined by the improper integral
 \[\mathcal{F}\{f(t)\}(\omega) = F(\omega) = \int_{-\infty}^{\infty} e^{-i\omega t} f(t)\,\mathrm{d}t.\]
-\ssc{{{反傅立葉
+\sssc{Inverse Fourier Transform (反傅立葉變換)}
+The inverse Fourier transform of a complex function $F(s)$, denoted as $\mathcal{F}^{-1}\{F(s)\}(t)$ or $f(t)$, is defined as a real function such that
+\[\mathcal{F}\{f(t)\}(s) = F(s),\]
+where $\mathcal {F}$ denotes the Fourier transform.
+
+The inverse Laplace transform of a complex function $F(s)$ is given by the line integral:
+\[f(t) = \frac{1}{2\pi}\int_{-\infty}^{\infty} F(\omega) e^{i\omega t}\dd{\omega} .\]
 
 
 
-\sct{Lists and Tables}
+\sct{Lists}
 \ssc{List of Integrals}
 \sssc{Rational function}
 \[\int\frac{f'(x)}{f(x)}\,\mathrm{d}x=\ln|f(x)|+C.\]
@@ -1141,9 +1402,9 @@ The Fourier transform, denoted as $\mathcal{F}\{f(t)\}(\omega)$ or $F(\omega)$ i
 \[\int\sqrt{a^2+x^2}\,\mathrm{d}x=\frac{x}{2}\sqrt{a^2+x^2}+\frac{a^2}{2}\ln\qty(x+\sqrt{a^2+x^2})+C.\]
 \[\int\sqrt{x^2-a^2}\,\mathrm{d}x=\frac{x}{2}\sqrt{x^2-a^2}-\frac{a^2}{2}\ln\qty(x+\sqrt{x^2-a^2})+C,\quad x^2>a^2.\]
 \[\int\sqrt{a^2-x^2}\,\mathrm{d}x=\frac{x}{2}\sqrt{a^2-x^2}+\frac{a^2}{2}\arcsin\frac{x}{|a|}+C,\quad|a|\geq|x|.\]
-\ssc{Laplace Transform Table}
+\ssc{Lists of Laplace Transform}
 
-\ssc{Fourier Transform Table}
+\ssc{Lists Fourier Transform}
 
 
 
