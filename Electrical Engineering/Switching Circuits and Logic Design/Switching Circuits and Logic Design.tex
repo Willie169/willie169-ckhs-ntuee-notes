@@ -277,13 +277,6 @@ In a Boolean expression, parentheses are added as needed to specify the order in
 A Boolean function or a switching function is a function of which the domain is $\{1,0\}^n$ in which $n\in\mathbb{N}$ and the codomain is $\{1,0\}$.
 
 A truth table, also called a table of combinations, specifies the corresponding output values for all possible combinations of input values for a Boolean function. A truth table for an $n$-variable Boolean function will have $2^n$ rows.
-\ssc{Sum-of-Products (SOP) and Product-of-Sums (POS) forms}
-\bit
-\item\Tb{Sum-of-products (SOP) form}: An expression is said to be in SOP form if it consists of a sum (OR) of product (AND) or single variable terms, in which it is called to be degenerate when some of the terms are single variables. Every Boolean expression can be expressed in SOP form.
-\item\Tb{Product-of-sums (POS) form}: An expression is said to be in POS form if it consists of a product (AND) of sum (OR) or single variable terms, in which it is called to be degenerate when some of the terms are single variables. Every Boolean expression can be expressed in POS form.
-\item\Tb{Minimal SOP form}: The SOP form of a Boolean expression that has the fewest number of terms out of all SOP form of the expression.
-\item\Tb{Minimal POS form}: The POS form of a Boolean expression that has the fewest number of terms out of all POS form of the expression.
-\eit
 \ssc{Theorems}
 \sssc{Idempotent Laws}
 \[X + X = X,\quad X\cdot X = X.\]
@@ -334,14 +327,47 @@ XY+X′Z+YZ&=XY+X'Z+(X+X')YZ\\
 \begin{proof}
 \[(X+Y)(X'+Z)=0+XZ+X'Y+YZ=XZ+X'Y\]
 \end{proof}
-\subsection{Axiom of Equality}
+\sssc{Axiom of Equality}
 For an one-to-one Boolean function $f$, a Boolean expression $A$ equals another Boolean expression $B$ if and only if $f(A)$ equals $f(B)$.
-\ssc{Minterm and Maxterm Expansions}
+\ssc{Sum-of-Products (SOP) and Product-of-Sums (POS) forms}
 \bit
-\item\Tb{Minterm}: A minterm of a Boolean function, often denoted as $m_i$ for the $(i+1)$th row in the truth table of the function, is a product of all input variables that corresponds to an input combination for which the function is $1$ where each variable appears is in true form ($A$) if the input of that variable is $1$ and complemented ($A'$) if the input of that variable is $0$.
-\item\Tb{Minterm expansion, standard SOP, or canonical SOP}: Express a Boolean function as sum of minterms. For a given Boolean function, there exists a unique minterm expansion of it.
-\item\Tb{Maxterm}: A maxterm of a Boolean function, often denoted as $M_i$ for the $(i+1)$th row in the truth table of the function,  is a sum of all input variables that corresponds to an input combination for which the function is $0$ where each variable appears is in true form ($A$) if the input of that variable is $0$ and complemented ($A'$) if the input of that variable is $1$.
-\item\Tb{Maxterm expansion, standard POS, or canonical POS}: Express a Boolean function as product of maxterms. For a given Boolean function, there exists a unique maxterm expansion of it.
+\item\Tb{Sum-of-products (SOP) form}: An expression is said to be in SOP form if it consists of a sum (OR) of product (AND) or single variable terms, in which it is called to be degenerate when some of the terms are single variables. Every Boolean expression can be expressed in SOP form.
+\item\Tb{Product-of-sums (POS) form}: An expression is said to be in POS form if it consists of a product (AND) of sum (OR) or single variable terms, in which it is called to be degenerate when some of the terms are single variables. Every Boolean expression can be expressed in POS form.
+\item\Tb{Minimal SOP form}: The SOP form of a Boolean expression that has the fewest number of terms out of all SOP form of the expression.
+\item\Tb{Minimal POS form}: The POS form of a Boolean expression that has the fewest number of terms out of all POS form of the expression.
 \eit
+\ssc{Minterm and Maxterm Expansions, Canonical Expansions, or Standard Expansion}
+\sssc{Minterm expansion, canonical SOP, or standard SOP}
+The ON-set of a Boolean function $f$ is the set of all input combinations such that $f$ of them are $1$. Each element in the ON-set of $f$ corresponds to a row in the truth table of $f$ in which the output is $1$.
 
+The minterms of a Boolean function $f\colon\{1,0\}^n\to\{1,0\}$, often denoted as $m_i$ for the $i$th element in the ON-set $S$ of $f$, is defined as
+\[m_i=\prod_{k=1}^ny_k,\]
+in which $y_k$ is defined as the $k$th input variable $x_k$ if the $k$th input in the $i$th element of $S$ is $1$, and as the complement of the $k$th input variable $(x_k)'$ if the $k$th input in the $i$th element of $S$ is $0$.
 
+Minterm expansion, canonical SOP, or standard SOP is an expression of a Boolean function as a sum of minterms of it, that is,
+\[f=\sum_{i\in S}m_i,\]
+also denoted as 
+\[f=\sum m(i\in S).\]
+
+For a given Boolean function, there exists a unique minterm expansion of it.
+\sssc{Maxterm expansion, canonical POS, or standard POS}
+The OFF-set of a Boolean function $f$ is the set of all input combinations such that $f$ of them are $0$. Each element in the ON-set of $f$ corresponds to a row in the truth table of $f$ in which the output is $0$.
+
+The maxterms of a Boolean function $f\colon\{1,0\}^n\to\{1,0\}$, often denoted as $M_i$ for the $i$th element in the OFF-set $T$ of $f$, is defined as
+\[m_i=\sum_{k=1}^nz_k,\]
+in which $z_k$ is defined as the $k$th input variable $x_k$ if the $k$th input in the $i$th element of $T$ is $0$, and as the complement of the $k$th input variable $(x_k)'$ if the $k$th input in the $i$th element of $T$ is $1$.
+
+Maxterm expansion, canonical POS, or standard POS is an expression of a Boolean function as a product of maxterms of it, that is,
+\[f=\prod_{i\in T}M_i,\]
+also denoted as 
+\[f=\prod M(i\in T).\]
+
+For a given Boolean function, there exists a unique maxterm expansion of it.
+\ssc{Incompletely Specified Boolean Functions (ISF) or Don’t-care Functions}
+A (completely specified) Boolean function $F\colon\{0,1\}^n \to \{0,1\}$ gives an output $0$ or $1$ for every one of the $2^n$ input combinations. Canonical expansions only apply to completely specified functions.
+
+An incompletely specified function (ISF) or a don’t-care function is a Boolean function but in which for some input combinations, the output is not defined or irrelevant, denoted as don’t-care conditions or $d$. The definition of ON-set and OFF-set of an ISF is the same as completely specified function; the Don’t-Care set or DC-set of an ISF is the set of all don’t-care conditions. When simplifying an ISF, the output for the don’t-care conditions can be assigned as either $0$ or $1$, so the assignment is chosen to yield a simpler minimal SOP or POS.
+\ssc{Boolean Vector Functions or Boolean Multi-output Functions}
+A Boolean vector function or a Boolean multi-output function is a function $f\colon\{1,0\}^n\to\{1,0\}^m$. A Boolean vector function can be specified with truth table or as a tuple of $m$ Boolean functions.
+\ssc{Examples of Construction of Boolean Vector Functions}
+\sssc{Unsigned binary number adder}
