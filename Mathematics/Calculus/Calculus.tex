@@ -143,9 +143,9 @@ where $H(0)=u(0)$ is sometimes defined to be $\frac{1}{2}$ or other values inste
 \section{Sequences and Series (數列與級數)}
 \ssc{Sequence}
 \begin{itemize}
-\item\textbf{Sequence}: A sequence is a function of which the domain is a set $\{x\in\mathbb{Z}\land l\leq x\leq m\}$, in which $l$ usually equals to $0$ or $1$, usually denoted as $\langle a_n\rangle$, $\{a_n\}$, or $(a_n)$, sometimes denoted with domain as $\langle a_n\rangle_{n=l}^m$, $\{a_n\}_{n=l}^m$, or $(a_n)_{n=l}^m$, where the subscript $n$ refers to the $n$th element of the sequence, that is, the function value when the  independent variable is $n$. Below assume $l=1$.
-\item\textbf{Finite Sequence (有限數列)}: A finite sequence is a sequence with finite terms, i.e. $l,m\in\mathbb{Z}$.
-\item\textbf{Infinite sequence (無窮數列)}: An infinite sequence is a sequence with infinite terms, sometimes denoted with domain as $\langle a_n\rangle_{n=l}^\infty$. Unless otherwise specified, sequences usually refer to infinite sequences.
+\item\textbf{Sequence}: A sequence in $X$ is a function of which the domain is a set $\{x\in\mathbb{Z}\mid l\leq x\leq m\}$ or $\{x\in\mathbb{Z}\mid l\leq x\}$ and the codomain is a topological space $X$, in which $l$ is an integer, usually $0$ or $1$, and $m$ is a integer, denoted as $\langle a_n\rangle$, $\{a_n\}$, $(a_n)$, $\langle a_n\rangle_{n=l}^m$, $\{a_n\}_{n=l}^m$, or $(a_n)_{n=l}^m$, with $m=\infty$ when its domain is $\{x\in\mathbb{Z}\mid l\leq x\}$, where the subscript $n$ refers to the $n$th element of the sequence, that is, the function value when the  independent variable is $n$.
+\item\textbf{Finite Sequence (有限數列)}: A finite sequence is a sequence with finite terms, i.e. $\langle a_n\rangle_{n=l}^m,\quad m\in\mathbb{Z}$.
+\item\textbf{Infinite sequence (無窮數列)}: An infinite sequence is a sequence with infinite terms, i.e. $\langle a_n\rangle_{n=l}^\infty$. Unless otherwise specified, sequences refer to infinite sequences.
 \end{itemize}
 \ssc{Series (級數)}
 \begin{itemize}
@@ -158,9 +158,9 @@ where $H(0)=u(0)$ is sometimes defined to be $\frac{1}{2}$ or other values inste
 
 \section{Limit (極限)}
 \subsection{Limits of Real Sequences}
-Below, we are discussing limits of sequences in the set of real number and $\mathbb{N}$ denotes the domain of them.
+Below, we are discussing limits of sequences with domain $\mathbb{N}$ and codomain $\mathbb{R}$. For sequences $\langle a_n\rangle_{i=l}^\infty$ in $\mathbb{R}$, its limit is the same as the limit of another sequence $\langle b_n=a_{n+l-1}\rangle_{i=1}^\infty$.
 \subsubsection{Definition}
-For a real sequence \(\langle a_n\rangle\), the limit of \(\langle a_n\rangle\), denoted as $\lim_{n \to \infty} a_n$ or $\lim_n a_n$, is defined as follows:
+For a real sequence \(\langle a_n\rangle\), the limit of \(\langle a_n\rangle\) (as $n$ approaches infinity), denoted as $\lim_{n \to \infty} a_n$ or $\lim_n a_n$, is defined as follows:
 \[\lim_{n \to \infty} a_n = L \equiv \forall \epsilon > 0:\, \exists N \in\mathbb{N}\text{\ s.t.\ } n\in\mathbb{N}\land n \geq N\implies |a_n - L| < \epsilon.\]
 In other words, as \(n\) becomes arbitrarily large, \(a_n\) gets arbitrarily close to \(L\).
 
@@ -324,12 +324,14 @@ then:
 Let \(I\) be an interval containing the point \(a\). Let \( f(x) \) be a function defined on \(I\), except possibly at \(a\) itself. The limit of \( f(x) \) as \( x \) approaches \( a \) is defined as follows:
 \[\lim_{x \to a} f(x) = L \equiv \forall \epsilon > 0:\, \exists \delta > 0 \text{\ s.t.\ } 0 < |x - a| < \delta \implies |f(x) - L| < \epsilon.\]
 In other words, as \(x\) becomes arbitrarily close to \(a\), \(f(x)\) gets arbitrarily close to \(L\).
+
+If such $\detla$s exist, we say the limit exists; otherwise, we say the limit doesn't exist.
 \subsubsection{Definition at Infinity}
-\begin{itemize}
-\item Let \(I\) be a left-bounded, right-unbounded interval with the point \(a\) being its endpoint on the left. Let \( f(x) \) be a function defined on \(I\). The limit of \( f(x) \) as \( x \) approaches \( \infty \) is defined as follows:
+Let \(I\) be a left-bounded, right-unbounded interval with the point \(a\) being its endpoint on the left. Let \( f(x) \) be a function defined on \(I\). The limit of \( f(x) \) as \( x \) approaches \( \infty \) is defined as follows:
 \[\lim_{x \to \infty} f(x) = L \equiv \forall \epsilon > 0: \, \exists M > a \text{\ s.t.\ } x > M \implies |f(x) - L| < \epsilon.\]
 In other words, as \(x\) becomes arbitrarily large, \(f(x)\) gets arbitrarily close to \(L\). We say $f(x)$ converge to $L$ as $x\to\infty$ if $\lim_{x \to \infty} f(x) = L$.
-\item Let \(I\) be a right-bounded, left-unbounded interval with the point \(a\) being its endpoint on the right. Let \( f(x) \) be a function defined on \(I\). The limit of \( f(x) \) as \( x \) approaches \( -\infty \) is defined as follows:
+
+Let \(I\) be a right-bounded, left-unbounded interval with the point \(a\) being its endpoint on the right. Let \( f(x) \) be a function defined on \(I\). The limit of \( f(x) \) as \( x \) approaches \( -\infty \) is defined as follows:
 \[\lim_{x \to -\infty} f(x) = L \equiv \forall \epsilon > 0: \, \exists M < a \text{\ s.t.\ } x < M \implies |f(x) - L| < \epsilon.\]
 In other words, as \(x\) becomes arbitrarily small, \(f(x)\) gets arbitrarily close to \(L\). We say $f(x)$ converge to $L$ as $x\to-\infty$ if $\lim_{x \to -\infty} f(x) = L$.
 \end{itemize}
@@ -338,31 +340,27 @@ In other words, as \(x\) becomes arbitrarily small, \(f(x)\) gets arbitrarily cl
 \subsubsection{Slant asymptote (斜漸近線)}
 \[ \qty(\lim_{x \to \infty} f(x)-(mx+b)=0 \lor\lim_{x \to -\infty} f(x)-(mx+b)=0) \iff \qty(y=mx+b\tx{\ is a slant asymptote of $y=f(x)$}).\]
 \subsubsection{One-side Limits}
-\begin{itemize}
-\item \tb{Right-hand Limit (右極限)}: Let \(I\) be a left-open interval with the point \(a\) being its endpoint on the left. Let \( f(x) \) be a function defined on \(I\). The right-hand limit of \( f(x) \) as \( x \) approaches \( a \) is defined as follows:
+\tb{Right-hand Limit (右極限)}: Let \(I\) be a left-open interval with the point \(a\) being its endpoint on the left. Let \( f(x) \) be a function defined on \(I\). The right-hand limit of \( f(x) \) as \( x \) approaches \( a \) is defined as follows:
 \[\lim_{x \to a^+} f(x) = L \equiv \forall \epsilon > 0 :\,\exists \delta > 0 \text{\ s.t.\ } 0 < x - a < \delta \implies |f(x) - L| < \epsilon.\]
-In other words, as \(x\) becomes arbitrarily close to \(a\) and is greater than \(a\), \(f(x)\) gets arbitrarily close to \(L\).
+In other words, as \(x\) becomes arbitrarily close to \(a\) and is greater than \(a\), \(f(x)\) gets arbitrarily close to \(L\). For a function $f(x)$, $\lim_{x\to a^+}f(x)$ can also be denoted as $f(a^+)$.
 
-For a function $f(x)$, $\lim_{x\to a^+}f(x)$ can also be denoted as $f(a^+)$.
-\item \tb{Left-hand Limit (左極限)}: Let \(I\) be a right-open interval with the point \(a\) being its endpoint on the right. Let \( f(x) \) be a function defined on \(I\). The left-hand limit of \( f(x) \) as \( x \) approaches \( a \) is defined as follows:
+\tb{Left-hand Limit (左極限)}: Let \(I\) be a right-open interval with the point \(a\) being its endpoint on the right. Let \( f(x) \) be a function defined on \(I\). The left-hand limit of \( f(x) \) as \( x \) approaches \( a \) is defined as follows:
 \[\lim_{x \to a^-} f(x) = L \equiv \forall \epsilon > 0 :\,\exists \delta > 0 \text{\ s.t.\ } 0 < a - x < \delta \implies |f(x) - L| < \epsilon.\]
-In other words, as \(x\) becomes arbitrarily close to \(a\) and is less than \(a\), \(f(x)\) gets arbitrarily close to \(L\).
-
-For a function $f(x)$, $\lim_{x\to a^-}f(x)$ can also be denoted as $f(a^-)$.
-\end{itemize}
+In other words, as \(x\) becomes arbitrarily close to \(a\) and is less than \(a\), \(f(x)\) gets arbitrarily close to \(L\). For a function $f(x)$, $\lim_{x\to a^-}f(x)$ can also be denoted as $f(a^-)$.
 \subsubsection{Infinite Limits}
 \[\lim_{x\to a}f(x)=\infty \equiv \forall M > 0, \exists \delta > 0 \text{\ s.t.\ } 0 < |x - a| < \delta \implies f(x) > M.\]
+\[\lim_{x\to a^+}f(x)=\infty \equiv \forall M > 0, \exists \delta > 0 \text{\ s.t.\ } 0 < x - a < \delta \implies f(x) > M.\]
+\[\lim_{x\to a^-}f(x)=\infty \equiv \forall M > 0, \exists \delta > 0 \text{\ s.t.\ } 0 < a - x < \delta \implies f(x) > M.\]
 \[\lim_{x\to a}f(x)=-\infty \equiv \forall M < 0, \exists \delta > 0 \text{\ s.t.\ } 0 < |x - a| < \delta \implies f(x) < M.\]
+\[\lim_{x\to a^+}f(x)=-\infty \equiv \forall M < 0, \exists \delta > 0 \text{\ s.t.\ } 0 < x - a < \delta \implies f(x) < M.\]
+\[\lim_{x\to a^-}f(x)=-\infty \equiv \forall M < 0, \exists \delta > 0 \text{\ s.t.\ } 0 < a - x < \delta \implies f(x) < M.\]
 \[\lim_{x\to\infty}f(x)=\infty \equiv \forall M > 0, \exists \delta > 0 \text{\ s.t.\ } x > \delta \implies f(x) > M.\]
 \[\lim_{x\to\infty}f(x)=-\infty \equiv \forall M > 0, \exists \delta > 0 \text{\ s.t.\ } x > \delta \implies f(x) < M.\]
 \[\lim_{x\to-\infty}f(x)=\infty \equiv \forall M > 0, \exists \delta < 0 \text{\ s.t.\ } x < \delta \implies f(x) > M.\]
 \[\lim_{x\to-\infty}f(x)=-\infty \equiv \forall M > 0, \exists \delta < 0 \text{\ s.t.\ } x < \delta \implies f(x) < M.\]
+Note that if a limit equals to $\infty$ or $-\infty$, the limit doesn't exist.
 \sssc{Vertical asymptote (鉛直漸近線)}
 \[\qty(\exists a\in\mathbb{R}\colon\abs{\lim_{x \to a^+} f(x)}=\infty\lor\abs{\lim_{x \to a^-} f(x)}=\infty)\iff \qty(x=a\tx{\ is a vertical asymptote of $y=f(x)$}).\]
-\subsubsection{Existence of Limits}
-\[\exists\lim_{x \to a^+} f(x) \iff \exists \,\text{finite}\,L\text{\ s.t.\ }\forall \epsilon > 0:\, \exists \delta > 0 \text{\ s.t.\ } 0 < x - a < \delta \implies |f(x) - L| < \epsilon.\]
-\[\exists\lim_{x \to a^-} f(x) \iff \exists \,\text{finite}\,L\text{\ s.t.\ }\forall \epsilon > 0 :\,\exists \delta > 0 \text{\ s.t.\ } 0 < a - x < \delta \implies |f(x) - L| < \epsilon.\]
-\[\exists\lim_{x \to a} f(x) \iff \exists \lim_{x \to a^+} f(x)\land\exists \lim_{x \to a^-} f(x)\land\lim_{x \to a^+} f(x) = \lim_{x \to a^-} f(x).\]
 \sssc{Preservation of equal to at finity}
 Let \(I\) be an interval containing the point \(a\). Let $f(x)$ and $g(x)$ be functions defined on \(I\), except possibly at \(a\) itself, which for all $x\in I\land x\neq a$, $f(x)=g(x)$, and that $\lim_{x\to a}f(x)$ exists, then $\lim_{x\to a}g(x)$ exists and that
 \[\lim_{x\to a}f(x)=\lim_{x\to a}g(x).\]
@@ -496,9 +494,13 @@ If $f$ and $g$ are continuous at $a$ and $c$ is a constant, then the following f
 If $g$ is continuous at $a$ and $f$ is continuous at $g(a)$, then the composite function $f\circ g$ is continuous at $a$.
 \sssc{Examples of continuous real functions}
 The following types of functions are continuous at every number in their domains: algebraic functions, trigonometric functions, inverse trigonometric functions, exponential functions, logarithmic functions.
-\sssc{Intermediate Value Theorem, IVT (中間值定理) for real functions}
-Let $f:\, I\subseteq\mathbb{R}\to\mathbb{R}$ be a continuous function, then
-\[\forall [a,b]\subseteq I \text{\ s.t.\ } f(a)\neq f(b):\,k\in (f(a), f(b))\implies (\exists c\in (a,b) \text{\ s.t.\ }f(c)=k).\]
+\sssc{Intermediate Value Theorem (IVT) (中間值定理) for real functions}
+Let $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ be continuous on $J\subseteq$, then for any interval $[a,b]\subseteq J$ such that $f(a)\neq f(b)$,
+\[k\in (f(a),f(b)) \implies \qty(\exists c\in (a,b) \text{\ s.t.\ }f(c)=k).\]
+\sssc{Intermediate Value Theorem (IVT) for functions between topological spaces}
+Let $X$ and $Y$ be topological spaces and function $f\colon I\subseteq X\to Y$ be continuous on a subset $J$ of $I$, then for any connected subset $K$ of $J$, $f(K)$ is a connected subset of $Y$.
+
+Let $X$ and $Y$ be topological spaces and function $f\colon I\subseteq X\to Y$ be continuous on a subset $J$ of $I$, then for any path-connected subset $K$ of $J$, $f(K)$ is a path-connected subset of $Y$.
 
 
 
@@ -652,7 +654,7 @@ when $b^-$ is in an expression, we define the expression as
 
 Each $[x_i, x_{i+1}]$ is called a sub-interval of the partition, in which $[a^+,x_1]$ is defined as $(a,x_1)$, and $[x_{n-1},b^-]$ is defined as $[x_{n-1},b)$. The mesh or norm of a partition is defined to be the length of the longest sub-interval, that is,
 \[\max\left(x_{i+1}-x_{i}\right),\quad i\in [0,n-1].\]
-A tagged partition $P(x,n,\xi)$ of an interval $[a,b]$ is a partition together with a choice of a sample point within each of all $n$ sub-intervals, that is, numbers $\{\xi_i\}_{i=0}^{n-1}$ with $\xi_i\in [x_i,x_{i+1}]$ for each $i\in [0,n-1]$. The mesh of a tagged partition is the same as that of an ordinary partition.
+A tagged partition $P(x,n,\xi)$ of an integral interval $(a,b)$ is a partition together with a choice of a sample point within each of all $n$ sub-intervals, that is, numbers $\{\xi_i\}_{i=0}^{n-1}$ with $\xi_i\in [x_i,x_{i+1}]$ for each $i\in [0,n-1]$. The mesh of a tagged partition is the same as that of an ordinary partition.
 
 Suppose that two tagged partitions $P(x,n,\xi)$ and $Q(y,m,\zeta)$ are both partitions of the integral interval $(a,b)$. We say that $Q(y,m,\zeta)$ is a refinement of $P(x,n,\xi)$ if for each integer $i\in [0,n]$, there exists an integer $r(i)\in [0,m]$ such that $x_i = y_{r(i)}$ and that $\forall i\in [0,n-1]:\,\exists j\in [r(i),r(i + 1)] \text{\ s.t.\ }\xi_i = \zeta_j$. That is, a tagged partition breaks up some of the sub-intervals and adds sample points where necessary, "refining" the accuracy of the partition.
 
@@ -1120,7 +1122,7 @@ The DETAIL rule or the LIATE rule is a rule of thumb for integration by parts. I
 \end{itemize}
 \ssc{Leibniz integral rule (萊布尼茲積分法則)}{{{
 \ssc{Fubini's theorem (富比尼定理)}{{{
-\ssc{Lebesgue’s Dominated convergence theorem (勒貝格控制收斂定理 or 勒貝格受制收斂定理)}{{{
+\ssc{(Lebesgue’s) Dominated convergence theorem ((勒貝格)控制/受制收斂定理)}{{{
 
 
 \sct{Integral Transform}
