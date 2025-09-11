@@ -163,11 +163,15 @@ The basic mathematics needed for the study of logic design of digital systems is
 Switching devices are essentially two-state devices (e.g. switches which are open or closed and transistors with high or low output voltages). Consequently, we will emphasize the special case of Boolean algebra in which all of the variables assume only one of two values, 0 (false) or 1 (true), called Boolean variables; this two-valued Boolean algebra is also called switching algebra.
 
 In a switch circuit, 0 (usually) represents an open switch, and 1 represents a closed circuit. In general, 0 and 1 can be used to represent the two states in any binary-valued system.
-\subsection{Basic operations}
+
+A Boolean function is a logical operation performed on one or more binary inputs that produces a single binary output.
+
+A logic gate is a device that performs a Boolean function. Below, electronic symbols follow ANSI standards.
+\subsection{Logic Operations}
 \sssc{NOT (Negation / Inversion / Complement)}
 \begin{itemize}
-\item Symbol: $\overline{A}$ or $A'$
-\item Meaning: Flip the value.
+\item Symbol: $\overline{A}$, $\neg A$, or $A'$
+\item Definition: Invert the value.
 \item Truth Table:
 \begin{longtable}[c]{|m|m|}
 \hline
@@ -175,11 +179,12 @@ A & A'\\\hline
 0 & 1\\\hline
 1 & 0\\\hline
 \end{longtable}
-\item 
-\sssc{AND (Conjunction / Multiplication)}
+\item Logic gate: \esym{not port}
+\eit 
+\sssc{AND (Conjunction / Logic Multiplication)}
 \begin{itemize}
 \item Symbol: $A \cdot B$, $A*B$, or $AB$
-\item Meaning: True only if both inputs are true.
+\item Definition: True if both inputs are true and false otherwise.
 \item Truth Table:
 \begin{longtable}[c]{|m|m|m|}
 \hline
@@ -189,59 +194,125 @@ A & B & A\cdot B\\\hline
 0 & 1 & 0\\\hline
 1 & 1 & 1\\\hline
 \end{longtable}
-\sssc{OR (Disjunction / Addition / Inclusive OR)}
+\item Logic gate: \esym{and port}
+\eit
+\sssc{OR (Disjunction / Logic Addition / Inclusive OR)}
 \begin{itemize}
 \item Symbol: $A + B$
-\item Meaning: True if at least one input is true.
+\item Definition: True if at least one input is true and false otherwise.
 \item Truth Table:
 \begin{longtable}[c]{|m|m|m|}
 \hline
-A & B & A\cdot B\\\hline
+A & B & A+B\\\hline
 0 & 0 & 0\\\hline
 1 & 0 & 1\\\hline
 0 & 1 & 1\\\hline
 1 & 1 & 1\\\hline
 \end{longtable}
-\ssc{Boolean Expressions and Truth Tables}
-Boolean expressions are formed by application of the basic operations to one or more variables or constants. The simplest expressions consist of a single constant or variable or its complement, such as 0, X, or Y′, which are called "literals". More complicated expressions are formed by combining two or more other expressions using AND or OR, or by complementing another expression.
-
-Parentheses are added as needed to specify the order in which the operations are performed. When parentheses are omitted, complementation is performed first and then AND and then OR.
-
-A truth table, also called a table of combinations, specifies the corresponding output values for all possible combinations of input values for a binary expression. A truth table for an $n$-variable expression will have $2^n$ rows.
-\ssc{Theorems}
-\sssc{Basic theorems}
-\bit
-\item Idempotent laws:
-\[X + X = X,\quad X·X = X.\]
-\item Involution law:
-\[(X′)′ = X.\]
-\item Laws of complementarity:
-\[X + X′ = 1 ,\quad X·X′ = 0 .\]
-\item AND is commutative:
-\[XY=YX.\]
-\item OR is commutative:
-\[X+Y=Y+X.\]
-\item AND is associative:
-\[XYZ=X(YZ).\]
-\item OR is associative:
-\[X+Y+Z=X+(Y+Z).\]
-\item AND is distributive over OR:
-\[X(Y+Z)=XY+XZ.\]
-\item OR is distributive over AND:
-\[X+YZ=(X+Y)(X+Z).\]
-\item DeMorgan’s Laws:
-\[(\sum_{i=1}^nX_i)′=\prod_{i=1}^nX_i',\quad (\prod_{i=1}^nX_i)'=\sum_{i=1}^nX_i'.\]
-\item Duality Principle: If a Boolean equation is true, you can get another true equation, called its dual, by interchanging AND and OR and interchanging 0 and 1 everywhere.
+\item Logic gate: \esym{or port}
 \eit
-\sssc{Simplification theorems}
+\sssc{XOR (Exclusive-OR)}
+\begin{itemize}
+\item Symbol: $A \oplus B$
+\item Definition: $A'B+AB'$
+\item Truth Table:
+\begin{longtable}[c]{|m|m|m|}
+\hline
+A & B & A\oplus B\\\hline
+0 & 0 & 0\\\hline
+1 & 0 & 1\\\hline
+0 & 1 & 1\\\hline
+1 & 1 & 0\\\hline
+\end{longtable}
+\item Logic gate: \esym{xor port}
+\eit
+\sssc{NAND (Not AND)}
+\begin{itemize}
+\item Definition: $(AB)'$
+\item Truth Table:
+\begin{longtable}[c]{|m|m|m|}
+\hline
+A & B & (A\cdot B)'\\\hline
+0 & 0 & 1\\\hline
+1 & 0 & 1\\\hline
+0 & 1 & 1\\\hline
+1 & 1 & 0\\\hline
+\end{longtable}
+\item Logic gate: \esym{nand port}
+\eit
+\sssc{NOR (Not OR)}
+\begin{itemize}
+\item Definition: $(A+B)'$
+\item Truth Table:
+\begin{longtable}[c]{|m|m|m|}
+\hline
+A & B & (A+B)'\\\hline
+0 & 0 & 1\\\hline
+1 & 0 & 0\\\hline
+0 & 1 & 0\\\hline
+1 & 1 & 0\\\hline
+\end{longtable}
+\item Logic gate: \esym{nor port}
+\eit
+\sssc{XNOR ((Logic) equivalence / Exclusive NOR)}
+\begin{itemize}
+\item Symbol: $A\equiv B$ or $A\odot B$
+\item Definition: $(A\oplus B)'$
+\item Truth Table:
+\begin{longtable}[c]{|m|m|m|}
+\hline
+A & B & (A\oplus B)'\\\hline
+0 & 0 & 1\\\hline
+1 & 0 & 0\\\hline
+0 & 1 & 0\\\hline
+1 & 1 & 1\\\hline
+\end{longtable}
+\item Logic gate: \esym{xnor port}
+\eit
+\ssc{Boolean Arithmetic}
+A Boolean expression is formed by application of the logic operations to one or more Boolean variables or constants. The simplest expressions consist of a single constant or variable or its complement, such as 0, X, or Y′, which are called "literals".
+
+In a Boolean expression, parentheses are added as needed to specify the order in which the operations are performed; when parentheses are omitted, complementation is performed first and then AND and then OR; while the precedence of XOR and XNOR varies in context.
+
+A Boolean function or a switching function is a function of which the domain is $\{1,0\}^n$ in which $n\in\mathbb{N}$ and the codomain is $\{1,0\}$.
+
+A truth table, also called a table of combinations, specifies the corresponding output values for all possible combinations of input values for a Boolean function. A truth table for an $n$-variable Boolean function will have $2^n$ rows.
+\ssc{Sum-of-Products (SOP) and Product-of-Sums (POS) forms}
 \bit
-\item Uniting:
+\item\Tb{Sum-of-products (SOP) form}: An expression is said to be in SOP form if it consists of a sum (OR) of product (AND) or single variable terms, in which it is called to be degenerate when some of the terms are single variables. Every Boolean expression can be expressed in SOP form.
+\item\Tb{Product-of-sums (POS) form}: An expression is said to be in POS form if it consists of a product (AND) of sum (OR) or single variable terms, in which it is called to be degenerate when some of the terms are single variables. Every Boolean expression can be expressed in POS form.
+\item\Tb{Minimal SOP form}: The SOP form of a Boolean expression that has the fewest number of terms out of all SOP form of the expression.
+\item\Tb{Minimal POS form}: The POS form of a Boolean expression that has the fewest number of terms out of all POS form of the expression.
+\eit
+\ssc{Theorems}
+\sssc{Idempotent Laws}
+\[X + X = X,\quad X\cdot X = X.\]
+\sssc{Involution Law}
+\[(X′)′ = X.\]
+\sssc{Laws of Complementarity}
+\[X + X′ = 1 ,\quad X\cdot X′ = 0 .\]
+\sssc{Commutativity}
+AND, OR, XOR, NAND, NOR, and XNOR are commutative.
+\sssc{Associativity}
+AND, OR, XOR, NAND, NOR, and XNOR are associative.
+\sssc{Distributivity}
+\bit
+\item AND is distributive over OR and XOR.
+\item OR is distributive over AND and XOR.
+\item XOR is distributive over AND and OR.
+\eit
+\sssc{DeMorgan’s Laws}
+\[(\sum_{i=1}^nX_i)′=\prod_{i=1}^nX_i',\quad (\prod_{i=1}^nX_i)'=\sum_{i=1}^nX_i'.\]
+\sssc{Duality Principle}
+If a Boolean equation is true, you can get another true equation, called its dual, by interchanging AND and OR and interchanging 0 and 1 everywhere.
+\sssc{Uniting Theorems}
 \[XY+XY'=X,\quad (X+Y)(X+Y')=X.\]
-\item Absorption:
+\sssc{Absorption Theorems}
 \[X+XY=X,\quad X(X+Y)=X.\]
-\item Elimination:
+\sssc{Elimination Theorems}
 \[X+X'Y=X+Y,\quad X(X'+Y)=XY.\]
-\item Consensus:
+\sssc{Consensus Theorems}
+The consensus theorems involve eliminate one term from an expression in SOP or POS form, in which the eliminated term is called the consensus term.
 \[XY+X′Z+YZ=XY+X′Z.\]
 \begin{proof}
 \[\begin{aligned}
@@ -258,7 +329,19 @@ XY+X′Z+YZ&=XY+X'Z+(X+X')YZ\\
 &=(X+Y)(X′+Z).
 \end{aligned}\]
 \end{proof}
+\sssc{Theorem of Combination of Distributivity and Consensus Theorem}
+\[(X+Y)(X'+Z)=XZ+X'Y\]
+\begin{proof}
+\[(X+Y)(X'+Z)=0+XZ+X'Y+YZ=XZ+X'Y\]
+\end{proof}
+\subsection{Axiom of Equality}
+For an one-to-one Boolean function $f$, a Boolean expression $A$ equals another Boolean expression $B$ if and only if $f(A)$ equals $f(B)$.
+\ssc{Minterm and Maxterm Expansions}
+\bit
+\item\Tb{Minterm}: A minterm of a Boolean function, often denoted as $m_i$ for the $(i+1)$th row in the truth table of the function, is a product of all input variables that corresponds to an input combination for which the function is $1$ where each variable appears is in true form ($A$) if the input of that variable is $1$ and complemented ($A'$) if the input of that variable is $0$.
+\item\Tb{Minterm expansion, standard SOP, or canonical SOP}: Express a Boolean function as sum of minterms. For a given Boolean function, there exists a unique minterm expansion of it.
+\item\Tb{Maxterm}: A maxterm of a Boolean function, often denoted as $M_i$ for the $(i+1)$th row in the truth table of the function,  is a sum of all input variables that corresponds to an input combination for which the function is $0$ where each variable appears is in true form ($A$) if the input of that variable is $0$ and complemented ($A'$) if the input of that variable is $1$.
+\item\Tb{Maxterm expansion, standard POS, or canonical POS}: Express a Boolean function as product of maxterms. For a given Boolean function, there exists a unique maxterm expansion of it.
+\eit
 
 
-A logic gate is a device that performs a Boolean function, a logical operation performed on one or more binary inputs that produces a single binary output.
-{{{logic gates symbol 待
