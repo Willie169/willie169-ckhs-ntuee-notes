@@ -161,13 +161,14 @@ where $H(0)=u(0)$ is sometimes defined to be $\frac{1}{2}$ or other values inste
 Below, we are discussing limits of sequences with domain $\mathbb{N}$ and codomain $\mathbb{R}$. For sequences $\langle a_n\rangle_{i=l}^\infty$ in $\mathbb{R}$, its limit is the same as the limit of another sequence $\langle b_n=a_{n+l-1}\rangle_{i=1}^\infty$.
 \subsubsection{Definition}
 For a real sequence \(\langle a_n\rangle\), the limit of \(\langle a_n\rangle\) (as $n$ approaches infinity), denoted as $\lim_{n \to \infty} a_n$ or $\lim_n a_n$, is defined as follows:
-\[\lim_{n \to \infty} a_n = L \equiv \forall \epsilon > 0:\, \exists N \in\mathbb{N}\text{\ s.t.\ } n\in\mathbb{N}\land n \geq N\implies |a_n - L| < \epsilon.\]
+\[\lim_{n \to \infty} a_n = L \equiv \forall \epsilon > 0:\, \exists M \in\mathbb{N}\text{\ s.t.\ } n\in\mathbb{N}\land n \geq M\implies |a_n - L| < \epsilon.\]
 In other words, as \(n\) becomes arbitrarily large, \(a_n\) gets arbitrarily close to \(L\).
 
-If such $N$ exists, we say the limit exists or the sequence converges (收斂) to $L$; otherwise, we say the limit doesn't exist or the sequence diverge (發散).
+If such $M$ exists, we say the limit exists or the sequence converges (收斂) to $L$; otherwise, we say the limit doesn't exist or the sequence diverge (發散).
 \subsubsection{Infinite Limits}
-\[\lim_{n\to \infty}a_n=\infty \equiv \forall M > 0, \exists N \in\mathbb{N} \text{\ s.t.\ } n\in\mathbb{N}\land n \geq N \implies a_n > M.\]
-\[\lim_{n\to \infty}a_n=-\infty \equiv \forall M < 0, \exists N \in\mathbb{N} \text{\ s.t.\ } n\in\mathbb{N}\land n \geq N \implies a_n < M.\]
+\[\lim_{n\to \infty}a_n=\infty \equiv \forall M > 0, \exists M \in\mathbb{N} \text{\ s.t.\ } n\in\mathbb{N}\land n \geq M \implies a_n > M.\]
+\[\lim_{n\to \infty}a_n=-\infty \equiv \forall M < 0, \exists M \in\mathbb{N} \text{\ s.t.\ } n\in\mathbb{N}\land n \geq M \implies a_n < M.\]
+Note that if a limit equals to $\infty$ or $-\infty$, the limit doesn't exist.
 \sssc{Preservation of equal to}
 Given real sequences $\langle a_n\rangle$ and $\langle b_n\rangle$ which for all $k$ that is greater than or equal to a specific $j\in \mathbb{N}$, $a_k=b_k$ and that $\lim_{n\to\infty}a_n$ exists, then $\lim_{n\to\infty}b_n$ exists and that:
 \[\lim_{n\to\infty}a_n=\lim_{n\to\infty}b_n.\]
@@ -190,12 +191,12 @@ then:
 \[\lim_{n\to\infty}a_n=\inf_n a_n\]
 \end{enumerate}
 \begin{proof}\mbox{}\\
-Let $\{a_{n}\}_{n\in\mathbb {N}}$ be the set of values of $\langle a_n\rangle$. By assumption, $\{a_n\}$ is non-empty and bounded-above by $\sup_n a_n$. Let $c=\sup_n a_n$.
-\[\forall\epsilon>0:\,\exists N\text{\ s.t.\ }c\geq a_N>c-\epsilon,\]
+Let $\{a_{n}\}$ be the set of values of $\langle a_n\rangle_{n\in\mathbb {N}}$. By assumption, $\{a_n\}$ is non-empty and bounded-above by $\sup_n a_n$. Let $c=\sup_n a_n$.
+\[\forall\epsilon>0:\,\exists M\in\mathbb {N}\text{\ s.t.\ }c\geq a_M>c-\epsilon,\]
 since otherwise $c-\epsilon$ is a strictly smaller upper bound of $\langle a_n\rangle$, contradicting the definition of the supremum. 
 
-Then since $\langle a_n\rangle$ is non decreasing, and $c$ is an upper bound:
-\[\forall\epsilon>0:\,\exists N\text{\ s.t.\ }\forall n\geq N:\,|c-a_n|=c-a_n\leq c-a_N=|c-a_N|<\epsilon.\]
+Then since $\langle a_n\rangle$ is non-decreasing, and $c$ is an upper bound:
+\[\forall\epsilon>0:\,\exists M\in\mathbb {N}\text{\ s.t.\ }\forall n\geq M:\,|c-a_n|=c-a_n\leq c-a_M=|c-a_M|<\epsilon.\]
 The proof of the (B) part is analogous or follows from (A) by considering $\langle -a_{n}\rangle_{n\in \mathbb{N}}$.
 \end{proof}
 \textit{Statement.}
@@ -226,9 +227,9 @@ Given $a$ and $b$, $\pm\sqrt{ab}$ is called the median of an geometric sequence 
 Let:
 \[S_n = \sum_{i=1}^n a_i,\]
 where \(a_i\) are terms of a real sequence. The limit of \(S_n\), denoted as \(\lim_{n\to\infty}S_n\) or \(\sum_{i=1}^{\infty}a_i\), is defined as the following:
-\[\sum_{i=1}^{\infty}a_i = L \equiv \forall \epsilon > 0:\, \exists N \in\mathbb{N}\text{\ s.t.\ } n \geq N\implies |S_n - L| < \epsilon.\]
+\[\sum_{i=1}^{\infty}a_i = L \equiv \forall \epsilon > 0:\, \exists M \in\mathbb{N}\text{\ s.t.\ } n \geq M\implies |S_n - L| < \epsilon.\]
 
-If such $N$ exists, we say the limit exists or the series converges to $L$; otherwise, we say the limit doesn't exist or the series diverge.
+If such $M$ exists, we say the limit exists or the series converges to $L$; otherwise, we say the limit doesn't exist or the series diverge.
 \subsubsection{Absolute convergence and conditional convergence}
 A series $S_n=\sum_{i=1}^{\infty}a_i$ converges absolutely to $L$ if $\exists\lim_{n\to\infty}\sum_{i=1}^{\infty}\abs{a_1}\land\lim_{n\to\infty}\sum_{i=1}^{\infty}\abs{a_1}=L$. If $S_n$ is convergent but not convergent absolutely, we say $S_n$ converges conditionally.
 \sssc{Preservation of equal to}
@@ -302,10 +303,11 @@ Below, we are discussing limits of nets in the set of real number.
 For a real net $\langle x_a\rangle_{a\in A}$ in which $A$ is a directed set, the limit of $\langle x_a\rangle_{a\in A}$, denoted as $\lim_{a\in A} x_a$ or $\lim_a x_a$, is defined as follows:
 \[\lim_ax_a = L \equiv \forall \epsilon > 0:\, \exists a_0 \in A\text{\ s.t.\ } a\in A\land a\ge a_0\implies |x_a - L| < \epsilon.\]
 
-If such $N$ exists, we say the limit exists or the net converges to $L$; otherwise, we say the limit doesn't exist.
+If such $a_0$ exists, we say the limit exists or the net converges to $L$; otherwise, we say the limit doesn't exist.
 \subsubsection{Infinite Limits}
 \[\lim_{a}x_a=\infty \equiv \forall M > 0, \exists a_0 \in A \text{\ s.t.\ } a\in A\land a\geq a_0 \implies x_a > M.\]
 \[\lim_{a}x_a=-\infty \equiv \forall M < 0, \exists a_0 \in A \text{\ s.t.\ } a\in A\land a\geq a_0 \implies x_a < M.\]
+Note that if a limit equals to $\infty$ or $-\infty$, the limit doesn't exist.
 \sssc{Preservation of equal to}
 Let $A$ be a directed set. Given real nets $\langle x_a\rangle_{a\in A}$ and $\langle b_n\rangle_{a\in A}$ which for all $k$ that is greater than or equal to a specific $j\in A$, $a_k=b_k$ and that $\lim_{a}x_a$ exists, then $\lim_{a}b_n$ exists and that:
 \[\lim_{a}x_a=\lim_{a}b_n.\]
@@ -348,16 +350,16 @@ In other words, as \(x\) becomes arbitrarily close to \(a\) and is greater than 
 \[\lim_{x \to a^-} f(x) = L \equiv \forall \epsilon > 0 :\,\exists \delta > 0 \text{\ s.t.\ } 0 < a - x < \delta \implies |f(x) - L| < \epsilon.\]
 In other words, as \(x\) becomes arbitrarily close to \(a\) and is less than \(a\), \(f(x)\) gets arbitrarily close to \(L\). For a function $f(x)$, $\lim_{x\to a^-}f(x)$ can also be denoted as $f(a^-)$.
 \subsubsection{Infinite Limits}
-\[\lim_{x\to a}f(x)=\infty \equiv \forall M > 0, \exists \delta > 0 \text{\ s.t.\ } 0 < |x - a| < \delta \implies f(x) > M.\]
-\[\lim_{x\to a^+}f(x)=\infty \equiv \forall M > 0, \exists \delta > 0 \text{\ s.t.\ } 0 < x - a < \delta \implies f(x) > M.\]
-\[\lim_{x\to a^-}f(x)=\infty \equiv \forall M > 0, \exists \delta > 0 \text{\ s.t.\ } 0 < a - x < \delta \implies f(x) > M.\]
-\[\lim_{x\to a}f(x)=-\infty \equiv \forall M < 0, \exists \delta > 0 \text{\ s.t.\ } 0 < |x - a| < \delta \implies f(x) < M.\]
-\[\lim_{x\to a^+}f(x)=-\infty \equiv \forall M < 0, \exists \delta > 0 \text{\ s.t.\ } 0 < x - a < \delta \implies f(x) < M.\]
-\[\lim_{x\to a^-}f(x)=-\infty \equiv \forall M < 0, \exists \delta > 0 \text{\ s.t.\ } 0 < a - x < \delta \implies f(x) < M.\]
-\[\lim_{x\to\infty}f(x)=\infty \equiv \forall M > 0, \exists \delta > 0 \text{\ s.t.\ } x > \delta \implies f(x) > M.\]
-\[\lim_{x\to\infty}f(x)=-\infty \equiv \forall M > 0, \exists \delta > 0 \text{\ s.t.\ } x > \delta \implies f(x) < M.\]
-\[\lim_{x\to-\infty}f(x)=\infty \equiv \forall M > 0, \exists \delta < 0 \text{\ s.t.\ } x < \delta \implies f(x) > M.\]
-\[\lim_{x\to-\infty}f(x)=-\infty \equiv \forall M > 0, \exists \delta < 0 \text{\ s.t.\ } x < \delta \implies f(x) < M.\]
+\[\lim_{x\to a}f(x)=\infty \equiv \forall N > 0:\, \exists \delta > 0 \text{\ s.t.\ } 0 < |x - a| < \delta \implies f(x) > N.\]
+\[\lim_{x\to a^+}f(x)=\infty \equiv \forall N > 0:\, \exists \delta > 0 \text{\ s.t.\ } 0 < x - a < \delta \implies f(x) > N.\]
+\[\lim_{x\to a^-}f(x)=\infty \equiv \forall N > 0:\, \exists \delta > 0 \text{\ s.t.\ } 0 < a - x < \delta \implies f(x) > N.\]
+\[\lim_{x\to a}f(x)=-\infty \equiv \forall N < 0:\, \exists \delta > 0 \text{\ s.t.\ } 0 < |x - a| < \delta \implies f(x) < N.\]
+\[\lim_{x\to a^+}f(x)=-\infty \equiv \forall N < 0:\, \exists \delta > 0 \text{\ s.t.\ } 0 < x - a < \delta \implies f(x) < N.\]
+\[\lim_{x\to a^-}f(x)=-\infty \equiv \forall N < 0:\, \exists \delta > 0 \text{\ s.t.\ } 0 < a - x < \delta \implies f(x) < N.\]
+\[\lim_{x\to\infty}f(x)=\infty \equiv \forall N > 0:\, \exists M > 0 \text{\ s.t.\ } x > M \implies f(x) > N.\]
+\[\lim_{x\to\infty}f(x)=-\infty \equiv \forall N > 0:\, \exists M > 0 \text{\ s.t.\ } x > M \implies f(x) < N.\]
+\[\lim_{x\to-\infty}f(x)=\infty \equiv \forall N > 0:\, \exists M < 0 \text{\ s.t.\ } x < M \implies f(x) > N.\]
+\[\lim_{x\to-\infty}f(x)=-\infty \equiv \forall N > 0:\, \exists M < 0 \text{\ s.t.\ } x < M \implies f(x) < N.\]
 Note that if a limit equals to $\infty$ or $-\infty$, the limit doesn't exist.
 \sssc{Vertical asymptote (鉛直漸近線)}
 \[\qty(\exists a\in\mathbb{R}\colon\abs{\lim_{x \to a^+} f(x)}=\infty\lor\abs{\lim_{x \to a^-} f(x)}=\infty)\iff \qty(x=a\tx{\ is a vertical asymptote of $y=f(x)$}).\]
@@ -459,7 +461,7 @@ The function $f$ is said to be the pointwise limit function of $f_n$.
 \subsection{Continuity (連續性)}
 \sssc{Definition for real functions}
 \begin{itemize}
-\item For a point $a$ in the domain of a function $f$, if and only if $\exists\lim_{x\to a}f(x)$ and $\lim_{x\to a}f(x)=f(a)$, we say $f(x)$ is continuous (連續的) at $a$; otherwise, we say $f(x)$ is discontinuous (不連續的) at $a$. A point that $f$ is discontinuous at is called a singularity or singular point (奇點).
+\item For a point $a$ in the domain of a function $f$, if and only if $\exists\lim_{x\to a}f(x)$ and $\lim_{x\to a}f(x)=f(a)$, we say $f(x)$ is continuous (連續的) at $a$; otherwise, we say $f(x)$ is discontinuous (不連續的) at $a$.
 \item For a point $a$ in the domain of a function $f$, if and only if $\exists\lim_{x\to a^+}f(x)$ and $\lim_{x\to a^+}f(x)=f(a)$, we say $f(x)$ is continuous from the right at $a$; if and only if $\exists \lim_{x\to a^-} f(x)$ and $\lim_{x\to a^-} f(x)=f(a)$, we say $f(x)$ is continuous from the left at $a$.
 \item For an open interval $I$ that is a subset of the domain of a function $f$, if and only if $f(x)$ is continuous at all points in $I$, we say $f(x)$ is continuous on $I$; otherwise, we say $f(x)$ is discontinuous on $I$.
 \item For an right-open interval $[a,b)$ that is a subset of the domain of a function $f$, if and only if $f(x)$ is continuous on $(a,b)$ and continuous from the right at $a$, we say $f(x)$ is continuous on $[a,b)$; otherwise, we say $f(x)$ is discontinuous on $[a,b).
@@ -467,6 +469,8 @@ The function $f$ is said to be the pointwise limit function of $f_n$.
 \item For an closed interval $[a,b]$ that is a subset of the domain of a function $f$, if and only if $f(x)$ is continuous on both $[a,b)$ and $(a,b]$, we say $f(x)$ is continuous on $[a,b]$; otherwise, we say $f(x)$ is discontinuous on $[a,b].
 \item if and only if $f(x)$ is continuous at all points in its domain, we say $f(x)$ is continuous.
 \eit
+\sssc{Singularity or singular point (奇點) of real functions}
+In real analysis, a point is usually called a singularity or a singular point of a real function $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ if it is a cluster point of $I$ but not in $I$, or it is a discontinuity of $f$.
 \sssc{Definition for functions between topological spaces}
 \begin{itemize}
 \item A function $f\colon I\subeteq X\to Y$ where $X$ and $Y$ are topological spaces is continuous at a point $x\in I$ if and only if for any neighborhood $V$ of $f(x)$ in $Y$, there is a neighborhood $U$ of $x$ such that $f(U)\subseteq V$.
@@ -509,39 +513,44 @@ Let $X$ and $Y$ be topological spaces and function $f\colon I\subseteq X\to Y$ b
 \sssc{Leibniz's notation (萊布尼茲符號) for differentiation}
 Suppose a dependent variable $y$ represents a function $f$ of an independent variable $x$, that is,
 \[y=f(x).\]
-Then the derivative of the function $f$ can be written as
-\[\frac{\mathrm{d}y}{\mathrm{d}x},\quad\frac{\mathrm{d}}{\mathrm{d}x}y,\quad\frac{\mathrm{d}\qty(f(x))}{\mathrm{d}x},\quad\text{or\ }\frac{\mathrm{d}}{\mathrm{d}x}\qty(f(x));\]
+Then, the derivative of the function $f$ can be written as
+\[\frac{\mathrm{d}y}{\mathrm{d}x},\quad\frac{\mathrm{d}}{\mathrm{d}x}y,\quad\frac{\mathrm{d}\qty(f(x))}{\mathrm{d}x},\quad\text{or\ }\frac{\mathrm{d}}{\mathrm{d}x}\qty(f(x)),\]
+in which $\frac{\mathrm{d}}{\mathrm{d}x}$ is called a differential operator (微分運算子) or a derivative operator (導數運算子);
+
 the $n$th derivative of the function $f$ can be written as
-\[\frac{\mathrm{d}^ny}{\mathrm{d}x^n},\quad\frac{\mathrm{d}^n}{\mathrm{d}x^n}y,\quad\frac{\mathrm{d}^n\qty(f(x))}{\mathrm{d}x^n},\quad\tx{or\ }\frac{\mathrm{d}^n}{\mathrm{d}x^n}\qty(f(x)).\]
+\[\frac{\mathrm{d}^ny}{\mathrm{d}x^n},\quad\frac{\mathrm{d}^n}{\mathrm{d}x^n}y,\quad\frac{\mathrm{d}^n\qty(f(x))}{\mathrm{d}x^n},\quad\tx{or\ }\frac{\mathrm{d}^n}{\mathrm{d}x^n}\qty(f(x)),\]
+in which $\frac{\mathrm{d}^n}{\mathrm{d}x^n}$ is called a differential operator or a derivative operator.
 \sssc{Leibniz's notation for partial differentiation}
 Suppose a dependent variable $y$ represents a function $f$ of an independent variable vector $\mb{x}=(x_1,x_2,\ldots,x_n)$, that is,
 \[y=f(\mb{x}).\]
-Then the partial derivative of the function $f$ with respect to $x_i$ can be written as
-\[\frac{\partial y}{\partial x_i},\quad\frac{\partial }{\partial x_i}y,\quad\frac{\partial \qty(f(x))}{\partial x_i},\quad\text{or\ }\frac{\partial }{\partial x_i}\qty(f(x));\]
+Then, the partial derivative of the function $f$ with respect to $x_i$ can be written as
+\[\frac{\partial y}{\partial x_i},\quad\frac{\partial }{\partial x_i}y,\quad\frac{\partial \qty(f(x))}{\partial x_i},\quad\text{or\ }\frac{\partial }{\partial x_i}\qty(f(x)),\]
+in which $\frac{\partial}{\partial x_i}$ is called a partial differential operator (偏微分運算子) or a partial derivative operator (偏導數運算子);
+
 the $n$th partial derivative of the function $f$ with respect to $x_i$ can be written as
-\[\frac{\partial^ny}{\partial x_i^{\phantom{i}n}},\quad\frac{\partial^n}{\partial x_i^{\phantom{i}n}}y,\quad\frac{\partial^n\qty(f(x))}{\partial x_i^{\phantom{i}n}}\text{or\ }\frac{\partial^n}{\partial x_i^{\phantom{i}n}}\qty(f(x));\]
+\[\frac{\partial^ny}{\partial x_i^{\phantom{i}n}},\quad\frac{\partial^n}{\partial x_i^{\phantom{i}n}}y,\quad\frac{\partial^n\qty(f(x))}{\partial x_i^{\phantom{i}n}}\text{or\ }\frac{\partial^n}{\partial x_i^{\phantom{i}n}}\qty(f(x)),\]
+in which $\frac{\partial^n}{\partial x_i^{\phantom{i}n}}$ is called a partial differential operator or a partial derivative operator;
+
 the $n$th mixed partial derivative of the function $f$ $m_{i_1}$ times with respect to $x_{i_1}$, $m_{i_1}$ times with respect to $x_{i_2}$, $\ldots$, $m_{i_k}$ times with respect to $x_{i_k}$, in which $\sum_{j=1}^km_{i_j}=n$, can be written as
 \[\frac{\partial^ny}{\partial^{m_{i_1}}x_{i_1}^{\phantom{i_1}m_{i_1}}\partial^{m_{i_2}}x_{i_2}^{\phantom{i_2}m_{i_2}}\ldots\partial^{m_{i_k}}x_{i_k}^{\phantom{i_k}m_{i_k}}},\]
 \[\frac{\partial^n}{\partial^{m_{i_1}}x_{i_1}^{\phantom{i_1}m_{i_1}}\partial^{m_{i_2}}x_{i_2}^{\phantom{i_2}m_{i_2}}\ldots\partial^{m_{i_k}}x_{i_k}^{\phantom{i_k}m_{i_k}}}y,\]
 \[\frac{\partial^nf\qty(\mb{x})}{\partial^{m_{i_1}}x_{i_1}^{\phantom{i_1}m_{i_1}}\partial^{m_{i_2}}x_{i_2}^{\phantom{i_2}m_{i_2}}\ldots\partial^{m_{i_k}}x_{i_k}^{\phantom{i_k}m_{i_k}}},\quad \tx{or}\]
-\[\frac{\partial^n}{\partial^{m_{i_1}}x_{i_1}^{\phantom{i_1}m_{i_1}}\partial^{m_{i_2}}x_{i_2}^{\phantom{i_2}m_{i_2}}\ldots\partial^{m_{i_k}}x_{i_k}^{\phantom{i_k}m_{i_k}}}f(\mb{x}).\]
+\[\frac{\partial^n}{\partial^{m_{i_1}}x_{i_1}^{\phantom{i_1}m_{i_1}}\partial^{m_{i_2}}x_{i_2}^{\phantom{i_2}m_{i_2}}\ldots\partial^{m_{i_k}}x_{i_k}^{\phantom{i_k}m_{i_k}}}f(\mb{x}),\]
+in which $\frac{\partial^n}{\partial^{m_{i_1}}x_{i_1}^{\phantom{i_1}m_{i_1}}\partial^{m_{i_2}}x_{i_2}^{\phantom{i_2}m_{i_2}}\ldots\partial^{m_{i_k}}x_{i_k}^{\phantom{i_k}m_{i_k}}}$ is called a partial differential operator or a partial derivative operator.
 \sssc{Lagrange's notation (拉格朗日符號) or Prime notation for differentiation}
 Suppose a dependent variable $y$ represents a function $f$ of an independent variable $x$, that is,
 \[y=f(x).\]
-Then the derivative of the function $f$ can be written as
-\[f'(x),\]
-the second derivative of the function $f$ can be written as
-\[f''(x),\]
-and so on.
-
-The $n$th derivative of the function $f$ can also be written as
-\[f^{(n)}(x).\]
+Then, the derivative of the function $f$ can be written as
+\[y',\quad\tx{or\ }f'(x);\]
+the $n$th derivative of the function $f$ can also be written as
+\[y^{(n)},\quad\tx{or\ }f^{(n)}(x),\]
+in which $^{(n)}$ can be replaced with $n$ primes ($'$) (For example, $y''$ is equivalent to $y^{(2)}$, and $f''$ is equivalent to $f^{(2)}$.).
 \sssc{Newton's notation (牛頓符號), dot notation, or fluxions for differentiation}
 Suppose a dependent variable $y$ represents a function $f$ of an independent variable $t$, that is,
 \[y=f(t),\]
 where $t$ usually represents time.
 
-Then the derivative of the function $f$ can be written as
+Then, the derivative of the function $f$ can be written as
 \[\dot{y},\]
 the second derivative of the function $f$ can be written as
 \[\ddot{y},\]
@@ -549,14 +558,40 @@ and so on.
 \sssc{Subscript notation for partial differentiation}
 Suppose a dependent variable $y$ represents a function $f$ of an independent variable vector $\mb{x}=(x_1,x_2,\ldots,x_n)$, that is,
 \[y=f(\mb{x}).\]
-Then the partial derivative of the function $f$ with respect to $x_i$ can be written as
-\[y_{x_i},\quad y'_{x_i},\quad f_{x_i},\quad f'_{x_i},\quad\partial_{x_i}f,\quad \tx{or\ }D_{x_i}f;\]
+Then, the partial derivative of the function $f$ with respect to $x_i$ can be written as
+\[y_{x_i},\quad y'_{x_i},\quad f_{x_i},\quad \tx{or\ }f'_{x_i};\]
 the $n$th partial derivative of the function $f$ with respect to $x_i$ can be written as below, in which subscript are $n$ $x_i$s
-\[y_{x_ix_i\ldots x_i},\quad y'_{x_ix_i\ldots x_i},\quad f_{x_ix_i\ldots x_i},\quad f'_{x_ix_i\ldots x_i},\quad\partial_{x_ix_i\ldots x_i}f,\quad \tx{or\ }D_{x_ix_i\ldots x_i}f;\]
+\[y_{x_ix_i\ldots x_i},\quad y^{(n)}_{\pht{(n)}x_ix_i\ldots x_i},\quad f_{x_ix_i\ldots x_i},\tx{or\ }\quad f^{(n)}_{\pht{(n)}x_ix_i\ldots x_i},\]
+in which $^{(n)}$ can be replaced with $n$ primes ($'$) (For example, $y''$ is equivalent to $y^{(2)}$, and $f''$ is equivalent to $f^{(2)}$.);
+
 the $n$th mixed partial derivative of the function $f$ $m_{i_1}$ times with respect to $x_{i_1}$, $m_{i_1}$ times with respect to $x_{i_2}$, $\ldots$, $m_{i_k}$ times with respect to $x_{i_k}$, in which $\sum_{j=1}^km_{i_j}=n$, can be written as below, in which subscript are $m_{i_j}$ $x_{i_j}$s for all $x_{i_j}$
-\[y_{x_{i_1}x_{i_1}\ldots x_{i_2}x_{i_2}x_{i_2}\ldots x_{i_2}\ldots x_{i_k}x_{i_k}\ldots x_{i_k}},\quad y'_{x_{i_1}x_{i_1}\ldots x_{i_2}x_{i_2}x_{i_2}\ldots x_{i_2}\ldots x_{i_k}x_{i_k}\ldots x_{i_k}},\]
-\[f_{x_{i_1}x_{i_1}\ldots x_{i_2}x_{i_2}x_{i_2}\ldots x_{i_2}\ldots x_{i_k}x_{i_k}\ldots x_{i_k}},\quad f'_{x_{i_1}x_{i_1}\ldots x_{i_2}x_{i_2}x_{i_2}\ldots x_{i_2}\ldots x_{i_k}x_{i_k}\ldots x_{i_k}},\]
-\[\partial_{x_{i_1}x_{i_1}\ldots x_{i_2}x_{i_2}x_{i_2}\ldots x_{i_2}\ldots x_{i_k}x_{i_k}\ldots x_{i_k}}f,\quad \tx{or\ }D_{x_{i_1}x_{i_1}\ldots x_{i_2}x_{i_2}x_{i_2}\ldots x_{i_2}\ldots x_{i_k}x_{i_k}\ldots x_{i_k}}f.\]
+\[y_{x_{i_1}x_{i_1}\ldots x_{i_2}x_{i_2}x_{i_2}\ldots x_{i_2}\ldots x_{i_k}x_{i_k}\ldots x_{i_k}},\quad y^{(n)}_{\pht{(n)}x_{i_1}x_{i_1}\ldots x_{i_2}x_{i_2}x_{i_2}\ldots x_{i_2}\ldots x_{i_k}x_{i_k}\ldots x_{i_k}},\]
+\[f_{x_{i_1}x_{i_1}\ldots x_{i_2}x_{i_2}x_{i_2}\ldots x_{i_2}\ldots x_{i_k}x_{i_k}\ldots x_{i_k}},\quad \tx{or\ }f^{(n)}_{\pht{(n)}x_{i_1}x_{i_1}\ldots x_{i_2}x_{i_2}x_{i_2}\ldots x_{i_2}\ldots x_{i_k}x_{i_k}\ldots x_{i_k}}.\]
+\sssc{Euler’s notation (歐拉符號) for differentiation}
+Given a function $f$ of an independent variable $x$, that is,
+\[f(x).\]
+Then, the derivative of the function $f$ can be written as
+\[Df(x)\quad\tx{or\ }(Df)(x)\]
+in which $Df$ is called a differential operator or a derivative operator;
+
+the $n$th derivative of the function $f$ can be written as
+\[D^nf(x)\quad\tx{or\ }(D^nf)(x)\]
+in which $D^nf$ is called a differential operator or a derivative operator.
+\sssc{Euler’s notation for partial differentiation}
+Given a function $f$ of an independent variable vector $\mb{x}=(x_1,x_2,\ldots,x_n)$, that is,
+\[f(\mb{x}).\]
+Then, the partial derivative of the function $f$ with respect to $x_i$ can be written as
+\[\partial_{x_i}f,\quad \tx{or\ }D_{x_i}f,\]
+in which $\partial_{x_i}$ and $D_{x_i}$ are called partial differential operators or partial derivative operators;
+
+the $n$th partial derivative of the function $f$ with respect to $x_i$ can be written as
+\[\partial_{x_ix_i\ldots x_i}f,\quad\partial^{(n)}_{\pht{(n)}x_ix_i\ldots x_i}f,\quad D_{x_ix_i\ldots x_i}f,\quad\tx{or\ }D^{(n)}_{\pht{(n)}x_ix_i\ldots x_i}f,\]
+in which subscript are $n$ $x_i$s, $^{(n)}$ can be replaced with $n$ primes ($'$) (For example, $\partial''$ is equivalent to $\partial^{(2)}$, and $D''$ is equivalent to $D^{(2)}$.), and $\partial_{x_ix_i\ldots x_i}$, $\partial^{(n)}_{\pht{(n)}x_ix_i\ldots x_i}$, $D_{x_ix_i\ldots x_i}$, and $D^{(n)}_{\pht{(n)}x_ix_i\ldots x_i}$ are called partial differential operators or partial derivative operators;
+
+the $n$th mixed partial derivative of the function $f$ $m_{i_1}$ times with respect to $x_{i_1}$, $m_{i_1}$ times with respect to $x_{i_2}$, $\ldots$, $m_{i_k}$ times with respect to $x_{i_k}$, in which $\sum_{j=1}^km_{i_j}=n$, can be written as
+\[\partial_{x_{i_1}x_{i_1}\ldots x_{i_2}x_{i_2}x_{i_2}\ldots x_{i_2}\ldots x_{i_k}x_{i_k}\ldots x_{i_k}}f,\quad\partial^{(n)}_{\pht{(n)}x_{i_1}x_{i_1}\ldots x_{i_2}x_{i_2}x_{i_2}\ldots x_{i_2}\ldots x_{i_k}x_{i_k}\ldots x_{i_k}}f,\]
+\[ D_{x_{i_1}x_{i_1}\ldots x_{i_2}x_{i_2}x_{i_2}\ldots x_{i_2}\ldots x_{i_k}x_{i_k}\ldots x_{i_k}}f,\quad \tx{or\ }D^{(n)}_{\pht{(n)}x_{i_1}x_{i_1}\ldots x_{i_2}x_{i_2}x_{i_2}\ldots x_{i_2}\ldots x_{i_k}x_{i_k}\ldots x_{i_k}}f,\]
+in which subscript are $m_{i_j}$ $x_{i_j}$s for all $x_{i_j}$, $^{(n)}$ can be replaced with $n$ primes ($'$) (For example, $\partial''$ is equivalent to $\partial^{(2)}$, and $D''$ is equivalent to $D^{(2)}$.), and $\partial_{x_ix_i\ldots x_i}$, $\partial^{(n)}_{\pht{(n)}x_ix_i\ldots x_i}$, $D_{x_ix_i\ldots x_i}$, and $D^{(n)}_{\pht{(n)}x_ix_i\ldots x_i}$ are called partial differential operators or partial derivative operators.
 \ssc{Fréchet Differentiation (弗蘭歇微分)}
 \sssc{Fréchet derivative (弗蘭歇導數), ordinary derivative (常導數), or derivative (導數)}
 Let $V$ and $W$ be normed vector spaces and $U$ be an open subset of $U$. A function $f\colon U\to W$ is Fréchet differentiable (弗蘭歇可微的) or differentiable at $x\in U$ if there exists a bounded linear operator $A\colon V\to W$ such that
