@@ -592,53 +592,88 @@ the $n$th mixed partial derivative of the function $f$ $m_{i_1}$ times with resp
 \[\partial_{x_{i_1}x_{i_1}\ldots x_{i_2}x_{i_2}x_{i_2}\ldots x_{i_2}\ldots x_{i_k}x_{i_k}\ldots x_{i_k}}f,\quad\partial^{(n)}_{\pht{(n)}x_{i_1}x_{i_1}\ldots x_{i_2}x_{i_2}x_{i_2}\ldots x_{i_2}\ldots x_{i_k}x_{i_k}\ldots x_{i_k}}f,\]
 \[ D_{x_{i_1}x_{i_1}\ldots x_{i_2}x_{i_2}x_{i_2}\ldots x_{i_2}\ldots x_{i_k}x_{i_k}\ldots x_{i_k}}f,\quad \tx{or\ }D^{(n)}_{\pht{(n)}x_{i_1}x_{i_1}\ldots x_{i_2}x_{i_2}x_{i_2}\ldots x_{i_2}\ldots x_{i_k}x_{i_k}\ldots x_{i_k}}f,\]
 in which subscript are $m_{i_j}$ $x_{i_j}$s for all $x_{i_j}$, $^{(n)}$ can be replaced with $n$ primes ($'$) (For example, $\partial''$ is equivalent to $\partial^{(2)}$, and $D''$ is equivalent to $D^{(2)}$.), and $\partial_{x_ix_i\ldots x_i}$, $\partial^{(n)}_{\pht{(n)}x_ix_i\ldots x_i}$, $D_{x_ix_i\ldots x_i}$, and $D^{(n)}_{\pht{(n)}x_ix_i\ldots x_i}$ are called partial differential operators or partial derivative operators.
-\ssc{Fréchet Differentiation (弗蘭歇微分)}
-\sssc{Fréchet derivative (弗蘭歇導數), ordinary derivative (常導數), or derivative (導數)}
-Let $V$ and $W$ be normed vector spaces and $U$ be an open subset of $U$. A function $f\colon U\to W$ is Fréchet differentiable (弗蘭歇可微的) or differentiable at $x\in U$ if there exists a bounded linear operator $A\colon V\to W$ such that
-\[\lim_{\|h\|_V\to 0}\frac{\|f(x+h)-f(x)-A(h)\|_W}{\|h\|_V}=0.\]
-If there exists such an operator $A$, it is unique, so we define the (first) Fréchet derivative, ordinary derivative, or derivative of $f$ at $x$, denoted as $Df(x)$, as $A$.
+\ssc{Ordinary differentiation (常微分) or differentiation (微分) of Function with Real Domain}
+Let $W$ be a topological vector space. The derivative of a function $f\colon U\subeteq\mathbb{R}\to W$ at $x\in U$ is defined as
+\[\lim_{h\to 0}\frac{f(x+h)-f(x)}{h}\]
+if the limit exists. If such limit exists, we say $f$ is differentiable at $x$.
 
-We define the (first) Fréchet derivative function (弗蘭歇導函數) or derivative function (導函數) of $f$, denoted as $Df$, as a function $Df\colon U\to B(V,W)$, in which $B(V,W)$ is the space of all bounded linear operators from $V$ to $W$, such that for any $x\in U$ at which $f$ is differentiable, $Df$ maps $x$ to the derivative of $f$ at $x$.
+We define the (first) derivative function (導函數) of $f$ as a function $Df$ with codomain $W$ such that for any $x\in U$ at which $f$ is differentiable, $Df$ maps $x$ to the derivative of $f$ at $x$.
 
-If such derivative exists, the derivative of the $k$th ($k\in\mathbb{N}$) derivative function of $f$ at $x\in U$ is called the $k+1$th derivative of $f$ at $x\in U$. If such function exists, the derivative function of the $k$th ($k\in\mathbb{N}$) derivative function of $f$ is called the $k+1$th derivative function of $f$.
+The derivative of the $k$th ($k\in\mathbb{N}$) derivative function of $f$ at $x\in U$ is called the $k+1$th derivative of $f$ at $x\in U$. The derivative function of the $k$th ($k\in\mathbb{N}$) derivative function of $f$ is called the $k+1$th derivative function of $f$.
 
 If for any $n\in\mathbb{N}$, the $n$th derivative of a function $f$ at a point $x$ in its domain exists, we say $f$ is infinitely differentiable at $x$.
 
-If $f$ is differentiable at all point in its domain, we say $f$ is differentiable.
+If $f$ is differentiable at all point in $I\subeteq U$, we say $f$ is differentiable on $I$; if $f$ is differentiable at all point in its domain, we say $f$ is differentiable.
 
-The operation of finding the derivative or derivative function is called Fréchet differentiation (弗蘭歇微分), ordinary differentiation (常微分), or differentiation (微分).
+The operation of finding the derivative or derivative function is called ordinary differentiation (常微分) or differentiation (微分).
+\ssc{Partial differentiation (偏微分) of Function with Real Vector Domain}
+Let $W$ be a topological vector space and $f\colon U\subeteq\mathbb{R}^n\to W$ be a function, $\mb{x}$ be the independent variable vector of $f$, and $X$ be the set of all independent variables of $f$.
+
+The (first) partial derivative (偏導數) $\pdv{f}{x_i}$ of $f$ with respect to $x_i\in X$ at $u\in U$ is defined as
+\bma
+\pdv{f}{x_i}&=\lim_{h\to 0}\frac{f(u+h\mb{e}_i)-f(u)}{h}\]
+&=\frac{\mathrm{d}}{\mathrm{d}h}f(u+h\mb{e}_i)\big\vert_{h=0}
+\end{aligned},\]
+in which $\mb{e}_i\in\mathbb{R}^n$ is the unit vector in the direction of $x_i$.
+
+The partial derivative of the $k$th ($k\in\mathbb{N}$) partial derivative function of $f$ with respect to $ x \in X$ with respect to $ x \in X$ at $u\in U$ is called the $k+1$th partial derivative of $f$ with respect to $ x$ at $u\in U$. The partial derivative function of the $k$th ($k\in\mathbb{N}$) partial derivative function of $f$ with respect to $ x \in X$ with respect to $ x \in X$ is called the $k+1$th partial derivative function of $f$ with respect to $ x$.
+
+The partial derivative of the $k$th partial derivative function of $f$ with respect to $ x_1\in X$ with respect to $ x_2\in X$ at $u\in U$ is called the $(k+1)$th mixed partial derivative of $f$ with respect to $ x_1, x_1,\ldots, x_1$ ($k$ times) and $ x_2$ at $u\in U$. The partial derivative function of the $k$th partial derivative function of $f$ with respect to $ x_1\in X$ with respect to $ x_2\in X$ at $u\in U$ is called the $(k+1)$th mixed partial derivative function of $f$ with respect to $ x_1, x_1,\ldots, x_1$ ($k$ times) and $ x_2$.
+
+The partial derivative of the $k$th mixed partial derivative function of $f$ with respect to $ x_1, x_2,\ldots, x_k\in X$ with respect to $ x_{k+1}\in X$ at $u\in U$ is called the $(k+1)$th mixed partial derivative of $f$ with respect to $ x_1, x_2,\ldots, x_k, x_{k+1}$ at $u\in U$. The partial derivative function of the $k$th mixed partial derivative function of $f$ with respect to $ x_1, x_2,\ldots, x_k\in X$ with respect to $ x_{k+1}\in X$ is called the $(k+1)$th mixed partial derivative function of $f$ with respect to $ x_1, x_2,\ldots, x_k, x_{k+1}$.
+
+The operation of finding the partial derivative or partial derivative function is called partial differentiation.
+\ssc{Fréchet Differentiation (弗蘭歇微分)}
+\sssc{Fréchet derivative (弗蘭歇導數), ordinary derivative, or derivative}
+Let $V$ and $W$ be normed vector spaces and $U$ be an open subset of $V$. A function $f\colon U\to W$ is Fréchet differentiable (弗蘭歇可微的) or differentiable at $x\in U$ if there exists a bounded linear operator $A\colon V\to W$ such that
+\[\lim_{\|h\|_V\to 0}\frac{\|f(x+h)-f(x)-A(h)\|_W}{\|h\|_V}=0.\]
+If there exists such an operator $A$, it is unique, so we define the (first) Fréchet derivative, ordinary derivative, or derivative of $f$ at $x$, denoted as $Df(x)$, as $A$.
+
+We define the (first) Fréchet derivative function (弗蘭歇導函數) or derivative function of $f$ as a function $Df$ with codomain $B(V,W)$, in which $B(V,W)$ is the space of all bounded linear operators from $V$ to $W$, such that for any $x\in U$ at which $f$ is differentiable, $Df$ maps $x$ to the derivative of $f$ at $x$.
+
+The derivative of the $k$th ($k\in\mathbb{N}$) derivative function of $f$ at $x\in U$ is called the $k+1$th derivative of $f$ at $x\in U$. The derivative function of the $k$th ($k\in\mathbb{N}$) derivative function of $f$ is called the $k+1$th derivative function of $f$.
+
+If for any $n\in\mathbb{N}$, the $n$th derivative of a function $f$ at a point $x$ in its domain exists, we say $f$ is infinitely differentiable at $x$.
+
+If $f$ is differentiable at all point in $I\subeteq U$, we say $f$ is differentiable on $I$; if $f$ is differentiable at all point in its domain, we say $f$ is differentiable.
+
+The operation of finding the derivative or derivative function is called Fréchet differentiation (弗蘭歇微分), ordinary differentiation, or differentiation.
 \sssc{Smoothness (光滑性 or 平滑性)}
 A function $f$ that has a $k$th derivative that is continuous in its domain is said to be of class $C^k$ or be a $C^k$-function.
 
 Generally, the term smooth function refers to a $C^{\infty}$-function. However, it may also mean "sufficiently differentiable" for the problem under consideration.
 \ssc{Gateaux Differentiation (加托微分)}
-\sssc{Gateaux derivative (加托導數) and partial derivatives (偏導數)}
-Let $V$ be a locally convex topological vector spaces (LCTVS), $W$ be a topological vector space, and $U$ be an open subset of $V$. Given a function $F\colon U\to W$, the (first) Gateaux derivative $dF(u;\,\psi)$ of $F$ at $u\in U$ in the direction $\psi \in V$ is defined to be
+\sssc{Gateaux derivative (加托導數) and partial derivatives}
+Let $V$ be a locally convex topological vector spaces (LCTVS), $W$ be a topological vector space, $U$ be an open subset of $V$, and $f\colon U\to W$ be a function.
+
+The (first) Gateaux derivative $df(u;\,\psi)$ of $f$ at $u\in U$ in the direction $\psi \in V$ is defined to be
 \[\begin{aligned}
-dF(u;\,\psi) &= \lim_{\tau\to 0}\frac{F(u+\tau \psi)-F(u)}{\tau}\\
-&= \frac{\mathrm{d}}{\mathrm{d}\tau}F(u+\tau \psi)\big\vert_{\tau =0}
+df(u;\,\psi) &= \lim_{\tau\to 0}\frac{f(u+\tau \psi)-f(u)}{\tau}\\
+&= \frac{\mathrm{d}}{\mathrm{d}\tau}f(u+\tau \psi)\big\vert_{\tau =0}
 \end{aligned}\]
-if the limit exists. If for any $\psi \in V$, the Gateaux derivative exists, then it is said that $F$ is Gateaux differentiable (加托可微的) at $u$.
+if the limit exists. If for any $\psi \in V$, the Gateaux derivative exists, then it is said that $f$ is Gateaux differentiable (加托可微的) at $u$.
 
 We define the (first) Gateaux derivative function (加托導函數) of $f$ in the direction $\psi \in V$, denoted as $df$, as a function $df\colon U\to W$, such that for any $u\in U$ at which $f$ is Gateaux differentiable, $df$ maps $u$ to the Gateaux derivative of $f$ at $u$ in the direction $\psi \in V$.
 
-If such derivative exists, the Gateaux derivative of the $k$th ($k\in\mathbb{N}$) Gateaux derivative function of $f$ at $u\in U$ in the direction $\psi \in V$ in the direction $\psi \in V$ is called the $k+1$th Gateaux derivative of $f$ at $u\in U$ in the direction $\psi$. If such function exists, the Gateaux derivative function of the $k$th ($k\in\mathbb{N}$) Gateaux derivative function of $f$ at $u\in U$ in the direction $\psi \in V$ in the direction $\psi \in V$ is called the $k+1$th Gateaux derivative function of $f$ at $u\in U$ in the direction $\psi$.
+The Gateaux derivative of the $k$th ($k\in\mathbb{N}$) Gateaux derivative function of $f$ in the direction $\psi \in V$ in the direction $\psi \in V$ at $u\in U$ is called the $k+1$th Gateaux derivative of $f$ in the direction $\psi$ at $u\in U$. The Gateaux derivative function of the $k$th ($k\in\mathbb{N}$) Gateaux derivative function of $f$ in the direction $\psi \in V$ in the direction $\psi \in V$ is called the $k+1$th Gateaux derivative function of $f$ in the direction $\psi$.
 
-If such derivative exists, the Gateaux derivative of the $k$th Gateaux derivative function of $f$ at $u\in U$ in the direction $\psi_1\in V$ in the direction $\psi_2\in V$ is called the $(k+1)$th mixed Gateaux derivative of $f$ at $u\in U$ in the direction $\psi_1,\psi_1,\ldots,\psi_1$ ($k$ times) and $\psi_2$. If such function exists, the Gateaux derivative of the $k$th Gateaux derivative function of $f$ at $u\in U$ in the direction $\psi_1\in V$ in the direction $\psi_2\in V$ is called the $(k+1)$th mixed Gateaux derivative function of $f$ at $u\in U$ in the direction $\psi_1,\psi_1,\ldots,\psi_1$ ($k$ times) and $\psi_2$.
+The Gateaux derivative of the $k$th Gateaux derivative function of $f$ in the direction $\psi_1\in V$ in the direction $\psi_2\in V$ at $u\in U$ is called the $(k+1)$th mixed Gateaux derivative of $f$ in the direction $\psi_1,\psi_1,\ldots,\psi_1$ ($k$ times) and $\psi_2$ at $u\in U$. The Gateaux derivative function of the $k$th Gateaux derivative function of $f$ in the direction $\psi_1\in V$ in the direction $\psi_2\in V$ is called the $(k+1)$th mixed Gateaux derivative function of $f$ in the direction $\psi_1,\psi_1,\ldots,\psi_1$ ($k$ times) and $\psi_2$.
 
-If such derivative exists, the Gateaux derivative of the $k$th mixed Gateaux derivative function of $f$ at $u\in U$ in the direction $\psi_1,\psi_2,\ldots,\psi_k\in V$ in the direction $\psi_{k+1}\in V$ is called the $(k+1)$th mixed Gateaux derivative of $f$ at $u\in U$ in the direction $\psi_1,\psi_2,\ldots,\psi_k,\psi_{k+1}$. If such function exists, the Gateaux derivative of the $k$th mixed Gateaux derivative function of $f$ at $u\in U$ in the direction $\psi_1,\psi_2,\ldots,\psi_k\in V$ in the direction $\psi_{k+1}\in V$ is called the $(k+1)$th mixed Gateaux derivative function of $f$ at $u\in U$ in the direction $\psi_1,\psi_2,\ldots,\psi_k,\psi_{k+1}$.
+The Gateaux derivative of the $k$th mixed Gateaux derivative function of $f$ in the direction $\psi_1,\psi_2,\ldots,\psi_k\in V$ in the direction $\psi_{k+1}\in V$ at $u\in U$ is called the $(k+1)$th mixed Gateaux derivative of $f$ in the direction $\psi_1,\psi_2,\ldots,\psi_k,\psi_{k+1}$ at $u\in U$. The Gateaux derivative function of the $k$th mixed Gateaux derivative function of $f$ in the direction $\psi_1,\psi_2,\ldots,\psi_k\in V$ in the direction $\psi_{k+1}\in V$ is called the $(k+1)$th mixed Gateaux derivative function of $f$ in the direction $\psi_1,\psi_2,\ldots,\psi_k,\psi_{k+1}$.
 
 The operation of finding the Gateaux derivative or Gateaux derivative function is called Gateaux differentiation (加托微分).
-\sssc{Partial derivative (偏導數)}
-Let $\mb{x}$ be the variable vector in $V$, and the unit vector in the $i$th direction be $\mb{e}_i$. The (first) partial derivative of $f$ at $u\in U$ with respect to $x_i\in\mb{x}$ is defined as the Gateaux derivative of $f$ at $u$ in the direction $\mb{e_i}$ if it exists.
+\sssc{Partial derivative}
+Let $V$ be a locally convex topological vector spaces (LCTVS), $W$ be a topological vector space, $U$ be an open subset of $V$, and $f\colon U\to W$ be a function, $\mb{x}$ be the independent variable vector of $f$, and $X$ be the set of all independent variables of $f$.
 
-If such derivative exists, the partial derivative of the $k$th ($k\in\mathbb{N}$) partial derivative function of $f$ at $u\in U$ with respect to $\psi \in\mb{x}$ with respect to $\psi \in\mb{x}$ is called the $k+1$th partial derivative of $f$ at $u\in U$ with respect to $\psi$. If such function exists, the partial derivative function of the $k$th ($k\in\mathbb{N}$) partial derivative function of $f$ at $u\in U$ with respect to $\psi \in\mb{x}$ with respect to $\psi \in\mb{x}$ is called the $k+1$th partial derivative function of $f$ at $u\in U$ with respect to $\psi$.
+The (first) partial derivative of $f$ with respect to $x_i\in X$ at $u\in U$ is defined as the Gateaux derivative of $f$ in the direction of $x_i$ at $u$ if it exists.
 
-If such derivative exists, the partial derivative of the $k$th partial derivative function of $f$ at $u\in U$ with respect to $\psi_1\in\mb{x}$ with respect to $\psi_2\in\mb{x}$ is called the $(k+1)$th mixed partial derivative of $f$ at $u\in U$ with respect to $\psi_1,\psi_1,\ldots,\psi_1$ ($k$ times) and $\psi_2$. If such function exists, the partial derivative of the $k$th partial derivative function of $f$ at $u\in U$ with respect to $\psi_1\in\mb{x}$ with respect to $\psi_2\in\mb{x}$ is called the $(k+1)$th mixed partial derivative function of $f$ at $u\in U$ with respect to $\psi_1,\psi_1,\ldots,\psi_1$ ($k$ times) and $\psi_2$.
+The partial derivative of the $k$th ($k\in\mathbb{N}$) partial derivative function of $f$ with respect to $ x \in X$ with respect to $ x \in X$ at $u\in U$ is called the $k+1$th partial derivative of $f$ with respect to $ x$ at $u\in U$. The partial derivative function of the $k$th ($k\in\mathbb{N}$) partial derivative function of $f$ with respect to $ x \in X$ with respect to $ x \in X$ is called the $k+1$th partial derivative function of $f$ with respect to $ x$.
 
-If such derivative exists, the partial derivative of the $k$th mixed partial derivative function of $f$ at $u\in U$ with respect to $\psi_1,\psi_2,\ldots,\psi_k\in\mb{x}$ with respect to $\psi_{k+1}\in\mb{x}$ is called the $(k+1)$th mixed partial derivative of $f$ at $u\in U$ with respect to $\psi_1,\psi_2,\ldots,\psi_k,\psi_{k+1}$. If such function exists, the partial derivative of the $k$th mixed partial derivative function of $f$ at $u\in U$ with respect to $\psi_1,\psi_2,\ldots,\psi_k\in\mb{x}$ with respect to $\psi_{k+1}\in\mb{x}$ is called the $(k+1)$th mixed partial derivative function of $f$ at $u\in U$ with respect to $\psi_1,\psi_2,\ldots,\psi_k,\psi_{k+1}$.
+The partial derivative of the $k$th partial derivative function of $f$ with respect to $ x_1\in X$ with respect to $ x_2\in X$ at $u\in U$ is called the $(k+1)$th mixed partial derivative of $f$ with respect to $ x_1, x_1,\ldots, x_1$ ($k$ times) and $ x_2$ at $u\in U$. The partial derivative function of the $k$th partial derivative function of $f$ with respect to $ x_1\in X$ with respect to $ x_2\in X$ at $u\in U$ is called the $(k+1)$th mixed partial derivative function of $f$ with respect to $ x_1, x_1,\ldots, x_1$ ($k$ times) and $ x_2$.
 
-The operation of finding the partial derivative or partial derivative function is called partial differentiation (偏微分).
+The partial derivative of the $k$th mixed partial derivative function of $f$ with respect to $ x_1, x_2,\ldots, x_k\in X$ with respect to $ x_{k+1}\in X$ at $u\in U$ is called the $(k+1)$th mixed partial derivative of $f$ with respect to $ x_1, x_2,\ldots, x_k, x_{k+1}$ at $u\in U$. The partial derivative function of the $k$th mixed partial derivative function of $f$ with respect to $ x_1, x_2,\ldots, x_k\in X$ with respect to $ x_{k+1}\in X$ is called the $(k+1)$th mixed partial derivative function of $f$ with respect to $ x_1, x_2,\ldots, x_k, x_{k+1}$.
+
+The operation of finding the partial derivative or partial derivative function is called partial differentiation.
 \subsection{Taylor series (泰勒級數) or Taylor expansion (泰勒展開)}
 Assume that $F:\,\mathbb{R}\to\mathbb{R}$ is an infinitely differentiable function, and its derivatives of every order exist on $\mathbb{R}$, then the Taylor series of $F$ at $a$ is
 \[F(x) = \sum_{n\in\mathbb{N}_0} \frac{F^{(n)}(a)}{n!}(x-a)^n,\]
