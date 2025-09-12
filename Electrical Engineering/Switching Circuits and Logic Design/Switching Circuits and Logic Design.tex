@@ -363,11 +363,22 @@ also denoted as
 \[f=\prod M(i\in T).\]
 
 For a given Boolean function, there exists a unique maxterm expansion of it.
+\sssc{Conversion between function and its complement}
+Let $f$ be a Boolean function, the complement of it, denoted as $f'$, is defined as a Boolean function with the same domain as $f$ such that
+\[f'(x)=\begin{cases}1,\quad & \tx{if\ }f(x)=0\\0,\quad & \tx{if\ }f(x)=1\end{cases}.\]
+
+Let $f\colon D\to\{1,0\}$ be a Boolean function with ON-set $S$, OFF-set $T=D\setminus S$, minterm expansion
+\[f=\prod_{i\in S}m_i,\]
+and maxterm expansion
+\[f=\sum_{i\in T}M_i.\]
+
+Then, the complement $f'$ of it has ON-set $T$, OFF-set $S$, minterm expansion 
+\[f'=\prod_{i\in T}m_i,\]
+and maxterm expansion
+\[f'=\sum_{i\in S}M_i.\]
 \ssc{Incompletely Specified Boolean Functions (ISF) or Don’t-care Functions}
 A (completely specified) Boolean function $F\colon\{0,1\}^n \to \{0,1\}$ gives an output $0$ or $1$ for every one of the $2^n$ input combinations. Canonical expansions only apply to completely specified functions.
 
 An incompletely specified function (ISF) or a don’t-care function is a Boolean function but in which for some input combinations, the output is not defined or irrelevant, denoted as don’t-care conditions or $d$. The definition of ON-set and OFF-set of an ISF is the same as completely specified function; the Don’t-Care set or DC-set of an ISF is the set of all don’t-care conditions. When simplifying an ISF, the output for the don’t-care conditions can be assigned as either $0$ or $1$, so the assignment is chosen to yield a simpler minimal SOP or POS.
 \ssc{Boolean Vector Functions or Boolean Multi-output Functions}
 A Boolean vector function or a Boolean multi-output function is a function $f\colon\{1,0\}^n\to\{1,0\}^m$. A Boolean vector function can be specified with truth table or as a tuple of $m$ Boolean functions.
-\ssc{Examples of Construction of Boolean Vector Functions}
-\sssc{Unsigned binary number adder}
