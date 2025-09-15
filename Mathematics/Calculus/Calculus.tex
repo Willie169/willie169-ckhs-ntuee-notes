@@ -27,6 +27,8 @@ If $x\in X$ and $(x, y) \in R$, we write $y = f(x)$, in which $f(x)$ is called t
 
 If $I$ is a subset of the domain of $f$, $f(I)$ is defined as
 \[f(I)\coloneq\{y\mid\exists x\in I \tx{\ s.t.\ }f(x)=y\}.\]
+
+Let $f\colon X\to Y$ and $I\subeteq X$. Then $f\vert_I$ is defined as a function $f\vert_I\colon I\to Y$ such that for every $x\in I$, $f\vert_I(x)=f(x)$.
 \ssc{Type of Functions}
 Consider a function $f$:
 \[f\colon X\to Y;\,x\mapsto y.\]
@@ -115,6 +117,11 @@ A polynomial is a function $P(x)=\sum_{k=0}^na_kx^k$ where $a_k\in\mathbb{R}$ or
 A function $f$ is called a rational function if there exists two polynomials $P(x)$ and $Q(x)$ such that $f(x)=\frac{P(x)}{Q(x)}$ for all $x$ in the domain.
 \sssc{Algebraic Function (代數函數)}
 A function $f$ is called an algebraic function if there exists a polynomial $P(y,x)$ in two variables such that $P(f(x),x)=0$ for all $x$ in the domain.
+\sssc{Elementary functions}
+A constants, a power function, a logarithmic function, an exponential function, a trigonometric function, an inverse trigonometric function, or any function that can be built up with finite defined operations of addition, subtraction, multiplication, division, and composition of functions on any finite set of elementary functions is called an elementary function.
+
+An integral of which the integrand is an elementary function is called an elementary integral.
+\ssc{Special functions}
 \sssc{Heaviside step function (黑維塞階躍函數) or Unit step function (單位階躍函數)}
 \[H(x)=u(x)=
 \begin{cases}0,\quad &x<0\\
@@ -137,10 +144,12 @@ where $H(0)=u(0)$ is sometimes defined to be $\frac{1}{2}$ or other values inste
 \int _{-\infty }^{\infty }\delta(x) \, \mathrm{d}x = 1.
 \]
 \[\int_0^x\delta(t)\,\mathrm{d}t=H(x).\]
-\ssc{Elementary functions}
-A constants, a power function, a logarithmic function, an exponential function, a trigonometric function, an inverse trigonometric function, or any function that can be built up with finite defined operations of addition, subtraction, multiplication, division, and composition of functions on any finite set of elementary functions is called an elementary function.
+\sssc{Dirichlet function{{{
+\sssc{Weierstrass function{{{
+\sssc{Blancmange curve{{{
 
-An integral of which the integrand is an elementary function is called an elementary integral.
+
+
 \section{Sequences and Series (數列與級數)}
 \ssc{Sequence}
 \begin{itemize}
@@ -471,26 +480,31 @@ The function $f$ is said to be the pointwise limit function of $f_n$.
 \item if and only if $f(x)$ is continuous at all points in its domain, we say $f(x)$ is continuous.
 \eit
 \sssc{Singularity or singular point (奇點) of real functions}
-In real analysis, a point is usually called a singularity or a singular point of a real function $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ if it is a cluster point of $I$ but not in $I$, or it is a discontinuity of $f$.
+A point is a singularity or a singular point of a function $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ if it is a cluster point of $I$ but not in $I$, or it is a discontinuity of $f$.
 \sssc{Definition for functions between topological spaces}
 \begin{itemize}
 \item A function $f\colon I\subeteq X\to Y$ where $X$ and $Y$ are topological spaces is continuous at a point $x\in I$ if and only if for any neighborhood $V$ of $f(x)$ in $Y$, there is a neighborhood $U$ of $x$ such that $f(U)\subseteq V$.
 \item A function $f\colon I\subeteq X\to Y$ where $X$ and $Y$ are topological spaces is continuous if and only if for any open subset $V$ of $Y$, the preimage of $f$ on $V$ is an open subset of $X$.
 \item A function $f\colon I\subeteq X\to Y$ where $X$ and $Y$ are topological spaces is continuous on a subset $J$ of $I$ if and only if for any open subset $V$ of $Y$, the joint set of the preimage of $f$ on $V$ and $J$ is open in the subspace topology of $X$ in $J$.
 \eit
-\sssc{Type of discontinuity for real functions}
+\sssc{Type of singularities for real functions}
 \bit
-\item \tb{Removable discontinuity}: If $\exists\lim_{x\to a}f(x)\land\lim_{x\to a}f(x)\neq f(a)$, we call $f(a)$ removable discontinuity.
-\item \tb{Jump discontinuity}: If $\exists\lim_{x\to a^-}f(x)\land\exists\lim_{x\to a^+}f(x)\land\lim_{x\to a^-}f(x)\neq\lim_{x\to a^+}f(x)$, we call $f(a)$ jump discontinuity.
-\item \tb{Type I discontinuity}: Removable discontinuity and jump discontinuity are collectively called type I discontinuity.
-\item \tb{Essential discontinuity or type II discontinuity}: At least one of $\lim_{x\to a^-}f(x)$ and $\lim_{x\to a^+}f(x)$ doesn't exist in $\mathbb{R}$, we call $f(a)$ essential discontinuity or type II discontinuity.
-\item\tb{Infinite discontinuity}: If at least one of $\lim_{x\to a^-}f(x)$ and $\lim_{x\to a^+}f(x)$ does not exist and those in $\lim_{x\to a^-}f(x)$ and $\lim_{x\to a^+}f(x)$ that do not exist are either $\infty$ or $-\infty$, we call $f(a)$ infinite discontinuity.
-\item\tb{Essential singularity}: An essential discontinuity that is not an infinite discontinuity is called an essential singularity.
+\item \tb{Removable discontinuity}: If $\exists\lim_{x\to a}f(x)\land\lim_{x\to a}f(x)\neq f(a)$, we call $f(a)$ a removable discontinuity.
+\item \tb{Removable singularity}: If $\exists\lim_{x\to a}f(x)$ and either that $f(a)$ is undefined or $\lim_{x\to a}f(x)\neq f(a)$, we call $f(a)$ a removable singularity.
+\item \tb{Jump discontinuity}: If $\exists\lim_{x\to a^-}f(x)\land\exists\lim_{x\to a^+}f(x)\land\lim_{x\to a^-}f(x)\neq\lim_{x\to a^+}f(x)$ and that $f(a)$ is defined, we call $f(a)$ a jump discontinuity.
+\item \tb{Jump singularity}: If $\exists\lim_{x\to a^-}f(x)\land\exists\lim_{x\to a^+}f(x)\land\lim_{x\to a^-}f(x)\neq\lim_{x\to a^+}f(x)$, we call $f(a)$ a jump singularity.
+\item \tb{Type I discontinuity}: Removable discontinuities and jump discontinuities are collectively called type I discontinuities.
+\item \tb{Type I singularity}: Removable singularities and jump singularities are collectively called type I singularities.
+\item \tb{Type II discontinuity}: At least one of $\lim_{x\to a^-}f(x)$ and $\lim_{x\to a^+}f(x)$ doesn't exist in $\mathbb{R}$ and that $f(a)$ is defined, we call $f(a)$ a type II discontinuity.
+\item \tb{Type II singularity}: At least one of $\lim_{x\to a^-}f(x)$ and $\lim_{x\to a^+}f(x)$ doesn't exist in $\mathbb{R}$, we call $f(a)$ a type II singularity.
+\item\tb{Infinite discontinuity}: If at least one of $\lim_{x\to a^-}f(x)$ and $\lim_{x\to a^+}f(x)$ does not exist, and that those in $\lim_{x\to a^-}f(x)$ and $\lim_{x\to a^+}f(x)$ that do not exist are either $\infty$ or $-\infty$, and that $f(a)$ is defined, we call $f(a)$ infinite discontinuity.
+\item\tb{Infinite singularity}: If at least one of $\lim_{x\to a^-}f(x)$ and $\lim_{x\to a^+}f(x)$ does not exist, and that those in $\lim_{x\to a^-}f(x)$ and $\lim_{x\to a^+}f(x)$ that do not exist are either $\infty$ or $-\infty$, we call $f(a)$ infinite singularity.
+\item\tb{Essential singularity}: An essential singularity that is not an infinite singularity is called an essential singularity.
 \eit
 \sssc{Piecewise continuity for real functions}
-For a real function $f$ defined on an interval $I$, if there is a finite set $J$ (i.e. $n(J)\in\mathbb{N}$) of subintervals of $I$ such that $n(I\setminus\bigcup_{j\in J}j)\in\mathbb{N}_0$ and that $f$ is continuous on each $j\in J$, we say $f$ is piecewise-continuous.
+Let $f\colon D\subseteq\mathbb{R}\to\mathbb{R}$ be a function. We say $f$ is piecewise-continuous if there exists a family $\{[a_i,b_i]\mid i\in I\}$ of closed intervals such that for every closed interval $V$, the set $\{i\in I\mid V\cap [a_i,b_i]\neq\varnothing\}$ is finite, and $D\subseteq\bigcup_{i\in I}[a_i,b_i]$, and that function $f\big\vert_{(a_i,b_i)}\colon(a_i,b_i)\to Y$ is continuous for every $i\in I$.
 \sssc{Piecewise continuity for functions between topological spaces}
-For a function $f\colon I\subeteq X\to Y$ where $X$ and $Y$ are topological spaces, if there is a finite set $J$ (i.e. $n(J)\in\mathbb{N}$) of subsets of $I$ that are connected, such that $n(I\setminus\bigcup_{j\in J}j)\in\mathbb{N}_0$ and that $f$ is continuous on each $j\in J$, we say $f$ is piecewise-continuous.
+Let $X$ and $Y$ be topological spaces, and $f\colon D\subseteq X\to Y$ be a function. We say $f$ is piecewise-continuous if there exists a locally finite family $\{U_i\mid i\in I\}$ of closed subsets of $X$ such that $D\subseteq\bigcup_{i\in I}U_i$ and that function $f\big\vert_{\operatorname{int}\left(U_i\right)}\colon\operatorname{int}\left(U_i\right)\to Y$ is continuous for every $i\in I$.
 \sssc{Arithmetic Laws}
 If $f$ and $g$ are continuous at $a$ and $c$ is a constant, then the following functions are also continuous at $a$:
 \[f+g;\quad f-g;\quad cf;\quad fg;\]
