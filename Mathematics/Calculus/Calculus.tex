@@ -29,6 +29,8 @@ If $I$ is a subset of the domain of $f$, $f(I)$ is defined as
 \[f(I)\coloneq\{y\mid\exists x\in I \tx{\ s.t.\ }f(x)=y\}.\]
 
 Let $f\colon X\to Y$ and $I\subeteq X$. Then $f\vert_I$ is defined as a function $f\vert_I\colon I\to Y$ such that for every $x\in I$, $f\vert_I(x)=f(x)$.
+
+Let $f\colon X\subseteq\mathbb{R}\to Y$ and $(a,b)\subeteq X$. Then $f\vert_a^b$ is defined as a function $f\vert_a^b\colon (a,b)\to Y$ such that for every $x\in (a,b)$, $f\vert_a^b(x)=f(x)$.
 \ssc{Type of Functions}
 Consider a function $f$:
 \[f\colon X\to Y;\,x\mapsto y.\]
@@ -88,9 +90,11 @@ For two functions $f\colon X\to Y$ and $g\colon V\to W$ such that $g(V)\subseteq
 \ssc{Inverse function (反函數)}
 For a bijective function $f\colon X\to Y$, the inverse of it, denoted as $f^{-1}$, is defined as:
 \[f^{-1}\colon Y\to X;\,f(x)\mapsto x\]
-\sssc{Preimage or Inverse image}
+\ssc{Preimage (像原) or Inverse image}
 Given an open subset $B$ of the codomain of a function $f$ the preimage or inverse image of $f$ on $B$, denoted as $f^{-1}(B)$ is defined as
 \[f^{-1}(B)=\{x\in X|f(x)\in B\}.\]
+\ssc{Extension (延拓) of a function}
+We say a function $f\colon X\to Y$ is an extension of another function $g\colon U\subseteq X\to Y$ if $\forall u\in U\colon f(u)=g(u)$.
 \ssc{Piecewise function (分段函數)}
 A piecewise function is a function defined in the form:
 \[f(x) =
@@ -144,9 +148,33 @@ where $H(0)=u(0)$ is sometimes defined to be $\frac{1}{2}$ or other values inste
 \int _{-\infty }^{\infty }\delta(x) \, \mathrm{d}x = 1.
 \]
 \[\int_0^x\delta(t)\,\mathrm{d}t=H(x).\]
-\sssc{Dirichlet function{{{
-\sssc{Weierstrass function{{{
-\sssc{Blancmange curve{{{
+\sssc{Dirichlet function (狄利克雷函數)}
+The Dirichlet function is a function $f\colon\manthbb{R}\to\mathbb{R};$
+\[f(x)=\begin{cases}1,\quad & x\in\mathbb{Q}\\
+0,\quad & x\in\mathbb{R}\setminus\mathbb{Q}
+\end{cases},\]
+which is discontinuous at everywhere.
+\sssc{Weierstrass function (魏爾施特拉斯函數)}
+The Weierstrass function is a function $f\colon\mathbb{R}\to\mathbb{R};$
+\[f(x)=\sum_{n=0}^{\infty}a^n\cos\left(b^n\pi x\right),\]
+in which $0<a<1$, $b$ is a positive odd integer, and $ab>1+\frac{3}{2}\pi$, which is continuous but differentiable nowhere.
+\sssc{Differentiable but derivative not continuous}
+The function $f\colon\mathbb{R}\to\mathbb{R};$
+\[f(x)=\begin{cases}x^2\sin\qty(\frac{1}{x}),\quad&x\neq 0\\0,\quad&x=0\end{cases},\]
+is differentiable but its derivative is not continuous at $0$. (Note that because $\{0\}$ has Lebesgue measure $0$, $f'\colon\mathbb{R}\to\mathbb{R}$ is continuous almost everywhere, that is, $f'$ is Riemann integrable on any closed interval.)
+\begin{proof}
+\[f'(x)=2x\sin\qty(\frac{1}{x})-x^2\cos\qty(\frac{1}{x}),\quad x\neq 0\]
+\bma
+f'(0)&=\lim_{h\to 0}\frac{f(h)}{h}\\
+&=\lim_{h\to 0}h\sin\qty(\frac{1}{h})
+\eam
+For any $|h|>0$, we have $-|h|\leq h\sin\qty(\frac{1}{h})\leq |h|$. By the squeeze theorem, $\lim_{h\to 0}-|h|=\lim_{h\to 0}|h|=0$ implies $\lim_{h\to 0}h\sin\qty(\frac{1}{h})=0$.
+\bma
+\lim_{x\to 0}f'(x)&=2\lim_{x\to 0}x\sin\qty(\frac{1}{x})-\lim_{x\to 0}\cos\qty(\frac{1}{x})\\
+&=-\lim_{x\to 0}\cos\qty(\frac{1}{x})\\
+\eam
+$\lim_{x\to 0}\cos\qty(\frac{1}{x})$ doesn't exist, so $\lim_{x\to 0}f'(x)$ doesn't exist.
+\end{proof}
 
 
 
@@ -213,7 +241,7 @@ The proof of the (B) part is analogous or follows from (A) by considering $\lang
 
 If $\langle a_n\rangle_{n\in\mathbb {N}}$ is a monotone sequence of real numbers, i.e., if 
 $a_n\leq a_{n+1}$ for every $n\geq 1$ or $a_n\geq a_{n+1}$ for every $n\geq 1$, then this sequence has a finite limit if and only if the sequence is bounded.
-\begin{proof}
+\begin{proof}\mbox{}\\
 "If"-direction: The proof follows directly from the proposition.
 
 "Only If"-direction: By $(\epsilon,\delta)$-definition of limit, every sequence $\langle a_n\rangle_{n\in\mathbb {N}}$ with a finite limit $L$ is necessarily bounded.
@@ -469,42 +497,50 @@ if and only if the limit of the sequence $f_{n}(x)$ evaluated at each point $x\i
 \[\forall x\in X,\lim _{n\to \infty }f_{n}(x)=f(x).\]
 The function $f$ is said to be the pointwise limit function of $f_n$.
 \subsection{Continuity (連續性)}
-\sssc{Definition for real functions}
+\sssc{Definition of continuity for real functions}
 \begin{itemize}
-\item For a point $a$ in the domain of a function $f$, if and only if $\exists\lim_{x\to a}f(x)$ and $\lim_{x\to a}f(x)=f(a)$, we say $f(x)$ is continuous (連續的) at $a$; otherwise, we say $f(x)$ is discontinuous (不連續的) at $a$.
+\item For a point $a$ in the domain of a function $f$, if and only if $\exists\lim_{x\to a}f(x)$ and $\lim_{x\to a}f(x)=f(a)$, we say $f(x)$ is continuous (連續的) at $a$.
 \item For a point $a$ in the domain of a function $f$, if and only if $\exists\lim_{x\to a^+}f(x)$ and $\lim_{x\to a^+}f(x)=f(a)$, we say $f(x)$ is continuous from the right at $a$; if and only if $\exists \lim_{x\to a^-} f(x)$ and $\lim_{x\to a^-} f(x)=f(a)$, we say $f(x)$ is continuous from the left at $a$.
-\item For an open interval $I$ that is a subset of the domain of a function $f$, if and only if $f(x)$ is continuous at all points in $I$, we say $f(x)$ is continuous on $I$; otherwise, we say $f(x)$ is discontinuous on $I$.
-\item For an right-open interval $[a,b)$ that is a subset of the domain of a function $f$, if and only if $f(x)$ is continuous on $(a,b)$ and continuous from the right at $a$, we say $f(x)$ is continuous on $[a,b)$; otherwise, we say $f(x)$ is discontinuous on $[a,b).
-\item For an left-open interval $(a,b]$ that is a subset of the domain of a function $f$, if and only if $f(x)$ is continuous on $(a,b)$ and continuous from the left at $b$, we say $f(x)$ is continuous on $(a,b]$; otherwise, we say $f(x)$ is discontinuous on $(a,b].
-\item For an closed interval $[a,b]$ that is a subset of the domain of a function $f$, if and only if $f(x)$ is continuous on both $[a,b)$ and $(a,b]$, we say $f(x)$ is continuous on $[a,b]$; otherwise, we say $f(x)$ is discontinuous on $[a,b].
+\item For an open interval $I$ that is a subset of the domain of a function $f$, if and only if $f(x)$ is continuous at all points in $I$, we say $f(x)$ is continuous on $I$.
+\item For an right-open interval $[a,b)$ that is a subset of the domain of a function $f$, if and only if $f(x)$ is continuous on $(a,b)$ and continuous from the right at $a$, we say $f(x)$ is continuous on $[a,b)$.
+\item For an left-open interval $(a,b]$ that is a subset of the domain of a function $f$, if and only if $f(x)$ is continuous on $(a,b)$ and continuous from the left at $b$, we say $f(x)$ is continuous on $(a,b]$.
+\item For an closed interval $[a,b]$ that is a subset of the domain of a function $f$, if and only if $f(x)$ is continuous on both $[a,b)$ and $(a,b]$, we say $f(x)$ is continuous on $[a,b]$.
 \item if and only if $f(x)$ is continuous at all points in its domain, we say $f(x)$ is continuous.
 \eit
-\sssc{Singularity or singular point (奇點) of real functions}
-A point is a singularity or a singular point of a function $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ if it is a cluster point of $I$ but not in $I$, or it is a discontinuity of $f$.
-\sssc{Definition for functions between topological spaces}
+\sssc{Definition of continuity for functions between topological spaces}
 \begin{itemize}
 \item A function $f\colon I\subeteq X\to Y$ where $X$ and $Y$ are topological spaces is continuous at a point $x\in I$ if and only if for any neighborhood $V$ of $f(x)$ in $Y$, there is a neighborhood $U$ of $x$ such that $f(U)\subseteq V$.
 \item A function $f\colon I\subeteq X\to Y$ where $X$ and $Y$ are topological spaces is continuous if and only if for any open subset $V$ of $Y$, the preimage of $f$ on $V$ is an open subset of $X$.
 \item A function $f\colon I\subeteq X\to Y$ where $X$ and $Y$ are topological spaces is continuous on a subset $J$ of $I$ if and only if for any open subset $V$ of $Y$, the joint set of the preimage of $f$ on $V$ and $J$ is open in the subspace topology of $X$ in $J$.
 \eit
-\sssc{Type of singularities for real functions}
+\sssc{Discontinuity (不連續（點）)}
+A point is a discontinuity of a function $f$ if it is in the domain of $f$ but $f$ is not continuous on it.
+\sssc{Type of discontinuity for real functions}
 \bit
-\item \tb{Removable discontinuity}: If $\exists\lim_{x\to a}f(x)\land\lim_{x\to a}f(x)\neq f(a)$, we call $f(a)$ a removable discontinuity.
-\item \tb{Removable singularity}: If $\exists\lim_{x\to a}f(x)$ and either that $f(a)$ is undefined or $\lim_{x\to a}f(x)\neq f(a)$, we call $f(a)$ a removable singularity.
-\item \tb{Jump discontinuity}: If $\exists\lim_{x\to a^-}f(x)\land\exists\lim_{x\to a^+}f(x)\land\lim_{x\to a^-}f(x)\neq\lim_{x\to a^+}f(x)$ and that $f(a)$ is defined, we call $f(a)$ a jump discontinuity.
-\item \tb{Jump singularity}: If $\exists\lim_{x\to a^-}f(x)\land\exists\lim_{x\to a^+}f(x)\land\lim_{x\to a^-}f(x)\neq\lim_{x\to a^+}f(x)$, we call $f(a)$ a jump singularity.
-\item \tb{Type I discontinuity}: Removable discontinuities and jump discontinuities are collectively called type I discontinuities.
-\item \tb{Type I singularity}: Removable singularities and jump singularities are collectively called type I singularities.
-\item \tb{Type II discontinuity}: At least one of $\lim_{x\to a^-}f(x)$ and $\lim_{x\to a^+}f(x)$ doesn't exist in $\mathbb{R}$ and that $f(a)$ is defined, we call $f(a)$ a type II discontinuity.
-\item \tb{Type II singularity}: At least one of $\lim_{x\to a^-}f(x)$ and $\lim_{x\to a^+}f(x)$ doesn't exist in $\mathbb{R}$, we call $f(a)$ a type II singularity.
-\item\tb{Infinite discontinuity}: If at least one of $\lim_{x\to a^-}f(x)$ and $\lim_{x\to a^+}f(x)$ does not exist, and that those in $\lim_{x\to a^-}f(x)$ and $\lim_{x\to a^+}f(x)$ that do not exist are either $\infty$ or $-\infty$, and that $f(a)$ is defined, we call $f(a)$ infinite discontinuity.
-\item\tb{Infinite singularity}: If at least one of $\lim_{x\to a^-}f(x)$ and $\lim_{x\to a^+}f(x)$ does not exist, and that those in $\lim_{x\to a^-}f(x)$ and $\lim_{x\to a^+}f(x)$ that do not exist are either $\infty$ or $-\infty$, we call $f(a)$ infinite singularity.
-\item\tb{Essential singularity}: An essential singularity that is not an infinite singularity is called an essential singularity.
+\item \tb{Removable (可去) discontinuity}: If $\exists\lim_{x\to a}f(x)\land\lim_{x\to a}f(x)\neq f(a)$, we call $f(a)$ a removable discontinuity. A discontinuity that is not a removable discontinuity is called a non-removable discontinuity.
+\item \tb{Jump (跳躍) discontinuity}: If $\exists\lim_{x\to a^-}f(x)\land\exists\lim_{x\to a^+}f(x)\land\lim_{x\to a^-}f(x)\neq\lim_{x\to a^+}f(x)$ and that $f(a)$ is defined, we call $f(a)$ a jump discontinuity.
+\item\tb{Infinite (無窮) discontinuity}: If at least one of $\lim_{x\to a^-}f(x)$ and $\lim_{x\to a^+}f(x)$ does not exist, and that those in $\lim_{x\to a^-}f(x)$ and $\lim_{x\to a^+}f(x)$ that do not exist are either $\infty$ or $-\infty$, and that $f(a)$ is defined, we call $f(a)$ an infinite discontinuity.
+\item\tb{Type I discontinuity}: A discontinuity of $f$ that is either a removable discontinuity or a jump discontinuity is called a type I discontinuity of $f$.
+\item\tb{Essential (本質) discontinuity or type II discontinuity}: A discontinuity of $f$ that is neither a removable discontinuity nor a jump discontinuity is called an essential discontinuity or a type II discontinuity of $f$.
 \eit
+\sssc{Singularity or singular point (奇點)}
+A point is a singularity or a singular point of a function $f$ if it is a cluster point of its domain but not in its domain, or it is a discontinuity of $f$.
 \sssc{Piecewise continuity for real functions}
-Let $f\colon D\subseteq\mathbb{R}\to\mathbb{R}$ be a function. We say $f$ is piecewise-continuous if there exists a family $\{[a_i,b_i]\mid i\in I\}$ of closed intervals such that for every closed interval $V$, the set $\{i\in I\mid V\cap [a_i,b_i]\neq\varnothing\}$ is finite, and $D\subseteq\bigcup_{i\in I}[a_i,b_i]$, and that function $f\big\vert_{(a_i,b_i)}\colon(a_i,b_i)\to Y$ is continuous for every $i\in I$.
+Let $f\colon D\subseteq\mathbb{R}\to\mathbb{R}$ be a function. If there exists a family $\{[a_i,b_i]\mid i\in I\}$ of closed intervals such that:
+\begin{itemize}
+\item for every closed interval $V$, the set $\{i\in I\mid V\cap [a_i,b_i]\neq\varnothing\}$ is finite,
+\item $D\subseteq\bigcup_{i\in I}[a_i,b_i]$,
+\item function $f\big\vert_{a_i}^{b_i}\colon(a_i,b_i)\to Y$ is continuous for every $i\in I$, and
+\item there exist finite $\lim_{x\to a_i^{\phantom{i}+}}f(x)$ and $\lim_{x\to b_i^{\phantom{i}-}}f(x)$ for every $i\in I$.
+\end{itemize},
+we say $f$ is piecewise continuous (on $\bigcup_{i\in I}[a_i,b_i]$).
 \sssc{Piecewise continuity for functions between topological spaces}
-Let $X$ and $Y$ be topological spaces, and $f\colon D\subseteq X\to Y$ be a function. We say $f$ is piecewise-continuous if there exists a locally finite family $\{U_i\mid i\in I\}$ of closed subsets of $X$ such that $D\subseteq\bigcup_{i\in I}U_i$ and that function $f\big\vert_{\operatorname{int}\left(U_i\right)}\colon\operatorname{int}\left(U_i\right)\to Y$ is continuous for every $i\in I$.
+Let $X$ and $Y$ be topological spaces, and $f\colon D\subseteq X\to Y$ be a function. If there exists a locally finite family $\{U_i\mid i\in I\}$ of closed subsets of $X$ such that:
+\begin{itemize}
+\item $D\subseteq\bigcup_{i\in I}U_i$, and
+\item there exists a function $g_i\colon U_i\to Y$ that is continuous on $U_i$ such that $\forall x\in\operatorname{int}\left(U_i\right)f(x)=g_i(x)$ for every $i\in I$.
+\end{itemize},
+we say $f$ is piecewise continuous (on $\bigcup_{i\in I}U_i$).
 \sssc{Arithmetic Laws}
 If $f$ and $g$ are continuous at $a$ and $c$ is a constant, then the following functions are also continuous at $a$:
 \[f+g;\quad f-g;\quad cf;\quad fg;\]
@@ -582,7 +618,7 @@ in which $^{(n)}$ can be replaced with $n$ primes ($'$) for usually $n<4$ (For e
 the $n$th mixed partial derivative of the function $f$ $m_{i_1}$ times with respect to $x_{i_1}$, $m_{i_1}$ times with respect to $x_{i_2}$, $\ldots$, $m_{i_k}$ times with respect to $x_{i_k}$, in which $\sum_{j=1}^km_{i_j}=n$, can be written as below, in which subscript are $m_{i_j}$ $x_{i_j}$s for all $x_{i_j}$
 \[y_{x_{i_1}x_{i_1}\ldots x_{i_2}x_{i_2}x_{i_2}\ldots x_{i_2}\ldots x_{i_k}x_{i_k}\ldots x_{i_k}},\quad y^{(n)}_{\pht{(n)}x_{i_1}x_{i_1}\ldots x_{i_2}x_{i_2}x_{i_2}\ldots x_{i_2}\ldots x_{i_k}x_{i_k}\ldots x_{i_k}},\]
 \[f_{x_{i_1}x_{i_1}\ldots x_{i_2}x_{i_2}x_{i_2}\ldots x_{i_2}\ldots x_{i_k}x_{i_k}\ldots x_{i_k}},\quad \tx{or\ }f^{(n)}_{\pht{(n)}x_{i_1}x_{i_1}\ldots x_{i_2}x_{i_2}x_{i_2}\ldots x_{i_2}\ldots x_{i_k}x_{i_k}\ldots x_{i_k}}.\]
-\sssc{Euler’s notation (歐拉符號) for differentiation}
+\sssc{Euler's notation (歐拉符號) for differentiation}
 Given a function $f$ of an independent variable $x$, that is,
 \[f(x).\]
 Then, the derivative of the function $f$ can be written as
@@ -592,7 +628,7 @@ in which $Df$ is called a differential operator or a derivative operator;
 the $n$th derivative of the function $f$ can be written as
 \[D^nf(x)\quad\tx{or\ }(D^nf)(x)\]
 in which $D^nf$ is called a differential operator or a derivative operator.
-\sssc{Euler’s notation for partial differentiation}
+\sssc{Euler's notation for partial differentiation}
 Given a function $f$ of an independent variable vector $\mb{x}=(x_1,x_2,\ldots,x_n)$, that is,
 \[f(\mb{x}).\]
 Then, the partial derivative of the function $f$ with respect to $x_i$ can be written as
@@ -741,7 +777,7 @@ Let $f:\,I\subseteq\mathbb{R}\to\mathbb{R}$ be a continuous function and be diff
 \section{Integration (積分)}
 \ssc{Terms}
 \bit
-\item \tb{Integral (積分)} noun: A definite integral or antiderivative of a function.
+\item \tb{Integral (積分)} noun: A definite or indefinte integral of a function.
 \item \tb{Integrate (積分)} verb: Find the integral definite integral or antiderivative of a function.
 \item \tb{Integration (積分)} noun: The operation of finding the integral definite integral or antiderivative of a function.
 \item \tb{Integrand (被積函數)} noun: The function that is to be integrated.
@@ -768,62 +804,63 @@ The limits of the definite integral:
 are the limit points of $\Omega$.
 \eit
 \subsection{Riemann integral (黎曼積分) and Darboux integral (達布積分)}
-Two equivalent definitions of definite integral (定積分).
+Two equivalent definitions of definite integral (定積分) of real functions over compact intervals.
 \subsubsection{Partition of an interval}
-A partition $P(x, n)$ of an integral interval $(a,b)$ is a finite sequence of numbers of the form
-\[P(x, n):=\{x_i\colon x_0=a^+\land x_n=b^-\land\forall 1\leq i<j\leq n\colon x_i<x_j\}_{i=0}^n,\]
-in which when $a^+$ is in an expression, we define the expression as 
-\[\lim_{x\to a^+}\qty(\tx{the expression with $a^+$ replaced with $x$});\]
-when $b^-$ is in an expression, we define the expression as 
-\[\lim_{y\to b^-}\qty(\tx{the expression with $b^+$ replaced with $y$}).\]
+A partition $P(x, n)$ of a compact interval $[a,b]$ is a finite sequence of numbers of the form
+\[P(x, n):=\{x_i\colon x_0=a\land x_n=b\land\forall 1\leq i<j\leq n\colon x_i<x_j\}_{i=0}^n.\]
 
-Each $[x_i, x_{i+1}]$ is called a sub-interval of the partition, in which $[a^+,x_1]$ is defined as $(a,x_1)$, and $[x_{n-1},b^-]$ is defined as $[x_{n-1},b)$. The mesh or norm of a partition is defined to be the length of the longest sub-interval, that is,
-\[\max\left(x_{i+1}-x_{i}\right),\quad i\in [0,n-1].\]
-A tagged partition $P(x,n,\xi)$ of an integral interval $(a,b)$ is a partition together with a choice of a sample point within each of all $n$ sub-intervals, that is, numbers $\{\xi_i\}_{i=0}^{n-1}$ with $\xi_i\in [x_i,x_{i+1}]$ for each $i\in [0,n-1]$. The mesh of a tagged partition is the same as that of an ordinary partition.
+Each $[x_i, x_{i+1}]$ is called a subinterval of the partition. The length of a closed interval $[c,d]$ is defined as $d-c$. The mesh or norm of a partition is defined as
+\[\max_i\left(x_{i+1}-x_{i}\right)\]
+for every integer $i\in [0,n-1]$.
 
-Suppose that two tagged partitions $P(x,n,\xi)$ and $Q(y,m,\zeta)$ are both partitions of the integral interval $(a,b)$. We say that $Q(y,m,\zeta)$ is a refinement of $P(x,n,\xi)$ if for each integer $i\in [0,n]$, there exists an integer $r(i)\in [0,m]$ such that $x_i = y_{r(i)}$ and that $\forall i\in [0,n-1]:\,\exists j\in [r(i),r(i + 1)] \text{\ s.t.\ }\xi_i = \zeta_j$. That is, a tagged partition breaks up some of the sub-intervals and adds sample points where necessary, "refining" the accuracy of the partition.
+A tagged partition $P(x,n,\xi)$ of a interval $(a,b)$ is a partition together with a choice of a sample point within each of all $n$ subintervals, that is, numbers $\{\xi_i\}_{i=0}^{n-1}$ with $\xi_i\in [x_i,x_{i+1}]$ for each integer $i\in [0,n-1]$. The mesh of a tagged partition is the same as that of an ordinary partition.
+
+Suppose that two tagged partitions $P(x,n,\xi)$ and $Q(y,m,\zeta)$ are both partitions of the interval $[a,b]$. We say that $Q(y,m,\zeta)$ is a refinement of $P(x,n,\xi)$ if for each integer $i\in [0,n-1]$, there exists an integer $r(i)\in [0,m-1]$ such that $x_i = y_{r(i)}$ and that $\forall i\in [0,n-1]\colon\exists j\in [r(i),r(i + 1)] \text{\ s.t.\ }\xi_i = \zeta_j$. That is, a tagged partition breaks up some of the subintervals and adds sample points where necessary, "refining" the accuracy of the partition.
 
 We can turn the set of all tagged partitions into a directed set by saying that one tagged partition is greater than or equal to another if the former is a refinement of the latter.
 \subsubsection{Riemann sum}
-Let $f$ be a real-valued function defined on the integral interval $(a,b)$. The Riemann sum of $f$ with respect to the tagged partition $P(x,n,\xi)$ is defined to be
+Let $f$ be a real-valued function defined on a interval $[a,b]$. The Riemann sum of $f$ with respect to a tagged partition $P(x,n,\xi)$ of $[a,b]$ is defined to be
 \[R(f,P):=\sum_{i=0}^{n-1}f(\xi_i)\left(x_{i+1}-x_i\right).\]
-Each term in the sum is the product of the value of the function at a given point and the length of an interval. Consequently, each term represents the (signed) area of a rectangle with height $f(\xi_i)$ and width $x_{i + 1} − x_i$. The Riemann sum is the (signed) area of all the rectangles.
+Each term in the sum is the product of the value of the function at a given point and the length of an interval. Consequently, each term represents the signed area of a rectangle with height $f(\xi_i)$ and width $x_{i + 1} − x_i$. Thus the Riemann sum is the signed area of all the rectangles.
 \subsubsection{Darboux sum}
-Lower and upper Darboux sums of $f$ with respect to the partition $P(x,n)$ are two specific Riemann sums of which the tags are chosen to be the infimum and supremum (respectively) of $f$ on each sub-interval:
+Let $f$ be a real-valued function defined on a interval $[a,b]$. Lower and upper Darboux sums of $f$ with respect to a partition $P(x,n)$ of $[a,b]$ are two specific Riemann sums of which the tags are chosen to be the infimum and supremum (respectively) of $f$ on each subinterval:
 \[\begin{aligned}
 L(f,P)&:=\sum_{i=0}^{n-1}\inf_{\xi\in [x_i,x_{i+1}]}f(\xi)(x_{i+1}-x_i),\\
 U(f,P)&:=\sum_{i=0}^{n-1}\sup_{\xi\in [x_i,x_{i+1}]}f(\xi)(x_{i+1}-x_i).
 \end{aligned}\]
 \subsubsection{Riemann integral}
-The Riemann integral of $f$ exists and equals $s$ if for all $\varepsilon > 0$, there exists $\delta > 0$ such that for any tagged partition $P(x,n,\xi)$ whose mesh is less than $\delta$,
+Let $f$ be a real-valued function defined on a interval $[a,b]$. The Riemann integral of $f$ on $[a,b]$ exists and equals $s$ if for all $\varepsilon > 0$, there exists $\delta > 0$ such that for any tagged partition $P(x,n,\xi)$ whose mesh is less than $\delta$,
 \[\abs{R(f,P)-s}<\varepsilon .\]
-\subsubsection{Darboux integral (達布積分)}
-The Darboux integral of $f$ exists and equals $s$ if for all $\varepsilon > 0$, there exists $\delta > 0$ such that for any partition $P$ whose mesh is less than $\delta$,
+\subsubsection{Darboux integral}
+Let $f$ be a real-valued function defined on a interval $[a,b]$. The Darboux integral of $f$ on $[a,b]$ exists and equals $s$ if for all $\varepsilon > 0$, there exists $\delta > 0$ such that for any partition $P$ whose mesh is less than $\delta$,
 \[\abs{U(f,P)-s}<\varepsilon \land \abs{L(f,P)-s}<\varepsilon.\]
-\subsubsection{Integrability}
-A function is Riemann-integrable if and only if it is Darboux-integrable.
 \subsubsection{Improper integral (瑕積分)}
-In the simplest case of a real-valued function of a single variable integrated in the sense of Riemann or Darboux over a single interval, $\int _{a}^{b}f(x)\dd{x}$ is an improper integrals if one or more of below conditions occur: 
+$\int _{a}^{b}f(x)\dd{x}$ is an improper integrals if one or more of below conditions occur:
 \ben
-\item$a=-\infty$
-\item$b=\infty$
-\item$f(x)$ is undefined or discontinuous somewhere on $(a,b)$
+\item $a=-\infty$,
+\item $b=\infty$,
+\item $f(x)$ is unbounded on $[a,b]$, or
+\item $f(x)$ is undefined somewhere in $[a,b]$.
 \een
 
-The improper integrals are defined with:
+The improper integrals are defined by limits as:
 \bit
-\item $a=-\infty$:
-\[\int _{-\infty }^bf(x)\dd{x}=\lim _{a\to -\infty }\int _{a}^{b}f(x)\dd{x}.\]
-\item $b=\infty$:
-\[\int _{a}^{\infty }f(x)\dd{x}=\lim _{b\to \infty }\int _{a}^{b}f(x)\dd{x}.\]
-\item $f(x)$ is undefined or discontinuous at $c$, in which $a<c<b$:
-\[\int _{a}^{b}f(x)\dd{x}=\lim_{t\to c^-}\int _{a}^{t}f(x)\dd{x}+\lim_{t\to c^+}\int _{t}^{b}f(x)\dd{x}.\]
-\item If any of the terms diverge, the improper integral is undefined.
+\item for $a=-\infty$:
+\[\int _{-\infty }^bf(x)\dd{x}=\lim _{a\to -\infty }\int _{a}^{b}f(x)\dd{x},\]
+\item for $b=\infty$:
+\[\int _{a}^{\infty }f(x)\dd{x}=\lim _{b\to \infty }\int _{a}^{b}f(x)\dd{x},\]
+\item for $f(x)$ that is not continuous from the right at $a$:
+\[\int_a^bf(x)\dd{x}=\lim_{c\to a^+}\int_c^bf(x)\dd{x},\]
+\item for $f(x)$ that is not continuous from the left at $b$:
+\[\int_a^bf(x)\dd{x}=\lim_{c\to b^-}\int_a^cf(x)\dd{x},\]
+\item for $f(x)$ with singularity $c\in(a,b)$:
+\[\int _{a}^{b}f(x)\dd{x}=\lim_{t\to c^-}\int _{a}^{t}f(x)\dd{x}+\lim_{t\to c^+}\int _{t}^{b}f(x)\dd{x},\]
 \eit
+in which if any of the terms diverge or is undefined, the improper integral diverges and is undefined; otherwise, the improper integral exists finitely and converges to a finite value.
 
 $\lim _{a\to -\infty }\int _{a}^{b}f(x)\dd{x}$ converges absolutely to $L$ if $\exists\lim _{a\to -\infty }\int _{a}^{b}\abs{f(x)}\dd{x}\land\lim _{a\to -\infty }\int _{a}^{b}\abs{f(x)}\dd{x}=L$.
 
-$\lim _{b\to \infty }\int _{a}^{b}f(x)\dd{x}$ converges absolutely to $L$ if $\exists\lim _{b\to \infty }\int _{a}^{b}f(x)\dd{x}\dd{x}\land\lim _{b\to \infty }\int _{a}^{b}f(x)\dd{x}=L$.
+$\lim _{b\to \infty }\int _{a}^{b}f(x)\dd{x}$ converges absolutely to $L$ if $\exists\lim _{b\to \infty }\int _{a}^{b}f(x)\dd{x}\land\lim _{b\to \infty }\int _{a}^{b}f(x)\dd{x}=L$.
 
 If an improper integral is convergent but not convergent absolutely, we say it converges conditionally.
 \sssc{Cauchy principal value or PV integral}
@@ -883,6 +920,8 @@ Let $(S,\Sigma,\mu)$ be a measure space. $L^p(\mu)$ or $L^p(S,\Sigma,\mu)$ ($p\i
 \[\int_S|f|^p\dd{\mu}<\infty,\]
 with norm $\|f\|_{L^p}$ defined as
 \[\|f\|_{L^p} = \left(\int_S |f|^p \dd{\mu} \right)^{1/p}.\]
+\ssc{Lebesgue-Vitali theorem (of characterization of the Riemann integrable functions)}
+A bounded function on a compact interval is Riemann integrable if and only if it is continuous almost everywhere in the sense of Lebesgue measure.
 \ssc{Antiderivative (反導函數), inverse derivative, primitive function, primitive integral or indefinite integral (不定積分)}
 An antiderivative of a continuous function $f$ is a differentiable function $F$ whose derivative is equal to the original function $f$, that is,
 \[F'=f.\]
@@ -1277,7 +1316,7 @@ Then, for all $x\in X$,
 \ssc{Fubini's theorem (富比尼定理)}
 If a function is Lebesgue integrable on $X\times Y$, then:
 \[\iint_{X\times Y}f(x,y)\dd{(x,y)}=\int_X\qty(\int_Yf(x,y)\dd{y))\dd{x}=\int_Y\qty(\int_Xf(x,y)\dd{x})\dd{y}.\]
-\ssc{(Lebesgue’s) Dominated convergence theorem (DCT) (（勒貝格）控制/受制收斂定理)}
+\ssc{(Lebesgue's) Dominated convergence theorem (DCT) (（勒貝格）控制/受制收斂定理)}
 Let $\langle f_n\rangle_{n\in I}$ be a net of real or complex-valued measurable functions on a measure space $(S,\Sigma,\mu)$. If $f_n$ is almost everywhere pointwise convergent to a function $f$, and there is a Lebesgue-integrable function $g$ such that
 \[\abs{f_n}\leq g\]
 almost everywhere for all $n\in I$.
@@ -1302,42 +1341,29 @@ In the context of Laplace transform, convergence refers to absolute convergence,
 converges absolutely for some real $s$.
 
 The set of values for which $F(s)$ converges, called region of convergence (ROC), is either of the form $\Re(s) > a$ or $\Re(s) \geq a$, where $a$ is an extended real constant, i.e. $-\infty\leq a\leq\infty$.
-\sssc{Laplace transformability for improper integral definition}
-A function $f\colon\mathbb{R}\to\mathbb{R}$ is Laplace-transformable (for improper integral definition of Laplace transform) if and only if it is piecewise continuous and of exponential order.
-\begin{proof}
-"if" Direction:
-
-Assume that a function $f\colon\mathbb{R}\to\mathbb{R}$ is piecewise continuous and that there exists $M>0$ and $T>0$ such that:
+\sssc{Laplace transformability}
+A function $f\colon\mathbb{R}\to\mathbb{R}$ is Laplace-transformable if it is piecewise continuous on $[0,\infty)$ and of exponential order.
+\begin{proof}\mbox{}\\
+Assume that a $f\colon D\subseteq [0,\infty)\to\mathbb{R}$ is piecewise continuous on $[0,\infty)$ and there exists $M>0$ and $T>0$ such that:
 \[|f(t)|\leq Me^{\alpha t}\quad \forall t>T.\]
 
-For $s > \alpha$, we take $t_0\in\mathbb{R}$:
-\[\int_0^\infty |f(t)| e^{-st}\dd{t} = \int_0^{t_0} |f(t)| e^{-st}\dd{t} + \int_{t_0}^\infty |f(t)| e^{-st}\dd{t}.\]
+For $s>\alpha$, since $f(t)$ is piecewise continuous, there exist $t_0=0,t_1,\ldots,t_k\in\mathbb{R}$ such that:
+\begin{itemize}
+\item the integral
+\[\int_{t_i}^{t_{i+1}} |f(t)| e^{-st}\dd{t}$\]
+exists and is finite for every $i\in\mathbb{Z}\land 0\leq i\leq k-1$, and that
+\item the family $\{[t_0,t_1],[t_1,t_2],\ldots,[t_{k-1},t_k]$ is locally finite, and that
+\item $f(t)$ is continuous on $[t_k,\infty)$.
+\end{itemize}
 
-The first integral is over a finite interval. Since $f(t)$ is piecewise continuous, it is bounded on $[0,t_0]$, so the first integral is finite.
+Rewrite $F(s)$ as:
+\[\int_0^\infty |f(t)| e^{-st}\dd{t} = \sum_{i=0}^{k-1} \int_{t_i}^{t_{i+1}} |f(t)| e^{-st}\dd{t} + \int_{t_k}^\infty |f(t)| e^{-st}\dd{t}\]
+
+$\sum_{i=0}^{k-1} \int_{t_i}^{t_{i+1}} |f(t)| e^{-st}\dd{t}$ is finite.
 
 For the second integral, since $|f(t)| \le M e^{\alpha t}$, we have
-\[\int_{t_0}^\infty |f(t)| e^{-st}\dd{t}\le \int_{t_0}^\infty M e^{\alpha t} e^{-st}\dd{t} = M \int_{t_0}^\infty e^{-(s-\alpha)t}\dd{t}.\]
-
-Since $s > \alpha$, the integral converges, so the second integral is finite.
-
-"Only if" Direction:
-
-Assume that a function $f\colon\mathbb{R}\to\mathbb{R}$ is such that there exists some $s_0$ such that
-\[\int_0^\infty |f(t)| e^{-s_0 t} \dd{t} < \infty.\]
-
-Piecewise continuity:
-
-Prove by contraction. If $f(t)$ is not piecewise continuous on some interval $[0,T]$, it must have uncountably many discontinuities, which would make the improper integral $\int_0^T |f(t)| e^{-s_0 t}\dd{t}$ diverge.
-
-Exponential order:
-
-For the Laplace transform of $f(t)$ to exist, the integral $\int_0^\infty |f(t)| e^{-s_0 t} \dd{t}$ must converges, so $|f(t)| e^{-s_0 t}$ is bounded-above for sufficiently large $t$, that is, there exists $M > 0$ and $T>0$ such that
-\[|f(t)| e^{-s_0 t} \leq M, \quad \forall t \ge T.\]
-
-Multiply both sides by $e^{s_0 t}$:
-\[|f(t)| \le M e^{s_0 t}, \quad \forall t \ge T.\]
-
-Hence, $f(t)$ is of exponential order $\alpha = s_0$.
+\[\int_{t_k}^\infty |f(t)| e^{-st}\dd{t}\le \int_{t_k}^\infty M e^{\alpha t} e^{-st}\dd{t} = M \int_{t_k}^\infty e^{-(s-\alpha)t}\dd{t}.\]
+Since $s>\alpha$, the integral converges, so the second integral is finite.
 \end{proof}
 \sssc{Linearity}
 \[\mathcal{L}\{af(t)+bg(t)\}=a\mathcal{L}\{f(t)\}+b\mathcal{L}\{g(t)\}.\]
@@ -1372,7 +1398,7 @@ Integral by parts.
 \sssc{Differentiation in Frequency Domain}
 \[\mathcal{L}\{t f(t)\}(s) = -\dv{}{s} F(s).\]
 \[\mathcal{L}\{t^n f(t)\}(s) = (-1)^n \dv[n]{}{s} F(s).\]
-\begin{proof}
+\begin{proof}\mbox{}\\
 By Leibniz integral rule,
 \bma
 -\dv{}{s} F(s)&=-\dv{}{s}\int_0^{\infty} e^{-st} f(t)\,\mathrm{d}t\\
