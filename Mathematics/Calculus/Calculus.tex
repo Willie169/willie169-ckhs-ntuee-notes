@@ -522,15 +522,16 @@ The function $f$ is said to be the pointwise limit function of $f_n$.
 \sssc{Discontinuity (不連續（點）)}
 A point is a discontinuity of a function $f$ if it is in the domain of $f$ but $f$ is not continuous on it.
 \sssc{Type of discontinuity for real functions}
+For a function $f$ with domain $U\subseteq\mathbb{R}$ and a point $a\in U$ that $f$ is discontinuous at, the discontinuity $a$ of $f$ can be classified as below:
 \bit
 \item \tb{Removable (可去) discontinuity}: If $\exists\lim_{x\to a}f(x)\land\lim_{x\to a}f(x)\neq f(a)$, we call $f(a)$ a removable discontinuity. A discontinuity that is not a removable discontinuity is called a non-removable discontinuity.
-\item \tb{Jump (跳躍) discontinuity}: If $\exists\lim_{x\to a^-}f(x)\land\exists\lim_{x\to a^+}f(x)\land\lim_{x\to a^-}f(x)\neq\lim_{x\to a^+}f(x)$ and that $f(a)$ is defined, we call $f(a)$ a jump discontinuity.
-\item\tb{Infinite (無窮) discontinuity}: If at least one of $\lim_{x\to a^-}f(x)$ and $\lim_{x\to a^+}f(x)$ does not exist, and that those in $\lim_{x\to a^-}f(x)$ and $\lim_{x\to a^+}f(x)$ that do not exist are either $\infty$ or $-\infty$, and that $f(a)$ is defined, we call $f(a)$ an infinite discontinuity.
+\item \tb{Jump (跳躍) discontinuity}: If $\exists\lim_{x\to a^-}f(x)\land\exists\lim_{x\to a^+}f(x)\land\lim_{x\to a^-}f(x)\neq\lim_{x\to a^+}f(x)$, we call $f(a)$ a jump discontinuity.
+\item\tb{Infinite (無窮) discontinuity}: If at least one of $\lim_{x\to a^-}f(x)$ and $\lim_{x\to a^+}f(x)$ does not exist, and that those in $\lim_{x\to a^-}f(x)$ and $\lim_{x\to a^+}f(x)$ that do not exist are either $\infty$ or $-\infty$, we call $f(a)$ an infinite discontinuity.
 \item\tb{Type I discontinuity}: A discontinuity of $f$ that is either a removable discontinuity or a jump discontinuity is called a type I discontinuity of $f$.
-\item\tb{Essential (本質) discontinuity or type II discontinuity}: A discontinuity of $f$ that is neither a removable discontinuity nor a jump discontinuity is called an essential discontinuity or a type II discontinuity of $f$.
+\item\tb{Essential (本質) discontinuity or type II discontinuity}: A discontinuity of $f$ that is not a type I discontinuity is called an essential discontinuity or a type II discontinuity of $f$.
 \eit
 \sssc{Singularity or singular point (奇點)}
-A point is a singularity or a singular point of a function $f$ if it is a cluster point of its domain but not in its domain, or it is a discontinuity of $f$.
+A point is a singularity or a singular point of a function $f$ if it is in the closure of its domain but not in its domain, or it is a discontinuity of $f$.
 \sssc{Arithmetic Laws}
 If $f$ and $g$ are continuous at $a$ and $c$ is a constant, then the following functions are also continuous at $a$:
 \[f+g;\quad f-g;\quad cf;\quad fg;\]
@@ -879,8 +880,8 @@ $\int _{a}^{b}f(x)\dd{x}$ is an improper integrals if one or more of below condi
 \ben
 \item $a=-\infty$,
 \item $b=\infty$,
-\item $f(x)$ is unbounded on $[a,b]$, or
-\item $f(x)$ is undefined somewhere in $[a,b]$.
+\item $f(x)$ is unbounded on $[a,b]$,
+\item $f(x)$ is discontinuous or undefined at somewhere in $[a,b]$.
 \een
 
 The improper integrals are defined by limits as:
@@ -893,7 +894,7 @@ The improper integrals are defined by limits as:
 \[\int_a^bf(x)\dd{x}=\lim_{c\to a^+}\int_c^bf(x)\dd{x},\]
 \item for $f(x)$ that is not continuous from the left at $b$:
 \[\int_a^bf(x)\dd{x}=\lim_{c\to b^-}\int_a^cf(x)\dd{x},\]
-\item for $f(x)$ with singularity $c\in(a,b)$:
+\item for $f(x)$ that is discontinuous or undefined at $c\in(a,b)$:
 \[\int _{a}^{b}f(x)\dd{x}=\lim_{t\to c^-}\int _{a}^{t}f(x)\dd{x}+\lim_{t\to c^+}\int _{t}^{b}f(x)\dd{x},\]
 \eit
 in which if any of the terms diverge or is undefined, the improper integral diverges and is undefined; otherwise, the improper integral exists finitely and converges to a finite value.
@@ -1319,7 +1320,7 @@ Furthermore, there exists some Borel measurable function $g$ such that
 \subsubsection{Theorem}
 \[\frac{\mathrm{d}}{\mathrm{d}x}\prod_{i=1}^nf_i(x)=\sum_{j=1}^n\left(\frac{\mathrm{d}f_j(x)}{\mathrm{d}x}\frac{\prod_{\substack{i=1\\i\neq j}}^n f_i(x)}{f_j(x)}\right)\]
 For example,
-\[\int_a^b u\dd{v} = \qty(u v)\big\vert_a^b - \int_a^b v\dd{u}.\]
+\[\int_{\Omega} u\dd{v} = \qty(u v)\big\vert_{\Omega} - \int_{\Omega} v\dd{u}.\]
 \subsubsection{Application}
 Integration by parts is a heuristic rather than a purely mechanical process for solving integrals; given a single function to integrate, the typical strategy is to carefully separate this single function into a product of two functions such that the residual integral from the integration by parts formula is easier to evaluate than the single function.
 
