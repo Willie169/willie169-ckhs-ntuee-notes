@@ -8,9 +8,9 @@
 \date{\temtoday}
 \titletocdoc
 \chapter{Calculus (微積分)}
-\section{Function (函數)}
+\section{Function (函數), map, or mapping (映射)}
 \subsection{Definition and notation}
-A function is formed by three sets, the domain (定義域) $X$, the codomain (對應域) $Y$, and the graph $R$ that satisfy the three following conditions:
+A function, a map, or a mapping is formed by three sets, the domain (定義域) $X$, the codomain (對應域) $Y$, and the graph $R$ that satisfy the three following conditions:
 \[R\subseteq \{(x,y)\mid x\in X,y\in Y\}\]
 \[\forall x\in X,\exists y\in Y,\left(x,y\right)\in R \]
 \[ (x,y)\in R\land (x,z)\in R\implies y=z\]
@@ -42,6 +42,8 @@ Consider a function $f$:
 \[f(X)=Y\]
 \sssc{Bijection (對射) or Bijective function or One-to-one (一對一) function or One-to-one correspondence (一一對應)}
 Injective and surjective function.
+\ssc{Fixed point, fixpoint, or invariant point (不動點 or 定點)}
+A fixed point, fixpoint, or invariant point of a function $f\colon X\subseteq Y\to Y$, is a point $x\in X$ such that $f(x)=x$.
 \ssc{Increasing and Decreasing}
 Consider a function $f$:
 \[f\colon X\to Y;\,x\mapsto y,\]
@@ -496,7 +498,11 @@ Let $X$ be a set and $Y$ be topological space. A net of functions $f_n$ all havi
 if and only if the limit of the sequence $f_{n}(x)$ evaluated at each point $x\in X$ is equal to $f(x)$, that is
 \[\forall x\in X,\lim _{n\to \infty }f_{n}(x)=f(x).\]
 The function $f$ is said to be the pointwise limit function of $f_n$.
-\subsection{Continuity (連續性)}
+
+
+
+\section{Continuity (連續性)}
+\ssc{Continuity}
 \sssc{Definition of continuity for real functions}
 \begin{itemize}
 \item For a point $a$ in the domain of a function $f$, if and only if $\exists\lim_{x\to a}f(x)$ and $\lim_{x\to a}f(x)=f(a)$, we say $f(x)$ is continuous (連續的) at $a$.
@@ -525,6 +531,23 @@ A point is a discontinuity of a function $f$ if it is in the domain of $f$ but $
 \eit
 \sssc{Singularity or singular point (奇點)}
 A point is a singularity or a singular point of a function $f$ if it is a cluster point of its domain but not in its domain, or it is a discontinuity of $f$.
+\sssc{Arithmetic Laws}
+If $f$ and $g$ are continuous at $a$ and $c$ is a constant, then the following functions are also continuous at $a$:
+\[f+g;\quad f-g;\quad cf;\quad fg;\]
+\[\frac{f}{g}\text{\ if\ }g(a)\neq 0.\]
+\sssc{Composte Laws}
+If $g$ is continuous at $a$ and $f$ is continuous at $g(a)$, then the composite function $f\circ g$ is continuous at $a$.
+\sssc{Examples of continuous real functions}
+The following types of functions are continuous at every number in their domains: algebraic functions, trigonometric functions, inverse trigonometric functions, exponential functions, logarithmic functions.
+\ssc{Intermediate Value Theorem (IVT) (中間值定理)}
+\sssc{Intermediate value theorem for real functions}
+Let $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ be continuous on $J\subseteq$, then for any interval $[a,b]\subseteq J$ such that $f(a)\neq f(b)$,
+\[k\in (f(a),f(b)) \implies \qty(\exists c\in (a,b) \text{\ s.t.\ }f(c)=k).\]
+\sssc{Intermediate value theorem for functions between topological spaces}
+Let $X$ and $Y$ be topological spaces and function $f\colon I\subseteq X\to Y$ be continuous on a subset $J$ of $I$, then for any connected subset $K$ of $J$, $f(K)$ is a connected subset of $Y$.
+
+Let $X$ and $Y$ be topological spaces and function $f\colon I\subseteq X\to Y$ be continuous on a subset $J$ of $I$, then for any path-connected subset $K$ of $J$, $f(K)$ is a path-connected subset of $Y$.
+\ssc{Piecewise continuity}
 \sssc{Piecewise continuity for real functions}
 Let $f\colon D\subseteq\mathbb{R}\to\mathbb{R}$ be a function. If there exists a family $\{[a_i,b_i]\mid i\in I\}$ of closed intervals such that:
 \begin{itemize}
@@ -541,21 +564,38 @@ Let $X$ and $Y$ be topological spaces, and $f\colon D\subseteq X\to Y$ be a func
 \item there exists a function $g_i\colon U_i\to Y$ that is continuous on $U_i$ such that $\forall x\in\operatorname{int}\left(U_i\right)f(x)=g_i(x)$ for every $i\in I$.
 \end{itemize},
 we say $f$ is piecewise continuous (on $\bigcup_{i\in I}U_i$).
-\sssc{Arithmetic Laws}
-If $f$ and $g$ are continuous at $a$ and $c$ is a constant, then the following functions are also continuous at $a$:
-\[f+g;\quad f-g;\quad cf;\quad fg;\]
-\[\frac{f}{g}\text{\ if\ }g(a)\neq 0.\]
-\sssc{Composte Laws}
-If $g$ is continuous at $a$ and $f$ is continuous at $g(a)$, then the composite function $f\circ g$ is continuous at $a$.
-\sssc{Examples of continuous real functions}
-The following types of functions are continuous at every number in their domains: algebraic functions, trigonometric functions, inverse trigonometric functions, exponential functions, logarithmic functions.
-\sssc{Intermediate Value Theorem (IVT) (中間值定理) for real functions}
-Let $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ be continuous on $J\subseteq$, then for any interval $[a,b]\subseteq J$ such that $f(a)\neq f(b)$,
-\[k\in (f(a),f(b)) \implies \qty(\exists c\in (a,b) \text{\ s.t.\ }f(c)=k).\]
-\sssc{Intermediate Value Theorem (IVT) for functions between topological spaces}
-Let $X$ and $Y$ be topological spaces and function $f\colon I\subseteq X\to Y$ be continuous on a subset $J$ of $I$, then for any connected subset $K$ of $J$, $f(K)$ is a connected subset of $Y$.
+\ssc{Uniform continuity (一致連續)}
+\sssc{Uniform continuity for functions between metric spaces}
+Let $(X,d_1)$ and $(Y,d_2)$ be metric spaces, and $f\colon D\subseteq X\to Y$ be a function. $f$ is called to be uniformly continuous if for every real number $\varepsilon >0$ there exists a real number $\delta >0$ such that $x,y\in D$ with $d_{1}(x,y)<\delta$ implies $d_{2}(f(x),f(y))<\varepsilon$.
 
-Let $X$ and $Y$ be topological spaces and function $f\colon I\subseteq X\to Y$ be continuous on a subset $J$ of $I$, then for any path-connected subset $K$ of $J$, $f(K)$ is a path-connected subset of $Y$.
+Let $(X,d_1)$ and $(Y,d_2)$ be metric spaces, and $f\colon O\subseteq X\to Y$ be a function. $f$ is called to be uniformly continuous on $D\subseteq O$ if for every real number $\varepsilon >0$ there exists a real number $\delta >0$ such that $x,y\in D$ with $d_{1}(x,y)<\delta$ implies $d_{2}(f(x),f(y))<\varepsilon$.
+\sssc{Uniform continuity for functions between topological vector spaces}
+Let $X$ and $Y$ be topological vector spaces, and $f\colon D\subseteq X\to Y$ be a function. $f$ is called to be uniformly continuous if for every neighborhood $V$ of the zero vector in $Y$, there exists a neighborhood $U$ of the zero vector in $X$ such that $x,y\in D$ with $x-y\in U$ implies $f(x)-f(y)\in V$.
+
+Let $X$ and $Y$ be topological vector spaces, and $f\colon O\subseteq X\to Y$ be a function. $f$ is called to be uniformly continuous on $D\subseteq O$ if for every neighborhood $V$ of the zero vector in $Y$, there exists a neighborhood $U$ of the zero vector in $X$ such that $x,y\in D$ with $x-y\in U$ implies $f(x)-f(y)\in V$.
+\ssc{Lipschitz continuity (利普希茨連續)}
+\sssc{Lipschitz continuity for functions between metric spaces}
+Let $(X,d_1)$ and $(Y,d_2)$ be metric spaces, and $f\colon D\subseteq X\to Y$ be a function. $f$ is called to be Lipschitz continuous if there exists a real constant $K$ such that $\forall x,y\in D$, $d_{2}(f(x),f(y))\leq Kd_{1}(x,y)$.
+
+
+Let $(X,d_1)$ and $(Y,d_2)$ be metric spaces, and $f\colon O\subseteq X\to Y$ be a function. $f$ is called to be Lipschitz continuous on $D\subseteq O$ if there exists a real constant $K$ such that $\forall x,y\in D$, $d_{2}(f(x),f(y))\leq Kd_{1}(x,y)$.
+\sssc{Relationship with uniform continuity}
+Let $(X,d_1)$ and $(Y,d_2)$ be metric spaces, and $f\colon O\subseteq X\to Y$ be a function. $f$ is uniform continuous if it is Lipschitz continuous. $f$ is uniform continuous on $D\subseteq O$ if it is Lipschitz continuous on $D\subseteq O$.
+\sssc{Lipschitz constant (利普希茨常數)}
+If a function $f\colon D\subseteq X\to Y$ between metric spaces $(X,d_1)$ and $(Y,d_2)$ is such that there exists a real constant $K$ such that $\forall x,y\in D$, $d_{2}(f(x),f(y))\leq Kd_{1}(x,y)$, then, any such $K$ is sometimes called a Lipschitz constant of the function $f$, $f$ is sometimes called to be $K$-Lipschitz, and the smallest such $K$ is sometimes called the best Lipschitz constant, Lipschitz constant, or the dilation of $f$.
+\sssc{Short map}
+A short map is a function between metric spaces that is $1$-Lipschitz.
+\sssc{Contraction mapping, contraction map, contraction, contractive mapping, contractive map, or contractor (壓縮映射)}
+A contraction mapping is a function $f$ from a metric space to itself such that there exists a real number $0\leq K<1$ such that $f$ is $K$-Lipschitz.
+\sssc{Banach fixed-point theorem (巴拿赫不動點定理), contraction mapping theorem (壓縮映射定理), or Banach–Caccioppoli theorem}
+For any contraction mapping $T$ over a non-empty complete metric space $X$, there must exist a unique fixed-point $x^*$ of $T$ in $X$. 
+
+Furthermore, for any $x\in X$, for any sequence $\langle x_n\rangle$_{n\in \mathbb {N}_0}$ defined as
+\[\begin{cases}
+&x_0=x\\
+&x_n=T\qty(x_{n-1}),n\in\mathbb{N}
+\end{cases},\]
+\[\lim_{n\to \infty }x_{n}=x^{*}.\]
 
 
 
