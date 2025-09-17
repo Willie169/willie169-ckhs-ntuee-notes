@@ -44,6 +44,8 @@ Consider a function $f$:
 Injective and surjective function.
 \ssc{Fixed point, fixpoint, or invariant point (不動點 or 定點)}
 A fixed point, fixpoint, or invariant point of a function $f\colon X\subseteq Y\to Y$, is a point $x\in X$ such that $f(x)=x$.
+\ssc{Property in a variable}
+Unless otherwise specified, given a property $P$ defined for a function $f(w_1,\ldots,w_n,x,y_1,\ldots,y_n)$ in which $w_1,\ldots,w_n,x,y_1,\ldots,y_n$ are independent variables, we say $f$ is with property $P$ in $x$ if the function $g(w_1,\ldots,w_n,y_1,\ldots,y_n)$ that is defined to map $w_1,\ldots,w_n,y_1,\ldots,y_n$ to $f(w_1,\ldots,w_n,x,y_1,\ldots,y_n)$ for any $w_1,\ldots,w_n,x,y_1,\ldots,y_n$ in the domain of $f$ is with property $P$.
 \ssc{Increasing and Decreasing}
 Consider a function $f$:
 \[f\colon X\to Y;\,x\mapsto y,\]
@@ -474,6 +476,19 @@ and function $f\in A$. Then:
 \[ \lim_{x \to \infty}\frac{n^{af\left(x\right)}}{bf\left(x\right)} = \infty, \quad a,b > 0 \land  n > 1 \]
 \[ \lim_{x \to \infty}\frac{n^{af\left(x\right)}}{bf\left(x\right)} = 0, \quad a,b > 0 \land  0\leq n<1 \]
 \[ \lim_{x \to \infty}\frac{af\left(x\right)}{b\log_n f\left(x\right)} = \infty, \quad a,b > 0 \land  n > 1 \]
+\ssc{Limit of nets of fuctions}
+\sssc{Pointwise convergence (逐點收斂)}
+Let $V$ be a set and $Y$ be a topological space. A net of functions $\lange f_n\rangle_{n\in A}$ all having the same domain $X\subseteq V$ and codomain $Y$ is said to converge pointwise to a given function $f\colon X\to Y$, denoted as 
+\[\lim_nf_n=f\text{\ pointwise},\]
+if and only if
+\[\forall x\in X\colon\lim_nf_n(x)=f(x).\]
+The function $f$ is said to be the pointwise limit function of $\lange f_n\rangle$.
+\sssc{Uniform convergence (一致收斂)}
+Let $V$ be a set and $(Y,d)$ be a metric topological space. A net of functions $\lange f_n\rangle_{n\in A}$ all having the same domain $X\subseteq V$ and codomain $Y$ is said to converge uniformly to a given function $f\colon X\to Y$, denoted as 
+\[\lim_nf_n=f\text{\ uniformly},\]
+if and only if
+\[\forall\varepsilon\in\mathbb{R}_{>0}\colon\exists N\in A\text{\ s.t.\ }\left(n\in A\land N\leq n\implies\sup_{x\in X}d(f_n(x),f(x))<\varepsilon\right).\]
+The function $f$ is said to be the uniform limit function of $\lange f_n\rangle$.
 \ssc{Limit Laws}
 Given the limits of the functions involved exist,
 \sssc{Sum Law}
@@ -492,12 +507,6 @@ The limit of the $n$th power of a function, in which $n$ is a positive integer, 
 The limit of the $n$th root of a function, in which $n$ is a positive integer, is the $n$th root of the limit of the function.
 \sssc{The Uniqueness of Limits}
 If a limit exists, it is unique.
-\ssc{Pointwise Convergence (逐點收斂)}
-Let $X$ be a set and $Y$ be topological space. A net of functions $f_n$ all having the same domain $X$ and codomain $Y$ is said to converge pointwise to a given function $f\colon X\to Y$, denoted as 
-\[\lim _{n\to \infty }f_{n}=f\tx{\ pointwise},\]
-if and only if the limit of the sequence $f_{n}(x)$ evaluated at each point $x\in X$ is equal to $f(x)$, that is
-\[\forall x\in X,\lim _{n\to \infty }f_{n}(x)=f(x).\]
-The function $f$ is said to be the pointwise limit function of $f_n$.
 
 
 
@@ -552,14 +561,14 @@ Let $X$ and $Y$ be topological spaces and function $f\colon I\subseteq X\to Y$ b
 \sssc{Piecewise continuity for real functions}
 Let $f\colon D\subseteq\mathbb{R}\to\mathbb{R}$ be a function. If there exists a family $\{[a_i,b_i]\mid i\in I\}$ of closed intervals such that:
 \begin{itemize}
-\item for every closed interval $V$, the set $\{i\in I\mid V\cap [a_i,b_i]\neq\varnothing\}$ is finite,
+\item for every closed interval $V$, the set $\{i\in I\mid V\cap [a_i,b_i]\neq\varnothing\}$ is finite (some sources require instead that $n(I)$ is finite, which is stronger),
 \item $D\subseteq\bigcup_{i\in I}[a_i,b_i]$,
 \item function $f\big\vert_{a_i}^{b_i}\colon(a_i,b_i)\to Y$ is continuous for every $i\in I$, and
 \item there exist finite $\lim_{x\to a_i^{\phantom{i}+}}f(x)$ and $\lim_{x\to b_i^{\phantom{i}-}}f(x)$ for every $i\in I$.
 \end{itemize},
 we say $f$ is piecewise continuous (on $\bigcup_{i\in I}[a_i,b_i]$).
 \sssc{Piecewise continuity for functions between topological spaces}
-Let $X$ and $Y$ be topological spaces, and $f\colon D\subseteq X\to Y$ be a function. If there exists a locally finite family $\{U_i\mid i\in I\}$ of closed subsets of $X$ such that:
+Let $X$ and $Y$ be topological spaces, and $f\colon D\subseteq X\to Y$ be a function. If there exists a locally finite (some sources require instead finite, which is stronger) family $\{U_i\mid i\in I\}$ of closed subsets of $X$ such that:
 \begin{itemize}
 \item $D\subseteq\bigcup_{i\in I}U_i$, and
 \item there exists a function $g_i\colon U_i\to Y$ that is continuous on $U_i$ such that $\forall x\in\operatorname{int}\left(U_i\right)f(x)=g_i(x)$ for every $i\in I$.
@@ -575,15 +584,12 @@ Let $X$ and $Y$ be topological vector spaces, and $f\colon D\subseteq X\to Y$ be
 
 Let $X$ and $Y$ be topological vector spaces, and $f\colon O\subseteq X\to Y$ be a function. $f$ is called to be uniformly continuous on $D\subseteq O$ if for every neighborhood $V$ of the zero vector in $Y$, there exists a neighborhood $U$ of the zero vector in $X$ such that $x,y\in D$ with $x-y\in U$ implies $f(x)-f(y)\in V$.
 \ssc{Lipschitz continuity (利普希茨連續)}
-\sssc{Lipschitz continuity for functions between metric spaces}
+\sssc{(Golbal/regular) Lipschitz continuity for functions between metric spaces}
 Let $(X,d_1)$ and $(Y,d_2)$ be metric spaces, and $f\colon D\subseteq X\to Y$ be a function. $f$ is called to be Lipschitz continuous if there exists a real constant $K$ such that $\forall x,y\in D$, $d_{2}(f(x),f(y))\leq Kd_{1}(x,y)$.
 
-
 Let $(X,d_1)$ and $(Y,d_2)$ be metric spaces, and $f\colon O\subseteq X\to Y$ be a function. $f$ is called to be Lipschitz continuous on $D\subseteq O$ if there exists a real constant $K$ such that $\forall x,y\in D$, $d_{2}(f(x),f(y))\leq Kd_{1}(x,y)$.
-\sssc{Relationship with uniform continuity}
-Let $(X,d_1)$ and $(Y,d_2)$ be metric spaces, and $f\colon O\subseteq X\to Y$ be a function. $f$ is uniform continuous if it is Lipschitz continuous. $f$ is uniform continuous on $D\subseteq O$ if it is Lipschitz continuous on $D\subseteq O$.
-\sssc{Lipschitz constant (利普希茨常數)}
-If a function $f\colon D\subseteq X\to Y$ between metric spaces $(X,d_1)$ and $(Y,d_2)$ is such that there exists a real constant $K$ such that $\forall x,y\in D$, $d_{2}(f(x),f(y))\leq Kd_{1}(x,y)$, then, any such $K$ is sometimes called a Lipschitz constant of the function $f$, $f$ is sometimes called to be $K$-Lipschitz, and the smallest such $K$ is sometimes called the best Lipschitz constant, Lipschitz constant, or the dilation of $f$.
+
+If a function $f\colon D\subseteq X\to Y$ between metric spaces $(X,d_1)$ and $(Y,d_2)$ is such that there exists a real constant $K$ such that $\forall x,y\in D$, $d_{2}(f(x),f(y))\leq Kd_{1}(x,y)$, then, any such $K$ is sometimes called a Lipschitz constant (利普希茨常數) of the function $f$, $f$ is sometimes called to be $K$-Lipschitz, and the smallest such $K$ is sometimes called the best Lipschitz constant, Lipschitz constant, or the dilation of $f$.
 \sssc{Short map}
 A short map is a function between metric spaces that is $1$-Lipschitz.
 \sssc{Contraction mapping, contraction map, contraction, contractive mapping, contractive map, or contractor (壓縮映射)}
@@ -597,6 +603,10 @@ Furthermore, for any $x\in X$, for any sequence $\langle x_n\rangle$_{n\in \math
 &x_n=T\qty(x_{n-1}),n\in\mathbb{N}
 \end{cases},\]
 \[\lim_{n\to \infty }x_{n}=x^{*}.\]
+\sssc{Locally Lipschitz}
+Let $(X,d_1)$ and $(Y,d_2)$ be metric spaces, and $f\colon D\subseteq X\to Y$ be a function. $f$ is called to be locally Lipschitz if $\forall x\in D$, there exists a real constant $K$ and an open set $V\subseteq D$ with $x\in V$ such that $d_{2}(f(y),f(z))\leq Kd_{1}(y,z)$ for all $y,z\in V$.
+\sssc{Relationships}
+Let $(X,d_1)$ and $(Y,d_2)$ be metric spaces, and $f\colon O\subseteq X\to Y$ be a function. $f$ is uniform continuous and locally Lipschitz if it is Lipschitz continuous. $f$ is uniform continuous on $D\subseteq O$ if it is Lipschitz continuous on $D\subseteq O$.
 
 
 
@@ -736,12 +746,29 @@ If $f$ is differentiable at all point in $I\subeteq U$, we say $f$ is differenti
 The operation of finding the derivative or derivative function is called Fréchet differentiation (弗蘭歇微分), ordinary differentiation, or differentiation.
 
 Specifically, the $0$th(-order) derivative of $f$ is $f$ itself.
-\sssc{Smoothness (光滑性 or 平滑性)}
+\ssc{Smoothness (光滑性 or 平滑性)}
+\sssc{Smoothness}
 A function $f$ that has a $k$th derivative that is continuous on its domain is said to be of class $C^k$, denoted as $f\in C^k$, or be a $C^k$-function.
 
 A function $f$ that has a $k$th derivative that is continuous on a subset $I$ of its domain is said to be of class $C^k$ on $I$ or of class $C^k(I)$, denoted as $f\in C^k(I)$.
 
 Generally, the term smooth function refers to a $C^{\infty}$-function. However, it may also mean "sufficiently differentiable" for the problem under consideration.
+\sssc{Piecewise smoothness for real functions}
+Let $f\colon D\subseteq\mathbb{R}\to\mathbb{R}$ be a function. If there exists a family $\{[a_i,b_i]\mid i\in I\}$ of closed intervals such that:
+\begin{itemize}
+\item for every closed interval $V$, the set $\{i\in I\mid V\cap [a_i,b_i]\neq\varnothing\}$ is finite (some sources require instead that $n(I)$ is finite, which is stronger),
+\item $D\subseteq\bigcup_{i\in I}[a_i,b_i]$,
+\item function $f\big\vert_{a_i}^{b_i}\colon(a_i,b_i)\to Y$ is of class $C^k((a_i,b_i))$ for every $i\in I$, and
+\item there exist finite $\lim_{x\to a_i^{\phantom{i}+}}f(x)$ and $\lim_{x\to b_i^{\phantom{i}-}}f(x)$ for every $i\in I$.
+\end{itemize},
+we say $f$ is of class piecewise $C^k$ (or of class piecewise $C^k\qty(\bigcup_{i\in I}[a_i,b_i])$); when $k=\infty$ or sufficiently large, we say $f$ is piecewise smooth (on $\bigcup_{i\in I}U_i$).
+\sssc{Piecewise smoothness for functions between topological spaces}
+Let $X$ and $Y$ be topological spaces, and $f\colon D\subseteq X\to Y$ be a function. If there exists a locally finite (some sources require instead finite, which is stronger) family $\{U_i\mid i\in I\}$ of closed subsets of $X$ such that:
+\begin{itemize}
+\item $D\subseteq\bigcup_{i\in I}U_i$, and
+\item there exists a function $g_i\colon U_i\to Y$ that is of class $C^k\qty(U_i)$ such that $\forall x\in\operatorname{int}\left(U_i\right)f(x)=g_i(x)$ for every $i\in I$.
+\end{itemize},
+we say $f$ is of class piecewise $C^k$ (or of class piecewise $C^k\qty(\bigcup_{i\in I}U_i)$); when $k=\infty$ or sufficiently large, we say $f$ is piecewise smooth (on $\bigcup_{i\in I}U_i$).
 \ssc{Gateaux Differentiation (加托微分)}
 \sssc{Gateaux derivative (加托導數) and partial derivatives}
 Let $V$ be a locally convex topological vector spaces (LCTVS), $W$ be a topological vector space, $U$ be an open subset of $V$, and $f\colon U\to W$ be a function.
@@ -1574,4 +1601,85 @@ The error is defined as
 \[E_n=\int_a^bf(x)\,\mathrm{d}x-\frac{b-a}{3n}\left(2\left(\sum_{i=0}^nf(a+\frac{i}{n}(b-a))\right)+2\left(\sum_{i=1}^{\frac{n}{2}}f(a+\frac{2i-1}{n}(b-a))\right)-f(a)-f(b)\right).\]
 When $\frac{\mathrm{d}^4f(x)}{\mathrm{d}x^4}$ is continuous on $[a,b]$, the error satisfies that
 \[\abs{E_n}\leq\frac{(b-a)^5}{180n^4}\max_{a\leq x\leq b}\left(\abs{\frac{\mathrm{d}^4f(x)}{\mathrm{d}x^4}}\right).\]
+
+
+
+\section{Differential Equation (微分方程)}
+\ssc{Introduction}
+\sssc{Differential Equation}
+An equation containing the derivatives of one or more unknown functions or dependent variables, with respect to one or more independent variables, is said to be a differential equation (DE). The independent variables of DEs are usually real numbers.
+\sssc{Ordinary differential equation (ODE) (常微分方程)}
+If a differential equation contains only ordinary derivatives of one or more unknown functions with respect to a single independent variable, it is said to be an ordinary differential equation (ODE).
+\sssc{Partial differential equation (PDE) (偏微分方程)}
+If a DE contains partial derivatives of one or more unknown functions of two or more independent variables is called a partial differential equation (PDE).
+\sssc{Classification by order}
+The order of a differential equation is the order of the highest derivative in the equation.
+\ssc{Ordinary differential equation (ODE)}
+\sssc{Differential form of first-order ODEs}
+For a first-order ODE of a dependent variable $y$ with respect to an independent variable $x$,
+\[M(x,y)=-N(x,y)\dv{y}{x},\]
+where $M$ and $N$ are functions of two variables, $x$ and $y$, the differential form of it is
+\[M(x,y)\dd{x}+N(x,y)\dd{y}=0.\]
+\sssc{Normal form of ODEs}
+The normal form of an $n$th-order ODE of a dependent variable $y$ in codomain $Y$ with respect to an independent variable $x$ in domain $X$ is
+\[\dv[n]{y}{x}=F(x,y,y',y'',\ldots,y^{(n-1)}),\]
+in which $F$ is a function of $(n+1)$ variables, $x,y,y',y'',\ldots,y^{(n-1)}$, with domain being a subset of $X\times Y^n$ and codomain being $Y$.
+\sssc{Linear ODE}
+An $n$-th order ODE of a dependent variable $y$ with respect to an independent variable $x$ is linear if and only if it can be written in the form
+\[\sum_{i=0}^na_n(x)y^{(i)}=g(x),\]
+where $a_0(x),\ldots,a_n(x)$, called the coefficients, and $g(x)$, called the forcing term, are given functions of one variable, $x$, and $a_n(x)\neq 0$ on the domain of interest.
+
+An ODE is nonlinear if it is not linear.
+
+A linear ODE is called a homgeneous linear ODE if $g(x)=0$; otherwise, it is called a nonhomogeneous linear ODE.
+
+Let $L[y]=\sum_{i=0}^na_n(x)y^{(i)}$ denotes the left-hand side, then $L[\alpha y_1+\beta y_2]=\alpha L[y_1]+\beta L[y_2]$. That's why it's called to be linear.
+\sssc{Solution of an ODE}
+Any function $f$ that is defined on an interval $I$, called interval of definition, the interval of existence, the interval of validity, or the domain of the solution, and of class $C^k$ on $I$, and when substituted into an $n$th-order ordinary differential equation reduces the equation to an identity, is said to be a solution of the equation on $I$.
+
+An ODE does not necessarily have to possess a solution.
+\sssc{Solution curve}
+The graph of a solution $f$ on its interval of definition of an ODE is called a solution curve.
+\sssc{Explicit solution}
+An explicit solution of an ODE of a dependent variable $y$ with respect to an independent variable $x$ is in the form $y=f(x)$, where $f(x)$ is a function of $x$.
+\sssc{Implicit solution}
+A relation $G(x, y) = 0$ is said to be an implicit solution of an ODE on an interval $I$ if there exists at least one function $f$ that satisfes the relation $G(x, y) = 0$ as well as the ODE on $I$.
+\sssc{Type of solutions}
+An $n$-parameter family of solutions of an $(\geq n)$th-order ODE of a dependent variable $y$ with respect to an independent variable $x$ is in the form $y=f(x,c_1,c_2,\ldots,c_n)$ (explicit) or $G(x,y,c_1,c_2,\ldots,c_n)=0$ (implicit), in which $c_1,c_2,\ldots,c_n$ are parameters that are arbitrary given that the solution obtained is a solution of the ODE.
+
+If every solution of an $(\geq n)$th-order ODE on an interval $I$ can be obtained from an $n$-parameter family of solutions by appropriate choices of the parameters, we then say that that family of solutions is the general solution (通解) of the ODE.
+
+A solution of an ODE that is free of parameters is called a particular solution (特解).
+
+Sometimes a differential equation possesses a solution that is not a member of a family of solutions of the equation, that is, a solution that cannot be obtained by specializing any of the parameters in the family of solutions. Such an extra solution is called a singular solution (奇異解).
+\sssc{System of ODEs (常微分方程組)}
+A system of ODEs is two or more equations involving the derivatives of two or more unknown functions or dependent variables of a single independent variable.
+
+A solution of a system of ODEs involving the derivatives of $n$ unknown functions or dependent variables, $y_1,y_2,\ldots,y_n$ of a single independent variable $x$ is a $n$-tuple of sufficiently smooth functions of $x$ defined on a common interval of definition that satisfy all equations in the system.
+
+A system of ODEs does not necessarily have to possess a solution.
+\sssc{Initial-value problem (IVP)}
+An $n$th-order initial-value problem is an $n$th-order ODE with $n$ conditions for $y$ and $(<n)$-th derivative functions of $y$ at the same point, that is, $\{y^{(k)}(x_0)=y_k\}_{k\in[0,n-1]\cap\mathbb{Z}}$, called initial conditions (IC).
+
+A solution of an IVP is a solution of the ODE that complies with all the ICs.
+
+The interval of existence of an IVP is the largest open interval containing $x_0$ where a solution of the IVP exists; the interval of existence of an IVP is the largest open interval containing $x_0$ where a unique solution of the IVP exists.
+\ssc{Peano existence theorem (皮亞諾存在性定理), Peano theorem (皮亞諾定理), or Cauchy–Peano theorem (柯西-皮亞諾定理)}
+Let $D$ be an open subset of $\mathbb{R}\times\mathbb{R}^n$ and $f\colon D\to \mathbb {R}$ be a continuous function, then every initial value problem given by explicit first-order ODE $y'(t)=f\left(t,y(t)\right)$ defined on $D$ and initial condition $y\left(t_{0}\right)=y_{0}$ with $(t_{0},y_{0})\in D$ has a local solution $z\colon I\to \mathbb {R}^n$ where $I$ is a neighbourhood of $t_0$ in $\mathbb {R} $, such that $z'(t)=f\left(t,z(t)\right)$ for all $t\in I$.
+\ssc{Carathéodory's existence theorem}
+Let $D=\{(t,y)\mid|t-T|\leq a\land |y-Y|\leq b\}$ be a rectangle in $\mathbb{R}\times\mathbb{R}^n$ where $t,T\in\mathbb{R}$, $y,Y\in\mathbb{R}^n$, and constant $a,b\in\mathbb{R}_{>0}$, and $f\colon D\to \mathbb {R}$ be a function that is:
+\bit
+\item continuous in $y$ for each fixed $t$, 
+\item Lebesgue-measurable in $t$ for each fixed $y$, and
+\item such that there is a Lebesgue-integrable function $m\colon [T-a,T+a]\to [0,\infty )$ such that $|f(t,y)|\leq m(t)$ for all $(t,y)\in D$,
+\end{itemize}
+then every initial value problem given by explicit first-order ODE $y'(t)=f\left(t,y(t)\right)$ defined on $D$ and initial condition $y\left(t_{0}\right)=y_{0}$ with $(t_{0},y_{0})\in D$ has a local solution $z\colon I\to \mathbb {R}^n$ where $I$ is a neighbourhood of $t_0$ in $\mathbb {R} $, such that $z'(t)=f\left(t,z(t)\right)$ for all $t\in I$.
+\sssc{Picard–Lindelöf theorem (皮卡-林德勒夫定理) or Cauchy–Lipschitz theorem (柯西-利普希茨定理)}
+Let $D=\{(t,y)\mid|t-T|\leq a\land |y-Y|\leq b\}$ be a rectangle in $\mathbb{R}\times\mathbb{R}^n$ where $t,T\in\mathbb{R}$, $y,Y\in\mathbb{R}^n$, and constant $a,b\in\mathbb{R}_{>0}$, and $f\colon D\to \mathbb {R}$ be a function that is continuous in $t$ and Lipschitz continuous in $y$, then every initial value problem given by explicit first-order ODE $y'(t)=f\left(t,y(t)\right)$ defined on $D$ and initial condition $y\left(t_{0}\right)=y_{0}$ with $(t_{0},y_{0})\in D$ has a unique local solution $z\colon I\to \mathbb {R}^n$ where $I$ is a neighbourhood of $t_0$ in $\mathbb {R} $, such that $z'(t)=f\left(t,z(t)\right)$ for all $t\in I$.
+\sssc{Boundary-value problem (BVP)}
+An $n$th-order boundary-value problem is an $n$th-order ODE with some conditions called boundary conditions (BC).
+
+A solution of an BVP is a solution of the ODE that complies with all the BCs.
+
+
 \end{document}
