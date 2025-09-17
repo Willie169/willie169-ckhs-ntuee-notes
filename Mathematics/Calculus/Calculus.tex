@@ -45,7 +45,11 @@ Injective and surjective function.
 \ssc{Fixed point, fixpoint, or invariant point (不動點 or 定點)}
 A fixed point, fixpoint, or invariant point of a function $f\colon X\subseteq Y\to Y$, is a point $x\in X$ such that $f(x)=x$.
 \ssc{Property in a variable}
-Unless otherwise specified, given a property $P$ defined for a function $f(w_1,\ldots,w_n,x,y_1,\ldots,y_n)$ in which $w_1,\ldots,w_n,x,y_1,\ldots,y_n$ are independent variables, we say $f$ is with property $P$ in $x$ if the function $g(w_1,\ldots,w_n,y_1,\ldots,y_n)$ that is defined to map $w_1,\ldots,w_n,y_1,\ldots,y_n$ to $f(w_1,\ldots,w_n,x,y_1,\ldots,y_n)$ for any $w_1,\ldots,w_n,x,y_1,\ldots,y_n$ in the domain of $f$ is with property $P$.
+Unless otherwise specified, given a property $P$ defined for a function $f(w_1,\ldots,w_n,x,y_1,\ldots,y_n)$ in which $w_1,\ldots,w_n,x,y_1,\ldots,y_n$ are independent variables, we say $f$ is with property $P$ in $x$ if the function $g(x)$ that is defined to map $x$ to $f(w_1,\ldots,w_n,x,y_1,\ldots,y_n)$ for any $x$ such that $w_1,\ldots,w_n,x,y_1,\ldots,y_n$ is in the domain of $f$ for any fixed $w_1,\ldots,w_n,y_1,\ldots,y_n$ is with property $P$.
+
+Unless otherwise specified, given a property $P$ defined for a function $f(w_1,\ldots,w_n,x,y_1,\ldots,y_n)$ in which $w_1,\ldots,w_n,x,y_1,\ldots,y_n$ are independent variables, we say $f$ is with property $P$ in $x$ for a fixed $w_1,\ldots,w_n,y_1,\ldots,y_n$ if the function $g(x)$ that is defined to map $x$ to $f(w_1,\ldots,w_n,x,y_1,\ldots,y_n)$ for any $x$ such that $w_1,\ldots,w_n,x,y_1,\ldots,y_n$ is in the domain of $f$ is with property $P$.
+
+Unless otherwise specified, given a property $P$ defined for a function $f(w_1,\ldots,w_n,x,y_1,\ldots,y_n)$ in which $w_1,\ldots,w_n,x,y_1,\ldots,y_n$ are independent variables, we say $f$ is with property $P$ in $x$ at a point $w_1,\ldots,w_n,x_0,y_1,\ldots,y_n$ in the domain of $f$ if there exists a neighbourhood $X$ of $x_0$ such that the function $g(x)$ that is defined to map $x$ to $f(w_1,\ldots,w_n,x,y_1,\ldots,y_n)$ for any $x\in X$ such that $w_1,\ldots,w_n,x,y_1,\ldots,y_n$ is in the domain of $f$ is with property $P$.
 \ssc{Increasing and Decreasing}
 Consider a function $f$:
 \[f\colon X\to Y;\,x\mapsto y,\]
@@ -112,73 +116,37 @@ where
 \[\bigcup_{i=1}^nA_i=D_f\land\forall i\neq j\land i,j\in\mathbb{N}\land i,j\leq n\colon A_i\cap A_j=\varnothing.\]
 \subsection{Indicator function (指示函數或示性函數) or characteristic function (特徵函數)}
 An indicator function or a characteristic function of a subset $A$ of a set $X$ is a function that maps elements of the subset to one, and all other elements to zero, often denoted as $1_A$.
-\ssc{Common Functions}
-\sssc{Power Function}
+\ssc{Elementary functions}
+A constants, a power function, a logarithmic function, an exponential function, a trigonometric function, an inverse trigonometric function, or any function that can be built up with finite defined operations of addition, subtraction, multiplication, division, and composition of functions on any finite set of elementary functions is called an elementary function.
+
+An integral of which the integrand is an elementary function is called an elementary integral.
+\ssc{Real Algebraic Function (實代數函數)}
+\sssc{Power Function (冪函數)}
 A power function if a function $f(x)=kx^a$ where $k\in\mathbb{C}$, called coefficient, and $a\in\mathbb{R}$, called exponent, are constants (some requires $k\in\mathbb{R}$ or $k=1$).
-\sssc{Root Function}
+\sssc{Root Function (根式函數)}
 A root function is a power function of which the exponent is $\frac{1}{n}$ where $n\in\mathbb{N}$.
 \sssc{Reciprocal Function}
-A reciprocal function is function $f(x)=\frac{1}{x}$.
+The reciprocal function is the function $f(x)=\frac{1}{x}$.
 \sssc{Polynomial (多項式)}
 A polynomial is a function $P(x)=\sum_{k=0}^na_kx^k$ where $a_k\in\mathbb{R}$ or $\mathbb{C}$ are constants called coefficients and $n$ is a nonnegative integer called the degree of $P$.
 \sssc{Rational Function (有理函數)}
 A function $f$ is called a rational function if there exists two polynomials $P(x)$ and $Q(x)$ such that $f(x)=\frac{P(x)}{Q(x)}$ for all $x$ in the domain.
 \sssc{Algebraic Function (代數函數)}
 A function $f$ is called an algebraic function if there exists a polynomial $P(y,x)$ in two variables such that $P(f(x),x)=0$ for all $x$ in the domain.
-\sssc{Elementary functions}
-A constants, a power function, a logarithmic function, an exponential function, a trigonometric function, an inverse trigonometric function, or any function that can be built up with finite defined operations of addition, subtraction, multiplication, division, and composition of functions on any finite set of elementary functions is called an elementary function.
-
-An integral of which the integrand is an elementary function is called an elementary integral.
-\ssc{Special functions}
-\sssc{Heaviside step function (黑維塞階躍函數) or Unit step function (單位階躍函數)}
-\[H(x)=u(x)=
-\begin{cases}0,\quad &x<0\\
-1,\quad &x\geq 0
-\end{cases},\]
-where $H(0)=u(0)$ is sometimes defined to be $\frac{1}{2}$ or other values instead.
-\[H'(x)=u'(x)=\delta(x).\]
-\sssc{Dirac delta function (狄拉克 δ 函數)}
-\[
-\delta(x) =
-\begin{cases}
-\infty, & x = 0, \\
-0, & x \neq 0.
-\end{cases}
-\]
-\[
-\forall \epsilon > 0:\,\int_{a-\epsilon}^{a+\epsilon} f(x) \delta(x-a) \, \mathrm{d}x = f(a).
-\]
-\[
-\int _{-\infty }^{\infty }\delta(x) \, \mathrm{d}x = 1.
-\]
-\[\int_0^x\delta(t)\,\mathrm{d}t=H(x).\]
-\sssc{Dirichlet function (狄利克雷函數)}
-The Dirichlet function is a function $f\colon\manthbb{R}\to\mathbb{R};$
-\[f(x)=\begin{cases}1,\quad & x\in\mathbb{Q}\\
-0,\quad & x\in\mathbb{R}\setminus\mathbb{Q}
-\end{cases},\]
-which is discontinuous at everywhere.
-\sssc{Weierstrass function (魏爾施特拉斯函數)}
-The Weierstrass function is a function $f\colon\mathbb{R}\to\mathbb{R};$
-\[f(x)=\sum_{n=0}^{\infty}a^n\cos\left(b^n\pi x\right),\]
-in which $0<a<1$, $b$ is a positive odd integer, and $ab>1+\frac{3}{2}\pi$, which is continuous but differentiable nowhere.
-\sssc{Differentiable but derivative not continuous}
-The function $f\colon\mathbb{R}\to\mathbb{R};$
-\[f(x)=\begin{cases}x^2\sin\qty(\frac{1}{x}),\quad&x\neq 0\\0,\quad&x=0\end{cases},\]
-is differentiable but its derivative is not continuous at $0$. (Note that because $\{0\}$ has Lebesgue measure $0$, $f'\colon\mathbb{R}\to\mathbb{R}$ is continuous almost everywhere, that is, $f'$ is Riemann integrable on any closed interval.)
-\begin{proof}
-\[f'(x)=2x\sin\qty(\frac{1}{x})-x^2\cos\qty(\frac{1}{x}),\quad x\neq 0\]
-\bma
-f'(0)&=\lim_{h\to 0}\frac{f(h)}{h}\\
-&=\lim_{h\to 0}h\sin\qty(\frac{1}{h})
-\eam
-For any $|h|>0$, we have $-|h|\leq h\sin\qty(\frac{1}{h})\leq |h|$. By the squeeze theorem, $\lim_{h\to 0}-|h|=\lim_{h\to 0}|h|=0$ implies $\lim_{h\to 0}h\sin\qty(\frac{1}{h})=0$.
-\bma
-\lim_{x\to 0}f'(x)&=2\lim_{x\to 0}x\sin\qty(\frac{1}{x})-\lim_{x\to 0}\cos\qty(\frac{1}{x})\\
-&=-\lim_{x\to 0}\cos\qty(\frac{1}{x})\\
-\eam
-$\lim_{x\to 0}\cos\qty(\frac{1}{x})$ doesn't exist, so $\lim_{x\to 0}f'(x)$ doesn't exist.
-\end{proof}
+\ssc{Logarithmic Function (對數函數)}
+\sssc{Natural logarithm (自然對數)}
+$\ln(x)\colon\mathbb{R}_{>0}\to\mathbb{R};$
+\[\ln(x)=\int_1^x\frac{1}{t}\,\mathrm{d}t.\]
+\sssc{Logarithm (對數)}
+The logarithm of $x$, called argument (真數), to the $a$, called base (底數), $\log_a(x)\colon\mathbb{R}_{>0}\to\mathbb{R};$
+\[\log_a(x)=\frac{\ln(x)}{\ln(a)}.\]
+\ssc{Exponential Function (指數函數)}
+\sssc{Natural exponential function}
+$e^x\colon\mathbb{R}\to\mathbb{R};$
+\[e^x=\ln^{-1}(x).\]
+\sssc{Exponential function}
+$a\in\mathbb{R}_{\neq 0}$, called base (底數), to the exponent of $x$, called exponent (真數), $\a^x\colon\mathbb{R}\to\mathbb{R};$
+\[a^x=e^{n\ln(a)}.\]
 
 
 
@@ -250,20 +218,6 @@ $a_n\leq a_{n+1}$ for every $n\geq 1$ or $a_n\geq a_{n+1}$ for every $n\geq 1$, 
 
 "Only If"-direction: By $(\epsilon,\delta)$-definition of limit, every sequence $\langle a_n\rangle_{n\in\mathbb {N}}$ with a finite limit $L$ is necessarily bounded.
 \end{proof}
-\sssc{Arithmetic progression or sequence (等差數列)}
-An arithmetic sequence is a sequence $\langle a_n\rangle=\langle a_1+(n-1)d\rangle$. 
-
-Given $a$ and $b$, $\frac{a+b}{2}$ is called the median of an arithmetic sequence (等差中項).
-
-\[\nexists\lim_{n\to\infty}a_n,\quad d\neq 0\]
-\[\lim_{n\to\infty}a_n=a_1,\quad d=0\]
-\sssc{Geometric progression or sequence (等比 or 幾何數列)}
-A geometric sequence is a sequence $\langle a_n\rangle=\langle a_1\cdot r^{n-1}\rangle$, where $a_1r\neq 0$.
-
-Given $a$ and $b$, $\pm\sqrt{ab}$ is called the median of an geometric sequence (等比中項).
-\[\nexists\lim_{n\to\infty}a_n,\quad |d|\geq 1\land d\neq 1\]
-\[\lim_{n\to\infty}a_n=a_1,\quad d=1\]
-\[\lim_{n\to\infty}a_n=0,\quad |d|<1\]
 \subsection{Limits of Real Series}
 \subsubsection{Definition}
 Let:
@@ -291,54 +245,6 @@ and
 \[\sum_{i=1}^{\infty}a_i=\sum_{i=1}^{\infty}b_i=L,\]
 then: 
 \[\sum_{i=1}^{\infty}c_i=L.\]
-\sssc{Arithmetic series (等差級數)}
-An arithmetic series is a series $S_n=\sum_{i=1}^na_i$, where $\langle a_n\rangle$ is an arithmetic sequence.
-\[S_n=\frac{n}{2}\qty(a_1+a_n)=\frac{n}{2}\qty(2a_1+(n-1)d)=na_1+\frac{n(n-1)d}{2}\]
-\[\nexists\lim_{n\to\infty}S_n,\quad a_1\neq 0\lor d\neq 0\]
-\[\lim_{n\to\infty}S_n=0,\quad a_1=0\land d=0\]
-\sssc{Geometric series (等比 or 幾何級數)}
-A geometric series is a series $S_n=\sum_{i=1}^na_i$, where $\langle a_n\rangle$ is a geometric sequence.
-
-\[S_n=\frac{a_1\qty(1-r^n)}{1-r},\quad r\neq 1\]
-\[S_n=na_1,\quad r=1\]
-\[\lim_{n\to\infty}S_n=\frac{a_1}{1-r},\quad \abs{r}<1\]
-\[\nexists\lim_{n\to\infty}S_n,\quad \abs{r}\geq 1\]
-\sssc{Riemann zeta function (黎曼 zeta 函數)}
-\[\begin{aligned}
-\zeta(s) &= \sum_{n=1}^\infty\frac{1}{n^s}\\
-&= \frac{1}{\Gamma (s)}\int _0^\infty \frac {x^{s-1}}{e^x-1}\,\mathrm {d} x
-\eam
-
-Harmonic Series (調和級數):
-\[S_n=\sum_{n=1}^n\frac{1}{n}\]
-\[\nexists\sum_{n=1}^\infty\frac{1}{n}\]
-
-Basel Problem (巴塞爾問題):
-\[\zeta(2)=\frac{\pi^2}{6}\]
-
-Other Even Positive Integers:
-\[\zeta(4)=\frac{\pi^4}{90}\]
-\[\zeta(6)=\frac{\pi^6}{945}\]
-\[\zeta(8)=\frac{\pi^8}{9450}\]
-\[\zeta(10)=\frac{\pi^{10}}{93555}\]
-\[\zeta(12)=\frac{691\pi^{12}}{638512875}\]
-\[\zeta(14)=\frac{2\pi^{14}}{18243225}\]
-
-Infinity:
-\[\lim_{n\to\infty}\zeta(n)=1\]
-\sssc{Euler–Mascheroni constant (歐拉–馬斯克若尼常數)}
-\[\begin{aligned}
-\gamma &= \lim _{n\to \infty }\left(\left(\sum _{k=1}^n\frac {1}{k}\right)-\ln(n)\right)\\
-&= \int _1^\infty \left(\frac{1}{\lfloor x\rfloor}-\frac{1}{x}\right)\,\mathrm{d}x
-\end{aligned}\]
-\sssc{Power series (冪級數)}
-\[\begin{aligned}
-\sum_{i=1}^ni &= \frac{n\qty(n+1)}{2}\\
-\sum_{i=1}^ni^2 &= \frac{n\qty(n+1)\qty(2n+1)}{6}\\
-\sum_{i=1}^ni^3 &= \qty(\frac{n(n+1)}{2})^2\\
-\sum_{i=1}^ni^r &= n + \sum_{k=1}^{n-1} (n-k)((k+1)^r - k^r)\\
-&= n + \sum_{k=1}^{n-1} (n-k)\sum_{j=0}^{r-1}\binom{r}{j}k^{j}
-\end{aligned}\]
 \subsection{Limits of Real Nets}
 Below, we are discussing limits of nets in the set of real number.
 \subsubsection{Definition}
@@ -507,6 +413,74 @@ The limit of the $n$th power of a function, in which $n$ is a positive integer, 
 The limit of the $n$th root of a function, in which $n$ is a positive integer, is the $n$th root of the limit of the function.
 \sssc{The Uniqueness of Limits}
 If a limit exists, it is unique.
+
+
+
+\section{Sequences and Series and Their Calculus Prosperities}
+\ssc{Sequences}
+\sssc{Arithmetic progression or sequence (等差數列)}
+An arithmetic sequence is a sequence $\langle a_n\rangle=\langle a_1+(n-1)d\rangle$. 
+
+Given $a$ and $b$, $\frac{a+b}{2}$ is called the median of an arithmetic sequence (等差中項).
+
+\[\nexists\lim_{n\to\infty}a_n,\quad d\neq 0\]
+\[\lim_{n\to\infty}a_n=a_1,\quad d=0\]
+\sssc{Geometric progression or sequence (等比 or 幾何數列)}
+A geometric sequence is a sequence $\langle a_n\rangle=\langle a_1\cdot r^{n-1}\rangle$, where $a_1r\neq 0$.
+
+Given $a$ and $b$, $\pm\sqrt{ab}$ is called the median of an geometric sequence (等比中項).
+\[\nexists\lim_{n\to\infty}a_n,\quad |d|\geq 1\land d\neq 1\]
+\[\lim_{n\to\infty}a_n=a_1,\quad d=1\]
+\[\lim_{n\to\infty}a_n=0,\quad |d|<1\]
+\ssc{Series}
+\sssc{Arithmetic series (等差級數)}
+An arithmetic series is a series $S_n=\sum_{i=1}^na_i$, where $\langle a_n\rangle$ is an arithmetic sequence.
+\[S_n=\frac{n}{2}\qty(a_1+a_n)=\frac{n}{2}\qty(2a_1+(n-1)d)=na_1+\frac{n(n-1)d}{2}\]
+\[\nexists\lim_{n\to\infty}S_n,\quad a_1\neq 0\lor d\neq 0\]
+\[\lim_{n\to\infty}S_n=0,\quad a_1=0\land d=0\]
+\sssc{Geometric series (等比 or 幾何級數)}
+A geometric series is a series $S_n=\sum_{i=1}^na_i$, where $\langle a_n\rangle$ is a geometric sequence.
+
+\[S_n=\frac{a_1\qty(1-r^n)}{1-r},\quad r\neq 1\]
+\[S_n=na_1,\quad r=1\]
+\[\lim_{n\to\infty}S_n=\frac{a_1}{1-r},\quad \abs{r}<1\]
+\[\nexists\lim_{n\to\infty}S_n,\quad \abs{r}\geq 1\]
+\sssc{Riemann zeta function (黎曼 zeta 函數)}
+\[\begin{aligned}
+\zeta(s) &= \sum_{n=1}^\infty\frac{1}{n^s}\\
+&= \frac{1}{\Gamma (s)}\int _0^\infty \frac {x^{s-1}}{e^x-1}\,\mathrm {d} x
+\eam
+
+Harmonic Series (調和級數):
+\[S_n=\sum_{n=1}^n\frac{1}{n}\]
+\[\nexists\sum_{n=1}^\infty\frac{1}{n}\]
+
+Basel Problem (巴塞爾問題):
+\[\zeta(2)=\frac{\pi^2}{6}\]
+
+Other Even Positive Integers:
+\[\zeta(4)=\frac{\pi^4}{90}\]
+\[\zeta(6)=\frac{\pi^6}{945}\]
+\[\zeta(8)=\frac{\pi^8}{9450}\]
+\[\zeta(10)=\frac{\pi^{10}}{93555}\]
+\[\zeta(12)=\frac{691\pi^{12}}{638512875}\]
+\[\zeta(14)=\frac{2\pi^{14}}{18243225}\]
+
+Infinity:
+\[\lim_{n\to\infty}\zeta(n)=1\]
+\sssc{Euler–Mascheroni constant (歐拉–馬斯克若尼常數)}
+\[\begin{aligned}
+\gamma &= \lim _{n\to \infty }\left(\left(\sum _{k=1}^n\frac {1}{k}\right)-\ln(n)\right)\\
+&= \int _1^\infty \left(\frac{1}{\lfloor x\rfloor}-\frac{1}{x}\right)\,\mathrm{d}x
+\end{aligned}\]
+\sssc{Power series (冪級數)}
+\[\begin{aligned}
+\sum_{i=1}^ni &= \frac{n\qty(n+1)}{2}\\
+\sum_{i=1}^ni^2 &= \frac{n\qty(n+1)\qty(2n+1)}{6}\\
+\sum_{i=1}^ni^3 &= \qty(\frac{n(n+1)}{2})^2\\
+\sum_{i=1}^ni^r &= n + \sum_{k=1}^{n-1} (n-k)((k+1)^r - k^r)\\
+&= n + \sum_{k=1}^{n-1} (n-k)\sum_{j=0}^{r-1}\binom{r}{j}k^{j}
+\end{aligned}\]
 
 
 
@@ -805,6 +779,8 @@ The partial derivative of the $k$th(-order) mixed partial derivative function of
 The operation of finding the partial derivative or partial derivative function is called partial differentiation.
 
 Specifically, the $0$th(-order) partial derivative of $f$ is $f$ itself.
+\ssc{Differentiability and continuity}
+For a point $a$ in the domain of $f$, $f$ is differentiable at $a$ if it is continuous at $a$.
 \subsection{Taylor series (泰勒級數) or Taylor expansion (泰勒展開)}
 Assume that $F:\,\mathbb{R}\to\mathbb{R}$ is an infinitely differentiable function, and its derivatives of every order exist on $\mathbb{R}$, then the Taylor series of $F$ at $a$ is
 \[F(x) = \sum_{n\in\mathbb{N}_0} \frac{F^{(n)}(a)}{n!}(x-a)^n,\]
@@ -1548,6 +1524,62 @@ The inverse Laplace transform of a complex function $F(s)$ is given by the line 
 
 
 \sct{Lists}
+\ssc{List of Special Functions}
+\sssc{Heaviside step function (黑維塞階躍函數) or Unit step function (單位階躍函數)}
+\[H(x)=u(x)=
+\begin{cases}0,\quad &x<0\\
+1,\quad &x\geq 0
+\end{cases},\]
+where $H(0)=u(0)$ is sometimes defined to be $\frac{1}{2}$ or other values instead.
+\[H'(x)=u'(x)=\delta(x).\]
+\sssc{Dirac delta function (狄拉克 δ 函數)}
+\[
+\delta(x) =
+\begin{cases}
+\infty, & x = 0, \\
+0, & x \neq 0.
+\end{cases}
+\]
+\[
+\forall \epsilon > 0:\,\int_{a-\epsilon}^{a+\epsilon} f(x) \delta(x-a) \, \mathrm{d}x = f(a).
+\]
+\[
+\int _{-\infty }^{\infty }\delta(x) \, \mathrm{d}x = 1.
+\]
+\[\int_0^x\delta(t)\,\mathrm{d}t=H(x).\]
+\sssc{Dirichlet function (狄利克雷函數)}
+The Dirichlet function is a function $f\colon\manthbb{R}\to\mathbb{R};$
+\[f(x)=\begin{cases}1,\quad & x\in\mathbb{Q}\\
+0,\quad & x\in\mathbb{R}\setminus\mathbb{Q}
+\end{cases},\]
+which is discontinuous at everywhere.
+\sssc{Weierstrass function (魏爾施特拉斯函數)}
+The Weierstrass function is a function $f\colon\mathbb{R}\to\mathbb{R};$
+\[f(x)=\sum_{n=0}^{\infty}a^n\cos\left(b^n\pi x\right),\]
+in which $0<a<1$, $b$ is a positive odd integer, and $ab>1+\frac{3}{2}\pi$, which is continuous but differentiable nowhere.
+\sssc{Differentiable but derivative not continuous}
+The function $f\colon\mathbb{R}\to\mathbb{R};$
+\[f(x)=\begin{cases}x^2\sin\qty(\frac{1}{x}),\quad&x\neq 0\\0,\quad&x=0\end{cases},\]
+is differentiable but its derivative is not continuous at $0$. (Note that because $\{0\}$ has Lebesgue measure $0$, $f'\colon\mathbb{R}\to\mathbb{R}$ is continuous almost everywhere, that is, $f'$ is Riemann integrable on any closed interval.)
+\begin{proof}
+\[f'(x)=2x\sin\qty(\frac{1}{x})-x^2\cos\qty(\frac{1}{x}),\quad x\neq 0\]
+\bma
+f'(0)&=\lim_{h\to 0}\frac{f(h)}{h}\\
+&=\lim_{h\to 0}h\sin\qty(\frac{1}{h})
+\eam
+For any $|h|>0$, we have $-|h|\leq h\sin\qty(\frac{1}{h})\leq |h|$. By the squeeze theorem, $\lim_{h\to 0}-|h|=\lim_{h\to 0}|h|=0$ implies $\lim_{h\to 0}h\sin\qty(\frac{1}{h})=0$.
+\bma
+\lim_{x\to 0}f'(x)&=2\lim_{x\to 0}x\sin\qty(\frac{1}{x})-\lim_{x\to 0}\cos\qty(\frac{1}{x})\\
+&=-\lim_{x\to 0}\cos\qty(\frac{1}{x})\\
+\eam
+$\lim_{x\to 0}\cos\qty(\frac{1}{x})$ doesn't exist, so $\lim_{x\to 0}f'(x)$ doesn't exist.
+\end{proof}
+\sssc{Differentiable at one point and discontinuous everywhere else}
+The function $f\colon\manthbb{R}\to\mathbb{R};$
+\[f(x)=\begin{cases}1,\quad & x^2\in\mathbb{Q}\\
+0,\quad & x\in\mathbb{R}\setminus\mathbb{Q}
+\end{cases}\]
+which is differentiable at $0$ with $f'(0)=0$ and discontinuous everywhere else.
 \ssc{List of Integrals}
 \sssc{Rational function}
 \[\int\frac{f'(x)}{f(x)}\,\mathrm{d}x=\ln|f(x)|+C.\]
@@ -1563,7 +1595,6 @@ The inverse Laplace transform of a complex function $F(s)$ is given by the line 
 \[\int\sqrt{a^2+x^2}\,\mathrm{d}x=\frac{x}{2}\sqrt{a^2+x^2}+\frac{a^2}{2}\ln\qty(x+\sqrt{a^2+x^2})+C.\]
 \[\int\sqrt{x^2-a^2}\,\mathrm{d}x=\frac{x}{2}\sqrt{x^2-a^2}-\frac{a^2}{2}\ln\qty(x+\sqrt{x^2-a^2})+C,\quad x^2>a^2.\]
 \[\int\sqrt{a^2-x^2}\,\mathrm{d}x=\frac{x}{2}\sqrt{a^2-x^2}+\frac{a^2}{2}\arcsin\frac{x}{|a|}+C,\quad|a|\geq|x|.\]
-{{{
 \ssc{Lists of Laplace Transform}{{{
 \ssc{Lists Fourier Transform}{{{
 
