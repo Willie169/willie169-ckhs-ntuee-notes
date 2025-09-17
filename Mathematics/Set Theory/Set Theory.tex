@@ -201,15 +201,7 @@ Let $\mathbb{R}$ denote the set of all real numbers. Then:
 \[\mathbb{R}\setminus\mathbb{Q}.\]
 \sssc{Complex numbers (複數)}
 \[\mathbb{C}=\{a+bi\mid a,b\in\mathbb{R}\land i=\sqrt{-1}\}.\]
-\subsection{Cardinality (勢/基數/計數)}
-The cardinality is a measure of the size of a set, denoted as $|A|$ or $n(A)$. 
-\bit
-\item The cardinality of a finite set is the number of its elements.
-\item Two sets have the same cardinality if there exists a one-to-one correspondence between them.
-\item The cardinality of $\mathbb{N}$ is called the cardinality of countable infinity (可數無限勢), denoted as $\aleph_0$. A set with the same cardinality of $\mathbb{N}$ is called to be countable infinite (可數無限的).
-\item The cardinality of $\mathbb{R}$ is called the cardinality of continuity (連續勢), denoted as $\mathfrak{c}$. A set with the same cardinality of $\mathbb{R}$ is called to be uncountable infinite (不可數無限的).
-\eit
-\ssc{Interval (區間)}
+\sssc{Interval (區間)}
 \begin{itemize}
 \item Open interval (開區間):
 \[(a,b)\coloneq\{x\mid a<x<b\}\]
@@ -232,4 +224,126 @@ In mathematics, the term "almost all" means "all but a negligible quantity". Mor
 \ssc{Cover or covering (覆蓋)}
 A cover or covering $C$ of a set $X$ is a family of subsets of $X$ such that:
 \[\bigcup_{U\in C}U=X.\]
+\ssc{Order}
+\sssc{Ordered set (序集)}
+An ordered set is an ordered pair $P=(X,\leq )$ (or $P=(X,<)$) consisting of a set $X$, called the ground set of $P$, and an order (序) $\leq$ (or $<$), in which an order is a binary relation between two elements in $X$.
+
+A non-strict order $\leq$ is an order such that $a=b\implies a\leq b$; a strict order $<$ is an order such that $a<b\implies a!=b$. An ordered set defined with a strict order is called a strictly ordered set.
+
+Unless otherwise specified,
+\bit
+\item an order denoted as $\leq$ is a non-strict order;
+\item an order denoted as $<$ is a strict order;
+\item an order without notation or explanation that makes it a strict order is considered a non-strict order;
+\item for an ordered set with order $\leq$, $\geq$ is defined as a binary relation between two elements $a,b$ in it such that $a\leq b\iff b\geq a$;
+\item for an ordered set with order $<$, $>$ is defined as a binary relation between two elements $a,b$ in it such that $a<b\iff b>a$; and
+\item for an ordered set with an order $\leq$ and an order $<$ add the same time, $a\leq b\iff a<b\lor a=b$;
+\item for a specefic type $P$ of ordered sets (e.g. preordered set), strict $P$ (e.g. strict preordered set) is a type of strictly ordered set defined with the same definition of $P$ but replace non-strict order $\leq$ with strict order $<$ and remove the requirement of antisymmetry (if any).
+\eit
+
+When the meaning is clear from context and there is no ambiguity about the order, the groud set itself can sometimes represent the whole ordered set.
+\sssc{Preordered set (預序集), preset, or quasiordered set}
+A preordered set is an ordered pair $P=(X,\leq )$ consisting of a set $X$ and a preorder (預序), aka, quasiorder, $\leq$ on $X$, that is, for all $a,b,c\in X$ it must satisfy:
+\bit
+\item Reflexivity: $a\leq a$, and
+\item Transitivity: $a\leq b\implies a+c\leq b+c$.
+\eit
+\sssc{Partially ordered set (偏序集) or poset}
+A partially ordered set is an ordered pair $P=(X,\leq )$ consisting of a set $X$ and a partial order (偏序) $\leq$ on $X$, that is, for all $a,b,c\in X$ it must satisfy:
+\begin{enumerate}
+\item Reflexivity: $a\leq a$, i.e. every element is related to itself.
+\item Antisymmetry: $a\leq b\land b\leq a\implies a=b$, i.e. no two distinct elements precede each other.
+\item Transitivity: $a\leq b\land b\leq c\implies a\leq c$.
+\end{enumerate}
+\sssc{Upward closure}
+Let $A$ be a subset of a poset $X$, the upward closure of $A$, denoted as $\uparrow A$, is defined as:
+\[\uparrow A \coloneq \{ x \in X : \,\exists a \in A \text{ s.t. } a \leq x \}.\]
+\sssc{Totally ordered set (全序集) or linearly ordered set (線性順序集)}
+A totally ordered set is an ordered pair $P=(X,\leq )$ consisting of a set $X$ and a total order (全序), aka, linear order (線性順序), $\leq$ on $X$, that is, for all $a,b,c\in X$ it must satisfy:
+\begin{enumerate}
+\item Reflexivity: $a\leq a$, i.e. every element is related to itself.
+\item Antisymmetry: $a\leq b\land b\leq a\implies a=b$, i.e. no two distinct elements precede each other.
+\item Transitivity: $a\leq b\land b\leq c\implies a\leq c$.
+\item Strongly connectivity or totality: $a\leq b\lor b\leq a$.
+\end{enumerate}
+\sssc{Ordered field (有序域)}
+A field $(F,+,\cdot)$ together with a total order $\leq$ on $F$ is an ordered field if the order satisfies the following properties for all $a,b,c\in F$:
+\begin{enumerate}
+\item $a\leq b\implies a+c\leq b+c$.
+\item $0\leq a\land 0\leq b\implies 0\leq a\cdot b$.
+\end{enumerate}
+As usual, we write $a<b$ for $a\leq b$ and $a\neq b$. The notations $b\geq a$ and $b>a$ stand for $a\leq b$ and $a<b$, respectively. Elements $a\in F$ with $a>0$ are called positive.
+\sssc{Well ordered set, well-ordered set, or woset (良序集)}
+A well ordered set is a totally ordered set such that every non-empty subset of it has a least element in its order. The order of a woset is called a well order or well-order.
+\sssc{Order homomorphism or Order-preserving function}
+Given two posets $(S,\leq _{S})$ and $(T,\leq _{T})$, an order homoomorphism or order-preserving function from $(S,\leq _{S})$ to $(T,\leq _{T})$ is a function $f$ from $S$ to $T$ with the property that, for every $x,y\in S$, $x \leq_S y$ implies $f(x)\leq _{T}f(y)$.
+\sssc{Order isomorphism}
+Given two posets $(S,\leq _{S})$ and $(T,\leq _{T})$, an order isomorphism from $(S,\leq _{S})$ to $(T,\leq _{T})$ is a bijective function $f$ from $S$ to $T$ with the property that, for every $x,y\in S$, $x \leq_S y$ if and only if $f(x)\leq _{T}f(y)$.
+
+Two sets are called to be order-isomorphic if there exists an order isomorphism between them.
+\sssc{Ordered by inclusion}
+A family of sets is called to be ordered by inclusion if it is a poset such that for any two sets $A,B$ in it, $A\leq B\iff A\subseteq B$.
+\sssc{Cofinal (共尾的) or frequent}
+A subset $B\subseteq A$ of a preordered set $(A,\leq )$ is said to be cofinal or frequent in $A$ if for every $a\in A$, there exists a $b\in B$ such that $a\leq b$.
+\sssc{Upper Bound (上界)}
+$M$ is an upper bound of a preset $A$ if $a\leq M$ for every $a\in A$. We say a preset is bounded-above by $M$ if it has an upper bound $M$.
+
+$M$ is an upper bound of a function $f$ of which the range is a preset if $M$ is an upper bound of its range. We say a function is bounded-above by $M$ if it has an upper bound $M$.
+
+$M$ is an upper bound of a function $f$ of which the range is a preset on a subset $I$ of its domain if $M$ is an upper bound of $f(I)$. We say a function is bounded-above by $M$ on a subset $I$ of its domain if it has an upper bound $M$ on $I$.
+\sssc{Lower Bound (下界)}
+$m$ is an lower bound of a preset $A$ if $a\geq m$ for every $a\in A$. We say a preset is bounded-below by $m$ if it has an lower bound $m$.
+
+$m$ is an lower bound of a function $f$ of which the range is a preset if $m$ is an lower bound of its range. We say a function is bounded-below by $m$ if it has an lower bound $m$.
+
+$m$ is an lower bound of a function $f$ of which the range is a preset on a subset $I$ of its domain if $m$ is an lower bound of $f(I)$. We say a function is bounded-below by $m$ on a subset $I$ of its domain if it has an lower bound $m$ on $I$.
+\sssc{Supremum or Least Upper Bound (最小上界)}
+The supremum or least upper bound of a preset $A$, denoted as $\sup A$, is defined as $M_0$ in the set $\mathcal{M}$ of all upper bounds of $A$ such that $\forall M\in\mathcal{M}\colon M_0\leq M$.
+
+The supremum or least upper bound of a function $f$ of which the range is a preset, denoted as $\sup_xf(x)$, is defined as $M_0$ in the set $\mathcal{M}$ of all upper bounds of $f$ such that $\forall M\in\mathcal{M}\colon M_0\leq M$.
+\sssc{Infimum or Greatest Lower Bound (最大下界)}
+The infimum or greatest lower bound of a preset $A$, denoted as $\inf A$, is defined as $m_0$ in the set $\mathcal{M}$ of all lower bounds of $A$ such that $\forall m\in\mathcal{M}\colon m_0\geq m$.
+
+The infimum or greatest lower bound of a function $f$ of which the range is a preset, denoted as $\inf_xf(x)$, is defined as $m_0$ in the set $\mathcal{M}$ of all lower bounds of $f$ such that $\forall m\in\mathcal{M}\colon m_0\geq m$.
+\sssc{Bounded (有界的)}
+We say a preset or a function of which the range is a preset is bounded if it is bounded-above and bounded-below.
+
+We say a function is bounded on a subset $I$ of its domain if it is bounded-above and bounded-below on $I$.
+\sssc{Directed set (有向集), directed preset (有向預序集), or filtered set}
+A directed set is a preset in which every finite subset has an upper bound.
+\ssc{Ordinal number or ordinal (序數)}
+\sssc{Ordinal number or ordina (序數)}
+The ordinal number or ordinal is a set that measures the order of an element of a strict well ordered set.
+
+The ordinal numbers is defined to ordered by inclusion to form a strictly well ordered set; the ordinal $0$ is defined as $\varnothing$; and each ordinal $>0$ is defined as the set of all smaller ordinals, that is, for an ordinal $a>0$:
+\[a=\{b\mid b\tx{\ is an ordinal and\ }b<a\}.\]
+This definition is known as the von Neumann definition of ordinals.
+
+The ordinal number $\omega$, called the first infinite ordinal, is defined to be order-isomorphic to $\mathbb{N}_0$, and in von Neumann definition of ordinals, $\mathbb{N}_0$.
+\sssc{Successor ordinal}
+If an ordinal has a maximum $a$, then it is the next ordinal after $a$, then it is called a successor ordinal (of $a$), written $a+1$.
+\sssc{Limit ordinal}
+A nonzero ordinal that is not a successor is called a limit ordinal.
+\subsection{Cardinality (勢 or 計數) and Cardinal number or cardinal (基數 or 量)}
+\sssc{Cardinality (勢 or 計數) and Cardinal number or cardinal (基數 or 量)}
+The cardinality is a scalar that measures the size of a set $A$, denoted as $|A|$ or $n(A)$.
+
+Two sets are said to be equinumerous or have the same cardinality if there exists a bijection between them.
+
+The cardinality of a finite set is the number of its elements.
+
+Assuming the axiom of choice, the cardinality of a set $X$ is defined to be the least ordinal number $\alpha$ such that there is a bijection between $X$ and $\alpha$. This definition is known as the von Neumann cardinal assignment.
+
+To describe the cardinality of infinite sets, we use a system called cardinal number or cardinal, denoted in Aleph numbers $\aleph_0, \aleph_1, \aleph_2, \ldots \aleph_\omega, \aleph_{\omega+1}, \ldots$, in which the subscripts are ordinal numbers, defined as:
+\bit
+\item $\aleph_0$ is defined as the cardinality of $\mathbb{N}_0$.
+\item For any successor ordinal $n$, $\aleph_n$ is defined inductively as:
+    \[\aleph_n=\min\{\kappa\mid\kappa>\aleph_{n-1}\}.\]
+\item For any limit ordinal $\lambda$, $\aleph_{\lambda}$ is defined as:
+\[\aleph_{\lambda}=\sup\{\aleph_{\alpha}\mid\alpha<\lambda}.\]
+\eit
+\sssc{Countable infinity (可數無限)}
+$\aleph_0$ is called the cardinality of countable infinity (可數無限勢). A set with the same cardinality of $\mathbb{N}$ is called to be countable infinite (可數無限的).
+\sssc{Uncountable infinity (不可數無限)}
+The cardinality of the set of real numbers $\mathbb{R}$, called the cardinality of continuity (連續勢), is $2^{\aleph_0}$, also denoted as $\mathfrak{c}$. A set with the same cardinality of $\mathbb{R}$ is called to be uncountable infinite (不可數無限的).
 \end{document}
