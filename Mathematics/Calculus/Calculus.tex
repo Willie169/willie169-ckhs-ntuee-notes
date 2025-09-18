@@ -42,6 +42,11 @@ Consider a function $f$:
 \[f(X)=Y\]
 \sssc{Bijection (對射) or Bijective function or One-to-one (一對一) function or One-to-one correspondence (一一對應)}
 Injective and surjective function.
+\ssc{Tests for real functions}
+\sssc{Vertical line test (垂線測試)}
+For a graph on $xy$ plane, if any vertical line intersects it, $y$ is not a function of $x$.
+\sssc{Horizontal line test (水平線測試)}
+Given a graph of a real function $y=f(x)$ on $xy$ plane, if any horizontal line intersects it more than once, $f(x)$ is not bijective.
 \ssc{Fixed point, fixpoint, or invariant point (不動點 or 定點)}
 A fixed point, fixpoint, or invariant point of a function $f\colon X\subseteq Y\to Y$, is a point $x\in X$ such that $f(x)=x$.
 \ssc{Property in a variable}
@@ -51,8 +56,9 @@ Unless otherwise specified, given a property $P$ defined for a function $f(w_1,\
 
 Unless otherwise specified, given a property $P$ defined for a function $f(w_1,\ldotsw_n,x,y_1,\ldotsy_n)$ in which $w_1,\ldotsw_n,x,y_1,\ldotsy_n$ are independent variables, we say $f$ is with property $P$ in $x$ at a point $w_1,\ldotsw_n,x_0,y_1,\ldotsy_n$ in the domain of $f$ if there exists a neighbourhood $X$ of $x_0$ such that the function $g(x)$ that is defined to map $x$ to $f(w_1,\ldotsw_n,x,y_1,\ldotsy_n)$ for any $x\in X$ such that $w_1,\ldotsw_n,x,y_1,\ldotsy_n$ is in the domain of $f$ is with property $P$.
 \ssc{Increasing and Decreasing Real Functions}
-Consider a function $f$:
-\[f\colon X\subseteq\mathbb{R}\to\mathbb{R};\;x\mapsto y.\]
+Consider a function $f$
+\[f\colon X\subseteq Y\to Z\]
+with $Y,Z$ being posets.
 \sssc{Non-Decreasing (非遞減) or Monotone Increasing (單調遞增) function}
 $f$ is non-decreasing on $I\subseteq X$ if and only if
 \[\forall a,b\in I\colon a<b\implies f(a)\leq f(b).\]
@@ -524,7 +530,7 @@ If $g$ is continuous at $a$ and $f$ is continuous at $g(a)$, then the composite 
 The following types of functions are continuous at every number in their domains: algebraic functions, trigonometric functions, inverse trigonometric functions, exponential functions, logarithmic functions.
 \ssc{Intermediate Value Theorem (IVT) (中間值定理)}
 \sssc{Intermediate value theorem for real functions}
-Let $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ be continuous on $J\subseteq$, then for any interval $[a,b]\subseteq J$ such that $f(a)\neq f(b)$,
+Let $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ be a function, then for any interval $[a,b]\subseteq I$ such that $f$ is continuous on $[a,b]$ and $f(a)\neq f(b)$,
 \[k\in (f(a),f(b)) \implies \qty(\exists c\in (a,b) \text{\ s.t.\ }f(c)=k).\]
 \sssc{Intermediate value theorem for functions between topological spaces}
 Let $X$ and $Y$ be topological spaces and function $f\colon I\subseteq X\to Y$ be continuous on a subset $J$ of $I$, then for any connected subset $K$ of $J$, $f(K)$ is a connected subset of $Y$.
@@ -808,30 +814,32 @@ Also, the $k$th-order approximation of $f$ near $a$ is
 and the first-order approximation near $a$ is
 \[F(x) \approx F(0)+F'(a)(x-a).\]
 The Taylor series of $F$ at $0$ is called Maclaurin series (馬克勞林級數) or Maclaurin expansion (馬克勞林展開).
-\ssc{Real analyticity (實解析性)}
-A real function $f$ is real analytic at a point $x_0$ in its domain, if it is infinitely differentiable at $x_0$ and that the Taylor expansion of $f$ at $x_0$ converges to $f(x)$ pointwise for any $x$ in a neighborhood of $x_0$.
+\ssc{Real analyticity (實解析性) for real-codomain functions}
+A real-codomain function $f$ is real analytic at a point $x_0$ in its domain, if it is infinitely differentiable at $x_0$ and that the Taylor expansion of $f$ at $x_0$ converges to $f(x)$ pointwise for any $x$ in a neighborhood of $x_0$.
 
-A real function is real analytic on an interval $I$ that is a subset of its domain if it is real analytic at any point in $I$.
+A real-codomain function is called to be real analytic on an interval $I$ that is a subset of its domain if it is real analytic at any point in $I$.
 
-A real function is real analytic if it is real analytic at any point in its domain.
-\subsection{Critical point (臨界點)}
-Let $f$ be a real function and \( c \) be a point in \( D_f \) , if \( f'(c) = 0 \) or \( f' \) does not exist at \( c \), then \( c \) is a critical point of \( f \).
-\subsection{Relative extremum (相對極值), local extremum (局部極值), or extremum (極值)}
-Let $f$ be a real function and \( c \) be a point in \( D_f \), a relative maximum or maximum \( f(c) \) of \(f\) is said to occur at $c$ if there exists an open interval $I$ where \( c\in I \subseteq D_f \) such that \( \forall x\in I:\, f(c) \geq f(x) \).
+A real-codomain function is called to be real analytic if it is real analytic at any point in its domain.
+\ssc{Points in graph}
+\sssc{Critical point (臨界點), equilibrium, equilibrium point (平衡點), or stationary point (駐點)}
+Let $f$ be a function where the codomain of it has a zero element and \( c \) be a point in the domain of $f$ , if \( f'(c) = 0 \) or \( f' \) does not exist at \( c \), then \( c \) is a critical point, equilibrium, equilibrium point, or stationary point of \( f \).
+\sssc{Relative extremum (相對極值), local extremum (局部極值), or extremum (極值)}
+Let $f\colon D\subseteq X\to Y$ be a function with $X$ being a topological space and $Y$ being a preordered set. It is said that a relative maximum (相對極大值) or maximum (極大值) \( f(c) \) of \(f\) occurs at $c\in D$ if there exists an open subset $I\ni c$ of $X$ such that \( \forall x\in I\cap D\colon f(c) \geq f(x) \).
 
-Let $f$ be a real function and \( c \) be a point in \( D_f \), a relative minimum or minimum \( f(c) \) of \(f\) is said to occur at $c$ if there exists an open interval $I$ where \( c\in I \subseteq D_f \) such that \( \forall x\in I:\, f(c) \leq f(x) \).
+Let $f\colon D\subseteq X\to Y$ be a function with $X$ being a topological space and $Y$ being a preordered set. It is said that a relative minimum (相對極小值) or minimum (極小值) \( f(c) \) of \(f\) occurs at $c\in D$ if there exists an open subset $I\ni c$ of $X$ such that \( \forall x\in I\cap D\colon f(c) \leq f(x) \).
 
 The relative maximum and relative minimum are collectively called the relative extreme.
 \subsection{Absolute extremum (絕對極值 or 最值) or global extremum (全域極值)}
-Let $f$ be a real function and \( c \) be a point in \( D_f \), an absolute maximum (絕對極大值 or 最大值) \( f(c) \) of \(f\) is said to occur at $c$ if \( \forall x\in D_f:\, f(c) \geq f(x) \).
+Let $f\colon D\to Y$ be a function with $Y$ be a preordered set. It is said that a absolute maximum (絕對極大值 or 最大值) \( f(c) \) of \(f\) occurs at $c\in D$ if \( \forall x\in D\colon f(c) \geq f(x) \).
 
-Let $f$ be a real function and \( c \) be a point in \( D_f \), an absolute minimum (絕對極小值 or 最小值) \( f(c) \) of \(f\) is said to occur at $c$ if \( \forall x\in D_f:\, f(c) \leq f(x) \).
+Let $f\colon D\to Y$ be a function with $Y$ be a preordered set. It is said that a absolute minimum (絕對極小值 or 最小值) \( f(c) \) of \(f\) occurs at $c\in D$ if \( \forall x\in D\colon f(c) \leq f(x) \).
 
 The absolute maximum and absolute minimum are collectively called the absolute extreme.
-\subsection{Concavity (凹性)}
-Let $f:\,J\subseteq\mathbb{R}\to\mathbb{R}$ be differentiable on the open interval $I\subseteq J$. If $f'$ is strictly increasing on $I$, the graph of $f$ is said to concave upward on $I$; if $f'$ is strictly decreasing on $I$, the graph of $f$ is said to concave downward on $I$; if $f'$ is a constant on $I$, the graph of $f$ is said to be neither upward nor downward (or both upward and downward or undefined in some contexts) on $I$.
-\subsection{Point of inflection or inflection point (反曲點 or 拐點)}
-Let $f:\,I\subseteq\mathbb{R}\to\mathbb{R}$ be a continuous function and be differentiable on an open interval $J\subseteq I$, and let $a<b<c\land a,b,c\in J$. If the graph of $f$ is concave upward on interval $(a,b)$ and concave downward on interval $(b,c)$, or concave downward on interval $(a,b)$ and concave upward on interval $(b,c)$, then $(b,f(b))$ is called an inflection point of the graph of $f$.
+\sssc{Concavity (凹性)}
+Let $f\colon J\subseteq X\to Y$ with $X,Y$ being posets be differentiable on the open interval $I\subseteq J$. If $f'$ is strictly increasing on $I$, the graph of $f$ is said to concave upward on $I$; if $f'$ is strictly decreasing on $I$, the graph of $f$ is said to concave downward on $I$; if $f'$ is a constant on $I$, the graph of $f$ is said to be neither upward nor downward (or both upward and downward or undefined in some contexts) on $I$.
+{{{below need generalize or check
+\sssc{Point of inflection or inflection point (反曲點 or 拐點)}
+Let $f\colon J\subseteq X\to Y$ with $X,Y$ being posets be a continuous function and be differentiable on an open interval $I\subseteq J$, and let $a<b<c\land a,b,c\in I$. If the graph of $f$ is concave upward on interval $(a,b)$ and concave downward on interval $(b,c)$, or concave downward on interval $(a,b)$ and concave upward on interval $(b,c)$, then $(b,f(b))$ is called an inflection point of the graph of $f$.
 \ssc{Corner or sharp corner}
 A corner or sharp corner is a point $x$ on the graph of a real function $f$ such that $f$ is continuous but not differentiable at $x$ and that the left-hand derivative and the right-hand derivative of $f$ at $x$ both exist and are finite.
 \ssc{Vertical tangent}
@@ -1669,8 +1677,8 @@ Let $L[y]=\sum_{i=0}^na_n(x)y^{(i)}$ denotes the left-hand side, then $L[\alpha 
 Any function $f$ that is defined on an interval $I$, called interval of definition, the interval of existence, the interval of validity, or the domain of the solution, and of class $C^k$ on $I$, and when substituted into an $n$th-order ordinary differential equation reduces the equation to an identity, is said to be a solution of the equation on $I$.
 
 An ODE does not necessarily have to possess a solution.
-\sssc{Solution curve}
-The graph of a solution $f$ on its interval of definition of an ODE is called a solution curve.
+\sssc{Solution curve or trajectory}
+The graph of a solution $f$ on its interval of definition of an ODE is called a solution curve or a trajectory.
 \sssc{Explicit solution}
 An explicit solution of an ODE of a dependent variable $y$ with respect to an independent variable $x$ is in the form $y=f(x)$, where $f(x)$ is a function of $x$.
 \sssc{Implicit solution}
@@ -1721,5 +1729,12 @@ An $n$th-order boundary-value problem is an $n$th-order ODE with some conditions
 A solution of an BVP is a solution of the ODE that complies with all the BCs.
 \sssc{Slope function or rate function}
 In a first-order ODE in the form $\dv{y}{x}=f(x,y)$, $f$ is called the slope function or rate function.
+\sssc{Direction field or slope field}
+In a first-order ODE in the form $\dv{y}{x}=f(x,y)$, if we evaluate $f$ over a rectangle grid of points and draw a lineal element at each point $(x,y)$ of the grid with slope $f(x,y)$, then the collection of all these lineal elements is called a direction field or a slope field of the ODE.
+\sssc{Isocline}
+In a first-order ODE in the form $\dv{y}{x}=f(x,y)$, the isocline for slope $m$ is defined as the family of points $\{(x,y)\mid f(x,y)=m\}$. In the method of isocline, we draw a lineal element at each point in the isocline for slope $m$ of $f$ with slope $m$.
+\sssc{Autonomous first-order ODE}
+An autonomous first-order ODE is an ODE in the form $\dv{y}{x}=f(y)$.
+\sssc{System of autonomous first-order ODEs as dynamical system{{{
 
 

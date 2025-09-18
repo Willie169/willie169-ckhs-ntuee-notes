@@ -201,24 +201,6 @@ Let $\mathbb{R}$ denote the set of all real numbers. Then:
 \[\mathbb{R}\setminus\mathbb{Q}.\]
 \sssc{Complex numbers (複數)}
 \[\mathbb{C}=\{a+bi\mid a,b\in\mathbb{R}\land i=\sqrt{-1}\}.\]
-\sssc{Interval (區間)}
-\begin{itemize}
-\item Open interval (開區間):
-\[(a,b)\coloneq\{x\mid a<x<b\}\]
-\item Right open interval (右開區間):
-\[[a,b)\coloneq\{x\mid a\leq x<b\}\]
-\item Left open interval (左開區間):
-\[(a,b]\coloneq\{x\mid a<x\leq b\}\]
-\item Half open interval (半開區間): A interval is a half open interval if it is either a right open interval or a left open interval.
-\item Closed interval (閉區間):
-\[[a,b]\coloneq\{x\mid a\leq x\leq b\}\]
-\item Infinite interval (無限區間):
-\[(a,\infty)\coloneq\{x\mid a<x\}\]
-\[[a,\infty)\coloneq\{x\mid a\leq x\}\]
-\[(-\infty,b)\coloneq\{x\mid x<b\}\]
-\[(-\infty,b]\coloneq\{x\mid x\leq b\}\]
-\[(-\infty,\infty)\coloneq\mathbb{R}\]
-\end{itemize}
 \ssc{Almost all (幾乎所有)}
 In mathematics, the term "almost all" means "all but a negligible quantity". More precisely, if $X$ is a set, "almost all elements of $X$" means "all elements of $X$ but those in a negligible subset of $X$". The meaning of "negligible" depends on the mathematical context; for instance, it can mean finite, countable, or null.
 \ssc{Cover or covering (覆蓋)}
@@ -228,17 +210,17 @@ A cover or covering $C$ of a set $X$ is a family of subsets of $X$ such that:
 \sssc{Ordered set (序集)}
 An ordered set is an ordered pair $P=(X,\leq )$ (or $P=(X,<)$) consisting of a set $X$, called the ground set of $P$, and an order (序) $\leq$ (or $<$), in which an order is a binary relation between two elements in $X$.
 
-A non-strict order $\leq$ is an order such that $a=b\implies a\leq b$; a strict order $<$ is an order such that $a<b\implies a!=b$. An ordered set defined with a strict order is called a strictly ordered set.
+A non-strict order $\leq$ is an order such that $a=b\implies a\leq b$; a strict order $<$ is an order such that $a<b\implies a!=b$. An ordered set defined with a non-strict order is called a non-strictly ordered set; an ordered set defined with a strict order is called a strictly ordered set.
 
 Unless otherwise specified,
 \bit
 \item an order denoted as $\leq$ is a non-strict order;
 \item an order denoted as $<$ is a strict order;
 \item an order without notation or explanation that makes it a strict order is considered a non-strict order;
-\item for an ordered set with order $\leq$, $\geq$ is defined as a binary relation between two elements $a,b$ in it such that $a\leq b\iff b\geq a$;
-\item for an ordered set with order $<$, $>$ is defined as a binary relation between two elements $a,b$ in it such that $a<b\iff b>a$; and
-\item for an ordered set with an order $\leq$ and an order $<$ add the same time, $a\leq b\iff a<b\lor a=b$;
-\item for a specefic type $P$ of ordered sets (e.g. preordered set), strict $P$ (e.g. strict preordered set) is a type of strictly ordered set defined with the same definition of $P$ but replace non-strict order $\leq$ with strict order $<$ and remove the requirement of antisymmetry (if any).
+\item for an non-strictly ordered set with order $\leq$, $\geq$ is defined as a binary relation between two elements $a,b$ in it such that $a\leq b\iff b\geq a$;
+\item for an strictly ordered set with order $<$, $>$ is defined as a binary relation between two elements $a,b$ in it such that $a<b\iff b>a$;
+\item for an strictly ordered set with order $<$, a non-strict order $\leq$ is defined as a binary relation between two elements $a,b$ in it such that $a\leq b\iff a<b\lor a=b$; and
+\item for a specefic type $P$ of ordered sets (e.g. preordered set), strictly $P$ (e.g. strictly preordered set) is a type of strictly ordered set defined with the same definition of $P$ but replace non-strict order $\leq$ with strict order $<$ and remove the requirement of antisymmetry (if any).
 \eit
 
 When the meaning is clear from context and there is no ambiguity about the order, the groud set itself can sometimes represent the whole ordered set.
@@ -257,7 +239,7 @@ A partially ordered set is an ordered pair $P=(X,\leq )$ consisting of a set $X$
 \end{enumerate}
 \sssc{Upward closure}
 Let $A$ be a subset of a poset $X$, the upward closure of $A$, denoted as $\uparrow A$, is defined as:
-\[\uparrow A \coloneq \{ x \in X : \,\exists a \in A \text{ s.t. } a \leq x \}.\]
+\[\uparrow A \coloneq \{ x \in X \mid\exists a \in A \text{\ s.t.\ } a \leq x \}.\]
 \sssc{Totally ordered set (全序集) or linearly ordered set (線性順序集)}
 A totally ordered set is an ordered pair $P=(X,\leq )$ consisting of a set $X$ and a total order (全序), aka, linear order (線性順序), $\leq$ on $X$, that is, for all $a,b,c\in X$ it must satisfy:
 \begin{enumerate}
@@ -311,6 +293,32 @@ We say a preset or a function of which the range is a preset is bounded if it is
 We say a function is bounded on a subset $I$ of its domain if it is bounded-above and bounded-below on $I$.
 \sssc{Directed set (有向集), directed preset (有向預序集), or filtered set}
 A directed set is a preset in which every finite subset has an upper bound.
+\sssc{Closed intervals (閉區間) in partially ordered set}
+For a partially ordered set $(P,\leq)$ and $a,b\in P$, a closed interval $[a,b]$ is defined as
+\[[a,b]\coloneq\{x\in P\mid a\leq x\leq b\}.\]
+\sssc{Intervals (區間) in strictly partially ordered set}
+For a strictly partially ordered set $(P,\leq)$ and $a,b\in P$,
+\begin{itemize}
+\item an open interval (開區間) $(a,b)$ is defined as
+\[(a,b)\coloneq\{x\in P\mid a<x<b\};\]
+\item a right open interval (右開區間) $[a,b)$ is defined as
+\[[a,b)\coloneq\{x\in P\mid a\leq x<b\};\]
+\item a left open interval (左開區間) $(a,b]$ is defined as
+\[(a,b]\coloneq\{x\in P\mid a<x\leq b\};\]
+\item an left-open upward interval $(a,\infty)$ is defined as
+\[(a,\infty)\coloneq\{x\in P\mid a<x\};\]
+\item an left-closed upward interval $[a,\infty)$ is defined as
+\[[a,\infty)\coloneq\{x\in P\mid a\leq x\};\]
+\item a right-open downward interval $(-\infty,b)$ is defined as
+\[(-\infty,b)\coloneq\{x\in P\mid x<b\};\]
+\item a right-closed downward interval $(-\infty,b]$ is defined as
+\[(-\infty,b]\coloneq\{x\in P\mid x\leq b\};\]
+\item the interval $(-\infty,\infty)$ is defined as
+\[(-\infty,\infty)\coloneq P.\]
+\end{itemize}
+
+Right open intervals and left open intervals are collectively called half open intervals (半開區間). All intervals with at least one of the endpoint being $\infty$ or $-\infty$ are collectively called infinite intervals (無限區間).
+\end{itemize}
 \ssc{Ordinal number or ordinal (序數)}
 \sssc{Ordinal number or ordinal}
 The ordinal number or ordinal is a measurement of the order of an element of a strict well ordered set.
@@ -326,24 +334,84 @@ If an ordinal has a maximum $a$, then it is the next ordinal after $a$, then it 
 A nonzero ordinal that is not a successor is called a limit ordinal.
 \subsection{Cardinality (勢 or 計數) and Cardinal number or cardinal (基數 or 量)}
 \sssc{Cardinality and Cardinal number or cardinal}
-The cardinality is a measurement of the size of a set $A$, denoted as $|A|$ or $n(A)$.
+The cardinal number or cardinal is a measurement of the cardinality (size) of a set $A$, denoted as $|A|$ or $n(A)$.
 
 Two sets are said to be equinumerous or have the same cardinality if there exists a bijection between them.
 
-The cardinality of a finite set is the number of its elements.
+The cardinality of a finite set is the number of its elements. A cardinal that is not finite is called an infinite cardinal.
 
 Assuming the axiom of choice, the cardinality of a set $X$ is defined to be the least ordinal number $\alpha$ such that there is a bijection between $X$ and $\alpha$. This definition is known as the von Neumann cardinal assignment.
-
-To describe the cardinality of infinite sets, we use a system called cardinal number or cardinal, denoted in Aleph numbers $\aleph_0, \aleph_1, \aleph_2, \ldots \aleph_\omega, \aleph_{\omega+1}, \ldots$, in which the subscripts are ordinal numbers, defined as:
+\sssc{Aleph numbers}
+Aleph numbers, a system to describe infinite cardinals, denoted as $\aleph_0, \aleph_1, \aleph_2, \ldots \aleph_\omega, \aleph_{\omega+1}, \ldots$, in which the subscripts are ordinal numbers, are defined with:
 \bit
-\item $\aleph_0$ is defined as the cardinality of $\mathbb{N}_0$.
-\item For any successor ordinal $n$, $\aleph_n$ is defined inductively as:
-    \[\aleph_n=\min\{\kappa\mid\kappa>\aleph_{n-1}\}.\]
-\item For any limit ordinal $\lambda$, $\aleph_{\lambda}$ is defined as:
+\item $\aleph_0$ is defined as $\omega$;
+\item for any successor ordinal $n$, $\aleph_n$ is defined inductively as:
+\[\aleph_n=\min\{b\mid b\tx{\ is an cardinal and\ }b>\aleph_{n-1}\};\]
+\item for any limit ordinal $\lambda$, $\aleph_{\lambda}$ is defined as:
 \[\aleph_{\lambda}=\sup\{\aleph_{\alpha}\mid\alpha<\lambda}.\]
 \eit
+\sssc{Beth numbers}
+Beth numbers, a system to describe infinite cardinals, denoted as $\beth_0, \beth_1, \beth_2, \ldots \beth_\omega, \beth_{\omega+1}, \ldots$, in which the subscripts are ordinal numbers, are defined with:
+\bit
+\item $\beth_0$ is defined as $\aleph_0$;
+\item for any successor ordinal $n$, $\beth_n$ is defined inductively as:
+\[\beth_n=2^{\aleph_{n-1}};\]
+\item for any limit ordinal $\lambda$, $\aleph_{\lambda}$ is defined as:
+\[\aleph_{\lambda}=\sup\{\beth_{\alpha}\mid\alpha<\lambda}.\]
+\eit
 \sssc{Countable infinity (可數無限)}
-$\aleph_0$ is called the cardinality of countable infinity (可數無限勢). A set with the same cardinality of $\mathbb{N}$ is called to be countable infinite (可數無限的).
+The cardinality of $\mathbb{N}_0$, called the cardinality of countable infinity (可數無限勢), is $\aleph_0$. A set with the same cardinality of $\mathbb{N}$ is called to be countable infinite (可數無限的).
 \sssc{Uncountable infinity (不可數無限)}
-The cardinality of the set of real numbers $\mathbb{R}$, called the cardinality of continuity (連續勢), is $2^{\aleph_0}$, also denoted as $\mathfrak{c}$. A set with the same cardinality of $\mathbb{R}$ is called to be uncountable infinite (不可數無限的).
+The cardinality of $\mathbb{R}$, called the cardinality of continuity (連續勢), is $2^{\aleph_0}=\beth_1$, also denoted as $\mathfrak{c}$. A set with the same cardinality of $\mathbb{R}$ is called to be uncountable infinite (不可數無限的).
+\sssc{Continuum hypothesis (CH)}
+The continuum hypothesis (CH) states that, there is no set whose cardinality is strictly between that of the integers and the real numbers, that is, $2^{\aleph_0}=\aleph_1$.
+
+CH is independent from ZFC, that is, proving or disproving the CH within ZFC is impossible.
+\sssc{Generalized continuum hypothesis (GCH) or Cantor's aleph hypothesis}
+The generalized continuum hypothesis (GCH) or Cantor's aleph hypothesis states that, if a set's cardinality lies between that of an infinite set $S$ and that of the power set $P(S)$ of $S$, then it has the same cardinality as either $S$ or $P(s)$, that is, for any infinite cardinal $\lambda$, there is no cardinal $\kappa$ such that $\lambda <\kappa <2^{\lambda }$, that is, $\aleph _{\alpha +1}=2^{\aleph _{\alpha }}$ for every ordinal $\alpha$.
+
+GCH is independent from ZFC, that is, proving or disproving the GCH within ZFC is impossible.
+\ssc{Group theory (群論)}
+\sssc{Monoid (么半群, 單群, or 亞群)}
+A monoid is a set equipped with an operation that combines any two elements of the set to produce a third element within the same set such that the following conditions hold: the operation is associative, and it has an identity element.
+\sssc{Group (群)}
+A group is a set equipped with an operation that combines any two elements of the set to produce a third element within the same set such that the following conditions hold: the operation is associative, it has an identity element, and every element of the set has an inverse element.
+\sssc{Projection maps}
+The $k$-th projection map for a Cartesian product of $n$ sets:
+\[\prod_{i=1}^nX_i\]
+is the function $\pi_k$
+\[\pi_k\colon\prod_{i=1}^nX_i\to X_k;\;\pi_k(x_1,x_2,\ldots x_n)=x_k.\]
+\sssc{Dynamical system (動力系統 or 動態系統)}
+A dynamical system is a tuple $(T, X, \Phi)$ where $T$ is a monoid, written additively and with the independent variable $t$ in it called evolution parameter (演化參數), $X$ is a non-empty set, called the phase space (相空間) or state space (狀態空間) with the independent variable $x$ in it called phase (相) or state (狀態), and $\Phi$ is a function, called the evolution function (演化函數),
+\[\Phi(t,x)\colon U\subseteq(T\times X)\to X\]
+where $U$ is such that the second projection map $\pi_2$ for $T\times X$ satisfies
+\[\pi_2(U)=X,\]
+and for any $x \in X$:
+\[\Phi (0,x)=x,\]
+\[\Phi (t_{2},\Phi (t_{1},x))=\Phi (t_{2}+t_{1},x)\]
+for any $t_{1},t_{2}+t_{1}\in I(x)$ and $t_{2}\in I(\Phi (t_{1},x))$ in which
+\[I(x)\coloneq\{t\in T\mid(t,x)\in U\}\]
+for any $x\in X$.
+\sssc{Orbit (軌道)}
+Given a dynamical system $(T, X, \Phi)$ with
+\[\Phi(t,x)\colon U\subseteq(T\times X)\to X\]
+and
+\[I(x)\coloneq\{t\in T\mid(t,x)\in U\}.\]
+The set
+\[\gamma _{x}\coloneq\{\Phi (t,x)\colon t\in I(x)\}\subset X\]
+is called the orbit through $x$.
+
+An orbit which consists of a single point is called constant orbit; a non-constant orbit is called closed or periodic if there exists $t\neq 0\in I(x)$ such that $\Phi (t,x)=x$ for any $x\in X$.
+\sssc{Velocity field (速度場)}
+The velocity field of a dynamical system $(T, X, \Phi)$ with 
+\[\Phi(t,x)\colon U\subseteq(T\times X)\to X\]
+is the function 
+\[f(x)=\pdv{\Phi}{t}\big\vert_{t=0}.\]
+\sssc{Equilibria (平衡點)}
+The equilibria of a dynamical system $(T, X, \Phi)$ is the equilibria of the velocity field of it.
+\sssc{Phase portrait (相圖)}
+Given a dynamical system $(T, X, \Phi)$, the phase portrait is a geometric representation of the collection of all orbits $\gamma$ through any $x\in X$.
+
+{{{How to
+
 \end{document}
