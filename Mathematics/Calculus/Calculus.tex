@@ -860,6 +860,17 @@ A cusp is a point $x$ on the graph of a real function $f$ such that:
 \item $x$ is not a vertical tangent of $f$, and
 \item the left-hand derivative and the right-hand derivative of $f$ at $x$ are both either finite, $\infty$, or $-\infty$.
 \eit
+\ssc{Differential Equation (微分方程)}
+\sssc{Differential Equation}
+An equation containing the derivatives of one or more unknown functions or dependent variables, with respect to one or more independent variables, is said to be a differential equation (DE).
+
+Unless otherwise specified, the unknown functions or dependent variables are in $\mathbb{R}^n$ with $n\in\mathbb{N}$, and the independent variables are in $\matbbb{R}$.
+\sssc{Ordinary differential equation (ODE) (常微分方程)}
+If a differential equation contains only ordinary derivatives of one or more unknown functions with respect to a single independent variable, it is said to be an ordinary differential equation (ODE).
+\sssc{Partial differential equation (PDE) (偏微分方程)}
+If a DE contains partial derivatives of one or more unknown functions of two or more independent variables is called a partial differential equation (PDE).
+\sssc{Order of a DE}
+The order of a differential equation is the order of the highest derivative in the equation.
 
 
 
@@ -869,9 +880,9 @@ The integral of a function $f$, called integrand (被積函數), with respect to
 \[\int_a^bf\dd{x}.\]
 The integral of a function $f$ with respect to $\omega$ over $\Omega$, called the domain of integration and which the limit points of $\Omega$ are called are called limits of integration (積分極限), is denoted as
 \[\int_{\Omega}f\dd{\omega}.\]
-\subsection{Riemann integral (黎曼積分) and Darboux integral (達布積分)}
+\subsection{(Proper) Riemann integral (黎曼積分) and Darboux integral (達布積分)}
 \sssc{Premise}
-Riemann integral and Darboux integral are two equivalant definitions of definite integral of functions over compact intervals of $\mathbb{R}$ to $\mathbb{R}$.
+(Proper) Riemann integral and Darboux integral are two equivalant definitions of definite integral of functions over compact intervals of $\mathbb{R}$ to $\mathbb{R}$.
 \subsubsection{Partition of an interval}
 A partition $P(x, n)$ of a compact interval $[a,b]$ is a finite sequence of numbers of the form
 \[P(x, n):=\{x_i\colon x_0=a\land x_n=b\land\forall 1\leq i<j\leq n\colon x_i<x_j\}_{i=0}^n.\]
@@ -1667,19 +1678,9 @@ When $\frac{\mathrm{d}^4f(x)}{\mathrm{d}x^4}$ is continuous on $[a,b]$, the erro
 
 
 
-\section{Differential Equation (微分方程)}
-\ssc{Introduction}
-\sssc{Differential Equation}
-An equation containing the derivatives of one or more unknown functions or dependent variables, with respect to one or more independent variables, is said to be a differential equation (DE).
-
-Unless otherwise specified, the unknown functions or dependent variables are in $\mathbb{R}^n$ with $n\in\mathbb{N}$, and the independent variables are in $\matbbb{R}$.
-\sssc{Ordinary differential equation (ODE) (常微分方程)}
-If a differential equation contains only ordinary derivatives of one or more unknown functions with respect to a single independent variable, it is said to be an ordinary differential equation (ODE).
-\sssc{Partial differential equation (PDE) (偏微分方程)}
-If a DE contains partial derivatives of one or more unknown functions of two or more independent variables is called a partial differential equation (PDE).
-\sssc{Classification of DEs by order}
-The order of a differential equation is the order of the highest derivative in the equation.
-\sssc{Dynamical system (動力系統 or 動態系統)}
+\sct{Ordinary differential equation (ODE) (常微分方程) and continuous-time dynamical system (連續時間動力系統)}
+\ssc{Dynamical system (動力系統 or 動態系統)}
+\sssc{Dynamical system}
 A dynamical system is a tuple $(T, X, \Phi)$ where $T$ is a monoid, written additively and with the independent variable $t$ in it called evolution parameter (演化參數) or time, $X$ is a non-empty set, called the phase space (相空間) or state space (狀態空間) with the independent variable $x$ in it called (system) phase (相) or state (狀態), and $\Phi$ is a function, called the evolution function (演化函數) or flow,
 \[\Phi(t,x)\colon U\subseteq(T\times X)\to X\]
 where $U$ is such that the second projection map $\pi_2$ for $T\times X$ satisfies
@@ -1716,7 +1717,7 @@ Given a dynamical system $(T, X, \Phi)$, the phase portrait is a geometric repre
 For an autonomous continuous-time dynamical system, one usually plots the space $X$, marks equilibria, and draw arrows at each point $x$ in a grid indicating $f(x)$ at it.
 
 Specifically, a phase portrait for an autonomous continuous-time dynamical system in which $X=\mathbb{R}$ is also called a phase line.
-\ssc{Ordinary differential equation (ODE) and continuous-time dynamical system}
+\ssc{Ordinary differential equation (ODE)}
 \sssc{Differential form of first-order ODEs}
 For a first-order ODE of a dependent variable $y$ with respect to an independent variable $x$,
 \[M(x,y)=-N(x,y)\dv{y}{x},\]
@@ -1805,20 +1806,21 @@ For a system of autonomous first-order ODEs $\dv{y}{x}=f(y)$, we say that a poin
 If $c$ is a critical point, then $y(x)=c$ is a constant solution of the system of autonomous first-order ODEs.
 
 If $c$ is a critical point and $f$ is locally Lipschitz at $c$, then $y(x)=c$ is the unique solution of the system of autonomous first-order ODEs through $c$.
+\ssc{Continuous-time dynamical systems}
 \sssc{Systems of first-order ODEs as evolution rule of continuous-time dynamical systems}
 Consider a system of first-order ODEs:
 \[\dv{x}{t}=f(t,x), \quad x\in\mathbb{R}^n\land f\colon\mathbb{R}\times\mathbb{R}^n\to\mathbb{R}^n.\]
 
 Let $U\subseteq\mathbb{R}\times\mathbb{R}^n$ be the set such that for any $(t_0,x_0)$ in $U$, $t_0$ is in the interval of definition of the solution of it with the initial condition $x(0)=x_0$ and that the solution is unique, and $x(t;x_0)$ be the solution of it with the initial condition $x(0)=x_0$.
 
-Then the dynamical system represented by it has phase space $\mathbb{R}^n$, evolution parameter $t$, phase or state $x$, and evlotion function $\Phi\colon U\to\mathbb{R}^n;\Phi(t,x_0)=x(t;x_0)$. And the system of ODEs is called the evolution rule of the dynamical system.
+Then the dynamical system represented by it has phase space $\mathbb{R}^n$, evolution parameter $t$, phase or state $x$, and evlotion function $\Phi\colon U\to\mathbb{R}^n;\Phi(t,x_0)=x(t;x_0)$. The system of ODEs is called the evolution rule of the dynamical system, and the dynamical system is called to be defined by the system of ODEs.
 \sssc{Systems of autonomous first-order ODEs as evolution rule of autonomous continuous-time dynamical systems}
 Consider a system of autonomous first-order ODEs:
 \[\dv{x}{t}=f(x), \quad x\in\mathbb{R}^n\land f\colon\mathbb{R}^n\to\mathbb{R}^n.\]
 
 Let $U\subseteq\mathbb{R}\times\mathbb{R}^n$ be the set such that for any $(t_0,x_0)$ in $U$, $t_0$ is in the interval of definition of the solution of it with the initial condition $x(0)=x_0$ and that the solution is unique, and $x(t;x_0)$ be the solution of it with the initial condition $x(0)=x_0$.
 
-Then the dynamical system represented by it has phase space $\mathbb{R}^n$, evolution parameter $t$, phase or state $x$, and evlotion function $\Phi\colon U\to\mathbb{R}^n;\Phi(t,x_0)=x(t;x_0)$. And the system of ODEs is called the evolution rule of the dynamical system.
+Then the dynamical system represented by it has phase space $\mathbb{R}^n$, evolution parameter $t$, phase or state $x$, and evlotion function $\Phi\colon U\to\mathbb{R}^n;\Phi(t,x_0)=x(t;x_0)$. The system of ODEs is called the evolution rule of the dynamical system, and the dynamical system is called to be defined by the system of ODEs.
 \sssc{(Lyapunov) stable, Asymptotically stable, Exponentially stable, Semi-stable, and Unstable equilibria}
 Let $x^*$ be an equilibrium of an autonomous continuous-time dynamical system defined by the evlotion rule $\dv{x}{t}=f(x)$. Then
 \bit
