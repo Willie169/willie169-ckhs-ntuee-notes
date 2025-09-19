@@ -539,7 +539,7 @@ Let $X$ and $Y$ be topological spaces and function $f\colon I\subseteq X\to Y$ b
 Let $f\colon D\subseteq\mathbb{R}\to\mathbb{R}$ be a function. If there exists a family $\{[a_i,b_i]\mid i\in I\}$ of closed intervals such that:
 \begin{itemize}
 \item for every closed interval $V$, the set $\{i\in I\mid V\cap [a_i,b_i]\neq\varnothing\}$ is finite (some sources require instead that $n(I)$ is finite, which is stronger),
-\item $D\subseteq\bigcup_{i\in I}[a_i,b_i]$,
+\item $D=\bigcup_{i\in I}[a_i,b_i]$,
 \item function $f\big\vert_{a_i}^{b_i}\colon(a_i,b_i)\to Y$ is continuous for every $i\in I$, and
 \item there exist finite $\lim_{x\to a_i^{\phantom{i}+}}f(x)$ and $\lim_{x\to b_i^{\phantom{i}-}}f(x)$ for every $i\in I$.
 \end{itemize},
@@ -547,7 +547,7 @@ we say $f$ is piecewise continuous (on $\bigcup_{i\in I}[a_i,b_i]$).
 \sssc{Piecewise continuity of functions between topological spaces}
 Let $X$ and $Y$ be topological spaces, and $f\colon D\subseteq X\to Y$ be a function. If there exists a locally finite (some sources require instead finite, which is stronger) family $\{U_i\mid i\in I\}$ of closed subsets of $X$ such that:
 \begin{itemize}
-\item $D\subseteq\bigcup_{i\in I}U_i$, and
+\item $D=\bigcup_{i\in I}U_i$, and
 \item there exists a function $g_i\colon U_i\to Y$ that is continuous on $U_i$ such that $\forall x\in\operatorname{int}\left(U_i\right)f(x)=g_i(x)$ for every $i\in I$.
 \end{itemize},
 we say $f$ is piecewise continuous (on $\bigcup_{i\in I}U_i$).
@@ -871,7 +871,7 @@ The integral of a function $f$ with respect to $\omega$ over $\Omega$, called th
 \[\int_{\Omega}f\dd{\omega}.\]
 \subsection{Riemann integral (黎曼積分) and Darboux integral (達布積分)}
 \sssc{Premise}
-Riemann integral and Darboux integral are two definitions of definite integral of functions over compact intervals of $\mathbb{R}$ to $\mathbb{R}$.
+Riemann integral and Darboux integral are two equivalant definitions of definite integral of functions over compact intervals of $\mathbb{R}$ to $\mathbb{R}$.
 \subsubsection{Partition of an interval}
 A partition $P(x, n)$ of a compact interval $[a,b]$ is a finite sequence of numbers of the form
 \[P(x, n):=\{x_i\colon x_0=a\land x_n=b\land\forall 1\leq i<j\leq n\colon x_i<x_j\}_{i=0}^n.\]
@@ -901,13 +901,15 @@ Let $f$ be a real-valued function defined on a interval $[a,b]$. The Riemann int
 \subsubsection{Darboux integral}
 Let $f$ be a real-valued function defined on a interval $[a,b]$. The Darboux integral of $f$ on $[a,b]$ exists and equals $s$ if for all $\varepsilon > 0$, there exists $\delta > 0$ such that for any partition $P$ whose mesh is less than $\delta$,
 \[\abs{U(f,P)-s}<\varepsilon \land \abs{L(f,P)-s}<\varepsilon.\]
-\subsubsection{Improper integral (瑕積分)}
-$\int _{a}^{b}f(x)\dd{x}$ is an improper integrals if one or more of below conditions occur:
+\sssc{Lebesgue-Vitali theorem (of characterization of the Riemann integrable functions)}
+A function on bounded a compact interval $I$ is Riemann integrable (i.e. Darboux integrable) over $I$ if and only if it is continuous almost everywhere in $I$.
+\ssc{Extensions of Riemann integral}
+\sssc{Improper (Riemann) integral (瑕（黎曼）積分)}
+An integral $\int _{a}^{b}f(x)\dd{x}$ is an improper integral if one or more of the below conditions occur:
 \ben
 \item $a=-\infty$,
 \item $b=\infty$,
-\item $f(x)$ is unbounded on $[a,b]$,
-\item $f(x)$ is discontinuous or undefined at somewhere in $(a,b)$.
+\item $f(x)$ is unbounded or undefined somewhere in $[a,b]$.
 \een
 
 The improper integrals are defined by limits as:
@@ -916,11 +918,11 @@ The improper integrals are defined by limits as:
 \[\int _{-\infty }^bf(x)\dd{x}=\lim _{a\to -\infty }\int _{a}^{b}f(x)\dd{x},\]
 \item for $b=\infty$:
 \[\int _{a}^{\infty }f(x)\dd{x}=\lim _{b\to \infty }\int _{a}^{b}f(x)\dd{x},\]
-\item for $f(x)$ that is not continuous from the right at $a$:
+\item for $f(x)$ that is unbounded or undefined at $a$:
 \[\int_a^bf(x)\dd{x}=\lim_{c\to a^+}\int_c^bf(x)\dd{x},\]
-\item for $f(x)$ that is not continuous from the left at $b$:
+\item for $f(x)$ that is unbounded or undefined at $b$:
 \[\int_a^bf(x)\dd{x}=\lim_{c\to b^-}\int_a^cf(x)\dd{x},\]
-\item for $f(x)$ that is discontinuous or undefined at $c\in(a,b)$:
+\item for $f(x)$ that is unbounded or undefined at $c\in(a,b)$:
 \[\int _{a}^{b}f(x)\dd{x}=\lim_{t\to c^-}\int _{a}^{t}f(x)\dd{x}+\lim_{t\to c^+}\int _{t}^{b}f(x)\dd{x},\]
 \eit
 in which if any of the terms diverge or is undefined, the improper integral diverges and is undefined; otherwise, the improper integral exists finitely and converges to a finite value.
@@ -930,16 +932,18 @@ $\lim _{a\to -\infty }\int _{a}^{b}f(x)\dd{x}$ converges absolutely to $L$ if $\
 $\lim _{b\to \infty }\int _{a}^{b}f(x)\dd{x}$ converges absolutely to $L$ if $\exists\lim _{b\to \infty }\int _{a}^{b}f(x)\dd{x}\land\lim _{b\to \infty }\int _{a}^{b}f(x)\dd{x}=L$.
 
 If an improper integral is convergent but not convergent absolutely, we say it converges conditionally.
-\sssc{Cauchy principal value or PV integral}
+\sssc{Cauchy principal value (柯西主值) or PV integral}
 The Cauchy principal value or PV integral, denoted as p.v., is a weaker notion of convergence, defined by taking symmetric limits. 
 
 The p.v. of $\int _{-\infty}^{\infty}f(x)\dd{x}$, denoted as $\text{p.v.\ }\int_{-\infty}^{\infty} f(x)\dd{x}$, is defined with:
 \[\text{p.v.\ }\int_{-\infty}^{\infty} f(x)\dd{x}\coloneq\lim_{R\to\infty} \int_{-R}^{R} f(x)\dd{x},\]
 if the limit exists.
 
-The p.v. of $\int _{a}^{b}f(x)\dd{x}$, in which $f(x)$ is undefined or discontinuous at $c$ and $a<c<b$, denoted as $\text{p.v.\ }\int_{a}^{b} f(x)\dd{x}$, is defined with:
+The p.v. of $\int _{a}^{b}f(x)\dd{x}$, in which $f(x)$ is unbounded or undefined at $c\in (a,b)$, denoted as $\text{p.v.\ }\int_{a}^{b} f(x)\dd{x}$, is defined with:
 \[\text{p.v.\ }\int_{a}^{b} f(x)\dd{x}\coloneq\lim_{\epsilon\to 0}\qty(\int_a^{c-\epsilon}f(x)\dd{x}+\int_{c+\epsilon}^bf(x)\dd{x}),\]
 if the limit exists.
+
+If an improper integral converges, the p.v. of it converges.
 \subsection{Lebesgue integral (勒貝格積分)}
 A definition of definite integral.
 \sssc{Premise}
@@ -987,8 +991,6 @@ Let $f$ be a function on some measurable subset $B$ of $E$ into $\mathbb{R}\cup\
 If
 \[\int |f|\,\mathrm {d} \mu <\infty ,\]
 we say that $f$ is Lebesgue integrable.
-\ssc{Lebesgue-Vitali theorem (of characterization of the Riemann integrable functions)}
-A function on bounded a compact interval $I$ is Riemann integrable over $I$ if and only if it is continuous almost everywhere in $I$.
 \sssc{$L^p$ spaces ($L^p$ 空間)}{{{
 
 \ssc{Bochner integral (博赫納積分)}
