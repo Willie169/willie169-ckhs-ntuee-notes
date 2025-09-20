@@ -11,75 +11,97 @@
 \ssc{Binary relation}
 \sssc{Binary relation or correspondence}
 A binary relation or correspondence $R$ over sets $X$ and $Y$ is a subset of $X\times Y$. The set $X$ is called the domain or set of departure of $R$, and the set $Y$ the codomain or set of destination of $R$. In order to specify the choices of the sets $X$ and $Y$, some authors define a binary relation or correspondence as an ordered triple $(X,Y,G)$, where $G$ is a subset of $X\times Y$ called the graph of the binary relation. The statement $(x,y)\in R$ reads "$x$ is $R$-related to $y$" and is denoted by $xRy$. The domain of definition or active domain of $R$ is the set of all $x\in X$ such that there exists $y\in Y$ such that $xRy$. The codomain of definition, active codomain, image, or range of $R$ is the set of all $y\in Y$ such that there exists $x\in X$ such that $xRy$. The field of $R$ is the union of its domain of definition and its codomain of definition.
-\sssc{Transitive (binary) relation
-{{{
-\ssc{Equivalence relation (等價關係)}
-\sssc{Equicalence relation}
-An equivalence relation on a set $X$ is a binary relation $\cong$ on $X$ satisfying the three properties:
+\sssc{Homogeneous relation or endorelation}
+A homogeneous relation or endorelation on a set $X$ is a binary relation between $X$ and itself, i.e. it is a subset of $X^2$, commonly phrased as "a (binary) relation on/over X".
+\sssc{Transitive relation}
+A homogeneous relation $R$ on the set $X$ is a transitive relation if
+\[\forall a, b, c \in X\colon (aRb\land bRc)\implies aRc.\]
+\sssc{Incomparability}
+For a homogeneous relation $R$ on the set $X$, the homogeneous relation "incomparable with respect to $R$" is defined as "$a$ and $b$ in $X$ are incomparable with respect to $R$ if and only if $(\neg aRb)\land (\neg bRa)$".
+\sssc{Important properties}
+Some important properties that a homogeneous relation $R$ over a set $X$ may have include: for all $a,b,c\in X$,
 \bit
-\item Reflexivity:
-\[\forall a\in X\colon a\cong a,\]
-\item Symmetry:
-\[\forall a,b\in X\colon a\cong b\implies b\cong a,\]
-\item Transitivity:
-\[\forall a,b,c\in X\colon a\cong b\land b\cong a\implies a\cong c.\]
+\item Reflexive: $aRa$,
+\item Irreflexive or anti-reflexive: $\neq aRa$,
+\item Symmetric: $aRb\implies bRa$,
+\item Asymmetric: $aRb\implies \neg bRa$ (which implies irreflexivity),
+\item Antisymmetric: $aRb\land bRa\implies a=b$,
+\item Transitive: $(aRb\land bRc)\implies aRc$,
+\item Transitivity of incomparability or comparability modulo equivalence: the homogeneous relation "imcomparable with respect to $R$" is transitive, that is, an equivalence relation.
+\item Connected: $a\neq b\implies (aRb\lor bRa)$ (which implies transitivity of incomparability),
+\item Strongly connected or total: $aRb\lor bRa$ (which implies reflexivity and connectivity),
+\item Dense: $aRb\implies (\exists z\in X\text{\ s.t.\ }aRz\land zRb$,
+\item Well-founded: for every non-empty subset $S\subseteq X$, there exists some $m\in S$ such that $mRs$ for all $s\in S\setminus\{m\}$.
 \eit
-\sssc{Equivalence classs (等價類)}
+\ssc{Equivalence relation (等價關係)}
+\sssc{Equivalence relation}
+An equivalence relation on a set $X$ is a binary relation on $X$ that is reflexive, symmetric, and transitive, often denoted as $\cong$, $=$, $\equiv$, or $\sim$.
+\sssc{Equivalence class (等價類)}
 An equivalence class of an element $a$ in a set $X$ under an equivalance relation $\cong$ on $X$ is defined as
-\[[a]=\{x\in X\mid a\cong x\}.}\]
+\[[a]=\{x\in X\mid a\cong x\}.\]
 \sssc{Quotient set (商集)}
 The quotient set $Y=X/\cong$ is the set of equivalence classes of elements of $X$ under equivalence relation $\cong$. 
-\ssc{Ordered sets}
+\ssc{Order (序)}
 \sssc{Ordered set (序集)}
-An ordered set is an ordered pair $P=(X,\leq )$ (or $P=(X,<)$) consisting of a set $X$, called the ground set of $P$, and an order (序) $\leq$ (or $<$), in which an order is a binary relation between two elements in $X$.
+An ordered set is an ordered pair $P=(X,\leq )$ (or $P=(X,<)$) consisting of a set $X$, called the ground set of $P$, and an order (序), aka ordering, $\leq$ (or $<$), in which an order is a transitive relation on $X$.
 
-A non-strict order $\leq$ is an order such that $a=b\implies a\leq b$; a strict order $<$ is an order such that $a<b\implies a!=b$. An ordered set defined with a non-strict order is called a non-strictly ordered set; an ordered set defined with a strict order is called a strictly ordered set.
+When the meaning is clear from context and there is no ambiguity about the order, the ground set itself can sometimes represents the whole ordered set.
+\sssc{Preorder (預序), quasiorder, or quasi-order}
+A preorder, quasiorder, or quasi-ordering is a transitive relation $\leq$ that is reflexive. 
 
-Unless otherwise specified,
-\bit
-\item an order denoted as $\leq$ is a non-strict order;
-\item an order denoted as $<$ is a strict order;
-\item an order without notation or explanation that makes it a strict order is considered a non-strict order;
-\item for an non-strictly ordered set with order $\leq$, $\geq$ is defined as a binary relation between two elements $a,b$ in it such that $a\leq b\iff b\geq a$;
-\item for an strictly ordered set with order $<$, $>$ is defined as a binary relation between two elements $a,b$ in it such that $a<b\iff b>a$;
-\item for an strictly ordered set with order $<$, a non-strict order $\leq$ is defined as a binary relation between two elements $a,b$ in it such that $a\leq b\iff a<b\lor a=b$; and
-\item for a specefic type $P$ of ordered sets (e.g. preordered set), strictly $P$ (e.g. strictly preordered set) is a type of strictly ordered set defined with the same definition of $P$ but replace non-strict order $\leq$ with strict order $<$ and remove the requirement of antisymmetry (if any).
-\eit
+A set equipped with a preorder is called a preordered set, preset, quasiordered set, or quasi-ordered set.
+\sssc{Total preorder (全預序), total quasiorder, or total quasi-order}
+A total preorder is a transitive relation $\leq$ that is strongly connected.
 
-When the meaning is clear from context and there is no ambiguity about the order, the groud set itself can sometimes represent the whole ordered set.
-\sssc{Preordered set (預序集), preset, or quasiordered set}
-A preordered set is an ordered pair $P=(X,\leq )$ consisting of a set $X$ and a preorder (預序), aka, quasiorder, $\leq$ on $X$, that is, for all $a,b,c\in X$ it must satisfy:
-\bit
-\item Reflexivity: $a\leq a$, and
-\item Transitivity: $a\leq b\implies a+c\leq b+c$.
-\eit
-\sssc{Partially ordered set (偏序集) or poset}
-A partially ordered set is an ordered pair $P=(X,\leq )$ consisting of a set $X$ and a partial order (偏序) $\leq$ on $X$, that is, for all $a,b,c\in X$ it must satisfy:
-\begin{enumerate}
-\item Reflexivity: $a\leq a$, i.e. every element is related to itself.
-\item Antisymmetry: $a\leq b\land b\leq a\implies a=b$, i.e. no two distinct elements precede each other.
-\item Transitivity: $a\leq b\land b\leq c\implies a\leq c$.
-\end{enumerate}
+A set equipped with a total preorder is called a totally preordered set, totally preset, totally quasiordered set, or totally quasi-ordered set.
+\sssc{Partial order (偏序)}
+A partial order is a transitive relation $\leq$ that is reflexive and antisymmetric.
+
+A set equipped with a partial order is called a partially ordered set or poset.
 \sssc{Upward closure}
 Let $A$ be a subset of a poset $X$, the upward closure of $A$, denoted as $\uparrow A$, is defined as:
 \[\uparrow A \coloneq \{ x \in X \mid\exists a \in A \text{\ s.t.\ } a \leq x \}.\]
-\sssc{Totally ordered set (全序集) or linearly ordered set (線性順序集)}
-A totally ordered set is an ordered pair $P=(X,\leq )$ consisting of a set $X$ and a total order (全序), aka, linear order (線性順序), $\leq$ on $X$, that is, for all $a,b,c\in X$ it must satisfy:
-\begin{enumerate}
-\item Reflexivity: $a\leq a$, i.e. every element is related to itself.
-\item Antisymmetry: $a\leq b\land b\leq a\implies a=b$, i.e. no two distinct elements precede each other.
-\item Transitivity: $a\leq b\land b\leq c\implies a\leq c$.
-\item Strongly connectivity or totality: $a\leq b\lor b\leq a$.
-\end{enumerate}
+\sssc{Strict partial order, strict preorder, strict quasiorder, or strict quasi-order}
+A strict partial order, strict preorder, strict quasiorder, or strict quasi-order is a transitive relation $<$ that is asymmetric.
+
+A set equipped with a strict partial order is called a strictly partially ordered set, strictly preordered set, strictly preset, strictly quasiordered set, or strictly quasi-ordered set.
+
+A strict partial order $<$ can be induced from a preorder $\leq$ with $a<b\iff(a\leq b\land \neg(b\leq a)$. A partial order $\leq$ can be induced from a strict partial order $<$ and an equivalence relation $=$ with $a\leq b\iff(a<b\lor a=b)$.
+\sssc{Strict weak order}
+A strict weak order is a transitive relation $<$ that is asymmetric and with transitivity of incomparability.
+
+A strict weak order $<$ can be induced from a preorder $\leq$ with $a<b\iff(a\leq b\land \neg(b\leq a)$. A partial order $\leq$ can be induced from a strict weak order $<$ with $a\leq b\iff(a<b\lor a=b)$ where $=$ denotes the equivalence relation "incomparable with respect to $<$".
+\sssc{Total order (全序) or linear order (線性順序)}
+A total order or linear order is a transitive relation $\leq$ that is strongly connected and antisymmetric.
+
+A set equipped with a total order is called a totally ordered set or linearly ordered set.
+\sssc{Strict total order, strict linear order, or strict total preorder}
+A strict total order, strict linear order, or strict total preorder is a transitive relation $<$ that is asymmetric and connected.
+
+A set equipped with a strict total order is called a strictly totally ordered set, strictly linearly ordered set, or strictly totally preordered set.
+
+A strict total order $<$ can be induced from a total preorder $\leq$ with $a<b\iff(a\leq b\land \neg(b\leq a)$. A total order $\leq$ can be induced from a strict total order $<$ with $a\leq b\iff(a<b\lor a=b)$ where $=$ denotes the equivalence relation "incomparable with respect to $<$".
 \sssc{Ordered field (有序域)}
 A field $(F,+,\cdot)$ together with a total order $\leq$ on $F$ is an ordered field if the order satisfies the following properties for all $a,b,c\in F$:
 \begin{enumerate}
 \item $a\leq b\implies a+c\leq b+c$.
 \item $0\leq a\land 0\leq b\implies 0\leq a\cdot b$.
 \end{enumerate}
-As usual, we write $a<b$ for $a\leq b$ and $a\neq b$. The notations $b\geq a$ and $b>a$ stand for $a\leq b$ and $a<b$, respectively. Elements $a\in F$ with $a>0$ are called positive.
-\sssc{Well ordered set, well-ordered set, or woset (良序集)}
-A well ordered set is a totally ordered set such that every non-empty subset of it has a least element in its order. The order of a woset is called a well order or well-order.
+Elements $a\in F$ with $a>0$ are called positive; $a\in F$ with $a<0$ are called negative.
+\sssc{Prewellorder (預良序)}
+A prewellorder is a transitive relation $\leq$ that is strongly connected and well-founded.
+
+A set equipped with a prewellorder is called a prewellordered set.
+\sssc{Well order or well-order (良序)}
+A well order or well-order is a transitive relation $\leq$ that is strongly connected, antisymmetric, and well-founded.
+
+A set equipped with a well-order is called a well ordered set, well-ordered set, or woset.
+\sssc{Strict well order or strict well-order}
+A strict well order or strict well-order is a transitive relation $<$ that is asymmetric, connected, and well-founded.
+
+A set equipped with a strict well order is called a strictly well ordered set or strictly well-ordered set.
+
+A strict well order $<$ can be induced from a prewellorder $\leq$ with $a<b\iff(a\leq b\land \neg(b\leq a)$. A well order $\leq$ can be induced from a strict well order $<$ with $a\leq b\iff(a<b\lor a=b)$ where $=$ denotes the equivalence relation "incomparable with respect to $<$".
 \sssc{Order homomorphism or Order-preserving function}
 Given two posets $(S,\leq _{S})$ and $(T,\leq _{T})$, an order homomorphism or order-preserving function from $(S,\leq _{S})$ to $(T,\leq _{T})$ is a function $f$ from $S$ to $T$ with the property that, for every $x,y\in S$, $x \leq_S y$ implies $f(x)\leq _{T}f(y)$.
 \sssc{Order isomorphism}
@@ -102,18 +124,26 @@ $m$ is an lower bound of a preset $A$ if $a\geq m$ for every $a\in A$. We say a 
 $m$ is an lower bound of a function $f$ of which the range is a preset if $m$ is an lower bound of its range. We say a function is bounded-below by $m$ if it has an lower bound $m$.
 
 $m$ is an lower bound of a function $f$ of which the range is a preset on a subset $I$ of its domain if $m$ is an lower bound of $f(I)$. We say a function is bounded-below by $m$ on a subset $I$ of its domain if it has an lower bound $m$ on $I$.
-\sssc{Supremum or Least Upper Bound (最小上界)}
-The supremum or least upper bound of a preset $A$, denoted as $\sup A$, is defined as $M_0$ in the set $\mathcal{M}$ of all upper bounds of $A$ such that $\forall M\in\mathcal{M}\colon M_0\leq M$.
+\sssc{Supremum, join, or Least Upper Bound (最小上界)}
+The supremum, join, or least upper bound of a preset $A$, denoted as $\sup A$, is defined as $M_0$ in the set $\mathcal{M}$ of all upper bounds of $A$ such that $\forall M\in\mathcal{M}\colon M_0\leq M$.
 
 The supremum or least upper bound of a function $f$ of which the range is a preset, denoted as $\sup_xf(x)$, is defined as $M_0$ in the set $\mathcal{M}$ of all upper bounds of $f$ such that $\forall M\in\mathcal{M}\colon M_0\leq M$.
-\sssc{Infimum or Greatest Lower Bound (最大下界)}
-The infimum or greatest lower bound of a preset $A$, denoted as $\inf A$, is defined as $m_0$ in the set $\mathcal{M}$ of all lower bounds of $A$ such that $\forall m\in\mathcal{M}\colon m_0\geq m$.
+\sssc{Infimum, meet, or Greatest Lower Bound (最大下界)}
+The infimum, meet, or greatest lower bound of a preset $A$, denoted as $\inf A$, is defined as $m_0$ in the set $\mathcal{M}$ of all lower bounds of $A$ such that $\forall m\in\mathcal{M}\colon m_0\geq m$.
 
 The infimum or greatest lower bound of a function $f$ of which the range is a preset, denoted as $\inf_xf(x)$, is defined as $m_0$ in the set $\mathcal{M}$ of all lower bounds of $f$ such that $\forall m\in\mathcal{M}\colon m_0\geq m$.
 \sssc{Bounded (有界的)}
-We say a preset or a function of which the range is a preset is bounded if it is bounded-above and bounded-below.
+We say a preset or a function of which the range is a preset of which the range is a preset is bounded if it is bounded-above and bounded-below.
 
-We say a function is bounded on a subset $I$ of its domain if it is bounded-above and bounded-below on $I$.
+We say a function of which the range is a preset is bounded on a subset $I$ of its domain if it is bounded-above and bounded-below on $I$.
+
+We say a function $f$ of which the range is a preset is unbounded at a point $a$ in its domain if $f$ is unbounded on all neighborhood of $a$.
+\sssc{Join-semilattice}
+A join-semilattice is a partially ordered set such that every two-element $\{a,b\}$ subset has a join.
+\sssc{Meet-semilattice}
+A meet-semilattice is a partially ordered set such that every two-element $\{a,b\}$ subset has a meet.
+\sssc{Lattice}
+A lattice is a partially ordered set such that every two-element $\{a,b\}$ subset has a join and a meet.
 \sssc{Directed set (有向集), directed preset (有向預序集), or filtered set}
 A directed set is a preset in which every finite subset has an upper bound.
 \sssc{Intervals (區間)}
@@ -146,16 +176,4 @@ For a strictly partially ordered set $(P,<)$ and $a,b\in P$,
 \end{itemize}
 
 Right open intervals and left open intervals are collectively called half open intervals (半開區間). All intervals with at least one of the endpoint being $\infty$ or $-\infty$ are collectively called infinite intervals (無限區間).
-\ssc{Algebraic structures (代數結構) or algebraic system (代數系統)}
-\sssc{Algebraic structure or algebraic system}
-An algebraic structure or algebraic system consists of a nonempty set $A$ (called the underlying set, carrier set or domain), a collection of operations on $A$ (typically binary operations such as addition and multiplication), and a finite set of identities (known as axioms) that these operations must satisfy.
-\sssc{Monoid (么半群, 單群, or 亞群)}
-A monoid is a set equipped with an operation that combines any two elements of the set to produce a third element within the same set such that the following conditions hold: the operation is associative, and it has an identity element.
-\sssc{Group (群)}
-A group is a set equipped with an operation that combines any two elements of the set to produce a third element within the same set such that the following conditions hold: the operation is associative, it has an identity element, and every element of the set has an inverse element.
-\sssc{Projection maps}
-The $k$-th projection map for a Cartesian product of $n$ sets:
-\[\prod_{i=1}^nX_i\]
-is the function $\pi_k$
-\[\pi_k\colon\prod_{i=1}^nX_i\to X_k;\;\pi_k(x_1,x_2,\ldots x_n)=x_k.\]
 \end{document}
