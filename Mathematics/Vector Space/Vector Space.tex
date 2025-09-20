@@ -1,0 +1,290 @@
+\documentclass[a4paper,12pt]{article}
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{3}
+\input{/usr/share/LaTeX-ToolKit/template.tex}
+\begin{document}
+\title{Vector Space}
+\author{沈威宇}
+\date{\temtoday}
+\titletocdoc
+\sct{Vector Space (向量空間)}
+\ssc{Vector space}
+\sssc{Vector space or Linear space (線性空間)}
+A vector space over a field $F$ is a non-empty set $V$ together with a binary operation and a binary function that satisfy the eight axioms listed below. In this context, the elements of $V$ are commonly called vectors, and the elements of $F$ are called scalars.
+
+The binary operation, called vector addition or simply addition assigns to any two vectors $v$ and $w$ in $V$ a third vector in $V$ which is commonly written as $v + w$, and called the sum of these two vectors.
+
+The binary function, called scalar multiplication, assigns to any scalar $a$ in $F$ and any vector $v$ in $V$ another vector in $V$, which is denoted $av$.
+
+To have a vector space, the eight following axioms must be satisfied for every $u$, $v$ and $w$ in $V$, and $a$ and $b$ in $F$.
+\begin{enumerate}
+\item Associativity of vector addition: $u + (v + w) = (u + v) + w$.
+\item Commutativity of vector addition: $u + v = v + u$.
+\item Identity element of vector addition: There exists an element $ 0 \in V$, called the zero vector, such that $\forall v\in V\colon v+ 0=v$.
+\item Inverse elements of vector addition: $\forall v\in V\colon \exists$ an element $-v\in V$, called the additive inverse or inverse of $v$, such that $v + (−v) = 0$.
+\item Compatibility of scalar multiplication with field multiplication: $a(bv) = (ab)v$.
+\item Identity element of scalar multiplication: $1v = v$, where 1 denotes the multiplicative identity in $F$.
+\item Distributivity of scalar multiplication with respect to vector addition: $a(u + v) = au + av$.
+\item Distributivity of scalar multiplication with respect to field addition: $(a + b)v = av + bv$.
+\end{enumerate}
+When the scalar field is the real numbers, the vector space is called a real vector space, and when the scalar field is the complex numbers, the vector space is called a complex vector space. These two cases are the most common ones, but vector spaces with scalars in an arbitrary field $F$ are also commonly considered. Such a vector space is called an $F$-vector space or a vector space over $F$.
+\sssc{Isomorphism (同構)}
+Vector spaces $X$ and $Y$ are called isomophic if there exists a mapping $f:\,X\to Y$ between them such that $f$ is bijective and continuous and $f^{-1}$ is continuous, written as \( X \cong Y \), and $f$ is called a isomorphism between them.
+\sssc{Linear combination (線性組合)}
+A vector $a$ in a vector space $V$ over a field $F$ is a linear combination of a series of vectors $(a_1,a_2,\ldots,a_n)$ in a vector space $V$ over a field $F$ if there exists a series of scalars $(\alpha_1,\alpha_2,\ldots,\alpha_n)$ in $F$ such that:
+\[a=\sum_{i=1}^n\alpha_ia_i.\]
+\sssc{Affine space (仿射空間)}
+An affine space is a point set $A$ together with a vector space $\ora{A}$, and a transitive and free action of the additive group of $\ora{A}$ on the set $A$. The vector space $\ora{A}$ is said to be associated to the affine space, and its elements are called vectors, translations, or sometimes free vectors.
+
+Explicitly, the definition above means that the action is a mapping, generally denoted as an addition,
+\[\begin{aligned}
+& A\times\ora{A}\to A\\
+& (a,v)\mapsto a+v
+\end{aligned}\]
+that has the following properties.
+\begin{enumerate}
+\item Right identity: \[\forall a\in A\colon a+0=a,\quad\tx{where $ 0$ is the zero vector in $\ora{A}$}\]
+\item Associativity: \[\forall v,w\in \ora{A},\forall a\in A,\;(a+v)+w=a+(v+w)\]
+\item Free and transitive action: \[\forall a\in A\colon \tx{the mapping }\ora{A}\to A\colon v\mapsto a+v\tx{ is a bijection.}\]
+\item Existence of one-to-one translations \[\forall v\in \ora{A} \colon \tx{the mapping }\ora{A}\to A\colon v\mapsto a+v\tx{ is a bijection.}\]
+\end{enumerate}
+\sssc{Linear independence (線性獨立)}
+For a set of vectors \(\{\mathbf{v}_1,\mathbf{v}_2, \dots, \mathbf{v}_n\}\), if the equation:
+\[\sum_{i=1}^nc_i\mathbf{v}_i = 0 \]
+is true only if all coefficients \(c_1,c_2, \dots,c_n\) are zero, then the set of vectors is linearly independent.
+\sssc{Linear map (線性映射)}
+A map $T\colon V\to W$ between vector spaces $V$ and $W$ over field $F$ is linear if
+\[\forall a,b\in F,v,w\in V\colon T(av+bw)=aT(v)+bT(w).\]
+The zero vector always maps to the zero vector under a linear transformation.
+\sssc{Linear transformation (線性變換)}
+A linear transformation is a bijection from an vector space onto itself that is an linear map. l
+\sssc{Invertible map (可逆映射)}
+A map $T\colon V\to W$ is Invertible if and only if it is bijective. The unique inverse of $T$, called $T^{-1}$, is defined to be:
+\[T^{-1}\colon W\to V;\,\forall v\in V\colon T(v)\mapsto v=T^{-1}(T(v)).\]
+\sssc{Basis (基)}
+The basis of a vector space $X$ over a field $F$ is a set of linearly independent vectors $\mathbf{v}=\{v_1,v_2,\dots\}\subseteq X$ such that for any vector $\mathbf{P}\in X$, there exists a unique coefficient vector $(c_1,c_2, \dots)\subseteq F$ such that:
+\[\sum_{i=1}c_iv_i=\mathbf{P}.\]
+\sssc{Dimension (維度)}
+The dimension of a vector space is defined as the cardinality of a basis of it.
+
+The $n$-dimensional vector space over field $F$ is usually written as $F^n$.
+\sssc{Bilinear form (雙線性形式)}
+Let $V$ be a vector space of dimension $n$ over a field $\mathbb{K}$. A map $B\colon V\times V\rightarrow \mathbb{K}$ is a bilinear form on the space if:
+\begin{enumerate}
+\item $\forall u,v,w\in V\colon B(u+v,w)=B(u,w)+B(v,w)$.
+\item $\forall u,v\in V,\lambda\in \mathbb{K}\colon B(\lambda u,v)=\lambda B(u,v)$.
+\item $\forall u,v,w\in V\colon B(u,v+w)=B(u,v)+B(u,w)$.
+\item $\forall u,v\in V,\lambda\in \mathbb{K}\colon B(u,\lambda v)=\lambda B(u,v)$.
+\end{enumerate}
+\sssc{Symmetric bilinear form (對稱雙線性形式)}
+Let $V$ be a vector space of dimension $n$ over a field $\mathbb{K}$. A map $B\colon V\times V\rightarrow \mathbb{K}$ is a symmetric bilinear form on the space if:
+\begin{enumerate}
+\item $\forall u,v\in V\colon B(u,v)=B(v,u)$.
+\item $\forall u,v,w\in V\colon B(u+v,w)=B(u,w)+B(v,w)$.
+\item $\forall u,v\in V,\lambda\in \mathbb{K}\colon B(\lambda u,v)=\lambda B(u,v)$.
+\end{enumerate}
+\sssc{Topological vector space (TVS) (拓樸向量空間)}
+A topological vector space $X$ is a vector space over a topological field $\mathbb{K}$, such that vector addition $X\times X\to X$ and scalar multiplication $\mathbb{K}\times X \to X$ are continuous functions.
+\sssc{Functional (泛函)}
+A functional is a function from a vector space into the field of real or complex numbers.
+\sssc{Seminorm (半範數)}
+Given a vector space $X$ over a ordered field $F$, a seminorm on $X$ is a real-valued function $p\colon X\to\mathbb{R}$ with the following conditions, where $|s|$ denotes the usual absolute value of a scalar $s$:
+\begin{enumerate}
+\item Subadditivity/Triangle inequality:\[\forall x,y\in X\colon p(x+y)\leq p(x)+p(y).\]
+\item Absolute homogeneity: \[\forall s\in\mathbb{R},x\in X\colon p(sx)=|s|p(x).\]
+\end{enumerate}
+These conditions implies that:
+\begin{enumerate}
+\item Non-negativity: $\forall x\in X\colon p(x)\geq 0$.
+\item $p(0)=0$.
+\end{enumerate}
+\sssc{Norm (範數/模長)}
+A norm on $X$ is a seminorm $p\colon X\to\mathbb{R}$ with the following properties:
+\begin{itemize}
+\item Positive definiteness/Positiveness/Point-separating: \[\forall x\in X\colon p(x)=0\implies x=0\]
+\end{itemize}
+A vector $x$ such that $p(x)=1$ is called an unit vector.
+\sssc{Sublinear function (亞線性函數) or quasi-seminorm (準半範數)}
+Let $p\colon X\to\mathbb{R}$ be a function on a vector space $X$ over the field $\mathbb{K}$, which is either $\mathbb{R}$ or $\mathbb{C}$. $p$ is called a sublinear function or quasi-seminorm if it satisfies the following conditions:
+\begin{enumerate}
+\item Subadditivity/Triangle inequality:\[\forall x,y\in X\colon p(x+y)\leq p(x)+p(y).\]
+\item Nonnegative homogeneity: \[\forall x\in X,r\geq 0\colon p(rx)=rp(x).\]
+\end{enumerate}
+\sssc{Absolutely continuous function (絕對連續函數)}
+Function $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ is absolutely continuous on $I$ if for every positive number $\varepsilon$, there is a positive number $\delta$ such that, for every finite sequence of pairwise disjoint sub-intervals $(x_k,y_k)$ of $I$ with $x_k<y_k\in I$ and cardinality $N$,
+\[\sum_{k=1}^N(y_k-x_k)<\delta\implies\sum_{k=1}^N|f(y_k)-f(x_k)|<\varepsilon.\]
+The collection of all absolutely continuous functions on $I$ is denoted $\operatorname {AC} (I)$.
+\sssc{Bounded linear operator (有界線性運算子)}
+A bounded linear operator is a linear transformation $L\colon X\to Y$ between topological vector spaces (TVSs) $X$ and $Y$ that maps bounded subsets of $X$ to bounded subsets of $Y$. If $X$ and $Y$ are normed vector spaces, then $L$ is bounded if and only if there exists some $M>0$ such that:
+\[\forall x\in X\colon \|Lx\|_Y\leq M\|x\|_X.\]
+The smallest such $M$ is called the operator norm of $L$ and denoted by $\|L\|$. A bounded operator between normed spaces is continuous and vice versa.
+\sssc{Hahn–Banach theorem (哈恩-巴拿赫定理)}
+Let $p\colon X\to\mathbb{R}$ be a sublinear functional on a vector space $X$ over the field $\mathbb{K}$, which is either $\mathbb{R}$ or $\mathbb{C}$. If $f\colon M\to\mathbb{K}$ is a linear functional on a vector subspace $M$ such that
+\[\forall m\in M\colon f(m)\leq p(m),\]
+then there exists a linear functional $F\colon X\to\mathbb{K}$ such that
+\[\forall m\in M\colon F(m)=f(m),\]
+\[\forall x\in X\colon F(x)\leq p(x).\]
+\sssc{p-norm (p-範數)}
+The $p$-norm of a $n$-dimensional vector $x=((x_i)_{i=1}^n)$ is defined to be
+\[\|x\|_p=\qty(\sum_{i=1}^n|x_i|^p)^{\frac{1}{p}},\quad p\in\mathbb{N}_{\infty},\]
+where the $\infty$-norm is
+\[\|x\|_{\infty}=\max_{i=1}^n|x_i|.\]
+The 1-norm is also called Manhattan norm (曼哈頓範數); the 2-norm is also called Euclidean norm (歐幾里德範數).
+\sssc{Locally convex topological vector space (LCTVS) or locally convex space}
+A locally convex topological vector space (LCTVS) $(X,\mathcal{T})$ is a TVS whose topology is generated by a family of seminorms $P$ on it such that:
+\[\bigcap_{p\in P}\{x\colon p(x)=0\}=\{0\}\]
+That is, $\mathcal{T}$ is generated by a basis $\{U_{\epsilon,x}\}_{\epsilon\in\mathbb{R}_{\geq 0},x\in X}$ of neighborhoods defined to be:
+\[U_{\epsilon,0}=\{y\in X\colon \forall p\in P\colon p(y)<\epsilon\}.\]
+\[U_{\epsilon,x}=\{y\in X\colon y-x\in U_{\epsilon,0}\}.\]
+This definition implies that a LCTVS is necessarily a Hausdorff space (T2 space).
+\sssc{Banach space (巴拿赫空間)}
+A Banach space is a normed vector space $(X,\|{\cdot }\|)$ with induced metric $d$
+\[d(x,y)=\|x-y\|,\quad \forall x,y\in X\]
+that is a Complete metric space (aka Cauchy space).
+\sssc{Dot product (點積)}
+The dot product of two vectors $\mathbf{a}=(a_1,a_2,\dots,a_n)$ and $\mathbf{b}=(b_1,b_2,\dots,b_n)$ is defined as:
+\[\mathbf{a}\cdot\mathbf{b}=\sum_{i=1}^n a_ib_i.\]
+\sssc{Inner product space (內積空間)}
+A bar over an expression representing a scalar denotes the complex conjugate of this scalar.
+
+An inner product space is a vector space $V$ over the field $F$ together with an inner product, that is, a map
+\[\langle \cdot ,\cdot \rangle \colon V\times V\to F\]
+that satisfies the following three properties for all vectors $x,y,z\in V$ and all scalars $a,b\in F$.
+\bit
+\item Conjugate symmetry: 
+\[\langle x,y\rangle =\ol{\langle y,x\rangle }.\]
+This implies that $\langle x,x\rangle$ is a real number.
+\item Linearity in the first argument:
+\[ \langle ax+by,z\rangle =a\langle x,z\rangle +b\langle y,z\rangle .\]
+\item Positive-definiteness: if $x$ is not zero, then$\langle x,x\rangle >0$.
+\eit
+\sssc{Orthonormal basis (正交基)}
+An orthonormal basis for an inner product space $V$ with finite dimension is a basis for $V$ such that for $e,f$ in it:
+\[\langle e,f \rangle = \begin{cases}1, & \text{if } e=f,\\0, & \text{if } e\neq f.\end{cases}\]
+\sssc{Euclidean vector space (歐幾里德向量空間)}
+A Euclidean vector space $E$ is a finite-dimensional vector space over the real numbers equipped with an inner product 
+\[\langle \cdot ,\cdot \rangle \colon E\times E\to\mathbb{R},\]
+and a norm $\|\cdot\|$ defined as:
+\[\|v\|=\sqrt{\langle v,v\rangle},\]
+and a metric, called the Euclidean distance $d(\cdot,\cdot)\colon E\times E\to\mathbb{R}$, defined as:
+\[d(v,w)=\|v-w\|.\]
+\sssc{Manifold (流形)}
+Let $M$ be a Hausdorff space. If for any $x\in M$, there exists a neighborhood $U_x$ of $x$ that is homeomorphic to some open set of the $m$-dimensional Euclidean space, then $M$ is called an $m$-dimensional manifold.
+\sssc{Coordinate system (座標系統)}
+A coordinate system is a system that uses one or more numbers, or coordinates, to uniquely determine the points on a manifold.
+\sssc{Cartesian coordinate system (笛卡爾座標系統)}
+The Cartesian coordinate system is a coordinate system in a Euclidean vector space $E$ determined by an orthogonal basis of unit vectors such that the inner product of two vectors in $E$ equals to the dot product of them, and that the norm of $E$ is 2-norm.
+\sssc{Balanced set (平衡集), circled set, or disk set}
+Let $X$ be a vector space over a field $\mathbb{K}$ with an absolute value function $|\cdot |$. A subset $S$ of $X$ is called a balanced set or balanced if:
+\[\forall a\in\mathbb{K}\text{ s.t. }|a|\leq 1\colon aS\subseteq S.\]
+\sssc{Well-defined (定義良好)/Unambiguous (不模糊的)}
+A well-defined expression or unambiguous expression is an expression whose definition assigns it a unique interpretation or value. Otherwise, the expression is said to be not well defined, ill defined or ambiguous.
+\sssc{Affine map (仿射映射)}
+Given two affine spaces $A$ and $B$ whose associated vector spaces are $\mathscr{A}$ and $\mathscr{B}$, an affine map from $A$ to $B$ is a map $f\colon A\to B$ such that
+\[\begin{aligned}
+&\mathscr{f}\colon\mathscr{A}\to\mathscr{B}\\
+&b-a\mapsto f(b)-f(a)
+\end{aligned}\]
+is a well-defined linear map.
+\sssc{Affine transformation (仿射變換)}
+An affine transformation is a bijection from an affine space onto itself that is an affine map.
+\sssc{Tagent space (切空間)}
+Suppose that $M$ is a $C^k$ differentiable $n$-dimensional manifold (with smoothness $k\geq 1$) and that $x\in M$. Pick a coordinate chart $\varphi\colon U\to\mathbb{R}^n$, where $U$ is an open subset of $M$ containing $x$. Suppose further that two curves $\gamma_1,\gamma_2\colon (-1,1)\to M$ with $\gamma_1(0)=\gamma_2(0)=x$ are given such that both $\varphi\circ\gamma_1,\varphi\circ\gamma_2\colon (-1,1)\to\mathbb{R}^n$ are differentiable. We call these differentiable curves initialized at $x$. Then $\gamma_1$ and $\gamma_2$ are said to be equivalent at $0$ if and only if the derivatives of $\varphi\circ\gamma_1$ and $\varphi\circ\gamma_2$ at $0$ coincide. This defines an equivalence relation on the set of all differentiable curves initialized at $x$, and equivalence classes of such curves are called tangent vectors (切向量) of $M$ at $x$. The tangent space of $M$ at $x$, denoted by $T_xM$, is then defined as the set of all tangent vectors at $x$, which does not depend on the choice of coordinate chart $\varphi$.
+\sssc{Tagent bundle (切叢)}
+A tangent bundle $TM$ of a smooth manifold $M$ is defined to be
+\[TM=\{(x,v)\colon x\in M\land v\in T_xM\},\]
+where $T_xM$ is the tangent space at $x$.
+\sssc{Von Neumann bounded or bounded}
+Suppose $X$ is a topological vector space (TVS) over a field $\mathbb{K}$. A subset $B$ of $X$ is called von Neumann bounded (or bounded) in $X$ if for every neighborhood $V$ of the origin, there exists a real $r>0$ such that $B\subseteq sV$ for all scalars $s$ satisfying $|s|\geq r$.
+\sssc{Convex set (凸集)}
+Let $S$ be a vector space or an affine space over some ordered field. A subset $C$ of $S$ is convex if, for all $x$ and $y$ in $C$, the line segment connecting $x$ and $y$ is included in $C$.
+\sssc{(Algebraic) dual (vector) space (對偶空間)}
+Given any vector space $V$ over a field $F$, the dual space $V^*$ is defined as the set of all linear maps $\varphi\colon V\to F$. The dual space $V^*$ itself thus becomes a vector space over $F$ when equipped with an addition and scalar multiplication satisfying:
+\[\begin{aligned}
+&\forall\varphi ,\psi \in V^*,x\in V,a\in F:\\
+&(\varphi+\psi)(x)=\varphi (x)+\psi (x)\\
+&(a\varphi )(x)=a\left(\varphi (x)\right)
+\end{aligned}\]
+\sssc{Orthogonal complement (正交補)}
+An orthogonal complement of a subspace $W$ of a vector space $V$ equipped with a bilinear form $B$ is the set $W^{\perp }$ of all vectors in $V$ that are orthogonal to every vector in $W$, of which $v\in V$ is orthogonal to $w\in V$ if and only if $B(v,w)=0$.
+\sssc{Normal space (法空間)}
+Suppose that $M$ is a $C^k$ differentiable $n$-dimensional manifold (with smoothness $k\geq 1$) in a vector space $V$ equipped with a bilinear form $B$ and that $x\in M$. The normal space of $M$ at $x$, denoted by $N_xM$, is defined as the orthogonal complement of the tangent space of $M$ at $x$. A vector $v\in N_xM$ such that $B(v,v)\neq 0$ is called a normal vector (法向量) of $M$ at $x$.
+\sssc{Euclidean affine space (歐幾里德仿射空間) or Euclidean space (歐幾里得空間)}
+A Euclidean space, also known as Euclidean affine space, is an affine space over $\mathbb{R}$ such that the associated vector space is a Euclidean vector space.
+
+A Euclidean space is equipped with a metric, called the Euclidean distance $d(\cdot,\cdot)\colon E\times E\to\mathbb{R}$, defined as:
+\[d(v,w)=\|v-w\|.\]
+\sssc{Affine hull (仿射包)}
+An affine combination is a linear combination of points where all coefficients sum up to 1.
+
+The affine hull $\operatorname{aff} (S)$ of a set of points $S$ in a Euclidean space is the smallest affine space that contains all the points in $S$, namely, the set of all affine combinations of the points in $S$, i.e.:
+\[\operatorname{aff}(S)=\left\{\sum _{i=1}^k\alpha _ix_i\colon k>0,x_i\in S,\alpha _i\in\mathbb{R},\sum _{i=1}^k\alpha _i=1\right\}\]
+\sssc{Convex hull (凸包)}
+A convex combination is a linear combination of points where all coefficients are non-negative and sum up to 1.
+
+The convex hull $\operatorname{conv} (S)$ of a set of points $S$ in a Euclidean space is the smallest convex set that contains all the points in $S$, namely, the set of all convex combinations of points in $S$, i.e.:
+\[\operatorname{conv}(S)=\left\{\sum _{i=1}^k\alpha _ix_i\colon k>0,x_i\in S,\alpha _i\in [0,1],\sum _{i=1}^k\alpha _i=1\right\}\]
+\sssc{Curvilinear coordinate}
+A curvilinear coordinate is a coordinate system for Euclidean space such that there exists an invertible map from a Cartesian coordinate system to it.
+\sssc{Projection (投影)}
+A projection on a subset $U$ of a vector space $V$ is a linear operator $P\colon V\to U$ such that $P^2=P$. The property $P^2=P$ is called idempotency (冪等性).
+\sssc{Orthographic projection (正射影)}
+An orthographic on a subset $U$ of a vector space $V$ is a projection $P\colon V\to U$  such that 
+\[ \forall v\in V\colon v - P(v)\in U^*\]
+where $U^*$ is the orthogonal complement of \( U \).
+\sssc{Hilbert space (希爾伯特空間)}
+A Hilbert space is a real or complex inner product space that is also a complete metric space with respect to the distance function induced by the inner product.
+\sssc{Angle (夾角) between two vectors}
+Given two vectors $u,v$ in an inner product space, the angle $\theta$ between than is defined as
+\[\thets=\arccos(u\cdot v).\]
+\sssc{Principal angles (主夾角) between two subspaces}
+Given two subspaces $U,W$ of an inner product space with $\dim(U)=k\leq\dim(W)=m$, there exists then a sequence of $k$ angles $0\leq\theta_1\leq\theta_2\leq\ldots\leq\theta_k\leq\frac{\pi}{2}$ called the principal angles between $U$ and $W$, the first one defined as
+\[\theta_1\coloneq\min\left\{\arccos\left(\frac{|\langle u,w\rangle|}{\|u\|\|w\|}\right)\middle |u\in U\land w\in W\right\}=\angle(u_1\in U,w_1\in W),\]
+The vectors $u_1$ and $w_1$ are the corresponding principal vectors.
+
+The other principal angles and vectors are then defined recursively via
+\[\theta_i\coloneq\min\left\{\arccos\left(\frac{|\langle u,w\rangle|}{\|u\|\|w\|}\right)\middle |u\in U\land w\in W\land \forall j\in\mathbb{N}\land j<i\colon\langle u_i,u_j\rangle=\langle w_i,w_j\rangle=0\right\}=\angle(u_i\in U,w_i\in W).\]
+\sssc{Lattice points (格子點)}
+In a Euclidean vector space, vectors whose components are all integers are called lattice points.
+\sssc{Flat (平面) or affine subspace (仿射子空間)}
+A flat or an affine subspace of an affine space is a subspace of it that is an affine space.
+\sssc{Direction space}
+The direction space of an affine subspace is the tangent space of it at any point on it. (Note that the tangent spaces of it at any two points on it are the same.)
+\sssc{Parallel (平行)}
+Two non-zero vectors $u,v$ in a vector space over field $F$ are called to be parallel if there exists a scalar $x\in F$ such that $xu=v$, denoted as $u\parallel v$.
+
+Two affine subspaces are called to be parallel if the direction spaces of them $D,E$ satisfies:
+\[D\subseteq E\lor E\subseteq D,\]
+denoted as $D\parallel E$.
+\sssc{Unit vector (單位向量) or normalized vector}
+A unit vector or a normalized vector in a normed vector space is a vector of norm 1, denoted by a lowercase letter with a circumflex or hat, as in $\hat{\mathbf{v}}$ (pronounced "v-hat"). The unit vector or normalized vector $\hat{\mathbf{u}}$ of a non-zero vector $\mathbf{u}$ in a normed vector space equipped with a norm $\|\cdot\|$ is defined as:
+\[\hat{\mathbf{u}}=\frac{\mathbf{u}}{\|\mathbf{u}\|}.\]
+\ssc{Two-Dimensional Vector Space}
+\sssc{Quadrant (象限)}
+\RNum{1}(+, +), \RNum{2}(-, +), \RNum{3}(-, -), \RNum{4}(+, -).
+\ssc{Three-Dimensional Vector Space}
+\sssc{Right-hand rule (右手定則)}
+In a right-handed Cartesian coordinate system, if you point the thumb of your right hand in the positive $x$-axis direction and your index finger in the positive $y$-axis direction, then your middle finger (extended perpendicularly from the palm) will point in the positive $z$-axis direction. If not specified otherwise, right-handed Cartesian coordinate system is usually used.
+\sssc{Octant (卦限)}
+\RNum{1}(+, +, +), \RNum{2}(-, +, +), \RNum{3}(-, -, +), \RNum{4}(+, -, +), \RNum{5}(+, +, -), \RNum{6}(-, +, -), \RNum{7}(-, -, -), \RNum{8}(+, -, -).
+\sssc{Cross product (叉積), external product (外積), or vector product (向量積)}
+The cross product of vector $\mathbf{a}=(a_1,a_2,a_3)$ and $\mathbf{b}=(b_1,b_2,b_3)$ is defined as:
+\[\mathbf{a}\times\mathbf{b}=\det\begin{pmatrix}\mathbf{i} & \mathbf{j} & \mathbf{k}\\a_1 & a_2 & a_3\\b_1 & b_2 & b_3\end{pmatrix},\]
+where $\mb{i}=(1,0,0)$, $\mb{j}=(0,1,0)$, $\mb{k}=(0,0,1)$.
+
+Properties:
+\bit
+\item Self cross product is the zero vector:
+\[\mb{a}\times\mb{a}=\mb{0}.\]
+\item Anticommutative law (反交換律):
+\[\mathbf{a}\times\mathbf{b}=-\mathbf{b}\times\mathbf{a}.\]
+\item Distributive over addition and substraction:
+\[\mb{a}\times(\mb{b}\pm\mb{c})=\mb{a}\times\mb{b}\pm\mb{a}\times\mb{c}.\]
+\item Commutative and associative over scalar multiplication:
+\[(r\mb{a})\times\mb{b}=a\times(r\mb{b})=r(\mb{a}\times\mb{b}).\]
+\item Triple product identity (三重積恆等式)/Jacobi identity (雅可比恆等式):
+\[\mathbf{A}\times(\mathbf{B}\times\mathbf{C})+\mathbf{B}\times(\mathbf{C}\times\mathbf{A})+\mathbf{C}\times(\mathbf{A}\times\mathbf{B})=0.\]
+\[\mathbf{A}\cdot(\mathbf{B}\times\mathbf{C})=\mathbf{B}\cdot(\mathbf{C}\times\mathbf{A})=\mathbf{C}\cdot(\mathbf{A}\times\mathbf{B})=\det\begin{pmatrix}\mathbf{A}\\\mathbf{B}\\\mathbf{C}\end{pmatrix}\]
+\[(\mathbf{A}\times\mathbf{B})\times\mathbf{C}=(\mathbf{A}\cdot\mathbf{C})\mathbf{B}-(\mathbf{B}\cdot\mathbf{C})\mathbf{A}.\]
+\eit
+\end{document}
