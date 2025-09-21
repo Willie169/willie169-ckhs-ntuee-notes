@@ -1,0 +1,106 @@
+\documentclass[a4paper,12pt]{article}
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{3}
+\input{/usr/share/LaTeX-ToolKit/template.tex}
+\begin{document}
+\title{Dynamical Systems Theory}
+\author{沈威宇}
+\date{\temtoday}
+\titletocdoc
+\sct{Dynamical Systems Theory (動態系統論 or 動力系統論)}
+\ssc{Dynamical system (動態系統 or 動力系統)}
+\sssc{Dynamical system}
+A dynamical system is a tuple $(T, X, \Phi)$ where $T$ is a monoid, written additively and with the independent variable $t$ in it called evolution parameter (演化參數) or time, $X$ is a non-empty set, called the phase space (相空間) or state space (狀態空間) with the independent variable $x$ in it called (system) phase (相) or state (狀態), and $\Phi$ is a function, called the evolution function (演化函數) or flow,
+\[\Phi(t,x)\colon U\subseteq(T\times X)\to X\]
+where $U$ is such that the second projection map $\pi_2$ for $T\times X$ satisfies
+\[\pi_2(U)=X,\]
+and for any $x \in X$, it satisfies
+\bit
+\item identity:
+\[\Phi (0,x)=x,\]
+\item semigroup property:
+\[\Phi (t_{2},\Phi (t_{1},x))=\Phi (t_{2}+t_{1},x)\]
+for any $t_{1},t_{2}+t_{1}\in I(x)$ and $t_{2}\in I(\Phi (t_{1},x))$i, in which
+\[I(x)\coloneq\{t\in T\mid(t,x)\in U\}\]
+for any $x\in X$.
+\eit
+\sssc{Orbit (軌道)}
+Given a dynamical system $(T, X, \Phi)$ with
+\[\Phi(t,x)\colon U\subseteq(T\times X)\to X\]
+and
+\[I(x)\coloneq\{t\in T\mid(t,x)\in U\}.\]
+The set
+\[\gamma _{x}\coloneq\{\Phi (t,x)\colon t\in I(x)\}\subset X\]
+is called the orbit through $x$.
+
+An orbit which consists of a single point is called constant orbit; a non-constant orbit is called closed or periodic if there exists $t\neq 0\in I(x)$ such that $\Phi (t,x)=x$.
+\sssc{Phase portrait (相圖)}
+Given a dynamical system $(T, X, \Phi)$, the phase portrait is a geometric representation of the collection of all orbits $\gamma$ through any $x\in X$.
+\sssc{Attractor (吸引子)}
+For a dynamical system $(\mathbb{R}, X, \Phi)$ with $D\subseteq X$ and $\Phi(t,x)\colon \mathbb{R}_{\geq 0}\times D\to X$, a non-empty subset $A$ of $D$ is called an attractor if and only if it satisfies the following three conditions:
+\bit
+\item Forward invariance:
+    \[\forall a\in A\colon\forall t>0\colon\Phi(t,a)\in A.\]
+\item Attraction: There exists a neighborhood of $A$, called the basin of attraction for $A$ and denoted $B(A)$, such that for any $b\in B(A)$ and any open neighborhood $N$ of $A$, there is a positive constant $T$ such that $\forall t>T\colon\Phi(t,b)\in N$.
+\item Minimality: There is no non-empty proper subset of $A$ that satisfies the above two conditions.
+\eit
+
+A point $a$ in $D$ is called an attractor if and only if $\{a\}$ is an attractor.
+\sssc{Repeller}
+For a dynamical system $(\mathbb{R}, X, \Phi)$ with $D\subseteq X$ and $\Phi(t,x)\colon \mathbb{R}_{\geq 0}\times D\to X$, a non-empty subset $R$ of $X$ is called a repeller if and only if it satisfies the following three conditions:
+\bit
+\item Forward invariance:
+    \[\forall r\in R\colon\forall t>0\colon\Phi(t,r)\in R.\]
+\item Repulsion: There exists a neighborhood of $R$, called the basin of repulsion for $R$ and denoted $B(R)$, such that for any $b\in B(R)\setminus R$ and any open neighborhood $N$ of $R$, there is a positive constant $T$ such that $\forall t>T\colon\Phi(t,b)\notin N$.
+\item Minimality: There is no non-empty proper subset of $R$ that satisfies the above two conditions.
+\eit
+
+A point $r$ in $D$ is called a repeller if and only if $\{r\}$ is a repeller.
+\ssc{Autonomous or time-invariant continuous-time dynamical system}
+\sssc{Continuous-time dynamical system}
+A dynamical system $(\mathbb{R}, \mathbb{R}^n, \Phi)$ with $A=\mathbb{R}_{\geq 0}$ (or $\mathbb{R}$), $B\subseteq\mathbb{R}^n$, and $\Phi(t,x)\colon A\times B\to\mathbb{R}^n$ is called a continuous-time dynamical system if $\pdv{\Phi}{t}\big\vert_{t=0}$ exists for all $X\in B$.
+\sssc{Autonomous or time-invariant continuous-time dynamical system}
+A continuous-time dynamical system $(\mathbb{R}, \mathbb{R}^n, \Phi)$ is called autonomous, aka time-invariant, if $\pdv{\Phi(t,x)}{t}\big\vert_{t=0}$ is only dependent on $x$.
+\sssc{Linear (autonomous) continuous-time dynamical system}
+An autonomous continuous-time dynamical system $(\mathbb{R}, \mathbb{R}^n, \Phi(t,x))$ with evolution rule $\dv{x}{t}=f(x)$ is called linear if $f(x)=Ax$ where $A$ is a constant matrix in $\mathbb{R}^{n\times n}$.
+
+The eigenvalues and eigen vectors of $A$ are called the eigenvalues and eigen vectors of the linear autonomous continuous-time dynamical system.
+\sssc{Phase portrait}
+For an autonomous continuous-time dynamical system, one usually plots the space $X$, marks equilibria, and draw arrows at each point $x$ in a grid indicating $f(x)$ at it.
+
+Specifically, a phase portrait for an autonomous continuous-time dynamical system in which $X=\mathbb{R}$ is also called a phase line.
+\sssc{Equilibria, fixed points, or fixpoints of autonomous continuous-time dynamical systems}
+An equilibrium, fixed point, or fixpoint of an autonomous continuous-time dynamical system $(T, X, \Phi)$ is a point $x^*\in X$ such that the vector field $f(x)=\pdv{\Phi}{t}\big\vert_{t=0}$ vanishes there, that is, $f(x^*)=0$.
+\sssc{Systems of first-order ODEs as continuous-time dynamical systems}
+Consider a system of first-order ODEs:
+\[\dv{x}{t}=f(t,x), \quad x\in\mathbb{R}^n\land f\colon\mathbb{R}\times\mathbb{R}^n\to\mathbb{R}^n.\]
+
+Let $U\subseteq\mathbb{R}\times\mathbb{R}^n$ be the set such that for any $(t_0,x_0)$ in $U$, $t_0$ is in the interval of definition of the solution of it with the initial condition $x(0)=x_0$ and that the solution is unique, and $x(t;x_0)$ be the solution of it with the initial condition $x(0)=x_0$.
+
+Then the dynamical system represented by it has phase space $\mathbb{R}^n$, evolution parameter $t$, phase or state $x$, and evolution function $\Phi\colon U\to\mathbb{R}^n;\Phi(t,x_0)=x(t;x_0)$. The system of ODEs is called the evolution rule of the dynamical system, and the dynamical system is called to be defined by the system of ODEs.
+\sssc{Autonomous system of ODEs as autonomous continuous-time dynamical systems}
+Consider an autonomous system of ODEs:
+\[\dv{x}{t}=f(x), \quad x\in\mathbb{R}^n\land f\colon\mathbb{R}^n\to\mathbb{R}^n.\]
+
+Let $U\subseteq\mathbb{R}\times\mathbb{R}^n$ be the set such that for any $(t_0,x_0)$ in $U$, $t_0$ is in the interval of definition of the solution of it with the initial condition $x(0)=x_0$ and that the solution is unique, and $x(t;x_0)$ be the solution of it with the initial condition $x(0)=x_0$.
+
+Then the dynamical system represented by it has phase space $\mathbb{R}^n$, evolution parameter $t$, phase or state $x$, and evolution function $\Phi\colon U\to\mathbb{R}^n;\Phi(t,x_0)=x(t;x_0)$. The system of ODEs is called the evolution rule of the dynamical system, and the dynamical system is called to be defined by the system of ODEs. The equilibria of the dynamical system are the critical points of the system of ODEs.
+\sssc{Stability of equilibria}
+Let $x^*$ be an equilibrium of an autonomous continuous-time dynamical system defined by the evolution rule $\dv{x}{t}=f(x)$ and $A=\mathbb{R}_{\geq 0}$ or $\mathbb{R}$ be the domain of the evolution function. Then
+\bit
+\item $x^*$ is called to be (Lyapunov) stable (（李亞普諾夫）穩定) if and only if
+    \[\forall\varepsilon>0\colon\exists\delta>0\text{\ s.t.\ }\|x(0)-x^*\|<\delta\implies\forall t\in A\colon\|x(t)-x^*\|<\varepsilon.\]
+\item $x^*$ is called to be asymptotically stable if and only if 
+    \[\exists\delta>0\text{\ s.t.\ }\|x(0)-x^*\|<\delta\implies\lim_{t\to\infty}x(t)=x^*.\]
+An asymptotically stable (漸近穩定) equilibrium is necessarily (Lyapunov) stable and an attractor.
+\item $x^*$ is called to be exponentially (指數穩定) stable if and only if
+    \[\exists M>0,\alpha>0,\delta>0\text{\ s.t.\ }\|x(0)-x^*\|<\delta\implies\forall t\in A\|x(t)-x^*\|\leq\|x(0)-x^*\|e^{-\alpha t}.\]
+    An exponentially stable equilibrium is necessarily asymptotically stable.
+\item for $n=1$, $x^*$ is called to be semi-stable or semistable if and only if it is (Lyapunov) stable and
+    \[(\exists\delta>0\text{\ s.t.\ }x(0)-x^*<\delta\implies\lim_{t\to\infty}x(t)=x^*)\lor (\exists\delta>0\text{\ s.t.\ }x^*-x(0)<\delta\implies\lim_{t\to\infty}x(t)=x^*).\]
+\item for linear autonomous continuous-time dynamical system, $x^*$ is called to be marginally stable (臨界穩定) if it is (Lyapunov) stable but not asymptotically stable,
+\item $x^*$ is called to be unstable (不穩定) if and only if it is not (Lyapunov) stable.
+
+An equilibrium that is in a repeller is necessarily unstable.
+\eit
+\end{document}
