@@ -34,13 +34,13 @@ and
 \[\lim_{n\to\infty}a_n=\lim_{n\to\infty}b_n=L,\]
 then: 
 \[\lim_{n\to\infty}c_n=L.\]
-\subsubsection{Monotone Convergence Theorem (單調收斂定理) or Completeness of the Real Number (實數的完備性)}
+\subsubsection{Monotone Convergence Theorem (單調收斂定理) or Completeness (Axiom) of the Real Numbers (實數的完備性)}
 \textit{Statement.}
 \begin{enumerate}[label=(\Alph*)]
 \item For a non-decreasing and bounded-above sequence of real numbers $\langle a_n\rangle_{n\in\mathbb {N}}$:
-\[\lim_{n\to\infty}a_n=\sup_n a_n\]
+\[\lim_{n\to\infty}a_n=\sup_n a_n.\]
 \item For a non-increasing and bounded-below sequence of real numbers $\langle a_n\rangle_{n\in\mathbb {N}}$:
-\[\lim_{n\to\infty}a_n=\inf_n a_n\]
+\[\lim_{n\to\infty}a_n=\inf_n a_n.\]
 \end{enumerate}
 \begin{proof}\mbox{}\\
 Let $\{a_{n}\}$ be the set of values of $\langle a_n\rangle_{n\in\mathbb {N}}$. By assumption, $\{a_n\}$ is non-empty and bounded-above by $\sup_n a_n$. Let $c=\sup_n a_n$.
@@ -1087,23 +1087,93 @@ If functions $f$ and $g$ are differentiable on $I$, then the composite $f\circ g
 &f^{\qty(\sum_{j=1}^nm_j)}\left(g(x)\right)\cdot\\
 &\prod_{j=1}^n\left(\frac {g^{(j)}(x)}{j!}\right)^{m_j}.
 \eam
-{{{proof need start
-\subsection{Mean Value Theorem, MVT (均值定理)}
-Let $f:\, I\subseteq\mathbb{R}\to\mathbb{R}$ be a continuous function, and $f$ is differentiable on an interval $(a, b)\subseteq I$, then
-\[\exists c\in (a, b)\text{\ s.t.\ }f'(c)=\frac{f(b)-f(a)}{b-a}\]
-\subsection{Extreme Value Theorem, EVT (極值定理)}
-Let function $f:\, I\subseteq\mathbb{R}\to\mathbb{R}$ be continuous on an interval $[a,b]$, then
-\[\exists c,d \in [a, b] \text{\ s.t.\ }\qty(\forall x \in [a, b]\colon f(c)\geq f(x)\geq f(d))\]
+{{{ need proof start
+\subsection{Extreme Value Theorem (EVT) (極值定理)}
+Let function $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ be continuous on an interval $[a,b]\subseteq I$, then
+\[\exists c,d \in [a, b] \text{\ s.t.\ }\forall x \in [a, b]\colon f(c)\geq f(x)\geq f(d).\]
+\begin{proof}
+We claim that $f$ is bounded on $[a,b]$. Argue by contradiction. Suppose $f$ is not bounded-above.
+
+For any $n\in\mathbb{N}$, there exists $x_n\in [a,b]$ such that $f\qty(x_n)>n$. This defines a sequence $\langle x_n\rangle$.
+
+By the Bolzano-Weierstrass Theorem and that $[a,b]$ is bounded, it has a convergent subsequence $x_{n_k}$ that converges to some limit $L$. Since $[a,b]$ is closed, $L\in [a,b]$.
+
+Since $f$ is continuous on $[a,b]$, the sequence $f\qty(x_{n_k})$ converges to $f(L)$, which is finite.
+
+This contradicts $f\qty(x_n)>n$ for every $n\in\mathbb{N}$. So the set
+\[S=\{f(x)\mid x\in [a,b]\}.\]
+must be bounded-above.
+
+By considering $-f$, we obtain that $S$ is also bounded-below.
+
+By the Completeness of the Real Numbers, every non-empty set bounded-above has a least upper bound; every non-empty set bounded-below has a greatest lower bound.
+
+Let
+\[M=\sup S,\quad m=\inf S.\]
+
+Since $M$ is the least upper bound of $S$, for any $n\in\mathbb{N}$, $M-\frac{1}{n}$ is not an upper bound of $S$. This means that for each $n\in\mathbb{N}$, there exists a point $y_n\in [a,b]$ such that:
+\[M-\frac{1}{n}<f(y_n)\leq M.\]
+This defines another sequence $\langle y_n\rangle$ within $[a, b]$.
+
+By the Bolzano-Weierstrass Theorem and that $[a,b]$ is bounded, it has a convergent subsequence $y_{n_k}$ that converges to some limit $c$. Since $[a,b]$ is closed, $c\in [a,b]$.
+\[\lim_{n_k\to \infty}\qty(M - \frac{1}{n_k}) = M.\]
+By the Squeeze Theorem:
+\[\lim_{n_k \to \infty} f\qty(y_{n_k}) = M.\]
+Since $f$ is continuous on $[a,b]$, the sequence $f\qty(y_{n_k})$ converges to $f(c)$.
+
+Similarly, we can prove that there exists $d\in [a,b]$ such that $f(d)=m$.
+
+{{{? need check
+\end{proof}
+\ssc{Fermat's Theorem (費馬引理) or Interior Extremum Theorem (內部極值定理)}
+Let $f\colon D\subseteq\mathbb{R}\to\mathbb{R}$ be differentiable on an open interval $I\subseteq D$ and $c\in I$ be a local extreme of $f$, then
+\[f'(c)=0.\]
+\begin{proof}
+Without loss of generality, suppose $c$ is a local extreme. Then there exists $\delta>0$ such that for all $x\in (c-\delta,c+\delta)\colon f(x)\leq f(c)$.
+
+Thus,
+\[\lim_{h\to 0^+}\frac{f(x+h)-f(x)}{h}\leq 0\]
+and
+\[\lim_{h\to 0^-}\frac{f(x+h)-f(x)}{h}\geq 0.\]
+
+Since $f$ is differentiable at $c$,
+\[\lim_{h\to 0^+}\frac{f(x+h)-f(x)}{h}=\lim_{h\to 0^-}\frac{f(x+h)-f(x)}{h}=0=f'(c).\]
+\end{proof}
+\ssc{Rolle's Theorem (羅爾定理)}
+Let $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ be continuous on an interval $[a, b]\subseteq I$ and differentiable on $(a,b)$, then
+\[\exists c\in (a, b)\text{\ s.t.\ }f'(c)=0.\]
+\begin{proof}
+By the Extreme Value Theorem, $f$ must have maximum and minimum on $[a,b]$.
+
+Let
+\[M=\max_{x\in [a,b]}f(x),\quad m=\min_{x\in [a,b]}f(x).\]
+If $M=m$, then $f$ is constant on $[a,b]$, then $f'(x)=0$ for any $c\in (a,b)$.
+
+Otherwise, $M>m$. Because $f(a)=f(b)$. 
+
+We claim that there must be $c\in (a,b)$ such that $M=f(c)$ or $m=f(c)$. Argue by contradiction. If the claim is false, then $M=m=f(a)=f(b)$, contradicting $M>m$.
+
+By Fermat's Theorem,
+\[f'(c)=0.\]
+\end{proof}
+\subsection{Mean Value Theorem (MVT) (均值定理)}
+Let $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ be continuous on an interval $[a, b]\subseteq I$ and differentiable on $(a,b)$, then
+\[\exists c\in (a, b)\text{\ s.t.\ }f'(c)=\frac{f(b)-f(a)}{b-a}.\]
+\begin{proof}
+Let
+\[\phi(x) = f(x) - \frac{f(b)-f(a)}{b-a} (x-a).\]
+\[\phi(a)=\phi(b)=f(a).\]
+By Rolle's Theorem, there exists $c\in (a,b)$ such that $\phi'(c)=0$.
+\[\phi'(c)=f'(c)-\frac{f(b)-f(a)}{b-a}.\]
+\end{proof}
 \subsection{L'Hôpital's rule (羅必達法則) or Bernoulli's rule}
 Let \(I\) be an interval containing the point \(a\). Let \( f(x) \) and \( g(x) \) be functions defined on \(I\), except possibly at \(a\) itself. Let \( f(x) \) and \( g(x) \) be differentiable at all points except $a$ in $I$. If $\lim_{x\to a}f(x)=\lim_{x\to a}g(x)\in\{0,\infty,-\infty\}$, and $\exists \lim_{x\to a}\frac{f'(x)}{g'(x)}$, then:
-\[\lim_{x\to a}\frac{f(x)}{g(x)}=\lim_{x\to a}\frac{f'(x)}{g'(x)}\]
-\subsection{Relative extreme theorem}
-A point in $I$ where a relative extreme of $f:\,I\subseteq\mathbb{R}\to\mathbb{R}$ occurs must be a critical point.
+\[\lim_{x\to a}\frac{f(x)}{g(x)}=\lim_{x\to a}\frac{f'(x)}{g'(x)}.\]
 \subsection{Concavity theorem}
 Let $f:\,J\subseteq\mathbb{R}\to\mathbb{R}$ be differentiable on the open interval $I\subseteq J$. If $\forall x\in I:\,f''>0$, then the graph of $f$ is concave upward on $I$; if $\forall x\in I:\,f''<0$, then the graph of $f$ is concave downward on $I$.
 \subsection{Inflection point theorem}
 If $(c,f(c))$ is an inflection point of $f$, then $f''(c)=0$ or $f''$ does not exist at $c$.
-{{{proof need end
+{{{ need proof end
 \subsection{Lagrange multiplier (method) (拉格朗日乘數 or 乘子（法）)}
 The Lagrange multiplier method is a method for finding the points where extremes occur of a differentiable function under constraints.
 \sssc{Univariate form}
@@ -1612,10 +1682,6 @@ Assume:
 Differentiate both side:
 \[y'P_{n-1}'(y)=y^{(n)}=-(1+y^2)P_{n-1}'(y)=P_n(y).\]
 \end{proof}
-{{{Inverse
-
-
-
 \ssc{List of Counterexamples}
 \sssc{Dirichlet function (狄利克雷函數)}
 The Dirichlet function is a function $f\colon\manthbb{R}\to\mathbb{R};$
