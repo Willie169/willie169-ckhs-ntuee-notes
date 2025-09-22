@@ -99,18 +99,33 @@ If such $a_0$ exists, we say the limit exists or the net converges to $L$; other
 \[\lim_{a}x_a=-\infty \equiv \forall M < 0, \exists a_0 \in A \text{\ s.t.\ } a\in A\land a\geq a_0 \implies x_a < M.\]
 Note that if a limit equals to $\infty$ or $-\infty$, the limit doesn't exist.
 \sssc{Preservation of equal to}
-Let $A$ be a directed set. Given real nets $\langle x_a\rangle_{a\in A}$ and $\langle b_n\rangle_{a\in A}$ which for all $k$ that is greater than or equal to a specific $j\in A$, $a_k=b_k$ and that $\lim_{a}x_a$ exists, then $\lim_{a}b_n$ exists and that:
-\[\lim_{a}x_a=\lim_{a}b_n.\]
+Let $A$ be a directed set. Given real nets $\langle x_a\rangle_{a\in A}$ and $\langle y_a\rangle_{a\in A}$ which for all $k\in A$ such that there exists $j\in A$ with $j\leq k$, $x_k=y_k$ and that $\lim_{a}x_a$ exists, then $\lim_{a}y_a$ exists and that:
+\[\lim_{a}x_a=\lim_{a}y_a.\]
 \sssc{Preservation of less than or equal to}
-Let $A$ be a directed set. Given real nets $\langle x_a\rangle_{a\in A}$ and $\langle b_n\rangle_{a\in A}$ which for all $k$ that is greater than or equal to a specific $j\in A$, $a_k\leq b_k$ and that both $\lim_{a}x_a$ and $\lim_{a}b_n$ exist, then:
-\[\lim_{a}x_a\leq\lim_{a}b_n.\]
+Let $A$ be a directed set. Given real nets $\langle x_a\rangle_{a\in A}$ and $\langle y_a\rangle_{a\in A}$ which for all $k\in A$ such that there exists $j\in A$ with $j\leq k$, $x_k\leq y_k$ and that both $\lim_{a}x_a$ and $\lim_{a}y_a$ exist, then:
+\[\lim_{a}x_a\leq\lim_{a}y_a.\]
 \sssc{Squeeze theorem or Sandwich theorem}
-Let $A$ be a directed set. Given real nets $\langle x_a\rangle_{a\in A}$, $\langle b_n\rangle_{a\in A}$, and $\langle c_n\rangle_{a\in A}$ which for all $k$ that is greater than or equal to a specific $j\in A$:
-\[a_k\leq c_k\leq b_k\]
+Let $A$ be a directed set. Given real nets $\langle x_a\rangle_{a\in A}$, $\langle y_a\rangle_{a\in A}$, and $\langle z_a\rangle_{a\in A}$ which for all $k\in A$ such that there exists $j\in A$ with $j\leq k$:
+\[x_k\leq z_k\leq y_k\]
 and
-\[\lim_{a}x_a=\lim_{a}b_n=L,\]
+\[\lim_{a}x_a=\lim_{a}y_a=L,\]
 then: 
-\[\lim_{a}c_n=L.\]
+\[\lim_{a}z_a=L.\]
+\begin{proof}
+Start from the limits of $x_a$ and $y_a$, by definition of limit:
+
+For every $\varepsilon\in\mathbb{R}_{>0}$, there exists some $a_1\in A$ such that for every $b\in A$ with $b\geq a_1$, the point $L-\varepsilon\leq x_b\leq L+\varepsilon$.
+
+For every $\varepsilon\in\mathbb{R}_{>0}$, there exists some $a_2\in A$ such that for every $b\in A$ with $b\geq a_2$, the point $L-\varepsilon\leq y_b\leq L+\varepsilon$.
+
+Choose $a\in A$ such that $a_1\leq a$ and $a_2\leq a$.
+
+so,
+\[L-\varepsilon\leq x_{a}\leq z_{a}\leq y_{a}\leq L+\varepsilon.\]
+
+Since $\varepsilon > 0$ was arbitrary, by definition of limit:
+\[\lim_{a}z_a=L.\]
+\end{proof}
 \subsection{Limits of Functions with Real Domains}
 \subsubsection{Definition at Finity}
 Let \(I\) be an interval containing the point \(a\). Let \( f(x) \) be a function defined on \(I\), except possibly at \(a\) itself. The limit of \( f(x) \) as \( x \) approaches \( a \) is defined as follows:
@@ -166,6 +181,21 @@ and
 \[\lim_{x\to a}f(x)=\lim_{x\to a}g(x)=L,\]
 then: 
 \[\lim_{x\to a}h(x)=L.\]
+\begin{proof}
+Start from the limits of $f$ and $g$, by definition of limit:
+\[\forall\varepsilon>0, \exists\delta_1>0\text{\ s.t.\ }0<|x-a|<\delta_1\implies|f(x)-L|<\varepsilon,\]
+and
+\[\forall\varepsilon>0, \exists\delta_2>0\text{\ s.t.\ }0<|x-a|<\delta_2\implies|g(x)-L|<\varepsilon,\]
+
+Choose:
+\[\delta\coloneq\min(\delta_1,\delta_2),\]
+
+so,
+\[L-\varepsilon<f(x)\leq h(x)\leq g(x)<L+\varepsilon.\]
+
+Since $\varepsilon > 0$ was arbitrary, by definition of limit:
+\[\lim_{x\to a}h(x)=L.\]
+\end{proof}
 \sssc{Preservation of equal to at finity of one-sided limit}
 Let \(I\) be an interval \((a,b)\) in which $a<b$. Let $f(x)$ and $g(x)$ be functions defined on \(I\), which for all $x\in I$, $f(x)=g(x)$, and that $\lim_{x\to a^+}f(x)$ exists, then $\lim_{x\to a^+}g(x)$ exists and that
 \[\lim_{x\to a^+}f(x)=\lim_{x\to a^+}g(x).\]
@@ -185,6 +215,21 @@ and
 \[\lim_{x\to a^+}f(x)=\lim_{x\to a^+}g(x)=L,\]
 then: 
 \[\lim_{x\to a^+}h(x)=L.\]
+\begin{proof}
+Start from the limits of $f$ and $g$, by definition of right-hand limit:
+\[\forall\varepsilon>0, \exists\delta_1>0\text{\ s.t.\ }0<x-a<\delta_1\implies|f(x)-L|<\varepsilon,\]
+and
+\[\forall\varepsilon>0, \exists\delta_2>0\text{\ s.t.\ }0<x-a<\delta_2\implies|g(x)-L|<\varepsilon,\]
+
+Choose:
+\[\delta\coloneq\min(\delta_1,\delta_2),\]
+
+so,
+\[L-\varepsilon<f(x)\leq h(x)\leq g(x)<L+\varepsilon.\]
+
+Since $\varepsilon > 0$ was arbitrary, by definition of limit:
+\[\lim_{x\to a^+}h(x)=L.\]
+\end{proof}
 
 Let \(I\) be an interval \((b,a)\) in which $b>a$. Let $f(x)$, $g(x)$, and $h(x)$ be functions defined on \(I\), which for all $x\in I$:
 \[f(x)\leq h(x)\leq g(x)\]
@@ -299,8 +344,22 @@ If $g$ is continuous at $a$ and $f$ is continuous at $g(a)$, then the composite 
 The following types of functions are continuous at every number in their domains: algebraic functions, trigonometric functions, inverse trigonometric functions, exponential functions, logarithmic functions.
 \ssc{Intermediate Value Theorem (IVT) (中間值定理)}
 \sssc{Intermediate value theorem of real functions}
-Let $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ be a function, then for any interval $[a,b]\subseteq I$ such that $f$ is continuous on $[a,b]$ and $f(a)\neq f(b)$,
-\[k\in (f(a),f(b)) \implies \qty(\exists c\in (a,b) \text{\ s.t.\ }f(c)=k).\]
+Let $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ be a function, then for any interval $[a,b]\subseteq I$ such that $f$ is continuous on $[a,b]$ and $f(a)\neq f(b)$, $N$ is strictly between $f(a)$ and $f(b)$ implies there exists $c\in (a,b)$ such that $f(c)=N$.
+\begin{proof}
+Without loss of generality, assume $f(a)<N<f(b)$.
+
+Consider the set
+\[S=\{x\in [a,b]\mid f(x)\leq N\}.\]
+Since $f(a)<N$, $a\in S$; since $f(b)>N$, $b\notin S$. So $S$ is nonempty and bounded-above by $b$.
+
+Let $c=\sup S$. We claim that $f(c)=N$. Argue by contradiction.
+
+Assume $f(c)<N$. By continuity, there exists $\delta>0$ such that for all $x\in (c,c+\delta)\cap [a,b]$, $|f(x)-f(c)|<N-f(c)$. So $f(x)<N$ for some $x>c$. Contradicting that $c$ is the least upper bound.
+
+Assume $f(c)>N$. By continuity, there exists $\delta>0$ such that for all $x\in (c-\delta,c)\cap [a,b]$, $|f(x)-f(c)|<f(c)-N$. So $f(x)>N$ for some $x<c$. Contradicting that $c$ is the least upper bound.
+
+Therefore, $f(c)=N$.
+\end{proof}
 \sssc{Intermediate value theorem of functions between topological spaces}
 Let $X$ and $Y$ be topological spaces and function $f\colon I\subseteq X\to Y$ be continuous on a subset $J$ of $I$, then for any connected subset $K$ of $J$, $f(K)$ is a connected subset of $Y$.
 
@@ -977,17 +1036,50 @@ The generalized Stokes theorem says that the integral of a differential form $\o
 
 
 \section{Differential theorems}
-\ssc{Distributive over addition and subtraction}
-Differentiation is distributive over addition and subtraction.
+\ssc{Linearity}
+If functions $f$ and $g$ are differentiable on $I$ and $a,b\in\mathbb{R}$, then $af(x)+bg(x)$ is also differentiable on $I$ and its derivative is given by
+\[\dv{}{x}\qty(af(x)+bg(x))=af'(x)+bg'(x).\]
+\begin{proof}
+\[\ba
+\dv{}{x}\qty(af(x)+bg(x))&=\lim_{h\to 0}\frac{af(x+h)+bg(x+h)-af(x)-bg(x)}{h}\\
+&=af'(x)+bg'(x)
+\ea\]
+\end{proof}
 \ssc{Product rule (乘法定則)}
+If functions $f$ and $g$ are differentiable on $I$, then the product $fg$ is also differentiable on $I$ and its derivative is given by
 \[\dv{x}\qty(f(x)g(x))=f'(x)g(x)+f(x)g'(x).\]
+\begin{proof}
+\[\begin{aligned}
+\dv{f(x)g(x)}{x}&=\lim_{h\to 0}\frac{f(x+h)g(x+h)-f(x)g(x)}{h}\\
+&=\lim_{h\to 0}\frac{f(x+h)(g(x+h)-g(x))+g(x)(f(x+h)-f(x))}{h}\\
+&=f(x)g'(x)+f'(x)g(x).
+\end{aligned}\]
+\end{proof}
 \ssc{General Leibniz rule}
-If $f$ and $g$ are $n$-times differentiable functions, then the product $fg$ is also n-times differentiable and its $n$th derivative is given by 
+If functions $f$ and $g$ are $n$-times differentiable on $I$, then the product $fg$ is also $n$-times differentiable on $I$ and its derivative is given by
 \[(fg)^{(n)}=\sum _{k=0}^{n}{n \choose k}f^{(n-k)}g^{(k)}.\] 
 \ssc{Quotient rule (除法定則)}
+If functions $f$ and $g$ are differentiable on $I$ and $g\neq 0$ on $I$, then the quotient $\frac{f}{g}$ is also differentiable on $I$ and its derivative is given by
 \[\dv{x}\qty(\frac{f(x)}{g(x)})=\frac{f'(x)g(x)-f(x)g'(x)}{\qty(g(x))^2}.\]
+\begin{proof}
+\[\begin{aligned}
+\dv{}{x}\frac{f(x)}{g(x)}&=\lim_{h\to 0}\frac{\frac{f(x+h)}{g(x+h)}-\frac{f(x)}{g(x)}}{h}\\
+&=\lim_{h\to 0}\frac{f(x+h)g(x)-f(x)g(x+h)}{h\,g(x+h)g(x)}\\
+&=\lim_{h\to 0}\frac{(f(x+h)-f(x))g(x)-f(x)(g(x+h)-g(x))}{h\,g(x+h)g(x)}\\
+&=\lim_{h\to 0}\frac{f(x+h)-f(x)}{h\,g(x+h)}-f(x)\lim_{h\to 0}\frac{g(x+h)-g(x)}{h\,g(x+h)g(x)}\\
+&=\frac{f'(x)g(x)-f(x)g'(x)}{g(x)^2}
+\end{aligned}\]
+\end{proof}
 \ssc{Chain rule (連鎖律)}
-\[\dv{x}\qty((f\circ g)(x))=f'\qty(g(x))g'(x).\]
+If functions $f$ and $g$ are differentiable on $I$, then the composite $f\circ g$ is also differentiable on $I$ and its derivative is given by
+\[\dv{}{x}\qty((f\circ g)(x))=f'\qty(g(x))g'(x).\]
+\begin{proof}
+\[\ba
+\dv{}{x}\qty((f\circ g)(x))&=\lim_{h\to 0}\frac{f\qty(g(x+h))-f\qty(g(x))}{h}\\
+&=\lim_{h\to 0}\frac{f\qty(g(x+h))-f\qty(g(x))}{g(x+h)-g(x)}\cdot\frac{g(x+h)-g(x)}{h}\\
+&=f'\qty(g(x))g'(x)
+\ea\]
+\end{proof}
 \ssc{Faà di Bruno's formula}
 \bma
 &\frac{\mathrm{d}^n}{\mathrm{d}x}f\left(g(x)\right)\\
@@ -995,6 +1087,7 @@ If $f$ and $g$ are $n$-times differentiable functions, then the product $fg$ is 
 &f^{\qty(\sum_{j=1}^nm_j)}\left(g(x)\right)\cdot\\
 &\prod_{j=1}^n\left(\frac {g^{(j)}(x)}{j!}\right)^{m_j}.
 \eam
+{{{proof need start
 \subsection{Mean Value Theorem, MVT (均值定理)}
 Let $f:\, I\subseteq\mathbb{R}\to\mathbb{R}$ be a continuous function, and $f$ is differentiable on an interval $(a, b)\subseteq I$, then
 \[\exists c\in (a, b)\text{\ s.t.\ }f'(c)=\frac{f(b)-f(a)}{b-a}\]
@@ -1010,6 +1103,7 @@ A point in $I$ where a relative extreme of $f:\,I\subseteq\mathbb{R}\to\mathbb{R
 Let $f:\,J\subseteq\mathbb{R}\to\mathbb{R}$ be differentiable on the open interval $I\subseteq J$. If $\forall x\in I:\,f''>0$, then the graph of $f$ is concave upward on $I$; if $\forall x\in I:\,f''<0$, then the graph of $f$ is concave downward on $I$.
 \subsection{Inflection point theorem}
 If $(c,f(c))$ is an inflection point of $f$, then $f''(c)=0$ or $f''$ does not exist at $c$.
+{{{proof need end
 \subsection{Lagrange multiplier (method) (拉格朗日乘數 or 乘子（法）)}
 The Lagrange multiplier method is a method for finding the points where extremes occur of a differentiable function under constraints.
 \sssc{Univariate form}
@@ -1354,81 +1448,25 @@ From geometry of the arc length, the chord length, and the tangent length of an 
 \[\cos h<\frac{\sin h}{h}<1.\]
 \[\lim_{h\to 0}\cos h=1.\]
 
-Lemma 0.0:
-
-Let \(I\) be an interval containing the point \(a\). Let $f(x)$, $g(x)$, and $h(x)$ be functions defined on \(I\), except possibly at \(a\) itself which:
-\[f(x)\leq h(x)\leq g(x)\]
-and
-\[\lim_{x\to a}f(x)=\lim_{x\to a}g(x)=L,\]
-then:
-\[\lim_{x\to a}h(x)=L.\]
-
-So,
+By the squeeze theorem:
 \[\lim_{h\to 0}\frac{\sin h}{h}=1.\]
 
 Proof of lemma 1:
 \[\cos h-1=-2\sin^2\qty(\frac{h}{2}),\]
 \[\frac{\sin^2\qty(\frac{h}{2})}{h}=\frac{\sin\qty(\frac{h}{2})}{\frac{h}{2}}\cdot\frac{\sin\qty(\frac{h}{2})}{2}.\]
 
-Lemma 1.0:
-\[\dv{f(x)g(x)}{x}=f'(x)g(x)+f(x)g'(x).\]
-
-Recall lemma 0, we obtain:
+By lemma 0:
 \[\lim_{h\to 0}\frac{\cos h-1}{h}=0.\]
-
-Proof of lemma 0.0:
-
-Start from the limits of $f$ and $g$, by definition of limit:
-\[\forall\varepsilon>0, \exists\delta_1>0\text{\ s.t.\ }0<|x-a|<\delta_1\implies|f(x)-L|<\varepsilon,\]
-and
-\[\forall\varepsilon>0, \exists\delta_2>0\text{\ s.t.\ }0<|x-a|<\delta_2\implies|g(x)-L|<\varepsilon,\]
-
-Choose:
-\[\delta\coloneq\min(\delta_1,\delta_2),\]
-
-so,
-\[L-\varepsilon<f(x)\leq h(x)\leq g(x)<L+\varepsilon.\]
-
-Since $\varepsilon > 0$ was arbitrary, by definition of limit:
-\[\lim_{x\to a}h(x)=L.\]
-
-Proof of lemma 1.0:
-\[\begin{aligned}
-\dv{f(x)g(x)}{x}&=\lim_{h\to 0}\frac{f(x+h)g(x+h)-f(x)g(x)}{h}\\
-&=\lim_{h\to 0}\frac{f(x+h)(g(x+h)-g(x))+g(x)(f(x+h)-f(x))}{h}\\
-&=f(x)g'(x)+f'(x)g(x).
-\end{aligned}\]
 \end{proof}
 \sssc{Cosine function}
 \[\dv{\cos(x)}{x}=-\sin(x).\]
 \sssc{Tangent function}
 \[\dv{\tan(x)}{x}=\sec^2(x).\]
 \begin{proof}
-\[\tan(x)=\frac{\sin(x)}{\cos(x)}.\]
-Lemma 0: For differentiable functionS $f(x)$ and $g(x)$,
-\[\dv{}{x}\qty(\frac{f(x)}{g(x)})=\frac{f'(x)g(x)-f(x)g'(x)}{g(x)^2},\quad g(x)\neq 0.\]
 \[\begin{aligned}
 \dv{\tan(x)}{x}&=\dv{}{x}\frac{\sin(x)}{\cos(x)}\\
 &=\frac{\cos^2(x)+\sin^2(x)}{\cos^2(x)}\\
 &=\sec^2(x).
-\end{aligned}\]
-
-Let $y=\tan(x)$.
-\[y'=1+y^2.\]
-Prove by mathematical induction. When $n=0$,
-\[P_0(y)=y.\]
-Assume 
-\[P_{n-1}(y)=y^{(n-1)}.\]
-Differentiate both side:
-\[y'P_{n-1}'(y)=y^{(n)}=(1+y^2)P_{n-1}'(y)=P_n(y).\]
-
-Proof of lemma 0:
-\[\begin{aligned}
-\dv{}{x}\frac{f(x)}{g(x)}&=\lim_{h\to 0}\frac{\frac{f(x+h)}{g(x+h)}-\frac{f(x)}{g(x)}}{h}\\
-&=\lim_{h\to 0}\frac{f(x+h)g(x)-f(x)g(x+h)}{h\,g(x+h)g(x)}\\
-&=\lim_{h\to 0}\frac{(f(x+h)-f(x))g(x)-f(x)(g(x+h)-g(x))}{h\,g(x+h)g(x)}\\
-&=\lim_{h\to 0}\frac{f(x+h)-f(x)}{h\,g(x+h)}-f(x)\lim_{h\to 0}\frac{g(x+h)-g(x)}{h\,g(x+h)g(x)}\\
-&=\frac{f'(x)g(x)-f(x)g'(x)}{g(x)^2},\quad g(x)\neq 0.
 \end{aligned}\]
 \end{proof}
 \sssc{Cotangent function}
@@ -1444,7 +1482,6 @@ Proof of lemma 0:
 \sssc{Secant function}
 \[\dv{\sec(x)}{x}=\sec(x)\tan(x).\]
 \begin{proof}
-\[\sec(x)=\frac{1}{\cos(x)}.\]
 \[\ba
 \dv{\sec(x)}{x}&=\dv{}{x}\frac{1}{\cos(x)}\\
 &=\frac{\sin(x)}{\cos^2(x)}\\
@@ -1454,7 +1491,6 @@ Proof of lemma 0:
 \sssc{Cosecant function}
 \[\dv{\csc(x)}{x}=-\csc(x)\cot(x).\]
 \begin{proof}
-\[\csc(x)=\frac{1}{\sin(x)}.\]
 \[\ba
 \dv{\csc(x)}{x}&=\dv{}{x}\frac{1}{\sin(x)}\\
 &=\frac{-\cos(x)}{\sin^2(x)}\\
@@ -1547,6 +1583,16 @@ Define the derivative polynomials $P_n$ such that $P_n\qty(\tan(x))=\tan^{(n)}(x
 
 The Taylor expansion of the tangent function at $a$ is:
 \[\tan(x)=\sum_{n=0}^{\infty}\frac{P_n\qty(\tan(x))(a)}{n!}(x-a)^n.\]
+\begin{proof}
+Let $y=\tan(x)$.
+\[y'=1+y^2.\]
+Prove by mathematical induction. When $n=0$,
+\[P_0(y)=y.\]
+Assume:
+\[P_{n-1}(y)=y^{(n-1)}.\]
+Differentiate both side:
+\[y'P_{n-1}'(y)=y^{(n)}=(1+y^2)P_{n-1}'(y)=P_n(y).\]
+\end{proof}
 \sssc{Cotangent function}
 Define the derivative polynomials $P_n$ such that $P_n\qty(\cot(x))=\cot^{(n)}(x)$ with recursion as:
 \[\begin{cases}
@@ -1556,7 +1602,20 @@ Define the derivative polynomials $P_n$ such that $P_n\qty(\cot(x))=\cot^{(n)}(x
 
 The Taylor expansion of the cotangent function at $a$ is:
 \[\cot(x)=\sum_{n=0}^{\infty}\frac{P_n\qty(\cot(x))(a)}{n!}(x-a)^n.\]
-{{{
+\begin{proof}
+Let $y=\cot(x)$.
+\[y'=-(1+y^2).\]
+Prove by mathematical induction. When $n=0$,
+\[P_0(y)=y.\]
+Assume:
+\[P_{n-1}(y)=y^{(n-1)}.\]
+Differentiate both side:
+\[y'P_{n-1}'(y)=y^{(n)}=-(1+y^2)P_{n-1}'(y)=P_n(y).\]
+\end{proof}
+{{{Inverse
+
+
+
 \ssc{List of Counterexamples}
 \sssc{Dirichlet function (狄利克雷函數)}
 The Dirichlet function is a function $f\colon\manthbb{R}\to\mathbb{R};$
