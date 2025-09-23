@@ -151,13 +151,44 @@ The sign function $\sgn\colon\bbR\to\bbR$ is defined as:
 0,\quad & x=0\\
 1,\quad & x>0
 \ecs\]
-\sssc{Floor function (下取整函數), integral part, integer part (整數部份), greatest integer,or entier}
+\sssc{Floor function (下取整函數), integral part, integer part (整數部份), greatest integer, entier, rounding down (無條件捨去), or rounding toward negative infinity}
 The floor function $\lfloor\cdot\rfloor\colon\bbR\to\bbR$ or $[\cdot]\colon\bbR\to\bbR$ is defined as:
 \[\lfloor x\rfloor=[x]=\max\{m\in\bbZ\mid m\leq x\},\]
 in which $[\cdot]$ is called the Gauss sign (高斯符號).
-\sssc{Ceiling function (上取整函數)}
+\sssc{Ceiling function (上取整函數), rounding up (無條件進位), or rounding toward positive infinity}
 The ceiling function $\lceil\cdot\rceil\colon\bbR\to\bbR$ is defined as:
 \[\lceil x\rceil=\min\{m\in\bbZ\mid m\geq x\}.\]
+\sssc{Truncation, rounding toward zero, or rounding away from infinity}
+The truncation $\operatorname{truncate}\colon\bb{R}\to\bb{R}$ is defined as:
+\[\operatorname{truncate}(x)=
+\bcs
+\lfloor x\rfloor,\quad & x\geq 0\\
+\lceil x\rceil,\quad & x<0
+\ecs\]
+\sssc{Rounding half up (四捨五入) or rounding half toward positive infinity}
+The rounding half up $\operatorname{roundhalfup}\colon\bbR\to\bbR$ is defined as:
+\[\operatorname{roundhalfup}(x)=\left\lfloor x+\frac{1}{2}\right\rfloor.\]
+\sssc{Rounding half down (五捨六入) or rounding half toward negative infinity}
+The rounding half down $\operatorname{roundhalfdown}\colon\bbR\to\bbR$ is defined as:
+\[\operatorname{roundhalfdown}(x)=\left\lceil x-\frac{1}{2}\right\rceil.\]
+\sssc{Rounding half toward zero or rounding half away from infinity}
+The rounding half toward zero $\operatorname{roundhalftowardzero}\colon\bbR\to\bbR$ is defined as:
+\[\operatorname{roundhalftowardzero}(x)=\sgn(x)\left\lceil |x|-\frac{1}{2}\right\rceil.\]
+\sssc{Rounding half away from zero or rounding half toward infinity}
+The rounding half away from zero $\operatorname{roundhalfawayfromzero}\colon\bbR\to\bbR$ is defined as:
+\[\operatorname{roundhalfawayfromzero}(x)=\sgn(x)\left\lfloor |x|+\frac{1}{2}\right\rfloor.\]
+\sssc{Rounding half to even (四捨六入五成雙)}
+The rounding half to even $\operatorname{roundhalftoeven}\colon\bbR\to\bbR$ is defined as:
+\[\operatorname{roundhalftoeven}(x)=\bcs
+\left\lfloor x+\frac{1}{2}\right\rfloor,\quad & \frac{1}{2}\left\lfloor x+\frac{1}{2}\right\rfloor\in\mathbb{Z}\\
+\left\lceil x-\frac{1}{2}\right\rceil,\quad & \frac{1}{2}\left\lfloor x+\frac{1}{2}\right\rfloor\notin\mathbb{Z}
+\ecs.\]
+\sssc{Rounding half to odd (四捨六入五成單)}
+The rounding half to odd $\operatorname{roundhalftoodd}\colon\bbR\to\bbR$ is defined as:
+\[\operatorname{roundhalftoodd}(x)=\bcs
+\left\lfloor x+\frac{1}{2}\right\rfloor,\quad & \frac{1}{2}\left\lfloor x+\frac{1}{2}\right\rfloor\notin\mathbb{Z}\\
+\left\lceil x-\frac{1}{2}\right\rceil,\quad & \frac{1}{2}\left\lfloor x+\frac{1}{2}\right\rfloor\in\mathbb{Z}
+\ecs.\]
 \sssc{Heaviside step function (黑維塞階躍函數) or Unit step function (單位階躍函數)}
 \[H(x)=u(x)=
 \begin{cases}0,\quad &x<0\\
