@@ -599,10 +599,14 @@ Specifically, the $0$th(-order) partial derivative of $f$ is $f$ itself.
 \ssc{Differentiability and continuity}
 For a point $a$ in the domain of $f$, $f$ is differentiable at $a$ if it is continuous at $a$.
 \ssc{Antiderivative (反導函數), inverse derivative, primitive function, primitive integral, or indefinite integral (不定積分)}
-An antiderivative of a continuous function $f$ is a differentiable function $F$ whose derivative is equal to the original function $f$, that is,
-\[F'=f.\]
-Suppose $f$ is a function of an independent variable $x$, then its antiderivative $F$ is denoted as
-\[F=\int f\,\mathrm{d}x.\]
+An antiderivative of a function $f(x)$ is a differentiable function $F(x)$ whose derivative is equal to the original function $f(x)$, that is,
+\[F'(x)=f(x),\]
+denoted as
+\[F(x)=\int f(x)\,\mathrm{d}x.\]
+If one of $F(x)$ is $G(x)$, we also write
+\[F(x)=G(x)+C,\]
+where $C$ is an arbitrary constant that does not depend on $x$, called constant of integration.
+
 The process of solving for antiderivatives is called antidifferentiation (反微分) or indefinite integration (不定積分).
 \subsection{Taylor series (泰勒級數) or Taylor expansion (泰勒展開)}
 Assume that $F:\,\mathbb{R}\to\mathbb{R}$ is an infinitely differentiable function, and its derivatives of every order exist on $\mathbb{R}$, then the Taylor series of $F$ at $a$ is
@@ -931,26 +935,26 @@ A real function $A$ with real independent variables that is second-order differe
 \subsection{Multi-index notation (多重指標記號)}
 Suppose there are \( n \) variables \( x_1, x_2, \dots, x_n \), then a multi-index $\alpha$ is a vector of \( n \) nonnegative integers: 
 \[
-\alpha = (\alpha_1, \alpha_2, \dots, \alpha_n), \quad \text{where } \alpha_i \in \mathbb{N}_0.
+\alpha = (\alpha_1, \alpha_2, \ldots, \alpha_n), \quad \text{where\ } \alpha_i \in \mathbb{N}_0.
 \]
 Define: 
 \begin{itemize}
 \item Norm \( \|\alpha\| \): 
 \[
-\|\alpha\| = \alpha_1 + \alpha_2 + \dots  + \alpha_n.
+\|\alpha\| = \alpha_1 + \alpha_2 + \ldots\alpha_n.
 \]
 \item Factorial \( \alpha! \): 
 \[
-\alpha! = \alpha_1! \cdot \alpha_2! \cdot \dots  \cdot \alpha_n!.
+\alpha! = \alpha_1! \cdot \alpha_2! \cdot \ldots \alpha_n!.
 \]
 \item Power \( \mathbf{x}^\alpha \): 
-If \( \mathbf{x} = (x_1, x_2, \dots, x_n) \), then
+If \( \mathbf{x} = (x_1, x_2, \ldots x_n) \), then
 \[
-\mathbf{x}^\alpha = x_1^{\alpha_1} \cdot x_2^{\alpha_2} \dots  x_n^{\alpha_n}.
+\mathbf{x}^\alpha = x_1^{\alpha_1} \cdot x_2^{\alpha_2} \ldots  x_n^{\alpha_n}.
 \]
 \item Higher-order mixed partial derivatives $D^\alpha f$: 
 \[
-D^\alpha f = \frac{\partial^{\|\alpha\|} f}{\partial x_1^{\alpha_1} \partial x_2^{\alpha_2} \dots  \partial x_n^{\alpha_n}}.
+D^\alpha f = \frac{\partial^{\|\alpha\|} f}{\partial x_1^{\alpha_1} \partial x_2^{\alpha_2} \ldots  \partial x_n^{\alpha_n}}.
 \]
 \end{itemize}
 \subsection{Higher-order derivative}
@@ -1218,11 +1222,12 @@ Since $g(\mathbf{x}^*) = \mathbf{0}$, we have
 Because \( \delta\mathbf{x} \in \ker(\nabla g(\mathbf{x}^)) \), \( \nabla f(\mathbf{x}^) \) can be expressed as a linear combination of \( \nabla g(\mathbf{x}^) \) . This means that there exists a vector to $\lambda$ such that:
 \[\nabla\mathcal{L} = \nabla \qty(f(\mathbf{x}) - \lambda \cdot g(\mathbf{x})) = \mathbf{0} \]
 \end{proof}
-\ssc{Generalized Schwarz's theorem or Clairaut's theorem on equality of mixed partials}
-For a function $f\colon\Omega\subseteq\mathbb{R}^n\to\mathbb{R}$, if $\mathbf{p}\in\Omega$ such that $f$ has continuous $m$th partial derivative with respect to $x_h$ for any $h\in\{1,2,\dots n\}$ on some neighborhood $N\subseteq\Omega$ of $\mathbf{p}$, then all $r$th mixed partial derivatives \[\frac{\partial^r f(\mathbf{p}}{\partial^{m_{i_1}}x_{i_1}^{\phantom{i_1}m_{i_1}}\partial^{m_{i_2}}x_{i_2}^{\phantom{i_2}m_{i_2}}\dots \partial^{m_{i_k}}x_{i_k}^{\phantom{i_k}m_{i_k}}}\]
-with given constants $t_q$ for any $q\in\{1,2,\dots n\}$ in which $0<r<m$, $\sum_{j=1}^km_{i_j}=r$, and
-\[\forall q\in\{1,2,\dots n\}\colon\sum_{i_j=q}m_{i_j}=t_q,\]
-are equivalent.
+\ssc{Generalized Schwarz's Theorem, Young's Theorem, or Clairaut's Theorem on equality or symmetry of mixed partial derivatives}
+For a function $f\colon\Omega\subseteq\mathbb{R}^n\to\mathbb{R}^o$ and any $m$th derivative function $g$ of it given by
+\[g=\frac{\partial^mf}{\prod_{k=1}^r\partial x_{i_k}^{\phantom{i_k}m_k}}\]
+with $\sum_{k=1}^rm_k=m$ and $i_k\in\mathbb{N}\land i_k\leq n$ for all $k$. Define constants $t_q$ for all $q\in\mathbb{N}\land q\leq n$ as $t_q=\sum_{i_k=q}m_k$. 
+
+If any such $g$ exists in a neighborhood of $\mathbf{p}\in\Omega$ and is continuous at $\mathbf{p}$, then all such $g$ with the same $t_q$ for all $q\in\mathbb{N}\land q\leq n$ are equal at $\mathbf{p}$.
 
 
 
@@ -1618,7 +1623,7 @@ Using the chain rule on the left:
 \ssc{List of Taylor Expansions}
 \sssc{Power function}
 For any $n\in\mathbb{R}$ and $x\in\mathbb{R}$ in the maximum possible domain:
-\[x^n=\sum_{k=0}^{\infty}\binom{n}{k}a^{n-k}(x-a)^k.\]
+\[x^n=\sum_{k=0}^{\infty}\binom{n}{k}a^{n-k}(x-a)^k,|x-a|<|a|.\]
 \sssc{Logarithmic function}
 For any $x\in\mathbb{R}_{>0}$:
 \[\ln(x)=\ln(a)+\sum_{n=1}^{\infty}(-1)^{n-1}\frac{(x-a)^n}{na^n},\quad 0<x\leq a.\]
@@ -1725,6 +1730,10 @@ which is differentiable at $0$ with $f'(0)=0$ and discontinuous everywhere else.
 \[\int\sqrt{a^2+x^2}\,\mathrm{d}x=\frac{x}{2}\sqrt{a^2+x^2}+\frac{a^2}{2}\ln\qty(x+\sqrt{a^2+x^2})+C.\]
 \[\int\sqrt{x^2-a^2}\,\mathrm{d}x=\frac{x}{2}\sqrt{x^2-a^2}-\frac{a^2}{2}\ln\qty(x+\sqrt{x^2-a^2})+C,\quad x^2>a^2.\]
 \[\int\sqrt{a^2-x^2}\,\mathrm{d}x=\frac{x}{2}\sqrt{a^2-x^2}+\frac{a^2}{2}\arcsin\frac{x}{|a|}+C,\quad|a|\geq|x|.\]
+\sssc{Gaussian integral (高斯積分) or Euler–Poisson integral}
+\[\int_{-\infty}^{\infty}e^{-t^2}\dd{t}=\sqrt{\pi}.\]
+\[\int_0^{\infty}e^{-t^2}\dd{t}=\frac{\sqrt{\pi}}{2}.\]
+{{{
 \ssc{Lists of Laplace Transform}{{{
 \ssc{Lists Fourier Transform}{{{
 

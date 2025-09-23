@@ -146,8 +146,107 @@ An $n$th-order boundary-value problem is an $n$th-order ODE with some conditions
 
 A solution of an BVP is a solution of the ODE that complies with all the BCs.
 \sct{Solving an ODE}
-\ssc{Solving a separable ODE}
-{{{
+\ssc{First-order separable ODEs}
+\sssc{Definition}
+A first-order ODE in the form
+\[\dv{y}{x}=g(x)h(y)\]
+is said to be separable or have separable variables.
+\sssc{Solution by integration}
+The solutions of
+\[\dv{y}{x}=g(x)h(y)\]
+are the family
+\[\int\frac{1}{h(y)}\dd{y}=\int g(x)\dd{x}+C\]
+and the constant solution
+\[h(y)=0.\]
+\ssc{First-order linear ODEs}
+\sssc{Definition}
+A first-order ODE in the form
+\[\dv{y}{x}+P(x)y=Q(x)\]
+is said to be linear.
+\sssc{Solution by integrating factor}
+Define the integrating factor
+\[\mu(x)=e^{\int P(x)\dd{x}}.\]
+Multiply both sides:
+\[\mu(x)\dv{y}{x}+\mu(x)P(x)y=\mu(x)Q(x).\]
+But the left-hand side is exactly a derivative:
+\[\dv{}{x}\qty(\mu(x)y(x))=\mu(x)Q(x).\]
+Integrate:
+\[\mu(x)y(x)=\int\mu(x)Q(x)\dd{x}+C.\]
+\[y(x)=\frac{1}{\mu(x)}\qty(\int\mu(x)Q(x)\dd{x}+C).\]
+\sssc{Remarks}
+Occasionally, a first-order differential equation is not linear in one variable
+but is linear in the other variable. If a first-order ODE that can be wriiten in the form
+\[\dv{y}{x}=\frac{1}{P(y)x+Q(y)}.\]
+We can take its reciprocal as
+\[\dv{x}{y}-P(y)x=Q(y),\]
+which is recognized as linear in the variable $x$.
+\ssc{Exact ODEs}
+\sssc{Definition}
+A first-order ODE in the form
+\[M(x,y)\dd{x}+N(x,y)\dd{y}=0,\]
+i.e.
+\[M(x,y)+N(x,y)\dv{y}{x}=0,\]
+with
+\[\pdv{M}{y}=\pdv{N}{x}\]
+in a certian rectangle $R\subseteq\bbR^2$ is said to be exact.
+
+By Schwarz's Theorem, Young's Theorem, or Clairaut's Theorem, the criterion
+\[\pdv{M}{y}=\pdv{N}{x}\]
+holds if and only if there exists a function $F\colon R\to\bbR$ such that
+\[\pdv{F}{x}=M,\quad\pdv{F}{y}=N,\]
+and $\frac{\partial^2F}{\partial x\partial y}$.
+
+Such $F$ is called the potential function.
+\sssc{Solution by integration and then differentiation with respect to different variables}
+First, integrate $M(x,y)$ with respect to $x$:
+\[F(x,y)=\int M(x,y)\dd{x}+\phi(y),\]
+where $\phi(y)$ is an arbitrary constant of integration that may depend on $y$.
+
+Second, differentiate with respect to $y$:
+\[\pdv{F}{y}(x,y)=N(x,y)=\pdv{}{y}\qty(\int M(x,y)\dd{x})+\phi'(y).\]
+
+Third, integrate
+\[\phi'(y)=N(x,y)-\pdv{}{y}\qty(\int M(x,y)\dd{x})\]
+with respect to $y$ to find $\phi(y)$.
+
+Fourth, substitute $\phi(y)$ back to find the potential function $F(x,y)$, the implicit solution is given by
+\[F(x,y)=C,\]
+where $C$ is an arbitrary constant.
+\sssc{Integration factor to make nonexact ODE exact}
+Given a first-order ODE in the form
+\[M(x,y)\dd{x}+N(x,y)\dd{y}=0,\]
+we define the integration factor $\mu(x,y)$ such that
+\[\mu(x,y)M(x,y)\dd{x}+\mu(x,y)N(x,y)\dd{y}=0\]
+is exact and with potential function $F$ such that
+\[\pdv{F}{x}=\mu(x,y)M(x,y),\quad\pdv{F}{y}=\mu(x,y)N(x,y).\]
+
+If
+\[\frac{\pdv{M}{y}-\pdv{N}{x}}{N}\]
+depends only on $x$, we can construct integration factor $\mu(x)$ by letting
+\[\frac{\mu'(x)}{\mu(x)}=\frac{\pdv{M}{y}-\pdv{N}{x}}{N},\]
+that is,
+\[\mu(x)=e^{\int\frac{\pdv{M}{y}-\pdv{N}{x}}{N}\dd{x}.\]
+\begin{proof}\mbox{}\\
+This is a separable ODE of $\mu$ with repect to $x$.
+
+Let
+\[P(x)=\frac{\pdv{M}{y}-\pdv{N}{x}}{N}.\]
+\[\mu^{-1}\dd{\mu}=P(x)\dd{x}.\]
+\[\ln|\mu|=\int P(x)\dd{x}.\]
+\[\mu=e^{\int P(x)\dd{x}}.\]
+\end{proof}
+
+Similarly, if
+\[\frac{\pdv{N}{x}-\pdv{M}{y}}{M}\]
+depends only on $y$, we can construct integration factor $\mu(y)$ by letting
+\[\frac{\mu'(y)}{\mu(y)}=\frac{\pdv{N}{x}-\pdv{M}{y}}{M},\]
+that is,
+\[\mu(y)=e^{\int\frac{\pdv{N}{x}-\pdv{M}{y}}{M}\dd{x}.\]
+
+
+
+
+
 
 
 \ssc{Dynamical system (動態系統 or 動力系統)}
