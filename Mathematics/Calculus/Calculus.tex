@@ -673,10 +673,13 @@ The order of a differential equation is the order of the highest derivative in t
 
 \section{Definte Integration (定積分)}
 \ssc{Notation}
-The integral of a function $f$, called integrand (被積函數), with respect to $x$, called integration variable (積分變數), from $a$ to $b$, which $(a,b)$ is called the domain of integration (積分域) or interval of integration (積分區間) and $a,b$ are called limits of integration (積分極限 or 積分上下限), is denoted as
-\[\int_a^bf\dd{x}.\]
-The integral of a function $f$ with respect to $\omega$ over $\Omega$, called the domain of integration and which the limit points of $\Omega$ are called are called limits of integration (積分極限), is denoted as
-\[\int_{\Omega}f\dd{\omega}.\]
+The integral of a function $f(x)$ with domain being a subset of $\bbR$, called integrand (被積函數), with respect to $x$, called integration variable (積分變數), from $a$ to $b$, which the open interval between $a$ and $b$ is called the domain of integration (積分域) or interval of integration (積分區間) and $a,b$ are called limits of integration (積分極限 or 積分上下限), is denoted as
+\[\int_a^bf(x)\dd{x},\]
+in which when $a>b$, the integral is defined as
+\[\int_a^bf(x)\dd{x}\coloneq-\int_b^af(x)\dd{x}.\]
+
+The integral of a function $f(\omega)$ with respect to $\omega$ over $\Omega$, called the domain of integration and which the limit points of $\Omega$ are called are called limits of integration (積分極限), is denoted as
+\[\int_{\Omega}f(\omega)\dd{\omega}.\]
 \subsection{(Proper) Riemann integral (黎曼積分) and Darboux integral (達布積分)}
 \sssc{Premise}
 (Proper) Riemann integral and Darboux integral are two equivalant definitions of definite integral of functions over compact intervals of $\mathbb{R}$ to $\mathbb{R}$.
@@ -1476,16 +1479,19 @@ The inverse Laplace transform of a complex function $F(s)$ is given by the line 
 
 
 \sct{Lists}
-\ssc{List of Derivatives}
+\ssc{List of Derivatives and as definite integrals}
 \sssc{Power function}
 \[\dv{x^n}{x}=nx^{n-1}.\]
+\[x^n=n\int_0^xt^{n-1}\dd{t}.\]
 \begin{proof}
 \[\dv{x^n}{x}=\lim_{h\to 0}\frac{(x+h)^n-x^n}{h}=\lim_{h\to 0}\frac{\sum_{k=1}^{\infty}\binom{n}{k}x^{n-k}h^k}{h}=nx^{n-1}.\]
 \end{proof}
 \sssc{Logarithmic function}
 \[\dv{\ln(x)}{x}=\frac{1}{x}.\]
+\[\ln(x)=\int_1^x\frac{1}{t}\dd{t},\quad x>0.\]
 \sssc{Exponential function}
 \[\dv{a^x}{x}=\ln aa^x.\]
+\[a^x=1+\int_0^x\ln aa^t\dd{t}.\]
 \begin{proof}
 \[\ba
 \dv{a^x}{x}&=\lim_{h\to 0}\frac{a^{x+h)-a^x}{h}\\
@@ -1498,6 +1504,7 @@ The inverse Laplace transform of a complex function $F(s)$ is given by the line 
 \end{proof}
 \sssc{Sine function}
 \[\dv{\sin(x)}{x}=\cos(x).\]
+\[\sin(x)=\int_0^x\cos(t)\dd{t}.\]
 \begin{proof}
 Lemma 0:
 \[\lim_{h\to 0}\frac{\sin h}{h}=1.\]
@@ -1529,8 +1536,10 @@ By lemma 0:
 \end{proof}
 \sssc{Cosine function}
 \[\dv{\cos(x)}{x}=-\sin(x).\]
+\[\cos(x)=1-\int_0^x\sin(t)\dd{t}.\]
 \sssc{Tangent function}
 \[\dv{\tan(x)}{x}=\sec^2(x).\]
+\[\tan(x)=\int_{\operatorname{round}\qty(\frac{x}{\pi})\pi}^x\sec^2(t)\dd{t}.\]
 \begin{proof}
 \[\begin{aligned}
 \dv{\tan(x)}{x}&=\dv{}{x}\frac{\sin(x)}{\cos(x)}\\
@@ -1540,6 +1549,7 @@ By lemma 0:
 \end{proof}
 \sssc{Cotangent function}
 \[\dv{\cot(x)}{x}=-\csc^2(x).\]
+\[\cot(x)=-\int_{\frac{\pi}{2}+\operatorname{round}\qty(\frac{x}{\pi}-\frac{1}{2})\pi}^x\csc^2(t)\dd{t}.\]
 \begin{proof}
 \[\cot(x)=\frac{\cos(x)}{\sin(x)}.\]
 \[\begin{aligned}
@@ -1550,6 +1560,7 @@ By lemma 0:
 \end{proof}
 \sssc{Secant function}
 \[\dv{\sec(x)}{x}=\sec(x)\tan(x).\]
+\[\sec(x)=\int_{\operatorname{round}\qty(\frac{x}{\pi})\pi}^x\sec(t)\tan(t)\dd{t}.\]
 \begin{proof}
 \[\ba
 \dv{\sec(x)}{x}&=\dv{}{x}\frac{1}{\cos(x)}\\
@@ -1559,6 +1570,7 @@ By lemma 0:
 \end{proof}
 \sssc{Cosecant function}
 \[\dv{\csc(x)}{x}=-\csc(x)\cot(x).\]
+\[\csc(x)=-\int_{\frac{\pi}{2}+\operatorname{round}\qty(\frac{x}{\pi}-\frac{1}{2})\pi}^x\csc(t)\cot(t)\dd{t}.\]
 \begin{proof}
 \[\ba
 \dv{\csc(x)}{x}&=\dv{}{x}\frac{1}{\sin(x)}\\
@@ -1568,6 +1580,7 @@ By lemma 0:
 \end{proof}
 \sssc{Inverse sine function}
 \[\dv{\arcsin(x)}{x}=\frac{1}{\sqrt{1-x^2}}.\]
+\[\arcsin(x)=\int_0^x\frac{1}{\sqrt{1-t^2}}\dd{t},\quad\abs{x}\leq 1.\]
 \begin{proof}
 Let $y=\arcsin(x)$. $\sin(y)=x$.
 \[\dv{}{x}\sin(y)=\dv{}{x}(x).\]
@@ -1577,6 +1590,7 @@ Using the chain rule on the left:
 \end{proof}
 \sssc{Inverse cosine function}
 \[\dv{\arccos(x)}{x}=-\frac{1}{\sqrt{1-x^2}}.\]
+\[\arccos(x)=\int_x^1\frac{1}{\sqrt{1-t^2}}\dd{t},\quad\abs{x}\leq 1.\]
 \begin{proof}
 Let $y=\arccos(x)$. $\cos(y)=x$.
 \[\dv{}{x}\cos(y)=\dv{}{x}(x).\]
@@ -1586,6 +1600,7 @@ Using the chain rule on the left:
 \end{proof}
 \sssc{Inverse tangent function}
 \[\dv{\arctan(x)}{x}=\frac{1}{x^2+1}.\]
+\[\arctan(x)=\int_0^x\frac{1}{t^2+1}\dd{t}.\]
 \begin{proof}
 Let $y=\arctan(x)$. $\tan(y)=x$.
 \[\dv{}{x}\tan(y)=\dv{}{x}(x).\]
@@ -1595,6 +1610,7 @@ Using the chain rule on the left:
 \end{proof}
 \sssc{Inverse cotangent function}
 \[\dv{\arccot(x)}{x}=-\frac{1}{x^2+1}.\]
+\[\arccot(x)=\int_x^{\infty}\frac{1}{t^2+1}\dd{t}.\]
 \begin{proof}
 Let $y=\arccot(x)$. $\cot(y)=x$.
 \[\dv{}{x}\cot(y)=\dv{}{x}(x).\]
@@ -1604,6 +1620,7 @@ Using the chain rule on the left:
 \end{proof}
 \sssc{Inverse secant function}
 \[\dv{\arcsec(x)}{x}=\frac{1}{|x|\sqrt{x^2+1}}.\]
+\[\arcsec(x)=\sgn(x)\int_1^\abs{x}\frac{1}{t\sqrt{t^2-1}}\dd{t}+(1-\sgn(x))\frac{\pi}{2},\quad\abs{x}\geq 1.\]
 \begin{proof}
 \[\ba
 \dv{\arcsec(x)}{x}&=\dv{\arccos(\frac{1}{x})}{x}\\
@@ -1613,6 +1630,7 @@ Using the chain rule on the left:
 \end{proof}
 \sssc{Inverse cosecant function}
 \[\dv{\arccsc(x)}{x}=-\frac{1}{|x|\sqrt{x^2+1}}.\]
+\[\arccsc(x)=\sgn(x)\int_\abs{x}^{\infty}\frac{1}{t\sqrt{t^2-1}}\dd{t},\quad\abs{x}\geq 1.\]
 \begin{proof}
 \[\ba
 \dv{\arccsc(x)}{x}&=\dv{\arcsin(\frac{1}{x})}{x}\\
@@ -1716,7 +1734,14 @@ The function $f\colon\manthbb{R}\to\mathbb{R};$
 \end{cases}\]
 which is differentiable at $0$ with $f'(0)=0$ and discontinuous everywhere else.
 \ssc{List of Integrals}
-\sssc{Rational function}
+{{{start
+\sssc{Power function}
+\sssc{Logarithmic function}
+\sssc{Exponential function}
+\sssc{Trigonometric functions}
+\sssc{Inverse trigonometric functions}
+{{{end
+\sssc{Rational functions}
 \[\int\frac{f'(x)}{f(x)}\,\mathrm{d}x=\ln|f(x)|+C.\]
 \[\int\frac{1}{x^2+a^2}\,\mathrm{d}x=\frac{1}{a}\arctan\frac{x}{a}+C.\]
 \[\int\frac{1}{x^2-a^2}\,\mathrm{d}x=\frac{1}{2a}\ln\frac{x-a}{x+a}+C.\]
@@ -1726,14 +1751,13 @@ which is differentiable at $0$ with $f'(0)=0$ and discontinuous everywhere else.
 \[\int\frac{x}{ax+b}\,\mathrm{d}x=\frac{x}{a}-\frac{b}{a^2}\ln|ax+b|+C.\]
 \[\int\frac{x}{(ax+b)^2}\,\mathrm{d}x=\frac{b}{a^2(ax+b)}+\frac{1}{a^2}\ln|ax+b|+C.\]
 \[\int x(ax+b)^n\,\mathrm{d}x=\frac{a(n+1)x-b}{a^2(n+1)(n+2)}(ax+b)^{n+1}+C,\quad n\notin\{-1,-2\}.\]
-\sssc{Irrational function}
+\sssc{Irrational functions}
 \[\int\sqrt{a^2+x^2}\,\mathrm{d}x=\frac{x}{2}\sqrt{a^2+x^2}+\frac{a^2}{2}\ln\qty(x+\sqrt{a^2+x^2})+C.\]
 \[\int\sqrt{x^2-a^2}\,\mathrm{d}x=\frac{x}{2}\sqrt{x^2-a^2}-\frac{a^2}{2}\ln\qty(x+\sqrt{x^2-a^2})+C,\quad x^2>a^2.\]
 \[\int\sqrt{a^2-x^2}\,\mathrm{d}x=\frac{x}{2}\sqrt{a^2-x^2}+\frac{a^2}{2}\arcsin\frac{x}{|a|}+C,\quad|a|\geq|x|.\]
 \sssc{Gaussian integral (高斯積分) or Euler–Poisson integral}
 \[\int_{-\infty}^{\infty}e^{-t^2}\dd{t}=\sqrt{\pi}.\]
 \[\int_0^{\infty}e^{-t^2}\dd{t}=\frac{\sqrt{\pi}}{2}.\]
-{{{
 \ssc{Lists of Laplace Transform}{{{
 \ssc{Lists Fourier Transform}{{{
 
