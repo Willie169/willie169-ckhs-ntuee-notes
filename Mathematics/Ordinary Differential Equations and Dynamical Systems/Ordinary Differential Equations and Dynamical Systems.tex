@@ -277,26 +277,6 @@ which is a separable ODE that has the family of solutions
 \[\int\frac{1}{g(y)}\dd{y}=x\]
 and the constant solution
 \[g(y)=0.\]
-\ssc{General method for reducing first-order ODE to separable ODE with substitution}
-Consider a first-order ODE of the form
-\[\dv{y}{x}=F(x,y).\]
-Take functions $u(x,y)$, $g(u)$, and $h(x)$ such that for almost everywhere in the domain of $F$,
-\begin{itemize}
-    \item there exists a function $p$ with $y=p(x,u)$ and $\pdv{p}{u}$ exists,
-    \item there exists a function $q$ such that $q(u)=\pdv{p}{x}$,
-    \item $u(x,y)$ is defined almost everywhere in the domain of $F$,
-    \item $g(u)h(x)=F(x,y)$ almost everywhere in the domain of $F$.
-\end{itemize}
-
-Substitution gives
-\[\pdv{p}{x}+\pdv{p}{u}\pdv{u}{x}=g(u)h(x),\]
-which is separable.
-\[\int\frac{1}{g(u)}\dv{y}{u}\dd{u}=\int h(x)\dd{x}+C.\]
-And $g(u)=0$ is a constant solution.
-
-Substituting $u(x,y)$ back gives the solutions.
-
-Finally, we should consider the singular solutions when $u(x,y)$ is not defined or $g(u)h(x)!=F(x,y)$.
 \ssc{Bernoulli differential equations}
 A first-order ODE of the form
 \[\dv{y}{x}+P(x)y=Q(x)y^n,\quad n\in\mathbb{R}\setminus\{0,1\}\]
@@ -321,6 +301,33 @@ Integrate:
 \[\mu(x)v(x)=\int\mu(x)(1-n)Q(x)\dd{x}+C.\]
 \[v(x)=\frac{1}{\mu(x)}\qty(\int\mu(x)(1-n)Q(x)\dd{x}+C).\]
 Recall $v=y^{1-n}$, we obtain the family of general solutions.
+
+{{{ For F(x,y)=f(ax+by+c) solutions by substitution 
+
+
+
+\ssc{General method for reducing first-order ODE to separable ODE with substitution}
+Consider a first-order ODE of the form
+\[\dv{y}{x}=F(x,y).\]
+Take functions $u(x,y)$ and $g(u)$ that satisfy
+\begin{itemize}
+    \item there exists functions $p(x,u)=y$ and $r(u)s(x)=\pdv{p}{u}\neq 0$,
+    \item there exists a function $q$ such that $q(u)=\pdv{p}{x}$, and
+    \item $g(u)=F(x,y)$
+\end{itemize}
+almost everywhere in the domain of $F$.
+
+Substitute:
+\[q(u)+r(u)s(x)\dv{u}{x}=g(u).\]
+\[\frac{r(u)}{g(u)-q(u)}\dd{u}=\frac{1}{s(x)}\dd{x}.\]
+This is a separable first-order ODE. By integration, we obtain a family of solutions:
+\[\int\frac{r(u)}{g(u)-q(u)}\dd{u}=\int\frac{1}{s(x)}\dd{x}+C.\]
+And $g(u)-q(u)=0$ is a constant solution.
+
+Substituting $u(x,y)$ back gives solutions for $y$.
+
+Finally, consider the singular solutions at points where the conditions fail.
+
 
 
 
