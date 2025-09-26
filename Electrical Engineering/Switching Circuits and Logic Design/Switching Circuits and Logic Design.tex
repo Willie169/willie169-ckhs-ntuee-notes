@@ -23,23 +23,34 @@
 \end{itemize}
 \subsection{Number Systems}
 \subsubsection{Definition}
-Let $b\in\mathbb{N}\land b>1$. A number with digits $d_n d_{n-1} \dots d_1 d_0$ in base (or radix) $b$ represents the value:
-\[N = d_n \cdot b^n + d_{n-1} \cdot b^{n-1} + \dots + d_1 \cdot b^1 + d_0 \cdot b^0\]
-where each $d_i \in \mathbb{Z}\land 0\leq d_i<b$.
+Let $b\in\mathbb{N}_{>1}$. A number with digits $\ldots d_1 d_0.d_{-1}d_{-2}\ldots$ in base (or radix) $b$ represents the value:
+\[N = \sum_n d_nb^n\]
+where $d_n \in \mathbb{N}_0\land d_i<b$.
+
+We call numbers in base $b$ (decimal) base-$b$ number. We can only represent a base $b$ in another base or in decimal (base-10) and specify the base you use the represent the base if not in decimal; otherwise, every base would be base-10.
+
+Usually, when base $b>10$ (decimal), $A$ (or $a$) is used to represent the digit $9+1$; when $b>11$ (decimal), $B$ (or $b$) is used to represent the digit $9+2$; and so on.
+
+To indicate the base of a base-$b$ number, we append subscript $_b$ after it. We also use prefix $0b$ (or $0B$) to represent base-2 numbers, aka binary numbers, prefix $0$ to represent base-8 numbers, aka octal numbers, prefix $0x$ (or $0X$) to represent base-16 numbers, aka hexadecimal number, and no prefix to represent decimal numbers, aka base-10 numbers.
 \subsubsection{Conversion}
-Suppose you have a number written in base $N$ (with $N\in\mathbb{N}\land N>1$):
-\[(d_k d_{k-1} \dots d_1 d_0)_N\]
-To convert it into base $M$ (with $M\in\mathbb{N}\land M>1$), we can repeatedly divide the number by $M$ and record the remainders until the quotient is $0$, then the digits in base $M$ are the remainders read from last to first.
-\sssc{Special cases}
-There is an easier way for conversion Between base $b$ and base $b^n$ (with $b\in\mathbb{N}\land b>1$):
-\ben
-\item Base $b$ to Base $b^n$:
+To convert a nonnegative integer
+\[N=\ldots d_1 d_0\]
+in base $x$ with $x\in\mathbb{N}_{>1}$ into base $y\neq x$ (written in base $x$) with $y\in\mathbb{N}_{>1}$, we take $I_1=N$ and then repeatedly take $r_i=I_i\mod y$ in the $i$th (start from $1$st) time and $I_{i+1}=\frac{I-r_i}{y}$ until the first time $I_{i+1}=0$, and let that time be the $k$th time, then the same number in base $y$ is digits $r_kr_{k-1}\ldots r_1$.
+
+To convert a rational number $q=(-1)^k\frac{a}{b}$ with $a,b\in\mathbb{N}\land k\in\{0,1\}$ in base $x$ into base $y$, we convert $a$ and $b$ to base $y$ as $a_y$ and $b_y$ separate and the wanted result is $(-1)^k\frac{a_y}{b_y}$.
+
+To convert a base-dependent expression that is a base-independent fuction $f$ of a vector of rational numbers $(p_1,p_2,\ldots)$, we convert each $p_i$ to the wanted base as $q_i$ and the wanted result is $f(q_1,q_2,\ldots)$.
+\sssc{Special cases conversions}
+There is an easier way for conversion between nonnegative integers in base $b$ and base $b^n$ (with $b,n\in\mathbb{N}_{>1}$):
+
+Convert nonnegative integers in base $b$ into base $b^n$:
 \ben
 \item Group the digits of the base-$b$ number into blocks of $n$ digits, starting from the LSB.
 \item Convert each block to its equivalent single digit in base $b^n$.
 \item Concatenate the bits.
 \een
-\item Base $b^n$ to Base $b$:
+
+Convert nonnegative integers in base $b^n$ into base $b$:
 \ben
 \item Convert each digit of the base-$b^n$ number to $n$ digits in base $b$.
 \item Concatenate the $n$-digit blocks.
