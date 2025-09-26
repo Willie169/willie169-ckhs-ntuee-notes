@@ -32,29 +32,33 @@ We call numbers in base $b$ (decimal) base-$b$ number. We can only represent a b
 Usually, when base $b>10$ (decimal), $A$ (or $a$) is used to represent the digit $9+1$; when $b>11$ (decimal), $B$ (or $b$) is used to represent the digit $9+2$; and so on.
 
 To indicate the base of a base-$b$ number, we append subscript $_b$ after it. We also use prefix $0b$ (or $0B$) to represent base-2 numbers, aka binary numbers, prefix $0$ to represent base-8 numbers, aka octal numbers, prefix $0x$ (or $0X$) to represent base-16 numbers, aka hexadecimal number, and no prefix to represent decimal numbers, aka base-10 numbers.
-\subsubsection{Conversion}
-To convert a nonnegative integer
-\[N=(\ldots d_1 d_0)_x\]
-in base $x$ with $x\in\mathbb{N}_{>1}$ into base $y\neq x$ (written in base $x$) with $y\in\mathbb{N}_{>1}$, we take $I_1=N$ and then repeatedly take $r_i=I_i\mod y$, convert it to base $y$, and take $I_{i+1}=\frac{I-r_i}{y}$ in the $i$th (start from $1$st) time until the first time $I_{i+1}=0$, and let that time be the $k$th time, then $N$ in base $y$ is digits $(r_kr_{k-1}\ldots r_1)_y$.
-
-To convert a rational number $q=(-1)^k\frac{a}{b}$ with $a,b\in\mathbb{N}\land k\in\{0,1\}$ in base $x$ into base $y$, we convert $a$ and $b$ to base $y$ as $a_y$ and $b_y$ separate and the wanted result is $(-1)^k\frac{a_y}{b_y}$.
-
-To convert a base-dependent expression that is a base-independent fuction $f$ of a vector of rational numbers $(p_1,p_2,\ldots)$, we convert each $p_i$ to the wanted base as $q_i$ and the wanted result is $f(q_1,q_2,\ldots)$.
-\sssc{Special cases conversions}
-There is an easier way for conversion between nonnegative integers in base $b$ and base $b^n$ (with $b,n\in\mathbb{N}_{>1}$):
-
-Convert nonnegative integers in base $b$ into base $b^n$:
+\subsubsection{General conversion method}
+We want to convert a nonnegative number
+\[N=(\ldots d_1 d_0.d^{-1}d^{-2}\ldots)_x\]
+in base $x$ with $x\in\mathbb{N}_{>1}$ into base $y\neq x$ (written in base $x$) with $y\in\mathbb{N}_{>1}$.
 \ben
-\item Group the digits of the base-$b$ number into blocks of $n$ digits, starting from the LSB.
-\item Convert each block to its equivalent single digit in base $b^n$.
-\item Concatenate the bits.
+\item We first take $I_1=(\ldots d_1 d_0)_x$ and repeatedly:
+\ben
+\item take $r_i=I_i\mod y$, convert it to base $y$, which must be a single digit, and
+\item take $I_{i+1}=\frac{I-r_i}{y}$,
+\een
+in the $i$th (start from $1$st) time, until the first time $I_{i+1}=0$, and let that time be the $k$th time.
+\item And then we take $J_1=(d^{-1}d^{-2}\ldots)_x$ and repeatedly
+\item take $s_j=\lfloor J_j\cdot y$, which may be more than $1$ digits if $x>y$ and is later treated directly as base $y$, and
+\item take $J_{j+1}=J_j\cdot y-s_j$,
+\een
+in the $j$th (start from $1$st) time, until the first time $J_{j+1}=0$, and let that time be the $l$th time.
+\item Then, $N$ in base $y$ is
+\[(r_kr_{k-1}\ldots r_1.s_1s_2\ldots l_k)_y.\]
 \een
 
-Convert nonnegative integers in base $b^n$ into base $b$:
-\ben
-\item Convert each digit of the base-$b^n$ number to $n$ digits in base $b$.
-\item Concatenate the $n$-digit blocks.
-\een
+To convert an expression that is a base-independent fuction $f$ of a vector of rational numbers $(p_1,p_2,\ldots)$, we convert each $p_i$ to the wanted base as $q_i$ and the wanted result is $f(q_1,q_2,\ldots)$.
+\sssc{Special conversion methods}
+There are easier ways for conversion between base $b$ and base $b^n$ with $b,n\in\mathbb{N}_{>1}$.
+
+To convert numbers in base $b$ into base $b^n$, we group the digits to the left and right of the decimal point of the base-$b$ number into blocks of $n$ digits starting from the digit closest to the decimal point and convert each block to one digit in base $b^n$.
+
+To convert numbers in base $b^n$ into base $b$, we convert each digit of the base-$b^n$ number to $n$ digits in base $b$.
 \subsection{Binary}
 A binary digit is called a bit, which is either $0$ or $1$. Binary arithmetic is the same as decimals, except that "invert" or "flip" means converting $0$ to $1$ and $1$ to $0$, and "complement" means inverting all bits.
 
