@@ -8,8 +8,7 @@
 \date{\temtoday}
 \titletocdoc
 \chapter{Switching Circuits and Logic Design}
-\section{Introduction}
-\subsection{Digital Systems and Switching Circuits}
+\section{Digital Systems and Switching Circuits}
 \begin{itemize}
 \item\textbf{Digital system}: Deals with signals that have discrete values. Theoretically, for a given input, the output is exactly correct.
 \item\textbf{Analog system}: Deals with signals that vary continuously over time. The output might have an error depending on the accuracy of the components used.
@@ -21,26 +20,29 @@
 \item\textbf{Sequential circuit}: A circuit whose output value depends on the present input value and past input values.
 \item\textbf{Logic gate}: An electronic device that performs a basic Boolean operation on one or more binary inputs (0 or 1) to produce a single binary output (0 or 1).
 \end{itemize}
+{{{
+
 \sct{Number Systems}
 \ssc{Definition}
-Let $b\in\mathbb{N}_{>1}$. A number with digits $\ldots d_2d_1d_0.d_{-1}d_{-2}\ldots$ in base (or radix) $b$ represents the value:
-\[N = \sum_n d_nb^n\]
-where $d_n \in \mathbb{N}_0\land d_i<b$.
+Let the base (aka radix) $b\in\mathbb{N}_{>1}$. A base-$b$ (aka radix-$b$) number in digits:
+\[(-1)^m\ldots d_2d_1d_0.d_{-1}d_{-2}\ldots,\quad m\in\{0,1\}\land\forall i\colon d_i\in\mathbb{N}_0\land d_i<b\]
+represents the value:
+\[N =(-1)^m\sum_id_ib^i.\]
 
-We call numbers in base $b$ (decimal) base-$b$ number. We can only represent a base $b$ in another base or in decimal (base-10) and specify the base you use the represent the base if not in decimal; otherwise, every base would be base-10.
+We can only represent a base $b$ in another specified base or in decimal (base-10) and specify the base you use the represent the base if not in decimal; otherwise, every base would be base-10.
 
-Usually, when base $b>10$ (decimal), $A$ (or $a$) is used to represent the digit $9+1$; when $b>11$ (decimal), $B$ (or $b$) is used to represent the digit $9+2$; and so on.
+To indicate the base of a base-$b$ number, we append subscript $_b$ after it. We also use prefix \verb|0b| (or \verb|0B|) to represent base-2 numbers, aka binary numbers, prefix \verb|0| (or \verb|0o|, \verb|0O|) to represent base-8 numbers, aka octal numbers, prefix \verb|0x| (or \verb|0X|) to represent base-16 numbers, aka hexadecimal number, and no prefix (or \verb|0d|, \verb|0D|) to represent base-10 numbers, aka decimal numbers.
 
-To indicate the base of a base-$b$ number, we append subscript $_b$ after it. We also use prefix \verb|0b| (or \verb|0B|) to represent base-2 numbers, aka binary numbers, prefix \verb|0| (or \verb|0o|, \verb|0O|) to represent base-8 numbers, aka octal numbers, prefix \verb|0x| (or \verb|0X|) to represent base-16 numbers, aka hexadecimal number, and no prefix (or \verb|0d|, \verb|0D|) to represent decimal numbers, aka base-10 numbers.
+Usually, when the radix $b>10_{10}$, $A$ (or $a$) is used to represent the digit $9+1$; when the radix $b>11_{10}$, $B$ (or $b$) is used to represent the digit $9+2$; and so on.
 \ssc{Conversion between bases}
 \sssc{General conversion method}
-We want to convert a nonnegative rational number
-\[N=(\ldots d_2d_1d_0+D)_x,\]
-where $0\leq D<1$ is a fraction or a float-point number $(0.d_{-1}d_{-2}\ldots)_x$, in base $x$ with $x\in\mathbb{N}_{>1}$ into base $y\neq x$ (written in base $x$) with $y\in\mathbb{N}_{>1}$.
+We want to convert a nonnegative number $N$ in base $x$ with $x\in\mathbb{N}_{>1}$,
+\[N=((-1)^m\ldots d_2d_1d_0.d_{-1}d_{-2}\ldots)_x,\quad m\in\{0,1\},\]
+into base $y\neq x$ (written in base $x$) with $y\in\mathbb{N}_{>1}$.
 \ben
 \item First, we take $I_1=(\ldots d_2d_1d_0)_x$ and repeatedly:
 \ben
-\item take $r_i=I_i\mod y$, convert it to base $y$, which must be a single digit, and
+\item take $r_i=I_i\mod y$, convert it to base $y$, of which the result must be a single digit, and
 \item take $I_{i+1}=\frac{I-r_i}{y}$,
 \een
 in the $i$th (start from $1$st) time, until the first time $I_{i+1}=0$, and let that time be the $k$th time.
@@ -50,29 +52,29 @@ in the $i$th (start from $1$st) time, until the first time $I_{i+1}=0$, and let 
 \een
 in the $j$th (start from $1$st) time, until the first time $J_{j+1}=0$, and let that time be the $l$th time.
 \item Then, $N$ is
-\[\sum_{i=1}^kr_i\times y^{i-1}+\sum_{j=1}^ls_j\times y^{-j},\]
-and $N$ in base $y$ can be obtained by first taking its integer part
+\[(-1)^m\qty(\sum_{i=1}^kr_i\times y^{i-1}+\sum_{j=1}^ls_j\times y^{-j}),\]
+and $N$ in base $y$ can be obtained by first taking the integer part of the magnitude of it:
 \[(r_kr_{k-1}\ldots r_2r_1)_y\]
-and then obtaining its fractional part using vertical addition where the $i$th row is $s_i$ with its units digit in the $i$th digit to the right of the decimal point, for each $i$, where carry propagation is applied to ensure all digits are valid in base $y$, i.e. $<y$.
+and then obtaining the fractional part with radix point of the magnitude of it using vertical addition where the $i$th row is $s_i$ with the units digit of $s_i$ in the $i$th digit to the right of the radix point, for each $i$, where carry propagation is applied to ensure all digits are valid in base $y$, i.e. $<y$.
 \een
 
-To convert an expression that is a base-independent fuction $f$ of a vector of nonnegative rational numbers $(p_1,p_2,\ldots)$, we convert each $p_i$ to the wanted base as $q_i$ and the wanted result is $f(q_1,q_2,\ldots)$.
+To convert an expression that is a radix-independent fuction $f$ of a vector of numbers $(p_1,p_2,\ldots)$, we convert each $p_i$ to the wanted base, let it be $q_i$, then the wanted result is $f(q_1,q_2,\ldots)$.
 \sssc{Power-base conversion method}
-To convert a nonnegative integer or float-point number in base $b$ into base $b^n$ with $b,n\in\mathbb{N}_{>1}$, we group the digits to the left and right of the decimal point of the base-$b$ number into blocks of $n$ digits starting from the digit closest to the decimal point and convert each block to one digit in base $b^n$.
+To convert a base-$b$ number into base $b^n$ with $b,n\in\mathbb{N}_{>1}$, we group the digits to the left and right of the radix point into blocks of $n$ digits starting from the digits closest to the radix point and convert each block to one digit in base $b^n$.
 \sssc{Root-base conversion method}
-To convert a nonnegative integer or float-point number in base $b^n$ into base $b$ with $b,n\in\mathbb{N}_{>1}$, we convert each digit of the base-$b^n$ number to $n$ digits in base $b$.
+To convert a base-$b^n$ number in into base $b$ with $b,n\in\mathbb{N}_{>1}$, we convert each digit to $n$ digits in base $b$ and concatenate them.
 \sssc{Product and quotient-base conversion method}
-We want to convert a nonnegative integer or float-point number
-\[N=(\ldots d_2d_1d_0.d_{-1}d_{-2}\ldots)_x\]
-in base $x$ with $x\in\mathbb{N}_{>1}$ into base $y=ax$ (written in base $x$) with $a\in\mathbb{N}_{>1}\lor\frac{1}{a}\in\mathbb{N}_{>1}$.
+We want to convert a number in base $x$ with $x\in\mathbb{N}_{>1}$,
+\[N=((-1)^m\ldots d_2d_1d_0.d_{-1}d_{-2}\ldots)_x,\quad m\in\{0,1\},\]
+into base $y=ax$ (written in base $x$) with $a\in\mathbb{N}_{>1}\lor\frac{1}{a}\in\mathbb{N}_{>1}$.
 
 We take $D_i=d_i\cdot a^{-i}$, which is later treated directly as in base $y$, for each integer $i$.
 
 Then, $N$ is
-\[\sum_iD_i\times y^i,\]
-and $N$ in base $y$ can be obtained by vertical addition where the $i$th row is $D_i$ with its units digit in the $i+1$th digit to the left of the decimal point, for each $i$, where carry propagation is applied to ensure all digits are valid in base $y$, i.e. $<y$.
+\[(-1)^m\sum_iD_i\times y^i,\]
+and $N$ in base $y$ can be obtained by vertical addition where the $i$th row is $D_i$ with the units digit of $D_i$ in the $(i+1)$th digit to the left of the radix point, for each $i$, where carry propagation is applied to ensure all digits are valid in base $y$, i.e. $<y$.
 \sssc{Criterion of finite expansion after base conversion}
-A rational number $0\leq D<1$ in base $x$ with $x\in\mathbb{N}_{>1}$ can be expressed in finite digits to the right of decimal points in base $y\neq x$ with $y\in\mathbb{N}_{>1}$ iff the reduced denominator (cancelled common factors with the numerator) of $D$ has only prime factors that are prime factors of $y$.
+A finite rational number with the fractional part of the magnitude of it expressed in fraction in base $x$ with $x\in\mathbb{N}_{>1}$ being $D_x$ can be expressed in finite digits with radix point in base $y\neq x$ with $y\in\mathbb{N}_{>1}$ iff the reduced denominator (denominator cancelled the greatest common factor with the numerator) of $D_x$ has no prime factor that is not a prime factor of $y$.
 \subsection{Binary}
 A binary digit is called a bit, which is either $0$ or $1$. Binary arithmetic is the same as decimals, except that "invert" or "flip" means converting $0$ to $1$ and $1$ to $0$, and "complement" means inverting all bits.
 
@@ -104,7 +106,7 @@ It can represent numbers range from $-(2^{N-1}-1)$ to $2^{N-1}-1$. It has two ze
 
 It is the easiest to read, but its arithmetic is the hardest to compute.
 \ssc{1's complement}
-The nonnegative numbers are the same as those in sign and magnitude; the negative numbers invert all bits of its absolute value. 
+The nonnegative numbers are the same as those in sign and magnitude; the negative numbers invert all bits of its absolute value, i.e. $(2^N-1)$ minus it.
 
 It can represent numbers range from $-(2^{N-1}-1)$ to $2^{N-1}-1$. It has two zero ($+0$ and $-0$). 
 
@@ -116,29 +118,32 @@ Assume no overflow conditions.
 
 An $n$-bit negative number $X$ is represent as $2^n-1-|X|$ in 1's complement.
 
-When we add two $n$-bit numbers $A$ and $B$, with 1's complement representations $A_1$ and $B_1$.
+Suppose we want to add two $n$-bit numbers $A$ and $B$, and in 1's complement, $A_1$ and $B_1$. Without loss of generality, assume $A\geq B$.
 
 Let:
-\[S = A_1 + B_1,\quad R=S \mod 2^n, \quad C=\left\lfloor \frac{S}{2^n} \right\rfloor,\]
+\[S = A_1 + B_1,\quad R=S \mod 2^n, \quad C=\left\lfloor\frac{S}{2^n}\right\rfloor,\]
 and $S_c$ be the correct sum of $A$ and $B$ in 1's complement.
 
-Case 0: $A>B\geq 0$
-\[S = A_1 + B_1 = A +B =S_c\]
+Case 0: $A,B\geq 0$
+\[S =A_1+B_1=A+B=S_c\]
 
-Case 1: $A\geq 0>B\land |B|<A$
-\[S = A_1 + B_1 = 2^n-1+A-|B|\]
-\[R=A-|B|,\quad C=1\]
+Case 1: $A\geq 0>B\land |B|\leq A$
+\[S =A_1+B_1=2^n-1+A-|B|\]
+\[R=A-|B|-1,\quad C=1\]
 \[S_c=A-|B|=R+C\]
 
-Case 2: $0\geq A>B$
+Case 2: $A\geq 0>B\land |B|\geq A$
+\[S =A_1+B_1=2^n-1+A-|B|=S_c=R\]
+
+Case 3: $0\geq A>B$
 \[S=A_1+B_1=2^{n+1}-2-|A|-|B|\]
 \[R=2^n-2-|A|-|B|,\quad C=1\]
 \[S_c=2^n-1-|A|-|B|=R+C\]
 \end{proof}
 
-If the sum of two positive numbers exceeds $2^{N-1}-1$, it overflows into the negative range; if the sum of two negative numbers is less than $-2^{N-1}$, it overflows into the positive range. This makes overflow detection straightforward. 
+If the sum of two positive numbers is greater than $2^{N-1}-1$, it overflows into the negative range; if the sum of two negative numbers is less than $-2^{N-1}+1$, it overflows into the positive range. This makes overflow detection straightforward. 
 \ssc{2's complement}
-The nonnegative numbers are the same as those in sign and magnitude; the negative numbers invert all bits of its absolute value and add $1$. 
+The nonnegative numbers are the same as those in sign and magnitude; the negative numbers invert all bits of its absolute value and add $1$, i.e. $2^N$ minus it.
 
 It can represent numbers range from $-2^{N-1}$ to $2^{N-1}-1$. It has only one zero.
 
@@ -197,8 +202,8 @@ In a switch circuit, 0 (usually) represents an open switch, and 1 represents a c
 A Boolean function is a logical operation performed on one or more binary inputs that produces a single binary output.
 
 A logic gate is a device that performs a Boolean function. Below, electronic symbols follow ANSI standards.
-\subsection{Logic Operations}
-\sssc{NOT (Negation / Inversion / Complement)}
+\subsection{Logical Operators}
+\sssc{NOT / Negation / Inversion / Complement}
 \begin{itemize}
 \item Symbol: $A'$, $\neg A$, $\mathord{\sim}A$, or $\ol{A}$
 \item Definition: Invert the value.
@@ -211,7 +216,7 @@ A & A'\\\hline
 \end{longtable}
 \item Logic gate: \esym{not port}
 \eit 
-\sssc{AND (Conjunction / Logic Multiplication)}
+\sssc{AND / Conjunction / Logical Multiplication}
 \begin{itemize}
 \item Symbol: $A \cdot B$, $A*B$, or $AB$
 \item Definition: True if both inputs are true and false otherwise.
@@ -226,7 +231,7 @@ A & B & A\cdot B\\\hline
 \end{longtable}
 \item Logic gate: \esym{and port}
 \eit
-\sssc{OR (Disjunction / Logic Addition / Inclusive OR)}
+\sssc{OR / Disjunction / Logical Addition / Inclusive OR}
 \begin{itemize}
 \item Symbol: $A + B$
 \item Definition: True if at least one input is true and false otherwise.
@@ -241,7 +246,7 @@ A & B & A+B\\\hline
 \end{longtable}
 \item Logic gate: \esym{or port}
 \eit
-\sssc{XOR (Exclusive-OR)}
+\sssc{XOR / Exclusive OR}
 \begin{itemize}
 \item Symbol: $A \oplus B$
 \item Definition: $A'B+AB'$
@@ -256,7 +261,7 @@ A & B & A\oplus B\\\hline
 \end{longtable}
 \item Logic gate: \esym{xor port}
 \eit
-\sssc{NAND (Not AND)}
+\sssc{NAND / Not AND}
 \begin{itemize}
 \item Definition: $(AB)'$
 \item Truth Table:
@@ -270,7 +275,7 @@ A & B & (A\cdot B)'\\\hline
 \end{longtable}
 \item Logic gate: \esym{nand port}
 \eit
-\sssc{NOR (Not OR)}
+\sssc{NOR / Not OR}
 \begin{itemize}
 \item Definition: $(A+B)'$
 \item Truth Table:
@@ -284,7 +289,7 @@ A & B & (A+B)'\\\hline
 \end{longtable}
 \item Logic gate: \esym{nor port}
 \eit
-\sssc{XNOR ((Logic) equivalence / Exclusive NOR)}
+\sssc{XNOR / Logical equivalence / Exclusive NOR}
 \begin{itemize}
 \item Symbol: $A\equiv B$ or $A\odot B$
 \item Definition: $(A\oplus B)'$
@@ -309,13 +314,13 @@ A Boolean expression is formed by application of the logic operations to one or 
 \item\tb{Sum terms}: A sum term is a sum of literals or a literal.
 \eit
 
-In a Boolean expression, parentheses are added as needed to specify the order in which the operations are performed; when parentheses are omitted, complementation is performed first and then AND and then OR; while the precedence of XOR and XNOR varies in context.
+In a Boolean expression, parentheses are added as needed to specify the order in which the operations are performed; without parentheses, complementation is performed first, and then AND, and then OR; and the precedence of XOR and XNOR are either right higher to OR or right lower to OR depending on the context.
 \sssc{Boolean function}
 A Boolean function or a switching function is a function of which the domain is $\{1,0\}^n$ in which $n\in\mathbb{N}$ and the codomain is $\{1,0\}$.
 
 The ON-set of a Boolean function $f$ is the set of all input combinations such that $f$ of them is $1$. Each element in the ON-set of $f$ corresponds to a row in the truth table of $f$ in which the output is $1$. The OFF-set of a Boolean function $f$ is the set of all input combinations such that $f$ of them is $0$. Each element in the OFF-set of $f$ corresponds to a row in the truth table of $f$ in which the output is $0$.
 \sssc{Truth table}
-A truth table, also called a table of combinations, specifies the corresponding output values for all possible combinations of input values for a Boolean function. A truth table for an $n$-variable Boolean function $f\qty(A_1,A_2,\ldots A_n)$ have $2^n$ rows and is:
+A truth table, also called a table of combinations, specifies the corresponding output values for all possible combinations of input values for a Boolean function in the order such that if two input combinations have the same inputs in the first $i$ variables and $A_{i+1}$ of the first one is $0$, $A_{i+1}$ of the second one is $1$, then the first is put prior to the second. A truth table for an $n$-variable Boolean function $f\qty(A_1,A_2,\ldots A_n)$ have $2^n$ rows and is:
 \begin{longtable}[c]{|m|m|m|m|m|}
 \hline
 A_1 & A_2 & \ldots & A_n & f\\\hline
@@ -325,9 +330,15 @@ A_1 & A_2 & \ldots & A_n & f\\\hline
 1 & 1 & \ldots & 1 & f\qty(1,1,\ldots 1)\\\hline
 \end{longtable}
 \sssc{Sum-of-products (SOP) form}
-An expression is said to be in SOP form if it consists of a sum (OR) of product (AND) or single variable terms, in which it is called to be degenerate when some of the terms are single variables. Every Boolean expression can be expressed in SOP form.
+An expression is said to be in SOP form if it consists of a sum (OR) of product (AND) or single variable terms, in which it is called to be degenerate when some of the terms are single variables.
+
+Every Boolean expression can be expressed in SOP form. And a Boolean expression may have more than one SOP forms.
 \sssc{Product-of-sums (POS) form}
-An expression is said to be in POS form if it consists of a product (AND) of sum (OR) or single variable terms, in which it is called to be degenerate when some of the terms are single variables. Every Boolean expression can be expressed in POS form.
+An expression is said to be in POS form if it consists of a product (AND) of sum (OR) or single variable terms, in which it is called to be degenerate when some of the terms are single variables.
+
+Every Boolean expression can be expressed in POS form. And a Boolean expression may have more than one POS forms.
+\sssc{Dual}
+The dual of an Boolean expression or equation is another Boolean expression or equation obtained by simplifing the original expression or equation such that it only consists of literals, AND, and OR, and then replacing all AND in it with OR, all OR in it with AND, and all constants in it with their complements.
 \sssc{Boolean Vector Functions or Boolean Multi-output Functions}
 A Boolean vector function or a Boolean multi-output function is a function $f\colon\{1,0\}^n\to\{1,0\}^m$. A Boolean vector function can be specified with truth table or as a tuple of $m$ Boolean functions.
 \ssc{Theorems}
@@ -348,9 +359,10 @@ AND, OR, XOR, NAND, NOR, and XNOR are associative.
 \item XOR is distributive over AND and OR.
 \eit
 \sssc{DeMorgan's Laws}
-\[(\sum_{i=1}^nX_i)′=\prod_{i=1}^nX_i',\quad (\prod_{i=1}^nX_i)'=\sum_{i=1}^nX_i'.\]
+\[(\sum_{i=1}^nX_i)′=\prod_{i=1}^nX_i',\quad (\prod_{i=1}^nX_i)'=\sum_{i=1}^nX_i',\]
+\[(\bigoplus_{i=1}^nX_i)′=\bigodot_{i=1}^nX_i',\quad (\bigodot_{i=1}^nX_i)'=\bigoplus_{i=1}^nX_i'.\]
 \sssc{Duality Principle}
-If a Boolean equation is true, you can get another true equation, called its dual, by interchanging AND and OR and interchanging 0 and 1 everywhere.
+A Boolean equation is an identity if and only if the dual of it is an identity.
 \sssc{Uniting Theorems}
 \[XY+XY'=X,\quad (X+Y)(X+Y')=X.\]
 \sssc{Absorption Theorems}
@@ -375,46 +387,128 @@ XY+X′Z+YZ&=XY+X'Z+(X+X')YZ\\
 &=(X+Y)(X′+Z).
 \end{aligned}\]
 \end{proof}
-\sssc{Theorem of Combination of Distributivity and Consensus Theorem}
+\sssc{Axiom of Equality}
+For an one-to-one Boolean function $f$, a Boolean expression $A$ equals another Boolean expression $B$ if and only if $f(A)$ equals $f(B)$.
+\sssc{Boole's expansion theorem, Shannon's expansion theorem, Shannon decomposition, or fundamental theorem of Boolean algebra}
+The theorem states that
+\[F=x\cdot F_x+x'\cdot F_{x'},\]
+where $F$ is any Boolean function, $x$ is a variable, and $F_x$ and $F_{x'}$, sometimes called the positive and negative Shannon cofactors, respectively, of $F$ with respect to $x$, are $F$ with the independent variable $x$ set to $1$ and to $0$ respectively.
+\sssc{Combination of Distributivity and Consensus Theorem}
 \[(X+Y)(X'+Z)=XZ+X'Y\]
 \begin{proof}
 \[(X+Y)(X'+Z)=0+XZ+X'Y+YZ=XZ+X'Y\]
 \end{proof}
-\sssc{Axiom of Equality}
-For an one-to-one Boolean function $f$, a Boolean expression $A$ equals another Boolean expression $B$ if and only if $f(A)$ equals $f(B)$.
+\sssc{XOR and XNOR of Complements}
+\[X'\oplus Y'=X\oplus Y,\quad X'\odot Y'=X\odot Y.\]
+\sssc{XOR and XNOR Series Theorems}
+\[\qty(\bigoplus_{i=1}^nX_i)'=\qty(\bigoplus_{i=1}^{j-1}X_i)\oplus\qty(X_j)'\oplus\qty(\bigoplus_{i=j+1}^nX_i),\quad\forall j\leq n\land j\in\mathbb{N},\,\forall n\text{\ s.t.\ }\frac{n}{2}\in\mathbb{N}.\]
+\begin{proof}\mbox{}\\
+Case $n=2$:
+\[\ba
+(X_1\oplus X_2)'&=(X_1X_2'+X_1'X_2)'=(X_1X_2')'(X_1'X_2)'\\
+&=(X_1'+X_2)(X_1+X_2')=(X_1'X_2'+X_1X_2)\\
+&=X_1'\oplus X_2=X_1\oplus X_2'
+\ea\]
+Prove by mathematical induction. Assume it holds for $n=k$ and $n=2$. We want to prove that it holds for $n=k+2$.
+\[\ba
+\qty(\bigoplus_{i=1}^{k+2})'&=\qty(\bigoplus_{i=1}^kX_i)'\oplus X_{k+1}\oplus X_{k+2}\\
+&=\qty(\bigoplus_{i=1}^{j-1}X_i)\oplus\qty(X_j)'\oplus\qty(\bigoplus_{i=j+1}^kX_i)\oplus X_{k+1}\oplus X_{k+2},\quad \forall j\leq k\land j\in\mathbb{N}
+\ea\]
+\[\ba
+\qty(\bigoplus_{i=1}^{k+2})'&=X_1\oplus X_2\oplus\qty(\bigoplus_{i=3}^{k+2}X_i)'\\
+&=X_1\oplus X_2\oplus\qty(\bigoplus_{i=3}^{j-1}X_i)\oplus\qty(X_j)'\oplus\qty(\bigoplus_{i=j+1}^{k+2}X_i),\quad \forall 3\leq j\leq k+2\land j\in\mathbb{N}
+\ea\]
+\end{proof}
+\[\bigoplus_{i=1}^nX_i=\qty(\bigodot_{i=1}^nX_i)',\quad\forall n\text{\ s.t.\ }\frac{n}{2}\in\mathbb{N}.\]
+\begin{proof}\mbox{}\\
+By the definitions, it holds for case $n=2$.
+
+Prove by mathematical induction. Assume it holds for $n=k$ and $n=2$. We want to prove that it holds for $n=k+2$.
+\[\ba
+\bigoplus_{i=1}^{k+2}X_i&=\qty(\bigoplus_{i=1}^kX_i)\oplus X_{k+1}\oplus X_{k+2}\\
+&=\qty(\bigodot_{i=1}^kX_i)'\oplus X_{k+1}\oplus X_{k+2}\\
+&=\qty(\bigodot_{i=1}^{k+1}X_i)\oplus X_{k+2}\\
+&=\qty(\bigodot_{i=1}^{k+2}X_i)'
+\ea\]
+\end{proof}
+\[\bigoplus_{i=1}^nX_i=\bigodot_{i=1}^nX_i,\quad\forall n\text{\ s.t.\ }\frac{n-1}{2}\in\mathbb{N}.\]
+\begin{proof}\mbox{}\\
+By
+\[\bigoplus_{i=1}^nX_i=\qty(\bigodot_{i=1}^nX_i)',\quad\forall n\text{\ s.t.\ }\frac{n}{2}\in\mathbb{N}.\]
+For $n$ such that $\frac{n-1}{2}\in\mathbb{N}$,
+\[\ba
+\bigoplus_{i=1}^nX_i&=\bigoplus_{i=1}^{n-1}X_i\oplus X_n\\
+&=\bigoplus_{i=1}^{n-1}X_i\oplus X_n\\
+&=\qty(\bigodot_{i=1}^{n-1}X_i)'\oplus X_n\\
+&=\bigodot_{i=1}^nX_i
+\ea\]
+\end{proof}
 \ssc{Minterm and Maxterm Expansions, Canonical Expansions, or Standard Expansion}
 \sssc{Minterm expansion, canonical SOP, or standard SOP}
-A minterm of a completely specified Boolean function $f\colon\{1,0\}^n\to\{1,0\}$, often denoted as $m_i$ for the input combination in the $i$th row of the truth table of $f$ that is in the ON-set of $f$, is defined for any input combinations in the ON-set of $f$ as
+A minterm of a completely specified Boolean function $f\colon\{1,0\}^n\to\{1,0\}$, denoted as $m_i$ for the input combination in the $(i+1)$th row of the truth table of $f$ that is in the ON-set of $f$, is defined for any input combinations in the ON-set of $f$ as
 \[m_i=\prod_{k=1}^ny_k,\]
 in which $y_k$ is defined as the $k$th input variable, i.e. $x_k$, if the $k$th input in that input combination is $1$ and as the complement of the $k$th input variable, i.e. $(x_k)'$, if the $k$th input in that input combination is $0$.
 
-Minterm expansion, canonical SOP, or standard SOP is an expression of a completely specified Boolean function as a sum of minterms of it. Let $S$ be the set of all integer $i$ such that the input combination in the $i$th row of the truth table of $f$ is in the ON-set of $f$. Then the minterm expansion, canonical SOP, or standard SOP of $f$ is
+Minterm expansion, canonical SOP, or standard SOP is an expression of a completely specified Boolean function as a sum of minterms of it. Let $S$ be the set of all integer $i$ such that the input combination in the $(i+1)$th row of the truth table of $f$ is in the ON-set of $f$. Then the minterm expansion, canonical SOP, or standard SOP of $f$ is
 \[f=\sum_{i\in S}m_i,\]
 also denoted as
 \[f=\sum m(i\in S).\]
 
 For a given completely specified Boolean function, there exists a unique minterm expansion of it.
+
+For example, given a function $f(a,b,c)$ with truth table
+\begin{longtable}[c]{|m|m|m|m|}
+\hline
+a & b & c & f\\\hline
+0 & 0 & 0 & 0\\\hline
+0 & 0 & 1 & 0\\\hline
+0 & 1 & 0 & 1\\\hline
+0 & 1 & 1 & 0\\\hline
+1 & 0 & 0 & 0\\\hline
+1 & 0 & 1 & 1\\\hline
+1 & 1 & 0 & 1\\\hline
+1 & 1 & 1 & 0\\\hline
+\end{longtable}
+, the minterm expansion of it is
+\[f=m_2+m_5+m_6=\sum m(2,5,6).\]
 \sssc{Maxterm expansion, canonical POS, or standard POS}
-A maxterm of a completely specified Boolean function $f\colon\{1,0\}^n\to\{1,0\}$, often denoted as $M_i$ for the input combination in the $i$th row of the truth table of $f$ that is in the OFF-set of $f$, is defined for any input combinations in the OFF-set of $f$ as
+A maxterm of a completely specified Boolean function $f\colon\{1,0\}^n\to\{1,0\}$, denoted as $M_i$ for the input combination in the $(i+1)$th row of the truth table of $f$ that is in the OFF-set of $f$, is defined for any input combinations in the OFF-set of $f$ as
 \[M_i=\sum_{k=1}^ny_k,\]
 in which $y_k$ is defined as the $k$th input variable, i.e. $x_k$, if the $k$th input in that input combination is $0$ and as the complement of the $k$th input variable, i.e. $(x_k)'$, if the $k$th input in that input combination is $1$.
 
-Maxterm expansion, canonical POS, or standard POS is an expression of a completely specified Boolean function as a product of maxterms of it. Let $T$ be the set of all integer $i$ such that the input combination in the $i$th row of the truth table of $f$ is in the OFF-set of $f$. Then the maxterm expansion, canonical POS, or standard POS of $f$ is
+Maxterm expansion, canonical POS, or standard POS is an expression of a completely specified Boolean function as a product of maxterms of it. Let $T$ be the set of all integer $i$ such that the input combination in the $(i+1)$th row of the truth table of $f$ is in the OFF-set of $f$. Then the maxterm expansion, canonical POS, or standard POS of $f$ is
 \[f=\prod_{i\in T}M_i,\]
 also denoted as 
 \[f=\prod M(i\in T).\]
 
 For a given completely specified Boolean function, there exists a unique maxterm expansion of it.
-\sssc{Conversion between function and its complement}
-Let $f\colon D\to\{1,0\}$ be a completely specified Boolean function with ON-set $S$, OFF-set $T=D\setminus S$, minterm expansion
-\[f=\sum_{i\in S}m_i,\]
-and maxterm expansion
-\[f=\prod_{i\in T}M_i.\]
 
-Then, the complement $f'$ of it has ON-set $T$, OFF-set $S$, minterm expansion 
-\[f'=\sum_{i\in T}m_i,\]
+For example, given a function $f(a,b,c)$ with truth table
+\begin{longtable}[c]{|m|m|m|m|}
+\hline
+a & b & c & f\\\hline
+0 & 0 & 0 & 0\\\hline
+0 & 0 & 1 & 0\\\hline
+0 & 1 & 0 & 1\\\hline
+0 & 1 & 1 & 0\\\hline
+1 & 0 & 0 & 0\\\hline
+1 & 0 & 1 & 1\\\hline
+1 & 1 & 0 & 1\\\hline
+1 & 1 & 1 & 0\\\hline
+\end{longtable}
+, the maxterm expansion of it is
+\[f=M_0M_1M_3M_4M_7=\prod M(0,1,3,4,7).\]
+\sssc{Conversion between function and its complement}
+Let $f$ be a completely specified Boolean function with minterm expansion
+\[f=\sum m(i\in S),\]
 and maxterm expansion
-\[f'=\prod_{i\in S}M_i.\]
+\[f=\prod M(i\in T),\]
+where $S$ be the set of all integer $i$ such that the input combination in the $(i+1)$th row of the truth table of $f$ is in the ON-set of $f$, $T$ be the set of all integer $i$ such that the input combination in the $(i+1)$th row of the truth table of $f$ is in the OFF-set of $f$.
+
+Then, the complement $f'$ of has minterm expansion 
+\[f'=\sum m(i\in T),\]
+and maxterm expansion
+\[f'=\prod M(i\in S).\]
 \ssc{Minimum SOP form}
 \sssc{Implicant}
 Given a Boolean function $f$ of $n$ variables, a product term $P$ is an implicant of $f$ iff for every combination of values of the $n$ variables for which $P = 1$, $f$ is also equal to $1$.
@@ -431,9 +525,14 @@ A minimum SOP form of a Boolean function must contain all of its essential prime
 \sssc{Minimum POS form}
 The POS form of a Boolean function that has the fewest number of terms out of all POS forms of the function. For a given Boolean function, there may exist more than one minimum POS forms of it.
 \sssc{Incompletely Specified Boolean Functions (ISF) or Don't-care Functions}
-An incompletely specified function (ISF) or a don't-care function is a Boolean function but in which for some input combinations, the output is not defined or irrelevant. Those input combinations are called don't-care conditions, and their outputs are sometimes written as $X$, denoting don't care. The definition of ON-set and OFF-set of an ISF is the same as completely specified function; the Don't-Care set or DC-set of an ISF is the set of all don't-care conditions.
+An incompletely specified function (ISF) or a don't-care function is a Boolean function but in which for some input combinations, the output is not defined or irrelevant. Those input combinations are called don't-care conditions, sometimes denoted as $d$, and their outputs are sometimes written as $X$, denoting don't care. The definition of ON-set and OFF-set of an ISF is the same as completely specified function; the Don't-Care set or DC-set of an ISF is the set of all don't-care conditions.
 
 The output for the don't-care conditions can be assigned either $0$ or $1$ such that the minimum SOP (or POS) forms have the fewest terms.
+
+An ISF $f$ with ON-set $S$, OFF-set $T$, and DC-set $D$ is sometimes written similar to minterm expansion as
+\[f=\sum m(i\in S)+\sum d(i\in D),\]
+and similar to maxterm expansion as
+\[f=\prod M(i\in T)+\prod d(i\in D).\]
 \ssc{Karnaugh Maps}
 A Karnaugh Map, aka a K-map, is a grid that visualize the ways to simplify a completely or incompletely specified Boolean function to a minimum SOP form.
 \sssc{Drawing Karnaugh Maps of less than five variables}
