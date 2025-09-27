@@ -24,19 +24,19 @@
 
 \sct{Number Systems}
 \ssc{Definition}
-Let the base (aka radix) $b\in\mathbb{N}_{>1}$. A base-$b$ (aka radix-$b$) number in digits:
-\[(-1)^m\ldots d_2d_1d_0.d_{-1}d_{-2}\ldots,\quad m\in\{0,1\}\land\forall i\colon d_i\in\mathbb{N}_0\land d_i<b\]
-represents the value:
+Let the base (aka radix) $b\in\mathbb{N}_{>1}$. A base-$b$ (aka radix-$b$) number
+\[N=\qty((-1)^m\ldots d_2d_1d_0.d_{-1}d_{-2}\ldots)_b,\quad m\in\{0,1\}\land\forall i\colon d_i\in\mathbb{N}_0\land d_i<b\]
+represents the value
 \[N =(-1)^m\sum_id_ib^i.\]
 
-We can only represent a base $b$ in another specified base or in decimal (base-10) and specify the base you use the represent the base if not in decimal; otherwise, every base would be base-10.
+We can only represent a base in another base or in decimal (base-10), and we have to specify the base you use if not in decimal; otherwise, every base would be base-10.
 
 To indicate the base of a base-$b$ number, we append subscript $_b$ after it. We also use prefix \verb|0b| (or \verb|0B|) to represent base-2 numbers, aka binary numbers, prefix \verb|0| (or \verb|0o|, \verb|0O|) to represent base-8 numbers, aka octal numbers, prefix \verb|0x| (or \verb|0X|) to represent base-16 numbers, aka hexadecimal number, and no prefix (or \verb|0d|, \verb|0D|) to represent base-10 numbers, aka decimal numbers.
 
 Usually, when the radix $b>10_{10}$, $A$ (or $a$) is used to represent the digit $9+1$; when the radix $b>11_{10}$, $B$ (or $b$) is used to represent the digit $9+2$; and so on.
 \ssc{Conversion between bases}
 \sssc{General conversion method}
-We want to convert a nonnegative number $N$ in base $x$ with $x\in\mathbb{N}_{>1}$,
+We want to convert a number $N$ in base $x$ with $x\in\mathbb{N}_{>1}$,
 \[N=((-1)^m\ldots d_2d_1d_0.d_{-1}d_{-2}\ldots)_x,\quad m\in\{0,1\},\]
 into base $y\neq x$ (written in base $x$) with $y\in\mathbb{N}_{>1}$.
 \ben
@@ -55,7 +55,7 @@ in the $j$th (start from $1$st) time, until the first time $J_{j+1}=0$, and let 
 \[(-1)^m\qty(\sum_{i=1}^kr_i\times y^{i-1}+\sum_{j=1}^ls_j\times y^{-j}),\]
 and $N$ in base $y$ can be obtained by first taking the integer part of the magnitude of it:
 \[(r_kr_{k-1}\ldots r_2r_1)_y\]
-and then obtaining the fractional part with radix point of the magnitude of it using vertical addition where the $i$th row is $s_i$ with the units digit of $s_i$ in the $i$th digit to the right of the radix point, for each $i$, where carry propagation is applied to ensure all digits are valid in base $y$, i.e. $<y$.
+and then obtaining the fractional part of the magnitude of it using vertical addition where the $i$th row is $s_i$ with the units digit of $s_i$ in the $i$th digit to the right of the radix point, for each $i$, where carry propagation is applied to ensure all digits are valid in base $y$, i.e. $<y$.
 \een
 
 To convert an expression that is a radix-independent fuction $f$ of a vector of numbers $(p_1,p_2,\ldots)$, we convert each $p_i$ to the wanted base, let it be $q_i$, then the wanted result is $f(q_1,q_2,\ldots)$.
@@ -74,7 +74,7 @@ Then, $N$ is
 \[(-1)^m\sum_iD_i\times y^i,\]
 and $N$ in base $y$ can be obtained by vertical addition where the $i$th row is $D_i$ with the units digit of $D_i$ in the $(i+1)$th digit to the left of the radix point, for each $i$, where carry propagation is applied to ensure all digits are valid in base $y$, i.e. $<y$.
 \sssc{Criterion of finite expansion after base conversion}
-A finite rational number with the fractional part of the magnitude of it expressed in fraction in base $x$ with $x\in\mathbb{N}_{>1}$ being $D_x$ can be expressed in finite digits with radix point in base $y\neq x$ with $y\in\mathbb{N}_{>1}$ iff the reduced denominator (denominator cancelled the greatest common factor with the numerator) of $D_x$ has no prime factor that is not a prime factor of $y$.
+A finite rational number with the fractional part of the magnitude of it expressed in fraction in base $x$ with $x\in\mathbb{N}_{>1}$ being $D_x$ can be expressed in finite digits in radix point in base $y\neq x$ with $y\in\mathbb{N}_{>1}$ iff the reduced denominator (denominator cancelled the greatest common factor with the numerator) of $D_x$ has no prime factor that is not a prime factor of $y$.
 \subsection{Binary}
 A binary digit is called a bit, which is either $0$ or $1$. Binary arithmetic is the same as decimals, except that "invert" or "flip" means converting $0$ to $1$ and $1$ to $0$, and "complement" means inverting all bits.
 
