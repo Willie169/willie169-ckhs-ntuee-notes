@@ -1,27 +1,13 @@
 \documentclass[a4paper,12pt]{report}
 \setcounter{secnumdepth}{5}
 \setcounter{tocdepth}{3}
-\input{/usr/share/latex-toolkit/template.tex}
+\input{/usr/share/LaTeX-ToolKit/template.tex}
 \begin{document}
 \title{Switching Circuits and Logic Design}
 \author{沈威宇}
 \date{\temtoday}
 \titletocdoc
 \chapter{Switching Circuits and Logic Design}
-\section{Digital Systems and Switching Circuits}
-\begin{itemize}
-\item\textbf{Digital system}: Deals with signals that have discrete values. Theoretically, for a given input, the output is exactly correct.
-\item\textbf{Analog system}: Deals with signals that vary continuously over time. The output might have an error depending on the accuracy of the components used.
-\item\textbf{System design}: The highest level of the design of digital systems, where you break the system into subsystems, specify what each subsystem do, and determine the interconnection and control of the subsystems.
-\item\textbf{Logic design}: The middle level of the design of digital systems, where you specify the logic operations inside each subsystem.
-\item\textbf{Circuit design}: The lowest level of the design of digital systems, where you specify the electronic components and their interconnection to form the system.
-\item\textbf{Switching circuit}: A switching circuit has one or more inputs and one or more outputs which take on discrete values. Many of a digital system's subsystems take the form of a switching circuit.
-\item\textbf{Combinational circuit}: A circuit whose output value depends only on the present input value.
-\item\textbf{Sequential circuit}: A circuit whose output value depends on the present input value and past input values.
-\item\textbf{Logic gate}: An electronic device that performs a basic Boolean operation on one or more binary inputs (0 or 1) to produce a single binary output (0 or 1).
-\end{itemize}
-{{{
-
 \sct{Number Systems}
 \ssc{Definition}
 Let the base (aka radix) $b\in\mathbb{N}_{>1}$. A base-$b$ (aka radix-$b$) number
@@ -47,6 +33,7 @@ into base $y\neq x$ (written in base $x$) with $y\in\mathbb{N}_{>1}$.
 \een
 in the $i$th (start from $1$st) time, until the first time $I_{i+1}=0$, and let that time be the $k$th time.
 \item Second, we take $J_1=(0.d^{-1}d^{-2}\ldots)_x$ and repeatedly
+\ben
 \item take $s_j=\lfloor J_j\cdot y\rfloor$, which may be more than $1$ digits if $x>y$ and is later treated directly as in base $y$, and
 \item take $J_{j+1}=J_j\cdot y-s_j$,
 \een
@@ -83,7 +70,7 @@ The most significant bit (MSB) or most significant digit is the bit with the hig
 $4$ bits is called a nibble; $8$ bits is called a byte.
 
 A binary prefix is a unit prefix that indicates a multiple of a unit of measurement by an integer power of two. They are most often used in information technology as multipliers of bit and byte, in which the short prefixes are prefixed before b (representing bits) or B (representing bytes), and the long prefixes are prefixed before bits or bytes.
-\begin{longtable}[c]{|c|c|c|}
+\begin{longtable}[c]{|c|c|c|c|c|}
 \hline
 Value & IEC (short) & IEC (long) & JEDEC (short) & JEDEC (long)\\\hline
 $1024$ & Ki & kibi & K & kilo\\\hline
@@ -538,27 +525,27 @@ A Karnaugh Map, aka a K-map, is a grid that visualize the ways to simplify a com
 \sssc{Drawing Karnaugh Maps of less than five variables}
 A K-map for a $2$-variable Boolean function $f(A,B)$ is
 \begin{longtable}[c]{c|c|c|}
-\multicolum{1}{c}{\thead{\backslashbox{$B$}{$A$}} & \multicolum{1}{c}{\thead{0}} & \multicolum{1}{c}{\thead{1}} \\\cline{2-3}
-\multicolum{1}{c|}{\thead{0}} & $f(0,0)$ & $f(1,0)$ \\\cline{2-3}
-\multicolum{1}{c|}{\thead{1}} & $f(0,1)$ & $f(1,1)$ \\\cline{2-3}
+\multicolumn{1}{c}{\thead{\backslashbox{$B$}{$A$}}} & \multicolumn{1}{c}{\thead{0}} & \multicolumn{1}{c}{\thead{1}} \\\cline{2-3}
+\multicolumn{1}{c|}{\thead{0}} & $f(0,0)$ & $f(1,0)$ \\\cline{2-3}
+\multicolumn{1}{c|}{\thead{1}} & $f(0,1)$ & $f(1,1)$ \\\cline{2-3}
 \end{longtable}
 
 A K-map for a $3$-variable Boolean function $f(A,B,C)$ is
 \begin{longtable}[c]{c|c|c|}
-\multicolum{1}{c}{\thead{\backslashbox{$BC$}{$A$}} & \multicolum{1}{c}{\thead{0}} & \multicolum{1}{c}{\thead{1}} \\\cline{2-3}
-\multicolum{1}{c|}{\thead{00}} & $f(0,0,0)$ & $f(1,0,0)$ \\\cline{2-3}
-\multicolum{1}{c|}{\thead{01}} & $f(0,0,1)$ & $f(1,0,1)$ \\\cline{2-3}
-\multicolum{1}{c|}{\thead{11}} & $f(0,1,1)$ & $f(1,1,1)$ \\\cline{2-3}
-\multicolum{1}{c|}{\thead{10}} & $f(0,1,0)$ & $f(1,1,0)$ \\\cline{2-3}
+\multicolumn{1}{c}{\thead{\backslashbox{$BC$}{$A$}}} & \multicolumn{1}{c}{\thead{0}} & \multicolumn{1}{c}{\thead{1}} \\\cline{2-3}
+\multicolumn{1}{c|}{\thead{00}} & $f(0,0,0)$ & $f(1,0,0)$ \\\cline{2-3}
+\multicolumn{1}{c|}{\thead{01}} & $f(0,0,1)$ & $f(1,0,1)$ \\\cline{2-3}
+\multicolumn{1}{c|}{\thead{11}} & $f(0,1,1)$ & $f(1,1,1)$ \\\cline{2-3}
+\multicolumn{1}{c|}{\thead{10}} & $f(0,1,0)$ & $f(1,1,0)$ \\\cline{2-3}
 \end{longtable}
 
 A K map for a $4$-variable Boolean function $f(A,B,C,D)$ is
 \begin{longtable}[c]{c|c|c|c|c|}
-\multicolum{1}{c}{\thead{\backslashbox{$CD$}{$AB$}} & \multicolum{1}{c}{\thead{00}} & \multicolum{1}{c}{\thead{01}} & \multicolum{1}{c}{\thead{11}} & \multicolum{1}{c}{\thead{10}} \\\cline{2-5}
-\multicolum{1}{c|}{\thead{00}} & $f(0,0,0,0)$ & $f(0,1,0,0)$ & $f(1,1,0,0)$ & $f(1,0,0,0)$ \\\cline{2-5}
-\multicolum{1}{c|}{\thead{01}} & $f(0,0,0,1)$ & $f(0,1,0,1)$ & $f(1,1,0,1)$ & $f(1,0,0,1)$ \\\cline{2-5}
-\multicolum{1}{c|}{\thead{11}} & $f(0,0,1,1)$ & $f(0,1,1,1)$ & $f(1,1,1,1)$ & $f(1,0,1,1)$ \\\cline{2-5}
-\multicolum{1}{c|}{\thead{10}} & $f(0,0,1,0)$ & $f(0,1,1,0)$ & $f(1,1,1,0)$ & $f(1,0,1,0)$ \\\cline{2-5}
+\multicolumn{1}{c}{\thead{\backslashbox{$CD$}{$AB$}}} & \multicolumn{1}{c}{\thead{00}} & \multicolumn{1}{c}{\thead{01}} & \multicolumn{1}{c}{\thead{11}} & \multicolumn{1}{c}{\thead{10}} \\\cline{2-5}
+\multicolumn{1}{c|}{\thead{00}} & $f(0,0,0,0)$ & $f(0,1,0,0)$ & $f(1,1,0,0)$ & $f(1,0,0,0)$ \\\cline{2-5}
+\multicolumn{1}{c|}{\thead{01}} & $f(0,0,0,1)$ & $f(0,1,0,1)$ & $f(1,1,0,1)$ & $f(1,0,0,1)$ \\\cline{2-5}
+\multicolumn{1}{c|}{\thead{11}} & $f(0,0,1,1)$ & $f(0,1,1,1)$ & $f(1,1,1,1)$ & $f(1,0,1,1)$ \\\cline{2-5}
+\multicolumn{1}{c|}{\thead{10}} & $f(0,0,1,0)$ & $f(0,1,1,0)$ & $f(1,1,1,0)$ & $f(1,0,1,0)$ \\\cline{2-5}
 \end{longtable}
 If the ouput of the input combination of a cell is $1$, we write $1$ in that cell; if the ouput of the input combination of a cell is $0$, we can leave that cell empty or write $0$ in that cell; if the input combination of a cell is a don't care condition, we write $X$ in that cell.
 
@@ -593,13 +580,27 @@ Find an allowed collection of groups that contains the fewest groups, the sum of
 \een
 \sssc{Five-variable Karnaugh Maps}
 One way of drawing a five-variable K-map is by placing one four-variable K-map on top of another, that is, for a $5$-variable Boolean function $f(A,B,C,D,E)$, the K-map is
+{\fontsize{8pt}{12pt}\selectfont
 \begin{longtable}[c]{cc|c|c|c|c|}
-& \multicolum{1}{c}{\thead{\backslashbox{$BC$}{$DE$}} & \multicolum{1}{c}{\thead{00}} & \multicolum{1}{c}{\thead{01}} & \multicolum{1}{c}{\thead{11}} & \multicolum{1}{c}{\thead{10}} \\\cline{3-6}
-& \multicolum{1}{c|}{\thead{00}} & \backslashbox{$f(1,0,0,0,0)$}{$f(0,0,0,0,0)$} & \backslashbox{$f(1,0,1,0,0)$}{$f(0,0,1,0,0)$} & \backslashbox{$f(1,1,1,0,0)$}{$f(0,1,1,0,0)$} & \backslashbox{$f(1,1,0,0,0)$}{$f(0,1,0,0,0)$} \\\cline{3-6}
-$A$ & \multicolum{1}{c|}{\thead{01}} & \backslashbox{$f(1,0,0,0,1)$}{$f(0,0,0,0,1)$} & \backslashbox{$f(1,0,1,0,1)$}{$f(0,0,1,0,1)$} & \backslashbox{$f(1,1,1,0,1)$}{$f(0,1,1,0,1)$} & \backslashbox{$f(1,1,0,0,1)$}{$f(0,1,0,0,1)$} \\\cline{3-6}
-\backslashbox{$1$}{$0$} & \multicolum{1}{c|}{\thead{11}} & \backslashbox{$f(1,0,0,1,1)$}{$f(0,0,0,1,1)$} & \backslashbox{$f(1,0,1,1,1)$}{$f(0,0,1,1,1)$} & \backslashbox{$f(1,1,1,1,1)$}{$f(0,1,1,1,1)$} & \backslashbox{$f(1,1,0,1,1)$}{$f(0,1,0,1,1)$} \\\cline{3-6}
-& \multicolum{1}{c|}{\thead{10}} & \backslashbox{$f(1,0,0,1,0)$}{$f(0,0,0,1,0)$} & \backslashbox{$f(1,0,1,1,0)$}{$f(0,0,1,1,0)$} & \backslashbox{$f(1,1,1,1,0)$}{$f(0,1,1,1,0)$} & \backslashbox{$f(1,1,0,1,0)$}{$f(0,1,0,1,0)$} \\\cline{3-6}
-\end{longtable}
+& \multicolumn{1}{c}{\thead{\backslashbox{$BC$}{$DE$}}} & \multicolumn{1}{c}{\thead{00}} & \multicolumn{1}{c}{\thead{01}} & \multicolumn{1}{c}{\thead{11}} & \multicolumn{1}{c}{\thead{10}} \\\cline{3-6}
+& \multicolumn{1}{c|}{\thead{00}} & \backslashbox{$f(1,0,0,0,0)$}{$f(0,0,0,0,0)$} & \backslashbox{$f(1,0,1,0,0)$}{$f(0,0,1,0,0)$} & \backslashbox{$f(1,1,1,0,0)$}{$f(0,1,1,0,0)$} & \backslashbox{$f(1,1,0,0,0)$}{$f(0,1,0,0,0)$} \\\cline{3-6}
+$A$ & \multicolumn{1}{c|}{\thead{01}} & \backslashbox{$f(1,0,0,0,1)$}{$f(0,0,0,0,1)$} & \backslashbox{$f(1,0,1,0,1)$}{$f(0,0,1,0,1)$} & \backslashbox{$f(1,1,1,0,1)$}{$f(0,1,1,0,1)$} & \backslashbox{$f(1,1,0,0,1)$}{$f(0,1,0,0,1)$} \\\cline{3-6}
+\backslashbox{$1$}{$0$} & \multicolumn{1}{c|}{\thead{11}} & \backslashbox{$f(1,0,0,1,1)$}{$f(0,0,0,1,1)$} & \backslashbox{$f(1,0,1,1,1)$}{$f(0,0,1,1,1)$} & \backslashbox{$f(1,1,1,1,1)$}{$f(0,1,1,1,1)$} & \backslashbox{$f(1,1,0,1,1)$}{$f(0,1,0,1,1)$} \\\cline{3-6}
+& \multicolumn{1}{c|}{\thead{10}} & \backslashbox{$f(1,0,0,1,0)$}{$f(0,0,0,1,0)$} & \backslashbox{$f(1,0,1,1,0)$}{$f(0,0,1,1,0)$} & \backslashbox{$f(1,1,1,1,0)$}{$f(0,1,1,1,0)$} & \backslashbox{$f(1,1,0,1,0)$}{$f(0,1,0,1,0)$} \\\cline{3-6}
+\end{longtable}}
 in which the adjacency between cells in the same layer of four-variable K-map is the same as that in four-variable K-map; the upper and lower triangles in the same square are adjacent; and a group is a cuboid of $2^l\times 2^m\times 2^n$ cells that are either $1$ (minterm) or $X$ (don't-care condition), in which $l,m,n\in\mathbb{N}_0$.
 \sssc{Minimum POS form}
 To find a minimum POS form of a function $f$, we can use K-map to find a minimum SOP form of $f'$, and change all literals to its inverse, all AND to OR, and all OR to AND.
+\section{Digital Systems and Switching Circuits}
+\begin{itemize}
+\item\textbf{Digital system}: Deals with signals that have discrete values. Theoretically, for a given input, the output is exactly correct.
+\item\textbf{Analog system}: Deals with signals that vary continuously over time. The output might have an error depending on the accuracy of the components used.
+\item\textbf{System design}: The highest level of the design of digital systems, where you break the system into subsystems, specify what each subsystem do, and determine the interconnection and control of the subsystems.
+\item\textbf{Logic design}: The middle level of the design of digital systems, where you specify the logic operations inside each subsystem.
+\item\textbf{Circuit design}: The lowest level of the design of digital systems, where you specify the electronic components and their interconnection to form the system.
+\item\textbf{Switching circuit}: A switching circuit has one or more inputs and one or more outputs which take on discrete values. Many of a digital system's subsystems take the form of a switching circuit.
+\item\textbf{Combinational circuit}: A circuit whose output value depends only on the present input value.
+\item\textbf{Sequential circuit}: A circuit whose output value depends on the present input value and past input values.
+\item\textbf{Logic gate}: An electronic device that performs a basic Boolean operation on one or more binary inputs (0 or 1) to produce a single binary output (0 or 1).
+\end{itemize}
+\end{document}
