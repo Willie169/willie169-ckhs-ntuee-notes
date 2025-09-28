@@ -93,11 +93,16 @@ It can represent numbers range from $-(2^{N-1}-1)$ to $2^{N-1}-1$. It has two ze
 
 It is the easiest to read, but its arithmetic is the hardest to compute.
 \ssc{1's complement}
-The nonnegative numbers are the same as those in sign and magnitude; the negative numbers invert all bits of its absolute value, i.e. $(2^N-1)$ minus it.
+The nonnegative numbers are the same as those in sign and magnitude; the negative numbers invert all bits of its absolute value, i.e. $(2^N-1)$ minus it, that is, if a negative integer $B$ written in 1's complement is
+\[B=b_{n-1}b_{n-2}\ldots b_1b_0,\]
+then
+\[B=-2^{n-1}+1+\sum_{i=0}^{n-2}b_i2^i.\]
 
 It can represent numbers range from $-(2^{N-1}-1)$ to $2^{N-1}-1$. It has two zero ($+0$ and $-0$). 
 
 Its arithmetic is easier than sign and magnitude and harder than 2's complement to compute. 
+
+The negation can be computed by inverting all bits.
 
 The addition can be computed the same as unsigned numbers; however, if the sum had a carry out from the MSB, we must add it back to the LSB, called the "end-around carry".
 \begin{proof}\mbox{}\\
@@ -130,13 +135,38 @@ Case 3: $0\geq A>B$
 
 If the sum of two positive numbers is greater than $2^{N-1}-1$, it overflows into the negative range; if the sum of two negative numbers is less than $-2^{N-1}+1$, it overflows into the positive range. This makes overflow detection straightforward. 
 \ssc{2's complement}
-The nonnegative numbers are the same as those in sign and magnitude; the negative numbers invert all bits of its absolute value and add $1$, i.e. $2^N$ minus it.
+The nonnegative numbers are the same as those in sign and magnitude; the negative numbers invert all bits of its absolute value and add $1$, i.e. $2^N$ minus it, that is, if a negative integer $B$ written in 1's complement is
+\[B=b_{n-1}b_{n-2}\ldots b_1b_0,\]
+then
+\[B=-2^{n-1}+\sum_{i=0}^{n-2}b_i2^i.\]
+\begin{proof}
+\[\ba
+B&=-|B|=-\qty(\sum_{i=0}^{n-2}(1-b_i)+1)\\
+&=-\frac{2^{n-1}-1}{2-1}-1+\sum_{i=0}^{n-2}b_i2^i\\
+&=-2^{n-1}+\sum_{i=0}^{n-2}b_i2^i
+\ea\]
+\end{proof}
 
 It can represent numbers range from $-2^{N-1}$ to $2^{N-1}-1$. It has only one zero.
 
 The arithmetic is the easiest to compute.
 
-The addition can be computed the same as unsigned numbers. If the sum of two positive numbers exceeds $2^{N-1}-1$, it overflows into the negative range; if the sum of two negative numbers is less than $-2^{N-1}$, it overflows into the positive range. This makes overflow detection straightforward. 
+The negation can be computed by inverting all bits and add $1$.
+\begin{proof}\mbox{}\\
+Let negative integer $B$ written in 1's complement be
+\[B=b_{n-1}b_{n-2}\ldots b_1b_0,\]
+that is,
+\[B=-2^{n-1}+\sum_{i=0}^{n-2}b_i2^i.\]
+The negation of it, which is positive, is
+\[\ba
+-B&=2^{n-1}-\sum_{i=0}^{n-2}b_i2^i\\
+&=2^{n-1}+\sum_{i=0}^{n-2}(1-b_i)2^i-\sum_{i=0}^{n-2}2^i\\
+&=2^{n-1}+\sum_{i=0}^{n-2}(1-b_i)2^i-\frac{2^{n-1}-1}{2-1}\\
+&=\sum_{i=0}^{n-2}(1-b_i)2^i+1
+\ea\]
+\end{proof}
+
+The addition can be computed the same as unsigned numbers. If the sum of two positive numbers exceeds $2^{N-1}-1$, it overflows into the negative range; if the sum of two negative numbers is less than $-2^{N-1}$, it overflows into the positive range. This makes overflow detection straightforward.
 
 It is the most commonly used representation for signed numbers in computers.
 \sct{Binary Codes}
@@ -330,21 +360,30 @@ The dual of an Boolean expression or equation is another Boolean expression or e
 A Boolean vector function or a Boolean multi-output function is a function $f\colon\{1,0\}^n\to\{1,0\}^m$. A Boolean vector function can be specified with truth table or as a tuple of $m$ Boolean functions.
 \ssc{Theorems}
 \sssc{Idempotent Laws}
-\[X + X = X,\quad X\cdot X = X.\]
+\[X\cdot X = X,\quad X + X = X.\]
 \sssc{Involution Law}
 \[(X′)′ = X.\]
 \sssc{Laws of Complementarity}
-\[X + X′ = 1 ,\quad X\cdot X′ = 0 .\]
-\sssc{Commutativity}
-AND, OR, XOR, NAND, NOR, and XNOR are commutative.
-\sssc{Associativity}
-AND, OR, XOR, NAND, NOR, and XNOR are associative.
-\sssc{Distributivity}
-\bit
-\item AND is distributive over OR and XOR.
-\item OR is distributive over AND and XOR.
-\item XOR is distributive over AND and OR.
-\eit
+\[X\cdot X′ = 0,\quad X + X′ = 1.\]
+\sssc{Commutativity of AND, OR, XOR, and XNOR}
+\[X\cdot Y=Y\cdot X,\quad X+Y=Y+X,\]
+\[X\oplus Y=Y\oplus X,\quad X\odot Y=Y\odot X.\]
+\sssc{Associativity of AND, OR, XOR, and XNOR}
+\[X\cdot Y\cdot Z=X\cdot (Y\cdot Z),\quad X+Y+Z=X+(Y+Z),\]
+\[X\oplus Y\oplus Z=X\oplus (Y\oplus Z),\quad X\odot Y\odot Z=X\odot (Y\odot Z).\]
+\sssc{Distributivity of AND over OR and OR over AND}
+\[X\cdot (Y+Z)=X\cdot Y+X\cdot Z.\]
+\[X+YZ=(X+Y)(X+Z).\]
+\sssc{XOR of ANDs Theorem or Distributivity of AND over XOR}
+\[X\cdot Y\oplus X\cdot Z=X\cdot (Y\oplus Z).\]
+\begin{proof}
+\[X\cdot Y\oplus X\cdot Z=XY(XZ)'+(XY)'XZ=XYX'+XYZ'+X'XZ+Y'XZ=XYZ'+XY'Z=X(Y\oplus Z).\]
+\end{proof}
+\sssc{XOR of ORs Theorem}
+\[(X+Y)\oplus (X+Z)=X'\cdot (Y\oplus Z).\]
+\begin{proof}
+\[(X+Y)\oplus (X+Z)=(X+Y)(X+Z)'+(X+Y)'(X+Z)=XX'Z'+YX'Z'+X'Y'X+X'Y'Z=X'YZ'+X'Y'Z=X'(Y\oplus Z).\]
+\end{proof}
 \sssc{DeMorgan's Laws}
 \[(\sum_{i=1}^nX_i)′=\prod_{i=1}^nX_i',\quad (\prod_{i=1}^nX_i)'=\sum_{i=1}^nX_i',\]
 \[(\bigoplus_{i=1}^nX_i)′=\bigodot_{i=1}^nX_i',\quad (\bigodot_{i=1}^nX_i)'=\bigoplus_{i=1}^nX_i'.\]
@@ -388,6 +427,8 @@ where $F$ is any Boolean function, $x$ is a variable, and $F_x$ and $F_{x'}$, so
 \sssc{XOR and XNOR of Complements}
 \[X'\oplus Y'=X\oplus Y,\quad X'\odot Y'=X\odot Y.\]
 \sssc{XOR and XNOR Series Theorems}
+\[\bigoplus_{i=1}^nX_i=\qty(\sum_{i=1}^nX_i)\mod 2.\]
+\[\bigodot_{i=1}^nX_i=1-\qty(\sum_{i=1}^nX_i)\mod 2=\qty(1+\sum_{i=1}^nX_i)\mod 2.\]
 \[\qty(\bigoplus_{i=1}^nX_i)'=\qty(\bigoplus_{i=1}^{j-1}X_i)\oplus\qty(X_j)'\oplus\qty(\bigoplus_{i=j+1}^nX_i),\quad\forall j\leq n\land j\in\mathbb{N},\,\forall n\text{\ s.t.\ }\frac{n}{2}\in\mathbb{N}.\]
 \begin{proof}\mbox{}\\
 Case $n=2$:
@@ -429,6 +470,11 @@ For $n$ such that $\frac{n-1}{2}\in\mathbb{N}$,
 &=\qty(\bigodot_{i=1}^{n-1}X_i)'\oplus X_n\\
 &=\bigodot_{i=1}^nX_i
 \ea\]
+\end{proof}
+\sssc{Consensus of XOR Theorem}
+\[X\oplus Y+X\oplus Z+Y\oplus Z=X\oplus Y+X\oplus Z=X\oplus Y+Y\oplus Z=X\oplus Z+Y\oplus Z=XY'+X'Z+YZ'=X'Y+XZ'+Y'Z\]
+\begin{proof}
+\[X\oplus Y+X\oplus Z=XY'+X'Y+XZ'+X'Z=XY'+X'Y+XZ'+X'Z+YZ'+Y'Z=X\oplus Y+X\oplus Z+Y\oplus Z=XY'+X'Z+YZ'=X'Y+XZ'+Y'Z\]
 \end{proof}
 \ssc{Minterm and Maxterm Expansions, Canonical Expansions, or Standard Expansion}
 \sssc{Minterm expansion, canonical SOP, or standard SOP}
