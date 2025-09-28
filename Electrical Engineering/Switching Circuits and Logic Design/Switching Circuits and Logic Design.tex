@@ -85,25 +85,27 @@ $1024^9$ & Ri & robi & —\\\hline
 $1024^10$ & Qi & quebi & —\\\hline
 \end{longtable}\FB
 \sct{Signed Number}
-Suppose you have $N$ bit, to present a signed number, there's three common method:
+Suppose you have $N$ bits to present a signed number. There's three common method:
 \ssc{Sign and magnitude}
+\sssc{Definition}
 The MSB represents sign, in which $0$ represents positive and $1$ represents negative; the remaining represents magnitude. 
-
+\sssc{Range}
 It can represent numbers range from $-(2^{N-1}-1)$ to $2^{N-1}-1$. It has two zero ($+0$ and $-0$).
-
-It is the easiest to read, but its arithmetic is the hardest to compute.
+\sssc{Properties}
+It might be the easiest to read, but its arithmetic is the hardest to compute.
 \ssc{1's complement}
-The nonnegative numbers are the same as those in sign and magnitude; the negative numbers invert all bits of its absolute value, i.e. $(2^N-1)$ minus it, that is, if a negative integer $B$ written in 1's complement is
+\sssc{Definition}
+The nonnegative numbers are the same as those in sign and magnitude; the negative numbers invert all bits of its absolute value, i.e. $(2^N-1)$ minus its absolute value, that is, if a negative integer $B$ written in 1's complement is
 \[B=b_{n-1}b_{n-2}\ldots b_1b_0,\]
 then
 \[B=-2^{n-1}+1+\sum_{i=0}^{n-2}b_i2^i.\]
-
+\sssc{Range}
 It can represent numbers range from $-(2^{N-1}-1)$ to $2^{N-1}-1$. It has two zero ($+0$ and $-0$). 
-
+\sssc{Properties}
 Its arithmetic is easier than sign and magnitude and harder than 2's complement to compute. 
-
+\sssc{Negation}
 The negation can be computed by inverting all bits.
-
+\sssc{Addition}
 The addition can be computed the same as unsigned numbers; however, if the sum had a carry out from the MSB, we must add it back to the LSB, called the "end-around carry".
 \begin{proof}\mbox{}\\
 Assume no overflow conditions.
@@ -135,7 +137,8 @@ Case 3: $0\geq A>B$
 
 If the sum of two positive numbers is greater than $2^{N-1}-1$, it overflows into the negative range; if the sum of two negative numbers is less than $-2^{N-1}+1$, it overflows into the positive range. This makes overflow detection straightforward. 
 \ssc{2's complement}
-The nonnegative numbers are the same as those in sign and magnitude; the negative numbers invert all bits of its absolute value and add $1$, i.e. $2^N$ minus it, that is, if a negative integer $B$ written in 1's complement is
+\sssc{Definition}
+The nonnegative numbers are the same as those in sign and magnitude; the negative numbers invert all bits of its absolute value and add $1$, i.e. $2^N$ minus its absolute value, where $-2^{N-1}$ is only MSB being $1$ and others being $0$, that is, if a negative integer $B$ written in 1's complement is
 \[B=b_{n-1}b_{n-2}\ldots b_1b_0,\]
 then
 \[B=-2^{n-1}+\sum_{i=0}^{n-2}b_i2^i.\]
@@ -146,14 +149,14 @@ B&=-|B|=-\qty(\sum_{i=0}^{n-2}(1-b_i)+1)\\
 &=-2^{n-1}+\sum_{i=0}^{n-2}b_i2^i
 \ea\]
 \end{proof}
-
+\sssc{Range}
 It can represent numbers range from $-2^{N-1}$ to $2^{N-1}-1$. It has only one zero.
-
-The arithmetic is the easiest to compute.
-
+\sssc{Properties}
+Its arithmetic is the easiest to compute. It is the most commonly used representation for signed numbers in computers.
+\sssc{Negation}
 The negation can be computed by inverting all bits and add $1$.
 \begin{proof}\mbox{}\\
-Let negative integer $B$ written in 1's complement be
+Let negative integer $B$ written in 2's complement be
 \[B=b_{n-1}b_{n-2}\ldots b_1b_0,\]
 that is,
 \[B=-2^{n-1}+\sum_{i=0}^{n-2}b_i2^i.\]
@@ -165,10 +168,8 @@ The negation of it, which is positive, is
 &=\sum_{i=0}^{n-2}(1-b_i)2^i+1
 \ea\]
 \end{proof}
-
+\sssc{Addition}
 The addition can be computed the same as unsigned numbers. If the sum of two positive numbers exceeds $2^{N-1}-1$, it overflows into the negative range; if the sum of two negative numbers is less than $-2^{N-1}$, it overflows into the positive range. This makes overflow detection straightforward.
-
-It is the most commonly used representation for signed numbers in computers.
 \sct{Binary Codes}
 \ssc{Binary-coded decimal (BCD)}
 Binary-coded decimal (BCD), or more explicitly 8-4-2-1 BCD, is a way to represent decimal digits ($0$ to $9$) in binary, in which each decimal digit is encoded separately using 4 bits (a nibble). There are several other possible sets of binary codes for the ten decimal digits.
@@ -383,6 +384,16 @@ A Boolean vector function or a Boolean multi-output function is a function $f\co
 \[(X+Y)\oplus (X+Z)=X'\cdot (Y\oplus Z).\]
 \begin{proof}
 \[(X+Y)\oplus (X+Z)=(X+Y)(X+Z)'+(X+Y)'(X+Z)=XX'Z'+YX'Z'+X'Y'X+X'Y'Z=X'YZ'+X'Y'Z=X'(Y\oplus Z).\]
+\end{proof}
+\sssc{XNOR of ORs Theorem or Distributivity of OR over XNOR}
+\[(X+Y)\odot (X+Z)=X+(Y\odot Z).\]
+\begin{proof}
+\[(X+Y)\odot (X+Z)=(X+Y)(X+Z)+(X+Y)'(X+Z)'=X+YZ+X'Y'Z'=X+YZ+Y'Z'=X+(Y\odot Z).\]
+\end{proof}
+\sssc{XNOR of ANDs Theorem}
+\[XY\odot XZ=X'+(Y\odot Z).\]
+\begin{proof}
+\[XY\odot XZ=XYZ+(XY)'(XZ)'=XYZ+(X'+Y')(X'+Z')=XYZ+X'+Y'Z'=X'+(Y\odot Z).\]
 \end{proof}
 \sssc{DeMorgan's Laws}
 \[(\sum_{i=1}^nX_i)′=\prod_{i=1}^nX_i',\quad (\prod_{i=1}^nX_i)'=\sum_{i=1}^nX_i',\]
