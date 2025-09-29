@@ -129,13 +129,15 @@ A topological space is called simply connected if and only if it is path-connect
 \sssc{Compact space (緊緻空間)}
 A topological space $X$ is called compact if and only if for every collection $C$ of open subsets of $X$ such that
 \[X=\bigcup_{S\in C}S,\]
-there is a finite subcollection $F\subseteq C$ such that
-\[X=\bigcup _{S\in F}S.\]
+called a open cover, there is a finite subcollection $F\subseteq C$ such that
+\[X=\bigcup _{S\in F}S,\]
+called a finite subcover.
 \subsection{Compact (緊緻) subset}
 A subset $K$ of a topological space $X$ is said to be compact if for every collection $C$ of open subsets of $X$ such that
 \[K\subseteq\bigcup_{S\in C}S,\]
-there is a finite subcollection $F\subseteq C$ such that
-\[K\subseteq\bigcup _{S\in F}S.\]
+called a open cover, there is a finite subcollection $F\subseteq C$ such that
+\[K\subseteq\bigcup _{S\in F}S,\]
+called a finite subcover.
 \subsection{Locally finite cover}
 Let $X$ be a topological space, and $\{U_i\mid i\in I\}$ be a cover of $X$. We say that $U$ is locally finite if for all $x\in X$, there exists $V\ni x$ that is open in $X$ such that the set $\{i\in I\mid V\cap U_i\neq\varnothing\}$ is finite.
 \ssc{Dense (稠密) subset}
@@ -158,8 +160,10 @@ Given a metric space $(x,d)$, a sequence of elements of $X$:
 is Cauchy if for every positive real number $\varepsilon$ there is a positive integer $N$ such that for all positive integers $m,n>N$:
 \[d\left(x_m,x_n\right)<\varepsilon.\]
 \sssc{Complete metric space (完備度量空間) or Cauchy space (柯西空間)}
-A metric space $(x,d)$ is complete if every Cauchy sequence of points in $X$ has a limit that is also in $X$.
-\sssc{Open ball (開球)}
+A metric space $(X,d)$ is complete if every Cauchy sequence of points in $X$ has a limit that is also in $X$.
+\sssc{Complete subset or Cauchy subset}
+A subset $S$ of a metric space $(X,d)$ is complete if every Cauchy sequence of points in $S$ has a limit that is also in $S$.
+\sssc{(Open) ball (開球)}
 In a metric space $(X,d)$, the open ball of radius $r>0$ and centered at the point $a\in X$, denoted as $B_{<r}(a)$ or $B_{r}(a)$, is defined as:
 \[B_{r}(a)\coloneq\left\{p\in X:\, d(a,p)<r\right\}.\]
 \sssc{Closed ball (閉球)}
@@ -167,6 +171,60 @@ In a metric space $(X,d)$, the closed ball of radius $r\geq 0$ and centered at t
 \[B_{\leq r}(a)\coloneq\left\{p\in X:\, d(a,p)\leq r\right\}.\]
 \sssc{Bounded (有界) subset}
 A subset $S$ of a metric space $(M, d)$ is called bounded if and only if there exists $r > 0$ such that for all $s,t\in S$, we have $d(s, t) < r$.
+\sssc{Totally bounded or precompact subset}
+A subset $S$ of a metric space $(M, d)$ is called totally bounded or precompact if and only if there eixsts $r>0$ such that there exists a finite collection of open balls of radius $r$ that is a cover of $S$.
+\sssc{A compact subset of a Hausdorff space is closed}
+\textit{Statement:} If a subset $K$ of a Hausdorff space $X$ is compact, then it must be closed.
+
+\begin{proof}\mbox{}\\
+We want to show that $K$ is closed, that is, $X\setminus K$ is open.
+
+For any $a\in X\setminus K$, for each $x\in K$, by the definition of Hausdorff space, there exist a disjoint open set $U_x$ such that $x\in U_x$, $a\in V_x$, and $U_x\cap V_x=\varnothing$.
+
+The collection of $C=\{U_x\mid x\in K\}$ is an open cover of $K$. Since $K$ is compact, a finite subset $D$ of $C$ is a cover of $K$.
+
+Corresponding to each $U_i\in D$, we have an open neighborhood $V_i$ of $a$ such that $U_i\cap V_i=\varnothing$. Let $V=\bigcap_{U_i\in D}V_i$. Then $V$ is an open neighborhood of $a$ and is disjoint from $\bigcap_{U_i\in D}U_i\supseteq K$, so
+\[V\cap K=\varnothing.\]
+
+For every $a\in X\setminus K$, we found an open neighborhood $V$ of $a$ such that
+\[V\subseteq X\setminus K\land V\cap K=\varnothing,\]
+so $K$ is closed.
+\end{proof}
+\sssc{A closed subset of a compact set is compact}
+\textit{Statement:} If $K$ is a compact subset of a topological space $X$ and $F\subseteq K$ is closed in $X$, then $F$ is compact.
+
+\begin{proof}\mbox{}\\
+Let $C$ be an open cover of $F$. Then
+\[C\cup\{X\setminus F\}\]
+is an open cover of $K$.
+
+Since $K$ is compact, there is a finite subcollection $D=C'\cup\{X\setminus F\}$ of $C\cup\{X\setminus F\}$ where $C'\subseteq C$ that is a cover of $K$. Then $C'$ is a finite subcollection of $C$ that is a cover of $F$. Thus $F$ is compact.
+\end{proof}
+\sssc{If a subset of a metric space is compact, then it is bounded}
+\textit{Statement:} If $K$ is a compact subset of a metric space $(X,d)$, then $K$ is bounded.
+
+\begin{proof}\mbox{}\\
+Since $K$ is compact, for any point $p\in X$, there exist a finite collection of open balls
+\[\{B(p,n)\mid n\in\bbN\land n\leq m\in\bbN\}\]
+that is a cover of $K$, then $K\subseteq B(p,m)$, so $K$ is bounded.
+\end{proof}
+\sssc{A complete subset of a complete metric topological space is closed}{{{
+\sssc{A closed subset of a complete metric topological space is complete}{{{
+\sssc{A totally bounded subset is bounded}{{{
+\sssc{A bounded subset of a finite-dimensional Euclidean space is totally bounded}{{{
+\sssc{A complete and totally bounded subset of a complete metric topological space is compact}{{{
+\sssc{Heine–Borel Theorem (海涅-博雷爾定理)}
+For a subset $S$ of an Euclidean space $\bbR^n$, the following two statements are equivalent:
+\bit
+\item $S$ is compact;
+\item $S$ is closed and bounded.
+\eit
+\sssc{Generalized Heine–Borel Theorem}
+For a subset $S$ of a complete metric space $(X,d)$, the following two statements are equivalent:
+\bit
+\item $S$ is compact;
+\item $S$ is complete and totally bounded.
+\eit
 \subsection{Topological field (拓樸域)}
 A topological field is a topological space, such that addition, multiplication, the maps $a\mapsto -a$, and $a\mapsto a^{-1}$ are continuous maps with respect to the topology of the space.
 \ssc{Net (網)}
