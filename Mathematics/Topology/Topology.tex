@@ -164,7 +164,7 @@ A metric space $(X,d)$ is complete if every Cauchy sequence of points in $X$ has
 \sssc{Complete subset or Cauchy subset}
 A subset $S$ of a metric space $(X,d)$ is complete if every Cauchy sequence of points in $S$ has a limit that is also in $S$.
 \sssc{(Open) ball (開球)}
-In a metric space $(X,d)$, the open ball of radius $r>0$ and centered at the point $a\in X$, denoted as $B_{<r}(a)$ or $B_{r}(a)$, is defined as:
+In a metric space $(X,d)$, the open ball or ball of radius $r>0$ and centered at the point $a\in X$, denoted as $B_{<r}(a)$, $B_{r}(a)$, or $B(a,r)$, is defined as:
 \[B_{r}(a)\coloneq\left\{p\in X:\, d(a,p)<r\right\}.\]
 \sssc{Closed ball (閉球)}
 In a metric space $(X,d)$, the closed ball of radius $r\geq 0$ and centered at the point $a\in X$, denoted as $B_{\leq r}(a)$, is defined as:
@@ -173,6 +173,34 @@ In a metric space $(X,d)$, the closed ball of radius $r\geq 0$ and centered at t
 A subset $S$ of a metric space $(M, d)$ is called bounded if and only if there exists $r > 0$ such that for all $s,t\in S$, we have $d(s, t) < r$.
 \sssc{Totally bounded or precompact subset}
 A subset $S$ of a metric space $(M, d)$ is called totally bounded or precompact if and only if there eixsts $r>0$ such that there exists a finite collection of open balls of radius $r$ that is a cover of $S$.
+\sssc{$\varepsilon$-net}
+A subset $E$ of a metric space $X$ is an $\varepsilon$-net for another subset $A$ of $X$ if
+\[A\subseteq\bigcup_{x\in E}B(x,\varepsilon).\]
+
+If a finite $\varepsilon$-net exists for every $\varepsilon>0$, then $A$ is totally bounded.
+\sssc{Bolzano–Weierstrass Theorem (波爾查諾-魏爾斯特拉斯定理)}
+\textit{Statement: }Every bounded sequence in an Euclidean space $\bbR^n$ has a convergent subsequence.
+
+\begin{proof}\mbox{}\\
+    For $\bbR$, take any bounded sequence $(x_n)$ in $\bbR$. Then there exist real numbers $m,M$ such that
+    \[m\leq x_n\leq M,\quad\forall n.\]
+    So the sequence lies in the closed interval $[m,M]$.
+
+    For $\varepsilon=1$. Divide $[m,M]$ into disjoint subintervals with length $\frac{M-m}{2^\varepsilon}$:
+    \[\qty[m,\frac{m+M}{2}],\qty[\frac{m+M}{2},M].\]
+    Since $(x_n)$ is infinite, by the pigeonhold principle, one of the subintervals must contain infinitely many terms of $(x_n)$. Denote it by $I_1$ and pick the subsequence $\qty(x_n^{(1)})$ of $(x_n)$ that is entirely in $I_1$.
+
+    Repeat it for $\varepsilon=2,3,\ldots$ by dividing $I_{\varepsilon-1}$ into two halves, we can construct a nested sequence of subsequences
+    \[\qty(x_n^{(1)})\supseteq \qty(x_n^{(2)})\supseteq\ldots\]
+    where $\qty(x_n^{(k)})$ lies in a closed interval of length $\frac{M-m}{2^k}$, $I_k$.
+
+    Pick the diagonal sequence $y_k=x_k^(k)$. Then
+    \[y_k\in\qty(x_n^{(k)})\subseteq I_k,\]
+    and the sequence $(y_k)$ is a convergent subsequence of $(x_n)$ because
+    \[\forall N\in\bbN\colon m,n\geq N\implies |y_m-y_n|\leq\frac{M-m}{2^N}.\]i
+
+    To generalized to $\bbR^n$, consider each coordinate sequence in $\bbR$, it has a convergent subsequence. Diagonalization gives a subsequence converging in all coordinates.
+\end{proof}
 \sssc{A compact subset of a Hausdorff space is closed}
 \textit{Statement:} If a subset $K$ of a Hausdorff space $X$ is compact, then it must be closed.
 
@@ -191,7 +219,7 @@ For every $a\in X\setminus K$, we found an open neighborhood $V$ of $a$ such tha
 so $K$ is closed.
 \end{proof}
 \sssc{A closed subset of a compact set is compact}
-\textit{Statement:} If $K$ is a compact subset of a topological space $X$ and $F\subseteq K$ is closed in $X$, then $F$ is compact.
+\textit{Statement:} If $K$ is a compact subset of a topological space $X$ and $F\subseteq K$ is closed, then $F$ is compact.
 
 \begin{proof}\mbox{}\\
 Let $C$ be an open cover of $F$. Then
@@ -200,7 +228,7 @@ is an open cover of $K$.
 
 Since $K$ is compact, there is a finite subcollection $D=C'\cup\{X\setminus F\}$ of $C\cup\{X\setminus F\}$ where $C'\subseteq C$ that is a cover of $K$. Then $C'$ is a finite subcollection of $C$ that is a cover of $F$. Thus $F$ is compact.
 \end{proof}
-\sssc{If a subset of a metric space is compact, then it is bounded}
+\sssc{A compact subset of a metric space is bounded}
 \textit{Statement:} If $K$ is a compact subset of a metric space $(X,d)$, then $K$ is bounded.
 
 \begin{proof}\mbox{}\\
@@ -208,23 +236,126 @@ Since $K$ is compact, for any point $p\in X$, there exist a finite collection of
 \[\{B(p,n)\mid n\in\bbN\land n\leq m\in\bbN\}\]
 that is a cover of $K$, then $K\subseteq B(p,m)$, so $K$ is bounded.
 \end{proof}
-\sssc{A complete subset of a complete metric topological space is closed}{{{
-\sssc{A closed subset of a complete metric topological space is complete}{{{
-\sssc{A totally bounded subset is bounded}{{{
-\sssc{A bounded subset of a finite-dimensional Euclidean space is totally bounded}{{{
-\sssc{A complete and totally bounded subset of a complete metric topological space is compact}{{{
+\sssc{A complete subset of a complete metric space is closed}
+\Textit{Statement:} If a subset $A$ of a complete metric space is compact, them $A$ is closed.
+
+\begin{proof}\mbox{}\\
+Since a metric space is necessarily a Hausdorff space, any convergent sequence must have a unique limit. Since $A$ is complete, every Cauchy sequence in $A$ converges to a point in $A$. Thus, $A$ is closed.
+\end{proof}
+\sssc{A closed subset of a complete metric space is complete}
+\Textit{Statement:} If a subset $A$ of a complete metric space $X$ is closed, them $A$ is compact.
+
+\begin{proof}\mbox{}\\
+Let $(x_n)$ be a Cauchy sequence in $A$. Since the space is complete, it converges to some $x\in X$. Since $A$ is closed in $X$, any limit of a convergent sequence in $A$ must be in $A$. Thus, $A$ is complete.
+\end{proof}
+\sssc{A closed and bounded subset of an Euclidean space is compact}
+\textit{Statement: }If a subset $A$ of an Euclidean space $\bbR^n$ is closed and bounded, then $A$ is compact.
+
+\begin{proof}\mbox{}\\
+Let $(x_k)$ be any sequence in $A$. We want to show that it has a convergent subsequence with its limit in $A$.
+
+Since $A$ is bounded, there exists $M>0$ such that
+    \[\|x_k\|\leq M,\quad\forall k.\]
+    So
+    \[x_k\in B(0,M),\quad\forall k.\]
+    By the Bolzano–Weierstrass theorem, there exists a subsequence $(x_{k_j})$ that coverges to some point $x\in\bbR^n$.
+    
+    Since $A$ is closed, it is complete. Thus $x\in A$.
+\end{proof}
 \sssc{Heine–Borel Theorem (海涅-博雷爾定理)}
 For a subset $S$ of an Euclidean space $\bbR^n$, the following two statements are equivalent:
 \bit
 \item $S$ is compact;
 \item $S$ is closed and bounded.
 \eit
-\sssc{Generalized Heine–Borel Theorem}
+\sssc{A complete and totally bounded subset of a complete metric space is compact}
+\textit{Statement: }If a subset $A$ of a complete metric space $(x,d)$ is complete and totally bounded, then $A$ it is compact.
+
+\begin{proof}\mbox{}\\
+Take any sequence $(x_n)$ in $A$. We want to find a convergent subsequence whose limit lies in $A$.
+
+For $\varepsilon=1$, since $A$ is totally bounded, there exists a finite cover of $A$ by closed balls of radius $1$:
+    \[A\subseteq\bigcup_{i=1}^{N_1}B_1\qty(y_i).\]
+    Since $(x_n)$ is infinite but the cover is finite, by the pigeonhold principle, one of these balls must contain infinitely many terms of $(x_n)$. Denote this ball by $B_1\qty(y_{i_1})$ and pick the subsequence $\qty(x_n^{(1)})$ of $(x_n)$ that is entirely in $B_1\qty(y_{i_1})$.
+
+    Repeat it for $\varepsilon=\frac{1}{2},\frac{1}{3},\ldots$, we can construct a nested sequence of subsequences
+    \[\qty(x_n^{(1)})\supseteq \qty(x_n^{(2)})\supseteq\ldots\]
+    where $\qty(x_n^{(k)})$ lies in a closed ball of radius $\frac{1}{k}$, $B_{\frac{1}{k}}\qty(y_{i_k})$.
+
+    Pick the diagonal sequence $y_k=x_k^{(k)}$. Then
+    \[y_k\in\qty(x_n^{(k)})\subseteq B_{\frac{1}{k}}\qty(y_{i_k}),\]
+    and the sequence $(y_k)$ is a Cauchy sequence in $A$ because
+    \[\forall N\in\bbN\colon m,n\geq N\implies d(y_m,y_n)\leq\frac{2}{N}.\]
+    Since $A$ is complete, $(y_k)$ must converges to some point $y\in A$.
+\end{proof}
+\sssc{Generalized/general Heine–Borel Theorem}
 For a subset $S$ of a complete metric space $(X,d)$, the following two statements are equivalent:
 \bit
 \item $S$ is compact;
 \item $S$ is complete and totally bounded.
 \eit
+\sssc{A totally bounded subset is bounded}
+\Textit{Statement:} If a subset $A$ of a metric space $(X,d)$ is totally bounded, them $A$ is bounded.
+
+\begin{proof}\mbox{}\\
+By total boundedness, there exist finitely many points $x_1,x_2,\ldots x_n\in X$ such that:
+\[A\subseteq\bigcup_{i=1}^nB(x_i,1).\]
+Pick one of these centers, say $x_1$.
+
+For any $a\in A$, there exists some $i\in\{1,2,\ldots n\}$ such that
+\[d(a,x_i)<1.\]
+By triangle inequality:
+\[d(a,x_1)\leq d(a,x_i)+d(x_i,x_1)\leq 1+d(x_i,x_1).\]
+Let:
+\[M=1+\max_{i\in\{1,2,\ldots n\}}d(x_i,x_1).\]
+So, for all $a\in A$:
+\[d(a,x_1)<M.\]
+Thus:
+\[A\subseteq B(x_1,M).\]
+Therefore, $A$ is bounded.
+\end{proof}
+\sssc{All norms on a finite-dimensional vector space are equivalent}
+\textit{Statement: }Let $V$ be a finite-dimensional vector space over $\bbR$ or $\bbC$ and $\dim V=n$. If $\|\cdot\|_a
+$ and $\|\cdot\|_b$ are two norm on $V$, then there exist constants $c,C>0$ such that for all $v\in V$,
+\[c\|v\|_a\leq\|v\|_b\leq C\|v\|_a,\]
+called that the two norms are equivalent, and $c,C$ are called the equivalence constants.
+
+\begin{proof}\mbox{}\\
+    First consider $V=\bbR^n$. The set
+    \[S_a=\{x\in\bbR^n\mid\|x\|_a=1\}\]
+    is closed and bounded in $\bbR^n$, hence compact.
+
+    Define
+    \[f(x)=\|x\|_b,\quad x\in S_a.\]
+    Since $\|\cdot\|_b$ is continuous, $f$ is continuous on the compact set $S_a$. Therefore $f$ attains a minimum and maximum on $S_a$. So there exist $m,M\geq 0$ such that
+    \[m\leq f(x)\leq M.\]
+    For any $v\neq 0$, write
+    \[u=\frac{v}{\|v\|_a}\in S_a.\]
+    Then
+    \[\|v\|_b=\|v\|_a\cdot\|u\|_b.\]
+    So
+    \[m\|v\|_a\leq\|v\|_b\leq M\|v\|_a.\]
+    Thus $c=m,C=M$ are the equivalence constants.
+\end{proof}
+\sssc{A bounded subset of a finite-dimensional Banach space is totally bounded}
+\Textit{Statement:} If a subset $A$ of a $n$-dimensional Banach space $X$ with $n\in\bbN$ is bounded, then $A$ is totally bounded.
+
+\begin{proof}\mbox{}\\
+    Pick a linear isomorphism
+    \[T\colon\bbR^n\to X.\]
+    Define a norm on $\bbbR^n$ by
+    \[\|v\|_*\coloneq\|Tv\|_X,\quad\forall v\in\bbR^n.\]
+    By that all norms on a finite-dimensional vector space are equivalent, the Euclidean norm $\|\cdot\|_2$ and $\|\cdot\|_*$ are equivalent, that is, there exist constants $c,C>0$ such that for every $v\in \bbR^n$,
+    \[c\|v\|_2\leq\|v\|_*\leq C\|v\|_2.\qquad (1)\]
+    Let $A\subseteq X$ be bounded. Then $B\coloneq T^{-1}(A)$ is bounded with respect to the metric induced by $\|\cdot\|_*$ and, by $(1)$, is bounded with respect to the metric induced by $\|\cdot\|_2$. So there is $R>0$ with $B_{\|\cdot\|_2}(0,R)\supseteq B$.
+    For any $\varepsilon>0$ and $\delta\coloneq\frac{\varepsilon}{C}$, there is a finite collection of $B_{\|\cdot\|_2}(v_i,R)$ where $v_i\in\bbR^n$ that is a cover of $B_{\|\cdot\|_2}(0,R)$.
+
+    Take any $b\in B$. Then $b\in B_{\|\cdot\|_2}(v_i,R)$ for some $v_i$, so $\|b-v_i\|_2<\delta$.
+
+    By $(1)$, we get
+    \[\|T(b)-T(v_i)\|_X=\|b-v_i\|_*\leq C\|b-v_i\|_2<C\delta=\varepsilon.\]
+    Therefore the finite set of all $T(v_i)$ is an $\varepsilon$-net for $A$. Since $\varepsilon>0$ was arbitrary, $A$ is totally bounded.
+\end{proof}
 \subsection{Topological field (拓樸域)}
 A topological field is a topological space, such that addition, multiplication, the maps $a\mapsto -a$, and $a\mapsto a^{-1}$ are continuous maps with respect to the topology of the space.
 \ssc{Net (網)}
