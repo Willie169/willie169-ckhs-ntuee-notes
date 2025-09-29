@@ -1100,7 +1100,7 @@ Since $f$ is continuous on $[a,b]$, the sequence $f\qty(y_{n_k})$ converges to $
 Similarly, we can prove that there exists $d\in [a,b]$ such that $f(d)=m$.
 \end{proof}
 \ssc{Fermat's Theorem (費馬引理) or Interior Extremum Theorem (內部極值定理)}
-Let $f\colon D\subseteq\mathbb{R}\to\mathbb{R}$ be differentiable on an open interval $I\subseteq D$ and $c\in I$ be a local extreme of $f$, then
+Let function $f\colon D\subseteq\mathbb{R}\to\mathbb{R}$ be differentiable on an open interval $I\subseteq D$ and $c\in I$ be a local extreme of $f$, then
 \[f'(c)=0.\]
 \begin{proof}
 Without loss of generality, suppose $c$ is a local extreme. Then there exists $\delta>0$ such that for all $x\in (c-\delta,c+\delta)\colon f(x)\leq f(c)$.
@@ -1114,7 +1114,7 @@ Since $f$ is differentiable at $c$,
 \[\lim_{h\to 0^+}\frac{f(x+h)-f(x)}{h}=\lim_{h\to 0^-}\frac{f(x+h)-f(x)}{h}=0=f'(c).\]
 \end{proof}
 \ssc{Rolle's Theorem (羅爾定理)}
-Let $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ be continuous on an interval $[a, b]\subseteq I$ and differentiable on $(a,b)$, then
+Let function $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ be continuous on an interval $[a, b]\subseteq I$ and differentiable on $(a,b)$, then
 \[\exists c\in (a, b)\text{\ s.t.\ }f'(c)=0.\]
 \begin{proof}
 By the Extreme Value Theorem, $f$ must have maximum and minimum on $[a,b]$.
@@ -1131,7 +1131,7 @@ By Fermat's Theorem,
 \[f'(c)=0.\]
 \end{proof}
 \subsection{Mean Value Theorem (MVT) (均值定理)}
-Let $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ be continuous on an interval $[a, b]\subseteq I$ and differentiable on $(a,b)$, then
+Let function $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ be continuous on an interval $[a, b]\subseteq I$ and differentiable on $(a,b)$, then
 \[\exists c\in (a, b)\text{\ s.t.\ }f'(c)=\frac{f(b)-f(a)}{b-a}.\]
 \begin{proof}
 Let
@@ -1140,7 +1140,17 @@ Let
 By Rolle's Theorem, there exists $c\in (a,b)$ such that $\phi'(c)=0$.
 \[\phi'(c)=f'(c)-\frac{f(b)-f(a)}{b-a}.\]
 \end{proof}
-{{{ need proof start
+\sssc{Cauchy's Mean Value Theorem (CMVT) (柯西均值定理)}
+Let functions $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ and $g\colon J\subseteq\mathbb{R}\to\mathbb{R}$ be continuous on an interval $[a, b]\subseteq I\cap J$ and differentiable on $(a,b)$, and $g'(x)\neq 0$ for all $X\in (a,b)$, then
+\[\exists c\in (a,b)\text{\ s.t.\ }\frac{f(b)-f(a)}{g(b)-g(a)}=\frac{f'(c)}{g'(c)}.\]
+\begin{proof}\mbox{}\\
+    Define a function
+    \[\phi(x)=f(x)-\frac{f(b)-f(a)}{g(b)-g(a)}g(x).\]
+    \[\phi(b)-\phi(a)=\qty(f(b)-f(a))-\frac{f(b)-f(a)}{g(b)-g(a)}\qty(g(b)-g(a))=0.\]
+    By Rolle's Theorem, there exists $c\in (a,b)$ such that $\phi'(c)=0$.
+    \[\phi'(x)=f'(x)-\frac{f(b)-f(a)}{g(b)-g(a)}g'(x).\]
+    \[\frac{f(b)-f(a)}{g(b)-g(a)}=\frac{f'(c)}{g'(c)}.\]
+\end{proof}
 \subsection{General form of L'Hôpital's rule (羅必達法則) or Bernoulli's rule}
 Let $I$ be an open interval and $a\in I$, and $f(x)$ and $g(x)$ be functions differentiable on $I\setminus\{a\}$. If $\lim_{x\to a}f(x)=\lim_{x\to a}g(x)\in\{0,\infty,-\infty\}$ and $\lim_{x\to a}\frac{f'(x)}{g'(x)}\in\mathbb{R}\cup\{-\infty,\infty\}$, then:
 \[\lim_{x\to a}\frac{f(x)}{g(x)}=\lim_{x\to a}\frac{f'(x)}{g'(x)}.\]
@@ -1156,12 +1166,30 @@ Let $f(x)$ and $g(x)$ be functions differentiable on $(a,\infty)$. If $\lim_{x\t
 
 Let $f(x)$ and $g(x)$ be functions differentiable on $(-\infty,a)$. If $\lim_{x\to-\infty}f(x)=\lim_{x\to-\infty}g(x)\in\{0,\infty,-\infty\}$ and $\lim_{x\to-\infty}\frac{f'(x)}{g'(x)}\in\mathbb{R}\cup\{-\infty,\infty\}$, then:
 \[\lim_{x\to-\infty}\frac{f(x)}{g(x)}=\lim_{x\to-\infty}\frac{f'(x)}{g'(x)}.\]
-{{{ mb better statement and search name start
+\begin{proof}
+Let $f(x)$ and $g(x)$ be functions differentiable on $(a,b)$ with $a<b$. We want to show that if $\lim_{x\to a^+}f(x)=\lim_{x\to a^+}g(x)=0$ and $\lim_{x\to a^+}\frac{f'(x)}{g'(x)}\in\mathbb{R}\cup\{-\infty,\infty\}$, then
+\[\lim_{x\to a^+}\frac{f(x)}{g(x)}=\lim_{x\to a^+}\frac{f'(x)}{g'(x)}.\]
+Let
+\[F(x)=\begin{cases}f(x),\quad & x\in (a,b)\\
+\lim_{x\to a^+}f(x),\quad & x=a\end{cases}\]
+and
+\[G(x)=\begin{cases}g(x),\quad & x\in (a,b)\\
+\lim_{x\to a^+}g(x),\quad & x=a\end{cases}\]
+By CMVT, for any $x\in (a,b)$, there exists $c\in (a,x)$ such that
+\[\frac{F(x)-F(a)}{G(x)-G(a)}=\frac{F'(c)}{G'(c)}.\]
+Since $F(a)=G(a)=0$,
+\[\frac{F(x)}{G(x)}=\frac{F'(c)}{G'(c)}.\]
+Thus,
+\[\lim_{x\to a^+}\frac{f(x)}{g(x)}=\lim_{x\to a^+}\frac{f'(x)}{g'(x)}.\]
+
+Other statements can be proved similarly.
+\end{proof}
+{{{ mb better statement and search name and prove start
 \subsection{Concavity theorem}
 Let $f:\,J\subseteq\mathbb{R}\to\mathbb{R}$ be differentiable on the open interval $I\subseteq J$. If $\forall x\in I:\,f''>0$, then the graph of $f$ is concave upward on $I$; if $\forall x\in I:\,f''<0$, then the graph of $f$ is concave downward on $I$.
 \subsection{Inflection point theorem}
 If $(c,f(c))$ is an inflection point of $f$, then $f''(c)=0$ or $f''$ does not exist at $c$.
-{{{ mb better statement and search name end; need proof end
+{{{ end
 \subsection{Lagrange multiplier (method) (拉格朗日乘數 or 乘子（法）)}
 The Lagrange multiplier method is a method for finding the points where extremes occur of a differentiable function under constraints.
 \sssc{Univariate form}
