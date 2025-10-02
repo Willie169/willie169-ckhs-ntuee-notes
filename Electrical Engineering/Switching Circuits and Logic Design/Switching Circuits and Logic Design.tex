@@ -96,52 +96,87 @@ It might be the easiest to read, but its arithmetic is the hardest to compute.
 \ssc{1's complement}
 \sssc{Definition}
 The nonnegative numbers are the same as those in sign and magnitude; the negative numbers invert all bits of its absolute value, i.e. $(2^N-1)$ minus its absolute value, that is, if a negative integer $B$ written in 1's complement is
-\[B=b_{n-1}b_{n-2}\ldots b_1b_0,\]
+\[B=b_{N-1}b_{N-2}\ldots b_1b_0,\]
 then
-\[B=-2^{n-1}+1+\sum_{i=0}^{n-2}b_i2^i.\]
+\[B=-2^{N-1}+1+\sum_{i=0}^{N-2}b_i2^i.\]
 \sssc{Range}
 It can represent numbers range from $-(2^{N-1}-1)$ to $2^{N-1}-1$. It has two zero ($+0$ and $-0$). 
 \sssc{Properties}
 Its arithmetic is easier than sign and magnitude and harder than 2's complement to compute. 
 \sssc{Negation}
-The negation can be computed by inverting all bits.
+The negation can be computed by inverting all bits, that is, subtract it from $2^N-1$.
 \sssc{Addition}
-The addition can be computed the same as unsigned numbers; however, if the sum had a carry out from the MSB, we must add it back to the LSB, called the "end-around carry".
+The addition can be computed the same as unsigned numbers; however, if the sum had a carry out from the MSB, we must add it back to the LSB, called the "end-around carry (EAC)".
 \begin{proof}\mbox{}\\
 Assume no overflow conditions.
 
-An $n$-bit negative number $X$ is represent as $2^n-1-|X|$ in 1's complement.
-
-Suppose we want to add two $n$-bit numbers $A$ and $B$, and in 1's complement, $A_1$ and $B_1$. Without loss of generality, assume $A\geq B$.
+Suppose we want to add two $n$-bit numbers $A$ and $B$, and $A$ and $B$ in 1's complement are $A_1$ and $B_1$ (treated as unsigned). Without loss of generality, assume $A\geq B$.
 
 Let:
-\[S = A_1 + B_1,\quad R=S \mod 2^n, \quad C=\left\lfloor\frac{S}{2^n}\right\rfloor,\]
-and $S_c$ be the correct sum of $A$ and $B$ in 1's complement.
+\[S = A_1 + B_1,\quad R=S \mod 2^N, \quad C=\left\lfloor\frac{S}{2^N}\right\rfloor,\]
+and $S_c$ be the correct sum of $A$ and $B$ in 1's complement (treated as unsigned).
 
 Case 0: $A,B\geq 0$
 \[S =A_1+B_1=A+B=S_c\]
 
 Case 1: $A\geq 0>B\land |B|\leq A$
-\[S =A_1+B_1=2^n-1+A-|B|\]
+\[S =A_1+B_1=2^N-1+A-|B|\]
 \[R=A-|B|-1,\quad C=1\]
 \[S_c=A-|B|=R+C\]
 
 Case 2: $A\geq 0>B\land |B|\geq A$
-\[S =A_1+B_1=2^n-1+A-|B|=S_c=R\]
+\[S =A_1+B_1=2^N-1+A-|B|=S_c=R\]
 
-Case 3: $0\geq A>B$
-\[S=A_1+B_1=2^{n+1}-2-|A|-|B|\]
-\[R=2^n-2-|A|-|B|,\quad C=1\]
-\[S_c=2^n-1-|A|-|B|=R+C\]
+Case 3: $0\geq A\geq B$
+\[S=A_1+B_1=2^{N+1}-2-|A|-|B|\]
+\[R=2^N-2-|A|-|B|,\quad C=1\]
+\[S_c=2^N-1-|A|-|B|=R+C\]
 \end{proof}
 
-If the sum of two positive numbers is greater than $2^{N-1}-1$, it overflows into the negative range; if the sum of two negative numbers is less than $-2^{N-1}+1$, it overflows into the positive range. This makes overflow detection straightforward. 
+If the sum of two positive numbers is greater than $2^{N-1}-1$, it overflows into the negative range; if the sum of two negative numbers is less than $-2^{N-1}+1$, it overflows into the positive range. This makes overflow detection straightforward.
+\sssc{Subtraction}
+The subtraction can be computed the same as unsigned numbers; however, if the difference had a borrow out from the MSB, we must subtract it back to the LSB, called the "end-around borrow (EAB)".
+\begin{proof}\mbox{}\\
+Assume no overflow conditions.
+
+Suppose we want to subtract a $n$-bit number $B$ from another $n$-bit number $A$, and $A$ and $B$ in 1's complement are $A_1$ and $B_1$ (treated as unsigned).
+
+Let:
+\[S = A_1 - B_1,\quad R=S \mod 2^N, \quad C=\left\lfloor\frac{S}{2^N}\right\rfloor,\]
+and $S_c$ be the correct sum of $A$ and $B$ in 1's complement (treated as unsigned).
+
+Case 0: $A\geq B\geq 0$
+\[S=A_1-B_1=A-B=S_c\]
+
+Case 1: $B\geq A\geq 0$
+\[S=A_1-B_1=2^N-1-(B-A)\]
+\[R=B-A+1,\quad C=1\]
+\[S_c=B-A=R-C\]
+
+Case 2: $A\geq 0>B$
+\[S=A_1-B_1=A-\qty(2^N-1-|B|)\]
+\[R=A+|B|+1,\quad C=1\]
+\[S_c=A+|B|=R-C\]
+
+Case 3: $B\geq 0>A$
+\[S=A_1-B_1=2^N-1-|A|-B=R=S_c\]
+
+Case 4: $0>A\geq B$
+\[S=A_1-B_1=2^N-1-|A|-\qty(2^N-1-|B|)=|B|-|A|=R=S_c\]
+
+Case 5: $0>B>A$
+\[S=A_1-B_1=2^N-1-\qty(2^N-1-|A|-\qty(2^N-1-|B|))=2^N-1+|A|-|B|\]
+\[R=|A|-|B|+1,\quad C=1\]
+\[S_c=|A|-|B|=R-C\]
+\end{proof}
+
+If the difference of a positive number and a negative number is greater than $2^{N-1}-1$, it overflows into the negative range; if the difference of a negative number and a positive number is less than $-2^{N-1}+1$, it overflows into the positive range. This makes overflow detection straightforward.
 \ssc{2's complement}
 \sssc{Definition}
 The nonnegative numbers are the same as those in sign and magnitude; the negative numbers invert all bits of its absolute value and add $1$, i.e. $2^N$ minus its absolute value, where $-2^{N-1}$ is only MSB being $1$ and others being $0$, that is, if a negative integer $B$ written in 1's complement is
-\[B=b_{n-1}b_{n-2}\ldots b_1b_0,\]
+\[B=b_{N-1}b_{N-2}\ldots b_1b_0,\]
 then
-\[B=-2^{n-1}+\sum_{i=0}^{n-2}b_i2^i.\]
+\[B=-2^{N-1}+\sum_{i=0}^{N-2}b_i2^i.\]
 \begin{proof}
 \[\ba
 B&=-|B|=-\qty(\sum_{i=0}^{n-2}(1-b_i)+1)\\
@@ -154,7 +189,7 @@ It can represent numbers range from $-2^{N-1}$ to $2^{N-1}-1$. It has only one z
 \sssc{Properties}
 Its arithmetic is the easiest to compute. It is the most commonly used representation for signed numbers in computers.
 \sssc{Negation}
-The negation can be computed by inverting all bits and add $1$.
+The negation can be computed by inverting all bits and add $1$, that is, subtract it from $2^N$.
 \begin{proof}\mbox{}\\
 Let negative integer $B$ written in 2's complement be
 \[B=b_{n-1}b_{n-2}\ldots b_1b_0,\]
@@ -169,7 +204,13 @@ The negation of it, which is positive, is
 \ea\]
 \end{proof}
 \sssc{Addition}
-The addition can be computed the same as unsigned numbers. If the sum of two positive numbers exceeds $2^{N-1}-1$, it overflows into the negative range; if the sum of two negative numbers is less than $-2^{N-1}$, it overflows into the positive range. This makes overflow detection straightforward.
+The addition can be computed the same as unsigned numbers.
+
+If the sum of two positive numbers is greater than $2^{N-1}-1$, it overflows into the negative range; if the sum of two negative numbers is less than $-2^{N-1}$, it overflows into the positive range. This makes overflow detection straightforward.
+\sssc{Subtraction}
+The subtraction can be computed the same as unsigned numbers.
+
+If the difference of a positive number and a negative number is greater than $2^{N-1}-1$, it overflows into the negative range; if the difference of a negative number and a positive number is less than $-2^{N-1}$, it overflows into the positive range. This makes overflow detection straightforward.
 \sct{Binary Codes}
 \ssc{Binary-coded decimal (BCD)}
 Binary-coded decimal (BCD), or more explicitly 8-4-2-1 BCD, is a way to represent decimal digits ($0$ to $9$) in binary, in which each decimal digit is encoded separately using 4 bits (a nibble). There are several other possible sets of binary codes for the ten decimal digits.
@@ -551,32 +592,39 @@ Then, the complement $f'$ of has minterm expansion
 \[f'=\sum m(i\in T),\]
 and maxterm expansion
 \[f'=\prod M(i\in S).\]
-\ssc{Minimum SOP form}
+\ssc{Minimal form}
 \sssc{Implicant}
 Given a Boolean function $f$ of $n$ variables, a product term $P$ is an implicant of $f$ iff for every combination of values of the $n$ variables for which $P = 1$, $f$ is also equal to $1$.
 \sssc{Prime implicant}
 A prime implicant of a function $f$ is an implicant of $f$ which is no longer an implicant of $f$ if any literal is deleted from it.
 \sssc{Essential prime implicant}
 An essential prime implicant of a function $f$ is a prime implicant $P$ of $f$ such that there exists a minterm $m$ of $f$ such that $m$ implies $P$ and for any other prime implicant $Q$ of $f$, $m$ implies $Q'$.
-\sssc{Minimum SOP form}
-A SOP form of a Boolean function is called minimal if it has the fewest number of terms out of all SOP forms of the function, and every product term in it can not have any variable in it be eliminated. For a given Boolean function, there may exist more than one minimum SOP forms of it.
+\sssc{Minimal SOP form}
+A SOP form of a Boolean function is called minimal if it has the fewest number of terms out of all SOP forms of the function, and every product term in it can not have any variable in it be eliminated. For a given Boolean function, there may exist more than one minimal SOP forms of it.
 
-A minimum SOP form of a Boolean function must consist of some of its prime implicants (but not necessarily all), that is, if a SOP form contains implicants that are not prime implicants, it is not minimal.
+A minimal SOP form of a Boolean function must consist of some of its prime implicants (but not necessarily all), that is, if a SOP form contains implicants that are not prime implicants, it is not minimal.
 
-A minimum SOP form of a Boolean function must contain all of its essential prime implicants.
-\sssc{Minimum POS form}
-A POS form of a Boolean function is called minimal if it has the fewest number of terms out of all POS forms of the function, and every sum term in it can not have any variable in it be eliminated. For a given Boolean function, there may exist more than one minimum POS forms of it.
+A minimal SOP form of a Boolean function must contain all of its essential prime implicants.
+\sssc{Minimal POS form}
+A POS form of a Boolean function is called minimal if it has the fewest number of terms out of all POS forms of the function, and every sum term in it can not have any variable in it be eliminated. For a given Boolean function, there may exist more than one minimal POS forms of it.
+
+One can simplify a Boolean function to minimal POS form by:
+\ben
+\item taking dual of the expression,
+\item simplifying it to minimal SOP form, and
+\item taking dual of it.
+\een
 \sssc{Incompletely Specified Boolean Functions (ISF) or Don't-care Functions}
 An incompletely specified function (ISF) or a don't-care function is a Boolean function but in which for some input combinations, the output is not defined or irrelevant. Those input combinations are called don't-care conditions, sometimes denoted as $d$, and their outputs are sometimes written as $X$, denoting don't care. The definition of ON-set and OFF-set of an ISF is the same as completely specified function; the Don't-Care set or DC-set of an ISF is the set of all don't-care conditions.
 
-The output for the don't-care conditions can be assigned either $0$ or $1$ such that the minimum SOP (or POS) forms have the fewest terms.
+The output for the don't-care conditions can be assigned either $0$ or $1$ such that the minimal SOP (or POS) forms have the fewest terms.
 
 An ISF $f$ with ON-set $S$, OFF-set $T$, and DC-set $D$ is sometimes written similar to minterm expansion as
 \[f=\sum m(i\in S)+\sum d(i\in D),\]
 and similar to maxterm expansion as
 \[f=\prod M(i\in T)+\prod d(i\in D).\]
 \ssc{Karnaugh Maps}
-A Karnaugh Map, aka a K-map, is a grid that visualize the ways to simplify a completely or incompletely specified Boolean function to a minimum SOP form.
+A Karnaugh Map, aka a K-map, is a grid that visualize the ways to simplify a completely or incompletely specified Boolean function to a minimal SOP form.
 \sssc{Drawing Karnaugh Maps of less than five variables}
 A K-map for a $2$-variable Boolean function $f(A,B)$ is
 \begin{longtable}[c]{c|c|c|}
@@ -625,13 +673,13 @@ An allowed collection of groups must follow the following rules:
 \item If any group $g$ is completely covered by another group following the above rules, $g$ must not be chosen, that is, a group chosen must represent a prime implicant.
 \item If any $1$ is only covered by one possible group, then that group must be chosen, that is, any group representing an essential prime implicant must be chosen.
 \eit
-\sssc{Minmum SOP form}
-Find an allowed collection of groups that contains the fewest groups, the sum of the implicants represented by them is a minimum SOP form of the given function.
+\sssc{Constructing minimal SOP form}
+Find an allowed collection of groups that contains the fewest groups, the sum of the implicants represented by them is a minimal SOP form of the given function.
 \sssc{Workflow}
 \ben
 \item Draw K-map.
 \item Find all groups representing essential prime implicants.
-\item Find an allowed collection of groups that contains the fewest groups and construct the minimum SOP form.
+\item Find an allowed collection of groups that contains the fewest groups and construct the minimal SOP form.
 \een
 \sssc{Five-variable Karnaugh Maps}
 One way of drawing a five-variable K-map is by placing one four-variable K-map on top of another, that is, for a $5$-variable Boolean function $f(A,B,C,D,E)$, the K-map is
@@ -644,8 +692,8 @@ $A$ & \multicolumn{1}{c|}{\thead{01}} & \backslashbox{$f(1,0,0,0,1)$}{$f(0,0,0,0
 & \multicolumn{1}{c|}{\thead{10}} & \backslashbox{$f(1,0,0,1,0)$}{$f(0,0,0,1,0)$} & \backslashbox{$f(1,0,1,1,0)$}{$f(0,0,1,1,0)$} & \backslashbox{$f(1,1,1,1,0)$}{$f(0,1,1,1,0)$} & \backslashbox{$f(1,1,0,1,0)$}{$f(0,1,0,1,0)$} \\\cline{3-6}
 \end{longtable}}
 in which the adjacency between cells in the same layer of four-variable K-map is the same as that in four-variable K-map; the upper and lower triangles in the same square are adjacent; and a group is a cuboid of $2^l\times 2^m\times 2^n$ cells that are either $1$ (minterm) or $X$ (don't-care condition), in which $l,m,n\in\mathbb{N}_0$.
-\sssc{Minimum POS form}
-To find a minimum POS form of a function $f$, we can use K-map to find a minimum SOP form of $f'$, and change all literals to its inverse, all AND to OR, and all OR to AND.
+\sssc{For minimal POS form}
+To find a minimal POS form of a function $f$, we can use K-map to find a minimal SOP form of $f'$, and change all literals to its inverse, all AND to OR, and all OR to AND.
 \section{Digital Systems and Switching Circuits}
 \begin{itemize}
 \item\textbf{Digital system}: Deals with signals that have discrete values. Theoretically, for a given input, the output is exactly correct.
