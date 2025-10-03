@@ -1063,7 +1063,7 @@ If functions $f$ and $g$ are differentiable on $I$, then the product $fg$ is als
 \end{proof}
 \ssc{General Leibniz rule}
 If functions $f$ and $g$ are $n$-times differentiable on $I$, then the product $fg$ is also $n$-times differentiable on $I$ and its derivative is given by
-\[(fg)^{(n)}=\sum _{k=0}^{n}{n \choose k}f^{(n-k)}g^{(k)}.\] 
+\[(fg)^{(n)}=\sum _{k=0}^{n}{n \choose k}f^{(n-k)}g^{(k)}.\]
 \ssc{Quotient rule (除法定則)}
 If functions $f$ and $g$ are differentiable on $I$ and $g\neq 0$ on $I$, then the quotient $\frac{f}{g}$ is also differentiable on $I$ and its derivative is given by
 \[\dv{x}\qty(\frac{f(x)}{g(x)})=\frac{f'(x)g(x)-f(x)g'(x)}{\qty(g(x))^2}.\]
@@ -1086,9 +1086,6 @@ If functions $f$ and $g$ are differentiable on $I$, then the composite $f\circ g
 &=f'\qty(g(x))g'(x)
 \ea\]
 \end{proof}
-\ssc{Power rule combined with chain rule}
-If $n\in\bbR$ and $f(x)$ is differentiable on $I$, then $\qty(f(x))^n$ is also differentiable on $I$ and its derivative is given by
-\[\dv{}{x}\qty(f(x))^n=n\qty(f(x))^{n-1}\cdot f'(x).\]
 \ssc{Faà di Bruno's formula}
 \bma
 &\frac{\mathrm{d}^n}{\mathrm{d}x}f\left(g(x)\right)\\
@@ -1096,8 +1093,32 @@ If $n\in\bbR$ and $f(x)$ is differentiable on $I$, then $\qty(f(x))^n$ is also d
 &f^{\qty(\sum_{j=1}^nm_j)}\left(g(x)\right)\cdot\\
 &\prod_{j=1}^n\left(\frac {g^{(j)}(x)}{j!}\right)^{m_j}.
 \eam
-\ssc{Implicit differentiation (隱函數微分)}{{{
+\ssc{Implicit differentiation (隱函數微分)}
+If $x$ and $y$ are related by an equation $F(x,y)=0$, then we can differentiate both sides with respect to $x$, treating $y$ as a function of $x$.
 
+Whenever we differentiate a term involving $y$, we apply the chain rule, which introduces a factor of $\dv{y}{x}$.
+
+We can compute derivatives of $y$ with respect to $x$ without solving for $y$ by implicit differentiation.
+\ssc{Logarithmic differentiation}
+Logarithmic differentiation is a method for finding derivatives by taking the natural logarithm of both sides of an equation first, then differentiating.
+
+It’s especially useful when the function involves products or quotients of many factors, or variables in both the base and the exponent.
+\ssc{Derivative of variable base, constant exponent funcion}
+If $n\in\bbR$ and $f(x)$ is differentiable on $I$, then $\qty(f(x))^n$ is also differentiable on $I$ and its derivative is given by
+\[\dv{}{x}\qty(f(x))^n=n\qty(f(x))^{n-1}f'(x).\]
+\ssc{Derivative of constant base, variable exponent funcion}
+If $n\in\bbR$ and $f(x)$ is differentiable on $I$, then $n^{f(x)}$ is also differentiable on $I$ and its derivative is given by
+\[\dv{}{x}n^{f(x)}=n^{f(x)}(\ln n)f'(x).\]
+\ssc{Derivative of variable base, variable exponent funcion}
+\[\dv{}{x}\qty(f(x))^{g(x)}=\qty(f(x))^{g(x)}\qty(g'(x)\ln\qty(f(x))+g(x)\frac{f'(x)}{f(x)}).\]
+\begin{proof}
+\[y\coloneq\qty(f(x))^{g(x)}\]
+Take natural logarithm of both sides:
+\[\ln y=g(x)\ln\qty(f(x)).\]
+Take differentiation of both sides:
+\[\frac{y'}{y}=g'(x)\ln\qty(f(x))+g(x)\frac{f'(x)}{f(x)}.\]
+\[y'=\qty(f(x))^{g(x)}\qty(g'(x)\ln\qty(f(x))+g(x)\frac{f'(x)}{f(x)}).\]
+\end{proof}
 \subsection{Extreme Value Theorem (EVT) (極值定理)}
 Let function $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ be continuous on an interval $[a,b]\subseteq I$, then
 \[\exists c,d \in [a, b] \text{\ s.t.\ }\forall x \in [a, b]\colon f(c)\geq f(x)\geq f(d).\]
