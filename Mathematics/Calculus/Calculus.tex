@@ -61,6 +61,29 @@ $a_n\leq a_{n+1}$ for every $n\geq 1$ or $a_n\geq a_{n+1}$ for every $n\geq 1$, 
 
 "Only If"-direction: By $(\epsilon,\delta)$-definition of limit, every sequence $\langle a_n\rangle_{n\in\mathbb {N}}$ with a finite limit $L$ is necessarily bounded.
 \end{proof}
+\sssc{Bolzano–Weierstrass Theorem (波爾查諾-魏爾斯特拉斯定理)}
+Every bounded sequence in an Euclidean space $\bbR^n$ has a convergent subsequence.
+
+\begin{proof}\mbox{}\\
+    For $\bbR$, take any bounded sequence $(x_n)$ in $\bbR$. Then there exist real numbers $m,M$ such that
+    \[m\leq x_n\leq M,\quad\forall n.\]
+    So the sequence lies in the closed interval $[m,M]$.
+
+    For $\varepsilon=1$. Divide $[m,M]$ into disjoint subintervals with length $\frac{M-m}{2^\varepsilon}$:
+    \[\qty[m,\frac{m+M}{2}],\qty[\frac{m+M}{2},M].\]
+    Since $(x_n)$ is infinite, by the pigeonhole principle, one of the subintervals must contain infinitely many terms of $(x_n)$. Denote it by $I_1$ and pick the subsequence $\qty(x_n^{(1)})$ of $(x_n)$ that is entirely in $I_1$.
+
+    Repeat it for $\varepsilon=2,3,\ldots$ by dividing $I_{\varepsilon-1}$ into two halves, we can construct a nested sequence of subsequences
+    \[\qty(x_n^{(1)})\supseteq \qty(x_n^{(2)})\supseteq\ldots\]
+    where $\qty(x_n^{(k)})$ lies in a closed interval of length $\frac{M-m}{2^k}$, $I_k$.
+
+    Pick the diagonal sequence $y_k=x_k^{(k)}$. Then
+    \[y_k\in\qty(x_n^{(k)})\subseteq I_k,\]
+    and the sequence $(y_k)$ is a convergent subsequence of $(x_n)$ because
+    \[\forall N\in\bbN\colon m,n\geq N\implies |y_m-y_n|\leq\frac{M-m}{2^N}.\]
+
+    To generalized to $\bbR^n$, consider each coordinate sequence in $\bbR$, it has a convergent subsequence. Diagonalization gives a subsequence converging in all coordinates.
+\end{proof}
 \subsection{Limits of Real Series}
 \subsubsection{Definition}
 Let:
