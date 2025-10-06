@@ -1660,7 +1660,7 @@ The inverse Laplace transform of a complex function $F(s)$ is given by the line 
 
 
 \sct{Lists}
-\ssc{List of Derivatives and Functions as definite integrals}
+\ssc{List of Derivatives of Real Functions and Real Functions as Definite Integrals}
 \sssc{Power function}
 \[\dv{x^n}{x}=nx^{n-1}.\]
 \[x^n=n\int_0^xt^{n-1}\dd{t}.\]
@@ -1848,9 +1848,9 @@ Using the chain rule on the left:
 \[\dv{\arccoth x}{x}=\frac{1}{1-x^2},\quad|x|>1.\]
 \sssc{Inverse hyperbolic secant function}
 \[\dv{\arcsech x}{x}=-\frac{1}{x\sqrt{1-x^2}},\quad 0<x<1.\]
-\sssc{Inverse hyperbolic sine function}
+\sssc{Inverse hyperbolic cosecant function}
 \[\dv{\arcsinh x}{x}=-\frac{1}{|x|\sqrt{1+x^2}},\quad x\neq 0.\]
-\ssc{List of Taylor Expansions}
+\ssc{List of Taylor Expansions of Real Functions}
 \sssc{Power function}
 For any $n\in\mathbb{R}$ and $x\in\mathbb{R}$ in the maximum possible domain:
 \[x^n=\sum_{k=0}^{\infty}\binom{n}{k}a^{n-k}(x-a)^k,|x-a|<|a|.\]
@@ -1911,7 +1911,7 @@ Assume:
 Differentiate both side:
 \[y'P_{n-1}'(y)=y^{(n)}=-(1+y^2)P_{n-1}'(y)=P_n(y).\]
 \end{proof}
-\ssc{List of Integrals}
+\ssc{List of Integrals of Real Functions}
 \sssc{Power function}
 \[\int x^n\dd{x}=\begin{cases}
     \frac{x^{n+1}}{n+1}+C,\quad n\neq -1,
@@ -1993,10 +1993,10 @@ Differentiate both side:
     \[\dv{}{x}\qty(\ln|\sec x+\tan x|)=\frac{1}{|\sec x+\tan x|}\qty(\sec x\tan x+\sec^2 x)\frac{|\sec x+\tan x|}{\sec x+\tan x}=\sec x.\]
 \end{proof}
 \[\int\sec^2 x\dd{x}=\tan x+C.\]
-\[\int\sec^n x\dd{x}=\frac{1}{n-1}\tan x\sec^{n-2}x+\frac{n-2}{n-1}\int\sec^{n-2}x\dd{x},\quad n\in\bbN_{>1}.\]
+\[\int\sec^n x\dd{x}=\frac{1}{n-1}\sec^{n-2}x\tan x+\frac{n-2}{n-1}\int\sec^{n-2}x\dd{x},\quad n\in\bbN_{>1}.\]
 \begin{proof}\mbox{}\\
-    Differentiate RHS
-    \[\dv{}{x}\qty(\frac{1}{n-1}\tan x\sec^{n-2}x+\frac{n-2}{n-1}\int\sec^{n-2}x\dd{x})=\frac{1}{n-1}\sec^nx+\frac{n-2}{n-1}\tan^2x\sec^{n-2}x+\frac{n-2}{n-1}\sec^{n-2}x=\sec^n x.\]
+    Differentiate RHS:
+    \[\dv{}{x}\qty(\frac{1}{n-1}\sec^{n-2}x\tan x+\frac{n-2}{n-1}\int\sec^{n-2}x\dd{x})=\frac{1}{n-1}\sec^nx+\frac{n-2}{n-1}\sec^{n-2}x\tan^2x+\frac{n-2}{n-1}\sec^{n-2}x=\sec^n x.\]
 \end{proof}
 \sssc{Cosecant function}
 \[\int\csc x\dd{x}=-\ln|\csc x+\cot x|+C.\]
@@ -2005,12 +2005,83 @@ Differentiate both side:
     \[\dv{}{x}\qty(-\ln|\csc x+\cot x|)=-\frac{1}{|\csc x+\cot x|}\qty(-\csc x\cot x-\csc^2 x)\frac{|\csc x+\cot x|}{\csc x+\cot x}=\csc x.\]
 \end{proof}
 \[\int\csc^2 x\dd{x}=-\cot x+C.\]
-\[\int\csc^n x\dd{x}=-\frac{1}{n-1}\cot x\csc^{n-2}x+\frac{n-2}{n-1}\int\csc^{n-2}x\dd{x},\quad n\in\bbN_{>1}.\]
+\[\int\csc^n x\dd{x}=-\frac{1}{n-1}\csc^{n-2}x\cot x+\frac{n-2}{n-1}\int\csc^{n-2}x\dd{x},\quad n\in\bbN_{>1}.\]
 \begin{proof}\mbox{}\\
-    Differentiate RHS
-    \[\dv{}{x}\qty(-\frac{1}{n-1}\cot x\csc^{n-2}x+\frac{n-2}{n-1}\int\csc^{n-2}x\dd{x})=\frac{1}{n-1}\csc^nx-\frac{n-2}{n-1}\cot^2x\csc^{n-2}x+\frac{n-2}{n-1}\csc^{n-2}x=\csc^nx.\]
+    Differentiate RHS:
+    \[\dv{}{x}\qty(-\frac{1}{n-1}\csc^{n-2}x\cot x+\frac{n-2}{n-1}\int\csc^{n-2}x\dd{x})=\frac{1}{n-1}\csc^nx-\frac{n-2}{n-1}\csc^{n-2}x\cot^2x+\frac{n-2}{n-1}\csc^{n-2}x=\csc^nx.\]
 \end{proof}
-PLACEHOLDER: Inverse trigonometric, mb hyperbolic and inverse hyperbolic
+\sssc{Inverse sine function}
+\[\int\arcsin x\dd{x}=x\arcsin x+\sqrt{1-x^2}+C.\]
+\begin{proof}\mbox{}\\
+    Differentiate RHS:
+    \[\dv{}{x}\qty(x\arcsin x+\sqrt{1-x^2})=\frac{x}{\sqrt{1-x^2}}+\arcsin x+\frac{-x}{\sqrt{1-x^2}}=\arcsin x.\]
+\end{proof}
+\sssc{Inverse cosine function}
+\[\int\arccos x\dd{x}=x\arccos x-\sqrt{1-x^2}+C.\]
+\begin{proof}\mbox{}\\
+    Differentiate RHS:
+    \[\dv{}{x}\qty(x\arccos x-\sqrt{1-x^2})=-\frac{x}{\sqrt{1-x^2}}+\arccos x-\frac{-x}{\sqrt{1-x^2}}=\arccos x.\]
+\end{proof}
+\sssc{Inverse tangent function}
+\[\int\arctan x\dd{x}=x\arctan x-\frac{1}{2}\ln(1+x^2)+C.\]
+\begin{proof}\mbox{}\\
+    Differentiate RHS:
+    \[\dv{}{x}\qty(x\arctan x-\frac{1}{2}\ln(1+x^2))=\frac{x}{1+x^2}+\arctan x-\frac{2x}{2\qty(1+x^2)}=\arctan x.\]
+\end{proof}
+\sssc{Inverse cotangent function}
+\[\int\arccot x\dd{x}=x\arccot x+\frac{1}{2}\ln(1+x^2)+C.\]
+\begin{proof}\mbox{}\\
+    Differentiate RHS:
+    \[\dv{}{x}\qty(x\arccot x+\frac{1}{2}\ln(1+x^2))=-\frac{x}{1+x^2}+\arccot x+\frac{2x}{2\qty(1+x^2)}=\arccot x.\]
+\end{proof}
+\sssc{Inverse secant function}
+\[\int\arcsec x\dd{x}=x\arcsec x-\ln\abs{x+\sqrt{x^2-1}}+C,\quad|x|\geq 1.\]
+\begin{proof}\mbox{}\\
+    Differentiate RHS:
+    \[\dv{}{x}\qty(x\arcsec x-\ln\abs{x+\sqrt{x^2-1}})=\frac{x}{|x|\sqrt{x^2-1}}+\arcsec x-\frac{1}{\abs{x+\sqrt{x^2-1}}\qty(1+\frac{2x}{\sqrt{x^2-1}})=\frac{x}{|x|\sqrt{x^2-1}}+\arcsec x-\frac{x}{|x|}\frac{1}{x+\sqrt{x^2-1}}\frac{x+\sqrt{x^2-1}}{\sqrt{x^2-1}}=\arcsec x.\]
+\end{proof}
+\sssc{Inverse cosecant function}
+\[\int\arccsc x\dd{x}=x\arccsc x+\ln\abs{x+\sqrt{x^2-1}}+C,\quad|x|\geq 1.\]
+\begin{proof}\mbox{}\\
+    Differentiate RHS:
+    \[\dv{}{x}\qty(x\arccsc x+\ln\abs{x+\sqrt{x^2-1}})=-\frac{x}{|x|\sqrt{x^2-1}}+\arccsc x+\frac{1}{\abs{x+\sqrt{x^2-1}}\qty(1+\frac{2x}{\sqrt{x^2-1}})=-\frac{x}{|x|\sqrt{x^2-1}}+\arccsc x+\frac{x}{|x|}\frac{1}{x+\sqrt{x^2-1}}\frac{x+\sqrt{x^2-1}}{\sqrt{x^2-1}}=\arccsc x.\]
+\end{proof}
+\sssc{Hyperbolic sine function}
+\[\int\sinh x\dd{x}=\cosh x+C.\]
+\[\int\sinh^2x\dd{x}=\frac{\sinh(2x)}{4}-\frac{x}{2}+C.\]
+\[\int\sinh^nx\dd{x}=\frac{1}{n}\sinh^{n-1}x\cosh x-\frac{n-1}{n}\int\sinh^{n-2}x\dd{x},\quad n\in\bbN_{>1}.\]
+\sssc{Hyperbolic cosine function}
+\[\int\cosh x\dd{x}=\sinh x+C.\]
+\[\int\cosh^2x\dd{x}\frac{\sinh(2x)}{4}+\frac{x}{2}+C.\]
+\[\int\cosh^nx\dd{x}=\frac{1}{n}\cosh^{n-1}x\sinh x+\frac{n-1}{n}\int\cosh^{n-2}x\dd{x},\quad n\in\bbN_{>1}.\]
+\sssc{Hyperbolic tangent function}
+\[\int\tanh x\dd{x}=\ln\cosh x+C.\]
+\[\int\tanh^2x\dd{x}=x-\tanh x+C.\]
+\[\int\tanh^nx\dd{x}=\frac{1}{n-1}\tanh^{n-1}x-\int\tanh^{n-2}x\dd{x},\quad n\in\bbN_{>1}.\]
+\sssc{Hyperbolic cotangent function}
+\[\int\coth x\dd{x}=\ln|\sinh x|+C.\]
+\[\int\coth^2x\dd{x}=x-\coth x+C.\]
+\[\int\coth^nx\dd{x}=-\frac{1}{n-1}\coth^{n-1}x-\int\coth^{n-2}x\dd{x},\quad n\in\bbN_{>1}.\]
+\sssc{Hyperbolic secant function}
+\[\int\sech x\dd{x}=\arctanh\sinh x+C.\]
+\[\int\sech^2x\dd{x}=\tanh x+C.\]
+\[\int\sech^nx\dd{x}=\frac{1}{n-1}\sech^{n-1}x\tanh x+\frac{n-2}{n-1}\int\sech^{n-2}x\dd{x},\quad n\in\bbN_{>1}.\]
+\sssc{Hyperbolic cosecant function}
+\[\int\csch x\dd{x}=\ln\abs{\tanh\frac{x}{2}}+C.\]
+\[\int\csch^2x\dd{x}=-\coth x+C.\]
+\[\int\csch^nx\dd{x}=-\frac{1}{n-1}\csch^{n-1}x\coth x+\frac{n-2}{n-1}\int\csch^{n-2}x\dd{x},\quad n\in\bbN_{>1}.\]
+\sssc{Inverse hyperbolic sine function}
+\[\int\arcsinh x\dd{x}=x\arcsinh x-\sqrt{x^2+1}+C.\]
+\sssc{Inverse hyperbolic cosine function}
+\[\int\arccosh x\dd{x}=x\arccosh x-\sqrt{x^2-1}+C,\quad x\geq 1.\]
+\sssc{Inverse hyperbolic tangent function}
+\[\int\arctanh x\dd{x}=x\arctanh x+\frac{1}{2}\ln(1-x^2)+C,\quad|x|<1.\]
+\sssc{Inverse hyperbolic cotangent function}
+\[\int\arccoth x\dd{x}=x\arccoth x+\frac{1}{2}\ln(x^2-1)+C,\quad|x|>1.\]
+\sssc{Inverse hyperbolic secant function}
+\[\int\arcsech x\dd{x}=x\arcsech x+\arctan\qty(\frac{\sqrt{1-x^2}}{x})+C,\quad 0<x\leq 1.\]
+\sssc{Inverse hyperbolic cosecant function}
+\[\int\arccsch x\dd{x}=x\arccsch x+\ln\abs{x+\sqrt{x^2+1}}+C,\quad x\neq 0.\]
 \sssc{Rational functions}
 $a\neq 0$.
 \[\int\frac{f'(x)}{f(x)}\,\mathrm{d}x=\ln|f(x)|+C.\]
@@ -2022,6 +2093,7 @@ $a\neq 0$.
 \[\int\frac{x}{ax+b}\,\mathrm{d}x=\frac{x}{a}-\frac{b}{a^2}\ln|ax+b|+C.\]
 \[\int\frac{x}{(ax+b)^2}\,\mathrm{d}x=\frac{b}{a^2(ax+b)}+\frac{1}{a^2}\ln|ax+b|+C.\]
 \[\int x(ax+b)^n\,\mathrm{d}x=\frac{a(n+1)x-b}{a^2(n+1)(n+2)}(ax+b)^{n+1}+C,\quad n\notin\{-1,-2\}.\]
+PLACEHOLDER
 \sssc{Irrational functions}
 \[\int\sqrt{a^2+x^2}\,\mathrm{d}x=\frac{x}{2}\sqrt{a^2+x^2}+\frac{a^2}{2}\ln\qty(x+\sqrt{a^2+x^2})+C.\]
 \[\int\sqrt{x^2-a^2}\,\mathrm{d}x=\frac{x}{2}\sqrt{x^2-a^2}-\frac{a^2}{2}\ln\qty(x+\sqrt{x^2-a^2})+C,\quad x^2>a^2.\]
@@ -2029,6 +2101,7 @@ $a\neq 0$.
 \sssc{Gaussian integral (高斯積分) or Euler–Poisson integral}
 \[\int_{-\infty}^{\infty}e^{-t^2}\dd{t}=\sqrt{\pi}.\]
 \[\int_0^{\infty}e^{-t^2}\dd{t}=\frac{\sqrt{\pi}}{2}.\]
+PLACEHOLDER
 \ssc{Lists of Laplace Transform}
 PLACEHOLDER
 \ssc{Lists Fourier Transform}
