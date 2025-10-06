@@ -7,6 +7,7 @@
 \author{沈威宇}
 \date{\temtoday}
 \titletocdoc
+\renewcommand{\arraystretch}{1.5}
 \sct{Hyperbolic Functions (雙曲函數)}
 \ssc{Hyperbolic Functions}
 \sssc{Definition}
@@ -66,6 +67,31 @@ Function & Symbols & Definition & Domain & Range \\
     \arccsc(x) & \frac{1}{x} & \frac{\sqrt{x^2-1}}{|x|} & \frac{\operatorname{sgn}\qty(x)}{\sqrt{x^2-1}},\quad|x|>1 & \sqrt{x^2-1}\operatorname{sgn}\qty(x) & \frac{|x|}{\sqrt{x^2-1}} & x \\\hline
 \end{longtable}\FB
 \ssc{Identities}
+\sssc{雙曲函數基本關係}
+\begin{center}
+\begin{tikzpicture}
+  \foreach \a in {0,60,...,300}
+    \node (P\a) at (\a:3) {};
+  \draw (P0) -- (P60) -- (P120) -- (P180) -- (P240) -- (P300) -- (P0) -- cycle;
+  \draw (P0) -- (P180);
+  \draw (P60) -- (P240);
+  \draw (P120) -- (P300);
+  \draw (P0) -- (P300);
+  \node[draw, fill=white, minimum size=1cm, anchor=center] at (P0) {$\coth$};
+  \node[draw, fill=white, minimum size=1cm, anchor=center] at (P60) {$\cosh$};
+  \node[draw, fill=white, minimum size=1cm, anchor=center] at (P120) {$\sinh$};
+  \node[draw, fill=white, minimum size=1cm, anchor=center] at (P180) {$\tanh$};
+  \node[draw, fill=white, minimum size=1cm, anchor=center] at (P240) {$\sech$};
+  \node[draw, fill=white, minimum size=1cm, anchor=center] at (P300) {$\csch$};
+  \node[draw, fill=white, minimum size=1cm, anchor=center] at (0,0) {$1$};
+\end{tikzpicture}
+\end{center}
+\bit
+\item 名稱：左側三者為正；右側三者為餘；上面二者為弦；中間二者為切；下面二者為割。
+\item 倒數關係：三條通過中心點的線，其兩端者互為倒數，相乘為1。
+\item 商數關係：六邊形周上，連續三個頂點形成的連線，其兩端者相乘等於中間者。
+\item 平方關係：圖中有三個倒正三角形，其在右上頂點者之平方減去在左上頂點者之平方等於在下方頂點者之平方。
+\eit
 \sssc{正切萬能公式}
 \[\sinh\theta=\frac{2\tanh\frac{\theta}{2}}{1-\tanh^2\frac{\theta}{2}}\]
 \[\cosh\theta=\frac{1+\tanh^2\frac{\theta}{2}}{1-\tanh^2\frac{\theta}{2}}\]
