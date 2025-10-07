@@ -1166,39 +1166,6 @@ Take differentiation of both sides:
 \[\frac{y'}{y}=g'(x)\ln\qty(f(x))+g(x)\frac{f'(x)}{f(x)}.\]
 \[y'=\qty(f(x))^{g(x)}\qty(g'(x)\ln\qty(f(x))+g(x)\frac{f'(x)}{f(x)}).\]
 \end{proof}
-\sssc{General form of L'Hôpital's rule (羅必達法則) or Bernoulli's rule}
-Let $I$ be an open interval and $a\in I$, and $f(x)$ and $g(x)$ be functions differentiable on $I\setminus\{a\}$. If $\lim_{x\to a}f(x)=\lim_{x\to a}g(x)\in\{0,\infty,-\infty\}$ and $\lim_{x\to a}\frac{f'(x)}{g'(x)}\in\mathbb{R}\cup\{-\infty,\infty\}$, then:
-\[\lim_{x\to a}\frac{f(x)}{g(x)}=\lim_{x\to a}\frac{f'(x)}{g'(x)}.\]
-
-Let $f(x)$ and $g(x)$ be functions differentiable on $(a,b)$ with $a<b$. If $\lim_{x\to a^+}f(x)=\lim_{x\to a^+}g(x)\in\{0,\infty,-\infty\}$ and $\lim_{x\to a^+}\frac{f'(x)}{g'(x)}\in\mathbb{R}\cup\{-\infty,\infty\}$, then:
-\[\lim_{x\to a^+}\frac{f(x)}{g(x)}=\lim_{x\to a^+}\frac{f'(x)}{g'(x)}.\]
-
-Let $f(x)$ and $g(x)$ be functions differentiable on $(b,a)$ with $a>b$. If $\lim_{x\to a^-}f(x)=\lim_{x\to a^-}g(x)\in\{0,\infty,-\infty\}$ and $\lim_{x\to a^-}\frac{f'(x)}{g'(x)}\in\mathbb{R}\cup\{-\infty,\infty\}$, then:
-\[\lim_{x\to a^-}\frac{f(x)}{g(x)}=\lim_{x\to a^-}\frac{f'(x)}{g'(x)}.\]
-
-Let $f(x)$ and $g(x)$ be functions differentiable on $(a,\infty)$. If $\lim_{x\to\infty}f(x)=\lim_{x\to\infty}g(x)\in\{0,\infty,-\infty\}$ and $\lim_{x\to\infty}\frac{f'(x)}{g'(x)}\in\mathbb{R}\cup\{-\infty,\infty\}$, then:
-\[\lim_{x\to\infty}\frac{f(x)}{g(x)}=\lim_{x\to\infty}\frac{f'(x)}{g'(x)}.\]
-
-Let $f(x)$ and $g(x)$ be functions differentiable on $(-\infty,a)$. If $\lim_{x\to-\infty}f(x)=\lim_{x\to-\infty}g(x)\in\{0,\infty,-\infty\}$ and $\lim_{x\to-\infty}\frac{f'(x)}{g'(x)}\in\mathbb{R}\cup\{-\infty,\infty\}$, then:
-\[\lim_{x\to-\infty}\frac{f(x)}{g(x)}=\lim_{x\to-\infty}\frac{f'(x)}{g'(x)}.\]
-\begin{proof}\mbox{}\\
-Let $f(x)$ and $g(x)$ be functions differentiable on $(a,b)$ with $a<b$. We want to show that if $\lim_{x\to a^+}f(x)=\lim_{x\to a^+}g(x)=0$ and $\lim_{x\to a^+}\frac{f'(x)}{g'(x)}\in\mathbb{R}\cup\{-\infty,\infty\}$, then
-\[\lim_{x\to a^+}\frac{f(x)}{g(x)}=\lim_{x\to a^+}\frac{f'(x)}{g'(x)}.\]
-Let
-\[F(x)=\begin{cases}f(x),\quad & x\in (a,b)\\
-\lim_{x\to a^+}f(x),\quad & x=a\end{cases}\]
-and
-\[G(x)=\begin{cases}g(x),\quad & x\in (a,b)\\
-\lim_{x\to a^+}g(x),\quad & x=a\end{cases}\]
-By CMVT, for any $x\in (a,b)$, there exists $c\in (a,x)$ such that
-\[\frac{F(x)-F(a)}{G(x)-G(a)}=\frac{F'(c)}{G'(c)}.\]
-Since $F(a)=G(a)=0$,
-\[\frac{F(x)}{G(x)}=\frac{F'(c)}{G'(c)}.\]
-Thus,
-\[\lim_{x\to a^+}\frac{f(x)}{g(x)}=\lim_{x\to a^+}\frac{f'(x)}{g'(x)}.\]
-
-Other statements can be proved similarly.
-\end{proof}
 \ssc{Points}
 \sssc{Critical point (臨界點)}
 Let $f$ be a function with codomain $\bbR$ and \( c \) be a point in the domain of $f$, if \( f'(c) = 0 \) or \( f' \) does not exist at \( c \), then \( c \) is a critical point, of \( f \), and $f(c)$ is called a critical value of $f$.
@@ -1338,57 +1305,58 @@ eme at $c$.
 \sssc{Concavity (凹性)}
 Let $V$ be a vector space, $f\colon J\subseteq V\to\bbR$ be a function, and $I\subseteq J$ be a convex set.
 \bit
-\item If for any $x,y\in I$ and $\alpha\in(0,1)$, $f((1-\alpha)x+\alpha y)>(1-\alpha)f(x)+\alpha f(y)$, often called "$f$ lies strictly above all its secant lines on $I$", then $f$ is called to be strictly concave upwards or strictly convex downwards.
-\item If for any $x,y\in I$ and $\alpha\in(0,1)$, $f((1-\alpha)x+\alpha y)\geq (1-\alpha)f(x)+\alpha f(y)$, often called "$f$ lies weakly above all of its tangent lines on $I$", then $f$ is called to be weakly concave upwards or weakly convex downwards.
-\item If for any $x,y\in I$ and $\alpha\in(0,1)$, $f((1-\alpha)x+\alpha y)<(1-\alpha)f(x)+\alpha f(y)$, often called "$f$ lies strictly below all of its tangent lines on $I$", then $f$ is called to be strictly concave (downwards) or strictly convex (upwards).
-\item If for any $x,y\in I$ and $\alpha\in(0,1)$, $f((1-\alpha)x+\alpha y)\leq (1-\alpha)f(x)+\alpha f(y)$, often called "$f$ lies weakly below all of its tangent lines on $I$", then $f$ is called to be weakly concave (downwards) or weakly convex (upwards).
+\item If for any $x,y\in I$ and $\alpha\in(0,1)$, $f((1-\alpha)x+\alpha y)\leq (1-\alpha)f(x)+\alpha f(y)$, often called "$f$ lies weakly below all of its secant lines on $I$", then $f$ is called to be weakly concave upward/convex (upwards)/CU/cup-shape.
+\item If for any $x,y\in I$ and $\alpha\in(0,1)$, $f((1-\alpha)x+\alpha y)<(1-\alpha)f(x)+\alpha f(y)$, often called "$f$ lies strictly below all of its secant lines on $I$", then $f$ is called to be strictly concave upward/convex (upwards)/CU/cup-shape.
+\item If for any $x,y\in I$ and $\alpha\in(0,1)$, $f((1-\alpha)x+\alpha y)\geq (1-\alpha)f(x)+\alpha f(y)$, often called "$f$ lies weakly above all of its secant lines on $I$", then $f$ is called to be weakly concave (downwards)/convex downwards/CD/cap-shape.
+\item If for any $x,y\in I$ and $\alpha\in(0,1)$, $f((1-\alpha)x+\alpha y)>(1-\alpha)f(x)+\alpha f(y)$, often called "$f$ lies strictly above all its secant lines on $I$", then $f$ is called to be strictly concave (downwards)/convex downwards/CD/cap-shape.
 \eit
-Concave upward (CU) or convex downward and concave downward (CD) are define to be either weakly or strictly concave (upward) and concave downward in different contexts, here we define them to be strictly concave (upward) and concave downward.
+The terms concave upward/convex (upwards)/CU/cup-shape and concave (downwards)/convex downwards/CD/cap-shape are define to be either weakly or strictly in different contexts, here we define them to be strictly.
 \sssc{Point of inflection or inflection point (反曲點 or 拐點)}
 Let $V$ be a vector space, $f\colon J\subseteq V\to\bbR$ be a function, and $I\subseteq J$ be a convex set. If $f$ is concave upward on $(a,b)$ and concave downward on $(b,c)$, or, concave downward on $(a,b)$ and concave upward on $(b,c)$, then $(b,f(b))$ is called an inflection point of $f$.
 \sssc{First Derivative Test for Concavity Theorem}
 Let function $f\colon J\subseteq\bbR\to\bbR$ be differentiable on an open interval $I\subseteq J$.
 \bit
-\item $f'$ is strictly increasing on $I$ iff $f$ is strictly concave upward on $I$.
-\item $f'$ is non-decreasing on $I$ iff $f$ is weakly concave upward on $I$.
-\item $f'$ is strictly decreasing on $I$ iff $f$ is strictly concave downward on $I$.
-\item $f'$ is non-increasing on $I$ iff $f$ is weakly concave downward on $I$.
+\item $f'$ is non-decreasing on $I$, often called "$f$ lies weakly below all its tagent lines on $I$", iff $f$ is weakly concave upward on $I$.
+\item $f'$ is strictly increasing on $I$, often called "$f$ lies strictly below all its tagent lines on $I$", iff $f$ is strictly concave upward on $I$.
+\item $f'$ is non-increasing on $I$, often called "$f$ lies weakly above all its tagent lines on $I$", iff $f$ is weakly concave downward on $I$.
+\item $f'$ is strictly decreasing on $I$, often called "$f$ lies strictly above all its tagent lines on $I$", iff $f$ is strictly concave downward on $I$.
 \eit
-\begin{proof}
-    For the first statement, we want to show that for any $x,y\in I$ and $\alpha\in(0,1)$, $f((1-\alpha)x+\alpha y)>(1-\alpha)f(x)+\alpha f(y)$.
+\begin{proof}\mbox{}\\
+    For the first statement, we want to show that for any $x,y\in I$ and $\alpha\in(0,1)$, $f((1-\alpha)x+\alpha y)\leq(1-\alpha)f(x)+\alpha f(y)$.
 
     Let $a<b<c$ and $a,b,c\in I$. By MVT, there exists $A\in (a,b)$ such that
     \[f'(A)=\frac{f(b)-f(a)}{b-a},\]
     and there exists $B\in (b,c)$ such that
     \[f'(B)=\frac{f(c)-f(b)}{c-b}.\]
-    Since $A<B$, $f'(A)<f'(B)$.
-    \[\frac{f(b)-f(a)}{b-a}<\frac{f(c)-f(b)}{c-b}.\]
-    \[(f(b)-f(a))(c-b)<(f(c)-f(b))(b-a).\]
-    \[(c-a)f(b)<(b-a)f(c)+(c-b)f(a).\]
-    \[f(b)<\frac{b-a}{c-a}f(c)+\frac{c-b}{c-a}f(a).\]
+    Since $A<B$, $f'(A)\leq f'(B)$.
+    \[\frac{f(b)-f(a)}{b-a}\leq\frac{f(c)-f(b)}{c-b}.\]
+    \[(f(b)-f(a))(c-b)\leq(f(c)-f(b))(b-a).\]
+    \[(c-a)f(b)\leq(b-a)f(c)+(c-b)f(a).\]
+    \[f(b)\leq\frac{b-a}{c-a}f(c)+\frac{c-b}{c-a}f(a).\]
     Set
     \[\alpha=\frac{b-a}{c-a}\in(0,1).\]
     Then
     \[b=(1-\alpha)a+\alpha c.\]
     Thus the inequality becomes
-    \[f\qty((1-\alpha)a+\alpha c)<(1-\alpha)f(a)+\alpha f(c).\]
-
-
+    \[f\qty((1-\alpha)a+\alpha c)\leq(1-\alpha)f(a)+\alpha f(c).\]
+    Other statements can be proved similarly.
+\end{proof}
 \sssc{Concavity Test Theorem or Second Derivative Test for Concavity Theorem}
 Let function $f\colon J\subseteq\mathbb{R}\to\mathbb{R}$ be twice differentiable on an open interval $I\subseteq J$.
 \bit
-\item If $f''>0$ for any $x\in I$, then the graph of $f$ is concave upward on $I$.
-\item If $f''<0$ for any $x\in I$, then the graph of $f$ is concave downward on $I$.
+\item If $f''\geq 0$ for any $x\in I$, then the graph of $f$ is weakly concave upward on $I$.
+\item If $f''>0$ for any $x\in I$, then the graph of $f$ is strictly concave upward on $I$.
+\item If $f''\leq 0$ for any $x\in I$, then the graph of $f$ is weakly concave downward on $I$.
+\item If $f''<0$ for any $x\in I$, then the graph of $f$ is strictly concave downward on $I$.
 \eit
 \begin{proof}
-
-
-
-
-\sssc{Inflection point theorem}
-If $(c,f(c))$ is an inflection point of $f$, then $f''(c)=0$ or $f''$ does not exist at $c$.
-
-
+For the first statement, $f''\geq 0$ implies $f'$ is non-decreasing. Thus proved by the First Derivative Test for Concavity Theorem. Other statements can be proved similarly.
+\end{proof}
+\sssc{Inflection Point Theorem}
+Let $f\colon I\subseteq\bbR\to\bbR$ be a function. If $(c,f(c))$ is an inflection point of $f$ and $f$ is differentiable at $c$, then $c$ is a critical point of $f'$.
+\begin{proof}
+By the First Derivative Test for Concavity Theorem, it is obvious.
+\end{proof}
 \sssc{Kink}
 A kink is a point $x$ on the graph of a real function $f$ such that $f$ is continuous but not differentiable at $x$.
 \sssc{Corner or sharp corner}
@@ -1403,6 +1371,39 @@ A cusp is a point $x$ on the graph of a real function $f$ such that:
 \item $x$ is not a vertical tangent of $f$, and
 \item the left-hand derivative and the right-hand derivative of $f$ at $x$ are both either finite, $\infty$, or $-\infty$.
 \eit
+\ssc{General form of L'Hôpital's rule (羅必達法則) or Bernoulli's rule}
+Let $I$ be an open interval and $a\in I$, and $f(x)$ and $g(x)$ be functions differentiable on $I\setminus\{a\}$. If $\lim_{x\to a}f(x)=\lim_{x\to a}g(x)\in\{0,\infty,-\infty\}$ and $\lim_{x\to a}\frac{f'(x)}{g'(x)}\in\mathbb{R}\cup\{-\infty,\infty\}$, then:
+\[\lim_{x\to a}\frac{f(x)}{g(x)}=\lim_{x\to a}\frac{f'(x)}{g'(x)}.\]
+
+Let $f(x)$ and $g(x)$ be functions differentiable on $(a,b)$ with $a<b$. If $\lim_{x\to a^+}f(x)=\lim_{x\to a^+}g(x)\in\{0,\infty,-\infty\}$ and $\lim_{x\to a^+}\frac{f'(x)}{g'(x)}\in\mathbb{R}\cup\{-\infty,\infty\}$, then:
+\[\lim_{x\to a^+}\frac{f(x)}{g(x)}=\lim_{x\to a^+}\frac{f'(x)}{g'(x)}.\]
+
+Let $f(x)$ and $g(x)$ be functions differentiable on $(b,a)$ with $a>b$. If $\lim_{x\to a^-}f(x)=\lim_{x\to a^-}g(x)\in\{0,\infty,-\infty\}$ and $\lim_{x\to a^-}\frac{f'(x)}{g'(x)}\in\mathbb{R}\cup\{-\infty,\infty\}$, then:
+\[\lim_{x\to a^-}\frac{f(x)}{g(x)}=\lim_{x\to a^-}\frac{f'(x)}{g'(x)}.\]
+
+Let $f(x)$ and $g(x)$ be functions differentiable on $(a,\infty)$. If $\lim_{x\to\infty}f(x)=\lim_{x\to\infty}g(x)\in\{0,\infty,-\infty\}$ and $\lim_{x\to\infty}\frac{f'(x)}{g'(x)}\in\mathbb{R}\cup\{-\infty,\infty\}$, then:
+\[\lim_{x\to\infty}\frac{f(x)}{g(x)}=\lim_{x\to\infty}\frac{f'(x)}{g'(x)}.\]
+
+Let $f(x)$ and $g(x)$ be functions differentiable on $(-\infty,a)$. If $\lim_{x\to-\infty}f(x)=\lim_{x\to-\infty}g(x)\in\{0,\infty,-\infty\}$ and $\lim_{x\to-\infty}\frac{f'(x)}{g'(x)}\in\mathbb{R}\cup\{-\infty,\infty\}$, then:
+\[\lim_{x\to-\infty}\frac{f(x)}{g(x)}=\lim_{x\to-\infty}\frac{f'(x)}{g'(x)}.\]
+\begin{proof}\mbox{}\\
+Let $f(x)$ and $g(x)$ be functions differentiable on $(a,b)$ with $a<b$. We want to show that if $\lim_{x\to a^+}f(x)=\lim_{x\to a^+}g(x)=0$ and $\lim_{x\to a^+}\frac{f'(x)}{g'(x)}\in\mathbb{R}\cup\{-\infty,\infty\}$, then
+\[\lim_{x\to a^+}\frac{f(x)}{g(x)}=\lim_{x\to a^+}\frac{f'(x)}{g'(x)}.\]
+Let
+\[F(x)=\begin{cases}f(x),\quad & x\in (a,b)\\
+\lim_{x\to a^+}f(x),\quad & x=a\end{cases}\]
+and
+\[G(x)=\begin{cases}g(x),\quad & x\in (a,b)\\
+\lim_{x\to a^+}g(x),\quad & x=a\end{cases}\]
+By CMVT, for any $x\in (a,b)$, there exists $c\in (a,x)$ such that
+\[\frac{F(x)-F(a)}{G(x)-G(a)}=\frac{F'(c)}{G'(c)}.\]
+Since $F(a)=G(a)=0$,
+\[\frac{F(x)}{G(x)}=\frac{F'(c)}{G'(c)}.\]
+Thus,
+\[\lim_{x\to a^+}\frac{f(x)}{g(x)}=\lim_{x\to a^+}\frac{f'(x)}{g'(x)}.\]
+
+Other statements can be proved similarly.
+\end{proof}
 \subsection{Lagrange multiplier (method) (拉格朗日乘數 or 乘子（法）)}
 The Lagrange multiplier method is a method for finding the points where extremes occur of a differentiable function under constraints.
 \sssc{Univariate form}
