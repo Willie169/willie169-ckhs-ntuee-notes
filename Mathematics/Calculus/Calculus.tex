@@ -166,9 +166,9 @@ Let \(I\) be a right-bounded, left-unbounded interval with the point \(a\) being
 \[\lim_{x \to -\infty} f(x) = L \equiv \forall \epsilon > 0: \, \exists M < a \text{\ s.t.\ } x < M \implies |f(x) - L| < \epsilon.\]
 In other words, as \(x\) becomes arbitrarily small, \(f(x)\) gets arbitrarily close to \(L\). We say $f(x)$ converge to $L$ as $x\to-\infty$ if $\lim_{x \to -\infty} f(x) = L$.
 \subsubsection{Horizontal asymptote (水平漸近線)}
-\[ \qty(\lim_{x \to \infty} f(x)=L \lor\lim_{x \to -\infty} f(x)=L) \iff \qty(y=L\tx{ is a horizontal asymptote of $y=f(x)$}).\]
+We say $y=L$ is a horizontal asymptote of $y=f(x)$ iff $\lim_{x \to \infty} f(x)=L$ or $\lim_{x \to -\infty} f(x)=L$.
 \subsubsection{Slant asymptote (斜漸近線)}
-\[ \qty(\lim_{x \to \infty} f(x)-(mx+b)=0 \lor\lim_{x \to -\infty} f(x)-(mx+b)=0) \iff \qty(y=mx+b\tx{\ is a slant asymptote of $y=f(x)$}).\]
+We say $y=mx+b$ with $m\neq 0$ is a slant asymptote of $y=f(x)$ iff $\lim_{x \to \infty} \qty(f(x)-(mx+b))=0$ or $\lim_{x \to -\infty} \qty(f(x)-(mx+b))=0$.
 \subsubsection{One-side Limits}
 \tb{Right-hand Limit (右極限)}: Let \(I\) be a left-open interval with the point \(a\) being its endpoint on the left. Let \( f(x) \) be a function defined on \(I\). The right-hand limit of \( f(x) \) as \( x \) approaches \( a \) is defined as follows:
 \[\lim_{x \to a^+} f(x) = L \equiv \forall \epsilon > 0 :\,\exists \delta > 0 \text{\ s.t.\ } 0 < x - a < \delta \implies |f(x) - L| < \epsilon.\]
@@ -190,7 +190,7 @@ In other words, as \(x\) becomes arbitrarily close to \(a\) and is less than \(a
 \[\lim_{x\to-\infty}f(x)=-\infty \equiv \forall N > 0:\, \exists M < 0 \text{\ s.t.\ } x < M \implies f(x) < N.\]
 Note that if a limit equals to $\infty$ or $-\infty$, the limit doesn't exist.
 \sssc{Vertical asymptote (鉛直漸近線)}
-\[\qty(\exists a\in\mathbb{R}\colon\abs{\lim_{x \to a^+} f(x)}=\infty\lor\abs{\lim_{x \to a^-} f(x)}=\infty)\iff \qty(x=a\tx{\ is a vertical asymptote of $y=f(x)$}).\]
+We say $x=a$ is a vertical asymptote of $y=f(x)$ iff $\abs{\lim_{x \to a^+} f(x)}=\infty$ or $\abs{\lim_{x \to a^-} f(x)}=\infty$.
 \sssc{Preservation of equal to}
 Let $I$ be an open interval and $a\in I$, and $f(x)$ and $g(x)$ be functions defined on $I\setminus\{a\}$ which for all $x\in I\land x\neq a$, $f(x)=g(x)$. If $\lim_{x\to a}f(x)=L\in\mathbb{R}\cup\{-\infty,\infty\}$, then
 \[\lim_{x\to a}g(x)=L.\]
@@ -577,8 +577,14 @@ The operation of finding the Fréchet derivative or Fréchet derivative function
 
 Specifically, the $0$th(-order) Fréchet derivative of $f$ is $f$ itself.
 \ssc{Smoothness (光滑性 or 平滑性)}
+\sssc{Continuously differentiable functions}
+A function is called continuously ($n$-times) differentiable iff it is ($n$-times) differentiable and its ($n$th) derivative is continuous.
 \sssc{Smoothness}
-A function with real domain $f$ that has a $k$th derivative that is continuous on its domain is said to be of class $C^k$, denoted as $f\in C^k$, or be a $C^k$-function.
+A function $f$ with real domain that has a derivative that is continuous on its domain is said to be of class $C^1$ or continuously differentiable, denoted as $f\in C^1$, or be a $C^1$-function.
+
+A function $f$ that has a derivative that is continuous on a subset $I$ of its domain is said to be of class $C^1$ on $I$, of class $C^k(I)$, or continuously differentiable on $I$, denoted as $f\in C^k(I)$.
+
+A function $f$ with real domain that has a $k$th derivative that is continuous on its domain is said to be of class $C^k$ or $k$-times continuously differentiable, denoted as $f\in C^k$, or be a $C^k$-function.
 
 A function $f$ that has a $k$th derivative that is continuous on a subset $I$ of its domain is said to be of class $C^k$ on $I$ or of class $C^k(I)$, denoted as $f\in C^k(I)$.
 
@@ -1577,9 +1583,9 @@ with $\sum_{k=1}^rm_k=m$ and $i_k\in\mathbb{N}\land i_k\leq n$ for all $k$. Defi
 If any such $g$ exists in a neighborhood of $\mathbf{p}\in\Omega$ and is continuous at $\mathbf{p}$, then all such $g$ with the same $t_q$ for all $q\in\mathbb{N}\land q\leq n$ are equal at $\mathbf{p}$.
 \ssc{Numerical differentiation (數值微分)}
 \sssc{Newton's Method (牛頓法) or Newton-Raphson Method (牛頓-拉普森法)}
-Newton's method, also known as Newton-Raphson method, is an iterative technique used to approximate the roots of a real-valued function. Given a function $f(x)$ and an initial guess \( x_0 \) close to a root, Newton's method refines this guess by repeatedly applying the formula:
+Newton's method, also known as Newton-Raphson method, is an iterative technique used to approximate the roots of a real-valued function. Given a function $f(x)$ and an initial guess \( x_0 \), Newton's method refines this guess by repeatedly applying the formula:
 \[
-x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)},n\in\mathbb{N}
+x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)},\quad n\in\mathbb{N}
 \]
 where:
 \begin{itemize}
@@ -1587,6 +1593,8 @@ where:
 \item \( f(x_n) \) is the value of the function at \( x_n \),
 \item \( f'(x_n) \) is the derivative of \( f(x) \) evaluated at \( x_n \).
 \end{itemize}
+PLACEHOLDER: Newton's method converges quadratically or faster if and proof
+PLACEHOLDER: Given convergence, suppose that we want the error to be less than a given value $v$, we can take $x_n$ such that $\abs{x_n-x_{n-1}}<v$?
 
 
 
