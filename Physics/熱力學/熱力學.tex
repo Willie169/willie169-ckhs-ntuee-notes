@@ -1,0 +1,536 @@
+\documentclass[a4paper,12pt]{report}
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{3}
+\newcounter{ZhRenew}
+\setcounter{ZhRenew}{1}
+\newcounter{SectionLanguage}
+\setcounter{SectionLanguage}{1}
+\input{/usr/share/LaTeX-ToolKit/template.tex}
+\begin{document}
+\title{熱力學}
+\author{沈威宇}
+\date{\temtoday}
+\titletocdoc
+\chapter{熱力學（Thermodynamics）}
+\section{熱力學系統、狀態與過程}
+\subsection{熱力學系統（Thermodynamic system）}
+指用於熱力學研究的有限宏觀區域，是熱力學的研究對象。它的外部空間被稱為這個系統（system）的環境（surrounding）。一個系統的邊界（boundary）將系統與它的外部隔開。這個邊界既可以是真實存在的，也可以是假想出來的，但必須將這個系統限制在一個有限空間裡。系統與其環境可以在邊界進行物質、功、熱或其它形式能量的傳遞。而熱力學系統可以從它的邊界（或邊界的一部分）所允許的傳遞類型進行分類。
+\begin{longtable}[c]{|c|c|c|c|}
+\hline
+熱力學系統類型 & 物質傳遞 & 功傳遞 & 熱傳遞 \\ \hline\endhead
+\tb{開放系統（Open system）} & 可 & 可 & 可 \\ \hline
+\tb{密閉/封閉系統（Closed system）} & 不可 & 可 & 可 \\ \hline
+\tb{絕熱系統（Insulated system）} & 不可 & 可 & 不可 \\ \hline
+\tb{力學孤立系統（Mechanically isolated system）} & 不可 & 不可 & 可 \\ \hline
+\tb{孤立系統（Isolated system）} & 不可 & 不可 & 不可 \\ \hline
+\end{longtable}
+\FB
+\subsection{熱力學狀態（Thermodynamic state）}
+\bit
+\item \tb{熱力學狀態（Thermodynamic state）}：指一組描述熱力學系統的狀態。
+\item \tb{狀態函數（State function）}：是系統狀態的函數，其值僅取決於系統目前的狀態，而與系統如何到達該狀態的路徑無關，又稱狀態變數。
+\item \tb{熱力學平衡狀態}：指除非被引發熱力學過程的熱力學操作中斷，否則將保持不變的熱力學狀態。
+\item 系統的每個平衡狀態分別由一組適當的熱力學狀態函數完全指定，只要一熱力學系統中有足夠多的已知狀態函數，其他的就已被確定，而所需要的狀態函數數量視系統複雜程度而定。
+\eit
+\subsection{熱力學過程（Thermodynamic process）/熱力學路徑（Thermodynamic path）}
+\bit
+\item \tb{熱力學過程（Thermodynamic process）/熱力學路徑（Thermodynamic path）}：指系統熱力學狀態改變的過程，系統的改變是由從初始熱力學平衡狀態到最終狀態的轉變來定義的，例如所有化學反應都是熱力學過程。在經典熱力學中實際過程常被忽略，但非平衡熱力學考慮的是系統狀態接近熱力學平衡的過程。
+\item \tb{路徑函數（Path function）/過程函數（Process function）}：是系統從一個狀態變到另一個狀態的過程的函數。
+\item \tb{熱力學循環（Thermodynamic cycle）}：一熱力學系統經過一系列熱力學過程，最終回到初始狀態的過程。
+\eit
+\subsection{常數}
+\subsubsection{波茲曼常數（Boltzmann constant）}
+\[k_B=1.380649\cdot 10^{-23}\,\text{J}\cdot\text{K}^{-1}\]
+\subsubsection{亞佛加厥常數（Avogadro constant）}
+\[N_A=6.02214076\times 10^{23} \tx{ mol}^{-1}\]
+\subsubsection{（理想）氣體常數（(Ideal) gas constant）}
+\[R=k_BN_A \approx 8.31446261815324 \tx{\ J K}^{-1}\tx{\ mol}^{-1}\approx 0.082057338 \tx{\ L atm K}^{-1}\tx{\ mol}^{-1}\]
+\subsection{狀態函數}
+\subsubsection{質量（mass）}
+$m$ (kg)
+\subsubsection{壓力（pressure）}
+$p$ (N/m$^2$)。指分子對單位面積接觸表面碰撞的作用力。
+\subsubsection{體積（volume）}
+$V$ (m$^3$)
+\subsubsection{密度（density）}
+\(\rho\) (kg/m\(^3\))。單位體積的質量。
+\subsubsection{質量比容（Mass specific volume）}
+$\frac{V}{m}=\frac{1}{\rho}$ (m$^3$/kg)。單位質量的體積
+\subsubsection{莫耳比容（Molar specific volume）/莫耳體積（Molar volume）}
+$\frac{V}{n}$ (m$^3$/mol)。單位莫耳的體積。
+\subsubsection{絕對溫度（Absolute temperature）/克爾文溫度（Kelvin temperature）/熱力學溫度（Thermodynamic temperature）}
+$T$ (K)
+\subsubsection{莫耳數（Number of moles）}
+$n$ (mole)
+\subsubsection{粒子數（Number of particles）}
+$N$ (個)。第$i$種粒子的粒子數為$N_i$。單位個有時或視為無因次。
+\subsubsection{內能（Internal energy）/熱能（Thermal energy）}
+$U$ (J)。指系統所含有的能量，但不包含因外部力場而產生的系統整體之動能（即有序動能）與位能。
+\subsubsection{焓（Enthalpy）}
+$H$ (J)
+\[H = U + pV\]
+\subsubsection{熵（Entropy）}
+$S$ (J/K)。用於描述一個系統的無序程度。
+\subsubsection{吉布斯能（Gibbs energy）/吉布斯自由能（Gibbs free energy）}
+$G$ (J)
+\[G = H - TS\]
+\subsubsection{亥姆霍茲能（Helmholtz energy）/亥姆霍茲自由能（Helmholtz free energy）}
+$F$ (J)
+\[F = U - TS\]
+\sssc{立方公尺莫耳濃度}
+$\phi$ (mol m$^{-3}$)，每立方公尺所含某物質之莫耳數。
+\subsection{路徑函數、物質性質與其他}
+\subsubsection{速率}
+$v$ (m/s)
+\subsubsection{對系統外作的體積功/膨脹功}
+$W$ (J)
+\[\delta W = -p\mathrm{d}V \]
+\subsubsection{熱量（Heat）}
+$Q$ (J)。由於溫度差而在系統之間傳遞的能量，自系統外獲得為正。
+\subsubsection{化學勢（Chemical potential）}
+\(\mu_i\) (J/個)。其它粒子數量與所有狀態函數不變下，單位該物質粒子變化的吉布斯自由能變化：
+\[\mu _{i}=\left({\frac {\partial G}{\partial N_{i}}}\right)_{N_{j\neq i},\tx{\ all other state functions}}\]
+\subsubsection{質量潛熱（Latent heat）/質量相變焓（Heat of transformation）}
+$L_m$ (J/kg)。單位質量物質相變時吸收的能量。
+\subsubsection{莫耳潛熱/莫耳相變焓}
+$L$ (J/mol)。單位莫耳物質相變時吸收的能量。
+\subsubsection{反應熱（Heat of reaction）}
+$\Delta H$ (J)。化學反應後生成物的焓減去反應前反應物的焓。
+\subsubsection{活化能（Activation energy）}
+$E_a$ (J)。化學反應的活化能。
+\subsubsection{（莫耳）熱容（Heat capacity）}
+$C$ (J K$^{-1}$ mol$^{-1}$)
+\[C = \frac{\delta Q}{\mathrm{d}T}\,n^{-1}\]
+\bit
+\item 定容莫耳熱容$C_V$：定容下，溫度升高$\mathrm{d}T$，吸收熱量$\delta Q$均轉變為系統內能，即$\delta Q = \mathrm{d}U$。
+\item 定壓莫耳熱容$C_p$：定壓下，溫度升高$\mathrm{d}T$，吸收熱量$\delta Q$部分轉變為系統內能，部分對外做體積功$\mathrm{d}W = p\mathrm{d}V$，即$\delta Q = \mathrm{d}U + p\mathrm{d}V$。
+\eit
+\subsubsection{絕熱指數（Adiabatic index）/等熵膨脹係數（Isentropic expansion factor）/熱容比（Heat capacity ratio）}
+$\gamma$
+\[\gamma = \frac{C_p}{C_V}\]
+\subsubsection{比熱容（Specific heat capacity）}
+$c$ (J/K)
+\[c=\frac{\delta Q}{m\Delta T}\]
+\sssc{擴散通量（Diffusion flux）}
+$\mb{J}$ (mol m$^{-2}$ s$^{-1}$)，單位時間內擴散通過某單位面積的淨物質量，方向與物質淨流向相同。
+\sssc{擴散係數（Diffusion coefficient）/（質量）擴散率（(Mass) diffusivity）}
+$D$ (m$^2$ s$^{-1}$)，是一個比例常數，反映了物質擴散的速度，與物質本身的性質、溫度、壓力等因素有關。
+
+
+\section{熱力學基本定律}
+\ssc{焦耳（Joule）熱功當量（Mechanical equivalent of heat）實驗}
+焦耳利用重物緩緩等速下降經滑輪帶動水中的葉片轉動而攪動水使水溫因摩擦生熱升高，使得重物減少的重力位能轉換為水的內能，測得 1 卡（Calorie, cal）= 4.186 焦耳（Joule, J）。
+\subsection{熱力學第零定律/熱力學平衡定律}
+如果兩個系統都與第三個系統處於熱平衡，則它們彼此之間也處於熱平衡。
+\subsection{熱力學第一定律/能量守恆定律（Law of conservation of energy）}
+不適用於核反應。
+\sssc{熱力學第一定律/能量守恆定律}
+對於一系統：
+\bma
+\mathrm{d}U &= \delta Q - \delta W\\
+&= T\mathrm{d}S + p \delta V + \sum _{i=1}^{n}\mu _{i}\,\mathrm {d} N_i
+\eam
+\sssc{封閉系統焓表述}
+對於一封閉系統：
+\[\mathrm{d}H = \delta Q - V\delta p \]
+\sssc{（赫斯）（反應熱加成/恆定熱總和）定律（Hess's/The law (of constant heat summation/of additivity of reaction heat)）}
+熱力學過程的焓與從初始狀態到最終狀態所採取的路徑無關，即焓是狀態函數。
+\sssc{波恩-哈伯循環（Born–Haber cycle）}
+根據赫斯定律，以各已知反應熱求得待求反應熱的方法。
+\subsection{反應熱（Heat of reaction）}
+\sssc{反應熱（Heat of reaction）}
+反應熱$\Delta H$=生成物的焓-反應物的焓。對於定溫過程或微分過程，$\Delta H$=正反應活化能$E_a-$逆反應活化能$E_r$=生成物的位能-反應物的位能。
+
+反應熱依賴於溫度但效應多不顯著，不依賴於活化能、反應機構、各物質濃度。
+
+\bit
+\item \tb{放熱/散熱（exothermic）過程}：$\Delta H<0$的過程。
+\item \tb{吸熱（endothermic）過程}：$\Delta H>0$的過程。
+\eit
+\sssc{標準反應熱}
+25°c、1bar 下的反應熱。
+\sssc{標準莫耳生成熱（Standard molar heat of formation）/標準（莫耳）生成焓（Standard (molar) enthalpy of formation）}
+$\Delta H_f$，由成分元素的最常見或最穩定狀態化合成一莫耳有興趣物質的反應熱。25°C、1bar 下，元素的的最常見或最穩定狀態（如石墨、斜方硫、氧氣、白磷）的標準莫耳生成熱訂為零。
+
+其相反數稱標準莫耳分解熱/標準（莫耳）分解焓。
+\subsection{熱力學第二定律/熵增原理}
+熱力學第二定律是古典物理唯一沒有可逆性的定律。
+\subsubsection{孤立系統熵增表述}
+對於一孤立系統：
+\[\mathrm{d}S \geq 0\]
+\subsubsection{克勞修斯表述（Clausius statement）}
+不可能把熱量從低溫物體傳遞到高溫物體而不產生其他影響。
+\subsubsection{克耳文-普朗克表述（Kelvin-Planck statement）}
+不可能從單一熱源吸收能量，使之完全變為有用功而不產生其他影響。
+\subsubsection{黑首保勞-肯南表述（Hatsopoulos-Keenan statement）}
+對於一個有給定能量，物質組成，參數的系統，存在這樣一個穩定的平衡態：其他狀態總可以通過可逆過程達到之。
+\subsection{克勞修斯定理（Clausius theorem）}
+對於一封閉系統，一個熱力學微分過程必然：
+\[\mathrm{d}S \geq \frac{\delta Q}{T}\]
+\bit
+\item \tb{不可逆過程}：$\mathrm{d}S > \frac{\delta Q}{T}$
+\item \tb{可逆過程}：$\mathrm{d}S = \frac{\delta Q}{T}$，熵的克勞修斯定義即此。
+\eit
+\subsection{吉布斯能變化判斷定壓過程}
+對於定壓封閉系統：
+\[\mathrm{d} G = \mathrm{d} H - T \mathrm{d} S - S\mathrm{d} T = \mathrm{d} U + p\mathrm{d} V - T \mathrm{d} S - S\mathrm{d} T = \delta Q + W + p\mathrm{d} V - T \mathrm{d} S - S\mathrm{d} T = Q - T \mathrm{d} S - S\mathrm{d} T \leq - S\mathrm{d} T\]
+\bit
+\item \tb{自發（spontaneous）過程}：一個熱力學過程具有自發性（spontaneity）的必要條件是$\mathrm{d} G < - S\mathrm{d} T$。吉布斯自發過程必為克勞修斯不可逆過程。
+\item \tb{平衡狀態（equilibrium state）}：一個熱力學過程處於平衡狀態的必要條件是任何自該狀態的微分過程之$\mathrm{d} G = - S\mathrm{d} T$。
+\item \tb{平衡（equilibrium）過程}：指$\mathrm{d} G = - S\mathrm{d} T$的熱力學過程。吉布斯平衡過程必為克勞修斯可逆過程。
+\item \tb{不會發生}：不會發生$\mathrm{d} G > - S\mathrm{d} T$的熱力學過程。
+\item \tb{放能（exergonic）過程}：$\mathrm{d}G<0$的過程。
+\item \tb{吸能（endergonic）過程}：$\mathrm{d}G>0$的過程。
+\eit
+\subsection{亥姆霍茲能變化判斷定容過程}
+對於一定容封閉系統：
+\[\mathrm{d} F = \mathrm{d} U - T \mathrm{d} S - S\mathrm{d} T = \delta Q - T \mathrm{d} S - S\mathrm{d} T\leq - S\mathrm{d} T\]
+\bit
+\item \tb{平衡狀態}：一個熱力學過程處於平衡狀態的必要條件是任何自該狀態的微分過程之$\mathrm{d} F  = - S\mathrm{d} T$。
+\item \tb{平衡過程}：指$\mathrm{d} F = - S\mathrm{d} T$的熱力學過程。吉布斯平衡過程必為克勞修斯可逆過程。
+\item \tb{不會發生}：不會發生$\mathrm{d} F > - S\mathrm{d} T$的熱力學過程。
+\item \tb{放能（exergonic）過程}：$\mathrm{d}F<0$的過程。
+\item \tb{吸能（endergonic）過程}：$\mathrm{d}F>0$的過程。
+\eit
+\ssc{化學勢（Chemical potential）}
+\sssc{標準化學勢（standard chemical potential）}
+\(\mu^0\) 。指標準狀態（通常取 0°C, 1 bar）下的化學勢。
+\sssc{微分過程的化學勢}
+\[\qty(\frac{\partial\mu}{\partial p})_{\tx{all other state functions}}=\frac{V}{n}\]
+\[\qty(\frac{\partial\mu}{\partial T})_{\tx{all other state functions}}=S\]
+由此可以通過積分此二式和代入標準化學勢獲得任意已知狀態的化學勢。
+\subsection{卡諾定理（Carnot's theorem）}
+\subsubsection{表述}
+\bit
+\item 在相同的高溫熱源和低溫熱源間工作的一切可逆熱機的效率都相等。
+\item 在相同的高溫熱源和低溫熱源間工作的一切熱機中，不可逆熱機的效率不可能大於可逆熱機的效率。
+\eit
+可用熱力學第一定律和第二定律得出。
+\subsubsection{可逆熱機}
+可逆熱機的一種實作為卡諾熱機，即進行卡諾循環的熱機。卡諾循環步驟：
+\bit
+\item 可逆等溫膨脹：此等溫的過程中系統從高溫熱庫吸收了熱量且全部拿去作功。
+\item 等熵（可逆絕熱）膨脹：移開熱庫，系統對環境作功，其能量來自於本身的內能。
+\item 可逆等溫壓縮：此等溫的過程中系統向低溫熱庫放出了熱量。同時環境對系統作正功。
+\item 等熵（可逆絕熱）壓縮：移開低溫熱庫，此絕熱的過程系統對環境作負功，系統在此過程後回到原來的狀態。
+\item 可逆熱機的熱效率$\eta$只取決於始狀態的溫度$T_1$與末狀態的溫度$T_2$。令從環境中吸收的熱量$Q_1$和放出的熱量$Q_2$：
+\[\eta = \frac{\left|Q_1-Q_2\right|}{\left|Q_1\right|} = 1 - \frac{T_2}{T_1}\]
+\eit
+\subsection{熱力學第三定律/絕對零度定律}
+當系統的溫度趨近於絕對零度（指絕對溫標（Absolute scale of temperature）/克耳文溫標（Kelvin scale of temperature）$0$ K）時，任何過程之熵變趨近於零，系統的熵趨近於該系統熵之最小值。
+\subsection{吉布斯-杜漢方程式（Gibbs-Duhem equation）}
+對於一系統：
+\[\displaystyle \sum _{i=1}^{n}N_{i}\mathrm {d} \mu _{i}=-S\mathrm {d} T+V\mathrm {d} p\]
+\subsection{絕熱等熵關係}
+對於絕熱等熵過程：
+\[pV^{\gamma}=\text{constant}\]
+\subsection{波茲曼熵公式（Boltzmann's entropy formula）}
+\[\begin{aligned}
+S_0&: \text{當系統的溫度趨近於絕對零度時的熵}\\
+\Omega&: \text{The number of real microstates corresponding to the system's macrostate}
+\end{aligned}\]
+\[S-S_0 = k_B \cdot \ln(\Omega)\]
+為熵的波茲曼定義。
+
+
+\section{物質的狀態（State）與相（Phase）}
+\subsection{物質的狀態（State of Matter）}
+一個物質的狀態是物質存在的宏觀形式之一，主要由粒子的運動與排列決定。四種古典物質狀態包含固態、液態、氣態和等離子態，另存在許多非古典物質狀態。
+\subsubsection{固態（Solid, s）}
+\begin{itemize}
+\item 粒子組成：基態原子或離子（團）。
+\item 物理性質：具有固定的形狀和體積；不可流動；多數難壓縮，但亦有易壓縮者；多數不可擴散或擴散極慢；屬於凝（Condensed）態。
+\item 粒子運動與排列：多數固態為晶體，僅剩振動自由度，轉動、平移自由度受極大限制；但部分固態，如非晶固體，具有轉動自由度。粒子間相對位置固定於一定範圍內；距離小；作用力大；晶體（crystal）中粒子依固定規則有序排列。
+\end{itemize}
+\subsubsection{液態（Liquid, l）}
+\begin{itemize}
+\item 粒子組成：基態原子或離子（團）。
+\item 物理性質：具有固定的體積但無固定的形狀；可以流動，但部分有黏性而較難流動；多數難壓縮，但亦有易壓縮者；可以擴散；屬於凝態、流體（Fluid）。
+\item 粒子運動與排列：粒子具有振動、轉動、平移自由度，粒子可自由游動，但部分物質有不同程度的黏滯性。粒子間相對位置不固定；距離小，多數小於同條件下固態；作用力小，但大於同條件下氣態；無固定排列，但可能因為氫鍵等有較常出現的特定相對位置或角度。
+\end{itemize}
+\subsubsection{氣態（Gas, g）}
+\begin{itemize}
+\item 粒子組成：基態原子（團）。
+\item 物理性質：無固定的形狀和體積；自由流動；易壓縮；可以充滿任何容器；擴散極快；屬於流體。
+\item 粒子運動與排列：粒子具有振動、轉動、平移自由度，粒子自由游動。粒子間相對位置不固定；距離大，大於同條件下凝態；作用力極小；無特定排列。
+\end{itemize}
+\subsubsection{等離子態/電漿態（Plasma）}
+\begin{itemize}
+\item 條件：溫度或輻射等提供的高能量使電子游離，常見於高溫環境如太陽或閃電中。
+\item 粒子組成：電子和離子。
+\item 物理性質：無固定的形狀和體積；可以流動；可以壓縮；擴散極快；屬於流體；具有電荷，受到勞侖茲力影響，具有一些類似金屬的電磁性質。
+\item 粒子運動與排列：粒子具有振動、轉動、平移自由度，粒子自由游動且非常劇烈。高能使可發生電子躍遷、游離事件。離子與電子質量相差極大，具有不同的運動情況。
+\end{itemize}
+\subsubsection{玻色-愛因斯坦凝聚態（Bose-Einstein Condensate, BEC）}
+\begin{itemize}
+\item 條件：極低溫。
+\item 粒子組成：玻色子的物質波波長大於其間距時形成的宏觀量子狀態。
+\item 物理性質：特性由量子力學主導。
+\item 粒子運動與排列：粒子動量極小，熵與焓極小。
+\end{itemize}
+\subsubsection{液晶態（Liquid Crystal, LC）}
+\begin{itemize}
+\item 粒子組成：基態原子（團）。
+\item 物理性質：介於液態和固態之間的中間態，具有液體的流動性和結晶固體的某些物理、化學與光學特性；液晶晶型有柱狀、盤狀、圓錐狀等，柱狀者較多，晶格長度通常不超過3奈米；可視為液態的一種，除粒子有序排列與其造成者外，物理性質與液態相似；屬於凝態、流體。通常是有機物。
+\item 粒子運動與排列：粒子具有振動自由度；轉動與平移自由度依物質受不同程度限制。粒子部分有序排列。
+\item 熱致液晶（Thermatropic Liquid Crystal）：指具有液晶相的物質有兩個熔點，在較低溫者之下為一般固體，在兩者之間為液晶，在較高溫者之上為一般液體。
+\item 弗里德里克斯轉變（Fréedericksz transition）：當對未變形狀態的液晶施加足夠強的電場或磁場時產生的液晶相變。於1927年由 Vsevolod Konstantinovich Frederiks 與 A. Repiewa 發現。
+\end{itemize}
+\subsubsection{超流態/超臨界流態（Superfluid）}
+\begin{itemize}
+\item 粒子組成：基態原子（團）。
+\item 物理性質：介於氣態和液態之間，零黏度，能夠無摩擦地流動，擴散性與溫度大於液態、壓力與密度大於氣態；屬於凝態、流體。
+\item 粒子運動與排列：粒子具有振動、轉動、平移自由度，粒子可自由游動。粒子間相對位置不固定；距離小。
+\end{itemize}
+\subsubsection{非晶固態/玻璃態（Glass/Vitreous）/過冷液態}
+\begin{itemize}
+\item 條件：液態冷卻而不結晶，如玻璃、柏油、塑膠。
+\item 粒子組成：基態原子（團）。
+\item 玻璃轉變溫度/玻璃轉化溫度（Glass-transition temperature, Tg）：在玻璃轉變溫度以上時表現出一些液態的特性，在其以下時則表現出一些固態的特性。非平衡態，不同於一般固–液相變。
+\item 物理性質：玻璃轉變溫度以下，可視為固態的一種，除粒子無序排列與其造成者外，物理性質與固態相似。玻璃轉變溫度以上，可視為黏滯性極大的液體，物理性質類似液態但難以流動。
+\item 分子排列與運動：玻璃轉變溫度以下，粒子僅剩振動自由度，轉動、平移自由度受極大限制。玻璃轉變溫度以上，粒子具有振動、轉動自由度，平移自由度受限制。粒子間相對位置固定於一定範圍內；距離小；作用力大；無序排列。
+\end{itemize}
+\subsection{相（Phase）}
+\sssc{相的定義}
+某種或多種物質呈現某種物質狀態時，若該物質或這些物質所占的體積內的分子均勻分布，則這片區域就是一個相。同一純物質同一個物質狀態可以有多個相，例如斜方硫與單斜硫。
+\sssc{相變（Phase transformation）}
+相變指物質從一個相變成另一個相的過程。
+\sssc{常見的相變}
+\begin{itemize}
+  \item 凝固/固化（Solidification）：由流態轉變為固態的過程。
+  \item 熔化（Melting）：由固態轉變為液態的過程。
+  \item 汽化（Vaporization）：轉變為氣態的過程。
+  \item 蒸發（Evaporation）：凝態表面上部分分子因溫度增加而獲得足夠能量，而逸出成為氣態的過程。
+  \item 沸騰（Boiling）：氣相氣壓小於等於凝相的飽和蒸氣壓，而使凝態內部和表面各處分子快速地從凝相轉變為氣相的過程。
+  \item 凝結（Condensation）：由氣態轉變為凝態的過程。
+  \item 液化（Liquefaction）：轉變為液態的過程。
+  \item 離子化/游離（Ionization）：轉變為等離子態的過程。
+  \item 昇華（Sublimation）：由固態轉變為氣態的過程。
+  \item 凝華（Deposition）：由氣態轉變為固態的過程。
+\end{itemize}
+\subsubsection{純物質相變焓（Heat of transformation）的性質}
+\bit
+\item 物質之汽化熱必大於其熔化熱。如水的熔化熱為 334 kJ/kg = 80 kcal/kg = 6.0 kJ/mol、液相變為氣相的汽化熱為 2266 kJ/kg = 540 kcal/kg = 40.8 kJ/mol。
+\item 晶體之熔化熱受其晶格能影響並與其正相關。熔化熱愈高熔點不一定愈高。
+\item 同壓下不同純物質，汽化熱愈高，沸點愈高。
+\eit
+\sssc{相平衡（Phase equilibrium）}
+當兩相或多相處於相平衡時，化學勢相等。相平衡並不代表不反應，多數的相平衡為正逆反應速率相等的動態平衡。
+\sssc{克勞修斯–克拉佩龍方程（Clausius-Clapeyron equation）}
+在純物質相圖的異相平衡壓力–溫度曲線上：
+\[\frac{\mathrm{d}p}{\mathrm{d}T}=\frac{L}{T\,\Delta\qty(\frac{V}{n})}\]
+其中：
+\bit
+\item $\frac{\mathrm{d}p}{\mathrm{d}T}$是共存曲線任意點的切線斜率。
+\item $L$是該點發生的一個跨越該線之相變的莫耳相變焓。
+\item $T$是相平衡溫度。
+\item $\Delta\qty(\frac{V}{n})$是該相變前後的莫耳比容變化。
+\eit
+\subsubsection{升溫或降溫過程溫度–熱量曲線圖}
+定壓下物質升溫或降溫的曲線圖，橫軸為外界提供的熱量或釋放至外界的熱量（以$\dv{H}{t}$方向為正），縱軸為溫度。對於純物質：某相時該線之斜率正比於該相之比熱；溫度不變之線段為相變過程，且該溫壓條件為該二相之平衡條件。
+\sssc{（飽和）蒸氣壓（(Saturated) vapor pressure）}
+飽和蒸氣壓$p^\circ$為物質的凝相與氣相達平衡時氣相的壓力，是溫度的函數。
+
+令液體體積可忽略，在$T_1$、$T_2$下飽和蒸氣壓$p_1$、$p_2$：
+\[\ln\left(\frac{p_2}{p_1}\right)=\frac{LM}{R}\left(\frac{1}{T_1}-\frac{1}{T_2}\right)\]
+\begin{proof}\mbox{}\\
+令莫耳比容$\nu\coloneq\frac{V}{n}$，克勞修斯-克拉佩龍方程指出：
+\[\frac{\mathrm{d}p}{\mathrm{d}T}=\frac{L}{T \Delta \nu}\]
+推導：
+\[\begin{aligned}
+&\nu_{\text{g}}\gg\nu_{\text{l}}\\
+\Rightarrow &\Delta \left(\nu\right)\approx \nu_{\text{g}}=\frac{RT}{pM}\\
+\Rightarrow &\frac{\mathrm{d}p}{\mathrm{d}T}=\frac{pLM}{T^2 R}\\
+\Rightarrow &\frac{\mathrm{d}p}{p}=\frac{LM}{R}\frac{\mathrm{d}T}{T^2}\\
+\Rightarrow &\int\frac{\mathrm{d}p}{p}=\frac{LM}{R}\int\frac{\mathrm{d}T}{T^2}\\
+\Rightarrow &\ln(p)=-\frac{LM}{RT}+C\\
+\Rightarrow &\ln\left(\frac{p_2}{p_1}\right)=\frac{LM}{R}\left(\frac{1}{T_1}-\frac{1}{T_2}\right)
+\end{aligned}\]
+\end{proof}
+
+若氣相壓力大於凝相的飽和蒸氣壓，則氣相的化學勢較大，會發生淨凝結（液化或凝華）；若氣相壓力小於凝相的飽和蒸氣壓，則凝相的化學勢較大，會發生淨汽化（蒸發或昇華）。
+\subsubsection{相圖（Phase graph）}
+相圖是描述物質在不同狀態下之相的圖表，顯示了不同相之間的平衡條件。相圖一般以溫度為橫軸，壓力（指該物質的氣相分壓，即蒸氣壓）為縱軸，亦有另增體積為$z$軸者，在圖上將異相平衡的條件以曲線繪出，彼等線圍出的區域即為各相所屬之區域。
+\bct\bfH\ctr\icg[width=0.6\textwidth]{phase.jpg}\ef\FB\ect
+\sssc{臨界點（Critical point）}
+該點的溫度稱臨界溫度，是物質能液化的最高溫度。該點的氣壓稱臨界氣壓，是恰小於臨界溫度時物質液化所需的最小壓力。當溫度高於臨界溫度且與壓力高於臨界壓力且尚不足以游離電子時，物質呈超臨界流相。
+
+在臨界溫度以上，不再有飽和蒸氣壓的概念。在臨界壓力以上升溫通過臨界溫度或在臨界溫度以上增壓通過臨界壓力時，原先液相與氣相的分界消失，而成為超臨界流體。此種過程並非典型的相變，而是密度連續變化，分子始終均勻分布，僅有熱容效應的吸熱增壓或增溫，而無相變焓，可視為克勞修斯–克拉佩龍方程中的相變焓和莫耳比容變化都是零。
+
+二氧化碳臨界點31.2攝氏度、72.9大氣壓，二氧化碳的超臨界流相常用於萃取咖啡因等。
+\sssc{三相點（Triple point）}
+固相、液相、氣相平衡的點，即固相的飽和蒸氣壓等於液相的飽和蒸氣壓等於氣壓的點。
+\sssc{純物質的固液平衡線}
+\bit
+\item 多數物質之此線斜率為正，代表固相密度大於液相，如二氧化碳。
+\item 少數物質斜率為負，代表固相密度小於液相，如水、銻、鉍、生鐵。水的固相密度小於液相造成鐵線切冰冰不斷的復冰現象、溜冰時壓力大冰面的水復結為冰故溜冰速度極快。
+\eit
+\sssc{過冷/超冷凍（Supercooling）現象}
+指液體溫度降低到低於熔點仍未凝固的現象，冷卻曲線先以液態下降到凝固點之下，當出現晶種開始升溫並開始凝固，到達凝固點時開始恆溫凝固，直到全部凝固後開始以固體的比熱降溫。
+\sssc{（正常）熔（化）點（Melting point, m.p.）}
+一大氣壓下液相與固相化學勢相同的溫度。
+\sssc{（正常）沸（騰）點（Boiling point, b.p.）}
+一大氣壓下液相與氣相化學勢相同的溫度，即液相飽和蒸氣壓為一大氣壓的溫度。
+\sssc{（正常）昇華點（Sublimation point, s.p.）}
+一大氣壓下固相與氣相化學勢相同的溫度，即固相飽和蒸氣壓為一大氣壓的溫度。
+
+
+\section{氣體動力論（Kinetic theory of gases）}
+\subsection{理想氣體分子假設}
+\bit
+\item 遵守馬克思威-波茲曼理想氣體分子速率機率分布函數。
+\item 除碰撞外，無分子間作用力，即無分子間位能，即氣體分子的內能等於其總動能。
+\item 分子不斷直線平移運動，不會轉動與振動。
+\item 分子有質量，無體積，無形狀。
+\item 所有碰撞皆為完全彈性碰撞。
+\item 氣體無法液化或固化。
+\item 在任一時刻，向各方向運動的分子數目皆相同。
+\item 分子數量足夠大，以至於對該問題進行統計處理和假設是合理的。
+\item $T \ll \frac{mc^2}{k_B}$，即相對論效應可忽略。
+\eit
+\subsection{馬克思威-波茲曼分布（Maxwell-Boltzmann distribution）}
+\sssc{馬克思威-波茲曼分布}
+馬克思威-波茲曼分布描述理想氣體粒子在熱力學平衡狀態的速率機率分布。
+\[\begin{aligned}
+P(v)&: \text{分子數占總分子數比例}\\
+a &= \sqrt{\frac{k_BT}{m}}\\
+P(v) &= \sqrt{\frac{2}{\pi}}\frac{v^2}{a^3}e^{\frac{-v^2}{2a^2}},\quad 0<v<\infty
+\end{aligned}\]
+\subsubsection{方均根速率}
+\[\sqrt{\langle v^2 \rangle}=v_{rms} = \sqrt{3}a\]
+恰有一半的分子其速率$< v_{rms}$，一半的分子其速率$> v_{rms}$，即：
+\[\int_0^{v_{rms}} P(v) \,\mathrm{d}v = \int_{v_{rms}}^{\infty} P(v) \,\mathrm{d}v = \frac{1}{2}\]
+\subsubsection{最大可能速率/最概然速率/速率分布之眾數}
+\[v_p = \sqrt{2}a\]
+\subsubsection{平均速率}
+\[\langle v \rangle = \sqrt{\frac{8}{\pi}}a\]
+\subsubsection{平均相對速率}
+\[\langle \left|\vec{v_1} - \vec{v_2}\right| \rangle =v_{rel} = 4\sqrt{\frac{1}{\pi}}a\]
+\ssc{氣體壓力}
+\sssc{氣體壓力}
+一體積$V$容器中氣體分子總數$N$、方均根速率$v_{\text{rms}}$、一個氣體分子的質量$m$、氣體碰撞對器壁造成的壓力$p$，則：
+\[p=\frac{Nmv_{\text{rms}}^{\pht{\text{rms}}2}}{3V}\]
+\begin{proof}\mbox{}\\
+考慮正方體容器中，一個分子在平行於一邊長方向上的運動。令該方向速度分量 \( v_x \)，則這個分子與與其運動方向垂直的器壁碰撞時，產生動量變化：
+\[ \Delta p_x = 2mv_x \]
+由於在長度 \( L \) 的線段上運動，兩次碰撞同一器壁之間的行進距離為 \( 2L \)，所以單個分子的碰撞頻率為：
+\[ \frac{v_x}{2L} \]
+單個分子對容器壁的平均力是：
+\[ F_{ix} = \frac{(\Delta p_x) v_x}{2L} = \frac{mv_x^{\pht{x}2}}{L} \]
+所有 \( N \) 個分子對容器壁的總力為：
+\[ F_{\text{total}} = N \cdot \frac{mv_x^{\pht{x}2}}{L} \]
+\( L = \sqrt[3]{V} \)，器壁面積 \( A = L^2 \)，所以壓力為：
+\[ p = \frac{F_{\text{total}}}{A} = \frac{N \cdot \frac{mv_x^{\pht{x}2}}{L}}{L^2} = \frac{N m v_x^{\pht{x}2}}{L^3} = \frac{N m v_x^{\pht{x}2}}{V} \]
+在三維空間中，分子的總速度平方 \( v^2 = v_x^2 + v_y^2 + v_z^2 \)，所以有：
+\[ \overline{v^2} = \overline{v_x^{\pht{x}2}} + \overline{v_y^{\pht{y}2}} + \overline{v_z^{\pht{z}2}} = 3 \overline{v_x^{\pht{x}2}} \]
+因此，
+\[ \overline{v_x^{\pht{x}2}} = \frac{1}{3} \overline{v^2} \]
+代入得，
+\[ p = \frac{N m \overline{v_x^{\pht{x}2}}}{V} = \frac{N m \frac{1}{3} \overline{v^2}}{V} = \frac{1}{3} N m \frac{\overline{v^2}}{V} \]
+根據定義，均方根速度 \( v_{\text{rms}} \) 是：
+\[ v_{\text{rms}} = \sqrt{\overline{v^2}} \]
+所以，
+\[ p = \frac{Nmv_{\text{rms}}^{\pht{\text{rms}}2}}{3V} \]
+將容器分割成兩個部分，則從兩部分通過界面到達另一部分的分子們速率、分子數與壓力相同，速度與力的方向相反，通過將任意容器分割成若干個正方體容器，可知任意容器均遵循此定律。
+\end{proof}
+\sssc{道耳頓（分壓）定律（Dalton's law (of partial pressures)）}
+互不反應的理想氣體混合物，各組分氣體的分壓（partial pressure）等於總壓乘以其莫耳分率。
+\subsection{理想氣體方程式（Ideal gas law）}
+由馬克思威-波茲曼分布與氣體壓力公式可得到理想氣體方程式：
+\[pV = Nk_BT = nRT \]
+其中：
+\[V\propto\frac{1}{p}\]
+稱\tb{波以耳（Boyle）定律}；
+\[V\propto T\]
+稱\tb{查理定律（Charles's law）}或\tb{查理–給呂薩克定律（Charles and Gay-Lussac's Law）}；
+\[\frac{1}{p}\propto T\]
+稱\tb{給呂薩克定律（Gay-Lussac's law）}；
+\[V\propto n\]
+稱\tb{亞弗加厥定律}。
+
+並可推得：
+\[pM=\rho RT\]
+\[v_{rms}=\sqrt{\frac{3k_BT}{m}}=\sqrt{\frac{3RT}{M}}=\sqrt{\frac{3p}{\rho}}\]
+\[\langle v \rangle = \sqrt{\frac{8k_BT}{\pi m}}=\sqrt{\frac{8RT}{\pi M}}=\sqrt{\frac{8p}{\pi \rho}}\]
+\sssc{通量（flux）}
+單位體積分子數$N$、平均速率$v$理想氣體的通量（單位面積單位時間通過該面的分子數）$f$為：
+\[f=\frac{Nv}{4}=N\sqrt{\frac{k_BT}{2\pi m}}=N\sqrt{\frac{RT}{2\pi M}}\]
+\sssc{標準溫度與壓力（Standard temperature and pressure, STP）/標準狀況（Standard conditions (for temperature and pressure)）}
+1982 年以前，STP 指的是溫度 273.15 K（0 °C）與絕對壓力 1 atm（101.325 kPa）；自 1982 年起，STP 變更定義為溫度 273.15 K（0 °C）與絕對壓力 1 bar（100 kPa）。STP 下理想氣體約 22.4 L/mol。
+\sssc{常態溫度與壓力（Normal temperature and pressure, NTP）/常態狀況（Standard conditions (for temperature and pressure)）}
+1982 年以前，NTP 指的是溫度 298.15 K（25°C）與絕對壓力 1 atm（101.325 kPa）；自 1982 年起，NTP 變更定義為溫度 298.15 K（25 °C）與絕對壓力 1 bar（100 kPa）。NTP 下理想氣體約 24.5 L/mol。
+\ssc{真實氣體}
+\sssc{理想氣體和真實氣體的比較}
+\begin{longtable}[c]{|c|c|c|}
+\hline
+& 理想氣體 & 真實氣體 \\\hline\endhead
+分子體積 & 無 & 有 \\\hline
+分子作用力 & 無 & 有 \\\hline
+分子碰撞 & 完全彈性 & 非完全彈性 \\\hline
+適用理想氣體方程式 & 是 & 否 \\\hline
+\end{longtable}\FB
+\sssc{凡得瓦方程式（Van der Waals equation）}
+真實氣體更接近凡得瓦方程式，其中$a$, $b$為與物質種類相關的係數：
+\[\qty(p + \frac{a}{V^2})\qty(V - b) = nRT\]
+\sssc{可壓縮性因子（Compressibility factor）}
+可壓縮性因子$Z$定義為：
+\[Z=\frac{pV}{nRT}\]
+\sssc{真實氣體的偏差}
+可壓縮性因子在低溫低壓時與壓力負相關，其餘情況與壓力正相關。
+
+真實氣體分子間作用力愈小及分子大小除以分子間距大小愈小，愈接近理想氣體，即愈高溫、低壓、低極性、無氫鍵、沸點低、分子量小、凡得瓦力小等愈接近理想氣體。
+
+
+\sct{布朗運動（Brownian motion）與擴散（作用）（Diffusion）}
+\ssc{布朗運動（Brownian motion）}
+\bit
+\item 1827 年，布朗（Robert Brown）觀察到花粉微粒的不規則折線運動，後發現微粒均有之，且顆粒愈小愈活躍，稱布朗運動。
+\item 1905 年，愛因斯坦（Albert Einstein）從分子運動觀點發表布朗運動第一個可用實驗檢驗的定量理論，預言微粒平均運動路徑長與溫度、微粒大小、微粒濃度、液體年的等因素的關係。
+\item 1908 年，佩蘭（Jean Baptiste Perrin）驗證愛因斯坦布朗運動理論，使原子論受廣泛接受。
+\eit
+\ssc{擴散（Diffusion）}
+流體不受外力通過布朗運動從高化學勢區向低化學勢區淨運輸的過程。
+\sssc{菲克第一定律（Fick's First Law）}
+從高濃度區域往低濃度流的通量大小與濃度對空間位置的梯度成正比：
+\[\mb{J}=-D\nabla\phi\]
+\sssc{菲克第二定律（Fick's second law）}
+由質量守恆定律與菲克第一定律導出：
+\[\frac{\partial\phi}{\partial t}=D\nabla^2\phi\]
+\sssc{氣體隙流/通孔擴散的格雷姆定律（Graham's Law）}
+隙流/通孔擴散指流體擴散通過小孔的過程，格雷姆定律指出，在氣體中各處的密度差別不大的情況下，各組分氣體隙流速率與分子量平方根反比。
+
+
+\section{能量均分定理（Equipartition theorem）}
+描述在熱平衡狀態下，系統中的每個獨立的能量存儲模式（如平動、轉動、振動等）會依自由度均分能量，每個自由度平均會有 \( N \frac{1}{2} k_B T \) 的能量。考慮相對論效應的影響，該定理依然成立，但在量子效應的影響下失效。
+
+低溫時，部分能量形式會依序消失，莫耳熱容會顯著減少，應改用其他模型。
+\subsection{能量存儲模式}
+\subsubsection{平動}
+\bit
+\item 理想氣體：三個方向，三個自由度，\( \frac{3}{2}Nk_BT \) 的能量。
+\item 理想晶體：無。
+\eit
+\subsubsection{轉動}
+\bit
+\item 理想氣體單原子分子、理想晶體：無。
+\item 理想氣體直線形分子：兩個方向，兩個自由度，\( Nk_BT \) 的能量。
+\item 理想氣體非直線形分子：三個方向，三個自由度，\( \frac{3}{2} Nk_BT \) 的能量。
+\eit
+\subsubsection{振動}
+一個振動分為動能與位能兩個自由度，故有 \( Nk_B T \) 的能量。
+\bit
+\item 低溫：無。
+\item 高溫理想共價鍵：一個振動，兩個自由度，故有 \( Nk_B T \) 的能量。
+\item 高溫理想晶體構造單位間：依\tb{杜隆-泊替定律（Dulong-Petit law）}，有三個振動，六個自由度，故有 \( 3 Nk_B T \) 的能量。
+\eit
+\subsection{莫耳熱容}
+\bit
+\item 理想氣體單原子分子：$C_V=\frac{3}{2} R$、$C_p=\frac{5}{2}R$
+\item 低溫理想氣體直線形分子：$C_V=\frac{5}{2}R$、$C_p=\frac{7}{2}R$
+\item 高溫理想氣體$n$共價鍵直線形分子：$C_V=\frac{5+2n}{2}R$、$C_p=\frac{7+2n}{2}R$
+\item 低溫理想氣體非直線形分子：$C_V=3R$、$C_p=4R$
+\item 高溫理想氣體$n$共價鍵非直線形分子：$C_V=(3+n)R$、$C_p=(4+n)R$
+\item 低溫理想晶體：$C_V=0$
+\item 高溫理想晶體：$C_V=3R$
+\eit
+\end{document}
