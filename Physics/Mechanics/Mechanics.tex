@@ -105,19 +105,26 @@ An equilibrium point $\mb{r}_0$ is a point where $\mb{F}(\mb{r}_0)=0$, and can b
 \item Unstable equilibrium: $U$ has a local maximum at $\mb{r}_0$, that is, the Hessian of $U$ at $\mb{r}_0$ is negative definite. When an infinisimal displacement occurs on the particle at it, $\mb{F}$ pushes it away.
 \item Neutral or indifferent equilibrium: $U$ is constant near $\mb{r}_0$, that is, the Hessian of $U$ at $\mb{r}_0$ is zero semidefinite. When an infinisimal displacement occurs on the particle at it, it stay where it becomes.
 \eit
-\ssc{質心（Center of mass）}
+\ssc{Center of mass (COM) (質心)}
+\sssc{Center of mass (COM) (質心)}
+The (position of) center of mass of a system is the point that moves as if all of the system's mass were concentrated there.
+
+For a system of $N$ particles with masses $m_i$ at postion $\mb{r}_i$, the (position of) center of mass $\mb{r}$ is
+\[\mb{r}=\frac{\sum_{i=1}^Nm_i\mb{r}_i}{\sum_{i=1}^Nm_i}.\]
+
+For a system $S$ of continuous mass distribution with (mass) density $\rho(\mb{r})$, the (position of) center of mass $\mb{r}$
+\[\mb{r}=\frac{\int_S\mb{r}\rho(\mb{r})\dd{V}}{\int\rho(\mb{r})\dd{V}}.\]
 \sssc{向量}
 \bit
-\item\tb{質心（Center of mass）（位置）}：系統中各點密度乘以該點位置向量的體積積分，再除以系統質量。一系統的位置指其質心位置。
 \item\tb{質心（瞬間/瞬時）速度}：質心位置對時間的導數，等於系統中各點密度乘以該點速度向量的體積積分，再除以系統質量。
 \item\tb{質心（瞬間/瞬時）加速度}：質心速度對時間的導數，等於系統中各點密度乘以該點加速度向量的體積積分，再除以系統質量。
 \item\tb{動量}：系統質量與質心速度的乘積，等於系統中各點密度乘以該點速度向量的體積積分。
 \item\tb{衝量}：系統末動量減去初動量，等於系統中各點密度，乘以該點末速度減去初速度之向量，的體積積分。
 \eit
 \sssc{純量}
-\begin{itemize}
-\item\tb{密度（Density）}：一點的密度為該處的單位體積質量；一系統的密度為其質量除以其體積。
-\item\tb{質心動能}：系統總質量$m$，質心速度$\mathbf{v}_c$，質心動能$K_c$：
+\bit
+\item\tb{質心動能}
+系統總質量$m$，質心速度$\mathbf{v}_c$，質心動能$K_c$定義為：
 \[K_c=\frac{m\mathbf{v}_c^{\phantom{c}2}}{2}.\]
 系統質心動能僅受系統外力影響。
 \item\tb{總動能}：系統中各點密度，乘以該點速度的歐幾里得範數的平方，的體積積分。
@@ -125,6 +132,52 @@ An equilibrium point $\mb{r}_0$ is a point where $\mb{F}(\mb{r}_0)=0$, and can b
 \end{itemize}
 \sssc{（理想）剛體（Rigid body or rigid object）}
 一種有限尺寸且無形變的固體，無形變表示不論是否受到外力，剛體內部質點與質點之間的距離都不會改變。
+\ssc{變質量系統與火箭方程（Rocket Equations）}
+\sssc{質量增加}
+令無外力下：
+\begin{itemize}
+\item 時間$t$時：主系統質量$m$、速度$\mathbf{v}$，副系統質量$\mathrm{d}m$、速度$\mathbf{v}+\mathbf{v}_{rel}$，兩系統總動量$\mathbf{p}$；
+\item 時間$(t+\mathrm{d}t)$時：副系統併入主系統，主系統的性質在$t$時為$i$者變為$i+\mathrm{d}i$，主系統動量仍為$\mathbf{p}$。
+\end{itemize}
+\[\ba
+\mathbf{p}&=m\mathbf{v}+(\mathrm{d}m)\qty(\mathbf{v}+\mathbf{v}_{rel})\\
+&=\qty(m+\mathrm{d}m)(\mathbf{v}+\mathrm{d}\mathbf{v})
+\ea\]
+故：
+\[m(\mathrm{d}\mathbf{v})-(\mathrm{d}m)\mathbf{v}_{rel}=0.\]
+令質量增加率$R=\dv{m}{t}$，加速度$\mathbf{a}=\dv{\mathbf{v}}{t}$：
+\[R\mathbf{v}_{rel}=m\mathbf{a}.\]
+令時間$t_1$與$t_2$時$\mb{v}$與$m$分別為$\mb{v}_1$、$m_1$與$\mb{v}_2$、$m_2$。積分前式：
+\[\mb{v}_2-\mb{v}_1=\mathbf{v}_{rel}\int_{t_1}^{t_2}\frac{R}{m}\dd{t}.\]
+由於：
+\[\dv{\ln|f(x)|}{x}=\frac{f'(x)}{f(x)}.\]
+我們有：
+\[\mb{v}_2-\mb{v}_1=\mathbf{v}_{rel}\ln\frac{M_2}{M_1}.\]
+\sssc{質量減少與火箭方程}
+令無外力下：
+\begin{itemize}
+\item 時間$t$時：主系統質量$m$、速度$\mathbf{v}$、動量$\mathbf{p}$；
+\item 時間$(t+\mathrm{d}t)$時：主系統分出質量$\mathrm{d}m$的副系統，使得主系統質量變為$m-\mathrm{d}m$，主系統的質量以外性質在$t$時為$i$者變為$i+\mathrm{d}i$，副系統速度$\mathbf{v}+\mathbf{v}_{rel}$，主系統動量仍為$\mathbf{p}$。
+\end{itemize}
+\[\begin{aligned}
+\mathbf{p}&=m\mathbf{v} \\
+&=\qty(m-\mathrm{d}m)(\mathbf{v}+\mathrm{d}\mathbf{v})+\mathrm{d}m\qty(\mathbf{v}+\mathbf{v}_{rel})
+\ea\]
+故：
+\[\qty(m-\mathrm{d}m)(\mathrm{d}\mathbf{v})+(\mathrm{d}m)\mathbf{v}_{rel}=0.\]
+考慮$(\mathrm{d}m)(\mathrm{d}\mathbf{v})=0$，故：
+\[m(\mathrm{d}\mathbf{v})+(\mathrm{d}m)\mathbf{v}_{rel}=0.\]
+令質量減少率$R=-\dv{m}{t}$，加速度$\mathbf{a}=\dv{\mathbf{v}}{t}$：
+\[R\mathbf{v}_{rel}=m\mathbf{a}.\]
+對於火箭，我們稱$R$為燃料消耗質量率（mass rate of fuel consumption），稱$R\mathbf{v}_{rel}$為推力（thrust），稱此方程為火箭第一方程（First rocket equation）。
+
+令時間$t_1$與$t_2$時$\mb{v}$與$m$分別為$\mb{v}_1$、$m_1$與$\mb{v}_2$、$m_2$。積分前式：
+\[\mb{v}_2-\mb{v}_1=\mathbf{v}_{rel}\int_{t_1}^{t_2}\frac{R}{m}\dd{t}.\]
+由於：
+\[\dv{\ln|f(x)|}{x}=\frac{f'(x)}{f(x)}.\]
+我們有：
+\[\mb{v}_2-\mb{v}_1=-\mathbf{v}_{rel}\ln\frac{M_2}{M_1}.\]
+稱此方程為火箭第二方程（Second rocket equation）。
 \subsection{一維轉動（Rotation）}
 \subsubsection{向量}
 \begin{itemize}
@@ -179,29 +232,6 @@ Sometimes, only the scalar angle $\theta$ itself is referred to as the angular p
 令一旋轉參考系相對於慣性參考系以角速度$\boldsymbol{\omega}$繞其原點旋轉，一質量$m$質點在此參考系有位置$\mathbf{x}$和速度$\mathbf{v}$，欲使牛頓第二運動定律在此參考系中成立需施予該質點假想力$\mathbf{F}$，則其服從：
 \[\mathbf{F}=-m\boldsymbol{\omega}\times\qty(\boldsymbol{\omega}\times\mathbf{x})-2m\boldsymbol{\omega}\times\mathbf{v}-m\frac{\mathrm{d}\boldsymbol{\omega}}{\mathrm{d}t}\times\mathbf{x}\]
 其中：$-m\boldsymbol{\omega}\times\qty(\boldsymbol{\omega}\times\mathbf{x})$稱\tb{離心力（Centrifugal force）}，$-2m\boldsymbol{\omega}\times\mathbf{v}$稱\tb{科里奥利力/科氏力（Coriolis force）}，$-m\frac{\mathrm{d}\boldsymbol{\omega}}{\mathrm{d}t}\times\mathbf{x}$稱\tb{尤拉力（Euler force）}。
-\ssc{變質量系統}
-\sssc{質量增加}
-令：
-\begin{itemize}
-\item 時間$t$時：主系統質量$m$、速度$\mathbf{v}$，副系統質量$\mathrm{d}m$、速度$\mathbf{v}+\mathbf{u}$，兩系統總動量$\mathbf{p}$；
-\item 時間$(t+\mathrm{d}t)$時：副系統併入主系統，主系統的性質在$t$時為$i$者變為$i+\mathrm{d}i$，主系統動量為$\mathbf{p}+\mathrm{d}\mathbf{p}$。
-\end{itemize}
-\[\begin{aligned}
-& \mathbf{p}=m\mathbf{v}+(\mathrm{d}m)(\mathbf{v}+\mathbf{u})\\
-& \mathbf{p}+\mathrm{d}\mathbf{p}=\qty(m+\mathrm{d}m)(\mathbf{v}+\mathrm{d}\mathbf{v})\\
-& \mathrm{d}\mathbf{p}=m(\mathrm{d}\mathbf{v})-(\mathrm{d}m)\mathbf{u}
-\end{aligned}\]
-\sssc{質量減少}
-令：
-\begin{itemize}
-\item 時間$t$時：主系統質量$m$、速度$\mathbf{v}$、動量$\mathbf{p}$；
-\item 時間$(t+\mathrm{d}t)$時：主系統分出質量$\mathrm{d}m$的副系統，使得主系統質量變為$m-\mathrm{d}m$，主系統的質量以外性質在$t$時為$i$者變為$i+\mathrm{d}i$，副系統速度$\mathbf{v}+\mathbf{u}$。
-\end{itemize}
-\[\begin{aligned}
-& \mathbf{p}=m\mathbf{v} \\
-& \mathbf{p}+\mathrm{d}\mathbf{p}=\qty(m-\mathrm{d}m)(\mathbf{v}+\mathrm{d}\mathbf{v})+\mathrm{d}m(\mathbf{v}+\mathbf{u})\\
-& \mathrm{d}\mathbf{p}=\qty(m-\mathrm{d}m)(\mathrm{d}\mathbf{v})+(\mathrm{d}m)\mathbf{u}
-\end{aligned}\]
 \ssc{Lagrangian Mechanics (拉格朗日力學)}
 \sssc{Configuration space}
 The degrees of freedom, or parameters, that define the configuration, or position of all constituent point particles, of a physical system are called generalized coordinates, and the space defined by these coordinates is called the configuration space of the system. Each unique possible configuration of the system corresponds to a unique point in the space. It is often the case that the set of all actual configurations of the system is a manifold in the configuration space, called the configuration manifold of the system. The number of dimensions of the configuration space is equal to the degrees of freedom of the system.
@@ -249,7 +279,7 @@ The number of equations has decreased compared to Newtonian mechanics, from $3N$
 服從虎克定律的彈性材料是線性彈性的（linear elastic），使服從虎克定律的軸向外力大小區間稱線性彈性區（linear elastic region），其最大力值稱彈性限度（elastic limit）。
 \sssc{彈力位能/彈性位能（spring potential energy）}
 \[U=\frac{k^2}{2}.\]
-\sssc{楊氏模量（Young's modulus or Young modulus）}
+\sssc{楊氏模量/楊氏模數（Young's modulus or Young modulus）}
 彈性材料承受軸向應力（stress）$p$時會產生軸向應變$x$，在形變量沒有超過對應材料的一定彈性限度時，定義楊氏模量$E$為：
 \[E=\frac{p}{x}.\]
 
