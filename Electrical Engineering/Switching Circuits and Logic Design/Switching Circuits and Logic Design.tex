@@ -599,13 +599,13 @@ Given a Boolean function $f$ of $n$ variables, a product term $P$ is an implican
 A prime implicant of a function $f$ is an implicant of $f$ which is no longer an implicant of $f$ if any literal is deleted from it.
 \sssc{Essential prime implicant}
 An essential prime implicant of a function $f$ is a prime implicant $P$ of $f$ such that there exists a minterm $m$ of $f$ such that $m$ implies $P$ and for any other prime implicant $Q$ of $f$, $m$ implies $Q'$.
-\sssc{Minimal SOP form}
+\sssc{Minimal SOP form or minimum sum}
 A SOP form of a Boolean function is called minimal if it has the fewest number of terms out of all SOP forms of the function, and every product term in it can not have any variable in it be eliminated. For a given Boolean function, there may exist more than one minimal SOP forms of it.
 
 A minimal SOP form of a Boolean function must consist of some of its prime implicants (but not necessarily all), that is, if a SOP form contains implicants that are not prime implicants, it is not minimal.
 
 A minimal SOP form of a Boolean function must contain all of its essential prime implicants.
-\sssc{Minimal POS form}
+\sssc{Minimal POS form or minimum product}
 A POS form of a Boolean function is called minimal if it has the fewest number of terms out of all POS forms of the function, and every sum term in it can not have any variable in it be eliminated. For a given Boolean function, there may exist more than one minimal POS forms of it.
 
 One can simplify a Boolean function to minimal POS form by:
@@ -615,7 +615,7 @@ One can simplify a Boolean function to minimal POS form by:
 \item taking dual of it.
 \een
 \sssc{Incompletely Specified Boolean Functions (ISF) or Don't-care Functions}
-An incompletely specified function (ISF) or a don't-care function is a Boolean function but in which for some input combinations, the output is not defined or irrelevant. Those input combinations are called don't-care conditions, sometimes denoted as $d$. The definition of ON-set and OFF-set of an ISF is the same as completely specified function; the Don't-Care set or DC-set of an ISF is the set of all don't-care conditions.
+An incompletely specified function (ISF) or a don't-care function is a Boolean function but in which for some input combinations, the output is not defined or irrelevant. Those input combinations are called don't-care conditions. The definition of ON-set and OFF-set of an ISF is the same as completely specified function; the Don't-Care set or DC-set of an ISF is the set of all don't-care conditions.
 
 The output for the don't-care conditions can be assigned either $0$ or $1$ such that the minimal SOP (or POS) forms have the fewest terms.
 
@@ -650,7 +650,7 @@ A K map for a $4$-variable Boolean function $f(A,B,C,D)$ is
 \multicolumn{1}{c|}{\thead{11}} & $f(0,0,1,1)$ & $f(0,1,1,1)$ & $f(1,1,1,1)$ & $f(1,0,1,1)$ \\\cline{2-5}
 \multicolumn{1}{c|}{\thead{10}} & $f(0,0,1,0)$ & $f(0,1,1,0)$ & $f(1,1,1,0)$ & $f(1,0,1,0)$ \\\cline{2-5}
 \end{longtable}
-If the ouput of the input combination of a cell is $1$, we write $1$ in that cell; if the ouput of the input combination of a cell is $0$, we can leave that cell empty or write $0$ in that cell; if the input combination of a cell is a don't care condition, we write $d$ in that cell.
+If the ouput of the input combination of a cell is $1$, we write $1$ in that cell; if the ouput of the input combination of a cell is $0$, we can leave that cell empty or write $0$ in that cell; if the input combination of a cell is a don't care condition, we write $-$ in that cell.
 
 The order 00, 01, 11, 10 is the gray code order, which is such that adjacent cells in the K-map differ by only one variable.
 
@@ -658,7 +658,7 @@ The notation of a cell is the input combination of that cell (thus a binary numb
 \sssc{Groups of 1s}
 The first step of simplifying a Boolean function using K-maps is grouping 1s (minterms).
 
-A group is a rectangle of $2^m\times 2^n$ cells that are either $1$ (minterm) or $d$ (don't-care condition), in which $m,n\in\mathbb{N}_0$, the leftmost and rightmost columns are horizontally adjacent, and the top and bottom rows are vertically adjacent. Cells can be in multiple groups.
+A group is a rectangle of $2^m\times 2^n$ cells that are either $1$ (minterm) or $-$ (don't-care condition), in which $m,n\in\mathbb{N}_0$, the leftmost and rightmost columns are horizontally adjacent, and the top and bottom rows are vertically adjacent. Cells can be in multiple groups.
 
 Each group represents an implicant of $f$ by the following rules:
 \ben
@@ -691,9 +691,147 @@ $A$ & \multicolumn{1}{c|}{\thead{01}} & \backslashbox{$f(1,0,0,0,1)$}{$f(0,0,0,0
 \backslashbox{$1$}{$0$} & \multicolumn{1}{c|}{\thead{11}} & \backslashbox{$f(1,0,0,1,1)$}{$f(0,0,0,1,1)$} & \backslashbox{$f(1,0,1,1,1)$}{$f(0,0,1,1,1)$} & \backslashbox{$f(1,1,1,1,1)$}{$f(0,1,1,1,1)$} & \backslashbox{$f(1,1,0,1,1)$}{$f(0,1,0,1,1)$} \\\cline{3-6}
 & \multicolumn{1}{c|}{\thead{10}} & \backslashbox{$f(1,0,0,1,0)$}{$f(0,0,0,1,0)$} & \backslashbox{$f(1,0,1,1,0)$}{$f(0,0,1,1,0)$} & \backslashbox{$f(1,1,1,1,0)$}{$f(0,1,1,1,0)$} & \backslashbox{$f(1,1,0,1,0)$}{$f(0,1,0,1,0)$} \\\cline{3-6}
 \end{longtable}}
-in which the adjacency between cells in the same layer of four-variable K-map is the same as that in four-variable K-map; the upper and lower triangles in the same square are adjacent; and a group is a cuboid of $2^l\times 2^m\times 2^n$ cells that are either $1$ (minterm) or $d$ (don't-care condition), in which $l,m,n\in\mathbb{N}_0$.
+in which the adjacency between cells in the same layer of four-variable K-map is the same as that in four-variable K-map; the upper and lower triangles in the same square are adjacent; and a group is a cuboid of $2^l\times 2^m\times 2^n$ cells that are either $1$ (minterm) or $-$ (don't-care condition), in which $l,m,n\in\mathbb{N}_0$.
 \sssc{For minimal POS form}
 To find a minimal POS form of a function $f$, we can use K-map to find a minimal SOP form of $f'$, and change all literals to its inverse, all AND to OR, and all OR to AND.
+\ssc{Quine-McCluskey Method}
+The Quine-McCluskey method (along with the Petrick's method) is a systematic procedure to find the minimal SOP forms of a completely or incompletely specified Boolean function. Below, we first discuss about completely specified Boolean function.
+\sssc{Minterm expansion}
+First, we convert the function minterm expansion.
+
+Below, we will take
+\[f(a,b,c,d)=\sum m(0,1,2,5,6,7,8,9,10,14)\]
+for example.
+\sssc{Group minterms}
+Group minterms with the same number of $1$'s in the input combination together and list them. Let the group of minterms with $k$ $1$'s be Group $k$. Group $k$ and Group $(k+1)$ are called adjacent.
+
+For $f$:
+\begin{longtable}[c]{|c|m|mmmm|}
+\hline
+Group 0 & 0 & 0 & 0 & 0 & 0 \\\hline
+Group 1 & 1 & 0 & 0 & 0 & 1 \\\cline{2-6}
+& 2 & 0 & 0 & 1 & 0 \\\cline{2-6}
+& 8 & 1 & 0 & 0 & 0 \\\hline
+Group 2 & 5 & 0 & 1 & 0 & 1 \\\cline{2-6}
+& 6 & 0 & 1 & 1 & 0 \\\cline{2-6}
+& 9 & 1 & 0 & 0 & 1 \\\cline{2-6}
+& 10 & 1 & 0 & 1 & 0 \\\hline
+Group 3 & 7 & 0 & 1 & 1 & 1 \\\cline{2-6}
+& 14 & 1 & 1 & 1 & 0 \\\hline
+\end{longtable}
+\sssc{Combine minterms}
+Compare minterms from adjacent groups and combine minterms that differ in only one input bit by
+\[XY+XY'=X,\]
+where $X$ is a product of literals and $Y$ is a literal.
+
+(Note: It is obvious that two terms not in adjacent groups can't be combined by $XY+XY'=X$.)
+
+Create next list by writing combined terms with $X$ preserved and $Y$, the differing bit, by $-$ (don't care), and writing not-touched terms as is.
+
+Repeat combinations and create next list until no further combining is possible. The terms in this last list are the prime implicants of $f$.
+
+For $f$:
+
+List 1:
+\begin{longtable}[c]{|c|m|mmmm|}
+\hline
+Group 0 & 0 & 0 & 0 & 0 & 0 \\\hline
+Group 1 & 1 & 0 & 0 & 0 & 1 \\\cline{2-6}
+& 2 & 0 & 0 & 1 & 0 \\\cline{2-6}
+& 8 & 1 & 0 & 0 & 0 \\\hline
+Group 2 & 5 & 0 & 1 & 0 & 1 \\\cline{2-6}
+& 6 & 0 & 1 & 1 & 0 \\\cline{2-6}
+& 9 & 1 & 0 & 0 & 1 \\\cline{2-6}
+& 10 & 1 & 0 & 1 & 0 \\\hline
+Group 3 & 7 & 0 & 1 & 1 & 1 \\\cline{2-6}
+& 14 & 1 & 1 & 1 & 0 \\\hline
+\end{longtable}
+
+List 2:
+\begin{longtable}[c]{|c|m|mmmm|}
+\hline
+Group 0 & 0,1 & 0 & 0 & 0 & - \\\cline{2-6}
+& 0,2 & 0 & 0 & - & 0 \\\cline{2-6}
+& 0,8 & - & 0 & 0 & 0 \\\hline
+Group 1 & 1,5 & 0 & - & 0 & 1 \\\cline{2-6}
+& 1,9 & - & 0 & 0 & 1 \\\cline{2-6}
+& 2,6 & 0 & - & 1 & 0 \\\cline{2-6}
+& 2,10 & - & 0 & 1 & 0 \\\cline{2-6}
+& 8,9 & 1 & 0 & 0 & - \\\cline{2-6}
+& 8,10 & 1 & 0 & - & 0 \\\hline
+Group 2 & 5,7 & 0 & 1 & - & 1 \\\cline{2-6}
+& 6,7 & 0 & 1 & 1 & - \\\cline{2-6}
+& 6,14 & - & 1 & 1 & 0 \\\cline{2-6}
+& 10,14 & 1 & - & 1 & 0 \\\hline
+\end{longtable}
+
+List 3:
+\begin{longtable}[c]{|c|m|mmmm|}
+\hline
+Group 0 & 0,1,8,9 & - & 0 & 0 & - \\\cline{2-6}
+& 0,2,8,10 & - & 0 & - & 0 \\\hline
+Group 1 & 1,5 & 0 & - & 0 & 1 \\\cline{2-6}
+& 2,6,10,14 & - & - & 1 & 0 \\\hline
+Group 2 & 5,7 & 0 & 1 & - & 1 \\\cline{2-6}
+& 6,7 & 0 & 1 & 1 & - \\\hline
+\end{longtable}
+\sssc{Create prime implicant chart}
+Create the prime implicant chart, a chart where the column are minterms and rows are prime implicants and each cell is marked $\times$ if the corresponding minterm is implied by the corresponding prime implicant.
+
+For $f$:
+\begin{longtable}[c]{m|mmmmmmmmmm}
+\hline
+& 0 & 1 & 2 & 5 & 6 & 7 & 8 & 9 & 10 & 14 \\\hline
+(0,1,8,9) b'c' & \times & \times & & & & & \times & \times & & \\
+(0,2,8,10) b'd' & \times & & \times & & & & \times & & \times & \\
+(1,5) a'c'd & & \times & & \times & & & & & & \\
+(2,6,10,14) cd' & & & \times & & \times & & & & \times & \times \\
+(5,7) a'bd & & & & \times & & \times & & & & \\
+(6,7) a'bc & & & & & \times & \times & & & & \\
+\end{longtable}
+\sssc{Select ssential prime implicants}
+When a prime implicant is selected for inclusion in the minimal SOP form, the chart is reduced by deleting the corresponding row and the columns which correspond to the minterms covered by that prime implicant.
+
+If a column has only one $\times$, the prime implicant of that row is an essential prime implicant.
+
+Select all essential prime implicants.
+
+For $f$: Select $(0,1,8,9) b'c'$ to cover $m_9$, and select $(2,6,10,14) cd'$ to cover $m_{14}$.
+\sssc{Petrick's method}
+Given the reduced chart, number all prime implicants as $P_1,P_2,\ldots$.
+
+For $f$:
+\[P_1=a'c'd,\quad P_2=a'bd,\quad P_3=a'bc.\]
+
+For each remaining minterm $m_i$, construct a sum term of all prime implicants that covers it, and let $P$ be the product of them.
+
+For $f$:
+\[P=(P_1+P_2)(P_2+P_3).\]
+
+Expand $P$ into canonical SOP form (with each $P_i$ considered a literal).
+
+For $f$:
+\[P=P_1P_2+P_2+P_2P_3.\]
+
+Reduce $P$ by applying
+\[X+XY=X\]
+until no more such reduction is possible.
+
+For $f$:
+\[P=P_2.\]
+
+Each term in reduced $P$ represents a solution, that is, a set of prime implicants which covers all minterms in the reduced chart. The sets with the least number of literals in it are the minimal SOP forms of $f$.
+
+For $f$: $P_2$ is the only term in reduced $P$, thus the only minimal SOP form is 
+\[f=P_2=b'c'+cd'+a'bd.\]
+\sssc{Incompletely specified Boolean functions}
+
+
+
+
+
+
+
 \section{Digital Systems and Switching Circuits}
 \begin{itemize}
 \item\textbf{Digital system}: Deals with signals that have discrete values. Theoretically, for a given input, the output is exactly correct.
