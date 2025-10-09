@@ -937,10 +937,12 @@ PLACEHOLDER
 \item Dot product (點積) operator: $\cdot$
 \item Cross product (叉積) operator: $\times$
 \item Gradient (梯度) operator: $\nabla$
+\item Jacobian matrix (雅可比矩陣): $\nabla$, or $\mathbf{J}(\mathbf{F})$, $J(\mathbf{F})$, $\mb{J}_{\mb{F}}$, or $J_{\mathbf{F}}$ for operand $\mb{F}$.
 \item Divergence (散度) operator: $\nabla \cdot$
 \item Curl (旋度) operator: $\nabla \times$
 \item Directional derivative (方向導數) operator: $\cdot\nabla$
-\item Laplace (拉普拉斯) operator: $\nabla^2$或$\Delta$
+\item Hessian (黑塞) (matrix): $\nabla\nabla$, $\nabla^2$, $\nabla\otimes\nabla$, $D^2$, or $\mb{H}(f)$, $H(f)$, $\mb{H}_f$ or $H_f$ for operand $f$, or simply as second derivative.
+\item Laplace operator (拉普拉斯算子): $\nabla\cdot\nabla$, $\nabla^2$, or $\Delta$. For clarity, we use $\nabla\cdot\nabla$ here.
 \item Line or Path integral operator: $\int$
 \item Surface integral operator: $\iint$
 \item Volume integration operator: $\iiint$
@@ -962,7 +964,8 @@ If not otherwise specified:
 \item Three-dimensional tensor space field: $\mathbf{T}(\mathbf{x})$
 \item The $i$th component of the map $f$: $f_i$
 \end{itemize}
-\subsection{Gradient}
+\ssc{First order}
+\sssc{Gradient (梯度) or first derivative, and Jacobian matrix}
 \[
 \nabla f = \begin{pmatrix}\qty(\pdv{f}{x_1})^T & \qty(\pdv{f}{x_2})^T & \dots  & \qty(\pdv{f}{x_n})^T\end{pmatrix}
 \]
@@ -972,15 +975,14 @@ In particular, the gradient of a scalar field $A$ is
 \[
 \nabla A = \sum_{i=1}^n \pdv{A}{x_i}e_i.
 \]
-And the gradient of a vector field $\mathbf{F}$ is also called the Jacobian matrix (雅可比矩陣) of it and also denoted as $\mathbf{J}(\mathbf{F})$, $J(\mathbf{F})$, or $J_{\mathbf{F}}$, of which the $( i,j )$th entry is
-\[\mathbf{J}_{ij}=\frac{\partial F_i}{\partial x_j}.\]
-The determinant $\det\left(J_{\mathbf{F}}\right)$ of a Jacobian matrix is called a Jacobian determinant, or Jacobian for short.
-\subsection{Divergence}
+And the gradient of a vector field $\mathbf{F}$, also called the Jacobian matrix (雅可比矩陣) of $\mb{F}$, is a matrix such that the $( i,j )$th entry is
+\[(J(\mb{F}))_{ij}=\frac{\partial F_i}{\partial x_j}.\]
+The determinant of Jacobian matrix is called Jacobian determinant, or Jacobian for short.\sssc{Divergence (散度)}
 \[
 \nabla \cdot f = \sum_{i=1}^n\frac{\partial f_i}{\partial x_i}
 \]
 The divergence of a vector field is a scalar field, the gradient of a second-order tensor (i.e. matrix) field is a vector field, and the divergence of a $k+1$-order tensor field is a $k$-order tensor field.
-\subsection{Curl}
+\sssc{Curl (旋度)}
 The curl is only defined on three-dimensional vector field.
 \[
 \nabla \times \mathbf{T} = 
@@ -991,23 +993,27 @@ T_1 & T_2 & T_3 \\
 \end{pmatrix}
 \]
 The curl of a three-dimensional vector field is a three-dimensional vector field.
-\subsection{Directional derivative}
+\sssc{Directional derivative (方向導數)}
 \[(\mathbf{f}\cdot\nabla)\mathbf{g}=\sum_{i=1}^n f_i\pdv{g}{x_i}\]
-\subsection{Laplace operator}
+\ssc{Higher order}
+\sssc{Hessian (黑塞) (matrix) or second derivative}
+The Hessian or second derivative $H_f$ of field $f$ is defined as a matrix such that
+\[(H(f))_{ij}=\frac{\partial f}{\partial x_i\partial x_j},\]
+that is,
+\[H(f)=\nabla\qty((\nabla f)^\top).\]
+\sssc{Laplace operator (拉普拉斯算子)}
+\[\nabla\cdot\nabla f = \nabla \cdot (\nabla f) = \tr(H(f))=\sum_{i=1}^n\frac{\partial^2 f}{\partial x_i^{\phantom{i}2}}\]
+The Laplace operator applied to a tensor field is a tensor field of the same order and same dimension.
+\sssc{Poisson's equation (卜瓦松 or 帕松 or 泊松方程)}
 \[
-\nabla^2 f = \nabla \cdot (\nabla f) = \sum_{i=1}^n\frac{\partial^2 f}{\partial x_i^{\phantom{i}2}}
+\nabla\cdot\nabla A = B(\mathbf{x})
 \]
-The Laplace operator applied to a tensor field is a tensor field of the same order and same dimension (but not necessarily the same field).
-\subsection{Poisson's equation (卜瓦松 or 帕松 or 泊松方程)}
+\sssc{Laplace's equation (拉普拉斯方程)}
 \[
-\nabla^2 A = B(\mathbf{x})
-\]
-\subsection{Laplace's equation (拉普拉斯方程)}
-\[
-\nabla^2 A = 0
+\nabla\cdot\nabla A = 0
 \]
 A real function $A$ with real independent variables that is second-order differentiable for all independent variables is called a harmonic function if $A$ satisfies Laplace's equation.
-\subsection{Multi-index notation (多重指標記號)}
+\sssc{Multi-index notation (多重指標記號)}
 Suppose there are \( n \) variables \( x_1, x_2, \dots, x_n \), then a multi-index $\alpha$ is a vector of \( n \) nonnegative integers: 
 \[
 \alpha = (\alpha_1, \alpha_2, \ldots, \alpha_n), \quad \text{where\ } \alpha_i \in \mathbb{N}_0.
@@ -1032,21 +1038,39 @@ If \( \mathbf{x} = (x_1, x_2, \ldots x_n) \), then
 D^\alpha f = \frac{\partial^{\|\alpha\|} f}{\partial x_1^{\alpha_1} \partial x_2^{\alpha_2} \ldots  \partial x_n^{\alpha_n}}.
 \]
 \end{itemize}
-\subsection{Higher-order derivative}
+\sssc{Higher-order derivative}
 The $k$th order derivative of $\mathbf{F}:\,\mathbb{R}^n\to\mathbb{R}^m$, denoted as $\mathbf{F}^{(k)}(\mathbf{x})$ or $D^{k}\mathbf{F}(\mathbf{x})$, is a $(\mathbb{R}^n)^k\to\mathbb{R}$ function, where $(\mathbb{R}^n)^k$ is a Cartesian product of $k$ copies of $\mathbb{R}^n$ vector, that is,
 \[D^{k}\mathbf{F}(\mathbf{x})=\sum_{\|\alpha\|=k} \left(D^\alpha \mathbf{F}(\mathbf{a})\right).\]
 In particular, the first-order derivative of $\mathbf{F}$ is the gradient of it.
-\subsection{Taylor expansion}
+\sssc{Taylor expansion}
 Assume that $\mathbf{F}:\,\mathbb{R}^n\to\mathbb{R}^m$ is an infinitely differentiable function, and its partial derivatives of every order exist on $\mathbb{R}^n$, then the Taylor expansion of $\mathbf{F}$ at $\mathbf{a}$ is
 \[\mathbf{F}(\mathbf{x}) = \sum_{\|\alpha\|\in\mathbb{N}_0} \frac{D^\alpha \mathbf{F}(\mathbf{a})}{\alpha!} (\mathbf{x} - \mathbf{a})^\alpha,\]
 that is,
 \[\mathbf{F}(\mathbf{x}) = \sum_{\|\alpha\|\leq k} \frac{D^\alpha \mathbf{F}(\mathbf{a})}{\alpha!} (\mathbf{x} - \mathbf{a})^\alpha+\int_0^1\frac{(1-t)^k}{k!} D^{k+1}\mathbf{F}(\mathbf{a} + t(\mathbf{x} - \mathbf{a})) (\mathbf{x} - \mathbf{a})^{k+1} \, \mathrm{d}t.\]
 Also, the $k$th-order approximation of $\mathbf{F}$ near $\mathbf{a}$ is
 \[\mathbf{F}(\mathbf{x}) \approx \sum_{\|\alpha\|\leq k} \frac{D^\alpha \mathbf{F}(\mathbf{a})}{\alpha!} (\mathbf{x} - \mathbf{a})^\alpha,\]
-and the first-order (aka linear or tangent line) approximation of $f$ near $\mathbf{a}$ is
-\[\mathbf{F}(\mathbf{x}) \approx \mathbf{F}(\mathbf{a}) + \nabla \mathbf{F}(\mathbf{a}) \cdot (\mathbf{x} - \mathbf{a}).\]
+the first-order (aka linear or tangent line) approximation of $f$ near $\mathbf{a}$ is
+\[\mathbf{F}(\mathbf{x}) \approx \mathbf{F}(\mathbf{a}) + \nabla \mathbf{F}(\mathbf{a}) \cdot (\mathbf{x} - \mathbf{a}),\]
+and the second-order approximation of $f$ near $\mathbf{a}$ is
+\[\mathbf{F}(\mathbf{x}) \approx \mathbf{F}(\mathbf{a}) + \nabla \mathbf{F}(\mathbf{a}) \cdot (\mathbf{x} - \mathbf{a}) + \frac{1}{2}(\mathbf{x} - \mathbf{a})^\top H(\mb{F})(\mb{a})(\mathbf{x} - \mathbf{a}).\]
 The linearization of $f$ near $\mathbf{a}$ is
 \[\mathbf{L}(\mathbf{x})= \mathbf{F}(\mathbf{a}) + \nabla \mathbf{F}(\mathbf{a}) \cdot (\mathbf{x} - \mathbf{a}).\]
+\sssc{Definiteness (正定性)}
+\bit
+\item Positive definite: We say the Hessian $H(\mb{F})$ of $\mb{F}$ at $\mb{a}$ is positive definite if the second derivative term in Taylor series is positive for all inifinisimal changes $\delta\mb{x}$ near $\mb{a}$, that is,
+\[(\delta\mb{x})^\top H(\mb{F})(\mb{a})\delta\mb{x}>0,\quad\forall \delta\mb{x}.\]
+\item Negative definite: We say the Hessian $H(\mb{F})$ of $\mb{F}$ at $\mb{a}$ is positive definite if the second derivative term in Taylor series is negative for all inifinisimal changes $\delta\mb{x}$ near $\mb{a}$, that is,
+\[(\delta\mb{x})^\top H(\mb{F})(\mb{a})\delta\mb{x}<0,\quad\forall \delta\mb{x}.\]
+\item Neutral semidefinite: We say the Hessian $H(\mb{F})$ of $\mb{F}$ at $\mb{a}$ is zero semidefinite if the second derivative term in Taylor series is zero for all inifinisimal changes $\delta\mb{x}$ near $\mb{a}$, that is,
+\[(\delta\mb{x})^\top H(\mb{F})(\mb{a})\delta\mb{x}=0,\quad\forall \delta\mb{x}.\]
+\item Nonnegative semidefinite: We say the Hessian $H(\mb{F})$ of $\mb{F}$ at $\mb{a}$ is nonnegative semidefinite if the second derivative term in Taylor series is nonnegative for all inifinisimal changes $\delta\mb{x}$ near $\mb{a}$ but not all positive, that is,
+\[(\delta\mb{x})^\top H(\mb{F})(\mb{a})\delta\mb{x}\geq 0,\quad\forall \delta\mb{x},\quad\land\]
+\[(\delta\mb{x})^\top H(\mb{F})(\mb{a})\delta\mb{x}=0,\quad\exists \delta\mb{x}.\]
+\item Nonpositive semidefinite: We say the Hessian $H(\mb{F})$ of $\mb{F}$ at $\mb{a}$ is nonpositive semidefinite if the second derivative term in Taylor series is nonpositive for all inifinisimal changes $\delta\mb{x}$ near $\mb{a}$ but not all negative, that is,
+\[(\delta\mb{x})^\top H(\mb{F})(\mb{a})\delta\mb{x}\leq 0,\quad\forall \delta\mb{x},\quad\land\]
+\[(\delta\mb{x})^\top H(\mb{F})(\mb{a})\delta\mb{x}=0,\quad\exists \delta\mb{x}.\]
+\item Indefinite: We say the Hessian $H(\mb{F})$ of $\mb{F}$ at $\mb{a}$ is indefinite if it is neither definite nor semidefinite.
+\eit
 \ssc{Line integral (線積分) or Path integral (路徑積分)}
 \sssc{Scalar field line or path integral}
 For a scalar field $A : \,U\subseteq \mathbb {R} ^{n}\to \mathbb {R}$ and the path $C \in U$, the line integral of $A$ is: 
@@ -1187,6 +1211,12 @@ Let $f\colon D\subseteq X\to\bbR$ be a function with $X$ being a topological spa
 Let $f\colon D\subseteq X\to\bbR$ be a function with $X$ being a topological space. It is said that a relative minimum (相對極小值) or minimum (極小值) \( f(c) \) of \(f\) occurs at $c\in D$ if there exists an open subset $I\ni c$ of $X$ such that \( \forall x\in I\cap D\colon f(c) \leq f(x) \).
 
 Relative maximum and relative minimum are collectively called relative extreme.
+
+Let $f\colon D\subseteq X\to\bbR$ be a function with $X$ being a topological space. It is said that a strict relative maximum or strict maximum \( f(c) \) of \(f\) occurs at $c\in D$ if there exists an open subset $I\ni c$ of $X$ such that \( \forall x\in I\cap D\colon f(c) > f(x) \).
+
+Let $f\colon D\subseteq X\to\bbR$ be a function with $X$ being a topological space. It is said that a strict relative minimum or strict minimum \( f(c) \) of \(f\) occurs at $c\in D$ if there exists an open subset $I\ni c$ of $X$ such that \( \forall x\in I\cap D\colon f(c) < f(x) \).
+
+Strict relative maximum and strict relative minimum are collectively called strict relative extreme.
 \sssc{Absolute extremum (絕對極值 or 最值) or global extremum (全域極值)}
 Let $f\colon D\to\bbR$ be a function. It is said that a absolute maximum (絕對極大值 or 最大值) \( f(c) \) of \(f\) occurs at $c\in D$ if \( \forall x\in D\colon f(c) \geq f(x) \).
 
@@ -1301,10 +1331,12 @@ Let functions $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ be differentiable on a
     Other statements can be proved similarly.
 \end{proof}
 \sssc{First Derivative Test for Local Extrema Theorem}
-Let $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ be a function, $c$ be a critical point of $f$, and $f$ be continuous on some open interval $J\subseteq I$ with $c\in J$.
+Let $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ be a function, $c$ be a critical point of $f$, and $f'$ be continuous at $c$.
 \bit
-\item If exist $a<c<b$ such that $f'(c)>0$ for any $x\in (a,c)$ and $f'(c)<0$ for any $x\in (c,b)$, then $f$ has a local maximum at $c$.
-\item If exist $a<c<b$ such that $f'(c)<0$ for any $x\in (a,c)$ and $f'(c)>0$ for any $x\in (c,b)$, then $f$ has a local minimum at $c$.
+\item If exist $a<c<b$ such that $f'(c)>0$ for any $x\in (a,c)$ and $f'(c)<0$ for any $x\in (c,b)$, then $f$ has a strict local maximum at $c$.
+\item If exist $a<c<b$ such that $f'(c)\geq 0$ for any $x\in (a,c)$ and $f'(c)\leq 0$ for any $x\in (c,b)$, then $f$ has a local maximum at $c$.
+\item If exist $a<c<b$ such that $f'(c)<0$ for any $x\in (a,c)$ and $f'(c)>0$ for any $x\in (c,b)$, then $f$ has a strict local minimum at $c$.
+\item If exist $a<c<b$ such that $f'(c)\leq 0$ for any $x\in (a,c)$ and $f'(c)\geq 0$ for any $x\in (c,b)$, then $f$ has a local minimum at $c$.
 \item If exist $a<c<b$ such that $f'(c)>0$ for any $x\in (a,b)$, then $f$ has no local exteme at $c$.
 \item If exist $a<c<b$ such that $f'(c)<0$ for any $x\in (a,b)$, then $f$ has no local ext
 eme at $c$.
@@ -1312,6 +1344,27 @@ eme at $c$.
 \begin{proof}
     By definitions and the Increasing/Decreasing Test Theorem, it is obvious.
 \end{proof}
+\sssc{Eigenvalues Test of Definiteness for Symmetric Hessians}
+If a Hessian $H$ of a scalar field is symmetric, that is,
+\[H=H^\top,\]
+then:
+\bit
+\item $H$ is positive definte if $\lambda>0$ for all eigenvalues $\lambda$ of $H$.
+\item $H$ is negative definte if $\lambda<0$ for all eigenvalues $\lambda$ of $H$.
+\item $H$ is nonnegative semidefinte if $\lambda\geq 0$ for all eigenvalues $\lambda$ of $H$.
+\item $H$ is nonpositive semidefinte if $\lambda\leq 0$ for all eigenvalues $\lambda$ of $H$.
+\item $H$ is neutral semidefinte if $\lambda=0$ for all eigenvalues $\lambda$ of $H$.
+\item $H$ is indefinte if none of above conditions is true.
+\eit
+\sssc{Second Derivative Test for Local Extrema Theorem}
+Let $f\colon I\subseteq\mathbb{R}^n\to\mathbb{R}$ be a function, $c$ be a critical point of $f$, and $f$ be twice differentiable at $c$.
+\bit
+\item If $f''$ is negative definite, then $f$ has a strict local maximum at $c$.
+\item If $f''$ is nonpositive definite, then $f$ has a local maximum at $c$.
+\item If $f''$ is positive definite, then $f$ has a strict local minimum at $c$.
+\item If $f''$ is nonnegative definite, then $f$ has a local minimum at $c$.
+\item If $f''$ is indefinite, then $f$ has no local exteme at $c$.
+\eit
 \sssc{Concavity (凹性)}
 Let $V$ be a vector space and function $f\colon J\subseteq V\to\bbR$ be continuous on a convex set $I\subseteq J$.
 \bit

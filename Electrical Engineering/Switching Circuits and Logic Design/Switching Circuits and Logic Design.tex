@@ -615,7 +615,7 @@ One can simplify a Boolean function to minimal POS form by:
 \item taking dual of it.
 \een
 \sssc{Incompletely Specified Boolean Functions (ISF) or Don't-care Functions}
-An incompletely specified function (ISF) or a don't-care function is a Boolean function but in which for some input combinations, the output is not defined or irrelevant. Those input combinations are called don't-care conditions, sometimes denoted as $d$, and their outputs are sometimes written as $X$, denoting don't care. The definition of ON-set and OFF-set of an ISF is the same as completely specified function; the Don't-Care set or DC-set of an ISF is the set of all don't-care conditions.
+An incompletely specified function (ISF) or a don't-care function is a Boolean function but in which for some input combinations, the output is not defined or irrelevant. Those input combinations are called don't-care conditions, sometimes denoted as $d$. The definition of ON-set and OFF-set of an ISF is the same as completely specified function; the Don't-Care set or DC-set of an ISF is the set of all don't-care conditions.
 
 The output for the don't-care conditions can be assigned either $0$ or $1$ such that the minimal SOP (or POS) forms have the fewest terms.
 
@@ -650,7 +650,7 @@ A K map for a $4$-variable Boolean function $f(A,B,C,D)$ is
 \multicolumn{1}{c|}{\thead{11}} & $f(0,0,1,1)$ & $f(0,1,1,1)$ & $f(1,1,1,1)$ & $f(1,0,1,1)$ \\\cline{2-5}
 \multicolumn{1}{c|}{\thead{10}} & $f(0,0,1,0)$ & $f(0,1,1,0)$ & $f(1,1,1,0)$ & $f(1,0,1,0)$ \\\cline{2-5}
 \end{longtable}
-If the ouput of the input combination of a cell is $1$, we write $1$ in that cell; if the ouput of the input combination of a cell is $0$, we can leave that cell empty or write $0$ in that cell; if the input combination of a cell is a don't care condition, we write $X$ in that cell.
+If the ouput of the input combination of a cell is $1$, we write $1$ in that cell; if the ouput of the input combination of a cell is $0$, we can leave that cell empty or write $0$ in that cell; if the input combination of a cell is a don't care condition, we write $d$ in that cell.
 
 The order 00, 01, 11, 10 is the gray code order, which is such that adjacent cells in the K-map differ by only one variable.
 
@@ -658,7 +658,7 @@ The notation of a cell is the input combination of that cell (thus a binary numb
 \sssc{Groups of 1s}
 The first step of simplifying a Boolean function using K-maps is grouping 1s (minterms).
 
-A group is a rectangle of $2^m\times 2^n$ cells that are either $1$ (minterm) or $X$ (don't-care condition), in which $m,n\in\mathbb{N}_0$, the leftmost and rightmost columns are horizontally adjacent, and the top and bottom rows are vertically adjacent. Cells can be in multiple groups.
+A group is a rectangle of $2^m\times 2^n$ cells that are either $1$ (minterm) or $d$ (don't-care condition), in which $m,n\in\mathbb{N}_0$, the leftmost and rightmost columns are horizontally adjacent, and the top and bottom rows are vertically adjacent. Cells can be in multiple groups.
 
 Each group represents an implicant of $f$ by the following rules:
 \ben
@@ -691,7 +691,7 @@ $A$ & \multicolumn{1}{c|}{\thead{01}} & \backslashbox{$f(1,0,0,0,1)$}{$f(0,0,0,0
 \backslashbox{$1$}{$0$} & \multicolumn{1}{c|}{\thead{11}} & \backslashbox{$f(1,0,0,1,1)$}{$f(0,0,0,1,1)$} & \backslashbox{$f(1,0,1,1,1)$}{$f(0,0,1,1,1)$} & \backslashbox{$f(1,1,1,1,1)$}{$f(0,1,1,1,1)$} & \backslashbox{$f(1,1,0,1,1)$}{$f(0,1,0,1,1)$} \\\cline{3-6}
 & \multicolumn{1}{c|}{\thead{10}} & \backslashbox{$f(1,0,0,1,0)$}{$f(0,0,0,1,0)$} & \backslashbox{$f(1,0,1,1,0)$}{$f(0,0,1,1,0)$} & \backslashbox{$f(1,1,1,1,0)$}{$f(0,1,1,1,0)$} & \backslashbox{$f(1,1,0,1,0)$}{$f(0,1,0,1,0)$} \\\cline{3-6}
 \end{longtable}}
-in which the adjacency between cells in the same layer of four-variable K-map is the same as that in four-variable K-map; the upper and lower triangles in the same square are adjacent; and a group is a cuboid of $2^l\times 2^m\times 2^n$ cells that are either $1$ (minterm) or $X$ (don't-care condition), in which $l,m,n\in\mathbb{N}_0$.
+in which the adjacency between cells in the same layer of four-variable K-map is the same as that in four-variable K-map; the upper and lower triangles in the same square are adjacent; and a group is a cuboid of $2^l\times 2^m\times 2^n$ cells that are either $1$ (minterm) or $d$ (don't-care condition), in which $l,m,n\in\mathbb{N}_0$.
 \sssc{For minimal POS form}
 To find a minimal POS form of a function $f$, we can use K-map to find a minimal SOP form of $f'$, and change all literals to its inverse, all AND to OR, and all OR to AND.
 \section{Digital Systems and Switching Circuits}
