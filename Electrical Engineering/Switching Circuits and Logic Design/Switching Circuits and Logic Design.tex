@@ -615,7 +615,7 @@ One can simplify a Boolean function to minimal POS form by:
 \item taking dual of it.
 \een
 \ssc{Incompletely Specified Boolean Functions (ISF) or Don't-care Functions}
-An incompletely specified function (ISF) or a don't-care function is a Boolean function but in which for some input combinations, the output is not defined or irrelevant. Those input combinations are called don't-care conditions. The definition of ON-set and OFF-set of an ISF is the same as completely specified function; the Don't-Care set or DC-set of an ISF is the set of all don't-care conditions.
+An incompletely specified function (ISF) or a don't-care function is a Boolean function but in which for some input combinations, the output is not defined or irrelevant, often denoted as $X$. Those input combinations are called don't-care conditions. The definition of ON-set and OFF-set of an ISF is the same as completely specified function; the Don't-Care set or DC-set of an ISF is the set of all don't-care conditions.
 
 The output for the don't-care conditions can be assigned either $0$ or $1$ such that the minimal SOP (or POS) forms have the fewest terms.
 
@@ -626,7 +626,7 @@ and similar to maxterm expansion as
 where each $d_i$ is called a don't-care terms.
 \ssc{Karnaugh Maps}
 A Karnaugh Map, aka a K-map, is a grid that visualize the ways to simplify a completely or incompletely specified Boolean function to a minimal SOP form.
-\sssc{Drawing Karnaugh Maps of less than five variables}
+\sssc{Draw Karnaugh Maps of less than five variables}
 A K-map for a $2$-variable Boolean function $f(A,B)$ is
 \begin{longtable}[c]{c|c|c|}
 \multicolumn{1}{c}{\thead{\backslashbox{$B$}{$A$}}} & \multicolumn{1}{c}{\thead{0}} & \multicolumn{1}{c}{\thead{1}} \\\cline{2-3}
@@ -651,15 +651,15 @@ A K map for a $4$-variable Boolean function $f(A,B,C,D)$ is
 \multicolumn{1}{c|}{\thead{11}} & $f(0,0,1,1)$ & $f(0,1,1,1)$ & $f(1,1,1,1)$ & $f(1,0,1,1)$ \\\cline{2-5}
 \multicolumn{1}{c|}{\thead{10}} & $f(0,0,1,0)$ & $f(0,1,1,0)$ & $f(1,1,1,0)$ & $f(1,0,1,0)$ \\\cline{2-5}
 \end{longtable}
-If the ouput of the input combination of a cell is $1$, we write $1$ in that cell; if the ouput of the input combination of a cell is $0$, we can leave that cell empty or write $0$ in that cell; if the input combination of a cell is a don't care condition, we write $-$ in that cell.
+If the ouput of the input combination of a cell is $1$, we write $1$ in that cell; if the ouput of the input combination of a cell is $0$, we can leave that cell empty or write $0$ in that cell; if the input combination of a cell is a don't care condition, we write $X$ in that cell.
 
 The order 00, 01, 11, 10 is the gray code order, which is such that adjacent cells in the K-map differ by only one variable.
 
 The notation of a cell is the input combination of that cell (thus a binary number), called binary notation, or the decimal integer in BCD representated by the input combination of that cell, called decimal notation.
-\sssc{Groups of 1s}
-The first step of simplifying a Boolean function using K-maps is grouping 1s (minterms).
+\sssc{Group 1's}
+The first step of simplifying a Boolean function using K-maps is grouping 1's (minterms).
 
-A group is a rectangle of $2^m\times 2^n$ cells that are either $1$ (minterm) or $-$ (don't-care condition), in which $m,n\in\mathbb{N}_0$, the leftmost and rightmost columns are horizontally adjacent, and the top and bottom rows are vertically adjacent. Cells can be in multiple groups.
+A group is a rectangle of $2^m\times 2^n$ cells that are either $1$ (minterm) or $X$ (don't-care condition), in which $m,n\in\mathbb{N}_0$, the leftmost and rightmost columns are horizontally adjacent, and the top and bottom rows are vertically adjacent. Cells can be in multiple groups.
 
 Each group represents an implicant of $f$ by the following rules:
 \ben
@@ -667,21 +667,14 @@ Each group represents an implicant of $f$ by the following rules:
 \item Let the set of all input variables that are $0$ in all cells in the group be $Z$.
 \item The implicant represented by that group is $\prod_{o\in O}o\prod_{z\in Z}z'$.
 \een
-\sssc{Allowed collections of groups}
+\sssc{Select collections of groups}
 An allowed collection of groups must follow the following rules:
 \bit
 \item Any $1$ must be in at least one group.
-\item If any group $g$ is completely covered by another group following the above rules, $g$ must not be chosen, that is, a group chosen must represent a prime implicant.
 \item If any $1$ is only covered by one possible group, then that group must be chosen, that is, any group representing an essential prime implicant must be chosen.
+\item If any group $g$ is completely covered by another group, $g$ must not be chosen, that is, a group chosen must represent a prime implicant.
 \eit
-\sssc{Constructing minimal SOP form}
-Find an allowed collection of groups that contains the fewest groups, the sum of the implicants represented by them is a minimal SOP form of the given function.
-\sssc{Workflow}
-\ben
-\item Draw K-map.
-\item Find all groups representing essential prime implicants.
-\item Find an allowed collection of groups that contains the fewest groups and construct the minimal SOP form.
-\een
+Find the allowed collections of groups that contain the fewest groups. For each one of them, the sum of the implicants corresponding to the groups in it is a minimal SOP form of the given function.
 \sssc{Five-variable Karnaugh Maps}
 One way of drawing a five-variable K-map is by placing one four-variable K-map on top of another, that is, for a $5$-variable Boolean function $f(A,B,C,D,E)$, the K-map is
 {\fontsize{8pt}{12pt}\selectfont
@@ -692,13 +685,73 @@ $A$ & \multicolumn{1}{c|}{\thead{01}} & \backslashbox{$f(1,0,0,0,1)$}{$f(0,0,0,0
 \backslashbox{$1$}{$0$} & \multicolumn{1}{c|}{\thead{11}} & \backslashbox{$f(1,0,0,1,1)$}{$f(0,0,0,1,1)$} & \backslashbox{$f(1,0,1,1,1)$}{$f(0,0,1,1,1)$} & \backslashbox{$f(1,1,1,1,1)$}{$f(0,1,1,1,1)$} & \backslashbox{$f(1,1,0,1,1)$}{$f(0,1,0,1,1)$} \\\cline{3-6}
 & \multicolumn{1}{c|}{\thead{10}} & \backslashbox{$f(1,0,0,1,0)$}{$f(0,0,0,1,0)$} & \backslashbox{$f(1,0,1,1,0)$}{$f(0,0,1,1,0)$} & \backslashbox{$f(1,1,1,1,0)$}{$f(0,1,1,1,0)$} & \backslashbox{$f(1,1,0,1,0)$}{$f(0,1,0,1,0)$} \\\cline{3-6}
 \end{longtable}}
-in which the adjacency between cells in the same layer of four-variable K-map is the same as that in four-variable K-map; the upper and lower triangles in the same square are adjacent; and a group is a cuboid of $2^l\times 2^m\times 2^n$ cells that are either $1$ (minterm) or $-$ (don't-care condition), in which $l,m,n\in\mathbb{N}_0$.
-\sssc{Map-entered variable (MEV)}
-Map-Entered Variable (MEV) simplification is an extension of Karnaugh maps used to simplify Boolean functions with many variables — typically more than four — by allowing some variables to be entered as symbols or expressions inside the K-map cells rather than expanding the map's dimensions.
-
-Suppose we have an $n$-variable Boolean function. The method of one MEV is as follows.
+in which the adjacency between cells in the same layer of four-variable K-map is the same as that in four-variable K-map; the upper and lower triangles in the same square are adjacent; and a group is a cuboid of $2^l\times 2^m\times 2^n$ cells that are either $1$ (minterm) or $X$ (don't-care condition), in which $l,m,n\in\mathbb{N}_0$.
+\ssc{Map-entered variable (MEV) or Variable entered map (VEM) method}
+Map-Entered Variable (MEV), aka variable entered map (VEM), simplification is an extension of Karnaugh maps used to simplify Boolean functions with typically more than four variables by allowing some variables to be entered as symbols or expressions inside the K-map cells rather than expanding the map's dimensions.
+\sssc{Single MEV}
+Suppose we have an $n$-variable (usually five-variable) completely or incompletely specified Boolean function $f$ with $E$ being one of the input variable of $f$ and being the MEV.
 \ben
-\item Draw
+\item Draw a $(n-1)$-variable K-map for input variables except $E$. In each cell, let the $n-1$-variable input combination corresponding to the cell be $P$:
+\bit
+\item If both $f(P,E)=f(P,E')=X$, enter $X$.
+\item If $f(P,E)=1$ and $f(P,E')=0$, enter $E$.
+\item If $f(P,E)=0$ and $f(P,E')=1$, enter $E'$.
+\item If $f(P,E)=f(P,E')=1$, enter $1$.
+\item If $f(P,E)=1$ and $f(P,E')=X$, enter $1$.
+\item If $f(P,E)=X$ and $f(P,E')=1$, enter $1$.
+\item If $f(P,E)=0=f(P,E')=0$, enter $0$.
+\item If $f(P,E)=0$ and $f(P,E')=X$, enter $0$.
+\item If $f(P,E)=X$ and $f(P,E')=0$, enter $0$.
+\eit
+That is, let the set of products of $n-1$ literals that corresponding to a $1$ cell be $\mathcal{O}$, the set of products of $n-1$ literals that corresponding to a $E$ cell be $\mathcal{E}$, the set of products of $n-1$ literals that corresponding to a $E'$ cell be $\mathcal{C}$, and the set of products of $n-1$ literals that corresponding to a $X$ cell be $\mathcal{X}$, we write $f$ as:
+\[f=\sum m(i\mid m_i\mathcal{O})+E\sum m(i\mid m_i\in\mathcal{E})+E'\sum m(i\mid m_i\in\mathcal{C})+\sum d(i\mid m_i\in\mathcal{X}),\]
+where $m_i$ is minterms in $(n-1)$-variable truth tables.
+\item Group 1's in same way as K-map, that is, $1$ and $X$ are allowed in a group. Each such group corresponding to a $(n-1)$-variable implicant.
+\item Group $E$s in same way as K-map except replacing $1$ with $E$ and $X$ with $1$ and $X$, that is, $E$, $1$, and $X$ are allowed in a group. Each such group corresponding to a $n$-variable implicant with $E$ be one of the literals
+\item Group $E'$s in same way as K-map except replacing $1$ with $E'$ and $X$ with $1$ and $X$, that is, $E'$, $1$, and $X$ are allowed in a group. Each such group corresponding to a $n$-variable implicant with $E'$ be one of the literals.
+\item An allowed collection of groups must follow the following rules:
+\bit
+\item Any $1$, $E$, or $E'$ must be in at least one group.
+\item If any $1$, $E$, or $E'$ is only covered by one possible group, then that group must be chosen, that is, any group representing an essential prime implicant must be chosen.
+\item If any group $g$ is completely covered by another group, $g$ must not be chosen, that is, a group chosen must represent a prime implicant.
+\eit
+\item Find the allowed collections of groups that contain the fewest groups. For each one of them, the sum of the implicants corresponding to the groups in it is a minimal SOP form of the given function.
+\eit
+\sssc{Two MEVs}
+Suppose we have an $n$-variable (usually six-variable) completely or incompletely specified Boolean function $f$ with $E$ and $F$  being two of the input variables of $f$ and being the MEVs.
+\ben
+\item Draw a $(n-2)$-variable K-map for input variables except $E$ and $F$. In each cell, let the $(n-2)$-variable input combination corresponding to the cell be $P$:
+
+wait
+\bit
+\item If both $f(P,E)=f(P,E')=X$, enter $X$.
+\item If $f(P,E)=1$ and $f(P,E')=0$, enter $E$.
+\item If $f(P,E)=0$ and $f(P,E')=1$, enter $E'$.
+\item If $f(P,E)=f(P,E')=1$, enter $1$.
+\item If $f(P,E)=1$ and $f(P,E')=X$, enter $1$.
+\item If $f(P,E)=X$ and $f(P,E')=1$, enter $1$.
+\item If $f(P,E)=0=f(P,E')=0$, enter $0$.
+\item If $f(P,E)=0$ and $f(P,E')=X$, enter $0$.
+\item If $f(P,E)=X$ and $f(P,E')=0$, enter $0$.
+\eit
+That is, let the set of products of $n-1$ literals that corresponding to a $1$ cell be $\mathcal{O}$, the set of products of $n-1$ literals that corresponding to a $E$ cell be $\mathcal{E}$, the set of products of $n-1$ literals that corresponding to a $E'$ cell be $\mathcal{C}$, and the set of products of $n-1$ literals that corresponding to a $X$ cell be $\mathcal{X}$, we write $f$ as:
+\[f=\sum m(i\mid m_i\mathcal{O})+E\sum m(i\mid m_i\in\mathcal{E})+E'\sum m(i\mid m_i\in\mathcal{C})+\sum d(i\mid m_i\in\mathcal{X}),\]
+where $m_i$ is minterms in $(n-1)$-variable truth tables.
+\item Group 1's in same way as K-map, that is, $1$ and $X$ are allowed in a group. Each such group corresponding to a $(n-1)$-variable implicant.
+\item Group $E$s in same way as K-map except replacing $1$ with $E$ and $X$ with $1$ and $X$, that is, $E$, $1$, and $X$ are allowed in a group. Each such group corresponding to a $n$-variable implicant with $E$ be one of the literals
+\item Group $E'$s in same way as K-map except replacing $1$ with $E'$ and $X$ with $1$ and $X$, that is, $E'$, $1$, and $X$ are allowed in a group. Each such group corresponding to a $n$-variable implicant with $E'$ be one of the literals.
+\item An allowed collection of groups must follow the following rules:
+\bit
+\item Any $1$, $E$, or $E'$ must be in at least one group.
+\item If any $1$, $E$, or $E'$ is only covered by one possible group, then that group must be chosen, that is, any group representing an essential prime implicant must be chosen.
+\item If any group $g$ is completely covered by another group, $g$ must not be chosen, that is, a group chosen must represent a prime implicant.
+\eit
+\item Find the allowed collections of groups that contain the fewest groups. For each one of them, the sum of the implicants corresponding to the groups in it is a minimal SOP form of the given function.
+\eit
+
+
+
+
 
 
 \ssc{Quine-McCluskey Method}
