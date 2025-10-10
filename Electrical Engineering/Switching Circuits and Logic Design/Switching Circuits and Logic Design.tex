@@ -614,7 +614,7 @@ One can simplify a Boolean function to minimal POS form by:
 \item simplifying it to minimal SOP form, and
 \item taking dual of it.
 \een
-\sssc{Incompletely Specified Boolean Functions (ISF) or Don't-care Functions}
+\ssc{Incompletely Specified Boolean Functions (ISF) or Don't-care Functions}
 An incompletely specified function (ISF) or a don't-care function is a Boolean function but in which for some input combinations, the output is not defined or irrelevant. Those input combinations are called don't-care conditions. The definition of ON-set and OFF-set of an ISF is the same as completely specified function; the Don't-Care set or DC-set of an ISF is the set of all don't-care conditions.
 
 The output for the don't-care conditions can be assigned either $0$ or $1$ such that the minimal SOP (or POS) forms have the fewest terms.
@@ -622,7 +622,8 @@ The output for the don't-care conditions can be assigned either $0$ or $1$ such 
 An ISF $f$ with ON-set $S$, OFF-set $T$, and DC-set $D$ is sometimes written similar to minterm expansion as
 \[f=\sum m(i\in S)+\sum d(i\in D),\]
 and similar to maxterm expansion as
-\[f=\prod M(i\in T)+\prod d(i\in D).\]
+\[f=\prod M(i\in T)+\prod d(i\in D),\]
+where each $d_i$ is called a don't-care terms.
 \ssc{Karnaugh Maps}
 A Karnaugh Map, aka a K-map, is a grid that visualize the ways to simplify a completely or incompletely specified Boolean function to a minimal SOP form.
 \sssc{Drawing Karnaugh Maps of less than five variables}
@@ -692,8 +693,14 @@ $A$ & \multicolumn{1}{c|}{\thead{01}} & \backslashbox{$f(1,0,0,0,1)$}{$f(0,0,0,0
 & \multicolumn{1}{c|}{\thead{10}} & \backslashbox{$f(1,0,0,1,0)$}{$f(0,0,0,1,0)$} & \backslashbox{$f(1,0,1,1,0)$}{$f(0,0,1,1,0)$} & \backslashbox{$f(1,1,1,1,0)$}{$f(0,1,1,1,0)$} & \backslashbox{$f(1,1,0,1,0)$}{$f(0,1,0,1,0)$} \\\cline{3-6}
 \end{longtable}}
 in which the adjacency between cells in the same layer of four-variable K-map is the same as that in four-variable K-map; the upper and lower triangles in the same square are adjacent; and a group is a cuboid of $2^l\times 2^m\times 2^n$ cells that are either $1$ (minterm) or $-$ (don't-care condition), in which $l,m,n\in\mathbb{N}_0$.
-\sssc{For minimal POS form}
-To find a minimal POS form of a function $f$, we can use K-map to find a minimal SOP form of $f'$, and change all literals to its inverse, all AND to OR, and all OR to AND.
+\sssc{Map-entered variable (MEV)}
+Map-Entered Variable (MEV) simplification is an extension of Karnaugh maps used to simplify Boolean functions with many variables — typically more than four — by allowing some variables to be entered as symbols or expressions inside the K-map cells rather than expanding the map's dimensions.
+
+Suppose we have an $n$-variable Boolean function. The method of one MEV is as follows.
+\ben
+\item Draw
+
+
 \ssc{Quine-McCluskey Method}
 The Quine-McCluskey method (along with the Petrick's method) is a systematic procedure to find the minimal SOP forms of a completely or incompletely specified Boolean function. Below, we first discuss about completely specified Boolean function.
 \sssc{Minterm expansion}
@@ -825,6 +832,11 @@ Each term in reduced $P$ represents a solution, that is, a set of prime implican
 For $f$: $P_2$ is the only term in reduced $P$, thus the only minimal SOP form is 
 \[f=P_2=b'c'+cd'+a'bd.\]
 \sssc{Incompletely specified Boolean functions}
+For incompletely specified Boolean functions, we do the following change to the process for completely specified Boolean functions:
+\ben
+\item Treat don't-care terms as minterms when grouping minterm.
+\item Omit don't-care terms columns when creating the prime implicant chart.
+\een
 
 
 
