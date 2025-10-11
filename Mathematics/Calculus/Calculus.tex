@@ -336,6 +336,10 @@ For a function $f$ with domain $U\subseteq\mathbb{R}$ and a point $a\in U$ that 
 \item\tb{Type I discontinuity}: A discontinuity of $f$ that is either a removable discontinuity or a jump discontinuity is called a type I discontinuity of $f$.
 \item\tb{Essential (本質) discontinuity or type II discontinuity}: A discontinuity of $f$ that is not a type I discontinuity is called an essential discontinuity or a type II discontinuity of $f$.
 \eit
+\sssc{Removable discontinuity of functions between topological spaces}
+Let $f\colon I\subseteq X\to Y$ be a function where $X$ and $Y$ are topological spaces. We say that $f(a)$ is a removable discontinuity of $f$ iff $f$ is discontinuous at $a$ and there exists $L\in Y$ such that the function
+\[g(x)=\begin{cases}L,\quad&x=a\\f(x),\quad&x\in I\setminus\{a\}\end{cases}\]
+is continuous at $a$. A discontinuity that is not a removable discontinuity is called a non-removable discontinuity.
 \sssc{Singularity or singular point (奇點)}
 A point is a singularity or a singular point of a function $f$ if it is in the closure of its domain but not in its domain, or it is a discontinuity of $f$.
 \sssc{Arithmetic Laws}
@@ -890,42 +894,6 @@ The Bochner space $L^p(E;X)$ with $p\in\mathbb{N}\cup\{\infty\}$ is defined to b
 and
 \[\|f(t)\|_{L^{\infty }(E;X)}\coloneq\operatorname{ess\,sup}_{t\in E}\|f(t)\|_{X},\]
 is finite under the equivalence relation of equality almost everywhere.
-\ssc{Fundamental theorem of calculus (FTC) (微積分基本定理) of real functions}
-Below is the FTC for functions from a subset of $\mathbb{R}$ to $\mathbb{R}$.
-\sssc{The First Theorem}
-Let $F(x)$ be a function differentiable on $[a,b]$. Then:
-\[\int_a^bF'(x)\dd{x}=F(b)-F(a).\]
-\begin{proof}
-PLACEHOLDER: Change to Lebesgue integral
-By the definition of the Riemann integral:
-\[
-\int_a^b F'(x)\, \dd{x} = \lim_{n \to \infty} \sum_{i=1}^n F'(x_i^*) \Delta x_i,
-\]
-where \( \{x_i^*\} \) are sample points in the subintervals of a partition \( P = \{x_0, x_1, \dots, x_n\} \) of \([a, b]\), and \( \Delta x_i = x_i - x_{i-1} \).
-By the Mean Value Theorem for derivatives, since \( F(x) \) is differentiable, there exists an adequately refined partition \( P = \{x_0, x_1, \dots, x_n\} \) such that on each subinterval \([x_{i-1}, x_i]\) there exists a point \( x_i^* \in [x_{i-1}, x_i] \) such that:
-\[
-F'(x_i^*) \cdot \Delta x_i = F(x_i) - F(x_{i-1}).
-\]
-Thus, the Riemann sum becomes:
-\[
-\sum_{i=1}^n F'(x_i^*) \Delta x_i = \sum_{i=1}^n \left(F(x_i) - F(x_{i-1})\right) = F(b) - F(a).
-\]
-\end{proof}
-\sssc{The Second Theorem}
-Let $f(x)$ be a function continuous on $[a,b]$. Then:
-\[\dv{x}\int_a^xf(t)\dd{t}=f(x).\]
-\begin{proof}
-\[\dv{x}\qty(\int_a^xf(t)\,\dd{t})=\lim_{h\to 0}\frac{\int_a^{x+h}f(t)\,\dd{t}-\int_a^xf(t)\,\dd{t}}{h}\]
-Using the additivity property of integrals:
-\[\int_a^{x+h}f(t)\,\dd{t}-\int_a^xf(t)\,\dd{t}=\int_x^{x+h}f(t)\,\dd{t}\]
-By the Mean Value Theorem for integrals, since \(f(t)\) is continuous on \([x,x+h]\), there exists a point \(c\in [x,x+h]\) such that:
-\[\int_x^{x+h} f(t)\, \dd{t} = f(c) \cdot h.\]
-Substituting into the difference quotient:
-\[\frac{\int_x^{x+h}f(t)\,\dd{t}}{h} = f(c).\]
-\[\lim_{h\to 0}\frac{\int_x^{x+h}f(t)\,\dd{t}}{h} = f(x).\]
-\end{proof}
-\ssc{Fundamental theorem of calculus of Banach-space valued functions}
-PLACEHOLDER
 
 
 
@@ -1311,7 +1279,7 @@ We claim that there must be $c\in (a,b)$ such that $M=f(c)$ or $m=f(c)$. Argue b
 By Fermat's Theorem,
 \[f'(c)=0.\]
 \end{proof}
-\sssc{Mean Value Theorem (MVT) (均值定理)}
+\sssc{Mean Value Theorem (MVT) (均值定理) (for Derivatives)}
 Let function $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ be continuous on an interval $[a, b]\subseteq I$ and differentiable on $(a,b)$ with $a<b$, then
 \[\exists c\in (a, b)\text{\ s.t.\ }f'(c)=\frac{f(b)-f(a)}{b-a}.\]
 \begin{proof}\mbox{}
@@ -1347,30 +1315,32 @@ By MVT, there exists $c\in(a,x)$ such that
 The second statement can be proven similarly.
 \end{proof}
 \sssc{Increasing/Decreasing Test (I/D Test) Theorem}
-Let functions $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ be differentiable on an interval $J\subseteq I$.
+Let $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ be function.
 \bit
-\item If $f'(x)>0$ for any $x\in J$, then $f$ is strictly increasing on $J$.
-\item If $f'(x)<0$ for any $x\in J$, then $f$ is strictly decreasing on $J$.
-\item If $f'(x)\geq 0$ for any $x\in J$, then $f$ is non-decreasing on $J$.
-\item If $f'(x)\leq 0$ for any $x\in J$, then $f$ is non-increasing on $J$.
+\item If $f'(x)>0$ for any $x\in (a,b)$, then $f$ is strictly increasing on $(a,b)$.
+\item If $f'(x)>0$ for any $x\in (a,b)$ and $f$ is continuous on $[a,b)$, then $f$ is strictly increasing on $[a,b)$.
+\item If $f'(x)>0$ for any $x\in (a,b)$ and $f$ is continuous on $(a,b]$, then $f$ is strictly increasing on $(a,b]$.
+\item If $f'(x)<0$ for any $x\in (a,b)$, then $f$ is strictly decreasing on $(a,b)$.
+\item If $f'(x)<0$ for any $x\in (a,b)$ and $f$ is continuous on $[a,b)$, then $f$ is strictly decreasing on $[a,b)$.
+\item If $f'(x)<0$ for any $x\in (a,b)$ and $f$ is continuous on $(a,b]$, then $f$ is strictly decreasing on $(a,b]$.
+\item If $f'(x)\geq 0$ for any $x\in (a,b)$, then $f$ is non-decreasing on $(a,b)$.
+\item If $f'(x)\geq 0$ for any $x\in (a,b)$ and $f$ is continuous on $[a,b)$, then $f$ is non-decreasing on $[a,b)$.
+\item If $f'(x)\geq 0$ for any $x\in (a,b)$ and $f$ is continuous on $(a,b]$, then $f$ is non-decreasing on $(a,b]$.
+\item If $f'(x)\leq 0$ for any $x\in (a,b)$, then $f$ is non-increasing on $(a,b)$.
+\item If $f'(x)\leq 0$ for any $x\in (a,b)$ and $f$ is continuous on $[a,b)$, then $f$ is non-increasing on $[a,b)$.
+\item If $f'(x)\leq 0$ for any $x\in (a,b)$ and $f$ is continuous on $(a,b]$, then $f$ is non-increasing on $(a,b]$.
 \eit
 \begin{proof}
-    For the first statement, we want to show that $\forall a,b\in J\colon a<b\implies f(a)<f(b)$.
+    For the first statement, we want to show that $\forall c,d\in (a,b)\colon c<d\implies f(c)<f(d)$.
 
-    Take any two points $a,b\in J$ with $a<b$. By MVT, there exists $c\in (a,b)$ such that
-    \[f'(c)=\frac{f(b)-f(a)}{b-a}.\]
-    Because $f'(c)>0$ and $b-a>0$, we get $f(b)-f(a)>0$.
+    Take any two points $c,d\in (a,b)$ with $c<d$. By MVT, there exists $g\in (c,d)$ such that
+    \[f'(g)=\frac{f(d)-f(c)}{d-c}.\]
+    Because $f'(g)>0$ and $d-c>0$, we get $f(d)-f(c)>0$.
+    
+    The second and third statements are obviously true as the first holds.
 
     The other statements can be proven similarly.
 \end{proof}
-Let functions $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ be continuous on an interval $[a,b]\subseteq I$ and differentiable on $(a,b)$ with $a<b$.
-\bit
-\item If $f'(x)>0$ for any $x\in (a,b)$, then $f$ is strictly increasing on $[a,b]$.
-\item If $f'(x)<0$ for any $x\in (a,b)$, then $f$ is strictly decreasing on $[a,b]$.
-\item If $f'(x)\geq 0$ for any $x\in (a,b)$, then $f$ is non-decreasing on $[a,b]$.
-\item If $f'(x)\leq 0$ for any $x\in (a,b)$, then $f$ is non-increasing on $[a,b]$.
-\eit
-\begin{proof}Obvious.\end{proof}
 \sssc{First Derivative Test for Local Extrema Theorem}
 Let $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ be a function, $c$ be a critical point of $f$, and $f'$ be continuous at $c$.
 \bit
@@ -1476,7 +1446,7 @@ A cusp is a point $x$ on the graph of a real function $f$ such that:
 \item the left-hand derivative and the right-hand derivative of $f$ at $x$ are both either finite, $\infty$, or $-\infty$.
 \eit
 \ssc{Indeterminate forms and L'Hôpital's rule (羅必達法則) or Bernoulli's rule}
-\sssc{(General form of )L'Hôpital's rule or Bernoulli's rule and indeterminate quotients}
+\sssc{(General form of) L'Hôpital's rule or Bernoulli's rule and indeterminate quotients}
 Let $I$ be an open interval and $a\in I$, and $f(x)$ and $g(x)$ be functions differentiable on $I\setminus\{a\}$. If
 \bit
 \item $\lim_{x\to a}f(x)=\lim_{x\to a}g(x)=0$, where $\lim_{x\to a}\frac{f(x)}{g(x)}$ is called indeterminate form of type $\frac{0}{0}$, or $\abs{\lim_{x\to a}f(x)}=\abs{\lim_{x\to a}g(x)}=\infty$, where $\lim_{x\to a}\frac{f(x)}{g(x)}$ is called indeterminate form of type $\frac{\infty}{\infty}$, and
@@ -1700,6 +1670,32 @@ PLACEHOLDER: Given convergence, suppose that we want the error to be less than a
 \ssc{Linearity, or sum rule, difference rule, and constant multiple rule}
 If functions $f$ and $g$ are integrable over an interval $I$ and $a,b\in\mathbb{R}$, then $af(x)+bg(x)$ is also integrable over $I$ and its integral is given by
 \[\int_Iaf(x)+bg(x)\dd{x}=a\int_If(x)\dd{x}+b\int_Ig(x)\dd{x}.\]
+\ssc{Fundamental Theorem of Calculus (FTC) (微積分基本定理)}
+\sssc{Fundamental Theorem of Calculus Part First or First Fundamental Theorem of Calculus}
+Let function $f\colon D\subseteq\bbR\to\bbR$ be continuous on a closed interval $[a,b]$, and $f$ be the function defined, for all $x\in[a,b]$ by
+\[F(x)=\int_a^xf(t)\dd{t}.\]
+Then $F$ uniformly continuous on $[a,b]$ and differentiable on $(a,b)$ and
+\[F'(x)=f(x)\]
+for all $x\in (a,b)$.
+\begin{proof}
+PLACEHOLDER
+\end{proof}
+\sssc{Fundamental Theorem of Calculus Part Second, Second Fundamental Theorem of Calculus, or Newton–Leibniz Theorem}
+Let function $f\colon I\subseteq\bbR\to\bbR$ be Riemann integrable on a closed interval $[a,b]$, and $F\colon J\subseteq\bbR\to\bbR$ be a function continuous on $[a,b]$ and differentiable on $(a,b)$ such that
+\[F'(x)=f(x)\]
+for all $x\in (a,b)$.
+
+Then
+\[\int_a^bf(x)\dd{x}=F(b)-F(a).\]
+\begin{proof}
+PLACEHOLDER
+\end{proof}
+\ssc{Mean Value Theorem (MVT) for Integrals}
+If a function $f\colon D\subseteq\bbR\to\bbR$ is continuous on a closed interval $[a,b]$ with $a<b$, then
+\[\exists c\in (a, b)\text{\ s.t.\ }f(c)=\frac{1}{b-a}\int_a^bf(x)\dd{x}.\]
+\begin{proof}
+PLACEHOLDER
+\end{proof}
 \subsection{Integration by substitution (代換積分法), integration by change of variables (換元積分法), u-substitution (u-代換), reverse chain rule, substitution theroem (代換定理), change of variables theorem (換元定理), or transformation theorem (變換定理)}
 \subsubsection{Univariate form}
 Let $g:\,I\subseteq\mathbb{R}\to\mathbb{R}$ be injective and differentiable on $[a,b]\subseteq I$, with $g'$ being integrable on $[a,b]$, and $f:\,K\supseteq g([a,b])\to\mathbb{R}$ be integrable on $g([a,b])$. Then:
