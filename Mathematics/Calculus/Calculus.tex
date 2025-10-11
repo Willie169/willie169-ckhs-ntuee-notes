@@ -43,7 +43,7 @@ then
 \item For a non-increasing and bounded-below sequence of real numbers $\langle a_n\rangle_{n\in\mathbb {N}}$:
 \[\lim_{n\to\infty}a_n=\inf_n a_n.\]
 \end{enumerate}
-\begin{proof}\mbox{}\\
+\begin{proof}
 Let $\{a_{n}\}$ be the set of values of $\langle a_n\rangle_{n\in\mathbb {N}}$. By assumption, $\{a_n\}$ is non-empty and bounded-above by $\sup_n a_n$. Let $c=\sup_n a_n$.
 \[\forall\epsilon>0:\,\exists M\in\mathbb {N}\text{\ s.t.\ }c\geq a_M>c-\epsilon,\]
 since otherwise $c-\epsilon$ is a strictly smaller upper bound of $\langle a_n\rangle$, contradicting the definition of the supremum. 
@@ -56,7 +56,7 @@ The proof of the (B) part is analogous or follows from (A) by considering $\lang
 
 If $\langle a_n\rangle_{n\in\mathbb {N}}$ is a monotone sequence of real numbers, i.e., if 
 $a_n\leq a_{n+1}$ for every $n\geq 1$ or $a_n\geq a_{n+1}$ for every $n\geq 1$, then this sequence has a finite limit if and only if the sequence is bounded.
-\begin{proof}\mbox{}\\
+\begin{proof}
 "If"-direction: The proof follows directly from the proposition.
 
 "Only If"-direction: By $(\epsilon,\delta)$-definition of limit, every sequence $\langle a_n\rangle_{n\in\mathbb {N}}$ with a finite limit $L$ is necessarily bounded.
@@ -64,7 +64,7 @@ $a_n\leq a_{n+1}$ for every $n\geq 1$ or $a_n\geq a_{n+1}$ for every $n\geq 1$, 
 \sssc{Bolzano–Weierstrass Theorem (波爾查諾-魏爾斯特拉斯定理)}
 Every bounded sequence in an Euclidean space $\bbR^n$ has a convergent subsequence.
 
-\begin{proof}\mbox{}\\
+\begin{proof}
     For $\bbR$, take any bounded sequence $(x_n)$ in $\bbR$. Then there exist real numbers $m,M$ such that
     \[m\leq x_n\leq M,\quad\forall n.\]
     So the sequence lies in the closed interval $[m,M]$.
@@ -641,8 +641,6 @@ The partial derivative of the $k$th(-order) mixed partial derivative function of
 The operation of finding the partial derivative or partial derivative function is called partial differentiation.
 
 Specifically, the $0$th(-order) partial derivative of $f$ is $f$ itself.
-\ssc{Differentiability implies continuity}
-For a point $a$ in the domain of $f$, $f$ is differentiable at $a$ implies it is continuous at $a$; for an open subset $I$ of the domain of $f$, $f$ is differentiable on $I$ implies it is continuous on $I$.
 \ssc{Applicational interpretation}
 \sssc{Rate of change}
 If $y=f(x)$, then $f'(a)$ where defined is called the instantaneous rate of change of $y$ with repsect to $x$ at $a$.
@@ -897,7 +895,7 @@ Below is the FTC for functions from a subset of $\mathbb{R}$ to $\mathbb{R}$.
 \sssc{The First Theorem}
 Let $F(x)$ be a function differentiable on $[a,b]$. Then:
 \[\int_a^bF'(x)\dd{x}=F(b)-F(a).\]
-\begin{proof}\mbox{}\\
+\begin{proof}
 PLACEHOLDER: Change to Lebesgue integral
 By the definition of the Riemann integral:
 \[
@@ -1204,6 +1202,21 @@ Take differentiation of both sides:
 If functions $f$ is differentiable and nonzero on $I$, then $\ln|f(x)|$ is also differentiable on $I$ and its derivative is given by
 \[\dv{\ln|f(x)|}{x}=\frac{f'(x)}{f(x)}.\]
 \ssc{Points}
+\sssc{Differentiability implies continuity}
+Let $V$ and $W$ be normed vector spaces, $U$ be an open subset of $V$, and $f\colon U\subseteq V\to W$ be a function. For a point $a\in U$, $f$ is differentiable at $a$ implies it is continuous at $a$; for an open subset $I\subseteq U$, $f$ is differentiable on $I$ implies it is continuous on $I$.
+\begin{proof}
+$f$ is differentiable at $a$ iff there exists bounded linear operator $A\colon V\to W$ such that
+\[\lim_{\|h\|_V\to 0}\frac{\|f(a+h)-f(a)-A(h)\|_W}{\|h\|_V}=0,\]
+that is,
+\[\forall\varepsilon>0\colon\exists\delta>0\text{\ s.t.\ }\|h\|_V<\delta\implies\|f(a+h)-f(a)-A(h)\|_W\leq\varepsion\|h\|_V.\]
+By the triangular identity,
+\[\|f(a+h)-f(a)\|_W\leq\|A(h)\|_W+\|f(a+h)-f(a)-A(h)\|_W.\]
+By the definition of bounded linear operator, there exists $C\in\bbR_{>0}$ such that
+\[\|A(h)\|_W\leq C\|h\|_V.\]
+\[\|f(a+h)-f(a)\|_W\leq (C+\varepsilon)\|h\|_V.\]
+Thus,
+\[\forall\varepsilon>0\colon\exists\delta'=\frac{\varepsilon}{C+\varepsilon}\text{\ s.t.\ }\|h\|_V<\delta'\implies\|f(a+h)-f(a)\|_W\leq(C+\varepsilon)\|h\|_V<(C+\varepsilon)\delta'=\varepsilon.\]
+\end{proof}
 \sssc{Critical point (臨界點)}
 Let $f$ be a function with codomain $\bbR$ and \( c \) be a point in the domain of $f$, if \( f'(c) = 0 \) or \( f' \) does not exist at \( c \), then \( c \) is a critical point, of \( f \), and $f(c)$ is called a critical value of $f$.
 
@@ -1231,7 +1244,7 @@ Let $f$ be a function with codomain $\bbR$ and \( c \) be a point in the domain 
 \sssc{Extreme Value Theorem (EVT) (極值定理)}
 Let function $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ be continuous on an interval $[a,b]\subseteq I$, then
 \[\exists c,d \in [a, b] \text{\ s.t.\ }\forall x \in [a, b]\colon f(c)\geq f(x)\geq f(d).\]
-\begin{proof}\mbox{}\\
+\begin{proof}
 We first claim that $f$ is bounded on $[a,b]$. Argue by contradiction. Suppose $f$ is not bounded-above.
 
 For any $n\in\mathbb{N}$, there exists $x_n\in [a,b]$ such that $f\qty(x_n)>n$. This defines a sequence $\langle x_n\rangle$.
@@ -1311,7 +1324,7 @@ By Rolle's Theorem, there exists $c\in (a,b)$ such that $\phi'(c)=0$.
 \ssc{Cauchy's Mean Value Theorem (CMVT) (柯西均值定理)}
 Let functions $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ and $g\colon J\subseteq\mathbb{R}\to\mathbb{R}$ be continuous on an interval $[a, b]\subseteq I\cap J$ and differentiable on $(a,b)$, and $g'(x)\neq 0$ for all $x\in (a,b)$, then
 \[\exists c\in (a,b)\text{\ s.t.\ }\frac{f(b)-f(a)}{g(b)-g(a)}=\frac{f'(c)}{g'(c)}.\]
-\begin{proof}\mbox{}\\
+\begin{proof}
     Define a function
     \[\phi(x)=f(x)-\frac{f(b)-f(a)}{g(b)-g(a)}g(x).\]
     \[\phi(b)-\phi(a)=\qty(f(b)-f(a))-\frac{f(b)-f(a)}{g(b)-g(a)}\qty(g(b)-g(a))=0.\]
@@ -1323,7 +1336,7 @@ Let functions $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ and $g\colon J\subsete
 If $f'(x)>g'(x)$ for all $x>a$, and $f(a)=g(a)$, then $f(x)>g(x)$ for all $x>a$.
 
 If $f'(x)\geq g'(x)$ for all $x>a$, and $f(a)=g(a)$, then $f(x)\geq g(x)$ for all $x>a$.
-\begin{proof}\mbox{}\\
+\begin{proof}
 For the first statement, let $h(x)=f(x)-g(x)$.
 \[h'(x)=f'(x)-g'(x)>0,\quad\forall x>a.\]
 \[h(a)=f(a)-g(a)=0.\]
@@ -1340,7 +1353,7 @@ Let functions $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ be differentiable on a
 \item If $f'(x)\geq 0$ for any $x\in J$, then $f$ is non-decreasing on $J$.
 \item If $f'(x)\leq 0$ for any $x\in J$, then $f$ is non-increasing on $J$.
 \eit
-\begin{proof}\mbox{}\\
+\begin{proof}
     For the first statement, we want to show that $\forall a,b\in J\colon a<b\implies f(a)<f(b)$.
 
     Take any two points $a,b\in J$ with $a<b$. By MVT, there exists $c\in (a,b)$ such that
@@ -1403,7 +1416,7 @@ Let function $f\colon J\subseteq\bbR\to\bbR$ be differentiable on an open interv
 \item $f'$ is non-increasing on $I$, often called "$f$ lies weakly above all its tagent lines on $I$", iff $f$ is weakly concave downward on $I$.
 \item $f'$ is strictly decreasing on $I$, often called "$f$ lies strictly above all its tagent lines on $I$", iff $f$ is strictly concave downward on $I$.
 \eit
-\begin{proof}\mbox{}\\
+\begin{proof}
     For the first statement, we want to show that for any $x,y\in I$ and $\alpha\in(0,1)$, $f((1-\alpha)x+\alpha y)\leq(1-\alpha)f(x)+\alpha f(y)$.
 
     Let $a<b<c$ and $a,b,c\in I$. By MVT, there exists $A\in (a,b)$ such that
@@ -1494,7 +1507,7 @@ Let $f(x)$ and $g(x)$ be functions differentiable on $(-\infty,a)$. If
 \eit
 then:
 \[\lim_{x\to -\infty}\frac{f(x)}{g(x)}=\lim_{x\to -\infty}\frac{f'(x)}{g'(x)}.\]
-\begin{proof}\mbox{}\\
+\begin{proof}
 For the second statement. Let $f(x)$ and $g(x)$ be functions differentiable on $(a,b)$ with $a<b$. We want to show that if $\lim_{x\to a^+}f(x)=\lim_{x\to a^+}g(x)=0$ and $\lim_{x\to a^+}\frac{f'(x)}{g'(x)}\in\mathbb{R}\cup\{-\infty,\infty\}$, then
 \[\lim_{x\to a^+}\frac{f(x)}{g(x)}=\lim_{x\to a^+}\frac{f'(x)}{g'(x)}.\]
 Let
@@ -1633,7 +1646,7 @@ Find the gradient of $\mathcal{L}$ and set it to zero:
 Solve the equation to find \( \mathbf{x} \) and \( \lambda \) . 
 
 \text{Statement:} Let $A$ be the set of all solutions for \( \mathbf{x} \) such that $\nabla \mathcal{L} = \mathbf{0}$, and $B$ be the set of all points where extremes of \( f(\mathbf{x}) \) under the constraint \( g(\mathbf{x}) = \mathbf{0}\) occur. We claim that $B\subseteq A$.
-\begin{proof}\mbox{}\\
+\begin{proof}
 Consider $\mathbf{x}^*\in B$. It must satisfy the constraint:
 \[g(\mathbf{x}^*) = \mathbf{0}.\]
 Any feasible point $\mathbf{x}$ near $\mathbf{x}^*$ must satisfy the constraint. We can represent $\mathbf{x}$ as:
@@ -1684,7 +1697,7 @@ Let $g:\,I\subseteq\mathbb{R}\to\mathbb{R}$ be injective and differentiable on $
 \[\int_a^bf\circ g(x)\cdot g'(x)\,\mathrm{d}x=\int_{g(a)}^{g(b)}f(u)\,\mathrm{d}u,\]
 and for $K=g([a,b])$:
 \[\int f\circ g(x)\cdot g'(x)\,\mathrm{d}x=\int f(u)\,\mathrm{d}u.\]
-\begin{proof}\mbox{}\\
+\begin{proof}
 Consider the interval \([a, b]\) partitioned as
 \[P = \{a = x_0 < x_1 < \dots  < x_n = b\}.\]
 For each subinterval \([x_{i-1}, x_i]\), let \(\xi_i \in [x_{i-1}, x_i]\) be a sample point. The Riemann sum for the left-hand side of the integral is:
@@ -1796,7 +1809,7 @@ converges absolutely for some real $s$.
 The set of values for which $F(s)$ converges, called region of convergence (ROC), is either of the form $\Re(s) > a$ or $\Re(s) \geq a$, where $a$ is an extended real constant, i.e. $-\infty\leq a\leq\infty$.
 \sssc{Laplace transformability}
 A function $f\colon\mathbb{R}\to\mathbb{R}$ is Laplace-transformable if it is piecewise continuous on $[0,\infty)$ and of exponential order.
-\begin{proof}\mbox{}\\
+\begin{proof}
 Assume that a $f\colon D\subseteq [0,\infty)\to\mathbb{R}$ is piecewise continuous on $[0,\infty)$ and there exists $M>0$ and $T>0$ such that:
 \[|f(t)|\leq Me^{\alpha t}\quad \forall t>T.\]
 
@@ -1852,7 +1865,7 @@ Integral by parts.
 \sssc{Differentiation in Frequency Domain}
 \[\mathcal{L}\{t f(t)\}(s) = -\dv{}{s} F(s).\]
 \[\mathcal{L}\{t^n f(t)\}(s) = (-1)^n \dv[n]{}{s} F(s).\]
-\begin{proof}\mbox{}\\
+\begin{proof}
 By Leibniz integral rule,
 \bma
 -\dv{}{s} F(s)&=-\dv{}{s}\int_0^{\infty} e^{-st} f(t)\,\mathrm{d}t\\
@@ -1969,7 +1982,7 @@ The inverse Laplace transform of a complex function $F(s)$ is given by the line 
 
 Lemma:
 \[\lim_{h\to 0}\frac{\sin h}{h}=1.\]
-\begin{proof}\mbox{}\\
+\begin{proof}
 From geometry of the arc length, the chord length, and the tangent length of an arc on a unit circle:
 \[\sin h<h<\tan h,\quad h>0.\]
 \[1<\frac{h}{\sin h}<\frac{1}{\cos h}.\]
@@ -2193,7 +2206,7 @@ Differentiate both side:
     \[\int\ln(x)\dd{x}=x\ln(x)-\int x\frac{1}{x}\dd{x}=x\ln(x)-x+C.\]
 \end{proof}
 \[\int\qty(\ln(x))^n\dd{x}=x\qty(\ln(x))^n-n\int\qty(\ln(x))^{n-1}\dd{x},\quad n\in\bbN.\]
-\begin{proof}\mbox{}\\
+\begin{proof}
     Differentiate RHS:
     \[\dv{}{x}\qty(x\qty(\ln(x))^n-n\int\qty(\ln(x))^{n-1}\dd{x})=\qty(\ln(x))^n+n\qty(\ln(x))^{n-1}-n\qty(\ln(x))^{n-1}=\qty(\ln(x))^n.\]
 \end{proof}
@@ -2207,7 +2220,7 @@ Differentiate both side:
     \[\int\sin^2(x)\dd{x}=\frac{x}{2}-\frac{1}{2}\int\cos(2x)\dd{x}=\frac{x}{2}-\frac{\sin(2x)}{4}+C.\]
 \end{proof}
 \[\int\sin^n(x)\dd{x}=-\frac{1}{n}\sin^{n-1}(x)\cos(x)+\frac{n-1}{n}\int\sin^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
-\begin{proof}\mbox{}\\
+\begin{proof}
     Differentiate RHS:
     \[\dv{}{x}\qty(-\frac{1}{n}\sin^{n-1}(x)\cos(x)+\frac{n-1}{n}\int\sin^{n-2}(x)\dd{x})=-\frac{n-1}{n}\sin^{n-2}(x)\cos^2(x)+\frac{n-1}{n}\sin^{n-2}(x)=\sin^n(x).\]
 \end{proof}
@@ -2219,99 +2232,99 @@ Differentiate both side:
     \[\int\sin^2(x)\dd{x}=\frac{x}{2}+\frac{1}{2}\int\cos(2x)\dd{x}=\frac{x}{2}+\frac{\sin(2x)}{4}+C.\]
 \end{proof}
 \[\int\cos^n(x)\dd{x}=\frac{1}{n}\cos^{n-1}(x)\sin(x)+\frac{n-1}{n}\int\cos^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
-\begin{proof}\mbox{}\\
+\begin{proof}
     Differentiate RHS:
     \[\dv{}{x}\qty(\frac{1}{n}\cos^{n-1}(x)\cos(x)+\frac{n-1}{n}\int\cos^{n-2}(x)\dd{x})=-\frac{n-1}{n}\cos^{n-2}(x)\sin^2(x)+\frac{n-1}{n}\cos^{n-2}(x)=\cos^n(x).\]
 \end{proof}
 \sssc{Tangent function}
 \[\int\tan(x)\dd{x}=-\ln|\cos(x)|+C=\ln|\sec(x)|+C.\]
-\begin{proof}\mbox{}\\
+\begin{proof}
     Differentiate RHS:
     \[\dv{-\ln|\cos(x)|}{x}=-\frac{1}{|\cos(x)|}(-\sin(x))\frac{|\cos(x)|}{\cos(x)}=\tan(x).\]
 \end{proof}
 \[\int\tan^2(x)\dd{x}=\tan(x)-x+C.\]
-\begin{proof}\mbox{}\\
+\begin{proof}
     Differentiate RHS:
     \[\dv{}{x}\qty(\tan(x)-x)=\sec^2(x)-1=\tan^2(x).\]
 \end{proof}
 \[\int\tan^n(x)\dd{x}=\frac{1}{n-1}\tan^{n-1}(x)-\int\tan^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
-\begin{proof}\mbox{}\\
+\begin{proof}
     Differentiate RHS:
     \[\dv{}{x}\qty(\frac{1}{n-1}\tan^{n-1}(x)-\int\tan^{n-2}(x)\dd{x})=\tan^{n-2}(x)+\tan^n(x)-\tan^{n-2}(x)=\tan^n(x).\]
 \end{proof}
 \sssc{Cotangent function}
 \[\int\cot(x)\dd{x}=\ln|\sin(x)|+C.\]
-\begin{proof}\mbox{}\\
+\begin{proof}
     Differentiate RHS:
     \[\dv{\ln|\sin(x)|}{x}=\frac{1}{|\sin(x)|}(\cos(x))\frac{|\sin(x)|}{\sin(x)}=\cot(x).\]
 \end{proof}
 \[\int\cot^2(x)\dd{x}=-\cot(x)-x+C.\]
-\begin{proof}\mbox{}\\
+\begin{proof}
     Differentiate RHS:
     \[\dv{}{x}\qty(-\cot(x)-x)=\csc^2(x)-1=\cot^2(x).\]
 \end{proof}
 \[\int\cot^n(x)\dd{x}=-\frac{1}{n-1}\cot^{n-1}(x)-\int\cot^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
-\begin{proof}\mbox{}\\
+\begin{proof}
     Differentiate RHS:
     \[\dv{}{x}\qty(-\frac{1}{n-1}\cot^{n-1}(x)-\int\cot^{n-2}(x)\dd{x})=\cot^{n-2}(x)+\cot^n(x)-\cot^{n-2}(x)=\cot^n(x).\]
 \end{proof}
 \sssc{Secant function}
 \[\int\sec(x)\dd{x}=\ln|\sec(x)+\tan(x)|+C.\]
-\begin{proof}\mbox{}\\
+\begin{proof}
     Differentiate RHS:
     \[\dv{}{x}\qty(\ln|\sec(x)+\tan(x)|)=\frac{1}{|\sec(x)+\tan(x)|}\qty(\sec(x)\tan(x)+\sec^2(x))\frac{|\sec(x)+\tan(x)|}{\sec(x)+\tan(x)}=\sec(x).\]
 \end{proof}
 \[\int\sec^2(x)\dd{x}=\tan(x)+C.\]
 \[\int\sec^n(x)\dd{x}=\frac{1}{n-1}\sec^{n-2}(x)\tan(x)+\frac{n-2}{n-1}\int\sec^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
-\begin{proof}\mbox{}\\
+\begin{proof}
     Differentiate RHS:
     \[\dv{}{x}\qty(\frac{1}{n-1}\sec^{n-2}(x)\tan(x)+\frac{n-2}{n-1}\int\sec^{n-2}(x)\dd{x})=\frac{1}{n-1}\sec^n(x)+\frac{n-2}{n-1}\sec^{n-2}(x)\tan^2(x)+\frac{n-2}{n-1}\sec^{n-2}(x)=\sec^n(x).\]
 \end{proof}
 \sssc{Cosecant function}
 \[\int\csc(x)\dd{x}=-\ln|\csc(x)+\cot(x)|+C.\]
-\begin{proof}\mbox{}\\
+\begin{proof}
     Differentiate RHS:
     \[\dv{}{x}\qty(-\ln|\csc(x)+\cot(x)|)=-\frac{1}{|\csc(x)+\cot(x)|}\qty(-\csc(x)\cot(x)-\csc^2(x))\frac{|\csc(x)+\cot(x)|}{\csc(x)+\cot(x)}=\csc(x).\]
 \end{proof}
 \[\int\csc^2(x)\dd{x}=-\cot(x)+C.\]
 \[\int\csc^n(x)\dd{x}=-\frac{1}{n-1}\csc^{n-2}(x)\cot(x)+\frac{n-2}{n-1}\int\csc^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
-\begin{proof}\mbox{}\\
+\begin{proof}
     Differentiate RHS:
     \[\dv{}{x}\qty(-\frac{1}{n-1}\csc^{n-2}(x)\cot(x)+\frac{n-2}{n-1}\int\csc^{n-2}(x)\dd{x})=\frac{1}{n-1}\csc^n(x)-\frac{n-2}{n-1}\csc^{n-2}(x)\cot^2(x)+\frac{n-2}{n-1}\csc^{n-2}(x)=\csc^n(x).\]
 \end{proof}
 \sssc{Inverse sine function}
 \[\int\arcsin(x)\dd{x}=x\arcsin(x)+\sqrt{1-x^2}+C.\]
-\begin{proof}\mbox{}\\
+\begin{proof}
     Differentiate RHS:
     \[\dv{}{x}\qty(x\arcsin(x)+\sqrt{1-x^2})=\frac{x}{\sqrt{1-x^2}}+\arcsin(x)+\frac{-x}{\sqrt{1-x^2}}=\arcsin(x).\]
 \end{proof}
 \sssc{Inverse cosine function}
 \[\int\arccos(x)\dd{x}=x\arccos(x)-\sqrt{1-x^2}+C.\]
-\begin{proof}\mbox{}\\
+\begin{proof}
     Differentiate RHS:
     \[\dv{}{x}\qty(x\arccos(x)-\sqrt{1-x^2})=-\frac{x}{\sqrt{1-x^2}}+\arccos(x)-\frac{-x}{\sqrt{1-x^2}}=\arccos(x).\]
 \end{proof}
 \sssc{Inverse tangent function}
 \[\int\arctan(x)\dd{x}=x\arctan(x)-\frac{1}{2}\ln(1+x^2)+C.\]
-\begin{proof}\mbox{}\\
+\begin{proof}
     Differentiate RHS:
     \[\dv{}{x}\qty(x\arctan(x)-\frac{1}{2}\ln(1+x^2))=\frac{x}{1+x^2}+\arctan(x)-\frac{2x}{2\qty(1+x^2)}=\arctan(x).\]
 \end{proof}
 \sssc{Inverse cotangent function}
 \[\int\arccot(x)\dd{x}=x\arccot(x)+\frac{1}{2}\ln(1+x^2)+C.\]
-\begin{proof}\mbox{}\\
+\begin{proof}
     Differentiate RHS:
     \[\dv{}{x}\qty(x\arccot(x)+\frac{1}{2}\ln(1+x^2))=-\frac{x}{1+x^2}+\arccot(x)+\frac{2x}{2\qty(1+x^2)}=\arccot(x).\]
 \end{proof}
 \sssc{Inverse secant function}
 \[\int\arcsec(x)\dd{x}=x\arcsec(x)-\ln\abs{x+\sqrt{x^2-1}}+C,\quad|x|\geq 1.\]
-\begin{proof}\mbox{}\\
+\begin{proof}
     Differentiate RHS:
     \[\dv{}{x}\qty(x\arcsec(x)-\ln\abs{x+\sqrt{x^2-1}})=\frac{x}{|x|\sqrt{x^2-1}}+\arcsec(x)-\frac{1}{\abs{x+\sqrt{x^2-1}}}\qty(1+\frac{2x}{\sqrt{x^2-1}})=\frac{x}{|x|\sqrt{x^2-1}}+\arcsec(x)-\frac{x}{|x|}\frac{1}{x+\sqrt{x^2-1}}\frac{x+\sqrt{x^2-1}}{\sqrt{x^2-1}}=\arcsec(x).\]
 \end{proof}
 \sssc{Inverse cosecant function}
 \[\int\arccsc(x)\dd{x}=x\arccsc(x)+\ln\abs{x+\sqrt{x^2-1}}+C,\quad|x|\geq 1.\]
-\begin{proof}\mbox{}\\
+\begin{proof}
     Differentiate RHS:
     \[\dv{}{x}\qty(x\arccsc(x)+\ln\abs{x+\sqrt{x^2-1}})=-\frac{x}{|x|\sqrt{x^2-1}}+\arccsc(x)+\frac{1}{\abs{x+\sqrt{x^2-1}}}\qty(1+\frac{2x}{\sqrt{x^2-1}})=-\frac{x}{|x|\sqrt{x^2-1}}+\arccsc(x)+\frac{x}{|x|}\frac{1}{x+\sqrt{x^2-1}}\frac{x+\sqrt{x^2-1}}{\sqrt{x^2-1}}=\arccsc(x).\]
 \end{proof}
@@ -2629,7 +2642,7 @@ depends only on $x$, we can construct integration factor $\mu(x)$ by letting
 \[\frac{\mu'(x)}{\mu(x)}=\frac{\pdv{M}{y}-\pdv{N}{x}}{N},\]
 that is,
 \[\mu(x)=e^{\int\frac{\pdv{M}{y}-\pdv{N}{x}}{N}\dd{x}}.\]
-\begin{proof}\mbox{}\\
+\begin{proof}
 This is a separable ODE of $\mu$ with repect to $x$.
 
 Let
