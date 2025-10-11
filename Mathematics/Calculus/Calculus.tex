@@ -1930,29 +1930,17 @@ The inverse Laplace transform of a complex function $F(s)$ is given by the line 
 \[\dv{\ln(x)}{x}=\frac{1}{x}.\]
 \[\ln(x)=\int_1^x\frac{1}{t}\dd{t},\quad x>0.\]
 \sssc{Exponential function}
-\[\dv{a^x}{x}=\ln aa^x.\]
-\[a^x=1+\int_0^x\ln aa^t\dd{t}.\]
+\[\dv{a^x}{x}=\ln(a)a^x.\]
+\[a^x=1+\int_0^x\ln(a)a^t\dd{t}.\]
 \begin{proof}
 \[\ba
 \dv{a^x}{x}&=\lim_{h\to 0}\frac{a^{x+h}-a^x}{h}\\
 &=a^x\lim_{h\to 0}\frac{a^h-1}{h}\\
-&=a^x\lim_{h\to 0}\frac{e^{\ln ah}-1}{h}\\
-&=a^x\lim_{h\to 0}\frac{\lim_{n\to\infty}\sum_{k=0}^n\frac{(\ln ah)^k}{k!}-1}{h}\\
-&=a^x\lim_{h\to 0}\frac{\lim_{n\to\infty}\sum_{k=1}^n\frac{(\ln ah)^k}{k!}}{h}\\
-&=\ln aa^x
+&=a^x\lim_{h\to 0}\frac{e^{\ln(a)h}-1}{h}\\
+&=a^x\lim_{h\to 0}\frac{\lim_{n\to\infty}\sum_{k=0}^n\frac{(\ln(a)h)^k}{k!}-1}{h}\\
+&=a^x\lim_{h\to 0}\frac{\lim_{n\to\infty}\sum_{k=1}^n\frac{(\ln(a)h)^k}{k!}}{h}\\
+&=\ln(a)a^x
 \ea\]
-\end{proof}
-\sssc{Sine function divided by independent variable}
-\[\lim_{h\to 0}\frac{\sin h}{h}=1.\]
-\begin{proof}\mbox{}\\
-From geometry of the arc length, the chord length, and the tangent length of an arc on a unit circle:
-\[\sin h<h<\tan h,\quad h>0.\]
-\[1<\frac{h}{\sin h}<\frac{1}{\cos h}.\]
-\[\cos h<\frac{\sin h}{h}<1.\]
-\[\lim_{h\to 0}\cos h=1.\]
-
-By the squeeze theorem:
-\[\lim_{h\to 0}\frac{\sin h}{h}=1.\]
 \end{proof}
 \sssc{Sine function}
 \[\dv{\sin(x)}{x}=\cos(x).\]
@@ -1965,6 +1953,16 @@ By the squeeze theorem:
 
 Lemma:
 \[\lim_{h\to 0}\frac{\sin h}{h}=1.\]
+\begin{proof}\mbox{}\\
+From geometry of the arc length, the chord length, and the tangent length of an arc on a unit circle:
+\[\sin h<h<\tan h,\quad h>0.\]
+\[1<\frac{h}{\sin h}<\frac{1}{\cos h}.\]
+\[\cos h<\frac{\sin h}{h}<1.\]
+\[\lim_{h\to 0}\cos h=1.\]
+
+By the squeeze theorem:
+\[\lim_{h\to 0}\frac{\sin h}{h}=1.\]
+\end{proof}
 
 \[\cos h-1=-2\sin^2\qty(\frac{h}{2}),\]
 \[\frac{\sin^2\qty(\frac{h}{2})}{h}=\frac{\sin\qty(\frac{h}{2})}{\frac{h}{2}}\cdot\frac{\sin\qty(\frac{h}{2})}{2}.\]
@@ -2086,17 +2084,17 @@ Using the chain rule on the left:
 \ea\]
 \end{proof}
 \sssc{Hyperbolic sine function}
-\[\dv{\sinh(x)}{x}=\cosh x.\]
+\[\dv{\sinh(x)}{x}=\cosh(x).\]
 \sssc{Hyperbolic cosine function}
-\[\dv{\cosh(x)}{x}=\sinh x.\]
+\[\dv{\cosh(x)}{x}=\sinh(x).\]
 \sssc{Hyperbolic tangent function}
-\[\dv{\tanh(x)}{x}=\sech^2 x.\]
+\[\dv{\tanh(x)}{x}=\sech^2(x).\]
 \sssc{Hyperbolic cotangent function}
-\[\dv{\coth(x)}{x}=-\csch^2 x,\quad x\neq 0.\]
+\[\dv{\coth(x)}{x}=-\csch^2(x),\quad x\neq 0.\]
 \sssc{Hyperbolic secant function}
-\[\dv{\sech(x)}{x}=-\tanh x\sech x.\]
+\[\dv{\sech(x)}{x}=-\tanh(x)\sech(x).\]
 \sssc{Hyperbolic cosecant function}
-\[\dv{\csch(x)}{x}=-\coth x\csch x,\quad x\neq 0.\]
+\[\dv{\csch(x)}{x}=-\coth(x)\csch(x),\quad x\neq 0.\]
 \sssc{Inverse hyperbolic sine function}
 \[\dv{\arcsinh(x)}{x}=\frac{1}{\sqrt{x^2+1}}.\]
 \sssc{Inverse hyperbolic cosine function}
@@ -2127,7 +2125,7 @@ $\sum_{n=1}^{\infty}(-1)^{n-1}\frac{(x-a)^n}{na^n}$ converge if and only if $-1<
 \end{proof}
 \sssc{Exponential function}
 For any $x\in\mathbb{R}$ and $a\in\mathbb{R}_{>0}$:
-\[a^x=\sum_{n=0}^{\infty}\frac{a^b(\ln a)^n}{n!}(x-b)^n.\]
+\[a^x=\sum_{n=0}^{\infty}\frac{a^b\qty(\ln(a))^n}{n!}(x-b)^n.\]
 \sssc{Sine function}
 \[\sin(x)=\sum_{n=0}^{\infty}\frac{\sin\qty(a+\frac{n\pi}{2})}{n!}(x-a)^n.\]
 \sssc{Cosine function}
@@ -2174,169 +2172,169 @@ Differentiate both side:
 \sssc{Power function}
 \[\int x^n\dd{x}=\begin{cases}\frac{1}{n+1}x^{n+1}+C,\quad n\neq -1\\\ln|x|+C,\quad n\neq -1\end{cases}.\]
 \sssc{Logarithmic function}
-\[\int\ln x\dd{x}=x\ln x-x+C.\]
+\[\int\ln(x)\dd{x}=x\ln(x)-x+C.\]
 \begin{proof}
-    \[\int\ln x\dd{x}=x\ln x-\int x\frac{1}{x}\dd{x}=x\ln x-x+C.\]
+    \[\int\ln(x)\dd{x}=x\ln(x)-\int x\frac{1}{x}\dd{x}=x\ln(x)-x+C.\]
 \end{proof}
-\[\int(\ln x)^n\dd{x}=x(\ln x)^n-n\int(\ln x)^{n-1}\dd{x}.\]
+\[\int\qty(\ln(x))^n\dd{x}=x\qty(\ln(x))^n-n\int\qty(\ln(x))^{n-1}\dd{x}.\]
 \begin{proof}\mbox{}\\
     Differentiate RHS:
-    \[\dv{}{x}\qty(x(\ln x)^n-n\int(\ln x)^{n-1}\dd{x})=(\ln x)^n+n(\ln x)^{n-1}-n(\ln x)^{n-1}=(\ln x)^n.\]
+    \[\dv{}{x}\qty(x\qty(\ln(x))^n-n\int\qty(\ln(x))^{n-1}\dd{x})=\qty(\ln(x))^n+n\qty(\ln(x))^{n-1}-n\qty(\ln(x))^{n-1}=\qty(\ln(x))^n.\]
 \end{proof}
 \sssc{Exponential function}
 \[\int e^{nx}\dd{x}=\frac{1}{n}e^{nx}+C,\quad n\neq 0.\]
 \sssc{Sine function}
-\[\int\sin x\dd{x}=-\cos x+C.\]
-\[\int\sin^2 x\dd{x}=\frac{x}{2}-\frac{\sin(2x)}{4}+C.\]
+\[\int\sin(x)\dd{x}=-\cos(x)+C.\]
+\[\int\sin^2(x)\dd{x}=\frac{x}{2}-\frac{\sin(2x)}{4}+C.\]
 \begin{proof}
-    \[\sin^2 x=\frac{1}{2}\qty(1-\cos(2x)).\]
-    \[\int\sin^2 x\dd{x}=\frac{x}{2}-\frac{1}{2}\int\cos(2x)\dd{x}=\frac{x}{2}-\frac{\sin(2x)}{4}+C.\]
+    \[\sin^2(x)=\frac{1}{2}\qty(1-\cos(2x)).\]
+    \[\int\sin^2(x)\dd{x}=\frac{x}{2}-\frac{1}{2}\int\cos(2x)\dd{x}=\frac{x}{2}-\frac{\sin(2x)}{4}+C.\]
 \end{proof}
-\[\int\sin^n x\dd{x}=-\frac{1}{n}\sin^{n-1}x\cos x+\frac{n-1}{n}\int\sin^{n-2}x\dd{x},\quad n\in\bbN_{>2}.\]
+\[\int\sin^n(x)\dd{x}=-\frac{1}{n}\sin^{n-1}(x)\cos(x)+\frac{n-1}{n}\int\sin^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
 \begin{proof}\mbox{}\\
     Differentiate RHS:
-    \[\dv{}{x}\qty(-\frac{1}{n}\sin^{n-1}x\cos x+\frac{n-1}{n}\int\sin^{n-2}x\dd{x})=-\frac{n-1}{n}\sin^{n-2}x\cos^2 x+\frac{n-1}{n}\sin^{n-2}x=\sin^n x.\]
+    \[\dv{}{x}\qty(-\frac{1}{n}\sin^{n-1}(x)\cos(x)+\frac{n-1}{n}\int\sin^{n-2}(x)\dd{x})=-\frac{n-1}{n}\sin^{n-2}(x)\cos^2(x)+\frac{n-1}{n}\sin^{n-2}(x)=\sin^n(x).\]
 \end{proof}
 \sssc{Cosine function}
-\[\int\cos x\dd{x}=\sin x+C.\]
-\[\int\cos^2 x\dd{x}=\frac{x}{2}+\frac{\sin(2x)}{4}+C.\]
+\[\int\cos(x)\dd{x}=\sin(x)+C.\]
+\[\int\cos^2(x)\dd{x}=\frac{x}{2}+\frac{\sin(2x)}{4}+C.\]
 \begin{proof}
-    \[\sin^2 x=\frac{1}{2}\qty(1+\cos(2x)).\]
-    \[\int\sin^2 x\dd{x}=\frac{x}{2}+\frac{1}{2}\int\cos(2x)\dd{x}=\frac{x}{2}+\frac{\sin(2x)}{4}+C.\]
+    \[\sin^2(x)=\frac{1}{2}\qty(1+\cos(2x)).\]
+    \[\int\sin^2(x)\dd{x}=\frac{x}{2}+\frac{1}{2}\int\cos(2x)\dd{x}=\frac{x}{2}+\frac{\sin(2x)}{4}+C.\]
 \end{proof}
-\[\int\cos^n x\dd{x}=\frac{1}{n}\cos^{n-1}x\sin x+\frac{n-1}{n}\int\cos^{n-2}x\dd{x},\quad n\in\bbN_{>2}.\]
+\[\int\cos^n(x)\dd{x}=\frac{1}{n}\cos^{n-1}(x)\sin(x)+\frac{n-1}{n}\int\cos^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
 \begin{proof}\mbox{}\\
     Differentiate RHS:
-    \[\dv{}{x}\qty(\frac{1}{n}\cos^{n-1}x\cos x+\frac{n-1}{n}\int\cos^{n-2}x\dd{x})=-\frac{n-1}{n}\cos^{n-2}x\sin^2 x+\frac{n-1}{n}\cos^{n-2}x=\cos^n x.\]
+    \[\dv{}{x}\qty(\frac{1}{n}\cos^{n-1}(x)\cos(x)+\frac{n-1}{n}\int\cos^{n-2}(x)\dd{x})=-\frac{n-1}{n}\cos^{n-2}(x)\sin^2(x)+\frac{n-1}{n}\cos^{n-2}(x)=\cos^n(x).\]
 \end{proof}
 \sssc{Tangent function}
-\[\int\tan x\dd{x}=-\ln|\cos x|+C=\ln|\sec x|+C.\]
+\[\int\tan(x)\dd{x}=-\ln|\cos(x)|+C=\ln|\sec(x)|+C.\]
 \begin{proof}\mbox{}\\
     Differentiate RHS:
-    \[\dv{-\ln|\cos x|}{x}=-\frac{1}{|\cos x|}(-\sin x)\frac{|\cos x|}{\cos x}=\tan x.\]
+    \[\dv{-\ln|\cos(x)|}{x}=-\frac{1}{|\cos(x)|}(-\sin(x))\frac{|\cos(x)|}{\cos(x)}=\tan(x).\]
 \end{proof}
-\[\int\tan^2 x\dd{x}=\tan x-x+C.\]
+\[\int\tan^2(x)\dd{x}=\tan(x)-x+C.\]
 \begin{proof}\mbox{}\\
     Differentiate RHS:
-    \[\dv{}{x}\qty(\tan x-x)=\sec^2 x-1=\tan^2x.\]
+    \[\dv{}{x}\qty(\tan(x)-x)=\sec^2(x)-1=\tan^2(x).\]
 \end{proof}
-\[\int\tan^n x\dd{x}=\frac{1}{n-1}\tan^{n-1}x-\int\tan^{n-2}x\dd{x},\quad n\in\bbN_{>2}.\]
+\[\int\tan^n(x)\dd{x}=\frac{1}{n-1}\tan^{n-1}(x)-\int\tan^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
 \begin{proof}\mbox{}\\
     Differentiate RHS:
-    \[\dv{}{x}\qty(\frac{1}{n-1}\tan^{n-1}x-\int\tan^{n-2}x\dd{x})=\tan^{n-2}x+\tan^nx-\tan^{n-2}x=\tan^n x.\]
+    \[\dv{}{x}\qty(\frac{1}{n-1}\tan^{n-1}(x)-\int\tan^{n-2}(x)\dd{x})=\tan^{n-2}(x)+\tan^n(x)-\tan^{n-2}(x)=\tan^n(x).\]
 \end{proof}
 \sssc{Cotangent function}
-\[\int\cot x\dd{x}=\ln|\sin x|+C.\]
+\[\int\cot(x)\dd{x}=\ln|\sin(x)|+C.\]
 \begin{proof}\mbox{}\\
     Differentiate RHS:
-    \[\dv{\ln|\sin x|}{x}=\frac{1}{|\sin x|}(\cos x)\frac{|\sin x|}{\sin x}=\cot x.\]
+    \[\dv{\ln|\sin(x)|}{x}=\frac{1}{|\sin(x)|}(\cos(x))\frac{|\sin(x)|}{\sin(x)}=\cot(x).\]
 \end{proof}
-\[\int\cot^2 x\dd{x}=-\cot x-x+C.\]
+\[\int\cot^2(x)\dd{x}=-\cot(x)-x+C.\]
 \begin{proof}\mbox{}\\
     Differentiate RHS:
-    \[\dv{}{x}\qty(-\cot x-x)=\csc^2 x-1=\cot^2x.\]
+    \[\dv{}{x}\qty(-\cot(x)-x)=\csc^2(x)-1=\cot^2(x).\]
 \end{proof}
-\[\int\cot^n x\dd{x}=-\frac{1}{n-1}\cot^{n-1}x-\int\cot^{n-2}x\dd{x},\quad n\in\bbN_{>2}.\]
+\[\int\cot^n(x)\dd{x}=-\frac{1}{n-1}\cot^{n-1}(x)-\int\cot^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
 \begin{proof}\mbox{}\\
     Differentiate RHS:
-    \[\dv{}{x}\qty(-\frac{1}{n-1}\cot^{n-1}x-\int\cot^{n-2}x\dd{x})=\cot^{n-2}x+\cot^nx-\cot^{n-2}x=\cot^n x.\]
+    \[\dv{}{x}\qty(-\frac{1}{n-1}\cot^{n-1}(x)-\int\cot^{n-2}(x)\dd{x})=\cot^{n-2}(x)+\cot^n(x)-\cot^{n-2}(x)=\cot^n(x).\]
 \end{proof}
 \sssc{Secant function}
-\[\int\sec x\dd{x}=\ln|\sec x+\tan x|+C.\]
+\[\int\sec(x)\dd{x}=\ln|\sec(x)+\tan(x)|+C.\]
 \begin{proof}\mbox{}\\
     Differentiate RHS:
-    \[\dv{}{x}\qty(\ln|\sec x+\tan x|)=\frac{1}{|\sec x+\tan x|}\qty(\sec x\tan x+\sec^2 x)\frac{|\sec x+\tan x|}{\sec x+\tan x}=\sec x.\]
+    \[\dv{}{x}\qty(\ln|\sec(x)+\tan(x)|)=\frac{1}{|\sec(x)+\tan(x)|}\qty(\sec(x)\tan(x)+\sec^2(x))\frac{|\sec(x)+\tan(x)|}{\sec(x)+\tan(x)}=\sec(x).\]
 \end{proof}
-\[\int\sec^2 x\dd{x}=\tan x+C.\]
-\[\int\sec^n x\dd{x}=\frac{1}{n-1}\sec^{n-2}x\tan x+\frac{n-2}{n-1}\int\sec^{n-2}x\dd{x},\quad n\in\bbN_{>2}.\]
+\[\int\sec^2(x)\dd{x}=\tan(x)+C.\]
+\[\int\sec^n(x)\dd{x}=\frac{1}{n-1}\sec^{n-2}(x)\tan(x)+\frac{n-2}{n-1}\int\sec^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
 \begin{proof}\mbox{}\\
     Differentiate RHS:
-    \[\dv{}{x}\qty(\frac{1}{n-1}\sec^{n-2}x\tan x+\frac{n-2}{n-1}\int\sec^{n-2}x\dd{x})=\frac{1}{n-1}\sec^nx+\frac{n-2}{n-1}\sec^{n-2}x\tan^2x+\frac{n-2}{n-1}\sec^{n-2}x=\sec^n x.\]
+    \[\dv{}{x}\qty(\frac{1}{n-1}\sec^{n-2}(x)\tan(x)+\frac{n-2}{n-1}\int\sec^{n-2}(x)\dd{x})=\frac{1}{n-1}\sec^n(x)+\frac{n-2}{n-1}\sec^{n-2}(x)\tan^2(x)+\frac{n-2}{n-1}\sec^{n-2}(x)=\sec^n(x).\]
 \end{proof}
 \sssc{Cosecant function}
-\[\int\csc x\dd{x}=-\ln|\csc x+\cot x|+C.\]
+\[\int\csc(x)\dd{x}=-\ln|\csc(x)+\cot(x)|+C.\]
 \begin{proof}\mbox{}\\
     Differentiate RHS:
-    \[\dv{}{x}\qty(-\ln|\csc x+\cot x|)=-\frac{1}{|\csc x+\cot x|}\qty(-\csc x\cot x-\csc^2 x)\frac{|\csc x+\cot x|}{\csc x+\cot x}=\csc x.\]
+    \[\dv{}{x}\qty(-\ln|\csc(x)+\cot(x)|)=-\frac{1}{|\csc(x)+\cot(x)|}\qty(-\csc(x)\cot(x)-\csc^2(x))\frac{|\csc(x)+\cot(x)|}{\csc(x)+\cot(x)}=\csc(x).\]
 \end{proof}
-\[\int\csc^2 x\dd{x}=-\cot x+C.\]
-\[\int\csc^n x\dd{x}=-\frac{1}{n-1}\csc^{n-2}x\cot x+\frac{n-2}{n-1}\int\csc^{n-2}x\dd{x},\quad n\in\bbN_{>2}.\]
+\[\int\csc^2(x)\dd{x}=-\cot(x)+C.\]
+\[\int\csc^n(x)\dd{x}=-\frac{1}{n-1}\csc^{n-2}(x)\cot(x)+\frac{n-2}{n-1}\int\csc^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
 \begin{proof}\mbox{}\\
     Differentiate RHS:
-    \[\dv{}{x}\qty(-\frac{1}{n-1}\csc^{n-2}x\cot x+\frac{n-2}{n-1}\int\csc^{n-2}x\dd{x})=\frac{1}{n-1}\csc^nx-\frac{n-2}{n-1}\csc^{n-2}x\cot^2x+\frac{n-2}{n-1}\csc^{n-2}x=\csc^nx.\]
+    \[\dv{}{x}\qty(-\frac{1}{n-1}\csc^{n-2}(x)\cot(x)+\frac{n-2}{n-1}\int\csc^{n-2}(x)\dd{x})=\frac{1}{n-1}\csc^n(x)-\frac{n-2}{n-1}\csc^{n-2}(x)\cot^2(x)+\frac{n-2}{n-1}\csc^{n-2}(x)=\csc^n(x).\]
 \end{proof}
 \sssc{Inverse sine function}
-\[\int\arcsin x\dd{x}=x\arcsin x+\sqrt{1-x^2}+C.\]
+\[\int\arcsin(x)\dd{x}=x\arcsin(x)+\sqrt{1-x^2}+C.\]
 \begin{proof}\mbox{}\\
     Differentiate RHS:
-    \[\dv{}{x}\qty(x\arcsin x+\sqrt{1-x^2})=\frac{x}{\sqrt{1-x^2}}+\arcsin x+\frac{-x}{\sqrt{1-x^2}}=\arcsin x.\]
+    \[\dv{}{x}\qty(x\arcsin(x)+\sqrt{1-x^2})=\frac{x}{\sqrt{1-x^2}}+\arcsin(x)+\frac{-x}{\sqrt{1-x^2}}=\arcsin(x).\]
 \end{proof}
 \sssc{Inverse cosine function}
-\[\int\arccos x\dd{x}=x\arccos x-\sqrt{1-x^2}+C.\]
+\[\int\arccos(x)\dd{x}=x\arccos(x)-\sqrt{1-x^2}+C.\]
 \begin{proof}\mbox{}\\
     Differentiate RHS:
-    \[\dv{}{x}\qty(x\arccos x-\sqrt{1-x^2})=-\frac{x}{\sqrt{1-x^2}}+\arccos x-\frac{-x}{\sqrt{1-x^2}}=\arccos x.\]
+    \[\dv{}{x}\qty(x\arccos(x)-\sqrt{1-x^2})=-\frac{x}{\sqrt{1-x^2}}+\arccos(x)-\frac{-x}{\sqrt{1-x^2}}=\arccos(x).\]
 \end{proof}
 \sssc{Inverse tangent function}
-\[\int\arctan x\dd{x}=x\arctan x-\frac{1}{2}\ln(1+x^2)+C.\]
+\[\int\arctan(x)\dd{x}=x\arctan(x)-\frac{1}{2}\ln(1+x^2)+C.\]
 \begin{proof}\mbox{}\\
     Differentiate RHS:
-    \[\dv{}{x}\qty(x\arctan x-\frac{1}{2}\ln(1+x^2))=\frac{x}{1+x^2}+\arctan x-\frac{2x}{2\qty(1+x^2)}=\arctan x.\]
+    \[\dv{}{x}\qty(x\arctan(x)-\frac{1}{2}\ln(1+x^2))=\frac{x}{1+x^2}+\arctan(x)-\frac{2x}{2\qty(1+x^2)}=\arctan(x).\]
 \end{proof}
 \sssc{Inverse cotangent function}
-\[\int\arccot x\dd{x}=x\arccot x+\frac{1}{2}\ln(1+x^2)+C.\]
+\[\int\arccot(x)\dd{x}=x\arccot(x)+\frac{1}{2}\ln(1+x^2)+C.\]
 \begin{proof}\mbox{}\\
     Differentiate RHS:
-    \[\dv{}{x}\qty(x\arccot x+\frac{1}{2}\ln(1+x^2))=-\frac{x}{1+x^2}+\arccot x+\frac{2x}{2\qty(1+x^2)}=\arccot x.\]
+    \[\dv{}{x}\qty(x\arccot(x)+\frac{1}{2}\ln(1+x^2))=-\frac{x}{1+x^2}+\arccot(x)+\frac{2x}{2\qty(1+x^2)}=\arccot(x).\]
 \end{proof}
 \sssc{Inverse secant function}
-\[\int\arcsec x\dd{x}=x\arcsec x-\ln\abs{x+\sqrt{x^2-1}}+C,\quad|x|\geq 1.\]
+\[\int\arcsec(x)\dd{x}=x\arcsec(x)-\ln\abs{x+\sqrt{x^2-1}}+C,\quad|x|\geq 1.\]
 \begin{proof}\mbox{}\\
     Differentiate RHS:
-    \[\dv{}{x}\qty(x\arcsec x-\ln\abs{x+\sqrt{x^2-1}})=\frac{x}{|x|\sqrt{x^2-1}}+\arcsec x-\frac{1}{\abs{x+\sqrt{x^2-1}}}\qty(1+\frac{2x}{\sqrt{x^2-1}})=\frac{x}{|x|\sqrt{x^2-1}}+\arcsec x-\frac{x}{|x|}\frac{1}{x+\sqrt{x^2-1}}\frac{x+\sqrt{x^2-1}}{\sqrt{x^2-1}}=\arcsec x.\]
+    \[\dv{}{x}\qty(x\arcsec(x)-\ln\abs{x+\sqrt{x^2-1}})=\frac{x}{|x|\sqrt{x^2-1}}+\arcsec(x)-\frac{1}{\abs{x+\sqrt{x^2-1}}}\qty(1+\frac{2x}{\sqrt{x^2-1}})=\frac{x}{|x|\sqrt{x^2-1}}+\arcsec(x)-\frac{x}{|x|}\frac{1}{x+\sqrt{x^2-1}}\frac{x+\sqrt{x^2-1}}{\sqrt{x^2-1}}=\arcsec(x).\]
 \end{proof}
 \sssc{Inverse cosecant function}
-\[\int\arccsc x\dd{x}=x\arccsc x+\ln\abs{x+\sqrt{x^2-1}}+C,\quad|x|\geq 1.\]
+\[\int\arccsc(x)\dd{x}=x\arccsc(x)+\ln\abs{x+\sqrt{x^2-1}}+C,\quad|x|\geq 1.\]
 \begin{proof}\mbox{}\\
     Differentiate RHS:
-    \[\dv{}{x}\qty(x\arccsc x+\ln\abs{x+\sqrt{x^2-1}})=-\frac{x}{|x|\sqrt{x^2-1}}+\arccsc x+\frac{1}{\abs{x+\sqrt{x^2-1}}}\qty(1+\frac{2x}{\sqrt{x^2-1}})=-\frac{x}{|x|\sqrt{x^2-1}}+\arccsc x+\frac{x}{|x|}\frac{1}{x+\sqrt{x^2-1}}\frac{x+\sqrt{x^2-1}}{\sqrt{x^2-1}}=\arccsc x.\]
+    \[\dv{}{x}\qty(x\arccsc(x)+\ln\abs{x+\sqrt{x^2-1}})=-\frac{x}{|x|\sqrt{x^2-1}}+\arccsc(x)+\frac{1}{\abs{x+\sqrt{x^2-1}}}\qty(1+\frac{2x}{\sqrt{x^2-1}})=-\frac{x}{|x|\sqrt{x^2-1}}+\arccsc(x)+\frac{x}{|x|}\frac{1}{x+\sqrt{x^2-1}}\frac{x+\sqrt{x^2-1}}{\sqrt{x^2-1}}=\arccsc(x).\]
 \end{proof}
 \sssc{Hyperbolic sine function}
-\[\int\sinh x\dd{x}=\cosh x+C.\]
-\[\int\sinh^2x\dd{x}=\frac{\sinh(2x)}{4}-\frac{x}{2}+C.\]
-\[\int\sinh^nx\dd{x}=\frac{1}{n}\sinh^{n-1}x\cosh x-\frac{n-1}{n}\int\sinh^{n-2}x\dd{x},\quad n\in\bbN_{>2}.\]
+\[\int\sinh(x)\dd{x}=\cosh(x)+C.\]
+\[\int\sinh^2(x)\dd{x}=\frac{\sinh(2x)}{4}-\frac{x}{2}+C.\]
+\[\int\sinh^n(x)\dd{x}=\frac{1}{n}\sinh^{n-1}(x)\cosh(x)-\frac{n-1}{n}\int\sinh^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
 \sssc{Hyperbolic cosine function}
-\[\int\cosh x\dd{x}=\sinh x+C.\]
-\[\int\cosh^2x\dd{x}\frac{\sinh(2x)}{4}+\frac{x}{2}+C.\]
-\[\int\cosh^nx\dd{x}=\frac{1}{n}\cosh^{n-1}x\sinh x+\frac{n-1}{n}\int\cosh^{n-2}x\dd{x},\quad n\in\bbN_{>2}.\]
+\[\int\cosh(x)\dd{x}=\sinh(x)+C.\]
+\[\int\cosh^2(x)\dd{x}\frac{\sinh(2x)}{4}+\frac{x}{2}+C.\]
+\[\int\cosh^n(x)\dd{x}=\frac{1}{n}\cosh^{n-1}(x)\sinh(x)+\frac{n-1}{n}\int\cosh^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
 \sssc{Hyperbolic tangent function}
-\[\int\tanh x\dd{x}=\ln\cosh x+C.\]
-\[\int\tanh^2x\dd{x}=x-\tanh x+C.\]
-\[\int\tanh^nx\dd{x}=\frac{1}{n-1}\tanh^{n-1}x-\int\tanh^{n-2}x\dd{x},\quad n\in\bbN_{>2}.\]
+\[\int\tanh(x)\dd{x}=\ln\cosh(x)+C.\]
+\[\int\tanh^2(x)\dd{x}=x-\tanh(x)+C.\]
+\[\int\tanh^n(x)\dd{x}=\frac{1}{n-1}\tanh^{n-1}(x)-\int\tanh^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
 \sssc{Hyperbolic cotangent function}
-\[\int\coth x\dd{x}=\ln|\sinh x|+C.\]
-\[\int\coth^2x\dd{x}=x-\coth x+C.\]
-\[\int\coth^nx\dd{x}=-\frac{1}{n-1}\coth^{n-1}x-\int\coth^{n-2}x\dd{x},\quad n\in\bbN_{>2}.\]
+\[\int\coth(x)\dd{x}=\ln|\sinh(x)|+C.\]
+\[\int\coth^2(x)\dd{x}=x-\coth(x)+C.\]
+\[\int\coth^n(x)\dd{x}=-\frac{1}{n-1}\coth^{n-1}(x)-\int\coth^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
 \sssc{Hyperbolic secant function}
-\[\int\sech x\dd{x}=\arctanh\sinh x+C.\]
-\[\int\sech^2x\dd{x}=\tanh x+C.\]
-\[\int\sech^nx\dd{x}=\frac{1}{n-1}\sech^{n-1}x\tanh x+\frac{n-2}{n-1}\int\sech^{n-2}x\dd{x},\quad n\in\bbN_{>2}.\]
+\[\int\sech(x)\dd{x}=\arctanh\sinh(x)+C.\]
+\[\int\sech^2(x)\dd{x}=\tanh(x)+C.\]
+\[\int\sech^n(x)\dd{x}=\frac{1}{n-1}\sech^{n-1}(x)\tanh(x)+\frac{n-2}{n-1}\int\sech^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
 \sssc{Hyperbolic cosecant function}
-\[\int\csch x\dd{x}=\ln\abs{\tanh\frac{x}{2}}+C.\]
-\[\int\csch^2x\dd{x}=-\coth x+C.\]
-\[\int\csch^nx\dd{x}=-\frac{1}{n-1}\csch^{n-1}x\coth x+\frac{n-2}{n-1}\int\csch^{n-2}x\dd{x},\quad n\in\bbN_{>2}.\]
+\[\int\csch(x)\dd{x}=\ln\abs{\tanh\frac{x}{2}}+C.\]
+\[\int\csch^2(x)\dd{x}=-\coth(x)+C.\]
+\[\int\csch^n(x)\dd{x}=-\frac{1}{n-1}\csch^{n-1}(x)\coth(x)+\frac{n-2}{n-1}\int\csch^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
 \sssc{Inverse hyperbolic sine function}
-\[\int\arcsinh x\dd{x}=x\arcsinh x-\sqrt{x^2+1}+C.\]
+\[\int\arcsinh(x)\dd{x}=x\arcsinh(x)-\sqrt{x^2+1}+C.\]
 \sssc{Inverse hyperbolic cosine function}
-\[\int\arccosh x\dd{x}=x\arccosh x-\sqrt{x^2-1}+C,\quad x\geq 1.\]
+\[\int\arccosh(x)\dd{x}=x\arccosh(x)-\sqrt{x^2-1}+C,\quad(x)\geq 1.\]
 \sssc{Inverse hyperbolic tangent function}
-\[\int\arctanh x\dd{x}=x\arctanh x+\frac{1}{2}\ln(1-x^2)+C,\quad|x|<1.\]
+\[\int\arctanh(x)\dd{x}=x\arctanh(x)+\frac{1}{2}\ln(1-x^2)+C,\quad|x|<1.\]
 \sssc{Inverse hyperbolic cotangent function}
-\[\int\operatorname{arccoth} x\dd{x}=x\operatorname{arccoth} x+\frac{1}{2}\ln(x^2-1)+C,\quad|x|>1.\]
+\[\int\operatorname{arccoth}(x)\dd{x}=x\operatorname{arccoth}(x)+\frac{1}{2}\ln(x^2-1)+C,\quad|x|>1.\]
 \sssc{Inverse hyperbolic secant function}
-\[\int\arcsech x\dd{x}=x\arcsech x+\arctan\qty(\frac{\sqrt{1-x^2}}{x})+C,\quad 0<x\leq 1.\]
+\[\int\arcsech(x)\dd{x}=x\arcsech(x)+\arctan\qty(\frac{\sqrt{1-x^2}}{x})+C,\quad 0<x\leq 1.\]
 \sssc{Inverse hyperbolic cosecant function}
-\[\int\arccsch x\dd{x}=x\arccsch x+\ln\abs{x+\sqrt{x^2+1}}+C,\quad x\neq 0.\]
+\[\int\arccsch(x)\dd{x}=x\arccsch(x)+\ln\abs{x+\sqrt{x^2+1}}+C,\quad x\neq 0.\]
 \sssc{Rational functions}
 $a\neq 0$.
 \[\int\frac{f'(x)}{f(x)}\,\mathrm{d}x=\ln|f(x)|+C.\]
