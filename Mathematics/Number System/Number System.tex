@@ -1,0 +1,86 @@
+\documentclass[a4paper,12pt]{article}
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{3}
+\input{/usr/share/LaTeX-ToolKit/template.tex}
+\begin{document}
+\title{Number System}
+\author{沈威宇}
+\date{\temtoday}
+\titletocdoc
+\sct{Number System}
+\ssc{Definition}
+Let the base (aka radix) $b\in\mathbb{N}_{>1}$. A base-$b$ (aka radix-$b$) number
+\[N=\qty((-1)^m\ldots d_2d_1d_0.d_{-1}d_{-2}\ldots)_b,\quad m\in\{0,1\}\land\forall i\colon d_i\in\mathbb{N}_0\land d_i<b\]
+represents the value
+\[N =(-1)^m\sum_id_ib^i.\]
+
+We can only represent a base in another base or in decimal (base-10), and we have to specify the base you use if not in decimal; otherwise, every base would be base-10.
+
+To indicate the base of a base-$b$ number, we append subscript $_b$ after it. We also use prefix \verb|0b| (or \verb|0B|) to represent base-2 numbers, aka binary numbers, prefix \verb|0| (or \verb|0o|, \verb|0O|) to represent base-8 numbers, aka octal numbers, prefix \verb|0x| (or \verb|0X|) to represent base-16 numbers, aka hexadecimal number, and no prefix (or \verb|0d|, \verb|0D|) to represent base-10 numbers, aka decimal numbers.
+
+Usually, when the radix $b>10_{10}$, $A$ (or $a$) is used to represent the digit $9+1$; when the radix $b>11_{10}$, $B$ (or $b$) is used to represent the digit $9+2$; and so on.
+\ssc{Conversion between bases}
+\sssc{General conversion method}
+We want to convert a number $N$ in base $x$ with $x\in\mathbb{N}_{>1}$,
+\[N=((-1)^m\ldots d_2d_1d_0.d_{-1}d_{-2}\ldots)_x,\quad m\in\{0,1\},\]
+into base $y\neq x$ (written in base $x$) with $y\in\mathbb{N}_{>1}$.
+\ben
+\item First, we take $I_1=(\ldots d_2d_1d_0)_x$ and repeatedly:
+\ben
+\item take $r_i=I_i\mod y$, convert it to base $y$, of which the result must be a single digit, and
+\item take $I_{i+1}=\frac{I-r_i}{y}$,
+\een
+in the $i$th (start from $1$st) time, until the first time $I_{i+1}=0$, and let that time be the $k$th time.
+\item Second, we take $J_1=(0.d^{-1}d^{-2}\ldots)_x$ and repeatedly
+\ben
+\item take $s_j=\lfloor J_j\cdot y\rfloor$, which may be more than $1$ digits if $x>y$ and is later treated directly as in base $y$, and
+\item take $J_{j+1}=J_j\cdot y-s_j$,
+\een
+in the $j$th (start from $1$st) time, until the first time $J_{j+1}=0$, and let that time be the $l$th time.
+\item Then, $N$ is
+\[(-1)^m\qty(\sum_{i=1}^kr_i\times y^{i-1}+\sum_{j=1}^ls_j\times y^{-j}),\]
+and $N$ in base $y$ can be obtained by first taking the integer part of the magnitude of it:
+\[(r_kr_{k-1}\ldots r_2r_1)_y\]
+and then obtaining the fractional part of the magnitude of it using vertical addition where the $i$th row is $s_i$ with the units digit of $s_i$ in the $i$th digit to the right of the radix point, for each $i$, where carry propagation is applied to ensure all digits are valid in base $y$, i.e. $<y$.
+\een
+
+To convert an expression that is a radix-independent fuction $f$ of a vector of numbers $(p_1,p_2,\ldots)$, we convert each $p_i$ to the wanted base, let it be $q_i$, then the wanted result is $f(q_1,q_2,\ldots)$.
+\sssc{Power-base conversion method}
+To convert a base-$b$ number into base $b^n$ with $b,n\in\mathbb{N}_{>1}$, we group the digits to the left and right of the radix point into blocks of $n$ digits starting from the digits closest to the radix point and convert each block to one digit in base $b^n$.
+\sssc{Root-base conversion method}
+To convert a base-$b^n$ number in into base $b$ with $b,n\in\mathbb{N}_{>1}$, we convert each digit to $n$ digits in base $b$ and concatenate them.
+\sssc{Product and quotient-base conversion method}
+We want to convert a number in base $x$ with $x\in\mathbb{N}_{>1}$,
+\[N=((-1)^m\ldots d_2d_1d_0.d_{-1}d_{-2}\ldots)_x,\quad m\in\{0,1\},\]
+into base $y=ax$ (written in base $x$) with $y\in\mathbb{N}_{>1}$.
+
+We take $D_i=d_i\cdot a^{-i}$, which is later treated directly as in base $y$, for each integer $i$.
+
+Then, $N$ is
+\[(-1)^m\sum_iD_i\times y^i,\]
+and $N$ in base $y$ can be obtained by vertical addition where the $i$th row is $D_i$ with the units digit of $D_i$ in the $(i+1)$th digit to the left of the radix point, for each $i$, where carry propagation is applied to ensure all digits are valid in base $y$, i.e. $<y$.
+\sssc{Criterion of finite expansion after base conversion}
+A finite rational number with the fractional part of the magnitude of it expressed in fraction in base $x$ with $x\in\mathbb{N}_{>1}$ being $D_x$ can be expressed in finite digits in radix point in base $y\neq x$ with $y\in\mathbb{N}_{>1}$ iff the reduced denominator (denominator cancelled the greatest common factor with the numerator) of $D_x$ has no prime factor that is not a prime factor of $y$.
+\subsection{Binary}
+A binary digit is called a bit, which is either $0$ or $1$. Binary arithmetic is the same as decimals, except that "invert" or "flip" means converting $0$ to $1$ and $1$ to $0$, and "complement" means inverting all bits.
+
+The most significant bit (MSB) or most significant digit is the bit with the highest value place in a binary number and is the leftmost bit in standard binary notation; the least significant bit (LSB) or least significant digit is the bit with the lowest value place in a binary number and is the rightmost bit in standard binary notation.
+
+$4$ bits is called a nibble; $8$ bits is called a byte.
+
+A binary prefix is a unit prefix that indicates a multiple of a unit of measurement by an integer power of two. They are most often used in information technology as multipliers of bit and byte, in which the short prefixes are prefixed before b (representing bits) or B (representing bytes), and the long prefixes are prefixed before bits or bytes.
+\begin{longtable}[c]{|c|c|c|c|c|}
+\hline
+Value & IEC (short) & IEC (long) & JEDEC (short) & JEDEC (long)\\\hline
+$1024$ & Ki & kibi & K & kilo\\\hline
+$1024^2$ & Mi & mebi & M & mega\\\hline
+$1024^3$ & Gi & gibi & G & giga\\\hline
+$1024^4$ & Ti & tebi & T & tera\\\hline
+$1024^5$ & Pi & pebi & —\\\hline
+$1024^6$ & Ei & exbi & —\\\hline
+$1024^7$ & Zi & zebi & —\\\hline
+$1024^8$ & Yi & yobi & —\\\hline
+$1024^9$ & Ri & robi & —\\\hline
+$1024^10$ & Qi & quebi & —\\\hline
+\end{longtable}\FB
+\end{document}

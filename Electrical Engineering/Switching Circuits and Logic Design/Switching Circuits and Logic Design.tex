@@ -1,4 +1,4 @@
-\documentclass[a4paper,12pt]{report}
+\documentclass[a4paper,12pt]{article}
 \setcounter{secnumdepth}{5}
 \setcounter{tocdepth}{3}
 \input{/usr/share/LaTeX-ToolKit/template.tex}
@@ -7,251 +7,21 @@
 \author{沈威宇}
 \date{\temtoday}
 \titletocdoc
-\chapter{Switching Circuits and Logic Design}
-\sct{Number Systems}
-\ssc{Definition}
-Let the base (aka radix) $b\in\mathbb{N}_{>1}$. A base-$b$ (aka radix-$b$) number
-\[N=\qty((-1)^m\ldots d_2d_1d_0.d_{-1}d_{-2}\ldots)_b,\quad m\in\{0,1\}\land\forall i\colon d_i\in\mathbb{N}_0\land d_i<b\]
-represents the value
-\[N =(-1)^m\sum_id_ib^i.\]
-
-We can only represent a base in another base or in decimal (base-10), and we have to specify the base you use if not in decimal; otherwise, every base would be base-10.
-
-To indicate the base of a base-$b$ number, we append subscript $_b$ after it. We also use prefix \verb|0b| (or \verb|0B|) to represent base-2 numbers, aka binary numbers, prefix \verb|0| (or \verb|0o|, \verb|0O|) to represent base-8 numbers, aka octal numbers, prefix \verb|0x| (or \verb|0X|) to represent base-16 numbers, aka hexadecimal number, and no prefix (or \verb|0d|, \verb|0D|) to represent base-10 numbers, aka decimal numbers.
-
-Usually, when the radix $b>10_{10}$, $A$ (or $a$) is used to represent the digit $9+1$; when the radix $b>11_{10}$, $B$ (or $b$) is used to represent the digit $9+2$; and so on.
-\ssc{Conversion between bases}
-\sssc{General conversion method}
-We want to convert a number $N$ in base $x$ with $x\in\mathbb{N}_{>1}$,
-\[N=((-1)^m\ldots d_2d_1d_0.d_{-1}d_{-2}\ldots)_x,\quad m\in\{0,1\},\]
-into base $y\neq x$ (written in base $x$) with $y\in\mathbb{N}_{>1}$.
-\ben
-\item First, we take $I_1=(\ldots d_2d_1d_0)_x$ and repeatedly:
-\ben
-\item take $r_i=I_i\mod y$, convert it to base $y$, of which the result must be a single digit, and
-\item take $I_{i+1}=\frac{I-r_i}{y}$,
-\een
-in the $i$th (start from $1$st) time, until the first time $I_{i+1}=0$, and let that time be the $k$th time.
-\item Second, we take $J_1=(0.d^{-1}d^{-2}\ldots)_x$ and repeatedly
-\ben
-\item take $s_j=\lfloor J_j\cdot y\rfloor$, which may be more than $1$ digits if $x>y$ and is later treated directly as in base $y$, and
-\item take $J_{j+1}=J_j\cdot y-s_j$,
-\een
-in the $j$th (start from $1$st) time, until the first time $J_{j+1}=0$, and let that time be the $l$th time.
-\item Then, $N$ is
-\[(-1)^m\qty(\sum_{i=1}^kr_i\times y^{i-1}+\sum_{j=1}^ls_j\times y^{-j}),\]
-and $N$ in base $y$ can be obtained by first taking the integer part of the magnitude of it:
-\[(r_kr_{k-1}\ldots r_2r_1)_y\]
-and then obtaining the fractional part of the magnitude of it using vertical addition where the $i$th row is $s_i$ with the units digit of $s_i$ in the $i$th digit to the right of the radix point, for each $i$, where carry propagation is applied to ensure all digits are valid in base $y$, i.e. $<y$.
-\een
-
-To convert an expression that is a radix-independent fuction $f$ of a vector of numbers $(p_1,p_2,\ldots)$, we convert each $p_i$ to the wanted base, let it be $q_i$, then the wanted result is $f(q_1,q_2,\ldots)$.
-\sssc{Power-base conversion method}
-To convert a base-$b$ number into base $b^n$ with $b,n\in\mathbb{N}_{>1}$, we group the digits to the left and right of the radix point into blocks of $n$ digits starting from the digits closest to the radix point and convert each block to one digit in base $b^n$.
-\sssc{Root-base conversion method}
-To convert a base-$b^n$ number in into base $b$ with $b,n\in\mathbb{N}_{>1}$, we convert each digit to $n$ digits in base $b$ and concatenate them.
-\sssc{Product and quotient-base conversion method}
-We want to convert a number in base $x$ with $x\in\mathbb{N}_{>1}$,
-\[N=((-1)^m\ldots d_2d_1d_0.d_{-1}d_{-2}\ldots)_x,\quad m\in\{0,1\},\]
-into base $y=ax$ (written in base $x$) with $y\in\mathbb{N}_{>1}$.
-
-We take $D_i=d_i\cdot a^{-i}$, which is later treated directly as in base $y$, for each integer $i$.
-
-Then, $N$ is
-\[(-1)^m\sum_iD_i\times y^i,\]
-and $N$ in base $y$ can be obtained by vertical addition where the $i$th row is $D_i$ with the units digit of $D_i$ in the $(i+1)$th digit to the left of the radix point, for each $i$, where carry propagation is applied to ensure all digits are valid in base $y$, i.e. $<y$.
-\sssc{Criterion of finite expansion after base conversion}
-A finite rational number with the fractional part of the magnitude of it expressed in fraction in base $x$ with $x\in\mathbb{N}_{>1}$ being $D_x$ can be expressed in finite digits in radix point in base $y\neq x$ with $y\in\mathbb{N}_{>1}$ iff the reduced denominator (denominator cancelled the greatest common factor with the numerator) of $D_x$ has no prime factor that is not a prime factor of $y$.
-\subsection{Binary}
-A binary digit is called a bit, which is either $0$ or $1$. Binary arithmetic is the same as decimals, except that "invert" or "flip" means converting $0$ to $1$ and $1$ to $0$, and "complement" means inverting all bits.
-
-The most significant bit (MSB) or most significant digit is the bit with the highest value place in a binary number and is the leftmost bit in standard binary notation; the least significant bit (LSB) or least significant digit is the bit with the lowest value place in a binary number and is the rightmost bit in standard binary notation.
-
-$4$ bits is called a nibble; $8$ bits is called a byte.
-
-A binary prefix is a unit prefix that indicates a multiple of a unit of measurement by an integer power of two. They are most often used in information technology as multipliers of bit and byte, in which the short prefixes are prefixed before b (representing bits) or B (representing bytes), and the long prefixes are prefixed before bits or bytes.
-\begin{longtable}[c]{|c|c|c|c|c|}
-\hline
-Value & IEC (short) & IEC (long) & JEDEC (short) & JEDEC (long)\\\hline
-$1024$ & Ki & kibi & K & kilo\\\hline
-$1024^2$ & Mi & mebi & M & mega\\\hline
-$1024^3$ & Gi & gibi & G & giga\\\hline
-$1024^4$ & Ti & tebi & T & tera\\\hline
-$1024^5$ & Pi & pebi & —\\\hline
-$1024^6$ & Ei & exbi & —\\\hline
-$1024^7$ & Zi & zebi & —\\\hline
-$1024^8$ & Yi & yobi & —\\\hline
-$1024^9$ & Ri & robi & —\\\hline
-$1024^10$ & Qi & quebi & —\\\hline
-\end{longtable}\FB
-\sct{Signed Number}
-Suppose you have $N$ bits to present a signed number. There's three common method:
-\ssc{Sign and magnitude}
-\sssc{Definition}
-The MSB represents sign, in which $0$ represents positive and $1$ represents negative; the remaining represents magnitude. 
-\sssc{Range}
-It can represent numbers range from $-(2^{N-1}-1)$ to $2^{N-1}-1$. It has two zero ($+0$ and $-0$).
-\sssc{Properties}
-It might be the easiest to read, but its arithmetic is the hardest to compute.
-\ssc{1's complement}
-\sssc{Definition}
-The nonnegative numbers are the same as those in sign and magnitude; the negative numbers invert all bits of its absolute value, i.e. $(2^N-1)$ minus its absolute value, that is, if a negative integer $B$ written in 1's complement is
-\[B=b_{N-1}b_{N-2}\ldots b_1b_0,\]
-then
-\[B=-2^{N-1}+1+\sum_{i=0}^{N-2}b_i2^i.\]
-\sssc{Range}
-It can represent numbers range from $-(2^{N-1}-1)$ to $2^{N-1}-1$. It has two zero ($+0$ and $-0$). 
-\sssc{Properties}
-Its arithmetic is easier than sign and magnitude and harder than 2's complement to compute. 
-\sssc{Negation}
-The negation can be computed by inverting all bits, that is, subtracting it from $2^N-1$.
-\sssc{Addition}
-The addition can be computed the same as unsigned numbers; however, if the sum had a carry out from the MSB, we must add it back to the LSB, called the "end-around carry (EAC)".
-\begin{proof}\mbox{}\\
-Assume no overflow conditions.
-
-Suppose we want to add two $n$-bit numbers $A$ and $B$, and $A$ and $B$ in 1's complement are $A_1$ and $B_1$ (treated as unsigned). Without loss of generality, assume $A\geq B$.
-
-Let:
-\[S = A_1 + B_1,\quad R=S \mod 2^N, \quad C=\left\lfloor\frac{S}{2^N}\right\rfloor,\]
-and $S_c$ be the correct sum of $A$ and $B$ in 1's complement (treated as unsigned).
-
-Case 0: $A,B\geq 0$
-\[S =A_1+B_1=A+B=S_c\]
-
-Case 1: $A\geq 0>B\land |B|\leq A$
-\[S =A_1+B_1=2^N-1+A-|B|\]
-\[R=A-|B|-1,\quad C=1\]
-\[S_c=A-|B|=R+C\]
-
-Case 2: $A\geq 0>B\land |B|\geq A$
-\[S =A_1+B_1=2^N-1+A-|B|=S_c=R\]
-
-Case 3: $0\geq A\geq B$
-\[S=A_1+B_1=2^{N+1}-2-|A|-|B|\]
-\[R=2^N-2-|A|-|B|,\quad C=1\]
-\[S_c=2^N-1-|A|-|B|=R+C\]
-\end{proof}
-
-If the sum of two positive numbers is greater than $2^{N-1}-1$, it overflows into the negative range; if the sum of two negative numbers is less than $-2^{N-1}+1$, it overflows into the positive range. This makes overflow detection straightforward.
-\sssc{Subtraction}
-The subtraction can be computed the same as unsigned numbers; however, if the difference had a borrow out from the MSB, we must subtract it back to the LSB, called the "end-around borrow (EAB)".
-\begin{proof}\mbox{}\\
-Assume no overflow conditions.
-
-Suppose we want to subtract a $n$-bit number $B$ from another $n$-bit number $A$, and $A$ and $B$ in 1's complement are $A_1$ and $B_1$ (treated as unsigned).
-
-Let:
-\[S = A_1 - B_1,\quad R=S \mod 2^N, \quad C=\left\lfloor\frac{S}{2^N}\right\rfloor,\]
-and $S_c$ be the correct sum of $A$ and $B$ in 1's complement (treated as unsigned).
-
-Case 0: $A\geq B\geq 0$
-\[S=A_1-B_1=A-B=S_c\]
-
-Case 1: $B\geq A\geq 0$
-\[S=A_1-B_1=2^N-1-(B-A)\]
-\[R=B-A+1,\quad C=1\]
-\[S_c=B-A=R-C\]
-
-Case 2: $A\geq 0>B$
-\[S=A_1-B_1=A-\qty(2^N-1-|B|)\]
-\[R=A+|B|+1,\quad C=1\]
-\[S_c=A+|B|=R-C\]
-
-Case 3: $B\geq 0>A$
-\[S=A_1-B_1=2^N-1-|A|-B=R=S_c\]
-
-Case 4: $0>A\geq B$
-\[S=A_1-B_1=2^N-1-|A|-\qty(2^N-1-|B|)=|B|-|A|=R=S_c\]
-
-Case 5: $0>B>A$
-\[S=A_1-B_1=2^N-1-\qty(2^N-1-|A|-\qty(2^N-1-|B|))=2^N-1+|A|-|B|\]
-\[R=|A|-|B|+1,\quad C=1\]
-\[S_c=|A|-|B|=R-C\]
-\end{proof}
-
-If the difference of a positive number and a negative number is greater than $2^{N-1}-1$, it overflows into the negative range; if the difference of a negative number and a positive number is less than $-2^{N-1}+1$, it overflows into the positive range. This makes overflow detection straightforward.
-\ssc{2's complement}
-\sssc{Definition}
-The nonnegative numbers are the same as those in sign and magnitude; the negative numbers invert all bits of its absolute value and add $1$, i.e. $2^N$ minus its absolute value, where $-2^{N-1}$ is only MSB being $1$ and others being $0$, that is, if a negative integer $B$ written in 1's complement is
-\[B=b_{N-1}b_{N-2}\ldots b_1b_0,\]
-then
-\[B=-2^{N-1}+\sum_{i=0}^{N-2}b_i2^i.\]
-\begin{proof}
-\[\ba
-B&=-|B|=-\qty(\sum_{i=0}^{n-2}(1-b_i)+1)\\
-&=-\frac{2^{n-1}-1}{2-1}-1+\sum_{i=0}^{n-2}b_i2^i\\
-&=-2^{n-1}+\sum_{i=0}^{n-2}b_i2^i
-\ea\]
-\end{proof}
-\sssc{Range}
-It can represent numbers range from $-2^{N-1}$ to $2^{N-1}-1$. It has only one zero.
-\sssc{Properties}
-Its arithmetic is the easiest to compute. It is the most commonly used representation for signed numbers in computers.
-\sssc{Negation}
-The negation can be computed by inverting all bits and add $1$, that is, subtracting it from $2^N$.
-\begin{proof}\mbox{}\\
-Let negative integer $B$ written in 2's complement be
-\[B=b_{n-1}b_{n-2}\ldots b_1b_0,\]
-that is,
-\[B=-2^{n-1}+\sum_{i=0}^{n-2}b_i2^i.\]
-The negation of it, which is positive, is
-\[\ba
--B&=2^{n-1}-\sum_{i=0}^{n-2}b_i2^i\\
-&=2^{n-1}+\sum_{i=0}^{n-2}(1-b_i)2^i-\sum_{i=0}^{n-2}2^i\\
-&=2^{n-1}+\sum_{i=0}^{n-2}(1-b_i)2^i-\frac{2^{n-1}-1}{2-1}\\
-&=\sum_{i=0}^{n-2}(1-b_i)2^i+1
-\ea\]
-\end{proof}
-\sssc{Addition}
-The addition can be computed the same as unsigned numbers.
-
-If the sum of two positive numbers is greater than $2^{N-1}-1$, it overflows into the negative range; if the sum of two negative numbers is less than $-2^{N-1}$, it overflows into the positive range. This makes overflow detection straightforward.
-\sssc{Subtraction}
-The subtraction can be computed the same as unsigned numbers.
-
-If the difference of a positive number and a negative number is greater than $2^{N-1}-1$, it overflows into the negative range; if the difference of a negative number and a positive number is less than $-2^{N-1}$, it overflows into the positive range. This makes overflow detection straightforward.
-\sct{Binary Codes}
-\ssc{Binary-coded decimal (BCD)}
-Binary-coded decimal (BCD), or more explicitly 8-4-2-1 BCD, is a way to represent decimal digits ($0$ to $9$) in binary, in which each decimal digit is encoded separately using 4 bits (a nibble). There are several other possible sets of binary codes for the ten decimal digits.
-
-A $k$-bit ($k\geq 4$) weighted code has the property that if the weights are integers $w_{k-1}, w_{k-2}, \ldots w_0$ (in decimal, and where for all $0\leq i<j<k$, $w_i<w_j$), the code $a_{k-1}a_{k-2}\ldots a_0$, where $a_i\in\{0,1\}$, represents number $N$, then
-\[N = \sum_{n=0}^{k-1}w_na_n.\]
-If a number $N$ has more than one possible codes in a specific set of weights, the one such that the unsigned binary number presented by the code is least is usually used. A such $k$-bit weighted code can represent up to $\sum_{n=1}^{k-1}w_n$.
-
-Below shows the BCD and other commonly used binary codes:
-\begin{longtable}[c]{|c|c|c|c|c|c|}
-\hline
-Decimal Digit & 8-4-2-1 Code (BCD) & 6-3-1-1 Code & Excess-3 Code & 2-out-of-5 Code & Gray Code\\\hline
-0 & 0000 & 0000 & 0011 & 00011 & 0000\\\hline
-1 & 0001 & 0001 & 0100 & 00101 & 0001\\\hline
-2 & 0010 & 0011 & 0101 & 00110 & 0011\\\hline
-3 & 0011 & 0100 & 0110 & 01001 & 0010\\\hline
-4 & 0100 & 0101 & 0111 & 01010 & 0110\\\hline
-5 & 0101 & 0111 & 1000 & 01100 & 1110\\\hline
-6 & 0110 & 1000 & 1001 & 10001 & 1010\\\hline
-7 & 0111 & 1001 & 1010 & 10010 & 1011\\\hline
-8 & 1000 & 1011 & 1011 & 10100 & 1001\\\hline
-9 & 1001 & 1100 & 1100 & 11000 & 1000\\\hline
-\end{longtable}\FB
-
+\sct{Switching Circuits and Logic Design}
+\ssc{Digital Systems and Switching Circuits}
 \begin{itemize}
-\item\tb{8-4-2-1 Code (BCD)}: Each decimal digit is directly mapped to its binary form, which makes it easy to convert between decimal numbers and binary.
-\item\tb{6-3-1-1 Code}: Sometimes makes it easier to design display drivers or simplify logic circuits.
-\item\tb{Excess-3 Code}: It's sefl-complementing, i.e. the complement of it is the 9's complement of the number. 
-\item\tb{2-out-of-5 Code}: Always has exactly 2 ones.
-\item\tb{Gray Code}: Each step changes only one bit, which minimizes transition errors for sensors, counters, or rotary encoders.
-\eit
-\ssc{Character Encoding}
-Many applications of computers require the processing of data which contains numbers, letters, and other symbols. In order to transmit such data to or from a computer or store it internally in a computer, each character must be represented by a binary code.
-
-Common character encodings include:
-\bit
-\item\tb{ASCII code (American Standard Code for Information Interchange)}: A 7-bit code, so 128 different code combinations are available.
-\item\tb{Unicode or the Unicode Standard (TUS)}: Includes international characters, symbols, etc. such as those in Arabic, CJK Unified Ideographs, and Emoticons. The Unicode Standard itself defines three encodings: UTF-8, UTF-16, and UTF-32. UTF-8 is the most widely used, in part due to its backwards-compatibility with ASCII.
-\eit
-\section{Boolean Algebra}
-\subsection{Introduction}
+\item\textbf{Digital system or digital circuit}: Deals with signals that have discrete values. Theoretically, for a given input, the output is exactly correct.
+\item\textbf{Analog system}: Deals with signals that vary continuously over time. The output might have an error depending on the accuracy of the components used.
+\item\textbf{System design}: The highest level of the design of digital systems, where you break the system into subsystems, specify what each subsystem do, and determine the interconnection and control of the subsystems.
+\item\textbf{(Digital) logic design}: The middle level of the design of digital systems, where you specify the logic operations inside each subsystem.
+\item\textbf{Circuit (ckt) design}: The lowest level of the design of digital systems, where you specify the electronic components and their interconnection to form the system.
+\item\textbf{Switching (logic) circuit}: A switching circuit has one or more inputs and one or more outputs which take on discrete values. Many of a digital system's subsystems take the form of a switching circuit.
+\item\textbf{Combinational (logic) circuit}: A circuit whose output value depends only on the present input value.
+\item\textbf{Sequential (logic) circuit}: A circuit whose output value depends on the present input value and past input values.
+\item\textbf{Logic gate}: An electronic device that performs a basic Boolean operation on one or more binary inputs (0 or 1) to produce a single binary output (0 or 1).
+\item\textbf{Flip-flop}: A bistable electronic device, meaning it has two stable states representing logic 0 and 1. It's a basic memory element used in sequential circuits.
+\end{itemize}
+\subsection{Boolean Algebra}
 The basic mathematics needed for the study of logic design of digital systems is Boolean algebra. Boolean algebra was introduced by George Boole in his first book The Mathematical Analysis of Logic (1847), and set forth more fully in his An Investigation of the Laws of Thought (1854).
 
 Switching devices are essentially two-state devices (e.g. switches which are open or closed and transistors with high or low output voltages). Consequently, we will emphasize the special case of Boolean algebra in which all of the variables assume only one of two values, 0 (false) or 1 (true), called Boolean variables; this two-valued Boolean algebra is also called switching algebra.
@@ -883,23 +653,12 @@ For incompletely specified Boolean functions, we do the following change to the 
 \item Treat don't-care terms as minterms when grouping minterm.
 \item Omit don't-care terms columns when creating the prime implicant chart.
 \een
+\ssc{Two-level circuit}
+The maximum number of gates cascaded in series between a circuit input and the output is referred to as the number of levels of gates. Thus, a function written in sum-of-products form or in product-of-sums form corresponds directly to a two-level gate circuit. As is usually the case in digital circuits where the gates are driven from flip-flop outputs, we will assume that all variables and their complements are available as circuit inputs.
+For this reason, we will not normally count inverters which are connected directly Multi-Level Gate Circuits NAND and NOR Gates to input variables when determining the number of levels in a circuit
 
 
 
 
 
-
-
-\section{Digital Systems and Switching Circuits}
-\begin{itemize}
-\item\textbf{Digital system}: Deals with signals that have discrete values. Theoretically, for a given input, the output is exactly correct.
-\item\textbf{Analog system}: Deals with signals that vary continuously over time. The output might have an error depending on the accuracy of the components used.
-\item\textbf{System design}: The highest level of the design of digital systems, where you break the system into subsystems, specify what each subsystem do, and determine the interconnection and control of the subsystems.
-\item\textbf{Logic design}: The middle level of the design of digital systems, where you specify the logic operations inside each subsystem.
-\item\textbf{Circuit design}: The lowest level of the design of digital systems, where you specify the electronic components and their interconnection to form the system.
-\item\textbf{Switching circuit}: A switching circuit has one or more inputs and one or more outputs which take on discrete values. Many of a digital system's subsystems take the form of a switching circuit.
-\item\textbf{Combinational circuit}: A circuit whose output value depends only on the present input value.
-\item\textbf{Sequential circuit}: A circuit whose output value depends on the present input value and past input values.
-\item\textbf{Logic gate}: An electronic device that performs a basic Boolean operation on one or more binary inputs (0 or 1) to produce a single binary output (0 or 1).
-\end{itemize}
 \end{document}
