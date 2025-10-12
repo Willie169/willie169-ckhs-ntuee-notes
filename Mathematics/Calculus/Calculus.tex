@@ -2,6 +2,13 @@
 \setcounter{secnumdepth}{5}
 \setcounter{tocdepth}{3}
 \input{/usr/share/LaTeX-ToolKit/template.tex}
+\makeatletter
+\DeclareFontFamily{U}{tipa}{}
+\DeclareFontShape{U}{tipa}{m}{n}{<->tipa10}{}
+\DeclareDocumentCommand\arc@char{}{{\usefont{U}{tipa}{m}{n}\symbol{62}}}
+\DeclareDocumentCommand\arc{m}{\mathpalette\arc@arc{#1}}
+\DeclareDocumentCommand\arc@arc{m m}{\sbox0{$\m@th#1#2$}\vbox{\hbox{\resizebox{\wd0}{\height}{\arc@char}}\nointerlineskip\box0}}
+\makeatother
 \begin{document}
 \title{Calculus}
 \author{沈威宇}
@@ -1976,6 +1983,26 @@ The inverse Laplace transform of a complex function $F(s)$ is given by the line 
 &=\ln(a)a^x
 \ea\]
 \end{proof}
+\sssc{Limit of Sine Function over Independent Variable}
+\[\lim_{h\to 0}\frac{\sin h}{h}=1.\]
+\begin{proof}
+On a unit circle with center $O$, consider the arc $\arc{AB}=h$ subtended by acute angle $h$ (i.e. $\frac{\pi}{2}>h>0$), the chord length $\ol{BC}=\sin(h)$ with $C$ be the intersection of the chord and $\ora{OA}$, and the tangent length $\ol{AD}=\tan(h)$ with $D$ be the intersection of the tangent and $\ora{OB}$.
+
+We can observe that
+\[\ol{BC}<\arc{AB}.\]
+
+Take tangent of the circle at $B$. Let it intersects $\ol{AD}$ at $E$. We can observe that the adjacent $\ol{BE}$ is less than the hypothenuse $\ol{DE}$. Thus
+\[\arc{AB}<\ol{BE}+\ol{AE}<\ol{DE}+\ol{AE}=\ol{AD}.\]
+
+Thus,
+\[\sin h<h<\tan h.\]
+\[1<\frac{h}{\sin h}<\frac{1}{\cos h}.\]
+\[\cos h<\frac{\sin h}{h}<1.\]
+\[\lim_{h\to 0}\cos h=1.\]
+
+By the squeeze theorem:
+\[\lim_{h\to 0}\frac{\sin h}{h}=1.\]
+\end{proof}
 \sssc{Sine function}
 \[\dv{\sin(x)}{x}=\cos(x).\]
 \[\sin(x)=\int_0^x\cos(t)\dd{t}.\]
@@ -1984,26 +2011,12 @@ The inverse Laplace transform of a complex function $F(s)$ is given by the line 
 \dv{\sin\theta}{\theta}&=\lim_{h\to 0}\frac{\sin(\theta+h)-\sin(\theta)}{h}\\
 &=\lim_{h\to 0}\frac{\sin(\theta)(\cos h-1)+\cos\theta\sin h}{h}
 \end{aligned}\]
-
-Lemma:
-\[\lim_{h\to 0}\frac{\sin h}{h}=1.\]
-\begin{proof}
-From geometry of the arc length, the chord length, and the tangent length of an arc on a unit circle:
-\[\sin h<h<\tan h,\quad h>0.\]
-\[1<\frac{h}{\sin h}<\frac{1}{\cos h}.\]
-\[\cos h<\frac{\sin h}{h}<1.\]
-\[\lim_{h\to 0}\cos h=1.\]
-
-By the squeeze theorem:
-\[\lim_{h\to 0}\frac{\sin h}{h}=1.\]
-\end{proof}
-
 \[\cos h-1=-2\sin^2\qty(\frac{h}{2}),\]
 \[\frac{\sin^2\qty(\frac{h}{2})}{h}=\frac{\sin\qty(\frac{h}{2})}{\frac{h}{2}}\cdot\frac{\sin\qty(\frac{h}{2})}{2}.\]
-
-By lemma, we have:
+By
+\[\lim_{h\to 0}\frac{\sin h}{h}=1.\]
+we have:
 \[\lim_{h\to 0}\frac{\cos h-1}{h}=0.\]
-
 \[\begin{aligned}
 &=\lim_{h\to 0}\sin\theta\cdot 0+\cos\theta\cdot 1\\
 &=\cos\theta.
