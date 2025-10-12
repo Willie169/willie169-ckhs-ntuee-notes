@@ -35,103 +35,42 @@ A logic gate is a device that performs a Boolean function. Below, electronic sym
 \sssc{NOT / Negation / Inversion / Complement}
 \begin{itemize}
 \item Symbol: $A'$, $\neg A$, $\mathord{\sim}A$, or $\ol{A}$
-\item Definition: Invert the value.
-\item Truth Table:
-\begin{longtable}[c]{|m|m|}
-\hline
-A & A'\\\hline
-0 & 1\\\hline
-1 & 0\\\hline
-\end{longtable}
-\item Logic gate: \esym{not port}
+\item Definition: One input, one output. True if the input is false and false otherwise.
+\item Logic gate (input at the right and output at the left):\\\mbox{}\\\cktnode[american]{not port}
 \eit 
 \sssc{AND / Conjunction / Logical Multiplication}
 \begin{itemize}
 \item Symbol: $A \cdot B$, $A*B$, or $AB$
-\item Definition: True if both inputs are true and false otherwise.
-\item Truth Table:
-\begin{longtable}[c]{|m|m|m|}
-\hline
-A & B & A\cdot B\\\hline
-0 & 0 & 0\\\hline
-1 & 0 & 0\\\hline
-0 & 1 & 0\\\hline
-1 & 1 & 1\\\hline
-\end{longtable}
-\item Logic gate: \esym{and port}
+\item Definition: Multiple inputs, one output. True if all inputs are true and false otherwise.
+\item Logic gate (input at the right and output at the left, assuming two inputs and one output):\\\mbox{}\\\cktnode[american]{and port}
 \eit
 \sssc{OR / Disjunction / Logical Addition / Inclusive OR}
 \begin{itemize}
 \item Symbol: $A + B$
-\item Definition: True if at least one input is true and false otherwise.
-\item Truth Table:
-\begin{longtable}[c]{|m|m|m|}
-\hline
-A & B & A+B\\\hline
-0 & 0 & 0\\\hline
-1 & 0 & 1\\\hline
-0 & 1 & 1\\\hline
-1 & 1 & 1\\\hline
-\end{longtable}
-\item Logic gate: \esym{or port}
+\item Definition: Multiple inputs, one output. True if at least one input is true and false otherwise.
+\item Logic gate (input at the right and output at the left, assuming two inputs and one output):\\\mbox{}\\\cktnode[american]{or port}
 \eit
 \sssc{XOR / Exclusive OR}
 \begin{itemize}
 \item Symbol: $A \oplus B$
-\item Definition: $A'B+AB'$
-\item Truth Table:
-\begin{longtable}[c]{|m|m|m|}
-\hline
-A & B & A\oplus B\\\hline
-0 & 0 & 0\\\hline
-1 & 0 & 1\\\hline
-0 & 1 & 1\\\hline
-1 & 1 & 0\\\hline
-\end{longtable}
-\item Logic gate: \esym{xor port}
+\item Definition: Multiple inputs, one output. True if odd number of inputs are true and false otherwise.
+\item Logic gate (input at the right and output at the left, assuming two inputs and one output):\\\mbox{}\\\cktnode[american]{xor port}
 \eit
 \sssc{NAND / Not AND}
 \begin{itemize}
-\item Definition: $(AB)'$
-\item Truth Table:
-\begin{longtable}[c]{|m|m|m|}
-\hline
-A & B & (A\cdot B)'\\\hline
-0 & 0 & 1\\\hline
-1 & 0 & 1\\\hline
-0 & 1 & 1\\\hline
-1 & 1 & 0\\\hline
-\end{longtable}
-\item Logic gate: \esym{nand port}
+\item Definition: Multiple inputs, one output. True if all inputs are false and false otherwise.
+\item Logic gate (input at the right and output at the left, assuming two inputs and one output):\\\mbox{}\\\cktnode[american]{nand port}
 \eit
 \sssc{NOR / Not OR}
 \begin{itemize}
-\item Definition: $(A+B)'$
-\item Truth Table:
-\begin{longtable}[c]{|m|m|m|}
-\hline
-A & B & (A+B)'\\\hline
-0 & 0 & 1\\\hline
-1 & 0 & 0\\\hline
-0 & 1 & 0\\\hline
-1 & 1 & 0\\\hline
-\end{longtable}
-\item Logic gate: \esym{nor port}
+\item Definition: Multiple inputs, one output. True if at least one input is false and false otherwise.
+\item Logic gate (input at the right and output at the left, assuming two inputs and one output):\\\mbox{}\\\cktnode[american]{nor port}
 \eit
 \sssc{XNOR / Logical equivalence / Exclusive NOR}
 \begin{itemize}
 \item Symbol: $A\equiv B$ or $A\odot B$
-\item Definition: $(A\oplus B)'$
-\item Truth Table:
-\begin{longtable}[c]{|m|m|m|}
-\hline
-A & B & (A\oplus B)'\\\hline
-0 & 0 & 1\\\hline
-1 & 0 & 0\\\hline
-0 & 1 & 0\\\hline
-1 & 1 & 1\\\hline
-\end{longtable}
-\item Logic gate: \esym{xnor port}
+\item Definition: Multiple inputs, one output. True if even number (including 0) of inputs are true and false otherwise.
+\item Logic gate (input at the right and output at the left, assuming two inputs and one output):\\\mbox{}\\\cktnode[american]{xnor port}
 \eit
 \ssc{Boolean Arithmetic}
 \sssc{Boolean expression}
@@ -168,6 +107,8 @@ An expression is said to be in POS form if it consists of a product (AND) of sum
 Every Boolean expression can be expressed in POS form. And a Boolean expression may have more than one POS forms.
 \sssc{Dual}
 The dual of an Boolean expression or equation is another Boolean expression or equation obtained by simplifing the original expression or equation such that it only consists of literals, AND, and OR, and then replacing all AND in it with OR, all OR in it with AND, and all constants in it with their complements.
+\sssc{Functionally complete}
+A functionally complete set is a set of logic operations that can express all possible Boolean functions of any number of input variables. A minimal functionally complete set is a functionally complete set such that removing any one element from it makes it no longer functionally complete. Some minimal functionally complete sets are $\{\tx{AND},\tx{NOT}\}$, $\{\tx{OR},\tx{NOT}\}$, $\{\tx{XOR},\tx{NOT}\}$, $\{\tx{XNOR},\tx{NOT}\}$, $\{\tx{NAND}\}$, and $\{\tx{NOR}\}$, in which NAND and NOR are called universal gates.
 \sssc{Boolean Vector Functions or Boolean Multi-output Functions}
 A Boolean vector function or a Boolean multi-output function is a function $f\colon\{1,0\}^n\to\{1,0\}^m$. A Boolean vector function can be specified with truth table or as a tuple of $m$ Boolean functions.
 \ssc{Theorems}
@@ -362,32 +303,32 @@ Then, the complement $f'$ of has minterm expansion
 \[f'=\sum m(i\in T),\]
 and maxterm expansion
 \[f'=\prod M(i\in S).\]
-\ssc{Minimal form}
+\ssc{Minimum form}
 \sssc{Implicant}
 Given a Boolean function $f$ of $n$ variables, a product term $P$ is an implicant of $f$ iff for every combination of values of the $n$ variables for which $P = 1$, $f$ is also equal to $1$.
 \sssc{Prime implicant}
 A prime implicant of a function $f$ is an implicant of $f$ which is no longer an implicant of $f$ if any literal is deleted from it.
 \sssc{Essential prime implicant}
 An essential prime implicant of a function $f$ is a prime implicant $P$ of $f$ such that there exists a minterm $m$ of $f$ such that $m$ implies $P$ and for any other prime implicant $Q$ of $f$, $m$ implies $Q'$.
-\sssc{Minimal SOP form or minimum sum}
-A SOP form of a Boolean function is called minimal if it has the fewest number of terms out of all SOP forms of the function, and every product term in it can not have any variable in it be eliminated. For a given Boolean function, there may exist more than one minimal SOP forms of it.
+\sssc{Minimum SOP form or minimum sum}
+A SOP form of a Boolean function is called minimum if it has the fewest number of terms out of all SOP forms of the function, and every product term in it can not have any variable in it be eliminated. For a given Boolean function, there may exist more than one minimum SOP forms of it.
 
-A minimal SOP form of a Boolean function must consist of some of its prime implicants (but not necessarily all), that is, if a SOP form contains implicants that are not prime implicants, it is not minimal.
+A minimum SOP form of a Boolean function must consist of some of its prime implicants (but not necessarily all), that is, if a SOP form contains implicants that are not prime implicants, it is not minimum.
 
-A minimal SOP form of a Boolean function must contain all of its essential prime implicants.
-\sssc{Minimal POS form or minimum product}
-A POS form of a Boolean function is called minimal if it has the fewest number of terms out of all POS forms of the function, and every sum term in it can not have any variable in it be eliminated. For a given Boolean function, there may exist more than one minimal POS forms of it.
+A minimum SOP form of a Boolean function must contain all of its essential prime implicants.
+\sssc{Minimum POS form or minimum product}
+A POS form of a Boolean function is called minimum if it has the fewest number of terms out of all POS forms of the function, and every sum term in it can not have any variable in it be eliminated. For a given Boolean function, there may exist more than one minimum POS forms of it.
 
-One can simplify a Boolean function to minimal POS form by:
+One can simplify a Boolean function to minimum POS form by:
 \ben
 \item taking dual of the expression,
-\item simplifying it to minimal SOP form, and
+\item simplifying it to minimum SOP form, and
 \item taking dual of it.
 \een
 \ssc{Incompletely Specified Boolean Functions (ISF) or Don't-care Functions}
 An incompletely specified function (ISF) or a don't-care function is a Boolean function but in which for some input combinations, the output is not defined or irrelevant, often denoted as $X$. Those input combinations are called don't-care conditions. The definition of ON-set and OFF-set of an ISF is the same as completely specified function; the Don't-Care set or DC-set of an ISF is the set of all don't-care conditions.
 
-The output for the don't-care conditions can be assigned either $0$ or $1$ such that the minimal SOP (or POS) forms have the fewest terms.
+The output for the don't-care conditions can be assigned either $0$ or $1$ such that the minimum SOP (or POS) forms have the fewest terms.
 
 An ISF $f$ with ON-set $S$, OFF-set $T$, and DC-set $D$ is sometimes written similar to minterm expansion as
 \[f=\sum m(i\in S)+\sum d(i\in D),\]
@@ -395,7 +336,7 @@ and similar to maxterm expansion as
 \[f=\prod M(i\in T)+\prod d(i\in D),\]
 where each $d_i$ is called a don't-care terms.
 \ssc{Karnaugh Maps}
-A Karnaugh Map, aka a K-map, is a grid that visualize the ways to simplify a completely or incompletely specified Boolean function to a minimal SOP form.
+A Karnaugh Map, aka a K-map, is a grid that visualize the ways to simplify a completely or incompletely specified Boolean function to a minimum SOP form.
 \sssc{Draw Karnaugh Maps of less than five variables}
 If the ouput of the input combination of a cell is $1$, we write $1$ in that cell; if the ouput of the input combination of a cell is $0$, we can leave that cell empty or write $0$ in that cell; if the input combination of a cell is a don't care condition, we write $X$ in that cell.
 
@@ -445,7 +386,7 @@ An allowed collection of groups must follow the following rules:
 \item If any $1$ is only covered by one possible group, then that group must be chosen, that is, any group representing an essential prime implicant must be chosen.
 \item If any group $g$ is completely covered by another group, $g$ must not be chosen, that is, a group chosen must represent a prime implicant.
 \eit
-Find the allowed collections of groups that contain the fewest groups. For each one of them, the sum of the implicants corresponding to the groups in it is a minimal SOP form of the given function.
+Find the allowed collections of groups that contain the fewest groups. For each one of them, the sum of the implicants corresponding to the groups in it is a minimum SOP form of the given function.
 \sssc{Five-variable Karnaugh Maps}
 One way of drawing a five-variable K-map is by placing one four-variable K-map on top of another, that is, for a $5$-variable Boolean function $f(A,B,C,D,E)$, the K-map is
 {\fontsize{8pt}{12pt}\selectfont
@@ -486,8 +427,8 @@ where $m_i$ is minterms in $(n-1)$-variable truth tables.
 \item If any $1$, $E$, or $E'$ is only covered by one possible group, then that group must be chosen, that is, any group representing an essential prime implicant must be chosen.
 \item If any group $g$ is completely covered by another group, $g$ must not be chosen, that is, a group chosen must represent a prime implicant.
 \eit
-\item Find the allowed collections of groups that contain the fewest groups. For each one of them, the sum of the implicants corresponding to the groups in it is a minimal SOP form of the given function.
-\eit
+\item Find the allowed collections of groups that contain the fewest groups. For each one of them, the sum of the implicants corresponding to the groups in it is a minimum SOP form of the given function.
+\een
 \sssc{Multiple MEVs}
 Suppose we have an $n$-variable completely or incompletely specified Boolean function $f$ in which there exist $m$ (usually $n-4$) variables $E_1,E_2,\ldots E_m$ chosen as MEVs such that given a $(n-m)$-variable input combination $P$ of the other variables, the set of all possible values of $f(P,Q,E_i)$ is a subset of $\{0,X\}$ or a subset of $\{1,X\}$, with $X$ denoting don't-care, for any fixed $(m-1)$-variable input combination $Q$ of the MEVs except $E_i$, where $f(P,Q,E_i)$ denotes a function of $E_i$ where the output when $E_i$ be $x\in\{1,0\}$, $f(P,Q,x)$ equals the output of $f$ when the variables except MEVs be their values in $P$, the MEVs except $E_i$ be their values in $Q$, and $E_i$ be $x$.
 \ben
@@ -515,10 +456,10 @@ where $m_i$ is minterms in $(n-m)$-variable truth tables.
 \item If any $1$, $E_i$, or $E_i'$ is only covered by one possible group, then that group must be chosen, that is, any group representing an essential prime implicant must be chosen.
 \item If any group $g$ is completely covered by another group, $g$ must not be chosen, that is, a group chosen must represent a prime implicant.
 \eit
-\item Find the allowed collections of groups that contain the fewest groups. For each one of them, the sum of the implicants corresponding to the groups in it is a minimal SOP form of the given function.
-\eit
+\item Find the allowed collections of groups that contain the fewest groups. For each one of them, the sum of the implicants corresponding to the groups in it is a minimum SOP form of the given function.
+\een
 \ssc{Quine-McCluskey Method}
-The Quine-McCluskey method (along with the Petrick's method) is a systematic procedure to find the minimal SOP forms of a completely or incompletely specified Boolean function. Below, we first discuss about completely specified Boolean function.
+The Quine-McCluskey method (along with the Petrick's method) is a systematic procedure to find the minimum SOP forms of a completely or incompletely specified Boolean function. Below, we first discuss about completely specified Boolean function.
 \sssc{Minterm expansion}
 First, we convert the function minterm expansion.
 
@@ -613,7 +554,7 @@ For $f$:
 (6,7) a'bc & & & & & \times & \times & & & & \\
 \end{longtable}
 \sssc{Select ssential prime implicants}
-When a prime implicant is selected for inclusion in the minimal SOP form, the chart is reduced by deleting the corresponding row and the columns which correspond to the minterms covered by that prime implicant.
+When a prime implicant is selected for inclusion in the minimum SOP form, the chart is reduced by deleting the corresponding row and the columns which correspond to the minterms covered by that prime implicant.
 
 If a column has only one $\times$, the prime implicant of that row is an essential prime implicant.
 
@@ -643,9 +584,9 @@ until no more such reduction is possible.
 For $f$:
 \[P=P_2.\]
 
-Each term in reduced $P$ represents a solution, that is, a set of prime implicants which covers all minterms in the reduced chart. The sets with the least number of literals in it are the minimal SOP forms of $f$.
+Each term in reduced $P$ represents a solution, that is, a set of prime implicants which covers all minterms in the reduced chart. The sets with the least number of literals in it are the minimum SOP forms of $f$.
 
-For $f$: $P_2$ is the only term in reduced $P$, thus the only minimal SOP form is 
+For $f$: $P_2$ is the only term in reduced $P$, thus the only minimum SOP form is 
 \[f=P_2=b'c'+cd'+a'bd.\]
 \sssc{Incompletely specified Boolean functions}
 For incompletely specified Boolean functions, we do the following change to the process for completely specified Boolean functions:
@@ -653,12 +594,45 @@ For incompletely specified Boolean functions, we do the following change to the 
 \item Treat don't-care terms as minterms when grouping minterm.
 \item Omit don't-care terms columns when creating the prime implicant chart.
 \een
-\ssc{Two-level circuit}
-The maximum number of gates cascaded in series between a circuit input and the output is referred to as the number of levels of gates. Thus, a function written in sum-of-products form or in product-of-sums form corresponds directly to a two-level gate circuit. As is usually the case in digital circuits where the gates are driven from flip-flop outputs, we will assume that all variables and their complements are available as circuit inputs.
-For this reason, we will not normally count inverters which are connected directly to input variables when determining the number of levels in a circuit.
+\ssc{Multi-level circuit}
+\sssc{Introduction}
+The maximum number of gates cascaded in series between a circuit input and the output is referred to as the number of levels of gates. Thus, a function written in sum-of-products form or in product-of-sums form corresponds directly to a two-level gate circuit. As is usually the case in digital circuits where the gates are driven from flip-flop outputs, we will assume that all variables and their complements are available as circuit inputs. For this reason, we will not normally count inverters which are connected directly to input variables.
 
+Given multi-input logic gates $A_1,A_2,\ldots A_m$, $A_1-A_2-\ldots A_mi$ circuit means a $m$-level circuit composed of a level of $A_1$ gates followed by a level of $A_2$ gate followed by $\ldots$ an $A_m$ gate at the output.
 
+Given multi-input logic gates $A_1,A_2,\ldots A_m$, circuit of $A_1,A_2,\ldots A_m$ gates implies no particular ordering of the gates.
+\sssc{Design of circuits of AND and OR gates}
+The number of levels in an AND-OR circuit can be increased by factoring the sum-of-products expression from which it was derived. Similarly, the number of levels in an OR-AND circuit can be increased by multiplying out some of the terms in the product-of-sums expression from which it was derived. Sometimes doing so will reduce the required number of gates and gate inputs, and thus reduce the cost of building the circuit. In many application, the number of gates which can be cascaded is limited by gate delays. When the input of a gate is switched, there is a finite time before the output changes. When several gates are cascaded, the time between an input change and the corresponding change in the circuit output may become excessive and slow down the operation of the digital system.
 
+In general, to be sure of obtaining a minimum solution, one must find both the circuit with the AND-gate output and the one with the OR-gate output. If an expression for $f'$ has $n$ levels, the complement of that expression is an $n$-level expression for $f$. Therefore, to realize $f$ as an $n$-level circuit with an AND-gate output, one procedure is first to find an $n$-level expression for $f'$ with an OR operation at the output level and then complement the expression for $f'$.
+\sssc{Forms and design of two-level circuits}
+A degenerate form can degenerate into one-level circuit, while a non-degenerate form can't and is an implementation of a SOP form or POS form.
+
+There are 16 forms of two-level circuit given AND, OR, NAND, NOR gates, in which the degenerate forms are
+\bit
+\item AND-AND, which can degenerate into one AND,
+\item OR-OR, which can degenerate into one OR,
+\item AND-NAND, which can degenerate into one NAND,
+\item OR-NOR, which can degenerate into one NOR,
+\item NAND-NOR, which can degenerate into one AND,
+\item NOR-NAND, which can degenerate into one OR,
+\item NAND-OR, which can degenerate into one NAND,
+\item NOR-AND, which can degenerate into one NOR,
+\eit
+the non-degenerate forms that implement SOP form are
+\bit
+\item AND-OR, which is directly derived from the SOP form,
+\item NAND-NAND, which can be converted from AND-OR form by taking complement on all inputs of the second level and replacing AND with NAND and OR with NAND, which can be derived from AND-OR form by taking double negation and applying De Morgan's law on the second level OR,
+\item OR-NAND, which can be converted from AND-OR form by taking complement on all literals and replacing AND with OR and OR with NAND, which can be derived from NAND-NAND form by applying De Morgan's law on the first level NAND, or from NOR-OR form by applying De Morgan's law on the second level OR,
+\item NOR-OR, which can be converted from AND-OR form by taking complement on all inputs of the first level and replacing AND with NOR, which can be derived from AND-OR form by applying De Morgan's law on the first level AND,
+\eit
+and the non-degenerate forms that implement POS form are
+\bit
+\item OR-AND, which is directly derived from the POS form,
+\item NOR-NOR, which can be converted from OR-AND form by taking complement on all inputs of the second level and replacing OR with NOR and AND with NOR, which can be derived from OR-AND form by taking double negation and applying De Morgan's law on the second level AND,
+\item AND-NOR, which can be converted from OR-AND form by taking complement on all literals and replacing OR with AND and AND with NOR, which can be derived from NOR-NOR form by applying De Morgan's law on the first level NOR, or from NAND-AND form by applying De Morgan's law on the second level AND,
+\item NAND-AND, which can be converted from OR-AND form by taking complement on all inputs of the first level and replacing OR with NAND, which can be derived from OR-AND form by applying De Morgan's law on the first level OR.
+\eit
 
 
 \end{document}
