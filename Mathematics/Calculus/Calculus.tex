@@ -304,7 +304,7 @@ The limit of a sum of constant multiples of functions is the sum of the constant
 \sssc{Product law}
 The limit of a product of functions is the product of the limits of the functions.
 \sssc{Quotient law}
-The limit of a quotient of functions is the quotient of the limits of the functions, provided that the limit of the denominator is not 0.
+The limit of a quotient of functions is the quotient of the limits of the functions, provided that the limit of the denominator is not 0, in which the reciprocals of $\infty$ and $-\infty$ are $0$.
 \sssc{Power law}
 The limit of the $n$th power of a function, in which $n$ is a positive integer, is the $n$th power of the limit of the function.
 \sssc{Root law}
@@ -1514,21 +1514,45 @@ Let $f(x)$ and $g(x)$ be functions differentiable on $(-\infty,a)$. If
 then:
 \[\lim_{x\to -\infty}\frac{f(x)}{g(x)}=\lim_{x\to -\infty}\frac{f'(x)}{g'(x)}.\]
 \begin{proof}
-For the second statement. Let $f(x)$ and $g(x)$ be functions differentiable on $(a,b)$ with $a<b$. We want to show that if $\lim_{x\to a^+}f(x)=\lim_{x\to a^+}g(x)=0$ and $\lim_{x\to a^+}\frac{f'(x)}{g'(x)}\in\mathbb{R}\cup\{-\infty,\infty\}$, then
+Let $f(x)$ and $g(x)$ be functions differentiable on $(a,b)$ with $a<b$. We want to show that if $\lim_{x\to a^+}f(x)=\lim_{x\to a^+}g(x)=0$ and $\lim_{x\to a^+}\frac{f'(x)}{g'(x)}\in\mathbb{R}\cup\{-\infty,\infty\}$, then
 \[\lim_{x\to a^+}\frac{f(x)}{g(x)}=\lim_{x\to a^+}\frac{f'(x)}{g'(x)}.\]
-Let
-\[F(x)=\begin{cases}f(x),\quad & x\in (a,b)\\
-\lim_{x\to a^+}f(x),\quad & x=a\end{cases}\]
+Because the existence of the limits, we know that there exists interval $(a,c)$ such that $g(x)$ and $g'(x)$ both $\neq 0$ on $(a,c)$. Let
+\[F(x)=\begin{cases}f(x),\quad & x\in (a,c)\\
+0,\quad & x=a\end{cases}\]
 and
-\[G(x)=\begin{cases}g(x),\quad & x\in (a,b)\\
-\lim_{x\to a^+}g(x),\quad & x=a\end{cases}\]
-By CMVT, for any $x\in (a,b)$, there exists $c\in (a,x)$ such that
-\[\frac{F(x)-F(a)}{G(x)-G(a)}=\frac{F'(c)}{G'(c)}.\]
+\[G(x)=\begin{cases}g(x),\quad & x\in (a,c)\\
+0,\quad & x=a\end{cases}\]
+By CMVT, for any $x\in (a,c)$, there exists $c\in (a,x)$ such that
+\[\qty(F(x)-F(a))G'(c)=\qty(G(x)-G(a))F'(c).\]
 Since $F(a)=G(a)=0$,
-\[\frac{F(x)}{G(x)}=\frac{F'(c)}{G'(c)}.\]
+\[F(x)G'(c)=G(x)F'(c).\]
 Thus,
+\[\lim_{x\to a^+}\frac{f(x)}{g(x)}=\lim_{x\to a^+}\frac{F(x)}{G(x)}=\lim_{x\to a^+}\frac{F'(x)}{G'(x)}=\lim_{x\to a^+}\frac{f'(x)}{g'(x)}.\]
+
+Let $f(x)$ and $g(x)$ be functions differentiable on $(a,b)$ with $a<b$. We want to show that if $\lim_{x\to a^+}f(x)=\lim_{x\to a^+}g(x)=\infty$ and $\lim_{x\to a^+}\frac{f'(x)}{g'(x)}\in\mathbb{R}\cup\{-\infty,\infty\}$, then
 \[\lim_{x\to a^+}\frac{f(x)}{g(x)}=\lim_{x\to a^+}\frac{f'(x)}{g'(x)}.\]
-The other statements can be proven similarly.
+Because $\lim_{x\to a^+}f(x)=\lim_{x\to a^+}g(x)=\infty$, by quotient law, we know that
+\[\lim_{x\to a^+}\frac{1}{f(x)}=\lim_{x\to a^+}\frac{1}{g(x)}=0.\]
+Because the existence of the limits, there exists interval $(a,c)$ such that $\frac{1}{f(x)}$ and $\frac{1}{g(x)}$ both $\neq 0$ on $(a,c)$. Let
+\[F(x)=\begin{cases}\frac{1}{f(x)},\quad & x\in (a,b)\\
+0,\quad & x=a\end{cases}\]
+and
+\[G(x)=\begin{cases}\frac{1}{g(x)},\quad & x\in (a,b)\\
+0,\quad & x=a\end{cases}\]
+\[F'(x)=\frac{-f'(x)}{\qty(f(x))^2}.\]
+\[G'(x)=\frac{-g'(x)}{\qty(g(x))^2}.\]
+By CMVT, for any $x\in (a,c)$, there exists $c\in (a,x)$ such that
+\[\qty(F(x)-F(a))G'(c)=\qty(G(x)-G(a))F'(c).\]
+Since $F(a)=G(a)=0$,
+\[F(x)G'(c)=G(x)F'(c).\]
+Thus,
+\[\ba
+\lim_{x\to a^+}\frac{f(x)}{g(x)}&=\lim_{x\to a^+}\frac{G(x)}{F(x)}=\lim_{x\to a^+}\frac{G'(x)}{F'(x)}\\
+&=\lim_{x\to a^+}\frac{g'(x)}{f'(x)}\lim_{x\to a^+}\qty(\frac{f(x)}{g(x)})^2
+\ea\]
+\[\lim_{x\to a^+}\frac{f(x)}{g(x)}=\lim_{x\to a^+}\frac{f'(x)}{g'(x)}.\]
+
+All other statements can be proven either similarly or by applying other statements.
 \end{proof}
 \sssc{Indeterminate produucts}
 Let $I$ be an open interval and $a\in I$, and $f(x)$ and $g(x)$ be functions differentiable on $I\setminus\{a\}$. If $\lim_{x\to a}f(x)=0$ and $\abs{\lim_{x\to a}g(x)}=\infty$, where $\lim_{x\to a}f(x)g(x)$ is called indeterminate form of type $0\cdot\infty$, we may find $\lim_{x\to a}f(x)g(x)$ by writing the product $f(x)g(x)$ as a quotient:
