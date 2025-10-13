@@ -600,15 +600,15 @@ The maximum number of gates cascaded in series between a circuit input and the o
 
 Given multi-input logic gates $A_1,A_2,\ldots A_m$, $A_1-A_2-\ldots A_mi$ circuit means a $m$-level circuit composed of a level of $A_1$ gates followed by a level of $A_2$ gate followed by $\ldots$ an $A_m$ gate at the output.
 
-Given multi-input logic gates $A_1,A_2,\ldots A_m$, circuit of $A_1,A_2,\ldots A_m$ gates implies no particular ordering of the gates.
+Given multi-input logic gates $A_1,A_2,\ldots A_m$, circuit of $A_1,A_2,\ldots A_m$ gates or $A_1,A_2,\ldots A_m$-gates circuits implies no particular ordering of the gates.
 \sssc{Design of circuits of AND and OR gates}
 The number of levels in an AND-OR circuit can be increased by factoring the sum-of-products expression from which it was derived. Similarly, the number of levels in an OR-AND circuit can be increased by multiplying out some of the terms in the product-of-sums expression from which it was derived. Sometimes doing so will reduce the required number of gates and gate inputs, and thus reduce the cost of building the circuit. In many application, the number of gates which can be cascaded is limited by gate delays. When the input of a gate is switched, there is a finite time before the output changes. When several gates are cascaded, the time between an input change and the corresponding change in the circuit output may become excessive and slow down the operation of the digital system.
 
 In general, to be sure of obtaining a minimum solution, one must find both the circuit with the AND-gate output and the one with the OR-gate output. If an expression for $f'$ has $n$ levels, the complement of that expression is an $n$-level expression for $f$. Therefore, to realize $f$ as an $n$-level circuit with an AND-gate output, one procedure is first to find an $n$-level expression for $f'$ with an OR operation at the output level and then complement the expression for $f'$.
-\sssc{Forms and design of two-level circuits}
-A degenerate form can degenerate into one-level circuit, while a non-degenerate form can't and is an implementation of a SOP form or POS form.
+\sssc{Degeneracy}
+A $m$-level circuit is degenerate iff it can degenerate into less-than-$m$-level. A circuit is non-degenerate iff it's not degenerate.
 
-There are 16 forms of two-level circuit given AND, OR, NAND, NOR gates, in which the degenerate forms are
+There are $8$ degenerate forms, which are two-level circuits:
 \bit
 \item AND-AND, which can degenerate into one AND,
 \item OR-OR, which can degenerate into one OR,
@@ -617,22 +617,47 @@ There are 16 forms of two-level circuit given AND, OR, NAND, NOR gates, in which
 \item NAND-NOR, which can degenerate into one AND,
 \item NOR-NAND, which can degenerate into one OR,
 \item NAND-OR, which can degenerate into one NAND,
-\item NOR-AND, which can degenerate into one NOR,
+\item NOR-AND, which can degenerate into one NOR.
 \eit
-the non-degenerate forms that implement SOP form are
+
+A circuit is degenerate iff any two-level subcircuit of it is of the $8$ degenerate form.
+
+A non-deegenerate circuit is an implementation of a sum-of-product-of-sum-of-product-$\ldots$sum-of-product or product-of-sum-of-product-of-sum-$\ldots$product-of-sum form.
+\sssc{Design of two-level circuits}
+There are $16$ forms of two-level circuit consist of AND, OR, NAND, and NOR gates, $8$ of which are the degenerate forms, $4$ of which are implementation of SOP form, and $4$ of which are implementation of POS form.
+
+The non-degenerate forms that implement SOP form are
 \bit
 \item AND-OR, which is directly derived from the SOP form,
 \item NAND-NAND, which can be converted from AND-OR form by taking complement on all inputs of the second level and replacing AND with NAND and OR with NAND, which can be derived from AND-OR form by taking double negation and applying De Morgan's law on the second level OR,
 \item OR-NAND, which can be converted from AND-OR form by taking complement on all literals and replacing AND with OR and OR with NAND, which can be derived from NAND-NAND form by applying De Morgan's law on the first level NAND, or from NOR-OR form by applying De Morgan's law on the second level OR,
-\item NOR-OR, which can be converted from AND-OR form by taking complement on all inputs of the first level and replacing AND with NOR, which can be derived from AND-OR form by applying De Morgan's law on the first level AND,
+\item NOR-OR, which can be converted from AND-OR form by taking complement on all inputs of the first level and replacing AND with NOR, which can be derived from AND-OR form by applying De Morgan's law on the first level AND.
 \eit
-and the non-degenerate forms that implement POS form are
+
+The non-degenerate forms that implement POS form are
 \bit
 \item OR-AND, which is directly derived from the POS form,
 \item NOR-NOR, which can be converted from OR-AND form by taking complement on all inputs of the second level and replacing OR with NOR and AND with NOR, which can be derived from OR-AND form by taking double negation and applying De Morgan's law on the second level AND,
 \item AND-NOR, which can be converted from OR-AND form by taking complement on all literals and replacing OR with AND and AND with NOR, which can be derived from NOR-NOR form by applying De Morgan's law on the first level NOR, or from NAND-AND form by applying De Morgan's law on the second level AND,
 \item NAND-AND, which can be converted from OR-AND form by taking complement on all inputs of the first level and replacing OR with NAND, which can be derived from OR-AND form by applying De Morgan's law on the first level OR.
 \eit
+
+The procedure of designing a two-level circuit is
+\ben
+\item Simplify the Boolean function to be realized to SOP or POS form.
+\item Design an AND-OR or OR-AND circuit.
+\item Convert it to the wanted form.
+\eit
+\sssc{Design of multi-level NAND- and NOR-gate circuits}
+The procedure of designing a multi-level circuit is
+\ben
+\item Simplify the Boolean function to be realized to SOP or POS form.
+\item Design an AND-OR or OR-AND circuit.
+\item Convert it to the wanted form.
+\eit
+
+
+
 
 
 \end{document}
