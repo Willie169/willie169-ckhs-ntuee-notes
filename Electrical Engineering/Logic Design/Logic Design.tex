@@ -8,7 +8,7 @@
 \date{\temtoday}
 \titletocdoc
 \sct{Logic Design}
-\ssc{Introduction to Digital Systems and Switching Circuits}
+\ssc{Introduction to Switching Circuits}
 \begin{itemize}
 \item\textbf{Digital system or digital circuit}: Deals with signals that have discrete values. Theoretically, for a given input, the output is exactly correct.
 \item\textbf{Analog system}: Deals with signals that vary continuously over time. The output might have an error depending on the accuracy of the components used.
@@ -18,7 +18,7 @@
 \item\textbf{Switching (logic) circuit}: A switching circuit has one or more inputs and one or more outputs which take on discrete values. Many of a digital system's subsystems take the form of a switching circuit.
 \item\textbf{Combinational (logic) circuit}: A circuit whose output value depends only on the present input value.
 \item\textbf{Sequential (logic) circuit}: A circuit whose output value depends on the present input value and past input values.
-\item\textbf{Logic gate}: An electronic device that performs a basic Boolean operation on one or more binary inputs (0 or 1) to produce a single binary output (0 or 1).
+\item\textbf{Logic gate}: An electronic device that performs a logic operation on one or more binary inputs (0 or 1) to produce a single binary output (0 or 1). An empty circle, called inversion bubble or bubble, means inverting the input before inputting to the gate when at a input to a gate, and means inverting the output before outputting from the gate when at the output from a gate. Below, the symbols of logic gates follow ANSI standards.
 \item\textbf{Flip-flop}: A bistable electronic device, meaning it has two stable states representing logic 0 and 1. It's a basic memory element used in sequential circuits.
 \end{itemize}
 \subsection{Introduction to Boolean Algebra}
@@ -29,8 +29,6 @@ Switching devices are essentially two-state devices (e.g. switches which are ope
 In a switch circuit, 0 (usually) represents an open switch, and 1 represents a closed circuit. In general, 0 and 1 can be used to represent the two states in any binary-valued system.
 
 A Boolean function is a logical operation performed on one or more binary inputs that produces a single binary output.
-
-A logic gate is a device that performs a Boolean function. Below, electronic symbols follow ANSI standards. A bubble in a input to a gate means inverting the input before inputting to the gate; a bubble in the output from a gate means inverting the output before outputting from the gate.
 \subsection{Logical Operators}
 \sssc{NOT / Negation / Inversion / Complement}
 \begin{itemize}
@@ -663,10 +661,25 @@ The procedure of designing a multi-level NOR-gate circuit is
 \item Design an OR-AND-OR$\ldots$AND or AND-OR-AND-$\ldots$OR-AND circuit.
 \item Replace all gates with NOR gates and invert all literals that are inputs to levels of odd numbers.
 \een
-
-
-
-
-
+\sssc{Circuit conversion using inversion bubbles}
+By using inversion bubbles at the inputs instead of the output, we have alternative gate symbols:
+\bit
+\item NOT gate:\mbox{}\\
+\cktus{buffer gate}{i}
+\item AND gate:\mbox{}\\
+\cktus{nor gate}{ii}
+\item OR gate:\mbox{}\\
+\cktus{nand gate}{ii}
+\item NAND gate:\mbox{}\\
+\cktus{or gate}{ii}
+\item NOR gate:\mbox{}\\
+\cktus{and gate}{ii}
+\item XOR gate:\mbox{}\\
+\cktus{xnor gate}{ii}
+\item XNOR gate:\mbox{}\\
+\cktus{xor gate}{ii}
+\eit
+Adding inversion bubbles to both ends of any interconnection does not change the Boolean function realized by the circuit. Therefore, the gate type at level $i$ and $i+1$ can be changed by inserting inversion bubbles on both sides of all connections between levels $i+1$ and $i$. After this operation, the gates at level $i$ will appear in their alternate symbols (with input bubbles) and can be replaced with their standard forms if we desire.
 
 \end{document}
+
