@@ -2,13 +2,6 @@
 \setcounter{secnumdepth}{5}
 \setcounter{tocdepth}{3}
 \input{/usr/share/LaTeX-ToolKit/template.tex}
-\makeatletter
-\DeclareFontFamily{U}{tipa}{}
-\DeclareFontShape{U}{tipa}{m}{n}{<->tipa10}{}
-\DeclareDocumentCommand\arc@char{}{{\usefont{U}{tipa}{m}{n}\symbol{62}}}
-\DeclareDocumentCommand\arc{m}{\mathpalette\arc@arc{#1}}
-\DeclareDocumentCommand\arc@arc{m m}{\sbox0{$\m@th#1#2$}\vbox{\hbox{\resizebox{\wd0}{\height}{\arc@char}}\nointerlineskip\box0}}
-\makeatother
 \begin{document}
 \title{Calculus}
 \author{沈威宇}
@@ -1161,7 +1154,15 @@ Complete exponential Bell polynomial $B_n\qty(x_1,x_2,\ldots x_n)$ is defined as
 Differentiate both sides:
 \[f'\qty(f^{-1}(x))\qty(f^{-1})'(x)=1.\]
 \end{proof}
-\[\dv[n]{f^{-1}(x)}{x}=\frac{(-1)^{n-1}}{\qty(f'\qty(f^{-1}(x)))^{2n-1}}B_{n-1}\sum_{i=2}^{n}f^{(i)}\qty(f^{-1}(x)),\quad n\in\bbN.\]
+\[\qty(f^{-1})''(x)=\frac{f''\qty(f^{-1}(x))}{\qty(f'\qty(f^{-1}(x)))^3}.\]
+\begin{proof}
+\[f'\qty(f^{-1}(x))\qty(f^{-1})'(x)=1.\]
+Differentiate both sides:
+\[f''\qty(f^{-1}(x))\qty(\qty(f^{-1})'(x))^2+f'\qty(f^{-1}(x))\qty(f^{-1})''(x)=0.\]
+\[\qty(f^{-1})''(x)=\frac{f''\qty(f^{-1}(x))\qty(\qty(f^{-1})'(x))^2}{f'\qty(f^{-1}(x))}=\frac{f''\qty(f^{-1}(x))}{\qty(f'\qty(f^{-1}(x)))^3}.\]
+\end{proof}
+\[\dv[n]{f^{-1}(x)}{x}=\frac{(-1)^{n-1}}{\qty(f'\qty(f^{-1}(x)))^{2n-1}}B_{n-1}\sum_{i=2}^{n}f^{(i)}\qty(f^{-1}(x)),\quad n\in\bbN,\]
+where $B_n$ is complete exponential Bell polynomial.
 \sssc{Implicit differentiation (隱函數微分)}
 If $x$ and $y$ are related by an equation $F(x,y)=0$, then we can differentiate both sides with respect to $x$, treating $y$ as a function of $x$.
 
