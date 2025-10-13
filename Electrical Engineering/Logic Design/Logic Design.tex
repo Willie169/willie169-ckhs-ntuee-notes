@@ -598,6 +598,8 @@ For incompletely specified Boolean functions, we do the following change to the 
 \sssc{Introduction}
 The maximum number of gates cascaded in series between a circuit input and the output is referred to as the number of levels of gates. Thus, a function written in sum-of-products form or in product-of-sums form corresponds directly to a two-level gate circuit. As is usually the case in digital circuits where the gates are driven from flip-flop outputs, we will assume that all variables and their complements are available as circuit inputs. For this reason, we will not normally count inverters which are connected directly to input variables.
 
+The level starting with the output gate is numbered 1.
+
 Given multi-input logic gates $A_1,A_2,\ldots A_m$, $A_1-A_2-\ldots A_mi$ circuit means a $m$-level circuit composed of a level of $A_1$ gates followed by a level of $A_2$ gate followed by $\ldots$ an $A_m$ gate at the output.
 
 Given multi-input logic gates $A_1,A_2,\ldots A_m$, circuit of $A_1,A_2,\ldots A_m$ gates or $A_1,A_2,\ldots A_m$-gates circuits implies no particular ordering of the gates.
@@ -622,24 +624,24 @@ There are $8$ degenerate forms, which are two-level circuits:
 
 A circuit is degenerate iff any two-level subcircuit of it is of the $8$ degenerate form.
 
-A non-deegenerate circuit is an implementation of a sum-of-product-of-sum-of-product-$\ldots$sum-of-product or product-of-sum-of-product-of-sum-$\ldots$product-of-sum form.
+A non-deegenerate circuit is an implementation of a sum-of-product-of-sum-$\ldots$product or product-of-sum-of-product-$\ldots$sum form.
 \sssc{Design of two-level circuits}
 There are $16$ forms of two-level circuit consist of AND, OR, NAND, and NOR gates, $8$ of which are the degenerate forms, $4$ of which are implementation of SOP form, and $4$ of which are implementation of POS form.
 
-The non-degenerate forms that implement SOP form are
+The non-degenerate forms that implement SOP form are:
 \bit
-\item AND-OR, which is directly derived from the SOP form,
-\item NAND-NAND, which can be converted from AND-OR form by taking complement on all inputs of the second level and replacing AND with NAND and OR with NAND, which can be derived from AND-OR form by taking double negation and applying De Morgan's law on the second level OR,
-\item OR-NAND, which can be converted from AND-OR form by taking complement on all literals and replacing AND with OR and OR with NAND, which can be derived from NAND-NAND form by applying De Morgan's law on the first level NAND, or from NOR-OR form by applying De Morgan's law on the second level OR,
-\item NOR-OR, which can be converted from AND-OR form by taking complement on all inputs of the first level and replacing AND with NOR, which can be derived from AND-OR form by applying De Morgan's law on the first level AND.
+\item AND-OR, which can be directly derived from the SOP form,
+\item NAND-NAND, which can be converted from AND-OR form by replacing all gates with NAND gates and inverting all literals that are inputs to level 1, which can be derived from AND-OR form by taking double negation and applying De Morgan's law on level 1,
+\item OR-NAND, which can be converted from AND-OR form by replacing AND gates with OR gates and OR gate with NAND gate and inverting all literals, which can be derived from NAND-NAND form by applying De Morgan's law on level 2, or from NOR-OR form by applying De Morgan's law on level 1,
+\item NOR-OR, which can be converted from AND-OR form by replacing AND gates with NOR gates and inverting all inputs to level 2, which can be derived from AND-OR form by applying De Morgan's law on level 2.
 \eit
 
 The non-degenerate forms that implement POS form are
 \bit
-\item OR-AND, which is directly derived from the POS form,
-\item NOR-NOR, which can be converted from OR-AND form by taking complement on all inputs of the second level and replacing OR with NOR and AND with NOR, which can be derived from OR-AND form by taking double negation and applying De Morgan's law on the second level AND,
-\item AND-NOR, which can be converted from OR-AND form by taking complement on all literals and replacing OR with AND and AND with NOR, which can be derived from NOR-NOR form by applying De Morgan's law on the first level NOR, or from NAND-AND form by applying De Morgan's law on the second level AND,
-\item NAND-AND, which can be converted from OR-AND form by taking complement on all inputs of the first level and replacing OR with NAND, which can be derived from OR-AND form by applying De Morgan's law on the first level OR.
+\item OR-AND, which can be directly derived from the POS form,
+\item NOR-NOR, which can be converted from OR-AND form by replacing all gates with NOR gates and inverting all literals that are inputs to level 1, which can be derived from OR-AND form by taking double negation and applying De Morgan's law on level 1,
+\item AND-NOR, which can be converted from OR-AND form by replacing OR gates with AND gates and AND gate with NOR gate and inverting all literals, which can be derived from NOR-NOR form by applying De Morgan's law on level 2, or from NAND-AND form by applying De Morgan's law on level 1,
+\item NAND-AND, which can be converted from OR-AND form by replacing OR gates with NAND gates and inverting all inputs to level 2, which can be derived from OR-AND form by applying De Morgan's law on level 2.
 \eit
 
 The procedure of designing a two-level circuit is
@@ -647,14 +649,21 @@ The procedure of designing a two-level circuit is
 \item Simplify the Boolean function to be realized to SOP or POS form.
 \item Design an AND-OR or OR-AND circuit.
 \item Convert it to the wanted form.
-\eit
+\een
 \sssc{Design of multi-level NAND- and NOR-gate circuits}
-The procedure of designing a multi-level circuit is
+The procedure of designing a multi-level NAND-gate circuit is
 \ben
-\item Simplify the Boolean function to be realized to SOP or POS form.
-\item Design an AND-OR or OR-AND circuit.
-\item Convert it to the wanted form.
-\eit
+\item Simplify the Boolean function to be realized to the wanted sum-of-product-of-sum-$\ldots$product form.
+\item Design an AND-OR-AND-$\ldots$OR or OR-AND-OR$\ldots$AND-OR circuit.
+\item Replace all gates with NAND gates and invert all literals that are inputs to levels of odd numbers.
+\een
+The procedure of designing a multi-level NOR-gate circuit is
+\ben
+\item Simplify the Boolean function to be realized to the wanted product-of-sum-of-product-$\ldots$sum form.
+\item Design an OR-AND-OR$\ldots$AND or AND-OR-AND-$\ldots$OR-AND circuit.
+\item Replace all gates with NOR gates and invert all literals that are inputs to levels of odd numbers.
+\een
+
 
 
 
