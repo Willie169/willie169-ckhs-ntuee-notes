@@ -490,11 +490,11 @@ Suppose a dependent variable $y$ represents a function $f$ of an independent var
 \[y=f(x).\]
 Then, the derivative function of $y$ or $f$ (with respect to $x$) can be written as
 \[Df(x),\quad(Df)(x),\quad D_xf(x),\quad (D_xf)(x),\quad \mathrm{d}f(x),\quad(\mathrm{d}f)(x),\quad \mathrm{d}_xf(x),\quad \tx{or\ }(\mathrm{d}_xf)(x),\]
-in which $D$, $D_x$, $\mathrm{d}$, or $\mathrm{d}_x$ is called a differential operators or a derivative operator, and  $Df$, $D_xf$, $\mathrm{d}f$, or $\mathrm{d}_xf$ are called the differential (微分子) of $y$ or $f$ (with respect to $x$);
+in which $D$, $D_x$, $\mathrm{d}$, or $\mathrm{d}_x$ is called a (unary) differential operators or a derivative operator, and  $Df$, $D_xf$, $\mathrm{d}f$, or $\mathrm{d}_xf$ are called the differential (微分子) of $y$ or $f$ (with respect to $x$);
 
 the $n$th derivative function of $y$ or $f$ (with respect to $x$) can be written as
 \[D^nf(x),\quad(D^nf)(x),\quad D^n_{\pht{(n)}xx\dots x}f(x),\quad\qty(D^n_{\pht{(n)}xx\dots x}f)(x),\quad \mathrm{d}^nf(x),\quad(\mathrm{d}^nf)(x),\quad \mathrm{d}^n_{\pht{(n)}xx\dots x}f(x),\quad \tx{or\ }\qty(\mathrm{d}^n_{\pht{(n)}xx\dots x}f)(x),\]
-in which subscript are $n$ $x$s, $D^n$, $D^n_{\pht{(n)}xx\dots x}$, $\mathrm{d}^n$, or $\mathrm{d}^n_{\pht{(n)}xx\dots x}$ is called a differential operators or a derivative operators, and $D^nf$, $D^n_{\pht{(n)}xx\dots x}f$, $\mathrm{d}^nf$, or $\mathrm{d}^n_{\pht{(n)}xx\dots x}f$ is called the differential of the $(n-1)$th derivative function of $y$ or $f$.
+in which subscript are $n$ $x$s, $D^n$, $D^n_{\pht{(n)}xx\dots x}$, $\mathrm{d}^n$, or $\mathrm{d}^n_{\pht{(n)}xx\dots x}$ is called a (unary) differential operators or a derivative operators, and $D^nf$, $D^n_{\pht{(n)}xx\dots x}f$, $\mathrm{d}^nf$, or $\mathrm{d}^n_{\pht{(n)}xx\dots x}f$ is called the differential of the $(n-1)$th derivative function of $y$ or $f$.
 \sssc{Euler's notation for partial derivatives}
 Suppose a dependent variable $y$ represents a function $f$ of an independent variable vector $\mb{x}=(x_1,x_2,\dots x_n)$, that is,
 \[y=f(\mb{x}).\]
@@ -1147,12 +1147,30 @@ If functions $f$ and $g$ are differentiable on $I$, then the composite $f\circ g
 &f^{\qty(\sum_{j=1}^nm_j)}\left(g(x)\right)\cdot\\
 &\prod_{j=1}^n\left(\frac {g^{(j)}(x)}{j!}\right)^{m_j}.
 \eam
+\sssc{Exponential Bell polynomials}
+Partially or incomplete exponential Bell polynomials $B_{n,k}\qty(x_1,x_2,\ldots x_{n-k+1})$ is defined as
+\[B_{n,k}\qty(x_1,x_2,\ldots x_{n-k+1})=n!\sum_{\langle j_i\rangle\in C}\prod_{i=1}^{n-k+1}\frac{x_i^{\phantom{i}j_i}}{(i!)^{j_i}j_i!},\]
+where
+\[C=\left\{\langle j_i\rangle_{i=1}^{n-k+1}\middle|\sum_{i=1}^{n-k+1}=k\land\sum_{i=1}^{n-k+1}ij_i=n\right\}.\]
+Complete exponential Bell polynomial $B_n\qty(x_1,x_2,\ldots x_n)$ is defined as
+\[B_n\qty(x_1,x_2,\ldots x_n)=n!\sum_{k=0}^nB_{n,k}\qty(x_1,x_2,\ldots x_{n-k+1}).\]
+\sssc{Derivative of inverse functions}
+\[\qty(f^{-1})'(x)=\frac{1}{f'\qty(f^{-1}(x)).\]
+\begin{proof}
+\[f\qty(f^{-1}(x))=x.\]
+Differentiate both sides:
+\[f'\qty(f^{-1}(x))\qty(f^{-1})'(x)=1.\]
+\end{proof}
+\[\dv[n]{f^{-1}(x)}{x}=\frac{(-1)^{n-1}}{\qty(f'\qty(f^{-1}(x)))^{2n-1}}B_{n-1}\sum_{i=2}^{n}f^{(i)}\qty(f^{-1}(x)),\quad n\in\bbN.\]
 \sssc{Implicit differentiation (隱函數微分)}
 If $x$ and $y$ are related by an equation $F(x,y)=0$, then we can differentiate both sides with respect to $x$, treating $y$ as a function of $x$.
 
 Whenever we differentiate a term involving $y$, we apply the chain rule, which introduces a factor of $\dv{y}{x}$.
 
 We can compute derivatives of $y$ with respect to $x$ without solving for $y$ by implicit differentiation.
+\sssc{Derivative of natural logarithm of absolute value of function}
+If functions $f$ is differentiable and nonzero on $I$, then $\ln|f(x)|$ is also differentiable on $I$ and its derivative is given by
+\[\dv{\ln|f(x)|}{x}=\frac{f'(x)}{f(x)}.\]
 \sssc{Logarithmic differentiation}
 Logarithmic differentiation is a method for finding derivatives by taking the natural logarithm of both sides of an equation first, then differentiating.
 
@@ -1173,9 +1191,6 @@ Take differentiation of both sides:
 \[\frac{y'}{y}=g'(x)\ln\qty(f(x))+g(x)\frac{f'(x)}{f(x)}.\]
 \[y'=\qty(f(x))^{g(x)}\qty(g'(x)\ln\qty(f(x))+g(x)\frac{f'(x)}{f(x)}).\]
 \end{proof}
-\sssc{Derivative of natural logarithm of absolute value of function}
-If functions $f$ is differentiable and nonzero on $I$, then $\ln|f(x)|$ is also differentiable on $I$ and its derivative is given by
-\[\dv{\ln|f(x)|}{x}=\frac{f'(x)}{f(x)}.\]
 \ssc{Points}
 \sssc{Differentiability implies continuity}
 Let $V$ and $W$ be normed vector spaces, $U$ be an open subset of $V$, and $f\colon U\subseteq V\to W$ be a function. For a point $a\in U$, $f$ is differentiable at $a$ implies it is continuous at $a$; for an open subset $I\subseteq U$, $f$ is differentiable on $I$ implies it is continuous on $I$.
