@@ -18,7 +18,6 @@
 \item\textbf{Switching (logic) circuit}: A switching circuit has one or more inputs and one or more outputs which take on discrete values. Many of a digital system's subsystems take the form of a switching circuit.
 \item\textbf{Combinational (logic) circuit}: A circuit whose output value depends only on the present input value.
 \item\textbf{Sequential (logic) circuit}: A circuit whose output value depends on the present input value and past input values.
-\item\textbf{Logic gate}: An electronic device that performs a logic operation on one or more binary inputs (0 or 1) to produce a single binary output (0 or 1). An empty circle, called inversion bubble or bubble, means inverting the input before inputting to the gate when at a input to a gate, and means inverting the output before outputting from the gate when at the output from a gate. Below, the symbols of logic gates follow ANSI standards.
 \item\textbf{Flip-flop}: A bistable electronic device, meaning it has two stable states representing logic 0 and 1. It's a basic memory element used in sequential circuits.
 \end{itemize}
 \subsection{Introduction to Boolean Algebra}
@@ -34,41 +33,40 @@ A Boolean function is a logical operation performed on one or more binary inputs
 \begin{itemize}
 \item Symbol: $A'$, $\neg A$, $\mathord{\sim}A$, or $\ol{A}$
 \item Definition: One input, one output. True if the input is false and false otherwise.
-\item Logic gate (input at the right and output at the left):\mbox{}\\\cktus{not gate}{n}
 \eit 
 \sssc{AND / Conjunction / Logical Multiplication}
 \begin{itemize}
 \item Symbol: $A \cdot B$, $A*B$, or $AB$
 \item Definition: Multiple inputs, one output. True if all inputs are true and false otherwise.
-\item Logic gate (input at the right and output at the left, assuming two inputs and one output):\mbox{}\\\cktus{and gate}{nn}
 \eit
 \sssc{OR / Disjunction / Logical Addition / Inclusive OR}
 \begin{itemize}
 \item Symbol: $A + B$
 \item Definition: Multiple inputs, one output. True if at least one input is true and false otherwise.
-\item Logic gate (input at the right and output at the left, assuming two inputs and one output):\mbox{}\\\cktus{or gate}{nn}
 \eit
+\sssc{NAND / Not AND}
+Definition: Multiple inputs, one output. True if all inputs are false and false otherwise.
+\sssc{NOR / Not OR}
+Definition: Multiple inputs, one output. True if at least one input is false and false otherwise.
 \sssc{XOR / Exclusive OR}
 \begin{itemize}
 \item Symbol: $A \oplus B$
 \item Definition: Multiple inputs, one output. True if odd number of inputs are true and false otherwise.
-\item Logic gate (input at the right and output at the left, assuming two inputs and one output):\mbox{}\\\cktus{xor gate}{nn}
 \eit
 \sssc{XNOR / Logical equivalence / Exclusive NOR}
 \begin{itemize}
 \item Symbol: $A\equiv B$ or $A\odot B$
 \item Definition: Multiple inputs, one output. True if even number (including 0) of inputs are true and false otherwise.
-\item Logic gate (input at the right and output at the left, assuming two inputs and one output):\mbox{}\\\cktus{nor gate}{nn}
 \eit
-\sssc{NAND / Not AND}
+\sssc{IMPLY / Logical conditional}
 \begin{itemize}
-\item Definition: Multiple inputs, one output. True if all inputs are false and false otherwise.
-\item Logic gate (input at the right and output at the left, assuming two inputs and one output):\mbox{}\\\cktus{nand gate}{nn}
+\item Symbol: $A \rightarrow B$
+\item Definition: Two inputs, one output. $A\rightarrow B$ is defined as $A'+B$.
 \eit
-\sssc{NOR / Not OR}
+\sssc{NIMPLY / Material nonimplication}
 \begin{itemize}
-\item Definition: Multiple inputs, one output. True if at least one input is false and false otherwise.
-\item Logic gate (input at the right and output at the left, assuming two inputs and one output):\mbox{}\\\cktus{nor gate}{nn}
+\item Symbol: $A\nrightarrow B$
+\item Definition: Two inputs, one output. $A\nrightarrow B$ is defined as $AB'$.
 \eit
 \ssc{Boolean Arithmetic}
 \sssc{Boolean expression}
@@ -106,9 +104,45 @@ Every Boolean expression can be expressed in POS form. And a Boolean expression 
 \sssc{Dual}
 The dual of an Boolean expression or equation is another Boolean expression or equation obtained by simplifing the original expression or equation such that it only consists of literals, AND, and OR, and then replacing all AND in it with OR, all OR in it with AND, and all constants in it with their complements.
 \sssc{Functionally complete}
-A functionally complete set is a set of logic operations that can express all possible Boolean functions of any number of input variables. A minimal functionally complete set is a functionally complete set such that removing any one element from it makes it no longer functionally complete. Some minimal functionally complete sets are $\{\tx{AND},\tx{NOT}\}$, $\{\tx{OR},\tx{NOT}\}$, $\{\tx{XOR},\tx{NOT}\}$, $\{\tx{XNOR},\tx{NOT}\}$, $\{\tx{NAND}\}$, and $\{\tx{NOR}\}$, in which NAND and NOR are called universal gates.
+A functionally complete set is a set of logic operators and constant sources (0 or 1) that can express all possible Boolean functions of any number of input variables. A minimal functionally complete set is a functionally complete set such that removing any one element from it makes it no longer functionally complete. Some minimal functionally complete sets are $\{\tx{AND},\tx{NOT}\}$, $\{\tx{OR},\tx{NOT}\}$, $\{\tx{XOR},\tx{NOT}\}$, $\{\tx{XNOR},\tx{NOT}\}$, $\{\tx{NAND}\}$, $\{\tx{NOR}\}$, $\{\tx{IMPLY},\tx{0}\}$, and $\{\tx{NIMPLY},\tx{1}\}$, in which NAND and NOR are called universal.
 \sssc{Boolean Vector Functions or Boolean Multi-output Functions}
 A Boolean vector function or a Boolean multi-output function is a function $f\colon\{1,0\}^n\to\{1,0\}^m$. A Boolean vector function can be specified with truth table or as a tuple of $m$ Boolean functions.
+\ssc{Logic gate}
+A logic gate is an electronic device that performs a Boolean function.
+
+Logic gates symbols (inputs at left, first input named A, second input named B):
+\begin{longtable}[c]{|c|c|c|c|}
+\hline
+Type & Distinctive shape (ANSI/IEEE Std 91/91a-1991 & Rectangular shape (IEEE Std 91/91a-1991/IEC 60617-12:1997) & Boolean function \\\hline\endhead
+(Logic) buffer (gate) & \cktus{buffer gate}{n} & \cktiec{buffer gate}{n} & $A$ \\\hline
+NOT gate / inverter & \cktus{not gate}{n} & \cktiec{not gate}{n} & $A'$ \\\hline
+AND gate & \cktus{and gate}{nn} & \cktiec{and gate}{nn} & $AB$ \\\hline 
+OR gate & \cktus{or gate}{nn} & \cktiec{or gate}{nn} & $A+B$ \\\hline
+NAND gate & \cktus{nand gate}{nn} & \cktiec{nand gate}{nn} & $(AB)'$ \\\hline
+NOR gate & \cktus{nor gate}{nn} & \cktiec{nor gate}{nn} & $(A+B)'$ \\\hline
+XOR gate & \cktus{xor gate}{nn} & \cktiec{xor gate}{nn} & $A\oplus B$ \\\hline
+XNOR gate & \cktus{xnor gate}{nn} & \cktiec{xnor gate}{nn} & $A\odot B$ \\\hline
+IMPLY gate & \cktus{or gate}{in} & \cktiec{or gate}{in} & $A\rightarrow B$ \\\hline
+NIMPLY gate & \cktus{nor gate}{in} & \cktiec{nor gate}{in} & $A\nrightarrow B$ \\\hline
+\end{longtable}
+
+An empty circle, called inversion bubble or bubble, means inverting the input before inputting to the gate when at a input to a gate, and means inverting the output before outputting from the gate when at the output from a gate.
+
+By using inversion bubbles at the inputs instead of the output in logic gates symbol except IMPLY and NIMPLY gates, using inversion bubbles at the output and second input instead of the first input in IMPLY gate symbol, and using inversion bubbles at the second input instead of the first input and the output in NIMPLY gate symbol, we obtain the alternative gate symbols:
+\begin{longtable}[c]{|c|c|c|c|}
+\hline
+Type & Distinctive shape (ANSI/IEEE Std 91/91a-1991 & Rectangular shape (IEEE Std 91/91a-1991/IEC 60617-12:1997) & Boolean function \\\hline\endhead
+(Logic) buffer (gate) & \cktus{not gate}{i} & \cktiec{not gate}{i} & $A$ \\\hline
+NOT gate / inverter & \cktus{buffer gate}{i} & \cktiec{buffer gate}{i} & $A'$ \\\hline
+AND gate & \cktus{nor gate}{ii} & \cktiec{nor gate}{ii} & $AB$ \\\hline 
+OR gate & \cktus{nand gate}{ii} & \cktiec{nand gate}{ii} & $A+B$ \\\hline
+NAND gate & \cktus{or gate}{ii} & \cktiec{or gate}{ii} & $(AB)'$ \\\hline
+NOR gate & \cktus{and gate}{ii} & \cktiec{and gate}{ii} & $(A+B)'$ \\\hline
+XOR gate & \cktus{xnor gate}{ii} & \cktiec{xnor gate}{ii} & $A\oplus B$ \\\hline
+XNOR gate & \cktus{xor gate}{ii} & \cktiec{xor gate}{ii} & $A\odot B$ \\\hline
+IMPLY gate & \cktus{nand gate}{ni} & \cktiec{nand gate}{ni} & $A\rightarrow B$ \\\hline
+NIMPLY gate & \cktus{and gate}{ni} & \cktiec{and gate}{ni} & $A\nrightarrow B$ \\\hline
+\end{longtable}
 \ssc{Theorems}
 \sssc{Idempotent Laws}
 \[XX = X,\quad X + X = X.\]
@@ -308,7 +342,7 @@ Given a Boolean function $f$ of $n$ variables, a product term $P$ is an implican
 A prime implicant of a function $f$ is an implicant of $f$ which is no longer an implicant of $f$ if any literal is deleted from it.
 \sssc{Essential prime implicant}
 An essential prime implicant of a function $f$ is a prime implicant $P$ of $f$ such that there exists a minterm $m$ of $f$ such that $m$ implies $P$ and for any other prime implicant $Q$ of $f$, $m$ implies $Q'$.
-\sssc{Minimum SOP form or minimum sum}
+\sssc{Minimum SOP form or minimum sum (of prime implicants)}
 A SOP form of a Boolean function is called minimum if it has the fewest number of terms out of all SOP forms of the function, and every product term in it can not have any variable in it be eliminated. For a given Boolean function, there may exist more than one minimum SOP forms of it.
 
 A minimum SOP form of a Boolean function must consist of some of its prime implicants (but not necessarily all), that is, if a SOP form contains implicants that are not prime implicants, it is not minimum.
@@ -592,7 +626,7 @@ For incompletely specified Boolean functions, we do the following change to the 
 \item Treat don't-care terms as minterms when grouping minterm.
 \item Omit don't-care terms columns when creating the prime implicant chart.
 \een
-\ssc{Multi-level circuit}
+\ssc{Multi-level combinational circuits}
 \sssc{Introduction}
 The maximum number of gates cascaded in series between a circuit input and the output is referred to as the number of levels of gates. Thus, a function written in sum-of-products form or in product-of-sums form corresponds directly to a two-level gate circuit. As is usually the case in digital circuits where the gates are driven from flip-flop outputs, we will assume that all variables and their complements are available as circuit inputs. For this reason, we will not normally count inverters which are connected directly to input variables.
 
@@ -662,24 +696,68 @@ The procedure of designing a multi-level NOR-gate circuit is
 \item Replace all gates with NOR gates and invert all literals that are inputs to levels of odd numbers.
 \een
 \sssc{Circuit conversion using inversion bubbles}
-By using inversion bubbles at the inputs instead of the output, we have alternative gate symbols:
+Adding inversion bubbles to both ends of any interconnection does not change the Boolean function realized by the circuit.
+
+Therefore, the gate type at levels $i$ and $i+1$ can be changed by inserting inversion bubbles on both sides of all connections between levels $i+1$ and $i$. After this operation, the gates at level $i+1$ may appear with double inversion bubbles at output and can be cancelled together, the gates at level $i$ will appear in their alternate symbols (with input bubbles) and can be changed to the standard form. The changing of level $i+1$ after this operation is
+\begin{longtable}[c]{|c|c|}
+\hline
+Original gate & New gate \\\hline\endhead
+Buffer gate & Not gate \\\hline
+Not gate & Buffer gate \\\hline
+AND gate & NAND gate \\\hline
+OR gate & NOR gate \\\hline
+NAND gate & AND gate \\\hline
+NOR gate & OR gate \\\hline
+XOR gate & XNOR gate \\\hline
+XNOR gate & XOR gate \\\hline
+\end{longtable}
+The changing of level $i$ after this operation is
+\begin{longtable}[c]{|c|c|}
+\hline
+Original gate & New gate \\\hline\endhead
+Buffer gate & Not gate \\\hline
+Not gate & Buffer gate \\\hline
+AND gate & NOR gate \\\hline
+OR gate & NAND gate \\\hline
+NAND gate & OR gate \\\hline
+NOR gate & AND gate \\\hline
+XOR gate & XNOR gate \\\hline
+XNOR gate & XOR gate \\\hline
+\end{longtable}
+\ssc{Multiple-output combinational circuits}
+\sssc{Minimal cost realization}
+Solution of digital design problems often requires the realization of several completely or incompletely specified Boolean functions of the same variables, that is, a completely or incompletely specified Boolean vector function. Although each function could be realized separately, the use of some gates in common between two or more functions sometimes leads to a more economical realization. Thus in realizing multiple-output circuits, the use of a minimum SOP for each function does not necessarily lead to a minimum cost realization for the circuit as a whole.
+
+When designing multiple-output circuits, you should try to minimize the total number of gates required. If several solutions require the same number of gates, the one with the minimum number of gate inputs should be chosen.
+\sssc{Karnaugh Maps}
+\ben
+\item Draw K-map for each output.
+\item Group 1's in the same definition in K-maps for single Boolean function; however the collection of groups is the collection of all groups on all maps, in which groups including same cells on different maps are the same and corresponding to only one element in the collection.
+\item An allowed collection of groups must follow the following rules:
 \bit
-\item NOT gate:\mbox{}\\
-\cktus{buffer gate}{i}
-\item AND gate:\mbox{}\\
-\cktus{nor gate}{ii}
-\item OR gate:\mbox{}\\
-\cktus{nand gate}{ii}
-\item NAND gate:\mbox{}\\
-\cktus{or gate}{ii}
-\item NOR gate:\mbox{}\\
-\cktus{and gate}{ii}
-\item XOR gate:\mbox{}\\
-\cktus{xnor gate}{ii}
-\item XNOR gate:\mbox{}\\
-\cktus{xor gate}{ii}
+\item Any $1$ must be in at least one group.
+\item If any $1$ is only covered by one possible group, then that group must be choose. The product represented by the group is called an essential prime implicant of the Boolean vector function.
+\item If any group $g$ is completely covered by another group, $g$ must not be chosen. The product represented by a group that is allowed to be chosen according to this rule is called an prime implicant of the Boolean vector function.
 \eit
-Adding inversion bubbles to both ends of any interconnection does not change the Boolean function realized by the circuit. Therefore, the gate type at level $i$ and $i+1$ can be changed by inserting inversion bubbles on both sides of all connections between levels $i+1$ and $i$. After this operation, the gates at level $i$ will appear in their alternate symbols (with input bubbles) and can be replaced with their standard forms if we desire.
+\item Find the allowed collections of groups that contain the fewest groups. For each one of them, the sum of the products corresponding to the groups in it derives a minimal-gate SOP realization of the Boolean vector function.
+\item Among the realization(s), find the one with fewest literal inputs, that is the minimum cost realization of the Boolean vector function.
+\een
+\sssc{Design of multiple-output NAND- and NOR-gate circuits}
+The procedure of designing a multiple-output NAND-gate circuit is
+\ben
+\item Simplify the Boolean vector function to be realized to the wanted sum-of-product-of-sum-$\ldots$product form.
+\item Design an AND-OR-AND-$\ldots$OR or OR-AND-OR$\ldots$AND-OR circuit.
+\item Replace all gates with NAND gates and invert all literals that are inputs to levels of odd numbers.
+\een
+The procedure of designing a multiple-output NOR-gate circuit is
+\ben
+\item Simplify the Boolean vector function to be realized to the wanted product-of-sum-of-product-$\ldots$sum form.
+\item Design an OR-AND-OR$\ldots$AND or AND-OR-AND-$\ldots$OR-AND circuit.
+\item Replace all gates with NOR gates and invert all literals that are inputs to levels of odd numbers.
+\een
+
+
+
 
 \end{document}
 
