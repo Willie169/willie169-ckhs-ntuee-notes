@@ -2,6 +2,7 @@
 \setcounter{secnumdepth}{5}
 \setcounter{tocdepth}{3}
 \input{/usr/share/LaTeX-ToolKit/template.tex}
+\renewcommand{\arraystretch}{1.5}
 \begin{document}
 \title{Switching Circuit and Logic Design}
 \author{沈威宇}
@@ -111,7 +112,7 @@ A Boolean vector function or a Boolean multi-output function is a function $f\co
 A logic gate is an electronic device that performs a Boolean function.
 
 Logic gates symbols (inputs at left, first input named A, second input named B):
-\begin{longtable}[c]{|c|c|c|c|}
+\begin{longtable}[c]{|p{0.2\tw}|p{0.2\tw}|p{0.2\tw}|p{0.2\tw}|}
 \hline
 Type & Distinctive shape (ANSI/IEEE Std 91/91a-1991 & Rectangular shape (IEEE Std 91/91a-1991/IEC 60617-12:1997) & Boolean function \\\hline\endhead
 (Logic) buffer (gate) & \cktus{buffer gate}{n} & \cktiec{buffer gate}{n} & $A$ \\\hline
@@ -129,7 +130,7 @@ NIMPLY gate & \cktus{nor gate}{in} & \cktiec{nor gate}{in} & $A\nrightarrow B$ \
 An empty circle, called inversion bubble or bubble, means inverting the input before inputting to the gate when at a input to a gate, and means inverting the output before outputting from the gate when at the output from a gate.
 
 By using inversion bubbles at the inputs instead of the output in logic gates symbol except IMPLY and NIMPLY gates, using inversion bubbles at the output and second input instead of the first input in IMPLY gate symbol, and using inversion bubbles at the second input instead of the first input and the output in NIMPLY gate symbol, we obtain the alternative gate symbols:
-\begin{longtable}[c]{|c|c|c|c|}
+\begin{longtable}[c]{|p{0.2\tw}|p{0.2\tw}|p{0.2\tw}|p{0.2\tw}|}
 \hline
 Type & Distinctive shape (ANSI/IEEE Std 91/91a-1991 & Rectangular shape (IEEE Std 91/91a-1991/IEC 60617-12:1997) & Boolean function \\\hline\endhead
 (Logic) buffer (gate) & \cktus{not gate}{i} & \cktiec{not gate}{i} & $A$ \\\hline
@@ -403,7 +404,7 @@ A K map for a $4$-variable Boolean function $f(A,B,C,D)$ is
 \sssc{Group 1's}
 The first step of simplifying a Boolean function using K-maps is grouping 1's (minterms).
 
-A group is a rectangle of $2^m\times 2^n$ cells that are either $1$ (minterm) or $X$ (don't-care condition), in which $m,n\in\mathbb{N}_0$, the leftmost and rightmost columns are horizontally adjacent, and the top and bottom rows are vertically adjacent. Cells can be in multiple groups.
+A group (or loop) is a rectangle of $2^m\times 2^n$ cells that are either $1$ (minterm) or $X$ (don't-care condition), in which $m,n\in\mathbb{N}_0$, the leftmost and rightmost columns are horizontally adjacent, and the top and bottom rows are vertically adjacent. Cells can be in multiple groups.
 
 Each group represents an implicant of $f$ by the following rules:
 \ben
@@ -430,6 +431,8 @@ $A$ & \multicolumn{1}{c|}{\thead{01}} & \backslashbox{$f(1,0,0,0,1)$}{$f(0,0,0,0
 & \multicolumn{1}{c|}{\thead{10}} & \backslashbox{$f(1,0,0,1,0)$}{$f(0,0,0,1,0)$} & \backslashbox{$f(1,0,1,1,0)$}{$f(0,0,1,1,0)$} & \backslashbox{$f(1,1,1,1,0)$}{$f(0,1,1,1,0)$} & \backslashbox{$f(1,1,0,1,0)$}{$f(0,1,0,1,0)$} \\\cline{3-6}
 \end{longtable}}
 in which the adjacency between cells in the same layer of four-variable K-map is the same as that in four-variable K-map; the upper and lower triangles in the same square are adjacent; and a group is a cuboid of $2^l\times 2^m\times 2^n$ cells that are either $1$ (minterm) or $X$ (don't-care condition), in which $l,m,n\in\mathbb{N}_0$.
+\sssc{Finding minimum POS form}
+We can use K-maps to find minimum POS form of a completely or incompletely specified Boolean function by grouping $0$s instead of $1$s ($0$s and $X$s are allowed in a group), in which each group corresponds to a sum term, and the product of the sum terms corresponding to the groups in an allowed (covering all 0's) collections that contain the fewest groups is a minimum POS form of the Boolean function.
 \ssc{Map-entered variable (MEV) or Variable entrant map (VEM)}
 Map-entered variable (MEV), aka variable entrant map (VEM), simplification is an extension of Karnaugh maps used to simplify Boolean functions with typically more than four variables by allowing some variables to be entered as symbols or expressions inside the K-map cells rather than expanding the map's dimensions.
 \sssc{One MEV}
@@ -450,9 +453,9 @@ Suppose we have an $n$-variable (usually five-variable) completely or incomplete
 That is, let the set of products of $n-1$ literals that corresponding to a $1$ cell be $A_1$, the set of products of $n-1$ literals that corresponding to a $E$ cell be $A_E$, the set of products of $n-1$ literals that corresponding to a $E'$ cell be $A_e$, and the set of products of $n-1$ literals that corresponding to a $X$ cell be $A_X$, we write $f$ as:
 \[f=\sum m(i\mid m_i\in A_1)+E\sum m(i\mid m_i\in A_E)+E'\sum m(i\mid m_i\in A_e)+\sum d(i\mid m_i\in A_X),\]
 where $m_i$ is minterms in $(n-1)$-variable truth tables.
-\item Group 1's in same way as K-map, that is, $1$ and $X$ are allowed in a group. Each such group corresponding to a $(n-1)$-variable implicant.
-\item Group $E$s in same way as K-map except replacing $1$ with $E$ and $X$ with $1$ and $X$, that is, $E$, $1$, and $X$ are allowed in a group. Each such group corresponding to a $n$-variable implicant with $E$ be one of the literals
-\item Group $E'$s in same way as K-map except replacing $1$ with $E'$ and $X$ with $1$ and $X$, that is, $E'$, $1$, and $X$ are allowed in a group. Each such group corresponding to a $n$-variable implicant with $E'$ be one of the literals.
+\item Group $1$s in same way as K-map ($1$s and $X$s are allowed in a group). Each group corresponding to a $(n-1)$-variable implicant.
+\item Group $E$s in same way as K-map but treating $1$s as $X$s ($E$s, $1$s, and $X$s are allowed in a group). Each group corresponding to a $n$-variable implicant with $E$ be one of the literals.
+\item Group $E'$s in same way as K-map but treating $1$s as $X$s ($E'$s, $1$s, and $X$s are allowed in a group). Each group corresponding to a $n$-variable implicant with $E'$ be one of the literals.
 \item An allowed collection of groups must follow the following rules:
 \bit
 \item Any $1$, $E$, or $E'$ must be in at least one group.
@@ -479,9 +482,9 @@ Suppose we have an $n$-variable completely or incompletely specified Boolean fun
 That is, let the set of products of $n-m$ literals that corresponding to a $1$ cell be $A_1$, the set of products of $n-m$ literals that corresponding to a $E_i$ cell be $A_{E_i}$, the set of products of $n-m$ literals that corresponding to a $E_i'$ cell be $A_{e_i}$, and the set of products of $n-m$ literals that corresponding to a $X$ cell be $A_X$, we write $f$ as:
 \[f=\sum m(i\mid m_i\in A_1)+\sum_{i=1}^mE_i\sum m(i\mid m_i\in A_{E_i})+\sum_{i=1}^mE_i'\sum m(i\mid m_i\in A_{e_i})+\sum d(i\mid m_i\in A_X),\]
 where $m_i$ is minterms in $(n-m)$-variable truth tables.
-\item Group 1's in same way as K-map, that is, $1$ and $X$ are allowed in a group. Each such group corresponding to a $(n-m)$-variable implicant.
-\item For each $i\in\bbN_{\leq m}$, group $E_i$s in same way as K-map except replacing $1$ with $E_i$ and $X$ with $1$ and $X$, that is, $E_i$, $1$, and $X$ are allowed in a group. Each such group corresponding to a $(n-m+1)$-variable implicant with $E_i$ be one of the literals
-\item For each $i\in\bbN_{\leq m}$, group $E_i'$s in same way as K-map except replacing $1$ with $E_i'$ and $X$ with $1$ and $X$, that is, $E_i'$, $1$, and $X$ are allowed in a group. Each such group corresponding to a $(n-m+1)$-variable implicant with $E_i'$ be one of the literals.
+\item Group $1$s in same way as K-map ($1$s and $X$s are allowed in a group). Each group corresponding to a $(n-1)$-variable implicant.
+\item For each $i\in\bbN_{\leq m}$, group $E_i$s in same way as K-map but treating $1$s as $X$s ($E_i$s, $1$s, and $X$s are allowed in a group). Each group corresponding to a $(n-m+1)$-variable implicant with $E_i$ be one of the literals.
+\item For each $i\in\bbN_{\leq m}$, group $E_i'$s in same way as K-map but treating $1$s as $X$s ($E_i'$s, $1$s, and $X$s are allowed in a group). Each group corresponding to a $(n-m+1)$-variable implicant with $E_i'$ be one of the literals.
 \item An allowed collection of groups must follow the following rules:
 \bit
 \item Any $1$, $E_i$, or $E_i'$ must be in at least one group.
@@ -724,6 +727,8 @@ NOR gate & AND gate \\\hline
 XOR gate & XNOR gate \\\hline
 XNOR gate & XOR gate \\\hline
 \end{longtable}
+\sssc{Limited gate fan-ins}
+In practical logic design problems, the maximum number of inputs on each gate (or the fan-in) is limited. Depending on the type of gates used, this limit may be two, three, four, eight, or some other number. If a realization of a circuit requires more gate inputs than allowed, factoring the logic expression to obtain a more-level realization is necessary.
 \ssc{Multiple-output combinational circuits}
 \sssc{Minimal cost realization}
 Solution of digital design problems often requires the realization of several completely or incompletely specified Boolean functions of the same variables, that is, a completely or incompletely specified Boolean vector function. Although each function could be realized separately, the use of some gates in common between two or more functions sometimes leads to a more economical realization. Thus in realizing multiple-output circuits, the use of a minimum SOP for each function does not necessarily lead to a minimum cost realization for the circuit as a whole.
@@ -755,14 +760,21 @@ The procedure of designing a multiple-output NOR-gate circuit is
 \item Design an OR-AND-OR$\ldots$AND or AND-OR-AND-$\ldots$OR-AND circuit.
 \item Replace all gates with NOR gates and invert all literals that are inputs to levels of odd numbers.
 \een
-\ssc{Practical considerations}
-\sssc{Limited gate fan-ins}
-In practical logic design problems, the maximum number of inputs on each gate (or the fan-in) is limited. Depending on the type of gates used, this limit may be two, three, four, eight, or some other number. If a realization of a circuit requires more gate inputs than allowed, factoring the logic expression to obtain a more-level realization is necessary.
-\ssc{Gate propagation delays}
-When the input to a logic gate is changed, the output will not change instantaneously. The transistors or other switching elements within the gate take a finite time to react to a change in input, so that the change in the gate output is delayed with respect to the input change. If the change in output is delayed by time $\varepsilon$ with respect to the input, we say that this gate has a propagation delay of $\varepsilon$. In practice, the propagation delay for a 0 to 1 output change may be different than the delay for a 1 to 0 change. Propagation delays for integrated circuit gates may be as short as a few nanoseconds, and in many cases these delays can be neglected. However, in the analysis of some types of sequential circuits, even short delays may be important.
+\ssc{Delays and Hazards}
+\sssc{Propagation delays and timing diagram}
+When the input to a logic gate is changed, the output will not change instantaneously but change after a finite delay. If the change in output is delayed by time $\varepsilon$ with respect to the input, we say that this gate has a propagation delay of $\varepsilon$. In practice, the propagation delay for a 0 to 1 output change may be different than the delay for a 1 to 0 change. Propagation delays for integrated circuit gates may be as short as a few nanoseconds, and in many cases these delays can be neglected. However, in the analysis of some types of sequential circuits, even short delays may be important.
 
-Timing diagrams are frequently used in the analysis of sequential circuits. These diagrams show various signals in the circuit as a function of time. Several variables are usually plotted with the same time scale so that the times at which these vari-ables change with respect to each other can easily be observed.
+Timing diagram show various signals in the circuit as a function of time, often in waveform with time being the horizontal axis and each vertical block plots one signal with the same time scale. The vertical edges on the diagram where the signals change from 0 to 1 are called rising edges; the vertical edges on the diagram where the signals change from 1 to 0 are called falling edges.
+\sssc{Inertial delays}
+If a logic gate will not respond to an input change that is shorter than a certain minimum pulse width $\varepsilon$, we say that this gate has a inertial delay of $\varepsilon$. Quite often the inertial delay value is assumed to be the same as the propagation delay of the gate. In contrast, if a gate always responds to input changes (with a propagation delay), no matter how closely spaced the input changes may be, the gate is said to have an ideal or transport delay.
+\sssc{Hazards}
+When the input to a combinational circuit changes, unwanted switching transients may appear in the output. These transients occur when different paths from input to output have different propagation delays. If, in response to any single input change and for some combination of propagation delays, a circuit output may momentarily go to 0 when it should remain a constant 1, we say that the circuit has a (static) 1-hazard (or static-1 hazard). Similarly, if the output may momentarily go to 1 when it should remain a 0, we say that the circuit has a (static) 0-hazard (or static-0 hazard). If, when the output is supposed to change from 0 to 1 (or 1 to 0), the output may change three or more times, we say that the circuit has a dynamic hazard. In each case the steady-state output of the circuit is correct, but a switching transient appears at the circuit output when the input is changed.
+待
+Hazards in a two-level circuit realizing a SOP form can be detected using a Karnaugh map, in which if any two adjacent 1's are not covered by a same group corresponding to a product term, a 1-hazard exists for the transition between the two 1's. For an $n$-variable map, this transition occurs when one variable changes and the other $n-1$ variables are held constant. We can eliminates a hazard by adding a group (product term) that covers the two 1's.
 
+Hazards in a two-level circuit realizing a POS form can be detected using a Karnaugh map, in which if any two adjacent 0's are not covered by a same group corresponding to a sum term, a 0-hazard exists for the transition between the two 0's. For an $n$-variable map, this transition occurs when one variable changes and the other $n-1$ variables are held constant. We can eliminates a hazard by adding a group (sum term) that covers the two 0's.
+
+Hazarss in circuits with more than two levels can be detected by deriving either a SOP or POS expression for the circuit that represents a two-level circuit containing the same hazards as the original circuit. The SOP or POS expression is derived in the normal manner except that the complementation, i.e. $XX'=0$ and $X+X'=1$, are not used.
 
 \end{document}
 
