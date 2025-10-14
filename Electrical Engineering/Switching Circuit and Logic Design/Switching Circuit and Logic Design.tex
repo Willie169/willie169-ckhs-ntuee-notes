@@ -337,20 +337,30 @@ Then, the complement $f'$ of has minterm expansion
 and maxterm expansion
 \[f'=\prod M(i\in S).\]
 \ssc{Minimum form}
-\sssc{Implicant}
-Given a Boolean function $f$ of $n$ variables, a product term $P$ is an implicant of $f$ iff for every combination of values of the $n$ variables for which $P = 1$, $f$ is also equal to $1$.
+\sssc{Implicant or 1-term}
+Given a Boolean function $f$ of $n$ variables, a product term $P$ is an implicant (aka 1-term) of $f$ iff for every combination of values of the $n$ variables for which $P = 1$, $f$ is also equal to $1$.
+\sssc{Implicate or 0-term}
+Given a Boolean function $f$ of $n$ variables, a sum term $P$ is an implicate (aka 0-term) of $f$ iff for every combination of values of the $n$ variables for which $P = 0$, $f$ is also equal to $0$.
 \sssc{Prime implicant}
 A prime implicant of a function $f$ is an implicant of $f$ which is no longer an implicant of $f$ if any literal is deleted from it.
+\sssc{Prime implicate}
+A prime implicate of a function $f$ is an implicate of $f$ which is no longer an implicate of $f$ if any literal is deleted from it.
 \sssc{Essential prime implicant}
-An essential prime implicant of a function $f$ is a prime implicant $P$ of $f$ such that there exists a minterm $m$ of $f$ such that $m$ implies $P$ and for any other prime implicant $Q$ of $f$, $m$ implies $Q'$.
+An essential prime implicant of a function $f$ is a prime implicant $P$ of $f$ such that there exists a minterm $m$ of $f$ such that $m$ implies $P$ and for any other prime implicant $Q$ of $f$, $m$ doesn't implies $Q$.
+\sssc{Essential prime implicate}
+An essential prime implicate of a function $f$ is a prime implicate $P$ of $f$ such that there exists a maxterm $M$ of $f$ such that $P$ implies $M$ and for any other prime implicate $Q$ of $f$, $Q$ doesn't implies $M$.
 \sssc{Minimum SOP form or minimum sum (of prime implicants)}
 A SOP form of a Boolean function is called minimum if it has the fewest number of terms out of all SOP forms of the function, and every product term in it can not have any variable in it be eliminated. For a given Boolean function, there may exist more than one minimum SOP forms of it.
 
-A minimum SOP form of a Boolean function must consist of some of its prime implicants (but not necessarily all), that is, if a SOP form contains implicants that are not prime implicants, it is not minimum.
+A minimum SOP form of a Boolean function must consist of some of its prime implicants (but not necessarily all). If a SOP form contains implicants that are not prime implicants, it is not a minimum SOP form.
 
 A minimum SOP form of a Boolean function must contain all of its essential prime implicants.
-\sssc{Minimum POS form or minimum product}
+\sssc{Minimum POS form or minimum product (of prime implicates)}
 A POS form of a Boolean function is called minimum if it has the fewest number of terms out of all POS forms of the function, and every sum term in it can not have any variable in it be eliminated. For a given Boolean function, there may exist more than one minimum POS forms of it.
+
+A minimum POS form of a Boolean function must consist of some of its prime implicates (but not necessarily all). If a POS form contains implicates that are not prime implicates, it is not a minimum POS form.
+
+A minimum POS form of a Boolean function must contain all of its essential prime implicates.
 
 One can simplify a Boolean function to minimum POS form by:
 \ben
@@ -769,12 +779,31 @@ Timing diagram show various signals in the circuit as a function of time, often 
 If a logic gate will not respond to an input change that is shorter than a certain minimum pulse width $\varepsilon$, we say that this gate has a inertial delay of $\varepsilon$. Quite often the inertial delay value is assumed to be the same as the propagation delay of the gate. In contrast, if a gate always responds to input changes (with a propagation delay), no matter how closely spaced the input changes may be, the gate is said to have an ideal or transport delay.
 \sssc{Hazards}
 When the input to a combinational circuit changes, unwanted switching transients may appear in the output. These transients occur when different paths from input to output have different propagation delays. If, in response to any single input change and for some combination of propagation delays, a circuit output may momentarily go to 0 when it should remain a constant 1, we say that the circuit has a (static) 1-hazard (or static-1 hazard). Similarly, if the output may momentarily go to 1 when it should remain a 0, we say that the circuit has a (static) 0-hazard (or static-0 hazard). If, when the output is supposed to change from 0 to 1 (or 1 to 0), the output may change three or more times, we say that the circuit has a dynamic hazard. In each case the steady-state output of the circuit is correct, but a switching transient appears at the circuit output when the input is changed.
-待
-Hazards in a two-level circuit realizing a SOP form can be detected using a Karnaugh map, in which if any two adjacent 1's are not covered by a same group corresponding to a product term, a 1-hazard exists for the transition between the two 1's. For an $n$-variable map, this transition occurs when one variable changes and the other $n-1$ variables are held constant. We can eliminates a hazard by adding a group (product term) that covers the two 1's.
 
-Hazards in a two-level circuit realizing a POS form can be detected using a Karnaugh map, in which if any two adjacent 0's are not covered by a same group corresponding to a sum term, a 0-hazard exists for the transition between the two 0's. For an $n$-variable map, this transition occurs when one variable changes and the other $n-1$ variables are held constant. We can eliminates a hazard by adding a group (sum term) that covers the two 0's.
+Hazards in a two-level circuit:
+\bit
+\item Hazards in a two-level circuit realizing a SOP form can be detected using a Karnaugh map, in which if any two adjacent 1's are not covered by a same group corresponding to a product term, a 1-hazard exists for the transition between the two 1's, which corresponds to an eliminated consensus term. For an $n$-variable map, this transition occurs when one variable changes and the other $n-1$ variables are held constant. We can eliminate a hazard by adding a group (product term) that covers the two 1's.
+\item Hazards in a two-level circuit realizing a POS form can be detected using a Karnaugh map, in which if any two adjacent 0's are not covered by a same group corresponding to a sum term, a 0-hazard exists for the transition between the two 0's, which corresponds to an eliminated consensus term. For an $n$-variable map, this transition occurs when one variable changes and the other $n-1$ variables are held constant. We can eliminate a hazard by adding a group (sum term) that covers the two 0's.
+\eit
 
-Hazarss in circuits with more than two levels can be detected by deriving either a SOP or POS expression for the circuit that represents a two-level circuit containing the same hazards as the original circuit. The SOP or POS expression is derived in the normal manner except that the complementation, i.e. $XX'=0$ and $X+X'=1$, are not used.
+Hazards a multi-level circuit can be detected by deriving either a SOP or POS expression for the circuit that represents a two-level circuit containing the same hazards as the original circuit. The SOP or POS expression is derived in the normal manner except that the complementation laws, i.e. $XX'=0$ and $X+X'=1$, are not used. Consequently:
+\bit
+\item The resulting SOP expression may contain products of the form $xx'\alpha$, where $\alpha$ is a product of literals or nothing. In the SOP expression, a product of the form $xx'\alpha$ represents a pseudo AND gate that may temporarily have the output value 1 as $x$ changes if $\alpha=1$, which causes static 0- or dynamic hazards.
+\item The resulting POS expression may contain sums of the form $x+x'+\beta$, where $\beta$ is a sum of literals or nothing. In the POS expression, a sum of the form $x+x'+\beta$ represents a pseudo OR gate that may temporarily have the output value 0 as $x$ changes if $\beta=0$, which causes static 1- or dynamic hazards.
+\eit
+
+To design a circuit  which is free of static and dynamic hazards, the following procedures may be used:
+\ben
+\item Find a SOP expression for the function in which every pair of adjacent 1's is covered by a 1-term. (The sum of all prime implicants always satisfy this condition.) A two-level AND-OR circuit based on this expression will be free of 1-, 0-, and dynamic hazards.
+\item If a different form of the circuit is desired, manipulate the expression to the desired form but treat each independent variable and its inverse as two independent variables to prevent introduction of hazards.
+\een
+or
+\ben
+\item Find a POS expression for the function in which every pair of adjacent 0's is covered by a 0-term. (The product of all prime implicate always satisfy this condition.) A two-level OR-AND circuit based on this expression will be free of 1-, 0-, and dynamic hazards.
+\item If a different form of the circuit is desired, manipulate the expression to the desired form but treat each independent variable and its inverse as two independent variables to prevent introduction of hazards.
+\een
+
+It should be emphasized that the discussion of hazards and the possibility of resulting glitches in this section has assumed that only a single input can change at a time and that no other input will change until the circuit has stabilized. If more than one input can change at one time, then nearly all circuits will contain hazards, and they cannot be eliminated by modifying the circuit implementation.
 
 \end{document}
 
