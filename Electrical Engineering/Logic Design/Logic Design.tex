@@ -755,8 +755,13 @@ The procedure of designing a multiple-output NOR-gate circuit is
 \item Design an OR-AND-OR$\ldots$AND or AND-OR-AND-$\ldots$OR-AND circuit.
 \item Replace all gates with NOR gates and invert all literals that are inputs to levels of odd numbers.
 \een
+\ssc{Practical considerations}
+\sssc{Limited gate fan-ins}
+In practical logic design problems, the maximum number of inputs on each gate (or the fan-in) is limited. Depending on the type of gates used, this limit may be two, three, four, eight, or some other number. If a realization of a circuit requires more gate inputs than allowed, factoring the logic expression to obtain a more-level realization is necessary.
+\ssc{Gate propagation delays}
+When the input to a logic gate is changed, the output will not change instantaneously. The transistors or other switching elements within the gate take a finite time to react to a change in input, so that the change in the gate output is delayed with respect to the input change. If the change in output is delayed by time $\varepsilon$ with respect to the input, we say that this gate has a propagation delay of $\varepsilon$. In practice, the propagation delay for a 0 to 1 output change may be different than the delay for a 1 to 0 change. Propagation delays for integrated circuit gates may be as short as a few nanoseconds, and in many cases these delays can be neglected. However, in the analysis of some types of sequential circuits, even short delays may be important.
 
-
+Timing diagrams are frequently used in the analysis of sequential circuits. These diagrams show various signals in the circuit as a function of time. Several variables are usually plotted with the same time scale so that the times at which these vari-ables change with respect to each other can easily be observed.
 
 
 \end{document}
