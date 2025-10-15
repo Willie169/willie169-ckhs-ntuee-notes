@@ -11,11 +11,12 @@
 \sct{Switching Circuit and Logic Design}
 \ssc{Introduction to Switching Circuit}
 \begin{itemize}
-\item\textbf{Digital system or digital circuit}: Deals with signals that have discrete values. Theoretically, for a given input, the output is exactly correct.
+\item\textbf{Digital system}: Deals with signals that have discrete values. Theoretically, for a given input, the output is exactly correct.
+\item\textbf{Digital circuit (ckt) or logic circuit}: A circuit that deals with binary input and output signals, that is, either 0 or 1.
 \item\textbf{Analog system}: Deals with signals that vary continuously over time. The output might have an error depending on the accuracy of the components used.
-\item\textbf{System design}: The highest level of the design of digital systems, where you break the system into subsystems, specify what each subsystem do, and determine the interconnection and control of the subsystems.
+\item\textbf{System design}: The highest level of the design of systems, where you break the system into subsystems, specify what each subsystem do, and determine the interconnection and control of the subsystems.
 \item\textbf{(Digital) logic design}: The middle level of the design of digital systems, where you specify the logic operations inside each subsystem.
-\item\textbf{Circuit (ckt) design}: The lowest level of the design of digital systems, where you specify the electronic components and their interconnection to form the system.
+\item\textbf{Circuit design}: The lowest level of the design of digital systems, where you specify the electronic components and their interconnection to form the system.
 \item\textbf{Switching (logic) circuit}: A switching circuit has one or more inputs and one or more outputs which take on discrete values. Many of a digital system's subsystems take the form of a switching circuit.
 \item\textbf{Combinational (logic) circuit}: A circuit whose output value depends only on the present input value.
 \item\textbf{Sequential (logic) circuit}: A circuit whose output value depends on the present input value and past input values.
@@ -775,6 +776,44 @@ Hazards in a two-level circuit realizing a SOP form can be detected using a Karn
 Hazards in a two-level circuit realizing a POS form can be detected using a Karnaugh map, in which if any two adjacent 0's are not covered by a same group corresponding to a sum term, a 0-hazard exists for the transition between the two 0's. For an $n$-variable map, this transition occurs when one variable changes and the other $n-1$ variables are held constant. We can eliminates a hazard by adding a group (sum term) that covers the two 0's.
 
 Hazarss in circuits with more than two levels can be detected by deriving either a SOP or POS expression for the circuit that represents a two-level circuit containing the same hazards as the original circuit. The SOP or POS expression is derived in the normal manner except that the complementation, i.e. $XX'=0$ and $X+X'=1$, are not used.
+\ssc{Simulation and testing of logic circuits}
+\sssc{Verilog, SystemVerilog, and VHDL}
+A hardware description language (HDL) is a specialized computer language used to describe the structure and behavior of logic circuits.
+
+Verilog, standardized as IEEE 1364, is a hardware description language used to model and simulate logic circuits.
+
+SystemVerilog, an extension of Verilog, standardized as IEEE 1800, is a hardware description and hardware verification language used to model, simulate, and test logic circuits.
+
+VHDL (VHSIC Hardware Description Language), standardized as IEEE Std 1076, is a hardware description language used to model and simulate logic circuits.
+\sssc{Four-valued logic in Verilog and SystemVerilog}
+The two logic values, \texttt{0} and \texttt{1}, are not sufficient for simulating logic circuits. At times, the value of a gate input or output may be unknown, which is represented by \texttt{X} (unknown). At other times we may have no logic signal at an input, as in the case of an open circuit when an input is not connected to any output, called high impedance or hi-\texttt{Z} connection, which is represented by \texttt{Z} (high impedance / hi-\texttt{Z}).
+
+The logical connectives are defined as follows (without loss of commutativity of operators):
+\[\texttt{X}\cdot\texttt{0}=\texttt{Z}\cdot\texttt{0}=0,\]
+\[\texttt{X}\cdot\texttt{1}=\texttt{X}\cdot\texttt{X}=\texttt{X}\cdot\texttt{Z}=\texttt{Z}\cdot\texttt{1}=\texttt{Z}\cdot\texttt{Z}=\texttt{X},\]
+\[\texttt{X}+\texttt{1}=\texttt{Z}+\texttt{1}=1,\]
+\[\texttt{X}+\texttt{0}=\texttt{X}+\texttt{X}=\texttt{X}+\texttt{Z}=\texttt{Z}+\texttt{0}=\texttt{Z}+\texttt{Z}=\texttt{X}.\]
+\sssc{Simulation}
+A simple simulator for combinational logic works as follows:
+\ben
+\item The circuit inputs are applied to the first set of gates in the circuit, and the out-puts of those gates are calculated.
+\item The outputs of the gates which changed in the previous step are fed into the next level of gate inputs. If the input to any gate has changed, then the output of that gate is calculated.
+\item Step 2 is repeated until no more changes in gate inputs occur. The circuit is then in a steady-state condition, and the outputs may be read.
+\item Steps 1 through 3 are repeated every time a circuit input changes.
+\een
+If a circuit output is wrong for some set of input values, this may be due to several possible causes:
+\bit
+\item incorrect design
+\iten Gates connected wrong
+\item Wrong input signals to the circuit
+\eit
+If the circuit is physically built, other possible causes include
+\bit
+\item Defective gates
+\item Defective connecting wires
+\eit
+It is very easy to locate the problem systematically by starting at the output and working back through the circuit until the trouble is located.
+
 
 \end{document}
 
