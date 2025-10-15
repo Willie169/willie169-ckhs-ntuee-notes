@@ -740,6 +740,8 @@ XNOR gate & XOR gate \\\hline
 \end{longtable}
 \sssc{Limited gate fan-ins}
 In practical logic design problems, the maximum number of inputs on each gate (or the fan-in) is limited. Depending on the type of gates used, this limit may be two, three, four, eight, or some other number. If a realization of a circuit requires more gate inputs than allowed, factoring the logic expression to obtain a more-level realization is necessary.
+\sssc{Buffer}
+A gate output can only be connected to a limited number of other device inputs without degrading the performance of a digital system. A simple buffer may be used to increase the driving capability of a gate output.
 \ssc{Multiple-output combinational circuits}
 \sssc{Minimal cost realization}
 Solution of digital design problems often requires the realization of several completely or incompletely specified Boolean functions of the same variables, that is, a completely or incompletely specified Boolean vector function. Although each function could be realized separately, the use of some gates in common between two or more functions sometimes leads to a more economical realization. Thus in realizing multiple-output circuits, the use of a minimum SOP for each function does not necessarily lead to a minimum cost realization for the circuit as a whole.
@@ -866,14 +868,15 @@ An integrated circuit package is the physical case that holds the silicon chip (
 \end{longtable}
 
 It is generally uneconomical to design digital systems using only SSI and MSI integrated circuits. By using LSI and larger functions, the required number of integrated circuit packages is greatly reduced, and the cost of mounting, wiring, designing, and maintaining may be significantly lower.
+\ssc{Bus}
+Several logic signals that perform a common function may be grouped together to form a bus, represented with a single heavy line optionally with a diagonal slash through it specifying the number of bits in the bus.
 \ssc{Digital circuits}
-move from sv learning
 \sssc{Multiplexer (MUX)}
-A multiplexer (MUX) or data selector has a group of data inputs and a group of control inputs (aka select inputs) and one output. The control inputs are used to select one of the data inputs and connect it to the output terminal. The symbol for a MUX is an isosceles trapezoid, where the longer parallel side contains the data input pins, one of the legs contains the control inputs, and the shorter parallel side contains the output pin. Multiplexers are frequently used in digital system design to select the data which is to be processed or stored.
+A multiplexer (MUX) or data selector has a group of data inputs and a group of control inputs (aka select inputs or select lines) and one output. The control inputs are used to select one of the data inputs and connect it to the output terminal. The symbol for a MUX is an isosceles trapezoid, where the longer parallel side contains the data input pins, one of the legs contains the control inputs, and the shorter parallel side contains the output pin. Multiplexers are frequently used in digital system design to select the data which is to be processed or stored. Unless otherwise specified, a MUX is with active high outputs.
 
 A $2^n$-to-1 MUX has $2^n$ data inputs $D_0,D_1,\ldots D_{2^n-1}$, $n$ control inputs $S_0,S_1,\ldots S_{n-1}$, and one output $Y$, with $Y$ given by
 \[\sum_{i=0}^{n-1}D_i\cdot m_i(S_0,S_1,\ldots S_{n-1}),\]
-where $m_i$ is the minterm corresponding to $i$ for $n$-variable functions of $S_0,S_1,\ldots S_{n-1}$.
+where $m_i$ is the minterm corresponding to $i$ for $n$-variable functions of $S_0,S_1,\ldots S_{n-1}$. When $m_i=1$, that is, the binary number $S_0S_1\ldots S_{n-1}$ is $i$, $I_i$ is the selected input.
 
 Alternatively $Y$ can be written as
 \[\prod_{i=0}^{n-1}D_i+M_i(S_0,S_1,\ldots S_{n-1}),\]
@@ -881,10 +884,11 @@ where $M_i$ is the maxterm corresponding to $i$ for $n$-variable functions of $S
 
 We can implement a MUX with a two- or multi-level circuit that realizes the SOP or POS form given above.
 
+A MUX with active high (aka active-high) outputs outputs the selected input directly, while a MUX with active low (aka active-low) outputs outputs the inverse of the selected input. A MUX can also has an additional input called an enable $E$ where it works as discussed above when $E=1$ and outputs $0$ when $E=0$.
 
-
-
-
+Given a switching function, a MUX implementation can be obtained using Shannon's expansion of the function.
+\sssc{Three-state buffer or tri-state buffer}
+A three-state buffer 
 
 
 
