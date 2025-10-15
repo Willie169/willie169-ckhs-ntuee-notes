@@ -20,6 +20,7 @@
 \item\textbf{Switching (logic) circuit}: A switching circuit has one or more inputs and one or more outputs which take on discrete values. Many of a digital system's subsystems take the form of a switching circuit.
 \item\textbf{Combinational (logic) circuit}: A circuit whose output value depends only on the present input value.
 \item\textbf{Sequential (logic) circuit}: A circuit whose output value depends on the present input value and past input values.
+\item\textbf{Switch, switching device, or switch element}: A component that opens or closes a circuit.
 \item\textbf{Flip-flop}: A bistable electronic device, meaning it has two stable states representing logic 0 and 1. It's a basic memory element used in sequential circuits.
 \item\textbf{Bus}: Several signals that perform a common function may be grouped together to form a bus, represented with a single heavy line optionally with a diagonal slash through it specifying the number of bits in the bus.
 \end{itemize}
@@ -778,7 +779,7 @@ The procedure of designing a multiple-output NOR-gate circuit is
 \sssc{Propagation delays and timing diagram}
 When the input to a logic gate is changed, the output will not change instantaneously but change after a finite delay. If the change in output is delayed by time $\varepsilon$ with respect to the input, we say that this gate has a propagation delay of $\varepsilon$. In practice, the propagation delay for a 0 to 1 output change may be different than the delay for a 1 to 0 change. Propagation delays for integrated circuit gates may be as short as a few nanoseconds, and in many cases these delays can be neglected. However, in the analysis of some types of sequential circuits, even short delays may be important.
 
-Timing diagram show various signals in the circuit as a function of time, often in waveform with time being the horizontal axis and each vertical block plots one signal with the same time scale. The vertical edges on the diagram where the signals change from 0 to 1 are called rising edges; the vertical edges on the diagram where the signals change from 1 to 0 are called falling edges.
+Timing diagram shows various signals in the circuit as a function of time, often in waveform with time being the horizontal axis and each vertical block plots one signal with the same time scale. The vertical edges on the diagram where the signals change from 0 to 1 are called rising edges; the vertical edges on the diagram where the signals change from 1 to 0 are called falling edges.
 \sssc{Inertial delays}
 If a logic gate will not respond to an input change that is shorter than a certain minimum pulse width $\varepsilon$, we say that this gate has a inertial delay of $\varepsilon$. Quite often the inertial delay value is assumed to be the same as the propagation delay of the gate. In contrast, if a gate always responds to input changes (with a propagation delay), no matter how closely spaced the input changes may be, the gate is said to have an ideal or transport delay.
 \sssc{Hazards}
@@ -790,7 +791,7 @@ Hazards in a two-level circuit:
 \item Hazards in a two-level circuit realizing a POS form can be detected using a Karnaugh map, in which if any two adjacent 0's are not covered by a same group corresponding to a sum term, a 0-hazard exists for the transition between the two 0's, which corresponds to an eliminated consensus term. For an $n$-variable map, this transition occurs when one variable changes and the other $n-1$ variables are held constant. We can eliminate a hazard by adding a group (sum term) that covers the two 0's.
 \eit
 
-Hazards a multi-level circuit can be detected by deriving either a SOP or POS expression for the circuit that represents a two-level circuit containing the same hazards as the original circuit. The SOP or POS expression is derived in the normal manner except that the complementation laws, i.e. $XX'=0$ and $X+X'=1$, are not used. Consequently:
+Hazards in a multi-level circuit can be detected by deriving either a SOP or POS expression for the circuit that represents a two-level circuit containing the same hazards as the original circuit. The SOP or POS expression is derived in the normal manner except that the complementation laws, i.e. $XX'=0$ and $X+X'=1$, are not used. Consequently:
 \bit
 \item The resulting SOP expression may contain products of the form $xx'\alpha$, where $\alpha$ is a product of literals or nothing. In the SOP expression, a product of the form $xx'\alpha$ represents a pseudo AND gate that may temporarily have the output value 1 as $x$ changes if $\alpha=1$, which causes static 0- or dynamic hazards.
 \item The resulting POS expression may contain sums of the form $x+x'+\beta$, where $\beta$ is a sum of literals or nothing. In the POS expression, a sum of the form $x+x'+\beta$ represents a pseudo OR gate that may temporarily have the output value 0 as $x$ changes if $\beta=0$, which causes static 1- or dynamic hazards.
@@ -798,12 +799,12 @@ Hazards a multi-level circuit can be detected by deriving either a SOP or POS ex
 
 To design a circuit  which is free of static and dynamic hazards, the following procedures may be used:
 \ben
-\item Find a SOP expression for the function in which every pair of adjacent 1's is covered by a 1-term. (The sum of all prime implicants always satisfy this condition.) A two-level AND-OR circuit based on this expression will be free of 1-, 0-, and dynamic hazards.
+\item Find a SOP expression for the function in which every pair of adjacent 1's is covered by a 1-term. (The sum of all prime implicants always satisfies this condition.) A two-level AND-OR circuit based on this expression will be free of 1-, 0-, and dynamic hazards.
 \item If a different form of the circuit is desired, manipulate the expression to the desired form but treat each independent variable and its inverse as two independent variables to prevent introduction of hazards.
 \een
 or
 \ben
-\item Find a POS expression for the function in which every pair of adjacent 0's is covered by a 0-term. (The product of all prime implicate always satisfy this condition.) A two-level OR-AND circuit based on this expression will be free of 1-, 0-, and dynamic hazards.
+\item Find a POS expression for the function in which every pair of adjacent 0's is covered by a 0-term. (The product of all prime implicate always satisfies this condition.) A two-level OR-AND circuit based on this expression will be free of 1-, 0-, and dynamic hazards.
 \item If a different form of the circuit is desired, manipulate the expression to the desired form but treat each independent variable and its inverse as two independent variables to prevent introduction of hazards.
 \een
 
@@ -818,7 +819,7 @@ SystemVerilog, an extension of Verilog, standardized as IEEE 1800, is a hardware
 
 VHDL (VHSIC Hardware Description Language), standardized as IEEE Std 1076, is a hardware description language used to model and simulate electronic circuits.
 \sssc{Four-valued logic}
-The two logic values, 0 and 1, are not sufficient for simulating logic circuits. At times, the value of a gate input or output may be unknown, which is represented by X (\verb|x| in Verilog/SystemVerilog). At other times we may have no logic signal at an input, as in the case of an open circuit when an input is not connected to any output, called high impedance or hi-Z/Hi-Z connection, which is represented by Z (\verb|z| in Verilog/SystemVerilo).
+The two logic values, 0 and 1, are not sufficient for simulating logic circuits. At times, the value of a gate input or output may be unknown, which is represented by X (\verb|x| in Verilog/SystemVerilog). At other times we may have no logic signal at an input, as in the case of an open circuit when an input is not connected to any output, called high impedance or hi-Z/Hi-Z connection, which is represented by Z (\verb|z| in Verilog/SystemVerilog).
 
 The logical connectives are defined as follows (without loss of commutativity of operators):
 \[X\cdot0=Z\cdot0=0,\]
@@ -854,7 +855,7 @@ An integrated circuit package is the physical case that holds the silicon chip (
 \bit
 \item Silicon die (chip): The actual IC.
 \item Bond wires: Typically tiny gold or aluminum wires.
-\item Encapsulation: Protective material that shiels the die from damage.
+\item Encapsulation: Protective material that shields the die from damage.
 \item Pins or leads: Metal terminal that connect the IC to a printed circuit board (PCB).
 \eit
 \sssc{Scales}
@@ -864,26 +865,26 @@ An integrated circuit package is the physical case that holds the silicon chip (
     SSI & small-scale integration & 1964 & 1 to 10 & 1 to 12 \\\hline
     MSI & medium-scale integration & 1968 & 10 to 500 & 13 to 99 \\\hline
     LSI & large-scale integration & 1971 & 500 to 20000 & 100 to 9999 \\\hline
-    VLSI & very-large-scale integration & 1980 & 20000 to 1000000 or 20000 and more & 10000 to 99999 or 10000 and more \\\hline
-    ULSI & ultra-large-scale integration & 1964 & 1000000 and more & 100000 and more \\\hline
+    VLSI & very-large-scale integration & 1980 & 20000 and more (or 20000 to 1000000) & 10000 and more (or 10000 to 99999) \\\hline
+    (ULSI & ultra-large-scale integration & 1964 & 1000000 and more & 100000 and more) \\\hline
 \end{longtable}
 
-It is generally uneconomical to design digital systems using only SSI and MSI integrated circuits. By using LSI and larger functions, the required number of integrated circuit packages is greatly reduced, and the cost of mounting, wiring, designing, and maintaining may be significantly lower.
-\ssc{Combinational circuits}
+It is generally uneconomical to design digital systems using only SSI and MSI integrated circuits. By using LSI and VLSI ICs, the required number of integrated circuit packages is greatly reduced, and the cost of mounting, wiring, designing, and maintaining may be significantly lower.
+\ssc{Digital circuits}
 \sssc{Multiplexer (MUX)}
 A multiplexer (MUX) or data selector has a group of data inputs and a group of control inputs (aka select inputs or select lines) and one output. The control inputs are used to select one of the data inputs and connect it to the output terminal. The symbol for a MUX is an isosceles trapezoid, where the longer parallel side contains the data input pins, one of the legs contains the control inputs, and the shorter parallel side contains the output pin. Multiplexers are frequently used in digital system design to select the data which is to be processed or stored. Unless otherwise specified, a MUX is with active high outputs.
 
 A $2^n$-to-1 MUX has $2^n$ data inputs $D_0,D_1,\ldots D_{2^n-1}$, $n$ control inputs $S_0,S_1,\ldots S_{n-1}$, and one output $Y$, with $Y$ given by
-\[\sum_{i=0}^{n-1}D_i\cdot m_i(S_0,S_1,\ldots S_{n-1}),\]
+\[Y=\sum_{i=0}^{2^{n-1}}D_i\cdot m_i(S_0,S_1,\ldots S_{n-1}),\]
 where $m_i$ is the minterm corresponding to $i$ for $n$-variable functions of $S_0,S_1,\ldots S_{n-1}$. When $m_i=1$, that is, the binary number $S_0S_1\ldots S_{n-1}$ is $i$, $I_i$ is the selected input.
 
-Alternatively $Y$ can be written as
-\[\prod_{i=0}^{n-1}D_i+M_i(S_0,S_1,\ldots S_{n-1}),\]
+Alternatively, $Y$ can be written as
+\[Y=\prod_{i=0}^{2^{n-1}}\qty(D_i+M_i(S_0,S_1,\ldots S_{n-1})),\]
 where $M_i$ is the maxterm corresponding to $i$ for $n$-variable functions of $S_0,S_1,\ldots S_{n-1}$.
 
 We can implement a MUX with a two- or multi-level circuit that realizes the SOP or POS form given above.
 
-A MUX with active high (aka active-high) outputs outputs the selected input directly, while a MUX with active low (aka active-low) outputs outputs the inverse of the selected input. A MUX can also has an additional input $E$ called enable (signal) and works as discussed above when $E=1$ and outputs $0$ when $E=0$.
+A MUX with active high (aka active-high) outputs outputs the selected input directly, while a MUX with active low (aka active-low) outputs outputs the inverse of the selected input. A MUX can also have an additional input $E$ called enable (signal) and works as discussed above when $E=1$ and outputs $0$ when $E=0$.
 
 Given a switching function, a MUX implementation can be obtained using Shannon's expansion of the function.
 \sssc{Three-state buffer or tri-state buffer}
@@ -899,17 +900,16 @@ Integrated circuits are often designed using bidirectional I/O pins for input an
 \sssc{Decoders}
 A decoder is a combinational circuit that converts binary input codes into a single active output line. An $n$-to-$2^n$ line decoder has $n$ input signals and $2^n$ output signals realizing a one-to-one Boolean vector function $\{0,1\}^n\to\{0,1\}^{2^n}$ that map each input combination to an output vector of which the 1-norm is $1$ (noninverted/active-high outputs) or $2^n-1$ (inverted/active-low outputs).
 
-Each output line of a decoder corresonds to a minterm of the inputs. Thus, we can ORing them together to get the active-high outputs or NANDing them together to get the active-low outputs.
+Each possible output of a decoder corresponds to a minterm of the inputs. Thus, we can OR them together to get the active-high outputs or NAND them together to get the active-low outputs.
 \sssc{Encoders}
-An encoder is a combinational circuit that realize the inverse of a Boolean vector function realized by a decoder. A $2^n$-to-$n$ priority encoder realizes the inverse of a Boolean vector function $\{0,1\}^n\to\{0,1\}^{2^n}$ realized by a decoder. (Note that the domain of the inverse is a subset of $\{0,1\}^{2^n}$ that has $n$ elements.) 
+An encoder is a combinational circuit that realize the inverse of a Boolean vector function realized by a decoder. A $2^n$-to-$n$ priority encoder realizes the inverse of a Boolean vector function $\{0,1\}^n\to\{0,1\}^{2^n}$ realized by a decoder, of which the domain of the inverse is a subset of $\{0,1\}^{2^n}$ that has $n$ elements, each of which with the 1-norm being $1$ (noninverted/active-high outputs) or $2^n-1$ (inverted/active-low outputs).
 \sssc{Read-only memory (ROM)}
+A read-only memory (ROM) is a sequential circuit consists of an array of semiconductor devices that are interconnected to store an array of binary data. Once binary data is stored in the ROM, it can be read out whenever desired, but the data that is stored cannot be changed under normal operating conditions. The block diagram of a ROM is typically a rectangle with input lines at the left side and output lines at the buttom.
+
+A ROM which has $n$ input lines and $m$ output lines contains an array of $2^n$ words, each word of width $m$ bits, called a $2^n$-word$\times m$-bit ROM. An input combination serves as an address to select one of the $2^n$ words and output it from the ROM, that is, a ROM basically consists of a decoder and a memory array. Typical sizes for commercially available ROMs range from 32 words $\times$ 4 bits to 512K words $\times$ 8 bits, or larger.
 
 
 
 
-
-
-
-This unit introduces the use of multiplexers, decoders, encoders, and three-state buffers in logic design. Then read-only memories (ROMs) are described and used to implement multiple-output combinational logic circuits. Finally, other types of programmable logic devices (PLDs), including programmable logic arrays (PLAs), programmable array logic devices (PALs), complex programmable logic devices (CPLDs), and field- programmable gate arrays (FPGAs) are introduced and used in combinational logic design.
 \end{document}
 
