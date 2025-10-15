@@ -807,13 +807,13 @@ or
 It should be emphasized that the discussion of hazards and the possibility of resulting glitches in this section has assumed that only a single input can change at a time and that no other input will change until the circuit has stabilized. If more than one input can change at one time, then nearly all circuits will contain hazards, and they cannot be eliminated by modifying the circuit implementation.
 \ssc{Simulation and testing of logic circuits}
 \sssc{Verilog, SystemVerilog, and VHDL}
-A hardware description language (HDL) is a specialized computer language used to describe the structure and behavior of logic circuits.
+A hardware description language (HDL) is a specialized computer language used to describe the structure and behavior of electronic circuits.
 
-Verilog, standardized as IEEE 1364, is a hardware description language used to model and simulate logic circuits.
+Verilog, standardized as IEEE 1364, is a hardware description language used to model and simulate electronic circuits.
 
-SystemVerilog, an extension of Verilog, standardized as IEEE 1800, is a hardware description and hardware verification language used to model, simulate, and test logic circuits.
+SystemVerilog, an extension of Verilog, standardized as IEEE 1800, is a hardware description and hardware verification language used to model, simulate, and test electronic circuits.
 
-VHDL (VHSIC Hardware Description Language), standardized as IEEE Std 1076, is a hardware description language used to model and simulate logic circuits.
+VHDL (VHSIC Hardware Description Language), standardized as IEEE Std 1076, is a hardware description language used to model and simulate electronic circuits.
 \sssc{Four-valued logic in Verilog and SystemVerilog}
 The two logic values, \texttt{0} and \texttt{1}, are not sufficient for simulating logic circuits. At times, the value of a gate input or output may be unknown, which is represented by \texttt{X} (unknown). At other times we may have no logic signal at an input, as in the case of an open circuit when an input is not connected to any output, called high impedance or hi-\texttt{Z} connection, which is represented by \texttt{Z} (high impedance / hi-\texttt{Z}).
 
@@ -822,7 +822,7 @@ The logical connectives are defined as follows (without loss of commutativity of
 \[\texttt{X}\cdot\texttt{1}=\texttt{X}\cdot\texttt{X}=\texttt{X}\cdot\texttt{Z}=\texttt{Z}\cdot\texttt{1}=\texttt{Z}\cdot\texttt{Z}=\texttt{X},\]
 \[\texttt{X}+\texttt{1}=\texttt{Z}+\texttt{1}=1,\]
 \[\texttt{X}+\texttt{0}=\texttt{X}+\texttt{X}=\texttt{X}+\texttt{Z}=\texttt{Z}+\texttt{0}=\texttt{Z}+\texttt{Z}=\texttt{X}.\]
-\sssc{Simulation}
+\sssc{Simulation and testing}
 A simple simulator for combinational logic works as follows:
 \ben
 \item The circuit inputs are applied to the first set of gates in the circuit, and the out-puts of those gates are calculated.
@@ -842,5 +842,52 @@ If the circuit is physically built, other possible causes include
 \item Defective connecting wires
 \eit
 It is very easy to locate the problem systematically by starting at the output and working back through the circuit until the trouble is located.
+\ssc{Integrated Circuit (IC)}
+An integrated circuit (IC), also known as a microchip or simply chip, is a compact assembly of electronic circuits, in which the components are fabricated onto a thin piece (called chip) of semiconductor material, most commonly silicon.
+
+Integrated circuits can be broadly classified into analog, digital and mixed-signal, consisting of analog and digital signaling on the same IC.
+\sssc{Integrated circuit package}
+An integrated circuit package is the physical case that holds the silicon chip (die) and provides the electrical and mechanical connection between the chip’s microscopic circuits and the outside world. An IC package typically has:
+\bit
+\item Silicon die (chip): The actual IC.
+\item Bond wires: Typically tiny gold or aluminum wires.
+\item Encapsulation: Protective material that shiels the die from damage.
+\item Pins or leads: Metal terminal that connect the IC to a printed circuit board (PCB).
+\eit
+\sssc{Scales}
+\begin{longtable}[c]{|c|c|c|c|c|}
+    \hline
+    Acronym & Name & Year & Transistor count & Logic gates number \\\hline
+    SSI & small-scale integration & 1964 & 1 to 10 & 1 to 12 \\\hline
+    MSI & medium-scale integration & 1968 & 10 to 500 & 13 to 99 \\\hline
+    LSI & large-scale integration & 1971 & 500 to 20000 & 100 to 9999 \\\hline
+    VLSI & very-large-scale integration & 1980 & 20000 to 1000000 or 20000 and more & 10000 to 99999 or 10000 and more \\\hline
+    ULSI & ultra-large-scale integration & 1964 & 1000000 and more & 100000 and more \\\hline
+\end{longtable}
+
+It is generally uneconomical to design digital systems using only SSI and MSI integrated circuits. By using LSI and larger functions, the required number of integrated circuit packages is greatly reduced, and the cost of mounting, wiring, designing, and maintaining may be significantly lower.
+\ssc{Digital circuits}
+move from sv learning
+\sssc{Multiplexer (MUX)}
+A multiplexer (MUX) or data selector has a group of data inputs and a group of control inputs (aka select inputs) and one output. The control inputs are used to select one of the data inputs and connect it to the output terminal. The symbol for a MUX is an isosceles trapezoid, where the longer parallel side contains the data input pins, one of the legs contains the control inputs, and the shorter parallel side contains the output pin. Multiplexers are frequently used in digital system design to select the data which is to be processed or stored.
+
+A $2^n$-to-1 MUX has $2^n$ data inputs $D_0,D_1,\ldots D_{2^n-1}$, $n$ control inputs $S_0,S_1,\ldots S_{n-1}$, and one output $Y$, with $Y$ given by
+\[\sum_{i=0}^{n-1}D_i\cdot m_i(S_0,S_1,\ldots S_{n-1}),\]
+where $m_i$ is the minterm corresponding to $i$ for $n$-variable functions of $S_0,S_1,\ldots S_{n-1}$.
+
+Alternatively $Y$ can be written as
+\[\prod_{i=0}^{n-1}D_i+M_i(S_0,S_1,\ldots S_{n-1}),\]
+where $M_i$ is the maxterm corresponding to $i$ for $n$-variable functions of $S_0,S_1,\ldots S_{n-1}$.
+
+We can implement a MUX with a two- or multi-level circuit that realizes the SOP or POS form given above.
+
+
+
+
+
+
+
+
+This unit introduces the use of multiplexers, decoders, encoders, and three-state buffers in logic design. Then read-only memories (ROMs) are described and used to implement multiple-output combinational logic circuits. Finally, other types of programmable logic devices (PLDs), including programmable logic arrays (PLAs), programmable array logic devices (PALs), complex programmable logic devices (CPLDs), and field- programmable gate arrays (FPGAs) are introduced and used in combinational logic design.
 \end{document}
 
