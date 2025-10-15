@@ -21,6 +21,7 @@
 \item\textbf{Combinational (logic) circuit}: A circuit whose output value depends only on the present input value.
 \item\textbf{Sequential (logic) circuit}: A circuit whose output value depends on the present input value and past input values.
 \item\textbf{Flip-flop}: A bistable electronic device, meaning it has two stable states representing logic 0 and 1. It's a basic memory element used in sequential circuits.
+\item\textbf{Bus}: Several signals that perform a common function may be grouped together to form a bus, represented with a single heavy line optionally with a diagonal slash through it specifying the number of bits in the bus.
 \end{itemize}
 \subsection{Introduction to Boolean Algebra}
 The basic mathematics needed for the study of logic design of digital systems is Boolean algebra. Boolean algebra was introduced by George Boole in his first book The Mathematical Analysis of Logic (1847), and set forth more fully in his An Investigation of the Laws of Thought (1854).
@@ -816,14 +817,14 @@ Verilog, standardized as IEEE 1364, is a hardware description language used to m
 SystemVerilog, an extension of Verilog, standardized as IEEE 1800, is a hardware description and hardware verification language used to model, simulate, and test electronic circuits.
 
 VHDL (VHSIC Hardware Description Language), standardized as IEEE Std 1076, is a hardware description language used to model and simulate electronic circuits.
-\sssc{Four-valued logic in Verilog and SystemVerilog}
-The two logic values, \texttt{0} and \texttt{1}, are not sufficient for simulating logic circuits. At times, the value of a gate input or output may be unknown, which is represented by \texttt{X} (unknown). At other times we may have no logic signal at an input, as in the case of an open circuit when an input is not connected to any output, called high impedance or hi-\texttt{Z} connection, which is represented by \texttt{Z} (high impedance / hi-\texttt{Z}).
+\sssc{Four-valued logic}
+The two logic values, 0 and 1, are not sufficient for simulating logic circuits. At times, the value of a gate input or output may be unknown, which is represented by X (\verb|x| in Verilog/SystemVerilog). At other times we may have no logic signal at an input, as in the case of an open circuit when an input is not connected to any output, called high impedance or hi-Z/Hi-Z connection, which is represented by Z (\verb|z| in Verilog/SystemVerilo).
 
 The logical connectives are defined as follows (without loss of commutativity of operators):
-\[\texttt{X}\cdot\texttt{0}=\texttt{Z}\cdot\texttt{0}=0,\]
-\[\texttt{X}\cdot\texttt{1}=\texttt{X}\cdot\texttt{X}=\texttt{X}\cdot\texttt{Z}=\texttt{Z}\cdot\texttt{1}=\texttt{Z}\cdot\texttt{Z}=\texttt{X},\]
-\[\texttt{X}+\texttt{1}=\texttt{Z}+\texttt{1}=1,\]
-\[\texttt{X}+\texttt{0}=\texttt{X}+\texttt{X}=\texttt{X}+\texttt{Z}=\texttt{Z}+\texttt{0}=\texttt{Z}+\texttt{Z}=\texttt{X}.\]
+\[X\cdot0=Z\cdot0=0,\]
+\[X\cdot1=X\cdot X=X\cdot Z=Z\cdot1=Z\cdot Z=X,\]
+\[X+1=Z+1=1,\]
+\[X+0=X+X=X+Z=Z+0=Z+Z=X.\]
 \sssc{Simulation and testing}
 A simple simulator for combinational logic works as follows:
 \ben
@@ -868,9 +869,7 @@ An integrated circuit package is the physical case that holds the silicon chip (
 \end{longtable}
 
 It is generally uneconomical to design digital systems using only SSI and MSI integrated circuits. By using LSI and larger functions, the required number of integrated circuit packages is greatly reduced, and the cost of mounting, wiring, designing, and maintaining may be significantly lower.
-\ssc{Bus}
-Several logic signals that perform a common function may be grouped together to form a bus, represented with a single heavy line optionally with a diagonal slash through it specifying the number of bits in the bus.
-\ssc{Digital circuits}
+\ssc{Combinational circuits}
 \sssc{Multiplexer (MUX)}
 A multiplexer (MUX) or data selector has a group of data inputs and a group of control inputs (aka select inputs or select lines) and one output. The control inputs are used to select one of the data inputs and connect it to the output terminal. The symbol for a MUX is an isosceles trapezoid, where the longer parallel side contains the data input pins, one of the legs contains the control inputs, and the shorter parallel side contains the output pin. Multiplexers are frequently used in digital system design to select the data which is to be processed or stored. Unless otherwise specified, a MUX is with active high outputs.
 
@@ -884,11 +883,30 @@ where $M_i$ is the maxterm corresponding to $i$ for $n$-variable functions of $S
 
 We can implement a MUX with a two- or multi-level circuit that realizes the SOP or POS form given above.
 
-A MUX with active high (aka active-high) outputs outputs the selected input directly, while a MUX with active low (aka active-low) outputs outputs the inverse of the selected input. A MUX can also has an additional input called an enable $E$ where it works as discussed above when $E=1$ and outputs $0$ when $E=0$.
+A MUX with active high (aka active-high) outputs outputs the selected input directly, while a MUX with active low (aka active-low) outputs outputs the inverse of the selected input. A MUX can also has an additional input $E$ called enable (signal) and works as discussed above when $E=1$ and outputs $0$ when $E=0$.
 
 Given a switching function, a MUX implementation can be obtained using Shannon's expansion of the function.
 \sssc{Three-state buffer or tri-state buffer}
-A three-state buffer 
+A three-state buffer (or tri-state buffer) is a logic gate that has three stable states: logic HIGH (1), logic LOW (0), and high impedance (Z). In the high impedance state, the output of the buffer is effectively disconnected from the subsequenct circuit. A three-state buffer has one data input and one output like a simple buffer and one additional input $B$ called enable (signal) and works as a simple buffer when $B=1$ and outputs high impedance when $B=0$.
+
+When a bus is driven by three-state buffers, we call it a three-state bus.
+
+We can also add an inversion bubble at enable signal such that it works as a simple buffer when $B=0$ and outputs high impedance when $B=1$. We can also add an inversion bubble at either data input or output such that when it doesn't outputs high impedance, it works as an inverter.
+
+We can implement a 2-to-1 MUX by using data inputs of the MUX as data inputs of two tri-state buffers, using the control input and its inverse as enable signal of the two tri-state buffers respectively, and simply connecting the two outputs of the two tri-state buffers to the output of the MUX.
+\sssc{Bidirectional I/O pin}
+Integrated circuits are often designed using bidirectional I/O pins for input and output to save pins and wiring. A bidirectional pin is a single physical pin that can act as either an input or an output, but not both at the same time, depending on the control signal. To accomplish this, the circuit output is connected to the pin through a three-state buffer. When the buffer is enabled, the pin is driven with the output signal; when the buffer is disabled, an external source can drive the pin.
+\sssc{Decoders}
+A decoder is a combinational circuit that converts binary input codes into a single active output line. An $n$-to-$2^n$ line decoder has $n$ input signals and $2^n$ output signals realizing a one-to-one Boolean vector function $\{0,1\}^n\to\{0,1\}^{2^n}$ that map each input combination to an output vector of which the 1-norm is $1$ (noninverted/active-high outputs) or $2^n-1$ (inverted/active-low outputs).
+
+Each output line of a decoder corresonds to a minterm of the inputs. Thus, we can ORing them together to get the active-high outputs or NANDing them together to get the active-low outputs.
+\sssc{Encoders}
+An encoder is a combinational circuit that realize the inverse of a Boolean vector function realized by a decoder. A $2^n$-to-$n$ priority encoder realizes the inverse of a Boolean vector function $\{0,1\}^n\to\{0,1\}^{2^n}$ realized by a decoder. (Note that the domain of the inverse is a subset of $\{0,1\}^{2^n}$ that has $n$ elements.) 
+\sssc{Read-only memory (ROM)}
+
+
+
+
 
 
 
