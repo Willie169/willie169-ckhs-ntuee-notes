@@ -22,7 +22,6 @@
 \item\textbf{Sequential (logic) circuit}: A circuit whose output value depends on the present input value and past input values.
 \item\textbf{Switch, switching device, or switch element}: A component that opens or closes a circuit.
 \item\textbf{Flip-flop}: A bistable electronic device, meaning it has two stable states representing logic 0 and 1. It's a basic memory element used in sequential circuits.
-\item\textbf{Bus}: Several signals that perform a common function may be grouped together to form a bus, represented with a single heavy line optionally with a diagonal slash through it specifying the number of bits in the bus.
 \end{itemize}
 \subsection{Introduction to Boolean Algebra}
 The basic mathematics needed for the study of logic design of digital systems is Boolean algebra. Boolean algebra was introduced by George Boole in his first book The Mathematical Analysis of Logic (1847), and set forth more fully in his An Investigation of the Laws of Thought (1854).
@@ -214,10 +213,10 @@ XY+X′Z+YZ&=XY+X'Z+(X+X')YZ\\
 &=(X+Y)(X′+Z).
 \end{aligned}\]
 \end{proof}
-\sssc{Boole's expansion theorem, Shannon's expansion theorem, Shannon decomposition, or fundamental theorem of Boolean algebra}
+\sssc{Shannon's expansion theorem, Shannon decomposition, Boole's expansion theorem, or fundamental theorem of Boolean algebra}
 The theorem states that
 \[F=x\cdot F_x+x'\cdot F_{x'},\]
-where $F$ is any Boolean function, $x$ is a variable, and $F_x$ and $F_{x'}$, sometimes called the positive and negative Shannon cofactors, respectively, of $F$ with respect to $x$, are $F$ with the independent variable $x$ set to $1$ and to $0$ respectively.
+where $F$ is any $n$-variable Boolean function, $x$ is any independent variable of $F$, $F_x$ and $F_{x'}$, sometimes called the positive and negative Shannon cofactors, respectively, of $F$ with respect to $x$, are $(n-1)$-variable Boolean functions defined as $F$ with the $x$ set to $1$ and to $0$ respectively, and the RHS is called a Shannon's expansion or Boole's expansion of $F$.
 \sssc{Combination of Distributivity and Consensus Theorem}
 \[(X+Y)(X'+Z)=XZ+X'Y\]
 \begin{proof}
@@ -871,8 +870,14 @@ An integrated circuit package is the physical case that holds the silicon chip (
 
 It is generally uneconomical to design digital systems using only SSI and MSI integrated circuits. By using LSI and VLSI ICs, the required number of integrated circuit packages is greatly reduced, and the cost of mounting, wiring, designing, and maintaining may be significantly lower.
 \ssc{Combinational circuits}
+\sssc{Active high and low}
+For some type of circuits, active high (aka active-high or noninverted) outputs means the outputs are noninverted; active low (aka active-low or inverted) outputs means the outputs are logically equivalent to being inverted. Active high (aka active-high or noninverted) inputs means the inputs are noninverted before inputted; active low (aka active-low or inverted) outputs means the inputs are logically equivalent to being inverted before inputted.
+
+Unless otherwise specified, a type of circuit with active high and low version of inputs and/or outputs are assumed to be active high inputs and/or outputs.
+\sssc{Bus}
+Several signals that perform a common function may be grouped together to form a bus, represented with a single heavy line optionally with a diagonal slash through it specifying the number of bits in the bus.
 \sssc{Multiplexer (MUX)}
-A multiplexer (MUX) or data selector has a group of data inputs and a group of control inputs (aka select inputs or select lines) and one output. The control inputs are used to select one of the data inputs and connect it to the output terminal. The symbol for a MUX is an isosceles trapezoid, where the longer parallel side contains the data input pins, one of the legs contains the control inputs, and the shorter parallel side contains the output pin. Multiplexers are frequently used in digital system design to select the data which is to be processed or stored. Unless otherwise specified, a MUX is with active high outputs.
+A multiplexer (MUX) or data selector has a group of data inputs and a group of control inputs (aka select inputs or select lines) and one output. The control inputs are used to select one of the data inputs and connect it to the output terminal. The symbol for a MUX is an isosceles trapezoid, where the longer parallel side contains the data input pins, one of the legs contains the control inputs, and the shorter parallel side contains the output pin. Multiplexers are frequently used in digital system design to select the data which is to be processed or stored.
 
 A $2^n$-to-1 MUX has $2^n$ data inputs $D_0,D_1,\ldots D_{2^n-1}$, $n$ control inputs $S_0,S_1,\ldots S_{n-1}$, and one output $Y$, with $Y$ given by
 \[Y=\sum_{i=0}^{2^{n-1}}D_i\cdot m_i(S_0,S_1,\ldots S_{n-1}),\]
@@ -884,9 +889,11 @@ where $M_i$ is the maxterm corresponding to $i$ for $n$-variable functions of $S
 
 We can implement a MUX with a two- or multi-level circuit that realizes the SOP or POS form given above.
 
-A MUX with active high (aka active-high) outputs outputs the selected input directly, while a MUX with active low (aka active-low) outputs outputs the inverse of the selected input. A MUX can also have an additional input $E$ called enable (signal) and works as discussed above when $E=1$ and outputs $0$ when $E=0$.
+A MUX with active high outputs outputs the selected input directly, while a MUX with active low outputs outputs the inverse of the selected input. A MUX can also have an additional input $E$ called enable (signal) and works as discussed above when $E=1$ and outputs $0$ when $E=0$.
 
-Given a switching function, a MUX implementation can be obtained using Shannon's expansion of the function.
+A $2^n$-to-1 multiplexer can be realized with $\qty(2^{n-m+1}-1)$ $2^m$-to-1 multiplexers ($m\leq n$).
+
+Given a $n$-variable switching function $F$, $2^m$ $m$-variable subfunctions of $F$ can be obtained using Shannon's expansion of the function and compose back to $F$ with one $2^{n-m}$-to-1 multiplexer. Take $m=1$, we can get a realization of $F$ with one $2^{n-1}$-to-1 multiplexer.
 \sssc{Three-state buffer or tri-state buffer}
 A three-state buffer (or tri-state buffer) is a logic gate that has three stable states: logic HIGH (1), logic LOW (0), and high impedance (Z). In the high impedance state, the output of the buffer is effectively disconnected from the subsequenct circuit. A three-state buffer has one data input and one output like a simple buffer and one additional input $B$ called enable (signal) and works as a simple buffer when $B=1$ and outputs high impedance when $B=0$.
 
@@ -901,21 +908,32 @@ Integrated circuits are often designed using bidirectional (or bi-directional) I
 A decoder is a combinational circuit that converts binary input codes into a single active output line. An $n$-to-$2^n$ line decoder has $n$ input signals and $2^n$ output signals realizing a one-to-one Boolean vector function $\{0,1\}^n\to\{0,1\}^{2^n}$ that map each input combination to an output vector of which the 1-norm is $1$ (noninverted/active-high outputs) or $2^n-1$ (inverted/active-low outputs).
 
 Each possible output of a decoder corresponds to a minterm of the inputs. Thus, we can OR them together to get the active-high outputs or NAND them together to get the active-low outputs.
-\sssc{Encoders}
-An encoder is a combinational circuit that realize the inverse of a Boolean vector function realized by a decoder. A $2^n$-to-$n$ priority encoder realizes the inverse of a Boolean vector function $\{0,1\}^n\to\{0,1\}^{2^n}$ realized by a decoder, of which the domain of the inverse is a subset of $\{0,1\}^{2^n}$ that has $n$ elements, each of which with the 1-norm being $1$ (noninverted/active-high outputs) or $2^n-1$ (inverted/active-low outputs).
+\sssc{Normal encoders}
+A normal encoder is a combinational circuit that realize the inverse of a Boolean vector function realized by a decoder. A $2^n$-to-$n$ normal encoder realizes the inverse of a Boolean vector function $\{0,1\}^n\to\{0,1\}^{2^n}$ realized by a decoder, of which the domain of the inverse is a subset of $\{0,1\}^{2^n}$ that has $n$ elements, each of which with the 1-norm being $1$ (noninverted/active-high inputs) or $(2^n-1)$ (inverted/active-low inputs). If the input combination is not in the domain, the outputs are undefined.
+\sssc{Priority encoders}
+A priority encoder resolves the undefined behaviour of normal encoders by assigning priority to the inputs.
+
+A $2^n$-to-$n$ active-high inputs and outputs priority encoder has $2^n$ inputs and $(n+1)$ outputs. If all inputs are 0, the $(n+1)$-th output, called valid (V) or enable output (EO), is 0 and the other $n$ outputs are undefined; otherwise the $(n+1)$-th output is 1 and the other $n$ outputs are determined by a loop: \texttt{for (int i=1; i<=2^n; i=i+1)} (in which \verb|2^n| means $2$ to the power of $n$):
+\bit
+\item If the input of $i$th priority is $1$, the output combination is the output combination of a active-high inputs normal encoder when that input is $1$ and all other inputs are $0$.
+\eit
+
+The priority of inputs are usually as: for any $1\leq i<2^n$, the $(i+1)$-th input is prior to the $i$-th input.
+
+An active-low inputs priority encoder invert the inputs; an active-low outputs priority encoder invert the outputs.
 \ssc{Read-only memory (ROM)}
 \sssc{Introduction and Realization}
 A read-only memory (ROM) is a non-volatile (data is kept even when power is off) memory consists of an array of semiconductor devices that are interconnected to store an array of binary data. Once binary data is stored in the ROM, it can be read out whenever desired, but the data that is stored cannot be changed under normal operating conditions. The block diagram of a ROM is typically a rectangle with input lines at the left side and output lines at the buttom.
 
 A ROM which has $n$ input lines and $m$ output lines contains an array of $2^n$ words, each word of width $m$ bits, called a $2^n$(-word)$\times m$-bit ROM. An input combination serves as an address to select one of the $2^n$ words and output it from the ROM, that is, a ROM basically consists of a decoder and a memory array. Typical sizes for commercially available ROMs range from 32 words $\times$ 4 bits to 512K words $\times$ 8 bits, or larger.
 
-A $2^n$-word$\times m$-bit ROM realizes the truth table by a $n$-to-$2^n$ decoder and a grid consists of $2^n$ rows (decoder outputs) intersecting each of the $m$ columns (group to ROM outputs, outputs 0 if no 1 signal from the input lines is inputted), where in each of the $2^n\times m$ row-column intersection points, each corresponding to one bit in the memory array, a switching element is either present and connected or not. If absent or not connected (logic 0), the signal value from the row isn't passed to the column; if present and connected (logic 1), represented by a $\times$ on the diagram, the signal value from the row is passed to the column.
+A $2^n$-word$\times m$-bit ROM stores $m$ $n$-variable truth tables by a $n$-to-$2^n$ decoder and a grid consists of $2^n$ rows (decoder outputs) intersecting each of the $m$ columns (wires that connect ground to ROM outputs, which outputs 0 if no 1 signal from the input lines is inputted), sometimes called OR plane, where in each of the $2^n\times m$ row-column intersection points, each corresponding to one bit in the memory array, a switching element, often a diode, is either present and connected or not. If absent or not connected (logic 0), the signal value from the row isn't passed to the column; if present and connected (logic 1), represented by a $\times$ on the diagram, the signal value from the row is passed to the column.
 \sssc{Types}
 Common types of ROMs:
 \bit
 \item Mask-programmable ROMs: Programmed permanently during manufacturing using photolithography by selectively including or omitting the switching elements at the cells. The mask used in photolithography is expensive, so the use of mask-programmable ROMs is economically feasible only if a large quantity (typically several thousand or more) is required with the same data array.
-\item Programmable ROMs (PROM): Manufactured blank and programmable once (one-time programmable (OTP)) by the user using a PROM programmer (aka PROM burner), which sends high-voltage pulses to burn tiny fuses in the cell to create permanent 1's and 0's.
-\item Erasable Programmable ROMs (EPROM): Manufactured blank with each cell contains a control gate that receives normal programming or read voltages and a floating gate that is completely insulated by oxide and can store electric charge and with quartz window on top, programmable by the user using a PROM programmer (aka PROM burner), which sends high-voltage pulses to inject electrons into floating gates, and erasable by the user by expose it to intense UV light that provides photons providing energy to remove trapped electrons from the floating gate simultaneously at all celles.
+\item Programmable ROMs (PROM): Manufactured with switching elements at all cells and programmable once (one-time programmable (OTP)) by the user using a PROM programmer (aka PROM burner), which sends high-voltage pulses to burn tiny fuses in the cell to create permanent 1's and 0's.
+\item Erasable Programmable ROMs (EPROM): Manufactured with each cell contains a control gate that receives normal programming or read voltages and a floating gate that is completely insulated by oxide and can store electric charge and with quartz window on top, programmable by the user using a PROM programmer (aka PROM burner), which sends high-voltage pulses to inject electrons into floating gates, and erasable by the user by expose it to intense UV light that provides photons providing energy to remove trapped electrons from the floating gate simultaneously at all celles.
 \item Electrically Erasable Programmable ROMs (EEPROM): Similar to EPROM but erasing process is done electrically to remove trapped electrons from the floating gate one bit or one byte at a time (instead of all cells simultaneously) only a limited number of times, typically 100 to 1000 times.
 \item Flash memory: Derived from EEPROM but optimized to be faster, denser, cheaper, and erasable in blocks or pages.
 
@@ -937,7 +955,7 @@ Flash memories usually have built-in programming and erase capability so that da
 \ssc{Programmable Logic Devices (PLDs)}
 A programmable logic device (PLD) is a general name for a digital integrated circuit capable of being programmed to provide a variety of different logic function. When a digital system is designed using a PLD, changes in the design can easily be made by changing the programming of the PLD without having to change the wiring in the system, which leads to lower cost designs.
 \sssc{Programmable Logic Arrays (PLAs)}
-A programmable logic array (PLA) performs the same basic function as a ROM. A PLA with $n$ inputs and $m$ outputs can realize $m$ functions of $n$ variables. The internal organization of the PLA is different from that of the ROM. The decoder is replaced with an AND array which realizes selected product terms of the input variables. The OR array ORs together the product terms needed to form the output functions, so a PLA implements a sum-of-products expression, while a ROM directly implements a truth table. Product terms are formed in the AND array by connecting switching elements at appropriate points in the array. Outputs are formed in the OR array by connecting switching elements at appropriate points in the array. 
+A programmable logic array (PLA) performs the same basic function as a ROM. A PLA with $n$ inputs and $m$ outputs can realize $m$ functions of $n$ variables. The internal organization of the PLA is different from that of the ROM. The decoder is replaced with an AND array (aka AND plane) which realizes selected product terms of the input variables. The OR array (aka OR plane) ORs together the product terms needed to form the output functions, so a PLA implements a sum-of-products expression, while a ROM directly implements a truth table. Product terms are formed in the AND array by connecting switching elements at appropriate points in the array. Outputs are formed in the OR array by connecting switching elements at appropriate points in the array. 
 
 The contents of a PLA can be specified by a PLA table, in which the first column are product terms, the second columns are input combinations in the product terms with $-$ indicating don't care, and the third columns are output combinations corresponding to the product terms, in which the first column is sometimes omitted.
 
@@ -959,9 +977,8 @@ As integrated circuit technology continues to improve, more and more gates can b
 
 Take Xilinx XCR3064XL CPLD for example. This CPLD has four function blocks, each of which has 16 associated macrocells and is a programmable AND-OR array that is configured as a PLA. Each macrocell contains a flip-flop and multiplexers that route signals from the function block to the input-output (I/O) block or to the interconnect array (IA). The IA selects signals from the macrocell outputs or I/O blocks and connects them to function block inputs. The I/O blocks connect the signals from the interior of the CPLD to the bi-directional I/O pins on the IC.
 \sssc{Field-Programmable Gate Arrays (FGPAs)}
-An FPGA is an IC that consists of an array of identical logic cells, also called configurable logic blocks (CLBs), with programmable interconnections and surrounded by I/O blocks that connect the CLB signals to IC pins. The user can program the functions realized by each logic cell and the connections between the cells.
+An FPGA is an IC that consists of an array of identical logic cells, also called configurable logic blocks (CLBs) or function generators, with programmable interconnections and surrounded by I/O blocks that connect the CLB signals to IC pins. The user can program the functions realized by each logic cell and the connections between the cells. Each CLB contains a lookup table (LUT), flip-flops, and multiplexers. An $n$-input LUT is essentially a reprogrammable $2^n$-word-$\times$-1-bit ROM that stores the truth table for the $n$-variable function being generated.
 
-The function generators are implemented as lookup tables (LUTs), which a $n$-input LUT is essentially a reprogrammable $2^n$-word-$\times$-1-bit ROM that stores the truth table for the function being generated.
-
+Given a $n$-variable switching function $F$ and a FGPA with $m$-input LUTs ($m<n$), $2^{n-m}$ $m$-variable subfunctions of $F$ can be obtained using Shannon's expansion of the function and compose back to $F$ with one $2^{n-m}$-to-1 multiplexer, which can be composed of $\qty(2^{n-m-k+1}-1)$ $2^k$-to-1 multiplexers ($k\leq n-m$).
 \end{document}
 
