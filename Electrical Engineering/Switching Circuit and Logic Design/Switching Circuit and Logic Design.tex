@@ -870,7 +870,7 @@ An integrated circuit package is the physical case that holds the silicon chip (
 \end{longtable}
 
 It is generally uneconomical to design digital systems using only SSI and MSI integrated circuits. By using LSI and VLSI ICs, the required number of integrated circuit packages is greatly reduced, and the cost of mounting, wiring, designing, and maintaining may be significantly lower.
-\ssc{Digital circuits}
+\ssc{Combinational circuits}
 \sssc{Multiplexer (MUX)}
 A multiplexer (MUX) or data selector has a group of data inputs and a group of control inputs (aka select inputs or select lines) and one output. The control inputs are used to select one of the data inputs and connect it to the output terminal. The symbol for a MUX is an isosceles trapezoid, where the longer parallel side contains the data input pins, one of the legs contains the control inputs, and the shorter parallel side contains the output pin. Multiplexers are frequently used in digital system design to select the data which is to be processed or stored. Unless otherwise specified, a MUX is with active high outputs.
 
@@ -903,13 +903,36 @@ A decoder is a combinational circuit that converts binary input codes into a sin
 Each possible output of a decoder corresponds to a minterm of the inputs. Thus, we can OR them together to get the active-high outputs or NAND them together to get the active-low outputs.
 \sssc{Encoders}
 An encoder is a combinational circuit that realize the inverse of a Boolean vector function realized by a decoder. A $2^n$-to-$n$ priority encoder realizes the inverse of a Boolean vector function $\{0,1\}^n\to\{0,1\}^{2^n}$ realized by a decoder, of which the domain of the inverse is a subset of $\{0,1\}^{2^n}$ that has $n$ elements, each of which with the 1-norm being $1$ (noninverted/active-high outputs) or $2^n-1$ (inverted/active-low outputs).
-\sssc{Read-only memory (ROM)}
-A read-only memory (ROM) is a sequential circuit consists of an array of semiconductor devices that are interconnected to store an array of binary data. Once binary data is stored in the ROM, it can be read out whenever desired, but the data that is stored cannot be changed under normal operating conditions. The block diagram of a ROM is typically a rectangle with input lines at the left side and output lines at the buttom.
+\ssc{Read-only memory (ROM)}
+\sssc{Introduction and Realization}
+A read-only memory (ROM) is a non-volatile (data is kept even when power is off) memory (thus a sequential circuit instead of combinational circuit) consists of an array of semiconductor devices that are interconnected to store an array of binary data. Once binary data is stored in the ROM, it can be read out whenever desired, but the data that is stored cannot be changed under normal operating conditions. The block diagram of a ROM is typically a rectangle with input lines at the left side and output lines at the buttom.
 
-A ROM which has $n$ input lines and $m$ output lines contains an array of $2^n$ words, each word of width $m$ bits, called a $2^n$-word$\times m$-bit ROM. An input combination serves as an address to select one of the $2^n$ words and output it from the ROM, that is, a ROM basically consists of a decoder and a memory array. Typical sizes for commercially available ROMs range from 32 words $\times$ 4 bits to 512K words $\times$ 8 bits, or larger.
+A ROM which has $n$ input lines and $m$ output lines contains an array of $2^n$ words, each word of width $m$ bits, called a $2^n$(-word)$\times m$-bit ROM. An input combination serves as an address to select one of the $2^n$ words and output it from the ROM, that is, a ROM basically consists of a decoder and a memory array. Typical sizes for commercially available ROMs range from 32 words $\times$ 4 bits to 512K words $\times$ 8 bits, or larger.
 
+A $2^n$-word$\times m$-bit ROM is realized by a $n$-to-$2^n$ decoder and a grid consists of $2^n$ rows (decoder outputs) intersecting each of the $m$ columns (group to ROM outputs, outputs 0 if no 1 signal from the input lines is inputted), where in each of the $2^n\times m$ row-column intersections, called cells or bits in the memory array, a switching element is either present and connected or not. If absent or not connected (logic 0), the signal value from the row isn't passed to the column; if present and connected (logic 1), often indicated by a $\times$ on the diagram, the signal value from the row is passed to the column.
+\sssc{Types}
+Common types of ROMs:
+\bit
+\item Mask-programmable ROMs: Programmed permanently during manufacturing using photolithography by selectively including or omitting the switching elements at the cells. The mask used in photolithography is expensive, so the use of mask-programmable ROMs is economically feasible only if a large quantity (typically several thousand or more) is required with the same data array.
+\item Programmable ROMs (PROM): Manufactured blank and programmable once (one-time programmable (OTP)) by the user using a PROM programmer (aka PROM burner), which sends high-voltage pulses to burn tiny fuses in the cell to create permanent 1's and 0's.
+\item Erasable Programmable ROMs (EPROM): Manufactured blank with each cell contains a control gate that receives normal programming or read voltages and a floating gate that is completely insulated by oxide and can store electric charge and with quartz window on top, programmable by the user using a PROM programmer (aka PROM burner), which sends high-voltage pulses to inject electrons into floating gates, and erasable by the user by expose it to intense UV light that provides photons providing energy to remove trapped electrons from the floating gate simultaneously at all celles.
+\item Electrically Erasable Programmable ROMs (EEPROM): Similar to EPROM but erasing process is done electrically to remove trapped electrons from the floating gate one bit or one byte at a time (instead of all cells simultaneously) only a limited number of times, typically 100 to 1000 times.
+\item Flash memory: Derived from EEPROM but optimized to be faster, denser, cheaper, and erasable in blocks or pages.
 
-
-
+NOR and NAND flash:
+\bit
+\item NOR Flash: Output lines are connected in parallel and cells are erased in blocks and with random access for read. Writing and erasing is slower and cell size is larger.
+\item NAND Flash: Output lines are connected in series and cells are erased in pages and with sequential access for read only. Writing and erasing is faster and cell size is smaller.
+\eit
+:
+\begin{longtable}[c]{|c|c|c|}
+\hline
+Type & Bits per cell & Characteristics \\\hline
+Single-level cell (SLC) & 1 & Fast, reliable, expensive \\\hline
+Multi-level cell (MLC) & 2 & Slower, cheaper \\\hline
+TLC (Triple-Level Cell) & 3 & Used in consumer solid-state drives (SSDs) \\\hline
+QLC (Quad-Level Cell) & 4 & Denser, slower, less endurable \\\hline
+\end{longtable}
+Flash memories usually have built-in programming and erase capability so that data can be written to the flash memory while it is in place in a circuit without the need for a separate programmer.
 \end{document}
 
