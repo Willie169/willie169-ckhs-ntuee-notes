@@ -1451,39 +1451,53 @@ Let $V$ be a vector space, $f\colon J\subseteq V\to\bbR$ be a function, and $I\s
 \sssc{First Derivative Test for Concavity Theorem}
 Let $f\colon I\subseteq\bbR\to\bbR$ be a function and $(a,b)\subseteq I$ be an open interval.
 \bit
-\item if $f'$ is strictly increasing on $(a,b)$, often called "$f$ lies strictly below all its tagent lines on $(a,b)$", then $f$ is strictly concave upward on $(a,b)$.
-\item if $f'$ is strictly increasing on $(a,b)$ and $f$ is continuous on $[a,b)$, then $f$ is strictly concave upward on $[a,b)$.
-\item if $f'$ is strictly increasing on $(a,b)$ and $f$ is continuous on $(a,b]$, then $f$ is strictly concave upward on $(a,b]$.
+\item If $f'$ is strictly increasing on $(a,b)$, often called "$f$ lies strictly below all its tagent lines on $(a,b)$", then $f$ is strictly concave upward on $(a,b)$.
+\item If $f'$ is strictly increasing on $(a,b)$ and $f$ is continuous on $[a,b)$, then $f$ is strictly concave upward on $[a,b)$.
+\item If $f'$ is strictly increasing on $(a,b)$ and $f$ is continuous on $(a,b]$, then $f$ is strictly concave upward on $(a,b]$.
 \item If $f'$ is strictly decreasing on $I$, often called "$f$ lies strictly above all its tagent lines on $(a,b)$", then $f$ is strictly concave downward on $(a,b)$.
-\item if $f'$ is strictly decreasing on $(a,b)$ and $f$ is continuous on $[a,b)$, then $f$ is strictly concave downward on $[a,b)$.
-\item if $f'$ is strictly decreasing on $(a,b)$ and $f$ is continuous on $(a,b]$, then $f$ is strictly concave downward on $(a,b]$.
+\item If $f'$ is strictly decreasing on $(a,b)$ and $f$ is continuous on $[a,b)$, then $f$ is strictly concave downward on $[a,b)$.
+\item If $f'$ is strictly decreasing on $(a,b)$ and $f$ is continuous on $(a,b]$, then $f$ is strictly concave downward on $(a,b]$.
 \item $f'$ is non-decreasing on $(a,b)$, often called "$f$ lies weakly below all its tagent lines on $(a,b)$", iff $f$ is weakly concave upward on $(a,b)$.
-\item if $f'$ is non-decreasing on $(a,b)$ and $f$ is continuous on $[a,b)$, then $f$ is weakly concave upward on $[a,b)$.
-\item if $f'$ is non-decreasing on $(a,b)$ and $f$ is continuous on $(a,b]$, then $f$ is weakly concave upward on $(a,b]$.
+\item If $f'$ is non-decreasing on $(a,b)$ and $f$ is continuous on $[a,b)$, then $f$ is weakly concave upward on $[a,b)$.
+\item If $f'$ is non-decreasing on $(a,b)$ and $f$ is continuous on $(a,b]$, then $f$ is weakly concave upward on $(a,b]$.
 \item $f'$ is non-increasing on $(a,b)$, often called "$f$ lies weakly above all its tagent lines on $(a,b)$", iff $f$ is weakly concave downward on $(a,b)$.
-\item if $f'$ is non-increasing on $(a,b)$ and $f$ is continuous on $[a,b)$, then $f$ is weakly concave downward on $[a,b)$.
-\item if $f'$ is non-increasing on $(a,b)$ and $f$ is continuous on $(a,b]$, then $f$ is weakly concave downward on $(a,b]$.
+\item If $f'$ is non-increasing on $(a,b)$ and $f$ is continuous on $[a,b)$, then $f$ is weakly concave downward on $[a,b)$.
+\item If $f'$ is non-increasing on $(a,b)$ and $f$ is continuous on $(a,b]$, then $f$ is weakly concave downward on $(a,b]$.
 \eit
 \begin{proof}
-    For the first statement, we want to show that for any $x,y\in I$ and $\alpha\in(0,1)$, $f((1-\alpha)x+\alpha y)\leq(1-\alpha)f(x)+\alpha f(y)$.
+    For the first statement, we want to show that for any $c,d\in (a,b)$ and $\alpha\in(0,1)$, $f((1-\alpha)c+\alpha d)<(1-\alpha)f(c)+\alpha f(d)$ if for any $a\leq A<B\leq b$, $f'(A)<f'(B)$.
 
-    Let $a<b<c$ and $a,b,c\in I$. By MVT, there exists $A\in (a,b)$ such that
-    \[f'(A)=\frac{f(b)-f(a)}{b-a},\]
-    and there exists $B\in (b,c)$ such that
-    \[f'(B)=\frac{f(c)-f(b)}{c-b}.\]
+    Fix any $a\leq c<x<d\leq b$. By MVT, there exists $A\in (c,x)$ such that
+    \[f'(A)=\frac{f(x)-f(c)}{x-c}.\]
+    By MVT, there exists $B\in (b,c)$ such that
+    \[f'(B)=\frac{f(d)-f(x)}{d-x}.\]
     Since $A<B$, $f'(A)\leq f'(B)$.
-    \[\frac{f(b)-f(a)}{b-a}\leq\frac{f(c)-f(b)}{c-b}.\]
-    \[(f(b)-f(a))(c-b)\leq(f(c)-f(b))(b-a).\]
-    \[(c-a)f(b)\leq(b-a)f(c)+(c-b)f(a).\]
-    \[f(b)\leq\frac{b-a}{c-a}f(c)+\frac{c-b}{c-a}f(a).\]
+    \[\frac{f(x)-f(c)}{x-c}\leq\frac{f(d)-f(x)}{d-x}.\]
+    \[(f(x)-f(c))(d-x)\leq(f(d)-f(x))(x-c).\]
+    \[(d-c)f(x)\leq(d-x)f(c)+(x-c)f(d).\]
+    \[f(x)\leq\frac{(d-x)}{(d-c)}f(c)+\frac{(x-c)}{(d-c)}f(d).\]
     Set
-    \[\alpha=\frac{b-a}{c-a}\in(0,1).\]
+    \[\alpha=\frac{(x-c)}{(d-c)}\in(0,1).\]
     Then
-    \[b=(1-\alpha)a+\alpha c.\]
+    \[x=(1-\alpha)c+\alpha d.\]
     Thus the inequality becomes
-    \[f\qty((1-\alpha)a+\alpha c)\leq(1-\alpha)f(a)+\alpha f(c).\]
+    \[f\qty((1-\alpha)c+\alpha d)\leq(1-\alpha)f(c)+\alpha f(d).\]
     
-    The second and third statements are obviously true as the first holds.
+    For the second statement, argue by contradiction. Assume that there exists $d\in(a,b)$ and $\alpha\in(0,1)$ such that
+    \[f((1-\alpha)a+\alpha d)=(1-\alpha)f(a)+\alpha f(d).\]
+    Let $x=(1-\alpha)a+\alpha d$.
+    \[f(x)-f(a)=\alpha(f(d)-f(a)).\]
+    By MVT, there exists $B\in (a,x)$ such that
+    \[f(x)-f(a)=f'(B)(x-a)=f'(B)\alpha (d-a).\]
+    By MVT, there exists $c\in (x,d)$ such that
+    \[f(d)-f(x)=f'(C)(d-x)=f'(C)(1-\alpha)(d-a).\]
+    \[f(d)-f(a)=(f'(B)\alpha+f'(C)(1-\alpha))(d-a).\]
+    \[f(x)-f(a)=\alpha(f'(B)\alpha+f'(C)(1-\alpha))(d-a)=f'(B)\alpha (d-a).\]
+    \[f'(B)=f'(B)\alpha+f'(C)(1-\alpha).\]
+    \[f'(B)=f'(C).\]
+    This contradicts the condition that $B<C\implies f'(B)<f'(C)$ for any $a\leq B<C\leq b$.
+    
+    The third statement can be proven similarly.
     
     The "if" directions of the other statements can be proven similarly.
     
