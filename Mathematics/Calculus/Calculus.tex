@@ -1192,7 +1192,7 @@ Take differentiation of both sides:
 \[\frac{y'}{y}=g'(x)\ln\qty(f(x))+g(x)\frac{f'(x)}{f(x)}.\]
 \[y'=\qty(f(x))^{g(x)}\qty(g'(x)\ln\qty(f(x))+g(x)\frac{f'(x)}{f(x)}).\]
 \end{proof}
-\ssc{Points}
+\ssc{Graph-related}
 \sssc{Differentiability implies continuity}
 Let $V$ and $W$ be normed vector spaces, $U$ be an open subset of $V$, and $f\colon U\subseteq V\to W$ be a function. For a point $a\in U$, $f$ is differentiable at $a$ implies it is continuous at $a$; for an open subset $I\subseteq U$, $f$ is differentiable on $I$ implies it is continuous on $I$.
 \begin{proof}
@@ -1208,6 +1208,29 @@ By the definition of bounded linear operator, there exists $C\in\bbR_{>0}$ such 
 Thus,
 \[\forall\varepsilon>0\colon\exists\delta'=\frac{\varepsilon}{C+\varepsilon}\text{\ s.t.\ }\|h\|_V<\delta'\implies\|f(a+h)-f(a)\|_W\leq(C+\varepsilon)\|h\|_V<(C+\varepsilon)\delta'=\varepsilon.\]
 \end{proof}
+\sssc{Increasing (遞增) and Decreasing (遞減)}
+Let $f\colon X\subseteq\bbR\to\bbR$ be a function.
+\bit
+\item $f$ is called strictly increasing on $I\subseteq X$ if
+\[\forall a,b\in I\colon a<b\implies f(a)<f(b).\]
+\item $f$ is called strictly increasing if
+\[\forall a,b\in X\colon a<b\implies f(a)<f(b).\]
+\item $f$ is called strictly decreasing on $I\subseteq X$ if
+\[\forall a,b\in I\colon a<b\implies f(a)>f(b).\]
+\item $f$ is called strictly decreasing if
+\[\forall a,b\in X\colon a<b\implies f(a)>f(b).\]
+\item $f$ is called non-decreasing or monotone (單調) increasing on $I\subseteq X$ if
+\[\forall a,b\in I\colon a<b\implies f(a)\leq f(b).\]
+\item $f$ is called non-decreasing or monotone increasing if
+\[\forall a,b\in X\colon a<b\implies f(a)\leq f(b).\]
+\item $f$ is called non-increasing or monotone decreasing on $I\subseteq X$ if
+\[\forall a,b\in I\colon a<b\implies f(a)\geq f(b).\]
+\item $f$ is called non-increasing or monotone decreasing if
+\[\forall a,b\in X\colon a<b\implies f(a)\geq f(b).\]
+\item $f$ is called monotone on $I\subseteq X$ if it is either monotone increasing or monotone decreasing on $I$.
+\item $f$ is called monotone if it is either monotone increasing or monotone decreasing.
+\eit
+The terms without monotone and strictly are define to be either monotone or strictly in different contexts; here we define them to be strictly.
 \sssc{Critical point (臨界點)}
 Let $f$ be a function with codomain $\bbR$ and \( c \) be a point in the domain of $f$, if \( f'(c) = 0 \) or \( f' \) does not exist at \( c \), then \( c \) is a critical point, of \( f \), and $f(c)$ is called a critical value of $f$.
 
@@ -1343,31 +1366,41 @@ If $f'(x)\geq g'(x)$ for all $x\in (a,b)$ with $b\in\bbR_{>a}\cup\{\infty\}$, $f
     The other statements can be proven similarly.
 \end{proof}
 \sssc{Increasing/Decreasing Test (I/D Test) Theorem}
-Let $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ be function.
+Let function $f\colon I\subseteq\bbR\to\bbR$ be differentiable on an open interval $(a,b)\subseteq I$.
 \bit
-\item If $f'(x)>0$ for any $x\in (a,b)$, then $f$ is strictly increasing on $(a,b)$.
+\item if $f'(x)>0$ for any $x\in (a,b)$, then $f$ is strictly increasing on $(a,b)$.
 \item If $f'(x)>0$ for any $x\in (a,b)$ and $f$ is continuous on $[a,b)$, then $f$ is strictly increasing on $[a,b)$.
 \item If $f'(x)>0$ for any $x\in (a,b)$ and $f$ is continuous on $(a,b]$, then $f$ is strictly increasing on $(a,b]$.
-\item If $f'(x)<0$ for any $x\in (a,b)$, then $f$ is strictly decreasing on $(a,b)$.
+\item if $f'(x)<0$ for any $x\in (a,b)$, then $f$ is strictly decreasing on $(a,b)$.
 \item If $f'(x)<0$ for any $x\in (a,b)$ and $f$ is continuous on $[a,b)$, then $f$ is strictly decreasing on $[a,b)$.
 \item If $f'(x)<0$ for any $x\in (a,b)$ and $f$ is continuous on $(a,b]$, then $f$ is strictly decreasing on $(a,b]$.
-\item If $f'(x)\geq 0$ for any $x\in (a,b)$, then $f$ is non-decreasing on $(a,b)$.
+\item $f'(x)\geq 0$ for any $x\in (a,b)$ iff $f$ is non-decreasing on $(a,b)$.
 \item If $f'(x)\geq 0$ for any $x\in (a,b)$ and $f$ is continuous on $[a,b)$, then $f$ is non-decreasing on $[a,b)$.
 \item If $f'(x)\geq 0$ for any $x\in (a,b)$ and $f$ is continuous on $(a,b]$, then $f$ is non-decreasing on $(a,b]$.
-\item If $f'(x)\leq 0$ for any $x\in (a,b)$, then $f$ is non-increasing on $(a,b)$.
+\item $f'(x)\leq 0$ for any $x\in (a,b)$ iff $f$ is non-increasing on $(a,b)$.
 \item If $f'(x)\leq 0$ for any $x\in (a,b)$ and $f$ is continuous on $[a,b)$, then $f$ is non-increasing on $[a,b)$.
 \item If $f'(x)\leq 0$ for any $x\in (a,b)$ and $f$ is continuous on $(a,b]$, then $f$ is non-increasing on $(a,b]$.
 \eit
 \begin{proof}
-    For the first statement, we want to show that $\forall c,d\in (a,b)\colon c<d\implies f(c)<f(d)$.
+    For the first statement, we want to show that $\forall c,d\in (a,b)\colon c<d\implies f(c)<f(d)$ if $f'(x)>0$ for any $x\in (a,b)$.
 
     Take any two points $c,d\in (a,b)$ with $c<d$. By MVT, there exists $g\in (c,d)$ such that
     \[f'(g)=\frac{f(d)-f(c)}{d-c}.\]
     Because $f'(g)>0$ and $d-c>0$, we get $f(d)-f(c)>0$.
     
     The second and third statements are obviously true as the first holds.
-
-    The other statements can be proven similarly.
+    
+    The "if" directions of the other statements can be proven similarly.
+    
+    For the "only if" direction of the seventh statement, we want to show that $f'(x)\geq 0$ if $\forall c,d\in (a,b)\colon c<d\implies f(c)\leq f(d)$ and $f$ is differentiable on $(a,b)$.
+    
+    Fix any $x\in (a,b)$. For any $h>0$ with $(x+h)\in(a,b)$, we have
+    \[f(x)\leq f(x+h).\]
+    For any $h<0$ with $(x+h)\in(a,b)$, we have
+    \[f(x)\geq f(x+h).\]
+    Thus for any $h$ with $(x+h)\in(a,b)$, we have
+    \[\frac{x+h}-f(x)}{h}\geq 0.\]
+    The "only if" direction of the tenth statement can be proven similarly.
 \end{proof}
 \sssc{First Derivative Test for Local Extrema Theorem}
 Let $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ be a function, $c$ be a critical point of $f$, and $f'$ be continuous at $c$.
@@ -1407,21 +1440,29 @@ Let $f\colon I\subseteq\mathbb{R}^n\to\mathbb{R}$ be a function, $c$ be a critic
 \sssc{Concavity (凹性)}
 Let $V$ be a vector space and function $f\colon J\subseteq V\to\bbR$ be continuous on a convex set $I\subseteq J$.
 \bit
-\item If for any $x,y\in I$ and $\alpha\in(0,1)$, $f((1-\alpha)x+\alpha y)\leq (1-\alpha)f(x)+\alpha f(y)$, often called "$f$ lies weakly below all of its secant lines on $I$", then $f$ is called to be weakly concave up/upward/upwards (CU), weakly convex, weakly convex up/upward/upwards, or weakly cup-shaped.
 \item If for any $x,y\in I$ and $\alpha\in(0,1)$, $f((1-\alpha)x+\alpha y)<(1-\alpha)f(x)+\alpha f(y)$, often called "$f$ lies strictly below all of its secant lines on $I$", then $f$ is called to be strictly concave up/upward/upwards (CU), strictly convex, strictly convex up/upward/upwards, or strictly cup-shaped.
-\item If for any $x,y\in I$ and $\alpha\in(0,1)$, $f((1-\alpha)x+\alpha y)\geq (1-\alpha)f(x)+\alpha f(y)$, often called "$f$ lies weakly above all of its secant lines on $I$", then $f$ is called to be weakly concave, weakly concave down/downward/downwards (CD), weakly convex down/downward/downwards, or weakly cap-shaped.
 \item If for any $x,y\in I$ and $\alpha\in(0,1)$, $f((1-\alpha)x+\alpha y)>(1-\alpha)f(x)+\alpha f(y)$, often called "$f$ lies strictly above all its secant lines on $I$", then $f$ is called to be strictly concave, strictly concave down/downward/downwards (CD), strictly convex down/downward/downwards, or strictly cap-shaped.
+\item If for any $x,y\in I$ and $\alpha\in(0,1)$, $f((1-\alpha)x+\alpha y)\leq (1-\alpha)f(x)+\alpha f(y)$, often called "$f$ lies weakly below all of its secant lines on $I$", then $f$ is called to be weakly concave up/upward/upwards (CU), weakly convex, weakly convex up/upward/upwards, or weakly cup-shaped.
+\item If for any $x,y\in I$ and $\alpha\in(0,1)$, $f((1-\alpha)x+\alpha y)\geq (1-\alpha)f(x)+\alpha f(y)$, often called "$f$ lies weakly above all of its secant lines on $I$", then $f$ is called to be weakly concave, weakly concave down/downward/downwards (CD), weakly convex down/downward/downwards, or weakly cap-shaped.
 \eit
 The terms without weakly and strictly are define to be either weakly or strictly in different contexts; here we define them to be strictly.
 \sssc{Point of inflection or inflection point (反曲點 or 拐點)}
 Let $V$ be a vector space, $f\colon J\subseteq V\to\bbR$ be a function, and $I\subseteq J$ be a convex set. If $f$ is concave upward on $(a,b)$ and concave downward on $(b,c)$, or, concave downward on $(a,b)$ and concave upward on $(b,c)$, then $(b,f(b))$ is called an inflection point of $f$.
 \sssc{First Derivative Test for Concavity Theorem}
-Let function $f\colon J\subseteq\bbR\to\bbR$ be differentiable on an open interval $I\subseteq J$.
+Let $f\colon I\subseteq\bbR\to\bbR$ be a function and $(a,b)\subseteq I$ be an open interval.
 \bit
-\item $f'$ is non-decreasing on $I$, often called "$f$ lies weakly below all its tagent lines on $I$", iff $f$ is weakly concave upward on $I$.
-\item $f'$ is strictly increasing on $I$, often called "$f$ lies strictly below all its tagent lines on $I$", iff $f$ is strictly concave upward on $I$.
-\item $f'$ is non-increasing on $I$, often called "$f$ lies weakly above all its tagent lines on $I$", iff $f$ is weakly concave downward on $I$.
-\item $f'$ is strictly decreasing on $I$, often called "$f$ lies strictly above all its tagent lines on $I$", iff $f$ is strictly concave downward on $I$.
+\item if $f'$ is strictly increasing on $(a,b)$, often called "$f$ lies strictly below all its tagent lines on $(a,b)$", then $f$ is strictly concave upward on $(a,b)$.
+\item if $f'$ is strictly increasing on $(a,b)$ and $f$ is continuous on $[a,b)$, then $f$ is strictly concave upward on $[a,b)$.
+\item if $f'$ is strictly increasing on $(a,b)$ and $f$ is continuous on $(a,b]$, then $f$ is strictly concave upward on $(a,b]$.
+\item If $f'$ is strictly decreasing on $I$, often called "$f$ lies strictly above all its tagent lines on $(a,b)$", then $f$ is strictly concave downward on $(a,b)$.
+\item if $f'$ is strictly decreasing on $(a,b)$ and $f$ is continuous on $[a,b)$, then $f$ is strictly concave downward on $[a,b)$.
+\item if $f'$ is strictly decreasing on $(a,b)$ and $f$ is continuous on $(a,b]$, then $f$ is strictly concave downward on $(a,b]$.
+\item $f'$ is non-decreasing on $(a,b)$, often called "$f$ lies weakly below all its tagent lines on $(a,b)$", iff $f$ is weakly concave upward on $(a,b)$.
+\item if $f'$ is non-decreasing on $(a,b)$ and $f$ is continuous on $[a,b)$, then $f$ is weakly concave upward on $[a,b)$.
+\item if $f'$ is non-decreasing on $(a,b)$ and $f$ is continuous on $(a,b]$, then $f$ is weakly concave upward on $(a,b]$.
+\item $f'$ is non-increasing on $(a,b)$, often called "$f$ lies weakly above all its tagent lines on $(a,b)$", iff $f$ is weakly concave downward on $(a,b)$.
+\item if $f'$ is non-increasing on $(a,b)$ and $f$ is continuous on $[a,b)$, then $f$ is weakly concave downward on $[a,b)$.
+\item if $f'$ is non-increasing on $(a,b)$ and $f$ is continuous on $(a,b]$, then $f$ is weakly concave downward on $(a,b]$.
 \eit
 \begin{proof}
     For the first statement, we want to show that for any $x,y\in I$ and $\alpha\in(0,1)$, $f((1-\alpha)x+\alpha y)\leq(1-\alpha)f(x)+\alpha f(y)$.
@@ -1441,18 +1482,46 @@ Let function $f\colon J\subseteq\bbR\to\bbR$ be differentiable on an open interv
     \[b=(1-\alpha)a+\alpha c.\]
     Thus the inequality becomes
     \[f\qty((1-\alpha)a+\alpha c)\leq(1-\alpha)f(a)+\alpha f(c).\]
-    The other statements can be proven similarly.
+    
+    The second and third statements are obviously true as the first holds.
+    
+    The "if" directions of the other statements can be proven similarly.
+    
+    For the "only if" direction of the seventh statement, we want to show that for any $c,d\in (a,b)$ and $\alpha\in(0,1)$, $f((1-\alpha)c+\alpha d)\leq (1-\alpha)f(c)+\alpha f(d)$ if $\forall c,d\in (a,b)\colon c<d\implies f'(c)\leq f'(d)$.
+    
+    Fix any $c,d\in(a,b)$ with $c<d$.
+    
+    By MVT, there exists $g\in(c,((1-\alpha)c+\alpha d))$ such that
+    \[f((1-\alpha)c+\alpha d)-f(c)=f'(g)((1-\alpha)c+\alpha d-c)=f'(g)\alpha(d-c).\]
+    By MVT, there exists $h\in(((1-\alpha)c+\alpha d)),d)$ such that
+    \[f(d)-f((1-\alpha)c+\alpha d)=f'(h)(d-(1-\alpha)c-\alpha d)=f'(h)(1-\alpha)(d-c).\]
+    Thus,
+    \[f((1-\alpha)c+\alpha d)=f(c)+f'(g)\alpha(d-c)=f(d)-f'(h)(1-\alpha)(d-c).\]
+    \[f'(g)\alpha+f'(h)(1-\alpha)=\frac{f(d)-f(c)}{d-c}.\]
+    Because $f'(g)\leq f'(h)$, we have
+    \[f'(g)(d-c)\leq f(d)-f(c).\]
+    Substitute:
+    \[f((1-\alpha)c+\alpha d)\leq f(c)+\alpha(f(d)-f(c))=(1-\alpha)f(c)+\alpha f(d).\]
+    The "only if" direction of the tenth statement can be proven similarly.
 \end{proof}
 \sssc{Concavity Test Theorem or Second Derivative Test for Concavity Theorem}
-Let function $f\colon J\subseteq\mathbb{R}\to\mathbb{R}$ be twice differentiable on an open interval $I\subseteq J$.
+Let function $f\colon I\subseteq\bbR\to\bbR$ be twice differentiable on an open interval $(a,b)\subseteq I$.
 \bit
-\item If $f''\geq 0$ for any $x\in I$, then the graph of $f$ is weakly concave upward on $I$.
-\item If $f''>0$ for any $x\in I$, then the graph of $f$ is strictly concave upward on $I$.
-\item If $f''\leq 0$ for any $x\in I$, then the graph of $f$ is weakly concave downward on $I$.
-\item If $f''<0$ for any $x\in I$, then the graph of $f$ is strictly concave downward on $I$.
+\item If $f''>0$ for any $x\in (a,b)$, then the graph of $f$ is strictly concave upward on $(a,b)$.
+\item If $f''>0$ for any $x\in (a,b)$ and $f'$ is continuous on $[a,b)$, then the graph of $f$ is strictly concave upward on $[a,b)$.
+\item If $f''>0$ for any $x\in (a,b)$ and $f'$ is continuous on $(a,b]$, then the graph of $f$ is strictly concave upward on $(a,b]$.
+\item If $f''<0$ for any $x\in (a,b)$, then the graph of $f$ is strictly concave downward on $(a,b)$.
+\item If $f''<0$ for any $x\in (a,b)$ and $f'$ is continuous on $[a,b)$, then the graph of $f$ is strictly concave downward on $[a,b)$.
+\item If $f''<0$ for any $x\in (a,b)$ and $f'$ is continuous on $(a,b]$, then the graph of $f$ is strictly concave downward on $(a,b]$.
+\item $f''\geq 0$ for any $x\in (a,b)$ iff the graph of $f$ is weakly concave upward on $(a,b)$.
+\item If $f''\geq 0$ for any $x\in (a,b)$ and $f'$ is continuous on $[a,b)$, then the graph of $f$ is weakly concave upward on $[a,b)$.
+\item If $f''\geq 0$ for any $x\in (a,b)$ and $f'$ is continuous on $(a,b]$, then the graph of $f$ is weakly concave upward on $(a,b]$.
+\item $f''\leq 0$ for any $x\in (a,b)$ iff the graph of $f$ is weakly concave downward on $(a,b)$.
+\item If $f''\leq 0$ for any $x\in (a,b)$ and $f'$ is continuous on $[a,b)$, then the graph of $f$ is weakly concave downward on $[a,b)$.
+\item If $f''\leq 0$ for any $x\in (a,b)$ and $f'$ is continuous on $(a,b]$, then the graph of $f$ is weakly concave downward on $(a,b]$.
 \eit
 \begin{proof}
-For the first statement, $f''\geq 0$ implies $f'$ is non-decreasing. Thus it can be proven by applying the First Derivative Test for Concavity Theorem. The other statements can be proven similarly.
+By Increasing/Decreasing Test Theorem and First Derivative Test for Concavity Theorem, it is obvious.
 \end{proof}
 \sssc{Inflection Point Theorem}
 Let $f\colon I\subseteq\bbR\to\bbR$ be a function. If $(c,f(c))$ is an inflection point of $f$ and $f$ is differentiable at $c$, then $c$ is a critical point of $f'$.
