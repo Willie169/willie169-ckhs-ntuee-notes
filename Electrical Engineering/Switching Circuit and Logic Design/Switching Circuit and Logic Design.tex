@@ -896,7 +896,7 @@ We can also add an inversion bubble at enable signal such that it works as a sim
 
 We can implement a 2-to-1 MUX by using data inputs of the MUX as data inputs of two tri-state buffers, using the control input and its inverse as enable signal of the two tri-state buffers respectively, and simply connecting the two outputs of the two tri-state buffers to the output of the MUX.
 \sssc{Bidirectional I/O pin}
-Integrated circuits are often designed using bidirectional I/O pins for input and output to save pins and wiring. A bidirectional pin is a single physical pin that can act as either an input or an output, but not both at the same time, depending on the control signal. To accomplish this, the circuit output is connected to the pin through a three-state buffer. When the buffer is enabled, the pin is driven with the output signal; when the buffer is disabled, an external source can drive the pin.
+Integrated circuits are often designed using bidirectional (or bi-directional) I/O pins for input and output to save pins and wiring. A bidirectional pin is a single physical pin that can act as either an input or an output, but not both at the same time, depending on the control signal. To accomplish this, the circuit output is connected to the pin through a three-state buffer. When the buffer is enabled, the pin is driven with the output signal; when the buffer is disabled, an external source can drive the pin.
 \sssc{Decoders}
 A decoder is a combinational circuit that converts binary input codes into a single active output line. An $n$-to-$2^n$ line decoder has $n$ input signals and $2^n$ output signals realizing a one-to-one Boolean vector function $\{0,1\}^n\to\{0,1\}^{2^n}$ that map each input combination to an output vector of which the 1-norm is $1$ (noninverted/active-high outputs) or $2^n-1$ (inverted/active-low outputs).
 
@@ -905,11 +905,11 @@ Each possible output of a decoder corresponds to a minterm of the inputs. Thus, 
 An encoder is a combinational circuit that realize the inverse of a Boolean vector function realized by a decoder. A $2^n$-to-$n$ priority encoder realizes the inverse of a Boolean vector function $\{0,1\}^n\to\{0,1\}^{2^n}$ realized by a decoder, of which the domain of the inverse is a subset of $\{0,1\}^{2^n}$ that has $n$ elements, each of which with the 1-norm being $1$ (noninverted/active-high outputs) or $2^n-1$ (inverted/active-low outputs).
 \ssc{Read-only memory (ROM)}
 \sssc{Introduction and Realization}
-A read-only memory (ROM) is a non-volatile (data is kept even when power is off) memory (thus a sequential circuit instead of combinational circuit) consists of an array of semiconductor devices that are interconnected to store an array of binary data. Once binary data is stored in the ROM, it can be read out whenever desired, but the data that is stored cannot be changed under normal operating conditions. The block diagram of a ROM is typically a rectangle with input lines at the left side and output lines at the buttom.
+A read-only memory (ROM) is a non-volatile (data is kept even when power is off) memory consists of an array of semiconductor devices that are interconnected to store an array of binary data. Once binary data is stored in the ROM, it can be read out whenever desired, but the data that is stored cannot be changed under normal operating conditions. The block diagram of a ROM is typically a rectangle with input lines at the left side and output lines at the buttom.
 
 A ROM which has $n$ input lines and $m$ output lines contains an array of $2^n$ words, each word of width $m$ bits, called a $2^n$(-word)$\times m$-bit ROM. An input combination serves as an address to select one of the $2^n$ words and output it from the ROM, that is, a ROM basically consists of a decoder and a memory array. Typical sizes for commercially available ROMs range from 32 words $\times$ 4 bits to 512K words $\times$ 8 bits, or larger.
 
-A $2^n$-word$\times m$-bit ROM is realized by a $n$-to-$2^n$ decoder and a grid consists of $2^n$ rows (decoder outputs) intersecting each of the $m$ columns (group to ROM outputs, outputs 0 if no 1 signal from the input lines is inputted), where in each of the $2^n\times m$ row-column intersections, called cells or bits in the memory array, a switching element is either present and connected or not. If absent or not connected (logic 0), the signal value from the row isn't passed to the column; if present and connected (logic 1), often indicated by a $\times$ on the diagram, the signal value from the row is passed to the column.
+A $2^n$-word$\times m$-bit ROM realizes the truth table by a $n$-to-$2^n$ decoder and a grid consists of $2^n$ rows (decoder outputs) intersecting each of the $m$ columns (group to ROM outputs, outputs 0 if no 1 signal from the input lines is inputted), where in each of the $2^n\times m$ row-column intersection points, each corresponding to one bit in the memory array, a switching element is either present and connected or not. If absent or not connected (logic 0), the signal value from the row isn't passed to the column; if present and connected (logic 1), represented by a $\times$ on the diagram, the signal value from the row is passed to the column.
 \sssc{Types}
 Common types of ROMs:
 \bit
@@ -924,7 +924,7 @@ NOR and NAND flash:
 \item NOR Flash: Output lines are connected in parallel and cells are erased in blocks and with random access for read. Writing and erasing is slower and cell size is larger.
 \item NAND Flash: Output lines are connected in series and cells are erased in pages and with sequential access for read only. Writing and erasing is faster and cell size is smaller.
 \eit
-:
+Type of cells:
 \begin{longtable}[c]{|c|c|c|}
 \hline
 Type & Bits per cell & Characteristics \\\hline
@@ -934,5 +934,34 @@ TLC (Triple-Level Cell) & 3 & Used in consumer solid-state drives (SSDs) \\\hlin
 QLC (Quad-Level Cell) & 4 & Denser, slower, less endurable \\\hline
 \end{longtable}
 Flash memories usually have built-in programming and erase capability so that data can be written to the flash memory while it is in place in a circuit without the need for a separate programmer.
+\ssc{Programmable Logic Devices (PLDs)}
+A programmable logic device (PLD) is a general name for a digital integrated circuit capable of being programmed to provide a variety of different logic function. When a digital system is designed using a PLD, changes in the design can easily be made by changing the programming of the PLD without having to change the wiring in the system, which leads to lower cost designs.
+\sssc{Programmable Logic Arrays (PLAs)}
+A programmable logic array (PLA) performs the same basic function as a ROM. A PLA with $n$ inputs and $m$ outputs can realize $m$ functions of $n$ variables. The internal organization of the PLA is different from that of the ROM. The decoder is replaced with an AND array which realizes selected product terms of the input variables. The OR array ORs together the product terms needed to form the output functions, so a PLA implements a sum-of-products expression, while a ROM directly implements a truth table. Product terms are formed in the AND array by connecting switching elements at appropriate points in the array. Outputs are formed in the OR array by connecting switching elements at appropriate points in the array. 
+
+The contents of a PLA can be specified by a PLA table, in which the first column are product terms, the second columns are input combinations in the product terms with $-$ indicating don't care, and the third columns are output combinations corresponding to the product terms, in which the first column is sometimes omitted.
+
+When the number of input variables is small, a PROM may be more economical to use than a PLA. However, when the number of input variables is large, PLAs often provide a more economical solution than PROMs.
+
+Type:
+\bit
+\item Mask-programmable logic arrays: Programmed permanently during manufacturing using photolithography. The mask used in photolithography is expensive, so the use of mask-programmable logic arrays is economically feasible only if a large quantity (typically several thousand or more) is required with the same AND and OR arrays.
+\item Field-programmable logic arrays (FPLAs): Manufactured blank and programmable by the user. Technology of EPROM, EEPROM, or Flash memory may be used. Typically slower and larger than mask-programmable logic arrays.
+\eit
+\sssc{Programmable Array Logic (PAL)}
+A programmable array logic (PAL) is similar to a programmable logic array but in which the AND array is programmable and the OR array is fixed. PALs are less expensive than the more general PLAs and easier to program. For this reason, logic designers frequently use PALs to replace individual logic gates when several logic functions must be realized.
+
+A buffer is used because each PAL input must drive many AND gate inputs. When the PAL is programmed, some of the interconnection points are programmed to make the desired connections to the AND gate inputs, represented by $X$'s on the diagram.
+
+When designing with PALs, we must simplify our logic equations and try to fit them into one (or more) of the available PALs. Unlike the more general PLA, the AND terms cannot be shared among two or more OR gates; therefore, each function to be realized can be simplified by itself without regard to common terms. For a given type of PAL, the number of AND terms that feed each output OR gate is fixed and limited. If the number of AND terms in a simplified function is too large, we may be forced to choose a PAL with more gate inputs and fewer outputs.
+\sssc{Complex Programmable Logic Devices (CPLDs)}
+As integrated circuit technology continues to improve, more and more gates can be placed on a single chip. This has allowed the development of complex programmable logic devices (CPLDs). Instead of a single PAL or PLA on a chip, many PALs or PLAs can be placed on a single CPLD chip and interconnected. When storage elements such as flip-flops are also included on the same IC, a small digital system can be implemented with a single CPLD.
+
+Take Xilinx XCR3064XL CPLD for example. This CPLD has four function blocks, each of which has 16 associated macrocells and is a programmable AND-OR array that is configured as a PLA. Each macrocell contains a flip-flop and multiplexers that route signals from the function block to the input-output (I/O) block or to the interconnect array (IA). The IA selects signals from the macrocell outputs or I/O blocks and connects them to function block inputs. The I/O blocks connect the signals from the interior of the CPLD to the bi-directional I/O pins on the IC.
+\sssc{Field-Programmable Gate Arrays (FGPAs)}
+An FPGA is an IC that consists of an array of identical logic cells, also called configurable logic blocks (CLBs), with programmable interconnections and surrounded by I/O blocks that connect the CLB signals to IC pins. The user can program the functions realized by each logic cell and the connections between the cells.
+
+The function generators are implemented as lookup tables (LUTs), which a $n$-input LUT is essentially a reprogrammable $2^n$-word-$\times$-1-bit ROM that stores the truth table for the function being generated.
+
 \end{document}
 
