@@ -588,6 +588,51 @@ Group 1 & 1,5 & 0 & - & 0 & 1 \\\cline{2-6}
 Group 2 & 5,7 & 0 & 1 & - & 1 \\\cline{2-6}
 & 6,7 & 0 & 1 & 1 & - \\\hline
 \end{longtable}
+
+Sometimes, all rows that have appeared in any of the previous lists are omitted and all rows that have been combined into any row in the next list are checked or crossed out. The terms that are not checked or crossed out are the prime implicants of $f$.
+
+For $f$:
+
+List 1:
+\begin{longtable}[c]{|c|m|mmmm|c|}
+\hline
+Group 0 & 0 & 0 & 0 & 0 & 0 & \checkmark\\\hline
+Group 1 & 1 & 0 & 0 & 0 & 1 & \checkmark\\\cline{2-6}
+& 2 & 0 & 0 & 1 & 0 & \checkmark\\\cline{2-6}
+& 8 & 1 & 0 & 0 & 0 & \checkmark\\\hline
+Group 2 & 5 & 0 & 1 & 0 & 1 & \checkmark\\\cline{2-6}
+& 6 & 0 & 1 & 1 & 0 & \checkmark\\\cline{2-6}
+& 9 & 1 & 0 & 0 & 1 & \checkmark\\\cline{2-6}
+& 10 & 1 & 0 & 1 & 0 & \checkmark\\\hline
+Group 3 & 7 & 0 & 1 & 1 & 1 & \checkmark\\\cline{2-6}
+& 14 & 1 & 1 & 1 & 0 & \checkmark\\\hline
+\end{longtable}
+
+List 2:
+\begin{longtable}[c]{|c|m|mmmm|c|}
+\hline
+Group 0 & 0,1 & 0 & 0 & 0 & - & \checkmark\\\cline{2-6}
+& 0,2 & 0 & 0 & - & 0 & \checkmark\\\cline{2-6}
+& 0,8 & - & 0 & 0 & 0 & \checkmark\\\hline
+Group 1 & 1,5 & 0 & - & 0 & 1 &\\\cline{2-6}
+& 1,9 & - & 0 & 0 & 1 & \checkmark\\\cline{2-6}
+& 2,6 & 0 & - & 1 & 0 & \checkmark\\\cline{2-6}
+& 2,10 & - & 0 & 1 & 0 & \checkmark\\\cline{2-6}
+& 8,9 & 1 & 0 & 0 & - & \checkmark\\\cline{2-6}
+& 8,10 & 1 & 0 & - & 0 & \checkmark\\\hline
+Group 2 & 5,7 & 0 & 1 & - & 1 &\\\cline{2-6}
+& 6,7 & 0 & 1 & 1 & - &\\\cline{2-6}
+& 6,14 & - & 1 & 1 & 0 & \checkmark\\\cline{2-6}
+& 10,14 & 1 & - & 1 & 0 & \checkmark\\\hline
+\end{longtable}
+
+List 3:
+\begin{longtable}[c]{|c|m|mmmm|}
+\hline
+Group 0 & 0,1,8,9 & - & 0 & 0 & - \\\cline{2-6}
+& 0,2,8,10 & - & 0 & - & 0 \\\hline
+Group 1 & 2,6,10,14 & - & - & 1 & 0 \\\hline
+\end{longtable}
 \sssc{Create prime implicant chart}
 Create the prime implicant chart, a chart where the column are minterms and rows are prime implicants and each cell is marked $\times$ if the corresponding minterm is implied by the corresponding prime implicant.
 
@@ -878,6 +923,44 @@ For some type of circuits, active high (aka active-high or noninverted) outputs 
 Unless otherwise specified, a type of circuit with active high and low version of inputs and/or outputs are assumed to be active high inputs and/or outputs.
 \sssc{Bus}
 Several signals that perform a common function may be grouped together to form a bus, represented with a single heavy line optionally with a diagonal slash through it specifying the number of bits in the bus.
+\sssc{Full adder (FA)}
+A full adder is a combinational circuit that has three inputs, $A$ (augend bit), $B$ (addend bit), and $C_{in}$ (carry-in), and produces two ouputs $S$ (sum) and $C_{out}$ (carry-out), in which
+\[S=A\oplus B\oplus C_{in},\]
+\[C_{out}=AB+AC_{in}+BC_{in}.\]
+\sssc{Full subtractor (FS)}
+A full subtractor is a combinational circuit that has three inputs, $A$ (minuend bit), $B$ (subtrahend bit), and $B_{in}$ (borrow-in), and produces two ouputs $D$ (difference) and $B_{out}$ (borrow-out), in which
+\[D=A\oplus B\oplus B_{in},\]
+\[B_{out}=A'B+A'B_{in}+BB_{in}.\]
+\sssc{Parallel (binary) adder or ripple (carry) adder (RCA)}
+An $n$-bit parallel adder or ripple carry adder is a combinational circuit consisting of $n$ full adders as cells. It has two $n$-bits unsigned or two's complement numbers as inputs (MSB to LSB), $A_{n-1}A_{n-2}\ldots A_0$ (augend) and $B_{n-1}B_{n-2}\ldots B_0$ (addned), and a constant $0$ input, $C_{in_0}=0$, and produces the $(n+1)$-bit sum of the two numbers as outputs, $C_{out_{n-1}}S_{n-1}S_{n-2}\ldots S_0$, in which the $(i+1)$th cell takes $A_i$ as augend bit, $B_i$ as addend bit, and $C_{in_i}$ as carry-in, and produces sum $S_i$ and carry-out $C_{out_i}$, that is,
+\[S_i=A_i\oplus B_i\oplus C_{in_i},\]
+\[C_{out_i}=A_iB_i+A_iC_{in_i}+B_iC_{in_i},\]
+where $C_{in_i}$ for $n\geq i>0$ and $C_{out_i}$ for $n-1>i\geq 0$ are interconnections in the parallel adder, and for the first cell,
+\[S_0=A_0\oplus B_0,\]
+\[C_{out_0}=A_0B_0.\]
+The ripple carry adder is relatively slow because, in the worst case, a carry propagates through all $n$ stages of the adder, and there are approximately two gate delays per stage.
+\sssc{One's complement adder}
+An $n$-bit one's complement adder can be realized with an $n$-bit ripple carry adder but let $C_{in_0}=0+C_{out_{n-1}}$ to realize end-around carry (EAC).
+\sssc{Parallel (binary) subtractor or ripple (borrow) subtractor (RBS)}
+An $n$-bit parallel subtractor or ripple borrow adder is a combinational circuit consisting of $n$ full subtractors as cells. It has two $n$-bits unsigned or two's complement numbers as inputs (MSB to LSB), $A_{n-1}A_{n-2}\ldots A_0$ (minuend) and $B_{n-1}B_{n-2}\ldots B_0$ (subtrahend), and a constant $0$ input, $B_{in_0}=0$, and produces the $(n+1)$-bit two's complement difference of the two numbers as outputs, $B_{out_{n-1}}D_{n-1}D_{n-2}\ldots D_0$, in which the $(i+1)$th cell takes $A_i$ as minuend bit, $B_i$ as subtrahend bit, and $B_{in_i}$ as borrow-in, and produces difference $D_i$ and borrow-out $B_{out_i}$, that is,
+\[D_i=A_i\oplus B_i\oplus B_{in_i},\]
+\[B_{out_i}=A_i'B_i+A_i'B_{in_i}+B_iB_{in_i},\]
+where $B_{in_i}$ for $n\geq i>0$ and $B_{out_i}$ for $n-1>i\geq 0$ are interconnections in the parallel subtractor, and for the first cell,
+\[D_0=A_0\oplus B_0,\]
+\[D_{out_0}=A_'0B_0.\]
+A logical equivalence of a parallel subtractor is a parallel adder with inversion bubbles at all $B_i$ inputs and $C_{in_0}$ being constant $1$ input.
+
+The ripple borrow subtractor is relatively slow because, in the worst case, a borrow propagates through all $n$ stages of the subtractor, and there are approximately two gate delays per stage.
+\sssc{One's complement subtractor}
+An $n$-bit one's complement subtractor can be realized with an $n$-bit ripple borrow subtractor but let $B_{in_0}=0+B_{out_{n-1}}$ to realize end-around borrow (EAB).
+
+An $n$-bit one's complement subtractor can also be realized with a one's complement adder but invert all bits of the subtrahend.
+
+
+
+
+
+
 \sssc{Multiplexer (MUX)}
 A multiplexer (MUX) or data selector has a group of data inputs and a group of control inputs (aka select inputs or select lines) and one output. The control inputs are used to select one of the data inputs and connect it to the output terminal. The symbol for a MUX is an isosceles trapezoid, where the longer parallel side contains the data input pins, one of the legs contains the control inputs, and the shorter parallel side contains the output pin. Multiplexers are frequently used in digital system design to select the data which is to be processed or stored.
 
