@@ -434,8 +434,12 @@ An allowed collection of groups must follow the following rules:
 \item If any group $g$ is completely covered by another group, $g$ must not be chosen, that is, a group chosen must represent a prime implicant.
 \eit
 Find the allowed collections of groups that contain the fewest groups. For each one of them, the sum of the implicants corresponding to the groups in it is a minimum SOP form of the given function.
+\sssc{Other uses of Karnaugh Maps}
+K-maps have one-to-one correspondence to truth tables. We can perform logic operations on functions by perform the operation on each cell on their K-maps to obtain the K-map of the result function.
+\sssc{Veitch Diagrams}
+Veitch Diagrams are an alternative form of K-maps by labeling each input variable with a curly bracket containing the maximum rows or columns which that variable is 1 in the input combinations of all cells in them.
 \sssc{Five-variable Karnaugh Maps}
-One way of drawing a five-variable K-map is by placing one four-variable K-map on top of another, that is, for a $5$-variable Boolean function $f(A,B,C,D,E)$, the K-map is
+One form of drawing a five-variable K-map is by placing one four-variable K-map on top of another, that is, for a $5$-variable Boolean function $f(A,B,C,D,E)$, the K-map is
 {\fontsize{8pt}{12pt}\selectfont
 \begin{longtable}[c]{cc|c|c|c|c|}
 & \multicolumn{1}{c}{\thead{\backslashbox{$BC$}{$DE$}}} & \multicolumn{1}{c}{\thead{00}} & \multicolumn{1}{c}{\thead{01}} & \multicolumn{1}{c}{\thead{11}} & \multicolumn{1}{c}{\thead{10}} \\\cline{3-6}
@@ -445,6 +449,10 @@ $A$ & \multicolumn{1}{c|}{\thead{01}} & \backslashbox{$f(1,0,0,0,1)$}{$f(0,0,0,0
 & \multicolumn{1}{c|}{\thead{10}} & \backslashbox{$f(1,0,0,1,0)$}{$f(0,0,0,1,0)$} & \backslashbox{$f(1,0,1,1,0)$}{$f(0,0,1,1,0)$} & \backslashbox{$f(1,1,1,1,0)$}{$f(0,1,1,1,0)$} & \backslashbox{$f(1,1,0,1,0)$}{$f(0,1,0,1,0)$} \\\cline{3-6}
 \end{longtable}}
 in which the adjacency between cells in the same layer of four-variable K-map is the same as that in four-variable K-map; the upper and lower triangles in the same square are adjacent; and a group is a cuboid of $2^l\times 2^m\times 2^n$ cells that are either $1$ (minterm) or $X$ (don't-care condition), in which $l,m,n\in\mathbb{N}_0$.
+
+Another form is drawing the upper and lower triangles of the previous form as two four-variable K-maps side-by-side and drawing a line to connect two parts of a group on different map.
+
+Yet another form is the same as the previous one but with Veitch diagram labeling and drawing two halves of boundary lines of a group surrounding two parts of a group on different maps instead of a line.
 \sssc{Finding minimum POS form}
 We can use K-maps to find minimum POS form of a completely or incompletely specified Boolean function by grouping $0$s instead of $1$s ($0$s and $X$s are allowed in a group), in which each group corresponds to a sum term, and the product of the sum terms corresponding to the groups in an allowed (covering all 0's) collections that contain the fewest groups is a minimum POS form of the Boolean function.
 \ssc{Map-entered variable (MEV) or Variable entrant map (VEM)}
@@ -923,44 +931,6 @@ For some type of circuits, active high (aka active-high or noninverted) outputs 
 Unless otherwise specified, a type of circuit with active high and low version of inputs and/or outputs are assumed to be active high inputs and/or outputs.
 \sssc{Bus}
 Several signals that perform a common function may be grouped together to form a bus, represented with a single heavy line optionally with a diagonal slash through it specifying the number of bits in the bus.
-\sssc{Full adder (FA)}
-A full adder is a combinational circuit that has three inputs, $A$ (augend bit), $B$ (addend bit), and $C_{in}$ (carry-in), and produces two ouputs $S$ (sum) and $C_{out}$ (carry-out), in which
-\[S=A\oplus B\oplus C_{in},\]
-\[C_{out}=AB+AC_{in}+BC_{in}.\]
-\sssc{Full subtractor (FS)}
-A full subtractor is a combinational circuit that has three inputs, $A$ (minuend bit), $B$ (subtrahend bit), and $B_{in}$ (borrow-in), and produces two ouputs $D$ (difference) and $B_{out}$ (borrow-out), in which
-\[D=A\oplus B\oplus B_{in},\]
-\[B_{out}=A'B+A'B_{in}+BB_{in}.\]
-\sssc{Parallel (binary) adder or ripple (carry) adder (RCA)}
-An $n$-bit parallel adder or ripple carry adder is a combinational circuit consisting of $n$ full adders as cells. It has two $n$-bits unsigned or two's complement numbers as inputs (MSB to LSB), $A_{n-1}A_{n-2}\ldots A_0$ (augend) and $B_{n-1}B_{n-2}\ldots B_0$ (addned), and a constant $0$ input, $C_{in_0}=0$, and produces the $(n+1)$-bit sum of the two numbers as outputs, $C_{out_{n-1}}S_{n-1}S_{n-2}\ldots S_0$, in which the $(i+1)$th cell takes $A_i$ as augend bit, $B_i$ as addend bit, and $C_{in_i}$ as carry-in, and produces sum $S_i$ and carry-out $C_{out_i}$, that is,
-\[S_i=A_i\oplus B_i\oplus C_{in_i},\]
-\[C_{out_i}=A_iB_i+A_iC_{in_i}+B_iC_{in_i},\]
-where $C_{in_i}$ for $n\geq i>0$ and $C_{out_i}$ for $n-1>i\geq 0$ are interconnections in the parallel adder, and for the first cell,
-\[S_0=A_0\oplus B_0,\]
-\[C_{out_0}=A_0B_0.\]
-The ripple carry adder is relatively slow because, in the worst case, a carry propagates through all $n$ stages of the adder, and there are approximately two gate delays per stage.
-\sssc{One's complement adder}
-An $n$-bit one's complement adder can be realized with an $n$-bit ripple carry adder but let $C_{in_0}=0+C_{out_{n-1}}$ to realize end-around carry (EAC).
-\sssc{Parallel (binary) subtractor or ripple (borrow) subtractor (RBS)}
-An $n$-bit parallel subtractor or ripple borrow adder is a combinational circuit consisting of $n$ full subtractors as cells. It has two $n$-bits unsigned or two's complement numbers as inputs (MSB to LSB), $A_{n-1}A_{n-2}\ldots A_0$ (minuend) and $B_{n-1}B_{n-2}\ldots B_0$ (subtrahend), and a constant $0$ input, $B_{in_0}=0$, and produces the $(n+1)$-bit two's complement difference of the two numbers as outputs, $B_{out_{n-1}}D_{n-1}D_{n-2}\ldots D_0$, in which the $(i+1)$th cell takes $A_i$ as minuend bit, $B_i$ as subtrahend bit, and $B_{in_i}$ as borrow-in, and produces difference $D_i$ and borrow-out $B_{out_i}$, that is,
-\[D_i=A_i\oplus B_i\oplus B_{in_i},\]
-\[B_{out_i}=A_i'B_i+A_i'B_{in_i}+B_iB_{in_i},\]
-where $B_{in_i}$ for $n\geq i>0$ and $B_{out_i}$ for $n-1>i\geq 0$ are interconnections in the parallel subtractor, and for the first cell,
-\[D_0=A_0\oplus B_0,\]
-\[D_{out_0}=A_'0B_0.\]
-A logical equivalence of a parallel subtractor is a parallel adder with inversion bubbles at all $B_i$ inputs and $C_{in_0}$ being constant $1$ input.
-
-The ripple borrow subtractor is relatively slow because, in the worst case, a borrow propagates through all $n$ stages of the subtractor, and there are approximately two gate delays per stage.
-\sssc{One's complement subtractor}
-An $n$-bit one's complement subtractor can be realized with an $n$-bit ripple borrow subtractor but let $B_{in_0}=0+B_{out_{n-1}}$ to realize end-around borrow (EAB).
-
-An $n$-bit one's complement subtractor can also be realized with a one's complement adder but invert all bits of the subtrahend.
-
-
-
-
-
-
 \sssc{Multiplexer (MUX)}
 A multiplexer (MUX) or data selector has a group of data inputs and a group of control inputs (aka select inputs or select lines) and one output. The control inputs are used to select one of the data inputs and connect it to the output terminal. The symbol for a MUX is an isosceles trapezoid, where the longer parallel side contains the data input pins, one of the legs contains the control inputs, and the shorter parallel side contains the output pin. Multiplexers are frequently used in digital system design to select the data which is to be processed or stored.
 
@@ -989,6 +959,64 @@ We can also add an inversion bubble at enable signal such that it works as a sim
 We can implement a 2-to-1 MUX by using data inputs of the MUX as data inputs of two tri-state buffers, using the control input and its inverse as enable signal of the two tri-state buffers respectively, and simply connecting the two outputs of the two tri-state buffers to the output of the MUX.
 \sssc{Bidirectional I/O pin}
 Integrated circuits are often designed using bidirectional (or bi-directional) I/O pins for input and output to save pins and wiring. A bidirectional pin is a single physical pin that can act as either an input or an output, but not both at the same time, depending on the control signal. To accomplish this, the circuit output is connected to the pin through a three-state buffer. When the buffer is enabled, the pin is driven with the output signal; when the buffer is disabled, an external source can drive the pin.
+\sssc{Full adder (FA)}
+A full adder is a combinational circuit that has three inputs, $A$ (augend bit), $B$ (addend bit), and $C_{in}$ (carry-in), and produces two ouputs $S$ (sum) and $C_{out}$ (carry-out), in which
+\[S=A\oplus B\oplus C_{in},\]
+\[C_{out}=AB+AC_{in}+BC_{in}.\]
+\sssc{Full subtractor (FS)}
+A full subtractor is a combinational circuit that has three inputs, $A$ (minuend bit), $B$ (subtrahend bit), and $B_{in}$ (borrow-in), and produces two ouputs $D$ (difference) and $B_{out}$ (borrow-out), in which
+\[D=A\oplus B\oplus B_{in},\]
+\[B_{out}=A'B+A'B_{in}+BB_{in}.\]
+\sssc{Parallel (binary) adder or ripple-carry adder (RCA)}
+An $n$-bit parallel adder or ripple-carry adder, or simply adder is a combinational circuit consisting of $n$ full adders called cells or stages. It has two $n$-bits unsigned or two's complement binary numbers as inputs (MSB to LSB), $A_{n-1}A_{n-2}\ldots A_0$ (augend) and $B_{n-1}B_{n-2}\ldots B_0$ (addned), and a constant $0$ input, $C_{in_0}=0$, and produces the $(n+1)$-bit sum of the two numbers as outputs, $C_{out_{n-1}}S_{n-1}S_{n-2}\ldots S_0$, in which the $(i+1)$th cell takes $A_i$ as augend bit, $B_i$ as addend bit, and $C_{in_i}$ as carry-in, and produces sum $S_i$ and carry-out $C_{out_i}$, that is,
+\[S_i=A_i\oplus B_i\oplus C_{in_i},\]
+\[C_{out_i}=A_iB_i+A_iC_{in_i}+B_iC_{in_i},\]
+where $C_{in_i}$ for $n\geq i>0$ and $C_{out_i}$ for $n-1>i\geq 0$ are interconnections in the parallel adder, and for the first cell,
+\[S_0=A_0\oplus B_0,\]
+\[C_{out_0}=A_0B_0.\]
+The ripple-carry adder is relatively slow because, in the worst case, a carry propagates through all $n$ stages of the adder, and there are approximately two gate delays per stage.
+\sssc{Parallel (binary) subtractor or ripple-borrow subtractor (RBS)}
+An $n$-bit parallel subtractor or ripple-borrow adder is a combinational circuit consisting of $n$ full subtractors called cells or stages. It has two $n$-bits unsigned or two's complement binary numbers as inputs (MSB to LSB), $A_{n-1}A_{n-2}\ldots A_0$ (minuend) and $B_{n-1}B_{n-2}\ldots B_0$ (subtrahend), and a constant $0$ input, $B_{in_0}=0$, and produces the $(n+1)$-bit two's complement difference of the two numbers as outputs, $B_{out_{n-1}}D_{n-1}D_{n-2}\ldots D_0$, in which the $(i+1)$th cell takes $A_i$ as minuend bit, $B_i$ as subtrahend bit, and $B_{in_i}$ as borrow-in, and produces difference $D_i$ and borrow-out $B_{out_i}$, that is,
+\[D_i=A_i\oplus B_i\oplus B_{in_i},\]
+\[B_{out_i}=A_i'B_i+A_i'B_{in_i}+B_iB_{in_i},\]
+where $B_{in_i}$ for $n\geq i>0$ and $B_{out_i}$ for $n-1>i\geq 0$ are interconnections in the parallel subtractor, and for the first cell,
+\[D_0=A_0\oplus B_0,\]
+\[D_{out_0}=A_'0B_0.\]
+The ripple-borrow subtractor is relatively slow because, in the worst case, a borrow propagates through all $n$ stages of the subtractor, and there are approximately two gate delays per stage.
+\sssc{Adder-subtractor}
+A logical equivalence of a parallel subtractor that is used more often is a parallel adder with inversion bubbles at all $B_i$ inputs and $C_{in_0}$ being constant $1$ input, where $B_{n-1}'B_{n-2}'\ldots B_0'+1$ represents $-B_{n-1}B_{n-2}\ldots B_0$ in two's complement.
+
+An $n$-bit adder-subtractor is a ripple-carry adder (or other type of $n$-bit adder for unsigned or two's complement numbers) with an extra control input $M$ and $n$ 2-to-1 MUXes, in which the MUX at the $(i+1)$th cell take data inputs $B_i$ and $B_i'$ and control input $M$, if $M=0$, it outputs $B_i$ to the full adder to make the adder-subtractor perform addition; if $M=1$, it outputs $B_i'$ to the full adder to make the adder-subtractor perform subtraction.
+\sssc{One's complement adder}
+An $n$-bit one's complement adder can be realized with an $n$-bit ripple-carry adder but let $C_{in_0}=0+C_{out_{n-1}}$ to realize end-around carry (EAC).
+\sssc{One's complement subtractor}
+An $n$-bit one's complement subtractor can be realized with an $n$-bit ripple-borrow subtractor but let $B_{in_0}=0+B_{out_{n-1}}$ to realize end-around borrow (EAB).
+
+An $n$-bit one's complement subtractor can also be realized with a one's complement adder but invert all bits of the subtrahend.
+\sssc{Carry-lookahead adder (CLA)}
+An $n$-bit carry lookahead adder has the same inputs and outputs of an $n$-bit ripple-carry adder, that is, it has two $n$-bits unsigned or two's complement binary numbers as inputs (MSB to LSB), $A_{n-1}A_{n-2}\ldots A_0$ (augend) and $B_{n-1}B_{n-2}\ldots B_0$ (addned), and a constant $0$ input, $C_0=0$, and produces the $(n+1)$-bit sum of the two numbers as outputs, $C_nS_{n-1}S_{n-2}\ldots S_0$, and is a combinational circuit designed to speed up addition from $O(n)$ in a ripple-carry adder
+to ideally $O(1)$ and practically $O(\log n)$ (hierarchical lookahead) by reducing the carry propagation delay.
+
+A revised full adder has the same inputs like a full adder but outputs are changed from sum and carry-out to original sum $S$ and generate $G$ and propagate $P$ defined with
+\[G=AB,\]
+\[P=A\oplus B,\]
+\[S=A\oplus B\oplus C_{in}.\]
+
+Suppose the maximum number of fan-ins of our add gates is $m$, we can implement carry-lookahead circuit up to $m-1$ bit. A $n$-bit (usually $n=4=m-1$) carry-lookahead circuit has $n$ generate inputs $G_0$ to $G_{n-1}$, $n$ propagate inputs $P_0$ to $P_{n-1}$, one carry-in input $C_0$, and produces $n$ carry-out outputs $C_1$ to $C_n$ given recursively by
+\[C_{i+1}=G_i+P_iC_i\]
+but realized in expanded SOP form, which makes it $O(1)$ but limited by gate fan-ins, e.g.
+\[C_{i+2}=G_{i+1}+P_{i+1}G_i+P_{i+1}P_iC_i.\]
+
+A $n$-bit carry-lookahead has $n$ revised full adders called cells or stages and one $n$-bit carry-lookahead circuit, in which the $(i+1)$th cell takes $A_i$ as augend bit, $B_i$ as addend bit, and $C_i$ as carry-in, and produces sum $S_i$, generate $G_i$, and propagate $P_i$, and the carry-lookahead circuit take generate inputs $G_0$ to $G_{n-1}$, propagate inputs $P_0$ to $P_{n-1}$, carry-in input $C_0$, and produces $n$ carry-out outputs $C_1$ to $C_n$.
+
+When the maximum number of fan-ins is not greater than the number of bit needed, we use hierarchical lookahead structure, in which the carry-lookahead circuit is replaced with a tree of physically possible $m$-bit carry-lookahead circuits. A $m^k$-bit carry-lookahead adder consists of $k$ levels of carry-lookahead circuits, in which the $l$th level consists $m^{k-l}$ $m$-bit carry-lookahead circuits, each of the carry-lookahead circuits that are not in the last level (which contains only one
+carry-lookahead circuit) is revised to output generate $g$ given recursively by
+\[g_0=G_0,\]
+\[g_{i+1}=G_{i+1}+P_ig_i,\]
+\[g=g_{m-1},\]
+and propagate $p$ given by
+\[p=\prod_{i=1}^{m-1}P_i,\]
+instead of carry-out outputs, where $m$ $G_i$ and $m$ $P_i$ are the generates and propagates of the revised full adders ditributed in order to each of them, and each of the carry-lookahead circuits that are not in the first level takes $m$ generates and $m$ propagates of the previous level in order and computed the same as a normal $m$-bit carry-lookahead circuit by treating the generate and propagate of the $m*(i-1)+j$th carry-lookahead circuit in the previous level as the $j$th generate and propagate inputs of the $i$th carry-lookahead circuit in this level.
 \sssc{Decoders}
 A decoder is a combinational circuit that converts binary input codes into a single active output line. An $n$-to-$2^n$ line decoder has $n$ input signals and $2^n$ output signals realizing a one-to-one Boolean vector function $\{0,1\}^n\to\{0,1\}^{2^n}$ that map each input combination to an output vector of which the 1-norm is $1$ (noninverted/active-high outputs) or $2^n-1$ (inverted/active-low outputs).
 
