@@ -28,7 +28,7 @@ Unless otherwise stated, objects and systems refer to insulated systems, positio
 \item 第$k$秒初到第$k$秒末稱第$k$秒內（during/within the $k$th second）。
 \item 第$1$秒初到第$k$秒末稱$k$秒內（over the $k$-second interval）。
 \end{itemize}
-\subsection{運動（Motion）}
+\subsection{平移運動（Motion of translation）}
 \subsubsection{向量}
 下均指三維或以下；一維下，正負即表方向。
 \begin{itemize}
@@ -109,18 +109,24 @@ An equilibrium point $\mathbf{r}_0$ is a point where $\mathbf{F}(\mathbf{r}_0)=0
 \item Neutral or indifferent equilibrium: $U$ is constant near $\mathbf{r}_0$, that is, the Hessian of $U$ at $\mathbf{r}_0$ is zero semidefinite. When an infinisimal displacement occurs on the particle at it, it stay where it becomes.
 \eit
 \ssc{Center of mass (COM) (質心)}
-\sssc{Density (密度)}
+\sssc{(Mass) density (（質量）密度)}
 The density $\rho(\mathbf{r})$ at a point in an object is a scalar field defined as the derivative of mass $m$ with respect to volume $V$ at that point, that is, $\rho(\mathbf{r})=\dv{m}{V}$.
 
 The average density of an abject is the total mass of it divided by the volume of it.
 \sssc{Center of mass (COM) (質心)}
 The (position of) center of mass of a system is the point that moves as if all of the system's mass were concentrated there.
 
-For a system of $N$ particles with masses $m_i$ at postion $\mathbf{r}_i$, the (position of) center of mass $\mathbf{r}$ is
-\[\mathbf{r}=\frac{\sum_{i=1}^Nm_i\mathbf{r}_i}{\sum_{i=1}^Nm_i}.\]
+For a system of volumne $V$ and density field $\rho(\mathbf{r})$, the (position of) center of mass $\mathbf{r}_c$ is defined as:
+\[\mathbf{r}_c=\frac{\int_V\rho(\mb{r})\mathbf{r}\dd{V}}{\int_V\rho(\mb{r})\dd{V}},\]
+where the denominator is the total mass of the system.
 
-For a system of volumne $V$ of density field $\rho(\mathbf{r})$ of continuous mass distribution with (mass) density $\rho(\mathbf{r})$, the (position of) center of mass $\mathbf{r}$
-\[\mathbf{r}=\frac{\int_V\mathbf{r}\dd{V}}{V}.\]
+For a system of $N$ particles with masses $m_i$ at postion $\mathbf{r}_i$, the (position of) center of mass $\mathbf{r}_c$ is defined as:
+\[\mathbf{r}_c=\frac{\sum_{i=1}^Nm_i\mathbf{r}_i}{\sum_{i=1}^Nm_i},\]
+where the denominator is the total mass of the system.
+
+To make this kind of system suit the volume integral definition, we can let the density field $\rho(\mathbf{r})$ be:
+\[\rho(\mb{r})=\sum_{i=1}^Nm_i\delta(\mb{r}-\mb{r}_i),\]
+where $\delta$ is the Dirac delta function.
 \sssc{向量}
 \bit
 \item\tb{質心（瞬間/瞬時）速度}：質心位置對時間的導數，等於系統中各點密度乘以該點速度向量的體積積分，再除以系統質量。
@@ -139,158 +145,6 @@ For a system of volumne $V$ of density field $\rho(\mathbf{r})$ of continuous ma
 \end{itemize}
 \sssc{（理想）剛體（Rigid body or rigid object）}
 一種有限尺寸且無形變的固體，無形變表示剛體內部質量分布始終不變。
-\ssc{變質量系統與火箭方程（Rocket Equations）}
-\sssc{質量增加}
-令無外力下：
-\begin{itemize}
-\item 時間$t$時：主系統質量$m$、速度$\mathbf{v}$，副系統質量$\mathrm{d}m$、速度$\mathbf{v}+\mathbf{v}_{rel}$，兩系統總動量$\mathbf{p}$；
-\item 時間$(t+\mathrm{d}t)$時：副系統併入主系統，主系統的性質在$t$時為$i$者變為$i+\mathrm{d}i$，主系統動量仍為$\mathbf{p}$。
-\end{itemize}
-\[\ba
-\mathbf{p}&=m\mathbf{v}+(\mathrm{d}m)\qty(\mathbf{v}+\mathbf{v}_{rel})\\
-&=\qty(m+\mathrm{d}m)(\mathbf{v}+\mathrm{d}\mathbf{v})
-\ea\]
-故：
-\[m(\mathrm{d}\mathbf{v})-(\mathrm{d}m)\mathbf{v}_{rel}=0.\]
-令質量增加率$R=\dv{m}{t}$，加速度$\mathbf{a}=\dv{\mathbf{v}}{t}$：
-\[R\mathbf{v}_{rel}=m\mathbf{a}.\]
-令時間$t_1$與$t_2$時$\mathbf{v}$與$m$分別為$\mathbf{v}_1$、$m_1$與$\mathbf{v}_2$、$m_2$。積分前式：
-\[\mathbf{v}_2-\mathbf{v}_1=\mathbf{v}_{rel}\int_{t_1}^{t_2}\frac{R}{m}\dd{t}.\]
-由於：
-\[\dv{\ln|f(x)|}{x}=\frac{f'(x)}{f(x)}.\]
-我們有：
-\[\mathbf{v}_2-\mathbf{v}_1=\mathbf{v}_{rel}\ln\frac{M_2}{M_1}.\]
-\sssc{質量減少與火箭方程}
-令無外力下：
-\begin{itemize}
-\item 時間$t$時：主系統質量$m$、速度$\mathbf{v}$、動量$\mathbf{p}$；
-\item 時間$(t+\mathrm{d}t)$時：主系統分出質量$\mathrm{d}m$的副系統，使得主系統質量變為$m-\mathrm{d}m$，主系統的質量以外性質在$t$時為$i$者變為$i+\mathrm{d}i$，副系統速度$\mathbf{v}+\mathbf{v}_{rel}$，主系統動量仍為$\mathbf{p}$。
-\end{itemize}
-\[\begin{aligned}
-\mathbf{p}&=m\mathbf{v} \\
-&=\qty(m-\mathrm{d}m)(\mathbf{v}+\mathrm{d}\mathbf{v})+\mathrm{d}m\qty(\mathbf{v}+\mathbf{v}_{rel})
-\ea\]
-故：
-\[\qty(m-\mathrm{d}m)(\mathrm{d}\mathbf{v})+(\mathrm{d}m)\mathbf{v}_{rel}=0.\]
-考慮$(\mathrm{d}m)(\mathrm{d}\mathbf{v})=0$，故：
-\[m(\mathrm{d}\mathbf{v})+(\mathrm{d}m)\mathbf{v}_{rel}=0.\]
-令質量減少率$R=-\dv{m}{t}$，加速度$\mathbf{a}=\dv{\mathbf{v}}{t}$：
-\[R\mathbf{v}_{rel}=m\mathbf{a}.\]
-對於火箭，我們稱$R$為燃料消耗質量率（mass rate of fuel consumption），稱$R\mathbf{v}_{rel}$為推力（thrust），稱此方程為火箭第一方程（First rocket equation）。
-
-令時間$t_1$與$t_2$時$\mathbf{v}$與$m$分別為$\mathbf{v}_1$、$m_1$與$\mathbf{v}_2$、$m_2$。積分前式：
-\[\mathbf{v}_2-\mathbf{v}_1=\mathbf{v}_{rel}\int_{t_1}^{t_2}\frac{R}{m}\dd{t}.\]
-由於：
-\[\dv{\ln|f(x)|}{x}=\frac{f'(x)}{f(x)}.\]
-我們有：
-\[\mathbf{v}_2-\mathbf{v}_1=-\mathbf{v}_{rel}\ln\frac{M_2}{M_1}.\]
-稱此方程為火箭第二方程（Second rocket equation）。
-\subsection{一維轉動（Rotation）}
-三維空間中的一維轉動。
-\subsubsection{三維向量}
-\begin{itemize}
-\item\tb{（槓桿）力臂（Lever arm）}：一力的力臂為其施力點相對於受力系統質心的位置向量。
-\item\tb{力矩（Torque）}：一力對受力系統產生之力矩為該力與其力臂的叉積。一外力對受力系統產生之力矩稱外力矩。
-\item\tb{Angular position (角位置)}:
-
-The angular position of a point $\mathbf{P}$ with respect to a given reference axis, which is a line oriented along a unit vector $\hat{\mathbf{n}}$, and a given polar axis on some plane $F$ perpendicular to the reference axis, which defines a polar coordinate system whose positive sense is determined by looking upward along $\hat{\mathbf{n}}$, is
-\[\boldsymbol{\theta} = \hat{\mathbf{n}}\theta,\]
-where $\theta$ is the polar angle of the projection of $\mathbf{P}$ on $F$.
-
-The quantity $\boldsymbol{\theta}$ is a dimensionless axial vector.
-
-Sometimes, only the scalar angle $\theta$ itself is referred to as the angular position.
-\item\tb{角位移（Angular displacement）}：系統末角位置減初角位置。
-\item\tb{（瞬間/瞬時）角速度（Angular velocity）}：系統角位置對時間的導數。
-\item\tb{（瞬間/瞬時）角加速度（Angular acceleration）}：系統角速度對時間的導數。
-\item\tb{角動量（Angular momentum）}：系統轉動慣量與角速度的乘積。
-\end{itemize}
-\subsubsection{純量}
-\begin{itemize}
-\item\tb{轉動慣量（Moment of inertia）}：系統內密度乘以與參考軸距離的平方的體積積分。轉動慣量乘以角加速度等於力矩。
-\item\tb{（瞬間/瞬時）角速率（Angular speed）/角頻率（Angular frequency）}：系統角速度的歐幾里得範數。
-\end{itemize}
-\sssc{質點轉動}
-一質點質量$m$，相對於參考點的位置$\mathbf{r}$，轉動慣量$I$、角速度$\boldsymbol{\omega}$、角加速度$\boldsymbol{\alpha}$、速度$\mathbf{v}$、加速度$\mathbf{a}$、角動量$\mathbf{L}$、轉動動能$K$：
-\[I=m|\mathbf{r}|^2\]
-\[\mathbf{L}=I\boldsymbol{\omega}\]
-\[\mathbf{v}=\boldsymbol{\omega}\times\mathbf{r}.\]
-\[\mathbf{a}=\boldsymbol{\alpha}\times\mathbf{r}-|\boldsymbol{\omega}|^2\mathbf{r}.\]
-\[K=\frac{I\boldsymbol{\omega}^2}{2}=\frac{|\mathbf{L}|^2}{2I}.\]
-\sssc{角動量守恆定律（Law of conservation of angular momentum）}
-當一系統受合外力矩為零，其角動量時變率必為零，稱其處於轉動平衡（Rotational equilibrium），即該系統角位置靜止或行等角速度運動。
-\sssc{平衡力矩}
-作用在同一系統上且和為零的一組外力矩。
-\sssc{三力轉動平衡}
-一剛體受三力達轉動平衡，則三力延長線必交於一點。
-\sssc{靜力平衡（Static equilibrium）}
-指一系統達移動平衡且轉動平衡。
-\ssc{參考系（Frame of reference or reference frame）}
-\sssc{參考系（Frame of reference or reference frame）}
-一個抽象的座標系，其原點、方向和比例已在物理空間中基於一組參考點（reference points）而指定。參考點指在數學和物理上定義的幾何點。
-\sssc{慣性參考系（Inertial frame of reference）/伽俐略參考系（Galilean reference frame）}
-指在僅考慮實際力時，遵守牛頓運動定律的參考系。
-
-一個慣性參考系相對於另一個慣性參考系必靜止或行等速度運動。
-\sssc{非慣性參考系（Non-inertial frame of reference）}
-指在僅考慮實際力時，不遵守牛頓運動定律的參考系。
-\sssc{假想力（Fictitious force）/慣性力（inertial force）/假力（pseudo-force）}
-在非慣性參考系中描述系統運動時，欲使得牛頓第二運動定律成立需要作用於系統的非實際力。
-\sssc{旋轉參考系（Rotating reference frame）中的假想力}
-令一旋轉參考系相對於慣性參考系以角速度$\boldsymbol{\omega}$繞其原點旋轉，一質量$m$質點在此參考系有位置$\mathbf{x}$和速度$\mathbf{v}$，欲使牛頓第二運動定律在此參考系中成立需施予該質點假想力$\mathbf{F}$，則其服從：
-\[\mathbf{F}=-m\boldsymbol{\omega}\times\qty(\boldsymbol{\omega}\times\mathbf{x})-2m\boldsymbol{\omega}\times\mathbf{v}-m\frac{\mathrm{d}\boldsymbol{\omega}}{\mathrm{d}t}\times\mathbf{x}\]
-其中：$-m\boldsymbol{\omega}\times\qty(\boldsymbol{\omega}\times\mathbf{x})$稱\tb{離心力（Centrifugal force）}，$-2m\boldsymbol{\omega}\times\mathbf{v}$稱\tb{科里奥利力/科氏力（Coriolis force）}，$-m\frac{\mathrm{d}\boldsymbol{\omega}}{\mathrm{d}t}\times\mathbf{x}$稱\tb{尤拉力（Euler force）}。
-\ssc{Lagrangian Mechanics (拉格朗日力學)}
-\sssc{Configuration space}
-The degrees of freedom, or parameters, that define the configuration, or position of all constituent point particles, of a physical system are called generalized coordinates, and the space defined by these coordinates is called the configuration space of the system. Each unique possible configuration of the system corresponds to a unique point in the space. It is often the case that the set of all actual configurations of the system is a manifold in the configuration space, called the configuration manifold of the system. The number of dimensions of the configuration space is equal to the degrees of freedom of the system.
-\sssc{Lagrangian mechanics}
-Lagrangian mechanics describes a mechanical system as a pair $(M,L)$ consisting of a configuration manifold $M$ and a smooth functional $L\colon TM\to\mathbb{R}$, called a Lagrangian, where $TM$ is the tagent bundle of $M$, that is, $L=L(\mathbf{q},\dot{\mathbf{q}},t)$, where the vector $\mathbf{q}$ is a point in the configuration space of the system, $\dot{\mathbf{q}}=\frac{\mathrm{d}\mathbf{q}}{\mathrm{d}t}$, and $t$ is time.
-\subsection{Non-Relativistic Lagrangian}
-Let $\mathbf{r}_k$ denote the position of the $k$th particle for $_{k=1}^N$ in the position space $\mathbb{R}^3$ equipped with Cartesian coordinates as function of time, and \[\mathbf{v}_k=\dot{\mathbf{r}_k}=\frac{\mathrm{d}\mathbf{r}_k}{\mathrm{d}t}.\]
-The non-relativistic Lagrangian for a system of $N$ particles is given by
-\[L=T-V,\]
-where
-\[T=\frac{1}{2}\sum_{k=1}^Nm_k\mathbf{v}_k^{\phantom{k}2}\]
-is the total kinetic energy of the system. Each particle labeled $k$ has mass $m$, and $\mathbf{v}_k^{\phantom{k}2}=\mathbf{v}_k\cdot\mathbf{v}_k$ is the square of the norm of its velocity, equivalent to the dot product of the velocity with itself.
-
-$V$, the potential energy of the system, is the energy any one of the particles has due to all the others together with all external influences. For conservative forces (e.g. Newtonian gravity), $V$ is a function of the vectors of the position of the particles only, that is, $V=V((\mathbf{r}_k)_{i=1}^N)$. For non-conservative forces that can be derived from an appropriate potential (e.g. electromagnetic potential), $V$ is a function of the vectors of the position and velocity of the particles, that is, $V=V((\mathbf{r}_k)_{i=1}^N,(\mathbf{v}_k)_{i=1}^N)$. For some time-dependent external field or force (e.g. electric field and magnetic flux density field in electromagnetodynamics), the potential changes with time, so most generally, $V$ is a function of the vectors of the position and velocity of the particles and time, that is, $V=V((\mathbf{r}_k)_{i=1}^N,(\mathbf{v}_k)_{i=1}^N,t)$.
-\sssc{Lagrange's Equations of the First Kind}
-With these definitions, Lagrange's equations of the first kind are
-\[\nabla_{\mathbf{r}_k}L-\frac{\mathrm{d}}{\mathrm{d}t}\nabla_{\dot{\mathbf{r}_k}}L+\sum_{i=1}^C\lambda_i\nabla_{\mathbf{r}_k}f_i=0,\]
-where $k$ for $_{k=1}^N$ labels the particles, $f_i$ for $_{i=1}^C$ labels $C$ constraint equations, and $\lambda_i$ for $_{i=1}^C$ labels the Lagrange multiplier for the $i$th constraint equation. The constraint equations can be either holonomic, that is, in the form of $f_i((\mathbf{r}_k)_{i=1}^N)=0$, non-holonomic, that is, in the form of $f_i((\mathbf{r}_k)_{i=1}^N,(\mathbf{v}_k)_{i=1}^N)=0$, or most generally, time dependent, that is, in the form of $f_i((\mathbf{r}_k)_{i=1}^N,(\mathbf{v}_k)_{i=1}^N,t)=0$.
-\sssc{From position space to configuration space}
-In each constraint equation, one coordinate can be determined from the other coordinates. The number of independent coordinates is therefore $n = 3N − C$. We can construct a configuration space with $n$ generalized coordinates,  conveniently written as an $n$-vector $\mathbf{q} = ((q_k)_{k=1}^n)$. Hence the position coordinates as functions of the generalized coordinates and time are
-\[\mathbf{r}_k\colon\mathbb{R}^{n+1}\to\mathbb{R}^3;\;(\mathbf{q},t)\mapsto\mathbf{r}_k(x_k,y_k,z_k).\]
-The vector $\mathbf{q}$ is a point in the configuration space of the system. The time derivatives of the generalized coordinates are called the generalized velocities, and for each particle labelled as $k$ for $_{k=1}^N$, its velocity vector, namely, the total derivative of its position with respect to time, is
-\[\mathbf{v}_k=\left(\dot{\mathbf{q}}\cdot\nabla_{\mathbf{q}}\right)\mathbf{r}_k+\frac{\partial\mathbf{r}_k}{\partial t}.\]
-\sssc{Euler–Lagrange Equations or Lagrange's Equations of the Second Kind}
-With these definitions, the Euler–Lagrange equations, or Lagrange's equations of the second kind are
-\[\nabla_{\mathbf{q}}L=\frac{\mathrm{d}}{\mathrm{d}t}\nabla_{\dot{\mathbf{q}}}L.\]
-The number of equations has decreased compared to Newtonian mechanics, from $3N$ to $n = 3N − C$ coupled second-order differential equations in the generalized coordinates. These equations do not include constraint forces at all, only non-constraint forces need to be accounted for.
-\ssc{正向力（Normal Force）}
-垂直於兩系統界面的接觸排斥力，且令界面兩側系統為$A$、$B$，界面指入$A$的單位法向量$\hat{n}$，$\mathbf{A}$相對於$\mathbf{B}$的速度$\mathbf{v}$，則當兩系統間正向力量值大於零時其必足夠小使得$\mathbf{v}\cdot\hat{n}\leq 0$。源自於電磁力。
-\ssc{摩擦力（Frictional force）}
-平行於兩系統界面的接觸力，且與受力系統相對於施力系統速度的內積不為正，且與受力系統所受其他外力合的內積不為正。與該界面的正向力與界面粗糙程度有關，與接觸面積無關。源自於電磁力。
-\sssc{靜摩擦力（Static frictional force）}
-界面兩側系統相對速度平行界面的分量為零時的摩擦力，等於受力系統所受其他外力合平行界面的分量乘以負一，其量值不大於最大靜摩擦力。
-\sssc{最大靜摩擦力（Maximum static frictional force）}
-一界面可能發生的靜摩擦力量值的最大值，其量值正比於該界面的正向力量值，其量值與正向力量值的比值稱靜摩擦（力）係數（Coefficient of static friction）。
-\sssc{（滑）動摩擦力（Kinetic frictional force）}
-界面兩側系統相對速度平行界面的分量不為零時的摩擦力，其量值與兩側系統相對速度平行界面的分量無關，其量值正比於該界面的正向力量值，其量值與正向力量值的比值稱（滑）動摩擦（力）係數（Coefficient of kinetic friction），通常略小於靜摩擦（力）係數。
-\ssc{彈性力（Elastic Force）或恢復力（Restoring Force）}
-指彈性系統內部垂直於假想界面的接觸吸引力。
-\sssc{虎克定律（Hooke's Law）與楊氏模量/楊氏模數（Young's modulus or Young modulus）}
-線性彈性材料（linear elastic material）承受軸向（axial）（指服從虎克定律的方向，力為指向材料內）外力時會產生軸向應變（strain）$x$（指與應力同向之形變，且此時外力與恢復力$F$同量值反方向），在形變量沒有超過對應材料的一定彈性限度（elastic limit）時，服從虎克定律（Hooke's law）：
-\[F=-kx,\]
-其中$x$與$F$以正負號表示一維方向，$k$為一正常數，稱力常數（force constant）或彈力常數/彈性常數（spring constant），依賴於材料與截面積；又可以寫作
-\[p=Ex,\]
-其中$p$為材料承受之軸向應力（stress）（壓力），$E$為一正常數，稱楊氏模量/楊氏模數（Young's modulus or Young modulus）。
-
-服從虎克定律的軸向外力大小區間稱線性彈性區（linear elastic region），其最大力值稱彈性限度（elastic limit）。
-\sssc{彈力位能/彈性位能（spring potential energy）}
-\[U=\frac{k^2}{2}.\]
-\ssc{張力（Tension）}
-系統內部的接觸吸引力，於非正在發生形變之材料內部處處平衡。
 \ssc{碰撞（Collision）}
 \sssc{定義}
 物體接近時，彼此間產生排斥力。
@@ -542,6 +396,158 @@ v_2' &= (1+e)v_c - ev_2 = \frac{(m_2-em_1)v_2+(1+e)m_1v_1}{m_2+m_1} \\
 \mathbf{v}_2'&=\mathbf{v}_t+v_2'\hat{\mathbf{v}}_n\\
 K_{int}' &= \frac{\mu \qty(v_1'-v_2')^2}{2} = \frac{\mu \qty(e\qty(v_1-v_2))^2}{2} = e^2K_{int}
 \end{aligned}\]
+\ssc{變質量系統與火箭方程（Rocket Equations）}
+\sssc{質量增加}
+令無外力下：
+\begin{itemize}
+\item 時間$t$時：主系統質量$m$、速度$\mathbf{v}$，副系統質量$\mathrm{d}m$、速度$\mathbf{v}+\mathbf{v}_{rel}$，兩系統總動量$\mathbf{p}$；
+\item 時間$(t+\mathrm{d}t)$時：副系統併入主系統，主系統的性質在$t$時為$i$者變為$i+\mathrm{d}i$，主系統動量仍為$\mathbf{p}$。
+\end{itemize}
+\[\ba
+\mathbf{p}&=m\mathbf{v}+(\mathrm{d}m)\qty(\mathbf{v}+\mathbf{v}_{rel})\\
+&=\qty(m+\mathrm{d}m)(\mathbf{v}+\mathrm{d}\mathbf{v})
+\ea\]
+故：
+\[m(\mathrm{d}\mathbf{v})-(\mathrm{d}m)\mathbf{v}_{rel}=0.\]
+令質量增加率$R=\dv{m}{t}$，加速度$\mathbf{a}=\dv{\mathbf{v}}{t}$：
+\[R\mathbf{v}_{rel}=m\mathbf{a}.\]
+令時間$t_1$與$t_2$時$\mathbf{v}$與$m$分別為$\mathbf{v}_1$、$m_1$與$\mathbf{v}_2$、$m_2$。積分前式：
+\[\mathbf{v}_2-\mathbf{v}_1=\mathbf{v}_{rel}\int_{t_1}^{t_2}\frac{R}{m}\dd{t}.\]
+由於：
+\[\dv{\ln|f(x)|}{x}=\frac{f'(x)}{f(x)}.\]
+我們有：
+\[\mathbf{v}_2-\mathbf{v}_1=\mathbf{v}_{rel}\ln\frac{M_2}{M_1}.\]
+\sssc{質量減少與火箭方程}
+令無外力下：
+\begin{itemize}
+\item 時間$t$時：主系統質量$m$、速度$\mathbf{v}$、動量$\mathbf{p}$；
+\item 時間$(t+\mathrm{d}t)$時：主系統分出質量$\mathrm{d}m$的副系統，使得主系統質量變為$m-\mathrm{d}m$，主系統的質量以外性質在$t$時為$i$者變為$i+\mathrm{d}i$，副系統速度$\mathbf{v}+\mathbf{v}_{rel}$，主系統動量仍為$\mathbf{p}$。
+\end{itemize}
+\[\begin{aligned}
+\mathbf{p}&=m\mathbf{v} \\
+&=\qty(m-\mathrm{d}m)(\mathbf{v}+\mathrm{d}\mathbf{v})+\mathrm{d}m\qty(\mathbf{v}+\mathbf{v}_{rel})
+\ea\]
+故：
+\[\qty(m-\mathrm{d}m)(\mathrm{d}\mathbf{v})+(\mathrm{d}m)\mathbf{v}_{rel}=0.\]
+考慮$(\mathrm{d}m)(\mathrm{d}\mathbf{v})=0$，故：
+\[m(\mathrm{d}\mathbf{v})+(\mathrm{d}m)\mathbf{v}_{rel}=0.\]
+令質量減少率$R=-\dv{m}{t}$，加速度$\mathbf{a}=\dv{\mathbf{v}}{t}$：
+\[R\mathbf{v}_{rel}=m\mathbf{a}.\]
+對於火箭，我們稱$R$為燃料消耗質量率（mass rate of fuel consumption），稱$R\mathbf{v}_{rel}$為推力（thrust），稱此方程為火箭第一方程（First rocket equation）。
+
+令時間$t_1$與$t_2$時$\mathbf{v}$與$m$分別為$\mathbf{v}_1$、$m_1$與$\mathbf{v}_2$、$m_2$。積分前式：
+\[\mathbf{v}_2-\mathbf{v}_1=\mathbf{v}_{rel}\int_{t_1}^{t_2}\frac{R}{m}\dd{t}.\]
+由於：
+\[\dv{\ln|f(x)|}{x}=\frac{f'(x)}{f(x)}.\]
+我們有：
+\[\mathbf{v}_2-\mathbf{v}_1=-\mathbf{v}_{rel}\ln\frac{M_2}{M_1}.\]
+稱此方程為火箭第二方程（Second rocket equation）。
+\ssc{轉動（Rotation）}
+Below only consider rotation in three-dimensional space.
+\sssc{Rotaion}
+Rotations is a rigid body movement which, unlike a translation, keeps at least one point fixed, and in three-dimension, keeps all points on at least one line, called axis, fixed.
+
+All rigid body movements are rotations, translations, or combinations of the two.
+
+If a rotation around a point or axis is followed by a second rotation around the same point/axis, a third rotation results. The inverse of a rotation is also a rotation. Thus, the rotations around a point/axis form a group. However, a rotation around a point or axis and a rotation around a different point/axis may result in something other than a rotation, e.g. a translation.
+
+
+
+\begin{itemize}
+\item\tb{Angular position (角位置)}: The angular position of a point $\mathbf{P}$ with respect to a given reference axis, which is a line oriented along a unit vector $\hat{\mathbf{n}}$, relative to a given polar axis on some plane $F$ perpendicular to the reference axis, which defines a polar coordinate system whose positive sense is determined by looking upward along $\hat{\mathbf{n}}$, is the polar angle $\theta$ of the projection of $\mathbf{P}$ on $F$.
+\item\tb{角位移（Angular displacement）}：系統末角位置減初角位置。
+\item\tb{轉動慣量（Moment of inertia）}：系統內密度乘以與參考軸距離的平方的體積積分。轉動慣量乘以角加速度等於力矩。
+\item\tb{（瞬間/瞬時）角速率（Angular speed）/角頻率（Angular frequency）}：系統角速度的歐幾里得範數。
+\end{itemize}
+\subsubsection{三維向量}
+\begin{itemize}
+\item\tb{（槓桿）力臂（Lever arm）}：一力的力臂為其施力點相對於受力系統質心的位置向量。
+\item\tb{力矩（Torque）}：一力對受力系統產生之力矩為該力與其力臂的叉積。一外力對受力系統產生之力矩稱外力矩。
+\item\tb{（瞬間/瞬時）角速度（Angular velocity）}：系統角位置對時間的導數。
+\item\tb{（瞬間/瞬時）角加速度（Angular acceleration）}：系統角速度對時間的導數。
+\item\tb{角動量（Angular momentum）}：系統轉動慣量與角速度的乘積。
+\end{itemize}
+\sssc{質點轉動}
+一質點質量$m$，相對於參考點的位置$\mathbf{r}$，轉動慣量$I$、角速度$\boldsymbol{\omega}$、角加速度$\boldsymbol{\alpha}$、速度$\mathbf{v}$、加速度$\mathbf{a}$、角動量$\mathbf{L}$、轉動動能$K$：
+\[I=m|\mathbf{r}|^2\]
+\[\mathbf{L}=I\boldsymbol{\omega}\]
+\[\mathbf{v}=\boldsymbol{\omega}\times\mathbf{r}.\]
+\[\mathbf{a}=\boldsymbol{\alpha}\times\mathbf{r}-|\boldsymbol{\omega}|^2\mathbf{r}.\]
+\[K=\frac{I\boldsymbol{\omega}^2}{2}=\frac{|\mathbf{L}|^2}{2I}.\]
+\sssc{角動量守恆定律（Law of conservation of angular momentum）}
+當一系統受合外力矩為零，其角動量時變率必為零，稱其處於轉動平衡（Rotational equilibrium），即該系統角位置靜止或行等角速度運動。
+\sssc{平衡力矩}
+作用在同一系統上且和為零的一組外力矩。
+\sssc{三力轉動平衡}
+一剛體受三力達轉動平衡，則三力延長線必交於一點。
+\sssc{靜力平衡（Static equilibrium）}
+指一系統達移動平衡且轉動平衡。
+\ssc{參考系（Frame of reference or reference frame）}
+\sssc{參考系（Frame of reference or reference frame）}
+一個抽象的座標系，其原點、方向和比例已在物理空間中基於一組參考點（reference points）而指定。參考點指在數學和物理上定義的幾何點。
+\sssc{慣性參考系（Inertial frame of reference）/伽俐略參考系（Galilean reference frame）}
+指在僅考慮實際力時，遵守牛頓運動定律的參考系。
+
+一個慣性參考系相對於另一個慣性參考系必靜止或行等速度運動。
+\sssc{非慣性參考系（Non-inertial frame of reference）}
+指在僅考慮實際力時，不遵守牛頓運動定律的參考系。
+\sssc{假想力（Fictitious force）/慣性力（inertial force）/假力（pseudo-force）}
+在非慣性參考系中描述系統運動時，欲使得牛頓第二運動定律成立需要作用於系統的非實際力。
+\sssc{旋轉參考系（Rotating reference frame）中的假想力}
+令一旋轉參考系相對於慣性參考系以角速度$\boldsymbol{\omega}$繞其原點旋轉，一質量$m$質點在此參考系有位置$\mathbf{x}$和速度$\mathbf{v}$，欲使牛頓第二運動定律在此參考系中成立需施予該質點假想力$\mathbf{F}$，則其服從：
+\[\mathbf{F}=-m\boldsymbol{\omega}\times\qty(\boldsymbol{\omega}\times\mathbf{x})-2m\boldsymbol{\omega}\times\mathbf{v}-m\frac{\mathrm{d}\boldsymbol{\omega}}{\mathrm{d}t}\times\mathbf{x}\]
+其中：$-m\boldsymbol{\omega}\times\qty(\boldsymbol{\omega}\times\mathbf{x})$稱\tb{離心力（Centrifugal force）}，$-2m\boldsymbol{\omega}\times\mathbf{v}$稱\tb{科里奥利力/科氏力（Coriolis force）}，$-m\frac{\mathrm{d}\boldsymbol{\omega}}{\mathrm{d}t}\times\mathbf{x}$稱\tb{尤拉力（Euler force）}。
+\ssc{Lagrangian Mechanics (拉格朗日力學)}
+\sssc{Configuration space}
+The degrees of freedom, or parameters, that define the configuration, or position of all constituent point particles, of a physical system are called generalized coordinates, and the space defined by these coordinates is called the configuration space of the system. Each unique possible configuration of the system corresponds to a unique point in the space. It is often the case that the set of all actual configurations of the system is a manifold in the configuration space, called the configuration manifold of the system. The number of dimensions of the configuration space is equal to the degrees of freedom of the system.
+\sssc{Lagrangian mechanics}
+Lagrangian mechanics describes a mechanical system as a pair $(M,L)$ consisting of a configuration manifold $M$ and a smooth functional $L\colon TM\to\mathbb{R}$, called a Lagrangian, where $TM$ is the tagent bundle of $M$, that is, $L=L(\mathbf{q},\dot{\mathbf{q}},t)$, where the vector $\mathbf{q}$ is a point in the configuration space of the system, $\dot{\mathbf{q}}=\frac{\mathrm{d}\mathbf{q}}{\mathrm{d}t}$, and $t$ is time.
+\subsection{Non-Relativistic Lagrangian}
+Let $\mathbf{r}_k$ denote the position of the $k$th particle for $_{k=1}^N$ in the position space $\mathbb{R}^3$ equipped with Cartesian coordinates as function of time, and \[\mathbf{v}_k=\dot{\mathbf{r}_k}=\frac{\mathrm{d}\mathbf{r}_k}{\mathrm{d}t}.\]
+The non-relativistic Lagrangian for a system of $N$ particles is given by
+\[L=T-V,\]
+where
+\[T=\frac{1}{2}\sum_{k=1}^Nm_k\mathbf{v}_k^{\phantom{k}2}\]
+is the total kinetic energy of the system. Each particle labeled $k$ has mass $m$, and $\mathbf{v}_k^{\phantom{k}2}=\mathbf{v}_k\cdot\mathbf{v}_k$ is the square of the norm of its velocity, equivalent to the dot product of the velocity with itself.
+
+$V$, the potential energy of the system, is the energy any one of the particles has due to all the others together with all external influences. For conservative forces (e.g. Newtonian gravity), $V$ is a function of the vectors of the position of the particles only, that is, $V=V((\mathbf{r}_k)_{i=1}^N)$. For non-conservative forces that can be derived from an appropriate potential (e.g. electromagnetic potential), $V$ is a function of the vectors of the position and velocity of the particles, that is, $V=V((\mathbf{r}_k)_{i=1}^N,(\mathbf{v}_k)_{i=1}^N)$. For some time-dependent external field or force (e.g. electric field and magnetic flux density field in electromagnetodynamics), the potential changes with time, so most generally, $V$ is a function of the vectors of the position and velocity of the particles and time, that is, $V=V((\mathbf{r}_k)_{i=1}^N,(\mathbf{v}_k)_{i=1}^N,t)$.
+\sssc{Lagrange's Equations of the First Kind}
+With these definitions, Lagrange's equations of the first kind are
+\[\nabla_{\mathbf{r}_k}L-\frac{\mathrm{d}}{\mathrm{d}t}\nabla_{\dot{\mathbf{r}_k}}L+\sum_{i=1}^C\lambda_i\nabla_{\mathbf{r}_k}f_i=0,\]
+where $k$ for $_{k=1}^N$ labels the particles, $f_i$ for $_{i=1}^C$ labels $C$ constraint equations, and $\lambda_i$ for $_{i=1}^C$ labels the Lagrange multiplier for the $i$th constraint equation. The constraint equations can be either holonomic, that is, in the form of $f_i((\mathbf{r}_k)_{i=1}^N)=0$, non-holonomic, that is, in the form of $f_i((\mathbf{r}_k)_{i=1}^N,(\mathbf{v}_k)_{i=1}^N)=0$, or most generally, time dependent, that is, in the form of $f_i((\mathbf{r}_k)_{i=1}^N,(\mathbf{v}_k)_{i=1}^N,t)=0$.
+\sssc{From position space to configuration space}
+In each constraint equation, one coordinate can be determined from the other coordinates. The number of independent coordinates is therefore $n = 3N − C$. We can construct a configuration space with $n$ generalized coordinates,  conveniently written as an $n$-vector $\mathbf{q} = ((q_k)_{k=1}^n)$. Hence the position coordinates as functions of the generalized coordinates and time are
+\[\mathbf{r}_k\colon\mathbb{R}^{n+1}\to\mathbb{R}^3;\;(\mathbf{q},t)\mapsto\mathbf{r}_k(x_k,y_k,z_k).\]
+The vector $\mathbf{q}$ is a point in the configuration space of the system. The time derivatives of the generalized coordinates are called the generalized velocities, and for each particle labelled as $k$ for $_{k=1}^N$, its velocity vector, namely, the total derivative of its position with respect to time, is
+\[\mathbf{v}_k=\left(\dot{\mathbf{q}}\cdot\nabla_{\mathbf{q}}\right)\mathbf{r}_k+\frac{\partial\mathbf{r}_k}{\partial t}.\]
+\sssc{Euler–Lagrange Equations or Lagrange's Equations of the Second Kind}
+With these definitions, the Euler–Lagrange equations, or Lagrange's equations of the second kind are
+\[\nabla_{\mathbf{q}}L=\frac{\mathrm{d}}{\mathrm{d}t}\nabla_{\dot{\mathbf{q}}}L.\]
+The number of equations has decreased compared to Newtonian mechanics, from $3N$ to $n = 3N − C$ coupled second-order differential equations in the generalized coordinates. These equations do not include constraint forces at all, only non-constraint forces need to be accounted for.
+\ssc{正向力（Normal Force）}
+垂直於兩系統界面的接觸排斥力，且令界面兩側系統為$A$、$B$，界面指入$A$的單位法向量$\hat{n}$，$\mathbf{A}$相對於$\mathbf{B}$的速度$\mathbf{v}$，則當兩系統間正向力量值大於零時其必足夠小使得$\mathbf{v}\cdot\hat{n}\leq 0$。源自於電磁力。
+\ssc{摩擦力（Frictional force）}
+平行於兩系統界面的接觸力，且與受力系統相對於施力系統速度的內積不為正，且與受力系統所受其他外力合的內積不為正。與該界面的正向力與界面粗糙程度有關，與接觸面積無關。源自於電磁力。
+\sssc{靜摩擦力（Static frictional force）}
+界面兩側系統相對速度平行界面的分量為零時的摩擦力，等於受力系統所受其他外力合平行界面的分量乘以負一，其量值不大於最大靜摩擦力。
+\sssc{最大靜摩擦力（Maximum static frictional force）}
+一界面可能發生的靜摩擦力量值的最大值，其量值正比於該界面的正向力量值，其量值與正向力量值的比值稱靜摩擦（力）係數（Coefficient of static friction）。
+\sssc{（滑）動摩擦力（Kinetic frictional force）}
+界面兩側系統相對速度平行界面的分量不為零時的摩擦力，其量值與兩側系統相對速度平行界面的分量無關，其量值正比於該界面的正向力量值，其量值與正向力量值的比值稱（滑）動摩擦（力）係數（Coefficient of kinetic friction），通常略小於靜摩擦（力）係數。
+\ssc{彈性力（Elastic Force）或恢復力（Restoring Force）}
+指彈性系統內部垂直於假想界面的接觸吸引力。
+\sssc{虎克定律（Hooke's Law）與楊氏模量/楊氏模數（Young's modulus or Young modulus）}
+線性彈性材料（linear elastic material）承受軸向（axial）（指服從虎克定律的方向，力為指向材料內）外力時會產生軸向應變（strain）$x$（指與應力同向之形變，且此時外力與恢復力$F$同量值反方向），在形變量沒有超過對應材料的一定彈性限度（elastic limit）時，服從虎克定律（Hooke's law）：
+\[F=-kx,\]
+其中$x$與$F$以正負號表示一維方向，$k$為一正常數，稱力常數（force constant）或彈力常數/彈性常數（spring constant），依賴於材料與截面積；又可以寫作
+\[p=Ex,\]
+其中$p$為材料承受之軸向應力（stress）（壓力），$E$為一正常數，稱楊氏模量/楊氏模數（Young's modulus or Young modulus）。
+
+服從虎克定律的軸向外力大小區間稱線性彈性區（linear elastic region），其最大力值稱彈性限度（elastic limit）。
+\sssc{彈力位能/彈性位能（spring potential energy）}
+\[U=\frac{k^2}{2}.\]
+\ssc{張力（Tension）}
+系統內部的接觸吸引力，於非正在發生形變之材料內部處處平衡。
 \ssc{重力（Gravity）}
 \sssc{牛頓萬有引力定律（Newton's Law of Universal Gravitation）}
 質量$M$、$m$的兩質點距離$r$，則其相互重力量值$F$為：
