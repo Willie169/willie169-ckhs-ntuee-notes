@@ -144,8 +144,6 @@ where $\delta$ is the Dirac delta function.
 \end{itemize}
 \sssc{剛體（Rigid body or rigid object）}
 一種有限尺寸且無形變的固體，無形變表示剛體內部質量分布始終不變。
-\sssc{Planar lamina or plane lamina (薄片)}
-A planar lamina or plane lamina is an object that is infinitely thin,
 \ssc{碰撞（Collision）}
 \sssc{定義}
 物體接近時，彼此間產生排斥力。
@@ -487,6 +485,8 @@ where:
 \[I_{yz}=I_{zy}=-\iiint_V\rho(\mb{r})\qty(\mb{r}\cdot\hat{\mb{j}})\cdot\qty(\mb{r}\cdot\hat{\mb{z}})\dd{V},\]
 \[I_{xz}=I_{zx}=-\iiint_V\rho(\mb{r})\qty(\mb{r}\cdot\hat{\mb{i}})\cdot\qty(\mb{r}\cdot\hat{\mb{z}})\dd{V},\]
 where $\hat{\mb{i}},\hat{\mb{j}},\hat{\mb{k}}$ are the unit vectors in the positive $x$-, $y$-, and $z$-axes.
+
+We can find a set of $x$-, $y$-, and $z$-axes such that $I_{xy}=I_{xz}=I_{yz}=0$, that is, $\mb{I}$ is diagonal.
 \sssc{Angular momentum (角動量)}
 The angular momentum $\mb{L}$ is
 \[\mb{L}=\mb{I}\bomega=I\bomega=\iint_V\rho{\mb{r}}\mb{r}\times\dot{\mb{r}}\dd{V}.\]
@@ -521,6 +521,8 @@ where $m$ is the total mass of the rigid body and $\mb{v}$ is the velocity of th
 
 The total kinetic energy $K$ of the rigid body is given by
 \[K=\frac{1}{2}\iint_V\rho{\mb{r}}\abs{\dot{\mb{r}}}^2\dd{V}=K_r+K_t.\]
+\sssc{Planar lamina or plane lamina (薄片)}
+A planar lamina or plane lamina is an object that is infinitely thin.
 \sssc{Perpendicular axis theorem (垂直軸定理或正交軸定理) or plane figure theorem}
 Define axes $x,y,z$ perpendicular to each other and meet at origin $O$. Suppose a planar lamina rigid body lies on the $xy$ plane. Let $I_x,I_y,I_z$ be moments of inertia about axis $x,y,z$ respectively, then the perpendicular axis theorem states that
 \[I_z=I_x+I_y.\]
@@ -535,6 +537,30 @@ Suppose a rigid body of mass $m$ is rotated about an axis $z$ passing through th
 一剛體受三力達轉動平衡，則三力延長線必交於一點。
 \sssc{靜力平衡（Static equilibrium）}
 指一系統達移動平衡且轉動平衡。
+\ssc{參考系（Frame of reference, reference frame, or frame）}
+\sssc{參考系}
+一個抽象的座標系，其原點、方向和比例已在物理空間中基於一組參考點（reference points）而指定。參考點指在數學和物理上定義的幾何點。
+\sssc{慣性參考系（Inertial frame (of reference)）/伽俐略參考系（Galilean (reference) frame）}
+指在僅考慮實際力時，遵守牛頓運動定律的參考系。
+
+一個慣性參考系相對於另一個慣性參考系必靜止或行等速度運動。
+\sssc{非慣性參考系（Non-inertial frame (of reference)）}
+指在僅考慮實際力時，不遵守牛頓運動定律的參考系。
+\sssc{假想力（Fictitious force）/慣性力（inertial force）/假力（pseudo-force）}
+在非慣性參考系中描述系統運動時，欲使得牛頓第二運動定律成立需要作用於系統的非實際力。
+\sssc{旋轉參考系（Rotating (reference) frame）中的假想力}
+令一旋轉參考系相對於慣性參考系以角速度$\boldsymbol{\omega}$繞其原點旋轉，一質量$m$質點在此參考系有位置$\mathbf{x}$和速度$\mathbf{v}$，欲使牛頓第二運動定律在此參考系中成立需施予該質點假想力$\mathbf{F}$，則其服從：
+\[\mathbf{F}=-m\boldsymbol{\omega}\times\qty(\boldsymbol{\omega}\times\mathbf{x})-2m\boldsymbol{\omega}\times\mathbf{v}-m\frac{\mathrm{d}\boldsymbol{\omega}}{\mathrm{d}t}\times\mathbf{x}\]
+其中：$-m\boldsymbol{\omega}\times\qty(\boldsymbol{\omega}\times\mathbf{x})$稱\tb{離心力（Centrifugal force）}，$-2m\boldsymbol{\omega}\times\mathbf{v}$稱\tb{科里奥利力/科氏力（Coriolis force）}，$-m\frac{\mathrm{d}\boldsymbol{\omega}}{\mathrm{d}t}\times\mathbf{x}$稱\tb{歐拉力（Euler force）}。
+\ssc{Rotation using body-fixed frame}
+Below, we'll consider rotation of a rigid body in the body-fixed frame, that is, the rotating frame of reference such that any point of the body remains at the same position in the frame.
+\sssc{Euler's rotation equations (歐拉（轉動）方程)}
+Euler's rotation equations are a first-order ordinary differential equation describing the rotation of a rigid body using body-fixed frame.
+\[\mb{I}\dot{\bomega}+\bomega\times(\mb{I}\bomega=\btau,\]
+that is,
+\[\dv{L}{t}+\bomega\times\mb{L}=\btau.\]
+\sssc{Spinning top or top}
+A spinning top or simply top is a rigid body of which the mass is distributed axially symmetric about the rotational axis fixed to the body.
 \sssc{Precession (進動) and nutation (章動)}
 The (instantaneous) precession rate (（瞬時）進動率) $\bOmega$ is defined as
 \[\bOmega=\frac{\mb{L}\times\btau}{\abs{\mb{L}}^2}\]
@@ -542,27 +568,13 @@ to describe the angular velocity of the axis of rotation.
 
 Sometimes $\Omega=\abs{\bOmega}$ is used as the instantaneous precession rate.
 
-Suppose a rigid body of which the mass is distributed axially symmetric about the rotational axis fixed to the body, called a spinning top or simply top, is subjected to a constant force $\mb{F}$ on the COM, which is on the axis, and another force $-\mb{F}$ on a fulcrum (支點) that is also on the axis. Let the relative position of the COM from the fulcrum be $\mb{r}$. The torque $\btau$ is
-\[\btau=\mb{r}\times\mb{F}.\]
-The steady solution is such that the precession rate is a constant $\bOmega_c$ called steady procession dependent on the angular momentum $\mb{L}$
-\[\bOmega_c=
+Suppose a top is subjected to a constant force $\mb{F}$ on the COM, which is on its rotational axis, and another force $-\mb{F}$ on the fulcrum (支點), which is also on its rotational axis. Let the relative position of the COM from the fulcrum be $\mb{r}$.
 
 
-\ssc{參考系（Frame of reference or reference frame）}
-\sssc{參考系（Frame of reference or reference frame）}
-一個抽象的座標系，其原點、方向和比例已在物理空間中基於一組參考點（reference points）而指定。參考點指在數學和物理上定義的幾何點。
-\sssc{慣性參考系（Inertial frame of reference）/伽俐略參考系（Galilean reference frame）}
-指在僅考慮實際力時，遵守牛頓運動定律的參考系。
 
-一個慣性參考系相對於另一個慣性參考系必靜止或行等速度運動。
-\sssc{非慣性參考系（Non-inertial frame of reference）}
-指在僅考慮實際力時，不遵守牛頓運動定律的參考系。
-\sssc{假想力（Fictitious force）/慣性力（inertial force）/假力（pseudo-force）}
-在非慣性參考系中描述系統運動時，欲使得牛頓第二運動定律成立需要作用於系統的非實際力。
-\sssc{旋轉參考系（Rotating reference frame）中的假想力}
-令一旋轉參考系相對於慣性參考系以角速度$\boldsymbol{\omega}$繞其原點旋轉，一質量$m$質點在此參考系有位置$\mathbf{x}$和速度$\mathbf{v}$，欲使牛頓第二運動定律在此參考系中成立需施予該質點假想力$\mathbf{F}$，則其服從：
-\[\mathbf{F}=-m\boldsymbol{\omega}\times\qty(\boldsymbol{\omega}\times\mathbf{x})-2m\boldsymbol{\omega}\times\mathbf{v}-m\frac{\mathrm{d}\boldsymbol{\omega}}{\mathrm{d}t}\times\mathbf{x}\]
-其中：$-m\boldsymbol{\omega}\times\qty(\boldsymbol{\omega}\times\mathbf{x})$稱\tb{離心力（Centrifugal force）}，$-2m\boldsymbol{\omega}\times\mathbf{v}$稱\tb{科里奥利力/科氏力（Coriolis force）}，$-m\frac{\mathrm{d}\boldsymbol{\omega}}{\mathrm{d}t}\times\mathbf{x}$稱\tb{尤拉力（Euler force）}。
+
+
+
 \ssc{Lagrangian Mechanics (拉格朗日力學)}
 \sssc{Configuration space}
 The degrees of freedom, or parameters, that define the configuration, or position of all constituent point particles, of a physical system are called generalized coordinates, and the space defined by these coordinates is called the configuration space of the system. Each unique possible configuration of the system corresponds to a unique point in the space. It is often the case that the set of all actual configurations of the system is a manifold in the configuration space, called the configuration manifold of the system. The number of dimensions of the configuration space is equal to the degrees of freedom of the system.
