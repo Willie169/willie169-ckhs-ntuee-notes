@@ -31,18 +31,18 @@ Unless otherwise stated, objects and systems refer to insulated systems, positio
 \subsection{平移運動（Motion of translation）}
 \subsubsection{向量}
 \begin{itemize}
-    \item\tb{力（Force）$\mb{F}$}：系統間的交互作用。
+    \item\tb{力（Force）$\mathbf{F}$}：系統間的交互作用。
 \item\tb{外力（External force）}：系統外施予系統之力。
 \item\tb{內力（Internal force）}：系統內不同質點間的力。
 \item\tb{(Relative) position (（相對）位置)}: The relative position of a point $\mathbf{Q}$ with respect to a given reference point (參考點) $\mathbf{P}$ is the vector $\mathbf{Q}-\mathbf{P}$, each with respect to the origin (原點), where we usually set $\mathbf{P}$ as origin.
-\item\tb{位移（Displacement）$\Delta\mb{r}$}：系統末位置減去初位置。
-\item\tb{（瞬間/瞬時（Instantaneous））速度（Velocity）$\mb{v}$}：系統位置對時間的導數。
+\item\tb{位移（Displacement）$\Delta\mathbf{r}$}：系統末位置減去初位置。
+\item\tb{（瞬間/瞬時（Instantaneous））速度（Velocity）$\mathbf{v}$}：系統位置對時間的導數。
 \item\tb{平均速度（Average velocity）}：系統位移，與末時刻減去初時刻，的比值。
-\item\tb{（瞬間/瞬時）加速度（Acceleration）$\mb{a}$}：系統速度對時間的導數。
+\item\tb{（瞬間/瞬時）加速度（Acceleration）$\mathbf{a}$}：系統速度對時間的導數。
 \item\tb{（瞬間/瞬時）加加速度（Jerk or jolt）}：系統加速度對時間的導數。
 \item\tb{平均加速度（Average acceleration）}：系統末速度減去初速度，與末時刻減去初時刻，的比值。
-\item\tb{動量（Momentum）$\mb{p}$}：系統質量與速度的乘積。
-\item\tb{衝量（Impulse）$\mb{J}$}：系統末動量減去初動量。
+\item\tb{動量（Momentum）$\mathbf{p}$}：系統質量與速度的乘積。
+\item\tb{衝量（Impulse）$\mathbf{J}$}：系統末動量減去初動量。
 \end{itemize}
 \subsubsection{純量}
 \begin{itemize}
@@ -116,7 +116,7 @@ The average density of an abject is the total mass of it divided by the volume o
 The (position of) center of mass of a system is the point that moves as if all of the system's mass were concentrated there.
 
 For a system of volumne $V$ and density field $\rho(\mathbf{r})$, the (position of) center of mass $\mathbf{r}_c$ is defined as:
-\[\mathbf{r}_c=\frac{\iiint_V\rho(\mb{r})\mathbf{r}\dd{V}}{\iiint_V\rho(\mb{r})\dd{V}},\]
+\[\mathbf{r}_c=\frac{\iiint_V\rho(\mathbf{r})\mathbf{r}\dd{V}}{\iiint_V\rho(\mathbf{r})\dd{V}},\]
 where the denominator is the total mass of the system.
 
 For a system of $N$ particles with masses $m_i$ at postion $\mathbf{r}_i$, the (position of) center of mass $\mathbf{r}_c$ is defined as:
@@ -124,7 +124,7 @@ For a system of $N$ particles with masses $m_i$ at postion $\mathbf{r}_i$, the (
 where the denominator is the total mass of the system.
 
 To make this kind of system suit the volume integral definition, we can let the density field $\rho(\mathbf{r})$ be:
-\[\rho(\mb{r})=\sum_{i=1}^Nm_i\delta(\mb{r}-\mb{r}_i),\]
+\[\rho(\mathbf{r})=\sum_{i=1}^Nm_i\delta(\mathbf{r}-\mathbf{r}_i),\]
 where $\delta$ is the Dirac delta function.
 \sssc{向量}
 \bit
@@ -144,6 +144,17 @@ where $\delta$ is the Dirac delta function.
 \end{itemize}
 \sssc{剛體（Rigid body or rigid object）}
 一種有限尺寸且無形變的固體，無形變表示剛體內部質量分布始終不變。
+\ssc{參考系（Frame of reference, reference frame, or frame）}
+\sssc{參考系}
+一個抽象的座標系，其原點、方向和比例已在物理空間中基於一組參考點（reference points）而指定。參考點指在數學和物理上定義的幾何點。
+\sssc{慣性參考系（Inertial frame (of reference)）/伽俐略參考系（Galilean (reference) frame）}
+指在僅考慮實際力時，遵守牛頓運動定律的參考系。
+
+一個慣性參考系相對於另一個慣性參考系必靜止或行等速度運動。
+\sssc{非慣性參考系（Non-inertial frame (of reference)）}
+指在僅考慮實際力時，不遵守牛頓運動定律的參考系。
+\sssc{假想力（Fictitious force）/慣性力（inertial force）/假力（pseudo-force）}
+在非慣性參考系中描述系統運動時，欲使得牛頓第二運動定律成立需要作用於系統的非實際力。
 \ssc{碰撞（Collision）}
 \sssc{定義}
 物體接近時，彼此間產生排斥力。
@@ -455,7 +466,7 @@ However, a rotation around a point or axis and a rotation around a different poi
 \sssc{Principal rotations}
 Rotations around the $x$, $y$ and $z$ axes are called principal rotations. Rotation around any axis can be performed by taking a rotation around the $x$ axis, followed by a rotation around the $y$ axis, and followed by a rotation around the $z$ axis. That is, any spatial rotation can be decomposed into a combination of principal rotations.
 \sssc{Angular position (角位置)}
-The angular position of a point $\mathbf{P}$ with respect to a given reference axis, which is a line oriented along a unit vector $\hat{\mathbf{n}}$, relative to a given polar axis on some plane $F$ perpendicular to the reference axis, which defines a polar coordinate system whose positive sense is determined by looking upward along $\hat{\mathbf{n}}$ (right-hand rule), is the polar angle $\theta$ (one-dimensional) of the projection of $\mathbf{P}$ on $F$ or $\boldsymbol{\theta}=\theta\hat{\mb{n}}$ (three-dimensional).
+The angular position of a point $\mathbf{P}$ with respect to a given reference axis, which is a line oriented along a unit vector $\hat{\mathbf{n}}$, relative to a given polar axis on some plane $F$ perpendicular to the reference axis, which defines a polar coordinate system whose positive sense is determined by looking upward along $\hat{\mathbf{n}}$ (right-hand rule), is the polar angle $\theta$ (one-dimensional) of the projection of $\mathbf{P}$ on $F$ or $\boldsymbol{\theta}=\theta\hat{\mathbf{n}}$ (three-dimensional).
 
 Angular displacements are additive for rotations about the same axis and, in three dimensions, are also additive for infinitesimal rotations. However, they are not additive for finite rotations about different axes.
 \sssc{Angular displacement (角位移)}
@@ -465,42 +476,42 @@ The (instantaneous) angular velocity $\omega$ (one-dimensional) or $\boldsymbol{
 \sssc{(Instantaneous) angular acceleration (（瞬時）角加速度)}
 The (instantaneous) angular acceleration $\alpha$ (one-dimensional) or $\boldsymbol{\alpha}$ (three-dimensional) is the derivative of angular velocity with respect to time.
 \sssc{Velocity of a point in a rotating rigid body}
-If a rigid body is rotating at angular velocity $\boldsymbol{\omega}$ and angular acceleration $\balpha$ around a rotational axis, and the axis is translating at velocity $\mb{v}_t$, then a mass point in a rigid body at position $\mb{r}$ from the axis is translating at velocity
-\[\dot{\mb{r}}=\boldsymbol{\omega}\times\mb{r}+\mb{v}_t.\]
+If a rigid body is rotating at angular velocity $\boldsymbol{\omega}$ and angular acceleration $\balpha$ around a rotational axis, and the axis is translating at velocity $\mathbf{v}_t$, then a mass point in a rigid body at position $\mathbf{r}$ from the axis is translating at velocity
+\[\dot{\mathbf{r}}=\boldsymbol{\omega}\times\mathbf{r}+\mathbf{v}_t.\]
 \sssc{Moment of inertia (轉動慣量) or rotational inertia (scalar)}
-The moment of inertia or rotational inertia scalar $I$ of an object of volume $V$ about its rotational axis is a measure of the object's resistance to changes to its rotation, defined with the density field $\rho(\mb{r})$ with some point on the axis as origin and unit vector in the direction of axis $\hat{\mb{n}}$ as:
-\[I=\iiint_V\rho(\mb{r})\abs{\mb{r}\times\hat{\mb{n}}}^2\dd{V}.\]
+The moment of inertia or rotational inertia scalar $I$ of an object of volume $V$ about its rotational axis is a measure of the object's resistance to changes to its rotation, defined with the density field $\rho(\mathbf{r})$ with some point on the axis as origin and unit vector in the direction of axis $\hat{\mathbf{n}}$ as:
+\[I=\iiint_V\rho(\mathbf{r})\abs{\mathbf{r}\times\hat{\mathbf{n}}}^2\dd{V}.\]
 \sssc{Moment of inertia or rotational inertia tensor}
-The moment of inertia or rotational inertia tensor $\mb{I}$ of an object of volume $V$ is a measure of the object's resistance to changes to its rotation independent from axes, defined with the density field $\rho(\mb{r})$:
-\[\mb{I}=\begin{pmatrix}
+The moment of inertia or rotational inertia tensor $\mathbf{I}$ of an object of volume $V$ is a measure of the object's resistance to changes to its rotation independent from axes, defined with the density field $\rho(\mathbf{r})$:
+\[\mathbf{I}=\begin{pmatrix}
     I_{xx} & I_{xy} & I_{xz}\\
     I_{yx} & I_{yy} & I_{yz}\\
     I_{zx} & I_{zy} & I_{zz}
 \end{pmatrix},\]
 where:
-\[I_{xx}=\iiint_V\rho(\mb{r})\qty(\qty(\mb{r}\cdot\hat{\mb{j}})^2+\qty(\mb{r}\cdot\hat{\mb{k}})^2)\dd{V},\]
-\[I_{yy}=\iiint_V\rho(\mb{r})\qty(\qty(\mb{r}\cdot\hat{\mb{i}})^2+\qty(\mb{r}\cdot\hat{\mb{k}})^2)\dd{V},\]
-\[I_{zz}=\iiint_V\rho(\mb{r})\qty(\qty(\mb{r}\cdot\hat{\mb{i}})^2+\qty(\mb{r}\cdot\hat{\mb{j}})^2)\dd{V},\]
-\[I_{xy}=I_{yx}=-\iiint_V\rho(\mb{r})\qty(\mb{r}\cdot\hat{\mb{i}})\cdot\qty(\mb{r}\cdot\hat{\mb{j}})\dd{V},\]
-\[I_{yz}=I_{zy}=-\iiint_V\rho(\mb{r})\qty(\mb{r}\cdot\hat{\mb{j}})\cdot\qty(\mb{r}\cdot\hat{\mb{z}})\dd{V},\]
-\[I_{xz}=I_{zx}=-\iiint_V\rho(\mb{r})\qty(\mb{r}\cdot\hat{\mb{i}})\cdot\qty(\mb{r}\cdot\hat{\mb{z}})\dd{V},\]
-where $\hat{\mb{i}},\hat{\mb{j}},\hat{\mb{k}}$ are the unit vectors in the positive $x$-, $y$-, and $z$-axes.
+\[I_{xx}=\iiint_V\rho(\mathbf{r})\qty(\qty(\mathbf{r}\cdot\hat{\mathbf{j}})^2+\qty(\mathbf{r}\cdot\hat{\mathbf{k}})^2)\dd{V},\]
+\[I_{yy}=\iiint_V\rho(\mathbf{r})\qty(\qty(\mathbf{r}\cdot\hat{\mathbf{i}})^2+\qty(\mathbf{r}\cdot\hat{\mathbf{k}})^2)\dd{V},\]
+\[I_{zz}=\iiint_V\rho(\mathbf{r})\qty(\qty(\mathbf{r}\cdot\hat{\mathbf{i}})^2+\qty(\mathbf{r}\cdot\hat{\mathbf{j}})^2)\dd{V},\]
+\[I_{xy}=I_{yx}=-\iiint_V\rho(\mathbf{r})\qty(\mathbf{r}\cdot\hat{\mathbf{i}})\cdot\qty(\mathbf{r}\cdot\hat{\mathbf{j}})\dd{V},\]
+\[I_{yz}=I_{zy}=-\iiint_V\rho(\mathbf{r})\qty(\mathbf{r}\cdot\hat{\mathbf{j}})\cdot\qty(\mathbf{r}\cdot\hat{\mathbf{z}})\dd{V},\]
+\[I_{xz}=I_{zx}=-\iiint_V\rho(\mathbf{r})\qty(\mathbf{r}\cdot\hat{\mathbf{i}})\cdot\qty(\mathbf{r}\cdot\hat{\mathbf{z}})\dd{V},\]
+where $\hat{\mathbf{i}},\hat{\mathbf{j}},\hat{\mathbf{k}}$ are the unit vectors in the positive $x$-, $y$-, and $z$-axes.
 
-We can find a set of $x$-, $y$-, and $z$-axes such that $I_{xy}=I_{xz}=I_{yz}=0$, that is, $\mb{I}$ is diagonal.
+We can find a set of $x$-, $y$-, and $z$-axes such that $I_{xy}=I_{xz}=I_{yz}=0$, that is, $\mathbf{I}$ is diagonal.
 \sssc{Angular momentum (角動量)}
-The angular momentum $\mb{L}$ is
-\[\mb{L}=\mb{I}\bomega=I\bomega=\iint_V\rho{\mb{r}}\mb{r}\times\dot{\mb{r}}\dd{V}.\]
+The angular momentum $\mathbf{L}$ is
+\[\mathbf{L}=\mathbf{I}\boldsymbol{\omega}=I\boldsymbol{\omega}=\iint_V\rho{\mathbf{r}}\mathbf{r}\times\dot{\mathbf{r}}\dd{V}.\]
 \sssc{Torque (力矩)}
-The torque $\btau$ is the twisting effect of a force $F$ applied to a rigid body at position $\mb{r}$ from its axis of rotation given by
-\[\btau=\mb{r}\times\mb{F},\]
-where $\mb{r}$ is called the lever arm (力臂) of the force.
+The torque $\btau$ is the twisting effect of a force $F$ applied to a rigid body at position $\mathbf{r}$ from a fixed point of rotation given by
+\[\btau=\mathbf{r}\times\mathbf{F},\]
+where $\mathbf{r}$ is called the lever arm (力臂) of the force.
 
 Sometimes
 \[\tau=\abs{\btau}\]
-is used as torque instead.
+is used as torque instead if $\abs{\btau\times\mb{L}}=0$.
 
 Torque and angular momentum are related according to
-\[\btau=\dv{\mb{L}}{t},\]
+\[\btau=\dv{\mathbf{L}}{t},\]
 called Newton's second law for rotation.
 
 Torque and angular aceleration are related according to
@@ -508,19 +519,19 @@ Torque and angular aceleration are related according to
 called Newton's second law for rotation.
 \sssc{Power, work, and kinetic energy}
 The power pf $P$ of a torque $\btau$ is
-\[P=\btau\cdot\bomega.\]
+\[P=\btau\cdot\boldsymbol{\omega}.\]
 
 The work $W$ done by a torque $\btau$ in the same direction in some time interval $t_0$ to $t_1$, in which the rigid body rotates from angular position $\theta_0$ to $\theta_1$, is
-\[W=\int_{t_0}^{t_1}\btau\cdot\bomega\dd{t}=\int_{\theta_0}^{\theta_1}\tau\dd{\theta}.\]
+\[W=\int_{t_0}^{t_1}\btau\cdot\boldsymbol{\omega}\dd{t}=\int_{\theta_0}^{\theta_1}\tau\dd{\theta}.\]
 
 The kinetic energy $K_r$ due to the rotation, called rotational kinetic energy, is given by
-\[K_r=\frac{1}{2}I|\bomega|^2.\]
+\[K_r=\frac{1}{2}I|\boldsymbol{\omega}|^2.\]
 The translational kinetic energy $K_t$ associated with the motion of the rotation axis is given by
-\[K_t=\frac{1}{2}m|\mb{v}|^2\]
-where $m$ is the total mass of the rigid body and $\mb{v}$ is the velocity of the axis of rotation.
+\[K_t=\frac{1}{2}m|\mathbf{v}|^2\]
+where $m$ is the total mass of the rigid body and $\mathbf{v}$ is the velocity of the axis of rotation.
 
 The total kinetic energy $K$ of the rigid body is given by
-\[K=\frac{1}{2}\iint_V\rho{\mb{r}}\abs{\dot{\mb{r}}}^2\dd{V}=K_r+K_t.\]
+\[K=\frac{1}{2}\iint_V\rho{\mathbf{r}}\abs{\dot{\mathbf{r}}}^2\dd{V}=K_r+K_t.\]
 \sssc{Planar lamina or plane lamina (薄片)}
 A planar lamina or plane lamina is an object that is infinitely thin.
 \sssc{Perpendicular axis theorem (垂直軸定理或正交軸定理) or plane figure theorem}
@@ -537,44 +548,24 @@ Suppose a rigid body of mass $m$ is rotated about an axis $z$ passing through th
 一剛體受三力達轉動平衡，則三力延長線必交於一點。
 \sssc{靜力平衡（Static equilibrium）}
 指一系統達移動平衡且轉動平衡。
-\ssc{參考系（Frame of reference, reference frame, or frame）}
-\sssc{參考系}
-一個抽象的座標系，其原點、方向和比例已在物理空間中基於一組參考點（reference points）而指定。參考點指在數學和物理上定義的幾何點。
-\sssc{慣性參考系（Inertial frame (of reference)）/伽俐略參考系（Galilean (reference) frame）}
-指在僅考慮實際力時，遵守牛頓運動定律的參考系。
-
-一個慣性參考系相對於另一個慣性參考系必靜止或行等速度運動。
-\sssc{非慣性參考系（Non-inertial frame (of reference)）}
-指在僅考慮實際力時，不遵守牛頓運動定律的參考系。
-\sssc{假想力（Fictitious force）/慣性力（inertial force）/假力（pseudo-force）}
-在非慣性參考系中描述系統運動時，欲使得牛頓第二運動定律成立需要作用於系統的非實際力。
-\sssc{旋轉參考系（Rotating (reference) frame）中的假想力}
+\sssc{Fulcrum (支點)}
+A point in a rigid body on which external force is applied such that the position of it is fixed.
+\sssc{Spinning top or top}
+A spinning top or simply top is a rigid body of which the mass is distributed axially symmetric about the rotational axis fixed to the body.
+\sssc{Gyroscopic precession (陀螺儀進動)}
+Suppose a top rotating at angular momentum $\mb{L}$ is subjected to a constant force $\mathbf{F}$ on a point on its rotational axis at position $\mb{r}$ relative to a fixed fulcrum, and another constant force $-\mathbf{F}$ on the fulcrum, which is also on its rotational axis. Then the tip of $\mb{L}$ is rotating at an angular velocity $\boldsymbol{\Omega}_p$ given by
+\[\boldsymbol{\Omega}_p=
+\frac{\hat{\mb{L}}\times(\mb{r}\times\mb{F})}{\abs{\mathbf{L}}}.\]
+In special case that $\hat{\mb{L}}=\hat{\mb{r}}$, the tip of $\mb{L}$ is rotating at constant angular velocity around a precession axis fixed in the space, called steady precession.
+\sssc{旋轉參考系（Rotating (reference) frame）}
 令一旋轉參考系相對於慣性參考系以角速度$\boldsymbol{\omega}$繞其原點旋轉，一質量$m$質點在此參考系有位置$\mathbf{x}$和速度$\mathbf{v}$，欲使牛頓第二運動定律在此參考系中成立需施予該質點假想力$\mathbf{F}$，則其服從：
 \[\mathbf{F}=-m\boldsymbol{\omega}\times\qty(\boldsymbol{\omega}\times\mathbf{x})-2m\boldsymbol{\omega}\times\mathbf{v}-m\frac{\mathrm{d}\boldsymbol{\omega}}{\mathrm{d}t}\times\mathbf{x}\]
 其中：$-m\boldsymbol{\omega}\times\qty(\boldsymbol{\omega}\times\mathbf{x})$稱\tb{離心力（Centrifugal force）}，$-2m\boldsymbol{\omega}\times\mathbf{v}$稱\tb{科里奥利力/科氏力（Coriolis force）}，$-m\frac{\mathrm{d}\boldsymbol{\omega}}{\mathrm{d}t}\times\mathbf{x}$稱\tb{歐拉力（Euler force）}。
-\ssc{Rotation using body-fixed frame}
-Below, we'll consider rotation of a rigid body in the body-fixed frame, that is, the rotating frame of reference such that any point of the body remains at the same position in the frame.
 \sssc{Euler's rotation equations (歐拉（轉動）方程)}
-Euler's rotation equations are a first-order ordinary differential equation describing the rotation of a rigid body using body-fixed frame.
-\[\mb{I}\dot{\bomega}+\bomega\times(\mb{I}\bomega=\btau,\]
+Euler's rotation equations are a first-order ordinary differential equation describing the rotation of a rigid body using body-fixed frame, that is, the rotating frame of reference such that any point of the body remains at the same position in the frame.
+\[\mathbf{I}\dot{\boldsymbol{\omega}}+\boldsymbol{\omega}\times(\mathbf{I}\boldsymbol{\omega}=\btau,\]
 that is,
-\[\dv{L}{t}+\bomega\times\mb{L}=\btau.\]
-\sssc{Spinning top or top}
-A spinning top or simply top is a rigid body of which the mass is distributed axially symmetric about the rotational axis fixed to the body.
-\sssc{Precession (進動) and nutation (章動)}
-The (instantaneous) precession rate (（瞬時）進動率) $\bOmega$ is defined as
-\[\bOmega=\frac{\mb{L}\times\btau}{\abs{\mb{L}}^2}\]
-to describe the angular velocity of the axis of rotation.
-
-Sometimes $\Omega=\abs{\bOmega}$ is used as the instantaneous precession rate.
-
-Suppose a top is subjected to a constant force $\mb{F}$ on the COM, which is on its rotational axis, and another force $-\mb{F}$ on the fulcrum (支點), which is also on its rotational axis. Let the relative position of the COM from the fulcrum be $\mb{r}$.
-
-
-
-
-
-
+\[\dv{L}{t}+\boldsymbol{\omega}\times\mathbf{L}=\btau.\]
 \ssc{Lagrangian Mechanics (拉格朗日力學)}
 \sssc{Configuration space}
 The degrees of freedom, or parameters, that define the configuration, or position of all constituent point particles, of a physical system are called generalized coordinates, and the space defined by these coordinates is called the configuration space of the system. Each unique possible configuration of the system corresponds to a unique point in the space. It is often the case that the set of all actual configurations of the system is a manifold in the configuration space, called the configuration manifold of the system. The number of dimensions of the configuration space is equal to the degrees of freedom of the system.
