@@ -445,11 +445,11 @@ K_{int}' &= \frac{\mu \qty(v_1'-v_2')^2}{2} = \frac{\mu \qty(e\qty(v_1-v_2))^2}{
 稱此方程為火箭第二方程（Second rocket equation）。
 \ssc{Rotation (轉動)}
 \sssc{Rotaion}
-Rotations is a rigid body movement which, unlike a translation, keeps at least one point fixed. We call a rotation to be around or about the fixed point or axis (when all points on a line are fixed), and call such point or axis point or axis of the rotation or rotational point or axis.
+Rotations is a rigid body movement which, unlike a translation, keeps at least one point fixed to the body. We call a rotation to be around or about the fixed point or axis (when all points on a line are fixed), and call such point or axis point or axis of the rotation or rotational point or axis.
 
 All rigid body movements are rotations, translations, or combinations of the two.
 \sssc{Euler’s rotation theorem and rotational matrix}
-Any motion of a rigid body such that a point on it remains fixed, is equivalanet to a single rotaion about some axis that passes through the fixed point.
+Any motion of a rigid body such that a point on it remains fixed to the body, is equivalanet to a single rotaion about some axis that passes through the fixed point.
 
 The sum of finite rotations around a same point or axis is also a rotaion. The inverse of a rotation is also a rotation. Thus, the rotations around a point or axis form a group, which is, when expressed in rotational matrices with a fixed point chosen to be the origin of the three-dimensional Euclidean vector space, the special orthogonal group of degree three $\operatorname{SO}(3)$ over $\bbR$.
 
@@ -458,6 +458,8 @@ However, a rotation around a point or axis and a rotation around a different poi
 Rotations around the $x$, $y$ and $z$ axes are called principal rotations. Rotation around any axis can be performed by taking a rotation around the $x$ axis, followed by a rotation around the $y$ axis, and followed by a rotation around the $z$ axis. That is, any spatial rotation can be decomposed into a combination of principal rotations.
 \sssc{Angular position (角位置)}
 The angular position of a point $\mathbf{P}$ with respect to a given reference axis, which is a line oriented along a unit vector $\hat{\mathbf{n}}$, relative to a given polar axis on some plane $F$ perpendicular to the reference axis, which defines a polar coordinate system whose positive sense is determined by looking upward along $\hat{\mathbf{n}}$ (right-hand rule), is the polar angle $\theta$ (one-dimensional) of the projection of $\mathbf{P}$ on $F$ or $\boldsymbol{\theta}=\theta\hat{\mb{n}}$ (three-dimensional).
+
+Angular displacements are additive for rotations about the same axis and, in three dimensions, are also additive for infinitesimal rotations. However, they are not additive for finite rotations about different axes.
 \sssc{Angular displacement (角位移)}
 The angular displacement $\Delta\theta$ (one-dimensional) or $\Delta\boldsymbol{\theta}$ (three-dimensional) is the angular position at the end subtracted by the angular position at the begining, where the reference axis is the fixed axis in the rotation.
 \sssc{(Instantaneous) angular velocity (（瞬時）角速度)}
@@ -467,12 +469,27 @@ The (instantaneous) angular acceleration $\alpha$ (one-dimensional) or $\boldsym
 \sssc{Velocity of a point in a rotating rigid body}
 If a rigid body is rotating at angular velocity $\boldsymbol{\omega}$ and angular acceleration $\balpha$ around a rotational axis, and the axis is translating at velocity $\mb{v}_t$, then a mass point in a rigid body at position $\mb{r}$ from the axis is translating at velocity
 \[\dot{\mb{r}}=\boldsymbol{\omega}\times\mb{r}+\mb{v}_t.\]
-\sssc{Moment of inertia (轉動慣量) or rotational inertia}
-The moment of inertia or rotational inertia $I$ of an object of volume $V$ about its rotational axis is a measure of the object's resistance to changes to its rotation, defined with the density field $\rho(\mb{r})$ with some point on the axis as origin and unit vector in the direction of axis $\hat{\mb{n}}$ as:
+\sssc{Moment of inertia (轉動慣量) or rotational inertia (scalar)}
+The moment of inertia or rotational inertia scalar $I$ of an object of volume $V$ about its rotational axis is a measure of the object's resistance to changes to its rotation, defined with the density field $\rho(\mb{r})$ with some point on the axis as origin and unit vector in the direction of axis $\hat{\mb{n}}$ as:
 \[I=\iiint_V\rho(\mb{r})\abs{\mb{r}\times\hat{\mb{n}}}^2\dd{V}.\]
+\sssc{Moment of inertia or rotational inertia tensor}
+The moment of inertia or rotational inertia tensor $\mb{I}$ of an object of volume $V$ is a measure of the object's resistance to changes to its rotation independent from axes, defined with the density field $\rho(\mb{r})$:
+\[\mb{I}=\begin{pmatrix}
+    I_{xx} & I_{xy} & I_{xz}\\
+    I_{yx} & I_{yy} & I_{yz}\\
+    I_{zx} & I_{zy} & I_{zz}
+\end{pmatrix},\]
+where:
+\[I_{xx}=\iiint_V\rho(\mb{r})\qty(\qty(\mb{r}\cdot\hat{\mb{j}})^2+\qty(\mb{r}\cdot\hat{\mb{k}})^2)\dd{V},\]
+\[I_{yy}=\iiint_V\rho(\mb{r})\qty(\qty(\mb{r}\cdot\hat{\mb{i}})^2+\qty(\mb{r}\cdot\hat{\mb{k}})^2)\dd{V},\]
+\[I_{zz}=\iiint_V\rho(\mb{r})\qty(\qty(\mb{r}\cdot\hat{\mb{i}})^2+\qty(\mb{r}\cdot\hat{\mb{j}})^2)\dd{V},\]
+\[I_{xy}=I_{yx}=-\iiint_V\rho(\mb{r})\qty(\mb{r}\cdot\hat{\mb{i}})\cdot\qty(\mb{r}\cdot\hat{\mb{j}})\dd{V},\]
+\[I_{yz}=I_{zy}=-\iiint_V\rho(\mb{r})\qty(\mb{r}\cdot\hat{\mb{j}})\cdot\qty(\mb{r}\cdot\hat{\mb{z}})\dd{V},\]
+\[I_{xz}=I_{zx}=-\iiint_V\rho(\mb{r})\qty(\mb{r}\cdot\hat{\mb{i}})\cdot\qty(\mb{r}\cdot\hat{\mb{z}})\dd{V},\]
+where $\hat{\mb{i}},\hat{\mb{j}},\hat{\mb{k}}$ are the unit vectors in the positive $x$-, $y$-, and $z$-axes.
 \sssc{Angular momentum (角動量)}
 The angular momentum $\mb{L}$ is
-\[\mb{L}=I\bomega=\iint_V\rho{\mb{r}}\mb{r}\times\dot{\mb{r}}\dd{V}.\]
+\[\mb{L}=\mb{I}\bomega=I\bomega=\iint_V\rho{\mb{r}}\mb{r}\times\dot{\mb{r}}\dd{V}.\]
 \sssc{Torque (力矩)}
 The torque $\btau$ is the twisting effect of a force $F$ applied to a rigid body at position $\mb{r}$ from its axis of rotation given by
 \[\btau=\mb{r}\times\mb{F},\]
@@ -504,8 +521,6 @@ where $m$ is the total mass of the rigid body and $\mb{v}$ is the velocity of th
 
 The total kinetic energy $K$ of the rigid body is given by
 \[K=\frac{1}{2}\iint_V\rho{\mb{r}}\abs{\dot{\mb{r}}}^2\dd{V}=K_r+K_t.\]
-\sssc{Linearity}
-Qunatities of a rotation about an axis or describing the rotational property of a rigid body to do such rotations, such as angular displacement, are linear only for rotations around a same axis and, as three-dimensional, linear for infinisimal rotations. However, they are not linear for arbitrary rotations.
 \sssc{Perpendicular axis theorem (垂直軸定理或正交軸定理) or plane figure theorem}
 Define axes $x,y,z$ perpendicular to each other and meet at origin $O$. Suppose a planar lamina rigid body lies on the $xy$ plane. Let $I_x,I_y,I_z$ be moments of inertia about axis $x,y,z$ respectively, then the perpendicular axis theorem states that
 \[I_z=I_x+I_y.\]
@@ -520,6 +535,19 @@ Suppose a rigid body of mass $m$ is rotated about an axis $z$ passing through th
 一剛體受三力達轉動平衡，則三力延長線必交於一點。
 \sssc{靜力平衡（Static equilibrium）}
 指一系統達移動平衡且轉動平衡。
+\sssc{Precession (進動) and nutation (章動)}
+The (instantaneous) precession rate (（瞬時）進動率) $\bOmega$ is defined as
+\[\bOmega=\frac{\mb{L}\times\btau}{\abs{\mb{L}}^2}\]
+to describe the angular velocity of the axis of rotation.
+
+Sometimes $\Omega=\abs{\bOmega}$ is used as the instantaneous precession rate.
+
+Suppose a rigid body of which the mass is distributed axially symmetric about the rotational axis fixed to the body, called a spinning top or simply top, is subjected to a constant force $\mb{F}$ on the COM, which is on the axis, and another force $-\mb{F}$ on a fulcrum (支點) that is also on the axis. Let the relative position of the COM from the fulcrum be $\mb{r}$. The torque $\btau$ is
+\[\btau=\mb{r}\times\mb{F}.\]
+The steady solution is such that the precession rate is a constant $\bOmega_c$ called steady procession dependent on the angular momentum $\mb{L}$
+\[\bOmega_c=
+
+
 \ssc{參考系（Frame of reference or reference frame）}
 \sssc{參考系（Frame of reference or reference frame）}
 一個抽象的座標系，其原點、方向和比例已在物理空間中基於一組參考點（reference points）而指定。參考點指在數學和物理上定義的幾何點。
