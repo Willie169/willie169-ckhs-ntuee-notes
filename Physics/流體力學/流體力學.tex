@@ -1,0 +1,120 @@
+\documentclass[a4paper,12pt]{article}
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{3}
+\input{/usr/share/LaTeX-ToolKit/template.tex}
+\begin{document}
+\title{流體力學}
+\author{沈威宇}
+\date{\temtoday}
+\titletocdoc
+\sct{流體力學（Fluid Mechanics）}
+\ssc{符號約定}
+\begin{itemize}
+\item $t$：時間
+\item $\mathbf{v}$：流速場
+\item $\rho$：密度
+\item $V$：控制體積
+\item $M$：流體分子分子量
+\item $n$：流體分子分子數
+\item $p$：（絕對（absolute））壓力（pressure）
+\item $R$：理想氣體常數
+\item $T$：絕對溫度
+\item $u$：每個流體分子的平均內能
+\item $\frac{\mathrm{D}}{\mathrm{D}t}$：物質導數（Material derivative）/隨質導數（Substantial derivative）
+\item $\mu$：動力黏度（Dynamic viscosity）
+\item $\nu$：運動黏度（Kinetic viscosity）
+\item $C$：阻力係數（Drag coefficient）
+\item $L$：特徵長度（Characteristic length）: Typical length of the system, chosen for relevance and simplicity, not uniqueness.
+\item $v$：特徵速率（Characteristic speed）: Typical speed of the system, chosen for relevance and simplicity, not uniqueness.
+\end{itemize}
+\ssc{流體壓力（Fluid pressure）}
+\sssc{靜力平衡流體壓力}
+均勻重力場$g$中一密度$\rho$均勻流體處於靜力平衡，若深度$h_0\geq 0$處壓力$p_0$，則深度$h_1$處壓力$p_1$為：
+\[p_1=p_0+\rho g(h_1+h_0).\]
+\sssc{連通管（communicating tubes）原理}
+流體面以下相連的兩或多個相同同相物質的流體柱，平衡時等高處壓力相等。
+\sssc{帕斯卡定律（Pascal's law）/帕斯卡原理（Pascal's principle）}
+靜止的封閉不可壓縮流體中任何一點的壓力變化都會均勻且不減弱地傳遞到整個流體各個方向上的所有點，並且由於壓力而產生的力與封閉壁成直角。
+\sssc{液壓槓桿（Hydraulic lever）/千斤頂（Jack）}
+令盛有均勻不可壓縮液體之容器有兩開口而下方連通，面積$A_0,A_1$，均塞有質量與摩擦力不計之活塞，各開口與其活塞等寬處均足夠長。若在面積$A_0$開口施力$F_0$，則產生壓力
+\[p=\frac{F_0}{A_0},\]
+使得面積$A_1$開口的活塞受向上力
+\[F_i=A_ip.\]
+若以恆定力$F_0$推動面積$A_0$開口之活塞使下降距離$d_0$，則面積$A_1$開口的活塞上升
+\[d_1=\frac{A_0d_0}{A_1},\]
+做功
+\[W=F_0d_0=F_1d_1.\]
+若以力$F_0$推動面積$A_0$開口之活塞使以速率$v_0$下降，則面積$A_1$開口的活塞上升之速率為
+\[v_1=\frac{A_0v_0}{A_1},\]
+做功率
+\[P=F_0v_0=F_1v_1.\]
+\sssc{Gauge pressure (表壓)}
+Gauge pressure is the difference between the absolute pressure at a point and the atmospheric pressure.
+\sssc{浮力（Buoyancy）}
+流體中的物體受到的壓力對其表面的面積分。
+\sssc{阿基米德原理（Archimedes' principle）}
+任何物體，無論全部或部分浸入流體，都會受到一個等於該物體排開的流體重量的力的浮力。
+\sssc{物體的浮沉}
+令密度$\rho$物體在密度$d$流體中受浮力$F$、重力$W$：
+\begin{longtable}[c]{|c|c|c|}
+\hline
+物體行為 & 力 & 密度 \\\hline\endhead
+漂浮（floating） & $F=G$ & $\rho<F$ \\\hline
+懸浮（suspended） & $F=G$ & $\rho=F$ \\\hline
+沉底（sinked） & $F<G$ & $\rho>F$ \\\hline
+上浮（rising） & $F>G$ & $\rho<F$ \\\hline
+下沉（sinking） & $F<G$ & $\rho>F$ \\\hline
+\end{longtable}\FB
+其中：
+\begin{itemize}
+\item\textbf{漂浮}：物體在流體面上，以外力下壓後移去外力仍會上浮出流體面。
+\item\textbf{懸浮}：物體在流體中任一位置，以外力移動後移去外力會保持位置而不會回復到之前的高度。
+\item\textbf{沉底}：物體沉於器底，以外力上提後移去外力仍會下沉至器底。
+\item\textbf{上浮}：一個動態過程，最終達到漂浮。
+\item\textbf{下沉}：一個動態過程，最終達到沉底。
+\end{itemize}
+\ssc{流體運動（Fluid motion）}
+\sssc{物質導數（Material derivative）/隨質導數（Substantial derivative）}
+對於任意場$\mb{y}$，其物質導數$\frac{\mathrm{D}\mb{y}}{\mathrm{D}t}$定義為：
+\[\frac{\mathrm{D}\mb{y}}{\mathrm{D}t}=\pdv{\mb{y}}{t}+\mathbf{v}\cdot(\nabla \mb{y}).\]
+\sssc{連續性方程（Continuity equation）/質量守恆}
+\[\frac{\partial\rho}{\partial t}+\nabla\cdot(\rho\mathbf{v})=0\]
+\sssc{納維-斯托克斯方程式（Navier–Stokes equations）/動量守恆}
+\[\rho\frac{\partial\mathbf{v}}{\partial t}+\rho(\mathbf{v}\cdot\nabla)\mathbf{v}=-\nabla p\]
+\sssc{歐拉方程式（Euler equations）}
+對於零黏度、零導熱率的流體：
+\[\begin{aligned}
+\frac{\mathrm{D}\rho}{\mathrm{D}t}&=-\rho\nabla\cdot\mathbf {v}\\
+\frac{\mathrm{D}\mathbf{v}}{\mathrm{D}t}&=-\frac{\nabla p}{\rho}+\frac{\partial\mathbf{v}}{\partial t}\\
+\frac{\mathrm{D}u}{\mathrm{D}t}&=-\frac{p}{\rho}\nabla\cdot\mathbf{v}
+\end{aligned}\]
+\sssc{不可壓縮/體積守恆約束}
+對於不可壓縮的流體：
+\[\frac{\mathrm{D}\rho}{\mathrm{D}t}=0\]
+\[\frac{\mathrm{D}u}{\mathrm{D}t}=0\]
+\[\nabla\cdot\mathbf{v}=0\]
+\sssc{Laminar flow (層流)}
+Laminar flow is the property of fluid particles to follow smooth paths in layers, with each layer moving smoothly past the adjacent layers without mixing.
+\sssc{Ideal fluid (理想流體)}
+An ideal fluid is incompressible and lacks viscosity, and its flow is steady and irrotational.
+\sssc{Streamline}
+A streamline is the oath followed by an individual fluid particle.
+\ssc{Viscosity (黏度/黏滯性)}
+\sssc{Drag, fluid resistance, or viscous force (阻力)}
+A force acting opposite to the direction of motion of any object moving with respect to a surrounding fluid.
+\sssc{Viscosity of Newtonian fluid (牛頓流體)}
+Let the viscous stress tensor ($3\times 3$) be $p$ (Pa). Then any fluid such that there exists a constant $3\times 3$ tensor or scalar $\mu$ (Pa s), called the dynamic viscosity (動力黏度), such that
+\[p=\mu\nabla v.\]
+is called Newtonian.
+
+And the kinetic viscosity (運動黏度) $\nu$ is defined as
+\[\nu=\frac{\mu}{\rho}.\]
+\sssc{Reynolds number, Re (雷諾數)}
+\[\operatorname{Re}=\frac{\rho v L}{\mu}=\frac{v L}{\nu}\]
+\sssc{Drag equation (阻力方程式)}
+The drag force $\mb{F}$ of fluid with density $\rho$ and high Reynolds number ($\operatorname{Re}\gg 1$) on an object with effective cross-sectional area (截面積) $A$ and velocity $\mb{v}$ relative to the fluid is given by
+\[\mb{F}=-\frac{1}{2}C\rho A\abs{\mb{v}}^2\hat{\mb{v}},\]
+where $C$ is the drag coefficient (阻力係數), a dimensionless number, which is not actually a constant but can be treated as a constant in some scenarios.
+\sssc{Stokes' law (斯托克定律)}
+In a laminar flow of fluid of homogeneous (uniform in composition) material with zero Reynolds number and dynamic viscosity $\mu$, and that particles do not interfere with each other, a sphere particle with radius $a$ and smooth surfaces moving in velocity $\mb{v}$ in the fluid is subjected to a drag force $\mb{F}$, known as Stokes' drag, given by
+\[\mb{F}=-6\pi\mu a\mb{v}.\]
