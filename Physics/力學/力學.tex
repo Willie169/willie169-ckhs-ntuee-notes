@@ -1302,7 +1302,26 @@ U&=-\frac{n}{2}\sum_{k=1}^{n-1}\frac{Gm^2}{\sqrt{2r^2\left(1-\cos\frac{2\pi k}{n
 \[H=\frac{v}{r}=\frac{2}{3t}\]
 \[H=\frac{2}{3}t^{-1}=0.5\times 10^{-10}\tx{\ yr}^{-1}\]
 \[t=1.33\times 10^{10}\tx{\ yr}\]
-\ssc{流體壓力}
+\ssc{流體力學（Fluid Mechanics）}
+\sssc{符號約定}
+\begin{itemize}
+\item $t$：時間
+\item $\mathbf{v}$：流速場
+\item $\rho$：密度
+\item $V$：控制體積
+\item $M$：流體分子分子量
+\item $n$：流體分子分子數
+\item $p$：壓力
+\item $R$：理想氣體常數
+\item $T$：絕對溫度
+\item $u$：每個流體分子的平均內能
+\item $\frac{\mathrm{D}}{\mathrm{D}t}$：物質導數（Material derivative）/隨質導數（Substantial derivative）
+\item $\mu$：動力黏度（Dynamic viscosity）
+\item $\nu$：運動黏度（Kinetic viscosity）
+\item $C$：阻力係數（Drag coefficient）
+\item $L$：特徵長度（Characteristic length）
+\item $v$：特徵長度（Characteristic speed）
+\end{itemize}
 \sssc{流體壓力（Fluid pressure）}
 流體柱底所受的的壓力等於流體密度乘以深度乘以重力加速度加上流體頂所受的壓力。
 \sssc{連通管原理}
@@ -1332,6 +1351,47 @@ U&=-\frac{n}{2}\sum_{k=1}^{n-1}\frac{Gm^2}{\sqrt{2r^2\left(1-\cos\frac{2\pi k}{n
 \item\textbf{上浮}：一個動態過程，最終達到漂浮。
 \item\textbf{下沉}：一個動態過程，最終達到沉底。
 \end{itemize}
+\sssc{物質導數（Material derivative）/隨質導數（Substantial derivative）}
+對於任意場$\mb{y}$，其物質導數$\frac{\mathrm{D}\mb{y}}{\mathrm{D}t}$定義為：
+\[\frac{\mathrm{D}\mb{y}}{\mathrm{D}t}=\pdv{\mb{y}}{t}+\mathbf{v}\cdot(\nabla \mb{y}).\]
+\sssc{連續性方程（Continuity equation）/質量守恆}
+\[\frac{\partial\rho}{\partial t}+\nabla\cdot(\rho\mathbf{v})=0\]
+\sssc{納維-斯托克斯方程式（Navier–Stokes equations）/動量守恆}
+\[\rho\frac{\partial\mathbf{v}}{\partial t}+\rho(\mathbf{v}\cdot\nabla)\mathbf{v}=-\nabla p\]
+\sssc{歐拉方程式（Euler equations）}
+對於零黏度、零導熱率的流體：
+\[\begin{aligned}
+\frac{\mathrm{D}\rho}{\mathrm{D}t}&=-\rho\nabla\cdot\mathbf {v}\\
+\frac{\mathrm{D}\mathbf{v}}{\mathrm{D}t}&=-\frac{\nabla p}{\rho}+\frac{\partial\mathbf{v}}{\partial t}\\
+\frac{\mathrm{D}u}{\mathrm{D}t}&=-\frac{p}{\rho}\nabla\cdot\mathbf{v}
+\end{aligned}\]
+\sssc{不可壓縮約束}
+對於不可壓縮的流體：
+\[\frac{\mathrm{D}\rho}{\mathrm{D}t}=0\]
+\[\frac{\mathrm{D}u}{\mathrm{D}t}=0\]
+\[\nabla\cdot\mathbf{v}=0\]
+\ssc{Characteristic length (特徵長度) and characteristic speed (特徵速率)}
+Typical length and speed of the system, chosen for relevance and simplicity, not uniqueness.
+\sssc{Drag, fluid resistance, or viscous force (阻力)}
+A force acting opposite to the direction of motion of any object moving with respect to a surrounding fluid.
+\sssc{Viscosity (黏度/黏滯性) of Newtonian fluid (牛頓流體)}
+Let the viscous stress tensor ($3\times 3$) be $p$ (Pa). Then any fluid such that there exists a constant $3\times 3$ tensor or scalar $\mu$ (Pa s), called the dynamic viscosity (動力黏度), such that
+\[p=\mu\nabla v.\]
+is called Newtonian.
+
+And the kinetic viscosity (運動黏度) $\nu$ is defined as
+\[\nu=\frac{\mu}{\rho}.\]
+\sssc{Reynolds number, Re (雷諾數)}
+\[\operatorname{Re}=\frac{\rho v L}{\mu}=\frac{v L}{\nu}\]
+\sssc{Drag equation (阻力方程式)}
+The drag force $\mb{F}$ of fluid with density $\rho$ and high Reynolds number ($\operatorname{Re}\gg 1$) on an object with effective cross-sectional area (截面積) $A$ and velocity $\mb{v}$ relative to the fluid is given by
+\[\mb{F}=-\frac{1}{2}C\rho A\abs{\mb{v}}^2\hat{\mb{v}},\]
+where $C$ is the drag coefficient (阻力係數), a dimensionless number, which is not actually a constant but can be treated as a constant in some scenarios.
+\sssc{Laminar flow (層流)}
+Laminar flow is the property of fluid particles to follow smooth paths in layers, with each layer moving smoothly past the adjacent layers without mixing.
+\sssc{Stokes' law (斯托克定律)}
+In a laminar flow of fluid of homogeneous (uniform in composition) material with zero Reynolds number and dynamic viscosity $\mu$, and that particles do not interfere with each other, a sphere particle with radius $a$ and smooth surfaces moving in velocity $\mb{v}$ in the fluid is subjected to a drag force $\mb{F}$, known as Stokes' drag, given by
+\[\mb{F}=-6\pi\mu a\mb{v}.\]
 \ssc{等速度運動（Constant velocity motion）}
 指速度恆定之運動，必為直線運動或靜止。
 \sssc{等加速度運動（Constant acceleration motion）}
