@@ -43,12 +43,13 @@ and $N$ in base $y$ can be obtained by first taking the integer part of the magn
 \[(r_kr_{k-1}\ldots r_2r_1)_y\]
 and then obtaining the fractional part of the magnitude of it using vertical addition where the $i$th row is $s_i$ with the units digit of $s_i$ in the $i$th digit to the right of the radix point, for each $i$, where carry propagation is applied to ensure all digits are valid in base $y$, i.e. $<y$.
 \een
+This conversion method is $O(n\log n)$.
 
 To convert an expression that is a radix-independent fuction $f$ of a vector of numbers $(p_1,p_2,\ldots)$, we convert each $p_i$ to the wanted base, let it be $q_i$, then the wanted result is $f(q_1,q_2,\ldots)$.
 \sssc{Power-base conversion method}
-To convert a base-$b$ number into base $b^n$ with $b,n\in\mathbb{N}_{>1}$, we group the digits to the left and right of the radix point into blocks of $n$ digits starting from the digits closest to the radix point and convert each block to one digit in base $b^n$.
+To convert a base-$b$ number into base $b^n$ with $b,n\in\mathbb{N}_{>1}$, we group the digits to the left and right of the radix point into blocks of $n$ digits starting from the digits closest to the radix point and convert each block to one digit in base $b^n$. This conversion method is $O(n)$.
 \sssc{Root-base conversion method}
-To convert a base-$b^n$ number in into base $b$ with $b,n\in\mathbb{N}_{>1}$, we convert each digit to $n$ digits in base $b$ and concatenate them.
+To convert a base-$b^n$ number in into base $b$ with $b,n\in\mathbb{N}_{>1}$, we convert each digit to $n$ digits in base $b$ and concatenate them. This conversion method is $O(n)$.
 \sssc{Product and quotient-base conversion method}
 We want to convert a number in base $x$ with $x\in\mathbb{N}_{>1}$,
 \[N=((-1)^m\ldots d_2d_1d_0.d_{-1}d_{-2}\ldots)_x,\quad m\in\{0,1\},\]
@@ -58,7 +59,7 @@ We take $D_i=d_i\cdot a^{-i}$, which is later treated directly as in base $y$, f
 
 Then, $N$ is
 \[(-1)^m\sum_iD_i\times y^i,\]
-and $N$ in base $y$ can be obtained by vertical addition where the $i$th row is $D_i$ with the units digit of $D_i$ in the $(i+1)$th digit to the left of the radix point, for each $i$, where carry propagation is applied to ensure all digits are valid in base $y$, i.e. $<y$.
+and $N$ in base $y$ can be obtained by vertical addition where the $i$th row is $D_i$ with the units digit of $D_i$ in the $(i+1)$th digit to the left of the radix point, for each $i$, where carry propagation is applied to ensure all digits are valid in base $y$, i.e. $<y$. This conversion method is $O(n)$.
 \sssc{Criterion of finite expansion after base conversion}
 A finite rational number with the fractional part of the magnitude of it expressed in fraction in base $x$ with $x\in\mathbb{N}_{>1}$ being $D_x$ can be expressed in finite digits in radix point in base $y\neq x$ with $y\in\mathbb{N}_{>1}$ iff the reduced denominator (denominator cancelled the greatest common factor with the numerator) of $D_x$ has no prime factor that is not a prime factor of $y$.
 \subsection{Binary}
