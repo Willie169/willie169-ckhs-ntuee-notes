@@ -454,7 +454,13 @@ Another form is drawing the upper and lower triangles of the previous form as tw
 
 Yet another form is the same as the previous one but with Veitch diagram labeling and drawing two halves of boundary lines of a group surrounding two parts of a group on different maps instead of a line.
 \sssc{Finding minimum POS form}
-We can use K-maps to find minimum POS form of a completely or incompletely specified Boolean function by grouping $0$s instead of $1$s ($0$s and $X$s are allowed in a group), in which each group corresponds to a sum term, and the product of the sum terms corresponding to the groups in an allowed (covering all 0's) collections that contain the fewest groups is a minimum POS form of the Boolean function.
+We can use K-maps to find minimum POS form of a completely or incompletely specified Boolean function by grouping $0$s instead of $1$s ($0$s and $X$s are allowed in a group), in which each group represents an implicate of $f$ by the following rules:
+\ben
+\item Let the set of all input variables that are $1$ in all cells in the group be $O$.
+\item Let the set of all input variables that are $0$ in all cells in the group be $Z$.
+\item The implicant represented by that group is $\sum_{o\in O}o'+\sum_{z\in Z}z$.
+\een
+, and the product of the sum terms corresponding to the groups in an allowed (covering all 0's) collections that contain the fewest groups is a minimum POS form of the Boolean function.
 \ssc{Map-entered variable (MEV) or Variable entrant map (VEM)}
 Map-entered variable (MEV), aka variable entrant map (VEM), simplification is an extension of Karnaugh maps used to simplify Boolean functions with typically more than four variables by allowing some variables to be entered as symbols or expressions inside the K-map cells rather than expanding the map's dimensions.
 \sssc{One MEV}
