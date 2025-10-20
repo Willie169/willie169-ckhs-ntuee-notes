@@ -40,26 +40,26 @@ A Boolean function is a logical operation performed on one or more binary inputs
 \sssc{AND / Conjunction / Logical Multiplication}
 \begin{itemize}
 \item Symbol: $A \cdot B$, $A*B$, or $AB$
-\item Definition: Multiple inputs, one output. True if all inputs are true and false otherwise.
+\item Definition: At least two inputs, one output. True if all inputs are true and false otherwise.
 \eit
 \sssc{OR / Disjunction / Logical Addition / Inclusive OR}
 \begin{itemize}
 \item Symbol: $A + B$
-\item Definition: Multiple inputs, one output. True if at least one input is true and false otherwise.
+\item Definition: At least two inputs, one output. True if at least one input is true and false otherwise.
 \eit
 \sssc{NAND / Not AND}
-Definition: Multiple inputs, one output. True if all inputs are false and false otherwise.
+Definition: At least two inputs, one output. True if all inputs are false and false otherwise.
 \sssc{NOR / Not OR}
-Definition: Multiple inputs, one output. True if at least one input is false and false otherwise.
+Definition: At least two inputs, one output. True if at least one input is false and false otherwise.
 \sssc{XOR / Exclusive OR}
 \begin{itemize}
 \item Symbol: $A \oplus B$
-\item Definition: Multiple inputs, one output. True if odd number of inputs are true and false otherwise.
+\item Definition: At least two inputs, one output. True if odd number of inputs are true and false otherwise.
 \eit
 \sssc{XNOR / Logical equivalence / Exclusive NOR}
 \begin{itemize}
 \item Symbol: $A\equiv B$ or $A\odot B$
-\item Definition: Multiple inputs, one output. True if even number (including 0) of inputs are true and false otherwise.
+\item Definition: At least two inputs, one output. True if even number (including 0) of inputs are true and false otherwise.
 \eit
 \sssc{IMPLY / Logical conditional}
 \begin{itemize}
@@ -112,7 +112,7 @@ A functionally complete set is a set of logic operators and constant sources (0 
 A Boolean vector function or a Boolean multi-output function is a function $f\colon\{1,0\}^n\to\{1,0\}^m$. A Boolean vector function can be specified with truth table or as a tuple of $m$ Boolean functions.
 \ssc{Logic gate}
 A logic gate is an electronic device that performs a Boolean function.
-
+\sssc{Logic gate symbols}
 Logic gates symbols (inputs at left, two inputs for example for AND, OR, NAND, NOR, XOR, and XNOR gate):
 \begin{longtable}[c]{|p{0.2\tw}|p{0.2\tw}|p{0.2\tw}|p{0.2\tw}|}
 \hline
@@ -131,7 +131,9 @@ NIMPLY gate & \cktus{nor gate}{in} & \cktiec{nor gate}{in} & NIMPLY \\\hline
 
 An empty circle, called inversion bubble or bubble, means inverting the input before inputting to the gate when at a input to a gate, and means inverting the output before outputting from the gate when at the output from a gate.
 
-By using inversion bubbles at the inputs instead of the output in logic gates symbol except IMPLY and NIMPLY gates, using inversion bubbles at the output and second input instead of the first input in IMPLY gate symbol, and using inversion bubbles at the second input instead of the first input and the output in NIMPLY gate symbol, we obtain the alternative gate symbols:
+The diagrams of logic circuits are called block diagrams. The number of gate inputs of a circuit is the sum of the number of inputs to all gates in the circuit.
+\sssc{Alternative symbols}
+By using inversion bubbles at the inputs instead of the output in logic gates symbol except IMPLY and NIMPLY gates, using inversion bubbles at the output and second input instead of the first input in IMPLY gate symbol, and using inversion bubbles at the second input instead of the first input and the output in NIMPLY gate symbol, we obtain the alternative gate symbols (inputs at left, two inputs for example for AND, OR, NAND, NOR, XOR, and XNOR gate):
 \begin{longtable}[c]{|p{0.2\tw}|p{0.2\tw}|p{0.2\tw}|p{0.2\tw}|}
 \hline
 Type & Distinctive shape (ANSI/IEEE Std 91/91a-1991 & Rectangular shape (IEEE Std 91/91a-1991/IEC 60617-12:1997) & Boolean function \\\hline\endhead
@@ -148,10 +150,16 @@ NIMPLY gate & \cktus{and gate}{ni} & \cktiec{and gate}{ni} & NIMPLY \\\hline
 \end{longtable}
 
 Sometimes multiple (typically two) outputs are drawn on a gate with some of them (typically one of the two) with inversion bubble. This is logically equivalent to drawing one gate of that type for each of the noninverted or inverted outputs with the same input lines.
+\sssc{Fan-ins}
+The maximum number of inputs to a gate is called the fan-in of the gate.
 
-An AND, OR, NAND, NOR, XOR, or XNOR gate with $n$ inputs is sometimes called with suffix $n$, e.g. NAND2 gate is a NAND gate with 2 inputs. An AND, OR, NAND, NOR, XOR, or XNOR gate without the number of inputs specified is sometimes assumed to have two inputs.
+An AND, OR, NAND, NOR, XOR, or XNOR gate with $n$ inputs or fan-in $n$ is sometimes called with suffix $n$, e.g. NAND2 gate is a NAND gate with 2 inputs or fan-in 2.
 
-The diagrams of logic circuits are called block diagrams.
+An AND, OR, NAND, NOR, XOR, or XNOR gate without fan-in specified is sometimes assumed to have fan-in 2.
+
+The fan-in of a practical logic gate is limited and may be two, three, four, eight, or some other number depending on the type of gates used.
+\sssc{Buffer}
+A gate output can only be connected to a limited number of other device inputs without degrading the performance of a digital system. A simple buffer may be used to increase the driving capability of a gate output.
 \ssc{Theorems}
 \sssc{Idempotent Laws}
 \[XX = X,\quad X + X = X.\]
@@ -710,6 +718,8 @@ For incompletely specified Boolean functions, we do the following change to the 
 \sssc{Introduction}
 The maximum number of gates cascaded in series between a circuit input and the output is referred to as the number of levels of gates. Thus, a function written in sum-of-products form or in product-of-sums form corresponds directly to a two-level gate circuit. As is usually the case in digital circuits where the gates are driven from flip-flop outputs, we will assume that all variables and their complements are available as circuit inputs. For this reason, we will not normally count inverters which are connected directly to input variables.
 
+If a realization of a circuit requires more inputs to a gate than its fan-in, factoring or multiplying out the logic expression to obtain a more-level realization is necessary.
+
 The level starting with the output gate is numbered 1.
 
 Given multi-input logic gates $A_1,A_2,\ldots A_m$, $A_1-A_2-\ldots A_mi$ circuit means a $m$-level circuit composed of a level of $A_1$ gates followed by a level of $A_2$ gate followed by $\ldots$ an $A_m$ gate at the output.
@@ -804,10 +814,6 @@ NOR gate & AND gate \\\hline
 XOR gate & XNOR gate \\\hline
 XNOR gate & XOR gate \\\hline
 \end{longtable}
-\sssc{Limited gate fan-ins}
-In practical logic design problems, the maximum number of inputs on each gate (or the fan-in) is limited. Depending on the type of gates used, this limit may be two, three, four, eight, or some other number. If a realization of a circuit requires more gate inputs than allowed, factoring the logic expression to obtain a more-level realization is necessary.
-\sssc{Buffer}
-A gate output can only be connected to a limited number of other device inputs without degrading the performance of a digital system. A simple buffer may be used to increase the driving capability of a gate output.
 \ssc{Multiple-output combinational circuits}
 \sssc{Minimal cost realization}
 Solution of digital design problems often requires the realization of several completely or incompletely specified Boolean functions of the same variables, that is, a completely or incompletely specified Boolean vector function. Although each function could be realized separately, the use of some gates in common between two or more functions sometimes leads to a more economical realization. Thus in realizing multiple-output circuits, the use of a minimum SOP for each function does not necessarily lead to a minimum cost realization for the circuit as a whole.
