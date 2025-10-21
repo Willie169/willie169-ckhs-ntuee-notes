@@ -228,7 +228,7 @@ $SSA$型的討論：若已知$a$、$b$、$\angle A$：
 \ssc{各體公式}
 \[\tx{柱體體積}=\tx{底面積}\times \tx{高}\]
 \[\tx{錐體體積}=\frac{1}{3}\tx{底面積}\times \tx{高}\]
-\[\tx{球體體積}=\f{4}{3}\pi\times\tx{半徑}^3\]
+\[\tx{球體體積}=\frac{4}{3}\pi\times\tx{半徑}^3\]
 \[\tx{球體表面積}=4\pi\times\tx{半徑}^2\]
 \ssc{四面體}
 \sssc{正四面體}
@@ -267,8 +267,19 @@ In a Euclidean vector space, vectors whose components are all integers are calle
 \ssc{二維空間}
 \sssc{Quadrant (象限)}
 \RNum{1}(+, +), \RNum{2}(-, +), \RNum{3}(-, -), \RNum{4}(+, -).
-\sssc{極座標系（Polar Coordinate System）}
-極座標系是由一參考點，稱極點（pole）或原點（origin），與一始於極點的射線，稱極軸（polar axis），定義的二維座標系。令一個點在以極點為原點、極軸為$x$軸正向的二維右手笛卡爾座標系中有座標$(r\cos\theta,r\sin\theta)$使得$r\geq 0\land\theta\in[0,2\pi)$，則該點在此極座標系中有極座標$(r;\theta)$，其中$r$稱徑向距離（radial distance or radius），即與原點的距離，$\theta$稱極角（polar angle），即相對於$x$軸、逆時針增加的角位置。
+\sssc{Polar coordinate system (極座標系)}
+A polar coordinate system is a two-dimensional coordinate system that specifies point positions by a point called pole and a polar axis (a reference ray) that starts from the pole. The two polar coordinates $(r,\theta)$ are:
+\bit
+\item the radial distance $r\in\bbR_{\geq 0}$ defined as the distance of the point from the origin; and
+\item the polar angle, azimuth, or azimuthal angle $\theta$ defined as any signed angle of the ray from the pole to the point from the polar axis with counterclockwise being positive and clockwise being negative.
+\eit
+If the pole and polar axis of a polar coordinate system is the origin and the positive direction of the $x$ axis of a Cartesian coordinate system, then
+\[x=r\cos\theta,\]
+\[y=r\sin\theta;\]
+\[r=\sqrt{x^2+y^2},\]
+\[\theta=\operatorname{arctan2}(y,x)+2k\pi,\quad k\in\bbZ.\]
+Volume integral:
+\[\iint_Sf(x,y)\dd{S}=\int_{\theta_\text{min}}^{\theta_\text{max}}\int_{r_\text{min}(\theta)}^{r_\text{max}(\theta)}f(r\cos\theta,r\sin\theta)r\dd{r}\dd{\theta}.\]
 \ssc{三維空間}
 \sssc{Right-hand rule (右手定則)}
 Right-hand rule is a common used orientation for a three-dimensional space. In a right-handed Cartesian coordinate system, if you point the thumb of your right hand in the positive $x$-axis direction and your index finger in the positive $y$-axis direction, then your middle finger (extended perpendicularly from the palm) will point in the positive $z$-axis direction. If not specified otherwise, right-handed Cartesian coordinate system is usually used.
@@ -295,7 +306,7 @@ Properties:
 \[(\mathbf{A}\times\mathbf{B})\times\mathbf{C}=(\mathbf{A}\cdot\mathbf{C})\mathbf{B}-(\mathbf{B}\cdot\mathbf{C})\mathbf{A}.\]
 \eit
 \sssc{ISO 31-11 cylindrical coordinate system (圓柱座標系)}
-A cylindrical coordinate system is a three-dimensional coordinate system that specifies point positions around a main axis (a chosen directed line) and an auxiliary axis (a reference ray) with the intersection of the two axes called the origin and the plane passing through the origin and perpendicular to the main axis equipped with polar coordinate system with the polar axis being the auxiliary axis called the reference plane. The three cylindrical coordinates $(\rho,\varphi,z)$ are:
+A cylindrical coordinate system is a three-dimensional coordinate system that specifies point positions by a main axis (a chosen directed line) and an auxiliary axis (a reference ray) with the intersection of the two axes called the origin and the plane passing through the origin and perpendicular to the main axis equipped with polar coordinate system with the polar axis being the auxiliary axis called the reference plane. The three cylindrical coordinates $(\rho,\varphi,z)$ are:
 \bit
 \item the radial distance $\rho\in\bbR_{\geq 0}$ defined as the perpendicular distance of the point from the main axis;
 \item the azimuth or azimuthal angle $\varphi\in(-\pi,\pi]$ defined as the polar angle of the projection of the point on the reference plane and undefined on the main axis; and
@@ -308,8 +319,10 @@ If the main axis and the auxiliary axis of a cyclindrical coordinate system is t
 \[\rho=\sqrt{x^2+y^2},\]
 \[\varphi=\begin{cases}\sgn(y)\arccos\frac{x}{\sqrt{x^2+y^2}},\quad&y\neq 0\lor x>0\\\pi,\quad&y=0\land x<0\end{cases},\]
 \[z=z.\]
+Volume integral:
+\[\iiint_Vf(x,y,z)\dd{V}=\int_{z_\text{min}}^{z_\text{max}}\int_{\rho_\text{min}}^{\rho_\text{max}}\int_{\varphi_\text{min}}^{\varphi_\text{max}}f(\rho\cos\varphi,\rho\sin\varphi,z)\rho\dd{\varphi}\dd{\rho}\dd{z}.\]
 \sssc{ISO 80000-2, inclination-azimuth, or physics convention spherical coordinate system (球座標系)}
-A spherical coordinate system is a three-dimensional coordinate system that specifies point positions around a polar axis (a chosen directed line) and an auxiliary axis (a reference ray) with the intersection of the two axes called the origin and the plane passing through the origin and perpendicular to the polar axis equipped with polar coordinate system with the polar axis being the auxiliary axis called the reference plane. The three spherical coordinates $(r,\theta,\varphi)$ are:
+A spherical coordinate system is a three-dimensional coordinate system that specifies point positions by a polar axis (a chosen directed line) and an auxiliary axis (a reference ray) with the intersection of the two axes called the origin and the plane passing through the origin and perpendicular to the polar axis equipped with polar coordinate system with the polar axis being the auxiliary axis called the reference plane. The three spherical coordinates $(r,\theta,\varphi)$ are:
 \bit
 \item the radial distance or radius $r\in\bbR_{\geq 0}$ defined as the distance of the point from the origin;
 \item the polar angle, inclination, or zenith angle $\theta\in[0,\pi]$ defined as the angle between the ray from the origin to the point and the positive half of the polar axis and undefined at the origin; and
@@ -329,6 +342,8 @@ If the polar axis and the auxiliary axis of a spherical coordinate system is the
 \[r=\sqrt{\rho^2+z^2},\]
 \[\theta=\arctan\frac{\rho}{z},\]
 \[\varphi=\varphi.\]
+Volume integral:
+\[\iiint_Vf(x,y,z)\dd{V}=\int_{r_\text{min}}^{r_\text{max}}\int_{\theta_\text{min}}^{\theta_\text{max}}\int_{\varphi_\text{min}}^{\varphi_\text{max}}f(r\sin\theta\cos\varphi,r\sin\theta\sin\varphi,r\cos\theta)r^2\sin\theta\dd{\varphi}\dd{\theta}\dd{r}.\]
 \sct{Analytic Geometry (解析幾何)}
 下：空間為歐幾里德空間；位置$\mathbf{x}=(x_1,x_2,\ldots)$；第$i$軸正方向單位向量$\mathbf{e}_i$；一向量空間中兩點$P$、$Q$，$\ora{PQ}\coloneq Q-P$；$\hat{\mathbf{v}}$為$\mathbf{v}$正方向單位向量。
 \ssc{正整數維空間}
