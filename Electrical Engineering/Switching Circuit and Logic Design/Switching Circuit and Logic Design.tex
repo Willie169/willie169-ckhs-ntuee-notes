@@ -946,8 +946,6 @@ Several signals that perform a common function may be grouped together to form a
 \sssc{Multiplexer (MUX)}
 A multiplexer (MUX) or data selector has a group of data inputs and a group of control inputs (aka select inputs or select lines) and one output. The control inputs are used to select one of the data inputs and connect it to the output terminal. Multiplexers are frequently used in digital system design to select the data which is to be processed or stored.
 
-The symbol for a MUX is an isosceles trapezoid, where the longer parallel side contains the data input pins, one of the legs contains the control inputs, and the shorter parallel side contains the output pin, with control inputs combination for each data input to be selected written beside each data input.
-
 A $2^n$-to-1 MUX has $2^n$ data inputs $D_0,D_1,\ldots D_{2^n-1}$, $n$ control inputs $S_0,S_1,\ldots S_{n-1}$, and one output $Y$, with $Y$ given by
 \[Y=\sum_{i=0}^{2^{n-1}}D_i\cdot m_i(S_0,S_1,\ldots S_{n-1}),\]
 where $m_i$ is the minterm corresponding to $i$ for $n$-variable functions of $S_0,S_1,\ldots S_{n-1}$. When $m_i=1$, that is, the binary number $S_0S_1\ldots S_{n-1}$ is $i$, $I_i$ is the selected input.
@@ -955,6 +953,8 @@ where $m_i$ is the minterm corresponding to $i$ for $n$-variable functions of $S
 Alternatively, $Y$ can be written as
 \[Y=\prod_{i=0}^{2^{n-1}}\qty(D_i+M_i(S_0,S_1,\ldots S_{n-1})),\]
 where $M_i$ is the maxterm corresponding to $i$ for $n$-variable functions of $S_0,S_1,\ldots S_{n-1}$.
+
+The symbol of a MUX in block diagrams is an isosceles trapezoid with the longer parallel side contains the data input pins in order of the unsigned binary number corresponding to the control inputs combination for each data input to be selected with the control inputs combination for each data input to be selected written beside in the trapezoid, one of the legs, usually the leg farther from the data input that is selected when all control inputs are 0, contains the control inputs, and the shorter parallel side contains the output pin.
 
 We can implement a MUX with a two- or multi-level circuit that realizes the SOP or POS form given above.
 
@@ -985,12 +985,12 @@ A half subtractor is a combinational circuit that has two inputs, $A$ (minuend b
 A full adder is a combinational circuit that has three inputs, $A$ (augend bit), $B$ (addend bit), and $C_{in}$ (carry-in), and produces two ouputs $S$ (sum) and $C_{out}$ (carry-out), in which
 \[S=A\oplus B\oplus C_{in},\]
 \[C_{out}=AB+AC_{in}+BC_{in}.\]
-The symbol of a full adder in block diagram is a square with augend bit and addend bit inputs lines and sum output lines on two parallel sides, carry-in input and carry-out output with arrows on the other two sides respectively, and "full adder" in it.
+The symbol of a full adder in block diagrams is a square with augend bit and addend bit inputs lines and sum output lines on two parallel sides, carry-in input and carry-out output with arrows on the other two sides respectively, and "full adder" in it.
 \sssc{Full subtractor (FS)}
 A full subtractor is a combinational circuit that has three inputs, $A$ (minuend bit), $B$ (subtrahend bit), and $B_{in}$ (borrow-in), and produces two ouputs $D$ (difference) and $B_{out}$ (borrow-out), in which
 \[D=A\oplus B\oplus B_{in},\]
 \[B_{out}=A'B+A'B_{in}+BB_{in}.\]
-The symbol of a full subtractor in block diagram is a square with minuend bit and subtrahend bit inputs lines and difference output lines on two parallel sides, borrow-in input and borrow-out output with arrows on the other two sides respectively, and "full subtractor" in it.
+The symbol of a full subtractor in block diagrams is a square with minuend bit and subtrahend bit inputs lines and difference output lines on two parallel sides, borrow-in input and borrow-out output with arrows on the other two sides respectively, and "full subtractor" in it.
 \sssc{Parallel (binary) adder or ripple-carry adder (RCA)}
 An $n$-bit parallel adder or ripple-carry adder, or simply adder is a combinational circuit consisting of $n$ full adders called cells or stages. It has two $n$-bits unsigned or two's complement binary numbers as inputs (MSB to LSB), $A_{n-1}A_{n-2}\ldots A_0$ (augend) and $B_{n-1}B_{n-2}\ldots B_0$ (addned), and a constant $0$ input, $C_{in_0}=0$, and produces the $(n+1)$-bit sum of the two numbers as outputs, $C_{out_{n-1}}S_{n-1}S_{n-2}\ldots S_0$, in which the $(i+1)$th cell takes $A_i$ as augend bit, $B_i$ as addend bit, and $C_{in_i}$ as carry-in, and produces sum $S_i$ and carry-out $C_{out_i}$, that is,
 \[S_i=A_i\oplus B_i\oplus C_{in_i},\]
@@ -1046,11 +1046,11 @@ A decoder is a combinational circuit that converts binary input codes into a sin
 
 Each possible output of a decoder corresponds to a minterm of the inputs. Thus, we can OR them together to get the active-high outputs or NAND them together to get the active-low outputs.
 
-The symbol of an $n$-to-$2^n$ decoder in block diagram is a rectangle with inputs lines and output lines with arrows on two parallel sides and "($n$-to-$2^n$) decoder" in it.
+The symbol of an $n$-to-$2^n$ decoder in block diagrams is a rectangle with inputs lines and output lines with arrows on two parallel sides and "($n$-to-$2^n$) decoder" in it.
 \sssc{Normal encoders}
 A normal encoder is a combinational circuit that realize the inverse of a Boolean vector function realized by a decoder. A $2^n$-to-$n$ normal encoder realizes the inverse of a Boolean vector function $\{0,1\}^n\to\{0,1\}^{2^n}$ realized by a decoder, of which the domain of the inverse is a subset of $\{0,1\}^{2^n}$ that has $n$ elements, each of which with the 1-norm being $1$ (noninverted/active-high inputs) or $(2^n-1)$ (inverted/active-low inputs). If the input combination is not in the domain, the outputs are undefined.
 
-The symbol of a $2^n$-to-$n$ normal encoder in block diagram is a rectangle with inputs lines and output lines with arrows on two parallel sides and "($2^n$-to-$n$) normal encoder" in it.
+The symbol of a $2^n$-to-$n$ normal encoder in block diagrams is a rectangle with inputs lines and output lines with arrows on two parallel sides and "($2^n$-to-$n$) normal encoder" in it.
 \sssc{Priority encoders}
 A priority encoder resolves the undefined behaviour of normal encoders by assigning priority to the inputs.
 
@@ -1063,7 +1063,7 @@ The priority of inputs are usually as: for any $1\leq i<2^n$, the $(i+1)$-th inp
 
 An active-low inputs priority encoder invert the inputs; an active-low outputs priority encoder invert the outputs.
 
-The symbol of a $2^n$-to-$n$ priority encoder in block diagram is a rectangle with inputs lines and output lines with arrows on two parallel sides and "($2^n$-to-$n$) priority encoder" in it.
+The symbol of a $2^n$-to-$n$ priority encoder in block diagrams is a rectangle with inputs lines and output lines with arrows on two parallel sides and "($2^n$-to-$n$) priority encoder" in it.
 \ssc{Read-only memory (ROM)}
 A read-only memory (ROM) is a non-volatile (data is kept even when power is off) memory consists of an array of semiconductor devices that are interconnected to store an array of binary data. Once binary data is stored in the ROM, it can be read out whenever desired, but the data that is stored cannot be changed under normal operating conditions.
 
@@ -1073,7 +1073,7 @@ A $2^n$-word$\times m$-bit ROM stores $m$ $n$-variable functions by an $n$-to-$2
 
 The ROM table of a ROM is the truth tables of the functions realized combined by combining rows with same input combinations and listing the outputs of the functions in columns.
 
-The symbol of a $2^n$-word$\times m$-bit ROM in block diagram is a rectangle with inputs lines and output lines with arrows on two adjacent sides and "($2^n$-word$\times m$-bit) ROM" in it, or an $n$-to-$2^n$ decoder connected to a $2^n\times m$ memory array, with the latter being a rectangle with inputs lines and output lines with arrows on two adjacent sides.
+The symbol of a $2^n$-word$\times m$-bit ROM in block diagrams is a rectangle with inputs lines and output lines with arrows on two adjacent sides and "($2^n$-word$\times m$-bit) ROM" in it, or an $n$-to-$2^n$ decoder connected to a $2^n\times m$ memory array, with the latter being a rectangle with inputs lines and output lines with arrows on two adjacent sides.
 
 Common types of ROMs:
 \bit
