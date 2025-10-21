@@ -846,6 +846,8 @@ The procedure of designing a multiple-output NOR-gate circuit is
 When the input to a logic gate is changed, the output will not change instantaneously but change after a finite delay. If the change in output is delayed by time $\varepsilon$ with respect to the input, we say that this gate has a propagation delay of $\varepsilon$. In practice, the propagation delay for a 0 to 1 output change may be different than the delay for a 1 to 0 change. Propagation delays for integrated circuit gates may be as short as a few nanoseconds, and in many cases these delays can be neglected. However, in the analysis of some types of sequential circuits, even short delays may be important.
 
 Timing diagram shows various signals in the circuit as a function of time, often in waveform with time being the horizontal axis and each vertical block plots one signal with the same time scale. The vertical edges on the diagram where the signals change from 0 to 1 are called rising edges; the vertical edges on the diagram where the signals change from 1 to 0 are called falling edges.
+
+The propagation delay of a digital circuit is the time it needs to stabilize.
 \sssc{Inertial delays}
 If a logic gate will not respond to an input change that is shorter than a certain minimum pulse width $\varepsilon$, we say that this gate has a inertial delay of $\varepsilon$. Quite often the inertial delay value is assumed to be the same as the propagation delay of the gate. In contrast, if a gate always responds to input changes (with a propagation delay), no matter how closely spaced the input changes may be, the gate is said to have an ideal or transport delay.
 \sssc{Hazards}
@@ -998,7 +1000,7 @@ An $n$-bit parallel adder or ripple-carry adder, or simply adder is a combinatio
 where $C_{in_i}$ for $n\geq i>0$ and $C_{out_i}$ for $n-1>i\geq 0$ are interconnections in the parallel adder, and for the first cell,
 \[S_0=A_0\oplus B_0,\]
 \[C_{out_0}=A_0B_0.\]
-The ripple-carry adder is relatively slow because, in the worst case, a carry propagates through all $n$ stages of the adder, and there are approximately two gate delays per stage.
+The ripple-carry adder is relatively slow because, in the worst case, a carry propagates through all $n$ stages of the adder before it stabilizes, and there are approximately two gate delays per stage.
 \sssc{Parallel (binary) subtractor or ripple-borrow subtractor (RBS)}
 An $n$-bit parallel subtractor or ripple-borrow adder is a combinational circuit consisting of $n$ full subtractors called cells or stages. It has two $n$-bits unsigned or two's complement binary numbers as inputs (MSB to LSB), $A_{n-1}A_{n-2}\ldots A_0$ (minuend) and $B_{n-1}B_{n-2}\ldots B_0$ (subtrahend), and a constant $0$ input, $B_{in_0}=0$, and produces the $(n+1)$-bit two's complement difference of the two numbers as outputs, $B_{out_{n-1}}D_{n-1}D_{n-2}\ldots D_0$, in which the $(i+1)$th cell takes $A_i$ as minuend bit, $B_i$ as subtrahend bit, and $B_{in_i}$ as borrow-in, and produces difference $D_i$ and borrow-out $B_{out_i}$, that is,
 \[D_i=A_i\oplus B_i\oplus B_{in_i},\]
@@ -1006,15 +1008,15 @@ An $n$-bit parallel subtractor or ripple-borrow adder is a combinational circuit
 where $B_{in_i}$ for $n\geq i>0$ and $B_{out_i}$ for $n-1>i\geq 0$ are interconnections in the parallel subtractor, and for the first cell,
 \[D_0=A_0\oplus B_0,\]
 \[D_{out_0}=A_'0B_0.\]
-The ripple-borrow subtractor is relatively slow because, in the worst case, a borrow propagates through all $n$ stages of the subtractor, and there are approximately two gate delays per stage.
+The ripple-borrow subtractor is relatively slow because, in the worst case, a borrow propagates through all $n$ stages of the subtractor before it stabilizes, and there are approximately two gate delays per stage.
 \sssc{Adder-subtractor}
 A logical equivalence of a parallel subtractor that is used more often is a parallel adder with inversion bubbles at all $B_i$ inputs and $C_{in_0}$ being constant $1$ input, where $B_{n-1}'B_{n-2}'\ldots B_0'+1$ represents $-B_{n-1}B_{n-2}\ldots B_0$ in two's complement.
 
 An $n$-bit adder-subtractor is a ripple-carry adder (or other type of $n$-bit adder for unsigned or two's complement numbers) with an extra control input $M$ and $n$ 2-to-1 MUXes, in which the MUX at the $(i+1)$th cell take data inputs $B_i$ and $B_i'$ and control input $M$, if $M=0$, it outputs $B_i$ to the full adder to make the adder-subtractor perform addition; if $M=1$, it outputs $B_i'$ to the full adder to make the adder-subtractor perform subtraction.
 \sssc{One's complement adder}
-An $n$-bit one's complement adder can be realized with an $n$-bit ripple-carry adder but let $C_{in_0}=0+C_{out_{n-1}}$ to realize end-around carry (EAC).
+An $n$-bit one's complement adder can be realized with an $n$-bit ripple-carry adder but connect $C_{out_{n-1}}$ to $C_{in_0}$ to realize end-around carry (EAC). The propagation delay when $C_{out_{n-1}}=1$ is approximately twice the propagation delay of the ripple-carry adder.
 \sssc{One's complement subtractor}
-An $n$-bit one's complement subtractor can be realized with an $n$-bit ripple-borrow subtractor but let $B_{in_0}=0+B_{out_{n-1}}$ to realize end-around borrow (EAB).
+An $n$-bit one's complement subtractor can be realized with an $n$-bit ripple-borrow subtractor but connect $B_{out_{n-1}}$ to $B_{in_0}$ to realize end-around borrow (EAB). The propagation delay when $B_{out_{n-1}}=1$ is approximately twice the propagation delay of the ripple-borrow subtractor.
 
 An $n$-bit one's complement subtractor can also be realized with a one's complement adder but invert all bits of the subtrahend.
 \sssc{Carry-lookahead adder (CLA)}
