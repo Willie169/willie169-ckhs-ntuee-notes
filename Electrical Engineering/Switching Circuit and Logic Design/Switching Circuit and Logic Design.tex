@@ -476,23 +476,21 @@ We can use K-maps to find minimum POS form of a completely or incompletely speci
 \ssc{Map-entered variable (MEV) or Variable entrant map (VEM)}
 Map-entered variable (MEV), aka variable entrant map (VEM), simplification is an extension of Karnaugh maps used to simplify Boolean functions with typically more than four variables by allowing some variables to be entered as symbols or expressions inside the K-map cells rather than expanding the map's dimensions.
 \sssc{One MEV}
-Suppose we have an $n$-variable (usually five-variable) completely or incompletely specified Boolean function $f$ with $E$ being one of the input variable of $f$ and being the MEV.
+Suppose we have an $n$-variable (usually five-variable) completely or incompletely specified Boolean function $f$ with $E$ being one of the input variable of $f$ being the MEV such that
+\[\{f(P,1),f(P,0)\}\notin\{\{1,X\},\{0,X\}\},\]
+for any $(n-1)$-variable input combination $P$, where $f(P,x)$ with $x\in\{1,0\}$ denotes the output of $f$ when the variables except MEVs be their corresponding values in $P$ and $E_i$ be $x$, that is, the function can be written as
+\[f=\sum m(i\mid m_i\in A_1)+E\sum m(i\mid m_i\in A_E)+E'\sum m(i\mid m_i\in A_e)+\sum d(i\mid m_i\in A_X),\]
+where $m_i$ is a possible $(n-1)$-variable minterm. Let $A$ be the set of all $(n-1)$-variable input combinations, and
+\[A_0=A\setminus(A_1\cap A_E\cap A_e\cap A_X).\]
 \ben
 \item Draw a $(n-1)$-variable K-map for input variables except $E$. In each cell, let the $n-1$-variable input combination corresponding to the cell be $P$, where $f(P,E)$ denotes a function of $E$ where the variables except $E$ be their values in $P$:
 \bit
-\item If $f(P,1)=f(P,0)=X$, enter $X$.
-\item If $f(P,1)=1$ and $f(P,0)=0$, enter $E$.
-\item If $f(P,1)=0$ and $f(P,0)=1$, enter $E'$.
-\item If $f(P,1)=f(P,0)=1$, enter $1$.
-\item If $f(P,1)=1$ and $f(P,0)=X$, enter $1$.
-\item If $f(P,1)=X$ and $f(P,0)=1$, enter $1$.
-\item If $f(P,1)=0=f(P,0)=0$, leave the cell empty or enter $0$.
-\item If $f(P,1)=0$ and $f(P,0)=X$, leave the cell empty or enter $0$.
-\item If $f(P,1)=X$ and $f(P,0)=0$, leave the cell empty or enter $0$.
+\item If $f(P,1)=f(P,0)=1$, that is, the cell corresponds to a minterm in $A_1$, enter $1$.
+\item If $f(P,1)=f(P,0)=0$, that is, the cell corresponds to a minterm in $A_0$, leave the cell empty or enter $0$.
+\item If $f(P,1)=1$ and $f(P,0)=0$, that is, the cell corresponds to a minterm in $A_E$, enter $E$.
+\item If $f(P,1)=0$ and $f(P,0)=1$, that is, the cell corresponds to a minterm in $A_e$, enter $E'$.
+\item If $f(P,1)=f(P,0)=X$, that is, the cell corresponds to a minterm in $A_X$, enter $X$.
 \eit
-That is, let the set of products of $n-1$ literals that corresponding to a $1$ cell be $A_1$, the set of products of $n-1$ literals that corresponding to a $E$ cell be $A_E$, the set of products of $n-1$ literals that corresponding to a $E'$ cell be $A_e$, and the set of products of $n-1$ literals that corresponding to a $X$ cell be $A_X$, we write $f$ as:
-\[f=\sum m(i\mid m_i\in A_1)+E\sum m(i\mid m_i\in A_E)+E'\sum m(i\mid m_i\in A_e)+\sum d(i\mid m_i\in A_X),\]
-where $m_i$ is minterms in $(n-1)$-variable truth tables.
 \item Group $1$s in same way as K-map ($1$s and $X$s are allowed in a group). Each group corresponding to a $(n-1)$-variable implicant.
 \item Group $E$s in same way as K-map but treating $1$s as $X$s ($E$s, $1$s, and $X$s are allowed in a group). Each group corresponding to a $n$-variable implicant with $E$ be one of the literals.
 \item Group $E'$s in same way as K-map but treating $1$s as $X$s ($E'$s, $1$s, and $X$s are allowed in a group). Each group corresponding to a $n$-variable implicant with $E'$ be one of the literals.
@@ -505,23 +503,21 @@ where $m_i$ is minterms in $(n-1)$-variable truth tables.
 \item Find the allowed collections of groups that contain the fewest groups. For each one of them, the sum of the implicants corresponding to the groups in it is a minimum SOP form of the given function.
 \een
 \sssc{Multiple MEVs}
-Suppose we have an $n$-variable completely or incompletely specified Boolean function $f$ in which there exist $m$ (usually $n-4$) variables $E_1,E_2,\ldots E_m$ chosen as MEVs such that given a $(n-m)$-variable input combination $P$ of the other variables, the set of all possible values of $f(P,Q,E_i)$ is a subset of $\{0,X\}$ or a subset of $\{1,X\}$, with $X$ denoting don't-care, for any fixed $(m-1)$-variable input combination $Q$ of the MEVs except $E_i$, where $f(P,Q,E_i)$ denotes a function of $E_i$ where the output when $E_i$ be $x\in\{1,0\}$, $f(P,Q,x)$ equals the output of $f$ when the variables except MEVs be their values in $P$, the MEVs except $E_i$ be their values in $Q$, and $E_i$ be $x$.
+Suppose we have an $n$-variable completely or incompletely specified Boolean function $f$ in which there exist $m$ (usually $n-4$) variables $E_1,E_2,\ldots E_m$ chosen as MEVs such that
+\[\{f(P,Q,1),f(P,Q,0)\}\notin\{\{1,X\},\{0,X\}\},\]
+for any $(n-1)$-variable input combination $P$, for any fixed $(m-1)$-variable input combination $Q$, where $f(P,Q,x)$ with $x\in\{1,0\}$ denotes the output of $f$ when the variables except MEVs be their corresponding values in $P$, the MEVs except $E_i$ be their corresponding values in $Q$, and $E_i$ be $x$, that is, the function can be written as
+\[f=\sum m(i\mid m_i\in A_1)+\sum_{i=1}^mE_i\sum m(i\mid m_i\in A_{E_i})+\sum_{i=1}^mE_i'\sum m(i\mid m_i\in A_{e_i})+\sum d(i\mid m_i\in A_X),\]
+where $m_i$ is minterms in $(n-m)$-variable truth tables. Let $A$ be the set of all $(n-m)$-variable input combinations, and
+\[A_0=A\setminus\qty(A_1\cap A_X\cap\bigcap_{i=1}^m\qty(A_{E_i}\cap A_{e_i})).\]
 \ben
 \item Draw a $(n-m)$-variable K-map for input variables except $E$ and $F$. In each cell, let the $(n-m)$-variable input combination corresponding to the cell be $P$, for any $i\in\mathbb{N}_{\leq m}$:
 \bit
-\item If $f(P,R)=X$ for any fixed $m$-variable input combination $Q$ of the MEVs, where $f(P,Q)$ denotes the output of $f$ when the variables except MEVs be their values in $P$ and the MEVs be their values in $Q$, enter $X$.
-\item If the set of all possible values of $f(P,Q,1)$ is $\{1\}$ and the set of all possible values of $f(P,Q,0)$ is $\{0\}$, for any fixed $(m-1)$-variable input combination $Q$ of the MEVs except $E_i$, enter $E_i$.
-\item If the set of all possible values of $f(P,Q,1)$ is $\{0\}$ and the set of all possible values of $f(P,Q,0)$ is $\{1\}$, for any fixed $(m-1)$-variable input combination $Q$ of the MEVs except $E_i$, enter $E_i'$.
-\item If the set of all possible values of $f(P,Q,1)$ and the set of all possible values of $f(P,Q,0)$ are both $\{1\}$ for any fixed $(m-1)$-variable input combination $Q$ of the MEVs except $E_i$, enter $1$.
-\item If the set of all possible values of $f(P,Q,1)$ is $\{1\}$ and the set of all possible values of $f(P,Q,0)$ is $\{X\}$, for any fixed $(m-1)$-variable input combination $Q$ of the MEVs except $E_i$, enter $1$.
-\item If the set of all possible values of $f(P,Q,1)$ is $\{X\}$ and the set of all possible values of $f(P,Q,0)$ is $\{1\}$, for any fixed $(m-1)$-variable input combination $Q$ of the MEVs except $E_i$, enter $1$.
-\item If the set of all possible values of $f(P,Q,1)$ and the set of all possible values of $f(P,Q,0)$ are both $\{0\}$ for any fixed $(m-1)$-variable input combination $Q$ of the MEVs except $E_i$, leave the cell empty or enter $0$.
-\item If the set of all possible values of $f(P,Q,1)$ is $\{0\}$ and the set of all possible values of $f(P,Q,0)$ is $\{X\}$, for any fixed $(m-1)$-variable input combination $Q$ of the MEVs except $E_i$, leave the cell empty or enter $0$.
-\item If the set of all possible values of $f(P,Q,1)$ is $\{X\}$ and the set of all possible values of $f(P,Q,0)$ is $\{0\}$, for any fixed $(m-1)$-variable input combination $Q$ of the MEVs except $E_i$, leave the cell empty or enter $0$.
+\item If $f(P,R)=1$ for any fixed $m$-variable input combination $R$ of the MEVs, where $f(P,R)$ denotes the output of $f$ when the variables except MEVs be their corresponding values in $P$ and the MEVs be their corresponding values in $R$, that is, the cell corresponds to a minterm in $A_1$, enter $1$.
+\item If $f(P,R)=0$ for any fixed $m$-variable input combination $R$ of the MEVs, where $f(P,R)$ denotes the output of $f$ when the variables except MEVs be their corresponding values in $P$ and the MEVs be their corresponding values in $R$, that is, the cell corresponds to a minterm in $A_0$, enter $0$.
+\item If the set of all possible values of $f(P,Q,1)$ is $\{1\}$ and the set of all possible values of $f(P,Q,0)$ is $\{0\}$, for any fixed $(m-1)$-variable input combination $Q$ of the MEVs except $E_i$, that is, the cell corresponds to a minterm in $A_{E_i}$, enter $E_i$.
+\item If the set of all possible values of $f(P,Q,1)$ is $\{0\}$ and the set of all possible values of $f(P,Q,0)$ is $\{1\}$, for any fixed $(m-1)$-variable input combination $Q$ of the MEVs except $E_i$, that is, the cell corresponds to a minterm in $A_{e_i}$, enter $E_i'$.
+\item If $f(P,R)=X$ for any fixed $m$-variable input combination $R$ of the MEVs, where $f(P,R)$ denotes the output of $f$ when the variables except MEVs be their corresponding values in $P$ and the MEVs be their corresponding values in $R$, that is, the cell corresponds to a minterm in $A_X$, enter $X$.
 \eit
-That is, let the set of products of $n-m$ literals that corresponding to a $1$ cell be $A_1$, the set of products of $n-m$ literals that corresponding to a $E_i$ cell be $A_{E_i}$, the set of products of $n-m$ literals that corresponding to a $E_i'$ cell be $A_{e_i}$, and the set of products of $n-m$ literals that corresponding to a $X$ cell be $A_X$, we write $f$ as:
-\[f=\sum m(i\mid m_i\in A_1)+\sum_{i=1}^mE_i\sum m(i\mid m_i\in A_{E_i})+\sum_{i=1}^mE_i'\sum m(i\mid m_i\in A_{e_i})+\sum d(i\mid m_i\in A_X),\]
-where $m_i$ is minterms in $(n-m)$-variable truth tables.
 \item Group $1$s in same way as K-map ($1$s and $X$s are allowed in a group). Each group corresponding to a $(n-1)$-variable implicant.
 \item For each $i\in\bbN_{\leq m}$, group $E_i$s in same way as K-map but treating $1$s as $X$s ($E_i$s, $1$s, and $X$s are allowed in a group). Each group corresponding to a $(n-m+1)$-variable implicant with $E_i$ be one of the literals.
 \item For each $i\in\bbN_{\leq m}$, group $E_i'$s in same way as K-map but treating $1$s as $X$s ($E_i'$s, $1$s, and $X$s are allowed in a group). Each group corresponding to a $(n-m+1)$-variable implicant with $E_i'$ be one of the literals.
