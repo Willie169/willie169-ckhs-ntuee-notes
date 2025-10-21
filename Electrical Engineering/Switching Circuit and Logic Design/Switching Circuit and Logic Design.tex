@@ -1049,13 +1049,14 @@ The priority of inputs are usually as: for any $1\leq i<2^n$, the $(i+1)$-th inp
 
 An active-low inputs priority encoder invert the inputs; an active-low outputs priority encoder invert the outputs.
 \ssc{Read-only memory (ROM)}
-\sssc{Introduction and Realization}
 A read-only memory (ROM) is a non-volatile (data is kept even when power is off) memory consists of an array of semiconductor devices that are interconnected to store an array of binary data. Once binary data is stored in the ROM, it can be read out whenever desired, but the data that is stored cannot be changed under normal operating conditions. The block diagram of a ROM is typically a rectangle with input lines at the left side and output lines at the buttom.
 
 A ROM which has $n$ input lines and $m$ output lines contains an array of $2^n$ words, each word of width $m$ bits, called a $2^n$(-word)$\times m$-bit ROM. An input combination serves as an address to select one of the $2^n$ words and output it from the ROM, that is, a ROM basically consists of a decoder and a memory array. Typical sizes for commercially available ROMs range from 32 words $\times$ 4 bits to 512K words $\times$ 8 bits, or larger.
 
-A $2^n$-word$\times m$-bit ROM stores $m$ $n$-variable truth tables by a $n$-to-$2^n$ decoder and a grid consists of $2^n$ rows (decoder outputs) intersecting each of the $m$ columns (wires that connect ground to ROM outputs, which outputs 0 if no 1 signal from the input lines is inputted), sometimes called OR plane, where in each of the $2^n\times m$ row-column intersection points, each corresponding to one bit in the memory array, a diode as switching element, is either present and connected or not. If absent or not connected (logic 0), the signal value from the row isn't passed to the column; if present and connected (logic 1), represented by a $\times$ on the diagram, the signal value from the row is passed to the column.
-\sssc{Types}
+A $2^n$-word$\times m$-bit ROM stores $m$ $n$-variable functions by a $n$-to-$2^n$ decoder and a grid consists of $2^n$ rows (decoder outputs) intersecting each of the $m$ columns (wires that connect ground to ROM outputs, which outputs 0 if no 1 signal from the input lines is inputted), sometimes called OR plane, where in each of the $2^n\times m$ row-column intersection points, each corresponding to one bit in the memory array, a diode as switching element, is either present and connected or not. If absent or not connected (logic 0), the signal value from the row isn't passed to the column; if present and connected (logic 1), represented by a $\times$ on the diagram, the signal value from the row is passed to the column.
+
+The ROM table of a ROM is the truth tables of the functions realized combined by combining rows with same input combinations and listing the outputs of the functions in columns.
+
 Common types of ROMs:
 \bit
 \item Mask-programmable ROMs: Programmed permanently during manufacturing using photolithography by selectively including or omitting the diodes at the cells. The mask used in photolithography is expensive, so the use of mask-programmable ROMs is economically feasible only if a large quantity (typically several thousand or more) is required with the same data array.
