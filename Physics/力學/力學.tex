@@ -565,9 +565,19 @@ A planar lamina or plane lamina is an object that is infinitely thin.
 \sssc{Perpendicular axis theorem (垂直軸定理或正交軸定理) or plane figure theorem}
 Define axes $x,y,z$ perpendicular to each other and meet at origin $O$. Suppose a planar lamina rigid body lies on the $xy$ plane. Let $I_x,I_y,I_z$ be moments of inertia about axis $x,y,z$ respectively, then the perpendicular axis theorem states that
 \[I_z=I_x+I_y.\]
+\begin{proof}
+\[I_z=\int(x^2+y^2)\dd{m}=\int x^2\dd{m}+\int y^2\dd{m}=I_y+I_x\]
+\end{proof}
 \sssc{Parallel axis theorem (平行軸定理), Huygens–Steiner theorem, or Steiner's theorem}
-Suppose a rigid body of mass $m$ is rotated about an axis $z$ passing through the body's center of mass. The body has a moment of inertia $I_{cm}$ with respect to this axis. The parallel axis theorem states that if the body is made to rotate instead about a new axis $z'$, which is parallel to the first axis and displaced from it by a distance $d$, then the moment of inertia $I$ with respect to the new axis is related to $I_{cm}$ by
-\[I=I_{cm}+md^2.\]
+Suppose a rigid body of mass $M$ is rotated about an axis $z$ passing through the body's center of mass. The body has a moment of inertia $I_{cm}$ with respect to this axis. The parallel axis theorem states that if the body is made to rotate instead about a new axis $z'$, which is parallel to the first axis and displaced from it by a distance $D$, then the moment of inertia $I$ with respect to the new axis is related to $I_{cm}$ by
+\[I=I_{cm}+MD^2.\]
+\begin{proof}
+\[\ba
+I&=\int\qty((x-D)^2+y^2)\dd{m}\\
+&=\int(x^2+y^2)\dd{m}+D^2\int\dd{m}-2D\int x\dd{m}\\
+&=I_{cm}+MD^2
+\ea\]
+\end{proof}
 \sssc{角動量守恆定律（Conservation of angular momentum）}
 當一系統受外合力矩為零，其角動量時變率必為零，稱其處於轉動平衡（rotational equilibrium），即該系統轉動靜止或行等角速度運動。
 \sssc{平衡力矩}
@@ -585,18 +595,33 @@ A uniform rigid infinitely thin hoop or infinitely thin annular cylinder of mass
 \[I=MR^2.\]
 \sssc{Moment of inertia of a hoop about any axis passing through its center of mass and perpendicular to its central axis}
 A uniform rigid infinitely thin hoop of mass $M$ and radius $R$ has moment of inertia $I$ about any axis passing through its center of mass and perpendicular to its central axis:
-\[I=\frac{M}{2}R^2.\]
+\[I=\frac{MR^2}{2}.\]
 \begin{proof}
 By perpendicular axis theorem and the symmetry of the object, $2I=MR^2$.
+\end{proof}
+\sssc{Moment of inertia of a disk about its central axis}
+A uniform rigid infinitely thin disk of mass $M$ and radius $R$ has moment of inertia $I$ about its central axis:
+\[I=\frac{MR^2}{2}.\]
+\begin{proof}
+\[\ba
+I&=\frac{M}{\pi R^2}\int_0^Rr^22\pi r\dd{r}\\
+&=\frac{2M}{R^2}\int_0^Rr^3\dd{r}\\
+&=\frac{MR^2}{2}
+\end{proof}
+\sssc{Moment of inertia of a disk about any axis passing through its center of mass and perpendicular to its central axis}
+A uniform rigid infinitely thin disk of mass $M$ and radius $R$ has moment of inertia $I$ about any axis passing through its center of mass and perpendicular to its central axis:
+\[I=\frac{MR^2}{4}.\]
+\begin{proof}
+By perpendicular axis theorem and the symmetry of the object, $2I=\frac{MR^2}{2}$.
 \end{proof}
 \sssc{Moment of inertia of a cylinder about its central axis}
 A uniform rigid cylinder of mass $M$ and radius $R$ has moment of inertia $I$ about its central axis:
 \[I=\frac{M}{2}R^2.\]
 \begin{proof}
 \[\ba
-I&=\int_0^Rr^2M\frac{2\pi r\dd{r}}{\pi R^2}\\
+I&=\frac{M}{\pi R^2}\int_0^Rr^22\pi r\dd{r}\\
 &=\frac{2M}{R^2}\int_0^Rr^3\dd{r}\\
-&=\frac{M}{2}R^2
+&=\frac{MR^2}{2}
 \ea\]
 \end{proof}
 \sssc{Moment of inertia of a cylinder about any axis passing through its center of mass and perpendicular to its central axis}
@@ -605,8 +630,7 @@ A uniform rigid cylinder of mass $M$, radius $R$, and lenght $L$ has moment of i
 \begin{proof}
 For $R>0$:
 \[\ba
-I&=2\int_0^{\frac{L}{2}}\int_0^R\int_0^{2\pi}(r^2\sin^2\theta+l^2)M\frac{r\dd{\theta}\dd{r}\dd{l}}{\pi R^2L}\\
-&=\frac{2M}{\pi R^2L}\int_0^{\frac{L}{2}}\int_0^R\int_0^{2\pi}(r^2\sin^2\theta+l^2)r\dd{\theta}\dd{r}\dd{l}\\
+I&=\frac{2M}{\pi R^2L}\int_0^{\frac{L}{2}}\int_0^R\int_0^{2\pi}(r^2\sin^2\theta+l^2)r\dd{\theta}\dd{r}\dd{l}\\
 &=\frac{2M}{\pi R^2L}\int_0^{\frac{L}{2}}\int_0^R\qty(r^3\qty(\frac{\theta}{2}-\frac{\sin(2\theta)}{4})+l^2r\theta)\big\vert_0^{2\pi}\dd{r}\dd{l}\\
 &=\frac{2M}{\pi R^2L}\int_0^{\frac{L}{2}}\int_0^R\qty(\pi r^3+2\pi l^2r)\dd{r}\dd{l}\\
 &=\frac{2M}{R^2L}\int_0^{\frac{L}{2}}\frac{R^4}{4}+l^2R^2\dd{l}\\
@@ -622,27 +646,27 @@ I&=2\int_0^{\frac{L}{2}}l^2\frac{M}{L}\dd{l}\\
 \end{proof}
 \sssc{Moment of inertia of a spherical shell about any axis passing through its center of mass}
 A uniform rigid spherical shell of mass $M$ and radius $R$ has moment of inertia $I$ about any axis passing through its center of mass:
-\[I=\frac{2M}{3}R^2.\]
+\[I=\frac{2MR^2}{3}.\]
 \begin{proof}
 \[\ba
-I&=\int_0^{\pi}\int_0^{2\pi}R^2\sin^2\theta M\frac{R^2\sin\theta\dd{\phi}\dd{\theta}}{4\pi R^2}\\
+I&=\frac{M}{4\pi R^2}\int_0^{\pi}\int_0^{2\pi}R^2\sin^2\theta R^2\sin\theta\dd{\phi}\dd{\theta}\\
 &=\frac{MR^2}{4\pi}\int_0^{\pi}\int_0^{2\pi}\sin^3\theta\dd{\phi}\dd{\theta}\\
 &=\frac{MR^2}{2}\int_0^{\pi}\sin^3\theta\dd{\theta}\\
 &=\frac{MR^2}{3}\qty(-\cos\theta)\big\vert_0^{\pi}\\
-&=\frac{2M}{3}R^2
+&=\frac{2MR^2}{3}
 \ea\]
 \end{proof}
 \sssc{Moment of inertia of a sphere about any axis passing through its center of mass}
 A uniform rigid sphere of mass $M$ and radius $R$ has moment of inertia $I$ about any axis passing through its center of mass:
-\[I=\frac{2M}{5}R^2.\]
+\[I=\frac{2MR^2}{5}.\]
 \begin{proof}
 \[\ba
-I&=\int_0^R\int_0^{\pi}\int_0^{2\pi}r^2\sin^2\theta M\frac{r^2\sin\theta\dd{\phi}\dd{\theta}\dd{r}}{\frac{4}{3}\pi R^3}\\
+I&=\frac{M}{\frac{4}{3}\pi R^3}\int_0^R\int_0^{\pi}\int_0^{2\pi}r^2\sin^2\theta r^2\sin\theta\dd{\phi}\dd{\theta}\dd{r}\\
 &=\frac{3M}{4\pi R^3}\int_0^R\int_0^{\pi}\int_0^{2\pi}r^4\sin^3\theta\dd{\phi}\dd{\theta}\dd{r}\\
 &=\frac{3M}{2R^3}\int_0^R\int_0^{\pi}r^4\sin^3\theta\dd{\theta}\dd{r}\\
 &=\frac{3M}{2R^3}\int_0^Rr^4\qty(-\frac{1}{3}\sin^2\theta\cos\theta-\frac{2}{3}\cos\theta)\big\vert_0^{\pi}\dd{r}\\
 &=\frac{2M}{R^3}\int_0^Rr^4\dd{r}\\
-&=\frac{2M}{5}R^2
+&=\frac{2MR^2}{5}
 \ea\]
 \end{proof}
 \sssc{Moment of inertia of a cuboid about axis passing through its center of mass and perpendicular to its surface}
@@ -655,6 +679,57 @@ I&=\frac{4M}{ab}\int_0^{\frac{a}{2}}\int_0^{\frac{b}{2}}A^2+B^2\dd{B}\dd{A}\\
 &=\frac{M}{6a}\int_0^{\frac{a}{2}}12A^2+b^2\dd{A}\\
 &=\frac{M}{6a}\qty(\frac{a^3}{2}+\frac{ab^2}{2})\\
 &=\frac{M}{12}\qty(a^2+b^2)
+\ea\]
+\end{proof}
+\sssc{Moment of inertia of a cone about its central axis}
+A uniform rigid cone of mass $M$, radius of bottom $R$, and length $L$ has moment of inertia $I$ about its central axis:
+\[I=\frac{3MR^2}{10}.\]
+\begin{proof}
+\[\ba
+I&=\frac{M}{\frac{\pi R^2L}{3}}\int_0^L\int_0^{\frac{Rl}{L}}r^22\pi r\dd{r}\dd{l}\\
+&=\frac{6M}{R^2L}\int_0^L\int_0^{\frac{Rl}{L}}r^3\dd{r}\dd{l}\\
+&=\frac{6M}{R^2L}\int_0^L\frac{1}{4}\qty(\frac{Rl}{L})^4\dd{l}\\
+&=\frac{3MR^2}{2L^5}\int_0^Ll^4\dd{l}\\
+&=\frac{3MR^2}{2L^5}\frac{L^5}{5}\\
+&=\frac{3MR^2}{10}
+\ea\]
+\end{proof}
+\sssc{Moment of inertia of a cone about any axis passing through its center of mass and perpendicular to its central axis}
+A uniform rigid cone of mass $M$, radius of bottom $R$, and lenght $L$ has moment of inertia $I$ about any axis passing through its center of mass and perpendicular to its central axis:
+\[I=\frac{3M}{80}\qty(4R^2+L^2).\]
+\begin{proof}
+\[\frac{\int_0^Ll\pi R^2\qty(\frac{l}{L})^2\dd{l}}{\int_0^L\pi R^2\qty(\frac{l}{L})^2\dd{l}}=\frac{\int_0^Ll^3\dd{l}}{\int_0^Ll^2\dd{l}}=\frac{3L}{4}\]
+Thus, the center of mass of it is on the central axis of it and $\frac{3L}{4}$ below its vertex.
+\[\ba
+I&=\frac{3M}{\pi R^2L}\int_0^L\qty(\frac{R^2}{4}\frac{l^2}{L^2}+\qty(l-\frac{3L}{4})^2)\pi R^2\frac{l^2}{L^2}\dd{l}\\
+&=\frac{3M}{16L^5}\int_0^L4R^2l^4+16L^2l^4-24L^3l^3+9L^4l^2\dd{l}\\
+&=\frac{3M}{80}\qty(4R^2+L^2)
+\ea\]
+\end{proof}
+\sssc{Moment of inertia of a hollow cone about its central axis}
+A uniform rigid hollow cone of mass $M$, radius of bottom $R$, and length $L$ has moment of inertia $I$ about its central axis:
+\[I=\frac{MR^2}{2}.\]
+\begin{proof}
+\[\ba
+I&=\frac{M}{\int_0^L2\pi R\frac{l}{L}\dd{l}}\int_0^LR^2\frac{l^2}{L^2}2\pi R\frac{l}{L}\dd{l}\\
+&=\frac{2MR^2}{L^4}\int_0^Ll^3\dd{l}\\
+&=\frac{MR^2}{2}
+\ea\]
+\end{proof}
+\sssc{Moment of inertia of a hollow cone about any axis passing through its center of mass and perpendicular to its central axis}
+A uniform rigid hollow cone of mass $M$, radius of bottom $R$, and lenght $L$ has moment of inertia $I$ about any axis passing through its center of mass and perpendicular to its central axis:
+\[I=\frac{M}{36}\qty(9R^2+2L^2).\]
+\begin{proof}
+\[\ba
+\[\frac{\int_0^Ll2\pi R\frac{l}{L}\dd{l}}{\int_0^L2\pi R\frac{l}{L}\dd{l}}=\frac{\frac{L^3}{3}}{\frac{L^2}{2}}=\frac{2L}{3}.\]
+Thus, the center of mass of it is on the central axis of it and $\frac{2L}{3}$ below its vertex.
+\[\ba
+I&=\frac{M}{\int_0^L2\pi R\frac{l}{L}\dd{l}}\int_0^L\qty(\frac{1}{2}R^2\qty(\frac{l}{L})^2+\qty(l-\frac{2L}{3})^2)2\pi R\frac{l}{L}\dd{l}\\
+&=\frac{M}{\pi RL}\int_0^L\qty(\frac{1}{2}R^2\qty(\frac{l}{L})^2+l^2-\frac{4Ll}{3}+\frac{4L^2}{9})2\pi R\frac{l}{L}\dd{l}\\
+&=\frac{M}{L^4}\int_0^L\qty(R^2l^2+2L^2l^2-\frac{8L^3l}{3}+\frac{8L^4}{9})l\dd{l}\\
+&=\frac{M}{9L^4}\int_0^L9R^2l^3+18L^2l^3-24L^3l^2+8L^4l\dd{l}\\
+&=\frac{M}{36}\qty(9R^2+18L^2-32L^2+16L^2)\\
+&=\frac{M}{36}\qty(9R^2+2L^2)
 \ea\]
 \end{proof}
 \sssc{等速率圓周運動（Uniform circular motion）}
