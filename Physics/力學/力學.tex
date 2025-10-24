@@ -882,30 +882,55 @@ Thus, the effective gravitational acceleration downward increases as latitude in
 落地前，在到達最高點前與後相同時間之速率相同、高度相同、鉛直速度分量相反，稱時間對稱性。
 
 到達地面時：
-\[t=\frac{v_y+\sqrt{v_y^{\phantom{y}2}+2gh}}{g}\]
-\[\mathbf{r}=\qty(\frac{v_x\qty(v_y+\sqrt{v_y^{\phantom{y}2}+2gh})}{g},0)\]
-\[\dot{r}=\qty(v_x,-\sqrt{v_y^{\phantom{y}2}+2gh})\]
+\[t=\frac{v_y+\sqrt{v_y^{\phantom{y}2}+2gh}}{g}=\frac{v\sin\theta+\sqrt{v^2\sin^2\theta+2gh}}{g}\]
+\[\mathbf{r}=\qty(\frac{v_x\qty(v_y+\sqrt{v_y^{\phantom{y}2}+2gh})}{g},0)=\qty(v\cos\theta\frac{v\sin\theta+\sqrt{v^2\sin^2\theta+2gh}}{g},0)\]
+\[\dot{r}=\qty(v_x,-\sqrt{v_y^{\phantom{y}2}+2gh})=\qty(v\cos\theta,-\sqrt{v^2\sin^2\theta+2gh})\]
 此時$\mathbf{r}$的$x$座標稱射程（range）。
 
+落地時與地面夾角$\theta_g$為：
+\[\tan\theta_g=\frac{\sqrt{v_y^{\phantom{y}2}+2gh}}{v_x}=\frac{\sqrt{v^2\sin^2\theta+2gh}}{v\cos\theta}\]
+
 給定速率$v$下最大射程$R$為
-\[R\]
+\[R=\frac{v\sqrt{\frac{v^2+2gh}}}{g}\]
 發生於
-\[\tan\theta\]
+\[\sin\theta=\frac{v}{\sqrt{2\qty(v^2+gh)}}\]
+\[\cos\theta=\frac{\sqrt{v^2+2gh}}{\sqrt{2\qty(v^2+gh)}}\]
+\[\tan\theta=\frac{v}{\sqrt{v^2+2gh}}\]
+到達地面時：
+\[\dot{r}=\qty(\frac{v\sqrt{v^2+2gh}}{\sqrt{2\qty(v^2+gh)}},-\frac{v^2+2gh}{\sqrt{2\qty(v^2+gh)}})\]
+\[\tan\theta_g=\frac{\sqrt{v^2+2gh}}{v}\]
+與$\theta$互為補角。
 \begin{proof}
 \[R=\frac{v\cos\theta}{g}\qty(v\sin\theta+\sqrt{v^2\sin^2\theta+2gh})\]
 \[s\coloneq\sin\theta,\quad\cos\theta=\sqrt{1-s^2}\]
+\[R(s)=\frac{v\sqrt{1-s^2}}{g}\qty(vs+\sqrt{v^2s^2+2gh})\]
+\[R'(s)=\frac{-vs}{g\sqrt{1-s^2}}\qty(vs+\sqrt{v^2s^2+2gh})+\frac{v\sqrt{1-s^2}}{g}\qty(v+\frac{v^2s}{\sqrt{v^2s^2+2gh}})\]
+\[R'(s)=0\Rightarrow\]
+\[s\qty(vs\sqrt{v^2s^2+2gh}+v^2s^2+2gh)=\qty(1-s^2)\qty(v\sqrt{v^2s^2+2gh}+v^2s)\]
+\[vs^2\sqrt{v^2s^2+2gh}+v^2s^3+2ghs=v\sqrt{v^2s^2+2gh}+v^2s-vs^2\sqrt{v^2s^2+2gh}-v^2s^3\]
+\[2ghs-v^2s\qty(1-2s^2)=v\qty(1-2s^2)\sqrt{v^2s^2+2gh}\]
+\[(2gh)^2s^2+v^4s^2\qty(1-2s^2)^2-4ghv^2s^2\qty(1-2s^2)=v^4s^2\qty(1-2s^2)^2+2ghv^2\qty(1-2s^2)^2\]
+\[2ghs^2=v^2\qty(1-2s^2)\]
+\[s^2=\frac{v^2}{2\qty(v^2+gh)}\]
+\[s=\pm\frac{v}{\sqrt{2\qty(v^2+gh)}}\]
 
-
-
+\[R=\frac{v\cos\theta}{g}\qty(v\sin\theta+\sqrt{v^2\sin^2\theta+2gh})\]
+\[\ba
+R\qty(\pm\frac{v}{\sqrt{2\qty(v^2+gh)}})&=\frac{v}{g}\sqrt{\frac{v^2+2gh}{2\qty(v^2+gh)}}\qty(\pm\frac{v^2}{\sqrt{2\qty(v^2+gh)}}+\sqrt{\frac{v^4}{2\qty(v^2+gh)}+2gh})\\
+&=\frac{v}{g}\sqrt{\frac{v^2+2gh}}\frac{v^2\pm v^2+2gh}{2\qty(v^2+gh)}
+\ea\]
+$\pm$取正較大。
+\[R\qty(\frac{v}{\sqrt{2\qty(v^2+gh)}})=\frac{v\sqrt{\frac{v^2+2gh}}}{g}\]
 \end{proof}
-
-
-
 
 若$h=0$，則到達地面時：
 \[t=\frac{2v_y}{g}\]
 \[\mathbf{r}=\qty(\frac{2v_xv_y}{g},0)\]
 \[\dot{r}=\qty(v_x,-v_y)\]
+最大射程$R$為
+\[R=\frac{v^2}{g}\]
+發生於
+\[\theta=\theta_g=\frac{\pi}{4}\]
 \sssc{符合阻力方程式之阻力下的自由落體運動}
 均勻重力加速度量值$g$下，一平面直角座標使得$x$軸在地面上、重力加速度$\mathbf{g}=\qty(0,-g)$，設質量$m$、速度$\dot{r}$之物體所受空氣阻力$\mathbf{f}$為：
 \[\mathbf{f}=-\frac{1}{2}C\rho A\abs{\dot{r}}^2\hat{\dot{r}}\]
