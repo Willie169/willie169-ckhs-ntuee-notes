@@ -1,13 +1,14 @@
-\documentclass[a4paper,12pt]{article}
+\documentclass[a4paper,12pt]{report}
 \setcounter{secnumdepth}{5}
 \setcounter{tocdepth}{3}
 \input{/usr/share/LaTeX-ToolKit/template.tex}
 \begin{document}
-\title{Set Theory}
+\title{Set Theory and Number}
 \author{沈威宇}
 \date{\temtoday}
 \titletocdoc
-\section{Set Theory (集合論)}
+\ch{Set Theory and Number}
+\sct{Set Theory (集合論)}
 \ssc{Basic Notations}
 \sssc{Set (集合/集)}
 A set, sometimes called a collection or family, is a collection of different things. Theses things are called elements (元素) or members (成員) if the set.
@@ -129,8 +130,94 @@ A cover or covering $C$ of a set $X$ is a family of subsets of $X$ such that:
 We say $C$ covers $X$.
 
 A subset of a cover $C$ of $X$ that is also a cover of $X$ is a subcover of $C$.
-\ssc{Number System or Numeral System (數系)}
-\sssc{Natural numbers (自然數)}
+\sct{Positional Systems, Positional Numeral System, Place-value Notations, or Place-value}
+\ssc{Numeral Systems}
+A number is a mathematical object used to count, measure, and label.
+
+A numeral system is a set of symbols, called numerals, and the rules for using them to represent numbers. Numerals can be used for counting (as with cardinal numbers), for ordering (as with ordinal numbers), labels (as with telephone numbers), and for codes (as with ISBNs). In common usage, a numeral is not clearly distinguished from the number that it represents.
+\ssc{Definition}
+Positional systems, positional numeral system, place-value notations, or place-value, usually denoted as extension to any base of the Hindu–Arabic numeral system, are classified by their base or radix, which is the number of symbols called digits used by the system.
+
+Let the base (aka radix) $b\in\mathbb{N}_{>1}$. A base-$b$ (aka radix-$b$) number
+\[N=\qty((-1)^m\ldots d_2d_1d_0.d_{-1}d_{-2}\ldots)_b,\quad m\in\{0,1\}\land\forall i\colon d_i\in\mathbb{N}_0\land d_i<b\]
+represents the value
+\[N =(-1)^m\sum_id_ib^i.\]
+
+We can only represent a base in another base or in decimal (base-10), and we have to specify the base you use if not in decimal; otherwise, every base would be base-10.
+
+To indicate the base of a base-$b$ number, we append subscript $_b$ after it. We also use prefix \verb|0b| (or \verb|0B|) to represent base-2 numbers, aka binary numbers, prefix \verb|0| (or \verb|0o|, \verb|0O|) to represent base-8 numbers, aka octal numbers, prefix \verb|0x| (or \verb|0X|) to represent base-16 numbers, aka hexadecimal number, and no prefix (or \verb|0d|, \verb|0D|) to represent base-10 numbers, aka decimal numbers.
+
+Usually, when the radix $b>10_{10}$, $A$ (or $a$) is used to represent the digit $9+1$; when the radix $b>11_{10}$, $B$ (or $b$) is used to represent the digit $9+2$; and so on.
+\ssc{Conversion between bases}
+\sssc{General conversion algorithm}
+We want to convert a number $N$ in base $x$ with $x\in\mathbb{N}_{>1}$,
+\[N=((-1)^n\ldots d_2d_1d_0.d_{-1}d_{-2}\ldots)_x,\quad m\in\{0,1\},\]
+into base $y\neq x$ (written in base $x$) with $y\in\mathbb{N}_{>1}$.
+\ben
+\item First, we take $I_1=(\ldots d_2d_1d_0)_x$ and repeatedly:
+\ben
+\item take $r_i=I_i\mod y$, convert it to base $y$, of which the result must be a single digit, and
+\item take $I_{i+1}=\frac{I-r_i}{y}$,
+\een
+in the $i$th (start from $1$st) time, until the first time $I_{i+1}=0$, and let that time be the $k$th time.
+\item Second, we take $J_1=(0.d^{-1}d^{-2}\ldots)_x$ and repeatedly
+\ben
+\item take $s_j=\lfloor J_j\cdot y\rfloor$, which may be more than $1$ digits if $x>y$ and is later treated directly as in base $y$, and
+\item take $J_{j+1}=J_j\cdot y-s_j$,
+\een
+in the $j$th (start from $1$st) time, until the first time $J_{j+1}=0$, and let that time be the $l$th time.
+\item Then, $N$ is
+\[(-1)^n\qty(\sum_{i=1}^kr_i\times y^{i-1}+\sum_{j=1}^ls_j\times y^{-j}),\]
+and $N$ in base $y$ can be obtained by first taking the integer part of the magnitude of it:
+\[(r_kr_{k-1}\ldots r_2r_1)_y\]
+and then obtaining the fractional part of the magnitude of it using vertical addition where the $i$th row is $s_i$ with the units digit of $s_i$ in the $i$th digit to the right of the radix point, for each $i$, where carry propagation is applied to ensure all digits are valid in base $y$, i.e. $<y$.
+\een
+This conversion algorithm is $O(m\log m)$, where $m$ is the total number of digits.
+
+To convert an expression that is a radix-independent fuction $f$ of a vector of numbers $(p_1,p_2,\ldots)$, we convert each $p_i$ to the wanted base, let it be $q_i$, then the wanted result is $f(q_1,q_2,\ldots)$.
+\sssc{Power-base conversion algorithm}
+To convert a base-$b$ number into base $b^n$ with $b,n\in\mathbb{N}_{>1}$, we group the digits to the left and right of the radix point into blocks of $n$ digits starting from the digits closest to the radix point and convert each block to one digit in base $b^n$. This algorithm method is $O(m)$, where $m$ is the total number of digits.
+\sssc{Root-base conversion algorithm}
+To convert a base-$b^n$ number in into base $b$ with $b,n\in\mathbb{N}_{>1}$, we convert each digit to $n$ digits in base $b$ and concatenate them. This algorithm method is $O(m)$, where $m$ is the total number of digits.
+\sssc{Product and quotient-base conversion algorithm}
+We want to convert a number in base $x$ with $x\in\mathbb{N}_{>1}$,
+\[N=((-1)^m\ldots d_2d_1d_0.d_{-1}d_{-2}\ldots)_x,\quad m\in\{0,1\},\]
+into base $y=ax$ (written in base $x$) with $y\in\mathbb{N}_{>1}$.
+
+We take $D_i=d_i\cdot a^{-i}$, which is later treated directly as in base $y$, for each integer $i$.
+
+Then, $N$ is
+\[(-1)^m\sum_iD_i\times y^i,\]
+and $N$ in base $y$ can be obtained by vertical addition where the $i$th row is $D_i$ with the units digit of $D_i$ in the $(i+1)$th digit to the left of the radix point, for each $i$, where carry propagation is applied to ensure all digits are valid in base $y$, i.e. $<y$.
+
+This conversion algorithm is $O(m)$, where $m$ is the total number of digits.
+\sssc{Criterion of finite expansion after base conversion}
+A finite rational number with the fractional part of the magnitude of it expressed in fraction in base $x$ with $x\in\mathbb{N}_{>1}$ being $D_x$ can be expressed in finite digits in radix point in base $y\neq x$ with $y\in\mathbb{N}_{>1}$ iff the reduced denominator (denominator cancelled the greatest common factor with the numerator) of $D_x$ has no prime factor that is not a prime factor of $y$.
+\subsection{Binary}
+A binary digit is called a bit, which is either $0$ or $1$. Binary arithmetic is the same as decimals, except that "invert" or "flip" means converting $0$ to $1$ and $1$ to $0$, and "complement" means inverting all bits.
+
+The most significant bit (MSB) or most significant digit is the bit with the highest value place in a binary number and is the leftmost bit in standard binary notation; the least significant bit (LSB) or least significant digit is the bit with the lowest value place in a binary number and is the rightmost bit in standard binary notation.
+
+$4$ bits is called a nibble; $8$ bits is called a byte.
+
+A binary prefix is a unit prefix that indicates a multiple of a unit of measurement by an integer power of two. They are most often used in information technology as multipliers of bit and byte, in which the short prefixes are prefixed before b (representing bits) or B (representing bytes), and the long prefixes are prefixed before bits or bytes.
+\begin{longtable}[c]{|c|c|c|c|c|}
+\hline
+Value & IEC (short) & IEC (long) & JEDEC (short) & JEDEC (long)\\\hline
+$1024$ & Ki & kibi & K & kilo\\\hline
+$1024^2$ & Mi & mebi & M & mega\\\hline
+$1024^3$ & Gi & gibi & G & giga\\\hline
+$1024^4$ & Ti & tebi & T & tera\\\hline
+$1024^5$ & Pi & pebi & —\\\hline
+$1024^6$ & Ei & exbi & —\\\hline
+$1024^7$ & Zi & zebi & —\\\hline
+$1024^8$ & Yi & yobi & —\\\hline
+$1024^9$ & Ri & robi & —\\\hline
+$1024^10$ & Qi & quebi & —\\\hline
+\end{longtable}\FB
+\sct{Number Systems or Number Sets}
+Numbers can be classified into sets, called number sets or number systems, such as the natural numbers and the real numbers.
+\ssc{Natural numbers (自然數)}
 The natural numbers $\mathbb{N}$ are defined as positive integers $\mathbb{N}^*$, $\mathbb{N}_1$, or $\mathbb{N}^+$, that is, 1, 2, 3, and so on. (Some sources define it as non-negative integers $\mathbb{N}^0$ or $\mathbb{N}_0$, that is, 0, 1, 2, 3, and so on.)
 
 \tb{Peano axioms (皮亞諾公理), Dedekind–Peano axioms, or Peano postulates (皮亞諾公設)}: A formal definition of the natural numbers. Below, we define the natural numbers to include zero; the definition of natural numbers to exclude zero can be constructed by simply replace $0$ with $1$ in the following axioms.
@@ -176,15 +263,15 @@ then $K$ contains every natural number.
 \[\forall x,y\in\mathbb{N}\colon 0\leq x\land 0\leq y\implies 0\leq xy.\]
 \eit
 \eit
-\sssc{Integers (整數)}
+\ssc{Integers (整數)}
 The set of integers (aka the integers) $\mathbb{Z}$ can be constructed as follows. First construct the set of natural numbers (excluding $0$) according to the Peano axioms, call this $P$. Then construct a set $P^-$ which is disjoint from $P$ and in one-to-one correspondence with $P$ via a function $\psi$. Finally let $0$ be some object not in $P$ or $P^-$. Then the integers are defined to be the union $P\cup P^{-}\cup \{0\}$.
-\sssc{Rational numbers (有理數)}
+\ssc{Rational numbers (有理數)}
 The set of rational numbers (aka, the rationals) $\mathbb{Q}$ can be constructed as equivalence classes of ordered pairs of integers. Let $(\mathbb {Z} \times (\mathbb {Z} \setminus \{0\}))$⁠ be the set of the pairs $(m, n)$ of integers such that $n \neq 0$ and denoted as $\frac{m}{n}$. An equivalence relation is defined on this set by
 \[(m_{1},n_{1})=(m_{2},n_{2})\iff m_{1}n_{2}=m_{2}n_{1}.\]
 Addition and multiplication can be defined by the following rules:
 \[(m_{1},n_{1})+(m_{2},n_{2})\equiv (m_{1}n_{2}+n_{1}m_{2},n_{1}n_{2}),\]
 \[(m_{1},n_{1})\times (m_{2},n_{2})\equiv (m_{1}m_{2},n_{1}n_{2}).\]
-\sssc{Real numbers (實數)}
+\ssc{Real numbers (實數)}
 The set of real numbers (aka, the reals) $\mathbb{R}$ can be constructed axiomatically with
 \bit
 \item \tb{Addition and multiplication}: The set $\mathbb{R}$ is a field under addition and multiplication. In other words,
@@ -213,11 +300,12 @@ The set of real numbers (aka, the reals) $\mathbb{R}$ can be constructed axiomat
 \[\forall x,y\in\mathbb{R}\colon 0\leq x\land 0\leq y\implies 0\leq xy.\]
 \item The order is Dedekind-complete, meaning that every nonempty subset $S$ of $\mathbb{R}$ with an upper bound in $\mathbb{R}$ has a least upper bound (aka, supremum) in $\mathbb{R}$. This property applies to the real numbers but not to the rational numbers. For example, $\{x\in\mathbb{Q}\colon x^2<2\}$ has a rational upper bound (e.g., 1.42), but no least rational upper bound, because $\sqrt{2}$ is not rational.
 \eit\eit
-\sssc{Irrational numbers (無理數)}
+\ssc{Irrational numbers (無理數)}
 \[\mathbb{R}\setminus\mathbb{Q}.\]
-\sssc{Complex numbers (複數)}
+\ssc{Complex numbers (複數)}
 \[\mathbb{C}=\{a+bi\mid a,b\in\mathbb{R}\},\]
 in which $i=\sqrt{-1}$.
+\sct{Ordinal and Cardinal}
 \ssc{Ordinal number or ordinal (序數)}
 \sssc{Ordinal number or ordinal}
 The ordinal number or ordinal is a measurement of the order of an element of a strict well ordered set.
