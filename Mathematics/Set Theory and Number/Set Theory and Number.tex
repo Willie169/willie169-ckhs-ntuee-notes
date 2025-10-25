@@ -192,10 +192,8 @@ A numeral system is a set of symbols, called numerals, and the rules for using t
 Numbers can be classified into sets, called number sets or number systems, such as the natural numbers and the real numbers.
 \ssc{Natural numbers (自然數)}
 The natural numbers $\mathbb{N}$, aka counting numbers or whole numbers, are defined as positive integers $\mathbb{N}^*$, $\mathbb{N}_1$, or $\mathbb{N}^+$, that is, 1, 2, 3, and so on. Some sources define it as non-negative integers $\mathbb{N}^0$ or $\mathbb{N}_0$, that is, 0, 1, 2, 3, and so on.
-\sssc{Von Neumann ordinals definition}
-A formal definition of $\bbN_0$ is as von Neumann ordinals.
 \sssc{Second-order Peano Axioms (皮亞諾公理), Dedekind–Peano axioms, or Peano postulates (皮亞諾公設)}
-A formal definition of the natural numbers. Below, we define $\bbN_0$; the definition of $\bbN_1$ can be constructed by simply replace $0$ with $1$ in the following axioms.
+A formal construction of the natural numbers. Below, we define $\bbN_0$; the definition of $\bbN_1$ can be constructed by simply replace $0$ with $1$ in the following axioms.
 \bit
 \item $0$ is a natural number.
 \item Every natural number $n$ has a successor $S(n)$ which is also a natural number, that is, the natural numbers are closed under $S$.
@@ -225,8 +223,8 @@ The axiomatization of arithmetic provided by Peano axioms.
 \item \tb{Strong order}: The strong order $<$ over $\bbN_0$ is defined as:
 \[\forall x,y\in\bbN_0\colon x<y\iff\qty(x\leq y\land x\neq y).\]
 \eit
-\sssc{First-order Theory of Peano Axioms}
-A weaker first-order definition of $\bbN_0$ is obtained by explicitly adding the addition and multiplication operation symbols and replacing the second-order induction axiom with a first-order axiom schema, called Robinson arithmetic.
+\sssc{First-order Peano Axioms, Dedekind–Peano axioms, or Peano postulates}
+A weaker first-order theory can be obtained by explicitly adding the addition and multiplication operation and replacing the second-order induction axiom with a first-order axiom schema.
 \bit
 \item $0$ is a natural number.
 \item Every natural number $n$ has a successor $S(n)$ which is also a natural number, that is, the natural numbers are closed under $S$.
@@ -247,7 +245,7 @@ A weaker first-order definition of $\bbN_0$ is obtained by explicitly adding the
 \item Preservation of order under multiplication:
 \[\forall x,y\in\bbN_0\colon 0\leq x\land 0\leq y\implies 0\leq xy.\]
 \eit
-\item \tb{The first-order induction axiom (schema)}: For any formula $\varphi\qty(x,\bar{y})$ where $\bar{y}$ stands for $y_1,y_2,\ldots,y_k$ in the language of Peano arithmetic,
+\item \tb{The first-order induction axiom (schema)}: For any formula $\varphi\qty(x,\bar{y})$ where $\bar{y}$ stands for $y_1,y_2,\ldots,y_k$ in the language of Peano arithmetic (i.e. addition and multiplication),
 \[\forall\bar{y}\colon\qty(\varphi\qty(0,\bar{y})\land\forall x\colon\varphi\qty(x,\bar{y})\implies\varphi\qty(S(x),\bar{y}))\implies\forall x\colon\varphi\qty(x,\bar{y})).\]
 \eit
 \ssc{Integers (整數)}
@@ -258,8 +256,7 @@ Below, we will construct the set of integers (aka the integers) $\mathbb{Z}$.
 \[\forall(a,b),(c,d)\in\bbN_0^{\pht{0}2}\colon(a,b)\sim(c,d)\iff a+d=b+c.\]
 An equivalence class of $(a,b)$ is
 \[[(a,b)]=\qty\{(c,d)\in\bbN_0^{\pht{0}2}\middle|(a,b)\sim(c,d)\}.\]
-The integers $\bbZ$ is defined as
-\[\bbZ\coloneq\qty\{[(a,b)]\middle|a,b\in\bbN_0\}.\]
+The integers $\bbZ$ is defined as the quotient set of $\bbN_0^{\pht{0}2}$ by the equivalence relation $\sim$.
 \item \tb{Addition}: Addition is a function $\bbZ^2\to\bbZ$ defined as
 \[[(a,b)]+[(c,d)]\coloneq[(a+c,b+d)].\]
 \item \tb{Multiplication}: Multiplication is a function $\bbZ^2\to\bbZ$ defined as
@@ -272,25 +269,46 @@ Subtraction is a function $\bbZ^2\to\bbZ$ defined as:
 \[[(a,b)]-[(c,d)]\coloneq[(a+d,b+c)].\]
 \sssc{Order}
 The standard weak order $\leq$ over $\bbZ$ is defined given order $\leq$ over $\bbN_0$ as:
-\[[(a,b)]<[(c,d)]\iff a+d<b+c,\]
-\[[(a,b)]\leq[(c,d)]\iff\qty([(a,b)]<[(c,d)]\lor[(a,b)]=[(c,d)]).\]
-The standard strong order $<$ over $\bbZ_0$ is defined as:
-\[\forall x,y\in\bbZ\colon x<y\iff\qty(x\leq y\land x\neq y).\]
+\[[(a,b)]\leq[(c,d)]\iff a+d\leq b+c.\]
+The standard strong order $<$ over $\bbZ$ is defined given order $<$ over $\bbN_0$ as:
+\[[(a,b)]<[(c,d)]\iff a+d<b+c.\]
 \sssc{Notation}
 $[a,b]\in\bbZ$ is denoted by
 \[\begin{cases}
 a-b,\quad&b\leq a\\
 -(b-a),\quad&a<b
-\end{cases}\]
-
-
-
+\end{cases}.\]
 \ssc{Rational numbers (有理數)}
-The set of rational numbers (aka, the rationals) $\mathbb{Q}$ can be constructed as equivalence classes of ordered pairs of integers. Let $(\mathbb {Z} \times (\mathbb {Z} \setminus \{0\}))$⁠ be the set of the pairs $(m, n)$ of integers such that $n \neq 0$ and denoted as $\frac{m}{n}$. An equivalence relation is defined on this set by
-\[(m_{1},n_{1})=(m_{2},n_{2})\iff m_{1}n_{2}=m_{2}n_{1}.\]
-Addition and multiplication can be defined by the following rules:
-\[(m_{1},n_{1})+(m_{2},n_{2})\equiv (m_{1}n_{2}+n_{1}m_{2},n_{1}n_{2}),\]
-\[(m_{1},n_{1})\times (m_{2},n_{2})\equiv (m_{1}m_{2},n_{1}n_{2}).\]
+Below, we will construct the set of rational numbers (aka the rationals or the rational numbers) $\mathbb{Q}$.
+\sssc{Equivalence classes of ordered pairs of integers}
+\bit
+\item \tb{Equivalence relation}: Define an equivalence relation $\sim$ on $\bbZ\times\qty(\bbZ\setminus\{0\})$ as
+\[\forall(a,b),(c,d)\in\bbZ\times\qty(\bbZ\setminus\{0\})\colon(a,b)\sim(c,d)\iff ad=bc.\]
+An equivalence class of $(a,b)$ is
+\[[(a,b)]=\qty\{(c,d)\in\bbZ\times\qty(\bbZ\setminus\{0\})\middle|(a,b)\sim(c,d)\}.\]
+The rationals $\bbQ$ is defined as the quotient set of $\bbZ\times\qty(\bbZ\setminus\{0\})$ by the equivalence relation $\sim$.
+\item \tb{Addition}: Addition is a function $\bbQ^2\to\bbQ$ defined as
+\[[(a,b)]+[(c,d)]\coloneq[(ad+bc,bd)].\]
+\item \tb{Multiplication}: Multiplication is a function $\bbQ^2\to\bbQ$ defined as
+\[[(a,b)]\cdot [(c,d)]\coloneq[(ac,bd)].\]
+\eit
+\sssc{Subtraction}
+Subtraction is a function $\bbQ^2\to\bbQ$ defined as:
+\[[(a,b)]-[(c,d)]\coloneq[(ad-bc,bd)].\]
+\sssc{Order}
+The standard weak order $\leq$ over $\bbQ$ is defined given order $\leq$ over $\bbZ$ as:
+\[[(a,b)]\leq[(c,d)]\iff ad\leq bc.\]
+The standard strong order $<$ over $\bbQ$ is defined given order $<$ over $\bbZ$ as:
+\[[(a,b)]<[(c,d)]\iff ad<bc.\]
+\sssc{Negation or additive inverse}
+Negation (or additive inverse) is a function $\bbQ\to\bbQ$ defined as
+\[-[(a,b)]\coloneq[(-a,b)].\]
+\sssc{Notation}
+$[a,b]\in\bbQ$ is denoted by $\frac{a}{b}$.
+
+
+
+
 \ssc{Real numbers (實數)}
 The set of real numbers (aka, the reals) $\mathbb{R}$ can be constructed axiomatically with
 \bit
