@@ -193,16 +193,14 @@ A number is a mathematical object used to count, measure, and label.
 A numeral system is a set of symbols, called numerals, and the rules for using them to represent numbers. Numerals can be used for counting (as with cardinal numbers), for ordering (as with ordinal numbers), labels (as with telephone numbers), and for codes (as with ISBNs). In common usage, a numeral is not clearly distinguished from the number that it represents.
 
 Numbers can be classified into sets, called number sets or number systems, such as the natural numbers and the real numbers.
-\ssc{Natural numbers (自然數)}
-The set of positive integers (aka the positive integers) $\mathbb{N}^*$, $\mathbb{N}_1$, or $\mathbb{N}^+$ is, 1, 2, 3, and so on
+\ssc{Natural numbers (自然數), counting numbers, or whole numbers}
+The positive integer system (aka the positive integers) $\mathbb{N}^*$, $\mathbb{N}_1$, or $\mathbb{N}^+$ is, 1, 2, 3, and so on
 
-The set of non-negative integers (aka the non-negative integers) $\mathbb{N}^0$ or $\mathbb{N}_0$ is, 0, 1, 2, 3, and so on.
+The non-negative integer system (aka the non-negative integers) $\mathbb{N}^0$ or $\mathbb{N}_0$ is, 0, 1, 2, 3, and so on.
 
-The set of natural numbers (aka the naturals, counting numbers or whole numbers) $\mathbb{N}$ is defined as the set of positive integers or the set of non-negative integers.
-
-Below, we will list some constructions of the natural numbers.
+The natural/counting/whole number system (aka the naturals) $\mathbb{N}$ is defined as either the positive integer system or the set of non-negative integer system; if not specified, $\bbN=\bbN_1$ is used.
 \sssc{Second-order Peano Axioms (皮亞諾公理), Dedekind–Peano axioms, or Peano postulates (皮亞諾公設)}
-A formal construction of the natural numbers. Below, we define $\bbN_0$; the definition of $\bbN_1$ can be constructed by simply replace $0$ with $1$ in the following axioms.
+Second-order Peano Axioms (aka Dedekind–Peano axioms or Peano postulates) is a formal construction of the natural numbers. Below, we define $\bbN_0$; the definition of $\bbN_1$ can be constructed by simply replace $0$ with $1$ in the following axioms.
 \bit
 \item $0$ is a natural number.
 \item Every natural number $n$ has a successor $S(n)$ which is also a natural number, that is, the natural numbers are closed under $S$.
@@ -233,7 +231,7 @@ The axiomatization of arithmetic provided by Peano axioms.
 \[\forall x,y\in\bbN_0\colon x<y\iff\qty(x\leq y\land x\neq y).\]
 \eit
 \sssc{First-order Peano Axioms, Dedekind–Peano axioms, or Peano postulates}
-A weaker first-order theory can be obtained by explicitly adding the addition and multiplication operation and replacing the second-order induction axiom with a first-order axiom schema.
+A weaker first-order formal construction of the natural numbers can be obtained by explicitly adding the addition and multiplication operation and replacing the second-order induction axiom with a first-order axiom schema.
 \bit
 \item $0$ is a natural number.
 \item Every natural number $n$ has a successor $S(n)$ which is also a natural number, that is, the natural numbers are closed under $S$.
@@ -258,8 +256,9 @@ A weaker first-order theory can be obtained by explicitly adding the addition an
 \[\forall\bar{y}\colon\qty(\varphi\qty(0,\bar{y})\land\forall x\colon\varphi\qty(x,\bar{y})\implies\varphi\qty(S(x),\bar{y}))\implies\forall x\colon\varphi\qty(x,\bar{y})).\]
 \eit
 \ssc{Integers (整數)}
-The set of integers (aka the integers) $\mathbb{Z}$ is an ordered abelian group under addition and $\leq$. Below, we will list some constructions of the set of integers.
-\sssc{Equivalence classes of ordered pairs of natural numbers}
+The integer system (aka the integers) $\mathbb{Z}$ is an ordered abelian group under addition and $\leq$.
+\sssc{Construction as equivalence classes of ordered pairs of natural numbers}
+Below, we will construct the integers as the equivalence classes of ordered pairs of $\bbN_0$.
 \bit
 \item \tb{Equivalence relation}: Define an equivalence relation $\sim$ on $\bbN_0^{\pht{0}2}$ as
 \[\forall(a,b),(c,d)\in\bbN_0^{\pht{0}2}\colon(a,b)\sim(c,d)\iff a+d=b+c.\]
@@ -285,8 +284,9 @@ a-b,\quad&b\leq a\\
 \end{cases}.\]
 \eit
 \ssc{Rational numbers (有理數)}
-Tthe set of rational numbers (aka the rationals or the rational numbers) $\mathbb{Q}$ is an ordered field under addition, multiplication, and $\leq$. Below, we will list some constructions of the set of rational numbers.
-\sssc{Equivalence classes of ordered pairs of integers}
+Tthe rational number system (aka the rationals or the rational numbers) $\mathbb{Q}$ is an ordered field under addition, multiplication, and $\leq$.
+\sssc{Construction as equivalence classes of ordered pairs of integers}
+Below, we will construct the rationals as the equivalence classes of ordered pairs of integers.
 \bit
 \item \tb{Equivalence relation}: Define an equivalence relation $\sim$ on $\bbZ\times\qty(\bbZ\setminus\{0\})$ as
 \[\forall(a,b),(c,d)\in\bbZ\times\qty(\bbZ\setminus\{0\})\colon(a,b)\sim(c,d)\iff ad=bc.\]
@@ -310,11 +310,14 @@ The rationals $\bbQ$ is defined as the quotient set of $\bbZ\times\qty(\bbZ\setm
 \item \tb{Notation}: $[a,b]\in\bbQ$ is denoted as $a/b$.
 \eit
 \ssc{Real numbers (實數)}
-The set of real numbers (aka the reals or the real numbers) $\mathbb{R}$ is a Dedekind-complete ordered field under addition, multiplication, and $<$. Below, we will list some constructions of the set of real numbers.
-\sssc{Equivalence classes of Cauchy sequences}
+The real number system (aka the reals, the real numbers, or the real number line) $\mathbb{R}$ is a Dedekind-complete ordered field under addition, multiplication, and $<$. Below, we will list some constructions of it.
+\sssc{Construction as equivalence classes of Cauchy sequences}
+Below, we will construct the reals as the equivalence classes of Cauchy sequences of the rationals.
 \bit
-\item\tb{Cauchy sequence}: A Cauchy sequence $(x_n)$ of the rational numbers is a sequence of the rational numbers such that for every rational number $\varepsilon>0$, there exists a positive integer $N$ such that $m,n\geq N\implies|x_m−x_n|\leq\varepsilon$. Let $R$ be the set of Cauchy sequences of the rational numbers.
-\item \tb{Equivalence relation}: Define an equivalence relation $\sim$ on $R$ as $(x_n)\sim(y_n)$ iff $(|x_n-y_n|)$ is a Cauchy sequence.
+\item\tb{Cauchy sequence}: A Cauchy sequence $(x_n)$ of the rational numbers is a sequence of the rational numbers such that for every rational number $\varepsilon>0$, there exists a positive integer $N$ such that $m,n\geq N\implies|x_m−x_n|\leq\varepsilon$.
+
+Let $R$ be the set of Cauchy sequences of the rational numbers.
+\item \tb{Equivalence relation}: Define an equivalence relation $\sim$ on $R$ as $(x_n)\sim(y_n)$ iff for every rational number $\varepsilon>0$, there exists a positive integer $N$ such that $n\geq N\implies|x_n−y_n|\leq\varepsilon$.
 
 An equivalence class of $(x_n)$ is
 \[[(x_n)]=\qty\{(y_n)\in R\middle|(x_n)\sim(y_n)\}.\]
@@ -330,28 +333,28 @@ for every rational number $\varepsilon>0$, there exists a positive integer $N$ s
 \item \tb{Negation or additive inverse}: Negation (or additive inverse) is a function $\bbR\to\bbR$ defined as
 \[-[(x_n)]\coloneq[(-x_n)].\]
 \item \tb{Absolute value}: Absolute value is a function $\bbR\to\bbR$ defined as
-\[\abs{[(x_n)]}\coloneq\begin{cases}[(x_n)],\quad&a\geq [(0)]\\[(-x_n)],\quad&a\leq [(0)]\end{cases}.\]
+\[\abs{[(x_n)]}\coloneq\begin{cases}[(x_n)],\quad&[(x_n)]\geq [(0)]\\[(-x_n)],\quad&[(x_n)]\leq [(0)]\end{cases}.\]
 \item \tb{Multiplication}: Multiplication is a function $\bbR^2\to\bbR$ defined as
 \[[(x_n)]\cdot[(y_n)]\coloneq[(x_n\cdot y_n)].\]
 \item \tb{Division}: Division is a function $\bbR\times\bbR\setminus\{[(0)]\}\to\bbR$ defined as
 \[[x_n]/[y_n]\coloneq[x_n/y_n].\]
 \item \tb{Notation}: $[(x_n)]\in\bbR$ is denoted as the limit of it $\lim_{n\to\infty}x_n$.
 \eit
-\sssc{Set of Dedekind cuts and rationals}
+\sssc{Construction by Dedekind cuts}
+Below, we will construct the reals by Dedekind cuts.
 \bit
-\item \tb{Dedekind cut}: A Dedekind cut of $\bbQ$ is a partition of the rationals $\bbQ$ into two subsets $A$ and $B$ such that
+\item \tb{Dedekind cut}: A Dedekind cut of $\bbQ$ is a subset $A$ of $\bbQ$ such that
 \bit
-\item $A$ is nonempty.
-\item $B$ is nonempty.
-\item $A$ is closed downwards: If $x,y\in\bbQ\land x\leq y\land y\in A$, then $x\in A$.
-\item $A$ does not contain a greatest element: If $x\in A$, then there exists a $y\in A$ such that $y>x$.
+\item Nonempty:
+\[A\neq\varnothing.\]
+\item $\bbQ\setminus A$ is not empty:
+\[A\neq\bbQ.\]
+\item Closed downwards:
+\[(x\in\bbQ\land y\in A\land x\leq y)\implies (x\in A).\]
+\item Does not contain a greatest element:
+\[\forall x\in A\colon\exists y\in A\text{\ s.t.\ }y>x.\]
 \eit
-Let $D$ be the set of all Dedekind cuts of $\bbQ$. A rational number $q$ is represented by
-\[\{x\in\bbQ\mid x<q\}.\]
-Thus, the rationals is
-\[\{\{x\in\bbQ\mid x<q\}\mid q\in\bbQ\}.\]
-The reals is defined as
-\[D\cup\{\{x\in\bbQ\mid x<q\}\mid q\in\bbQ\}.\]
+The reals $\bbR$ is defined as the set of all Dedekind cuts of $\bbQ$.
 \item \tb{Total order}: Total order $\leq$ over $\bbR$ is defined as
 \[A\leq B\iff A\subseteq B.\]
 \item \tb{Addition}: Addition is a function $\bbR^2\to\bbR$ defined as
@@ -381,12 +384,52 @@ B,\quad&B\geq\{x\in\bbQ\mid x<0\}\\
 \end{cases}\]
 \item \tb{Notation}: $A\in\bbR$ is denoted as the supremum (aka least upper bound) of it $\sup A$.
 \eit
-\ssc{Irrational numbers (無理數)}
-The set of Irrational numbers (aka, the Irrationals) is defined as
-\[\mathbb{R}\setminus\mathbb{Q}.\]
+\sssc{Irrational numbers (無理數)}
+A real number that is not a rational number is called an irrational number.
 \ssc{Extended real numbers (擴展實數)}
-
-
+The extended real number system (aka the extended real numbers or the extended real number line) $\ol{\bbR}$, $[-\infty,+\infty$, $[-\infty,\infty$, $\mathbb{R}\cup\{-\infty,+\infty\}$, or $\mathbb{R}\cup\{-\infty,\infty\}$ is an extension of real number system by adding two elements: $+\infty$ (also denoted as $\infty$) and $-\infty$, and is a Dedekind-complete ordered set.
+\sssc{Definition}
+\bit
+\item Below properties and definitions hold for any $a,b,c\in\ol{\bbR}$ such that the expression is defined:
+\bit
+\item Commutativity of addition:
+\[a+b=b+a.\]
+\item Associativity of addition:
+\[a+(b+c)=(a+b)+c.\]
+\item Commutativity of multiplication:
+\[a\cdot b=b\cdot a.\]
+\item Associativity of multiplication:
+\[a\cdot (b\cdot c)=(a\cdot b)\cdot c.\]
+\item Distributivity of multiplication over addition:
+\[a\cdot (b+c)=a\cdot b+a\cdot c.\]
+\item Definition of negation (or additive inverse):
+\[-a=(-1)\cdot a.\]
+\item Definition of subtraction:
+\[a-b=a+(-b).\]
+\item Definition of division:
+\[\forall a,b,c\in\ol{\bbR}\land b\neq 0\colon bc=a\iff a/b=c.\]
+\eit
+\item Below, we define some arithmetic expressions:
+\[\forall a\in\bbR\colon a+(\pm\infty)=(\pm\infty)+a=\pm\infty.\]
+\[\forall a\in\bbR\land a>0\colon a\cdot(\pm\infty)=(\pm\infty)\cdot a=\pm\infty.\]
+\[\forall a\in\bbR\land a<0\colon a\cdot(\pm\infty)=(\pm\infty)\cdot a=\mp\infty.\]
+\[\forall a\in\bbR\colon a/(\pm\infty)=0.\]
+\[\forall a\in\bbR\land a>0\colon(\pm\infty)/a=\pm\infty.\]
+\[\forall a\in\bbR\land a<0\colon(\pm\infty)/a=\mp\infty.\]
+\item For any $a,b\in\bbR$, arithmetic expression of them in $\ol{\bbR}$ equals that in $\bbR$ whenever the RHS is defined.
+\item The undefined arithmetic expressions are called indeterminate forms.
+\item The order is defined as
+\bit
+\item For any $a,b\in\bbR$, comparisons of them in $\ol{\bbR}$ are evaluated the same as those in $\bbR$.
+\item For any $a\in\bbR$,
+\[-\infty<a<\infty.\]
+\eit
+\item When using the extended real number system as the codomain of limits, when the numerator $0$ is a limit:
+\[\forall a\in\bbR\land a>0\colon a/0=\infty,\]
+\[\forall a\in\bbR\land a<0\colon a/0=-\infty.\]
+\item When using the extended real number system as codomains, any function $f$ with limit at $a\in\bbR$ being $\pm\infty$ is extended by $f(a)=\pm\infty$.
+\item When using the extended real number system as the codomain of limits, any function $f$ with limit at $a\in\{-\infty,\infty\}$ being $\pm\infty$ is extended by $f(a)=\pm\infty$ when the input $a$ is a limit.
+\eit
 \sct{Positional Systems, Positional Numeral System, Place-value Notations, or Place-value}
 \ssc{Definition}
 Positional systems, positional numeral system, place-value notations, or place-value, usually denoted as extension to any base of the Hindu–Arabic numeral system, are classified by their base or radix, which is the number of symbols called digits used by the system. These systems in Hindu–Arabic numeral system are also called number system.
