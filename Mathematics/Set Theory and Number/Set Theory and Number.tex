@@ -38,15 +38,18 @@ A set with no element in it is called the empty set, denoted as $\varnothing$. A
 \subsubsection{Union (聯集)}
 \[A\cup B\coloneq\{x\mid x\in A \lor x\in B\}\]
 \[\bigcup_{i=1}^n A_i\coloneq\left\{x\middle | \bigvee_{i=1}^n x\in A_i\right\}\]
-\subsubsection{Complement (差集)}
+\subsubsection{(Relative) complement (（相對）差集)}
 \[A\setminus B\coloneq\{x\mid x\in A \land x\notin B\}\]
-\subsubsection{Cartesian product (笛卡爾積)}
-\[\prod_{i=1}^nA_i=\{(a_1,a_2,\ldots a_n)\mid a_i\in A_i\},\]
-and its elements are called ordered $n$-tuple, in which a $2$-tuple is also called a pair and $3$-tuple is also called a triple.
 \subsubsection{Power set (冪集合)}
 \[2^A\coloneq\{B\mid B\subseteq A\}\]
+\subsubsection{Cartesian product (笛卡爾積)}
+\[\prod_{i=1}^nA_i\coloneq\{(a_1,a_2,\ldots a_n)\mid a_i\in A_i\},\]
+and its elements are called ordered $n$-tuple, in which a $2$-tuple is also called a pair and $3$-tuple is also called a triple.
+\sssc{Power of set}
+For any $n\in\bbN$ and any set $A$,
+\[A^n\coloneq\prod_{i=1}^nA.\]
 \sssc{Set scalar arithmetic operation}
-\begin{itemize}
+\begin{itemizle}
 \item If $\forall a\in A$, $sa$ is defined, $sA\coloneq\{sa:\,a\in A\}$.
 \item If $\forall a\in A$, $a+v$ is defined, $A+v\coloneq\{a+v:\,a\in A\}$.
 \end{itemize}
@@ -130,23 +133,6 @@ A cover or covering $C$ of a set $X$ is a family of subsets of $X$ such that:
 We say $C$ covers $X$.
 
 A subset of a cover $C$ of $X$ that is also a cover of $X$ is a subcover of $C$.
-\ssc{Field (域)}
-A field is a set $F$ together with two binary operations on $F$ called addition and multiplication. A binary operation on $F$ is a function $F\times F\to F$. The result of the addition of $a$ and $b$ is called the sum of $a$ and $b$, denoted $a+b$. The result of the multiplication of $a$ and $b$ is called the sum of $a$ and $b$, denoted $a\cdot b$. These operations are required to satisfy the following properties, referred to as field axioms, for all elements $a,b,c\in F$:
-\bit
-\item Associativity of addition and multiplication:
-\[a+(b+c)=(a+b)+c,\quad a\cdot (b\cdot c)=(a\cdot b)\cdot c.\]
-\item Commutativity of addition and multiplication:
-\[a+b=b+a,\quad a\cdot b=b\cdot a.\]
-\item Additive and multiplicative identity: there exist two distinct elements $0$ and $1$ in $F$ such that
-\[a+0=a,\quad a\cdot 1=a.\]
-\item Additive inverses: for every $a$ in $F$, there exists an element in $F$, denoted $-a$, called the additive inverse of $a$, such that
-\[a+(-a)=0.\]
-\item Multiplicative inverses: for every $a\neq 0$ in $F$, there exists an element in $F$, denoted by $\frac{1}{a}$, called the multiplicative inverse of $a$, such that
-\[a\cdot\frac{1}{a}=1.\]
-\item Distributivity of multiplication over addition:
-\[a\cdot (b+c)=(a\cdot b)+(b\cdot c).\]
-\eit
-Equivalently, a field is a set $F$ together with two commutative binary operations on $F$ called addition and multiplication, such that $F$ is a group under addition with $0$ as the identity element, called addictive identity, and $F\setminus\{0\}$ is a group under multiplication with $1$ as the identity element, called multiplicative identity.
 \sct{Ordinal and Cardinal}
 \ssc{Ordinal number or ordinal (序數)}
 \sssc{Ordinal number or ordinal}
@@ -208,7 +194,13 @@ A numeral system is a set of symbols, called numerals, and the rules for using t
 
 Numbers can be classified into sets, called number sets or number systems, such as the natural numbers and the real numbers.
 \ssc{Natural numbers (自然數)}
-The natural numbers (aka the naturals) $\mathbb{N}$, aka counting numbers or whole numbers, are positive integers, denoted $\mathbb{N}^*$, $\mathbb{N}_1$, or $\mathbb{N}^+$, that is, 1, 2, 3, and so on, or non-negative integers, denoted $\mathbb{N}^0$ or $\mathbb{N}_0$, that is, 0, 1, 2, 3, and so on. The natural numbers forms a strictly totally ordered set under $<$. Below, we will construct the natural numbers.
+The set of positive integers (aka the positive integers) $\mathbb{N}^*$, $\mathbb{N}_1$, or $\mathbb{N}^+$ is, 1, 2, 3, and so on
+
+The set of non-negative integers (aka the non-negative integers) $\mathbb{N}^0$ or $\mathbb{N}_0$ is, 0, 1, 2, 3, and so on.
+
+The set of natural numbers (aka the naturals, counting numbers or whole numbers) $\mathbb{N}$ is defined as the set of positive integers or the set of non-negative integers.
+
+Below, we will list some constructions of the natural numbers.
 \sssc{Second-order Peano Axioms (皮亞諾公理), Dedekind–Peano axioms, or Peano postulates (皮亞諾公設)}
 A formal construction of the natural numbers. Below, we define $\bbN_0$; the definition of $\bbN_1$ can be constructed by simply replace $0$ with $1$ in the following axioms.
 \bit
@@ -266,7 +258,7 @@ A weaker first-order theory can be obtained by explicitly adding the addition an
 \[\forall\bar{y}\colon\qty(\varphi\qty(0,\bar{y})\land\forall x\colon\varphi\qty(x,\bar{y})\implies\varphi\qty(S(x),\bar{y}))\implies\forall x\colon\varphi\qty(x,\bar{y})).\]
 \eit
 \ssc{Integers (整數)}
-The set of integers (aka the integers) $\mathbb{Z}$ is a strictly totally ordered group under addition and $<$. Below, we will construct the set of integers.
+The set of integers (aka the integers) $\mathbb{Z}$ is an ordered abelian group under addition and $\leq$. Below, we will list some constructions of the set of integers.
 \sssc{Equivalence classes of ordered pairs of natural numbers}
 \bit
 \item \tb{Equivalence relation}: Define an equivalence relation $\sim$ on $\bbN_0^{\pht{0}2}$ as
@@ -274,29 +266,26 @@ The set of integers (aka the integers) $\mathbb{Z}$ is a strictly totally ordere
 An equivalence class of $(a,b)$ is
 \[[(a,b)]=\qty\{(c,d)\in\bbN_0^{\pht{0}2}\middle|(a,b)\sim(c,d)\}.\]
 The integers $\bbZ$ is defined as the quotient set of $\bbN_0^{\pht{0}2}$ by the equivalence relation $\sim$.
+\item \tb{Total order}: Total order $\leq$ over $\bbZ$ is defined given order $\leq$ over $\bbN_0$ as:
+\[[(a,b)]\leq[(c,d)]\iff a+d\leq b+c.\]
 \item \tb{Addition}: Addition is a function $\bbZ^2\to\bbZ$ defined as
 \[[(a,b)]+[(c,d)]\coloneq[(a+c,b+d)].\]
+\item \tb{Subtraction}: Subtraction is a function $\bbZ^2\to\bbZ$ defined as:
+\[[(a,b)]-[(c,d)]\coloneq[(a+d,b+c)].\]
+\item \tb{Negation or additive inverse}: Negation (or additive inverse) is a function $\bbZ\to\bbZ$ defined as
+\[-[(a,b)]\coloneq[(b,a)].\]
+\item \tb{Absolute value}: Absolute value is a function $\bbZ\to\bbZ$ defined as
+\[\abs{[(a,b)]}\coloneq\begin{cases}[(a,b)],\quad&a\geq [(0,0)]\\[(b,a)],\quad&a\leq [(0,0)]\end{cases}.\]
 \item \tb{Multiplication}: Multiplication is a function $\bbZ^2\to\bbZ$ defined as
 \[[(a,b)]\cdot [(c,d)]\coloneq[(ac+bd,ad+bc)].\]
-\item Negation (or additive inverse) is a function $\bbZ\to\bbZ$ defined as
-\[-[(a,b)]\coloneq[(b,a)].\]
-\eit
-\sssc{Subtraction}
-Subtraction is a function $\bbZ^2\to\bbZ$ defined as:
-\[[(a,b)]-[(c,d)]\coloneq[(a+d,b+c)].\]
-\sssc{Order}
-The standard weak order $\leq$ over $\bbZ$ is defined given order $\leq$ over $\bbN_0$ as:
-\[[(a,b)]\leq[(c,d)]\iff a+d\leq b+c.\]
-The standard strong order $<$ over $\bbZ$ is defined given order $<$ over $\bbN_0$ as:
-\[[(a,b)]<[(c,d)]\iff a+d<b+c.\]
-\sssc{Notation}
-$[a,b]\in\bbZ$ is denoted by
+\item \tb{Notation}: $[a,b]\in\bbZ$ is denoted as
 \[\begin{cases}
 a-b,\quad&b\leq a\\
 -(b-a),\quad&a<b
 \end{cases}.\]
+\eit
 \ssc{Rational numbers (有理數)}
-Tthe set of rational numbers (aka the rationals or the rational numbers) $\mathbb{Q}$ is a strictly totally ordered field under addition, multiplication, and $<$. Below, we will construct the set of rational numbers.
+Tthe set of rational numbers (aka the rationals or the rational numbers) $\mathbb{Q}$ is an ordered field under addition, multiplication, and $\leq$. Below, we will list some constructions of the set of rational numbers.
 \sssc{Equivalence classes of ordered pairs of integers}
 \bit
 \item \tb{Equivalence relation}: Define an equivalence relation $\sim$ on $\bbZ\times\qty(\bbZ\setminus\{0\})$ as
@@ -304,62 +293,100 @@ Tthe set of rational numbers (aka the rationals or the rational numbers) $\mathb
 An equivalence class of $(a,b)$ is
 \[[(a,b)]=\qty\{(c,d)\in\bbZ\times\qty(\bbZ\setminus\{0\})\middle|(a,b)\sim(c,d)\}.\]
 The rationals $\bbQ$ is defined as the quotient set of $\bbZ\times\qty(\bbZ\setminus\{0\})$ by the equivalence relation $\sim$.
+\item \tb{Total order}: Total order $\leq$ over $\bbQ$ is defined given order $\leq$ over $\bbZ$ as:
+\[[(a,b)]\leq[(c,d)]\iff ad\leq bc.\]
 \item \tb{Addition}: Addition is a function $\bbQ^2\to\bbQ$ defined as
 \[[(a,b)]+[(c,d)]\coloneq[(ad+bc,bd)].\]
+\item \tb{Subtraction}: Subtraction is a function $\bbQ^2\to\bbQ$ defined as:
+\[[(a,b)]-[(c,d)]\coloneq[(ad-bc,bd)].\]
+\item \tb{Negation or additive inverse}: Negation (or additive inverse) is a function $\bbQ\to\bbQ$ defined as
+\[-[(a,b)]\coloneq[(-a,b)].\]
+\item \tb{Absolute value}: Absolute value is a function $\bbQ\to\bbQ$ defined as
+\[\abs{[(a,b)]}\coloneq\begin{cases}[(a,b)],\quad&a\geq [(0,1)]\\[(-a,b)],\quad&a\leq [(0,1)]\end{cases}.\]
 \item \tb{Multiplication}: Multiplication is a function $\bbQ^2\to\bbQ$ defined as
 \[[(a,b)]\cdot [(c,d)]\coloneq[(ac,bd)].\]
+\item \tb{Division}: Division is a function $\bbQ\times\bbQ\setminus\{[0,1]\}\to\bbQ$ defined as
+\[[(a,b)]/[(c,d)]\coloneq[(ad,bc)].\]
+\item \tb{Notation}: $[a,b]\in\bbQ$ is denoted as $a/b$.
 \eit
-\sssc{Subtraction}
-Subtraction is a function $\bbQ^2\to\bbQ$ defined as:
-\[[(a,b)]-[(c,d)]\coloneq[(ad-bc,bd)].\]
-\sssc{Order}
-The standard weak order $\leq$ over $\bbQ$ is defined given order $\leq$ over $\bbZ$ as:
-\[[(a,b)]\leq[(c,d)]\iff ad\leq bc.\]
-The standard strong order $<$ over $\bbQ$ is defined given order $<$ over $\bbZ$ as:
-\[[(a,b)]<[(c,d)]\iff ad<bc.\]
-\sssc{Negation or additive inverse}
-Negation (or additive inverse) is a function $\bbQ\to\bbQ$ defined as
-\[-[(a,b)]\coloneq[(-a,b)].\]
-\sssc{Notation}
-$[a,b]\in\bbQ$ is denoted by $\frac{a}{b}$.
 \ssc{Real numbers (實數)}
-The set of real numbers (aka, the reals) $\mathbb{R}$ is a complete strictly totally-ordered field under addition, multiplication, and $<$ with metric $d(a,b)=|a-b|$. Below, we will construct the set of real numbers.
-
-
-
-
+The set of real numbers (aka the reals or the real numbers) $\mathbb{R}$ is a Dedekind-complete ordered field under addition, multiplication, and $<$. Below, we will list some constructions of the set of real numbers.
+\sssc{Equivalence classes of Cauchy sequences}
 \bit
-\item \tb{Addition and multiplication}: The set $\mathbb{R}$ is a field under addition and multiplication. In other words,
-\bit
-\item Associativity of addition and multiplication:
-\[\forall x,y,z\in\mathbb{R}\colon x+(y+z)=(x+y)+z\land x\cdot(y\cdot z)=(x\cdot y)\cdot z.\]
-\item Commutativity of addition and multiplication:
-\[\forall x,y\in\mathbb{R}\colon x+y=y+x\land x\cdot y=y\cdot x.\]
-\item Distributivity of multiplication over addition:
-\[\forall x,y,z\in\mathbb{R}\colon x\cdot(y+z)=(x\cdot y)+(x\cdot z).\]
-\item Existence of additive identity:
-\[\forall x\in\mathbb{R}\colon x+0=x.\]
-\item Existence of multiplicative identity:
-\[0\neq 1,\]
-\[\forall x\in\mathbb{R}\colon x\times 1=x.\]
-\item Existence of additive inverses:
-\[\forall x\in\mathbb{R}\colon\exists(-x)\in\mathbb{R}\text{\ s.t.\ }x+(-x)=0.\]
-\item Existence of multiplicative inverses:
-\[\forall x\in\mathbb{R}\land x\neq 0\colon\exists x^{-1}\in\mathbb{R}\text{\ s.t.\ }x\cdot x^{-1}=1.\]
+\item\tb{Cauchy sequence}: A Cauchy sequence $(x_n)$ of the rational numbers is a sequence of the rational numbers such that for every rational number $\varepsilon>0$, there exists a positive integer $N$ such that $m,n\geq N\implies|x_m−x_n|\leq\varepsilon$. Let $R$ be the set of Cauchy sequences of the rational numbers.
+\item \tb{Equivalence relation}: Define an equivalence relation $\sim$ on $R$ as $(x_n)\sim(y_n)$ iff $(|x_n-y_n|)$ is a Cauchy sequence.
+
+An equivalence class of $(x_n)$ is
+\[[(x_n)]=\qty\{(y_n)\in R\middle|(x_n)\sim(y_n)\}.\]
+
+The reals $\bbR$ is defined as the quotient set of $R$ by the equivalence relation $\sim$.
+\item \tb{Total order}: Total order $\leq$ over $\bbR$ is defined given order $\leq$ over $\bbQ$ as,
+\[[x_n]\leq[y_n]\iff\]
+for every rational number $\varepsilon>0$, there exists a positive integer $N$ such that $n\geq N\implies x_n\leq y_n+\varepsilon$.
+\item \tb{Addition}: Addition is a function $\bbR^2\to\bbR$ defined as
+\[[(x_n)]+[(y_n)]\coloneq[(x_n+y_n)].\]
+\item \tb{Subtraction}: Subtraction is a function $\bbR^2\to\bbR$ defined as:
+\[[(x_n)]-[(y_n)]\coloneq[(x_n-y_n)].\]
+\item \tb{Negation or additive inverse}: Negation (or additive inverse) is a function $\bbR\to\bbR$ defined as
+\[-[(x_n)]\coloneq[(-x_n)].\]
+\item \tb{Absolute value}: Absolute value is a function $\bbR\to\bbR$ defined as
+\[\abs{[(x_n)]}\coloneq\begin{cases}[(x_n)],\quad&a\geq [(0)]\\[(-x_n)],\quad&a\leq [(0)]\end{cases}.\]
+\item \tb{Multiplication}: Multiplication is a function $\bbR^2\to\bbR$ defined as
+\[[(x_n)]\cdot[(y_n)]\coloneq[(x_n\cdot y_n)].\]
+\item \tb{Division}: Division is a function $\bbR\times\bbR\setminus\{[(0)]\}\to\bbR$ defined as
+\[[x_n]/[y_n]\coloneq[x_n/y_n].\]
+\item \tb{Notation}: $[(x_n)]\in\bbR$ is denoted as the limit of it $\lim_{n\to\infty}x_n$.
 \eit
-\item \tb{Total order}: The field $\mathbb{R}$ is ordered, meaning that there is a total order $\leq$ such that for all real numbers $x$, $y$ and $z$:
+\sssc{Set of Dedekind cuts and rationals}
 \bit
-\item Preservation of order under addition:
-\[\forall x,y,z\in\mathbb{R}\colon x\leq y\implies x+z\leq y+z.\]
-\item Preservation of order under multiplication:
-\[\forall x,y\in\mathbb{R}\colon 0\leq x\land 0\leq y\implies 0\leq xy.\]
-\item The order is Dedekind-complete, meaning that every nonempty subset $S$ of $\mathbb{R}$ with an upper bound in $\mathbb{R}$ has a least upper bound (aka, supremum) in $\mathbb{R}$. This property applies to the real numbers but not to the rational numbers. For example, $\{x\in\mathbb{Q}\colon x^2<2\}$ has a rational upper bound (e.g., 1.42), but no least rational upper bound, because $\sqrt{2}$ is not rational.
-\eit\eit
+\item \tb{Dedekind cut}: A Dedekind cut of $\bbQ$ is a partition of the rationals $\bbQ$ into two subsets $A$ and $B$ such that
+\bit
+\item $A$ is nonempty.
+\item $B$ is nonempty.
+\item $A$ is closed downwards: If $x,y\in\bbQ\land x\leq y\land y\in A$, then $x\in A$.
+\item $A$ does not contain a greatest element: If $x\in A$, then there exists a $y\in A$ such that $y>x$.
+\eit
+Let $D$ be the set of all Dedekind cuts of $\bbQ$. A rational number $q$ is represented by
+\[\{x\in\bbQ\mid x<q\}.\]
+Thus, the rationals is
+\[\{\{x\in\bbQ\mid x<q\}\mid q\in\bbQ\}.\]
+The reals is defined as
+\[D\cup\{\{x\in\bbQ\mid x<q\}\mid q\in\bbQ\}.\]
+\item \tb{Total order}: Total order $\leq$ over $\bbR$ is defined as
+\[A\leq B\iff A\subseteq B.\]
+\item \tb{Addition}: Addition is a function $\bbR^2\to\bbR$ defined as
+\[A+B\coloneq\{a+b|a\in A\land b\in B\}.\]
+\item \tb{Subtraction}: Subtraction is a function $\bbR^2\to\bbR$ defined as:
+\[A-B\coloneq\{a-b|a\in A\land b\in(\bbQ\setminus B)\}.\]
+\item \tb{Negation or additive inverse}: Negation (or additive inverse) is a function $\bbR\to\bbR$ defined as
+\[-B\coloneq\{a-b|a<0\land b\in(\bbQ\setminus B)\}.\]
+\item \tb{Absolute value}: Absolute value is a function $\bbR\to\bbR$ defined as
+\[|B|\coloneq\begin{cases}
+B,\quad&B\geq\{x\in\bbQ\mid x<0\}\\
+-B,\quad&B<\{x\in\bbQ\mid x<0\}
+\end{cases}.\]
+\item \tb{Multiplication}: Multiplication is a function $\bbR^2\to\bbR$ defined as
+\[A\cdot B\coloneq\begin{cases}
+\{a\cdot b\mid a,b\geq 0\land a\in A\land b\in B\}\cup\{x\in\bbQ\mid x<0\},\quad&A,B\geq\{x\in\bbQ\mid x<0\}\\
+-(-A)\cdot B,\quad&B\geq\{x\in\bbQ\mid x<0\}>A\\
+-A\cdot (-B),\quad&A\geq\{x\in\bbQ\mid x<0\}>B\\
+(-A)\cdot (-B),\quad&A,B<\{x\in\bbQ\mid x<0\}
+\end{cases}\]
+\item \tb{Division}: Division is a function $\bbR\times\bbR\setminus\{\{x\in\bbQ\mid x<0\}\}\to\bbR$ defined as
+\[A/B\coloneq\begin{cases}
+\{a/b\mid a\in A\land b\in(\bbQ\setminus B)\},\quad&A\geq\{\{x\in\bbQ\mid x<0\}\land B>\{\{x\in\bbQ\mid x<0\}\\
+-(-A)/B,\quad&B>\{x\in\bbQ\mid x<0\}>A\\
+-A/(-B),\quad&A\geq\{x\in\bbQ\mid x<0\}>B\\
+(-A)/(-B),\quad&A,B<\{x\in\bbQ\mid x<0\}
+\end{cases}\]
+\item \tb{Notation}: $A\in\bbR$ is denoted as the supremum (aka least upper bound) of it $\sup A$.
+\eit
 \ssc{Irrational numbers (無理數)}
+The set of Irrational numbers (aka, the Irrationals) is defined as
 \[\mathbb{R}\setminus\mathbb{Q}.\]
-\ssc{Complex numbers (複數)}
-\[\mathbb{C}=\{a+bi\mid a,b\in\mathbb{R}\},\]
-in which $i=\sqrt{-1}$.
+\ssc{Extended real numbers (擴展實數)}
+
+
 \sct{Positional Systems, Positional Numeral System, Place-value Notations, or Place-value}
 \ssc{Definition}
 Positional systems, positional numeral system, place-value notations, or place-value, usually denoted as extension to any base of the Hindu–Arabic numeral system, are classified by their base or radix, which is the number of symbols called digits used by the system. These systems in Hindu–Arabic numeral system are also called number system.
