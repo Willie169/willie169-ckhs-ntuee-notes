@@ -12,7 +12,7 @@
 \ssc{Introduction to Switching Circuit}
 \begin{itemize}
 \item\textbf{Digital system}: A system that deals with signals that have discrete values.
-\item\textbf{Circuit (ckt)}:A complete electrical network, that is, an interconnection of electrical components, with a closed-loop giving a return path for current.
+\item\textbf{Circuit (ckt)}: A complete electrical network, that is, an interconnection of electrical components, with a closed-loop giving a return path for current.
 \item\textbf{Switching circuit or digital circuit}: A circuit that deals with input and output signals that have discrete values, or, as typically the case, a logic circuit.
 \item\textbf{Logic circuit}: A circuit that deals with binary input and output signals, that is, either 0 or 1.
 \item\textbf{Analog system}: Deals with signals that vary continuously over time. The output might have an error depending on the accuracy of the components used.
@@ -22,7 +22,6 @@
 \item\textbf{Combinational circuit}: A switching circuit whose output value depends only on the present input value.
 \item\textbf{Sequential circuit}: A switching circuit whose output value depends on the present input value and past input values.
 \item\textbf{Switch, switching device, or switch element}: A component that opens or closes a circuit.
-\item\textbf{Flip-flop}: A bistable electronic device, meaning it has two stable states representing logic 0 and 1. It's a basic memory element used in sequential circuits.
 \end{itemize}
 \subsection{Introduction to Boolean Algebra}
 The basic mathematics needed for the study of logic design of digital systems is Boolean algebra. Boolean algebra was introduced by George Boole in his first book The Mathematical Analysis of Logic (1847), and set forth more fully in his An Investigation of the Laws of Thought (1854).
@@ -939,13 +938,23 @@ An integrated circuit package is the physical case that holds the silicon chip (
 \end{longtable}
 
 It is generally uneconomical to design digital systems using only SSI and MSI integrated circuits. By using LSI and VLSI ICs, the required number of integrated circuit packages is greatly reduced, and the cost of mounting, wiring, designing, and maintaining may be significantly lower.
-\ssc{Combinational circuits}
+\ssc{Helpers}
 \sssc{Active high and low}
-For some type of circuits, active high (aka active-high or noninverted) outputs means the outputs are noninverted; active low (aka active-low or inverted) outputs means the outputs are logically equivalent to being inverted. Active high (aka active-high or noninverted) inputs means the inputs are noninverted before inputted; active low (aka active-low or inverted) outputs means the inputs are logically equivalent to being inverted before inputted.
+Active high (aka active-high or noninverted) means the input or output signal is noninverted; active low (aka active-low or inverted) means the input or output signal is (logically equivalent to) inverted.
 
-Unless otherwise specified, a type of circuit with active high and low version of inputs and/or outputs are assumed to be active high inputs and/or outputs.
+Unless otherwise specified, a type of electronic components with active high and low version of inputs and/or outputs are assumed to be active high inputs and/or outputs.
 \sssc{Bus}
 Several signals that perform a common function may be grouped together to form a bus, represented with a single heavy line optionally with a diagonal slash through it specifying the number of bits in the bus.
+
+\sssc{Pull-up and Pull-down resistors}
+In a digital circuit, if an input pin is not connected to anything (floating), it can pick up random electrical noise. To keep it in a definite voltage we can use pull-up or pull-down resistors.
+
+A pull-up resistor is a resistor connected between a signal line and +Vcc to ensure that the signal stays at logic 1 when no active signal drives it low.
+
+A pull-down resistor is a resistor connected between a signal line and ground to ensure that the signal stays at logic 0 when no active signal drives it high.
+\sssc{Feedback}
+Feedback occurs when the output of a circuit is fed back into its input. Sequential circuits must contain feedback, but not all circuits with feedback are sequential.
+\ssc{Combinational circuits}
 \sssc{Multiplexer (MUX)}
 A multiplexer (MUX) or data selector has a group of data inputs and a group of control inputs (aka select inputs or select lines) and one output. The control inputs are used to select one of the data inputs and connect it to the output terminal. Multiplexers are frequently used in digital system design to select the data which is to be processed or stored.
 
@@ -1136,21 +1145,103 @@ Take Xilinx XCR3064XL CPLD for example. This CPLD has four function blocks, each
 An FPGA is an IC that consists of an array of identical logic cells, also called configurable logic blocks (CLBs) or function generators, with programmable interconnections and surrounded by I/O blocks that connect the CLB signals to IC pins. The user can program the functions realized by each logic cell and the connections between the cells. Each CLB contains a lookup table (LUT), flip-flops, and multiplexers. An $n$-input LUT is essentially a reprogrammable $2^n$-word-$\times$-1-bit ROM that stores the truth table for the $n$-variable function being generated.
 
 Given a $n$-variable switching function $F$ and a FGPA with $m$-input LUTs ($m<n$), $2^{n-m}$ $m$-variable subfunctions of $F$ can be obtained using Shannon's expansion of the function and compose back to $F$ with one $2^{n-m}$-to-1 multiplexer, which can be composed of $\qty(2^{n-m-k+1}-1)$ $2^k$-to-1 multiplexers ($k\leq n-m$).
+
+
+
+
+
 \ssc{Latches and Flip-Flops}
 \sssc{Clock (CLK) signal}
 A clock signal is an periodic logic signal (square wave)  which oscillates between a high, representing a "one", and a low, representing a "zero", state at a constant frequency. A duty cycle is half a full cycle (a period), that is, how long the signal stays high or low. A rising edge is a moment the signal goes from 0 to 1; a falling edge is a moment the signal goes from 1 to 0.
 
 Clock signals are generated by oscillators, which can be crystal oscillator (very stable, used in CPUs and microcontrollers), RC oscillator (simpler and less precise), external clock generator, etc., often labeled CLK.
-\sssc{Flip-flops}
-Flip-flops are edge-triggered data storage elements that store a single bit of data; one of its two states represents a "one" and the other represents a "zero". "Edge-triggered" means it only responds at a clock edge.
-\sssc{Latches}
-Latches are level-triggered data storage elements that store a single bit of data; one of its two states represents a "one" and the other represents a "zero". "Level-triggered" means it responds to the level (value) change of a control signal called Enable and becomes transparent when the Enable is HIGH (or sometimes LOW), called enabled.
 \sssc{Synchronous system} 
 A synchronous system is a digital system where all state changes are coordinated by a single, global clock signal.
 
 An asynchronous systems is a digital system that is not a synchronous system.
-\sssc{Feedback}
-Feedback occurs when the output of a circuit is fed back into its input. Sequential circuits must contain feedback, but not all circuits with feedback are sequential.
+\sssc{Latches}
+Latches are level-triggered data storage elements that store a single bit of data; one of its two states represents a "one" and the other represents a "zero". "Level-triggered" means it responds to the level (value) change of a control signal called Enable and becomes transparent when the Enable is HIGH (or sometimes LOW), called enabled.
+\sssc{Flip-flops}
+Flip-flops are edge-triggered data storage elements that store a single bit of data; one of its two states represents a "one" and the other represents a "zero". "Edge-triggered" means it only responds at a clock edge.
+\sssc{Time}
+The response time or delay time $\epsilon$ of a latch or flip-flop is the time it needs to react to a input change. If an impulse of input lasts less than $\epsilon$, the latch or flip-flop will not react to it.
+
+When discussing latches and flip-flops, we the term \textit{present state} $Q=Q(t)$ to denote the state of the $Q$ output of the latch or flip-flop at the time input signal changes, and the term \textit{next state} $Q^+=Q(t+\epsilon)$ to denote the state of the $Q$ output after the latch or flip-flop has reacted to the input change and stabilized.
+\sssc{Metastable state}
+A metastable state is a state where the signal in a closed circuit
+\bit
+\item is a constant and can theoretically stay as is if no noise occur, and
+\item transits away if any noise occurs.
+\eit
+The probability that metastability lasts decays exponentially over time.
+
+Take a circuit consist of two inverters with the output of one being the input of another for example. There are two stable states (excluding metastable state), 0 and 1, and one metastable state, a voltage right in the middle of 0 and 1.
+\sssc{(Active-high or NOR-based) Set-Reset (S-R or SR) Latch}
+An (active-high or NOR-based) set-reset latch has two inputs, set $S$ and reset $R$, and two outputs, $Q$ and $Q'$, and stores one bit, $Q$. It consists two NOR gates with $S$ and $Q$ being the inputs and $Q'$ being the output of one NOR gate, and $R$ and $Q'$ being the inputs and $Q$ begin the output of the other NOR gate. It has restriction that $SR=0$ because $Q$ and $Q'$ will oscillate when $S=R=1$.
+
+With present state $Q$, next state $Q^+$, and next state of $Q'$ $P$, the next-state equation of an S-R latch is:
+\[Q^+=(R+(S+Q)')'=R'S+R'Q,\]
+\[P=(S+Q^+)'=S'Q^+'.\]
+\[Q^+'=(R'S+R'Q)'=(R'S)'(R'Q)'=(R+S')(R+Q')=R+S'Q'.\]
+\[P=S'R+S'Q'.\]
+The truth table is:
+\begin{longtable}[c]{|m|m|m|m|m|m|}
+\hline
+S & R & Q & Q^+ & Q^+' & P\\\hline
+0 & 0 & 0 & 0 & 1 & 1\\\hline
+0 & 0 & 1 & 1 & 0 & 0\\\hline
+0 & 1 & 0 & 0 & 1 & 1\\\hline
+0 & 1 & 1 & 0 & 1 & 1\\\hline
+1 & 0 & 0 & 1 & 0 & 0\\\hline
+1 & 0 & 1 & 1 & 0 & 0\\\hline
+1 & 1 & 0 & 0 & 1 & 0\\\hline
+1 & 1 & 1 & 0 & 1 & 0\\\hline
+\end{longtable}
+Thus, $P=Q^+'$ except when $S=R=1$.
+
+Making $S=R=1$ don't care combination allows simplifying the next-state equation as:
+\[Q^+=S+R'Q.\]
+
+In words, this equation tells us that the next state of the latch will be 1 either if it is set to 1 with an $S=1$ input, or if the present state is 1 and the latch is not reset with an $R=1$ input, and be 0 otherwise.
+
+The symbol of an active-high S-R latch in block diagrams is an rectangle with L or S-R latch in it, two input lines with label $S$ and $R$ in the rectangle adjacent to it on one long side, output line with label $Q$ in the rectangle adjacent to it at the position opposite to $S$ on the opposite side, and output line with label $Q'$ in the rectangle adjacent to it at the position opposite to $R$ on the opposite side.
+\sssc{Active-low or NAND-based Set-Reset (S-R or SR) Latch, $\ol{\tx{S}}\ol{\tx{R}}$ Latch, or $\ol{\tx{S}}$-$\ol{\tx{R}}$ Latch}
+An alternative form of S-R latch is the active-low or NAND-based set-reset latch, aka $\ol{\tx{S}}\ol{\tx{R}}$ latch or $\ol{\tx{S}}$-$\ol{\tx{R}}$ latch. It has two inputs, $\ol{S}$ and $\ol{R}$, and two outputs, $Q$ and $Q'$, and stores one bit, $Q$. It consists two NAND gates with $\ol{S}$ and $Q'$ being the inputs and $Q$ being the output of one NAND gate, and $\ol{R}$ and $Q$ being the inputs and $Q'$ begin the output of the other NAND gate. It has restriction that $\ol{S}+\ol{R}=1$ because $Q$ and $Q'$ will oscillate when $\ol{S}=\ol{R}=0$.
+
+With present state $Q$, next state $Q^+$, and next state of $Q'$ $P$, the next-state equation of an S-R latch is:
+\[Q^+=(\ol{S}(\ol{R}Q)')'=\ol{S}'+\ol{R}Q,\]
+\[P=(\ol{R}Q^+)'=\ol{R}'+Q^+'.\]
+\[Q^+'=(\ol{S}'+\ol{R}Q)'=\ol{S}(\ol{R}Q)'=\ol{S}\ol{R}'+\ol{S}Q'.\]
+\[P=\ol{R}'+\ol{S}Q'.\]
+The truth table is:
+\begin{longtable}[c]{|m|m|m|m|m|m|}
+\hline
+\ol{S} & \ol{R} & Q & Q^+ & Q^+' & P\\\hline
+1 & 1 & 0 & 0 & 1 & 1\\\hline
+1 & 1 & 1 & 1 & 0 & 0\\\hline
+1 & 0 & 0 & 0 & 1 & 1\\\hline
+1 & 0 & 1 & 0 & 1 & 1\\\hline
+0 & 1 & 0 & 1 & 0 & 0\\\hline
+0 & 1 & 1 & 1 & 0 & 0\\\hline
+0 & 0 & 0 & 1 & 0 & 1\\\hline
+0 & 0 & 1 & 1 & 0 & 1\\\hline
+\end{longtable}
+Thus, $P=Q^+'$ except when $\ol{S}=\ol{R}=0$.
+
+In words, this equation tells us that the next state of the latch will be 1 either if it is set to 1 with an $\ol{S}=0$ input, or if the present state is 1 and the latch is not reset with an $\ol{R}=0$ input, and be 0 otherwise.
+
+The symbol of an active-low S-R latch in block diagrams is an rectangle with L or S-R latch in it, two input lines with label $\ol{S}$ and $\ol{R}$ in the rectangle adjacent to it on one long side, output line with label $Q$ in the rectangle adjacent to it at the position opposite to $\ol{S}$ on the opposite side, and output line with label $Q'$ in the rectangle adjacent to it at the position opposite to $\ol{R}$ on the opposite side.
+\sssc{Switch Debouncing with an S-R Latch}
+When you press or release a physical pushbutton or toggle switch, the conductor contacts don't make or break cleanly but bounce (open-close-open-close rapidly), called switch bounce or contact chatter, which may cause noise transitions in logic instead of one if fed directly into digital system.
+
+To ensure that each physical press or release of a switch produces only one transition in logic, we can connect logic 1 (+V) to a double throw switch, connect the two outputs $b$ and $a$ of the double throw switch to $S$ and $R$ of an S-R latch respectively, connect $S$ and $R$ to pull-down resistors, and connect $Q$ to final output. When switch is switched from $a$ to $b$, the following sessions happen on the time diagram:
+\ben
+\item switch at $a$: $S=0$, $R=1$, $Q=0$,
+\item bounce at $a$: $S=0$, $R$ bounces, $Q=0$,
+\item switch between $a$ and $b$: $S=R=Q=0$,
+\item bounce at $b$: $S$ bounces, $R=0$, $Q=1$ after delay time of the latch since bounce at $b$ starts (delay time of the latch is longer than the time $S$ bounces from one state to another),
+\item switch at $b$: $S=1$, $R=0$, $Q=1$.
+\een
 
 
 \end{document}
