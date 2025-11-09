@@ -1168,7 +1168,7 @@ An asynchronous systems is a digital system that is not a synchronous system.
 \sssc{Latches}
 Latches are level-triggered data storage elements that store a single bit of data; one of its two states represents a "one" and the other represents a "zero". "Level-triggered" means it changes state at a level change of input signals.
 \sss{Gated latch}
-A gated latch is a latch with an extra input signal called enable (EN) or clock (clk) that controls whether the latch is transparent (enabled) or hold (disabled). When EN is at active level (1 for active-high latch and 0 for active-low latch), the latch is transparent, meaning the output follows the input; when EN is at inactive level (0 for active-high latch and 1 for active-low latch), the latch is hold, meaning the output remains at its previous state regardless of input changes.
+A gated latch is a latch with an extra input signal called enable or clock (clk) that controls whether the latch is transparent (enabled) or hold (disabled). When enable is at active level (1 for active-high latch and 0 for active-low latch), the latch is transparent, meaning the output follows the input; when enable is at inactive level (0 for active-high latch and 1 for active-low latch), the latch is hold, meaning the output remains at its previous state regardless of input changes.
 \sssc{Flip-flops}
 Flip-flops are edge-triggered data storage elements that store a single bit of data; one of its two states represents a "one" and the other represents a "zero". "Edge-triggered" means it only changes state at a clock edge.
 \sssc{Time}
@@ -1250,18 +1250,35 @@ To ensure that each physical press or release of a switch produces only one tran
 \item bounce at $b$: $S$ bounces, $R=0$, $Q=1$ after delay time of the latch since bounce at $b$ starts (delay time of the latch is longer than the time $S$ bounces from one state to another),
 \item switch at $b$: $S=1$, $R=0$, $Q=1$.
 \een
-\sssc{(Active-high or NOR-gate) Gated S-R Latch}
-An (active-high or NOR-gate) gated S-R latch has three inputs, set $S$, reset $R$, and enable $E$, and two outputs, $Q$ and $Q'$, and stores one bit, $Q$. It consists of an active-high S-R latch with $S$ and $R$ being replaced with outputs of two AND gates, each of which takes $E$ and the original input as inputs respectively. When $E=0$, the gated S-R latch is hold, i.e., it functions as an active-high S-R latch; when $E=1$, the gated S-R latch is transparent. It has restriction that $SR=0$ because $Q$ and $Q'$ will oscillate when $E=S=R=1$ and a race condition where both inputs to the S-R latch changes from 0 to 1 and the propagation delays of the gates determine whether the latch stabilizes with $Q=1$ or $Q=0$ occurs when $E$ changes from 1 to 0 while $S=R=1$.
+\sssc{Active-high or NOR-gate Gated S-R Latch}
+An active-high or NOR-gate gated S-R latch has three inputs, set $S$, reset $R$, and enable $E$, and two outputs, $Q$ and $Q'$, and stores one bit, $Q$. It consists of an active-high S-R latch with $S$ and $R$ being replaced with outputs of two AND gates, each of which takes $E$ and the original input as inputs respectively. When $E=0$, the gated S-R latch is hold, i.e., it functions as an active-high S-R latch; when $E=1$, the gated S-R latch is transparent.
+
+It has restriction that $SR=0$ because $Q$ and $Q'$ will oscillate when $E=S=R=1$ and a race condition where both inputs to the S-R latch changes from 0 to 1 and the propagation delays of the gates determine whether the latch stabilizes with $Q=1$ or $Q=0$ occurs when $E$ changes from 1 to 0 while $S=R=1$.
 
 With present state $Q$, next state $Q^+$, and next state of $Q'$ $P$, the next-state equation of a gated S-R latch is:
 \[Q^+=(RE+(SE+Q)')'=(RE)'(SE+Q)=(R'+E')(SE+Q)=SR'E+R'Q+QE'.\]
-By making $SR=0$ don't care combination, we can simplify it as:
+By making $S=R=1$ don't care combination, we can simplify it as:
 \[Q^+=SE+Q(R'+E').\]
-\[P=(SE+(SE+Q(R'+E')))'=(SE)'(SE+Q(R'+E'))'=(S'+E')(SE)'(Q(R'+E'))'=(S'+E')(Q'+RE)=S'Q+S'RE+E'Q'=RE+Q'(S'+E').\]
-\[Q^+'=(SE+Q(R'+E'))'=(SE)'(Q(R'+E'))'=(S'+E')(Q'+RE)=S'Q'+S'RE+E'Q.\]
-By making $SR=0$ don't care combination, we can simplify it as:
-\[Q^+'=RE+Q'(S+E')=P.\]
-If we plot the next-state equation for $Q^+$ on a K-map:
+\[P=(SE+(SE+Q(R'+E')))'=(SE)'(SE+Q(R'+E'))'=(S'+E')(SE)'(Q(R'+E'))'=(S'+E')(Q'+RE)=S'Q+S'RE+E'Q'.\]
+\[Q^+'=(SE+Q(R'+E'))'=(SE)'(Q(R'+E'))'=(S'+E')(Q'+RE)=S'Q'+S'RE+E'Q=P.\]
+By making $S=R=1$ don't care combination, we can simplify it as:
+\[Q^+'=P=RE+Q'(S+E').\]
+If we plot $Q^+=SE+Q(R'+E')$ on a K-map:
+\begin{longtable}[c]{mm|m|m|m|m|}
+& & \multicolumn{4}{|c|}{SR}\\
+& & 00 & 01 & 11 & 10\\\hline
+\multirow{4}{EQ} & 00 & 0 & 0 & 0 & 0\\\cline{3-6}
+& 01 & 1 & 1 & 1 & 1\\\cline{3-6}
+& 11 & 1 & 0 & 1 & 1\\\cline{3-6}
+& 10 & 0 & 0 & 1 & 1\\\cline{3-6}
+\end{longtable}
+we can find a static-1 hazard in it, 
+$(S,R,E,Q)=(1,1,0,1)\lra (S,R,E,Q)=(1,1,1,1)$. When $E$ changes from 1 to 0, the output $Q$ may changes to 1 temporarily, but will be forced back to 0 since the inputs $S_{SR}$ and $R_{SR}$ of the underlying S-R latch are both 0, which is simply a glitch. When $E$ changes from 0 to 1, however,  a race condition occurs.
+
+Another restriction of a NOR-gate gated S-R latch is that when a 
+called 0's catching problem, 0 catching problem, or race condition at 0 problem.
+
+?
 
 
 \end{document}
