@@ -1,4 +1,4 @@
-\documentclass[a4paper,12pt]{article}
+\documentclass[a4paper,12pt]{report}
 \setcounter{secnumdepth}{5}
 \setcounter{tocdepth}{3}
 \input{/usr/share/LaTeX-ToolKit/template.tex}
@@ -8,22 +8,9 @@
 \author{沈威宇}
 \date{\temtoday}
 \titletocdoc
-\sct{Switching Circuit and Logic Design}
-\ssc{Introduction to Switching Circuit}
-\begin{itemize}
-\item\textbf{Digital system}: A system that deals with signals that have discrete values.
-\item\textbf{Circuit (ckt)}: A complete electrical network, that is, an interconnection of electrical components, with a closed-loop giving a return path for current.
-\item\textbf{Switching circuit or digital circuit}: A circuit that deals with input and output signals that have discrete values, or, as typically the case, a logic circuit.
-\item\textbf{Logic circuit}: A circuit that deals with binary input and output signals, that is, either 0 or 1.
-\item\textbf{Analog system}: Deals with signals that vary continuously over time. The output might have an error depending on the accuracy of the components used.
-\item\textbf{System design}: The highest level of the design of systems, where you break the system into subsystems, specify what each subsystem do, and determine the interconnection and control of the subsystems.
-\item\textbf{(Digital) logic design}: The middle level of the design of digital systems, where you specify the logic operations inside each subsystem.
-\item\textbf{Circuit design}: The lowest level of the design of digital systems, where you specify the electronic components and their interconnection to form the system.
-\item\textbf{Combinational circuit}: A switching circuit whose output value depends only on the present input value.
-\item\textbf{Sequential circuit}: A switching circuit whose output value depends on the present input value and past input values.
-\item\textbf{Switch, switching device, or switch element}: A component that opens or closes a circuit.
-\end{itemize}
-\subsection{Introduction to Boolean Algebra}
+\ch{Switching Circuit and Logic Design}
+\sct{Boolean Algebra}
+\subsection{Introduction}
 The basic mathematics needed for the study of logic design of digital systems is Boolean algebra. Boolean algebra was introduced by George Boole in his first book The Mathematical Analysis of Logic (1847), and set forth more fully in his An Investigation of the Laws of Thought (1854).
 
 Switching devices are essentially two-state devices (e.g. switches which are open or closed and transistors with high or low output voltages). Consequently, we will emphasize the special case of Boolean algebra in which all of the variables assume only one of two values, 0 (false) or 1 (true), called Boolean variables; this two-valued Boolean algebra is also called switching algebra.
@@ -112,56 +99,6 @@ The dual of an Boolean expression or equation is another Boolean expression or e
 A functionally complete set is a set of logic operators and constant sources (0 or 1) that can express all possible Boolean functions of any number of input variables. A minimal functionally complete set is a functionally complete set such that removing any one element from it makes it no longer functionally complete. Some minimal functionally complete sets are $\{\tx{AND},\tx{NOT}\}$, $\{\tx{OR},\tx{NOT}\}$, $\{\tx{XOR},\tx{NOT}\}$, $\{\tx{XNOR},\tx{NOT}\}$, $\{\tx{NAND}\}$, $\{\tx{NOR}\}$, $\{\tx{IMPLY},\tx{0}\}$, and $\{\tx{NIMPLY},\tx{1}\}$, in which NAND and NOR are called universal.
 \sssc{Boolean Vector Functions or Boolean Multi-output Functions}
 A Boolean vector function or a Boolean multi-output function is a function $f\colon\{1,0\}^n\to\{1,0\}^m$. A Boolean vector function can be specified with truth table or as a tuple of $m$ Boolean functions.
-\ssc{Logic gate}
-A logic gate is an electronic device that performs a Boolean function.
-\sssc{Logic gate symbols}
-Logic gates symbols (inputs at left, two inputs for example for AND, OR, NAND, NOR, XOR, and XNOR gate):
-\begin{longtable}[c]{|p{0.2\tw}|p{0.2\tw}|p{0.2\tw}|p{0.2\tw}|}
-\hline
-Type & Distinctive shape (ANSI/IEEE Std 91/91a-1991 & Rectangular shape (IEEE Std 91/91a-1991/IEC 60617-12:1997) & Boolean function \\\hline\endhead
-(Logic) buffer (gate) & \cktus{buffer gate}{n} & \cktiec{buffer gate}{n} & $A$ \\\hline
-NOT gate / inverter & \cktus{not gate}{n} & \cktiec{not gate}{n} & $A'$ \\\hline
-AND gate & \cktus{and gate}{nn} & \cktiec{and gate}{nn} & AND \\\hline 
-OR gate & \cktus{or gate}{nn} & \cktiec{or gate}{nn} & OR \\\hline
-NAND gate & \cktus{nand gate}{nn} & \cktiec{nand gate}{nn} & NAND \\\hline
-NOR gate & \cktus{nor gate}{nn} & \cktiec{nor gate}{nn} & NOR \\\hline
-XOR gate & \cktus{xor gate}{nn} & \cktiec{xor gate}{nn} & XOR \\\hline
-XNOR gate & \cktus{xnor gate}{nn} & \cktiec{xnor gate}{nn} & XNOR \\\hline
-IMPLY gate & \cktus{or gate}{in} & \cktiec{or gate}{in} & IMPLY \\\hline
-NIMPLY gate & \cktus{nor gate}{in} & \cktiec{nor gate}{in} & NIMPLY \\\hline
-\end{longtable}
-
-An empty circle, called inversion bubble or bubble, means inverting the input before inputting to the gate when at a input to a gate, and means inverting the output before outputting from the gate when at the output from a gate.
-
-The diagrams of logic circuits are called block diagrams. The number of gate inputs of a circuit is the sum of the number of inputs to all gates in the circuit.
-\sssc{Alternative symbols}
-By using inversion bubbles at the inputs instead of the output in logic gates symbol except IMPLY and NIMPLY gates, using inversion bubbles at the output and second input instead of the first input in IMPLY gate symbol, and using inversion bubbles at the second input instead of the first input and the output in NIMPLY gate symbol, we obtain the alternative gate symbols (inputs at left, two inputs for example for AND, OR, NAND, NOR, XOR, and XNOR gate):
-\begin{longtable}[c]{|p{0.2\tw}|p{0.2\tw}|p{0.2\tw}|p{0.2\tw}|}
-\hline
-Type & Distinctive shape (ANSI/IEEE Std 91/91a-1991 & Rectangular shape (IEEE Std 91/91a-1991/IEC 60617-12:1997) & Boolean function \\\hline\endhead
-(Logic) buffer (gate) & \cktus{not gate}{i} & \cktiec{not gate}{i} & $A$ \\\hline
-NOT gate / inverter & \cktus{buffer gate}{i} & \cktiec{buffer gate}{i} & $A'$ \\\hline
-AND gate & \cktus{nor gate}{ii} & \cktiec{nor gate}{ii} & AND \\\hline 
-OR gate & \cktus{nand gate}{ii} & \cktiec{nand gate}{ii} & OR \\\hline
-NAND gate & \cktus{or gate}{ii} & \cktiec{or gate}{ii} & NAND \\\hline
-NOR gate & \cktus{and gate}{ii} & \cktiec{and gate}{ii} & NOR \\\hline
-XOR gate & \cktus{xnor gate}{ii} & \cktiec{xnor gate}{ii} & XOR \\\hline
-XNOR gate & \cktus{xor gate}{ii} & \cktiec{xor gate}{ii} & $XNOR \\\hline
-IMPLY gate & \cktus{nand gate}{ni} & \cktiec{nand gate}{ni} & IMPLY \\\hline
-NIMPLY gate & \cktus{and gate}{ni} & \cktiec{and gate}{ni} & NIMPLY \\\hline
-\end{longtable}
-
-Sometimes multiple (typically two) outputs are drawn on a gate with some of them (typically one of the two) with inversion bubble. This is logically equivalent to drawing one gate of that type for each of the noninverted or inverted outputs with the same input lines.
-\sssc{Fan-ins}
-The maximum number of inputs to a gate is called the fan-in of the gate.
-
-An AND, OR, NAND, NOR, XOR, or XNOR gate with $n$ inputs or fan-in $n$ is sometimes called with suffix $n$, e.g. NAND2 gate is a NAND gate with 2 inputs or fan-in 2.
-
-An AND, OR, NAND, NOR, XOR, or XNOR gate without fan-in specified is sometimes assumed to have fan-in 2.
-
-The fan-in of a practical logic gate is limited and may be two, three, four, eight, or some other number depending on the type of gates used.
-\sssc{Buffer}
-A gate output can only be connected to a limited number of other device inputs without degrading the performance of a digital system. A simple buffer may be used to increase the driving capability of a gate output.
 \ssc{Theorems}
 \sssc{Idempotent Laws}
 \[XX = X,\quad X + X = X.\]
@@ -710,6 +647,95 @@ For incompletely specified Boolean functions, we do the following change to the 
 \item Treat don't-care terms as minterms when grouping minterm.
 \item Omit don't-care terms columns when creating the prime implicant chart.
 \een
+\sct{Combinational Circuit}
+\ssc{Logic gate}
+A logic gate is an electronic device that performs a Boolean function.
+\sssc{Logic gate symbols}
+Logic gates symbols (inputs at left, two inputs for example for AND, OR, NAND, NOR, XOR, and XNOR gate):
+\begin{longtable}[c]{|p{0.2\tw}|p{0.2\tw}|p{0.2\tw}|p{0.2\tw}|}
+\hline
+Type & Distinctive shape (ANSI/IEEE Std 91/91a-1991 & Rectangular shape (IEEE Std 91/91a-1991/IEC 60617-12:1997) & Boolean function \\\hline\endhead
+(Logic) buffer (gate) & \cktus{buffer gate}{n} & \cktiec{buffer gate}{n} & $A$ \\\hline
+NOT gate / inverter & \cktus{not gate}{n} & \cktiec{not gate}{n} & $A'$ \\\hline
+AND gate & \cktus{and gate}{nn} & \cktiec{and gate}{nn} & AND \\\hline 
+OR gate & \cktus{or gate}{nn} & \cktiec{or gate}{nn} & OR \\\hline
+NAND gate & \cktus{nand gate}{nn} & \cktiec{nand gate}{nn} & NAND \\\hline
+NOR gate & \cktus{nor gate}{nn} & \cktiec{nor gate}{nn} & NOR \\\hline
+XOR gate & \cktus{xor gate}{nn} & \cktiec{xor gate}{nn} & XOR \\\hline
+XNOR gate & \cktus{xnor gate}{nn} & \cktiec{xnor gate}{nn} & XNOR \\\hline
+IMPLY gate & \cktus{or gate}{in} & \cktiec{or gate}{in} & IMPLY \\\hline
+NIMPLY gate & \cktus{nor gate}{in} & \cktiec{nor gate}{in} & NIMPLY \\\hline
+\end{longtable}
+
+An empty circle, called inversion bubble or bubble, means inverting the input before inputting to the gate when at a input to a gate, and means inverting the output before outputting from the gate when at the output from a gate.
+
+The diagrams of logic circuits are called block diagrams. The number of gate inputs of a circuit is the sum of the number of inputs to all gates in the circuit.
+\sssc{Alternative symbols}
+By using inversion bubbles at the inputs instead of the output in logic gates symbol except IMPLY and NIMPLY gates, using inversion bubbles at the output and second input instead of the first input in IMPLY gate symbol, and using inversion bubbles at the second input instead of the first input and the output in NIMPLY gate symbol, we obtain the alternative gate symbols (inputs at left, two inputs for example for AND, OR, NAND, NOR, XOR, and XNOR gate):
+\begin{longtable}[c]{|p{0.2\tw}|p{0.2\tw}|p{0.2\tw}|p{0.2\tw}|}
+\hline
+Type & Distinctive shape (ANSI/IEEE Std 91/91a-1991 & Rectangular shape (IEEE Std 91/91a-1991/IEC 60617-12:1997) & Boolean function \\\hline\endhead
+(Logic) buffer (gate) & \cktus{not gate}{i} & \cktiec{not gate}{i} & $A$ \\\hline
+NOT gate / inverter & \cktus{buffer gate}{i} & \cktiec{buffer gate}{i} & $A'$ \\\hline
+AND gate & \cktus{nor gate}{ii} & \cktiec{nor gate}{ii} & AND \\\hline 
+OR gate & \cktus{nand gate}{ii} & \cktiec{nand gate}{ii} & OR \\\hline
+NAND gate & \cktus{or gate}{ii} & \cktiec{or gate}{ii} & NAND \\\hline
+NOR gate & \cktus{and gate}{ii} & \cktiec{and gate}{ii} & NOR \\\hline
+XOR gate & \cktus{xnor gate}{ii} & \cktiec{xnor gate}{ii} & XOR \\\hline
+XNOR gate & \cktus{xor gate}{ii} & \cktiec{xor gate}{ii} & $XNOR \\\hline
+IMPLY gate & \cktus{nand gate}{ni} & \cktiec{nand gate}{ni} & IMPLY \\\hline
+NIMPLY gate & \cktus{and gate}{ni} & \cktiec{and gate}{ni} & NIMPLY \\\hline
+\end{longtable}
+
+Sometimes multiple (typically two) outputs are drawn on a gate with some of them (typically one of the two) with inversion bubble. This is logically equivalent to drawing one gate of that type for each of the noninverted or inverted outputs with the same input lines.
+\sssc{Fan-ins}
+The maximum number of inputs to a gate is called the fan-in of the gate.
+
+An AND, OR, NAND, NOR, XOR, or XNOR gate with $n$ inputs or fan-in $n$ is sometimes called with suffix $n$, e.g. NAND2 gate is a NAND gate with 2 inputs or fan-in 2.
+
+An AND, OR, NAND, NOR, XOR, or XNOR gate without fan-in specified is sometimes assumed to have fan-in 2.
+
+The fan-in of a practical logic gate is limited and may be two, three, four, eight, or some other number depending on the type of gates used.
+\sssc{Buffer}
+A gate output can only be connected to a limited number of other device inputs without degrading the performance of a digital system. A simple buffer may be used to increase the driving capability of a gate output.
+\ssc{Switching circuit}
+\sssc{Digital system}
+A system that deals with signals that have discrete values.
+\sssc{Circuit (ckt)}
+A complete electrical network, that is, an interconnection of electrical components, with a closed-loop giving a return path for current.
+\sssc{Switching circuit or digital circuit}
+A circuit that deals with input and output signals that have discrete values, or, as typically the case, a logic circuit.
+\sssc{Logic circuit}
+A circuit that deals with binary input and output signals, that is, either 0 or 1.
+\sssc{Analog system}
+Deals with signals that vary continuously over time. The output might have an error depending on the accuracy of the components used.
+\sssc{System design}
+The highest level of the design of systems, where you break the system into subsystems, specify what each subsystem do, and determine the interconnection and control of the subsystems.
+\sssc{(Digital) logic design}
+The middle level of the design of digital systems, where you specify the logic operations inside each subsystem.
+\sssc{Circuit design}
+The lowest level of the design of digital systems, where you specify the electronic components and their interconnection to form the system.
+\sssc{Combinational circuit}
+A switching circuit whose output value depends only on the present input value.
+\sssc{Sequential circuit}
+A switching circuit whose output value depends on the present input value and past input values.
+\sssc{Switch, switching device, or switch element}
+A component that opens or closes a circuit.
+\sssc{Active high and low}
+Active high (aka active-high or noninverted) means the input or output signal is noninverted; active low (aka active-low or inverted) means the input or output signal is (logically equivalent to) inverted.
+
+Unless otherwise specified, a type of electronic components with active high and low version of inputs and/or outputs are assumed to be active high inputs and/or outputs.
+\sssc{Bus}
+Several signals that perform a common function may be grouped together to form a bus, represented with a single heavy line optionally with a diagonal slash through it specifying the number of bits in the bus.
+
+\sssc{Pull-up and Pull-down resistors}
+In a digital circuit, if an input pin is not connected to anything (floating), it can pick up random electrical noise. To keep it in a definite voltage we can use pull-up or pull-down resistors.
+
+A pull-up resistor is a resistor connected between a signal line and +Vcc to ensure that the signal stays at logic 1 when no active signal drives it low.
+
+A pull-down resistor is a resistor connected between a signal line and ground to ensure that the signal stays at logic 0 when no active signal drives it high.
+\sssc{Feedback}
+Feedback occurs when the output of a circuit is fed back into its input. Sequential circuits must contain feedback, but not all circuits with feedback are sequential.
 \ssc{Multi-level combinational circuits}
 \sssc{Introduction}
 The maximum number of gates cascaded in series between a circuit input and the output is referred to as the number of levels of gates. Thus, a function written in sum-of-products form or in product-of-sums form corresponds directly to a two-level gate circuit. As is usually the case in digital circuits where the gates are driven from flip-flop outputs, we will assume that all variables and their complements are available as circuit inputs. For this reason, we will not normally count inverters which are connected directly to input variables.
@@ -938,22 +964,6 @@ An integrated circuit package is the physical case that holds the silicon chip (
 \end{longtable}
 
 It is generally uneconomical to design digital systems using only SSI and MSI integrated circuits. By using LSI and VLSI ICs, the required number of integrated circuit packages is greatly reduced, and the cost of mounting, wiring, designing, and maintaining may be significantly lower.
-\ssc{Helpers}
-\sssc{Active high and low}
-Active high (aka active-high or noninverted) means the input or output signal is noninverted; active low (aka active-low or inverted) means the input or output signal is (logically equivalent to) inverted.
-
-Unless otherwise specified, a type of electronic components with active high and low version of inputs and/or outputs are assumed to be active high inputs and/or outputs.
-\sssc{Bus}
-Several signals that perform a common function may be grouped together to form a bus, represented with a single heavy line optionally with a diagonal slash through it specifying the number of bits in the bus.
-
-\sssc{Pull-up and Pull-down resistors}
-In a digital circuit, if an input pin is not connected to anything (floating), it can pick up random electrical noise. To keep it in a definite voltage we can use pull-up or pull-down resistors.
-
-A pull-up resistor is a resistor connected between a signal line and +Vcc to ensure that the signal stays at logic 1 when no active signal drives it low.
-
-A pull-down resistor is a resistor connected between a signal line and ground to ensure that the signal stays at logic 0 when no active signal drives it high.
-\sssc{Feedback}
-Feedback occurs when the output of a circuit is fed back into its input. Sequential circuits must contain feedback, but not all circuits with feedback are sequential.
 \ssc{Combinational circuits}
 \sssc{Multiplexer (MUX)}
 A multiplexer (MUX) or data selector has a group of data inputs and a group of control inputs (aka select inputs or select lines) and one output. The control inputs are used to select one of the data inputs and connect it to the output terminal. Multiplexers are frequently used in digital system design to select the data which is to be processed or stored.
@@ -1145,11 +1155,7 @@ Take Xilinx XCR3064XL CPLD for example. This CPLD has four function blocks, each
 An FPGA is an IC that consists of an array of identical logic cells, also called configurable logic blocks (CLBs) or function generators, with programmable interconnections and surrounded by I/O blocks that connect the CLB signals to IC pins. The user can program the functions realized by each logic cell and the connections between the cells. Each CLB contains a lookup table (LUT), flip-flops, and multiplexers. An $n$-input LUT is essentially a reprogrammable $2^n$-word-$\times$-1-bit ROM that stores the truth table for the $n$-variable function being generated.
 
 Given a $n$-variable switching function $F$ and a FGPA with $m$-input LUTs ($m<n$), $2^{n-m}$ $m$-variable subfunctions of $F$ can be obtained using Shannon's expansion of the function and compose back to $F$ with one $2^{n-m}$-to-1 multiplexer, which can be composed of $\qty(2^{n-m-k+1}-1)$ $2^k$-to-1 multiplexers ($k\leq n-m$).
-
-
-
-
-
+\sct{Sequential Circuit}
 \ssc{Latches and Flip-Flops}
 \sssc{Clock (CLK) signal}
 A clock signal is an periodic logic signal (square wave)  which oscillates between a high, representing a "one", and a low, representing a "zero", state at a constant frequency. A duty cycle is half a full cycle (a period), that is, how long the signal stays high or low. A rising edge is a moment the signal goes from 0 to 1; a falling edge is a moment the signal goes from 1 to 0.
@@ -1160,7 +1166,7 @@ A synchronous system is a digital system where all state changes are coordinated
 
 An asynchronous systems is a digital system that is not a synchronous system.
 \sssc{Latches}
-Latches are level-triggered data storage elements that store a single bit of data; one of its two states represents a "one" and the other represents a "zero". "Level-triggered" means it responds to the level (value) change of a control signal called Enable and becomes transparent when the Enable is HIGH (or sometimes LOW), called enabled.
+Latches are level-triggered data storage elements that store a single bit of data; one of its two states represents a "one" and the other represents a "zero". "Level-triggered" means it responds to the level change of input signals.
 \sssc{Flip-flops}
 Flip-flops are edge-triggered data storage elements that store a single bit of data; one of its two states represents a "one" and the other represents a "zero". "Edge-triggered" means it only responds at a clock edge.
 \sssc{Time}
