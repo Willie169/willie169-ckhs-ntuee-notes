@@ -1169,6 +1169,8 @@ A synchronous system is a digital system where all state changes are coordinated
 An asynchronous systems is a digital system that is not a synchronous system.
 \sssc{Latch}
 A latch is a bistable sequential circuit that store a single bit of information and hold its value until it is updated by new input signals. One of its two states represents a logic 0 and the other represents a logic 1.
+
+For a latch to capture the inputted information and store it is called latch.
 \sssc{Asynchronous, Edge-triggered, and Level-triggered latch}
 An asynchronous latch (aka a basic latch) is a latch that responds to changes of data inputs all the time.
 
@@ -1179,8 +1181,10 @@ A edge-triggered flip-flop is a latch that responds to changes of data inputs at
 A gated or level-sensitive latch is a level-triggered latch that has an extra input signal that is not a data input called enable (EN) which controls whether the latch is transparent (enabled) or hold (disabled). When enable is at active level (1 for active-high gated latch and 0 for active-low gated latch), it is transparent, meaning the it acts as an asynchronous latch of its type; when enable is at inactive level (0 for active-high latch and 1 for active-low latch), the latch is hold (aka retain), meaning the output remains at its previous state regardless of input changes.
 
 Unless otherwise specified, a gated latch is active-high. A active-low gated latch can be implemented by adding an inverter at the enable input. The symbol of an active-low latch in block diagrams is that of an active-high one with an inversion bubble at the enable input right outside of the rectangle.
-\sssc{Flip-flops}
+\sssc{Flip-flop (FF)}
 The term flip-flop has historically referred generically to both level-triggered and edge-triggered latch. Some modern authors, however, reserve the term flip-flop exclusively for edge-triggered latch and use the term gated latch or simply latch for level-triggered latch. The terms "edge-triggered", and "level-triggered" may be used to avoid ambiguity.
+
+The implementation a type of flip-flop with another type of flip-flop is called conversion.
 \sssc{Response time or Delay time}
 The response time or delay time $\epsilon$ of a latch or flip-flop is the time it needs to react to a input change. If an impulse of input lasts less than $\epsilon$, the latch or flip-flop will not react to it.
 \sssc{Present state and Next state}
@@ -1338,12 +1342,8 @@ A gated J-K latch is a J-K latch with one additional input, enable $E$, to both 
 It is hold when $E=0$ or $J=K=0$, set when $E=J=K'=1$, reset when $E=J'=K=1$, and toggle when $E=J=K=1$.
 
 The symbol of a gated J-K latch in block diagrams is a J-K latch with an additional enable input line between $J$ and $K$ labeled $EN$.
-\sssc{T Latch}
-A toggle (aka T) latch is a gated J-K latch with $J$ and $K$ replaced with $T$. It has two inputs, toggle $T$ and enable $E$, and two outputs, $Q$ and $Q'$.
-
-It is hold when $E=0$ or $T=0$ and toggle when $E=T=1$.
 \sssc{Edge-triggered flip-flops}
-An edge-triggered flip-flop has the same inputs and outputs of the gated latch of the same type but the enable input $E$ is replaced with clock input $C$. For rising-edge-triggered (aka active-high) flip-flops, when clock is at a rising edge, the flip-flop is transparent; otherwise the flip-flop is hold (aka retain). For falling-edge-triggered (aka active-low) flip-flops, when clock is at a falling edge, the flip-flop is transparent; otherwise the flip-flop is hold (aka retain).
+An edge-triggered flip-flop has the same inputs and outputs of the gated latch of the same type but the enable input $E$ is replaced with clock input Clk. For rising-edge-triggered (aka active-high) flip-flops, when clock is at a rising edge, called active edge, the flip-flop is transparent; otherwise the flip-flop is hold (aka retain). For falling-edge-triggered (aka active-low) flip-flops, when clock is at a falling edge, called active edge, the flip-flop is transparent; otherwise the flip-flop is hold (aka retain).
 
 The symbol of a rising-edge-triggered flip-flop in block diagrams is a gated latch of the same type with $EN$ replaced with a small arrowhead (wedge shape) with its opening facing outwards from the rectangle and its two ends on the side of the rectangle representing the clock input.
 
@@ -1355,8 +1355,42 @@ The term master-slave flip-flop refers to a particular implementation that uses 
 
 The master is the latch that takes the data inputs and the slave is the latch that takes outputs of the master as inputs and outputs the final outputs of the master-slave flip-flop.
 
-For active-high/rising-edge-triggered flip-flops, the enable signal of the master is the inverse of the clock signal and the enable signal of the slave is the clock signal. For active-low/falling-edge-triggered flip-flops, the enable signal of the master is the clock signal and the enable signal of the slave is the inverse of the clock signal.
-\sssc{Master-slave D flip-flop}
+The master-slave flip-flops need a time where the data inputs are stable before an active edge long enough for the master to latch, called setup time, and a time where the data inputs are stable after an active edge long enough for the outputs of master to transfer to the slave, called hold time. If data inputs change during the union of setup time and hold time around an active edge, the behavior is unpredictable.
+
+For rising-edge-triggered flip-flops, the enable signal of the master is the inverse of the clock signal and the enable signal of the slave is the clock signal. For falling-edge-triggered flip-flops, the enable signal of the master is the clock signal and the enable signal of the slave is the inverse of the clock signal.
+\sssc{Master-slave S-R flip-flop (SRFF)}
+Let the inputs and outputs of the master be with subscript $_1$ and those of the slave be with subscript $_2$. In a master-slave S-R flip-flop, $Q_1$ and $Q_1'$ are connected to $S_2$ and $R_2$ respectively, and $Q_2$ and $Q_2'$ are the final outputs of it.
+\sssc{Master-slave D flip-flop (DFF)}
+Let the inputs and outputs of the master be with subscript $_1$ and those of the slave be with subscript $_2$. In a master-slave D flip-flop, $Q_1$ is connected to $D_2$, $Q_1'$ is discarded, and $Q_2$ and $Q_2'$ are the final outputs of it.
+\sssc{Master-slave J-K flip-flop (JKFF)}
+Let the inputs and outputs of the master be with subscript $_1$ and those of the slave be with subscript $_2$. In a master-slave J-K flip-flop, $Q_1$ and $Q_1'$ are connected to $J_2$ and $K_2$ respectively, and $Q_2$ and $Q_2'$ are the final outputs of it.
+\sssc{T flip-flop (TFF)}
+A toggle (aka T) flip-flop has two inputs, toggle $T$ and clock $C$, and two outputs, $Q$ and $Q'$. If $T=1$ at an active edge, the outputs $(Q,Q')$ become $(1,0)$ if originally $(0,1)$ and $(0,1)$ if originally $(1,0)$, called toggle. Otherwise it is hold.
+
+With present state $Q$, next state $Q^+$, the next-state equation of a T flip-flop at an active edge is:
+\[Q^+=T'Q+TQ'.\]
+
+It can be implemented with a J-K flip-flop with inputs $J$ and $K$ both connected to $T$.
+
+Alternatively, it can be implemented with a D flip-flop with input $D$ connect to the output of a XOR gate with inputs $T$ and $Q$.
+
+The symbol of a T flip-flop in block diagrams is a D flip-flop with $D$ replaced with $T$.
+\sssc{Flip-flops with asynchronous clear and preset}
+Some flip-flops has asynchronous inputs that change the stored state of $Q$ at any time.
+
+Active-high asynchronous clear Clr and preset Pre set the stored state of $Q$ to 1 if (Pre,Clr)=(1,0), set the stored state of $Q$ to 0 if (Pre,Clr)=(0,1), let the flip-flop work as normal if (Pre,Clr)=(0,0), and is not allowed to be both 1. In block diagrams, with the side of the symbol of the flip-flop with input lines at the buttom, Clr is an input line on the left side labeled Clr, and Pre is an input line on the right side labeled Pre.
+
+Active-low asynchronous clear ClrN and preset PreN set the stored state of $Q$ to 0 if (Pre,Clr)=(1,0), set the stored state of $Q$ to 1 if (Pre,Clr)=(0,1), let the flip-flop work as normal if (Pre,Clr)=(1,1), and is not allowed to be both 0. In block diagrams, with the side of the symbol of the flip-flop with input lines at the buttom, ClrN is an input line with inversion bubble on the left side labeled ClrN, and PreN is an input line with inversion bubble on the right side labeled PreN.
+\sssc{Flip-flops with clock enable}
+In synchronous digital systems, the flip-flops are usually driven by a common clock so that all state changes occur at the same time in response to the same clock edge. If we want a flip-flop to hold existing data during an active edge even though the data input to the flip-flops may be changing, we can use a flip-flop with clock enable (CE) input.
+
+A flip-flop with clock enable (CE) input has an additional input CE and works as a normal flip-flop if CE=1 and hold if CE=0.
+
+One method to implement it is by gating the clock, that is, replace the original clock input with the output of an AND gate with clock input and CE being the inputs. However, there are two potential problem. First, gate delays may cause the clock to arrive at some flip-flops at different times than at other flip-flops, resulting in a loss of synchronization. Second, if CE changes at the wrong time, the flip-flop may trigger due to the change in CE instead of due to the change in the clock input.
+
+Rather than gating the clock, a better method to implement it is by replacing each original data input with the output a 2-to-1 MUX with CE being the control input, original input being the data input selected when CE=1, and 0 being the data input selected when CE=0.
+
+A flip-flop with CE is called with the original name with -CE sufficed to the original type name, e.g., D-CE flip-flop.
 
 
 
