@@ -986,11 +986,11 @@ A $2^n$-to-1 multiplexer can be realized with $\qty(2^{n-m+1}-1)$ $2^m$-to-1 mul
 
 Given a $n$-variable switching function $F$, $2^m$ $m$-variable subfunctions of $F$ can be obtained using Shannon's expansion of the function and compose back to $F$ with one $2^{n-m}$-to-1 multiplexer. Take $m=1$, we can get a realization of $F$ with one $2^{n-1}$-to-1 multiplexer.
 \sssc{Three-state buffer or tri-state buffer}
-A three-state buffer (or tri-state buffer) is a logic gate that has three stable states: logic HIGH (1), logic LOW (0), and high impedance (Z). In the high impedance state, the output of the buffer is effectively disconnected from the subsequenct circuit. A three-state buffer has one data input and one output like a simple buffer and one additional input $B$ called enable (signal) and works as a simple buffer when $B=1$ and outputs high impedance when $B=0$.
+A three-state buffer (or tri-state buffer) is a logic gate that has three stable states: logic HIGH (1), logic LOW (0), and high impedance (Z). In the high impedance state, the output of the buffer is effectively disconnected from the subsequenct circuit. A three-state buffer has one data input and one output like a simple buffer and one additional enable input signal $En$. It works as a simple buffer when $En=1$ and outputs high impedance when $En=0$.
 
 When a bus is driven by three-state buffers, we call it a three-state bus.
 
-We can also add an inversion bubble at enable signal such that it works as a simple buffer when $B=0$ and outputs high impedance when $B=1$. We can also add an inversion bubble at either data input or output such that when it doesn't outputs high impedance, it works as an inverter.
+We can also add an inversion bubble at enable signal such that it works as a simple buffer when $En=0$ and outputs high impedance when $En=1$. We can also add an inversion bubble at either data input or output such that when it doesn't outputs high impedance, it works as an inverter.
 
 We can implement a 2-to-1 MUX by using data inputs of the MUX as data inputs of two tri-state buffers, using the control input and its inverse as enable signal of the two tri-state buffers respectively, and simply connecting the two outputs of the two tri-state buffers to the output of the MUX.
 \sssc{Bidirectional I/O pin}
@@ -1174,11 +1174,11 @@ A state variable is a binary variable that represents the current state of a seq
 \sssc{Asynchronous, Edge-triggered, and Level-triggered latch}
 An asynchronous latch (aka a basic latch) is a latch that responds to changes of data inputs all the time.
 
-A level-triggered latch/flip-flop is a latch that responds to changes of data inputs when a signal, called enable (EN or E), is at a specific high or low level.
+A level-triggered latch/flip-flop is a latch that responds to changes of data inputs when a signal, called enable (En or E), is at a specific high or low level.
 
 A edge-triggered flip-flop is a latch that responds to changes of data inputs only at the rising or falling edge of a clock signal, called clock (Clk, Ck, or C).
 \ssss{Gated or level-sensitive latch}
-A gated or level-sensitive latch is a level-triggered latch that has an extra input signal that is not a data input called enable (EN) which controls whether the latch is transparent (enabled) or hold (disabled). When enable is at active level (1 for active-high gated latch and 0 for active-low gated latch), it is transparent, meaning the it acts as an asynchronous latch of its type; when enable is at inactive level (0 for active-high latch and 1 for active-low latch), the latch is hold (aka retain), meaning the output remains at its previous state regardless of input changes.
+A gated or level-sensitive latch is a level-triggered latch that has an additional enable input signal $En$ which controls whether the latch is transparent (enabled) or hold (disabled). When enable is at active level (1 for active-high gated latch and 0 for active-low gated latch), it is transparent, meaning the it acts as an asynchronous latch of its type; when enable is at inactive level (0 for active-high latch and 1 for active-low latch), the latch is hold (aka retain), meaning the output remains at its previous state regardless of input changes.
 
 Unless otherwise specified, a gated latch is active-high. A active-low gated latch can be implemented by adding an inverter at the enable input. The symbol of an active-low latch in block diagrams is that of an active-high one with an inversion bubble at the enable input right outside of the rectangle.
 \sssc{Flip-flop (FF)}
@@ -1300,7 +1300,7 @@ By making $S=R=1$ don't care combination, we can simplify it as:
 
 Another restriction of NOR-gate gated S-R latchs is when one or both of $S$ and $R$ go low (e.g. a glitch caused by a statc-0 hazard) near a falling edge of $E$, the latch may catch the unwanted 0. This is called 0's catching problem.
 
-The symbol of a gated S-R latch in block diagrams is an active-high S-R latch with an additional enable input line between $S$ and $R$ labeled $EN$.
+The symbol of a gated S-R latch in block diagrams is an active-high S-R latch with an additional enable input line between $S$ and $R$ labeled $En$.
 \sssc{NAND-gate Gated S-R Latch}
 A NAND-gate gated S-R latch or a gated S-R NAND latch has three inputs, set $S$, reset $R$, and enable $E$, and two outputs, $Q$ and $Q'$, and stores one bit, $Q$. It consists of an active-low S-R latch with $\ol{S}$ and $\ol{R}$ being replaced with the outputs of two NAND gates, each of which takes $E$ and the original input as inputs respectively.
 
@@ -1315,7 +1315,7 @@ By making $S=R=1$ don't care combination, we can simplify it as:
 
 Another restriction of NAND-gate gated S-R latchs is when one or both of $S$ and $R$ go high (e.g. a glitch caused by a statc-1 hazard) near a falling edge of $E$, the latch may catch the unwanted 1. This is called 1's catching problem.
 
-The symbol of a gated S-R latch in block diagrams is an active-high S-R latch with an additional enable input line between $S$ and $R$ labeled $EN$.
+The symbol of a gated S-R latch in block diagrams is an active-high S-R latch with an additional enable input line between $S$ and $R$ labeled $En$.
 \sssc{(Gated) D Latch or Transparent Latch}
 A (gated) data (aka D) latch or transparent latch has two inputs, data $D$ and enable $E$, and two outputs, $Q$ and $Q'$, and stores one bit, $Q$. It consists of a gated S-R latch with $S$ and $R$ being replaced with $D$ and $D'$ ($D$ through an inverter) respectively. It is called a transparent latch because $Q=D$ when $E=1$.
 
@@ -1335,17 +1335,17 @@ With present state $Q$, next state $Q^+$, and next state of $Q'$ $P$, the next-s
 \[Q^+=((JQ')'((KQ)'Q)')'=JQ'+(KQ)'Q=JQ'+(K'+Q')Q=JQ'+K'Q.\]
 \[P=((KQ)'Q^+)'=(KQ)(J'+Q)(K+Q')=(J'+Q)(K+Q')=Q^+'=J'K+J'Q'+KQ.\]
 
-The symbol of a J-K latch in block diagrams is the same as an active-high S-R latch with $S$ and $R$ renamed $J$ and $K$ respectively.
+The symbol of a J-K latch in block diagrams is the same as an active-high S-R latch with $S$ and $R$ renamed $J$ and $K$ respectively. Sometimes output $Q'$ is omitted if not used.
 \sssc{Gated J-K Latch}
 A gated J-K latch is a J-K latch with one additional input, enable $E$, that is connected to both the gates $J$ and $K$ input to, which makes the two gates both have three inputs.
 
 It is hold when $E=0$ or $J=K=0$, set when $E=J=K'=1$, reset when $E=J'=K=1$, and toggle with race-around problem when $E=J=K=1$.
 
-The symbol of a gated J-K latch in block diagrams is a J-K latch with an additional enable input line between $J$ and $K$ labeled $EN$.
+The symbol of a gated J-K latch in block diagrams is a J-K latch with an additional enable input line between $J$ and $K$ labeled $En$.
 \sssc{Edge-triggered flip-flops}
 An edge-triggered flip-flop has the same inputs and outputs of the gated latch of the same type but the enable input $E$ is replaced with clock input Clk. For rising-edge-triggered (aka active-high) flip-flops, when clock is at a rising edge, called active edge, the flip-flop is transparent; otherwise the flip-flop is hold (aka retain). For falling-edge-triggered (aka active-low) flip-flops, when clock is at a falling edge, called active edge, the flip-flop is transparent; otherwise the flip-flop is hold (aka retain).
 
-The symbol of a rising-edge-triggered flip-flop in block diagrams is a gated latch of the same type with $EN$ replaced with a small arrowhead (wedge shape) with its opening facing outwards from the rectangle and its two ends on the side of the rectangle representing the clock input.
+The symbol of a rising-edge-triggered flip-flop in block diagrams is a gated latch of the same type with $En$ replaced with a small arrowhead (wedge shape) with its opening facing outwards from the rectangle and its two ends on the side of the rectangle representing the clock input.
 
 The symbol of a falling-edge-triggered flip-flop in block diagrams is a rising-edge-triggered flip-flop of the same type with an inversion bubble outside of the rectangle at the clock input.
 \sssc{Pulse-triggered flip-flops}
@@ -1362,6 +1362,8 @@ For rising-edge-triggered flip-flops, the enable signal of the master is the inv
 Let the inputs and outputs of the master be with subscript $_1$ and those of the slave be with subscript $_2$. In a master-slave S-R flip-flop, $Q_1$ and $Q_1'$ are connected to $S_2$ and $R_2$ respectively, and $Q_2$ and $Q_2'$ are the final outputs of it.
 \sssc{Master-slave D flip-flop (DFF)}
 Let the inputs and outputs of the master be with subscript $_1$ and those of the slave be with subscript $_2$. In a master-slave D flip-flop, $Q_1$ is connected to $D_2$, $Q_1'$ is discarded, and $Q_2$ and $Q_2'$ are the final outputs of it.
+
+In the symbol of a DFF, sometimes output $Q'$ ($Q_2'$) is omitted if not used.
 \sssc{Master-slave J-K flip-flop (JKFF)}
 Let the inputs and outputs of the master be with subscript $_1$ and those of the slave be with subscript $_2$. In a master-slave J-K flip-flop, $Q_1$ and $Q_1'$ are connected to $J_2$ and $K_2$ respectively, and $Q_2$ and $Q_2'$ are the final outputs of it.
 \sssc{T flip-flop (TFF)}
@@ -1377,10 +1379,13 @@ Alternatively, it can be implemented with a D flip-flop with input $D$ connect t
 The symbol of a T flip-flop in block diagrams is a D flip-flop with $D$ replaced with $T$.
 \sssc{Flip-flops with asynchronous clear and preset}
 Some flip-flops has asynchronous inputs that change the stored state of $Q$ at any time.
-
-Active-high asynchronous clear Clr and preset Pre set the stored state of $Q$ to 1 if (Pre,Clr)=(1,0), set the stored state of $Q$ to 0 if (Pre,Clr)=(0,1), let the flip-flop work as normal if (Pre,Clr)=(0,0), and is not allowed to be both 1, in which Clr or Pre is called asserted if being 1. In block diagrams, with the side of the symbol of the flip-flop with input lines at the buttom, Clr is an input line on the left side labeled Clr, and Pre is an input line on the right side labeled Pre.
-
-Active-low asynchronous clear ClrN and preset PreN set the stored state of $Q$ to 0 if (Pre,Clr)=(1,0), set the stored state of $Q$ to 1 if (Pre,Clr)=(0,1), let the flip-flop work as normal if (Pre,Clr)=(1,1), and is not allowed to be both 0, in which ClrN or PreN is called asserted if being 0. In block diagrams, with the side of the symbol of the flip-flop with input lines at the buttom, ClrN is an input line with inversion bubble on the left side labeled ClrN, and PreN is an input line with inversion bubble on the right side labeled PreN.
+\bit
+\item Active-high asynchronous clear Clr sets the stored state of $Q$ to 0 if Clr=1, called active, and does nothing if Clr=0. In block diagrams, with the side of the symbol of the flip-flop with input lines at the buttom, Clr is an input line on the left side labeled Clr.
+\item Active-high asynchronous clear Pre sets the stored state of $Q$ to 1 if Pre=1, called active, and does nothing if Pre=0. In block diagrams, with the side of the symbol of the flip-flop with input lines at the buttom, Pre is an input line on the right side labeled Pre.
+\item Active-low asynchronous clear ClrN sets the stored state of $Q$ to 0 if Clr=0, called active, and does nothing if Clr=1. In block diagrams, with the side of the symbol of the flip-flop with input lines at the buttom, ClrN is an input line with inversion bubble on the left side labeled ClrN or Clr.
+\item Active-low asynchronous clear PreN sets the stored state of $Q$ to 1 if Pre=0, called active, and does nothing if Pre=1. In block diagrams, with the side of the symbol of the flip-flop with input lines at the buttom, PreN is an input line with inversion bubble on the right side labeled PreN or Pre.
+\item If both Clr (ClrN) and Pre (PreN) are active at the same time, the behavior is unpredictable.
+\eit
 \sssc{Flip-flops with clock enable}
 In synchronous digital systems, the flip-flops are usually driven by a common clock so that all state changes occur at the same time in response to the same clock edge. If we want a flip-flop to hold existing data during an active edge even though the data input to the flip-flops may be changing, we can use a flip-flop with clock enable (CE) input.
 
@@ -1392,6 +1397,10 @@ Rather than gating the clock, a better method to implement it is by replacing ea
 
 A flip-flop with CE is called with the original name with -CE sufficed to the original type name, e.g., D-CE flip-flop.
 \ssc{Registers and Counters}
+\sssc{Parallel-In Parallel-Out (PIPO) Register}
+A parallel-in parallel-out (PIPO) register is a register that can load data inputs in parallel and output stored data in parallel. A $n$ bit PIPO register consists of $n$ edge-triggered D flip-flops, each with $D$ being data input and $Q$ being data output. The flip-flops usually share common clock input and asynchronous clear and/or preset inputs. If using gated clocks, the clock is gated with a common signal called load; if using clock enable, the flip-flops share a common clock enable input called load. When load=1 at an active edge, the data inputs are loaded into the register; when load=0 at an active edge, the register holds existing data.
+
+The symbol of a PIPO register in block diagrams is one underlying flip-flop symbol with bus lines for data inputs and outputs, and load is labeled at the clock enable input or the gated clock input.
 
 
 \end{document}
