@@ -682,7 +682,7 @@ OR gate & \cktus{nand gate}{ii} & \cktiec{nand gate}{ii} & OR \\\hline
 NAND gate & \cktus{or gate}{ii} & \cktiec{or gate}{ii} & NAND \\\hline
 NOR gate & \cktus{and gate}{ii} & \cktiec{and gate}{ii} & NOR \\\hline
 XOR gate & \cktus{xnor gate}{ii} & \cktiec{xnor gate}{ii} & XOR \\\hline
-XNOR gate & \cktus{xor gate}{ii} & \cktiec{xor gate}{ii} & $XNOR \\\hline
+XNOR gate & \cktus{xor gate}{ii} & \cktiec{xor gate}{ii} & XNOR \\\hline
 IMPLY gate & \cktus{nand gate}{ni} & \cktiec{nand gate}{ni} & IMPLY \\\hline
 NIMPLY gate & \cktus{and gate}{ni} & \cktiec{and gate}{ni} & NIMPLY \\\hline
 \end{longtable}
@@ -1174,9 +1174,9 @@ A state variable is a binary variable that represents the current state of a seq
 \sssc{Asynchronous, Edge-triggered, and Level-triggered latch}
 An asynchronous latch (aka a basic latch) is a latch that responds to changes of data inputs all the time.
 
-A level-triggered latch/flip-flop is a latch that responds to changes of data inputs when a signal, called enable (En or E), is at a specific high or low level.
+A level-triggered latch/flip-flop is a latch that responds to changes of data inputs when a signal, called enable ($En$ or $E$), is at a specific high or low level.
 
-A edge-triggered flip-flop is a latch that responds to changes of data inputs only at the rising or falling edge of a clock signal, called clock (Clk, Ck, or C).
+A edge-triggered flip-flop is a latch that responds to changes of data inputs only at the rising or falling edge of a clock signal, called clock (Clk, Ck, or $C$).
 \ssss{Gated or level-sensitive latch}
 A gated or level-sensitive latch is a level-triggered latch that has an additional enable input signal $En$ which controls whether the latch is transparent (enabled) or hold (disabled). When enable is at active level (1 for active-high gated latch and 0 for active-low gated latch), it is transparent, meaning the it acts as an asynchronous latch of its type; when enable is at inactive level (0 for active-high latch and 1 for active-low latch), the latch is hold (aka retain), meaning the output remains at its previous state regardless of input changes.
 
@@ -1300,7 +1300,7 @@ By making $S=R=1$ don't care combination, we can simplify it as:
 
 Another restriction of NOR-gate gated S-R latchs is when one or both of $S$ and $R$ go low (e.g. a glitch caused by a statc-0 hazard) near a falling edge of $E$, the latch may catch the unwanted 0. This is called 0's catching problem.
 
-The symbol of a gated S-R latch in block diagrams is an active-high S-R latch with an additional enable input line between $S$ and $R$ labeled $En$.
+The symbol of a gated S-R latch in block diagrams is an active-high S-R latch with an additional enable input line between $S$ and $R$ labeld $En$.
 \sssc{NAND-gate Gated S-R Latch}
 A NAND-gate gated S-R latch or a gated S-R NAND latch has three inputs, set $S$, reset $R$, and enable $E$, and two outputs, $Q$ and $Q'$, and stores one bit, $Q$. It consists of an active-low S-R latch with $\ol{S}$ and $\ol{R}$ being replaced with the outputs of two NAND gates, each of which takes $E$ and the original input as inputs respectively.
 
@@ -1315,7 +1315,7 @@ By making $S=R=1$ don't care combination, we can simplify it as:
 
 Another restriction of NAND-gate gated S-R latchs is when one or both of $S$ and $R$ go high (e.g. a glitch caused by a statc-1 hazard) near a falling edge of $E$, the latch may catch the unwanted 1. This is called 1's catching problem.
 
-The symbol of a gated S-R latch in block diagrams is an active-high S-R latch with an additional enable input line between $S$ and $R$ labeled $En$.
+The symbol of a gated S-R latch in block diagrams is an active-high S-R latch with an additional enable input line between $S$ and $R$ labeld $En$.
 \sssc{(Gated) D Latch or Transparent Latch}
 A (gated) data (aka D) latch or transparent latch has two inputs, data $D$ and enable $E$, and two outputs, $Q$ and $Q'$, and stores one bit, $Q$. It consists of a gated S-R latch with $S$ and $R$ being replaced with $D$ and $D'$ ($D$ through an inverter) respectively. It is called a transparent latch because $Q=D$ when $E=1$.
 
@@ -1341,7 +1341,7 @@ A gated J-K latch is a J-K latch with one additional input, enable $E$, that is 
 
 It is hold when $E=0$ or $J=K=0$, set when $E=J=K'=1$, reset when $E=J'=K=1$, and toggle with race-around problem when $E=J=K=1$.
 
-The symbol of a gated J-K latch in block diagrams is a J-K latch with an additional enable input line between $J$ and $K$ labeled $En$.
+The symbol of a gated J-K latch in block diagrams is a J-K latch with an additional enable input line between $J$ and $K$ labeld $En$.
 \sssc{Edge-triggered flip-flops}
 An edge-triggered flip-flop has the same inputs and outputs of the gated latch of the same type but the enable input $E$ is replaced with clock input Clk. For rising-edge-triggered (aka active-high) flip-flops, when clock is at a rising edge, called active edge, the flip-flop is transparent; otherwise the flip-flop is hold (aka retain). For falling-edge-triggered (aka active-low) flip-flops, when clock is at a falling edge, called active edge, the flip-flop is transparent; otherwise the flip-flop is hold (aka retain).
 
@@ -1360,7 +1360,7 @@ The master-slave flip-flops need a time where the data inputs are stable before 
 For rising-edge-triggered flip-flops, the enable signal of the master is the inverse of the clock signal and the enable signal of the slave is the clock signal. For falling-edge-triggered flip-flops, the enable signal of the master is the clock signal and the enable signal of the slave is the inverse of the clock signal.
 \sssc{Master-slave S-R flip-flop (SRFF)}
 Let the inputs and outputs of the master be with subscript $_1$ and those of the slave be with subscript $_2$. In a master-slave S-R flip-flop, $Q_1$ and $Q_1'$ are connected to $S_2$ and $R_2$ respectively, and $Q_2$ and $Q_2'$ are the final outputs of it.
-\sssc{Master-slave D flip-flop (DFF)}
+\sssc{Master-slave D flip-flop (DFF or FF)}
 Let the inputs and outputs of the master be with subscript $_1$ and those of the slave be with subscript $_2$. In a master-slave D flip-flop, $Q_1$ is connected to $D_2$, $Q_1'$ is discarded, and $Q_2$ and $Q_2'$ are the final outputs of it.
 
 In the symbol of a DFF, sometimes output $Q'$ ($Q_2'$) is omitted if not used.
@@ -1400,8 +1400,15 @@ A flip-flop with CE is called with the original name with -CE sufficed to the or
 \sssc{Parallel-In Parallel-Out (PIPO) Register}
 A parallel-in parallel-out (PIPO) register is a register that can load data inputs in parallel and output stored data in parallel. A $n$ bit PIPO register consists of $n$ edge-triggered D flip-flops, each with $D$ being data input and $Q$ being data output. The flip-flops usually share common clock input and asynchronous clear and/or preset inputs. If using gated clocks, the clock is gated with a common signal called load; if using clock enable, the flip-flops share a common clock enable input called load. When load=1 at an active edge, the data inputs are loaded into the register; when load=0 at an active edge, the register holds existing data.
 
-The symbol of a PIPO register in block diagrams is one underlying flip-flop symbol with bus lines for data inputs and outputs, and load is labeled at the clock enable input or the gated clock input.
+The symbol of a PIPO register in block diagrams is one underlying flip-flop symbol with bus lines for data inputs and outputs, and load is labeled as Load at the clock enable input or the gated clock input.
 \sssc{Data Transfer Between Registers with Tri-state Buffers}
+To transfer data from a source register to a destination register, we can connect the outputs of the source register to the inputs of the destination register through tri-state buffers, and connect the enable inputs of the tri-state buffers to a common enable signal $En$. When $En=1$, the tri-state buffers are enabled and the data outputs of the source register are transferred to the data inputs of the destination register; when $En=0$, the tri-state buffers are disabled and the data inputs of the destination register are disconnected from the data outputs of the source register.
+
+If multiple registers share a common data bus, only one register should enable its tri-state buffers at a time to avoid bus contention.
+\sssc{Data Transfer Between Registers with Multiplexers}
+To transfer data from source registers to a destination register, we can connect the outputs of the source registers to data inputs of a multiplexer and connect the output of the multiplexer to the data inputs of the destination register. When the select input select a source register and clock enable/load input of the destination register is active at an active edge, the data outputs of the selected source register are transferred to the data inputs of the destination register.
+\sssc{Parallel-In Serial-Out (PISO) Register}
+
 
 
 \end{document}
