@@ -903,8 +903,6 @@ or
 \een
 
 It should be emphasized that the discussion of hazards and the possibility of resulting glitches in this section has assumed that only a single input can change at a time and that no other input will change until the circuit has stabilized. If more than one input can change at one time, then nearly all circuits will contain hazards, and they cannot be eliminated by modifying the circuit implementation.
-\sssc{Race condition or race hazard}
-A race condition or race hazard is the condition which the behavior of a system is dependent on the sequence or timing of other uncontrollable events, leading to unwanted or inconsistent results. 
 \ssc{Simulation and testing of logic circuits}
 \sssc{Verilog, SystemVerilog, and VHDL}
 A hardware description language (HDL) is a specialized computer language used to describe the structure and behavior of electronic circuits.
@@ -1171,12 +1169,14 @@ An asynchronous systems is a digital system that is not a synchronous system.
 A latch is a bistable sequential circuit that store a single bit of information and hold its value until it is updated by new input signals. One of its two states represents a logic 0 and the other represents a logic 1.
 
 For a latch to capture the inputted information and store it is called latch.
+\sssc{State variable}
+A state variable is a binary variable that represents the current state of a sequential circuit.
 \sssc{Asynchronous, Edge-triggered, and Level-triggered latch}
 An asynchronous latch (aka a basic latch) is a latch that responds to changes of data inputs all the time.
 
 A level-triggered latch/flip-flop is a latch that responds to changes of data inputs when a signal, called enable (EN or E), is at a specific high or low level.
 
-A edge-triggered flip-flop is a latch that responds to changes of data inputs at the rising or falling edge of a clock signal, called clock (Clk, Ck, or C).
+A edge-triggered flip-flop is a latch that responds to changes of data inputs only at the rising or falling edge of a clock signal, called clock (Clk, Ck, or C).
 \ssss{Gated or level-sensitive latch}
 A gated or level-sensitive latch is a level-triggered latch that has an extra input signal that is not a data input called enable (EN) which controls whether the latch is transparent (enabled) or hold (disabled). When enable is at active level (1 for active-high gated latch and 0 for active-low gated latch), it is transparent, meaning the it acts as an asynchronous latch of its type; when enable is at inactive level (0 for active-high latch and 1 for active-low latch), the latch is hold (aka retain), meaning the output remains at its previous state regardless of input changes.
 
@@ -1188,20 +1188,32 @@ The implementation a type of flip-flop with another type of flip-flop is called 
 \sssc{Response time or Delay time}
 The response time or delay time $\epsilon$ of a latch or flip-flop is the time it needs to react to a input change. If an impulse of input lasts less than $\epsilon$, the latch or flip-flop will not react to it.
 \sssc{Present state and Next state}
-When discussing latches and flip-flops, we the term present state $Q=Q(t)$ to denote the state of the $Q$ output of the latch or flip-flop at the time input signal changes, and the term next state $Q^+=Q(t+\epsilon)$ to denote the state of the $Q$ output after the latch or flip-flop has reacted to the input change and stabilized.
+When discussing latches and flip-flops, we the term present state $Q=Q(t)$ to denote the state of the $Q$ output of the latch or flip-flop at the time input signal changes, and the term next state $Q^+=Q(t+\epsilon)$ to denote the state of the $Q$ output after the latch or flip-flop has reacted to the input change and stabilized. The equation with the next state in the LHS and a function of present state and inputs in the RHS is called the next-state equation or characteristic equation of the sequential circuit.
+\sssc{Flow table}
+A flow table of a sequential circuit is a truth table with state variables (labeled with superscript $^+$) and sometimes also output values in next state as output variables and input variables and state variables in present state as input variables.
 \sssc{Metastable state}
-A metastable state is a state where the signal in a sequential circuit
+A metastable state is a state where the state variables in a sequential circuit
 \bit
-\item is a constant and can theoretically stay as is if no noise occur, and
-\item transits away to a truly stable state (i.e., returns to the original state if a noise occurs) if any noise occurs.
+\item are constants and can theoretically stay as is if no noise occur, and
+\item transit away to a truly stable state if any noise occurs,
 \eit
+where a truly stable state is a state where the state variables return to the value of them in the state  if any noise occurs.
+
 The probability that metastability lasts decays exponentially over time.
 
 Take the sequential circuit consists of two inverters with the output of one being the input of another for example. There are two stable states (excluding metastable state), 0 and 1, and one metastable state, a voltage right in the middle of 0 and 1.
+\sssc{Essential hazard}
+An essential hazard in an asynchronous circuit is a hazard, which causes glitch but does not affect the final stable state, caused by unequal propagation delays along at least two different paths that originate from the same input, at least one of which in the circuit's feedback paths. These hazards cannot be corrected by adding redundant logic gates and require adjusting the delays in the affected paths to be resolved.
+\sssc{Race condition, race hazard, or race}
+A race condition, race hazard, or simply race is the condition which the behavior of a system is dependent on the sequence or timing of other uncontrollable events.
+
+A non-critical race is a race which the final stable state is not dependent on the sequence or timing of other uncontrollable events.
+
+A critical race is a race which the final stable state is dependent on the sequence or timing of other uncontrollable events. A critical race is caused by race of state variables and cannot be removed by adding redundant gates or adjusting the delays. To eliminate critical races, we can assign states in a way such that at most one state variable changes at a time, e.g., gray code.
 \sssc{(Active-high) S-R Latch}
 An (asynchronous) (active-high or NOR-gate) set-reset (aka S-R or SR) latch or an (asynchronous) S-R NOR latch has two inputs, set $S$ and reset $R$, and two outputs, $Q$ and $Q'$, and stores one bit, $Q$. It consists two NOR gates with $S$ and $Q$ being the inputs and $Q'$ being the output of one NOR gate, and $R$ and $Q'$ being the inputs and $Q$ begin the output of the other NOR gate.
 
-It has restriction that $SR=0$ because $Q$ and $Q'$ will oscillate when $S=R=1$.
+It is hold when $S=R=0$, set when $S=R'=1$, and reset when $S'=R=1$. It has restriction that $SR=0$ because $Q$ and $Q'$ will oscillate when $S=R=1$.
 
 With present state $Q$, next state $Q^+$, and next state of $Q'$ $P$, the next-state equation of an S-R latch is:
 \[Q^+=(R+(S+Q)')'=R'S+R'Q.\]
@@ -1227,15 +1239,13 @@ By making $S=R=1$ don't care combination, we can simplify them as:
 \[Q^+=S+R'Q.\]
 \[Q^+'=P=R+S'Q'.\]
 
-It is hold when $S=R=0$, set when $S=R'=1$, and reset when $S'=R=1$.
-
-In words, this equation tells us that the next state of the latch will be 1 either if it is set to 1 with an $S=1$ input, or if the present state is 1 and the latch is not reset with an $R=1$ input, and be 0 otherwise.
+The next state $Q^+$ will be 1 either if it is set to 1 with an $S=1$ input, or if the present state is 1 and the latch is not reset with an $R=1$ input, and be 0 otherwise.
 
 The symbol of an active-high S-R latch in block diagrams is an rectangle with two input lines with label $S$ and $R$ in the rectangle adjacent to it on one long side, output line with label $Q$ in the rectangle adjacent to it at the position opposite to $S$ on the opposite side, and output line with label $Q'$ in the rectangle adjacent to it at the position opposite to $R$ on the opposite side.
 \sssc{Active-low S-R Latch}
 An (asynchronous) active-low or NAND-gate S-R latch, an (asynchronous) S-R NAND latch, $\ol{\tx{S}\tx{R}}$ latch, or $\ol{\tx{S}}$-$\ol{\tx{R}}$ latch has two inputs, set $\ol{S}$ and reset $\ol{R}$, and two outputs, $Q$ and $Q'$, and stores one bit, $Q$. It consists two NAND gates with $\ol{S}$ and $Q'$ being the inputs and $Q$ being the output of one NAND gate, and $\ol{R}$ and $Q$ being the inputs and $Q'$ begin the output of the other NAND gate.
 
-It has restriction that $\ol{S}+\ol{R}=1$ because $Q$ and $Q'$ will oscillate when $\ol{S}=\ol{R}=0$.
+It is hold when $\ol{S}=\ol{R}=1$, set when $\ol{S}=\ol{R}'=0$, and reset when $\ol{S}'=\ol{R}=0$. It has restriction that $\ol{S}+\ol{R}=1$ because $Q$ and $Q'$ will oscillate when $\ol{S}=\ol{R}=0$.
 
 With present state $Q$, next state $Q^+$, and next state of $Q'$ $P$, the next-state equation of an S-R latch is:
 \[Q^+=(\ol{S}(\ol{R}Q)')'=\ol{S}'+\ol{R}Q.\]
@@ -1260,9 +1270,7 @@ Thus, $P=Q^+'$ except when $\ol{S}=\ol{R}=0$.
 By making $\ol{S}=\ol{R}=0$ don't care combination, we can simplify it as:
 \[Q^+'=P=\ol{R}'+\ol{S}Q'.\]
 
-It is hold when $\ol{S}=\ol{R}=1$, set when $\ol{S}=\ol{R}'=0$, and reset when $\ol{S}'=\ol{R}=0$.
-
-In words, this equation tells us that the next state of the latch will be 1 either if it is set to 1 with an $\ol{S}=0$ input, or if the present state is 1 and the latch is not reset with an $\ol{R}=0$ input, and be 0 otherwise.
+The next state $Q^+$ will be 1 either if it is set to 1 with an $\ol{S}=0$ input, or if the present state is 1 and the latch is not reset with an $\ol{R}=0$ input, and be 0 otherwise.
 
 The symbol of an active-low S-R latch in block diagrams is an rectangle with two input lines with label $\ol{S}$ and $\ol{R}$ in the rectangle adjacent to it on one long side, output line with label $Q$ in the rectangle adjacent to it at the position opposite to $\ol{S}$ on the opposite side, and output line with label $Q'$ in the rectangle adjacent to it at the position opposite to $\ol{R}$ on the opposite side.
 \sssc{Switch Debouncing with an S-R Latch}
@@ -1279,7 +1287,7 @@ To ensure that each physical press or release of a switch produces only one tran
 \sssc{NOR-gate Gated S-R Latch}
 A NOR-gate gated S-R latch or a gated S-R NOR latch has three inputs, set $S$, reset $R$, and enable $E$, and two outputs, $Q$ and $Q'$, and stores one bit, $Q$. It consists of an active-high S-R latch with $S$ and $R$ being replaced with the outputs of two AND gates, each of which takes $E$ and the original input as inputs respectively.
 
-It has restriction that $SR=0$ because $Q$ and $Q'$ will oscillate when $S=R=E=1$ and a race condition where both inputs to the S-R latch changes from 0 to 1 and the propagation delays of the gates determine whether the latch stabilizes with $Q$ changed or being original state occurs when $E$ changes from 1 to 0 while $S=R=1$.
+It is hold when $E=0$ or $S=R=0$, set when $E=S=R'=1$, and reset when $E=S'=R=1$. It has restriction that $SR=0$ because $Q$ and $Q'$ will oscillate when $S=R=E=1$ and a race condition where both inputs to the S-R latch changes from 0 to 1 and the propagation delays of the gates determine whether the latch stabilizes with $Q$ changed or being original state occurs when $E$ changes from 1 to 0 while $S=R=1$.
 
 With present state $Q$, next state $Q^+$, and next state of $Q'$ $P$, the next-state equation of a gated S-R latch is:
 \[Q^+=(RE+(SE+Q)')'=(RE)'(SE+Q)=(R'+E')(SE+Q)=SR'E+R'Q+E'Q.\]
@@ -1290,15 +1298,13 @@ By making $S=R=1$ don't care combination, we can simplify it as:
 By making $S=R=1$ don't care combination, we can simplify it as:
 \[Q^+'=P=RE+Q'(S+E').\]
 
-It is hold when $E=0$ or $S=R=0$, set when $E=S=R'=1$, and reset when $E=S'=R=1$.
-
 Another restriction of NOR-gate gated S-R latchs is when one or both of $S$ and $R$ go low (e.g. a glitch caused by a statc-0 hazard) near a falling edge of $E$, the latch may catch the unwanted 0. This is called 0's catching problem.
 
 The symbol of a gated S-R latch in block diagrams is an active-high S-R latch with an additional enable input line between $S$ and $R$ labeled $EN$.
 \sssc{NAND-gate Gated S-R Latch}
 A NAND-gate gated S-R latch or a gated S-R NAND latch has three inputs, set $S$, reset $R$, and enable $E$, and two outputs, $Q$ and $Q'$, and stores one bit, $Q$. It consists of an active-low S-R latch with $\ol{S}$ and $\ol{R}$ being replaced with the outputs of two NAND gates, each of which takes $E$ and the original input as inputs respectively.
 
-It has restriction that $SR=0$ because $Q$ and $Q'$ will oscillate when $S=R=E=1$ and a race condition where both inputs to the S-R latch changes from 1 to 0 and the propagation delays of the gates determine whether the latch stabilizes with $Q$ changed or being original state occurs when $E$ changes from 1 to 0 while $S=R=1$.
+It is hold when $E=0$ or $S=R=0$, set when $E=S=R'=1$, and reset when $E=S'=R=1$. It has restriction that $SR=0$ because $Q$ and $Q'$ will oscillate when $S=R=E=1$ and a race condition where both inputs to the S-R latch changes from 1 to 0 and the propagation delays of the gates determine whether the latch stabilizes with $Q$ changed or being original state occurs when $E$ changes from 1 to 0 while $S=R=1$.
 
 With present state $Q$, next state $Q^+$, and next state of $Q'$ $P$, the next-state equation of a NAND-gate gated S-R latch is:
 \[Q^+=((SE)'((RE)'Q)')'=SE+(RE)'Q=SE+Q(R'+E').\]
@@ -1307,8 +1313,6 @@ With present state $Q$, next state $Q^+$, and next state of $Q'$ $P$, the next-s
 By making $S=R=1$ don't care combination, we can simplify it as:
 \[Q^+'=P=RE+Q'(S+E').\]
 
-It is hold when $E=0$ or $S=R=0$, set when $E=S=R'=1$, and reset when $E=S'=R=1$.
-
 Another restriction of NAND-gate gated S-R latchs is when one or both of $S$ and $R$ go high (e.g. a glitch caused by a statc-1 hazard) near a falling edge of $E$, the latch may catch the unwanted 1. This is called 1's catching problem.
 
 The symbol of a gated S-R latch in block diagrams is an active-high S-R latch with an additional enable input line between $S$ and $R$ labeled $EN$.
@@ -1316,34 +1320,26 @@ The symbol of a gated S-R latch in block diagrams is an active-high S-R latch wi
 A (gated) data (aka D) latch or transparent latch has two inputs, data $D$ and enable $E$, and two outputs, $Q$ and $Q'$, and stores one bit, $Q$. It consists of a gated S-R latch with $S$ and $R$ being replaced with $D$ and $D'$ ($D$ through an inverter) respectively. It is called a transparent latch because $Q=D$ when $E=1$.
 
 The symbol of a D latch in block diagrams is the same as a gated S-R latch with $R$ removed and $S$ changed to $D$.
-\sssc{NOR-gate J-K Latch}
-An (asynchronous) J-K (aka JK) latch is an improved version of the S-R latch that eliminates the forbidden state. A NOR-gate J-K latch or J-K NOR latch has two inputs, $J$ and $K$, and two outputs, $Q$ and $Q'$, and stores one bit, $Q$. It consists of a NOR-gate gated S-R latch with $S$ and $R$ being renamed as $J$ and $K$ respectively and the enable $E$ inputs to the gates with $J$ and $K$ being the other input being replaced with new $Q'$ and $Q$ feedback inputs respectively.
+\sssc{(Asynchronous) J-K Latch}
+An (asynchronous) J-K (aka JK) latch is an improved version of the S-R latch that eliminates the forbidden state. It has two inputs, $J$ and $K$, and two outputs, $Q$ and $Q'$, and stores one bit, $Q$. It consists of a gated S-R latch with $S$ and $R$ being renamed as $J$ and $K$ respectively and the enable $E$ inputs to the gates with $J$ and $K$ being the other input being replaced with new $Q'$ and $Q$ feedback inputs respectively.
 
-When $J=K=1$, the outputs $(Q,Q')$ become $(1,0)$ if originally $(0,1)$ and $(0,1)$ if originally $(1,0)$, called toggle; however, if $J=K=1$ stays too long, the outputs toggle between the two states back and forth repeatedly, called the race-around condition.
+When $J=K=1$, the outputs $(Q,Q')$ become $(1,0)$ if originally $(0,1)$ and $(0,1)$ if originally $(1,0)$, called toggle. However, if $J=K=1$ stays longer than the propagation delay, the outputs toggle again, called the race-around problem.
 
-With present state $Q$, next state $Q^+$, and next state of $Q'$ $P$, the next-state equation of a NOR-gate gated S-R latch is:
+It is hold when $J=K=0$, set when $J=K'=1$, reset when $J'=K=1$, and toggle when $J=K=1$.
+
+With present state $Q$, next state $Q^+$, and next state of $Q'$ $P$, the next-state equation of a NOR-gate gated S-R latch, that is a J-K latch with underlying gated S-R latch being NOR-gate gated S-R latch, is:
 \[Q^+=(KQ+(JQ'+Q)')'=(KQ)'(JQ'+Q)=(K'+Q')(JQ'+Q)=JQ'+K'Q.\]
 \[P=(JQ'+Q^+)'=(JQ'+K'Q)'=Q^+'=(J'+Q)(K+Q')=J'K+J'Q'+KQ.\]
 
-It is hold when $J=K=0$, set when $J=K'=1$, reset when $J'=K=1$, and toggle when $J=K=1$.
-
-The symbol of a J-K latch in block diagrams is the same as an active-high S-R latch with $S$ and $R$ renamed $J$ and $K$ respectively.
-\sssc{(Asynchronous) NAND-gate J-K Latch}
-An (asynchronous) NAND-gate J-K latch or J-K NAND latch has two inputs, $J$ and $K$, and two outputs, $Q$ and $Q'$, and stores one bit, $Q$. It consists of a NAND-gate gated S-R latch with $S$ and $R$ being renamed as $J$ and $K$ respectively and the enable $E$ inputs to the gates with $J$ and $K$ being the other input being replaced with new $Q'$ and $Q$ feedback inputs respectively.
-
-When $J=K=1$, the outputs $(Q,Q')$ become $(1,0)$ if originally $(0,1)$ and $(0,1)$ if originally $(1,0)$, called toggle; however, if $J=K=1$ stays too long, the outputs toggle between the two states back and forth repeatedly, called the race-around condition.
-
-With present state $Q$, next state $Q^+$, and next state of $Q'$ $P$, the next-state equation of a NAND-gate gated S-R latch is:
+With present state $Q$, next state $Q^+$, and next state of $Q'$ $P$, the next-state equation of a NAND-gate gated S-R latch, that is a J-K latch with underlying gated S-R latch being NAND-gate gated S-R latch, is:
 \[Q^+=((JQ')'((KQ)'Q)')'=JQ'+(KQ)'Q=JQ'+(K'+Q')Q=JQ'+K'Q.\]
 \[P=((KQ)'Q^+)'=(KQ)(J'+Q)(K+Q')=(J'+Q)(K+Q')=Q^+'=J'K+J'Q'+KQ.\]
-
-It is hold when $J=K=0$, set when $J=K'=1$, reset when $J'=K=1$, and toggle when $J=K=1$.
 
 The symbol of a J-K latch in block diagrams is the same as an active-high S-R latch with $S$ and $R$ renamed $J$ and $K$ respectively.
 \sssc{Gated J-K Latch}
 A gated J-K latch is a J-K latch with one additional input, enable $E$, that is connected to both the gates $J$ and $K$ input to, which makes the two gates both have three inputs.
 
-It is hold when $E=0$ or $J=K=0$, set when $E=J=K'=1$, reset when $E=J'=K=1$, and toggle when $E=J=K=1$.
+It is hold when $E=0$ or $J=K=0$, set when $E=J=K'=1$, reset when $E=J'=K=1$, and toggle with race-around problem when $E=J=K=1$.
 
 The symbol of a gated J-K latch in block diagrams is a J-K latch with an additional enable input line between $J$ and $K$ labeled $EN$.
 \sssc{Edge-triggered flip-flops}
@@ -1382,9 +1378,9 @@ The symbol of a T flip-flop in block diagrams is a D flip-flop with $D$ replaced
 \sssc{Flip-flops with asynchronous clear and preset}
 Some flip-flops has asynchronous inputs that change the stored state of $Q$ at any time.
 
-Active-high asynchronous clear Clr and preset Pre set the stored state of $Q$ to 1 if (Pre,Clr)=(1,0), set the stored state of $Q$ to 0 if (Pre,Clr)=(0,1), let the flip-flop work as normal if (Pre,Clr)=(0,0), and is not allowed to be both 1. In block diagrams, with the side of the symbol of the flip-flop with input lines at the buttom, Clr is an input line on the left side labeled Clr, and Pre is an input line on the right side labeled Pre.
+Active-high asynchronous clear Clr and preset Pre set the stored state of $Q$ to 1 if (Pre,Clr)=(1,0), set the stored state of $Q$ to 0 if (Pre,Clr)=(0,1), let the flip-flop work as normal if (Pre,Clr)=(0,0), and is not allowed to be both 1, in which Clr or Pre is called asserted if being 1. In block diagrams, with the side of the symbol of the flip-flop with input lines at the buttom, Clr is an input line on the left side labeled Clr, and Pre is an input line on the right side labeled Pre.
 
-Active-low asynchronous clear ClrN and preset PreN set the stored state of $Q$ to 0 if (Pre,Clr)=(1,0), set the stored state of $Q$ to 1 if (Pre,Clr)=(0,1), let the flip-flop work as normal if (Pre,Clr)=(1,1), and is not allowed to be both 0. In block diagrams, with the side of the symbol of the flip-flop with input lines at the buttom, ClrN is an input line with inversion bubble on the left side labeled ClrN, and PreN is an input line with inversion bubble on the right side labeled PreN.
+Active-low asynchronous clear ClrN and preset PreN set the stored state of $Q$ to 0 if (Pre,Clr)=(1,0), set the stored state of $Q$ to 1 if (Pre,Clr)=(0,1), let the flip-flop work as normal if (Pre,Clr)=(1,1), and is not allowed to be both 0, in which ClrN or PreN is called asserted if being 0. In block diagrams, with the side of the symbol of the flip-flop with input lines at the buttom, ClrN is an input line with inversion bubble on the left side labeled ClrN, and PreN is an input line with inversion bubble on the right side labeled PreN.
 \sssc{Flip-flops with clock enable}
 In synchronous digital systems, the flip-flops are usually driven by a common clock so that all state changes occur at the same time in response to the same clock edge. If we want a flip-flop to hold existing data during an active edge even though the data input to the flip-flops may be changing, we can use a flip-flop with clock enable (CE) input.
 
@@ -1392,10 +1388,10 @@ A flip-flop with clock enable (CE) input has an additional input CE and works as
 
 One method to implement it is by gating the clock, that is, replace the original clock input with the output of an AND gate with clock input and CE being the inputs. However, there are two potential problem. First, gate delays may cause the clock to arrive at some flip-flops at different times than at other flip-flops, resulting in a loss of synchronization. Second, if CE changes at the wrong time, the flip-flop may trigger due to the change in CE instead of due to the change in the clock input.
 
-Rather than gating the clock, a better method to implement it is by replacing each original data input with the output a 2-to-1 MUX with CE being the control input, original input being the data input selected when CE=1, and 0 being the data input selected when CE=0.
+Rather than gating the clock, a better method to implement it is by replacing each original data input with the output a 2-to-1 MUX with CE being the control input, original input being the data input selected when CE=1, and 0 being the data input selected when CE=0. Because there is no gate in the clock line, this cannot cause a synchronization problem.
 
 A flip-flop with CE is called with the original name with -CE sufficed to the original type name, e.g., D-CE flip-flop.
-
+\ssc{Registers and Counters}
 
 
 \end{document}
