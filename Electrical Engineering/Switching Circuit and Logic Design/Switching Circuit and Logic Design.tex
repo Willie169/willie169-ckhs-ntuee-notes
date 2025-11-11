@@ -1360,10 +1360,12 @@ The master-slave flip-flops need a time where the data inputs are stable before 
 For rising-edge-triggered flip-flops, the enable signal of the master is the inverse of the clock signal and the enable signal of the slave is the clock signal. For falling-edge-triggered flip-flops, the enable signal of the master is the clock signal and the enable signal of the slave is the inverse of the clock signal.
 \sssc{Master-slave S-R flip-flop (SRFF)}
 Let the inputs and outputs of the master be with subscript $_1$ and those of the slave be with subscript $_2$. In a master-slave S-R flip-flop, $Q_1$ and $Q_1'$ are connected to $S_2$ and $R_2$ respectively, and $Q_2$ and $Q_2'$ are the final outputs of it.
-\sssc{Master-slave D flip-flop (DFF or FF)}
+\sssc{Master-slave D flip-flop (DFF)}
 Let the inputs and outputs of the master be with subscript $_1$ and those of the slave be with subscript $_2$. In a master-slave D flip-flop, $Q_1$ is connected to $D_2$, $Q_1'$ is discarded, and $Q_2$ and $Q_2'$ are the final outputs of it.
 
 In the symbol of a DFF, sometimes output $Q'$ ($Q_2'$) is omitted if not used.
+
+When the context is clear, flip-flops (FFs) may be used to refer to D flip-flops (DFFs).
 \sssc{Master-slave J-K flip-flop (JKFF)}
 Let the inputs and outputs of the master be with subscript $_1$ and those of the slave be with subscript $_2$. In a master-slave J-K flip-flop, $Q_1$ and $Q_1'$ are connected to $J_2$ and $K_2$ respectively, and $Q_2$ and $Q_2'$ are the final outputs of it.
 \sssc{T flip-flop (TFF)}
@@ -1397,17 +1399,40 @@ Rather than gating the clock, a better method to implement it is by replacing ea
 
 A flip-flop with CE is called with the original name with -CE sufficed to the original type name, e.g., D-CE flip-flop.
 \ssc{Registers and Counters}
-\sssc{Parallel-In Parallel-Out (PIPO) Register}
-A parallel-in parallel-out (PIPO) register is a register that can load data inputs in parallel and output stored data in parallel. A $n$ bit PIPO register consists of $n$ edge-triggered D flip-flops, each with $D$ being data input and $Q$ being data output. The flip-flops usually share common clock input and asynchronous clear and/or preset inputs. If using gated clocks, the clock is gated with a common signal called load; if using clock enable, the flip-flops share a common clock enable input called load. When load=1 at an active edge, the data inputs are loaded into the register; when load=0 at an active edge, the register holds existing data.
+\sssc{Register}
+A register can load data inputs in parallel and output stored data in parallel. A $n$ bit register consists of $n$ edge-triggered D flip-flops, each with $D$ being data input and $Q$ being data output. The flip-flops usually share common clock input and asynchronous clear and/or preset inputs. If using gated clocks, the clock is gated with a common signal called load; if using clock enable, the flip-flops share a common clock enable input called load. When load=1 at an active edge, the data
+inputs are loaded into the register; otherwise, the register holds existing data.
 
-The symbol of a PIPO register in block diagrams is one underlying flip-flop symbol with bus lines for data inputs and outputs, and load is labeled as Load at the clock enable input or the gated clock input.
+The symbol of a register in block diagrams is one underlying flip-flop symbol with bus lines for data inputs and outputs, and load is labeled as Load at the clock enable input or the gated clock input.
 \sssc{Data Transfer Between Registers with Tri-state Buffers}
 To transfer data from a source register to a destination register, we can connect the outputs of the source register to the inputs of the destination register through tri-state buffers, and connect the enable inputs of the tri-state buffers to a common enable signal $En$. When $En=1$, the tri-state buffers are enabled and the data outputs of the source register are transferred to the data inputs of the destination register; when $En=0$, the tri-state buffers are disabled and the data inputs of the destination register are disconnected from the data outputs of the source register.
 
 If multiple registers share a common data bus, only one register should enable its tri-state buffers at a time to avoid bus contention.
 \sssc{Data Transfer Between Registers with Multiplexers}
 To transfer data from source registers to a destination register, we can connect the outputs of the source registers to data inputs of a multiplexer and connect the output of the multiplexer to the data inputs of the destination register. When the select input select a source register and clock enable/load input of the destination register is active at an active edge, the data outputs of the selected source register are transferred to the data inputs of the destination register.
-\sssc{Parallel-In Serial-Out (PISO) Register}
+\sssc{Accumulator}
+An accumulator is a register that stores intermediate results of arithmetic and logic operations in a digital system. It is commonly used in arithmetic logic units (ALUs) of computers and digital signal processors (DSPs) to hold the results of calculations.
+
+Take $n$-bit parallel adder with accumulator for example. It consists of an $n$-bit parallel adder and an $n$-bit register. For the full adder of each cell, the addend input is connected to the data output of the associated flip-flop in the accumulator register, the augend input is connected to the corresponding bit of the external $n$-bit augend input, and the sum output is connected to the data input of the associated flip-flop in the accumulator register. The addition takes place each time load=1 at an active edge.
+
+Before addition, we should let the register hold the addend. This can be accomplished in several ways. The easiest way is to first clear the accumulator using the asynchronous clear inputs on the flip-flops, and then put the addend on the augend input. Another way is to add a multiplexer before the data input of each flip-flop in the accumulator register to select between the external data input and the sum output of the adder.
+\sssc{Serial-In Serial-Out (SISO) Shift Register}
+A serial-in serial-out (SISO) shift register is a type of shift register that allows data to be shifted in and out one bit at a time. It consists of a series of edge-triggered D flip-flops connected in a chain, where the output $Q$ of one flip-flop is connected to the input $D$ of the next flip-flop. The first flip-flop in the chain receives the serial input (SI), and the last flip-flop in the chain provides the serial output (SO). The flip-flops share common clock input and clock enable/load input called shift. When shift=1 at an active edge, the data in each flip-flop is shifted to the next flip-flop in the chain, a new bit of data is loaded into the first flip-flop, and the bit in the last flip-flop is output as the serial output; otherwise, the register holds existing data.
+
+If we connect the serial output to the serial input, the resulting cyclic shift register performs an end-around shift.
+\sssc{Parallel-In Parallel-Out (PIPO) Shift Register}
+A parallel-in parallel-out (PIPO) shift register is a type of shift register that allows data to be loaded and retrieved in parallel. It can be implemented using edge-triggered D flip-flops and 4-to-1 multiplexers. The data input $D$ of each flip-flop is connected to the output of the associated multiplexer. The two select inputs of each multiplexer are connected to a common 2-bit select input called shift enable $Sh$ and load enable $L$. The four data inputs of each multiplexer are:
+\bit
+\item The output of the associated flip-flop, selected when $(Sh,L)=(0,0)$, called hold,
+\item The corresponding bit of the parallel input (PI), selected when $(Sh,L)=(0,1)$, called load, and
+\item The output of the previous flip-flop in the chain, with the first flip-flop taking serial input SI, selected when $(Sh,L)=(1,0)$ or $(1,1)$, called shift.
+\eit
+The flip-flops share common clock input. The outputs of the flip-flops provide the parallel output (PO).
+
+At an active edge,
+\bit
+
+
 
 
 
