@@ -1417,27 +1417,38 @@ Take $n$-bit parallel adder with accumulator for example. It consists of an $n$-
 
 Before addition, we should let the register hold the addend. This can be accomplished in several ways. The easiest way is to first clear the accumulator using the asynchronous clear inputs on the flip-flops, and then put the addend on the augend input. Another way is to add a multiplexer before the data input of each flip-flop in the accumulator register to select between the external data input and the sum output of the adder.
 \sssc{Shift Register}
-A shift register is a sequential circuit composed of edge-triggered flip-flops that stores data and shifts by one bit when certain control inputs are at a certain combination at an active edge, optionally allowing serial or parallel input and output.
+A shift register is a sequential circuit consists of a chain of edge-triggered D flip-flops that stores data and shifts by one bit when certain control inputs are at a certain combination at an active edge, optionally allowing serial or parallel input and output.
 \bit
 \item A shift toward least significant bit (LSB) is called a right shift.
 \item A shift toward most significant bit (MSB) is called a left shift.
 \eit
+The state variable representing the $(i+1)$-th least significant bit is denoted as $Q_i$.
 \sssc{Serial-In Serial-Out (SISO) Shift Register}
-A serial-in serial-out (SISO) shift register is a type of shift register that allows data to be shifted in and out one bit at a time. An $n$-bit serial-in serial-out (SISO) shift register consists of a series of $n$ edge-triggered D flip-flops connected in a chain, where the output $Q$ of one flip-flop is connected to the input $D$ of the next flip-flop with the first flip-flop in the chain receiving the serial input (SI) and the last flip-flop in the chain providing the serial output (SO) instead. The flip-flops share common clock input and clock enable/load input called shift. When shift=1 at an active edge, the register shifts a bit; otherwise, the register holds.
+A serial-in serial-out (SISO) shift register is a type of shift register where data is shifted in and out one bit per shift. An $n$-bit SISO shift register consists of a chain of $n$ edge-triggered D flip-flops. The output $Q$ of each flip-flop is connected to the input $D$ of the next flip-flop, with the first flip-flop in the chain receiving the serial input (SI) and the last flip-flop in the chain providing the serial output (SO) instead. The flip-flops share common clock input and clock enable/load input called shift.
 
-If we connect the serial output to the serial input, the resulting cyclic shift register performs an end-around shift.
-\sssc{Parallel-In Parallel-Out (PIPO) Shift Register}
-A parallel-in parallel-out (PIPO) shift register is a type of shift register that allows data to be loaded and retrieved in parallel. An $n$-bit parallel-in parallel-out (PIPO) shift register can be implemented using $n$ edge-triggered D flip-flops each of which associated with one 4-to-1 multiplexer. The data input $D$ of each flip-flop is connected to the output of the associated multiplexer. The two select inputs of each multiplexer are connected to a common 2-bit select input called shift enable $Sh$ and load enable $L$. The four data inputs of each multiplexer are:
+When shift=1 at an active edge, the register shifts a bit; otherwise, the register holds.
+\sssc{Serial-In Parallel-Out (SIPO) Shift Register}
+A serial-in parallel-out (SIPO) shift register is a type of shift register that allows data to be retrieved in parallel. An $n$-bit SIPO shift register consists of an $n$-bit SISO register with additional $n-1$ outputs connected to the outputs $Q$ of the flip-flops except the last one. Those outputs together with the original SO is the parallel output of the register.
+\sssc{Parallel-In Serial-Out (PISO) Shift Register}
+A parallel-in serial-out (PISO) shift register is a type of shift register that allows data to be loaded in parallel. An $n$-bit PISO shift register consists of a chain of $n$ edge-triggered D flip-flops each of which associated with one 4-to-1 multiplexer. The data input $D$ of each flip-flop is connected to the output of the associated multiplexer. The two select inputs of each multiplexer are connected to a common 2-bit select input called shift enable $Sh$ and load enable $L$. The four data inputs of each multiplexer are:
 \bit
-\item The output of the associated flip-flop, selected when $(Sh,L)=(0,0)$, called hold,
-\item The corresponding bit of the parallel input (PI), selected when $(Sh,L)=(0,1)$, called load, and
-\item The output of the previous flip-flop in the chainwith the first flip-flop in the chain receiving the serial input (SI) instead, selected when $(Sh,L)=(1,0)$ or $(1,1)$, called shift.
+\item the output of the associated flip-flop that is selected when $(Sh,L)=(0,0)$, called hold,
+\item the corresponding bit of the parallel input (PI) that is selected when $(Sh,L)=(0,1)$, called load, and
+\item the output of the previous flip-flop in the chain with the first flip-flop in the chain receiving the serial input (SI) instead that is selected when $(Sh,L)=(1,0)$ or $(1,1)$, called shift.
 \eit
-The flip-flops share common clock input. The outputs of the flip-flops provide the parallel output (PO).
 
 When $(Sh,L)=(1,0)$ or $(1,1)$ at an active edge, the register shifts a bit; when $(Sh,L)=(0,1)$ at an active edge, the register loads parallel input; otherwise, the register holds.
+\sssc{Parallel-In Parallel-Out (PIPO) Shift Register}
+A parallel-in parallel-out (PIPO) shift register is a type of shift register that allows data to be loaded and retrieved in parallel. An $n$-bit PIPO shift register consists of an $n$-bit PISO register with additional $n-1$ outputs connected to the outputs $Q$ of the flip-flops except the last one. Those outputs together with the original SO is the parallel output of the register.
 
 
+
+
+
+\sssc{Ring Counter}
+If we connect the output $Q$ of the last flip-flop in the chain to the input $D$ of the first flip-flop in the chain of an $n$-bit shift register, the resulting cyclic shift register performs an end-around shift, that is, the bits stored circulate around the register, and the state of the register repeats each $\frac{n}{m}$ shifts with $m\in\bbN$ being the largest number of bits of the repeating subpattern in a state.
+
+If we connect the output $Q'$ of the last flip-flop in the chain to the input $D$ of the first flip-flop in the chain, the resulting shift register with inverted feedback transitions through distinct states repeatedly.
 
 
 \end{document}
