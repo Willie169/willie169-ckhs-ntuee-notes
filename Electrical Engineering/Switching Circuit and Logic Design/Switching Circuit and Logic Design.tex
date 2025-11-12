@@ -971,9 +971,9 @@ An integrated circuit package is the physical case that holds the silicon chip (
 It is generally uneconomical to design digital systems using only SSI and MSI integrated circuits. By using LSI and VLSI ICs, the required number of integrated circuit packages is greatly reduced, and the cost of mounting, wiring, designing, and maintaining may be significantly lower.
 \ssc{Combinational circuits}
 \sssc{Multiplexer (MUX)}
-A multiplexer (MUX) or data selector has a group of data inputs and a group of control inputs (aka select inputs or select lines) and one output. The control inputs are used to select one of the data inputs and connect it to the output terminal. Multiplexers are frequently used in digital system design to select the data which is to be processed or stored.
+A multiplexer (MUX) or data selector has a group of data inputs and a group of select inputs (aka control inputs, select lines, or control lines) and one output. The select inputs are used to select one of the data inputs and connect it to the output terminal. Multiplexers are frequently used in digital system design to select the data which is to be processed or stored.
 
-A $2^n$-to-1 MUX has $2^n$ data inputs $D_0,D_1,\ldots D_{2^n-1}$, $n$ control inputs $S_0,S_1,\ldots S_{n-1}$, and one output $Y$, with $Y$ given by
+A $2^n$-to-1 MUX has $2^n$ data inputs $D_0,D_1,\ldots D_{2^n-1}$, $n$ select inputs $S_0,S_1,\ldots S_{n-1}$, and one output $Y$, with $Y$ given by
 \[Y=\sum_{i=0}^{2^{n-1}}D_i\cdot m_i(S_0,S_1,\ldots S_{n-1}),\]
 where $m_i$ is the minterm corresponding to $i$ for $n$-variable functions of $S_0,S_1,\ldots S_{n-1}$. When $m_i=1$, that is, the binary number $S_0S_1\ldots S_{n-1}$ is $i$, $I_i$ is the selected input.
 
@@ -981,7 +981,7 @@ Alternatively, $Y$ can be written as
 \[Y=\prod_{i=0}^{2^{n-1}}\qty(D_i+M_i(S_0,S_1,\ldots S_{n-1})),\]
 where $M_i$ is the maxterm corresponding to $i$ for $n$-variable functions of $S_0,S_1,\ldots S_{n-1}$.
 
-The symbol of a MUX in block diagrams is an isosceles trapezoid with the longer parallel side contains the data input pins in order of the unsigned binary number corresponding to the control inputs combination for each data input to be selected with the control inputs combination for each data input to be selected written beside in the trapezoid, one of the legs, usually the leg farther from the data input that is selected when all control inputs are 0, contains the control inputs, and the shorter parallel side contains the output pin.
+The symbol of a MUX in block diagrams is an isosceles trapezoid with the longer parallel side contains the data input pins in order of the unsigned binary number corresponding to the select inputs combination for each data input to be selected with the select inputs combination for each data input to be selected written beside in the trapezoid, one of the legs, usually the leg farther from the data input that is selected when all select inputs are 0, contains the select inputs, and the shorter parallel side contains the output pin.
 
 We can implement a MUX with a two- or multi-level circuit that realizes the SOP or POS form given above.
 
@@ -997,7 +997,7 @@ When a bus is driven by three-state buffers, we call it a three-state bus.
 
 We can also add an inversion bubble at enable signal such that it works as a simple buffer when $En=0$ and outputs high impedance when $En=1$. We can also add an inversion bubble at either data input or output such that when it doesn't outputs high impedance, it works as an inverter.
 
-We can implement a 2-to-1 MUX by using data inputs of the MUX as data inputs of two tri-state buffers, using the control input and its inverse as enable signal of the two tri-state buffers respectively, and simply connecting the two outputs of the two tri-state buffers to the output of the MUX.
+We can implement a 2-to-1 MUX by using data inputs of the MUX as data inputs of two tri-state buffers, using the select input and its inverse as enable signal of the two tri-state buffers respectively, and simply connecting the two outputs of the two tri-state buffers to the output of the MUX.
 \sssc{Bidirectional I/O pin}
 Integrated circuits are often designed using bidirectional (or bi-directional) I/O pins for input and output to save pins and wiring. A bidirectional pin is a single physical pin that can act as either an input or an output, but not both at the same time, depending on the control signal. To accomplish this, the circuit output is connected to the pin through a three-state buffer. When the buffer is enabled, the pin is driven with the output signal; when the buffer is disabled, an external source can drive the pin.
 \sssc{Half adder (HA)}
@@ -1039,7 +1039,7 @@ The ripple-borrow subtractor is relatively slow because, in the worst case, a bo
 \sssc{Adder-subtractor}
 A logical equivalence of a parallel subtractor that is used more often is a parallel adder with inversion bubbles at all $B_i$ inputs and $C_{in_0}$ being constant $1$ input, where $B_{n-1}'B_{n-2}'\ldots B_0'+1$ represents $-B_{n-1}B_{n-2}\ldots B_0$ in two's complement.
 
-An $n$-bit adder-subtractor is a ripple-carry adder (or other type of $n$-bit adder for unsigned or two's complement numbers) with an extra control input $M$ and $n$ 2-to-1 MUXes, in which the MUX at the $(i+1)$th cell take data inputs $B_i$ and $B_i'$ and control input $M$, if $M=0$, it outputs $B_i$ to the full adder to make the adder-subtractor perform addition; if $M=1$, it outputs $B_i'$ to the full adder to make the adder-subtractor perform subtraction.
+An $n$-bit adder-subtractor is a ripple-carry adder (or other type of $n$-bit adder for unsigned or two's complement numbers) with an additional common select input $M$ and $n$ 2-to-1 MUXes, in which the MUX at the $(i+1)$th cell take data inputs $B_i$ and $B_i'$ and select input $M$, if $M=0$, it outputs $B_i$ to the full adder to make the adder-subtractor perform addition; if $M=1$, it outputs $B_i'$ to the full adder to make the adder-subtractor perform subtraction.
 \sssc{One's complement adder}
 An $n$-bit one's complement adder can be realized with an $n$-bit ripple-carry adder but connect $C_{out_{n-1}}$ to $C_{in_0}$ to realize end-around carry (EAC). The propagation delay when $C_{out_{n-1}}=1$ is approximately twice the propagation delay of the ripple-carry adder.
 \sssc{One's complement subtractor}
@@ -1194,8 +1194,28 @@ The implementation a type of flip-flop with another type of flip-flop is called 
 The response time or delay time $\epsilon$ of a latch or flip-flop is the time it needs to react to a input change. If an impulse of input lasts less than $\epsilon$, the latch or flip-flop will not react to it.
 \sssc{Present state and Next state}
 When discussing latches and flip-flops, we the term present state $Q=Q(t)$ to denote the state of the $Q$ output of the latch or flip-flop at the time input signal changes, and the term next state $Q^+=Q(t+\epsilon)$ to denote the state of the $Q$ output after the latch or flip-flop has reacted to the input change and stabilized. The equation with the next state in the LHS and a function of present state and inputs in the RHS is called the next-state equation or characteristic equation of the sequential circuit.
-\sssc{Flow table}
-A flow table of a sequential circuit is a truth table with state variables (labeled with superscript $^+$) and sometimes also output values in next state as output variables and input variables and state variables in present state as input variables.
+\sssc{State-Transition Table or Transition Table}
+A state-transition table or transition table of a sequential circuit is in the form of a truth table with output variables replaced with state variables (labeled with superscript $^+$) and sometimes also output variables in next state and input variables replaced with input variables and state variables in present state.
+\sssc{Moore Machine}
+A Moore machine can be defined as a 6-tuple $(S,s_{0},\Sigma ,O,\delta ,G)$ consisting of:
+\bit
+\item A finite set of states $S$,
+\item A start state (also called initial state) $s_{0}$ which is an element of $S$,
+\item A finite set called the input alphabet $\Sigma$
+\item A finite set called the output alphabet $O$,
+\item A transition function $\delta :S\times \Sigma \rightarrow S$ mapping a state and the input alphabet to the next state, and
+\item An output function $G:S\rightarrow O$ mapping each state to the output alphabet.
+\eit
+\sssc{Mealy Machine}
+A Mealy machine can be defined as a 6-tuple $(S,s_{0},\Sigma ,O,\delta ,G)$ consisting of:
+\bit
+\item A finite set of states $S$,
+\item A start state (also called initial state) $s_{0}$ which is an element of $S$,
+\item A finite set called the input alphabet $\Sigma$
+\item A finite set called the output alphabet $O$,
+\item A transition function $\delta :S\times \Sigma \rightarrow S$ mapping each pair of a state and an element of input alphabet to an next state, and
+\item An output function $G:S\times \Sigma\rightarrow O$ mapping each pair of a state and an element of input alphabet to an output alphabet.
+\eit
 \sssc{Metastable state}
 A metastable state is a state where the state variables in a sequential circuit
 \bit
@@ -1400,7 +1420,7 @@ A flip-flop with clock enable (CE) input has an additional input CE and works as
 
 One method to implement it is by gating the clock, that is, replace the original clock input with the output of an AND gate with clock input and CE being the inputs. However, there are two potential problem. First, gate delays may cause the clock to arrive at some flip-flops at different times than at other flip-flops, resulting in a loss of synchronization. Second, if CE changes at the wrong time, the flip-flop may trigger due to the change in CE instead of due to the change in the clock input.
 
-Rather than gating the clock, a better method to implement it is by replacing each original data input with the output a 2-to-1 MUX with CE being the control input, original input being the data input selected when CE=1, and 0 being the data input selected when CE=0. Because there is no gate in the clock line, this cannot cause a synchronization problem.
+Rather than gating the clock, a better method to implement it is by replacing each original data input with the output a 2-to-1 MUX with CE being the select input, original input being the data input selected when CE=1, and 0 being the data input selected when CE=0. Because there is no gate in the clock line, this cannot cause a synchronization problem.
 
 A flip-flop with CE is called with the original name with -CE sufficed to the original type name, e.g., D-CE flip-flop.
 \ssc{Registers and Counters}
@@ -1431,7 +1451,7 @@ The state variable representing the $(i+1)$-th least significant bit is denoted 
 \sssc{Serial-In Serial-Out (SISO) Shift Register}
 A serial-in serial-out (SISO) shift register is a type of shift register where data is shifted in and out one bit per shift. An $n$-bit SISO shift register consists of a chain of $n$ edge-triggered D flip-flops. The output $Q$ of each flip-flop is connected to the input $D$ of the next flip-flop, with the first flip-flop in the chain receiving the serial input (SI) and the last flip-flop in the chain providing the serial output (SO) instead. The flip-flops share common clock input and clock enable/load input called shift.
 
-When shift=1 at an active edge, the register shifts a bit; otherwise, the register holds.
+When shift=1 at an active edge, the register shifts a bit; otherwise, the register holds its present state.
 \sssc{Serial-In Parallel-Out (SIPO) Shift Register}
 A serial-in parallel-out (SIPO) shift register is a type of shift register that allows data to be retrieved in parallel. An $n$-bit SIPO shift register consists of an $n$-bit SISO register with additional $n-1$ outputs connected to the outputs $Q$ of the flip-flops except the last one. Those outputs together with the original SO compose the parallel output of the register.
 \sssc{Parallel-In Serial-Out (PISO) Shift Register}
@@ -1442,7 +1462,7 @@ A parallel-in serial-out (PISO) shift register is a type of shift register that 
 \item the output of the previous flip-flop in the chain with the first flip-flop in the chain receiving the serial input (SI) instead, selected when $(Sh,L)=(1,0)$ or $(1,1)$, called shift.
 \eit
 
-When $(Sh,L)=(1,0)$ or $(1,1)$ at an active edge, the register shifts a bit; when $(Sh,L)=(0,1)$ at an active edge, the register loads parallel input; otherwise, the register holds.
+When $(Sh,L)=(1,0)$ or $(1,1)$ at an active edge, the register shifts a bit; when $(Sh,L)=(0,1)$ at an active edge, the register loads parallel input; otherwise, the register holds its present state.
 \sssc{Parallel-In Parallel-Out (PIPO) Shift Register}
 A parallel-in parallel-out (PIPO) shift register is a type of shift register that allows data to be loaded and retrieved in parallel. An $n$-bit PIPO shift register consists of an $n$-bit PISO register with additional $n-1$ outputs connected to the outputs $Q$ of the flip-flops except the last one. Those outputs together with the original SO compose the parallel output of the register.
 \sssc{Parallel-In Serial-Out (PISO) Bidirectional Shift Register}
@@ -1456,11 +1476,11 @@ A bidirectional shift register is a type of shift register that allows data to b
 
 Two serial outputs (SO) are connected to the outputs $Q$ of the flip-flops storing the least and most significant bits respectively.
 
-When $(S_1,S_0)=(1,0)$ at an active edge, the register shifts a bit right; when $(S_1,S_0)=(1,1)$ at an active edge, the register shifts a bit left; when $(S_1,S_0)=(0,1)$ at an active edge, the register loads parallel input; otherwise, the register holds.
+When $(S_1,S_0)=(1,0)$ at an active edge, the register shifts a bit right; when $(S_1,S_0)=(1,1)$ at an active edge, the register shifts a bit left; when $(S_1,S_0)=(0,1)$ at an active edge, the register loads parallel input; otherwise, the register holds its present state.
 \sssc{Serial-In Serial-Out (SISO) Bidirectional Shift Register}
 An $n$-bit serial-in serial-out (SISO) bidirectional shift register is an $n$-bit PISO register with each bit of the parallel input connected to each multiplexer as data input replaced with the output of the associated flip-flop.
 
-When $(S_1,S_0)=(1,0)$ at an active edge, the register shifts a bit right; when $(S_1,S_0)=(1,1)$ at an active edge, the register shifts a bit left; otherwise, the register holds.
+When $(S_1,S_0)=(1,0)$ at an active edge, the register shifts a bit right; when $(S_1,S_0)=(1,1)$ at an active edge, the register shifts a bit left; otherwise, the register holds its present state.
 \sssc{Parallel-In Parallel-Out (PIPO) Bidirectional Shift Register}
 An $n$-bit parallel-in parallel-out (PIPO) bidirectional shift register is an $n$-bit PISO register additional $n-2$ outputs connected to the outputs $Q$ of the flip-flops except the flip-flops storing the least and most significant bits. Those outputs together with the original two SOs compose the parallel output of the register.
 \sssc{Serial-In Parallel-Out (SIPO) Bidirectional Shift Register}
@@ -1477,9 +1497,30 @@ A Johnson counter, twisted ring counter, or mod-2n counter is a type of shift re
 A linear (feedback) shift register (LFSR) counter consists is a type of shift register counter where the function realized by the combination circuit whose output is connected to the input $D$ of the first flip-flop in the chain is linear.
 
 For each $n\in\bbN$, there exists a linear $n$-bit shift register counter whose count cycle is $2^n-1$, in which all states except the all 0's state are included.
+\sssc{Synchronous Binary Counter}
+An $n$-bit synchronous binary counter consists of $n$ T flip-flops sharing a common clock input signal with the one storing the $(k+1)$-th least significant bit labeled with subscript $_k$. The data input $T_0$ is connected to a constant 1 source, and the data input $T_k$ for $k\in\bbN$ is connected to the output of a $k$-input AND gate whose inputs are the outputs $Q_0$ to $Q_{k-1}$. Its count cycle is $2^n$ and its state is a binary number incrementing from 0 to $2^n$ one-by-one per cycle.
+\sssc{Synchronous Up/Down (U/D) Counter}
+An $n$-bit synchronous up/down (U/D) counter with separate up $U$ and down $D$ inputs consists of $n$ T flip-flops sharing a common clock input signal with the one storing the $(k+1)$-th least significant bit labeled with subscript $_k$. The data input $T_k$ is connected to
+\[U\prod_{i=0}^{k-1}Q_i+D\prod_{i=0}^{k-1}Q_i',\quad k\in\bbN_0\land k<n\]
+which is implemented using AND and OR gates as
+\[U_0=U\]
+\[U_k=U_{k-1}Q_{k-1},\quad k\in\bbN\land k<n\]
+\[D_0=D\]
+\[D_k=D_{k-1}Q_{k-1}',\quad k\in\bbN\land k<n\]
+\[T_k=U_k+D_k,\quad k\in\bbN\land k<n.\]
 
+An $n$-bit synchronous up/down (U/D) counter with up/down input $M$ indicating up when $M=1$ and down when $M=0$ consists of $n$ T flip-flops optionally with clock enable CE to hold when CE=0 sharing a common clock input signal with the one storing the $(k+1)$-th least significant bit labeled with subscript $_k$. The data input $T_0$ is connected to a constant 1 source, and the data input $T_k$ for $k\in\bbN$ is connected to
+\[M\prod_{i=0}^{k-1}Q_i+M'\prod_{i=0}^{k-1}Q_i',\quad k\in\bbN_0\land k<n\]
+which is implemented using AND and OR gates as
+\[U_1=M\]
+\[U_k=U_{k-1}Q_{k-1},\quad k\in\bbN\land 1<k<n\]
+\[D_1=M'\]
+\[D_k=D_{k-1}Q_{k-1}',\quad k\in\bbN\land 1<k<n\]
+\[T_k=U_k+D_k,\quad k\in\bbN\land 1<k<n.\]
+\sssc{Loadable Counter}
+A counter that consists of T flip-flops mentioned above can be adjusted to be loada le from a parallel input (PI) with an associated 2-to-1 multiplexer for each T flip-flop and a common load input as select input for all multiplexers. The original input $T$ to each flip-flop is connected instead to the data input of the associated multiplexer which is selected when load=0, the output of each multiplexer is connected to the input $T$ of the associated flip-flop, and the other data input to each multiplexer, which is selected when load=1, is connected to the corresponding bit of the parallel input.
 
-
+When load=1 at an active edge, the loadable counter loads parallel input; when load=0 at an active edge, the loadable counter works as the underlying counter; otherwise, the loadable counter holds its present state.
 
 \end{document}
 
