@@ -1176,6 +1176,8 @@ A latch is a bistable sequential circuit that store a single bit of information 
 For a latch to capture the inputted information and store it is called latch.
 \sssc{State variable}
 A state variable is a binary variable that represents the current state of a sequential circuit.
+
+The state variable stored in a latch is usually denoted as $Q$ and sometimes called the same as the latch.
 \sssc{Asynchronous, Edge-triggered, and Level-triggered latch}
 An asynchronous latch (aka a basic latch) is a latch that responds to changes of data inputs all the time.
 
@@ -1194,8 +1196,6 @@ The implementation a type of flip-flop with another type of flip-flop is called 
 The response time or delay time $\epsilon$ of a latch or flip-flop is the time it needs to react to a input change. If an impulse of input lasts less than $\epsilon$, the latch or flip-flop will not react to it.
 \sssc{Present state and Next state}
 When discussing latches and flip-flops, we the term present state $Q=Q(t)$ to denote the state of the $Q$ output of the latch or flip-flop at the time input signal changes, and the term next state $Q^+=Q(t+\epsilon)$ to denote the state of the $Q$ output after the latch or flip-flop has reacted to the input change and stabilized. The equation with the next state in the LHS and a function of present state and inputs in the RHS is called the next-state equation or characteristic equation of the sequential circuit.
-\sssc{State-Transition Table or Transition Table}
-A state-transition table or transition table of a sequential circuit is in the form of a truth table with output variables replaced with state variables (labeled with superscript $^+$) and sometimes also output variables in next state and input variables replaced with input variables and state variables in present state.
 \sssc{Moore Machine}
 A Moore machine can be defined as a 6-tuple $(S,s_{0},\Sigma ,O,\delta ,G)$ consisting of:
 \bit
@@ -1485,8 +1485,10 @@ When $(S_1,S_0)=(1,0)$ at an active edge, the register shifts a bit right; when 
 An $n$-bit parallel-in parallel-out (PIPO) bidirectional shift register is an $n$-bit PISO register additional $n-2$ outputs connected to the outputs $Q$ of the flip-flops except the flip-flops storing the least and most significant bits. Those outputs together with the original two SOs compose the parallel output of the register.
 \sssc{Serial-In Parallel-Out (SIPO) Bidirectional Shift Register}
 An $n$-bit serial-in parallel-out (SIPO) bidirectional shift register is an $n$-bit SISO register additional $n-2$ outputs connected to the outputs $Q$ of the flip-flops except the flip-flops storing the least and most significant bits. Those outputs together with the original two SOs compose the parallel output of the register.
+\sssc{Counter}
+A counter is a sequential circuit whose state repeats every fixed finite number of active edges, called count cycle. The sequence of states in the cycle drawn as a circle with arrows pointing to next state for each state is called the transition cycle of the counter.
 \sssc{Synchronous Counter}
-A synchronous counter is a sequential circuit consist of flip-flops where the states of all flip-flops shift synchronously at every active edge and the state of the circuit repeats every fixed finite number, called count cycle, of active edges.
+A synchronous counter is a counter consists of flip-flops where all flip-flops are enabled synchronously.
 \sssc{Shift Register Counter}
 A shift register counter is a type of synchronous counter consists of a shift register with some or all of the outputs $Q$ of the flip-flops connected to the inputs of a combinational circuit with one output and the output of the combinational circuit connected to the input $D$ of the first flip-flop in the chain.
 \sssc{Ring Counter}
@@ -1497,8 +1499,20 @@ A Johnson counter, twisted ring counter, or mod-2n counter is a type of shift re
 A linear (feedback) shift register (LFSR) counter consists is a type of shift register counter where the function realized by the combination circuit whose output is connected to the input $D$ of the first flip-flop in the chain is linear.
 
 For each $n\in\bbN$, there exists a linear $n$-bit shift register counter whose count cycle is $2^n-1$, in which all states except the all 0's state are included.
-\sssc{Synchronous Binary Counter}
-An $n$-bit synchronous binary counter consists of $n$ T flip-flops sharing a common clock input signal with the one storing the $(k+1)$-th least significant bit labeled with subscript $_k$. The data input $T_0$ is connected to a constant 1 source, and the data input $T_k$ for $k\in\bbN$ is connected to the output of a $k$-input AND gate whose inputs are the outputs $Q_0$ to $Q_{k-1}$. Its count cycle is $2^n$ and its state is a binary number incrementing from 0 to $2^n$ one-by-one per cycle.
+\sssc{Synchronous Binary Up Counter}
+An $n$-bit synchronous binary up counter consists of $n$ T flip-flops sharing a common clock input signal with the one storing the $(k+1)$-th least significant bit labeled with subscript $_k$. The data input $T_0$ is connected to a constant 1 source, and the data input $T_k$ for $k\in\bbN$ is connected to
+\[\prod_{i=0}^{k-1}Q_i,\]
+which is implemented using AND gates as
+\[T_1=Q_0\]
+\[T_k=T_{k-1}Q_{k-1},\quad k\in\bbN\land 1<k<n.\]
+Its count cycle is $2^n$ and its state is a binary number incrementing from 0 to $2^n$ one-by-one per cycle.
+\sssc{Synchronous Down Counter}
+An $n$-bit synchronous down counter consists of $n$ T flip-flops sharing a common clock input signal with the one storing the $(k+1)$-th least significant bit labeled with subscript $_k$. The data input $T_0$ is connected to a constant 0 source, and the data input $T_k$ for $k\in\bbN$ is connected to
+\[\prod_{i=0}^{k-1}Q_i',\]
+which is implemented using AND gates as
+\[T_1=Q_0'\]
+\[T_k=T_{k-1}Q_{k-1}',\quad k\in\bbN\land 1<k<n.\]
+Its count cycle is $2^n$ and its state is a binary number decrementing from $2^n$ to 0 one-by-one per cycle.
 \sssc{Synchronous Up/Down (U/D) Counter}
 An $n$-bit synchronous up/down (U/D) counter with separate up $U$ and down $D$ inputs consists of $n$ T flip-flops sharing a common clock input signal with the one storing the $(k+1)$-th least significant bit labeled with subscript $_k$. The data input $T_k$ is connected to
 \[U\prod_{i=0}^{k-1}Q_i+D\prod_{i=0}^{k-1}Q_i',\quad k\in\bbN_0\land k<n\]
@@ -1521,6 +1535,22 @@ which is implemented using AND and OR gates as
 A counter that consists of T flip-flops mentioned above can be adjusted to be loada le from a parallel input (PI) with an associated 2-to-1 multiplexer for each T flip-flop and a common load input as select input for all multiplexers. The original input $T$ to each flip-flop is connected instead to the data input of the associated multiplexer which is selected when load=0, the output of each multiplexer is connected to the input $T$ of the associated flip-flop, and the other data input to each multiplexer, which is selected when load=1, is connected to the corresponding bit of the parallel input.
 
 When load=1 at an active edge, the loadable counter loads parallel input; when load=0 at an active edge, the loadable counter works as the underlying counter; otherwise, the loadable counter holds its present state.
+\sssc{State-Transition Table or Transition Table}
+A state-transition table or transition table of a sequential circuit is in the form of a truth table with output variables replaced with next-state variables (labeled with superscript $^+$) and sometimes also output variables and input variables replaced with present-state variables and sometimes also input variables.
+\sssc{Next-state Map}
+A next-state map is the K-map of a next-state variable as a function of the present-state variables and sometimes also input variables of the sequential circuit.
+\sssc{Design of General Synchronous Counter with T Flip-Flops}
+To design a synchronous counter consists of $n$ T flip-flops given arbitrary transition table of $m$ rows of distinct present states $Q_k$'s and corresponding next states $Q^+_k$'s specified, where the other $2^n-m$ states are don't care states, the following procedure can be used:
+\ben
+\item For each $Q^+_k$, draw a next-state map.
+\item For each 0 and 1 cell in each map, convert the value $Q^+_k$ in it to $T_k$ given by $T_k=Q_k\oplus Q^+_k$. These map are called T input (K-)maps.
+\item Realize all inputs $T$ with combination circuits with a subset of all outputs $Q$ and $Q'$, constant 1 and 0 sources, and all external control inputs as inputs.
+\een
+\sssc{Design of General Synchronous Counter with D Flip-Flops}
+\sssc{Design of General Synchronous Counter with S-R Flip-Flops}
+\sssc{Design of General Synchronous Counter with J-K Flip-Flops}
+
+
 
 \end{document}
 
