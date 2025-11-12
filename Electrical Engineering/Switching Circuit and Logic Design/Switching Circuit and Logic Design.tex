@@ -96,7 +96,12 @@ Every Boolean expression can be expressed in POS form. And a Boolean expression 
 \sssc{Dual}
 The dual of an Boolean expression or equation is another Boolean expression or equation obtained by simplifing the original expression or equation such that it only consists of literals, AND, and OR, and then replacing all AND in it with OR, all OR in it with AND, and all constants in it with their complements.
 \sssc{Functionally complete}
-A functionally complete set is a set of logic operators and constant sources (0 or 1) that can express all possible Boolean functions of any number of input variables. A minimal functionally complete set is a functionally complete set such that removing any one element from it makes it no longer functionally complete. Some minimal functionally complete sets are $\{\tx{AND},\tx{NOT}\}$, $\{\tx{OR},\tx{NOT}\}$, $\{\tx{XOR},\tx{NOT}\}$, $\{\tx{XNOR},\tx{NOT}\}$, $\{\tx{NAND}\}$, $\{\tx{NOR}\}$, $\{\tx{IMPLY},\tx{0}\}$, and $\{\tx{NIMPLY},\tx{1}\}$, in which NAND and NOR are called universal.
+A functionally complete set is a set of logic operators and constant sources (0 or 1) that can express all possible Boolean functions of any number of input variables. A minimal functionally complete set is a functionally complete set such that removing any one element from it makes it no longer functionally complete. Some minimal functionally complete sets are $\{\tx{AND},\tx{NOT}\}$, $\{\tx{OR},\tx{NOT}\}$, $\{\tx{NAND}\}$, $\{\tx{NOR}\}$, $\{\tx{IMPLY},\tx{0}\}$, and $\{\tx{NIMPLY},\tx{1}\}$, in which NAND and NOR are called universal.
+\sssc{Linear Boolean function}
+A Boolean function is linear iff it can be expressed as the XOR of a subset of the union of its input variables and constant 1, iff
+\[\exists c_0,c_1,\ldots,c_n\in\{1,0\}\colon f(x_1,x_2,\ldots,x_n)=c_0\oplus\bigoplus_{i=1}^nc_ix_i,\]
+iff
+\[\forall a,b\in D_f\colon f(a\oplus b)=f(a)\oplus f(b)\oplus f(0).\]
 \sssc{Boolean Vector Functions or Boolean Multi-output Functions}
 A Boolean vector function or a Boolean multi-output function is a function $f\colon\{1,0\}^n\to\{1,0\}^m$. A Boolean vector function can be specified with truth table or as a tuple of $m$ Boolean functions.
 \ssc{Theorems}
@@ -1428,27 +1433,52 @@ A serial-in serial-out (SISO) shift register is a type of shift register where d
 
 When shift=1 at an active edge, the register shifts a bit; otherwise, the register holds.
 \sssc{Serial-In Parallel-Out (SIPO) Shift Register}
-A serial-in parallel-out (SIPO) shift register is a type of shift register that allows data to be retrieved in parallel. An $n$-bit SIPO shift register consists of an $n$-bit SISO register with additional $n-1$ outputs connected to the outputs $Q$ of the flip-flops except the last one. Those outputs together with the original SO is the parallel output of the register.
+A serial-in parallel-out (SIPO) shift register is a type of shift register that allows data to be retrieved in parallel. An $n$-bit SIPO shift register consists of an $n$-bit SISO register with additional $n-1$ outputs connected to the outputs $Q$ of the flip-flops except the last one. Those outputs together with the original SO compose the parallel output of the register.
 \sssc{Parallel-In Serial-Out (PISO) Shift Register}
-A parallel-in serial-out (PISO) shift register is a type of shift register that allows data to be loaded in parallel. An $n$-bit PISO shift register consists of a chain of $n$ edge-triggered D flip-flops each of which associated with one 4-to-1 multiplexer. The data input $D$ of each flip-flop is connected to the output of the associated multiplexer. The two select inputs of each multiplexer are connected to a common 2-bit select input called shift enable $Sh$ and load enable $L$. The four data inputs of each multiplexer are:
+A parallel-in serial-out (PISO) shift register is a type of shift register that allows data to be loaded in parallel. An $n$-bit PISO shift register consists of a chain of $n$ edge-triggered D flip-flops, each of which associated with one 4-to-1 multiplexer (or other logically equivalent implementations). The data input $D$ of each flip-flop is connected to the output of the associated multiplexer. The two select inputs of each multiplexer are connected to common shift enable input $Sh$ and load enable input $L$. The four data inputs of each multiplexer are:
 \bit
-\item the output of the associated flip-flop that is selected when $(Sh,L)=(0,0)$, called hold,
-\item the corresponding bit of the parallel input (PI) that is selected when $(Sh,L)=(0,1)$, called load, and
-\item the output of the previous flip-flop in the chain with the first flip-flop in the chain receiving the serial input (SI) instead that is selected when $(Sh,L)=(1,0)$ or $(1,1)$, called shift.
+\item the output of the associated flip-flop, selected when $(Sh,L)=(0,0)$, called hold,
+\item the corresponding bit of the parallel input (PI), selected when $(Sh,L)=(0,1)$, called load, and
+\item the output of the previous flip-flop in the chain with the first flip-flop in the chain receiving the serial input (SI) instead, selected when $(Sh,L)=(1,0)$ or $(1,1)$, called shift.
 \eit
 
 When $(Sh,L)=(1,0)$ or $(1,1)$ at an active edge, the register shifts a bit; when $(Sh,L)=(0,1)$ at an active edge, the register loads parallel input; otherwise, the register holds.
 \sssc{Parallel-In Parallel-Out (PIPO) Shift Register}
-A parallel-in parallel-out (PIPO) shift register is a type of shift register that allows data to be loaded and retrieved in parallel. An $n$-bit PIPO shift register consists of an $n$-bit PISO register with additional $n-1$ outputs connected to the outputs $Q$ of the flip-flops except the last one. Those outputs together with the original SO is the parallel output of the register.
+A parallel-in parallel-out (PIPO) shift register is a type of shift register that allows data to be loaded and retrieved in parallel. An $n$-bit PIPO shift register consists of an $n$-bit PISO register with additional $n-1$ outputs connected to the outputs $Q$ of the flip-flops except the last one. Those outputs together with the original SO compose the parallel output of the register.
+\sssc{Parallel-In Serial-Out (PISO) Bidirectional Shift Register}
+A bidirectional shift register is a type of shift register that allows data to be shifted in both directions. An $n$-bit parallel-in serial-out (PISO) bidirectional shift register consists of a chain of $n$ edge-triggered D flip-flops, each of which associated with one 4-to-1 multiplexer (or other logically equivalent implementations). The data input $D$ of each flip-flop is connected to the output of the associated multiplexer. The two select inputs of each multiplexer are connected to common shift/load input $S_1$ and shift direction left/right or load/hold select input $S_0$. The four data inputs of each multiplexer are:
+\bit
+\item the output of the associated flip-flop, selected when $(S_1,S_0)=(0,0)$, called hold,
+\item the corresponding bit of the parallel input (PI), selected when $(S_1,S_0)=(0,1)$, called load,
+\item the output of the adjacent flip-flop storing the less significant bit in the chain with the flip-flop storing the least significant bit in the chain receiving the serial input (SI) instead, selected when $(S_1,S_0)=(1,0)$, called shift right, and
+\item the output of the adjacent flip-flop storing the more significant bit in the chain with the flip-flop storing the most significant bit in the chain receiving the serial input (SI) instead, selected when $(S_1,S_0)=(1,1)$, called shift left.
+\eit
 
+Two serial outputs (SO) are connected to the outputs $Q$ of the flip-flops storing the least and most significant bits respectively.
 
+When $(S_1,S_0)=(1,0)$ at an active edge, the register shifts a bit right; when $(S_1,S_0)=(1,1)$ at an active edge, the register shifts a bit left; when $(S_1,S_0)=(0,1)$ at an active edge, the register loads parallel input; otherwise, the register holds.
+\sssc{Serial-In Serial-Out (SISO) Bidirectional Shift Register}
+An $n$-bit serial-in serial-out (SISO) bidirectional shift register is an $n$-bit PISO register with each bit of the parallel input connected to each multiplexer as data input replaced with the output of the associated flip-flop.
 
-
-
+When $(S_1,S_0)=(1,0)$ at an active edge, the register shifts a bit right; when $(S_1,S_0)=(1,1)$ at an active edge, the register shifts a bit left; otherwise, the register holds.
+\sssc{Parallel-In Parallel-Out (PIPO) Bidirectional Shift Register}
+An $n$-bit parallel-in parallel-out (PIPO) bidirectional shift register is an $n$-bit PISO register additional $n-2$ outputs connected to the outputs $Q$ of the flip-flops except the flip-flops storing the least and most significant bits. Those outputs together with the original two SOs compose the parallel output of the register.
+\sssc{Serial-In Parallel-Out (SIPO) Bidirectional Shift Register}
+An $n$-bit serial-in parallel-out (SIPO) bidirectional shift register is an $n$-bit SISO register additional $n-2$ outputs connected to the outputs $Q$ of the flip-flops except the flip-flops storing the least and most significant bits. Those outputs together with the original two SOs compose the parallel output of the register.
+\sssc{Synchronous Counter}
+A synchronous counter is a sequential circuit consist of flip-flops where the states of all flip-flops shift synchronously at every active edge and the state of the circuit repeats every fixed finite number, called count cycle, of active edges.
+\sssc{Shift Register Counter}
+A shift register counter is a type of synchronous counter consists of a shift register with some or all of the outputs $Q$ of the flip-flops connected to the inputs of a combinational circuit with one output and the output of the combinational circuit connected to the input $D$ of the first flip-flop in the chain.
 \sssc{Ring Counter}
-If we connect the output $Q$ of the last flip-flop in the chain to the input $D$ of the first flip-flop in the chain of an $n$-bit shift register, the resulting cyclic shift register performs an end-around shift, that is, the bits stored circulate around the register, and the state of the register repeats each $\frac{n}{m}$ shifts with $m\in\bbN$ being the largest number of bits of the repeating subpattern in a state.
+A ring counter is a type of shift register counter consists of a shift register with the output $Q$ of the last flip-flop in the chain connected to the input $D$ of the first flip-flop in the chain. The bits stored circulate around the register. The count cycle of an $n$-bit ring counter is $n$.
+\sssc{Johnson counter, Twisted Ring Counter, or Mod-2n Counter}
+A Johnson counter, twisted ring counter, or mod-2n counter is a type of shift register counter consists of a shift register with the output $Q'$ of the last flip-flop in the chain connected to the input $D$ of the first flip-flop in the chain. The legal states of a Johnson counter are those consist of at most one contiguous 0 bits block and at most one contiguous 1 bits block. For an $n$-bit Johnson counter,  number of legal states is $2n$, and the count cycle is $2n$ if starting with a legal state.
+\sssc{Linear (Feedback) Shift Register (LFSR) Counter}
+A linear (feedback) shift register (LFSR) counter consists is a type of shift register counter where the function realized by the combination circuit whose output is connected to the input $D$ of the first flip-flop in the chain is linear.
 
-If we connect the output $Q'$ of the last flip-flop in the chain to the input $D$ of the first flip-flop in the chain, the resulting shift register with inverted feedback transitions through distinct states repeatedly.
+For each $n\in\bbN$, there exists a linear $n$-bit shift register counter whose count cycle is $2^n-1$, in which all states except the all 0's state are included.
+
+
 
 
 \end{document}
