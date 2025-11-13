@@ -300,10 +300,10 @@ For completely or incompletely specified Boolean function $f$:
 \[f=\sum m(i\in S)+\sum d(i\in D)\iff f'=\prod M(i\in S)\cdot\prod D(i\in D).\]
 \[f=\prod M(i\in T)\cdot\prod D(i\in D)\iff f'=\sum m(i\in T)+\sum d(i\in D).\]
 For completely or incompletely specified Boolean functions $f$ and $g$ with same number of variables:
-\[f=\sum m(i\in S_f)+\sum d(i\in D_f)\land g=\sum m(i\in S_g)+\sum d(i\in D_g)\implies fg=\sum m(i\in S_f\cap S_g)+\sum d\qty(i\in\qty(S_f\cup D_f)\cap\qty(S_g\cup D_g)\setminus\qty(S_f\cap S_g).\]
-\[f=\sum m(i\in S_f)+\sum d(i\in D_f)\land g=\sum m(i\in S_g)+\sum d(i\in D_g)\implies f+g=\sum m(i\in S_f\cup S_g)+\sum d\qty(i\in\qty(S_f\cup D_f)\cup\qty(S_g\cup D_g)\setminus\qty(S_f\cup S_g).\]
-\[f=\prod M(i\in T_f)\cdot\prod D(i\in D_f)\land g=\prod M(i\in T_f)\cdot\prod D(i\in D_f)\implies fg=\prod M(i\in T_f\cup T_g)\cdot\prod D\qty(i\in\qty(T_f\cup D_f)\cup\qty(T_g\cup D_g)\setminus\qty(T_f\cup T_g).\]
-\[f=\prod M(i\in T_f)\cdot\prod D(i\in D_f)\land g=\prod M(i\in T_f)\cdot\prod D(i\in D_f)\implies f+g=\prod M(i\in T_f\cap T_g)\cdot\prod D\qty(i\in\qty(T_f\cup D_f)\cap\qty(T_g\cup D_g)\setminus\qty(T_f\cap T_g).\]
+\[f=\sum m(i\in S_f)+\sum d(i\in D_f)\land g=\sum m(i\in S_g)+\sum d(i\in D_g)\implies fg=\sum m(i\in S_f\cap S_g)+\sum d\qty(i\in\qty(S_f\cup D_f)\cap\qty(S_g\cup D_g)\setminus\qty(S_f\cap S_g)).\]
+\[f=\sum m(i\in S_f)+\sum d(i\in D_f)\land g=\sum m(i\in S_g)+\sum d(i\in D_g)\implies f+g=\sum m(i\in S_f\cup S_g)+\sum d\qty(i\in\qty(S_f\cup D_f)\cup\qty(S_g\cup D_g)\setminus\qty(S_f\cup S_g)).\]
+\[f=\prod M(i\in T_f)\cdot\prod D(i\in D_f)\land g=\prod M(i\in T_f)\cdot\prod D(i\in D_f)\implies fg=\prod M(i\in T_f\cup T_g)\cdot\prod D\qty(i\in\qty(T_f\cup D_f)\cup\qty(T_g\cup D_g)\setminus\qty(T_f\cup T_g)).\]
+\[f=\prod M(i\in T_f)\cdot\prod D(i\in D_f)\land g=\prod M(i\in T_f)\cdot\prod D(i\in D_f)\implies f+g=\prod M(i\in T_f\cap T_g)\cdot\prod D\qty(i\in\qty(T_f\cup D_f)\cap\qty(T_g\cup D_g)\setminus\qty(T_f\cap T_g)).\]
 \ssc{Minimum form}
 \sssc{Implicant or 1-term}
 Given a Boolean function $f$ of $n$ variables, a product term $P$ is an implicant (aka 1-term) of $f$ iff for every combination of values of the $n$ variables for which $P = 1$, $f$ is also equal to $1$.
@@ -936,7 +936,7 @@ A simple simulator for combinational logic works as follows:
 If a circuit output is wrong for some set of input values, this may be due to several possible causes:
 \bit
 \item incorrect design
-\iten Gates connected wrong
+\item Gates connected wrong
 \item Wrong input signals to the circuit
 \eit
 If the circuit is physically built, other possible causes include
@@ -1034,7 +1034,7 @@ An $n$-bit parallel subtractor or ripple-borrow adder is a combinational circuit
 \[B_{out_i}=A_i'B_i+A_i'B_{in_i}+B_iB_{in_i},\]
 where $B_{in_i}$ for $n\geq i>0$ and $B_{out_i}$ for $n-1>i\geq 0$ are interconnections in the parallel subtractor, and for the first cell,
 \[D_0=A_0\oplus B_0,\]
-\[D_{out_0}=A_'0B_0.\]
+\[D_{out_0}=A_0'B_0.\]
 The ripple-borrow subtractor is relatively slow because, in the worst case, a borrow propagates through all $n$ stages of the subtractor before it stabilizes, and there are approximately two gate delays per stage.
 \sssc{Adder-subtractor}
 A logical equivalence of a parallel subtractor that is used more often is a parallel adder with inversion bubbles at all $B_i$ inputs and $C_{in_0}$ being constant $1$ input, where $B_{n-1}'B_{n-2}'\ldots B_0'+1$ represents $-B_{n-1}B_{n-2}\ldots B_0$ in two's complement.
@@ -1083,7 +1083,7 @@ The symbol of a $2^n$-to-$n$ normal encoder in block diagrams is a rectangle wit
 \sssc{Priority encoders}
 A priority encoder resolves the undefined behaviour of normal encoders by assigning priority to the inputs.
 
-A $2^n$-to-$n$ active-high inputs and outputs priority encoder has $2^n$ inputs and $(n+1)$ outputs. If all inputs are 0, the $(n+1)$-th output, called valid (V) or enable output (EO), is 0 and the other $n$ outputs are undefined; otherwise the $(n+1)$-th output is 1 and the other $n$ outputs are determined by a loop: \texttt{for (int i=1; i<=2^n; i=i+1)} (in which \verb|2^n| means $2$ to the power of $n$):
+A $2^n$-to-$n$ active-high inputs and outputs priority encoder has $2^n$ inputs and $(n+1)$ outputs. If all inputs are 0, the $(n+1)$-th output, called valid (V) or enable output (EO), is 0 and the other $n$ outputs are undefined; otherwise the $(n+1)$-th output is 1 and the other $n$ outputs are determined by a loop: \texttt{for (int i=1; i<=2\^n; i=i+1)} (in which \verb|2^n| means $2$ to the power of $n$):
 \bit
 \item If the input of $i$th priority is $1$, the output combination is the output combination of a active-high inputs normal encoder when that input is $1$ and all other inputs are $0$.
 \eit
@@ -1184,7 +1184,7 @@ An asynchronous latch (aka a basic latch) is a latch that responds to changes of
 A level-triggered latch/flip-flop is a latch that responds to changes of data inputs when a signal, called enable ($En$ or $E$), is at a specific high or low level.
 
 A edge-triggered flip-flop is a latch that responds to changes of data inputs only at the rising or falling edge of a clock signal, called clock (Clk, Ck, or $C$).
-\ssss{Gated or level-sensitive latch}
+\sssc{Gated or level-sensitive latch}
 A gated or level-sensitive latch is a level-triggered latch that has an additional enable input signal $En$ which controls whether the latch is transparent (enabled) or hold (disabled). When enable is at active level (1 for active-high gated latch and 0 for active-low gated latch), it is transparent, meaning the it acts as an asynchronous latch of its type; when enable is at inactive level (0 for active-high latch and 1 for active-low latch), the latch is hold (aka retain), meaning the output remains at its previous state regardless of input changes.
 
 Unless otherwise specified, a gated latch is active-high. A active-low gated latch can be implemented by adding an inverter at the enable input. The symbol of an active-low latch in block diagrams is that of an active-high one with an inversion bubble at the enable input right outside of the rectangle.
@@ -1242,13 +1242,13 @@ It has a restriction that $SR=0$.
 
 With present state $Q$, next state $Q^+$, and next state of $Q'$ $P$, the next-state equation of an S-R latch is:
 \[Q^+=(R+(S+Q)')'=R'S+R'Q.\]
-\[P=(S+Q^+)'=S'Q^+'.\]
-\[Q^+'=(R'S+R'Q)'=(R'S)'(R'Q)'=(R+S')(R+Q')=R+S'Q'.\]
+\[P=(S+Q^+)'=S'{Q^+}'.\]
+\[{Q^+}'=(R'S+R'Q)'=(R'S)'(R'Q)'=(R+S')(R+Q')=R+S'Q'.\]
 \[P=S'R+S'Q'.\]
 The truth table is:
 \begin{longtable}[c]{|m|m|m|m|m|m|}
 \hline
-S & R & Q & Q^+ & Q^+' & P\\\hline
+S & R & Q & Q^+ & {Q^+}' & P\\\hline
 0 & 0 & 0 & 0 & 1 & 1\\\hline
 0 & 0 & 1 & 1 & 0 & 0\\\hline
 0 & 1 & 0 & 0 & 1 & 1\\\hline
@@ -1258,11 +1258,11 @@ S & R & Q & Q^+ & Q^+' & P\\\hline
 1 & 1 & 0 & 0 & 1 & 0\\\hline
 1 & 1 & 1 & 0 & 1 & 0\\\hline
 \end{longtable}
-Thus, $P=Q^+'$ except when $S=R=1$.
+Thus, $P={Q^+}'$ except when $S=R=1$.
 
 By making $(S,R)=(1,1)$ don't care combination, we can simplify them as:
 \[Q^+=S+R'Q.\]
-\[Q^+'=P=R+S'Q'.\]
+\[{Q^+}'=P=R+S'Q'.\]
 
 When $(S,R)=(1,0)$, it sets $Q^+$ to 1; when $(S,R)=(0,1)$, it resets $Q^+$ to 0; when $(S,R)=(0,0)$, it holds present state; when $(S,R)=(1,1)$, which is not allowed, the outputs oscillate.
 
@@ -1274,13 +1274,13 @@ It has a restriction that $\ol{S}+\ol{R}=1$.
 
 With present state $Q$, next state $Q^+$, and next state of $Q'$ $P$, the next-state equation of an S-R latch is:
 \[Q^+=(\ol{S}(\ol{R}Q)')'=\ol{S}'+\ol{R}Q.\]
-\[P=(\ol{R}Q^+)'=\ol{R}'+Q^+'.\]
-\[Q^+'=(\ol{S}'+\ol{R}Q)'=\ol{S}(\ol{R}Q)'=\ol{S}\ol{R}'+\ol{S}Q'.\]
+\[P=(\ol{R}Q^+)'=\ol{R}'+{Q^+}'.\]
+\[{Q^+}'=(\ol{S}'+\ol{R}Q)'=\ol{S}(\ol{R}Q)'=\ol{S}\ol{R}'+\ol{S}Q'.\]
 \[P=\ol{R}'+\ol{S}Q'.\]
 The truth table is:
 \begin{longtable}[c]{|m|m|m|m|m|m|}
 \hline
-\ol{S} & \ol{R} & Q & Q^+ & Q^+' & P\\\hline
+\ol{S} & \ol{R} & Q & Q^+ & {Q^+}' & P\\\hline
 0 & 0 & 0 & 1 & 0 & 1\\\hline
 0 & 0 & 1 & 1 & 0 & 1\\\hline
 0 & 1 & 0 & 1 & 0 & 0\\\hline
@@ -1290,10 +1290,10 @@ The truth table is:
 1 & 1 & 0 & 0 & 1 & 1\\\hline
 1 & 1 & 1 & 1 & 0 & 0\\\hline
 \end{longtable}
-Thus, $P=Q^+'$ except when $\ol{S}=\ol{R}=0$.
+Thus, $P={Q^+}'$ except when $\ol{S}=\ol{R}=0$.
 
 By making $(\ol{S},\ol{R})=(0,0)$ don't care combination, we can simplify it as:
-\[Q^+'=P=\ol{R}'+\ol{S}Q'.\]
+\[{Q^+}'=P=\ol{R}'+\ol{S}Q'.\]
 
 When $(\ol{S},\ol{R})=(0,1)$, it sets $Q^+$ to 1; when $(\ol{S},\ol{R})=(1,0)$, it resets $Q^+$ to 0; when $(\ol{S},\ol{R})=(1,1)$, it holds present state; when $(\ol{S},\ol{R})=(0,0)$, which is not allowed, the outputs oscillate.
 
@@ -1319,9 +1319,9 @@ With present state $Q$, next state $Q^+$, and next state of $Q'$ $P$, the next-s
 By making $(S,R)=(1,1)$ don't care combination, we can simplify it as:
 \[Q^+=SE+Q(R'+E').\]
 \[P=(SE+Q^+)'=(SE+SR'E+R'Q+E'Q)'=(S'+E')(R+Q')(E+Q')=S'RE+S'Q'+E'Q'.\]
-\[Q^+'=(SE+Q(R'+E'))'=(SE)'(Q(R'+E'))'=(S'+E')(Q'+RE)=S'RE+S'Q'+E'Q'=P.\]
+\[{Q^+}'=(SE+Q(R'+E'))'=(SE)'(Q(R'+E'))'=(S'+E')(Q'+RE)=S'RE+S'Q'+E'Q'=P.\]
 By making $(S,R)=(1,1)$ don't care combination, we can simplify it as:
-\[Q^+'=P=RE+Q'(S+E').\]
+\[{Q^+}'=P=RE+Q'(S+E').\]
 
 When $(S,R,E)=(1,0,1)$, it sets $Q^+$ to 1; when $(S,R,E)=(0,1,1)$, it resets $Q^+$ to 0; when $(S,R)=(0,0)$ or $E=0$, it holds present state; when $(S,R,E)=(1,1,1)$, which is not allowed, the outputs oscillate; when $E$ changes from 1 to 0 while $(S,R)=(1,1)$, which is not allowed, a race condition where both inputs to the underlying S-R latch changes from 0 to 1 and the propagation delays of the gates determine whether the latch stabilizes with $Q^+$ changed or not occurs.
 
@@ -1335,10 +1335,10 @@ It has a restriction that $SR=0$.
 
 With present state $Q$, next state $Q^+$, and next state of $Q'$ $P$, the next-state equation of a NAND-gate gated S-R latch is:
 \[Q^+=((SE)'((RE)'Q)')'=SE+(RE)'Q=SE+Q(R'+E').\]
-\[P=((RE)'Q^+')'=((RE)'(SE+Q(R'+E')))'=RE+(SE+Q(R'+E'))'=RE+(SE)'(Q(R'+E'))'=RE+(S'+E')(Q'+RE)=S'Q'+RE+E'Q.\]
-\[Q^+'=(SE+Q(R'+E'))'=(SE)'(Q(R'+E'))'=(S'+E')(Q'+RE)=S'Q'+S'RE+E'Q=P.\]
+\[P=((RE)'{Q^+}')'=((RE)'(SE+Q(R'+E')))'=RE+(SE+Q(R'+E'))'=RE+(SE)'(Q(R'+E'))'=RE+(S'+E')(Q'+RE)=S'Q'+RE+E'Q.\]
+\[{Q^+}'=(SE+Q(R'+E'))'=(SE)'(Q(R'+E'))'=(S'+E')(Q'+RE)=S'Q'+S'RE+E'Q=P.\]
 By making $(S,R,E)=(1,1)$ don't care combination, we can simplify it as:
-\[Q^+'=P=RE+Q'(S+E').\]
+\[{Q^+}'=P=RE+Q'(S+E').\]
 
 When $(S,R,E)=(1,0,1)$, it sets $Q^+$ to 1; when $(S,R,E)=(0,1,1)$, it resets $Q^+$ to 0; when $(S,R)=(0,0)$ or $E=0$, it holds present state; when $(S,R,E)=(1,1,1)$, which is not allowed, the outputs oscillate; when $E$ changes from 1 to 0 while $(S,R)=(1,1)$, which is not allowed, a race condition where both inputs to the underlying S-R latch changes from 1 to 0 and the propagation delays of the gates determine whether the latch stabilizes with $Q^+$ changed or not occurs.
 
@@ -1354,11 +1354,11 @@ An (asynchronous) J-K (aka JK) latch is an improved version of the S-R latch tha
 
 With present state $Q$, next state $Q^+$, and next state of $Q'$ $P$, the next-state equation of a NOR-gate gated S-R latch, that is a J-K latch with underlying gated S-R latch being NOR-gate gated S-R latch, is:
 \[Q^+=(KQ+(JQ'+Q)')'=(KQ)'(JQ'+Q)=(K'+Q')(JQ'+Q)=JQ'+K'Q.\]
-\[P=(JQ'+Q^+)'=(JQ'+K'Q)'=Q^+'=(J'+Q)(K+Q')=J'K+J'Q'+KQ.\]
+\[P=(JQ'+Q^+)'=(JQ'+K'Q)'={Q^+}'=(J'+Q)(K+Q')=J'K+J'Q'+KQ.\]
 
 With present state $Q$, next state $Q^+$, and next state of $Q'$ $P$, the next-state equation of a NAND-gate gated S-R latch, that is a J-K latch with underlying gated S-R latch being NAND-gate gated S-R latch, is:
 \[Q^+=((JQ')'((KQ)'Q)')'=JQ'+(KQ)'Q=JQ'+(K'+Q')Q=JQ'+K'Q.\]
-\[P=((KQ)'Q^+)'=(KQ)(J'+Q)(K+Q')=(J'+Q)(K+Q')=Q^+'=J'K+J'Q'+KQ.\]
+\[P=((KQ)'Q^+)'=(KQ)(J'+Q)(K+Q')=(J'+Q)(K+Q')={Q^+}'=J'K+J'Q'+KQ.\]
 
 When $(J,K)=(1,0)$, it sets $Q^+$ to 1; when $(J,K)=(0,1)$, it resets $Q^+$ to 0; when $(J,K)=(0,0)$, it holds present state; when $(J,K)=(1,1)$, the outputs $(Q,Q')$ become $(1,0)$ if originally $(0,1)$ and $(0,1)$ if originally $(1,0)$, called toggle; however, if $J=K=1$ stays longer than the propagation delay, the outputs toggle again, called the race-around problem.
 
@@ -1564,7 +1564,7 @@ To design a synchronous counter consists of $n$ S-R flip-flops given arbitrary t
 \item For each 0 and 1 cell in each map, convert the value $Q^+_k$ in it to $S_k$ and $R_k$ respectively given by the truth table below where $X$ denotes don't care:
 \begin{longtable}[c]{mm|mm}
 \hline
-Q_k & Q_^+_k & S_k & R_k \\\hline
+Q_k & Q^+_k & S_k & R_k \\\hline
 0 & 0 & 0 & X \\\hline
 0 & 1 & 1 & 0 \\\hline
 1 & 0 & 0 & 1 \\\hline
@@ -1580,7 +1580,7 @@ To design a synchronous counter consists of $n$ J-K flip-flops given arbitrary t
 \item For each 0 and 1 cell in each map, convert the value $Q^+_k$ in it to $J_k$ and $K_k$ respectively given by the truth table below where $X$ denotes don't care:
 \begin{longtable}[c]{mm|mm}
 \hline
-Q_k & Q_^+_k & J_k & K_k \\\hline
+Q_k & Q^+_k & J_k & K_k \\\hline
 0 & 0 & 0 & X \\\hline
 0 & 1 & 1 & X \\\hline
 1 & 0 & X & 1 \\\hline
