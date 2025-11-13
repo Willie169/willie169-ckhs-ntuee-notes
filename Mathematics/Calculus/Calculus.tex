@@ -8,6 +8,200 @@
 \date{\temtoday}
 \titletocdoc
 \chapter{Calculus (微積分)}
+\section{Function (函數)}
+\subsection{Function, map, or mapping (映射)}
+A function, a map, or a mapping is formed by three sets, the domain (定義域) $X$, the codomain (對應域) $Y$, and the graph $R$ that satisfy the three following conditions:
+\[R\subseteq \{(x,y)\mid x\in X,y\in Y\},\]
+\[\forall x\in X,\exists y\in Y,\left(x,y\right)\in R ,\]
+\[ (x,y)\in R\land (x,z)\in R\implies y=z.\]
+
+We say a function is from, over, or on its domain (or sometimes a superset of its domain) and into, to, or in its codomain. We also say a function is between its domain (or sometimes a superset of its domain) and its codomain.
+
+A function $f$ that satisfies the above is denoted as:
+\[f\colon X\to Y.\]
+in which the domain $X$ is also denoted as $D_f$.
+
+The range (值域) or image (像), denoted as $R_f$ or $f(X)$, is defined as:
+\[\{ y \mid \exists x \in X, (x, y) \in R \}.\]
+
+If $x\in X$ and $(x, y) \in R$, we write $y = f(x)$, in which $f(x)$ is called the image of $x$ under $f$, $x$ is called the independent variable (自變數 or 獨立變數) or input, and $y$ is called the dependent variable (應變數 or 依賴變數) or output; and the function $f$ is also denoted as:
+\[f \colon X \to Y;\, x \mapsto y.\]
+
+If $I$ is a subset of the domain of $f$, $f(I)$ is defined as
+\[f(I)\coloneq\{y\mid\exists x\in I \tx{\ s.t.\ }f(x)=y\}.\]
+
+Let $f\colon X\to Y$ and $I\subeteq X$. Then $f\vert_I$ is defined as a function $f\vert_I\colon I\to Y$ such that for every $x\in I$, $f\vert_I(x)=f(x)$.
+
+Let $f\colon X\subseteq\mathbb{R}\to Y$ and $(a,b)\subeteq X$. Then $f\vert_a^b$ is defined as a function $f\vert_a^b\colon (a,b)\to Y$ such that for every $x\in (a,b)$, $f\vert_a^b(x)=f(x)$.
+\ssc{Types of Functions}
+Consider a function $f$:
+\[f\colon X\to Y;\,x\mapsto y.\]
+\sssc{Injection (單射) or Injective function or One-to-one (一對一) function}
+\[\forall a,b\in X\text{\ s.t.\ } f(a)=f(b)\colon a=b\]
+\sssc{Many-to-one (多對一) function}
+\[\exists a\neq b\in X\colon f(a)=f(b)\]
+\sssc{Surjection (滿射 or 蓋射) or Surjective function or Onto function}
+\[f(X)=Y\]
+\sssc{Bijection (對射) or Bijective function or One-to-one (一對一) function or One-to-one correspondence (一一對應)}
+Injective and surjective function.
+\ssc{Tests of real functions}
+\sssc{Vertical line test (垂線測試)}
+For a graph on $xy$ plane, if any vertical line intersects it, $y$ is not a function of $x$.
+\sssc{Horizontal line test (水平線測試)}
+Given a graph of a real function $y=f(x)$ on $xy$ plane, if any horizontal line intersects it more than once, $f(x)$ is not bijective.
+\ssc{Fixed point, fixpoint, or invariant point (不動點 or 定點)}
+A fixed point, fixpoint, or invariant point of a function $f\colon X\subseteq Y\to Y$, is a point $x\in X$ such that $f(x)=x$.
+\ssc{Property in a variable}
+Unless otherwise specified, given a property $P$ defined for a function $f(w_1,\dots w_n,x,y_1,\dots y_n)$ in which $w_1,\dots w_n,x,y_1,\dots y_n$ are independent variables, we say $f$ is with property $P$ in $x$ if the function $g(x)$ that is defined to map $x$ to $f(w_1,\dots w_n,x,y_1,\dots y_n)$ for any $x$ such that $w_1,\dots w_n,x,y_1,\dots y_n$ is in the domain of $f$ for any fixed $w_1,\dots w_n,y_1,\dots y_n$ is with property $P$.
+
+Unless otherwise specified, given a property $P$ defined for a function $f(w_1,\dots w_n,x,y_1,\dots y_n)$ in which $w_1,\dots w_n,x,y_1,\dots y_n$ are independent variables, we say $f$ is with property $P$ in $x$ for a fixed $w_1,\dots w_n,y_1,\dots y_n$ if the function $g(x)$ that is defined to map $x$ to $f(w_1,\dots w_n,x,y_1,\dots y_n)$ for any $x$ such that $w_1,\dots w_n,x,y_1,\dots y_n$ is in the domain of $f$ is with property $P$.
+
+Unless otherwise specified, given a property $P$ defined for a function $f(w_1,\dots w_n,x,y_1,\dots y_n)$ in which $w_1,\dots w_n,x,y_1,\dots y_n$ are independent variables, we say $f$ is with property $P$ in $x$ at a point $w_1,\dots w_n,x_0,y_1,\dots y_n$ in the domain of $f$ if there exists a neighbourhood $X$ of $x_0$ such that the function $g(x)$ that is defined to map $x$ to $f(w_1,\dots w_n,x,y_1,\dots y_n)$ for any $x\in X$ such that $w_1,\dots w_n,x,y_1,\dots y_n$ is in the domain of $f$ is with property $P$.
+\ssc{Homogeneous function}
+A function $F$ with domain $\Omega\subseteq\bbR^n$ is called a homogeneous function of degree $\alpha\in\bbR$ if and only if for any nonzero real number $t$ and $\mathbf{x},t\mathbf{x}\in\Omega$, $F(t\mathbf{x})=t^{\alpha}F(\mb{x})$.
+
+For any homogeneous function $F(x_1,\mb{x})$ of $n$ variables where $\mb{x}$ represents the second to the $n$th variable, there exists a function $f$ of $n-1$ variables such that $F(x_1,\mb{x})=f\qty(\frac{\mb{x}}{x_1})$ for all $x_1\neq 0$ such that $(x_1,\mb{x})$ is in the domain of $F$.
+\ssc{Periodic function (週期函數)}
+Let $f$ be a function with domain $\bbR$ or $\bbR_{\geq 0}$. If there exists $T>0$ such that
+\[f(t+T)=f(t)\]
+for any $t$ in the domain of $f$, we say that $f$ is periodic and that the smallest $T$ is the period (週期) of $f$.
+\ssc{Of Exponential Order}
+A real or complex-valued net $f$ on a subset of $\mathbb{R}$ is considered of exponential order $\alpha\in\mathbb{R}_{>0}$ if there exists $M>0$ and $T>0$ such that:
+\[|f(t)|\leq Me^{\alpha t}\quad \forall t>T.\]
+\ssc{Symmetry}
+Given a function $f\colon X\to Y$ such that $\forall x\in X\colon -x\in X$.
+\sssc{Even Function (偶函數)}
+$f$ is an even function if for all $x\in X$, $f(x)=f(-x)$.
+\sssc{Odd Function (奇函數)}
+$f$ is an odd function if for all $x\in X$, $-f(x)=f(-x)$.
+\ssc{Transformation (變換)}
+\sssc{Translation (平移)}
+For any function $f\colon\mathbb{R}\to\mathbb{R}$, shifting $y=f(x)$ right by $h$ units and up by $k$ units on the $xy$ coordinate plane yields $y=f(x-h)+k$.
+\sssc{Scaling (伸縮 or 縮放 or 拉伸)}
+For any function $f\colon\mathbb{R}\to\mathbb{R}$, on the $xy$ coordinate plane, expand $y=f(x)$ vertically by $a$ times the original value with the $x$ axis as the reference line, and expand $y=af\qty(\frac{x}{b})$ horizontally by $b$ times the original value with the $y$ axis as the reference line, to obtain $y=af\qty(\frac{x}{b})$.
+\ssc{Function composition (函數合成)}
+For two functions $f\colon X\to Y$ and $g\colon V\to W$ such that $g(V)\subseteq X$, the composition of them, denoted as $(f\circ g)$, is defined as:
+\[(f \circ g)\colon V\to Y;\,x\mapsto = f(g(x))\]
+\ssc{Inverse function (反函數)}
+For a bijective function $f\colon X\to Y$, the inverse of it, denoted as $f^{-1}$, is defined as:
+\[f^{-1}\colon Y\to X;\,f(x)\mapsto x.\]
+\ssc{Preimage (像原) or Inverse image}
+Given an open subset $B$ of the codomain of a function $f$ the preimage or inverse image of $f$ on $B$, denoted as $f^{-1}(B)$ is defined as
+\[f^{-1}(B)=\{x\in X|f(x)\in B\}.\]
+\ssc{Extension (延拓) of a function}
+We say a function $f\colon X\to Y$ is an extension of another function $g\colon U\subseteq X\to Y$ if $\forall u\in U\colon f(u)=g(u)$.
+\ssc{Piecewise function (分段函數)}
+A piecewise function is a function defined in the form:
+\[f(x) =
+\begin{cases}
+f_1(x), & \quad x\in A_1, \\
+f_2(x), & \quad x\in A_2, \\
+\dots  \\
+f_n(x), & \quad x \in A_n
+\end{cases},\]
+where
+\[\bigcup_{i=1}^nA_i=D_f\land\forall i\neq j\land i,j\in\mathbb{N}\land i,j\leq n\colon A_i\cap A_j=\varnothing.\]
+\subsection{Indicator function (指示函數或示性函數) or characteristic function (特徵函數)}
+An indicator function or a characteristic function of a subset $A$ of a set $X$ is a function that maps elements of the subset to one, and all other elements to zero, often denoted as $1_A$.
+\ssc{Elementary functions}
+A constants, a power function, a logarithmic function, an exponential function, a trigonometric function, an inverse trigonometric function, or any function that can be built up with finite defined operations of addition, subtraction, multiplication, division, and composition of functions on any finite set of elementary functions is called an elementary function.
+
+An integral of which the integrand is an elementary function is called an elementary integral.
+\ssc{Binary operation}
+A binary operation $*$ on a set $S$ is a function with domain $S^2$ and codomain $S$, and the output is denoted as $a*b$ for inputs $(a,b)\in S^2$.
+\ssc{Some Types of Real Functions}
+\sssc{Power Function (冪函數)}
+A power function if a function $f(x)=kx^a$ where $k\in\mathbb{C}$, called coefficient, and $a\in\mathbb{R}$, called exponent, are constants (some requires $k\in\mathbb{R}$ or $k=1$).
+\sssc{Root Function (根式函數)}
+A root function is a power function of which the exponent is $\frac{1}{n}$ where $n\in\mathbb{N}$.
+\sssc{Reciprocal Function}
+The reciprocal function is the function $f(x)=\frac{1}{x}$.
+\sssc{Polynomial (多項式)}
+A polynomial is a function $P(x)=\sum_{k=0}^na_kx^k$ where $a_k\in\mathbb{R}$ or $\mathbb{C}$ are constants called coefficients and $n$ is a nonnegative integer called the degree of $P$.
+\sssc{Rational Function (有理函數)}
+A function $f$ is called a rational function if there exists two polynomials $P(x)$ and $Q(x)$ such that $f(x)=\frac{P(x)}{Q(x)}$ for all $x$ in the domain.
+\sssc{Algebraic Function (代數函數)}
+A function $f$ is called an algebraic function if there exists a polynomial $P(y,x)$ in two variables such that $P(f(x),x)=0$ for all $x$ in the domain.
+\sssc{Transcendental Function (超越函數)
+A real function is called a transcendental function if it is not an algebraic function.
+\ssc{Piecewise Functions}
+\sssc{Absolute value (絕對值) or modulus (模)}
+The absolute value or modulus function $|\cdot|\colon\bbR\to\bbR$ is defined as:
+\[|x|=\bcs x,\quad&x\geq 0\\-x,\quad&x<0\ecs.\]
+\sssc{Sign function or signum function (符號函數)}
+The sign function $\sgn\colon\bbR\to\bbR$ is defined as:
+\[\sgn(x)=\bcs\frac{x}{|x|},\quad & x\neq 0\\0,\quad & x=0\end{cases}.\]
+\sssc{Floor function (下取整函數), integral part, integer part (整數部份), greatest integer, entier, rounding down (無條件捨去), or rounding toward negative infinity}
+The floor function $\lfloor\cdot\rfloor\colon\bbR\to\bbR$ or $[\cdot]\colon\bbR\to\bbR$ is defined as:
+\[\lfloor x\rfloor=[x]=\max\{m\in\bbZ\mid m\leq x\},\]
+in which $[\cdot]$ is called the Gauss sign (高斯符號).
+\sssc{Ceiling function (上取整函數), rounding up (無條件進位), or rounding toward positive infinity}
+The ceiling function $\lceil\cdot\rceil\colon\bbR\to\bbR$ is defined as:
+\[\lceil x\rceil=\min\{m\in\bbZ\mid m\geq x\}.\]
+\sssc{Truncation, rounding toward zero, or rounding away from infinity}
+The truncation $\operatorname{truncate}\colon\bb{R}\to\bb{R}$ is defined as:
+\[\operatorname{truncate}(x)=
+\bcs
+\lfloor x\rfloor,\quad & x\geq 0\\
+\lceil x\rceil,\quad & x<0
+\ecs\]
+\sssc{Rounding half up (四捨五入) or rounding half toward positive infinity}
+The rounding half up $\operatorname{roundhalfup}\colon\bbR\to\bbR$ is defined as:
+\[\operatorname{roundhalfup}(x)=\left\lfloor x+\frac{1}{2}\right\rfloor.\]
+\sssc{Rounding half down (五捨六入) or rounding half toward negative infinity}
+The rounding half down $\operatorname{roundhalfdown}\colon\bbR\to\bbR$ is defined as:
+\[\operatorname{roundhalfdown}(x)=\left\lceil x-\frac{1}{2}\right\rceil.\]
+\sssc{Rounding half toward zero or rounding half away from infinity}
+The rounding half toward zero $\operatorname{roundhalftowardzero}\colon\bbR\to\bbR$ is defined as:
+\[\operatorname{roundhalftowardzero}(x)=\sgn(x)\left\lceil |x|-\frac{1}{2}\right\rceil.\]
+\sssc{Rounding half away from zero or rounding half toward infinity}
+The rounding half away from zero $\operatorname{roundhalfawayfromzero}\colon\bbR\to\bbR$ is defined as:
+\[\operatorname{roundhalfawayfromzero}(x)=\sgn(x)\left\lfloor |x|+\frac{1}{2}\right\rfloor.\]
+\sssc{Rounding half to even (四捨六入五成雙)}
+The rounding half to even $\operatorname{roundhalftoeven}\colon\bbR\to\bbR$ is defined as:
+\[\operatorname{roundhalftoeven}(x)=\bcs
+\left\lfloor x+\frac{1}{2}\right\rfloor,\quad & \frac{1}{2}\left\lfloor x+\frac{1}{2}\right\rfloor\in\mathbb{Z}\\
+\left\lceil x-\frac{1}{2}\right\rceil,\quad & \frac{1}{2}\left\lfloor x+\frac{1}{2}\right\rfloor\notin\mathbb{Z}
+\ecs.\]
+\sssc{Rounding half to odd (四捨六入五成單)}
+The rounding half to odd $\operatorname{roundhalftoodd}\colon\bbR\to\bbR$ is defined as:
+\[\operatorname{roundhalftoodd}(x)=\bcs
+\left\lfloor x+\frac{1}{2}\right\rfloor,\quad & \frac{1}{2}\left\lfloor x+\frac{1}{2}\right\rfloor\notin\mathbb{Z}\\
+\left\lceil x-\frac{1}{2}\right\rceil,\quad & \frac{1}{2}\left\lfloor x+\frac{1}{2}\right\rfloor\in\mathbb{Z}
+\ecs.\]
+\sssc{Pulse wave, pulse train, or rectangular wave}
+A pulse wave with period $T$, duty cycle $D$, crest $A_1$, and trough $A_0$ is
+\[f(t)=A_0+\qty(A_1-A_0)\qty(\left\lfloor\frac{t}{T}+D\rfloor\right-\left\lfloor\frac{t}{T}\rfloor\right).\]
+The ratio of the high period to the total period of a pulse wave is called the duty cycle.
+
+When the duty cycle is $50\%$, the pulse wave is called square wave.
+\sssc{Triangular wave or triangle wave}
+A triangular wave with period $T$, crest $A_1$, and trough $A_0$ is
+\[f(t)=A_0+2\qty(A_1-A_0)\abs{\frac{t}{T}-\left\lfloor\frac{t}{T}+\frac{1}{2}\right\rfloor}.\]
+\sssc{Sawtooth wave or saw wave}
+A sawtooth wave with period $T$, crest $A_1$, and trough $A_0$ is
+\[f(t)=\frac{A_0+A_1}{2}+\qty(A_1-A_0)\qty(\frac{t}{T}-\left\lfloor\frac{t}{T}+\frac{1}{2}\right\rfloor).\]
+\sssc{Heaviside step function (黑維塞階躍函數) or Unit step function (單位階躍函數)}
+The Heaviside step function or unit step function $H(x)$ or $u(x)\colon\bbR\to\bbR$ is defined as:
+\[H(x)=u(x)=
+\begin{cases}0,\quad &x<0\\
+1,\quad &x\geq 0
+\end{cases},\]
+where $H(0)=u(0)$ is sometimes defined to be $\frac{1}{2}$ or other values instead.
+\[H'(x)=u'(x)=\delta(x).\]
+\sssc{Dirac delta function (狄拉克 δ 函數)}
+The Dirac delta function $\delta(x)\colon\bbR\to\bbR\cup\{-\infty,\infty\}$ is defined as:
+\[\delta(x) =
+\begin{cases}
+\infty, & x = 0, \\
+0, & x \neq 0.
+\end{cases}\]
+\[\int _{-\infty }^{\infty }\delta(x) \, \mathrm{d}x = 1.\]
+\[\int_0^x\delta(t)\,\mathrm{d}t=H(x).\]
+\[\forall \epsilon > 0:\,\int_{a-\epsilon}^{a+\epsilon} f(x) \delta(x-a) \, \mathrm{d}x = f(a).\]
+
+
+
 \section{Limit (極限)}
 \subsection{Limits of Real Sequences}
 Below, we are discussing limits of sequences with domain $\mathbb{N}$ and codomain $\mathbb{R}$. For sequences $\langle a_n\rangle_{i=l}^\infty$ in $\mathbb{R}$, its limit is the same as the limit of another sequence $\langle b_n=a_{n+l-1}\rangle_{i=1}^\infty$.
@@ -423,6 +617,31 @@ implies
 \[\sum _{k}d\left(f(y_{k}),f(x_{k})\right)<\varepsilon.\]
 
 Absolute continuity implies uniform continuity.
+\sssc{(Golbal/regular) Lipschitz continuity (利普希茨連續) of functions between metric spaces}
+Let $(X,d_1)$ and $(Y,d_2)$ be metric spaces, and $f\colon D\subseteq X\to Y$ be a function. $f$ is called to be Lipschitz continuous if there exists a real constant $K$ such that $\forall x,y\in D$, $d_{2}(f(x),f(y))\leq Kd_{1}(x,y)$.
+
+Let $(X,d_1)$ and $(Y,d_2)$ be metric spaces, and $f\colon O\subseteq X\to Y$ be a function. $f$ is called to be Lipschitz continuous on $D\subseteq O$ if there exists a real constant $K$ such that $\forall x,y\in D$, $d_{2}(f(x),f(y))\leq Kd_{1}(x,y)$.
+
+Lipschitz continuity implies absolute continuity.
+
+If a function $f\colon D\subseteq X\to Y$ between metric spaces $(X,d_1)$ and $(Y,d_2)$ is such that there exists a real constant $K$ such that $\forall x,y\in D$, $d_{2}(f(x),f(y))\leq Kd_{1}(x,y)$, then, any such $K$ is called a Lipschitz constant (利普希茨常數) of the function $f$, and $f$ is called to be $K$-Lipschitz or Lipschitz continuous with constant $K$. The smallest such $K$ is called (best) Lipschitz constant or dilation of $f$.
+\sssc{Short map}
+A short map is a function between metric spaces that is $1$-Lipschitz.
+\sssc{Contraction mapping, contraction map, contraction, contractive mapping, contractive map, or contractor (壓縮映射)}
+A contraction mapping is a function $f$ from a metric space to itself such that there exists a real number $0\leq K<1$ such that $f$ is $K$-Lipschitz, in which $K$ is sometimes called a contraction constant and the smallest such $K$ is sometimes called the best contraction constant or the contraction constant.
+\sssc{Banach fixed-point theorem (巴拿赫不動點定理), contraction mapping theorem (壓縮映射定理), contraction principle, or Banach–Caccioppoli theorem}
+For any contraction mapping $T$ over a non-empty complete metric space $X$ with best contraction constant $K$, there must exist a unique fixed-point $x^*$ of $T$ in $X$, and for any $x\in X$, for any sequence $\langle x_n\rangle_{n\in \mathbb {N}_0}$ defined as
+\[\begin{cases}
+&x_0=x\\
+&x_n=T\qty(x_{n-1}),n\in\mathbb{N}
+\end{cases},\]
+\[\lim_{n\to \infty }x_{n}=x^{*}\]
+and
+\[d(x_n,x^*)\leq\frac{K^n}{1-K}d(x_1,x_0).\]
+\sssc{Locally Lipschitz of functions between metric spaces}
+Let $(X,d_1)$ and $(Y,d_2)$ be metric spaces, and $f\colon D\subseteq X\to Y$ be a function. $f$ is called to be locally Lipschitz if $\forall x\in D$, there exists a real constant $K$ and an open set $V\subseteq D$ with $x\in V$ such that $d_{2}(f(y),f(z))\leq Kd_{1}(y,z)$ for all $y,z\in V$.
+
+Let $(X,d_1)$ and $(Y,d_2)$ be metric spaces, and $f\colon O\subseteq X\to Y$ be a function. $f$ is called to be locally Lipschitz on $D\subseteq O$ if $\forall x\in D$, there exists a real constant $K$ and an open set $V\subseteq D$ with $x\in V$ such that $d_{2}(f(y),f(z))\leq Kd_{1}(y,z)$ for all $y,z\in V$.
 
 
 
@@ -720,7 +939,7 @@ If a function $F(x)$ with codomain $Y$ is an antiderivative of a function $f(x)$
 \sssc{Notation}
 If a function $F(x)$ with codomain $Y$ is an antiderivative of a function $f(x)$ on subset $I$ of the domain of $f$, we write
 \[\int f(x)\,\mathrm{d}x=F(x)+C,\]
-where $C$ denotes an arbitrary constant in $Y$ that does not depend on $x$, called constant of integration.
+where $C$ denotes an arbitrary constant in $Y$ that does not depend on $x$, called constant of integration. The symbol $\int$ is called integral sign, introduced by Leibniz.
 \subsection{Taylor series (泰勒級數) or Taylor expansion (泰勒展開)}
 Assume that $F:\,\mathbb{R}\to\mathbb{R}$ is an infinitely differentiable function, and its derivatives of every order exist on $\mathbb{R}$, then the Taylor series of $F$ at $a$ is
 \[F(x) = \sum_{n\in\mathbb{N}_0} \frac{F^{(n)}(a)}{n!}(x-a)^n,\]
@@ -771,7 +990,7 @@ Each $[x_i, x_{i+1}]$ is called a subinterval of the partition. The length of a 
 \[\max_i\left(x_{i+1}-x_{i}\right)\]
 for every integer $i\in [0,n-1]$.
 
-A tagged partition $P(x,n,\xi)$ of a interval $(a,b)$ is a partition together with a choice of a sample point within each of all $n$ subintervals, that is, numbers $\{\xi_i\}_{i=0}^{n-1}$ with $\xi_i\in [x_i,x_{i+1}]$ for each integer $i\in [0,n-1]$. The mesh of a tagged partition is the same as that of an ordinary partition.
+A tagged partition $P(x,n,\xi)$ of a interval $(a,b)$ is a partition together with a choice of a sample point or tag within each of all $n$ subintervals, that is, numbers $\{\xi_i\}_{i=0}^{n-1}$ with $\xi_i\in [x_i,x_{i+1}]$ for each integer $i\in [0,n-1]$. The mesh of a tagged partition is the same as that of an ordinary partition.
 
 Suppose that two tagged partitions $P(x,n,\xi)$ and $Q(y,m,\zeta)$ are both partitions of the interval $[a,b]$. We say that $Q(y,m,\zeta)$ is a refinement of $P(x,n,\xi)$ if for each integer $i\in [0,n-1]$, there exists an integer $r(i)\in [0,m-1]$ such that $x_i = y_{r(i)}$ and that $\forall i\in [0,n-1]\colon\exists j\in [r(i),r(i + 1)] \text{\ s.t.\ }\xi_i = \zeta_j$. That is, a tagged partition breaks up some of the subintervals and adds sample points where necessary, "refining" the accuracy of the partition.
 
@@ -1070,28 +1289,6 @@ This implies
 \item If $\operatorname{dim}(U)=3$, then for any subset of $U$ where $f$ is smooth,
 \[\nabla\times f=0.\]
 \end{itemize}
-\ssc{Fundamental theorem of multivariable calculus (多變數微積分基本定理)}
-\sssc{Gradient theorem (梯度定理)}
-Suppose $r$ is a oriented differentiable curve that starts at a point $\mathbf{p}$ and ends at a point $\mathbf{q}$. If $\mathbf{F}$ is a differentiable tensor field defined on a neighborhood of $\mathbf{F}$, then,
-\[\int_r(\nabla\mathbf{F})\cdot\mathrm{d}\mathbf{r}=\mathbf{F}\left(\mathbf{q}\right)-\mathbf{F}\left(\mathbf{p}\right).\]
-Gradient theorem is a special case of generalized Stokes theorem.
-\sssc{Divergence theorem, Gauss's theorem, or Ostrogradsky's theorem (高斯散度定理)}
-Suppose $V\subseteq\mathbb{R}^n$ is compact and has a piecewise smooth boundary $S$ (also indicated with $\partial V=S$). The closed, measurable set $\partial V$ is oriented by outward-pointing normals. If $F$ is a continuously differentiable vector field defined on a neighborhood of $V$, then,
-\[\iiint_V\left(\nabla\cdot\mathbf {F}\right)\,\mathrm{d}V=\oiint_S\mathbf{F}\cdot\mathrm{d}\mathbf{S}\]
-Divergence theorem is a special case of generalized Stokes theorem.
-\sssc{Stokes' theorem (斯托克斯定理) or Kelvin–Stokes theorem}
-Let $S$ be a positively oriented, piecewise smooth surface in $\mathbb{R}^3$ with boundary $\partial S\equiv L$. If a vector field $\mathbf{F}:\,\mathbb{R}^3\rightarrow\mathbb{R}^3$ is defined and has continuous first order partial derivatives in a region containing $S$, then,
-\[\iint_S(\nabla\times\mathbf{F})\cdot \mathrm{d}\mathbf{S}=\oint_{L}\mathbf{F}\cdot\mathrm{d}\mathbf{L}\]
-Stokes' theorem is a special case of generalized Stokes theorem.
-\sssc{Green's theorem (格林定理或綠定理)}
-Let $S$ be a positively oriented, piecewise smooth surface in $\mathbb{R}^2$ with boundary $\partial S\equiv L$. If scalar function $P,(x,y)\,Q(x,y)$ are defined and has continuous first order partial derivatives in a region containing $S$, then,
-\[\oint_L (P\mathrm{d}x+Q\mathrm{d}y)=\iint_S\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)\mathrm{d}x\mathrm{d}y\]
-where the path of integration along C is counterclockwise.
-
-Green's theorem is a special case of Stokes' theorem.
-\sssc{Generalized Stokes theorem, Stokes–Cartan theorem, or fundamental theorem of multivariable calculus}
-The generalized Stokes theorem says that the integral of a differential form $\omega$ over the boundary $\partial\Omega$ of some orientable manifold $\Omega$ is equal to the integral of its exterior derivative $\mathrm{d}\boldsymbol{\omega}$ over the whole of $\Omega$, i.e.,
-\[\int _{\partial\Omega}\omega=\int_{\Omega}\mathrm{d}\boldsymbol{\omega}\]
 
 
 
@@ -1822,15 +2019,44 @@ PLACEHOLDER: Given convergence, suppose that we want the error to be less than a
 \ssc{Linearity, or sum rule, difference rule, and constant multiple rule}
 If functions $f$ and $g$ are integrable over an interval $I$ and $a,b\in\mathbb{R}$, then $af(x)+bg(x)$ is also integrable over $I$ and its integral is given by
 \[\int_Iaf(x)+bg(x)\dd{x}=a\int_If(x)\dd{x}+b\int_Ig(x)\dd{x}.\]
+\ssc{Mean Value Theorem (MVT) for Integrals}
+If a function $f\colon D\subseteq\bbR\to\bbR$ is continuous on a closed interval $[a,b]$ with $a<b$, then
+\[\exists c\in (a, b)\text{\ s.t.\ }f(c)=\frac{1}{b-a}\int_a^bf(x)\dd{x}.\]
+\begin{proof}
+By the Extreme Value Theorem, $f$ must have maximum and minimum on $[a,b]$.
+
+Let
+\[M=\max_{x\in [a,b]}f(x),\quad m=\min_{x\in [a,b]}f(x).\]
+Then for any $x\in[a,b]$:
+\[m\leq f(x)\leq M.\]
+Integrate it over $[a,b]$:
+\[m(b-a)=\int_a^bm\dd{x}\leq\int_a^bf(x)\dd{x}\leq\int_a^bM\dd{x}=M(b-a).\]
+\[m\leq\frac{\int_a^bf(x)\dd{x}}{b-a}\leq M.\]
+Since $f$ is continuous, by IVT, the statement holds.
+\end{proof}
 \ssc{Fundamental Theorem of Calculus (FTC) (微積分基本定理)}
 \sssc{Fundamental Theorem of Calculus Part First or First Fundamental Theorem of Calculus}
-Let function $f\colon D\subseteq\bbR\to\bbR$ be continuous on a closed interval $[a,b]$, and $f$ be the function defined, for all $x\in[a,b]$ by
+Let function $f\colon D\subseteq\bbR\to\bbR$ be continuous on a closed interval $[a,b]$, and $F$ be the function defined, for all $x\in[a,b]$ by
 \[F(x)=\int_a^xf(t)\dd{t}.\]
-Then $F$ uniformly continuous on $[a,b]$ and differentiable on $(a,b)$ and
+Then $F$ Lipschitz continuous on $[a,b]$ and differentiable on $(a,b)$ and
 \[F'(x)=f(x)\]
 for all $x\in (a,b)$.
 \begin{proof}
-PLACEHOLDER
+Lipschitz continuity: Let $(x,y)\in(a,b)$ with $x<y$. Let
+\[M=\max_{t\in[a,b]}\abs{f(t)}.\]
+Then,
+\[F(y)-F(x)=\int_a^yf(t)\dd{t}-\int_a^xf(t)\dd{t}=\int_x^yf(t)\dd{t}.\]
+\[\abs{F(y)+F(x)}=\abs{\int_x^yf(t)\dd{t}}\leq\int_x^y\abs{f(t)}\dd{t}\leq\int_x^yM\dd{t}=M(y-x).\]
+Thus $F$ is Lipschitz continuous with constant $M$.
+
+Differentiability:
+\[F'(x)=\lim_{h\to 0}\frac{\int_a^{x+h}f(t)\dd{t}-\int_a^xf(t)\dd{t}}{h}=\lim_{h\to 0}\frac{\int_x^{x+h}f(t)\dd{t}}{h}.\]
+By MVT for integrals, there exists $c_h\in[x,x+h]$ (or $[x+h,x]$ for h<0) such that
+\[f(c_h)=\frac{\int_x^{x+h}f(t)\dd{t}}{h}.\]
+By continuity of $f$,
+\[\lim_{h\to 0}c_h=x.\]
+Hence,
+\[\lim_{h\to 0}\frac{\int_x^{x+h}f(t)\dd{t}}{h}=f(x).\]
 \end{proof}
 \sssc{Fundamental Theorem of Calculus Part Second, Second Fundamental Theorem of Calculus, or Newton–Leibniz Theorem}
 Let function $f\colon I\subseteq\bbR\to\bbR$ be Riemann integrable on a closed interval $[a,b]$, and $F\colon J\subseteq\bbR\to\bbR$ be a function continuous on $[a,b]$ and differentiable on $(a,b)$ such that
@@ -1840,13 +2066,13 @@ for all $x\in (a,b)$.
 Then
 \[\int_a^bf(x)\dd{x}=F(b)-F(a).\]
 \begin{proof}
-PLACEHOLDER
-\end{proof}
-\ssc{Mean Value Theorem (MVT) for Integrals}
-If a function $f\colon D\subseteq\bbR\to\bbR$ is continuous on a closed interval $[a,b]$ with $a<b$, then
-\[\exists c\in (a, b)\text{\ s.t.\ }f(c)=\frac{1}{b-a}\int_a^bf(x)\dd{x}.\]
-\begin{proof}
-PLACEHOLDER
+Let $P(x,n)$ be a partition of $[a,b]$. By MVT, for each subinterval $[x_i,x_{i+1}]$, there exists $c_i\in[x_i,x_{i+1}]$ such that
+\[F(x_{i+1})-F(x_i)=F'(c_i)(x_{i+1}-x_i)=f(c_i)(x_{i+1}-x_i).\]
+So for any $n\in\bbN$:
+\[\sum_{i=0}^{n-1}f(c_i)(x_{i+1}-x_i)=\sum_{i=0}^{n-1}(F(x_{i+1})-F(x_i))=F(x_n)-F(x_0)=F(b)-F(a).\]
+Since $f$ is Riemann integrable
+\[\int_a^bf(x)\dd{x}=\lim_{n\to\infty}\sum_{i=0}^{n-1}f(c_i)(x_{i+1}-x_i)\]
+exists.
 \end{proof}
 \subsection{Integration by substitution (代換積分法), integration by change of variables (換元積分法), u-substitution (u-代換), reverse chain rule, substitution theroem (代換定理), change of variables theorem (換元定理), or transformation theorem (變換定理)}
 \subsubsection{Univariate form}
@@ -1935,6 +2161,28 @@ Then $f_n$ for all $n\in I$ and $f$ are in $L^1(\mu)$ and
 \[\lim_n\int_Sf_n\dd{\mu}=\int_S\lim_nf_n\dd{\mu}=\int_Sf\dd{\mu},\]
 and
 \[\lim_n\int_S\abs{f_n-f}\dd{\mu}=0.\]
+\ssc{Fundamental theorem of multivariable calculus (多變數微積分基本定理)}
+\sssc{Gradient theorem (梯度定理)}
+Suppose $r$ is a oriented differentiable curve that starts at a point $\mathbf{p}$ and ends at a point $\mathbf{q}$. If $\mathbf{F}$ is a differentiable tensor field defined on a neighborhood of $\mathbf{F}$, then,
+\[\int_r(\nabla\mathbf{F})\cdot\mathrm{d}\mathbf{r}=\mathbf{F}\left(\mathbf{q}\right)-\mathbf{F}\left(\mathbf{p}\right).\]
+Gradient theorem is a special case of generalized Stokes theorem.
+\sssc{Divergence theorem, Gauss's theorem, or Ostrogradsky's theorem (高斯散度定理)}
+Suppose $V\subseteq\mathbb{R}^n$ is compact and has a piecewise smooth boundary $S$ (also indicated with $\partial V=S$). The closed, measurable set $\partial V$ is oriented by outward-pointing normals. If $F$ is a continuously differentiable vector field defined on a neighborhood of $V$, then,
+\[\iiint_V\left(\nabla\cdot\mathbf {F}\right)\,\mathrm{d}V=\oiint_S\mathbf{F}\cdot\mathrm{d}\mathbf{S}\]
+Divergence theorem is a special case of generalized Stokes theorem.
+\sssc{Stokes' theorem (斯托克斯定理) or Kelvin–Stokes theorem}
+Let $S$ be a positively oriented, piecewise smooth surface in $\mathbb{R}^3$ with boundary $\partial S\equiv L$. If a vector field $\mathbf{F}:\,\mathbb{R}^3\rightarrow\mathbb{R}^3$ is defined and has continuous first order partial derivatives in a region containing $S$, then,
+\[\iint_S(\nabla\times\mathbf{F})\cdot \mathrm{d}\mathbf{S}=\oint_{L}\mathbf{F}\cdot\mathrm{d}\mathbf{L}\]
+Stokes' theorem is a special case of generalized Stokes theorem.
+\sssc{Green's theorem (格林定理或綠定理)}
+Let $S$ be a positively oriented, piecewise smooth surface in $\mathbb{R}^2$ with boundary $\partial S\equiv L$. If scalar function $P,(x,y)\,Q(x,y)$ are defined and has continuous first order partial derivatives in a region containing $S$, then,
+\[\oint_L (P\mathrm{d}x+Q\mathrm{d}y)=\iint_S\left(\frac{\partial Q}{\partial x}-\frac{\partial P}{\partial y}\right)\mathrm{d}x\mathrm{d}y\]
+where the path of integration along C is counterclockwise.
+
+Green's theorem is a special case of Stokes' theorem.
+\sssc{Generalized Stokes theorem, Stokes–Cartan theorem, or fundamental theorem of multivariable calculus}
+The generalized Stokes theorem says that the integral of a differential form $\omega$ over the boundary $\partial\Omega$ of some orientable manifold $\Omega$ is equal to the integral of its exterior derivative $\mathrm{d}\boldsymbol{\omega}$ over the whole of $\Omega$, i.e.,
+\[\int _{\partial\Omega}\omega=\int_{\Omega}\mathrm{d}\boldsymbol{\omega}\]
 \ssc{Numerical integration (數值積分)}
 \sssc{The trapezoidal rule (梯形法)}
 Let $f$ be a continuous real-valued function on $[a,b]$, the trapezoidal rule gives the approximation
@@ -2564,11 +2812,10 @@ Differentiate RHS:
 \[W(x)\dv{W(x)}{x}e^{W(x)}(1+W(x))=W(x)\]
 \[x(1+W(x))\dv{W(x)}{x}=W(x)\]
 \end{proof}
-
-\end{proof}
+\sssc{Derivative over function}
+\[\int\frac{f'(x)}{f(x)}\,\mathrm{d}x=\ln|f(x)|+C,\quad f(x)\neq 0.\]
 \sssc{Rational functions}
 $a\neq 0$.
-\[\int\frac{f'(x)}{f(x)}\,\mathrm{d}x=\ln|f(x)|+C.\]
 \[\int\frac{1}{x^2+a^2}\,\mathrm{d}x=\frac{1}{a}\arctan\frac{x}{a}+C.\]
 \[\int\frac{1}{x^2-a^2}\,\mathrm{d}x=\frac{1}{2a}\ln\frac{x-a}{x+a}+C.\]
 \[\int\frac{1}{a^2-x^2}\,\mathrm{d}x=\frac{1}{2a}\ln\frac{a+x}{a+x}+C.\]
@@ -2628,6 +2875,82 @@ which is differentiable at $0$ with $f'(0)=0$ and discontinuous everywhere else.
 \[f(x)=x^3,\quad f'(x)=3x^2.\]
 \[f'(0)=0\]
 $f(x)$ has no local extreme at $0$.
+
+
+
+\sct{Constants and Functions Defined by Integrals}
+\ssc{Euler's constant or Euler–Mascheroni constant}
+PLACEHOLDER
+\ssc{Error function}
+\sssc{Error funcction (誤差函數) or Gauss error function (高斯誤差函數)}
+The error function or Gauss error function $\erf\colon\bbC\to\bbC$ or $\erf\colon\bbR\to\bbR$ is defined as:
+\[\erf(z)=\frac{2}{\sqrt{\pi}}\int_0^ze^{-t^2}\dd{t}.\]
+\sssc{Complementary error function (互補誤差函數)}
+The complementary error function $\erfc\colon\bbC\to\bbC$ or $\erfc\colon\bbR\to\bbR$ is defined as:
+\[\erfc(z)=1-\erf(z)=\int_z^{\infty}e^{-t^2}\dd{t}.\]
+\sssc{Imaginary error function (虛誤差函數)}
+The imaginary error function $\erfi\colon\bbC\to\bbC$ or $\erfi\colon\bbR\to\bbR$ is defined as:
+\[\erfi(z)=-i\erf(iz).\]
+\ssc{Lambert W function, omega function, or product logarithm}
+Lambert W function, omega function, or product logarithm $W(z)$ is defined implicitly by
+\[W(z)e^{W(z)}=z,\quad z\in\bbC.\]
+Each branch $k$, starting from $0$ as the principal branch, is denoted as $W_k(z)$.
+
+In the reals, there are two branches: $W_0(x)\colon[-\frac{1}{e},\infty)\to\bbR$ is the inverse of
+\[xe^x,\quad & x\geq-1.\]
+$W_{-1}(x)\colon[-\frac{1}{e},0)\to\bbR$ is the inverse of
+\[xe^x,\quad & x\leq-1.\]
+\ssc{Fresnel Integrals}
+Fresnel integrals $S(x)$ and $C(x)$, and their auxiliary functions $F(x)$ and $G(x)$ are defined as
+\[S(x)=\int_0^x\sin(t^2)\dd{t},\]
+\[C(x)=\int_0^x\cos(t^2)\dd{t},\]
+\[F(x)=\qty(\frac{1}{2}-S(x))\cos(x^2)-\qty(\frac{1}{2}-C(x))\sin(x^2),\]
+\[G(x)=\qty(\frac{1}{2}-S(x))\sin(x^2)+\qty(\frac{1}{2}-C(x))\cos(x^2).\]
+
+The Auxiliary functions $F(x)$ and $G(x)$ provide monotonic bounds for the Fresnel Integrals:
+\[\frac{1}{2}-F(x)-G(x)\leq S(x)\leq\frac{1}{2}+F(x)+G(x),\]
+\[\frac{1}{2}-F(x)-G(x)\leq C(x)\leq\frac{1}{2}+F(x)+G(x).\]
+\begin{proof}
+PLACEHOLDER
+\end{proof}
+\ssc{Trigonometric and Hyperbolic Integrals}
+\sssc{Sine Integral}
+The two different sine integral definitions are
+\[\operatorname{Si}(x)=\int_0^x\frac{\sin(t)}{t}\dd{t},\]
+\[\operatorname{si}(x)=-\int_x^\infty\frac{\sin(t)}{t}\dd{t}.\]
+Their difference is
+\[\operatorname{Si}(x)-\operatorname{si}(x)=\int_0^\infty\frac{\sin(t)}{t}\dd{t}=\frac{\pi}{2}.\]
+\begin{proof}
+PLACEHOLDER
+\end{proof}
+\sssc{Cosine Integral}
+The two different cosine integral definitions are
+\[\operatorname{Cin}(x)=\int_0^x\frac{1-\cos(t)}{t}\dd{t},\]
+\[\operatorname{Ci}(x)=-\int_x^\infty\frac{\cos(t)}{t}\dd{t}.\]
+Their sum is
+\[\operatorname{Cin}(x)+\operatorname{Ci}(x)=\ln(x)+\gamma.\]
+where $\gamma$ is the Euler–Mascheroni constant.
+\begin{proof}
+PLACEHOLDER
+\end{proof}
+\sssc{Hyperbolic Sine Integral}
+The hyperbolic sine integral is defined as:
+\[\operatorname{Shi}(x)=\int_0^x\frac{\sinh(t)}{t}\dd{t}.\]
+It is related to the sine integral by
+\[\operatorname{Si}(ix)=i\operatorname{Shi}(x).\]
+\begin{proof}
+PLACEHOLDER
+\end{proof}
+\sssc{Hyperbolic Cosine Integral}
+The hyperbolic cosine integral is defined as
+\[\operatorname{Chi}(x)=\gamma+\ln(x)+\int_0^x\frac{\cosh(t)-1}{t}\dd{t},\]
+where $\gamma$ is the Euler–Mascheroni constant.
+
+It is related to the cosine integral by
+\[\operatorname{Ci}(ix)=i\operatorname{Chi}(x)-\frac{\pi}{2}.\]
+\begin{proof}
+PLACEHOLDER
+\end{proof}
 
 
 
@@ -2715,31 +3038,6 @@ An $n$th-order boundary-value problem is an $n$th-order ODE with some conditions
 
 A solution of an BVP is a solution of the ODE that complies with all the BCs.
 \ssc{Classical theory}
-\sssc{(Golbal/regular) Lipschitz continuity (利普希茨連續) of functions between metric spaces}
-Let $(X,d_1)$ and $(Y,d_2)$ be metric spaces, and $f\colon D\subseteq X\to Y$ be a function. $f$ is called to be Lipschitz continuous if there exists a real constant $K$ such that $\forall x,y\in D$, $d_{2}(f(x),f(y))\leq Kd_{1}(x,y)$.
-
-Let $(X,d_1)$ and $(Y,d_2)$ be metric spaces, and $f\colon O\subseteq X\to Y$ be a function. $f$ is called to be Lipschitz continuous on $D\subseteq O$ if there exists a real constant $K$ such that $\forall x,y\in D$, $d_{2}(f(x),f(y))\leq Kd_{1}(x,y)$.
-
-Lipschitz continuity implies absolute continuity.
-
-If a function $f\colon D\subseteq X\to Y$ between metric spaces $(X,d_1)$ and $(Y,d_2)$ is such that there exists a real constant $K$ such that $\forall x,y\in D$, $d_{2}(f(x),f(y))\leq Kd_{1}(x,y)$, then, any such $K$ is sometimes called a Lipschitz constant (利普希茨常數) of the function $f$, $f$ is sometimes called to be $K$-Lipschitz, and the smallest such $K$ is sometimes called the best Lipschitz constant, the Lipschitz constant, or the dilation of $f$.
-\sssc{Short map}
-A short map is a function between metric spaces that is $1$-Lipschitz.
-\sssc{Contraction mapping, contraction map, contraction, contractive mapping, contractive map, or contractor (壓縮映射)}
-A contraction mapping is a function $f$ from a metric space to itself such that there exists a real number $0\leq K<1$ such that $f$ is $K$-Lipschitz, in which $K$ is sometimes called a contraction constant and the smallest such $K$ is sometimes called the best contraction constant or the contraction constant.
-\sssc{Banach fixed-point theorem (巴拿赫不動點定理), contraction mapping theorem (壓縮映射定理), contraction principle, or Banach–Caccioppoli theorem}
-For any contraction mapping $T$ over a non-empty complete metric space $X$ with best contraction constant $K$, there must exist a unique fixed-point $x^*$ of $T$ in $X$, and for any $x\in X$, for any sequence $\langle x_n\rangle_{n\in \mathbb {N}_0}$ defined as
-\[\begin{cases}
-&x_0=x\\
-&x_n=T\qty(x_{n-1}),n\in\mathbb{N}
-\end{cases},\]
-\[\lim_{n\to \infty }x_{n}=x^{*}\]
-and
-\[d(x_n,x^*)\leq\frac{K^n}{1-K}d(x_1,x_0).\]
-\sssc{Locally Lipschitz of functions between metric spaces}
-Let $(X,d_1)$ and $(Y,d_2)$ be metric spaces, and $f\colon D\subseteq X\to Y$ be a function. $f$ is called to be locally Lipschitz if $\forall x\in D$, there exists a real constant $K$ and an open set $V\subseteq D$ with $x\in V$ such that $d_{2}(f(y),f(z))\leq Kd_{1}(y,z)$ for all $y,z\in V$.
-
-Let $(X,d_1)$ and $(Y,d_2)$ be metric spaces, and $f\colon O\subseteq X\to Y$ be a function. $f$ is called to be locally Lipschitz on $D\subseteq O$ if $\forall x\in D$, there exists a real constant $K$ and an open set $V\subseteq D$ with $x\in V$ such that $d_{2}(f(y),f(z))\leq Kd_{1}(y,z)$ for all $y,z\in V$.
 PLACEHOLDER: below waiting for change to "Ordinary Differential Equations and Dynamical Systems" version
 \sssc{Peano existence theorem (皮亞諾存在性定理), Peano theorem (皮亞諾定理), or Cauchy–Peano theorem (柯西-皮亞諾定理)}
 Let $D$ be an open subset of $\mathbb{R}\times\mathbb{R}^n$ and $f\colon D\to \mathbb {R}$ be a continuous function, then every initial value problem given by explicit first-order ODE $y'(t)=f\left(t,y(t)\right)$ defined on $D$ and initial condition $y\left(t_{0}\right)=y_{0}$ with $(t_{0},y_{0})\in D$ has a local solution $z\colon I\to \mathbb {R}^n$ where $I$ is a neighbourhood of $t_0$ in $\mathbb {R} $.
@@ -3033,5 +3331,19 @@ An asymptotically stable (漸近穩定) equilibrium is necessarily (Lyapunov) st
 
 An equilibrium that is in a repeller is necessarily unstable.
 \eit
+
+
+
+\sct{Differential Geometry (微分幾何)}
+PLACEHOLDER
+\ssc{Curvature (曲率)}
+\sssc{Plane curves}
+Let $\gamma$ be a plane curve twice differentiable at $t$. The signed curvature $k$ of $\gamma$ at $t$ is given by
+\[k(t)=\frac{\det(\gamma'(t),\gamma''(t))}{\|\gamma'(t)\|^3}.\]
+The curvature $\kappa$ of $\gamma$ at $t$ is given by
+\[\kappa(t)=|k(t)|.\]
+For any $t$ such that $\kappa(t)\neq 0$, there exists a circle with radius $R(t)=\frac{1}{\kappa(t)}$ that is tangent to $\gamma$ at $t$.
+PLACEHOLDER
+PLACEHOLDER
 \end{document}
 
