@@ -1238,7 +1238,7 @@ A critical race is a race which the final stable state is dependent on the seque
 \sssc{(Active-high) S-R Latch}
 An (asynchronous) (active-high or NOR-gate) set-reset (aka S-R or SR) latch or an (asynchronous) S-R NOR latch has two inputs, set $S$ and reset $R$, and two outputs, $Q$ and $Q'$, and stores one bit, $Q$. It consists two NOR gates with $S$ and $Q$ being the inputs and $Q'$ being the output of one NOR gate, and $R$ and $Q'$ being the inputs and $Q$ begin the output of the other NOR gate.
 
-It is hold when $S=R=0$, set when $S=R'=1$, and reset when $S'=R=1$. It has restriction that $SR=0$ because $Q$ and $Q'$ will oscillate when $S=R=1$.
+It has a restriction that $SR=0$.
 
 With present state $Q$, next state $Q^+$, and next state of $Q'$ $P$, the next-state equation of an S-R latch is:
 \[Q^+=(R+(S+Q)')'=R'S+R'Q.\]
@@ -1260,17 +1260,17 @@ S & R & Q & Q^+ & Q^+' & P\\\hline
 \end{longtable}
 Thus, $P=Q^+'$ except when $S=R=1$.
 
-By making $S=R=1$ don't care combination, we can simplify them as:
+By making $(S,R)=(1,1)$ don't care combination, we can simplify them as:
 \[Q^+=S+R'Q.\]
 \[Q^+'=P=R+S'Q'.\]
 
-The next state $Q^+$ will be 1 either if it is set to 1 with an $S=1$ input, or if the present state is 1 and the latch is not reset with an $R=1$ input, and be 0 otherwise.
+When $(S,R)=(1,0)$, it sets $Q^+$ to 1; when $(S,R)=(0,1)$, it resets $Q^+$ to 0; when $(S,R)=(0,0)$, it holds present state; when $(S,R)=(1,1)$, which is not allowed, the outputs oscillate.
 
 The symbol of an active-high S-R latch in block diagrams is an rectangle with two input lines with label $S$ and $R$ in the rectangle adjacent to it on one long side, output line with label $Q$ in the rectangle adjacent to it at the position opposite to $S$ on the opposite side, and output line with label $Q'$ in the rectangle adjacent to it at the position opposite to $R$ on the opposite side.
 \sssc{Active-low S-R Latch}
 An (asynchronous) active-low or NAND-gate S-R latch, an (asynchronous) S-R NAND latch, $\ol{\tx{S}\tx{R}}$ latch, or $\ol{\tx{S}}$-$\ol{\tx{R}}$ latch has two inputs, set $\ol{S}$ and reset $\ol{R}$, and two outputs, $Q$ and $Q'$, and stores one bit, $Q$. It consists two NAND gates with $\ol{S}$ and $Q'$ being the inputs and $Q$ being the output of one NAND gate, and $\ol{R}$ and $Q$ being the inputs and $Q'$ begin the output of the other NAND gate.
 
-It is hold when $\ol{S}=\ol{R}=1$, set when $\ol{S}=\ol{R}'=0$, and reset when $\ol{S}'=\ol{R}=0$. It has restriction that $\ol{S}+\ol{R}=1$ because $Q$ and $Q'$ will oscillate when $\ol{S}=\ol{R}=0$.
+It has a restriction that $\ol{S}+\ol{R}=1$.
 
 With present state $Q$, next state $Q^+$, and next state of $Q'$ $P$, the next-state equation of an S-R latch is:
 \[Q^+=(\ol{S}(\ol{R}Q)')'=\ol{S}'+\ol{R}Q.\]
@@ -1292,10 +1292,10 @@ The truth table is:
 \end{longtable}
 Thus, $P=Q^+'$ except when $\ol{S}=\ol{R}=0$.
 
-By making $\ol{S}=\ol{R}=0$ don't care combination, we can simplify it as:
+By making $(\ol{S},\ol{R})=(0,0)$ don't care combination, we can simplify it as:
 \[Q^+'=P=\ol{R}'+\ol{S}Q'.\]
 
-The next state $Q^+$ will be 1 either if it is set to 1 with an $\ol{S}=0$ input, or if the present state is 1 and the latch is not reset with an $\ol{R}=0$ input, and be 0 otherwise.
+When $(\ol{S},\ol{R})=(0,1)$, it sets $Q^+$ to 1; when $(\ol{S},\ol{R})=(1,0)$, it resets $Q^+$ to 0; when $(\ol{S},\ol{R})=(1,1)$, it holds present state; when $(\ol{S},\ol{R})=(0,0)$, which is not allowed, the outputs oscillate.
 
 The symbol of an active-low S-R latch in block diagrams is an rectangle with two input lines with label $\ol{S}$ and $\ol{R}$ in the rectangle adjacent to it on one long side, output line with label $Q$ in the rectangle adjacent to it at the position opposite to $\ol{S}$ on the opposite side, and output line with label $Q'$ in the rectangle adjacent to it at the position opposite to $\ol{R}$ on the opposite side.
 \sssc{Switch Debouncing with an S-R Latch}
@@ -1312,16 +1312,18 @@ To ensure that each physical press or release of a switch produces only one tran
 \sssc{NOR-gate Gated S-R Latch}
 A NOR-gate gated S-R latch or a gated S-R NOR latch has three inputs, set $S$, reset $R$, and enable $E$, and two outputs, $Q$ and $Q'$, and stores one bit, $Q$. It consists of an active-high S-R latch with $S$ and $R$ being replaced with the outputs of two AND gates, each of which takes $E$ and the original input as inputs respectively.
 
-It is hold when $E=0$ or $S=R=0$, set when $E=S=R'=1$, and reset when $E=S'=R=1$. It has restriction that $SR=0$ because $Q$ and $Q'$ will oscillate when $S=R=E=1$ and a race condition where both inputs to the S-R latch changes from 0 to 1 and the propagation delays of the gates determine whether the latch stabilizes with $Q$ changed or being original state occurs when $E$ changes from 1 to 0 while $S=R=1$.
+It has a restriction that $SR=0$.
 
 With present state $Q$, next state $Q^+$, and next state of $Q'$ $P$, the next-state equation of a gated S-R latch is:
 \[Q^+=(RE+(SE+Q)')'=(RE)'(SE+Q)=(R'+E')(SE+Q)=SR'E+R'Q+E'Q.\]
-By making $S=R=1$ don't care combination, we can simplify it as:
+By making $(S,R)=(1,1)$ don't care combination, we can simplify it as:
 \[Q^+=SE+Q(R'+E').\]
 \[P=(SE+Q^+)'=(SE+SR'E+R'Q+E'Q)'=(S'+E')(R+Q')(E+Q')=S'RE+S'Q'+E'Q'.\]
 \[Q^+'=(SE+Q(R'+E'))'=(SE)'(Q(R'+E'))'=(S'+E')(Q'+RE)=S'RE+S'Q'+E'Q'=P.\]
-By making $S=R=1$ don't care combination, we can simplify it as:
+By making $(S,R)=(1,1)$ don't care combination, we can simplify it as:
 \[Q^+'=P=RE+Q'(S+E').\]
+
+When $(S,R,E)=(1,0,1)$, it sets $Q^+$ to 1; when $(S,R,E)=(0,1,1)$, it resets $Q^+$ to 0; when $(S,R)=(0,0)$ or $E=0$, it holds present state; when $(S,R,E)=(1,1,1)$, which is not allowed, the outputs oscillate; when $E$ changes from 1 to 0 while $(S,R)=(1,1)$, which is not allowed, a race condition where both inputs to the underlying S-R latch changes from 0 to 1 and the propagation delays of the gates determine whether the latch stabilizes with $Q^+$ changed or not occurs.
 
 Another restriction of NOR-gate gated S-R latchs is when one or both of $S$ and $R$ go low (e.g. a glitch caused by a statc-0 hazard) near a falling edge of $E$, the latch may catch the unwanted 0. This is called 0's catching problem.
 
@@ -1329,14 +1331,16 @@ The symbol of a gated S-R latch in block diagrams is an active-high S-R latch wi
 \sssc{NAND-gate Gated S-R Latch}
 A NAND-gate gated S-R latch or a gated S-R NAND latch has three inputs, set $S$, reset $R$, and enable $E$, and two outputs, $Q$ and $Q'$, and stores one bit, $Q$. It consists of an active-low S-R latch with $\ol{S}$ and $\ol{R}$ being replaced with the outputs of two NAND gates, each of which takes $E$ and the original input as inputs respectively.
 
-It is hold when $E=0$ or $S=R=0$, set when $E=S=R'=1$, and reset when $E=S'=R=1$. It has restriction that $SR=0$ because $Q$ and $Q'$ will oscillate when $S=R=E=1$ and a race condition where both inputs to the S-R latch changes from 1 to 0 and the propagation delays of the gates determine whether the latch stabilizes with $Q$ changed or being original state occurs when $E$ changes from 1 to 0 while $S=R=1$.
+It has a restriction that $SR=0$.
 
 With present state $Q$, next state $Q^+$, and next state of $Q'$ $P$, the next-state equation of a NAND-gate gated S-R latch is:
 \[Q^+=((SE)'((RE)'Q)')'=SE+(RE)'Q=SE+Q(R'+E').\]
 \[P=((RE)'Q^+')'=((RE)'(SE+Q(R'+E')))'=RE+(SE+Q(R'+E'))'=RE+(SE)'(Q(R'+E'))'=RE+(S'+E')(Q'+RE)=S'Q'+RE+E'Q.\]
 \[Q^+'=(SE+Q(R'+E'))'=(SE)'(Q(R'+E'))'=(S'+E')(Q'+RE)=S'Q'+S'RE+E'Q=P.\]
-By making $S=R=1$ don't care combination, we can simplify it as:
+By making $(S,R,E)=(1,1)$ don't care combination, we can simplify it as:
 \[Q^+'=P=RE+Q'(S+E').\]
+
+When $(S,R,E)=(1,0,1)$, it sets $Q^+$ to 1; when $(S,R,E)=(0,1,1)$, it resets $Q^+$ to 0; when $(S,R)=(0,0)$ or $E=0$, it holds present state; when $(S,R,E)=(1,1,1)$, which is not allowed, the outputs oscillate; when $E$ changes from 1 to 0 while $(S,R)=(1,1)$, which is not allowed, a race condition where both inputs to the underlying S-R latch changes from 1 to 0 and the propagation delays of the gates determine whether the latch stabilizes with $Q^+$ changed or not occurs.
 
 Another restriction of NAND-gate gated S-R latchs is when one or both of $S$ and $R$ go high (e.g. a glitch caused by a statc-1 hazard) near a falling edge of $E$, the latch may catch the unwanted 1. This is called 1's catching problem.
 
@@ -1348,10 +1352,6 @@ The symbol of a D latch in block diagrams is the same as a gated S-R latch with 
 \sssc{(Asynchronous) J-K Latch}
 An (asynchronous) J-K (aka JK) latch is an improved version of the S-R latch that eliminates the forbidden state. It has two inputs, $J$ and $K$, and two outputs, $Q$ and $Q'$, and stores one bit, $Q$. It consists of a gated S-R latch with $S$ and $R$ being renamed as $J$ and $K$ respectively and the enable $E$ inputs to the gates with $J$ and $K$ being the other input being replaced with new $Q'$ and $Q$ feedback inputs respectively.
 
-When $J=K=1$, the outputs $(Q,Q')$ become $(1,0)$ if originally $(0,1)$ and $(0,1)$ if originally $(1,0)$, called toggle. However, if $J=K=1$ stays longer than the propagation delay, the outputs toggle again, called the race-around problem.
-
-It is hold when $J=K=0$, set when $J=K'=1$, reset when $J'=K=1$, and toggle when $J=K=1$.
-
 With present state $Q$, next state $Q^+$, and next state of $Q'$ $P$, the next-state equation of a NOR-gate gated S-R latch, that is a J-K latch with underlying gated S-R latch being NOR-gate gated S-R latch, is:
 \[Q^+=(KQ+(JQ'+Q)')'=(KQ)'(JQ'+Q)=(K'+Q')(JQ'+Q)=JQ'+K'Q.\]
 \[P=(JQ'+Q^+)'=(JQ'+K'Q)'=Q^+'=(J'+Q)(K+Q')=J'K+J'Q'+KQ.\]
@@ -1360,11 +1360,13 @@ With present state $Q$, next state $Q^+$, and next state of $Q'$ $P$, the next-s
 \[Q^+=((JQ')'((KQ)'Q)')'=JQ'+(KQ)'Q=JQ'+(K'+Q')Q=JQ'+K'Q.\]
 \[P=((KQ)'Q^+)'=(KQ)(J'+Q)(K+Q')=(J'+Q)(K+Q')=Q^+'=J'K+J'Q'+KQ.\]
 
+When $(J,K)=(1,0)$, it sets $Q^+$ to 1; when $(J,K)=(0,1)$, it resets $Q^+$ to 0; when $(J,K)=(0,0)$, it holds present state; when $(J,K)=(1,1)$, the outputs $(Q,Q')$ become $(1,0)$ if originally $(0,1)$ and $(0,1)$ if originally $(1,0)$, called toggle; however, if $J=K=1$ stays longer than the propagation delay, the outputs toggle again, called the race-around problem.
+
 The symbol of a J-K latch in block diagrams is the same as an active-high S-R latch with $S$ and $R$ renamed $J$ and $K$ respectively. Sometimes output $Q'$ is omitted if not used.
 \sssc{Gated J-K Latch}
 A gated J-K latch is a J-K latch with one additional input, enable $E$, that is connected to both the gates $J$ and $K$ input to, which makes the two gates both have three inputs.
 
-It is hold when $E=0$ or $J=K=0$, set when $E=J=K'=1$, reset when $E=J'=K=1$, and toggle with race-around problem when $E=J=K=1$.
+When $(J,K,E)=(1,0,1)$, it sets $Q^+$ to 1; when $(J,K,E)=(0,1,1)$, it resets $Q^+$ to 0; when $(J,K,E)=(1,1,1)$, the outputs toggle with race-around problem; otherwise, it holds present state.
 
 The symbol of a gated J-K latch in block diagrams is a J-K latch with an additional enable input line between $J$ and $K$ labeld $En$.
 \sssc{Edge-triggered flip-flops}
@@ -1373,6 +1375,23 @@ An edge-triggered flip-flop has the same inputs and outputs of the gated latch o
 The symbol of a rising-edge-triggered flip-flop in block diagrams is a gated latch of the same type with $En$ replaced with a small arrowhead (wedge shape) with its opening facing outwards from the rectangle and its two ends on the side of the rectangle representing the clock input.
 
 The symbol of a falling-edge-triggered flip-flop in block diagrams is a rising-edge-triggered flip-flop of the same type with an inversion bubble outside of the rectangle at the clock input.
+\sssc{(Edge-triggered) S-R flip-flop (JKFF)}
+For active-high S-R flip-flops, $(S,R)=(1,1)$ is not allowed. For active-low S-R flip-flops, $(\ol{S},\ol{R})=(0,0)$ is not allowed.
+\sssc{(Edge-triggered) D flip-flop (DFF)}
+When the context is clear, flip-flops (FFs) may be used to refer to D flip-flops (DFFs).
+\sssc{(Edge-triggered) J-K flip-flop (JKFF)}
+When $(J,K)=(1,0)$ at an active edge, it sets $Q^+$ to 1; when $(J,K)=(0,1)$ at an active edge, it resets $Q^+$ to 0; when $(J,K)=(1,1)$ at an active edge, the outputs toggle exactly once, without race-around problem; otherwise, it holds present state.
+\sssc{(Edge-triggered) T flip-flop (TFF)}
+A toggle (aka T) flip-flop has two inputs, toggle $T$ and clock $C$, and two outputs, $Q$ and $Q'$. If $T=1$ at an active edge, the outputs $(Q,Q')$ become $(1,0)$ if originally $(0,1)$ and $(0,1)$ if originally $(1,0)$, called toggle. Otherwise it is hold.
+
+With present state $Q$, next state $Q^+$, the next-state equation of a T flip-flop at an active edge is:
+\[Q^+=T'Q+TQ'.\]
+
+It can be implemented with a J-K flip-flop with inputs $J$ and $K$ both connected to $T$.
+
+Alternatively, it can be implemented with a D flip-flop with input $D$ connect to the output of a XOR gate with inputs $T$ and $Q$.
+
+The symbol of a T flip-flop in block diagrams is a D flip-flop with $D$ replaced with $T$.
 \sssc{Pulse-triggered flip-flops}
 The term pulse-triggered flip-flop refers to the implementation that AND together clock signal and a slightly delayed version of the inversion of the clock siganl and feed it to a gated latch such that the flip-flop is transparent only on a short period after a rising edge, or AND together the inversion of a clock signal and a slightly delayed version of the clock siganl and feed it to a gated latch such that the flip-flop is transparent only on a short period after a falling edge.
 \sssc{Master-slave flip-flops}
@@ -1384,26 +1403,11 @@ The master-slave flip-flops need a time where the data inputs are stable before 
 
 For rising-edge-triggered flip-flops, the enable signal of the master is the inverse of the clock signal and the enable signal of the slave is the clock signal. For falling-edge-triggered flip-flops, the enable signal of the master is the clock signal and the enable signal of the slave is the inverse of the clock signal.
 \sssc{Master-slave S-R flip-flop (SRFF)}
-Let the inputs and outputs of the master be with subscript $_1$ and those of the slave be with subscript $_2$. In a master-slave S-R flip-flop, $Q_1$ and $Q_1'$ are connected to $S_2$ and $R_2$ respectively, and $Q_2$ and $Q_2'$ are the final outputs of it.
-\sssc{Master-slave D flip-flop (DFF)}
+Let the inputs and outputs of the master be with subscript $_1$ and those of the slave be with subscript $_2$. In an active-high or active-low master-slave S-R flip-flop, $Q_1$ and $Q_1'$ are connected to $S_2$ and $R_2$ respectively, and $Q_2$ and $Q_2'$ are the final outputs of it.
+\sssc{Master-slave D flip-flop}
 Let the inputs and outputs of the master be with subscript $_1$ and those of the slave be with subscript $_2$. In a master-slave D flip-flop, $Q_1$ is connected to $D_2$, $Q_1'$ is discarded, and $Q_2$ and $Q_2'$ are the final outputs of it.
-
-In the symbol of a DFF, sometimes output $Q'$ ($Q_2'$) is omitted if not used.
-
-When the context is clear, flip-flops (FFs) may be used to refer to D flip-flops (DFFs).
 \sssc{Master-slave J-K flip-flop (JKFF)}
 Let the inputs and outputs of the master be with subscript $_1$ and those of the slave be with subscript $_2$. In a master-slave J-K flip-flop, $Q_1$ and $Q_1'$ are connected to $J_2$ and $K_2$ respectively, and $Q_2$ and $Q_2'$ are the final outputs of it.
-\sssc{T flip-flop (TFF)}
-A toggle (aka T) flip-flop has two inputs, toggle $T$ and clock $C$, and two outputs, $Q$ and $Q'$. If $T=1$ at an active edge, the outputs $(Q,Q')$ become $(1,0)$ if originally $(0,1)$ and $(0,1)$ if originally $(1,0)$, called toggle. Otherwise it is hold.
-
-With present state $Q$, next state $Q^+$, the next-state equation of a T flip-flop at an active edge is:
-\[Q^+=T'Q+TQ'.\]
-
-It can be implemented with a J-K flip-flop with inputs $J$ and $K$ both connected to $T$.
-
-Alternatively, it can be implemented with a D flip-flop with input $D$ connect to the output of a XOR gate with inputs $T$ and $Q$.
-
-The symbol of a T flip-flop in block diagrams is a D flip-flop with $D$ replaced with $T$.
 \sssc{Flip-flops with asynchronous clear and preset}
 Some flip-flops has asynchronous inputs that change the stored state of $Q$ at any time.
 \bit
@@ -1426,7 +1430,7 @@ A flip-flop with CE is called with the original name with -CE sufficed to the or
 \ssc{Registers and Counters}
 \sssc{Register}
 A register can load data inputs in parallel and output stored data in parallel. A $n$ bit register consists of $n$ edge-triggered D flip-flops, each with $D$ being data input and $Q$ being data output. The flip-flops usually share common clock input and asynchronous clear and/or preset inputs. If using gated clocks, the clock is gated with a common signal called load; if using clock enable, the flip-flops share a common clock enable input called load. When load=1 at an active edge, the data
-inputs are loaded into the register; otherwise, the register holds existing data.
+inputs are loaded into the register; otherwise, the register holds present state.
 
 The symbol of a register in block diagrams is one underlying flip-flop symbol with bus lines for data inputs and outputs, and load is labeled as Load at the clock enable input or the gated clock input.
 \sssc{Data Transfer Between Registers with Tri-state Buffers}
@@ -1543,14 +1547,47 @@ A next-state map is the K-map of a next-state variable as a function of the pres
 To design a synchronous counter consists of $n$ T flip-flops given arbitrary transition table of $m$ rows of distinct present states $Q_k$'s and corresponding next states $Q^+_k$'s specified, where the other $2^n-m$ states are don't care states, the following procedure can be used:
 \ben
 \item For each $Q^+_k$, draw a next-state map.
-\item For each 0 and 1 cell in each map, convert the value $Q^+_k$ in it to $T_k$ given by $T_k=Q_k\oplus Q^+_k$. These map are called T input (K-)maps.
+\item For each 0 and 1 cell in each map, convert the value $Q^+_k$ in it to $T_k$ given by $T_k=Q_k\oplus Q^+_k$. These maps are called T input (K-)maps and are the same as the next-state maps with $Q_k=1$ half complemented.
 \item Realize all inputs $T$ with combination circuits with a subset of all outputs $Q$ and $Q'$, constant 1 and 0 sources, and all external control inputs as inputs.
 \een
 \sssc{Design of General Synchronous Counter with D Flip-Flops}
+To design a synchronous counter consists of $n$ D flip-flops given arbitrary transition table of $m$ rows of distinct present states $Q_k$'s and corresponding next states $Q^+_k$'s specified, where the other $2^n-m$ states are don't care states, the following procedure can be used:
+\ben
+\item For each $Q^+_k$, draw a next-state map.
+\item For each 0 and 1 cell in each map, convert the value $Q^+_k$ in it to $D_k$ given by $D_k=Q^+_k$. These maps are called D input (K-)maps and are exactly the same as the next-state maps.
+\item Realize all inputs $D$ with combination circuits with a subset of all outputs $Q$ and $Q'$, constant 1 and 0 sources, and all external control inputs as inputs.
+\een
 \sssc{Design of General Synchronous Counter with S-R Flip-Flops}
+To design a synchronous counter consists of $n$ S-R flip-flops given arbitrary transition table of $m$ rows of distinct present states $Q_k$'s and corresponding next states $Q^+_k$'s specified, where the other $2^n-m$ states are don't care states, the following procedure can be used:
+\ben
+\item For each $Q^+_k$, draw a next-state map.
+\item For each 0 and 1 cell in each map, convert the value $Q^+_k$ in it to $S_k$ and $R_k$ respectively given by the truth table below where $X$ denotes don't care:
+\begin{longtable}[c]{mm|mm}
+\hline
+Q_k & Q_^+_k & S_k & R_k \\\hline
+0 & 0 & 0 & X \\\hline
+0 & 1 & 1 & 0 \\\hline
+1 & 0 & 0 & 1 \\\hline
+1 & 1 & X & 0 \\\hline
+\end{longtable}
+These maps are called S input (K-)maps and R input (K-)maps. S input maps are the same as the next-state maps with 1's in $Q_k=1$ half replaced with X. S input maps are the same as the next-state maps with 0's in $Q_k=0$ half replaced with X.
+\item Realize all inputs $S$ and $R$ with combination circuits with a subset of all outputs $Q$ and $Q'$, constant 1 and 0 sources, and all external control inputs as inputs.
+\een
 \sssc{Design of General Synchronous Counter with J-K Flip-Flops}
-
-
-
+To design a synchronous counter consists of $n$ J-K flip-flops given arbitrary transition table of $m$ rows of distinct present states $Q_k$'s and corresponding next states $Q^+_k$'s specified, where the other $2^n-m$ states are don't care states, the following procedure can be used:
+\ben
+\item For each $Q^+_k$, draw a next-state map.
+\item For each 0 and 1 cell in each map, convert the value $Q^+_k$ in it to $J_k$ and $K_k$ respectively given by the truth table below where $X$ denotes don't care:
+\begin{longtable}[c]{mm|mm}
+\hline
+Q_k & Q_^+_k & J_k & K_k \\\hline
+0 & 0 & 0 & X \\\hline
+0 & 1 & 1 & X \\\hline
+1 & 0 & X & 1 \\\hline
+1 & 1 & X & 0 \\\hline
+\end{longtable}
+These maps are called J input (K-)maps and K input (K-)maps. J input maps are the same as the next-state maps with all cells in $Q_k=1$ half replaced with X. K input maps are the same as the next-state maps with all cells in $Q_k=0$ half replaced with X and $Q_k=1$ half complemented.
+\item Realize all inputs $J$ and $K$ with combination circuits with a subset of all outputs $Q$ and $Q'$, constant 1 and 0 sources, and all external control inputs as inputs.
+\een
 \end{document}
 
