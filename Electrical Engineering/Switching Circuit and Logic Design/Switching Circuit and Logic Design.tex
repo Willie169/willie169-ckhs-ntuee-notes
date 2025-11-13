@@ -288,7 +288,7 @@ a & b & c & f\\\hline
 \sssc{Incompletely specified boolean functions}
 The definition of ON-set and OFF-set of an ISF is the same as completely specified function; the Don't-Care set or DC-set of an ISF is the set of all don't-care conditions.
 
-The output for the don't-care conditions can be assigned either $0$ or $1$ such that the minimum SOP (or POS) forms have the fewest terms.
+The output for the don't-care conditions can be assigned either $0$ or $1$ during simplification or realization.
 
 An ISF $f$ with ON-set $S$, OFF-set $T$, and DC-set $D$ is sometimes written similar to minterm expansion as
 \[f=\sum m(i\in S)+\sum d(i\in D),\]
@@ -741,6 +741,22 @@ A pull-up resistor is a resistor connected between a signal line and +Vcc to ens
 A pull-down resistor is a resistor connected between a signal line and ground to ensure that the signal stays at logic 0 when no active signal drives it high.
 \sssc{Feedback}
 Feedback occurs when the output of a circuit is fed back into its input. Sequential circuits must contain feedback, but not all circuits with feedback are sequential.
+\sssc{Transmission Gate (TG), Analog Switch, or Bilateral Switch}
+A transmission gate (TG), aka analog switch or bilateral switch, is a CMOS bidirectional switch with two data terminal and a enable signal (aka control signal or select signal) that can either conduct or block the signal path between the two data terminals based on the enable signal. When enable signal is 1, it is closed and can conduct nearly any voltage between ground and supply voltage in both directions; when enable signal is 0, it is open. It consists of a p-channel MOSFET (PMOS), which passes a strong 1 but a weak 0, and a n-channel MOSFET (NMOS), which passes a strong 0 but a weak 1, connected in parallel with the drain and source terminals of the two transistors connected together as the two data terminals and the gate terminals of the PMOS and NMOS driven by the complement of the enable signal and the enable signal respectively.
+
+The symbol of a transmission gate in block diagrams is
+\begin{tikzpicture}
+\node[ieee tgate] at (0,0){};
+\end{tikzpicture}
+or
+\begin{tikzpicture}
+\node[ieee double tgate] at (0,0){};
+\end{tikzpicture}
+or
+\begin{tikzpicture}
+\node[pmos] at (0,0){};
+\node[nmos, xscale=-1, yscale=-1] at (0,0){};
+\end{tikzpicture}
 \ssc{Multi-level combinational circuits}
 \sssc{Introduction}
 The maximum number of gates cascaded in series between a circuit input and the output is referred to as the number of levels of gates. Thus, a function written in sum-of-products form or in product-of-sums form corresponds directly to a two-level gate circuit. As is usually the case in digital circuits where the gates are driven from flip-flop outputs, we will assume that all variables and their complements are available as circuit inputs. For this reason, we will not normally count inverters which are connected directly to input variables.
@@ -1181,7 +1197,7 @@ The state variable stored in a latch is usually denoted as $Q$ and sometimes cal
 \sssc{Asynchronous, Edge-triggered, and Level-triggered latch}
 An asynchronous latch (aka a basic latch) is a latch that responds to changes of data inputs all the time.
 
-A level-triggered latch/flip-flop is a latch that responds to changes of data inputs when a signal, called enable ($En$ or $E$), is at a specific high or low level.
+A level-triggered latch/flip-flop is a latch that responds to changes of data inputs when a signal, called enable ($En$ or $E$) or clock (Clk, Ck, or $C$), is at a specific high or low level.
 
 A edge-triggered flip-flop is a latch that responds to changes of data inputs only at the rising or falling edge of a clock signal, called clock (Clk, Ck, or $C$).
 \sssc{Gated or level-sensitive latch}
@@ -1195,7 +1211,9 @@ The implementation a type of flip-flop with another type of flip-flop is called 
 \sssc{Response time or Delay time}
 The response time or delay time $\epsilon$ of a latch or flip-flop is the time it needs to react to a input change. If an impulse of input lasts less than $\epsilon$, the latch or flip-flop will not react to it.
 \sssc{Present state and Next state}
-When discussing latches and flip-flops, we the term present state $Q=Q(t)$ to denote the state of the $Q$ output of the latch or flip-flop at the time input signal changes, and the term next state $Q^+=Q(t+\epsilon)$ to denote the state of the $Q$ output after the latch or flip-flop has reacted to the input change and stabilized. The equation with the next state in the LHS and a function of present state and inputs in the RHS is called the next-state equation or characteristic equation of the sequential circuit.
+When discussing latches and flip-flops, we the term present state $Q=Q(t)$ to denote the state of the $Q$ output of the latch or flip-flop at the time input signal changes, and the term next state $Q^+=Q(t+\epsilon)$ to denote the state of the $Q$ output after the latch or flip-flop has reacted to the input change and stabilized.
+\sssc{Next-state Equation or Characteristic Equation}
+The equation of the next state of a sequential circuit as a function of the present state and inputs.
 \sssc{Moore Machine}
 A Moore machine can be defined as a 6-tuple $(S,s_{0},\Sigma ,O,\delta ,G)$ consisting of:
 \bit
@@ -1346,7 +1364,21 @@ Another restriction of NAND-gate gated S-R latchs is when one or both of $S$ and
 
 The symbol of a gated S-R latch in block diagrams is an active-high S-R latch with an additional enable input line between $S$ and $R$ labeld $En$.
 \sssc{(Gated) D Latch or Transparent Latch}
-A (gated) data (aka D) latch or transparent latch has two inputs, data $D$ and enable $E$, and two outputs, $Q$ and $Q'$, and stores one bit, $Q$. It consists of a gated S-R latch with $S$ and $R$ being replaced with $D$ and $D'$ ($D$ through an inverter) respectively. It is called a transparent latch because $Q=D$ when $E=1$.
+A (gated) data (aka D) latch or transparent latch has two inputs, data $D$ and enable $E$, and two outputs, $Q$ and $Q'$, and stores one bit, $Q$.
+
+With present state $Q$, next state $Q^+$, and next state of $Q'$ $P$, the next-state equation is:
+\[Q^+=DE+QE'.\]
+\[P={Q^+}'=(DE+QE')'=(D'+E')(Q'+E)=D'Q'+D'E+E'Q'.\]
+
+It is called a transparent latch because $Q=D$ when $E=1$.
+
+It can be implemented with a gated S-R latch with $S$ and $R$ being replaced with $D$ and $D'$ ($D$ through an inverter) respectively, called S-R latch-based D latch.
+\[S=DE.\]
+\[R=D'E.\]
+
+It can also be implemented with two transmission gates, input transmission gate $T_1$ and feedback transmission gate $T_2$, and two inverters output inverter $I_1$ and feedback inverter $I_2$, where the data input $D$ is connected to one data terminal of $T_1$, the other data terminal of $T_1$ is connected to one data terminal of $T_2$, output $Q$, and the input of $I_1$, the output of $I_1$ is connected to the output $Q'$ and the input of $I_2$, the output of $I_2$ is connected to the input of $T_2$, the enable signal of $T_1$ is connected to $E$, and the enable signal of $T_2$ is connected to $E'$
+\[Q^+=DE+QE'.\]
+\[P=(DE+(Q')'E')'=(DE+QE')'={Q^+}'=D'Q'+D'E+E'Q'.\]
 
 The symbol of a D latch in block diagrams is the same as a gated S-R latch with $R$ removed and $S$ changed to $D$.
 \sssc{(Asynchronous) J-K Latch}
@@ -1389,7 +1421,7 @@ With present state $Q$, next state $Q^+$, the next-state equation of a T flip-fl
 
 It can be implemented with a J-K flip-flop with inputs $J$ and $K$ both connected to $T$.
 
-Alternatively, it can be implemented with a D flip-flop with input $D$ connect to the output of a XOR gate with inputs $T$ and $Q$.
+It can also be implemented with a D flip-flop with input $D$ connect to the output of a XOR gate with inputs $T$ and $Q$, which is cheaper in cost.
 
 The symbol of a T flip-flop in block diagrams is a D flip-flop with $D$ replaced with $T$.
 \sssc{Pulse-triggered flip-flops}
@@ -1488,9 +1520,9 @@ When $(S_1,S_0)=(1,0)$ at an active edge, the register shifts a bit right; when 
 \sssc{Parallel-In Parallel-Out (PIPO) Bidirectional Shift Register}
 An $n$-bit parallel-in parallel-out (PIPO) bidirectional shift register is an $n$-bit PISO register additional $n-2$ outputs connected to the outputs $Q$ of the flip-flops except the flip-flops storing the least and most significant bits. Those outputs together with the original two SOs compose the parallel output of the register.
 \sssc{Serial-In Parallel-Out (SIPO) Bidirectional Shift Register}
-An $n$-bit serial-in parallel-out (SIPO) bidirectional shift register is an $n$-bit SISO register additional $n-2$ outputs connected to the outputs $Q$ of the flip-flops except the flip-flops storing the least and most significant bits. Those outputs together with the original two SOs compose the parallel output of the register.
+An $n$-bit serial-in parallel-out (SIPO) bidirectional shift register is an $n$-bit SISO register additional $n-2$ outputs connected to the outputs $Q$ of the flip-flops except the flip-flops storing the least and most significant bits. Those outputs together with the original two SOs compose the parallel output of the register. Other possible states of the counter that are not in a state loop can also be drawn on the transition graph as a state with a directed edge pointing to the next state of it.
 \sssc{Counter}
-A counter is a sequential circuit whose state repeats every fixed finite number of active edges, called count cycle. The sequence of states in the cycle drawn as a circle with arrows pointing to next state for each state is called the transition cycle of the counter.
+A counter is a sequential circuit whose state repeats every fixed finite number of active edges, called count cycle. The cyclic sequence of those states is called state loop. The graph of all states in a state loop with directed edges indicating the transition to next state for all states is called (state) transition cycle/graph.
 \sssc{Synchronous Counter}
 A synchronous counter is a counter consists of flip-flops where all flip-flops are enabled synchronously.
 \sssc{Shift Register Counter}
@@ -1520,7 +1552,7 @@ Its count cycle is $2^n$ and its state is a binary number decrementing from $2^n
 \sssc{Synchronous Up/Down (U/D) Counter}
 An $n$-bit synchronous up/down (U/D) counter with separate up $U$ and down $D$ inputs consists of $n$ T flip-flops sharing a common clock input signal with the one storing the $(k+1)$-th least significant bit labeled with subscript $_k$. The data input $T_k$ is connected to
 \[U\prod_{i=0}^{k-1}Q_i+D\prod_{i=0}^{k-1}Q_i',\quad k\in\bbN_0\land k<n\]
-which is implemented using AND and OR gates as
+which is implemented using AND and OR gates or other logically equivalent combinational circuit (e.g., NAND gates) as
 \[U_0=U\]
 \[U_k=U_{k-1}Q_{k-1},\quad k\in\bbN\land k<n\]
 \[D_0=D\]
@@ -1529,7 +1561,7 @@ which is implemented using AND and OR gates as
 
 An $n$-bit synchronous up/down (U/D) counter with up/down input $M$ indicating up when $M=1$ and down when $M=0$ consists of $n$ T flip-flops optionally with clock enable CE to hold when CE=0 sharing a common clock input signal with the one storing the $(k+1)$-th least significant bit labeled with subscript $_k$. The data input $T_0$ is connected to a constant 1 source, and the data input $T_k$ for $k\in\bbN$ is connected to
 \[M\prod_{i=0}^{k-1}Q_i+M'\prod_{i=0}^{k-1}Q_i',\quad k\in\bbN_0\land k<n\]
-which is implemented using AND and OR gates as
+which is implemented using AND and OR gates or other logically equivalent combinational circuit (e.g., NAND gates) as
 \[U_1=M\]
 \[U_k=U_{k-1}Q_{k-1},\quad k\in\bbN\land 1<k<n\]
 \[D_1=M'\]
@@ -1539,8 +1571,8 @@ which is implemented using AND and OR gates as
 A counter that consists of T flip-flops mentioned above can be adjusted to be loada le from a parallel input (PI) with an associated 2-to-1 multiplexer for each T flip-flop and a common load input as select input for all multiplexers. The original input $T$ to each flip-flop is connected instead to the data input of the associated multiplexer which is selected when load=0, the output of each multiplexer is connected to the input $T$ of the associated flip-flop, and the other data input to each multiplexer, which is selected when load=1, is connected to the corresponding bit of the parallel input.
 
 When load=1 at an active edge, the loadable counter loads parallel input; when load=0 at an active edge, the loadable counter works as the underlying counter; otherwise, the loadable counter holds its present state.
-\sssc{State-Transition Table or Transition Table}
-A state-transition table or transition table of a sequential circuit is in the form of a truth table with output variables replaced with next-state variables (labeled with superscript $^+$) and sometimes also output variables and input variables replaced with present-state variables and sometimes also input variables.
+\sssc{State-Transition Table, Transition Table, or Next-state table}
+A state-transition table, transition table, or next-state table of a sequential circuit is a truth table with output variables replaced with next-state variables (labeled with superscript $^+$) and sometimes also output variables and input variables replaced with present-state variables and sometimes also input variables.
 \sssc{Next-state Map}
 A next-state map is the K-map of a next-state variable as a function of the present-state variables and sometimes also input variables of the sequential circuit.
 \sssc{Design of General Synchronous Counter with T Flip-Flops}
