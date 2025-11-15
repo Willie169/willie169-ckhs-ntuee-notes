@@ -1278,17 +1278,26 @@ where $\mathbf{r}:\, [a, b] \to C$ is a one-to-one parametric function with $\ma
 
 $\mathbf{F}$ is called the integral function, $C$ is called the integral path, and the result of the line integration does not depend on the parametric function $\mathbf{r}$.
 \sssc{Conservative field (保守場)}
-A field $f$ whose domain is a subset $U$ of a Euclidean tensor space is called a conservative field if for all paths $C$ between point $a$ and $b$, the integral 
+A field $f$ whose domain is a subset $U$ of a Euclidean tensor space is called a conservative field iff for all paths $C$ between point $a$ and $b$, the integral 
 \[\int_Cf(\mathbf{x})\cdot\mathrm{d}\mathbf{x}\]
-are the same.
+are the same, iff for any closed path $C$, 
+\[\oint_Cf(\mathbf{x})\cdot\mathrm{d}\mathbf{x}=0.\]
 
-This implies 
-\begin{itemize}
-\item For any closed path $C$, 
-\[\int_Cf(\mathbf{x})\cdot\mathrm{d}\mathbf{x}=0.\]
-\item If $\operatorname{dim}(U)=3$, then for any subset of $U$ where $f$ is smooth,
-\[\nabla\times f=0.\]
-\end{itemize}
+\bit
+\item Field $f$ whose domain is $U\subseteq\bbR$ is conservative iff it is continuous.
+\item If field $f=(f_x,f_y)$ whose domain is $U\subseteq\bbR^2$ is conservative, then
+\[\pdv{f_y}{x}-\pdv{f_x}{y}=0\]
+wherever it is defined.
+\item Field $f=(f_x,f_y)$ whose domain is a simply connected set $U\subseteq\bbR^2$ is conservative iff
+\[\pdv{f_y}{x}-\pdv{f_x}{y}=0\]
+for all $(x,y)\in U$.
+\item If field $f$ whose domain is $U\subseteq\bbR^3$ is conservative, then
+\[\nabla\times f=0\]
+wherever it is defined.
+\item Field $f$ whose domain is a simply connected set $U\subseteq\bbR^3$ is conservative iff
+\[\nabla\times f(\mb{x})=0\]
+for all $\mb{x}\in U$.
+\eit
 
 
 
@@ -2190,6 +2199,29 @@ Green's theorem is a special case of Stokes' theorem.
 \sssc{Generalized Stokes theorem, Stokes–Cartan theorem, or fundamental theorem of multivariable calculus}
 The generalized Stokes theorem says that the integral of a differential form $\omega$ over the boundary $\partial\Omega$ of some orientable manifold $\Omega$ is equal to the integral of its exterior derivative $\mathrm{d}\boldsymbol{\omega}$ over the whole of $\Omega$, i.e.,
 \[\int _{\partial\Omega}\omega=\int_{\Omega}\mathrm{d}\boldsymbol{\omega}\]
+\ssc{Volume as definite integral}
+The volume of a solid lying between $x=a$ and $x=b$ with $a<b$ whose cross-sectional area to the $x$-axis at position $x$ is $A(x)$ is
+\[\int_a^bf(x)\dd{x}.\]
+\ssc{Solid of revolution}
+\sssc{Disc method or disc integration}
+The volume of the solid formed by rotating the area between the curves of $f(x)$ and $g(x)$ and the lines $x=a$ and $x=b$ with $a<b$ about the $x$-axis is given by 
+\[V=\pi\int_a^b\abs{f(x)^2-g(x)^2}\dd{x},\]
+aka Washer method.
+
+If $g(x)=0$ (e.g. revolving an area between the curve and the y-axis), this reduces to: 
+\[V=\pi\int_a^bf(x)^2\dd{x}.\]
+\sssc{Shell method or shell integration}
+The volume of the solid formed by rotating the area between the curves of $f(x)$ and $g(x)$ and the lines $x=a$ and $x=b$ with $a<b$ about the $y$-axis is given by 
+\[V=2\pi\int_a^bx\abs{f(x)-g(x)}\dd{x}.\]
+\ssc{Arc length}
+The arc length of a curve $(x(t),y(t))$ between $t=a$ and $t=b$ with $a<b$ is
+\[\int_a^b\sqrt{\qty(\dv{x}{t})^2+\qty(\dv{y}{t})^2}\dd{t}.\]
+
+The arc length of a curve $y=f(x)$ between $x=a$ and $x=b$ with $a<b$ is
+\[\int_a^b\sqrt{1+\qty(\dv{f}{x})^2}\dd{x}.\]
+\ssc{Average value}
+The average value of a function $f(x)$ between $x=a$ and $x=b$ with $a<b$ is
+\[\frac{1}{b-a}\int_a^bf(x)\dd{x}.\]
 \ssc{Numerical integration (數值積分)}
 \sssc{The trapezoidal rule (梯形法)}
 Let $f$ be a continuous real-valued function on $[a,b]$, the trapezoidal rule gives the approximation
