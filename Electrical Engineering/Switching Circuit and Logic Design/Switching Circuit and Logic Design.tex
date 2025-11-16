@@ -1049,7 +1049,7 @@ It can be implemented with
 \end{proof}
 
 The symbol of a full subtractor in block diagrams is a square with "full subtractor" in it with minuend bit and subtrahend bit inputs lines and difference output line on two parallel sides; let $x$-axis be the line perpendicular to the two sides oriented from minuend bit and subtrahend bit inputs lines and difference output line, $z$-axis be oriented out of the paper; borrow-in input and borrow-out output with arrows on the other two sides respectively with direction of them in positivite $y$ direction and from borrow-in input to borrow-out output.
-\sssc{Parallel (binary) adder or ripple-carry adder (RCA)}
+\sssc{Parallel (binary) adder, ripple-carry adder (RCA), or adder}
 An $n$-bit parallel adder or ripple-carry adder, or simply adder is a combinational circuit consisting of $n$ full adders called cells or stages. It has two $n$-bits unsigned or two's complement binary numbers as inputs (MSB to LSB), $A_{n-1}A_{n-2}\ldots A_0$ (augend) and $B_{n-1}B_{n-2}\ldots B_0$ (addned), and a constant $0$ input, $C_{in_0}=0$, and produces the $(n+1)$-bit sum of the two numbers as outputs, $C_{out_{n-1}}S_{n-1}S_{n-2}\ldots S_0$, in which the $(i+1)$th cell takes $A_i$ as augend bit, $B_i$ as addend bit, and $C_{in_i}$ as carry-in, and produces sum $S_i$ and carry-out $C_{out_i}$, that is,
 \[S_i=A_i\oplus B_i\oplus C_{in_i},\]
 \[C_{out_i}=A_iB_i+A_iC_{in_i}+B_iC_{in_i},\]
@@ -1057,8 +1057,8 @@ where $C_{in_i}$ for $n\geq i>0$ and $C_{out_i}$ for $n-1>i\geq 0$ are interconn
 \[S_0=A_0\oplus B_0,\]
 \[C_{out_0}=A_0B_0.\]
 The ripple-carry adder is relatively slow because, in the worst case, a carry propagates through all $n$ stages of the adder before it stabilizes, and there are approximately two gate delays per stage.
-\sssc{Parallel (binary) subtractor or ripple-borrow subtractor (RBS)}
-An $n$-bit parallel subtractor or ripple-borrow adder is a combinational circuit consisting of $n$ full subtractors called cells or stages. It has two $n$-bits unsigned or two's complement binary numbers as inputs (MSB to LSB), $A_{n-1}A_{n-2}\ldots A_0$ (minuend) and $B_{n-1}B_{n-2}\ldots B_0$ (subtrahend), and a constant $0$ input, $B_{in_0}=0$, and produces the $(n+1)$-bit two's complement difference of the two numbers as outputs, $B_{out_{n-1}}D_{n-1}D_{n-2}\ldots D_0$, in which the $(i+1)$th cell takes $A_i$ as minuend bit, $B_i$ as subtrahend bit, and $B_{in_i}$ as borrow-in, and produces difference $D_i$ and borrow-out $B_{out_i}$, that is,
+\sssc{Parallel (binary) subtractor, ripple-borrow subtractor (RBS), or subtractor}
+An $n$-bit parallel subtractor, ripple-borrow subtractor, or simply subtractor is a combinational circuit consisting of $n$ full subtractors called cells or stages. It has two $n$-bits unsigned or two's complement binary numbers as inputs (MSB to LSB), $A_{n-1}A_{n-2}\ldots A_0$ (minuend) and $B_{n-1}B_{n-2}\ldots B_0$ (subtrahend), and a constant $0$ input, $B_{in_0}=0$, and produces the $(n+1)$-bit two's complement difference of the two numbers as outputs, $B_{out_{n-1}}D_{n-1}D_{n-2}\ldots D_0$, in which the $(i+1)$th cell takes $A_i$ as minuend bit, $B_i$ as subtrahend bit, and $B_{in_i}$ as borrow-in, and produces difference $D_i$ and borrow-out $B_{out_i}$, that is,
 \[D_i=A_i\oplus B_i\oplus B_{in_i},\]
 \[B_{out_i}=A_i'B_i+A_i'B_{in_i}+B_iB_{in_i},\]
 where $B_{in_i}$ for $n\geq i>0$ and $B_{out_i}$ for $n-1>i\geq 0$ are interconnections in the parallel subtractor, and for the first cell,
