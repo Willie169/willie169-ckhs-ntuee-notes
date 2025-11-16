@@ -940,6 +940,26 @@ If a function $F(x)$ with codomain $Y$ is an antiderivative of a function $f(x)$
 If a function $F(x)$ with codomain $Y$ is an antiderivative of a function $f(x)$ on subset $I$ of the domain of $f$, we write
 \[\int f(x)\,\mathrm{d}x=F(x)+C,\]
 where $C$ denotes an arbitrary constant in $Y$ that does not depend on $x$, called constant of integration. The symbol $\int$ is called integral sign, introduced by Leibniz.
+
+An indefinite integral in the form
+\[\int f(x)\,\mathrm{d}x=
+\begin{cases}
+F(x)+C_1,\quad & x\in A_1\\
+F(x)+C_2,\quad & x\in A_2\\
+\vdots
+F(x)+C_n,\quad & x\in A_n\\
+(\ldots)
+\end{cases}\]
+with an interval $A$ such that $\bigcup_{i=1}^nA_i\subseteq A$ and that $A\setminus\bigcup_{i=1}^nA_i$ is a set $B$ of measure zero and that $F(x)$ is not defined on $C$ and defined on $\bigcup_{i=1}^nA_i$, is usually abbreviated as
+\[\int f(x)\,\mathrm{d}x=
+\begin{cases}
+F(x)+C,\quad & x\in A\\
+\ldots
+\end{cases}\]
+where $C$ is to be understood as notation for a locally constant function of $x$.
+
+When computing indefinite integral, we usually absorb constants into $C$ without changing its symbol, that is,
+\[\int f(x)\dd{x}=\ldots=F(x)+a+C=F(x)+C.\]
 \subsection{Taylor series (泰勒級數) or Taylor expansion (泰勒展開)}
 Assume that $F:\,\mathbb{R}\to\mathbb{R}$ is an infinitely differentiable function, and its derivatives of every order exist on $\mathbb{R}$, then the Taylor series of $F$ at $a$ is
 \[F(x) = \sum_{n\in\mathbb{N}_0} \frac{F^{(n)}(a)}{n!}(x-a)^n,\]
@@ -2857,8 +2877,7 @@ Differentiate RHS:
 \end{proof}
 \sssc{Derivative over function}
 \[\int\frac{f'(x)}{f(x)}\,\mathrm{d}x=\ln|f(x)|+C,\quad f(x)\neq 0.\]
-\sssc{Rational functions}
-待
+\sssc{$\frac{1}{x^2+a^2}$}
 \[\int\frac{1}{x^2+a^2}\,\mathrm{d}x=\frac{1}{a}\arctan\frac{x}{a}+C,\quad a\neq 0.\]
 \begin{proof}
 \[\ba
@@ -2866,20 +2885,23 @@ Differentiate RHS:
 &=\frac{1}{a}\arctan\frac{x}{a}+C
 \ea\]
 \end{proof}
-\[\int\frac{1}{x^2-a^2}\,\mathrm{d}x=\frac{1}{2a}\ln\frac{x-a}{x+a}+C,\quad a\neq 0.\]
+\sssc{$\frac{1}{x^2-a^2}$}
+\[\int\frac{1}{x^2-a^2}\,\mathrm{d}x=\frac{1}{2a}\ln(\frac{x-a}{x+a})+C,\quad a\neq 0.\]
 \begin{proof}
 \[\ba
 \int\frac{1}{x^2-a^2}\,\mathrm{d}x&=\int\frac{1}{2a}\qty(\frac{1}{x-a}-\frac{1}{x+a})\dd{x}\\
-&=\frac{1}{2a}\ln\frac{x-a}{x+a}+C
+&=\frac{1}{2a}\ln(\frac{x-a}{x+a})+C
 \ea\]
 \end{proof}
-\[\int\frac{1}{a^2-x^2}\,\mathrm{d}x=\frac{1}{2a}\ln\frac{a-x}{a+x}+C,\quad a\neq 0.\]
+\sssc{$\frac{1}{a^2-x^2}$}
+\[\int\frac{1}{a^2-x^2}\,\mathrm{d}x=\frac{1}{2a}\ln(\frac{a-x}{a+x})+C,\quad a\neq 0.\]
 \begin{proof}
 \[\ba
 \int\frac{1}{a^2-x^2}\,\mathrm{d}x&=\int\frac{1}{2a}\qty(\frac{1}{a-x}-\frac{1}{a+x})\dd{x}\\
-&=\frac{1}{2a}\ln\frac{a-x}{a+x}+C
+&=\frac{1}{2a}\ln(\frac{a-x}{a+x})+C
 \ea\]
 \end{proof}
+\sssc{$ax+b$}
 \[\int\frac{1}{ax+b}\,\mathrm{d}x=\frac{1}{a}\ln|ax+b|+C,\quad a\neq 0.\]
 \begin{proof}
 \[\ba
@@ -2889,12 +2911,10 @@ Differentiate RHS:
 \end{proof}
 \[\int(ax+b)^n\,\mathrm{d}x=\frac{1}{a(n+1)}(ax+b)^{n-1}+C,\quad a\neq 0\land n\neq -1.\]
 \begin{proof}
-\begin{proof}
 \[\ba
 \int(ax+b)^n\,\mathrm{d}x&=\frac{1}{a}\int u^n\dd{u},\quad u=ax+b,\quad \dd{u}=a\dd{x}\\
 &=\frac{1}{a(n+1)}(ax+b)^{n-1}+C
 \ea\]
-\end{proof}
 \end{proof}
 \[\int\frac{x}{ax+b}\,\mathrm{d}x=\frac{x}{a}-\frac{b}{a^2}\ln|ax+b|+C,\quad a\neq 0.\]
 \begin{proof}
@@ -2904,17 +2924,162 @@ Differentiate RHS:
 &=\frac{x}{a}-\frac{b}{a^2}\ln|ax+b|+C
 \ea\]
 \end{proof}
-\[\int\frac{x}{(ax+b)^2}\,\mathrm{d}x=\frac{b}{a^2(ax+b)}+\frac{1}{a^2}\ln|ax+b|+C,\quad a\neq 0.\]
+\[\int\frac{x}{(ax+b)^2}\,\mathrm{d}x=\frac{1}{a^2}\ln|ax+b|+\frac{b}{a^2(ax+b)}+C,\quad a\neq 0.\]
 \begin{proof}
+\[\ba
+\int\frac{x}{(ax+b)^2}\,\mathrm{d}x&=\int\frac{u-b}{a^2u^2}\dd{u},\quad u=ax+b,\quad \dd{u}=a\dd{x}\\
+&=\frac{1}{a^2}\ln|ax+b|+\frac{b}{a^2(ax+b)}
+\ea\]
 \end{proof}
 \[\int x(ax+b)^n\,\mathrm{d}x=\frac{a(n+1)x-b}{a^2(n+1)(n+2)}(ax+b)^{n+1}+C,\quad a\neq 0\land n\notin\{-1,-2\}.\]
 \begin{proof}
+\[\ba
+\int x(ax+b)^n\,\mathrm{d}x&=\int\frac{u-b}{a^2}u^n\dd{u},\quad u=ax+b,\quad \dd{u}=a\dd{x}\\
+&=\frac{(ax+b)^{n+2}}{a^2(n+2)}-\frac{b(ax+b)^{n+1}}{a^2(n+1)}\\
+&=\frac{(ax+b)(n+1)-b(n+2)}{a^2(n+1)(n+2)}(ax+b)^{n+1}+C\\
+&=\frac{a(n+1)x-b}{a^2(n+1)(n+2)}(ax+b)^{n+1}+C
+\ea\]
 \end{proof}
-PLACEHOLDER
-\sssc{Irrational functions}
-\[\int\sqrt{a^2+x^2}\,\mathrm{d}x=\frac{x}{2}\sqrt{a^2+x^2}+\frac{a^2}{2}\ln\qty(x+\sqrt{a^2+x^2})+C.\]
+\sssc{$\sqrt{a^2+x^2}$}
+\[\int\sqrt{a^2+x^2}\,\mathrm{d}x=\frac{x}{2}\sqrt{a^2+x^2}+\frac{a^2}{2}\ln(x+\sqrt{a^2+x^2})+C.\]
+\begin{proof}
+\[\ba
+\int\sqrt{a^2+x^2}\dd{x}&=a^2\int\sqrt{1+u^2}\dd{u},\quad u=\frac{x}{|a|},\quad\dd{u}=\frac{1}{|a|}\dd{x}\\
+&=a^2\int\sqrt{1+\sinh^2t}\cosh t\dd{t},\quad u=\sinh t,\quad\dd{u}=\cosh t\dd{t}\\
+&=a^2\int\cosh^2t\dd{t}\\
+&=a^2\int\frac{\cosh(2t)+1}{2}\dd{t}\\
+&=\frac{a^2\sinh(2t)}{4}+\frac{a^2t}{2}+C\\
+&=\frac{a^2u\sqrt{1+u^2}}{2}+\frac{a^2}{2}\ln(u+\sqrt{1+u^2})+C\\
+&=\frac{x}{2}\sqrt{a^2+x^2}+\frac{a^2}{2}\ln(\frac{x}{|a|}+\frac{1}{|a|}\sqrt{a^2+x^2})+C\\
+&=\frac{x}{2}\sqrt{a^2+x^2}+\frac{a^2}{2}\ln(x+\sqrt{a^2+x^2})+C
+\ea\]
+Alternatively,
+\[\ba
+\int\sqrt{a^2+x^2}\dd{x}&=x\sqrt{a^2+x^2}-\int\frac{x^2}{\sqrt{a^2+x^2}}\dd{x}\\
+&=x\sqrt{a^2+x^2}-a^2\int\frac{u^2}{\sqrt{1+u^2}}\dd{u},\quad u=\frac{x}{|a|},\quad\dd{u}=\frac{1}{|a|}\dd{x}\\
+&=x\sqrt{a^2+x^2}-a^2\int\tan^2t\sec t\dd{t},\quad u=\tan t,\quad\dd{u}=\sec^2t\dd{t}\\
+&=x\sqrt{a^2+x^2}-a^2\int\sec^3t-\sec t\dd{t}\\
+&=x\sqrt{a^2+x^2}-\frac{a^2}{2}\tan(t)\sec(t)-\frac{a^2}{2}\ln|\tan t+\sec t|+a^2\ln|\tan t+\sec t|+C\\
+&=x\sqrt{a^2+x^2}-\frac{a^2}{2}u\sqrt{1+u^2}+\frac{a^2}{2}\ln|u+\sqrt{1+u^2}|+C\\
+&=\frac{x}{2}\sqrt{a^2+x^2}+\frac{a^2}{2}\ln(\frac{x}{|a|}+\frac{1}{|a|}\sqrt{a^2+x^2})+C\\
+&=\frac{x}{2}\sqrt{a^2+x^2}+\frac{a^2}{2}\ln(x+\sqrt{a^2+x^2})+C
+\ea\]
+\end{proof}
+\[\int x\sqrt{a^2+x^2}\dd{x}=\frac{1}{3}(a^2+x^2)^{3/2}+C.\]
+\begin{proof}
+\[\ba
+\int x\sqrt{a^2+x^2}\dd{x}&=\int u^2\dd{u},\quad u=\sqrt{a^2+x^2},\quad\dd{u}=\frac{x}{u}\dd{x}\\
+&=\frac{u^3}{3}+C\\
+&=\frac{1}{3}(a^2+x^2)^{3/2}+C
+\ea\]
+\end{proof}
+\[\int\frac{1}{\sqrt{a^2+x^2}}\dd{x}=\arcsinh\frac{x}{|a|}+C=\ln(x+\sqrt{a^2+x^2})+C.\]
+\begin{proof}
+\[\ba
+\int\frac{1}{\sqrt{a^2+x^2}}\dd{x}&=\int\frac{1}{\sqrt{1+u^2}}\dd{x},\quad u=\frac{x}{|a|},\quad\dd{u}=\frac{1}{|a|}\dd{x}\\
+&=\int1\dd{t},\quad u=\sinh t,\quad\dd{u}=\cosh t\dd{t}\\
+&=t+C=\arcsinh u+C\\
+&=\arcsinh\frac{x}{|a|}\\
+&=\ln(\frac{x}{|a|}+\sqrt{1+\qty(\frac{x}{|a|})^2})\\
+&=\ln(x+\sqrt{a^2+x^2})+C
+\ea\]
+\end{proof}
+\[\int\frac{x}{\sqrt{a^2+x^2}}\dd{x}=\sqrt{a^2+x^2}+C.\]
+\sssc{$\sqrt{x^2-a^2}$}
 \[\int\sqrt{x^2-a^2}\,\mathrm{d}x=\frac{x}{2}\sqrt{x^2-a^2}-\frac{a^2}{2}\ln\qty(x+\sqrt{x^2-a^2})+C,\quad x^2>a^2.\]
-\[\int\sqrt{a^2-x^2}\,\mathrm{d}x=\frac{x}{2}\sqrt{a^2-x^2}+\frac{a^2}{2}\arcsin\frac{x}{|a|}+C,\quad|a|\geq|x|.\]
+\begin{proof}
+\[\ba
+\int\sqrt{x^2-a^2}\,\mathrm{d}x&=a^2\int\sqrt{u^2-1}\dd{u},\quad u=\frac{x}{|a|},\quad\dd{u}=\frac{1}{|a|}\dd{x}\\
+&=a^2\int\sinh^2t\dd{t},\quad u=\cosh t,\quad\dd{u}=\sinh t\dd{t}\\
+&=a^2\int\frac{\cosh(2t)-1}{2}\dd{t}\\
+&=\frac{a^2\sinh(2t)}{4}-\frac{a^2t}{2}+C\\
+&=\frac{a^2u\sqrt{u^2-1}}{2}-\frac{a^2}{2}\ln(u+\sqrt{u^2-1})+C\\
+&=\frac{x}{2}\sqrt{x^2-a^2}+\frac{a^2}{2}\ln(\frac{x}{|a|}+\frac{1}{|a|}\sqrt{x^2-a^2})+C\\
+&=\frac{x}{2}\sqrt{x^2-a^2}-\frac{a^2}{2}\ln(x+\sqrt{x^2-a^2})+C
+\ea\]
+\end{proof}
+\[\int x\sqrt{x^2-a^2}\dd{x}=\frac{1}{3}(x^2-a^2)^{3/2}+C,\quad x^2>a^2.\]
+\begin{proof}
+\[\ba
+\int x\sqrt{x^2-a^2}\dd{x}&=\int u^2\dd{u},\quad u=\sqrt{x^2-a^2},\quad\dd{u}=\frac{x}{u}\dd{x}\\
+&=\frac{u^3}{3}+C\\
+&=\frac{1}{3}(x^2-a^2)^{3/2}+C
+\ea\]
+\end{proof}
+\[\int\frac{1}{\sqrt{a^2-x^2}}\dd{x}=\arcsin(\frac{x}{|a|})+C,\quad x^2>a^2.\]
+\begin{proof}
+\[\ba
+\int\frac{1}{\sqrt{x^2-a^2}}\dd{x}&=\int\frac{1}{\sqrt{u^2-1}}\dd{x},\quad u=\frac{x}{|a|},\quad\dd{u}=\frac{1}{|a|}\dd{x}\\
+&=\int1\dd{t},\quad u=\cosh t,\quad\dd{u}=\sinh t\dd{t}\\
+&=t+C=\operatorname{sgn}(u)\arccosh u+C\\
+&=\operatorname{sgn}(x)\arccosh\abs{\frac{x}{a}}+C\\
+&=\ln\abs{\frac{x}{a}+\sqrt{\qty(\frac{x}{a})^2-1}}+C
+&=\ln\abs{x+\sqrt{x^2-a^2}}+C
+\ea\]
+\end{proof}
+\[\int\frac{x}{\sqrt{a^2-x^2}}\dd{x}=-\sqrt{a^2-x^2}+C,\quad x^2>a^2.\]
+\sssc{$\sqrt{a^2-x^2}$}
+\[\int\sqrt{a^2-x^2}\,\mathrm{d}x=\frac{x}{2}\sqrt{a^2-x^2}+\frac{a^2}{2}\arcsin\frac{x}{|a|}+C,\quad a^2\geq x^2.\]
+\begin{proof}
+\[\ba
+\int\sqrt{a^2-x^2}\,\mathrm{d}x&=a^2\int\sqrt{1-u^2}\dd{u},\quad u=\frac{x}{|a|},\quad\dd{u}=\frac{1}{|a|}\dd{x}\\
+&=a^2\int\cos^2t\dd{t},\quad u=\sin t,\quad\dd{u}=\cos t\dd{t}\\
+&=a^2\int\frac{\cos(2t)+1}{2}\dd{t}\\
+&=\frac{a^2\sin(2t)}{4}+\frac{a^2t}{2}+C\\
+&=\frac{a^2}{2}\sqrt{1-u^2}+\frac{a^2}{2}\arcsin\frac{x}{|a|}+C
+\ea\]
+\end{proof}
+\[\int x\sqrt{a^2-x^2}\dd{x}=\frac{1}{3}(a^2-x^2)^{3/2}+C,\quad a^2\geq x^2.\]
+\begin{proof}
+\[\ba
+\int x\sqrt{a^2-x^2}\dd{x}&=\int u^2\dd{u},\quad u=\sqrt{a^2-x^2},\quad\dd{u}=\frac{x}{u}\dd{x}\\
+&=\frac{u^3}{3}+C\\
+&=\frac{1}{3}(a^2-x^2)^{3/2}+C
+\ea\]
+\end{proof}
+\[\int\frac{1}{\sqrt{a^2-x^2}}\dd{x}=\arcsin(\frac{x}{|a|})+C,\quad a^2\geq x^2.\]
+\begin{proof}
+\[\ba
+\int\frac{1}{\sqrt{a^2-x^2}}\dd{x}&=\int\frac{1}{\sqrt{1-u^2}}\dd{x},\quad u=\frac{x}{|a|},\quad\dd{u}=\frac{1}{|a|}\dd{x}\\
+&=\int1\dd{t},\quad u=\sin t,\quad\dd{u}=\cos t\dd{t}\\
+&=t+C=\arccos u+C\\
+&=\arccos(\frac{x}{|a|})+C
+\ea\]
+\end{proof}
+\[\int\frac{x}{\sqrt{a^2-x^2}}\dd{x}=\sqrt{a^2-x^2}+C,\quad a^2\geq x^2.\]
+\sssc{$\sqrt{ax+b}$}
+\[\int\sqrt{ax+b}\dd{x}=\frac{2}{3a}(ax+b)^{3/2}+C,\quad a\neq 0.\]
+\begin{proof}
+\[\ba
+\int\sqrt{ax+b}\dd{x}&=\frac{2}{a}\int u^2\dd{u},\quad u=\sqrt{ax+b},\quad\dd{u}=\frac{a}{2u}\dd{x}\\
+&=\frac{2u^3}{3a}+C\\
+&=\frac{2}{3a}(ax+b)^{3/2}+C
+\ea\]
+\end{proof}
+\[\int x^n\sqrt{ax+b}\dd{x}=\frac{2}{a(2n+3)}\qty(x^n(ax+b)^{3/2}-bn\int x^{n-1}\sqrt{ax+b}\dd{x}),\quad a\neq 0\land n\in\bbN.\]
+\begin{proof}
+\[\ba
+\int x^n\sqrt{ax+b}\dd{x}&=\frac{2}{3a}x^n(ax+b)^{3/2}-\frac{2n}{3a}\int x^{n-1}(ax+b)^{3/2}\dd{x}\\
+&=\frac{2}{3a}x^n(ax+b)^{3/2}-\frac{2n}{3}\int x^n\sqrt{ax+b}\dd{x}-\frac{2bn}{3a}\int x^{n-1}\sqrt{ax+b}\dd{x}\\
+&=\frac{2}{a(2n+3)}\qty(x^n(ax+b)^{3/2}-bn\int x^{n-1}\sqrt{ax+b}\dd{x})
+\ea\]
+\end{proof}
+\[\int\frac{1}{\sqrt{ax+b}}\dd{x}=\frac{2\sqrt{ax+b}}{a}+C,\quad a\neq 0.\]
+\begin{proof}
+\[\ba
+\int\frac{1}{\sqrt{ax+b}}\dd{x}&=\frac{2}{a}\int1\dd{u},\quad u=\sqrt{ax+b},\quad\dd{u}=\frac{a}{2u}\dd{x}\\
+&=\frac{2u}{a}+C=\frac{2\sqrt{ax+b}}{a}+C
+\ea\]
+\end{proof}
+\[\int\frac{x^n}{\sqrt{ax+b}}\dd{x}=\frac{2}{a}\qty(x^n\sqrt{ax+b}-n\int x^{n-1}\sqrt{ax+b}\dd{x})=\frac{2}{a(2n+1)}\qty(x^n\sqrt{ax+b}-bn\int \frac{x^{n-1}}{\sqrt{ax+b}}\dd{x}),\quad a\neq 0\land n\in\bbN.\]
+\begin{proof}
+\[\ba
+\int\frac{x^n}{\sqrt{ax+b}}\dd{x}&=x^n\frac{2\sqrt{ax+b}}{a}-\frac{2n}{a}\int x^{n-1}\sqrt{ax+b}\dd{x}\\
+&=\frac{2}{a}\qty(x^n\sqrt{ax+b}-n\int x^{n-1}\sqrt{ax+b}\dd{x})\\
+&=\frac{2}{a}x^n\sqrt{ax+b}-2n\int \frac{x^n}{\sqrt{ax+b}}\dd{x})-\frac{2bn}{a}\int \frac{x^{n-1}}{\sqrt{ax+b}}\dd{x})\\
+&=\frac{2}{a(2n+1)\qty(x^n\sqrt{ax+b}-bn\int \frac{x^{n-1}}{\sqrt{ax+b}}\dd{x})
+\ea\]
+\end{proof}
 \sssc{Gaussian integral (高斯積分) or Euler–Poisson integral}
 \[\int_{-\infty}^{\infty}e^{-t^2}\dd{t}=\sqrt{\pi}.\]
 \[\int_0^{\infty}e^{-t^2}\dd{t}=\frac{\sqrt{\pi}}{2}.\]
