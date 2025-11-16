@@ -1030,11 +1030,24 @@ The symbol of a half subtractor in block diagrams is a square with "half subtrac
 A full adder is a combinational circuit that has three inputs, $A$ (augend bit), $B$ (addend bit), and $C_{in}$ (carry-in), and produces two ouputs $S$ (sum) and $C_{out}$ (carry-out), in which
 \[S=A\oplus B\oplus C_{in},\]
 \[C_{out}=AB+AC_{in}+BC_{in}.\]
+It can be implemented with
+\[X=A\oplus B.\]
+\[S=X\oplus C_{in}.\]
+\[C_{out}=AB+XC_{in}.\]
+
 The symbol of a full adder in block diagrams is a square with "full adder" in it with augend bit and addend bit inputs lines and sum output line on two parallel sides; let $x$-axis be the line perpendicular to the two sides oriented from augend bit and addend bit inputs lines to sum output line, $z$-axis be oriented out of the paper; carry-in input and carry-out output with arrows on the other two sides respectively with direction of them in positivite $y$ direction and from carry-in input to carry-out output.
 \sssc{Full subtractor (FS)}
 A full subtractor is a combinational circuit that has three inputs, $A$ (minuend bit), $B$ (subtrahend bit), and $B_{in}$ (borrow-in), and produces two ouputs $D$ (difference) and $B_{out}$ (borrow-out), in which
 \[D=A\oplus B\oplus B_{in},\]
 \[B_{out}=A'B+A'B_{in}+BB_{in}.\]
+It can be implemented with
+\[X=A\oplus B.\]
+\[D=X\oplus B_{in}.\]
+\[B_{out}=A'B+X'B_{in}.\]
+\begin{proof}
+\[B_{out}=A'B+X'B_{in}=A'B+ABB_{in}+A'B'B_{in}=A'B+BB_{in}+A'B_{in}.\]
+\end{proof}
+
 The symbol of a full subtractor in block diagrams is a square with "full subtractor" in it with minuend bit and subtrahend bit inputs lines and difference output line on two parallel sides; let $x$-axis be the line perpendicular to the two sides oriented from minuend bit and subtrahend bit inputs lines and difference output line, $z$-axis be oriented out of the paper; borrow-in input and borrow-out output with arrows on the other two sides respectively with direction of them in positivite $y$ direction and from borrow-in input to borrow-out output.
 \sssc{Parallel (binary) adder or ripple-carry adder (RCA)}
 An $n$-bit parallel adder or ripple-carry adder, or simply adder is a combinational circuit consisting of $n$ full adders called cells or stages. It has two $n$-bits unsigned or two's complement binary numbers as inputs (MSB to LSB), $A_{n-1}A_{n-2}\ldots A_0$ (augend) and $B_{n-1}B_{n-2}\ldots B_0$ (addned), and a constant $0$ input, $C_{in_0}=0$, and produces the $(n+1)$-bit sum of the two numbers as outputs, $C_{out_{n-1}}S_{n-1}S_{n-2}\ldots S_0$, in which the $(i+1)$th cell takes $A_i$ as augend bit, $B_i$ as addend bit, and $C_{in_i}$ as carry-in, and produces sum $S_i$ and carry-out $C_{out_i}$, that is,
