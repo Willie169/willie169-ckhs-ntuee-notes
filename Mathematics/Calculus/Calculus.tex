@@ -2239,6 +2239,10 @@ The error is defined as
 \[E_n=\int_a^bf(x)\,\mathrm{d}x-\frac{b-a}{3n}\left(2\left(\sum_{i=0}^nf(a+\frac{i}{n}(b-a))\right)+2\left(\sum_{i=1}^{\frac{n}{2}}f(a+\frac{2i-1}{n}(b-a))\right)-f(a)-f(b)\right).\]
 When $\frac{\mathrm{d}^4f(x)}{\mathrm{d}x^4}$ is continuous on $[a,b]$, the error satisfies that
 \[\abs{E_n}\leq\frac{(b-a)^5}{180n^4}\max_{a\leq x\leq b}\left(\abs{\frac{\mathrm{d}^4f(x)}{\mathrm{d}x^4}}\right).\]
+
+
+
+\sct{Integral Transform}
 \ssc{Laplace transform (拉普拉斯變換)}
 \sssc{(Unilateral or One-sided) Laplace transform (（單邊）拉普拉斯變換)}
 The (unilateral or one-sided) Laplace transform is an integral transform that converts a function of a real variable (usually $t$, in the time domain) to a function of a complex variable (usually $s$, in the complex-valued frequency domain, also known as $s$-domain, or $s$-plane). The functions are often denoted in lowercase for the time-domain representation and uppercase for the frequency-domain.
@@ -2854,15 +2858,58 @@ Differentiate RHS:
 \sssc{Derivative over function}
 \[\int\frac{f'(x)}{f(x)}\,\mathrm{d}x=\ln|f(x)|+C,\quad f(x)\neq 0.\]
 \sssc{Rational functions}
-$a\neq 0$.
-\[\int\frac{1}{x^2+a^2}\,\mathrm{d}x=\frac{1}{a}\arctan\frac{x}{a}+C.\]
-\[\int\frac{1}{x^2-a^2}\,\mathrm{d}x=\frac{1}{2a}\ln\frac{x-a}{x+a}+C.\]
-\[\int\frac{1}{a^2-x^2}\,\mathrm{d}x=\frac{1}{2a}\ln\frac{a+x}{a+x}+C.\]
-\[\int\frac{1}{ax+b}\,\mathrm{d}x=\frac{1}{a}\ln|ax+b|+C.\]
-\[\int(ax+b)^n\,\mathrm{d}x=\frac{(ax+b)^{n-1}}{a(n+1)}+C,\quad n\neq -1.\]
-\[\int\frac{x}{ax+b}\,\mathrm{d}x=\frac{x}{a}-\frac{b}{a^2}\ln|ax+b|+C.\]
-\[\int\frac{x}{(ax+b)^2}\,\mathrm{d}x=\frac{b}{a^2(ax+b)}+\frac{1}{a^2}\ln|ax+b|+C.\]
-\[\int x(ax+b)^n\,\mathrm{d}x=\frac{a(n+1)x-b}{a^2(n+1)(n+2)}(ax+b)^{n+1}+C,\quad n\notin\{-1,-2\}.\]
+待
+\[\int\frac{1}{x^2+a^2}\,\mathrm{d}x=\frac{1}{a}\arctan\frac{x}{a}+C,\quad a\neq 0.\]
+\begin{proof}
+\[\ba
+\int\frac{1}{x^2+a^2}\,\mathrm{d}x&=\frac{1}{a}\int\frac{1}{u^2+1^2}\dd{u},\quad u=\frac{x}{a},\quad\dd{u}=\frac{1}{a}\dd{x}\\
+&=\frac{1}{a}\arctan\frac{x}{a}+C
+\ea\]
+\end{proof}
+\[\int\frac{1}{x^2-a^2}\,\mathrm{d}x=\frac{1}{2a}\ln\frac{x-a}{x+a}+C,\quad a\neq 0.\]
+\begin{proof}
+\[\ba
+\int\frac{1}{x^2-a^2}\,\mathrm{d}x&=\int\frac{1}{2a}\qty(\frac{1}{x-a}-\frac{1}{x+a})\dd{x}\\
+&=\frac{1}{2a}\ln\frac{x-a}{x+a}+C
+\ea\]
+\end{proof}
+\[\int\frac{1}{a^2-x^2}\,\mathrm{d}x=\frac{1}{2a}\ln\frac{a-x}{a+x}+C,\quad a\neq 0.\]
+\begin{proof}
+\[\ba
+\int\frac{1}{a^2-x^2}\,\mathrm{d}x&=\int\frac{1}{2a}\qty(\frac{1}{a-x}-\frac{1}{a+x})\dd{x}\\
+&=\frac{1}{2a}\ln\frac{a-x}{a+x}+C
+\ea\]
+\end{proof}
+\[\int\frac{1}{ax+b}\,\mathrm{d}x=\frac{1}{a}\ln|ax+b|+C,\quad a\neq 0.\]
+\begin{proof}
+\[\ba
+\int\frac{1}{ax+b}\,\mathrm{d}x&=\frac{1}{a}\int\frac{1}{u}\dd{u},\quad u=ax+b,\quad\dd{u}=a\dd{x}\\
+&=\frac{1}{a}\ln|ax+b|+C
+\ea\]
+\end{proof}
+\[\int(ax+b)^n\,\mathrm{d}x=\frac{1}{a(n+1)}(ax+b)^{n-1}+C,\quad a\neq 0\land n\neq -1.\]
+\begin{proof}
+\begin{proof}
+\[\ba
+\int(ax+b)^n\,\mathrm{d}x&=\frac{1}{a}\int u^n\dd{u},\quad u=ax+b,\quad \dd{u}=a\dd{x}\\
+&=\frac{1}{a(n+1)}(ax+b)^{n-1}+C
+\ea\]
+\end{proof}
+\end{proof}
+\[\int\frac{x}{ax+b}\,\mathrm{d}x=\frac{x}{a}-\frac{b}{a^2}\ln|ax+b|+C,\quad a\neq 0.\]
+\begin{proof}
+\[\ba
+\int\frac{x}{ax+b}\,\mathrm{d}x&=\int\frac{u-b}{a^2u}\dd{u},\quad u=ax+b,\quad \dd{u}=a\dd{x}\\
+&=\frac{ax+b}{a^2}-\frac{b}{a^2}\ln|ax+b|+C\\
+&=\frac{x}{a}-\frac{b}{a^2}\ln|ax+b|+C
+\ea\]
+\end{proof}
+\[\int\frac{x}{(ax+b)^2}\,\mathrm{d}x=\frac{b}{a^2(ax+b)}+\frac{1}{a^2}\ln|ax+b|+C,\quad a\neq 0.\]
+\begin{proof}
+\end{proof}
+\[\int x(ax+b)^n\,\mathrm{d}x=\frac{a(n+1)x-b}{a^2(n+1)(n+2)}(ax+b)^{n+1}+C,\quad a\neq 0\land n\notin\{-1,-2\}.\]
+\begin{proof}
+\end{proof}
 PLACEHOLDER
 \sssc{Irrational functions}
 \[\int\sqrt{a^2+x^2}\,\mathrm{d}x=\frac{x}{2}\sqrt{a^2+x^2}+\frac{a^2}{2}\ln\qty(x+\sqrt{a^2+x^2})+C.\]
