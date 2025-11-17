@@ -2824,14 +2824,14 @@ Differentiate RHS:
 \end{proof}
 \sssc{Hyperbolic sine function}
 \[\int\sinh(x)\dd{x}=\cosh(x)+C.\]
-\[\int\sinh^2(x)\dd{x}=\frac{\sinh(2x)}{4}-\frac{x}{2}+C.\]
+\[\int\sinh^2(x)\dd{x}=-\frac{x}{2}+\frac{\sinh(2x)}{4}+C.\]
 \[\int\sinh^n(x)\dd{x}=\frac{1}{n}\sinh^{n-1}(x)\cosh(x)-\frac{n-1}{n}\int\sinh^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
 \sssc{Hyperbolic cosine function}
 \[\int\cosh(x)\dd{x}=\sinh(x)+C.\]
-\[\int\cosh^2(x)\dd{x}\frac{\sinh(2x)}{4}+\frac{x}{2}+C.\]
+\[\int\cosh^2(x)\dd{x}=\frac{x}{2}+\frac{\sinh(2x)}{4}+C.\]
 \[\int\cosh^n(x)\dd{x}=\frac{1}{n}\cosh^{n-1}(x)\sinh(x)+\frac{n-1}{n}\int\cosh^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
 \sssc{Hyperbolic tangent function}
-\[\int\tanh(x)\dd{x}=\ln\cosh(x)+C.\]
+\[\int\tanh(x)\dd{x}=\ln(\cosh(x))+C.\]
 \[\int\tanh^2(x)\dd{x}=x-\tanh(x)+C.\]
 \[\int\tanh^n(x)\dd{x}=\frac{1}{n-1}\tanh^{n-1}(x)-\int\tanh^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
 \sssc{Hyperbolic cotangent function}
@@ -2839,7 +2839,7 @@ Differentiate RHS:
 \[\int\coth^2(x)\dd{x}=x-\coth(x)+C.\]
 \[\int\coth^n(x)\dd{x}=-\frac{1}{n-1}\coth^{n-1}(x)-\int\coth^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
 \sssc{Hyperbolic secant function}
-\[\int\sech(x)\dd{x}=\arctanh\sinh(x)+C.\]
+\[\int\sech(x)\dd{x}=\arctanh(\sinh(x))+C.\]
 \[\int\sech^2(x)\dd{x}=\tanh(x)+C.\]
 \[\int\sech^n(x)\dd{x}=\frac{1}{n-1}\sech^{n-1}(x)\tanh(x)+\frac{n-2}{n-1}\int\sech^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
 \sssc{Hyperbolic cosecant function}
@@ -2877,11 +2877,11 @@ Differentiate RHS:
 \sssc{Derivative over function}
 \[\int\frac{f'(x)}{f(x)}\dd{x}=\ln|f(x)|+C,\quad f(x)\neq 0.\]
 \sssc{$\frac{1}{x^2+a^2}$}
-\[\int\frac{1}{x^2+a^2}\dd{x}=\frac{1}{a}\arctan\frac{x}{a}+C,\quad a\neq 0.\]
+\[\int\frac{1}{x^2+a^2}\dd{x}=\frac{1}{a}\arctan(\frac{x}{a})+C,\quad a\neq 0.\]
 \begin{proof}
 \[\ba
 \int\frac{1}{x^2+a^2}\dd{x}&=\frac{1}{a}\int\frac{1}{u^2+1^2}\dd{u},\quad u=\frac{x}{a},\quad\dd{u}=\frac{1}{a}\dd{x}\\
-&=\frac{1}{a}\arctan\frac{x}{a}+C
+&=\frac{1}{a}\arctan(\frac{x}{a})+C
 \ea\]
 \end{proof}
 \sssc{$\frac{1}{x^2-a^2}$}
@@ -2908,11 +2908,12 @@ Differentiate RHS:
 &=\frac{1}{a}\ln|ax+b|+C
 \ea\]
 \end{proof}
-\[\int(ax+b)^n\dd{x}=\frac{1}{a(n+1)}(ax+b)^{n-1}+C,\quad a\neq 0\land n\neq -1.\]
+\[\int(ax+b)^n\dd{x}=\frac{1}{a(n+1)}(ax+b)^{n+1}+C,\quad a\neq 0\land n\neq -1.\]
 \begin{proof}
 \[\ba
 \int(ax+b)^n\dd{x}&=\frac{1}{a}\int u^n\dd{u},\quad u=ax+b,\quad \dd{u}=a\dd{x}\\
-&=\frac{1}{a(n+1)}(ax+b)^{n-1}+C
+&=\frac{1}{a}u^{n+1}+C\\
+&=\frac{1}{a(n+1)}(ax+b)^{n+1}+C
 \ea\]
 \end{proof}
 \[\int\frac{x}{ax+b}\dd{x}=\frac{x}{a}-\frac{b}{a^2}\ln|ax+b|+C,\quad a\neq 0.\]
@@ -2972,13 +2973,13 @@ Alternatively,
 &=\frac{1}{3}(a^2+x^2)^{3/2}+C
 \ea\]
 \end{proof}
-\[\int\frac{1}{\sqrt{a^2+x^2}}\dd{x}=\arcsinh\frac{x}{|a|}+C=\ln(x+\sqrt{a^2+x^2})+C.\]
+\[\int\frac{1}{\sqrt{a^2+x^2}}\dd{x}=\arcsinh(\frac{x}{|a|})+C=\ln(x+\sqrt{a^2+x^2})+C.\]
 \begin{proof}
 \[\ba
 \int\frac{1}{\sqrt{a^2+x^2}}\dd{x}&=\int\frac{1}{\sqrt{1+u^2}}\dd{x},\quad u=\frac{x}{|a|},\quad\dd{u}=\frac{1}{|a|}\dd{x}\\
 &=\int1\dd{t},\quad u=\sinh t,\quad\dd{u}=\cosh t\dd{t}\\
 &=t+C=\arcsinh u+C\\
-&=\arcsinh\frac{x}{|a|}\\
+&=\arcsinh(\frac{x}{|a|})\\
 &=\ln(\frac{x}{|a|}+\sqrt{1+\qty(\frac{x}{|a|})^2})\\
 &=\ln(x+\sqrt{a^2+x^2})+C
 \ea\]
@@ -3005,7 +3006,7 @@ Alternatively,
 &=\frac{1}{3}(x^2-a^2)^{3/2}+C
 \ea\]
 \end{proof}
-\[\int\frac{1}{\sqrt{a^2-x^2}}\dd{x}=\arcsin(\frac{x}{|a|})+C,\quad x^2>a^2.\]
+\[\int\frac{1}{\sqrt{a^2-x^2}}\dd{x}=\arcsin(\frac{x}{|a|})+C,\quad a^2>x^2.\]
 \begin{proof}
 \[\ba
 \int\frac{1}{\sqrt{x^2-a^2}}\dd{x}&=\int\frac{1}{\sqrt{u^2-1}}\dd{x},\quad u=\frac{x}{|a|},\quad\dd{u}=\frac{1}{|a|}\dd{x}\\
@@ -3016,7 +3017,7 @@ Alternatively,
 &=\ln\abs{x+\sqrt{x^2-a^2}}+C
 \ea\]
 \end{proof}
-\[\int\frac{x}{\sqrt{a^2-x^2}}\dd{x}=-\sqrt{a^2-x^2}+C,\quad x^2>a^2.\]
+\[\int\frac{x}{\sqrt{a^2-x^2}}\dd{x}=-\sqrt{a^2-x^2}+C,\quad a^2>x^2.\]
 \sssc{$\sqrt{a^2-x^2}$}
 \[\int\sqrt{a^2-x^2}\dd{x}=\frac{x}{2}\sqrt{a^2-x^2}+\frac{a^2}{2}\arcsin\frac{x}{|a|}+C,\quad a^2\geq x^2.\]
 \begin{proof}
