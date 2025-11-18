@@ -1091,7 +1091,9 @@ Timing diagram, or timing chart, shows various signals in the circuit as a funct
 The propagation delay of a digital circuit is the time it needs to stabilize.
 \sssc{Inertial delays}
 If a logic gate will not respond to an input change that is shorter than a certain minimum pulse width $\varepsilon$, we say that this gate has a inertial delay of $\varepsilon$. Quite often the inertial delay value is assumed to be the same as the propagation delay of the gate. In contrast, if a gate always responds to input changes (with a propagation delay), no matter how closely spaced the input changes may be, the gate is said to have an ideal or transport delay.
-\sssc{Hazards}
+\sssc{Hazards, Glithces, or Spikes}
+The behavior that an output goes 0 temporarily when it should stay at 1 or goes 1 temporarily when it should stay 0 due to delay is called a hazard, glitch, or spike.
+
 When the input to a combinational circuit changes, unwanted switching transients may appear in the output. These transients occur when different paths from input to output have different propagation delays. If, in response to any single input change and for some combination of propagation delays, a circuit output may momentarily go to 0 when it should remain a constant 1, we say that the circuit has a (static) 1-hazard (or static-1 hazard). Similarly, if the output may momentarily go to 1 when it should remain a 0, we say that the circuit has a (static) 0-hazard (or static-0 hazard). If, when the output is supposed to change from 0 to 1 (or 1 to 0), the output may change three or more times, we say that the circuit has a dynamic hazard. In each case the steady-state output of the circuit is correct, but a switching transient appears at the circuit output when the input is changed.
 
 Hazards in a two-level circuit:
@@ -1425,6 +1427,15 @@ The response time or delay time $\epsilon$ of a latch or flip-flop is the time i
 When discussing latches and flip-flops, we the term present state $Q=Q(t)$ to denote the state of the $Q$ output of the latch or flip-flop at the time input signal changes, and the term next state $Q^+=Q(t+\epsilon)$ to denote the state of the $Q$ output after the latch or flip-flop has reacted to the input change and stabilized.
 \sssc{Next-state Equation or Characteristic Equation}
 The equation of the next state of a sequential circuit as a function of the present state and inputs.
+\sssc{Analysis of Synchronous Circuits by Signal Tracing and Timing Charts}
+The basic procedure of analysis of a synchronous circuit to find the output sequence resulting from a given input sequence is as follows:
+\ben
+\item Assume an initial state of the flip-flops (all flip-flops reset to 0 unless otherwise specified).
+\item For the first input in the given sequence, determine the circuit output(s) and flip-flop inputs and draw on the timing chart.
+\item Determine the new set of flip-flop states after the next active clock edge and draw on the timing chart.
+\item Determine the output(s) that corresponds to the new states and draw on the timing chart.
+\item Repeat 2, 3, and 4 for each input in the given sequence.
+\een
 \sssc{Moore Machine}
 A Moore machine can be defined as a 6-tuple $(S,s_{0},\Sigma ,O,\delta ,G)$ consisting of:
 \bit
@@ -1464,6 +1475,18 @@ A race condition, race hazard, or simply race is the condition which the behavio
 A non-critical race is a race which the final stable state is not dependent on the sequence or timing of other uncontrollable events.
 
 A critical race is a race which the final stable state is dependent on the sequence or timing of other uncontrollable events. A critical race is caused by race of state variables and cannot be removed by adding redundant gates or adjusting the delays. To eliminate critical races, we can assign states in a way such that at most one state variable changes at a time, e.g., gray code.
+\sssc{Glitch of Mealy Circuit}
+After the circuit has changed state and before the input is changed, the output may temporarily assume an incorrect value, which we call a false output, glitch, or spike. If the output of the circuit is fed into a second sequential circuit which uses the same clock, the false outputs will not cause any problem because the inputs to the second circuit can cause a change of state only when a falling clock edge occurs.
+
+Because the output of a Moore circuit can change state only when the
+flip-flops change state and not when the input changes, no false outputs can appear
+in a Moore circuit.
+\sssc{State-Transition Table, Transition Table, or Next-state table}
+A state-transition table, transition table, or next-state table of a sequential circuit is a truth table with output variables replaced with next-state variables, and input variables replaced with present-state variables and for Mealy circuit also input variables.
+\sssc{State Table}
+A state table of a sequential circuit is a truth table with output variables replaced with next-state variables and output variables, and input variables replaced with present-state variables and for Mealy circuit also input variables.
+\sssc{Next-state Map}
+A next-state map is the K-map of a next-state variable as a function of the present-state variables and for Mealy circuit also input variables.
 \sssc{(Active-high) S-R Latch}
 An (asynchronous) (active-high or NOR-gate) set-reset (aka S-R or SR) latch or an (asynchronous) S-R NOR latch has two inputs, set $S$ and reset $R$, and two outputs, $Q$ and $Q'$, and stores one bit, $Q$. It consists two NOR gates with $S$ and $Q$ being the inputs and $Q'$ being the output of one NOR gate, and $R$ and $Q'$ being the inputs and $Q$ begin the output of the other NOR gate.
 
@@ -1678,23 +1701,6 @@ It can be implemented with a T flip-flop, in which $X$ is the input $T$ and $Z$ 
 For even parity, the state $Q$ in the T flip-flop must be cleared to $0$ before the start of a data input string. For odd parity, the state $Q$ in the T flip-flop must be preset to $1$ before the start of a data input string.
 
 The $X$ input must be synchronized with the clock so that it assumes its next value before the next active clock edge.
-\sssc{Analysis of Synchronous Circuits by Signal Tracing and Timing Charts}
-The basic procedure of analysis of a synchronous circuit to find the output sequence resulting from a given input sequence is as follows:
-\ben
-\item Assume an initial state of the flip-flops (all flip-flops reset to 0 unless otherwise specified).
-\item For the first input in the given sequence, determine the circuit output(s) and flip-flop inputs and draw on the timing chart.
-\item Determine the new set of flip-flop states after the next active clock edge and draw on the timing chart.
-\item Determine the output(s) that corresponds to the new states and draw on the timing chart.
-\item Repeat 2, 3, and 4 for each input in the given sequence.
-\een
-
-
-
-
-
-
-
-
 \ssc{Registers and Counters}
 \sssc{Register}
 A register can load data inputs in parallel and output stored data in parallel. A $n$ bit register consists of $n$ edge-triggered D flip-flops, each with $D$ being data input and $Q$ being data output. The flip-flops usually share common clock input and asynchronous clear and/or preset inputs. If using gated clocks, the clock is gated with a common signal called load; if using clock enable, the flip-flops share a common clock enable input called load. When load=1 at an active edge, the data
@@ -1807,10 +1813,6 @@ which is implemented using AND and OR gates or other logically equivalent combin
 A counter that consists of T flip-flops mentioned above can be adjusted to be loada le from a parallel input (PI) with an associated 2-to-1 multiplexer for each T flip-flop and a common load input as select input for all multiplexers. The original input $T$ to each flip-flop is connected instead to the data input of the associated multiplexer which is selected when load=0, the output of each multiplexer is connected to the input $T$ of the associated flip-flop, and the other data input to each multiplexer, which is selected when load=1, is connected to the corresponding bit of the parallel input.
 
 When load=1 at an active edge, the loadable counter loads parallel input; when load=0 at an active edge, the loadable counter works as the underlying counter; otherwise, the loadable counter holds its present state.
-\sssc{State-Transition Table, Transition Table, or Next-state table}
-A state-transition table, transition table, or next-state table of a sequential circuit is a truth table with output variables replaced with next-state variables (labeled with superscript $^+$) and sometimes also output variables and input variables replaced with present-state variables and sometimes also input variables.
-\sssc{Next-state Map}
-A next-state map is the K-map of a next-state variable as a function of the present-state variables and sometimes also input variables of the sequential circuit.
 \sssc{Design of General Synchronous Counter with T Flip-Flops}
 To design a synchronous counter consists of $n$ T flip-flops given arbitrary transition table of $m$ rows of distinct present states $Q_k$'s and corresponding next states $Q^+_k$'s specified, where the other $2^n-m$ states are don't care states, the following procedure can be used:
 \ben
