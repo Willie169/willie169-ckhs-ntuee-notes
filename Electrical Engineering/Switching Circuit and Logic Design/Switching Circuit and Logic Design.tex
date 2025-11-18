@@ -15,7 +15,7 @@ A binary digit is called a bit, which is either $0$ or $1$. Binary arithmetic is
 
 The most significant bit (MSB) or most significant digit is the bit with the highest value place in a binary number and is the leftmost bit in standard binary notation; the least significant bit (LSB) or least significant digit is the bit with the lowest value place in a binary number and is the rightmost bit in standard binary notation.
 
-$4$ bits is called a nibble; $8$ bits is called a byte.
+$4$ bits is called a nibble; $8$ bits is called a byte or an octet of bits.
 \ssc{Binary Prefix}
 A binary prefix is a unit prefix that indicates a multiple of a unit of measurement by an integer power of two. They are most often used in information technology as multipliers of bit and byte, in which the short prefixes are prefixed before b (representing bits) or B (representing bytes), and the long prefixes are prefixed before bits or bytes.
 \begin{longtable}[c]{|c|c|c|c|c|}
@@ -195,6 +195,10 @@ Common character encodings include:
 \item\tb{ASCII code (American Standard Code for Information Interchange)}: A 7-bit code, so 128 different code combinations are available.
 \item\tb{Unicode or the Unicode Standard (TUS)}: Includes international characters, symbols, etc. such as those in Arabic, CJK Unified Ideographs, and Emoticons. The Unicode Standard itself defines three encodings: UTF-8, UTF-16, and UTF-32. UTF-8 is the most widely used, in part due to its backwards-compatibility with ASCII.
 \eit
+\sssc{Parity bit or check bit}
+A parity bit, or check bit, is a bit added to a string of binary code. Parity bits are a simple form of error detecting code. Even parity bit means that the parity bits are added such that the total number of 1-bits in the string is even. Odd parity bit means that the parity bits are added such that the total number of 1-bits in the string is odd.
+
+Parity bits are generally applied to the smallest units of a communication protocol, typically bytes, that is, each byte consists of 7 bits of data bits and 1 parity bit, although they can also be applied separately to an entire message string of bits.
 \sct{Boolean Algebra}
 \subsection{Introduction}
 The basic mathematics needed for the study of logic design of digital systems is Boolean algebra. Boolean algebra was introduced by George Boole in his first book The Mathematical Analysis of Logic (1847), and set forth more fully in his An Investigation of the Laws of Thought (1854).
@@ -927,6 +931,10 @@ A pull-up resistor is a resistor connected between a signal line and +Vcc to ens
 A pull-down resistor is a resistor connected between a signal line and ground to ensure that the signal stays at logic 0 when no active signal drives it high.
 \sssc{Feedback}
 Feedback occurs when the output of a circuit is fed back into its input. Sequential circuits must contain feedback, but not all circuits with feedback are sequential.
+\sssc{Serial and Parallel Input and Output}
+Serial input/output means that the data is inputted to/outputted from the circuit sequentially, one bit at a time.
+
+Parallel input/output means that the data is inputted to/outputted from the circuit parallelly, all bits at the same time.
 \sssc{Transmission Gate (TG), Analog Switch, or Bilateral Switch}
 A transmission gate (TG), aka analog switch or bilateral switch, is a CMOS bidirectional switch with two data terminal and a enable signal (aka control signal or select signal) that can either conduct or block the signal path between the two data terminals based on the enable signal. When enable signal is 1, it is closed and can conduct nearly any voltage between ground and supply voltage in both directions; when enable signal is 0, it is open. It consists of a p-channel MOSFET (PMOS), which passes a strong 1 but a weak 0, and a n-channel MOSFET (NMOS), which passes a strong 0 but a weak 1, connected in parallel with the drain and source terminals of the two transistors connected together as the two data terminals and the gate terminals of the PMOS and NMOS driven by the complement of the enable signal and the enable signal respectively.
 
@@ -1078,7 +1086,7 @@ The procedure of designing a multiple-output NOR-gate circuit is
 \sssc{Propagation delays and timing diagram}
 When the input to a logic gate is changed, the output will not change instantaneously but change after a finite delay. If the change in output is delayed by time $\varepsilon$ with respect to the input, we say that this gate has a propagation delay of $\varepsilon$. In practice, the propagation delay for a 0 to 1 output change may be different than the delay for a 1 to 0 change. Propagation delays for integrated circuit gates may be as short as a few nanoseconds, and in many cases these delays can be neglected. However, in the analysis of some types of sequential circuits, even short delays may be important.
 
-Timing diagram shows various signals in the circuit as a function of time, often in waveform with time being the horizontal axis and each vertical block plots one signal with the same time scale. The vertical edges on the diagram where the signals change from 0 to 1 are called rising edges; the vertical edges on the diagram where the signals change from 1 to 0 are called falling edges.
+Timing diagram, or timing chart, shows various signals in the circuit as a function of time, often in waveform with time being the horizontal axis and each vertical block plots one signal with the same time scale. The vertical edges on the diagram where the signals change from 0 to 1 are called rising edges; the vertical edges on the diagram where the signals change from 1 to 0 are called falling edges.
 
 The propagation delay of a digital circuit is the time it needs to stabilize.
 \sssc{Inertial delays}
@@ -1380,15 +1388,15 @@ An FPGA is an IC that consists of an array of identical logic cells, also called
 
 Given a $n$-variable switching function $F$ and a FGPA with $m$-input LUTs ($m<n$), $2^{n-m}$ $m$-variable subfunctions of $F$ can be obtained using Shannon's expansion of the function and compose back to $F$ with one $2^{n-m}$-to-1 multiplexer, which can be composed of $\qty(2^{n-m-k+1}-1)$ $2^k$-to-1 multiplexers ($k\leq n-m$).
 \sct{Sequential Circuit}
-\ssc{Latches and Flip-Flops}
+\ssc{Latches, Flip-Flops, and Analysis of Sequential Circuits}
 \sssc{Clock (CLK) signal}
 A clock signal is a pulse wave that oscillates between a high state, representing a "one", and a low state, representing a "zero", at a constant frequency. The ratio of the high period to the total period is called the duty cycle.
 
 Clock signals are generated by clock generators, which can be crystal oscillator (very stable, used in CPUs), RC oscillator (simpler and less precise), external clock generator, etc., and can be modified by other components in frequency or phase.
-\sssc{Synchronous and asynchronous system} 
-A synchronous system is a digital system where all state changes are coordinated by a single, global clock signal.
+\sssc{Synchronous and asynchronous circuit} 
+A synchronous circuit or a clocked sequential is a sequential circuit where all state changes are coordinated by a single, global clock signal.
 
-An asynchronous systems is a digital system that is not a synchronous system.
+An asynchronous circuit is a sequential system that is not a synchronous circuit.
 \sssc{Latch}
 A latch is a bistable sequential circuit that store a single bit of information and hold its value until it is updated by new input signals. One of its two states represents a logic 0 and the other represents a logic 1.
 
@@ -1662,6 +1670,31 @@ One method to implement it is by gating the clock, that is, replace the original
 Rather than gating the clock, a better method to implement it is by replacing each original data input with the output a 2-to-1 MUX with CE being the select input, original input being the data input selected when CE=1, and 0 being the data input selected when CE=0. Because there is no gate in the clock line, this cannot cause a synchronization problem.
 
 A flip-flop with CE is called with the original name with -CE sufficed to the original type name, e.g., D-CE flip-flop.
+\sssc{Sequential parity checker}
+A sequential parity checker is a sequential circuit that receives a clock input and a serial input $X$ of data with parity bits that is read at every clock edge and outputs $Z=1$ if the total number of 1 inputs received is odd and $Z=0$ total number of 1 inputs received is even.
+
+It can be implemented with a T flip-flop, in which $X$ is the input $T$ and $Z$ is the output $Q$.
+
+For even parity, the state $Q$ in the T flip-flop must be cleared to $0$ before the start of a data input string. For odd parity, the state $Q$ in the T flip-flop must be preset to $1$ before the start of a data input string.
+
+The $X$ input must be synchronized with the clock so that it assumes its next value before the next active clock edge.
+\sssc{Analysis of Synchronous Circuits by Signal Tracing and Timing Charts}
+The basic procedure of analysis of a synchronous circuit to find the output sequence resulting from a given input sequence is as follows:
+\ben
+\item Assume an initial state of the flip-flops (all flip-flops reset to 0 unless otherwise specified).
+\item For the first input in the given sequence, determine the circuit output(s) and flip-flop inputs and draw on the timing chart.
+\item Determine the new set of flip-flop states after the next active clock edge and draw on the timing chart.
+\item Determine the output(s) that corresponds to the new states and draw on the timing chart.
+\item Repeat 2, 3, and 4 for each input in the given sequence.
+\een
+
+
+
+
+
+
+
+
 \ssc{Registers and Counters}
 \sssc{Register}
 A register can load data inputs in parallel and output stored data in parallel. A $n$ bit register consists of $n$ edge-triggered D flip-flops, each with $D$ being data input and $Q$ being data output. The flip-flops usually share common clock input and asynchronous clear and/or preset inputs. If using gated clocks, the clock is gated with a common signal called load; if using clock enable, the flip-flops share a common clock enable input called load. When load=1 at an active edge, the data
