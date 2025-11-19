@@ -1,0 +1,201 @@
+\documentclass[a4paper,12pt]{article}
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{3}
+\input{/usr/share/LaTeX-ToolKit/template.tex}
+\begin{document}
+\title{Theory of Computation}
+\author{沈威宇}
+\date{\temtoday}
+\titletocdoc
+\section{Theory of Computation (TOC)}
+\ssc{Formal Language Theory}
+\sssc{Alphabet}
+An alphabet $\Sigma$ of a formal language is a finite set of symbols, called characters or symbols.
+\sssc{String or word}
+Strings (or words) over alphabet $\Sigma$ are defined as follows:
+\begin{itemize}
+\item The empty sequence is a string, called empty string and denoted by $\varepsilon$.
+\item A single character $a\in\Sigma$ is a string.
+\item A concatenation of strings is a string, denoted by writing them side by side.
+\end{itemize}
+The length of a string is defined as follows:
+\begin{itemize}
+\item The empty string $\varepsilon$ has length $0$.
+\item A single character $a\in\Sigma$ has length $1$.
+\item A string of length $m$ concatenated with a string of length $n$ yields a string of length $m+n$.
+\end{itemize}
+\sssc{Kleene star, Kleene operator, or Kleene closure of an alphabet}
+Given an alphabet $V$, define
+\[V^0 = \{\varepsilon\},\]
+and define recursively for $i\in\mathbb{N}$:
+\[V^i = \{wv \mid w\in V^{i-1} \land v\in V \}.\]
+The Kleene star on $V$ is defined as
+\[V^* = \bigcup_{i\in\mathbb{N}_0} V^i.\]
+The Kleene plus on $V$ is defined as
+\[V^+ = \bigcup_{i\in\mathbb{N}} V^i.\]
+\sssc{Formal language}
+A formal language, or, when the context is clear, language, $L$ over $\Sigma$ is any subset of $\Sigma^*$. A word $w\in\Sigma^*$ is called well-formed if $w\in L$.
+\sssc{Kleene star, Kleene operator, or Kleene closure of a language}
+Given a language $V$, define
+\[V^0 = \{\varepsilon\},\]
+and define recursively for $i\in\mathbb{N}$:
+\[V^i = \{wv \mid w\in V^{i-1} \land v\in V \}.\]
+The Kleene star on $V$ is defined as
+\[V^* = \bigcup_{i\in\mathbb{N}_0} V^i.\]
+The Kleene plus on $V$ is defined as
+\[V^+ = \bigcup_{i\in\mathbb{N}} V^i.\]
+\sssc{Concatenation of languages}
+Given two formal languages $L_0,L_1$ over the same alphabet, the concatenation of them, denoted by $L_0L_1$ or $L_0\cdot L_1$, is defined as
+\[L_0L_1=\{xy\mid x\in L_0\land y\in L_1\}.\]
+\sssc{Regular language}
+The collection of regular languages over an alphabet $\Sigma$ is defined recursively:
+\begin{itemize}
+\item The empty language $\varnothing$ is a regular language.
+\item For each $a\in\Sigma$, the singleton $\{a\}$ is a regular language.
+\item If $A$ is a regular language, then $A^*$ is a regular language.
+\item If $A$ and $B$ are regular languages, then $A\cup B$ and $A\cdot B$ are regular languages.
+\item No other languages over $\Sigma$ are regular.
+\end{itemize}
+\ssc{Automata Theory}
+\sssc{Automata}
+Unless otherwise specified, an automaton is considered deterministic.
+
+An automaton (plural: automata) can be defined as a four-tuple
+\[M=(\Sigma,\Gamma,S,\delta),\]
+where
+\bit
+\item $\Sigma$ is the input alphabet,
+\item $\Gamma$ is the output alphabet,
+\item $S$ is a set of all states,
+\item $\delta$ is the next-state function or transition function which,
+\bit
+\item For deterministic automaton, is a partial function
+\[\delta\colon S\times\Sigma\to S\]
+mapping state-input pairs to successor states,
+\item For nondeterministic automaton, is a partial function
+\[\delta\colon S\times\Sigma\to 2^S\]
+mapping state-input pairs to sets of all possible successor states,
+\eit
+\sssc{Extended transition function}
+\bit
+\item For deterministic automaton, the transition function $\delta$ is extended inductively into $\ol{\delta}\colon S\times\Sigma^*\to S$. For the empty string $\varepsilon$, $\ol{\delta}(s,\varepsilon)=s$ for all states $s$, and for strings $wa$ where $a$ is the last symbol and $w$ is the (possibly empty) rest of the string,
+\[\ol{\delta}(s,wa)=\delta(\ol{\delta}(s,w),a).\]
+\item For nondeterministic automaton, the transition function $\delta$ is extended inductively into $\ol{\delta}\colon S\times\Sigma^*\to 2^S$. For the empty string $\varepsilon$, $\ol{\delta}(s,\varepsilon)=\{s\}$ for all states $s$, and for strings $wa$ where $a$ is the last symbol and $w$ is the (possibly empty) rest of the string,
+\[\ol{\delta}(s,wa)=\bigcup_{q\in\ol{\delta}(s,w)}\delta(q,a).\]
+\eit
+\sssc{Computation}
+Given an input word $a_1a_2\ldots a_n\in\Sigma^*$ and an starting state $s_0\in S$ of an automaton, for each $i\in\bbN\land i\leq n$, called a step of the computation,
+\bit
+\item For deterministic automaton, the automaton transitions from $s_{i-1}$ to $s_i=\delta(s_{i-1},a_i)$, denoted $s_{i-1}\vdash s_i$, in which $s_n$ is called the final state.
+\item For nondeterministic automaton, with $p_0=\{s_0\}$, the automaton transitions from an element $s_{i-1}$ of $p_{i-1}$ to an element $s_i$ of $p_i=\bigcup_{s\in p_{i-1}}\delta(s,a_i)$, denoted $s_{i-1}\vdash s_i$, in which all elements of $p_n$ are called the final states.
+\eit
+
+$\vdash^*$ is the reflexive and transitive closure of the relation $\vdash$, that is, if there exists a sequence of steps
+\[C_0\vdash C_1\vdash\ldots\vdash C_n,\]
+then
+\[C_0\vdash^*C_n.\]
+\sssc{Acceptor or recognizer}
+Together with a set of accepted final state $F\subseteq S$ and a starting state $s_0\in S$, an automaton is an acceptor (also called recognizer) of formal languages. An input word $w\in\Sigma^*$ is an accepting word if there exists $f\in F$ such that $s_0\vdash^*f$. The formal language $L$ recognized is the set of all accepting words.
+
+The set of all recognizable languages of an automaton with a set of accepted final state is the set of all languages $L$ such that there exists a starting state of the automaton such that $L$ is recognized.
+\sssc{Finite-state machine (FSM), finite-state automaton (FSA), finite automaton, or state machine}
+A finite-state machine can be defined as a five-tuple
+\[M=(\Sigma,S,s_0,\delta,F),\]
+where
+\bit
+\item $\Sigma$ is the input alphabet,
+\item $S$ is a set of all states,
+\item $s_0$ is a starting state,
+\item $\delta$ is the next-state function or transition function,
+\item $F\subseteq S$ is a set of accepted final states.
+\eit
+
+A deterministic finite-state automaton is abbreviated to DFA, DFSA, or DFSM. A nondeterministic finite-state automaton is abbreviated to NFA, NFSA, or NFSM.
+
+The set of all recognizable languages of all finite-state machine is the set of all regular language.
+\sssc{Pushdown automation (PDA)}
+A pushdown automaton accepting by final state can be defined as a seven-tuple
+\[M=(\Sigma,\Gamma,S,s_0,\delta,Z,F),\]
+where
+\bit
+\item $\Sigma$ is the input alphabet,
+\item $\Gamma$ is the stack alphabet,
+\item $S$ is a set of all states,
+\item $s_0\in S$ is a starting state,
+\item $\delta$ is the next-state function or transition function,
+\item $Z\in\Gamma$ is the initial stack symbol, 
+\item $F\subseteq S$ is a set of accepted final states.
+\eit
+A pushdown automaton accepting by empty stack can be defined as a six-tuple
+\[M=(\Sigma,\Gamma,S,s_0,\delta,Z),\]
+where
+\bit
+\item $\Sigma$ is the input alphabet,
+\item $\Gamma$ is the stack alphabet,
+\item $S$ is a set of all states,
+\item $s_0\in S$ is a starting state,
+\item $\delta$ is the next-state function or transition function,
+\item $Z\in\Gamma$ is the initial stack symbol.
+\eit
+The stack of a PDA is a string over $\Gamma$. When the PDA pushes a symbol $a\in\Gamma$ to the stack, the symbol is appended to the sequence, that is, the stack transitions from $\gamma$ to $\gamma a$ where $\gamma\in\Gamma^*$. When the PDA pops a symbol from the stack, the last symbol of the sequence is removed from the sequence, that is, the stack transitions from $\gamma a$ to $\gamma$ where $\gamma a\in\Gamma^*$.
+
+Given an input word $w=a_1a_2\ldots a_n\in\Sigma^*$ and an starting state $s_0\in S$ of a PDA, for each $i\in\bbN\land i\leq n$, called a step of the computation, a PDA reads an input character $a_i$, transitions its state according to $\delta$ from $s_{i-1}$ to $s_i$, and may push and/or pop symbols from the stack. Let $w_i=a_1a_2\ldots a_{n-i}$ for $i\in\bbN_0\land i\leq n$, $\gamma_0=Z$, and the stack after the $i$th step be $\gamma_i$. The $i$th step is denoted as $(s_{i-1},w_{i-1},\gamma_{i-1})\vdash(s_i,w_i,\gamma_i)$.
+
+For a pushdown automaton accepting by final state, an input word $w\in\Sigma^*$ is an accepting word if $(s_0,w,Z)\vdash^*(f,\varepsilon,\gamma_n)$ for some $f\in F$ and $\gamma_n\in\Gamma^*$. For each pushdown automaton $M$ accepting by final state, the set of all accepting words is denoted as $L(M)$.
+
+For a pushdown automaton accepting by empty stack, an input word $w\in\Sigma^*$ is an accepting word if $(s_0,w,Z)\vdash^*(s_n,\varepsilon,\varepsilon)$ for some $s_n\in S$. For each pushdown automaton $M$ accepting by empty stack, the set of all accepting words is denoted as $N(M)$.
+
+\tb{Theorem.} For each pushdown automaton $M$ accepting by final state, there exists a pushdown automaton $M'$ accepting by empty stack such that $L(M)=N(M')$. For each pushdown automaton $M$ accepting by empty stack, there exists a pushdown automaton $M'$ accepting by final state such that $N(M)=L(M')$.
+
+The set of all recognizable languages of all deterministic pushdown automata is the set of all deterministic context-free language.
+\sssc{Automaton with output}
+An automaton with output can be defined as five-tuple
+\[M=(\Sigma,\Gamma,S,\delta,\lambda),\]
+where
+\bit
+\item $\Sigma$ is the input alphabet,
+\item $\Gamma$ is the output alphabet,
+\item $S$ is a set of all states,
+\item $\delta$ is the next-state function or transition function,
+\item $\lambda$ is the next-output function which is a partial function
+\[\delta\colon S\times\Sigma\to\Gamma\]
+mapping state-input pairs to outputs.
+\eit
+\sssc{Extended output function}
+\bit
+\item For deterministic automaton with output, the transition function $\lambda$ is extended inductively into $\ol{\lambda}\colon S\times\Sigma^*\to\Gamma$. For the empty string $\varepsilon$, $\ol{\lambda}(s,\varepsilon)=\varepsilon$ for all states $s$, and for strings $wa$ where $a$ is the last symbol and $w$ is the (possibly empty) rest of the string,
+\[\ol{\lambda}(s,wa)=\ol{\lambda}(s,w)\lambda(\ol{\delta}(s,w),a),\]
+where $\lambda(\ol{\delta}(s,w),a)$ is the last symbol and $\ol{\lambda}(s,w)$ is the (possibly empty) rest of the string.
+\item For nondeterministic automaton with output, the transition function $\lambda$ is extended inductively into $\ol{\lambda}\colon S\times\Sigma^*\to 2^\Gamma$. For the empty string $\varepsilon$, $\ol{\lambda}(s,\varepsilon)=\{\varepsilon\}$ for all states $s$, and for strings $wa$ where $a$ is the last symbol and $w$ is the (possibly empty) rest of the string,
+\[\ol{\lambda}(s,wa)=\{v\lambda(q,a)\mid v\in\ol{\lambda}(s,w)\land q\in\ol{\delta}(s,w)}\},\]
+where $\lambda(q,w)$ is the last symbol and $v$ is the (possibly empty) rest of the string.
+\eit
+\sssc{Moore Machine}
+A Moore machine can be defined as a six-tuple
+\[M=(\Sigma,\Gamma,S,s_0,\delta,\lambda),\]
+where
+\bit
+\item $\Sigma$ is the input alphabet,
+\item $\Gamma$ is the output alphabet,
+\item $S$ is a set of all states,
+\item $s_0\in S$ is a starting state,
+\item $\delta$ is the next-state function or transition function which is a partial function
+\[\delta\colon S\times\Sigma\to S\]
+mapping state-input pairs to successor states,
+$\lambda$ is the next-output function.
+\eit
+\sssc{Mealy Machine}
+A Mealy machine can be defined as a six-tuple
+\[M=(\Sigma,\Gamma,S,s_0,\delta,\lambda),\]
+where
+\bit
+\item $\Sigma$ is the input alphabet,
+\item $\Gamma$ is the output alphabet,
+\item $S$ is a set of all states,
+\item $s_0\in S$ is a starting state,
+\item $\delta$ is the next-state function or transition function which is a partial function
+\[\delta\colon S\times\Sigma\to S\]
+mapping state-input pairs to successor states,
+\item $\lambda$ is the next-output function.
+\eit
+\end{document}
