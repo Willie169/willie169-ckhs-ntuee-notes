@@ -1446,6 +1446,38 @@ A race condition, race hazard, or simply race is the condition which the behavio
 A non-critical race is a race which the final stable state is not dependent on the sequence or timing of other uncontrollable events.
 
 A critical race is a race which the final stable state is dependent on the sequence or timing of other uncontrollable events. A critical race is caused by race of state variables and cannot be removed by adding redundant gates or adjusting the delays. To eliminate critical races, we can assign states in a way such that at most one state variable changes at a time, e.g., gray code.
+\sssc{Moore Machine}
+A Moore machine can be defined as a 6-tuple $(S,s_{0},\Sigma ,O,\delta ,G)$ consisting of:
+\bit
+\item A finite set of states $S$,
+\item A start state (also called initial state) $s_{0}$ which is an element of $S$,
+\item A finite set called the input alphabet $\Sigma$
+\item A finite set called the output alphabet $O$,
+\item A transition function $\delta :S\times \Sigma \rightarrow S$ mapping a state and the input alphabet to the next state, and
+\item An output function $G:S\rightarrow O$ mapping each state to the output alphabet.
+\eit
+\sssc{Mealy Machine}
+A Mealy machine can be defined as a 6-tuple $(S,s_{0},\Sigma ,O,\delta ,G)$ consisting of:
+\bit
+\item A finite set of states $S$,
+\item A start state (also called initial state) $s_{0}$ which is an element of $S$,
+\item A finite set called the input alphabet $\Sigma$
+\item A finite set called the output alphabet $O$,
+\item A transition function $\delta :S\times \Sigma \rightarrow S$ mapping each pair of a state and an element of input alphabet to an next state, and
+\item An output function $G:S\times \Sigma\rightarrow O$ mapping each pair of a state and an element of input alphabet to an output alphabet.
+\eit
+\sssc{State-Transition Table, Transition Table, or Next-state table}
+A state-transition table, transition table, or next-state table of a sequential circuit is a truth table with output variables replaced with next-state variables, and input variables replaced with present-state variables and for Mealy circuit also input variables.
+\sssc{State Table}
+A state table of a sequential circuit is a truth table with output variables replaced with next-state variables and output variables, and input variables replaced with present-state variables and for Mealy circuit also input variables.
+\sssc{Next-state Map}
+A next-state map is the K-map of a next-state variable as a function of the present-state variables and for Mealy circuit also input variables.
+\sssc{Glitch of Mealy Circuit}
+After the circuit has changed state and before the input is changed, the output may temporarily assume an incorrect value, which we call a false output, glitch, or spike. If the output of the circuit is fed into a second sequential circuit which uses the same clock, the false outputs will not cause any problem because the inputs to the second circuit can cause a change of state only when a falling clock edge occurs.
+
+Because the output of a Moore circuit can change state only when the
+flip-flops change state and not when the input changes, no false outputs can appear
+in a Moore circuit.
 \ssc{Latches}
 \sssc{(Active-high) S-R Latch}
 An (asynchronous) (active-high or NOR-gate) set-reset (aka S-R or SR) latch or an (asynchronous) S-R NOR latch has two inputs, set $S$ and reset $R$, and two outputs, $Q$ and $Q'$, and stores one bit, $Q$. It consists two NOR gates with $S$ and $Q$ being the inputs and $Q'$ being the output of one NOR gate, and $R$ and $Q'$ being the inputs and $Q$ begin the output of the other NOR gate.
@@ -1457,6 +1489,7 @@ With present state $Q$, next state $Q^+$, and next state of $Q'$ $P$, the next-s
 \[P=(S+Q^+)'=S'{Q^+}'.\]
 \[{Q^+}'=(R'S+R'Q)'=(R'S)'(R'Q)'=(R+S')(R+Q')=R+S'Q'.\]
 \[P=S'R+S'Q'.\]
+The state table is:
 \begin{longtable}[c]{|m|m|m|m|m|m|}
 \hline
 S & R & Q & Q^+ & {Q^+}' & P\\\hline
@@ -1488,6 +1521,7 @@ With present state $Q$, next state $Q^+$, and next state of $Q'$ $P$, the next-s
 \[P=(\ol{R}Q^+)'=\ol{R}'+{Q^+}'.\]
 \[{Q^+}'=(\ol{S}'+\ol{R}Q)'=\ol{S}(\ol{R}Q)'=\ol{S}\ol{R}'+\ol{S}Q'.\]
 \[P=\ol{R}'+\ol{S}Q'.\]
+The state table is:
 \begin{longtable}[c]{|m|m|m|m|m|m|}
 \hline
 \ol{S} & \ol{R} & Q & Q^+ & {Q^+}' & P\\\hline
@@ -1726,8 +1760,6 @@ An $n$-bit serial-in parallel-out (SIPO) bidirectional shift register is an $n$-
 \ssc{Counter}
 \sssc{Counter}
 A counter is a sequential circuit whose state repeats every fixed finite number of active edges, called count cycle. The cyclic sequence of the states is called state loop. 
-\sssc{Transition Cycle}
-The transition cycle of a counter is a graph of states with directed edges indicating the transition to next state.
 \sssc{Synchronous Counter}
 A synchronous counter is a counter consists of flip-flops where all flip-flops are enabled synchronously.
 \sssc{Shift Register Counter}
@@ -1832,17 +1864,8 @@ The basic procedure to find the output sequence of a synchronous circuit resulti
 \item Determine the output(s) that corresponds to the new states and draw on the timing chart.
 \item Repeat 2, 3, and 4 for each input in the given sequence.
 \een
-
-\sssc{State-Transition Table or Transition Table}
-A state-transition table or transition table of a sequential circuit is a truth table with output replaced with next state, and input replaced with present state and for Mealy circuit also output, where the states can be presented with the combination of the real Boolean values of the latches or symbols such as $S_0,S_1,\ldots$.
-\sssc{Next-state Map}
-A next-state map is the K-map of a next-state variable as a function of the present-state variables and for Mealy circuit also input variables.
-\sssc{Glitch of Mealy Circuit}
-After the circuit has changed state and before the input is changed, the output may temporarily assume an incorrect value, which we call a false output, glitch, or spike. If the output of the circuit is fed into a second sequential circuit which uses the same clock, the false outputs will not cause any problem because the inputs to the second circuit can cause a change of state only when a falling clock edge occurs.
-
-Because the output of a Moore circuit can change state only when the
-flip-flops change state and not when the input changes, no false outputs can appear
-in a Moore circuit.
+\sssc{State Transition Graph or Transition Graph}
+A graph of states of a sychronous circuit with directed edges indicating the transition to next state for all states is called (state) transition graph.
 \sssc{Analysis by State Transition Table}
 The following method can be used to construct the transition table:
 \ben
@@ -1851,7 +1874,5 @@ The following method can be used to construct the transition table:
 \item Plot a next-state map for each flip-flop.
 \item Combine these maps to form the transition table.
 \een
-
-
 \end{document}
 
