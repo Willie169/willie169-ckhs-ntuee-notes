@@ -18,7 +18,7 @@ Strings (or words) over alphabet $\Sigma$ are defined as follows:
 \item A single character $a\in\Sigma$ is a string.
 \item A concatenation of strings is a string, denoted by writing them side by side.
 \end{itemize}
-The length of a string is defined as follows:
+The length of a string, denoted by $|\cdot|$, is defined as follows:
 \begin{itemize}
 \item The empty string $\varepsilon$ has length $0$.
 \item A single character $a\in\Sigma$ has length $1$.
@@ -47,8 +47,38 @@ The Kleene plus on $V$ is defined as
 \sssc{Concatenation of languages}
 Given two formal languages $L_0,L_1$ over the same alphabet, the concatenation of them, denoted by $L_0L_1$ or $L_0\cdot L_1$, is defined as
 \[L_0L_1=\{xy\mid x\in L_0\land y\in L_1\}.\]
+\sssc{(Unrestricted or type 0) grammar}
+A grammar can be defined as a four-tuple
+\[G=(V,\Sigma,R,S)\]
+where
+\bit
+\item $V$ is a set of nonterminal symbols, abstract symbols that represent syntactic categories,
+\item $\Sigma$ is a set of terminal symbols, the actual characters that can appear in a string, i.e., alphabet, with $V\cap\Sigma=\varnothing$,
+\item $R$ is production rules, aka rewrite rules, a partial function
+\[R\colon(V\cup\Sigma)^+\colon V\to 2^{(V\cup\Sigma)^*}\]
+mapping strings of nonterminal symbols and terminal symbols to sets of strings of nonterminal symbols and terminal symbols, where if $a\in R(A)$, we say $A$ rewrites to $a$, and if $v\in(V\cup\Sigma)^*$ can be converted to $w\in(V\cup\Sigma)^*$ by replacing one symbol $A$ with any $a\in R(A)$, we write $v\vdash w$, and $\vdash^*$ is the reflexive and transitive closure of the relation $\vdash$, that is, if
+\[w_0\vdash w_1\vdash\ldots\vdash w_n,\]
+then
+\[w_0\vdash^*w_n,\]
+\item $S\in V$ is a start symbol.
+\eit
+The language defined by a grammar $G$, i.e., all $w\in\Sigma^*$ such that $S\vash^*w$, is denoted as $L(G)$.
+\sssc{Context-free grammar (CFG) or type 2 grammar}
+A context-free grammar is a grammar of which the production rules $R$ is a partial function
+\[R\colon V\to 2^{(V\cup\Sigma)^*}\]
+mapping nonterminal symbols to sets strings of nonterminal symbols and terminal symbols.
+\sssc{Context-free language (CFL)}
+A context-free language is a language defined by a context-free grammar.
+\sssc{Regular grammar or type 3 grammar}
+A regular grammar is a context-free grammar of which the production rules $R$ is left-linear or right-near.
+
+A production rules $R$ is right-linear if the range of $R$ is a subset of the language $\Sigma^*(V\cup\{\varepsilon\})$.
+
+A production rules $R$ is left-linear if the range of $R$ is a subset of the language $(V\cup\{\varepsilon\})\Sigma^*$.
 \sssc{Regular language}
-The collection of regular languages over an alphabet $\Sigma$ is defined recursively:
+A regular language is a language defined by a regular grammar.
+
+The collection of regular languages over an alphabet $\Sigma$ can be defined recursively with:
 \begin{itemize}
 \item The empty language $\varnothing$ is a regular language.
 \item For each $a\in\Sigma$, the singleton $\{a\}$ is a regular language.
@@ -56,10 +86,14 @@ The collection of regular languages over an alphabet $\Sigma$ is defined recursi
 \item If $A$ and $B$ are regular languages, then $A\cup B$ and $A\cdot B$ are regular languages.
 \item No other languages over $\Sigma$ are regular.
 \end{itemize}
+\sssc{Context-sensitive grammar (CSG) or type 1 grammar}
+A context-sensitive grammar is a grammar $G$ of which the production rules $R$, which is a partial function
+\[R\colon(V\cup\Sigma)^+\to 2^{(V\cup\Sigma)^*},\]
+is such that for any fixed $A\in D_R$, for all $a\in R(A)$, there exist $u,v,w\in(V\cup\Sigma)^*$ and $x\in V$ such that $A=uxv$ and $a=uwv$.
+\sssc{Context-sensitive language (CFL)}
+A context-sensitive language is a language defined by a context-sensitive grammar.
 \ssc{Automata Theory}
 \sssc{Automata}
-Unless otherwise specified, an automaton is considered deterministic.
-
 An automaton (plural: automata) can be defined as a four-tuple
 \[M=(\Sigma,\Gamma,S,\delta),\]
 where
@@ -76,6 +110,7 @@ mapping state-input pairs to successor states,
 \[\delta\colon S\times\Sigma\to 2^S\]
 mapping state-input pairs to sets of all possible successor states,
 \eit
+Unless otherwise specified, an automaton is usually considered deterministic.
 \sssc{Extended transition function}
 \bit
 \item For deterministic automaton, the transition function $\delta$ is extended inductively into $\ol{\delta}\colon S\times\Sigma^*\to S$. For the empty string $\varepsilon$, $\ol{\delta}(s,\varepsilon)=s$ for all states $s$, and for strings $wa$ where $a$ is the last symbol and $w$ is the (possibly empty) rest of the string,
@@ -90,7 +125,7 @@ Given an input word $a_1a_2\ldots a_n\in\Sigma^*$ and an starting state $s_0\in 
 \item For nondeterministic automaton, with $p_0=\{s_0\}$, the automaton transitions from an element $s_{i-1}$ of $p_{i-1}$ to an element $s_i$ of $p_i=\bigcup_{s\in p_{i-1}}\delta(s,a_i)$, denoted $s_{i-1}\vdash s_i$, in which all elements of $p_n$ are called the final states.
 \eit
 
-$\vdash^*$ is the reflexive and transitive closure of the relation $\vdash$, that is, if there exists a sequence of steps
+$\vdash^*$ is the reflexive and transitive closure of the relation $\vdash$, that is, if
 \[C_0\vdash C_1\vdash\ldots\vdash C_n,\]
 then
 \[C_0\vdash^*C_n.\]
@@ -112,7 +147,7 @@ where
 
 A deterministic finite-state automaton is abbreviated to DFA, DFSA, or DFSM. A nondeterministic finite-state automaton is abbreviated to NFA, NFSA, or NFSM.
 
-The set of all recognizable languages of all finite-state machine is the set of all regular language.
+\tb{Theorem.} The set of all recognizable languages of all finite-state machine is the set of all regular language.
 \sssc{Pushdown automation (PDA)}
 A pushdown automaton accepting by final state can be defined as a seven-tuple
 \[M=(\Sigma,\Gamma,S,s_0,\delta,Z,F),\]
@@ -147,26 +182,26 @@ For a pushdown automaton accepting by empty stack, an input word $w\in\Sigma^*$ 
 
 \tb{Theorem.} For each pushdown automaton $M$ accepting by final state, there exists a pushdown automaton $M'$ accepting by empty stack such that $L(M)=N(M')$. For each pushdown automaton $M$ accepting by empty stack, there exists a pushdown automaton $M'$ accepting by final state such that $N(M)=L(M')$.
 
-The set of all recognizable languages of all deterministic pushdown automata is the set of all deterministic context-free language.
-\sssc{Automaton with output}
-An automaton with output can be defined as five-tuple
+\tb{Theorem.} The set of all recognizable languages of all deterministic pushdown automata is the set of all deterministic context-free language.
+\sssc{Transducer}
+An transducer can be defined as five-tuple
 \[M=(\Sigma,\Gamma,S,\delta,\lambda),\]
 where
 \bit
 \item $\Sigma$ is the input alphabet,
 \item $\Gamma$ is the output alphabet,
 \item $S$ is a set of all states,
-\item $\delta$ is the next-state function or transition function,
+\item $\delta$ is the deterministic or nondeterministic next-state function or transition function,
 \item $\lambda$ is the next-output function which is a partial function
 \[\delta\colon S\times\Sigma\to\Gamma\]
 mapping state-input pairs to outputs.
 \eit
 \sssc{Extended output function}
 \bit
-\item For deterministic automaton with output, the transition function $\lambda$ is extended inductively into $\ol{\lambda}\colon S\times\Sigma^*\to\Gamma$. For the empty string $\varepsilon$, $\ol{\lambda}(s,\varepsilon)=\varepsilon$ for all states $s$, and for strings $wa$ where $a$ is the last symbol and $w$ is the (possibly empty) rest of the string,
+\item For deterministic transducer, the transition function $\lambda$ is extended inductively into $\ol{\lambda}\colon S\times\Sigma^*\to\Gamma$. For the empty string $\varepsilon$, $\ol{\lambda}(s,\varepsilon)=\varepsilon$ for all states $s$, and for strings $wa$ where $a$ is the last symbol and $w$ is the (possibly empty) rest of the string,
 \[\ol{\lambda}(s,wa)=\ol{\lambda}(s,w)\lambda(\ol{\delta}(s,w),a),\]
 where $\lambda(\ol{\delta}(s,w),a)$ is the last symbol and $\ol{\lambda}(s,w)$ is the (possibly empty) rest of the string.
-\item For nondeterministic automaton with output, the transition function $\lambda$ is extended inductively into $\ol{\lambda}\colon S\times\Sigma^*\to 2^\Gamma$. For the empty string $\varepsilon$, $\ol{\lambda}(s,\varepsilon)=\{\varepsilon\}$ for all states $s$, and for strings $wa$ where $a$ is the last symbol and $w$ is the (possibly empty) rest of the string,
+\item For nondeterministic transducer, the transition function $\lambda$ is extended inductively into $\ol{\lambda}\colon S\times\Sigma^*\to 2^\Gamma$. For the empty string $\varepsilon$, $\ol{\lambda}(s,\varepsilon)=\{\varepsilon\}$ for all states $s$, and for strings $wa$ where $a$ is the last symbol and $w$ is the (possibly empty) rest of the string,
 \[\ol{\lambda}(s,wa)=\{v\lambda(q,a)\mid v\in\ol{\lambda}(s,w)\land q\in\ol{\delta}(s,w)}\},\]
 where $\lambda(q,w)$ is the last symbol and $v$ is the (possibly empty) rest of the string.
 \eit
