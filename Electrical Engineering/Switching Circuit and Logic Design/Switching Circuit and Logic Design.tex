@@ -1645,7 +1645,7 @@ Some flip-flops has asynchronous inputs that change the stored state of $Q$ at a
 \sssc{Flip-flops with clock enable}
 In synchronous digital systems, the flip-flops are usually driven by a common clock so that all state changes occur at the same time in response to the same clock edge. If we want a flip-flop to hold existing data during an active edge even though the data input to the flip-flops may be changing, we can use a flip-flop with clock enable (CE) input.
 
-A flip-flop with clock enable (CE) input has an additional input CE and works as a normal flip-flop if CE=1 and hold if CE=0.
+A flip-flop with clock enable (CE) input has an additional input CE and works as a normal flip-flop if CE=1, called enabled, and hold if CE=0, called disabled.
 
 One method to implement it is by gating the clock, that is, replace the original clock input with the output of an AND gate with clock input and CE being the inputs. However, there are two potential problem. First, gate delays may cause the clock to arrive at some flip-flops at different times than at other flip-flops, resulting in a loss of synchronization. Second, if CE changes at the wrong time, the flip-flop may trigger due to the change in CE instead of due to the change in the clock input.
 
@@ -1833,7 +1833,7 @@ The basic procedure to find the output sequence of a synchronous circuit resulti
 \item Repeat 2, 3, and 4 for each input in the given sequence.
 \een
 \sssc{As automata}
-A synchronous digital circuit is a deterministic finite-state machine (DFSM) with input alphabet being $\{0,1\}^m$ where $m$ is the number of input wires (thus it recognize a regular language over $\{0,1\}^m$), states being sequences of 0's and 1's of which the length is the number of flip-flops, next-state function given by the next-state equations of the flip-flops and the combinational logic of the flip-flop inputs, and the accepted final state being all states and thus not concerned in the context of digital circuit.
+A synchronous digital circuit is a deterministic finite-state machine (DFSM) that transitions every active edge with input alphabet being $\{0,1\}^m$ where $m$ is the number of input wires (thus it recognize a regular language over $\{0,1\}^m$), states being sequences of 0's and 1's of which the length is the number of flip-flops, next-state function given by the next-state equations of the flip-flops and the combinational logic of the flip-flop inputs, and the accepted final state being all states and thus not concerned in the context of digital circuit.
 
 A synchronous digital circuit with output is a deterministic finite-state transducer (DFST) with the output alphabet being $\{0,1\}^n$ where $n$ is the number of output wires, and next-output function given by the next-state equations of the flip-flops and the combinational logic of the circuit outputs.
 
