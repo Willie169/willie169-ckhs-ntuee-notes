@@ -266,7 +266,7 @@ The ON-set of a Boolean function $f$ is the set of all input combinations such t
 \sssc{Incompletely specified function (ISF) or Don't-care function}
 An incompletely specified function (ISF) or a don't-care function is a Boolean function but in which for some input combinations, the output is not defined or irrelevant, often denoted as $X$. Those input combinations are called don't-care conditions.
 \sssc{Truth table}
-A truth table, also called a table of combinations, specifies the corresponding output values for all possible combinations of input values for a Boolean function in the order such that if two input combinations have the same inputs in the first $i$ variables and $A_{i+1}$ of the first one is $0$, $A_{i+1}$ of the second one is $1$, then the first is put prior to the second. A truth table for an $n$-variable Boolean function $f\qty(A_1,A_2,\ldots A_n)$ have $2^n$ rows and is:
+A truth table, also called a table of combinations, specifies the corresponding outputs for all possible input combinations of a Boolean function in the order such that if two input combinations have the same inputs in the first $i$ variables and $A_{i+1}$ of the first one is $0$, $A_{i+1}$ of the second one is $1$, then the first is put prior to the second. A truth table for an $n$-variable Boolean function $f\qty(A_1,A_2,\ldots A_n)$ have $2^n$ rows and is:
 \begin{longtable}[c]{|m|m|m|m|m|}
 \hline
 A_1 & A_2 & \ldots & A_n & f\\\hline
@@ -1434,7 +1434,7 @@ where a truly stable state is a state where the state variables return to the va
 The probability that metastability lasts decays exponentially over time.
 
 Take the sequential circuit consists of two inverters with the output of one being the input of another for example. There are two stable states (excluding metastable state), 0 and 1, and one metastable state, a voltage right in the middle of 0 and 1.
-\sssc{Present state and Next state}
+\sssc{Present state and next state}
 When discussing latches and flip-flops, we the term present state $Q=Q(t)$ to denote the state of the $Q$ output of the latch or flip-flop at the time input signal changes, and the term next state $Q^+=Q(t+\epsilon)$ to denote the state of the $Q$ output after the latch or flip-flop has reacted to the input change and stabilized.
 \sssc{Next-state Equation or Characteristic Equation}
 The equation of the next state of a sequential circuit as a function of the present state and inputs.
@@ -1823,6 +1823,10 @@ These maps are called J input (K-)maps and K input (K-)maps. J input maps are th
 \item Realize all inputs $J$ and $K$ with combination circuits with a subset of all outputs $Q$ and $Q'$, constant 1 and 0 sources, and all external control inputs as inputs.
 \een
 \ssc{Analysis of Synchronous Circuit}
+\sssc{Automata theory}
+A synchronous circuit is a finite-state machine (FSM) with the accepted final state typically being all states and also a transducer for circuits with outputs, where the next-state function is specified by the next-state equations of the flip-flops of the circuit, and thus can be analyzed with state-transition table, state diagram, etc.
+
+A circuit that is a Moore machine is called a Moore circuit. A circuit that is a Mealy machine is called a Mealy circuit.
 \sssc{Analysis by Signal Tracing and Timing Charts}
 The basic procedure to find the output sequence of a synchronous circuit resulting from a given input sequence is as follows:
 \ben
@@ -1832,9 +1836,6 @@ The basic procedure to find the output sequence of a synchronous circuit resulti
 \item Determine the output(s) that corresponds to the new states and draw on the timing chart.
 \item Repeat 2, 3, and 4 for each input in the given sequence.
 \een
-
-\sssc{State-Transition Table or Transition Table}
-A state-transition table or transition table of a sequential circuit is a truth table with output replaced with next state, and input replaced with present state and for Mealy circuit also output, where the states can be presented with the combination of the real Boolean values of the latches or symbols such as $S_0,S_1,\ldots$.
 \sssc{Next-state Map}
 A next-state map is the K-map of a next-state variable as a function of the present-state variables and for Mealy circuit also input variables.
 \sssc{Glitch of Mealy Circuit}

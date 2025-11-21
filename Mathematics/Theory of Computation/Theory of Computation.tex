@@ -24,6 +24,7 @@ The length of a string, denoted by $|\cdot|$, is defined as follows:
 \item A single character $a\in\Sigma$ has length $1$.
 \item A string of length $m$ concatenated with a string of length $n$ yields a string of length $m+n$.
 \end{itemize}
+A string can be of infinite length.
 \sssc{Kleene star, Kleene operator, or Kleene closure of an alphabet}
 Given an alphabet $V$, define
 \[V^0 = \{\varepsilon\},\]
@@ -57,9 +58,9 @@ where
 \item $R$ is production rules, aka rewrite rules, a partial function
 \[R\colon(V\cup\Sigma)^+\colon V\to 2^{(V\cup\Sigma)^*}\]
 mapping strings of nonterminal symbols and terminal symbols to sets of strings of nonterminal symbols and terminal symbols, where if $a\in R(A)$, we say $A$ rewrites to $a$, and if $v\in(V\cup\Sigma)^*$ can be converted to $w\in(V\cup\Sigma)^*$ by replacing one symbol $A$ with any $a\in R(A)$, we write $v\vdash w$, and $\vdash^*$ is the reflexive and transitive closure of the relation $\vdash$, that is, if
-\[w_0\vdash w_1\vdash\ldots\vdash w_n,\]
+\[w_0\vdash w_1\vdash\ldots\vdash w_k,\]
 then
-\[w_0\vdash^*w_n,\]
+\[w_0\vdash^*w_k,\]
 \item $S\in V$ is a start symbol.
 \eit
 The language defined by a grammar $G$, i.e., all $w\in\Sigma^*$ such that $S\vash^*w$, is denoted as $L(G)$.
@@ -67,7 +68,7 @@ The language defined by a grammar $G$, i.e., all $w\in\Sigma^*$ such that $S\vas
 A context-free grammar is a grammar of which the production rules $R$ is a partial function
 \[R\colon V\to 2^{(V\cup\Sigma)^*}\]
 mapping nonterminal symbols to sets strings of nonterminal symbols and terminal symbols.
-\sssc{Context-free language (CFL)}
+\sssc{Context-free language (CFL) or type 2 language}
 A context-free language is a language defined by a context-free grammar.
 \sssc{Regular grammar or type 3 grammar}
 A regular grammar is a context-free grammar of which the production rules $R$ is left-linear or right-near.
@@ -75,7 +76,7 @@ A regular grammar is a context-free grammar of which the production rules $R$ is
 A production rules $R$ is right-linear if the range of $R$ is a subset of the language $\Sigma^*(V\cup\{\varepsilon\})$.
 
 A production rules $R$ is left-linear if the range of $R$ is a subset of the language $(V\cup\{\varepsilon\})\Sigma^*$.
-\sssc{Regular language}
+\sssc{Regular language or type 3 language}
 A regular language is a language defined by a regular grammar.
 
 The collection of regular languages over an alphabet $\Sigma$ can be defined recursively with:
@@ -90,25 +91,27 @@ The collection of regular languages over an alphabet $\Sigma$ can be defined rec
 A context-sensitive grammar is a grammar $G$ of which the production rules $R$, which is a partial function
 \[R\colon(V\cup\Sigma)^+\to 2^{(V\cup\Sigma)^*},\]
 is such that for any fixed $A\in D_R$, for all $a\in R(A)$, there exist $u,v,w\in(V\cup\Sigma)^*$ and $x\in V$ such that $A=uxv$ and $a=uwv$.
-\sssc{Context-sensitive language (CFL)}
+\sssc{Context-sensitive language (CFL) or type 1 language}
 A context-sensitive language is a language defined by a context-sensitive grammar.
+\sssc{Recursively enumerable (RE), recognizable, partially decidable, semidecidable, Turing-acceptable, Turing-recognizable, or type 0 language}
+A recursively enumerable language is a language defined by an unrestricted grammar.
 \ssc{Automata Theory}
 \sssc{Automata}
 An automaton (plural: automata) can be defined as a four-tuple
 \[M=(\Sigma,\Gamma,S,\delta),\]
 where
 \bit
-\item $\Sigma$ is the input alphabet,
-\item $\Gamma$ is the output alphabet,
+\item $\Sigma$ is an input alphabet,
+\item $\Gamma$ is an output alphabet,
 \item $S$ is a set of all states,
-\item $\delta$ is the next-state function or transition function which,
+\item $\delta$ is a next-state function or transition function which,
 \bit
 \item For deterministic automaton, is a partial function
 \[\delta\colon S\times\Sigma\to S\]
-mapping state-input pairs to successor states,
+mapping pairs of current state (aka present state) and input to successor states (aka next states),
 \item For nondeterministic automaton, is a partial function
 \[\delta\colon S\times\Sigma\to 2^S\]
-mapping state-input pairs to sets of all possible successor states,
+mapping pairs of current state (aka present state) and input to sets of all possible successor states (aka next states),
 \eit
 Unless otherwise specified, an automaton is usually considered deterministic.
 \sssc{Extended transition function}
@@ -119,62 +122,67 @@ Unless otherwise specified, an automaton is usually considered deterministic.
 \[\ol{\delta}(s,wa)=\bigcup_{q\in\ol{\delta}(s,w)}\delta(q,a).\]
 \eit
 \sssc{Computation}
-Given an input word $a_1a_2\ldots a_n\in\Sigma^*$ and an starting state $s_0\in S$ of an automaton, for each $i\in\bbN\land i\leq n$, called a step of the computation,
+Given a finite-length or infinite-length input word $w=a_1a_2\ldots\in\Sigma^*$ and an starting state (aka start state) $s_0\in S$ of an automaton, for each $i\in\bbN\land i\leq |w|$, called a step of the computation,
 \bit
-\item For deterministic automaton, the automaton transitions from $s_{i-1}$ to $s_i=\delta(s_{i-1},a_i)$, denoted $s_{i-1}\vdash s_i$, in which $s_n$ is called the final state.
-\item For nondeterministic automaton, with $p_0=\{s_0\}$, the automaton transitions from an element $s_{i-1}$ of $p_{i-1}$ to an element $s_i$ of $p_i=\bigcup_{s\in p_{i-1}}\delta(s,a_i)$, denoted $s_{i-1}\vdash s_i$, in which all elements of $p_n$ are called the final states.
+\item For deterministic automaton, the automaton transitions from $s_{i-1}$ to $s_i=\delta(s_{i-1},a_i)$, denoted $s_{i-1}\vdash s_i$.
+\item For nondeterministic automaton, with $p_0=\{s_0\}$, the automaton transitions from an element $s_{i-1}$ of $p_{i-1}$ to an element $s_i$ of $p_i=\bigcup_{s\in p_{i-1}}\delta(s,a_i)$, denoted $s_{i-1}\vdash s_i$.
 \eit
 
 $\vdash^*$ is the reflexive and transitive closure of the relation $\vdash$, that is, if
-\[C_0\vdash C_1\vdash\ldots\vdash C_n,\]
+\[C_0\vdash C_1\vdash\ldots\vdash C_k,\]
 then
-\[C_0\vdash^*C_n.\]
+\[C_0\vdash^*C_k.\]
+
+The final states of an automaton given an input word $w$ and a starting state $s_0$ is the states $s_n$ such that $s_0\vash^*s_n$ and that the automaton will stop reading symbols, called halt, if its state is $s_n$ after the $n$th step, either due to $|w|=n$ for those automata that reads input word directly one-by-one or due to the automaton's own rule.
 \sssc{Acceptor or recognizer}
 Together with a set of accepted final state $F\subseteq S$ and a starting state $s_0\in S$, an automaton is an acceptor (also called recognizer) of formal languages. An input word $w\in\Sigma^*$ is an accepting word if there exists $f\in F$ such that $s_0\vdash^*f$. The formal language $L$ recognized is the set of all accepting words.
 
-The set of all recognizable languages of an automaton with a set of accepted final state is the set of all languages $L$ such that there exists a starting state of the automaton such that $L$ is recognized.
+The set of all recognizable languages of an automaton with a set of accepted final state is the set of all languages $L$ such that there exists the starting state of the automaton such that $L$ is recognized.
 \sssc{Finite-state machine (FSM), finite-state automaton (FSA), finite automaton, or state machine}
 A finite-state machine can be defined as a five-tuple
 \[M=(\Sigma,S,s_0,\delta,F),\]
 where
 \bit
-\item $\Sigma$ is the input alphabet,
-\item $S$ is a set of all states,
-\item $s_0$ is a starting state,
-\item $\delta$ is the next-state function or transition function,
-\item $F\subseteq S$ is a set of accepted final states.
+\item $\Sigma$ is a finite input alphabet,
+\item $S$ is a finite non-empty set of all states,
+\item $s_0\in S$ is the starting state,
+\item $\delta$ is a next-state function or transition function,
+\item $F\subseteq S$ is the set of accepted final states.
 \eit
+A finite-state machine reads finite-length input words.
 
 A deterministic finite-state automaton is abbreviated to DFA, DFSA, or DFSM. A nondeterministic finite-state automaton is abbreviated to NFA, NFSA, or NFSM.
 
-\tb{Theorem.} The set of all recognizable languages of all finite-state machine is the set of all regular language.
+\tb{Theorem.} The collection of all recognizable languages of all finite-state machine is the collection of all regular language.
 \sssc{Pushdown automation (PDA)}
 A pushdown automaton accepting by final state can be defined as a seven-tuple
 \[M=(\Sigma,\Gamma,S,s_0,\delta,Z,F),\]
 where
 \bit
-\item $\Sigma$ is the input alphabet,
-\item $\Gamma$ is the stack alphabet,
-\item $S$ is a set of all states,
-\item $s_0\in S$ is a starting state,
-\item $\delta$ is the next-state function or transition function,
+\item $\Sigma$ is a finite input alphabet,
+\item $\Gamma$ is a finite stack alphabet,
+\item $S$ is a finite non-empty set of all states,
+\item $s_0\in S$ is the starting state,
+\item $\delta$ is a next-state function or transition function,
 \item $Z\in\Gamma$ is the initial stack symbol, 
-\item $F\subseteq S$ is a set of accepted final states.
+\item $F\subseteq S$ is the set of accepted final states.
 \eit
 A pushdown automaton accepting by empty stack can be defined as a six-tuple
 \[M=(\Sigma,\Gamma,S,s_0,\delta,Z),\]
 where
 \bit
-\item $\Sigma$ is the input alphabet,
-\item $\Gamma$ is the stack alphabet,
-\item $S$ is a set of all states,
-\item $s_0\in S$ is a starting state,
-\item $\delta$ is the next-state function or transition function,
+\item $\Sigma$ is a finite input alphabet,
+\item $\Gamma$ is a finite stack alphabet,
+\item $S$ is a finite non-empty set of all states,
+\item $s_0\in S$ is the starting state,
+\item $\delta$ is a next-state function or transition function,
 \item $Z\in\Gamma$ is the initial stack symbol.
 \eit
+A pushdown automaton reads finite-length input words.
+
 The stack of a PDA is a string over $\Gamma$. When the PDA pushes a symbol $a\in\Gamma$ to the stack, the symbol is appended to the sequence, that is, the stack transitions from $\gamma$ to $\gamma a$ where $\gamma\in\Gamma^*$. When the PDA pops a symbol from the stack, the last symbol of the sequence is removed from the sequence, that is, the stack transitions from $\gamma a$ to $\gamma$ where $\gamma a\in\Gamma^*$.
 
-Given an input word $w=a_1a_2\ldots a_n\in\Sigma^*$ and an starting state $s_0\in S$ of a PDA, for each $i\in\bbN\land i\leq n$, called a step of the computation, a PDA reads an input character $a_i$, transitions its state according to $\delta$ from $s_{i-1}$ to $s_i$, and may push and/or pop symbols from the stack. Let $w_i=a_1a_2\ldots a_{n-i}$ for $i\in\bbN_0\land i\leq n$, $\gamma_0=Z$, and the stack after the $i$th step be $\gamma_i$. The $i$th step is denoted as $(s_{i-1},w_{i-1},\gamma_{i-1})\vdash(s_i,w_i,\gamma_i)$.
+Given a finite-lenght input word $w=a_1a_2\ldots a_n\in\Sigma^*$ and a starting state $s_0\in S$ of a PDA, for each $i$th step of the computation, a PDA reads an input character $a_i$, transitions its state according to $\delta$ from $s_{i-1}$ to $s_i$, and may push and/or pop symbols from the stack. Let $w_i=a_1a_2\ldots a_{n-i}$ for $i\in\bbN_0\land i\leq n$, $\gamma_0=Z$, and the stack after the $i$th step be $\gamma_i$. The $i$th step is denoted as $(s_{i-1},w_{i-1},\gamma_{i-1})\vdash(s_i,w_i,\gamma_i)$.
 
 For a pushdown automaton accepting by final state, an input word $w\in\Sigma^*$ is an accepting word if $(s_0,w,Z)\vdash^*(f,\varepsilon,\gamma_n)$ for some $f\in F$ and $\gamma_n\in\Gamma^*$. For each pushdown automaton $M$ accepting by final state, the set of all accepting words is denoted as $L(M)$.
 
@@ -182,19 +190,19 @@ For a pushdown automaton accepting by empty stack, an input word $w\in\Sigma^*$ 
 
 \tb{Theorem.} For each pushdown automaton $M$ accepting by final state, there exists a pushdown automaton $M'$ accepting by empty stack such that $L(M)=N(M')$. For each pushdown automaton $M$ accepting by empty stack, there exists a pushdown automaton $M'$ accepting by final state such that $N(M)=L(M')$.
 
-\tb{Theorem.} The set of all recognizable languages of all deterministic pushdown automata is the set of all deterministic context-free language.
+\tb{Theorem.} The collection of all recognizable languages of all deterministic pushdown automata is the collection of all deterministic context-free language.
 \sssc{Transducer}
 An transducer can be defined as five-tuple
 \[M=(\Sigma,\Gamma,S,\delta,\lambda),\]
 where
 \bit
-\item $\Sigma$ is the input alphabet,
-\item $\Gamma$ is the output alphabet,
+\item $\Sigma$ is an input alphabet,
+\item $\Gamma$ is an output alphabet,
 \item $S$ is a set of all states,
-\item $\delta$ is the deterministic or nondeterministic next-state function or transition function,
-\item $\lambda$ is the next-output function which is a partial function
-\[\delta\colon S\times\Sigma\to\Gamma\]
-mapping state-input pairs to outputs.
+\item $\delta$ is a deterministic or nondeterministic next-state function or transition function,
+\item $\lambda$ is a next-output function which is a partial function
+\[\lambda\colon S\times\Sigma\to\Gamma\]
+mapping pairs of current state and input to outputs.
 \eit
 \sssc{Extended output function}
 \bit
@@ -210,27 +218,65 @@ A Moore machine can be defined as a six-tuple
 \[M=(\Sigma,\Gamma,S,s_0,\delta,\lambda),\]
 where
 \bit
-\item $\Sigma$ is the input alphabet,
-\item $\Gamma$ is the output alphabet,
-\item $S$ is a set of all states,
-\item $s_0\in S$ is a starting state,
-\item $\delta$ is the next-state function or transition function which is a partial function
-\[\delta\colon S\times\Sigma\to S\]
-mapping state-input pairs to successor states,
-$\lambda$ is the next-output function.
+\item $\Sigma$ is a finite input alphabet,
+\item $\Gamma$ is a finite output alphabet,
+\item $S$ is a finite non-empty set of all states,
+\item $s_0\in S$ is the starting state,
+\item $\delta$ is a next-state function or transition function,
+\item $\lambda$ is a next-output function, which is a partial function
+\[\lambda\colon S\to\Gamma\]
+mapping current states to outputs.
 \eit
 \sssc{Mealy Machine}
 A Mealy machine can be defined as a six-tuple
 \[M=(\Sigma,\Gamma,S,s_0,\delta,\lambda),\]
 where
 \bit
-\item $\Sigma$ is the input alphabet,
-\item $\Gamma$ is the output alphabet,
-\item $S$ is a set of all states,
-\item $s_0\in S$ is a starting state,
-\item $\delta$ is the next-state function or transition function which is a partial function
-\[\delta\colon S\times\Sigma\to S\]
-mapping state-input pairs to successor states,
-\item $\lambda$ is the next-output function.
+\item $\Sigma$ is a finite input alphabet,
+\item $\Gamma$ is a finite output alphabet,
+\item $S$ is a finite non-empty set of all states,
+\item $s_0\in S$ is the starting state,
+\item $\delta$ is a next-state function or transition function,
+\item $\lambda$ is a next-output function which is a partial function
+\[\lambda\colon S\times\Sigma\to\Gamma\]
+mapping pairs of current state and input to outputs.
 \eit
+\sssc{Turing machine (TM)}
+A Turing machine can be defined as a seven-tuple
+\[M=(\Sigma,b,\Gamma,S,s_0,F,\delta)\]
+where
+\bit
+\item $\Sigma$ is a finite input alphabet,
+\item $b\notin\Sigma$ is a blank symbol,
+\item $\Gamma\supseteq\Sigma\cup\{b\}$ is a finite non-empty tape alphabet,
+\item $S$ is a finite non-empty set of all states,
+\item $s_0\in S$ is the starting state,
+\item $F\subseteq S$ is the set of accepted final states,
+\item $\delta$ is a next-state function or transition function, which
+\bit
+\item For deterministic Turing machine (DTM), is a partial function
+\[\delta\colon (S\setminus F)\times\Sigma\to S\times\Sigma\times\{L,R\}\]
+mapping pairs of current state and tape symbol at current head to triples of successor state, tap symbol to write at current head, and head move direction.
+\item For nondeterministic Turing machine (NTM), is a partial function
+\[\delta\colon (S\setminus F)\times\Sigma\to 2^{S\times\Sigma\times\{L,R\}}\]
+mapping pairs of current state and tape symbol at current head to sets of possible triples of successor state, tap symbol to write at current head, and tape shift direction.
+\eit
+\eit
+A Turing machine reads finite-length and infinite-length input words.
+
+Given input word $w=a_1a_2\ldots$, the tape of a TM is an infinite sequence initially loaded with $w$ in a contiguous block from left to right and loaded with $b$ for the rest of the cells. Let the cell loaded with $a_i$ be of index $i$. The initial head is the cell of index 1. For one-way infinite tape, the cell of index 1 is the leftmost cell, and moving head left at that cell is defined as staying at that cell. For two-way infinite tape, there are infinite cells to both the left and right to the cell of index 1.
+
+Given also a starting state $s_0\in S$ of the TM, for each $i$th step of the computation, the TM reads the tape symbol at the current head, transitions its state according to $\delta$ from $s_{i-1}$ to $s_i$, overwrite the symbol at the current head according to $\delta$, and move the head one cell left or right according to $\delta$.
+
+The TM halts when the pair of the current state and the tape symbol at the current head is not in the domain of $\delta$. If the final state $s_f$ of the TM is in $F$, the halt is an accepting halt and the input word $w$ is an accepting word; otherwise, the halt is a rejecting halt, $s_f$ is a rejecting state, $w$ is a rejecting word.
+\sssc{State-transition table for FSM}
+The one-dimensional state-transition table for a FSM lists the corresponding next states (and outputs if the FSM is also a transducer) for all allowed combinations of input character and current state in rows with each of them in a column.
+
+The two-dimensional state-transition table for a FSM consists of rows of all current states and columns of all input characters and specifies the corresponding next states (and outputs if the FSM is also a transducer) in each cell, where the cell of not allowed combinations of input and current state is typically filled with -.
+
+The states may be represented in meaningless symbols or real meaning.
+\sssc{State diagram for Moore machine}
+\sssc{State diagram for Mealy machine}
+
+
 \end{document}
