@@ -896,14 +896,14 @@ A gate output can only be connected to a limited number of other device inputs w
 \ssc{Switching circuit}
 \sssc{Digital system}
 A system that deals with signals that have discrete values.
+\sssc{Analog system}
+Deals with signals that vary continuously over time. The output might have an error depending on the accuracy of the components used.
 \sssc{Circuit (ckt)}
 A complete electrical network, that is, an interconnection of electrical components, with a closed-loop giving a return path for current.
 \sssc{Switching circuit or digital circuit}
 A circuit that deals with input and output signals that have discrete values, or, as typically the case, a logic circuit.
 \sssc{Logic circuit}
-A circuit that deals with binary input and output signals, that is, either 0 or 1.
-\sssc{Analog system}
-Deals with signals that vary continuously over time. The output might have an error depending on the accuracy of the components used.
+A circuit that deals with binary input and output signals, that is, either 0 or 1. Below, all circuits are logic circuit unless otherwise specified.
 \sssc{System design}
 The highest level of the design of systems, where you break the system into subsystems, specify what each subsystem do, and determine the interconnection and control of the subsystems.
 \sssc{(Digital) logic design}
@@ -1823,12 +1823,6 @@ These maps are called J input (K-)maps and K input (K-)maps. J input maps are th
 \item Realize all inputs $J$ and $K$ with combination circuits with a subset of all outputs $Q$ and $Q'$, constant 1 and 0 sources, and all external control inputs as inputs.
 \een
 \ssc{Analysis of Synchronous Circuit}
-\sssc{Automata theory}
-A synchronous circuit is a finite-state machine (FSM) with all alphabet being $\{0,1\}$, states being sequences of 0's and 1's, next-state function specified by the next-state equations of the flip-flops and the combinational logic of the flip-flop inputs, and the accepted final state typically being all states, and also a transducer for circuits with outputs, with the next-output function specified by the next-state equations of the flip-flops and the combinational logic of the circuit outputs.
-
-A circuit that is a Moore machine is called a Moore circuit. A circuit that is a Mealy machine is called a Mealy circuit.
-
-State-transition tables (typical one-dimensional, resembling truth table) and state diagrams are commonly used to analyze synchronous circuits.
 \sssc{Analysis by Signal Tracing and Timing Charts}
 The basic procedure to find the output sequence of a synchronous circuit resulting from a given input sequence is as follows:
 \ben
@@ -1838,14 +1832,23 @@ The basic procedure to find the output sequence of a synchronous circuit resulti
 \item Determine the output(s) that corresponds to the new states and draw on the timing chart.
 \item Repeat 2, 3, and 4 for each input in the given sequence.
 \een
-\sssc{Next-state Map}
-A next-state map is the K-map of a next-state variable as a function of the present-state variables and for Mealy circuit also input variables.
+\sssc{Automata theory}
+A synchronous digital circuit is a deterministic finite-state machine (DFSM) with input alphabet being $\{0,1\}^m$ where $m$ is the number of input wires (thus it recognize a regular language over $\{0,1\}^m$), states being sequences of 0's and 1's of which the length is the number of flip-flops, next-state function given by the next-state equations of the flip-flops and the combinational logic of the flip-flop inputs, and the accepted final state being all states and thus not concerned in the context of digital circuit.
+
+A synchronous digital circuit with output is a deterministic finite-state transducer (DFST) with the output alphabet being $\{0,1\}^n$ where $n$ is the number of output wires, and next-output function given by the next-state equations of the flip-flops and the combinational logic of the circuit outputs.
+
+When the combinational logic of the circuit outputs depends only on the state of the circuit and independent from the circuit inputs, the circuit is a Moore machine, called a Moore circuit. When the combinational logic of the circuit outputs depends on the combination of the state of the circuit and the circuit inputs, the circuit is a Mealy machine, called a Mealy circuit.
 \sssc{Glitch of Mealy Circuit}
 After the circuit has changed state and before the input is changed, the output may temporarily assume an incorrect value, which we call a false output, glitch, or spike. If the output of the circuit is fed into a second sequential circuit which uses the same clock, the false outputs will not cause any problem because the inputs to the second circuit can cause a change of state only when a falling clock edge occurs.
 
-Because the output of a Moore circuit can change state only when the
-flip-flops change state and not when the input changes, no false outputs can appear
+Because the output of a Moore circuit can change state only when the flip-flops change state and not when the input changes, no false outputs can appear
 in a Moore circuit.
+\sssc{Transition table and state table}
+A transition table is a one-dimensional state-transition table with the states represented by real binary sequences, resembling a truth table. A state table is a transition table but with the states represented by meaningless symbol.
+\sssc{State diagram}
+Same as Moore and Mealy machines, state diagrams are commonly used to analyze Moore and Mealy circuits, with the states typically represented by meaningless symbol.
+\sssc{Next-state Map}
+A next-state map is the K-map of a next-state variable as a function of the present-state variables and for Mealy circuit also input variables.
 \sssc{Analysis by State Transition Table}
 The following method can be used to construct the transition table:
 \ben
@@ -1854,7 +1857,5 @@ The following method can be used to construct the transition table:
 \item Plot a next-state map for each flip-flop.
 \item Combine these maps to form the transition table.
 \een
-
-
 \end{document}
 
