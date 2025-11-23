@@ -2176,6 +2176,52 @@ The DETAIL rule or the LIATE rule is a rule of thumb for integration by parts. I
 \item T: Trigonometric function
 \item E: Exponential function
 \end{itemize}
+\sssc{Notation for two parts}
+We write the integration of
+\[\int f(x)\dd{x}\]
+by parts as:
+\ben
+\item Let
+\[u=g(x),\quad\dd{v}=h(x)\dd{x}\]
+with some functions $g(x)$ and $h(x)$ such that
+\[f(x)\dd{x}=u\dd{v}.\]
+\item Compute
+\[\dd{u}=g'(x)\dd{x},\quad v=\int h(x)\dd{x}\]
+with the constant of integration of $\int h(x)\dd{x}$ arbitrarily chosen to be assigned to $v$.
+\item Integral by parts
+\[\int f(x)\dd{x}=uv-\int v\dd{u}.\]
+\item If $\int v\dd{u}$ is simplified as
+\[\int v\dd{u}=k\int f(x)\dd{x}+I(x)+C\]
+with some constant $k\notin\{-1,0\}$, we write
+\[\ba
+\int f(x)\dd{x}&=uv-\int v\dd{u}\\
+&=uv-k\int f(x)\dd{x}-I(x)+C\\
+&=\frac{1}{k+1}\qty(uv-I(x))+C.
+\ea\]
+\een
+Take
+\[\int e^{ax}\sin(bx)\dd{x}\]
+for example.
+
+Let:
+\[u=\sin(bx),\quad\dd{v}=e^{ax}\dd{x}.\]
+\[\dd{u}=b\cos(bx)\dd{x},\quad v=\int e^{ax}\dd{x}=\frac{1}{a}e^{ax}.\]
+\[\ba
+\int e^{ax}\sin(bx)\dd{x}&=\int u\dd{v}=uv-\int v\dd{u}\\
+&=\frac{1}{a}e^{ax}\sin(bx)-\frac{b}{a}\int e^{ax}\cos(bx)\dd{x}.
+\ea\]
+\[w=\cos(bx).\]
+\[\dd{w}=-b\sin(bx).\]
+\[\ba
+\int e^{ax}\cos(bx)\dd{x}&=\int w\dd{v}=wv-\int v\dd{w}\\
+&=\frac{1}{a}e^{ax}\cos(bx)+\frac{b}{a}\int e^{ax}\sin(bx)\dd{x}.
+\ea\]
+\[\ba
+\int e^{ax}\sin(bx)\dd{x}&=\frac{1}{a}e^{ax}\sin(bx)-\frac{b}{a}\qty(\frac{1}{a}e^{ax}\cos(bx)+\frac{b}{a}\int e^{ax}\sin(bx)\dd{x})\\
+&=\frac{1}{a}e^{ax}\sin(bx)-\frac{b}{a^2}e^{ax}\cos(bx)-\frac{b^2}{a^2}\int e^{ax}\sin(bx)\dd{x}\\
+&=\frac{a^2}{a^2+b^2}\qty(\frac{1}{a}e^{ax}\sin(bx)-\frac{b}{a^2}e^{ax}\cos(bx))+C\\
+&=\frac{e^{ax}}{a^2+b^2}\qty(a\sin(bx)-b\cos(bx))+C.
+\ea\]
 \ssc{Leibniz integral rule (for differentiation under the integral sign) (（積分符號內取微分的）萊布尼茲積分法則)}
 \sssc{Basic form for constant limits}
 Let $a,b\in\mathbb{R}$, $f(x,t)$ be a function with domain $\mathbb{R}^2$, and the following integral exists. Then:
@@ -2701,9 +2747,6 @@ Differentiate both side:
     \[\int\ln(x)\dd{x}=x\ln(x)-\int x\frac{1}{x}\dd{x}=x\ln(x)-x+C.\]
 \end{proof}
 \[\int\qty(\ln(x))^n\dd{x}=x\qty(\ln(x))^n-n\int\qty(\ln(x))^{n-1}\dd{x},\quad n\in\bbN.\]
-\begin{proof}
-PLACEHOLDER
-\end{proof}
 \sssc{Exponential function}
 \[\int e^{nx}\dd{x}=\frac{1}{n}e^{nx}+C,\quad n\neq 0.\]
 \sssc{Sine function}
@@ -2715,7 +2758,11 @@ PLACEHOLDER
 \end{proof}
 \[\int\sin^n(x)\dd{x}=-\frac{1}{n}\sin^{n-1}(x)\cos(x)+\frac{n-1}{n}\int\sin^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
 \begin{proof}
-PLACEHOLDER
+\[\ba
+\int\sin^n(x)\dd{x}&=-\sin^{n-1}(x)\cos(x)-(n-1)\int\sin^{n-2}(x)\cos^2(x)\dd{x}\\
+&=-\sin^{n-1}(x)\cos(x)-(n-1)\int\sin^{n-2}(x)\dd{x}+(n-1)\int\sin^n(x)\dd{x}\\
+&=-\frac{1}{n}\sin^{n-1}(x)\cos(x)+\frac{n-1}{n}\int\sin^{n-2}(x)\dd{x}
+\ea\]
 \end{proof}
 \sssc{Cosine function}
 \[\int\cos(x)\dd{x}=\sin(x)+C.\]
@@ -2726,33 +2773,61 @@ PLACEHOLDER
 \end{proof}
 \[\int\cos^n(x)\dd{x}=\frac{1}{n}\cos^{n-1}(x)\sin(x)+\frac{n-1}{n}\int\cos^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
 \begin{proof}
-PLACEHOLDER
+\[\ba
+\int\cos^n(x)\dd{x}&=\cos^{n-1}(x)\sin(x)+(n-1)\int\cos^{n-2}(x)\sin^2(x)\dd{x}\\
+&=\cos^{n-1}(x)\sin(x)+(n-1)\int\cos^{n-2}(x)\dd{x}-(n-1)\int\cos^n(x)\dd{x}\\
+&=\frac{1}{n}\cos^{n-1}(x)\sin(x)+\frac{n-1}{n}\int\cos^{n-2}(x)\dd{x}
+\ea\]
 \end{proof}
 \sssc{Tangent function}
 \[\int\tan(x)\dd{x}=-\ln|\cos(x)|+C=\ln|\sec(x)|+C.\]
 \begin{proof}
-PLACEHOLDER
+\[\ba
+\int\tan(x)\dd{x}&=-\int\frac{-\sin(x)}{\cos(x)}\dd{x}\\
+&=-\ln|\cos(x)|+C=\ln|\sec(x)|+C
+\ea\]
 \end{proof}
 \[\int\tan^2(x)\dd{x}=\tan(x)-x+C.\]
 \begin{proof}
-PLACEHOLDER
+\[\ba
+\int\tan^2(x)\dd{x}&=\int\sec^2(x)-1\dd{x}\\
+&=\tan(x)-x+C
+\ea\]
 \end{proof}
 \[\int\tan^n(x)\dd{x}=\frac{1}{n-1}\tan^{n-1}(x)-\int\tan^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
 \begin{proof}
-PLACEHOLDER
+\[\int\tan^n(x)\dd{x}=\int\tan^{n-2}(x)\sec^2(x)\dd{x}-\int\tan^{n-2}(x)\dd{x}\]
+\[u=\tan^{n-2}(x),\quad\dd{v}=\sec^2(x)\dd{x},\dd{u}=(n-2)\tan^{n-3}(x)\sec^2(x),\quad v=\tan(x).\]
+\[\ba
+\int\tan^{n-2}(x)\sec^2(x)\dd{x}&=\tan^{n-1}(x)-(n-2)\int\tan^{n-2}(x)\sec^2(x)\dd{x}\\
+&=\frac{1}{n-1}\tan^{n-1}(x)
+\ea\]
+\[\int\tan^n(x)\dd{x}=\frac{1}{n-1}\tan^{n-1}(x)-\int\tan^{n-2}(x)\dd{x}.\]
 \end{proof}
 \sssc{Cotangent function}
 \[\int\cot(x)\dd{x}=\ln|\sin(x)|+C.\]
 \begin{proof}
-PLACEHOLDER
+\[\ba
+\int\cot(x)\dd{x}&=\int\frac{-\cos(x)}{\sin(x)}\dd{x}\\
+&=\ln|\sin(x)|+C
+\ea\]
 \end{proof}
 \[\int\cot^2(x)\dd{x}=-\cot(x)-x+C.\]
 \begin{proof}
-PLACEHOLDER
+\[\ba
+\int\cot^2(x)\dd{x}&=\int\csc^2(x)-1\dd{x}\\
+&=-\cot(x)-x+C
+\ea\]
 \end{proof}
 \[\int\cot^n(x)\dd{x}=-\frac{1}{n-1}\cot^{n-1}(x)-\int\cot^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
 \begin{proof}
-PLACEHOLDER
+\[\int\cot^n(x)\dd{x}=\int\cot^{n-2}(x)\csc^2(x)\dd{x}-\int\cot^{n-2}(x)\dd{x}\]
+\[u=\cot^{n-2}(x),\quad\dd{v}=\csc^2(x)\dd{x},\dd{u}=-(n-2)\cot^{n-3}(x)\csc^2(x),\quad v=-\cot(x).\]
+\[\ba
+\int\cot^{n-2}(x)\csc^2(x)\dd{x}&=-\cot^{n-1}(x)+(n-2)\int\cot^{n-2}(x)\csc^2(x)\dd{x}\\
+&=\frac{1}{n-1}\cot^{n-1}(x)
+\[\int\cot^n(x)\dd{x}=-\frac{1}{n-1}\cot^{n-1}(x)-\int\cot^{n-2}(x)\dd{x}.\]
+\ea\]
 \end{proof}
 \sssc{Secant function}
 \[\int\sec(x)\dd{x}=\ln|\tan(x)+\sec(x)|+C.\]
