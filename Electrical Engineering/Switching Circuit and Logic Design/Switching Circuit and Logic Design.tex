@@ -1417,12 +1417,6 @@ Unless otherwise specified, a gated latch is active-high. A active-low gated lat
 The term flip-flop has historically referred generically to both level-triggered and edge-triggered latch. Some modern authors, however, reserve the term flip-flop exclusively for edge-triggered latch and use the term gated latch or simply latch for level-triggered latch. The terms "edge-triggered", and "level-triggered" may be used to avoid ambiguity.
 
 The implementation a type of flip-flop with another type of flip-flop is called conversion.
-\sssc{Response time or Delay time}
-The response time or delay time $\epsilon$ of a latch or flip-flop is the time it needs to react to a input change. If an impulse of input lasts less than $\epsilon$, the latch or flip-flop will not react to it.
-\sssc{State variable}
-A state variable is a binary variable that represents the current state of a sequential circuit.
-
-The state variable stored in a latch is usually denoted as $Q$ and sometimes called the same as the latch.
 \sssc{Metastable state}
 A metastable state is a state where the state variables in a sequential circuit
 \bit
@@ -1431,9 +1425,23 @@ A metastable state is a state where the state variables in a sequential circuit
 \eit
 where a truly stable state is a state where the state variables return to the value of them in the state  if any noise occurs.
 
+The situation for a latch to be in a metastable state is called metastability.
+
 The probability that metastability lasts decays exponentially over time.
 
 Take the sequential circuit consists of two inverters with the output of one being the input of another for example. There are two stable states (excluding metastable state), 0 and 1, and one metastable state, a voltage right in the middle of 0 and 1.
+\sssc{Latch response time or delay time}
+The response time or delay time $\epsilon$ of an asynchoronous or level-triggered latch is the time it needs for its state to react to a input change. If an impulse of input lasts less than $\epsilon$, the latch or flip-flop will not react to it.
+\sssc{Flip-flop setup time and hold time}
+The setup time $t_s$ of a flip-flop is the minimum time before an acitve edge that the data inputs must be stable so that the flip-flop can correctly capture it.
+
+The hold time $t_h$ of a flip-flop is the minimum time afte an acitve edge that the data inputs must be stable to ensure the flip-flop captures it correctly.
+
+Violating setup or hold times can cause metastability.
+\sssc{State variable}
+A state variable is a binary variable that represents the current state of a sequential circuit.
+
+The state variable stored in a latch is usually denoted as $Q$ and sometimes called the same as the latch.
 \sssc{Present state and next state}
 When discussing latches and flip-flops, we the term present state $Q=Q(t)$ to denote the state of the $Q$ output of the latch or flip-flop at the time input signal changes, and the term next state $Q^+=Q(t+\epsilon)$ to denote the state of the $Q$ output after the latch or flip-flop has reacted to the input change and stabilized.
 \sssc{Next-state Equation or Characteristic Equation}
@@ -1660,6 +1668,76 @@ It can be implemented with a T flip-flop, in which $X$ is the input $T$ and $Z$ 
 For even parity, the state $Q$ in the T flip-flop must be cleared to $0$ before the start of a data input string. For odd parity, the state $Q$ in the T flip-flop must be preset to $1$ before the start of a data input string.
 
 The $X$ input must be synchronized with the clock so that it assumes its next value before the next active clock edge.
+\ssc{Analysis of Synchronous Circuits}
+\sssc{Analysis by signal tracing}
+The basic procedure to find the output sequence of a synchronous circuit resulting from a given input sequence is as follows:
+\ben
+\item Assume an initial state of the flip-flops (all flip-flops reset to 0 unless otherwise specified).
+\item For the first input in the given sequence, determine the circuit output(s) and flip-flop inputs and draw on the timing chart.
+\item Determine the new set of flip-flop states after the next active clock edge and draw on the timing chart.
+\item Determine the output(s) that corresponds to the new states and draw on the timing chart.
+\item Repeat 2, 3, and 4 for each input in the given sequence.
+\een
+\sssc{As automata}
+A synchronous digital circuit is a Mealy machine that transitions every active edge, called a Mealy circuit, with input alphabet being $\{0,1\}^m$ where $m$ is the number of input wires (thus it recognize a regular language over $\{0,1\}^m$), with the variable representing elements in it denoted as $X$, the output alphabet being $\{0,1\}^n$ where $n$ is the number of output wires, with the variable representing elements in it denoted as $Z$, states being sequences of 0's and 1's of which the length is the number of flip-flops, with the present state denoted as $S$ and the next state denoted as $S^+$, next-state function, denoted as $\delta$, given by the next-state equations of the flip-flops and the combinational logic of the flip-flop inputs as a function of present state and circuit inputs, and next-output function, denoted as $\lambda$, given by the next-state equations of the flip-flops and the combinational logic of the circuit outputs as a function of present state and circuit inputs.
+
+When the combinational logic depends only on the state of the circuit and independent from the circuit inputs, the circuit is a Moore machine, called a Moore circuit, with next-output function, denoted as $\lambda$, given by the next-state equations of the flip-flops and the combinational logic of the circuit outputs as a function of present state.
+
+A Mealy circuit can be specified with equations
+\[S^+=\delta(S,X),\quad Z=\lambda(S,X).\]
+
+A Moore circuit can be specified with equations
+\[S^+=\delta(S,X),\quad Z=\lambda(S).\]
+
+Note that the glitches are not considered and typically cannot be detected when analyzing as automata because the inputs are read at the active clock edge, and no provision is made for extra input changes between active edges.
+\sssc{Glitch of Mealy Circuit}
+After the circuit has changed state and before the input is changed, the output may temporarily assume an incorrect value, which we call a false output, glitch, or spike. If the output of the circuit is fed into a second sequential circuit which uses the same clock, the false outputs will not cause any problem because the inputs to the second circuit can cause a change of state only when a falling clock edge occurs. The best time to read the output is just before the active edge of the clock, because the input must be stable at that time and thus the output will be correct.
+
+Because the output of a Moore circuit can change state only when the flip-flops change state and not when the input changes, no false outputs can appear in a Moore circuit.
+\sssc{Transition table and state table}
+A transition table is a one-dimensional state-transition table with the states represented by real binary sequences, resembling a truth table. A state table is a transition table but with the states represented by meaningless symbol.
+\sssc{State diagram or state graph}
+Same as Moore and Mealy machines, state diagrams (also called state graphs) are commonly used to analyze Moore and Mealy circuits, with the states typically represented by meaningless symbol and a starting state usually represented by an arrow with no origin pointing to the state or not shown.
+\sssc{Next-state Map}
+A next-state map is the K-map of a next-state variable as a function of the present-state variables and for Mealy circuit also input variables.
+\sssc{Analysis by state table or transition table}
+The following method can be used to construct a state table or a transition table:
+\ben
+\item Determine the flip-flop input equations and the final output equations from the circuit.
+\item Derive the next-state equation for each flip-flop from its input equations.
+\item Plot a next-state map for each flip-flop.
+\item Combine these maps to form the table.
+\item If time chart is wanted,
+\ben
+\item For the first input and starting state, read the present output and plot them.
+\item Read the next state and plot it.
+\item For Mealy circuit if glitches need to be plotted, go to the row in the table which corresponds to the next state and the old input column and plot the output. If the input changes several times before it assumes its correct value, the output may also change several times, plot them. This may be a false output. Otherwise, omit this step.
+\item The input must assume its correct value before active edge. Read the next output and plot it.
+\item Repeat step 2 to 4.
+\een
+\een
+\sssc{Clock skew}
+Clock skew $t_{sk}$ is the difference in arrival times of a clock signal at different components in a synchronous digital circuit, due to variance in propagation delay.
+\sssc{General model for Mealy circuits}
+The general model of Mealy cicuits consists of $k$ flip-flops with a common clock and a combinational subcircuit with inputs from outside of the Mealy circuit $X_1,X_2,\ldots,X_m$, inputs that are flip-flops outputs $Q_1,Q_2,\ldots,Q_k$, outputs as inputs for flip-flops
+\[{I_1}_1,{I_1}_2,\ldots,{I_1}_{n_1},{I_2}_1,{I_2}_2,\ldots,{I_2}_{n_2},\ldots,{I_k}_1,{I_k}_2,\ldots,{I_k}_{n_k}\]
+with ${I_i}_1,{I_i}_2,\ldots,{I_i}_{n_i}$ being the inputs of the $i$th flip-flop, and outputs to outside of the Mealy circuit $Z_1,Z_2,\ldots,Z_n$.
+
+We can determine the fastest clock speed (the minimum clock period) from the
+general model of the Mealy circuitWe can determine the fastest clock speed (the minimum clock period) from the general model of the Mealy circuit.
+the clock period $t_{clk}$ 
+For any flip-flop in the circuit with output propagation delay $t_p$, combinational circuit propagation delay to the flip-flop input $t_c$, the maximum time $t_x$ the inputs $X_i$ that the flip-flop input is dependent on need to be stable before the next active clock edge, the flip-flop setup time $t_s$, and clock skew $t_{sk}$ between the flip-flops that receive the clock signal first and the flip-flop.
+\[t_{clk}\geq\max\{t_p,t_x\}+t_c+t_s+t_{sk}.\]
+Another constraint is that for any flip-flop in the circuit with also hold time $t_h$ and the maximum clock skew $t_{msk}$ between it and any flip-flop whose inputs are dependent on the flip-flop output,
+\[t_p+t_c\geq t_{msk}+t_h.\]
+\sssc{General model for Moore circuits}
+The general model of Moore cicuits consists of $k$ flip-flops with a common clock, a combinational subcircuit with inputs from outside of the Mealy circuit $X_1,X_2,\ldots,X_m$ and outputs as inputs for flip-flops
+\[{I_1}_1,{I_1}_2,\ldots,{I_1}_{n_1},{I_2}_1,{I_2}_2,\ldots,{I_2}_{n_2},\ldots,{I_k}_1,{I_k}_2,\ldots,{I_k}_{n_k}\]
+with ${I_i}_1,{I_i}_2,\ldots,{I_i}_{n_i}$ being the inputs of the $i$th flip-flop, and another combinational subcircuit with inputs that are flip-flops outputs $Q_1,Q_2,\ldots,Q_k$ and outputs to outside of the Mealy circuit $Z_1,Z_2,\ldots,Z_n$.
+\sssc{General model for synchoronous circuits without outputs}
+The general model of Moore cicuits consists of $k$ flip-flops with a common clock and a combinational subcircuit with inputs from outside of the Mealy circuit $X_1,X_2,\ldots,X_m$ and outputs as inputs for flip-flops
+\[{I_1}_1,{I_1}_2,\ldots,{I_1}_{n_1},{I_2}_1,{I_2}_2,\ldots,{I_2}_{n_2},\ldots,{I_k}_1,{I_k}_2,\ldots,{I_k}_{n_k}\]
+with ${I_i}_1,{I_i}_2,\ldots,{I_i}_{n_i}$ being the inputs of the $i$th flip-flop.
 \ssc{Register}
 \sssc{Register}
 A register can load data inputs in parallel and output stored data in parallel. A $n$ bit register consists of $n$ edge-triggered D flip-flops, each with $D$ being data input and $Q$ being data output. The flip-flops usually share common clock input and asynchronous clear and/or preset inputs. If using gated clocks, the clock is gated with a common signal called load; if using clock enable, the flip-flops share a common clock enable input called load. When load=1 at an active edge, the data
@@ -1723,7 +1801,7 @@ When $(S_1,S_0)=(1,0)$ at an active edge, the register shifts a bit right; when 
 An $n$-bit parallel-in parallel-out (PIPO) bidirectional shift register is an $n$-bit PISO register additional $n-2$ outputs connected to the outputs $Q$ of the flip-flops except the flip-flops storing the least and most significant bits. Those outputs together with the original two SOs compose the parallel output of the register.
 \sssc{Serial-In Parallel-Out (SIPO) Bidirectional Shift Register}
 An $n$-bit serial-in parallel-out (SIPO) bidirectional shift register is an $n$-bit SISO register additional $n-2$ outputs connected to the outputs $Q$ of the flip-flops except the flip-flops storing the least and most significant bits. Those outputs together with the original two SOs compose the parallel output of the register.
-\ssc{Counter}
+\ssc{Synchoronous Counter}
 \sssc{Counter}
 A counter is a sequential circuit whose state repeats every fixed finite number of active edges, called count cycle. The cyclic sequence of the states is called state loop. 
 \sssc{Transition Cycle}
@@ -1822,42 +1900,10 @@ Q_k & Q^+_k & J_k & K_k \\\hline
 These maps are called J input (K-)maps and K input (K-)maps. J input maps are the same as the next-state maps with all cells in $Q_k=1$ half replaced with X. K input maps are the same as the next-state maps with all cells in $Q_k=0$ half replaced with X and $Q_k=1$ half complemented.
 \item Realize all inputs $J$ and $K$ with combination circuits with a subset of all outputs $Q$ and $Q'$, constant 1 and 0 sources, and all external control inputs as inputs.
 \een
-\ssc{Analysis of Synchronous Circuits}
-\sssc{Analysis by signal tracing}
-The basic procedure to find the output sequence of a synchronous circuit resulting from a given input sequence is as follows:
-\ben
-\item Assume an initial state of the flip-flops (all flip-flops reset to 0 unless otherwise specified).
-\item For the first input in the given sequence, determine the circuit output(s) and flip-flop inputs and draw on the timing chart.
-\item Determine the new set of flip-flop states after the next active clock edge and draw on the timing chart.
-\item Determine the output(s) that corresponds to the new states and draw on the timing chart.
-\item Repeat 2, 3, and 4 for each input in the given sequence.
-\een
-\sssc{As automata}
-A synchronous digital circuit is a deterministic finite-state machine (DFSM) that transitions every active edge, with input alphabet being $\{0,1\}^m$ where $m$ is the number of input wires (thus it recognize a regular language over $\{0,1\}^m$), states being sequences of 0's and 1's of which the length is the number of flip-flops, next-state function given by the next-state equations of the flip-flops and the combinational logic of the flip-flop inputs, and the accepted final states being all states and thus not concerned in the context of digital circuit.
+\ssc{Sqeuence Detector}
 
-A synchronous digital circuit with output is a deterministic finite-state transducer (DFST) and a Mealy machine as the accepted final states is not concerned and thus called a Mealy circuit, with the output alphabet being $\{0,1\}^n$ where $n$ is the number of output wires, and next-output function given by the next-state equations of the flip-flops and the combinational logic of the circuit outputs.
 
-When the combinational logic of the circuit outputs depends only on the state of the circuit and independent from the circuit inputs, the circuit is a Moore machine, called a Moore circuit.
 
-Note that the glitches are not considered and typically cannot be detected when analyzing as automata because the inputs are read at the active clock edge, and no provision is made for extra input changes between active edges.
-\sssc{Glitch of Mealy Circuit}
-After the circuit has changed state and before the input is changed, the output may temporarily assume an incorrect value, which we call a false output, glitch, or spike. If the output of the circuit is fed into a second sequential circuit which uses the same clock, the false outputs will not cause any problem because the inputs to the second circuit can cause a change of state only when a falling clock edge occurs. The best time to read the output is just before the active edge of the clock, because the input must be stable at that time and thus the output will be correct.
 
-Because the output of a Moore circuit can change state only when the flip-flops change state and not when the input changes, no false outputs can appear in a Moore circuit.
-\sssc{Transition table and state table}
-A transition table is a one-dimensional state-transition table with the states represented by real binary sequences, resembling a truth table. A state table is a transition table but with the states represented by meaningless symbol.
-\sssc{State diagram}
-Same as Moore and Mealy machines, state diagrams are commonly used to analyze Moore and Mealy circuits, with the states typically represented by meaningless symbol and a starting state usually represented by an arrow with no origin pointing to the state or not shown.
-\sssc{Next-state Map}
-A next-state map is the K-map of a next-state variable as a function of the present-state variables and for Mealy circuit also input variables.
-\sssc{Analysis by state table or transition table}
-The following method can be used to construct a state table or a transition table:
-\ben
-\item Determine the flip-flop input equations and the final output equations from the circuit.
-\item Derive the next-state equation for each flip-flop from its input equations.
-\item Plot a next-state map for each flip-flop.
-\item Combine these maps to form the transition table.
-\item If time chart (with glitches) is wanted, first
-\een
 \end{document}
 

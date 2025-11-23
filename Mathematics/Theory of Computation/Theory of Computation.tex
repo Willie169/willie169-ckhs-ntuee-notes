@@ -109,7 +109,7 @@ where
 \item $S$ is a set of all states.
 \item $s_0\in S$ is the starting state (also called start state).
 \item $\delta\subseteq S\times\Sigma\times S$ is a transition function (also called next-state function), which are triples of current state, input character, and next state, in which each element is denoted as
-\[(s,\sigma)\to t\]
+\[(s,\sigma)\to t\quad\tx{or}\quad\delta(s,\sigma)=t\]
 for $(s,\sigma,t)\in\delta$.
 
 A general transition function and a general automaton is called nondeterministic. If $\delta$ satisfies the constraint that
@@ -146,7 +146,7 @@ where
 \item $S$ is a set of all states.
 \item $s_0\in S$ is the starting state.
 \item $\delta\subseteq S\times\Sigma\times S\times\Gamma$ is a transition function with output, which are four-tuples of current state, input character, next state, and (next) output, in which each element is denoted as
-\[(s,\sigma)\to (t,x)\]
+\[(s,\sigma)\to (t,x)\quad\tx{or}\quad\delta(s,\sigma)=(t,x)\]
 for $(s,\sigma,t,x)\in\delta$.
 
 A general transition function with output and a general transducer is called nondeterministic. If $\delta$ satisfies the constraint that
@@ -154,7 +154,7 @@ A general transition function with output and a general transducer is called non
 the transition function with output and the transducer is called deterministic. A deterministic transition function with output can also be written as a two partial function
 \[\delta\colon S\times\Sigma\to S\]
 mapping pairs of current state and input character to next states and called (deterministic) transition function, and
-\[G\colon S\times\Sigma\to\Gamma\]
+\[\lambda\colon S\times\Sigma\to\Gamma\]
 mapping pairs of current state and input to output characters and called (deterministic) next-output function or output function.
 \eit
 Given an input word $w=a_1a_2\ldots a_n\in\Sigma^*$, for the $i$th step of the computation (also called the $i$th transition), for all $(s_{i-1},a_i,s_i,x_i)\in\delta$, the transduce may transition from $s_{i-1}$ to $s_i$ and outputs $x_i$, denoted as $s_{i-1}\vdash s_i$ or $(s_{i-1},w_i,\gamma_{i-1})\vdash (s_i,w_{i+1},\gamma_i)$, where $w_i=a_ia_{i+1}\ldots a_n$, $w_{n+1}=\varepsilon$, $\gamma_i=x_1x_2\ldots x_i$, and $\gamma_0=\varepsilon$. $s_n$ is called the final state.
@@ -200,7 +200,7 @@ where
 \item $S$ is a finite non-empty set of all states.
 \item $s_0\in S$ is the starting state.
 \item $\delta\colon S\times\Sigma\to S$ is a deterministic transition function.
-\item $G$ is a deterministic next-output function.
+\item $\lambda$ is a deterministic next-output function.
 \eit
 \sssc{Moore machine}
 A Moore machine is a Mealy machine whose output only depends on present state and not on input and can be defined as a six-tuple
@@ -212,8 +212,8 @@ where
 \item $S$ is a finite non-empty set of all states.
 \item $s_0\in S$ is the starting state.
 \item $\delta\colon S\times\Sigma\to S$ is a deterministic transition function.
-\item $G$ is a deterministic next-output function, which is a partial function
-\[G\colon S\to\Gamma\]
+\item $\lambda$ is a deterministic next-output function, which is a partial function
+\[\lambda\colon S\to\Gamma\]
 mapping current states to output characters.
 \eit
 \sssc{Pushdown automaton (PDA)}
@@ -228,7 +228,7 @@ where
 \item $S$ is a finite non-empty set of all states.
 \item $s_0\in S$ is the starting state.
 \item $\delta\subseteq S\times(\Sigma\cup\{\varepsilon\})\times\Gamma\times S\times\Gamma^*$ is a transition function, which are five-tuples of current state, input character or empty string, current stack symbol to pop, next state, and stack word to push, in which each element is denoted as
-\[(s,\sigma,x)\to (t,\gamma)\]
+\[(s,\sigma,x)\to (t,\gamma)\quad\tx{or}\quad\delta(s,\sigma,x)=(t,\gamma)\]
 for $(s,\sigma,x,t,\gamma)\in\delta$.
 
 A general transition function and a general PDA is called nondeterministic. If $\delta$ satisfies the constraints that
@@ -266,7 +266,7 @@ where
 \item $S$ is a finite non-empty set of all states.
 \item $s_0\in S$ is the starting state.
 \item $\delta\subseteq S\times\Gamma\times S\times\Gamma\times\{L,S,R\}$ is a transition function, which are five-tuples of current state, current tape symbol at head, next state, tape symbol to overwrite at head, and head movement, where $L$ means moving head one cell left, $S$ means not moving head, $R$ means moving head one cell right, in which each element is denoted as
-\[(s,x)\to (t,y,c)\]
+\[(s,x)\to (t,y,c)\quad\tx{or}\quad\delta(s,x)=(t,y,c)\]
 for $(s,x,t,y,c)\in\delta$.
 
 A general transition function and a general Turing machine is called nondeterministic. If $\delta$ satisfies the constraint that
@@ -295,10 +295,13 @@ where
 \item $\Gamma\supseteq\Sigma\cup\{l,r\}$ is a finite tape alphabet.
 \item $S$ is a finite non-empty set of all states.
 \item $s_0\in S$ is the starting state.
-\item $\delta\subseteq S\times\Gamma\times S\times(\Gamma\setminus\{l,r\})\times\{L,S,R\}$ is a transition function with the constraints that
+\item $\delta\subseteq S\times\Gamma\times S\times(\Gamma\setminus\{l,r\})\times\{L,S,R\}$ is a transition function, which are five-tuples of current state, current tape symbol at head, next state, tape symbol to overwrite at head, and head movement, where $L$ means moving head one cell left, $S$ means not moving head, $R$ means moving head one cell right, with the constraints that
 \[(s,l,t,y,c)\in\delta\implies c\neq L,\]
 and
-\[(s,r,t,y,c)\in\delta\implies c\neq R.\]
+\[(s,r,t,y,c)\in\delta\implies c\neq R,\]
+in which each element is denoted as
+\[(s,x)\to (t,y,c)\quad\tx{or}\quad\delta(s,x)=(t,y,c)\]
+for $(s,x,t,y,c)\in\delta$.
 
 A general transition function and a general LBA is called nondeterministic. If $\delta$ satisfies the constraint that
 \[\forall (s,x)\in S\times\Gamma\colon(s,x,t,y,c)\in\delta\land(s,x,u,z,d)\in\delta\implies t=u\land y=z\land c=d,\]
@@ -325,15 +328,15 @@ A one-dimensional state-transition table lists the corresponding next states (an
 A two-dimensional state-transition table consists of rows of all current states and columns of all input characters and specifies the corresponding next states (and outputs for FST) in each cell, where the cell of not allowed combinations of input and current state is typically filled with -.
 
 The states may be represented in meaningless symbols or real meaning.
-\sssc{State diagram for Moore machine}
-A state diagram for Moore machine is a directes graph with
+\sssc{State diagram or state graph for Moore machine}
+A state diagram (also called a state graph) for Moore machine is a directes graph with
 \bit
 \item Each vertex being a state, normally represented by circles with symbols of states in the top half and output at the state in the bottom half.
 \item Each directed edge being a transition, normally drawn as an arrow from present state to next state with the input character read on the edge.
 \item The starting state is usually represented by an arrow with no origin pointing to the state or not shown.
 \eit
-\sssc{State diagram for Mealy machine}
-A state diagram for Mealy machine is a directes graph with
+\sssc{State diagram or state graph for Mealy machine}
+A state diagram (also called a state graph) for Mealy machine is a directes graph with
 \bit
 \item Each vertex being a state, normally represented by circles with symbols of states.
 \item Each directed edge being a transition, normally drawn as an arrow from present state to next state with the input character read on and output character of the transition on the edge.
