@@ -1697,7 +1697,7 @@ Because the output of a Moore circuit can change state only when the flip-flops 
 \sssc{Transition table and state table}
 A transition table is a one-dimensional state-transition table with the states represented by real binary sequences, resembling a truth table. A state table is a transition table but with the states represented by meaningless symbol.
 \sssc{State diagram or state graph}
-Same as Moore and Mealy machines, state diagrams (also called state graphs) are commonly used to analyze Moore and Mealy circuits, with the states typically represented by meaningless symbol and a starting state usually represented by an arrow with no origin pointing to the state or not shown.
+Same as Moore and Mealy machines, state diagrams (also called state graphs) are commonly used to analyze Moore and Mealy circuits, with the states typically represented by meaningless symbol and a starting state usually represented by an arrow with no origin pointing to the state, a subscript 0 in the symbol of the state (often $s_0$ or $S_0$), or not shown.
 \sssc{Next-state Map}
 A next-state map is the K-map of a next-state variable as a function of the present-state variables and for Mealy circuit also input variables.
 \sssc{Analysis by state table or transition table}
@@ -1723,13 +1723,12 @@ The general model of Mealy cicuits consists of $k$ flip-flops with a common cloc
 \[{I_1}_1,{I_1}_2,\ldots,{I_1}_{n_1},{I_2}_1,{I_2}_2,\ldots,{I_2}_{n_2},\ldots,{I_k}_1,{I_k}_2,\ldots,{I_k}_{n_k}\]
 with ${I_i}_1,{I_i}_2,\ldots,{I_i}_{n_i}$ being the inputs of the $i$th flip-flop, and outputs to outside of the Mealy circuit $Z_1,Z_2,\ldots,Z_n$.
 
-We can determine the fastest clock speed (the minimum clock period) from the
-general model of the Mealy circuitWe can determine the fastest clock speed (the minimum clock period) from the general model of the Mealy circuit.
-the clock period $t_{clk}$ 
-For any flip-flop in the circuit with output propagation delay $t_p$, combinational circuit propagation delay to the flip-flop input $t_c$, the maximum time $t_x$ the inputs $X_i$ that the flip-flop input is dependent on need to be stable before the next active clock edge, the flip-flop setup time $t_s$, and clock skew $t_{sk}$ between the flip-flops that receive the clock signal first and the flip-flop.
+We can determine the fastest clock speed (the minimum clock period) from the general model of the Mealy circuit.
+
+For any flip-flop in the circuit with output propagation delay $t_p$, combinational circuit propagation delay to the flip-flop input $t_c$, the maximum time $t_x$ the inputs $X_i$ that the flip-flop input is dependent on need to be stable before the next active clock edge, the flip-flop setup time $t_s$, and clock skew $t_{sk}$ between the flip-flops that receive the clock signal first and the flip-flop, the clock period $t_{clk}$ must satisfy
 \[t_{clk}\geq\max\{t_p,t_x\}+t_c+t_s+t_{sk}.\]
-Another constraint is that for any flip-flop in the circuit with also hold time $t_h$ and the maximum clock skew $t_{msk}$ between it and any flip-flop whose inputs are dependent on the flip-flop output,
-\[t_p+t_c\geq t_{msk}+t_h.\]
+Another constraint is that for any flip-flop in the circuit with also hold time $t_h$ and the clock skew ${t_{sk}}_i$ between it and any flip-flop $i$ whose next input are dependent on the flip-flop output, the circuit must satisfy
+\[t_p+t_c\geq\max_i{t_{sk}}_i+t_h.\]
 \sssc{General model for Moore circuits}
 The general model of Moore cicuits consists of $k$ flip-flops with a common clock, a combinational subcircuit with inputs from outside of the Mealy circuit $X_1,X_2,\ldots,X_m$ and outputs as inputs for flip-flops
 \[{I_1}_1,{I_1}_2,\ldots,{I_1}_{n_1},{I_2}_1,{I_2}_2,\ldots,{I_2}_{n_2},\ldots,{I_k}_1,{I_k}_2,\ldots,{I_k}_{n_k}\]
@@ -1901,9 +1900,25 @@ These maps are called J input (K-)maps and K input (K-)maps. J input maps are th
 \item Realize all inputs $J$ and $K$ with combination circuits with a subset of all outputs $Q$ and $Q'$, constant 1 and 0 sources, and all external control inputs as inputs.
 \een
 \ssc{Sqeuence Detector}
+\sssc{Definition}
+A sequence detector is a Mealy circuit with a serial input $X\in\{0,1\}$ is read and an output $Z$ that when the sequence of the last $n$ characters in the input word read is a prescribed string $w$, it outputs 1; otherwise, it outputs 0. Let $w=a_1a_2\ldots a_n$, $w_i=a_1a_2\ldots a_i$, and $w_0=\varepsilon$ (empty string).
+\sssc{Design with SIPO shift register}
+Use an $n$-bit SIPO shift register to read $X$ and a combinational circuit with inputs being the parallel outputs of the shift register and 1 output that is 1 if the shift register output is $w$ and 0 otherwise.
+\sssc{Design as finite-state machine (FSM)}
+We need $n$ states $S_0,S_1,\ldots,S_{n-1}$, each $S_i$ corresponding to the scenario that the string of the last $i$ input characters are the string of the first $i$ characters of $w$. The circuit is a deterministic finite-state machine with starting state is $S_0$ and the set of accepted (final) states at and only at which $Z=1$ is $S_{n-1}$.
+\ben
+\item For any $1\leq i\leq n-1$, define $m_i$ such that the string of the last $m_i$ characters of $w_{i-1}a_i'$ equals $w_{m_i}$ and that for any $j>m_i$, the string of the last $j$ characters of $w_{i-1}a_i'$ does not equal $w_j$. (Thus $m_0=0$.)
 
+Define $m_{n1}$ such that the string of the last $m_{n1}$ characters of $w1$ equals $w_{m_{n1}}$ and that for any $j>m_{n1}$, the string of the last $j$ characters of $w1$ does not equal $w_j$. Define $m_{n0}$ such that the string of the last $m_{n0}$ characters of $w0$ equals $w_{m_{n0}}$ and that for any $j>m_{n0}$, the string of the last $j$ characters of $w0$ does not equal $w_j$.
 
+Define $b_{n1}$ as 1 if $m_{n1}=n$ and 0 otherwise. Define $b_{n0}$ as 1 if $m_{n0}=n$ and 0 otherwise.
+\item Draw a state graph where
+\[S_{i-1}\xrightarrow{a_i/0}S_i,\quad 1\leq i\leq n-1,\]
+\[S_{i-1}\xrightarrow{a_i'/0}S_{m_i},\quad 1\leq i\leq n-1,\]
+\[S_{n-1}\xrightarrow{1/b_{n1}}S_{m_{n1}},\]
+\[S_{n-1}\xrightarrow{0/b_{n0}}S_{m_{n0}}.\]
+\item 
 
-
+\een
 \end{document}
 
