@@ -163,9 +163,8 @@ Binary-coded decimal (BCD), or more explicitly 8-4-2-1 BCD, is a way to represen
 A $k$-bit ($k\geq 4$) weighted code has the property that if the weights are integers $w_{k-1}, w_{k-2}, \ldots w_0$ (in decimal, and where for all $0\leq i<j<k$, $w_i<w_j$), the code $a_{k-1}a_{k-2}\ldots a_0$, where $a_i\in\{0,1\}$, represents number $N$, then
 \[N = \sum_{n=0}^{k-1}w_na_n.\]
 If a number $N$ has more than one possible codes in a specific set of weights, the one such that the unsigned binary number presented by the code is least is usually used. A such $k$-bit weighted code can represent up to $\sum_{n=1}^{k-1}w_n$.
-
-Below shows the BCD and other commonly used binary codes:
-\begin{longtable}[c]{|c|c|c|c|c|c|}
+\sssc{Commonly used binary codes for decimal}
+\begin{longtable}[c]{|c|c|c|c|c|c|c|}
 \hline
 Decimal Digit & 8-4-2-1 Code (BCD) & 6-3-1-1 Code & Excess-3 Code & 2-out-of-5 Code & Gray Code\\\hline
 0 & 0000 & 0000 & 0011 & 00011 & 0000\\\hline
@@ -185,8 +184,20 @@ Decimal Digit & 8-4-2-1 Code (BCD) & 6-3-1-1 Code & Excess-3 Code & 2-out-of-5 C
 \item\tb{6-3-1-1 Code}: Sometimes makes it easier to design display drivers or simplify logic circuits.
 \item\tb{Excess-3 Code}: It's sefl-complementing, i.e. the complement of it is the 9's complement of the number. 
 \item\tb{2-out-of-5 Code}: Always has exactly 2 ones.
-\item\tb{Gray Code}: Each step changes only one bit, which minimizes transition errors for sensors, counters, or rotary encoders.
+\item\tb{Gray Code}: Each step changes only one bit, which minimizes transition errors.
 \eit
+\sssc{Binary encoding}
+Binary encoding is an encoding for a sequence of things of which the $i$th one is assigned with a binary number $i$.
+\sssc{Excess-$n$ encoding}
+Excess-$n$ encoding is an encoding for a sequence of things of which the $i$th one is assigned with a binary number $i+n$. 
+\sssc{Gray-like encoding}
+An encoding of a sequence of things is called gray-like if each step changes only one bit, which minimizes transition errors.
+\sssc{One-hot and one-cold encoding}
+A one-hot (encoding) is an encoding for any number of things of which each one is assigned with a unique binary sequence with only one 1 bit.
+
+A one-cold (encoding) is an encoding for any number of things of which each one is assigned with a unique binary sequence with only one 0 bit.
+
+One-hot and one-cold encoding always change exactly two bits when changing state, errors can be detected by checking parity, and detecting states costs less, but requires more bits.
 \sssc{Character Encoding}
 Many applications of computers require the processing of data which contains numbers, letters, and other symbols. In order to transmit such data to or from a computer or store it internally in a computer, each character must be represented by a binary code.
 
@@ -1431,7 +1442,7 @@ The probability that metastability lasts decays exponentially over time.
 
 Take the sequential circuit consists of two inverters with the output of one being the input of another for example. There are two stable states (excluding metastable state), 0 and 1, and one metastable state, a voltage right in the middle of 0 and 1.
 \sssc{Latch response time or delay time}
-The response time or delay time $\epsilon$ of an asynchoronous or level-triggered latch is the time it needs for its state to react to a input change. If an impulse of input lasts less than $\epsilon$, the latch or flip-flop will not react to it.
+The response time or delay time $\epsilon$ of an asynchronous or level-triggered latch is the time it needs for its state to react to a input change. If an impulse of input lasts less than $\epsilon$, the latch or flip-flop will not react to it.
 \sssc{Flip-flop setup time and hold time}
 The setup time $t_s$ of a flip-flop is the minimum time before an acitve edge that the data inputs must be stable so that the flip-flop can correctly capture it.
 
@@ -1694,12 +1705,52 @@ Note that the glitches are not considered and typically cannot be detected when 
 After the circuit has changed state and before the input is changed, the output may temporarily assume an incorrect value, which we call a false output, glitch, or spike. If the output of the circuit is fed into a second sequential circuit which uses the same clock, the false outputs will not cause any problem because the inputs to the second circuit can cause a change of state only when a falling clock edge occurs. The best time to read the output is just before the active edge of the clock, because the input must be stable at that time and thus the output will be correct.
 
 Because the output of a Moore circuit can change state only when the flip-flops change state and not when the input changes, no false outputs can appear in a Moore circuit.
-\sssc{Transition table and state table}
-A transition table is a one-dimensional state-transition table with the states represented by real binary sequences, resembling a truth table. A state table is a transition table but with the states represented by meaningless symbol.
-\sssc{State diagram or state graph}
-Same as Moore and Mealy machines, state diagrams (also called state graphs) are commonly used to analyze Moore and Mealy circuits, with the states typically represented by meaningless symbol and a starting state usually represented by an arrow with no origin pointing to the state, a subscript 0 in the symbol of the state (often $s_0$ or $S_0$), or not shown.
+\sssc{State table and transition table}
+A transition table is a one-dimensional table with three (for Moore circuit) or four (for Mealy circuit) columns that lists the corresponding next states and outputs (for Mealy circuit) in the third and fourth columns for all allowed combinations of input character in the first column and present state in the second column in rows, resembling a truth table, in which the states are represented by binary or other radix numbers corresponding to the binary sequence of the state variables.
+
+A state table is the same as a transition table except that the states are represented by meaningless symbols assigned, often $s_i$ or $S_i$.
+\sssc{State diagram or state graph for Moore circuit}
+A state diagram (also called a state graph) for a Moore circuit is a directed graph with
+\bit
+\item Each vertex being a state, normally represented by circles with symbols of the states in the top half and output at the state in the bottom half, i.e., [state]/[output character].
+\item Each directed edge being a transition, normally drawn as an arrow from present state to next state with the input character read for such transition to happen on the edge.
+\item The starting state is usually represented by an arrow with no origin pointing to the state, a subscript 0 in the symbol of the state (often $s_0$ or $S_0$), or not shown.
+\eit
+\sssc{State diagram or state graph for Mealy circuit}
+A state diagram (also called a state graph) for a Mealy circuit is a directed graph with
+\bit
+\item Each vertex being a state, normally represented by circles with symbols of the states.
+\item Each directed edge being a transition, normally drawn as an arrow from present state to next state with the input character read for such transition to happen and output character of the transition on the edge separated by /, i.e., [input character]/[output character].
+\item The starting state is usually represented by an arrow with no origin pointing to the state, a subscript 0 in the symbol of the state (often $s_0$ or $S_0$), or not shown.
+\eit
 \sssc{Next-state Map}
 A next-state map is the K-map of a next-state variable as a function of the present-state variables and for Mealy circuit also input variables.
+\sssc{T input map}
+Given a next-state map of a T flip-flop, to find the input needed for each present state variables and input variables combination, convert the value $Q^+_k$ in it to $T_k$ given by $T_k=Q_k\oplus Q^+_k$ for every 0 and 1 cell to get T input maps, equivalently, complement every 0 and 1 cell in the $Q_k=1$ half.
+\sssc{D input map}
+Given a next-state map of a D flip-flop, to find the input needed for each present state variables and input variables combination, convert the value $Q^+_k$ in it to $D_k$ given by $D_k=Q^+_k$ for every 0 and 1 cell to get D input maps, equivalently, do nothing.
+\sssc{S and R input map}
+Given a next-state map of a S-R flip-flop, to find the inputs needed for each present state variables and input variables combination, convert the value $Q^+_k$ in it to $S_k$ and $R_k$ respectively given by the truth table below where $X$ denotes don't care:
+\begin{longtable}[c]{mm|mm}
+\hline
+Q_k & Q^+_k & S_k & R_k \\\hline
+0 & 0 & 0 & X \\\hline
+0 & 1 & 1 & 0 \\\hline
+1 & 0 & 0 & 1 \\\hline
+1 & 1 & X & 0 \\\hline
+\end{longtable}
+for every 0 and 1 cell to get S and R input maps, equivalently, for S input maps, replace 1's in $Q_k=1$ half with X's, for R input maps, replace 0's in $Q_k=0$ half with X's and then complement all 0 and 1 cells.
+\sssc{J and K input map}
+Given a next-state map of a J-K flip-flop, to find the inputs needed for each present state variables and input variables combination, convert the value $Q^+_k$ in it to $J_k$ and $K_k$ respectively given by the truth table below where $X$ denotes don't care:
+\begin{longtable}[c]{mm|mm}
+\hline
+Q_k & Q^+_k & J_k & K_k \\\hline
+0 & 0 & 0 & X \\\hline
+0 & 1 & 1 & X \\\hline
+1 & 0 & X & 1 \\\hline
+1 & 1 & X & 0 \\\hline
+\end{longtable}
+for every 0 and 1 cell to get J and K input maps, equivalently, for J input maps, replace all cells in $Q_k=1$ half with X's, for K input maps, replace all cells in $Q_k=0$ half with X's and then complement all cells in $Q_k=1$ half.
 \sssc{Analysis by state table or transition table}
 The following method can be used to construct a state table or a transition table:
 \ben
@@ -1733,7 +1784,7 @@ Another constraint is that for any flip-flop in the circuit with also hold time 
 The general model of Moore cicuits consists of $k$ flip-flops with a common clock, a combinational subcircuit with inputs from outside of the Mealy circuit $X_1,X_2,\ldots,X_m$ and outputs as inputs for flip-flops
 \[{I_1}_1,{I_1}_2,\ldots,{I_1}_{n_1},{I_2}_1,{I_2}_2,\ldots,{I_2}_{n_2},\ldots,{I_k}_1,{I_k}_2,\ldots,{I_k}_{n_k}\]
 with ${I_i}_1,{I_i}_2,\ldots,{I_i}_{n_i}$ being the inputs of the $i$th flip-flop, and another combinational subcircuit with inputs that are flip-flops outputs $Q_1,Q_2,\ldots,Q_k$ and outputs to outside of the Mealy circuit $Z_1,Z_2,\ldots,Z_n$.
-\sssc{General model for synchoronous circuits without outputs}
+\sssc{General model for synchronous circuits without outputs}
 The general model of Moore cicuits consists of $k$ flip-flops with a common clock and a combinational subcircuit with inputs from outside of the Mealy circuit $X_1,X_2,\ldots,X_m$ and outputs as inputs for flip-flops
 \[{I_1}_1,{I_1}_2,\ldots,{I_1}_{n_1},{I_2}_1,{I_2}_2,\ldots,{I_2}_{n_2},\ldots,{I_k}_1,{I_k}_2,\ldots,{I_k}_{n_k}\]
 with ${I_i}_1,{I_i}_2,\ldots,{I_i}_{n_i}$ being the inputs of the $i$th flip-flop.
@@ -1800,7 +1851,7 @@ When $(S_1,S_0)=(1,0)$ at an active edge, the register shifts a bit right; when 
 An $n$-bit parallel-in parallel-out (PIPO) bidirectional shift register is an $n$-bit PISO register additional $n-2$ outputs connected to the outputs $Q$ of the flip-flops except the flip-flops storing the least and most significant bits. Those outputs together with the original two SOs compose the parallel output of the register.
 \sssc{Serial-In Parallel-Out (SIPO) Bidirectional Shift Register}
 An $n$-bit serial-in parallel-out (SIPO) bidirectional shift register is an $n$-bit SISO register additional $n-2$ outputs connected to the outputs $Q$ of the flip-flops except the flip-flops storing the least and most significant bits. Those outputs together with the original two SOs compose the parallel output of the register.
-\ssc{Synchoronous Counter}
+\ssc{Synchronous Counter}
 \sssc{Counter}
 A counter is a sequential circuit whose state repeats every fixed finite number of active edges, called count cycle. The cyclic sequence of the states is called state loop. 
 \sssc{Transition Cycle}
@@ -1857,68 +1908,98 @@ When load=1 at an active edge, the loadable counter loads parallel input; when l
 To design a synchronous counter consists of $n$ T flip-flops given arbitrary transition table of $m$ rows of distinct present states $Q_k$'s and corresponding next states $Q^+_k$'s specified, where the other $2^n-m$ states are don't care states, the following procedure can be used:
 \ben
 \item For each $Q^+_k$, draw a next-state map.
-\item For each 0 and 1 cell in each map, convert the value $Q^+_k$ in it to $T_k$ given by $T_k=Q_k\oplus Q^+_k$. These maps are called T input (K-)maps and are the same as the next-state maps with $Q_k=1$ half complemented.
+\item Convert the next-state maps to T input maps.
 \item Realize all inputs $T$ with combination circuits with a subset of all outputs $Q$ and $Q'$, constant 1 and 0 sources, and all external control inputs as inputs.
 \een
 \sssc{Design of General Synchronous Counter with D Flip-Flops}
 To design a synchronous counter consists of $n$ D flip-flops given arbitrary transition table of $m$ rows of distinct present states $Q_k$'s and corresponding next states $Q^+_k$'s specified, where the other $2^n-m$ states are don't care states, the following procedure can be used:
 \ben
 \item For each $Q^+_k$, draw a next-state map.
-\item For each 0 and 1 cell in each map, convert the value $Q^+_k$ in it to $D_k$ given by $D_k=Q^+_k$. These maps are called D input (K-)maps and are exactly the same as the next-state maps.
+\item Convert the next-state maps to D input maps.
 \item Realize all inputs $D$ with combination circuits with a subset of all outputs $Q$ and $Q'$, constant 1 and 0 sources, and all external control inputs as inputs.
 \een
 \sssc{Design of General Synchronous Counter with S-R Flip-Flops}
 To design a synchronous counter consists of $n$ S-R flip-flops given arbitrary transition table of $m$ rows of distinct present states $Q_k$'s and corresponding next states $Q^+_k$'s specified, where the other $2^n-m$ states are don't care states, the following procedure can be used:
 \ben
 \item For each $Q^+_k$, draw a next-state map.
-\item For each 0 and 1 cell in each map, convert the value $Q^+_k$ in it to $S_k$ and $R_k$ respectively given by the truth table below where $X$ denotes don't care:
-\begin{longtable}[c]{mm|mm}
-\hline
-Q_k & Q^+_k & S_k & R_k \\\hline
-0 & 0 & 0 & X \\\hline
-0 & 1 & 1 & 0 \\\hline
-1 & 0 & 0 & 1 \\\hline
-1 & 1 & X & 0 \\\hline
-\end{longtable}
-These maps are called S input (K-)maps and R input (K-)maps. S input maps are the same as the next-state maps with 1's in $Q_k=1$ half replaced with X. R input maps are the same as the next-state maps with 0's in $Q_k=0$ half replaced with X and all cells complemented.
+\item Convert the next-state maps to S and R input maps.
 \item Realize all inputs $S$ and $R$ with combination circuits with a subset of all outputs $Q$ and $Q'$, constant 1 and 0 sources, and all external control inputs as inputs.
 \een
 \sssc{Design of General Synchronous Counter with J-K Flip-Flops}
 To design a synchronous counter consists of $n$ J-K flip-flops given arbitrary transition table of $m$ rows of distinct present states $Q_k$'s and corresponding next states $Q^+_k$'s specified, where the other $2^n-m$ states are don't care states, the following procedure can be used:
 \ben
 \item For each $Q^+_k$, draw a next-state map.
-\item For each 0 and 1 cell in each map, convert the value $Q^+_k$ in it to $J_k$ and $K_k$ respectively given by the truth table below where $X$ denotes don't care:
-\begin{longtable}[c]{mm|mm}
-\hline
-Q_k & Q^+_k & J_k & K_k \\\hline
-0 & 0 & 0 & X \\\hline
-0 & 1 & 1 & X \\\hline
-1 & 0 & X & 1 \\\hline
-1 & 1 & X & 0 \\\hline
-\end{longtable}
-These maps are called J input (K-)maps and K input (K-)maps. J input maps are the same as the next-state maps with all cells in $Q_k=1$ half replaced with X. K input maps are the same as the next-state maps with all cells in $Q_k=0$ half replaced with X and $Q_k=1$ half complemented.
+\item Convert the next-state maps to J and K input maps.
 \item Realize all inputs $J$ and $K$ with combination circuits with a subset of all outputs $Q$ and $Q'$, constant 1 and 0 sources, and all external control inputs as inputs.
 \een
-\ssc{Sqeuence Detector}
-\sssc{Definition}
-A sequence detector is a Mealy circuit with a serial input $X\in\{0,1\}$ is read and an output $Z$ that when the sequence of the last $n$ characters in the input word read is a prescribed string $w$, it outputs 1; otherwise, it outputs 0. Let $w=a_1a_2\ldots a_n$, $w_i=a_1a_2\ldots a_i$, and $w_0=\varepsilon$ (empty string).
+\ssc{Window Sequence Detector of Single Word}
+\sssc{Sliding and Disjoint Windows Sequence Detector}
+A window sequence detector is a Mealy circuit with a serial input $X\in\{0,1\}$ is read and an output $Z$ that when the string of the last $n$ characters in the input word read is a prescribed string $w$, it outputs 1; otherwise, it outputs 0. Let $w=a_1a_2\ldots a_n$, $w_i=a_1a_2\ldots a_i$, and $w_0=\varepsilon$ (empty string).
+
+Initial state can be loaded such that the detector works as if a input string is already read at the beginning.
+
+Types:
+\bit
+\item \tb{Overlapping sliding window sequence detector}: Detector is never reset. This is the default one.
+\item \tb{Non-overlapping sliding window sequence detector}: Detector is reset when $Z=1$ occurs.
+\item \tb{Disjoint window sequence detector}: The detector is reset every $n$ input characters after the first occurrence of $Z=1$.
+\eit
 \sssc{Design with SIPO shift register}
-Use an $n$-bit SIPO shift register to read $X$ and a combinational circuit with inputs being the parallel outputs of the shift register and 1 output that is 1 if the shift register output is $w$ and 0 otherwise.
-\sssc{Design as finite-state machine (FSM)}
-We need $n$ states $S_0,S_1,\ldots,S_{n-1}$, each $S_i$ corresponding to the scenario that the string of the last $i$ input characters are the string of the first $i$ characters of $w$. The circuit is a deterministic finite-state machine with starting state is $S_0$ and the set of accepted (final) states at and only at which $Z=1$ is $S_{n-1}$.
+\bit
+\item \textbf{Moore circuit implementation:} Use an $n$-bit SIPO shift register to read $X$ and a combinational circuit whose inputs are the parallel outputs of the shift register that outputs 1 if the shift register stores $w$ now and 0 otherwise to output $Z$.
+
+The output becomes valid after the next clock edge, but the output is stable for the entire clock period (independent of input glitches).
+\item \textbf{Mealy circuit implementation:} Use an $(n-1)$-bit SIPO shift register to read $X$ and a combinational circuit whose inputs are the parallel outputs of the shift register and the input $X$ that outputs 1 if the shift register stores $w_{n-1}$ now and $X=a_n$ and 0 otherwise to output $Z$.
+
+The output is valid since the final input bit arrives (one clock earlier than Moore), but the output is combinational with respect to $X$, so it may glitch if $X$ is not stable or combinational subcircuit hasn't stabilized. One less flip-flop is used than Moore circuit implementation.
+\eit
+
+For the detector to work as if a input string $v$ is already read at the beginning, load $v$ into the shift register at the beginning with parallel or serial input.
+
+To prevent $Z=1$ to occur before the $(n-m)$th input character is read where $m=0$ for those without initial state and the length of initial state $v$ for those with initial state $v$, we can AND the original output $Z$ together with the output $C$ of a combinational subcircuit that outputs 1 if a counter with $n$ states is at the $n$th state and 0 otherwise as the new output $Z$, with the clock enable signal of the counter connected to $C'$, and the original state of the counter being the $(m+1)$th state.
+
+For non-overlapping sliding window sequence detector, connect a clear signal for all flip-flops to $Z$.
+
+For disjoint window sequence detector, we can AND the original output $Z$ together with the output $C$ of a combinational subcircuit that outputs 1 if a counter with $n$ states with parallel input is at the $n$th state and 0 otherwise as the new output $Z$, with the clock enable signal of the counter connected to $C'$ and the parallel input connected to a constant source of first state of the counter read iff $Z=1$.
+\sssc{Design as finite-state machine (FSM) based on Knuth–Morris–Pratt (KMP) algorithm}
 \ben
-\item For any $1\leq i\leq n-1$, define $m_i$ such that the string of the last $m_i$ characters of $w_{i-1}a_i'$ equals $w_{m_i}$ and that for any $j>m_i$, the string of the last $j$ characters of $w_{i-1}a_i'$ does not equal $w_j$. (Thus $m_0=0$.)
-
-Define $m_{n1}$ such that the string of the last $m_{n1}$ characters of $w1$ equals $w_{m_{n1}}$ and that for any $j>m_{n1}$, the string of the last $j$ characters of $w1$ does not equal $w_j$. Define $m_{n0}$ such that the string of the last $m_{n0}$ characters of $w0$ equals $w_{m_{n0}}$ and that for any $j>m_{n0}$, the string of the last $j$ characters of $w0$ does not equal $w_j$.
-
-Define $b_{n1}$ as 1 if $m_{n1}=n$ and 0 otherwise. Define $b_{n0}$ as 1 if $m_{n0}=n$ and 0 otherwise.
-\item Draw a state graph where
-\[S_{i-1}\xrightarrow{a_i/0}S_i,\quad 1\leq i\leq n-1,\]
-\[S_{i-1}\xrightarrow{a_i'/0}S_{m_i},\quad 1\leq i\leq n-1,\]
-\[S_{n-1}\xrightarrow{1/b_{n1}}S_{m_{n1}},\]
-\[S_{n-1}\xrightarrow{0/b_{n0}}S_{m_{n0}}.\]
-\item 
-
+\item Find the number of states and flip-flops needed:
+\bit
+\item \textbf{Moore circuit implementation:} We need $n+1$ states $S_0,S_1,\ldots,S_n$, each $S_i$ corresponding to the scenario that the string of the last $i$ input characters are the string of the first $i$ characters of $w$. Thus, we need at least $\lceil\log_2(n+1)\rceil$ flip-flops. Let the number of flip-flops be $k$.
+\item \textbf{Mealy circuit implementation:} We need $n$ states $S_0,S_1,\ldots,S_{n-1}$, each $S_i$ corresponding to the scenario that the string of the last $i$ input characters are the string of the first $i$ characters of $w$. Thus, we need at least $\lceil\log_2(n)\rceil$ flip-flops. Let the number of flip-flops be $k$.
+\eit
+\item Assign a $k$-bit binary number corresponding to the flip-flops to each state. Binary encoding, one-hot encoding, one-code encoding, and gray-like encoding are often used. One-hot encoding or one-code encoding is typically used for FGPA.
+\item Compose output:
+\bit
+\item\textbf{Moore circuit implementation:} Use a combinational circuit whose inputs are the outputs of the flip-flops that outputs 1 if the present state is $S_n$ and 0 otherwise.
+\item\textbf{Mealy circuit implementation:} Use a combinational circuit whose inputs are the outputs of the flip-flops and $X$ that outputs 1 if the present state is $S_{n-1}$ AND $X=a_n$ and 0 otherwise.
+\eit
+\item For any $0\leq i\leq n-1$, define $m_i$ such that the string of the last $m_i$ characters of $w_ia_{i+1}'$ equals $w_{m_i}$ and that for any $j>m_i$, the string of the last $j$ characters of $w_ia_{i+1}'$ does not equal $w_j$. (Thus $m_0=0$.)
+\item Compute transition after match:
+\bit
+\item \textbf{Overlapping sliding window sequence detector or disjoint window sequence detector and Moore circuit implementation}: Define $m_{n1}$ such that the string of the last $m_{n1}$ characters of $w1$ equals $w_{m_{n1}}$ and that for any $j>m_{n1}$, the string of the last $j$ characters of $w1$ does not equal $w_j$. Define $m_{n0}$ such that the string of the last $m_{n0}$ characters of $w0$ equals $w_{m_{n0}}$ and that for any $j>m_{n0}$, the string of the last $j$ characters of $w0$ does not equal $w_j$. Define $b_{n1}$ as 1 if $m_{n1}=n$ and 0 otherwise. Define $b_{n0}$ as 1 if $m_{n0}=n$ and 0 otherwise.
+\item \tb{Non-overlapping sliding window sequence detector and Moore circuit implementation}: Define $m_{n1}=m_{n0}=b_{n1}=b_{n0}=0$.
+\item \textbf{Mealy circuit implementation}: Define $m_n$ such that the string of the last $m_n$ characters of $w$ equals $w_{m_n}$ and that for any $j>m_n$, the string of the last $j$ characters of $w$ does not equal $w_j$.
+\eit
+\item Draw a state graph that:
+\bit
+\item \textbf{Moore circuit implementation:}
+\[S_i/0\xrightarrow{a_{i+1}}S_{i+1}/0,\quad 0\leq i\leq n-2,\]
+\[S_{n-1}/0\xrightarrow{a_n}S_n/1,\]
+\[S_i/0\xrightarrow{a_{i+1}'}S_{m_i}/0,\quad 0\leq i\leq n-1,\]
+\[S_n/1\xrightarrow{1}S_{m_{n1}}/b_{n1},\]
+\[S_n/1\xrightarrow{0}S_{m_{n0}}/b_{n0}.\]
+\item\textbf{Mealy circuit implementation:}
+\[S_i\xrightarrow{a_{i+1}/0}S_{i+1},\quad 0\leq i\leq n-2,\]
+\[S_{n-1}\xrightarrow{a_n/1}S_{m_n},\]
+\[S_i\xrightarrow{a_{i+1}'/0}S_{m_i},\quad 0\leq i\leq n-1.\]
+\eit
+\item Draw a state table based on the state graph.
+\item Translate the state table to transition table based on the encoding.
+\item Plot the next-state maps for the flip-flops and the K-map for the output $Z$.
+\item Convert next-state maps to flip-flop input maps.
+\item Implement the flip-flop inputs and output $Z$ with combination logic as functions of input character variable and present state variable.
+\item For disjoint window sequence detector, we can AND the original output $Z$ together with the output $C$ of a combinational subcircuit that outputs 1 if a counter with $n$ states with parallel input is at the $n$th state and 0 otherwise as the new output $Z$, with the clock enable signal of the counter connected to $C'$ and the parallel input connected to a constant source of first state of the counter read iff $Z=1$.
 \een
 \end{document}
 
