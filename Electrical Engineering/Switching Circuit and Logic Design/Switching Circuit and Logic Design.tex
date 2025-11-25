@@ -1932,8 +1932,8 @@ To design a synchronous counter consists of $n$ J-K flip-flops given arbitrary t
 \item Convert the next-state maps to J and K input maps.
 \item Realize all inputs $J$ and $K$ with combination circuits with a subset of all outputs $Q$ and $Q'$, constant 1 and 0 sources, and all external control inputs as inputs.
 \een
-\ssc{Window Sequence Detector of Single Word}
-\sssc{Sliding and Disjoint Windows Sequence Detector}
+\ssc{Window Sequence Detector}
+\sssc{Definition}
 A window sequence detector is a Mealy circuit with a serial input $X\in\{0,1\}$ is read and an output $Z$ that when the string of the last $n$ characters in the input word read is a prescribed string $w$, it outputs 1; otherwise, it outputs 0. Let $w=a_1a_2\ldots a_n$, $w_i=a_1a_2\ldots a_i$, and $w_0=\varepsilon$ (empty string).
 
 Initial state can be loaded such that the detector works as if a input string is already read at the beginning.
@@ -1956,50 +1956,76 @@ The output is valid since the final input bit arrives (one clock earlier than Mo
 
 For the detector to work as if a input string $v$ is already read at the beginning, load $v$ into the shift register at the beginning with parallel or serial input.
 
-To prevent $Z=1$ to occur before the $(n-m)$th input character is read where $m=0$ for those without initial state and the length of initial state $v$ for those with initial state $v$, we can AND the original output $Z$ together with the output $C$ of a combinational subcircuit that outputs 1 if a counter with $n$ states is at the $n$th state and 0 otherwise as the new output $Z$, with the clock enable signal of the counter connected to $C'$, and the original state of the counter being the $(m+1)$th state.
+To prevent $Z=1$ to occur before the $(n-m)$th input character is read where $m=0$ for those without initial state and the length of initial state $v$ for those with initial state $v$, we can AND the original output $Z$ together with the output $C$ of a combinational subcircuit that outputs 1 if a mod-$n$ counter is at the $n$th state and 0 otherwise as the new output $Z$, with the clock enable signal of the counter connected to $C'$, and the original state of the counter being the $(m+1)$th state.
 
 For non-overlapping sliding window sequence detector, connect a clear signal for all flip-flops to $Z$.
 
-For disjoint window sequence detector, we can AND the original output $Z$ together with the output $C$ of a combinational subcircuit that outputs 1 if a counter with $n$ states with parallel input is at the $n$th state and 0 otherwise as the new output $Z$, with the clock enable signal of the counter connected to $C'$ and the parallel input connected to a constant source of first state of the counter read iff $Z=1$.
-\sssc{Design as finite-state machine (FSM) based on Knuth–Morris–Pratt (KMP) algorithm}
+For disjoint window sequence detector, we can AND the original output $Z$ together with the output $C$ of a combinational subcircuit that outputs 1 if a mod-$n$ counter with parallel input is at the $n$th state and 0 otherwise as the new output $Z$, with the clock enable signal of the counter connected to $C'$ and the parallel input connected to a constant source of first state of the counter read iff $Z=1$.
+\sssc{Design as finite-state machine (FSM) performing Knuth–Morris–Pratt (KMP) algorithm}
 \ben
-\item Find the number of states and flip-flops needed:
+\item Find the number of states and flip-flops needed. Let the set of all states be $S$. Let the number of flip-flops be $k$. Each state $S_i$ corresponds to the scenario that the string of the last $i$ input characters is $w_i$, and for any $j>i$, the string of the last $j$ input characters is not $w_j$.
 \bit
-\item \textbf{Moore circuit implementation:} We need $n+1$ states $S_0,S_1,\ldots,S_n$, each $S_i$ corresponding to the scenario that the string of the last $i$ input characters are the string of the first $i$ characters of $w$. Thus, we need at least $\lceil\log_2(n+1)\rceil$ flip-flops. Let the number of flip-flops be $k$.
-\item \textbf{Mealy circuit implementation:} We need $n$ states $S_0,S_1,\ldots,S_{n-1}$, each $S_i$ corresponding to the scenario that the string of the last $i$ input characters are the string of the first $i$ characters of $w$. Thus, we need at least $\lceil\log_2(n)\rceil$ flip-flops. Let the number of flip-flops be $k$.
+\item \textbf{Moore circuit implementation:} We need $n+1$ states,
+\[S=\{S_0,S_1,\ldots,S_n\},\]
+\[k\geq\lceil\log_2(n+1)\rceil.\]
+\item \textbf{Mealy circuit implementation:} We need $n$ states,
+\[S=\{S_0,S_1,\ldots,S_{n-1}\},\]
+\[k\geq\lceil\log_2(n)\rceil.\]
+\eit
+\item Let transition function be $\delta\colon S\times\{0,1\}\to S$. We have $\delta(S_i,a_{i+1})$ defined as
+\[\delta(S_i,a_{i+1})=S_{i+1}\]
+\bit
+\item \textbf{Moore circuit implementation:} for any $0\leq i\leq n-1$.
+\item \textbf{Mealy circuit implementation:} for any $0\leq i\leq n-2$.
 \eit
 \item Assign a $k$-bit binary number corresponding to the flip-flops to each state. Binary encoding, one-hot encoding, one-code encoding, and gray-like encoding are often used. One-hot encoding or one-code encoding is typically used for FGPA.
 \item Compose output:
 \bit
-\item\textbf{Moore circuit implementation:} Use a combinational circuit whose inputs are the outputs of the flip-flops that outputs 1 if the present state is $S_n$ and 0 otherwise.
-\item\textbf{Mealy circuit implementation:} Use a combinational circuit whose inputs are the outputs of the flip-flops and $X$ that outputs 1 if the present state is $S_{n-1}$ AND $X=a_n$ and 0 otherwise.
+\item\textbf{Moore circuit implementation:} Use a combinational circuit whose inputs are the outputs of the flip-flops that outputs 1 if the present state is $S_n$ and 0 otherwise. The output function $\lambda\colon S\to\{0,1\}$ is defined as
+\[\lambda(s)=\begin{cases}
+1,\quad&s=S_n\\
+0,\quad&s\in S\setminus\{S_n\}
+\end{cases}.\]
+\item\textbf{Mealy circuit implementation:} Use a combinational circuit whose inputs are the outputs of the flip-flops and $X$ that outputs 1 if the present state is $S_{n-1}$ AND $X=a_n$ and 0 otherwise. The output function $\lambda\colon S\times\{0,1\}\to\{0,1\}$ is defined as
+\[\lambda(s,a)=\begin{cases}
+1,\quad&s=S_{n-1}\land a=a_n\\
+0,\quad&s\in S\setminus\{S_{n-1}\}\lor a\neq a_n
+\end{cases}.\]
 \eit
-\item For any $0\leq i\leq n-1$, define $m_i$ such that the string of the last $m_i$ characters of $w_ia_{i+1}'$ equals $w_{m_i}$ and that for any $j>m_i$, the string of the last $j$ characters of $w_ia_{i+1}'$ does not equal $w_j$. (Thus $m_0=0$.)
-\item Compute transition after match:
+\item Define the \tb{prefix function or failure function} $\pi\colon S\setminus\to S$ such that $\pi(S_0)=S_0$, and for any $S_i\in S\setminus\{S_0\} with $S_p=\pi(S_i)$, it satisfies that $p<i$, that $w_p$ equals to the string of the last $p$ characters of $w_i$, and that for any $q\in(p,i)$, $w_q$ doesn't equal to the string of the last $q$ characters of $w_i$. However for
 \bit
-\item \textbf{Overlapping sliding window sequence detector or disjoint window sequence detector and Moore circuit implementation}: Define $m_{n1}$ such that the string of the last $m_{n1}$ characters of $w1$ equals $w_{m_{n1}}$ and that for any $j>m_{n1}$, the string of the last $j$ characters of $w1$ does not equal $w_j$. Define $m_{n0}$ such that the string of the last $m_{n0}$ characters of $w0$ equals $w_{m_{n0}}$ and that for any $j>m_{n0}$, the string of the last $j$ characters of $w0$ does not equal $w_j$. Define $b_{n1}$ as 1 if $m_{n1}=n$ and 0 otherwise. Define $b_{n0}$ as 1 if $m_{n0}=n$ and 0 otherwise.
-\item \tb{Non-overlapping sliding window sequence detector and Moore circuit implementation}: Define $m_{n1}=m_{n0}=b_{n1}=b_{n0}=0$.
-\item \textbf{Mealy circuit implementation}: Define $m_n$ such that the string of the last $m_n$ characters of $w$ equals $w_{m_n}$ and that for any $j>m_n$, the string of the last $j$ characters of $w$ does not equal $w_j$.
+\item \textbf{Non-overlapping sliding window sequence detector Moore circuit implementation:}
+\[\pi(S_n)=S_0\]
+instead.
 \eit
+\item We have $\delta(S_i,a_{i+1}')$ defined recursively as
+\[\delta(S_i,a_{i+1}')=\delta(\pi(S_i),a_{i+1})\]
+for any $0\leq i\leq n-1$, and
+\[\delta(S_n,a)=\delta(\pi(S_n),a)\]
+for any $a\in\{0,1\}.
 \item Draw a state graph that:
 \bit
 \item \textbf{Moore circuit implementation:}
+\[s/\lambda(s)\xrightarrow{a}\delta(s)/\lambda(\delta(s))\]
+for all $s\in S$ and $a\in\{0,1\}$, equivalently,
 \[S_i/0\xrightarrow{a_{i+1}}S_{i+1}/0,\quad 0\leq i\leq n-2,\]
 \[S_{n-1}/0\xrightarrow{a_n}S_n/1,\]
-\[S_i/0\xrightarrow{a_{i+1}'}S_{m_i}/0,\quad 0\leq i\leq n-1,\]
-\[S_n/1\xrightarrow{1}S_{m_{n1}}/b_{n1},\]
-\[S_n/1\xrightarrow{0}S_{m_{n0}}/b_{n0}.\]
+\[S_i/0\xrightarrow{a_{i+1}'}\delta(\pi(S_i),a_{i+1}')/0,\quad 0\leq i\leq n-1,\]
+\[S_n/1\xrightarrow{a}\delta(\pi(S_n),a),\quad a\in\{0,1\}.\]
 \item\textbf{Mealy circuit implementation:}
+\[s\xrightarrow{a/\lambda(s,a)}\delta(s)\]
+for all $s\in S$ and $a\in\{0,1\}$, equivalently,
 \[S_i\xrightarrow{a_{i+1}/0}S_{i+1},\quad 0\leq i\leq n-2,\]
-\[S_{n-1}\xrightarrow{a_n/1}S_{m_n},\]
-\[S_i\xrightarrow{a_{i+1}'/0}S_{m_i},\quad 0\leq i\leq n-1.\]
+\[S_{n-1}\xrightarrow{a_n/1}\delta(\pi(S_{n-1}),a_n),\]
+\[S_i\xrightarrow{a_{i+1}'/0}\delta(\pi(S_i),a_{i+1}'),\quad 0\leq i\leq n-1.\]
 \eit
+Note that all $\delta$ and $\lambda$ are computed in the process, since in hardware you never implement it recursively.
 \item Draw a state table based on the state graph.
 \item Translate the state table to transition table based on the encoding.
 \item Plot the next-state maps for the flip-flops and the K-map for the output $Z$.
 \item Convert next-state maps to flip-flop input maps.
 \item Implement the flip-flop inputs and output $Z$ with combination logic as functions of input character variable and present state variable.
-\item For disjoint window sequence detector, we can AND the original output $Z$ together with the output $C$ of a combinational subcircuit that outputs 1 if a counter with $n$ states with parallel input is at the $n$th state and 0 otherwise as the new output $Z$, with the clock enable signal of the counter connected to $C'$ and the parallel input connected to a constant source of first state of the counter read iff $Z=1$.
+\item For disjoint window sequence detector, we can AND the original output $Z$ together with the output $C$ of a combinational subcircuit that outputs 1 if a mod-$n$ counter with parallel input is at the $n$th state and 0 otherwise as the new output $Z$, with the clock enable signal of the counter connected to $C'$ and the parallel input connected to a constant source of first state of the counter read iff $Z=1$.
 \een
 \end{document}
 
