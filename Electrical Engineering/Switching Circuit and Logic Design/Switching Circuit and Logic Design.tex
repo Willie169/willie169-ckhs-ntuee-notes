@@ -1699,12 +1699,15 @@ A Mealy circuit can be specified with equations
 
 A Moore circuit can be specified with equations
 \[S^+=\delta(S,X),\quad Z=\lambda(S).\]
-
-Note that the glitches are not considered and typically cannot be detected when analyzing as automata because the inputs are read at the active clock edge, and no provision is made for extra input changes between active edges.
 \sssc{Glitch of Mealy Circuit}
 After the circuit has changed state and before the input is changed, the output may temporarily assume an incorrect value, which we call a false output, glitch, or spike. If the output of the circuit is fed into a second sequential circuit which uses the same clock, the false outputs will not cause any problem because the inputs to the second circuit can cause a change of state only when a falling clock edge occurs. The best time to read the output is just before the active edge of the clock, because the input must be stable at that time and thus the output will be correct.
-
-Because the output of a Moore circuit can change state only when the flip-flops change state and not when the input changes, no false outputs can appear in a Moore circuit.
+\sssc{Mealy and Moore implementation}
+For Mealy and Moore implementations of same sequential logic:
+\bit
+\item If a Mealy implementation that is not a Moore implementation exists, Moore implementation needs more states than Mealy implementation.
+\item Moore implementation outputs one clock period later than Mealy implementation.
+\item Mealy implementation may contain glitches while Moore implementation doesn't.
+\eit
 \sssc{State table and transition table}
 A transition table is a one-dimensional table with three (for Moore circuit) or four (for Mealy circuit) columns that lists the corresponding next states and outputs (for Mealy circuit) in the third and fourth columns for all allowed combinations of input character in the first column and present state in the second column in rows, resembling a truth table, in which the states are represented by binary or other radix numbers corresponding to the binary sequence of the state variables.
 
@@ -1712,19 +1715,32 @@ A state table is the same as a transition table except that the states are repre
 \sssc{State diagram or state graph for Moore circuit}
 A state diagram (also called a state graph) for a Moore circuit is a directed graph with
 \bit
-\item Each vertex being a state, normally represented by circles with symbols of the states in the top half and output at the state in the bottom half, i.e., [state]/[output character].
+\item Each vertex being a state, normally represented by circles with states in the top half and output at the state in the bottom half, i.e., [state]/[output character].
 \item Each directed edge being a transition, normally drawn as an arrow from present state to next state with the input character read for such transition to happen on the edge.
 \item The starting state is usually represented by an arrow with no origin pointing to the state, a subscript 0 in the symbol of the state (often $s_0$ or $S_0$), or not shown.
 \eit
 \sssc{State diagram or state graph for Mealy circuit}
 A state diagram (also called a state graph) for a Mealy circuit is a directed graph with
 \bit
-\item Each vertex being a state, normally represented by circles with symbols of the states.
+\item Each vertex being a state, normally represented by circles with states in it.
 \item Each directed edge being a transition, normally drawn as an arrow from present state to next state with the input character read for such transition to happen and output character of the transition on the edge separated by /, i.e., [input character]/[output character].
 \item The starting state is usually represented by an arrow with no origin pointing to the state, a subscript 0 in the symbol of the state (often $s_0$ or $S_0$), or not shown.
 \eit
+\sssc{Incompletely specified state table}
+A cell in a state table or transition may be don't care since such transition would never occur and is represented with - and treated the same as that in a truth table. Such a state table is called an incompletely specified state table.
+\sssc{Alphanumeric state graph notation}
+States in a state graph are usually represented by alphanumeric symbols such as $S_0,S_1\ldots S_n$.
+
+Input characters may also be represented in alphanumeric notation by assign alphanumeric symbols to Boolean variables of the characters and represent characters as Boolean expression of those variables, in which a Boolean expression on a transition means all characters such that the Boolean expression is true lead to that transition. When doing so, with all Boolean expressions on edges from a state $s$ being $F_1,F_2,\ldots,F_n$,
+\bit
+\item Transition from $s$ is deterministic iff
+\[\sum_{i=1}^n\prod_{\substack{j=1\\j\neq o}}^n F_iF_j=0.\]
+\item Transition function is defined for all combinations of $s$ and an arbitrary input character in the input alphabet iff
+\[\sum_{i=1}^nF_i=1.\]
+\eit
+The FSM is valid as a digital circuit iff it is deterministic iff transition is deterministic for all states.
 \sssc{Next-state Map}
-A next-state map is the K-map of a next-state variable as a function of the present-state variables and for Mealy circuit also input variables.
+A next-state map is the K-map of a next-state variable as a function of the present-state variables and for Mealy circuit also input variables given by a transition table.
 \sssc{T input map}
 Given a next-state map of a T flip-flop, to find the input needed for each present state variables and input variables combination, convert the value $Q^+_k$ in it to $T_k$ given by $T_k=Q_k\oplus Q^+_k$ for every 0 and 1 cell to get T input maps, equivalently, complement every 0 and 1 cell in the $Q_k=1$ half.
 \sssc{D input map}
@@ -1932,9 +1948,9 @@ To design a synchronous counter consists of $n$ J-K flip-flops given arbitrary t
 \item Convert the next-state maps to J and K input maps.
 \item Realize all inputs $J$ and $K$ with combination circuits with a subset of all outputs $Q$ and $Q'$, constant 1 and 0 sources, and all external control inputs as inputs.
 \een
-\ssc{Window Sequence Detector}
+\ssc{Sequence Detector}
 \sssc{Definition}
-A window sequence detector is a Mealy circuit with a serial input $X\in\{0,1\}$ is read and an output $Z$ that when the string of the last $n$ characters in the input word read is a prescribed string $w$, it outputs 1; otherwise, it outputs 0. Let $w=a_1a_2\ldots a_n$, $w_i=a_1a_2\ldots a_i$, and $w_0=\varepsilon$ (empty string).
+A sequence detector is a Mealy circuit with a serial input $X\in\{0,1\}$ is read and an output $Z$ that when the string of the last $n$ characters in the input word read is a prescribed string $w$, it outputs 1; otherwise, it outputs 0. Let $w=a_1a_2\ldots a_n$, $w_i=a_1a_2\ldots a_i$ for all $1\leq i\leq n$, and $w_0=\varepsilon$ (empty string).
 
 Initial state can be loaded such that the detector works as if a input string is already read at the beginning.
 
@@ -1992,7 +2008,7 @@ For disjoint window sequence detector, we can AND the original output $Z$ togeth
 0,\quad&s\in S\setminus\{S_{n-1}\}\lor a\neq a_n
 \end{cases}.\]
 \eit
-\item Define the \tb{prefix function or failure function} $\pi\colon S\setminus\to S$ such that $\pi(S_0)=S_0$, and for any $S_i\in S\setminus\{S_0\} with $S_p=\pi(S_i)$, it satisfies that $p<i$, that $w_p$ equals to the string of the last $p$ characters of $w_i$, and that for any $q\in(p,i)$, $w_q$ doesn't equal to the string of the last $q$ characters of $w_i$. However for
+\item Define the \tb{prefix/failure function/link} $\pi\colon S\setminus\to S$ such that $\pi(S_0)=S_0$, and for any $S_i\in S\setminus\{S_0\} with $S_p=\pi(S_i)$, it satisfies that $p<i$, that $w_p$ equals to the string of the last $p$ characters of $w_i$, and that for any $q\in(p,i)$, $w_q$ doesn't equal to the string of the last $q$ characters of $w_i$. However for
 \bit
 \item \textbf{Non-overlapping sliding window sequence detector Moore circuit implementation:}
 \[\pi(S_n)=S_0\]
@@ -2027,5 +2043,116 @@ Note that all $\delta$ and $\lambda$ are computed in the process, since in hardw
 \item Implement the flip-flop inputs and output $Z$ with combination logic as functions of input character variable and present state variable.
 \item For disjoint window sequence detector, we can AND the original output $Z$ together with the output $C$ of a combinational subcircuit that outputs 1 if a mod-$n$ counter with parallel input is at the $n$th state and 0 otherwise as the new output $Z$, with the clock enable signal of the counter connected to $C'$ and the parallel input connected to a constant source of first state of the counter read iff $Z=1$.
 \een
+\sssc{Trie}
+In computer science, a trie, also known as a digital tree or prefix tree, is a tree data structure where each edge stores a character and each node has a one-to-one correspondence to the string of the characters of the edges from root to it concatenated one by one, where the root corresponds to $\varepsilon$ (empty string).
+
+Given a set of words $W=\{w_1,w_2,\ldots,w_n\}$. Let $w_i=a_{i_1}a_{i_2}\ldots a_{i_{|w_i|}}$, $w_{i_j}=a_{i_1}a_{i_2}\ldots a_{i_j}$ for all $i_j$ such that $j\in\bbN\land j\leq |w_i|$, $w_{i_0}=\varepsilon$ (empty string), and $W_i=\{w_{i_j}\mid j\in\bbN_0\land j\leq |w_i|\}$, for all $i\in\bbN\land i\leq n$. Let the set $P=\bigcup_{i=1}^nW_i$. Note that if $w_{i_j}$ and $w_{k_l}$ are the same, they are the same element of $P$. The trie of $w_1,w_2,\ldots,w_n$ is a trie such that the nodes is a bijection of $P$ and the nodes correspond to $w_1,w_2,\ldots,w_n$ respectively labeled "end-of-word". Note that in the trie, a node labeled "end-of-word" is not necessarily a leaf node (a node without child), but a leaf node must be labeled "end-of-word".
+\sssc{Sequence detector detecting multiple sequences}
+A sequence detector detecting multiple sequences $w_1,w_2,\ldots,w_n$ outputs the same as the outputs of the $n$ sequence detectors detecting $w_1,w_2,\ldots,w_n$ respectively ORed together, or outputs a sequence of $n$ bits corresponding to the outputs of the $n$ sequence detectors detecting $w_1,w_2,\ldots,w_n$ respectively.
+
+It can be implemented the $n$ sequence detectors detecting $w_1,w_2,\ldots,w_n$ respectively, with each of them implemented with SIPO register or as FSM performing KMP algorithm. However, this method wastes flip-flops.
+
+We can implement it with FSM performing Aho-Corasick algorithm.
+\ben
+\item Construct a trie of $w_1,w_2,\ldots,w_n$.
+\item Find the number of states and flip-flops needed. Let the set of all states be $S$. Each state has a one-to-one correspondence to a node. Let the number of flip-flops be $k$.
+\[k\geq\lceil\log_2(|S|)\rceil.\]
+\bit
+\item \textbf{Moore circuit implementation:} The states in $S$ is bijection of the nodes.
+\item \textbf{Mealy circuit implementation:} The states in $S$ is bijection of the nodes with children.
+\eit
+\een
+\ssc{Line code converter}
+\sssc{Line code}
+In telecommunications, a line code is a pattern of voltage, current, or photons used to represent serial digital data transmitted.
+\sssc{Clock recovery}
+Clock recovery is a process in serial communication used to extract timing information from a stream of serial data being sent in order to accurately determine payload sequence without separate clock information.
+\sssc{DC balance}
+In telecommunications, DC balance refers to the property of a transmitted signal that the DC component approaches when the length of the signal approaches infinity for any signal pattern.
+\sssc{NRZ (non-return-to-zero) code}
+NRZ code is a line code of serial binary data that represent bit '1' with high voltage for the entire bit period and bit '0' with low voltage for the entire bit period.
+
+It requires minimal bandwidth and has poor clock recovery and no DC balance. Often used internally within chips and on circuit boards where distances are short.
+\sssc{NRZI (non-return-to-zero-inverted) code}
+NRZI code is a line code of serial binary data that represent bit '1' with a transition in voltage (high-to-low or low-to-high) at the beginning of the bit period and bit '0' with no transition for the entire bit period.
+
+It requires minimal bandwidth and has poor clock recovery for long 0s and no DC balance. Used in the Universal Serial Bus (USB).
+\sssc{RZ (return-to-zero) code}
+RZ code is a line code of serial binary data that represent bit '1' with a pulse that goes high at the beginning of the bit period and return 0 before the end of the bit period and bit '0' with low voltage for the entire bit period.
+
+It requires more bandwidth than NRZ code and has good clock recovery for 1s and no DC balance.
+\sssc{Manchester code}
+Manchester code is a line code of serial binary data that represent bit '1' with a high-to-low transition in voltage in the middle of the bit period and bit '0' with a low-to-high transition in voltage in the middle of the bit period.
+
+It requires twice the bandwidth of NRZ code and has excellent clock recovery and DC balance. Used in ethernet (10BASE-T) and many RFID tags (e.g., NFC).
+\sssc{Mealy NRZ to NRZI and NRZI to NRZ converter}
+A D flip-flop with the same active edges occurrence as input signal that store last bit and a XOR gate that XOR input signal and flip-flop output as output signal.
+\sssc{Moore NRZ to NRZI and NRZI to NRZ converter}
+A two-bit SIPO shift register with the same active edges occurrence as input signal that store last two bits and a XOR gate that XOR the two flip-flops' output as output signal.
+\sssc{Mealy NRZ to RZ converter}
+An AND gate that AND the input signal and a clock signal of the same frequency as that of the input signal that is at rising edge at the beginning of every bit.
+\sssc{Moore NRZ to RZ converter}
+A D flip-flop with the same active edges occurrence as input signal that store last bit and an AND gate that AND the flip-flop output and a clock signal of the same frequency as that of the input signal that is at rising edge at the beginning of every bit.
+\sssc{Moore RZ to NRZ converter}
+A D flip-flop with the same active edges occurrence as input signal that store last bit sampled for 1 bits between beginning of bit periods and high-to-low transitions whose output is the output signal.
+\sssc{Mealy NRZ to Manchester converter}
+A FSM with clock signal being of two times the frequency of the clock of the input signal of three states $S_0,S_1,S_2$ with $S_0$ being the starting state and state graph
+\[S_0\xrightarrow{0/0}S_1\xrightarrow{0/1}S_0\xrightarrow{1/1}S_2\xrightarrow{1/0}S_0.\]
+It can be implemented with two D flip-flops with input $D_0D_1$ and output $Q_0Q_1$. Let $S_0=00,S_1=01,S_2=10$, input signal $X$, and output signal $Z$.
+\begin{longtable}[c]{|mmm|mmm|}
+\hline
+Q_0 & Q_1 & X & Q_0^+ & Q_1^+ & Z \\\hline
+0 & 0 & 0 & 0 & 1 & 0 \\
+0 & 0 & 1 & 1 & 0 & 1 \\
+0 & 1 & 0 & 0 & 0 & 1 \\
+1 & 0 & 1 & 0 & 0 & 0 \\\hline
+\end{longtable}
+\begin{longtable}[c]{mmmmm}
+Q_0^+ & 00 & 01 & 11 & 10 \\
+0 & 0 & 0 & X & X \\
+1 & 1 & X & X & 0 \\
+\end{longtable}
+\[D_0=Q_0'X.\]
+\begin{longtable}[c]{mmmmm}
+Q_1^+ & 00 & 01 & 11 & 10 \\
+0 & 1 & 0 & X & X \\
+1 & 0 & X & X & 0 \\
+\end{longtable}
+\[D_1=Q_1'X'.\]
+\begin{longtable}[c]{mmmmm}
+Q_1^+ & 00 & 01 & 11 & 10 \\
+0 & 0 & 1 & X & X \\
+1 & 1 & X & X & 0 \\
+\end{longtable}
+\[Z=Q_0'X+Q_1.\]
+\sssc{Moore NRZ to Manchester converter}
+A FSM with clock signal being of two times the frequency of the clock of the input signal of four states $S_0,S_1,S_2,S_3$ with $S_0$ or $S_2$ being the starting state and state graph
+\[S_0/0\xrightarrow{0}S_1/0\xrightarrow{0}S_2/1\xrightarrow{0}S_1/0,\]
+\[S_2/1\xrightarrow{1}S_3/1\xrightarrow{1}S_0/0\xrightarrow{1}S_3/1.\]
+It can be implemented with two D flip-flops with input $D_0D_1$ and output $Q_0Q_1$. Let $S_0=00,S_1=01,S_2=10,S_3=11$, input signal $X$, and output signal $Z$.
+\begin{longtable}[c]{|mmm|mm|}
+\hline
+Q_0 & Q_1 & X & Q_0^+ & Q_1^+ \\\hline
+0 & 0 & 0 & 0 & 1 \\
+0 & 0 & 1 & 1 & 1 \\
+0 & 1 & 0 & 1 & 0 \\
+1 & 0 & 0 & 0 & 1 \\
+1 & 0 & 1 & 1 & 1 \\
+1 & 1 & 1 & 0 & 0 \\\hline
+\end{longtable}
+\begin{longtable}[c]{mmmmm}
+Q_0^+ & 00 & 01 & 11 & 10 \\
+0 & 0 & 1 & X & 0 \\
+1 & 1 & X & 0 & 1 \\
+\end{longtable}
+\[D_0=Q_1\oplus X.\]
+\begin{longtable}[c]{mmmmm}
+Q_1^+ & 00 & 01 & 11 & 10 \\
+0 & 1 & 0 & X & 1 \\
+1 & 1 & X & 0 & 1 \\
+\end{longtable}
+\[D_1=Q_1'.\]
+\[Z=Q_0.\]
+
 \end{document}
 
