@@ -58,6 +58,63 @@
 \item 排列矩陣（permutation matrix）：每個元素皆為$1$或$0$的雙重隨機矩陣。
 \item 相異代表系（System of Distinct Representatives，SDR）：令集合$A_1, A_2, A_3, \ldots, A_n$均為集合$S$的子集合。集合族$(A_1, A_2, A_3, \ldots, A_n)$的相異代表系是$S$的子集$\{a_1, a_2, a_3, \ldots, a_n\}$，使得$\forall 1\leq i \neq j \leq n: a_i \in A_1 \wedge a_i \neq a_j$。
 \end{itemize}
+\ssc{Clique}
+\sssc{Definition}
+A clique is a subset of vertices of an undirected graph such that every two distinct vertices in the clique are adjacent.
+\sssc{Bron–Kerbosch Algorithm}
+The Bron–Kerbosch algorithm is an algorithm for finding all maximal cliques in an undirected graph, as shown in the following pseudo code.
+
+Without pivoting:
+\begin{lstlisting}[language=C++]
+void BronKerbosch(vector<vertex>&& R, unordered_set<vertex> P, unordered_set<vertex> X, vector<vector<vertex>>& maximalCliques) {
+    if (P.empty() && X.empty()) {
+        maximalCliques.push_back(R);
+        return;
+    }
+    unordered_set<vertex> Pc = P;
+    for (vertex v : Pc) {
+        R.push_back(v);
+        unordered_set<vertex> Pe = P;
+        unordered_set<vertex> Xe = X;
+        erase_if(Pe, [v](vertex u) -> bool { return !isNeighbor(v, u); });
+        erase_if(Xe, [v](vertex u) -> bool { return !isNeighbor(v, u); });
+        BronKerbosch(forward<vector<vertex>&&>(R), Pe, Xe, maximalCliques);
+        R.pop_back();
+        P.erase(v);
+        X.insert(v);
+    }
+}
+
+// call with
+BronKerbosch(vector<vertex>(), allVerticesOfAGraph, unordered_set<vertex>(), maximalCliques);
+\end{lstlisting}
+
+With pivoting (faster):
+\begin{lstlisting}[language=C++]
+void BronKerbosch(vector<vertex>&& R, unordered_set<vertex> P, unordered_set<vertex> X, vector<vector<vertex>>& maximalCliques) {
+    if (P.empty() && X.empty()) {
+        maximalCliques.push_back(R);
+        return;
+    }
+    vertex pivot = P.empty() ? *X.begin() : *P.begin(); // choose an arbitrary pivot from the union of P and X
+    unordered_set<vertex> Pc = P;
+    erase_if(Pc, [pivot](vertex u) -> bool { return isNeighbor(pivot, u); });
+    for (vertex v : Pc) {
+        R.push_back(v);
+        unordered_set<vertex> Pe = P;
+        unordered_set<vertex> Xe = X;
+        erase_if(Pe, [v](vertex u) -> bool { return !isNeighbor(v, u); });
+        erase_if(Xe, [v](vertex u) -> bool { return !isNeighbor(v, u); });
+        BronKerbosch(forward<vector<vertex>&&>(R), Pe, Xe, maximalCliques);
+        R.pop_back();
+        P.erase(v);
+        X.insert(v);
+    }
+}
+
+// call with
+BronKerbosch(vector<vertex>(), allVerticesOfAGraph, unordered_set<vertex>(), maximalCliques);
+\end{lstlisting}
 \subsection{著色（Coloring）}
 \begin{itemize}
 \item $k$-著色（$k$-coloring）：一個圖$G$的$k$-著色指一函數$f: V(G) \rightarrow \{1, 2, 3, \ldots, k\}$。如果$f$滿足$f(u)\neq f(v)$對所有$uv\in E(G)$，稱$f$是$G$的正常$k$-著色（proper $k$-coloring）。

@@ -157,13 +157,7 @@ The subtraction can be computed the same as unsigned numbers.
 
 If the difference of a positive number and a negative number is greater than $2^{N-1}-1$, it overflows into the negative range; if the difference of a negative number and a positive number is less than $-2^{N-1}$, it overflows into the positive range. This makes overflow detection straightforward.
 \ssc{Binary Codes}
-\sssc{Binary-coded decimal (BCD)}
-Binary-coded decimal (BCD), or more explicitly 8-4-2-1 BCD, is a way to represent decimal digits ($0$ to $9$) in binary, in which each decimal digit is encoded separately using 4 bits (a nibble). There are several other possible sets of binary codes for the ten decimal digits.
-
-A $k$-bit ($k\geq 4$) weighted code has the property that if the weights are integers $w_{k-1}, w_{k-2}, \ldots w_0$ (in decimal, and where for all $0\leq i<j<k$, $w_i<w_j$), the code $a_{k-1}a_{k-2}\ldots a_0$, where $a_i\in\{0,1\}$, represents number $N$, then
-\[N = \sum_{n=0}^{k-1}w_na_n.\]
-If a number $N$ has more than one possible codes in a specific set of weights, the one such that the unsigned binary number presented by the code is least is usually used. A such $k$-bit weighted code can represent up to $\sum_{n=1}^{k-1}w_n$.
-\sssc{Commonly used binary codes for decimal}
+\sssc{Commonly used code of decimal digits}
 \begin{longtable}[c]{|c|c|c|c|c|c|c|}
 \hline
 Decimal Digit & 8-4-2-1 Code (BCD) & 6-3-1-1 Code & Excess-3 Code & 2-out-of-5 Code & Gray Code\\\hline
@@ -178,26 +172,32 @@ Decimal Digit & 8-4-2-1 Code (BCD) & 6-3-1-1 Code & Excess-3 Code & 2-out-of-5 C
 8 & 1000 & 1011 & 1011 & 10100 & 1001\\\hline
 9 & 1001 & 1100 & 1100 & 11000 & 1000\\\hline
 \end{longtable}\FB
+\sssc{Binary codes}
+Binary codes are encodings that encode things into binary numbers.
+\sssc{Binary code}
+Binary code is an encoding of a sequence of things that encode the $i$th one to binary number $i$.
+\sssc{Binary-coded decimal (BCD)}
+Binary-coded decimal (BCD), or more explicitly 8-4-2-1 BCD, is an encoding of decimal digits ($0$ to $9$) in binary, in which each decimal digit is encoded separately using 4 bits to its binary form, which makes it easy to convert between decimal numbers and binary.
+\sssc{Weighted code}
+A $k$-bit ($k\geq 4$) weighted code of numbers has the property that if the weights are integers $w_{k-1}, w_{k-2}, \ldots w_0$ where for all $0\leq i<j<k$, $w_i<w_j$, the code $a_{k-1}a_{k-2}\ldots a_0$, where $a_i\in\{0,1\}$, represents number $N$, then
+\[N = \sum_{n=0}^{k-1}w_na_n.\]
+If a number $N$ has more than one possible codes in a specific set of weights, the one such that the unsigned binary number presented by the code is least is usually used.
+\sssc{Excess-$n$ code}
+Excess-$n$ encoding is an encoding of a sequence of things that encode the $i$th one to binary number $i+n$. 
 
-\begin{itemize}
-\item\tb{8-4-2-1 Code (BCD)}: Each decimal digit is directly mapped to its binary form, which makes it easy to convert between decimal numbers and binary.
-\item\tb{6-3-1-1 Code}: Sometimes makes it easier to design display drivers or simplify logic circuits.
-\item\tb{Excess-3 Code}: It's sefl-complementing, i.e. the complement of it is the 9's complement of the number. 
-\item\tb{2-out-of-5 Code}: Always has exactly 2 ones.
-\item\tb{Gray Code}: Each step changes only one bit, which minimizes transition errors.
-\eit
-\sssc{Binary encoding}
-Binary encoding is an encoding for a sequence of things of which the $i$th one is assigned with a binary number $i$.
-\sssc{Excess-$n$ encoding}
-Excess-$n$ encoding is an encoding for a sequence of things of which the $i$th one is assigned with a binary number $i+n$. 
-\sssc{Gray-like encoding}
+Excess-3 code of decimal digits is sefl-complementing, i.e. the complement of it is the 9's complement of the number. 
+\sssc{Gray code}
+In gray code, each step changes only one bit, which minimizes transition errors.
+
 An encoding of a sequence of things is called gray-like if each step changes only one bit, which minimizes transition errors.
 \sssc{One-hot and one-cold encoding}
-A one-hot (encoding) is an encoding for any number of things of which each one is assigned with a unique binary sequence with only one 1 bit.
+A one-hot (encoding) is an encoding where each code is a unique binary sequence with only one 1 bit.
 
-A one-cold (encoding) is an encoding for any number of things of which each one is assigned with a unique binary sequence with only one 0 bit.
+A one-cold (encoding) is an encoding where each code is a unique binary sequence with only one 0 bit.
 
 One-hot and one-cold encoding always change exactly two bits when changing state, errors can be detected by checking parity, and detecting states costs less, but requires more bits.
+\sssc{2-out-of-5 code}
+Every code in 2-out-of-5 code always has exactly two 1 bits.
 \sssc{Character Encoding}
 Many applications of computers require the processing of data which contains numbers, letters, and other symbols. In order to transmit such data to or from a computer or store it internally in a computer, each character must be represented by a binary code.
 
@@ -1726,8 +1726,10 @@ A state diagram (also called a state graph) for a Mealy circuit is a directed gr
 \item Each directed edge being a transition, normally drawn as an arrow from present state to next state with the input character read for such transition to happen and output character of the transition on the edge separated by /, i.e., [input character]/[output character].
 \item The starting state is usually represented by an arrow with no origin pointing to the state, a subscript 0 in the symbol of the state (often $s_0$ or $S_0$), or not shown.
 \eit
-\sssc{Incompletely specified state table}
-A cell in a state table or transition may be don't care since such transition would never occur and is represented with - and treated the same as that in a truth table. Such a state table is called an incompletely specified state table.
+\sssc{Incompletely specified state}
+A transition of state given an input character may be don't care and is represented with - and can be treated as any state when simplifying. The state, state table, and automaton are called incompletely specified when so.
+
+An output of state for Mealy machine given an input character may be don't care and is represented with - and can be treated as any output character when simplifying. The state, state table, and automaton are called incompletely specified when so.
 \sssc{Alphanumeric state graph notation}
 States in a state graph are usually represented by alphanumeric symbols such as $S_0,S_1\ldots S_n$.
 
@@ -1880,25 +1882,27 @@ A shift register counter is a type of synchronous counter consists of a shift re
 A ring counter is a type of shift register counter consists of a shift register with the output $Q$ of the last flip-flop in the chain connected to the input $D$ of the first flip-flop in the chain. The bits stored circulate around the register. The count cycle of an $n$-bit ring counter is $n$.
 \sssc{Johnson counter, Twisted Ring Counter, or Mod-2n Counter}
 A Johnson counter, twisted ring counter, or mod-2n counter is a type of shift register counter consists of a shift register with the output $Q'$ of the last flip-flop in the chain connected to the input $D$ of the first flip-flop in the chain. The legal states of a Johnson counter are those consist of at most one contiguous 0 bits block and at most one contiguous 1 bits block. For an $n$-bit Johnson counter,  number of legal states is $2n$, and the count cycle is $2n$ if starting with a legal state.
+\sssc{Weighted counter}
+A weighted code is a counter that counts in weighted code.
 \sssc{Linear (Feedback) Shift Register (LFSR) Counter}
 A linear (feedback) shift register (LFSR) counter consists is a type of shift register counter where the function realized by the combination circuit whose output is connected to the input $D$ of the first flip-flop in the chain is linear.
 
 For each $n\in\bbN$, there exists a linear $n$-bit shift register counter whose count cycle is $2^n-1$, in which all states except the all 0's state are included.
-\sssc{Synchronous Binary Up Counter}
+\sssc{Binary Up Counter}
 An $n$-bit synchronous binary up counter consists of $n$ T flip-flops sharing a common clock input signal with the one storing the $(k+1)$-th least significant bit labeled with subscript $_k$. The data input $T_0$ is connected to a constant 1 source, and the data input $T_k$ for $k\in\bbN$ is connected to
 \[\prod_{i=0}^{k-1}Q_i,\]
 which is implemented using AND gates as
 \[T_1=Q_0\]
 \[T_k=T_{k-1}Q_{k-1},\quad k\in\bbN\land 1<k<n.\]
 Its count cycle is $2^n$ and its state is a binary number incrementing from 0 to $2^n$ one-by-one per cycle.
-\sssc{Synchronous Down Counter}
+\sssc{Down Counter}
 An $n$-bit synchronous down counter consists of $n$ T flip-flops sharing a common clock input signal with the one storing the $(k+1)$-th least significant bit labeled with subscript $_k$. The data input $T_0$ is connected to a constant 0 source, and the data input $T_k$ for $k\in\bbN$ is connected to
 \[\prod_{i=0}^{k-1}Q_i',\]
 which is implemented using AND gates as
 \[T_1=Q_0'\]
 \[T_k=T_{k-1}Q_{k-1}',\quad k\in\bbN\land 1<k<n.\]
 Its count cycle is $2^n$ and its state is a binary number decrementing from $2^n$ to 0 one-by-one per cycle.
-\sssc{Synchronous Up/Down (U/D) Counter}
+\sssc{Up/Down (U/D) Counter}
 An $n$-bit synchronous up/down (U/D) counter with separate up $U$ and down $D$ inputs consists of $n$ T flip-flops sharing a common clock input signal with the one storing the $(k+1)$-th least significant bit labeled with subscript $_k$. The data input $T_k$ is connected to
 \[U\prod_{i=0}^{k-1}Q_i+D\prod_{i=0}^{k-1}Q_i',\quad k\in\bbN_0\land k<n\]
 which is implemented using AND and OR gates or other logically equivalent combinational circuit (e.g., NAND gates) as
@@ -1994,7 +1998,7 @@ For disjoint window sequence detector, we can AND the original output $Z$ togeth
 \item \textbf{Moore circuit implementation:} for any $0\leq i\leq n-1$.
 \item \textbf{Mealy circuit implementation:} for any $0\leq i\leq n-2$.
 \eit
-\item Assign a $k$-bit binary number corresponding to the flip-flops to each state. Binary encoding, one-hot encoding, one-code encoding, and gray-like encoding are often used. One-hot encoding or one-code encoding is typically used for FGPA.
+\item Assign a unique $k$-bit binary number whose each digit corresponds to the state variable of a flip-flop to each state.
 \item Compose output:
 \bit
 \item\textbf{Moore circuit implementation:} Use a combinational circuit whose inputs are the outputs of the flip-flops that outputs 1 if the present state is $S_n$ and 0 otherwise. The output function $\lambda\colon S\to\{0,1\}$ is defined as
@@ -2153,21 +2157,33 @@ Q_1^+ & 00 & 01 & 11 & 10 \\
 \end{longtable}
 \[D_1=Q_1'.\]
 \[Z=Q_0.\]
-\ssc{Equivalence}
+\ssc{Elimination of Redundant States}
+\sssc{Reachability}
+A state is reachable iff it is mapped to by transition function $\delta$ for any $x\in D_{\delta}$.
 \sssc{Equivalent states}
-Two states $p$ and $q$ of a Mealy machine are equivalent iff for any input $X$,
-\[\delta(p,X)\equiv\delta(q,X),\quad\lambda(p,X)=\lambda(q,X).\]
+Two completely specified states $p$ and $q$ of a Mealy machine are equivalent, denoted $p\equiv q$, iff for any input $X$,
+\[\delta(p,X)\equiv\delta(q,X)\land\lambda(p,X)=\lambda(q,X).\]
 
-Two states $p$ and $q$ of a Moore machine are equivalent iff for any input $X$,
-\[\delta(p,X)\equiv\delta(q,X),\quad\lambda(p)=\lambda(q).\]
+Two completely specified states $p$ and $q$ of a Moore machine are equivalent, denoted $p\equiv q$, iff for any input $X$,
+\[\delta(p,X)\equiv\delta(q,X),\]
+and
+\[\lambda(p)=\lambda(q).\]
+
+Equivalence of states is reflexive, symmetric, and transitive.
+
+Two completely specified states are distinguishable iff they can't be equivalent in any assignment of legal equivalent states.
 
 If two equivalent states exist in a state table, we can replace any occurrence of one of them by the other to eliminate a redundant state.
 
-A deterministic finite-state transducer is minimized if no equivalent states exist.
-\sssc{Finding equivalent states with implication chart}
-Let the set of all states be $S=\{S_0,S_1,\ldots,S_n\}$ and the input alphabet be $\Sigma=\{X_0,X_1,\ldots,X_m\}$.
+A completely specified deterministic finite-state transducer is minimized iff no state is unreachable and every two distinct states are distinguishable.
+
+We can minimize a completely specified deterministic finite-state transducer by maximizing the number of pairs of equivalent states, eliminating all equivalences, and eliminating all unreachable states.
+\sssc{Implication chart or implication table}
+Implication chart, also called implication table, is a method to minimize completely specified deterministic finite-state transducer.
+
+First eliminate all unreachable states. Let the set of all remaining states be $S=\{S_0,S_1,\ldots,S_n\}$ and the input alphabet be $\Sigma=\{X_0,X_1,\ldots,X_m\}$.
 \ben
-\item The implication chart, also called implication table, is a lower-triangle table with entries $a_{ij}$ for all integers $i,j\in\bbN_0\land n\geq i>j$.
+\item The implication chart is a lower-triangle table with entries $a_{ij}$ for all integers $i,j\in\bbN_0\land n\geq i>j$.
 \item Fill each entry $a_{ij}$ with
 \bit
 \item $\times$ (means distinguishable) iff for Mealy machine, there exists $X_k\in\Sigma$ such that $\lambda(S_j,X_k)\neq\lambda(S_i,X_k)$, and for Moore machine, $\lambda(S_j)\neq\lambda(S_i)$,
@@ -2176,16 +2192,58 @@ Let the set of all states be $S=\{S_0,S_1,\ldots,S_n\}$ and the input alphabet b
 otherwise.
 \eit
 \item For each entry $a_{ij}$ that has not been filled with $\times$, fill it with $\times iff any pair of states $(S_p,S_q)$ in it is such that $a_{\max(p,q)\min(p,q)}$ has been filled with $\times$. Repeatedly iterate through all entries that has not been filled with $\times$ until no entry is filled with $\times$ in an iteration.
-\item For each entry $a_{ij}$ that has not been filled with $\times$, $S_j\equiv S_i$.
+\item For each entry $a_{ij}$ that has not been filled with $\times$, $S_j\equiv S_i$. For all equivalence classes under $\equiv$, replace all elements in it with one arbitrary state in it.
+\een
+\sssc{Compatible states}
+Two possibly incompletely specified states $p$ and $q$ of a Mealy machine are compatible, denoted $p\sim q$, iff for any input $X$ such that both $\delta(p,X)$ and $\delta(q,X)$ are defined,
+\[\delta(p,X)\sim\delta(q,X),\]
+and for any input $X$ such that both $\lambda(p,X)$ and $\lambda(q,X)$ are defined,
+\[\lambda(p,X)=\lambda(q,X).\]
+
+Two possibly incompletely specified states $p$ and $q$ of a incompletely specified Moore machine are compatible, denoted $p\sim q$, iff for any input $X$ such that both $\delta(p,X)$ and $\delta(q,X)$ are defined,
+\[\delta(p,X)\sim\delta(q,X),\]
+and if both $\lambda(p)$ and $\lambda(q)$ are defined,
+\[\lambda(p)=\lambda(q).\]
+
+Compatibility of states is reflexive and symmetric but not transitive. Two states are compatible if they are equivalent.
+
+Two states are distinguishable iff they can't be compatible in any assignment of legal compatible states.
+
+If two compatible states exist in a state table, we can replace any occurrence of one of them by the other to eliminate a redundant state.
+
+A incompletely specified deterministic finite-state transducer is minimized iff no state is unreachable and every two distinct states are distinguishable.
+\sssc{Merger chart or merger table}
+Merger chart, also called merger table, is a method to minimize incompletely specified deterministic finite-state transducer.
+
+First eliminate all unreachable states. Let the set of all remaining states be $S=\{S_0,S_1,\ldots,S_n\}$ and the input alphabet be $\Sigma=\{X_0,X_1,\ldots,X_m\}$.
+\ben
+\item The merger chart is a lower-triangle table with entries $a_{ij}$ for all integers $i,j\in\bbN_0\land n\geq i>j$.
+\item Fill each entry $a_{ij}$ with
+\bit
+\item $\times$ (means distinguishable) iff for Mealy machine, there exists $X_k\in\Sigma$ such that $\lambda(S_j,X_k)\neq\lambda(S_i,X_k)$, and for Moore machine, $\lambda(S_j)\neq\lambda(S_i)$,
+\item pairs of states $(\delta(S_j,X_k),\delta(S_i,X_k))$ for all $X_k\in\Sigma$ such that
+\[\delta(S_j,X_k)\neq\delta(S_i,X_k)\land\{\delta(S_j,X_k),\delta(S_i,X_k)\}\neq\{S_i,S_j\},\]
+otherwise.
+\eit
+\item For each entry $a_{ij}$ that has not been filled with $\times$, fill it with $\times iff any pair of states $(S_p,S_q)$ in it is such that $a_{\max(p,q)\min(p,q)}$ has been filled with $\times$. Repeatedly iterate through all entries that has not been filled with $\times$ until no entry is filled with $\times$ in an iteration.
+\item For each entry $a_{ij}$ that has not been filled with $\times$, $S_j\sim S_i$. Draw a undirected graph with each state being a vertex and an edge exists between two vertices iff the two states are compatible, called compatibility graph.
+\item Find all maximal cliques of the graph using the Bron–Kerbosch algorithm. For all maximal cliques, replace all elements in it with one arbitrary state in it.
 \een
 \sssc{Equivalent deterministic finite-state transducers}
-Two deterministic finite-state transducers $M_1,M_2$ with same input alphabets $\Sigma$ and output alphabets $\Gamma$, each with set of all states $S,T$ with $S\cap T=\varnothing$, transition functions $\delta_1,\delta_2$, and output function $\lambda_1,\lambda_2$, are equivalent, iff, in the combined deterministic finite-state transducer with set of states $S\cup T$, input alphabet $\Sigma$, output alphabet $\Gamma$, transition function
-\[\delta(x)=\bcs\delta_1(x),\quad&x\in D_{\delta_1}\\\delta_2(x),\quad&x\in D_{\delta_2}\ecs,\]
-and output function
-\[\lambda(x)=\bcs\lambda_1(x),\quad&x\in D_{\lambda_1}\\\lambda_2(x),\quad&x\in D_{\lambda_2}\ecs,\]
-\[\qty(\forall s\in S\colon\exists t\in T\,\text{s.t.}\,s\equiv t)\land\qty(\forall t\in T\colon\exists s\in S\,\text{s.t.}\,s\equiv t).\]
+Two (completely or incompletely specified) deterministic finite-state transducers $M_1,M_2$ with same input alphabets $\Sigma$ and output alphabets $\Gamma$, each with set of all states $S,T$ with $S\cap T=\varnothing$, transition functions $\delta_1,\delta_2$, and output function $\lambda_1,\lambda_2$, are equivalent, iff there exists a bijection $f\colon S\to T$ such that with function
+\[\forall(s,X)\in D_{\delta_1}\colon\delta_1(s,X)=\delta_2(f(s),X),\]
+\[\forall(t,X)\in D_{\delta_2}\colon\delta_2(t,X)=\delta_1(f^{-1}(t),X),\]
+and,
+\bit
+\item for Mealy machine
+\[\forall(s,X)\in D_{\lambda_1}\colon\lambda_1(s,X)=\lambda_2(f(s),X),\]
+\[\forall(t,X)\in D_{\lambda_2}\colon\lambda_2(t,X)=\lambda_1(f^{-1}(t),X),\]
+\item for Moore machine
+\[\forall s\in D_{\lambda_1}\colon\lambda_1(s)=\lambda_2(f(s)),\]
+\[\forall t\in D_{\lambda_2}\colon\lambda_2(t)=\lambda_1(f^{-1}(t)).\]
+\eit
 \sssc{Finding equivalent deterministic finite-state transducers with implication chart}
-First minimize both deterministic finite-state transducers respectively. Let the set of all remaining states of the two deterministic finite-state transducers be $S$ and $T$. If $|S|\neq |T|$, the two deterministic finite-state transducers are not equivalent. Let $S=\{S_0,S_1,\ldots,S_n\}$ and $T=\{T_0,T_1,\ldots,T_n\}$, and the input alphabet of both deterministic finite-state transducers be $\Sigma=\{X_0,X_1,\ldots,X_m\}$.
+First minimize the two (completely or incompletely specified) deterministic finite-state transducers respectively. Let the set of all remaining states of the two automata be $S$ and $T$. If $|S|\neq |T|$, the two automata are not equivalent. Let $S=\{S_0,S_1,\ldots,S_n\}$ and $T=\{T_0,T_1,\ldots,T_n\}$, and the input alphabet of both automata be $\Sigma=\{X_0,X_1,\ldots,X_m\}$.
 \ben
 \item The implication chart, also called implication table, is a table with entries $a_{ij}$ for all integers $i,j\in\bbN_0\land n\geq i,j$.
 \item Fill each entry $a_{ij}$ with
@@ -2196,7 +2254,27 @@ First minimize both deterministic finite-state transducers respectively. Let the
 otherwise.
 \eit
 \item For each entry $a_{ij}$ that has not been filled with $\times$, fill it with $\times iff any pair of states $(S_p,T_q)$ in it is such that $a_{pq}$ has been filled with $\times$. Repeatedly iterate through all entries that has not been filled with $\times$ until no entry is filled with $\times$ in an iteration.
-\item Define a bipartite graph with two partitions $S$ and $T$ with, an edge between $S_i\in S$ and $T_j\in T$ exists iff $a_{ij}$ is not filled with $\times$. The two deterministic finite-state transducers are equivalent iff the bipartite graph has a perfect matching.
+\item Define a bipartite graph with two partitions $S$ and $T$ with, an edge between $S_i\in S$ and $T_j\in T$ exists iff $a_{ij}$ is not filled with $\times$. The two automata are equivalent iff the bipartite graph has a perfect matching.
 \een
+\ssc{State Assignment}
+A unique binary number whose each digit corresponds to the state variable of a flip-flop is assigned to each state.
+\sssc{Given encoding}
+Binary encoding, one-hot encoding, one-code encoding, and gray-like encoding are often used. One-hot encoding or one-code encoding is typically used for FGPA.
+\sssc{Cost}
+After the number of states of the automaton has been reduced, the next step in realizing is to assign flip-flop state variables to correspond to the states of the automaton The cost of the logic required to realize a sequential circuit is strongly dependent on the way this state assignment is made.
+\sssc{Equivalent state assignments}
+Two state assignments are called equivalent iff they are of equal cost.
+\sssc{Interchanging digits}
+If two state assignments are such that one can be obtained from the other by interchanging two digits for all states, the two state assignments are equivalent, since the interchanging is equivalent to interchanging the order of two flip-flops.
+\sssc{Symmetrical flip-flop}
+A flip-flop is symmetrical iff complementing the bit stored in that flip-flop for all states in a state assignment results in a state assignment of equal cost. S-R, J-K, and T flip-flops are symmetrical, while D flip-flops aren't.
+\sssc{Trial-and-error method}
+The trial-and-error method is a method to find the state assignment(s) of the lowest cost as follows
+\ben
+\item For a $n$-state DFSM, $k=\lceil\log_2n\rceil$ flip-flops is required.
+\item Find equivalent state assignments by interchanging digits, complementing bits for symmetrical flip-flops, etc. and eliminate one of them for every two equivalent state assignments found.
+\item Iterate through the remaining state assignments and find the one(s) of the lowest cost.
+\een
+
 \end{document}
 
