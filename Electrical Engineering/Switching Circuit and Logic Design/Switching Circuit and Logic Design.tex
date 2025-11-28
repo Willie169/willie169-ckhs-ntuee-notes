@@ -1679,7 +1679,7 @@ It can be implemented with a T flip-flop, in which $X$ is the input $T$ and $Z$ 
 For even parity, the state $Q$ in the T flip-flop must be cleared to $0$ before the start of a data input string. For odd parity, the state $Q$ in the T flip-flop must be preset to $1$ before the start of a data input string.
 
 The $X$ input must be synchronized with the clock so that it assumes its next value before the next active clock edge.
-\ssc{Analysis of Synchronous Circuits}
+\ssc{Analysis and Design of Synchronous Circuits}
 \sssc{Analysis by signal tracing}
 The basic procedure to find the output sequence of a synchronous circuit resulting from a given input sequence is as follows:
 \ben
@@ -2153,6 +2153,50 @@ Q_1^+ & 00 & 01 & 11 & 10 \\
 \end{longtable}
 \[D_1=Q_1'.\]
 \[Z=Q_0.\]
+\ssc{Equivalence}
+\sssc{Equivalent states}
+Two states $p$ and $q$ of a Mealy machine are equivalent iff for any input $X$,
+\[\delta(p,X)\equiv\delta(q,X),\quad\lambda(p,X)=\lambda(q,X).\]
 
+Two states $p$ and $q$ of a Moore machine are equivalent iff for any input $X$,
+\[\delta(p,X)\equiv\delta(q,X),\quad\lambda(p)=\lambda(q).\]
+
+If two equivalent states exist in a state table, we can replace any occurrence of one of them by the other to eliminate a redundant state.
+
+A deterministic finite-state transducer is minimized if no equivalent states exist.
+\sssc{Finding equivalent states with implication chart}
+Let the set of all states be $S=\{S_0,S_1,\ldots,S_n\}$ and the input alphabet be $\Sigma=\{X_0,X_1,\ldots,X_m\}$.
+\ben
+\item The implication chart, also called implication table, is a lower-triangle table with entries $a_{ij}$ for all integers $i,j\in\bbN_0\land n\geq i>j$.
+\item Fill each entry $a_{ij}$ with
+\bit
+\item $\times$ (means distinguishable) iff for Mealy machine, there exists $X_k\in\Sigma$ such that $\lambda(S_j,X_k)\neq\lambda(S_i,X_k)$, and for Moore machine, $\lambda(S_j)\neq\lambda(S_i)$,
+\item pairs of states $(\delta(S_j,X_k),\delta(S_i,X_k))$ for all $X_k\in\Sigma$ such that
+\[\delta(S_j,X_k)\neq\delta(S_i,X_k)\land\{\delta(S_j,X_k),\delta(S_i,X_k)\}\neq\{S_i,S_j\},\]
+otherwise.
+\eit
+\item For each entry $a_{ij}$ that has not been filled with $\times$, fill it with $\times iff any pair of states $(S_p,S_q)$ in it is such that $a_{\max(p,q)\min(p,q)}$ has been filled with $\times$. Repeatedly iterate through all entries that has not been filled with $\times$ until no entry is filled with $\times$ in an iteration.
+\item For each entry $a_{ij}$ that has not been filled with $\times$, $S_j\equiv S_i$.
+\een
+\sssc{Equivalent deterministic finite-state transducers}
+Two deterministic finite-state transducers $M_1,M_2$ with same input alphabets $\Sigma$ and output alphabets $\Gamma$, each with set of all states $S,T$ with $S\cap T=\varnothing$, transition functions $\delta_1,\delta_2$, and output function $\lambda_1,\lambda_2$, are equivalent, iff, in the combined deterministic finite-state transducer with set of states $S\cup T$, input alphabet $\Sigma$, output alphabet $\Gamma$, transition function
+\[\delta(x)=\bcs\delta_1(x),\quad&x\in D_{\delta_1}\\\delta_2(x),\quad&x\in D_{\delta_2}\ecs,\]
+and output function
+\[\lambda(x)=\bcs\lambda_1(x),\quad&x\in D_{\lambda_1}\\\lambda_2(x),\quad&x\in D_{\lambda_2}\ecs,\]
+\[\qty(\forall s\in S\colon\exists t\in T\,\text{s.t.}\,s\equiv t)\land\qty(\forall t\in T\colon\exists s\in S\,\text{s.t.}\,s\equiv t).\]
+\sssc{Finding equivalent deterministic finite-state transducers with implication chart}
+First minimize both deterministic finite-state transducers respectively. Let the set of all remaining states of the two deterministic finite-state transducers be $S$ and $T$. If $|S|\neq |T|$, the two deterministic finite-state transducers are not equivalent. Let $S=\{S_0,S_1,\ldots,S_n\}$ and $T=\{T_0,T_1,\ldots,T_n\}$, and the input alphabet of both deterministic finite-state transducers be $\Sigma=\{X_0,X_1,\ldots,X_m\}$.
+\ben
+\item The implication chart, also called implication table, is a table with entries $a_{ij}$ for all integers $i,j\in\bbN_0\land n\geq i,j$.
+\item Fill each entry $a_{ij}$ with
+\bit
+\item $\times$ (means distinguishable) iff for Mealy machine, there exists $X_k\in\Sigma$ such that $\lambda(S_i,X_k)\neq\lambda(T_j,X_k)$, and for Moore machine, $\lambda(S_i)\neq\lambda(T_j)$,
+\item pairs of states $(\delta(S_i,X_k),\delta(T_j,X_k))$ for all $X_k\in\Sigma$ such that
+\[\delta(S_i,X_k)\neq\delta(T_j,X_k)\land(\delta(S_i,X_k),\delta(T_j,X_k))\neq(S_i,T_j),\]
+otherwise.
+\eit
+\item For each entry $a_{ij}$ that has not been filled with $\times$, fill it with $\times iff any pair of states $(S_p,T_q)$ in it is such that $a_{pq}$ has been filled with $\times$. Repeatedly iterate through all entries that has not been filled with $\times$ until no entry is filled with $\times$ in an iteration.
+\item Define a bipartite graph with two partitions $S$ and $T$ with, an edge between $S_i\in S$ and $T_j\in T$ exists iff $a_{ij}$ is not filled with $\times$. The two deterministic finite-state transducers are equivalent iff the bipartite graph has a perfect matching.
+\een
 \end{document}
 
