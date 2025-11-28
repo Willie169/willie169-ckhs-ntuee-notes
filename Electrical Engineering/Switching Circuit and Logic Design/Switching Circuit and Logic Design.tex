@@ -172,8 +172,8 @@ Decimal Digit & 8-4-2-1 Code (BCD) & 6-3-1-1 Code & Excess-3 Code & 2-out-of-5 C
 8 & 1000 & 1011 & 1011 & 10100 & 1001\\\hline
 9 & 1001 & 1100 & 1100 & 11000 & 1000\\\hline
 \end{longtable}\FB
-\sssc{Binary codes}
-Binary codes are encodings that encode things into binary numbers.
+\sssc{Binary encodings}
+Binary encodings are encodings that encode things into binary numbers.
 \sssc{Binary code}
 Binary code is an encoding of a sequence of things that encode the $i$th one to binary number $i$.
 \sssc{Binary-coded decimal (BCD)}
@@ -185,7 +185,9 @@ If a number $N$ has more than one possible codes in a specific set of weights, t
 \sssc{Excess-$n$ code}
 Excess-$n$ encoding is an encoding of a sequence of things that encode the $i$th one to binary number $i+n$. 
 
-Excess-3 code of decimal digits is sefl-complementing, i.e. the complement of it is the 9's complement of the number. 
+Excess-3 code of decimal digits is sefl-complementing, i.e. the complement of it is the 9's complement of the number.
+\sssc{Gray adjacency}
+Two binary numbers in a binary encoding are called (gray) adjacent iff they differ only in one bit.
 \sssc{Gray code}
 In gray code, each step changes only one bit, which minimizes transition errors.
 
@@ -1743,10 +1745,12 @@ Input characters may also be represented in alphanumeric notation by assign alph
 The FSM is valid as a digital circuit iff it is deterministic iff transition is deterministic for all states.
 \sssc{Next-state Map}
 A next-state map is the K-map of a next-state variable as a function of the present-state variables and for Mealy circuit also input variables given by a transition table.
+\sssc{Flip-flop input map}
+Given a next-state map of a flip-flop, to find the input needed for each present state variables and input variables combination, convert the value $Q^+_k$ in it to the input given by the transition function of the flip-flop for every 0 and 1 cell to get flip-flop input maps.
 \sssc{T input map}
-Given a next-state map of a T flip-flop, to find the input needed for each present state variables and input variables combination, convert the value $Q^+_k$ in it to $T_k$ given by $T_k=Q_k\oplus Q^+_k$ for every 0 and 1 cell to get T input maps, equivalently, complement every 0 and 1 cell in the $Q_k=1$ half.
+Given a next-state map of a T flip-flop, to find the input needed for each present state variables and input variables combination, convert the value $Q^+_k$ in it to $T_k$ given by $T_k=Q_k\oplus Q^+_k$ for every 0 and 1 cell to get T input map, equivalently, complement every 0 and 1 cell in the $Q_k=1$ half.
 \sssc{D input map}
-Given a next-state map of a D flip-flop, to find the input needed for each present state variables and input variables combination, convert the value $Q^+_k$ in it to $D_k$ given by $D_k=Q^+_k$ for every 0 and 1 cell to get D input maps, equivalently, do nothing.
+Given a next-state map of a D flip-flop, to find the input needed for each present state variables and input variables combination, convert the value $Q^+_k$ in it to $D_k$ given by $D_k=Q^+_k$ for every 0 and 1 cell to get D input map, equivalently, do nothing.
 \sssc{S and R input map}
 Given a next-state map of a S-R flip-flop, to find the inputs needed for each present state variables and input variables combination, convert the value $Q^+_k$ in it to $S_k$ and $R_k$ respectively given by the truth table below where $X$ denotes don't care:
 \begin{longtable}[c]{mm|mm}
@@ -1757,7 +1761,7 @@ Q_k & Q^+_k & S_k & R_k \\\hline
 1 & 0 & 0 & 1 \\\hline
 1 & 1 & X & 0 \\\hline
 \end{longtable}
-for every 0 and 1 cell to get S and R input maps, equivalently, for S input maps, replace 1's in $Q_k=1$ half with X's, for R input maps, replace 0's in $Q_k=0$ half with X's and then complement all 0 and 1 cells.
+for every 0 and 1 cell to get S and R input maps, equivalently, for S input map, replace 1's in $Q_k=1$ half with X's, for R input map, replace 0's in $Q_k=0$ half with X's and then complement all 0 and 1 cells.
 \sssc{J and K input map}
 Given a next-state map of a J-K flip-flop, to find the inputs needed for each present state variables and input variables combination, convert the value $Q^+_k$ in it to $J_k$ and $K_k$ respectively given by the truth table below where $X$ denotes don't care:
 \begin{longtable}[c]{mm|mm}
@@ -1768,7 +1772,9 @@ Q_k & Q^+_k & J_k & K_k \\\hline
 1 & 0 & X & 1 \\\hline
 1 & 1 & X & 0 \\\hline
 \end{longtable}
-for every 0 and 1 cell to get J and K input maps, equivalently, for J input maps, replace all cells in $Q_k=1$ half with X's, for K input maps, replace all cells in $Q_k=0$ half with X's and then complement all cells in $Q_k=1$ half.
+for every 0 and 1 cell to get J and K input maps, equivalently, for J input map, replace all cells in $Q_k=1$ half with X's, for K input map, replace all cells in $Q_k=0$ half with X's and then complement all cells in $Q_k=1$ half.
+\sssc{Output functions and output maps}
+The output variables as functions of flip-flops outputs and for Mealy circuit also inputs of the synchronous circuit are called output functions. The K-maps of output functions are called output maps.
 \sssc{Analysis by state table or transition table}
 The following method can be used to construct a state table or a transition table:
 \ben
@@ -2258,8 +2264,6 @@ otherwise.
 \een
 \ssc{State Assignment}
 A unique binary number whose each digit corresponds to the state variable of a flip-flop is assigned to each state.
-\sssc{Given encoding}
-Binary encoding, one-hot encoding, one-code encoding, and gray-like encoding are often used. One-hot encoding or one-code encoding is typically used for FGPA.
 \sssc{Cost}
 After the number of states of the automaton has been reduced, the next step in realizing is to assign flip-flop state variables to correspond to the states of the automaton The cost of the logic required to realize a sequential circuit is strongly dependent on the way this state assignment is made.
 \sssc{Equivalent state assignments}
@@ -2273,8 +2277,29 @@ The trial-and-error method is a method to find the state assignment(s) of the lo
 \ben
 \item For a $n$-state DFSM, $k=\lceil\log_2n\rceil$ flip-flops is required.
 \item Find equivalent state assignments by interchanging digits, complementing bits for symmetrical flip-flops, etc. and eliminate one of them for every two equivalent state assignments found.
-\item Iterate through the remaining state assignments and find the one(s) of the lowest cost.
+\item Iterate through the remaining state assignments and find the minimum cost solution(s).
 \een
+\sssc{Assignment map method}
+The trial-and-error method is not practical in most cases. The assignment map method involves trying to choose a state assignment which will place the 1's (or 0's) on the flip-flop input maps and output maps in adjacent cells so that the corresponding terms can be combined. This method does not apply to all problems, and even when applicable, it does not guarantee a minimum cost solution.
 
+Assignments for two states are said to be adjacent if they differ in only one state variable. The following guidelines are used to find the state assignments that place the 1's (or 0's) on the flip-flop input maps (guidelines 1 and 2) and output maps (guideline 3) in adjacent cells:
+\ben
+\item States which have the same next state for a given input should be given adjacent assignments.
+\item States which are the next states of the same state should be given adjacent assignments.
+\item States which have the same output for Mealy circuit for a given input should be given adjacent assignments.
+\item When above guidelines require that three states be adjacent, these states should be assigned such that for the three two-combinations from the three states, only one of them is such that the two states are not adjacent.
+\item As the number of state variables increases, the cost of not satisfying guidelines 1 and 2 grows approximately exponentially.
+\item As the number of output variables increases, the cost of not satisfying guideline 3 grows approximately linearly.
+\een
+When using this guidelines, we write down all pairs states which should be given adjacent assignments according to the guidelines and then draw assignment maps. An assignment map is a Karnaugh map in which the rows and columns are combinations of state variables and each cell is a unique assignment for a state to be filled in. When filling in the map, the starting state should be put in the cell where all state variables are 0 to simplify reset wiring since nothing is to be gained by trying to put the starting state in different squares on the map because the same number of adjacencies can be found no matter where you put the starting state. Fill the map and try to satisfy as many of these adjacencies as possible. A state that is equivalent to a tried state need not be tried. Such equivalence can be found by interchanging digits, complementing bits for symmetrical flip-flops, etc. An amount of trial and error may be required to fill in the map so that the maximum number of desired state adjacencies is obtained.
+\sssc{One-hot and one-cold state assignment}
+When designing with CPLDs and FPGAs, we should keep in mind that flip-flops in logic cells are there whether we use them or not. This means that it may not be important to minimize the number of flip-flops used in the design. Instead, we should try to reduce the total number of logic cells used and the interconnections between cells since the propagation delay is longer when several cells are cascaded to realize a function. Using a one-hot or one-cold encoding for state assignment may help to accomplish this.
+
+When a one-hot (or one-cold) state assignment is used,
+\bit
+\item The minimal SOP (or POS) form of next-state equation for each flip-flop is such that each product term (or sum term) contains exactly one state variable.
+\item The minimal SOP (or POS) form of output function for each output is such that each product term (or sum term) contains exactly one state variable.
+\eit
+When designing with CPLDs or FPGAs, you should try both an assignment with a minimum number of state variables and a one-hot (or one-cold) assignment to see which one leads to a design with the smallest number of logic cells and/or fewest interconnections among cells.
 \end{document}
 
