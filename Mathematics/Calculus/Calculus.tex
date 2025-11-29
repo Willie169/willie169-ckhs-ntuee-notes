@@ -1,3 +1,48 @@
+lune of Hippocrates area (?):
+```
+7.3 49. Find the area of the crescent-shaped region (called a lune) bounded by arcs of circles with radii $r$ and $R$. (See the figure.)
+
+Blue circle:
+\[x^2+y^2=r^2\]
+\[y=\sqrt{r^2-x^2}\]
+Red circle:
+\[x^2+(y+\sqrt{R^2-r^2})^2=R^2\]
+\[y=\sqrt{R^2-x^2}-\sqrt{R^2-r^2}\]
+The area of the lune in the blue circle outside of the red circle is
+\[\int_{-r}^r\sqrt{r^2-x^2}-\sqrt{R^2-x^2}+\sqrt{R^2-r^2}\dd{x}=\frac{\pi r^2}{2}+2r\sqrt{R^2-r^2}-R^2\int_{-r/R}^{r/R}\sqrt{1-u^2}\dd{u},\quad u=\frac{x}{R},\quad\dd{u}=\frac{1}{R}\dd{x}\]
+\[\ba
+\int_{-r/R}^{r/R}\sqrt{1-u^2}\dd{u}&=\int_{\arcsin(-r/R)}^{\arcsin(r/R)}\cos^2t\dd{t},\quad u=\sin t,\quad\dd{u}=\cos t\dd{t}\\
+&=\frac{1}{2}\int_{\arcsin(-r/R)}^{\arcsin(r/R)}1+\cos(2t)\dd{t}\\
+&=\arcsin(\frac{r}{R})+\frac{r}{R}\sqrt{1-\qty(\frac{r}{R})^2}
+\ea\]
+\[\int_{-r}^r\sqrt{r^2-x^2}-\sqrt{R^2-x^2}+\sqrt{R^2-r^2}\dd{x}=\frac{\pi r^2}{2}+r\sqrt{R^2-r^2}-R^2\arcsin(\frac{r}{R})\]
+```
+
+bounded variation
+Dirichlet test and Cauchy condensation test for series and integral
+
+Improper:
+If $\int_a^{\infty}\abs{f(x)}\dd{x}$ converges, then $\lim_{x\to\infty}f(x)=0$.
+If $\int_a^{\infty}f(x)\dd{x}$ converges and $f(x)$ is nonnegative and non-increasing on $(a,\infty)$, then $\lim_{x\to\infty}xf(x)=0$.
+\begin{proof}
+Since $\int_a^{\infty}f(x)\dd{x}$ and $f(x)$ is nonnegative, $\forall\varepsilon>0$, there exists $M>a$ such that $\forall A>M$:
+\[0\leq\int_A^{\infty}f(x)\dd{x}<\varepsilon.\]
+Thus for $t>2M$,
+\[0\leq\int_{t/2}^tf(x)\dd{x}=\int_{t/2}^{\infty}f(x)\dd{x}-\int_t^{\infty}f(x)\dd{x}<2\varepsilon.\]
+Since $f(x)$ is non-increasing,
+\[f(x)\geq f(t),\quad\forall x\in[t/2,t]\]
+\[\int_{t/2}^tf(x)\dd{x}\geq\int_{t/2}^tf(t)\dd{x}=\frac{t}{2}f(t)\]
+\[tf(t)<4\varepsilon.\]
+Thus, $\forall\varepsilon>0$, there exists $M>0$ such that $\forall t>M$,
+\[tf(t)<\varepsilon,\]
+that is,
+\[\lim_{x\to\infty}xf(x)=0.\]
+\end{proof}
+Comparison test: If there exists $g(x)$ such that $\int_a^{\infty}g(x)\dd{x}$ converges and $\exists b\geq a$ such that $\forall x\in(b,\infty)\colon g(x)\geq\abs{f(x)}$, then $\int_a^{\infty}\abs{f(x)}\dd{x}$ converges.
+p-test: $\int_a^{\infty}x^p\dd{x}$ converges iff $p<-1$.
+Dirichlet test (?): If $f(x)$ is such that there exist $g(x)$ that is non-increasing on $[a,\infty)$ and $h(x)$ that is of bounded variation on $[a,\infty)$ such that $f(x)=g(x)h(x)$ for all $x\in(a,\infty)$, then $\int_a^{\infty}f(x)\dd{x}$ converges.
+
+
 \documentclass[a4paper,12pt]{report}
 \setcounter{secnumdepth}{5}
 \setcounter{tocdepth}{3}
