@@ -2179,7 +2179,7 @@ Equivalence of states is reflexive, symmetric, and transitive.
 
 Two completely specified states are distinguishable iff they can't be equivalent in any assignment of legal equivalent states.
 
-If two equivalent states exist in a state table, we can replace any occurrence of one of them by the other to eliminate a redundant state.
+If two states are equivalent, we can merge them to one.
 
 A completely specified deterministic finite-state transducer is minimized iff no state is unreachable and every two distinct states are distinguishable.
 
@@ -2198,7 +2198,7 @@ First eliminate all unreachable states. Let the set of all remaining states be $
 otherwise.
 \eit
 \item For each entry $a_{ij}$ that has not been filled with $\times$, fill it with $\times iff any pair of states $(S_p,S_q)$ in it is such that $a_{\max(p,q)\min(p,q)}$ has been filled with $\times$. Repeatedly iterate through all entries that has not been filled with $\times$ until no entry is filled with $\times$ in an iteration.
-\item For each entry $a_{ij}$ that has not been filled with $\times$, $S_j\equiv S_i$. For all equivalence classes under $\equiv$, replace all elements in it with one arbitrary state in it.
+\item For each entry $a_{ij}$ that has not been filled with $\times$, $S_j\equiv S_i$. For all equivalence classes under $\equiv$, merge all states in it to one.
 \een
 \sssc{Compatible states}
 Two possibly incompletely specified states $p$ and $q$ of a Mealy machine are compatible, denoted $p\sim q$, iff for any input $X$ such that both $\delta(p,X)$ and $\delta(q,X)$ are defined,
@@ -2211,19 +2211,21 @@ Two possibly incompletely specified states $p$ and $q$ of a incompletely specifi
 and if both $\lambda(p)$ and $\lambda(q)$ are defined,
 \[\lambda(p)=\lambda(q).\]
 
-Compatibility of states is reflexive and symmetric but not transitive. Two states are compatible if they are equivalent.
+Compatibility of states is reflexive and symmetric but not transitive.
+
+Two states are compatible if they are equivalent.
 
 Two states are distinguishable iff they can't be compatible in any assignment of legal compatible states.
 
-If two compatible states exist in a state table, we can replace any occurrence of one of them by the other to eliminate a redundant state.
+If two states are compatible, we can merge them to one.
 
 A incompletely specified deterministic finite-state transducer is minimized iff no state is unreachable and every two distinct states are distinguishable.
-\sssc{Merger chart or merger table}
-Merger chart, also called merger table, is a method to minimize incompletely specified deterministic finite-state transducer.
+\sssc{Merger table}
+Merger table is a method to minimize incompletely specified deterministic finite-state transducer.
 
 First eliminate all unreachable states. Let the set of all remaining states be $S=\{S_0,S_1,\ldots,S_n\}$ and the input alphabet be $\Sigma=\{X_0,X_1,\ldots,X_m\}$.
 \ben
-\item The merger chart is a lower-triangle table with entries $a_{ij}$ for all integers $i,j\in\bbN_0\land n\geq i>j$.
+\item The merger table is a lower-triangle table with entries $a_{ij}$ for all integers $i,j\in\bbN_0\land n\geq i>j$.
 \item Fill each entry $a_{ij}$ with
 \bit
 \item $\times$ (means distinguishable) iff for Mealy machine, there exists $X_k\in\Sigma$ such that $\lambda(S_j,X_k)\neq\lambda(S_i,X_k)$, and for Moore machine, $\lambda(S_j)\neq\lambda(S_i)$,
@@ -2233,7 +2235,8 @@ otherwise.
 \eit
 \item For each entry $a_{ij}$ that has not been filled with $\times$, fill it with $\times iff any pair of states $(S_p,S_q)$ in it is such that $a_{\max(p,q)\min(p,q)}$ has been filled with $\times$. Repeatedly iterate through all entries that has not been filled with $\times$ until no entry is filled with $\times$ in an iteration.
 \item For each entry $a_{ij}$ that has not been filled with $\times$, $S_j\sim S_i$. Draw a undirected graph with each state being a vertex and an edge exists between two vertices iff the two states are compatible, called compatibility graph.
-\item Find all maximal cliques of the graph using the Bron–Kerbosch algorithm. For all maximal cliques, replace all elements in it with one arbitrary state in it.
+\item Find all maximal cliques of the graph using the Bron–Kerbosch algorithm.
+\item Find a set of disjoint maximal cliques such that the number of vertices covered by them is the largest, merge all vertices in each of them to one.
 \een
 \sssc{Equivalent deterministic finite-state transducers}
 Two (completely or incompletely specified) deterministic finite-state transducers $M_1,M_2$ with same input alphabets $\Sigma$ and output alphabets $\Gamma$, each with set of all states $S,T$ with $S\cap T=\varnothing$, transition functions $\delta_1,\delta_2$, and output function $\lambda_1,\lambda_2$, are equivalent, iff there exists a bijection $f\colon S\to T$ such that with function
