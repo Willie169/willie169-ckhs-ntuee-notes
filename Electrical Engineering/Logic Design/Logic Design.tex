@@ -2236,7 +2236,9 @@ otherwise.
 \item For each entry $a_{ij}$ that has not been filled with $\times$, fill it with $\times iff any pair of states $(S_p,S_q)$ in it is such that $a_{\max(p,q)\min(p,q)}$ has been filled with $\times$. Repeatedly iterate through all entries that has not been filled with $\times$ until no entry is filled with $\times$ in an iteration.
 \item For each entry $a_{ij}$ that has not been filled with $\times$, $S_j\sim S_i$. Draw a undirected graph with each state being a vertex and an edge exists between two vertices iff the two states are compatible, called compatibility graph.
 \item Find all maximal cliques of the graph using the Bron–Kerbosch algorithm.
-\item Find a set of disjoint maximal cliques such that the number of vertices covered by them is the largest, merge all vertices in each of them to one.
+\item Draw a undirected graph with each maximal clique found in the last step being a vertex and an edge exists between two vertices iff the two cliques are disjoint.
+\item Find all maximal cliques of the graph using the Bron–Kerbosch algorithm.
+\item Find the maximal clique with the maximal sum of the number of vertices in the clique of compatibility graph corresponding to each vertex in the clique. Merge all vertices in each of the clique of compatibility graph corresponding to each vertex in that clique to one.
 \een
 \sssc{Equivalent deterministic finite-state transducers}
 Two (completely or incompletely specified) deterministic finite-state transducers $M_1,M_2$ with same input alphabets $\Sigma$ and output alphabets $\Gamma$, each with set of all states $S,T$ with $S\cap T=\varnothing$, transition functions $\delta_1,\delta_2$, and output function $\lambda_1,\lambda_2$, are equivalent, iff there exists a bijection $f\colon S\to T$ such that with function
