@@ -170,6 +170,8 @@ The reciprocal function is the function $f(x)=\frac{1}{x}$.
 A polynomial is a function $P(x)=\sum_{k=0}^na_kx^k$ where $a_k\in\mathbb{R}$ or $\mathbb{C}$ are constants called coefficients and $n$ is a nonnegative integer called the degree of $P$.
 \sssc{Rational Function (有理函數)}
 A function $f$ is called a rational function if there exists two polynomials $P(x)$ and $Q(x)$ such that $f(x)=\frac{P(x)}{Q(x)}$ for all $x$ in the domain.
+
+If $\deg(P)\geq\deg(Q)$, $f(x)$ is improper; otherwise $f(x)$ is proper.
 \sssc{Algebraic Function (代數函數)}
 A function $f$ is called an algebraic function if there exists a polynomial $P(y,x)$ in two variables such that $P(f(x),x)=0$ for all $x$ in the domain.
 \sssc{Transcendental Function (超越函數)
@@ -2175,8 +2177,9 @@ exists.
 \subsubsection{Univariate form}
 Let $g:\,I\subseteq\mathbb{R}\to\mathbb{R}$ be injective and differentiable on $[a,b]\subseteq I$, with $g'$ being integrable on $[a,b]$, and $f:\,K\supseteq g([a,b])\to\mathbb{R}$ be integrable on $g([a,b])$. Then:
 \[\int_a^bf\circ g(x)\cdot g'(x)\dd{x}=\int_{g(a)}^{g(b)}f(u)\,\mathrm{d}u,\]
-and for $K=g([a,b])$:
+and
 \[\int f\circ g(x)\cdot g'(x)\dd{x}=\int f(u)\,\mathrm{d}u.\]
+Substitutions from RHS to LHS are also called inverse substitution.
 \begin{proof}
 Consider the interval \([a, b]\) partitioned as
 \[P = \{a = x_0 < x_1 < \dots  < x_n = b\}.\]
@@ -2200,12 +2203,15 @@ As the partition \(P\) of \([a, b]\) gets finer, the Riemann sum \(S_P\) converg
 \end{proof}
 \subsubsection{Multivariate form}
 Let $\mathbf{T}:\,I\subseteq\mathbb{R}^n\to\mathbb{R}^n$ be injective and differentiable on $D\subseteq I$, with all elements of its gradient (i.e. Jacobian matrix) $\nabla\mathbf{T}$ being continuous on $D$, and $f:\,K\supseteq\mathbf{T}(D)\to\mathbb{R}$ be integrable on $\mathbf{T}(D)$. Then:
-\[\int_{\mathbf{T}(D)}f(x_1\,x_2\,\dots\,x_n)\cdot\dd{x}_1\dd{x}_2\,\dots\dd{x}_n=\int_D f(u_1\,u_2\,\dots\,u_n)\abs{\det\left(\nabla\mathbf{T}\right)}\,\mathrm{d}u_1\,\mathrm{d}u_2\,\dots\,\mathrm{d}u_n,\]
-and for $K=\mathbf{T}(D)$:
-\[\int f(x_1\,x_2\,\dots\,x_n)\cdot\dd{x}_1\dd{x}_2\,\dots\dd{x}_n=\int f(u_1\,u_2\,\dots\,u_n)\abs{\det\left(\nabla\mathbf{T}\right)}\,\mathrm{d}u_1\,\mathrm{d}u_2\,\dots\,\mathrm{d}u_n.\]
+\[\int_D f(u_1\,u_2\,\dots\,u_n)\abs{\det\left(\nabla\mathbf{T}\right)}\,\mathrm{d}u_1\,\mathrm{d}u_2\,\dots\,\mathrm{d}u_n=\int_{\mathbf{T}(D)}f(x_1\,x_2\,\dots\,x_n)\cdot\dd{x}_1\dd{x}_2\,\dots\dd{x}_n,\]
+and
+\[\int f(u_1\,u_2\,\dots\,u_n)\abs{\det\left(\nabla\mathbf{T}\right)}\,\mathrm{d}u_1\,\mathrm{d}u_2\,\dots\,\mathrm{d}u_n=\int f(x_1\,x_2\,\dots\,x_n)\cdot\dd{x}_1\dd{x}_2\,\dots\dd{x}_n.\]
+Substitutions from RHS to LHS are also called inverse substitution.
 \subsubsection{Measure theory form}
 Let $X$ be a locally compact Hausdorff space equipped with a finite Radon measure $μ$, and let $Y$ be a \text{\textsigma}-compact Hausdorff space with a \text{\textsigma}-finite Radon measure $\rho$. Let $\phi:\,X\to Y$ be an absolutely continuous function, (which implies that $\mu(E)=0\implies\rho(\phi(E))=0$). Then there exists a real-valued Borel measurable function $w$ on $X$ such that for every Lebesgue integrable function $f:\,Y\to\mathbb{R}$, the function $(f\circ\phi)\cdot w$ is Lebesgue integrable on $X$, and for every open subset $U$ of $X$
-\[\int_{\phi(U)}f(y)\,\mathrm{d}\rho(y)=\int_U(f\circ\phi)(x)\cdot w(x)\,\mathrm{d}\mu(x).\]
+\[\int_U(f\circ\phi)(x)\cdot w(x)\,\mathrm{d}\mu(x)=\int_{\phi(U)}f(y)\,\mathrm{d}\rho(y).\]
+Substitutions from RHS to LHS are also called inverse substitution.
+
 Furthermore, there exists some Borel measurable function $g$ such that 
 \[w(x)=(g\circ\phi)(x).\]
 \subsection{Integration by parts (IBP) (分部積分法) or partial integration (部分積分法)}
@@ -2270,6 +2276,88 @@ Let:
 &=\frac{a^2}{a^2+b^2}\qty(\frac{1}{a}e^{ax}\sin(bx)-\frac{b}{a^2}e^{ax}\cos(bx))+C\\
 &=\frac{e^{ax}}{a^2+b^2}\qty(a\sin(bx)-b\cos(bx))+C.
 \ea\]
+\ssc{General Method of Integration of Rational Functions}
+\sssc{$\frac{A}{x-a}$}
+\[\int\frac{A}{x-a}\dd{x}=A\ln|x-a|+C,\quad a,A\in\bbR\]
+\sssc{$\frac{A}{\qty(x-a)^g}$}
+\[\int\frac{A}{\qty(x-a)^g}\dd{x}=-\frac{A}{(g-1)\qty(x-a)^{g-1}}+C,\quad a,A\in\bbR\land g\in\bbN_{>1}\]
+\sssc{$\frac{Ax+B}{x^2+bx+c}$}
+\[\int\frac{Ax+B}{x^2+bx+c}=\frac{A}{2}\ln|x^2+bx+c|+\frac{2B-bA}{\sqrt{4c-b^2}}\arctan(\frac{2x+b}{\sqrt{4c-b^2}})+C,\quad b,c,A,B\in\bbR\land b^2<4c\]
+\begin{proof}
+\[\ba
+\int\frac{Ax+B}{x^2+bx+c}&=\int\frac{A}{2}\frac{2x+b}{x^2+bx+c}+\frac{B-\frac{bA}{2}}{\qty(x+\frac{b}{2})^2+\qty(c-\frac{b^2}{4})}\dd{x}\\
+&=\frac{A}{2}\ln|x^2+bx+c|+\qty(B-\frac{bA}{2})\int\frac{1}{u^2+\qty(c-\frac{b^2}{4})}\dd{u},\quad u=x+\frac{b}{2}\\
+&=\frac{A}{2}\ln|x^2+bx+c|+\frac{2B-bA}{\sqrt{4c-b^2}}\arctan(\frac{2x+b}{\sqrt{4c-b^2}})+C
+\ea\]
+\sssc{$\frac{1}{\qty(x^2+bx+c)^h}$}
+\[\int\frac{1}{\qty(x^2+bx+c)^h}\dd{x}=\frac{1}{\qty(4c-b^2)(h-1)}\frac{2x+b}{\qty(x^2+bx+c)^{h-1}}+\frac{4h-6}{\qty(4c-b^2)(h-1)}\int\frac{1}{\qty(x^2+bx+c)^{h-1}}\dd{x},\quad b,c\in\bbR\land b^2<4c\land h\in\bbN_{>1}\]
+\begin{proof}
+\[u=x+\frac{b}{2},\quad\alpha=\sqrt{c-\frac{b^2}{4}}\]
+\[\ba 
+\int\frac{1}{\qty(x^2+bx+c)^h}\dd{x}&=\int\frac{1}{\qty(u^2+\alpha^2)^h}\dd{u}\\
+&=\frac{1}{\alpha^2}\int\frac{u^2+\alpha^2-u^2}{\qty(u^2+\alpha^2)^h}\dd{u}\\
+&=\frac{1}{\alpha^2}\int\frac{1}{\qty(u^2+\alpha^2)^{h-1}}\dd{u}-\frac{1}{\alpha^2}\int\frac{u^2}{\qty(u^2+\alpha^2)^h}\dd{u}
+\ea\]
+\[\ba
+\dv{}{u}\qty(\frac{u}{\qty(u^2+\alpha^2)^{h-1}})&=\frac{\qty(u^2+\alpha^2)^{h-1}-u(h-1)\qty(u^2+\alpha^2)^{h-2}(2u)}{\qty(u^2+\alpha^2)^{2(h-1)}}\\
+&=\frac{1}{\qty(u^2+\alpha^2)^{h-1}}-
+2(h-1)\frac{u^2}{\qty(u^2+\alpha^2)^h}
+\ea\]
+\[\frac{u^2}{\qty(u^2+\alpha^2)^h}=\frac{1}{2(h-1)}\qty(\frac{1}{\qty(u^2+\alpha^2)^{h-1}}-\dv{}{u}\qty(\frac{u}{\qty(u^2+\alpha^2)^{h-1}}))\]
+\[\int\frac{u^2}{\qty(u^2+\alpha^2)^h}\dd{u}=\frac{1}{2(h-1)}\qty(\int\frac{1}{\qty(u^2+\alpha^2)^{h-1}}\dd{u}-\frac{u}{\qty(u^2+\alpha^2)^{h-1}})\]
+\[\ba  
+\int\frac{1}{\qty(x^2+bx+c)^h}\dd{x}&=\frac{1}{\alpha^2}\int\frac{1}{\qty(u^2+\alpha^2)^{h-1}}\dd{u}-\frac{1}{\alpha^2}\int\frac{u^2}{\qty(u^2+\alpha^2)^h}\dd{u}\\
+&=\frac{1}{\alpha^2}\int\frac{1}{\qty(u^2+\alpha^2)^{h-1}}\dd{u}-\frac{1}{2\alpha^2(h-1)}\qty(\int\frac{1}{\qty(u^2+\alpha^2)^{h-1}}\dd{u}-\frac{u}{\qty(u^2+\alpha^2)^{h-1}})\\
+&=\frac{2h-3}{2\alpha^2(h-1)}\int\frac{1}{\qty(u^2+\alpha^2)^{h-1}}\dd{u}+\frac{1}{2\alpha^2(h-1)}\frac{u}{\qty(u^2+\alpha^2)^{h-1}}\\
+&=\frac{4h-6}{\qty(4c-b^2)(h-1)}\int\frac{1}{\qty(x^2+bx+c)^{h-1}}\dd{x}+\frac{1}{\qty(4c-b^2)(h-1)}\frac{2x+b}{\qty(x^2+bx+c)^{h-1}}
+\ea\]
+\end{proof}
+\sssc{$\frac{Ax+B}{\qty(x^2+bx+c)^h}$}
+\[\int\frac{Ax+B}{\qty(x^2+bx+c)^h}\dd{x}=-\frac{A}{2(h-1)\qty(x^2+bx+c)^{h-1}}+\qty(B-\frac{bA}{2})\int\frac{1}{\qty(x^2+bx+c)^h}\dd{x},\quad b,c,A,B\in\bbR\land b^2<4c\land h\in\bbN_{>1}\]
+\sssc{Integration of Rational Functions by Partial Fractions}
+To compute the integral of any arbitrary rational function $f(x)$,
+\ben
+\item Express it as
+\[f(x)=S(x)+\frac{P(x)}{Q(x)}\]
+where $S(x),P(x),Q(x)$ are polynomials and $\deg(P)<\deg(Q)$.
+\item Find $q,a_j,b_k,c_k\in\bbR$, $m,n\in\bbN_0$, $r_j,s_k\in\bbN$ and $b_k^{\pht{k}2}-4c_k<0$ for all $k$ such that
+\[Q(x)=q\prod_{j=1}^m\qty(x-a_j)^{r_j}\prod_{k=1}^n\qty(x^2+b_kx+c_k)^{s_k}.\]
+\item Express $\frac{P(x)}{Q(x)}$ as
+\[\frac{P(x)}{Q(x)}=p\qty(\sum_{j=1}^m\sum_{g=1}^{r_j}\frac{A_{j_g}}{\qty(x-a_j)^g}+\sum_{k=1}^n\sum_{h=1}^{s_k}\frac{B_{k_h}x+C_{k_h}}{\qty(x^2+b_kx+c_k)^h})\]
+where $p,A_{j_g},B_{k_h},C_{k_h}\in\bbR$.
+\item Integrate $S(x)$ and each term of $\frac{A_{j_g}}{\qty(x-a_j)^g}$ and $\frac{B_{k_h}x+C_{k_h}}{\qty(x^2+b_kx+c_k)^h}$ respectively.
+\een
+\ssc{Rationalizing substitution}
+\sssc{Direct substitution}
+When computing an integral of
+\[R(x,\sqrt[n]{g(x)})\]
+with respect to $x$ where $R$ and $g$ are rational functions, the substitution $u=\sqrt[n]{g(x)}$ may be effective.
+\sssc{Euler substitutions}
+When computing an integral of
+\[R(x,\sqrt{ax^2+bx+c})\]
+with respect to $x$ where $R$ is a rational function, the three Euler('s) substitutions may be effective.
+\ben
+\item First substitution: For $a\geq 0$, substitute
+\[\sqrt{ax^2+bx+c}=\pm x\sqrt{a}+t\]
+\[x=\frac{c-t^2}{\pm 2t\sqrt{a}-b}\]
+where either the positive sign or the negative sign can be chosen.
+\item Second substitution: For $c\geq 0$, substitute
+\[\sqrt{ax^2+bx+c}=xt\pm\sqrt{c}\]
+\[x=\pm 2t\sqrt{c}-b}\]
+where either the positive sign or the negative sign can be chosen.
+\item Third substitution: For $b^2-4ac\geq 0$, let
+\[ax^2+bx+c=a(x-\alpha)(x-\beta),\]
+substitute
+\[\sqrt{ax^2+bx+c}=(x-\alpha)t\]
+\[x=\frac{\alpha\beta-\alpha t^2}{a-t^2}\]
+\een
+\ssc{Tangent half-angle substitution, Weierstrass substitution, or universal trigonometric substitution}
+When computing an integral of
+\[f(\sin(x),\cos(x))\]
+with respect to $x$, the substitution
+\[t=\tan(\frac{x}{2})\]
+gives
+\[\int f(\sin(x),\cos(x))=\int f\qty(\frac{2t}{1+t^2},\frac{1-t^2}{1+t^2})\frac{2}{1+t^2}\dd{t}.\]
 \ssc{Leibniz integral rule (for differentiation under the integral sign) (（積分符號內取微分的）萊布尼茲積分法則)}
 \sssc{Basic form for constant limits}
 Let $a,b\in\mathbb{R}$, $f(x,t)$ be a function with domain $\mathbb{R}^2$, and the following integral exists. Then:
@@ -2698,40 +2786,64 @@ Using the chain rule on the left:
 \end{proof}
 \sssc{Hyperbolic sine function}
 \[\dv{\sinh(x)}{x}=\cosh(x).\]
+\begin{proof}
 PLACEHOLDER
+\end{proof}
 \sssc{Hyperbolic cosine function}
 \[\dv{\cosh(x)}{x}=\sinh(x).\]
+\begin{proof}
 PLACEHOLDER
+\end{proof}
 \sssc{Hyperbolic tangent function}
 \[\dv{\tanh(x)}{x}=\sech^2(x).\]
+\begin{proof}
 PLACEHOLDER
+\end{proof}
 \sssc{Hyperbolic cotangent function}
 \[\dv{\coth(x)}{x}=-\csch^2(x).\]
+\begin{proof}
 PLACEHOLDER
+\end{proof}
 \sssc{Hyperbolic secant function}
 \[\dv{\sech(x)}{x}=-\tanh(x)\sech(x).\]
+\begin{proof}
 PLACEHOLDER
+\end{proof}
 \sssc{Hyperbolic cosecant function}
 \[\dv{\csch(x)}{x}=-\coth(x)\csch(x).\]
+\begin{proof}
 PLACEHOLDER
+\end{proof}
 \sssc{Inverse hyperbolic sine function}
 \[\dv{\arcsinh(x)}{x}=\frac{1}{\sqrt{x^2+1}}.\]
+\begin{proof}
 PLACEHOLDER
+\end{proof}
 \sssc{Inverse hyperbolic cosine function}
 \[\dv{\arccosh(x)}{x}=\frac{1}{\sqrt{x^2-1}},\quad x>1.\]
+\begin{proof}
 PLACEHOLDER
+\end{proof}
 \sssc{Inverse hyperbolic tangent function}
 \[\dv{\arctanh(x)}{x}=\frac{1}{1-x^2},\quad|x|<1.\]
+\begin{proof}
 PLACEHOLDER
+\end{proof}
 \sssc{Inverse hyperbolic cotangent function}
 \[\dv{\operatorname{arccoth}\qty(x)}{x}=\frac{1}{1-x^2},\quad|x|>1.\]
+\begin{proof}
 PLACEHOLDER
+\end{proof}
 \sssc{Inverse hyperbolic secant function}
 \[\dv{\operatorname{arcsech}\qty(x)}{x}=-\frac{1}{x\sqrt{1-x^2}},\quad 0<x\leq 1.\]
+\begin{proof}
 PLACEHOLDER
+\end{proof}
 \sssc{Inverse hyperbolic cosecant function}
 \[\dv{\operatorname{arccsch}\qty(x)}{x}=-\frac{1}{|x|\sqrt{1+x^2}}.\]
+\begin{proof}
 PLACEHOLDER
+\end{proof}
 \sssc{Lambert W function}
 \[x(1+W(x))\dv{W(x)}{x}=W(x),\quad x\neq -\frac{1}{e}.\]
 \begin{proof}
@@ -2909,6 +3021,29 @@ PLACEHOLDER
 \begin{proof}
 PLACEHOLDER
 \end{proof}
+\sssc{Product of sine and cosine functions}
+\[\int\sin^m(x)\cos^n(x)\dd{x},\quad m,n\in\bbN.\]
+\begin{itemize}
+\item For odd $n$, use $\cos^2(x)=1-\sin^2(x)$ and then substitute $u=\sin(x),\quad\dd{u}=\cos(x)\dd{x}$.
+\item For odd $m$, use $\sin^2(x)=1-\cos^2(x)$ and then substitute $u=\cos(x),\quad\dd{u}=-\sin(x)\dd{x}$.
+\item For $m=n$, use $\sin(x)\cos(x)=\frac{1}{2}\sin(2x)$.
+\item For $\frac{m-n}{2}\in\bbN$, use $\sin(x)\cos(x)=\frac{1}{2}\sin(2x)$ and then substitute $\sin^2(x)=\frac{1}{2}(1-\cos(2x))$.
+\item For $\frac{n-m}{2}\in\bbN$, use $\sin(x)\cos(x)=\frac{1}{2}\sin(2x)$ and then substitute $\cos^2(x)=\frac{1}{2}(1+\cos(2x))$.
+\end{itemize}
+\sssc{Product of tangent and secant functions}
+\[\int\tan^m(x)\sec^n(x)\dd{x},\quad m,n\in\bbN.\]
+\begin{itemize}
+\item For even $n$, save a factor of $\sec^2(x)$, use $\sec^2(x)=1+\tan^2(x)$ to express the remaining factors in terms of $\tan(x)$, and then substitute $u=\tan(x),\quad\dd{u}=\sec^2(x)\dd{x}$.
+\item For odd $m$, save a factor of $\tan(x)\sec(x)$, use $\tan^2(x)=\sec^2(x)-1$ to express the remaining factors in terms of $\sec(x)$, and then substitute $u=\sec(x),\quad\dd{u}=\tan(x)\sec(x)\dd{x}$.
+\item For even $m$, use $\tan^2(x)=\sec^2(x)-1$ to express the integrand in terms of $\sec(x)$, and then use reduction formula for secant function.
+\end{itemize}
+\sssc{Product of cotangent and cosecant functions}
+\[\int\cot^m(x)\csc^n(x)\dd{x},\quad m,n\in\bbN.\]
+\begin{itemize}
+\item For even $n$, save a factor of $\csc^2(x)$, use $\csc^2(x)=1+\cot^2(x)$ to express the remaining factors in terms of $\cot(x)$, and then substitute $u=\cot(x),\quad\dd{u}=-\csc^2(x)\dd{x}$.
+\item For odd $m$, save a factor of $\cot(x)\csc(x)$, use $\cot^2(x)=\csc^2(x)-1$ to express the remaining factors in terms of $\csc(x)$, and then substitute $u=\csc(x),\quad\dd{u}=-\cot(x)\csc(x)\dd{x}$.
+\item For even $m$, use $\cot^2(x)=\csc^2(x)-1$ to express the integrand in terms of $\csc(x)$, and then use reduction formula for cosecant function.
+\end{itemize}
 \sssc{Inverse sine function}
 \[\int\arcsin(x)\dd{x}=x\arcsin(x)+\sqrt{1-x^2}+C.\]
 \begin{proof}
