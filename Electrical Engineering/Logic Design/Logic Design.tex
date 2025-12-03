@@ -1665,10 +1665,10 @@ Some flip-flops has asynchronous inputs that change the stored state of $Q$ at a
 \item Active-low asynchronous clear PreN sets the stored state of $Q$ to 1 if Pre=0, called active, and does nothing if Pre=1. In block diagrams, with the side of the symbol of the flip-flop with input lines at the buttom, PreN is an input line with inversion bubble on the right side labeled PreN or Pre.
 \item If both Clr (ClrN) and Pre (PreN) are active at the same time, the behavior is unpredictable.
 \eit
-\sssc{Flip-flops with clock enable}
-In synchronous digital systems, the flip-flops are usually driven by a common clock so that all state changes occur at the same time in response to the same clock edge. If we want a flip-flop to hold existing data during an active edge even though the data input to the flip-flops may be changing, we can use a flip-flop with clock enable (CE) input.
+\sssc{Flip-flops with clock enable or chip enable}
+In synchronous digital systems, the flip-flops are usually driven by a common clock so that all state changes occur at the same time in response to the same clock edge. If we want a flip-flop to hold existing data during an active edge even though the data input to the flip-flops may be changing, we can use a flip-flop with clock enable (also called chip enable) (CE) input.
 
-A flip-flop with clock enable (CE) input has an additional input CE and works as a normal flip-flop if CE=1, called enabled, and hold if CE=0, called disabled.
+A flip-flop with clock enable input has an additional input CE and works as a normal flip-flop if CE=1, called enabled, and hold if CE=0, called disabled.
 
 One method to implement it is by gating the clock, that is, replace the original clock input with the output of an AND gate with clock input and CE being the inputs. However, there are two potential problem. First, gate delays may cause the clock to arrive at some flip-flops at different times than at other flip-flops, resulting in a loss of synchronization. Second, if CE changes at the wrong time, the flip-flop may trigger due to the change in CE instead of due to the change in the clock input.
 
