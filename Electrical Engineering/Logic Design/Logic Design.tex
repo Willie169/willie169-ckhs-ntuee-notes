@@ -1623,7 +1623,7 @@ An edge-triggered flip-flop has the same inputs and outputs of the gated latch o
 The symbol of a rising-edge-triggered flip-flop in block diagrams is a gated latch of the same type with $En$ replaced with a small arrowhead (wedge shape) with its opening facing outwards from the rectangle and its two ends on the side of the rectangle representing the clock input.
 
 The symbol of a falling-edge-triggered flip-flop in block diagrams is a rising-edge-triggered flip-flop of the same type with an inversion bubble outside of the rectangle at the clock input.
-\sssc{(Edge-triggered) S-R flip-flop (JKFF)}
+\sssc{(Edge-triggered) S-R flip-flop (SRFF)}
 For active-high S-R flip-flops, $(S,R)=(1,1)$ is not allowed. For active-low S-R flip-flops, $(\ol{S},\ol{R})=(0,0)$ is not allowed.
 \sssc{(Edge-triggered) D flip-flop (DFF)}
 When the context is clear, flip-flops (FFs) may be used to refer to D flip-flops (DFFs).
@@ -1643,19 +1643,19 @@ The symbol of a T flip-flop in block diagrams is a D flip-flop with $D$ replaced
 \sssc{Pulse-triggered flip-flops}
 The term pulse-triggered flip-flop refers to the implementation that AND together clock signal and a slightly delayed version of the inversion of the clock siganl and feed it to a gated latch such that the flip-flop is transparent only on a short period after a rising edge, or AND together the inversion of a clock signal and a slightly delayed version of the clock siganl and feed it to a gated latch such that the flip-flop is transparent only on a short period after a falling edge.
 \sssc{Master-slave flip-flops}
-The term master-slave flip-flop refers to a particular implementation that uses two gated latches of the same type in such a way that the flip-flop outputs only change on a clock edge.
+The term master-slave flip-flop refers to a particular implementation that uses two gated latches in such a way that the flip-flop outputs only change on a clock edge.
 
 The master is the latch that takes the data inputs and the slave is the latch that takes outputs of the master as inputs and outputs the final outputs of the master-slave flip-flop.
 
-The master-slave flip-flops need a time where the data inputs are stable before an active edge long enough for the master to latch, called setup time, and a time where the data inputs are stable after an active edge long enough for the outputs of master to transfer to the slave, called hold time. If data inputs change during the union of setup time and hold time around an active edge, the behavior is unpredictable.
+The master-slave flip-flops need a time where the data inputs are stable before an active edge long enough for the master to latch, called setup time, and a time where the data inputs are stable after an active edge long enough for the outputs of master to transfer to the slave, called hold time. If data inputs change during setup time or hold time around an active edge, the behavior is unpredictable.
 
 For rising-edge-triggered flip-flops, the enable signal of the master is the inverse of the clock signal and the enable signal of the slave is the clock signal. For falling-edge-triggered flip-flops, the enable signal of the master is the clock signal and the enable signal of the slave is the inverse of the clock signal.
-\sssc{Master-slave S-R flip-flop (SRFF)}
-Let the inputs and outputs of the master be with subscript $_1$ and those of the slave be with subscript $_2$. In an active-high or active-low master-slave S-R flip-flop, $Q_1$ and $Q_1'$ are connected to $S_2$ and $R_2$ respectively, and $Q_2$ and $Q_2'$ are the final outputs of it.
+\sssc{Master-slave S-R flip-flop}
+A master-slave S-R flip-flop consist of two gated S-R latches in which, with the inputs and outputs of the master be with subscript $_1$ and those of the slave be with subscript $_2$, $Q_1$ and $Q_1'$ are connected to $S_2$ and $R_2$ respectively, and $Q_2$ and $Q_2'$ are the final outputs of it.
 \sssc{Master-slave D flip-flop}
-Let the inputs and outputs of the master be with subscript $_1$ and those of the slave be with subscript $_2$. In a master-slave D flip-flop, $Q_1$ is connected to $D_2$, $Q_1'$ is discarded, and $Q_2$ and $Q_2'$ are the final outputs of it.
-\sssc{Master-slave J-K flip-flop (JKFF)}
-Let the inputs and outputs of the master be with subscript $_1$ and those of the slave be with subscript $_2$. In a master-slave J-K flip-flop, $Q_1$ and $Q_1'$ are connected to $J_2$ and $K_2$ respectively, and $Q_2$ and $Q_2'$ are the final outputs of it.
+A master-slave D flip-flop consist of two gated D latch in which, with the inputs and outputs of the master be with subscript $_1$ and those of the slave be with subscript $_2$, $Q_1$ is connected to $D_2$, $Q_1'$ is discarded, and $Q_2$ and $Q_2'$ are the final outputs of it.
+\sssc{Master-slave J-K flip-flop}
+A master-slave J-K flip-flop consist of a master gated J-K latch and a slave gated S-R latches in which, with the inputs and outputs of the master be with subscript $_1$ and those of the slave be with subscript $_2$, $Q_1$ and $Q_1'$ are connected to $S_2$ and $R_2$ respectively, and $Q_2$ and $Q_2'$ are the final outputs of it.
 \sssc{Flip-flops with asynchronous clear and preset}
 Some flip-flops has asynchronous inputs that change the stored state of $Q$ at any time.
 \bit
@@ -1747,10 +1747,25 @@ Input characters may also be represented in alphanumeric notation by assign alph
 \[\sum_{i=1}^nF_i=1.\]
 \eit
 The FSM is valid as a digital circuit iff it is deterministic iff transition is deterministic for all states.
+\sssc{Cross-Coupled Gates}
+To get the truth table of a sequential circuit with cross-coupled gates,
+\ben
+\item If the circuit composed of sequential subcircuits and combination subcircuits, we may analyze each sequential subcircuit respectively. It is usually easier to analyze a latch.
+\item Solve the system of Boolean equations of input signals and output signals given by the gates.
+\item For each combination of input signals,
+\bit
+\item If there is no root with them, the combination cause the circuit to be unstable, and signal tracing may be required to determine the behavior.
+\item If there is only one root with them, all present states stabilize to the root.
+\item If there are multiple roots with them, for each present state, signal tracing may be required to determine which root it will stabilize to. For the cases where the present combination of output signals exists in one of the roots, the original output signals are preserved.
+\eit
+\een
+Note that even if it eventually stabilizes to a state, glitches may happen beforehand, and signal tracing may be required to determine the glitches.
+\sssc{Logic-equivalent circuit using standard latches and flip-flops}
+If only stable states are cared (i.e., glitches and behaviors when not stabilized are not cared), all sequential circuits have logic-equivalent circuits purely consist of standard latches and flip-flops (S-R, D, J-K, and T) and combinational subcircuits. We can thus analyze and design a such circuit and convert to the wanted circuit afterwards.
 \sssc{Next-state Map}
 A next-state map is the K-map of a next-state variable as a function of the present-state variables and for Mealy circuit also input variables given by a transition table.
-\sssc{Flip-flop input map}
-Given a next-state map of a flip-flop, to find the input needed for each present state variables and input variables combination, convert the value $Q^+_k$ in it to the input given by the transition function of the flip-flop for every 0 and 1 cell to get flip-flop input maps.
+\sssc{Flip-flop input (K-)map}
+Given a next-state map of a flip-flop, to find the input needed for each present state variables and input variables combination, convert the value $Q^+_k$ in it to the input given by the transition function of the flip-flop for every 0 and 1 cell to get flip-flop input (K-)maps.
 \sssc{T input map}
 Given a next-state map of a T flip-flop, to find the input needed for each present state variables and input variables combination, convert the value $Q^+_k$ in it to $T_k$ given by $T_k=Q_k\oplus Q^+_k$ for every 0 and 1 cell to get T input map, equivalently, complement every 0 and 1 cell in the $Q_k=1$ half.
 \sssc{D input map}
@@ -1816,19 +1831,6 @@ with ${I_i}_1,{I_i}_2,\ldots,{I_i}_{n_i}$ being the inputs of the $i$th flip-flo
 The general model of Moore cicuits consists of $k$ flip-flops with a common clock and a combinational subcircuit with inputs from outside of the Mealy circuit $X_1,X_2,\ldots,X_m$ and outputs as inputs for flip-flops
 \[{I_1}_1,{I_1}_2,\ldots,{I_1}_{n_1},{I_2}_1,{I_2}_2,\ldots,{I_2}_{n_2},\ldots,{I_k}_1,{I_k}_2,\ldots,{I_k}_{n_k}\]
 with ${I_i}_1,{I_i}_2,\ldots,{I_i}_{n_i}$ being the inputs of the $i$th flip-flop.
-\sssc{Analysis of Cross-Coupled Gates}
-To get the truth table of a sequential circuit with cross-coupled gates,
-\ben
-\item If the circuit composed of sequential subcircuits and combination subcircuits, we may analyze each sequential subcircuit respectively. It is usually easier to analyze a latch.
-\item Solve the system of Boolean equations of input signals and output signals given by the gates.
-\item For each combination of input signals,
-\bit
-\item If there is no root with them, the combination cause the circuit to be unstable, and signal tracing may be required to determine the behavior.
-\item If there is only one root with them, all present states stabilize to the root.
-\item If there are multiple roots with them, for each present state, signal tracing may be required to determine which root it will stabilize to. For the cases where the present combination of output signals exists in one of the roots, the original output signals are preserved.
-\eit
-\een
-Note that even if it eventually stabilizes to a state, glitches may happen beforehand, and signal tracing may be required to determine the glitches.
 \ssc{Register}
 \sssc{Register}
 A register can load data inputs in parallel and output stored data in parallel. A $n$ bit register consists of $n$ edge-triggered D flip-flops, each with $D$ being data input and $Q$ being data output. The flip-flops usually share common clock input and asynchronous clear and/or preset inputs. If using gated clocks, the clock is gated with a common signal called load; if using clock enable, the flip-flops share a common clock enable input called load. When load=1 at an active edge, the data
