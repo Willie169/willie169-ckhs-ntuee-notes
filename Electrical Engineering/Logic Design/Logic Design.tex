@@ -1618,19 +1618,23 @@ When $(J,K,E)=(1,0,1)$, it sets $Q^+$ to 1; when $(J,K,E)=(0,1,1)$, it resets $Q
 The symbol of a gated J-K latch in block diagrams is a J-K latch with an additional enable input line between $J$ and $K$ labeld $En$.
 \ssc{Flip-flops}
 \sssc{Edge-triggered flip-flops}
-An edge-triggered flip-flop has the same inputs and outputs of the gated latch of the same type but the enable input $E$ is replaced with clock input Clk. For rising-edge-triggered (aka active-high) flip-flops, when clock is at a rising edge, called active (clock) edge, the flip-flop is transparent; otherwise the flip-flop is hold (aka retain). For falling-edge-triggered (aka active-low) flip-flops, when clock is at a falling edge, called active (clock) edge, the flip-flop is transparent; otherwise the flip-flop is hold (aka retain).
+An edge-triggered flip-flop has the same inputs and outputs of the gated latch of the same type but the enable input $E$ is replaced with clock input C, Clk, or CLK and for rising-edge-triggered (aka active-high) flip-flops, when clock is at a rising edge, called active (clock) edge, the flip-flop is transparent; otherwise the flip-flop is hold (aka retain); for falling-edge-triggered (aka active-low) flip-flops, when clock is at a falling edge, called active (clock) edge, the flip-flop is transparent; otherwise the flip-flop is hold (aka retain).
 
 The symbol of a rising-edge-triggered flip-flop in block diagrams is a gated latch of the same type with $En$ replaced with a small arrowhead (wedge shape) with its opening facing outwards from the rectangle and its two ends on the side of the rectangle representing the clock input.
 
 The symbol of a falling-edge-triggered flip-flop in block diagrams is a rising-edge-triggered flip-flop of the same type with an inversion bubble outside of the rectangle at the clock input.
 \sssc{(Edge-triggered) S-R flip-flop (SRFF)}
-For active-high S-R flip-flops, $(S,R)=(1,1)$ is not allowed. For active-low S-R flip-flops, $(\ol{S},\ol{R})=(0,0)$ is not allowed.
+For active-high S-R flip-flops, at an active edge, $Q^+=S+R'Q$ and $(S,R)=(1,1)$ is not allowed.
+
+For active-low S-R flip-flops, at an active edge, $Q^+=\ol{S}'+\ol{R}Q$ and $(\ol{S},\ol{R})=(0,0)$ is not allowed.
 \sssc{(Edge-triggered) D flip-flop (DFF)}
+At an active edge, $Q^+=D$.
+
 When the context is clear, flip-flops (FFs) may be used to refer to D flip-flops (DFFs).
 \sssc{(Edge-triggered) J-K flip-flop (JKFF)}
-When $(J,K)=(1,0)$ at an active edge, it sets $Q^+$ to 1; when $(J,K)=(0,1)$ at an active edge, it resets $Q^+$ to 0; when $(J,K)=(1,1)$ at an active edge, the outputs toggle exactly once, without race-around problem; otherwise, it holds present state.
+At an active edge, $Q^+=JQ'+K'Q$ where when $(J,K)=(1,1)$, the outputs toggle exactly once without race-around problem.
 \sssc{(Edge-triggered) T flip-flop (TFF)}
-A toggle (aka T) flip-flop has two inputs, toggle $T$ and clock $C$, and two outputs, $Q$ and $Q'$. If $T=1$ at an active edge, the outputs $(Q,Q')$ become $(1,0)$ if originally $(0,1)$ and $(0,1)$ if originally $(1,0)$, called toggle. Otherwise it is hold.
+A toggle (aka T) flip-flop has two inputs, toggle $T$ and clock $C$, and two outputs, $Q$ and $Q'$. At an active edge, if $T=1$, the outputs toggle, that is, outputs $(Q,Q')$ become $(1,0)$ if originally $(0,1)$ and $(0,1)$ if originally $(1,0)$.
 
 With present state $Q$, next state $Q^+$, the next-state equation of a T flip-flop at an active edge is:
 \[Q^+=T'Q+TQ'.\]
