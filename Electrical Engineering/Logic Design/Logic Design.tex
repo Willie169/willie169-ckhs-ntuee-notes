@@ -1478,6 +1478,7 @@ With present state $Q$, next state $Q^+$, and next state of $Q'$ $P$, the next-s
 \[P=(S+Q^+)'=S'{Q^+}'.\]
 \[{Q^+}'=(R'S+R'Q)'=(R'S)'(R'Q)'=(R+S')(R+Q')=R+S'Q'.\]
 \[P=S'R+S'Q'.\]
+The truth table is:
 \begin{longtable}[c]{|m|m|m|m|m|m|}
 \hline
 S & R & Q & Q^+ & {Q^+}' & P\\\hline
@@ -1509,6 +1510,7 @@ With present state $Q$, next state $Q^+$, and next state of $Q'$ $P$, the next-s
 \[P=(\ol{R}Q^+)'=\ol{R}'+{Q^+}'.\]
 \[{Q^+}'=(\ol{S}'+\ol{R}Q)'=\ol{S}(\ol{R}Q)'=\ol{S}\ol{R}'+\ol{S}Q'.\]
 \[P=\ol{R}'+\ol{S}Q'.\]
+The truth table is:
 \begin{longtable}[c]{|m|m|m|m|m|m|}
 \hline
 \ol{S} & \ol{R} & Q & Q^+ & {Q^+}' & P\\\hline
@@ -1813,15 +1815,15 @@ The general model of Moore cicuits consists of $k$ flip-flops with a common cloc
 \[{I_1}_1,{I_1}_2,\ldots,{I_1}_{n_1},{I_2}_1,{I_2}_2,\ldots,{I_2}_{n_2},\ldots,{I_k}_1,{I_k}_2,\ldots,{I_k}_{n_k}\]
 with ${I_i}_1,{I_i}_2,\ldots,{I_i}_{n_i}$ being the inputs of the $i$th flip-flop.
 \sssc{Analysis of Cross-Coupled Gates}
-To get the transition table of a sequential circuit with cross-coupled gates,
+To get the truth table of a sequential circuit with cross-coupled gates,
 \ben
-\item If the circuit composed of sequential subcircuits and combination subcircuits, we may analyze each sequential subcircuit respectively. It is usually easier to analyze a latch with Moore outputs.
+\item If the circuit composed of sequential subcircuits and combination subcircuits, we may analyze each sequential subcircuit respectively. It is usually easier to analyze a latch.
 \item Solve the system of Boolean equations of input signals and output signals given by the gates.
 \item For each combination of input signals,
 \bit
 \item If there is no root with them, the combination cause the circuit to be unstable, and signal tracing may be required to determine the behavior.
 \item If there is only one root with them, all present states stabilize to the root.
-\item If there are multiple roots with them, for each present state, signal tracing may be required to determine which root it will stabilize to. For the cases where the output signals are Moore and the present combination of output signals exists in one of the roots, the original output signals are preserved.
+\item If there are multiple roots with them, for each present state, signal tracing may be required to determine which root it will stabilize to. For the cases where the present combination of output signals exists in one of the roots, the original output signals are preserved.
 \eit
 \een
 Note that even if it eventually stabilizes to a state, glitches may happen beforehand, and signal tracing may be required to determine the glitches.
