@@ -1467,6 +1467,21 @@ A race condition, race hazard, or simply race is the condition which the behavio
 A non-critical race is a race which the final stable state is not dependent on the sequence or timing of other uncontrollable events.
 
 A critical race is a race which the final stable state is dependent on the sequence or timing of other uncontrollable events. A critical race is caused by race of state variables and cannot be removed by adding redundant gates or adjusting the delays. To eliminate critical races, we can assign states in a way such that at most one state variable changes at a time, e.g., gray code.
+\sssc{Cross-Coupled Gates}
+To get the truth table of a sequential circuit with cross-coupled gates,
+\ben
+\item If the circuit composed of sequential subcircuits and combination subcircuits, we may analyze each sequential subcircuit respectively. It is usually easier to analyze a latch.
+\item Solve the system of Boolean equations of input signals and output signals given by the gates.
+\item For each combination of input signals,
+\bit
+\item If there is no root with them, the combination cause the circuit to be unstable, and signal tracing may be required to determine the behavior.
+\item If there is only one root with them, all present states stabilize to the root.
+\item If there are multiple roots with them, for each present state, signal tracing may be required to determine which root it will stabilize to. For the cases where the present combination of output signals exists in one of the roots, the original output signals are preserved.
+\eit
+\een
+Note that even if it eventually stabilizes to a state, glitches may happen beforehand, and signal tracing may be required to determine the glitches.
+\sssc{Logic-equivalent circuit using standard latches and flip-flops}
+If only stable states are cared (i.e., glitches and behaviors when not stabilized are not cared), all sequential circuits have logic-equivalent circuits purely consist of standard latches and flip-flops (S-R, D, J-K, and T) and combinational subcircuits. We can thus analyze and design a such circuit and convert to the wanted circuit afterwards.
 \ssc{Latches}
 \sssc{(Active-high) S-R Latch}
 An (asynchronous) (active-high or NOR-gate) set-reset (aka S-R or SR) latch or an (asynchronous) S-R NOR latch has two inputs, set $S$ and reset $R$, and two outputs, $Q$ and $Q'$, and stores one bit, $Q$. It consists two NOR gates with $S$ and $Q$ being the inputs and $Q'$ being the output of one NOR gate, and $R$ and $Q'$ being the inputs and $Q$ begin the output of the other NOR gate.
@@ -1751,21 +1766,6 @@ Input characters may also be represented in alphanumeric notation by assign alph
 \[\sum_{i=1}^nF_i=1.\]
 \eit
 The FSM is valid as a digital circuit iff it is deterministic iff transition is deterministic for all states.
-\sssc{Cross-Coupled Gates}
-To get the truth table of a sequential circuit with cross-coupled gates,
-\ben
-\item If the circuit composed of sequential subcircuits and combination subcircuits, we may analyze each sequential subcircuit respectively. It is usually easier to analyze a latch.
-\item Solve the system of Boolean equations of input signals and output signals given by the gates.
-\item For each combination of input signals,
-\bit
-\item If there is no root with them, the combination cause the circuit to be unstable, and signal tracing may be required to determine the behavior.
-\item If there is only one root with them, all present states stabilize to the root.
-\item If there are multiple roots with them, for each present state, signal tracing may be required to determine which root it will stabilize to. For the cases where the present combination of output signals exists in one of the roots, the original output signals are preserved.
-\eit
-\een
-Note that even if it eventually stabilizes to a state, glitches may happen beforehand, and signal tracing may be required to determine the glitches.
-\sssc{Logic-equivalent circuit using standard latches and flip-flops}
-If only stable states are cared (i.e., glitches and behaviors when not stabilized are not cared), all sequential circuits have logic-equivalent circuits purely consist of standard latches and flip-flops (S-R, D, J-K, and T) and combinational subcircuits. We can thus analyze and design a such circuit and convert to the wanted circuit afterwards.
 \sssc{Next-state Map}
 A next-state map is the K-map of a next-state variable as a function of the present-state variables and for Mealy circuit also input variables given by a transition table.
 \sssc{Flip-flop input (K-)map}
