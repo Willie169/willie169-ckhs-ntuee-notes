@@ -1445,7 +1445,9 @@ The probability that metastability lasts decays exponentially over time.
 Take the sequential circuit consists of two inverters with the output of one being the input of another for example. There are two stable states (excluding metastable state), 0 and 1, and one metastable state, a voltage right in the middle of 0 and 1.
 \sssc{Latch response time or delay time}
 The response time or delay time $\epsilon$ of an asynchronous or level-triggered latch is the time it needs for its state to react to a input change. If an impulse of input lasts less than $\epsilon$, the latch or flip-flop will not react to it.
-\sssc{Flip-flop setup time and hold time}
+\sssc{Flip-flop propagation delay, setup time, and hold time}
+The propagation delay $t_p$ of a flip-flops is the time it takes for a change at the inputs to propagate to the output(s).
+
 The setup time $t_s$ of a flip-flop is the minimum time before an acitve edge that the data inputs must be stable so that the flip-flop can correctly capture it.
 
 The hold time $t_h$ of a flip-flop is the minimum time afte an acitve edge that the data inputs must be stable to ensure the flip-flop captures it correctly.
@@ -1638,17 +1640,17 @@ An edge-triggered flip-flop has the same inputs and outputs of the gated latch o
 The symbol of a rising-edge-triggered flip-flop in block diagrams is a gated latch of the same type with $En$ replaced with a small arrowhead (wedge shape) with its opening facing outwards from the rectangle and its two ends on the side of the rectangle representing the clock input.
 
 The symbol of a falling-edge-triggered flip-flop in block diagrams is a rising-edge-triggered flip-flop of the same type with an inversion bubble outside of the rectangle at the clock input.
-\sssc{(Edge-triggered) S-R flip-flop (SRFF)}
+\sssc{(Edge-triggered) S-R flip-flop (SRFF or SR-FF)}
 For active-high S-R flip-flops, at an active edge, $Q^+=S+R'Q$ and $(S,R)=(1,1)$ is not allowed.
 
 For active-low S-R flip-flops, at an active edge, $Q^+=\ol{S}'+\ol{R}Q$ and $(\ol{S},\ol{R})=(0,0)$ is not allowed.
-\sssc{(Edge-triggered) D flip-flop (DFF)}
+\sssc{(Edge-triggered) D flip-flop (DFF or D-FF)}
 At an active edge, $Q^+=D$.
 
 When the context is clear, flip-flops (FFs) may be used to refer to D flip-flops (DFFs).
-\sssc{(Edge-triggered) J-K flip-flop (JKFF)}
+\sssc{(Edge-triggered) J-K flip-flop (JKFF or JK-FF)}
 At an active edge, $Q^+=JQ'+K'Q$ where when $(J,K)=(1,1)$, the outputs toggle exactly once without race-around problem.
-\sssc{(Edge-triggered) T flip-flop (TFF)}
+\sssc{(Edge-triggered) T flip-flop (TFF or T-FF)}
 A toggle (aka T) flip-flop has two inputs, toggle $T$ and clock $C$, and two outputs, $Q$ and $Q'$. At an active edge, if $T=1$, the outputs toggle, that is, outputs $(Q,Q')$ become $(1,0)$ if originally $(0,1)$ and $(0,1)$ if originally $(1,0)$.
 
 With present state $Q$, next state $Q^+$, the next-state equation of a T flip-flop at an active edge is:
@@ -1722,6 +1724,8 @@ A Mealy circuit can be specified with equations
 
 A Moore circuit can be specified with equations
 \[S^+=\delta(S,X),\quad Z=\lambda(S).\]
+
+A circuit implementation with the minimal $|S|$ is called state-minimal.
 \sssc{Glitch of Mealy Circuit}
 After the circuit has changed state and before the input is changed, the output may temporarily assume an incorrect value, which we call a false output, glitch, or spike. If the output of the circuit is fed into a second sequential circuit which uses the same clock, the false outputs will not cause any problem because the inputs to the second circuit can cause a change of state only when a falling clock edge occurs. The best time to read the output is just before the active edge of the clock, because the input must be stable at that time and thus the output will be correct.
 \sssc{Mealy and Moore implementation}
@@ -1731,21 +1735,23 @@ For Mealy and Moore implementations of same sequential logic:
 \item Moore implementation outputs one clock period later than Mealy implementation.
 \item Mealy implementation may contain glitches while Moore implementation doesn't.
 \eit
-\sssc{State table and transition table}
-A transition table is a one-dimensional table with three (for Moore circuit) or four (for Mealy circuit) columns that lists the corresponding next states and outputs (for Mealy circuit) in the third and fourth columns for all allowed combinations of input character in the first column and present state in the second column in rows, resembling a truth table, in which the states are represented by binary or other radix numbers corresponding to the binary sequence of the state variables.
+\sssc{State table and (state) transition table}
+A (state) transition table is a one-dimensional table with three (for Moore circuit) or four (for Mealy circuit) columns that lists the corresponding next states and outputs (for Mealy circuit) in the third and fourth columns for all allowed combinations of input character in the first column and present state in the second column in rows, resembling a truth table, in which the states are represented by binary or other radix numbers corresponding to the binary sequence of the state variables.
 
-For Mealy circuits, alternatively, we may list the next states given all input characters respectively given a present state in the same row with the scenario of each input character in one column and labeled in the header row.
+Output column may be omitted.
+
+Alternatively, we may list the next states given all input characters respectively given a present state in the same row with the scenario of each input character in one column and labeled in the header row.
 
 A state table is the same as a transition table except that the states are represented by meaningless symbols assigned, often $s_i$ or $S_i$.
-\sssc{State diagram or state graph for Moore circuit}
-A state diagram (also called a state graph) for a Moore circuit is a directed graph with
+\sssc{State/transition/state transition diagram/graph for Moore circuit}
+A state/transition/state transition diagram/graph for a Moore circuit is a directed graph with
 \bit
 \item Each vertex being a state, normally represented by circles with states in the top half and output at the state in the bottom half, i.e., [state]/[output character].
 \item Each directed edge being a transition, normally drawn as an arrow from present state to next state with the input character read for such transition to happen on the edge.
 \item The starting state is usually represented by an arrow with no origin pointing to the state, a subscript 0 in the symbol of the state (often $s_0$ or $S_0$), or not shown.
 \eit
-\sssc{State diagram or state graph for Mealy circuit}
-A state diagram (also called a state graph) for a Mealy circuit is a directed graph with
+\sssc{State/transition/state transition diagram/graph for Mealy circuit}
+A state/transition/state transition diagram/graph for a Mealy circuit is a directed graph with
 \bit
 \item Each vertex being a state, normally represented by circles with states in it.
 \item Each directed edge being a transition, normally drawn as an arrow from present state to next state with the input character read for such transition to happen and output character of the transition on the edge separated by /, i.e., [input character]/[output character].
@@ -1823,7 +1829,7 @@ with ${I_i}_1,{I_i}_2,\ldots,{I_i}_{n_i}$ being the inputs of the $i$th flip-flo
 
 We can determine the fastest clock speed (the minimum clock period) from the general model of the Mealy circuit.
 
-For any flip-flop in the circuit with output propagation delay $t_p$, combinational circuit propagation delay to the flip-flop input $t_c$, the maximum time $t_x$ the inputs $X_i$ that the flip-flop input is dependent on need to be stable before the next active clock edge, the flip-flop setup time $t_s$, and clock skew $t_{sk}$ between the flip-flops that receive the clock signal first and the flip-flop, the clock period $t_{clk}$ must satisfy
+For any flip-flop in the circuit with propagation delay $t_p$, combinational circuit propagation delay to the flip-flop input $t_c$, the maximum time $t_x$ the inputs $X_i$ that the flip-flop input is dependent on need to be stable before the next active clock edge, the flip-flop setup time $t_s$, and clock skew $t_{sk}$ between the flip-flops that receive the clock signal first and the flip-flop, the clock period $t_{clk}$ must satisfy
 \[t_{clk}\geq\max\{t_p,t_x\}+t_c+t_s+t_{sk}.\]
 Another constraint is that for any flip-flop in the circuit with also hold time $t_h$ and the clock skew ${t_{sk}}_i$ between it and any flip-flop $i$ whose next input are dependent on the flip-flop output, the circuit must satisfy
 \[t_p+t_c\geq\max_i{t_{sk}}_i+t_h.\]
