@@ -3233,12 +3233,24 @@ Using the chain rule on the left:
 \sssc{Inverse hyperbolic secant function}
 \[\dv{\operatorname{arcsech}\qty(x)}{x}=-\frac{1}{x\sqrt{1-x^2}},\quad 0<x\leq 1.\]
 \begin{proof}
-PLACEHOLDER
+\[\ba
+\dv{\operatorname{arcsech}\qty(x)}{x}&=\dv{}{x}\ln(\frac{1}{x}+\frac{\sqrt{1-x^2}}{x})\\
+&=\frac{x}{1+\sqrt{1-x^2}}\frac{\frac{-x}{\sqrt{1-x^2}}x-\qty(1+\sqrt{1-x^2})}{x^2}\\
+&=\frac{1}{1+\sqrt{1-x^2}}\frac{-x^2-\sqrt{1-x^2}-1+x^2}{x\sqrt{1-x^2}}\\
+&=-\frac{1}{x\sqrt{1-x^2}}
+\ea\]
 \end{proof}
 \sssc{Inverse hyperbolic cosecant function}
 \[\dv{\operatorname{arccsch}\qty(x)}{x}=-\frac{1}{|x|\sqrt{1+x^2}}.\]
 \begin{proof}
-PLACEHOLDER
+\[\ba
+\dv{\operatorname{arccsch}\qty(x)}{x}&=\dv{}{x}\ln(\frac{1}{x}+\frac{\sqrt{1+x^2}}{|x|})\\
+&=\dv{}{x}\ln(\frac{1+\operatorname{sgn}(x)\sqrt{1+x^2}}{x})\\
+&=\frac{x}{1+\operatorname{sgn}(x)\sqrt{1+x^2}}\frac{\frac{\operatorname{sgn}(x)x}{\sqrt{1+x^2}}x-\qty(1+\operatorname{sgn}(x)\sqrt{1+x^2})}{x^2}\\
+&=\frac{1}{1+\operatorname{sgn}(x)\sqrt{1+x^2}}\frac{-\sqrt{1+x^2}-\operatorname{sgn}(x)}{x\sqrt{1+x^2}}\\
+&=\frac{-\operatorname{sgn}(x)}{x\sqrt{1+x^2}}\\
+&=-\frac{1}{|x|\sqrt{1+x^2}}
+\ea\]
 \end{proof}
 \sssc{Lambert W function}
 \[x(1+W(x))\dv{W(x)}{x}=W(x),\quad x\neq -\frac{1}{e}.\]
@@ -3737,7 +3749,18 @@ PLACEHOLDER
 \sssc{Gaussian integral (高斯積分) or Euler–Poisson integral}
 \[\int_{-\infty}^{\infty}e^{-t^2}\dd{t}=\sqrt{\pi}.\]
 \[\int_0^{\infty}e^{-t^2}\dd{t}=\frac{\sqrt{\pi}}{2}.\]
-PLACEHOLDER
+\begin{proof}
+Let
+\[I=\int_0^{\infty}e^{-t^2}\dd{t}.\]
+\[\ba
+I^2&=\qty(\int_0^{\infty}e^{-x^2}\dd{x})\qty(\int_0^{\infty}e^{-y^2}\dd{y})\\
+&=\int_0^{\infty}\int_0^{\infty}e^{-x^2}e^{-y^2}\dd{x}\dd{y}\\
+&=\int_0^{\pi/2}\int_0^{\infty}e^{-r^2}r\dd{r}\dd{\theta}\\
+&=\frac{1}{2}\int_0^{\pi/2}\int_0^{\infty}e^{-u}\dd{u}\dd{\theta},\quad u=r^2\\
+&=\frac{1}{2}\int_0^{\pi/2}1\dd{\theta}\\
+&=\frac{\pi}{4}
+\ea\]
+\end{proof}
 \ssc{Lists of Laplace Transform}
 PLACEHOLDER
 \ssc{Lists Fourier Transform}
