@@ -3295,14 +3295,6 @@ Using the chain rule on the left:
 &=-\frac{1}{|x|\sqrt{1+x^2}}
 \ea\]
 \end{proof}
-\sssc{Lambert W function}
-\[x(1+W(x))\dv{W(x)}{x}=W(x),\quad x\neq -\frac{1}{e}.\]
-\begin{proof}
-\[W(x)e^{W(x)}=x\]
-\[\dv{W(x)}{x}e^{W(x)}+W(x)\dv{W(x)}{x}e^{W(x)}=1\]
-\[W(x)\dv{W(x)}{x}e^{W(x)}(1+W(x))=W(x)\]
-\[x(1+W(x))\dv{W(x)}{x}=W(x)\]
-\end{proof}
 \ssc{List of Taylor Expansions of Real Functions}
 \sssc{Power function}
 \[x^n=\sum_{k=0}^{\infty}\binom{n}{k}a^{n-k}(x-a)^k,\quad |x-a|<|a|.\]
@@ -3455,53 +3447,51 @@ Differentiate both side:
 \sssc{Secant function}
 \[\int\sec(x)\dd{x}=\ln|\tan(x)+\sec(x)|+C.\]
 \begin{proof}
-PLACEHOLDER
+\[\ba
+\int\sec(x)\dd{x}&=\int\sec(x)\frac{\tan(x)+\sec(x)}{\tan(x)+\sec(x)}\dd{x}\\
+&=\int u^{-1}\dd{u},\quad u=\tan(x)+\sec(x),\quad\dd{u}=\sec(x)\qty(\tan(x)+\sec(x))\dd{x}\\
+&=\ln|u|+C=\ln|\tan(x)+\sec(x)|+C
+\ea\]
 \end{proof}
 \[\int\sec^2(x)\dd{x}=\tan(x)+C.\]
 \[\int\sec^n(x)\dd{x}=\frac{1}{n-1}\tan(x)\sec^{n-2}(x)+\frac{n-2}{n-1}\int\sec^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
 \begin{proof}
-PLACEHOLDER
+\[\ba
+\int\sec^n(x)\dd{x}&=\tan(x)\sec^{n-2}(x)-\int\tan(x)(n-2)\sec^{n-3}(x)\tan(x)\sec(x)\dd{x}\\
+&=\tan(x)\sec^{n-2}(x)-(n-2)\int\sec^n(x)-\sec^{n-2}(x)\dd{x}\\
+&=\frac{1}{n-1}\tan(x)\sec^{n-2}(x)+\frac{n-2}{n-1}\int\sec^{n-2}(x)\dd{x}\\
+\ea\]
 \end{proof}
 \sssc{Cosecant function}
 \[\int\csc(x)\dd{x}=-\ln|\cot(x)+\csc(x)|+C.\]
 \begin{proof}
-PLACEHOLDER
+\[\ba
+\int\csc(x)\dd{x}&=\int\csc(x)\frac{\cot(x)+\csc(x)}{\cot(x)+\csc(x)}\dd{x}\\
+&=-\int u^{-1}\dd{u},\quad u=\cot(x)+\csc(x),\quad\dd{u}=-\cot(x)\qty(\cot(x)+\csc(x))\dd{x}\\
+&=-\ln|u|+C=\ln|\cot(x)+\csc(x)|+C
+\ea\]
 \end{proof}
 \[\int\csc^2(x)\dd{x}=-\cot(x)+C.\]
 \[\int\csc^n(x)\dd{x}=-\frac{1}{n-1}\cot(x)\csc^{n-2}(x)+\frac{n-2}{n-1}\int\csc^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
 \begin{proof}
-PLACEHOLDER
+\[\ba
+\int\csc^n(x)\dd{x}&=-\cot(x)\csc^{n-2}(x)+\int\cot(x)(n-2)\csc^{n-3}(x)(-1)\cot(x)\csc(x)\dd{x}\\
+&=-\cot(x)\csc^{n-2}(x)-(n-2)\int\csc^n(x)-\csc^{n-2}(x)\dd{x}\\
+&=-\frac{1}{n-1}\cot(x)\csc^{n-2}(x)+\frac{n-2}{n-1}\int\csc^{n-2}(x)\dd{x}\\
+\ea\]
 \end{proof}
 \sssc{Inverse sine function}
 \[\int\arcsin(x)\dd{x}=x\arcsin(x)+\sqrt{1-x^2}+C.\]
-\begin{proof}
-PLACEHOLDER
-\end{proof}
 \sssc{Inverse cosine function}
 \[\int\arccos(x)\dd{x}=x\arccos(x)-\sqrt{1-x^2}+C.\]
-\begin{proof}
-PLACEHOLDER
-\end{proof}
 \sssc{Inverse tangent function}
 \[\int\arctan(x)\dd{x}=x\arctan(x)-\frac{1}{2}\ln(1+x^2)+C.\]
-\begin{proof}
-PLACEHOLDER
-\end{proof}
 \sssc{Inverse cotangent function}
 \[\int\arccot(x)\dd{x}=x\arccot(x)+\frac{1}{2}\ln(1+x^2)+C.\]
-\begin{proof}
-PLACEHOLDER
-\end{proof}
 \sssc{Inverse secant function}
 \[\int\arcsec(x)\dd{x}=x\arcsec(x)-\operatorname{sgn}(x)\ln\abs{x+\sqrt{x^2-1}}+C,\quad|x|\geq 1.\]
-\begin{proof}
-PLACEHOLDER
-\end{proof}
 \sssc{Inverse cosecant function}
 \[\int\arccsc(x)\dd{x}=x\arccsc(x)+\operatorname{sgn}(x)\ln\abs{x+\sqrt{x^2-1}}+C,\quad|x|\geq 1.\]
-\begin{proof}
-PLACEHOLDER
-\end{proof}
 \sssc{Hyperbolic sine function}
 \[\int\sinh(x)\dd{x}=\cosh(x)+C.\]
 \[\int\sinh^2(x)\dd{x}=-\frac{x}{2}+\frac{\sinh(2x)}{4}+C.\]
@@ -3538,22 +3528,6 @@ PLACEHOLDER
 \[\int\operatorname{arcsech}\qty(x)\dd{x}=x\operatorname{arcsech}\qty(x)+\arctan\qty(\frac{\sqrt{1-x^2}}{x})+C.\]
 \sssc{Inverse hyperbolic cosecant function}
 \[\int\operatorname{arccsch}\qty(x)\dd{x}=x\operatorname{arccsch}\qty(x)+\ln\abs{x+\sqrt{x^2+1}}+C.\]
-\sssc{Lambert W function}
-\[\int W(x)\dd{x}=x(W(x)-1)+e^{W(x)}+C.\]
-\begin{proof}
-\[\ba
-\dv{x(W(x)-1)+e^{W(x)}}{x}&=W(x)-1+x\frac{W(x)}{x(1+W(x))}+\frac{W(x)e^{W(x)}}{x(1+W(x))}\\
-&=W(x)-1+\frac{W(x)}{1+W(x)}+\frac{1}{1+W(x)}\\
-&=W(x)
-\ea\]
-\sssc{Lambert W function}
-\[x(1+W(x))\dv{W(x)}{x}=W(x),\quad x\neq -\frac{1}{e}.\]
-\begin{proof}
-\[W(x)e^{W(x)}=x\]
-\[\dv{W(x)}{x}e^{W(x)}+W(x)\dv{W(x)}{x}e^{W(x)}=1\]
-\[W(x)\dv{W(x)}{x}e^{W(x)}(1+W(x))=W(x)\]
-\[x(1+W(x))\dv{W(x)}{x}=W(x)\]
-\end{proof}
 \sssc{Derivative over function}
 \[\int\frac{f'(x)}{f(x)}\dd{x}=\ln|f(x)|+C,\quad f(x)\neq 0.\]
 \sssc{$\frac{1}{x^2+a^2}$}
@@ -3763,9 +3737,6 @@ Let $R=\sqrt{ax+b},\quad a\neq 0$.
 &=\frac{2}{a(2n+1)\qty(x^nR-bn\int \frac{x^{n-1}}{R}\dd{x})
 \ea\]
 \end{proof}
-\sssc{$\sqrt{ax^2+bx+c}$}
-Let $S=\sqrt{ax^2+bx+c},\quad a>0,\quad b^2-4ac\neq 0$.
-PLACEHOLDER
 \sssc{Gaussian integral (高斯積分) or Euler–Poisson integral}
 \[\int_{-\infty}^{\infty}e^{-t^2}\dd{t}=\sqrt{\pi}.\]
 \[\int_0^{\infty}e^{-t^2}\dd{t}=\frac{\sqrt{\pi}}{2}.\]
@@ -3825,6 +3796,70 @@ which is differentiable at $0$ with $f'(0)=0$ and discontinuous everywhere else.
 \[f(x)=x^3,\quad f'(x)=3x^2.\]
 \[f'(0)=0\]
 $f(x)$ has no local extreme at $0$.
+\ssc{List of implicitly defined functions}
+\ssc{Lambert W function, omega function, or product logarithm}
+Lambert W function, omega function, or product logarithm $W(z)$ is defined implicitly by
+\[W(z)e^{W(z)}=z,\quad z\in\bbC.\]
+Each branch $k$, starting from $0$ as the principal branch, is denoted as $W_k(z)$.
+
+In the reals, there are two branches: $W_0(x)\colon[-\frac{1}{e},\infty)\to\bbR$ is the inverse of
+\[xe^x,\quad x\geq-1.\]
+$W_{-1}(x)\colon[-\frac{1}{e},0)\to\bbR$ is the inverse of
+\[xe^x,\quad x\leq-1.\]
+
+Derivative:
+\[\dv{W_0(x)}{x}=\begin{cases}
+\frac{W_0(x)}{x(1+W_0(x))},\quad&x\neq 0,-\frac{1}{e}\\
+1,\quad&x=0
+\end{cases}.\]
+\[\lim_{x\to-\frac{1}{e}^+}\dv{W_0(x)}{x}=\infty.\]
+\[\dv{W_{-1}(x)}{x}=\frac{W_{-1}(x)}{x(1+W_{-1}(x))},\quad x\neq -\frac{1}{e}.\]
+\[\lim_{x\to-\frac{1}{e}^+}\dv{W_{-1}(x)}{x}=-\infty.\]
+\[\lim_{x\to 0^-}\dv{W_{-1}(x)}{x}=-\infty.\]
+\begin{proof}
+\[W(x)e^{W(x)}=x\]
+\[\dv{W(x)}{x}e^{W(x)}+W(x)\dv{W(x)}{x}e^{W(x)}=1\]
+\[\dv{W(x)}{x}e^{W(x)}(1+W(x))=1\]
+\[\dv{W(x)}{x}W(x)e^{W(x)}(1+W(x))=W(x)\]
+\[\dv{W(x)}{x}x(1+W(x))=W(x)\]
+\[\dv{W_0(0)}{x}e^{W_0(0)}(1+W_0(0))=1\]
+\[\dv{W_0(0)}{x}1(1+0)=1\]
+\[\dv{W_0(0)}{x}=1\]
+\[W\qty(-\frac{1}{e})=-1\]
+Solve below equation for $\varepsilon$:
+\[\qty(-1+\varepsilon)e^{-1+\varepsilon}=-\frac{1}{e}+\detla.\]
+\[\qty(-1+\varepsilon)e^{\varepsilon}=-1+e\detla\]
+\[\qty(-1+\varepsilon)\sum_{i=0}^{\infty}\frac{\varepsilon^i}{i!}=-1+e\detla\]
+\[-\sum_{i=0}^{\infty}\frac{\varepsilon^i}{i!}+\sum_{i=1}^{\infty}\frac{\varepsilon^i}{(i-1)!}=-1+e\detla\]
+\[\sum_{i=2}^{\infty}\frac{\varepsilon^i}{(i-2)!i!}=e\detla\]
+\[\frac{\varepsilon^2}{2}+O(\varepsilon^3)=e\delta\]
+\[\varepsilon=O(\sqrt{\delta})\]
+\[W_0\qty(-\frac{1}{e}+\detla)=-1+\varepsilon=-1+O(\sqrt{\delta})\]
+\[\frac{W\qty(-\frac{1}{e}+\detla)-W\qty(-\frac{1}{e})}{\delta}=O\qty((\delta)^{-1/2})\]
+\[\lim_{\delta\to 0}\dv{W(x)}{x}=\lim_{\delta\to 0}O\qty((\delta)^{-1/2})=\pm\infty\]
+\[\lim_{x\to 0^-}W_{-1}(x)=-\infty\]
+\[\ba
+\lim_{x\to 0^-}xW_{-1}(x)&=\lim_{x\to 0^-}\frac{W_{-1}(x)}{x^{-1}}\\
+&=\lim_{x\to 0^-}\frac{\frac{W_{-1}(x)}{x(1+W_{-1}(x))}}{-x^{-2}}\\
+&=-\lim_{x\to 0^-}\frac{xW_{-1}(x)}{1+W_{-1}(x)}
+\ea\]
+Let
+\[L=\lim_{x\to 0^-}xW_{-1}(x).\]
+\[L=-\frac{L}{-\infty}\]
+\[L=-\infty\]
+\end{proof}
+
+Integral:
+\[\int W(x)\dd{x}=x(W(x)-1)+e^{W(x)}+C.\]
+\begin{proof}
+\[\ba
+\int W(x)\dd{x}&=xW(x)-\int\frac{W(x)}{1+W(x)}\dd{x}\\
+&=xW(x)-x+\int\frac{1}{1+W(x)}\frac{W(x)}{x}\frac{x}{W(x)}\dd{x}\\
+&=x(W(x)-1)+\int\dv{W(x)}{x}\frac{W(x)e^{W(x)}}{W(x)}\dd{x}\\
+&=x(W(x)-1)+\int e^W\dd{W}\\
+&=x(W(x)-1)+e^{W(x)}+C
+\ea\]
+\end{proof}
 
 
 
@@ -3839,15 +3874,6 @@ The complementary error function $\erfc\colon\bbC\to\bbC$ or $\erfc\colon\bbR\to
 \sssc{Imaginary error function (虛誤差函數)}
 The imaginary error function $\erfi\colon\bbC\to\bbC$ or $\erfi\colon\bbR\to\bbR$ is defined as:
 \[\erfi(z)=-i\erf(iz).\]
-\ssc{Lambert W function, omega function, or product logarithm}
-Lambert W function, omega function, or product logarithm $W(z)$ is defined implicitly by
-\[W(z)e^{W(z)}=z,\quad z\in\bbC.\]
-Each branch $k$, starting from $0$ as the principal branch, is denoted as $W_k(z)$.
-
-In the reals, there are two branches: $W_0(x)\colon[-\frac{1}{e},\infty)\to\bbR$ is the inverse of
-\[xe^x,\quad & x\geq-1.\]
-$W_{-1}(x)\colon[-\frac{1}{e},0)\to\bbR$ is the inverse of
-\[xe^x,\quad & x\leq-1.\]
 \ssc{Fresnel Integrals}
 Fresnel integrals $S(x)$ and $C(x)$, and their auxiliary functions $F(x)$ and $G(x)$ are defined as
 \[S(x)=\int_0^x\sin(t^2)\dd{t},\]
