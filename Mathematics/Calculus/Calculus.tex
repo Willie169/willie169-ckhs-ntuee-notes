@@ -1,51 +1,3 @@
-lune of Hippocrates area (?):
-```
-7.3 49. Find the area of the crescent-shaped region (called a lune) bounded by arcs of circles with radii $r$ and $R$. (See the figure.)
-
-Blue circle:
-\[x^2+y^2=r^2\]
-\[y=\sqrt{r^2-x^2}\]
-Red circle:
-\[x^2+(y+\sqrt{R^2-r^2})^2=R^2\]
-\[y=\sqrt{R^2-x^2}-\sqrt{R^2-r^2}\]
-The area of the lune in the blue circle outside of the red circle is
-\[\int_{-r}^r\sqrt{r^2-x^2}-\sqrt{R^2-x^2}+\sqrt{R^2-r^2}\dd{x}=\frac{\pi r^2}{2}+2r\sqrt{R^2-r^2}-R^2\int_{-r/R}^{r/R}\sqrt{1-u^2}\dd{u},\quad u=\frac{x}{R},\quad\dd{u}=\frac{1}{R}\dd{x}\]
-\[\ba
-\int_{-r/R}^{r/R}\sqrt{1-u^2}\dd{u}&=\int_{\arcsin(-r/R)}^{\arcsin(r/R)}\cos^2t\dd{t},\quad u=\sin t,\quad\dd{u}=\cos t\dd{t}\\
-&=\frac{1}{2}\int_{\arcsin(-r/R)}^{\arcsin(r/R)}1+\cos(2t)\dd{t}\\
-&=\arcsin(\frac{r}{R})+\frac{r}{R}\sqrt{1-\qty(\frac{r}{R})^2}
-\ea\]
-\[\int_{-r}^r\sqrt{r^2-x^2}-\sqrt{R^2-x^2}+\sqrt{R^2-r^2}\dd{x}=\frac{\pi r^2}{2}+r\sqrt{R^2-r^2}-R^2\arcsin(\frac{r}{R})\]
-```
-
-bounded variation
-Dirichlet test and Cauchy condensation test for series and integral
-
-Improper:
-If $\int_a^{\infty}\abs{f(x)}\dd{x}$ converges, then $\lim_{x\to\infty}f(x)=0$.
-If $\int_a^{\infty}f(x)\dd{x}$ converges and $f(x)$ is nonnegative and non-increasing on $(a,\infty)$, then $\lim_{x\to\infty}xf(x)=0$.
-\begin{proof}
-Since $\int_a^{\infty}f(x)\dd{x}$ and $f(x)$ is nonnegative, $\forall\varepsilon>0$, there exists $M>a$ such that $\forall A>M$:
-\[0\leq\int_A^{\infty}f(x)\dd{x}<\varepsilon.\]
-Thus for $t>2M$,
-\[0\leq\int_{t/2}^tf(x)\dd{x}=\int_{t/2}^{\infty}f(x)\dd{x}-\int_t^{\infty}f(x)\dd{x}<2\varepsilon.\]
-Since $f(x)$ is non-increasing,
-\[f(x)\geq f(t),\quad\forall x\in[t/2,t]\]
-\[\int_{t/2}^tf(x)\dd{x}\geq\int_{t/2}^tf(t)\dd{x}=\frac{t}{2}f(t)\]
-\[tf(t)<4\varepsilon.\]
-Thus, $\forall\varepsilon>0$, there exists $M>0$ such that $\forall t>M$,
-\[tf(t)<\varepsilon,\]
-that is,
-\[\lim_{x\to\infty}xf(x)=0.\]
-\end{proof}
-mb nonnegative replace with BV still works?
-
-
-Comparison test: If there exists $g(x)$ such that $\int_a^{\infty}g(x)\dd{x}$ converges and $\exists b\geq a$ such that $\forall x\in(b,\infty)\colon g(x)\geq\abs{f(x)}$, then $\int_a^{\infty}\abs{f(x)}\dd{x}$ converges.
-p-test: $\int_a^{\infty}x^p\dd{x}$ converges iff $p<-1$.
-Dirichlet test (?): If $f(x)$ is such that there exist $g(x)$ that is non-increasing on $[a,\infty)$ and $h(x)$ that is of bounded variation on $[a,\infty)$ such that $f(x)=g(x)h(x)$ for all $x\in(a,\infty)$, then $\int_a^{\infty}f(x)\dd{x}$ converges.
-
-
 \documentclass[a4paper,12pt]{report}
 \setcounter{secnumdepth}{5}
 \setcounter{tocdepth}{3}
@@ -81,6 +33,10 @@ If $I$ is a subset of the domain of $f$, $f(I)$ is defined as
 Let $f\colon X\to Y$ and $I\subeteq X$. Then $f\vert_I$ is defined as a function $f\vert_I\colon I\to Y$ such that for every $x\in I$, $f\vert_I(x)=f(x)$.
 
 Let $f\colon X\subseteq\mathbb{R}\to Y$ and $(a,b)\subeteq X$. Then $f\vert_a^b$ is defined as a function $f\vert_a^b\colon (a,b)\to Y$ such that for every $x\in (a,b)$, $f\vert_a^b(x)=f(x)$.
+
+Let $f\colon X\subseteq\mathbb{R}\to Y$. When $(-\infty,a]\subseteq X$, for some $a\in\bbR$, we sometimes denote $\lim_{x\to-\infty}f(x)$ as $f(-\infty)$. When $[a,\infty)\subseteq X$, for some $a\in\bbR$, we sometimes denote $\lim_{x\to\infty}f(x)$ as $f(\infty)$.
+
+Let $f$ be a function. We denote $f(b)-f(a)$ as $\evlv{f(x)}_a^b$, $\evlv[f(x)]_a^b$, $\evlv(f(x))_a^b$, $\evlp{f(x)}_a^b$, $\evlp[f(x)]_a^b$, $\evlp(f(x))_a^b$, $\evlb{f(x)}_a^b$, $\evlb[f(x)]_a^b$, or $\evlb(f(x))_a^b$.
 \ssc{Partial Function (偏函數)}
 A partial function from $X$ to $Y$ is a function from a subset of $X$ to $Y$. The notation of a partial function is the same as a function except the fact that it is a partial function should be specified.
 \ssc{Types of Functions}
@@ -101,6 +57,29 @@ For a graph on $xy$ plane, if any vertical line intersects it, $y$ is not a func
 Given a graph of a real function $y=f(x)$ on $xy$ plane, if any horizontal line intersects it more than once, $f(x)$ is not bijective.
 \ssc{Fixed point, fixpoint, or invariant point (不動點 or 定點)}
 A fixed point, fixpoint, or invariant point of a function $f\colon X\subseteq Y\to Y$, is a point $x\in X$ such that $f(x)=x$.
+\sssc{Increasing (遞增) Decreasing (遞減), and Monotone (單調)}
+Let $f\colon X\subseteq\bbR\to\bbR$ be a function.
+\bit
+\item $f$ is called strictly increasing on an interval $I\subseteq X$ if
+\[\forall a,b\in I\colon a<b\implies f(a)<f(b).\]
+\item $f$ is called strictly increasing if
+\[\forall a,b\in X\colon a<b\implies f(a)<f(b).\]
+\item $f$ is called strictly decreasing on an interval $I\subseteq X$ if
+\[\forall a,b\in I\colon a<b\implies f(a)>f(b).\]
+\item $f$ is called strictly decreasing if
+\[\forall a,b\in X\colon a<b\implies f(a)>f(b).\]
+\item $f$ is called non-decreasing or monotone increasing on an interval $I\subseteq X$ if
+\[\forall a,b\in I\colon a<b\implies f(a)\leq f(b).\]
+\item $f$ is called non-decreasing or monotone increasing if
+\[\forall a,b\in X\colon a<b\implies f(a)\leq f(b).\]
+\item $f$ is called non-increasing or monotone decreasing on an interval $I\subseteq X$ if
+\[\forall a,b\in I\colon a<b\implies f(a)\geq f(b).\]
+\item $f$ is called non-increasing or monotone decreasing if
+\[\forall a,b\in X\colon a<b\implies f(a)\geq f(b).\]
+\item $f$ is called monotone or monotonic on an interval $I\subseteq X$ if it is either monotone increasing or monotone decreasing on $I$.
+\item $f$ is called monotone or monotonic if it is either monotone increasing or monotone decreasing.
+\eit
+The terms increasing and decreasing are define to be either monotone or strictly definition in different sources. Here, we use the monotone definition.
 \ssc{Property in a variable}
 Unless otherwise specified, given a property $P$ defined for a function $f(w_1,\dots w_n,x,y_1,\dots y_n)$ in which $w_1,\dots w_n,x,y_1,\dots y_n$ are independent variables, we say $f$ is with property $P$ in $x$ if the function $g(x)$ that is defined to map $x$ to $f(w_1,\dots w_n,x,y_1,\dots y_n)$ for any $x$ such that $w_1,\dots w_n,x,y_1,\dots y_n$ is in the domain of $f$ for any fixed $w_1,\dots w_n,y_1,\dots y_n$ is with property $P$.
 
@@ -159,6 +138,19 @@ A constants, a power function, a logarithmic function, an exponential function, 
 An integral of which the integrand is an elementary function is called an elementary integral.
 \ssc{Binary operation}
 A binary operation $*$ on a set $S$ is a function with domain $S^2$ and codomain $S$, and the output is denoted as $a*b$ for inputs $(a,b)\in S^2$.
+\ssc{Sequences (數列)}
+\begin{itemize}
+\item\textbf{Sequence}: A sequence in $X$ is a function of which the domain is a set $\{x\in\mathbb{Z}\mid l\leq x\leq m\}$ or $\{x\in\mathbb{Z}\mid l\leq x\}$ and the codomain is a topological space $X$, in which $l$ is an integer, usually $0$ or $1$, and $m$ is a integer, denoted as $\langle a_n\rangle$, $\{a_n\}$, $(a_n)$, $\langle a_n\rangle_{n=l}^m$, $\{a_n\}_{n=l}^m$, or $(a_n)_{n=l}^m$, with $m=\infty$ when its domain is $\{x\in\mathbb{Z}\mid l\leq x\}$, where the subscript $n$ refers to the $n$th element of the sequence, that is, the function value when the  independent variable is $n$.
+\item\textbf{Finite Sequence (有限數列)}: A finite sequence is a sequence with finite terms, i.e. $\langle a_n\rangle_{n=l}^m,\quad m\in\mathbb{Z}$.
+\item\textbf{Infinite sequence (無窮數列)}: An infinite sequence is a sequence with infinite terms, i.e. $\langle a_n\rangle_{n=l}^\infty$. Unless otherwise specified, sequences refer to infinite sequences.
+\item\tb{Sequence of partial sums}: The sequence of partial sums of a sequence $\langle a_n\rangle_{n=l}^{\infty}$ is the sequence $\langle s_n=\sum_{i=l-1}^na_i\rangle_{n=l-1}^{\infty}$ where $s_{l-1}=0$ or $\langle s_n=\sum_{i=l}^na_i\rangle_{n=l}^{\infty}$.
+\end{itemize}
+\ssc{Series (級數)}
+\begin{itemize}
+\item\textbf{Series}: The sum of the terms of a sequence.
+\item\textbf{Finite Series (有限級數)}: The sum of the terms of a finite sequence.
+\item\textbf{Infinite Series (無窮級數)}: The sum of the terms of an infinite sequence.
+\end{itemize}
 \ssc{Some Types of Real Functions}
 \sssc{Power Function (冪函數)}
 A power function if a function $f(x)=kx^a$ where $k\in\mathbb{C}$, called coefficient, and $a\in\mathbb{R}$, called exponent, are constants (some requires $k\in\mathbb{R}$ or $k=1$).
@@ -267,71 +259,6 @@ If such $M$ exists, we say the limit exists or the sequence converges (收斂) t
 \[\lim_{n\to \infty}a_n=\infty \equiv \forall M > 0, \exists M \in\mathbb{N} \text{\ s.t.\ } n\in\mathbb{N}\land n \geq M \implies a_n > M.\]
 \[\lim_{n\to \infty}a_n=-\infty \equiv \forall M < 0, \exists M \in\mathbb{N} \text{\ s.t.\ } n\in\mathbb{N}\land n \geq M \implies a_n < M.\]
 Note that if a limit equals to $\infty$ or $-\infty$, the limit doesn't exist.
-\sssc{The Uniqueness of Limits}
-If a limit of a real sequence exists, it is unique.
-\sssc{Preservation of equal to}
-Given real sequences $\langle a_n\rangle$ and $\langle b_n\rangle$ which for all $k$ that is greater than or equal to a specific $j\in \mathbb{N}$, $a_k=b_k$. If $\lim_{n\to\infty}a_n=L\in\mathbb{R}\cup\{-\infty,\infty\}$, then
-\[\lim_{n\to\infty}b_n=L.\]
-\sssc{Preservation of less than or equal to}
-Given real sequences $\langle a_n\rangle$ and $\langle b_n\rangle$ which for all $k$ that is greater than or equal to a specific $j\in \mathbb{N}$, $a_k\leq b_k$. If both $\lim_{n\to\infty}a_n$ and $\lim_{n\to\infty}b_n$ are in $\mathbb{R}\cup\{-\infty,\infty\}$, then
-\[\lim_{n\to\infty}a_n\leq\lim_{n\to\infty}b_n.\]
-If $\lim_{n\to\infty}a_n=\infty$, then $\lim_{n\to\infty}b_n=\infty$; if $\lim_{n\to\infty}b_n=-\infty$, then $\lim_{n\to\infty}a_n=-\infty$.
-\sssc{Squeeze (夾擠) theorem or Sandwich (三明治) theorem}
-Given real sequences $\langle a_n\rangle$, $\langle b_n\rangle$, and $\langle c_n\rangle$ which for all $k$ that is greater than or equal to a specific $j\in \mathbb{N}$:
-\[a_k\leq c_k\leq b_k.\]
-If
-\[\lim_{n\to\infty}a_n=\lim_{n\to\infty}b_n=L\in\mathbb{R}\cup\{-\infty,\infty\},\]
-then
-\[\lim_{n\to\infty}c_n=L.\]
-\subsubsection{Monotone Convergence Theorem (單調收斂定理) or Completeness (Axiom) of the Real Numbers (實數的完備性)}
-\textit{Statement.}
-\begin{enumerate}[label=(\Alph*)]
-\item For a non-decreasing and bounded-above sequence of real numbers $\langle a_n\rangle_{n\in\mathbb {N}}$:
-\[\lim_{n\to\infty}a_n=\sup_n a_n.\]
-\item For a non-increasing and bounded-below sequence of real numbers $\langle a_n\rangle_{n\in\mathbb {N}}$:
-\[\lim_{n\to\infty}a_n=\inf_n a_n.\]
-\end{enumerate}
-\begin{proof}
-Let $\{a_{n}\}$ be the set of values of $\langle a_n\rangle_{n\in\mathbb {N}}$. By assumption, $\{a_n\}$ is non-empty and bounded-above by $\sup_n a_n$. Let $c=\sup_n a_n$.
-\[\forall\epsilon>0:\,\exists M\in\mathbb {N}\text{\ s.t.\ }c\geq a_M>c-\epsilon,\]
-since otherwise $c-\epsilon$ is a strictly smaller upper bound of $\langle a_n\rangle$, contradicting the definition of the supremum. 
-
-Then since $\langle a_n\rangle$ is non-decreasing, and $c$ is an upper bound:
-\[\forall\epsilon>0:\,\exists M\in\mathbb {N}\text{\ s.t.\ }\forall n\geq M:\,|c-a_n|=c-a_n\leq c-a_M=|c-a_M|<\epsilon.\]
-The proof of the (B) part is analogous or follows from (A) by considering $\langle -a_{n}\rangle_{n\in \mathbb{N}}$.
-\end{proof}
-\textit{Statement.}
-
-If $\langle a_n\rangle_{n\in\mathbb {N}}$ is a monotone sequence of real numbers, i.e., if 
-$a_n\leq a_{n+1}$ for every $n\geq 1$ or $a_n\geq a_{n+1}$ for every $n\geq 1$, then this sequence has a finite limit if and only if the sequence is bounded.
-\begin{proof}
-"If"-direction: The proof follows directly from the proposition.
-
-"Only If"-direction: By $(\epsilon,\delta)$-definition of limit, every sequence $\langle a_n\rangle_{n\in\mathbb {N}}$ with a finite limit $L$ is necessarily bounded.
-\end{proof}
-\sssc{Bolzano–Weierstrass Theorem (波爾查諾-魏爾斯特拉斯定理)}
-Every bounded sequence in an Euclidean space $\bbR^n$ has a convergent subsequence.
-
-\begin{proof}
-    For $\bbR$, take any bounded sequence $(x_n)$ in $\bbR$. Then there exist real numbers $m,M$ such that
-    \[m\leq x_n\leq M,\quad\forall n.\]
-    So the sequence lies in the closed interval $[m,M]$.
-
-    For $\varepsilon=1$. Divide $[m,M]$ into disjoint subintervals with length $\frac{M-m}{2^\varepsilon}$:
-    \[\qty[m,\frac{m+M}{2}],\qty[\frac{m+M}{2},M].\]
-    Since $(x_n)$ is infinite, by the pigeonhole principle, one of the subintervals must contain infinitely many terms of $(x_n)$. Denote it by $I_1$ and pick the subsequence $\qty(x_n^{(1)})$ of $(x_n)$ that is entirely in $I_1$.
-
-    Repeat it for $\varepsilon=2,3,\ldots,$ by dividing $I_{\varepsilon-1}$ into two halves, we can construct a nested sequence of subsequences
-    \[\qty(x_n^{(1)})\supseteq \qty(x_n^{(2)})\supseteq\ldots\]
-    where $\qty(x_n^{(k)})$ lies in a closed interval of length $\frac{M-m}{2^k}$, $I_k$.
-
-    Pick the diagonal sequence $y_k=x_k^{(k)}$. Then
-    \[y_k\in\qty(x_n^{(k)})\subseteq I_k,\]
-    and the sequence $(y_k)$ is a convergent subsequence of $(x_n)$ because
-    \[\forall N\in\bbN\colon m,n\geq N\implies |y_m-y_n|\leq\frac{M-m}{2^N}.\]
-
-    To generalized to $\bbR^n$, consider each coordinate sequence in $\bbR$, it has a convergent subsequence. Diagonalization gives a subsequence converging in all coordinates.
-\end{proof}
 \subsection{Limits of Real Series}
 \subsubsection{Definition}
 Let:
@@ -341,26 +268,7 @@ where \(a_i\) are terms of a real sequence. The limit of \(S_n\), denoted as \(\
 
 If such $M$ exists, we say the limit exists or the series converges to $L$; otherwise, we say the limit doesn't exist or the series diverge.
 \subsubsection{Absolute convergence and conditional convergence}
-A series $S_n=\sum_{i=1}^{\infty}a_i$ converges absolutely to $L$ if $\exists\lim_{n\to\infty}\sum_{i=1}^{\infty}\abs{a_1}\land\lim_{n\to\infty}\sum_{i=1}^{\infty}\abs{a_1}=L$. If $S_n$ is convergent but not convergent absolutely, we say $S_n$ converges conditionally.
-\sssc{The Uniqueness of Limits}
-If a limit of a real series exists, it is unique.
-\sssc{Preservation of equal to}
-Given real sequences $\langle a_n\rangle$ and $\langle b_n\rangle$ which for all $k$ that is greater than or equal to a specific $j\in \mathbb{N}$:
-\[\sum_{i=1}^ka_i=\sum_{i=1}^kb_i.\]
-If $\sum_{i=1}^{\infty}a_i=L\in\mathbb{R}\cup\{-\infty,\infty\}$, then
-\[\sum_{i=1}^{\infty}b_i=L.\]
-\sssc{Preservation of less than or equal to}
-Given real sequences $\langle a_n\rangle$ and $\langle b_n\rangle$ which for all $k$ that is greater than or equal to a specific $j\in \mathbb{N}$:
-\[\sum_{i=1}^ka_i\leq\sum_{i=1}^kb_i.\]
-If both $\sum_{i=1}^{\infty}a_i$ and $\sum_{i=1}^{\infty}b_i$ are in $\mathbb{R}\cup\{-\infty,\infty\}$, then
-\[\sum_{i=1}^{\infty}a_i\leq\sum_{i=1}^{\infty}b_i.\]
-\sssc{Squeeze theorem or Sandwich theorem}
-Given real sequences $\langle a_n\rangle$, $\langle b_n\rangle$, and $\langle c_n\rangle$ which for all $k$ that is greater than or equal to a specific $j\in \mathbb{N}$:
-\[\sum_{i=1}^ka_i\leq\sum_{i=1}^kc_i\leq\sum_{i=1}^kb_i.\]
-If
-\[\sum_{i=1}^{\infty}a_i=\sum_{i=1}^{\infty}b_i=L\in\mathbb{R}\cup\{-\infty,\infty\},\]
-then: 
-\[\sum_{i=1}^{\infty}c_i=L.\]
+We say a series $S_n=\sum_{i=1}^{\infty}a_i$ converges absolutely to $L$ iff the series $\sum_{i=1}^{\infty}\abs{a_i}$ converges to $L$. If $S_n$ is convergent but not convergent absolutely, we say it is convergent conditionally.
 \subsection{Limits of Real Nets}
 Below, we are discussing limits of nets in the set of real number.
 \subsubsection{Definition}
@@ -372,36 +280,6 @@ If such $a_0$ exists, we say the limit exists or the net converges to $L$; other
 \[\lim_{a}x_a=\infty \equiv \forall M > 0, \exists a_0 \in A \text{\ s.t.\ } a\in A\land a\geq a_0 \implies x_a > M.\]
 \[\lim_{a}x_a=-\infty \equiv \forall M < 0, \exists a_0 \in A \text{\ s.t.\ } a\in A\land a\geq a_0 \implies x_a < M.\]
 Note that if a limit equals to $\infty$ or $-\infty$, the limit doesn't exist.
-\sssc{The Uniqueness of Limits}
-If a limit of a real net exists, it is unique.
-\sssc{Preservation of equal to}
-Let $A$ be a directed set. Given real nets $\langle x_a\rangle_{a\in A}$ and $\langle y_a\rangle_{a\in A}$ which for all $k\in A$ such that there exists $j\in A$ with $j\leq k$, $x_k=y_k$. If $\lim_{a}x_a$ exists, then:
-\[\lim_{a}x_a=\lim_{a}y_a.\]
-\sssc{Preservation of less than or equal to}
-Let $A$ be a directed set. Given real nets $\langle x_a\rangle_{a\in A}$ and $\langle y_a\rangle_{a\in A}$ which for all $k\in A$ such that there exists $j\in A$ with $j\leq k$, $x_k\leq y_k$. If both $\lim_{a}x_a$ and $\lim_{a}y_a$ exist, then:
-\[\lim_{a}x_a\leq\lim_{a}y_a.\]
-\sssc{Squeeze theorem or Sandwich theorem}
-Let $A$ be a directed set. Given real nets $\langle x_a\rangle_{a\in A}$, $\langle y_a\rangle_{a\in A}$, and $\langle z_a\rangle_{a\in A}$ which for all $k\in A$ such that there exists $j\in A$ with $j\leq k$:
-\[x_k\leq z_k\leq y_k.\]
-If
-\[\lim_{a}x_a=\lim_{a}y_a=L,\]
-then: 
-\[\lim_{a}z_a=L.\]
-\begin{proof}
-Start from the limits of $x_a$ and $y_a$, by definition of limit:
-
-For every $\varepsilon\in\mathbb{R}_{>0}$, there exists some $a_1\in A$ such that for every $b\in A$ with $b\geq a_1$, the point $L-\varepsilon\leq x_b\leq L+\varepsilon$.
-
-For every $\varepsilon\in\mathbb{R}_{>0}$, there exists some $a_2\in A$ such that for every $b\in A$ with $b\geq a_2$, the point $L-\varepsilon\leq y_b\leq L+\varepsilon$.
-
-Choose $a\in A$ such that $a_1\leq a$ and $a_2\leq a$.
-
-so,
-\[L-\varepsilon\leq x_{a}\leq z_{a}\leq y_{a}\leq L+\varepsilon.\]
-
-Since $\varepsilon > 0$ was arbitrary, by definition of limit:
-\[\lim_{a}z_a=L.\]
-\end{proof}
 \subsection{Limits of Functions with Real Domains}
 \subsubsection{Definition at Finity}
 Let \(I\) be an interval containing the point \(a\). Let \( f(x) \) be a function defined on \(I\), except possibly at \(a\) itself. The limit of \( f(x) \) as \( x \) approaches \( a \) is defined as follows:
@@ -443,94 +321,6 @@ In other words, as \(x\) becomes arbitrarily close to \(a\) and is less than \(a
 Note that if a limit equals to $\infty$ or $-\infty$, the limit doesn't exist.
 \sssc{Vertical asymptote (鉛直漸近線)}
 We say $x=a$ is a vertical asymptote of $y=f(x)$ iff $\abs{\lim_{x \to a^+} f(x)}=\infty$ or $\abs{\lim_{x \to a^-} f(x)}=\infty$.
-\sssc{The Uniqueness of Limits}
-If a limit of a real function exists, it is unique.
-\sssc{Preservation of equal to}
-Let $I$ be an open interval and $a\in I$, and $f(x)$ and $g(x)$ be functions defined on $I\setminus\{a\}$ which for all $x\in I\land x\neq a$, $f(x)=g(x)$. If $\lim_{x\to a}f(x)=L\in\mathbb{R}\cup\{-\infty,\infty\}$, then
-\[\lim_{x\to a}g(x)=L.\]
-
-Let $f(x)$ and $g(x)$ be functions defined on $(a,b)$ with $a<b$ which for all $x\in I$, $f(x)=g(x)$. If $\lim_{x\to a^+}f(x)=L\in\mathbb{R}\cup\{-\infty,\infty\}$, then
-\[\lim_{x\to a^+}g(x)=L.\]
-
-Let $f(x)$ and $g(x)$ be functions defined on $(b,a)$ with $a>b$ which for all $x\in I$, $f(x)=g(x)$. If $\lim_{x\to a^-}f(x)=L\in\mathbb{R}\cup\{-\infty,\infty\}$, then
-\[\lim_{x\to a^-}g(x)=L.\]
-
-Let $f(x)$ and $g(x)$ be functions defined on $(a,\infty)$ which for all $x\in I$, $f(x)=g(x)$. If $\lim_{x\to\infty}f(x)=L\in\mathbb{R}\cup\{-\infty,\infty\}$, then
-\[\lim_{x\to\infty}g(x)=L.\]
-
-Let $f(x)$ and $g(x)$ be functions defined on $(-\infty,a)$ which for all $x\in I$, $f(x)=g(x)$. If $\lim_{x\to-\infty}f(x)=L\in\mathbb{R}\cup\{-\infty,\infty\}$, then
-\[\lim_{x\to-\infty}g(x)=L.\]
-\sssc{Preservation of less than or equal to}
-Let $I$ be an open interval and $a\in I$, and $f(x)$ and $g(x)$ be functions defined on $I\setminus\{a\}$ which for all $x\in I\land x\neq a$, $f(x)\leq g(x)$. If both $\lim_{x\to a}f(x)$ and $\lim_{x\to a}g(x)$ are in $\mathbb{R}\setminus\{-\infty,\infty\}$, then
-\[\lim_{x\to a}f(x)\leq\lim_{x\to a}g(x).\]
-If $\lim_{x\to a}f(x)=\infty$, then $\lim_{x\to a}g(x)=\infty$; if $\lim_{x\to a}g(x)=-\infty$, then $\lim_{x\to a}f(x)=-\infty$.
-
-Let $f(x)$ and $g(x)$ be functions defined on $(a,b)$ with $a<b$ which for all $x\in I$, $f(x)\leq g(x)$. If both $\lim_{x\to a^+}f(x)$ and $\lim_{x\to a^+}g(x)$ are in $\mathbb{R}\cup\{-\infty,\infty\}$, then
-\[\lim_{x\to a^+}f(x)\leq\lim_{x\to a^+}g(x).\]
-If $\lim_{x\to a^+}f(x)=\infty$, then $\lim_{x\to a^+}g(x)=\infty$; if $\lim_{x\to a^+}g(x)=-\infty$, then $\lim_{x\to a^+}f(x)=-\infty$.
-
-Let $f(x)$ and $g(x)$ be functions defined on $(b,a)$ with $a>b$ which for all $x\in I$, $f(x)\leq g(x)$. If both $\lim_{x\to a^-}f(x)$ and $\lim_{x\to a^-}g(x)$ are in $\mathbb{R}\cup\{-\infty,\infty\}$, then
-\[\lim_{x\to a^-}f(x)\leq\lim_{x\to a^-}g(x).\]
-If $\lim_{x\to a^-}f(x)=\infty$, then $\lim_{x\to a^-}g(x)=\infty$; if $\lim_{x\to a^-}g(x)=-\infty$, then $\lim_{x\to a^-}f(x)=-\infty$.
-
-Let $f(x)$ and $g(x)$ be functions defined on $(a,\infty)$ which for all $x\in I$, $f(x)\leq g(x)$. If both $\lim_{x\to\infty}f(x)$ and $\lim_{x\to\infty}g(x)$ are in $\mathbb{R}\cup\{-\infty,\infty\}$, then
-\[\lim_{x\to\infty}f(x)\leq\lim_{x\to\infty}g(x).\]
-If $\lim_{x\to\infty}f(x)=\infty$, then $\lim_{x\to\infty}g(x)=\infty$; if $\lim_{x\to\infty}g(x)=-\infty$, then $\lim_{x\to\infty}f(x)=-\infty$.
-
-Let $f(x)$ and $g(x)$ be functions defined on $(-\infty,a)$ which for all $x\in I$, $f(x)\leq g(x)$. If both $\lim_{x\to-\infty}f(x)$ and $\lim_{x\to-\infty}g(x)$ are in $\mathbb{R}\cup\{-\infty,\infty\}$, then
-\[\lim_{x\to-\infty}f(x)\leq\lim_{x\to-\infty}g(x).\]
-If $\lim_{x\to-\infty}f(x)=\infty$, then $\lim_{x\to-\infty}g(x)=\infty$; if $\lim_{x\to-\infty}g(x)=-\infty$, then $\lim_{x\to-\infty}f(x)=-\infty$.
-\subsubsection{Squeeze theorem or Sandwich theorem}
-Let $I$ be an open interval and $a\in I$, and $f(x)$, $g(x)$, and $h(x)$ be functions defined on $I\setminus\{a\}$ which for all $x\in I\land x\neq a$, $f(x)\leq h(x)\leq g(x)$. If
-\[\lim_{x\to a}f(x)=\lim_{x\to a}g(x)=L\in\mathbb{R}\setminus\{-\infty,\infty\},\]
-then
-\[\lim_{x\to a}h(x)=L.\]
-
-Let $f(x)$, $g(x)$, and $h(x)$ be functions defined on $(a,b)$ with $a<b$ which for all $x\in I$, $f(x)\leq h(x)\leq g(x)$. If
-\[\lim_{x\to a^+}f(x)=\lim_{x\to a^+}g(x)=L\in\mathbb{R}\setminus\{-\infty,\infty\},\]
-then
-\[\lim_{x\to a^+}h(x)=L.\]
-
-Let $f(x)$, $g(x)$, and $h(x)$ be functions defined on $(b,a)$ with $a>b$ which for all $x\in I$, $f(x)\leq h(x)\leq g(x)$. If
-\[\lim_{x\to a^-}f(x)=\lim_{x\to a^-}g(x)=L\in\mathbb{R}\setminus\{-\infty,\infty\},\]
-then
-\[\lim_{x\to a^-}h(x)=L.\]
-
-Let $f(x)$, $g(x)$, and $h(x)$ be functions defined on $(a,\infty)$ which for all $x\in I$, $f(x)\leq h(x)\leq g(x)$. If
-\[\lim_{x\to\infty}f(x)=\lim_{x\to\infty}g(x)=L\in\mathbb{R}\setminus\{-\infty,\infty\},\]
-then
-\[\lim_{x\to\infty}h(x)=L.\]
-
-Let $f(x)$, $g(x)$, and $h(x)$ be functions defined on $(-\infty,a)$ which for all $x\in I$, $f(x)\leq h(x)\leq g(x)$. If
-\[\lim_{x\to-\infty}f(x)=\lim_{x\to-\infty}g(x)=L\in\mathbb{R}\setminus\{-\infty,\infty\},\]
-then
-\[\lim_{x\to-\infty}h(x)=L.\]
-\begin{proof}
-Take the first statement for example. The other statements can be proven similarly.
-
-Start from the limits of $f$ and $g$, by definition of limit:
-\[\forall\varepsilon>0, \exists\delta_1>0\text{\ s.t.\ }0<|x-a|<\delta_1\implies|f(x)-L|<\varepsilon,\]
-and
-\[\forall\varepsilon>0, \exists\delta_2>0\text{\ s.t.\ }0<|x-a|<\delta_2\implies|g(x)-L|<\varepsilon,\]
-
-Choose:
-\[\delta\coloneq\min(\delta_1,\delta_2),\]
-
-so,
-\[L-\varepsilon<f(x)\leq h(x)\leq g(x)<L+\varepsilon.\]
-
-Since $\varepsilon > 0$ was arbitrary, by definition of limit:
-\[\lim_{x\to a}h(x)=L.\]
-\end{proof}
-\sssc{Limits involving quotient functions}
-Let \( a \) and \( b \) be real numbers, set
-\[A=\left\{f\colon U\subseteq\mathbb{R}\to\mathbb{R} \middle | f(x) = x \lor \ln(f(x)) \in A \lor e^{f\left(x\right)}  \in A \right\},\]
-and function $f\in A$. Then:
-\[\lim_{x \to \infty} \frac{\left(f\left(x\right)\right)^a}{\left(f\left(x\right)\right)^b} = \infty, \quad a > b \]
-\[ \lim_{x \to \infty} \frac{af\left(x\right)}{bf\left(x\right)} = \frac{a}{b}, \quad b \neq 0 \]
-\[ \lim_{x \to \infty}\frac{n^{af\left(x\right)}}{bf\left(x\right)} = \infty, \quad a,b > 0 \land  n > 1 \]
-\[ \lim_{x \to \infty}\frac{n^{af\left(x\right)}}{bf\left(x\right)} = 0, \quad a,b > 0 \land  0\leq n<1 \]
-\[ \lim_{x \to \infty}\frac{af\left(x\right)}{b\log_n f\left(x\right)} = \infty, \quad a,b > 0 \land  n > 1 \]
 \ssc{Limit of nets of fuctions}
 \sssc{Pointwise convergence (逐點收斂)}
 Let $V$ be a set and $Y$ be a topological space. A net of functions $\langle f_n\rangle_{n\in A}$ all having the same domain $X\subseteq V$ and codomain $Y$ is said to converge pointwise to a given function $f\colon X\to Y$, denoted as 
@@ -544,20 +334,6 @@ Let $V$ be a set and $(Y,d)$ be a metric topological space. A net of functions $
 if and only if
 \[\forall\varepsilon\in\mathbb{R}_{>0}\colon\exists N\in A\text{\ s.t.\ }\left(n\in A\land N\leq n\implies\sup_{x\in X}d(f_n(x),f(x))<\varepsilon\right).\]
 The function $f$ is said to be the uniform limit function of $\langle f_n\rangle$.
-\ssc{Limit Laws}
-If the limit (including one-sided ones for functions with real domains) of sequences, series, nets, or functions with real domains, hereinafter referred to as a function, in one side exists in $\mathbb{R}\cup\{-\infty,\infty\}$, then the limit in the other side exists in $\mathbb{R}\cup\{-\infty,\infty\}$ and follows the following law.
-\sssc{Linearity or sum law, difference law, and constant multiple law}
-The limit of a sum of constant multiples of functions is the sum of the constant multiples of the limits of the functions.
-\sssc{Product law}
-The limit of a product of functions is the product of the limits of the functions.
-\sssc{Quotient law}
-The limit of a quotient of functions is the quotient of the limits of the functions, provided that the limit of the denominator is not 0, in which the reciprocals of $\infty$ and $-\infty$ are $0$.
-\sssc{Power law}
-The limit of the $n$th power of a function, in which $n$ is a positive integer, is the $n$th power of the limit of the function.
-\sssc{Root law}
-The limit of the $n$th root of a function, in which $n$ is a positive integer, is the $n$th root of the limit of the function.
-\sssc{General limit law}
-For any function $f\colon D\subseteq\bbR\to\bbR$ that is continuous at a limit of a function $g$, $f$ of the limit of $g$ is the limit of $f$ of $g$, where $f$ is called continuous at $\infty$ if $\lim_{x\to\infty}f(x)\in\bbR\cup\{-\infty,\infty\}$ and called continuous at $-\infty$ if $\lim_{x\to-\infty}f(x)\in\bbR\cup\{-\infty,\infty\}$.
 
 
 
@@ -572,6 +348,8 @@ For any function $f\colon D\subseteq\bbR\to\bbR$ that is continuous at a limit o
 \item For an left-open interval $(a,b]$ that is a subset of the domain of a function $f$, if and only if $f(x)$ is continuous on $(a,b)$ and continuous from the left at $b$, we say $f(x)$ is continuous on $(a,b]$.
 \item For an closed interval $[a,b]$ that is a subset of the domain of a function $f$, if and only if $f(x)$ is continuous on both $[a,b)$ and $(a,b]$, we say $f(x)$ is continuous on $[a,b]$.
 \item if and only if $f(x)$ is continuous at all points in its domain, we say $f(x)$ is continuous.
+\item $f$ is called continuous at $\infty$ if $\lim_{x\to\infty}f(x)\in\bbR\cup\{-\infty,\infty\}$.
+\item $f$ is called continuous at $-\infty$ if $\lim_{x\to-\infty}f(x)\in\bbR\cup\{-\infty,\infty\}$.
 \eit
 \sssc{Definition of continuity of functions between topological spaces}
 \begin{itemize}
@@ -865,7 +643,7 @@ A function is called continuously ($n$-times) differentiable iff it is ($n$-time
 \sssc{Smoothness}
 A function $f$ with real domain that has a derivative that is continuous on its domain is said to be of class $C^1$ or continuously differentiable, denoted as $f\in C^1$, or be a $C^1$-function.
 
-A function $f$ that has a derivative that is continuous on a subset $I$ of its domain is said to be of class $C^1$ on $I$, of class $C^k(I)$, or continuously differentiable on $I$, denoted as $f\in C^k(I)$.
+A function $f$ that has a derivative that is continuous on a subset $I$ of its domain is said to be of class $C^1$ on $I$, of class $C^1(I)$, or continuously differentiable on $I$, denoted as $f\in C^1(I)$.
 
 A function $f$ with real domain that has a $k$th derivative that is continuous on its domain is said to be of class $C^k$ or $k$-times continuously differentiable, denoted as $f\in C^k$, or be a $C^k$-function.
 
@@ -1068,63 +846,62 @@ Suppose that two tagged partitions $P(x,n,\xi)$ and $Q(y,m,\zeta)$ are both part
 
 We can turn the set of all tagged partitions into a directed set by saying that one tagged partition is greater than or equal to another if the former is a refinement of the latter.
 \subsubsection{Riemann sum}
-Let $f$ be a real-valued function defined on a interval $[a,b]$. The Riemann sum of $f$ with respect to a tagged partition $P(x,n,\xi)$ of $[a,b]$ is defined to be
+Let $f$ be a real-valued function defined on a interval $[a,b]$. The Riemann sum of $f$ over a tagged partition $P(x,n,\xi)$ of $[a,b]$ is defined to be
 \[R(f,P):=\sum_{i=0}^{n-1}f(\xi_i)\left(x_{i+1}-x_i\right).\]
 Each term in the sum is the product of the value of the function at a given point and the length of an interval. Consequently, each term represents the signed area of a rectangle with height $f(\xi_i)$ and width $x_{i + 1} − x_i$. Thus the Riemann sum is the signed area of all the rectangles.
 \subsubsection{Darboux sum}
-Let $f$ be a real-valued function defined on a interval $[a,b]$. The lower and upper Darboux sums, $L(f,P)$ and $U(f,P)$, of $f$ with respect to a partition $P(x,n)$ of $[a,b]$, are two specific Riemann sums of which the tags are chosen to be the infimum and supremum (respectively) of $f$ on each subinterval:
+Let $f$ be a real-valued function defined on a interval $[a,b]$. The lower and upper Darboux sums, $L(f,P)$ and $U(f,P)$, of $f$ over a partition $P(x,n)$ of $[a,b]$, are two specific Riemann sums of which the tags are chosen to be the infimum and supremum (respectively) of $f$ on each subinterval:
 \[\begin{aligned}
 L(f,P)&:=\sum_{i=0}^{n-1}\inf_{\xi\in [x_i,x_{i+1}]}f(\xi)(x_{i+1}-x_i),\\
 U(f,P)&:=\sum_{i=0}^{n-1}\sup_{\xi\in [x_i,x_{i+1}]}f(\xi)(x_{i+1}-x_i).
 \end{aligned}\]
 \subsubsection{Riemann left, right, and midpoint sums}
-Let $f$ be a real-valued function defined on a interval $[a,b]$. The Riemann left (aka left-sided), right (aka right-sided), and midpoint sums, $R_L(f,P)$, $R_R(f,P)$, and $R_M(f,P)$, of $f$ with respect to a partition $P(x,n)$ of $[a,b]$, are three specific Riemann sums of which the tags are chosen to be the left endpoint, right endpoint, and midpoint (respectively) on each subinterval:
+Let $f$ be a real-valued function defined on a interval $[a,b]$. The Riemann left (aka left-sided), right (aka right-sided), and midpoint sums, $R_L(f,P)$, $R_R(f,P)$, and $R_M(f,P)$, of $f$ over a partition $P(x,n)$ of $[a,b]$, are three specific Riemann sums of which the tags are chosen to be the left endpoint, right endpoint, and midpoint (respectively) on each subinterval:
 \[\begin{aligned}
 R_L(f,P)&:=\sum_{i=0}^{n-1}f\qty(x_i)(x_{i+1}-x_i),\\
 R_L(f,P)&:=\sum_{i=0}^{n-1}f\qty(x_{i+1})(x_{i+1}-x_i),\\
 R_M(f,P)&:=\sum_{i=0}^{n-1}f\qty(\frac{x_i+x_{i+1}}{2})(x_{i+1}-x_i).
 \end{aligned}\]
-\subsubsection{Riemann sums with respect to partition that divides interval equally}
-A Riemann sum of $f$ with respect to a tagged partition $P(x,n,\xi)$ that divides an interval into subintervals of equal length is denoted as $R_n(f)$.
+\subsubsection{Riemann sums over partition that divides interval equally}
+A Riemann sum of $f$ over a tagged partition $P(x,n,\xi)$ that divides an interval into subintervals of equal length is denoted as $R_n(f)$.
 
-A lower Darboux sum, an upper Darboux sum, a Riemann left sum, a Riemann right sum, and a Riemann midpoint sum of $f$ with respect to a partition $P(x,n)$ that divides an interval into subintervals of equal length are sometimes denoted as $L_n(f),U_n(f),{R_L}_n(f),{R_R}_n(f)$, and ${R_M}_n(f)$ respectively.
+A lower Darboux sum, an upper Darboux sum, a Riemann left sum, a Riemann right sum, and a Riemann midpoint sum of $f$ over a partition $P(x,n)$ that divides an interval into subintervals of equal length are sometimes denoted as $L_n(f),U_n(f),{R_L}_n(f),{R_R}_n(f)$, and ${R_M}_n(f)$ respectively.
 \subsubsection{Riemann integral}
 Let $f$ be a real-valued function defined on a interval $[a,b]$. The Riemann integral of $f$ on $[a,b]$ exists and equals $s$ if for all $\varepsilon > 0$, there exists $\delta > 0$ such that for any tagged partition $P(x,n,\xi)$ whose mesh is less than $\delta$,
 \[\abs{R(f,P)-s}<\varepsilon .\]
 \subsubsection{Darboux integral}
 Let $f$ be a real-valued function defined on a interval $[a,b]$. The Darboux integral of $f$ on $[a,b]$ exists and equals $s$ if for all $\varepsilon > 0$, there exists $\delta > 0$ such that for any partition $P$ whose mesh is less than $\delta$,
 \[\abs{U(f,P)-s}<\varepsilon \land \abs{L(f,P)-s}<\varepsilon.\]
-\sssc{Lebesgue-Vitali theorem (of characterization of the Riemann integrable functions)}
-A function is Riemann integrable (i.e. Darboux integrable) over a closed interval $I$ iff it is bounded on $I$ and continuous almost everywhere in $I$.
 \ssc{Extensions of Riemann integral}
 \sssc{Improper (Riemann) integral (瑕（黎曼）積分)}
-An integral $\int _{a}^{b}f(x)\dd{x}$ is an improper integral if one or more of the below conditions occur:
+An integral $\int _{a}^{b}f(x)\dd{x}$ is an improper integral if it satisfies one or more of the below conditions:
 \ben
 \item $a=-\infty$,
 \item $b=\infty$,
 \item $f(x)$ is unbounded or undefined somewhere in $[a,b]$.
 \een
 
-The improper integrals are defined by limits as:
+The improper integrals are defined by limits recursively as:
 \bit
-\item for $a=-\infty$:
+\item For $a=-\infty$:
 \[\int _{-\infty }^bf(x)\dd{x}=\lim _{a\to -\infty }\int _{a}^{b}f(x)\dd{x},\]
-\item for $b=\infty$:
+called improper integrals of type 1.
+\item For $b=\infty$:
 \[\int _{a}^{\infty }f(x)\dd{x}=\lim _{b\to \infty }\int _{a}^{b}f(x)\dd{x},\]
-\item for $f(x)$ that is unbounded or undefined at $a$:
+called improper integrals of type 1.
+\item For $f(x)$ that is unbounded or undefined at $a$:
 \[\int_a^bf(x)\dd{x}=\lim_{c\to a^+}\int_c^bf(x)\dd{x},\]
-\item for $f(x)$ that is unbounded or undefined at $b$:
+called improper integrals of type 2.
+\item For $f(x)$ that is unbounded or undefined at $b$:
 \[\int_a^bf(x)\dd{x}=\lim_{c\to b^-}\int_a^cf(x)\dd{x},\]
-\item for $f(x)$ that is unbounded or undefined at $c\in(a,b)$:
+called improper integrals of type 2.
+\item For $f(x)$ that is unbounded or undefined at $c\in(a,b)$:
 \[\int _{a}^{b}f(x)\dd{x}=\lim_{t\to c^-}\int _{a}^{t}f(x)\dd{x}+\lim_{t\to c^+}\int _{t}^{b}f(x)\dd{x},\]
+called improper integrals of type 2.
 \eit
-in which if any of the terms diverge or is undefined, the improper integral diverges and is undefined; otherwise, the improper integral exists finitely and converges to a finite value.
+In which if any of the terms diverge or is undefined, the improper integral diverges and is undefined; otherwise, the improper integral exists finitely and converges to a finite value.
 
-$\lim _{a\to -\infty }\int _{a}^{b}f(x)\dd{x}$ converges absolutely to $L$ if $\exists\lim _{a\to -\infty }\int _{a}^{b}\abs{f(x)}\dd{x}\land\lim _{a\to -\infty }\int _{a}^{b}\abs{f(x)}\dd{x}=L$.
-
-$\lim _{b\to \infty }\int _{a}^{b}f(x)\dd{x}$ converges absolutely to $L$ if $\exists\lim _{b\to \infty }\int _{a}^{b}f(x)\dd{x}\land\lim _{b\to \infty }\int _{a}^{b}f(x)\dd{x}=L$.
-
-If an improper integral is convergent but not convergent absolutely, we say it converges conditionally.
+We say an improper integral of $f(x)$ over interval $I$ converges absolutely to $L$ iff the improper integral of $\abs{f(x)}$ over $I$ converges to $L$. If an improper integral is convergent but not convergent absolutely, we say it is convergent conditionally.
 \sssc{Cauchy principal value (柯西主值) or PV integral}
 The Cauchy principal value or PV integral, denoted as p.v., is a weaker notion of convergence, defined by taking symmetric limits. 
 
@@ -1137,6 +914,26 @@ The p.v. of $\int _{a}^{b}f(x)\dd{x}$, in which $f(x)$ is unbounded or undefined
 if the limit exists.
 
 If an improper integral converges, the p.v. of it converges.
+\ssc{Riemann–Stieltjes integral}
+\sssc{Definition}
+Below, we will define the Riemann–Stieltjes integral of a function $f\colon X\subseteq\bbR\to\bbR$ over another function $g\colon Y\subseteq\bbR\to\bbR$ over an interval $[a,b]\subseteq (X\cap Y)$,
+\[\int_{x=a}^bf(x)\dd{g(x)}.\]
+
+The Riemann–Stieltjes sum of $f$ with respect to $g$ over a tagged partition $P(x,n,\xi)$ is defined as
+\[S(f,g,P):=\sum_{i=0}^{n-1}f(\xi_i)\left(g\qty(x_{i+1})-g(x_i)\right).\]
+
+The Riemann–Stieltjes integral
+\[\int_{x=a}^bf(x)\dd{g(x)}\]
+exists and equals $s$ if for all $\varepsilon > 0$, there exists $\delta > 0$ such that for any tagged partition $P(x,n,\xi)$ whose mesh is less than $\delta$,
+\[\abs{S(f,g,P)-s}<\varepsilon.\]
+\sssc{Extension}
+An integral $\int_{x=a}^bf(x)\dd{g(x)}$ is an improper integral if it satisfies one or more of the below conditions:
+\ben
+\item $a=-\infty$,
+\item $b=\infty$,
+\item $f(x)$ is unbounded or undefined somewhere in $[a,b]$.
+\een
+The definition of improper integral and Cauchy principal value as extensions of the Riemann–Stieltjes integral are the same as those for the Riemann integral.
 \subsection{Lebesgue integral (勒貝格積分)}
 A definition of definite integral.
 \sssc{Premise}
@@ -1156,10 +953,10 @@ where this sum can be finite or $\infty$.
 The integral of a nonnegative simple function $s=\sum_ka_k1_{S_k}$ over a subset $B$ of $E$ is defined to be:
 \[\int_Bs\,\mathrm{d}\mu=\sum_ka_k\mu \qty(S_k\cap B).\]
 \subsubsection{Of a nonnegative measurable function}
-Let $f$ be a nonnegative function on some measurable subset $B$ of $E$ into $\mathbb{R}\cup\{-\infty,\infty\}$, called a nonnegative measurable function. We define
+Let $f$ be a nonnegative measurable function on some measurable subset $B$ of $E$ into $\mathbb{R}\cup\{-\infty,\infty\}$. We define
 \[\int_Bf\,\mathrm{d}\mu=\sup\left\{\int_Bs\,\mathrm{d}\mu\mid\forall x\in B\colon 0\leq s(x)\leq f(x)\land s\text{\ is a nonnegative simple function}\right\}.\]
 \subsubsection{Of a measurable function}
-Let $f$ be a function on some measurable subset $B$ of $E$ into $\mathbb{R}\cup\{-\infty,\infty\}$, called a measurable function. We first define
+Let $f$ be a measurable function on some measurable subset $B$ of $E$ into $\mathbb{R}\cup\{-\infty,\infty\}$. We first define
 \[\begin{aligned}
 f^{+}(x)&=
 \begin{cases}
@@ -1204,6 +1001,26 @@ The Bochner space $L^p(E;X)$ with $p\in\mathbb{N}\cup\{\infty\}$ is defined to b
 and
 \[\|f(t)\|_{L^{\infty }(E;X)}\coloneq\operatorname{ess\,sup}_{t\in E}\|f(t)\|_{X},\]
 is finite by the equivalence relation of equality almost everywhere.
+\ssc{Total variation, functions of bounded variation (BV functions), and functions of locally bounded variation (locally BV functions)}
+\sssc{Of real functions}
+Let $f\colon X\subseteq\bbR\to\bbR$ be a function. The total variation of $f$ over interval $[a,b]\subseteq X$ is
+\[V_a^b(f)=\sup_{P(x,n_p)\in\mathcal{P}}\sum_{i=0}^{n_p-1}\abs{f\qty(x_{i+1})-f\qty(x)},\]
+where $\mathcal{P}$ is the set of all partitions of $f$ over $[a,b]$.
+
+$f$ is called of bounded variation or called a (globally) BV function over $[a,b]$ iff $V_a^b(f)$ is finite.
+
+$f$ is called of locally bounded variation or called a locally BV function over an open interval $(a,b)$ iff $V_c^d(f)$ is finite for all $[c,d]\in (a,b)$.
+
+The space of all (globally) BV functions over $[a,b]$ is denoted as $\operatorname{BV}([a,b])$. The space of all locally BV functions over $(a,b)$ is denoted as
+\[\operatorname{BV}_{\tx{loc}}((a,b)).\]
+
+If $f$ is monotone on $[a,b]$, it is BV over $[a,b]$.
+\sssc{Of real fields}
+PLACEHOLDER
+\sssc{In measure theory}
+PLACEHOLDER
+\sssc{Space of BV functions}
+PLACEHOLDER (is a Banach space)
 
 
 
@@ -1212,10 +1029,10 @@ is finite by the equivalence relation of equality almost everywhere.
 \begin{itemize}
 \item Dot product (點積) operator: $\cdot$
 \item Cross product (叉積) operator: $\times$
-\item Gradient (梯度) operator: $\nabla$
+\item Gradient (梯度) operator: $\nabla$ or $\operatorname{grad}$
 \item Jacobian matrix (雅可比矩陣): $\nabla$, or $\mathbf{J}(\mathbf{F})$, $J(\mathbf{F})$, $\mb{J}_{\mb{F}}$, or $J_{\mathbf{F}}$ for operand $\mb{F}$.
-\item Divergence (散度) operator: $\nabla \cdot$
-\item Curl (旋度) operator: $\nabla \times$
+\item Divergence (散度) operator: $\nabla \cdot$ or $\operatorname{div}$
+\item Curl (旋度) operator: $\nabla \times$ or $\operatorname{curl}$
 \item Directional derivative (方向導數) operator: $\cdot\nabla$
 \item Hessian (黑塞) (matrix): $\nabla\nabla$, $\nabla^2$, $\nabla\otimes\nabla$, $D^2$, or $\mb{H}(f)$, $H(f)$, $\mb{H}_f$ or $H_f$ for operand $f$, or simply as second derivative.
 \item Laplace operator (拉普拉斯算子): $\nabla\cdot\nabla$, $\nabla^2$, or $\Delta$. For clarity, we use $\nabla\cdot\nabla$ here.
@@ -1384,6 +1201,422 @@ for all $\mb{x}\in U$.
 
 
 
+\sct{Limit Theorems and Methods}
+\ssc{The Uniqueness of Limits}
+\sssc{For real sequence}
+If a limit of a real sequence exists, it is unique.
+\sssc{For real series}
+If a limit of a real series exists, it is unique.
+\sssc{For real net}
+If a limit of a real net exists, it is unique.
+\sssc{For real function}
+If a limit of a real function exists, it is unique.
+\ssc{Limit Laws}
+If the limit (including one-sided ones for functions with real domains) of sequences, series, nets, or functions with real domains, hereinafter referred to as a function, in one side exists in $\mathbb{R}\cup\{-\infty,\infty\}$, then the limit in the other side exists in $\mathbb{R}\cup\{-\infty,\infty\}$ and follows the following law.
+\sssc{Linearity or sum law, difference law, and constant multiple law}
+The limit of a sum of constant multiples of functions is the sum of the constant multiples of the limits of the functions.
+\sssc{Product law}
+The limit of a product of functions is the product of the limits of the functions.
+\sssc{Quotient law}
+The limit of a quotient of functions is the quotient of the limits of the functions, provided that the limit of the denominator is not 0, in which the reciprocals of $\infty$ and $-\infty$ are $0$.
+
+Thus, if $\lim f=\pm\infty$ and $\lim(fg)\in\bbR$, then $\lim g=0$.
+\sssc{Power law}
+The limit of the $n$th power of a function, in which $n$ is a positive integer, is the $n$th power of the limit of the function.
+\sssc{Root law}
+The limit of the $n$th root of a function, in which $n$ is a positive integer, is the $n$th root of the limit of the function.
+\sssc{General limit law}
+For any function $f\colon D\subseteq\bbR\to\bbR$ that is continuous at a limit of a function $g$, $f$ of the limit of $g$ is the limit of $f$ of $g$, where $f$ is called continuous at $\infty$ if $\lim_{x\to\infty}f(x)\in\bbR\cup\{-\infty,\infty\}$ and called continuous at $-\infty$ if $\lim_{x\to-\infty}f(x)\in\bbR\cup\{-\infty,\infty\}$.
+\begin{proof}
+PLACEHOLDER
+\end{proof}
+\ssc{The Uniqueness of Limits}
+\sssc{For real sequence}
+If a limit of a real sequence exists, it is unique.
+\sssc{For real series}
+If a limit of a real series exists, it is unique.
+\sssc{For real net}
+If a limit of a real net exists, it is unique.
+\sssc{For real function}
+If a limit of a real function exists, it is unique.
+\ssc{Preservation of equal to}
+\sssc{For real sequence}
+Given real sequences $\langle a_n\rangle$ and $\langle b_n\rangle$ which for all $k$ that is greater than or equal to a specific $j\in \mathbb{N}$, $a_k=b_k$. If $\lim_{n\to\infty}a_n=L\in\mathbb{R}\cup\{-\infty,\infty\}$, then
+\[\lim_{n\to\infty}b_n=L.\]
+\sssc{For real series}
+Given real sequences $\langle a_n\rangle$ and $\langle b_n\rangle$ which for all $k$ that is greater than or equal to a specific $j\in \mathbb{N}$:
+\[\sum_{i=1}^ka_i=\sum_{i=1}^kb_i.\]
+If $\sum_{i=1}^{\infty}a_i=L\in\mathbb{R}\cup\{-\infty,\infty\}$, then
+\[\sum_{i=1}^{\infty}b_i=L.\]
+\sssc{For real net}
+Let $A$ be a directed set. Given real nets $\langle x_a\rangle_{a\in A}$ and $\langle y_a\rangle_{a\in A}$ which for all $k\in A$ such that there exists $j\in A$ with $j\leq k$, $x_k=y_k$. If $\lim_{a}x_a$ exists, then:
+\[\lim_{a}x_a=\lim_{a}y_a.\]
+\sssc{For real function}
+Let $I$ be an open interval and $a\in I$, and $f(x)$ and $g(x)$ be functions defined on $I\setminus\{a\}$ which for all $x\in I\land x\neq a$, $f(x)=g(x)$. If $\lim_{x\to a}f(x)=L\in\mathbb{R}\cup\{-\infty,\infty\}$, then
+\[\lim_{x\to a}g(x)=L.\]
+
+Let $f(x)$ and $g(x)$ be functions defined on $(a,b)$ with $a<b$ which for all $x\in I$, $f(x)=g(x)$. If $\lim_{x\to a^+}f(x)=L\in\mathbb{R}\cup\{-\infty,\infty\}$, then
+\[\lim_{x\to a^+}g(x)=L.\]
+
+Let $f(x)$ and $g(x)$ be functions defined on $(b,a)$ with $a>b$ which for all $x\in I$, $f(x)=g(x)$. If $\lim_{x\to a^-}f(x)=L\in\mathbb{R}\cup\{-\infty,\infty\}$, then
+\[\lim_{x\to a^-}g(x)=L.\]
+
+Let $f(x)$ and $g(x)$ be functions defined on $(a,\infty)$ which for all $x\in I$, $f(x)=g(x)$. If $\lim_{x\to\infty}f(x)=L\in\mathbb{R}\cup\{-\infty,\infty\}$, then
+\[\lim_{x\to\infty}g(x)=L.\]
+
+Let $f(x)$ and $g(x)$ be functions defined on $(-\infty,a)$ which for all $x\in I$, $f(x)=g(x)$. If $\lim_{x\to-\infty}f(x)=L\in\mathbb{R}\cup\{-\infty,\infty\}$, then
+\[\lim_{x\to-\infty}g(x)=L.\]
+\sssc{Preservation of less than or equal to}
+\sssc{For real sequence}
+Given real sequences $\langle a_n\rangle$ and $\langle b_n\rangle$ which for all $k$ that is greater than or equal to a specific $j\in \mathbb{N}$, $a_k\leq b_k$. If both $\lim_{n\to\infty}a_n$ and $\lim_{n\to\infty}b_n$ are in $\mathbb{R}\cup\{-\infty,\infty\}$, then
+\[\lim_{n\to\infty}a_n\leq\lim_{n\to\infty}b_n.\]
+If $\lim_{n\to\infty}a_n=\infty$, then $\lim_{n\to\infty}b_n=\infty$; if $\lim_{n\to\infty}b_n=-\infty$, then $\lim_{n\to\infty}a_n=-\infty$.
+\sssc{For real series}
+Given real sequences $\langle a_n\rangle$ and $\langle b_n\rangle$ which for all $k$ that is greater than or equal to a specific $j\in \mathbb{N}$:
+\[\sum_{i=1}^ka_i\leq\sum_{i=1}^kb_i.\]
+If both $\sum_{i=1}^{\infty}a_i$ and $\sum_{i=1}^{\infty}b_i$ are in $\mathbb{R}\cup\{-\infty,\infty\}$, then
+\[\sum_{i=1}^{\infty}a_i\leq\sum_{i=1}^{\infty}b_i.\]
+\sssc{For real net}
+Let $A$ be a directed set. Given real nets $\langle x_a\rangle_{a\in A}$ and $\langle y_a\rangle_{a\in A}$ which for all $k\in A$ such that there exists $j\in A$ with $j\leq k$, $x_k\leq y_k$. If both $\lim_{a}x_a$ and $\lim_{a}y_a$ exist, then:
+\[\lim_{a}x_a\leq\lim_{a}y_a.\]
+\sssc{For real function}
+Let $I$ be an open interval and $a\in I$, and $f(x)$ and $g(x)$ be functions defined on $I\setminus\{a\}$ which for all $x\in I\land x\neq a$, $f(x)\leq g(x)$. If both $\lim_{x\to a}f(x)$ and $\lim_{x\to a}g(x)$ are in $\mathbb{R}\setminus\{-\infty,\infty\}$, then
+\[\lim_{x\to a}f(x)\leq\lim_{x\to a}g(x).\]
+If $\lim_{x\to a}f(x)=\infty$, then $\lim_{x\to a}g(x)=\infty$; if $\lim_{x\to a}g(x)=-\infty$, then $\lim_{x\to a}f(x)=-\infty$.
+
+Let $f(x)$ and $g(x)$ be functions defined on $(a,b)$ with $a<b$ which for all $x\in I$, $f(x)\leq g(x)$. If both $\lim_{x\to a^+}f(x)$ and $\lim_{x\to a^+}g(x)$ are in $\mathbb{R}\cup\{-\infty,\infty\}$, then
+\[\lim_{x\to a^+}f(x)\leq\lim_{x\to a^+}g(x).\]
+If $\lim_{x\to a^+}f(x)=\infty$, then $\lim_{x\to a^+}g(x)=\infty$; if $\lim_{x\to a^+}g(x)=-\infty$, then $\lim_{x\to a^+}f(x)=-\infty$.
+
+Let $f(x)$ and $g(x)$ be functions defined on $(b,a)$ with $a>b$ which for all $x\in I$, $f(x)\leq g(x)$. If both $\lim_{x\to a^-}f(x)$ and $\lim_{x\to a^-}g(x)$ are in $\mathbb{R}\cup\{-\infty,\infty\}$, then
+\[\lim_{x\to a^-}f(x)\leq\lim_{x\to a^-}g(x).\]
+If $\lim_{x\to a^-}f(x)=\infty$, then $\lim_{x\to a^-}g(x)=\infty$; if $\lim_{x\to a^-}g(x)=-\infty$, then $\lim_{x\to a^-}f(x)=-\infty$.
+
+Let $f(x)$ and $g(x)$ be functions defined on $(a,\infty)$ which for all $x\in I$, $f(x)\leq g(x)$. If both $\lim_{x\to\infty}f(x)$ and $\lim_{x\to\infty}g(x)$ are in $\mathbb{R}\cup\{-\infty,\infty\}$, then
+\[\lim_{x\to\infty}f(x)\leq\lim_{x\to\infty}g(x).\]
+If $\lim_{x\to\infty}f(x)=\infty$, then $\lim_{x\to\infty}g(x)=\infty$; if $\lim_{x\to\infty}g(x)=-\infty$, then $\lim_{x\to\infty}f(x)=-\infty$.
+
+Let $f(x)$ and $g(x)$ be functions defined on $(-\infty,a)$ which for all $x\in I$, $f(x)\leq g(x)$. If both $\lim_{x\to-\infty}f(x)$ and $\lim_{x\to-\infty}g(x)$ are in $\mathbb{R}\cup\{-\infty,\infty\}$, then
+\[\lim_{x\to-\infty}f(x)\leq\lim_{x\to-\infty}g(x).\]
+If $\lim_{x\to-\infty}f(x)=\infty$, then $\lim_{x\to-\infty}g(x)=\infty$; if $\lim_{x\to-\infty}g(x)=-\infty$, then $\lim_{x\to-\infty}f(x)=-\infty$.
+\sssc{Squeeze (夾擠) theorem or Sandwich (三明治) theorem}
+\sssc{For real sequence}
+Given real sequences $\langle a_n\rangle$, $\langle b_n\rangle$, and $\langle c_n\rangle$ which for all $k$ that is greater than or equal to a specific $j\in \mathbb{N}$:
+\[a_k\leq c_k\leq b_k.\]
+If
+\[\lim_{n\to\infty}a_n=\lim_{n\to\infty}b_n=L\in\mathbb{R}\cup\{-\infty,\infty\},\]
+then
+\[\lim_{n\to\infty}c_n=L.\]
+\sssc{For real series}
+Given real sequences $\langle a_n\rangle$, $\langle b_n\rangle$, and $\langle c_n\rangle$ which for all $k$ that is greater than or equal to a specific $j\in \mathbb{N}$:
+\[\sum_{i=1}^ka_i\leq\sum_{i=1}^kc_i\leq\sum_{i=1}^kb_i.\]
+If
+\[\sum_{i=1}^{\infty}a_i=\sum_{i=1}^{\infty}b_i=L\in\mathbb{R}\cup\{-\infty,\infty\},\]
+then: 
+\[\sum_{i=1}^{\infty}c_i=L.\]
+\sssc{For real net}
+Let $A$ be a directed set. Given real nets $\langle x_a\rangle_{a\in A}$, $\langle y_a\rangle_{a\in A}$, and $\langle z_a\rangle_{a\in A}$ which for all $k\in A$ such that there exists $j\in A$ with $j\leq k$:
+\[x_k\leq z_k\leq y_k.\]
+If
+\[\lim_{a}x_a=\lim_{a}y_a=L,\]
+then: 
+\[\lim_{a}z_a=L.\]
+\begin{proof}
+Start from the limits of $x_a$ and $y_a$, by definition of limit:
+
+For every $\varepsilon\in\mathbb{R}_{>0}$, there exists some $a_1\in A$ such that for every $b\in A$ with $b\geq a_1$, the point $L-\varepsilon\leq x_b\leq L+\varepsilon$.
+
+For every $\varepsilon\in\mathbb{R}_{>0}$, there exists some $a_2\in A$ such that for every $b\in A$ with $b\geq a_2$, the point $L-\varepsilon\leq y_b\leq L+\varepsilon$.
+
+Choose $a\in A$ such that $a_1\leq a$ and $a_2\leq a$.
+
+so,
+\[L-\varepsilon\leq x_{a}\leq z_{a}\leq y_{a}\leq L+\varepsilon.\]
+
+Since $\varepsilon > 0$ was arbitrary, by definition of limit:
+\[\lim_{a}z_a=L.\]
+\end{proof}
+\sssc{For real function}
+Let $I$ be an open interval and $a\in I$, and $f(x)$, $g(x)$, and $h(x)$ be functions defined on $I\setminus\{a\}$ which for all $x\in I\land x\neq a$, $f(x)\leq h(x)\leq g(x)$. If
+\[\lim_{x\to a}f(x)=\lim_{x\to a}g(x)=L\in\mathbb{R}\setminus\{-\infty,\infty\},\]
+then
+\[\lim_{x\to a}h(x)=L.\]
+
+Let $f(x)$, $g(x)$, and $h(x)$ be functions defined on $(a,b)$ with $a<b$ which for all $x\in I$, $f(x)\leq h(x)\leq g(x)$. If
+\[\lim_{x\to a^+}f(x)=\lim_{x\to a^+}g(x)=L\in\mathbb{R}\setminus\{-\infty,\infty\},\]
+then
+\[\lim_{x\to a^+}h(x)=L.\]
+
+Let $f(x)$, $g(x)$, and $h(x)$ be functions defined on $(b,a)$ with $a>b$ which for all $x\in I$, $f(x)\leq h(x)\leq g(x)$. If
+\[\lim_{x\to a^-}f(x)=\lim_{x\to a^-}g(x)=L\in\mathbb{R}\setminus\{-\infty,\infty\},\]
+then
+\[\lim_{x\to a^-}h(x)=L.\]
+
+Let $f(x)$, $g(x)$, and $h(x)$ be functions defined on $(a,\infty)$ which for all $x\in I$, $f(x)\leq h(x)\leq g(x)$. If
+\[\lim_{x\to\infty}f(x)=\lim_{x\to\infty}g(x)=L\in\mathbb{R}\setminus\{-\infty,\infty\},\]
+then
+\[\lim_{x\to\infty}h(x)=L.\]
+
+Let $f(x)$, $g(x)$, and $h(x)$ be functions defined on $(-\infty,a)$ which for all $x\in I$, $f(x)\leq h(x)\leq g(x)$. If
+\[\lim_{x\to-\infty}f(x)=\lim_{x\to-\infty}g(x)=L\in\mathbb{R}\setminus\{-\infty,\infty\},\]
+then
+\[\lim_{x\to-\infty}h(x)=L.\]
+\begin{proof}
+Take the first statement for example. The other statements can be proven similarly.
+
+Start from the limits of $f$ and $g$, by definition of limit:
+\[\forall\varepsilon>0, \exists\delta_1>0\text{\ s.t.\ }0<|x-a|<\delta_1\implies|f(x)-L|<\varepsilon,\]
+and
+\[\forall\varepsilon>0, \exists\delta_2>0\text{\ s.t.\ }0<|x-a|<\delta_2\implies|g(x)-L|<\varepsilon,\]
+
+Choose:
+\[\delta\coloneq\min(\delta_1,\delta_2),\]
+
+so,
+\[L-\varepsilon<f(x)\leq h(x)\leq g(x)<L+\varepsilon.\]
+
+Since $\varepsilon > 0$ was arbitrary, by definition of limit:
+\[\lim_{x\to a}h(x)=L.\]
+\end{proof}
+\ssc{Limit of real sequence theorems}
+\subsubsection{Monotone Convergence Theorem (單調收斂定理) or Completeness of the Real Numbers (實數的完備性)}
+\textit{Statement.}
+\begin{enumerate}[label=(\Alph*)]
+\item For a non-decreasing and bounded-above sequence of real numbers $\langle a_n\rangle_{n\in\mathbb {N}}$:
+\[\lim_{n\to\infty}a_n=\sup_n a_n.\]
+\item For a non-increasing and bounded-below sequence of real numbers $\langle a_n\rangle_{n\in\mathbb {N}}$:
+\[\lim_{n\to\infty}a_n=\inf_n a_n.\]
+\end{enumerate}
+\begin{proof}
+Let $\{a_{n}\}$ be the set of values of $\langle a_n\rangle_{n\in\mathbb {N}}$. By assumption, $\{a_n\}$ is non-empty and bounded-above by $\sup_n a_n$. Let $c=\sup_n a_n$.
+\[\forall\epsilon>0:\,\exists M\in\mathbb {N}\text{\ s.t.\ }c\geq a_M>c-\epsilon,\]
+since otherwise $c-\epsilon$ is a strictly smaller upper bound of $\langle a_n\rangle$, contradicting the definition of the supremum. 
+
+Then since $\langle a_n\rangle$ is non-decreasing, and $c$ is an upper bound:
+\[\forall\epsilon>0:\,\exists M\in\mathbb {N}\text{\ s.t.\ }\forall n\geq M:\,|c-a_n|=c-a_n\leq c-a_M=|c-a_M|<\epsilon.\]
+The proof of the (B) part is analogous or follows from (A) by considering $\langle -a_{n}\rangle_{n\in \mathbb{N}}$.
+\end{proof}
+\textit{Statement.}
+
+If $\langle a_n\rangle_{n\in\mathbb {N}}$ is a monotone sequence of real numbers, i.e., if 
+$a_n\leq a_{n+1}$ for every $n\geq 1$ or $a_n\geq a_{n+1}$ for every $n\geq 1$, then this sequence has a finite limit if and only if the sequence is bounded.
+\begin{proof}
+"If"-direction: The proof follows directly from the proposition.
+
+"Only If"-direction: By $(\epsilon,\delta)$-definition of limit, every sequence $\langle a_n\rangle_{n\in\mathbb {N}}$ with a finite limit $L$ is necessarily bounded.
+\end{proof}
+\sssc{Bolzano–Weierstrass Theorem (波爾查諾-魏爾斯特拉斯定理)}
+Every bounded sequence in an Euclidean space $\bbR^n$ has a convergent subsequence.
+
+\begin{proof}
+    For $\bbR$, take any bounded sequence $(x_n)$ in $\bbR$. Then there exist real numbers $m,M$ such that
+    \[m\leq x_n\leq M,\quad\forall n.\]
+    So the sequence lies in the closed interval $[m,M]$.
+
+    For $\varepsilon=1$. Divide $[m,M]$ into disjoint subintervals with length $\frac{M-m}{2^\varepsilon}$:
+    \[\qty[m,\frac{m+M}{2}],\qty[\frac{m+M}{2},M].\]
+    Since $(x_n)$ is infinite, by the pigeonhole principle, one of the subintervals must contain infinitely many terms of $(x_n)$. Denote it by $I_1$ and pick the subsequence $\qty(x_n^{(1)})$ of $(x_n)$ that is entirely in $I_1$.
+
+    Repeat it for $\varepsilon=2,3,\ldots,$ by dividing $I_{\varepsilon-1}$ into two halves, we can construct a nested sequence of subsequences
+    \[\qty(x_n^{(1)})\supseteq \qty(x_n^{(2)})\supseteq\ldots\]
+    where $\qty(x_n^{(k)})$ lies in a closed interval of length $\frac{M-m}{2^k}$, $I_k$.
+
+    Pick the diagonal sequence $y_k=x_k^{(k)}$. Then
+    \[y_k\in\qty(x_n^{(k)})\subseteq I_k,\]
+    and the sequence $(y_k)$ is a convergent subsequence of $(x_n)$ because
+    \[\forall N\in\bbN\colon m,n\geq N\implies |y_m-y_n|\leq\frac{M-m}{2^N}.\]
+
+    To generalized to $\bbR^n$, consider each coordinate sequence in $\bbR$, it has a convergent subsequence. Diagonalization gives a subsequence converging in all coordinates.
+\end{proof}
+\sssc{Abel transformation or summation by parts}
+Let $\langle f_k\rangle$ and $\langle g_k\rangle$ be two sequences.
+\[\sum_{k=m}^nf_k\qty(g_{k+1}-g_k)=\qty(f_{n+1}g_{n+1}-f_mg_m)-\sum_{k=m}^ng_{k+1}\qty(f_{k+1}-f_k).\]
+\[\sum_{k=m}^nf_k\qty(g_k-g_{k-1})=\qty(f_ng_n-f_{m-1}g_{m-1})-\sum_{k=m}^ng_{k-1}\qty(f_k-f_{k-1}).\]
+\[\sum_{k=m}^n\qty(f_k\qty(g_{k+1}-g_k)+g_k\qty(f_k-f_{k-1}))=f_ng_{n+1}-f_{m-1}g_m.\]
+\ssc{Limit of real function theorems}
+\sssc{Limits involving quotient functions}
+Let \( a \) and \( b \) be real numbers, set
+\[A=\left\{f\colon U\subseteq\mathbb{R}\to\mathbb{R} \middle | f(x) = x \lor \ln(f(x)) \in A \lor e^{f\left(x\right)}  \in A \right\},\]
+and function $f\in A$. Then:
+\[\lim_{x \to \infty} \frac{\left(f\left(x\right)\right)^a}{\left(f\left(x\right)\right)^b} = \infty, \quad a > b \]
+\[ \lim_{x \to \infty} \frac{af\left(x\right)}{bf\left(x\right)} = \frac{a}{b}, \quad b \neq 0 \]
+\[ \lim_{x \to \infty}\frac{n^{af\left(x\right)}}{bf\left(x\right)} = \infty, \quad a,b > 0 \land  n > 1 \]
+\[ \lim_{x \to \infty}\frac{n^{af\left(x\right)}}{bf\left(x\right)} = 0, \quad a,b > 0 \land  0\leq n<1 \]
+\[ \lim_{x \to \infty}\frac{af\left(x\right)}{b\log_n f\left(x\right)} = \infty, \quad a,b > 0 \land  n > 1 \]
+\ssc{Improper integral theorems}
+\sssc{p-test}
+$\int_a^{\infty}x^p\dd{x},\quad a>0$ converges iff $p<-1$. And for $p<-1\land a>0$,
+\[\int_a^{\infty}x^p\dd{x}=-\frac{1}{p+1}a^{p+1}.\]
+\begin{proof}
+\[\int x^p\dd{x}=\begin{cases}
+\frac{1}{p+1}x^{p+1},\quad&p\neq -1\\
+\ln(x),\quad&p=-1
+\end{cases}\]
+\[\forall p>-1\nexists\lim_{x\to\infty}\frac{1}{p+1}x^{p+1}\]
+\[\nexists\lim_{x\to\infty}\ln(x)\]
+\[\forall p<-1\lim_{x\to\infty}\frac{1}{p+1}x^{p+1}=0\]
+\end{proof}
+\sssc{Convergent improper integral implies limit of product of integrand and independent variable converges to 0 for nonnegative and non-increasing integrand}
+Let $f$ be a real function.
+
+If $\int_a^{\infty}f(x)\dd{x}$ converges and $f(x)$ is nonnegative and non-increasing on $(a,\infty)$, then $\lim_{x\to\infty}xf(x)=0$.
+\begin{proof}
+Since $\int_a^{\infty}f(x)\dd{x}$ and $f(x)$ is nonnegative, $\forall\varepsilon>0$, there exists $M>a$ such that $\forall A>M$:
+\[0\leq\int_A^{\infty}f(x)\dd{x}<\varepsilon.\]
+Thus for $t>2M$,
+\[0\leq\int_{t/2}^tf(x)\dd{x}=\int_{t/2}^{\infty}f(x)\dd{x}-\int_t^{\infty}f(x)\dd{x}<2\varepsilon.\]
+Since $f(x)$ is non-increasing,
+\[f(x)\geq f(t),\quad\forall x\in[t/2,t]\]
+\[\int_{t/2}^tf(x)\dd{x}\geq\int_{t/2}^tf(t)\dd{x}=\frac{t}{2}f(t)\]
+\[tf(t)<4\varepsilon.\]
+Thus, $\forall\varepsilon>0$, there exists $2M>0$ such that $\forall t>2M$,
+\[tf(t)<\varepsilon,\]
+that is,
+\[\lim_{x\to\infty}xf(x)=0.\]
+\end{proof}
+If $\int_a^{\infty}f(x)\dd{x}$ converges and $f(x)$ is nonpositive and non-decreasing on $(a,\infty)$, then $\lim_{x\to\infty}xf(x)=0$.
+
+If $\int_{-\infty}^af(x)\dd{x}$ converges and $f(x)$ is nonnegative and non-increasing on $(-\infty,a)$, then $\lim_{x\to-\infty}xf(x)=0$.
+
+If $\int_{-\infty}^af(x)\dd{x}$ converges and $f(x)$ is nonpositive and non-decreasing on $(-\infty,a)$, then $\lim_{x\to-\infty}xf(x)=0$.
+\ssc{Absolute convergence implies convergence}
+\sssc{For real series}
+A real series is convergent if it is absolutely convergent.
+\sssc{For improper integral}
+An improper integral of a real function is convergent if it is absolutely convergent.
+\ssc{Deleting head}
+\sssc{For real series}
+For real sequence $\langle a_i\rangle_{i=m}^{\infty}$, $\sum_{i=m}^{\infty}a_i$ converges iff $\sum_{i=m+n}^{\infty}a_i$ converges for all $n\in\bbN$.
+\sssc{For improper integral}
+For real function $f$ defined on $[a,\infty)$, $\int_a^{\infty}f(x)\dd{x}$ converges iff $\int_{a+b}^{\infty}f(x)\dd{x}$ converges for all $b\in\bbR_{>0}$.
+
+For real function $f$ defined on $(-\infty,a]$, $\int_{-\infty}^af(x)\dd{x}$ converges iff $\int_{-\infty}^{a-b}f(x)\dd{x}$ converges for all $b\in\bbR_{>0}$.
+\ssc{Comparison test}
+\sssc{For real series}
+If real sequences $\langle a_n\rangle_{n=1}^{\infty}$ and $\langle b_n\rangle_{n=1}^{\infty}$ are such that $a_n\geq b_n\geq 0$ for all $n\geq m$ for some $m\in\bbN$, then
+\ben
+\item $\sum_{n=1}^{\infty}a_n$ is convergent implies $\sum_{n=1}^{\infty}b_n$ is convergent.
+\item $\sum_{n=1}^{\infty}b_n$ is divergent implies $\sum_{n=1}^{\infty}a_n$ is divergent.
+\een
+\begin{proof}
+Let $\langle s_n=\sum_{i=1}^na_i\rangle_{i=1}^{\infty}$ and $\langle t_n=\sum_{i=1}^na_i\rangle_{i=1}^{\infty}$ be the sequences of partial sums of $\langle a_n\rangle_{n=1}^{\infty}$ and $\langle b_n\rangle_{n=1}^{\infty}$.
+
+$s_n$ and $t_n$ are monotone increasing for all $n\geq m$ since $a_n,b_n\geq 0$ for all $n\geq m$.
+
+$s_n\geq t_n$ for all $n\geq p$ for some $p\in\bbN$ since $a_n\geq b_n$ for all $n\geq m$.
+
+Statement 1:
+\[\sum_{n=1}^{\infty}a_n=\lim_{n\to\infty}s_n=L.\]
+\[0\leq t_n\leq s_n\]
+for all $n\geq p$.
+
+Thus,
+\[\sum_{n=1}^{\infty}b_n=\lim_{n\to\infty}t_n\]
+exists and $\geq 0$ and $\leq L$.
+
+Statement 2:
+\[\sum_{n=1}^{\infty}b_n=\lim_{n\to\infty}t_n=\infty\]
+\[0\leq t_n\leq s_n\]
+for all $n\geq p$.
+
+Thus,
+\[\sum_{n=1}^{\infty}a_n=\lim_{n\to\infty}s_n=\infty\]
+\end{proof}
+If real sequences $\langle a_n\rangle_{n=1}^{\infty}$ and $\langle b_n\rangle_{n=1}^{\infty}$ are such that $a_n\leq b_n\leq 0$ for all $n\geq m$ for some $m\in\bbN$, then
+\ben
+\item $\sum_{n=1}^{\infty}a_n$ is convergent implies $\sum_{n=1}^{\infty}b_n$ is convergent.
+\item $\sum_{n=1}^{\infty}b_n$ is divergent implies $\sum_{n=1}^{\infty}a_n$ is divergent.
+\een
+\sssc{For improper integral}
+If real functions $f$ and $g$ are measurable on $ and $f(x)\geq g(x)\geq 0$ a.e. for $x\geq a$, then
+\ben
+\item $\int_a^{\infty}f(x)\dd{x}$ is convergent implies $\int_a^{\infty}g(x)\dd{x}$ is convergent.
+\item $\int_a^{\infty}g(x)\dd{x}$ is divergent implies $\int_a^{\infty}f(x)\dd{x}$ is divergent.
+\een
+\begin{proof}
+Let
+\[F(b)=\int_a^bf(x)\dd{x},\quad b\geq a,\]
+\[G(b)=\int_a^bg(x)\dd{x},\quad b\geq a.\]
+$F$ and $G$ are monotone increasing since $f(x),g(x)\geq 0$ a.e. for $x\geq 0$.
+
+$F(x)\geq G(x)$ since $f(x)\geq g(x)$ a.e. for $x\geq 0$.
+
+Statement 1:
+\[\int_a^{\infty}f(x)\dd{x}=\lim_{x\to\infty}F(x)=L.\]
+\[0\leq G(x)\leq F(x)\]
+Thus,
+\[\int_a^bg(x)\dd{x}=\lim_{x\to\infty}G(x)\]
+exists and $\geq 0$ and $\leq L$.
+
+Statement 2:
+\[\int_a^bg(x)\dd{x}=\lim_{x\to\infty}G(x)=\infty\]
+\[0\leq G(x)\leq F(x)\]
+Thus,
+\[\int_a^bf(x)\dd{x}=\lim_{x\to\infty}F(x)=\infty.\]
+\end{proof}
+If real functions $f$ and $g$ are measurable on $ and $f(x)\leq g(x)\leq 0$ a.e. for $x\geq a$, then
+\ben
+\item $\int_a^{\infty}f(x)\dd{x}$ is convergent implies $\int_a^{\infty}g(x)\dd{x}$ is convergent.
+\item $\int_a^{\infty}g(x)\dd{x}$ is divergent implies $\int_a^{\infty}f(x)\dd{x}$ is divergent.
+\een
+If real functions $f$ and $g$ are measurable and $f(x)\geq g(x)\geq 0$ a.e. for $x\leq a$, then
+\ben
+\item $\int_{-\infty}^af(x)\dd{x}$ is convergent implies $\int_{-\infty}^ag(x)\dd{x}$ is convergent.
+\item $\int_{-\infty}^ag(x)\dd{x}$ is divergent implies $\int_{-\infty}^af(x)\dd{x}$ is divergent.
+\een
+If real functions $f$ and $g$ are measurable and $f(x)\leq g(x)\leq 0$ a.e. for $x\leq a$, then
+\ben
+\item $\int_{-\infty}^af(x)\dd{x}$ is convergent implies $\int_{-\infty}^ag(x)\dd{x}$ is convergent.
+\item $\int_{-\infty}^ag(x)\dd{x}$ is divergent implies $\int_{-\infty}^af(x)\dd{x}$ is divergent.
+\een
+\ssc{Dirichlet test}
+\sssc{For real series}
+If $\langle a_n\rangle_{n=1}^{\infty}$ is a sequence such that the sequence of partial sums $\langle s_n=\sum_{i=0}^na_i\rangle_{n=0}^{\infty}$ where $s_0=0$ is bounded and $\langle b_n\rangle_{n=1}^{\infty}$ is a monotone sequence such that $\lim_{n\to\infty}b_n=0$, then
+\[\sum_{n=1}^{\infty}a_nb_n\]
+converges.
+\begin{proof}
+Choose $M$ such that $\langle\abs{s_n}\rangle_{n=0}^{\infty}$ is bounded above by $M$.
+
+For any $\varepsilon>0$, there is $N\in\bbN$ such that $\abs{b_m}<\frac{\varepsilon}{2M}$ for all $m\geq N$.
+
+For any $N\leq p\leq q$, using Abel transformation,
+\[\ba
+\abs{\sum_{n=p}^qa_nb_n}&=\abs{\sum_{n=p}^q\qty(s_{n+1}-s_n)b_n}\\
+&=\abs{s_{q+1}b_{q+1}-s_pb_p-\sum_{n=p}^qs_{n+1}\qty(b_{n+1}-b_n)}\\
+&\leq M\qty(\abs{b_{q+1}}+\abs{b_p}+\sum_{n=p}^q\abs{b_{n+1}-b_n})\\
+&=M\qty(\abs{b_{q+1}}+\abs{b_p}+\abs{b_{q+1}-b_p})\\
+&=M\qty(\abs{b_{q+1}}+\abs{b_p}+\abs{b_p}-\abs{b_{q+1}})\\
+&=2M\abs{b_p}\\
+&\leq\varepsilon
+\ea\]
+\end{proof}
+\sssc{For improper integral}
+If $f\colon [a,\infty)\to\bbR$ is a function such that the function
+\[F(x)=\int_a^xf(t)\dd{t},\quad x\geq a\]
+is bounded and function $g\colon [a,\infty)\to\bbR$ is monotone such that $\lim_{x\to\infty}g(x)=0$, then
+\[\int_a^{\infty}f(x)g(x)\dd{x}\]
+converges.
+\begin{proof}
+Rewrite as Riemann–Stieltjes integral
+\[\int_a^{\infty}f(x)g(x)\dd{x}=\int_{x=a}^{\infty}g(x)\dd{F(x)}.\]
+
+Choose $M$ such that $\abs{F(x)}$ is bounded above by $M$.
+
+For any $\varepsilon>0$, there is $N\in\bbR$ such that $\abs{g(N)}<\frac{\varepsilon}{2M}$ for all $m\geq N$.
+
+For any $N\leq p\leq q$, using integration by parts of Riemann–Stieltjes integral,
+\[\ba
+\abs{\int_{x=p}^qg(x)\dd{F(x)}}&=\abs{F(q)g(q)-F(p)g(p)-\int_{x=p}^qf(x)\dd{g(x)}}\\
+&\leq M\qty(\abs{g(q)}+\abs{g(p)}+\int_{x=p}^q\dd{g(x)})\\
+&=M\qty(\abs{g(q)}+\abs{g(p)}+\abs{g(q)-g(p)})\\
+&=M\qty(\abs{g(q)}+\abs{g(p)}+\abs{g(p)}-\abs{g(q)})\\
+&=2M\abs{g(p)}\\
+&\leq\varepsilon
+\ea\]
+\end{proof}
+
+
+
 \section{Differential theorems and methods}
 \ssc{Theorems and methods of differentiation}
 \sssc{Linearity, or sum rule, difference rule, and constant multiple rule}
@@ -1420,8 +1653,8 @@ If functions $f$ and $g$ are differentiable on $I$ and $g\neq 0$ on $I$, then th
 &=\frac{f'(x)g(x)-f(x)g'(x)}{g(x)^2}
 \end{aligned}\]
 \end{proof}
-\sssc{Chain rule (連鎖律)}
-If functions $f$ and $g$ are differentiable on $I$, then the composite $f\circ g$ is also differentiable on $I$ and its derivative is given by
+\sssc{Chain rule (連鎖律) of real-domain functions}
+Let $f\colon X\subseteq\bbR\to\bbR$ and $g\colon Y\subseteq\bbR\to\bbR$ be functions, $g$ be differentiable on $I\subseteq\bbR$, and $f$ be differentiable on $g(I)$. Then the composite $f\circ g$ is differentiable on $I$ and its derivative on $I$ is given by
 \[\dv{}{x}\qty((f\circ g)(x))=f'\qty(g(x))g'(x).\]
 \begin{proof}
 \[\ba
@@ -1437,6 +1670,9 @@ If functions $f$ and $g$ are differentiable on $I$, then the composite $f\circ g
 &f^{\qty(\sum_{j=1}^nm_j)}\left(g(x)\right)\cdot\\
 &\prod_{j=1}^n\left(\frac {g^{(j)}(x)}{j!}\right)^{m_j}.
 \eam
+\sssc{Chain rule of real-vector-space-domain fields}
+Let $f\colon X\subseteq\bbR^n\to\bbR^p$ and $g\colon Y\subseteq\bbR^m\to\bbR^n$ be functions, $g$ be differentiable on $\Omega\subseteq\bbR^m$, and $f$ be differentiable on $g(\Omega)$. Then the composite $f\circ g$ is differentiable on $\Omega$ and its derivative on $\Omega$ is given by
+\[\nabla\qty(f\circ g)(\mb{x})=(\nabla f)(g(\mb{x}))\cdot(\nabla g)(\mb{x}).\]
 \sssc{Exponential Bell polynomials}
 Partially or incomplete exponential Bell polynomials $B_{n,k}\qty(x_1,x_2,\ldots, x_{n-k+1})$ is defined as
 \[B_{n,k}\qty(x_1,x_2,\ldots, x_{n-k+1})=n!\sum_{\langle j_i\rangle\in C}\prod_{i=1}^{n-k+1}\frac{x_i^{\phantom{i}j_i}}{(i!)^{j_i}j_i!},\]
@@ -1505,29 +1741,6 @@ By the definition of bounded linear operator, there exists $C\in\bbR_{>0}$ such 
 Thus,
 \[\forall\varepsilon>0\colon\exists\delta'=\frac{\varepsilon}{C+\varepsilon}\text{\ s.t.\ }\|h\|_V<\delta'\implies\|f(a+h)-f(a)\|_W\leq(C+\varepsilon)\|h\|_V<(C+\varepsilon)\delta'=\varepsilon.\]
 \end{proof}
-\sssc{Increasing (遞增) and Decreasing (遞減)}
-Let $f\colon X\subseteq\bbR\to\bbR$ be a function.
-\bit
-\item $f$ is called strictly increasing on $I\subseteq X$ if
-\[\forall a,b\in I\colon a<b\implies f(a)<f(b).\]
-\item $f$ is called strictly increasing if
-\[\forall a,b\in X\colon a<b\implies f(a)<f(b).\]
-\item $f$ is called strictly decreasing on $I\subseteq X$ if
-\[\forall a,b\in I\colon a<b\implies f(a)>f(b).\]
-\item $f$ is called strictly decreasing if
-\[\forall a,b\in X\colon a<b\implies f(a)>f(b).\]
-\item $f$ is called non-decreasing or monotone (單調) increasing on $I\subseteq X$ if
-\[\forall a,b\in I\colon a<b\implies f(a)\leq f(b).\]
-\item $f$ is called non-decreasing or monotone increasing if
-\[\forall a,b\in X\colon a<b\implies f(a)\leq f(b).\]
-\item $f$ is called non-increasing or monotone decreasing on $I\subseteq X$ if
-\[\forall a,b\in I\colon a<b\implies f(a)\geq f(b).\]
-\item $f$ is called non-increasing or monotone decreasing if
-\[\forall a,b\in X\colon a<b\implies f(a)\geq f(b).\]
-\item $f$ is called monotone on $I\subseteq X$ if it is either monotone increasing or monotone decreasing on $I$.
-\item $f$ is called monotone if it is either monotone increasing or monotone decreasing.
-\eit
-The terms without monotone and strictly are define to be either monotone or strictly in different contexts; here we define them to be strictly.
 \sssc{Critical point (臨界點)}
 Let $f$ be a function with codomain $\bbR$ and \( c \) be a point in the domain of $f$, if \( f'(c) = 0 \) or \( f' \) does not exist at \( c \), then \( c \) is a critical point, of \( f \), and $f(c)$ is called a critical value of $f$.
 
@@ -2173,6 +2386,21 @@ Since $f$ is Riemann integrable
 \[\int_a^bf(x)\dd{x}=\lim_{n\to\infty}\sum_{i=0}^{n-1}f(c_i)(x_{i+1}-x_i)\]
 exists.
 \end{proof}
+\ssc{Integrability}
+\sssc{Lebesgue-Vitali theorem (of characterization of the Riemann integrable functions)}
+A function is Riemann integrable (i.e. Darboux integrable) over a closed interval $I$ iff it is bounded on $I$ and continuous a.e. in $I$.
+\begin{proof}
+PLACEHOLDER
+\end{proof}
+\sssc{Riemann–Stieltjes integrability}
+The Riemann–Stieltjes integral
+\[\int_{x=a}^bf(x)\dd{g(x)}\]
+exists if $g$ is of a bounded variation on $[a,b]$, $f$ is bounded on $[a,b]$, $f$ is continuous a.e. on $[a,b]$, and there doesn't exist $x\in[a,b]$ such that $f$ and $g$ both have irremovable discontinuity at $x$.
+\begin{proof}
+PLACEHOLDER
+\end{proof}
+\sssc{PLACEHOLDER}
+PLACEHOLDER
 \subsection{Integration by substitution (代換積分法), integration by change of variables (換元積分法), u-substitution (u-代換), reverse chain rule, substitution theroem (代換定理), change of variables theorem (換元定理), or transformation theorem (變換定理)}
 \subsubsection{Univariate form}
 Let $g:\,I\subseteq\mathbb{R}\to\mathbb{R}$ be injective and differentiable on $[a,b]\subseteq I$, with $g'$ being integrable on $[a,b]$, and $f:\,K\supseteq g([a,b])\to\mathbb{R}$ be integrable on $g([a,b])$. Then:
@@ -2276,6 +2504,27 @@ Let:
 &=\frac{a^2}{a^2+b^2}\qty(\frac{1}{a}e^{ax}\sin(bx)-\frac{b}{a^2}e^{ax}\cos(bx))+C\\
 &=\frac{e^{ax}}{a^2+b^2}\qty(a\sin(bx)-b\cos(bx))+C.
 \ea\]
+\ssc{Riemann–Stieltjes integral theorems}
+\sssc{Integration by parts or partial integration of Riemann–Stieltjes integral}
+\[\int_{x=a}^bf(x)\dd{g(x)}=f(b)g(b)-f(a)g(a)-\int_{x=a}^bg(x)\dd{f(x)}.\]
+\begin{proof}
+PLACEHOLDER
+\end{proof}
+\sssc{Riemann–Stieltjes integral with respect to differential function}
+If $f(x)$ is bounded on $[a,b]$, $g(x)$ is monotonic on $[a,b]$, and $g'(x)$ exists and is Riemann integrable on $[a,b]$, then the Riemann–Stieltjes integral is related to the Riemann integral by
+\[\int_{x=a}^bf(x)\dd{g(x)}=\int_a^bf(x)g'(x)\dd{x}.\]
+\begin{proof}
+PLACEHOLDER
+\end{proof}
+\sssc{Riemann–Stieltjes integral with respect to step function}
+If $a<s<b$,
+\[g(x)=\bcs 0,\quad&a\leq x\leq s\\
+1,\quad&b\geq x>s\ecs,\]
+and $f\colon X\supseteq[a,b]\to\bbR$ is continuous at $s$, then
+\[\int_{x=a}^bf(x)\dd{g(x)}=f(s).\]
+\begin{proof}
+PLACEHOLDER
+\end{proof}
 \ssc{General Method of Integration of Rational Functions}
 \sssc{$\frac{A}{x-a}$}
 \[\int\frac{A}{x-a}\dd{x}=A\ln|x-a|+C,\quad a,A\in\bbR\]
@@ -2437,23 +2686,62 @@ The arc length of a curve $y=f(x)$ between $x=a$ and $x=b$ with $a<b$ is
 \ssc{Average value}
 The average value of a function $f(x)$ between $x=a$ and $x=b$ with $a<b$ is
 \[\frac{1}{b-a}\int_a^bf(x)\dd{x}.\]
+\ssc{Area of Lune}
+The area of the crescent-shaped region (called a lune) bounded by arcs of circles $C:x^2+y^2=r^2$ and $D:x^2+(y+\sqrt{R^2-r^2})^2=R^2$ inside the circle $C$ outside of the circle $D$ is
+\[\frac{\pi r^2}{2}+r\sqrt{R^2-r^2}-R^2\arcsin(\frac{r}{R}).\]
+\begin{proof}
+\[y=\sqrt{r^2-x^2}\]
+\[y=\sqrt{R^2-x^2}-\sqrt{R^2-r^2}\]
+\[\int_{-r}^r\sqrt{r^2-x^2}-\sqrt{R^2-x^2}+\sqrt{R^2-r^2}\dd{x}=\frac{\pi r^2}{2}+2r\sqrt{R^2-r^2}-R^2\int_{-r/R}^{r/R}\sqrt{1-u^2}\dd{u},\quad u=\frac{x}{R},\quad\dd{u}=\frac{1}{R}\dd{x}\]
+\[\ba
+\int_{-r/R}^{r/R}\sqrt{1-u^2}\dd{u}&=\int_{\arcsin(-r/R)}^{\arcsin(r/R)}\cos^2t\dd{t},\quad u=\sin t,\quad\dd{u}=\cos t\dd{t}\\
+&=\frac{1}{2}\int_{\arcsin(-r/R)}^{\arcsin(r/R)}1+\cos(2t)\dd{t}\\
+&=\arcsin(\frac{r}{R})+\frac{r}{R}\sqrt{1-\qty(\frac{r}{R})^2}
+\ea\]
+\[\int_{-r}^r\sqrt{r^2-x^2}-\sqrt{R^2-x^2}+\sqrt{R^2-r^2}\dd{x}=\frac{\pi r^2}{2}+r\sqrt{R^2-r^2}-R^2\arcsin(\frac{r}{R})\]
+\end{proof}
 \ssc{Numerical integration (數值積分)}
-\sssc{The trapezoidal rule (梯形法)}
-Let $f$ be a continuous real-valued function on $[a,b]$, the trapezoidal rule gives the approximation
-\[\int_a^bf(x)\dd{x}\approx\frac{b-a}{2n}\left(2\left(\sum_{i=0}^nf(a+\frac{i}{n}(b-a))\right)-f(a)-f(b)\right).\]
-The error is defined as
-\[E_n=\int_a^bf(x)\dd{x}-\frac{b-a}{2n}\left(2\left(\sum_{i=0}^nf(a+\frac{i}{n}(b-a))\right)-f(a)-f(b)\right).\]
-When $\frac{\mathrm{d}^2f(x)}{\mathrm{d}x^2}$ is continuous on $[a,b]$, the error satisfies that
-\[\abs{E_n}\leq\frac{(b-a)^3}{12n^2}\max_{a\leq x\leq b}\left(\abs{\frac{\mathrm{d}^2f(x)}{\mathrm{d}x^2}}\right).\]
-\sssc{The Simpson's rule (辛普森法) or the Simpson's 1 or 3 rule}
-Let $f$ be a continuous real-valued function on $[a,b]$, the Simpson's rule gives the approximation
-\[\int_a^bf(x)\dd{x}\approx\frac{b-a}{3n}\left(2\left(\sum_{i=0}^nf(a+\frac{i}{n}(b-a))\right)+2\left(\sum_{i=1}^{\frac{n}{2}}f(a+\frac{2i-1}{n}(b-a))\right)-f(a)-f(b)\right),\]
-where $\frac{n}{2}\in\mathbb{N}$.
-
-The error is defined as
-\[E_n=\int_a^bf(x)\dd{x}-\frac{b-a}{3n}\left(2\left(\sum_{i=0}^nf(a+\frac{i}{n}(b-a))\right)+2\left(\sum_{i=1}^{\frac{n}{2}}f(a+\frac{2i-1}{n}(b-a))\right)-f(a)-f(b)\right).\]
-When $\frac{\mathrm{d}^4f(x)}{\mathrm{d}x^4}$ is continuous on $[a,b]$, the error satisfies that
-\[\abs{E_n}\leq\frac{(b-a)^5}{180n^4}\max_{a\leq x\leq b}\left(\abs{\frac{\mathrm{d}^4f(x)}{\mathrm{d}x^4}}\right).\]
+\sssc{Left and right endpoint rule}
+Let $f$ be a continuous real-valued function on $[a,b]$. The left endpoint rule gives the approximation of $\int_a^bf(x)\dd{x}$
+\[L_n=\frac{b-a}{n}\sum_{i=0}^{n-1}f\qty(a+\frac{i}{n}(b-a)).\]
+The right endpoint rule gives the approximation of $\int_a^bf(x)\dd{x}$
+\[R_n=\frac{b-a}{n}\sum_{i=1}^nf\qty(a+\frac{i}{n}(b-a)).\]
+\sssc{Midpoint rule}
+Let $f$ be a continuous real-valued function on $[a,b]$. The midpoint rule gives the approximation of $\int_a^bf(x)\dd{x}$
+\[M_n=\frac{b-a}{n}\sum_{i=0}^{n-1}f\qty(a+\frac{2i+1}{2n}(b-a)).\]
+The error is
+\[E_M=\int_a^bf(x)\dd{x}-M_n.\]
+If $f''$ exists a.e. on $[a,b]$ and $\abs{f''(x)}\leq K$ for all $x\in[a,b]$ such that $f''(x)$ exist, then
+\[\abs{E_M}\leq\frac{K(b-a)^3}{24n^2}.\]
+If $f\in C^2([a,b])$, then
+\[E_M=\frac{(b-a)^3}{24n^2}f''(\xi)\]
+for some $\xi\in[a,b]$.
+\sssc{Trapezoidal rule}
+Let $f$ be a continuous real-valued function on $[a,b]$. The trapezoidal rule gives the approximation of $\int_a^bf(x)\dd{x}$
+\[T_n=\frac{b-a}{2n}\qty(f(a)+f(b)+2\sum_{i=1}^{n-1}f\qty(a+\frac{i}{n}(b-a))).\]
+The error is
+\[E_T=\int_a^bf(x)\dd{x}-T_n.\]
+If $f''$ exists a.e. on $[a,b]$ and $\abs{f''(x)}\leq K$ for all $x\in[a,b]$ such that $f''(x)$ exist, then
+\[\abs{E_T}\leq\frac{K(b-a)^3}{12n^2}.\]
+If $f\in C^2([a,b])$, then
+\[E_T=-\frac{(b-a)^3}{12n^2}f''(\xi)\]
+for some $\xi\in[a,b]$.
+\sssc{Simpson's rule or Simpson's 1/3 rule}
+Let $f$ be a continuous real-valued function on $[a,b]$, the Simpson's rule gives the approximation of $\int_a^bf(x)\dd{x}$
+\[S_n=\frac{b-a}{3n}\qty(f(a)+f(b)+2\sum_{i=1}^{n-1}f\qty(a+\frac{i(i\mod 2+1)}{n}(b-a)),\quad\frac{n}{2}\in\bbN.\]
+The error is
+\[E_S=\int_a^bf(x)\dd{x}-S_n.\]
+If $f^{(4)}$ exists a.e. on $[a,b]$ and $\abs{f^{(4)}(x)}\leq K$ for all $x\in[a,b]$ such that $f^{(4)}(x)$ exist, then
+\[\abs{E_S}\leq\frac{K(b-a)^5}{180n^4}.\]
+If $f\in C^4([a,b])$, then
+\[E_S=-\frac{(b-a)^5}{180n^4}f^{(4)}(\xi)\]
+for some $\xi\in[a,b]$.
+\ssc{Theorem of total variation of differentiable function}
+\sssc{Theorem of total variation of differentiable real function}
+Let $f\colon X\subseteq\bbR\to\bbR$ be a function. If $f$ is differentiable over $[a,b]\subseteq X$ and $f'$ is Riemann integrable over $[a,b]$, then the total variation of $f$ over $[a,b]$ is
+\[V_a^b(f)=\int_a^b\abs{f'(x)}\dd{x}.\]
+\sssc{Theorem of total variation of differentiable real fields}
+PLACEHOLDER
 
 
 
@@ -2611,6 +2899,70 @@ The inverse Laplace transform of a complex function $F(s)$ is given by the line 
 
 
 \sct{Lists}
+\ssc{List of Sequences}
+\sssc{Arithmetic progression or sequence (等差數列)}
+An arithmetic sequence is a sequence $\langle a_n\rangle=\langle a_1+(n-1)d\rangle$. 
+
+Given $a$ and $b$, $\frac{a+b}{2}$ is called the median of an arithmetic sequence (等差中項).
+
+\[\nexists\lim_{n\to\infty}a_n,\quad d\neq 0\]
+\[\lim_{n\to\infty}a_n=a_1,\quad d=0\]
+\sssc{Geometric progression or sequence (等比 or 幾何數列)}
+A geometric sequence is a sequence $\langle a_n\rangle=\langle a_1\cdot r^{n-1}\rangle$, where $a_1r\neq 0$.
+
+Given $a$ and $b$, $\pm\sqrt{ab}$ is called the median of an geometric sequence (等比中項).
+\[\nexists\lim_{n\to\infty}a_n,\quad |d|\geq 1\land d\neq 1\]
+\[\lim_{n\to\infty}a_n=a_1,\quad d=1\]
+\[\lim_{n\to\infty}a_n=0,\quad |d|<1\]
+\ssc{List of Series}
+\sssc{Arithmetic series (等差級數)}
+An arithmetic series is a series $S_n=\sum_{i=1}^na_i$, where $\langle a_n\rangle$ is an arithmetic sequence.
+\[S_n=\frac{n}{2}\qty(a_1+a_n)=\frac{n}{2}\qty(2a_1+(n-1)d)=na_1+\frac{n(n-1)d}{2}\]
+\[\nexists\lim_{n\to\infty}S_n,\quad a_1\neq 0\lor d\neq 0\]
+\[\lim_{n\to\infty}S_n=0,\quad a_1=0\land d=0\]
+\sssc{Geometric series (等比 or 幾何級數)}
+A geometric series is a series $S_n=\sum_{i=1}^na_i$, where $\langle a_n\rangle$ is a geometric sequence.
+
+\[S_n=\frac{a_1\qty(1-r^n)}{1-r},\quad r\neq 1\]
+\[S_n=na_1,\quad r=1\]
+\[\lim_{n\to\infty}S_n=\frac{a_1}{1-r},\quad \abs{r}<1\]
+\[\nexists\lim_{n\to\infty}S_n,\quad \abs{r}\geq 1\]
+\sssc{Riemann zeta function (黎曼 zeta 函數)}
+\[\begin{aligned}
+\zeta(s) &= \sum_{n=1}^\infty\frac{1}{n^s}\\
+&= \frac{1}{\Gamma (s)}\int _0^\infty \frac {x^{s-1}}{e^x-1}\,\mathrm {d} x
+\eam
+
+Harmonic Series (調和級數):
+\[S_n=\sum_{n=1}^n\frac{1}{n}\]
+\[\nexists\sum_{n=1}^\infty\frac{1}{n}\]
+
+Basel Problem (巴塞爾問題):
+\[\zeta(2)=\frac{\pi^2}{6}\]
+
+Other Even Positive Integers:
+\[\zeta(4)=\frac{\pi^4}{90}\]
+\[\zeta(6)=\frac{\pi^6}{945}\]
+\[\zeta(8)=\frac{\pi^8}{9450}\]
+\[\zeta(10)=\frac{\pi^{10}}{93555}\]
+\[\zeta(12)=\frac{691\pi^{12}}{638512875}\]
+\[\zeta(14)=\frac{2\pi^{14}}{18243225}\]
+
+Infinity:
+\[\lim_{n\to\infty}\zeta(n)=1\]
+\sssc{Euler–Mascheroni constant (歐拉–馬斯克若尼常數)}
+\[\begin{aligned}
+\gamma &= \lim _{n\to \infty }\left(\left(\sum _{k=1}^n\frac {1}{k}\right)-\ln(n)\right)\\
+&= \int _1^\infty \left(\frac{1}{\lfloor x\rfloor}-\frac{1}{x}\right)\,\mathrm{d}x
+\end{aligned}\]
+\sssc{Power series (冪級數)}
+\[\begin{aligned}
+\sum_{i=1}^ni &= \frac{n\qty(n+1)}{2}\\
+\sum_{i=1}^ni^2 &= \frac{n\qty(n+1)\qty(2n+1)}{6}\\
+\sum_{i=1}^ni^3 &= \qty(\frac{n(n+1)}{2})^2\\
+\sum_{i=1}^ni^r &= n + \sum_{k=1}^{n-1} (n-k)((k+1)^r - k^r)\\
+&= n + \sum_{k=1}^{n-1} (n-k)\sum_{j=0}^{r-1}\binom{r}{j}k^{j}
+\end{aligned}\]
 \ssc{List of Limits of Real Functions}
 \sssc{Limit of sine function over independent variable at zero}
 \[\lim_{h\to 0}\frac{\sin h}{h}=1.\]
