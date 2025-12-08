@@ -37,6 +37,8 @@ Let $f\colon X\subseteq\mathbb{R}\to Y$ and $(a,b)\subeteq X$. Then $f\vert_a^b$
 Let $f\colon X\subseteq\mathbb{R}\to Y$. When $(-\infty,a]\subseteq X$, for some $a\in\bbR$, we sometimes denote $\lim_{x\to-\infty}f(x)$ as $f(-\infty)$. When $[a,\infty)\subseteq X$, for some $a\in\bbR$, we sometimes denote $\lim_{x\to\infty}f(x)$ as $f(\infty)$.
 
 Let $f$ be a function. We denote $f(b)-f(a)$ as $\evlv{f(x)}_a^b$, $\evlv[f(x)]_a^b$, $\evlv(f(x))_a^b$, $\evlp{f(x)}_a^b$, $\evlp[f(x)]_a^b$, $\evlp(f(x))_a^b$, $\evlb{f(x)}_a^b$, $\evlb[f(x)]_a^b$, or $\evlb(f(x))_a^b$.
+
+A function whose domain is a subset of $\bbR$ is called a real-domain function. A function whose range is a subset of $\bbR$ is called a real-valued function. A function whose domain and range are both subsets of $\bbR$ is called a real function.
 \ssc{Partial Function (偏函數)}
 A partial function from $X$ to $Y$ is a function from a subset of $X$ to $Y$. The notation of a partial function is the same as a function except the fact that it is a partial function should be specified.
 \ssc{Types of Functions}
@@ -242,98 +244,129 @@ The Dirac delta function $\delta(x)\colon\bbR\to\bbR\cup\{-\infty,\infty\}$ is d
 \end{cases}\]
 \[\int _{-\infty }^{\infty }\delta(x) \, \mathrm{d}x = 1.\]
 \[\int_0^x\delta(t)\,\mathrm{d}t=H(x).\]
-\[\forall \epsilon > 0:\,\int_{a-\epsilon}^{a+\epsilon} f(x) \delta(x-a) \, \mathrm{d}x = f(a).\]
+\[\forall \varepsilon > 0:\,\int_{a-\varepsilon}^{a+\varepsilon} f(x) \delta(x-a) \, \mathrm{d}x = f(a).\]
 
 
 
 \section{Limit (極限)}
-\subsection{Limits of Real Sequences}
-Below, we are discussing limits of sequences with domain $\mathbb{N}$ and codomain $\mathbb{R}$. For sequences $\langle a_n\rangle_{i=l}^\infty$ in $\mathbb{R}$, its limit is the same as the limit of another sequence $\langle b_n=a_{n+l-1}\rangle_{i=1}^\infty$.
-\subsubsection{Definition}
-For a real sequence \(\langle a_n\rangle\), the limit of \(\langle a_n\rangle\) (as $n$ approaches infinity), denoted as $\lim_{n \to \infty} a_n$ or $\lim_n a_n$, is defined as follows:
-\[\lim_{n \to \infty} a_n = L \equiv \forall \epsilon > 0:\, \exists M \in\mathbb{N}\text{\ s.t.\ } n\in\mathbb{N}\land n \geq M\implies |a_n - L| < \epsilon.\]
+\subsection{Of Real Sequence}
+\subsubsection{Limit}
+For a real sequence \(\langle a_n\rangle_{n=l}^{\infty}\), the limit of it (as $n$ approaches infinity) is denoted as $\lim_{n \to \infty} a_n$ or $\lim_n a_n$. For $L\in\bbR$:
+\[\lim_{n \to \infty} a_n = L \equiv \forall \varepsilon > 0:\, \exists M \in\mathbb{N}\text{\ s.t.\ } n\in\mathbb{N}\land n \geq M\implies |a_n - L| < \varepsilon.\]
 In other words, as \(n\) becomes arbitrarily large, \(a_n\) gets arbitrarily close to \(L\).
 
-If such $M$ exists, we say the limit exists or the sequence converges (收斂) to $L$; otherwise, we say the limit doesn't exist or the sequence diverge (發散).
-\subsubsection{Infinite Limits}
+If such $M$ exists for some $L\in\bbR$, we say the limit exists and the sequence converges (收斂) to $L$; otherwise, we say the limit doesn't exist and the sequence diverges (發散).
 \[\lim_{n\to \infty}a_n=\infty \equiv \forall M > 0, \exists M \in\mathbb{N} \text{\ s.t.\ } n\in\mathbb{N}\land n \geq M \implies a_n > M.\]
 \[\lim_{n\to \infty}a_n=-\infty \equiv \forall M < 0, \exists M \in\mathbb{N} \text{\ s.t.\ } n\in\mathbb{N}\land n \geq M \implies a_n < M.\]
-Note that if a limit equals to $\infty$ or $-\infty$, the limit doesn't exist.
-\subsection{Limits of Real Series}
-\subsubsection{Definition}
-Let:
-\[S_n = \sum_{i=1}^n a_i,\]
-where \(a_i\) are terms of a real sequence. The limit of \(S_n\), denoted as \(\lim_{n\to\infty}S_n\) or \(\sum_{i=1}^{\infty}a_i\), is defined as the following:
-\[\sum_{i=1}^{\infty}a_i = L \equiv \forall \epsilon > 0:\, \exists M \in\mathbb{N}\text{\ s.t.\ } n \geq M\implies |S_n - L| < \epsilon.\]
-
-If such $M$ exists, we say the limit exists or the series converges to $L$; otherwise, we say the limit doesn't exist or the series diverge.
+\sssc{Limit inferior, infimum limit, limit infimum, liminf, inferior limit, lower limit, or inner limit, and limit superior, supremum limit, limit supremum, limsup, superior limit, upper limit, or outer limit}
+For a real sequence \(\langle a_n\rangle_{n=l}^{\infty}\), the limit inferior is defined as
+\[\liminf_{a\to\infty}a_n\coloneq\sup_{n\geq l}\inf_{m\geq n}a_m,\]
+and the limit superior is defined as
+\[\limsup_{a\to\infty}a_n\coloneq\inf_{n\geq l}\sup_{m\geq n}a_m.\]
+\subsection{Of Real Series}
+\subsubsection{Limit}
+For a real series
+\[S_n = \sum_{i=l}^n a_i,\]
+where \(a_i\) are terms of a real sequence \(\langle a_n\rangle_{n=l}^{\infty}\). The limit of \(S_n\) is denoted as \(\lim_{n\to\infty}S_n\) or \(\sum_{i=1}^{\infty}a_i\) and defined as the limit of the sequence \(\langle S_n\rangle_{n=l}^{\infty}\). If the limit exists and equal to $L$, we say the series converges to $L$; otherwise, we say the series diverges.
 \subsubsection{Absolute convergence and conditional convergence}
-We say a series $S_n=\sum_{i=1}^{\infty}a_i$ converges absolutely to $L$ iff the series $\sum_{i=1}^{\infty}\abs{a_i}$ converges to $L$. If $S_n$ is convergent but not convergent absolutely, we say it is convergent conditionally.
-\subsection{Limits of Real Nets}
-Below, we are discussing limits of nets in the set of real number.
-\subsubsection{Definition}
-For a real net $\langle x_a\rangle_{a\in A}$ in which $A$ is a directed set, the limit of $\langle x_a\rangle_{a\in A}$, denoted as $\lim_{a\in A} x_a$ or $\lim_a x_a$, is defined as follows:
-\[\lim_ax_a = L \equiv \forall \epsilon > 0:\, \exists a_0 \in A\text{\ s.t.\ } a\in A\land a\ge a_0\implies |x_a - L| < \epsilon.\]
+We say a real series $S_n=\sum_{i=1}^{\infty}a_i$ converges absolutely to $L$ iff the series $\sum_{i=1}^{\infty}\abs{a_i}$ converges to $L$. If a real series is convergent but not convergent absolutely, we say it is convergent conditionally.
+\subsection{Of Real Net}
+Below, we will discuss limits of nets in the set of real number.
+\subsubsection{Limit}
+For a real net $\langle x_a\rangle_{a\in A}$ in which $A$ is a directed set, the limit of $\langle x_a\rangle_{a\in A}$ is denoted as $\lim_a x_a$. For $L\in\bbR$:
+\[\lim_ax_a = L \equiv \forall \varepsilon > 0:\, \exists a_0 \in A\text{\ s.t.\ } a\in A\land a\ge a_0\implies |x_a - L| < \varepsilon.\]
 
-If such $a_0$ exists, we say the limit exists or the net converges to $L$; otherwise, we say the limit doesn't exist.
-\subsubsection{Infinite Limits}
+If such $a_0$ exists for some $L\in\bbR$, we say the limit exists or the net converges to $L$; otherwise, we say the limit doesn't exist.
 \[\lim_{a}x_a=\infty \equiv \forall M > 0, \exists a_0 \in A \text{\ s.t.\ } a\in A\land a\geq a_0 \implies x_a > M.\]
 \[\lim_{a}x_a=-\infty \equiv \forall M < 0, \exists a_0 \in A \text{\ s.t.\ } a\in A\land a\geq a_0 \implies x_a < M.\]
-Note that if a limit equals to $\infty$ or $-\infty$, the limit doesn't exist.
-\subsection{Limits of Functions with Real Domains}
-\subsubsection{Definition at Finity}
-Let \(I\) be an interval containing the point \(a\). Let \( f(x) \) be a function defined on \(I\), except possibly at \(a\) itself. The limit of \( f(x) \) as \( x \) approaches \( a \) is defined as follows:
-\[\lim_{x \to a} f(x) = L \equiv \forall \epsilon > 0:\, \exists \delta > 0 \text{\ s.t.\ } 0 < |x - a| < \delta \implies |f(x) - L| < \epsilon.\]
+\sssc{Limit inferior, infimum limit, limit infimum, liminf, inferior limit, lower limit, or inner limit, and limit superior, supremum limit, limit supremum, limsup, superior limit, upper limit, or outer limit}
+For a real net $\langle x_a\rangle_{a\in A}$, the limit inferior is defined as
+\[\liminf_{x}x_n\coloneq\sup_{n\geq l}\inf_{m\geq n}x_m,\]
+and the limit superior is defined as
+\[\limsup_{x}x_n\coloneq\inf_{n\geq l}\sup_{m\geq n}x_m.\]
+\subsection{Real-Domain Function}
+\subsubsection{Limit at Finity}
+Let \(I\) be an interval containing the point \(a\). Let \( f(x) \) be a function defined on \(I\), except possibly at \(a\) itself. The limit of \( f(x) \) as \( x \) approaches \( a \) is denoted as $\lim_{x \to a} f(x)$. For $L\in\bbR$:
+\[\lim_{x \to a} f(x) = L \equiv \forall \varepsilon > 0:\, \exists \delta > 0 \text{\ s.t.\ } 0 < |x - a| < \delta \implies |f(x) - L| < \varepsilon.\]
 In other words, as \(x\) becomes arbitrarily close to \(a\), \(f(x)\) gets arbitrarily close to \(L\).
 
-If such $\delta$'s exist, we say the limit exists; otherwise, we say the limit doesn't exist.
-\subsubsection{Definition at Infinity}
-Let \(I\) be a left-bounded, right-unbounded interval with the point \(a\) being its endpoint on the left. Let \( f(x) \) be a function defined on \(I\). The limit of \( f(x) \) as \( x \) approaches \( \infty \) is defined as follows:
-\[\lim_{x \to \infty} f(x) = L \equiv \forall \epsilon > 0: \, \exists M > a \text{\ s.t.\ } x > M \implies |f(x) - L| < \epsilon.\]
-In other words, as \(x\) becomes arbitrarily large, \(f(x)\) gets arbitrarily close to \(L\). We say $f(x)$ converge to $L$ as $x\to\infty$ if $\lim_{x \to \infty} f(x) = L$.
+If such $\delta$ exist for some $L\in\bbR$, we say the limit exists; otherwise, we say the limit doesn't exist.
+\[\lim_{x\to a}f(x)=\infty \equiv \forall N > 0:\, \exists \delta > 0 \text{\ s.t.\ } 0 < |x - a| < \delta \implies f(x) > N.\]
+\[\lim_{x\to a}f(x)=-\infty \equiv \forall N < 0:\, \exists \delta > 0 \text{\ s.t.\ } 0 < |x - a| < \delta \implies f(x) < N.\]
+\subsubsection{Limit at Infinity}
+Let \(I\) be a left-bounded, right-unbounded interval with the point \(a\) being its endpoint on the left. Let \( f(x) \) be a function defined on \(I\). The limit of \( f(x) \) as \( x \) approaches \( \infty \) is denoted as $\lim_{x \to \infty} f(x)$. For $L\in\bbR$:
+\[\lim_{x \to \infty} f(x) = L \equiv \forall \varepsilon > 0: \, \exists M > a \text{\ s.t.\ } x > M \implies |f(x) - L| < \varepsilon.\]
+In other words, as \(x\) becomes arbitrarily large, \(f(x)\) gets arbitrarily close to \(L\).
+
+If such $M$ exists for some $L\in\bbR$, we say the limit exists and the function converges to $L$ as \(x\) becomes arbitrarily large; otherwise, we say the limit doesn't exist and the function diverges as \(x\) becomes arbitrarily large.
 
 Let \(I\) be a right-bounded, left-unbounded interval with the point \(a\) being its endpoint on the right. Let \( f(x) \) be a function defined on \(I\). The limit of \( f(x) \) as \( x \) approaches \( -\infty \) is defined as follows:
-\[\lim_{x \to -\infty} f(x) = L \equiv \forall \epsilon > 0: \, \exists M < a \text{\ s.t.\ } x < M \implies |f(x) - L| < \epsilon.\]
-In other words, as \(x\) becomes arbitrarily small, \(f(x)\) gets arbitrarily close to \(L\). We say $f(x)$ converge to $L$ as $x\to-\infty$ if $\lim_{x \to -\infty} f(x) = L$.
-\subsubsection{Horizontal asymptote (水平漸近線)}
-We say $y=L$ is a horizontal asymptote of $y=f(x)$ iff $\lim_{x \to \infty} f(x)=L$ or $\lim_{x \to -\infty} f(x)=L$.
-\subsubsection{Slant asymptote (斜漸近線)}
-We say $y=mx+b$ with $m\neq 0$ is a slant asymptote of $y=f(x)$ iff $\lim_{x \to \infty} \qty(f(x)-(mx+b))=0$ or $\lim_{x \to -\infty} \qty(f(x)-(mx+b))=0$.
-\subsubsection{One-side Limits}
-\tb{Right-hand Limit (右極限)}: Let \(I\) be a left-open interval with the point \(a\) being its endpoint on the left. Let \( f(x) \) be a function defined on \(I\). The right-hand limit of \( f(x) \) as \( x \) approaches \( a \) is defined as follows:
-\[\lim_{x \to a^+} f(x) = L \equiv \forall \epsilon > 0 :\,\exists \delta > 0 \text{\ s.t.\ } 0 < x - a < \delta \implies |f(x) - L| < \epsilon.\]
-In other words, as \(x\) becomes arbitrarily close to \(a\) and is greater than \(a\), \(f(x)\) gets arbitrarily close to \(L\). For a function $f(x)$, $\lim_{x\to a^+}f(x)$ can also be denoted as $f(a^+)$.
+\[\lim_{x \to -\infty} f(x) = L \equiv \forall \varepsilon > 0: \, \exists M < a \text{\ s.t.\ } x < M \implies |f(x) - L| < \varepsilon.\]
+In other words, as \(x\) becomes arbitrarily small, \(f(x)\) gets arbitrarily close to \(L\).
 
-\tb{Left-hand Limit (左極限)}: Let \(I\) be a right-open interval with the point \(a\) being its endpoint on the right. Let \( f(x) \) be a function defined on \(I\). The left-hand limit of \( f(x) \) as \( x \) approaches \( a \) is defined as follows:
-\[\lim_{x \to a^-} f(x) = L \equiv \forall \epsilon > 0 :\,\exists \delta > 0 \text{\ s.t.\ } 0 < a - x < \delta \implies |f(x) - L| < \epsilon.\]
-In other words, as \(x\) becomes arbitrarily close to \(a\) and is less than \(a\), \(f(x)\) gets arbitrarily close to \(L\). For a function $f(x)$, $\lim_{x\to a^-}f(x)$ can also be denoted as $f(a^-)$.
-\subsubsection{Infinite Limits}
-\[\lim_{x\to a}f(x)=\infty \equiv \forall N > 0:\, \exists \delta > 0 \text{\ s.t.\ } 0 < |x - a| < \delta \implies f(x) > N.\]
-\[\lim_{x\to a^+}f(x)=\infty \equiv \forall N > 0:\, \exists \delta > 0 \text{\ s.t.\ } 0 < x - a < \delta \implies f(x) > N.\]
-\[\lim_{x\to a^-}f(x)=\infty \equiv \forall N > 0:\, \exists \delta > 0 \text{\ s.t.\ } 0 < a - x < \delta \implies f(x) > N.\]
-\[\lim_{x\to a}f(x)=-\infty \equiv \forall N < 0:\, \exists \delta > 0 \text{\ s.t.\ } 0 < |x - a| < \delta \implies f(x) < N.\]
-\[\lim_{x\to a^+}f(x)=-\infty \equiv \forall N < 0:\, \exists \delta > 0 \text{\ s.t.\ } 0 < x - a < \delta \implies f(x) < N.\]
-\[\lim_{x\to a^-}f(x)=-\infty \equiv \forall N < 0:\, \exists \delta > 0 \text{\ s.t.\ } 0 < a - x < \delta \implies f(x) < N.\]
+If such $M$ exists for some $L\in\bbR$, we say the limit exists and the function converges to $L$ as \(x\) becomes arbitrarily small; otherwise, we say the limit doesn't exist and the function diverges as \(x\) becomes arbitrarily small.
 \[\lim_{x\to\infty}f(x)=\infty \equiv \forall N > 0:\, \exists M > 0 \text{\ s.t.\ } x > M \implies f(x) > N.\]
 \[\lim_{x\to\infty}f(x)=-\infty \equiv \forall N > 0:\, \exists M > 0 \text{\ s.t.\ } x > M \implies f(x) < N.\]
 \[\lim_{x\to-\infty}f(x)=\infty \equiv \forall N > 0:\, \exists M < 0 \text{\ s.t.\ } x < M \implies f(x) > N.\]
 \[\lim_{x\to-\infty}f(x)=-\infty \equiv \forall N > 0:\, \exists M < 0 \text{\ s.t.\ } x < M \implies f(x) < N.\]
-Note that if a limit equals to $\infty$ or $-\infty$, the limit doesn't exist.
+\subsubsection{One-sided Limits}
+\tb{Right-hand Limit (右極限)}: Let \(I\) be a left-open interval with the point \(a\) being its endpoint on the left. Let \( f(x) \) be a function defined on \(I\). The right-hand limit of \( f(x) \) as \( x \) approaches \( a \) is denoted as $\lim_{x \to a^+} f(x)$. For $L\in\bbR$:
+\[\lim_{x \to a^+} f(x) = L \equiv \forall \varepsilon > 0 :\,\exists \delta > 0 \text{\ s.t.\ } 0 < x - a < \delta \implies |f(x) - L| < \varepsilon.\]
+In other words, as \(x\) becomes arbitrarily close to \(a\) and is greater than \(a\), \(f(x)\) gets arbitrarily close to \(L\).
+\[\lim_{x\to a^+}f(x)=\infty \equiv \forall N > 0:\, \exists \delta > 0 \text{\ s.t.\ } 0 < x - a < \delta \implies f(x) > N.\]
+\[\lim_{x\to a^+}f(x)=-\infty \equiv \forall N < 0:\, \exists \delta > 0 \text{\ s.t.\ } 0 < x - a < \delta \implies f(x) < N.\]
+For a function $f(x)$, $\lim_{x\to a^+}f(x)$ can also be denoted as $f(a^+)$.
+
+\tb{Left-hand Limit (左極限)}: Let \(I\) be a right-open interval with the point \(a\) being its endpoint on the right. Let \( f(x) \) be a function defined on \(I\). The left-hand limit of \( f(x) \) as \( x \) approaches \( a \) is denoted as $\lim_{x \to a^-} f(x)$. For $L\in\bbR$:
+\[\lim_{x \to a^-} f(x) = L \equiv \forall \varepsilon > 0 :\,\exists \delta > 0 \text{\ s.t.\ } 0 < a - x < \delta \implies |f(x) - L| < \varepsilon.\]
+In other words, as \(x\) becomes arbitrarily close to \(a\) and is less than \(a\), \(f(x)\) gets arbitrarily close to \(L\).
+\[\lim_{x\to a^-}f(x)=\infty \equiv \forall N > 0:\, \exists \delta > 0 \text{\ s.t.\ } 0 < a - x < \delta \implies f(x) > N.\]
+\[\lim_{x\to a^-}f(x)=-\infty \equiv \forall N < 0:\, \exists \delta > 0 \text{\ s.t.\ } 0 < a - x < \delta \implies f(x) < N.\]
+For a function $f(x)$, $\lim_{x\to a^-}f(x)$ can also be denoted as $f(a^-)$.
+\subsubsection{Horizontal asymptote (水平漸近線)}
+We say $y=L$ is a horizontal asymptote of $y=f(x)$ iff $\lim_{x \to \infty} f(x)=L$ or $\lim_{x \to -\infty} f(x)=L$.
+\subsubsection{Slant asymptote (斜漸近線)}
+We say $y=mx+b$ with $m\neq 0$ is a slant asymptote of $y=f(x)$ iff $\lim_{x \to \infty} \qty(f(x)-(mx+b))=0$ or $\lim_{x \to -\infty} \qty(f(x)-(mx+b))=0$.
 \sssc{Vertical asymptote (鉛直漸近線)}
 We say $x=a$ is a vertical asymptote of $y=f(x)$ iff $\abs{\lim_{x \to a^+} f(x)}=\infty$ or $\abs{\lim_{x \to a^-} f(x)}=\infty$.
-\ssc{Limit of nets of fuctions}
-\sssc{Pointwise convergence (逐點收斂)}
-Let $V$ be a set and $Y$ be a topological space. A net of functions $\langle f_n\rangle_{n\in A}$ all having the same domain $X\subseteq V$ and codomain $Y$ is said to converge pointwise to a given function $f\colon X\to Y$, denoted as 
-\[\lim_nf_n=f\text{\ pointwise},\]
-if and only if
-\[\forall x\in X\colon\lim_nf_n(x)=f(x).\]
-The function $f$ is said to be the pointwise limit function of $\langle f_n\rangle$.
-\sssc{Uniform convergence (一致收斂)}
-Let $V$ be a set and $(Y,d)$ be a metric topological space. A net of functions $\langle f_n\rangle_{n\in A}$ all having the same domain $X\subseteq V$ and codomain $Y$ is said to converge uniformly to a given function $f\colon X\to Y$, denoted as 
-\[\lim_nf_n=f\text{\ uniformly},\]
-if and only if
-\[\forall\varepsilon\in\mathbb{R}_{>0}\colon\exists N\in A\text{\ s.t.\ }\left(n\in A\land N\leq n\implies\sup_{x\in X}d(f_n(x),f(x))<\varepsilon\right).\]
-The function $f$ is said to be the uniform limit function of $\langle f_n\rangle$.
+\ssc{Of Real-valued Functions from Topological Space}
+\sssc{Limit}
+Let $(X,\tau)$ be a topological space, $a\in E\subseteq X$, and $f$ be a function definited on $E$ except possibly at $a$ with codomain $\bbR$. The limit of $f$ as $x$ approaches $a\in E$ is denoted as $\lim_{x\to a}f(x)$. For $L\in\bbR$:
+\[\lim_{x \to a} f(x) = L \equiv \forall \varepsilon > 0:\, \exists U\in\tau\land a\in U \text{\ s.t.\ } x\in E\cap U\setminus\{a\} \implies |f(x) - L| < \varepsilon.\]
+If such $U$ exist for some $L\in\bbR$, we say the limit exists; otherwise, we say the limit doesn't exist.
+\[\lim_{x\to a}f(x)=\infty \equiv \forall N > 0:\, \exists U\in\tau\land a\in U \text{\ s.t.\ }x\in E\cap U\setminus\{a\}\implies f(x) > N.\]
+\[\lim_{x\to a}f(x)=\infty \equiv \forall N < 0:\, \exists U\in\tau\land a\in U \text{\ s.t.\ }x\in E\cap U\setminus\{a\}\implies f(x) < N.\]
+\sssc{Limit inferior, infimum limit, limit infimum, liminf, inferior limit, lower limit, or inner limit, and limit superior, supremum limit, limit supremum, limsup, superior limit, upper limit, or outer limit}
+Let $(X,\tau)$ be a topological space, $a\in E\subseteq X$, and $f$ be a function definited on $E$ except possibly at $a$ with codomain $\bbR$. The limit inferior of $f$ as $x$ approaches $a\in E$ is defined as
+\[\liminf_{x\to a}f(x)\coloneq\sup\{\inf\{f(x)\mid x\in E\cap U\setminus\{a\}\}\mid a\in U\in\tau\},\]
+and the limit superior of $f$ as $x$ approaches $a\in E$ is defined as
+\[\limsup_{x\to a}f(x)\coloneq\inf\{\sup\{f(x)\mid x\in E\cap U\setminus\{a\}\}\mid a\in U\in\tau\}.\]
+\ssc{Of Nets of Fuctions}
+\sssc{(Pointwise) limit}
+Let $X$ be a set and $Y$ be a topological space. A net of functions $\langle f_a\rangle_{a\in A}$ all having the same domain $X$ and codomain $Y$ is said to converge pointwise (逐點收斂) to a function $f\colon X\to Y$ or have a pointwise limit function $f\colon X\to Y$, denoted as 
+\[\lim_af_a=f\text{\ pointwise}\]
+or
+\[\lim_af_a=f,\]
+iff
+\[\forall x\in X\colon\lim_af_a(x)=f(x).\]
+\sssc{(Pointwise) limit inferior, infimum limit, limit infimum, liminf, inferior limit, lower limit, or inner limit function, and limit superior, supremum limit, limit supremum, limsup, superior limit, upper limit, or outer limit function}
+Let $X$ be a set and $Y$ be a topological space. A net of functions $\langle f_a\rangle_{a\in A}$ all having the same domain $X$ and codomain $Y$ is said to have a (pointwise) limit inferior function $f\colon X\to Y$, denoted as 
+\[\liminf_af_a=f\text{\ pointwise}\]
+or
+\[\liminf_af_a=f,\]
+iff
+\[\forall x\in X\colon\liminf_af_a(x)=f(x),\]
+and is said to have a (pointwise) limit superior function $f\colon X\to Y$, denoted as 
+\[\limsup_af_a=f\text{\ pointwise}\]
+or
+\[\limsup_af_a=f,\]
+iff
+\[\forall x\in X\colon\limsup_af_a(x)=f(x).\]
+\sssc{Uniform limit}
+Let $X$ be a set and $(Y,d)$ be a metric space. A net of functions $\langle f_a\rangle_{a\in A}$ all having the same domain $X$ and codomain $Y$ is said to converge uniformly (一致收斂) to a function $f\colon X\to Y$ or have a uniform limit function $f\colon X\to Y$, denoted as 
+\[\lim_af_a=f\text{\ uniformly},\]
+iff
+\[\forall\varepsilon\in\mathbb{R}_{>0}\colon\exists N\in A\text{\ s.t.\ }a\in A\land N\leq a\implies\sup_{x\in X}d(f_a(x),f(x))<\varepsilon.\]
 
 
 
@@ -910,7 +943,7 @@ The p.v. of $\int _{-\infty}^{\infty}f(x)\dd{x}$, denoted as $\PV{\int_{-\infty}
 if the limit exists.
 
 The p.v. of $\int _{a}^{b}f(x)\dd{x}$, in which $f(x)$ is unbounded or undefined at $c\in (a,b)$, denoted as $\PV{\int_{a}^{b} f(x)\dd{x}}$ or $\pv{\int_{a}^{b} f(x)\dd{x}}$, is defined with:
-\[\PV{\int_{a}^{b} f(x)\dd{x}}\coloneq\lim_{\epsilon\to 0}\qty(\int_a^{c-\epsilon}f(x)\dd{x}+\int_{c+\epsilon}^bf(x)\dd{x}),\]
+\[\PV{\int_{a}^{b} f(x)\dd{x}}\coloneq\lim_{\varepsilon\to 0}\qty(\int_a^{c-\varepsilon}f(x)\dd{x}+\int_{c+\varepsilon}^bf(x)\dd{x}),\]
 if the limit exists.
 
 If an improper integral converges, the p.v. of it converges.
@@ -1202,18 +1235,42 @@ for all $\mb{x}\in U$.
 
 
 \sct{Limit Theorems and Methods}
-\ssc{The Uniqueness of Limits}
+\ssc{Uniqueness}
 \sssc{For real sequence}
-If a limit of a real sequence exists, it is unique.
+\bit
+\item If a limit inferior exists, it is unique.
+\item If a limit superior exists, it is unique.
+\item If a limit exists, it is unique, and the limit inferior and limit superior are it.
+\eit
 \sssc{For real series}
-If a limit of a real series exists, it is unique.
+If a limit exists, it is unique.
 \sssc{For real net}
-If a limit of a real net exists, it is unique.
-\sssc{For real function}
-If a limit of a real function exists, it is unique.
+\bit
+\item If a limit inferior exists, it is unique, and all cluster points are greater than or equal to it.
+\item If a limit superior exists, it is unique, and all cluster points are less than or equal to it.
+\item If a limit exists, it is unique, and the limit inferior, limit superior, and only cluster point are it.
+\eit
+\sssc{For real-domain function at finity}
+\bit
+\item If an one-sided limit exists, it is unique.
+\item If a limit exists, it is unique, and the left-hand limit and right-hand limit are it.
+\eit
+\sssc{For real-valued function from topological space}
+\bit
+\item If a limit inferior exists, it is unique.
+\item If a limit superior exists, it is unique.
+\item If a limit exists, it is unique, and the limit inferior and limit superior are it.
+\eit
+\sssc{For net of functions}
+\bit
+\item If a pointwise limit inferior function exists, it is unique.
+\item If a pointwise limit superior function exists, it is unique.
+\item If a pointwise limit function exists, it is unique, and the pointwise limit inferior function and pointwise limit superior function are it.
+\item If a uniform limit function exists, it is unique, and the pointwise limit function, pointwise limit inferior function, and pointwise limit superior function are it.
+\eit
 \ssc{Limit Laws}
 If the limit (including one-sided ones for functions with real domains) of sequences, series, nets, or functions with real domains, hereinafter referred to as a function, in one side exists in $\mathbb{R}\cup\{-\infty,\infty\}$, then the limit in the other side exists in $\mathbb{R}\cup\{-\infty,\infty\}$ and follows the following law.
-\sssc{Linearity or sum law, difference law, and constant multiple law}
+\sssc{Linearity, or sum law, difference law, and constant multiple law}
 The limit of a sum of constant multiples of functions is the sum of the constant multiples of the limits of the functions.
 \sssc{Product law}
 The limit of a product of functions is the product of the limits of the functions.
@@ -1230,15 +1287,19 @@ For any function $f\colon D\subseteq\bbR\to\bbR$ that is continuous at a limit o
 \begin{proof}
 PLACEHOLDER
 \end{proof}
-\ssc{The Uniqueness of Limits}
-\sssc{For real sequence}
-If a limit of a real sequence exists, it is unique.
-\sssc{For real series}
-If a limit of a real series exists, it is unique.
-\sssc{For real net}
-If a limit of a real net exists, it is unique.
-\sssc{For real function}
-If a limit of a real function exists, it is unique.
+\ssc{Limit inferior and limit superior laws}
+\sssc{Addition law}
+The limit inferior of a sum of functions is greater than or equal to the sum of the limit inferiors of the functions.
+
+The limit superior of a sum of functions is less than or equal to the sum of the limit superiors of the functions.
+\sssc{Constant multiple law}
+The limit inferior of a constant multiple of a function is the constant multiple of the limit inferior of the function.
+
+The limit superior of a constant multiple of a function is the constant multiple of the limit superior of the function.
+\sssc{Multiplication law}
+The limit inferior of a product of nonnegative real-valued functions is the product of the limit inferiors of the functions.
+
+The limit superior of a product of nonnegative real-valued functions is the product of the limit superiors of the functions.
 \ssc{Preservation of equal to}
 \sssc{For real sequence}
 Given real sequences $\langle a_n\rangle$ and $\langle b_n\rangle$ which for all $k$ that is greater than or equal to a specific $j\in \mathbb{N}$, $a_k=b_k$. If $\lim_{n\to\infty}a_n=L\in\mathbb{R}\cup\{-\infty,\infty\}$, then
@@ -1266,7 +1327,7 @@ Let $f(x)$ and $g(x)$ be functions defined on $(a,\infty)$ which for all $x\in I
 
 Let $f(x)$ and $g(x)$ be functions defined on $(-\infty,a)$ which for all $x\in I$, $f(x)=g(x)$. If $\lim_{x\to-\infty}f(x)=L\in\mathbb{R}\cup\{-\infty,\infty\}$, then
 \[\lim_{x\to-\infty}g(x)=L.\]
-\sssc{Preservation of less than or equal to}
+\ssc{Preservation of less than or equal to}
 \sssc{For real sequence}
 Given real sequences $\langle a_n\rangle$ and $\langle b_n\rangle$ which for all $k$ that is greater than or equal to a specific $j\in \mathbb{N}$, $a_k\leq b_k$. If both $\lim_{n\to\infty}a_n$ and $\lim_{n\to\infty}b_n$ are in $\mathbb{R}\cup\{-\infty,\infty\}$, then
 \[\lim_{n\to\infty}a_n\leq\lim_{n\to\infty}b_n.\]
@@ -1276,6 +1337,7 @@ Given real sequences $\langle a_n\rangle$ and $\langle b_n\rangle$ which for all
 \[\sum_{i=1}^ka_i\leq\sum_{i=1}^kb_i.\]
 If both $\sum_{i=1}^{\infty}a_i$ and $\sum_{i=1}^{\infty}b_i$ are in $\mathbb{R}\cup\{-\infty,\infty\}$, then
 \[\sum_{i=1}^{\infty}a_i\leq\sum_{i=1}^{\infty}b_i.\]
+If $\sum_{i=1}^{\infty}a_i=\infty$, then $\sum_{i=1}^{\infty}b_i=\infty$; if $\sum_{i=1}^{\infty}b_i=-\infty$, then $\sum_{i=1}^{\infty}a_i=-\infty$.
 \sssc{For real net}
 Let $A$ be a directed set. Given real nets $\langle x_a\rangle_{a\in A}$ and $\langle y_a\rangle_{a\in A}$ which for all $k\in A$ such that there exists $j\in A$ with $j\leq k$, $x_k\leq y_k$. If both $\lim_{a}x_a$ and $\lim_{a}y_a$ exist, then:
 \[\lim_{a}x_a\leq\lim_{a}y_a.\]
@@ -1299,7 +1361,7 @@ If $\lim_{x\to\infty}f(x)=\infty$, then $\lim_{x\to\infty}g(x)=\infty$; if $\lim
 Let $f(x)$ and $g(x)$ be functions defined on $(-\infty,a)$ which for all $x\in I$, $f(x)\leq g(x)$. If both $\lim_{x\to-\infty}f(x)$ and $\lim_{x\to-\infty}g(x)$ are in $\mathbb{R}\cup\{-\infty,\infty\}$, then
 \[\lim_{x\to-\infty}f(x)\leq\lim_{x\to-\infty}g(x).\]
 If $\lim_{x\to-\infty}f(x)=\infty$, then $\lim_{x\to-\infty}g(x)=\infty$; if $\lim_{x\to-\infty}g(x)=-\infty$, then $\lim_{x\to-\infty}f(x)=-\infty$.
-\sssc{Squeeze (夾擠) theorem or Sandwich (三明治) theorem}
+\ssc{Squeeze (夾擠) theorem or Sandwich (三明治) theorem}
 \sssc{For real sequence}
 Given real sequences $\langle a_n\rangle$, $\langle b_n\rangle$, and $\langle c_n\rangle$ which for all $k$ that is greater than or equal to a specific $j\in \mathbb{N}$:
 \[a_k\leq c_k\leq b_k.\]
@@ -1389,11 +1451,11 @@ Since $\varepsilon > 0$ was arbitrary, by definition of limit:
 \end{enumerate}
 \begin{proof}
 Let $\{a_{n}\}$ be the set of values of $\langle a_n\rangle_{n\in\mathbb {N}}$. By assumption, $\{a_n\}$ is non-empty and bounded-above by $\sup_n a_n$. Let $c=\sup_n a_n$.
-\[\forall\epsilon>0:\,\exists M\in\mathbb {N}\text{\ s.t.\ }c\geq a_M>c-\epsilon,\]
-since otherwise $c-\epsilon$ is a strictly smaller upper bound of $\langle a_n\rangle$, contradicting the definition of the supremum. 
+\[\forall\varepsilon>0:\,\exists M\in\mathbb {N}\text{\ s.t.\ }c\geq a_M>c-\varepsilon,\]
+since otherwise $c-\varepsilon$ is a strictly smaller upper bound of $\langle a_n\rangle$, contradicting the definition of the supremum. 
 
 Then since $\langle a_n\rangle$ is non-decreasing, and $c$ is an upper bound:
-\[\forall\epsilon>0:\,\exists M\in\mathbb {N}\text{\ s.t.\ }\forall n\geq M:\,|c-a_n|=c-a_n\leq c-a_M=|c-a_M|<\epsilon.\]
+\[\forall\varepsilon>0:\,\exists M\in\mathbb {N}\text{\ s.t.\ }\forall n\geq M:\,|c-a_n|=c-a_n\leq c-a_M=|c-a_M|<\varepsilon.\]
 The proof of the (B) part is analogous or follows from (A) by considering $\langle -a_{n}\rangle_{n\in \mathbb{N}}$.
 \end{proof}
 \textit{Statement.}
@@ -1403,7 +1465,7 @@ $a_n\leq a_{n+1}$ for every $n\geq 1$ or $a_n\geq a_{n+1}$ for every $n\geq 1$, 
 \begin{proof}
 "If"-direction: The proof follows directly from the proposition.
 
-"Only If"-direction: By $(\epsilon,\delta)$-definition of limit, every sequence $\langle a_n\rangle_{n\in\mathbb {N}}$ with a finite limit $L$ is necessarily bounded.
+"Only If"-direction: By $(\varepsilon,\delta)$-definition of limit, every sequence $\langle a_n\rangle_{n\in\mathbb {N}}$ with a finite limit $L$ is necessarily bounded.
 \end{proof}
 \sssc{Bolzano–Weierstrass Theorem (波爾查諾-魏爾斯特拉斯定理)}
 Every bounded sequence in an Euclidean space $\bbR^n$ has a convergent subsequence.
@@ -1483,15 +1545,15 @@ If $\int_{-\infty}^af(x)\dd{x}$ converges and $f(x)$ is nonpositive and non-decr
 \sssc{For real series}
 A real series is convergent if it is absolutely convergent.
 \sssc{For improper integral}
-An improper integral of a real function is convergent if it is absolutely convergent.
+An improper integral is convergent if it is absolutely convergent.
 \ssc{Deleting head}
 \sssc{For real series}
-For real sequence $\langle a_i\rangle_{i=m}^{\infty}$, $\sum_{i=m}^{\infty}a_i$ converges iff $\sum_{i=m+n}^{\infty}a_i$ converges for all $n\in\bbN$.
+For real sequence $\langle a_i\rangle_{i=m}^{\infty}$, $\sum_{i=m}^{\infty}a_i$ converges iff $\sum_{i=m+n}^{\infty}a_i$ converges, for all $n\in\bbN$.
 \sssc{For improper integral}
-For real function $f$ defined on $[a,\infty)$, $\int_a^{\infty}f(x)\dd{x}$ converges iff $\int_{a+b}^{\infty}f(x)\dd{x}$ converges for all $b\in\bbR_{>0}$.
+For real function $f$ defined on $[a,\infty)$, $\int_a^{\infty}f(x)\dd{x}$ converges iff $\int_{a+b}^{\infty}f(x)\dd{x}$ converges, for all $b\in\bbR_{>0}$.
 
-For real function $f$ defined on $(-\infty,a]$, $\int_{-\infty}^af(x)\dd{x}$ converges iff $\int_{-\infty}^{a-b}f(x)\dd{x}$ converges for all $b\in\bbR_{>0}$.
-\ssc{Comparison theorem}
+For real function $f$ defined on $(-\infty,a]$, $\int_{-\infty}^af(x)\dd{x}$ converges iff $\int_{-\infty}^{a-b}f(x)\dd{x}$ converges, for all $b\in\bbR_{>0}$.
+\ssc{Direct comparison theorem}
 \sssc{For real series}
 If real sequences $\langle a_n\rangle_{n=1}^{\infty}$ and $\langle b_n\rangle_{n=1}^{\infty}$ are such that $a_n\geq b_n\geq 0$ for all $n\geq m$ for some $m\in\bbN$, then
 \ben
@@ -1522,53 +1584,90 @@ for all $n\geq p$.
 Thus,
 \[\sum_{n=1}^{\infty}a_n=\lim_{n\to\infty}s_n=\infty\]
 \end{proof}
-If real sequences $\langle a_n\rangle_{n=1}^{\infty}$ and $\langle b_n\rangle_{n=1}^{\infty}$ are such that $a_n\leq b_n\leq 0$ for all $n\geq m$ for some $m\in\bbN$, then
-\ben
-\item $\sum_{n=1}^{\infty}a_n$ is convergent implies $\sum_{n=1}^{\infty}b_n$ is convergent.
-\item $\sum_{n=1}^{\infty}b_n$ is divergent implies $\sum_{n=1}^{\infty}a_n$ is divergent.
-\een
 \sssc{For improper integral}
-If real functions $f$ and $g$ are measurable on $ and $f(x)\geq g(x)\geq 0$ a.e. for $x\geq a$, then
+If functions $f\colon [a,b)\to\bbR$ and $g\colon [a,b)\to\bbR$ are measurable with $b\in(a,\infty]$, $\int_a^bf(x)\dd{x}$ and $\int_a^bg(x)\dd{x}$ are improper integral, $\int_a^cf(x)\dd{x}$ and $\int_a^cg(x)\dd{x}$ are proper integrals for any $a<c<b$,
+and $f(x)\geq g(x)\geq 0$ a.e. for $x\in[a,b)$, then
 \ben
-\item $\int_a^{\infty}f(x)\dd{x}$ is convergent implies $\int_a^{\infty}g(x)\dd{x}$ is convergent.
-\item $\int_a^{\infty}g(x)\dd{x}$ is divergent implies $\int_a^{\infty}f(x)\dd{x}$ is divergent.
+\item $\int_a^bf(x)\dd{x}$ is convergent implies $\int_a^bg(x)\dd{x}$ is convergent.
+\item $\int_a^bg(x)\dd{x}$ is divergent implies $\int_a^bf(x)\dd{x}$ is divergent.
 \een
 \begin{proof}
 Let
-\[F(b)=\int_a^bf(x)\dd{x},\quad b\geq a,\]
-\[G(b)=\int_a^bg(x)\dd{x},\quad b\geq a.\]
-$F$ and $G$ are monotone increasing since $f(x),g(x)\geq 0$ a.e. for $x\geq 0$.
+\[F(t)=\int_a^tf(x)\dd{x},\quad t\in[a,b),\]
+\[G(t)=\int_a^tg(x)\dd{x},\quad t\in[a,b).\]
+$F$ and $G$ are monotone increasing since $f(x),g(x)\geq 0$ a.e. for $x\in[a,b)$.
 
-$F(x)\geq G(x)$ since $f(x)\geq g(x)$ a.e. for $x\geq 0$.
+$F(x)\geq G(x)$ since $f(x)\geq g(x)$ a.e. for $x\in[a,b)$.
 
 Statement 1:
-\[\int_a^{\infty}f(x)\dd{x}=\lim_{x\to\infty}F(x)=L.\]
+\[\int_a^bf(x)\dd{x}=\lim_{t\to b}F(t)=L.\]
 \[0\leq G(x)\leq F(x)\]
 Thus,
-\[\int_a^bg(x)\dd{x}=\lim_{x\to\infty}G(x)\]
-exists and $\geq 0$ and $\leq L$.
+\[\int_a^bg(x)\dd{x}=\lim_{t\to b}G(t)\]
+exists and $\in [0,L]$.
 
 Statement 2:
-\[\int_a^bg(x)\dd{x}=\lim_{x\to\infty}G(x)=\infty\]
+\[\int_a^bg(x)\dd{x}=\lim_{t\to b}G(t)=\infty\]
 \[0\leq G(x)\leq F(x)\]
 Thus,
-\[\int_a^bf(x)\dd{x}=\lim_{x\to\infty}F(x)=\infty.\]
+\[\int_a^bf(x)\dd{x}=\lim_{t\to b}F(t)=\infty.\]
 \end{proof}
-If real functions $f$ and $g$ are measurable on $ and $f(x)\leq g(x)\leq 0$ a.e. for $x\geq a$, then
+\ssc{Limit comparison theorem (LCT)}
+\sssc{For real series}
+If real sequences $\langle a_n\rangle_{n=1}^{\infty}$ and $\langle b_n\rangle_{n=1}^{\infty}$ are such that $a_n\geq 0$ and $b_n>0$ for all $n\geq m$ for some $m\in\bbN$, let
+\[L=\lim_{n\to\infty}\frac{a_n}{b_n},\]
+then:
 \ben
-\item $\int_a^{\infty}f(x)\dd{x}$ is convergent implies $\int_a^{\infty}g(x)\dd{x}$ is convergent.
-\item $\int_a^{\infty}g(x)\dd{x}$ is divergent implies $\int_a^{\infty}f(x)\dd{x}$ is divergent.
+\item If $0<L<\infty$, then $\sum_{n=1}^{\infty}a_n$ is convergent iff $\sum_{n=1}^{\infty}b_n$ is convergent. (classical LCT)
+\item if $L=0$, then $\sum_{n=1}^{\infty}b_n$ is convergent implies $\sum_{n=1}^{\infty}a_n$ is convergent. (one-sided LCT)
+\item If $L=\infty$, then $\sum_{n=1}^{\infty}b_n$ is divergent implies $\sum_{n=1}^{\infty}a_n$ is divergent. (one-sided LCT)
 \een
-If real functions $f$ and $g$ are measurable and $f(x)\geq g(x)\geq 0$ a.e. for $x\leq a$, then
+\begin{proof}
+Statement 1:
+
+For every $\varepsilon>0$, there exists $N\in\bbN$ such that for all $n\geq N$, $\abs{\frac{a_n}{b_n}-L}<\varepsilon$, equivalently
+\[(L-\varepsilon)b_n<a_n<(L+\varepsilon)b_n.\]
+As $L>0$, choose $\varepsilon$ such that $L-\varepsilon>0$, so
+\[\frac{a_n}{L+\varepsilon}<b_n<\frac{a_n}{L-\varepsilon}.\]
+$\sum_{n=1}^{\infty}\frac{a_n}{L+\varepsilon}$ converges iff $\sum_{n=1}^{\infty}a_n$ converges iff $\sum_{n=1}^{\infty}\frac{a_n}{L-\varepsilon}$ converges.
+
+And by direct comparison test,
+\bit
+\item $\sum_{n=1}^{\infty}\frac{a_n}{L-\varepsilon}$ is convergent implies $\sum_{n=1}^{\infty}b_n$ is convergent,
+\item $\sum_{n=1}^{\infty}b_n$ is convergent implies $\sum_{n=1}^{\infty}\frac{a_n}{L+\varepsilon}$ is convergent.
+\eit
+
+Statement 2:
+
+For every $\varepsilon_1>0$, there exists $N_1\in\bbN$ such that for all $n\geq N_1$, $\frac{a_n}{b_n}<\varepsilon_1$.
+
+For every $\varepsilon_2>0$, there exists $N_2\in\bbN$ such that for all $n\geq N_2$, $b_n<\varepsilon_2$.
+
+Take $N_2$ for $varepsilon_2\leq 1$, for every $\varepsilon_1>0$, there exists $N=\max(N_1,N_2)\in\bbN$ such that for all $n\geq N$, $a_n<\varepsilon_1$
+
+Statement 3:
+
+For every $M_1>0$, there exists $N_1\in\bbN$ such that for all $n\geq N_1$, $\frac{a_n}{b_n}>M_1$.
+
+For every $M_2>0$, there exists $N_2\in\bbN$ such that for all $n\geq N_2$, $b_n>M_2$.
+
+Take $N_2$ for $M_2\geq 1$, for every $M_1>0$, there exists $N=\max(N_1,N_2)\in\bbN$ such that for all $n\geq N$, $a_n>M_1$.
+\end{proof}
+\sssc{For improper integral}
+If functions $f\colon [a,b)\to\bbR$ and $g\colon [a,b)\to\bbR$ are measurable with $b\in(a,\infty]$, $\int_a^bf(x)\dd{x}$ and $\int_a^bg(x)\dd{x}$ are improper integral, $\int_a^cf(x)\dd{x}$ and $\int_a^cg(x)\dd{x}$ are proper integrals for any $a<c<b$, $f(x)\geq 0$ and $g(x)>0$ a.e. for $x\in[a,b)$, let
+\[L=\frac{\int_a^bf(x)\dd{x}}{\int_a^bg(x)\dd{x}},\]
+then:
 \ben
-\item $\int_{-\infty}^af(x)\dd{x}$ is convergent implies $\int_{-\infty}^ag(x)\dd{x}$ is convergent.
-\item $\int_{-\infty}^ag(x)\dd{x}$ is divergent implies $\int_{-\infty}^af(x)\dd{x}$ is divergent.
+\item If $0<L<\infty$, then $\int_a^bf(x)\dd{x}$ is convergent iff $\int_a^bg(x)\dd{x}$ is convergent. (classical LCT)
+\item if $L=0$, then $\int_a^bg(x)\dd{x}$ is convergent implies $\int_a^bf(x)\dd{x}$ is convergent. (one-sided LCT)
+\item If $L=\infty$, then $\int_a^bg(x)\dd{x}$ is divergent implies $\int_a^bf(x)\dd{x}$ is divergent. (one-sided LCT)
 \een
-If real functions $f$ and $g$ are measurable and $f(x)\leq g(x)\leq 0$ a.e. for $x\leq a$, then
-\ben
-\item $\int_{-\infty}^af(x)\dd{x}$ is convergent implies $\int_{-\infty}^ag(x)\dd{x}$ is convergent.
-\item $\int_{-\infty}^ag(x)\dd{x}$ is divergent implies $\int_{-\infty}^af(x)\dd{x}$ is divergent.
-\een
+\begin{proof}
+待
+\end{proof}
+
+
+
 \ssc{Dirichlet test}
 \sssc{For real series}
 If $\langle a_n\rangle_{n=1}^{\infty}$ is a sequence such that the sequence of partial sums $\langle s_n=\sum_{i=0}^na_i\rangle_{n=0}^{\infty}$ where $s_0=0$ is bounded and $\langle b_n\rangle_{n=1}^{\infty}$ is a monotone sequence such that $\lim_{n\to\infty}b_n=0$, then
