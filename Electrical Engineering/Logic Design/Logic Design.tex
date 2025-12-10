@@ -1435,7 +1435,7 @@ A edge-triggered flip-flop is a latch that responds to changes of data inputs on
 A gated or level-sensitive latch is a level-triggered latch that has an additional enable input signal $En$ which controls whether the latch is transparent (enabled) or hold (disabled). When enable is at active level (1 for active-high gated latch and 0 for active-low gated latch), it is transparent, meaning the it acts as an asynchronous latch of its type; when enable is at inactive level (0 for active-high latch and 1 for active-low latch), the latch is hold (aka retain), meaning the output remains at its previous state regardless of input changes.
 
 Unless otherwise specified, a gated latch is active-high. A active-low gated latch can be implemented by adding an inverter at the enable input. The symbol of an active-low latch in block diagrams is that of an active-high one with an inversion bubble at the enable input right outside of the rectangle.
-\sssc{Flip-flop (FF)}
+\sssc{(Edge-triggered) Flip-flop (FF)}
 The term flip-flop has historically referred generically to both level-triggered and edge-triggered latch. Some modern authors, however, reserve the term flip-flop exclusively for edge-triggered latch and use the term gated latch or simply latch for level-triggered latch. The terms "edge-triggered", and "level-triggered" may be used to avoid ambiguity.
 
 The implementation a type of flip-flop with another type of flip-flop is called conversion.
@@ -1462,6 +1462,8 @@ The setup time $t_s$ of a flip-flop is the minimum time before an acitve edge th
 The hold time $t_h$ of a flip-flop is the minimum time afte an acitve edge that the data inputs must be stable to ensure the flip-flop captures it correctly.
 
 Violating setup or hold times can cause metastability.
+
+A synchronizer can be used to synchronize an input to a synchronous circuit with its clock.
 \sssc{State variable}
 A state variable is a binary variable that represents the current state of a sequential circuit.
 
@@ -1736,7 +1738,9 @@ A Moore circuit can be specified with equations
 
 A circuit implementation with the minimal $|S|$ is called state-minimal.
 \sssc{Glitch of Mealy Circuit}
-After the circuit has changed state and before the input is changed, the output may temporarily assume an incorrect value, which we call a false output, glitch, or spike. If the output of the circuit is fed into a second sequential circuit which uses the same clock, the false outputs will not cause any problem because the inputs to the second circuit can cause a change of state only when a falling clock edge occurs. The best time to read the output is just before the active edge of the clock, because the input must be stable at that time and thus the output will be correct.
+After the circuit has changed state and before the inputs are changed, the outputs may temporarily assume incorrect values, called false outputs, glitches, or spikes. Thus, if any valid input is not synchronized with the clock, the best time to read the outputs is just before the active edge of the clock because the inputs must be stable at that time.
+
+If the outputs of the circuit are fed into a second sequential circuit which uses the same clock, the false outputs will not cause any problem because the inputs to the second circuit can cause a change of state only when an active clock edge occurs.
 \sssc{Mealy and Moore implementation}
 For Mealy and Moore implementations of same sequential logic:
 \bit
@@ -1913,6 +1917,10 @@ When $(S_1,S_0)=(1,0)$ at an active edge, the register shifts a bit right; when 
 An $n$-bit parallel-in parallel-out (PIPO) bidirectional shift register is an $n$-bit PISO register additional $n-2$ outputs connected to the outputs $Q$ of the flip-flops except the flip-flops storing the least and most significant bits. Those outputs together with the original two SOs compose the parallel output of the register.
 \sssc{Serial-In Parallel-Out (SIPO) Bidirectional Shift Register}
 An $n$-bit serial-in parallel-out (SIPO) bidirectional shift register is an $n$-bit SISO register additional $n-2$ outputs connected to the outputs $Q$ of the flip-flops except the flip-flops storing the least and most significant bits. Those outputs together with the original two SOs compose the parallel output of the register.
+\sssc{Synchronizer}
+An $n$-flip-flop synchronizer is an $n$-bit SISO register used to synchronize an input to a synchronous circuit with its clock, in which the original not synchronized input is inputted to the SISO register and the synchronized and delayed up to $n$ clock periods input for the synchronous circuit is outputted from the SISO register.
+
+A two-flip-flop synchronizer is often used.
 \ssc{Synchronous Counter}
 \sssc{Counter}
 A counter is a sequential circuit whose state repeats every fixed finite number of active edges, called count cycle. The cyclic sequence of the states is called state loop. 
