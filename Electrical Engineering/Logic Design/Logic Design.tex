@@ -935,7 +935,8 @@ Active high (aka active-high or noninverted) means the input or output signal is
 Unless otherwise specified, a type of electronic components with active high and low version of inputs and/or outputs are assumed to be active high inputs and/or outputs.
 \sssc{Bus}
 Several signals that perform a common function may be grouped together to form a bus, represented with a single heavy line optionally with a diagonal slash through it specifying the number of bits in the bus.
-
+\sssc{Iterative Circuits}
+An iterative circuit consists of a number of identical cells interconnected in a regular manner. The regular structure of an iterative circuit makes it easier to fabricate in integrated circuit form than circuits with less regular structures.
 \sssc{Pull-up and Pull-down resistors}
 In a digital circuit, if an input pin is not connected to anything (floating), it can pick up random electrical noise. To keep it in a definite voltage we can use pull-up or pull-down resistors.
 
@@ -1335,6 +1336,14 @@ The priority of inputs are usually as: for any $1\leq i<2^n$, the $(i+1)$-th inp
 An active-low inputs priority encoder invert the inputs; an active-low outputs priority encoder invert the outputs.
 
 The symbol of a $2^n$-to-$n$ priority encoder in block diagrams is a rectangle with inputs lines and output lines with arrows on two parallel sides and "($2^n$-to-$n$) priority encoder" in it.
+\sssc{Comparator}
+An $n$-bit comparator has two $n$-bit parallel input $A_{n-1}A_{n-2}\ldots A_0$, $B_{n-1}B_{n-2}\ldots B_0$ representing two $n$-bit unsigned binary numbers A and B and three output signals $gt$, which is 1 iff A>B, $eq$, which is 1 iff A=B, and $lt$, which is 1 iff A<B. It consist of $n$ cells interconnected linearly. Each cell $i$ has four inputs, $gt_{i+1}$, $lt_{i+1}$, $A_i$, and  $B_i$, and two outputs, $gt_i$ and $lt_i$, where
+\[gt_i=gt_{i+1}+A_iB_i'lt_{i+1}',\]
+\[lt_i=lt_{i+1}+A_i'B_igt_{i+1}'.\]
+However, the left end cell (cell $n-1$) has no input $gt_n$ and $lt_n$, and
+\[gt_{n-1}=A_iB_{n-1}',\]
+\[lt_{n-1}=A_i'B_{n-1}.\]
+Comparison proceeds from left to right, $gt=gt_0$, $lt=lt_0$, and $eq=gt\odot lt$.
 \ssc{Read-only memory (ROM)}
 A read-only memory (ROM) is a non-volatile (data is kept even when power is off) memory consists of an array of semiconductor devices that are interconnected to store an array of binary data. Once binary data is stored in the ROM, it can be read out whenever desired, but the data that is stored cannot be changed under normal operating conditions.
 
@@ -2291,7 +2300,7 @@ First minimize the two (completely or incompletely specified) deterministic fini
 \[\delta(S_i,X_k)\neq\delta(T_j,X_k)\land(\delta(S_i,X_k),\delta(T_j,X_k))\neq(S_i,T_j),\]
 otherwise.
 \eit
-\item For each entry $a_{ij}$ that has not been filled with $\times$, fill it with $\times iff any pair of states $(S_p,T_q)$ in it is such that $a_{pq}$ has been filled with $\times$. Repeatedly iterate through all entries that has not been filled with $\times$ until no entry is filled with $\times$ in an iteration.
+\item For each entry $a_{ij}$ that has not been filled with $\times$, fill it with $\times$ iff any pair of states $(S_p,T_q)$ in it is such that $a_{pq}$ has been filled with $\times$. Repeatedly iterate through all entries that has not been filled with $\times$ until no entry is filled with $\times$ in an iteration.
 \item Define a bipartite graph with two partitions $S$ and $T$ with, an edge between $S_i\in S$ and $T_j\in T$ exists iff $a_{ij}$ is not filled with $\times$. The two automata are equivalent iff the bipartite graph has a perfect matching.
 \een
 \ssc{State Assignment}
