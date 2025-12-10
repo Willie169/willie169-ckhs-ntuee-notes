@@ -1134,7 +1134,7 @@ or
 \een
 
 It should be emphasized that the discussion of hazards and the possibility of resulting glitches in this section has assumed that only a single input can change at a time and that no other input will change until the circuit has stabilized. If more than one input can change at one time, then nearly all circuits will contain hazards, and they cannot be eliminated by modifying the circuit implementation.
-\ssc{Simulation and testing of logic circuits}
+\ssc{Simulation and Testing}
 \sssc{Verilog, SystemVerilog, and VHDL}
 A hardware description language (HDL) is a specialized computer language used to describe the structure and behavior of electronic circuits.
 
@@ -1161,7 +1161,7 @@ A simple simulator for combinational logic works as follows:
 \een
 If a circuit output is wrong for some set of input values, this may be due to several possible causes:
 \bit
-\item incorrect design
+\item Incorrect design
 \item Gates connected wrong
 \item Wrong input signals to the circuit
 \eit
@@ -1756,14 +1756,14 @@ A state table is the same as a transition table except that the states are repre
 A state/transition/state transition diagram/graph for a Moore circuit is a directed graph with
 \bit
 \item Each vertex being a state, normally represented by circles with states in the top half and output at the state in the bottom half, i.e., [state]/[output character].
-\item Each directed edge being a transition, normally drawn as an arrow from present state to next state with the input character read for such transition to happen on the edge.
+\item Each directed edge (arc) being a transition, normally drawn as an arrow from present state to next state with the input character read for such transition to happen on the edge.
 \item The starting state is usually represented by an arrow with no origin pointing to the state, a subscript 0 in the symbol of the state (often $s_0$ or $S_0$), or not shown.
 \eit
 \sssc{State/transition/state transition diagram/graph for Mealy circuit}
 A state/transition/state transition diagram/graph for a Mealy circuit is a directed graph with
 \bit
 \item Each vertex being a state, normally represented by circles with states in it.
-\item Each directed edge being a transition, normally drawn as an arrow from present state to next state with the input character read for such transition to happen and output character of the transition on the edge separated by /, i.e., [input character]/[output character].
+\item Each directed edge (arc) being a transition, normally drawn as an arrow from present state to next state with the input character read for such transition to happen and output character of the transition on the edge separated by /, i.e., [input character]/[output character].
 \item The starting state is usually represented by an arrow with no origin pointing to the state, a subscript 0 in the symbol of the state (often $s_0$ or $S_0$), or not shown.
 \eit
 \sssc{Incompletely specified state}
@@ -2334,13 +2334,48 @@ Assignments for two states are said to be adjacent if they differ in only one st
 \een
 When using this guidelines, we write down all pairs states which should be given adjacent assignments according to the guidelines and then draw assignment maps. An assignment map is a Karnaugh map in which the rows and columns are combinations of state variables and each cell is a unique assignment for a state to be filled in. When filling in the map, the starting state should be put in the cell where all state variables are 0 to simplify reset wiring since nothing is to be gained by trying to put the starting state in different squares on the map because the same number of adjacencies can be found no matter where you put the starting state. Fill the map and try to satisfy as many of these adjacencies as possible. A state that is equivalent to a tried state need not be tried. Such equivalence can be found by interchanging digits, complementing bits for symmetrical flip-flops, etc. An amount of trial and error may be required to fill in the map so that the maximum number of desired state adjacencies is obtained.
 \sssc{One-hot and one-cold state assignment}
-When designing with CPLDs and FPGAs, we should keep in mind that flip-flops in logic cells are there whether we use them or not. This means that it may not be important to minimize the number of flip-flops used in the design. Instead, we should try to reduce the total number of logic cells used and the interconnections between cells since the propagation delay is longer when several cells are cascaded to realize a function. Using a one-hot or one-cold encoding for state assignment may help to accomplish this.
-
 When a one-hot (or one-cold) state assignment is used,
 \bit
 \item The minimal SOP (or POS) form of next-state equation for each flip-flop is such that each product term (or sum term) contains exactly one state variable.
 \item The minimal SOP (or POS) form of output function for each output is such that each product term (or sum term) contains exactly one state variable.
 \eit
+\ssc{Design of Sequential Circuits Using ROMs, PLAs, CPLDs, and FGPAs}
+\sssc{Design of Sequential Circuits Using ROMs}
+The next-state and output combinational subcircuits of a sequential circuit can be realized using ROMs (read-only memories). The state of the circuit can then be stored in a register of D flip-flops and fed back to the input of the ROM.
+\bit
+\item A Mealy sequential circuit with $m$ inputs, $n$ outputs, and $k$ state variables can be realized using $k$ D flip-flops and a ROM with $m + k$ inputs ($2^{m+k}$ words) and $n + k$ outputs.
+\item A Moore sequential circuit with $m$ inputs, $n$ outputs, and $k$ state variables can be realized using $k$ D flip-flops, a next-state ROM with $m + k$ inputs ($2^{m+k}$ words) and $k$ outputs, and an output ROM with $k$ inputs ($2^k$ words) and $n$ outputs.
+\eit
+Use of D flip-flops is preferable because use of two-input flip-flops would require increasing the number of outputs from the ROM. The fact that the D flip-flop input equations could require more gates is of no consequence because the size of the ROM depends only on the number of inputs and outputs and not on the complexity of the equations being realized. For this reason, the state assignment is also of no consequence.
+\sssc{Design of Sequential Circuits Using PLAs}
+The next-state and output combinational subcircuits of a sequential circuit can be realized using PLAs (programmable logic arrays). However, in the case of PLAs, the state assignment may be important because the use of a good state assignment can reduce the required number of product terms and, hence, reduce the required size of the PLA.
+\sssc{Design of Sequential Circuits Using CPLDs and FGPAs}
+When designing with CPLDs and FPGAs, we should keep in mind that flip-flops in logic cells are there whether we use them or not. This means that it may not be important to minimize the number of flip-flops used in the design. Instead, we should try to reduce the total number of logic cells used and the interconnections between cells since the propagation delay is longer when several cells are cascaded to realize a function. Using a one-hot or one-cold encoding for state assignment may help to accomplish this.
+
 When designing with CPLDs or FPGAs, you should try both an assignment with a minimum number of state variables and a one-hot (or one-cold) assignment to see which one leads to a design with the smallest number of logic cells and/or fewest interconnections among cells.
+\ssc{Simulation and Testing}
+Simulation of sequential circuits is similar to the simulation of combinational circuits. However, the delays associated with the individual logic elements must be taken into account and modeled during simulation. The simulator output usually includes timing diagrams which show the times at which different signals in the circuit change. The simplest method for functional analysis is to assume that each element has one unit of delay. If a more detailed timing analysis is required, each logic element may be assigned nominal delay values, which are usually provided by the device manufacturer on the specification sheets. In Verilog/SystemVerilog, minimum, typical, and maximum delay values can be specified in a triple \verb|#(min:typ:max)|, e.g.,
+\begin{lstlisting}[language=Verilog]
+nand #(2:3:5) g1 (y, a, b);
+\end{lstlisting}
+and
+\begin{lstlisting}[language=Verilog]
+assign #(1:2:4) y = a & b;
+\end{lstlisting}
+, to be used in simulators, typically with \verb|+mindelays|, \verb|+typdelays|, and \verb|+maxdelays|. Another commonly used way of specifying them is SDF (Standard Delay Format) Back-Annotation, which typically come from an SDF file generated by static timing analysis tools, and can be used in Verilog/SystemVerilog with \verb|$sdf_annotate|, e.g.,
+\begin{lstlisting}[language=Verilog]
+$sdf_annotate("design.sdf", dut);
+\end{lstlisting}
+.
+
+Testing of sequential circuits is generally more difficult than testing combinational circuits. If the flip-flop outputs can be observed, then the state table can be verified directly on a row-by-row basis with a simulator or in lab as follows for each present state in the table:
+\ben
+\item Use the preset and clear inputs to set the flip-flop states to the present state.
+\item For a Moore machine, check to see that the output is correct. For a Mealy machine, check to see that the output is correct for each input combination.
+\item For each input combination, clock the circuit and check to see that the next state of the flip-flops is correct.
+\een
+
+In the cases where a sequential circuit is implemented as part of an integrated circuit, only the inputs and outputs are available at the IC pins, and observing the state of the internal flip-flops is Impossible, test must be done by applying input sequences to the circuit and observing the output sequences. The set of test sequences must traverse all arcs on the state graph, but this is typically not a sufficient test.
+
 \end{document}
 
