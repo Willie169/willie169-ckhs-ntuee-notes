@@ -663,7 +663,7 @@ The operation of finding the Fréchet derivative or Fréchet derivative function
 Specifically, the $0$th(-order) Fréchet derivative of $f$ is $f$ itself.
 \ssc{Smoothness (光滑性 or 平滑性)}
 \sssc{Continuously differentiable functions}
-A function is called continuously ($n$-times) differentiable iff it is ($n$-times) differentiable and its ($n$th) derivative is continuous.
+A function is called ($n$-times) continuously differentiable iff it is ($n$-times) differentiable and its ($n$th) derivative is continuous.
 \sssc{Smoothness}
 A function $f$ with real domain that has a derivative that is continuous on its domain is said to be of class $C^1$ or continuously differentiable, denoted as $f\in C^1$, or be a $C^1$-function.
 
@@ -940,8 +940,10 @@ if the limit exists.
 If an improper integral converges, the p.v. of it converges.
 \ssc{Riemann–Stieltjes integral}
 \sssc{Definition}
-Below, we will define the Riemann–Stieltjes integral of a function $f\colon X\subseteq\bbR\to\bbR$ over another function $g\colon Y\subseteq\bbR\to\bbR$ over an interval $[a,b]\subseteq (X\cap Y)$,
-\[\int_{x=a}^bf(x)\dd{g(x)}.\]
+Below, we will define the Riemann–Stieltjes integral of a function $f\colon X\subseteq\bbR\to\bbR$ over another function $g\colon Y\subseteq\bbR\to\bbR$ over an interval $[a,b]\subseteq (X\cap Y)$, denoted as
+\[\int_{x=a}^bf(x)\dd{g(x)},\]
+or
+\[\int_a^bf(x)\dd{g(x)}.\]
 
 The Riemann–Stieltjes sum of $f$ with respect to $g$ over a tagged partition $P(x,n,\xi)$ is defined as
 \[S(f,g,P):=\sum_{i=0}^{n-1}f(\xi_i)\left(g\qty(x_{i+1})-g(x_i)\right).\]
@@ -2625,7 +2627,7 @@ Let:
 &=\frac{e^{ax}}{a^2+b^2}\qty(a\sin(bx)-b\cos(bx))+C.
 \ea\]
 \ssc{Riemann–Stieltjes integral theorems}
-\sssc{Integration by parts or partial integration of Riemann–Stieltjes integral}
+\sssc{Integration by parts (IBP) or partial integration of Riemann–Stieltjes integral}
 \[\int_{x=a}^bf(x)\dd{g(x)}=f(b)g(b)-f(a)g(a)-\int_{x=a}^bg(x)\dd{f(x)}.\]
 \begin{proof}
 PLACEHOLDER
@@ -2826,49 +2828,6 @@ Green's theorem is a special case of Stokes' theorem.
 \sssc{Generalized Stokes theorem, Stokes–Cartan theorem, or fundamental theorem of multivariable calculus}
 The generalized Stokes theorem says that the integral of a differential form $\omega$ over the boundary $\partial\Omega$ of some orientable manifold $\Omega$ is equal to the integral of its exterior derivative $\mathrm{d}\boldsymbol{\omega}$ over the whole of $\Omega$, i.e.,
 \[\int _{\partial\Omega}\omega=\int_{\Omega}\mathrm{d}\boldsymbol{\omega}\]
-\ssc{Volume as definite integral}
-The volume of a solid lying between $x=a$ and $x=b$ with $a<b$ whose cross-sectional area to the $x$-axis at position $x$ is $A(x)$ is
-\[\int_a^bf(x)\dd{x}.\]
-\ssc{Solid of revolution}
-\sssc{Disc method or disc integration}
-The volume of the solid formed by rotating the area between the curves of $f(x)$ and $g(x)$ and the lines $x=a$ and $x=b$ with $a<b$ about the $x$-axis is given by 
-\[V=\pi\int_a^b\abs{f(x)^2-g(x)^2}\dd{x},\]
-aka Washer method.
-
-If $g(x)=0$ (e.g. revolving an area between the curve and the y-axis), this reduces to: 
-\[V=\pi\int_a^bf(x)^2\dd{x}.\]
-\sssc{Shell method or shell integration}
-The volume of the solid formed by rotating the area between the curves of $f(x)$ and $g(x)$ and the lines $x=a$ and $x=b$ with $a<b$ about the $y$-axis is given by 
-\[V=2\pi\int_a^bx\abs{f(x)-g(x)}\dd{x}.\]
-\ssc{Arc length}
-\sssc{Limit-of-polygons definition}
-Given a curve $\gamma(t)=(x(t),y(t))$ between $t=a$ and $t=b$ with $a<b$. Let $P(x,n)$ be a partition of interval $[a,b]$. Define
-\[L(P)=\sum_{i=1}^n\|\gamm(i)-\gamma(i-1)\|.\]
-The arc length of the curve between $t=a$ and $t=b$ is defined as
-\[L=\lim_{n\to\infty}L(P).\]
-\sssc{Integral for differentiable curve}
-The arc length of a differentiable curve $\gamma(t)=(x(t),y(t))$ between $t=a$ and $t=b$ with $a<b$ is
-\[L=\int_a^b\sqrt{\qty(\dv{x}{t})^2+\qty(\dv{y}{t})^2}\dd{t}.\]
-
-In a special case of curve $y=f(x)$, the arc length of it between $x=a$ and $x=b$ with $a<b$ is
-\[L=\int_a^b\sqrt{1+\qty(\dv{f}{x})^2}\dd{x}.\]
-\ssc{Average value}
-The average value of a function $f(x)$ between $x=a$ and $x=b$ with $a<b$ is
-\[\frac{1}{b-a}\int_a^bf(x)\dd{x}.\]
-\ssc{Area of Lune}
-The area of the crescent-shaped region (called a lune) bounded by arcs of circles $C:x^2+y^2=r^2$ and $D:x^2+(y+\sqrt{R^2-r^2})^2=R^2$ inside the circle $C$ outside of the circle $D$ is
-\[\frac{\pi r^2}{2}+r\sqrt{R^2-r^2}-R^2\arcsin(\frac{r}{R}).\]
-\begin{proof}
-\[y=\sqrt{r^2-x^2}\]
-\[y=\sqrt{R^2-x^2}-\sqrt{R^2-r^2}\]
-\[\int_{-r}^r\sqrt{r^2-x^2}-\sqrt{R^2-x^2}+\sqrt{R^2-r^2}\dd{x}=\frac{\pi r^2}{2}+2r\sqrt{R^2-r^2}-R^2\int_{-r/R}^{r/R}\sqrt{1-u^2}\dd{u},\quad u=\frac{x}{R},\quad\dd{u}=\frac{1}{R}\dd{x}\]
-\[\ba
-\int_{-r/R}^{r/R}\sqrt{1-u^2}\dd{u}&=\int_{\arcsin(-r/R)}^{\arcsin(r/R)}\cos^2t\dd{t},\quad u=\sin t,\quad\dd{u}=\cos t\dd{t}\\
-&=\frac{1}{2}\int_{\arcsin(-r/R)}^{\arcsin(r/R)}1+\cos(2t)\dd{t}\\
-&=\arcsin(\frac{r}{R})+\frac{r}{R}\sqrt{1-\qty(\frac{r}{R})^2}
-\ea\]
-\[\int_{-r}^r\sqrt{r^2-x^2}-\sqrt{R^2-x^2}+\sqrt{R^2-r^2}\dd{x}=\frac{\pi r^2}{2}+r\sqrt{R^2-r^2}-R^2\arcsin(\frac{r}{R})\]
-\end{proof}
 \ssc{Numerical integration (數值積分)}
 \sssc{Left and right endpoint rule}
 Let $f$ be a continuous real-valued function on $[a,b]$. The left endpoint rule gives the approximation of $\int_a^bf(x)\dd{x}$
@@ -2911,6 +2870,108 @@ Let $f\colon X\subseteq\bbR\to\bbR$ be a function. If $f$ is differentiable over
 \[V_a^b(f)=\int_a^b\abs{f'(x)}\dd{x}.\]
 \sssc{Theorem of total variation of differentiable real fields}
 PLACEHOLDER
+
+
+
+\sct{Integral Geometry}
+\ssc{Average value}
+\sssc{Plane region}
+The area $A$ and average $(\bar{x},\bar{y})$ of the plane region bounded by $y=f(x)$,$y=g(x)$, $x=a$, and $x=b$ with $a<b$ is given by
+\[A=\int_a^b\abs{f(x)-g(x)}\dd{x},\]
+\[\bar{x}=\frac{1}{A}\int_a^bx\abs{f(x)-g(x)}\dd{x},\]
+\[\bar{y}=\frac{1}{2A}\int_a^b\abs{f(x)-g(x)}(f(x)+g(x))\dd{x}.\]
+If $f(x)\geq g(x)$,
+\[A=\int_a^bf(x)-g(x)\dd{x},\]
+\[\bar{x}=\frac{1}{A}\int_a^bxf(x)-g(x)\dd{x},\]
+\[\bar{y}=\frac{1}{2A}\int_a^b(f(x))^2-(g(x))^2\dd{x}.\]
+\ssc{Arc Length}
+\sssc{Definition}
+Given a curve $\gamma(t)=(x_1(t),x_2(t),\quad,x_n(t)),\quad t\in[a,b]$. Let $P(t,k)$ be a partition of interval $[a,b]$. Define the polygonal length of $\gamma$ along $P(t,k)$ as
+\[s(P(t,k))=\sum_{i=1}^k\|\gamma(i)-\gamma(i-1)\|.\]
+The arc length of the curve is
+\[s=\sup_{P\in\mathcal{P}}s(P),\]
+where $\mathcal{P}$ is the set of all partitions of interval $[a,b]$.
+
+$s$ is finite iff all $x_i(t)$ is of bounded variation.
+\begin{proof}
+"If" direction:
+
+By triangular inequality,
+\[\|\gamma(i)-\gamma(i-1)\|\leq\sum_{j=1}^n\abs{x_j(i)-x_j(i-1)}.\]
+\[\sum_{i=1}^k\|\gamma(i)-\gamma(i-1)\|\leq\sum_{i=1}^k\sum_{j=1}^n\abs{x_j(i)-x_j(i-1)}=\sum_{j=1}^n\sum_{i=1}^k\abs{x_j(i)-x_j(i-1)}<\infty.\]
+
+"Only if" direction:
+
+By triangular inequality, for every $j\in\bbN\land j\leq n$,
+\[\abs{x_j(i)-x_j(i-1)}\leq\|\gamma(i)-\gamma(i-1)\|.\]
+\[\sum_{i=1}^k\abs{x_j(i)-x_j(i-1)}\leq\sum_{i=1}^k\|\gamma(i)-\gamma(i-1)\|<\infty.\]
+\end{proof}
+
+The arc length function of the curve from $a$ is defined a function of $t$ that maps $t\geq a$ to the arc length of $\gamma$ between $a$ and $t$.
+\sssc{For differentiable curve}
+If $\gamma$ is differentiable, the arc length is
+\[s=\int_a^b\|\dv{\gamma(t)}{t}\|\dd{t},\]
+and the arc length function of it from $a$ is
+\[s(t)=\int_a^t\|\dv{\gamma(u)}{u}\|\dd{u},\quad t\geq a.\]
+\sssc{For differentiable function}
+Given differentiable function $y=f(x),\quad x\in[a,b]$. The arc length of it is
+\[s=\int_a^b\|1+f'(x)\|\dd{x}.\]
+$s$ is finite iff $f(x)$ is of bounded variation.
+
+The arc length function of it from $a$ is
+\[s(x)=\int_a^x\|1+f'(t)\|\dd{t},\quad x\geq a.\]
+\ssc{Surface of revolution}
+\sssc{Definition}
+The surface formed by rotating the curve $\gamma(t)=(x(t),y(t),z(t)),\quad t\in[a,b]$ about rotational axis $\mb{P}+\mb{k}s,\quad s\in\bbR$ with $\mb{P},\mb{k}\in\bbR^3$ and $\|\mb{k}\|=1$ is parameterized as
+\[R(t,\theta)=\mb{P}+\qty(\gamma(t)-\mb{P})\cos\theta+(\mb{k}\times\qty(\gamma(t)-\mb{P}))\sin\theta+\mb{k}(\mb{k}\cdot\qty(\gamma(t)-\mb{P}))(1-\cos\theta),\quad t\in[a,b]\land\theta\in[0,2\pi].\]
+And its area is
+\[A=2\pi\int_{t=a}^b\norm{\gamma(t)-\mb{P}-\mb{k}(\mb{k}\cdot\qty(\gamma(t)-\mb{P}))}\dd{s(t)},\]
+where $s(t)$ is the arc length function of $\gamma$ from $a$.
+
+$A$ is finite iff $x(t)$, $y(t)$, and $z(t)$ are all of bounded variation iff $s(t)$ is of bounded variation.
+\sssc{Two-dimensional curve about principal axis on the same plane}
+The area of the surface formed by rotating the curve $\gamma(t)=(x(t),y(t)),\quad t\in[a,b]$ about $y=d$ is
+\[A=2\pi\int_{t=a}^b\abs{y(t)-d}\dd{s(t)},\]
+where $s(t)$ is the arc length function of $\gamma$ from $a$.
+\sssc{Pappus's (centroid) theorem I or (Pappus–)Guldinus theorem I}
+The area of the surface formed by rotating a two-dimensional curve with arc length $s$ and centroid $\mb{P}$ about a rotational axis on the same plane of the curve that doesn't cut the curve in a distance $d$ from $\mb{P}$ is
+\[A=2\pi sd.\]
+\begin{proof}
+Let the curve be $\gamma(t)=(x(t),y(t)),\quad t\in[a,b]$, $s(t)$ be the arc length function of it, the centroid of it be the origin, that is, 
+\[\int\gamma(t)\dd{s(t)}=(0,0),\]
+and the rotational axis is $y=d$.
+\[\ba
+A&=2\pi\int_{t=a}^b\abs{y(t)-d}\dd{s(t)}\\
+&=2\pi\abs{\int_{t=a}^by(t)\dd{s(t)}-\int_{t=a}^bd\dd{s(t)}}\\
+&=2\pi sd
+\ea\]
+\end{proof}
+\ssc{Solid of revolution}
+\sssc{Disc method or disc integration}
+The volume of the solid formed by rotating the area bounded by $y=f(x)$,$y=g(x)$, $x=a$, and $x=b$ with $a<b$ about the $x$-axis is given by 
+\[V=\pi\int_a^b\abs{f(x)^2-g(x)^2}\dd{x},\]
+aka Washer method.
+
+If $g(x)=0$ (e.g. revolving an area between the curve and the y-axis), this reduces to: 
+\[V=\pi\int_a^bf(x)^2\dd{x}.\]
+\sssc{Shell method or shell integration}
+The volume of the solid formed by rotating the area bounded by $y=f(x)$,$y=g(x)$, $x=a$, and $x=b$ with $a<b$ about the $y$-axis is given by 
+\[V=2\pi\int_a^bx\abs{f(x)-g(x)}\dd{x}.\]
+\sssc{Pappus's (centroid) theorem II or (Pappus–)Guldinus theorem II}
+The volume of the solid formed by rotating a plane region with area $A$ and centroid $\mb{P}$ about a rotational axis on the same plane of the region that doesn't cut the region in a distance $d$ from $\mb{P}$ is
+\[V=2\pi Ad.\]
+\begin{proof}
+Let the rotational axis be the $y$-axis. Split the region to subregions such that each subregion is bounded by $y=f(x)$,$y=g(x)$, $x=a$, and $x=b$, for some functions $f(x)$ and $g(x)$ and some constant $a<b$.
+
+For each subregion,
+\[V=2\pi\int_a^bx\abs{f(x)-g(x)}\dd{x}.\]
+\[Ad=\int_a^bx\abs{f(x)-g(x)}\dd{x}.\]
+\[V=2\pi Ad.\]
+
+The sum of the volume of the solid formed by rotating the subregions is the volume of the solid formed by rotating the original region. The average of the centroids $\mb{P}_i=(d_i,y_i)$ of the subregions weighted by their areas $A_i$ is the centroid $\mb{P}=(d,p_y)$ of the original region.
+\[\mb{P}=\frac{\sum_iA_i\mb{P}_i}{A}\]
+\[V=\sum_iV_i=\sum_iA_id_i=A\frac{\sum_iA_id_i}{A}=Ad.\]
+\end{proof}
 
 
 

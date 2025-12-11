@@ -132,6 +132,15 @@ A topological space $X$ is called compact if and only if for every collection $C
 called a open cover, there is a finite subcollection $F\subseteq C$ such that
 \[X=\bigcup _{S\in F}S,\]
 called a finite subcover.
+\sssc{Second-countable space or completely separable space}
+A topological space is second-countable iff it has a countable basis.
+\ssc{Homeomorphism or isomorphism}
+A function $f$ between two topological spaces is a homeomorphism if it has the following properties:
+\bit
+\item $f$ is a bijection,
+\item $f$ is continuous,
+\item $f^{-1}$ is continuous.
+\eit
 \subsection{Compact (緊緻) subset}
 A subset $K$ of a topological space $X$ is said to be compact if for every collection $C$ of open subsets of $X$ such that
 \[K\subseteq\bigcup_{S\in C}S,\]
@@ -142,6 +151,16 @@ called a finite subcover.
 Let $X$ be a topological space, and $\{U_i\mid i\in I\}$ be a cover of $X$. We say that $U$ is locally finite if for all $x\in X$, there exists $V\ni x$ that is open in $X$ such that the set $\{i\in I\mid V\cap U_i\neq\varnothing\}$ is finite.
 \ssc{Dense (稠密) subset}
 A subset $A$ of a topological space $X$ is said to be a dense subset of $X$ if for every $x\in X$ and every neighborhood $U$ of $x$, $U\cap A\neq\varnothing$.
+\ssc{Comparison of topologies}
+Let $\tau_1$ and $\tau_2$ be two topologies on a set $X$.
+
+$\tau_1$ is said to be a coarser (weaker or smaller) topology than $\tau_2$, and $\tau_2$ is said to be a finer (stronger or larger) topology than $\tau_1$, iff $\tau_1$ is a subset of $\tau_2$.
+
+$\tau_1$ is said to be a strictly coarser topology than $\tau_2$, and $\tau_2$ is said to be a strictly finer topology than $\tau_1$, iff $\tau_1$ is a proper subset of $\tau_2$.
+
+The binary relation $\subseteq$ defines a partial ordering relation on the set of all possible topologies on $X$.
+\ssc{Product topology or Tychonoff topology}
+The product topology or Tychonoff topology on a set $X=\prod_{i=1}^nX_i$ where $X_i$ are topological spaces and $n>1$ is defined as the coarsest topology on $X$ such that all $i$th projection map are continuous. $X$ with the product topology on $X$ is called a product space. Unless otherwise specified, product topology is assumed on a Cartesian product of topological spaces.
 \subsection{Metric space (度量空間 or 賦距空間)}
 \sssc{Metric space}
 Metric space is an ordered pair $(M, d)$ where $M$ is a set and $d$ is a metric on M, i.e., a function $d:\,M\times M\to\mathbb{R}$ satisfying the following axioms for all points $x,y,z\in M$:
@@ -318,7 +337,7 @@ called that the two norms are equivalent, and $c,C$ are called the equivalence c
 \Textit{Statement:} If a subset $A$ of a $n$-dimensional Banach space $X$ with $n\in\bbN$ is bounded, then $A$ is totally bounded.
 
 \begin{proof}
-    Pick a linear isomorphism
+    Pick a linear homeomorphism
     \[T\colon\bbR^n\to X.\]
     Define a norm on $\bbbR^n$ by
     \[\|v\|_*\coloneq\|Tv\|_X,\quad\forall v\in\bbR^n.\]
@@ -333,8 +352,6 @@ called that the two norms are equivalent, and $c,C$ are called the equivalence c
     \[\|T(b)-T(v_i)\|_X=\|b-v_i\|_*\leq C\|b-v_i\|_2<C\delta=\varepsilon.\]
     Therefore the finite set of all $T(v_i)$ is an $\varepsilon$-net for $A$. Since $\varepsilon>0$ was arbitrary, $A$ is totally bounded.
 \end{proof}
-\subsection{Topological field (拓樸域)}
-A topological field is a topological space, such that addition, multiplication, the maps $a\mapsto -a$, and $a\mapsto a^{-1}$ are continuous maps with respect to the topology of the space.
 \ssc{Net (網)}
 \sssc{Net (網)}
 A net in $X$, denoted as $x_{\bullet }=\left(x_{a}\right)_{a\in A}$ or $\left\langle x_{a}\right\rangle _{a\in A}$, is a function of the form $x_{\bullet }\colon A\to X$ whose domain $A$ is some directed set, and whose values are $x_{\bullet }(a)=x_{a}$ in a topological space $X$. Elements of a net's domain are called its indices.
@@ -360,4 +377,60 @@ A net $x_{\bullet }$ in $X$ is called an ultranet or a universal net if for ever
 A point is a limit point of a ultranet if and only if it a cluster point of it.
 \sssc{In Hausdorff spaces}
 A net in a Hausdorff space has at most one limit; if it has one, the limit point of it is the only cluster point of it.
+\ssc{Manifold}
+\sssc{Euclidean neighborhood}
+An Euclidean neighborhood of a point in a topological space is a neighborhood of it that is homeomorphic to an open subset of $\bbR^n$ for some $n\in\bbN_0$. Such Euclidean neighborhood is called $n$-dimensional.
+
+A Euclidean neighborhood homeomorphic to an open ball in $\bbR^n$ is called a Euclidean ball.
+\sssc{Locally Euclidean space}
+A topological space $X$ is called locally Euclidean iff it can be covered by $n$-dimensional Euclidean neighborhoods for some $n\in\bbN_0$. Such locally Euclidean space is called $n$-dimensional or an $n$-locally Euclidean space.
+
+Euclidean balls form a basis for the topology of a locally Euclidean space.
+\sssc{(Topological) manifold (流形)}
+A (topological) manifold is a locally Euclidean space that is a Hausdorff space. An $n$-dimensional (topological) manifold or $n$-manifold is an $n$-dimensional locally Euclidean space that is a Hausdorff space.
+\sssc{(Coordinate) chart}
+For any Euclidean neighborhood $U$, a homeomorphism $\phi\colon U\to\phi\left(U\right)\subseteq\bbR^n$ is called a (coordinate) chart on $U$.
+\sssc{Atlas}
+For a locally Euclidean space $M$, an atlas $\{(U_i,\phi_i)\mid i\in I\}$ on $M$ is a family of ordered pairs of Euclidean neighborhood $U_i$ and coordinate chart $\phi_i$ on $U_i$ such that $\{U_i\mid i\in I\}$ covers $M$.
+\sssc{Transition function or transition map}
+For an atlas $\{(U_i,\phi_i)\mid i\in I\}$ on an $n$-dimensional locally Euclidean space $M$, the transition function $\phi_i\phi_j^{\pht{j}-1}$ for $i,j\in I$ is defined as the function
+\[\phi_i\phi_j^{\pht{j}-1}\colon\phi_i(U_i\cap U_j)\to\phi_j(U_i\cap U_j);\;x\mapsto\phi_i(\phi_j^{\pht{j}-1}(x)).\]
+Such a map is a homeomorphism between open subsets of $\bbR^n$.
+\sssc{Differentiable and smooth}
+An atlas $\{(U_i,\phi_i)\mid i\in I\}$ is called a differentiable atlas iff for all $i,j\in I$, the transition map $\phi_i\phi_j^{\pht{j}-1}$ is differentiable.
+
+An atlas $\{(U_i,\phi_i)\mid i\in I\}$ is called a ($n$-times) continuously differentiable atlas iff for all $i,j\in I$, the transition map $\phi_i\phi_j^{\pht{j}-1}$ is ($n$-times) continuously differentiable.
+
+An atlas $\{(U_i,\phi_i)\mid i\in I\}$ is called a $C^k$ atlas iff for all $i,j\in I$, the transition map $\phi_i\phi_j^{\pht{j}-1}$ is a $C^k$ function.
+
+An atlas $\{(U_i,\phi_i)\mid i\in I\}$ is called a smooth ($C^\infty$) atlas iff for all $i,j\in I$, the transition map $\phi_i\phi_j^{\pht{j}-1}$ is a smooth ($C^\infty$) function.
+
+A differentiable manifold is a manifold such that there exists a differentiable atlas on it.
+
+A ($n$-times) continuously differentiable manifold is a manifold such that there exists a ($n$-times) continuously differentiable atlas on it.
+
+A $C^k$ manifold is a manifold such that there exists a $C^k$ atlas on it.
+
+A smooth ($C^\infty$) manifold is a manifold such that there exists a smooth ($C^\infty$) atlas on it.
+
+Let $M$ be an $n$-dimensional differentiable manifold with differentiable atlas $\{(U_i,\phi_i)\mid i\in I\}$. A map $f\colon M\to M$ is a differentiable map iff for any charts $(U_i,\phi_i)$ such that $p\in U_i\land i\in I$ and $(U_j,\phi_j)$ such that $f(p)\in U_j\land j\in I$,
+\[\phi_j\circ f\circ\phi_i^{\pht{i}-1}\colon\phi_i(U_i\cap f^{-1}(U_j))\subseteq\bbR^n\to\bbR^n\]
+is differentiable.
+
+Let $M$ be an $n$-dimensional ($n$-times) continuously differentiable manifold with ($n$-times) continuously differentiable atlas $\{(U_i,\phi_i)\mid i\in I\}$. A map $f\colon M\to M$ is an ($n$-times) continuously differentiable map iff for any charts $(U_i,\phi_i)$ such that $p\in U_i\land i\in I$ and $(U_j,\phi_j)$ such that $f(p)\in U_j\land j\in I$,
+\[\phi_j\circ f\circ\phi_i^{\pht{i}-1}\colon\phi_i(U_i\cap f^{-1}(U_j))\subseteq\bbR^n\to\bbR^n\]
+is ($n$-times) continuously differentiable.
+
+Let $M$ be an $n$-dimensional $C^k$ manifold with $C^k$ atlas $\{(U_i,\phi_i)\mid i\in I\}$. A map $f\colon M\to M$ is a $C^k$ map iff for any charts $(U_i,\phi_i)$ such that $p\in U_i\land i\in I$ and $(U_j,\phi_j)$ such that $f(p)\in U_j\land j\in I$,
+\[\phi_j\circ f\circ\phi_i^{\pht{i}-1}\colon\phi_i(U_i\cap f^{-1}(U_j))\subseteq\bbR^n\to\bbR^n\]
+is a $C^k$ function.
+
+Let $M$ be an $n$-dimensional smooth ($C^\infty$) manifold with smooth ($C^\infty$) atlas $\{(U_i,\phi_i)\mid i\in I\}$. A map $f\colon M\to M$ is a smooth ($C^\infty$) map iff for any charts $(U_i,\phi_i)$ such that $p\in U_i\land i\in I$ and $(U_j,\phi_j)$ such that $f(p)\in U_j\land j\in I$,
+\[\phi_j\circ f\circ\phi_i^{\pht{i}-1}\colon\phi_i(U_i\cap f^{-1}(U_j))\subseteq\bbR^n\to\bbR^n\]
+is a smooth ($C^\infty$) function.
+\ssc{Combination with abstract algebra}
+\sssc{Topological group (拓樸群)}
+A topological group is a triple $(X,\tau,*)$ such that $(X,\tau)$ is a topological space, $(X,*)$ is a group, and the maps of $(x,y)\in X^2\mapsto x*y$ and $x\mapsto x^{-1}$ are continuous mapa. Such topology $\tau$ is called a group topology.
+\sssc{Topological field (拓樸域)}
+A topological field is defined with a topological space $(X,\tau)$ and a field $(X,+,*)$ such that the maps of $a\mapsto -a$ and $a\mapsto a^{-1}$ are continuous maps.
 \end{document}

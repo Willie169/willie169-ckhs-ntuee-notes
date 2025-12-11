@@ -472,11 +472,15 @@ Properties:
 \sct{Transformation Matrices}
 \ssc{Groups}
 \sssc{General linear group}
-The general linear group of degree $n$ over some field $F$ is the set of $n\times n$ invertible matrices over $F$, together with the operation of matrix multiplication, denoted as $\operatorname{GL}(n,F)$ or $\operatorname{GL}_n(F)$, or simply $\operatorname{GL}(n)$ if the field is understood.
+The general linear group of degree $n$ over some field $F$ is the set of $n\times n$ invertible matrices over $F$, together with the operation of matrix multiplication, denoted as $\operatorname{GL}(n,F)$ or $\operatorname{GL}_n(F)$, or simply $\operatorname{GL}(n)$ if the field is understood. It is a topological group and a Lie group under operation $+$.
+
+The Lie algebra of a general linear group is denoted as the symbol of the general linear group with $\operatorname{GL}$ replaced with $$\operatorname{\mathfrak{gl}}$.
 \sssc{Orthogonal group or general orthogonal group}
-The orthogonal group or general orthogonal group of degree $n$ over some field $F$ is the set of $n\times n$ invertible matrices over $F$ such that the inverse equals the transpose, together with the operation of matrix multiplication, denoted as $\operatorname{O}(n,F)$ or $\operatorname{O}_n(F)$, or simply $\operatorname{O}(n)$ if the field is understood. An element of an orthogonal group is called an orthogonal matrix.
+The orthogonal group or general orthogonal group of degree $n$ over some field $F$ is the set of $n\times n$ invertible matrices over $F$ such that the inverse equals the transpose, together with the operation of matrix multiplication, denoted as $\operatorname{O}(n,F)$ or $\operatorname{O}_n(F)$, or simply $\operatorname{O}(n)$ if the field is understood. An element of an orthogonal group is called an orthogonal matrix. It is a topological group and a Lie group under operation $+$.
 \sssc{Special orthogonal group or rotation group}
-The special orthogonal group or rotation group of degree $n$ over some field $F$ is a subgroup of the orthogonal group of degree $n$ over some field $F$ such that for any matrix in it, the determinant is 1, that is, it preserves the orientation, denoted as $\operatorname{SO}(n,F)$ or $\operatorname{SO}_n(F)$, or simply $\operatorname{SO}(n)$ if the field is understood. An element of a special orthogonal group is called an rotational matrix.
+The special orthogonal group or rotation group of degree $n$ over some field $F$ is a subgroup of the orthogonal group of degree $n$ over some field $F$ such that for any matrix in it, the determinant is 1, that is, it preserves the orientation, denoted as $\operatorname{SO}(n,F)$ or $\operatorname{SO}_n(F)$, or simply $\operatorname{SO}(n)$ if the field is understood. An element of a special orthogonal group is called an rotational matrix. It is a topological group and a Lie group under operation $+$.
+
+The Lie algebra of a special orthogonal group is denoted as the symbol of the special orthogonal group with $\operatorname{SO}$ replaced with $$\operatorname{\mathfrak{so}}$.
 \ssc{Transformation matrices in two-dimensional space}
 \sssc{Degenerate matrices}
 Degenerate to 1 dimension ($(a\lor b)\land (d\lor e)\neq 0$):
@@ -620,6 +624,18 @@ A rotation by an angle $\theta$ counterclockwise about a line that passes the or
 a^2(1-\cos\theta)+\cos\theta & ab(1-\cos\theta)-c\sin\theta & ac(1-\cos\theta )+b\sin\theta\\
 bc(1-\cos\theta )+c\sin\theta & b^2(1-\cos\theta )+\cos\theta & bc(1-\cos\theta )-a\sin\theta\\
 ac(1-\cos\theta )-b\sin\theta & bc(1-\cos\theta )+a\sin\theta & c^2(1-\cos\theta )+\cos\theta \end{bmatrix}\]
+\sssc{Rodrigues' rotation formula}
+If $\mb{v},\mb{k}\in\bbR^3$ and $\mb{k}$ is a unit vector describing an axis of rotation about which $\mb{v}$ rotates by an angle $\theta$ according to the right hand rule, the Rodrigues formula for the rotated vector $\mb{v}_r$ is 
+\[\mb{v}_r=\mb{v}\cos\theta+(\mb{k}\times\mb{v})\sin\theta+\mb{k}(\mb{k}\cdot\mb{v})(1-\cos\theta).\]
+The skew-symmetric matrix $\mb{K}$ in Lie algebra $\operatorname{\mathfrak{so}}(3)$ that generates the one-parameter subgroup of $\operatorname{SO}(3)$:
+\[\mb{R}(\theta)=\exp(\theta\mb{K}),\]
+such that
+\[\mb{v}_r=\mb{R}(\theta)\mb{v},\]
+is given by
+\[\mb{K}\mb{v}=\mb{k}\times\mb{v},\quad \forall \mb{v}\in\bbR^3,\]
+and
+\[\mb{R}(\theta)=\mb{I}+\sin\theta\mb{K}+(1-\cos\theta)\mb{K}^2,\]
+where $\mb{I}$ is the $3\times 3$ identity matrix.
 \sssc{Reflection (鏡射/反射)}
 A reflection about a plane $ax+by+cz=0$ is given by:
 \[\mathbf{I}-\frac{1}{a^2+b^2+c^2}\begin{bmatrix}
