@@ -75,14 +75,15 @@ Blood pressure is measured in gauge pressure.
 \item\textbf{上浮}：一個動態過程，最終達到漂浮。
 \item\textbf{下沉}：一個動態過程，最終達到沉底。
 \end{itemize}
-\ssc{流體運動（Fluid motion）}
-\sssc{物質導數（Material derivative）/隨質導數（Substantial derivative）}
-對於任意場$\mb{y}$，其物質導數$\frac{\mathrm{D}\mb{y}}{\mathrm{D}t}$定義為：
-\[\frac{\mathrm{D}\mb{y}}{\mathrm{D}t}=\pdv{\mb{y}}{t}+\mathbf{v}\cdot(\nabla \mb{y}).\]
-\sssc{連續性方程（Continuity equation or equation of continuity）/質量守恆}
-\[\frac{\partial\rho}{\partial t}+\nabla\cdot(\rho\mathbf{v})=0\]
-\sssc{納維-斯托克斯方程式（Navier–Stokes equations）/動量守恆}
-\[\rho\frac{\partial\mathbf{v}}{\partial t}+\rho(\mathbf{v}\cdot\nabla)\mathbf{v}=-\nabla p\]
+\ssc{Fluid Motion}
+\sssc{Material derivative (物質導數) or Substantial derivative(隨質導數)}
+\[\frac{\mathrm{D}}{\mathrm{D}t}=\pdv{}{t}+\mathbf{v}\cdot\nabla.\]
+\sssc{Continuity equation (連續性方程)}
+Describe the conversation of mass.
+\[\frac{\partial\rho}{\partial t}+\nabla\cdot(\rho\mathbf{v})=0.\]
+\sssc{Navier–Stokes Equations (納維-斯托克斯方程式) or Cauchy momentum equation}
+Describe the Newton's second law.
+\[\rho\frac{\mathrm{D}\mathbf{v}}{\mathrm{D} t}=\nabla\cdot\boldsymbol{\sigma}+\rho\mb{a}.\]
 \sssc{歐拉方程式（Euler equations）}
 對於零黏度、零導熱率的流體：
 \[\begin{aligned}
@@ -94,6 +95,7 @@ Blood pressure is measured in gauge pressure.
 對於不可壓縮的流體：
 \[\frac{\mathrm{D}\rho}{\mathrm{D}t}=0\]
 \[\frac{\mathrm{D}u}{\mathrm{D}t}=0\]
+連續性方程變為：
 \[\nabla\cdot\mathbf{v}=0\]
 \sssc{Laminar flow (層流) or steady flow}
 Laminar flow is the property of fluid particles to follow smooth paths in layers, with each layer moving smoothly past the adjacent layers without mixing, that is, the velocity of the moving fluid at any fixed point does not change with time.
@@ -138,3 +140,17 @@ where $C$ is the drag coefficient (阻力係數), a dimensionless number, which 
 \sssc{Stokes' law (斯托克定律)}
 In a laminar flow of fluid of homogeneous (uniform in composition) material with zero Reynolds number and dynamic viscosity $\mu$, and that particles do not interfere with each other, a sphere particle with radius $a$ and smooth surfaces moving in velocity $\mb{v}$ in the fluid is subjected to a drag force $\mb{F}$, known as Stokes' drag, given by
 \[\mb{F}=-6\pi\mu a\mb{v}.\]
+\sssc{(Hagen–)Poiseuille equation or (Hagen–)Poiseuille law}
+The assumptions are that the fluid is incompressible and Newtonian with constant viscosity; the laminar flow is steady, axisymmetric, fully developed, and with zero radial and azimuthal components of velocity through a pipe of constant circular cross-section that is substantially longer than its diameter and with no-slip boundary; and pressure varies only along the pipe.
+\[v(r)=\frac{\delta p}{4\mu L}\qty(R^2-r^2),\]
+\[Q=\frac{\pi R^4}{8\mu L}\delta p=\frac{\qty(2\pi R^2)^2}{8\pi\mu L}\delta p,\]
+where
+\bit
+\item $v(r)$ is the axial velocity of the fluid at radial position $r$,
+\item $\delta p$ is the pressure difference between the two ends,
+\item $L$ is the length of pipe,
+\item $\mu$ is the dynamic viscosity,
+\item $R$ is the pipe radius,
+\item $Q$ is the volumetric flow rate.
+\eit
+\end{document}
