@@ -205,7 +205,7 @@ Solution:
 \[A=V_0-IR\]
 \[V(t)=IR\qty(1-e^{-t/(RC)})+V_0e^{-t/(RC)}\]
 \end{proof}
-\ssc{Exact ODEs}
+\ssc{First-order Exact Equation}
 \sssc{Definition}
 A first-order ODE of the form
 \[M(x,y)\dd{x}+N(x,y)\dd{y}=0\]
@@ -233,14 +233,17 @@ with respect to $y$ to find $\phi(y)$.
 Fourth, substitute $\phi(y)$ back to find the potential function $F(x,y)$. The implicit solutions is given by
 \[F(x,y)=C,\]
 where $C$ is an arbitrary constant.
-\sssc{Integration factors to make non-exact first-order ODEs exact}
+\ssc{Integration factors to make non-exact first-order ODEs exact}
+\sssc{Definition}
 Given a first-order ODE of the form
 \[M(x,y)\dd{x}+N(x,y)\dd{y}=0,\]
 we define the integration factor $\mu(x,y)$ such that
 \[\mu(x,y)M(x,y)\dd{x}+\mu(x,y)N(x,y)\dd{y}=0\]
 is exact and with potential function $F$ such that
-\[\pdv{F}{x}=\mu(x,y)M(x,y),\quad\pdv{F}{y}=\mu(x,y)N(x,y).\]
-
+\[\pdv{F}{x}=\mu(x,y)M(x,y),\quad\pdv{F}{y}=\mu(x,y)N(x,y),\]
+that is,
+\[\pdv{\mu M}{y}=\pdv{\mu N}{x}.\]
+\sssc{Integration factor of one variable}
 If
 \[\frac{\pdv{M}{y}-\pdv{N}{x}}{N}\]
 depends only on $x$, we can construct integration factor $\mu(x)$ by letting
@@ -263,7 +266,27 @@ depends only on $y$, we can construct integration factor $\mu(y)$ by letting
 \[\frac{\mu'(y)}{\mu(y)}=\frac{\pdv{N}{x}-\pdv{M}{y}}{M},\]
 that is,
 \[\mu(y)=e^{\int\frac{\pdv{N}{x}-\pdv{M}{y}}{M}\dd{x}}.\]
-\ssc{Homogeneous first-order ODEs}
+\sssc{
+}
+\[\pdv{\mu M}{y}=\pdv{\mu N}{x}.\]
+
+PLACEHOLDER
+
+\sssc{Example: Lotka–Volterra equations or predator–prey equations}
+IVP:
+\[\dv{x}{t}=\alpha x-\beta xy,\]
+\[\dv{y}{t}=-\gamma y+\delta xy,\]
+\[x(0)=x_0,\quad y(0)=y_0.\]
+
+Solution:
+PLACEHOLDER
+\[\dv{y}{t}=\dv{y}{x}\dv{x}{t}\]
+\[\dv{y}{x}=\frac{-\gamma y+\delta xy}{\alpha x-\beta xy}\]
+\[\qty(\gamma y-\delta xy)\dd{x}+\qty(\alpha x-\beta xy)\dd{y}=0\]
+PLACEHOLDER
+
+
+\ssc{First-order Homogeneous Equation}
 \sssc{Definition}
 A first-order ODE of the form
 \[\dv{y}{x}=F(x,y)\]
@@ -288,7 +311,7 @@ which is a separable ODE that has the family of solutions
 \[\int\frac{1}{g(y)}\dd{y}=x\]
 and the constant solution
 \[g(y)=0.\]
-\ssc{Bernoulli differential equations}
+\ssc{Bernoulli differential equation}
 A first-order ODE of the form
 \[\dv{y}{x}+P(x)y=Q(x)y^n,\quad n\in\mathbb{R}\setminus\{0,1\}\]
 is called a Bernoulli differential equation.
@@ -316,7 +339,7 @@ Recall $v=y^{1-n}$, we obtain the family of general solutions.
 PLACEHOLDER: For F(x,y)=f(ax+by+c) solutions by substitution 
 
 
-
+PLACEHOLDER
 \ssc{General method for reducing first-order ODE to separable ODE with substitution}
 Consider a first-order ODE of the form
 \[\dv{y}{x}=F(x,y).\]
@@ -338,7 +361,7 @@ And $g(u)-q(u)=0$ is a constant solution.
 Substituting $u(x,y)$ back gives solutions for $y$.
 
 Finally, consider the singular solutions at points where the conditions fail.
-
+PLACEHOLDER
 
 
 
@@ -399,8 +422,8 @@ The set
 is called the orbit through $x$.
 
 An orbit which consists of a single point is called constant orbit; a non-constant orbit is called closed or periodic if there exists $t\neq 0\in I(x)$ such that $\Phi (t,x)=x$.
-\sssc{Phase portrait (相圖)}
-Given a dynamical system $(T, X, \Phi)$, the phase portrait is a geometric representation of the collection of all orbits $\gamma$ through any $x\in X$.
+\sssc{Phase trajectory and phase portrait (相圖)}
+Given a dynamical system $(T, X, \Phi)$, a phase trajectory is a geometric representation of an orbit $\gamma$, the phase portrait is a geometric representation of the collection of all orbits $\gamma$ through any $x\in X$.
 \sssc{Attractor (吸引子)}
 For a dynamical system $(\mathbb{R}, X, \Phi)$ with $D\subseteq X$ and $\Phi(t,x)\colon \mathbb{R}_{\geq 0}\times D\to X$, a non-empty subset $A$ of $D$ is called an attractor if and only if it satisfies the following three conditions:
 \bit
