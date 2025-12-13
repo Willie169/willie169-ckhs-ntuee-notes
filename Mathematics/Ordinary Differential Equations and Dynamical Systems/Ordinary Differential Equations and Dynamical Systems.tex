@@ -14,16 +14,6 @@
 The normal form of an $n$th-order ODE of a dependent variable $y$ in codomain $Y$ with respect to an independent variable $x$ in domain $X$ is
 \[\dv[n]{y}{x}=F(x,y,y',y'',\dots y^{(n-1)}),\]
 in which $F$ is a function of $(n+1)$ variables with codomain $Y$.
-\sssc{Linear ODE}
-An $n$th order ODE of a dependent variable $y$ with respect to an independent variable $x$ is linear if and only if it can be written of the form
-\[\sum_{i=0}^na_n(x)y^{(i)}=g(x),\]
-where $a_0(x),\dots a_n(x)$, called the coefficients, and $g(x)$, called the forcing term, are functions of $x$.
-
-An ODE is nonlinear if it is not linear.
-
-A linear ODE is called a homgeneous linear ODE if $g(x)=0$; otherwise, it is called a nonhomogeneous linear ODE.
-
-Let $L[y]=\sum_{i=0}^na_n(x)y^{(i)}$ denotes the left-hand side, then $L[\alpha y_1+\beta y_2]=\alpha L[y_1]+\beta L[y_2]$. That's why it's called to be linear.
 \sssc{System of ODEs (常微分方程組)}
 A system of ODEs is two or more equations involving the derivatives of two or more unknown functions or dependent variables of a single independent variable.
 \sssc{Initial-value problem (IVP) (初值問題)}
@@ -70,11 +60,9 @@ An orthogonal trajectory of a family of curves is a curve that intersects each c
 
 An isogonal trajectory of a family of curves is a curve that intersects each curve of the family at a same angle $\alpha$.
 \sct{First-order ODEs}
-Unless otherwise specified, the unknown functions or dependent variables are in $\mathbb{R}^n$ with $n\in\mathbb{N}$, and the independent variables are in $\mathbb{R}$.
-\ssc{Differential form of first-order ODEs}
-For a first-order ODE of a dependent variable $y$ with respect to an independent variable $x$,
-\[M(x,y)+N(x,y)\dv{y}{x}=0,\]
-where $M$ and $N$ are functions of two variables, $x$ and $y$, the differential form of it is
+Unless otherwise specified, the variables and functions are in $\mathbb{R}$.
+\ssc{Differential form}
+The differential form of a first-order ODE $M(x,y)+N(x,y)\dv{y}{x}=0$ is
 \[M(x,y)\dd{x}+N(x,y)\dd{y}=0.\]
 \ssc{Slope}
 \sssc{Slope function or rate function}
@@ -111,7 +99,7 @@ The family of the orthogonal trajectories of the family of solutions of the firs
 \[M(x,y)\dd{x}+N(x,y)\dd{y}=0,\]
 is the family of solutions of the first-order ODE
 \[N(x,y)\dd{x}-M(x,y)\dd{y}=0.\]
-\ssc{Separable Equation}
+\ssc{Separable equation}
 \sssc{Definition}
 A first-order ODE of the form
 \[\dv{y}{x}=g(x)h(y)\]
@@ -126,7 +114,7 @@ and the constant solution
 \sssc{Example: law of natural growth}
 IVP:
 \[\dv{P}{t}=kP,\quad P(0)=P_0.\]
-Solution:
+Solutions:
 \[P=P_0e^{kt}.\]
 \begin{proof}
 \[P^{-1}\dd{P}=k\dd{t}\]
@@ -137,7 +125,7 @@ Solution:
 \sssc{Example: logistic differential equation}
 IVP:
 \[\dv{P}{t}=kP\qty(1-\frac{P}{M}),\quad P(0)=P_0.\]
-Solution:
+Solutions:
 \[P=\frac{M}{1+\frac{M-P_0}{P_0}e^{-kt}}.\]
 \begin{proof}
 \[\frac{1}{P\qty(1-\frac{P}{M})}\dd{P}=k\dd{t}\]
@@ -152,7 +140,24 @@ Solution:
 \[A=\frac{P_0}{M-P_0}\]
 \[P=\frac{\frac{P_0}{M-P_0}Me^{kt}}{1+\frac{P_0}{M-P_0}e^{kt}}=\frac{M}{1+\frac{M-P_0}{P_0}e^{-kt}}\]
 \end{proof}
-\ssc{First-order Linear Equation}
+\sssc{Example: Lotka–Volterra equations or predator–prey equations}
+ODE:
+\[\dv{x}{t}=x(\alpha-\beta y),\]
+\[\dv{y}{t}=-y(\gamma-\delta x).\]
+
+Implicit solutions:
+\[\delta x-\gamma\ln(x)+\beta y-\alpha\ln(y)=C.\]
+Equilibrium solutions:
+\[x=0,\quad y=0,\]
+and
+\[x=\frac{\gamma}{\delta},\quad y=\frac{\alpha}{\beta}.\]
+\begin{proof}
+\[\dv{y}{t}=\dv{y}{x}\dv{x}{t}\]
+\[\dv{y}{x}=-\frac{y}{x}\frac{\gamma-\delta x}{\alpha-\beta y}\]
+\[\frac{\delta x-\gamma}{x}\dd{x}=-\frac{\beta y-\alpha}{y}\dd{y}\]
+\[\delta x-\gamma\ln(x)+\beta y-\alpha\ln(y)=C\]
+\end{proof}
+\ssc{Linear equation}
 \sssc{Definition}
 A first-order ODE of the form
 \[\dv{y}{x}+P(x)y=Q(x)\]
@@ -176,8 +181,10 @@ which is recognized as linear in the variable $x$.
 \sssc{Example: constant voltage series RL circuit}
 IVP:
 \[L\dv{I(t)}{t}+RI(t)=V,\quad I(0)=I_0.\]
-Solution:
+Solutions:
 \[I(t)=\frac{V}{R}\qty(1-e^{-Rt/L})+I_0e^{-Rt/L}.\]
+Equilibrium solution:
+\[I(t)=\frac{V}{R}.\]
 \begin{proof}
 \[\dv{I(t)}{t}+\frac{R}{L}I(t)=\frac{V}{L}\]
 \[\mu(t)=\exp(\int\frac{R}{L}\dd{t})=e^{Rt/L}\]
@@ -192,8 +199,10 @@ Solution:
 \sssc{Example: constant current parallel RC circuit}
 IVP:
 \[C\dv{V(t)}{t}+\frac{1}{R}V(t)=I,\quad V(0)=V_0.\]
-Solution:
+Solutions:
 \[V(t)=IR\qty(1-e^{-t/(RC)})+V_0e^{-t/(RC)}.\]
+Equilibrium solution:
+\[V(t)=IR.\]
 \begin{proof}
 \[\dv{V(t)}{t}+\frac{1}{RC}V(t)=\frac{I}{C}\]
 \[\mu(t)=\exp(\int\frac{1}{RC}\dd{t})=e^{t/(RC)}\]
@@ -205,19 +214,33 @@ Solution:
 \[A=V_0-IR\]
 \[V(t)=IR\qty(1-e^{-t/(RC)})+V_0e^{-t/(RC)}\]
 \end{proof}
-\ssc{First-order Exact Equation}
+\sssc{Example: Falling with drag force complying with Stokes' law}
+IVP:
+\[m\dv{v}{t}=-kv-mg,\quad v(0)=v_0.\]
+Solutions:
+\[v=\frac{mg}{k}\qty(1-e^{-kt/m})+v_0e^{-kt/m}.\]
+Equilibrium solution:
+\[v=\frac{mg}{k}.\]
+\begin{proof}
+\[\dv{v}{t}+\frac{k}{m}v=-g\]
+\[\mu(t)=\exp(\int\frac{k}{m}\dd{t})=e^{kt/m}\]
+\[\dv{}{t}\qty(e^{kt/m}v)=-e^{kt/m}g\]
+\[e^{kt/m}v=\int-e^{kt/m}g\dd{t}=\frac{mg}{k}e^{kt/m}+C\]
+\[v=\frac{mg}{k}+Ce^{-kt/m}\]
+\[v_0=\frac{mg}{k}+C\]
+\[v=\frac{mg}{k}+\qty(v_0-\frac{mg}{k})e^{-kt/m}.\]
+\end{proof}
+\ssc{Exact equation}
 \sssc{Definition}
 A first-order ODE of the form
 \[M(x,y)\dd{x}+N(x,y)\dd{y}=0\]
-with
+where $\frac{\partial^2M}{\partial x\partial y}$ and $\frac{\partial^2N}{\partial x\partial y}$ is continuous and
 \[\pdv{M}{y}=\pdv{N}{x}\]
-in a certian rectangle $R\subseteq\bbR^2$ is said to be exact.
+is said to be exact.
 
-By Schwarz's Theorem, Young's Theorem, or Clairaut's Theorem, the criterion
-\[\pdv{M}{y}=\pdv{N}{x}\]
-holds if and only if there exists a function $F\colon R\to\bbR$ such that
+By Schwarz's Theorem, the criterion holds iff there exists a function $F\colon R\to\bbR$ such that
 \[\pdv{F}{x}=M,\quad\pdv{F}{y}=N,\]
-and $\frac{\partial^2F}{\partial x\partial y}$. Such $F$ is called the potential function.
+and $\frac{\partial^2F}{\partial x\partial y}$ is continuous. Such $F$ is called the potential function.
 \sssc{Solutions by integration and then differentiation with respect to different variables}
 First, integrate $M(x,y)$ with respect to $x$:
 \[F(x,y)=\int M(x,y)\dd{x}+\phi(y),\]
@@ -226,15 +249,44 @@ where $\phi(y)$ is an arbitrary constant of integration that may depend on $y$.
 Second, differentiate with respect to $y$:
 \[\pdv{F}{y}(x,y)=N(x,y)=\pdv{}{y}\qty(\int M(x,y)\dd{x})+\phi'(y).\]
 
-Third, integrate
-\[\phi'(y)=N(x,y)-\pdv{}{y}\qty(\int M(x,y)\dd{x})\]
-with respect to $y$ to find $\phi(y)$.
+Third, integrate $\phi'(y)$ with respect to $y$ to find $\phi(y)$:
+\[\phi(y)=\int\phi'(y)\dd{y}=\int N(x,y)-\pdv{}{y}\qty(\int M(x,y)\dd{x})\dd{y}.\]
 
 Fourth, substitute $\phi(y)$ back to find the potential function $F(x,y)$. The implicit solutions is given by
 \[F(x,y)=C,\]
 where $C$ is an arbitrary constant.
-\ssc{Integration factors to make non-exact first-order ODEs exact}
-\sssc{Definition}
+
+Alternatively, first, integrate $N(x,y)$ with respect to $y$:
+\[F(x,y)=\int N(x,y)\dd{y}+\phi(x),\]
+where $\phi(x)$ is an arbitrary constant of integration that may depend on $x$.
+
+Second, differentiate with respect to $x$:
+\[\pdv{F}{x}(x,y)=M(x,y)=\pdv{}{x}\qty(\int N(x,y)\dd{y})+\phi'(x).\]
+
+Third, integrate $\phi(x)$ with respect to $x$ to find $\phi(x)$:
+\[\phi(x)=\int\phi'(x)\dd{x}=\int M(x,y)-\pdv{}{x}\qty(\int N(x,y)\dd{y})\dd{x}.\]
+
+Fourth, substitute $\phi(x)$ back to find the potential function $F(x,y)$. The implicit solutions is given by
+\[F(x,y)=C,\]
+where $C$ is an arbitrary constant.
+\sssc{Example: $(4x^3+3y^2+\cos(x))\dd{x}+(6xy+2)\dd{y}=0$}
+ODE:
+\[(4x^3+3y^2+\cos(x))\dd{x}+(6xy+2)\dd{y}=0.\]
+Solutions:
+\[x^4+3xy^2+\sin(x)+2y=C.\]
+\begin{proof}
+\[\pdv{}{y}(4x^3+3y^2+\cos(x))=6y\]
+\[\pdv{}{x}(6xy+2)=6y\]
+\[\ba
+F(x,y)&=\int 4x^3+3y^2+\cos(x)\dd{x}+\phi(y)\\
+&=x^4+3xy^2+\sin(x)+\phi(y)
+\ea\]
+\[\pdv{F}{y}=6xy+\phi'(y)=6xy+2\]
+\[\phi'(y)=2,\quad\phi(y)=2y+C\]
+\[F(x,y)=x^4+3xy^2+\sin(x)+2y+C\]
+\end{proof}
+\ssc{Integration factors to make inexact equations exact}
+\sssc{General case}
 Given a first-order ODE of the form
 \[M(x,y)\dd{x}+N(x,y)\dd{y}=0,\]
 we define the integration factor $\mu(x,y)$ such that
@@ -243,14 +295,23 @@ is exact and with potential function $F$ such that
 \[\pdv{F}{x}=\mu(x,y)M(x,y),\quad\pdv{F}{y}=\mu(x,y)N(x,y),\]
 that is,
 \[\pdv{\mu M}{y}=\pdv{\mu N}{x}.\]
-\sssc{Integration factor of one variable}
+Solve the PDE to get $\mu$.
+\sssc{Separable case}
 If
 \[\frac{\pdv{M}{y}-\pdv{N}{x}}{N}\]
-depends only on $x$, we can construct integration factor $\mu(x)$ by letting
-\[\frac{\mu'(x)}{\mu(x)}=\frac{\pdv{M}{y}-\pdv{N}{x}}{N},\]
-that is,
-\[\mu(x)=e^{\int\frac{\pdv{M}{y}-\pdv{N}{x}}{N}\dd{x}}.\]
+depends only on $x$, we can construct integration factor $\mu(x)$:
+\[\mu(x)=e^{\int\frac{\pdv{M}{y}-\pdv{N}{x}}{N}\dd{x}}\]
+such that
+\[\pdv{\mu M}{y}=\pdv{\mu N}{x}=\mu\pdv{M}{y}.\]
+
+Similarly, if
+\[\frac{\pdv{N}{x}-\pdv{M}{y}}{M}\]
+depends only on $y$, we can construct integration factor $\mu(y)$:
+\[\mu(y)=e^{\int\frac{\pdv{N}{x}-\pdv{M}{y}}{M}\dd{x}}\]
+such that
+\[\pdv{\mu M}{y}=\pdv{\mu N}{x}=\mu\pdv{N}{x}.\]
 \begin{proof}
+\[\frac{\mu'(x)}{\mu(x)}=\frac{\pdv{M}{y}-\pdv{N}{x}}{N}.\]
 This is a separable ODE of $\mu$ with repect to $x$.
 
 Let
@@ -258,35 +319,50 @@ Let
 \[\mu^{-1}\dd{\mu}=P(x)\dd{x}.\]
 \[\ln|\mu|=\int P(x)\dd{x}.\]
 \[\mu=e^{\int P(x)\dd{x}}.\]
+
+Similarly,
+\[\frac{\mu'(y)}{\mu(y)}=\frac{\pdv{N}{x}-\pdv{M}{y}}{M}\]
+for the second case.
 \end{proof}
-
-Similarly, if
-\[\frac{\pdv{N}{x}-\pdv{M}{y}}{M}\]
-depends only on $y$, we can construct integration factor $\mu(y)$ by letting
-\[\frac{\mu'(y)}{\mu(y)}=\frac{\pdv{N}{x}-\pdv{M}{y}}{M},\]
-that is,
-\[\mu(y)=e^{\int\frac{\pdv{N}{x}-\pdv{M}{y}}{M}\dd{x}}.\]
-\sssc{
-}
-\[\pdv{\mu M}{y}=\pdv{\mu N}{x}.\]
-
-PLACEHOLDER
-
-\sssc{Example: Lotka–Volterra equations or predator–prey equations}
-IVP:
-\[\dv{x}{t}=\alpha x-\beta xy,\]
-\[\dv{y}{t}=-\gamma y+\delta xy,\]
-\[x(0)=x_0,\quad y(0)=y_0.\]
-
-Solution:
-PLACEHOLDER
-\[\dv{y}{t}=\dv{y}{x}\dv{x}{t}\]
-\[\dv{y}{x}=\frac{-\gamma y+\delta xy}{\alpha x-\beta xy}\]
-\[\qty(\gamma y-\delta xy)\dd{x}+\qty(\alpha x-\beta xy)\dd{y}=0\]
-PLACEHOLDER
-
-
-\ssc{First-order Homogeneous Equation}
+\ssc{Example: $(5xy+4y^2+1)\dd{x}+(x^2+2xy)\dd{y}=0$}
+ODE:
+\[(5xy+4y^2+1)\dd{x}+(x^2+2xy)\dd{y}=0.\]
+Solutions:
+\[x^5y+x^4y^2+\frac{x^4}{4}=C.\]
+\begin{proof}
+\[\pdv{}{y}(5xy+4y^2+1)=5x+8y\]
+\[\pdv{}{x}(x^2+2xy)=2x+2y\]
+\[\frac{\pdv{}{y}(5xy+4y^2+1)-\pdv{}{x}(x^2+2xy)}{x^2+2xy}=\frac{3x+6y}{x^2+2xy}=\frac{3}{x}\]
+\[\mu(x)=\exp(\int\frac{3}{x}\dd{x})=x^3\]
+\[x^3(5xy+4y^2+1)\dd{x}+x^3(x^2+2xy)\dd{y}=0\]
+\[\ba
+F(x,y)&=\int x^3(5xy+4y^2+1)\dd{x}+\phi(y)\\
+&=\int 5x^4y+4x^3y^2+x^3\dd{x}+\phi(y)\\
+&=x^5y+x^4y^2+\frac{x^4}{4}+\phi(y)
+\ea\]
+\[\pdv{F}{y}=x^5+2x^4y+\phi'(y)=x^3(x^2+2xy)=x^5+2x^4y\]
+\[\phi'(y)=0,\quad\phi(y)=C\]
+\[F(x,y)=x^5y+x^4y^2+\frac{x^4}{4}+C\]
+\end{proof}
+\sssc{Example: $(2xy+y)\dd{x}+x^2\dd{y}=0$}
+ODE:
+\[(2xy+y)\dd{x}+x^2\dd{y}=0.\]
+Solutions:
+\[y=Ce^{1/x}x^{-2}.\]
+\begin{proof}
+\[\pdv{}{y}(2xy+y)=2x+1\]
+\[\pdv{}{x}(x^2)=2x\]
+\[\frac{\pdv{}{y}(2xy+y)-\pdv{}{x}(x^2)}{x^2}=\frac{1}{x^2}\]
+\[\mu(x)=\exp(\int\frac{1}{x^2}\dd{x})=e^{-1/x}\]
+\[e^{-1/x}(2xy+y)\dd{x}+e^{-1/x}x^2\dd{y}=0.\]
+\[F(x,y)=\int e^{-1/x}x^2\dd{y}+\phi(x)=e^{-1/x}x^2y+\phi(x)\]
+\[\pdv{F}{x}=\qty(x^{-2}e^{-1/x}x^2+e^{-1/x}2x)y+\phi'(x)=e^{-1/x}(2x+1)y+\phi'(x)\]
+\[\phi'(x)=0\]
+\[F(x,y)=e^{-1/x}x^2y+C\]
+\[e^{-1/x}x^2y=C\]
+\[y=Ce^{1/x}x^{-2}\]
+\end{proof}
+\ssc{Homogeneous equation}
 \sssc{Definition}
 A first-order ODE of the form
 \[\dv{y}{x}=F(x,y)\]
@@ -299,22 +375,73 @@ if $M(x,y)$ and $N(x,y)$ are homogeneous functions of the same degree, $F(x,y)=-
 For any homogeneous function $F(x,y)$ of $2$ variables, there exists a function $f$ of $1$ variable such that $F(x,y)=f\qty(\frac{y}{x})$ for all $x\neq 0$ such that $(x,y)$ is in the domain of $F$.
 
 Introduce the substitution $v=\frac{y}{x}$.
-\[\dv{y}{x}=v+x\dv{v}{x}=f(v),\]
+\[\dv{y}{x}=\dv{(xv)}{x}=v+x\dv{v}{x}=f(v),\]
 which is a separable ODE.
 \[\frac{\dd{v}}{f(v)-v}=\frac{\dd{x}}{x}.\]
 \[\int\frac{\dd{v}}{f(v)-v}=\ln|x|+C.\]
 Substituting $v=\frac{y}{x}$ back gives the solutions.
 
-For the singular solution when $x=0$, we define function $g(y)=F(0,y)$.
-\[\dv{y}{x}=g(y),\]
-which is a separable ODE that has the family of solutions
-\[\int\frac{1}{g(y)}\dd{y}=x\]
-and the constant solution
-\[g(y)=0.\]
+If $F$ is defined when $x=0$, we also have a implicit constant solution
+\[F(0,y)=0.\]
+\sssc{Example: $(x^2+y^2)\dd{x}-2xy\dd{y}=0$}
+ODE:
+\[(x^2+y^2)\dd{x}-2xy\dd{y}=0.\]
+Implicit solutions:
+\[y^2=x^2+Cx.\]
+\begin{proof}
+\[\dv{y}{x}=\frac{x^2+y^2}{2xy}=F(x,y)\]
+\[F(tx,ty)=F(x,y)\]
+\[v=\frac{y}{x}\]
+\[F(x,y)=f(v)=\frac{1+v^2}{2v}\]
+\[\dv{y}{x}=v+x\dv{v}{x}=f(v)\]
+\[\frac{1}{f(v)-v}\dd{v}=\frac{\dd{x}}{x}\]
+\[\ba
+\int\frac{1}{f(v)-v}\dd{v}&=\ln|x|+C\\
+&=\int\frac{2v}{1-v^2}\dd{v}\\
+&=-\ln|u|,\quad u=1-v^2\\
+&=-\ln|1-v^2|
+\ea\]
+\[C|x|=\frac{1}{|1-v^2|}\]
+\[v^2=1+\frac{C}{x}\]
+\[y^2=x^2+Cx\]
+\end{proof}
+\sssc{Example: $(x^2+y^2)\dd{x}+y^2\dd{y}=0$}
+ODE:
+\[(x^2+y^2)\dd{x}+y^2\dd{y}=0.\]
+Implicit solutions:
+\[\arctan(\frac{2\sqrt{3}}{3}\qty(\frac{y}{x}+\frac{1}{2}))=\frac{\sqrt{3}}{2}\ln\abs{\frac{x^2}{y}}+C.\]
+Constant solution:
+\[x=0,\quad y=0.\]
+\begin{proof}
+\[\dv{y}{x}=-\frac{y^2}{x^2+y^2}=F(x,y)\]
+\[F(tx,ty)=F(x,y)\]
+\[v=\frac{y}{x}\]
+\[F(x,y)=f(v)=-\frac{v^2}{1+v^2},\quad x\neq 0\]
+\[\frac{1}{f(v)-v}\dd{v}=\frac{\dd{x}}{x}\]
+\[\int\frac{1}{f(v)-v}\dd{v}=\ln|x|+C\]
+\[\frac{1}{f(v)-v}=-\frac{1+v^2}{v(1+v+v^2)}=-\frac{A}{v}-\frac{Bv+C}{1+v+v^2}\]
+\[A+Av+Av^2+Bv^2+Cv=1+v^2\]
+\[A=1,\quad B=0,\quad C=-1\]
+\[\ba
+\int\frac{1}{f(v)-v}\dd{v}&=-\int\frac{1}{v}\dd{v}+\int\frac{1}{1+v+v^2}\dd{v}\\
+&=\ln|v|+\int\frac{1}{\qty(v+\frac{1}{2})^2+\frac{3}{4}}\dd{v},\quad u=\frac{2}{\sqrt{3}}\qty(v+\frac{1}{2})\\
+&=\ln|v|+\frac{\sqrt{3}}{2}\frac{4}{3}\int\frac{1}{u^2+1}\dd{u}\\
+&=\ln|v|+\frac{2\sqrt{3}}{3}\arctan(u)+C\\
+&=\ln|v|+\frac{2\sqrt{3}}{3}\arctan(\frac{2\sqrt{3}}{3}\qty(v+\frac{1}{2}))+C
+\ea\]
+\[\ln|v|+\frac{2\sqrt{3}}{3}\arctan(\frac{2\sqrt{3}}{3}\qty(v+\frac{1}{2}))=\ln|x|+C\]
+\[\ln|y|-\ln|x|+\frac{2\sqrt{3}}{3}\arctan(\frac{2\sqrt{3}}{3}\qty(\frac{y}{x}+\frac{1}{2}))=\ln|x|+C\]
+\[\arctan(\frac{2\sqrt{3}}{3}\qty(\frac{y}{x}+\frac{1}{2}))=\frac{\sqrt{3}}{2}\ln\abs{\frac{x^2}{y}}+C\]
+\[\arctan(\frac{2\sqrt{3}}{3}\qty(\frac{y}{x}+\frac{1}{2}))=\frac{\sqrt{3}}{2}\ln\abs{\frac{x^2}{y}}+C\]
+\[F(0,y)=0,\quad y=0\]
+\end{proof}
 \ssc{Bernoulli differential equation}
+\sssc{Definition}
 A first-order ODE of the form
 \[\dv{y}{x}+P(x)y=Q(x)y^n,\quad n\in\mathbb{R}\setminus\{0,1\}\]
 is called a Bernoulli differential equation.
+
+Remark: When $n=0$ or $1$, it is a first-order linear equation.
 \sssc{Solutions by substitutions}
 Divide both sides by $y^n$:
 \[y^{-n}\dv{y}{x}+P(x)y^{1-n}=Q(x).\]
@@ -335,33 +462,83 @@ Integrate:
 \[\mu(x)v(x)=\int\mu(x)(1-n)Q(x)\dd{x}+C.\]
 \[v(x)=\frac{1}{\mu(x)}\qty(\int\mu(x)(1-n)Q(x)\dd{x}+C).\]
 Recall $v=y^{1-n}$, we obtain the family of general solutions.
+\sssc{Example: $\dv{y}{x}+\cos(x)y=\sin(2x)y^{3/2}$}
+ODE:
+\[\dv{y}{x}+\cos(x)y=\sin(2x)y^{3/2}.\]
+Solutions:
+\[y=\qty(2\sin(x)+4+Ce^{\sin(x)/2})^{-2}.\]
+\begin{proof}
+\[y^{-3/2}\dv{y}{x}+\cos(x)y^{-1/2}=2\sin(x)\cos(x)\]
+\[v=y^{-1/2},\quad\dv{v}{x}=-\frac{1}{2}y^{-3/2}\dv{y}{x}.\]
+\[\dv{v}{x}-\frac{1}{2}\cos(x)v=-\sin(x)\cos(x)\]
+\[\mu(x)=\exp(\int-\frac{1}{2}\cos(x)\dd{x})=e^{-\sin(x)/2}\]
+\[\dv{}{x}\qty(e^{-\sin(x)/2}v)=-\sin(x)\cos(x)e^{-\sin(x)/2}\]
+\[\ba
+e^{-\sin(x)/2}v&=\int-\sin(x)\cos(x)e^{-\sin(x)/2}\dd{x},\quad u=\frac{\sin(x)}{2}\\
+&=-4\int ue^{-u}\dd{u}\\
+&=-4\qty(-ue^{-u}-\int -e^{-u}\dd{u})\\
+&=-4\qty(-ue^{-u}-e^{-u}+C)\\
+&=2\sin(x)e^{-\sin(x)/2}+4e^{-\sin(x)/2}+C
+\ea\]
+\[v=2\sin(x)+4+Ce^{\sin(x)/2}\]
+\[y=v^{-2}=\qty(2\sin(x)+4+Ce^{\sin(x)/2})^{-2}\]
+\end{proof}
+\ssc{Slope being function of linear function}
+ODE:
+\[\dv{y}{x}=f(u),\quad u=ax+by+c.\]
+Solutions:
+\[\int\frac{1}{a+bf(u)}\dd{u}=x+C.\]
+\begin{proof}
+\[\dv{u}{x}=a+b\dv{y}{x}=a+bf(u)\]
+This is separable.
+\[\int\frac{1}{a+bf(u)}\dd{u}=x+C\]
+\end{proof}
+\ssc{Slope being function of linear function over linear function}
+ODE:
+\[\dv{y}{x}=F\qty(\frac{ax+by+c}{px+qy+r}),\quad aq-bp\neq 0.\]
+We can find a unique solution of $ax+by+c=px+qy+r=0$ for $x$ and $y$, let it be $x=\alpha$, $y=\beta$, let
+\[f(t)=F\qty(\frac{a+bt}{p+qt}),\]
+and we can rewrite it as:
+\[\dv{y}{x}=f(u),\quad u=\frac{y-\beta}{x-\alpha}.\]
+\begin{proof}
+\[y=u(x-\alpha)+\beta\]
+\[ax+by+c=(a+bu)(x-\alpha)+a\alpha+b\beta+c=(a+bu)(x-\alpha)\]
+\[px+qy+r=(p+qu)(x-\alpha)+p\alpha+q\beta+r=(p+qu)(x-\alpha)\]
+\[\frac{ax+by+c}{px+qy+r}=\frac{a+bu}{p+qu}\]
+\end{proof}
+Solutions:
+\[\int\frac{1}{f(u)-u}\dd{u}=\ln|x-\alpha|+C,\]
+and possibe constant or singular solutions:
+\[f(u)=u.\]
+\begin{proof}
+\[y=(x-\alpha)u+\beta\]
+\[\dv{y}{x}=\pdv{}{x}\qty((x-\alpha)u+\beta)+\pdv{}{u}\qty((x-\alpha)u+\beta)\dv{u}{x}=u+(x-\alpha)\dv{u}{x}\]
+\[u+(x-\alpha)\dv{u}{x}=f(u)\]
+\[\frac{1}{f(u)-u}\dd{u}=\frac{1}{x-\alpha}\dd{x}\]
+This is separable.
+\[\int\frac{1}{f(u)-u}\dd{u}=\ln|x-\alpha|+C\]
+\end{proof}
+\sct{Linear ODE}
+Unless otherwise specified, the variables and functions are in $\mathbb{R}$.
+\ssc{Definition}
+An $n$th order ODE of a dependent variable $y$ with respect to an independent variable $x$ is linear if and only if it can be written of the form
+\[\sum_{i=0}^na_n(x)y^{(i)}=g(x),\]
+where $a_0(x),\dots a_n(x)$, called the coefficients, and $g(x)$, called the forcing term, are functions of $x$.
 
-PLACEHOLDER: For F(x,y)=f(ax+by+c) solutions by substitution 
+An ODE is nonlinear if it is not linear.
+
+A linear ODE is called a linear homgeneous ODE if $g(x)=0$; otherwise, it is called a linear nonhomogeneous ODE.
+
+Let $L[y]=\sum_{i=0}^na_n(x)y^{(i)}$ denotes the left-hand side, then $L[\alpha y_1+\beta y_2]=\alpha L[y_1]+\beta L[y_2]$. That's why it's called to be linear.
+\ssc{Superposition principle}
+\sssc{Superposition principle I}
+If $y_1(x)$ and $y_2(x)$ are both solutions of a linear homgeneous ODE on an interval, then $c_1y_1(x)+c_2y_2(x)$ is also a solution of the ODE on the interval for any constants $c_1,c_2$.
+\sssc{Superposition principle II}
+If $y_1(x),y_2(x),\ldots y_n(x)$ are linearly independent solutions of an $n$th-order linear homgeneous ODE on an interval, then $\sum_{i=1}^nc_iy_i(x)$ is the family general solutions of the ODE on the interval with $n$ parameter $c_1,c_2,\ldots c_n$.
+\ssc{
 
 
-PLACEHOLDER
-\ssc{General method for reducing first-order ODE to separable ODE with substitution}
-Consider a first-order ODE of the form
-\[\dv{y}{x}=F(x,y).\]
-Take functions $u(x,y)$ and $g(u)$ that satisfy
-\begin{itemize}
-    \item there exists functions $p(x,u)=y$ and $r(u)s(x)=\pdv{p}{u}\neq 0$,
-    \item there exists a function $q$ such that $q(u)=\pdv{p}{x}$, and
-    \item $g(u)=F(x,y)$
-\end{itemize}
-almost everywhere in the domain of $F$.
 
-Substitute:
-\[q(u)+r(u)s(x)\dv{u}{x}=g(u).\]
-\[\frac{r(u)}{g(u)-q(u)}\dd{u}=\frac{1}{s(x)}\dd{x}.\]
-This is a separable first-order ODE. By integration, we obtain a family of solutions:
-\[\int\frac{r(u)}{g(u)-q(u)}\dd{u}=\int\frac{1}{s(x)}\dd{x}+C.\]
-And $g(u)-q(u)=0$ is a constant solution.
-
-Substituting $u(x,y)$ back gives solutions for $y$.
-
-Finally, consider the singular solutions at points where the conditions fail.
-PLACEHOLDER
 
 
 
