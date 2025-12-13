@@ -17,7 +17,9 @@ in which $F$ is a function of $(n+1)$ variables with codomain $Y$.
 \sssc{System of ODEs (常微分方程組)}
 A system of ODEs is two or more equations involving the derivatives of two or more unknown functions or dependent variables of a single independent variable.
 \sssc{Initial-value problem (IVP) (初值問題)}
-An $n$th-order initial-value problem is an $n$th-order ODE with $n$ conditions for $y$ and $(<n)$th derivative functions of $y$ at the same point, that is, $\{y^{(k)}(x_0)=y_k\}_{k\in[0,n-1]\cap\mathbb{Z}}$, called initial conditions (IC) (初始條件).
+An $n$th-order initial-value problem is an $n$th-order ODE with $n$ conditions for $y$ and all $k$th derivative functions with $k\in\bbN\land k<n$ of $y$ at the same point $x=x_0$, that is,
+\[\left\{y^{(k)}(x_0)=y_k\middle| k\in\bbN\land k<n\right\},\]
+called initial conditions (ICs) (初始條件).
 
 A solution of an IVP is a solution of the ODE that complies with all the ICs.
 
@@ -27,7 +29,7 @@ A rectangle in $\mathbb{R}\times\mathbb{R}^n$ is a subset $D$ of it of the form:
 \[D=\{(t,y)\mid|t-T|\leq a\land\forall\tx{\ integer\ }1\leq i\leq n\colon |y_i-Y_i|\leq b_i\}\]
 where $t,T\in\mathbb{R}$, $y=(y_1, y_2,\dots  y_n)\in\mathbb{R}^n$, $Y=(Y_1, Y_2,\dots  Y_n)\in\mathbb{R}^n$, and constant $a,b_i\in\mathbb{R}_{>0}$.
 \sssc{Boundary-value problem (BVP) (邊值問題)}
-An $n$th-order boundary-value problem is an $n$th-order ODE with some conditions called boundary conditions (BC) (邊界條件).
+An $n$th-order boundary-value problem is an $n$th-order ODE with some conditions called boundary conditions (BCs) (邊界條件).
 
 A solution of an BVP is a solution of the ODE that complies with all the BCs.
 \ssc{Solutions of ODEs}
@@ -522,24 +524,37 @@ This is separable.
 Unless otherwise specified, the variables and functions are in $\mathbb{R}$.
 \ssc{Definition}
 An $n$th order ODE of a dependent variable $y$ with respect to an independent variable $x$ is linear if and only if it can be written of the form
-\[\sum_{i=0}^na_n(x)y^{(i)}=g(x),\]
+\[\sum_{j=0}^na_j(x)\dv[j]{y}{x}=g(x),\]
 where $a_0(x),\dots a_n(x)$, called the coefficients, and $g(x)$, called the forcing term, are functions of $x$.
 
 An ODE is nonlinear if it is not linear.
-
+\ssc{Homogeneity}
 A linear ODE is called a linear homgeneous ODE if $g(x)=0$; otherwise, it is called a linear nonhomogeneous ODE.
-
-Let $L[y]=\sum_{i=0}^na_n(x)y^{(i)}$ denotes the left-hand side, then $L[\alpha y_1+\beta y_2]=\alpha L[y_1]+\beta L[y_2]$. That's why it's called to be linear.
+\ssc{Linearity}
+Let $L[y]=\sum_{j=0}^na_j(x)\dv[j]{y}{x}$ denotes the left-hand side, then $L[\alpha y_1+\beta y_2]=\alpha L[y_1]+\beta L[y_2]$. That's why it's called to be linear.
 \ssc{Superposition principle}
-\sssc{Superposition principle I}
 If $y_1(x)$ and $y_2(x)$ are both solutions of a linear homgeneous ODE on an interval, then $c_1y_1(x)+c_2y_2(x)$ is also a solution of the ODE on the interval for any constants $c_1,c_2$.
-\sssc{Superposition principle II}
+\ssc{Theorem of general solutions as linear combinations}
 If $y_1(x),y_2(x),\ldots y_n(x)$ are linearly independent solutions of an $n$th-order linear homgeneous ODE on an interval, then $\sum_{i=1}^nc_iy_i(x)$ is the family general solutions of the ODE on the interval with $n$ parameter $c_1,c_2,\ldots c_n$.
-\ssc{
-
-
-
-
+\begin{proof}
+PLACEHOLDER
+\end{proof}
+\ssc{Characteristic equation or auxiliary equation}
+Given an $n$th-order linear homogeneous ODE
+\[\sum_{j=0}^na_j\dv[j]{y}{x}=0,\quad a_n\neq 0,\]
+the formation of its general solutions using the characteristic equation (also called auxiliary equation) is as follows:
+\ben
+\item The characteristic equation is
+\[\sum_{j=0}^na_jr^j=0.\]
+\item Suppose there are $k$ distinct real roots $r_1,r_2,\ldots,r_k$, each $r_j$ with multiplicity $m_j$, and $h$ distinct pairs of conjugate imaginary roots $\alpha_1\pm\beta_1i,\alpha_2\pm\beta_2i,\ldots,\alpha_h\pm\beta_hi$ ($\beta_j\neq 0$), each $\alpha_j\pm\beta_ji$ with multiplicity $\omega_j$. (Thus, $\sum_{j=1}^km_j+2\sum_{j=1}^h\omega_j=n$.)
+\item The $n$-parameter family of general solutions of the ODE is
+\[\sum_{j=1}^k\sum_{u=0}^{m_j-1}A_{ju}x^ue^{r_jx}+\sum_{j=1}^h\sum_{u=0}^{\omega_j-1}\qty(B_{ju}\cos(\beta_jx)+C_{ju}\sin(\beta_jx))x^ue^{\alpha_jx},\]
+with parameters $A_{ju},B_{ju},C_{ju}$.
+\een
+\begin{proof}
+PLACEHOLDER
+\end{proof}
+PLACEHOLDER
 
 
 \sct{Classical theory}
