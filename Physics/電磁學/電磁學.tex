@@ -1655,9 +1655,13 @@ MRI 是一種非侵入式的醫學影像技術，主要利用核磁共振現象�
 電壓相對於電流的相位角差$\theta$：當電路有淨感抗（即$X>0$）時$\theta>0$；當電路有淨容抗（即$X<0$）時$\theta<0$。
 \subsubsection{（電）阻抗（(Electric) impedance）}
 表示為複數時，實部定義為電阻、虛部定義為電抗；表示為二維向量且使用笛卡爾座標時，第一分量定義為電阻、第二分量定義為電抗。
-\subsection{RLC 與 LC 諧振電路（Resonant circuit）}
+\ssc{RC 與 RL 濾波電路（filter circuits）}
+PLACEHOLDER
+\subsection{RLC 與 LC 諧振電路（Resonant circuits）}
 \subsubsection{常電壓串聯 RLC 與 LC 電路}
-常電壓$V$直流電源、電阻$R$、電感$L$、電容$C$串聯。
+常電壓串聯 RLC 電路：常電壓$V$直流電源、電阻$R$、電感$L$、電容$C$串聯。
+
+常電壓串聯 LC 電路：常電壓$V$直流電源、電感$L$、電容$C$串聯，即令$R=0$。
 \[RI(t)+L\dv{I(t)}{t}+\frac{1}{C}\int _{-\infty}^tI(\tau)\,\mathrm{d}\tau=V\]
 \[\dv[2]{I(t)}{t}+\frac{R}{L}\dv{I(t)}{t}+\frac{1}{LC}I(t)=0\]
 定義奈培頻率（neper frequency）/衰減量（attenuation）$\alpha=\frac{R}{2L}$與角共振頻率（angular resonance frequency）$\omega_0=\frac{1}{\sqrt{LC}}$。
@@ -1676,7 +1680,9 @@ MRI 是一種非侵入式的醫學影像技術，主要利用核磁共振現象�
 無阻尼響應（Undamped response）（$\zeta=0$即$R=0$）的$I(t)$通解為：
 \[I(t)=A_1\cos\left(\omega_0t\right)+A_2\sin\left(\omega_0t\right)\]
 \subsubsection{常電流並聯 RLC 與 LC 電路}
-常電流$I$直流電源、電阻$R$、電感$L$、電容$C$串聯。
+常電流並聯 RLC 電路：常電流$I$直流電源、電阻$R$、電感$L$、電容$C$並聯。
+
+常電流並聯 LC 電路：常電流$I$直流電源、電感$L$、電容$C$並聯，即令 $\frac{1}{R}=0$。
 \[\frac{1}{R}V(t)+C\dv{V(t)}{t}+\frac{1}{L}\int _{-\infty}^tV(\tau)\,\mathrm{d}\tau=I\]
 \[\dv[2]{V(t)}{t}+\frac{1}{RC}\dv{V(t)}{t}+\frac{1}{LC}V(t)=0\]
 定義奈培頻率（neper frequency）/衰減量（attenuation）$\alpha=\frac{1}{2RC}$與角共振頻率（angular resonance frequency）$\omega_0=\frac{1}{\sqrt{LC}}$。
@@ -1692,7 +1698,7 @@ MRI 是一種非侵入式的醫學影像技術，主要利用核磁共振現象�
 \[V(t)=A_1e^{-\omega_0\zeta t}+A_2e^{-\omega_0\zeta t}\]
 欠阻尼響應（Underdamped response）（$0<\zeta<1$）的$V(t)$通解為：
 \[V(t)=A_1e^{-\omega_0\zeta t}\cos\left(\omega_0\sqrt{1-\zeta^2}t\right)+A_2e^{-\omega_0\zeta t}\sin\left(\omega_0\sqrt{1-\zeta^2}t\right)\]
-無阻尼響應（Undamped response）（$\zeta=0$即$R=0$）的$V(t)$通解為：
+無阻尼響應（Undamped response）（$\zeta=0$即$\frac{1}{R}=0$）的$V(t)$通解為：
 \[V(t)=A_1\cos\left(\omega_0t\right)+A_2\sin\left(\omega_0t\right)\]
 \subsubsection{無線電發射器（Transmitter）}
 在 RLC 阻尼振盪電爐的電感旁置另一電感，該電感兩側經匹配網路（matching network）各通向一金屬導線，稱天線（Antenna），是無線電發射器的原理，匹配網路與天線有多種，常見天線如：

@@ -9,6 +9,8 @@
 \titletocdoc
 \chapter{Calculus (微積分)}
 \section{Function (函數)}
+\ssc{Variable (變數)}
+A variable is a symbol, typically a letter, that refers to an unspecified mathematical object.
 \subsection{Function, map, or mapping (映射)}
 A function, a map, or a mapping is formed by three sets, the domain (定義域) $X$, the codomain (對應域) $Y$, and the graph $R$ that satisfy the three following conditions:
 \[R\subseteq \{(x,y)\mid x\in X,y\in Y\},\]
@@ -93,9 +95,6 @@ Unless otherwise specified, given a property $P$ defined for a function $f(w_1,\
 A function $F$ with domain $\Omega\subseteq\bbR^n$ is called a homogeneous function of degree $\alpha\in\bbR$ if and only if for any nonzero real number $t$ and $\mathbf{x},t\mathbf{x}\in\Omega$, $F(t\mathbf{x})=t^{\alpha}F(\mb{x})$.
 \sssc{Positive homogeneity}
 A function $F$ with domain $\Omega\subseteq\bbR^n$ is called a positively homogeneous function of degree $\alpha\in\bbR$ if and only if for any positive real number $t$ and $\mathbf{x},t\mathbf{x}\in\Omega$, $F(t\mathbf{x})=t^{\alpha}F(\mb{x})$.
-\ssc{Linear independence}
-$n$ functions of the same domain and same codomain that is a vector space, $f_1(x),f_2(x),\ldots f_n(x)$, are said to be linearly independent iff
-\[\sum_{i=1}^nc_if_i(x)=0\implies\forall i\colon c_i=0.\]
 \ssc{Periodic function (週期函數)}
 Let $f$ be a function with domain $\bbR$ or $\bbR_{\geq 0}$. If there exists $T>0$ such that
 \[f(t+T)=f(t)\]
@@ -3486,64 +3485,6 @@ Using the chain rule on the left:
 &=-\frac{1}{|x|\sqrt{1+x^2}}
 \ea\]
 \end{proof}
-\ssc{List of Taylor Expansions of Real Functions}
-\sssc{Power function}
-\[x^n=\sum_{k=0}^{\infty}\binom{n}{k}a^{n-k}(x-a)^k,\quad |x-a|<|a|.\]
-\sssc{Logarithmic function}
-\[\ln(x)=\ln(a)+\sum_{n=1}^{\infty}(-1)^{n-1}\frac{(x-a)^n}{na^n},\quad 0<x\leq a.\]
-\begin{proof}
-\[\dv{\ln(x)}{x}=\frac{1}{x}.\]
-Thus for $k\in\mathbb{N}$:
-\[\ba
-\dv[k]{\ln(x)}{x}&=\qty(\prod_{j=0}^{k}(-1-j))x^{-k}\\
-&=(-1)^k\frac{1}{(k+1)!x^k}
-\ea\]
-$\sum_{n=1}^{\infty}(-1)^{n-1}\frac{(x-a)^n}{na^n}$ converge if and only if $-1<\frac{(x-a)^n}{a^n}\leq 1$ (alternating harmonic series converges) if and only if $0<x\leq a$.
-\end{proof}
-\sssc{Exponential function}
-\[a^x=\sum_{n=0}^{\infty}\frac{a^b\qty(\ln(a))^n}{n!}(x-b)^n,\quad a\in\mathbb{R}_{>0}.\]
-\sssc{Sine function}
-\[\sin(x)=\sum_{n=0}^{\infty}\frac{\sin\qty(a+\frac{n\pi}{2})}{n!}(x-a)^n.\]
-\sssc{Cosine function}
-\[\cos(x)=\sum_{n=0}^{\infty}\frac{\cos\qty(a+\frac{n\pi}{2})}{n!}(x-a)^n.\]
-\sssc{Tangent function}
-Define the derivative polynomials $P_n$ such that $P_n\qty(\tan(x))=\tan^{(n)}(x)$ with recursion as:
-\[\begin{cases}
-&P_0(y)=y,\\
-&P_n(y)=(1+y^2)P_{n-1}'(y),\quad n\in\mathbb{N}.
-\end{cases}\]
-
-The Taylor expansion of the tangent function at $a$ is:
-\[\tan(x)=\sum_{n=0}^{\infty}\frac{P_n\qty(\tan(x))(a)}{n!}(x-a)^n.\]
-\begin{proof}
-Let $y=\tan(x)$.
-\[y'=1+y^2.\]
-Prove by mathematical induction. When $n=0$,
-\[P_0(y)=y.\]
-Assume:
-\[P_{n-1}(y)=y^{(n-1)}.\]
-Differentiate both side:
-\[y'P_{n-1}'(y)=y^{(n)}=(1+y^2)P_{n-1}'(y)=P_n(y).\]
-\end{proof}
-\sssc{Cotangent function}
-Define the derivative polynomials $P_n$ such that $P_n\qty(\cot(x))=\cot^{(n)}(x)$ with recursion as:
-\[\begin{cases}
-&P_0(y)=y,\\
-&P_n(y)=-(1+y^2)P_{n-1}'(y),\quad n\in\mathbb{N}.
-\end{cases}\]
-
-The Taylor expansion of the cotangent function at $a$ is:
-\[\cot(x)=\sum_{n=0}^{\infty}\frac{P_n\qty(\cot(x))(a)}{n!}(x-a)^n.\]
-\begin{proof}
-Let $y=\cot(x)$.
-\[y'=-(1+y^2).\]
-Prove by mathematical induction. When $n=0$,
-\[P_0(y)=y.\]
-Assume:
-\[P_{n-1}(y)=y^{(n-1)}.\]
-Differentiate both side:
-\[y'P_{n-1}'(y)=y^{(n)}=-(1+y^2)P_{n-1}'(y)=P_n(y).\]
-\end{proof}
 \ssc{List of Integrals of Real Functions}
 \sssc{Power function}
 \[\int x^n\dd{x}=\begin{cases}\frac{1}{n+1}x^{n+1}+C,\quad n\neq -1\\\ln|x|+C,\quad n=-1\end{cases}.\]
@@ -4006,6 +3947,89 @@ I^2&=\qty(\int_0^{\infty}e^{-x^2}\dd{x})\qty(\int_0^{\infty}e^{-y^2}\dd{y})\\
 \end{proof}
 \sssc{Euler's constant or Euler–Mascheroni constant}
 PLACEHOLDER
+\ssc{List of Maclaurin Series and Taylor Series of Real Functions}
+\sssc{Power function}
+\[x^n=\sum_{k=0}^{\infty}\binom{n}{k}a^{n-k}(x-a)^k,\quad |x-a|<|a|.\]
+\sssc{$\frac{1}{1-x}$}
+\[\frac{1}{1-x}=\sum_{n=0}^{\infty}x^n,\quad |x|<1.\]
+\[\frac{1}{1-x}=\frac{1}{1-a}\sum_{n=0}^{\infty}\qty(\frac{x-a}{1-a})^n,\quad |x-a|<|1-a|.\]
+\begin{proof}
+\[\dv{}{x}\qty(\frac{1}{1-x})=(1-x)^{-2}\]
+\[\dv{}{x}\qty((1-x)^{-n})=n(1-x)^{-n-1},\quad n\neq 0\]
+\[\dv[n]{}{x}\qty(\frac{1}{1-x})=\frac{n}{1-x}\dv[n-1]{}{x}\qty(\frac{1}{1-x}),\quad n\in\bbN\]
+\[\dv[n]{}{x}\qty(\frac{1}{1-x})=\frac{n!}{(1-x)^{n+1}},\quad n\in\bbN_0\]
+\end{proof}
+\sssc{$\frac{1}{1+x}$}
+\[\frac{1}{1+x}=\sum_{n=0}^{\infty}(-1)^nx^n,\quad |x|<1.\]
+\[\frac{1}{1+x}=\frac{1}{1+a}\sum_{n=0}^{\infty}\qty(\frac{-(x-a)}{1+a})^n,\quad |x-a|<|1+a|.\]
+\begin{proof}
+\[\dv{}{x}\qty(\frac{1}{1+x})=-(1+x)^{-2}\]
+\[\dv{}{x}\qty((1+x)^{-n})=-n(1+x)^{-n-1},\quad n\neq 0\]
+\[\dv[n]{}{x}\qty(\frac{1}{1+x})=-\frac{n}{1+x}\dv[n-1]{}{x}\qty(\frac{1}{1+x}),\quad n\in\bbN\]
+\[\dv[n]{}{x}\qty(\frac{1}{1+x})=\frac{(-1)^nn!}{(1+x)^{n+1}},\quad n\in\bbN_0\]
+\end{proof}
+\sssc{Logarithmic function}
+\[\ln(x)=\ln(a)+\sum_{n=1}^{\infty}\frac{(-1)^{n-1}}{na^n}(x-a)^n,\quad x\leq a.\]
+\begin{proof}
+\[\dv{\ln(x)}{x}=x^{-1}.\]
+Thus for $n\in\mathbb{N}$:
+\[\ba
+\dv[n]{\ln(x)}{x}&=\prod_{j=1}^{n-1}(-j)x^{-n}\\
+&=(-1)^{n-1}\frac{(n-1)!}{x^n}
+\ea\]
+The series converges iff $-1<\frac{(x-a)^n}{a^n}\leq 1$ ($\leq 1$ since alternating harmonic series converges) iff $0<x\leq a$.
+\end{proof}
+\[\ln(1+x)=\sum_{n=1}^{\infty}\frac{(-1)^{n-1}}{n}x^n,\quad x\leq 1.\]
+\[\ln(1+x)=\ln(1+a)+\sum_{n=1}^{\infty}\frac{(-1)^{n-1}}{n(1+a)^n}(x-a)^n,\quad x\leq 1+a.\]
+\sssc{Exponential function}
+\[e^x=\sum_{n=0}^{\infty}\frac{x^n}{n!}.\]
+\[e^x=e^a\sum_{n=0}^{\infty}\frac{(x-a)^n}{n!}.\]
+\[b^x=\sum_{n=0}^{\infty}\frac{(\ln b)^n}{n!}x^n,\quad b>0.\]
+\[b^x=b^a\sum_{n=0}^{\infty}\frac{(\ln b)^n}{n!}(x-a)^n,\quad b>0.\]
+\sssc{Sine function}
+\[\sin(x)=\sum_{n=0}^{\infty}\frac{(-1)^n}{(2n+1)!}x^{2n+1}.\]
+\[\sin(x)=\sum_{n=0}^{\infty}\frac{\sin\qty(a+\frac{n\pi}{2})}{n!}(x-a)^n.\]
+\sssc{Cosine function}
+\[\cos(x)=\sum_{n=0}^{\infty}\frac{(-1)^n}{(2n)!}x^{2n}.\]
+\[\cos(x)=\sum_{n=0}^{\infty}\frac{\cos\qty(a+\frac{n\pi}{2})}{n!}(x-a)^n.\]
+\sssc{Tangent function}
+Define the derivative polynomials $P_n$ such that $P_n\qty(\tan(x))=\tan^{(n)}(x)$ with recursion as:
+\[\begin{cases}
+&P_0(y)=y,\\
+&P_n(y)=(1+y^2)P_{n-1}'(y),\quad n\in\mathbb{N}.
+\end{cases}\]
+
+The Taylor expansion of the tangent function at $a$ is:
+\[\tan(x)=\sum_{n=0}^{\infty}\frac{P_n\qty(\tan(x))(a)}{n!}(x-a)^n.\]
+\begin{proof}
+Let $y=\tan(x)$.
+\[y'=1+y^2.\]
+Prove by mathematical induction. When $n=0$,
+\[P_0(y)=y.\]
+Assume:
+\[P_{n-1}(y)=y^{(n-1)}.\]
+Differentiate both side:
+\[y'P_{n-1}'(y)=y^{(n)}=(1+y^2)P_{n-1}'(y)=P_n(y).\]
+\end{proof}
+\sssc{Cotangent function}
+Define the derivative polynomials $P_n$ such that $P_n\qty(\cot(x))=\cot^{(n)}(x)$ with recursion as:
+\[\begin{cases}
+&P_0(y)=y,\\
+&P_n(y)=-(1+y^2)P_{n-1}'(y),\quad n\in\mathbb{N}.
+\end{cases}\]
+
+The Taylor expansion of the cotangent function at $a$ is:
+\[\cot(x)=\sum_{n=0}^{\infty}\frac{P_n\qty(\cot(x))(a)}{n!}(x-a)^n.\]
+\begin{proof}
+Let $y=\cot(x)$.
+\[y'=-(1+y^2).\]
+Prove by mathematical induction. When $n=0$,
+\[P_0(y)=y.\]
+Assume:
+\[P_{n-1}(y)=y^{(n-1)}.\]
+Differentiate both side:
+\[y'P_{n-1}'(y)=y^{(n)}=-(1+y^2)P_{n-1}'(y)=P_n(y).\]
+\end{proof}
 \ssc{Lists of Laplace Transform}
 PLACEHOLDER
 \ssc{Lists Fourier Transform}

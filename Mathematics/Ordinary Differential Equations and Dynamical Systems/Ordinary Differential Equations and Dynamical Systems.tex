@@ -43,14 +43,20 @@ The graph of a solution $f$ on its interval of definition of an ODE is called a 
 An explicit solution of an ODE of a dependent variable $y$ with respect to an independent variable $x$ is of the form $y=f(x)$, where $f(x)$ is a function of $x$.
 \sssc{Implicit solution}
 A relation $G(x, y) = 0$ is said to be an implicit solution of an ODE on an interval $I$ if there exists at least one function $f$ that satisfes the relation $G(x, y) = 0$ as well as the ODE on $I$.
-\sssc{Type of solutions}
-An $n$-parameter family of solutions of an $(\geq n)$th-order ODE of a dependent variable $y$ with respect to an independent variable $x$ is of the form $y=f(x,c_1,c_2,\dots c_n)$ (explicit) or $G(x,y,c_1,c_2,\dots c_n)=0$ (implicit), in which $c_1,c_2,\dots c_n$ are parameters that are arbitrary given that the solution obtained is a solution of the ODE. The arbitrary parameters are usually denoted as $A,B,\ldots$.
+\sssc{Parametric family or parameterized family}
+A parametric family or a parameterized family is a family of objects whose differences depend only on the chosen values for a set of parameters.
+\sssc{Degrees of freedom}
+The degrees of freedom of a system is the number of parameters of the system that may vary independently.
+\sssc{Parametric family of solutions}
+An $n$-parameter family of solutions of an ODE of a dependent variable $y$ with respect to an independent variable $x$ is of the form $y=f(x,c_1,c_2,\dots c_n)$ (explicit) or $G(x,y,c_1,c_2,\dots c_n)=0$ (implicit), in which $c_1,c_2,\dots c_n$ are parameters that are arbitrary given that the solution obtained is a solution of the ODE. The arbitrary parameters are usually denoted as $A,B,\ldots$.
+\sssc{General solution (通解)}
+If every solution of an ODE on an interval $I$ can be obtained from an $n$-parameter family of solutions by appropriate choices of the parameters, we then say that that family of solutions is the general solution of the ODE.
+\sssc{Particular solution (特解)}
+A particular solution of an ODE that is free of parameters is called a particular solution.
 
-If every solution of an $(\geq n)$th-order ODE on an interval $I$ can be obtained from an $n$-parameter family of solutions by appropriate choices of the parameters, we then say that that family of solutions is the general solution (通解) of the ODE.
-
-A solution of an ODE that is free of parameters is called a particular solution (特解).
-
-Sometimes a differential equation possesses a solution that is not a member of a family of solutions of the equation, that is, a solution that cannot be obtained by specializing any of the parameters in the family of solutions. Such an extra solution is called a singular solution (奇異解).
+If a system given by an ODE have $n$ degrees of freedom, one may obtain a determined particular solution by imposing $n-1$ non contradictory constraints, leaving one degree of freedom determined by the ODE.
+\sssc{Singular solution (奇異解)}
+Sometimes a differential equation possesses a solution that is not a member of a family of solutions of the equation, that is, a solution that cannot be obtained by specializing any of the parameters in the family of solutions. Such an extra solution is called a singular solution.
 \sssc{Solutions by substitutions or solutions by change of variables}
 When solving an ODE, we often replace dependent variables with functions of the independent variable and new dependent variables where the new dependent variables are functions of the independent variable and old dependent variables to transform it into another ODE of the new dependent variables that is easier to solve.
 \sssc{Solution of System of ODEs}
@@ -180,7 +186,7 @@ Occasionally, a first-order differential equation is not linear in one variable 
 We can take its reciprocal as
 \[\dv{x}{y}-P(y)x=Q(y),\]
 which is recognized as linear in the variable $x$.
-\sssc{Example: constant voltage series RL circuit}
+\sssc{Example: constant voltage series RL filter circuit}
 IVP:
 \[L\dv{I(t)}{t}+RI(t)=V,\quad I(0)=I_0.\]
 Solutions:
@@ -198,7 +204,7 @@ Equilibrium solution:
 \[A=I_0-\frac{V}{R}\]
 \[I(t)=\frac{V}{R}\qty(1-e^{-Rt/L})+I_0e^{-Rt/L}\]
 \end{proof}
-\sssc{Example: constant current parallel RC circuit}
+\sssc{Example: constant current parallel RC filter circuit}
 IVP:
 \[C\dv{V(t)}{t}+\frac{1}{R}V(t)=I,\quad V(0)=V_0.\]
 Solutions:
@@ -523,26 +529,35 @@ This is separable.
 \sct{Linear ODE}
 Unless otherwise specified, the variables and functions are in $\mathbb{R}$.
 \ssc{Definition}
-An $n$th order ODE of a dependent variable $y$ with respect to an independent variable $x$ is linear if and only if it can be written of the form
-\[\sum_{j=0}^na_j(x)\dv[j]{y}{x}=g(x),\]
-where $a_0(x),\dots a_n(x)$, called the coefficients, and $g(x)$, called the forcing term, are functions of $x$.
+An $n$th-order ODE of a dependent variable $y$ with respect to an independent variable $x$ is linear iff it can be written in the form
+\[\sum_{i=0}^np_i(x)y^{(i)}=q(x),\]
+where $p_0(x),\dots p_n(x)$, called the coefficients, and $q(x)$, called the forcing term, are functions of $x$, and $p_n(x)$ is nontrivial.
 
 An ODE is nonlinear if it is not linear.
-\ssc{Homogeneity}
-A linear ODE is called a linear homgeneous ODE if $g(x)=0$; otherwise, it is called a linear nonhomogeneous ODE.
 \ssc{Linearity}
-Let $L[y]=\sum_{j=0}^na_j(x)\dv[j]{y}{x}$ denotes the left-hand side, then $L[\alpha y_1+\beta y_2]=\alpha L[y_1]+\beta L[y_2]$. That's why it's called to be linear.
+Let $L[y]=\sum_{i=0}^np_i(x)y^{(i)}$ denotes the left-hand side, then $L[\alpha y_1+\beta y_2]=\alpha L[y_1]+\beta L[y_2]$. That's why it's called to be linear.
+\ssc{Homogeneity}
+A linear ODE is called a linear homgeneous ODE iff the forcing term is 0 for all $x$; otherwise, it is called a linear nonhomogeneous ODE.
+
+The general solutions of a linear homogenous ODE form a vector space.
+\ssc{Linear independence}
+$n$ functions of the same domain and codomain $y_1(x),y_2(x),\ldots y_n(x)$ are said to be linearly independent iff
+\[\sum_{i=1}^nc_iy_i(x)=0\implies\forall i\colon c_i=0.\]
 \ssc{Superposition principle}
 If $y_1(x)$ and $y_2(x)$ are both solutions of a linear homgeneous ODE on an interval, then $c_1y_1(x)+c_2y_2(x)$ is also a solution of the ODE on the interval for any constants $c_1,c_2$.
-\ssc{Theorem of general solutions as linear combinations}
-If $y_1(x),y_2(x),\ldots y_n(x)$ are linearly independent solutions of an $n$th-order linear homgeneous ODE on an interval, then $\sum_{i=1}^nc_iy_i(x)$ is the family general solutions of the ODE on the interval with $n$ parameter $c_1,c_2,\ldots c_n$.
-\begin{proof}
-PLACEHOLDER
-\end{proof}
-\ssc{Characteristic equation or auxiliary equation}
-Given an $n$th-order linear homogeneous ODE
-\[\sum_{j=0}^na_j\dv[j]{y}{x}=0,\quad a_n\neq 0,\]
-the formation of its general solutions using the characteristic equation (also called auxiliary equation) is as follows:
+\ssc{Basis}
+If $y_1(x),y_2(x),\ldots y_n(x)$ are linearly independent solutions of an $n$th-order linear homgeneous ODE on an interval, then they form a basis of the vector space of the general solutions of the ODE on the interval, and $\sum_{i=1}^nc_iy_i(x)$ is the family general solutions of the ODE on the interval with $n$ parameter $c_1,c_2,\ldots c_n$.
+\ssc{Complementary equation and particularly solution}
+Given an $n$th-order linear nonhomogeneous ODE
+\[y^{(n)}+\sum_{i=0}^{n-1}p_i(x)y^{(i)}=q(x),\]
+the $n$th-order linear homogeneous ODE,
+\[y^{(n)}+\sum_{i=0}^{n-1}p_i(x)y^{(i)}=0,\]
+is called its complementary equation, and the general solutions of the original equation is the sum of the general solutions $y_c$ of the complementary equation and a particular solution $y_p$.
+\ssc{Characteristic equation or auxiliary equation for constant coefficient linear homogeneous ODE}
+\sssc{Method}
+Consider an $n$th-order constant coefficient linear homogeneous ODE
+\[\sum_{j=0}^na_jy^{(j)}=0,\quad a_n\neq 0.\]
+The formation of its general solutions using the characteristic equation (also called auxiliary equation) is as follows:
 \ben
 \item The characteristic equation is
 \[\sum_{j=0}^na_jr^j=0.\]
@@ -551,14 +566,271 @@ the formation of its general solutions using the characteristic equation (also c
 \[\sum_{j=1}^k\sum_{u=0}^{m_j-1}A_{ju}x^ue^{r_jx}+\sum_{j=1}^h\sum_{u=0}^{\omega_j-1}\qty(B_{ju}\cos(\beta_jx)+C_{ju}\sin(\beta_jx))x^ue^{\alpha_jx},\]
 with parameters $A_{ju},B_{ju},C_{ju}$.
 \een
+\sssc{Example: SHM}
+PLACEHOLDER
+\sssc{Example: damped SHM}
+PLACEHOLDER
+\sssc{Example: constant voltage series RLC and LC resonance circuit}
+PLACEHOLDER
+\sssc{Example: constant current parallel RLC and LC resonance circuit}
+PLACEHOLDER
+\ssc{Method of undetermined coefficients (MUC) for constant coefficient linear nonhomogeneous ODE}
+\sssc{Method}
+Consider an $n$th-order constant coefficient linear nonhomogeneous ODE
+\[\sum_{j=0}^na_jy^{(j)}=g(x),\quad a_n\neq 0,\]
+with $g(x)$ being able to be written in the form
+\[g(x)=\sum_{j=1}^pk_jx^{m_j}e^{\alpha_jx}+\sum_{j=p+1}^{p+q}x^{m_j}e^{\alpha_jx}\qty(k_j\cos(\beta_jx)+l_j\sin(\beta_jx)),\]
+for some constants $p,q,m_j\in\bbN_0$ and $\alpha_j,\beta_j,k_j,l_j\in\bbR$.
+
+The formation of its general solutions using the method of undetermined coefficients is as follows:
+\ben
+\item Solve the complementary equation
+\[\sum_{j=0}^na_jy^{(j)}=0,\quad a_n\neq 0\]
+using characteristic equation to obtain its general solutions $y_c$.
+\item For each term $k_jx^{m_j}e^{\alpha_jx}$ of $g(x)$ for $j\in\bbN\land j\leq p$, construct a particular solution $y_j$:
+\ben
+\item If $\alpha_j$ is not a root of the characteristic equation of the complementary equation, let $s_j=0$; otherwise, let $s_j$ be the multiplicity of $\alpha_j$ as a root of the characteristic equation of the complementary equation.
+\item The ansatz is
+\[y_j=x^{s_j}e^{\alpha_jx}\sum_{k=0}^{m_j}C_{jk}x^k,\]
+with constants $C_{jk}\in\bbR$.
+\item Solve for $C_{jk}$ such that $y_j$ is a particular solution of the constant coefficient linear nonhomogeneous ODE
+\[\sum_{j=0}^na_jy^{(j)}=k_jx^{m_j}e^{\alpha_jx}.\]
+\een
+\item For each term $x^{m_j}e^{\alpha_jx}\qty(k_j\cos(\beta_jx)+l_j\sin(\beta_jx))$ of $g(x)$ for $j\in\bbN\land p<j\leq p+q$, construct a particular solution $y_j$:
+\ben
+\item If $\alpha_j\pm\beta_ji$ is not a pair of conjugate imaginary roots of the characteristic equation of the complementary equation, let $s_j=0$; otherwise, let $s_j$ be the multiplicity of $\alpha_j\pm\beta_ji$ as a pair of conjugate imaginary roots of the characteristic equation of the complementary equation.
+\item The ansatz is
+\[y_j=x^{s_j}e^{\alpha_jx}\sum_{k=0}^{m_j}x^k\qty(C_{jk}\cos(\beta_jx)+D_{jk}\sin(\beta_jx)),\]
+with constants $C_{jk},D_{jk}\in\bbR$.
+\item Solve for $C_{jk},D_{jk}$ such that $y_j$ is a particular solution of the constant coefficient linear nonhomogeneous ODE
+\[\sum_{j=0}^na_jy^{(j)}=x^{m_j}e^{\alpha_jx}\qty(k_j\cos(\beta_jx)+l_j\sin(\beta_jx)).\]
+\een
+\item A particular solution of the origin ODE is
+\[y_p=\sum_{j=1}^{p+q}y_j,\]
+and the general solutions of the origin ODE is
+\[y=y_c+y_p.\]
+\een
+\sssc{Example: Forced oscillation and resonance}
+PLACEHOLDER
+\ssc{Formation of solutions of linear nonhomogeneous equation}
+\sssc{Wrońskian}
+For $n$ functions $f_1,f_2,\ldots,f_n$ that are $(n-1)$ times differentiable on an interval $I$, the Wrońskian of them, $W(f_1,f_2,\ldots,f_n)$, is a function on $I$ defined by
+\[W(f_1,f_2,\ldots,f_n)(x)=\det\begin{bmatrix}
+f_1(x) & f_2(x) & \cdots & f_n(x) \\
+f_1'(x) & f_2(x) & \cdots & f_n'(x) \\
+\vdots & \vdots & \ddots & \vdots \\
+f_1^{(n-1)}(x) & f_2^{(n-1)}(x) & \cdots & f_n^{(n-1)}(x)
+\end{bmatrix}.\]
+If $f_1,f_2,\ldots,f_n$ are not linearly independent, then $W=0$.
+\sssc{Second-order Abel's (differential equation) identity/formula}
+A second-order linear homogeneous ODE
+\[y''+p(x)y'+q(x)y=0\]
+on an interval $I$ with continuous function $p$ and $q$. The Wrońskian $W(y_1,y_2)$ of two solutions $y_1,y_2$ of it satisfies
+\[W(y_1,y_2)(x)=W(y_1,y_2)(x_0)\cdot\exp(-\int_{x_0}^xp(t)\dd{t}),\quad x\in I,\]
+for any $x_0\in I$.
 \begin{proof}
-PLACEHOLDER
+\[\ba
+W'&=(y_1y_2'-y_1'y_2)'\\
+&=y_1'y_2'+y_1y_2''-y_1'y_2'-y_1''y_2\\
+&=y_1y_2''-y_1''y_2
+\ea\]
+\[y''=-(py'+qy).\]
+\[W'=-y_1(py_2'+qy_2)+y_2(py_2'+qy_2)=-pW\]
+$W'+p(x)W=0$ is a first-order linear homogenous ODE that can be solved by the integrating factor
+\[\mu(x)=\exp(\int p(x)\dd{x})\]
+and initial condition $W(x_0)$:
+\[\qty(W\exp(\int_a^xp(t)\dd{t}))'=0\]
+\[W\exp(\int_a^xp(t)\dd{t})=C\]
+\[W(x_0)\exp(\int_a^{x_0}p(t)\dd{t})=C\]
+\[W(x)=W(x_0)\cdot\exp(\int_a^{x_0}p(t)\dd{t}-\int_a^xp(t)\dd{t})=W(x_0)\cdot\exp(-\int_{x_0}^xp(t)\dd{t}).\]
 \end{proof}
+\sssc{General Abel's (differential equation) identity/formula}
+A linear homogeneous ODE
+\[\sum_{i=0}^{n-1}p_i(x)y^{(i)}+y^{(n)}=0\]
+on an interval $I$ with continuous functions $p_i$. The Wrońskian $W(y_1,y_2,\ldots,y_n)$ of $n$ solutions $y_1,y_2,\ldots,y_n$ of it satisfies
+\[W(y_1,y_2,\ldots,y_n)(x)=W(y_1,y_2,\ldots,y_n)(x_0)\cdot\exp(-\int_{x_0}^xp_{n-1}(t)\dd{t}),\quad x\in I,\]
+for any $x_0\in I$.
+\begin{proof}
+Differentiate row by row:
+\[\ba
+W'&=\dv{}{x}\qty(\det\begin{bmatrix}
+y_1 & y_2 & \cdots & y_n \\
+y_1' & y_2' & \cdots & y_n' \\
+\vdots & \vdots & \ddots & \vdots \\
+y_1^{(n-1)} & y_2^{(n-1)} & \cdots & y_n^{(n-1)}
+\end{bmatrix})\\
+&=\det\begin{bmatrix}
+y_1' & y_2' & \cdots & y_n' \\
+y_1' & y_2' & \cdots & y_n' \\
+\vdots & \vdots & \ddots & \vdots \\
+y_1^{(n-1)} & y_2^{(n-1)} & \cdots & y_n^{(n-1)}
+\end{bmatrix}+\det\begin{bmatrix}
+y_1 & y_2 & \cdots & y_n \\
+y_1'' & y_2'' & \cdots & y_n'' \\
+\vdots & \vdots & \ddots & \vdots \\
+y_1^{(n-1)} & y_2^{(n-1)} & \cdots & y_n^{(n-1)}
+\end{bmatrix}+\ldots+\det\begin{bmatrix}
+y_1 & y_2 & \cdots & y_n \\
+y_1' & y_2' & \cdots & y_n' \\
+\vdots & \vdots & \ddots & \vdots \\
+y_1^{(n)} & y_2^{(n)} & \cdots & y_n^{(n)}
+\end{bmatrix}
+\ea\]
+All these determinants except the last one contain linearly dependent rows and thus equal to 0.
+\[W'=\det\begin{bmatrix}
+y_1 & y_2 & \cdots & y_n \\
+y_1' & y_2' & \cdots & y_n' \\
+\vdots & \vdots & \ddots & \vdots \\
+y_1^{(n)} & y_2^{(n)} & \cdots & y_n^{(n)}
+\end{bmatrix}.\]
+For all $i\in\bbN\land i\leq n$:
+\[y_i^{(n)}+\sum_{i=0}^{n-2}p_i(x)y^{(i)}=-p_{n-1}(x)y^{(n-1)}.\]
+Hence, we can add to the last row of the above determinant $p_i$ times its $(i+1)$th row for all $i\in\bbN_0\land i<n-1$, the value of the determinant is unchanged, and we get
+\[W'=\det\begin{bmatrix}
+y_1 & y_2 & \cdots & y_n \\
+y_1' & y_2' & \cdots & y_n' \\
+\vdots & \vdots & \ddots & \vdots \\
+-p_{n-1}(x)y_1^{(n-1)} & -p_{n-1}(x)y_2^{(n-1)} & \cdots & -p_{n-1}(x)y_n^{(n-1)}
+\end{bmatrix}=-p_{n-1}(x)W.\]
+$W'+p_{n-1}(x)W=0$ is a first-order linear homogenous ODE that can be solved by the integrating factor
+\[\mu(x)=\exp(\int p_{n-1}(x)\dd{x})\]
+and initial condition $W(x_0)$:
+\[\qty(W\exp(\int_a^xp_{n-1}(t)\dd{t}))'=0\]
+\[W\exp(\int_a^xp_{n-1}(t)\dd{t})=C\]
+\[W(x_0)\exp(\int_a^{x_0}p_{n-1}(t)\dd{t})=C\]
+\[W(x)=W(x_0)\cdot\exp(\int_a^{x_0}p_{n-1}(t)\dd{t}-\int_a^xp_{n-1}(t)\dd{t})=W(x_0)\cdot\exp(-\int_{x_0}^xp_{n-1}(t)\dd{t}).\]
+\end{proof}
+\sssc{Variation of parameters or variation of constants}
+Given an $n$th-order linear nonhomogeneous ODE
+\[y^{(n)}+\sum_{i=0}^{n-1}p_i(x)y^{(i)}=q(x),\]
+let $y_1(x),y_2(x),\ldots,y_n(x)$ be a basis of the vector space of the solutions of the complementary equation,
+\[y^{(n)}+\sum_{i=0}^{n-1}p_i(x)y^{(i)}=0,\]
+which can be obtained by variation of parameters of the family of the solutions of the complementary equation. The particular solution of the original ODE is given by:
+\[y_p=\sum_{i=1}^ny_i(x)\int\frac{W_i(x)}{W(x)}\dd{x},\]
+where
+\bit
+\item $W(x)$ is the Wrońskian of $y_1(x),y_2(x),\ldots,y_n(x)$,
+\item $W_i(x)$ is the Wrońskian of $y_1(x),y_2(x),\ldots,y_n(x)$ but with the $i$th column replaced by $(0,0,\ldots,0,q(x))^\top$.
+\eit
+\begin{proof}
+The particular solution is given by
+\[y_p=\sum_{i=1}^nc_i(x)y_i(x),\]
+where $c_i(x)$ are differentiable functions which are assumed to satisfy the $n-1$ conditions
+\[\sum_{i=1}^nc_i'(x)y_i^{(j)}(x)=0\]
+for all $j\in\bbN_0\land j\leq n-2$.
+
+By repeated differentiation, we obtain:
+\[y_p^{(j)}=\sum_{i=1}^nc_i(x)y_i^{(j)}(x)\]
+for all $j\in\bbN_0\land j\leq n-1$.
+
+One last differentiation gives
+\[y_p^{(n)}=\sum_{i=1}^nc_i(x)y_i^{(n)}(x)+\sum_{i=1}^nc_i'(x)y_i^{(n-1)}(x).\]
+
+Substituting $y_p$ into the original ODE gives:
+\[y_p^{(n)}+\sum_{i=0}^{n-1}p_i(x)y_p^{(i)}=q(x),\]
+\[\sum_{i=1}^nc_i(x)y_i^{(n)}(x)+\sum_{i=1}^nc_i'(x)y_i^{(n-1)}(x)+\sum_{i=0}^{n-1}p_i(x)\sum_{i=1}^nc_i(x)y_i^{(j)}(x)=q(x),\]
+\[\sum_{i=1}^nc_i'(x)y_i^{(n-1)}(x)+\sum_{i=1}^nc_i(x)\qty(y_i^{(n)}(x)+\sum_{i=0}^{n-1}p_i(x)y_i^{(j)}(x))=q(x),\]
+\[\sum_{i=1}^nc_i'(x)y_i^{(n-1)}(x)=q(x).\]
+We obtain a system of linear equations
+\[\sum_{i=1}^nc_i'(x)y_i^{(j)}(x)=0\]
+for all $j\in\bbN_0\land j\leq n-2$, and
+\[\sum_{i=1}^nc_i'(x)y_i^{(n-1)}(x)=q(x).\]
+By Cramer Rule, we have
+\[c_i'(x)=\frac{W_i(x)}{W(x)},\quad i\in\bbN\land i\leq n.\]
+\end{proof}
+\ssc{Reduction of order}
+\sssc{Method}
+Given an $n$th-order linear homogeneous ODE
+\[\sum_{i=0}^np_i(x)y^{(i)}=0,\]
+if a nontrivial particular solution $y_1(x)$ has been known, we can reduce the order of the ODE by 1 by the substitution
+\[y=vy_1\]
+and then the substitution
+\[u=v'\]
+to an $(n-1)$th-order linear ODE.
+\sssc{Closed-form formula for second-order linear homogeneous ODEs}
+Given a second-order linear homogeneous ODE
+\[y''+p(x)y'+q(x)y=0,\]
+if a nontrivial particular solution $y_1(x)$ that has been known, then the general solutions of the ODE is
+\[y=y_1\int\frac{e^{-\int p(x)\dd{x}}}{y_1(x)^2}\dd{x}.\]
+\begin{proof}
+Substitute
+\[y=vy_1,\]
+\[y'=v'y_1+vy_1',\]
+\[y''=v''y_1+2v'y_1'+vy_1'',\]
+\[y_1''=-py_1'-qy_1,\]
+\[y''=-py'-qy=,\]
+\[-pv'y_1-pvy_1'-qvy_1=v''y_1+2v'y_1'-pvy_1'-qvy_1,\]
+\[y_1v''+(2y_1'+py_1)v'=0,\]
+Substitute
+\[u=v',\]
+\[y_1u'+(2y_1'+py_1)u=0,\]
+\[u'+\qty(\frac{2y_1'}{y_1}+p)u=0,\]
+\[\mu(x)=\exp(\int\frac{y_1'}{y_1}+p\dd{x})=y_1(x)^2e^{\int p(x)\dd{x}},\]
+\[(u\mu(x))'=0,\]
+\[u=\frac{C}{\mu(x)}=C\frac{e^{-\int p(x)\dd{x}}}{y_1(x)^2}=\frac{e^{-\int p(x)\dd{x}}}{y_1(x)^2},\]
+\[v=\int u\dd{x}=\int\frac{e^{-\int p(x)\dd{x}}}{y_1(x)^2}\dd{x},\]
+\[y=vy_1=y_1\int\frac{e^{-\int p(x)\dd{x}}}{y_1(x)^2}\dd{x}.\]
+\end{proof}
+\ssc{Power series solutions and Frobenius method for second-order linear homogenous ODE}
+\sssc{Power series solutions}
+Consider a second-order linear homogenous ODE
+\[y''+p(x)y'+q(x)y=0.\]
+For any $a$ in the intersection of the domain of $p$ and the domain of $q$, $a$ is called an ordinary point iff $p$ and $q$ are both analytic at $a$.
+\ben
+\item The power series method seeks a solution for all ordinary points $x$ of the form
+\[y=\sum_{n=0}^{\infty}a_n(x-x_0)^n,\]
+where $x_0$ is a fixed point called expansion point and $a_n$ are constants to be determined, called power series.
+\item Differentiate the series term by term:
+\[y'=\sum_{n=0}^{\infty}a_nn(x-x_0)^{n-1},\]
+\[y''=\sum_{n=0}^{\infty}a_nn(n-1)(x-x_0)^{n-2}.\]
+\item Substitute into the ODE:
+\[\sum_{n=0}^{\infty}\qty(n(n-1)+n(x-x_0)p(x)+(x-x_0)^2q(x))a_n(x-x_0)^{n-2}=0.\]
+\item The two-parameter family of general solutions for all ordinary points $x$ with parameters $a_0,a_1$ is
+\[y=\sum_{n=0}^{\infty}a_n(x-x_0)^n.\]
+Solve it into the ODE to obtain a recurrence relation for $a_n$.
+\een
+\sssc{Frobenius method}
+Consider a second-order linear homogenous ODE
+\[y''+p(x)y'+q(x)y=0.\]
+For any $a$ in the intersection of the domain of $p$ and the domain of $q$, $a$ is called a regular singular point iff it is not an ordinary point and $(x-a)p(x)$ and $(x-a)^2q(x)$ are both analytic at $a$.
+\ben
+\item The Frobenius method seeks a solution for all ordinary points and regular singular points $x$ of the form
+\[y=(x-x_0)^r\sum_{n=0}^{\infty}a_n(x-x_0)^n,\quad a_0\neq 0,\]
+where $x_0$ is a fixed point called expansion point and $a_n$ are constants to be determined, called Frobenius series.
+\item Differentiate the series term by term:
+\[y'=\sum_{n=0}^{\infty}a_n(n+r)(x-x_0)^{n+r-1},\]
+\[y''=\sum_{n=0}^{\infty}a_n(n+r)(n+r-1)(x-x_0)^{n+r-2}.\]
+\item Substitute into the ODE:
+\[\sum_{n=0}^{\infty}\qty((n+r)(n+r-1)+(n+r)(x-x_0)p(x)+(x-x_0)^2q(x))a_n(x-x_0)^{n+r-2}=0.\]
+\item Collect the lowest power term in the series (often the $n=0$ term but possibly other), let it be the $n=n$ term, let
+\[p_0=\lim_{x\to x_0}(x-x_0)p(x),\]
+\[q_0=\lim_{x\to x_0}(x-x_0)^2q(x),\]
+the indicial polynomial is defined as
+\[I(r)=(n+r)(n+r-1)+(n+r)p_0+q_0,\]
+and the indicial equation is defined as
+\[I(r)=0,\]
+which is a quadratic equation for $r$.
+\item Solve the indicial equation for $r$. Let the roots be $r_1\geq r_2$.
+\item Depending on the relation of $r_1$ and $r_2$:
+\bit
+\item Case $r_1-r_2\notin\bbZ$: The two one-parameter families of solutions for all ordinary points and regular singular points $x$, $y_1$ with parameter $A_0\neq 0$ and $y_2$ with parameter $B_0\neq 0$, are defined as
+\[y_1(x)=(x-x_0)^{r_1}\sum_{n=0}^{\infty}A_n(x-x_0)^n,\]
+\[y_2(x)=(x-x_0)^{r_2}\sum_{n=0}^{\infty}B_n(x-x_0)^n.\]
+Solve them into ODE respectively to obtain recurrence relations for $A_n$ and $B_n$. 
+\item Case $r_1-r_2\in\bbN_0$: The two one-parameter families of solutions for all ordinary points and regular singular points $x$, $y_1$ with parameter $A_0\neq 0$ and $y_2$ with parameter $B_0\neq 0$, are defined as
+\[y_1(x)=(x-x_0)^{r_1}\sum_{n=0}^{\infty}A_n(x-x_0)^n,\]
+\[y_2(x)=y_1(x)\ln(x-x_0)+(x-x_0)^{r_2}\sum_{n=0}^{\infty}B_n(x-x_0)^n.\]
+Solve them into ODE respectively to obtain recurrence relations for $A_n$ and $B_n$.
+\eit 
+\item The two-parameter family of general solutions for all ordinary points and regular singular points $x$ is given by
+\[y=y_1(x)+y_2(x).\]
+\een
+\sssc{Example:}
 PLACEHOLDER
-
-
+PLACEHOLDER
 \sct{Classical theory}
-PLACEHOLDER: below waiting for change to "Ordinary Differential Equations and Dynamical Systems" version
+PLACEHOLDER
+: below waiting for change to "Ordinary Differential Equations and Dynamical Systems" version
 \ssc{Existence of Solution}
 \sssc{Peano existence theorem (皮亞諾存在性定理), Peano theorem (皮亞諾定理), or Cauchy–Peano theorem (柯西-皮亞諾定理)}
 Let $D$ be an open subset of $\mathbb{R}\times\mathbb{R}^n$ and $f\colon D\to \mathbb {R}$ be a continuous function, then every initial value problem given by explicit first-order ODE $y'(t)=f\left(t,y(t)\right)$ defined on $D$ and initial condition $y\left(t_{0}\right)=y_{0}$ with $(t_{0},y_{0})\in D$ has a local solution $z\colon I\to \mathbb {R}^n$ where $I$ is a neighbourhood of $t_0$ in $\mathbb {R} $.
