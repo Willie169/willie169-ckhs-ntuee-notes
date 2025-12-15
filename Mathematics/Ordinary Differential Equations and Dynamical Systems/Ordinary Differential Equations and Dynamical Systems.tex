@@ -827,7 +827,7 @@ If they both exist and are linearly independent, no modification is needed; othe
 \[y_2(x)=\ln|x-x_0|y_1(x)+(x-x_0)^{r_2}\sum_{n=0}^{\infty}B_n(x-x_0)^n,\quad B_0\neq 0\land B_n\in\bbR.\]
 \eit 
 \item Substitute $y_1,y_1',y_1''$ and $y_2,y_2',y_2''$ into the ODE respectively, rewrite $p(x)$ and $q(x)$ into Taylor expansion at $x_0$, rewrite the products into Cauchy products, and rewrite LHSs as power series in $x^n$.
-\item Solve for the recurrence relations of $A_n$ and $B_n$.
+\item Solve for the recurrence relations of $A_n$ and $B_n$. The term with $\ln|x-x_0|$ of $y_2(x)$ substitution in Case $r_1-r_2\in\bbN_0$ can be ignored since solving it will get the same recurrence relations of $A_n$ as that of $y_1(x)$ substitution.
 \item The two-parameter family of general solutions for all $0<|x-x_0|<R$ where $R$ is the distance between $x_0$ and the nearest to $x_0$ regular singular point of $(x-x_0)p(x)$ or $(x-x_0)^2q(x)$ is:
 \[y=C_1y_1(x)+C_2y_2(x),\quad C_1,C_2\in\bbR.\]
 \een
@@ -901,28 +901,32 @@ Solutions:
 ODE:
 \[xy''+(x-1)^2y'+y=0.\]
 Solutions:
-
+PLACEHOLDER
 \begin{proof}
 \[y=\sum_{n=0}^{\infty}a_nx^{n+r}\]
 \[y'=\sum_{n=0}^{\infty}a_n(n+r)x^{n+r-1}\]
 \[y''=\sum_{n=0}^{\infty}a_n(n+r)(n+r-1)x^{n+r-2}\]
 \[xy''=\sum_{n=0}^{\infty}a_n(n+r)(n+r-1)x^{n+r-1}\]
-\[(x-x_1)^2y'=\sum_{n=0}^{\infty}a_n(n+r)x^{n+r+1}+2\sum_{n=0}^{\infty}a_n(n+r)x^{n+r}+\sum_{n=0}^{\infty}a_n(n+r)x^{n+r-1}\]
-\[L=a_0r(r-1)x^{r-1}+a_0rx^{r+1}+2a_0rx^r+a_0rx^{r-1}\]
+\[(x-1)^2y'=\sum_{n=0}^{\infty}a_n(n+r)x^{n+r+1}-2\sum_{n=0}^{\infty}a_n(n+r)x^{n+r}+\sum_{n=0}^{\infty}a_n(n+r)x^{n+r-1}\]
+\[L=a_0r(r-1)x^{r-1}+a_0rx^{r+1}-2a_0rx^r+a_0rx^{r-1}\]
 \[I(r)=a_0r(r-1)+a_0r=0\]
 \[r_1=r_2=0\]
-\[y_1(x)=\sum_{n=0}^{\infty}A_nx^n\]
-\[y_1'(x)=\sum_{n=0}^{\infty}A_{n+1}(n+1)x^n\]
-\[y_1''(x)=\sum_{n=0}^{\infty}A_{n+2}(n+2)(n+1)x^n\]
-\[\sum_{n=0}^{\infty}\qty(A_{n+1}(n+1)n+A_{n-1}(n-1)-2A_nn+A_{n+1}(n+1)+A_n)x^n=0.\]
-\[A_{n+2}=\frac{A_{n+1}(2n+1)-A_nn}{(n+2)^2}\]
+\[y_1=\sum_{n=0}^{\infty}A_nx^n\]
+\[\sum_{n=0}^{\infty}A_nn(n-1)x^{n-1}+\sum_{n=0}^{\infty}A_nnx^{n+1}-2\sum_{n=0}^{\infty}A_nnx^n+\sum_{n=0}^{\infty}A_nnx^{n-1}+\sum_{n=0}^{\infty}A_nx^n=0\]
+\[\sum_{n=0}^{\infty}A_{n+1}(n+1)nx^n+\sum_{n=0}^{\infty}A_{n-1}(n-1)x^n-2\sum_{n=0}^{\infty}A_nnx^n+\sum_{n=0}^{\infty}A_{n+1}(n+1)x^n+\sum_{n=0}^{\infty}A_nx^n=0\]
+\[A_{n+1}(n+1)^2-A_n(2n-1)+A_{n-1}(n-1)=0\]
+\[A_{n+2}(n+2)^2-A_{n+1}(2n+1)+A_nn=0\]
 \[y_2(x)=\ln|x|\sum_{n=0}^{\infty}A_nx^n+\sum_{n=0}^{\infty}B_nx^n\]
-\[y_2'(x)=\ln|x|\sum_{n=0}^{\infty}A_{n+1}(n+1)x^n+\sum_{n=0}^{\infty}A_nx^{n-1}+\sum_{n=0}^{\infty}B_{n+1}(n+1)x^n\]
-PLACEHOLDER
-\[y_2''(x)=
-\ln|x|\sum_{n=0}^{\infty}A_{n+1}(n+1)x^n+
-\sum_{n=0}^{\infty}A_nx^{n-1}+
-\sum_{n=0}^{\infty}B_{n+1}(n+1)x^n\]
+\[y_2'(x)=\ln|x|\sum_{n=0}^{\infty}A_nnx^{n-1}+\sum_{n=0}^{\infty}A_nx^{n-1}+\sum_{n=0}^{\infty}B_nnx^{n-1}\]
+\[y_2''(x)=\ln|x|\sum_{n=0}^{\infty}A_nn(n-1)x^{n-2}+\sum_{n=0}^{\infty}A_nnx^{n-2}+\sum_{n=0}^{\infty}B_nn(n-1)x^{n-2}\]
+\[xy_2''(x)=\ln|x|\sum_{n=0}^{\infty}A_nn(n-1)x^{n-1}+\sum_{n=0}^{\infty}A_nnx^{n-1}+\sum_{n=0}^{\infty}B_nn(n-1)x^{n-1}\]
+\[x^2y_2'(x)=\ln|x|\sum_{n=0}^{\infty}A_nnx^{n+1}+\sum_{n=0}^{\infty}A_nx^{n+1}+\sum_{n=0}^{\infty}B_nnx^{n+1}\]
+\[xy_2'(x)=\ln|x|\sum_{n=0}^{\infty}A_nnx^n+\sum_{n=0}^{\infty}A_nx^n+\sum_{n=0}^{\infty}B_nnx^n\]
+\[\ln|x|\sum_{n=0}^{\infty}A_nn(n-1)x^{n-1}+\sum_{n=0}^{\infty}A_nnx^{n-1}+\sum_{n=0}^{\infty}B_nn(n-1)x^{n-1}+\ln|x|\sum_{n=0}^{\infty}A_nnx^{n+1}+\sum_{n=0}^{\infty}A_nx^{n+1}+\sum_{n=0}^{\infty}B_nnx^{n+1}-2\ln|x|\sum_{n=0}^{\infty}A_nnx^n-2\sum_{n=0}^{\infty}A_nx^n-2\sum_{n=0}^{\infty}B_nnx^n+\ln|x|\sum_{n=0}^{\infty}A_nnx^{n-1}+\sum_{n=0}^{\infty}A_nx^{n-1}+\sum_{n=0}^{\infty}B_nnx^{n-1}+\ln|x|\sum_{n=0}^{\infty}A_nx^n+\sum_{n=0}^{\infty}B_nx^n=0\]
+\[\ln|x|A_{n+1}(n+1)n+A_{n+1}(n+1)+B_{n+1}(n+1)n+\ln|x|A_{n-1}(n-1)+A_{n-1}+B_{n-1}(n-1)-2\ln|x|A_nn-2A_n-2B_nn+\ln|x|A_{n+1}(n+1)+A_{n+1}+B_{n+1}(n+1)+\ln|x|A_n+B_n=0\]
+\[A_{n+1}(n+1)+B_{n+1}(n+1)n+A_{n-1}+B_{n-1}(n-1)-2A_n-2B_nn+A_{n+1}+B_{n+1}(n+1)+B_n=0\]
+\[A_{n+2}(n+1)+B_{n+2}(n+2)^2-2A_{n+1}-B_{n+1}(2n+1)+A_n+B_nn=0\]
+\[y(x)=C_1y_1(x)+C_2y_2(x)=C_1\sum_{n=0}^{\infty}A_nx^n+C_2\ln|x|\sum_{n=0}^{\infty}A_nx^n+C_2\sum_{n=0}^{\infty}B_nx^n\]
 PLACEHOLDER
 \end{proof}
 \sssc{Example for complex roots: PLACEHOLDER}
