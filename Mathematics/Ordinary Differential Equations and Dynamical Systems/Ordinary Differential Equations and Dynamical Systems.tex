@@ -778,59 +778,154 @@ PLACEHOLDER
 \ssc{Power series solutions and Frobenius method for second-order linear homogenous ODE}
 \sssc{Power series solutions}
 Consider a second-order linear homogenous ODE
-\[y''+p(x)y'+q(x)y=0.\]
+\[f(x)y''+g(x)y'+h(x)y=0.\]
+Let
+\[p(x)=\frac{g(x)}{f(x)},\quad q(x)=\frac{h(x)}{f(x)}.\]
 For any $a$ in the intersection of the domain of $p$ and the domain of $q$, $a$ is called an ordinary point iff $p$ and $q$ are both analytic at $a$.
 \ben
-\item The power series method seeks a solution for all ordinary points $x\neq x_0$ in the form
+\item The power series method seeks a solution in the form:
 \[y=\sum_{n=0}^{\infty}a_n(x-x_0)^n,\]
 where $x_0$ is a fixed point called expansion point and $a_n$ are constants to be determined, called power series.
 \item Differentiate the series term by term:
-\[y'=\sum_{n=0}^{\infty}a_nn(x-x_0)^{n-1},\]
-\[y''=\sum_{n=0}^{\infty}a_nn(n-1)(x-x_0)^{n-2}.\]
-\item Substitute into the ODE:
-\[\sum_{n=0}^{\infty}\qty(n(n-1)+n(x-x_0)p(x)+(x-x_0)^2q(x))a_n(x-x_0)^{n-2}=0.\]
-\item The family general solutions for all ordinary points $x\neq x_0$ is:
-\[y=C\sum_{n=0}^{\infty}a_n(x-x_0)^n,\quad C,a_n\in\bbR.\]
-Substitute it into the ODE and solve it to obtain a recurrence relation for $a_n$.
+\[y'=\sum_{n=0}^{\infty}a_nn(x-x_0)^{n-1}=\sum_{n=0}^{\infty}a_{n+1}(n+1)(x-x_0)^n,\]
+\[y''=\sum_{n=0}^{\infty}a_nn(n-1)(x-x_0)^{n-2}=\sum_{n=0}^{\infty}a_{n+2}(n+2)(n+1)(x-x_0)^n.\]
+\item Substitute into the ODE, rewrite $p(x)$ and $q(x)$ into Taylor expansion at $x_0$, rewrite the infinite series products (if any) into Cauchy products, and rewrite the LHS as a power series in $x^n$.
+\item Solve for the recurrence relation of $a_n$.
+\item The two-parameter family of general solutions for all $0<|x-x_0|<R$ where $R$ is the distance between $x_0$ and the nearest to $x_0$ singular point of $p(x)$ or $q(x)$ with parameters $a_0,a_1$ is:
+\[y=\sum_{n=0}^{\infty}a_n(x-x_0)^n.\]
 \een
 \sssc{Frobenius method}
 Consider a second-order linear homogenous ODE
-\[y''+p(x)y'+q(x)y=0.\]
-For any $a$ in the intersection of the domain of $p$ and the domain of $q$, $a$ is called a regular singular point iff it is not an ordinary point and $(x-a)p(x)$ and $(x-a)^2q(x)$ are both analytic at $a$.
+\[f(x)y''+g(x)y'+h(x)y=0.\]
+Let
+\[p(x)=\frac{g(x)}{f(x)},\quad q(x)=\frac{h(x)}{f(x)}.\]
+For any $x_0$ in the intersection of the domain of $p$ and the domain of $q$, $x_0$ is called a regular singular point iff it is not an ordinary point and $(x-x_0)p(x)$ and $(x-x_0)^2q(x)$ are both analytic at $a$.
 \ben
-\item The Frobenius method seeks a solution for all ordinary points and regular singular points $x\neq x_0$ in the form
-\[y=(x-x_0)^r\sum_{n=0}^{\infty}a_n(x-x_0)^n,\quad a_0\neq 0,\]
-where $x_0$ is a fixed point called expansion point and $a_n$ are constants to be determined, called Frobenius series.
+\item The Frobenius method seeks a solution in the form:
+\[y=\sum_{n=0}^{\infty}a_n(x-x_0)^{n+r},\quad a_0\neq 0,\]
+where $x_0$ is called expansion point and $a_n$ are constants to be determined, called Frobenius series.
 \item Differentiate the series term by term:
 \[y'=\sum_{n=0}^{\infty}a_n(n+r)(x-x_0)^{n+r-1},\]
 \[y''=\sum_{n=0}^{\infty}a_n(n+r)(n+r-1)(x-x_0)^{n+r-2}.\]
-\item Substitute into the ODE:
-\[\sum_{n=0}^{\infty}\qty((n+r)(n+r-1)+(n+r)(x-x_0)p(x)+(x-x_0)^2q(x))a_n(x-x_0)^{n+r-2}=0.\]
-\item Collect the lowest power term in the series (often the $n=0$ term but possibly other), let it be the $n=n$ term, let
-\[p_0=\lim_{x\to x_0}(x-x_0)p(x),\]
-\[q_0=\lim_{x\to x_0}(x-x_0)^2q(x),\]
-the indicial polynomial is defined as
-\[I(r)=(n+r)(n+r-1)+(n+r)p_0+q_0,\]
-and the indicial equation is defined as
+\item Substitute into $(x-x_0)^2y''$, $(x-x_0)^2p(x)y'$, and $(x-x_0)^2q(x)y$ respectively, rewrite $(x-x_0)^2p(x)$ and $(x-x_0)^2q(x)$ into Taylor expansion at $x_0$, rewrite the infinite series products (if any) into Cauchy products, and let the sum of all terms involving $a_0$ of the three be $L$.
+\item The indicial polynomial $I(r)$ is defined as the coefficient of the lowest power term of $L$, and the indicial equation is defined as
 \[I(r)=0,\]
 which is a quadratic equation for $r$.
 \item Solve the indicial equation for $r$. Let the roots be $r_1\geq r_2$.
 \item Depending on the relation of $r_1$ and $r_2$:
 \bit
-\item Case $r_1-r_2\notin\bbZ\land r_1,r_2\in\bbR$: Two linearly independent solutions for all ordinary points and regular singular points $x\neq x_0$ are:
+\item Case $r_1-r_2\notin\bbZ\land r_1,r_2\in\bbR$: Two linearly independent solutions for all $0<|x-x_0|<R$ where $R$ is the distance between $x_0$ and the nearest to $x_0$ regular singular point of $(x-x_0)p(x)$ or $(x-x_0)^2q(x)$ are:
 \[y_1(x)=(x-x_0)^{r_1}\sum_{n=0}^{\infty}A_n(x-x_0)^n,\quad A_0\neq 0\land A_n\in\bbR,\]
 \[y_2(x)=(x-x_0)^{r_2}\sum_{n=0}^{\infty}B_n(x-x_0)^n,\quad B_0\neq 0\land B_n\in\bbR.\]
-\item Case $r_1,r_2$ are conjugate imaginary roots: Let $r_1,r_2=\alpha\pm\beta i$. Two linearly independent solutions for all ordinary points and regular singular points $x\neq x_0$ are:
+\item Case $r_1,r_2$ are conjugate imaginary roots: Let $r_1,r_2=\alpha\pm\beta i$. Two linearly independent solutions for all $0<|x-x_0|<R$ where $R$ is the distance between $x_0$ and the nearest to $x_0$ regular singular point of $(x-x_0)p(x)$ or $(x-x_0)^2q(x)$ are:
 \[y_1(x)=(x-x_0)^{\alpha}\cos(\beta\ln|x-x_0|)\sum_{n=0}^{\infty}A_n(x-x_0)^n,\quad A_0\neq 0\land A_n\in\bbR,\]
 \[y_2(x)=(x-x_0)^{\alpha}\sin(\beta\ln|x-x_0|)\sum_{n=0}^{\infty}B_n(x-x_0)^n,\quad B_0\neq 0\land B_n\in\bbR.\]
-\item Case $r_1-r_2\in\bbN_0$: Two linearly independent solutions for all ordinary points and regular singular points $x\neq x_0$ are:
+\item Case $r_1-r_2\in\bbN_0$: Two solutions for all $0<|x-x_0|<R$ where $R$ is the distance between $x_0$ and the nearest to $x_0$ regular singular point of $(x-x_0)p(x)$ or $(x-x_0)^2q(x)$ are:
 \[y_1(x)=(x-x_0)^{r_1}\sum_{n=0}^{\infty}A_n(x-x_0)^n,\quad A_0\neq 0\land A_n\in\bbR,\]
-\[y_2(x)=y_1(x)\ln(x-x_0)+(x-x_0)^{r_2}\sum_{n=0}^{\infty}B_n(x-x_0)^n,\quad B_0\neq 0\land B_n\in\bbR.\]
+\[y_2(x)=(x-x_0)^{r_2}\sum_{n=0}^{\infty}B_n(x-x_0)^n,\quad B_0\neq 0\land B_n\in\bbR.\]
+If they both exist and are linearly independent, no modification is needed; otherwise, $y_2$ is modified to
+\[y_2(x)=\ln|x-x_0|y_1(x)+(x-x_0)^{r_2}\sum_{n=0}^{\infty}B_n(x-x_0)^n,\quad B_0\neq 0\land B_n\in\bbR.\]
 \eit 
-\item Substitute them into the ODE and solve them respectively to obtain recurrence relations for $A_n$ and $B_n$. The family of general solutions for all ordinary points and regular singular points $x\neq x_0$ is:
+\item Substitute $y_1,y_1',y_1''$ and $y_2,y_2',y_2''$ into the ODE respectively, rewrite $p(x)$ and $q(x)$ into Taylor expansion at $x_0$, rewrite the products into Cauchy products, and rewrite LHSs as power series in $x^n$.
+\item Solve for the recurrence relations of $A_n$ and $B_n$.
+\item The two-parameter family of general solutions for all $0<|x-x_0|<R$ where $R$ is the distance between $x_0$ and the nearest to $x_0$ regular singular point of $(x-x_0)p(x)$ or $(x-x_0)^2q(x)$ is:
 \[y=C_1y_1(x)+C_2y_2(x),\quad C_1,C_2\in\bbR.\]
 \een
-\sssc{Example:}
+\sssc{Example: $y''-2xy'+y=0$}
+ODE:
+\[y''-2xy'+y=0.\]
+Solutions:
+\[y=\sum_{n=0}^{\infty}a_nx^n,\]
+\[a_0,a_1\in\bbR,\quad a_{n+2}=\frac{n-1}{(n+2)(n+1)}a_n.\]
+\begin{proof}
+\[y=\sum_{n=0}^{\infty}a_nx^n\]
+\[y'=\sum_{n=0}^{\infty}a_{n+1}(n+1)x^n\]
+\[y''=\sum_{n=0}^{\infty}a_{n+2}(n+2)(n+1)x^n\]
+\[a_{n+2}(n+2)(n+1)-a_nn+a_n=0\]
+\[a_{n+2}=\frac{n-1}{(n+2)(n+1)}a_n\]
+\end{proof}
+\sssc{Example: $y''+\sin(x)y'+x^2y=0$}
+ODE:
+\[y''+\sin(x)y'+x^2y=0.\]
+Solutions:
+\[y=\sum_{n=0}^{\infty}a_nx^n,\]
+where:
+\[a_{-1}=a_{-2}=0,\quad a_0,a_1\in\bbR,\]
+\[a_{n+2}(n+2)(n+1)+\sum_{k=0}^{\left\lfloor\frac{n-1}{2}\right\rfloor}\frac{(-1)^k}{(2k+1)!}a_{n-2k}(n-2k)+a_{n-2}=0.\]
+\begin{proof}
+\[y=\sum_{n=0}^{\infty}a_nx^n\]
+\[y'=\sum_{n=0}^{\infty}a_{n+1}(n+1)x^n\]
+\[y''=\sum_{n=0}^{\infty}a_{n+2}(n+2)(n+1)x^n\]
+\[\sin(x)=\sum_{n=0}^{\infty}\frac{(-1)^n}{(2n+1)!}x^{2n+1}\]
+\[\sum_{n=0}^{\infty}a_{n+2}(n+2)(n+1)x^n+\sum_{n=0}^{\infty}\frac{(-1)^n}{(2n+1)!}x^{2n+1}\sum_{n=0}^{\infty}a_{n+1}(n+1)x^n+x^2\sum_{n=0}^{\infty}a_nx^n=0.\]
+\[\ba
+\sum_{n=0}^{\infty}\frac{(-1)^n}{(2n+1)!}x^{2n+1}\sum_{n=0}^{\infty}a_{n+1}(n+1)x^n&=\sum_{n=0)^{\infty}\sum_{k=0}^n\frac{(-1)^k}{(2k+1)!}x^{2k+1}a_{n-k+1}(n-k+1)x^{n-k}\\
+&=\sum_{n=0)^{\infty}\sum_{k=0}^n\frac{(-1)^k}{(2k+1)!}a_{n-k+1}(n-k+1)x^{n+k+1}\\
+&=\sum_{n=0}^{\infty}\sum_{k=0}^{\left\lfloor\frac{n-1}{2}\right\rfloor}\frac{(-1)^k}{(2k+1)!}a_{n-2k}(n-2k)x^n
+\ea\]
+\[\sum_{n=0}^{\infty}\qty(a_{n+2}(n+2)(n+1)+\sum_{k=0}^{\left\lfloor\frac{n-1}{2}\right\rfloor}\frac{(-1)^k}{(2k+1)!}a_{n-2k}(n-2k)+a_{n-2})x^n=0,\quad a_{-1}=a_{-2}=0\]
+\[a_{n+2}(n+2)(n+1)+\sum_{k=0}^{\left\lfloor\frac{n-1}{2}\right\rfloor}\frac{(-1)^k}{(2k+1)!}a_{n-2k}(n-2k)+a_{n-2}=0\]
+\end{proof}
+\sssc{Example: $(x-x_0)^2y''+(x-x_0)y'-y=0$}
+ODE:
+\[(x-x_0)^2y''+(x-x_0)y'-y=0.\]
+Solutions:
+\[y(x)=A(x-x_0)+B(x-x_0)^{-1},\quad A,B\in\bbR.\]
+\begin{proof}
+\[y=\sum_{n=0}^{\infty}a_n(x-x_0)^{n+r}\]
+\[y'=\sum_{n=0}^{\infty}a_n(n+r)(x-x_0)^{n+r-1}\]
+\[y''=\sum_{n=0}^{\infty}a_n(n+r)(n+r-1)(x-x_0)^{n+r-2}\]
+\[(x-x_0)^2y''=\sum_{n=0}^{\infty}a_n(n+r)(n+r-1)(x-x_0)^{n+r}\]
+\[(x-x_0)y'=\sum_{n=0}^{\infty}a_n(n+r)(x-x_0)^{n+r}\]
+\[L=a_0r(r-1)(x-x_0)^r+a_0r(x-x_0)^r-a_0(x-x_0)^r\]
+\[I(r)=a_0r(r-1)+a_0r-a_0=a_0(r^2-1)=0\]
+\[r=\pm 1\]
+\[y_1(x)=\sum_{n=0}^{\infty}A_n(x-x_0)^{n+1}\]
+\[y_1'(x)=\sum_{n=0}^{\infty}A_n(n+1)(x-x_0)^n\]
+\[y_1''(x)=\sum_{n=0}^{\infty}A_n(n+1)n(x-x_0)^{n-1}\]
+\[(x-x_0)y_1'(x)=\sum_{n=0}^{\infty}A_n(n+1)(x-x_0)^{n+1}\]
+\[(x-x_0)^2y_1''(x)=\sum_{n=0}^{\infty}A_n(n+1)n(x-x_0)^{n+1}\]
+\[A_n(n+1)n+A_n(n+1)-A_n=0.\]
+\[A_n=0,\quad\forall n\in\bbN\]
+\[y_2(x)=\sum_{n=0}^{\infty}B_n(x-x_0)^{n-1}\]
+\[y_2'(x)=\sum_{n=0}^{\infty}B_n(n-1)(x-x_0)^{n-2}\]
+\[y_2''(x)=\sum_{n=0}^{\infty}B_n(n-1)(n-2)(x-x_0)^{n-3}\]
+\[\sum_{n=0}^{\infty}B_n(n-1)(n-2)(x-x_0)^{n-1}+B_n(n-1)(x-x_0)^{n-1}-B_n(x-x_0)^{n-1}=0\]
+\[\sum_{n=0}^{\infty}B_n(n+1)(n-1)(x-x_0)^n=0\]
+\[B_n(n+1)(n-1)=0\]
+\[B_n=0,\quad\forall n\in\bbN\land n\neq 2\]
+\[y_2(x)=B_0(x-x_0)^{-1}+B_2(x-x_0)\]
+\[y(x)=C_1y_1(x)+C_2y_2(x)=A(x-x_0)+B(x-x_0)^{-1},\quad A,B\in\bbR\]
+\end{proof}
+\sssc{Example: $xy''+(x-1)^2y'+y=0$}
+ODE:
+\[xy''+(x-1)^2y'+y=0.\]
+Solutions:
+
+\begin{proof}
+\[y=\sum_{n=0}^{\infty}a_nx^{n+r}\]
+\[y'=\sum_{n=0}^{\infty}a_n(n+r)x^{n+r-1}\]
+\[y''=\sum_{n=0}^{\infty}a_n(n+r)(n+r-1)x^{n+r-2}\]
+\[xy''=\sum_{n=0}^{\infty}a_n(n+r)(n+r-1)x^{n+r-1}\]
+\[(x-x_1)^2y'=\sum_{n=0}^{\infty}a_n(n+r)x^{n+r+1}+2\sum_{n=0}^{\infty}a_n(n+r)x^{n+r}+\sum_{n=0}^{\infty}a_n(n+r)x^{n+r-1}\]
+\[L=a_0r(r-1)x^{r-1}+a_0rx^{r+1}+2a_0rx^r+a_0rx^{r-1}\]
+\[I(r)=a_0r(r-1)+a_0r=0\]
+\[r_1=r_2=0\]
+\[y_1(x)=\sum_{n=0}^{\infty}A_nx^n\]
+\[y_1'(x)=\sum_{n=0}^{\infty}A_{n+1}(n+1)x^n\]
+\[y_1''(x)=\sum_{n=0}^{\infty}A_{n+2}(n+2)(n+1)x^n\]
+\[\sum_{n=0}^{\infty}\qty(A_{n+1}(n+1)n+A_{n-1}(n-1)-2A_nn+A_{n+1}(n+1)+A_n)x^n=0.\]
+\[A_{n+2}=\frac{A_{n+1}(2n+1)-A_nn}{(n+2)^2}\]
+\[y_2(x)=\ln|x|\sum_{n=0}^{\infty}A_nx^n+\sum_{n=0}^{\infty}B_nx^n\]
+\[y_2'(x)=\ln|x|\sum_{n=0}^{\infty}A_{n+1}(n+1)x^n+\sum_{n=0}^{\infty}A_nx^{n-1}+\sum_{n=0}^{\infty}B_{n+1}(n+1)x^n\]
+PLACEHOLDER
+\[y_2''(x)=
+\ln|x|\sum_{n=0}^{\infty}A_{n+1}(n+1)x^n+
+\sum_{n=0}^{\infty}A_nx^{n-1}+
+\sum_{n=0}^{\infty}B_{n+1}(n+1)x^n\]
+PLACEHOLDER
+\end{proof}
+\sssc{Example for complex roots: PLACEHOLDER}
 PLACEHOLDER
 \sct{Classical theory}
 PLACEHOLDER
