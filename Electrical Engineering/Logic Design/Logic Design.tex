@@ -279,7 +279,7 @@ The ON-set of a Boolean function $f$ is the set of all input combinations such t
 \sssc{Incompletely specified function (ISF) or Don't-care function}
 An incompletely specified function (ISF) or a don't-care function is a Boolean function but in which for some input combinations, the output is not defined or irrelevant, often denoted as $X$. Those input combinations are called don't-care conditions.
 \sssc{Truth table}
-A truth table, also called a table of combinations, specifies the corresponding outputs for all possible input combinations of a Boolean function in the order such that if two input combinations have the same inputs in the first $i$ variables and $A_{i+1}$ of the first one is $0$, $A_{i+1}$ of the second one is $1$, then the first is put prior to the second. A truth table for an $n$-variable Boolean function $f\qty(A_1,A_2,\ldots A_n)$ have $2^n$ rows and is:
+A truth table, also called a table of combinations, specifies the corresponding outputs for all possible input combinations of a Boolean function in order of the unsigned binary number corresponding to the input combination from small to large from top to bottom. A truth table for an $n$-variable Boolean function $f\qty(A_1,A_2,\ldots A_n)$ have $2^n$ rows and is:
 \begin{longtable}[c]{|m|m|m|m|m|}
 \hline
 A_1 & A_2 & \ldots & A_n & f\\\hline
@@ -434,15 +434,16 @@ For $n$ such that $\frac{n-1}{2}\in\mathbb{N}$,
 \[X\oplus Y+X\oplus Z=XY'+X'Y+XZ'+X'Z=XY'+X'Y+XZ'+X'Z+YZ'+Y'Z=X\oplus Y+X\oplus Z+Y\oplus Z=XY'+X'Z+YZ'=X'Y+XZ'+Y'Z\]
 \end{proof}
 \ssc{Minterm and Maxterm Expansions, Canonical Expansions, or Standard Expansion}
+\sssc{Minterm}
+The $n$-variable minterm of index $i$, denoted as $m_i$ is a function that outputs 1 if the unsigned binary number corresponding to the input combination is $i$ and outputs 0 otherwise.
+\sssc{Maxterm}
+The $n$-variable maxterm of index $i$, denoted as $M_i$ is a function that outputs 0 if the unsigned binary number corresponding to the input combination is $i$ and outputs 1 otherwise.
 \sssc{Minterm expansion, canonical SOP, or standard SOP}
-A minterm of a completely specified Boolean function $f\colon\{1,0\}^n\to\{1,0\}$, denoted as $m_i$ for the input combination in the $(i+1)$th row of the truth table of $f$ that is in the ON-set of $f$, is defined for any input combinations in the ON-set of $f$ as
-\[m_i=\prod_{k=1}^ny_k,\]
-in which $y_k$ is defined as the $k$th input variable or its complement that is in the input combination, i.e. $x_k$, if the $k$th input in that input combination is $1$ and as the complement of the $k$th input variable, i.e. $(x_k)'$, if the $k$th input in that input combination is $0$. That is, the $i$ of any $m_i$ is the binary integer representated by the input combination of that row converted to decimal, and $m_i$ is defined as the product of the input variables or their complements that are in the input combination of that row for all rows with output $1$ and undefined for rows with output $0$.
-
-Minterm expansion, canonical SOP, or standard SOP is an expression of a completely specified Boolean function as a sum of minterms of it. Let $S$ be the set of all integer $i$ such that the input combination in the $(i+1)$th row of the truth table of $f$ is in the ON-set of $f$. Then the minterm expansion, canonical SOP, or standard SOP of $f$ is
+Minterm expansion, canonical SOP, or standard SOP is an expression of a completely specified Boolean function as a sum of minterms. Let $S$ be the set of all unsigned binary numbers corresponding to some input combination in the ON-set of $f$. The minterm expansion, canonical SOP, or standard SOP of $f$ is
 \[f=\sum_{i\in S}m_i,\]
 also denoted as
-\[f=\sum m(i\in S).\]
+\[f=\sum m(i\in S)\]
+where $i$ is listed from small to large.
 
 For a given completely specified Boolean function, there exists a unique minterm expansion of it.
 
@@ -462,14 +463,11 @@ a & b & c & f\\\hline
 , the minterm expansion of it is
 \[f=m_2+m_5+m_6=\sum m(2,5,6).\]
 \sssc{Maxterm expansion, canonical POS, or standard POS}
-A maxterm of a completely specified Boolean function $f\colon\{1,0\}^n\to\{1,0\}$, denoted as $M_i$ for the input combination in the $(i+1)$th row of the truth table of $f$ that is in the OFF-set of $f$, is defined for any input combinations in the OFF-set of $f$ as
-\[M_i=\sum_{k=1}^ny_k,\]
-in which $y_k$ is defined as the complement of the $k$th input variable or its complement that is in the input combination, i.e. $x_k$, if the $k$th input in that input combination is $0$ and as the complement of the $k$th input variable, i.e. $(x_k)'$, if the $k$th input in that input combination is $1$. That is, the $i$ of any $M_i$ is the binary integer representated by the input combination of that row converted to decimal, and $M_i$ is defined as the sum of the complement of the input variables or their complements that are in the input combination of that row for all rows with output $0$ and undefined for rows with output $1$.
-
-Maxterm expansion, canonical POS, or standard POS is an expression of a completely specified Boolean function as a product of maxterms of it. Let $T$ be the set of all integer $i$ such that the input combination in the $(i+1)$th row of the truth table of $f$ is in the OFF-set of $f$. Then the maxterm expansion, canonical POS, or standard POS of $f$ is
+Maxterm expansion, canonical POS, or standard POS is an expression of a completely specified Boolean function as a product of maxterms. Let $T$ be the set of all unsigned binary numbers corresponding to some input combination in the OFF-set of $f$. The maxterm expansion, canonical POS, or standard POS of $f$ is
 \[f=\prod_{i\in T}M_i,\]
 also denoted as 
-\[f=\prod M(i\in T).\]
+\[f=\prod M(i\in T)\]
+where $i$ is listed from small to large.
 
 For a given completely specified Boolean function, there exists a unique maxterm expansion of it.
 
@@ -937,6 +935,8 @@ Unless otherwise specified, a type of electronic components with active high and
 Several signals that perform a common function may be grouped together to form a bus, represented with a single heavy line optionally with a diagonal slash through it specifying the number of bits in the bus.
 \sssc{Iterative Circuits}
 An iterative circuit consists of a number of identical cells interconnected in a regular manner. The regular structure of an iterative circuit makes it easier to fabricate in integrated circuit form than circuits with less regular structures.
+\sssc{Bits significances}
+For circuits with the concept of LSB to MSB, variables of the $k$th least significant bit are usually labeled with subscript $_{k-1}$. When writing variables of a specific name of all bits in a row, they are usually listed from MSB to LSB from leftmost to rightmost. For an $n$-bit circuit, when treating variables of a specific name of all bits in a row listed from MSB to LSB from leftmost to rightmost as a unsigned binary number, decrements and increments are considered to be with mod $n$ afterwards.
 \sssc{Pull-up and Pull-down resistors}
 In a digital circuit, if an input pin is not connected to anything (floating), it can pick up random electrical noise. To keep it in a definite voltage we can use pull-up or pull-down resistors.
 
@@ -1100,7 +1100,7 @@ The procedure of designing a multiple-output NOR-gate circuit is
 \sssc{Propagation delays and timing diagram}
 When the input to a logic gate is changed, the output will not change instantaneously but change after a finite delay. If the change in output is delayed by time $\varepsilon$ with respect to the input, we say that this gate has a propagation delay of $\varepsilon$. In practice, the propagation delay for a 0 to 1 output change may be different than the delay for a 1 to 0 change. Propagation delays for integrated circuit gates may be as short as a few nanoseconds, and in many cases these delays can be neglected. However, in the analysis of some types of sequential circuits, even short delays may be important.
 
-Timing diagram, or timing chart, shows various signals in the circuit as a function of time, often in waveform with time being the horizontal axis and each vertical block plots one signal with the same time scale. The vertical edges on the diagram where the signals change from 0 to 1 are called rising edges; the vertical edges on the diagram where the signals change from 1 to 0 are called falling edges.
+Timing diagram, or timing chart, shows various signals in the circuit as a function of time, often in waveform with time being the horizontal axis and each vertical block plots one signal with the same time scale. The vertical edges on the diagram where the signals change from 0 to 1 are called rising edges or positive edges; the vertical edges on the diagram where the signals change from 1 to 0 are called falling edges or negative edges.
 
 The propagation delay of a digital circuit is the time it needs to stabilize.
 \sssc{Inertial delays}
@@ -1199,21 +1199,23 @@ It is generally uneconomical to design digital systems using only SSI and MSI in
 \sssc{Multiplexer (MUX)}
 A multiplexer (MUX) or data selector has a group of data inputs and a group of select inputs (aka control inputs, select lines, or control lines) and one output. The select inputs are used to select one of the data inputs and connect it to the output terminal. Multiplexers are frequently used in digital system design to select the data which is to be processed or stored.
 
-A $2^n$-to-1 MUX has $2^n$ data inputs $D_0,D_1,\ldots D_{2^n-1}$, $n$ select inputs $S_0,S_1,\ldots S_{n-1}$, and one output $Y$, with $Y$ given by
-\[Y=\sum_{i=0}^{2^{n-1}}D_i\cdot m_i(S_0,S_1,\ldots S_{n-1}),\]
-where $m_i$ is the minterm corresponding to $i$ for $n$-variable functions of $S_0,S_1,\ldots S_{n-1}$. When $m_i=1$, that is, the binary number $S_0S_1\ldots S_{n-1}$ is $i$, $I_i$ is the selected input.
+A $2^n$-to-1 MUX has $2^n$ data inputs $D_{2^n-1},D_{2^n-2},\ldots D_0$, $n$ select inputs $S_{n-1},S_{n-2},\ldots S_0$, and one output $Y$, in which $D_i$ is selected when the unsigned binary number $S_{n-1}S_{n-2}\ldots S_0$ equal to $i$.
 
-Alternatively, $Y$ can be written as
-\[Y=\prod_{i=0}^{2^{n-1}}\qty(D_i+M_i(S_0,S_1,\ldots S_{n-1})),\]
-where $M_i$ is the maxterm corresponding to $i$ for $n$-variable functions of $S_0,S_1,\ldots S_{n-1}$.
+$Y$ is given by
+\[Y=\sum_{i=0}^{2^n-1}D_i\cdot m_i(S_{n-1},S_{n-2},\ldots S_0),\]
+where $m_i(S_{n-1},S_{n-2},\ldots S_0)$ is the $n$-variable minterm of index $i$.
 
-The symbol of a MUX in block diagrams is an isosceles trapezoid with the longer parallel side contains the data input pins in order of the unsigned binary number corresponding to the select inputs combination for each data input to be selected with the select inputs combination for each data input to be selected written beside in the trapezoid, one of the legs, usually the leg farther from the data input that is selected when all select inputs are 0, contains the select inputs, and the shorter parallel side contains the output pin.
+Equivalently,
+\[Y=\prod_{i=0}^{2^n-1}\qty(D_i+M_i(S_{n-1},S_{n-2},\ldots S_0)),\]
+where $M_i(S_{n-1},S_{n-2},\ldots S_0)$ is the $n$-variable maxterm of index $i$.
 
-We can implement a MUX with a two- or multi-level circuit that realizes the SOP or POS form given above.
+The symbol of an $2^n$-to-$1$ MUX in block diagrams is an isosceles trapezoid, sometimes a rectangle, with paper output assigned as positive $z$-axis, the ray from the longer parallel side to the shorter parallel side perpendicular to them assigned as positive $y$ axis, with the longer parallel side contains the data input pins ordered from $D_0$ to $D_{2^n-1}$, typically from negative $x$-axis to positive $x$ axis, with the unsigned number $i$, typically in binary, labeled inside the trapezoid beside $D_i$, one of the legs, typically the leg farther from $D_0$, contains the select inputs ordered from $S_{n-1}$ to $S_0$ from closest to the longer parallel side to farthest from the longer parallel side, sometimes with name of each select input labeled inside the trapezoid beside each of them, and the shorter parallel side contains the output pin.
 
-A MUX with active high outputs outputs the selected input directly, while a MUX with active low outputs outputs the inverse of the selected input. A MUX can also have an additional input $E$ called enable (signal) and works as discussed above when $E=1$ and outputs $0$ when $E=0$.
+A multiplexer can be implemented with a two- or multi-level circuit that realizes the SOP or POS form given above. Alternatively, a $2^n$-to-1 multiplexer can be realized with $\qty(2^{n-m+1}-1)$ $2^m$-to-1 multiplexers ($m\leq n$).
 
-A $2^n$-to-1 multiplexer can be realized with $\qty(2^{n-m+1}-1)$ $2^m$-to-1 multiplexers ($m\leq n$).
+A MUX with active high outputs outputs the selected input directly, while a MUX with active low outputs outputs the inverse of the selected input.
+
+A MUX can also have an additional enable input $E$ and work as a normal MUX when $E=1$ and always output 0 or 1 or hi-Z when $E=0$ depending on the design.
 
 Given a $n$-variable switching function $F$, $2^m$ $m$-variable subfunctions of $F$ can be obtained using Shannon's expansion of the function and compose back to $F$ with one $2^{n-m}$-to-1 multiplexer. Take $m=1$, we can get a realization of $F$ with one $2^{n-1}$-to-1 multiplexer.
 \sssc{Three-state buffer or tri-state buffer}
@@ -1570,12 +1572,12 @@ To ensure that each physical press or release of a switch produces only one tran
 \item bounce at $b$: $S$ bounces, $R=0$, $Q=1$ after delay time of the latch since bounce at $b$ starts (delay time of the latch is longer than the time $S$ bounces from one state to another),
 \item switch at $b$: $S=1$, $R=0$, $Q=1$.
 \een
-\sssc{NOR-gate Gated S-R Latch}
-A NOR-gate gated S-R latch or a gated S-R NOR latch has three inputs, set $S$, reset $R$, and enable $E$, and two outputs, $Q$ and $Q'$, and stores one bit, $Q$. It consists of an active-high S-R latch with $S$ and $R$ being replaced with the outputs of two AND gates, each of which takes $E$ and the original input as inputs respectively.
+\sssc{Gated S-R Latch}
+A gated S-R latch has three inputs, set $S$, reset $R$, and enable $E$, and two outputs, $Q$ and $Q'$, and stores one bit, $Q$. There are NOR-gate and NAND-gate implementations of it, both with restriction that $SR=0$.
+\bit
+\item A NOR-gate gated S-R latch or a gated S-R NOR latch consists of an active-high S-R latch with $S$ and $R$ being replaced with the outputs of two AND gates, each of which takes $E$ and the original input as inputs respectively.
 
-It has a restriction that $SR=0$.
-
-With present state $Q$, next state $Q^+$, and next state of $Q'$ $P$, the next-state equation of a gated S-R latch is:
+With present state $Q$, next state $Q^+$, and next state of $Q'$ $P$, the next-state equation of a NOR-gate gated S-R latch is:
 \[Q^+=(RE+(SE+Q)')'=(RE)'(SE+Q)=(R'+E')(SE+Q)=SR'E+R'Q+E'Q.\]
 By making $(S,R)=(1,1)$ don't care combination, we can simplify it as:
 \[Q^+=SE+Q(R'+E').\]
@@ -1583,31 +1585,23 @@ By making $(S,R)=(1,1)$ don't care combination, we can simplify it as:
 \[{Q^+}'=(SE+Q(R'+E'))'=(SE)'(Q(R'+E'))'=(S'+E')(Q'+RE)=S'RE+S'Q'+E'Q'=P.\]
 By making $(S,R)=(1,1)$ don't care combination, we can simplify it as:
 \[{Q^+}'=P=RE+Q'(S+E').\]
-
-When $(S,R,E)=(1,0,1)$, it sets $Q^+$ to 1; when $(S,R,E)=(0,1,1)$, it resets $Q^+$ to 0; when $(S,R)=(0,0)$ or $E=0$, it holds present state; when $(S,R,E)=(1,1,1)$, which is not allowed, the outputs oscillate; when $E$ changes from 1 to 0 while $(S,R)=(1,1)$, which is not allowed, a race condition where both inputs to the underlying S-R latch changes from 0 to 1 and the propagation delays of the gates determine whether the latch stabilizes with $Q^+$ changed or not occurs.
-
-Another restriction of NOR-gate gated S-R latchs is when one or both of $S$ and $R$ go low (e.g. a glitch caused by a statc-0 hazard) near a falling edge of $E$, the latch may catch the unwanted 0. This is called 0's catching problem.
-
-The symbol of a gated S-R latch in block diagrams is an active-high S-R latch with an additional enable input line between $S$ and $R$ labeld $En$.
-\sssc{NAND-gate Gated S-R Latch}
-A NAND-gate gated S-R latch or a gated S-R NAND latch has three inputs, set $S$, reset $R$, and enable $E$, and two outputs, $Q$ and $Q'$, and stores one bit, $Q$. It consists of an active-low S-R latch with $\ol{S}$ and $\ol{R}$ being replaced with the outputs of two NAND gates, each of which takes $E$ and the original input as inputs respectively.
-
-It has a restriction that $SR=0$.
+\item A NAND-gate gated S-R latch or a gated S-R NAND latch consists of an active-low S-R latch with $\ol{S}$ and $\ol{R}$ being replaced with the outputs of two NAND gates, each of which takes $E$ and the original input as inputs respectively.
 
 With present state $Q$, next state $Q^+$, and next state of $Q'$ $P$, the next-state equation of a NAND-gate gated S-R latch is:
 \[Q^+=((SE)'((RE)'Q)')'=SE+(RE)'Q=SE+Q(R'+E').\]
 \[P=((RE)'{Q^+}')'=((RE)'(SE+Q(R'+E')))'=RE+(SE+Q(R'+E'))'=RE+(SE)'(Q(R'+E'))'=RE+(S'+E')(Q'+RE)=S'Q'+RE+E'Q.\]
 \[{Q^+}'=(SE+Q(R'+E'))'=(SE)'(Q(R'+E'))'=(S'+E')(Q'+RE)=S'Q'+S'RE+E'Q=P.\]
-By making $(S,R,E)=(1,1)$ don't care combination, we can simplify it as:
+By making $(S,R)=(1,1)$ don't care combination, we can simplify it as:
 \[{Q^+}'=P=RE+Q'(S+E').\]
-
-When $(S,R,E)=(1,0,1)$, it sets $Q^+$ to 1; when $(S,R,E)=(0,1,1)$, it resets $Q^+$ to 0; when $(S,R)=(0,0)$ or $E=0$, it holds present state; when $(S,R,E)=(1,1,1)$, which is not allowed, the outputs oscillate; when $E$ changes from 1 to 0 while $(S,R)=(1,1)$, which is not allowed, a race condition where both inputs to the underlying S-R latch changes from 1 to 0 and the propagation delays of the gates determine whether the latch stabilizes with $Q^+$ changed or not occurs.
-
-Another restriction of NAND-gate gated S-R latchs is when one or both of $S$ and $R$ go high (e.g. a glitch caused by a statc-1 hazard) near a falling edge of $E$, the latch may catch the unwanted 1. This is called 1's catching problem.
-
-The symbol of a gated S-R latch in block diagrams is an active-high S-R latch with an additional enable input line between $S$ and $R$ labeld $En$.
-\sssc{(Gated) D Latch or Transparent Latch}
-A (gated) data (aka D) latch or transparent latch has two inputs, data $D$ and enable $E$, and two outputs, $Q$ and $Q'$, and stores one bit, $Q$.
+\eit
+When $(S,R,E)=(1,0,1)$, it sets $Q^+$ to 1; when $(S,R,E)=(0,1,1)$, it resets $Q^+$ to 0; when $(S,R)=(0,0)$ or $E=0$, it holds present state; when $(S,R,E)=(1,1,1)$, which is not allowed, the outputs oscillate; when $E$ changes from 1 to 0 while $(S,R)=(1,1)$, which is not allowed, a race condition where both inputs to the underlying S-R latch changes from 0 to 1 and the propagation delays of the gates determine whether the latch stabilizes with $Q^+$ changed or not occurs.
+\bit
+\item Another restriction of NOR-gate gated S-R latchs is when one or both of $S$ and $R$ go low (e.g. a glitch caused by a statc-0 hazard) near a falling edge of $E$, the latch may catch the unwanted 0. This is called 0's catching problem.
+\item Another restriction of NAND-gate gated S-R latchs is when one or both of $S$ and $R$ go high (e.g. a glitch caused by a statc-1 hazard) near a falling edge of $E$, the latch may catch the unwanted 1. This is called 1's catching problem.
+\eit
+The symbol of a gated S-R latch in block diagrams is an active-high S-R latch with an additional enable input line between $S$ and $R$ labeld $En$ or $E$.
+\sssc{(Gated) D Latch}
+A (gated) data (aka D) latch (also called transparent latch) has two inputs, data $D$ and enable $E$, and two outputs, $Q$ and $Q'$, and stores one bit, $Q$.
 
 With present state $Q$, next state $Q^+$, and next state of $Q'$ $P$, the next-state equation is:
 \[Q^+=DE+QE'.\]
@@ -1615,15 +1609,25 @@ With present state $Q$, next state $Q^+$, and next state of $Q'$ $P$, the next-s
 
 It is called a transparent latch because $Q=D$ when $E=1$.
 
-It can be implemented with a gated S-R latch with $S$ and $R$ being replaced with $D$ and $D'$ ($D$ through an inverter) respectively, called S-R latch-based D latch.
-\[S=DE.\]
-\[R=D'E.\]
+It can be implemented with a gated S-R latch with $S$ and $R$ being replaced with $D$ and $D'$ respectively, called S-R latch-based D latch, that is,
+\[S=DE,\quad R=D'E,\]
+or
+\[\ol{S}=D'+E',\quad\ol{R}=D+E'.\]
+This can be modified to use one less inverter but one more level as an active-low S-R latch with
+\[\ol{S}=(DE)',\quad\ol{R}=(\ol{S}E)'=DE+E'=D+E'.\]
 
 It can also be implemented with two transmission gates, input transmission gate $T_1$ and feedback transmission gate $T_2$, and two inverters output inverter $I_1$ and feedback inverter $I_2$, where the data input $D$ is connected to one data terminal of $T_1$, the other data terminal of $T_1$ is connected to one data terminal of $T_2$, output $Q$, and the input of $I_1$, the output of $I_1$ is connected to the output $Q'$ and the input of $I_2$, the output of $I_2$ is connected to the input of $T_2$, the enable signal of $T_1$ is connected to $E$, and the enable signal of $T_2$ is connected to $E'$
 \[Q^+=DE+QE'.\]
 \[P=(DE+(Q')'E')'=(DE+QE')'={Q^+}'=D'Q'+D'E+E'Q'.\]
 
 The symbol of a D latch in block diagrams is the same as a gated S-R latch with $R$ removed and $S$ changed to $D$.
+
+A gated D latch with inverted enable $\ol{E}$ can be implemented with a gated S-R latch with $S$ and $R$ being replaced with $D$ and $D'$ respectively and $E$ being replaced with $\ol{E}'$, that is,
+\[S=D\ol{E}',\quad R=D'\ol{E}',\]
+or
+\[\ol{S}=D'+\ol{E},\quad\ol{R}=D+\ol{E}.\]
+This can be modified to use one less inverter but one more level as an active-high S-R latch with
+\[R=(D+\ol{E})'=D'\ol{E}',\quad S=(R+\ol{E})'=(D+\ol{E})\ol{E}'=D\ol{E}'.\]
 \sssc{(Asynchronous) J-K Latch}
 An (asynchronous) J-K (aka JK) latch is an improved version of the S-R latch that eliminates the forbidden state. It has two inputs, $J$ and $K$, and two outputs, $Q$ and $Q'$, and stores one bit, $Q$. It consists of a gated S-R latch with $S$ and $R$ being renamed as $J$ and $K$ respectively and the enable $E$ inputs to the gates with $J$ and $K$ being the other input being replaced with new $Q'$ and $Q$ feedback inputs respectively.
 
@@ -1646,9 +1650,9 @@ When $(J,K,E)=(1,0,1)$, it sets $Q^+$ to 1; when $(J,K,E)=(0,1,1)$, it resets $Q
 The symbol of a gated J-K latch in block diagrams is a J-K latch with an additional enable input line between $J$ and $K$ labeld $En$.
 \ssc{Flip-flops}
 \sssc{Edge-triggered flip-flops}
-An edge-triggered flip-flop has the same inputs and outputs of the gated latch of the same type but the enable input $E$ is replaced with clock input C, Clk, or CLK and for rising-edge-triggered (aka active-high) flip-flops, when clock is at a rising edge, called active (clock) edge, the flip-flop is transparent; otherwise the flip-flop is hold (aka retain); for falling-edge-triggered (aka active-low) flip-flops, when clock is at a falling edge, called active (clock) edge, the flip-flop is transparent; otherwise the flip-flop is hold (aka retain).
+An edge-triggered flip-flop has the same inputs and outputs of the gated latch of the same type but the enable input is replaced with clock input C, Clk, or CLK and for rising edge-triggered (also called positive edge-triggered or active-high) flip-flops, when clock is at a rising edge, called active (clock) edge, the flip-flop is transparent; otherwise the flip-flop is hold (also called retain); for falling edge-triggered (also called negative edge-triggered or active-low) flip-flops, when clock is at a falling edge, called active (clock) edge, the flip-flop is transparent; otherwise the flip-flop is hold (also called retain).
 
-The symbol of a rising-edge-triggered flip-flop in block diagrams is a gated latch of the same type with $En$ replaced with a small arrowhead (wedge shape) with its opening facing outwards from the rectangle and its two ends on the side of the rectangle representing the clock input.
+The symbol of a rising-edge-triggered flip-flop in block diagrams is a gated latch of the same type with enable input replaced with a small arrowhead (wedge shape) with its opening facing outwards from the rectangle and its two ends on the side of the rectangle representing the clock input.
 
 The symbol of a falling-edge-triggered flip-flop in block diagrams is a rising-edge-triggered flip-flop of the same type with an inversion bubble outside of the rectangle at the clock input.
 \sssc{(Edge-triggered) S-R flip-flop (SRFF or SR-FF)}
@@ -1683,11 +1687,13 @@ The master-slave flip-flops need a time where the data inputs are stable before 
 
 For rising-edge-triggered flip-flops, the enable signal of the master is the inverse of the clock signal and the enable signal of the slave is the clock signal. For falling-edge-triggered flip-flops, the enable signal of the master is the clock signal and the enable signal of the slave is the inverse of the clock signal.
 \sssc{Master-slave S-R flip-flop}
-A master-slave S-R flip-flop consist of two gated S-R latches in which $Q$ and $Q'$ of the master are connected to $S$ and $R$ of the slave respectively, $S$ and $R$ of the master are the inputs of it, and $Q$ and $Q'$ of the slave are the outputs of it.
+A master-slave S-R flip-flop can be implemented with two gated S-R latches in which $Q$ and $Q'$ of the master are connected to $S$ and $R$ of the slave respectively, $S$ and $R$ of the master are the inputs of it, and $Q$ and $Q'$ of the slave are the outputs of it.
 \sssc{Master-slave D flip-flop}
-A master-slave D flip-flop consist of two gated D latch in which $Q$ of the master is connected to $D$ of the slave, $D$ of the master is the input of it, and $Q$ and $Q'$ of the slave are the outputs of it.
+A master-slave D flip-flop can be implemented with two gated D latch in which $Q$ of the master is connected to $D$ of the slave, $D$ of the master is the input of it, and $Q$ and $Q'$ of the slave are the outputs of it.
+
+Alternatively, it can be implemented with a master gated D latch and a slave gated S-R latch in which $Q$ and $Q'$ of the master is connected to $S$ and $R$ of the slave, $D$ of the master is the input of it, and $Q$ and $Q'$ of the slave are the outputs of it.
 \sssc{Master-slave J-K flip-flop}
-A master-slave J-K flip-flop consist of a master-slave S-R flip-flop with $S$ and $R$ replaced with $JQ'$ and $KQ$ respectively.
+A master-slave J-K flip-flop can be implemented with a master-slave S-R flip-flop with $S$ and $R$ replaced with $JQ'$ and $KQ$ respectively.
 \sssc{Flip-flops with asynchronous clear and preset}
 Some flip-flops has asynchronous inputs that change the stored state of $Q$ at any time.
 \bit
@@ -1923,11 +1929,11 @@ An $n$-flip-flop synchronizer is an $n$-bit SISO register used to synchronize an
 A two-flip-flop synchronizer is often used.
 \ssc{Synchronous Counter}
 \sssc{Counter}
-A counter is a sequential circuit whose state repeats every fixed finite number of active edges, called count cycle. The cyclic sequence of the states is called state loop. 
+A counter is a sequential circuit whose state changes each active edge and repeats every fixed finite number of active edges, called count cycle. The cyclic sequence of the states is called state loop.
 \sssc{Transition Cycle}
 The transition cycle of a counter is a graph of states with directed edges indicating the transition to next state.
 \sssc{Synchronous Counter}
-A synchronous counter is a counter consists of flip-flops where all flip-flops are enabled synchronously.
+A synchronous counter is a counter consists of flip-flops sharing the same clock input.
 \sssc{Shift Register Counter}
 A shift register counter is a type of synchronous counter consists of a shift register with some or all of the outputs $Q$ of the flip-flops connected to the inputs of a combinational circuit with one output and the output of the combinational circuit connected to the input $D$ of the first flip-flop in the chain.
 \sssc{Ring Counter}
@@ -2002,6 +2008,15 @@ To design a synchronous counter consists of $n$ J-K flip-flops given arbitrary t
 \item Convert the next-state maps to J and K input maps.
 \item Realize all inputs $J$ and $K$ with combination circuits with a subset of all outputs $Q$ and $Q'$, constant 1 and 0 sources, and all external control inputs as inputs.
 \een
+\ssc{Asynchronous counter or ripple counter}
+\sssc{Asynchronous counter or ripple counter}
+An asynchronous counter or a ripple counter is a counter consists of flip-flops not sharing the same clock input.
+\sssc{Asynchronous down and up counter or frequency divider}
+An $n$-bit (also called mod-$2^n$) asynchronous down counter consists of $n$ FFs such that $Q_{n-1}Q_{n-2}\ldots Q_0$ as an unsigned number decrements by one every active clock edge. A rising-edge asynchronous down counter consists of $n$ rising-edge triggered TFFs with all inputs $T$ connected to constant 1 source, $Clk_0$ connected to the clock signal, and $Clk_{k+1}$ connected to $Q_k$ for all $k\in\bbN_0\land k<n$. A falling-edge asynchronous down counter consists of $n$ falling-edge triggered TFFs with all inputs $T$ connected to constant 1 source, $Clk_0$ connected to the clock signal, and $Clk_{k+1}$ connected to $Q_k'$ for all $k\in\bbN_0\land k<n$.
+
+An $n$-bit (also called mod-$2^n$) asynchronous up counter consists of $n$ FFs such that $Q_{n-1}Q_{n-2}\ldots Q_0$ as an unsigned number increments by one every active clock edge. A rising-edge asynchronous up counter consists of $n$ rising-edge triggered TFFs with all inputs $T$ connected to constant 1 source, $Clk_0$ connected to the clock signal, and $Clk_{k+1}$ connected to $Q_k'$ for all $k\in\bbN_0\land k<n$. A falling-edge asynchronous up counter consists of $n$ falling-edge triggered TFFs with all inputs $T$ connected to constant 1 source, $Clk_0$ connected to the clock signal, and $Clk_{k+1}$ connected to $Q_k$ for all $k\in\bbN_0\land k<n$.
+
+An $n$-bit asynchronous up or down counter is also a divided-by-$2^n$ frequency divider, in which $Q_{n-1}$ and $Q_{n-1}'$ are clock signals whose periods being $2^n$ times the period of the $Clk$ and duty cycles being $2^{n-1}$ times the period of the $Clk$.
 \ssc{Sequence Detector}
 \sssc{Definition}
 A sequence detector is a Mealy circuit with a serial input $X\in\{0,1\}$ is read and an output $Z$ that when the string of the last $n$ characters in the input word read is a prescribed string $w$, it outputs 1; otherwise, it outputs 0. Let $w=a_1a_2\ldots a_n$, $w_i=a_1a_2\ldots a_i$ for all $1\leq i\leq n$, and $w_0=\varepsilon$ (empty string).
@@ -2210,6 +2225,10 @@ Q_1^+ & 00 & 01 & 11 & 10 \\
 \ssc{Elimination of Redundant States}
 \sssc{Reachability}
 A state is reachable iff it is mapped to by transition function $\delta$ for any $x\in D_{\delta}$.
+\sssc{Distinguishable}
+Two states in a deterministic finite state transducer are distinguishable iff there exists an input string such that the output string starting from the two states are different.
+
+Two states in a deterministic finite state transducer are $k$-distinguishable iff there exists an input string of length $k$ such that the output string starting from the two states are different.
 \sssc{Equivalent states}
 Two completely specified states $p$ and $q$ of a Mealy machine are equivalent, denoted $p\equiv q$, iff for any input $X$,
 \[\delta(p,X)\equiv\delta(q,X)\land\lambda(p,X)=\lambda(q,X).\]
@@ -2233,7 +2252,7 @@ Implication chart, also called implication table, is a method to minimize comple
 
 First eliminate all unreachable states. Let the set of all remaining states be $S=\{S_0,S_1,\ldots,S_n\}$ and the input alphabet be $\Sigma=\{X_0,X_1,\ldots,X_m\}$.
 \ben
-\item The implication chart is a lower-triangle table with entries $a_{ij}$ for all integers $i,j\in\bbN_0\land n\geq i>j$.
+\item The implication chart is a lower-triangle table with entries $a_{ij}$ for all integers $i,j\in\bbN_0\land n\geq i>j$. In each entry, a pair of state $(s,t)$ is denoted as $s-t$, and pairs of states are denoted row by row.
 \item Fill each entry $a_{ij}$ with
 \bit
 \item $\times$ (means distinguishable) iff for Mealy machine, there exists $X_k\in\Sigma$ such that $\lambda(S_j,X_k)\neq\lambda(S_i,X_k)$, and for Moore machine, $\lambda(S_j)\neq\lambda(S_i)$,
@@ -2269,7 +2288,7 @@ Merger table is a method to minimize incompletely specified deterministic finite
 
 First eliminate all unreachable states. Let the set of all remaining states be $S=\{S_0,S_1,\ldots,S_n\}$ and the input alphabet be $\Sigma=\{X_0,X_1,\ldots,X_m\}$.
 \ben
-\item The merger table is a lower-triangle table with entries $a_{ij}$ for all integers $i,j\in\bbN_0\land n\geq i>j$.
+\item The merger table is a lower-triangle table with entries $a_{ij}$ for all integers $i,j\in\bbN_0\land n\geq i>j$. In each entry, a pair of state $(s,t)$ is denoted as $s-t$, and pairs of states are denoted row by row.
 \item Fill each entry $a_{ij}$ with
 \bit
 \item $\times$ (means distinguishable) iff for Mealy machine, there exists $X_k\in\Sigma$ such that $\lambda(S_j,X_k)\neq\lambda(S_i,X_k)$, and for Moore machine, $\lambda(S_j)\neq\lambda(S_i)$,
