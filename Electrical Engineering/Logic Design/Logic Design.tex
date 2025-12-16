@@ -1199,7 +1199,7 @@ It is generally uneconomical to design digital systems using only SSI and MSI in
 \sssc{Multiplexer (MUX)}
 A multiplexer (MUX) or data selector has a group of data inputs and a group of select inputs (aka control inputs, select lines, or control lines) and one output. The select inputs are used to select one of the data inputs and connect it to the output terminal. Multiplexers are frequently used in digital system design to select the data which is to be processed or stored.
 
-A $2^n$-to-1 MUX has $2^n$ data inputs $D_{2^n-1},D_{2^n-2},\ldots D_0$, $n$ select inputs $S_{n-1},S_{n-2},\ldots S_0$, and one output $Y$, in which $D_i$ is selected when the unsigned binary number $S_{n-1}S_{n-2}\ldots S_0$ equal to $i$.
+A $2^n$-to-1 MUX has $2^n$ data inputs $D_{2^n-1},D_{2^n-2},\ldots D_0$, $n$ select inputs $S_{n-1},S_{n-2},\ldots S_0$ with $S_{n-1}$, and one output $Y$, in which $D_i$ is selected when the unsigned binary number $S_{n-1}S_{n-2}\ldots S_0$ equal to $i$. (Some sources label the subscripts of the select inputs backwards, that is, $S_0$ being MSB and $S_{n-1}$ being LSB.)
 
 $Y$ is given by
 \[Y=\sum_{i=0}^{2^n-1}D_i\cdot m_i(S_{n-1},S_{n-2},\ldots S_0),\]
@@ -1209,7 +1209,7 @@ Equivalently,
 \[Y=\prod_{i=0}^{2^n-1}\qty(D_i+M_i(S_{n-1},S_{n-2},\ldots S_0)),\]
 where $M_i(S_{n-1},S_{n-2},\ldots S_0)$ is the $n$-variable maxterm of index $i$.
 
-The symbol of an $2^n$-to-$1$ MUX in block diagrams is an isosceles trapezoid, sometimes a rectangle, with paper output assigned as positive $z$-axis, the ray from the longer parallel side to the shorter parallel side perpendicular to them assigned as positive $y$ axis, with the longer parallel side contains the data input pins ordered from $D_0$ to $D_{2^n-1}$, typically from negative $x$-axis to positive $x$ axis, with the unsigned number $i$, typically in binary, labeled inside the trapezoid beside $D_i$, one of the legs, typically the leg farther from $D_0$, contains the select inputs ordered from $S_{n-1}$ to $S_0$ from closest to the longer parallel side to farthest from the longer parallel side, sometimes with name of each select input labeled inside the trapezoid beside each of them, and the shorter parallel side contains the output pin.
+The symbol of an $2^n$-to-$1$ MUX in block diagrams is an isosceles trapezoid, sometimes a rectangle, with paper output assigned as positive $z$-axis, the ray from the longer parallel side to the shorter parallel side perpendicular to them assigned as positive $y$ axis, with the longer parallel side contains the data input pins ordered from $D_0$ to $D_{2^n-1}$, typically from negative $x$-axis to positive $x$ axis, with the unsigned number $i$, typically in binary, labeled inside the trapezoid beside $D_i$, one of the legs, typically the leg farther from $D_0$, contains the select inputs ordered from MSB ($S_{n-1}$) to LSB ($S_0$) from closest to the longer parallel side to farthest from the longer parallel side, sometimes with name of each select input labeled inside the trapezoid beside each of them, and the shorter parallel side contains the output pin.
 
 A multiplexer can be implemented with a two- or multi-level circuit that realizes the SOP or POS form given above. Alternatively, a $2^n$-to-1 multiplexer can be realized with $\qty(2^{n-m+1}-1)$ $2^m$-to-1 multiplexers ($m\leq n$).
 

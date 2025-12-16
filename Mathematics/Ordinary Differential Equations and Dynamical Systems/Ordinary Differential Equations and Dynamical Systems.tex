@@ -568,10 +568,42 @@ The formation of its general solutions using the characteristic equation (also c
 \[\sum_{j=1}^k\sum_{u=0}^{m_j-1}A_{ju}x^ue^{r_jx}+\sum_{j=1}^h\sum_{u=0}^{\omega_j-1}\qty(B_{ju}\cos(\beta_jx)+C_{ju}\sin(\beta_jx))x^ue^{\alpha_jx},\]
 with parameters $A_{ju},B_{ju},C_{ju}$.
 \een
-\sssc{Example: SHM}
-PLACEHOLDER
-\sssc{Example: damped SHM}
-PLACEHOLDER
+\sssc{Example: simple harmonic motion}
+ODE:
+\[\ddot{x}=-\omega^2x,\quad\omega\in\bbR_{>0}.\]
+Solutions:
+\[x=A\sin(\omega t+\phi),\quad A,\phi\in\bbR.\]
+\begin{proof}
+\[\ddot{x}+\omega^2x=0\]
+\[r^2+\omega^2=0\]
+\[r=\pm\omega i\]
+\[x(t)=A\sin(\omega t)+B\cos(\omega t)=A\sin(\omega t+\phi)\]
+\end{proof}
+\sssc{Example: linearly damped simple harmonic motion}
+ODE:
+\[\ddot{x}=-k(x-C)-b\dot{x},\quad k,b\in\bbR_{>0}\land C\in\bbR.\]
+Solutions:
+\begin{itemize}
+\item Case $b^2<4k$ called underdamped:
+\[x=Ae^{\frac{-b}{2}t}\sin(\frac{\sqrt{4k-b^2}}{2}t+\phi)+C.\]
+\item Case $b^2=4k$ called critically damped:
+\[x=A(1+Bt)e^{\frac{-b}{2}t}+C\]
+\item Case $b^2>4k$ called overdamped:
+\[x=Ae^{\frac{-b}{2}t}\qty(e^{\frac{\sqrt{b^2-4k}}{2}t}+Be^{\frac{-\sqrt{b^2-4k}}{2}t})+C\]
+\end{itemize}
+\begin{proof}
+\[\lambda^2+b\lambda+k=0\]
+\[\lambda=\frac{-b\pm\sqrt{b^2-4k}}{2}\]
+Case $b^2<4k$:
+\[\lambda=\frac{-b\pm\sqrt{4k-b^2}i}{2}\]
+\[x-C=D\qty(e^{\frac{-b+\sqrt{4k-b^2}i}{2}t}+Ee^{\frac{-b-\sqrt{4k-b^2}i}{2}t})=Ae^{\frac{-b}{2}t}\sin(\frac{\sqrt{4k-b^2}}{2}t+\phi)\]
+Case $b^2=4k$:
+\[\lambda=\frac{-b}{2}\]
+\[x-C=A(1+Bt)e^{\frac{-b}{2}t}\]
+Case $b^2>4k$:
+\[\lambda=\frac{-b\pm\sqrt{b^2-4k}}{2}\]
+\[x-C=A\qty(e^{\frac{-b+\sqrt{b^2-4k}}{2}t}+Be^{\frac{-b-\sqrt{b^2-4k}}{2}t})=Ae^{\frac{-b}{2}t}\qty(e^{\frac{\sqrt{b^2-4k}}{2}t}+Be^{\frac{-\sqrt{b^2-4k}}{2}t})\]
+\end{proof}
 \sssc{Example: constant voltage series RLC and LC resonance circuit}
 PLACEHOLDER
 \sssc{Example: constant current parallel RLC and LC resonance circuit}
