@@ -1882,9 +1882,9 @@ Let the clock period of a synchronous circuit be $t_{clk}$, and for each flip-fl
 \item for each external input $X_{ij}$ that any of its input is dependent on, let the time $X_{ij}$ needs after an active clock edge to start being stable be $x_{ij}$, and the combinational circuit propagation delay from $X_{ij}$ to the input be $c_{ij}$, in which if multiple inputs of flip-flop $i$ depend on one external input, the one such that $x_{ij}+c_{ij}$ is larger is used, and
 \item for each flip-flop output $Q_{ij}$ that any of its input is dependent on, let the clock skew of flip-flop $i$ relative to the flip-flop $Q_{ij}$ belongs to be $k_{ji}$, the flip-flop output propagation delay of $Q_{ij}$ be $y_{ij}$, and the combinational circuit propagation delay from $Q_{ij}$ to the be $d_{ij}$, in which if multiple inputs of flip-flop $i$ depend on one flip-flop output, the one such that $y_{ij}+d_{ij}$ is larger is used,
 \eit
-then, the circuit is valid only if it satisfies:
+then, the circuit is valid only if it satisfies the conditions that
 \[t_{clk}\geq\max_i\{\max\{\max_j\{x_{ij}+c_{ij}-k_i\},\max_j\{y_{ij}+d_{ij}-k_{ij}\}+s_i\},\]
-and for each $i,j$:
+and for each $i,j$,
 \[y_{ij}+d_{ij}\geq k_{ij}+h_i.\]
 \sssc{General model for Moore circuits}
 The general model of Moore cicuits consists of $k$ flip-flops with a common clock, a combinational subcircuit with inputs from outside of the Mealy circuit $X_1,X_2,\ldots,X_m$ and outputs as inputs for flip-flops
