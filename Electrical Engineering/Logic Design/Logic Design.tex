@@ -2244,7 +2244,7 @@ Two completely specified states are distinguishable iff they can't be equivalent
 
 If two states are equivalent, we can merge them to one.
 
-A completely specified deterministic finite-state transducer is minimized iff no state is unreachable and every two distinct states are distinguishable.
+A completely specified deterministic finite-state transducer is minimal iff no state is unreachable and every two distinct states are distinguishable.
 
 We can minimize a completely specified deterministic finite-state transducer by maximizing the number of pairs of equivalent states, eliminating all equivalences, and eliminating all unreachable states.
 \sssc{Implication chart or implication table}
@@ -2282,9 +2282,9 @@ Two states are distinguishable iff they can't be compatible in any assignment of
 
 If two states are compatible, we can merge them to one.
 
-A incompletely specified deterministic finite-state transducer is minimized iff no state is unreachable and every two distinct states are distinguishable.
-\sssc{Merger table}
-Merger table is a method to minimize incompletely specified deterministic finite-state transducer.
+A incompletely specified deterministic finite-state transducer is minimal iff no state is unreachable and every two distinct states are distinguishable.
+\sssc{Merger table or merger chart}
+Merger table, also called merger chart, implication chart, or implication table, is a method to minimize incompletely specified deterministic finite-state transducer.
 
 First eliminate all unreachable states. Let the set of all remaining states be $S=\{S_0,S_1,\ldots,S_n\}$ and the input alphabet be $\Sigma=\{X_0,X_1,\ldots,X_m\}$.
 \ben
@@ -2292,7 +2292,7 @@ First eliminate all unreachable states. Let the set of all remaining states be $
 \item Fill each entry $a_{ij}$ with
 \bit
 \item $\times$ (means distinguishable) iff for Mealy machine, there exists $X_k\in\Sigma$ such that $\lambda(S_j,X_k)\neq\lambda(S_i,X_k)$, and for Moore machine, $\lambda(S_j)\neq\lambda(S_i)$,
-\item pairs of states $(\delta(S_j,X_k),\delta(S_i,X_k))$ for all $X_k\in\Sigma$ such that
+\item pairs of states $(\delta(S_j,X_k),\delta(S_i,X_k))$ for all $X_k\in\Sigma$ such that both $\delta(S_j,X_k)$ and $\delta(S_i,X_k)$ are specified and that
 \[\delta(S_j,X_k)\neq\delta(S_i,X_k)\land\{\delta(S_j,X_k),\delta(S_i,X_k)\}\neq\{S_i,S_j\},\]
 otherwise.
 \eit
@@ -2330,6 +2330,11 @@ otherwise.
 \item For each entry $a_{ij}$ that has not been filled with $\times$, fill it with $\times$ iff any pair of states $(S_p,T_q)$ in it is such that $a_{pq}$ has been filled with $\times$. Repeatedly iterate through all entries that has not been filled with $\times$ until no entry is filled with $\times$ in an iteration.
 \item Define a bipartite graph with two partitions $S$ and $T$ with, an edge between $S_i\in S$ and $T_j\in T$ exists iff $a_{ij}$ is not filled with $\times$. The two automata are equivalent iff the bipartite graph has a perfect matching.
 \een
+\sssc{Conversion between Moore and Mealy machine}
+\bit
+\item Moore machine to Mealy machine: A Moore machine is already a Mealy machine. However, a minimal Moore machine may not be a minimal Mealy machine, minimization by merging equivalent or compatible states may be required.
+\item Mealy machine to Moore machine: For each state, let there be $n$ distinct outputs, split it to $n$ states of the distinct outputs. A Moore machine converted from a minimal Mealy machine is always minimal.
+\eit
 \ssc{State Assignment}
 A unique binary number whose each digit corresponds to the state variable of a flip-flop is assigned to each state.
 \sssc{Cost}
@@ -2391,6 +2396,5 @@ Testing of sequential circuits is generally more difficult than testing combinat
 \een
 
 In the cases where a sequential circuit is implemented as part of an integrated circuit, only the inputs and outputs are available at the IC pins, and observing the state of the internal flip-flops is Impossible, test must be done by applying input sequences to the circuit and observing the output sequences. The set of test sequences must traverse all arcs on the state graph, but this is typically not a sufficient test.
-
 \end{document}
 

@@ -634,7 +634,7 @@ with constants $C_{jk}\in\bbR$.
 \ben
 \item If $\alpha_j\pm\beta_ji$ is not a pair of conjugate imaginary roots of the characteristic equation of the complementary equation, let $s_j=0$; otherwise, let $s_j$ be the multiplicity of $\alpha_j\pm\beta_ji$ as a pair of conjugate imaginary roots of the characteristic equation of the complementary equation.
 \item The ansatz is
-\[y_j=x^{s_j}e^{\alpha_jx}\sum_{k=0}^{m_j}x^k\qty(C_{jk}\cos(\beta_jx)+D_{jk}\sin(\beta_jx)),\]
+\[y_j=x^{s_j}e^{\alpha_jx}\sum_{k=0}^{m_j}\qty(C_{jk}\cos(\beta_jx)+D_{jk}\sin(\beta_jx))x^k,\]
 with constants $C_{jk},D_{jk}\in\bbR$.
 \item Solve for $C_{jk},D_{jk}$ such that $y_j$ is a particular solution of the constant coefficient linear nonhomogeneous ODE
 \[\sum_{j=0}^na_jy^{(j)}=x^{m_j}e^{\alpha_jx}\qty(k_j\cos(\beta_jx)+l_j\sin(\beta_jx)).\]
@@ -648,7 +648,7 @@ and the general solutions of the origin ODE is
 PLACEHOLDER
 \ssc{Formation of solutions of linear nonhomogeneous equation}
 \sssc{Wrońskian}
-For $n$ functions $f_1,f_2,\ldots,f_n$ that are $(n-1)$ times differentiable on an interval $I$, the Wrońskian of them, $W(f_1,f_2,\ldots,f_n)$, is a function on $I$ defined by
+For $n$ functions $f_1,f_2,\ldots,f_n$ that are $(n-1)$ times differentiable on an interval $I$, the Wrońskian (also called Wronskian) of them, $W(f_1,f_2,\ldots,f_n)$, is a function on $I$ defined by
 \[W(f_1,f_2,\ldots,f_n)(x)=\det\begin{bmatrix}
 f_1(x) & f_2(x) & \cdots & f_n(x) \\
 f_1'(x) & f_2(x) & \cdots & f_n'(x) \\
@@ -739,19 +739,19 @@ Given an $n$th-order linear nonhomogeneous ODE
 \[y^{(n)}+\sum_{i=0}^{n-1}p_i(x)y^{(i)}=q(x),\]
 let $y_1(x),y_2(x),\ldots,y_n(x)$ be a basis of the vector space of the solutions of the complementary equation,
 \[y^{(n)}+\sum_{i=0}^{n-1}p_i(x)y^{(i)}=0,\]
-which can be obtained by variation of parameters of the family of the solutions of the complementary equation. The particular solution of the original ODE is given by:
+which can be obtained by variation of parameters of the family of the solutions of the complementary equation. The particular solution of the original ODE (or family of general solutions with the integral constants being parameters) is given by:
 \[y_p=\sum_{i=1}^ny_i(x)\int\frac{W_i(x)}{W(x)}\dd{x},\]
 where
 \bit
 \item $W(x)$ is the Wrońskian of $y_1(x),y_2(x),\ldots,y_n(x)$,
-\item $W_i(x)$ is the Wrońskian of $y_1(x),y_2(x),\ldots,y_n(x)$ but with the $i$th column replaced by $(0,0,\ldots,0,q(x))^\top$.
+\item $W_i(x)$ is the Wrońskian of $W(x)$ but with the $i$th column replaced by $(0,0,\ldots,0,q(x))$.
 \eit
 For second-order equation
 \[y''+p_1(x)y'+p_0(x)y=q(x),\]
 let $y_1(x),y_2(x)$ be two linearly independent solutions of its complementary equation
 \[y''+p_1(x)y'+p_0(x)y=0,\]
-the particular solution is
-\[y_p(x)=y_1(x)\int\frac{-y_2(x)q(x)}{y_1(x)y_2'(x)-y_2(x)y_1'(x)}\dd{x}+y_2(x)\int\frac{y_1(x)q(x)}{y_1(x)y_2'(x)-y_2(x)y_1'(x)}\dd{x}.\]
+the particular solution (or family of general solutions with the integral constants being parameters) is given by
+\[y_p(x)=-y_1(x)\int\frac{y_2(x)q(x)}{y_1(x)y_2'(x)-y_2(x)y_1'(x)}\dd{x}+y_2(x)\int\frac{y_1(x)q(x)}{y_1(x)y_2'(x)-y_2(x)y_1'(x)}\dd{x}.\]
 \begin{proof}
 The particular solution is given by
 \[y_p=\sum_{i=1}^nc_i(x)y_i(x),\]
