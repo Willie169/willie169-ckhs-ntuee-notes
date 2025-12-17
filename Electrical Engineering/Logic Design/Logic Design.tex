@@ -1866,7 +1866,7 @@ The following method can be used to construct a state table or a transition tabl
 \een
 \een
 \sssc{Clock skew}
-Clock skew $t_{sk}$ is the difference in arrival times of a clock signal at different components in a synchronous digital circuit, due to variance in propagation delay.
+The clock skew $t_{sk}$ of a component $i$ relative to another component $j$ in a synchronous circuit is the arrival time of a clock edge to component $i$ relative to the arrival time of a clock edge to component $j$.
 \sssc{General model for Mealy circuits}
 The general model of Mealy cicuits consists of $k$ flip-flops with a common clock and a combinational subcircuit with inputs from outside of the Mealy circuit $X_1,X_2,\ldots,X_m$, inputs that are flip-flops outputs $Q_1,Q_2,\ldots,Q_k$, outputs as inputs for flip-flops
 \[{I_1}_1,{I_1}_2,\ldots,{I_1}_{n_1},{I_2}_1,{I_2}_2,\ldots,{I_2}_{n_2},\ldots,{I_k}_1,{I_k}_2,\ldots,{I_k}_{n_k}\]
@@ -1874,10 +1874,18 @@ with ${I_i}_1,{I_i}_2,\ldots,{I_i}_{n_i}$ being the inputs of the $i$th flip-flo
 
 We can determine the fastest clock speed (the minimum clock period) from the general model of the Mealy circuit.
 
-For any flip-flop in the circuit with propagation delay $t_p$, combinational circuit propagation delay to the flip-flop input $t_c$, the maximum time $t_x$ the inputs $X_i$ that the flip-flop input is dependent on need to be stable before the next active clock edge, the flip-flop setup time $t_s$, and clock skew $t_{sk}$ between the flip-flops that receive the clock signal first and the flip-flop, the clock period $t_{clk}$ must satisfy
-\[t_{clk}\geq\max\{t_p,t_x\}+t_c+t_s+t_{sk}.\]
-Another constraint is that for any flip-flop in the circuit with also hold time $t_h$ and the clock skew ${t_{sk}}_i$ between it and any flip-flop $i$ whose next input are dependent on the flip-flop output, the circuit must satisfy
-\[t_p+t_c\geq\max_i{t_{sk}}_i+t_h.\]
+Let the clock period of a synchronous circuit be $t_{clk}$, and for each flip-flop $i$ in the circuit,
+\bit
+\item let its setup time be $s_i$,
+\item let its hold time be $h_i$,
+\item let the clock skew of it relative to the flip-flop that receive an active edge first be $k_i$,
+\item for each external input $X_{ij}$ that any of its input is dependent on, let the time $X_{ij}$ needs after an active clock edge to start being stable be $x_{ij}$, and the combinational circuit propagation delay from $X_{ij}$ to the input be $c_{ij}$, in which if multiple inputs of flip-flop $i$ depend on one external input, the one such that $x_{ij}+c_{ij}$ is larger is used, and
+\item for each flip-flop output $Q_{ij}$ that any of its input is dependent on, let the clock skew of flip-flop $i$ relative to the flip-flop $Q_{ij}$ belongs to be $k_{ji}$, the flip-flop output propagation delay of $Q_{ij}$ be $y_{ij}$, and the combinational circuit propagation delay from $Q_{ij}$ to the be $d_{ij}$, in which if multiple inputs of flip-flop $i$ depend on one flip-flop output, the one such that $y_{ij}+d_{ij}$ is larger is used,
+\eit
+then, the circuit is valid only if it satisfies:
+\[t_{clk}\geq\max_i\{\max\{\max_j\{x_{ij}+c_{ij}-k_i\},\max_j\{y_{ij}+d_{ij}-k_{ij}\}+s_i\},\]
+and for each $i,j$:
+\[y_{ij}+d_{ij}\geq k_{ij}+h_i.\]
 \sssc{General model for Moore circuits}
 The general model of Moore cicuits consists of $k$ flip-flops with a common clock, a combinational subcircuit with inputs from outside of the Mealy circuit $X_1,X_2,\ldots,X_m$ and outputs as inputs for flip-flops
 \[{I_1}_1,{I_1}_2,\ldots,{I_1}_{n_1},{I_2}_1,{I_2}_2,\ldots,{I_2}_{n_2},\ldots,{I_k}_1,{I_k}_2,\ldots,{I_k}_{n_k}\]
