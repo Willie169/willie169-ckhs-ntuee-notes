@@ -46,6 +46,68 @@ An associative quasigroup is a magma equipped with an operation that is associat
 A group is a magma equipped with an operation that is associative, distributive, and has an identity element.
 \sssc{Abelian group (阿貝爾群) or commutative group (交換群)}
 An abelian group, aka a commutative group, is a group equipped with an operation that is commutative.
+\sssc{Group extension}
+We say that a group $K$ is a subgroup of another group $L$ and that $L$ is a group extension of $K$ iff $K\subseteq L$ and that the operation of $K$ is that of $L$ restricted to $K$.
+
+A trivial subgroup of a group is the singleton of the identity element of its operation.
+
+A proper subgroup of a group is a subgroup of it that is a proper subset of it.
+\sssc{One-parameter subgroup}
+A map $\phi\colon\bbR\to G$ to some group equipped with operation $*$ is called a one-parameter subgroup of $G$ iff
+\[\phi(t)*\phi(s)=\phi(t+s).\]
+\ssc{Ring-like algebraic structure}
+PLACEHOLDER
+rngs ⊃ rings ⊃ commutative rings ⊃ integral domains ⊃ integrally closed domains ⊃ GCD domains ⊃ unique factorization domains ⊃ principal ideal domains ⊃ Euclidean domains ⊃ fields ⊃ algebraically closed fields
+\sssc{Rng or non-unital ring}
+A rng or non-unital ring is a ordered triple $(R,+,\cdot)$ of set $R$ and binary operations $+$ and $\cdot$ on $R$ called addition and multiplication such that
+\bit
+\item $(R,+)$ is an abelian group under addition with $0$ as the identity element, called addictive identity,
+\item $(R\setminus\{0\},\cdot)$ is a semigroup under multiplication, and
+\item Distributivity of multiplication over addition:
+\[a\cdot (b+c)=(a\cdot b)+(b\cdot c).\]
+\eit
+\sssc{Ring}
+A ring is a ordered triple $(R,+,\cdot)$ of set $R$ and binary operations $+$ and $\cdot$ on $R$ called addition and multiplication such that
+\bit
+\item $(R,+)$ is an abelian group under addition with $0$ as the identity element, called addictive identity,
+\item $(R\setminus\{0\},\cdot)$ is a monoid under multiplication with $1$ as the identity element, called multiplicative identity, and
+\item Distributivity of multiplication over addition:
+\[a\cdot (b+c)=(a\cdot b)+(b\cdot c).\]
+\eit
+\sssc{Exponentiation to positive integer power}
+Exponentiation of an element $x$ of a rng $R$ to a positive integer power $n$ is defined as
+\[x^n=\prod_{i=1}^nx.\]
+\sssc{Exponentiation to zero}
+Exponentiation of an element $x$ of a ring $R$ to 0 is defined as 1.
+\sssc{Ring homomorphism}
+A ring homomorphism is a function from a ring $R$ to a ring $S$ that preserves addition, multiplication and multiplicative identity, that is,
+\[f(a+b)=f(a)+f(b),\quad f(ab)=f(a)f(b),\quad f(1)=1,\]
+for all $a,b\in R$.
+\sssc{Ring extension}
+We say that a ring $K$ is a subring of another ring $L$ and that $L$ is a ring extension of $K$ iff $K\subseteq L$ and that the operations of $K$ are those of $L$ restricted to $K$.
+\sssc{Commutative ring}
+A commutative ring is a ring whose multiplication is commutative.
+\sssc{Center of ring}
+The center of a ring $R$, denoted as $Z(R)$, is a commutative ring defined as a subring of $R$ consistig of all elements $x$ such that $xy=yx$ for all elements $y$ in $R$.
+\sssc{Module}
+A left module $M$ of a ring $R$, denoted as left $R$-module, is an abelian group $(M,+)$ and an operation $\cdot\colon R\times M\to M$ called scalar multiplication such that for all $r,s\in R$ and $x,y\in M$,
+\[r\cdot(x+y)=r\cdot x+r\cdot y,\]
+\[(r+s)\cdot x=r\cdot x+s\cdot x,\]
+\[(r\cdot s)\cdot x=r\cdot(s\cdot x),\]
+\[1\cdot x=x.\]
+A right module $M$ of a ring $R$, denoted as right $R$-module, is an abelian group $(M,+)$ and an operation $\cdot\colon R\times M\to M$ called scalar multiplication such that for all $r,s\in R$ and $x,y\in M$,
+\[r\cdot(x+y)=r\cdot x+r\cdot y,\]
+\[(r+s)\cdot x=r\cdot x+s\cdot x,\]
+\[(r\cdot s)\cdot x=s\cdot(r\cdot x),\]
+\[1\cdot x=x.\]
+If $R$ is a commutative ring, then left $R$-module is equivalent to right $R$-module, and they are collectively called $R$-module.
+\sssc{Associative algebra}
+An associative algebra $A$ over a commutative ring $R$, denoted as associative $R$-algebra or $R$-algebra, is a $R$-module $A$ of which $(A,+)$ is a ring and the scalar multiplication is such that for all $r\in R$ and $x,y\in A$,
+\[r\cdot(x\cdot y)=(r\cdot x)\cdot y=x\cdot (r\cdot y).\]
+\sssc{Commutative algebra}
+A commutative algebra is an associative algebra that is also a commutative ring.
+\sssc{Algebraic element or algebraic}
+If $A$ is an associative algebra over a ring $K$, then an element $a$ of $A$ is an algebraic element or algebraic over $K$, if there exists some non-zero polynomial $g(x)\in K[x]$ such that $g(a)=0$. Elements of $A$ that are not algebraic over $K$ are transcendental over $K$.
 \sssc{Field (域)}
 A field is a ordered triple $(F,+,\cdot)$ of set $F$ and binary operations $+$ and $\cdot$ on $F$ called addition and multiplication such that
 \bit
@@ -54,13 +116,24 @@ A field is a ordered triple $(F,+,\cdot)$ of set $F$ and binary operations $+$ a
 \item Distributivity of multiplication over addition:
 \[a\cdot (b+c)=(a\cdot b)+(b\cdot c).\]
 \eit
-\sssc{Subgroup}
-A subgroup of a group $G$ with operation $*$ is a subset of $G$ that is a group under $*$.
-
-A trivial subgroup of a group $G$ is the set of the identity element of $*$.
-
-A proper subgroup of a group $G$ is a subgroup of $G$ which is a proper subset of $G$.
-\sssc{One-parameter subgroup}
-A map $\phi\colon\bbR\to G$ to some group equipped with operation $*$ is called a one-parameter subgroup of $G$ iff
-\[\phi(t)*\phi(s)=\phi(t+s).\]
+\sssc{Field extension}
+We say that a field $K$ is a subfield of another field $L$ and that $L$ is a field extension of $K$ iff $K\subseteq L$ and that the operations of $K$ are those of $L$ restricted to $K$.
+\sssc{Algebraic extension}
+An algebraic extension $L$ of a field $K$ is a field extension of $K$ that is an associative algebra over $K$ such that for all $x\in L$, $x$ is algebraic over $K$.
+PLACEHOLDER
+Polynomial
+Root
+Polynomial ring
+PLACEHOLDER
+\sssc{Algebraically closed field}
+A field $F$ is closed if every non-constant polynomial $p(x)\in F[x]$ has a root in $F$.
+PLACEHOLDER
+\sssc{Algebraic closure}
+An algebraic closure of a field $K$ is an algebraic extension of $K$ that is algebraically closed.
+PLACEHOLDER
+Separable extension
+Separable polynomial
+PLACEHOLDER
+\sssc{Finite field or Galois field}
+PLACEHOLDER
 \end{document}

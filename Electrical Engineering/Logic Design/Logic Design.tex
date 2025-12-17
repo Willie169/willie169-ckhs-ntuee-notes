@@ -229,12 +229,12 @@ A Boolean function is a logical operation performed on one or more binary inputs
 \eit 
 \sssc{AND / Conjunction / Logical Multiplication}
 \begin{itemize}
-\item Symbol: $A \cdot B$, $A*B$, or $AB$
+\item Symbol: $A \cdot B$, $A*B$, $AB$, or $A\land B$
 \item Definition: At least two inputs, one output. True if all inputs are true and false otherwise.
 \eit
 \sssc{OR / Disjunction / Logical Addition / Inclusive OR}
 \begin{itemize}
-\item Symbol: $A + B$
+\item Symbol: $A + B$ or $A\lor B$
 \item Definition: At least two inputs, one output. True if at least one input is true and false otherwise.
 \eit
 \sssc{NAND / Not AND}
@@ -289,24 +289,47 @@ A_1 & A_2 & \ldots & A_n & f\\\hline
 1 & 1 & \ldots & 1 & f\qty(1,1,\ldots 1)\\\hline
 \end{longtable}
 \sssc{Sum-of-products (SOP) form}
-An expression is said to be in SOP form if it consists of a sum (OR) of product (AND) or single variable terms, in which it is called to be degenerate when some of the terms are single variables.
+A Boolean expression is said to be in SOP form if it consists of a sum (OR) of product (AND) or single variable terms, in which it is called to be degenerate when some of the terms are single variables.
 
 Every Boolean expression can be expressed in SOP form. And a Boolean expression may have more than one SOP forms.
 \sssc{Product-of-sums (POS) form}
-An expression is said to be in POS form if it consists of a product (AND) of sum (OR) or single variable terms, in which it is called to be degenerate when some of the terms are single variables.
+A Boolean expression is said to be in POS form if it consists of a product (AND) of sum (OR) or single variable terms, in which it is called to be degenerate when some of the terms are single variables.
 
 Every Boolean expression can be expressed in POS form. And a Boolean expression may have more than one POS forms.
 \sssc{Dual}
 The dual of an Boolean expression or equation is another Boolean expression or equation obtained by simplifing the original expression or equation such that it only consists of literals, AND, and OR, and then replacing all AND in it with OR, all OR in it with AND, and all constants in it with their complements.
 \sssc{Functionally complete}
 A functionally complete set is a set of logic operators and constant sources (0 or 1) that can express all possible Boolean functions of any number of input variables. A minimal functionally complete set is a functionally complete set such that removing any one element from it makes it no longer functionally complete. Some minimal functionally complete sets are $\{\tx{AND},\tx{NOT}\}$, $\{\tx{OR},\tx{NOT}\}$, $\{\tx{NAND}\}$, $\{\tx{NOR}\}$, $\{\tx{IMPLY},\tx{0}\}$, and $\{\tx{NIMPLY},\tx{1}\}$, in which NAND and NOR are called universal.
-\sssc{Linear Boolean function}
-A Boolean function is linear iff it can be expressed as the XOR of a subset of the union of its input variables and constant 1, iff
-\[\exists c_0,c_1,\ldots,c_n\in\{1,0\}\colon f(x_1,x_2,\ldots,x_n)=c_0\oplus\bigoplus_{i=1}^nc_ix_i,\]
-iff
-\[\forall a,b\in D_f\colon f(a\oplus b)=f(a)\oplus f(b)\oplus f(0).\]
 \sssc{Boolean Vector Functions or Boolean Multi-output Functions}
 A Boolean vector function or a Boolean multi-output function is a function $f\colon\{1,0\}^n\to\{1,0\}^m$. A Boolean vector function can be specified with truth table or as a tuple of $m$ Boolean functions.
+\sssc{True and false as finite field or Galois field of two elements}
+$(\{1,0\},\oplus,\land)$ where $\oplus$ denotes XOR and $\land$ denotes AND is finite field (aka Galois field) of two elements GF(2), also denoted as $\mathbb{F}_2$ or $\bbZ/2\bbZ$.
+PLACEHOLDER
+(after learned finite field (aka Galois field) in abstract algebra)
+\sssc{Linear and Affine Boolean function}
+A Boolean function $f\colon\{1,0\}^n\to\{1,0\}$ is linear iff
+\[\forall a,b\in\{1,0\}^n\colon f(a\oplus b)=f(a)\oplus f(b),\]
+where $\oplus$ denotes bitwise XOR, that is,
+\[\exists a_1,a_2,\ldots,a_n\in\{1,0\}\colon f(x_1,x_2,\ldots,x_n)=\bigoplus_{i=1}^na_ix_i.\]
+
+A Boolean function $f\colon\{1,0\}^n\to\{1,0\}$ is affine iff
+\[\forall a,b\in\{1,0\}^n\colon f(a\oplus b)=f(a)\oplus f(b)\oplus f(0),\]
+where $\oplus$ denotes bitwise XOR, that is,
+\[\exists a_0,a_1,a_2,\ldots,a_n\in\{1,0\}\colon f(x_1,x_2,\ldots,x_n)=a_0\oplus\bigoplus_{i=1}^na_ix_i.\]
+
+A Boolean vector function $f\colon\{1,0\}^n\to\{1,0\}^m$ is linear iff
+\[\forall a,b\in\{1,0\}^n\colon f(a\oplus b)=f(a)\oplus f(b),\]
+where $\oplus$ denotes bitwise XOR, that is, let the $k$th output of $f$ be a Boolean function $g_k$ of the inputs of $f$, for all $1\leq k\leq m$, $g_k$ is a linear Boolean function.
+
+A Boolean vector function $f\colon\{1,0\}^n\to\{1,0\}^m$ is affine iff
+\[\forall a,b\in\{1,0\}^n\colon f(a\oplus b)=f(a)\oplus f(b)\oplus f(0),\]
+where $\oplus$ denotes bitwise XOR, that is, let the $k$th output of $f$ be a Boolean function $g_k$ of the inputs of $f$, for all $1\leq k\leq m$, $g_k$ is an affine Boolean function.
+
+Some sources, however, use the term linear to refer to affine.
+\sssc{Algebraic normal form (ANF), ring sum normal form (RSNF or RNF), Zhegalkin normal form, or Reed–Muller expansion}
+A Boolean expression is said to be in algebraic norma form if it consists of a XOR of non-invertered AND or single variable terms and optionally a constant 1 term.
+
+Every Boolean expression can be expressed in ANF. And a Boolean expression may have more than one POS forms.
 \ssc{Theorems}
 \sssc{Idempotent Laws}
 \[XX = X,\quad X + X = X.\]
@@ -438,8 +461,8 @@ For $n$ such that $\frac{n-1}{2}\in\mathbb{N}$,
 The $n$-variable minterm of index $i$, denoted as $m_i$ is a function that outputs 1 if the unsigned binary number corresponding to the input combination is $i$ and outputs 0 otherwise.
 \sssc{Maxterm}
 The $n$-variable maxterm of index $i$, denoted as $M_i$ is a function that outputs 0 if the unsigned binary number corresponding to the input combination is $i$ and outputs 1 otherwise.
-\sssc{Minterm expansion, canonical SOP, or standard SOP}
-Minterm expansion, canonical SOP, or standard SOP is an expression of a completely specified Boolean function as a sum of minterms. Let $S$ be the set of all unsigned binary numbers corresponding to some input combination in the ON-set of $f$. The minterm expansion, canonical SOP, or standard SOP of $f$ is
+\sssc{Minterm expansion, (canonical/standard) sum-of-product (SOP) form, minterm canonical form, or canonical disjunctive normal form (CDNF)}
+Minterm expansion is an expression of a completely specified Boolean function as a sum of minterms. Let $S$ be the set of all unsigned binary numbers corresponding to some input combination in the ON-set of $f$. The minterm expansion, canonical SOP, or standard SOP of $f$ is
 \[f=\sum_{i\in S}m_i,\]
 also denoted as
 \[f=\sum m(i\in S)\]
@@ -462,8 +485,8 @@ a & b & c & f\\\hline
 \end{longtable}
 , the minterm expansion of it is
 \[f=m_2+m_5+m_6=\sum m(2,5,6).\]
-\sssc{Maxterm expansion, canonical POS, or standard POS}
-Maxterm expansion, canonical POS, or standard POS is an expression of a completely specified Boolean function as a product of maxterms. Let $T$ be the set of all unsigned binary numbers corresponding to some input combination in the OFF-set of $f$. The maxterm expansion, canonical POS, or standard POS of $f$ is
+\sssc{Maxterm expansion, (canonical/standard) product-of-sum (POS) form, maxterm canonical form, or canonical conjunctive normal form (CCNF)}
+Maxterm expansion is an expression of a completely specified Boolean function as a product of maxterms. Let $T$ be the set of all unsigned binary numbers corresponding to some input combination in the OFF-set of $f$. The maxterm expansion, canonical POS, or standard POS of $f$ is
 \[f=\prod_{i\in T}M_i,\]
 also denoted as 
 \[f=\prod M(i\in T)\]
@@ -1888,11 +1911,11 @@ A shift register is a sequential circuit consists of a chain of edge-triggered D
 \item A shift toward least significant bit (LSB) is called a right shift.
 \item A shift toward most significant bit (MSB) is called a left shift.
 \eit
-The state variable representing the $(i+1)$-th least significant bit is denoted as $Q_i$.
+The state variable representing the $(i+1)$-th least significant bit is denoted as $Q_i$, the input $D$ of the DFF storing $Q_i$ is denoted as $D_i$.
 \sssc{Serial-In Serial-Out (SISO) Shift Register}
-A serial-in serial-out (SISO) shift register is a type of shift register where data is shifted in and out one bit per shift. An $n$-bit SISO shift register consists of a chain of $n$ edge-triggered D flip-flops. The output $Q$ of each flip-flop is connected to the input $D$ of the next flip-flop, with the first flip-flop in the chain receiving the serial input (SI) and the last flip-flop in the chain providing the serial output (SO) instead. The flip-flops share common clock input and clock enable/load input called shift.
+A serial-in serial-out (SISO) shift register is a type of shift register where data is shifted in and out one bit per shift. An $n$-bit SISO shift register consists of a chain of $n$ edge-triggered D flip-flops. The output $Q$ of each flip-flop is connected to the input $D$ of the next flip-flop, with the first flip-flop in the chain receiving the serial input (SI) and the last flip-flop in the chain providing the serial output (SO) instead. The flip-flops share common clock input and clock enable/load input called shift $Sh$.
 
-When shift=1 at an active edge, the register shifts a bit; otherwise, the register holds its present state.
+When $Sh=1$ at an active edge, the register shifts a bit; otherwise, the register holds its present state.
 \sssc{Serial-In Parallel-Out (SIPO) Shift Register}
 A serial-in parallel-out (SIPO) shift register is a type of shift register that allows data to be retrieved in parallel. An $n$-bit SIPO shift register consists of an $n$-bit SISO register with additional $n-1$ outputs connected to the outputs $Q$ of the flip-flops except the last one. Those outputs together with the original SO compose the parallel output of the register.
 \sssc{Parallel-In Serial-Out (PISO) Shift Register}
@@ -1933,20 +1956,16 @@ A two-flip-flop synchronizer is often used.
 \ssc{Synchronous Counter}
 \sssc{Counter}
 A counter is a sequential circuit whose state changes each active edge and repeats every fixed finite number of active edges, called count cycle. The cyclic sequence of the states is called state loop.
-\sssc{Transition Cycle}
-The transition cycle of a counter is a graph of states with directed edges indicating the transition to next state.
+\sssc{State/transition/state transition diagram/graph/cycle}
+A graph of states with directed edges (arc) indicating transitions from present states to next states.
 \sssc{Synchronous Counter}
 A synchronous counter is a counter consists of flip-flops sharing the same clock input.
 \sssc{Shift Register Counter}
-A shift register counter is a type of synchronous counter consists of a shift register with some or all of the outputs $Q$ of the flip-flops connected to the inputs of a combinational circuit with one output and the output of the combinational circuit connected to the input $D$ of the first flip-flop in the chain.
+A shift register counter is a type of synchronous counter consists of a shift register with some or all the outputs $Q$ of the flip-flops being connected to the inputs of a combinational circuit with one output whose output is connected to $D_0$. For an $n$-bit shift register counter, $D_0$ as an $n$-variable Boolean function of $Q_0,Q_1,\ldots,Q_{n-1}$ is called feedback function of the shift register counter.
 \sssc{Ring Counter}
 A ring counter is a type of shift register counter consists of a shift register with the output $Q$ of the last flip-flop in the chain connected to the input $D$ of the first flip-flop in the chain. The bits stored circulate around the register. The count cycle of an $n$-bit ring counter is $n$.
 \sssc{Johnson counter, Twisted Ring Counter, or Mod-2n Counter}
 A Johnson counter, twisted ring counter, or mod-2n counter is a type of shift register counter consists of a shift register with the output $Q'$ of the last flip-flop in the chain connected to the input $D$ of the first flip-flop in the chain. The legal states of a Johnson counter are those consist of at most one contiguous 0 bits block and at most one contiguous 1 bits block. For an $n$-bit Johnson counter,  number of legal states is $2n$, and the count cycle is $2n$ if starting with a legal state.
-\sssc{Linear (Feedback) Shift Register (LFSR) Counter}
-A linear (feedback) shift register (LFSR) counter consists is a type of shift register counter where the function realized by the combination circuit whose output is connected to the input $D$ of the first flip-flop in the chain is linear.
-
-For each $n\in\bbN$, there exists a linear $n$-bit shift register counter whose count cycle is $2^n-1$, in which all states except the all 0's state are included.
 \sssc{Binary Up Counter}
 An $n$-bit synchronous binary up counter consists of $n$ T flip-flops sharing a common clock input signal with the one storing the $(k+1)$-th least significant bit labeled with subscript $_k$. The data input $T_0$ is connected to a constant 1 source, and the data input $T_k$ for $k\in\bbN$ is connected to
 \[\prod_{i=0}^{k-1}Q_i,\]
@@ -1979,6 +1998,27 @@ which is implemented using AND and OR gates or other logically equivalent combin
 \[D_1=M'\]
 \[D_k=D_{k-1}Q_{k-1}',\quad k\in\bbN\land 1<k<n\]
 \[T_k=U_k+D_k,\quad k\in\bbN\land 1<k<n.\]
+\sssc{Linear Feedback Shift Register (LFSR)}
+A linear feedback shift register (LFSR) is a shift register counter whose feedback function is linear, or a circuit that is logically equivalent to a such shift register counter. LFSR is commonly used to generate pseudo-random numbers and pseudo-noise sequences in modern computer system.
+
+An $n$-bit LFSR is characterized by its feedback function $f$. Let $T\subseteq\{0,1,\ldots,n-1\}$ be such that
+\[f=\bigoplus_{i\in T}Q_i.\]
+Each feedback from $Q_i$ for $i\in T$ is called a tap. The feedback polynomial, characteristic polynomial, or connection polynomial $p(x)$ is defined as
+\[p(x)=1+\sum_{i\in T}x^{i+1}.\]
+
+PLACEHOLDER: definition check
+
+PLACEHOLDER: GF(2) abstract algebra interpretation of feedback polynomial
+
+The initial state of an LFSR is called seed.
+
+For each $n\in\bbN$, the maximal count cycle of $n$-bit LFSRs is $2^n-1$, in which all possible states except the state where all bits are zero are included.
+
+PLACEHOLDER: which
+
+PLACEHOLDER: Fibonacci LFSRs, Galois LFSRs, Xorshift LFSRs
+
+PLACEHOLDER end
 \sssc{Loadable Counter}
 A counter that consists of T flip-flops mentioned above can be adjusted to be loada le from a parallel input (PI) with an associated 2-to-1 multiplexer for each T flip-flop and a common load input as select input for all multiplexers. The original input $T$ to each flip-flop is connected instead to the data input of the associated multiplexer which is selected when load=0, the output of each multiplexer is connected to the input $T$ of the associated flip-flop, and the other data input to each multiplexer, which is selected when load=1, is connected to the corresponding bit of the parallel input.
 
