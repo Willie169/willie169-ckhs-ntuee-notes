@@ -1684,8 +1684,11 @@ The term master-slave flip-flop refers to a particular implementation that uses 
 The master is the latch that takes the data inputs and the slave is the latch that takes outputs of the master as inputs and outputs the final outputs of the master-slave flip-flop.
 
 The master-slave flip-flops need a time where the data inputs are stable before an active edge long enough for the master to latch, called setup time, and a time where the data inputs are stable after an active edge long enough for the outputs of master to transfer to the slave, called hold time. If data inputs change during setup time or hold time around an active edge, the behavior is unpredictable.
-
-For rising-edge-triggered flip-flops, the enable signal of the master is the inverse of the clock signal and the enable signal of the slave is the clock signal. For falling-edge-triggered flip-flops, the enable signal of the master is the clock signal and the enable signal of the slave is the inverse of the clock signal.
+\bit
+\item For rising-edge-triggered flip-flops, the enable signal of the master is a slightly delayed inverted clock signal and the enable signal of the slave is the clock signal. The propagation delay of the inverter maybe used as the delay.
+\item For falling-edge-triggered flip-flops, the enable signal of the master is a slightly delayed clock signal and the enable signal of the slave is an inverted clock signal. A way to use propagation delay of inverter as delay is to invert the clock signal first, and feed a inverted again signal to the master's enable signal and the signal to slave's enable signal, in which the second inverter's propagation delay is the delay.
+\eit
+If instead that the enable signal of the slave is slightly delayed than that of the master, in an inactive edge, both latch will be enabled, which is not an intended behavior.
 \sssc{Master-slave S-R flip-flop}
 A master-slave S-R flip-flop can be implemented with two gated S-R latches in which $Q$ and $Q'$ of the master are connected to $S$ and $R$ of the slave respectively, $S$ and $R$ of the master are the inputs of it, and $Q$ and $Q'$ of the slave are the outputs of it.
 \sssc{Master-slave D flip-flop}
