@@ -156,28 +156,32 @@ If the sum of two positive numbers is greater than $2^{N-1}-1$, it overflows int
 The subtraction can be computed the same as unsigned numbers.
 
 If the difference of a positive number and a negative number is greater than $2^{N-1}-1$, it overflows into the negative range; if the difference of a negative number and a positive number is less than $-2^{N-1}$, it overflows into the positive range. This makes overflow detection straightforward.
-\ssc{Binary Codes}
-\sssc{Commonly used code of decimal digits}
+\ssc{Binary Encoding}
+\sssc{Commonly used code}
 \begin{longtable}[c]{|c|c|c|c|c|c|c|}
 \hline
-Decimal Digit & 8-4-2-1 Code (BCD) & 6-3-1-1 Code & Excess-3 Code & 2-out-of-5 Code & Gray Code\\\hline
+Decimal/Hexadecimal Digit & Binary Code & 6-3-1-1 Code & Excess-3 Code & 2-out-of-5 Code & Reflected binary code (RBC)\\\hline
 0 & 0000 & 0000 & 0011 & 00011 & 0000\\\hline
 1 & 0001 & 0001 & 0100 & 00101 & 0001\\\hline
 2 & 0010 & 0011 & 0101 & 00110 & 0011\\\hline
 3 & 0011 & 0100 & 0110 & 01001 & 0010\\\hline
 4 & 0100 & 0101 & 0111 & 01010 & 0110\\\hline
-5 & 0101 & 0111 & 1000 & 01100 & 1110\\\hline
-6 & 0110 & 1000 & 1001 & 10001 & 1010\\\hline
-7 & 0111 & 1001 & 1010 & 10010 & 1011\\\hline
-8 & 1000 & 1011 & 1011 & 10100 & 1001\\\hline
-9 & 1001 & 1100 & 1100 & 11000 & 1000\\\hline
+5 & 0101 & 0111 & 1000 & 01100 & 0111\\\hline
+6 & 0110 & 1000 & 1001 & 10001 & 0101\\\hline
+7 & 0111 & 1001 & 1010 & 10010 & 0100\\\hline
+8 & 1000 & 1011 & 1011 & 10100 & 1100\\\hline
+9 & 1001 & 1100 & 1100 & 11000 & 1101\\\hline
+A & 1010 & & & & 1111\\\hline
+B & 1011 & & & & 1110\\\hline
+C & 1100 & & & & 1010\\\hline
+D & 1101 & & & & 1011\\\hline
+E & 1110 & & & & 1001\\\hline
+F & 1111 & & & & 1000\\\hline
 \end{longtable}\FB
 \sssc{Binary encodings}
 Binary encodings are encodings that encode things into binary numbers.
 \sssc{Binary code}
 Binary code is an encoding of a sequence of things that encode the $i$th one to binary number $i$.
-\sssc{Binary-coded decimal (BCD)}
-Binary-coded decimal (BCD), or more explicitly 8-4-2-1 BCD, is an encoding of decimal digits ($0$ to $9$) in binary, in which each decimal digit is encoded separately using 4 bits to its binary form, which makes it easy to convert between decimal numbers and binary.
 \sssc{Weighted code}
 A $k$-bit ($k\geq 4$) weighted code of numbers has the property that if the weights are integers $w_{k-1}, w_{k-2}, \ldots w_0$ where for all $0\leq i<j<k$, $w_i<w_j$, the code $a_{k-1}a_{k-2}\ldots a_0$, where $a_i\in\{0,1\}$, represents number $N$, then
 \[N = \sum_{n=0}^{k-1}w_na_n.\]
@@ -186,12 +190,16 @@ If a number $N$ has more than one possible codes in a specific set of weights, t
 Excess-$n$ encoding is an encoding of a sequence of things that encode the $i$th one to binary number $i+n$. 
 
 Excess-3 code of decimal digits is sefl-complementing, i.e. the complement of it is the 9's complement of the number.
+\sssc{Binary-coded decimal (BCD) or 8-4-2-1 code}
+Binary-coded decimal (BCD) or 8-4-2-1 code, is an encoding of decimal digits ($0$ to $9$) in binary, in which each decimal digit is encoded separately using 4 bits to its binary form, which makes it easy to convert between decimal numbers and binary.
 \sssc{Gray adjacency}
-Two binary numbers in a binary encoding are called (gray) adjacent iff they differ only in one bit.
-\sssc{Gray code}
-In gray code, each step changes only one bit, which minimizes transition errors.
-
-An encoding of a sequence of things is called gray-like if each step changes only one bit, which minimizes transition errors.
+Two binary numbers in a binary encoding are called (gray) adjacent iff they differ only in one bit. An encoding of a sequence of things is called gray-like if each step changes only one bit, which can be useful to minimize transition errors.
+\sssc{Reflected binary code (RBC), reflected binary (RB), or (reflecting) gray code}
+Let the $n$-bit gray code be denoted as $G_n$ for all $n\in\bbN_0$, and integer $0\leq m\leq 2^n-1$ in $G_n$ be denoted as $G_n(m)$. The gray code is defined as follows:
+\[G_0(0)=\varepsilon,\]
+\[\forall n\in\bbN\colon\forall m\in\bbN_0\land m<2^{n-1}\colon G_n(m)=0G_{n-1)(m),\]
+\[\forall n\in\bbN\colon\forall m\in\bbN_0\land m\geq 2^{n-1}\colon G_n(m)=1G_{n-1)\qty(m-2^{n-1}),\]
+where $\varepsilon$ denotes the zero-bit code in $G_0$, and juxtaposition denotes concatenation.
 \sssc{One-hot and one-cold encoding}
 A one-hot (encoding) is an encoding where each code is a unique binary sequence with only one 1 bit.
 
@@ -1747,7 +1755,7 @@ It can be implemented with a T flip-flop, in which $X$ is the input $T$ and $Z$ 
 For even parity, the state $Q$ in the T flip-flop must be cleared to $0$ before the start of a data input string. For odd parity, the state $Q$ in the T flip-flop must be preset to $1$ before the start of a data input string.
 
 The $X$ input must be synchronized with the clock so that it assumes its next value before the next active clock edge.
-\ssc{Analysis and Design of Synchronous Circuits}
+\ssc{Analysis and Design of Sequential Circuits}
 \sssc{Analysis by signal tracing}
 The basic procedure to find the output sequence of a synchronous circuit resulting from a given input sequence is as follows:
 \ben
@@ -1817,36 +1825,71 @@ Input characters may also be represented in alphanumeric notation by assign alph
 \[\sum_{i=1}^nF_i=1.\]
 \eit
 The FSM is valid as a digital circuit iff it is deterministic iff transition is deterministic for all states.
+\sssc{Counter}
+A counter is a sequential circuit whose state changes each active edge and repeats every fixed finite number of active edges, called count cycle. The cyclic sequence of the states is called state loop. Each state in the state loop is a stage.
+\sssc{State/transition/state transition diagram/graph/cycle}
+A state/transition/state transition diagram/graph/cycle for a counter is a directed graph with
+\bit
+\item Each vertex being a state.
+\item Each directed edge (arc) being a transition, normally drawn as an arrow from present state to next state.
+\item The starting state is usually represented by an arrow with no origin pointing to the state, a subscript 0 in the symbol of the state (often $s_0$ or $S_0$), or not shown.
+\eit
 \sssc{Next-state Map}
 A next-state map is the K-map of a next-state variable as a function of the present-state variables and for Mealy circuit also input variables given by a transition table.
+\sssc{Excitation table}
+An excitation table is a truth table with present and next state being input variables and flip-flop inputs being output variables that shows the minimum (that is, don't care, denoted by X, where possible) inputs that are necessary to generate a particular next state from a particular present state.
 \sssc{Flip-flop input (K-)map}
-Given a next-state map of a flip-flop, to find the input needed for each present state variables and input variables combination, convert the value $Q^+_k$ in it to the input given by the transition function of the flip-flop for every 0 and 1 cell to get flip-flop input (K-)maps.
-\sssc{T input map}
-Given a next-state map of a T flip-flop, to find the input needed for each present state variables and input variables combination, convert the value $Q^+_k$ in it to $T_k$ given by $T_k=Q_k\oplus Q^+_k$ for every 0 and 1 cell to get T input map, equivalently, complement every 0 and 1 cell in the $Q_k=1$ half.
-\sssc{D input map}
-Given a next-state map of a D flip-flop, to find the input needed for each present state variables and input variables combination, convert the value $Q^+_k$ in it to $D_k$ given by $D_k=Q^+_k$ for every 0 and 1 cell to get D input map, equivalently, do nothing.
-\sssc{S and R input map}
-Given a next-state map of a S-R flip-flop, to find the inputs needed for each present state variables and input variables combination, convert the value $Q^+_k$ in it to $S_k$ and $R_k$ respectively given by the truth table below where $X$ denotes don't care:
+A K-map corverted from a next-state map of a flip-flop by converting each cell a flip-flop input according to the excitation table of that type of flip-flop is called a flip-flop input (K-)map.
+\sssc{D flip-flop excitation table}
 \begin{longtable}[c]{mm|mm}
 \hline
-Q_k & Q^+_k & S_k & R_k \\\hline
+Q & Q^+ & D \\\hline
+0 & 0 & 0 \\\hline
+0 & 1 & 1 \\\hline
+1 & 0 & 0 \\\hline
+1 & 1 & 1 \\\hline
+\end{longtable}
+\[D=Q^+.\]
+\sssc{T flip-flop excitation table}
+\begin{longtable}[c]{mm|mm}
+\hline
+Q & Q^+ & T \\\hline
+0 & 0 & 0 \\\hline
+0 & 1 & 1 \\\hline
+1 & 0 & 1 \\\hline
+1 & 1 & 0 \\\hline
+\end{longtable}
+\[T=Q\oplus Q^+.\]
+\sssc{S-R flip-flop excitation table}
+\begin{longtable}[c]{mm|mm}
+\hline
+Q & Q^+ & S & R \\\hline
 0 & 0 & 0 & X \\\hline
 0 & 1 & 1 & 0 \\\hline
 1 & 0 & 0 & 1 \\\hline
 1 & 1 & X & 0 \\\hline
 \end{longtable}
-for every 0 and 1 cell to get S and R input maps, equivalently, for S input map, replace 1's in $Q_k=1$ half with X's, for R input map, replace 0's in $Q_k=0$ half with X's and then complement all 0 and 1 cells.
-\sssc{J and K input map}
-Given a next-state map of a J-K flip-flop, to find the inputs needed for each present state variables and input variables combination, convert the value $Q^+_k$ in it to $J_k$ and $K_k$ respectively given by the truth table below where $X$ denotes don't care:
+\sssc{J-K flip-flop excitation table}
 \begin{longtable}[c]{mm|mm}
 \hline
-Q_k & Q^+_k & J_k & K_k \\\hline
+Q & Q^+ & J & K \\\hline
 0 & 0 & 0 & X \\\hline
 0 & 1 & 1 & X \\\hline
 1 & 0 & X & 1 \\\hline
 1 & 1 & X & 0 \\\hline
 \end{longtable}
-for every 0 and 1 cell to get J and K input maps, equivalently, for J input map, replace all cells in $Q_k=1$ half with X's, for K input map, replace all cells in $Q_k=0$ half with X's and then complement all cells in $Q_k=1$ half.
+\sssc{D input map}
+Conversion from a next-state map to a D input map is doing nothing.
+\sssc{T input map}
+Conversion from a next-state map to a T input map is complementing all 0 and 1 cells in the $Q_k=1$ half.
+\sssc{S and R input map}
+Conversion from a next-state map to a S input map is replacing all 1 cells in $Q_k=1$ half with X cells.
+
+Conversion from a next-state map to a R input map is replacing all 0 cells in $Q_k=0$ half with X cells and then complementing all 0 and 1 cells.
+\sssc{J and K input map}
+Conversion from a next-state map to a J input map is replacing all cells in $Q_k=1$ half with X cells.
+
+Conversion from a next-state map to a R input map is replacing all cells in $Q_k=0$ half with X cells and then complementing all 0 and 1 cells.
 \sssc{Output functions and output maps}
 The output variables as functions of flip-flops outputs and for Mealy circuit also inputs of the synchronous circuit are called output functions. The K-maps of output functions are called output maps.
 \sssc{Analysis by state table or transition table}
@@ -1879,7 +1922,9 @@ with ${I_i}_1,{I_i}_2,\ldots,{I_i}_{n_i}$ being the inputs of the $i$th flip-flo
 The general model of Moore cicuits consists of $k$ flip-flops with a common clock and a combinational subcircuit with inputs from outside of the Mealy circuit $X_1,X_2,\ldots,X_m$ and outputs as inputs for flip-flops
 \[{I_1}_1,{I_1}_2,\ldots,{I_1}_{n_1},{I_2}_1,{I_2}_2,\ldots,{I_2}_{n_2},\ldots,{I_k}_1,{I_k}_2,\ldots,{I_k}_{n_k}\]
 with ${I_i}_1,{I_i}_2,\ldots,{I_i}_{n_i}$ being the inputs of the $i$th flip-flop.
-\sssc{Static timing constraints}
+\sssc{Timing constraints}
+PLACEHOLDER: check, false path
+
 Let the clock period of a synchronous circuit be $t_{clk}$, and for each flip-flop $i$ in the circuit,
 \bit
 \item let its setup time be $s_i$,
@@ -1892,6 +1937,9 @@ then, the circuit is valid only if it satisfies the conditions that
 \[t_{clk}\geq\max_i\{\max\{\max_j\{x_{ij}+c_{ij}+s_i-k_i\},\max_j\{y_{ij}+d_{ij}+s_i-k_{ij}\}\},\]
 and
 \[\forall i\colon\forall j\colon y_{ij}+d_{ij}\geq k_{ij}+h_i.\]
+Violations of the timing constraints are called timing violations.
+\sssc{Output delay}
+When designing a sequential circuit with serial input, the number of clock cycles between the first input to the last output is called output delay.
 \ssc{Register}
 \sssc{Register}
 A register can load data inputs in parallel and output stored data in parallel. A $n$ bit register consists of $n$ edge-triggered D flip-flops, each with $D$ being data input and $Q$ being data output. The flip-flops usually share common clock input and asynchronous clear and/or preset inputs. If using gated clocks, the clock is gated with a common signal called load; if using clock enable, the flip-flops share a common clock enable input called load. When load=1 at an active edge, the data
@@ -1960,10 +2008,6 @@ An $n$-flip-flop synchronizer is an $n$-bit SISO register used to synchronize an
 
 A two-flip-flop synchronizer is often used.
 \ssc{Synchronous Counter}
-\sssc{Counter}
-A counter is a sequential circuit whose state changes each active edge and repeats every fixed finite number of active edges, called count cycle. The cyclic sequence of the states is called state loop. Each state in the state loop is a stage.
-\sssc{State/transition/state transition diagram/graph/cycle}
-A graph of states with directed edges (arc) indicating transitions from present states to next states.
 \sssc{Synchronous Counter}
 A synchronous counter is a counter consists of flip-flops sharing the same clock input.
 \sssc{Shift Register Counter}
@@ -2051,6 +2095,8 @@ The initial state of an LFSR is called seed.
 For each $n\in\bbN$, the maximal count cycle of $n$-bit LFSRs is $2^n-1$, in which all possible states except the state where all bits are zero are included. An $n$-bit LFSR has count cycle $2^n-1$ iff its feedback polynomial is primitive over $\bbF_2$.
 
 PLACEHOLDER: primitive, irreducible, Primitive trinomials after learned in abstract algebra
+
+PLACEHOLDER: The state graph of an $n$-bit LFSR (with $2^n-1$ vertices) consists of only disjoint cycles and loops, and the state where all bits are zero is always with a loop.
 
 PLACEHOLDER: Fibonacci LFSRs, Galois LFSRs, Xorshift LFSRs
 
@@ -2363,10 +2409,10 @@ and,
 \[\forall s\in D_{\lambda_1}\colon\lambda_1(s)=\lambda_2(f(s)),\]
 \[\forall t\in D_{\lambda_2}\colon\lambda_2(t)=\lambda_1(f^{-1}(t)).\]
 \eit
-\sssc{Finding equivalent deterministic finite-state transducers with implication chart}
+\sssc{Finding equivalent deterministic finite-state transducers with implication chart or pair chart}
 First minimize the two (completely or incompletely specified) deterministic finite-state transducers respectively. Let the set of all remaining states of the two automata be $S$ and $T$. If $|S|\neq |T|$, the two automata are not equivalent. Let $S=\{S_0,S_1,\ldots,S_n\}$ and $T=\{T_0,T_1,\ldots,T_n\}$, and the input alphabet of both automata be $\Sigma=\{X_0,X_1,\ldots,X_m\}$.
 \ben
-\item The implication chart, also called implication table, is a table with entries $a_{ij}$ for all integers $i,j\in\bbN_0\land n\geq i,j$.
+\item The implication chart, also called implication table or pair chart, is a table with entries $a_{ij}$ for all integers $i,j\in\bbN_0\land n\geq i,j$.
 \item Fill each entry $a_{ij}$ with
 \bit
 \item $\times$ (means distinguishable) iff for Mealy machine, there exists $X_k\in\Sigma$ such that $\lambda(S_i,X_k)\neq\lambda(T_j,X_k)$, and for Moore machine, $\lambda(S_i)\neq\lambda(T_j)$,
