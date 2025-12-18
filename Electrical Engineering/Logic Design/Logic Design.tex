@@ -1961,13 +1961,13 @@ An $n$-flip-flop synchronizer is an $n$-bit SISO register used to synchronize an
 A two-flip-flop synchronizer is often used.
 \ssc{Synchronous Counter}
 \sssc{Counter}
-A counter is a sequential circuit whose state changes each active edge and repeats every fixed finite number of active edges, called count cycle. The cyclic sequence of the states is called state loop.
+A counter is a sequential circuit whose state changes each active edge and repeats every fixed finite number of active edges, called count cycle. The cyclic sequence of the states is called state loop. Each state in the state loop is a stage.
 \sssc{State/transition/state transition diagram/graph/cycle}
 A graph of states with directed edges (arc) indicating transitions from present states to next states.
 \sssc{Synchronous Counter}
 A synchronous counter is a counter consists of flip-flops sharing the same clock input.
 \sssc{Shift Register Counter}
-A shift register counter is a type of synchronous counter consists of a shift register with some or all the outputs $Q$ of the flip-flops being connected to the inputs of a combinational circuit with one output whose output is connected to $D_0$. For an $n$-bit shift register counter, $D_0$ as an $n$-variable Boolean function of $Q_0,Q_1,\ldots,Q_{n-1}$ is called feedback function of the shift register counter.
+A shift register counter is a type of synchronous counter consists of a shift register with some or all the outputs $Q$ of the flip-flops being connected to the inputs of a combinational circuit with one output whose output is connected to $D_0$. A shift register counter of $n$ flip-flops is called $n$-bit or $n$-stage. For an $n$-bit shift register counter, $D_0$ as an $n$-variable Boolean function of $Q_0,Q_1,\ldots,Q_{n-1}$ is called feedback function of the shift register counter.
 \sssc{Ring Counter}
 A ring counter is a type of shift register counter consists of a shift register with the output $Q$ of the last flip-flop in the chain connected to the input $D$ of the first flip-flop in the chain. The bits stored circulate around the register. The count cycle of an $n$-bit ring counter is $n$.
 \sssc{Johnson counter, Twisted Ring Counter, or Mod-2n Counter}
@@ -2004,27 +2004,6 @@ which is implemented using AND and OR gates or other logically equivalent combin
 \[D_1=M'\]
 \[D_k=D_{k-1}Q_{k-1}',\quad k\in\bbN\land 1<k<n\]
 \[T_k=U_k+D_k,\quad k\in\bbN\land 1<k<n.\]
-\sssc{Linear Feedback Shift Register (LFSR)}
-A linear feedback shift register (LFSR) is a shift register counter whose feedback function is linear, or a circuit that is logically equivalent to a such shift register counter. LFSR is commonly used to generate pseudo-random numbers and pseudo-noise sequences in modern computer system.
-
-An $n$-bit LFSR is characterized by its feedback function $f$. Let $T\subseteq\{0,1,\ldots,n-1\}$ be such that
-\[f=\bigoplus_{i\in T}Q_i.\]
-Each feedback from $Q_i$ for $i\in T$ is called a tap. The feedback polynomial, characteristic polynomial, or connection polynomial $p(x)$ is defined as
-\[p(x)=1+\sum_{i\in T}x^{i+1}.\]
-
-PLACEHOLDER: definition check
-
-PLACEHOLDER: GF(2) abstract algebra interpretation of feedback polynomial
-
-The initial state of an LFSR is called seed.
-
-For each $n\in\bbN$, the maximal count cycle of $n$-bit LFSRs is $2^n-1$, in which all possible states except the state where all bits are zero are included.
-
-PLACEHOLDER: which
-
-PLACEHOLDER: Fibonacci LFSRs, Galois LFSRs, Xorshift LFSRs
-
-PLACEHOLDER end
 \sssc{Loadable Counter}
 A counter that consists of T flip-flops mentioned above can be adjusted to be loada le from a parallel input (PI) with an associated 2-to-1 multiplexer for each T flip-flop and a common load input as select input for all multiplexers. The original input $T$ to each flip-flop is connected instead to the data input of the associated multiplexer which is selected when load=0, the output of each multiplexer is connected to the input $T$ of the associated flip-flop, and the other data input to each multiplexer, which is selected when load=1, is connected to the corresponding bit of the parallel input.
 
@@ -2057,6 +2036,25 @@ To design a synchronous counter consists of $n$ J-K flip-flops given arbitrary t
 \item Convert the next-state maps to J and K input maps.
 \item Realize all inputs $J$ and $K$ with combination circuits with a subset of all outputs $Q$ and $Q'$, constant 1 and 0 sources, and all external control inputs as inputs.
 \een
+\ssc{Linear Feedback Shift Register (LFSR)}
+A linear feedback shift register (LFSR) is a shift register counter whose feedback function is linear, or a circuit that is logically equivalent to a such shift register counter. LFSR is commonly used to generate pseudo-random numbers and pseudo-noise sequences in modern computer system.
+
+An $n$-bit LFSR is characterized by its feedback function $f$. Let $T\subseteq\{0,1,\ldots,n-1\}$ be such that
+\[f=\bigoplus_{i\in T}Q_i.\]
+Each feedback from $Q_i$ for $i\in T$ is called a tap. The feedback polynomial, characteristic polynomial, or connection polynomial $p(x)$ is defined as
+\[p(x)=1+\sum_{i\in T}x^{i+1}.\]
+
+PLACEHOLDER: definition check, $\bbF_2$ abstract algebra interpretation of feedback polynomial
+
+The initial state of an LFSR is called seed.
+
+For each $n\in\bbN$, the maximal count cycle of $n$-bit LFSRs is $2^n-1$, in which all possible states except the state where all bits are zero are included. An $n$-bit LFSR has count cycle $2^n-1$ iff its feedback polynomial is primitive over $\bbF_2$.
+
+PLACEHOLDER: primitive, irreducible, Primitive trinomials after learned in abstract algebra
+
+PLACEHOLDER: Fibonacci LFSRs, Galois LFSRs, Xorshift LFSRs
+
+PLACEHOLDER end
 \ssc{Asynchronous counter or ripple counter}
 \sssc{Asynchronous counter or ripple counter}
 An asynchronous counter or a ripple counter is a counter consists of flip-flops not sharing the same clock input.
