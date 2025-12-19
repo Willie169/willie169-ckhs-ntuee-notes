@@ -2738,11 +2738,11 @@ When computing an integral of
 with respect to $x$ where $R$ is a rational function and $a\neq 0$, it may be effective to
 \ben
 \item let $h=\frac{b}{2|a|}$ and $k=-\frac{b^2}{4a^2}+\frac{c}{a}$, rewrite $\sqrt{ax^2+bx+c}$ as
-\[\sqrt{ax^2+bx+c}=\sqrt{|ak|}\sqrt{\operatorname{sgn}\qty(a)\qty(\frac{x}{\sqrt{|k|}}+\frac{h}{\sqrt{|k|}})^2+\operatorname{sgn}\qty(k)},\]
+\[\sqrt{ax^2+bx+c}=\sqrt{|ak|}\sqrt{\sgn(a)\qty(\frac{x}{\sqrt{|k|}}+\frac{h}{\sqrt{|k|}})^2+\sgn(k)},\]
 \iten use substitution $u=\frac{x}{\sqrt{|k|}}+\frac{h}{\sqrt{|k|}}$, which makes the integrand,
-\[\sqrt{|k|}R\qty(\sqrt{|k|}u-h,\sqrt{|ak|}\sqrt{\operatorname{sgn}\qty(a)u^2+\operatorname{sgn}\qty(k)}),\]
-which is a rational function of $u$ and $\sqrt{\operatorname{sgn}\qty(a)u^2+\operatorname{sgn}\qty(k)}$, and,
-\item depending on $\operatorname{sgn}\qty(a)$ and $\operatorname{sgn}\qty(k)$,
+\[\sqrt{|k|}R\qty(\sqrt{|k|}u-h,\sqrt{|ak|}\sqrt{\sgn(a)u^2+\sgn(k)}),\]
+which is a rational function of $u$ and $\sqrt{\sgn(a)u^2+\sgn(k)}$, and,
+\item depending on $\sgn(a)$ and $\sgn(k)$,
 \bit
 \item $k=0$: the integrand is a rational function of $u$,
 \item $a>0$ and $k>0$: try the substitution $u=\tan(t)$, $u=\cot(t)$, $u=\sinh(t)$, or $u=\csch(t)$,
@@ -3253,7 +3253,7 @@ By the squeeze theorem:
 \[\dv{x^n}{x}=\lim_{h\to 0}\frac{(x+h)^n-x^n}{h}=\lim_{h\to 0}\frac{\sum_{k=1}^{\infty}\binom{n}{k}x^{n-k}h^k}{h}=nx^{n-1}.\]
 \end{proof}
 \sssc{Absolute value function}
-\[\dv{|x|}{x}=\operatorname{sgn}\qty(x),\quad x\neq 0.\]
+\[\dv{|x|}{x}=\sgn(x),\quad x\neq 0.\]
 \sssc{Logarithmic function}
 \[\dv{\ln(x)}{x}=\frac{1}{x}.\]
 \[\ln(x)=\int_1^x\frac{1}{t}\dd{t},\quad x>0.\]
@@ -3379,7 +3379,7 @@ Using the chain rule on the left:
 \end{proof}
 \sssc{Inverse secant function}
 \[\dv{\arcsec(x)}{x}=\frac{1}{|x|\sqrt{x^2-1}}.\]
-\[\arcsec(x)=\operatorname{sgn}\qty(x)\int_1^{\abs{x}}\frac{1}{t\sqrt{t^2-1}}\dd{t}+(1-\operatorname{sgn}\qty(x))\frac{\pi}{2},\quad\abs{x}\geq 1.\]
+\[\arcsec(x)=\sgn(x)\int_1^{\abs{x}}\frac{1}{t\sqrt{t^2-1}}\dd{t}+(1-\sgn(x))\frac{\pi}{2},\quad\abs{x}\geq 1.\]
 \begin{proof}
 \[\ba
 \dv{\arcsec(x)}{x}&=\dv{\arccos(\frac{1}{x})}{x}\\
@@ -3389,7 +3389,7 @@ Using the chain rule on the left:
 \end{proof}
 \sssc{Inverse cosecant function}
 \[\dv{\arccsc(x)}{x}=-\frac{1}{|x|\sqrt{x^2-1}}.\]
-\[\arccsc(x)=\operatorname{sgn}\qty(x)\int_{\abs{x}}^{\infty}\frac{1}{t\sqrt{t^2-1}}\dd{t},\quad\abs{x}\geq 1.\]
+\[\arccsc(x)=\sgn(x)\int_{\abs{x}}^{\infty}\frac{1}{t\sqrt{t^2-1}}\dd{t},\quad\abs{x}\geq 1.\]
 \begin{proof}
 \[\ba
 \dv{\arccsc(x)}{x}&=\dv{\arcsin(\frac{1}{x})}{x}\\
@@ -3482,7 +3482,7 @@ Using the chain rule on the left:
 \ea\]
 \end{proof}
 \sssc{Inverse hyperbolic cotangent function}
-\[\dv{\operatorname{arccoth}\qty(x)}{x}=\frac{1}{1-x^2},\quad|x|>1.\]
+\[\dv{\arccoth(x)}{x}=\frac{1}{1-x^2},\quad|x|>1.\]
 \begin{proof}
 \[\ba
 \dv{\arccoth(x)}{x}&=\frac{1}{2}\dv{}{x}\ln(\frac{x+1}{x-1})\\
@@ -3492,24 +3492,24 @@ Using the chain rule on the left:
 \ea\]
 \end{proof}
 \sssc{Inverse hyperbolic secant function}
-\[\dv{\operatorname{arcsech}\qty(x)}{x}=-\frac{1}{x\sqrt{1-x^2}},\quad 0<x\leq 1.\]
+\[\dv{\arcsech(x)}{x}=-\frac{1}{x\sqrt{1-x^2}},\quad 0<x\leq 1.\]
 \begin{proof}
 \[\ba
-\dv{\operatorname{arcsech}\qty(x)}{x}&=\dv{}{x}\ln(\frac{1}{x}+\frac{\sqrt{1-x^2}}{x})\\
+\dv{\arcsech(x)}{x}&=\dv{}{x}\ln(\frac{1}{x}+\frac{\sqrt{1-x^2}}{x})\\
 &=\frac{x}{1+\sqrt{1-x^2}}\frac{\frac{-x}{\sqrt{1-x^2}}x-\qty(1+\sqrt{1-x^2})}{x^2}\\
 &=\frac{1}{1+\sqrt{1-x^2}}\frac{-x^2-\sqrt{1-x^2}-1+x^2}{x\sqrt{1-x^2}}\\
 &=-\frac{1}{x\sqrt{1-x^2}}
 \ea\]
 \end{proof}
 \sssc{Inverse hyperbolic cosecant function}
-\[\dv{\operatorname{arccsch}\qty(x)}{x}=-\frac{1}{|x|\sqrt{1+x^2}}.\]
+\[\dv{\arccsch(x)}{x}=-\frac{1}{|x|\sqrt{1+x^2}}.\]
 \begin{proof}
 \[\ba
-\dv{\operatorname{arccsch}\qty(x)}{x}&=\dv{}{x}\ln(\frac{1}{x}+\frac{\sqrt{1+x^2}}{|x|})\\
-&=\dv{}{x}\ln(\frac{1+\operatorname{sgn}\qty(x)\sqrt{1+x^2}}{x})\\
-&=\frac{x}{1+\operatorname{sgn}\qty(x)\sqrt{1+x^2}}\frac{\frac{\operatorname{sgn}\qty(x)x}{\sqrt{1+x^2}}x-\qty(1+\operatorname{sgn}\qty(x)\sqrt{1+x^2})}{x^2}\\
-&=\frac{1}{1+\operatorname{sgn}\qty(x)\sqrt{1+x^2}}\frac{-\sqrt{1+x^2}-\operatorname{sgn}\qty(x)}{x\sqrt{1+x^2}}\\
-&=\frac{-\operatorname{sgn}\qty(x)}{x\sqrt{1+x^2}}\\
+\dv{\arccsch(x)}{x}&=\dv{}{x}\ln(\frac{1}{x}+\frac{\sqrt{1+x^2}}{|x|})\\
+&=\dv{}{x}\ln(\frac{1+\sgn(x)\sqrt{1+x^2}}{x})\\
+&=\frac{x}{1+\sgn(x)\sqrt{1+x^2}}\frac{\frac{\sgn(x)x}{\sqrt{1+x^2}}x-\qty(1+\sgn(x)\sqrt{1+x^2})}{x^2}\\
+&=\frac{1}{1+\sgn(x)\sqrt{1+x^2}}\frac{-\sqrt{1+x^2}-\sgn(x)}{x\sqrt{1+x^2}}\\
+&=\frac{-\sgn(x)}{x\sqrt{1+x^2}}\\
 &=-\frac{1}{|x|\sqrt{1+x^2}}
 \ea\]
 \end{proof}
@@ -3651,9 +3651,9 @@ Using the chain rule on the left:
 \sssc{Inverse cotangent function}
 \[\int\arccot(x)\dd{x}=x\arccot(x)+\frac{1}{2}\ln(1+x^2)+C.\]
 \sssc{Inverse secant function}
-\[\int\arcsec(x)\dd{x}=x\arcsec(x)-\operatorname{sgn}\qty(x)\ln\abs{x+\sqrt{x^2-1}}+C,\quad|x|\geq 1.\]
+\[\int\arcsec(x)\dd{x}=x\arcsec(x)-\sgn(x)\ln\abs{x+\sqrt{x^2-1}}+C,\quad|x|\geq 1.\]
 \sssc{Inverse cosecant function}
-\[\int\arccsc(x)\dd{x}=x\arccsc(x)+\operatorname{sgn}\qty(x)\ln\abs{x+\sqrt{x^2-1}}+C,\quad|x|\geq 1.\]
+\[\int\arccsc(x)\dd{x}=x\arccsc(x)+\sgn(x)\ln\abs{x+\sqrt{x^2-1}}+C,\quad|x|\geq 1.\]
 \sssc{Hyperbolic sine function}
 \[\int\sinh(x)\dd{x}=\cosh(x)+C.\]
 \[\int\sinh^2(x)\dd{x}=-\frac{x}{2}+\frac{\sinh(2x)}{4}+C.\]
@@ -3744,15 +3744,15 @@ PLACEHOLDER
 \sssc{Inverse hyperbolic tangent function}
 \[\int\arctanh(x)\dd{x}=x\arctanh(x)+\frac{1}{2}\ln(1-x^2)+C.\]
 \sssc{Inverse hyperbolic cotangent function}
-\[\int\operatorname{arccoth}\qty(x)\dd{x}=x\operatorname{arccoth}\qty(x)+\frac{1}{2}\ln(x^2-1)+C.\]
+\[\int\arccoth(x)\dd{x}=x\arccoth(x)+\frac{1}{2}\ln(x^2-1)+C.\]
 \sssc{Inverse hyperbolic secant function}
-\[\int\operatorname{arcsech}\qty(x)\dd{x}=x\operatorname{arcsech}\qty(x)+\arctan\qty(\frac{\sqrt{1-x^2}}{x})+C.\]
+\[\int\arcsech(x)\dd{x}=x\arcsech(x)+\arctan\qty(\frac{\sqrt{1-x^2}}{x})+C.\]
 \sssc{Inverse hyperbolic cosecant function}
-\[\int\operatorname{arccsch}\qty(x)\dd{x}=x\operatorname{arccsch}\qty(x)+\ln\abs{x+\sqrt{x^2+1}}+C.\]
+\[\int\arccsch(x)\dd{x}=x\arccsch(x)+\ln\abs{x+\sqrt{x^2+1}}+C.\]
 \sssc{Derivative over function}
 \[\int\frac{f'(x)}{f(x)}\dd{x}=\ln|f(x)|+C,\quad f(x)\neq 0.\]
 \sssc{$\frac{1}{x^2+a^2}$}
-\[\int\frac{1}{x^2+a^2}\dd{x}=\frac{1}{a}\arctan(\frac{x}{a})+C,\quad a\neq 0.\]
+\[\int\frac{1}{x^2+a^2}\dd{x}=\frac{1}{a}\arctan(\frac{x}{a})+C,\quad a>0.\]
 \begin{proof}
 \[\ba
 \int\frac{1}{x^2+a^2}\dd{x}&=\frac{1}{a}\int\frac{1}{u^2+1^2}\dd{u},\quad u=\frac{x}{a},\quad\dd{u}=\frac{1}{a}\dd{x}\\
@@ -3760,7 +3760,7 @@ PLACEHOLDER
 \ea\]
 \end{proof}
 \sssc{$\frac{1}{x^2-a^2}$}
-\[\int\frac{1}{x^2-a^2}\dd{x}=\frac{1}{2a}\ln(\frac{x-a}{x+a})+C,\quad a\neq 0.\]
+\[\int\frac{1}{x^2-a^2}\dd{x}=\frac{1}{2a}\ln(\frac{x-a}{x+a})+C,\quad a>0\land x^2-a^2>0.\]
 \begin{proof}
 \[\ba
 \int\frac{1}{x^2-a^2}\dd{x}&=\int\frac{1}{2a}\qty(\frac{1}{x-a}-\frac{1}{x+a})\dd{x}\\
@@ -3768,7 +3768,7 @@ PLACEHOLDER
 \ea\]
 \end{proof}
 \sssc{$\frac{1}{a^2-x^2}$}
-\[\int\frac{1}{a^2-x^2}\dd{x}=\frac{1}{2a}\ln(\frac{a-x}{a+x})+C,\quad a\neq 0.\]
+\[\int\frac{1}{a^2-x^2}\dd{x}=\frac{1}{2a}\ln(\frac{a-x}{a+x})+C,\quad a>0\land a^2-x^2>0.\]
 \begin{proof}
 \[\ba
 \int\frac{1}{a^2-x^2}\dd{x}&=\int\frac{1}{2a}\qty(\frac{1}{a-x}-\frac{1}{a+x})\dd{x}\\
@@ -3776,7 +3776,7 @@ PLACEHOLDER
 \ea\]
 \end{proof}
 \sssc{$ax+b$}
-\[\int\frac{1}{ax+b}\dd{x}=\frac{1}{a}\ln\abs{ax+b}+C,\quad a\neq 0.\]
+\[\int\frac{1}{ax+b}\dd{x}=\frac{1}{a}\ln\abs{ax+b}+C,\quad a>0.\]
 \begin{proof}
 \[\ba
 \int\frac{1}{ax+b}\dd{x}&=\frac{1}{a}\int\frac{1}{u}\dd{u},\quad u=ax+b,\quad\dd{u}=a\dd{x}\\
@@ -3791,7 +3791,7 @@ PLACEHOLDER
 &=\frac{1}{a(n+1)}(ax+b)^{n+1}+C
 \ea\]
 \end{proof}
-\[\int\frac{x}{ax+b}\dd{x}=\frac{x}{a}-\frac{b}{a^2}\ln\abs{ax+b}+C,\quad a\neq 0.\]
+\[\int\frac{x}{ax+b}\dd{x}=\frac{x}{a}-\frac{b}{a^2}\ln\abs{ax+b}+C,\quad a>0.\]
 \begin{proof}
 \[\ba
 \int\frac{x}{ax+b}\dd{x}&=\int\frac{u-b}{a^2u}\dd{u},\quad u=ax+b,\quad \dd{u}=a\dd{x}\\
@@ -3799,7 +3799,7 @@ PLACEHOLDER
 &=\frac{x}{a}-\frac{b}{a^2}\ln\abs{ax+b}+C
 \ea\]
 \end{proof}
-\[\int\frac{x}{(ax+b)^2}\dd{x}=\frac{1}{a^2}\ln\abs{ax+b}+\frac{b}{a^2(ax+b)}+C,\quad a\neq 0.\]
+\[\int\frac{x}{(ax+b)^2}\dd{x}=\frac{1}{a^2}\ln\abs{ax+b}+\frac{b}{a^2(ax+b)}+C,\quad a>0.\]
 \begin{proof}
 \[\ba
 \int\frac{x}{(ax+b)^2}\dd{x}&=\int\frac{u-b}{a^2u^2}\dd{u},\quad u=ax+b,\quad \dd{u}=a\dd{x}\\
@@ -3888,8 +3888,8 @@ Let $s=\sqrt{x^2-a^2},\quad x^2>a^2$.
 \[\ba
 \int\frac{1}{s}\dd{x}&=\int\frac{1}{\sqrt{u^2-1}}\dd{x},\quad u=\frac{x}{|a|},\quad\dd{u}=\frac{1}{|a|}\dd{x}\\
 &=\int 1\dd{t},\quad u=\cosh t,\quad\dd{u}=\sinh t\dd{t}\\
-&=t+C=\operatorname{sgn}\qty(u)\arccosh u+C\\
-&=\operatorname{sgn}\qty(x)\arccosh\abs{\frac{x}{a}}+C\\
+&=t+C=\sgn(u)\arccosh u+C\\
+&=\sgn(x)\arccosh\abs{\frac{x}{a}}+C\\
 &=\ln\abs{\frac{x}{a}+\sqrt{\qty(\frac{x}{a})^2-1}}+C
 &=\ln\abs{x+s}+C
 \ea\]
