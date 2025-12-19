@@ -1520,7 +1520,7 @@ If $\sum_{n=0}^{\infty}a_n$ converges to $A$, $\sum_{n=0}^{\infty}b_n$ converges
 PLACEHOLDER
 \end{proof}
 \ssc{Improper integral theorems}
-\sssc{p-test}
+\sssc{p-test I}
 $\int_a^{\infty}x^p\dd{x},\quad a>0$ converges iff $p<-1$. And for $p<-1\land a>0$,
 \[\int_a^{\infty}x^p\dd{x}=-\frac{1}{p+1}a^{p+1}.\]
 \begin{proof}
@@ -1531,6 +1531,18 @@ $\int_a^{\infty}x^p\dd{x},\quad a>0$ converges iff $p<-1$. And for $p<-1\land a>
 \[\forall p>-1\nexists\lim_{x\to\infty}\frac{1}{p+1}x^{p+1}\]
 \[\nexists\lim_{x\to\infty}\ln(x)\]
 \[\forall p<-1\lim_{x\to\infty}\frac{1}{p+1}x^{p+1}=0\]
+\end{proof}
+\sssc{p-test II}
+$\int_0^ax^p\dd{x},\quad a>0$ converges iff $p>-1$. And for $p>-1\land a>0$,
+\[\int_0^ax^p\dd{x}=\frac{1}{p+1}a^{p+1}.\]
+\begin{proof}
+\[\int x^p\dd{x}=\begin{cases}
+\frac{1}{p+1}x^{p+1},\quad&p\neq -1\\
+\ln(x),\quad&p=-1
+\end{cases}\]
+\[\forall p<-1\nexists\lim_{x\to 0^+}\frac{1}{p+1}x^{p+1}\]
+\[\nexists\lim_{x\to 0^+}\ln(x)\]
+\[\forall p>-1\lim_{x\to 0^+}\frac{1}{p+1}x^{p+1}=0\]
 \end{proof}
 \sssc{Convergent improper integral of BV integrand implies limit of integrand converges to 0}
 If function $f\colon[a,\infty)\to\bbR$ is of bounded variation on $[a,\infty)$ and $\int_a^{\infty}f(x)\dd{x}$ converges, then $\lim_{x\to\infty}f(x)=0$.
@@ -1562,9 +1574,7 @@ An improper integral is convergent if it is absolutely convergent.
 \sssc{For real series}
 For real sequence $\langle a_i\rangle_{i=m}^{\infty}$, $\sum_{i=m}^{\infty}a_i$ converges iff $\sum_{i=m+n}^{\infty}a_i$ converges, for all $n\in\bbN$.
 \sssc{For improper integral}
-For real function $f$ defined on $[a,\infty)$, $\int_a^{\infty}f(x)\dd{x}$ converges iff $\int_{a+b}^{\infty}f(x)\dd{x}$ converges, for all $b\in\bbR_{>0}$.
-
-For real function $f$ defined on $(-\infty,a]$, $\int_{-\infty}^af(x)\dd{x}$ converges iff $\int_{-\infty}^{a-b}f(x)\dd{x}$ converges, for all $b\in\bbR_{>0}$.
+If function $f\colon [a,b)\to\bbR$ is measurable with $b\in(a,\infty]$, $\int_a^bf(x)\dd{x}$ is improper integral, $\int_a^cf(x)\dd{x}$ is proper integral for any $a<c<b$, then $\int_a^bf(x)\dd{x}$ converges iff $\int_c^bf(x)\dd{x} converges, for all $a<c<b$.
 \ssc{(Direct) comparison theorem}
 \sssc{For real series}
 If real sequences $\langle a_n\rangle_{n=1}^{\infty}$ and $\langle b_n\rangle_{n=1}^{\infty}$ are such that $a_n\geq b_n\geq 0$ for all $n\in\bbN$, then
@@ -1588,7 +1598,7 @@ exists and $\in[0,L]$.
 Statement 2 is the contrapositive of statement 1.
 \end{proof}
 \sssc{For improper integral}
-If functions $f\colon [a,b)\to\bbR$ and $g\colon [a,b)\to\bbR$ are measurable with $b\in(a,\infty]$, $\int_a^bf(x)\dd{x}$ and $\int_a^bg(x)\dd{x}$ are improper integral, $\int_a^cf(x)\dd{x}$ and $\int_a^cg(x)\dd{x}$ are proper integrals for any $a<c<b$,
+If functions $f\colon [a,b)\to\bbR$ and $g\colon [a,b)\to\bbR$ are measurable with $b\in(a,\infty]$, $\int_a^bf(x)\dd{x}$ and $\int_a^bg(x)\dd{x}$ are improper integrals, $\int_a^cf(x)\dd{x}$ and $\int_a^cg(x)\dd{x}$ are proper integrals for any $a<c<b$,
 and $f(x)\geq g(x)\geq 0$ a.e. for $x\in[a,b)$, then
 \ben
 \item $\int_a^bf(x)\dd{x}$ is convergent implies $\int_a^bg(x)\dd{x}$ is convergent.
@@ -1614,7 +1624,7 @@ Statement 2 is the contrapositive of statement 1.
 \end{proof}
 \ssc{Limit comparison theorem (LCT)}
 \sssc{For real series}
-If real sequences $\langle a_n\rangle_{n=1}^{\infty}$ and $\langle b_n\rangle_{n=1}^{\infty}$ are such that $a_n\geq 0$ and $b_n>0$ for all $n\geq m$ for some $m\in\bbN$, let
+If real sequences $\langle a_n\rangle_{n=1}^{\infty}$ and $\langle b_n\rangle_{n=1}^{\infty}$ are such that $a_n\geq 0$ and $b_n>0$ for all $n\geq m$ for some $m\in\bbN$, if
 \[L=\lim_{n\to\infty}\frac{a_n}{b_n}\in[0,\infty],\]
 then:
 \ben
@@ -1662,7 +1672,7 @@ There exists $N\in\bbN$ such that for all $n\geq N$, $\frac{a_n}{b_n}>1$, equiva
 By direct comparison test of $\sum_{n=N}^{\infty}a_n$ and $\sum_{n=N}^{\infty}b_n$, the statements hold.
 \end{proof}
 \sssc{For improper integral}
-If functions $f\colon [a,b)\to\bbR$ and $g\colon [a,b)\to\bbR$ are measurable with $b\in(a,\infty]$, $\int_a^bf(x)\dd{x}$ and $\int_a^bg(x)\dd{x}$ are improper integral, $\int_a^cf(x)\dd{x}$ and $\int_a^cg(x)\dd{x}$ are proper integrals for any $a<c<b$, $f(x)\geq 0$ and $g(x)>0$ a.e. for $x\in[a,b)$, let
+If functions $f\colon [a,b)\to\bbR$ and $g\colon [a,b)\to\bbR$ are measurable with $b\in(a,\infty]$, $\int_a^bf(x)\dd{x}$ and $\int_a^bg(x)\dd{x}$ are improper integrals, $\int_a^cf(x)\dd{x}$ and $\int_a^cg(x)\dd{x}$ are proper integrals for any $a<c<b$, $f(x)\geq 0$ and $g(x)>0$ for $x\in[a,b)$, if
 \[L=\lim_{x\to b^-}\frac{f(x)}{g(x)}\in[0,\infty],\]
 then:
 \ben
@@ -1709,7 +1719,7 @@ There exists $a\leq M<b$ such that for all $b>x\geq M$, $\frac{f(x)}{g(x)}>1$, e
 
 By direct comparison test of $\int_M^bf(x)\dd{x}$ and $\int_M^bg(x)\dd{x}$, the statements hold.
 \end{proof}
-\ssc{Dirichlet test}
+\ssc{Dirichlet test or Abel's test}
 \sssc{For real series}
 If $\langle a_n\rangle_{n=1}^{\infty}$ is a sequence such that the sequence of partial sums $\langle s_n=\sum_{i=0}^na_i\rangle_{n=0}^{\infty}$ where $s_0=0$ is bounded and $\langle b_n\rangle_{n=1}^{\infty}$ is a monotone sequence such that $\lim_{n\to\infty}b_n=0$, then
 \[\sum_{n=1}^{\infty}a_nb_n\]
@@ -1733,7 +1743,7 @@ For any $N\leq p\leq q$, using Abel transformation,
 \sssc{For improper integral}
 If $f\colon [a,b)\to\bbR$ with $b\in(a,\infty]$ is a function such that the function
 \[F(x)=\int_a^xf(t)\dd{t},\quad b>x\geq a\]
-is bounded and function $g\colon [a,b)\to\bbR$ is monotone such that $\lim_{x\to b^-}g(x)=0$, then
+is bounded, $g\colon [a,b)\to\bbR$ is a monotone and measurable function such that $\lim_{x\to b^-}g(x)=0$ and $g(a)$ is finite, then
 \[\int_a^bf(x)g(x)\dd{x}\]
 converges.
 \begin{proof}
