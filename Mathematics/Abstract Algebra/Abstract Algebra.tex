@@ -24,7 +24,8 @@ An operation is a function from a set to itself.
 \sssc{Existential axioms}
 \bit
 \item Having an identity element: A binary operation $*$ has an identity element if there is an element $e$ such that $x*e=x$ and $e*x=x$ for any $x$ in the algebraic structure. Unless otherwise specified, the identity element of an operator denoted as $+$ is denoted as $0$, and the identity element of an operator denoted as $*$ is denoted as $1$.
-\item Invertibility: Given a binary operation $*$ that an identity element $e$, an element $x$ in the algebraic structure is invertible if there exists an element $\operatorname{inv}(x)$, called the inverse element, in the algebraic structure such that $x*\operatorname{inv}(x)=e$ and $\operatorname{inv}(x)*x=e$. Unless otherwise specified, the inverse element of $a$ of an operator denoted as $+$ is denoted as $-a$, and the inverse element of $a$ of an operator denoted as $*$ is denoted as $a^{-1}$.
+\item Latin square property: A binary operation $*$ has Latin square property iff for every $a,b$ in the algebraic structure, there exists two unique $x,y$ in the algebraic structure such that $a*x=b$ and $x*a=b$.
+\item Invertibility: Given a binary operation $*$ that an identity element $e$, an element $x$ in the algebraic structure is invertible if there exists an unique element $\operatorname{inv}(x)$, called the inverse element, in the algebraic structure such that $x*\operatorname{inv}(x)=e$ and $\operatorname{inv}(x)*x=e$. Unless otherwise specified, the inverse element of $a$ of an operator denoted as $+$ is denoted as $-a$, and the inverse element of $a$ of an operator denoted as $*$ is denoted as $a^{-1}$.
 \eit
 \ssc{Group-like algebraic structure}
 \sssc{Magma (原群) or binar}
@@ -36,16 +37,18 @@ A semigroup is a magma equipped with an operation that is associative.
 A unital magma is a magma equipped with an operation that has an identity element.
 \sssc{Monoid (么半群, 單群, or 亞群)}
 A monoid is a magma equipped with an operation that is associative and has an identity element.
+\sssc{Commutative monoid or abelian monoid}
+A commutative monoid or abelian monoid is a monoid equipped with an operation that is commutative.
 \sssc{Quasigroup (擬群)}
-A quasigroup is a magma equipped with an operation that is distributive.
+A quasigroup is a magma equipped with an operation that has Latin square property.
 \sssc{Loop (么擬群 or 圈)}
-A loop is a magma equipped with an operation that is distributive and has an identity element.
+A loop is a magma equipped with an operation that has Latin square property and has an identity element.
 \sssc{Associative quasigroup}
-An associative quasigroup is a magma equipped with an operation that is associative and distributive.
+An associative quasigroup is a magma equipped with an operation that is associative and has Latin square property.
 \sssc{Group (群)}
-A group is a magma equipped with an operation that is associative, distributive, and has an identity element.
+A group is a magma equipped with an operation that has an identity element, is associative, and every element has an inverse element, that is, a nonempty associative quasigroup.
 \sssc{Abelian group (阿貝爾群) or commutative group (交換群)}
-An abelian group, aka a commutative group, is a group equipped with an operation that is commutative.
+An abelian group, also called a commutative group, is a group equipped with an operation that is commutative.
 \sssc{Group extension}
 We say that a group $K$ is a subgroup of another group $L$ and that $L$ is a group extension of $K$ iff $K\subseteq L$ and that the operation of $K$ is that of $L$ restricted to $K$.
 
@@ -58,21 +61,19 @@ A map $\phi\colon\bbR\to G$ to some group equipped with operation $*$ is called 
 \ssc{Ring-like algebraic structure}
 PLACEHOLDER
 rngs ⊃ rings ⊃ commutative rings ⊃ integral domains ⊃ integrally closed domains ⊃ GCD domains ⊃ unique factorization domains ⊃ principal ideal domains ⊃ Euclidean domains ⊃ fields ⊃ algebraically closed fields
-
-PLACEHOLDER: rng and ring etc. second not R\setminus\{0\} but R, isn't it?
 \sssc{Rng or non-unital ring}
-A rng or non-unital ring is a ordered triple $(R,+,\cdot)$ of set $R$ and binary operations $+$ and $\cdot$ on $R$ called addition and multiplication such that
+A rng or non-unital ring is a ordered triple $(R,+,\cdot)$ of set $R$, binary operations $+$, and $\cdot$ on $R$ called addition and multiplication such that
 \bit
-\item $(R,+)$ is an abelian group under addition with $0$ as the identity element, called addictive identity,
-\item $(R\setminus\{0\},\cdot)$ is a semigroup under multiplication, and
+\item $(R,+)$ is an abelian group under addition with $0$ as the identity element, called additive identity,
+\item $(R,\cdot)$ is a semigroup under multiplication, and
 \item Distributivity of multiplication over addition:
 \[a\cdot (b+c)=(a\cdot b)+(b\cdot c).\]
 \eit
 \sssc{Ring}
-A ring is a ordered triple $(R,+,\cdot)$ of set $R$ and binary operations $+$ and $\cdot$ on $R$ called addition and multiplication such that
+A ring is a ordered triple $(R,+,\cdot)$ of set $R$, binary operations $+$, and $\cdot$ on $R$ called addition and multiplication such that
 \bit
-\item $(R,+)$ is an abelian group under addition with $0$ as the identity element, called addictive identity,
-\item $(R\setminus\{0\},\cdot)$ is a monoid under multiplication with $1$ as the identity element, called multiplicative identity, and
+\item $(R,+)$ is an abelian group under addition with $0$ as the identity element, called additive identity,
+\item $(R,\cdot)$ is a monoid under multiplication with $1$ as the identity element, called multiplicative identity, and
 \item Distributivity of multiplication over addition:
 \[a\cdot (b+c)=(a\cdot b)+(b\cdot c).\]
 \eit
@@ -111,13 +112,7 @@ A commutative algebra is an associative algebra that is also a commutative ring.
 \sssc{Algebraic element or algebraic}
 If $A$ is an associative algebra over a ring $K$, then an element $a$ of $A$ is an algebraic element or algebraic over $K$, if there exists some non-zero polynomial $g(x)\in K[x]$ such that $g(a)=0$. Elements of $A$ that are not algebraic over $K$ are transcendental over $K$.
 \sssc{Field (域)}
-A field is a ordered triple $(F,+,\cdot)$ of set $F$ and binary operations $+$ and $\cdot$ on $F$ called addition and multiplication such that
-\bit
-\item $(F,+)$ is an abelian group under addition with $0$ as the identity element, called addictive identity,
-\item $(F\setminus\{0\},\cdot)$ is an abelian group under multiplication with $1$ as the identity element, called multiplicative identity, and
-\item Distributivity of multiplication over addition:
-\[a\cdot (b+c)=(a\cdot b)+(b\cdot c).\]
-\eit
+A field $(F,+,\cdot)$ is a commutative ring with $1\neq 0$ and $(F\setminus\{0\},\cdot)$ being an abelian group.
 \sssc{Field extension}
 We say that a field $K$ is a subfield of another field $L$ and that $L$ is a field extension of $K$ iff $K\subseteq L$ and that the operations of $K$ are those of $L$ restricted to $K$.
 \sssc{Algebraic extension}
