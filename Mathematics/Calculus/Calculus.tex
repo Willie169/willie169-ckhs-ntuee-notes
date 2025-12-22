@@ -237,13 +237,12 @@ A triangular wave with period $T$, crest $A_1$, and trough $A_0$ is
 A sawtooth wave with period $T$, crest $A_1$, and trough $A_0$ is
 \[f(t)=\frac{A_0+A_1}{2}+\qty(A_1-A_0)\qty(\frac{t}{T}-\left\lfloor\frac{t}{T}+\frac{1}{2}\right\rfloor).\]
 \sssc{Heaviside step function (黑維塞階躍函數) or Unit step function (單位階躍函數)}
-The Heaviside step function or unit step function $H(x)$ or $u(x)\colon\bbR\to\bbR$ is defined as:
-\[H(x)=u(x)=
+The Heaviside step function or unit step function $u(x)\colon\bbR\to\bbR$ is defined as:
+\[u(x)=
 \begin{cases}0,\quad &x<0\\
 1,\quad &x\geq 0
 \end{cases},\]
-where $H(0)=u(0)$ is sometimes defined to be $\frac{1}{2}$ or other values instead.
-\[H'(x)=u'(x)=\delta(x).\]
+where $u(0)$ is sometimes defined to be $\frac{1}{2}$ or other values instead.
 \sssc{Dirac delta function (狄拉克 δ 函數)}
 The Dirac delta function $\delta(x)\colon\bbR\to\bbR\cup\{-\infty,\infty\}$ is defined as:
 \[\delta(x) =
@@ -252,7 +251,8 @@ The Dirac delta function $\delta(x)\colon\bbR\to\bbR\cup\{-\infty,\infty\}$ is d
 0, & x \neq 0.
 \end{cases}\]
 \[\int _{-\infty }^{\infty }\delta(x) \, \mathrm{d}x = 1.\]
-\[\int_0^x\delta(t)\,\mathrm{d}t=H(x).\]
+\[\int_0^x\delta(t)\,\mathrm{d}t=u(x).\]
+\[u'(x)=\delta(x).\]
 \[\forall \varepsilon > 0:\,\int_{a-\varepsilon}^{a+\varepsilon} f(x) \delta(x-a) \, \mathrm{d}x = f(a).\]
 
 
@@ -3095,23 +3095,26 @@ Since $s>\alpha$, the integral converges, so the second integral is finite.
 \end{proof}
 \sssc{Linearity}
 \[\mathcal{L}\{af(t)+bg(t)\}=a\mathcal{L}\{f(t)\}+b\mathcal{L}\{g(t)\}.\]
-\sssc{First shifting theorem or Time shift}
+\sssc{First shifting theorem, Time delay, or Time shift}
 \[\mathcal{L}\{f(t-a)u(t-a)\}=e^{-as}F(s), \quad a > 0,\]
 where $u(t)$ is the unit step function.
+\begin{proof}
+PLACEHOLDER
+\end{proof}
 \sssc{Second shifting theorem or Frequency shift}
 \[\mathcal{L}\{e^{at} f(t)\}(s) = F(s-a).\]
+\begin{proof}
+PLACEHOLDER
+\end{proof}
 \sssc{Differentiation in Time Domain}
 \[\mathcal{L}\{f'(t)\}(s) = sF(s) - f\qty(0^+).\]
 \[\mathcal{L}\{f^{(n)}(t)\}(s) = s^n F(s) - \sum_{i=0}^{n-1}s^{n-1-i}f^{(i)}\qty(0^+).\]
 \begin{proof}
-\[\mathcal{L}\{f'(t)\}(s) = \int_0^\infty e^{-st} f'(t)\dd{t}.\]
 \[u = e^{-st} \quad \Rightarrow \quad \dd{u} = -s e^{-st} \dd{t}.\]
 \[dv = f'(t)\dd{t} \quad \Rightarrow \quad v = f(t).\]
-Integral by parts.
-\[\int_0^\infty u\dd{v} = (u v)\big\vert_0^\infty - \int_0^\infty v\dd{u}.\]
 \bma
-\int_0^\infty e^{-st} f'(t)\dd{t}&=\qty(e^{-st}f(t))\big\vert_0^\infty+\int_0^\infty f(t)se^{-st}\dd{t}\\
-&=-f\qty(0^+)+\int_0^\infty f(t)se^{-st}\dd{t}\\
+\mathcal{L}\{f'(t)\}(s)&=\int_0^\infty e^{-st} f'(t)\dd{t}\\
+&=\qty(e^{-st}f(t))\big\vert_0^\infty+\int_0^\infty f(t)se^{-st}\dd{t}\\
 &=s\mathcal{L}\{f(t)\}(s)-f\qty(0^+)
 \ea\]
 \end{proof}
