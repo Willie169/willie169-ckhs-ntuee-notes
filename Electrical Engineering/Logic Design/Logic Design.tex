@@ -1952,12 +1952,6 @@ To transfer data from a source register to a destination register, we can connec
 If multiple registers share a common data bus, only one register should enable its tri-state buffers at a time to avoid bus contention.
 \sssc{Data Transfer Between Registers with Multiplexers}
 To transfer data from source registers to a destination register, we can connect the outputs of the source registers to data inputs of a multiplexer and connect the output of the multiplexer to the data inputs of the destination register. When the select input select a source register and clock enable/load input of the destination register is active at an active edge, the data outputs of the selected source register are transferred to the data inputs of the destination register.
-\sssc{Accumulator}
-An accumulator is a register that stores intermediate results of arithmetic and logic operations in a digital system. It is commonly used in arithmetic logic units (ALUs) of computers and digital signal processors (DSPs) to hold the results of calculations.
-
-Take $n$-bit parallel adder with accumulator for example. It consists of an $n$-bit parallel adder and an $n$-bit register. For the full adder of each cell, the addend input is connected to the data output of the associated flip-flop in the accumulator register, the augend input is connected to the corresponding bit of the external $n$-bit augend input, and the sum output is connected to the data input of the associated flip-flop in the accumulator register. The addition takes place each time load=1 at an active edge.
-
-Before addition, we should let the register hold the addend. This can be accomplished in several ways. The easiest way is to first clear the accumulator using the asynchronous clear inputs on the flip-flops, and then put the addend on the augend input. Another way is to add a multiplexer before the data input of each flip-flop in the accumulator register to select between the external data input and the sum output of the adder.
 \ssc{Shift Register}
 \sssc{Shift Register}
 A shift register is a sequential circuit consists of a chain of edge-triggered D flip-flops that stores data and shifts by one bit when certain control inputs are at a certain combination at an active edge, optionally allowing serial or parallel input and output.
@@ -2007,6 +2001,18 @@ An $n$-bit serial-in parallel-out (SIPO) bidirectional shift register is an $n$-
 An $n$-flip-flop synchronizer is an $n$-bit SISO register used to synchronize an input to a synchronous circuit with its clock, in which the original not synchronized input is inputted to the SISO register and the synchronized and delayed up to $n$ clock periods input for the synchronous circuit is outputted from the SISO register.
 
 A two-flip-flop synchronizer is often used.
+\ssc{Accumulator}
+\sssc{Accumulator}
+An accumulator is a register or shift register that stores intermediate results of arithmetic and logic operations in a digital system. It is commonly used in arithmetic logic units (ALUs) of computers and digital signal processors (DSPs) to hold the results of calculations.
+待, serial data processing unit, parallel data processing unit
+\sssc{Parallel adder with accumulator}
+An $n$-bit parallel adder with accumulator consists of an $n$-bit parallel adder and an $n$-bit register. For the full adder of each cell, the addend input is connected to the data output of the associated flip-flop in the accumulator register, the augend input is connected to the corresponding bit of the external $n$-bit augend input, and the sum output is connected to the data input of the associated flip-flop in the accumulator register. The addition takes place each time load=1 at an active edge.
+
+Before addition, we should let the register hold the addend. This can be accomplished in several ways. The easiest way is to first clear the accumulator using the asynchronous clear inputs on the flip-flops, and then put the addend on the augend input. Another way is to add a multiplexer before the data input of each flip-flop in the accumulator register to select between the external data input and the sum output of the adder.
+\sssc{Serial adder with accumulator}
+An $n$-bit serial adder with accumulator consists of one full adder, two $n$-bit PIPO shift registers, and a D flip-flop. The addend and augend is loaded into the two shift registers first, with LSB in the last FF. The two SO is connected to the addend and augend input of the FA, the carry-out is connected to the input of the DFF, the output $Q$ of the DFF is connected to the carry-in of the FA, the sum output of the FA is connected to the SI of the addend register, and the SO of the augend register is sometimes connected to the SI of the augend register. After $n$ active edges, the addend register is loaded with the LSB to the $n$th bit of the sum with LSB in the last FF, and the sum output of the FA is the $(n+1)$th bit of the sum.
+
+
 \ssc{Synchronous Counter}
 \sssc{Synchronous Counter}
 A synchronous counter is a counter consists of flip-flops sharing the same clock input.
