@@ -965,7 +965,7 @@ Unless otherwise specified, a type of electronic components with active high and
 \sssc{Bus}
 Several signals that perform a common function may be grouped together to form a bus, represented with a single heavy line optionally with a diagonal slash through it specifying the number of bits in the bus.
 \sssc{Iterative Circuits}
-An iterative circuit consists of a number of identical cells interconnected in a regular manner. The regular structure of an iterative circuit makes it easier to fabricate in integrated circuit form than circuits with less regular structures.
+An iterative circuit consists of a number of identical cells interconnected in a regular manner, each cell has external inputs, external outputs, and interconnections with adjacent cells. The regular structure of an iterative circuit makes it easier to fabricate in integrated circuit form than circuits with less regular structures.
 \sssc{Bits significances}
 For circuits with the concept of LSB to MSB, variables of the $k$th least significant bit are usually labeled with subscript $_{k-1}$. When writing variables of a specific name of all bits in a row, they are usually listed from MSB to LSB from leftmost to rightmost. For an $n$-bit circuit, when treating variables of a specific name of all bits in a row listed from MSB to LSB from leftmost to rightmost as a unsigned binary number, decrements and increments are considered to be with mod $n$ afterwards.
 \sssc{Pull-up and Pull-down resistors}
@@ -2001,18 +2001,32 @@ An $n$-bit serial-in parallel-out (SIPO) bidirectional shift register is an $n$-
 An $n$-flip-flop synchronizer is an $n$-bit SISO register used to synchronize an input to a synchronous circuit with its clock, in which the original not synchronized input is inputted to the SISO register and the synchronized and delayed up to $n$ clock periods input for the synchronous circuit is outputted from the SISO register.
 
 A two-flip-flop synchronizer is often used.
-\ssc{Accumulator}
+\ssc{Accumulator and processing unit}
 \sssc{Accumulator}
 An accumulator is a register or shift register that stores intermediate results of arithmetic and logic operations in a digital system. It is commonly used in arithmetic logic units (ALUs) of computers and digital signal processors (DSPs) to hold the results of calculations.
-待, serial data processing unit, parallel data processing unit
+\sssc{Parallel processing unit}
+A parallel processing unit of $n$ cells consists of an iterative combinational circuit of $n$ cells, each cell with $i$ external inputs and $j<i$ external outputs, and $j$ $n$-bit registers as accumulators, with external $(i-j)$ $n$-bit PIs and the POs of the accumulators as input of the iterative circuit, the external outputs of the iterative circuit as the PIs of the accumulators, interconnection inputs of the ends of the iterative circuit provided, and the interconnection outputs of the ends of the iterative circuit optionally catched, and processes once at each active edge when enabled.
 \sssc{Parallel adder with accumulator}
-An $n$-bit parallel adder with accumulator consists of an $n$-bit parallel adder and an $n$-bit register. For the full adder of each cell, the addend input is connected to the data output of the associated flip-flop in the accumulator register, the augend input is connected to the corresponding bit of the external $n$-bit augend input, and the sum output is connected to the data input of the associated flip-flop in the accumulator register. The addition takes place each time load=1 at an active edge.
+Parallel adder with accumulator is an example of a parallel processing unit. An $n$-bit parallel adder with accumulator consists of an $n$-bit parallel adder and an $n$-bit register as accumulator. For each cell, the addend input is connected to the data output of the associated flip-flop in the accumulator, the augend input is connected to the corresponding bit of the external $n$-bit augend input, and the sum output is connected to the data input of the associated flip-flop in the accumulator register.
 
-Before addition, we should let the register hold the addend. This can be accomplished in several ways. The easiest way is to first clear the accumulator using the asynchronous clear inputs on the flip-flops, and then put the addend on the augend input. Another way is to add a multiplexer before the data input of each flip-flop in the accumulator register to select between the external data input and the sum output of the adder.
+Before addition, we should let the accumulator hold the initial addend. One way is to first clear the accumulator using the asynchronous clear inputs on the flip-flops, and then load the addend via the augend input. Another way is to add a multiplexer before the data input of each flip-flop in the accumulator register to select between the external data input and the sum output of the adder.
+\sssc{Serial processing unit}
+A serial processing unit is a logical equivalent of a parallel processing unit, but instead of processing multiple bits (or words) simultaneously, it processes data bit by bit (or word by word) over multiple clock cycles. For a parallel processing unit whose iterative combinational subcircuit has $n$ external inputs, $m$ external outputs, and $k$ interconnection inputs (thus $k$ interconnection outputs) all toward the same direction (i.e., $i$th cell to $(i+1)$ th cell and not $i$th cell to $(i-1)$th cell) that processes repeatedly $t$ times, the logically equivalent serial processing unit consists of $m$ $t$-bit shift registers as accumulators, $(n-m)$ external $t$-bit SIs (often from SO shift registers, and sometimes the SO of each of the shift registers is connected back to the SI of the shift register), a cell of the iterative circuit, a $k$-bit register, and a control state machine that receives a start input $St$ and provides a shift output $Sh$ (both assumed active-high here, inverting gives an active-low one) to all the accumulators and external SIs, with the external SIs and the SOs of the accumulators as input of the cell, the external outputs of the cell as the SIs of the accumulators, the interconnection outputs as inputs of the $k$-bit register, the outputs of the $k$-bit register as the interconnection inputs, and the control state machine being: (assumed Mealy here)
+\begin{itemize}
+\item If $St$ won't stay 1 after $t$ active edges, or such 1 should be treated as a new start: with $t$ states, $S_0,S_1,\ldots,S_{t-1}$, where $S_0$ is the starting state and the transitions are: (in present state input/output$\to$ next state with x denoting don't care)
+\[S_00/0\to S_0,\]
+\[S_01/1\to S_1,\]
+\[S_jx/1\to S_{j+1},\quad j\in\bbN\land j<t-1,\]
+\[S_{t-1}x/1\to S_0.\]
+\item If $St$ may stay 1 after $t$ active edges, and should 1 not be treated as a new start: with $t+1$ states, $S_0,S_1,\ldots,S_t$, where $S_0$ is the starting state, $S_t$ is the stop state, and the transitions are: (in present state input/output$\to$ next state with x denoting don't care)
+\[S_00/0\to S_0,\]
+\[S_01/1\to S_1,\]
+\[S_jx/1\to S_{j+1},\quad j\in\bbN\land j<t,\]
+\[S_t1/0\to S_t,\]
+\[S_t0/0\to S_0.\]
+\end{itemize}
 \sssc{Serial adder with accumulator}
-An $n$-bit serial adder with accumulator consists of one full adder, two $n$-bit PIPO shift registers, and a D flip-flop. The addend and augend is loaded into the two shift registers first, with LSB in the last FF. The two SO is connected to the addend and augend input of the FA, the carry-out is connected to the input of the DFF, the output $Q$ of the DFF is connected to the carry-in of the FA, the sum output of the FA is connected to the SI of the addend register, and the SO of the augend register is sometimes connected to the SI of the augend register. After $n$ active edges, the addend register is loaded with the LSB to the $n$th bit of the sum with LSB in the last FF, and the sum output of the FA is the $(n+1)$th bit of the sum.
-
-
+Serial adder with accumulator is an example of a serial processing unit. An $n$-bit serial adder with accumulator consists of one full adder, two $n$-bit PIPO shift registers with one of them as accumulator, a D flip-flop, and a control state machine of $n$ (if $St$ won't stay 1 after $t$ active edges, or such 1 should be treated as a new start) or $(n+1)$ (if $St$ may stay 1 after $t$ active edges, and should 1 not be treated as a new start) states. The addend and augend is loaded into the two shift registers first, with LSB in the last FF. The two SO is connected to the addend and augend input of the FA, the carry-out is connected to the input of the DFF, the output $Q$ of the DFF is connected to the carry-in of the FA, the sum output of the FA is connected to the SI of the accumulator, and the SO of the augend register is sometimes connected to the SI of the augend register. After $n$ active edges, the addend register is loaded with the LSB to the $n$th bit of the sum with LSB in the last FF, and the sum output of the FA is the $(n+1)$th bit of the sum.
 \ssc{Synchronous Counter}
 \sssc{Synchronous Counter}
 A synchronous counter is a counter consists of flip-flops sharing the same clock input.
