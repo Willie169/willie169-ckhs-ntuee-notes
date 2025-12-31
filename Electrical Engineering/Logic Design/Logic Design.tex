@@ -1134,6 +1134,8 @@ When the input to a logic gate is changed, the output will not change instantane
 Timing diagram, or timing chart, shows various signals in the circuit as a function of time, often in waveform with time being the horizontal axis and each vertical block plots one signal with the same time scale. The vertical edges on the diagram where the signals change from 0 to 1 are called rising edges or positive edges; the vertical edges on the diagram where the signals change from 1 to 0 are called falling edges or negative edges.
 
 The propagation delay of a digital circuit is the time it needs to stabilize.
+
+The propagation delay of a path of a combinational circuit from one of the inputs to one of the outputs is the sum of the propagation delays of the components on the path. The critical path of a combinational circuit is the path from one of the inputs to one of the outputs that has the largest propagation delay.
 \sssc{Inertial delays}
 If a logic gate will not respond to an input change that is shorter than a certain minimum pulse width $\varepsilon$, we say that this gate has a inertial delay of $\varepsilon$. Quite often the inertial delay value is assumed to be the same as the propagation delay of the gate. In contrast, if a gate always responds to input changes (with a propagation delay), no matter how closely spaced the input changes may be, the gate is said to have an ideal or transport delay.
 \sssc{Hazards, Glithces, or Spikes}
@@ -1279,6 +1281,14 @@ It can be implemented with
 \[C_{out}=AB+XC_{in}.\]
 
 The symbol of a full adder in block diagrams is a square with "full adder" in it with augend bit and addend bit inputs lines and sum output line on two parallel sides; let $x$-axis be the line perpendicular to the two sides oriented from augend bit and addend bit inputs lines to sum output line, $z$-axis be oriented out of the paper; carry-in input and carry-out output with arrows on the other two sides respectively with direction of them in positivite $y$ direction and from carry-in input to carry-out output.
+
+A FA assumed carry-in being 0 is given by
+\[S=A\oplus B,\]
+\[C_{out}=AB.\]
+A FA assumed carry-in being 1 is given by
+\[S=A\odot B,\]
+\[C_{out}=A+B.\]
+A full adder maybe revised to have the same inputs as a full adder, some outputs removed, and some new outputs added. Some outputs commonly added are generate $G=AB$ and propagate $P=A\oplus B$.
 \sssc{Full subtractor (FS)}
 A full subtractor is a combinational circuit that has three inputs, $A$ (minuend bit), $B$ (subtrahend bit), and $B_{in}$ (borrow-in), and produces two ouputs $D$ (difference) and $B_{out}$ (borrow-out), in which
 \[D=A\oplus B\oplus B_{in},\]
@@ -1302,6 +1312,8 @@ where $C_{in_i}$ for $n\geq i>0$ and $C_{out_i}$ for $n-1>i\geq 0$ are interconn
 The first cell can be replaced with a half adder.
 
 The ripple-carry adder is relatively slow because, in the worst case, a carry propagates through all $n$ stages of the adder before it stabilizes, and there are approximately two gate delays per stage.
+
+A logical equivalent of an $n$-bit ripple-carry adder, that is, with two $n$-bits unsigned or two's complement binary numbers as inputs (MSB to LSB), $A_{n-1}A_{n-2}\ldots A_0$ (augend) and $B_{n-1}B_{n-2}\ldots B_0$ (addned), (and a $C_{in_0}$ input set 0), and produces the $(n+1)$-bit sum of the two numbers as outputs, $C_nS_{n-1}S_{n-2}\ldots S_0$, is called an $n$-bit adder.
 \sssc{Parallel (binary) subtractor, ripple-borrow subtractor (RBS), or subtractor}
 An $n$-bit parallel subtractor, ripple-borrow subtractor, or simply subtractor is a combinational circuit consisting of $n$ full subtractors called cells or stages. It has two $n$-bits unsigned or two's complement binary numbers as inputs (MSB to LSB), $A_{n-1}A_{n-2}\ldots A_0$ (minuend) and $B_{n-1}B_{n-2}\ldots B_0$ (subtrahend), and a constant $0$ input, $B_{in_0}=0$, and produces the $(n+1)$-bit two's complement difference of the two numbers as outputs, $B_{out_{n-1}}D_{n-1}D_{n-2}\ldots D_0$, in which the $(i+1)$th cell takes $A_i$ as minuend bit, $B_i$ as subtrahend bit, and $B_{in_i}$ as borrow-in, and produces difference $D_i$ and borrow-out $B_{out_i}$, that is,
 \[D_i=A_i\oplus B_i\oplus B_{in_i},\]
@@ -1312,10 +1324,12 @@ where $B_{in_i}$ for $n\geq i>0$ and $B_{out_i}$ for $n-1>i\geq 0$ are interconn
 The first cell can be replaced with a half subtractor.
 
 The ripple-borrow subtractor is relatively slow because, in the worst case, a borrow propagates through all $n$ stages of the subtractor before it stabilizes, and there are approximately two gate delays per stage.
-\sssc{Adder-subtractor}
-A logical equivalence of a parallel subtractor that is used more often is a parallel adder with inversion bubbles at all $B_i$ inputs and $C_{in_0}$ being constant $1$ input, where $B_{n-1}'B_{n-2}'\ldots B_0'+1$ represents $-B_{n-1}B_{n-2}\ldots B_0$ in two's complement.
 
-An $n$-bit adder-subtractor is a ripple-carry adder (or other type of $n$-bit adder for unsigned or two's complement numbers) with an additional common select input $M$ and $n$ 2-to-1 MUXes, in which the MUX at the $(i+1)$th cell take data inputs $B_i$ and $B_i'$ and select input $M$, if $M=0$, it outputs $B_i$ to the full adder to make the adder-subtractor perform addition; if $M=1$, it outputs $B_i'$ to the full adder to make the adder-subtractor perform subtraction.
+A logical equivalent of an $n$-bit ripple-borrow subtractor, that is, with two $n$-bits unsigned or two's complement binary numbers as inputs (MSB to LSB), $A_{n-1}A_{n-2}\ldots A_0$ (minuend) and $B_{n-1}B_{n-2}\ldots B_0$ (subtrahend), (and a $B_{in_0}$ input set 0), and produces the $(n+1)$-bit two's complement difference of the two numbers as outputs, $B_{out_{n-1}}D_{n-1}D_{n-2}\ldots D_0$, is called an $n$-bit subtractor.
+\sssc{Adder-subtractor}
+A logical equivalent of a subtractor that is used more often is an adder with inversion bubbles at all $B_i$ inputs and $C_{in_0}$ being constant $1$ input, since $B_{n-1}'B_{n-2}'\ldots B_0'+1$ represents $-B_{n-1}B_{n-2}\ldots B_0$ in two's complement.
+
+An $n$-bit adder-subtractor is an $n$-bit adder with an additional common select input $M$ and $n$ 2-to-1 MUXes, in which the $(i+1)$th MUX takes data inputs $B_i$ and $B_i'$ and select input $M$, if $M=0$, it outputs $B_i$ to to make the adder-subtractor perform addition; if $M=1$, it outputs $B_i'$ to make the adder-subtractor perform subtraction.
 \sssc{One's complement adder}
 An $n$-bit one's complement adder can be realized with an $n$-bit ripple-carry adder but connect $C_{out_{n-1}}$ to $C_{in_0}$ to realize end-around carry (EAC). The propagation delay when $C_{out_{n-1}}=1$ is approximately twice the propagation delay of the ripple-carry adder.
 \sssc{One's complement subtractor}
@@ -1323,20 +1337,13 @@ An $n$-bit one's complement subtractor can be realized with an $n$-bit ripple-bo
 
 An $n$-bit one's complement subtractor can also be realized with a one's complement adder but invert all bits of the subtrahend.
 \sssc{Carry-lookahead adder (CLA)}
-An $n$-bit carry lookahead adder has the same inputs and outputs of an $n$-bit ripple-carry adder, that is, it has two $n$-bits unsigned or two's complement binary numbers as inputs (MSB to LSB), $A_{n-1}A_{n-2}\ldots A_0$ (augend) and $B_{n-1}B_{n-2}\ldots B_0$ (addned), and a constant $0$ input, $C_0=0$, and produces the $(n+1)$-bit sum of the two numbers as outputs, $C_nS_{n-1}S_{n-2}\ldots S_0$, and is a combinational circuit designed to speed up addition from $O(n)$ in a ripple-carry adder
-to ideally $O(1)$ and practically $O(\log n)$ (hierarchical lookahead) by reducing the carry propagation delay.
+An $n$-bit hierarchical carry-lookahead adder is an $n$-bit adder designed to speed up addition to $O(\log n)$ by reducing the carry propagation delay.
 
-A revised full adder has the same inputs like a full adder but outputs are changed from sum and carry-out to original sum $S$ and generate $G$ and propagate $P$ defined with
-\[G=AB,\]
-\[P=A\oplus B,\]
-\[S=A\oplus B\oplus C_{in}.\]
+Full adders for CLAs are revised to remove carry-out output and add generate $G=AB$ and propagate $P=A\oplus B$ outputs.
 
-Suppose the maximum number of fan-ins of our add gates is $m$, we can implement carry-lookahead circuit up to $m-1$ bit. A $n$-bit (usually $n=4=m-1$) carry-lookahead circuit has $n$ generate inputs $G_0$ to $G_{n-1}$, $n$ propagate inputs $P_0$ to $P_{n-1}$, one carry-in input $C_0$, and produces $n$ carry-out outputs $C_1$ to $C_n$ given recursively by
+Suppose the maximum number of fan-ins of our add gates is $m$, we can implement carry-lookahead circuit up to $m-1$ bit. An $n<m$-bit carry-lookahead circuit has $n$ generate inputs $G_0$ to $G_{n-1}$, $n$ propagate inputs $P_0$ to $P_{n-1}$, one carry-in input $C_0$, and produces $n$ carry-out outputs $C_1$ to $C_n$ given recursively by
 \[C_{i+1}=G_i+P_iC_i\]
-but realized in expanded SOP form, which makes it $O(1)$ but limited by gate fan-ins, e.g.
-\[C_{i+2}=G_{i+1}+P_{i+1}G_i+P_{i+1}P_iC_i.\]
-
-A $n$-bit carry-lookahead has $n$ revised full adders called cells or stages and one $n$-bit carry-lookahead circuit, in which the $(i+1)$th cell takes $A_i$ as augend bit, $B_i$ as addend bit, and $C_i$ as carry-in, and produces sum $S_i$, generate $G_i$, and propagate $P_i$, and the carry-lookahead circuit take generate inputs $G_0$ to $G_{n-1}$, propagate inputs $P_0$ to $P_{n-1}$, carry-in input $C_0$, and produces $n$ carry-out outputs $C_1$ to $C_n$.
+but realized in expanded SOP form, which is $O(1)$ but limited by gate fan-ins. An $n<m$-bit carry-lookahead has $n$ revised full adders called cells or stages and one $n$-bit carry-lookahead circuit, in which the $(i+1)$th cell takes $A_i$ as augend bit, $B_i$ as addend bit, and $C_i$ as carry-in, and produces sum $S_i$, generate $G_i$, and propagate $P_i$, and the carry-lookahead circuit take generate inputs $G_0$ to $G_{n-1}$, propagate inputs $P_0$ to $P_{n-1}$, carry-in input $C_0$, and produces $n$ carry-out outputs $C_1$ to $C_n$.
 
 When the maximum number of fan-ins is not greater than the number of bit needed, we use hierarchical lookahead structure, in which the carry-lookahead circuit is replaced with a tree of physically possible $m$-bit carry-lookahead circuits. A $m^k$-bit carry-lookahead adder consists of $k$ levels of carry-lookahead circuits, in which the $l$th level consists $m^{k-l}$ $m$-bit carry-lookahead circuits, each of the carry-lookahead circuits that are not in the last level (which contains only one
 carry-lookahead circuit) is revised to output generate $g$ given recursively by
@@ -1345,7 +1352,43 @@ carry-lookahead circuit) is revised to output generate $g$ given recursively by
 \[g=g_{m-1},\]
 and propagate $p$ given by
 \[p=\prod_{i=1}^{m-1}P_i,\]
-instead of carry-out outputs, where $m$ $G_i$ and $m$ $P_i$ are the generates and propagates of the revised full adders ditributed in order to each of them, and each of the carry-lookahead circuits that are not in the first level takes $m$ generates and $m$ propagates of the previous level in order and computed the same as a normal $m$-bit carry-lookahead circuit by treating the generate and propagate of the $m*(i-1)+j$th carry-lookahead circuit in the previous level as the $j$th generate and propagate inputs of the $i$th carry-lookahead circuit in this level.
+instead of carry-out outputs, where $m$ $G_i$ and $m$ $P_i$ are the generates and propagates of the revised full adders ditributed in order to each of them, and each of the carry-lookahead circuits that are not in the first level takes $m$ generates and $m$ propagates of the previous level in order and computed the same as a normal $m$-bit carry-lookahead circuit by treating the generate and propagate of the $m\times(i-1)+j$th carry-lookahead circuit in the previous level as the $j$th generate and propagate inputs of the $i$th carry-lookahead circuit in this level.
+\sssc{Carry-save adder (CSA)}
+A $n$-bit carry-save adder sums three $n$-bit operands $X_0,X_1,\ldots,X_{n-1}$, $Y_0,Y_1,\ldots,Y_{n-1}$, and $Z_0,Z_1,\ldots,Z_{n-1}$ with $n$ parallel disconnected full adders by feeding the bits of each operand into the three inputs of a full adder (FA) to produce an $n$-bit sum vector $S_0,S_1,\ldots,S_{n-1}$ from sum outputs and an $(n+1)$-bit carry vector $0,C_1,C_2,\ldots,C_n$ (that is, shifted by one bit towards more significant bit with 0 padded at the LSB) from carry-out outputs, which is called a 3-to-2 reduction and is of $O(1)$ time complexity.
+
+A multi-operand carry-save adder tree (or reduction tree) sums multiple operands and consists of layers of carry-save adders, called reduction layers, and a final adder, which is an adder, typically ripple adder or carry-lookahead adder, that sums two operands to produce the final result. For a carry-save adder tree that sums $m$ $n$-bit operands with the $k$ least significant bits of the result to be preserved ($n\leq k\leq n+\left\lceil\log_2m\right\rceil$),
+\bit
+\item the first reduction layer consists of $\left\lfloor\frac{m}{3}\right\rfloor$ $n$-bit carry-save adders, and produce $\left\lfloor\frac{m}{3}\right\rfloor$ $n$-bit sum vectors and $\left\lfloor\frac{m}{3}\right\rfloor$ $(n+1)$-bit carry vectors, where if the carry vectors exceed $k$ bits, the bits that are more significant than the $k$th least significant bit are discarded,
+\item the remaining reduction layers form a carry-save adder tree that sums $2\left\lfloor\frac{m}{3}\right\rfloor+m\mod 3$ $\min((n+1),k)$-bit operands with the $k$ least significant bits of the result to be preserved, and
+\item the final adder is $k$-bit and sums the sum vector and carry vector from the last reduction layer to produce the final result.
+\eit
+Let the time complexity of the final adder be $O(f(k))$. The time complexity of the CSA method is $O(\log m+f(k))$.
+\sssc{Carry-select adder (CSLA)}
+An $n$-bit carry-select adder consists of carry-select blocks indexed from least significant block to most significant block from 1 to $b$ such that with the number of bit of the block of index $i$ be $n_i$, it satisfies
+\[\sum_{i=1}^bn_i=n.\]
+An $m$-bit block of index $i>1$ consists of two $m$-bit ripple carry adders where the first with $C_{in_0}$ assumed 0 and the second with $C_{in_0}$ assumed 1, and $(m+1)$ 2-to-1 MUXes that, for each bit, with one MUX taking the sum outputs of the two ripple carry adders as data input to produce the final sum output of the bit, and with one MUX taking the $C_{out_m}$ of the two ripple carry adders as data input to produce the carry-out output of the block (or, for the block of index $b$, the $(n+1)$th bit of the final sum), where all MUXes take the carry-out output from the block of index $(i-1)$. An $m$-bit least significant block is an $m$-bit ripple carry adder that produces real sum outputs and carry-out output of the block.
+
+Assume the propagation delay of the ripple carry adder in the block of any index $i>1$ is not greater than the propagation delay of the ripple carry adder in the block of index 1 plus $(i-1)$ times the propagation delay of a 2-to-1 MUX. Then the total propagation delay is the propagation delay of the ripple carry adder in the block of index 1 plus $(b-1)$ times the propagation delay of a 2-to-1 MUX.
+
+For carry-select adder with fixed block size, say $k$ bit, and thus $b=\frac{n}{k}$, the time complexity is $O\qty(k+\frac{n}{k})$, and by
+\[\dv{}{k}\qty(k+\frac{n}{k})=1-\frac{n}{k^2},\]
+\[k=\sqrt{n},\]
+\[k+\frac{n}{k}=2\sqrt{n},\]
+the optimal time complexity is $O(\sqrt{n})$ and the optimal such carry-select adder is of block size $\sqrt{n}$ bits.
+
+The speed can be further increased by making middle blocks larger than end blocks.
+\sssc{Carry-skip adder (CSkA) or carry-bypass adder}
+An $n$-bit carry-skip adder consists of carry-skip blocks indexed from least significant block to most significant block from 1 to $b$ such that with the number of bit of the block of index $i$ be $n_i$, it satisfies
+\[\sum_{i=1}^bn_i=n.\]
+A $m$-bit block of index $i$ is an $m$-bit ripple carry adder with full adders revised to add propagate $P=A\oplus B$ output, a block propagate $P_{bi}$ that is the propagate outputs of all revised full adders in the block ANDed together, and a MUX that outputs the carry-out output of this block with $P_{bi}$ as the select input that selects the carry-out output $P_{b(i-1)}$ from block of index $(i-1)$ (or 0 for $i=1$) when $P_{bi}=1$, called bypass or skip, and selects the carry-out output of the most significant revised full adder of the ripple carry adder of this block when $P_{bi}=0$.
+
+For carry-skip adder with fixed block size, say $s$ bit, and thus $b=\frac{n}{s}$, the worst-case total propagation delay is two times the propagation delay of the ripple carry adder in a block plus the propagation delay of $P_{b(b-1)}$, that is, $O\qty(2s+\frac{n}{s})$, and by
+\[\dv{}{s}\qty(2s+\frac{n}{s})=2-\frac{n}{s^2},\]
+\[s=\sqrt{\frac{n}{2}},\]
+\[2s+\frac{n}{s}=2\sqrt{2n},\]
+the optimal worst-case time complexity is $O(\sqrt{n})$, and such adder is of block size $\sqrt{\frac{n}{2}}$ bits.
+
+The speed can be further increased by making middle blocks larger than end blocks.
 \sssc{Decoders}
 A decoder is a combinational circuit that converts binary input codes into a single active output line. An $n$-to-$2^n$ decoder has $n$ input signals and $2^n$ output signals realizing a one-to-one Boolean vector function $\{0,1\}^n\to\{0,1\}^{2^n}$ that map each input combination to an output vector of which the 1-norm is $1$ (noninverted/active-high outputs) or $2^n-1$ (inverted/active-low outputs).
 
@@ -2011,22 +2054,22 @@ Parallel adder with accumulator is an example of a parallel processing unit. An 
 
 Before addition, we should let the accumulator hold the initial addend. One way is to first clear the accumulator using the asynchronous clear inputs on the flip-flops, and then load the addend via the augend input. Another way is to add a multiplexer before the data input of each flip-flop in the accumulator register to select between the external data input and the sum output of the adder.
 \sssc{Serial processing unit}
-A serial processing unit is a logical equivalent of a parallel processing unit, but instead of processing multiple bits (or words) simultaneously, it processes data bit by bit (or word by word) over multiple clock cycles. For a parallel processing unit whose iterative combinational subcircuit has $n$ external inputs, $m$ external outputs, and $k$ interconnection inputs (thus $k$ interconnection outputs) all toward the same direction (i.e., $i$th cell to $(i+1)$ th cell and not $i$th cell to $(i-1)$th cell) that processes repeatedly $t$ times, the logically equivalent serial processing unit consists of $m$ $t$-bit shift registers as accumulators, $(n-m)$ external $t$-bit SIs (often from SO shift registers, and sometimes the SO of each of the shift registers is connected back to the SI of the shift register), a cell of the iterative circuit, a $k$-bit register, and a control state machine that receives a start input $St$ and provides a shift output $Sh$ (both assumed active-high here, inverting gives an active-low one) to all the accumulators and external SIs, with the external SIs and the SOs of the accumulators as input of the cell, the external outputs of the cell as the SIs of the accumulators, the interconnection outputs as inputs of the $k$-bit register, the outputs of the $k$-bit register as the interconnection inputs, and the control state machine being: (assumed Mealy here)
+A serial processing unit is a logical equivalent of a parallel processing unit, but instead of processing multiple bits (or words) simultaneously, it processes data bit by bit (or word by word) over multiple clock cycles. For a parallel processing unit whose iterative combinational subcircuit have $s$ cells, each has $n$ external inputs, $m$ external outputs, and $k$ interconnection inputs (thus $k$ interconnection outputs) all toward the same direction (i.e., $i$th cell to $(i+1)$ th cell) that processes repeatedly $t$ times, the logically equivalent serial processing unit consists of $m$ $s$-bit shift registers as accumulators, $(n-m)$ external $s\times t$-bit SIs (sometimes from $s$-bit SO shift registers whose SOs are connected back to SIs), a cell of the iterative circuit, a $k$-bit register, and a control state machine that receives a start input $St$ and provides a shift output $Sh$ (both assumed active-high here, inverting gives an active-low one) to all the accumulators and external SIs, with the external SIs and the SOs of the accumulators as input of the cell, the external outputs of the cell as the SIs of the accumulators, the interconnection outputs as inputs of the $k$-bit register, the outputs of the $k$-bit register as the interconnection inputs, and the control state machine being: (assumed Mealy here)
 \begin{itemize}
-\item If $St$ won't stay 1 after $t$ active edges, or such 1 should be treated as a new start: with $t$ states, $S_0,S_1,\ldots,S_{t-1}$, where $S_0$ is the starting state and the transitions are: (in present state input/output$\to$ next state with x denoting don't care)
+\item If $St$ won't stay 1 after $s\times t$ active edges, or such 1 should be treated as a new start: with $s\times t$ states, $S_0,S_1,\ldots,S_{s\times t-1}$, where $S_0$ is the starting state and the transitions are: (in present state input/output$\to$ next state with x denoting don't care)
 \[S_00/0\to S_0,\]
 \[S_01/1\to S_1,\]
-\[S_jx/1\to S_{j+1},\quad j\in\bbN\land j<t-1,\]
-\[S_{t-1}x/1\to S_0.\]
-\item If $St$ may stay 1 after $t$ active edges, and should 1 not be treated as a new start: with $t+1$ states, $S_0,S_1,\ldots,S_t$, where $S_0$ is the starting state, $S_t$ is the stop state, and the transitions are: (in present state input/output$\to$ next state with x denoting don't care)
+\[S_jx/1\to S_{j+1},\quad j\in\bbN\land j<s\times t-1,\]
+\[S_{s\times t-1}x/1\to S_0.\]
+\item If $St$ may stay 1 after $s\times t$ active edges, and should 1 not be treated as a new start: with $s\times t+1$ states, $S_0,S_1,\ldots,S_{s\times t}$, where $S_0$ is the starting state, $S_{s\times t}$ is the stop state, and the transitions are: (in present state input/output$\to$ next state with x denoting don't care)
 \[S_00/0\to S_0,\]
 \[S_01/1\to S_1,\]
-\[S_jx/1\to S_{j+1},\quad j\in\bbN\land j<t,\]
-\[S_t1/0\to S_t,\]
-\[S_t0/0\to S_0.\]
+\[S_jx/1\to S_{j+1},\quad j\in\bbN\land j<s\times t,\]
+\[S_{s\times t}1/0\to S_{s\times t},\]
+\[S_{s\times t}0/0\to S_0.\]
 \end{itemize}
 \sssc{Serial adder with accumulator}
-Serial adder with accumulator is an example of a serial processing unit. An $n$-bit serial adder with accumulator consists of one full adder, two $n$-bit PIPO shift registers with one of them as accumulator, a D flip-flop, and a control state machine of $n$ (if $St$ won't stay 1 after $t$ active edges, or such 1 should be treated as a new start) or $(n+1)$ (if $St$ may stay 1 after $t$ active edges, and should 1 not be treated as a new start) states. The addend and augend is loaded into the two shift registers first, with LSB in the last FF. The two SO is connected to the addend and augend input of the FA, the carry-out is connected to the input of the DFF, the output $Q$ of the DFF is connected to the carry-in of the FA, the sum output of the FA is connected to the SI of the accumulator, and the SO of the augend register is sometimes connected to the SI of the augend register. After $n$ active edges, the addend register is loaded with the LSB to the $n$th bit of the sum with LSB in the last FF, and the sum output of the FA is the $(n+1)$th bit of the sum.
+Serial adder with accumulator is an example of a serial processing unit. An $n$-bit serial adder with accumulator consists of one full adder, two $n$-bit PIPO shift registers with one of them as accumulator, a D flip-flop, and a control state machine of $n$ (if $St$ won't stay 1 after $n$ active edges, or such 1 should be treated as a new start) or $(n+1)$ (if $St$ may stay 1 after $n$ active edges, and should 1 not be treated as a new start) states. The addend and augend is loaded into the two shift registers first, with LSB in the last FF. The two SO is connected to the addend and augend input of the FA, the carry-out is connected to the input of the DFF, the output $Q$ of the DFF is connected to the carry-in of the FA, the sum output of the FA is connected to the SI of the accumulator, and the SO of the augend register is sometimes connected to the SI of the augend register. After $n$ active edges, the addend register is loaded with the LSB to the $n$th bit of the sum with LSB in the last FF, and the sum output of the FA is the $(n+1)$th bit of the sum.
 \ssc{Synchronous Counter}
 \sssc{Synchronous Counter}
 A synchronous counter is a counter consists of flip-flops sharing the same clock input.
