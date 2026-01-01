@@ -642,102 +642,15 @@ $R$為線性離心率加上半共軛軸即：
 
 
 \section{電路學一（Electric Circuit I）}
-\subsection{電路（Electrical circuit）/（電流）迴路}
+\subsection{Electrical circuit}
 \sssc{Electrical network}
 An electrical network is an interconnection of electrical components or a model of such an interconnection, consisting of electrical elements.
+\sssc{Electrical circuit (電路) or closed circuit (通路)}
+An electrical circuit is a network consisting of a closed loop, giving a return path for the current.
+\sssc{Open circuit (斷路)}
+An open circuit is an electrical network that is not a closed circuit.
 \sssc{Electrical element}
 Electrical elements are conceptual abstractions representing idealized electrical components, such as resistors, capacitors, and inductors, used in the analysis of electrical networks.
-\subsubsection{通路（Closed circuit）/電路（(Electrical) circuit）/（電流）迴路}
-An electrical circuit is a network consisting of a closed loop, giving a return path for the current.
-\subsubsection{斷路（Open circuit）}
-An open circuit is an electrical network that is not a closed circuit.
-\subsubsection{短路（Short circuit）}
-電路中電阻極小、電流極大的情形。
-\subsection{電路圖（Circuit diagram）}
-將電路元件以電路符號（Circuit symbols）表示繪出電路。
-\subsubsection{Wires}
-\begin{center}
-\begin{circuitikz}
-\draw (0,0) to[short, l=Wire] (3,0);
-\draw (5,0) to[crossing, l=Wire Crossing] (8,0);
-\draw (10,0) node[ground]{} (10,0) node[above]{ground};
-\end{circuitikz}
-\end{center}
-\subsubsection{Power Sources}
-\begin{center}
-\begin{circuitikz}
-\draw (0,0) to[V, l=Voltage Source] (3,0);
-\draw (5,0) to[I, l=Current Source] (8,0);
-\draw (10,0) node[battery1shape]{} (10,0.5) node[above]{Battery};
-\end{circuitikz}
-\end{center}
-\subsubsection{Switches}
-\begin{center}
-\begin{circuitikz}
-\draw (0,0) to[switch, l=Switch] (3,0);
-\draw (5,0) node[spdt]{} (5,0.5) node[above]{SPDT Switch};
-\end{circuitikz}
-\end{center}
-\subsubsection{Resistors}
-\begin{center}
-\begin{circuitikz}
-\draw (0,0) to[R, l=Resistor] (3,0);
-\draw (5,0) to[vR, l=Variable Resistor] (8,0);
-\draw (10,0) to[thermistor, l=Thermistor] (13,0);
-\end{circuitikz}
-\end{center}
-\begin{center}
-\begin{circuitikz}
-\draw (0,0) to[ldR, l=Light Dependent Resistor] (3,0);
-\draw (5,0) to[varistor, l=Varistor] (8,0);
-\end{circuitikz}
-\end{center}
-\subsubsection{Capacitors and Inductor}
-\begin{center}
-\begin{circuitikz}
-\draw (5,0) to[C, l=Capacitor] (8,0);
-\draw (10,0) to[L, l=Inductor] (13,0);
-\end{circuitikz}
-\end{center}
-\subsubsection{Diodes}
-\begin{center}
-\begin{circuitikz}
-\draw (0,0) to[D, l=Diode] (3,0);
-\draw (5,0) to[zDo, l=Zener Diode] (8,0);
-\draw (10,0) to[pDo, l=Photodiode] (13,0);
-\draw (15,0) to[led, l=LED] (18,0);
-\end{circuitikz}
-\end{center}
-\subsubsection{Transistors}
-\begin{center}
-\begin{circuitikz}
-\draw (0,0) node[npn]{} (0,1) node[above]{NPN Transistor};
-\draw (5,0) node[pnp]{} (5,1) node[above]{PNP Transistor};
-\draw (10,0) node[nmos]{} (10,1) node[above]{N-MOSFET};
-\draw (15,0) node[pmos]{} (15,1) node[above]{P-MOSFET};
-\end{circuitikz}
-\end{center}
-\subsubsection{Operational Amplifiers}
-\begin{center}
-\begin{circuitikz}
-\draw (0,0) node[op amp]{} (0,1) node[above]{Op-Amp};
-\end{circuitikz}
-\end{center}
-\subsubsection{Measuring Instruments}
-\begin{center}
-\begin{circuitikz}
-\draw (0,0) to[voltmeter, l=Voltmeter] (3,0);
-\draw (5,0) to[ammeter, l=Ammeter] (8,0);
-\draw (10,0) to[ohmmeter, l=Ohmmeter] (13,0);
-\end{circuitikz}
-\end{center}
-\subsubsection{Transformers}
-\begin{center}
-\begin{circuitikz}
-\draw (0,0) node[transformer]{Transformer} (3,0);
-\draw (5,0) node[transformer core]{Transformer Core} (8,0);
-\end{circuitikz}
-\end{center}
 \ssc{電壓（Voltage）/電位差（Electric potential difference）與電動勢（Electromotive force, emf, EMF）/開路電壓（Open-circuit voltage）}
 \sssc{電壓（Voltage）/電位差（Electric potential difference）}
 電壓或電位差$V$指兩點間之電位之差。
@@ -820,19 +733,6 @@ R=&\psi\frac{l}{S}\\
 \item Δ型電路：可能與外電路相接的節點$N_1$、$N_2$、$N_3$，$N_1$與$N_2$以電阻$R_1+R_2+\frac{R_1R_2}{R_3}$導線相接，$N_2$與$N_3$以電阻$R_2+R_3+\frac{R_2R_3}{R_1}$導線相接，$N_3$與$N_1$以電阻$R_3+R_1+\frac{R_3R_1}{R_2}$導線相接。
 \end{itemize}
 則此二電路等價。
-\ssc{Linear electrical network}
-\sssc{Linear electrical network}
-A linear electrical network is an electrical network which obeys the superposition principle that the output voltage is a linear combination of the input voltages.
-\sssc{Thévenin's theorem}
-Any linear time-invariant electricali network containing only voltage sources, current sources, and resistances with two terminals is equivalent to a combination of a voltage source in a series connection with a resistance, such equivalent circuit is called Thévenin equivalent or Thévenin form.
-\begin{proof}
-PLACEHOLDER
-\end{proof}
-\sssc{Norton's theorem or Mayer–Norton theorem}
-Any linear time-invariant electrical network containing only voltage sources, current sources, and resistances with two terminals is equivalent to a combination of a current source in a parallel connection with a resistance, such equivalent circuit is called Norton equivalent or Norton form.
-\begin{proof}
-PLACEHOLDER
-\end{proof}
 \subsection{電功率（Electric power）}
 \subsubsection{電（阻）器耗電的電功率}
 一電（阻）器耗電的電功率為電流通過該元件時的電位能變化率，即：
@@ -900,6 +800,7 @@ I_{rms}=&\sqrt{\frac{1}{T}\int_0^TI^2\,\mathrm{d}t}\\
 \eit
 \subsection{用電安全}
 \begin{itemize}
+\item 短路（Short circuit）：電路中電阻極小、電流極大的情形。
 \item 接地線：電器正常運作時電流只在設計好的迴路流動，而不與其導體外表接觸；漏電時則會與其導體外表接觸，當人體或其他接地導體接觸其導體外表時就會產生迴路。三腳插頭中的接地線將電器的導體外表接地，漏電時就可以將導體外表上的電荷導向接地線。
 \item 電器的額定值：電器額定電壓指其適用的電壓，額定電功率指該電壓下該電器的電功率。
 \item 最大安全電流容量：相同導線，電流愈大熱功率愈大，其最大安全電流容量指其不會過熱致不安全的最大電流。

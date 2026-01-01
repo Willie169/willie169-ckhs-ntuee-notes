@@ -8,4 +8,121 @@
 \date{\temtoday}
 \titletocdoc
 \sct{Electrical Circuit}
+\ssc{Introduction}
+\sssc{Circuit element}
+A circuit element is a two terminal electrical network that can be completely characterized by its voltage-current relationship, that is, with time $t$, voltage $v(t)$, and current $i(t)$, for some given three variable function $f$,
+\[f\qty(v(t),i(t),t)=0.\]
+
+We label + and - on the two terminal repsectively and voltage $v(t)$ between them to define the voltage $v(t)$ of the element as the electric potential difference of + terminal relative to - terminal.
+
+We label arrow and current $i(t)$ on it to define the reference direction of the current $i(t)$ of the element.
+
+If the current arrow enters the + terminal, the element is said to follow the passive sign convention. Under this convention, the power of the element absorbs is
+\[p(t)=v(t)i(t),\]
+where negative power means delivering.
+\sssc{Linear electrical network}
+A linear electrical network is an electrical network which obeys the superposition principle that the output voltage is a linear combination of the input voltages.
+\subsection{Circuit symbols}
+\subsubsection{Wires}
+\begin{center}
+\begin{circuitikz}
+\draw (0,0) to[short, l=Wire] (3,0);
+\draw (5,0) to[crossing, l=Wire Crossing] (8,0);
+\draw (10,0) node[ground]{} (10,0) node[above]{ground};
+\end{circuitikz}
+\end{center}
+\subsubsection{Sources}
+\begin{center}
+\begin{circuitikz}
+\draw (0,0) to[V, l=Voltage Source] (3,0);
+\draw (5,0) to[I, l=Current Source] (8,0);
+\draw (10,0) node[battery1shape]{} (10,0.5) node[above]{Battery};
+\end{circuitikz}
+\end{center}
+\subsubsection{Switches}
+\begin{center}
+\begin{circuitikz}
+\draw (0,0) to[switch, l=Switch] (3,0);
+\draw (5,0) node[spdt]{} (5,0.5) node[above]{SPDT Switch};
+\end{circuitikz}
+\end{center}
+\subsubsection{Resistors}
+\begin{center}
+\begin{circuitikz}
+\draw (0,0) to[R, l=Resistor] (3,0);
+\draw (5,0) to[vR, l=Variable Resistor] (8,0);
+\draw (10,0) to[thermistor, l=Thermistor] (13,0);
+\end{circuitikz}
+\end{center}
+\begin{center}
+\begin{circuitikz}
+\draw (0,0) to[ldR, l=Light Dependent Resistor] (3,0);
+\draw (5,0) to[varistor, l=Varistor] (8,0);
+\end{circuitikz}
+\end{center}
+\subsubsection{Capacitors and Inductor}
+\begin{center}
+\begin{circuitikz}
+\draw (5,0) to[C, l=Capacitor] (8,0);
+\draw (10,0) to[L, l=Inductor] (13,0);
+\end{circuitikz}
+\end{center}
+\subsubsection{Diodes}
+\begin{center}
+\begin{circuitikz}
+\draw (0,0) to[D, l=Diode] (3,0);
+\draw (5,0) to[zDo, l=Zener Diode] (8,0);
+\draw (10,0) to[pDo, l=Photodiode] (13,0);
+\draw (15,0) to[led, l=LED] (18,0);
+\end{circuitikz}
+\end{center}
+\subsubsection{Transistors}
+\begin{center}
+\begin{circuitikz}
+\draw (0,0) node[npn]{} (0,1) node[above]{NPN Transistor};
+\draw (5,0) node[pnp]{} (5,1) node[above]{PNP Transistor};
+\draw (10,0) node[nmos]{} (10,1) node[above]{N-MOSFET};
+\draw (15,0) node[pmos]{} (15,1) node[above]{P-MOSFET};
+\end{circuitikz}
+\end{center}
+\subsubsection{Operational Amplifiers}
+\begin{center}
+\begin{circuitikz}
+\draw (0,0) node[op amp]{} (0,1) node[above]{Op-Amp};
+\end{circuitikz}
+\end{center}
+\subsubsection{Measuring Instruments}
+\begin{center}
+\begin{circuitikz}
+\draw (0,0) to[voltmeter, l=Voltmeter] (3,0);
+\draw (5,0) to[ammeter, l=Ammeter] (8,0);
+\draw (10,0) to[ohmmeter, l=Ohmmeter] (13,0);
+\end{circuitikz}
+\end{center}
+\subsubsection{Transformers}
+\begin{center}
+\begin{circuitikz}
+\draw (0,0) node[transformer]{Transformer} (3,0);
+\draw (5,0) node[transformer core]{Transformer Core} (8,0);
+\end{circuitikz}
+\end{center}
+\ssc{Sources}
+\sssc{Independent voltage sources}
+An independent voltage source enforces a prescribed voltage $v_s(t)$ across its terminals, independent of the current flowing through it.
+\sssc{Independent current sources}
+An independent current source enforces a prescribed current $i_s(t)$ through its terminals, independent of the voltage across it.
+\sssc{Dependent or controlled source}
+
+
+\ssc{Thévenin's theorem and Norton's theorem}
+\sssc{Thévenin's theorem}
+Any linear time-invariant electricali network containing only voltage sources, current sources, and resistances with two terminals is equivalent to a combination of a voltage source in a series connection with a resistance, such equivalent circuit is called Thévenin equivalent or Thévenin form.
+\begin{proof}
+PLACEHOLDER
+\end{proof}
+\sssc{Norton's theorem or Mayer–Norton theorem}
+Any linear time-invariant electrical network containing only voltage sources, current sources, and resistances with two terminals is equivalent to a combination of a current source in a parallel connection with a resistance, such equivalent circuit is called Norton equivalent or Norton form.
+\begin{proof}
+PLACEHOLDER
+\end{proof}
 
