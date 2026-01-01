@@ -100,7 +100,7 @@
 \item 電阻率（Resistivity）：$\psi$ (Ω m = kg$^1$ m$^3$ s$^{-3}$ A$^{-2}$)
 \item 電阻率的溫度係數（Temperature coefficient of resistance）：$\alpha_R$ (K$^{-1}$)
 \item 線（熱）膨脹係數（Linear coefficient of thermal expansion）：$\alpha_L$ (K$^{-1}$)
-\item 導電度/電導率（(Electrical) conductivity）：$\kappa$ (S m$^{-1}$ = siemen m$^{-1}$ = 西門子 m$^{-1}$ = kg$^{-1}$ m$^{-3}$ s$^3$ A$^2$)
+\item 導電度/電導率（(Electrical) conductivity）：$G$ (S m$^{-1}$ = siemen m$^{-1}$ = 西門子 m$^{-1}$ = kg$^{-1}$ m$^{-3}$ s$^3$ A$^2$)
 \item 旋磁比/磁旋比（Gyromagnetic ratio）：$\gamma$ (C kg$^{-1}$)
 \item （體積）（總）電荷密度（(Volume) (total) charge density）：$\rho$ (C m$^{-3}$ = A s m$^{-3}$)
 \item （體積）束縛電荷密度（(Volume) bound charge density）：$\rho_b$ (C m$^{-3}$ = A s m$^{-3}$)
@@ -651,17 +651,6 @@ An electrical circuit is a network consisting of a closed loop, giving a return 
 An open circuit is an electrical network that is not a closed circuit.
 \sssc{Electrical element}
 Electrical elements are conceptual abstractions representing idealized electrical components, such as resistors, capacitors, and inductors, used in the analysis of electrical networks.
-\sssc{Circuit element}
-A circuit element is a two terminal electrical network that can be completely characterized by its voltage-current relationship, that is, with time $t$, voltage $v(t)$, and current $i(t)$, for some given three variable function $f$,
-\[f\qty(v(t),i(t),t)=0.\]
-
-We label + and - on the two terminal repsectively and voltage $v(t)$ between them to define the voltage $v(t)$ of the element as the electric potential difference of + terminal relative to - terminal.
-
-We label arrow and current $i(t)$ on it to define the reference direction of the current $i(t)$ of the element.
-
-If the current arrow enters the + terminal, the element is said to follow the passive sign convention. Under this convention, the power of the element absorbs is
-\[p(t)=v(t)i(t),\]
-where negative power means delivering.
 \ssc{電壓（Voltage）/電位差（Electric potential difference）與電動勢（Electromotive force, emf, EMF）/開路電壓（Open-circuit voltage）}
 \sssc{電壓（Voltage）/電位差（Electric potential difference）}
 電壓或電位差$V$指兩點間之電位之差。
@@ -673,17 +662,17 @@ where negative power means delivering.
 某電路元件的電阻$R$根據其上電壓$V$與電流$I$定義為：
 \[R=\frac{V}{I}.\]
 \subsubsection{電阻率（Resistivity）與電導率（Conductivity）}
-令一均勻相物質，截面積$S$，長度$l$，電阻率$\psi$與電導率$\kappa$定義為：
+令一均勻相物質，截面積$S$，長度$l$，電阻率$\psi$與電導率$G$定義為：
 \[R=\psi\frac{l}{S},\]
-\[\psi\kappa=1,\]
+\[\psi G=1,\]
 寫成微分形式即：
-\[\mathbf{J}=\kappa\mathbf{E}.\]
+\[\mathbf{J}=G\mathbf{E}.\]
 電阻率是材料特性，但受溫度與雜質影響。
 
 電阻率：導體>半導體>絕緣體，銀、銅、金等約為$10^{-9}$ Ω m，絕緣體約為$10^{17}$ Ω m，在20攝氏度時電阻率最低者為銀<銅<金<鋁，在1000攝氏度時電阻率最低者為金<銅<銀。
 \subsubsection{歐姆定律（Ohm's law）與歐姆（式）（Ohmic）/線性導體/物質}
 歐姆定律指某些物質的電阻不隨電壓或電流改變，由歐姆於1827年發現，即：
-\[\dv{\psi}{I}=0.\]
+\[\dv{\psi}{V}=0.\]
 符合歐姆定律者稱歐姆（式）/線性導體/物質，不符合歐姆定律者稱非歐姆（式）/非線性導體/物質，前者如大部分金屬，後者如二極體。
 \subsubsection{電阻率的溫度係數（Temperature coefficient of resistance）}
 令電阻率$\psi$、溫度$\mathscr{T}$、電阻率的溫度係數$\alpha_R$定義為：
@@ -709,6 +698,11 @@ R=&\psi\frac{l}{S}\\
 螢幕由兩層導電膜組成，當按壓螢幕時，兩層膜接觸。接觸點的電阻變化會被測量，並透過運算轉換為觸控位置。不需要導電特性，可以用任何東西觸控。
 \subsection{電池（Battery）}
 電池指將化學能轉變成電能的裝置，一般由一或多個電化電池（Electrochemical cell）組成。電池的電動勢與極板距離、面積、通過的電流大小等無關。
+\begin{center}
+\begin{circuitikz}
+\draw (0,0) node[battery1shape]{} (0,0.5) node[above]{Battery};
+\end{circuitikz}
+\end{center}
 \subsubsection{端電壓（Terminal voltage）}
 端電壓$V$指電池正極的電位減去負極的電位。
 \subsubsection{內電阻（Internal resistance）}
@@ -725,25 +719,6 @@ R=&\psi\frac{l}{S}\\
 實際電池隨化學能消耗而內電阻增加，端電壓減小，已知電池之端電壓對儲電量關係可通過測量端電壓得知剩餘的電量。
 
 常見的 1.5 V 碳鋅電池的在室溫下內電阻約 0.5 Ω，電動勢約 1.5 V。
-\subsection{穩態（Steady state）電路系統之電壓、電流與電阻}
-\tb{穩態電路系統}：指各點之淨電荷密度均不隨時間改變的電路系統，必遵循以下定則：
-\subsubsection{串聯（Series connection）}
-串聯電路元件，電壓和為總電壓，電流相同，電阻和為等效電阻。
-\subsubsection{並聯（Parallel connection）}
-並聯電路元件，電壓相同，電流和為總電流，電阻的倒數和為等效電阻的倒數。
-\subsubsection{克希荷夫電路定律（Kirchhoff's Circuit Laws）/克希荷夫定則（Kirchhoff's Rules）}
-1848年克希荷夫提出。
-\begin{itemize}
-\item \textbf{克希荷夫電流定律（Kirchhoff's current law）/克希荷夫第一定律（Kirchhoff's first law）/克希荷夫節/結點定則（Kirchhoff's junction rule）}：在某一節/結點相交的載流電路中，流入電流和與等於流出電流和，即任一節點必無電荷之聚積、產生或消滅。
-\item \textbf{克希荷夫電壓定律（Kirchhoff's voltage law）/克希荷夫第二定律（Kirchhoff's first law）/克希荷夫環路定則（Kirchhoff's loop rule）}：沿著任意閉合環路上，所有元件的電位變化和為零，即能量守恆。沿電流方向，經過電源電位會上升，經過電阻電位會下降。
-\end{itemize}
-\subsubsection{Y-Δ變換（Y-Δ transformation or wye-delta transformation）與Δ-Y變換（Δ-Y transformation or delta-wye transformation）}
-定義：
-\begin{itemize}
-\item Y型電路：可能與外電路相接的節點$N_1$、$N_2$、$N_3$，不與外電路相接的節點$N_0$，$N_0$與$N_1$以電阻$R_1$導線相接，$N_0$與$N_2$以電阻$R_2$導線相接，$N_0$與$N_3$以電阻$R_3$導線相接。
-\item Δ型電路：可能與外電路相接的節點$N_1$、$N_2$、$N_3$，$N_1$與$N_2$以電阻$R_1+R_2+\frac{R_1R_2}{R_3}$導線相接，$N_2$與$N_3$以電阻$R_2+R_3+\frac{R_2R_3}{R_1}$導線相接，$N_3$與$N_1$以電阻$R_3+R_1+\frac{R_3R_1}{R_2}$導線相接。
-\end{itemize}
-則此二電路等價。
 \subsection{電功率（Electric power）}
 \subsubsection{電（阻）器耗電的電功率}
 一電（阻）器耗電的電功率為電流通過該元件時的電位能變化率，即：
