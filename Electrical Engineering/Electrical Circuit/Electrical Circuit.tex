@@ -106,17 +106,36 @@ The algebraic sum of the voltages around any closed path is zero.
 Two or more elements are connected in series if they are connected along a single path, and each component has the same current through it, equal to the current through the network. The voltage across the network is equal to the sum of the voltages across each element. The resistance of the network is equal to the sum of the resistances of each element.
 \sssc{Parallel connection}
 Two or more elements are connected in parallel if they are connected along multiple paths from one node to another, and each component has the same voltage across it, equal to the voltage through the network. The current through the network is equal to the sum of the current through each element. The conductance of the network is equal to the sum of the conductances of each element.
+\sssc{Y-Δ transformation and Δ-Y transformation}
+\bit
+\item Y (aka wye or star) network: a common central node $N$, three terminals $N_1,N_2,N_3$, and three resistors with resistances $R_1,R_2,R_3$ connecting $N_1$ and $N$, $N_2$ and $N$, and $N_3$ and $N$ respectively.
+\item Δ (delta): three terminals $N_1,N_2,N_3$, and three resistors with resistances $R_{12},R_{23},R_{31}$ connecting $N_1$ and $N_2$, $N_2$ and $N_3$, and $N_3$ and $N_1$ respectively.
+\item Y-Δ (aka wye-delta or star-delta) transformation: The two network are equivalent if
+\[R_{12}=R_1+R_2+\frac{R_1R_2}{R_3},\]
+\[R_{23}=R_2+R_3+\frac{R_2R_3}{R_1},\]
+\[R_{31}=R_3+R_1+\frac{R_3R_1}{R_2}.\]
+\item Δ-Y (aka delta-wye or star-delta) transformation: The two network are equivalent if
+\[R_1=\frac{R_{12}R_{31}}{R_{12}+R_{23}+R_{31}},\]
+\[R_2=\frac{R_{23}R_{12}}{R_{12}+R_{23}+R_{31}},\]
+\[R_3=\frac{R_{31}R_{23}}{R_{12}+R_{23}+R_{31}}.\]
+\eit
+\sssc{Generalized Y-Δ transformation and Δ-Y transformation}
+For all integer $n\geq 3$:
+\bit
+\item $n$-star network: a common central node $N$, $n$ terminals $N_1,N_2,\ldots,N_n$, and $n$ resistors with resistances $R_i$ connecting $N_i$ and $N$ for all $i\in\bbN\land i\leq n$.
+\item $n$-gon network: $n$ terminals $N_1,N_2,\ldots,N_n$, and $\frac{n(n-1)}{2}$ resistors with resistances $R_{ij}$ connecting $N_i$ and $N_j$ for all $i,j\in\bbN\land i<j\leq n$.
+\item Generalized Y-Δ transformation: The two network are equivalent if
+\[R_{ij}=R_i+R_j+\frac{R_iR_j}{-R_i-R_j+\sum_{k=1}^nR_k}.\]
+\item Generalized Δ-Y (aka delta-wye or star-delta) transformation: The two network are equivalent if
+\[R_i=\frac{\prod_{k=1}^{i-1}R_{ki}\prod_{k=i+1}^nR_{ik}}{\sum_{k=1}^{n-1}\sum_{l=k+1}^nR_{kl}}.\]
+\eit
 
 
 
 
-\subsubsection{Y-Δ變換（Y-Δ transformation or wye-delta transformation）與Δ-Y變換（Δ-Y transformation or delta-wye transformation）}
-定義：
-\begin{itemize}
-\item Y型電路：可能與外電路相接的節點$N_1$、$N_2$、$N_3$，不與外電路相接的節點$N_0$，$N_0$與$N_1$以電阻$R_1$導線相接，$N_0$與$N_2$以電阻$R_2$導線相接，$N_0$與$N_3$以電阻$R_3$導線相接。
-\item Δ型電路：可能與外電路相接的節點$N_1$、$N_2$、$N_3$，$N_1$與$N_2$以電阻$R_1+R_2+\frac{R_1R_2}{R_3}$導線相接，$N_2$與$N_3$以電阻$R_2+R_3+\frac{R_2R_3}{R_1}$導線相接，$N_3$與$N_1$以電阻$R_3+R_1+\frac{R_3R_1}{R_2}$導線相接。
-\end{itemize}
-則此二電路等價。
+
+
+
 
 
 
@@ -197,12 +216,6 @@ Two or more elements are connected in parallel if they are connected along multi
 A linear electrical network is an electrical network which obeys the superposition principle that the output voltage is a linear combination of the input voltages.
 \sssc{Thévenin's theorem}
 Any linear time-invariant electricali network containing only voltage sources, current sources, and resistances with two terminals is equivalent to a combination of a voltage source in a series connection with a resistance, such equivalent circuit is called Thévenin equivalent or Thévenin form.
-\begin{proof}
-PLACEHOLDER
-\end{proof}
 \sssc{Norton's theorem or Mayer–Norton theorem}
 Any linear time-invariant electrical network containing only voltage sources, current sources, and resistances with two terminals is equivalent to a combination of a current source in a parallel connection with a resistance, such equivalent circuit is called Norton equivalent or Norton form.
-\begin{proof}
-PLACEHOLDER
-\end{proof}
 
