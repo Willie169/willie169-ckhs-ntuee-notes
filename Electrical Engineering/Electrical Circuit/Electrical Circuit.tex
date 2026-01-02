@@ -36,18 +36,98 @@ We label arrow and current $i(t)$ on it to define the reference direction of the
 If the current arrow enters the + terminal, the element is said to follow the passive sign convention. Under this convention, the power of the element absorbs is
 \[p(t)=v(t)i(t),\]
 where negative power means delivering.
-\sssc{Ohm’s law}
-The resistance $R$ of a circuit element is the magnitude of the fraction of its voltage over its current, while the conductance $G$ is $\frac{1}{R}$. Resistors discussed in this text are assumed to be linear conductor, that is, $R$ is independent from voltage and current.
+\sssc{Node}
+A node is a point in a network where two or more elements are connected.
+\sssc{Pole or terminal}
+A pole or a terminal is a node that is available for connection to an external network.
+\sssc{Path}
+A path is any route through which current can flow from one node to another.
+\sssc{Branch}
+A branch is a single element or a group of elements in series that connects two nodes.
+\sssc{Loop}
+A loop is any closed path in a network where you can start at a node, traverse branches, and return to the starting node without retracing any branch.
+\sssc{Electrical circuit or closed circuit}
+An electrical circuit is a network containing loops.
+\sssc{Open circuit}
+An open circuit is an electrical network that is not a circuit.
+\sssc{Port}
+A port is a pair of terminals through which current can enter or leave a network and satisfies the port condition: the current flowing into one pole from outside is equal to the current flowing out of the other pole to outside.
+
+An $n$-port network is a network with $2n$ poles forming $n$ ports.
+\sssc{Resistor}
+An ideal resistor is a circuit element with a resistance and no capacitance or inductance. Resistances in a network are called loads.
+\begin{center}
+\begin{circuitikz}
+\draw (0,0) to[R, l=Resistor] (3,0);
+\draw (5,0) to[vR, l=Variable Resistor] (8,0);
+\draw (10,0) to[thermistor, l=Thermistor] (13,0);
+\end{circuitikz}
+\begin{circuitikz}
+\draw (0,0) to[ldR, l=Light Dependent Resistor] (3,0);
+\draw (5,0) to[varistor, l=Varistor] (8,0);
+\end{circuitikz}
+\end{center}
+\subsubsection{Capacitor}
+An ideal capacitor is a circuit element with a capacitance and no resistance or inductance.
+\begin{center}
+\begin{circuitikz}
+\draw (0,0) to[C, l=Capacitor] (3,0);
+\end{circuitikz}
+\end{center}
+\subsubsection{Inductor}
+An ideal inductor is a circuit element with an inductance and no resistance or capacitance.
+\begin{center}
+\begin{circuitikz}
+\draw (0,0) to[L, l=Inductor] (3,0);
+\end{circuitikz}
+\end{center}
+\sssc{Linear element and Ohm's law}
+The resistance $R$, capacitance $C$, and inductance $L$ of a linear circuit element is assumed to be independent of voltage and current, that is, equivalent to a one-port network consists of ideal resistors, capacitors, and inductors. The assumption for resistance is the Ohm's law.
+\sssc{Sinusoidal alternating current as phasor}
+The voltage and current of a sinusoidal AC
+\[v(t)=v_m\cos(\omega t+\phi),\]
+\[i(t)=i_m\cos(\omega t+\theta),\]
+are represented in phasors $v_m\angle\phi$ and $i_m\angle\theta$, which can be treated as complex numbers $v_me^{i\phi}$ and $i_me^{i\theta}$.
+
+Here, all AC discussed are sinusoidal.
+\sssc{Reactance}
+Let the capacitance of a circuit element under alternating current at an angular frequency of $\omega$ be $C$. Then its capacitive reactance $X_C$ is defined as:
+\[X_C=\frac{1}{\omega C}.\]
+There is also a definition that is the opposite of the above definition, i.e., the capacitive reactance is negative, which is not used here.
+
+Let the inductance of a circuit element under alternating current with an angular frequency of $\omega$ be $L$. Then its inductive reactance $X_L$ is defined as:
+\[X_L=\omega L.\]
+The reactance $X$ of a circuit element is defined as:
+\[X=X_L-X_C.\]
+A circuit element is said to have net capacitive reactance if $X<0$ and have net inductive reactance if $X>0$.
+\sssc{Impedance}
+The impedance $Z$ of a one-port network is defined as a complex number with its resistance as real part and its reactance as imaginary part:
+\[Z=R+jX,\]
+where $j=\sqrt{-1}$ is the imaginary unit (since $i$ is used by current).
+
+For AC in phasor notation, we can write
+\[v=Zi.\]
+\sssc{Admittance}
+The admittance $Y$ of a one-port network is defined as the reciprocal of its impedance:
+\[Y=\frac{1}{Z}.\]
+\sssc{Conductance}
+The conductance $G$ of a circuit element is defined as the real part of its admittance, for circuit element under direct current, that is, the reciprocal of its resistance.
+\sssc{Susceptance}
+The susceptance $B$ of a circuit element is defined as the imaginary part of its admittance:
+\[Y=G+jB.\]
+\sssc{Phase shift by impedance}
+A circuit element with resistance $R$ and reactance $X$ introduces a change $\arctan(\frac{X}{R})$ in phase angle difference of current relative to voltage to the output current relative to input current. For in-phase input AC, circuit element with $X>0$ makes output current lags voltage, and circuit element with $X<0$ makes output current leads voltage.
 \sssc{Wire or lead}
-Circuit elements in a network are connected with wires (aka leads), which are assumed to have zero resistance.
+Circuit elements in a network are connected with wires (aka leads), which are assumed to have zero impedance.
 \begin{center}
 \begin{circuitikz}
 \draw (0,0) to[short, l=Wire] (3,0);
 \draw (5,0) to[crossing, l=Wire Crossing] (8,0);
 \end{circuitikz}
 \end{center}
+Adding a wire directly between two nodes is called adding a short circuit.
 \sssc{Sources}
-Ideal sources are assumed to have zero resistance.
+Ideal sources are assumed to have zero impedance.
 
 Independent sources:
 \bit
@@ -72,18 +152,6 @@ Dependent or controlled sources:
 \draw (5,0) node[cisourceAMshape]{} (5,1) node[above]{Controlled Current Source};
 \end{circuitikz}
 \end{center}
-\sssc{Node}
-A node is a point in a network where two or more elements are connected.
-\sssc{Path}
-A path is any route through which current can flow from one node to another.
-\sssc{Branch}
-A branch is a single element or a group of elements in series that connects two nodes.
-\sssc{Loop}
-A loop is any closed path in a network where you can start at a node, traverse branches, and return to the starting node without retracing any branch.
-\sssc{Electrical circuit or closed circuit}
-An electrical circuit is a network containing loops.
-\sssc{Open circuit}
-An open circuit is an electrical network that is not a circuit.
 \sssc{Ground}
 A ground is a node designated to have 0 electric potential. All other electric potential in the network are measured relative to the grounds.
 \bit
@@ -102,32 +170,70 @@ A ground is a node designated to have 0 electric potential. All other electric p
 The algebraic sum of the currents entering any node is zero.
 \sssc{Kirchhoff's voltage law (KVL), Kirchhoff's second law, or Kirchhoff's loop rule}
 The algebraic sum of the voltages around any closed path is zero.
+\sssc{Nodal analysis or node-voltage analysis}
+Analysis of circuits by equations given by KCL for nodes is called nodal analysis or node-voltage analysis.
+\sssc{Network as graph}
+A network is a graph with nodes being vertices and branches without nodes inside except ends being edges.
+\sssc{Planar network}
+A network that is planar as a graph.
+\sssc{Loop analysis}
+Analysis of circuits by equations given by KVL for loops is called loop analysis or loop-current analysis. If the circuit is planar, it is also called mesh analysis.
+\sssc{Linear electrical network}
+A linear electrical network is an electrical network which obeys the superposition principle that the output voltage is a linear combination of the input voltages, that is, consists of only linear elements.
+\sssc{Linear circuit}
+A linear circuit is a circuit consisting of linear netwroks and sources.
 \sssc{Series connection}
-Two or more elements are connected in series if they are connected along a single path, and each component has the same current through it, equal to the current through the network. The voltage across the network is equal to the sum of the voltages across each element. The resistance of the network is equal to the sum of the resistances of each element.
+Two or more elements are connected in series if they are connected along a single path, and each component has the same current through it, equal to the current through the network. The voltage across the network is equal to the sum of the voltages across each element. For linear networks, the impedance of the network is equal to the sum of the impedances of each element.
 \sssc{Parallel connection}
-Two or more elements are connected in parallel if they are connected along multiple paths from one node to another, and each component has the same voltage across it, equal to the voltage through the network. The current through the network is equal to the sum of the current through each element. The conductance of the network is equal to the sum of the conductances of each element.
+Two or more elements are connected in parallel if they are connected along multiple paths from one node to another, and each component has the same voltage across it, equal to the voltage through the network. The current through the network is equal to the sum of the current through each element. For linear networks, the admittance of the network is equal to the sum of the admittances of each element.
+\sssc{Bilateral network}
+A bilateral electrical network is an electrical network whose behaviors remain the same regardless of the direction of current flow or applied voltage.
+\ssc{Nodal Analysis of Linear Circuit under DC or Sinusoidal AC}
+\sssc{Supernode}
+If a voltage source is connected between two nodes, enclose both nodes and the source as a supernode.
+\sssc{Linear circuit as graph}
+A linear circuit is a graph with nodes with all voltage sources enclosed as supernodes being vertices, branches without nodes inside except ends being edges, and admittances (or conductance for DC) being weights.
+\sssc{Admittance matrix}
+The admittance (or conductance for DC) matrix of a linear circuit is the Laplacian matrix of it.
+\sssc{Matrix form}
+The equations given by KCL of a linear circuit is a system of linear equation:
+\[\mb{Y}\mb{v}=\mb{i},\]
+where $\mb{v}$ is the column vector of nodes voltages relative to a common node, $\mb{i}$ is the vector of current injected into the nodes, where each entry $i_k$ is zero if node $k$ is not connected to a current source and $i_s$ if node $k$ is connected to a current source of current $i_s$ injected to the node (negative for absorption), and $\mb{Y}$ is the admittance (or conductance for DC) matrix of the linear circuit.
 \sssc{Y-Δ transformation and Δ-Y transformation}
 \bit
-\item Y (aka wye or star) network: a common central node $N$, three terminals $N_1,N_2,N_3$, and three resistors with resistances $R_1,R_2,R_3$ connecting $N_1$ and $N$, $N_2$ and $N$, and $N_3$ and $N$ respectively.
-\item Δ (delta): three terminals $N_1,N_2,N_3$, and three resistors with resistances $R_{12},R_{23},R_{31}$ connecting $N_1$ and $N_2$, $N_2$ and $N_3$, and $N_3$ and $N_1$ respectively.
-\item Y-Δ (aka wye-delta or star-delta) transformation: The two network are equivalent if
+\item Y (wye or star) network: a common central node $N$, three terminals $N_1,N_2,N_3$, and three circuit elements with impedances $R_1,R_2,R_3$ connecting $N_1$ and $N$, $N_2$ and $N$, and $N_3$ and $N$ respectively.
+\item Δ (delta or triangle) network: three terminals $N_1,N_2,N_3$, and three circuit elements with impedances $R_{12},R_{23},R_{31}$ connecting $N_1$ and $N_2$, $N_2$ and $N_3$, and $N_3$ and $N_1$ respectively.
+\item Y-Δ transformation: The two networks are equivalent if
 \[R_{12}=R_1+R_2+\frac{R_1R_2}{R_3},\]
 \[R_{23}=R_2+R_3+\frac{R_2R_3}{R_1},\]
 \[R_{31}=R_3+R_1+\frac{R_3R_1}{R_2}.\]
-\item Δ-Y (aka delta-wye or star-delta) transformation: The two network are equivalent if
+\item Δ-Y transformation: The two networks are equivalent if
 \[R_1=\frac{R_{12}R_{31}}{R_{12}+R_{23}+R_{31}},\]
 \[R_2=\frac{R_{23}R_{12}}{R_{12}+R_{23}+R_{31}},\]
 \[R_3=\frac{R_{31}R_{23}}{R_{12}+R_{23}+R_{31}}.\]
 \eit
-\sssc{Generalized Y-Δ transformation and Δ-Y transformation}
+\sssc{Star-mesh transformation}
 For all integer $n\geq 3$:
 \bit
-\item $n$-star network: a common central node $N$, $n$ terminals $N_1,N_2,\ldots,N_n$, and $n$ resistors with resistances $R_i$ connecting $N_i$ and $N$ for all $i\in\bbN\land i\leq n$.
-\item $n$-gon network: $n$ terminals $N_1,N_2,\ldots,N_n$, and $\frac{n(n-1)}{2}$ resistors with resistances $R_{ij}$ connecting $N_i$ and $N_j$ for all $i,j\in\bbN\land i<j\leq n$.
-\item Generalized Y-Δ transformation: The two network are equivalent if
+\item $n$-star network: a common central node $N$, $n$ terminals $N_1,N_2,\ldots,N_n$, and $n$ circuit elements with impedances $R_i$ connecting $N_i$ and $N$ for all $i\in\bbN\land i\leq n$.
+\item $n$-mesh (complete graph) network: $n$ terminals $N_1,N_2,\ldots,N_n$, and $\frac{n(n-1)}{2}$ circuit elements  with impedances $R_{ij}$ connecting $N_i$ and $N_j$ for all $i,j\in\bbN\land i<j\leq n$.
+\item Star-mesh transformation: The two networks are equivalent if
 \[R_{ij}=R_i+R_j+\frac{R_iR_j}{-R_i-R_j+\sum_{k=1}^nR_k}.\]
-\item Generalized Δ-Y (aka delta-wye or star-delta) transformation: The two network are equivalent if
-\[R_i=\frac{\prod_{k=1}^{i-1}R_{ki}\prod_{k=i+1}^nR_{ik}}{\sum_{k=1}^{n-1}\sum_{l=k+1}^nR_{kl}}.\]
+\eit
+\ssc{Thévenin's theorem and Norton's theorem}
+\sssc{Thévenin's theorem}
+Any linear electrical network with two terminals under DC or sinusoidal AC is equivalent to a voltage source with a voltage called Thévenin voltage in a series connection with a linear element (or resistor for DC) with an impedance (or resistance for DC) called Thévenin impedance (or resistance for DC), such equivalent circuit is called Thévenin equivalent.
+\sssc{Norton's theorem}
+Any linear electrical network with two terminals under DC or sinusoidal AC is equivalent to a current source with a current called Norton current in a parallel connection with a linear element (or resistor for DC) with an impedance (or resistance for DC) called Norton impedance (or resistance for DC), such equivalent circuit is called Norton equivalent.
+\sssc{Finding Thévenin voltage}
+Remove any load, and the open-circuit voltage (phasor for AC) is the Thévenin voltage.
+\sssc{Finding Norton current}
+Add a short circuit between the two terminals, and the current on the it is the Norton current.
+\sssc{Finding Thévenin impedance or Norton impedance}
+Thévenin impedance and Norton impedance are the same and can be found with:
+\bit
+\item \tb{Source deactivation method}: Replace all indepedent voltage sources with short circuits and independent current sources with open circuits, and the impedance between the two terminals is the Thévenin impedance or Norton impedance.
+\item \tb{Division method}: The Thévenin impedance or Norton impedance is the Thévenin voltage divided by the Norton current.
 \eit
 
 
@@ -145,27 +251,6 @@ For all integer $n\geq 3$:
 \begin{circuitikz}
 \draw (0,0) to[switch, l=Switch] (3,0);
 \draw (5,0) node[spdt]{} (5,0.5) node[above]{SPDT Switch};
-\end{circuitikz}
-\end{center}
-\subsubsection{Resistors}
-\begin{center}
-\begin{circuitikz}
-\draw (0,0) to[R, l=Resistor] (3,0);
-\draw (5,0) to[vR, l=Variable Resistor] (8,0);
-\draw (10,0) to[thermistor, l=Thermistor] (13,0);
-\end{circuitikz}
-\end{center}
-\begin{center}
-\begin{circuitikz}
-\draw (0,0) to[ldR, l=Light Dependent Resistor] (3,0);
-\draw (5,0) to[varistor, l=Varistor] (8,0);
-\end{circuitikz}
-\end{center}
-\subsubsection{Capacitors and Inductor}
-\begin{center}
-\begin{circuitikz}
-\draw (5,0) to[C, l=Capacitor] (8,0);
-\draw (10,0) to[L, l=Inductor] (13,0);
 \end{circuitikz}
 \end{center}
 \subsubsection{Diodes}
@@ -207,15 +292,59 @@ For all integer $n\geq 3$:
 \draw (5,0) node[transformer core]{Transformer Core} (8,0);
 \end{circuitikz}
 \end{center}
-\ssc{Sources}
 
 
 
-\ssc{Linear electrical network}
-\sssc{Linear electrical network}
-A linear electrical network is an electrical network which obeys the superposition principle that the output voltage is a linear combination of the input voltages.
-\sssc{Thévenin's theorem}
-Any linear time-invariant electricali network containing only voltage sources, current sources, and resistances with two terminals is equivalent to a combination of a voltage source in a series connection with a resistance, such equivalent circuit is called Thévenin equivalent or Thévenin form.
-\sssc{Norton's theorem or Mayer–Norton theorem}
-Any linear time-invariant electrical network containing only voltage sources, current sources, and resistances with two terminals is equivalent to a combination of a current source in a parallel connection with a resistance, such equivalent circuit is called Norton equivalent or Norton form.
+
+
+
+
+
+\ssc{RC 與 RL 濾波電路（filter circuits）}
+PLACEHOLDER
+\subsection{RLC 與 LC 諧振電路（Resonant circuits）}
+\subsubsection{常電壓串聯 RLC 與 LC 電路}
+常電壓串聯 RLC 電路：常電壓$V$直流電源、電阻$R$、電感$L$、電容$C$串聯。
+
+常電壓串聯 LC 電路：常電壓$V$直流電源、電感$L$、電容$C$串聯，即令$R=0$。
+\[RI(t)+L\dv{I(t)}{t}+\frac{1}{C}\int _{-\infty}^tI(\tau)\,\mathrm{d}\tau=V\]
+\[\dv[2]{I(t)}{t}+\frac{R}{L}\dv{I(t)}{t}+\frac{1}{LC}I(t)=0\]
+定義奈培頻率（neper frequency）/衰減量（attenuation）$\alpha=\frac{R}{2L}$與角共振頻率（angular resonance frequency）$\omega_0=\frac{1}{\sqrt{LC}}$。
+\[\dv[2]{I(t)}{t}+2\alpha\dv{I(t)}{t}+\omega_0^{\phantom{0}2}I(t)=0\]
+定義阻尼係數（damping factor）$\zeta$：
+\[\zeta=\frac{\alpha}{\omega_0}=\frac{R}{2}\sqrt{\frac{C}{L}}\]
+特徵根：
+\[s_1=-\omega_0\zeta+\omega_0\sqrt{\zeta^2-1}\]
+\[s_2=-\omega_0\zeta-\omega_0\sqrt{\zeta^2-1}\]
+過阻尼響應（Overdamped response）（$\zeta>1$）的$I(t)$通解為：
+\[I(t)=A_1e^{-\omega_0\left(\zeta+\sqrt{\zeta^2-1}\right)t}+A_2e^{-\omega_0\left(\zeta-\sqrt{\zeta^2-1}\right)t}\]
+臨界阻尼響應（Critically damped response）（$\zeta=1$）的$I(t)$通解為：
+\[I(t)=A_1e^{-\omega_0\zeta t}+A_2e^{-\omega_0\zeta t}\]
+欠阻尼響應（Underdamped response）（$0<\zeta<1$）的$I(t)$通解為：
+\[I(t)=A_1e^{-\omega_0\zeta t}\cos\left(\omega_0\sqrt{1-\zeta^2}t\right)+A_2e^{-\omega_0\zeta t}\sin\left(\omega_0\sqrt{1-\zeta^2}t\right)\]
+無阻尼響應（Undamped response）（$\zeta=0$即$R=0$）的$I(t)$通解為：
+\[I(t)=A_1\cos\left(\omega_0t\right)+A_2\sin\left(\omega_0t\right)\]
+\subsubsection{常電流並聯 RLC 與 LC 電路}
+常電流並聯 RLC 電路：常電流$I$直流電源、電阻$R$、電感$L$、電容$C$並聯。
+
+常電流並聯 LC 電路：常電流$I$直流電源、電感$L$、電容$C$並聯，即令 $\frac{1}{R}=0$。
+\[\frac{1}{R}V(t)+C\dv{V(t)}{t}+\frac{1}{L}\int _{-\infty}^tV(\tau)\,\mathrm{d}\tau=I\]
+\[\dv[2]{V(t)}{t}+\frac{1}{RC}\dv{V(t)}{t}+\frac{1}{LC}V(t)=0\]
+定義奈培頻率（neper frequency）/衰減量（attenuation）$\alpha=\frac{1}{2RC}$與角共振頻率（angular resonance frequency）$\omega_0=\frac{1}{\sqrt{LC}}$。
+\[\dv[2]{V(t)}{t}+2\alpha\dv{V(t)}{t}+\omega_0^{\phantom{0}2}V(t)=0\]
+定義阻尼係數（damping factor）$\zeta$：
+\[\zeta=\frac{\alpha}{\omega_0}=\frac{1}{2R}\sqrt{\frac{L}{C}}\]
+特徵根：
+\[s_1=-\omega_0\zeta+\omega_0\sqrt{\zeta^2-1}\]
+\[s_2=-\omega_0\zeta-\omega_0\sqrt{\zeta^2-1}\]
+過阻尼響應（Overdamped response）（$\zeta>1$）的$V(t)$通解為：
+\[V(t)=A_1e^{-\omega_0\left(\zeta+\sqrt{\zeta^2-1}\right)t}+A_2e^{-\omega_0\left(\zeta-\sqrt{\zeta^2-1}\right)t}\]
+臨界阻尼響應（Critically damped response）（$\zeta=1$）的$V(t)$通解為：
+\[V(t)=A_1e^{-\omega_0\zeta t}+A_2e^{-\omega_0\zeta t}\]
+欠阻尼響應（Underdamped response）（$0<\zeta<1$）的$V(t)$通解為：
+\[V(t)=A_1e^{-\omega_0\zeta t}\cos\left(\omega_0\sqrt{1-\zeta^2}t\right)+A_2e^{-\omega_0\zeta t}\sin\left(\omega_0\sqrt{1-\zeta^2}t\right)\]
+無阻尼響應（Undamped response）（$\zeta=0$即$\frac{1}{R}=0$）的$V(t)$通解為：
+\[V(t)=A_1\cos\left(\omega_0t\right)+A_2\sin\left(\omega_0t\right)\]
+
+
 
