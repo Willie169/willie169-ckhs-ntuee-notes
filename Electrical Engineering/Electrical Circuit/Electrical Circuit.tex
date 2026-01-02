@@ -46,6 +46,8 @@ A path is any route through which current can flow from one node to another.
 A branch is a single element or a group of elements in series that connects two nodes.
 \sssc{Loop}
 A loop is any closed path in a network where you can start at a node, traverse branches, and return to the starting node without retracing any branch.
+\sssc{Mesh}
+A mesh is a loop that contains no other loop inside it.
 \sssc{Electrical circuit or closed circuit}
 An electrical circuit is a network containing loops.
 \sssc{Open circuit}
@@ -134,7 +136,7 @@ Independent sources:
 \item An independent voltage source enforces a prescribed voltage $v_s(t)$ across its terminals.
 \item An independent current source enforces a prescribed current $i_s(t)$ through its terminals.
 \eit
-Dependent or controlled sources:
+Linear dependent (aka controlled) sources:
 \bit
 \item A voltage-controlled voltage source enforces a voltage $v=\mu v_x$ across its terminals, where $v_x$ is control voltage and constant $\mu$ is dimensionless voltage gain.
 \item A current-controlled voltage source enforces a voltage $v=ri_x$ across its terminals, where $i_x$ is control current and constant $r$ is transresistance.
@@ -170,35 +172,47 @@ A ground is a node designated to have 0 electric potential. All other electric p
 The algebraic sum of the currents entering any node is zero.
 \sssc{Kirchhoff's voltage law (KVL), Kirchhoff's second law, or Kirchhoff's loop rule}
 The algebraic sum of the voltages around any closed path is zero.
-\sssc{Nodal analysis or node-voltage analysis}
-Analysis of circuits by equations given by KCL for nodes is called nodal analysis or node-voltage analysis.
 \sssc{Network as graph}
 A network is a graph with nodes being vertices and branches without nodes inside except ends being edges.
 \sssc{Planar network}
 A network that is planar as a graph.
-\sssc{Loop analysis}
-Analysis of circuits by equations given by KVL for loops is called loop analysis or loop-current analysis. If the circuit is planar, it is also called mesh analysis.
 \sssc{Linear electrical network}
 A linear electrical network is an electrical network which obeys the superposition principle that the output voltage is a linear combination of the input voltages, that is, consists of only linear elements.
 \sssc{Linear circuit}
-A linear circuit is a circuit consisting of linear netwroks and sources.
+A linear circuit is a circuit consisting of linear netwroks, independent sources, and linear dependent sources.
 \sssc{Series connection}
 Two or more elements are connected in series if they are connected along a single path, and each component has the same current through it, equal to the current through the network. The voltage across the network is equal to the sum of the voltages across each element. For linear networks, the impedance of the network is equal to the sum of the impedances of each element.
 \sssc{Parallel connection}
 Two or more elements are connected in parallel if they are connected along multiple paths from one node to another, and each component has the same voltage across it, equal to the voltage through the network. The current through the network is equal to the sum of the current through each element. For linear networks, the admittance of the network is equal to the sum of the admittances of each element.
 \sssc{Bilateral network}
 A bilateral electrical network is an electrical network whose behaviors remain the same regardless of the direction of current flow or applied voltage.
-\ssc{Nodal Analysis of Linear Circuit under DC or Sinusoidal AC}
+\ssc{Nodal Analysis or Node-voltage Analysis of Linear Circuit under DC or Sinusoidal AC}
 \sssc{Supernode}
 If a voltage source is connected between two nodes, enclose both nodes and the source as a supernode.
 \sssc{Linear circuit as graph}
 A linear circuit is a graph with nodes with all voltage sources enclosed as supernodes being vertices, branches without nodes inside except ends being edges, and admittances (or conductance for DC) being weights.
 \sssc{Admittance matrix}
 The admittance (or conductance for DC) matrix of a linear circuit is the Laplacian matrix of it.
-\sssc{Matrix form}
-The equations given by KCL of a linear circuit is a system of linear equation:
+\sssc{Nodal analysis or node-voltage analysis}
+\ben
+\item Form supernodes to enclose all voltage sources.
+\item The equations given by KCL for all nodes form a system of linear equations:
 \[\mb{Y}\mb{v}=\mb{i},\]
-where $\mb{v}$ is the column vector of nodes voltages relative to a common node, $\mb{i}$ is the vector of current injected into the nodes, where each entry $i_k$ is zero if node $k$ is not connected to a current source and $i_s$ if node $k$ is connected to a current source of current $i_s$ injected to the node (negative for absorption), and $\mb{Y}$ is the admittance (or conductance for DC) matrix of the linear circuit.
+where $\mb{v}$ is the column vector of nodal voltages (directly as variables) relative to a common reference node, $\mb{i}$ is the vector of current injected into the nodes, where each entry $i_k$ is zero if node $k$ is not connected to a current source and $i_s$ if node $k$ is connected to a current source of current $i_s$ injected to the node (negative for absorption, direct substituted for VCCS and CCCS), and $\mb{Y}$ is the admittance (or conductance for DC) matrix of the linear circuit.
+\item Addtional linear equations of VCVS and CCVS are addded to the linear system.
+\een
+\ssc{Mesh Analysis of Planar Linear Circuit under DC or Sinusoidal AC}
+\sssc{Supermesh}
+If a current source lies on two or more meshes, remove the edge with the current source and merge the meshes into one mesh.
+\sssc{Mesh analysis}
+\ben
+\item Indentify all meshes and form supermeshes to exlude all current sourcs.
+\item For each mesh, assign a mesh current variable for it with an arbitrary but consistent direction.
+\item Write the linear equation of mesh current variables given by KVL for every node.
+\item Addtional linear equations of current sources are addded to the linear system.
+\item Addtional linear equations of dependent sources are addded to the linear system.
+\een
+\ssc{Transformations}
 \sssc{Y-Δ transformation and Δ-Y transformation}
 \bit
 \item Y (wye or star) network: a common central node $N$, three terminals $N_1,N_2,N_3$, and three circuit elements with impedances $R_1,R_2,R_3$ connecting $N_1$ and $N$, $N_2$ and $N$, and $N_3$ and $N$ respectively.
