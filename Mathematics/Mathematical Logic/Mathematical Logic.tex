@@ -1,0 +1,125 @@
+\documentclass[a4paper,12pt]{report}
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{3}
+\input{/usr/share/LaTeX-ToolKit/template.tex}
+\begin{document}
+\title{Mathematical Logic}
+\author{沈威宇}
+\date{\temtoday}
+\titletocdoc
+\ch{Mathematical Logic}
+\sct{Propositional logic, statement logic, sentential logic, propositional calculus, statement calculus, sentential calculus, or zeroth-order logic.
+\ssc{Syntax}
+Given
+\bit
+\item a set of symbols $\mathcal{O}=\{\uparrow\}$ (here $\uparrow$ denotes NAND and is binary, while $\mathcal{O}$ can be any functionally complete set of logical operators in Boolean algebra with related definitions changed to the equivalent form for that $\mathcal{O}$), called connectives, logical connectives, logical operators, truth-functional connectives, truth-functors, or propositional connectives, and
+\item a set of symbols $\mathcal{P}$ with $\mathcal{P}\cap\mathcal{O}=\nothing$ and $\mathcal{O}\cup\mathcal{P}$ be the alphabet of $\mathcal{L}$, called atomic propositions, atomic formulas, atomic sentences, atoms, proposition letters, sentence letters, propositional variables, or variables,
+\eit
+the formal language $\mathcal{L}$ of propositional logic is defined by:
+\bit
+\item $\mathcal{P}\subseteq\mathcal{L}$,
+\item $(P\uparrow Q)\in\mathcal{L}$ if $P,Q\in\mathcal{L}$, and
+\item nothing else is in $\mathcal{L}$.
+\eit
+Any $w\in\mathcal{L}$ is called a well-formed formula (WFF or wff) or simply formula.
+\ssc{Semantics}
+\sssc{Interpretation}
+For a given set of atomic propositions $\mathcal{P}$, the interpretation (or valuation) function $\mathcal{I}$ maps every formula in $\mathcal{P}$ to a semantic value in $\{1,0\}$ (with 1 meaning true and 0 meaning false), to each $P\in\mathcal{P}$, denoted as
+\[\mathcal{I}(P)=B.\]
+
+For a given propositional logic with formal language $\mathcal{L}$, the interpretation function $\mathscr{I}$ over $\mathcal{L}$ is recursively defined as
+\bit
+\item for any $P\in\mathcal{P}$, $\mathscr{I}(P)=\mathcal{I}(P)$,
+\item for any $P,Q\in\mathcal{L}$, $\mathscr{I}(P\uparrow Q)=\mathscr{I}(P)\uparrow\mathscr{I}(Q)$.
+\eit
+For any $P\in\mathcal{L}$, we write $\mathcal{I}\vDash P$ if $\mathscr{I}(P)=1$ and $\mathcal{I}\nvDash P$ if $\mathscr{I}(P)=0$.
+\sssc{Type of formulas}
+A formula $P$ is called (logically) valid or a tautology iff for any interpretation function $\mathcal{I}$, $\mathcal{I}\vDash P$.
+
+A formula $P$ is called (logically) invalid or a contradiction iff for any interpretation function $\mathcal{I}$, $\mathcal{I}\nvDash P$.
+
+A formula $P$ is called contingent iff it is neither a tautology nor a contradiction.
+\sct{First-order logic (FOL), predicate logic, predicate calculus, or quantificational logic}
+\ssc{Syntax}
+Given logic symbols,
+\bit
+\item the quantifier symbols $\forall$ for universal quantification and $\exists$ for existential quantification (or either one of them),
+\item a set of logical connectives $\mathcal{O}=\{\uparrow,\implies\}$ with $\uparrow$ denoting NAND and $\implies$ denoting implication,
+\item a set of punctuation symbols $\mathcal{N}$ containing $(,),,$ and maybe other symbols, which do not carry meaning themselves but to help parse and read the language,
+\item an infinite set of variables $\mathcal{V}$,
+\eit
+equality symbol $=$ for first-order logic with equality, and a signature $\sigma=(\mathcal{P},\mathcal{F})$ of indexed sets of non-logical symbols,
+\bit
+\item a set of sets of predicate symbols (also called relation symbols) $\mathcal{P}=\{P_n\mid n\in\bbN_0\}$ with $P_n$ being an infinite set of predicate symbols of arity $n$, and $=\in P_2$ for first-order logic with equality,
+\item a set of sets of function symbols $\mathcal{F}=\{F_n\mid n\in\bbN_0\}$ with $F_n$ being an infinite set of function symbols of arity $n$, with any element of $F_0$ is called a constant,
+\eit
+the set of terms $\mathcal{T}$ is defined by:
+\bit
+\item $\mathcal{V}\subseteq\mathcal{T}$,
+\item $F_0\im\mathcal{T}$, and
+\item for all $n\in\bbN$, for all $t\in\mathcal{T}^n$, for all $f\in F_n$, $f(t)\in\mathcal{T}$,
+\eit
+the set of atomic formulas $\mathcal{C}$ is defined as
+\[\mathcal{C}=\bigcup_{n\in\bbN}\{p(t)\mid t\in\mathcal{T}^n\land p\in P_n\},\]
+and the formal language $\mathcal{L}$ of first-order logic is defined by:
+\bit
+\item $\mathcal{C}\subseteq\mathcal{L}$
+\item $(P\uparrow Q)\in\mathcal{L}$ if $P,Q\in\mathcal{L}$, and
+\item $\forall xP$ and $\exists xP$ are in $\mathcal{L}$ if $P\in\mathcal{L}$ and $x\in\mathcal{V}$,
+\item nothing else is in $\mathcal{L}$.
+\eit
+Any $w\in\mathcal{L}$ is called a well-formed formula (WFF or wff) or simply formula.
+\ssc{Free and bounded variables}
+A variable in a formula is either free or bounded, which are defined as follows:
+\bit
+\item A variable in an atomic formula is free.
+\item A variable is free in $P\uparrow Q$ if it is free in formula $P$ or $Q$.
+\item A variable $x$ is free in $\forall yP$ (and/or $\exists yP$) if $x$ is not the same symbol as $y$ and $x$ is free in formula $P$.
+\item No other variable in a formula is free.
+\eit
+A formula with no free variable is called a sentence or a closed formula.
+\ssc{Structure}
+\sssc{Structure}
+(In model theory), a (first-order) structure $\mathcal{M}$, also called model, can be defined with a triple $(A,\sigma,I)$ of a domain, also called universe, carrier, underlying set, domain of discourse, or universe of discourse, $A$ (sometimes denoted as $|\mathcal{M}|$, $D_{\mathcal{M}}$, or simply $\mathcal{M}$), a signature (of a first-order logic) $\sigma$ as defined above, and an interpretation function $I$, that map each $f\in F_n$ to a function from $A^n$ to $A$, each $p\in P_n$ to a subset of $A^n$, and, for signature with equality, $=$ to
+\[\{(a,a)\mid a\in A\}.\]
+\sssc{Substructure}
+A structure $\mathcal{B}$ is a substructure of a structure $\mathcal{M}$, often denoted as $\mathcal{B}\subseteq \mathcal{M}$, iff the domain of $\mathcal{B}$ is a subset of the domain of $\mathcal{M}$, the signatures of $\mathcal{M}$ and $\mathcal{B}$ are the same, and the interpretation function of $\mathcal{M}$ is an extension of the interpretation function of $\mathcal{B}$.
+\sssc{Closed subset}
+For a structure $\mathcal{M}=(A,\sigma,I)$, a subset $B\subseteq A$ is called closed iff for any $f\in F_n$ and $b\in B^n$, $I(f)(b)\in B$.
+
+For any subset $B$ of $A$, there exists a smallest closed subset that is a superset of $B$, called the hull of $B$ or the closed subset generated by $B$, denoted as $\langle B\rangle_\mathcal{M}$.
+\ssc{Semantics}
+\sssc{Interpretation}
+We define the semantics of a formula $P$ with a structure $\mathcal{M}=(A,\sigma,I)$ of the same signature as the first-order logic and a variable assignment function $s$ from the free variables in $P$ to $A$ as either $\mathcal{M},s\vDash P$, read $P$ is true in $\mathcal{M}$ under assignment $s$, or $\mathcal{M},s\nvDash P$, read $P$ is false in $\mathcal{M}$ under assignment $s$, with,
+\bit
+\item For any term $t$, $[t]$ denotes $t$ with any function symbols $f$ replaced with $I(f)$ and any variable $x$ replaced with $s(x)$,
+\item For any atomic formula $p(t_1,t_2,\ldots,t_n)$ for some predicate symbol $p\in P_n$, $\mathcal{M},s\vDash p(t)$ iff $[t_1],[t_2],\ldots,[t_n]\in I(p)$, and
+\item T-schema or truth schema: with $\mathscr{I}$ mapping formula $P$ to 1 if $\mathcal{M},s\vDash P$ and to 0 if $\mathcal{M},s\nvDash P$,
+\bit
+\item For any $P,Q\in\mathcal{L}$, $\mathscr{I}(P\uparrow Q)=\mathscr{I}(P)\uparrow\mathscr{I}(Q)$.
+\item For any $P,Q\in\mathcal{L}$, $\mathscr{I}(P\implies Q)=\mathscr{I}(Q)\uparrow\mathscr{I}(Q)\uparrow\mathscr{I}(P)$.
+\item $\mathcal{M},s\vDash\forall xP$ iff $\forall a\in A$, replacing $x$ with $a$ makes $\mathcal{M},s\vDash P$.
+\item $\mathcal{M},s\vDash\exists xP$ iff $\exists a\in A$, replacing $x$ with $a$ makes $\mathcal{M},s\vDash P$.
+\eit
+For sentences, $s$ can be skipped since there is no free variable and $s$ is irrelevant. For a sentence $P$, $\mathcal{M}\vDash P$ is called $\mathcal{M}$ satisfies $P$.
+\sssc{Logical consequence}
+Given two sentences $S,T$, $S\vDash T$ means for any structure $\mathcal{M}$, if $\mathcal{M}\vDash S$, then $\mathcal{M}\vDash T$, called $T$ is a logical consequence of $S$.
+\sssc{Satisfiability}
+A sentence is satisfiable iff there exists a structure that satisfies it.
+\sssc{Type of sentences}
+A sentence $P$ is called (logically) valid or a tautology iff for any interpretation structure $\mathcal{M}$, $\mathcal{M}\vDash P$.
+
+A sentence $P$ is called (logically) invalid or a contradiction iff for any interpretation structure $\mathcal{M}$, $\mathcal{M}\nvDash P$.
+
+A sentence $P$ is called contingent iff it is neither a tautology nor a contradiction.
+
+
+
+
+
+deductive system
+\ssc{Proof system}
+A proof system is a triple $(\mathcal{L},\mathcal{A},\mathcal{R})$ of a formal language $\mathcal{L}$ of formulas, a set $\mathcal{A}$ of axioms, which are formula in $\mathcal{L}$ that are assumed to be derived, and axiom schemas, which are expressions with schema variables that any expression obtained by replacing schema variables with arbitrary formulas in $\mathcavl{L}$ is assumed to be derived, and a set $\mathcal{R}$ of rules of inference, which are expression in the form $\frac{P_1,P_2,\ldots,P_n}{Q}$ for $P_1,P_2,\ldots,P_n,Q\in\mathcal{L}$ where $Q$ is derived if $P_1,P_2,\ldots,P_n$ are all derived. For every $P\in\mathcal{L}$, if $P$ is derived, we write $\Gamma\vdash P$.
+sound 
+completeness 
+Theory
