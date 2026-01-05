@@ -1,4 +1,4 @@
-\documentclass[a4paper,12pt]{report}
+\documentclass[a4paper,12pt]{article}
 \setcounter{secnumdepth}{5}
 \setcounter{tocdepth}{3}
 \input{/usr/share/LaTeX-ToolKit/template.tex}
@@ -7,17 +7,55 @@
 \author{沈威宇}
 \date{\temtoday}
 \titletocdoc
-\ch{Mathematical Logic}
-\sct{Structure}
-\ssc{Signature}
+\sct{Mathematical Logic}
+\ssc{Proof Theory}
+\sssc{Deductive system, proof system, formal system, or formal proof system}
+A deductive system, proof system, formal system, or formal proof system $\Gamma$ over a formal language $\mathcal{L}$ consists of axioms and rules of inference, where:
+\bit
+\item An axiom is a formula in $\mathcal{L}$ assumed to be derived in $\Gamma$.
+\item An axiom schema is an expression with schema variables, each designated with a type of symbols in $\mathcal{L}$, that the expression obtained by replacing each schema variable with an arbitrary symbol of its type, called an application of the axiom schema, is assumed to be an axiom.
+\item A rule of inference in Hilbert style is in the form $\frac{P_1,P_2,\ldots,P_n}{Q}$ where $P_1,P_2,\ldots,P_n,Q$ are expressions sharing the same set of metaformulas such that any expressions obtained by replacing each metaformula with an arbitrary formula in $\mathcal{L}$ are formulas in $\mathcal{L}$ and the expressions obtained by such replacement of $P_1,P_2,\ldots,P_n$ are assumed to derive the expression obtained by such replacement of $Q$. Other styles exist and have the same expressive power as Hilbert style for propositional logic and predicate logic.
+\eit
+\sssc{(Formal) derivation or proof}
+Given proof system $\Gamma$ over language $\mathcal{L}$ and formulas $S_1,S_2,\ldots S_n,T\in\mathcal{L}$, a (formal) derivation or proof from $S_1,S_2,\ldots S_n$ to $T$ is a finite sequence of formulas $\langle F_i\rangle_{i=1}^m$ such that each $F_i$ is either
+\bit
+\item an axiom of $\Gamma$,
+\item an element of $\{S_1,S_2,\ldots S_n\}$, or
+\item can be derived from some of the earlier formulas in the sequence using a rule of inference,
+\eit
+and that $F_m=T$.
+
+$S_1,S_2,\ldots S_n$ are called premises, $T$ is called conclusion, and this process is called argumentation.
+
+That there exists a derivation from $S_1,S_2,\ldots S_n$ to $T$ is denoted as $S_1,S_2,\ldots S_n\vdash T$ and called $S_1,S_2,\ldots S_n$ derive or prove $T$.
+
+Thus, for any axiom $\alpha$, $\vdash\alpha$.
+
+Any formula $\alpha$ such that $\vdash\alpha$ is called derived or a theorem and is also denoted as $\Gamma\vdash\alpha$.
+\sssc{(Syntactical) consistency}
+A deductive system is (syntactically) consistent iff there is no contradiction $P$ such that $\vdash P$.
+\sssc{Soundness}
+A deductive system is sound if every formula that can be derived from the system is a tautology in the language.
+\sssc{Syntactic consequence}
+For formulas $S_1,S_2,\ldots S_n,T$ in a language $\mathcal{L}$, $T$ is a syntactic consequence of $S_1,S_2,\ldots S_n$, denoted as $S_1,S_2,\ldots S_n\vdash T$, iff there exists a sound proof system over $\mathcal{L}$ in which $S_1,S_2,\ldots S_n\vdash T$.
+\sssc{Syntactical completeness}
+A deductive system is syntactically complete if for every formula in the language, either it or its negation can be derived from the system.
+\sssc{Semantical completeness}
+A deductive system is semantically complete if every tautology in the language can be derived from the system.
+\sssc{Interpretability}
+If a deductive system $S$ over language $L$ and a deductive system $T$ over language $M$ are such that there exists a function $H\colon L\to M$ that replaces each symbol in $L$ in the input with a symbol of the same type in $M$ such that for every formula $l\in L$, $S\vdash l\implies T\vdash H(l)$, then we say $T$ inteprets $S$, $S$ is weaker than $T$, or $T$ is stronger than $S$.
+\sssc{Computably enumerable (c.e.), recursively enumerable (r.e.), semidecidable, partially decidable, listable, provable or Turing-recognizable deductive system}
+A deductive system is computably enumerable (c.e.), recursively enumerable (r.e.), semidecidable, partially decidable, listable, provable or Turing-recognizable iff the set of all axioms of it is computably enumerable.
+\ssc{Model Theory}
+\sssc{Signature}
 A signature $\sigma=(\mathcal{P},\mathcal{F})$ is a pair of indexed sets of non-logical symbols,
 \bit
 \item a set of sets of predicate symbols (also called relation symbols) $\mathcal{P}=\{P_n\mid n\in\bbN_0\}$ with $P_n$ being a possibly infinite set of predicate symbols of arity $n$,
 \item a set of sets of function symbols $\mathcal{F}=\{F_n\mid n\in\bbN_0\}$ with $F_n$ being a possibly infinite set of function symbols of arity $n$, with any element of $F_0$ called a constant.
 \eit
-\ssc{Structure}
+\sssc{Structure}
 (In model theory), a structure $\mathcal{A}$, also called model, can be defined with a triple $(A,\sigma,I)$ of a domain, also called universe, carrier, underlying set, domain of discourse, or universe of discourse, $A$, denoted as $|\mathcal{A}|$ or simply $\mathcal{A}$, a signature $\sigma$, and an interpretation function $I$ that, for all $n\in\bbN_0$, maps each $f\in F_n$ to a function $I(f)$ from $A^n$ to $A$, called interpretation of $f$ and often denoted as $f$, and each $p\in P_n$ to a subset $I(p)$ of $A^n$, called interpretation of $f$ and often denoted as $p$.
-\ssc{Substructure}
+\sssc{Substructure}
 A structure $\mathcal{B}=(B,\sigma_B,I_B)$ is a substructure of a structure $\mathcal{A}=(A,\sigma_A,I_A)$, denoted as $\mathcal{B}\subseteq\mathcal{A}$, iff
 \bit
 \item $B\subseteq A$,
@@ -25,11 +63,11 @@ A structure $\mathcal{B}=(B,\sigma_B,I_B)$ is a substructure of a structure $\ma
 \item for every $n\in\bbN_0$, for every function symbol $f\in F_n$, $I_B(f)=I_A(f)\upharpoonright B^n$, and
 \item for every $n\in\bbN_0$, for every relation symbol $p\in P_n$, $I_B(p)=I_A(p)\cap B^n$.
 \eit
-\ssc{Closed subset}
+\sssc{Closed subset}
 For a structure $\mathcal{A}=(A,\sigma,I)$, a subset $B\subseteq A$ is called closed iff, for all $n\in\bbN_0$, for any $f\in F_n$ and $b\in B^n$, $I(f)(b)\in B$.
 
 For any subset $B$ of $A$, there exists a smallest closed subset that is a superset of $B$, called the hull of $B$ or the closed subset generated by $B$, denoted as $\langle B\rangle_\mathcal{A}$.
-\ssc{Homomorphism}
+\sssc{Homomorphism}
 A ($\sigma-$)homomorphism from a structure $\mathcal{A}=(A,\sigma,I_A)$ to a structure $\mathcal{B}=(B,\sigma,I_B)$ is a map $h\colon A\to B$ such that,
 \bit
 \item for all $n\in\bbN_0$, for any $f\in F_n$ and $a_1,a_2,\ldots,a_n\in A^n$,
@@ -37,7 +75,7 @@ A ($\sigma-$)homomorphism from a structure $\mathcal{A}=(A,\sigma,I_A)$ to a str
 \item for all $n\in\bbN_0$, for any $p\in P_n$ and $a_1,a_2,\ldots,a_n\in A^n$,
 \[(a_1,a_2,\ldots,a_n)\in I_A(p)\implies(h(a_1),h(a_2),\ldots,h(a_n))\in I_B(p).\]
 \eit
-\ssc{Strong homomorphism}
+\sssc{Strong homomorphism}
 A strong ($\sigma-$)homomorphism from a structure $\mathcal{A}=(A,\sigma,I_A)$ to a structure $\mathcal{B}=(B,\sigma,I_B$ is a map $h\colon A\to B$ such that,
 \bit
 \item for all $n\in\bbN_0$, for any $f\in F_n$ and $a_1,a_2,\ldots,a_n\in A^n$,
@@ -45,114 +83,169 @@ A strong ($\sigma-$)homomorphism from a structure $\mathcal{A}=(A,\sigma,I_A)$ t
 \item for all $n\in\bbN_0$, for any $p\in P_n$ and $a_1,a_2,\ldots,a_n\in A^n$,
 \[(a_1,a_2,\ldots,a_n)\in I_A(p)\iff(h(a_1),h(a_2),\ldots,h(a_n))\in I_B(p).\]
 \eit
-\ssc{Embedding}
+\sssc{Embedding}
 A ($\sigma-$)embedding from a structure $\mathcal{A}=(A,\sigma,I_A)$ to a structure $\mathcal{B}=(B,\sigma,I_B$ is a strong homomorphisms $h$ from $\mathcal{A}$ to $\mathcal{B}$ that is injective.
-\sct{Propositional logic (PL), statement logic, sentential logic, propositional calculus, statement calculus, sentential calculus, or zeroth-order logic}
-\ssc{Syntax}
+\ssc{Propositional logic (PL), statement logic, sentential logic, propositional calculus, statement calculus, sentential calculus, or zeroth-order logic}
+\sssc{Syntax}
 Given
 \bit
-\item a set of symbols $\mathcal{O}=\{\uparrow\}$ (here $\uparrow$ denotes NAND and is binary, while $\mathcal{O}$ can be any functionally complete set of logical operators in Boolean algebra with related definitions changed to the equivalent form for that $\mathcal{O}$), called connectives, logical connectives, logical operators, truth-functional connectives, truth-functors, or propositional connectives, and
-\item a set of symbols $\mathcal{P}$ with $\mathcal{P}\cap\mathcal{O}=\nothing$ and $\mathcal{O}\cup\mathcal{P}$ be the alphabet of $\mathcal{L}$, called atomic propositions, atomic formulas, atomic sentences, atoms, proposition letters, sentence letters, propositional variables, or variables,
+\item a set of connectives, logical connectives, logical operators, truth-functional connectives, truth-functors, or propositional connectives $\mathcal{O}=\{\neg,\land,\lor\}$ with unary negation $\neg$, binary conjunction $\land$, and binary disjunction $\lor$, (or any functionally complete set of logical operators in Boolean algebra with related definitions changed accordingly), and
+\item a set of atomic propositions, atomic formulas, atomic sentences, atoms, proposition letters, sentence letters, propositional variables, or variables $\mathcal{P}$ with $\mathcal{P}\cap\mathcal{O}=\nothing$ and $\mathcal{O}\cup\mathcal{P}$ be the alphabet of $\mathcal{L}$,
 \eit
 the formal language $\mathcal{L}$ of propositional logic is defined by:
 \bit
 \item $\mathcal{P}\subseteq\mathcal{L}$,
-\item $(P\uparrow Q)\in\mathcal{L}$ if $P,Q\in\mathcal{L}$, and
+\item $\neg P\in\mathcal{L}$ if $P\in\mathcal{L}$,
+\item $(P\land Q)\in\mathcal{L}$ if $P,Q\in\mathcal{L}$,
+\item $(P\lor Q)\in\mathcal{L}$ if $P,Q\in\mathcal{L}$, and
 \item nothing else is in $\mathcal{L}$.
 \eit
-Any $w\in\mathcal{L}$ is called a well-formed formula (WFF or wff) or simply formula.
-\ssc{Semantics}
-\sssc{Interpretation}
-For a given set of atomic propositions $\mathcal{P}$, the interpretation (or valuation) function $\mathcal{I}$ maps every formula in $\mathcal{P}$ to a semantic value in $\{1,0\}$ (with 1 meaning true and 0 meaning false), to each $P\in\mathcal{P}$, denoted as
+Any $w\in\mathcal{L}$ is called a well-formed formula (WFF or wff), or simply formula.
+\sssc{Semantics}
+For a given propositional logic, its interpretation (or valuation) is defined as an interpretation (or valuation) function of its set of atomic propositions.
+
+For a given set of atomic propositions $\mathcal{P}$, an interpretation (or valuation) function $\mathcal{I}$ maps every formula in $\mathcal{P}$ to a semantic value in $\{1,0\}$ (with 1 meaning true and 0 meaning false), denoted, for each $P\in\mathcal{P}$, as
 \[\mathcal{I}(P)=B.\]
 
-For a given propositional logic with formal language $\mathcal{L}$, the interpretation function $\mathscr{I}$ over $\mathcal{L}$ is recursively defined as
+For a given propositional logic with formal language $\mathcal{L}$ and interpretation $\mathcal{I}$, the interpretation function $\mathscr{I}$ over $\mathcal{L}$ is recursively defined as
 \bit
 \item for any $P\in\mathcal{P}$, $\mathscr{I}(P)=\mathcal{I}(P)$,
-\item for any $P,Q\in\mathcal{L}$, $\mathscr{I}(P\uparrow Q)=\mathscr{I}(P)\uparrow\mathscr{I}(Q)$.
+\item for any $P\in\mathcal{L}$, $\mathscr{I}(\neg P)=\neg\mathscr{I}(P)$,
+\item for any $P,Q\in\mathcal{L}$, $\mathscr{I}(P\land Q)=\mathscr{I}(P)\land\mathscr{I}(Q)$, and
+\item for any $P,Q\in\mathcal{L}$, $\mathscr{I}(P\lor Q)=\mathscr{I}(P)\lor\mathscr{I}(Q)$.
 \eit
 For any $P\in\mathcal{L}$, we write $\mathcal{I}\vDash P$ if $\mathscr{I}(P)=1$ and $\mathcal{I}\nvDash P$ if $\mathscr{I}(P)=0$.
+\sssc{Semantic consequence}
+Given formulas $S_1,S_2,\ldots S_n,T$, $S_1,S_2,\ldots S_n\vDash T$, called that $T$ is a semantic consequence of $S_1,S_2,\ldots S_n$, means that for any interpretation function $\mathcal{I}$, if $\mathcal{I}\vDash S_1,\mathcal{I}\vDash S_2,\ldots,\mathcal{I}\vDash S_n$, then $\mathcal{I}\vDash T$.
+\sssc{Equivalence of syntactic and semantic consequences}
+For any formulas $S_1,S_2,\ldots S_n,T$,
+\[S_1,S_2,\ldots S_n\vdash T\iff S_1,S_2,\ldots S_n\vDash T.\]
+Thus syntactic and semantic consequences are called (logical) consequences.
 \sssc{Classification of formulas}
-A formula $P$ is called (logically) valid or a tautology iff for any interpretation function $\mathcal{I}$, $\mathcal{I}\vDash P$.
+A formula $P$ is called (logically) valid or a tautology, denoted as $\top$, iff for any interpretation function $\mathcal{I}$, $\mathcal{I}\vDash P$.
 
-A formula $P$ is called (logically) invalid or a contradiction iff for any interpretation function $\mathcal{I}$, $\mathcal{I}\nvDash P$.
+A formula $P$ is called (logically) invalid or a contradiction, denoted as $\bot$, iff for any interpretation function $\mathcal{I}$, $\mathcal{I}\nvDash P$.
 
 A formula $P$ is called contingent iff it is neither a tautology nor a contradiction.
 
 A formula $P$ is called satisfiable iff it is not a contradiction.
-\sct{First-order logic (FOL), predicate logic, predicate calculus, or quantificational logic}
-\ssc{Syntax}
+\ssc{First-order logic (FOL), predicate logic, predicate calculus, or quantificational logic}
+\sssc{Syntax}
 Given logic symbols,
 \bit
 \item (either one of) the quantifier symbols $\forall$ for universal quantification and $\exists$ for existential quantification,
-\item a set of logical connectives same as propositional logic $\mathcal{O}=\{\uparrow,\implies\}$ with $\uparrow$ denoting NAND and $\implies$ denoting implication for simplicity,
+\item a set of logical connectives $\mathcal{O}=\{\neg,\land,\lor,\implies\}$ with unary negation $\neg$, binary conjunction $\land$, binary disjunction $\lor$, and binary material implication $\implies$, (or any functionally complete set of logical operators in Boolean algebra with related definitions changed accordingly),
 \item a set of punctuation symbols $\mathcal{N}$ containing $(,),,$ and maybe other symbols, which do not carry meaning themselves but to help parse and read the language,
 \item an infinite set of variables $\mathcal{V}$,
 \item an equality symbol $=$ for first-order logic with equality,
 \eit
 and a signature $\sigma=(\mathcal{P},\mathcal{F})$ with the equality symbol $=\in P_2$ for first-order logic with equality, the set of terms $\mathcal{T}$ is defined by:
 \bit
-\item $\mathcal{V}\subseteq\mathcal{T}$,
-\item $F_0\im\mathcal{T}$, and
-\item for all $n\in\bbN$, for all $t\in\mathcal{T}^n$, for all $f\in F_n$, $f(t)\in\mathcal{T}$,
+\item $\mathcal{V}\subseteq\mathcal{T}$, and
+\item for all $n\in\bbN_0$, for all $t\in\mathcal{T}^n$, for all $f\in F_n$, $f(t)\in\mathcal{T}$,
 \eit
 the set of atomic formulas $\mathcal{C}$ is defined as
-\[\mathcal{C}=\bigcup_{n\in\bbN}\{p(t)\mid t\in\mathcal{T}^n\land p\in P_n\},\]
+\[\mathcal{C}=\bigcup_{n\in\bbN_0}\{p(t)\mid t\in\mathcal{T}^n\land p\in P_n\},\]
 and the formal language $\mathcal{L}$ of first-order logic is defined by:
 \bit
 \item $\mathcal{C}\subseteq\mathcal{L}$
-\item $(P\uparrow Q)\in\mathcal{L}$ if $P,Q\in\mathcal{L}$, and
-\item $\forall xP$ and $\exists xP$ are in $\mathcal{L}$ if $P\in\mathcal{L}$ and $x\in\mathcal{V}$,
+\item $\neg P\in\mathcal{L}$ if $P\in\mathcal{L}$,
+\item $(P\land Q)\in\mathcal{L}$ if $P,Q\in\mathcal{L}$,
+\item $(P\lor Q)\in\mathcal{L}$ if $P,Q\in\mathcal{L}$,
+\item $(P\implies Q)\in\mathcal{L}$ if $P,Q\in\mathcal{L}$, and
+\item $\forall xP,\exists xP\in\mathcal{L}$ if $P\in\mathcal{L}$ and $x\in\mathcal{V}$,
 \item nothing else is in $\mathcal{L}$.
 \eit
 Any $w\in\mathcal{L}$ is called a well-formed formula (WFF or wff) or simply formula.
-\ssc{Free and bounded variables}
-A variable in a formula is either free or bounded, which are defined as follows:
+
+A variable in a formula is either free or bounded, which are defined as follows for formulas $P$ and $Q$:
 \bit
 \item A variable in an atomic formula is free.
-\item A variable is free in $P\uparrow Q$ if it is free in formula $P$ or $Q$.
-\item A variable $x$ is free in $\forall yP$ (and/or $\exists yP$) if $x$ is not the same symbol as $y$ and $x$ is free in formula $P$.
+\item A variable is free in $\neg P$ if it is free in formula $P$.
+\item A variable is free in $P\land Q$ if it is free in formula $P$ or $Q$.
+\item A variable is free in $P\lor Q$ if it is free in formula $P$ or $Q$.
+\item A variable is free in $P\implies Q$ if it is free in formula $P$ or $Q$.
+\item A variable $x$ is free in $\forall yP$ and $\exists yP$ if $x$ is not the same symbol as $y$ and $x$ is free in formula $P$.
 \item No other variable in a formula is free.
 \eit
 A formula with no free variable is called a sentence or a closed formula.
-\ssc{Semantics}
-\sssc{Interpretation}
-We define the semantics of a formula $P$ with a structure $\mathcal{A}=(A,\sigma,I)$ of the same signature as the first-order logic with the constraint for first-order logic with equality that
+
+A formula $P$ with free variables $x_1,x_2,\ldots,x_n$ is denoted as $P(x_1,x_2,\ldots,x_n)$.
+\sssc{Semantics}
+For a given first-order logic, its interpretation (or valuation) is defined as $\mathcal{I}=\mathcal{A},s$ with an interpretation (or valuation) structure $\mathcal{A}=(A,\sigma,I)$ of the same signature as the first-order logic with the constraint for first-order logic with equality that
 \[I(=)=\{(a,a)\mid a\in A\}\]
-and a variable assignment function $s$ from the free variables in $P$ to $A$ as either $\mathcal{A},s\vDash P$, read $P$ is true in $\mathcal{A}$ under assignment $s$, or $\mathcal{A},s\nvDash P$, read $P$ is false in $\mathcal{A}$ under assignment $s$, with,
+and a variable assignment function $s$ from the variables $\mathcal{V}$ to $A$.
+
+For any formula $P$, $\mathcal{A},s\vDash P$ denotes that $P$ is true in $\mathcal{A}$ under assignment $s$, and $\mathcal{A},s\nvDash P$, denotes that $P$ is false in $\mathcal{A}$ under assignment $s$.
+
+For a given first-order logic with formal language $\mathcal{L}$ and interpretation $\mathcal{A},s$,
 \bit
-\item For any term $t$, $[t]$ or $[t]_{\mathcal{A},s}$ denotes $t$ with any function symbols $f$ replaced with $I(f)$ and any variable $x$ replaced with $s(x)$,
-\item For any atomic formula $p(t_1,t_2,\ldots,t_n)$ for some predicate symbol $p\in P_n$, $\mathcal{A},s\vDash p(t)$ iff $[t_1],[t_2],\ldots,[t_n]\in I(p)$, and
+\item for any term $t$, $[t]$ or $[t]_{\mathcal{A},s}$ denotes $t$ with any function symbols $f$ replaced with $I(f)$ and any variable $x$ replaced with $s(x)$,
+\item for any atomic formula $p(t_1,t_2,\ldots,t_n)$ for some predicate symbol $p\in P_n$, $\mathcal{A},s\vDash p(t)$ iff $[t_1],[t_2],\ldots,[t_n]\in I(p)$, and
 \item T-schema or truth schema: with $\mathscr{I}$ mapping formula $P$ to 1 if $\mathcal{A},s\vDash P$ and to 0 if $\mathcal{A},s\nvDash P$,
 \bit
-\item For any $P,Q\in\mathcal{L}$, $\mathscr{I}(P\uparrow Q)=\mathscr{I}(P)\uparrow\mathscr{I}(Q)$.
-\item For any $P,Q\in\mathcal{L}$, $\mathscr{I}(P\implies Q)=\mathscr{I}(Q)\uparrow\mathscr{I}(Q)\uparrow\mathscr{I}(P)$.
-\item $\mathcal{A},s\vDash\forall xP$ iff $\forall a\in A$, replacing $x$ with $a$ makes $\mathcal{A},s\vDash P$, that is, $\forall xP=\bigwedge_{a\in A}P[x\mapsto a]$,
+\item for any $P\in\mathcal{L}$, $\mathscr{I}(\neg P)=\neg\mathscr{I}(P)$,
+\item for any $P,Q\in\mathcal{L}$, $\mathscr{I}(P\land Q)=\mathscr{I}(P)\land\mathscr{I}(Q)$,
+\item for any $P,Q\in\mathcal{L}$, $\mathscr{I}(P\lor Q)=\mathscr{I}(P)\lor\mathscr{I}(Q)$,
+\item for any $P,Q\in\mathcal{L}$, $\mathscr{I}(P\implies Q)=\mathscr{I}(P)\implies\mathscr{I}(Q)$,
+\item $\mathcal{A},s\vDash\forall xP$ iff $\forall a\in A$, replacing $x$ with $a$ makes $\mathcal{A},s\vDash P$, that is, $\forall xP=\bigwedge_{a\in A}P[x\mapsto a]$, and
 \item $\mathcal{A},s\vDash\exists xP$ iff $\exists a\in A$, replacing $x$ with $a$ makes $\mathcal{A},s\vDash P$, that is, $\exists xP=\bigvee_{a\in A}P[x\mapsto a]$.
 \eit
-For sentences, $s$ can be skipped since there is no free variable and $s$ is irrelevant. For a sentence $P$, $\mathcal{A}\vDash P$ is called $\mathcal{A}$ satisfies $P$.
-\sssc{Logical consequence}
-Given two sentences $S,T$, $S\vDash T$ means for any structure $\mathcal{A}$, if $\mathcal{A}\vDash S$, then $\mathcal{A}\vDash T$, called $T$ is a logical consequence of $S$.
-\sssc{Classification of sentences}
-A sentence $P$ is called (logically) valid or a tautology iff for any interpretation structure $\mathcal{A}$, $\mathcal{A}\vDash P$.
+For sentences, $\mathcal{A},s$ can be denoted as $\mathcal{A}$ since there is no free variable and thus $s$ is irrelevant.
+\sssc{Semantic consequence}
+Given formulas $S_1,S_2,\ldots S_n,T$, $S_1,S_2,\ldots S_n\vDash T$, called that $T$ is a semantic consequence of $S_1,S_2,\ldots S_n$, means that for any interpretation $\mathcal{A},s$, if $\mathcal{A},s\vDash S_1,\mathcal{A},s\vDash S_2,\ldots,\mathcal{A},s\vDash S_n$, then $\mathcal{A},s\vDash T$.
+\sssc{Equivalence of syntactic and semantic consequences}
+For any formulas $S_1,S_2,\ldots S_n,T$,
+\[S_1,S_2,\ldots S_n\vdash T\iff S_1,S_2,\ldots S_n\vDash T.\]
+Thus syntactic and semantic consequences are called (logical) consequences.
 
-A sentence $P$ is called (logically) invalid or a contradiction iff for any interpretation structure $\mathcal{A}$, $\mathcal{A}\nvDash P$.
+The $\Leftarrow$ direction is the Gödel's completeness theorem and the $\Rightarrow direction is from the Henkin's model existence theorem.
+\sssc{Classification of formulas}
+A formula $P$ is called (logically) valid or a tautology, denoted as $\top$, iff for any interpretation $\mathcal{A},s$, $\mathcal{A},s\vDash P$.
 
-A sentence $P$ is called contingent iff it is neither a tautology nor a contradiction.
+A formula $P$ is called (logically) invalid or a contradiction, denoted as $\bot$, iff for any interpretation $\mathcal{A},s$, $\mathcal{A},s\nvDash P$.
 
-A sentence is satisfiable iff it is not a contradiction.
-\sct{Deductive system, proof system, formal system, or formal proof system}
-\ssc{Deductive system, proof system, formal system, or formal proof system}
-A deductive system of a formal language $\mathcal{L}$ consists of
+A formula $P$ is called contingent iff it is neither a tautology nor a contradiction.
+
+A formula is satisfiable iff it is not a contradiction.
+\ssc{(Formal) (Deductive) Theory}
+\sssc{(Formal) (deductive) theory}
+A (formal) (deductive) theory $T$ over a formal language $\mathcal{L}$ is a set of formulas in $\mathcal{L}$ that is closed under $\vdash$. Each $P\in T$ is called a theorem.
+
+When the context is clear, the deductive system that $\vdash$ all theorems in a theory $T$ and $T$ are usually not distinguished.
+\sssc{(Syntactical) consistency}
+A theory $T$ is (syntactically) consistent iff there is no $S_1,S_2,\ldots S_n\in T$ and contradiction $P$ such that $S_1,S_2,\ldots S_n\vdash P$.
+\sssc{Satisfiability}
+A theory $T$ is satisfiable iff there exists an interpretation $\mathcal{I}$ such that for every $P\in T$, $\mathcal{I}\vDash P$, and $T$ is said to be satisfied by $\mathcal{I}$.
+\sssc{Equivalence of consistency and satisfiability}
+A theory over proportional logic or first-order logic language is consistent iff it is satisfiable.
+
+The $\Leftarrow$ direction is from the Gödel's completeness theorem and the $\Rightarrow direction is the Henkin's model existence theorem.
+\sssc{Complete (consistent) theory}
+A complete (consistent) theory $T$ is a consistent theory such that for every formula $P$ in its language, either $T\vdash P$ or $T\cup\{P\}$ is inconsistent.
+\sssc{Subtheory}
+If a theory $S$ and a theory $T$ is such that $S\subseteq T$, then $S$ is called a subtheory of $T$, $T$ is called a supertheory or an extension of $S$.
+\sssc{Effectively axiomatizable, computably axiomatizable, or recursively axiomatizable}
+A theory $T$ is effectively axiomatizable, computably axiomatizable, or recursively axiomatizable if there exists a recursively enumerable deductive system such that $T=P\mid\vdash P$.
+\ssc{First-order theory}
+\sssc{First-order theory}
+A (formal) (deductive) first-order theory $T$ over a formal language $\mathcal{L}$ is a set of sentences in $\mathcal{L}$ that is closed under $\vdash$.
+\sssc{First-order theory with identity}
+A first-order theory is with identiy if its language has the equality symbol $=$, and the set of theorems of the theory contains all applications of the following axiom schemas:
 \bit
-\item axioms: formulas in $\mathcal{L}$ that are assumed to be derived,
-\item axiom schemas: expressions with schema variables that any expression obtained by replacing schema variables with arbitrary formulas in $\mathcavl{L}$ is assumed to be derived, and
-\item rules of inference (Hilbert style): expression in the form $\frac{P_1,P_2,\ldots,P_n}{Q}$ for $P_1,P_2,\ldots,P_n,Q\in\mathcal{L}$ meaning that $Q$ is derived if $P_1,P_2,\ldots,P_n$ are all derived. Other styles exist and have the same expressive power as Hilbert style for propositional logic and predicate logic.
+\item Reflexivity: For any variable $x$, $x=x$.
+\item Leibniz's law or substitution: For any $n\in\bbN_0$, for any formula with any $n$ free variables $x_1,x_2,\ldots,x_n$, any $i\in\bbN\land i\leq n$, and any variable $x$,
+\[(x_i=x)\implies(P(x_1,x_2,\ldots,x_i,\ldots,x_n)\implies P(x_1,x_2,\ldots,x_{i-1},x,x_{i+1},\ldots,x_n)).\]
 \eit
-For every $P\in\mathcal{L}$, if $P$ is derived, we write $\vdash P$.
-\ssc{Soundness}
-A deductive system or proof system is sound if every formula that can be derived from the system is a tautology.
-\ssc{Semantical completeness}
-A deductive system or proof system is semantically complete if every tautology can be derived from the system.
+\sssc{(Complete) theory of structure}
+The (complete) theory of a structure $\mathcal{A}$ is all formulas that are satisfied by $\mathcal{A}$, denoted as $\operatorname{Th}(\mathcal{A})$.
 
-
+The theory of a collection $K$ of structures is all formulas that are satisfied by all $k\in K$, denoted as $\operatorname{Th}(K)$.
+\sssc{Elementary class or axiomatizable class}
+The elementary class or axiomatizable class of a first-order theory $T$ is the collection of all structures that satisfies $T$.
+\ssc{Gödel's incompleteness theorems}
+\sssc{Gödel's first incompleteness theorem}
+Any recursively enumerable consistent deductive system that can interprets the Robinson arithmetic is syntactically incomplete.
+\sssc{Gödel's second incompleteness theorem}
+Any recursively enumerable consistent deductive system that can interprets the Robinson arithmetic can not prove its consistency.
+\end{document}
