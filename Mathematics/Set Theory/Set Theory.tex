@@ -1,0 +1,203 @@
+\documentclass[a4paper,12pt]{article}
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{3}
+\input{/usr/share/LaTeX-ToolKit/template.tex}
+\begin{document}
+\title{Set Theory}
+\author{沈威宇}
+\date{\temtoday}
+\titletocdoc
+\sct{Set Theory}
+\ssc{Zermelo–Fraenkel Set Theory with the Axiom of Choice}
+\sssc{Introduction}
+Zermelo–Fraenkel set theory (ZF) is a first-order formal thoery in which every variable is called a set defined by the proof system with axiom of extensionality, axiom of regularity, axiom schema of specification, axiom of paring, axiom of union, axiom schema of replacement, axiom of infinity, axiom of power set, and typical rules of inference of first-order logic.
+
+Zermelo–Fraenkel set theory with the axiom of choice (ZFC) is a first-order formal thoery defined by the proof system with axiom of extensionality, axiom of regularity, axiom schema of specification, axiom of paring, axiom of union, axiom schema of replacement, axiom of infinity, axiom of power set, axiom of choice, and typical rules of inference of first-order logic.
+
+These theories have been the standard way to provide rigorous foundations for all branches of mathematics since the first half of the 20th century. Derivable in ZF $\vdash_{ZF}$ and derivable in ZFC $\vdash_{ZFC}$ are denoted $\vdash$ when the context is clear.
+\sssc{Axiom of extensionality}
+\[\forall x\forall y\qty[\forall z(z\in x\iff z\in y)\implies x=y].\]
+\sssc{Axiom of regularity or axiom of foundation}
+\[\forall x\qty[(\exists a(a\in x))\implies\exists y\qty(y\in x\land\neg\exists z(z\in y\land z\in x))].\]
+\sssc{Axiom schema of specification, separation, or restricted comprehension}
+Let $\varphi$ be any formula in the language of ZFC with free variables $x,z,w_1,w_2,\ldots,w_n$. Then:
+\[\forall z\forall w_1\forall w_2\ldots\forall w_n\exists y\forall x\qty[x\in y\iff\qty(x\in z\land\varphi\qty(x,z,w_1,w_2,\ldots,w_n))].\]
+This axiom can be applied to obtain the axiom of empty set:
+\[\exists x\forall y(y\notin x),\]
+and empty set, denoted as $\varnothing$, is defined as the $x$ above and can be constructed as
+\[\varnothing=\{u\in w\mid(u\in u)\land\neg(u\in u)\}.\]
+\sssc{Axiom of paring}
+\[\forall x\forall y\exists z(x\in z\land y\in z).\]
+\sssc{Axiom of union}
+\[\forall w\exists x\forall y\forall z\qty[(z\in y\land y\in w)\implies z\in x],\]
+called the weak axiom of union, and the strong axiom of union:
+\[\forall w\exists X\forall y\forall z\qty[(z\in y\land y\in w)\iff z\in X]\]
+can be obtained by applying the axiom schema of specification:
+\[X=\{z\in x\mid\exists y(z\in y\land y\in w)\},\]
+and the set $\bigcup_{u\in w}u$ is defined and constructed as the $X$ above.
+\sssc{Axiom schema of replacement}
+Let $\varphi$ be any formula in the language of ZFC with free variables $x,y,z,w_1,w_2,\ldots,w_n$. Then:
+\[\forall z\forall w_1\forall w_2\ldots\forall w_n\qty[\forall x\qty(x\in z\implies\exists y\qty(\varphi\qty(x,y,z,w_1,w_2,\ldots,w_n)\land\forall v\qty(\varphi\qty(x,v,z,w_1,w_2,\ldots,w_n)\implies v=y)))\implies\exists u\forall x\qty(x\in u\implies\exists y(y\in u\land\varphi\qty(x,y,z,w_1,w_2,\ldots,w_n))],\]
+called the weak axiom schema of replacement or axiom schema of collection, and the strong axiom schema of replacement:
+\[\forall z\forall w_1\forall w_2\ldots\forall w_n\qty[\forall x\qty(x\in z\implies\exists y\qty(\varphi\qty(x,y,z,w_1,w_2,\ldots,w_n)\land\forall v\qty(\varphi\qty(x,v,z,w_1,w_2,\ldots,w_n)\implies v=y)))\implies\exists U\forall x\qty(x\in U\iff\exists y(y\in U\land\varphi\qty(x,y,z,w_1,w_2,\ldots,w_n))],\]
+can be obtained by applying the axiom schema of specification:
+\[U=\{x\in u\mid\exists y(y\in U\land\varphi\qty(x,y,z,w_1,w_2,\ldots,w_n))\}.\]
+\sssc{Axiom of infinity}
+\[\exists x\qty[\exists w\qty(\forall z\neg(z\in w)\land w\in x)\land\forall y\qty(y\in x\implies S(y)\in x)],\]
+where $S(y)$ denotes the union of $y$ and $\{y\}$, which exists uniquely by axiom of pairing and strong axiom of union, and by axiom of empty set, equivalently
+\[\exists x\qty[\varnothing\in x\land\forall y\qty(y\in x\implies S(y)\in x)].\]
+The von Neumann ordinal $\omega$, or $\mathbb{N}_0$ with $0=\varnothing$ and successor function $S$, is defined as the minimal $x$, which exists by axiom schema of specification.
+\sssc{Axiom of power set}
+\[\forall x\exists y\forall z\qty(z\in y\iff z\subseteq x).\]
+The power set of $x$ is defined as $y$.
+\sssc{Axiom of choice (AC or AoC) or axiom of well-ordering}
+\[\forall x\qty(\exists e\qty(e\in x\land\neg\exists y(y\in e))\lor\exists a\exists b\exists c\qty(a\in x\land b\in x\land c\in a\land c\in b\land\neg(a=b))\lor\exists c\forall e\qty(e\in x\implies\exists a\qty(a\in e\land a\in c\land\forall b\qty((b\in e\land b\in c)\implies a=b)))),\]
+that is, for any set $x$ of pairwise disjoint nonempty sets, there exists a set $c$ such that its intersection any element of $x$ contains exactly one element, that is, for any set $x$ of pairwise disjoint nonempty sets, there exists a choice function (also called selector or selection) $f$ on $x$, i.e., a function that maps each element $a$ of $x$ to an element of $a$.
+\sssc{Singleton}
+A set $x$ such that
+\[\forall a\forall b\qty((a\in x\land b\in x)\implies a=b)\]
+is called a singleton.
+\sssc{Russell's paradox or Russell's antinomy}
+ZF $\cup\{\exists R\forall x(x\in R\iff x\notin x)\}$ is inconsistent and proves $R\in R\iff R\not\in R$.
+\sssc{Non-existence of universal set}
+ZF $\cup\{\exists U\forall x(x\in U)\}$ is inconsistent and with $R=\{x\in U\mid x\notin x\}$, which is a set by axiom schema of specification, proves $R\in R\iff R\not\in R$.
+\ssc{Notations and properties}
+\sssc{Collection}
+A collection or a naive set, sometimes informally called a set or a family, is a collection of different objects. Theses things are called elements or members.
+
+If $a$ is an element of a collection $S$, we say that $a$ belongs to $S$ or is in $S$, denoted as $a\in S$; if $b$ is not an element of a collection $S$, we say that $b$ does not belong to $S$ or is not in $S$, denoted as $b\notin S$.
+\sssc{Roster notation or enumeration notation} Specify a collection by listing its elements between braces $\{\,\}$, separated by commas $,$, e.g. $\{\,\}$, $\{x\}$, and $\{x,y\}$. When there is a clear pattern for generating all elements, one can use ellipses $\ldots$ for abbreviating the notation.
+\sssc{Builder notation}
+Specify a collection as being the collection of all objects that satisfy some logical formula. More precisely, if $P(x)$ is a logical formula depending on a variable ⁠$x$, which evaluates to true or false depending on the value of $x$, then
+\[\{x\mid P(x)\}\]
+or
+\[\{x\colon P(x)\}\]
+denotes the collection of all $x$ of which $P(x)$ is true, in which the vertical bar $\mid$ or the colon $\colon$ is read as "such that", and the the whole formula can be read as "the collection of all $x$ such that $P(x)$ is true".
+\sssc{Class}
+A collection built with builder notation is called a class.
+
+A class that is a set in ZF is called a small class.
+
+A class that is not a set in ZF is called a proper class.
+\sssc{Subset}
+\[A\subseteq B\iff (x\in A\implies x\in B)\]
+\sssc{Proper subset}
+\[A\subset B\iff (A\subseteq B\land A\neq B)\]
+\sssc{Superset}
+\[B\supseteq A\iff (x\in A\implies x\in B)\]
+\sssc{Proper superset}
+\[A\supset B\iff (A\supseteq B\land A\neq B)\]
+\sssc{Intersection}
+\[A\cap B\coloneq\{x\mid x\in A \land x\in B\}\]
+\[\bigcap_{i=1}^n A_i\coloneq\left\{x\middle | \bigwedge_{i=1}^n x\in A_i\right\}\]
+\sssc{Union}
+\[A\cup B\coloneq\{x\mid x\in A \lor x\in B\}\]
+\[\bigcup_{i=1}^n A_i\coloneq\left\{x\middle | \bigvee_{i=1}^n x\in A_i\right\}\]
+\sssc{Disjoint sets}
+Two sets $A,B$ are disjoint iff $A\cap B=\varnothing$.
+\sssc{Pairwise disjoint sets}
+Sets in a set $x$ of sets are pairwise disjoint iff
+\[\exists a\exists b\exists c\qty(a\in x\land b\in x\land c\in a\land c\in b\land\neg(a=b)).\]
+\sssc{Properties of intersection and union}
+\begin{itemize}
+\item Intersection has commutativity.
+\item Union has commutativity.
+\item Intersection has associativity and distributivity over intersection.
+\item Union has associativity and distributivity over union.
+\item Intersection has distributivity over union.
+\item Union has distributivity over intersection.
+\end{itemize}
+\sssc{(Relative) complement}
+\[A\setminus B\coloneq\{x\mid x\in A \land x\notin B\}\]
+\sssc{Power set}
+\[2^A=\mathcal{P}(A)\coloneq\{B\mid B\subseteq A\}\]
+\sssc{Cartesian product}
+\[\prod_{i=1}^nA_i\coloneq\{(a_1,a_2,\ldots a_n)\mid a_i\in A_i\},\]
+in which the elements are called ordered $n$-tuple, in which a $2$-tuple is also called a pair, a $3$-tuple is also called a triple, a $4$-tuple is also called a quadruple, a $5$-tuple is also called a quintuple, a $6$-tuple is also called a sextuple, a $7$-tuple is also called a septuple, an $8$-tuple is also called an octuple, a $9$-tuple is also called a nonuple, and a $10$-tuple is also called a decuple.
+\sssc{(Canonical) projection (map)s}
+The $k$-th projection (map) for a Cartesian product of $n$ sets:
+\[\prod_{i=1}^nX_i\]
+is the function $\pi_k$
+\[\pi_k\colon\prod_{i=1}^nX_i\to X_k;\;\pi_k(x_1,x_2,\ldots x_n)=x_k.\]
+\sssc{Nonnegative integer power}
+For any $n\in\bbN$ and any collection $A$,
+\[A^n\coloneq\prod_{i=1}^nA.\]
+For any collection $A$,
+\[A^0\coloneq\{\varnothing\},\]
+and thus $|A^0|=1$.
+\sssc{Kernel of collection of collections}
+The kernel of a collection $\mathcal{B}$ of collections is defined to be:
+\[\ker(\mathcal {B})\coloneq\bigcap_{B\in\mathcal{B}}B.\]
+\sssc{Cover or covering}
+A cover or covering $C$ of a set $X$ is a collection of subsets of $X$ such that:
+\[\bigcup_{U\in C}U\supseteq X.\]
+We say $C$ covers $X$.
+
+A subset of a cover $C$ of $X$ that is also a cover of $X$ is a subcover of $C$.
+\sssc{Almost all}
+If $X$ is a set, "almost all elements of $X$" means "all elements of $X$ but those in a negligible subset of $X$". The meaning of "negligible" depends on the mathematical context; for instance, it can mean finite, countable, or null.
+\sssc{Universe}
+When the sets under discussion are all subsets of a given set, the given set is called the universe, denoted as $U$, and for any set $A\subseteq U$, $U\setminus A$ is denoted as $A'$, $\overline{A}$, or $A^C$, called complement.
+
+\tb{Complement laws:}
+\[(A')'=A.\]
+\[A\setminus B = A\cap B'.\]
+\[A\subseteq B \iff B' \subseteq A'.\]
+\tb{De Morgan's law:}
+\[(A\cup B)'=A'\cap B'.\]
+\[(A\cap B)'=A'\cup B'.\]
+\ssc{Ordinal number or ordinal}
+\sssc{Ordinal number or ordinal}
+The ordinal number or ordinal is a measurement of the order of an element of a strict well ordered set.
+
+The ordinal numbers is defined to ordered by inclusion to form a strictly well ordered set; the ordinal $0$ is defined as $\varnothing$; and each ordinal $>0$ is defined as the set of all smaller ordinals, that is, for an ordinal $a>0$:
+\[a=\{b\mid b\tx{\ is an ordinal and\ }b<a\}.\]
+This definition is known as the von Neumann definition of ordinals.
+
+The ordinal number $\omega$, called the first infinite ordinal, is defined to be $\mathbb{N}_0$ in von Neumann definition of ordinals.
+\sssc{Successor ordinal}
+If an ordinal has a maximum $a$, then it is the next ordinal after $a$, then it is called a successor ordinal (of $a$), written $a+1$.
+\sssc{Limit ordinal}
+A nonzero ordinal that is not a successor is called a limit ordinal.
+\ssc{Cardinality and Cardinal number or cardinal}
+\sssc{Cardinality and Cardinal number or cardinal}
+The cardinal number or cardinal is a measurement of the cardinality (size) of a set $A$, denoted as $|A|$ or $n(A)$.
+
+Two sets are said to be equinumerous or have the same cardinality if there exists a bijection between them.
+
+The cardinality of a finite set is the number of its elements. A cardinal that is not finite is called an infinite cardinal.
+
+Assuming the axiom of choice, the cardinality of a set $X$ is defined to be the least ordinal number $\alpha$ such that there is a bijection between $X$ and $\alpha$. This definition is known as the von Neumann cardinal assignment.
+\sssc{Aleph numbers}
+Aleph numbers, a system to describe infinite cardinals, denoted as $\aleph_0, \aleph_1, \aleph_2, \ldots \aleph_\omega, \aleph_{\omega+1}, \ldots$, in which the subscripts are ordinal numbers, are defined with:
+\bit
+\item $\aleph_0$ is defined as $\omega$;
+\item for any successor ordinal $n$, $\aleph_n$ is defined inductively as:
+\[\aleph_n=\min\{b\mid b\tx{\ is an cardinal and\ }b>\aleph_{n-1}\};\]
+\item for any limit ordinal $\lambda$, $\aleph_{\lambda}$ is defined as:
+\[\aleph_{\lambda}=\sup\{\aleph_{\alpha}\mid\alpha<\lambda}.\]
+\eit
+\sssc{Beth numbers}
+Beth numbers, a system to describe infinite cardinals, denoted as $\beth_0, \beth_1, \beth_2, \ldots \beth_\omega, \beth_{\omega+1}, \ldots$, in which the subscripts are ordinal numbers, are defined with:
+\bit
+\item $\beth_0$ is defined as $\aleph_0$;
+\item for any successor ordinal $n$, $\beth_n$ is defined inductively as:
+\[\beth_n=2^{\aleph_{n-1}};\]
+\item for any limit ordinal $\lambda$, $\aleph_{\lambda}$ is defined as:
+\[\aleph_{\lambda}=\sup\{\beth_{\alpha}\mid\alpha<\lambda}.\]
+\eit
+\sssc{Countable}
+A set is countable if either it is finite or it can be made in one to one correspondence with the set of natural numbers.
+\sssc{Countable infinity}
+The cardinality of $\mathbb{N}_0$, called the cardinality of countable infinity, is $\aleph_0$. A set with the same cardinality of $\mathbb{N}$ is called to be countable infinite.
+\sssc{Uncountable infinity}
+The cardinality of $\mathbb{R}$, called the cardinality of continuity, is $2^{\aleph_0}=\beth_1$, also denoted as $\mathfrak{c}$. A set with the same cardinality of $\mathbb{R}$ is called to be uncountable infinite.
+\sssc{Continuum hypothesis (CH)}
+The continuum hypothesis (CH) states that, there is no set whose cardinality is strictly between that of the integers and the real numbers, that is, $2^{\aleph_0}=\aleph_1$.
+
+CH is independent from ZFC, that is, proving or disproving the CH within ZFC is impossible.
+\sssc{Generalized continuum hypothesis (GCH) or Cantor's aleph hypothesis}
+The generalized continuum hypothesis (GCH) or Cantor's aleph hypothesis states that, if a set's cardinality lies between that of an infinite set $S$ and that of the power set $P(S)$ of $S$, then it has the same cardinality as either $S$ or $P(s)$, that is, for any infinite cardinal $\lambda$, there is no cardinal $\kappa$ such that $\lambda <\kappa <2^{\lambda }$, that is, $\aleph _{\alpha +1}=2^{\aleph _{\alpha }}$ for every ordinal $\alpha$.
+
+GCH is independent from ZFC, that is, proving or disproving the GCH within ZFC is impossible.
+\end{document}

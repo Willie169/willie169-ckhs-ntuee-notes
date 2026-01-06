@@ -1,0 +1,278 @@
+\documentclass[a4paper,12pt]{article}
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{3}
+\input{/usr/share/LaTeX-ToolKit/template.tex}
+\begin{document}
+\title{Number Systems}
+\author{沈威宇}
+\date{\temtoday}
+\titletocdoc
+\sct{Number Systems}
+\ssc{Numeral system}
+A numeral system is a set of symbols, called numerals, and the rules for using them to represent numbers. Numerals can be used for counting (as with cardinal numbers), for ordering (as with ordinal numbers), labels (as with telephone numbers), and for codes (as with ISBNs). In common usage, a numeral is not clearly distinguished from the number that it represents.
+\ssc{Number system}
+A number system is a theory, proof system, or interpretation structure whose variables are called numbers.
+\ssc{Number set}
+A number set is a set of number.
+\ssc{Natural numbers (自然數), counting numbers, or whole numbers}
+The positive integer system (aka the positive integers) $\mathbb{N}^*$, $\mathbb{N}_1$, $\mathbb{N}^+$, or $\bbZ^+$ is, 1, 2, 3, and so on
+
+The non-negative integer system (aka the non-negative integers) $\mathbb{N}^0$ or $\mathbb{N}_0$ is, 0, 1, 2, 3, and so on.
+
+The natural/counting/whole number system (aka the naturals) $\mathbb{N}$ is defined as either the positive integer system or the set of non-negative integer system; if not specified, $\bbN=\bbN_1$ is used.
+\sssc{Second-order Peano Axioms (皮亞諾公理) (PA$_2$), Dedekind–Peano axioms, or Peano postulates (皮亞諾公設)}
+Second-order Peano Axioms (aka Dedekind–Peano axioms or Peano postulates) (PA$_2$) is a formal construction of the natural numbers. Below, we define $\bbN_0$; the definition of $\bbN_1$ can be constructed by simply replace $0$ with $1$ in the following axioms.
+\bit
+\item $0$ is a natural number.
+\item Every natural number $n$ has a successor $S(n)$ which is also a natural number, that is, the natural numbers are closed under $S$.
+\item $0$ is not a successor of any natural numbers, that is,
+\[\forall n\in\bbN_0\colon S(n)\neq 0.\]
+\item $S$ is an injection, that is,
+\[\forall m,n\in\bbN_0\colon S(m)=S(n)\implies m=n\]
+\eit
+\item The (second-order) induction axiom: If $K$ is a set such that, $0$ is in $K$, and, for every natural number $n$, $n\in K\implies S(n)\in K$, then $\bbN_0\subseteq K$.
+\eit
+\sssc{Peano Arithmetic (皮亞諾算術)}
+The axiomatization of arithmetic provided by Peano axioms.
+\bit
+\item \tb{Addition}: Addition is a function $\bbN_0^{\pht{0}2}\to\bbN_0$ defined recursively as
+\[a+0=a,\]
+\[a+S(b)=S(a+b).\]
+\item \tb{Multiplication}: Multiplication is a function $\bbN_0^{\pht{0}2}\to\bbN_0$ defined given addition recursively as
+\[a\cdot 0=0,\]
+\[a\cdot S(b)=a+(a\cdot b).\]
+\item \tb{Preservation of order under addition and multiplication}: $\mathbb{N}$ is a totally ordered set, that is, it is equipped with a transitive relation $\leq$ that is strongly connected and antisymmetric.
+\bit
+\item Preservation of order under addition:
+\[\forall x,y,z\in\bbN_0\colon x\leq y\implies x+z\leq y+z.\]
+\item Preservation of order under multiplication:
+\[\forall x,y\in\bbN_0\colon 0\leq x\land 0\leq y\implies 0\leq xy.\]
+\eit
+\item \tb{Strong order}: The strong order $<$ over $\bbN_0$ is defined as:
+\[\forall x,y\in\bbN_0\colon x<y\iff\qty(x\leq y\land x\neq y).\]
+\eit
+\sssc{First-order Peano Axioms (PA)}
+A weaker first-order formal construction of $\bbN_0$ can be obtained by explicitly adding the addition and multiplication operation and replacing the second-order induction axiom with a first-order axiom schema, called first-order Peano Axioms (PA).
+\bit
+\item $0$ is a natural number.
+\item Every natural number $n$ has a successor $S(n)$ which is also a natural number, that is, the natural numbers are closed under $S$.
+\item $0$ is not a successor of any natural numbers, that is,
+\[\forall n\in\bbN_0\colon S(n)\neq 0.\]
+\item $S$ is an injection, that is,
+\[\forall m,n\in\bbN_0\colon S(m)=S(n)\implies m=n\]
+\item \tb{Addition}: Addition is a function $\bbN_0^{\pht{0}2}\to\bbN_0$ defined recursively as
+\[a+0=a,\]
+\[a+S(b)=S(a+b).\]
+\item \tb{Multiplication}: Multiplication is a function $\bbN_0^{\pht{0}2}\to\bbN_0$ defined given addition recursively as
+\[a\cdot 0=0,\]
+\[a\cdot S(b)=a+(a\cdot b).\]
+\item \tb{Preservation of order under addition and multiplication}: $\mathbb{N}$ is a totally ordered set, that is, it is equipped with a transitive relation $\leq$ that is strongly connected and antisymmetric.
+\bit
+\item Preservation of order under addition:
+\[\forall x,y,z\in\bbN_0\colon x\leq y\implies x+z\leq y+z.\]
+\item Preservation of order under multiplication:
+\[\forall x,y\in\bbN_0\colon 0\leq x\land 0\leq y\implies 0\leq xy.\]
+\eit
+\item \tb{The first-order induction axiom (schema)}: For any formula $\varphi\qty(x,\bar{y})$ where $\bar{y}$ stands for $y_1,y_2,\ldots,y_k$ in the language of Peano arithmetic (i.e. addition and multiplication),
+\[\forall\bar{y}\colon\qty(\varphi\qty(0,\bar{y})\land\forall x\colon\varphi\qty(x,\bar{y})\implies\varphi\qty(S(x),\bar{y}))\implies\forall x\colon\varphi\qty(x,\bar{y})).\]
+\eit
+\ssc{Theories Strictly Weaker than PA}
+\sssc{PA$^-$}
+PA$^-$ is PA minus the induction axiom.
+\sssc{Robinson Arithmetic (Q)}
+Robinson Arithmetic (Q) is a first-order theory that is strictly weaker than PA$^-$ in the language $L=\{0,S,+,\cdot\}$, where $0$ is a constant, $S(x)$ denotes successor of $x$, $x+y$ denotes addition, and $x\cdot y$ denotes multiplication. Its axioms are:
+\[S(x)\neq 0.\]
+\[S(x)=S(y)\implies x=y.\]
+\[y=0\lor\exists x\colon S(x)=y.\]
+\[x+0=x.\]
+\[x+S(y)=S(x+y).\]
+\[x\cdot 0=0.\]
+\[x\cdot S(y)=x\cdot y+x.\]
+\ssc{Integers (整數)}
+The integer system (aka the integers) $\mathbb{Z}$ is an ordered abelian group under addition and $\leq$.
+\sssc{Construction as equivalence classes of ordered pairs of natural numbers}
+Below, we will construct the integers as the equivalence classes of ordered pairs of $\bbN_0$.
+\bit
+\item \tb{Equivalence relation}: Define an equivalence relation $\sim$ on $\bbN_0^{\pht{0}2}$ as
+\[\forall(a,b),(c,d)\in\bbN_0^{\pht{0}2}\colon(a,b)\sim(c,d)\iff a+d=b+c.\]
+An equivalence class of $(a,b)$ is
+\[[(a,b)]=\qty\{(c,d)\in\bbN_0^{\pht{0}2}\middle|(a,b)\sim(c,d)\}.\]
+The integers $\bbZ$ is defined as the quotient set of $\bbN_0^{\pht{0}2}$ by the equivalence relation $\sim$.
+\item \tb{Total order}: Total order $\leq$ over $\bbZ$ is defined given order $\leq$ over $\bbN_0$ as:
+\[[(a,b)]\leq[(c,d)]\iff a+d\leq b+c.\]
+\item \tb{Addition}: Addition is a function $\bbZ^2\to\bbZ$ defined as
+\[[(a,b)]+[(c,d)]\coloneq[(a+c,b+d)].\]
+\item \tb{Subtraction}: Subtraction is a function $\bbZ^2\to\bbZ$ defined as:
+\[[(a,b)]-[(c,d)]\coloneq[(a+d,b+c)].\]
+\item \tb{Negation or additive inverse}: Negation (or additive inverse) is a function $\bbZ\to\bbZ$ defined as
+\[-[(a,b)]\coloneq[(b,a)].\]
+\item \tb{Absolute value}: Absolute value is a function $\bbZ\to\bbZ$ defined as
+\[\abs{[(a,b)]}\coloneq\begin{cases}[(a,b)],\quad&a\geq [(0,0)]\\[(b,a)],\quad&a\leq [(0,0)]\end{cases}.\]
+\item \tb{Multiplication}: Multiplication is a function $\bbZ^2\to\bbZ$ defined as
+\[[(a,b)]\cdot [(c,d)]\coloneq[(ac+bd,ad+bc)].\]
+\item \tb{Notation}: $[a,b]\in\bbZ$ is denoted as
+\[\begin{cases}
+a-b,\quad&b\leq a\\
+-(b-a),\quad&a<b
+\end{cases}.\]
+\eit
+\ssc{Rational numbers (有理數)}
+Tthe rational number system (aka the rationals or the rational numbers) $\mathbb{Q}$ is an ordered field under addition, multiplication, and $\leq$.
+\sssc{Construction as equivalence classes of ordered pairs of integers}
+Below, we will construct the rationals as the equivalence classes of ordered pairs of integers.
+\bit
+\item \tb{Equivalence relation}: Define an equivalence relation $\sim$ on $\bbZ\times\qty(\bbZ\setminus\{0\})$ as
+\[\forall(a,b),(c,d)\in\bbZ\times\qty(\bbZ\setminus\{0\})\colon(a,b)\sim(c,d)\iff ad=bc.\]
+An equivalence class of $(a,b)$ is
+\[[(a,b)]=\qty\{(c,d)\in\bbZ\times\qty(\bbZ\setminus\{0\})\middle|(a,b)\sim(c,d)\}.\]
+The rationals $\bbQ$ is defined as the quotient set of $\bbZ\times\qty(\bbZ\setminus\{0\})$ by the equivalence relation $\sim$.
+\item \tb{Total order}: Total order $\leq$ over $\bbQ$ is defined given order $\leq$ over $\bbZ$ as:
+\[[(a,b)]\leq[(c,d)]\iff ad\leq bc.\]
+\item \tb{Addition}: Addition is a function $\bbQ^2\to\bbQ$ defined as
+\[[(a,b)]+[(c,d)]\coloneq[(ad+bc,bd)].\]
+\item \tb{Subtraction}: Subtraction is a function $\bbQ^2\to\bbQ$ defined as:
+\[[(a,b)]-[(c,d)]\coloneq[(ad-bc,bd)].\]
+\item \tb{Negation or additive inverse}: Negation (or additive inverse) is a function $\bbQ\to\bbQ$ defined as
+\[-[(a,b)]\coloneq[(-a,b)].\]
+\item \tb{Absolute value}: Absolute value is a function $\bbQ\to\bbQ$ defined as
+\[\abs{[(a,b)]}\coloneq\begin{cases}[(a,b)],\quad&a\geq [(0,1)]\\[(-a,b)],\quad&a\leq [(0,1)]\end{cases}.\]
+\item \tb{Multiplication}: Multiplication is a function $\bbQ^2\to\bbQ$ defined as
+\[[(a,b)]\cdot [(c,d)]\coloneq[(ac,bd)].\]
+\item \tb{Division}: Division is a function $\bbQ\times\bbQ\setminus\{[0,1]\}\to\bbQ$ defined as
+\[[(a,b)]/[(c,d)]\coloneq[(ad,bc)].\]
+\item \tb{Notation}: $[a,b]\in\bbQ$ is denoted as $a/b$.
+\eit
+\ssc{Real numbers (實數)}
+The real number system (aka the reals, the real numbers, or the real number line) $\mathbb{R}$ is a Dedekind-complete ordered field under addition, multiplication, and $<$. Below, we will list some constructions of it.
+\sssc{Construction as equivalence classes of Cauchy sequences}
+Below, we will construct the reals as the equivalence classes of Cauchy sequences of the rationals.
+\bit
+\item\tb{Cauchy sequence}: A Cauchy sequence $(x_n)$ of the rational numbers is a sequence of the rational numbers such that for every rational number $\varepsilon>0$, there exists a positive integer $N$ such that $m,n\geq N\implies|x_m−x_n|\leq\varepsilon$.
+
+Let $R$ be the set of Cauchy sequences of the rational numbers.
+\item \tb{Equivalence relation}: Define an equivalence relation $\sim$ on $R$ as $(x_n)\sim(y_n)$ iff for every rational number $\varepsilon>0$, there exists a positive integer $N$ such that $n\geq N\implies|x_n−y_n|\leq\varepsilon$.
+
+An equivalence class of $(x_n)$ is
+\[[(x_n)]=\qty\{(y_n)\in R\middle|(x_n)\sim(y_n)\}.\]
+
+The reals $\bbR$ is defined as the quotient set of $R$ by the equivalence relation $\sim$.
+\item \tb{Total order}: Total order $\leq$ over $\bbR$ is defined given order $\leq$ over $\bbQ$ as,
+\[[x_n]\leq[y_n]\iff\]
+for every rational number $\varepsilon>0$, there exists a positive integer $N$ such that $n\geq N\implies x_n\leq y_n+\varepsilon$.
+\item \tb{Addition}: Addition is a function $\bbR^2\to\bbR$ defined as
+\[[(x_n)]+[(y_n)]\coloneq[(x_n+y_n)].\]
+\item \tb{Subtraction}: Subtraction is a function $\bbR^2\to\bbR$ defined as:
+\[[(x_n)]-[(y_n)]\coloneq[(x_n-y_n)].\]
+\item \tb{Negation or additive inverse}: Negation (or additive inverse) is a function $\bbR\to\bbR$ defined as
+\[-[(x_n)]\coloneq[(-x_n)].\]
+\item \tb{Absolute value}: Absolute value is a function $\bbR\to\bbR$ defined as
+\[\abs{[(x_n)]}\coloneq\begin{cases}[(x_n)],\quad&[(x_n)]\geq [(0)]\\[(-x_n)],\quad&[(x_n)]\leq [(0)]\end{cases}.\]
+\item \tb{Multiplication}: Multiplication is a function $\bbR^2\to\bbR$ defined as
+\[[(x_n)]\cdot[(y_n)]\coloneq[(x_n\cdot y_n)].\]
+\item \tb{Division}: Division is a function $\bbR\times\bbR\setminus\{[(0)]\}\to\bbR$ defined as
+\[[x_n]/[y_n]\coloneq[x_n/y_n].\]
+\item \tb{Notation}: $[(x_n)]\in\bbR$ is denoted as the limit of it $\lim_{n\to\infty}x_n$.
+\eit
+\sssc{Construction by Dedekind cuts}
+Below, we will construct the reals by Dedekind cuts.
+\bit
+\item \tb{Dedekind cut}: A Dedekind cut of $\bbQ$ is a subset $A$ of $\bbQ$ such that
+\bit
+\item Nonempty:
+\[A\neq\varnothing.\]
+\item $\bbQ\setminus A$ is not empty:
+\[A\neq\bbQ.\]
+\item Closed downwards:
+\[(x\in\bbQ\land y\in A\land x\leq y)\implies (x\in A).\]
+\item Does not contain a greatest element:
+\[\forall x\in A\colon\exists y\in A\text{\ s.t.\ }y>x.\]
+\eit
+The reals $\bbR$ is defined as the set of all Dedekind cuts of $\bbQ$.
+\item \tb{Total order}: Total order $\leq$ over $\bbR$ is defined as
+\[A\leq B\iff A\subseteq B.\]
+\item \tb{Addition}: Addition is a function $\bbR^2\to\bbR$ defined as
+\[A+B\coloneq\{a+b|a\in A\land b\in B\}.\]
+\item \tb{Subtraction}: Subtraction is a function $\bbR^2\to\bbR$ defined as:
+\[A-B\coloneq\{a-b|a\in A\land b\in(\bbQ\setminus B)\}.\]
+\item \tb{Negation or additive inverse}: Negation (or additive inverse) is a function $\bbR\to\bbR$ defined as
+\[-B\coloneq\{a-b|a<0\land b\in(\bbQ\setminus B)\}.\]
+\item \tb{Absolute value}: Absolute value is a function $\bbR\to\bbR$ defined as
+\[|B|\coloneq\begin{cases}
+B,\quad&B\geq\{x\in\bbQ\mid x<0\}\\
+-B,\quad&B<\{x\in\bbQ\mid x<0\}
+\end{cases}.\]
+\item \tb{Multiplication}: Multiplication is a function $\bbR^2\to\bbR$ defined as
+\[A\cdot B\coloneq\begin{cases}
+\{a\cdot b\mid a,b\geq 0\land a\in A\land b\in B\}\cup\{x\in\bbQ\mid x<0\},\quad&A,B\geq\{x\in\bbQ\mid x<0\}\\
+-(-A)\cdot B,\quad&B\geq\{x\in\bbQ\mid x<0\}>A\\
+-A\cdot (-B),\quad&A\geq\{x\in\bbQ\mid x<0\}>B\\
+(-A)\cdot (-B),\quad&A,B<\{x\in\bbQ\mid x<0\}
+\end{cases}\]
+\item \tb{Division}: Division is a function $\bbR\times\bbR\setminus\{\{x\in\bbQ\mid x<0\}\}\to\bbR$ defined as
+\[A/B\coloneq\begin{cases}
+\{a/b\mid a\in A\land b\in(\bbQ\setminus B)\},\quad&A\geq\{\{x\in\bbQ\mid x<0\}\land B>\{\{x\in\bbQ\mid x<0\}\\
+-(-A)/B,\quad&B>\{x\in\bbQ\mid x<0\}>A\\
+-A/(-B),\quad&A\geq\{x\in\bbQ\mid x<0\}>B\\
+(-A)/(-B),\quad&A,B<\{x\in\bbQ\mid x<0\}
+\end{cases}\]
+\item \tb{Notation}: $A\in\bbR$ is denoted as the supremum (aka least upper bound) of it $\sup A$.
+\eit
+\sssc{Irrational numbers (無理數)}
+A real number that is not a rational number is called an irrational number. The set of irrational numbers is sometimes denoted $\neg\bbQ$.
+\ssc{Extended real numbers (擴展實數)}
+The extended real number system (aka the extended reals, the extended real numbers, or the extended real number line) $\ol{\bbR}$, $\bbR^*$, $[-\infty,+\infty]$, $[-\infty,\infty]$, $\mathbb{R}\cup\{-\infty,+\infty\}$, $\mathbb{R}\cup\{\pm\infty\}$, or $\mathbb{R}\cup\{-\infty,\infty\}$ is an extension of real number system by adding two elements: positive infinity $+\infty$ (also denoted as $\infty$) and negative infinity $-\infty$, and is a Dedekind-complete ordered set.
+\sssc{Definition}
+\bit
+\item \tb{Arithmetic properties}: Below properties and definitions hold for any $a,b,c\in\ol{\bbR}$ such that the expression is defined:
+\bit
+\item Commutativity of addition:
+\[a+b=b+a.\]
+\item Associativity of addition:
+\[a+(b+c)=(a+b)+c.\]
+\item Commutativity of multiplication:
+\[a\cdot b=b\cdot a.\]
+\item Associativity of multiplication:
+\[a\cdot (b\cdot c)=(a\cdot b)\cdot c.\]
+\item Distributivity of multiplication over addition:
+\[a\cdot (b+c)=a\cdot b+a\cdot c.\]
+\item Definition of negation (or additive inverse):
+\[-a=(-1)\cdot a.\]
+\item Definition of subtraction:
+\[a-b=a+(-b).\]
+\item Definition of division:
+\[\forall a,b,c\in\ol{\bbR}\land b\neq 0\colon bc=a\iff a/b=c.\]
+\eit
+\item \tb{Arithmetic expressions}: Below, we define some arithmetic expressions:
+
+For any $a,b\in\bbR$, arithmetic expression of them in $\ol{\bbR}$ equals that in $\bbR$ if it is defined in $\bbR$.
+\[\forall a\in\bbR\colon a+(\pm\infty)=(\pm\infty)+a=\pm\infty.\]
+\[\forall a\in\bbR\land a>0\colon a\cdot(\pm\infty)=(\pm\infty)\cdot a=\pm\infty.\]
+\[\forall a\in\bbR\land a<0\colon a\cdot(\pm\infty)=(\pm\infty)\cdot a=\mp\infty.\]
+\[\forall a\in\bbR\colon a/(\pm\infty)=0.\]
+\[\forall a\in\bbR\land a>0\colon(\pm\infty)/a=\pm\infty.\]
+\[\forall a\in\bbR\land a<0\colon(\pm\infty)/a=\mp\infty.\]
+\item \tb{Order}:
+\bit
+\item For any $a,b\in\bbR$, $a<b$ in $\ol{\bbR}$ iff $a<b$ in $\bbR$; $a>b$ in $\ol{\bbR}$ iff $a>b$ in $\bbR$; $a=b$ in $\ol{\bbR}$ iff $a=b$ in $\bbR$.
+\item For any $a\in\bbR$,
+\[-\infty<a<\infty.\]
+\item For any subset of $\bbR$ that has no supremum in $\bbR$, the supremum of it in $\ol{\bbR}$ is defined as $\infty$.
+
+For any subset of $\bbR$ that has no infimum in $\bbR$, the infimum of it in $\ol{\bbR}$ is defined as $-\infty$.
+
+For any subset of $\ol{\bbR}$ containing $\infty$, the supremum of it is defined as $\infty$.
+
+For any subset of $\ol{\bbR}$ containing $-\infty$, the infimum of it is defined as $-\infty$.
+\eit
+\item \tb{Topology}: A set $U\subseteq\ol{\bbR}$ is a neighborhood of $\infty$ if and only if $\exists a\in\bbR$ such that $\{x\in\ol{\bbR}\colon x>a\}\subseteq U$.
+
+A set $U\subseteq\ol{\bbR}$ is a neighborhood of $-\infty$ if and only if $\exists a\in\bbR$ such that $\{x\in\ol{\bbR}\colon x<a\}\subseteq U$.
+\item \tb{Functions}:
+\[|\infty|=|-\infty|=\infty\]
+\[\operatorname{sgn}(\infty)=1\]
+For any function $f$ defined on $(a,\infty)$ with $a\in\bbR$ and $\lim_{x\to\infty}f(x)=L$, it can be extended with
+\[f(\infty)=L.\]
+For any function $f$ defined on $(-\infty,a)$ with $a\in\bbR$ and $\lim_{x\to-\infty}f(x)=L$, it can be extended with
+\[f(-\infty)=L.\]
+\eit
+\end{document}
