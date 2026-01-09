@@ -32,8 +32,6 @@ That there exists a derivation from $S_1,S_2,\ldots S_n$ to $T$ is denoted as $S
 Thus, for any axiom $\alpha$, $\vdash\alpha$.
 
 Any formula $\alpha$ such that $\vdash\alpha$ is called derived or a theorem and is also denoted as $\Gamma\vdash\alpha$.
-\sssc{(Syntactical) consistency}
-A deductive system is (syntactically) consistent iff there is no formula $P$ such that $\vdash P$ and $\vdash\neg P$.
 \sssc{Soundness}
 A deductive system is sound if every formula that can be derived from the system is a tautology in the language.
 \sssc{Syntactic consequence}
@@ -56,7 +54,7 @@ A signature $\sigma=(\mathcal{P},\mathcal{F})$ is a pair of indexed sets,
 \item a set of sets of function symbols $\mathcal{F}=\{F_n\mid n\in\bbN_0\}$ with $F_n$ being a possibly infinite set of function symbols of arity $n$, with any element of $F_0$ called a constant.
 \eit
 \sssc{(Logical or model-theoric) structure}
-A (logical or model-theoric) structure can be defined with a triple $(A,\sigma,I)$ of a set called domain, universe, carrier (set), underlying set, domain of discourse, or universe of discourse, $A$, denoted as $|\mathcal{A}|$ or simply $\mathcal{A}$, a signature $\sigma$, and an interpretation function $I$ that, maps each $c\in F_0$ to an element $I(c)$ in $A$, for all $n\in\bbN$, maps each $f\in F_n$ to an $n$-ary operation $I(f)$ on $A$, called interpretation of $f$ and often denoted as $f$, and for all $n\in\bbN_0$, maps each $p\in P_n$ to a subset $I(p)$ of $A^n$, called interpretation of $p$ and often denoted as $p$, in which $A^0=\{\varnothing\}$.
+A (logical or model-theoric) structure can be defined with a triple $(A,\sigma,I)$ of a set called domain, universe, carrier (set), underlying set, domain of discourse, or universe of discourse, $A$, denoted as $|\mathcal{A}|$ or simply $\mathcal{A}$, a signature $\sigma$, and an interpretation function $I$ that, maps for all $n\in\bbN_0$, maps each $f\in F_n$ to an $n$-ary operation $I(f)$ on $A$, called interpretation of $f$ and often denoted as $f$, and for all $n\in\bbN_0$, maps each $p\in P_n$ to a subset $I(p)$ of $A^n$, called interpretation of $p$ and often denoted as $p$, in which $A^0=\{\varnothing\}$.
 
 A structure with signature $\sigma$ is called a $\sigma$-structure. A structure with signature $\sigma$ of a language $L$ is called a $L$-structure.
 \sssc{Substructure}
@@ -81,6 +79,7 @@ A ($\sigma-$)homomorphism from a structure $\mathcal{A}=(A,\sigma,I_A)$ to a str
 \item for all $n\in\bbN_0$, for any $p\in P_n$ and $a_1,a_2,\ldots,a_n\in A^n$,
 \[(a_1,a_2,\ldots,a_n)\in I_A(p)\implies(h(a_1),h(a_2),\ldots,h(a_n))\in I_B(p).\]
 \eit
+For any $a\in A^n$ with $a=(a_1,a_2,\ldots,a_n)$, $(h(a_1),h(a_2),\ldots,h(a_n))$ is denoted as $h(a)$.
 \sssc{Strong homomorphism}
 A strong ($\sigma-$)homomorphism from a structure $\mathcal{A}=(A,\sigma,I_A)$ to a structure $\mathcal{B}=(B,\sigma,I_B$ is a map $h\colon A\to B$ such that,
 \bit
@@ -93,6 +92,9 @@ A strong ($\sigma-$)homomorphism from a structure $\mathcal{A}=(A,\sigma,I_A)$ t
 A ($\sigma-$)embedding from a structure $\mathcal{A}=(A,\sigma,I_A)$ to a structure $\mathcal{B}=(B,\sigma,I_B$ is a strong homomorphisms $h$ from $\mathcal{A}$ to $\mathcal{B}$ that is injective.
 \sssc{Isomorphism}
 A ($\sigma-$)isomorphism from a structure $\mathcal{A}=(A,\sigma,I_A)$ to a structure $\mathcal{B}=(B,\sigma,I_B$ is a strong homomorphisms $h$ from $\mathcal{A}$ to $\mathcal{B}$ that is bijective.
+\sssc{Isomorphism-invariance}
+An $n$-free variable formula $\varphi$ is isomorphism-invariant between two models $\mathcal{M},\mathcal{N}$ with domains $M,N$ iff for every isomorphism $h$ between $\mathcal{M},\mathcal{N}$, for any $a\in M^n$:
+\[\mathcal{M}\vdash\varphi[a]\iff\mathcal{N}\vdash\varphi[h(a)].\]
 \sssc{Definability}
 Let $L$ be a first-order language, $\mathcal{M}$ be a $L$-structure with domain $M$, $X$ be a fixed subset of $M$, and $m$ be a positive integer.
 \bit
@@ -100,6 +102,7 @@ Let $L$ be a first-order language, $\mathcal{M}$ be a $L$-structure with domain 
 \item A set is definable in $\mathcal{M}$ without parameter iff it is definable in $\mathcal{M}$ with parameters from $\varnothing$.
 \item A function is definable in $\mathcal{M}$ (with some parameters) iff its graph is definable in $\mathcal{M}$ (with those parameters).
 \item An element $a\in M^m$ is definable in $\mathcal{M}$ (with some parameters) iff $\{a\}$ is definable in $\mathcal{M}$ (with those parameters).
+\item Set of definable sets: $\operatorname{Def}(\mathcal{M})$ is the union for all $m\in\bbN$ of the set of subsets of $M^m$ that is definable in $\mathcal{M}$ (with any parameter or without parameter).
 \eit
 \ssc{Propositional logic (PL), statement logic, sentential logic, propositional calculus, statement calculus, sentential calculus, or zeroth-order logic}
 \sssc{Syntax}
@@ -150,6 +153,7 @@ A formula $P$ is called satisfiable iff it is not a contradiction.
 \sssc{Typical rules of inference}
 For all equations that hold in Boolean algebra, with each Boolean variable replaced with a metaformula, LHS as numerator and RHS as denominator.
 \ssc{First-order logic (FOL), predicate logic, predicate calculus, or quantificational logic}
+Proportional logic and predicate logic are collectively called classical logic.
 \sssc{Syntax}
 Given logic symbols,
 \bit
@@ -190,7 +194,7 @@ A variable in a formula is either free or bounded, which are defined as follows 
 \eit
 A formula with no free variable is called a sentence or a closed formula.
 
-A formula $P$ with free variables $x_1,x_2,\ldots,x_n$ is denoted as $P(x_1,x_2,\ldots,x_n)$.
+A formula $P$ with free variables $x_1,x_2,\ldots,x_n$ is denoted as $P[x_1,x_2,\ldots,x_n]$ or $P(x_1,x_2,\ldots,x_n)$.
 
 The cardinalities of $\sigma$ and $\mathcal{L}$ are both defined as the cardinality of $\qty(\bigcup_{u\in\mathcal{P}}u)\cup\qty(\bigcup_{u\in\mathcal{F}}u)$.
 \sssc{Semantics}
@@ -243,14 +247,12 @@ A formula is satisfiable iff it is not a contradiction.
 \ssc{(Formal) (Deductive) Theory}
 \sssc{(Formal) (deductive) theory}
 A (formal) (deductive) theory $T$ over a formal language $\mathcal{L}$ is a set of formulas in $\mathcal{L}$ that is closed under $\vdash$. Each $P\in T$ is called a theorem.
-
-For a theory $T$ over language $\mathcal{L}$, a deductive system that $T=\{P\in\mathcal{L}\mid\vdash P\}$ is called to generate $T$ and is not distinguished with $T$ in terms of properties.
+\sssc{Deductive system}
+For a theory $T$ over language $\mathcal{L}$, a deductive system that $T=\{P\in\mathcal{L}\mid\vdash P\}$ is called to derive $T$ and is not distinguished with $T$ in terms of properties.
+\sss{(Syntactical) consistency}
+A theory $T$ is (syntactically) consistent iff there is no formula $P$ such that $P\in T$ and $\neg P\in T$.
 \sssc{Satisfiability}
 A theory $T$ is satisfiable iff there exists an interpretation $\mathcal{I}$ such that for every $P\in T$, $\mathcal{I}\vDash P$, and $T$ is said to be satisfied by $\mathcal{I}$ or has an interpretation $\mathcal{I}$.
-\sssc{Equivalence of consistency and satisfiability}
-A theory over proportional or first-order language is consistent iff it is satisfiable.
-
-The $\Leftarrow$ direction is from the Gödel's completeness theorem and the $\Rightarrow$ direction is the Henkin's model existence theorem.
 \sssc{Complete (consistent) theory}
 A complete (consistent) theory $T$ is a consistent theory such that for every formula $P$ in its language, either $T\vdash P$ or $T\cup\{P\}$ is inconsistent.
 \sssc{Subtheory}
@@ -273,16 +275,43 @@ A first-order theory is with identiy if its language has the equality symbol $=$
 \item Leibniz's law or substitution: For any $n\in\bbN_0$, for any formula with any $n$ free variables $x_1,x_2,\ldots,x_n$, any $i\in\bbN\land i\leq n$, and any variable $x$,
 \[(x_i=x)\implies(P(x_1,x_2,\ldots,x_i,\ldots,x_n)\implies P(x_1,x_2,\ldots,x_{i-1},x,x_{i+1},\ldots,x_n)).\]
 \eit
+\sssc{Equivalence of consistency and satisfiability}
+A theory over proportional or first-order language is consistent iff it is satisfiable.
+
+The $\Leftarrow$ direction is from the Gödel's completeness theorem and the $\Rightarrow$ direction is the Henkin's model existence theorem.
 \sssc{Elementary class or axiomatizable class}
 The elementary class or axiomatizable class of a first-order theory $T$ is the class of all structures that satisfies $T$.
+\sssc{Downward Löwenheim–Skolem Theorem}
+If a first-order theory has an infinite model $\mathcal{M}$ of some cardinality, then it has models of all smaller infinite cardinalities down to the cardinality of its language that are substructures of $\mathcal{M}$.
+\sssc{Upward Löwenheim–Skolem Theorem}
+If a first-order theory has an infinite model $\mathcal{M}$ of some cardinality, then it has models of all larger cardinalities that are superstructure of $\mathcal{M}$.
+\sssc{Compactness theorem}
+If a first-order theory $T$ is such that all its finite subsets have models, then $T$ has model.
 \ssc{Gödel's incompleteness theorems}
 \sssc{Gödel's first incompleteness theorem}
 Any recursively enumerable consistent deductive system that can interprets the Robinson arithmetic is syntactically incomplete.
 \sssc{Gödel's second incompleteness theorem}
 Any recursively enumerable consistent deductive system that can interprets the Robinson arithmetic can not prove its consistency.
-\ssc{Löwenheim–Skolem Theorems}
-\sssc{Downward Löwenheim–Skolem Theorem}
-If a first-order theory has an infinite model $\mathcal{M}$ of some cardinality, then it has models of all smaller infinite cardinalities down to the cardinality of its language that are substructures of $\mathcal{M}$.
+\ssc{Abstract logic}
+\sssc{Abstract logic}
+Let $L$ be a formal language closed under logical connectives and with functionally complete set of logical connectives, and $\mathscr{M}$ be all models (possibly designated to be allowed) for it. The ordered pair $(L,\mathscr{M})$ is called an abstract logic.
+\sssc{Isomorphism-invariant}
+An abstract logic, $(L,\mathscr{M})$, is isomorphism-invariant iff for every two models $\mathcal{M},\mathcal{N}\in\mathscr{M}$, for every sentence $\varphi\in L$, $\varphi$ is isomorphism-invariant between $\mathcal{M}$ and $\mathcal{N}$.
+\sssc{Expressive power}
+All isomorphism-invariant abstract logics form a class $\mathbb{L}$ with partial order $\leq$, called weaker than, equivalence relation $=$, and strict partial order $<$, called strictly weaker than, of expressive power defined, for any $(L_1,\mathscr{M}_1),(L_2,\mathscr{M}_2)\in\mathbb{L}$, with the $\mathscr{N}_1$ and $\mathscr{N}_2$ defined such that all elements of $\mathscr{N}_1\cup\mathscr{N}_2$ have the same signature $\sigma$ and domain $N$, that for any $\mathcal{M}\in\mathscr{M}_1$, there exists at least one $\mathcal{N}\in\mathscr{N}_1$ such that there exists at least one isomorphism between $\mathcal{M}$ and $\mathcal{N}$, and that for any $\mathcal{M}\in\mathscr{M}_2$, there exists at least one $\mathcal{N}\in\mathscr{N}_2$ such that there exists at least one isomorphism between $\mathcal{M}$ and $\mathcal{N}$, as:
+\[(L_1,\mathscr{M}_1)\leq(L_2,\mathscr{M}_2)\iff\bigcup_{\mathcal{N}\in\mathscr{N}_1}\operatorname{Def}(\mathcal{N})\subseteq\bigcup_{\mathcal{N}\in\mathscr{N}_2}\operatorname{Def}(\mathcal{N}),\]
+\[(L_1,\mathscr{M}_1)=(L_2,\mathscr{M}_2)\iff(L_1,\mathscr{M}_1)\leq(L_2,\mathscr{M}_2)\land(L_2,\mathscr{M}_2)\leq(L_1,\mathscr{M}_1).\]
+\[(L_1,\mathscr{M}_1)<(L_2,\mathscr{M}_2)\iff(L_1,\mathscr{M}_1)\leq(L_2,\mathscr{M}_2)\land\neg(L_2,\mathscr{M}_2)\leq(L_1,\mathscr{M}_1).\]
+\sssc{Compactness property}
+For an abstract logic $(L,\mathscr{M})$, if for every theory $T$ over its language, that all its finite subsets have model in $\mathscr{M}$ implies that $T$ has model in $\mathscr{M}$, then the abstract logic has compactness property.
+
+Compactness property implies that for any theory has model in $\mathscr{M}$, there exists a sound deductive system that derive it.
+
+That for any theory of a model in $\mathscr{M}$, there exists a sound and semantically complete deductive system that derive it, implies compactness property.
+\sssc{Downward Löwenheim–Skolem property}
+For an abstract logic $(L,\mathscr{M})$, if for every theory $T$ over $L$ that has an infinite model $\mathcal{M}\in\mathscr{M}$ of some cardinality, then it has models in $\mathscr{M}$ of all smaller infinite cardinalities down to the cardinality of its language that are substructures of $\mathcal{M}$, then the abstract logic has downward Löwenheim–Skolem property.
 \sssc{Upward Löwenheim–Skolem Theorem}
-If a first-order theory has an infinite model $\mathcal{M}$ of some cardinality, then it has models of all larger cardinalities that are superstructure of $\mathcal{M}$.
+For an abstract logic $(L,\mathscr{M})$, if for every theory $T$ over $L$ that has an infinite model $\mathcal{M}\in\mathscr{M}$ of some cardinality, then it has models in $\mathscr{M}$ of all larger cardinalities that are superstructures of $\mathcal{M}$, then the abstract logic has upward Löwenheim–Skolem property.
+\sssc{Lindström's theorem}
+Any isomorphism-invariant abstract logic extending first-order logic with standard semantics that has compact property and downward Löwenheim–Skolem property must not has strictly more expressive power than first-order logic with standard semantics.
 \end{document}
