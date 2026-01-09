@@ -58,12 +58,18 @@ A (logical or model-theoric) structure can be defined with a triple $(A,\sigma,I
 
 A structure with signature $\sigma$ is called a $\sigma$-structure. A structure with signature $\sigma$ of a language $L$ is called a $L$-structure.
 \sssc{Substructure}
-A structure $\mathcal{B}=(B,\sigma_B,I_B)$ is a substructure of a structure $\mathcal{A}=(A,\sigma_A,I_A)$, denoted as $\mathcal{B}\subseteq\mathcal{A}$, iff
+A structure $\mathcal{B}=(B,\sigma_B,I_B)$ is a substructure of a structure $\mathcal{A}=(A,\sigma_A,I_A)$, that is, $\mathcal{A}$ is an extension of $\mathcal{B}$, denoted as $\mathcal{B}\subseteq\mathcal{A}$, iff
 \bit
 \item $B\subseteq A$,
 \item $\sigma_B=\sigma_A$,
 \item for every $n\in\bbN_0$, for every function symbol $f\in F_n$, $I_B(f)=I_A(f)\upharpoonright B^n$, and
 \item for every $n\in\bbN_0$, for every relation symbol $p\in P_n$, $I_B(p)=I_A(p)\cap B^n$.
+\eit
+\sssc{Elementary substructure}
+A structure $\mathcal{B}=(B,\sigma_B,I_B)$ is an elementary substructure of a structure $\mathcal{A}=(A,\sigma_A,I_A)$, that is, $\mathcal{A}$ is an elementary extension of $\mathcal{B}$, denoted as $\mathcal{B}\prec\mathcal{A}$, iff, with the language of $\sigma_B$ denoted as $\mathcal{L}$,
+\bit
+\item $\mathcal{B}\subseteq\mathcal{A}$,
+\item for every $n$-ary formula $\varphi\in\mathcal{L}$, for every $a\in B^n$, $\mathcal{B}\vdash\varphi[a]\iff\mathcal{A}\vdash\varphi[b]$.
 \eit
 \sssc{Closed subset}
 For a structure $\mathcal{A}=(A,\sigma,I)$, a subset $B\subseteq A$ is called closed iff, for all $n\in\bbN_0$, for any $f\in F_n$ and $b\in B^n$, $I(f)(b)\in B$.
@@ -282,9 +288,9 @@ The $\Leftarrow$ direction is from the Gödel's completeness theorem and the $\R
 \sssc{Elementary class or axiomatizable class}
 The elementary class or axiomatizable class of a first-order theory $T$ is the class of all structures that satisfies $T$.
 \sssc{Downward Löwenheim–Skolem Theorem}
-If a first-order theory has an infinite model $\mathcal{M}$ of some cardinality, then it has models of all smaller infinite cardinalities down to the cardinality of its language that are substructures of $\mathcal{M}$.
+If a first-order theory with signature $\sigma$ has an infinite model $\mathcal{M}$ of some cardinality $\kappa\geq\aleph_0$, then for every $\mu$ such that $\max(|\sigma|,\aleph_0)\leq\mu\leq\kappa$, it has model of cardinality $\mu$ that is an elementary substructures of $\mathcal{M}$.
 \sssc{Upward Löwenheim–Skolem Theorem}
-If a first-order theory has an infinite model $\mathcal{M}$ of some cardinality, then it has models of all larger cardinalities that are extensions of $\mathcal{M}$.
+If a first-order theory with signature $\sigma$ has an infinite model $\mathcal{M}$ of some cardinality $\kappa\geq\aleph_0$, then for every $\mu\geq\kappa$, it has model of cardinality $\mu$ that is an elementary extension of $\mathcal{M}$.
 \sssc{Compactness theorem}
 If a first-order theory $T$ is such that all its finite subsets have models, then $T$ has model.
 \ssc{Gödel's incompleteness theorems}
@@ -309,9 +315,9 @@ Compactness property implies that for any theory has model in $\mathscr{M}$, the
 
 That for any theory of a model in $\mathscr{M}$, there exists a sound and semantically complete deductive system that derive it, implies compactness property.
 \sssc{Downward Löwenheim–Skolem property}
-For an abstract logic $(L,\mathscr{M})$, if for every theory $T$ over $L$ that has an infinite model $\mathcal{M}\in\mathscr{M}$ of some cardinality, then it has models in $\mathscr{M}$ of all smaller infinite cardinalities down to the cardinality of its language that are substructures of $\mathcal{M}$, then the abstract logic has downward Löwenheim–Skolem property.
+For an abstract logic $(L,\mathscr{M})$ with signature $\sigma$, if for every theory $T$ over $L$ that has an infinite model $\mathcal{M}\in\mathscr{M}$ of some cardinality $\kappa\geq\aleph_0$, for every $\mu$ such that $\max(|\sigma|,\aleph_0)\leq\mu\leq\kappa$, it has model of cardinality $\mu$ that is an elementary substructures of $\mathcal{M}\in\mathscr{M}$, then the abstract logic is called to have downward Löwenheim–Skolem property.
 \sssc{Upward Löwenheim–Skolem Theorem}
-For an abstract logic $(L,\mathscr{M})$, if for every theory $T$ over $L$ that has an infinite model $\mathcal{M}\in\mathscr{M}$ of some cardinality, then it has models in $\mathscr{M}$ of all larger cardinalities that are superstructures of $\mathcal{M}$, then the abstract logic has upward Löwenheim–Skolem property.
+For an abstract logic $(L,\mathscr{M})$ , if for every theory $T$ over $L$ that has an infinite model $\mathcal{M}\in\mathscr{M}$ of some cardinality $\kappa\geq\aleph_0$, then for every $\mu\geq\kappa$, it has model of cardinality $\mu$ that is an elementary extension of $\mathcal{M}\in\mathscr{M}$.
 \sssc{Lindström's theorem}
 Any isomorphism-invariant abstract logic extending first-order logic with standard semantics that has compact property and downward Löwenheim–Skolem property must not has strictly more expressive power than first-order logic with standard semantics.
 \end{document}
