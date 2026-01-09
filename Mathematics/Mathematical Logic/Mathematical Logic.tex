@@ -9,7 +9,7 @@
 \titletocdoc
 \sct{Mathematical Logic}
 \ssc{Proof Theory}
-\sssc{Deductive system, proof system, formal system, or formal proof system}
+\sssc{Deductive system, proof system, formal system, formal proof system, proof calculus, or deductive calculus}
 A deductive system, proof system, formal system, or formal proof system $\Gamma$ over a formal language $\mathcal{L}$ consists of axioms and rules of inference, where:
 \bit
 \item An axiom is a formula in $\mathcal{L}$ assumed to be derived in $\Gamma$.
@@ -17,13 +17,15 @@ A deductive system, proof system, formal system, or formal proof system $\Gamma$
 \item A rule of inference in Hilbert style is in the form $\frac{P_1,P_2,\ldots,P_n}{Q}$ where $P_1,P_2,\ldots,P_n,Q$ are expressions sharing the same set of metaformulas such that any expressions obtained by replacing each metaformula with an arbitrary formula in $\mathcal{L}$ are formulas in $\mathcal{L}$ and the expressions obtained by such replacement of $P_1,P_2,\ldots,P_n$ are assumed to derive the expression obtained by such replacement of $Q$. Other styles exist and have the same expressive power as Hilbert style for propositional logic and predicate logic.
 \eit
 \sssc{(Formal) derivation or proof}
-Given proof system $\Gamma$ over language $\mathcal{L}$ and formulas $S_1,S_2,\ldots S_n,T\in\mathcal{L}$, a (formal) derivation or proof from $S_1,S_2,\ldots S_n$ to $T$ is a finite sequence of formulas $\langle F_i\rangle_{i=1}^m$ such that each $F_i$ is either
+Given proof system $\Gamma$ over language $\mathcal{L}$ and formulas $S_1,S_2,\ldots S_n,T\in\mathcal{L}$, a (formal) derivation or proof from $S_1,S_2,\ldots S_n$ to $T$ is a sequence of formulas $\langle F_i\rangle_{i=1}^m$ such that each $F_i$ is either
 \bit
 \item an axiom of $\Gamma$,
 \item an element of $\{S_1,S_2,\ldots S_n\}$, or
 \item can be derived from some of the earlier formulas in the sequence using a rule of inference,
 \eit
 and that $F_m=T$.
+
+The sequences are required to be finite for finitary deductive systems.
 
 $S_1,S_2,\ldots S_n$ are called premises, $T$ is called conclusion, and this process is called argumentation.
 
@@ -46,6 +48,8 @@ A deductive system is semantically complete if every tautology in the language c
 If a deductive system $S$ over language $L$ and a deductive system $T$ over language $M$ are such that there exists a function $H\colon L\to M$ such that $S\vdash l\implies T\vdash H(l)$, then we say $T$ inteprets $S$, $S$ is weaker than $T$, or $T$ is stronger than $S$.
 \sssc{Computably enumerable (c.e.), recursively enumerable (r.e.), semidecidable, partially decidable, listable, provable or Turing-recognizable deductive system}
 A deductive system is computably enumerable (c.e.), recursively enumerable (r.e.), semidecidable, partially decidable, listable, provable or Turing-recognizable iff the set of all axioms of it is computably enumerable.
+
+If a deductive system is finitary, it is computably enumerable.
 \ssc{Model Theory}
 \sssc{Signature}
 A signature $\sigma=(\mathcal{P},\mathcal{F})$ is a pair of indexed sets,
@@ -304,16 +308,16 @@ Let $L$ be a formal language closed under logical connectives and with functiona
 \sssc{Isomorphism-invariant}
 An abstract logic, $(L,\mathscr{M})$, is isomorphism-invariant iff for every two models $\mathcal{M},\mathcal{N}\in\mathscr{M}$, for every sentence $\varphi\in L$, $\varphi$ is isomorphism-invariant between $\mathcal{M}$ and $\mathcal{N}$.
 \sssc{Expressive power}
-All isomorphism-invariant abstract logics form a class $\mathbb{L}$ with partial order $\leq$, called weaker than, equivalence relation $=$, and strict partial order $<$, called strictly weaker than, of expressive power defined, for any $(L_1,\mathscr{M}_1),(L_2,\mathscr{M}_2)\in\mathbb{L}$, with the $\mathscr{N}_1$ and $\mathscr{N}_2$ defined such that all elements of $\mathscr{N}_1\cup\mathscr{N}_2$ have the same signature $\sigma$ and domain $N$, that for any $\mathcal{M}\in\mathscr{M}_1$, there exists at least one $\mathcal{N}\in\mathscr{N}_1$ such that there exists at least one isomorphism between $\mathcal{M}$ and $\mathcal{N}$, and that for any $\mathcal{M}\in\mathscr{M}_2$, there exists at least one $\mathcal{N}\in\mathscr{N}_2$ such that there exists at least one isomorphism between $\mathcal{M}$ and $\mathcal{N}$, as:
+All isomorphism-invariant abstract logics form a class $\mathbb{L}$ with partial order $\leq$, called weaker than or less expressive than, equivalence relation $=$, and strict partial order $<$, called strictly weaker than or strictly less expressive than, of expressive power defined, for any $(L_1,\mathscr{M}_1),(L_2,\mathscr{M}_2)\in\mathbb{L}$, with the $\mathscr{N}_1$ and $\mathscr{N}_2$ defined such that all elements of $\mathscr{N}_1\cup\mathscr{N}_2$ have the same signature $\sigma$ and domain $N$, that for any $\mathcal{M}\in\mathscr{M}_1$, there exists at least one $\mathcal{N}\in\mathscr{N}_1$ such that there exists at least one isomorphism between $\mathcal{M}$ and $\mathcal{N}$, and that for any $\mathcal{M}\in\mathscr{M}_2$, there exists at least one $\mathcal{N}\in\mathscr{N}_2$ such that there exists at least one isomorphism between $\mathcal{M}$ and $\mathcal{N}$, as:
 \[(L_1,\mathscr{M}_1)\leq(L_2,\mathscr{M}_2)\iff\bigcup_{\mathcal{N}\in\mathscr{N}_1}\operatorname{Def}(\mathcal{N})\subseteq\bigcup_{\mathcal{N}\in\mathscr{N}_2}\operatorname{Def}(\mathcal{N}),\]
 \[(L_1,\mathscr{M}_1)=(L_2,\mathscr{M}_2)\iff(L_1,\mathscr{M}_1)\leq(L_2,\mathscr{M}_2)\land(L_2,\mathscr{M}_2)\leq(L_1,\mathscr{M}_1).\]
 \[(L_1,\mathscr{M}_1)<(L_2,\mathscr{M}_2)\iff(L_1,\mathscr{M}_1)\leq(L_2,\mathscr{M}_2)\land\neg(L_2,\mathscr{M}_2)\leq(L_1,\mathscr{M}_1).\]
 \sssc{Compactness property}
 For an abstract logic $(L,\mathscr{M})$, if for every theory $T$ over its language, that all its finite subsets have model in $\mathscr{M}$ implies that $T$ has model in $\mathscr{M}$, then the abstract logic has compactness property.
 
-Compactness property implies that for any theory has model in $\mathscr{M}$, there exists a sound deductive system that derive it.
+Compactness property implies that for any theory has model in $\mathscr{M}$, there exists a sound finitary deductive system that derive it.
 
-That for any theory of a model in $\mathscr{M}$, there exists a sound and semantically complete deductive system that derive it, implies compactness property.
+That for any theory of a model in $\mathscr{M}$, there exists a sound, finitary and semantically complete deductive system that derive it, implies compactness property.
 \sssc{Downward Löwenheim–Skolem property}
 For an abstract logic $(L,\mathscr{M})$ with signature $\sigma$, if for every theory $T$ over $L$ that has an infinite model $\mathcal{M}\in\mathscr{M}$ of some cardinality $\kappa\geq\aleph_0$, for every $\mu$ such that $\max(|\sigma|,\aleph_0)\leq\mu\leq\kappa$, it has model of cardinality $\mu$ that is an elementary substructures of $\mathcal{M}\in\mathscr{M}$, then the abstract logic is called to have downward Löwenheim–Skolem property.
 \sssc{Upward Löwenheim–Skolem Theorem}
