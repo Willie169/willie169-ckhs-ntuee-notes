@@ -14,7 +14,7 @@ A deductive system, proof system, formal system, or formal proof system $\Gamma$
 \bit
 \item An axiom is a formula in $\mathcal{L}$ assumed to be derived in $\Gamma$.
 \item An axiom schema is an expression with schema variables, each designated with a type of symbols in $\mathcal{L}$, that the expression obtained by replacing each schema variable with an arbitrary symbol of its type, called an application of the axiom schema, is assumed to be an axiom.
-\item A rule of inference in Hilbert style is in the form $\frac{P_1,P_2,\ldots,P_n}{Q}$ where $P_1,P_2,\ldots,P_n,Q$ are expressions sharing the same set of metaformulas such that any expressions obtained by replacing each metaformula with an arbitrary formula in $\mathcal{L}$ are formulas in $\mathcal{L}$ and the expressions obtained by such replacement of $P_1,P_2,\ldots,P_n$ are assumed to derive the expression obtained by such replacement of $Q$. Other styles exist and have the same expressive power as Hilbert style for propositional logic and predicate logic.
+\item A rule of inference in Hilbert style is in the form $\frac{P_1,P_2,\ldots,P_n}{Q}$ where $P_1,P_2,\ldots,P_n,Q$ are expressions sharing the same set of metaformulas such that any expressions obtained by replacing each metaformula with an arbitrary formula in $\mathcal{L}$ are formulas in $\mathcal{L}$ and the expressions obtained by such replacement of $P_1,P_2,\ldots,P_n$ are assumed to derive the expression obtained by such replacement of $Q$, in which $P_1,P_2,\ldots,P_n$ and their replacements are called preimises and $Q$ and their replacements called conclusion. Other styles exist and have the same expressive power as Hilbert style for propositional logic and predicate logic.
 \eit
 \sssc{(Formal) derivation or proof}
 Given proof system $\Gamma$ over language $\mathcal{L}$ and formulas $S_1,S_2,\ldots S_n,T\in\mathcal{L}$, a (formal) derivation or proof from $S_1,S_2,\ldots S_n$ to $T$ is a sequence of formulas $\langle F_i\rangle_{i=1}^m$ such that each $F_i$ is either
@@ -25,8 +25,6 @@ Given proof system $\Gamma$ over language $\mathcal{L}$ and formulas $S_1,S_2,\l
 \eit
 and that $F_m=T$.
 
-The sequences are required to be finite for finitary deductive systems.
-
 $S_1,S_2,\ldots S_n$ are called premises, $T$ is called conclusion, and this process is called argumentation.
 
 That there exists a derivation from $S_1,S_2,\ldots S_n$ to $T$ is denoted as $S_1,S_2,\ldots S_n\vdash T$ and called $S_1,S_2,\ldots S_n$ derive or prove $T$.
@@ -34,6 +32,10 @@ That there exists a derivation from $S_1,S_2,\ldots S_n$ to $T$ is denoted as $S
 Thus, for any axiom $\alpha$, $\vdash\alpha$.
 
 Any formula $\alpha$ such that $\vdash\alpha$ is called derived or a theorem and is also denoted as $\Gamma\vdash\alpha$.
+\sssc{Finitarity}
+A rule of inference is finitary iff its premises are finite.
+
+The rules of inference and sequences in formal proofs are required to be finite for finitary deductive systems.
 \sssc{Soundness}
 A deductive system is sound if every formula that can be derived from the system is a tautology in the language.
 \sssc{Syntactic consequence}
@@ -49,7 +51,7 @@ If a deductive system $S$ over language $L$ and a deductive system $T$ over lang
 \sssc{Computably enumerable (c.e.), recursively enumerable (r.e.), semidecidable, partially decidable, listable, provable or Turing-recognizable deductive system}
 A deductive system is computably enumerable (c.e.), recursively enumerable (r.e.), semidecidable, partially decidable, listable, provable or Turing-recognizable iff the set of all axioms of it is computably enumerable.
 
-If a deductive system is finitary, it is computably enumerable.
+If a deductive system is computably enumerable and its rules of inferences are finitary, it is finitary.
 \ssc{Model Theory}
 \sssc{Signature}
 A signature $\sigma=(\mathcal{P},\mathcal{F})$ is a pair of indexed sets,
@@ -268,7 +270,7 @@ A complete (consistent) theory $T$ is a consistent theory such that for every fo
 \sssc{Subtheory}
 If a theory $S$ and a theory $T$ is such that $S\subseteq T$, then $S$ is called a subtheory of $T$, $T$ is called a supertheory or an extension of $S$.
 \sssc{Effectively axiomatizable, computably axiomatizable, or recursively axiomatizable}
-A theory $T$ is effectively axiomatizable, computably axiomatizable, or recursively axiomatizable if there exists a recursively enumerable deductive system such that $T=P\mid\vdash P$.
+A theory $T$ over a language $\mathcal{L}$ is effectively axiomatizable, computably axiomatizable, or recursively axiomatizable if there exists a deductive system with recursively enumerable set of axioms such that $T=\{P\in\mathcal{L}\mid\vdash P\}$, that is, there exists a finitary deductive system such that $T=\{P\in\mathcal{L}\mid\vdash P\}$ and there exists a recursively enumerable set of formal proofs that derive all $P\in T$.
 \sssc{Independent formula}
 For any independent formula $P$ of a sound deductive system that generate a satisfiable theory $T$, $T\cup\{P\}$ and $T\cup\{\neg P\}$ are both satisfiable.
 \sssc{(Complete) theory of interpretation}
