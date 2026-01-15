@@ -85,13 +85,17 @@ An ideal inductor is a circuit element with an inductance and no resistance or c
 \draw (0,0) to[L, l=Inductor] (3,0);
 \end{circuitikz}
 \end{center}
-\sssc{Sinusoidal alternating current as phasor}
+\sssc{Sinusoidal alternating current}
 The voltage and current of a sinusoidal AC
 \[v(t)=v_m\cos(\omega t+\phi),\]
 \[i(t)=i_m\cos(\omega t+\theta),\]
 are represented in phasors $v_m\angle\phi$ and $i_m\angle\theta$, which can be treated as complex numbers $v_me^{i\phi}$ and $i_me^{i\theta}$.
 
-Here, all currents discussed are sinusoidal AC or DC.
+When the context is clear, sinusoidal AC may be called simply AC.
+
+A frequency range of sinusoidal AC is called bandwidth.
+
+Here, all currents discussed are either sinusoidal AC or DC.
 \sssc{Reactance}
 Let the capacitance of a circuit element under alternating current at an angular frequency of $\omega$ be $C$. Then its capacitive reactance $X_C$ is defined as:
 \[X_C=\frac{1}{\omega C}.\]
@@ -274,23 +278,55 @@ SPICE (Simulation Program with Integrated Circuit Emphasis) is a general-purpose
 \sssc{Ngspice}
 An open-source successor of SPICE.
 \ssc{Operational Amplifier (op amp or op-amp)}
-\sssc{Terminals}
+\sssc{Definition}
 An op amp has five terminals:
 \bit
-\item $V_+$: non-inverting input voltage of the terminal at the $+$ sign;
-\item $V_-$: inverting input voltage of the terminal at the $-$ sign;
-\item $V_{out}$: output voltage of the terminal at the opposite side of inputs;
-\item $V_{CC+}$: positive supply voltage, denoted on the $+$ side of an op-amp or omitted;
-\item $V_{CC-}$: negative supply voltage, denoted on the $+$ side of an op-amp or omitted.
+\item $v_+$: non-inverting input voltage of the terminal at the $+$ sign;
+\item $v_-$: inverting input voltage of the terminal at the $-$ sign;
+\item $v_o$: output voltage of the terminal at the opposite side of inputs;
+\item $v_{CC+}$: positive supply voltage, denoted on the $+$ side of an op-amp or omitted;
+\item $v_{CC-}$: negative supply voltage, denoted on the $-$ side of an op-amp or omitted.
 \eit
 \begin{center}
 \begin{circuitikz}
-\draw (0,0) node[op amp]{} (0,1);
+\draw (0,0) node[op amp] (op amp) {};
 \end{circuitikz}
 \end{center}
-
-
-
+\[v_o=A(v_+-v_-),\]
+where $A$ is open-loop gain.
+\sssc{Ideal op amp}
+\bit
+\item Infinite open-loop gain: $A=\infty$.
+\item Zero input offset voltage: $v_o=0$ when $v_+=v_-$.
+\item Infinite input impedance: No current flow into either of the input terminals.
+\item Zero output impedance: Can drive any load without output voltage change.
+\item Infinite bandwidth: Gain is independent of frequency.
+\eit
+\sssc{Inverting amplifier}
+An inverting amplifier consists of an op amp, an input resistor $R_i$, and a feedback resistor $R_f$, where input voltage $v_{in}$ is connected to $v_-$ through $R_i$, $v_+$ is connected to ground, output voltage $v_{out}$ is connected to $v_o$, and $v_o$ is fed back to $v_-$ through $R_f$.
+\[i_{in}=\frac{v_{in}}{R_{in}}=i_f=\frac{-v_{out}}{R_f},\]
+\[v_{out}=-\frac{R_f}{R_{in}}v_{in}.\]
+\sssc{Noninverting amplifier}
+A noninverting amplifier consist of an op amp, a ground resistor $R_g$, and a feedback resistor $R_f$, where input voltage $v_{in}$ is connected to $v_+$, $v_-$ is connected ground through $R_g$, output voltage $v_{out}$ is connected to $v_o$, and $v_o$ is fed back to $v_-$ through $R_f$.
+\[v_{in}=v_+=v_-=v_{out}\frac{R_g}{R_f+R_g},\]
+\[v_{out}=\qty(1+\frac{R_f}{R_g})v_{in}.\]
+\sssc{Summing amplifier}
+A summing amplifier consists of an op amp, input voltages $v_1,v_2,\ldots,v_n$, $n$ input resistors $R_1,R_2,\ldots,R_n$, and a feedback resistor $R_f$, where for any $k\in\bbN\land k\leq n$, $v_k$ is connected to $v_-$ through $R_k$, $v_+$ is connected to ground, output voltage $v_{out}$ is connected to $v_o$, and $v_o$ is fed back to $v_-$ through $R_f$.
+\[i_k=\frac{v_k}{R_k},\]
+\[\sum_{k=1}^ni_k=i_f=\frac{-v_{out}}{R_f},\]
+\[v_{out}=-R_f\sum_{k=1}^n\frac{v_k}{R_k}.\]
+When $R_k=R$ for all $k\in\bbN\land k\leq n$:
+\[v_{out}=-\frac{R_f}{R}\sum_{k=1}^nv_k.\]
+\sssc{Differential amplifier}
+A differential amplifier consists of a minuend $v_1$, a subtrahend $v_2$, and four resistors $R_1,R_2,R_3,R_4$ satisfying the condition
+\[\frac{R_1}{R_2}=\frac{R_3}{R_4},\]
+where $v_1,v_2$ are connected to $v_-,v_+$ through $R_1,R_2$ respectively, output voltage $v_{out}$ is connected to $v_o$, $v_o$ is fed back to $v_-$ through $R_3$, and $v_+$ is connected to ground through $R_4$.
+\[v_+=v_2\frac{R_4}{R_2+R_4},\]
+\[\frac{v_1-v_-}{R_1}=\frac{v_--v_{out}}{R_3},\]
+\[\frac{v_1}{R_2}-v_2\frac{R_4}{R_2+R_4}\frac{R_2+R_4}{R_2R_4}+\frac{v_{out}}{R_4}=0,\]
+\[v_{out}=\frac{R_4}{R_2}\qty(v_2-v_1).\]
+When $R_1=R_2=R_3=R_4$:
+\[v_{out}=(v_2-v_1).\]
 
 
 
