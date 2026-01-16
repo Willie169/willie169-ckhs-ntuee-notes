@@ -9,12 +9,125 @@
 \titletocdoc
 \sct{Electrical Circuit}
 \ssc{Introduction}
+\sssc{Convention}
+\bit
+\item Voltage $v$ (volt = V)
+\item Current $i$ (ampere = A)
+\item Angular frequency $\omega$ (Hz = 1 / s)
+\item Power $p$ (watt = W = A V)
+\item Imaginary unit (since $i$ is used by current) $j=\sqrt{-1}$
+\item Resistance $R$ (ohm = \textOmega = V / A)
+\item Capacitance $C$ (farad = F = A s / V)
+\item Inductance $L$ (henry = H = V s / A)
+\item Reactance $X$ (\textOmega)
+\item Impedance (complex) $Z$ (\textOmega)
+\item Admittance (complex) $Y$ (siemens = S = 1 / \textOmega)
+\item Conductance $G$ (S)
+\item Susceptance $B$ (S)
+\eit
 \sssc{Electrical network}
-An electrical network is an interconnection of electrical components or a model of such an interconnection, consisting of electrical elements.
+An electrical network or simply network is an interconnection of electrical components or a model of such an interconnection, consisting of electrical elements.
 \sssc{Electrical element}
-Electrical elements are conceptual abstractions representing idealized electrical components, such as resistors, capacitors, and inductors, used in the analysis of electrical networks and denoted with circuit symbols, also called electronic symbol, in circuit diagrams.
-\sssc{Passive element and active element}
-A passive element is an element that cannot generate power. An active element is an element that can generate power.
+Electrical elements or simply elements are conceptual abstractions representing idealized electrical components, such as resistors, capacitors, and inductors, used in the analysis of electrical networks and denoted with circuit symbols, also called electronic symbol, in circuit diagrams.
+\sssc{Resistance and resistor}
+The resistance $R$ of an element is the voltage across it over the current through it:
+\[v=Ri.\]
+
+An ideal resistor is a circuit element with a resistance and no capacitance or inductance.
+\begin{center}
+\begin{circuitikz}
+\draw (0,0) to[R, l=Resistor] (3,0);
+\draw (5,0) to[vR, l=Variable Resistor] (8,0);
+\draw (10,0) to[thermistor, l=Thermistor] (13,0);
+\end{circuitikz}
+\begin{circuitikz}
+\draw (0,0) to[ldR, l=Light Dependent Resistor] (3,0);
+\draw (5,0) to[varistor, l=Varistor] (8,0);
+\end{circuitikz}
+\end{center}
+Power absorbed:
+\[p=\frac{v^2}{R}=i^2R.\]
+\sssc{Capacitance and capacitor}
+The capacitance $C$ of an element is the current through it divided by the derivative of the voltage across it with respect to time:
+\[i=C\dv{v}{t}.\]
+
+An ideal capacitor is a circuit element with a capacitance and no resistance or inductance.
+\begin{center}
+\begin{circuitikz}
+\draw (0,0) to[C, l=Capacitor] (3,0);
+\end{circuitikz}
+\end{center}
+A capacitor voltage must not be allowed to jump instantaneously from one value to another.
+
+Integral voltage-current relationship:
+\[v(t)=\frac{1}{C}\int_{t_0}^ti(\tau)\dd{\tau}+v(t_0)=\frac{1}{C}\int_{-\infty}^ti(\tau)\dd{\tau}.\]
+
+Power absorbed:
+\[p=Cv\dv{v}{t}.\]
+
+Energy stored:
+\[\int_{-\infty}^tp\dd{t}=\frac{1}{2}Cv^2.\]
+\sssc{Inductance and inductor}
+The inductance $L$ of an element is the voltage across it divided by the derivative of the current through it with respect to time:
+\[v=L\dv{i}{t}.\]
+
+An ideal inductor is a circuit element with an inductance and no resistance or capacitance.
+\begin{center}
+\begin{circuitikz}
+\draw (0,0) to[L, l=Inductor] (3,0);
+\end{circuitikz}
+\end{center}
+An inductor current must not be allowed to jump instantaneously from one value to another.
+
+Integral voltage-current relationship:
+\[i(t)=\frac{1}{L}\int_{t_0}^tv(\tau)\dd{\tau}+i(t_0)=\frac{1}{L}\int_{-\infty}^tv(\tau)\dd{\tau}.\]
+
+Power absorbed:
+\[p=Li\dv{i}{t}.\]
+
+Energy stored:
+\[\int_{-\infty}^tp\dd{t}=\frac{1}{2}Li^2.\]
+\sssc{Reactance}
+Let the capacitance of a circuit element under alternating current at an angular frequency of $\omega$ be $C$. Then its capacitive reactance $X_C$ is defined as:
+\[X_C=\frac{1}{\omega C}.\]
+There is also a definition that is the opposite of the above definition, i.e., the capacitive reactance is negative, which is not used here.
+
+Let the inductance of a circuit element under alternating current with an angular frequency of $\omega$ be $L$. Then its inductive reactance $X_L$ is defined as:
+\[X_L=\omega L.\]
+The reactance $X$ of a circuit element is defined as:
+\[X=X_L-X_C.\]
+A circuit element is said to have net capacitive reactance if $X<0$ and have net inductive reactance if $X>0$.
+\sssc{Impedance}
+The impedance $Z$ of a one-port network is defined as a complex number with its resistance as real part and its reactance as imaginary part:
+\[Z=R+jX.\]
+
+For AC in phasor notation, we can write
+\[v=Zi.\]
+\sssc{Admittance}
+The admittance $Y$ of a one-port network is defined as the reciprocal of its impedance:
+\[Y=\frac{1}{Z}.\]
+\sssc{Conductance}
+The conductance $G$ of a circuit element is defined as the real part of its admittance, for circuit element under direct current, that is, the reciprocal of its resistance.
+\sssc{Susceptance}
+The susceptance $B$ of a circuit element is defined as the imaginary part of its admittance:
+\[Y=G+jB.\]
+\sssc{Direct current (AC)}
+A direct current is a current that is one-directional and with constant voltage and current over time.
+\sssc{Alternating current (AC)}
+An alternating current is a current that changes its voltage and current over time and with zero voltage and current in average over an infinite time interval.
+\sssc{Sinusoidal alternating current}
+A sinusoidal AC is an AC whose voltage $v(t)$ and current $i(t)$ over time can be written in the form
+\[v(t)=v_m\cos(\omega t+\phi),\]
+\[i(t)=i_m\cos(\omega t+\theta).\]
+They can be represented in phasors as $v=v_m\angle\phi$ and $i=i_m\angle\theta$, which can be treated as complex numbers $v_me^{i\phi}$ and $i_me^{i\theta}$.
+
+When the context is clear, sinusoidal AC may be called AC.
+
+A frequency range of sinusoidal AC is called bandwidth.
+\sssc{Active element}
+An active element is an element capable of furnishing an average power greater than zero to some external network over an infinite time interval.
+\sssc{Passive element}
+A passive element is an element that is not an active element.
 \sssc{Lumped-element model, lumped-parameter model, or lumped-component model}
 A simplified and idealized representation of an electrical network that assumes all components are concentrated at a single point and their behavior can be described by idealized mathematical models, that is, the lumped-matter discipline:
 \bit
@@ -58,71 +171,6 @@ An open circuit is an electrical network that is not a circuit.
 A port is a pair of terminals through which current can enter or leave a network and satisfies the port condition: the current flowing into one pole from outside is equal to the current flowing out of the other pole to outside.
 
 An $n$-port network is a network with $2n$ poles forming $n$ ports.
-\sssc{Resistor}
-An ideal resistor is a circuit element with a resistance and no capacitance or inductance.
-\begin{center}
-\begin{circuitikz}
-\draw (0,0) to[R, l=Resistor] (3,0);
-\draw (5,0) to[vR, l=Variable Resistor] (8,0);
-\draw (10,0) to[thermistor, l=Thermistor] (13,0);
-\end{circuitikz}
-\begin{circuitikz}
-\draw (0,0) to[ldR, l=Light Dependent Resistor] (3,0);
-\draw (5,0) to[varistor, l=Varistor] (8,0);
-\end{circuitikz}
-\end{center}
-\subsubsection{Capacitor}
-An ideal capacitor is a circuit element with a capacitance and no resistance or inductance.
-\begin{center}
-\begin{circuitikz}
-\draw (0,0) to[C, l=Capacitor] (3,0);
-\end{circuitikz}
-\end{center}
-\subsubsection{Inductor}
-An ideal inductor is a circuit element with an inductance and no resistance or capacitance.
-\begin{center}
-\begin{circuitikz}
-\draw (0,0) to[L, l=Inductor] (3,0);
-\end{circuitikz}
-\end{center}
-\sssc{Sinusoidal alternating current}
-The voltage and current of a sinusoidal AC
-\[v(t)=v_m\cos(\omega t+\phi),\]
-\[i(t)=i_m\cos(\omega t+\theta),\]
-are represented in phasors $v_m\angle\phi$ and $i_m\angle\theta$, which can be treated as complex numbers $v_me^{i\phi}$ and $i_me^{i\theta}$.
-
-When the context is clear, sinusoidal AC may be called simply AC.
-
-A frequency range of sinusoidal AC is called bandwidth.
-
-Here, all currents discussed are either sinusoidal AC or DC.
-\sssc{Reactance}
-Let the capacitance of a circuit element under alternating current at an angular frequency of $\omega$ be $C$. Then its capacitive reactance $X_C$ is defined as:
-\[X_C=\frac{1}{\omega C}.\]
-There is also a definition that is the opposite of the above definition, i.e., the capacitive reactance is negative, which is not used here.
-
-Let the inductance of a circuit element under alternating current with an angular frequency of $\omega$ be $L$. Then its inductive reactance $X_L$ is defined as:
-\[X_L=\omega L.\]
-The reactance $X$ of a circuit element is defined as:
-\[X=X_L-X_C.\]
-A circuit element is said to have net capacitive reactance if $X<0$ and have net inductive reactance if $X>0$.
-\sssc{Impedance}
-The impedance $Z$ of a one-port network is defined as a complex number with its resistance as real part and its reactance as imaginary part:
-\[Z=R+jX,\]
-where $j=\sqrt{-1}$ is the imaginary unit (since $i$ is used by current).
-
-For AC in phasor notation, we can write
-\[v=Zi.\]
-\sssc{Admittance}
-The admittance $Y$ of a one-port network is defined as the reciprocal of its impedance:
-\[Y=\frac{1}{Z}.\]
-\sssc{Conductance}
-The conductance $G$ of a circuit element is defined as the real part of its admittance, for circuit element under direct current, that is, the reciprocal of its resistance.
-\sssc{Susceptance}
-The susceptance $B$ of a circuit element is defined as the imaginary part of its admittance:
-\[Y=G+jB.\]
-\sssc{Phase shift by impedance}
-A circuit element with resistance $R$ and reactance $X$ introduces a change $\arctan(\frac{X}{R})$ in phase angle difference of current relative to voltage to the output current relative to input current. For in-phase input AC, circuit element with $X>0$ makes output current lags voltage, and circuit element with $X<0$ makes output current leads voltage.
 \sssc{Wire or lead}
 Circuit elements in a network are connected with wires (aka leads), which are assumed to have zero impedance.
 \begin{center}
@@ -132,40 +180,20 @@ Circuit elements in a network are connected with wires (aka leads), which are as
 \end{circuitikz}
 \end{center}
 Adding a wire directly between two nodes is called adding a short circuit.
-\sssc{Linear element and Ohm's law}
-A linear element is a passive element whose resistance $R$, capacitance $C$, and inductance $L$ are assumed to be independent of voltage and current, that is, equivalent to a one-port network consists of ideal resistors, capacitors, and inductors, that is, the voltage-current relationship under sinusoidal AC is a complex (real for DC) equation $v(t)=Z\cdot i(t)$ ($v(t)=R\cdot i(t)$) with voltage $v(t)$, current $i(t)$, and impedance $Z$ (resistance $R$ for DC). The assumption for resistance is the Ohm's law.
-\sssc{Souces}
-Ideal sources are active elements assumed to have zero impedance.
-
-\tb{Independent sources:}
-\bit
-\item An independent voltage source enforces a prescribed DC or sinusoidal AC voltage $v_s(t)$ across its terminals.
-\item An independent current source enforces a prescribed DC or sinusoidal AC current $i_s(t)$ through its terminals.
-\eit
-\begin{center}
-\begin{circuitikz}
-\draw (0,0) node[vsourcesinshape]{} (0,1) node[above]{Source};
-\draw (5,0) node[vsourceAMshape]{} (5,1) node[above]{Independent Voltage Source};
-\draw (10,0) node[isourceAMshape]{} (10,1) node[above]{Independent Current Source};
-\end{circuitikz}
-\end{center}
-\tb{Linear dependent or controlled sources:}
-\bit
-\item A voltage-controlled voltage source enforces a DC or sinusoidal AC voltage $v_s(t)=\mu v_x(t)$ across its terminals, where $v_x(t)$ is control voltage and real for DC or complex for AC constant $\mu$ is dimensionless voltage gain.
-\item A current-controlled voltage source enforces a DC or sinusoidal AC voltage $v_s(t)=ri_x(t)$ across its terminals, where $i_x(t)$ is control current and real for DC or complex for AC constant $r$ is transresistance.
-\item A voltage-controlled current source enforces a DC or sinusoidal AC current $i_s(t)=gv_x(t)$ through its terminals, where $v_x(t)$ is control voltage and real for DC or complex for AC constant $g$ is transconductance.
-\item A current-controlled current source enforces a DC or sinusoidal AC current $i_s(t)=\beta i_x(t)$ through its terminals, where $i_x(t)$ is control current and real for DC or complex for AC constant $\beta$ is dimensionless current gain.
-\eit
-\begin{center}
-\begin{circuitikz}
-\draw (0,0) node[cvsourceAMshape]{} (0,1) node[above]{Controlled Voltage Source};
-\draw (5,0) node[cisourceAMshape]{} (5,1) node[above]{Controlled Current Source};
-\end{circuitikz}
-\end{center}
-\sssc{Practical souces}
-A practical independent voltage source can be approximated with an ideal independent voltage source in series connection with a resistor.
-
-A practical independent current source can be approximated with an ideal independent current source in parallel connection with a resistor.
+\sssc{Kirchhoff's current law (KCL), Kirchhoff's first law, or Kirchhoff's junction rule}
+The algebraic sum of the currents entering any node is zero.
+\sssc{Kirchhoff's voltage law (KVL), Kirchhoff's second law, or Kirchhoff's loop rule}
+The algebraic sum of the voltages around any closed path is zero.
+\sssc{Network as graph}
+A network is a graph with nodes being vertices and branches without nodes inside except ends being edges.
+\sssc{Planar network}
+A network that is planar as a graph.
+\sssc{Series connection}
+Two or more elements are connected in series if they are connected along a single path, and each component has the same current through it, equal to the current through the network. The voltage across the network is equal to the sum of the voltages across each element.
+\sssc{Parallel connection}
+Two or more elements are connected in parallel if they are connected along multiple paths from one node to another, and each component has the same voltage across it, equal to the voltage through the network. The current through the network is equal to the sum of the current through each element.
+\sssc{Bilateral network}
+A bilateral electrical network is an electrical network whose behaviors remain the same regardless of the direction of current flow or applied voltage.
 \sssc{Ground}
 A ground is a node designated to have 0 electric potential. All other electric potential in the network are measured relative to the grounds.
 \bit
@@ -180,24 +208,68 @@ A ground is a node designated to have 0 electric potential. All other electric p
 \draw (10,0) node[cground]{} (10,0) node[above]{Chassis Ground};
 \end{circuitikz}
 \end{center}
-\sssc{Kirchhoff's current law (KCL), Kirchhoff's first law, or Kirchhoff's junction rule}
-The algebraic sum of the currents entering any node is zero.
-\sssc{Kirchhoff's voltage law (KVL), Kirchhoff's second law, or Kirchhoff's loop rule}
-The algebraic sum of the voltages around any closed path is zero.
-\sssc{Network as graph}
-A network is a graph with nodes being vertices and branches without nodes inside except ends being edges.
-\sssc{Planar network}
-A network that is planar as a graph.
-\sssc{Linear network and linear circuit}
-A linear network is a network which consists of only linear elements, independent sources, and linear dependent sources.
+\ssc{Souce}
+Ideal sources are active elements assumed to have zero impedance.
+\sssc{Independent source}
+\bit
+\item An independent voltage source enforces a prescribed DC or sinusoidal AC voltage $v_s(t)$ across its terminals.
+\item An independent current source enforces a prescribed DC or sinusoidal AC current $i_s(t)$ through its terminals.
+\eit
+\begin{center}
+\begin{circuitikz}
+\draw (0,0) node[vsourcesinshape]{} (0,1) node[above]{Source};
+\draw (5,0) node[vsourceAMshape]{} (5,1) node[above]{Independent Voltage Source};
+\draw (10,0) node[isourceAMshape]{} (10,1) node[above]{Independent Current Source};
+\end{circuitikz}
+\end{center}
+\sssc{Linear dependent or controlled source}
+\bit
+\item A voltage-controlled voltage source enforces a DC or sinusoidal AC voltage $v_s(t)=\mu v_x(t)$ across its terminals, where $v_x(t)$ is control voltage and real for DC or complex for AC constant $\mu$ is dimensionless voltage gain.
+\item A current-controlled voltage source enforces a DC or sinusoidal AC voltage $v_s(t)=ri_x(t)$ across its terminals, where $i_x(t)$ is control current and real for DC or complex for AC constant $r$ is transresistance.
+\item A voltage-controlled current source enforces a DC or sinusoidal AC current $i_s(t)=gv_x(t)$ through its terminals, where $v_x(t)$ is control voltage and real for DC or complex for AC constant $g$ is transconductance.
+\item A current-controlled current source enforces a DC or sinusoidal AC current $i_s(t)=\beta i_x(t)$ through its terminals, where $i_x(t)$ is control current and real for DC or complex for AC constant $\beta$ is dimensionless current gain.
+\eit
+\begin{center}
+\begin{circuitikz}
+\draw (0,0) node[cvsourceAMshape]{} (0,1) node[above]{Controlled Voltage Source};
+\draw (5,0) node[cisourceAMshape]{} (5,1) node[above]{Controlled Current Source};
+\end{circuitikz}
+\end{center}
+\sssc{Practical souce}
+A practical independent voltage source can be approximated with an ideal independent voltage source in series connection with a resistor.
 
+A practical independent current source can be approximated with an ideal independent current source in parallel connection with a resistor.
+
+
+
+\sssc{Phase shift by impedance}
+A circuit element with resistance $R$ and reactance $X$ introduces a change $\arctan(\frac{X}{R})$ in phase angle difference of current relative to voltage to the output current relative to input current. For in-phase input AC, circuit element with $X>0$ makes output current lags voltage, and circuit element with $X<0$ makes output current leads voltage.
+
+
+
+
+
+
+
+
+
+
+
+
+
+\ssc{Linear circuit}
+\sssc{Linear element}
+A linear element is a passive element whose resistance $R$, capacitance $C$, and inductance $L$ are independent of voltage and current, that is, equivalent to a one-port network consists of ideal resistors, capacitors, and inductors, that is, the voltage-current relationship under sinusoidal AC is a complex equation $v(t)=Z\cdot i(t)$ ($v(t)=R\cdot i(t)$) with voltage $v(t)$, current $i(t)$, and impedance $Z$ (resistance $R$ for DC). The assumption for resistance is the Ohm's law.
+\sssc{Linear network}
+A linear network is a network which consists of only linear elements, independent sources, and linear dependent sources.
+\sssc{Linear circuit}
 A linear circuit is a circuit which obeys the superposition principle of voltages and currents (but not power) that the voltages across or currents through all one-port subnetwork, called responses or response functions, are linear combinations of the input voltages from independent voltage sources and input currents from independent current sources in it, called forcing functions, that is, consists of only linear elements, independent sources, and linear dependent sources.
+\sssc{Current}
+Here, all currents discussed are linear combinations of sinusoidal AC and DC components, and by the superposition principle, can be analyzed by analyzing each sinusoidal AC and DC component separately and summing the voltages and currents.
 \sssc{Series connection}
-Two or more elements are connected in series if they are connected along a single path, and each component has the same current through it, equal to the current through the network. The voltage across the network is equal to the sum of the voltages across each element. For linear networks, the impedance of the network is equal to the sum of the impedances of each element.
+For linear networks, the impedance of the network is equal to the sum of the impedances of each element.
 \sssc{Parallel connection}
-Two or more elements are connected in parallel if they are connected along multiple paths from one node to another, and each component has the same voltage across it, equal to the voltage through the network. The current through the network is equal to the sum of the current through each element. For linear networks, the admittance of the network is equal to the sum of the admittances of each element.
-\sssc{Bilateral network}
-A bilateral electrical network is an electrical network whose behaviors remain the same regardless of the direction of current flow or applied voltage.
+For linear networks, the admittance of the network is equal to the sum of the admittances of each element.
 \ssc{Nodal Analysis or Node-voltage Analysis of Linear Circuit under DC or Sinusoidal AC}
 \sssc{Supernode}
 If a voltage source is connected between two nodes, enclose both nodes and the source as a supernode.
