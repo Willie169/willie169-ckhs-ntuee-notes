@@ -14,6 +14,7 @@
 \item Voltage $v$ (volt = V)
 \item Current $i$ (ampere = A)
 \item Angular frequency $\omega$ (Hz = 1 / s)
+\item Complex angular frequency $s$ (Hz = 1 / s)
 \item Power $p$ (watt = W = A V)
 \item Imaginary unit (since $i$ is used by current) $j=\sqrt{-1}$
 \item Resistance $R$ (ohm = \textOmega = V / A)
@@ -29,9 +30,24 @@
 An electrical network or simply network is an interconnection of electrical components or a model of such an interconnection, consisting of electrical elements.
 \sssc{Electrical element}
 Electrical elements or simply elements are conceptual abstractions representing idealized electrical components, such as resistors, capacitors, and inductors, used in the analysis of electrical networks and denoted with circuit symbols, also called electronic symbol, in circuit diagrams.
+\sssc{Direct current (DC)}
+A direct current is a current that is one-directional and with constant voltage and current over time.
+\sssc{Alternating current (AC)}
+An alternating current is a current that changes its voltage and current over time and with zero voltage and current in average over an infinite time interval.
+\sssc{Sinusoidal alternating current}
+A sinusoidal AC is an AC whose voltage $v(t)$ and current $i(t)$ over time can be written in the form
+\[v(t)=v_m\cos(\omega t+\phi),\]
+\[i(t)=i_m\cos(\omega t+\theta).\]
+They can be represented in phasors as $v=v_m\angle\phi$ and $i=i_m\angle\theta$, which can be treated as complex numbers $v_me^{i\phi}$ and $i_me^{i\theta}$.
+\sssc{General current in frequency domain}
+Given a general current with voltage $v(t)$ and current $i(t)$ over time, we can perform Fourier transforms,
+\[v(\omega)=\mathcal{F}\{v(t)\}(\omega)=\int_{-\infty}^{\infty}v(t)e^{-i\omega t}\dd{t},\]
+\[i(\omega)=\mathcal{F}\{i(t)\}(\omega)=\int_{-\infty}^{\infty}i(t)e^{-i\omega t}\dd{t},\]
+to obtain its voltage $v(\omega)$ and current $i(\omega)$ as a function of frequency domain $\omega$.
 \sssc{Resistance and resistor}
-The resistance $R$ of an element is the voltage across it over the current through it:
-\[v=Ri.\]
+The resistance $R$ of an element is the voltage across it over the current through it under DC:
+\[v(t)=Ri(t),\]
+\[v(\omega)=Ri(\omega).\]
 
 An ideal resistor is a circuit element with a resistance and no capacitance or inductance.
 \begin{center}
@@ -46,10 +62,12 @@ An ideal resistor is a circuit element with a resistance and no capacitance or i
 \end{circuitikz}
 \end{center}
 Power absorbed:
-\[p=\frac{v^2}{R}=i^2R.\]
+\[p(t)=\frac{\qty(v(t))^2}{R}=\qty(i(t))^2R,\]
+\[p(\omega)=\frac{\qty(v(\omega))^2}{R}=\qty(i(\omega))^2R.\]
 \sssc{Capacitance and capacitor}
 The capacitance $C$ of an element is the current through it divided by the derivative of the voltage across it with respect to time:
-\[i=C\dv{v}{t}.\]
+\[i(t)=C\dv{v(t)}{t},\]
+\[i(\omega)=j\omega Cv(\omega).\]
 
 An ideal capacitor is a circuit element with a capacitance and no resistance or inductance.
 \begin{center}
@@ -63,13 +81,14 @@ Integral voltage-current relationship:
 \[v(t)=\frac{1}{C}\int_{t_0}^ti(\tau)\dd{\tau}+v(t_0)=\frac{1}{C}\int_{-\infty}^ti(\tau)\dd{\tau}.\]
 
 Power absorbed:
-\[p=Cv\dv{v}{t}.\]
+\[p(t)=Cv(t)\dv{v(t)}{t}.\]
 
 Energy stored:
-\[\int_{-\infty}^tp\dd{t}=\frac{1}{2}Cv^2.\]
+\[\int_{-\infty}^tp(t)\dd{t}=\frac{1}{2}C\qty(v(t))^2.\]
 \sssc{Inductance and inductor}
 The inductance $L$ of an element is the voltage across it divided by the derivative of the current through it with respect to time:
-\[v=L\dv{i}{t}.\]
+\[v(t)=L\dv{i(t)}{t},\]
+\[v(\omega)=j\omega Li(\omega).\]
 
 An ideal inductor is a circuit element with an inductance and no resistance or capacitance.
 \begin{center}
@@ -83,49 +102,33 @@ Integral voltage-current relationship:
 \[i(t)=\frac{1}{L}\int_{t_0}^tv(\tau)\dd{\tau}+i(t_0)=\frac{1}{L}\int_{-\infty}^tv(\tau)\dd{\tau}.\]
 
 Power absorbed:
-\[p=Li\dv{i}{t}.\]
+\[p(t)=Li(t)\dv{i(t)}{t}.\]
 
 Energy stored:
-\[\int_{-\infty}^tp\dd{t}=\frac{1}{2}Li^2.\]
+\[\int_{-\infty}^tp(t)\dd{t}=\frac{1}{2}L\qty(i(t))^2.\]
 \sssc{Reactance}
-Let the capacitance of a circuit element under alternating current at an angular frequency of $\omega$ be $C$. Then its capacitive reactance $X_C$ is defined as:
-\[X_C=\frac{1}{\omega C}.\]
-There is also a definition that is the opposite of the above definition, i.e., the capacitive reactance is negative, which is not used here.
+The (capacitive) reactance $X_C$ of a one-port network with capacitance $C$ is defined as:
+\[X_C(\omega)=\frac{1}{\omega C}.\]
+There is also a definition that uses the negation of the definition above, which is not used here.
 
-Let the inductance of a circuit element under alternating current with an angular frequency of $\omega$ be $L$. Then its inductive reactance $X_L$ is defined as:
-\[X_L=\omega L.\]
-The reactance $X$ of a circuit element is defined as:
-\[X=X_L-X_C.\]
-A circuit element is said to have net capacitive reactance if $X<0$ and have net inductive reactance if $X>0$.
+The (inductive) reactance $X_L$ of a one-port network with inductance $L$ is defined as:
+\[X_L(\omega)=\omega L.\]
+The reactance $X$ of a one-port network is defined as:
+\[X(\omega)=X_L(\omega)-X_C(\omega).\]
+A one-port network is said to have net capacitive reactance if $X(\omega)<0$ and have net inductive reactance if $X(\omega)>0$.
 \sssc{Impedance}
 The impedance $Z$ of a one-port network is defined as a complex number with its resistance as real part and its reactance as imaginary part:
-\[Z=R+jX.\]
-
-For AC in phasor notation, we can write
-\[v=Zi.\]
+\[Z(\omega)=R+jX(\omega),\]
+\[v(\omega)=Z(\omega)i(\omega).\]
+Thus, the behaviors of resistors, capacitors, and inductors can all be presented with a complex function of frequency domain, impedance, with net capacitance existing and being propositional to reciprocal of reactance if reactance is negative, net inductance existing and being propositional to the reactance if reactance is positive, and no net capacitance or inductance existing if reactance is zero.
 \sssc{Admittance}
-The admittance $Y$ of a one-port network is defined as the reciprocal of its impedance:
-\[Y=\frac{1}{Z}.\]
+The admittance $Y(\omega)$ of a one-port network is defined as the reciprocal of its impedance:
+\[Y(\omega)=\frac{1}{Z(\omega)}.\]
 \sssc{Conductance}
-The conductance $G$ of a circuit element is defined as the real part of its admittance, for circuit element under direct current, that is, the reciprocal of its resistance.
+The conductance $G(\omega)$ of a circuit element is defined as the real part of its admittance.
 \sssc{Susceptance}
-The susceptance $B$ of a circuit element is defined as the imaginary part of its admittance:
-\[Y=G+jB.\]
-\sssc{Direct current (AC)}
-A direct current is a current that is one-directional and with constant voltage and current over time.
-\sssc{Alternating current (AC)}
-An alternating current is a current that changes its voltage and current over time and with zero voltage and current in average over an infinite time interval.
-\sssc{Sinusoidal alternating current}
-A sinusoidal AC is an AC whose voltage $v(t)$ and current $i(t)$ over time can be written in the form
-\[v(t)=v_m\cos(\omega t+\phi),\]
-\[i(t)=i_m\cos(\omega t+\theta).\]
-They can be represented in phasors as $v=v_m\angle\phi$ and $i=i_m\angle\theta$, which can be treated as complex numbers $v_me^{i\phi}$ and $i_me^{i\theta}$.
-
-When the context is clear, sinusoidal AC may be called AC.
-
-A frequency range of sinusoidal AC is called bandwidth.
-\sssc{Phase shift by impedance}
-A circuit element with resistance $R$ and reactance $X$ introduces a change $\arctan(\frac{X}{R})$ in phase angle difference of current relative to voltage to the output current relative to input current. For in-phase input AC, circuit element with $X>0$ makes output current lags voltage, and circuit element with $X<0$ makes output current leads voltage.
+The susceptance $B(\omega)$ of a circuit element is defined as the imaginary part of its admittance:
+\[Y(\omega)=G(\omega)+jB(\omega).\]
 \sssc{Active element}
 An active element is an element capable of furnishing an average power greater than zero to some external network over an infinite time interval.
 \sssc{Passive element}
@@ -210,6 +213,8 @@ A ground is a node designated to have 0 electric potential. All other electric p
 \draw (10,0) node[cground]{} (10,0) node[above]{Chassis Ground};
 \end{circuitikz}
 \end{center}
+\sssc{SPICE}
+SPICE (Simulation Program with Integrated Circuit Emphasis) is a general-purpose, open-source analog electronic circuit simulator. It is a program used in integrated circuit and board-level design to check the integrity of circuit designs and to predict circuit behavior.
 \ssc{Souce}
 Ideal sources are active elements assumed to have zero impedance.
 \sssc{Independent source}
@@ -248,12 +253,19 @@ A linear element is a passive element whose resistance $R$, capacitance $C$, and
 A linear network is a network which consists of only linear elements, independent sources, and linear dependent sources.
 \sssc{Linear circuit}
 A linear circuit is a circuit which obeys the superposition principle of voltages and currents (but not power) that the voltages across or currents through all one-port subnetwork, called responses or response functions, are linear combinations of the input voltages from independent voltage sources and input currents from independent current sources in it, called forcing functions, that is, consists of only linear elements, independent sources, and linear dependent sources.
-\sssc{Current}
-Here, all currents discussed are linear combinations of sinusoidal AC and DC components, and by the superposition principle, can be analyzed by analyzing each sinusoidal AC and DC component separately and summing the voltages and currents.
 \sssc{Series connection}
-For linear networks, the impedance of the network is equal to the sum of the impedance of each element, the reciprocal of the capacitance of the network is equal to the sum of the reciprocal of the capacitance of each element, and the inductance of the network is equal to the sum of the inductance of each element.
+For linear networks, the impedance of the network is equal to the sum of the impedance of each element.
 \sssc{Parallel connection}
-For linear networks, the admittance of the network is equal to the sum of the admittance of each element, the capacitance of the network is equal to the sum of the capacitance of each element, and the reciprocal of the inductance of the network is equal to the sum of the reciprocal of the inductance of each element.
+For linear networks, the admittance of the network is equal to the sum of the admittance of each element.
+\sssc{Current}
+Every current can be expressed as a linear combination of a DC component and an AC component, with the later as a complex function of frequency domain that can be obtained via Laplace transform, and thus by the superposition principle, we can analyze any current by analyzing its DC component, analyzing AC component with voltages, currents, and impedances as complex functions of frequency domain and then reverse Laplace transform to time domain, and summing the voltages and currents.
+\sssc{Linear circuit superposition analysis}
+\ben
+\item Select one of the independent sources. Set all other independent sources to zero. This means voltage sources are replaced with short circuits and current sources are replaced with open circuits. Leave dependent sources in the circuit.
+\item Analyze the simplified circuit to find the desired currents and voltages.
+\item Repeat previous steps until each independent source has been considered.
+\item Sum the currents and voltages obtained from the separate analyses above.
+\een
 \ssc{Nodal Analysis or Node-voltage Analysis of Linear Circuit under DC or Sinusoidal AC}
 \sssc{Supernode}
 If a voltage source is connected between two nodes, enclose both nodes and the source as a supernode.
@@ -321,20 +333,10 @@ Thévenin impedance and Norton impedance are the same and can be found with:
 \eit
 \sssc{Maximum power theorem}
 A linear network delivers maximum power to a load impedance when it is equal to the Thévenin impedance or its conjugate of the network.
-\ssc{Linear circuit superposition procedure}
-\ben
-\item Select one of the independent sources. Set all other independent sources to zero. This means voltage sources are replaced with short circuits and current sources are replaced with open circuits. Leave dependent sources in the circuit.
-\item Analyze the simplified circuit to find the desired currents and voltages.
-\item Repeat previous steps until each independent source has been considered.
-\item Sum the currents and voltages obtained from the separate analyses above.
-\een
-\ssc{SPICE}
-\sssc{SPICE}
-SPICE (Simulation Program with Integrated Circuit Emphasis) is a general-purpose, open-source analog electronic circuit simulator. It is a program used in integrated circuit and board-level design to check the integrity of circuit designs and to predict circuit behavior.
-\sssc{Ngspice}
-An open-source successor of SPICE.
-
-
+\ssc{RC, RL, LC, and RLC Circuits}
+\sssc{Series RC voltage low-pass filter circuit}
+An input AC with voltage $v_{in}$ is enforced from node 0 to node 1, a resistance $R$ connects node 1 and node 2, a capacitance $C$ connects node 2 and node 0, and output voltage $v_c$ and current $i_c$ is measured at node 0 to node 2.
+\[v_{in}
 
 
 
@@ -349,7 +351,7 @@ An op amp has five terminals:
 \bit
 \item $v_+$: non-inverting input voltage of the terminal at the $+$ sign;
 \item $v_-$: inverting input voltage of the terminal at the $-$ sign;
-\item $v_o$: output voltage of the terminal at the opposite side of inputs;
+\item $v_{out}$: output voltage of the terminal at the opposite side of inputs;
 \item $v_{CC+}$: positive supply voltage, denoted on the $+$ side of an op-amp or omitted;
 \item $v_{CC-}$: negative supply voltage, denoted on the $-$ side of an op-amp or omitted.
 \eit
@@ -358,26 +360,24 @@ An op amp has five terminals:
 \draw (0,0) node[op amp] (op amp) {};
 \end{circuitikz}
 \end{center}
-\[v_o=A(v_+-v_-),\]
-where $A$ is open-loop gain.
+\[v_{out}=A(v_+-v_--v_{os}),\]
+where $A$ is open-loop gain, and $v_{os}$ is input offset voltage.
 \sssc{Ideal op amp}
 \bit
-\item Infinite open-loop gain: $A=\infty$.
-\item Zero input offset voltage: $v_o=0$ when $v_+=v_-$.
-\item Infinite input impedance: No current flow into either of the input terminals.
-\item Zero output impedance: Can drive any load without output voltage change.
-\item Infinite bandwidth: Gain is independent of frequency.
+\item Infinite open-loop gain, infinite bandwidth, and zero output impedance: $A=\infty$ and is independent of frequency and output voltage.
+\item Zero input offset voltage: $v_{os}=0$.
+\item No current flow into either of the input terminals.
 \eit
 \sssc{Inverting amplifier}
-An inverting amplifier consists of an op amp, an input resistor $R_i$, and a feedback resistor $R_f$, where input voltage $v_{in}$ is connected to $v_-$ through $R_i$, $v_+$ is connected to ground, output voltage $v_{out}$ is connected to $v_o$, and $v_o$ is fed back to $v_-$ through $R_f$.
+An inverting amplifier consists of an op amp, an input resistor $R_i$, and a feedback resistor $R_f$, where input voltage $v_{in}$ is connected to $v_-$ through $R_i$, $v_+$ is connected to ground, and $v_{out}$ is fed back to $v_-$ through $R_f$.
 \[i_{in}=\frac{v_{in}}{R_{in}}=i_f=\frac{-v_{out}}{R_f},\]
 \[v_{out}=-\frac{R_f}{R_{in}}v_{in}.\]
 \sssc{Noninverting amplifier}
-A noninverting amplifier consist of an op amp, a ground resistor $R_g$, and a feedback resistor $R_f$, where input voltage $v_{in}$ is connected to $v_+$, $v_-$ is connected ground through $R_g$, output voltage $v_{out}$ is connected to $v_o$, and $v_o$ is fed back to $v_-$ through $R_f$.
+A noninverting amplifier consist of an op amp, a ground resistor $R_g$, and a feedback resistor $R_f$, where input voltage $v_{in}$ is connected to $v_+$, $v_-$ is connected ground through $R_g$, and $v_{out}$ is fed back to $v_-$ through $R_f$.
 \[v_{in}=v_+=v_-=v_{out}\frac{R_g}{R_f+R_g},\]
 \[v_{out}=\qty(1+\frac{R_f}{R_g})v_{in}.\]
 \sssc{Summing amplifier}
-A summing amplifier consists of an op amp, input voltages $v_1,v_2,\ldots,v_n$, $n$ input resistors $R_1,R_2,\ldots,R_n$, and a feedback resistor $R_f$, where for any $k\in\bbN\land k\leq n$, $v_k$ is connected to $v_-$ through $R_k$, $v_+$ is connected to ground, output voltage $v_{out}$ is connected to $v_o$, and $v_o$ is fed back to $v_-$ through $R_f$.
+A summing amplifier consists of an op amp, input voltages $v_1,v_2,\ldots,v_n$, $n$ input resistors $R_1,R_2,\ldots,R_n$, and a feedback resistor $R_f$, where for any $k\in\bbN\land k\leq n$, $v_k$ is connected to $v_-$ through $R_k$, $v_+$ is connected to ground, and $v_{out}$ is fed back to $v_-$ through $R_f$.
 \[i_k=\frac{v_k}{R_k},\]
 \[\sum_{k=1}^ni_k=i_f=\frac{-v_{out}}{R_f},\]
 \[v_{out}=-R_f\sum_{k=1}^n\frac{v_k}{R_k}.\]
@@ -386,7 +386,7 @@ When $R_k=R$ for all $k\in\bbN\land k\leq n$:
 \sssc{Differential amplifier}
 A differential amplifier consists of a minuend $v_1$, a subtrahend $v_2$, and four resistors $R_1,R_2,R_3,R_4$ satisfying the condition
 \[\frac{R_1}{R_2}=\frac{R_3}{R_4},\]
-where $v_1,v_2$ are connected to $v_-,v_+$ through $R_1,R_2$ respectively, output voltage $v_{out}$ is connected to $v_o$, $v_o$ is fed back to $v_-$ through $R_3$, and $v_+$ is connected to ground through $R_4$.
+where $v_1,v_2$ are connected to $v_-,v_+$ through $R_1,R_2$ respectively, $v_{out}$ is fed back to $v_-$ through $R_3$, and $v_+$ is connected to ground through $R_4$.
 \[v_+=v_2\frac{R_4}{R_2+R_4},\]
 \[\frac{v_1-v_-}{R_1}=\frac{v_--v_{out}}{R_3},\]
 \[\frac{v_1}{R_2}-v_2\frac{R_4}{R_2+R_4}\frac{R_2+R_4}{R_2R_4}+\frac{v_{out}}{R_4}=0,\]
