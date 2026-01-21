@@ -1,6 +1,3 @@
-DC analysis of resistive circuit
-Laplace
-
 \documentclass[a4paper,12pt]{article}
 \setcounter{secnumdepth}{5}
 \setcounter{tocdepth}{3}
@@ -16,7 +13,7 @@ Laplace
 \bit
 \item Voltage $v$ (volt = V)
 \item Current $i$ (ampere = A)
-\item Complex angular frequency $s$ (Hz = 1 / s)
+\item Complex-valued angular frequency $s$ (Hz = 1 / s)
 \item Power $p$ (watt = W = A V)
 \item Imaginary unit (since $i$ is used by current) $j=\sqrt{-1}$
 \item Resistance $R$ (ohm = \textOmega = V / A)
@@ -42,14 +39,14 @@ A sinusoidal AC is an AC whose voltage $v(t)$ and current $i(t)$ over time can b
 \[i(t)=i_m\cos(\omega t+\theta).\]
 They can be represented in phasors as $v=v_m\angle\phi$ and $i=i_m\angle\theta$, which can be treated as complex numbers $v_me^{i\phi}$ and $i_me^{i\theta}$.
 \sssc{General current in frequency domain}
-Given a general current with voltage $v(t)$ and current $i(t)$ over time, we can perform Fourier transforms,
-\[v(\omega)=\mathcal{F}\{v(t)\}(\omega)=\int_{-\infty}^{\infty}v(t)e^{-i\omega t}\dd{t},\]
-\[i(\omega)=\mathcal{F}\{i(t)\}(\omega)=\int_{-\infty}^{\infty}i(t)e^{-i\omega t}\dd{t},\]
-to obtain its voltage $v(\omega)$ and current $i(\omega)$ as a function of frequency domain $\omega$.
+Given a general current with voltage $v(t)$ and current $i(t)$ over time since $t=0$, we can perform Laplace transforms,
+\[v(s)=\mathcal{L}\{v(t)\}(s)=\int_0^{\infty}v(t)e^{-st}\dd{t},\]
+\[i(s)=\mathcal{L}\{i(t)\}(s)=\int_0^{\infty}i(t)e^{-st}\dd{t},\]
+to obtain its voltage $v(s)$ and current $i(\omega)$ as a function of frequency domain $s$.
 \sssc{Resistance and resistor}
 The resistance $R$ of an element is the voltage across it over the current through it under DC:
 \[v(t)=Ri(t),\]
-\[v(\omega)=Ri(\omega).\]
+\[v(s)=Ri(s).\]
 
 An ideal resistor is a circuit element with a resistance and no capacitance or inductance.
 \begin{center}
@@ -64,12 +61,11 @@ An ideal resistor is a circuit element with a resistance and no capacitance or i
 \end{circuitikz}
 \end{center}
 Power absorbed:
-\[p(t)=\frac{\qty(v(t))^2}{R}=\qty(i(t))^2R,\]
-\[p(\omega)=\frac{\qty(v(\omega))^2}{R}=\qty(i(\omega))^2R.\]
+\[p(t)=\frac{\qty(v(t))^2}{R}=\qty(i(t))^2R.\]
 \sssc{Capacitance and capacitor}
 The capacitance $C$ of an element is the current through it divided by the derivative of the voltage across it with respect to time:
 \[i(t)=C\dv{v(t)}{t},\]
-\[i(\omega)=j\omega Cv(\omega).\]
+\[i(s)=js Cv(\omega).\]
 
 An ideal capacitor is a circuit element with a capacitance and no resistance or inductance.
 \begin{center}

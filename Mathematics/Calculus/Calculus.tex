@@ -163,23 +163,11 @@ A triangular wave with period $T$, crest $A_1$, and trough $A_0$ is
 A sawtooth wave with period $T$, crest $A_1$, and trough $A_0$ is
 \[f(t)=\frac{A_0+A_1}{2}+\qty(A_1-A_0)\qty(\frac{t}{T}-\left\lfloor\frac{t}{T}+\frac{1}{2}\right\rfloor).\]
 \sssc{Heaviside step function (黑維塞階躍函數) or Unit step function (單位階躍函數)}
-The Heaviside step function or unit step function $u(x)\colon\bbR\to\bbR$ is defined as:
+The Heaviside step function or unit step function $u(x)\colon\bbR\to\bbR$ (also denoted as $H(x)$) is defined as either
 \[u(x)=
 \begin{cases}0,\quad &x<0\\
 1,\quad &x\geq 0
-\end{cases},\]
-where $u(0)$ is sometimes defined to be $\frac{1}{2}$ or other values instead.
-\sssc{Dirac delta function (狄拉克 δ 函數)}
-The Dirac delta function $\delta(x)\colon\bbR\to\bbR\cup\{-\infty,\infty\}$ is defined as:
-\[\delta(x) =
-\begin{cases}
-\infty, & x = 0, \\
-0, & x \neq 0.
-\end{cases}\]
-\[\int _{-\infty }^{\infty }\delta(x) \, \mathrm{d}x = 1.\]
-\[\int_0^x\delta(t)\,\mathrm{d}t=u(x).\]
-\[u'(x)=\delta(x).\]
-\[\forall \varepsilon > 0:\,\int_{a-\varepsilon}^{a+\varepsilon} f(x) \delta(x-a) \, \mathrm{d}x = f(a).\]
+\end{cases}.\]
 
 
 
@@ -374,21 +362,25 @@ Let $X$ and $Y$ be topological spaces and function $f\colon I\subseteq X\to Y$ b
 Let $X$ and $Y$ be topological spaces and function $f\colon I\subseteq X\to Y$ be continuous on a subset $J$ of $I$, then for any path-connected subset $K$ of $J$, $f(K)$ is a path-connected subset of $Y$.
 \ssc{Piecewise continuity}
 \sssc{Piecewise continuity of real functions}
-Let $f\colon D\subseteq\mathbb{R}\to\mathbb{R}$ be a function. If there exists a family $\{[a_i,b_i]\mid i\in I\}$ of closed intervals such that:
+Let $f\colon B\subseteq\bbR\to\bbR$ be a function and $D$ be subset of $B$. If there exists an indexed family $\{[a_i,b_i]\mid i\in I\}$ of closed intervals such that:
 \begin{itemize}
-\item for every closed interval $V$, the set $\{i\in I\mid V\cap [a_i,b_i]\neq\varnothing\}$ is finite (some sources require instead that $n(I)$ is finite, which is stronger),
-\item $D=\bigcup_{i\in I}[a_i,b_i]$,
+\item for every closed interval $V$, the set $\{i\in I\mid V\cap [a_i,b_i]\neq\varnothing\}$ is finite (some sources require instead that $n(I)$ is finite, which is stronger and not used here),
+\item $D\subseteq\bigcup_{i\in I}[a_i,b_i]\subseteq B$,
 \item function $f\big\vert_{a_i}^{b_i}\colon(a_i,b_i)\to Y$ is continuous for every $i\in I$, and
 \item there exist finite $\lim_{x\to a_i^{\phantom{i}+}}f(x)$ and $\lim_{x\to b_i^{\phantom{i}-}}f(x)$ for every $i\in I$.
 \end{itemize},
-we say $f$ is piecewise continuous (on $\bigcup_{i\in I}[a_i,b_i]$).
+we say $f$ is piecewise continuous on $D$.
+
+We say $f$ is piecewise continuous iff it is piecewise continuous on $B$.
 \sssc{Piecewise continuity of functions between topological spaces}
-Let $X$ and $Y$ be topological spaces, and $f\colon D\subseteq X\to Y$ be a function. If there exists a locally finite (some sources require instead finite, which is stronger) family $\{U_i\mid i\in I\}$ of closed subsets of $X$ such that:
+Let $X$ and $Y$ be topological spaces, $f\colon B\subseteq X\to Y$ be a function, and $D$ be a subset of $B$. If there exists a locally finite (some sources require instead finite, which is stronger and not used here) indexed family $\{U_i\mid i\in I\}$ of closed subsets of $X$ such that:
 \begin{itemize}
-\item $D=\bigcup_{i\in I}U_i$, and
-\item there exists a function $g_i\colon U_i\to Y$ that is continuous on $U_i$ such that $\forall x\in\operatorname{int}\left(U_i\right)f(x)=g_i(x)$ for every $i\in I$.
+\item $D\subseteq\bigcup_{i\in I}U_i\subseteq B$, and
+\item there exists a function $g_i\colon U_i\to Y$ that is continuous on $U_i$ such that $\forall x\in\operatorname{int}\left(U_i\right)\colon f(x)=g_i(x)$ for every $i\in I$.
 \end{itemize},
-we say $f$ is piecewise continuous (on $\bigcup_{i\in I}U_i$).
+we say $f$ is piecewise continuous on $B$.
+
+We say $f$ is piecewise continuous iff it is piecewise continuous on $B$.
 \ssc{Uniform continuity (一致連續)}
 \sssc{Uniform continuity of functions between metric spaces}
 Let $(X,d_1)$ and $(Y,d_2)$ be metric spaces, and $f\colon D\subseteq X\to Y$ be a function. $f$ is called to be uniformly continuous if for every real number $\varepsilon >0$ there exists a real number $\delta >0$ such that $x,y\in D$ with $d_{1}(x,y)<\delta$ implies $d_{2}(f(x),f(y))<\varepsilon$.
@@ -991,6 +983,31 @@ PLACEHOLDER
 PLACEHOLDER
 \sssc{Space of BV functions}
 PLACEHOLDER (is a Banach space)
+\ssc{Dirac delta function or unit impulse}
+\sssc{As an extended real function with informally assigned integral properties}
+The Dirac delta function $\delta(x)\colon\bbR^n\to\bar{\bbR}$ with $n\in\bbN$ is a function defined as
+\[\delta(x) =
+\begin{cases}
+\infty, & x = 0, \\
+0, & x \neq 0
+\end{cases}\]
+and for all $0\in\Omega\subseteq D_f\subseteq\bbR^n$ with $n\in\bbN$, for all indexed family $A\colon I\to\mathcal{A}\subseteq D_f;\;i\mapsto A_i$ with $I=J\cap\bbN$ for some interval $J$,
+\[\int f(x)\prod_{i\in I}\delta(A_i)\dd{x}\coloneq\sum_{i\in I}u(f(A_i)),\]
+\[\int_{\Omega}f(x)\prod_{i\in I}\delta(A_i)\dd{x}\coloneq\sum_{i\in I}f(A_i).\]
+Let
+\[u_U(x)\coloneq\sum_{i\in I}u(A_i),\]
+\[u_U'(x)\coloneq\prod_{i\in I}\delta(A_i).\]
+\sssc{As a measure}
+For all indexed family $A\colon I\to\mathcal{A}\subseteq\bbR^n;\;i\mapsto A_i$ with $n\in\bbN$ and $I=J\cap\bbN$ for some interval $J$, the definite integrals involving the product of Dirac delta functions $\prod_{i\in I}\delta(A_i)$ can be rigorously defined via a Radon measure called Dirac measure $\delta_A$ that for any $\Omega\in\bbR^n$,
+\[\delta_A(\Omega)\coloneq\abs{\Omega\cap A(I)}.\]
+Thus for any function $f$ such that $0\in\Omega\subseteq D_f\subseteq\bbR^n$ with $n\in\bbN$, for all such indexed family with $A(I)\subseteq D_f$,
+\[\int_{\Omega}f(x)\prod_{i\in I}\delta(A_i)\dd{x}\coloneq\int_{\Omega}f(x)\dd{\delta_A(x)}=\sum_{i\in I}f(A_i).\]
+\sssc{As proper or improper Riemann–Stieltjes integral}
+For any function $f$ such that $0\in\Omega\subseteq D_f\subseteq\bbR^n$ with $n\in\bbN$, for all indexed family $A\colon I\to\mathcal{A}\subseteq D_f;\;i\mapsto A_i$ with $n\in\bbN$ and $I=J\cap\bbN$ for some interval $J$, with
+\[u_A(x)\coloneq\sum_{i\in I}u(A_i),\]
+where $u$ is the unit step function, we define
+\[\int_{\Omega}f(x)\prod_{i\in I}\delta(A_i)\dd{x}\coloneq\int_{\Omega}f(x)\dd{u_A(x)}=\sum_{i\in I}f(A_i),\]
+where $\int_{\Omega}f(x)\dd{u_A(x)}$ is a proper or improper Riemann–Stieltjes integral.
 
 
 
@@ -2992,66 +3009,90 @@ PLACEHOLDER
 PLACEHOLDER
 Integral Transform
 Linear transform
-\ssc{Laplace transform (拉普拉斯變換)}
-\sssc{(Unilateral or One-sided) Laplace transform (（單邊）拉普拉斯變換)}
-The (unilateral or one-sided) Laplace transform is an integral transform that converts a function of a real variable (usually $t$, in the time domain) to a function of a complex variable (usually $s$, in the complex-valued frequency domain, also known as $s$-domain, or $s$-plane). The functions are often denoted in lowercase for the time-domain representation and uppercase for the frequency-domain.
+\ssc{(Unilateral or One-sided) Laplace transform (（單邊）拉普拉斯變換)}
+\sssc{Introduction}
+The (unilateral or one-sided) Laplace transform is an integral transform that converts a function of a real variable $t$, called time domain, to a complex function of a complex variable $s$, called (complex-valued) frequency domain, $s$-domain, or $s$-plane. The functions are often denoted in lowercase for the time-domain and uppercase for the frequency-domain.
+\sssc{Definition as Lebesgue integral}
+For any set $S$, for any complex-valued functions $g_j(t)$ defined on $D_j\superseteq\mathbb{R}_{\geq 0}$, for any indexed family $A_j\colon I_j\to\mathcal{A}_j\subseteq D_j;\;i\mapsto A_{j_i}$ with $n\in\bbN$ and $I_j=J_j\cap\bbN$ for some interval $J_j$, the Laplace transform of the extended complex-valued function
+\[f(t)=\sum_{j\in S}g_j(t)\prod_{i\in I_j}\delta(A_{j_i}),\]
+denoted as $\mathcal{L}\{f(t)\}(s)$ or $F(s)$, is defined as
+\[\mathcal{L}\{f(t)\}(s)=F(s)=\int_0^{\infty}f(t)e^{-st}\dd{t},\]
+with integrals involving Dirac detla functions defined via Dirac measures.
 
-The Laplace transform of a real function $f(t)$, denoted as $\mathcal{L}\{f(t)\}(s)$ or $F(s)$ is defined as the improper integral
-\[\mathcal{L}\{f(t)\}(s) = F(s) = \int_0^{\infty} e^{-st} f(t)\dd{t}.\]
+The convergence of a Laplace transform at a value of $s$ is defined as the existence of such Lebesgue integral.
+\sssc{Definition as improper Riemann–Stieltjes integral}
+For any set $S$, for any complex-valued functions $g_j(t)$ defined on $D_j\superseteq\mathbb{R}_{\geq 0}$, for any indexed family $A_j\colon I_j\to\mathcal{A}_j\subseteq D_j;\;i\mapsto A_{j_i}$ with $n\in\bbN$ and $I_j=J_j\cap\bbN$ for some interval $J_j$, the Laplace transform of the extended complex-valued function
+\[f(t)=\sum_{j\in S}g_j(t)\prod_{i\in I_j}\delta(A_{j_i}),\]
+denoted as $\mathcal{L}\{f(t)\}(s)$ or $F(s)$, is defined, with $\mathcal{f}(t)$, typically denoted simply as $f(t)$ defined as any function such that
+\bit
+\item its domain is a super set of an interval $[a,\infty)$ for some $a\in\bbR_{<0}$,
+\item $\mathcal{f}(t)=f(t)$ for all $t\in\bbR_{\geq 0}$, and
+\item it's continuous on some interval $[a,0)$ for some $a\in\bbR_{<0}$,
+\eit
+as,
+\[\mathcal{L}\{f(t)\}(s)=F(s)=\lim_{\varepsilon\to 0^+}\int_{-\varepsilon}^{\infty}\mathcal{f}(t)e^{-st}\dd{t},\]
+with integrals involving Dirac detla functions defined via improper Riemann–Stieltjes integral, where $\lim_{\varepsilon\to 0^+}\int_{-\varepsilon}^{\infty}$ is typically denoted as $\int_{0^-}^{\infty}$.
 
-In the context of Laplace transform, convergence refers to absolute convergence, that is, we say $F(s)$ converges or $f(t)$ is Laplace-transformable if the improper integral
-\[\int_0^{\infty} \abs{e^{-st} f(t)}\dd{t}\]
-converges absolutely for some real $s$.
-
-The set of values for which $F(s)$ converges, called region of convergence (ROC), is either of the form $\Re(s) > a$ or $\Re(s) \geq a$, where $a$ is an extended real constant, i.e. $-\infty\leq a\leq\infty$.
+The convergence of a Laplace transform at a value of $s$ is defined as the absolute convergence of such improper Riemann–Stieltjes integral.
+\sssc{Region of convergence (ROC)}
+The set of values of $s$ for which $F(s)$ converges, called region of convergence (ROC), is a class of either $\Re(s) > a$ or $\Re(s) \geq a$ for some extended real constant $a$, called abscissa of convergence.
 \sssc{Laplace transformability}
-A function $f\colon\mathbb{R}\to\mathbb{R}$ is Laplace-transformable if it is piecewise continuous on $[0,\infty)$ and of exponential order.
+A such $f(t)$ is called Laplace-transformable iff there exists some real number $a$ such that $F(a)$ converges.
+\sssc{Laplace transformability theorem}
+A complex-valued function $f(t)$ defined on $[0,\infty)$ is Laplace-transformable iff it is piecewise continuous on all closed subintervals of $[0,\infty)$ and of exponential order.
 \begin{proof}
-Assume that a $f\colon D\subseteq [0,\infty)\to\mathbb{R}$ is piecewise continuous on $[0,\infty)$ and there exists $M>0$ and $T>0$ such that:
+Assume that a $f(t)$ is piecewise continuous on $[0,\infty)$ and there exists $M>0$ and $T>0$ such that:
 \[|f(t)|\leq Me^{\alpha t}\quad \forall t>T.\]
 
-For $s>\alpha$, since $f(t)$ is piecewise continuous, there exist $t_0=0,t_1,\dots t_k\in\mathbb{R}$ such that:
-\begin{itemize}
-\item the integral
-\[\int_{t_i}^{t_{i+1}} |f(t)| e^{-st}\dd{t}\]
-exists and is finite for every $i\in\mathbb{Z}\land 0\leq i\leq k-1$, and that
-\item the family $\{[t_0,t_1],[t_1,t_2],\dots [t_{k-1},t_k]$ is locally finite, and that
-\item $f(t)$ is continuous on $[t_k,\infty)$.
-\end{itemize}
+For $s>\alpha$, since $f(t)$ is piecewise continuous on $[0,\infty)$, there exist a locally finite indexed family $A=\{[a_i,b_i]\mid i\in I\}$ such that for each $i\in I\setminus\{j\}$, the integral
+\[\int_{a_i}^{b_i} |f(t)| e^{-st}\dd{t}\]
+exists and is finite.
 
-Rewrite $F(s)$ as:
-\[\int_0^\infty |f(t)| e^{-st}\dd{t} = \sum_{i=0}^{k-1} \int_{t_i}^{t_{i+1}} |f(t)| e^{-st}\dd{t} + \int_{t_k}^\infty |f(t)| e^{-st}\dd{t}\]
-
-$\sum_{i=0}^{k-1} \int_{t_i}^{t_{i+1}} |f(t)| e^{-st}\dd{t}$ is finite.
+Split the integral:
+\[\int_0^{\infty}f(t)e^{-st}\dd{t}=\int_0^Tf(t)e^{-st}\dd{t}+\int_T^{\infty}f(t)e^{-st}\dd{t}.\]
+For the first integral, by local finiteness, there exists a finite cover of $[0,T]$ that is a subset of $A$. The sum over finitely many finite integral is finite.
 
 For the second integral, since $|f(t)| \le M e^{\alpha t}$, we have
-\[\int_{t_k}^\infty |f(t)| e^{-st}\dd{t}\le \int_{t_k}^\infty M e^{\alpha t} e^{-st}\dd{t} = M \int_{t_k}^\infty e^{-(s-\alpha)t}\dd{t}.\]
-Since $s>\alpha$, the integral converges, so the second integral is finite.
+\[\int_T^\infty |f(t)| e^{-st}\dd{t}\le \int_T^\infty M e^{\alpha t} e^{-st}\dd{t} = M \int_T^\infty e^{-(s-\alpha)t}\dd{t},\]
+which converges since $\Re(s)>\alpha$.
 \end{proof}
+For any complex function $g(t)$ defined on $D\superseteq\mathbb{R}_{\geq 0}$, for any indexed family $A\colon I\to\mathcal{A}\subseteq D;\;i\mapsto A_i$ with $n\in\bbN$ and $I=J\cap\bbN$ for some interval $J\ni 0$, the function
+\[f(t)=g(t)\prod_{i\in I}\delta(A_i)\]
+is Laplace-transformable iff $g(t)$ is Laplace-transformable and that $\sum_{a\in\mathcal{A}}a$ converges.
+
+If $f(t)$ and $g(t)$ are Laplace-transformable, then $f(t)+g(t)$ is Laplace-transformable.
+\sssc{Abscissa of convergence theorem}
+PLACEHOLDER
 \sssc{Linearity}
-\[\mathcal{L}\{af(t)+bg(t)\}=a\mathcal{L}\{f(t)\}+b\mathcal{L}\{g(t)\}.\]
-\sssc{First shifting theorem, Time delay, or Time shift}
+\[\mathcal{L}\{af(t)+bg(t)\}=a\mathcal{L}\{f(t)\}+b\mathcal{L}\{g(t)\},\quad a,b\in\bbC.\]
+\sssc{First shifting theorem or Frequency shift}
+\[\mathcal{L}\{e^{at} f(t)\}(s) = F(s-a),\]
+ROC shifts right by $\Re(a)$.
+\begin{proof}
+\[\mathcal{L}\{e^{at} f(t)\}(s)=\int_0^{\infty}e^{-(s-a)t}f(t)=F(s-a)\]
+\end{proof}
+\sssc{Second shifting theorem, Time delay, or Time shift}
 \[\mathcal{L}\{f(t-a)u(t-a)\}=e^{-as}F(s), \quad a > 0,\]
 where $u(t)$ is the unit step function.
 \begin{proof}
-PLACEHOLDER
-\end{proof}
-\sssc{Second shifting theorem or Frequency shift}
-\[\mathcal{L}\{e^{at} f(t)\}(s) = F(s-a).\]
-\begin{proof}
-PLACEHOLDER
+\[\ba
+\mathcal{L}\{f(t-a)u(t-a)\}(s)&=\int_a^{\infty} e^{-st}f(t-a)\dd{t}\\
+&=\int_0^{\infty}e^{-s\tau}e^{-as}f(\tau)\dd{\tau}\\
+&=e^{-as}F(s)
+\ea\]
 \end{proof}
 \sssc{Differentiation in Time Domain}
-\[\mathcal{L}\{f'(t)\}(s) = sF(s) - f\qty(0^+).\]
-\[\mathcal{L}\{f^{(n)}(t)\}(s) = s^n F(s) - \sum_{i=0}^{n-1}s^{n-1-i}f^{(i)}\qty(0^+).\]
+\[\mathcal{L}\{f'(t)\}(s) = sF(s) - f(0).\]
+\[\mathcal{L}\{f^{(n)}(t)\}(s) = s^n F(s) - \sum_{i=0}^{n-1}s^{n-1-i}f^{(i)}(0).\]
 \begin{proof}
 \[u = e^{-st} \quad \Rightarrow \quad \dd{u} = -s e^{-st} \dd{t}.\]
 \[dv = f'(t)\dd{t} \quad \Rightarrow \quad v = f(t).\]
-\bma
+\[\ba
 \mathcal{L}\{f'(t)\}(s)&=\int_0^\infty e^{-st} f'(t)\dd{t}\\
 &=\qty(e^{-st}f(t))\big\vert_0^\infty+\int_0^\infty f(t)se^{-st}\dd{t}\\
-&=s\mathcal{L}\{f(t)\}(s)-f\qty(0^+)
+&=s\mathcal{L}\{f(t)\}(s)-f(0)
 \ea\]
+Nota that in the case where $f'(t)$ contains $\delta(0)$, using $f(0)$ holds while $f\qty(0^+)$ not.
 \end{proof}
 \sssc{Integration in Time Domain}
 \[\mathcal{L}\left\{\int_0^t f(\tau)\dd{\tau}\right\}(s) = \frac{1}{s} F(s).\]
@@ -3118,7 +3159,7 @@ By dominated convergence theorem, we obtain:
 Evaluate the integral:
 \[\int_0^\infty f(0^+) e^{-u} \dd{u} = f(0^+) \int_0^\infty e^{-u}\dd{u} = f(0^+).\]
 \end{proof}
-\sssc{Mellin's inverse formula, Bromwich integral, or Fourier–Mellin integral of Inverse Laplace transform (反拉普拉斯變換)}
+\ssc{Mellin's inverse formula, Bromwich integral, or Fourier–Mellin integral of Inverse Laplace transform (反拉普拉斯變換)}
 The inverse Laplace transform of a complex function $F(s)$, denoted as $\mathcal{L}^{-1}\{F(s)\}(t)$ or $f(t)$, is defined as a real function such that
 \[\mathcal{L}\{f(t)\}(s) = F(s),\]
 where $\mathcal {L}$ denotes the Laplace transform.
@@ -3126,12 +3167,14 @@ where $\mathcal {L}$ denotes the Laplace transform.
 Mellin's inverse formula, Bromwich integral, or Fourier–Mellin integral states that, the inverse Laplace transform of a complex function $F(s)$ is given by the line integral:
 \[\mathcal{L}^{-1}\{F(s)\}(t)=f(t)=\frac{1}{2\pi i}\lim_{T\to\infty}\int_{\gamma-iT}^{\gamma+iT}e^{st}F(s)\dd{s},\]
 where $\gamma$ is a real number such that it is greater than the real part of all singularities of $F$ and that $F$ is bounded on the line $s=\gamma$.
-\sssc{(Bilateral or Two-sided) Laplace Transform (（雙邊）拉普拉斯變換)}
+\ssc{(Bilateral or Two-sided) Laplace Transform (（雙邊）拉普拉斯變換)}
+PLACEHOLDER
 The (bilateral or two-sided) Laplace transform is an integral transform that converts a function of a real variable (usually $t$, in the time domain) to a function of a complex variable (usually $s$, in the complex-valued angular frequency domain, also known as $s$-domain or $s$-plane). The functions are often denoted in lowercase for the time-domain representation and uppercase for the frequency-domain.
 
 The Laplace transform of a real function $f(t)$, denoted as $\mathcal{B}\{f(t)\}(s)$, is defined by the improper integral
 \[\mathcal{B}\{f(t)\}(s) = \int_{-\infty}^{\infty} e^{-st} f(t)\,\mathrm{d}t.\]
 \ssc{Fourier Transform (FT) (傅立葉變換)}
+PLACEHOLDER: as Laplace tranform special case
 \sssc{Fourier Transform (FT)}
 Fourier transform is an integral transform that converts a function of a real variable (usually $t$, in the time domain) to a function of another real variable (usually $\omega$, in the real-valued angular frequency domain). The functions are often denoted in lowercase for the time-domain representation and uppercase for the frequency-domain.
 
