@@ -1,0 +1,316 @@
+\documentclass[a4paper,12pt]{report}
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{3}
+\input{/usr/share/latex-toolkit/template.tex}
+\begin{document}
+\title{Complex Analysis}
+\author{沈威宇}
+\date{\temtoday}
+\titletocdoc
+\ch{Complex Analysis}
+\sct{Complex Number}
+\ssc{Complex number (複數)}
+\sssc{Complex Number}
+The set of complex numbers $\bbC$ is defined as
+\[\bbC\coloneq\{a+bi\mid a,b\in\bbR\},\]
+where $i$ is defined as the only complex number such that $i^2=-1$ and is called the imaginary unit.
+
+For a complex number $z=a+bi$ with $a,b\in\bbR$, $a$ is called its real part (實部) and denoted as $\Re(z)$, $\mathrm{Re}(z)$, or $\mathcal{Re}(z)$, $b$ is called its imaginary part (虛部) and denoted as $\Im(z)$, $\mathrm{Im}(z)$, or $\mathcal{Im}(z)$, $z$ is called an imaginary number (虛數) if $b\neq 0$, and $z$ is called a pure imaginary number (純虛數) if $a=0$ and $b\neq 0$.
+\sssc{Addition, subtraction, and multiplication}
+For two complex numbers $y=a+bi$ and $z=c+di$ with $a,b,c,d\in\bbR$:
+\[y+z=(a+c)+(b+d)i.\]
+\[y-z=(a-c)+(b-d)i.\]
+\[y\cdot z=(ac-bd)+(ad+bc)i.\]
+\sssc{Absolute value (絕對值), magnitude, radial distance (向徑), or modulus (模/模長)}
+The absolute value, magnitude, radial distance, or modulus of a complex number $z=a+bi$ with $a,b\in\bbR$ is $\abs{z}=\sqrt{a^2+b^2}$.
+\sssc{Conjugate (共軛)}
+The conjugate of a complex number $z=a+bi$ with $a,b\in\bbR$, denoted as $\ol{z}$ and called z bar, is defined as $a-bi$.
+\sssc{Division}
+\[\frac{1}{z}=\frac{\bar{z}}{|z|^2},z\neq 0\]
+\sssc{Properties}
+For complex numbers $z,z_1,z_2$:
+\[|z|=\sqrt{z\cdot\ol{z}}\]
+\[\ol{z_1}+\ol{z_2}=\ol{z_1+z_2}.\]
+\[\ol{z_1}-\ol{z_2}=\ol{z_1-z_2}.\]
+\[\ol{z_1\cdot z_2}=\ol{z_1}\cdot\ol{z_2}.\]
+\[\Re(\ol{z_1}\cdot z_2)=\Re(z_1\cdot\ol{z_2}).\]
+\[\frac{\ol{z_1}}{\ol{z_2}}=\ol{\qty(\frac{z_1}{z_2})},\quad z_2\neq 0.\]
+\[\ol{z^n}=\qty(\ol{z})^n,\quad zn\neq 0\land n\in\bbZ.\]
+\ssc{Polynomials}
+\sssc{Fundamental theorem of algebra (代數基本定理), d'Alembert's theorem, or the d'Alembert–Gauss theorem}
+Every non-constant single-variable polynomial with complex coefficients has at least one complex root.
+
+Every non-zero, single-variable, degree n polynomial with complex coefficients has, counted with multiplicity, exactly n complex roots.
+\sssc{Equality of polynomials with real coefficients of complex number and its conjugate}
+For all polynomials with real coefficients $f$, for all complex numbers $z$:
+\[\ol{f(z)}=f\qty(\ol{z}).\]
+Pair of imaginary roots (虛根成對定理): If a polynomial with real coefficients has an imaginary root, then its conjugate is also a root. Thus, an odd-degree polynomial with real coefficients must have at least one real root.
+\subsection{Argument}
+\subsubsection{Argument (輻角)}
+For a complex number $z\neq 0$, the argument of $z$, denoted as $\arg(z)$, is definited as any real number $\varphi $ such that
+\[z=|z|e^{i\varphi}.\]
+\subsubsection{Principal argument (輻角主值/主輻角)}
+For a complex number $z=\neq 0$, the principal argument of $z$, denoted as $\Arg(z)$, is definited as the argument of $z$ with in $(-\pi,\pi]$. (Some sources define it as the argument of $z$ with in $[0,2\pi)$.)
+\sssc{Polar form (極式)}
+The polar form of a complex number $z$ is
+\[z=|z|(\cos\theta+i\sin\theta),\quad\theta\in\bbR.\]
+\sssc{Properties}
+For any real number $\theta,\varphi,a,b$:
+\[\ol{e^{i\theta}}=e^{-i\theta}.\]
+\[(ae^{i\theta})(be^{i\varphi})=(ab)e^{i(\theta+\varphi)}.\]
+\[\frac{ae^{i\theta}}{be^{i\varphi}}=\frac{a}{b}e^{i(\theta-\varphi)}.\]
+\ssc{Complex plane (複數平面), Argand plane (阿爾岡平面), or Gaussian plane (高斯平面)}
+\sssc{Complex plane, Argand plane, or Gaussian plane}
+The complex plane is the plane formed by the complex numbers, with a Cartesian coordinate system such that the horizontal x-axis, called the real axis, is formed by the real numbers, and the vertical y-axis, called the imaginary axis, is formed by the imaginary numbers.
+\sssc{De Moivre's formula (隸美弗公式)}
+\[(r(\cos\theta+i\sin\theta))^n=r^n(\cos(n\theta)+i\sin(n\theta)),\quad r\neq 0\land n\in\mathbb{Z}.\]
+\sssc{Hyperbolic De Moivre's formula}
+\[(r(\cosh\theta+i\sinh\theta))^n=r^n(\cosh(n\theta)+i\sinh(n\theta)),\quad r\neq 0\land n\in\mathbb{Z}.\]
+\sssc{Dot product}
+The dot product of two vectors in $\bbR^2$ corresponding to the two complex numbers $z_1$ and $z_2$ on the complex plane is $\Re(z_1\cdot\ol{z_2})$.
+\ssc{複數的冪及其在複數平面上的幾何意義}
+\sssc{1的正整數分之一次冪及其在複數平面上的幾何意義}
+令$n\in\mathbb{N}$，$\omega=\cos\frac{2\pi}{n}+i\sin\frac{2\pi}{n}$，則$1^{\frac{1}{n}}$，即$x^n=1$的$n$個根，為$\omega$的0到$n-1$次方，即：
+\[e^{\frac{2\pi k}{n}}=\cos\frac{2\pi k}{n}+i\sin\frac{2\pi k}{n},\quad k\in\mathbb{N}_0<n.\]
+彼等根在複數平面上為以原點為圓心的單位圓的內接正$n$邊形的$n$個頂點。
+\sssc{非零複數的正整數分之一次冪及其在複數平面上的幾何意義}
+令$z\in\mathbb{C}_{\neq 0}\land n\in\mathbb{N}$，$\omega=\cos\frac{2\pi}{n}+i\sin\frac{2\pi}{n}$，則$z^{\frac{1}{n}}$，即$x^n=z$的$n$個根為$\sqrt[n]{|z|}$乘以$\omega$的0到$n-1$次方，即：
+\[\sqrt[n]{|z|}e^{\frac{\Arg(z)+2\pi k}{n}}=\sqrt[n]{|z|}\qty(\cos\frac{\Arg(z)+2\pi k}{n}+i\sin\frac{\Arg(z)+2\pi k}{n}),\quad k\in\mathbb{N}_0<n.\]
+彼等根在複數平面上為以原點為圓心、半徑$\sqrt[n]{|z|}$的圓的內接正$n$邊形的$n$個頂點。
+\subsubsection{非零複數的複數次冪及其在複數平面上的幾何意義}
+令$z\in\mathbb{C}_{\neq 0}\land w\in\mathbb{C}$，則$z^w$為：
+\[\begin{aligned}
+z^w=&e^{w\ln(z)}\\
+=&\left(|z|e^{i\arg(z)}\right)^w\\
+=&|z|^{\Re(w)}|z|^{\Im(w)i}e^{i\Re(w)\arg(z)}e^{-\Im(w)\arg(z)}\\
+=&|z|^{\Re(w)}e^{-\Im(w)\arg(z)+i(\Re(w)\arg(z)+\Im(w)\ln|z|)}\\
+=&|z|^{\Re(w)}e^{-\Im(w)\arg(z)}\left(\cos(\Re(w)\arg(z)+\Im(w)\ln|z|)+i\sin(\Re(w)\arg(z)+\Im(w)\ln|z|)\right),
+\end{aligned}\]
+其中：
+\[\arg(z)=\Arg(z)+2\pi k,\quad k\in\mathbb{Z}.\]
+彼等根在複數平面上為螺旋
+\[|z|^{\Re(w)}e^{-\Im(w)\theta}\left(\cos(\Re(w)\theta+\Im(w)\ln|z|)+i\sin(\Re(w)\theta+\Im(w)\ln|z|)\right)\]
+上等輻角差的點。
+\paragraph*{模長：}
+\[\abs{z^w}=|z|^{\Re(w)}e^{-\Im(w)\arg(z)}.\]
+\begin{itemize}
+\item 當$\Im(w)>0$：模長對$k$指數衰減，即隨$k$增大趨近於零、隨$k$減小發散至無限大。
+\item 當$\Im(w)<0$：模長對$k$指數增長，即隨$k$增大發散至無限大、隨$k$減小趨近於零。
+\item 當$\Im(w)=0$：模長始終為$|z|^{\Re(w)}$，即在複數平面上根在以原點為圓心、半徑$|z|^{\Re(w)}$的圓上。
+\end{itemize}
+\paragraph*{輻角：}
+\[\arg\left(z^w\right)=\Re(w)\arg(z)+\Im(w)\ln|z|.\]
+\begin{itemize}
+\item 當$\Re(w)>0$：輻角對$k$線性增長，即隨$k$增大逆時針旋轉、隨$k$減小順時針旋轉。
+\item 當$\Re(w)<0$：輻角對$k$線性衰減，即隨$k$增大順時針旋轉、隨$k$減小逆時針旋轉。
+\item 當$\Re(w)\in\mathbb{Z}$：輻角主值始終為$\left(\Re(w)\Arg(z)+\Im(w)\ln|z|\right)\mod (2\pi)$，即在複數平面上根在輻角$\Re(w)\Arg(z)+\Im(w)\ln|z|$的射線上。
+\end{itemize}
+\paragraph*{螺旋方向：}
+\begin{itemize}
+\item 當$\Re(w)\Im(w)>0$：在複數平面上根在以原點為中心點的順時針發散的螺旋上。
+\item 當$\Re(w)\Im(w)<0$：在複數平面上根在以原點為中心點的逆時針發散的螺旋上。
+\item 當$\Im(w)=0$：在複數平面上根在以原點為圓心的圓上。
+\end{itemize}
+\paragraph*{根的個數：}
+\begin{itemize}
+\item 當$\Im(w)=0\land\Re(w)\in\mathbb{Q}$：令$\abs{\Re(w)}=\frac{m}{n}$其中$n\in\mathbb{N},\gcd(m,n)=1$，則有$n$個根，且彼等根在複數平面上為以原點為圓心、半徑$|z|^{\Re(w)}$的圓的內接正$n$邊形的$n$個頂點，且其中一個頂點在輻角$\Re(w)\Arg(z)$的射線上。
+\item 其他情況：有無限多個根。
+\end{itemize}
+\ssc{Extended complex number}
+\[\bar{\bbC}=\{a+bi\mid a,b\in\bar{\bbR}\}.\]
+
+
+
+\sct{Integral Transform}
+PLACEHOLDER
+Integral Transform
+Linear transform
+\ssc{(Unilateral or One-sided) Laplace transform (（單邊）拉普拉斯變換)}
+\sssc{Introduction}
+The (unilateral or one-sided) Laplace transform is an integral transform that converts a function of a real variable $t$, called time domain, to a complex function of a complex variable $s$, called (complex-valued) frequency domain, $s$-domain, or $s$-plane. The functions are often denoted in lowercase for the time-domain and uppercase for the frequency-domain.
+\sssc{Definition as Lebesgue integral}
+For any set $S$, for any complex-valued functions $g_j(t)$ defined on $D_j\superseteq\mathbb{R}_{\geq 0}$, for any indexed family $A_j\colon I_j\to\mathcal{A}_j\subseteq D_j;\;i\mapsto A_{j_i}$ with $I_j=J_j\cap\bbN$ for some interval $J_j$, the Laplace transform of the extended complex-valued function
+\[f(t)=\sum_{j\in S}g_j(t)\sum_{i\in I_j}\delta(A_{j_i}),\]
+denoted as $\mathcal{L}\qty\{f(t)\}(s)$ or $F(s)$, is defined as
+\[\mathcal{L}\qty\{f(t)\}(s)=F(s)=\int_0^{\infty}f(t)e^{-st}\dd{t},\]
+with integrals involving Dirac detla functions defined via Dirac measures.
+
+The convergence of a Laplace transform at a value of $s$ is defined as the existence of such Lebesgue integral.
+\sssc{Definition as improper Riemann–Stieltjes integral}
+For any set $S$, for any complex-valued functions $g_j(t)$ defined on $D_j\superseteq\mathbb{R}_{\geq 0}$, for any indexed family $A_j\colon I_j\to\mathcal{A}_j\subseteq D_j;\;i\mapsto A_{j_i}$ with $I_j=J_j\cap\bbN$ for some interval $J_j$, the Laplace transform of the extended complex-valued function
+\[f(t)=\sum_{j\in S}g_j(t)\sum_{i\in I_j}\delta(A_{j_i}),\]
+denoted as $\mathcal{L}\qty\{f(t)\}(s)$ or $F(s)$, is defined, with $\mathcal{f}(t)$, typically denoted simply as $f(t)$ defined as any function such that
+\bit
+\item its domain is a super set of an interval $[a,\infty)$ for some $a\in\bbR_{<0}$,
+\item $\mathcal{f}(t)=f(t)$ for all $t\in\bbR_{\geq 0}$, and
+\item it's continuous on some interval $[a,0)$ for some $a\in\bbR_{<0}$,
+\eit
+as,
+\[\mathcal{L}\qty\{f(t)\}(s)=F(s)=\lim_{\varepsilon\to 0^+}\int_{-\varepsilon}^{\infty}\mathcal{f}(t)e^{-st}\dd{t},\]
+with integrals involving Dirac detla functions defined via improper Riemann–Stieltjes integral, where $\lim_{\varepsilon\to 0^+}\int_{-\varepsilon}^{\infty}$ is typically denoted as $\int_{0^-}^{\infty}$.
+
+The convergence of a Laplace transform at a value of $s$ is defined as the absolute convergence of such improper Riemann–Stieltjes integral.
+\sssc{Region of convergence (ROC)}
+The set of values of $s$ for which $F(s)$ converges, called region of convergence (ROC), is a class of either $\Re(s) > a$ or $\Re(s) \geq a$ for some extended real constant $a$, called abscissa of convergence.
+\sssc{Laplace transformability}
+A such $f(t)$ is called Laplace-transformable iff there exists some real number $a$ such that $F(a)$ converges.
+\sssc{Laplace transformability theorem}
+A complex-valued function $f(t)$ defined on $[0,\infty)$ is Laplace-transformable iff it is piecewise continuous on all closed subintervals of $[0,\infty)$ and of exponential order.
+\begin{proof}
+Assume that a $f(t)$ is piecewise continuous on $[0,\infty)$ and there exists $M>0$ and $T>0$ such that:
+\[|f(t)|\leq Me^{\alpha t}\quad \forall t>T.\]
+
+For $s>\alpha$, since $f(t)$ is piecewise continuous on $[0,\infty)$, there exist a locally finite indexed family $A=\{[a_i,b_i]\mid i\in I\}$ such that for each $i\in I\setminus\{j\}$, the integral
+\[\int_{a_i}^{b_i} |f(t)| e^{-st}\dd{t}\]
+exists and is finite.
+
+Split the integral:
+\[\int_0^{\infty}f(t)e^{-st}\dd{t}=\int_0^Tf(t)e^{-st}\dd{t}+\int_T^{\infty}f(t)e^{-st}\dd{t}.\]
+For the first integral, by local finiteness, there exists a finite cover of $[0,T]$ that is a subset of $A$. The sum over finitely many finite integral is finite.
+
+For the second integral, since $|f(t)| \le M e^{\alpha t}$, we have
+\[\int_T^\infty |f(t)| e^{-st}\dd{t}\le \int_T^\infty M e^{\alpha t} e^{-st}\dd{t} = M \int_T^\infty e^{-(s-\alpha)t}\dd{t},\]
+which converges since $\Re(s)>\alpha$.
+\end{proof}
+For any complex function $g(t)$ defined on $D\superseteq\mathbb{R}_{\geq 0}$, for any indexed family $A\colon I\to\mathcal{A}\subseteq D;\;i\mapsto A_i$ with $I=J\cap\bbN$ for some interval $J\ni 0$, the function
+\[f(t)=g(t)\sum_{i\in I}\delta(A_i)\]
+is Laplace-transformable iff $g(t)$ is Laplace-transformable and that $\sum_{a\in\mathcal{A}}a$ converges.
+
+If $f(t)$ and $g(t)$ are Laplace-transformable, then $f(t)+g(t)$ is Laplace-transformable.
+\sssc{Unit impulses}
+For any indexed family $A\colon I\to\mathcal{A}\subseteq D;\;i\mapsto A_i$ with $I=J\cap\bbN$ for some interval $J\ni 1$ and $A_i\leq A_{i+1}$ for all $i\in I\land (i+1)\in I$, the function:
+\[\mathcal{L}\qty\{\sum_{i\in I}\delta(t-A_i)\}=\sum_{i\in I}e^{-sA_i},\quad \mathcal{A}\subseteq\bbR_{\geq 0}.\]
+ROC is $\sum_{i\in I}e^{-\Re(s)A_i}<\infty$, which, for $|I|<\aleph_0$, is $\bbC$, for $\abs{\{i\in I\mid A_i=0\}}=\aleph_0$, is $\varnothing$, and otherwise, with
+\[N(x)\coloneq\abs{\{i\in I\mid A_i\leq x\}},\]
+is,
+\[\int_0^{\infty}e^{-\Re(s)x}\dd{N(x)}<\infty,\]
+that is,
+\[\int_0^{\infty}N(x)e^{-\Re(s)x}\dd{x}<\infty,\]
+that is,
+\[\Re(s)>\limsup_{x\to\infty}\frac{\ln(N(x))}{x},\]
+that is,
+\bit
+\item for $\limsup_{i\to\infty}\frac{\ln(i)}{A_i}=\infty$, $\varnothing$, and
+\item for $L\coloneq\limsup_{i\to\infty}\frac{\ln(i)}{A_i}\in\bbR_{\geq 0}$, $\Re(s)>L$.
+\eit
+\sssc{Linearity}
+\[\mathcal{L}\qty\{af(t)+bg(t)\}=a\mathcal{L}\qty\{f(t)\}+b\mathcal{L}\qty\{g(t)\},\quad a,b\in\bbC.\]
+\sssc{First shifting theorem or Frequency shift}
+\[\mathcal{L}\qty\{e^{at} f(t)\}(s) = F(s-a),\]
+ROC shifts right by $\Re(a)$.
+\begin{proof}
+\[\mathcal{L}\qty\{e^{at} f(t)\}(s)=\int_0^{\infty}e^{-(s-a)t}f(t)=F(s-a)\]
+\end{proof}
+\sssc{Second shifting theorem, Time delay, or Time shift}
+\[\mathcal{L}\qty\{f(t-a)u(t-a)\}=e^{-as}F(s), \quad a > 0,\]
+where $u(t)$ is the unit step function.
+\begin{proof}
+\[\ba
+\mathcal{L}\qty\{f(t-a)u(t-a)\}(s)&=\int_a^{\infty} e^{-st}f(t-a)\dd{t}\\
+&=\int_0^{\infty}e^{-s\tau}e^{-as}f(\tau)\dd{\tau}\\
+&=e^{-as}F(s)
+\ea\]
+\end{proof}
+\sssc{Differentiation in Time Domain}
+\[\mathcal{L}\qty\{f'(t)\}(s) = sF(s) - f(0).\]
+\[\mathcal{L}\qty\{f^{(n)}(t)\}(s) = s^n F(s) - \sum_{i=0}^{n-1}s^{n-1-i}f^{(i)}(0).\]
+\begin{proof}
+\[u = e^{-st} \quad \Rightarrow \quad \dd{u} = -s e^{-st} \dd{t}.\]
+\[dv = f'(t)\dd{t} \quad \Rightarrow \quad v = f(t).\]
+\[\ba
+\mathcal{L}\qty\{f'(t)\}(s)&=\int_0^\infty e^{-st} f'(t)\dd{t}\\
+&=\qty(e^{-st}f(t))\big\vert_0^\infty+\int_0^\infty f(t)se^{-st}\dd{t}\\
+&=s\mathcal{L}\qty\{f(t)\}(s)-f(0)
+\ea\]
+Nota that in the case where $f'(t)$ contains $\delta(0)$, using $f(0)$ holds while $f\qty(0^+)$ not.
+\end{proof}
+\sssc{Integration in Time Domain}
+\[\mathcal{L}\left\{\int_0^t f(\tau)\dd{\tau}\right\}(s) = \frac{1}{s} F(s).\]
+\begin{proof}
+\bma
+\mathcal{L}\qty\{\int_0^t f(\tau)\dd{\tau}\}(s) &= \int_0^{\infty} e^{-st} \int_0^t f(\tau)\dd{\tau}\dd{t}\\
+&=\qty(-\frac{1}{s}e^{-st}\int_0^t f(\tau)\dd{\tau})\big\vert_0^\infty+\int_0^{\infty} \frac{1}{s}e^{-st}f(t)\dd{t}\\
+&=\frac{1}{s}\int_0^{\infty} e^{-st}f(t)\dd{t}.
+\eam
+\end{proof}
+\sssc{Differentiation in Frequency Domain}
+\[\mathcal{L}\qty\{t f(t)\}(s) = -\dv{}{s} F(s).\]
+\[\mathcal{L}\qty\{t^n f(t)\}(s) = (-1)^n \dv[n]{}{s} F(s).\]
+\begin{proof}
+By Leibniz integral rule,
+\bma
+-\dv{}{s} F(s)&=-\dv{}{s}\int_0^{\infty} e^{-st} f(t)\,\mathrm{d}t\\
+&=-\int_0^{\infty} \pdv{}{s}\qty(e^{-st} f(t))\,\mathrm{d}t\\
+&=-\int_0^{\infty} -te^{-st} f(t)\,\mathrm{d}t\\
+&=\int_0^{\infty} te^{-st} f(t)\,\mathrm{d}t\\
+&=\mathcal{L}\qty\{t f(t)\}(s)
+\eam
+\end{proof}
+\sssc{Scaling in Time Domain}
+\[\mathcal{L}\qty\{f(at)\}(s) = \frac{1}{a} F\left(\frac{s}{a}\right), \quad a>0.\]
+\sssc{Convolution Theorem}
+If $h(t) = (f * g)(t) = \int_0^t f(\tau)g(t-\tau)\dd{\tau}$, then
+\[\mathcal{L}\qty\{h(t)\}(s) = F(s)G(s).\]
+\begin{proof}
+\[\mathcal{L}\qty\{h(t)\}(s)=\int_0^{\infty} e^{-st} \qty(\int_0^t f(\tau)g(t-\tau)\dd{\tau})\dd{t}\]
+By Fubini's theorem,
+\[\mathcal{L}\qty\{h(t)\}(s)=\int_0^\infty\int_\tau^\infty e^{-st} f(\tau)g(t-\tau)\dd{t}\dd{\tau}\]
+Let $u=t-\tau$. $\dd{t}=\dd{u}$.
+\[\begin{aligned}
+\mathcal{L}\qty\{h(t)\}(s)&=\int_0^\infty f(\tau)\int_0^\infty e^{-s(u+\tau)} g(u)\dd{u}\dd{\tau}\\
+&=\int_0^\infty f(\tau)e^{-s\tau}\int_0^\infty e^{-su} g(u)\dd{u}\dd{\tau}\\
+&=F(s)G(s)
+\end{aligned}\]
+\end{proof}
+\sssc{Initial Value Theorem}
+If $f(t)$ and $f'(t)$ are Laplace-transformable and $f(t)$ contains no unit impulses or derivatives of unit impulses at origin:
+\[\lim_{t\to 0^+}f(t)=\lim_{s\to\infty}sF(s).\]
+\begin{proof}
+\[sF(s)=\int_0^\inftysf(t)e^{-st}\dd{t}.\]
+Let $u=st$, $\dd{t}=\frac{\dd{u}}{s}$.
+\[sF(s)=\int_0^\infty f\qty(\frac{u}{s})e^{-u}\dd{u}.\]
+\[\lim_{s\to\infty}sF(s)=\int_0^\infty f\qty(\frac{u}{s})e^{-u}\dd{u}.\]
+We define a net of functions $\langle f_s(u)=f\qty(\frac{u}{s})\rangle_{s\in\mathbb{R}_{>s_0}}$, where $s_0$ is such that $F(s)$ converges for all $\Re(s)>s_0$.
+
+For every fixed $u\in\mathbb{R}_{>0}$, $\lim_{s\to\infty}\frac{u}{s}\to 0^+$, so $f_s(u)$ pointwise converges to $f(0^+)$.
+
+For dominated convergence theorem, we require an integrable function $g(u)$ such that
+\[\abs{f\qty(\frac{u}{s})e^{-u}}\le g(u),\quad\forall s>0.\]
+Since $f(t)$ is Laplace-transformable, it is of exponential order, that is, there exists $\alpha>0$, $M>0$, and $T>0$ such that:
+\[|f(t)|\le Me^{\alpha t}\quad\forall t>T.\]
+\[Me^{\alpha\frac{u}{s}}e^{-u}=Me^{-u\qty(1-\frac{\alpha}{s})}\le Me^{-\frac{u}{2}},\quad\forall s>2\alpha.\]
+By dominated convergence theorem, we obtain:
+\[\lim_{s\to\infty}sF(s)=\lim_{n\to\infty}\int_0^\infty f(0^+)e^{-u}\dd{u}=f(0^+)\int_0^\infty e^{-u}\dd{u}=f(0^+).\]
+\end{proof}
+\sssc{Final Value Theorem (FVT)}
+PLACEHOLDER
+\ssc{Mellin's inverse formula, Bromwich integral, or Fourier–Mellin integral of Inverse Laplace transform (反拉普拉斯變換)}
+The inverse Laplace transform of a complex function $F(s)$, denoted as $\mathcal{L}^{-1}\{F(s)\}(t)$ or $f(t)$, is a defined as
+\[\mathcal{L}^{-1}\{F(s)\}(t)=f(t)=\frac{1}{2\pi i}\lim_{T\to\infty}\int_{\gamma-iT}^{\gamma+iT}e^{st}F(s)\dd{s},\]
+called Mellin's inverse formula, Bromwich integral, or Fourier–Mellin integral, where $\gamma$ is any real number such that it is greater than the real part of all singularities of $F$ and that $F$ is bounded on the line $s=\gamma$, and is such that
+\[\mathcal{L}\qty\{f(t)\}(s) = F(s).\]
+\begin{proof}
+PLACEHOLDER
+\end{proof}
+\ssc{(Bilateral or Two-sided) Laplace Transform (（雙邊）拉普拉斯變換)}
+PLACEHOLDER
+The (bilateral or two-sided) Laplace transform is an integral transform that converts a function of a real variable (usually $t$, in the time domain) to a function of a complex variable (usually $s$, in the complex-valued angular frequency domain, also known as $s$-domain or $s$-plane). The functions are often denoted in lowercase for the time-domain representation and uppercase for the frequency-domain.
+
+The Laplace transform of a real function $f(t)$, denoted as $\mathcal{B}\{f(t)\}(s)$, is defined by the improper integral
+\[\mathcal{B}\{f(t)\}(s) = \int_{-\infty}^{\infty} e^{-st} f(t)\,\mathrm{d}t.\]
+\ssc{Fourier Transform (FT) (傅立葉變換)}
+PLACEHOLDER: as Laplace tranform special case
+\sssc{Fourier Transform (FT)}
+Fourier transform is an integral transform that converts a function of a real variable (usually $t$, in the time domain) to a function of another real variable (usually $\omega$, in the real-valued angular frequency domain). The functions are often denoted in lowercase for the time-domain representation and uppercase for the frequency-domain.
+
+The Fourier transform, denoted as $\mathcal{F}\{f(t)\}(\omega)$ or $F(\omega)$, is defined by the improper integral
+\[\mathcal{F}\{f(t)\}(\omega) = F(\omega) = \int_{-\infty}^{\infty} e^{-i\omega t} f(t)\,\mathrm{d}t.\]
+\sssc{Inverse Fourier Transform (反傅立葉變換)}
+The inverse Fourier transform of a complex function $F(s)$, denoted as $\mathcal{F}^{-1}\{F(s)\}(t)$ or $f(t)$, is defined as a real function such that
+\[\mathcal{F}\{f(t)\}(s) = F(s),\]
+where $\mathcal {F}$ denotes the Fourier transform.
+
+The inverse Laplace transform of a complex function $F(s)$ is given by the line integral:
+\[f(t) = \frac{1}{2\pi}\int_{-\infty}^{\infty} F(\omega) e^{i\omega t}\dd{\omega} .\]
+
+\end{document}
