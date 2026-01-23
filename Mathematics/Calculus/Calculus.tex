@@ -3065,8 +3065,22 @@ For any complex function $g(t)$ defined on $D\superseteq\mathbb{R}_{\geq 0}$, fo
 is Laplace-transformable iff $g(t)$ is Laplace-transformable and that $\sum_{a\in\mathcal{A}}a$ converges.
 
 If $f(t)$ and $g(t)$ are Laplace-transformable, then $f(t)+g(t)$ is Laplace-transformable.
-\sssc{Abscissa of convergence theorem}
-PLACEHOLDER: for unit impulses see list of Laplace
+\sssc{Unit impulses}
+For any indexed family $A\colon I\to\mathcal{A}\subseteq D;\;i\mapsto A_i$ with $I=J\cap\bbN$ for some interval $J\ni 1$ and $A_i\leq A_{i+1}$ for all $i\in I\land (i+1)\in I$, the function:
+\[\mathcal{L}\qty\{\sum_{i\in I}\delta(t-A_i)\}=\sum_{i\in I}e^{-sA_i},\quad \mathcal{A}\subseteq\bbR_{\geq 0}.\]
+ROC is $\sum_{i\in I}e^{-\Re(s)A_i}<\infty$, which, for $|I|<\aleph_0$, is $\bbC$, for $\abs{\{i\in I\mid A_i=0\}}=\aleph_0$, is $\varnothing$, and otherwise, with
+\[N(x)\coloneq\abs{\{i\in I\mid A_i\leq x\}},\]
+is,
+\[\int_0^{\infty}e^{-\Re(s)x}\dd{N(x)}<\infty,\]
+that is,
+\[\int_0^{\infty}N(x)e^{-\Re(s)x}\dd{x}<\infty,\]
+that is,
+\[\Re(s)>\limsup_{x\to\infty}\frac{\ln(N(x))}{x},\]
+that is,
+\bit
+\item for $\limsup_{i\to\infty}\frac{\ln(i)}{A_i}=\infty$, $\varnothing$, and
+\item for $L\coloneq\limsup_{i\to\infty}\frac{\ln(i)}{A_i}\in\bbR_{\geq 0}$, $\Re(s)>L$.
+\eit
 \sssc{Linearity}
 \[\mathcal{L}\qty\{af(t)+bg(t)\}=a\mathcal{L}\qty\{f(t)\}+b\mathcal{L}\qty\{g(t)\},\quad a,b\in\bbC.\]
 \sssc{First shifting theorem or Frequency shift}
@@ -3137,32 +3151,27 @@ Let $u=t-\tau$. $\dd{t}=\dd{u}$.
 \end{aligned}\]
 \end{proof}
 \sssc{Initial Value Theorem}
-If $f(t)$ and $f'(t)$ are Laplace-transformable:
-\[\lim_{t \to 0^+} f(t) = \lim_{s \to \infty} s F(s).\]
+If $f(t)$ and $f'(t)$ are Laplace-transformable and $f(t)$ contains no unit impulses or derivatives of unit impulses at origin:
+\[\lim_{t\to 0^+}f(t)=\lim_{s\to\infty}sF(s).\]
 \begin{proof}
-\[s F(s) = \int_0^\infty s f(t) e^{-st} \dd{t}.\]
-Let $u = st$, $\dd{t} = \frac{\dd{u}}{s}$.
-\[s F(s) = \int_0^\infty f\qty(\frac{u}{s}) e^{-u} \dd{u}.\]
-\[\lim_{s \to \infty}s F(s)=\int_0^\infty f\qty(\frac{u}{s}) e^{-u} \dd{u}.\]
+\[sF(s)=\int_0^\inftysf(t)e^{-st}\dd{t}.\]
+Let $u=st$, $\dd{t}=\frac{\dd{u}}{s}$.
+\[sF(s)=\int_0^\infty f\qty(\frac{u}{s})e^{-u}\dd{u}.\]
+\[\lim_{s\to\infty}sF(s)=\int_0^\infty f\qty(\frac{u}{s})e^{-u}\dd{u}.\]
+We define a net of functions $\langle f_s(u)=f\qty(\frac{u}{s})\rangle_{s\in\mathbb{R}_{>s_0}}$, where $s_0$ is such that $F(s)$ converges for all $\Re(s)>s_0$.
 
-We define a net of functions $\langle f_s\rangle_{s\in\mathbb{R}_{>s_0}}$, where $s_0$ is such that $F(s)$ converges for all $\Re(s)>s_0$.
-
-For fixed $u \in\mathbb{R}_{>0}$, $\lim_{s\to\infty}\frac{u}{s} \to 0^+$, so $f_n\qty(\frac{u}{s})$ pointwise converges to $f(0^+)$.
+For every fixed $u\in\mathbb{R}_{>0}$, $\lim_{s\to\infty}\frac{u}{s}\to 0^+$, so $f_s(u)$ pointwise converges to $f(0^+)$.
 
 For dominated convergence theorem, we require an integrable function $g(u)$ such that
-\[\abs{f\qty(\frac{u}{s}) e^{-u}} \le g(u), \quad \forall s > 0.\]
-
+\[\abs{f\qty(\frac{u}{s})e^{-u}}\le g(u),\quad\forall s>0.\]
 Since $f(t)$ is Laplace-transformable, it is of exponential order, that is, there exists $\alpha>0$, $M>0$, and $T>0$ such that:
-\[|f(t)|\leq Me^{\alpha t}\quad \forall t>T.\]
-\[M e^{\alpha \frac{u}{s}} e^{-u} = M e^{-u\qty(1 - \frac{\alpha}{s})}\le M e^{-\frac{u}{2}}, \quad \forall s > 2\alpha.\]
-
+\[|f(t)|\le Me^{\alpha t}\quad\forall t>T.\]
+\[Me^{\alpha\frac{u}{s}}e^{-u}=Me^{-u\qty(1-\frac{\alpha}{s})}\le Me^{-\frac{u}{2}},\quad\forall s>2\alpha.\]
 By dominated convergence theorem, we obtain:
-\[\lim_{s \to \infty}s F(s)=\lim_{n\to\infty}
-\int_0^\infty f(0^+) e^{-u} \dd{u}.\]
-
-Evaluate the integral:
-\[\int_0^\infty f(0^+) e^{-u} \dd{u} = f(0^+) \int_0^\infty e^{-u}\dd{u} = f(0^+).\]
+\[\lim_{s\to\infty}sF(s)=\lim_{n\to\infty}\int_0^\infty f(0^+)e^{-u}\dd{u}=f(0^+)\int_0^\infty e^{-u}\dd{u}=f(0^+).\]
 \end{proof}
+\sssc{Final Value Theorem (FVT)}
+PLACEHOLDER
 \ssc{Mellin's inverse formula, Bromwich integral, or Fourier–Mellin integral of Inverse Laplace transform (反拉普拉斯變換)}
 The inverse Laplace transform of a complex function $F(s)$, denoted as $\mathcal{L}^{-1}\{F(s)\}(t)$ or $f(t)$, is a defined as
 \[\mathcal{L}^{-1}\{F(s)\}(t)=f(t)=\frac{1}{2\pi i}\lim_{T\to\infty}\int_{\gamma-iT}^{\gamma+iT}e^{st}F(s)\dd{s},\]
@@ -4094,34 +4103,6 @@ Assume:
 Differentiate both side:
 \[y'P_{n-1}'(y)=y^{(n)}=-(1+y^2)P_{n-1}'(y)=P_n(y).\]
 \end{proof}
-\ssc{Lists of Laplace Transform}
-\sssc{Constant}
-\[\mathcal{L}\qty\{C\}=\frac{C}{s},\quad C\in\bbC.\]
-ROC is $\Re(s)>0$.
-\sssc{Unit impulses}
-For any indexed family $A\colon I\to\mathcal{A}\subseteq D;\;i\mapsto A_i$ with $I=J\cap\bbN$ for some interval $J\ni 1$ and $A_i\leq A_{i+1}$ for all $i\in I\land (i+1)\in I$, the function:
-\[\mathcal{L}\qty\{\sum_{i\in I}\delta(t-A_i)\}=\sum_{i\in I}e^{-sA_i},\quad \mathcal{A}\subseteq\bbR_{\geq 0}.\]
-ROC is $\sum_{i\in I}e^{-\Re(s)A_i}<\infty$, which, for $|I|<\aleph_0$, is $\bbC$, for $\abs{\{i\in I\mid A_i=0\}}=\aleph_0$, is $\varnothing$, and otherwise, with
-\[N(x)\coloneq\abs{\{i\in I\mid A_i\leq x\}},\]
-is,
-\[\int_0^{\infty}e^{-\Re(s)x}\dd{N(x)}<\infty,\]
-that is,
-\[\int_0^{\infty}N(x)e^{-\Re(s)x}\dd{x}<\infty,\]
-that is,
-\[\Re(s)>\limsup_{x\to\infty}\frac{\ln(N(x))}{x},\]
-that is,
-\bit
-\item for $\limsup_{i\to\infty}\frac{\ln(i)}{A_i}=\infty$, $\varnothing$, and
-\item for $L\coloneq\limsup_{i\to\infty}\frac{\ln(i)}{A_i}\in\bbR_{\geq 0}$, $\Re(s)>L$.
-\eit
-PLACEHOLDER待
-\sssc{Unit step}
-\[\Gamma(z) = \int_0^{\infty} t^{z-1} e^{-t} \, \mathrm{d}t, \quad \Re(z) > 0\]
-
-
-
-\ssc{Lists Fourier Transform}
-PLACEHOLDER
 \ssc{List of Counterexamples}
 \sssc{Dirichlet function (狄利克雷函數)}
 The Dirichlet function is a function $f\colon\mathbb{R}\to\mathbb{R};$
