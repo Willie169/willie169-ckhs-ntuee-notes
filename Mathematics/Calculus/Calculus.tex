@@ -984,31 +984,35 @@ PLACEHOLDER
 \sssc{Space of BV functions}
 PLACEHOLDER (is a Banach space)
 \ssc{Dirac delta function or unit impulse}
-\sssc{As an extended real function with informally assigned integral properties}
-The Dirac delta function $\delta(x)\colon\bbR^n\to\bar{\bbR}$ with $n\in\bbN$ is a function defined as
+\sssc{As extended real-valued function with informally assigned integral properties}
+The Dirac delta function $\delta(x)\colon\bbR\to\bar{\bbR}$ is a function defined as
 \[\delta(x) =
 \begin{cases}
 \infty, & x = 0, \\
 0, & x \neq 0
 \end{cases}\]
-and for all $0\in\Omega\subseteq D_f\subseteq\bbR^n$ with $n\in\bbN$, for all indexed family $A\colon I\to\mathcal{A}\subseteq D_f;\;i\mapsto A_i$ with $I=J\cap\bbN$ for some interval $J$,
-\[\int f(x)\prod_{i\in I}\delta(A_i)\dd{x}\coloneq\sum_{i\in I}u(f(A_i)),\]
-\[\int_{\Omega}f(x)\prod_{i\in I}\delta(A_i)\dd{x}\coloneq\sum_{i\in I}f(A_i).\]
+and for all $0\in\Omega\subseteq D_f\subseteq\bbR$, for all indexed family $A\colon I\to\mathcal{A}\subseteq D_f;\;i\mapsto A_i$ with $I=J\cap\bbN$ for some interval $J$,
+\[\int f(x)\sum_{i\in I}\delta(A_i)\dd{x}\coloneq\sum_{i\in I}u(f(A_i)),\]
+\[\int_{\Omega}f(x)\sum_{i\in I}\delta(A_i)\dd{x}\coloneq\sum_{i\in I}f(A_i).\]
 Let
 \[u_U(x)\coloneq\sum_{i\in I}u(A_i),\]
-\[u_U'(x)\coloneq\prod_{i\in I}\delta(A_i).\]
+\[u_U'(x)\coloneq\sum_{i\in I}\delta(A_i).\]
 \sssc{As a measure}
-For all indexed family $A\colon I\to\mathcal{A}\subseteq\bbR^n;\;i\mapsto A_i$ with $n\in\bbN$ and $I=J\cap\bbN$ for some interval $J$, the definite integrals involving the product of Dirac delta functions $\prod_{i\in I}\delta(A_i)$ can be rigorously defined via a Radon measure called Dirac measure $\delta_A$ that for any $\Omega\in\bbR^n$,
+For all indexed family $A\colon I\to\mathcal{A}\subseteq\bbR;\;i\mapsto A_i$ with $I=J\cap\bbN$ for some interval $J$, the definite integrals involving the sum of Dirac delta functions $\sum_{i\in I}\delta(A_i)$ can be rigorously defined via a Radon measure called Dirac measure $\delta_A$ that for any $\Omega\in\bbR$,
 \[\delta_A(\Omega)\coloneq\abs{\Omega\cap A(I)}.\]
-Thus for any function $f$ such that $0\in\Omega\subseteq D_f\subseteq\bbR^n$ with $n\in\bbN$, for all such indexed family with $A(I)\subseteq D_f$,
-\[\int_{\Omega}f(x)\prod_{i\in I}\delta(A_i)\dd{x}\coloneq\int_{\Omega}f(x)\dd{\delta_A(x)}=\sum_{i\in I}f(A_i).\]
+Thus for any function $f$ such that $0\in\Omega\subseteq D_f\subseteq\bbR$, for all such indexed family with $A(I)\subseteq D_f$,
+\[\int_{\Omega}f(x)\sum_{i\in I}\delta(A_i)\dd{x}\coloneq\int_{\Omega}f(x)\dd{\delta_A(x)}=\sum_{i\in I}f(A_i).\]
 \sssc{As proper or improper Riemann–Stieltjes integral}
-For any function $f$ such that $0\in\Omega\subseteq D_f\subseteq\bbR^n$ with $n\in\bbN$, for all indexed family $A\colon I\to\mathcal{A}\subseteq D_f;\;i\mapsto A_i$ with $n\in\bbN$ and $I=J\cap\bbN$ for some interval $J$, with
+For any function $f$ such that $0\in\Omega\subseteq D_f\subseteq\bbR$, for all indexed family $A\colon I\to\mathcal{A}\subseteq D_f;\;i\mapsto A_i$ with $I=J\cap\bbN$ for some interval $J$, with
 \[u_A(x)\coloneq\sum_{i\in I}u(A_i),\]
 where $u$ is the unit step function, we define
-\[\int_{\Omega}f(x)\prod_{i\in I}\delta(A_i)\dd{x}\coloneq\int_{\Omega}f(x)\dd{u_A(x)}=\sum_{i\in I}f(A_i),\]
+\[\int_{\Omega}f(x)\sum_{i\in I}\delta(A_i)\dd{x}\coloneq\int_{\Omega}f(x)\dd{u_A(x)}=\sum_{i\in I}f(A_i),\]
 where $\int_{\Omega}f(x)\dd{u_A(x)}$ is a proper or improper Riemann–Stieltjes integral.
-
+\sssc{In higher dimensions}
+For any $\mb{x}=(x_1,x_2,\ldots,x_n)\in\bbR^n$ with $n\in\bbN$:
+\[\delta(\mb{x})=\sum_{k=1}^n\delta(x_i).\]
+For any $z=a+bi\in\bbC$:
+\[\delta(z)=\delta(a)+\delta(b).\]
 
 
 \section{Multivariable (多變數 or 多變量 or 多元) Calculus}
@@ -3013,16 +3017,16 @@ Linear transform
 \sssc{Introduction}
 The (unilateral or one-sided) Laplace transform is an integral transform that converts a function of a real variable $t$, called time domain, to a complex function of a complex variable $s$, called (complex-valued) frequency domain, $s$-domain, or $s$-plane. The functions are often denoted in lowercase for the time-domain and uppercase for the frequency-domain.
 \sssc{Definition as Lebesgue integral}
-For any set $S$, for any complex-valued functions $g_j(t)$ defined on $D_j\superseteq\mathbb{R}_{\geq 0}$, for any indexed family $A_j\colon I_j\to\mathcal{A}_j\subseteq D_j;\;i\mapsto A_{j_i}$ with $n\in\bbN$ and $I_j=J_j\cap\bbN$ for some interval $J_j$, the Laplace transform of the extended complex-valued function
-\[f(t)=\sum_{j\in S}g_j(t)\prod_{i\in I_j}\delta(A_{j_i}),\]
+For any set $S$, for any complex-valued functions $g_j(t)$ defined on $D_j\superseteq\mathbb{R}_{\geq 0}$, for any indexed family $A_j\colon I_j\to\mathcal{A}_j\subseteq D_j;\;i\mapsto A_{j_i}$ with $I_j=J_j\cap\bbN$ for some interval $J_j$, the Laplace transform of the extended complex-valued function
+\[f(t)=\sum_{j\in S}g_j(t)\sum_{i\in I_j}\delta(A_{j_i}),\]
 denoted as $\mathcal{L}\{f(t)\}(s)$ or $F(s)$, is defined as
 \[\mathcal{L}\{f(t)\}(s)=F(s)=\int_0^{\infty}f(t)e^{-st}\dd{t},\]
 with integrals involving Dirac detla functions defined via Dirac measures.
 
 The convergence of a Laplace transform at a value of $s$ is defined as the existence of such Lebesgue integral.
 \sssc{Definition as improper Riemann–Stieltjes integral}
-For any set $S$, for any complex-valued functions $g_j(t)$ defined on $D_j\superseteq\mathbb{R}_{\geq 0}$, for any indexed family $A_j\colon I_j\to\mathcal{A}_j\subseteq D_j;\;i\mapsto A_{j_i}$ with $n\in\bbN$ and $I_j=J_j\cap\bbN$ for some interval $J_j$, the Laplace transform of the extended complex-valued function
-\[f(t)=\sum_{j\in S}g_j(t)\prod_{i\in I_j}\delta(A_{j_i}),\]
+For any set $S$, for any complex-valued functions $g_j(t)$ defined on $D_j\superseteq\mathbb{R}_{\geq 0}$, for any indexed family $A_j\colon I_j\to\mathcal{A}_j\subseteq D_j;\;i\mapsto A_{j_i}$ with $I_j=J_j\cap\bbN$ for some interval $J_j$, the Laplace transform of the extended complex-valued function
+\[f(t)=\sum_{j\in S}g_j(t)\sum_{i\in I_j}\delta(A_{j_i}),\]
 denoted as $\mathcal{L}\{f(t)\}(s)$ or $F(s)$, is defined, with $\mathcal{f}(t)$, typically denoted simply as $f(t)$ defined as any function such that
 \bit
 \item its domain is a super set of an interval $[a,\infty)$ for some $a\in\bbR_{<0}$,
@@ -3056,8 +3060,8 @@ For the second integral, since $|f(t)| \le M e^{\alpha t}$, we have
 \[\int_T^\infty |f(t)| e^{-st}\dd{t}\le \int_T^\infty M e^{\alpha t} e^{-st}\dd{t} = M \int_T^\infty e^{-(s-\alpha)t}\dd{t},\]
 which converges since $\Re(s)>\alpha$.
 \end{proof}
-For any complex function $g(t)$ defined on $D\superseteq\mathbb{R}_{\geq 0}$, for any indexed family $A\colon I\to\mathcal{A}\subseteq D;\;i\mapsto A_i$ with $n\in\bbN$ and $I=J\cap\bbN$ for some interval $J\ni 0$, the function
-\[f(t)=g(t)\prod_{i\in I}\delta(A_i)\]
+For any complex function $g(t)$ defined on $D\superseteq\mathbb{R}_{\geq 0}$, for any indexed family $A\colon I\to\mathcal{A}\subseteq D;\;i\mapsto A_i$ with $I=J\cap\bbN$ for some interval $J\ni 0$, the function
+\[f(t)=g(t)\sum_{i\in I}\delta(A_i)\]
 is Laplace-transformable iff $g(t)$ is Laplace-transformable and that $\sum_{a\in\mathcal{A}}a$ converges.
 
 If $f(t)$ and $g(t)$ are Laplace-transformable, then $f(t)+g(t)$ is Laplace-transformable.
@@ -3164,6 +3168,9 @@ The inverse Laplace transform of a complex function $F(s)$, denoted as $\mathcal
 \[\mathcal{L}^{-1}\{F(s)\}(t)=f(t)=\frac{1}{2\pi i}\lim_{T\to\infty}\int_{\gamma-iT}^{\gamma+iT}e^{st}F(s)\dd{s},\]
 called Mellin's inverse formula, Bromwich integral, or Fourier–Mellin integral, where $\gamma$ is any real number such that it is greater than the real part of all singularities of $F$ and that $F$ is bounded on the line $s=\gamma$, and is such that
 \[\mathcal{L}\{f(t)\}(s) = F(s).\]
+\begin{proof}
+PLACEHOLDER
+\end{proof}
 \ssc{(Bilateral or Two-sided) Laplace Transform (（雙邊）拉普拉斯變換)}
 PLACEHOLDER
 The (bilateral or two-sided) Laplace transform is an integral transform that converts a function of a real variable (usually $t$, in the time domain) to a function of a complex variable (usually $s$, in the complex-valued angular frequency domain, also known as $s$-domain or $s$-plane). The functions are often denoted in lowercase for the time-domain representation and uppercase for the frequency-domain.
@@ -4088,7 +4095,19 @@ Differentiate both side:
 \[y'P_{n-1}'(y)=y^{(n)}=-(1+y^2)P_{n-1}'(y)=P_n(y).\]
 \end{proof}
 \ssc{Lists of Laplace Transform}
-PLACEHOLDER
+PLACEHOLDER待
+\sssc{Constant}
+\[\mathcal{L}\{C\}=\frac{C}{s},\quad C\in\bbC.\]
+ROC: $\Re(s)>0$.
+\sssc{Unit impulses}
+For any indexed family $A\colon I\to\mathcal{A}\subseteq D;\;i\mapsto A_i$ with $I=J\cap\bbN$ for some interval $J\ni 1$, the function:
+\[\mathcal{L}\{\sum_{i\in I}\delta(t-A_i)\}=\sum_{i\in I}e^{-sA_i},\quad \mathcal{A}\subseteq\bbR_{\geq 0}.\]
+ROC: $s\in\bbC$ if $\mathcal{A}\cap\bbR_{>0}=\varnothing$, $\Re(s)>0$ otherwise.
+\sssc{Unit step}
+\[\Gamma(z) = \int_0^{\infty} t^{z-1} e^{-t} \, \mathrm{d}t, \quad \Re(z) > 0\]
+
+
+
 \ssc{Lists Fourier Transform}
 PLACEHOLDER
 \ssc{List of Counterexamples}
@@ -4130,7 +4149,7 @@ which is differentiable at $0$ with $f'(0)=0$ and discontinuous everywhere else.
 \[f'(0)=0\]
 $f(x)$ has no local extreme at $0$.
 \ssc{List of implicitly defined functions}
-\ssc{Lambert W function, omega function, or product logarithm}
+\sssc{Lambert W function, omega function, or product logarithm}
 Lambert W function, omega function, or product logarithm $W(z)$ is defined implicitly by
 \[W(z)e^{W(z)}=z,\quad z\in\bbC.\]
 Each branch $k$, starting from $0$ as the principal branch, is denoted as $W_k(z)$.
