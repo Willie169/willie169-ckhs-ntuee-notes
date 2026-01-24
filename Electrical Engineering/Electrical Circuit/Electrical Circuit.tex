@@ -33,21 +33,15 @@ Electrical elements or simply elements are conceptual abstractions representing 
 A direct current is a current that is one-directional and with constant voltage and current over time.
 \sssc{Alternating current (AC)}
 An alternating current is a current that changes its voltage and current over time and with zero voltage and current in average over an infinite time interval.
-\sssc{Sinusoidal alternating current}
-A sinusoidal AC is an AC whose voltage $v(t)$ and current $i(t)$ over time can be written in the form
-\[v(t)=v_m\cos(\omega t+\phi),\]
-\[i(t)=i_m\cos(\omega t+\theta).\]
-They can be represented in phasors as $v=v_m\angle\phi$ and $i=i_m\angle\theta$, which can be treated as complex numbers $v_me^{i\phi}$ and $i_me^{i\theta}$.
 \sssc{General current in frequency domain}
 Given a general current with voltage $v(t)$ and current $i(t)$ over time since $t=0$, we can perform Laplace transforms,
-\[v(s)=\mathcal{L}\{v(t)\}(s)=\int_0^{\infty}v(t)e^{-st}\dd{t},\]
-\[i(s)=\mathcal{L}\{i(t)\}(s)=\int_0^{\infty}i(t)e^{-st}\dd{t},\]
-to obtain its voltage $v(s)$ and current $i(\omega)$ as a function of frequency domain $s$.
+\[v(s)=\mathcal{L}\{v(t)\}(s)=\int_0^{\infty}e^{-st}v(t)\dd{t},\]
+\[i(s)=\mathcal{L}\{i(t)\}(s)=\int_0^{\infty}e^{-st}i(t)\dd{t},\]
+to obtain its voltage $v(s)$ and current $i(s)$ as a function of frequency domain $s$. Below, if not otherwise specified, $v$ and $i$ refer to $v(s)$ and $i(s)$.
 \sssc{Resistance and resistor}
 The resistance $R$ of an element is the voltage across it over the current through it under DC:
 \[v(t)=Ri(t),\]
 \[v(s)=Ri(s).\]
-
 An ideal resistor is a circuit element with a resistance and no capacitance or inductance.
 \begin{center}
 \begin{circuitikz}
@@ -65,8 +59,7 @@ Power absorbed:
 \sssc{Capacitance and capacitor}
 The capacitance $C$ of an element is the current through it divided by the derivative of the voltage across it with respect to time:
 \[i(t)=C\dv{v(t)}{t},\]
-\[i(s)=js Cv(\omega).\]
-
+\[i(s)=Csv(s).\]
 An ideal capacitor is a circuit element with a capacitance and no resistance or inductance.
 \begin{center}
 \begin{circuitikz}
@@ -77,17 +70,14 @@ A capacitor voltage must not be allowed to jump instantaneously from one value t
 
 Integral voltage-current relationship:
 \[v(t)=\frac{1}{C}\int_{t_0}^ti(\tau)\dd{\tau}+v(t_0)=\frac{1}{C}\int_{-\infty}^ti(\tau)\dd{\tau}.\]
-
 Power absorbed:
 \[p(t)=Cv(t)\dv{v(t)}{t}.\]
-
 Energy stored:
 \[\int_{-\infty}^tp(t)\dd{t}=\frac{1}{2}C\qty(v(t))^2.\]
 \sssc{Inductance and inductor}
 The inductance $L$ of an element is the voltage across it divided by the derivative of the current through it with respect to time:
 \[v(t)=L\dv{i(t)}{t},\]
-\[v(\omega)=j\omega Li(\omega).\]
-
+\[v(s)=Lsi(s).\]
 An ideal inductor is a circuit element with an inductance and no resistance or capacitance.
 \begin{center}
 \begin{circuitikz}
@@ -98,35 +88,33 @@ An inductor current must not be allowed to jump instantaneously from one value t
 
 Integral voltage-current relationship:
 \[i(t)=\frac{1}{L}\int_{t_0}^tv(\tau)\dd{\tau}+i(t_0)=\frac{1}{L}\int_{-\infty}^tv(\tau)\dd{\tau}.\]
-
 Power absorbed:
 \[p(t)=Li(t)\dv{i(t)}{t}.\]
-
 Energy stored:
 \[\int_{-\infty}^tp(t)\dd{t}=\frac{1}{2}L\qty(i(t))^2.\]
 \sssc{Reactance}
 The (capacitive) reactance $X_C$ of a one-port network with capacitance $C$ is defined as:
-\[X_C(\omega)=\frac{1}{\omega C}.\]
+\[X_C(s)=\frac{1}{sC}.\]
 There is also a definition that uses the negation of the definition above, which is not used here.
 
 The (inductive) reactance $X_L$ of a one-port network with inductance $L$ is defined as:
-\[X_L(\omega)=\omega L.\]
+\[X_L(s)=sL.\]
 The reactance $X$ of a one-port network is defined as:
-\[X(\omega)=X_L(\omega)-X_C(\omega).\]
-A one-port network is said to have net capacitive reactance if $X(\omega)<0$ and have net inductive reactance if $X(\omega)>0$.
+\[X(s)=X_L(s)-X_C(s).\]
+A one-port network is said to have net capacitive reactance if $X(s)<0$ and have net inductive reactance if $X(s)>0$.
 \sssc{Impedance}
 The impedance $Z$ of a one-port network is defined as a complex number with its resistance as real part and its reactance as imaginary part:
-\[Z(\omega)=R+jX(\omega),\]
-\[v(\omega)=Z(\omega)i(\omega).\]
+\[Z(s)=R+jX(s),\]
+\[v(s)=Z(s)i(s).\]
 Thus, the behaviors of resistors, capacitors, and inductors can all be presented with a complex function of frequency domain, impedance, with net capacitance existing and being propositional to reciprocal of reactance if reactance is negative, net inductance existing and being propositional to the reactance if reactance is positive, and no net capacitance or inductance existing if reactance is zero.
 \sssc{Admittance}
-The admittance $Y(\omega)$ of a one-port network is defined as the reciprocal of its impedance:
-\[Y(\omega)=\frac{1}{Z(\omega)}.\]
+The admittance $Y(s)$ of a one-port network is defined as the reciprocal of its impedance:
+\[Y(s)=\frac{1}{Z(s)}.\]
 \sssc{Conductance}
-The conductance $G(\omega)$ of a circuit element is defined as the real part of its admittance.
+The conductance $G(s)$ of a circuit element is defined as the real part of its admittance.
 \sssc{Susceptance}
-The susceptance $B(\omega)$ of a circuit element is defined as the imaginary part of its admittance:
-\[Y(\omega)=G(\omega)+jB(\omega).\]
+The susceptance $B(s)$ of a circuit element is defined as the imaginary part of its admittance:
+\[Y(s)=G(s)+jB(s).\]
 \sssc{Active element}
 An active element is an element capable of furnishing an average power greater than zero to some external network over an infinite time interval.
 \sssc{Passive element}
@@ -143,13 +131,12 @@ such that the system is a dynamic system whose state space is a finite dimension
 In contrast, distributed parameter systems have infinite-dimensional state space.
 
 We will concentrate on lumped-parameter networks in this text.
-\ssc{Circuit element}
-A circuit element is a two terminal electrical network that can be completely characterized by its voltage-current relationship, that is, with time $t$, voltage $v(t)$, and current $i(t)$, for some given three variable function $f$,
-\[f\qty(v(t),i(t),t)=0.\]
+\sssc{Circuit element}
+A circuit element is a two terminal electrical network that can be completely characterized by its voltage-current relationship.
 
-We label + and - on the two terminal repsectively and voltage $v(t)$ between them to define the voltage $v(t)$ of the element as the electric potential difference of + terminal relative to - terminal.
+We label + and - on the two terminal repsectively and voltage $v$ between them to define the voltage $v$ of the element as the electric potential difference of + terminal relative to - terminal.
 
-We label arrow and current $i(t)$ on it to define the reference direction of the current $i(t)$ of the element.
+We label arrow and current $i$ on it to define the reference direction of the current $i$ of the element.
 
 If the current arrow enters the + terminal, the element is said to follow the passive sign convention. Under this convention, the power absorbed by the element is
 \[p(t)=v(t)i(t),\]
@@ -217,8 +204,8 @@ SPICE (Simulation Program with Integrated Circuit Emphasis) is a general-purpose
 Ideal sources are active elements assumed to have zero impedance.
 \sssc{Independent source}
 \bit
-\item An independent voltage source enforces a prescribed DC or sinusoidal AC voltage $v_s(t)$ across its terminals.
-\item An independent current source enforces a prescribed DC or sinusoidal AC current $i_s(t)$ through its terminals.
+\item An independent voltage source enforces a prescribed DC or sinusoidal AC voltage $v_s$ across its terminals.
+\item An independent current source enforces a prescribed DC or sinusoidal AC current $i_s$ through its terminals.
 \eit
 \begin{center}
 \begin{circuitikz}
@@ -229,10 +216,10 @@ Ideal sources are active elements assumed to have zero impedance.
 \end{center}
 \sssc{Linear dependent or controlled source}
 \bit
-\item A voltage-controlled voltage source enforces a DC or sinusoidal AC voltage $v_s(t)=\mu v_x(t)$ across its terminals, where $v_x(t)$ is control voltage and real for DC or complex for AC constant $\mu$ is dimensionless voltage gain.
-\item A current-controlled voltage source enforces a DC or sinusoidal AC voltage $v_s(t)=ri_x(t)$ across its terminals, where $i_x(t)$ is control current and real for DC or complex for AC constant $r$ is transresistance.
-\item A voltage-controlled current source enforces a DC or sinusoidal AC current $i_s(t)=gv_x(t)$ through its terminals, where $v_x(t)$ is control voltage and real for DC or complex for AC constant $g$ is transconductance.
-\item A current-controlled current source enforces a DC or sinusoidal AC current $i_s(t)=\beta i_x(t)$ through its terminals, where $i_x(t)$ is control current and real for DC or complex for AC constant $\beta$ is dimensionless current gain.
+\item A voltage-controlled voltage source enforces a DC or sinusoidal AC voltage $v_s=\mu v_x$ across its terminals, where $v_x$ is control voltage and real for DC or complex for AC constant $\mu$ is dimensionless voltage gain.
+\item A current-controlled voltage source enforces a DC or sinusoidal AC voltage $v_s=ri_x$ across its terminals, where $i_x$ is control current and real for DC or complex for AC constant $r$ is transresistance.
+\item A voltage-controlled current source enforces a DC or sinusoidal AC current $i_s=gv_x$ through its terminals, where $v_x$ is control voltage and real for DC or complex for AC constant $g$ is transconductance.
+\item A current-controlled current source enforces a DC or sinusoidal AC current $i_s=\beta i_x$ through its terminals, where $i_x$ is control current and real for DC or complex for AC constant $\beta$ is dimensionless current gain.
 \eit
 \begin{center}
 \begin{circuitikz}
@@ -246,7 +233,7 @@ A practical independent voltage source can be approximated with an ideal indepen
 A practical independent current source can be approximated with an ideal independent current source in parallel connection with a resistor.
 \ssc{Linear circuit}
 \sssc{Linear element}
-A linear element is a passive element whose resistance $R$, capacitance $C$, and inductance $L$ are independent of voltage and current, that is, equivalent to a one-port network consists of ideal resistors, capacitors, and inductors, that is, the voltage-current relationship under sinusoidal AC is a complex equation $v(t)=Z\cdot i(t)$ ($v(t)=R\cdot i(t)$) with voltage $v(t)$, current $i(t)$, and impedance $Z$ (resistance $R$ for DC). The assumption for resistance is the Ohm's law.
+A linear element is a passive element whose resistance $R$, capacitance $C$, and inductance $L$ are independent of voltage and current, that is, equivalent to a one-port network consists of ideal resistors, capacitors, and inductors, that is, the voltage-current relationship is a complex equation $v=Z\cdot i$ ($v=R\cdot i$ for DC) with voltage $v$, current $i$, and impedance $Z$ (resistance $R$ for DC). The assumption for resistance is the Ohm's law.
 \sssc{Linear network}
 A linear network is a network which consists of only linear elements, independent sources, and linear dependent sources.
 \sssc{Linear circuit}
@@ -255,8 +242,6 @@ A linear circuit is a circuit which obeys the superposition principle of voltage
 For linear networks, the impedance of the network is equal to the sum of the impedance of each element.
 \sssc{Parallel connection}
 For linear networks, the admittance of the network is equal to the sum of the admittance of each element.
-\sssc{Current}
-Every current can be expressed as a linear combination of a DC component and an AC component, with the later as a complex function of frequency domain that can be obtained via Laplace transform, and thus by the superposition principle, we can analyze any current by analyzing its DC component, analyzing AC component with voltages, currents, and impedances as complex functions of frequency domain and then reverse Laplace transform to time domain, and summing the voltages and currents.
 \sssc{Linear circuit superposition analysis}
 \ben
 \item Select one of the independent sources. Set all other independent sources to zero. This means voltage sources are replaced with short circuits and current sources are replaced with open circuits. Leave dependent sources in the circuit.
@@ -264,7 +249,7 @@ Every current can be expressed as a linear combination of a DC component and an 
 \item Repeat previous steps until each independent source has been considered.
 \item Sum the currents and voltages obtained from the separate analyses above.
 \een
-\ssc{Nodal Analysis or Node-voltage Analysis of Linear Circuit under DC or Sinusoidal AC}
+\ssc{Nodal Analysis or Node-voltage Analysis of Linear Circuit}
 \sssc{Supernode}
 If a voltage source is connected between two nodes, enclose both nodes and the source as a supernode.
 \sssc{Linear circuit as graph}
@@ -292,7 +277,7 @@ If a current source lies on two or more meshes, exclude the edge with the curren
 \een
 \ssc{Transformations}
 \sssc{Source transformation}
-An independent voltage source  $v$ in series connection with an impedance $Z=R+jX$ is equivalent to an independent current source $i=\frac{v}{Z}$ in parallel connection with the same impedance $Z$.
+An independent voltage source $v$ in series connection with an impedance $Z=R+jX$ is equivalent to an independent current source $i=\frac{v}{Z}$ in parallel connection with the same impedance $Z$.
 \sssc{Y-Δ transformation and Δ-Y transformation}
 \bit
 \item Y (wye or star) network: a common central node $N$, three terminals $N_1,N_2,N_3$, and three circuit elements with impedances $Z_1,Z_2,Z_3$ connecting $N_1$ and $N$, $N_2$ and $N$, and $N_3$ and $N$ respectively.
@@ -333,7 +318,7 @@ Thévenin impedance and Norton impedance are the same and can be found with:
 A linear network delivers maximum power to a load impedance when it is equal to the Thévenin impedance or its conjugate of the network.
 \ssc{RC, RL, LC, and RLC Circuits}
 \sssc{Series RC voltage low-pass filter circuit}
-An input AC with voltage $v_{in}$ is enforced from node 0 to node 1, a resistance $R$ connects node 1 and node 2, a capacitance $C$ connects node 2 and node 0, and output voltage $v_c$ and current $i_c$ is measured at node 0 to node 2.
+An input voltage $v_{in}$ is enforced from node 0 to node 1, a resistance $R$ connects node 1 and node 2, a capacitance $C$ connects node 2 and node 0, and output voltage $v_c$ and current $i_c$ is measured from node 0 to node 2.
 \[v_{in}
 
 
