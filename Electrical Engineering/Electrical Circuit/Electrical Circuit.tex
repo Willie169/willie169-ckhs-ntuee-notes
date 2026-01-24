@@ -13,7 +13,7 @@
 \bit
 \item Voltage $v$ (volt = V)
 \item Current $i$ (ampere = A)
-\item Complex-valued angular frequency $s$ (Hz = 1 / s)
+\item Complex frequency $s$ (Hz = 1 / s)
 \item Power $p$ (watt = W = A V)
 \item Imaginary unit (since $i$ is used by current) $j=\sqrt{-1}$
 \item Resistance $R$ (ohm = \textOmega = V / A)
@@ -37,7 +37,7 @@ An alternating current is a current that changes its voltage and current over ti
 Given a general current with voltage $v(t)$ and current $i(t)$ over time since $t=0$, we can perform Laplace transforms,
 \[v(s)=\mathcal{L}\{v(t)\}(s)=\int_0^{\infty}e^{-st}v(t)\dd{t},\]
 \[i(s)=\mathcal{L}\{i(t)\}(s)=\int_0^{\infty}e^{-st}i(t)\dd{t},\]
-to obtain its voltage $v(s)$ and current $i(s)$ as a function of frequency domain $s$. Below, if not otherwise specified, $v$ and $i$ refer to $v(s)$ and $i(s)$.
+to obtain its voltage $v(s)$ and current $i(s)$ as a function of frequency domain $s$.
 \sssc{Resistance and resistor}
 The resistance $R$ of an element is the voltage across it over the current through it under DC:
 \[v(t)=Ri(t),\]
@@ -131,6 +131,8 @@ such that the system is a dynamic system whose state space is a finite dimension
 In contrast, distributed parameter systems have infinite-dimensional state space.
 
 We will concentrate on lumped-parameter networks in this text.
+\sssc{Time-invariant network}
+Elements' properties and connections don't change over time. We will concentrate on time-invariant networks in this text.
 \sssc{Circuit element}
 A circuit element is a two terminal electrical network that can be completely characterized by its voltage-current relationship.
 
@@ -151,8 +153,8 @@ A path is any route through which current can flow from one node to another.
 A branch is a single element or a group of elements in series that connects two nodes.
 \sssc{Loop}
 A loop is any closed path in a network where you can start at a node, traverse branches, and return to the starting node without retracing any branch.
-\sssc{Mesh}
-A mesh is a loop that contains no other loop inside it.
+\sssc{(Essential) mesh}
+An (essential) mesh is a loop $\ell$ such that there is no other loop whose surface is a subset of the surface surrounded by $\ell$.
 \sssc{Electrical circuit or closed circuit}
 An electrical circuit is a network containing loops.
 \sssc{Open circuit}
@@ -249,31 +251,61 @@ For linear networks, the admittance of the network is equal to the sum of the ad
 \item Repeat previous steps until each independent source has been considered.
 \item Sum the currents and voltages obtained from the separate analyses above.
 \een
-\ssc{Nodal Analysis or Node-voltage Analysis of Linear Circuit}
-\sssc{Supernode}
-If a voltage source is connected between two nodes, enclose both nodes and the source as a supernode.
 \sssc{Linear circuit as graph}
 A linear circuit is a graph with nodes with all voltage sources enclosed as supernodes being vertices, branches without nodes inside except ends being edges, and admittances (or conductance for DC) being weights.
-\sssc{Admittance matrix}
-The admittance (or conductance for DC) matrix of a linear circuit is the Laplacian matrix of it.
-\sssc{Nodal analysis or node-voltage analysis}
+\ssc{Thévenin's theorem and Norton's theorem}
+\sssc{Thévenin's theorem}
+Any linear network with two terminals is equivalent to a voltage source with a voltage called Thévenin voltage in a series connection with a linear element (or resistor for DC) with an impedance (or resistance for DC) called Thévenin impedance (or resistance for DC), such equivalent circuit is called Thévenin equivalent.
+\sssc{Norton's theorem}
+Any linear network with two terminals is equivalent to a current source with a current called Norton current in a parallel connection with a linear element (or resistor for DC) with an impedance (or resistance for DC) called Norton impedance (or resistance for DC), such equivalent circuit is called Norton equivalent.
+\sssc{Finding Thévenin voltage}
+Remove any load, and the open-circuit voltage (phasor for AC) is the Thévenin voltage.
+\sssc{Finding Norton current}
+Add a short circuit between the two terminals, and the current on the it is the Norton current.
+\sssc{Finding Thévenin impedance or Norton impedance}
+Thévenin impedance and Norton impedance are the same and can be found with:
+\bit
+\item \tb{Source deactivation method}: Replace all independent voltage sources with short circuits and independent current sources with open circuits, and the impedance between the two terminals is the Thévenin impedance or Norton impedance.
+\item \tb{Division method}: The Thévenin impedance or Norton impedance is the Thévenin voltage divided by the Norton current.
+\eit
+\sssc{Maximum power theorem}
+A linear network delivers maximum power to a load impedance when it is equal to the Thévenin impedance or its conjugate of the network.
+\ssc{Nodal analysis or node-voltage analysis of linear circuits}
+\sssc{(Nodal) admittance matrix}
+The (nodal) admittance (conductance for DC) matrix of a linear circuit that is a simple graph with all sources omitted is the Laplacian matrix of it with all sources omitted.
+\sssc{Supernode method}
 \ben
-\item Form supernodes to enclose all voltage sources.
-\item The equations given by KCL for all nodes form a system of linear equations:
+\item Choose a reference node and assign a voltage for it (typically 0).
+\item For each pair of nodes, if there exists an edge with zero impedance and no source, merge the two nodes, and discard all edges between them.
+\item For each pair of nodes, use series and parallel connections to combine all edges without sources between them.
+\item For each collection of voltage sources in series connection between two nodes, combine them to one.
+\item For each collection of current sources in parallel connection between two nodes, combine them to one.
+\item For each pair of node with a voltage source in series connection with an nonzero impedance (resistance for DC) connecting them, convert it to its Norton equivalent.
+\item For each voltage source whose either endpoint is the reference node, the nodal voltage of the other endpoint is immediately known.
+\item For each node with unknown voltage, assign a nodal voltage variable.
+\item For each voltage source whose neither endpoint is the reference node, enclose both nodes and the source as a supernode.
+\item Excluding all supernodes and all edges connected to supernode, form a system of linear equations given by KCL:
 \[\mb{Y}\mb{v}=\mb{i},\]
-where $\mb{v}$ is the column vector of nodal voltages (directly as variables) relative to a common reference node, $\mb{i}$ is the vector of current injected into the nodes, where each entry $i_k$ is zero if node $k$ is not connected to a current source and $i_s$ if node $k$ is connected to a current source of current $i_s$ injected to the node (negative for absorption, direct substituted for VCCS and CCCS), and $\mb{Y}$ is the admittance (or conductance for DC) matrix of the linear circuit.
-\item Additional linear equations of VCVS and CCVS are added to the linear system.
+where $\mb{v}$ is the column vector of the nodal voltage variables and known nodal voltages, $\mb{i}$ is the column vector of current injected into the nodes, where each entry $i_k$ is zero if node $k$ is not connected to a current source and $i_s$ if node $k$ is connected to a current source of current $i_s$ injected to the node (negative for absorption, VCCSs and CCCSs directly replaced with the control functions), and $\mb{Y}$ is the admittance (conductance for DC) matrix of the linear circuit.
+\item For each supernode, write the equation given by KCL in terms of nodal voltage variables, that is, the sum of the currents leave the boundary of the supernode is zero.
+\item For each voltage source, write the equation where the enforced voltage in one side and the difference of two nodal voltage variables in the other side.
+\item Solve the system of linear equations.
 \een
-\ssc{Mesh Analysis of Planar Linear Circuit under DC or Sinusoidal AC}
-\sssc{Supermesh}
-If a current source lies on two or more meshes, exclude the edge with the current source and merge the meshes into one mesh.
-\sssc{Mesh analysis}
+\sssc{MNA}
+PLACEHOLDER
+\ssc{Mesh analysis of planar linear circuit}
 \ben
-\item Indentify all meshes and form supermeshes to exclude all current sourcs.
-\item For each mesh, assign a mesh current variable for it with an arbitrary but consistent direction.
-\item Write the linear equation of mesh current variables given by KVL for every mesh.
-\item Additional linear equations of current sources are addded to the linear system.
-\item Additional linear equations of dependent sources are addded to the linear system.
+\item For each pair of nodes, if there exists an edge with zero impedance and no source, merge the two nodes, and discard all edges between them.
+\item For each pair of nodes, use series and parallel connections to combine all edges without sources between them.
+\item For each collection of voltage sources in series connection between two nodes, combine them to one.
+\item For each collection of current sources in parallel connection between two nodes, combine them to one.
+\item For each pair of node with a current source in parallel connection with an nonzero impedance (resistance for DC) connecting them, convert it to its Thévenin equivalent.
+\item Indentify all meshes.
+\item Assign an arbitrary but consistent direction (clockwise or counterclockwise) of current for all meshes, and assign a mesh current variable for each mesh.
+\item For each current source, if it lies on two or more meshes, exclude the edge with the current source and merge the meshes into one mesh, called a supermesh.
+\item For each mesh (including supermesh), write the linear equation given by KVL with VCVSs and CCVSs directly replaced with the control functions.
+\item For each current source, write the equation where the enforced current in one side and the result of additions and subtractions of mesh current variables in the other side.
+\item Solve the system of linear equations.
 \een
 \ssc{Transformations}
 \sssc{Source transformation}
@@ -299,31 +331,24 @@ For all integer $n\geq 3$:
 \item Star-mesh transformation: The two networks are equivalent if
 \[Z_{ij}=Z_i+Z_j+\frac{Z_iZ_j}{-Z_i-Z_j+\sum_{k=1}^nZ_k}.\]
 \eit
-\ssc{Thévenin's theorem and Norton's theorem}
-\sssc{Thévenin's theorem}
-Any linear network with two terminals under DC or sinusoidal AC is equivalent to a voltage source with a voltage called Thévenin voltage in a series connection with a linear element (or resistor for DC) with an impedance (or resistance for DC) called Thévenin impedance (or resistance for DC), such equivalent circuit is called Thévenin equivalent.
-\sssc{Norton's theorem}
-Any linear network with two terminals under DC or sinusoidal AC is equivalent to a current source with a current called Norton current in a parallel connection with a linear element (or resistor for DC) with an impedance (or resistance for DC) called Norton impedance (or resistance for DC), such equivalent circuit is called Norton equivalent.
-\sssc{Finding Thévenin voltage}
-Remove any load, and the open-circuit voltage (phasor for AC) is the Thévenin voltage.
-\sssc{Finding Norton current}
-Add a short circuit between the two terminals, and the current on the it is the Norton current.
-\sssc{Finding Thévenin impedance or Norton impedance}
-Thévenin impedance and Norton impedance are the same and can be found with:
-\bit
-\item \tb{Source deactivation method}: Replace all independent voltage sources with short circuits and independent current sources with open circuits, and the impedance between the two terminals is the Thévenin impedance or Norton impedance.
-\item \tb{Division method}: The Thévenin impedance or Norton impedance is the Thévenin voltage divided by the Norton current.
-\eit
-\sssc{Maximum power theorem}
-A linear network delivers maximum power to a load impedance when it is equal to the Thévenin impedance or its conjugate of the network.
 \ssc{RC, RL, LC, and RLC Circuits}
 \sssc{Series RC voltage low-pass filter circuit}
-An input voltage $v_{in}$ is enforced from node 0 to node 1, a resistance $R$ connects node 1 and node 2, a capacitance $C$ connects node 2 and node 0, and output voltage $v_c$ and current $i_c$ is measured from node 0 to node 2.
-\[v_{in}
-
-
-
-
+A series RC voltage low-pass filter circuit consists of an independent voltage source $v$, a resistance $R$, and a capacitance $C$ in series connection. Let the initial voltage of $C$ be $v_c$. The current through the circuit is:
+\[v(t)=Ri(t)+\frac{1}{C}\qty(v_c+\int_0^ti(\tau)\dd{\tau}).\]
+\[i(s)=\frac{1}{R+\frac{1}{sC}}\qty(?+v(s)).\]PLACEHOLDER
+\begin{proof}
+PLACEHOLDER
+\end{proof}
+If $v(t)$ is a constant $v_s$.
+\[i(t)=\frac{v_s-v_c}{R}e^{-\frac{t}{RC}}.\]PLACEHOLDER
+\begin{proof}
+\[0=Ri'(t)+\frac{1}{C}i(t)\]
+\[-\frac{1}{RC}\dd{t}=\frac{1}{i(t)}\dd{i}\]
+\[-\frac{t}{RC}=\ln(i(t))+A\]
+\[i(t)=Ae^{-\frac{t}{RC}}\]
+\[v_s=RA+v_C\]
+\[A=\frac{v_s-v_c}{R}\]
+\end{proof}
 
 
 

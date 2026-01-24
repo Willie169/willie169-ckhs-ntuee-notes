@@ -19,7 +19,7 @@
 \item 簡單圖（simple graph）：指沒有重邊（multiple edges）或自環（loop，或譯迴圈）的圖。在無向圖中，重邊指兩條相異的邊對應到同一對無序頂點，自環指一條邊自一個點連接到其自身（joins a vertex to itself），可表示為一個有序對$G=(V(G), E(G))$，其中$E(G)\subseteq\{\{x, y\}\mid x, y\in V(G)\wedge x\neq y\}$。未特別說明者，圖通常為簡單圖。
 \item 權重圖（weighted graph，或譯賦權圖）：一個權重圖是一個帶有數值權重的圖，每條邊都有一個相應的權重（weight)或成本。權重可用$w: E(G) \rightarrow \mathbb{R}$ 表示，其中 $w(e)$ 表示邊 $e$ 的權重。未特別說明者，圖通常為無權重圖。 
 \item 端點（endpoints）、相鄰（adjacent）與鄰居（neighbor）：對一條邊$e=\{u, v\}$（或可簡寫為$e=uv$），$u$和$v$被稱為其端點，並稱$u$和$v$相鄰，即$u$是$v$的鄰居。$v$的所有鄰居所構成的集合（the neighorhood of $v$），記作$N_G(v)$。
-\item 度數（degree）：一個點$v$的度數指連接到（be incident to）該頂點的邊數，用$deg_G(v)$表示，即$deg_G(v)=|N_G(v)|$。一個圖$G$的所有頂點中度數最大與最小者之度數分別稱$\Delta(G)$與$\delta(G)$。若$\Delta(G)=\delta(G)=k$，則稱圖$G$為$k$正則的（$k$-regular）。
+\item 度數（degree）：對於無權重圖一個點$v$的度數$\deg_G(v)$指連接到（be incident to）該頂點的邊數，即$\deg_G(v)=|N_G(v)|$；對於權重圖一個點$v$的度數$\deg_G(v)$指連接到該頂點的邊的權重和。一個圖$G$的所有頂點中度數最大與最小者之度數分別稱$\Delta(G)$與$\delta(G)$。若$\Delta(G)=\delta(G)=k$，則稱圖$G$為$k$正則的（$k$-regular）。
 \item 路徑（path）：一條路徑是圖中的一個頂點和邊的交替序列，以一頂點開始、一頂點結束，該二點稱該路徑的端點，其中邊以相鄰的兩頂點為端點，且除路徑的兩端點得為同一點外，同一頂點不得出現在一路徑上$\geq 2$次。例如，$v_1e_1v_2e_2v_3$是一條路徑。
 \item 行跡（trail）：一條行跡是圖中的一個頂點和邊的交替序列，以一頂點開始、一頂點結束，該二點稱該行跡的端點，其中邊以相鄰的兩頂點為端點，且同一條邊不得出現在一行跡上$\geq 2$次。一條路徑必為一條行跡。
 \item 道路（walk）：一條道路是圖中的一個頂點和邊的交替序列，以一頂點開始、一頂點結束，該二點稱該道路的端點，其中邊以相鄰的兩頂點為端點。若一條道路的兩端點為同一點，則稱該道路為封閉的（closed），否則稱該道路為開放的（open）。一條行跡必為一條道路。
@@ -43,8 +43,8 @@
 \item 對於一個無向權重圖 $G=(V(G), E(G))$，其鄰接矩陣 $A$ 是一個 $|V(G)|\times|V(G)|$ 的矩陣，對於其中元素$a_{ij}$，若$v_i$ 和 $v_j$ 之間存在一條邊$e$，則$a_{ij}=w(e)$，否則$a_{ij}=\infty$。
 \item 令一無權重圖的鄰接矩陣為$A$，則$A^n$的$a_ij$元素表示以點$i$和點$j$為兩端點且長度為$n$的道路個數。
 \end{itemize}
-\ssc{Degree matrix}
-The degree matrix of a simple undirected graph is a diagnoal matrix whose entry $a_{ii}$ is the degree of vertex $v_i$.
+\ssc{(In-)degree matrix}
+The (in-)degree matrix of a simple undirected graph is a diagnoal matrix whose entry $a_{ii}$ is the degree of vertex $v_i$.
 \ssc{Laplacian matrix}
 The Laplacian matrix of a simple undirected graph is its degree matrix minus its adjacency matrix.
 \subsection{配對（Matching）與點覆蓋（Vertex cover）}
