@@ -11,9 +11,10 @@
 \ssc{Introduction}
 \sssc{Convention}
 \bit
-\item Voltage $v$ (volt = V)
-\item Current $i$ (ampere = A)
+\item Time $t$ (s)
 \item Complex frequency $s$ (Hz = 1 / s)
+\item Voltage $v$ (time domain) $V$ (frequency domain) (volt = V)
+\item Current $i$ (time domain) $I$ (frequency domain) (ampere = A)
 \item Power $p$ (watt = W = A V)
 \item Imaginary unit (since $i$ is used by current) $j=\sqrt{-1}$
 \item Resistance $R$ (ohm = \textOmega = V / A)
@@ -35,13 +36,13 @@ A direct current is a current that is one-directional and with constant voltage 
 An alternating current is a current that changes its voltage and current over time and with zero voltage and current in average over an infinite time interval.
 \sssc{General current in frequency domain}
 Given a general current with voltage $v(t)$ and current $i(t)$ over time since $t=0$, we can perform Laplace transforms,
-\[v(s)=\mathcal{L}\{v(t)\}(s)=\int_0^{\infty}e^{-st}v(t)\dd{t},\]
-\[i(s)=\mathcal{L}\{i(t)\}(s)=\int_0^{\infty}e^{-st}i(t)\dd{t},\]
-to obtain its voltage $v(s)$ and current $i(s)$ as a function of frequency domain $s$.
+\[V(s)=\mathcal{L}\{v(t)\}(s)=\int_0^{\infty}e^{-st}v(t)\dd{t},\]
+\[I(s)=\mathcal{L}\{i(t)\}(s)=\int_0^{\infty}e^{-st}i(t)\dd{t},\]
+to obtain its voltage $V(s)$ and current $I(s)$ as a function of frequency domain $s$.
 \sssc{Resistance and resistor}
 The resistance $R$ of an element is the voltage across it over the current through it under DC:
-\[v(t)=Ri(t),\]
-\[v(s)=Ri(s).\]
+\[v(t)=Ri(t).\]
+\[V(s)=RI(s).\]
 An ideal resistor is a circuit element with a resistance and no capacitance or inductance.
 \begin{center}
 \begin{circuitikz}
@@ -58,8 +59,8 @@ Power absorbed:
 \[p(t)=\frac{\qty(v(t))^2}{R}=\qty(i(t))^2R.\]
 \sssc{Capacitance and capacitor}
 The capacitance $C$ of an element is the current through it divided by the derivative of the voltage across it with respect to time:
-\[i(t)=C\dv{v(t)}{t},\]
-\[i(s)=Csv(s).\]
+\[i(t)=C\dv{v(t)}{t}.\]
+\[I(s)=CsV(s)-Cv(0^-).\]
 An ideal capacitor is a circuit element with a capacitance and no resistance or inductance.
 \begin{center}
 \begin{circuitikz}
@@ -76,8 +77,8 @@ Energy stored:
 \[\int_{-\infty}^tp(t)\dd{t}=\frac{1}{2}C\qty(v(t))^2.\]
 \sssc{Inductance and inductor}
 The inductance $L$ of an element is the voltage across it divided by the derivative of the current through it with respect to time:
-\[v(t)=L\dv{i(t)}{t},\]
-\[v(s)=Lsi(s).\]
+\[v(t)=L\dv{i(t)}{t}.\]
+\[V(s)=LsI(s)-Li(0^-).\]
 An ideal inductor is a circuit element with an inductance and no resistance or capacitance.
 \begin{center}
 \begin{circuitikz}
@@ -104,8 +105,8 @@ The reactance $X$ of a one-port network is defined as:
 A one-port network is said to have net capacitive reactance if $X(s)<0$ and have net inductive reactance if $X(s)>0$.
 \sssc{Impedance}
 The impedance $Z$ of a one-port network is defined as a complex number with its resistance as real part and its reactance as imaginary part:
-\[Z(s)=R+jX(s),\]
-\[v(s)=Z(s)i(s).\]
+\[Z(s)=R+jX(s).\]
+\[V(s)=Z(s)I(s).\]
 Thus, the behaviors of resistors, capacitors, and inductors can all be presented with a complex function of frequency domain, impedance, with net capacitance existing and being propositional to reciprocal of reactance if reactance is negative, net inductance existing and being propositional to the reactance if reactance is positive, and no net capacitance or inductance existing if reactance is zero.
 \sssc{Admittance}
 The admittance $Y(s)$ of a one-port network is defined as the reciprocal of its impedance:
@@ -253,6 +254,10 @@ For linear networks, the admittance of the network is equal to the sum of the ad
 \een
 \sssc{Linear circuit as graph}
 A linear circuit is a graph with nodes with all voltage sources enclosed as supernodes being vertices, branches without nodes inside except ends being edges, and admittances (or conductance for DC) being weights.
+\sssc{Dual}
+Two linear circuit are dual if their governing equations in terms of variables become identical after systematically exchanging voltage and current, capacitance and inductance, impedance and admittance, open circuit and short circuit, KCL and KVL, Thévenin's theorem and Norton's theorem, series and parallel, node and loop, etc.
+
+Two linear circuit are exact dual if their governing equations in terms of numerical values become identical after systematically exchanging voltage and current, capacitance and inductance, impedance and admittance, open circuit and short circuit, KCL and KVL, Thévenin's theorem and Norton's theorem, series and parallel, node and loop, etc.
 \ssc{Thévenin's theorem and Norton's theorem}
 \sssc{Thévenin's theorem}
 Any linear network with two terminals is equivalent to a voltage source with a voltage called Thévenin voltage in a series connection with a linear element (or resistor for DC) with an impedance (or resistance for DC) called Thévenin impedance (or resistance for DC), such equivalent circuit is called Thévenin equivalent.
@@ -333,22 +338,18 @@ For all integer $n\geq 3$:
 \eit
 \ssc{RC, RL, LC, and RLC Circuits}
 \sssc{Series RC voltage low-pass filter circuit}
-A series RC voltage low-pass filter circuit consists of an independent voltage source $v$, a resistance $R$, and a capacitance $C$ in series connection. Let the initial voltage of $C$ be $v_c$. The current through the circuit is:
-\[v(t)=Ri(t)+\frac{1}{C}\qty(v_c+\int_0^ti(\tau)\dd{\tau}).\]
-\[i(s)=\frac{1}{R+\frac{1}{sC}}\qty(?+v(s)).\]PLACEHOLDER
-\begin{proof}
-PLACEHOLDER
-\end{proof}
-If $v(t)$ is a constant $v_s$.
-\[i(t)=\frac{v_s-v_c}{R}e^{-\frac{t}{RC}}.\]PLACEHOLDER
-\begin{proof}
-\[0=Ri'(t)+\frac{1}{C}i(t)\]
-\[-\frac{1}{RC}\dd{t}=\frac{1}{i(t)}\dd{i}\]
-\[-\frac{t}{RC}=\ln(i(t))+A\]
-\[i(t)=Ae^{-\frac{t}{RC}}\]
-\[v_s=RA+v_C\]
-\[A=\frac{v_s-v_c}{R}\]
-\end{proof}
+A series RC voltage low-pass filter circuit consists of an independent voltage source $V_s$, a resistor with resistance $R$, and a capacitor with capacitance $C$ and voltage $V_C$ in series connection with current $I$.
+\[V_C(s)=\frac{V_s(s)+RCv_C(0^-)}{RCs+1}\]
+\[I(s)=\frac{CsV_s(s)-Cv_C(0^-)}{RCs+1}\]
+
+\[V_s(s)=RI(s)+V_C(s)\]
+\[I(s)=CsV_C(s)-Cv_C(0^-)\]
+\[V_s(s)+RCv_C(0^-)=(RCs+1)V_C(s)\]
+\[V_C(s)=\frac{V_s(s)+RCv_C(0^-)}{RCs+1}\]
+\[I(s)=\frac{CsV_s(s)-Cv_C(0^-)}{RCs+1}\]
+
+
+
 
 
 
