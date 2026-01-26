@@ -25,6 +25,7 @@
 \item Admittance (complex) $Y$ (siemens = S = 1 / \textOmega)
 \item Conductance $G$ (S)
 \item Susceptance $B$ (S)
+\item Time constant $\tau$ (s)
 \eit
 \sssc{Electrical network}
 An electrical network or simply network is an interconnection of electrical components or a model of such an interconnection, consisting of electrical elements.
@@ -252,6 +253,10 @@ All circuits discussed in this text is linear time-invariant (LTI) circuit.
 \item\tb{Forced response}: Response when there are no initial energy (zero-state problem).
 \item\tb{(Total) response}: The response considering independent sources and initial energies, that is, the sum of natural response and forced response.
 \eit
+\sssc{Time constant}
+For a response function in the form $f(t)=f_0e^{-\alpha t}$ with constants $f_0\neq 0$ and $\alpha>0$, the time constant $\tau$ is defined as $\frac{1}{\alpha}$, and $f(\tau)=e^{-1}$.
+
+For the smallest positive integer (or rational number to a number of decimals) $k$ such that $\frac{f(k\tau)}{f_0}<0.01$, we typically call that $f(t)$ decays to $0$ about $k$ times time constants.
 \sssc{Series connection}
 For linear networks, the impedance of the network is equal to the sum of the impedance of each element.
 \sssc{Parallel connection}
@@ -275,7 +280,7 @@ Any linear network with two terminals is equivalent to a voltage source with a v
 \sssc{Norton's theorem}
 Any linear network with two terminals is equivalent to a current source with a current called Norton current in a parallel connection with a linear element (or resistor for DC) with an impedance (or resistance for DC) called Norton impedance (or resistance for DC), such equivalent circuit is called Norton equivalent.
 \sssc{Finding Thévenin voltage}
-Remove any load, and the open-circuit voltage (phasor for AC) is the Thévenin voltage.
+Remove any load, and the open-circuit voltage is the Thévenin voltage.
 \sssc{Finding Norton current}
 Add a short circuit between the two terminals, and the current on the it is the Norton current.
 \sssc{Finding Thévenin impedance or Norton impedance}
@@ -348,12 +353,15 @@ For all integer $n\geq 3$:
 \[Z_{ij}=Z_i+Z_j+\frac{Z_iZ_j}{-Z_i-Z_j+\sum_{k=1}^nZ_k}.\]
 \eit
 \ssc{RL, RC, LC, and RLC Circuits}
-\sssc{Series RL circuit}
-A series RL circuit consist of a resistor with resistance $R$, an inductor with inductance $L$, and an independent current source $v_{in}$ in series connection.
+\sssc{RL circuit}
+An RL circuit consist of a resistor with resistance $R$, an inductor with inductance $L$, and an independent voltage source $v_{in}$ in series connection.
 
 Natural response:
 \[Ri+L\dv{i}{t}=0\]
 \[i=i(0^-)e^{-\frac{R}{L}t}\]
+\[\tau=\frac{L}{R}\]
+\[p_R=(i(0^-))^2e^{-\frac{2R}{L}t}R\]
+\[\int_0^{\infty}p_R\dd{t}=\frac{1}{2}L(i(0^-))^2\]
 \[RI+L(sI-i(0^-))=0\]
 \[I=\frac{Li(0^-)}{R+Ls}\]
 \begin{proof}
@@ -362,6 +370,11 @@ Natural response:
 \[r=-\frac{R}{L}\]
 \[i=Ae^{-\frac{R}{L}t}\]
 \[i=i(0^-)e^{-\frac{R}{L}t}\]
+\[p_R=(i(0^-))^2e^{-\frac{2R}{L}t}R\]
+\[\ba
+\int_0^{\infty}p_R\dd{t}&=(i(0^-))^2R\evlv(-\frac{L}{2R}e^{-\frac{2R}{L}t})_0^{\infty}\\
+&=\frac{1}{2}L(i(0^-))^2
+\ea\]
 \[RI+L(sI-i(0^-))=0\]
 \[(R+Ls)I-Li(0^-)=0\]
 \[I=\frac{Li(0^-)}{R+Ls}\]
@@ -394,6 +407,9 @@ Check consistency:
 Total response:
 \[i=\qty(i(0^-)+\frac{1}{L}\int_0^te^{\frac{R}{L}\tau}v_{in}(\tau)\dd{\tau})e^{-\frac{R}{L}t}\]\]
 \[I=\frac{Li(0^-)+V_{in}}{R+Ls}\]
+
+
+
 
 
 
