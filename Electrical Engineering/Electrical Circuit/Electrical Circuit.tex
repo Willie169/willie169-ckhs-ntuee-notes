@@ -159,7 +159,9 @@ An (essential) mesh is a loop $\ell$ such that there is no other loop whose surf
 \sssc{Electrical circuit or closed circuit}
 An electrical circuit is a network containing loops.
 \sssc{Open circuit}
-An open circuit is an electrical network that is not a circuit.
+An open circuit is a path with infinite (or very high) impedance (thus not actually a path).
+\sssc{Short circuit}
+A short circuit is a path with zero (or very low) impedance.
 \sssc{Port}
 A port is a pair of terminals through which current can enter or leave a network and satisfies the port condition: the current flowing into one pole from outside is equal to the current flowing out of the other pole to outside.
 
@@ -217,6 +219,7 @@ Ideal sources are active elements assumed to have zero impedance.
 \draw (10,0) node[isourceAMshape]{} (10,1) node[above]{Independent Current Source};
 \end{circuitikz}
 \end{center}
+To turn off an independent voltage source means replace it with short circuit. To turn off an independent current source means replace it with open circuit.
 \sssc{Linear dependent or controlled source}
 \bit
 \item A voltage-controlled voltage source enforces a DC or sinusoidal AC voltage $v_s=\mu v_x$ across its terminals, where $v_x$ is control voltage and real for DC or complex for AC constant $\mu$ is dimensionless voltage gain.
@@ -241,6 +244,14 @@ A linear element is a passive element whose resistance $R$, capacitance $C$, and
 A linear network is a network which consists of only linear elements, independent sources, and linear dependent sources.
 \sssc{Linear circuit}
 A linear circuit is a circuit which obeys the superposition principle of voltages and currents (but not power) that the voltages across or currents through all one-port subnetwork, called responses or response functions, are linear combinations of the input voltages from independent voltage sources and input currents from independent current sources in it, called forcing functions, that is, consists of only linear elements, independent sources, and linear dependent sources.
+
+All circuits discussed in this text is linear time-invariant (LTI) circuit.
+\sssc{Response}
+\bit
+\item\tb{Natural, homogenous, or unforced response}: Response when all independent sources are turned off (zero-input problem). For passive circuit, also called transient response.
+\item\tb{Forced response}: Response when there are no initial energy (zero-state problem).
+\item\tb{(Total) response}: The response considering independent sources and initial energies, that is, the sum of natural response and forced response.
+\eit
 \sssc{Series connection}
 For linear networks, the impedance of the network is equal to the sum of the impedance of each element.
 \sssc{Parallel connection}
@@ -336,17 +347,54 @@ For all integer $n\geq 3$:
 \item Star-mesh transformation: The two networks are equivalent if
 \[Z_{ij}=Z_i+Z_j+\frac{Z_iZ_j}{-Z_i-Z_j+\sum_{k=1}^nZ_k}.\]
 \eit
-\ssc{RC, RL, LC, and RLC Circuits}
-\sssc{Series RC voltage low-pass filter circuit}
-A series RC voltage low-pass filter circuit consists of an independent voltage source $V_s$, a resistor with resistance $R$, and a capacitor with capacitance $C$ and voltage $V_C$ in series connection with current $I$.
-\[V_C(s)=\frac{V_s(s)+RCv_C(0^-)}{RCs+1}\]
-\[I(s)=\frac{CsV_s(s)-Cv_C(0^-)}{RCs+1}\]
+\ssc{RL, RC, LC, and RLC Circuits}
+\sssc{Series RL circuit}
+A series RL circuit consist of a resistor with resistance $R$, an inductor with inductance $L$, and an independent current source $v_{in}$ in series connection.
 
-\[V_s(s)=RI(s)+V_C(s)\]
-\[I(s)=CsV_C(s)-Cv_C(0^-)\]
-\[V_s(s)+RCv_C(0^-)=(RCs+1)V_C(s)\]
-\[V_C(s)=\frac{V_s(s)+RCv_C(0^-)}{RCs+1}\]
-\[I(s)=\frac{CsV_s(s)-Cv_C(0^-)}{RCs+1}\]
+Natural response:
+\[Ri+L\dv{i}{t}=0\]
+\[i=i(0^-)e^{-\frac{R}{L}t}\]
+\[RI+L(sI-i(0^-))=0\]
+\[I=\frac{Li(0^-)}{R+Ls}\]
+\begin{proof}
+\[Ri+L\dv{i}{t}=0\]
+\[Lr+R=0\]
+\[r=-\frac{R}{L}\]
+\[i=Ae^{-\frac{R}{L}t}\]
+\[i=i(0^-)e^{-\frac{R}{L}t}\]
+\[RI+L(sI-i(0^-))=0\]
+\[(R+Ls)I-Li(0^-)=0\]
+\[I=\frac{Li(0^-)}{R+Ls}\]
+Check consistency:
+\[\mathcal{L}\{i\}=\frac{i(0^-)}{s+\frac{R}{L}}=\frac{Li(0^-)}{R+Ls}\]
+\end{proof}
+Forced response:
+\[Ri+L\dv{i}{t}=v_{in}\]
+\[i=\frac{1}{L}\int_0^te^{\frac{R}{L}\tau}v_{in}(\tau)\dd{\tau}e^{-\frac{R}{L}t}\]
+\[RI+LsI=V_{in}\]
+\[I=\frac{V_{in}}{R+Ls}\]
+\begin{proof}
+\[Ri+L\dv{i}{t}=v_{in}\]
+\[\dv{i}{t}+\frac{R}{L}i=\frac{v_{in}}{L}\]
+\[\mu(t)=e^{\int\frac{R}{L}\dd{t}}=e^{\frac{R}{L}t}\]
+\[\dv{}{t}\qty(e^{\frac{R}{L}t}i)=e^{\frac{R}{L}t}\frac{v_{in}}{L}\]
+\[i=\frac{1}{L}\int_0^te^{\frac{R}{L}\tau}v_{in}(\tau)\dd{\tau}e^{-\frac{R}{L}t}\]
+\[RI+LsI=V_{in}\]
+\[I=\frac{V_{in}}{R+Ls}\]
+Check consistency:
+\[\ba
+\mathcal{L}\{i\}&=\frac{1}{L}\mathcal{L}\{\int_0^te^{\frac{R}{L}\tau}v_{in}\dd{\tau}\}e^{-\frac{R}{L}t}\\
+&=\frac{1}{L}\mathcal{L}\{\int_0^te^{\frac{R}{L}\tau}v_{in}u(t-\tau)\dd{\tau}\}e^{-\frac{R}{L}t}\\
+&=\frac{1}{L}\mathcal{L}\{e^{\frac{R}{L}t}v_{in}(t)\}e^{-\frac{R}{L}t}\mathcal{L}\{u(t)\}\\
+&=\frac{1}{Ls}V_{in}\qty(s-\frac{R}{L})e^{-\frac{R}{L}t}\\
+&=\frac{1}{L\qty(s+\frac{R}{L})}V_{in}(s)\\
+&=\frac{V_{in}}{R+Ls}
+\ea\]
+\end{proof}
+Total response:
+\[i=\qty(i(0^-)+\frac{1}{L}\int_0^te^{\frac{R}{L}\tau}v_{in}(\tau)\dd{\tau})e^{-\frac{R}{L}t}\]\]
+\[I=\frac{Li(0^-)+V_{in}}{R+Ls}\]
+
 
 
 

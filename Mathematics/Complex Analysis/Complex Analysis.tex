@@ -117,6 +117,9 @@ of parameter $\theta\in\bbR$ including that of $\theta=\Arg(z)$ on the complex p
 \end{itemize}
 \ssc{Extended complex number}
 \[\bar{\bbC}=\{a+bi\mid a,b\in\bar{\bbR}\}.\]
+\ssc{Of Exponential Order}
+A real or complex-valued net $f$ on a subset of $\mathbb{R}$ is considered of exponential order $\alpha\in\mathbb{R}_{>0}$ if there exists $M>0$ and $T>0$ such that:
+\[|f(t)|\leq Me^{\alpha t}\quad \forall t>T.\]
 
 
 
@@ -138,7 +141,7 @@ The convergence of a Laplace transform at a value of $s$ is defined as the exist
 \sssc{Definition as improper Riemann–Stieltjes integral}
 For any set $S$, for any complex-valued functions $g_j(t)$ defined on $D_j\superseteq\mathbb{R}_{\geq 0}$, for any indexed family $A_j\colon I_j\to\mathcal{A}_j\subseteq D_j;\;i\mapsto A_{j_i}$ with $I_j=J_j\cap\bbN$ for some interval $J_j$, the Laplace transform of the extended complex-valued function
 \[f(t)=\sum_{j\in S}g_j(t)\sum_{i\in I_j}\delta(A_{j_i}),\]
-denoted as $\mathcal{L}\qty\{f(t)\}(s)$ or $F(s)$, is defined, with $\mathcal{f}(t)$, typically denoted simply as $f(t)$ defined as any function such that
+denoted as $\mathcal{L}\qty\{f(t)\}(s)$ or $F(s)$, is defined, with $\mathcal{f}(t)$, typically denoted simply as $f(t)$, defined as any function such that
 \bit
 \item its domain is a super set of an interval $[a,\infty)$ for some $a\in\bbR_{<0}$,
 \item $\mathcal{f}(t)=f(t)$ for all $t\in\bbR_{\geq 0}$, and
@@ -207,12 +210,16 @@ that is,
 \sssc{Linearity}
 \[\mathcal{L}\qty\{af(t)+bg(t)\}=a\mathcal{L}\qty\{f(t)\}+b\mathcal{L}\qty\{g(t)\},\quad a,b\in\bbC.\]
 The ROC is the intersection of the ROC of $\mathcal{L}\qty\{f(t)\}$ and $\mathcal{L}\qty\{g(t)\}$.
+\sssc{Exponential function}
+\[\mathcal{L}\qty\{e^{at}\}(s) = \frac{1}{s-a},\quad a\in\bbC.\]
 \sssc{First shifting theorem or Frequency shift}
 \[\mathcal{L}\qty\{e^{at} f(t)\}(s) = F(s-a),\quad a\in\bbC.\]
 The ROC shifts right by $\Re(a)$.
 \begin{proof}
 \[\mathcal{L}\qty\{e^{at} f(t)\}(s)=\int_0^{\infty}e^{-(s-a)t}f(t)=F(s-a)\]
 \end{proof}
+\sssc{Unit step function}
+\[\mathcal{L}\qty\{u(t-a)\}(s) = \frac{e^{-as}}{s},\quad a\in\bbC.\]
 \sssc{Second shifting theorem, Time delay, or Time shift}
 \[\mathcal{L}\qty\{f(t-a)u(t-a)\}=e^{-as}F(s), \quad a\in\bbR_{\geq 0}.\]
 The ROC doesn't change.
@@ -224,17 +231,17 @@ The ROC doesn't change.
 \ea\]
 \end{proof}
 \sssc{Differentiation in Time Domain}
-\[\mathcal{L}\qty\{f'(t)\}(s) = sF(s) - f(0).\]
-\[\mathcal{L}\qty\{f^{(n)}(t)\}(s) = s^n F(s) - \sum_{i=0}^{n-1}s^{n-1-i}f^{(i)}(0).\]
+\[\mathcal{L}\qty\{f'(t)\}(s) = sF(s) - f(0^-).\]
+\[\mathcal{L}\qty\{f^{(n)}(t)\}(s) = s^n F(s) - \sum_{i=0}^{n-1}s^{n-1-i}f^{(i)}(0^-).\]
 \begin{proof}
-\[u = e^{-st} \quad \Rightarrow \quad \dd{u} = -s e^{-st} \dd{t}.\]
-\[dv = f'(t)\dd{t} \quad \Rightarrow \quad v = f(t).\]
+\[u = e^{-st}, \quad \dd{u} = -s e^{-st} \dd{t}.\]
+\[\dd{v} = f'(t)\dd{t}, \quad v = f(t).\]
 \[\ba
 \mathcal{L}\qty\{f'(t)\}(s)&=\int_0^\infty e^{-st} f'(t)\dd{t}\\
 &=\qty(e^{-st}f(t))\big\vert_0^\infty+\int_0^\infty f(t)se^{-st}\dd{t}\\
-&=s\mathcal{L}\qty\{f(t)\}(s)-f(0)
+&=s\mathcal{L}\qty\{f(t)\}(s)-f(0^-)
 \ea\]
-Nota that in the case where $f'(t)$ contains $\delta(0)$, using $f(0)$ holds while $f\qty(0^+)$ not.
+Nota that $0^-$ is required instead of $0$ in the cases where $f'(t)$ contains $\delta(0)$.
 \end{proof}
 \sssc{Integration in Time Domain}
 \[\mathcal{L}\left\{\int_0^t f(\tau)\dd{\tau}\right\}(s) = \frac{1}{s} F(s).\]
@@ -274,6 +281,7 @@ Let $u=t-\tau$. $\dd{t}=\dd{u}$.
 &=F(s)G(s)
 \end{aligned}\]
 \end{proof}
+Note that $\int_0^tf(\tau)\dd{\tau}=(f*u)(t)$.
 \sssc{Initial Value Theorem}
 If $f(t)$ and $f'(t)$ are Laplace-transformable and $f(t)$ contains no unit impulses at origin:
 PLACEHOLDER: condition
