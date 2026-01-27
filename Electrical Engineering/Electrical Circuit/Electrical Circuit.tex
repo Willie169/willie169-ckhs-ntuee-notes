@@ -63,15 +63,17 @@ An ideal resistor is a circuit element with a resistance and no capacitance or i
 Power absorbed:
 \[p(t)=\frac{\qty(v(t))^2}{R}=\qty(i(t))^2R.\]
 \sssc{Capacitance and capacitor}
-The capacitance $C$ of an element is the current through it divided by the derivative of the voltage across it with respect to time:
-\[i(t)=C\dv{v(t)}{t}.\]
-\[I(s)=CsV(s)-Cv(0^-).\]
 An ideal capacitor is a circuit element with a capacitance and no resistance or inductance.
 \begin{center}
 \begin{circuitikz}
 \draw (0,0) to[C, l=Capacitor] (3,0);
 \end{circuitikz}
 \end{center}
+The capacitance $C$ of an element is the current through it divided by the derivative of the voltage across it with respect to time:
+\[i(t)=C\dv{v(t)}{t}.\]
+\[I(s)=CsV(s)-Cv(0^-).\]
+When analyzing natural response, a capacitor with capacitance $C$ can be treated as a capacitance $C$ without initial energy in parallel connection with an independent current source enforcing current $Cv(0^-)$. When analyzing forced response, a capacitor with capacitance $C$ can be treated as a capacitance $C$ without initial energy.
+
 A capacitor voltage must not be allowed to jump instantaneously from one value to another.
 
 Integral voltage-current relationship:
@@ -81,15 +83,17 @@ Power absorbed:
 Energy stored:
 \[\int_{-\infty}^tp(t)\dd{t}=\frac{1}{2}C\qty(v(t))^2.\]
 \sssc{Inductance and inductor}
-The inductance $L$ of an element is the voltage across it divided by the derivative of the current through it with respect to time:
-\[v(t)=L\dv{i(t)}{t}.\]
-\[V(s)=LsI(s)-Li(0^-).\]
 An ideal inductor is a circuit element with an inductance and no resistance or capacitance.
 \begin{center}
 \begin{circuitikz}
 \draw (0,0) to[L, l=Inductor] (3,0);
 \end{circuitikz}
 \end{center}
+The inductance $L$ of an element is the voltage across it divided by the derivative of the current through it with respect to time:
+\[v(t)=L\dv{i(t)}{t}.\]
+\[V(s)=LsI(s)-Li(0^-).\]
+When analyzing natural response, an inductor with inductance $L$ can be treated as a inductance $L$ without initial energy in series connection with an independent voltage source enforcing voltage $Li(0^-)$. When analyzing forced response, an inductor with inductance $L$ can be treated as a inductance $L$ without initial energy.
+
 An inductor current must not be allowed to jump instantaneously from one value to another.
 
 Integral voltage-current relationship:
@@ -100,11 +104,11 @@ Energy stored:
 \[\int_{-\infty}^tp(t)\dd{t}=\frac{1}{2}L\qty(i(t))^2.\]
 \sssc{Reactance}
 The (capacitive) reactance $X_C$ of a one-port network with capacitance $C$ is defined as:
-\[X_C(s)=\frac{1}{sC}.\]
+\[X_C(s)=\frac{1}{Cs}.\]
 There is also a definition that uses the negation of the definition above, which is not used here.
 
 The (inductive) reactance $X_L$ of a one-port network with inductance $L$ is defined as:
-\[X_L(s)=sL.\]
+\[X_L(s)=Ls.\]
 The reactance $X$ of a one-port network is defined as:
 \[X(s)=X_L(s)-X_C(s).\]
 A one-port network is said to have net capacitive reactance if $X(s)<0$ and have net inductive reactance if $X(s)>0$.
@@ -357,11 +361,13 @@ For all integer $n\geq 3$:
 \sssc{RL circuit}
 An RL circuit, RL filter, or RL network consist of a resistor with resistance $R$, an inductor with inductance $L$, and an independent voltage source $v_{in}$ in series connection.
 
+Oriented in $R$ to $L$ to $v_{in}$ to $R$ direction:
+
 Natural response:
 \[Ri+L\dv{i}{t}=0\]
 \[i=i(0^-)e^{-\frac{R}{L}t}\]
-\[\tau_i=\frac{L}{R}\]
 \[v_R=-v_L=Ri(0^-)e^{-\frac{R}{L}t}\]
+\[\tau_i=\tau_{v_R}=\tau_{v_L}=\frac{L}{R}\]
 \[p_R=-p_L=R(i(0^-))^2e^{-\frac{2R}{L}t}\]
 \[\int_0^{\infty}p_R\dd{t}=-\int_0^{\infty}p_L\dd{t}=\frac{1}{2}L(i(0^-))^2\]
 \[I=\frac{Li(0^-)}{R+Ls}\]
@@ -378,7 +384,6 @@ Natural response:
 \int_0^{\infty}p_R\dd{t}&=R(i(0^-))^2\evlv(-\frac{L}{2R}e^{-\frac{2R}{L}t})_0^{\infty}\\
 &=\frac{1}{2}L(i(0^-))^2
 \ea\]
-\[RI+L(sI-i(0^-))=0\]
 \[I=\frac{Li(0^-)}{R+Ls}\]
 Check consistency:
 \[\mathcal{L}\{i\}=\frac{i(0^-)}{s+\frac{R}{L}}=\frac{Li(0^-)}{R+Ls}\]
@@ -396,15 +401,12 @@ Forced response:
 \[\mu(t)=e^{\int\frac{R}{L}\dd{t}}=e^{\frac{R}{L}t}\]
 \[\dv{}{t}\qty(e^{\frac{R}{L}t}i)=e^{\frac{R}{L}t}\frac{v_{in}}{L}\]
 \[i=\frac{1}{L}\int_0^te^{\frac{R}{L}\tau}v_{in}(\tau)\dd{\tau}e^{-\frac{R}{L}t}\]
-\[RI+LsI=V_{in}\]
 \[I=\frac{V_{in}}{R+Ls}\]
 Check consistency:
 \[\ba
-\mathcal{L}\{i\}&=\frac{1}{L}\mathcal{L}\{\int_0^te^{\frac{R}{L}\tau}v_{in}(\tau)\dd{\tau}\}e^{-\frac{R}{L}t}\\
-&=\frac{1}{L}\mathcal{L}\{\int_0^te^{\frac{R}{L}\tau}v_{in}(\tau)u(t-\tau)\dd{\tau}\}e^{-\frac{R}{L}t}\\
-&=\frac{1}{L}\mathcal{L}\{e^{\frac{R}{L}t}v_{in}(t)\}e^{-\frac{R}{L}t}\mathcal{L}\{u(t)\}\\
-&=\frac{1}{Ls}V_{in}\qty(s-\frac{R}{L})e^{-\frac{R}{L}t}\\
-&=\frac{1}{L\qty(s+\frac{R}{L})}V_{in}(s)\\
+\mathcal{L}\{i\}&=\frac{1}{L}\mathcal{L}\{\int_0^te^{\frac{R}{L}\tau}v_{in}(\tau)u(t-\tau)\dd{\tau}\}\qty(s+\frac{R}{L})\\
+&=\frac{1}{L}\mathcal{L}\{e^{\frac{R}{L}t}v_{in}(t)\}\qty(s+\frac{R}{L})\mathcal{L}\{u(t)\}\qty(s+\frac{R}{L})\\
+&=\frac{1}{L}V_{in}\qty(s-\frac{R}{L}+\frac{R}{L})\frac{1}{s+\frac{R}{L}}\\
 &=\frac{V_{in}}{R+Ls}
 \ea\]
 \end{proof}
@@ -425,7 +427,7 @@ Impulse response and transfer function:
 \[h_i=\frac{1}{L}\int_0^te^{\frac{R}{L}\tau}\delta(\tau)\dd{\tau}e^{-\frac{R}{L}t}=\frac{1}{L}u(t)e^{-\frac{R}{L}t}\]
 Check consistency:
 \[\mathca{L}\{h_i\}=\frac{1}{L\qty(s+\frac{R}{L})}=\frac{1}{R+Ls}\]
-\[\mathca{L}\{h_L\}=1-\frac{R}{R+Ls}=\frac{Ls}{R+Ls}\]
+\[\mathca{L}\{h_{V_L}\}=1-\frac{R}{R+Ls}=\frac{Ls}{R+Ls}\]
 \end{proof}
 $V_R$ being low-pass filter:
 \[\lim_{\omega\to 0}\abs{H_{V_R}(j\omega)}=1\]
@@ -435,24 +437,24 @@ $V_R$ being low-pass filter:
 \[\lim_{\omega\to\infty}\abs{H_{V_R}(j\omega)}=\lim_{\omega\to\infty}\abs{\frac{R}{R+Lj\omega}}=0\]
 \end{proof}
 $V_L$ being high-pass filter:
-\[\lim_{\omega\to 0}\abs{H_{V_R}(j\omega)}=0\]
-\[\lim_{\omega\to\infty}\abs{H_{V_R}(j\omega)}=1\]
+\[\lim_{\omega\to 0}\abs{H_{V_L}(j\omega)}=0\]
+\[\lim_{\omega\to\infty}\abs{H_{V_L}(j\omega)}=1\]
 \begin{proof}
-\[\lim_{\omega\to 0}\abs{H_{V_R}(j\omega)}=\lim_{\omega\to 0}\abs{\frac{Lj\omega}{R+Lj\omega}}=p\]
-\[\lim_{\omega\to\infty}\abs{H_{V_R}(j\omega)}=\lim_{\omega\to\infty}\abs{\frac{Lj\omega}{R+Lj\omega}}=1\]
+\[\lim_{\omega\to 0}\abs{H_{V_L}(j\omega)}=\lim_{\omega\to 0}\abs{\frac{Lj\omega}{R+Lj\omega}}=0\]
+\[\lim_{\omega\to\infty}\abs{H_{V_L}(j\omega)}=\lim_{\omega\to\infty}\abs{\frac{Lj\omega}{R+Lj\omega}}=1\]
 \end{proof}
 \sssc{RC circuit}
 An RC circuit, RC filter, or RC network consist of a resistor with resistance $R$, a capacitor with capacitance $C$, and an independent voltage source $v_{in}$ in series connection.
 
+Oriented in $R$ to $C$ to $v_{in}$ to $R$ direction.
+
 Natural response:
-\[v_R+v_C=0\]
 \[\frac{v_C}{R}+C\dv{v_C}{t}=0\]
 \[v_C=-v_R=v_C(0^-)e^{-\frac{1}{RC}t}\]
-\[\tau_{v_C}=\tau_{v_R}=\frac{1}{RC}\]
 \[i=-\frac{1}{R}v_C(0^-)e^{-\frac{1}{RC}t}\]
+\[\tau_{v_C}=\tau_{v_R}=\tau_i=\frac{1}{RC}\]
 \[p_R=-p_C=\frac{1}{R}(v_C(0^-))^2e^{-\frac{2}{RC}t}\]
-\[\int_0^{\infty}p_R\dd{t}=-\int_0^{\infty}p_L\dd{t}=\frac{1}{2}C(v_C(0^-))^2\]
-\[\frac{V_C}{R}+C(sV_C-V_C(0^-))=0\]
+\[\int_0^{\infty}p_R\dd{t}=-\int_0^{\infty}p_C\dd{t}=\frac{1}{2}C(v_C(0^-))^2\]
 \[V_C=-V_R=\frac{RCV_C(0^-)}{1+RCs}\]
 \[I=-\frac{CV_C(0^-)}{1+RCs}\]
 \begin{proof}
@@ -469,19 +471,17 @@ Natural response:
 \int_0^{\infty}p_R\dd{t}&=\frac{1}{R}(v_C(0^-))^2\evlv{-\frac{RC}{2}e^{-\frac{2}{RC}t}}_0^{\infty}\\
 &=\frac{1}{2}C(v_C(0^-))^2
 \ea\]
-\[\frac{V_C}{R}+C(sV_C-V_C(0^-))=0\]
-\[\qty(\frac{1}{R}+Cs)V_C-CV_C(0^-)=0\]
-\[V_C=\frac{CV_C(0^-)}{\frac{1}{R}+Cs}=\frac{RCV_C(0^-)}{1+RCs}\]
-\[I=-\frac{CV_C(0^-)}{1+RCs}\]
+\[V_C=\frac{1}{\frac{1}{R}+Cs}CV_C(0^-)=\frac{RCV_C(0^-)}{1+RCs}\]
 Check consistency:
 \[\mathcal{L}\{v_C\}=\frac{v_C(0^-)}{s+\frac{1}{RC}}=\frac{RCv_C(0^-)}{1+RCs}\]
 \end{proof}
 Forced response:
-\[v_R+v_C=v_{in}\]
 \[\frac{v_C-v_{in}}{R}+C\dv{v_C}{t}=0\]
-\[v_C=-v_R=\frac{1}{RC}\int_0^te^{\frac{1}{RC}\tau}v_{in}(\tau)\dd{\tau}e^{-\frac{1}{RC}t}\]
-\[V_C=-V_R=\frac{V_{in}}{1+RCs}\]
-\[I=-\frac{V_{in}}{R(1+RCs)}\]
+\[v_C=v_{in}-v_R=\frac{1}{RC}\int_0^te^{\frac{1}{RC}\tau}v_{in}(\tau)\dd{\tau}e^{-\frac{1}{RC}t}\]
+\[i=\frac{1}{R}\qty(v_{in}-\frac{1}{RC}\int_0^te^{\frac{1}{RC}\tau}v_{in}(\tau)\dd{\tau}e^{-\frac{1}{RC}t})\]
+\[V_C=\frac{V_{in}}{1+RCs}\]
+\[V_R=\frac{RCsV_{in}}{1+RCs}\]
+\[I=-\frac{CsV_{in}}{1+RCs}\]
 \begin{proof}
 \[v_R+v_C=v_{in}\]
 \[\frac{v_R}{R}-C\dv{v_C}{t}=0\]
@@ -490,52 +490,47 @@ Forced response:
 \[\mu(t)=e^{\int\frac{1}{RC}\dd{t}}=e^{\frac{1}{RC}t}\]
 \[\dv{}{t}\qty(e^{\frac{1}{RC}t}v_C)=e^{\frac{1}{RC}t}\frac{v_{in}}{RC}\]
 \[v_C=\frac{1}{RC}\int_0^te^{\frac{1}{RC}\tau}v_{in}(\tau)\dd{\tau}e^{-\frac{1}{RC}t}\]
-\[\frac{V_C-V_{in}}{R}+CsV_C=0\]
-\[V_C=\frac{V_{in}}{1+RCs}\]
-\[I=-\frac{V_{in}}{R(1+RCs)}\]
-Below 待 PLACEHOLDER
+\[V_C=\frac{1}{\frac{1}{R}+Cs}CV_{in}=\frac{RCV_{in}}{1+RCs}\]
 Check consistency:
 \[\ba
-\mathcal{L}\{i\}&=\frac{1}{L}\mathcal{L}\{\int_0^te^{\frac{R}{L}\tau}v_{in}(\tau)\dd{\tau}\}e^{-\frac{R}{L}t}\\
-&=\frac{1}{L}\mathcal{L}\{\int_0^te^{\frac{R}{L}\tau}v_{in}(\tau)u(t-\tau)\dd{\tau}\}e^{-\frac{R}{L}t}\\
-&=\frac{1}{L}\mathcal{L}\{e^{\frac{R}{L}t}v_{in}(t)\}e^{-\frac{R}{L}t}\mathcal{L}\{u(t)\}\\
-&=\frac{1}{Ls}V_{in}\qty(s-\frac{R}{L})e^{-\frac{R}{L}t}\\
-&=\frac{1}{L\qty(s+\frac{R}{L})}V_{in}(s)\\
-&=\frac{V_{in}}{R+Ls}
+\mathcal{L}\{v_C\}&=\frac{1}{RC}\mathcal{L}\{\int_0^te^{\frac{1}{RC}\tau}v_{in}(\tau)u(t-\tau)\dd{\tau}\}\qty(s+\frac{1}{RC})\\
+&=\frac{1}{RC}\mathcal{L}\{e^{\frac{1}{RC}t}v_{in}(t)\}\qty(s+\frac{1}{RC})\mathcal{L}\{u(t)\}\qty(s+\frac{1}{RC})\\
+&=\frac{1}{RC}V_{in}\qty(s-\frac{1}{RC}+\frac{1}{RC})\frac{1}{s+\frac{1}{RC}}\\
+&=\frac{V_{in}}{1+RCs}
 \ea\]
 \end{proof}
 Total response:
-\[i=\qty(i(0^-)+\frac{1}{L}\int_0^te^{\frac{R}{L}\tau}v_{in}(\tau)\dd{\tau})e^{-\frac{R}{L}t}\]
-\[v_R=v_{in}-v_L=R\qty(i(0^-)+\frac{1}{L}\int_0^te^{\frac{R}{L}\tau}v_{in}(\tau)\dd{\tau})e^{-\frac{R}{L}t}\]
-\[I=\frac{Li(0^-)+V_{in}}{R+Ls}\]
-\[V_R=\frac{RLi(0^-)+RV_{in}}{R+Ls}\]
-\[V_L=\frac{LsV_{in}-RLi(0^-)}{R+Ls}\]
+\[v_C=v_{in}-v_R=\qty(v_C(0^-)+\frac{1}{RC}\int_0^te^{\frac{1}{RC}\tau}v_{in}(\tau)\dd{\tau})e^{-\frac{1}{RC}t}\]
+\[i=\frac{1}{R}\qty(v_{in}-\qty(v_C(0^-)+\frac{1}{RC}\int_0^te^{\frac{1}{RC}\tau}v_{in}(\tau)\dd{\tau})e^{-\frac{1}{RC}t})\]
+\[V_C=\frac{RCV_C(0^-)+V_{in}}{1+RCs}\]
+\[V_R=\frac{-RCV_C(0^-)+RCsV_{in}}{1+RCs}\]
+\[I=-\frac{CV_C(0^-)+CsV_{in}}{1+RCs}\]
 Impulse response and transfer function:
-\[h_i=\frac{1}{L}u(t)e^{-\frac{R}{L}t}\]
-\[h_{v_R}=\frac{R}{L}u(t)e^{-\frac{R}{L}t}\]
-\[h_{v_L}=\delta(t)-\frac{R}{L}u(t)e^{-\frac{R}{L}t}\]
-\[H_I=\frac{1}{R+Ls}\]
-\[H_{V_R}=\frac{R}{R+Ls}\]
-\[H_{V_L}=\frac{Ls}{R+Ls}\]
+\[h_{v_C}=\frac{1}{RC}u(t)e^{-\frac{1}{RC}t}\]
+\[h_{v_R}=\delta(t)-\frac{1}{RC}u(t)e^{-\frac{1}{RC}t}\]
+\[h_i=\frac{1}{R}\qty(\delta(t)-\frac{1}{RC}u(t)e^{-\frac{1}{RC}t})\]
+\[H_{V_C}=\frac{1}{1+RCs}\]
+\[H_{V_R}=\frac{RCs}{1+RCs}\]
+\[H_I=-\frac{Cs}{1+RCs}\]
 \begin{proof}
-\[h_i=\frac{1}{L}\int_0^te^{\frac{R}{L}\tau}\delta(\tau)\dd{\tau}e^{-\frac{R}{L}t}=\frac{1}{L}u(t)e^{-\frac{R}{L}t}\]
+\[h_{v_C}=\frac{1}{RC}\int_0^te^{\frac{1}{RC}\tau}\delta(\tau)\dd{\tau}e^{-\frac{1}{RC}t}=\frac{1}{RC}u(t)e^{-\frac{1}{RC}t}\]
 Check consistency:
-\[\mathca{L}\{h_i\}=\frac{1}{L\qty(s+\frac{R}{L})}=\frac{1}{R+Ls}\]
-\[\mathca{L}\{h_L\}=1-\frac{R}{R+Ls}=\frac{Ls}{R+Ls}\]
+\[\mathca{L}\{h_{v_C}\}=\frac{1}{RC(s+\frac{1}{RC})}=\frac{1}{1+RCs}\]
+\[\mathca{L}\{h_i\}=\frac{1}{R}\qty(1-\frac{1}{1+RCs})=-\frac{Cs}{1+RCs}\]
 \end{proof}
-$V_R$ being low-pass filter:
-\[\lim_{\omega\to 0}\abs{H_{V_R}(j\omega)}=1\]
-\[\lim_{\omega\to\infty}\abs{H_{V_R}(j\omega)}=0\]
+$V_C$ being low-pass filter:
+\[\lim_{\omega\to 0}\abs{H_{V_C}(j\omega)}=1\]
+\[\lim_{\omega\to\infty}\abs{H_{V_C}(j\omega)}=0\]
 \begin{proof}
-\[\lim_{\omega\to 0}\abs{H_{V_R}(j\omega)}=\lim_{\omega\to 0}\abs{\frac{R}{R+Lj\omega}}=1\]
-\[\lim_{\omega\to\infty}\abs{H_{V_R}(j\omega)}=\lim_{\omega\to\infty}\abs{\frac{R}{R+Lj\omega}}=0\]
+\[\lim_{\omega\to 0}\abs{H_{V_C}(j\omega)}=\lim_{\omega\to 0}\abs{\frac{1}{1+RCj\omega}}=1\]
+\[\lim_{\omega\to\infty}\abs{H_{V_C}(j\omega)}=\lim_{\omega\to\infty}\abs{\frac{1}{1+RCj\omega}}=0\]
 \end{proof}
-$V_L$ being high-pass filter:
+$V_R$ being high-pass filter:
 \[\lim_{\omega\to 0}\abs{H_{V_R}(j\omega)}=0\]
 \[\lim_{\omega\to\infty}\abs{H_{V_R}(j\omega)}=1\]
 \begin{proof}
-\[\lim_{\omega\to 0}\abs{H_{V_R}(j\omega)}=\lim_{\omega\to 0}\abs{\frac{Lj\omega}{R+Lj\omega}}=p\]
-\[\lim_{\omega\to\infty}\abs{H_{V_R}(j\omega)}=\lim_{\omega\to\infty}\abs{\frac{Lj\omega}{R+Lj\omega}}=1\]
+\[\lim_{\omega\to 0}\abs{H_{V_R}(j\omega)}=\lim_{\omega\to 0}\abs{\frac{RCj\omega}{1+RCj\omega}}=0\]
+\[\lim_{\omega\to\infty}\abs{H_{V_R}(j\omega)}=\lim_{\omega\to\infty}\abs{\frac{RCj\omega}{1+RCj\omega}}=1\]
 \end{proof}
 
 
