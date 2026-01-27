@@ -115,8 +115,6 @@ of parameter $\theta\in\bbR$ including that of $\theta=\Arg(z)$ on the complex p
 \item When $\Im(w)=0\land\Re(w)\in\mathbb{Q}$: Suppose $\abs{\Re(w)}=\frac{m}{n}$ with $n\in\mathbb{N}$ and $\gcd(m,n)=1$, there are $n$ distinct roots, which are the $n$ vertices of a regular $n$-gon inscribed in a circle of radius $|z|^{\Re(w)}$ centered at the origin including $|z|^{\Re(w)}e^{i\Re(w)\Arg(z)}$ on the complex plane.
 \item Otherwise: There are countably infinitely many distinct roots.
 \end{itemize}
-\ssc{Extended complex number}
-\[\bar{\bbC}=\{a+bi\mid a,b\in\bar{\bbR}\}.\]
 \ssc{Of Exponential Order}
 A real or complex-valued net $f$ on a subset of $\mathbb{R}$ is considered of exponential order $\alpha\in\mathbb{R}_{>0}$ if there exists $M>0$ and $T>0$ such that:
 \[|f(t)|\leq Me^{\alpha t}\quad \forall t>T.\]
@@ -131,7 +129,7 @@ Linear transform
 \sssc{Introduction}
 The (unilateral or one-sided) Laplace transform is an integral transform that converts a function of a real variable $t$, called time domain, to a complex function of a complex variable $s$, called (complex-valued) frequency domain, $s$-domain, $s$-plane, or Laplace domain. The functions are often denoted in lowercase for the time-domain and uppercase for the frequency-domain.
 \sssc{Definition as Lebesgue integral}
-For any set $S$, for any complex-valued functions $g_j(t)$ defined on $D_j\superseteq\mathbb{R}_{\geq 0}$, for any indexed family $A_j\colon I_j\to\mathcal{A}_j\subseteq D_j;\;i\mapsto A_{j_i}$ with $I_j=J_j\cap\bbN$ for some interval $J_j$, the Laplace transform of the extended complex-valued function
+For any set $S$, for any complex-valued functions $g_j(t)$ defined on $D_j\superseteq\mathbb{R}_{\geq 0}$, for any indexed family $A_j\colon I_j\to\mathcal{A}_j\subseteq D_j;\;i\mapsto A_{j_i}$ with $I_j=J_j\cap\bbN$ for some interval $J_j$, the Laplace transform of the distribution (often called function)
 \[f(t)=\sum_{j\in S}g_j(t)\sum_{i\in I_j}\delta(A_{j_i}),\]
 denoted as $\mathcal{L}\qty\{f(t)\}(s)$ or $F(s)$, is defined as
 \[\mathcal{L}\qty\{f(t)\}(s)=F(s)=\int_0^{\infty}f(t)e^{-st}\dd{t},\]
@@ -139,7 +137,7 @@ with integrals involving Dirac detla functions defined via Dirac measures.
 
 The convergence of a Laplace transform at a value of $s$ is defined as the existence of such Lebesgue integral.
 \sssc{Definition as improper Riemann–Stieltjes integral}
-For any set $S$, for any complex-valued functions $g_j(t)$ defined on $D_j\superseteq\mathbb{R}_{\geq 0}$, for any indexed family $A_j\colon I_j\to\mathcal{A}_j\subseteq D_j;\;i\mapsto A_{j_i}$ with $I_j=J_j\cap\bbN$ for some interval $J_j$, the Laplace transform of the extended complex-valued function
+For any set $S$, for any complex-valued functions $g_j(t)$ defined on $D_j\superseteq\mathbb{R}_{\geq 0}$, for any indexed family $A_j\colon I_j\to\mathcal{A}_j\subseteq D_j;\;i\mapsto A_{j_i}$ with $I_j=J_j\cap\bbN$ for some interval $J_j$, the Laplace transform of the distribution (often called function)
 \[f(t)=\sum_{j\in S}g_j(t)\sum_{i\in I_j}\delta(A_{j_i}),\]
 denoted as $\mathcal{L}\qty\{f(t)\}(s)$ or $F(s)$, is defined, with $\mathcal{f}(t)$, typically denoted simply as $f(t)$, defined as any function such that
 \bit
@@ -152,6 +150,8 @@ as,
 with integrals involving Dirac detla functions defined via improper Riemann–Stieltjes integral, where $\lim_{\varepsilon\to 0^+}\int_{-\varepsilon}^{\infty}$ is typically denoted as $\int_{0^-}^{\infty}$.
 
 The convergence of a Laplace transform at a value of $s$ is defined as the absolute convergence of such improper Riemann–Stieltjes integral.
+\sssc{Definition as distribution}
+PLACEHOLDER
 \sssc{Region of convergence (ROC)}
 The set of values of $s$ for which $F(s)$ converges, called region of convergence (ROC), is a class of either $\Re(s) > a$ or $\Re(s) \geq a$ for some extended real constant $a$, called abscissa of convergence.
 \sssc{Laplace transformability}
@@ -267,8 +267,14 @@ By Leibniz integral rule,
 \end{proof}
 \sssc{Scaling in Time Domain}
 \[\mathcal{L}\qty\{f(at)\}(s) = \frac{1}{a} F\left(\frac{s}{a}\right), \quad a>0.\]
+\sssc{Convolution (卷積)}
+The convolution of two functions $f(t)$ and $g(t)$ defined on $\bbR_{\geq 0}$ is a function denoted as $(f * g)(t)$ and defined as
+\[(f * g)(t) = \int_0^t f(\tau)g(t-\tau)\dd{\tau}.\]
+The convolution of two functions $f(t)$ and $g(t)$ defined on $\bbR$ is a function denoted as $(f * g)(t)$ and defined as
+\[(f * g)(t) = \int_{-\infty}^{\infty} f(\tau)g(t-\tau)\dd{\tau}.\]
+PLACEHOLDER
 \sssc{Convolution Theorem}
-If $h(t) = (f * g)(t) = \int_0^t f(\tau)g(t-\tau)\dd{\tau}$, then
+If $h(t) = (f * g)(t)$, then
 \[\mathcal{L}\qty\{h(t)\}(s) = F(s)G(s).\]
 \begin{proof}
 \[\mathcal{L}\qty\{h(t)\}(s)=\int_0^{\infty} e^{-st} \qty(\int_0^t f(\tau)g(t-\tau)\dd{\tau})\dd{t}\]
@@ -282,12 +288,13 @@ Let $u=t-\tau$. $\dd{t}=\dd{u}$.
 \end{aligned}\]
 \end{proof}
 Note that $\int_0^tf(\tau)\dd{\tau}=(f*u)(t)$.
+PLACEHOLDER bilateral
 \sssc{Initial Value Theorem}
 If $f(t)$ and $f'(t)$ are Laplace-transformable and $f(t)$ contains no unit impulses at origin:
 PLACEHOLDER: condition
 \[\lim_{t\to 0^+}f(t)=\lim_{s\to\infty}sF(s).\]
 \begin{proof}
-\[sF(s)=\int_0^\inftysf(t)e^{-st}\dd{t}.\]
+\[sF(s)=\int_0^\infty sf(t)e^{-st}\dd{t}.\]
 Let $u=st$, $\dd{t}=\frac{\dd{u}}{s}$.
 \[sF(s)=\int_0^\infty f\qty(\frac{u}{s})e^{-u}\dd{u}.\]
 \[\lim_{s\to\infty}sF(s)=\int_0^\infty f\qty(\frac{u}{s})e^{-u}\dd{u}.\]
@@ -346,7 +353,8 @@ called Mellin's inverse formula, Bromwich integral, or Fourier–Mellin integral
 PLACEHOLDER
 \end{proof}
 \ssc{(Bilateral or Two-sided) Laplace Transform (（雙邊）拉普拉斯變換)}
-PLACEHOLDER
+PLACEHOLDER: move up and theorems add both uni and bi versions.
+
 The (bilateral or two-sided) Laplace transform is an integral transform that converts a function of a real variable (usually $t$, in the time domain) to a function of a complex variable (usually $s$, in the complex-valued angular frequency domain, also known as $s$-domain or $s$-plane). The functions are often denoted in lowercase for the time-domain representation and uppercase for the frequency-domain.
 
 The Laplace transform of a real function $f(t)$, denoted as $\mathcal{B}\{f(t)\}(s)$, is defined by the improper integral

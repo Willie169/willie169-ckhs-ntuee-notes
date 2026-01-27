@@ -26,6 +26,10 @@
 \item Conductance $G$ (S)
 \item Susceptance $B$ (S)
 \item Time constant $\tau$ (s)
+\item Dirac delta function $\delta(t)$
+\item Unit step function $u(t)$
+\item Impulse response function $h(t)$
+\item Transfer function $H(s)$
 \eit
 \sssc{Electrical network}
 An electrical network or simply network is an interconnection of electrical components or a model of such an interconnection, consisting of electrical elements.
@@ -246,17 +250,14 @@ A linear network is a network which consists of only linear elements, independen
 \sssc{Linear circuit}
 A linear circuit is a circuit which obeys the superposition principle of voltages and currents (but not power) that the voltages across or currents through all one-port subnetwork, called responses or response functions, are linear combinations of the input voltages from independent voltage sources and input currents from independent current sources in it, called forcing functions, that is, consists of only linear elements, independent sources, and linear dependent sources.
 
-All circuits discussed in this text is linear time-invariant (LTI) circuit.
-\sssc{Response}
+All circuits discussed in this text are causal continuous-time linear time-invariant (LTI) systems.
+\sssc{Types of responses}
 \bit
-\item\tb{Natural, homogenous, or unforced response}: Response when all independent sources are turned off (zero-input problem). For passive circuit, also called transient response.
-\item\tb{Forced response}: Response when there are no initial energy (zero-state problem).
-\item\tb{(Total) response}: The response considering independent sources and initial energies, that is, the sum of natural response and forced response.
+\item\tb{Natural, zero-input, homogeneous, or unforced response}: Response when all independent sources are turned off.
+\item\tb{Forced or zero-state response}: Response when there are no initial energy.
+\item\tb{(Total) response}: The response considering both independent sources and initial energies, which is the sum of natural response and forced response.
+\item\tb{Transient response}: A response that converges to a constant.
 \eit
-\sssc{Time constant}
-For a response function in the form $f(t)=f_0e^{-\alpha t}$ with constants $f_0\neq 0$ and $\alpha>0$, the time constant $\tau$ is defined as $\frac{1}{\alpha}$, and $f(\tau)=e^{-1}$.
-
-For the smallest positive integer (or rational number to a number of decimals) $k$ such that $\frac{f(k\tau)}{f_0}<0.01$, we typically call that $f(t)$ decays to $0$ about $k$ times time constants.
 \sssc{Series connection}
 For linear networks, the impedance of the network is equal to the sum of the impedance of each element.
 \sssc{Parallel connection}
@@ -354,29 +355,30 @@ For all integer $n\geq 3$:
 \eit
 \ssc{RL, RC, LC, and RLC Circuits}
 \sssc{RL circuit}
-An RL circuit consist of a resistor with resistance $R$, an inductor with inductance $L$, and an independent voltage source $v_{in}$ in series connection.
+An RL circuit, RL filter, or RL network consist of a resistor with resistance $R$, an inductor with inductance $L$, and an independent voltage source $v_{in}$ in series connection.
 
 Natural response:
 \[Ri+L\dv{i}{t}=0\]
 \[i=i(0^-)e^{-\frac{R}{L}t}\]
-\[\tau=\frac{L}{R}\]
-\[p_R=(i(0^-))^2e^{-\frac{2R}{L}t}R\]
-\[\int_0^{\infty}p_R\dd{t}=\frac{1}{2}L(i(0^-))^2\]
-\[RI+L(sI-i(0^-))=0\]
+\[\tau_i=\frac{L}{R}\]
+\[v_R=-v_L=Ri(0^-)e^{-\frac{R}{L}t}\]
+\[p_R=-p_L=R(i(0^-))^2e^{-\frac{2R}{L}t}\]
+\[\int_0^{\infty}p_R\dd{t}=-\int_0^{\infty}p_L\dd{t}=\frac{1}{2}L(i(0^-))^2\]
 \[I=\frac{Li(0^-)}{R+Ls}\]
+\[V_R=-V_L=\frac{RLi(0^-)}{R+Ls}\]
 \begin{proof}
 \[Ri+L\dv{i}{t}=0\]
 \[Lr+R=0\]
 \[r=-\frac{R}{L}\]
 \[i=Ae^{-\frac{R}{L}t}\]
 \[i=i(0^-)e^{-\frac{R}{L}t}\]
-\[p_R=(i(0^-))^2e^{-\frac{2R}{L}t}R\]
+\[p_R=R(i(0^-))^2e^{-\frac{2R}{L}t}\]
+\[p_L=Li(0^-)e^{-\frac{R}{L}t}\qty(-\frac{R}{L})i(0^-)e^{-\frac{R}{L}t}=-R(i(0^-))^2e^{-\frac{2R}{L}t}\]
 \[\ba
-\int_0^{\infty}p_R\dd{t}&=(i(0^-))^2R\evlv(-\frac{L}{2R}e^{-\frac{2R}{L}t})_0^{\infty}\\
+\int_0^{\infty}p_R\dd{t}&=R(i(0^-))^2\evlv(-\frac{L}{2R}e^{-\frac{2R}{L}t})_0^{\infty}\\
 &=\frac{1}{2}L(i(0^-))^2
 \ea\]
 \[RI+L(sI-i(0^-))=0\]
-\[(R+Ls)I-Li(0^-)=0\]
 \[I=\frac{Li(0^-)}{R+Ls}\]
 Check consistency:
 \[\mathcal{L}\{i\}=\frac{i(0^-)}{s+\frac{R}{L}}=\frac{Li(0^-)}{R+Ls}\]
@@ -384,8 +386,10 @@ Check consistency:
 Forced response:
 \[Ri+L\dv{i}{t}=v_{in}\]
 \[i=\frac{1}{L}\int_0^te^{\frac{R}{L}\tau}v_{in}(\tau)\dd{\tau}e^{-\frac{R}{L}t}\]
-\[RI+LsI=V_{in}\]
+\[v_R=v_{in}-v_L=\frac{R}{L}\int_0^te^{\frac{R}{L}\tau}v_{in}(\tau)\dd{\tau}e^{-\frac{R}{L}t}\]
 \[I=\frac{V_{in}}{R+Ls}\]
+\[V_R=\frac{RV_{in}}{R+Ls}\]
+\[V_L=\frac{LsV_{in}}{R+Ls}\]
 \begin{proof}
 \[Ri+L\dv{i}{t}=v_{in}\]
 \[\dv{i}{t}+\frac{R}{L}i=\frac{v_{in}}{L}\]
@@ -405,9 +409,134 @@ Check consistency:
 \ea\]
 \end{proof}
 Total response:
-\[i=\qty(i(0^-)+\frac{1}{L}\int_0^te^{\frac{R}{L}\tau}v_{in}(\tau)\dd{\tau})e^{-\frac{R}{L}t}\]\]
+\[i=\qty(i(0^-)+\frac{1}{L}\int_0^te^{\frac{R}{L}\tau}v_{in}(\tau)\dd{\tau})e^{-\frac{R}{L}t}\]
+\[v_R=v_{in}-v_L=R\qty(i(0^-)+\frac{1}{L}\int_0^te^{\frac{R}{L}\tau}v_{in}(\tau)\dd{\tau})e^{-\frac{R}{L}t}\]
 \[I=\frac{Li(0^-)+V_{in}}{R+Ls}\]
+\[V_R=\frac{RLi(0^-)+RV_{in}}{R+Ls}\]
+\[V_L=\frac{LsV_{in}-RLi(0^-)}{R+Ls}\]
+Impulse response and transfer function:
+\[h_i=\frac{1}{L}u(t)e^{-\frac{R}{L}t}\]
+\[h_{v_R}=\frac{R}{L}u(t)e^{-\frac{R}{L}t}\]
+\[h_{v_L}=\delta(t)-\frac{R}{L}u(t)e^{-\frac{R}{L}t}\]
+\[H_I=\frac{1}{R+Ls}\]
+\[H_{V_R}=\frac{R}{R+Ls}\]
+\[H_{V_L}=\frac{Ls}{R+Ls}\]
+\begin{proof}
+\[h_i=\frac{1}{L}\int_0^te^{\frac{R}{L}\tau}\delta(\tau)\dd{\tau}e^{-\frac{R}{L}t}=\frac{1}{L}u(t)e^{-\frac{R}{L}t}\]
+Check consistency:
+\[\mathca{L}\{h_i\}=\frac{1}{L\qty(s+\frac{R}{L})}=\frac{1}{R+Ls}\]
+\[\mathca{L}\{h_L\}=1-\frac{R}{R+Ls}=\frac{Ls}{R+Ls}\]
+\end{proof}
+$V_R$ being low-pass filter:
+\[\lim_{\omega\to 0}\abs{H_{V_R}(j\omega)}=1\]
+\[\lim_{\omega\to\infty}\abs{H_{V_R}(j\omega)}=0\]
+\begin{proof}
+\[\lim_{\omega\to 0}\abs{H_{V_R}(j\omega)}=\lim_{\omega\to 0}\abs{\frac{R}{R+Lj\omega}}=1\]
+\[\lim_{\omega\to\infty}\abs{H_{V_R}(j\omega)}=\lim_{\omega\to\infty}\abs{\frac{R}{R+Lj\omega}}=0\]
+\end{proof}
+$V_L$ being high-pass filter:
+\[\lim_{\omega\to 0}\abs{H_{V_R}(j\omega)}=0\]
+\[\lim_{\omega\to\infty}\abs{H_{V_R}(j\omega)}=1\]
+\begin{proof}
+\[\lim_{\omega\to 0}\abs{H_{V_R}(j\omega)}=\lim_{\omega\to 0}\abs{\frac{Lj\omega}{R+Lj\omega}}=p\]
+\[\lim_{\omega\to\infty}\abs{H_{V_R}(j\omega)}=\lim_{\omega\to\infty}\abs{\frac{Lj\omega}{R+Lj\omega}}=1\]
+\end{proof}
+\sssc{RC circuit}
+An RC circuit, RC filter, or RC network consist of a resistor with resistance $R$, a capacitor with capacitance $C$, and an independent voltage source $v_{in}$ in series connection.
 
+Natural response:
+\[v_R+v_C=0\]
+\[\frac{v_C}{R}+C\dv{v_C}{t}=0\]
+\[v_C=-v_R=v_C(0^-)e^{-\frac{1}{RC}t}\]
+\[\tau_{v_C}=\tau_{v_R}=\frac{1}{RC}\]
+\[i=-\frac{1}{R}v_C(0^-)e^{-\frac{1}{RC}t}\]
+\[p_R=-p_C=\frac{1}{R}(v_C(0^-))^2e^{-\frac{2}{RC}t}\]
+\[\int_0^{\infty}p_R\dd{t}=-\int_0^{\infty}p_L\dd{t}=\frac{1}{2}C(v_C(0^-))^2\]
+\[\frac{V_C}{R}+C(sV_C-V_C(0^-))=0\]
+\[V_C=-V_R=\frac{RCV_C(0^-)}{1+RCs}\]
+\[I=-\frac{CV_C(0^-)}{1+RCs}\]
+\begin{proof}
+\[v_R+v_C=0\]
+\[\frac{v_R}{R}-C\dv{v_C}{t}=0\]
+\[\frac{v_C}{R}+C\dv{v_C}{t}=0\]
+\[Cr+\frac{1}{R}=0\]
+\[r=-\frac{1}{RC}\]
+\[v_C=Ae^{-\frac{1}{RC}t}\]
+\[v_C=v_C(0^-)e^{-\frac{1}{RC}t}\]
+\[p_R=\frac{1}{R}(v_C(0^-))^2e^{-\frac{2}{RC}t}\\]
+\[p_C=Cv_C(0^-)e^{-\frac{1}{RC}t}\qty(-\frac{1}{RC})v_C(0^-)e^{-\frac{1}{RC}t}=-\frac{1}{R}(v_C(0^-))^2e^{-\frac{2}{RC}t}\]
+\[\ba
+\int_0^{\infty}p_R\dd{t}&=\frac{1}{R}(v_C(0^-))^2\evlv{-\frac{RC}{2}e^{-\frac{2}{RC}t}}_0^{\infty}\\
+&=\frac{1}{2}C(v_C(0^-))^2
+\ea\]
+\[\frac{V_C}{R}+C(sV_C-V_C(0^-))=0\]
+\[\qty(\frac{1}{R}+Cs)V_C-CV_C(0^-)=0\]
+\[V_C=\frac{CV_C(0^-)}{\frac{1}{R}+Cs}=\frac{RCV_C(0^-)}{1+RCs}\]
+\[I=-\frac{CV_C(0^-)}{1+RCs}\]
+Check consistency:
+\[\mathcal{L}\{v_C\}=\frac{v_C(0^-)}{s+\frac{1}{RC}}=\frac{RCv_C(0^-)}{1+RCs}\]
+\end{proof}
+Forced response:
+\[v_R+v_C=v_{in}\]
+\[\frac{v_C-v_{in}}{R}+C\dv{v_C}{t}=0\]
+\[v_C=-v_R=\frac{1}{RC}\int_0^te^{\frac{1}{RC}\tau}v_{in}(\tau)\dd{\tau}e^{-\frac{1}{RC}t}\]
+\[V_C=-V_R=\frac{V_{in}}{1+RCs}\]
+\[I=-\frac{V_{in}}{R(1+RCs)}\]
+\begin{proof}
+\[v_R+v_C=v_{in}\]
+\[\frac{v_R}{R}-C\dv{v_C}{t}=0\]
+\[\frac{v_C-v_{in}}{R}+C\dv{v_C}{t}=0\]
+\[\dv{v_C}{t}+\frac{v_C}{RC}=\frac{v_{in}}{RC}\]
+\[\mu(t)=e^{\int\frac{1}{RC}\dd{t}}=e^{\frac{1}{RC}t}\]
+\[\dv{}{t}\qty(e^{\frac{1}{RC}t}v_C)=e^{\frac{1}{RC}t}\frac{v_{in}}{RC}\]
+\[v_C=\frac{1}{RC}\int_0^te^{\frac{1}{RC}\tau}v_{in}(\tau)\dd{\tau}e^{-\frac{1}{RC}t}\]
+\[\frac{V_C-V_{in}}{R}+CsV_C=0\]
+\[V_C=\frac{V_{in}}{1+RCs}\]
+\[I=-\frac{V_{in}}{R(1+RCs)}\]
+Below 待 PLACEHOLDER
+Check consistency:
+\[\ba
+\mathcal{L}\{i\}&=\frac{1}{L}\mathcal{L}\{\int_0^te^{\frac{R}{L}\tau}v_{in}(\tau)\dd{\tau}\}e^{-\frac{R}{L}t}\\
+&=\frac{1}{L}\mathcal{L}\{\int_0^te^{\frac{R}{L}\tau}v_{in}(\tau)u(t-\tau)\dd{\tau}\}e^{-\frac{R}{L}t}\\
+&=\frac{1}{L}\mathcal{L}\{e^{\frac{R}{L}t}v_{in}(t)\}e^{-\frac{R}{L}t}\mathcal{L}\{u(t)\}\\
+&=\frac{1}{Ls}V_{in}\qty(s-\frac{R}{L})e^{-\frac{R}{L}t}\\
+&=\frac{1}{L\qty(s+\frac{R}{L})}V_{in}(s)\\
+&=\frac{V_{in}}{R+Ls}
+\ea\]
+\end{proof}
+Total response:
+\[i=\qty(i(0^-)+\frac{1}{L}\int_0^te^{\frac{R}{L}\tau}v_{in}(\tau)\dd{\tau})e^{-\frac{R}{L}t}\]
+\[v_R=v_{in}-v_L=R\qty(i(0^-)+\frac{1}{L}\int_0^te^{\frac{R}{L}\tau}v_{in}(\tau)\dd{\tau})e^{-\frac{R}{L}t}\]
+\[I=\frac{Li(0^-)+V_{in}}{R+Ls}\]
+\[V_R=\frac{RLi(0^-)+RV_{in}}{R+Ls}\]
+\[V_L=\frac{LsV_{in}-RLi(0^-)}{R+Ls}\]
+Impulse response and transfer function:
+\[h_i=\frac{1}{L}u(t)e^{-\frac{R}{L}t}\]
+\[h_{v_R}=\frac{R}{L}u(t)e^{-\frac{R}{L}t}\]
+\[h_{v_L}=\delta(t)-\frac{R}{L}u(t)e^{-\frac{R}{L}t}\]
+\[H_I=\frac{1}{R+Ls}\]
+\[H_{V_R}=\frac{R}{R+Ls}\]
+\[H_{V_L}=\frac{Ls}{R+Ls}\]
+\begin{proof}
+\[h_i=\frac{1}{L}\int_0^te^{\frac{R}{L}\tau}\delta(\tau)\dd{\tau}e^{-\frac{R}{L}t}=\frac{1}{L}u(t)e^{-\frac{R}{L}t}\]
+Check consistency:
+\[\mathca{L}\{h_i\}=\frac{1}{L\qty(s+\frac{R}{L})}=\frac{1}{R+Ls}\]
+\[\mathca{L}\{h_L\}=1-\frac{R}{R+Ls}=\frac{Ls}{R+Ls}\]
+\end{proof}
+$V_R$ being low-pass filter:
+\[\lim_{\omega\to 0}\abs{H_{V_R}(j\omega)}=1\]
+\[\lim_{\omega\to\infty}\abs{H_{V_R}(j\omega)}=0\]
+\begin{proof}
+\[\lim_{\omega\to 0}\abs{H_{V_R}(j\omega)}=\lim_{\omega\to 0}\abs{\frac{R}{R+Lj\omega}}=1\]
+\[\lim_{\omega\to\infty}\abs{H_{V_R}(j\omega)}=\lim_{\omega\to\infty}\abs{\frac{R}{R+Lj\omega}}=0\]
+\end{proof}
+$V_L$ being high-pass filter:
+\[\lim_{\omega\to 0}\abs{H_{V_R}(j\omega)}=0\]
+\[\lim_{\omega\to\infty}\abs{H_{V_R}(j\omega)}=1\]
+\begin{proof}
+\[\lim_{\omega\to 0}\abs{H_{V_R}(j\omega)}=\lim_{\omega\to 0}\abs{\frac{Lj\omega}{R+Lj\omega}}=p\]
+\[\lim_{\omega\to\infty}\abs{H_{V_R}(j\omega)}=\lim_{\omega\to\infty}\abs{\frac{Lj\omega}{R+Lj\omega}}=1\]
+\end{proof}
 
 
 
