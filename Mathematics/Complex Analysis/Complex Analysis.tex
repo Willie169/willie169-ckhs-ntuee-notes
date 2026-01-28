@@ -115,12 +115,23 @@ of parameter $\theta\in\bbR$ including that of $\theta=\Arg(z)$ on the complex p
 \item When $\Im(w)=0\land\Re(w)\in\mathbb{Q}$: Suppose $\abs{\Re(w)}=\frac{m}{n}$ with $n\in\mathbb{N}$ and $\gcd(m,n)=1$, there are $n$ distinct roots, which are the $n$ vertices of a regular $n$-gon inscribed in a circle of radius $|z|^{\Re(w)}$ centered at the origin including $|z|^{\Re(w)}e^{i\Re(w)\Arg(z)}$ on the complex plane.
 \item Otherwise: There are countably infinitely many distinct roots.
 \end{itemize}
-\ssc{Of Exponential Order}
-A real or complex-valued net $f$ on a subset of $\mathbb{R}$ is considered of exponential order $\alpha\in\mathbb{R}_{>0}$ if there exists $M>0$ and $T>0$ such that:
-\[|f(t)|\leq Me^{\alpha t}\quad \forall t>T.\]
-
-
-
+\ssc{Phasor or complex amplitude}
+\sssc{Definition)
+The phasor or complex amplitude of a sinusoid $A\cos(\omega t+\theta)$ for some real nonnegaative constants $A,\omega,\theta$ is a complex number
+\[Ae^{i\theta},\quad i=\sqrt{-1},\]
+also denoted as $A\angle\theta$ or a two-dimensional vector
+\[(A\cos\theta,A\sin\theta),\]
+which satisfies
+\[\Re(Ae^{i\theta}e^{i\omega t})=A\cos(\omega t+\theta).\]
+\sssc{Linearity}
+The phasor of
+\[aA\cos(\omega t+\theta)+bB\cos(\omega t+\varphi)\]
+is
+\[aAe^{i\theta}+bBe^{i\varphi}.\]
+\sssc{Differentiation}
+The phasor of $\dv{}{t}\qty(A\cos(\omega t+\theta))$ is $i\omega Ae^{i\theta}$.
+\sssc{Integration}
+The phasor of the sinusoid part of $\int A\cos(\omega\tau+\theta)\dd{\tau}$ is $-\frac{i}{\omega}Ae^{i\theta}$.
 \sct{Integral Transform}
 PLACEHOLDER
 Integral Transform
@@ -314,7 +325,16 @@ By dominated convergence theorem, we obtain:
 \end{proof}
 \sssc{Final Value Theorem (FVT)}
 PLACEHOLDER
-\sssc{Sine function}
+\sssc{Cosine and sine functions}
+\[\mathcal{L}\{\cos(\omega t)\}=\frac{s}{s^2+\omega^2}.\]
+\begin{proof}
+\[\ba
+\mathcal{L}\{\cos(\omega t)\}&=\frac{1}{2}\qty(\mathcal{L}\{e^{i\omega t}\}+\mathcal{L}\{e^{-i\omega t}\})\\
+&=\frac{1}{2}\qty(\frac{1}{s-i\omega}+\frac{1}{s+i\omega})\\
+&=\frac{1}{2}\frac{2s}{s^2+\omega^2}\\
+&=\frac{s}{s^2+\omega^2}
+\ea\]
+\end{proof}
 \[\mathcal{L}\{\sin(\omega t)\}=\frac{\omega}{s^2+\omega^2}.\]
 \begin{proof}
 \[\ba
@@ -324,14 +344,18 @@ PLACEHOLDER
 &=\frac{\omega}{s^2+\omega^2}
 \ea\]
 \end{proof}
-\sssc{Cosine function}
-\[\mathcal{L}\{\cos(\omega t)\}=\frac{s}{s^2+\omega^2}.\]
+\[\mathcal{L}\{\cos(\omega t-\varphi)\}=\frac{\cos\varphi s+\sin\varphi\omega}{s^2+\omega^2}.\]
 \begin{proof}
 \[\ba
-\mathcal{L}\{\cos(\omega t)\}&=\frac{1}{2}\qty(\mathcal{L}\{e^{i\omega t}\}+\mathcal{L}\{e^{-i\omega t}\})\\
-&=\frac{1}{2}\qty(\frac{1}{s-i\omega}+\frac{1}{s+i\omega})\\
-&=\frac{1}{2}\frac{2s}{s^2+\omega^2}\\
-&=\frac{s}{s^2+\omega^2}
+\mathcal{L}\{\cos(\omega t-\varphi)\}&=\mathcal{L}\{\cos\varphi\cos(\omega t)+\sin\varphi\sin(\omega t)\}\\
+&=\frac{\cos\varphi s+\sin\varphi\omega}{s^2+\omega^2}
+\ea\]
+\end{proof}
+\[\mathcal{L}\{\sin(\omega t-\varphi)\}=\frac{\cos\varphi\omega-\sin\varphi s}{s^2+\omega^2}.\]
+\begin{proof}
+\[\ba
+\mathcal{L}\{\sin(\omega t-\varphi)\}&=\mathcal{L}\{\cos\varphi\sin(\omega t)-\sin\varphi\cos(\omega t)\}\\
+&=\frac{\cos\varphi\omega-\sin\varphi s}{s^2+\omega^2}
 \ea\]
 \end{proof}
 \sssc{Power function}
@@ -365,10 +389,10 @@ The Laplace transform of a real function $f(t)$, denoted as $\mathcal{B}\{f(t)\}
 \ssc{Fourier Transform (FT) (傅立葉變換)}
 PLACEHOLDER: as Laplace tranform special case
 \sssc{Fourier Transform (FT)}
-Fourier transform is an integral transform that converts a function of a real variable (usually $t$, in the time domain) to a function of another real variable (usually $\omega$, in the real-valued angular frequency domain). The functions are often denoted in lowercase for the time-domain representation and uppercase for the frequency-domain.
+Fourier transform is an integral transform that converts a function of a real variable (usually $t$, in the time domain) to a function of another real variable (usually $\omega$, in the real-valued (angular) frequency or Fourier domain). The functions are often denoted in lowercase for the time-domain representation and uppercase for the frequency-domain.
 
 The Fourier transform, denoted as $\mathcal{F}\{f(t)\}(\omega)$ or $F(\omega)$, is defined by the improper integral
-\[\mathcal{F}\{f(t)\}(\omega) = F(\omega) = \int_{-\infty}^{\infty} e^{-i\omega t} f(t)\,\mathrm{d}t.\]
+\[\mathcal{F}\{f(t)\}(\omega) = F(\omega) = \int_{-\infty}^{\infty}e^{-i\omega t}f(t)\dd{t}.\]
 \sssc{Inverse Fourier Transform (反傅立葉變換)}
 The inverse Fourier transform of a complex function $F(s)$, denoted as $\mathcal{F}^{-1}\{F(s)\}(t)$ or $f(t)$, is defined as a real function such that
 \[\mathcal{F}\{f(t)\}(s) = F(s),\]

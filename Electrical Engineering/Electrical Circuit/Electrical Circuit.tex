@@ -12,17 +12,18 @@
 \sssc{Convention}
 \bit
 \item Time $t$ (s)
-\item Complex frequency $s$ (Hz = 1 / s)
-\item Voltage $v$ (time domain) $V$ (frequency domain) (volt = V)
-\item Current $i$ (time domain) $I$ (frequency domain) (ampere = A)
+\item Complex frequency (Laplace domain) $s$ (Hz = 1 / s)
+\item Angular frequency $\omega$ (Hz = 1 / s)
+\item Voltage $v$ (time domain) $V$ (phasor or Laplace domain) (volt = V)
+\item Current $i$ (time domain) $I$ (phasor or Laplace domain) (ampere = A)
 \item Power $p$ (watt = W = A V)
 \item Imaginary unit (since $i$ is used by current) $j=\sqrt{-1}$
 \item Resistance $R$ (ohm = \textOmega = V / A)
 \item Capacitance $C$ (farad = F = A s / V)
 \item Inductance $L$ (henry = H = V s / A)
 \item Reactance $X$ (\textOmega)
-\item Impedance (complex) $Z$ (\textOmega)
-\item Admittance (complex) $Y$ (siemens = S = 1 / \textOmega)
+\item Impedance $Z$ (\textOmega)
+\item Admittance $Y$ (siemens = S = 1 / \textOmega)
 \item Conductance $G$ (S)
 \item Susceptance $B$ (S)
 \item Time constant $\tau$ (s)
@@ -38,12 +39,21 @@ Electrical elements or simply elements are conceptual abstractions representing 
 \sssc{Direct current (DC)}
 A direct current is a current that is one-directional and with constant voltage and current over time.
 \sssc{Alternating current (AC)}
-An alternating current is a current that changes its voltage and current over time and with zero voltage and current in average over an infinite time interval.
-\sssc{General current in frequency domain}
+An alternating current is a current whose voltage and current change over time and are zero in average over an infinite time interval.
+\sssc{Steady-state sinusoidal alternating current and phasor domain}
+A steady-state sinusoidal alternating current is a current whose voltage $v(t)$ and current $i(t)$ are of the form:
+\[v(t)=v_m\cos(\omeg t+\varphi),\]
+\[i(t)=i_m\cos(\omega t+\theta),\]
+where $\omega$ is the angular frequency of them.
+
+They can be represented in phasor as
+\[V=v_me^{j\varphi},\]
+\[I=i_me^{j\theta}.\]
+\sssc{General current and Laplace domain}
 Given a general current with voltage $v(t)$ and current $i(t)$ over time since $t=0$, we can perform Laplace transforms,
 \[V(s)=\mathcal{L}\{v(t)\}(s)=\int_0^{\infty}e^{-st}v(t)\dd{t},\]
 \[I(s)=\mathcal{L}\{i(t)\}(s)=\int_0^{\infty}e^{-st}i(t)\dd{t},\]
-to obtain its voltage $V(s)$ and current $I(s)$ as a function of frequency domain $s$.
+to obtain its voltage $V(s)$ and current $I(s)$ as a function of Laplace domain $s$.
 \sssc{Resistance and resistor}
 The resistance $R$ of an element is the voltage across it over the current through it under DC:
 \[v(t)=Ri(t).\]
@@ -69,17 +79,22 @@ An ideal capacitor is a circuit element with a capacitance and no resistance or 
 \draw (0,0) to[C, l=Capacitor] (3,0);
 \end{circuitikz}
 \end{center}
-The capacitance $C$ of an element is the current through it divided by the derivative of the voltage across it with respect to time:
+The capacitance $C$ of an element is the current through it divided by the derivative of the voltage across it with respect to time.
+
+Time domain:
 \[i(t)=C\dv{v(t)}{t}.\]
+Phasor domain (steady-state sinusoidal AC with angular frequency $\omega$):
+\[I=Cj\omega V.\]
+Laplace domain:
 \[I(s)=CsV(s)-Cv(0^-).\]
-When analyzing natural response, a capacitor with capacitance $C$ can be treated as a capacitance $C$ without initial energy in parallel connection with an independent current source enforcing current $Cv(0^-)$. When analyzing forced response, a capacitor with capacitance $C$ can be treated as a capacitance $C$ without initial energy.
+When analyzing natural response, a capacitor with capacitance $C$ can be treated as a capacitance $C$ without initial energy in series connection with an independent voltage source enforcing voltage $-v(0^-)\delta(t)$ or a capacitance $C$ without initial energy in parallel connection with an independent current source enforcing current $-Cv(0^-)\delta(t)$. When analyzing forced response, a capacitor with capacitance $C$ can be treated as a capacitance $C$ without initial energy.
 
 A capacitor voltage must not be allowed to jump instantaneously from one value to another.
 
 Integral voltage-current relationship:
-\[v(t)=\frac{1}{C}\int_{t_0}^ti(\tau)\dd{\tau}+v(t_0)=\frac{1}{C}\int_{-\infty}^ti(\tau)\dd{\tau}.\]
+\[v(t)=\frac{1}{C}\int_{t_0}^ti(\tau)\dd{\tau}+v(t_0^{\pht{0}-})=\frac{1}{C}\int_{-\infty}^ti(\tau)\dd{\tau}.\]
 Power absorbed:
-\[p(t)=Cv(t)\dv{v(t)}{t}.\]
+\[p(t)=i(t)v(t)=Cv(t)\dv{v(t)}{t}.\]
 Energy stored:
 \[\int_{-\infty}^tp(t)\dd{t}=\frac{1}{2}C\qty(v(t))^2.\]
 \sssc{Inductance and inductor}
@@ -89,42 +104,53 @@ An ideal inductor is a circuit element with an inductance and no resistance or c
 \draw (0,0) to[L, l=Inductor] (3,0);
 \end{circuitikz}
 \end{center}
-The inductance $L$ of an element is the voltage across it divided by the derivative of the current through it with respect to time:
+The inductance $L$ of an element is the voltage across it divided by the derivative of the current through it with respect to time.
+
+Time domain:
 \[v(t)=L\dv{i(t)}{t}.\]
+Phasor domain (steady-state sinusoidal AC with angular frequency $\omega$):
+\[V=Lj\omega I.\]
+Laplace domain:
 \[V(s)=LsI(s)-Li(0^-).\]
-When analyzing natural response, an inductor with inductance $L$ can be treated as a inductance $L$ without initial energy in series connection with an independent voltage source enforcing voltage $Li(0^-)$. When analyzing forced response, an inductor with inductance $L$ can be treated as a inductance $L$ without initial energy.
+When analyzing natural response, an inductor with inductance $L$ can be treated as a inductance $L$ without initial energy in parallel connection with an independent current source enforcing current $-i(0^-)\delta(t)$ or a inductance $L$ without initial energy in series connection with an independent voltage source enforcing voltage $-Li(0^-)\delta(t)$. When analyzing forced response, an inductor with inductance $L$ can be treated as a inductance $L$ without initial energy.
 
 An inductor current must not be allowed to jump instantaneously from one value to another.
 
 Integral voltage-current relationship:
-\[i(t)=\frac{1}{L}\int_{t_0}^tv(\tau)\dd{\tau}+i(t_0)=\frac{1}{L}\int_{-\infty}^tv(\tau)\dd{\tau}.\]
+\[i(t)=\frac{1}{L}\int_{t_0}^tv(\tau)\dd{\tau}+i(t_0^{\pht{0}-})=\frac{1}{L}\int_{-\infty}^tv(\tau)\dd{\tau}.\]
 Power absorbed:
-\[p(t)=Li(t)\dv{i(t)}{t}.\]
+\[p(t)=i(t)v(t)=Li(t)\dv{i(t)}{t}.\]
 Energy stored:
 \[\int_{-\infty}^tp(t)\dd{t}=\frac{1}{2}L\qty(i(t))^2.\]
-\sssc{Reactance}
-The (capacitive) reactance $X_C$ of a one-port network with capacitance $C$ is defined as:
-\[X_C(s)=\frac{1}{Cs}.\]
-There is also a definition that uses the negation of the definition above, which is not used here.
-
-The (inductive) reactance $X_L$ of a one-port network with inductance $L$ is defined as:
-\[X_L(s)=Ls.\]
-The reactance $X$ of a one-port network is defined as:
-\[X(s)=X_L(s)-X_C(s).\]
-A one-port network is said to have net capacitive reactance if $X(s)<0$ and have net inductive reactance if $X(s)>0$.
-\sssc{Impedance}
-The impedance $Z$ of a one-port network is defined as a complex number with its resistance as real part and its reactance as imaginary part:
-\[Z(s)=R+jX(s).\]
-\[V(s)=Z(s)I(s).\]
-Thus, the behaviors of resistors, capacitors, and inductors can all be presented with a complex function of frequency domain, impedance, with net capacitance existing and being propositional to reciprocal of reactance if reactance is negative, net inductance existing and being propositional to the reactance if reactance is positive, and no net capacitance or inductance existing if reactance is zero.
-\sssc{Admittance}
-The admittance $Y(s)$ of a one-port network is defined as the reciprocal of its impedance:
-\[Y(s)=\frac{1}{Z(s)}.\]
-\sssc{Conductance}
-The conductance $G(s)$ of a circuit element is defined as the real part of its admittance.
-\sssc{Susceptance}
-The susceptance $B(s)$ of a circuit element is defined as the imaginary part of its admittance:
-\[Y(s)=G(s)+jB(s).\]
+\sssc{Reactance (phasor domain)}
+The (capacitive) reactance $X_C$ of a one-port network with capacitance $C$ under steady-state sinusoidal AC of angular frequency $\omega$ is defined as:
+\[X_C=-\frac{1}{C\omega}.\]
+The (inductive) reactance $X_L$ of a one-port network with inductance $L$ under steady-state sinusoidal AC of angular frequency $\omega$ is defined as:
+\[X_L=L\omega.\]
+The reactance $X$ of a one-port network under steady-state sinusoidal AC of angular frequency $\omega$ is defined as:
+\[X=X_L+X_C.\]
+Another choice is to define $X_C$ as $\frac{1}{C\omega}$ and $X=X_L-X_C$.
+\sssc{Impedance (phasor domain)}
+The impedance $Z$ of a one-port network under steady-state sinusoidal AC of angular frequency $\omega$ is defined as:
+\[V=ZI,\]
+and is such that
+\[Z=R+jX.\]
+\sssc{Impedance (Laplace domain)}
+The impedance $Z(s)$ of a one-port network is defined as:
+\[V(s)=Z(s)I(s),\]
+and is such that for a one-port network with capacitance $C$:
+\[Z(s)=\frac{1}{Cs};\]
+and for a one-port network with inductance $L$:
+\[Z(s)=Ls.\]
+The impedance in phasor domain can be obtained by assigning $s=j\omega$.
+\sssc{Admittance (phasor domain)}
+The admittance $Y$ of a one-port network is defined as the reciprocal of its impedance $Z$.
+\sssc{Admittance (Laplace domain)}
+The admittance $Y(s)$ of a one-port network is defined as the reciprocal of its impedance $Z(s)$.
+\sssc{Conductance (phasor domain)}
+The conductance $G$ of a circuit element is defined as the real part of its admittance.
+\sssc{Susceptance (phasor domain)}
+The susceptance $B$ of a circuit element is defined as the imaginary part of its admittance.
 \sssc{Active element}
 An active element is an element capable of furnishing an average power greater than zero to some external network over an infinite time interval.
 \sssc{Passive element}
@@ -361,7 +387,7 @@ For all integer $n\geq 3$:
 \sssc{RL circuit}
 An RL circuit, RL filter, or RL network consist of a resistor with resistance $R$, an inductor with inductance $L$, and an independent voltage source $v_{in}$ in series connection.
 
-Oriented in $R$ to $L$ to $v_{in}$ to $R$ direction:
+Voltages and currents oriented in resistor to inductor to independent voltage source to resistor direction.
 
 Natural response:
 \[Ri+L\dv{i}{t}=0\]
@@ -378,8 +404,7 @@ Natural response:
 \[r=-\frac{R}{L}\]
 \[i=Ae^{-\frac{R}{L}t}\]
 \[i=i(0^-)e^{-\frac{R}{L}t}\]
-\[p_R=R(i(0^-))^2e^{-\frac{2R}{L}t}\]
-\[p_L=Li(0^-)e^{-\frac{R}{L}t}\qty(-\frac{R}{L})i(0^-)e^{-\frac{R}{L}t}=-R(i(0^-))^2e^{-\frac{2R}{L}t}\]
+\[p_R=-p_L=R(i(0^-))^2e^{-\frac{2R}{L}t}\]
 \[\ba
 \int_0^{\infty}p_R\dd{t}&=R(i(0^-))^2\evlv(-\frac{L}{2R}e^{-\frac{2R}{L}t})_0^{\infty}\\
 &=\frac{1}{2}L(i(0^-))^2
@@ -446,7 +471,7 @@ $V_L$ being high-pass filter:
 \sssc{RC circuit}
 An RC circuit, RC filter, or RC network consist of a resistor with resistance $R$, a capacitor with capacitance $C$, and an independent voltage source $v_{in}$ in series connection.
 
-Oriented in $R$ to $C$ to $v_{in}$ to $R$ direction.
+Voltages and currents oriented in resistor to capacitor to independent voltage source to resistor direction.
 
 Natural response:
 \[\frac{v_C}{R}+C\dv{v_C}{t}=0\]
@@ -465,8 +490,7 @@ Natural response:
 \[r=-\frac{1}{RC}\]
 \[v_C=Ae^{-\frac{1}{RC}t}\]
 \[v_C=v_C(0^-)e^{-\frac{1}{RC}t}\]
-\[p_R=\frac{1}{R}(v_C(0^-))^2e^{-\frac{2}{RC}t}\\]
-\[p_C=Cv_C(0^-)e^{-\frac{1}{RC}t}\qty(-\frac{1}{RC})v_C(0^-)e^{-\frac{1}{RC}t}=-\frac{1}{R}(v_C(0^-))^2e^{-\frac{2}{RC}t}\]
+\[p_R=-p_C=\frac{1}{R}(v_C(0^-))^2e^{-\frac{2}{RC}t}\]
 \[\ba
 \int_0^{\infty}p_R\dd{t}&=\frac{1}{R}(v_C(0^-))^2\evlv{-\frac{RC}{2}e^{-\frac{2}{RC}t}}_0^{\infty}\\
 &=\frac{1}{2}C(v_C(0^-))^2
@@ -532,12 +556,161 @@ $V_R$ being high-pass filter:
 \[\lim_{\omega\to 0}\abs{H_{V_R}(j\omega)}=\lim_{\omega\to 0}\abs{\frac{RCj\omega}{1+RCj\omega}}=0\]
 \[\lim_{\omega\to\infty}\abs{H_{V_R}(j\omega)}=\lim_{\omega\to\infty}\abs{\frac{RCj\omega}{1+RCj\omega}}=1\]
 \end{proof}
+\sssc{Series LC circuit}
+A series LC circuit, resonant circuit, tank circuit, or tuned circuit consist of an inductor with inductance $L$, a capacitor with capacitance $C$, and an independent voltage source $v_{in}$ in series connection.
+
+Voltages and currents oriented in inductor to capacitor to independent voltage source to inductor direction. Resonance angular frequency $\omega_0$. Total energy stored in inductor and capacitor $E$.
+
+Natural response:
+\[L\dv{i}{t}+\frac{1}{C}\int_0^ti\dd{\tau}+v_C(0^-)=0\]
+\[\omega_0=\frac{1}{\sqrt{LC}}\]
+\[\ba
+i&=i(0^-)\cos\qty(\frac{1}{\sqrt{LC}}t)-v_C(0^-)\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t)\\
+&=i(0^-)\cos\qty(\omega_0t)-v_C(0^-)\frac{1}{L\omega_0}\sin\qty(\omega_0t)
+\ea\]
+\[\ba
+v_C&=-v_L\\
+&=i(0^-)\frac{1}{\sqrt{LC}}\sin\qty(\frac{1}{\sqrt{LC}}t)+v_C(0^-)\frac{1}{L}\cos\qty(\frac{1}{\sqrt{LC}}t)\\
+&=i(0^-)\omega_0\sin\qty(\omega_0t)+v_C(0^-)\frac{1}{L}\cos\qty(\omega_0t)
+\ea\]
+\[\ba
+p_C&=-p_L\\
+&=\frac{1}{2}\qty((i(0^-))^2+(v_C(0^-))^2\frac{C}{L})\frac{1}{\sqrt{LC}}\sin\qty(\frac{2}{\sqrt{LC}}t)-i(0^-)v_C(0^-)\frac{1}{L}\cos\qty(\frac{2}{\sqrt{LC}}t))\\
+&=\frac{1}{2}\qty((i(0^-))^2+(v_C(0^-))^2\frac{C}{L})\omega_0\sin\qty(2\omega_0t)-i(0^-)v_C(0^-)\frac{1}{L}\cos\qty(2\omega_0t))
+\ea\]
+\[E=\frac{1}{2}\qty(C(v_C(0^-))^2+L(I(0^-))^2)\]
+\[I=\frac{-Csv_C(0^-)+LCsi(0^-)}{LCs^2+1}\]
+\[V_C=-V_L=\frac{LCs^2v_C(0^-)+i(0^-)}{LCs^2+1}\]
+\begin{proof}
+\[L\dv{i}{t}+\frac{1}{C}\int_0^ti\dd{\tau}+v_C(0^-)=0\]
+\[L\dv[2]{i}{t}+\frac{1}{C}i=0\]
+\[Lr^2+\frac{1}{C}=0\]
+\[r=\pm\frac{1}{\sqrt{LC}}j\]
+\[i=A\cos\qty(\frac{1}{\sqrt{LC}}t)+B\sin\qty(\frac{1}{\sqrt{LC}}t)\]
+\[A=i(0^-)\]
+\[L\dv{i}{t}(0)+v_C(0^-)=0\]
+\[LB\frac{1}{\sqrt{LC}}+v_C(0^-)=0\]
+\[B=-v_C(0^-)\sqrt{\frac{C}{L}}=-v_C(0^-)\frac{1}{L\omega_0}\]
+\[\ba
+i&=i(0^-)\cos\qty(\frac{1}{\sqrt{LC}}t)-v_C(0^-)\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t)\\
+&=i(0^-)\cos\qty(\omega_0t)-v_C(0^-)\frac{1}{L\omega_0}\sin\qty(\omega_0t)
+\ea\]
+\[\ba
+v_C&=-v_L=-L\dv{i}{t}\\
+&=i(0^-)\frac{1}{\sqrt{LC}}\sin\qty(\frac{1}{\sqrt{LC}}t)+v_C(0^-)\frac{1}{L}\cos\qty(\frac{1}{\sqrt{LC}}t)\\
+&=i(0^-)\omega_0\sin\qty(\omega_0t)+v_C(0^-)\frac{1}{L}\cos\qty(\omega_0t)
+\ea\]
+\[\ba
+p_C&=-p_L\\
+&=\qty(i(0^-)\cos\qty(\frac{1}{\sqrt{LC}}t)-v_C(0^-)\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t))\qty(i(0^-)\frac{1}{\sqrt{LC}}\sin\qty(\frac{1}{\sqrt{LC}}t)+v_C(0^-)\frac{1}{L}\cos\qty(\frac{1}{\sqrt{LC}}t))\\
+&=\frac{1}{2}\qty((i(0^-))^2+(v_C(0^-))^2\frac{C}{L})\frac{1}{\sqrt{LC}}\sin\qty(\frac{2}{\sqrt{LC}}t)-i(0^-)v_C(0^-)\frac{1}{L}\cos\qty(\frac{2}{\sqrt{LC}}t))\\
+&=\frac{1}{2}\qty((i(0^-))^2+(v_C(0^-))^2\frac{C}{L})\omega_0\sin\qty(2\omega_0t)-i(0^-)v_C(0^-)\frac{1}{L}\cos\qty(2\omega_0t))
+\ea\]
+\[\ba
+I&=\frac{-v_C(0^-)+Li(0^-)}{Ls+\frac{1}{Cs}}\\
+&=\frac{-Csv_C(0^-)+LCsi(0^-)}{LCs^2+1}
+\ea\]
+\[V_C=-V_L=-(LsI-Li(0^-))=\frac{LCs^2v_C(0^-)+i(0^-)}{LCs^2+1}\]
+Check consistency:
+\[\mathcal{L}\{i\}=\frac{i(0^-)s-v_C(0^-)\sqrt{\frac{C}{L}}\frac{1}{\sqrt{LC}}}{s^2+\frac{1}{LC}}=\frac{LCsi(0^-)-Csv_C(0^-)}{LCs^2+1}\]
+\[\ba
+\mathcal{L}\{v_C\}&=i(0^-)\frac{1}{\sqrt{LC}}\frac{\frac{1}{\sqrt{LC}}}{s^2+\frac{1}{LC}}+v_C(0^-)\frac{1}{L}\frac{s}{s^2+\frac{1}{LC}}\\
+&=\frac{LCs^2v_C(0^-)+i(0^-)}{LCs^2+1}
+\ea\]
+\end{proof}
+Forced response:
+\[L\dv{i}{t}+\frac{1}{C}\int_0^ti\dd{\tau}=v_{in}\]
+\[\ba
+i&=\int_0^t\cos\qty(\frac{1}{\sqrt{LC}}(t-\tau)v_{in}(\tau)\dd{\tau}\\
+&=\int_0^t\cos\qty(\omega_0(t-\tau)v_{in}(\tau)\dd{\tau}
+\ea\]
+\[\ba
+v_L&=v_{in}-v_C\\
+&=Lv_{in}+\sqrt{\frac{L}{C}}\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}(t-\tau))v_{in}(\tau)\dd{\tau}\\
+&=Lv_{in}+\sqrt{\frac{L}{C}}\int_0^t\sin\qty(\omega_0(t-\tau))v_{in}(\tau)\dd{\tau}
+\ea\]
+\[I=\frac{V_{in}}{Ls+\frac{1}{Cs}}=\frac{CsV_{in}}{LCs^2+1}\]
+\[V_L=\frac{LCs^2V_{in}}{LCs^2+1}\]
+\[V_C=\frac{V_{in}}{LCs^2+1}\]
+
+
+\begin{proof}
+\[L\dv{i}{t}+\frac{1}{C}\int_0^ti\dd{\tau}=v_{in}\]
+\[L\dv[2]{i}{t}+\frac{1}{C}i=\dv{v_{in}}{t}\]
+\[i_1=\cos\qty(\frac{1}{\sqrt{LC}}t)\]
+\[i_2=\sin\qty(\frac{1}{\sqrt{LC}}t)\]
+\[\frac{1}{i_1i_2'-i_2i_1'}=\sqrt{LC}\]
+\[i=-\sqrt{LC}\cos\qty(\frac{1}{\sqrt{LC}}t)\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}\tau)\dv{v_{in}}{\tau}\dd{\tau}+\sqrt{LC}\sin\qty(\frac{1}{\sqrt{LC}}t)\int\cos\qty(\frac{1}{\sqrt{LC}}\tau)\dv{v_{in}}{\tau}\dd{\tau}\]
+\[\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}\tau)\dv{v_{in}}{\tau}\dd{\tau}=\sin\qty(\frac{1}{\sqrt{LC}}t)v_{in}-\frac{1}{\sqrt{LC}}\int_0^t\cos\qty(\frac{1}{\sqrt{LC}}\tau)v_{in}(\tau)\dd{t}\]
+\[\int_0^t\cos\qty(\frac{1}{\sqrt{LC}}\tau)\dv{v_{in}{\tau}\dd{\tau}=\cos\qty(\frac{1}{\sqrt{LC}}t)v_{in}+\frac{1}{\sqrt{LC}}\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}\tau)v_{in}(\tau)\dd{\tau}\]
+\[\ba
+i&=-\sqrt{LC}\cos\qty(\frac{1}{\sqrt{LC}}t)\sin\qty(\frac{1}{\sqrt{LC}}t)v_{in}+\cos\qty(\frac{1}{\sqrt{LC}}t)\int_0^t\cos\qty(\frac{1}{\sqrt{LC}}\tau)v_{in}(\tau)\dd{\tau}+\sqrt{LC}\sin\qty(\frac{1}{\sqrt{LC}}t)\cos\qty(\frac{1}{\sqrt{LC}}t)v_{in}+\sin\qty(\frac{1}{\sqrt{LC}}t)\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}\tau)v_{in}(\tau)\dd{\tau}\\
+&=\cos\qty(\frac{1}{\sqrt{LC}}t)\int_0^t\cos\qty(\frac{1}{\sqrt{LC}}\tau)v_{in}(\tau)\dd{\tau}+\sin\qty(\frac{1}{\sqrt{LC}}t)\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}\tau)v_{in}(\tau)\dd{\tau}\\
+&=\int_0^t\qty(\cos\qty(\frac{1}{\sqrt{LC}}t)\cos\qty(\frac{1}{\sqrt{LC}}\tau)+\sin\qty(\frac{1}{\sqrt{LC}}t)\sin\qty(\frac{1}{\sqrt{LC}}\tau))v_{in}(\tau)\dd{\tau}\\
+&=\int_0^t\cos\qty(\frac{1}{\sqrt{LC}}(t-\tau))v_{in}(\tau)\dd{\tau}\\
+&=\int_0^t\cos\qty(\omega_0(t-\tau)v_{in}(\tau)\dd{\tau}
+\ea\]
+\[\ba
+v_L&=v_{in}-v_C=L\dv{i}{t}\\
+&=L\qty(\cos(0)v_{in}+\int_0^t\pdv{}{t}\qty(\cos\qty(\frac{1}{\sqrt{LC}}(t-\tau))v_{in}(\tau))\dd{\tau})\\
+&=Lv_{in}+\sqrt{\frac{L}{C}}\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}(t-\tau))v_{in}(\tau)\dd{\tau}\\
+&=Lv_{in}+\sqrt{\frac{L}{C}}\int_0^t\sin\qty(\omega_0(t-\tau))v_{in}(\tau)\dd{\tau}
+\ea\]
+\[I=\frac{V_{in}}{Ls+\frac{1}{Cs}}=\frac{CsV_{in}}{LCs^2+1}\]
+\[V_L=\frac{LCs^2V_{in}}{LCs^2+1}\]
+\[V_C=\frac{V_{in}}{LCs^2+1}\]
+Check consistency:
+\[\mathcal{L}\{i\}=\frac{s}{s^2+\frac{1}{LC}}V_{in}=\frac{LCsV_{in}}{LCs^2+1}\]
+INCONSISTENT
 
 
 
 
 
 
+
+
+常電壓串聯 RLC 電路：常電壓$V$直流電源、電阻$R$、電感$L$、電容$C$串聯。
+
+常電壓串聯 LC 電路：常電壓$V$直流電源、電感$L$、電容$C$串聯，即令$R=0$。
+\[RI(t)+L\dv{I(t)}{t}+\frac{1}{C}\int _{-\infty}^tI(\tau)\,\mathrm{d}\tau=V\]
+\[\dv[2]{I(t)}{t}+\frac{R}{L}\dv{I(t)}{t}+\frac{1}{LC}I(t)=0\]
+定義奈培頻率（neper frequency）/衰減量（attenuation）$\alpha=\frac{R}{2L}$與角共振頻率（angular resonance frequency）$\omega_0=\frac{1}{\sqrt{LC}}$。
+\[\dv[2]{I(t)}{t}+2\alpha\dv{I(t)}{t}+\omega_0^{\phantom{0}2}I(t)=0\]
+定義阻尼係數（damping factor）$\zeta$：
+\[\zeta=\frac{\alpha}{\omega_0}=\frac{R}{2}\sqrt{\frac{C}{L}}\]
+特徵根：
+\[s_1=-\omega_0\zeta+\omega_0\sqrt{\zeta^2-1}\]
+\[s_2=-\omega_0\zeta-\omega_0\sqrt{\zeta^2-1}\]
+過阻尼響應（Overdamped response）（$\zeta>1$）的$I(t)$通解為：
+\[I(t)=A_1e^{-\omega_0\left(\zeta+\sqrt{\zeta^2-1}\right)t}+A_2e^{-\omega_0\left(\zeta-\sqrt{\zeta^2-1}\right)t}\]
+臨界阻尼響應（Critically damped response）（$\zeta=1$）的$I(t)$通解為：
+\[I(t)=A_1e^{-\omega_0\zeta t}+A_2e^{-\omega_0\zeta t}\]
+欠阻尼響應（Underdamped response）（$0<\zeta<1$）的$I(t)$通解為：
+\[I(t)=A_1e^{-\omega_0\zeta t}\cos\left(\omega_0\sqrt{1-\zeta^2}t\right)+A_2e^{-\omega_0\zeta t}\sin\left(\omega_0\sqrt{1-\zeta^2}t\right)\]
+無阻尼響應（Undamped response）（$\zeta=0$即$R=0$）的$I(t)$通解為：
+\[I(t)=A_1\cos\left(\omega_0t\right)+A_2\sin\left(\omega_0t\right)\]
+\subsubsection{常電流並聯 RLC 與 LC 電路}
+常電流並聯 RLC 電路：常電流$I$直流電源、電阻$R$、電感$L$、電容$C$並聯。
+
+常電流並聯 LC 電路：常電流$I$直流電源、電感$L$、電容$C$並聯，即令 $\frac{1}{R}=0$。
+\[\frac{1}{R}V(t)+C\dv{V(t)}{t}+\frac{1}{L}\int _{-\infty}^tV(\tau)\,\mathrm{d}\tau=I\]
+\[\dv[2]{V(t)}{t}+\frac{1}{RC}\dv{V(t)}{t}+\frac{1}{LC}V(t)=0\]
+定義奈培頻率（neper frequency）/衰減量（attenuation）$\alpha=\frac{1}{2RC}$與角共振頻率（angular resonance frequency）$\omega_0=\frac{1}{\sqrt{LC}}$。
+\[\dv[2]{V(t)}{t}+2\alpha\dv{V(t)}{t}+\omega_0^{\phantom{0}2}V(t)=0\]
+定義阻尼係數（damping factor）$\zeta$：
+\[\zeta=\frac{\alpha}{\omega_0}=\frac{1}{2R}\sqrt{\frac{L}{C}}\]
+特徵根：
+\[s_1=-\omega_0\zeta+\omega_0\sqrt{\zeta^2-1}\]
+\[s_2=-\omega_0\zeta-\omega_0\sqrt{\zeta^2-1}\]
+過阻尼響應（Overdamped response）（$\zeta>1$）的$V(t)$通解為：
+\[V(t)=A_1e^{-\omega_0\left(\zeta+\sqrt{\zeta^2-1}\right)t}+A_2e^{-\omega_0\left(\zeta-\sqrt{\zeta^2-1}\right)t}\]
+臨界阻尼響應（Critically damped response）（$\zeta=1$）的$V(t)$通解為：
+\[V(t)=A_1e^{-\omega_0\zeta t}+A_2e^{-\omega_0\zeta t}\]
+欠阻尼響應（Underdamped response）（$0<\zeta<1$）的$V(t)$通解為：
+\[V(t)=A_1e^{-\omega_0\zeta t}\cos\left(\omega_0\sqrt{1-\zeta^2}t\right)+A_2e^{-\omega_0\zeta t}\sin\left(\omega_0\sqrt{1-\zeta^2}t\right)\]
+無阻尼響應（Undamped response）（$\zeta=0$即$\frac{1}{R}=0$）的$V(t)$通解為：
+\[V(t)=A_1\cos\left(\omega_0t\right)+A_2\sin\left(\omega_0t\right)\]
 
 
 
@@ -637,59 +810,4 @@ When $R_1=R_2=R_3=R_4$:
 \draw (5,0) node[transformer core]{Transformer Core} (8,0);
 \end{circuitikz}
 \end{center}
-
-
-
-
-
-
-
-
-\ssc{RC 與 RL 濾波電路（filter circuits）}
-PLACEHOLDER
-\subsection{RLC 與 LC 諧振電路（Resonant circuits）}
-\subsubsection{常電壓串聯 RLC 與 LC 電路}
-常電壓串聯 RLC 電路：常電壓$V$直流電源、電阻$R$、電感$L$、電容$C$串聯。
-
-常電壓串聯 LC 電路：常電壓$V$直流電源、電感$L$、電容$C$串聯，即令$R=0$。
-\[RI(t)+L\dv{I(t)}{t}+\frac{1}{C}\int _{-\infty}^tI(\tau)\,\mathrm{d}\tau=V\]
-\[\dv[2]{I(t)}{t}+\frac{R}{L}\dv{I(t)}{t}+\frac{1}{LC}I(t)=0\]
-定義奈培頻率（neper frequency）/衰減量（attenuation）$\alpha=\frac{R}{2L}$與角共振頻率（angular resonance frequency）$\omega_0=\frac{1}{\sqrt{LC}}$。
-\[\dv[2]{I(t)}{t}+2\alpha\dv{I(t)}{t}+\omega_0^{\phantom{0}2}I(t)=0\]
-定義阻尼係數（damping factor）$\zeta$：
-\[\zeta=\frac{\alpha}{\omega_0}=\frac{R}{2}\sqrt{\frac{C}{L}}\]
-特徵根：
-\[s_1=-\omega_0\zeta+\omega_0\sqrt{\zeta^2-1}\]
-\[s_2=-\omega_0\zeta-\omega_0\sqrt{\zeta^2-1}\]
-過阻尼響應（Overdamped response）（$\zeta>1$）的$I(t)$通解為：
-\[I(t)=A_1e^{-\omega_0\left(\zeta+\sqrt{\zeta^2-1}\right)t}+A_2e^{-\omega_0\left(\zeta-\sqrt{\zeta^2-1}\right)t}\]
-臨界阻尼響應（Critically damped response）（$\zeta=1$）的$I(t)$通解為：
-\[I(t)=A_1e^{-\omega_0\zeta t}+A_2e^{-\omega_0\zeta t}\]
-欠阻尼響應（Underdamped response）（$0<\zeta<1$）的$I(t)$通解為：
-\[I(t)=A_1e^{-\omega_0\zeta t}\cos\left(\omega_0\sqrt{1-\zeta^2}t\right)+A_2e^{-\omega_0\zeta t}\sin\left(\omega_0\sqrt{1-\zeta^2}t\right)\]
-無阻尼響應（Undamped response）（$\zeta=0$即$R=0$）的$I(t)$通解為：
-\[I(t)=A_1\cos\left(\omega_0t\right)+A_2\sin\left(\omega_0t\right)\]
-\subsubsection{常電流並聯 RLC 與 LC 電路}
-常電流並聯 RLC 電路：常電流$I$直流電源、電阻$R$、電感$L$、電容$C$並聯。
-
-常電流並聯 LC 電路：常電流$I$直流電源、電感$L$、電容$C$並聯，即令 $\frac{1}{R}=0$。
-\[\frac{1}{R}V(t)+C\dv{V(t)}{t}+\frac{1}{L}\int _{-\infty}^tV(\tau)\,\mathrm{d}\tau=I\]
-\[\dv[2]{V(t)}{t}+\frac{1}{RC}\dv{V(t)}{t}+\frac{1}{LC}V(t)=0\]
-定義奈培頻率（neper frequency）/衰減量（attenuation）$\alpha=\frac{1}{2RC}$與角共振頻率（angular resonance frequency）$\omega_0=\frac{1}{\sqrt{LC}}$。
-\[\dv[2]{V(t)}{t}+2\alpha\dv{V(t)}{t}+\omega_0^{\phantom{0}2}V(t)=0\]
-定義阻尼係數（damping factor）$\zeta$：
-\[\zeta=\frac{\alpha}{\omega_0}=\frac{1}{2R}\sqrt{\frac{L}{C}}\]
-特徵根：
-\[s_1=-\omega_0\zeta+\omega_0\sqrt{\zeta^2-1}\]
-\[s_2=-\omega_0\zeta-\omega_0\sqrt{\zeta^2-1}\]
-過阻尼響應（Overdamped response）（$\zeta>1$）的$V(t)$通解為：
-\[V(t)=A_1e^{-\omega_0\left(\zeta+\sqrt{\zeta^2-1}\right)t}+A_2e^{-\omega_0\left(\zeta-\sqrt{\zeta^2-1}\right)t}\]
-臨界阻尼響應（Critically damped response）（$\zeta=1$）的$V(t)$通解為：
-\[V(t)=A_1e^{-\omega_0\zeta t}+A_2e^{-\omega_0\zeta t}\]
-欠阻尼響應（Underdamped response）（$0<\zeta<1$）的$V(t)$通解為：
-\[V(t)=A_1e^{-\omega_0\zeta t}\cos\left(\omega_0\sqrt{1-\zeta^2}t\right)+A_2e^{-\omega_0\zeta t}\sin\left(\omega_0\sqrt{1-\zeta^2}t\right)\]
-無阻尼響應（Undamped response）（$\zeta=0$即$\frac{1}{R}=0$）的$V(t)$通解為：
-\[V(t)=A_1\cos\left(\omega_0t\right)+A_2\sin\left(\omega_0t\right)\]
-
-
-
+\end{document}
