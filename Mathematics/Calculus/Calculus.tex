@@ -197,6 +197,10 @@ For a real series
 where \(a_i\) are terms of a real sequence \(\langle a_n\rangle_{n=l}^{\infty}\). The limit of \(S_n\) is denoted as \(\lim_{n\to\infty}S_n\) or \(\sum_{i=1}^{\infty}a_i\) and defined as the limit of the sequence \(\left\langle S_n\right\rangle_{n=l}^{\infty}\). If the limit exists and equal to $L$, we say the series converges to $L$; otherwise, we say the series diverges.
 \subsubsection{Absolute convergence and conditional convergence}
 We say a real series $S_n=\sum_{i=1}^{\infty}a_i$ converges absolutely to $L$ iff the series $\sum_{i=1}^{\infty}\abs{a_i}$ converges to $L$. If a real series is convergent but not convergent absolutely, we say it is convergent conditionally.
+\sssc{Cesàro sum or Cesàro mean}
+The Cesàro sum or Cesàro mean of a sequence $\langle a_i\rangle_{i=l}^{\infty}$ is defined as
+\[\lim_{n\to\infty}\frac{1}{n}\sum_{i=l}^na_i.\]
+If the Cesàro sum is finite, the sequence is called Cesàro-summable.
 \subsection{Of Real Net}
 Below, we will discuss limits of nets in the set of real number.
 \subsubsection{Limit}
@@ -981,13 +985,14 @@ PLACEHOLDER
 \sssc{Space of BV functions}
 PLACEHOLDER (is a Banach space)
 \ssc{Dirac delta function or unit impulse}
-\sssc{As fake function with informally assigned integral properties}
+\sssc{As fake function with informally assigned properties}
 The Dirac delta function $\delta(x)$ defined on $\bbR$ is a fake function denoted as
 \[\delta(x)
 \begin{cases}
 \infty, & x = 0, \\
 0, & x \neq 0.
 \end{cases}\]
+\[0\delta(x)=0.\]
 For all $0\in\Omega\subseteq D_f\subseteq\bbR$, for all indexed family $A\colon I\to\mathcal{A}\subseteq D_f;\;i\mapsto A_i$ with $I=J\cap\bbN$ for some interval $J$,
 \[\int f(x)\sum_{i\in I}\delta(A_i)\dd{x}\coloneq\sum_{i\in I}u(f(A_i)),\]
 \[\int_{\Omega}f(x)\sum_{i\in I}\delta(A_i)\dd{x}\coloneq\sum_{i\in I}f(A_i).\]
@@ -1010,6 +1015,22 @@ where $u$ is the unit step function, we define
 where $\int_{\Omega}f(x)\dd{u_A(x)}$ is a proper or improper Riemann–Stieltjes integral.
 \sssc{As a distribution}
 PLACEHOLDER
+\ssc{Arithmetic mean}
+\sssc{Real-domain function}
+The arithmetic mean of a real-domain function $f$ over an interval $(a,b)\subseteq D_f$ with $a,b\in\bbR$ is defined as
+\[\bar{f}=\frac{1}{b-a}\int_a^bf(x)\dd{x}.\]
+\sssc{Cesàro sum or Cesàro mean}
+The Cesàro sum or Cesàro mean of a real-domain function $f$ over $[a,\infty)\subseteq D_f$ for $a\in\bbR$ with $\int_a^bf(x)\dd{x}$ being a proper integral for all $b\in(a,\infty)$ is defined as
+\[\lim_{n\to\infty}\frac{1}{n}\int_a^nf(x)\dd{x}.\]
+If the Cesàro sum is finite, the function is called Cesàro-summable over $[a,\infty)$.
+
+The Cesàro sum or Cesàro mean of a real-domain function $f$ over $(-\infty,b]\subseteq D_f$ for $b\in\bbR$ with $\int_a^bf(x)\dd{x}$ being a proper integral for all $a\in(-\infty,b)$ is defined as
+\[\lim_{n\to\infty}\frac{1}{n}\int_{-n}^bf(x)\dd{x}.\]
+If the Cesàro sum is finite, the function is called Cesàro-summable over $(-\infty,b]$.
+\sssc{Measurable function}
+The arithmetic mean of a measurable function $f$ over a measurable set $\Omega\subseteq D_f$ with $\mu(\Omega)\in\bbR$ is defined as
+\[\bar{f}=\frac{1}{\mu(\Omega)}\int_{\Omega}f\dd{\mu}.\]
+
 
 
 \section{Multivariable (多變數 or 多變量 or 多元) Calculus}
@@ -1767,7 +1788,18 @@ For any $N\leq p\leq q<b$, using integration by parts of Riemann–Stieltjes int
 &\leq\varepsilon
 \ea\]
 \end{proof}
-
+\ssc{Cesàro-summability theorem}
+\sssc{For real sequence}
+If a real sequence converges to $L\in\bbR$, then the sequence is Cesàro-summable and its Cesàro sum is $L$.
+\begin{proof}
+PLACEHOLDER
+\end{proof}
+\sssc{For real function}
+If a real function $f$ and $a\in\bbR$ is such that $\lim_{x\to\infty}f(x)=L\in\bbR$ and $\int_a^bf(x)\dd{x}$ is a proper integral for all $b\in[a,\infty)$, then the function is Cesàro-summable over $[a,\infty)$ and its Cesàro sum over $[a,\infty)$ is $L$.
+\begin{proof}
+PLACEHOLDER
+\end{proof}
+If a real function $f$ and $b\in\bbR$ is such that $\lim_{x\to-\infty}f(x)=L\in\bbR$ and $\int_a^bf(x)\dd{x}$ is a proper integral for all $a\in(-\infty,b)$, then the function is Cesàro-summable over $(-\infty,b]$ and its Cesàro sum over $(-\infty,b]$ is $L$.
 
 
 \section{Differential theorems and methods}
@@ -2853,16 +2885,6 @@ Green's theorem is a special case of Stokes' theorem.
 \sssc{Generalized Stokes theorem, Stokes–Cartan theorem, or fundamental theorem of multivariable calculus}
 The generalized Stokes theorem says that the integral of a differential form $\omega$ over the boundary $\partial\Omega$ of some orientable manifold $\Omega$ is equal to the integral of its exterior derivative $\mathrm{d}\boldsymbol{\omega}$ over the whole of $\Omega$, i.e.,
 \[\int _{\partial\Omega}\omega=\int_{\Omega}\mathrm{d}\boldsymbol{\omega}\]
-\ssc{Average value}
-\sssc{Plane region}
-The area $A$ and average $(\bar{x},\bar{y})$ of the plane region bounded by $y=f(x)$,$y=g(x)$, $x=a$, and $x=b$ with $a<b$ is given by
-\[A=\int_a^b\abs{f(x)-g(x)}\dd{x},\]
-\[\bar{x}=\frac{1}{A}\int_a^bx\abs{f(x)-g(x)}\dd{x},\]
-\[\bar{y}=\frac{1}{2A}\int_a^b\abs{f(x)-g(x)}(f(x)+g(x))\dd{x}.\]
-If $f(x)\geq g(x)$,
-\[A=\int_a^bf(x)-g(x)\dd{x},\]
-\[\bar{x}=\frac{1}{A}\int_a^bxf(x)-g(x)\dd{x},\]
-\[\bar{y}=\frac{1}{2A}\int_a^b(f(x))^2-(g(x))^2\dd{x}.\]
 \ssc{Arc Length}
 \sssc{Definition}
 Given a curve $\gamma(t)=(x_1(t),x_2(t),\quad,x_n(t)),\quad t\in[a,b]$. Let $P(t,k)$ be a partition of interval $[a,b]$. Define the polygonal length of $\gamma$ along $P(t,k)$ as

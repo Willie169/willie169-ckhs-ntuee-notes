@@ -39,7 +39,7 @@ Electrical elements or simply elements are conceptual abstractions representing 
 \sssc{Direct current (DC)}
 A direct current is a current that is one-directional and with constant voltage and current over time.
 \sssc{Alternating current (AC)}
-An alternating current is a current whose voltage and current change over time and are zero in average over an infinite time interval.
+An alternating current is a current whose voltage and current change over time and are of zero Cesàro mean over $[0,\infty)$.
 \sssc{Steady-state sinusoidal alternating current and phasor domain}
 A steady-state sinusoidal alternating current is a current whose voltage $v(t)$ and current $i(t)$ are of the form:
 \[v(t)=v_m\cos(\omeg t+\varphi),\]
@@ -87,7 +87,7 @@ Phasor domain (steady-state sinusoidal AC with angular frequency $\omega$):
 \[I=Cj\omega V.\]
 Laplace domain:
 \[I(s)=CsV(s)-Cv(0^-).\]
-When analyzing natural response, a capacitor with capacitance $C$ can be treated as a capacitance $C$ without initial energy in series connection with an independent voltage source enforcing voltage $-v(0^-)\delta(t)$ or a capacitance $C$ without initial energy in parallel connection with an independent current source enforcing current $-Cv(0^-)\delta(t)$. When analyzing forced response, a capacitor with capacitance $C$ can be treated as a capacitance $C$ without initial energy.
+A capacitor with capacitance $C$ is equivalent to a capacitance $C$ without initial energy in series connection with an independent voltage source enforcing voltage $-v(0^-)u(t)$ or a capacitance $C$ without initial energy in parallel connection with an independent current source enforcing current $-Cv(0^-)\delta(t)$.
 
 A capacitor voltage must not be allowed to jump instantaneously from one value to another.
 
@@ -112,7 +112,7 @@ Phasor domain (steady-state sinusoidal AC with angular frequency $\omega$):
 \[V=Lj\omega I.\]
 Laplace domain:
 \[V(s)=LsI(s)-Li(0^-).\]
-When analyzing natural response, an inductor with inductance $L$ can be treated as a inductance $L$ without initial energy in parallel connection with an independent current source enforcing current $-i(0^-)\delta(t)$ or a inductance $L$ without initial energy in series connection with an independent voltage source enforcing voltage $-Li(0^-)\delta(t)$. When analyzing forced response, an inductor with inductance $L$ can be treated as a inductance $L$ without initial energy.
+An inductor with inductance $L$ is equivalent to a inductance $L$ without initial energy in parallel connection with an independent current source enforcing current $-i(0^-)u(t)$ or a inductance $L$ without initial energy in series connection with an independent voltage source enforcing voltage $-Li(0^-)\delta(t)$.
 
 An inductor current must not be allowed to jump instantaneously from one value to another.
 
@@ -152,7 +152,7 @@ The conductance $G$ of a circuit element is defined as the real part of its admi
 \sssc{Susceptance (phasor domain)}
 The susceptance $B$ of a circuit element is defined as the imaginary part of its admittance.
 \sssc{Active element}
-An active element is an element capable of furnishing an average power greater than zero to some external network over an infinite time interval.
+An active element is an element capable of furnishing a power with Cesàro mean over $[0,\infty)$ greater than zero to some external network.
 \sssc{Passive element}
 A passive element is an element that is not an active element.
 \sssc{Lumped-element model, lumped-parameter model, or lumped-component model}
@@ -402,14 +402,17 @@ Natural response:
 \[r=-\frac{R}{L}\]
 \[i=Ae^{-\frac{R}{L}t}\]
 \[i=i(0^-)e^{-\frac{R}{L}t}\]
+\[v_R=-v_L=Ri(0^-)e^{-\frac{R}{L}t}\]
 \[p_R=-p_L=R(i(0^-))^2e^{-\frac{2R}{L}t}\]
 \[\ba
 \int_0^{\infty}p_R\dd{t}&=R(i(0^-))^2\evlv(-\frac{L}{2R}e^{-\frac{2R}{L}t})_0^{\infty}\\
 &=\frac{1}{2}L(i(0^-))^2
 \ea\]
 \[I=\frac{Li(0^-)}{R+Ls}\]
+\[V_R=-V_L=\frac{RLi(0^-)}{R+Ls}\]
 Check consistency:
 \[\mathcal{L}\{i\}=\frac{i(0^-)}{s+\frac{R}{L}}=\frac{Li(0^-)}{R+Ls}\]
+\[\mathcal{L}\{v_R\}=Ri(0^-)\frac{1}{s+\frac{R}{L}}=\frac{RLi(0^-)}{R+Ls}\]
 \end{proof}
 Forced response:
 \[Ri+L\dv{i}{t}=v_{in}\]
@@ -476,8 +479,8 @@ Natural response:
 \[\tau_{v_C}=\tau_{v_R}=\tau_i=\frac{1}{RC}\]
 \[p_R=-p_C=\frac{1}{R}(v_C(0^-))^2e^{-\frac{2}{RC}t}\]
 \[\int_0^{\infty}p_R\dd{t}=-\int_0^{\infty}p_C\dd{t}=\frac{1}{2}C(v_C(0^-))^2\]
-\[V_C=-V_R=\frac{RCV_C(0^-)}{1+RCs}\]
-\[I=-\frac{CV_C(0^-)}{1+RCs}\]
+\[V_C=-V_R=\frac{RCv_C(0^-)}{1+RCs}\]
+\[I=-\frac{Cv_C(0^-)}{1+RCs}\]
 \begin{proof}
 \[v_R+v_C=0\]
 \[\frac{v_R}{R}-C\dv{v_C}{t}=0\]
@@ -486,14 +489,17 @@ Natural response:
 \[r=-\frac{1}{RC}\]
 \[v_C=Ae^{-\frac{1}{RC}t}\]
 \[v_C=v_C(0^-)e^{-\frac{1}{RC}t}\]
+\[i=-\frac{1}{R}v_C(0^-)e^{-\frac{1}{RC}t}\]
 \[p_R=-p_C=\frac{1}{R}(v_C(0^-))^2e^{-\frac{2}{RC}t}\]
 \[\ba
 \int_0^{\infty}p_R\dd{t}&=\frac{1}{R}(v_C(0^-))^2\evlv{-\frac{RC}{2}e^{-\frac{2}{RC}t}}_0^{\infty}\\
 &=\frac{1}{2}C(v_C(0^-))^2
 \ea\]
-\[V_C=\frac{1}{\frac{1}{R}+Cs}CV_C(0^-)=\frac{RCV_C(0^-)}{1+RCs}\]
+\[I=-\frac{v_C(0^-)}{s\qty(\frac{1}{Cs}+R)}=-\frac{Cv_C(0^-)}{1+RCs}\]
+\[V_C=\frac{I+Cv_C(0^-)}{Cs}=\frac{RCv_C(0^-)}{1+RCs}\]
 Check consistency:
 \[\mathcal{L}\{v_C\}=\frac{v_C(0^-)}{s+\frac{1}{RC}}=\frac{RCv_C(0^-)}{1+RCs}\]
+\[\mathcal{L}\{i\}=-\frac{1}{R}v_C(0^-)\frac{1}{s+\frac{1}{RC}}=-\frac{Cv_C(0^-)}{1+RCs}\]
 \end{proof}
 Forced response:
 \[\frac{v_C-v_{in}}{R}+C\dv{v_C}{t}=0\]
@@ -522,9 +528,9 @@ Check consistency:
 Total response:
 \[v_C=v_{in}-v_R=\qty(v_C(0^-)+\frac{1}{RC}\int_0^te^{\frac{1}{RC}\tau}v_{in}(\tau)\dd{\tau})e^{-\frac{1}{RC}t}\]
 \[i=\frac{1}{R}\qty(v_{in}-\qty(v_C(0^-)+\frac{1}{RC}\int_0^te^{\frac{1}{RC}\tau}v_{in}(\tau)\dd{\tau})e^{-\frac{1}{RC}t})\]
-\[V_C=\frac{RCV_C(0^-)+V_{in}}{1+RCs}\]
-\[V_R=\frac{-RCV_C(0^-)+RCsV_{in}}{1+RCs}\]
-\[I=-\frac{CV_C(0^-)+CsV_{in}}{1+RCs}\]
+\[V_C=\frac{RCv_C(0^-)+V_{in}}{1+RCs}\]
+\[V_R=\frac{-RCv_C(0^-)+RCsV_{in}}{1+RCs}\]
+\[I=-\frac{Cv_C(0^-)+CsV_{in}}{1+RCs}\]
 Impulse response and transfer function:
 \[h_{v_C}=\frac{1}{RC}u(t)e^{-\frac{1}{RC}t}\]
 \[h_{v_R}=\delta(t)-\frac{1}{RC}u(t)e^{-\frac{1}{RC}t}\]
@@ -560,21 +566,29 @@ Natural response: Total energy stored in inductor and capacitor $E$.
 \[\omega_0=\frac{1}{\sqrt{LC}}\]
 \[\ba
 i&=i(0^-)\cos\qty(\frac{1}{\sqrt{LC}}t)-v_C(0^-)\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t)\\
-&=i(0^-)\cos\qty(\omega_0t)-v_C(0^-)\frac{1}{L\omega_0}\sin\qty(\omega_0t)
+&=i(0^-)\cos\qty(\omega_0t)-v_C(0^-)C\omega_0\sin\qty(\omega_0t)
 \ea\]
 \[\ba
 v_C&=-v_L\\
-&=i(0^-)\frac{1}{\sqrt{LC}}\sin\qty(\frac{1}{\sqrt{LC}}t)+v_C(0^-)\frac{1}{L}\cos\qty(\frac{1}{\sqrt{LC}}t)\\
-&=i(0^-)\omega_0\sin\qty(\omega_0t)+v_C(0^-)\frac{1}{L}\cos\qty(\omega_0t)
+&=i(0^-)\sqrt{\frac{L}{C}}\sin\qty(\frac{1}{\sqrt{LC}}t)+v_C(0^-)\cos\qty(\frac{1}{\sqrt{LC}}t)\\
+&=i(0^-)L\omega_0\sin\qty(\omega_0t)+v_C(0^-)\cos\qty(\omega_0t)
 \ea\]
 \[\ba
 p_C&=-p_L\\
-&=\frac{1}{2}\qty((i(0^-))^2+(v_C(0^-))^2\frac{C}{L})\frac{1}{\sqrt{LC}}\sin\qty(\frac{2}{\sqrt{LC}}t)-i(0^-)v_C(0^-)\frac{1}{L}\cos\qty(\frac{2}{\sqrt{LC}}t))\\
-&=\frac{1}{2}\qty((i(0^-))^2+(v_C(0^-))^2\frac{C}{L})\omega_0\sin\qty(2\omega_0t)-i(0^-)v_C(0^-)\frac{1}{L}\cos\qty(2\omega_0t))
+&=\frac{1}{2}\qty((i(0^-))^2\sqrt{\frac{L}{C}}-(v_C(0^-))^2\sqrt{\frac{C}{L}})\sin\qty(\frac{2}{\sqrt{LC}}t)+i(0^-)v_C(0^-)\cos\qty(\frac{2}{\sqrt{LC}}t)\\
+&=\frac{1}{2}\qty((i(0^-))^2L\omega_0-(v_C(0^-))^2C\omega_0)\sin\qty(2\omega_0t)+i(0^-)v_C(0^-)\cos\qty(2\omega_0t)
 \ea\]
+\[\lim_{n\to\infty}\frac{1}{n}\int_0^np_C\dd{t}=-\lim_{n\to\infty}\frac{1}{n}\int_0^np_L\dd{t}=0\]
 \[E=\frac{1}{2}\qty(C(v_C(0^-))^2+L(I(0^-))^2)\]
-\[I=\frac{-Csv_C(0^-)+LCsi(0^-)}{LCs^2+1}\]
-\[V_C=-V_L=\frac{LCs^2v_C(0^-)+i(0^-)}{LCs^2+1}\]
+\[\ba
+I&=\frac{LCsi(0^-)-Cv_C(0^-)}{LCs^2+1}\\
+&=\frac{si(0^-)-C\omega_0^{\pht{0}2}v_C(0^-)}{s^2+\omega_0^{\pht{0}2}}
+\ea\]
+\[\ba
+V_C&=-V_L\\
+&=\frac{LCsv_C(0^-)+Li(0^-)}{LCs^2+1}\\
+&=\frac{sv_C(0^-)+L\omega_0^{\pht{0}2}i(0^-)}{s^2+\omega_0^{\pht{0}2}}
+\ea\]
 \begin{proof}
 \[L\dv{i}{t}+\frac{1}{C}\int_0^ti\dd{\tau}+v_C(0^-)=0\]
 \[L\dv[2]{i}{t}+\frac{1}{C}i=0\]
@@ -587,76 +601,163 @@ p_C&=-p_L\\
 \[B=-v_C(0^-)\sqrt{\frac{C}{L}}=-v_C(0^-)\frac{1}{L\omega_0}\]
 \[\ba
 i&=i(0^-)\cos\qty(\frac{1}{\sqrt{LC}}t)-v_C(0^-)\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t)\\
-&=i(0^-)\cos\qty(\omega_0t)-v_C(0^-)\frac{1}{L\omega_0}\sin\qty(\omega_0t)
+&=i(0^-)\cos\qty(\omega_0t)-v_C(0^-)C\omega_0\sin\qty(\omega_0t)
 \ea\]
 \[\ba
 v_C&=-v_L=-L\dv{i}{t}\\
-&=i(0^-)\frac{1}{\sqrt{LC}}\sin\qty(\frac{1}{\sqrt{LC}}t)+v_C(0^-)\frac{1}{L}\cos\qty(\frac{1}{\sqrt{LC}}t)\\
-&=i(0^-)\omega_0\sin\qty(\omega_0t)+v_C(0^-)\frac{1}{L}\cos\qty(\omega_0t)
+&=i(0^-)\sqrt{\frac{L}{C}}\sin\qty(\frac{1}{\sqrt{LC}}t)+v_C(0^-)\cos\qty(\frac{1}{\sqrt{LC}}t)\\
+&=i(0^-)L\omega_0\sin\qty(\omega_0t)+v_C(0^-)\cos\qty(\omega_0t)
 \ea\]
 \[\ba
 p_C&=-p_L\\
-&=\qty(i(0^-)\cos\qty(\frac{1}{\sqrt{LC}}t)-v_C(0^-)\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t))\qty(i(0^-)\frac{1}{\sqrt{LC}}\sin\qty(\frac{1}{\sqrt{LC}}t)+v_C(0^-)\frac{1}{L}\cos\qty(\frac{1}{\sqrt{LC}}t))\\
-&=\frac{1}{2}\qty((i(0^-))^2+(v_C(0^-))^2\frac{C}{L})\frac{1}{\sqrt{LC}}\sin\qty(\frac{2}{\sqrt{LC}}t)-i(0^-)v_C(0^-)\frac{1}{L}\cos\qty(\frac{2}{\sqrt{LC}}t))\\
-&=\frac{1}{2}\qty((i(0^-))^2+(v_C(0^-))^2\frac{C}{L})\omega_0\sin\qty(2\omega_0t)-i(0^-)v_C(0^-)\frac{1}{L}\cos\qty(2\omega_0t))
+&=\qty(i(0^-)\cos\qty(\frac{1}{\sqrt{LC}}t)-v_C(0^-)\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t))\qty(i(0^-)\sqrt{\frac{L}{C}}\sin\qty(\frac{1}{\sqrt{LC}}t)+v_C(0^-)\cos\qty(\frac{1}{\sqrt{LC}}t))\\
+&=(i(0^-))^2\sqrt{\frac{L}{C}}\cos\qty(\frac{1}{\sqrt{LC}}t)\sin\qty(\frac{1}{\sqrt{LC}}t)+i(0^-)v_C(0^-)\cos^2\qty(\frac{1}{\sqrt{LC}}t)-i(0^-)v_C(0^-)\sin^2\qty(\frac{1}{\sqrt{LC}}t)-(v_C(0^-))^2\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t)\cos\qty(\frac{1}{\sqrt{LC}}t)\\
+&=\frac{1}{2}\qty((i(0^-))^2\sqrt{\frac{L}{C}}-(v_C(0^-))^2\sqrt{\frac{C}{L}})\sin\qty(\frac{2}{\sqrt{LC}}t)+i(0^-)v_C(0^-)\cos\qty(\frac{2}{\sqrt{LC}}t)\\
+&=\frac{1}{2}\qty((i(0^-))^2L\omega_0-(v_C(0^-))^2C\omega_0)\sin\qty(2\omega_0t)+i(0^-)v_C(0^-)\cos\qty(2\omega_0t)
 \ea\]
 \[\ba
-I&=\frac{-v_C(0^-)+Li(0^-)}{Ls+\frac{1}{Cs}}\\
-&=\frac{-Csv_C(0^-)+LCsi(0^-)}{LCs^2+1}
+I&=\qty(Li(0^-)-\frac{v_C(0^-)}{s})\frac{1}{Ls+\frac{1}{Cs}}\\
+&=\frac{LCsi(0^-)-Cv_C(0^-)}{LCs^2+1}\\
+&=\frac{\omega_0^{\pht{0}-2}si(0^-)-Cv_C(0^-)}{\omega_0^{\pht{0}-2}s^2+1}\\
+&=\frac{si(0^-)-C\omega_0^{\pht{0}2}v_C(0^-)}{s^2+\omega_0^{\pht{0}2}}
 \ea\]
-\[V_C=-V_L=-(LsI-Li(0^-))=\frac{LCs^2v_C(0^-)+i(0^-)}{LCs^2+1}\]
+\[\ba
+V_C&=-V_L=-LsI+Li(0^-)\\
+&=\frac{-L^2Cs^2i(0^-)+LCsv_C(0^-)+L^2Cs^2i(0^-)+Li(0^-)}{LCs^2+1}\\
+&=\frac{LCsv_C(0^-)+Li(0^-)}{LCs^2+1}\\
+&=\frac{\omega_0^{\pht{0}-2}sv_C(0^-)+Li(0^-)}{\omega_0^{\pht{0}-2}s^2+1}\\
+&=\frac{sv_C(0^-)+L\omega_0^{\pht{0}2}i(0^-)}{s^2+\omega_0^{\pht{0}2}}
+\ea\]
 Check consistency:
-\[\mathcal{L}\{i\}=\frac{i(0^-)s-v_C(0^-)\sqrt{\frac{C}{L}}\frac{1}{\sqrt{LC}}}{s^2+\frac{1}{LC}}=\frac{LCsi(0^-)-Csv_C(0^-)}{LCs^2+1}\]
 \[\ba
-\mathcal{L}\{v_C\}&=i(0^-)\frac{1}{\sqrt{LC}}\frac{\frac{1}{\sqrt{LC}}}{s^2+\frac{1}{LC}}+v_C(0^-)\frac{1}{L}\frac{s}{s^2+\frac{1}{LC}}\\
-&=\frac{LCs^2v_C(0^-)+i(0^-)}{LCs^2+1}
+\mathcal{L}\{i\}&=i(0^-)\frac{s}{s^2+\frac{1}{LC}}-v_C(0^-)\sqrt{\frac{C}{L}}\frac{\frac{1}{\sqrt{LC}}}{s^2+\frac{1}{LC}}\\
+&=\frac{LCsi(0^-)-Cv_C(0^-)}{LCs^2+1}
+\ea\]
+\[\ba
+\mathcal{L}\{v_C\}&=i(0^-)\sqrt{\frac{L}{C}}\frac{\frac{1}{\sqrt{LC}}}{s^2+\frac{1}{LC}}+v_C(0^-)\frac{s}{s^2+\frac{1}{LC}}\\
+&=\frac{LCsv_C(0^-)+Li(0^-)}{LCs^2+1}
 \ea\]
 \end{proof}
 Forced response:
 \[L\dv{i}{t}+\frac{1}{C}\int_0^ti\dd{\tau}=v_{in}\]
 \[\ba
-i&=\int_0^t\cos\qty(\frac{1}{\sqrt{LC}}(t-\tau)v_{in}(\tau)\dd{\tau}\\
-&=\int_0^t\cos\qty(\omega_0(t-\tau)v_{in}(\tau)\dd{\tau}
+i&=\frac{1}{L}\int_0^t\cos\qty(\frac{1}{\sqrt{LC}}(t-\tau))v_{in}(\tau)\dd{\tau}\\
+&=\frac{1}{L}\int_0^t\cos\qty(\omega_0(t-\tau))v_{in}(\tau)\dd{\tau}
 \ea\]
 \[\ba
-v_L&=v_{in}-v_C\\
-&=Lv_{in}+\sqrt{\frac{L}{C}}\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}(t-\tau))v_{in}(\tau)\dd{\tau}\\
-&=Lv_{in}+\sqrt{\frac{L}{C}}\int_0^t\sin\qty(\omega_0(t-\tau))v_{in}(\tau)\dd{\tau}
+v_C&=v_{in}-v_L\\
+&=\frac{1}{\sqrt{LC}}\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}(t-\tau))v_{in}(\tau)\dd{\tau}\\
+&=\omega_0\int_0^t\sin\qty(\omega_0(t-\tau))v_{in}(\tau)\dd{\tau}
 \ea\]
-\[I=\frac{V_{in}}{Ls+\frac{1}{Cs}}=\frac{CsV_{in}}{LCs^2+1}\]
-\[V_L=\frac{LCs^2V_{in}}{LCs^2+1}\]
-\[V_C=\frac{V_{in}}{LCs^2+1}\]
-
-
+\[\ba
+I&=\frac{CsV_{in}}{LCs^2+1}\\
+&=\frac{\omega_0^{\pht{0}2}CsV_{in}}{s^2+\omega_0^{\pht{0}2}}
+\ea\]
+\[\ba
+V_C&=\frac{V_{in}}{LCs^2+1}\\
+&=\frac{\omega_0^{\pht{0}2}}V_{in}}{s^2+\omega_0^{\pht{0}2}}}
+\ea\]
+\[\ba
+V_L&=\frac{LCs^2V_{in}}{LCs^2+1}\\
+&=\frac{sV_{in}}{s^2+\omega_0^{\pht{0}2}}
+\ea\]
 \begin{proof}
 \[L\dv{i}{t}+\frac{1}{C}\int_0^ti\dd{\tau}=v_{in}\]
-\[L\dv[2]{i}{t}+\frac{1}{C}i=\dv{v_{in}}{t}\]
+\[\dv[2]{i}{t}+\frac{1}{LC}i=\frac{1}{L}\dv{v_{in}}{t}\]
 \[i_1=\cos\qty(\frac{1}{\sqrt{LC}}t)\]
 \[i_2=\sin\qty(\frac{1}{\sqrt{LC}}t)\]
 \[\frac{1}{i_1i_2'-i_2i_1'}=\sqrt{LC}\]
-\[i=-\sqrt{LC}\cos\qty(\frac{1}{\sqrt{LC}}t)\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}\tau)\dv{v_{in}}{\tau}\dd{\tau}+\sqrt{LC}\sin\qty(\frac{1}{\sqrt{LC}}t)\int\cos\qty(\frac{1}{\sqrt{LC}}\tau)\dv{v_{in}}{\tau}\dd{\tau}\]
-\[\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}\tau)\dv{v_{in}}{\tau}\dd{\tau}=\sin\qty(\frac{1}{\sqrt{LC}}t)v_{in}-\frac{1}{\sqrt{LC}}\int_0^t\cos\qty(\frac{1}{\sqrt{LC}}\tau)v_{in}(\tau)\dd{t}\]
-\[\int_0^t\cos\qty(\frac{1}{\sqrt{LC}}\tau)\dv{v_{in}{\tau}\dd{\tau}=\cos\qty(\frac{1}{\sqrt{LC}}t)v_{in}+\frac{1}{\sqrt{LC}}\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}\tau)v_{in}(\tau)\dd{\tau}\]
 \[\ba
-i&=-\sqrt{LC}\cos\qty(\frac{1}{\sqrt{LC}}t)\sin\qty(\frac{1}{\sqrt{LC}}t)v_{in}+\cos\qty(\frac{1}{\sqrt{LC}}t)\int_0^t\cos\qty(\frac{1}{\sqrt{LC}}\tau)v_{in}(\tau)\dd{\tau}+\sqrt{LC}\sin\qty(\frac{1}{\sqrt{LC}}t)\cos\qty(\frac{1}{\sqrt{LC}}t)v_{in}+\sin\qty(\frac{1}{\sqrt{LC}}t)\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}\tau)v_{in}(\tau)\dd{\tau}\\
-&=\cos\qty(\frac{1}{\sqrt{LC}}t)\int_0^t\cos\qty(\frac{1}{\sqrt{LC}}\tau)v_{in}(\tau)\dd{\tau}+\sin\qty(\frac{1}{\sqrt{LC}}t)\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}\tau)v_{in}(\tau)\dd{\tau}\\
-&=\int_0^t\qty(\cos\qty(\frac{1}{\sqrt{LC}}t)\cos\qty(\frac{1}{\sqrt{LC}}\tau)+\sin\qty(\frac{1}{\sqrt{LC}}t)\sin\qty(\frac{1}{\sqrt{LC}}\tau))v_{in}(\tau)\dd{\tau}\\
-&=\int_0^t\cos\qty(\frac{1}{\sqrt{LC}}(t-\tau))v_{in}(\tau)\dd{\tau}\\
-&=\int_0^t\cos\qty(\omega_0(t-\tau)v_{in}(\tau)\dd{\tau}
+i&=\sqrt{\frac{C}{L}}\qty(-\cos\qty(\frac{1}{\sqrt{LC}}t)\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}\tau)\dv{v_{in}}{\tau}\dd{\tau}+\sin\qty(\frac{1}{\sqrt{LC}}t)\int\cos\qty(\frac{1}{\sqrt{LC}}\tau)\dv{v_{in}}{\tau}\dd{\tau})\\
+&=\sqrt{\frac{C}{L}}\qty(-\cos\qty(\frac{1}{\sqrt{LC}}t)\qty(\sin\qty(\frac{1}{\sqrt{LC}}t)v_{in}-\frac{1}{\sqrt{LC}}\int_0^t\cos\qty(\frac{1}{\sqrt{LC}}\tau)v_{in}(\tau)\dd{t})+\sin\qty(\frac{1}{\sqrt{LC}}t)\qty(\cos\qty(\frac{1}{\sqrt{LC}}t)v_{in}+\frac{1}{\sqrt{LC}}\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}\tau)v_{in}(\tau)\dd{\tau}))\\
+&=-\sqrt{\frac{C}{L}}\cos\qty(\frac{1}{\sqrt{LC}}t)\sin\qty(\frac{1}{\sqrt{LC}}t)v_{in}+\frac{1}{L}\cos\qty(\frac{1}{\sqrt{LC}}t)\int_0^t\cos\qty(\frac{1}{\sqrt{LC}}\tau)v_{in}(\tau)\dd{\tau}+\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t)\cos\qty(\frac{1}{\sqrt{LC}}t)v_{in}+\frac{1}{L}\sin\qty(\frac{1}{\sqrt{LC}}t)\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}\tau)v_{in}(\tau)\dd{\tau}\\
+&=\frac{1}{L}\qty(\cos\qty(\frac{1}{\sqrt{LC}}t)\int_0^t\cos\qty(\frac{1}{\sqrt{LC}}\tau)v_{in}(\tau)\dd{\tau}+\sin\qty(\frac{1}{\sqrt{LC}}t)\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}\tau)v_{in}(\tau)\dd{\tau})\\
+&=\frac{1}{L}\int_0^t\qty(\cos\qty(\frac{1}{\sqrt{LC}}t)\cos\qty(\frac{1}{\sqrt{LC}}\tau)+\sin\qty(\frac{1}{\sqrt{LC}}t)\sin\qty(\frac{1}{\sqrt{LC}}\tau))v_{in}(\tau)\dd{\tau}\\
+&=\frac{1}{L}\int_0^t\cos\qty(\frac{1}{\sqrt{LC}}(t-\tau))v_{in}(\tau)\dd{\tau}\\
+&=\frac{1}{L}\int_0^t\cos\qty(\omega_0(t-\tau))v_{in}(\tau)\dd{\tau}
 \ea\]
 \[\ba
-v_L&=v_{in}-v_C=L\dv{i}{t}\\
-&=L\qty(\cos(0)v_{in}+\int_0^t\pdv{}{t}\qty(\cos\qty(\frac{1}{\sqrt{LC}}(t-\tau))v_{in}(\tau))\dd{\tau})\\
-&=Lv_{in}+\sqrt{\frac{L}{C}}\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}(t-\tau))v_{in}(\tau)\dd{\tau}\\
-&=Lv_{in}+\sqrt{\frac{L}{C}}\int_0^t\sin\qty(\omega_0(t-\tau))v_{in}(\tau)\dd{\tau}
+v_C&=v_{in}-v_L=v_{in}-L\dv{i}{t}\\
+&=v_{in}-\cos(0)v_{in}-\int_0^t\pdv{}{t}\qty(\cos\qty(\frac{1}{\sqrt{LC}}(t-\tau))v_{in}(\tau))\dd{\tau}\\
+&=\frac{1}{\sqrt{LC}}\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}(t-\tau))v_{in}(\tau)\dd{\tau}\\
+&=\omega_0\int_0^t\sin\qty(\omega_0(t-\tau))v_{in}(\tau)\dd{\tau}
 \ea\]
-\[I=\frac{V_{in}}{Ls+\frac{1}{Cs}}=\frac{CsV_{in}}{LCs^2+1}\]
-\[V_L=\frac{LCs^2V_{in}}{LCs^2+1}\]
-\[V_C=\frac{V_{in}}{LCs^2+1}\]
+\[\ba
+I&=\frac{V_{in}}{Ls+\frac{1}{Cs}}\\
+&=\frac{CsV_{in}}{LCs^2+1}\\
+&=\frac{CsV_{in}}{\omega_0^{\pht{0}-2}s^2+1}\\
+&=\frac{\omega_0^{\pht{0}2}CsV_{in}}{s^2+\omega_0^{\pht{0}2}}
+\ea\]
+\[\ba
+V_L&=\frac{LCs^2V_{in}}{LCs^2+1}\\
+&=\frac{sV_{in}}{s^2+\omega_0^{\pht{0}2}}
+\ea\]
+\[\ba
+V_C&=\frac{V_{in}}{LCs^2+1}\\
+&=\frac{\omega_0^{\pht{0}2}V_{in}}{s^2+\omega_0^{\pht{0}2}}
+\ea\]
 Check consistency:
-\[\mathcal{L}\{i\}=\frac{s}{s^2+\frac{1}{LC}}V_{in}=\frac{LCsV_{in}}{LCs^2+1}\]
-INCONSISTENT
-
+\[\mathcal{L}\{i\}=\frac{1}{L}\frac{s}{s^2+\frac{1}{LC}}V_{in}=\frac{CsV_{in}}{LCs^2+1}\]
+\[\mathcal{L}\{v_C\}=\frac{1}{\sqrt{LC}}\frac{\frac{1}{\sqrt{LC}}}{s^2+\frac{1}{LC}}V_{in}=\frac{V_{in}}{LCs^2+1}\]
+\end{proof}
+Total response:
+\[\ba
+i&=i(0^-)\cos\qty(\frac{1}{\sqrt{LC}}t)-v_C(0^-)\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t)+\frac{1}{L}\int_0^t\cos\qty(\frac{1}{\sqrt{LC}}(t-\tau))v_{in}(\tau)\dd{\tau}\\
+&=i(0^-)\cos\qty(\omega_0t)-v_C(0^-)C\omega_0\sin\qty(\omega_0t)+\frac{1}{L}\int_0^t\cos\qty(\omega_0(t-\tau))v_{in}(\tau)\dd{\tau}
+\ea\]
+\[\ba
+v_C&=v_{in}-v_L\\
+&=i(0^-)\sqrt{\frac{L}{C}}\sin\qty(\frac{1}{\sqrt{LC}}t)+v_C(0^-)\cos\qty(\frac{1}{\sqrt{LC}}t)+\frac{1}{\sqrt{LC}}\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}(t-\tau))v_{in}(\tau)\dd{\tau}\\
+&=i(0^-)L\omega_0\sin\qty(\omega_0t)+v_C(0^-)\cos\qty(\omega_0t)+\omega_0\int_0^t\sin\qty(\omega_0(t-\tau))v_{in}(\tau)\dd{\tau}
+\ea\]
+\[\ba
+I&=\frac{LCsi(0^-)-Cv_C(0^-)+CsV_{in}}{LCs^2+1}\\
+&=\frac{si(0^-)-C\omega_0^{\pht{0}2}v_C(0^-)+\omega_0^{\pht{0}2}CsV_{in}}{s^2+\omega_0^{\pht{0}2}}
+\ea\]
+\[\ba
+V_C&=\frac{LCsv_C(0^-)+Li(0^-)+V_{in}}{LCs^2+1}\\
+&=\frac{sv_C(0^-)+L\omega_0^{\pht{0}2}i(0^-)+\omega_0^{\pht{0}2}}V_{in}}{s^2+\omega_0^{\pht{0}2}}}
+\ea\]
+\[\ba
+V_L&=\frac{LCs^2V_{in}-LCsv_C(0^-)-Li(0^-)}{LCs^2+1}\\
+&=\frac{sV_{in}-sv_C(0^-)-L\omega_0^{\pht{0}2}i(0^-)}{s^2+\omega_0^{\pht{0}2}}
+\ea\]
+Impulse response and transfer function:
+\[\ba
+h_i&=\frac{1}{L}\cos\qty(\frac{1}{\sqrt{LC}}t)u(t)\\
+&=\frac{1}{L}\cos\qty(\omega_0t)u(t)
+\ea\]
+\[\ba
+h_{v_C}&=\delta(t)-h_{v_L}\\
+&=\frac{1}{\sqrt{LC}}\sin\qty(\frac{1}{\sqrt{LC}}t)\\
+&=\omega_0\sin\qty(\omega_0t)
+\ea\]
+\[\ba
+H_I&=\frac{Cs}{LCs^2+1}\\
+&=\frac{\omega_0^{\pht{0}2}Cs}{s^2+\omega_0^{\pht{0}2}}
+\ea\]
+\[\ba
+H_{V_C}&=\frac{1}{LCs^2+1}\\
+&=\frac{\omega_0^{\pht{0}2}}}{s^2+\omega_0^{\pht{0}2}}}
+\ea\]
+\[\ba
+H_{V_L}&=\frac{LCs^2}{LCs^2+1}\\
+&=\frac{s}{s^2+\omega_0^{\pht{0}2}}
+\ea\]
+$V_C$ being low-pass filter:
+\[\lim_{\omega\to 0}\abs{H_{V_C}(j\omega)}=1\]
+\[\lim_{\omega\to\infty}\abs{H_{V_C}(j\omega)}=0\]
+\begin{proof}
+\[\lim_{\omega\to 0}\abs{H_{V_C}(j\omega)}=\lim_{\omega\to 0}\abs{\frac{1}{1-LC\omega}}=1\]
+\[\lim_{\omega\to\infty}\abs{H_{V_C}(j\omega)}=\lim_{\omega\to\infty}\abs{\frac{1}{1-LC\omega}}=0\]
+\end{proof}
+$V_L$ being high-pass filter:
+\[\lim_{\omega\to 0}\abs{H_{V_L}(j\omega)}=0\]
+\[\lim_{\omega\to\infty}\abs{H_{V_L}(j\omega)}=1\]
+\begin{proof}
+\[\lim_{\omega\to 0}\abs{H_{V_L}(j\omega)}=\lim_{\omega\to 0}\abs{frac{-LC\omega^2}{1-LC\omega^2}}=0\]
+\[\lim_{\omega\to\infty}\abs{H_{V_L}(j\omega)}=\lim_{\omega\to\infty}\abs{\frac{-LC\omega^2}{1-LC\omega^2}}=1\]
+\end{proof}
 
 
 
