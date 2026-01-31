@@ -559,11 +559,12 @@ $V_R$ being high-pass filter:
 \[\lim_{\omega\to\infty}\abs{H_{V_R}(j\omega)}=\lim_{\omega\to\infty}\abs{\frac{RCj\omega}{1+RCj\omega}}=1\]
 \end{proof}
 \sssc{Series LC circuit}
-A series LC (resonant, tank, or tuned) circuit consists of an inductor with inductance $L$, a capacitor with capacitance $C$, and an independent voltage source $v_{in}$ in series connection. Resonance angular frequency $\omega_0$.
+A series LC (resonant, oscillator, tank, or tuned) circuit consists of an inductor with inductance $L$, a capacitor with capacitance $C$, and an independent voltage source $v_{in}$ in series connection. Angular resonance frequency (角共振頻率) $\omega_0$.
 
 Natural response: Total energy stored in inductor and capacitor $E$.
 \[LC\dv[2]{i}{t}+i=0\]
 \[\omega_0=\frac{1}{\sqrt{LC}}\]
+\[\dv[2]{i}{t}+\omega_0^{\pht{0}2}i=0\]
 \[\ba
 i&=i(0)\cos\qty(\frac{1}{\sqrt{LC}}t)-v_C(0)\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t)\\
 &=i(0)\cos\qty(\omega_0t)-v_C(0)C\omega_0\sin\qty(\omega_0t)
@@ -597,6 +598,7 @@ V_C&=-V_L\\
 \[LCr^2+1=0\]
 \[r=\pm\frac{1}{\sqrt{LC}}j\]
 \[\omega_0=\frac{1}{\sqrt{LC}}\]
+\[\dv[2]{i}{t}+\omega_0^{\pht{0}2}i=0\]
 \[i=A\cos\qty(\frac{1}{\sqrt{LC}}t)+B\sin\qty(\frac{1}{\sqrt{LC}}t)\]
 \[A=i(0)\]
 \[L\dv{i}{t}(0)+v_C(0)=0\]
@@ -642,7 +644,8 @@ Check consistency:
 \ea\]
 \end{proof}
 Forced response:
-\[\dv[2]{i}{t}+\frac{1}{LC}i=\frac{1}{L}\dv{v_{in}}{t}\]
+\[LC\dv[2]{i}{t}+i=C\dv{v_{in}}{t}\]
+\[\dv[2]{i}{t}+\omega_0^{\pht{0}2}i=\frac{1}{L}\dv{v_{in}}{t}\]
 \[\ba
 i&=\frac{1}{L}\int_0^t\cos\qty(\frac{1}{\sqrt{LC}}(t-\tau))v_{in}(\tau)\dd{\tau}\\
 &=\frac{1}{L}\int_0^t\cos\qty(\omega_0(t-\tau))v_{in}(\tau)\dd{\tau}
@@ -669,7 +672,9 @@ V_L&=\frac{LCs^2V_{in}}{LCs^2+1}\\
 \[i=C\dv{v_C}{t}\]
 \[v_C=v_{in}-v_L=v_{in}-L\dv{i}{t}\]
 \[i=C\dv{v_{in}}{t}-LC\dv[2]{i}{t}\]
+\[LC\dv[2]{i}{t}+i=C\dv{v_{in}}{t}\]
 \[\dv[2]{i}{t}+\frac{1}{LC}i=\frac{1}{L}\dv{v_{in}}{t}\]
+\[\dv[2]{i}{t}+\omega_0^{\pht{0}2}i=\frac{1}{L}\dv{v_{in}}{t}\]
 \[i_1=\cos\qty(\frac{1}{\sqrt{LC}}t)\]
 \[i_2=\sin\qty(\frac{1}{\sqrt{LC}}t)\]
 \[\frac{1}{i_1i_2'-i_2i_1'}=\sqrt{LC}\]
@@ -765,11 +770,12 @@ $V_L$ being high-pass filter:
 \[\lim_{\omega\to\infty}\abs{H_{V_L}(j\omega)}=\lim_{\omega\to\infty}\abs{\frac{-LC\omega^2}{1-LC\omega^2}}=1\]
 \end{proof}
 \sssc{Parallel LC circuit}
-A parallel LC (resonant, tank, or tuned) circuit consists of an inductor with inductance $L$, a capacitor with capacitance $C$, and an independent current source $i_{in}$ in parallel connection. Resonance angular frequency $\omega_0$.
+A parallel LC (resonant, oscillator, tank, or tuned) circuit consists of an inductor with inductance $L$, a capacitor with capacitance $C$, and an independent current source $i_{in}$ in parallel connection. Angular resonance frequency $\omega_0$.
 
 Natural response: Total energy stored in inductor and capacitor $E$.
 \[LC\dv[2]{v}{t}+v=0\]
 \[\omega_0=\frac{1}{\sqrt{LC}}\]
+\[\dv[2]{v}{t}+\omega_0^{\pht{0}2}v=0\]
 \[\ba
 v&=v(0)\cos\qty(\frac{1}{\sqrt{LC}}t)-i_L(0)\sqrt{\frac{L}{C}}\sin\qty(\frac{1}{\sqrt{LC}}t)\\
 &=v(0)\cos\qty(\omega_0t)-i_L(0)L\omega_0\sin\qty(\omega_0t)
@@ -803,6 +809,7 @@ I_L&=-I_C\\
 \[LCr^2+1=0\]
 \[r=\pm\frac{1}{\sqrt{LC}}j\]
 \[\omega_0=\frac{1}{\sqrt{LC}}\]
+\[\dv[2]{v}{t}+\omega_0^{\pht{0}2}v=0\]
 \[v=A\cos\qty(\frac{1}{\sqrt{LC}}t)+B\sin\qty(\frac{1}{\sqrt{LC}}t)\]
 \[A=v(0)\]
 \[i_L=v(0)\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t)-B\sqrt{\frac{C}{L}}\cos\qty(\frac{1}{\sqrt{LC}}t)\]
@@ -848,7 +855,8 @@ Check consistency:
 \ea\]
 \end{proof}
 Forced response:
-\[\dv[2]{v}{t}+\frac{v}{LC}=\frac{1}{LC}\dv{i_{in}}{t}\]
+\[LC\dv[2]{v}{t}+v=\dv{i_{in}}{t}\]
+\[\dv[2]{v}{t}+\omega_0^{\pht{0}2}v=\omega_0^{\pht{0}2}\dv{i_{in}}{t}\]
 \[\ba
 v&=\frac{1}{C}\int_0^t\cos\qty(\frac{1}{\sqrt{LC}}(t-\tau))i_{in}(\tau)\dd{\tau}\\
 &=\frac{1}{C}\int_0^t\cos\qty(\omega_0(t-\tau))i_{in}(\tau)\dd{\tau}
@@ -875,7 +883,9 @@ I_C&=\frac{LCs^2I_{in}}{LCs^2+1}\\
 \[v=L\dv{i_L}{t}\]
 \[i_L=i_{in}-i_C=i_{in}-C\dv{v}{t}\]
 \[v=L\dv{i_{in}}{t}-LC\dv[2]{v}{t}\]
+\[LC\dv[2]{v}{t}+v=\dv{i_{in}}{t}\]
 \[\dv[2]{v}{t}+\frac{v}{LC}=\frac{1}{C}\dv{i_{in}}{t}\]
+\[\dv[2]{v}{t}+\omega_0^{\pht{0}2}v=\omega_0^{\pht{0}2}\dv{i_{in}}{t}\]
 \[v_1=\cos\qty(\frac{1}{\sqrt{LC}}t)\]
 \[v_2=\sin\qty(\frac{1}{\sqrt{LC}}t)\]
 \[\frac{1}{v_1v_2'-v_2v_1'}=\sqrt{LC}\]
@@ -978,47 +988,190 @@ $I_C$ being high-pass filter:
 
 
 
-常電壓串聯 RLC 電路：常電壓$V$直流電源、電阻$R$、電感$L$、電容$C$串聯。
 
-常電壓串聯 LC 電路：常電壓$V$直流電源、電感$L$、電容$C$串聯，即令$R=0$。
-\[RI(t)+L\dv{I(t)}{t}+\frac{1}{C}\int _{-\infty}^tI(\tau)\,\mathrm{d}\tau=V\]
-\[\dv[2]{I(t)}{t}+\frac{R}{L}\dv{I(t)}{t}+\frac{1}{LC}I(t)=0\]
-定義奈培頻率（neper frequency）/衰減量（attenuation）$\alpha=\frac{R}{2L}$與角共振頻率（angular resonance frequency）$\omega_0=\frac{1}{\sqrt{LC}}$。
-\[\dv[2]{I(t)}{t}+2\alpha\dv{I(t)}{t}+\omega_0^{\phantom{0}2}I(t)=0\]
-定義阻尼係數（damping factor）$\zeta$：
+
+
+
+
+
+
+
+\sssc{Series RLC circuit}
+A series RLC (oscillator) circuit consists of a resistor with resistance $R$, an inductor with inductance $L$, a capacitor with capacitance $C$, and an independent voltage source $v_{in}$ in series connection. Neper frequency (奈培頻率) or attenuation (衰減量) $\alpha$, angular resonance frequency $\omega_0$, damping factor (阻尼係數) $\zeta$, characteristic roots $r$.
+\[\dv[2]{i}{t}+\frac{R}{L}\dv{i}{t}+\frac{i}{LC}=0\]
+\[\alpha=\frac{R}{2L}\]
+\[\omega_0=\frac{1}{\sqrt{LC}}\]
+\[\zeta=\frac{R}{2}\sqrt{\frac{C}{L}}\]
+\[\dv[2]{i}{t}+2\omega_0\zeta\dv{i}{t}+\omega_0^{\pht{0}2}i=0\]
+\[r=-\omega_0\qty(\zeta\pm\sqrt{\zeta^2-1})\]
+\begin{proof}
+\[v_R+v_C+v_L=0\]
+\[v_R=Ri\]
+\[i=C\dv{v_C}{t}\]
+\[v_L=L\dv{i}{t}\]
+\[R\dv{i}{t}+\frac{i}{C}+L\dv[2]{i}{t}=0\]
+\[\dv[2]{i}{t}+\frac{R}{L}\dv{i}{t}+\frac{i}{LC}=0\]
+\[\alpha=\frac{R}{2L}\]
+\[\omega_0=\frac{1}{\sqrt{LC}}\]
 \[\zeta=\frac{\alpha}{\omega_0}=\frac{R}{2}\sqrt{\frac{C}{L}}\]
-特徵根：
-\[s_1=-\omega_0\zeta+\omega_0\sqrt{\zeta^2-1}\]
-\[s_2=-\omega_0\zeta-\omega_0\sqrt{\zeta^2-1}\]
-過阻尼響應（Overdamped response）（$\zeta>1$）的$I(t)$通解為：
-\[I(t)=A_1e^{-\omega_0\left(\zeta+\sqrt{\zeta^2-1}\right)t}+A_2e^{-\omega_0\left(\zeta-\sqrt{\zeta^2-1}\right)t}\]
-臨界阻尼響應（Critically damped response）（$\zeta=1$）的$I(t)$通解為：
-\[I(t)=A_1e^{-\omega_0\zeta t}+A_2e^{-\omega_0\zeta t}\]
-欠阻尼響應（Underdamped response）（$0<\zeta<1$）的$I(t)$通解為：
-\[I(t)=A_1e^{-\omega_0\zeta t}\cos\left(\omega_0\sqrt{1-\zeta^2}t\right)+A_2e^{-\omega_0\zeta t}\sin\left(\omega_0\sqrt{1-\zeta^2}t\right)\]
-無阻尼響應（Undamped response）（$\zeta=0$即$R=0$）的$I(t)$通解為：
-\[I(t)=A_1\cos\left(\omega_0t\right)+A_2\sin\left(\omega_0t\right)\]
-\subsubsection{常電流並聯 RLC 與 LC 電路}
-常電流並聯 RLC 電路：常電流$I$直流電源、電阻$R$、電感$L$、電容$C$並聯。
+\[\dv[2]{i}{t}+2\omega_0\zeta\dv{i}{t}+\omega_0^{\pht{0}2}i=0\]
+\[r^2+2\omega_0\zeta+\omega_0^{\pht{0}2}=0\]
+\[\ba
+r&=\frac{-2\omega_0\zeta\pm\sqrt{4\omega_0^{\pht{0}2}\zeta^2-4\omega_0^{\pht{0}2}}}{2}\\
+&=-\omega_0\qty(\zeta\pm\sqrt{\zeta^2-1})
+\ea\]
+\end{proof}
+Natural response: Total energy stored in inductor and capacitor $E$.
+\bit
+\item $\zeta>1$ Overdamped response (過阻尼響應):
+\[i=-\frac{i(0)R\qty(\zeta-\sqrt{\zeta^2-1})+2v_C(0)\zeta}{2R\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\frac{i(0)R\qty(\zeta+\sqrt{\zeta^2-1})+2v_C(0)\zeta}{2R\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
+\[v_R=-\frac{i(0)R\qty(\zeta-\sqrt{\zeta^2-1})+2v_C(0)\zeta}{2\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\frac{i(0)R\qty(\zeta+\sqrt{\zeta^2-1})+2v_C(0)\zeta}{2\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
+\[v_L=\frac{i(0)R\qty(\zeta-\sqrt{\zeta^2-1})+2v_C(0)\zeta}{2\sqrt{\zeta^2-1}}\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-\frac{i(0)R\qty(\zeta+\sqrt{\zeta^2-1})+2v_C(0)\zeta}{2\sqrt{\zeta^2-1}}\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
+\[v_C=\frac{i(0)R+2v_C(0)\zeta\qty(\zeta+\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-\frac{i(0)R+2v_C(0)\zeta\qty(\zeta-\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
+\begin{proof}
+\[i=Ae^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+Be^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
+\[i(0)=A+B\]
+\[v_R=ARe^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+BRe^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
+\[\ba
+v_L&=L\dv{i}{t}\\
+&=-AR\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-BR\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}
+\ea\]
+\[
+\ba
+v_C&=-v_R-v_L\\
+&=-ARe^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-BRe^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}+AR\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+BR\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\\
+&=-AR\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-BR\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}
+\ea\]
+\[\ba
+v_C(0)&=-AR\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}-BR\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}\\
+&=-AR\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}-i(0)R\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}+AR\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}\\
+&=\frac{-i(0)R\qty(\zeta-\sqrt{\zeta^2-1})-2AR\sqrt{\zeta^2-1}}{2\zeta}
+\ea\]
+\[A=-\frac{i(0)R\qty(\zeta-\sqrt{\zeta^2-1})+2v_C(0)\zeta}{2R\sqrt{\zeta^2-1}}\]
+\[B=i(0)-A=\frac{i(0)R\qty(\zeta+\sqrt{\zeta^2-1})+2v_C(0)\zeta}{2R\sqrt{\zeta^2-1}}\]
+\[i=-\frac{i(0)R\qty(\zeta-\sqrt{\zeta^2-1})+2v_C(0)\zeta}{2R\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\frac{i(0)R\qty(\zeta+\sqrt{\zeta^2-1})+2v_C(0)\zeta}{2R\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
+\[\ba
+v_C&=\frac{i(0)R\qty(\zeta-\sqrt{\zeta^2-1})+2v_C(0)\zeta}{2R\sqrt{\zeta^2-1}}R\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-\frac{i(0)R\qty(\zeta+\sqrt{\zeta^2-1})+2v_C(0)\zeta}{2R\sqrt{\zeta^2-1}}R\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\\
+&=\frac{i(0)R+2v_C(0)\zeta\qty(\zeta+\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-\frac{i(0)R+2v_C(0)\zeta\qty(\zeta-\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}
+\ea\]
+Check $i=C\dv{v_C}{t}$:
+\[\ba
+i&=C\dv{v_C}{t}\\
+&=-\frac{i(0)R+2v_C(0)\zeta\qty(\zeta+\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}\frac{2\zeta}{R}\qty(\zeta-\sqrt{\zeta^2-1})e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\frac{i(0)R+2v_C(0)\zeta\qty(\zeta-\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}\frac{2\zeta}{R}\qty(\zeta+\sqrt{\zeta^2-1})e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\\
+&=-\frac{i(0)R\qty(\zeta-\sqrt{\zeta^2-1})+2v_C(0)\zeta}{2R\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\frac{i(0)R\qty(\zeta+\sqrt{\zeta^2-1})+2v_C(0)\zeta}{2R\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}
+\ea\]
+\[v_L=\frac{i(0)R\qty(\zeta-\sqrt{\zeta^2-1})+2v_C(0)\zeta}{2\sqrt{\zeta^2-1}}\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-\frac{i(0)R\qty(\zeta+\sqrt{\zeta^2-1})+2v_C(0)\zeta}{2\sqrt{\zeta^2-1}}\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
+\end{proof}
+\item $\zeta=1$ Critically damped response (臨界阻尼響應):
+\[i=\qty(i(0)-\qty(i(0)+\frac{2v_C(0)}{R})\omega_0t)e^{-\omega_0t}\]
+\[v_R=\qty(i(0)R-\qty(i(0)R+2v_C(0))\omega_0t)e^{-\omega_0t}\]
+\[v_L=-\qty(i(0)R+v_C(0)+\qty(\frac{1}{2}i(0)R+v_C(0))\omega_0t)e^{-\omega_0t}\]
+\[v_C=\qty(v_C(0)+\qty(\frac{1}{2}i(0)R+v_C(0))\omega_0t)e^{-\omega_0t}\]
+\begin{proof}
+\[i=(A+Bt)e^{-\omega_0t}\]
+\[i(0)=A\]
+\[i=(i(0)+Bt)e^{-\omega_0t}\]
+\[v_R=(i(0)+Bt)Re^{-\omega_0t}\]
+\[\ba
+v_L&=L\dv{i}{t}\\
+&=L\qty(-(i(0)+Bt)\omega_0+B)e^{-\omega_0t}\\
+&=\qty(-i(0)\frac{R}{2}+\frac{BR}{2\omega_0}-\frac{BR}{2}t)e^{-\omega_0t}
+\ea\]
+\[\ba
+v_C&=-v_R-v_L\\
+&=\qty(-i(0)R-BRt+i(0)\frac{R}{2}-\frac{BR}{2\omega_0}+\frac{BR}{2}t)e^{-\omega_0t}\\
+&=\qty(-i(0)\frac{R}{2}-\frac{BR}{2\omega_0}-\frac{BR}{2}t)e^{-\omega_0t}
+\ea\]
+\[v_C(0)=-i(0)\frac{R}{2}-\frac{BR}{2\omega_0}\]
+\[\ba
+B&=-\qty(i(0)\frac{R}{2}+v_C(0))\frac{2\omega_0}{R}\\
+&=-\frac{\qty(i(0)R+2v_C(0))\omega_0}{R}\\
+&=-\qty(i(0)+\frac{2v_C(0)}{R})\omega_0
+\ea\]
+\[i=\qty(i(0)-\qty(i(0)+\frac{2v_C(0)}{R})\omega_0t)e^{-\omega_0t}\]
+\[\ba
+v_C&=\qty(-i(0)\frac{R}{2}+\frac{i(0)R\omega_0+2v_C(0)\omega_0}{2\omega_0}+\frac{i(0)R\omega_0+2v_C(0)\omega_0}{2}t)e^{-\omega_0t}\\
+&=\qty(v_C(0)+\qty(\frac{1}{2}i(0)R+v_C(0))\omega_0t)e^{-\omega_0t}
+\ea\]
+Check $i=C\dv{v_C}{t}$:
+\[\ba
+i&=C\dv{v_C}{t}\\
+&=\qty(-v_C(0)\frac{2}{R}+\qty(\frac{1}{2}i(0)R+v_C(0))\frac{2}{R}-\qty(\frac{1}{2}i(0)R+v_C(0))\frac{2}{R}\omega_0t)e^{-\omega_0t}\\
+&=\qty(i(0)-\qty(\frac{1}{2}i(0)R+v_C(0))\frac{2}{R}\omega_0t)e^{-\omega_0t}\\
+&=(i(0)-\qty(i(0)+\frac{2v_C(0)}{R})\omega_0t)e^{-\omega_0t}
+\ea\]
+\[v_R=\qty(i(0)R-\qty(i(0)R+2v_C(0))\omega_0t)e^{-\omega_0t}\]
+\[v_L=-\qty(i(0)R+v_C(0)+\qty(\frac{1}{2}i(0)R+v_C(0))\omega_0t)e^{-\omega_0t}\]
+\end{proof}
+\item $0<\zeta<1$ Underdamped response (欠阻尼響應):
 
-常電流並聯 LC 電路：常電流$I$直流電源、電感$L$、電容$C$並聯，即令 $\frac{1}{R}=0$。
-\[\frac{1}{R}V(t)+C\dv{V(t)}{t}+\frac{1}{L}\int _{-\infty}^tV(\tau)\,\mathrm{d}\tau=I\]
-\[\dv[2]{V(t)}{t}+\frac{1}{RC}\dv{V(t)}{t}+\frac{1}{LC}V(t)=0\]
-定義奈培頻率（neper frequency）/衰減量（attenuation）$\alpha=\frac{1}{2RC}$與角共振頻率（angular resonance frequency）$\omega_0=\frac{1}{\sqrt{LC}}$。
-\[\dv[2]{V(t)}{t}+2\alpha\dv{V(t)}{t}+\omega_0^{\phantom{0}2}V(t)=0\]
-定義阻尼係數（damping factor）$\zeta$：
+
+
+
+\begin{proof}
+\[i=e^{-\omega_0\zeta t}\qty(A\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+B\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
+\[A=i(0)\]
+\[i=e^{-\omega_0\zeta t}\qty(i(0)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+B\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
+\[v_R=Re^{-\omega_0\zeta t}\qty(i(0)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+B\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
+\[\ba
+v_L&=L\dv{i}{t}\\
+&=-\frac{R}{2\zeta}\zeta e^{-\omega_0\zeta t}\qty(i(0)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+B\sin\qty(\omega_0\sqrt{1-\zeta^2}t))+\frac{R}{2\zeta}\sqrt{1-\zeta^2}e^{-\omega_0\zeta t}\qty(-i(0)\sin\qty(\omega_0\sqrt{1-\zeta^2}t)+B\cos\qty(\omega_0\sqrt{1-\zeta^2}t))\\
+&=\frac{R}{2\zeta}e^{-\omega_0\zeta t}\qty(-i(0)\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-B\zeta\sin\qty(\omega_0\sqrt{1-\zeta^2}t)-i(0)\sqrt{1-\zeta^2}\sin\qty(\omega_0\sqrt{1-\zeta^2}t)+B\sqrt{1-\zeta^2}\cos\qty(\omega_0\sqrt{1-\zeta^2}t))\\
+&=\frac{R}{2\zeta}e^{-\omega_0\zeta t}\qty(\qty(B\sqrt{1-\zeta^2}-i(0)\zeta)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(B\zeta+i(0)\sqrt{1-\zeta^2})\sin\qty(\omega_0\sqrt{1-\zeta^2}t))
+\ea\]
+\[\ba
+v_C&=-v_R-v_L\\
+&=\frac{R}{2\zeta}e^{-\omega_0\zeta t}\qty(-2i(0)\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-2B\zeta\sin\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(B\sqrt{1-\zeta^2}-i(0)\zeta)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(B\zeta+i(0)\sqrt{1-\zeta^2})\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\\
+&=\frac{R}{2\zeta}e^{-\omega_0\zeta t}\qty(-\qty(B\sqrt{1-\zeta^2}+i(0)\zeta)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(-B\zeta+i(0)\sqrt{1-\zeta^2})\sin\qty(\omega_0\sqrt{1-\zeta^2}t))
+\ea\]
+\[v_C(0)=-\frac{R}{2\zeta}\qty(B\sqrt{1-\zeta^2}+i(0)\zeta)\]
+\[B=-\qty(\frac{2v_C(0)}{R}+i(0))\frac{\zeta}{\sqrt{1-\zeta^2}}\]
+\[i=e^{-\omega_0\zeta t}\qty(i(0)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(\frac{2v_C(0)}{R}+i(0))\frac{\zeta}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
+\[\ba
+v_C&=\frac{R}{2\zeta}e^{-\omega_0\zeta t}\qty(\qty(\qty(\frac{2v_C(0)}{R}+i(0))\frac{\zeta}{\sqrt{1-\zeta^2}}\sqrt{1-\zeta^2}-i(0)\zeta)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(\qty(\frac{2v_C(0)}{R}+i(0))\frac{\zeta}{\sqrt{1-\zeta^2}}\zeta+i(0)\sqrt{1-\zeta^2})\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\\
+&=\frac{R}{2\zeta}e^{-\omega_0\zeta t}\qty(\frac{2v_C(0)}{R}\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(\qty(\frac{2v_C(0)}{R}+i(0))\zeta^2+i(0)\qty(1-\zeta^2))\frac{1}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\\
+
+
+
+
+
+Check $i=C\dv{v_C}{t}$:
+\[\ba
+i&=C\dv{v_C}{t}\\
+
+
+
+
+
+
+
+
+\[\omega_0=\frac{1}{\sqrt{LC}}\]
+\[\zeta=\frac{R}{2}\sqrt{\frac{C}{L}}\]
+\[L\omega_0=\frac{R}{2\zeta}\]
+\[C\omega_0=\frac{2\zeta}{R}\]
+
+\end{proof}
+\eit
+
+
+
+
+
+
+
+
+
+
+
+
+
+Parallel
+$\alpha=\frac{1}{2RC}$
+$\omega_0=\frac{1}{\sqrt{LC}}$
 \[\zeta=\frac{\alpha}{\omega_0}=\frac{1}{2R}\sqrt{\frac{L}{C}}\]
-特徵根：
 \[s_1=-\omega_0\zeta+\omega_0\sqrt{\zeta^2-1}\]
 \[s_2=-\omega_0\zeta-\omega_0\sqrt{\zeta^2-1}\]
-過阻尼響應（Overdamped response）（$\zeta>1$）的$V(t)$通解為：
-\[V(t)=A_1e^{-\omega_0\left(\zeta+\sqrt{\zeta^2-1}\right)t}+A_2e^{-\omega_0\left(\zeta-\sqrt{\zeta^2-1}\right)t}\]
-臨界阻尼響應（Critically damped response）（$\zeta=1$）的$V(t)$通解為：
-\[V(t)=A_1e^{-\omega_0\zeta t}+A_2e^{-\omega_0\zeta t}\]
-欠阻尼響應（Underdamped response）（$0<\zeta<1$）的$V(t)$通解為：
-\[V(t)=A_1e^{-\omega_0\zeta t}\cos\left(\omega_0\sqrt{1-\zeta^2}t\right)+A_2e^{-\omega_0\zeta t}\sin\left(\omega_0\sqrt{1-\zeta^2}t\right)\]
-無阻尼響應（Undamped response）（$\zeta=0$即$\frac{1}{R}=0$）的$V(t)$通解為：
-\[V(t)=A_1\cos\left(\omega_0t\right)+A_2\sin\left(\omega_0t\right)\]
 
 
 
