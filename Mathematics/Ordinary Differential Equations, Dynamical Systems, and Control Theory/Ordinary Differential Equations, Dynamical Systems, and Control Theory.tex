@@ -1105,24 +1105,17 @@ An equilibrium that is in a repeller is necessarily unstable.
 \sct{Control Theory (控制理論)}
 \ssc{Continuous-time linear time-invariant (LTI) system}
 \sssc{Causal (因果的) continuous-time linear time-invariant (LTI) system}
-A causal continuous-time linear time-invariant (LTI) system of a variable $t\in\bbR$ is a system that accept an input (distribution) (often called function) $x(t)$ and produces a response (distribution) (often called function) $y(t)$ that is the solution of a linear autonomous ODE whose forcing term is $x(t)$. It can be completely characterized by a homogeneous solution $y_c(t)$ given an initial condition (also called initial state) $y(0^-)$, a distribution called impulse response (function) $h(t)$ that map all $t<0$ to $0$, which is the output when the input is the Dirac delta function $\detla(t)$, that
-\[y(t)=(x*h)(t)+y_c(t),\]
+A causal continuous-time linear time-invariant (LTI) system of a variable $t\in\bbR$ is a system that accept an input (distribution) (often called function) $x(t)$ and produces a response (distribution) (often called function) $y(t)$ that is the solution of a linear autonomous ODE whose forcing term is $x(t)$, called governing equation, given initial condition $y(0)=0$. It can be completely characterized by a distribution called impulse response (function) $h(t)$, which is the output when the input is the Dirac delta function $\detla(t)$ and is such that $h(t)=0$ for all $t<0$, that
+\[y(t)=(x*h)(t),\]
 where
 \[(x*h)(t)\coloneq\int_0^tx(\tau)h(t-\tau)\dd{\tau}.\]
-Applying unilateral Laplace transform \[Y(s)=X(s)\cdot H(s)+Y_c(s),\]
-where $Y_c(s)=\mathcal{L}\{y_c(t)\}$ and $H(s)$ is called transfer function or gain.
+Applying unilateral Laplace transform \[Y(s)=X(s)\cdot H(s),\]
+where $H(s)$ is called transfer function or gain.
 \sssc{Non-causal continuous-time linear time-invariant (LTI) system}
-A non-causal continuous-time linear time-invariant (LTI) system of a variable $t\in\bbR$ is a system that accept an input (distribution) (often called function) $x(t)$ and produces a response (distribution) (often called function) $y(t)$ that is the solution of a linear autonomous ODE whose forcing term is $x(t)$. It can be completely characterized by a distribution called impulse response (function) $h(t)$, which is the output when the input is the Dirac delta function $\detla(t)$, that
+A non-causal continuous-time linear time-invariant (LTI) system of a variable $t\in\bbR$ is a system that accept an input (distribution) (often called function) $x(t)$ and produces a response (distribution) (often called function) $y(t)$ that is the solution of a linear autonomous ODE whose forcing term is $x(t)$, called governing equation. It can be completely characterized by a distribution called impulse response (function) $h(t)$, which is the output when the input is the Dirac delta function $\detla(t)$, that
 \[y(t)=(x*h)(t)\coloneq\int_{-\infty}^{\infty} x(\tau)h(t-\tau)\dd{\tau}.\]
 Applying bilateral Laplace transform \[Y(s)=X(s)\cdot H(s),\]
 where $H(s)$ is called transfer function or gain.
-\sssc{Types of responses}
-\bit
-\item\tb{Natural, zero-input, homogeneous, or unforced response (ZIR)}: Response when $x(t)=0$.
-\item\tb{Forced, zero-state, or zero IC response}: Response when $y(0)=0$ for causal system.
-\item\tb{(Total) response}: For causal system, the sum of natural response and forced response is the total response.
-\item\tb{Transient response}: A response that converges to a constant.
-\eit
 \sssc{Time constant}
 For a response function in the form $y(t)=y_0e^{-\alpha t}$ with constants $y_0\neq 0$ and $\alpha>0$, the time constant $\tau$ is defined as $\frac{1}{\alpha}$, that is, $y(\tau)=e^{-1}$.
 

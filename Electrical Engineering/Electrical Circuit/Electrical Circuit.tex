@@ -278,27 +278,21 @@ A linear element is a passive element whose resistance $R$, capacitance $C$, and
 \sssc{Linear network}
 A linear network is a network which consists of only linear elements, independent sources, and linear dependent sources.
 \sssc{Linear circuit}
-A linear circuit is a circuit which obeys the superposition principle of voltages and currents (but not power) that the voltages across or currents through all one-port subnetwork, called responses or response functions, are linear combinations of the input voltages from independent voltage sources and input currents from independent current sources in it, called forcing functions, that is, consists of only linear elements, independent sources, and linear dependent sources.
+A linear circuit is a circuit consists of only linear elements, independent sources, and linear dependent sources.
 
-All circuits discussed in this text are causal continuous-time linear time-invariant (LTI) systems.
-\sssc{Types of responses}
-\bit
-\item\tb{Natural, zero-input, homogeneous, or unforced response}: Response when all independent sources are turned off.
-\item\tb{Forced or zero-state response}: Response when there are no initial energy.
-\item\tb{(Total) response}: The response considering both independent sources and initial energies, which is the sum of natural response and forced response.
-\item\tb{Transient response}: A response that converges to a constant.
-\eit
-\sssc{Series connection}
-For linear networks, the impedance of the network is equal to the sum of the impedance of each element.
-\sssc{Parallel connection}
-For linear networks, the admittance of the network is equal to the sum of the admittance of each element.
-\sssc{Linear circuit superposition analysis}
+A voltage across or current through any one-port subnetwork of a linear time-invariant circuit, called (total) response, is the superposition of the responses with only one of the independent sources in the linear circuit, called forcing function, is turned on and with zero initial state, called forced, particular, or zero state responses (ZSR), and the response with all independent sources in the linear circuit turned off and initial states preserved, called natural, homogeneous, unforced, or zero input response (ZIR). The ZIR is the solution of an IVP of a linear homogenous ODE, called governing equation, with initial states given by the initial states of inductors and capacitors. Each ZSR is the response of a causal continuous-time linear time-invariant (LTI) systems with its forcing function as forcing function and the complementary equation of its governing equation being the governing equation of ZIR. A ZIR component that converges to an equilibrium is called a transient response.
+\sssc{Linear circuit superposition principle}
+For a linear circuit,
 \ben
 \item Select one of the independent sources. Set all other independent sources to zero. This means voltage sources are replaced with short circuits and current sources are replaced with open circuits. Leave dependent sources in the circuit.
 \item Analyze the simplified circuit to find the desired currents and voltages.
 \item Repeat previous steps until each independent source has been considered.
 \item Sum the currents and voltages obtained from the separate analyses above.
 \een
+\sssc{Series connection}
+For linear networks, the impedance of the network is equal to the sum of the impedance of each element.
+\sssc{Parallel connection}
+For linear networks, the admittance of the network is equal to the sum of the admittance of each element.
 \sssc{Linear circuit as graph}
 A linear circuit is a graph with nodes with all voltage sources enclosed as supernodes being vertices, branches without nodes inside except ends being edges, and admittances (or conductance for DC) being weights.
 \sssc{Dual}
@@ -1056,9 +1050,9 @@ v_C&=\frac{i(0)R\qty(\zeta-\sqrt{\zeta^2-1})+2v_C(0)\zeta}{2R\sqrt{\zeta^2-1}}R\
 \ea\]
 Check $i=C\dv{v_C}{t}$:
 \[\ba
-i&=C\dv{v_C}{t}\\
-&=-\frac{i(0)R+2v_C(0)\zeta\qty(\zeta+\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}\frac{2\zeta}{R}\qty(\zeta-\sqrt{\zeta^2-1})e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\frac{i(0)R+2v_C(0)\zeta\qty(\zeta-\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}\frac{2\zeta}{R}\qty(\zeta+\sqrt{\zeta^2-1})e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\\
-&=-\frac{i(0)R\qty(\zeta-\sqrt{\zeta^2-1})+2v_C(0)\zeta}{2R\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\frac{i(0)R\qty(\zeta+\sqrt{\zeta^2-1})+2v_C(0)\zeta}{2R\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}
+C\dv{v_C}{t}&=-\frac{i(0)R+2v_C(0)\zeta\qty(\zeta+\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}\frac{2\zeta}{R}\qty(\zeta-\sqrt{\zeta^2-1})e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\frac{i(0)R+2v_C(0)\zeta\qty(\zeta-\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}\frac{2\zeta}{R}\qty(\zeta+\sqrt{\zeta^2-1})e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\\
+&=-\frac{i(0)R\qty(\zeta-\sqrt{\zeta^2-1})+2v_C(0)\zeta}{2R\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\frac{i(0)R\qty(\zeta+\sqrt{\zeta^2-1})+2v_C(0)\zeta}{2R\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\\
+&=i
 \ea\]
 \[v_L=\frac{i(0)R\qty(\zeta-\sqrt{\zeta^2-1})+2v_C(0)\zeta}{2\sqrt{\zeta^2-1}}\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-\frac{i(0)R\qty(\zeta+\sqrt{\zeta^2-1})+2v_C(0)\zeta}{2\sqrt{\zeta^2-1}}\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
 \end{proof}
@@ -1095,10 +1089,10 @@ v_C&=\qty(-i(0)\frac{R}{2}+\frac{i(0)R\omega_0+2v_C(0)\omega_0}{2\omega_0}+\frac
 \ea\]
 Check $i=C\dv{v_C}{t}$:
 \[\ba
-i&=C\dv{v_C}{t}\\
-&=\qty(-v_C(0)\frac{2}{R}+\qty(\frac{1}{2}i(0)R+v_C(0))\frac{2}{R}-\qty(\frac{1}{2}i(0)R+v_C(0))\frac{2}{R}\omega_0t)e^{-\omega_0t}\\
+C\dv{v_C}{t}&=\qty(-v_C(0)\frac{2}{R}+\qty(\frac{1}{2}i(0)R+v_C(0))\frac{2}{R}-\qty(\frac{1}{2}i(0)R+v_C(0))\frac{2}{R}\omega_0t)e^{-\omega_0t}\\
 &=\qty(i(0)-\qty(\frac{1}{2}i(0)R+v_C(0))\frac{2}{R}\omega_0t)e^{-\omega_0t}\\
-&=(i(0)-\qty(i(0)+\frac{2v_C(0)}{R})\omega_0t)e^{-\omega_0t}
+&=(i(0)-\qty(i(0)+\frac{2v_C(0)}{R})\omega_0t)e^{-\omega_0t}\\
+&=i
 \ea\]
 \[v_R=\qty(i(0)R-\qty(i(0)R+2v_C(0))\omega_0t)e^{-\omega_0t}\]
 \[v_L=-\qty(i(0)R+v_C(0)+\qty(\frac{1}{2}i(0)R+v_C(0))\omega_0t)e^{-\omega_0t}\]
@@ -1133,11 +1127,11 @@ v_C&=\frac{R}{2\zeta}e^{-\omega_0\zeta t}\qty(\qty(\qty(\frac{2v_C(0)}{R}+i(0))-
 \ea\]
 Check $i=C\dv{v_C}{t}$:
 \[\ba
-i&=C\dv{v_C}{t}\\
-&=-\frac{2\zeta^2}{R}e^{-\omega_0\zeta t}\qty(v_C(0)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(v_C(0)\frac{\zeta}{\sqrt{1-\zeta^2}}+i(0)R\frac{1}{2\zeta\sqrt{1-\zeta^2}})\sin\qty(\omega_0\sqrt{1-\zeta^2}t))+\frac{2\zeta\sqrt{1-\zeta^2}}{R}e^{-\omega_0\zeta t}\qty(-v_C(0)\sin\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(v_C(0)\frac{\zeta}{\sqrt{1-\zeta^2}}+i(0)R\frac{1}{2\zeta\sqrt{1-\zeta^2}})\cos\qty(\omega_0\sqrt{1-\zeta^2}t))\\
+C\dv{v_C}{t}&=-\frac{2\zeta^2}{R}e^{-\omega_0\zeta t}\qty(v_C(0)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(v_C(0)\frac{\zeta}{\sqrt{1-\zeta^2}}+i(0)R\frac{1}{2\zeta\sqrt{1-\zeta^2}})\sin\qty(\omega_0\sqrt{1-\zeta^2}t))+\frac{2\zeta\sqrt{1-\zeta^2}}{R}e^{-\omega_0\zeta t}\qty(-v_C(0)\sin\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(v_C(0)\frac{\zeta}{\sqrt{1-\zeta^2}}+i(0)R\frac{1}{2\zeta\sqrt{1-\zeta^2}})\cos\qty(\omega_0\sqrt{1-\zeta^2}t))\\
 &=\frac{2\zeta}{R}e^{-\omega_0\zeta t}\qty(-v_C(0)\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(v_C(0)\frac{\zeta^2}{\sqrt{1-\zeta^2}}+i(0)R\frac{1}{2\sqrt{1-\zeta^2}})\sin\qty(\omega_0\sqrt{1-\zeta^2}t)-v_C(0)\sqrt{1-\zeta^2}\sin\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(v_C(0)\zeta+i(0)R\frac{1}{2\zeta})\cos\qty(\omega_0\sqrt{1-\zeta^2}t))\\
 &=\frac{2\zeta}{R}e^{-\omega_0\zeta t}\qty(i(0)R\frac{1}{2\zeta}\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(v_C(0)\frac{1}{\sqrt{1-\zeta^2}}+i(0)R\frac{1}{2\sqrt{1-\zeta^2}})\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\\
-&=e^{-\omega_0\zeta t}\qty(i(0)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(\frac{2v_C(0)}{R}+i(0))\frac{\zeta}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))
+&=e^{-\omega_0\zeta t}\qty(i(0)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(\frac{2v_C(0)}{R}+i(0))\frac{\zeta}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\\
+&=i
 \ea\]
 \[v_R=e^{-\omega_0\zeta t}\qty(i(0)R\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(2v_C(0)+i(0)R)\frac{\zeta}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
 \[v_L=e^{-\omega_0\zeta t}\qty(-\qty(v_C(0)+i(0)R)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(v_C(0)\frac{\zeta}{\sqrt{1-\zeta^2}}+i(0)R\frac{2\zeta^2-1}{2\zeta\sqrt{1-\zeta^2}})\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
