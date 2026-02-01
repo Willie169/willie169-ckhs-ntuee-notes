@@ -381,15 +381,13 @@ For all integer $n\geq 3$:
 \sssc{RL circuit}
 A (series) RL circuit or filter consists of a resistor with resistance $R$, an inductor with inductance $L$, and an independent voltage source $v_{in}$ in series connection.
 
-Natural response:
+Natural response (time domain):
 \[Ri+L\dv{i}{t}=0\]
 \[i=i(0)e^{-\frac{R}{L}t}\]
 \[v_R=-v_L=Ri(0)e^{-\frac{R}{L}t}\]
 \[\tau_i=\tau_{v_R}=\tau_{v_L}=\frac{L}{R}\]
 \[p_R=-p_L=R(i(0))^2e^{-\frac{2R}{L}t}\]
 \[\int_0^{\infty}p_R\dd{t}=-\int_0^{\infty}p_L\dd{t}=\frac{1}{2}L(i(0))^2\]
-\[I=\frac{Li(0)}{R+Ls}\]
-\[V_R=-V_L=\frac{RLi(0)}{R+Ls}\]
 \begin{proof}
 \[Ri+L\dv{i}{t}=0\]
 \[Lr+R=0\]
@@ -402,26 +400,31 @@ Natural response:
 \int_0^{\infty}p_R\dd{t}&=R(i(0))^2\evlv(-\frac{L}{2R}e^{-\frac{2R}{L}t})_0^{\infty}\\
 &=\frac{1}{2}L(i(0))^2
 \ea\]
+\end{proof}
+Natural response (Laplace domain):
 \[I=\frac{Li(0)}{R+Ls}\]
 \[V_R=-V_L=\frac{RLi(0)}{R+Ls}\]
+\begin{proof}
 Check consistency:
 \[\mathcal{L}\{i\}=\frac{i(0)}{s+\frac{R}{L}}=\frac{Li(0)}{R+Ls}\]
 \[\mathcal{L}\{v_R\}=Ri(0)\frac{1}{s+\frac{R}{L}}=\frac{RLi(0)}{R+Ls}\]
 \end{proof}
-Forced response:
+Forced response (time domain):
 \[Ri+L\dv{i}{t}=v_{in}\]
 \[i=\frac{1}{L}\int_0^te^{\frac{R}{L}\tau}v_{in}(\tau)\dd{\tau}e^{-\frac{R}{L}t}\]
 \[v_R=v_{in}-v_L=\frac{R}{L}\int_0^te^{\frac{R}{L}\tau}v_{in}(\tau)\dd{\tau}e^{-\frac{R}{L}t}\]
-\[I=\frac{V_{in}}{R+Ls}\]
-\[V_R=\frac{RV_{in}}{R+Ls}\]
-\[V_L=\frac{LsV_{in}}{R+Ls}\]
 \begin{proof}
 \[Ri+L\dv{i}{t}=v_{in}\]
 \[\dv{i}{t}+\frac{R}{L}i=\frac{v_{in}}{L}\]
 \[\mu(t)=e^{\int\frac{R}{L}\dd{t}}=e^{\frac{R}{L}t}\]
 \[\dv{}{t}\qty(e^{\frac{R}{L}t}i)=e^{\frac{R}{L}t}\frac{v_{in}}{L}\]
 \[i=\frac{1}{L}\int_0^te^{\frac{R}{L}\tau}v_{in}(\tau)\dd{\tau}e^{-\frac{R}{L}t}\]
+\end{proof}
+Forced response (Laplace domain):
 \[I=\frac{V_{in}}{R+Ls}\]
+\[V_R=\frac{RV_{in}}{R+Ls}\]
+\[V_L=\frac{LsV_{in}}{R+Ls}\]
+\begin{proof}
 Check consistency:
 \[\ba
 \mathcal{L}\{i\}&=\frac{1}{L}\mathcal{L}\{\int_0^te^{\frac{R}{L}\tau}v_{in}(\tau)u(t-\tau)\dd{\tau}\}\qty(s+\frac{R}{L})\\
@@ -430,21 +433,25 @@ Check consistency:
 &=\frac{V_{in}}{R+Ls}
 \ea\]
 \end{proof}
-Total response:
+Total response (time domain):
 \[i=\qty(i(0)+\frac{1}{L}\int_0^te^{\frac{R}{L}\tau}v_{in}(\tau)\dd{\tau})e^{-\frac{R}{L}t}\]
 \[v_R=v_{in}-v_L=R\qty(i(0)+\frac{1}{L}\int_0^te^{\frac{R}{L}\tau}v_{in}(\tau)\dd{\tau})e^{-\frac{R}{L}t}\]
+Total response (Laplace domain):
 \[I=\frac{Li(0)+V_{in}}{R+Ls}\]
 \[V_R=\frac{RLi(0)+RV_{in}}{R+Ls}\]
 \[V_L=\frac{LsV_{in}-RLi(0)}{R+Ls}\]
-Impulse response and transfer function:
+Impulse response:
 \[h_i=\frac{1}{L}u(t)e^{-\frac{R}{L}t}\]
 \[h_{v_R}=\frac{R}{L}u(t)e^{-\frac{R}{L}t}\]
 \[h_{v_L}=\delta(t)-\frac{R}{L}u(t)e^{-\frac{R}{L}t}\]
+\begin{proof}
+\[h_i=\frac{1}{L}\int_0^te^{\frac{R}{L}\tau}\delta(\tau)\dd{\tau}e^{-\frac{R}{L}t}=\frac{1}{L}u(t)e^{-\frac{R}{L}t}\]
+\end{proof}
+Transfer function:
 \[H_I=\frac{1}{R+Ls}\]
 \[H_{V_R}=\frac{R}{R+Ls}\]
 \[H_{V_L}=\frac{Ls}{R+Ls}\]
 \begin{proof}
-\[h_i=\frac{1}{L}\int_0^te^{\frac{R}{L}\tau}\delta(\tau)\dd{\tau}e^{-\frac{R}{L}t}=\frac{1}{L}u(t)e^{-\frac{R}{L}t}\]
 Check consistency:
 \[\mathca{L}\{h_i\}=\frac{1}{L\qty(s+\frac{R}{L})}=\frac{1}{R+Ls}\]
 \[\mathca{L}\{h_{V_L}\}=1-\frac{R}{R+Ls}=\frac{Ls}{R+Ls}\]
@@ -466,15 +473,13 @@ $V_L$ being high-pass filter:
 \sssc{RC circuit}
 A (series) RC circuit or filter consists of a resistor with resistance $R$, a capacitor with capacitance $C$, and an independent voltage source $v_{in}$ in series connection.
 
-Natural response:
+Natural response (time domain):
 \[\frac{v_C}{R}+C\dv{v_C}{t}=0\]
 \[v_C=-v_R=v_C(0)e^{-\frac{1}{RC}t}\]
 \[i=-\frac{1}{R}v_C(0)e^{-\frac{1}{RC}t}\]
 \[\tau_{v_C}=\tau_{v_R}=\tau_i=\frac{1}{RC}\]
 \[p_R=-p_C=\frac{1}{R}(v_C(0))^2e^{-\frac{2}{RC}t}\]
 \[\int_0^{\infty}p_R\dd{t}=-\int_0^{\infty}p_C\dd{t}=\frac{1}{2}C(v_C(0))^2\]
-\[V_C=-V_R=\frac{RCv_C(0)}{1+RCs}\]
-\[I=-\frac{Cv_C(0)}{1+RCs}\]
 \begin{proof}
 \[v_R+v_C=0\]
 \[\frac{v_R}{R}-C\dv{v_C}{t}=0\]
@@ -489,19 +494,21 @@ Natural response:
 \int_0^{\infty}p_R\dd{t}&=\frac{1}{R}(v_C(0))^2\evlv{-\frac{RC}{2}e^{-\frac{2}{RC}t}}_0^{\infty}\\
 &=\frac{1}{2}C(v_C(0))^2
 \ea\]
+\end{proof}
+Natural response (Laplace domain):
+\[V_C=-V_R=\frac{RCv_C(0)}{1+RCs}\]
+\[I=-\frac{Cv_C(0)}{1+RCs}\]
+\begin{proof}
 \[I=-\frac{v_C(0)}{s\qty(\frac{1}{Cs}+R)}=-\frac{Cv_C(0)}{1+RCs}\]
 \[V_C=\frac{I+Cv_C(0)}{Cs}=\frac{RCv_C(0)}{1+RCs}\]
 Check consistency:
 \[\mathcal{L}\{v_C\}=\frac{v_C(0)}{s+\frac{1}{RC}}=\frac{RCv_C(0)}{1+RCs}\]
 \[\mathcal{L}\{i\}=-\frac{1}{R}v_C(0)\frac{1}{s+\frac{1}{RC}}=-\frac{Cv_C(0)}{1+RCs}\]
 \end{proof}
-Forced response:
+Forced response (time domain):
 \[\frac{v_C-v_{in}}{R}+C\dv{v_C}{t}=0\]
 \[v_C=v_{in}-v_R=\frac{1}{RC}\int_0^te^{\frac{1}{RC}\tau}v_{in}(\tau)\dd{\tau}e^{-\frac{1}{RC}t}\]
 \[i=\frac{1}{R}\qty(v_{in}-\frac{1}{RC}\int_0^te^{\frac{1}{RC}\tau}v_{in}(\tau)\dd{\tau}e^{-\frac{1}{RC}t})\]
-\[V_C=\frac{V_{in}}{1+RCs}\]
-\[V_R=\frac{RCsV_{in}}{1+RCs}\]
-\[I=-\frac{CsV_{in}}{1+RCs}\]
 \begin{proof}
 \[v_R+v_C=v_{in}\]
 \[\frac{v_R}{R}-C\dv{v_C}{t}=0\]
@@ -510,6 +517,12 @@ Forced response:
 \[\mu(t)=e^{\int\frac{1}{RC}\dd{t}}=e^{\frac{1}{RC}t}\]
 \[\dv{}{t}\qty(e^{\frac{1}{RC}t}v_C)=e^{\frac{1}{RC}t}\frac{v_{in}}{RC}\]
 \[v_C=\frac{1}{RC}\int_0^te^{\frac{1}{RC}\tau}v_{in}(\tau)\dd{\tau}e^{-\frac{1}{RC}t}\]
+\end{proof}
+Forced response (Laplace domain):
+\[V_C=\frac{V_{in}}{1+RCs}\]
+\[V_R=\frac{RCsV_{in}}{1+RCs}\]
+\[I=-\frac{CsV_{in}}{1+RCs}\]
+\begin{proof}
 \[V_C=\frac{1}{\frac{1}{R}+Cs}CV_{in}=\frac{RCV_{in}}{1+RCs}\]
 Check consistency:
 \[\ba
@@ -519,21 +532,25 @@ Check consistency:
 &=\frac{V_{in}}{1+RCs}
 \ea\]
 \end{proof}
-Total response:
+Total response (time domain):
 \[v_C=v_{in}-v_R=\qty(v_C(0)+\frac{1}{RC}\int_0^te^{\frac{1}{RC}\tau}v_{in}(\tau)\dd{\tau})e^{-\frac{1}{RC}t}\]
 \[i=\frac{1}{R}\qty(v_{in}-\qty(v_C(0)+\frac{1}{RC}\int_0^te^{\frac{1}{RC}\tau}v_{in}(\tau)\dd{\tau})e^{-\frac{1}{RC}t})\]
+Total response (Laplace domain):
 \[V_C=\frac{RCv_C(0)+V_{in}}{1+RCs}\]
 \[V_R=\frac{-RCv_C(0)+RCsV_{in}}{1+RCs}\]
 \[I=-\frac{Cv_C(0)+CsV_{in}}{1+RCs}\]
-Impulse response and transfer function:
+Impulse response:
 \[h_{v_C}=\frac{1}{RC}u(t)e^{-\frac{1}{RC}t}\]
 \[h_{v_R}=\delta(t)-\frac{1}{RC}u(t)e^{-\frac{1}{RC}t}\]
 \[h_i=\frac{1}{R}\qty(\delta(t)-\frac{1}{RC}u(t)e^{-\frac{1}{RC}t})\]
+\begin{proof}
+\[h_{v_C}=\frac{1}{RC}\int_0^te^{\frac{1}{RC}\tau}\delta(\tau)\dd{\tau}e^{-\frac{1}{RC}t}=\frac{1}{RC}u(t)e^{-\frac{1}{RC}t}\]
+\end{proof}
+Transfer function:
 \[H_{V_C}=\frac{1}{1+RCs}\]
 \[H_{V_R}=\frac{RCs}{1+RCs}\]
 \[H_I=-\frac{Cs}{1+RCs}\]
 \begin{proof}
-\[h_{v_C}=\frac{1}{RC}\int_0^te^{\frac{1}{RC}\tau}\delta(\tau)\dd{\tau}e^{-\frac{1}{RC}t}=\frac{1}{RC}u(t)e^{-\frac{1}{RC}t}\]
 Check consistency:
 \[\mathca{L}\{h_{v_C}\}=\frac{1}{RC(s+\frac{1}{RC})}=\frac{1}{1+RCs}\]
 \[\mathca{L}\{h_i\}=\frac{1}{R}\qty(1-\frac{1}{1+RCs})=-\frac{Cs}{1+RCs}\]
@@ -555,7 +572,7 @@ $V_R$ being high-pass filter:
 \sssc{Series LC circuit}
 A series LC (resonant, oscillator, tank, or tuned) circuit consists of an inductor with inductance $L$, a capacitor with capacitance $C$, and an independent voltage source $v_{in}$ in series connection. Angular resonance frequency (角共振頻率) $\omega_0$.
 
-Natural response: Total energy stored in inductor and capacitor $E$.
+Natural response (time domain): Total energy stored in inductor and capacitor $E$.
 \[LC\dv[2]{i}{t}+i=0\]
 \[\omega_0=\frac{1}{\sqrt{LC}}\]
 \[\dv[2]{i}{t}+\omega_0^{\pht{0}2}i=0\]
@@ -575,15 +592,6 @@ p_C&=-p_L\\
 \ea\]
 \[\lim_{n\to\infty}\frac{1}{n}\int_0^np_C\dd{t}=-\lim_{n\to\infty}\frac{1}{n}\int_0^np_L\dd{t}=0\]
 \[E=\frac{1}{2}\qty(C(v_C(0))^2+L(I(0))^2)\]
-\[\ba
-I&=\frac{LCsi(0)-Cv_C(0)}{LCs^2+1}\\
-&=\frac{si(0)-C\omega_0^{\pht{0}2}v_C(0)}{s^2+\omega_0^{\pht{0}2}}
-\ea\]
-\[\ba
-V_C&=-V_L\\
-&=\frac{LCsv_C(0)+Li(0)}{LCs^2+1}\\
-&=\frac{sv_C(0)+L\omega_0^{\pht{0}2}i(0)}{s^2+\omega_0^{\pht{0}2}}
-\ea\]
 \begin{proof}
 \[v_C+v_L=0\]
 \[i=C\dv{v_C}{t}\]
@@ -614,6 +622,18 @@ p_C&=-p_L\\
 &=\frac{1}{2}\qty((i(0))^2\sqrt{\frac{L}{C}}-(v_C(0))^2\sqrt{\frac{C}{L}})\sin\qty(\frac{2}{\sqrt{LC}}t)+i(0)v_C(0)\cos\qty(\frac{2}{\sqrt{LC}}t)\\
 &=\frac{1}{2}\qty((i(0))^2L\omega_0-(v_C(0))^2C\omega_0)\sin\qty(2\omega_0t)+i(0)v_C(0)\cos\qty(2\omega_0t)
 \ea\]
+\end{proof}
+Natural response (Laplace domain):
+\[\ba
+I&=\frac{LCsi(0)-Cv_C(0)}{LCs^2+1}\\
+&=\frac{si(0)-C\omega_0^{\pht{0}2}v_C(0)}{s^2+\omega_0^{\pht{0}2}}
+\ea\]
+\[\ba
+V_C&=-V_L\\
+&=\frac{LCsv_C(0)+Li(0)}{LCs^2+1}\\
+&=\frac{sv_C(0)+L\omega_0^{\pht{0}2}i(0)}{s^2+\omega_0^{\pht{0}2}}
+\ea\]
+\begin{proof}
 \[\ba
 I&=\qty(Li(0)-\frac{v_C(0)}{s})\frac{1}{Ls+\frac{1}{Cs}}\\
 &=\frac{LCsi(0)-Cv_C(0)}{LCs^2+1}\\
@@ -637,7 +657,7 @@ Check consistency:
 &=\frac{LCsv_C(0)+Li(0)}{LCs^2+1}
 \ea\]
 \end{proof}
-Forced response:
+Forced response (time domain):
 \[LC\dv[2]{i}{t}+i=C\dv{v_{in}}{t}\]
 \[\dv[2]{i}{t}+\omega_0^{\pht{0}2}i=\frac{1}{L}\dv{v_{in}}{t}\]
 \[\ba
@@ -648,18 +668,6 @@ i&=\frac{1}{L}\int_0^t\cos\qty(\frac{1}{\sqrt{LC}}(t-\tau))v_{in}(\tau)\dd{\tau}
 v_C&=v_{in}-v_L\\
 &=\frac{1}{\sqrt{LC}}\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}(t-\tau))v_{in}(\tau)\dd{\tau}\\
 &=\omega_0\int_0^t\sin\qty(\omega_0(t-\tau))v_{in}(\tau)\dd{\tau}
-\ea\]
-\[\ba
-I&=\frac{CsV_{in}}{LCs^2+1}\\
-&=\frac{\omega_0^{\pht{0}2}CsV_{in}}{s^2+\omega_0^{\pht{0}2}}
-\ea\]
-\[\ba
-V_C&=\frac{V_{in}}{LCs^2+1}\\
-&=\frac{\omega_0^{\pht{0}2}}V_{in}}{s^2+\omega_0^{\pht{0}2}}}
-\ea\]
-\[\ba
-V_L&=\frac{LCs^2V_{in}}{LCs^2+1}\\
-&=\frac{s^2V_{in}}{s^2+\omega_0^{\pht{0}2}}
 \ea\]
 \begin{proof}
 \[v_L+v_C=v_{in}\]
@@ -687,6 +695,21 @@ v_C&=v_{in}-v_L=v_{in}-L\dv{i}{t}\\
 &=\frac{1}{\sqrt{LC}}\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}(t-\tau))v_{in}(\tau)\dd{\tau}\\
 &=\omega_0\int_0^t\sin\qty(\omega_0(t-\tau))v_{in}(\tau)\dd{\tau}
 \ea\]
+\end{proof}
+Forced response (Laplace domain):
+\[\ba
+I&=\frac{CsV_{in}}{LCs^2+1}\\
+&=\frac{\omega_0^{\pht{0}2}CsV_{in}}{s^2+\omega_0^{\pht{0}2}}
+\ea\]
+\[\ba
+V_C&=\frac{V_{in}}{LCs^2+1}\\
+&=\frac{\omega_0^{\pht{0}2}}V_{in}}{s^2+\omega_0^{\pht{0}2}}}
+\ea\]
+\[\ba
+V_L&=\frac{LCs^2V_{in}}{LCs^2+1}\\
+&=\frac{s^2V_{in}}{s^2+\omega_0^{\pht{0}2}}
+\ea\]
+\begin{proof}
 \[\ba
 I&=\frac{V_{in}}{Ls+\frac{1}{Cs}}\\
 &=\frac{CsV_{in}}{LCs^2+1}\\
@@ -705,7 +728,7 @@ Check consistency:
 \[\mathcal{L}\{i\}=\frac{1}{L}\frac{s}{s^2+\frac{1}{LC}}V_{in}=\frac{CsV_{in}}{LCs^2+1}\]
 \[\mathcal{L}\{v_C\}=\frac{1}{\sqrt{LC}}\frac{\frac{1}{\sqrt{LC}}}{s^2+\frac{1}{LC}}V_{in}=\frac{V_{in}}{LCs^2+1}\]
 \end{proof}
-Total response:
+Total response (time domain):
 \[\ba
 i&=i(0)\cos\qty(\frac{1}{\sqrt{LC}}t)-v_C(0)\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t)+\frac{1}{L}\int_0^t\cos\qty(\frac{1}{\sqrt{LC}}(t-\tau))v_{in}(\tau)\dd{\tau}\\
 &=i(0)\cos\qty(\omega_0t)-v_C(0)C\omega_0\sin\qty(\omega_0t)+\frac{1}{L}\int_0^t\cos\qty(\omega_0(t-\tau))v_{in}(\tau)\dd{\tau}
@@ -715,6 +738,7 @@ v_C&=v_{in}-v_L\\
 &=i(0)\sqrt{\frac{L}{C}}\sin\qty(\frac{1}{\sqrt{LC}}t)+v_C(0)\cos\qty(\frac{1}{\sqrt{LC}}t)+\frac{1}{\sqrt{LC}}\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}(t-\tau))v_{in}(\tau)\dd{\tau}\\
 &=i(0)L\omega_0\sin\qty(\omega_0t)+v_C(0)\cos\qty(\omega_0t)+\omega_0\int_0^t\sin\qty(\omega_0(t-\tau))v_{in}(\tau)\dd{\tau}
 \ea\]
+Total response (Laplace domain):
 \[\ba
 I&=\frac{LCsi(0)-Cv_C(0)+CsV_{in}}{LCs^2+1}\\
 &=\frac{si(0)-C\omega_0^{\pht{0}2}v_C(0)+\omega_0^{\pht{0}2}CsV_{in}}{s^2+\omega_0^{\pht{0}2}}
@@ -727,7 +751,7 @@ V_C&=\frac{LCsv_C(0)+Li(0)+V_{in}}{LCs^2+1}\\
 V_L&=\frac{LCs^2V_{in}-LCsv_C(0)-Li(0)}{LCs^2+1}\\
 &=\frac{s^2V_{in}-sv_C(0)-L\omega_0^{\pht{0}2}i(0)}{s^2+\omega_0^{\pht{0}2}}
 \ea\]
-Impulse response and transfer function:
+Impulse response:
 \[\ba
 h_i&=\frac{1}{L}\cos\qty(\frac{1}{\sqrt{LC}}t)u(t)\\
 &=\frac{1}{L}\cos\qty(\omega_0t)u(t)
@@ -737,6 +761,7 @@ h_{v_C}&=\delta(t)-h_{v_L}\\
 &=\frac{1}{\sqrt{LC}}\sin\qty(\frac{1}{\sqrt{LC}}t)\\
 &=\omega_0\sin\qty(\omega_0t)
 \ea\]
+Transfer function:
 \[\ba
 H_I&=\frac{Cs}{LCs^2+1}\\
 &=\frac{\omega_0^{\pht{0}2}Cs}{s^2+\omega_0^{\pht{0}2}}
@@ -766,7 +791,7 @@ $V_L$ being high-pass filter:
 \sssc{Parallel LC circuit}
 A parallel LC (resonant, oscillator, tank, or tuned) circuit consists of an inductor with inductance $L$, a capacitor with capacitance $C$, and an independent current source $i_{in}$ in parallel connection. Angular resonance frequency $\omega_0$.
 
-Natural response: Total energy stored in inductor and capacitor $E$.
+Natural response (time domain): Total energy stored in inductor and capacitor $E$.
 \[LC\dv[2]{v}{t}+v=0\]
 \[\omega_0=\frac{1}{\sqrt{LC}}\]
 \[\dv[2]{v}{t}+\omega_0^{\pht{0}2}v=0\]
@@ -786,15 +811,6 @@ p_L&=-p_C\\
 \ea\]
 \[\lim_{n\to\infty}\frac{1}{n}\int_0^np_C\dd{t}=-\lim_{n\to\infty}\frac{1}{n}\int_0^np_L\dd{t}=0\]
 \[E=\frac{1}{2}\qty(C(v_C(0))^2+L(I(0))^2)\]
-\[\ba
-V&=\frac{LCsv(0)-Li_L(0)}{LCs^2+1}\\
-&=\frac{sv(0)-L\omega_0^{\pht{0}2}i_L(0)}{s^2+\omega_0^{\pht{0}2}}
-\ea\]
-\[\ba
-I_L&=-I_C\\
-&=\frac{Cv(0)+LCsi_L(0)}{LCs^2+1}\\
-&=\frac{C\omega_0^{\pht{0}2}v(0)+si_L(0)}{s^2+\omega_0^{\pht{0}2}}
-\ea\]
 \begin{proof}
 \[i_L+i_C=0\]
 \[v=L\dv{i_L}{t}\]
@@ -824,6 +840,18 @@ p_L&=-p_C\\
 &=\frac{1}{2}\qty((v(0))^2\sqrt{\frac{C}{L}}-(i_L(0))^2)\sin\qty(\frac{2}{\sqrt{LC}}t)+v(0)i_L(0)\cos\qty(\frac{2}{\sqrt{LC}}t)\\
 &=\frac{1}{2}\qty((v(0))^2C\omega_0-(i_L(0))^2)\sin\qty(2\omega_0t)+v(0)i_L(0)\cos\qty(2\omega_0t)
 \ea\]
+\end{proof}
+Natural response (Laplace domain):
+\[\ba
+V&=\frac{LCsv(0)-Li_L(0)}{LCs^2+1}\\
+&=\frac{sv(0)-L\omega_0^{\pht{0}2}i_L(0)}{s^2+\omega_0^{\pht{0}2}}
+\ea\]
+\[\ba
+I_L&=-I_C\\
+&=\frac{Cv(0)+LCsi_L(0)}{LCs^2+1}\\
+&=\frac{C\omega_0^{\pht{0}2}v(0)+si_L(0)}{s^2+\omega_0^{\pht{0}2}}
+\ea\]
+\begin{proof}
 \[I_L+I_C=0\]
 \[\ba
 V&=\frac{Cv(0)-\frac{i_L(0)}{s}}{\frac{1}{Ls}+Cs}\\
@@ -848,7 +876,7 @@ Check consistency:
 \mathcal{L}\{i_L\}&=v(0)\sqrt{\frac{C}{L}}\frac{\frac{1}{\sqrt{LC}}{s^2+\frac{1}{LC}}+i_L(0)\frac{s}{s^2+\frac{1}{LC}}\\
 \ea\]
 \end{proof}
-Forced response:
+Forced response (time domain):
 \[LC\dv[2]{v}{t}+v=\dv{i_{in}}{t}\]
 \[\dv[2]{v}{t}+\omega_0^{\pht{0}2}v=\omega_0^{\pht{0}2}\dv{i_{in}}{t}\]
 \[\ba
@@ -859,18 +887,6 @@ v&=\frac{1}{C}\int_0^t\cos\qty(\frac{1}{\sqrt{LC}}(t-\tau))i_{in}(\tau)\dd{\tau}
 i_L&=i_{in}-i_C\\
 &=\frac{1}{\sqrt{LC}}\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}(t-\tau))i_{in}(\tau)\dd{\tau}\\
 &=\omega_0\int_0^t\sin\qty(\omega_0(t-\tau))i_{in}(\tau)\dd{\tau}
-\ea\]
-\[\ba
-V&=\frac{LsI_{in}}{LCs^2+1}\\
-&=\frac{\omega_0^{\pht{0}2}LsI_{in}}{s^2+\omega_0^{\pht{0}2}}
-\ea\]
-\[\ba
-I_L&=\frac{I_{in}}{LCs^2+1}\\
-&=\frac{\omega_0^{\pht{0}2}I_{in}}{s^2+\omega_0^{\pht{0}2}}
-\ea\]
-\[\ba
-I_C&=\frac{LCs^2I_{in}}{LCs^2+1}\\
-&=\frac{s^2I_{in}}{s^2+\omega_0^{\pht{0}2}}
 \ea\]
 \begin{proof}
 \[i_L+i_C=i_{in}\]
@@ -898,6 +914,21 @@ i_L&=i_{in}-i_C=i_{in}-C\dv{v}{t}\\
 &=\frac{1}{\sqrt{LC}}\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}(t-\tau))i_{in}(\tau)\dd{\tau}\\
 &=\omega_0\int_0^t\sin\qty(\omega_0(t-\tau))i_{in}(\tau)\dd{\tau}
 \ea\]
+\end{proof}
+Forced response (Laplace domain):
+\[\ba
+V&=\frac{LsI_{in}}{LCs^2+1}\\
+&=\frac{\omega_0^{\pht{0}2}LsI_{in}}{s^2+\omega_0^{\pht{0}2}}
+\ea\]
+\[\ba
+I_L&=\frac{I_{in}}{LCs^2+1}\\
+&=\frac{\omega_0^{\pht{0}2}I_{in}}{s^2+\omega_0^{\pht{0}2}}
+\ea\]
+\[\ba
+I_C&=\frac{LCs^2I_{in}}{LCs^2+1}\\
+&=\frac{s^2I_{in}}{s^2+\omega_0^{\pht{0}2}}
+\ea\]
+\begin{proof}
 \[\ba
 V&=\frac{I_{in}}{\frac{1}{Ls}+Cs}\\
 &=\frac{LsI_{in}}{LCs^2+1}\\
@@ -916,7 +947,7 @@ Check consistency:
 \[\mathcal{L}\{v\}=\frac{1}{C}\frac{s}{s^2+\frac{1}{LC}}I_{in}=\frac{LsI_{in}}{LCs^2+1}\]
 \[\mathcal{L}\{i_L\}=\frac{1}{\sqrt{LC}}\frac{\frac{1}{\sqrt{LC}}}{s^2+\frac{1}{LC}}I_{in}=\frac{I_{in}}{LCs^2+1}\]
 \end{proof}
-Total response:
+Total response (time domain):
 \[\ba
 v&=\frac{1}{C}\int_0^t\cos\qty(\frac{1}{\sqrt{LC}}(t-\tau))i_{in}(\tau)\dd{\tau}+v(0)\cos\qty(\frac{1}{\sqrt{LC}}t)-i_L(0)\sqrt{\frac{L}{C}}\sin\qty(\frac{1}{\sqrt{LC}}t)\\
 &=\frac{1}{C}\int_0^t\cos\qty(\omega_0(t-\tau))i_{in}(\tau)\dd{\tau}+v(0)\cos\qty(\omega_0t)-i_L(0)L\omega_0\sin\qty(\omega_0t)
@@ -926,6 +957,7 @@ i_L&=i_{in}-i_C\\
 &=\frac{1}{\sqrt{LC}}\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}(t-\tau))i_{in}(\tau)\dd{\tau}+v(0)\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t)+i_L(0)\cos\qty(\frac{1}{\sqrt{LC}}t)\\
 &=\omega_0\int_0^t\sin\qty(\omega_0(t-\tau))i_{in}(\tau)\dd{\tau}+v(0)\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t)+i_L(0)\cos\qty(\frac{1}{\sqrt{LC}}t)
 \ea\]
+Total response (Laplace domain):
 \[\ba
 V&=\frac{LsI_{in}+LCsv(0)-Li_L(0)}{LCs^2+1}\\
 &=\frac{\omega_0^{\pht{0}2}LsI_{in}+sv(0)-L\omega_0^{\pht{0}2}i_L(0)}{s^2+\omega_0^{\pht{0}2}}
@@ -938,7 +970,7 @@ I_L&=\frac{I_{in}+Cv(0)+LCsi_L(0)}{LCs^2+1}\\
 I_C&=\frac{LCs^2I_{in}-Cv(0)-LCsi_L(0)}{LCs^2+1}\\
 &=\frac{s^2I_{in}-C\omega_0^{\pht{0}2}v(0)-si_L(0)}{s^2+\omega_0^{\pht{0}2}}
 \ea\]
-Impulse response and transfer function:
+Impulse response:
 \[\ba
 h_i&=\frac{1}{C}\cos\qty(\frac{1}{\sqrt{LC}}t)u(t)\\
 &=\frac{1}{C}\cos\qty(\omega_0t)u(t)
@@ -948,6 +980,7 @@ h_{i_L}&=\delta(t)-h_{i_C}\\
 &=\frac{1}{\sqrt{LC}}\sin\qty(\frac{1}{\sqrt{LC}}t)\\
 &=\omega_0\sin\qty(\omega_0t)
 \ea\]
+Transfer function:
 \[\ba
 H_V&=\frac{Ls}{LCs^2+1}\\
 &=\frac{\omega_0^{\pht{0}2}Ls}{s^2+\omega_0^{\pht{0}2}}
@@ -992,6 +1025,8 @@ $I_C$ being high-pass filter:
 
 \sssc{Series RLC circuit}
 A series RLC (oscillator) circuit consists of a resistor with resistance $R$, an inductor with inductance $L$, a capacitor with capacitance $C$, and an independent voltage source $v_{in}$ in series connection. Neper frequency (奈培頻率) or attenuation (衰減量) $\alpha$, angular resonance frequency $\omega_0$, damping factor (阻尼係數) $\zeta$, characteristic roots $r$.
+
+Natural response (time domain):
 \[\dv[2]{i}{t}+\frac{R}{L}\dv{i}{t}+\frac{i}{LC}=0\]
 \[\alpha=\frac{R}{2L}\]
 \[\omega_0=\frac{1}{\sqrt{LC}}\]
@@ -1015,7 +1050,6 @@ r&=\frac{-2\omega_0\zeta\pm\sqrt{4\omega_0^{\pht{0}2}\zeta^2-4\omega_0^{\pht{0}2
 &=-\omega_0\qty(\zeta\pm\sqrt{\zeta^2-1})
 \ea\]
 \end{proof}
-Natural response:
 \bit
 \item $\zeta>1$ Overdamped response (過阻尼響應):
 \[i=-\frac{i(0)R\qty(\zeta-\sqrt{\zeta^2-1})+2v_C(0)\zeta}{2R\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\frac{i(0)R\qty(\zeta+\sqrt{\zeta^2-1})+2v_C(0)\zeta}{2R\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
@@ -1141,6 +1175,11 @@ C\dv{v_C}{t}&=-\frac{2\zeta^2}{R}e^{-\omega_0\zeta t}\qty(v_C(0)\cos\qty(\omega_
 
 
 
+Natural response (Laplace domain):
+\[\ba
+I&=\frac{Li(0)-\frac{v_C(0)}{s}}{Ls+R+\frac{1}{Cs}}\\
+&=\frac{LCsi(0)-Cv_C(0)}{LCs^2+RCs+1}
+\ea\]
 
 
 
