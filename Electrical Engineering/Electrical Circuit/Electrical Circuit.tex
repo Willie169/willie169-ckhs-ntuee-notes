@@ -1006,22 +1006,6 @@ $I_C$ being high-pass filter:
 \[\lim_{\omega\to 0}\abs{H_{I_C}(j\omega)}=\lim_{\omega\to 0}\abs{\frac{-LC\omega^2}{1-LC\omega^2}}=0\]
 \[\lim_{\omega\to\infty}\abs{H_{I_C}(j\omega)}=\lim_{\omega\to\infty}\abs{\frac{-LC\omega^2}{1-LC\omega^2}}=1\]
 \end{proof}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 \sssc{Series RLC circuit}
 A series RLC (oscillator) circuit consists of a resistor with resistance $R$, an inductor with inductance $L$, a capacitor with capacitance $C$, and an independent voltage source $v_{in}$ in series connection. Neper frequency (奈培頻率) or attenuation (衰減量) $\alpha$, angular resonance frequency $\omega_0$, damping factor (阻尼係數) $\zeta$, characteristic roots $r$.
 
@@ -1362,12 +1346,11 @@ C\dv{v_C}{t}&=2\frac{\omega_0}{R}\int_0^t\pdv{}{t}\qty((t-\tau)e^{-\omega_0(t-\t
 &=i
 \ea\]
 \end{proof}
-
-
-
-PLACEHOLDER inconsistent
 \item $0<\zeta<1$ Underdamped response:
-
+\[i=2\frac{\omega_0}{R}\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))-\frac{\zeta^2}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau)))v_{in}(\tau)\dd{\tau}\]
+\[v_R=2\omega_0\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))-\frac{\zeta^2}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau)))v_{in}(\tau)\dd{\tau}\]
+\[v_L=v_{in}+\omega_0\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(-2\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))+\frac{2\zeta^2-1}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau)))v_{in}(\tau)\dd{\tau}\]
+\[v_C=\frac{\omega_0}{\sqrt{1-\zeta^2}}\int_0^te^{-\omega_0\zeta(t-\tau)}\sin\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))v_{in}(\tau)\dd{\tau}\]
 \begin{proof}
 \[i_1=e^{-\omega_0\zeta t}\cos\qty(\omega_0\sqrt{1-\zeta^2}t)\]
 \[i_2=e^{-\omega_0\zeta t}\sin\qty(\omega_0\sqrt{1-\zeta^2}t)\]
@@ -1383,19 +1366,29 @@ i&=\frac{1}{L\omega_0\sqrt{1-\zeta^2}}\qty(-e^{-\omega_0\zeta t}\cos\qty(\omega_
 &=2\frac{\zeta}{R\sqrt{1-\zeta^2}}\int_0^t
 e^{-\omega_0\zeta(t-\tau)}\qty(\omega_0\sqrt{1-\zeta^2}\cos\qty(\omega_0\sqrt{1-\zeta^2}t)\cos\qty(\omega_0\sqrt{1-\zeta^2}\tau)+\omega_0\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}t)\sin\qty(\omega_0\sqrt{1-\zeta^2}\tau)-\omega_0\zeta\sin\qty(\omega_0\sqrt{1-\zeta^2}t)\cos\qty(\omega_0\sqrt{1-\zeta^2}\tau)+\omega_0\sqrt{1-\zeta^2}\sin\qty(\omega_0\sqrt{1-\zeta^2}t)\sin\qty(\omega_0\sqrt{1-\zeta^2}\tau))v_{in}(\tau)\dd{\tau}\\
 &=2\frac{\omega_0\zeta}{R\sqrt{1-\zeta^2}}\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(\sqrt{1-\zeta^2}\cos\qty(\omega_0\sqrt{1-\zeta^2}t)\cos\qty(\omega_0\sqrt{1-\zeta^2}\tau)+\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}t)\sin\qty(\omega_0\sqrt{1-\zeta^2}\tau)-\zeta\sin\qty(\omega_0\sqrt{1-\zeta^2}t)\cos\qty(\omega_0\sqrt{1-\zeta^2}\tau)+\sqrt{1-\zeta^2}\sin\qty(\omega_0\sqrt{1-\zeta^2}t)\sin\qty(\omega_0\sqrt{1-\zeta^2}\tau))v_{in}(\tau)\dd{\tau}\\
-&=2\frac{\omega_0\zeta}{R\sqrt{1-\zeta^2}}\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(
-\sqrt{1-\zeta^2}\cos\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))-\zeta\sin\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))
-)v_{in}(\tau)\dd{\tau}\\
-
-
-
-
-
+&=2\frac{\omega_0\zeta}{R\sqrt{1-\zeta^2}}\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(\sqrt{1-\zeta^2}\cos\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))-\zeta\sin\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau)))v_{in}(\tau)\dd{\tau}\\
+&=2\frac{\omega_0}{R}\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))-\frac{\zeta^2}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau)))v_{in}(\tau)\dd{\tau}
+\ea\]
+\[v_R=2\omega_0\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))-\frac{\zeta^2}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau)))v_{in}(\tau)\dd{\tau}\]
+\[\ba
+v_L&=L\dv{i}{t}\\
+&=v_{in}+\frac{1}{\sqrt{1-\zeta^2}}\int_0^t\pdv{}{t}\qty(e^{-\omega_0\zeta(t-\tau)}\qty(\sqrt{1-\zeta^2}\cos\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))-\zeta\sin\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))))v_{in}(\tau)\dd{\tau}\\
+&=v_{in}+\int_0^t\qty(-\omega_0\zeta e^{-\omega_0\zeta(t-\tau)}\qty(\cos\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))-\frac{\zeta}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau)))+\omega_0\sqrt{1-\zeta^2}e^{-\omega_0\zeta(t-\tau)}\qty(-\sin\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))-\frac{\zeta}{\sqrt{1-\zeta^2}}\cos\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))))v_{in}(\tau)\dd{\tau}\\
+&=v_{in}+\omega_0\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(-\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))+\frac{\zeta^2}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))-\sqrt{1-\zeta^2}\sin\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))-\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau)))v_{in}(\tau)\dd{\tau}\\
+&=v_{in}+\omega_0\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(-2\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))+\frac{2\zeta^2-1}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau)))v_{in}(\tau)\dd{\tau}
+\ea\]
+\[\ba
+v_C&=v_{in}-v_R-v_L\\
+&=-2\omega_0\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))-\frac{\zeta^2}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau)))v_{in}(\tau)\dd{\tau}-\omega_0\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(-2\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))+\frac{2\zeta^2-1}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau)))v_{in}(\tau)\dd{\tau}\\
+&=-\omega_0\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(2\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))-\frac{2\zeta^2}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))-2\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))+\frac{2\zeta^2-1}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau)))v_{in}(\tau)\dd{\tau}\\
+&=\frac{\omega_0}{\sqrt{1-\zeta^2}}\int_0^te^{-\omega_0\zeta(t-\tau)}\sin\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))v_{in}(\tau)\dd{\tau}
+\ea\]
 Check $i=C\dv{v_C}{t}$:
 \[\ba
-C\dv{v_C}{t}&=
-
-
+C\dv{v_C}{t}&=2\frac{\zeta}{R\sqrt{1-\zeta^2}}\int_0^t\pdv{}{t}\qty(e^{-\omega_0\zeta(t-\tau)}\sin\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau)))v_{in}(\tau)\dd{\tau}\\
+&=2\frac{\omega_0}{R}\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))-\frac{\zeta^2}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau)))v_{in}(\tau)\dd{\tau}\\
+&=i
+\ea\]
 \end{proof}
 \eit
 Forced response (Laplace domain):
@@ -1449,25 +1442,47 @@ Check consistency:
 &=\frac{2V_{in}\frac{\omega_0 s}{R}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
 \item $0<\zeta<1$ Underdamped response:
-
+\[\ba
+\mathcal{L}\{i\}&=2\frac{\omega_0}{R}\qty(\zeta\qty(s+\omega_0\zeta)-\frac{\zeta^2}{\sqrt{1-\zeta^2}}\omega_0\sqrt{1-\zeta^2})\frac{V_{in}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}\\
+&=\frac{2V_{in}\frac{\omega_0\zeta s}{R}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
+\ea\]
 \eit
-\[\omega_0=\frac{1}{\sqrt{LC}}\]
-\[\zeta=\frac{R}{2}\sqrt{\frac{C}{L}}\]
-1/L=2\frac{\omega_0\zeta}{R}
-L=\frac{1}{2}\frac{R}{\omega_0\zeta}
-1/C=\frac{1}{2}\frac{R\omega_0}{\zeta}
-C=2\frac{\zeta}{R\omega_0}
 \end{proof}
 
 
 
 
-Parallel
-$\alpha=\frac{1}{2RC}$
-$\omega_0=\frac{1}{\sqrt{LC}}$
+
+
+\sssc{Parallel RLC circuit}
+A parallel RLC (oscillator) circuit consists of a resistor with resistance $R$, an inductor with inductance $L$, a capacitor with capacitance $C$, and an independent current source $i_{in}$ in parallel connection. Neper frequency or attenuation $\alpha$, angular resonance frequency $\omega_0$, damping factor $\zeta$, characteristic roots $r$.
+
+Natural response (time domain):
+\[\dv[2]{v}{t}+\frac{1}{RC}\dv{v}{t}+\frac{v}{LC}=0\]
+\[\alpha=\frac{1}{2RC}\]
+\[\omega_0=\frac{1}{\sqrt{LC}}\]
+\[\zeta=\frac{1}{2R}\sqrt{\frac{L}{C}}\]
+\[\dv[2]{v}{t}+2\omega_0\zeta\dv{v}{t}+\omega_0^{\pht{0}2}v=0\]
+\[r=-\omega_0\qty(\zeta\pm\sqrt{\zeta^2-1})\]
+\begin{proof}
+\[i_R+i_L+i_C=0\]
+\[v=Ri_R\]
+\[i_C=C\dv{v}{t}\]
+\[v=L\dv{i_L}{t}\]
+\[\frac{1}{R}\dv{v}{t}+\frac{v}{L}+C\dv[2]{v}{t}=0\]
+\[\dv[2]{v}{t}+\frac{1}{RC}\dv{v}{t}+\frac{v}{LC}=0\]
+\[\alpha=\frac{1}{2RC}\]
+\[\omega_0=\frac{1}{\sqrt{LC}}\]
 \[\zeta=\frac{\alpha}{\omega_0}=\frac{1}{2R}\sqrt{\frac{L}{C}}\]
-\[s_1=-\omega_0\zeta+\omega_0\sqrt{\zeta^2-1}\]
-\[s_2=-\omega_0\zeta-\omega_0\sqrt{\zeta^2-1}\]
+\[\dv[2]{v}{t}+2\omega_0\zeta\dv{v}{t}+\omega_0^{\pht{0}2}v=0\]
+\[r^2+2\omega_0\zeta+\omega_0^{\pht{0}2}=0\]
+\[\ba
+r&=\frac{-2\omega_0\zeta\pm\sqrt{4\omega_0^{\pht{0}2}\zeta^2-4\omega_0^{\pht{0}2}}}{2}\\
+&=-\omega_0\qty(\zeta\pm\sqrt{\zeta^2-1})
+\ea\]
+\end{proof}
+
+
 
 
 
