@@ -1586,7 +1586,7 @@ L\dv{i_L}{t}&=-\qty(v(0)\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0)R
 \[v=(v(0)-(v(0)+2i_L(0)R)\omega_0t)e^{-\omega_0t}\]
 \[i_R=\qty(\frac{v(0)}{R}-\qty(\frac{v(0)}{R}+2i_L(0))\omega_0t)e^{-\omega_0t}\]
 \[i_L=\qty(i_L(0)+(\frac{1}{2}\frac{v(0)}{R}+i_L(0))\omega_0t)e^{-\omega_0t}\]
-\[i_C=\qty(\frac{v(0)}{R}+i_L(0))\qty(-1+\omega_0t)e^{-\omega_0t}\]
+\[i_C=\qty(-\frac{v(0)}{R}-i_L(0)+\qty(\frac{v(0)}{2R}+i_L(0))\omega_0t)e^{-\omega_0t}\]
 \begin{proof}
 \[v=(A+Bt)e^{-\omega_0t}\]
 \[A=v(0)\]
@@ -1605,11 +1605,9 @@ i_L&=-i_R-i_C\\
 \[v=(v(0)-(v(0)+2i_L(0)R)\omega_0t)e^{-\omega_0t}\]
 \[i_L=\qty(i_L(0)+(\frac{1}{2}\frac{v(0)}{R}+i_L(0))\omega_0t)e^{-\omega_0t}\]
 Check $v=L\dv{i_L}{t}$:
-\[\ba
-L\dv{i_L}{t}&=(v(0)-(v(0)+2i_L(0)R)\omega_0t)e^{-\omega_0t}
-\ea\]
+\[L\dv{i_L}{t}=(v(0)-(v(0)+2i_L(0)R)\omega_0t)e^{-\omega_0t}\]
 \[i_R=\qty(\frac{v(0)}{R}-\qty(\frac{v(0)}{R}+2i_L(0))\omega_0t)e^{-\omega_0t}\]
-\[i_C=\qty(\frac{v(0)}{R}+i_L(0))\qty(-1+\omega_0t)e^{-\omega_0t}\]
+\[i_C=\qty(-\frac{v(0)}{R}-i_L(0)+\qty(\frac{v(0)}{2R}+i_L(0))\omega_0t)e^{-\omega_0t}\]
 \end{proof}
 \item $0<\zeta<1$ Underdamped response:
 \[v=e^{-\omega_0\zeta t}\qty(v(0)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(v(0)+2i_L(0)R)\frac{\zeta}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
@@ -1664,7 +1662,6 @@ I_C&=-\frac{\qty(v(0)+i_L(0)R)LCs+v(0)RC}{RLCs^2+Ls+R}\\
 \[\ba
 V&=\frac{v(0)C-\frac{i_L(0)}{s}}{Cs+\frac{1}{R}+\frac{1}{Ls}}\\
 &=\frac{v(0)RLCs-i_L(0)RL}{RLCs^2+Ls+R}\\
-&=\frac{v(0)s-\frac{i_L(0)}{C}}{s^2+\frac{s}{RC}+\frac{1}{LC}}\\
 &=\frac{v(0)s-2i_L(0)R\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
 \[\ba
@@ -1711,11 +1708,11 @@ Check consistency:
 &=\frac{i_L(0)s+\frac{v(0)\omega_0}{2R}+2i_L(0)\omega_0}{s^2+2\omega_0s+\omega_0^{\pht{0}2}}
 \ea\]
 \[\ba
-\mathcal{L}\{i_C\}&=
-\[i_C=\qty(\frac{v(0)}{R}+i_L(0))\qty(-1+\omega_0t)e^{-\omega_0t}\]
+\mathcal{L}\{i_C\}&=-\frac{\frac{v(0)}{R}+i_L(0)}{s+\omega_0}+\frac{\qty(\frac{v(0)}{2R}+i_L(0))\omega_0}{s^2+2\omega_0s+\omega_0^{\pht{0}2}}\\
 &=-\frac{\qty(\frac{v(0)}{R}+i_L(0))s+\frac{v(0)\omega_0}{2R}}{s^2+2\omega_0s+\omega_0^{\pht{0}2}}
 \ea\]
 \item $0<\zeta<1$ Underdamped response:
+PLACEHOLDER 下待
 V=\frac{v(0)s-2i_L(0)R\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 I_L=\frac{i_L(0)s+\frac{v(0)\omega_0}{2R\zeta}+2i_L(0)\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 I_C=-\frac{\qty(\frac{v(0)}{R}+i_L(0))s+\frac{v(0)\omega_0}{2R\zeta}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
@@ -1724,6 +1721,7 @@ I_C=-\frac{\qty(\frac{v(0)}{R}+i_L(0))s+\frac{v(0)\omega_0}{2R\zeta}}{s^2+2\omeg
 \[i_C=-e^{-\omega_0\zeta t}\qty(\qty(\frac{v(0)}{R}+i_L(0))\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(\frac{v(0)}{R}\frac{1-2\zeta^2}{\zeta\sqrt{1-\zeta^2}}-i_L(0)\frac{\zeta}{\sqrt{1-\zeta^2}})\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
 \eit
 \end{proof}
+
 Forced response (time domain):
 \[\dv[2]{i}{t}+\frac{R}{L}\dv{i}{t}+\frac{i}{LC}=\frac{1}{L}\dv{v_{in}}{t}\]
 \[\dv[2]{i}{t}+2\omega_0\zeta\dv{i}{t}+\omega_0^{\pht{0}2}i=\frac{1}{L}\dv{v_{in}}{t}\]
