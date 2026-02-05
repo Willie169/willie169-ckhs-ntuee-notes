@@ -1253,7 +1253,7 @@ Check consistency:
 \end{proof}
 Forced response (time domain):
 \[\dv[2]{i}{t}+\frac{R}{L}\dv{i}{t}+\frac{i}{LC}=\frac{1}{L}\dv{v_{in}}{t}\]
-\[\dv[2]{i}{t}+2\omega_0\zeta\dv{i}{t}+\omega_0^{\pht{0}2}i=\frac{1}{L}\dv{v_{in}}{t}\]
+\[\dv[2]{i}{t}+2\omega_0\zeta\dv{i}{t}+\omega_0^{\pht{0}2}=2\frac{\omega_0\zeta}{R}\dv{v_{in}}{t}\]
 \begin{proof}
 \[v_R+v_C+v_L=v_{in}\]
 \[v_R=Ri\]
@@ -1261,7 +1261,7 @@ Forced response (time domain):
 \[v_L=L\dv{i}{t}\]
 \[R\dv{i}{t}+\frac{i}{C}+L\dv[2]{i}{t}=\dv{v_{in}}{t}\]
 \[\dv[2]{i}{t}+\frac{R}{L}\dv{i}{t}+\frac{i}{LC}=\frac{1}{L}\dv{v_{in}}{t}\]
-\[\dv[2]{i}{t}+2\omega_0\zeta\dv{i}{t}+\omega_0^{\pht{0}2}i=\frac{1}{L}\dv{v_{in}}{t}\]
+\[\dv[2]{i}{t}+2\omega_0\zeta\dv{i}{t}+\omega_0^{\pht{0}2}=2\frac{\omega_0\zeta}{R}\dv{v_{in}}{t}\]
 \end{proof}
 \bit
 \item $\zeta>1$ Overdamped response:
@@ -1274,12 +1274,12 @@ Forced response (time domain):
 \[i_2=e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
 \[\frac{1}{i_1i_2'-i_2i_1'}=-\frac{1}{2\omega_0\sqrt{\zeta^2-1}}e^{2\omega_0\zeta t}\]
 \[\ba
-i&=\frac{1}{2L\omega_0\sqrt{\zeta^2-1}}\qty(e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}\int_0^te^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})\tau}\dv{v_{in}}{\tau}e^{2\omega_0\zeta\tau}\dd{\tau}-e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\int_0^te^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})\tau}\dv{v_{in}}{\tau}e^{2\omega_0\zeta\tau}\dd{\tau})\\
-&=\frac{1}{2L\omega_0\sqrt{\zeta^2-1}}\qty(e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}\int_0^te^{\omega_0\qty(\zeta-\sqrt{\zeta^2-1})\tau}\dv{v_{in}}{\tau}\dd{\tau}-e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\int_0^te^{\omega_0\qty(\zeta+\sqrt{\zeta^2-1})\tau}\dv{v_{in}}{\tau}\dd{\tau})\\
-&=\frac{1}{2L\omega_0\sqrt{\zeta^2-1}}\qty(e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}\qty(e^{\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}(v_{in}-v_{in}(0))-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})\int_0^te^{\omega_0\qty(\zeta-\sqrt{\zeta^2-1})\tau}v_{in}(\tau)\dd{\tau})-e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\qty(e^{\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}(v_{in}-v_{in}(0))-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})\int_0^te^{\omega_0\qty(\zeta+\sqrt{\zeta^2-1})\tau}v_{in}(\tau)\dd{\tau}))\\
-&=\frac{1}{2L\sqrt{\zeta^2-1}}\qty(-\qty(\zeta-\sqrt{\zeta^2-1})\int_0^te^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})(t-\tau)}v_{in}(\tau)\dd{\tau}+\qty(\zeta+\sqrt{\zeta^2-1})\int_0^te^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})(t-\tau)}v_{in}(\tau)\dd{\tau})\\
-&=\frac{1}{2L\sqrt{\zeta^2-1}}\int_0^t\qty(-\qty(\zeta-\sqrt{\zeta^2-1})e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})(t-\tau)}+\qty(\zeta+\sqrt{\zeta^2-1})e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})(t-\tau)})v_{in}(\tau)\dd{\tau}\\
-&=\frac{1}{2L}\int_0^t\qty(-\frac{\zeta}{\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})(t-\tau)}+e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})(t-\tau)}+\frac{\zeta}{\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})(t-\tau)}+e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})(t-\tau)})v_{in}(\tau)\dd{\tau}\\
+i&=\frac{\zeta}{R\sqrt{\zeta^2-1}}\qty(e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}\int_0^te^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})\tau}\dv{v_{in}}{\tau}e^{2\omega_0\zeta\tau}\dd{\tau}-e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\int_0^te^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})\tau}\dv{v_{in}}{\tau}e^{2\omega_0\zeta\tau}\dd{\tau})\\
+&=\frac{\zeta}{R\sqrt{\zeta^2-1}}\qty(e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}\int_0^te^{\omega_0\qty(\zeta-\sqrt{\zeta^2-1})\tau}\dv{v_{in}}{\tau}\dd{\tau}-e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\int_0^te^{\omega_0\qty(\zeta+\sqrt{\zeta^2-1})\tau}\dv{v_{in}}{\tau}\dd{\tau})\\
+&=\frac{\zeta}{R\sqrt{\zeta^2-1}}\qty(e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}\qty(e^{\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}(v_{in}-v_{in}(0))-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})\int_0^te^{\omega_0\qty(\zeta-\sqrt{\zeta^2-1})\tau}v_{in}(\tau)\dd{\tau})-e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\qty(e^{\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}(v_{in}-v_{in}(0))-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})\int_0^te^{\omega_0\qty(\zeta+\sqrt{\zeta^2-1})\tau}v_{in}(\tau)\dd{\tau}))\\
+&=\frac{\omega_0\zeta}{R\sqrt{\zeta^2-1}}\qty(-\qty(\zeta-\sqrt{\zeta^2-1})\int_0^te^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})(t-\tau)}v_{in}(\tau)\dd{\tau}+\qty(\zeta+\sqrt{\zeta^2-1})\int_0^te^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})(t-\tau)}v_{in}(\tau)\dd{\tau})\\
+&=\frac{\omega_0\zeta}{R\sqrt{\zeta^2-1}}\int_0^t\qty(-\qty(\zeta-\sqrt{\zeta^2-1})e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})(t-\tau)}+\qty(\zeta+\sqrt{\zeta^2-1})e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})(t-\tau)})v_{in}(\tau)\dd{\tau}\\
+&=\frac{\omega_0\zeta}{R}\int_0^t\qty(-\frac{\zeta}{\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})(t-\tau)}+e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})(t-\tau)}+\frac{\zeta}{\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})(t-\tau)}+e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})(t-\tau)})v_{in}(\tau)\dd{\tau}\\
 &=2\frac{\omega_0\zeta}{R}\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(\cosh(\omega_0\sqrt{\zeta^2-1}(t-\tau))-\frac{\zeta}{\sqrt{\zeta^2-1}}\sinh(\omega_0\sqrt{\zeta^2-1}(t-\tau)))v_{in}(\tau)\dd{\tau}
 \ea\]
 \[v_R=2\omega_0\zeta\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(\cosh(\omega_0\sqrt{\zeta^2-1}(t-\tau))-\frac{\zeta}{\sqrt{\zeta^2-1}}\sinh(\omega_0\sqrt{\zeta^2-1}(t-\tau)))v_{in}(\tau)\dd{\tau}\]
@@ -1726,18 +1726,17 @@ Check consistency:
 \ea\]
 \eit
 \end{proof}
-PLACEHOLDER
 Forced response (time domain):
-\[\dv[2]{i}{t}+\frac{R}{L}\dv{i}{t}+\frac{i}{LC}=\frac{1}{L}\dv{v_{in}}{t}\]
-\[\dv[2]{i}{t}+2\omega_0\zeta\dv{i}{t}+\omega_0^{\pht{0}2}i=\frac{1}{L}\dv{v_{in}}{t}\]
+\[\dv[2]{v}{t}+\frac{1}{RC}\dv{v}{t}+\frac{v}{LC}=\frac{1}{C}\dv{i_{in}}{t}\]
+\[\dv[2]{v}{t}+2\omega_0\zeta\dv{v}{t}+\omega_0^{\pht{0}2}v=2R\omega_0\zeta\dv{i_{in}}{t}\]
 \begin{proof}
-\[v_R+v_C+v_L=v_{in}\]
-\[v_R=Ri\]
-\[i=C\dv{v_C}{t}\]
-\[v_L=L\dv{i}{t}\]
-\[R\dv{i}{t}+\frac{i}{C}+L\dv[2]{i}{t}=\dv{v_{in}}{t}\]
-\[\dv[2]{i}{t}+\frac{R}{L}\dv{i}{t}+\frac{i}{LC}=\frac{1}{L}\dv{v_{in}}{t}\]
-\[\dv[2]{i}{t}+2\omega_0\zeta\dv{i}{t}+\omega_0^{\pht{0}2}i=\frac{1}{L}\dv{v_{in}}{t}\]
+\[i_R+i_L+i_C=i_{in}\]
+\[v=Ri_R\]
+\[i_C=C\dv{v}{t}\]
+\[v=L\dv{i_L}{t}\]
+\[\frac{1}{R}\dv{v}{t}+\frac{v}{L}+C\dv[2]{v}{t}=\dv{i_{in}}{t}\]
+\[\dv[2]{v}{t}+\frac{1}{RC}\dv{v}{t}+\frac{v}{LC}=\frac{1}{C}\dv{i_{in}}{t}\]
+\[\dv[2]{v}{t}+2\omega_0\zeta\dv{v}{t}+\omega_0^{\pht{0}2}v=2R\omega_0\zeta\dv{i_{in}}{t}\]
 \end{proof}
 \bit
 \item $\zeta>1$ Overdamped response:
@@ -1749,23 +1748,12 @@ C=\frac{1}{2R\omega_0\zeta}
 1/L=\frac{\omega_0}{2R\zeta}
 L=\frac{2R\zeta}{\omega_0}
 
-\[i=2\frac{\omega_0\zeta}{R}\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(\cosh(\omega_0\sqrt{\zeta^2-1}(t-\tau))-\frac{\zeta}{\sqrt{\zeta^2-1}}\sinh(\omega_0\sqrt{\zeta^2-1}(t-\tau)))v_{in}(\tau)\dd{\tau}\]
-\[v_R=2\omega_0\zeta\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(\cosh(\omega_0\sqrt{\zeta^2-1}(t-\tau))-\frac{\zeta}{\sqrt{\zeta^2-1}}\sinh(\omega_0\sqrt{\zeta^2-1}(t-\tau)))v_{in}(\tau)\dd{\tau}\]
-\[v_L=v_{in}+\omega_0\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(-2\zeta\cosh(\omega_0\sqrt{\zeta^2-1}(t-\tau))+\frac{2\zeta^2-1}{\sqrt{\zeta^2-1}}\sinh(\omega_0\sqrt{\zeta^2-1}(t-\tau)))v_{in}(\tau)\dd{\tau}\]
-\[v_C=\frac{\omega_0}{\sqrt{\zeta^2-1}}\int_0^te^{-\omega_0\zeta(t-\tau)}\sinh(\omega_0\sqrt{\zeta^2-1}(t-\tau))v_{in}(\tau)\dd{\tau}\]
 \begin{proof}
-\[i_1=e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}\]
-\[i_2=e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
-\[\frac{1}{i_1i_2'-i_2i_1'}=-\frac{1}{2\omega_0\sqrt{\zeta^2-1}}e^{2\omega_0\zeta t}\]
-\[\ba
-i&=\frac{1}{2L\omega_0\sqrt{\zeta^2-1}}\qty(e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}\int_0^te^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})\tau}\dv{v_{in}}{\tau}e^{2\omega_0\zeta\tau}\dd{\tau}-e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\int_0^te^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})\tau}\dv{v_{in}}{\tau}e^{2\omega_0\zeta\tau}\dd{\tau})\\
-&=\frac{1}{2L\omega_0\sqrt{\zeta^2-1}}\qty(e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}\int_0^te^{\omega_0\qty(\zeta-\sqrt{\zeta^2-1})\tau}\dv{v_{in}}{\tau}\dd{\tau}-e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\int_0^te^{\omega_0\qty(\zeta+\sqrt{\zeta^2-1})\tau}\dv{v_{in}}{\tau}\dd{\tau})\\
-&=\frac{1}{2L\omega_0\sqrt{\zeta^2-1}}\qty(e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}\qty(e^{\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}(v_{in}-v_{in}(0))-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})\int_0^te^{\omega_0\qty(\zeta-\sqrt{\zeta^2-1})\tau}v_{in}(\tau)\dd{\tau})-e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\qty(e^{\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}(v_{in}-v_{in}(0))-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})\int_0^te^{\omega_0\qty(\zeta+\sqrt{\zeta^2-1})\tau}v_{in}(\tau)\dd{\tau}))\\
-&=\frac{1}{2L\sqrt{\zeta^2-1}}\qty(-\qty(\zeta-\sqrt{\zeta^2-1})\int_0^te^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})(t-\tau)}v_{in}(\tau)\dd{\tau}+\qty(\zeta+\sqrt{\zeta^2-1})\int_0^te^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})(t-\tau)}v_{in}(\tau)\dd{\tau})\\
-&=\frac{1}{2L\sqrt{\zeta^2-1}}\int_0^t\qty(-\qty(\zeta-\sqrt{\zeta^2-1})e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})(t-\tau)}+\qty(\zeta+\sqrt{\zeta^2-1})e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})(t-\tau)})v_{in}(\tau)\dd{\tau}\\
-&=\frac{1}{2L}\int_0^t\qty(-\frac{\zeta}{\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})(t-\tau)}+e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})(t-\tau)}+\frac{\zeta}{\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})(t-\tau)}+e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})(t-\tau)})v_{in}(\tau)\dd{\tau}\\
-&=2\frac{\omega_0\zeta}{R}\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(\cosh(\omega_0\sqrt{\zeta^2-1}(t-\tau))-\frac{\zeta}{\sqrt{\zeta^2-1}}\sinh(\omega_0\sqrt{\zeta^2-1}(t-\tau)))v_{in}(\tau)\dd{\tau}
-\ea\]
+\[v_1=e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}\]
+\[v_2=e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
+\[\frac{1}{v_1v_2'-v_2v_1'}=-\frac{1}{2\omega_0\sqrt{\zeta^2-1}}e^{2\omega_0\zeta t}\]
+
+
 \[v_R=2\omega_0\zeta\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(\cosh(\omega_0\sqrt{\zeta^2-1}(t-\tau))-\frac{\zeta}{\sqrt{\zeta^2-1}}\sinh(\omega_0\sqrt{\zeta^2-1}(t-\tau)))v_{in}(\tau)\dd{\tau}\]
 \[\ba
 v_L&=L\dv{i}{t}\\
