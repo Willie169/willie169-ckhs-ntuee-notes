@@ -1971,7 +1971,7 @@ An op amp has five terminals:
 \bit
 \item $v_+$: non-inverting input voltage of the terminal at the $+$ sign;
 \item $v_-$: inverting input voltage of the terminal at the $-$ sign;
-\item $v_{out}$: output voltage of the terminal at the opposite side of inputs;
+\item $v_o$: output voltage of the terminal at the opposite side of inputs;
 \item $v_{CC+}$: positive supply voltage, denoted on the $+$ side of an op-amp or omitted;
 \item $v_{CC-}$: negative supply voltage, denoted on the $-$ side of an op-amp or omitted.
 \eit
@@ -1980,7 +1980,7 @@ An op amp has five terminals:
 \draw (0,0) node[op amp] (op amp) {};
 \end{circuitikz}
 \end{center}
-\[v_{out}=A(v_+-v_--v_{os}),\]
+\[v_o=A(v_+-v_--v_{os}),\]
 where $A$ is open-loop gain, and $v_{os}$ is input offset voltage.
 \sssc{Ideal op amp}
 \bit
@@ -1989,30 +1989,59 @@ where $A$ is open-loop gain, and $v_{os}$ is input offset voltage.
 \item No current flow into either of the input terminals.
 \eit
 \sssc{Inverting amplifier}
-An inverting amplifier consists of an op amp, an input resistor $R_i$, and a feedback resistor $R_f$, where input voltage $v_{in}$ is connected to $v_-$ through $R_i$, $v_+$ is connected to ground, and $v_{out}$ is fed back to $v_-$ through $R_f$.
-\[i_{in}=\frac{v_{in}}{R_{in}}=i_f=\frac{-v_{out}}{R_f},\]
-\[v_{out}=-\frac{R_f}{R_{in}}v_{in}.\]
+An inverting amplifier consists of an op amp where input voltage $v_i$ is connected to $v_-$ through an input resistor $R_i$, $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through a feedback resistor $R_f$.
+\[i_i=\frac{v_i}{R_i}=i_f=\frac{-v_o}{R_f},\]
+\[v_o=-\frac{R_f}{R_i}v_i.\]
 \sssc{Noninverting amplifier}
-A noninverting amplifier consist of an op amp, a ground resistor $R_g$, and a feedback resistor $R_f$, where input voltage $v_{in}$ is connected to $v_+$, $v_-$ is connected ground through $R_g$, and $v_{out}$ is fed back to $v_-$ through $R_f$.
-\[v_{in}=v_+=v_-=v_{out}\frac{R_g}{R_f+R_g},\]
-\[v_{out}=\qty(1+\frac{R_f}{R_g})v_{in}.\]
+A noninverting amplifier consist of an op amp where input voltage $v_i$ is connected to $v_+$, $v_-$ is connected ground through a ground resistor $R_g$, and $v_o$ is fed back to $v_-$ through a feedback resistor $R_f$.
+\[v_i=v_o\frac{R_g}{R_f+R_g},\]
+\[v_o=\qty(1+\frac{R_f}{R_g})v_i.\]
+\sssc{Unity gain buffer}
+A unity gain buffer consist of an op amp where input voltage $v_i$ is connected to $v_+$, $v_-$ is connected ground through a ground resistor $R_g$, and $v_o$ is fed back to $v_-$.
+\[v_o=v_i.\]
 \sssc{Summing amplifier}
-A summing amplifier consists of an op amp, input voltages $v_1,v_2,\ldots,v_n$, $n$ input resistors $R_1,R_2,\ldots,R_n$, and a feedback resistor $R_f$, where for any $k\in\bbN\land k\leq n$, $v_k$ is connected to $v_-$ through $R_k$, $v_+$ is connected to ground, and $v_{out}$ is fed back to $v_-$ through $R_f$.
+A summing amplifier consists of an op amp, input voltages $v_1,v_2,\ldots,v_n$, $n$ input resistors $R_1,R_2,\ldots,R_n$, and a feedback resistor $R_f$, where for any $k\in\bbN\land k\leq n$, $v_k$ is connected to $v_-$ through $R_k$, $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through $R_f$.
 \[i_k=\frac{v_k}{R_k},\]
-\[\sum_{k=1}^ni_k=i_f=\frac{-v_{out}}{R_f},\]
-\[v_{out}=-R_f\sum_{k=1}^n\frac{v_k}{R_k}.\]
+\[\sum_{k=1}^ni_k=i_f=\frac{-v_o}{R_f},\]
+\[v_o=-R_f\sum_{k=1}^n\frac{v_k}{R_k}.\]
 When $R_k=R$ for all $k\in\bbN\land k\leq n$:
-\[v_{out}=-\frac{R_f}{R}\sum_{k=1}^nv_k.\]
+\[v_o=-\frac{R_f}{R}\sum_{k=1}^nv_k.\]
 \sssc{Differential amplifier}
 A differential amplifier consists of a minuend $v_1$, a subtrahend $v_2$, and four resistors $R_1,R_2,R_3,R_4$ satisfying the condition
 \[\frac{R_1}{R_2}=\frac{R_3}{R_4},\]
-where $v_1,v_2$ are connected to $v_-,v_+$ through $R_1,R_2$ respectively, $v_{out}$ is fed back to $v_-$ through $R_3$, and $v_+$ is connected to ground through $R_4$.
+where $v_1,v_2$ are connected to $v_-,v_+$ through $R_1,R_2$ respectively, $v_o$ is fed back to $v_-$ through $R_3$, and $v_+$ is connected to ground through $R_4$.
 \[v_+=v_2\frac{R_4}{R_2+R_4},\]
-\[\frac{v_1-v_-}{R_1}=\frac{v_--v_{out}}{R_3},\]
-\[\frac{v_1}{R_2}-v_2\frac{R_4}{R_2+R_4}\frac{R_2+R_4}{R_2R_4}+\frac{v_{out}}{R_4}=0,\]
-\[v_{out}=\frac{R_4}{R_2}\qty(v_2-v_1).\]
+\[\frac{v_1-v_-}{R_1}=\frac{v_--v_o}{R_3},\]
+\[\frac{v_1}{R_2}-v_2\frac{R_4}{R_2+R_4}\frac{R_2+R_4}{R_2R_4}+\frac{v_o}{R_4}=0,\]
+\[v_o=\frac{R_4}{R_2}\qty(v_2-v_1).\]
 When $R_1=R_2=R_3=R_4$:
-\[v_{out}=(v_2-v_1).\]
+\[v_o=(v_2-v_1).\]
+\sssc{Inverting integrator}
+An inverting integrator consists of an op amp where input voltage $v_i$ is connected to $v_-$ through an input resistor $R_i$, $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through a feedback capacitor $C_f$.
+
+Time domain:
+\[i_i=\frac{v_i}{R_i}=i_f=-C_f\dv{v_o}{t},\]
+\[v_o=v_o(0)-\int_0^t\frac{v_i(\tau)}{R_iC_f}\dd{\tau}.\]
+Laplace domain:
+\[I_i=\frac{V_i}{R_i}=I_f=-C_fsV_o+C_fv_o(0),\]
+\[V_o=\frac{v_o(0)}{s}-\frac{V_i}{R_iC_fs}.\]
+\sssc{Inverting differentiator}
+An inverting differentiator consists of an op amp where input voltage $v_i$ is connected to $v_-$ through an input capacitor $C_i$, $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through a feedback resistor $R_f$.
+
+Time domain:
+\[i_i=C_i\dv{v_i}{t}=i_f=\frac{-v_o}{R_f},\]
+\[v_o=R_fC_i\qty(v_i(0)-\int_0^tv_i(\tau)\dd{\tau}).\]
+Laplace domain:
+\[I_i=C_isV_i-C_iv_i(0)=I_f=\frac{-V_o}{R_f},\]
+\[V_o=R_fC_i\qty(v_i(0)-sV_i).\]
+\sssc{Inverting active low-pass filter}
+PLACEHOLDER
+An inverting active low-pass filter consists of an op amp where input voltage $v_i$ is connected to $v_-$ through an input resistor $R_i$, $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through a feedback capacitor $C_f$ in parallel connection.
+\[I_i=\frac{V_i}{R_i}=I_f=
+\[v_C=v_{in}-v_R=\qty(v_C(0)+\frac{1}{RC}\int_0^te^{\frac{1}{RC}\tau}v_{in}(\tau)\dd{\tau})e^{-\frac{1}{RC}t}\]
+\[V_C=\frac{RCv_C(0)+V_{in}}{1+RCs}\]
+PLACEHOLDER
+
 
 
 
