@@ -14,8 +14,8 @@
 \item Time $t$ (s)
 \item Complex frequency (Laplace domain) $s$ (Hz = 1 / s)
 \item Angular frequency $\omega$ (Hz = 1 / s)
-\item Voltage $v$ (time domain) $V$ (phasor or Laplace domain) (volt = V)
-\item Current $i$ (time domain) $I$ (phasor or Laplace domain) (ampere = A)
+\item Voltage $v$ (time domain) $\mb{V}$ (phasor domain) $V$ (Laplace domain) (volt = V)
+\item Current $i$ (time domain) $\mb{I}$ (phasor domain) $I$ (Laplace domain) (ampere = A)
 \item Power $p$ (watt = W = A V)
 \item Imaginary unit (since $i$ is used by current) $j=\sqrt{-1}$
 \item Resistance $R$ (ohm = \textOmega = V / A)
@@ -42,13 +42,14 @@ A direct current is a current that is one-directional and with constant voltage 
 An alternating current is a current whose voltage and current change over time and are of zero Cesàro mean over $[0,\infty)$.
 \sssc{Steady-state sinusoidal alternating current and phasor domain}
 A steady-state sinusoidal alternating current is a current whose voltage $v(t)$ and current $i(t)$ are of the form:
-\[v(t)=v_m\cos(\omeg t+\varphi),\]
+\[v(t)=v_m\cos(\omega t+\varphi),\]
 \[i(t)=i_m\cos(\omega t+\theta),\]
 where $\omega$ is the angular frequency of them.
 
 They can be represented in phasor as
-\[V=v_me^{j\varphi},\]
-\[I=i_me^{j\theta}.\]
+\[\mb{V}=v_m\angle\varphi=v_me^{j\varphi},\]
+\[\mb{I}=i_m\angle\theta=i_me^{j\theta}.\]
+$A\cos(\omega t+\varph_1)$ is called to be lagging $A\cos(\omega t+\varphi_2)$ by $\varphi_2-\varphi_1$ and leading $A\cos(\omega t+\varphi_2)$ by $\varphi_1-\varphi_2$.
 \sssc{General current and Laplace domain}
 Given a general current with voltage $v(t)$ and current $i(t)$ over time since $t=0$, we can perform Laplace transforms,
 \[V(s)=\mathcal{L}\{v(t)\}(s)=\int_0^{\infty}e^{-st}v(t)\dd{t},\]
@@ -84,7 +85,7 @@ The capacitance $C$ of an element is the current through it divided by the deriv
 Time domain:
 \[i(t)=C\dv{v(t)}{t}.\]
 Phasor domain (steady-state sinusoidal AC with angular frequency $\omega$):
-\[I=Cj\omega V.\]
+\[\mb{I}=Cj\omega\mb{V}.\]
 Laplace domain:
 \[I(s)=CsV(s)-Cv(0^+).\]
 \[V(s)=\frac{I(s)}{Cs}+\frac{v(0^+)}{s}.\]
@@ -108,7 +109,7 @@ The inductance $L$ of an element is the voltage across it divided by the derivat
 Time domain:
 \[v(t)=L\dv{i(t)}{t}.\]
 Phasor domain (steady-state sinusoidal AC with angular frequency $\omega$):
-\[V=Lj\omega I.\]
+\[\mb{V}=Lj\omega\mb{I}.\]
 Laplace domain:
 \[V(s)=LsI(s)-Li(0^+).\]
 \[I(s)=\frac{V(s)}{Ls}+\frac{i(0^+)}{s}.\]
@@ -130,7 +131,7 @@ The reactance $X$ of a one-port network under steady-state sinusoidal AC of angu
 Another choice is to define $X_C$ as $\frac{1}{C\omega}$ and $X=X_L-X_C$.
 \sssc{Impedance (phasor domain)}
 The impedance $Z$ of a one-port network under steady-state sinusoidal AC of angular frequency $\omega$ is defined as:
-\[V=ZI,\]
+\[\mb{V}=Z\mb{I},\]
 and is such that
 \[Z=R+jX.\]
 \sssc{Impedance (Laplace domain)}
