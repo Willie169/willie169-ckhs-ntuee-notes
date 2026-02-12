@@ -16,7 +16,11 @@
 \item Angular frequency $\omega$ (Hz = 1 / s)
 \item Voltage $v$ (time domain) $\mb{V}$ (phasor domain) $V$ (Laplace domain) (volt = V)
 \item Current $i$ (time domain) $\mb{I}$ (phasor domain) $I$ (Laplace domain) (ampere = A)
-\item Power $p$ (watt = W = A V)
+\item Powe $p$ (watt = W = A V)
+\item Real, average, or active power $P$ (W)
+\item Apparent power $S$ (volt-ampere = VA)
+\item Complex power $\mb{S}$ (VA)
+\item Reactive power $Q$ (volt-ampere-reactive = VAR)
 \item Imaginary unit (since $i$ is used by current) $j=\sqrt{-1}$
 \item Resistance $R$ (ohm = \textOmega = V / A)
 \item Capacitance $C$ (farad = F = A s / V = S s)
@@ -27,6 +31,7 @@
 \item Conductance $G$ (S)
 \item Susceptance $B$ (S)
 \item Time constant $\tau$ (s)
+\item Conjugate $^*$
 \item Dirac delta function $\delta(t)$
 \item Unit step function $u(t)$
 \item Impulse response function $h(t)$
@@ -37,20 +42,48 @@ An electrical network or simply network is an interconnection of electrical comp
 \sssc{Electrical element}
 Electrical elements or simply elements are conceptual abstractions representing idealized electrical components, such as resistors, capacitors, and inductors, used in the analysis of electrical networks and denoted with circuit symbols, also called electronic symbol, in circuit diagrams.
 \sssc{Average as Cesàro mean}
-The average in the context of voltage and current is defined as Cesàro mean.
+The term average used below is defined as Cesàro mean over $[0,\infty)$.
+\sssc{Active element}
+An active element is an element capable of furnishing a power with average over $[0,\infty)$ greater than zero to some external network.
+\sssc{Passive element}
+A passive element is an element that is not an active element.
+\sssc{Lumped-element model, lumped-parameter model, or lumped-component model}
+A simplified and idealized representation of an electrical network that assumes all components are concentrated at a single point and their behavior can be described by idealized mathematical models, that is, the lumped-matter discipline:
+\bit
+\item The change of the magnetic flux in time through the surface surrounded by a loop is zero.
+\item The change of the charge in time inside conductor is zero.
+\item Signal timescales of interest are much larger than propagation delay of electromagnetic waves across the lumped element.
+\eit
+such that the system is a dynamic system whose state space is a finite dimension, called lumped-parameter system.
+
+In contrast, distributed parameter systems have infinite-dimensional state space.
+
+We will concentrate on lumped-parameter networks in this text.
+\sssc{Time-invariant network}
+Elements' properties and connections don't change over time. We will concentrate on time-invariant networks in this text.
+\sssc{Circuit element}
+A circuit element is a two terminal electrical network that can be completely characterized by its voltage-current relationship.
+
+We label + and - on the two terminal repsectively and voltage $v$ between them to define the voltage $v$ of the element as the electric potential difference of + terminal relative to - terminal.
+
+We label arrow and current $i$ on it to define the reference direction of the current $i$ of the element.
+
+If the current arrow enters the + terminal, the element is said to follow the passive sign convention. Under this convention, the power absorbed by the element is
+\[p(t)=v(t)i(t),\]
+with negative power means delivering.
 \sssc{Direct current (DC)}
 A direct current is a current that is one-directional and with constant voltage and current over time.
 \sssc{Alternating current (AC)}
 An alternating current is a current whose voltage and current change over time and are of zero average over $[0,\infty)$.
 \sssc{Effective value or root mean square (RMS)}
-The effective value or root mean square (RMS) of a voltage or current is defined as its RMS.over $[0,\infty)$.
-\sssc{Steady-state sinusoidal alternating current and phasor domain}
-A steady-state sinusoidal alternating current is a current whose voltage $v(t)$ and current $i(t)$ are of the form:
+The effective value or root mean square (RMS) of a voltage or current is defined as its RMS over $[0,\infty)$.
+\sssc{Steady-state sinusoidal current and phasor domain}
+A steady-state sinusoidal current is a current whose voltage $v(t)$ and current $i(t)$ are of the form:
 \[v(t)=v_m\cos(\omega t+\varphi),\]
 \[i(t)=i_m\cos(\omega t+\theta),\]
 where $\omega$ is the angular frequency of them and the period of them is
 \[T\frac{2\pi}{\omega}.\]
-The effective values are
+The RMSs are
 \[v_{rms}=\sqrt{\frac{1}{T}\int_0^T(v(t))^2\dd{t}}=\frac{v_m}{\sqrt{2}},\]
 \[i_{rms}=\sqrt{\frac{1}{T}\int_0^T(i(t))^2\dd{t}}=\frac{i_m}{\sqrt{2}}.\]
 They can be represented in phasor as
@@ -94,9 +127,9 @@ Time domain:
 Phasor domain (steady-state sinusoidal AC with angular frequency $\omega$):
 \[\mb{I}=Cj\omega\mb{V}.\]
 Laplace domain:
-\[I(s)=CsV(s)-Cv(0^+).\]
-\[V(s)=\frac{I(s)}{Cs}+\frac{v(0^+)}{s}.\]
-A capacitor with capacitance $C$ is equivalent to a capacitance $C$ without initial energy in parallel connection with an independent current source enforcing current $Cv(0^+)\delta(t)$ (time domain), i.e., $Cv(0^+)$ (Laplace domain), or a capacitance $C$ without initial energy in series connection with an independent voltage source enforcing voltage $-v(0^+)u(t)$ (time domain), i.e., $-\frac{v(0^+)}{s}$ (Laplace domain).
+\[I(s)=CsV(s)-Cv(0^-).\]
+\[V(s)=\frac{I(s)}{Cs}+\frac{v(0^-)}{s}.\]
+A capacitor with capacitance $C$ is equivalent to a capacitance $C$ without initial energy in parallel connection with an independent current source enforcing current $Cv(0^-)\delta(t)$ (time domain), i.e., $Cv(0^-)$ (Laplace domain), or a capacitance $C$ without initial energy in series connection with an independent voltage source enforcing voltage $-v(0^-)u(t)$ (time domain), i.e., $-\frac{v(0^-)}{s}$ (Laplace domain).
 
 Integral voltage-current relationship:
 \[v(t)=\frac{1}{C}\int_{t_0}^ti(\tau)\dd{\tau}+v(t_0^{\pht{0}-})=\frac{1}{C}\int_{-\infty}^ti(\tau)\dd{\tau}.\]
@@ -118,9 +151,9 @@ Time domain:
 Phasor domain (steady-state sinusoidal AC with angular frequency $\omega$):
 \[\mb{V}=Lj\omega\mb{I}.\]
 Laplace domain:
-\[V(s)=LsI(s)-Li(0^+).\]
-\[I(s)=\frac{V(s)}{Ls}+\frac{i(0^+)}{s}.\]
-An inductor with inductance $L$ is equivalent to a inductance $L$ without initial energy in series connection with an independent voltage source enforcing voltage $Li(0^+)\delta(t)$ (time domain), i.e., $Li(0^+)$ (Laplace domain), or a inductance $L$ without initial energy in parallel connection with an independent current source enforcing current $-i(0^+)u(t)$ (time domain), i.e., $-\frac{i(0^+)}{s}$ (Laplace domain).
+\[V(s)=LsI(s)-Li(0^-).\]
+\[I(s)=\frac{V(s)}{Ls}+\frac{i(0^-)}{s}.\]
+An inductor with inductance $L$ is equivalent to a inductance $L$ without initial energy in series connection with an independent voltage source enforcing voltage $Li(0^-)\delta(t)$ (time domain), i.e., $Li(0^-)$ (Laplace domain), or a inductance $L$ without initial energy in parallel connection with an independent current source enforcing current $-i(0^-)u(t)$ (time domain), i.e., $-\frac{i(0^-)}{s}$ (Laplace domain).
 
 Integral voltage-current relationship:
 \[i(t)=\frac{1}{L}\int_{t_0}^tv(\tau)\dd{\tau}+i(t_0^{\pht{0}-})=\frac{1}{L}\int_{-\infty}^tv(\tau)\dd{\tau}.\]
@@ -128,6 +161,14 @@ Power absorbed:
 \[p(t)=i(t)v(t)=Li(t)\dv{i(t)}{t}.\]
 Energy stored:
 \[\int_{-\infty}^tp(t)\dd{t}=\frac{1}{2}L\qty(i(t))^2.\]
+\sssc{Resistive element}
+A resistive element is an element with nonzero resistance.
+\sssc{Reactive element}
+A reactive element is an element with either nonzero capacitance or nonzero inductance.
+\sssc{Purely resistive element}
+A pure resistive element is a resistive element with zero capacitance and zero inductance.
+\sssc{Purely reactive element}
+A pure reactive element is a reactive element with zero resistance.
 \sssc{Reactance (phasor domain)}
 The (capacitive) reactance $X_C$ of a one-port network with capacitance $C$ under steady-state sinusoidal AC of angular frequency $\omega$ is defined as:
 \[X_C=-\frac{1}{C\omega}.\]
@@ -157,34 +198,6 @@ The admittance $Y(s)$ of a one-port network is defined as the reciprocal of its 
 The conductance $G$ of a circuit element is defined as the real part of its admittance.
 \sssc{Susceptance (phasor domain)}
 The susceptance $B$ of a circuit element is defined as the imaginary part of its admittance.
-\sssc{Active element}
-An active element is an element capable of furnishing a power with average over $[0,\infty)$ greater than zero to some external network.
-\sssc{Passive element}
-A passive element is an element that is not an active element.
-\sssc{Lumped-element model, lumped-parameter model, or lumped-component model}
-A simplified and idealized representation of an electrical network that assumes all components are concentrated at a single point and their behavior can be described by idealized mathematical models, that is, the lumped-matter discipline:
-\bit
-\item The change of the magnetic flux in time through the surface surrounded by a loop is zero.
-\item The change of the charge in time inside conductor is zero.
-\item Signal timescales of interest are much larger than propagation delay of electromagnetic waves across the lumped element.
-\eit
-such that the system is a dynamic system whose state space is a finite dimension, called lumped-parameter system.
-
-In contrast, distributed parameter systems have infinite-dimensional state space.
-
-We will concentrate on lumped-parameter networks in this text.
-\sssc{Time-invariant network}
-Elements' properties and connections don't change over time. We will concentrate on time-invariant networks in this text.
-\sssc{Circuit element}
-A circuit element is a two terminal electrical network that can be completely characterized by its voltage-current relationship.
-
-We label + and - on the two terminal repsectively and voltage $v$ between them to define the voltage $v$ of the element as the electric potential difference of + terminal relative to - terminal.
-
-We label arrow and current $i$ on it to define the reference direction of the current $i$ of the element.
-
-If the current arrow enters the + terminal, the element is said to follow the passive sign convention. Under this convention, the power absorbed by the element is
-\[p(t)=v(t)i(t),\]
-with negative power means delivering.
 \sssc{Node}
 A node is a point in a network where two or more elements are connected.
 \sssc{Pole or terminal}
@@ -280,6 +293,39 @@ Ideal current sources are active elements with infinite output resistance. To tu
 A practical independent voltage source can be approximated with an ideal independent voltage source in series connection with a resistor.
 
 A practical independent current source can be approximated with an ideal independent current source in parallel connection with a resistor.
+\ssc{Power of steady-state sinusoidal current}
+Here, the current under discussion is a steady-state sinusoidal current of the form
+\[v(t)=v_m\cos(\omega t+\theta),\]
+\[i(t)=i_m\cos(\omega t+\theta-\phi),\]
+or in phasors,
+\[\mb{V}=v_m\angle\varphi=v_me^{j\theta},\]
+\[\mb{I}=i_m\angle\theta=i_me^{j\theta-\phi}.\]
+\sssc{Instantaneous power}
+\[\ba
+p(t)&=v(t)i(t)=v_mi_m\cos(\omega t+\theta)\cos(\omega t+\theta-\phi)\\
+&=\frac{v_mi_m}{2}\cos\phi\cos(2\omega t+2\theta-\phi)
+\ea\]
+\sssc{Complex power}
+The complex power $\mb{S}$ with unit volt-ampere (VA) of a steady-state sinusoidal current is defined as
+\[\mb{S}=\mb{V}\mb{I}^*=v_mi_me^{j\phi}.\]
+\sssc{Real, average, or active power}
+The real, average, or active power $P$ with unit watt (W) of a steady-state sinusoidal current is defined as the average power of it, that is
+\[P=\frac{v_mi_m}{2}\cos\phi=v_{rms}i_{rms}\cos\phi=\Re(\mb{S}).\]
+\sssc{Apparent power}
+The apparent power $S$ with unit volt-ampere (VA) of a steady-state sinusoidal current is defined as
+\[S=v_mi_m=\abs{\mb{S}}.\]
+\sssc{Power factor (PF)}
+The power factor (PF) of a steady-state sinusoidal current is defined as
+\[\tx{PF}=\frac{P}{S}.\]
+PF = 1 is called ideal.
+\sssc{Reactive power}
+The reactive power $Q$ with unit volt-ampere-reactive (VAR) of a steady-state sinusoidal current is defined as
+\[Q=\Im(\mb{S})=\frac{v_mi_m}{2}\sin\phi.\]
+It's the power oscillates between sources and reactive elements.
+\sssc{Power triangle}
+The triangle on the complex plane of $\mb{S}$, $P$, and $jQ$ showing
+\[\mb{S}=P+jQ\]
+is called the power triangle.
 \ssc{Linear circuit}
 \sssc{Linear element}
 A linear element is a passive element whose resistance $R$, capacitance $C$, and inductance $L$ are independent of voltage and current, that is, equivalent to a one-port network consists of ideal resistors, capacitors, and inductors, that is, the voltage-current relationship is a complex equation $v=Z\cdot i$ ($v=R\cdot i$ for DC) with voltage $v$, current $i$, and impedance $Z$ (resistance $R$ for DC). The assumption for resistance is the Ohm's law.
@@ -326,7 +372,7 @@ Thévenin impedance and Norton impedance are the same and can be found with:
 A linear network delivers maximum power to a load impedance when it is equal to the Thévenin impedance or its conjugate of the network.
 \ssc{Nodal analysis or node-voltage analysis of linear circuits}
 \sssc{(Nodal) admittance matrix}
-The (nodal) admittance (conductance for DC) matrix of a linear circuit that is a simple graph with all sources omitted is the Laplacian matrix of it with all sources omitted.
+The (nodal) admittance (conductance for DC) matrix $\mb{Y}$ of a linear circuit that is a simple graph with all sources omitted is the Laplacian matrix of it with all sources omitted.
 \sssc{Supernode method}
 \ben
 \item Choose a reference node and assign a voltage for it (typically 0).
@@ -339,8 +385,8 @@ The (nodal) admittance (conductance for DC) matrix of a linear circuit that is a
 \item For each node with unknown voltage, assign a nodal voltage variable.
 \item For each voltage source whose neither endpoint is the reference node, enclose both nodes and the source as a supernode.
 \item Excluding all supernodes and all edges connected to supernode, form a system of linear equations given by KCL:
-\[\mb{Y}\mb{v}=\mb{i},\]
-where $\mb{v}$ is the column vector of the nodal voltage variables and known nodal voltages, $\mb{i}$ is the column vector of current injected into the nodes, where each entry $i_k$ is zero if node $k$ is not connected to a current source and $i_s$ if node $k$ is connected to a current source of current $i_s$ injected to the node (negative for absorption, VCCSs and CCCSs directly replaced with the control functions), and $\mb{Y}$ is the admittance (conductance for DC) matrix of the linear circuit.
+\[\mb{Y}\mathcal{V}=\mathcal{I},\]
+where $\mathcal{V}$ is the column vector of the nodal voltage variables and known nodal voltages, $\mathcal{I}$ is the column vector of current injected into the nodes, where each entry $I_k$ is zero if node $k$ is not connected to a current source and $I_s$ if node $k$ is connected to a current source of current $I_s$ injected to the node (negative for absorption, VCCSs and CCCSs directly replaced with the control functions), and $\mb{Y}$ is the admittance (conductance for DC) matrix of the linear circuit.
 \item For each supernode, write the equation given by KCL in terms of nodal voltage variables, that is, the sum of the currents leave the boundary of the supernode is zero.
 \item For each voltage source, write the equation where the enforced voltage in one side and the difference of two nodal voltage variables in the other side.
 \item Solve the system of linear equations.
@@ -361,7 +407,7 @@ where $\mb{v}$ is the column vector of the nodal voltage variables and known nod
 \een
 \ssc{Transformations}
 \sssc{Source transformation}
-An independent voltage source $v$ in series connection with an impedance $Z=R+jX$ is equivalent to an independent current source $i=\frac{v}{Z}$ in parallel connection with the same impedance $Z$.
+An independent voltage source $V$ in series connection with an impedance $Z$ is equivalent to an independent current source $I=\frac{V}{Z}$ in parallel connection with the same impedance $Z$.
 \sssc{Y-Δ transformation and Δ-Y transformation}
 \bit
 \item Y (wye or star) network: a common central node $N$, three terminals $N_1,N_2,N_3$, and three circuit elements with impedances $Z_1,Z_2,Z_3$ connecting $N_1$ and $N$, $N_2$ and $N$, and $N_3$ and $N$ respectively.
@@ -389,31 +435,31 @@ A (series) RL circuit or filter consists of a resistor with resistance $R$, an i
 
 Natural response (time domain):
 \[Ri+L\dv{i}{t}=0\]
-\[i=i(0^+)e^{-\frac{R}{L}t}\]
-\[v_R=-v_L=Ri(0^+)e^{-\frac{R}{L}t}\]
+\[i=i(0^-)e^{-\frac{R}{L}t}\]
+\[v_R=-v_L=Ri(0^-)e^{-\frac{R}{L}t}\]
 \[\tau_i=\tau_{v_R}=\tau_{v_L}=\frac{L}{R}\]
-\[p_R=-p_L=R(i(0^+))^2e^{-\frac{2R}{L}t}\]
-\[\int_0^{\infty}p_R\dd{t}=-\int_0^{\infty}p_L\dd{t}=\frac{1}{2}L(i(0^+))^2\]
+\[p_R=-p_L=R(i(0^-))^2e^{-\frac{2R}{L}t}\]
+\[\int_0^{\infty}p_R\dd{t}=-\int_0^{\infty}p_L\dd{t}=\frac{1}{2}L(i(0^-))^2\]
 \begin{proof}
 \[Ri+L\dv{i}{t}=0\]
 \[Lr+R=0\]
 \[r=-\frac{R}{L}\]
 \[i=Ae^{-\frac{R}{L}t}\]
-\[i=i(0^+)e^{-\frac{R}{L}t}\]
-\[v_R=-v_L=Ri(0^+)e^{-\frac{R}{L}t}\]
-\[p_R=-p_L=R(i(0^+))^2e^{-\frac{2R}{L}t}\]
+\[i=i(0^-)e^{-\frac{R}{L}t}\]
+\[v_R=-v_L=Ri(0^-)e^{-\frac{R}{L}t}\]
+\[p_R=-p_L=R(i(0^-))^2e^{-\frac{2R}{L}t}\]
 \[\ba
-\int_0^{\infty}p_R\dd{t}&=R(i(0^+))^2\evlv(-\frac{L}{2R}e^{-\frac{2R}{L}t})_0^{\infty}\\
-&=\frac{1}{2}L(i(0^+))^2
+\int_0^{\infty}p_R\dd{t}&=R(i(0^-))^2\evlv(-\frac{L}{2R}e^{-\frac{2R}{L}t})_0^{\infty}\\
+&=\frac{1}{2}L(i(0^-))^2
 \ea\]
 \end{proof}
 Natural response (Laplace domain):
-\[I=\frac{Li(0^+)}{R+Ls}\]
-\[V_R=-V_L=\frac{RLi(0^+)}{R+Ls}\]
+\[I=\frac{Li(0^-)}{R+Ls}\]
+\[V_R=-V_L=\frac{RLi(0^-)}{R+Ls}\]
 \begin{proof}
 Check consistency:
-\[\mathcal{L}\{i\}=\frac{i(0^+)}{s+\frac{R}{L}}=\frac{Li(0^+)}{R+Ls}\]
-\[\mathcal{L}\{v_R\}=Ri(0^+)\frac{1}{s+\frac{R}{L}}=\frac{RLi(0^+)}{R+Ls}\]
+\[\mathcal{L}\{i\}=\frac{i(0^-)}{s+\frac{R}{L}}=\frac{Li(0^-)}{R+Ls}\]
+\[\mathcal{L}\{v_R\}=Ri(0^-)\frac{1}{s+\frac{R}{L}}=\frac{RLi(0^-)}{R+Ls}\]
 \end{proof}
 Forced response (time domain):
 \[Ri+L\dv{i}{t}=v_{in}\]
@@ -440,12 +486,12 @@ Check consistency:
 \ea\]
 \end{proof}
 Total response (time domain):
-\[i=\qty(i(0^+)+\frac{1}{L}\int_0^te^{\frac{R}{L}\tau}v_{in}(\tau)\dd{\tau})e^{-\frac{R}{L}t}\]
-\[v_R=v_{in}-v_L=R\qty(i(0^+)+\frac{1}{L}\int_0^te^{\frac{R}{L}\tau}v_{in}(\tau)\dd{\tau})e^{-\frac{R}{L}t}\]
+\[i=\qty(i(0^-)+\frac{1}{L}\int_0^te^{\frac{R}{L}\tau}v_{in}(\tau)\dd{\tau})e^{-\frac{R}{L}t}\]
+\[v_R=v_{in}-v_L=R\qty(i(0^-)+\frac{1}{L}\int_0^te^{\frac{R}{L}\tau}v_{in}(\tau)\dd{\tau})e^{-\frac{R}{L}t}\]
 Total response (Laplace domain):
-\[I=\frac{Li(0^+)+V_{in}}{R+Ls}\]
-\[V_R=\frac{RLi(0^+)+RV_{in}}{R+Ls}\]
-\[V_L=\frac{LsV_{in}-RLi(0^+)}{R+Ls}\]
+\[I=\frac{Li(0^-)+V_{in}}{R+Ls}\]
+\[V_R=\frac{RLi(0^-)+RV_{in}}{R+Ls}\]
+\[V_L=\frac{LsV_{in}-RLi(0^-)}{R+Ls}\]
 Impulse response:
 \[h_i=\frac{1}{L}u(t)e^{-\frac{R}{L}t}\]
 \[h_{v_R}=\frac{R}{L}u(t)e^{-\frac{R}{L}t}\]
@@ -481,11 +527,11 @@ A (series) RC circuit or filter consists of a resistor with resistance $R$, a ca
 
 Natural response (time domain):
 \[\frac{v_C}{R}+C\dv{v_C}{t}=0\]
-\[v_C=-v_R=v_C(0^+)e^{-\frac{1}{RC}t}\]
-\[i=-\frac{1}{R}v_C(0^+)e^{-\frac{1}{RC}t}\]
+\[v_C=-v_R=v_C(0^-)e^{-\frac{1}{RC}t}\]
+\[i=-\frac{1}{R}v_C(0^-)e^{-\frac{1}{RC}t}\]
 \[\tau_{v_C}=\tau_{v_R}=\tau_i=\frac{1}{RC}\]
-\[p_R=-p_C=\frac{1}{R}(v_C(0^+))^2e^{-\frac{2}{RC}t}\]
-\[\int_0^{\infty}p_R\dd{t}=-\int_0^{\infty}p_C\dd{t}=\frac{1}{2}C(v_C(0^+))^2\]
+\[p_R=-p_C=\frac{1}{R}(v_C(0^-))^2e^{-\frac{2}{RC}t}\]
+\[\int_0^{\infty}p_R\dd{t}=-\int_0^{\infty}p_C\dd{t}=\frac{1}{2}C(v_C(0^-))^2\]
 \begin{proof}
 \[v_R+v_C=0\]
 \[\frac{v_R}{R}-C\dv{v_C}{t}=0\]
@@ -493,23 +539,23 @@ Natural response (time domain):
 \[Cr+\frac{1}{R}=0\]
 \[r=-\frac{1}{RC}\]
 \[v_C=Ae^{-\frac{1}{RC}t}\]
-\[v_C=v_C(0^+)e^{-\frac{1}{RC}t}\]
-\[i=-\frac{1}{R}v_C(0^+)e^{-\frac{1}{RC}t}\]
-\[p_R=-p_C=\frac{1}{R}(v_C(0^+))^2e^{-\frac{2}{RC}t}\]
+\[v_C=v_C(0^-)e^{-\frac{1}{RC}t}\]
+\[i=-\frac{1}{R}v_C(0^-)e^{-\frac{1}{RC}t}\]
+\[p_R=-p_C=\frac{1}{R}(v_C(0^-))^2e^{-\frac{2}{RC}t}\]
 \[\ba
-\int_0^{\infty}p_R\dd{t}&=\frac{1}{R}(v_C(0^+))^2\evlv{-\frac{RC}{2}e^{-\frac{2}{RC}t}}_0^{\infty}\\
-&=\frac{1}{2}C(v_C(0^+))^2
+\int_0^{\infty}p_R\dd{t}&=\frac{1}{R}(v_C(0^-))^2\evlv{-\frac{RC}{2}e^{-\frac{2}{RC}t}}_0^{\infty}\\
+&=\frac{1}{2}C(v_C(0^-))^2
 \ea\]
 \end{proof}
 Natural response (Laplace domain):
-\[V_C=-V_R=\frac{RCv_C(0^+)}{1+RCs}\]
-\[I=-\frac{Cv_C(0^+)}{1+RCs}\]
+\[V_C=-V_R=\frac{RCv_C(0^-)}{1+RCs}\]
+\[I=-\frac{Cv_C(0^-)}{1+RCs}\]
 \begin{proof}
-\[I=-\frac{v_C(0^+)}{s\qty(\frac{1}{Cs}+R)}=-\frac{Cv_C(0^+)}{1+RCs}\]
-\[V_C=\frac{I+Cv_C(0^+)}{Cs}=\frac{RCv_C(0^+)}{1+RCs}\]
+\[I=-\frac{v_C(0^-)}{s\qty(\frac{1}{Cs}+R)}=-\frac{Cv_C(0^-)}{1+RCs}\]
+\[V_C=\frac{I+Cv_C(0^-)}{Cs}=\frac{RCv_C(0^-)}{1+RCs}\]
 Check consistency:
-\[\mathcal{L}\{v_C\}=\frac{v_C(0^+)}{s+\frac{1}{RC}}=\frac{RCv_C(0^+)}{1+RCs}\]
-\[\mathcal{L}\{i\}=-\frac{1}{R}v_C(0^+)\frac{1}{s+\frac{1}{RC}}=-\frac{Cv_C(0^+)}{1+RCs}\]
+\[\mathcal{L}\{v_C\}=\frac{v_C(0^-)}{s+\frac{1}{RC}}=\frac{RCv_C(0^-)}{1+RCs}\]
+\[\mathcal{L}\{i\}=-\frac{1}{R}v_C(0^-)\frac{1}{s+\frac{1}{RC}}=-\frac{Cv_C(0^-)}{1+RCs}\]
 \end{proof}
 Forced response (time domain):
 \[\frac{v_C-v_{in}}{R}+C\dv{v_C}{t}=0\]
@@ -539,12 +585,12 @@ Check consistency:
 \ea\]
 \end{proof}
 Total response (time domain):
-\[v_C=v_{in}-v_R=\qty(v_C(0^+)+\frac{1}{RC}\int_0^te^{\frac{1}{RC}\tau}v_{in}(\tau)\dd{\tau})e^{-\frac{1}{RC}t}\]
-\[i=\frac{1}{R}\qty(v_{in}-\qty(v_C(0^+)+\frac{1}{RC}\int_0^te^{\frac{1}{RC}\tau}v_{in}(\tau)\dd{\tau})e^{-\frac{1}{RC}t})\]
+\[v_C=v_{in}-v_R=\qty(v_C(0^-)+\frac{1}{RC}\int_0^te^{\frac{1}{RC}\tau}v_{in}(\tau)\dd{\tau})e^{-\frac{1}{RC}t}\]
+\[i=\frac{1}{R}\qty(v_{in}-\qty(v_C(0^-)+\frac{1}{RC}\int_0^te^{\frac{1}{RC}\tau}v_{in}(\tau)\dd{\tau})e^{-\frac{1}{RC}t})\]
 Total response (Laplace domain):
-\[V_C=\frac{RCv_C(0^+)+V_{in}}{1+RCs}\]
-\[V_R=\frac{-RCv_C(0^+)+RCsV_{in}}{1+RCs}\]
-\[I=-\frac{Cv_C(0^+)+CsV_{in}}{1+RCs}\]
+\[V_C=\frac{RCv_C(0^-)+V_{in}}{1+RCs}\]
+\[V_R=\frac{-RCv_C(0^-)+RCsV_{in}}{1+RCs}\]
+\[I=-\frac{Cv_C(0^-)+CsV_{in}}{1+RCs}\]
 Impulse response:
 \[h_{v_C}=\frac{1}{RC}u(t)e^{-\frac{1}{RC}t}\]
 \[h_{v_R}=\delta(t)-\frac{1}{RC}u(t)e^{-\frac{1}{RC}t}\]
@@ -583,21 +629,21 @@ Natural response (time domain): Total energy stored in inductor and capacitor $E
 \[\omega_0=\frac{1}{\sqrt{LC}}\]
 \[\dv[2]{i}{t}+\omega_0^{\pht{0}2}i=0\]
 \[\ba
-i&=i(0^+)\cos\qty(\frac{1}{\sqrt{LC}}t)-v_C(0^+)\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t)\\
-&=i(0^+)\cos\qty(\omega_0t)-v_C(0^+)C\omega_0\sin\qty(\omega_0t)
+i&=i(0^-)\cos\qty(\frac{1}{\sqrt{LC}}t)-v_C(0^-)\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t)\\
+&=i(0^-)\cos\qty(\omega_0t)-v_C(0^-)C\omega_0\sin\qty(\omega_0t)
 \ea\]
 \[\ba
 v_C&=-v_L\\
-&=i(0^+)\sqrt{\frac{L}{C}}\sin\qty(\frac{1}{\sqrt{LC}}t)+v_C(0^+)\cos\qty(\frac{1}{\sqrt{LC}}t)\\
-&=i(0^+)L\omega_0\sin\qty(\omega_0t)+v_C(0^+)\cos\qty(\omega_0t)
+&=i(0^-)\sqrt{\frac{L}{C}}\sin\qty(\frac{1}{\sqrt{LC}}t)+v_C(0^-)\cos\qty(\frac{1}{\sqrt{LC}}t)\\
+&=i(0^-)L\omega_0\sin\qty(\omega_0t)+v_C(0^-)\cos\qty(\omega_0t)
 \ea\]
 \[\ba
 p_C&=-p_L\\
-&=\frac{1}{2}\qty((i(0^+))^2\sqrt{\frac{L}{C}}-(v_C(0^+))^2\sqrt{\frac{C}{L}})\sin\qty(\frac{2}{\sqrt{LC}}t)+i(0^+)v_C(0^+)\cos\qty(\frac{2}{\sqrt{LC}}t)\\
-&=\frac{1}{2}\qty((i(0^+))^2L\omega_0-(v_C(0^+))^2C\omega_0)\sin\qty(2\omega_0t)+i(0^+)v_C(0^+)\cos\qty(2\omega_0t)
+&=\frac{1}{2}\qty((i(0^-))^2\sqrt{\frac{L}{C}}-(v_C(0^-))^2\sqrt{\frac{C}{L}})\sin\qty(\frac{2}{\sqrt{LC}}t)+i(0^-)v_C(0^-)\cos\qty(\frac{2}{\sqrt{LC}}t)\\
+&=\frac{1}{2}\qty((i(0^-))^2L\omega_0-(v_C(0^-))^2C\omega_0)\sin\qty(2\omega_0t)+i(0^-)v_C(0^-)\cos\qty(2\omega_0t)
 \ea\]
 \[\lim_{n\to\infty}\frac{1}{n}\int_0^np_C\dd{t}=-\lim_{n\to\infty}\frac{1}{n}\int_0^np_L\dd{t}=0\]
-\[E=\frac{1}{2}\qty(C(v_C(0^+))^2+L(I(0^+))^2)\]
+\[E=\frac{1}{2}\qty(C(v_C(0^-))^2+L(I(0^-))^2)\]
 \begin{proof}
 \[v_C+v_L=0\]
 \[i=C\dv{v_C}{t}\]
@@ -608,59 +654,59 @@ p_C&=-p_L\\
 \[\omega_0=\frac{1}{\sqrt{LC}}\]
 \[\dv[2]{i}{t}+\omega_0^{\pht{0}2}i=0\]
 \[i=A\cos\qty(\frac{1}{\sqrt{LC}}t)+B\sin\qty(\frac{1}{\sqrt{LC}}t)\]
-\[A=i(0^+)\]
-\[L\dv{i}{t}(0^+)+v_C(0^+)=0\]
-\[LB\frac{1}{\sqrt{LC}}+v_C(0^+)=0\]
-\[B=-v_C(0^+)\sqrt{\frac{C}{L}}=-v_C(0^+)\frac{1}{L\omega_0}\]
+\[A=i(0^-)\]
+\[L\dv{i}{t}(0^-)+v_C(0^-)=0\]
+\[LB\frac{1}{\sqrt{LC}}+v_C(0^-)=0\]
+\[B=-v_C(0^-)\sqrt{\frac{C}{L}}=-v_C(0^-)\frac{1}{L\omega_0}\]
 \[\ba
-i&=i(0^+)\cos\qty(\frac{1}{\sqrt{LC}}t)-v_C(0^+)\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t)\\
-&=i(0^+)\cos\qty(\omega_0t)-v_C(0^+)C\omega_0\sin\qty(\omega_0t)
+i&=i(0^-)\cos\qty(\frac{1}{\sqrt{LC}}t)-v_C(0^-)\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t)\\
+&=i(0^-)\cos\qty(\omega_0t)-v_C(0^-)C\omega_0\sin\qty(\omega_0t)
 \ea\]
 \[\ba
 v_C&=-v_L=-L\dv{i}{t}\\
-&=i(0^+)\sqrt{\frac{L}{C}}\sin\qty(\frac{1}{\sqrt{LC}}t)+v_C(0^+)\cos\qty(\frac{1}{\sqrt{LC}}t)\\
-&=i(0^+)L\omega_0\sin\qty(\omega_0t)+v_C(0^+)\cos\qty(\omega_0t)
+&=i(0^-)\sqrt{\frac{L}{C}}\sin\qty(\frac{1}{\sqrt{LC}}t)+v_C(0^-)\cos\qty(\frac{1}{\sqrt{LC}}t)\\
+&=i(0^-)L\omega_0\sin\qty(\omega_0t)+v_C(0^-)\cos\qty(\omega_0t)
 \ea\]
 \[\ba
 p_C&=-p_L\\
-&=\qty(i(0^+)\cos\qty(\frac{1}{\sqrt{LC}}t)-v_C(0^+)\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t))\qty(i(0^+)\sqrt{\frac{L}{C}}\sin\qty(\frac{1}{\sqrt{LC}}t)+v_C(0^+)\cos\qty(\frac{1}{\sqrt{LC}}t))\\
-&=(i(0^+))^2\sqrt{\frac{L}{C}}\cos\qty(\frac{1}{\sqrt{LC}}t)\sin\qty(\frac{1}{\sqrt{LC}}t)+i(0^+)v_C(0^+)\cos^2\qty(\frac{1}{\sqrt{LC}}t)-i(0^+)v_C(0^+)\sin^2\qty(\frac{1}{\sqrt{LC}}t)-(v_C(0^+))^2\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t)\cos\qty(\frac{1}{\sqrt{LC}}t)\\
-&=\frac{1}{2}\qty((i(0^+))^2\sqrt{\frac{L}{C}}-(v_C(0^+))^2\sqrt{\frac{C}{L}})\sin\qty(\frac{2}{\sqrt{LC}}t)+i(0^+)v_C(0^+)\cos\qty(\frac{2}{\sqrt{LC}}t)\\
-&=\frac{1}{2}\qty((i(0^+))^2L\omega_0-(v_C(0^+))^2C\omega_0)\sin\qty(2\omega_0t)+i(0^+)v_C(0^+)\cos\qty(2\omega_0t)
+&=\qty(i(0^-)\cos\qty(\frac{1}{\sqrt{LC}}t)-v_C(0^-)\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t))\qty(i(0^-)\sqrt{\frac{L}{C}}\sin\qty(\frac{1}{\sqrt{LC}}t)+v_C(0^-)\cos\qty(\frac{1}{\sqrt{LC}}t))\\
+&=(i(0^-))^2\sqrt{\frac{L}{C}}\cos\qty(\frac{1}{\sqrt{LC}}t)\sin\qty(\frac{1}{\sqrt{LC}}t)+i(0^-)v_C(0^-)\cos^2\qty(\frac{1}{\sqrt{LC}}t)-i(0^-)v_C(0^-)\sin^2\qty(\frac{1}{\sqrt{LC}}t)-(v_C(0^-))^2\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t)\cos\qty(\frac{1}{\sqrt{LC}}t)\\
+&=\frac{1}{2}\qty((i(0^-))^2\sqrt{\frac{L}{C}}-(v_C(0^-))^2\sqrt{\frac{C}{L}})\sin\qty(\frac{2}{\sqrt{LC}}t)+i(0^-)v_C(0^-)\cos\qty(\frac{2}{\sqrt{LC}}t)\\
+&=\frac{1}{2}\qty((i(0^-))^2L\omega_0-(v_C(0^-))^2C\omega_0)\sin\qty(2\omega_0t)+i(0^-)v_C(0^-)\cos\qty(2\omega_0t)
 \ea\]
 \end{proof}
 Natural response (Laplace domain):
 \[\ba
-I&=\frac{LCsi(0^+)-Cv_C(0^+)}{LCs^2+1}\\
-&=\frac{si(0^+)-C\omega_0^{\pht{0}2}v_C(0^+)}{s^2+\omega_0^{\pht{0}2}}
+I&=\frac{LCsi(0^-)-Cv_C(0^-)}{LCs^2+1}\\
+&=\frac{si(0^-)-C\omega_0^{\pht{0}2}v_C(0^-)}{s^2+\omega_0^{\pht{0}2}}
 \ea\]
 \[\ba
 V_C&=-V_L\\
-&=\frac{LCsv_C(0^+)+Li(0^+)}{LCs^2+1}\\
-&=\frac{sv_C(0^+)+L\omega_0^{\pht{0}2}i(0^+)}{s^2+\omega_0^{\pht{0}2}}
+&=\frac{LCsv_C(0^-)+Li(0^-)}{LCs^2+1}\\
+&=\frac{sv_C(0^-)+L\omega_0^{\pht{0}2}i(0^-)}{s^2+\omega_0^{\pht{0}2}}
 \ea\]
 \begin{proof}
 \[\ba
-I&=\qty(Li(0^+)-\frac{v_C(0^+)}{s})\frac{1}{Ls+\frac{1}{Cs}}\\
-&=\frac{LCsi(0^+)-Cv_C(0^+)}{LCs^2+1}\\
-&=\frac{\omega_0^{\pht{0}-2}si(0^+)-Cv_C(0^+)}{\omega_0^{\pht{0}-2}s^2+1}\\
-&=\frac{si(0^+)-C\omega_0^{\pht{0}2}v_C(0^+)}{s^2+\omega_0^{\pht{0}2}}
+I&=\qty(Li(0^-)-\frac{v_C(0^-)}{s})\frac{1}{Ls+\frac{1}{Cs}}\\
+&=\frac{LCsi(0^-)-Cv_C(0^-)}{LCs^2+1}\\
+&=\frac{\omega_0^{\pht{0}-2}si(0^-)-Cv_C(0^-)}{\omega_0^{\pht{0}-2}s^2+1}\\
+&=\frac{si(0^-)-C\omega_0^{\pht{0}2}v_C(0^-)}{s^2+\omega_0^{\pht{0}2}}
 \ea\]
 \[\ba
-V_C&=-V_L=-LsI+Li(0^+)\\
-&=\frac{-L^2Cs^2i(0^+)+LCsv_C(0^+)+L^2Cs^2i(0^+)+Li(0^+)}{LCs^2+1}\\
-&=\frac{LCsv_C(0^+)+Li(0^+)}{LCs^2+1}\\
-&=\frac{\omega_0^{\pht{0}-2}sv_C(0^+)+Li(0^+)}{\omega_0^{\pht{0}-2}s^2+1}\\
-&=\frac{sv_C(0^+)+L\omega_0^{\pht{0}2}i(0^+)}{s^2+\omega_0^{\pht{0}2}}
+V_C&=-V_L=-LsI+Li(0^-)\\
+&=\frac{-L^2Cs^2i(0^-)+LCsv_C(0^-)+L^2Cs^2i(0^-)+Li(0^-)}{LCs^2+1}\\
+&=\frac{LCsv_C(0^-)+Li(0^-)}{LCs^2+1}\\
+&=\frac{\omega_0^{\pht{0}-2}sv_C(0^-)+Li(0^-)}{\omega_0^{\pht{0}-2}s^2+1}\\
+&=\frac{sv_C(0^-)+L\omega_0^{\pht{0}2}i(0^-)}{s^2+\omega_0^{\pht{0}2}}
 \ea\]
 Check consistency:
 \[\ba
-\mathcal{L}\{i\}&=i(0^+)\frac{s}{s^2+\frac{1}{LC}}-v_C(0^+)\sqrt{\frac{C}{L}}\frac{\frac{1}{\sqrt{LC}}}{s^2+\frac{1}{LC}}\\
-&=\frac{LCsi(0^+)-Cv_C(0^+)}{LCs^2+1}
+\mathcal{L}\{i\}&=i(0^-)\frac{s}{s^2+\frac{1}{LC}}-v_C(0^-)\sqrt{\frac{C}{L}}\frac{\frac{1}{\sqrt{LC}}}{s^2+\frac{1}{LC}}\\
+&=\frac{LCsi(0^-)-Cv_C(0^-)}{LCs^2+1}
 \ea\]
 \[\ba
-\mathcal{L}\{v_C\}&=i(0^+)\sqrt{\frac{L}{C}}\frac{\frac{1}{\sqrt{LC}}}{s^2+\frac{1}{LC}}+v_C(0^+)\frac{s}{s^2+\frac{1}{LC}}\\
-&=\frac{LCsv_C(0^+)+Li(0^+)}{LCs^2+1}
+\mathcal{L}\{v_C\}&=i(0^-)\sqrt{\frac{L}{C}}\frac{\frac{1}{\sqrt{LC}}}{s^2+\frac{1}{LC}}+v_C(0^-)\frac{s}{s^2+\frac{1}{LC}}\\
+&=\frac{LCsv_C(0^-)+Li(0^-)}{LCs^2+1}
 \ea\]
 \end{proof}
 Forced response (time domain):
@@ -688,7 +734,7 @@ v_C&=v_{in}-v_L\\
 \[\frac{1}{i_1i_2'-i_2i_1'}=\sqrt{LC}\]
 \[\ba
 i&=\sqrt{\frac{C}{L}}\qty(-\cos\qty(\frac{1}{\sqrt{LC}}t)\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}\tau)\dv{v_{in}}{\tau}\dd{\tau}+\sin\qty(\frac{1}{\sqrt{LC}}t)\int\cos\qty(\frac{1}{\sqrt{LC}}\tau)\dv{v_{in}}{\tau}\dd{\tau})\\
-&=\sqrt{\frac{C}{L}}\qty(-\cos\qty(\frac{1}{\sqrt{LC}}t)\qty(\sin\qty(\frac{1}{\sqrt{LC}}t)(v_{in}-v_{in}(0^+))-\frac{1}{\sqrt{LC}}\int_0^t\cos\qty(\frac{1}{\sqrt{LC}}\tau)v_{in}(\tau)\dd{t})+\sin\qty(\frac{1}{\sqrt{LC}}t)\qty(\cos\qty(\frac{1}{\sqrt{LC}}t)(v_{in}-v_{in}(0^+))+\frac{1}{\sqrt{LC}}\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}\tau)v_{in}(\tau)\dd{\tau}))\\
+&=\sqrt{\frac{C}{L}}\qty(-\cos\qty(\frac{1}{\sqrt{LC}}t)\qty(\sin\qty(\frac{1}{\sqrt{LC}}t)(v_{in}-v_{in}(0^-))-\frac{1}{\sqrt{LC}}\int_0^t\cos\qty(\frac{1}{\sqrt{LC}}\tau)v_{in}(\tau)\dd{t})+\sin\qty(\frac{1}{\sqrt{LC}}t)\qty(\cos\qty(\frac{1}{\sqrt{LC}}t)(v_{in}-v_{in}(0^-))+\frac{1}{\sqrt{LC}}\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}\tau)v_{in}(\tau)\dd{\tau}))\\
 &=\frac{1}{L}\qty(\cos\qty(\frac{1}{\sqrt{LC}}t)\int_0^t\cos\qty(\frac{1}{\sqrt{LC}}\tau)v_{in}(\tau)\dd{\tau}+\sin\qty(\frac{1}{\sqrt{LC}}t)\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}\tau)v_{in}(\tau)\dd{\tau})\\
 &=\frac{1}{L}\int_0^t\qty(\cos\qty(\frac{1}{\sqrt{LC}}t)\cos\qty(\frac{1}{\sqrt{LC}}\tau)+\sin\qty(\frac{1}{\sqrt{LC}}t)\sin\qty(\frac{1}{\sqrt{LC}}\tau))v_{in}(\tau)\dd{\tau}\\
 &=\frac{1}{L}\int_0^t\cos\qty(\frac{1}{\sqrt{LC}}(t-\tau))v_{in}(\tau)\dd{\tau}\\
@@ -696,7 +742,7 @@ i&=\sqrt{\frac{C}{L}}\qty(-\cos\qty(\frac{1}{\sqrt{LC}}t)\int_0^t\sin\qty(\frac{
 \ea\]
 \[\ba
 v_C&=v_{in}-v_L=v_{in}-L\dv{i}{t}\\
-&=v_{in}-\cos(0^+)v_{in}-\int_0^t\pdv{}{t}\qty(\cos\qty(\frac{1}{\sqrt{LC}}(t-\tau))v_{in}(\tau))\dd{\tau}\\
+&=v_{in}-\cos(0^-)v_{in}-\int_0^t\pdv{}{t}\qty(\cos\qty(\frac{1}{\sqrt{LC}}(t-\tau))v_{in}(\tau))\dd{\tau}\\
 &=\frac{1}{\sqrt{LC}}\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}(t-\tau))v_{in}(\tau)\dd{\tau}\\
 &=\omega_0\int_0^t\sin\qty(\omega_0(t-\tau))v_{in}(\tau)\dd{\tau}
 \ea\]
@@ -735,26 +781,26 @@ Check consistency:
 \end{proof}
 Total response (time domain):
 \[\ba
-i&=i(0^+)\cos\qty(\frac{1}{\sqrt{LC}}t)-v_C(0^+)\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t)+\frac{1}{L}\int_0^t\cos\qty(\frac{1}{\sqrt{LC}}(t-\tau))v_{in}(\tau)\dd{\tau}\\
-&=i(0^+)\cos\qty(\omega_0t)-v_C(0^+)C\omega_0\sin\qty(\omega_0t)+\frac{1}{L}\int_0^t\cos\qty(\omega_0(t-\tau))v_{in}(\tau)\dd{\tau}
+i&=i(0^-)\cos\qty(\frac{1}{\sqrt{LC}}t)-v_C(0^-)\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t)+\frac{1}{L}\int_0^t\cos\qty(\frac{1}{\sqrt{LC}}(t-\tau))v_{in}(\tau)\dd{\tau}\\
+&=i(0^-)\cos\qty(\omega_0t)-v_C(0^-)C\omega_0\sin\qty(\omega_0t)+\frac{1}{L}\int_0^t\cos\qty(\omega_0(t-\tau))v_{in}(\tau)\dd{\tau}
 \ea\]
 \[\ba
 v_C&=v_{in}-v_L\\
-&=i(0^+)\sqrt{\frac{L}{C}}\sin\qty(\frac{1}{\sqrt{LC}}t)+v_C(0^+)\cos\qty(\frac{1}{\sqrt{LC}}t)+\frac{1}{\sqrt{LC}}\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}(t-\tau))v_{in}(\tau)\dd{\tau}\\
-&=i(0^+)L\omega_0\sin\qty(\omega_0t)+v_C(0^+)\cos\qty(\omega_0t)+\omega_0\int_0^t\sin\qty(\omega_0(t-\tau))v_{in}(\tau)\dd{\tau}
+&=i(0^-)\sqrt{\frac{L}{C}}\sin\qty(\frac{1}{\sqrt{LC}}t)+v_C(0^-)\cos\qty(\frac{1}{\sqrt{LC}}t)+\frac{1}{\sqrt{LC}}\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}(t-\tau))v_{in}(\tau)\dd{\tau}\\
+&=i(0^-)L\omega_0\sin\qty(\omega_0t)+v_C(0^-)\cos\qty(\omega_0t)+\omega_0\int_0^t\sin\qty(\omega_0(t-\tau))v_{in}(\tau)\dd{\tau}
 \ea\]
 Total response (Laplace domain):
 \[\ba
-I&=\frac{LCsi(0^+)-Cv_C(0^+)+CsV_{in}}{LCs^2+1}\\
-&=\frac{si(0^+)-C\omega_0^{\pht{0}2}v_C(0^+)+\omega_0^{\pht{0}2}CsV_{in}}{s^2+\omega_0^{\pht{0}2}}
+I&=\frac{LCsi(0^-)-Cv_C(0^-)+CsV_{in}}{LCs^2+1}\\
+&=\frac{si(0^-)-C\omega_0^{\pht{0}2}v_C(0^-)+\omega_0^{\pht{0}2}CsV_{in}}{s^2+\omega_0^{\pht{0}2}}
 \ea\]
 \[\ba
-V_C&=\frac{LCsv_C(0^+)+Li(0^+)+V_{in}}{LCs^2+1}\\
-&=\frac{sv_C(0^+)+L\omega_0^{\pht{0}2}i(0^+)+\omega_0^{\pht{0}2}}V_{in}}{s^2+\omega_0^{\pht{0}2}}}
+V_C&=\frac{LCsv_C(0^-)+Li(0^-)+V_{in}}{LCs^2+1}\\
+&=\frac{sv_C(0^-)+L\omega_0^{\pht{0}2}i(0^-)+\omega_0^{\pht{0}2}}V_{in}}{s^2+\omega_0^{\pht{0}2}}}
 \ea\]
 \[\ba
-V_L&=\frac{LCs^2V_{in}-LCsv_C(0^+)-Li(0^+)}{LCs^2+1}\\
-&=\frac{s^2V_{in}-sv_C(0^+)-L\omega_0^{\pht{0}2}i(0^+)}{s^2+\omega_0^{\pht{0}2}}
+V_L&=\frac{LCs^2V_{in}-LCsv_C(0^-)-Li(0^-)}{LCs^2+1}\\
+&=\frac{s^2V_{in}-sv_C(0^-)-L\omega_0^{\pht{0}2}i(0^-)}{s^2+\omega_0^{\pht{0}2}}
 \ea\]
 Impulse response:
 \[\ba
@@ -801,21 +847,21 @@ Natural response (time domain): Total energy stored in inductor and capacitor $E
 \[\omega_0=\frac{1}{\sqrt{LC}}\]
 \[\dv[2]{v}{t}+\omega_0^{\pht{0}2}v=0\]
 \[\ba
-v&=v(0^+)\cos\qty(\frac{1}{\sqrt{LC}}t)-i_L(0^+)\sqrt{\frac{L}{C}}\sin\qty(\frac{1}{\sqrt{LC}}t)\\
-&=v(0^+)\cos\qty(\omega_0t)-i_L(0^+)L\omega_0\sin\qty(\omega_0t)
+v&=v(0^-)\cos\qty(\frac{1}{\sqrt{LC}}t)-i_L(0^-)\sqrt{\frac{L}{C}}\sin\qty(\frac{1}{\sqrt{LC}}t)\\
+&=v(0^-)\cos\qty(\omega_0t)-i_L(0^-)L\omega_0\sin\qty(\omega_0t)
 \ea\]
 \[\ba
 i_L&=-i_C\\
-&=v(0^+)\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t)+i_L(0^+)\cos\qty(\frac{1}{\sqrt{LC}}t)\\
-&=v(0^+)\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t)+i_L(0^+)\cos\qty(\frac{1}{\sqrt{LC}}t)
+&=v(0^-)\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t)+i_L(0^-)\cos\qty(\frac{1}{\sqrt{LC}}t)\\
+&=v(0^-)\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t)+i_L(0^-)\cos\qty(\frac{1}{\sqrt{LC}}t)
 \ea\]
 \[\ba
 p_L&=-p_C\\
-&=\frac{1}{2}\qty((v(0^+))^2\sqrt{\frac{C}{L}}-(i_L(0^+))^2)\sin\qty(\frac{2}{\sqrt{LC}}t)+v(0^+)i_L(0^+)\cos\qty(\frac{2}{\sqrt{LC}}t)\\
-&=\frac{1}{2}\qty((v(0^+))^2C\omega_0-(i_L(0^+))^2)\sin\qty(2\omega_0t)+v(0^+)i_L(0^+)\cos\qty(2\omega_0t)
+&=\frac{1}{2}\qty((v(0^-))^2\sqrt{\frac{C}{L}}-(i_L(0^-))^2)\sin\qty(\frac{2}{\sqrt{LC}}t)+v(0^-)i_L(0^-)\cos\qty(\frac{2}{\sqrt{LC}}t)\\
+&=\frac{1}{2}\qty((v(0^-))^2C\omega_0-(i_L(0^-))^2)\sin\qty(2\omega_0t)+v(0^-)i_L(0^-)\cos\qty(2\omega_0t)
 \ea\]
 \[\lim_{n\to\infty}\frac{1}{n}\int_0^np_C\dd{t}=-\lim_{n\to\infty}\frac{1}{n}\int_0^np_L\dd{t}=0\]
-\[E=\frac{1}{2}\qty(C(v_C(0^+))^2+L(I(0^+))^2)\]
+\[E=\frac{1}{2}\qty(C(v_C(0^-))^2+L(I(0^-))^2)\]
 \begin{proof}
 \[i_L+i_C=0\]
 \[v=L\dv{i_L}{t}\]
@@ -826,59 +872,59 @@ p_L&=-p_C\\
 \[\omega_0=\frac{1}{\sqrt{LC}}\]
 \[\dv[2]{v}{t}+\omega_0^{\pht{0}2}v=0\]
 \[v=A\cos\qty(\frac{1}{\sqrt{LC}}t)+B\sin\qty(\frac{1}{\sqrt{LC}}t)\]
-\[A=v(0^+)\]
-\[i_L=v(0^+)\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t)-B\sqrt{\frac{C}{L}}\cos\qty(\frac{1}{\sqrt{LC}}t)\]
-\[B=-i_L(0^+)\sqrt{\frac{L}{C}}\]
+\[A=v(0^-)\]
+\[i_L=v(0^-)\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t)-B\sqrt{\frac{C}{L}}\cos\qty(\frac{1}{\sqrt{LC}}t)\]
+\[B=-i_L(0^-)\sqrt{\frac{L}{C}}\]
 \[\ba
-v&=v(0^+)\cos\qty(\frac{1}{\sqrt{LC}}t)-i_L(0^+)\sqrt{\frac{L}{C}}\sin\qty(\frac{1}{\sqrt{LC}}t)\\
-&=v(0^+)\cos\qty(\omega_0t)-i_L(0^+)L\omega_0\sin\qty(\omega_0t)
+v&=v(0^-)\cos\qty(\frac{1}{\sqrt{LC}}t)-i_L(0^-)\sqrt{\frac{L}{C}}\sin\qty(\frac{1}{\sqrt{LC}}t)\\
+&=v(0^-)\cos\qty(\omega_0t)-i_L(0^-)L\omega_0\sin\qty(\omega_0t)
 \ea\]
 \[\ba
 i_L&=-i_C=-C\dv{v}{t}\\
-&=v(0^+)\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t)+i_L(0^+)\cos\qty(\frac{1}{\sqrt{LC}}t)\\
-&=v(0^+)\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t)+i_L(0^+)\cos\qty(\frac{1}{\sqrt{LC}}t)
+&=v(0^-)\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t)+i_L(0^-)\cos\qty(\frac{1}{\sqrt{LC}}t)\\
+&=v(0^-)\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t)+i_L(0^-)\cos\qty(\frac{1}{\sqrt{LC}}t)
 \ea\]
 \[\ba
 p_L&=-p_C\\
-&=\qty(v(0^+)\cos\qty(\frac{1}{\sqrt{LC}}t)-i_L(0^+)\sqrt{\frac{L}{C}}\sin\qty(\frac{1}{\sqrt{LC}}t))\qty(v(0^+)\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t)+i_L(0^+)\cos\qty(\frac{1}{\sqrt{LC}}t))\\
-&=(v(0^+))^2\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t)\cos\qty(\frac{1}{\sqrt{LC}}t)+v(0^+)i_L(0^+)\cos^2\qty(\frac{1}{\sqrt{LC}}t)-v(0^+)i_L(0^+)\sin^2\qty(\frac{1}{\sqrt{LC}}t)-(i_L(0^+))^2\sin\qty(\frac{1}{\sqrt{LC}}t)\cos\qty(\frac{1}{\sqrt{LC}}t)\\
-&=\frac{1}{2}\qty((v(0^+))^2\sqrt{\frac{C}{L}}-(i_L(0^+))^2)\sin\qty(\frac{2}{\sqrt{LC}}t)+v(0^+)i_L(0^+)\cos\qty(\frac{2}{\sqrt{LC}}t)\\
-&=\frac{1}{2}\qty((v(0^+))^2C\omega_0-(i_L(0^+))^2)\sin\qty(2\omega_0t)+v(0^+)i_L(0^+)\cos\qty(2\omega_0t)
+&=\qty(v(0^-)\cos\qty(\frac{1}{\sqrt{LC}}t)-i_L(0^-)\sqrt{\frac{L}{C}}\sin\qty(\frac{1}{\sqrt{LC}}t))\qty(v(0^-)\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t)+i_L(0^-)\cos\qty(\frac{1}{\sqrt{LC}}t))\\
+&=(v(0^-))^2\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t)\cos\qty(\frac{1}{\sqrt{LC}}t)+v(0^-)i_L(0^-)\cos^2\qty(\frac{1}{\sqrt{LC}}t)-v(0^-)i_L(0^-)\sin^2\qty(\frac{1}{\sqrt{LC}}t)-(i_L(0^-))^2\sin\qty(\frac{1}{\sqrt{LC}}t)\cos\qty(\frac{1}{\sqrt{LC}}t)\\
+&=\frac{1}{2}\qty((v(0^-))^2\sqrt{\frac{C}{L}}-(i_L(0^-))^2)\sin\qty(\frac{2}{\sqrt{LC}}t)+v(0^-)i_L(0^-)\cos\qty(\frac{2}{\sqrt{LC}}t)\\
+&=\frac{1}{2}\qty((v(0^-))^2C\omega_0-(i_L(0^-))^2)\sin\qty(2\omega_0t)+v(0^-)i_L(0^-)\cos\qty(2\omega_0t)
 \ea\]
 \end{proof}
 Natural response (Laplace domain):
 \[\ba
-V&=\frac{LCsv(0^+)-Li_L(0^+)}{LCs^2+1}\\
-&=\frac{sv(0^+)-L\omega_0^{\pht{0}2}i_L(0^+)}{s^2+\omega_0^{\pht{0}2}}
+V&=\frac{LCsv(0^-)-Li_L(0^-)}{LCs^2+1}\\
+&=\frac{sv(0^-)-L\omega_0^{\pht{0}2}i_L(0^-)}{s^2+\omega_0^{\pht{0}2}}
 \ea\]
 \[\ba
 I_L&=-I_C\\
-&=\frac{Cv(0^+)+LCsi_L(0^+)}{LCs^2+1}\\
-&=\frac{C\omega_0^{\pht{0}2}v(0^+)+si_L(0^+)}{s^2+\omega_0^{\pht{0}2}}
+&=\frac{Cv(0^-)+LCsi_L(0^-)}{LCs^2+1}\\
+&=\frac{C\omega_0^{\pht{0}2}v(0^-)+si_L(0^-)}{s^2+\omega_0^{\pht{0}2}}
 \ea\]
 \begin{proof}
 \[I_L+I_C=0\]
 \[\ba
-V&=\frac{Cv(0^+)-\frac{i_L(0^+)}{s}}{\frac{1}{Ls}+Cs}\\
-&=\frac{LCsv(0^+)-Li_L(0^+)}{LCs^2+1}\\
-&=\frac{\omega_0^{\pht{0}-2}sv(0^+)-Li_L(0^+)}{\omega_0^{\pht{0}-2}s^2+1}\\
-&=\frac{sv(0^+)-L\omega_0^{\pht{0}2}i_L(0^+)}{s^2+\omega_0^{\pht{0}2}}
+V&=\frac{Cv(0^-)-\frac{i_L(0^-)}{s}}{\frac{1}{Ls}+Cs}\\
+&=\frac{LCsv(0^-)-Li_L(0^-)}{LCs^2+1}\\
+&=\frac{\omega_0^{\pht{0}-2}sv(0^-)-Li_L(0^-)}{\omega_0^{\pht{0}-2}s^2+1}\\
+&=\frac{sv(0^-)-L\omega_0^{\pht{0}2}i_L(0^-)}{s^2+\omega_0^{\pht{0}2}}
 \ea\]
 \[\ba
 I_L&=-I_C\\
-&=\frac{V}{Ls}+\frac{i_L(0^+)}{s}\\
-&=\frac{Csv(0^+)-i_L(0^+)+LCs^2i_L(0^+)+i_L(0^+)}{LCs^3+s}\\
-&=\frac{Cv(0^+)+LCsi_L(0^+)}{LCs^2+1}\\
-&=\frac{Cv(0^+)+\omega_0^{\pht{0}-2}si_L(0^+)}{\omega_0^{\pht{0}-2}s^2+1}\\
-&=\frac{C\omega_0^{\pht{0}2}v(0^+)+si_L(0^+)}{s^2+\omega_0^{\pht{0}2}}
+&=\frac{V}{Ls}+\frac{i_L(0^-)}{s}\\
+&=\frac{Csv(0^-)-i_L(0^-)+LCs^2i_L(0^-)+i_L(0^-)}{LCs^3+s}\\
+&=\frac{Cv(0^-)+LCsi_L(0^-)}{LCs^2+1}\\
+&=\frac{Cv(0^-)+\omega_0^{\pht{0}-2}si_L(0^-)}{\omega_0^{\pht{0}-2}s^2+1}\\
+&=\frac{C\omega_0^{\pht{0}2}v(0^-)+si_L(0^-)}{s^2+\omega_0^{\pht{0}2}}
 \ea\]
 Check consistency:
 \[\ba
-\mathcal{L}\{V\}&=v(0^+)\frac{s}{s^2+\frac{1}{LC}}-i_L(0^+)\sqrt{\frac{L}{C}}\frac{\frac{1}{\sqrt{LC}}{s^2+\frac{1}{LC}}\\
-&=\frac{LCsv(0^+)-Li_L(0^+)}{LCs^2+1}
+\mathcal{L}\{V\}&=v(0^-)\frac{s}{s^2+\frac{1}{LC}}-i_L(0^-)\sqrt{\frac{L}{C}}\frac{\frac{1}{\sqrt{LC}}{s^2+\frac{1}{LC}}\\
+&=\frac{LCsv(0^-)-Li_L(0^-)}{LCs^2+1}
 \ea\]
 \[\ba
-\mathcal{L}\{i_L\}&=v(0^+)\sqrt{\frac{C}{L}}\frac{\frac{1}{\sqrt{LC}}{s^2+\frac{1}{LC}}+i_L(0^+)\frac{s}{s^2+\frac{1}{LC}}\\
+\mathcal{L}\{i_L\}&=v(0^-)\sqrt{\frac{C}{L}}\frac{\frac{1}{\sqrt{LC}}{s^2+\frac{1}{LC}}+i_L(0^-)\frac{s}{s^2+\frac{1}{LC}}\\
 \ea\]
 \end{proof}
 Forced response (time domain):
@@ -906,7 +952,7 @@ i_L&=i_{in}-i_C\\
 \[\frac{1}{v_1v_2'-v_2v_1'}=\sqrt{LC}\]
 \[\ba
 v&=\sqrt{\frac{L}{C}}\qty(-\cos\qty(\frac{1}{\sqrt{LC}}t)\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}\tau)\dv{i_{in}}{\tau}\dd{\tau}+\sin\qty(\frac{1}{\sqrt{LC}}t)\int\cos\qty(\frac{1}{\sqrt{LC}}\tau)\dv{i_{in}}{\tau}\dd{\tau})\\
-&=\sqrt{\frac{L}{C}}\qty(-\cos\qty(\frac{1}{\sqrt{LC}}t)\qty(\sin\qty(\frac{1}{\sqrt{LC}}t)(i_{in}-i_{in}(0^+))-\frac{1}{\sqrt{LC}}\int_0^t\cos\qty(\frac{1}{\sqrt{LC}}\tau)i_{in}(\tau)\dd{t})+\sin\qty(\frac{1}{\sqrt{LC}}t)\qty(\cos\qty(\frac{1}{\sqrt{LC}}t)(i_{in}-i_{in}(0^+))+\frac{1}{\sqrt{LC}}\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}\tau)i_{in}(\tau)\dd{\tau}))\\
+&=\sqrt{\frac{L}{C}}\qty(-\cos\qty(\frac{1}{\sqrt{LC}}t)\qty(\sin\qty(\frac{1}{\sqrt{LC}}t)(i_{in}-i_{in}(0^-))-\frac{1}{\sqrt{LC}}\int_0^t\cos\qty(\frac{1}{\sqrt{LC}}\tau)i_{in}(\tau)\dd{t})+\sin\qty(\frac{1}{\sqrt{LC}}t)\qty(\cos\qty(\frac{1}{\sqrt{LC}}t)(i_{in}-i_{in}(0^-))+\frac{1}{\sqrt{LC}}\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}\tau)i_{in}(\tau)\dd{\tau}))\\
 &=\frac{1}{C}\cos\qty(\frac{1}{\sqrt{LC}}t)\int_0^t\cos\qty(\frac{1}{\sqrt{LC}}\tau)i_{in}(\tau)\dd{\tau}+\frac{1}{C}\sin\qty(\frac{1}{\sqrt{LC}}t)\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}\tau)i_{in}(\tau)\dd{\tau}\\
 &=\frac{1}{C}\qty(\cos\qty(\frac{1}{\sqrt{LC}}t)\int_0^t\cos\qty(\frac{1}{\sqrt{LC}}\tau)i_{in}(\tau)\dd{\tau}+\sin\qty(\frac{1}{\sqrt{LC}}t)\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}\tau)i_{in}(\tau)\dd{\tau})\\
 &=\frac{1}{C}\int_0^t\qty(\cos\qty(\frac{1}{\sqrt{LC}}t)\cos\qty(\frac{1}{\sqrt{LC}}\tau)+\sin\qty(\frac{1}{\sqrt{LC}}t)\sin\qty(\frac{1}{\sqrt{LC}}\tau))i_{in}(\tau)\dd{\tau}\\
@@ -915,7 +961,7 @@ v&=\sqrt{\frac{L}{C}}\qty(-\cos\qty(\frac{1}{\sqrt{LC}}t)\int_0^t\sin\qty(\frac{
 \ea\]
 \[\ba
 i_L&=i_{in}-i_C=i_{in}-C\dv{v}{t}\\
-&=i_{in}-\cos(0^+)i_{in}-\int_0^t\pdv{}{t}\qty(\cos\qty(\frac{1}{\sqrt{LC}}(t-\tau))i_{in}(\tau))\dd{\tau}\\
+&=i_{in}-\cos(0^-)i_{in}-\int_0^t\pdv{}{t}\qty(\cos\qty(\frac{1}{\sqrt{LC}}(t-\tau))i_{in}(\tau))\dd{\tau}\\
 &=\frac{1}{\sqrt{LC}}\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}(t-\tau))i_{in}(\tau)\dd{\tau}\\
 &=\omega_0\int_0^t\sin\qty(\omega_0(t-\tau))i_{in}(\tau)\dd{\tau}
 \ea\]
@@ -954,26 +1000,26 @@ Check consistency:
 \end{proof}
 Total response (time domain):
 \[\ba
-v&=\frac{1}{C}\int_0^t\cos\qty(\frac{1}{\sqrt{LC}}(t-\tau))i_{in}(\tau)\dd{\tau}+v(0^+)\cos\qty(\frac{1}{\sqrt{LC}}t)-i_L(0^+)\sqrt{\frac{L}{C}}\sin\qty(\frac{1}{\sqrt{LC}}t)\\
-&=\frac{1}{C}\int_0^t\cos\qty(\omega_0(t-\tau))i_{in}(\tau)\dd{\tau}+v(0^+)\cos\qty(\omega_0t)-i_L(0^+)L\omega_0\sin\qty(\omega_0t)
+v&=\frac{1}{C}\int_0^t\cos\qty(\frac{1}{\sqrt{LC}}(t-\tau))i_{in}(\tau)\dd{\tau}+v(0^-)\cos\qty(\frac{1}{\sqrt{LC}}t)-i_L(0^-)\sqrt{\frac{L}{C}}\sin\qty(\frac{1}{\sqrt{LC}}t)\\
+&=\frac{1}{C}\int_0^t\cos\qty(\omega_0(t-\tau))i_{in}(\tau)\dd{\tau}+v(0^-)\cos\qty(\omega_0t)-i_L(0^-)L\omega_0\sin\qty(\omega_0t)
 \ea\]
 \[\ba
 i_L&=i_{in}-i_C\\
-&=\frac{1}{\sqrt{LC}}\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}(t-\tau))i_{in}(\tau)\dd{\tau}+v(0^+)\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t)+i_L(0^+)\cos\qty(\frac{1}{\sqrt{LC}}t)\\
-&=\omega_0\int_0^t\sin\qty(\omega_0(t-\tau))i_{in}(\tau)\dd{\tau}+v(0^+)\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t)+i_L(0^+)\cos\qty(\frac{1}{\sqrt{LC}}t)
+&=\frac{1}{\sqrt{LC}}\int_0^t\sin\qty(\frac{1}{\sqrt{LC}}(t-\tau))i_{in}(\tau)\dd{\tau}+v(0^-)\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t)+i_L(0^-)\cos\qty(\frac{1}{\sqrt{LC}}t)\\
+&=\omega_0\int_0^t\sin\qty(\omega_0(t-\tau))i_{in}(\tau)\dd{\tau}+v(0^-)\sqrt{\frac{C}{L}}\sin\qty(\frac{1}{\sqrt{LC}}t)+i_L(0^-)\cos\qty(\frac{1}{\sqrt{LC}}t)
 \ea\]
 Total response (Laplace domain):
 \[\ba
-V&=\frac{LsI_{in}+LCsv(0^+)-Li_L(0^+)}{LCs^2+1}\\
-&=\frac{\omega_0^{\pht{0}2}LsI_{in}+sv(0^+)-L\omega_0^{\pht{0}2}i_L(0^+)}{s^2+\omega_0^{\pht{0}2}}
+V&=\frac{LsI_{in}+LCsv(0^-)-Li_L(0^-)}{LCs^2+1}\\
+&=\frac{\omega_0^{\pht{0}2}LsI_{in}+sv(0^-)-L\omega_0^{\pht{0}2}i_L(0^-)}{s^2+\omega_0^{\pht{0}2}}
 \ea\]
 \[\ba
-I_L&=\frac{I_{in}+Cv(0^+)+LCsi_L(0^+)}{LCs^2+1}\\
-&=\frac{\omega_0^{\pht{0}2}I_{in}+C\omega_0^{\pht{0}2}v(0^+)+si_L(0^+)}{s^2+\omega_0^{\pht{0}2}}
+I_L&=\frac{I_{in}+Cv(0^-)+LCsi_L(0^-)}{LCs^2+1}\\
+&=\frac{\omega_0^{\pht{0}2}I_{in}+C\omega_0^{\pht{0}2}v(0^-)+si_L(0^-)}{s^2+\omega_0^{\pht{0}2}}
 \ea\]
 \[\ba
-I_C&=\frac{LCs^2I_{in}-Cv(0^+)-LCsi_L(0^+)}{LCs^2+1}\\
-&=\frac{s^2I_{in}-C\omega_0^{\pht{0}2}v(0^+)-si_L(0^+)}{s^2+\omega_0^{\pht{0}2}}
+I_C&=\frac{LCs^2I_{in}-Cv(0^-)-LCsi_L(0^-)}{LCs^2+1}\\
+&=\frac{s^2I_{in}-C\omega_0^{\pht{0}2}v(0^-)-si_L(0^-)}{s^2+\omega_0^{\pht{0}2}}
 \ea\]
 Impulse response:
 \[\ba
@@ -1041,13 +1087,13 @@ r&=\frac{-2\omega_0\zeta\pm\sqrt{4\omega_0^{\pht{0}2}\zeta^2-4\omega_0^{\pht{0}2
 \end{proof}
 \bit
 \item $\zeta>1$ Overdamped response:
-\[i=-\frac{i(0^+)R\qty(\zeta-\sqrt{\zeta^2-1})+2v_C(0^+)\zeta}{2R\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\frac{i(0^+)R\qty(\zeta+\sqrt{\zeta^2-1})+2v_C(0^+)\zeta}{2R\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
-\[v_R=-\frac{i(0^+)R\qty(\zeta-\sqrt{\zeta^2-1})+2v_C(0^+)\zeta}{2\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\frac{i(0^+)R\qty(\zeta+\sqrt{\zeta^2-1})+2v_C(0^+)\zeta}{2\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
-\[v_L=\frac{i(0^+)R\qty(\zeta-\sqrt{\zeta^2-1})^2+2v_C(0^+)\zeta\qty(\zeta-\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-\frac{i(0^+)R\qty(\zeta+\sqrt{\zeta^2-1})^2+2v_C(0^+)\zeta\qty(\zeta+\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
-\[v_C=\frac{i(0^+)R+2v_C(0^+)\zeta\qty(\zeta+\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-\frac{i(0^+)R+2v_C(0^+)\zeta\qty(\zeta-\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
+\[i=-\frac{i(0^-)R\qty(\zeta-\sqrt{\zeta^2-1})+2v_C(0^-)\zeta}{2R\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\frac{i(0^-)R\qty(\zeta+\sqrt{\zeta^2-1})+2v_C(0^-)\zeta}{2R\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
+\[v_R=-\frac{i(0^-)R\qty(\zeta-\sqrt{\zeta^2-1})+2v_C(0^-)\zeta}{2\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\frac{i(0^-)R\qty(\zeta+\sqrt{\zeta^2-1})+2v_C(0^-)\zeta}{2\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
+\[v_L=\frac{i(0^-)R\qty(\zeta-\sqrt{\zeta^2-1})^2+2v_C(0^-)\zeta\qty(\zeta-\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-\frac{i(0^-)R\qty(\zeta+\sqrt{\zeta^2-1})^2+2v_C(0^-)\zeta\qty(\zeta+\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
+\[v_C=\frac{i(0^-)R+2v_C(0^-)\zeta\qty(\zeta+\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-\frac{i(0^-)R+2v_C(0^-)\zeta\qty(\zeta-\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
 \begin{proof}
 \[i=Ae^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+Be^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
-\[i(0^+)=A+B\]
+\[i(0^-)=A+B\]
 \[v_R=ARe^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+BRe^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
 \[\ba
 v_L&=L\dv{i}{t}\\
@@ -1059,203 +1105,203 @@ v_C&=-v_R-v_L\\
 &=-AR\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-BR\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}
 \ea\]
 \[\ba
-v_C(0^+)&=-AR\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}-BR\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}\\
-&=-AR\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}-i(0^+)R\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}+AR\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}\\
-&=\frac{-i(0^+)R\qty(\zeta-\sqrt{\zeta^2-1})-2AR\sqrt{\zeta^2-1}}{2\zeta}
+v_C(0^-)&=-AR\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}-BR\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}\\
+&=-AR\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}-i(0^-)R\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}+AR\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}\\
+&=\frac{-i(0^-)R\qty(\zeta-\sqrt{\zeta^2-1})-2AR\sqrt{\zeta^2-1}}{2\zeta}
 \ea\]
-\[A=-\frac{i(0^+)R\qty(\zeta-\sqrt{\zeta^2-1})+2v_C(0^+)\zeta}{2R\sqrt{\zeta^2-1}}\]
-\[B=i(0^+)-A=\frac{i(0^+)R\qty(\zeta+\sqrt{\zeta^2-1})+2v_C(0^+)\zeta}{2R\sqrt{\zeta^2-1}}\]
-\[i=-\frac{i(0^+)R\qty(\zeta-\sqrt{\zeta^2-1})+2v_C(0^+)\zeta}{2R\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\frac{i(0^+)R\qty(\zeta+\sqrt{\zeta^2-1})+2v_C(0^+)\zeta}{2R\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
+\[A=-\frac{i(0^-)R\qty(\zeta-\sqrt{\zeta^2-1})+2v_C(0^-)\zeta}{2R\sqrt{\zeta^2-1}}\]
+\[B=i(0^-)-A=\frac{i(0^-)R\qty(\zeta+\sqrt{\zeta^2-1})+2v_C(0^-)\zeta}{2R\sqrt{\zeta^2-1}}\]
+\[i=-\frac{i(0^-)R\qty(\zeta-\sqrt{\zeta^2-1})+2v_C(0^-)\zeta}{2R\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\frac{i(0^-)R\qty(\zeta+\sqrt{\zeta^2-1})+2v_C(0^-)\zeta}{2R\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
 \[\ba
-v_C&=\frac{i(0^+)R\qty(\zeta-\sqrt{\zeta^2-1})+2v_C(0^+)\zeta}{2R\sqrt{\zeta^2-1}}R\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-\frac{i(0^+)R\qty(\zeta+\sqrt{\zeta^2-1})+2v_C(0^+)\zeta}{2R\sqrt{\zeta^2-1}}R\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\\
-&=\frac{i(0^+)R+2v_C(0^+)\zeta\qty(\zeta+\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-\frac{i(0^+)R+2v_C(0^+)\zeta\qty(\zeta-\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}
+v_C&=\frac{i(0^-)R\qty(\zeta-\sqrt{\zeta^2-1})+2v_C(0^-)\zeta}{2R\sqrt{\zeta^2-1}}R\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-\frac{i(0^-)R\qty(\zeta+\sqrt{\zeta^2-1})+2v_C(0^-)\zeta}{2R\sqrt{\zeta^2-1}}R\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\\
+&=\frac{i(0^-)R+2v_C(0^-)\zeta\qty(\zeta+\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-\frac{i(0^-)R+2v_C(0^-)\zeta\qty(\zeta-\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}
 \ea\]
 Check $i=C\dv{v_C}{t}$:
 \[\ba
-C\dv{v_C}{t}&=-\frac{i(0^+)R+2v_C(0^+)\zeta\qty(\zeta+\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}\frac{2\zeta}{R}\qty(\zeta-\sqrt{\zeta^2-1})e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\frac{i(0^+)R+2v_C(0^+)\zeta\qty(\zeta-\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}\frac{2\zeta}{R}\qty(\zeta+\sqrt{\zeta^2-1})e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\\
-&=-\frac{i(0^+)R\qty(\zeta-\sqrt{\zeta^2-1})+2v_C(0^+)\zeta}{2R\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\frac{i(0^+)R\qty(\zeta+\sqrt{\zeta^2-1})+2v_C(0^+)\zeta}{2R\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}
+C\dv{v_C}{t}&=-\frac{i(0^-)R+2v_C(0^-)\zeta\qty(\zeta+\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}\frac{2\zeta}{R}\qty(\zeta-\sqrt{\zeta^2-1})e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\frac{i(0^-)R+2v_C(0^-)\zeta\qty(\zeta-\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}\frac{2\zeta}{R}\qty(\zeta+\sqrt{\zeta^2-1})e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\\
+&=-\frac{i(0^-)R\qty(\zeta-\sqrt{\zeta^2-1})+2v_C(0^-)\zeta}{2R\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\frac{i(0^-)R\qty(\zeta+\sqrt{\zeta^2-1})+2v_C(0^-)\zeta}{2R\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}
 \ea\]
 \[\ba
-v_L&=\frac{i(0^+)R\qty(\zeta-\sqrt{\zeta^2-1})+2v_C(0^+)\zeta}{2\sqrt{\zeta^2-1}}\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-\frac{i(0^+)R\qty(\zeta+\sqrt{\zeta^2-1})+2v_C(0^+)\zeta}{2\sqrt{\zeta^2-1}}\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\\
-&=\frac{i(0^+)R\qty(\zeta-\sqrt{\zeta^2-1})^2+2v_C(0^+)\zeta\qty(\zeta-\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-\frac{i(0^+)R\qty(\zeta+\sqrt{\zeta^2-1})^2+2v_C(0^+)\zeta\qty(\zeta+\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}
+v_L&=\frac{i(0^-)R\qty(\zeta-\sqrt{\zeta^2-1})+2v_C(0^-)\zeta}{2\sqrt{\zeta^2-1}}\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-\frac{i(0^-)R\qty(\zeta+\sqrt{\zeta^2-1})+2v_C(0^-)\zeta}{2\sqrt{\zeta^2-1}}\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\\
+&=\frac{i(0^-)R\qty(\zeta-\sqrt{\zeta^2-1})^2+2v_C(0^-)\zeta\qty(\zeta-\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-\frac{i(0^-)R\qty(\zeta+\sqrt{\zeta^2-1})^2+2v_C(0^-)\zeta\qty(\zeta+\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}
 \ea\]
 \end{proof}
 \item $\zeta=1$ Critically damped response:
-\[i=\qty(i(0^+)-\qty(i(0^+)+2\frac{v_C(0^+)}{R})\omega_0t)e^{-\omega_0t}\]
-\[v_R=\qty(i(0^+)R-\qty(i(0^+)R+2v_C(0^+))\omega_0t)e^{-\omega_0t}\]
-\[v_L=-\qty(i(0^+)R+v_C(0^+)+\qty(\frac{1}{2}i(0^+)R+v_C(0^+))\omega_0t)e^{-\omega_0t}\]
-\[v_C=\qty(v_C(0^+)+\qty(\frac{1}{2}i(0^+)R+v_C(0^+))\omega_0t)e^{-\omega_0t}\]
+\[i=\qty(i(0^-)-\qty(i(0^-)+2\frac{v_C(0^-)}{R})\omega_0t)e^{-\omega_0t}\]
+\[v_R=\qty(i(0^-)R-\qty(i(0^-)R+2v_C(0^-))\omega_0t)e^{-\omega_0t}\]
+\[v_L=-\qty(i(0^-)R+v_C(0^-)+\qty(\frac{1}{2}i(0^-)R+v_C(0^-))\omega_0t)e^{-\omega_0t}\]
+\[v_C=\qty(v_C(0^-)+\qty(\frac{1}{2}i(0^-)R+v_C(0^-))\omega_0t)e^{-\omega_0t}\]
 \begin{proof}
 \[i=(A+Bt)e^{-\omega_0t}\]
-\[A=i(0^+)\]
-\[i=(i(0^+)+Bt)e^{-\omega_0t}\]
-\[v_R=(i(0^+)+Bt)Re^{-\omega_0t}\]
+\[A=i(0^-)\]
+\[i=(i(0^-)+Bt)e^{-\omega_0t}\]
+\[v_R=(i(0^-)+Bt)Re^{-\omega_0t}\]
 \[\ba
 v_L&=L\dv{i}{t}\\
-&=L\qty(-(i(0^+)+Bt)\omega_0+B)e^{-\omega_0t}\\
-&=\qty(-i(0^+)\frac{R}{2}+\frac{BR}{2\omega_0}-\frac{BR}{2}t)e^{-\omega_0t}
+&=L\qty(-(i(0^-)+Bt)\omega_0+B)e^{-\omega_0t}\\
+&=\qty(-i(0^-)\frac{R}{2}+\frac{BR}{2\omega_0}-\frac{BR}{2}t)e^{-\omega_0t}
 \ea\]
 \[\ba
 v_C&=-v_R-v_L\\
-&=\qty(-i(0^+)R-BRt+i(0^+)\frac{R}{2}-\frac{BR}{2\omega_0}+\frac{BR}{2}t)e^{-\omega_0t}\\
-&=\qty(-i(0^+)\frac{R}{2}-\frac{BR}{2\omega_0}-\frac{BR}{2}t)e^{-\omega_0t}
+&=\qty(-i(0^-)R-BRt+i(0^-)\frac{R}{2}-\frac{BR}{2\omega_0}+\frac{BR}{2}t)e^{-\omega_0t}\\
+&=\qty(-i(0^-)\frac{R}{2}-\frac{BR}{2\omega_0}-\frac{BR}{2}t)e^{-\omega_0t}
 \ea\]
-\[v_C(0^+)=-i(0^+)\frac{R}{2}-\frac{BR}{2\omega_0}\]
+\[v_C(0^-)=-i(0^-)\frac{R}{2}-\frac{BR}{2\omega_0}\]
 \[\ba
-B&=-\qty(i(0^+)\frac{R}{2}+v_C(0^+))\frac{2\omega_0}{R}\\
-&=-\frac{\qty(i(0^+)R+2v_C(0^+))\omega_0}{R}\\
-&=-\qty(i(0^+)+2\frac{v_C(0^+)}{R})\omega_0
+B&=-\qty(i(0^-)\frac{R}{2}+v_C(0^-))\frac{2\omega_0}{R}\\
+&=-\frac{\qty(i(0^-)R+2v_C(0^-))\omega_0}{R}\\
+&=-\qty(i(0^-)+2\frac{v_C(0^-)}{R})\omega_0
 \ea\]
-\[i=\qty(i(0^+)-\qty(i(0^+)+2\frac{v_C(0^+)}{R})\omega_0t)e^{-\omega_0t}\]
+\[i=\qty(i(0^-)-\qty(i(0^-)+2\frac{v_C(0^-)}{R})\omega_0t)e^{-\omega_0t}\]
 \[\ba
-v_C&=\qty(-i(0^+)\frac{R}{2}+\frac{i(0^+)R\omega_0+2v_C(0^+)\omega_0}{2\omega_0}+\frac{i(0^+)R\omega_0+2v_C(0^+)\omega_0}{2}t)e^{-\omega_0t}\\
-&=\qty(v_C(0^+)+\qty(\frac{1}{2}i(0^+)R+v_C(0^+))\omega_0t)e^{-\omega_0t}
+v_C&=\qty(-i(0^-)\frac{R}{2}+\frac{i(0^-)R\omega_0+2v_C(0^-)\omega_0}{2\omega_0}+\frac{i(0^-)R\omega_0+2v_C(0^-)\omega_0}{2}t)e^{-\omega_0t}\\
+&=\qty(v_C(0^-)+\qty(\frac{1}{2}i(0^-)R+v_C(0^-))\omega_0t)e^{-\omega_0t}
 \ea\]
 Check $i=C\dv{v_C}{t}$:
 \[\ba
-C\dv{v_C}{t}&=\qty(-v_C(0^+)\frac{2}{R}+\qty(\frac{1}{2}i(0^+)R+v_C(0^+))\frac{2}{R}-\qty(\frac{1}{2}i(0^+)R+v_C(0^+))\frac{2}{R}\omega_0t)e^{-\omega_0t}\\
-&=\qty(i(0^+)-\qty(\frac{1}{2}i(0^+)R+v_C(0^+))\frac{2}{R}\omega_0t)e^{-\omega_0t}\\
-&=(i(0^+)-\qty(i(0^+)+2\frac{v_C(0^+)}{R})\omega_0t)e^{-\omega_0t}
+C\dv{v_C}{t}&=\qty(-v_C(0^-)\frac{2}{R}+\qty(\frac{1}{2}i(0^-)R+v_C(0^-))\frac{2}{R}-\qty(\frac{1}{2}i(0^-)R+v_C(0^-))\frac{2}{R}\omega_0t)e^{-\omega_0t}\\
+&=\qty(i(0^-)-\qty(\frac{1}{2}i(0^-)R+v_C(0^-))\frac{2}{R}\omega_0t)e^{-\omega_0t}\\
+&=(i(0^-)-\qty(i(0^-)+2\frac{v_C(0^-)}{R})\omega_0t)e^{-\omega_0t}
 \ea\]
-\[v_R=\qty(i(0^+)R-\qty(i(0^+)R+2v_C(0^+))\omega_0t)e^{-\omega_0t}\]
-\[v_L=-\qty(i(0^+)R+v_C(0^+)+\qty(\frac{1}{2}i(0^+)R+v_C(0^+))\omega_0t)e^{-\omega_0t}\]
+\[v_R=\qty(i(0^-)R-\qty(i(0^-)R+2v_C(0^-))\omega_0t)e^{-\omega_0t}\]
+\[v_L=-\qty(i(0^-)R+v_C(0^-)+\qty(\frac{1}{2}i(0^-)R+v_C(0^-))\omega_0t)e^{-\omega_0t}\]
 \end{proof}
 \item $0<\zeta<1$ Underdamped response:
-\[i=e^{-\omega_0\zeta t}\qty(i(0^+)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(2\frac{v_C(0^+)}{R}+i(0^+))\frac{\zeta}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
-\[v_R=e^{-\omega_0\zeta t}\qty(i(0^+)R\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(2v_C(0^+)+i(0^+)R)\frac{\zeta}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
-\[v_L=e^{-\omega_0\zeta t}\qty(-\qty(v_C(0^+)+i(0^+)R)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\frac{v_C(0^+)\zeta+\frac{1}{2}i(0^+)R\frac{2\zeta^2-1}{\zeta}}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
-\[v_C=e^{-\omega_0\zeta t}\qty(v_C(0^+)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(v_C(0^+)\frac{\zeta}{\sqrt{1-\zeta^2}}+\frac{1}{2}\frac{i(0^+)R}{\zeta\sqrt{1-\zeta^2}})\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
+\[i=e^{-\omega_0\zeta t}\qty(i(0^-)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(2\frac{v_C(0^-)}{R}+i(0^-))\frac{\zeta}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
+\[v_R=e^{-\omega_0\zeta t}\qty(i(0^-)R\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(2v_C(0^-)+i(0^-)R)\frac{\zeta}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
+\[v_L=e^{-\omega_0\zeta t}\qty(-\qty(v_C(0^-)+i(0^-)R)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\frac{v_C(0^-)\zeta+\frac{1}{2}i(0^-)R\frac{2\zeta^2-1}{\zeta}}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
+\[v_C=e^{-\omega_0\zeta t}\qty(v_C(0^-)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(v_C(0^-)\frac{\zeta}{\sqrt{1-\zeta^2}}+\frac{1}{2}\frac{i(0^-)R}{\zeta\sqrt{1-\zeta^2}})\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
 \begin{proof}
 \[i=e^{-\omega_0\zeta t}\qty(A\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+B\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
-\[A=i(0^+)\]
-\[i=e^{-\omega_0\zeta t}\qty(i(0^+)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+B\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
-\[v_R=Re^{-\omega_0\zeta t}\qty(i(0^+)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+B\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
+\[A=i(0^-)\]
+\[i=e^{-\omega_0\zeta t}\qty(i(0^-)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+B\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
+\[v_R=Re^{-\omega_0\zeta t}\qty(i(0^-)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+B\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
 \[\ba
 v_L&=L\dv{i}{t}\\
-&=-\frac{R}{2\zeta}\zeta e^{-\omega_0\zeta t}\qty(i(0^+)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+B\sin\qty(\omega_0\sqrt{1-\zeta^2}t))+\frac{R}{2\zeta}\sqrt{1-\zeta^2}e^{-\omega_0\zeta t}\qty(-i(0^+)\sin\qty(\omega_0\sqrt{1-\zeta^2}t)+B\cos\qty(\omega_0\sqrt{1-\zeta^2}t))\\
-&=\frac{R}{2\zeta}e^{-\omega_0\zeta t}\qty(\qty(B\sqrt{1-\zeta^2}-i(0^+)\zeta)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(B\zeta+i(0^+)\sqrt{1-\zeta^2})\sin\qty(\omega_0\sqrt{1-\zeta^2}t))
+&=-\frac{R}{2\zeta}\zeta e^{-\omega_0\zeta t}\qty(i(0^-)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+B\sin\qty(\omega_0\sqrt{1-\zeta^2}t))+\frac{R}{2\zeta}\sqrt{1-\zeta^2}e^{-\omega_0\zeta t}\qty(-i(0^-)\sin\qty(\omega_0\sqrt{1-\zeta^2}t)+B\cos\qty(\omega_0\sqrt{1-\zeta^2}t))\\
+&=\frac{R}{2\zeta}e^{-\omega_0\zeta t}\qty(\qty(B\sqrt{1-\zeta^2}-i(0^-)\zeta)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(B\zeta+i(0^-)\sqrt{1-\zeta^2})\sin\qty(\omega_0\sqrt{1-\zeta^2}t))
 \ea\]
 \[\ba
 v_C&=-v_R-v_L\\
-&=\frac{R}{2\zeta}e^{-\omega_0\zeta t}\qty(\qty(-B\sqrt{1-\zeta^2}+i(0^+)\zeta-2i(0^+)\zeta)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(B\zeta+i(0^+)\sqrt{1-\zeta^2}-2B\zeta)\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\\
-&=\frac{R}{2\zeta}e^{-\omega_0\zeta t}\qty(-\qty(B\sqrt{1-\zeta^2}+i(0^+)\zeta)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(-B\zeta+i(0^+)\sqrt{1-\zeta^2})\sin\qty(\omega_0\sqrt{1-\zeta^2}t))
+&=\frac{R}{2\zeta}e^{-\omega_0\zeta t}\qty(\qty(-B\sqrt{1-\zeta^2}+i(0^-)\zeta-2i(0^-)\zeta)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(B\zeta+i(0^-)\sqrt{1-\zeta^2}-2B\zeta)\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\\
+&=\frac{R}{2\zeta}e^{-\omega_0\zeta t}\qty(-\qty(B\sqrt{1-\zeta^2}+i(0^-)\zeta)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(-B\zeta+i(0^-)\sqrt{1-\zeta^2})\sin\qty(\omega_0\sqrt{1-\zeta^2}t))
 \ea\]
-\[v_C(0^+)=-\frac{R}{2\zeta}\qty(B\sqrt{1-\zeta^2}+i(0^+)\zeta)\]
-\[B=-\qty(2\frac{v_C(0^+)}{R}+i(0^+))\frac{\zeta}{\sqrt{1-\zeta^2}}\]
-\[i=e^{-\omega_0\zeta t}\qty(i(0^+)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(2\frac{v_C(0^+)}{R}+i(0^+))\frac{\zeta}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
+\[v_C(0^-)=-\frac{R}{2\zeta}\qty(B\sqrt{1-\zeta^2}+i(0^-)\zeta)\]
+\[B=-\qty(2\frac{v_C(0^-)}{R}+i(0^-))\frac{\zeta}{\sqrt{1-\zeta^2}}\]
+\[i=e^{-\omega_0\zeta t}\qty(i(0^-)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(2\frac{v_C(0^-)}{R}+i(0^-))\frac{\zeta}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
 \[\ba
-v_C&=\frac{R}{2\zeta}e^{-\omega_0\zeta t}\qty(\qty(\qty(2\frac{v_C(0^+)}{R}+i(0^+))-i(0^+))\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(\qty(2\frac{v_C(0^+)}{R}+i(0^+))\frac{\zeta^2}{\sqrt{1-\zeta^2}}+i(0^+)\sqrt{1-\zeta^2})\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\\
-&=e^{-\omega_0\zeta t}\qty(v_C(0^+)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(2\frac{v_C(0^+)}{R}\frac{\zeta^2}{\sqrt{1-\zeta^2}}+i(0^+)\frac{\zeta^2}{\sqrt{1-\zeta^2}}+i(0^+)\frac{1-\zeta^2}{\sqrt{1-\zeta^2}})\frac{R}{2\zeta}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\\
-&=e^{-\omega_0\zeta t}\qty(v_C(0^+)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(v_C(0^+)\frac{\zeta}{\sqrt{1-\zeta^2}}+\frac{1}{2}\frac{i(0^+)R}{\zeta\sqrt{1-\zeta^2}})\sin\qty(\omega_0\sqrt{1-\zeta^2}t))
+v_C&=\frac{R}{2\zeta}e^{-\omega_0\zeta t}\qty(\qty(\qty(2\frac{v_C(0^-)}{R}+i(0^-))-i(0^-))\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(\qty(2\frac{v_C(0^-)}{R}+i(0^-))\frac{\zeta^2}{\sqrt{1-\zeta^2}}+i(0^-)\sqrt{1-\zeta^2})\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\\
+&=e^{-\omega_0\zeta t}\qty(v_C(0^-)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(2\frac{v_C(0^-)}{R}\frac{\zeta^2}{\sqrt{1-\zeta^2}}+i(0^-)\frac{\zeta^2}{\sqrt{1-\zeta^2}}+i(0^-)\frac{1-\zeta^2}{\sqrt{1-\zeta^2}})\frac{R}{2\zeta}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\\
+&=e^{-\omega_0\zeta t}\qty(v_C(0^-)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(v_C(0^-)\frac{\zeta}{\sqrt{1-\zeta^2}}+\frac{1}{2}\frac{i(0^-)R}{\zeta\sqrt{1-\zeta^2}})\sin\qty(\omega_0\sqrt{1-\zeta^2}t))
 \ea\]
 Check $i=C\dv{v_C}{t}$:
 \[\ba
-C\dv{v_C}{t}&=-\frac{2\zeta^2}{R}e^{-\omega_0\zeta t}\qty(v_C(0^+)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(v_C(0^+)\frac{\zeta}{\sqrt{1-\zeta^2}}+\frac{1}{2}\frac{i(0^+)R}{\zeta\sqrt{1-\zeta^2}})\sin\qty(\omega_0\sqrt{1-\zeta^2}t))+\frac{2\zeta\sqrt{1-\zeta^2}}{R}e^{-\omega_0\zeta t}\qty(-v_C(0^+)\sin\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(v_C(0^+)\frac{\zeta}{\sqrt{1-\zeta^2}}+\frac{1}{2}\frac{i(0^+)R}{\zeta\sqrt{1-\zeta^2}})\cos\qty(\omega_0\sqrt{1-\zeta^2}t))\\
-&=\frac{2\zeta}{R}e^{-\omega_0\zeta t}\qty(-v_C(0^+)\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(v_C(0^+)\frac{\zeta^2}{\sqrt{1-\zeta^2}}+i(0^+)R\frac{1}{2\sqrt{1-\zeta^2}})\sin\qty(\omega_0\sqrt{1-\zeta^2}t)-v_C(0^+)\sqrt{1-\zeta^2}\sin\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(v_C(0^+)\zeta+i(0^+)R\frac{1}{2\zeta})\cos\qty(\omega_0\sqrt{1-\zeta^2}t))\\
-&=\frac{2\zeta}{R}e^{-\omega_0\zeta t}\qty(i(0^+)R\frac{1}{2\zeta}\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(v_C(0^+)\frac{1}{\sqrt{1-\zeta^2}}+i(0^+)R\frac{1}{2\sqrt{1-\zeta^2}})\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\\
-&=e^{-\omega_0\zeta t}\qty(i(0^+)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(2\frac{v_C(0^+)}{R}+i(0^+))\frac{\zeta}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))
+C\dv{v_C}{t}&=-\frac{2\zeta^2}{R}e^{-\omega_0\zeta t}\qty(v_C(0^-)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(v_C(0^-)\frac{\zeta}{\sqrt{1-\zeta^2}}+\frac{1}{2}\frac{i(0^-)R}{\zeta\sqrt{1-\zeta^2}})\sin\qty(\omega_0\sqrt{1-\zeta^2}t))+\frac{2\zeta\sqrt{1-\zeta^2}}{R}e^{-\omega_0\zeta t}\qty(-v_C(0^-)\sin\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(v_C(0^-)\frac{\zeta}{\sqrt{1-\zeta^2}}+\frac{1}{2}\frac{i(0^-)R}{\zeta\sqrt{1-\zeta^2}})\cos\qty(\omega_0\sqrt{1-\zeta^2}t))\\
+&=\frac{2\zeta}{R}e^{-\omega_0\zeta t}\qty(-v_C(0^-)\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(v_C(0^-)\frac{\zeta^2}{\sqrt{1-\zeta^2}}+i(0^-)R\frac{1}{2\sqrt{1-\zeta^2}})\sin\qty(\omega_0\sqrt{1-\zeta^2}t)-v_C(0^-)\sqrt{1-\zeta^2}\sin\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(v_C(0^-)\zeta+i(0^-)R\frac{1}{2\zeta})\cos\qty(\omega_0\sqrt{1-\zeta^2}t))\\
+&=\frac{2\zeta}{R}e^{-\omega_0\zeta t}\qty(i(0^-)R\frac{1}{2\zeta}\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(v_C(0^-)\frac{1}{\sqrt{1-\zeta^2}}+i(0^-)R\frac{1}{2\sqrt{1-\zeta^2}})\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\\
+&=e^{-\omega_0\zeta t}\qty(i(0^-)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(2\frac{v_C(0^-)}{R}+i(0^-))\frac{\zeta}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))
 \ea\]
-\[v_R=e^{-\omega_0\zeta t}\qty(i(0^+)R\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(2v_C(0^+)+i(0^+)R)\frac{\zeta}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
-\[v_L=e^{-\omega_0\zeta t}\qty(-\qty(v_C(0^+)+i(0^+)R)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\frac{v_C(0^+)\zeta+\frac{1}{2}i(0^+)R\frac{2\zeta^2-1}{\zeta}}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
+\[v_R=e^{-\omega_0\zeta t}\qty(i(0^-)R\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(2v_C(0^-)+i(0^-)R)\frac{\zeta}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
+\[v_L=e^{-\omega_0\zeta t}\qty(-\qty(v_C(0^-)+i(0^-)R)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\frac{v_C(0^-)\zeta+\frac{1}{2}i(0^-)R\frac{2\zeta^2-1}{\zeta}}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
 \end{proof}
 \eit
 Natural response (Laplace domain):
 \[\ba
-I&=\frac{i(0^+)LCs-v_C(0^+)C}{LCs^2+RCs+1}\\
-&=\frac{i(0^+)s-\frac{2v_C(0^+)\omega_0\zeta}{R}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
+I&=\frac{i(0^-)LCs-v_C(0^-)C}{LCs^2+RCs+1}\\
+&=\frac{i(0^-)s-\frac{2v_C(0^-)\omega_0\zeta}{R}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
 \[\ba
-V_R&=\frac{i(0^+)RLCs-v_C(0^+)RC}{LCs^2+RCs+1}\\
-&=\frac{i(0^+)Rs-2v_C(0^+)\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
+V_R&=\frac{i(0^-)RLCs-v_C(0^-)RC}{LCs^2+RCs+1}\\
+&=\frac{i(0^-)Rs-2v_C(0^-)\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
 \[\ba
-V_L&=-\frac{\qty(i(0^+)R+v_C(0^+))LCs+i(0^+)L}{LCs^2+RCs+1}\\
-&=-\frac{\qty(i(0^+)R+v_C(0^+))s+\frac{1}{2}\frac{i(0^+)R\omega_0}{\zeta}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
+V_L&=-\frac{\qty(i(0^-)R+v_C(0^-))LCs+i(0^-)L}{LCs^2+RCs+1}\\
+&=-\frac{\qty(i(0^-)R+v_C(0^-))s+\frac{1}{2}\frac{i(0^-)R\omega_0}{\zeta}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
 \[\ba
-V_C&=\frac{v_C(0^+)LCs+i(0^+)L+v_C(0^+)RC}{LCs^2+RCs+1}\\
-&=\frac{v_C(0^+)s+\frac{1}{2}\frac{i(0^+)R\omega_0}{\zeta}+2v_C(0^+)\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
+V_C&=\frac{v_C(0^-)LCs+i(0^-)L+v_C(0^-)RC}{LCs^2+RCs+1}\\
+&=\frac{v_C(0^-)s+\frac{1}{2}\frac{i(0^-)R\omega_0}{\zeta}+2v_C(0^-)\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
 \begin{proof}
 \[\ba
-I&=\frac{i(0^+)L-\frac{v_C(0^+)}{s}}{Ls+R+\frac{1}{Cs}}\\
-&=\frac{i(0^+)LCs-v_C(0^+)C}{LCs^2+RCs+1}\\
-&=\frac{i(0^+)s-\frac{v_C(0^+)}{L}}{s^2+\frac{R}{L}s+\frac{1}{LC}}\\
-&=\frac{i(0^+)s-\frac{2v_C(0^+)\omega_0\zeta}{R}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
+I&=\frac{i(0^-)L-\frac{v_C(0^-)}{s}}{Ls+R+\frac{1}{Cs}}\\
+&=\frac{i(0^-)LCs-v_C(0^-)C}{LCs^2+RCs+1}\\
+&=\frac{i(0^-)s-\frac{v_C(0^-)}{L}}{s^2+\frac{R}{L}s+\frac{1}{LC}}\\
+&=\frac{i(0^-)s-\frac{2v_C(0^-)\omega_0\zeta}{R}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
 \[\ba
-V_R&=\frac{i(0^+)RLCs-v_C(0^+)RC}{LCs^2+RCs+1}\\
-&=\frac{i(0^+)Rs-2v_C(0^+)\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
+V_R&=\frac{i(0^-)RLCs-v_C(0^-)RC}{LCs^2+RCs+1}\\
+&=\frac{i(0^-)Rs-2v_C(0^-)\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
 \[\ba
-V_L&=LsI-Li(0^+)\\
-&=\frac{i(0^+)L^2Cs^2-v_C(0^+)LCs-i(0^+)L^2Cs^2-i(0^+)RLCs-i(0^+)L}{LCs^2+RCs+1}\\
-&=-\frac{\qty(i(0^+)R+v_C(0^+))LCs+i(0^+)L}{LCs^2+RCs+1}\\
-&=-\frac{\qty(i(0^+)R+v_C(0^+))s+\frac{1}{2}\frac{i(0^+)R\omega_0}{\zeta}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
+V_L&=LsI-Li(0^-)\\
+&=\frac{i(0^-)L^2Cs^2-v_C(0^-)LCs-i(0^-)L^2Cs^2-i(0^-)RLCs-i(0^-)L}{LCs^2+RCs+1}\\
+&=-\frac{\qty(i(0^-)R+v_C(0^-))LCs+i(0^-)L}{LCs^2+RCs+1}\\
+&=-\frac{\qty(i(0^-)R+v_C(0^-))s+\frac{1}{2}\frac{i(0^-)R\omega_0}{\zeta}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
 \[\ba
-V_C&=\frac{I}{Cs}+\frac{v_C(0^+)}{s}\\
-&=\frac{i(0^+)Ls-v_C(0^+)+v_C(0^+)\qty(LCs^2+RCs+1)
+V_C&=\frac{I}{Cs}+\frac{v_C(0^-)}{s}\\
+&=\frac{i(0^-)Ls-v_C(0^-)+v_C(0^-)\qty(LCs^2+RCs+1)
 }{s\qty(LCs^2+RCs+1)}\\
-&=\frac{v_C(0^+)LCs+i(0^+)L+v_C(0^+)RC}{LCs^2+RCs+1}\\
-&=\frac{\frac{1}{2}\frac{i(0^+)R\omega_0}{\zeta}s-v_C(0^+)\omega_0^2+v_C(0^+)\qty(s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2})}{s\qty(s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2})}\\
-&=\frac{v_C(0^+)s+\frac{1}{2}\frac{i(0^+)R\omega_0}{\zeta}+2v_C(0^+)\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
+&=\frac{v_C(0^-)LCs+i(0^-)L+v_C(0^-)RC}{LCs^2+RCs+1}\\
+&=\frac{\frac{1}{2}\frac{i(0^-)R\omega_0}{\zeta}s-v_C(0^-)\omega_0^2+v_C(0^-)\qty(s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2})}{s\qty(s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2})}\\
+&=\frac{v_C(0^-)s+\frac{1}{2}\frac{i(0^-)R\omega_0}{\zeta}+2v_C(0^-)\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
 Check consistency:
 \bit
 \item $\zeta>1$ Overdamped response:
 \[\ba
-\mathcal{L}\{i\}&=-\frac{i(0^+)R\qty(\zeta-\sqrt{\zeta^2-1})+2v_C(0^+)\zeta}{2R\sqrt{\zeta^2-1}}\frac{1}{s+\omega_0\qty(\zeta-\sqrt{\zeta^2-1})}+\frac{i(0^+)R\qty(\zeta+\sqrt{\zeta^2-1})+2v_C(0^+)\zeta}{2R\sqrt{\zeta^2-1}}\frac{1}{s+\omega_0\qty(\zeta+\sqrt{\zeta^2-1})}\\
-&=\frac{\qty(-i(0^+)R\qty(\zeta-\sqrt{\zeta^2-1})-2v_C(0^+)\zeta)\qty(s+\omega_0\qty(\zeta+\sqrt{\zeta^2-1}))+\qty(i(0^+)R\qty(\zeta+\sqrt{\zeta^2-1})+2v_C(0^+)\zeta)\qty(s+\omega_0\qty(\zeta-\sqrt{\zeta^2-1}))}{2R\sqrt{\zeta^2-1}\qty(s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2})}\\
-&=\frac{-i(0^+)R\qty(\zeta-\sqrt{\zeta^2-1})s-i(0^+)R\qty(\zeta-\sqrt{\zeta^2-1})\omega_0\qty(\zeta+\sqrt{\zeta^2-1})-2v_C(0^+)\zeta s-2v_C(0^+)\omega_0\zeta\qty(\zeta+\sqrt{\zeta^2-1})+i(0^+)R\qty(\zeta+\sqrt{\zeta^2-1})s+i(0^+)R\qty(\zeta+\sqrt{\zeta^2-1})\omega_0\qty(\zeta-\sqrt{\zeta^2-1})+2v_C(0^+)\zeta s+2v_C(0^+)\omega_0\zeta\qty(\zeta-\sqrt{\zeta^2-1})}{2R\sqrt{\zeta^2-1}\qty(s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2})}\\
-&=\frac{2i(0^+)R\sqrt{\zeta^2-1}s-4v_C(0^+)\omega_0\zeta\sqrt{\zeta^2-1}}{2R\sqrt{\zeta^2-1}
+\mathcal{L}\{i\}&=-\frac{i(0^-)R\qty(\zeta-\sqrt{\zeta^2-1})+2v_C(0^-)\zeta}{2R\sqrt{\zeta^2-1}}\frac{1}{s+\omega_0\qty(\zeta-\sqrt{\zeta^2-1})}+\frac{i(0^-)R\qty(\zeta+\sqrt{\zeta^2-1})+2v_C(0^-)\zeta}{2R\sqrt{\zeta^2-1}}\frac{1}{s+\omega_0\qty(\zeta+\sqrt{\zeta^2-1})}\\
+&=\frac{\qty(-i(0^-)R\qty(\zeta-\sqrt{\zeta^2-1})-2v_C(0^-)\zeta)\qty(s+\omega_0\qty(\zeta+\sqrt{\zeta^2-1}))+\qty(i(0^-)R\qty(\zeta+\sqrt{\zeta^2-1})+2v_C(0^-)\zeta)\qty(s+\omega_0\qty(\zeta-\sqrt{\zeta^2-1}))}{2R\sqrt{\zeta^2-1}\qty(s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2})}\\
+&=\frac{-i(0^-)R\qty(\zeta-\sqrt{\zeta^2-1})s-i(0^-)R\qty(\zeta-\sqrt{\zeta^2-1})\omega_0\qty(\zeta+\sqrt{\zeta^2-1})-2v_C(0^-)\zeta s-2v_C(0^-)\omega_0\zeta\qty(\zeta+\sqrt{\zeta^2-1})+i(0^-)R\qty(\zeta+\sqrt{\zeta^2-1})s+i(0^-)R\qty(\zeta+\sqrt{\zeta^2-1})\omega_0\qty(\zeta-\sqrt{\zeta^2-1})+2v_C(0^-)\zeta s+2v_C(0^-)\omega_0\zeta\qty(\zeta-\sqrt{\zeta^2-1})}{2R\sqrt{\zeta^2-1}\qty(s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2})}\\
+&=\frac{2i(0^-)R\sqrt{\zeta^2-1}s-4v_C(0^-)\omega_0\zeta\sqrt{\zeta^2-1}}{2R\sqrt{\zeta^2-1}
 \qty(s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2})}\\
-&=\frac{i(0^+)s-\frac{2v_C(0^+)\omega_0\zeta}{R}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
+&=\frac{i(0^-)s-\frac{2v_C(0^-)\omega_0\zeta}{R}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
 \[\ba
-\mathcal{L}\{v_L\}&=\frac{i(0^+)R\qty(\zeta-\sqrt{\zeta^2-1})^2+2v_C(0^+)\zeta\qty(\zeta-\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}\frac{1}{s+\omega_0\qty(\zeta-\sqrt{\zeta^2-1})}-\frac{i(0^+)R\qty(\zeta+\sqrt{\zeta^2-1})^2+2v_C(0^+)\zeta\qty(\zeta+\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}\frac{1}{s+\omega_0\qty(\zeta+\sqrt{\zeta^2-1})}\\
-&=\frac{\qty(i(0^+)R\qty(\zeta-\sqrt{\zeta^2-1})^2+2v_C(0^+)\zeta\qty(\zeta-\sqrt{\zeta^2-1}))\qty(s+\omega_0\qty(\zeta+\sqrt{\zeta^2-1}))\qty(i(0^+)R\qty(\zeta+\sqrt{\zeta^2-1})^2+2v_C(0^+)\zeta\qty(\zeta+\sqrt{\zeta^2-1}))\qty(s+\omega_0\qty(\zeta-\sqrt{\zeta^2-1}))}{4\zeta\sqrt{\zeta^2-1}\qty(s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2})}\\
-&=\frac{i(0^+)R\qty(\zeta-\sqrt{\zeta^2-1})^2s+i(0^+)R\omega_0\qty(\zeta-\sqrt{\zeta^2-1})+2v_C(0^+)\zeta\qty(\zeta-\sqrt{\zeta^2-1})s+2v_C(0^+)\zeta-i(0^+)R\qty(\zeta+\sqrt{\zeta^2-1})^2s-i(0^+)R\omega_0\qty(\zeta+\sqrt{\zeta^2-1})-2v_C(0^+)\zeta\qty(\zeta+\sqrt{\zeta^2-1})s-2v_C(0^+)\zeta}{4\zeta\sqrt{\zeta^2-1}\qty(s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2})}\\
-&=\frac{-4i(0^+)R\zeta\sqrt{\zeta^2-1}s-2i(0^+)R\omega_0\sqrt{\zeta^2-1}-4v_C(0^+)\zeta\sqrt{\zeta^2-1}s}{4\zeta\sqrt{\zeta^2-1}\qty(s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2})}\\
-&=-\frac{\qty(i(0^+)R+v_C(0^+))s+\frac{1}{2}\frac{i(0^+)R\omega_0}{\zeta}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
+\mathcal{L}\{v_L\}&=\frac{i(0^-)R\qty(\zeta-\sqrt{\zeta^2-1})^2+2v_C(0^-)\zeta\qty(\zeta-\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}\frac{1}{s+\omega_0\qty(\zeta-\sqrt{\zeta^2-1})}-\frac{i(0^-)R\qty(\zeta+\sqrt{\zeta^2-1})^2+2v_C(0^-)\zeta\qty(\zeta+\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}\frac{1}{s+\omega_0\qty(\zeta+\sqrt{\zeta^2-1})}\\
+&=\frac{\qty(i(0^-)R\qty(\zeta-\sqrt{\zeta^2-1})^2+2v_C(0^-)\zeta\qty(\zeta-\sqrt{\zeta^2-1}))\qty(s+\omega_0\qty(\zeta+\sqrt{\zeta^2-1}))\qty(i(0^-)R\qty(\zeta+\sqrt{\zeta^2-1})^2+2v_C(0^-)\zeta\qty(\zeta+\sqrt{\zeta^2-1}))\qty(s+\omega_0\qty(\zeta-\sqrt{\zeta^2-1}))}{4\zeta\sqrt{\zeta^2-1}\qty(s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2})}\\
+&=\frac{i(0^-)R\qty(\zeta-\sqrt{\zeta^2-1})^2s+i(0^-)R\omega_0\qty(\zeta-\sqrt{\zeta^2-1})+2v_C(0^-)\zeta\qty(\zeta-\sqrt{\zeta^2-1})s+2v_C(0^-)\zeta-i(0^-)R\qty(\zeta+\sqrt{\zeta^2-1})^2s-i(0^-)R\omega_0\qty(\zeta+\sqrt{\zeta^2-1})-2v_C(0^-)\zeta\qty(\zeta+\sqrt{\zeta^2-1})s-2v_C(0^-)\zeta}{4\zeta\sqrt{\zeta^2-1}\qty(s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2})}\\
+&=\frac{-4i(0^-)R\zeta\sqrt{\zeta^2-1}s-2i(0^-)R\omega_0\sqrt{\zeta^2-1}-4v_C(0^-)\zeta\sqrt{\zeta^2-1}s}{4\zeta\sqrt{\zeta^2-1}\qty(s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2})}\\
+&=-\frac{\qty(i(0^-)R+v_C(0^-))s+\frac{1}{2}\frac{i(0^-)R\omega_0}{\zeta}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
 \[\ba
-\mathcal{L}\{v_C\}&=\frac{i(0^+)R+2v_C(0^+)\zeta\qty(\zeta+\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}\frac{1}{s+\omega_0\qty(\zeta-\sqrt{\zeta^2-1})}-\frac{i(0^+)R+2v_C(0^+)\zeta\qty(\zeta-\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}\frac{1}{s+\omega_0\qty(\zeta+\sqrt{\zeta^2-1})}\\
-&=\frac{\qty(i(0^+)R+2v_C(0^+)\zeta\qty(\zeta+\sqrt{\zeta^2-1}))\qty(s+\omega_0\qty(\zeta+\sqrt{\zeta^2-1}))-\qty(i(0^+)R+2v_C(0^+)\zeta\qty(\zeta-\sqrt{\zeta^2-1}))\qty(s+\omega_0\qty(\zeta-\sqrt{\zeta^2-1}))}{4\zeta\sqrt{\zeta^2-1}\qty(s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2})}\\
-&=\frac{i(0^+)Rs+i(0^+)R\omega_0\qty(\zeta+\sqrt{\zeta^2-1})+2v_C(0^+)\zeta\qty(\zeta+\sqrt{\zeta^2-1})s+2v_C(0^+)\omega_0\zeta\qty(\zeta+\sqrt{\zeta^2-1})^2-i(0^+)Rs-i(0^+)R\omega_0\qty(\zeta-\sqrt{\zeta^2-1})-2v_C(0^+)\zeta\qty(\zeta-\sqrt{\zeta^2-1})s-2v_C(0^+)\omega_0\zeta\qty(\zeta-\sqrt{\zeta^2-1})^2}{4\zeta\sqrt{\zeta^2-1}\qty(s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2})}\\
-&=\frac{2i(0^+)R\omega_0\sqrt{\zeta^2-1}+4v_C(0^+)\zeta\sqrt{\zeta^2-1}s+8v_C(0^+)\omega_0\zeta^2\sqrt{\zeta^2-1}}{4\zeta\sqrt{\zeta^2-1}\qty(s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2})}\\
-&=\frac{v_C(0^+)s+\frac{1}{2}\frac{i(0^+)R\omega_0}{\zeta}+2v_C(0^+)\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
+\mathcal{L}\{v_C\}&=\frac{i(0^-)R+2v_C(0^-)\zeta\qty(\zeta+\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}\frac{1}{s+\omega_0\qty(\zeta-\sqrt{\zeta^2-1})}-\frac{i(0^-)R+2v_C(0^-)\zeta\qty(\zeta-\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}\frac{1}{s+\omega_0\qty(\zeta+\sqrt{\zeta^2-1})}\\
+&=\frac{\qty(i(0^-)R+2v_C(0^-)\zeta\qty(\zeta+\sqrt{\zeta^2-1}))\qty(s+\omega_0\qty(\zeta+\sqrt{\zeta^2-1}))-\qty(i(0^-)R+2v_C(0^-)\zeta\qty(\zeta-\sqrt{\zeta^2-1}))\qty(s+\omega_0\qty(\zeta-\sqrt{\zeta^2-1}))}{4\zeta\sqrt{\zeta^2-1}\qty(s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2})}\\
+&=\frac{i(0^-)Rs+i(0^-)R\omega_0\qty(\zeta+\sqrt{\zeta^2-1})+2v_C(0^-)\zeta\qty(\zeta+\sqrt{\zeta^2-1})s+2v_C(0^-)\omega_0\zeta\qty(\zeta+\sqrt{\zeta^2-1})^2-i(0^-)Rs-i(0^-)R\omega_0\qty(\zeta-\sqrt{\zeta^2-1})-2v_C(0^-)\zeta\qty(\zeta-\sqrt{\zeta^2-1})s-2v_C(0^-)\omega_0\zeta\qty(\zeta-\sqrt{\zeta^2-1})^2}{4\zeta\sqrt{\zeta^2-1}\qty(s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2})}\\
+&=\frac{2i(0^-)R\omega_0\sqrt{\zeta^2-1}+4v_C(0^-)\zeta\sqrt{\zeta^2-1}s+8v_C(0^-)\omega_0\zeta^2\sqrt{\zeta^2-1}}{4\zeta\sqrt{\zeta^2-1}\qty(s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2})}\\
+&=\frac{v_C(0^-)s+\frac{1}{2}\frac{i(0^-)R\omega_0}{\zeta}+2v_C(0^-)\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
 \item $\zeta=1$ Critically damped response:
-\[I=\frac{i(0^+)s-2\frac{v_C(0^+)\omega_0}{R}}{\qty(s+\omega_0)^2}\]
-\[V_L=-\frac{\qty(i(0^+)R+v_C(0^+))s+\frac{1}{2}i(0^+)R\omega_0}{\qty(s+\omega_0)^2}\]
-\[V_C=\frac{v_C(0^+)s+\frac{1}{2}i(0^+)R\omega_0+2v_C(0^+)\omega_0}{\qty(s+\omega_0)^2}\]
+\[I=\frac{i(0^-)s-2\frac{v_C(0^-)\omega_0}{R}}{\qty(s+\omega_0)^2}\]
+\[V_L=-\frac{\qty(i(0^-)R+v_C(0^-))s+\frac{1}{2}i(0^-)R\omega_0}{\qty(s+\omega_0)^2}\]
+\[V_C=\frac{v_C(0^-)s+\frac{1}{2}i(0^-)R\omega_0+2v_C(0^-)\omega_0}{\qty(s+\omega_0)^2}\]
 \[\ba
-\mathcal{L}\{i\}&=\frac{i(0^+)}{s+\omega_0}-\qty(i(0^+)+2\frac{v_C(0^+)}{R})\omega_0\frac{1}{\qty(s+\omega_0)^2}\\
-&=\frac{i(0^+)s-2\frac{v_C(0^+)\omega_0}{R}}{\qty(s+\omega_0)^2}
+\mathcal{L}\{i\}&=\frac{i(0^-)}{s+\omega_0}-\qty(i(0^-)+2\frac{v_C(0^-)}{R})\omega_0\frac{1}{\qty(s+\omega_0)^2}\\
+&=\frac{i(0^-)s-2\frac{v_C(0^-)\omega_0}{R}}{\qty(s+\omega_0)^2}
 \ea\]
 \[\ba
-\mathcal{L}\{v_L\}&=-\frac{i(0^+)R+v_C(0^+)}{s+\omega_0}-\qty(\frac{1}{2}i(0^+)R+v_C(0^+))\omega_0\frac{1}{\qty(s+\omega_0)^2}\\
-&=-\frac{\qty(i(0^+)R+v_C(0^+))s+\frac{1}{2}i(0^+)R\omega_0}{\qty(s+\omega_0)^2}
+\mathcal{L}\{v_L\}&=-\frac{i(0^-)R+v_C(0^-)}{s+\omega_0}-\qty(\frac{1}{2}i(0^-)R+v_C(0^-))\omega_0\frac{1}{\qty(s+\omega_0)^2}\\
+&=-\frac{\qty(i(0^-)R+v_C(0^-))s+\frac{1}{2}i(0^-)R\omega_0}{\qty(s+\omega_0)^2}
 \ea\]
 \[\ba
-\mathcal{L}\{v_C\}&=\frac{v_C(0^+)}{s+\omega_0}+\qty(\frac{1}{2}i(0^+)R+v_C(0^+))\omega_0\frac{1}{\qty(s+\omega_0)^2}\\
-&=\frac{v_C(0^+)s+\frac{1}{2}i(0^+)R\omega_0+2v_C(0^+)\omega_0}{\qty(s+\omega_0)^2}
+\mathcal{L}\{v_C\}&=\frac{v_C(0^-)}{s+\omega_0}+\qty(\frac{1}{2}i(0^-)R+v_C(0^-))\omega_0\frac{1}{\qty(s+\omega_0)^2}\\
+&=\frac{v_C(0^-)s+\frac{1}{2}i(0^-)R\omega_0+2v_C(0^-)\omega_0}{\qty(s+\omega_0)^2}
 \ea\]
 \item $0<\zeta<1$ Underdamped response:
 \[\ba
-\mathcal{L}\{i\}&=i(0^+)\frac{\qty(s+\omega_0\zeta)}{\qty(s+\omega_0\zeta)^2+\omega_0^2\qty(1-\zeta^2)}-\qty(2\frac{v_C(0^+)}{R}+i(0^+))\frac{\zeta}{\sqrt{1-\zeta^2}}\frac{\omega_0\sqrt{1-\zeta^2}}{\qty(s+\omega_0\zeta)^2+\omega_0^2\qty(1-\zeta^2)}\\
-&=\frac{i(0^+)\qty(s+\omega_0\zeta)-\qty(2\frac{v_C(0^+)}{R}+i(0^+))\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^2}\\
-&=\frac{i(0^+)s-\frac{2v_C(0^+)\omega_0\zeta}{R}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
+\mathcal{L}\{i\}&=i(0^-)\frac{\qty(s+\omega_0\zeta)}{\qty(s+\omega_0\zeta)^2+\omega_0^2\qty(1-\zeta^2)}-\qty(2\frac{v_C(0^-)}{R}+i(0^-))\frac{\zeta}{\sqrt{1-\zeta^2}}\frac{\omega_0\sqrt{1-\zeta^2}}{\qty(s+\omega_0\zeta)^2+\omega_0^2\qty(1-\zeta^2)}\\
+&=\frac{i(0^-)\qty(s+\omega_0\zeta)-\qty(2\frac{v_C(0^-)}{R}+i(0^-))\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^2}\\
+&=\frac{i(0^-)s-\frac{2v_C(0^-)\omega_0\zeta}{R}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
 \[\ba
-\mathcal{L}\{v_L\}&=\frac{-\qty(v_C(0^+)+i(0^+)R)\qty(s+\omega_0\zeta)+\frac{v_C(0^+)\zeta+\frac{1}{2}i(0^+)R\frac{2\zeta^2-1}{\zeta}}{\sqrt{1-\zeta^2}}\omega_0\sqrt{1-\zeta^2}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}\\
-&=\frac{-\qty(v_C(0^+)+i(0^+)R)s-v_C(0^+)\omega_0\zeta-i(0^+)R\omega_0\zeta+v_C(0^+)\omega_0\zeta+\frac{1}{2}i(0^+)\omega_0R\frac{2\zeta^2-1}{\zeta}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}\\
-&=-\frac{\qty(i(0^+)R+v_C(0^+))s+\frac{1}{2}\frac{i(0^+)R\omega_0}{\zeta}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
+\mathcal{L}\{v_L\}&=\frac{-\qty(v_C(0^-)+i(0^-)R)\qty(s+\omega_0\zeta)+\frac{v_C(0^-)\zeta+\frac{1}{2}i(0^-)R\frac{2\zeta^2-1}{\zeta}}{\sqrt{1-\zeta^2}}\omega_0\sqrt{1-\zeta^2}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}\\
+&=\frac{-\qty(v_C(0^-)+i(0^-)R)s-v_C(0^-)\omega_0\zeta-i(0^-)R\omega_0\zeta+v_C(0^-)\omega_0\zeta+\frac{1}{2}i(0^-)\omega_0R\frac{2\zeta^2-1}{\zeta}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}\\
+&=-\frac{\qty(i(0^-)R+v_C(0^-))s+\frac{1}{2}\frac{i(0^-)R\omega_0}{\zeta}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
 \[\ba
-\mathcal{L}\{v_C\}&=\frac{v_C(0^+)\qty(s+\omega_0\zeta)+\qty(v_C(0^+)\frac{\zeta}{\sqrt{1-\zeta^2}}+\frac{1}{2}\frac{i(0^+)R}{\zeta\sqrt{1-\zeta^2}})\omega_0\sqrt{1-\zeta^2}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}\\
-&=\frac{v_C(0^+)s+\frac{1}{2}\frac{i(0^+)R\omega_0}{\zeta}+2v_C(0^+)\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
+\mathcal{L}\{v_C\}&=\frac{v_C(0^-)\qty(s+\omega_0\zeta)+\qty(v_C(0^-)\frac{\zeta}{\sqrt{1-\zeta^2}}+\frac{1}{2}\frac{i(0^-)R}{\zeta\sqrt{1-\zeta^2}})\omega_0\sqrt{1-\zeta^2}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}\\
+&=\frac{v_C(0^-)s+\frac{1}{2}\frac{i(0^-)R\omega_0}{\zeta}+2v_C(0^-)\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
 \eit
 \end{proof}
@@ -1284,7 +1330,7 @@ Forced response (time domain):
 \[\ba
 i&=\frac{\zeta}{R\sqrt{\zeta^2-1}}\qty(e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}\int_0^te^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})\tau}\dv{v_{in}}{\tau}e^{2\omega_0\zeta\tau}\dd{\tau}-e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\int_0^te^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})\tau}\dv{v_{in}}{\tau}e^{2\omega_0\zeta\tau}\dd{\tau})\\
 &=\frac{\zeta}{R\sqrt{\zeta^2-1}}\qty(e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}\int_0^te^{\omega_0\qty(\zeta-\sqrt{\zeta^2-1})\tau}\dv{v_{in}}{\tau}\dd{\tau}-e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\int_0^te^{\omega_0\qty(\zeta+\sqrt{\zeta^2-1})\tau}\dv{v_{in}}{\tau}\dd{\tau})\\
-&=\frac{\zeta}{R\sqrt{\zeta^2-1}}\qty(e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}\qty(e^{\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}(v_{in}-v_{in}(0^+))-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})\int_0^te^{\omega_0\qty(\zeta-\sqrt{\zeta^2-1})\tau}v_{in}(\tau)\dd{\tau})-e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\qty(e^{\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}(v_{in}-v_{in}(0^+))-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})\int_0^te^{\omega_0\qty(\zeta+\sqrt{\zeta^2-1})\tau}v_{in}(\tau)\dd{\tau}))\\
+&=\frac{\zeta}{R\sqrt{\zeta^2-1}}\qty(e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}\qty(e^{\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}(v_{in}-v_{in}(0^-))-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})\int_0^te^{\omega_0\qty(\zeta-\sqrt{\zeta^2-1})\tau}v_{in}(\tau)\dd{\tau})-e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\qty(e^{\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}(v_{in}-v_{in}(0^-))-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})\int_0^te^{\omega_0\qty(\zeta+\sqrt{\zeta^2-1})\tau}v_{in}(\tau)\dd{\tau}))\\
 &=\frac{\omega_0\zeta}{R\sqrt{\zeta^2-1}}\qty(-\qty(\zeta-\sqrt{\zeta^2-1})\int_0^te^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})(t-\tau)}v_{in}(\tau)\dd{\tau}+\qty(\zeta+\sqrt{\zeta^2-1})\int_0^te^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})(t-\tau)}v_{in}(\tau)\dd{\tau})\\
 &=\frac{\omega_0\zeta}{R\sqrt{\zeta^2-1}}\int_0^t\qty(-\qty(\zeta-\sqrt{\zeta^2-1})e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})(t-\tau)}+\qty(\zeta+\sqrt{\zeta^2-1})e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})(t-\tau)})v_{in}(\tau)\dd{\tau}\\
 &=\frac{\omega_0\zeta}{R}\int_0^t\qty(-\frac{\zeta}{\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})(t-\tau)}+e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})(t-\tau)}+\frac{\zeta}{\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})(t-\tau)}+e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})(t-\tau)})v_{in}(\tau)\dd{\tau}\\
@@ -1324,7 +1370,7 @@ C\dv{v_C}{t}&=\frac{C\omega_0}{\sqrt{\zeta^2-1}}\int_0^t\pdv{}{t}\qty(e^{-\omega
 \[\frac{1}{i_1i_2'-i_2i_1'}=e^{2\omega_0t}\]
 \[\ba
 i&=2\frac{\omega_0\zeta}{R}\qty(-e^{-\omega_0t}\int_0^t\tau e^{\omega_0\tau}\dv{v_{in}}{\tau}\dd{\tau}+te^{-\omega_0t}\int_0^te^{\omega_0\tau}\dv{v_{in}}{\tau}\dd{\tau})\\
-&=2\frac{\omega_0}{R}\qty(-e^{-\omega_0t}\qty(te^{\omega_0t}(v_{in}-v_{in}(0^+))-\int_0^t(\omega_0\tau+1)e^{\omega_0\tau}v_{in}(\tau)\dd{\tau})+te^{-\omega_0t}\qty(e^{\omega_0t}(v_{in}-v_{in}(0^+))-\omega_0\int_0^te^{\omega_0\tau}v_{in}(\tau)\dd{\tau}))\\
+&=2\frac{\omega_0}{R}\qty(-e^{-\omega_0t}\qty(te^{\omega_0t}(v_{in}-v_{in}(0^-))-\int_0^t(\omega_0\tau+1)e^{\omega_0\tau}v_{in}(\tau)\dd{\tau})+te^{-\omega_0t}\qty(e^{\omega_0t}(v_{in}-v_{in}(0^-))-\omega_0\int_0^te^{\omega_0\tau}v_{in}(\tau)\dd{\tau}))\\
 &=2\frac{\omega_0}{R}\int_0^t(1-\omega_0(t-\tau))e^{-\omega_0(t-\tau)}v_{in}(\tau)\dd{\tau}
 \ea\]
 \[v_R=2\omega_0\int_0^t(1-\omega_0(t-\tau))e^{-\omega_0(t-\tau)}v_{in}(\tau)\dd{\tau}\]
@@ -1362,7 +1408,7 @@ C\dv{v_C}{t}&=2\frac{\omega_0}{R}\int_0^t\pdv{}{t}\qty((t-\tau)e^{-\omega_0(t-\t
 \ea\]
 \[\ba
 i&=2\frac{\zeta}{R\sqrt{1-\zeta^2}}\qty(-e^{-\omega_0\zeta t}\cos\qty(\omega_0\sqrt{1-\zeta^2}t)\int_0^te^{\omega_0\zeta\tau}\sin\qty(\omega_0\sqrt{1-\zeta^2}\tau)\dv{v_{in}}{\tau}\dd{\tau}+e^{-\omega_0\zeta t}\sin\qty(\omega_0\sqrt{1-\zeta^2}t)\int_0^te^{\omega_0\zeta\tau}\cos\qty(\omega_0\sqrt{1-\zeta^2}\tau)\dv{v_{in}}{\tau}\dd{\tau})\\
-&=2\frac{\zeta}{R\sqrt{1-\zeta^2}}\qty(-e^{-\omega_0\zeta t}\cos\qty(\omega_0\sqrt{1-\zeta^2}t)\qty(e^{\omega_0\zeta t}\sin\qty(\omega_0\sqrt{1-\zeta^2}t)(v_{in}-v_{in}(0^+))-\int_0^te^{\omega_0\zeta\tau}\qty(\omega_0\sqrt{1-\zeta^2}\cos\qty(\omega_0\sqrt{1-\zeta^2}\tau)+\omega_0\zeta\sin\qty(\omega_0\sqrt{1-\zeta^2}\tau))v_{in}(\tau)\dd{\tau})+e^{-\omega_0\zeta t}\sin\qty(\omega_0\sqrt{1-\zeta^2}t)\qty(e^{\omega_0\zeta t}\cos\qty(\omega_0\sqrt{1-\zeta^2}t)(v_{in}-v_{in}(0^+))-\int_0^te^{\omega_0\zeta\tau}\qty(\omega_0\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}\tau)-\omega_0\sqrt{1-\zeta^2}\sin\qty(\omega_0\sqrt{1-\zeta^2}\tau))v_{in}(\tau)\dd{\tau}))\\
+&=2\frac{\zeta}{R\sqrt{1-\zeta^2}}\qty(-e^{-\omega_0\zeta t}\cos\qty(\omega_0\sqrt{1-\zeta^2}t)\qty(e^{\omega_0\zeta t}\sin\qty(\omega_0\sqrt{1-\zeta^2}t)(v_{in}-v_{in}(0^-))-\int_0^te^{\omega_0\zeta\tau}\qty(\omega_0\sqrt{1-\zeta^2}\cos\qty(\omega_0\sqrt{1-\zeta^2}\tau)+\omega_0\zeta\sin\qty(\omega_0\sqrt{1-\zeta^2}\tau))v_{in}(\tau)\dd{\tau})+e^{-\omega_0\zeta t}\sin\qty(\omega_0\sqrt{1-\zeta^2}t)\qty(e^{\omega_0\zeta t}\cos\qty(\omega_0\sqrt{1-\zeta^2}t)(v_{in}-v_{in}(0^-))-\int_0^te^{\omega_0\zeta\tau}\qty(\omega_0\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}\tau)-\omega_0\sqrt{1-\zeta^2}\sin\qty(\omega_0\sqrt{1-\zeta^2}\tau))v_{in}(\tau)\dd{\tau}))\\
 &=2\frac{\zeta}{R\sqrt{1-\zeta^2}}\int_0^t
 e^{-\omega_0\zeta(t-\tau)}\qty(\omega_0\sqrt{1-\zeta^2}\cos\qty(\omega_0\sqrt{1-\zeta^2}t)\cos\qty(\omega_0\sqrt{1-\zeta^2}\tau)+\omega_0\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}t)\sin\qty(\omega_0\sqrt{1-\zeta^2}\tau)-\omega_0\zeta\sin\qty(\omega_0\sqrt{1-\zeta^2}t)\cos\qty(\omega_0\sqrt{1-\zeta^2}\tau)+\omega_0\sqrt{1-\zeta^2}\sin\qty(\omega_0\sqrt{1-\zeta^2}t)\sin\qty(\omega_0\sqrt{1-\zeta^2}\tau))v_{in}(\tau)\dd{\tau}\\
 &=2\frac{\omega_0\zeta}{R\sqrt{1-\zeta^2}}\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(\sqrt{1-\zeta^2}\cos\qty(\omega_0\sqrt{1-\zeta^2}t)\cos\qty(\omega_0\sqrt{1-\zeta^2}\tau)+\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}t)\sin\qty(\omega_0\sqrt{1-\zeta^2}\tau)-\zeta\sin\qty(\omega_0\sqrt{1-\zeta^2}t)\cos\qty(\omega_0\sqrt{1-\zeta^2}\tau)+\sqrt{1-\zeta^2}\sin\qty(\omega_0\sqrt{1-\zeta^2}t)\sin\qty(\omega_0\sqrt{1-\zeta^2}\tau))v_{in}(\tau)\dd{\tau}\\
@@ -1450,37 +1496,37 @@ Check consistency:
 Total response (time domain):
 \bit
 \item $\zeta>1$ Overdamped response:
-\[i=2\frac{\omega_0\zeta}{R}\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(\cosh(\omega_0\sqrt{\zeta^2-1}(t-\tau))-\frac{\zeta}{\sqrt{\zeta^2-1}}\sinh(\omega_0\sqrt{\zeta^2-1}(t-\tau)))v_{in}(\tau)\dd{\tau}-\frac{i(0^+)R\qty(\zeta-\sqrt{\zeta^2-1})+2v_C(0^+)\zeta}{2R\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\frac{i(0^+)R\qty(\zeta+\sqrt{\zeta^2-1})+2v_C(0^+)\zeta}{2R\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
-\[v_R=2\omega_0\zeta\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(\cosh(\omega_0\sqrt{\zeta^2-1}(t-\tau))-\frac{\zeta}{\sqrt{\zeta^2-1}}\sinh(\omega_0\sqrt{\zeta^2-1}(t-\tau)))v_{in}(\tau)\dd{\tau}-\frac{i(0^+)R\qty(\zeta-\sqrt{\zeta^2-1})+2v_C(0^+)\zeta}{2\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\frac{i(0^+)R\qty(\zeta+\sqrt{\zeta^2-1})+2v_C(0^+)\zeta}{2\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
-\[v_L=v_{in}+\omega_0\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(-2\zeta\cosh(\omega_0\sqrt{\zeta^2-1}(t-\tau))+\frac{2\zeta^2-1}{\sqrt{\zeta^2-1}}\sinh(\omega_0\sqrt{\zeta^2-1}(t-\tau)))v_{in}(\tau)\dd{\tau}+\frac{i(0^+)R\qty(\zeta-\sqrt{\zeta^2-1})^2+2v_C(0^+)\zeta\qty(\zeta-\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-\frac{i(0^+)R\qty(\zeta+\sqrt{\zeta^2-1})^2+2v_C(0^+)\zeta\qty(\zeta+\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
-\[v_C=\frac{\omega_0}{\sqrt{\zeta^2-1}}\int_0^te^{-\omega_0\zeta(t-\tau)}\sinh(\omega_0\sqrt{\zeta^2-1}(t-\tau))v_{in}(\tau)\dd{\tau}+\frac{i(0^+)R+2v_C(0^+)\zeta\qty(\zeta+\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-\frac{i(0^+)R+2v_C(0^+)\zeta\qty(\zeta-\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
+\[i=2\frac{\omega_0\zeta}{R}\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(\cosh(\omega_0\sqrt{\zeta^2-1}(t-\tau))-\frac{\zeta}{\sqrt{\zeta^2-1}}\sinh(\omega_0\sqrt{\zeta^2-1}(t-\tau)))v_{in}(\tau)\dd{\tau}-\frac{i(0^-)R\qty(\zeta-\sqrt{\zeta^2-1})+2v_C(0^-)\zeta}{2R\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\frac{i(0^-)R\qty(\zeta+\sqrt{\zeta^2-1})+2v_C(0^-)\zeta}{2R\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
+\[v_R=2\omega_0\zeta\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(\cosh(\omega_0\sqrt{\zeta^2-1}(t-\tau))-\frac{\zeta}{\sqrt{\zeta^2-1}}\sinh(\omega_0\sqrt{\zeta^2-1}(t-\tau)))v_{in}(\tau)\dd{\tau}-\frac{i(0^-)R\qty(\zeta-\sqrt{\zeta^2-1})+2v_C(0^-)\zeta}{2\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\frac{i(0^-)R\qty(\zeta+\sqrt{\zeta^2-1})+2v_C(0^-)\zeta}{2\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
+\[v_L=v_{in}+\omega_0\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(-2\zeta\cosh(\omega_0\sqrt{\zeta^2-1}(t-\tau))+\frac{2\zeta^2-1}{\sqrt{\zeta^2-1}}\sinh(\omega_0\sqrt{\zeta^2-1}(t-\tau)))v_{in}(\tau)\dd{\tau}+\frac{i(0^-)R\qty(\zeta-\sqrt{\zeta^2-1})^2+2v_C(0^-)\zeta\qty(\zeta-\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-\frac{i(0^-)R\qty(\zeta+\sqrt{\zeta^2-1})^2+2v_C(0^-)\zeta\qty(\zeta+\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
+\[v_C=\frac{\omega_0}{\sqrt{\zeta^2-1}}\int_0^te^{-\omega_0\zeta(t-\tau)}\sinh(\omega_0\sqrt{\zeta^2-1}(t-\tau))v_{in}(\tau)\dd{\tau}+\frac{i(0^-)R+2v_C(0^-)\zeta\qty(\zeta+\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-\frac{i(0^-)R+2v_C(0^-)\zeta\qty(\zeta-\sqrt{\zeta^2-1})}{4\zeta\sqrt{\zeta^2-1}}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
 \item $\zeta=1$ Critically damped response:
 \[i=2\frac{\omega_0}{R}\int_0^t(1-\omega_0(t-\tau))e^{-\omega_0(t-\tau)}v_{in}(\tau)\dd{\tau}\]
-\[v_R=2\omega_0\int_0^t(1-\omega_0(t-\tau))e^{-\omega_0(t-\tau)}v_{in}(\tau)\dd{\tau}+\qty(i(0^+)-\qty(i(0^+)+2\frac{v_C(0^+)}{R})\omega_0t)e^{-\omega_0t}\]
-\[v_L=v_{in}-\omega_0\int_0^t(2-\omega_0(t-\tau))e^{-\omega_0(t-\tau)}v_{in}(\tau)\dd{\tau}-\qty(i(0^+)R+v_C(0^+)+\qty(\frac{1}{2}i(0^+)R+v_C(0^+))\omega_0t)e^{-\omega_0t}\]
-\[v_C=\omega_0^{\pht{0}2}\int_0^t(t-\tau)e^{-\omega_0(t-\tau)}v_{in}(\tau)\dd{\tau}+\qty(v_C(0^+)+\qty(\frac{1}{2}i(0^+)R+v_C(0^+))\omega_0t)e^{-\omega_0t}\]
+\[v_R=2\omega_0\int_0^t(1-\omega_0(t-\tau))e^{-\omega_0(t-\tau)}v_{in}(\tau)\dd{\tau}+\qty(i(0^-)-\qty(i(0^-)+2\frac{v_C(0^-)}{R})\omega_0t)e^{-\omega_0t}\]
+\[v_L=v_{in}-\omega_0\int_0^t(2-\omega_0(t-\tau))e^{-\omega_0(t-\tau)}v_{in}(\tau)\dd{\tau}-\qty(i(0^-)R+v_C(0^-)+\qty(\frac{1}{2}i(0^-)R+v_C(0^-))\omega_0t)e^{-\omega_0t}\]
+\[v_C=\omega_0^{\pht{0}2}\int_0^t(t-\tau)e^{-\omega_0(t-\tau)}v_{in}(\tau)\dd{\tau}+\qty(v_C(0^-)+\qty(\frac{1}{2}i(0^-)R+v_C(0^-))\omega_0t)e^{-\omega_0t}\]
 \item $0<\zeta<1$ Underdamped response:
-\[i=2\frac{\omega_0}{R}\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))-\frac{\zeta^2}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau)))v_{in}(\tau)\dd{\tau}+e^{-\omega_0\zeta t}\qty(i(0^+)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(2\frac{v_C(0^+)}{R}+i(0^+))\frac{\zeta}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
-\[v_R=2\omega_0\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))-\frac{\zeta^2}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau)))v_{in}(\tau)\dd{\tau}+e^{-\omega_0\zeta t}\qty(i(0^+)R\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(2v_C(0^+)+i(0^+)R)\frac{\zeta}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
-\[v_L=v_{in}+\omega_0\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(-2\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))+\frac{2\zeta^2-1}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau)))v_{in}(\tau)\dd{\tau}+e^{-\omega_0\zeta t}\qty(-\qty(v_C(0^+)+i(0^+)R)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\frac{v_C(0^+)\zeta+\frac{1}{2}i(0^+)R\frac{2\zeta^2-1}{\zeta}}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
-\[v_C=\frac{\omega_0}{\sqrt{1-\zeta^2}}\int_0^te^{-\omega_0\zeta(t-\tau)}\sin\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))v_{in}(\tau)\dd{\tau}+e^{-\omega_0\zeta t}\qty(v_C(0^+)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(v_C(0^+)\frac{\zeta}{\sqrt{1-\zeta^2}}+\frac{1}{2}\frac{i(0^+)R}{\zeta\sqrt{1-\zeta^2}})\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
+\[i=2\frac{\omega_0}{R}\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))-\frac{\zeta^2}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau)))v_{in}(\tau)\dd{\tau}+e^{-\omega_0\zeta t}\qty(i(0^-)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(2\frac{v_C(0^-)}{R}+i(0^-))\frac{\zeta}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
+\[v_R=2\omega_0\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))-\frac{\zeta^2}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau)))v_{in}(\tau)\dd{\tau}+e^{-\omega_0\zeta t}\qty(i(0^-)R\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(2v_C(0^-)+i(0^-)R)\frac{\zeta}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
+\[v_L=v_{in}+\omega_0\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(-2\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))+\frac{2\zeta^2-1}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau)))v_{in}(\tau)\dd{\tau}+e^{-\omega_0\zeta t}\qty(-\qty(v_C(0^-)+i(0^-)R)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\frac{v_C(0^-)\zeta+\frac{1}{2}i(0^-)R\frac{2\zeta^2-1}{\zeta}}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
+\[v_C=\frac{\omega_0}{\sqrt{1-\zeta^2}}\int_0^te^{-\omega_0\zeta(t-\tau)}\sin\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))v_{in}(\tau)\dd{\tau}+e^{-\omega_0\zeta t}\qty(v_C(0^-)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(v_C(0^-)\frac{\zeta}{\sqrt{1-\zeta^2}}+\frac{1}{2}\frac{i(0^-)R}{\zeta\sqrt{1-\zeta^2}})\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
 \eit
 Total response (Laplace domain):
 \[\ba
-I&=\frac{V_{in}Cs+i(0^+)LCs-v_C(0^+)C}{LCs^2+RCs+1}\\
-&=\frac{2V_{in}\frac{\omega_0\zeta s}{R}+i(0^+)s-\frac{2v_C(0^+)\omega_0\zeta}{R}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
+I&=\frac{V_{in}Cs+i(0^-)LCs-v_C(0^-)C}{LCs^2+RCs+1}\\
+&=\frac{2V_{in}\frac{\omega_0\zeta s}{R}+i(0^-)s-\frac{2v_C(0^-)\omega_0\zeta}{R}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
 \[\ba
-V_R&=\frac{V_{in}RCs+i(0^+)RLCs-v_C(0^+)RC}{LCs^2+RCs+1}\\
-&=\frac{2V_{in}\omega_0\zeta s+i(0^+)Rs-2v_C(0^+)\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
+V_R&=\frac{V_{in}RCs+i(0^-)RLCs-v_C(0^-)RC}{LCs^2+RCs+1}\\
+&=\frac{2V_{in}\omega_0\zeta s+i(0^-)Rs-2v_C(0^-)\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
 \[\ba
-V_L&=\frac{V_{in}LCs^2-\qty(i(0^+)R+v_C(0^+))LCs-i(0^+)L}{LCs^2+RCs+1}\\
-&=\frac{V_{in}s^2-\qty(i(0^+)R+v_C(0^+))s-\frac{1}{2}\frac{i(0^+)R\omega_0}{\zeta}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
+V_L&=\frac{V_{in}LCs^2-\qty(i(0^-)R+v_C(0^-))LCs-i(0^-)L}{LCs^2+RCs+1}\\
+&=\frac{V_{in}s^2-\qty(i(0^-)R+v_C(0^-))s-\frac{1}{2}\frac{i(0^-)R\omega_0}{\zeta}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
 \[\ba
-V_C&=\frac{V_{in}+v_C(0^+)LCs+i(0^+)L+v_C(0^+)RC}{LCs^2+RCs+1}\\
-&=\frac{V_{in}\omega_0^{\pht{0}2}+v_C(0^+)s+\frac{1}{2}\frac{i(0^+)R\omega_0}{\zeta}+2v_C(0^+)\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
+V_C&=\frac{V_{in}+v_C(0^-)LCs+i(0^-)L+v_C(0^-)RC}{LCs^2+RCs+1}\\
+&=\frac{V_{in}\omega_0^{\pht{0}2}+v_C(0^-)s+\frac{1}{2}\frac{i(0^-)R\omega_0}{\zeta}+2v_C(0^-)\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
 Impulse response:
 \bit
@@ -1558,13 +1604,13 @@ r&=\frac{-2\omega_0\zeta\pm\sqrt{4\omega_0^{\pht{0}2}\zeta^2-4\omega_0^{\pht{0}2
 \end{proof}
 \bit
 \item $\zeta>1$ Overdamped response:
-\[v=-\qty(v(0^+)\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^+)R\frac{\zeta}{\sqrt{\zeta^2-1}})e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\qty(v(0^+)\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^+)R\frac{\zeta}{\sqrt{\zeta^2-1}})e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
-\[i_R=-\qty(\frac{v(0^+)}{R}\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^+)\frac{\zeta}{\sqrt{\zeta^2-1}})e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\qty(\frac{v(0^+)}{R}\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^+)\frac{\zeta}{\sqrt{\zeta^2-1}})e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
-\[i_L=\qty(\frac{v(0^+)}{R}\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^+)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-\qty(\frac{v(0^+)}{R}\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^+)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
-\[i_C=\qty(\frac{v(0^+)}{R}\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^+)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-\qty(\frac{v(0^+)}{R}\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^+)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
+\[v=-\qty(v(0^-)\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)R\frac{\zeta}{\sqrt{\zeta^2-1}})e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\qty(v(0^-)\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)R\frac{\zeta}{\sqrt{\zeta^2-1}})e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
+\[i_R=-\qty(\frac{v(0^-)}{R}\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)\frac{\zeta}{\sqrt{\zeta^2-1}})e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\qty(\frac{v(0^-)}{R}\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)\frac{\zeta}{\sqrt{\zeta^2-1}})e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
+\[i_L=\qty(\frac{v(0^-)}{R}\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-\qty(\frac{v(0^-)}{R}\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
+\[i_C=\qty(\frac{v(0^-)}{R}\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-\qty(\frac{v(0^-)}{R}\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
 \begin{proof}
 \[v=Ae^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+Be^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
-\[v(0^+)=A+B\]
+\[v(0^-)=A+B\]
 \[i_R=\frac{A}{R}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\frac{B}{R}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
 \[\ba
 i_C&=C\dv{v}{t}\\
@@ -1575,161 +1621,161 @@ i_L&=-i_R-i_C\\
 &=-\frac{A}{R}\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-\frac{B}{R}\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}
 \ea\]
 \[\ba
-i_L(0^+)&=-\frac{A}{R}\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}-\frac{v(0^+)-A}{R}\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}\\
-&=-\frac{v(0^+)}{R}\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}-\frac{A}{R}\frac{\sqrt{\zeta^2-1}}{\zeta}
+i_L(0^-)&=-\frac{A}{R}\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}-\frac{v(0^-)-A}{R}\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}\\
+&=-\frac{v(0^-)}{R}\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}-\frac{A}{R}\frac{\sqrt{\zeta^2-1}}{\zeta}
 \ea\]
-\[A=-\qty(v(0^+)\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^+)R\frac{\zeta}{\sqrt{\zeta^2-1}})\]
-\[B=v(0^+)\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^+)R\frac{\zeta}{\sqrt{\zeta^2-1}}\]
-\[v=-\qty(v(0^+)\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^+)R\frac{\zeta}{\sqrt{\zeta^2-1}})e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\qty(v(0^+)\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^+)R\frac{\zeta}{\sqrt{\zeta^2-1}})e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
-\[i_L=\qty(\frac{v(0^+)}{R}\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^+)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-\qty(\frac{v(0^+)}{R}\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^+)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
+\[A=-\qty(v(0^-)\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)R\frac{\zeta}{\sqrt{\zeta^2-1}})\]
+\[B=v(0^-)\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)R\frac{\zeta}{\sqrt{\zeta^2-1}}\]
+\[v=-\qty(v(0^-)\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)R\frac{\zeta}{\sqrt{\zeta^2-1}})e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\qty(v(0^-)\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)R\frac{\zeta}{\sqrt{\zeta^2-1}})e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
+\[i_L=\qty(\frac{v(0^-)}{R}\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-\qty(\frac{v(0^-)}{R}\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
 Check $v=L\dv{i_L}{t}$:
 \[\ba
-L\dv{i_L}{t}&=-\qty(v(0^+)\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^+)R\frac{\zeta}{\sqrt{\zeta^2-1}})e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\qty(v(0^+)\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^+)R\frac{\zeta}{\sqrt{\zeta^2-1}})e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}
+L\dv{i_L}{t}&=-\qty(v(0^-)\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)R\frac{\zeta}{\sqrt{\zeta^2-1}})e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\qty(v(0^-)\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)R\frac{\zeta}{\sqrt{\zeta^2-1}})e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}
 \ea\]
-\[i_R=-\qty(\frac{v(0^+)}{R}\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^+)\frac{\zeta}{\sqrt{\zeta^2-1}})e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\qty(\frac{v(0^+)}{R}\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^+)\frac{\zeta}{\sqrt{\zeta^2-1}})e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
-\[i_C=\qty(\frac{v(0^+)}{R}\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^+)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-\qty(\frac{v(0^+)}{R}\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^+)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
+\[i_R=-\qty(\frac{v(0^-)}{R}\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)\frac{\zeta}{\sqrt{\zeta^2-1}})e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\qty(\frac{v(0^-)}{R}\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)\frac{\zeta}{\sqrt{\zeta^2-1}})e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
+\[i_C=\qty(\frac{v(0^-)}{R}\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-\qty(\frac{v(0^-)}{R}\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
 \end{proof}
 \item $\zeta=1$ Critically damped response:
-\[v=(v(0^+)-(v(0^+)+2i_L(0^+)R)\omega_0t)e^{-\omega_0t}\]
-\[i_R=\qty(\frac{v(0^+)}{R}-\qty(\frac{v(0^+)}{R}+2i_L(0^+))\omega_0t)e^{-\omega_0t}\]
-\[i_L=\qty(i_L(0^+)+(\frac{1}{2}\frac{v(0^+)}{R}+i_L(0^+))\omega_0t)e^{-\omega_0t}\]
-\[i_C=\qty(-\frac{v(0^+)}{R}-i_L(0^+)+\qty(\frac{v(0^+)}{2R}+i_L(0^+))\omega_0t)e^{-\omega_0t}\]
+\[v=(v(0^-)-(v(0^-)+2i_L(0^-)R)\omega_0t)e^{-\omega_0t}\]
+\[i_R=\qty(\frac{v(0^-)}{R}-\qty(\frac{v(0^-)}{R}+2i_L(0^-))\omega_0t)e^{-\omega_0t}\]
+\[i_L=\qty(i_L(0^-)+(\frac{1}{2}\frac{v(0^-)}{R}+i_L(0^-))\omega_0t)e^{-\omega_0t}\]
+\[i_C=\qty(-\frac{v(0^-)}{R}-i_L(0^-)+\qty(\frac{v(0^-)}{2R}+i_L(0^-))\omega_0t)e^{-\omega_0t}\]
 \begin{proof}
 \[v=(A+Bt)e^{-\omega_0t}\]
-\[A=v(0^+)\]
-\[v=(v(0^+)+Bt)e^{-\omega_0t}\]
-\[i_R=\frac{v(0^+)+Bt}{R}e^{-\omega_0t}\]
+\[A=v(0^-)\]
+\[v=(v(0^-)+Bt)e^{-\omega_0t}\]
+\[i_R=\frac{v(0^-)+Bt}{R}e^{-\omega_0t}\]
 \[\ba
 i_C&=C\dv{v}{t}\\
-&=\frac{\frac{B}{\omega_0}-v(0^+)-Bt}{2R}e^{-\omega_0t}
+&=\frac{\frac{B}{\omega_0}-v(0^-)-Bt}{2R}e^{-\omega_0t}
 \ea\]
 \[\ba
 i_L&=-i_R-i_C\\
-&=-\frac{\frac{B}{\omega_0}+v(0^+)+Bt}{2R}e^{-\omega_0t}
+&=-\frac{\frac{B}{\omega_0}+v(0^-)+Bt}{2R}e^{-\omega_0t}
 \ea\]
-\[i_L(0^+)=-\frac{\frac{B}{\omega_0}+v(0^+)}{2R}\]
-\[B=-(v(0^+)+2i_L(0^+)R)\omega_0\]
-\[v=(v(0^+)-(v(0^+)+2i_L(0^+)R)\omega_0t)e^{-\omega_0t}\]
-\[i_L=\qty(i_L(0^+)+(\frac{1}{2}\frac{v(0^+)}{R}+i_L(0^+))\omega_0t)e^{-\omega_0t}\]
+\[i_L(0^-)=-\frac{\frac{B}{\omega_0}+v(0^-)}{2R}\]
+\[B=-(v(0^-)+2i_L(0^-)R)\omega_0\]
+\[v=(v(0^-)-(v(0^-)+2i_L(0^-)R)\omega_0t)e^{-\omega_0t}\]
+\[i_L=\qty(i_L(0^-)+(\frac{1}{2}\frac{v(0^-)}{R}+i_L(0^-))\omega_0t)e^{-\omega_0t}\]
 Check $v=L\dv{i_L}{t}$:
-\[L\dv{i_L}{t}=(v(0^+)-(v(0^+)+2i_L(0^+)R)\omega_0t)e^{-\omega_0t}\]
-\[i_R=\qty(\frac{v(0^+)}{R}-\qty(\frac{v(0^+)}{R}+2i_L(0^+))\omega_0t)e^{-\omega_0t}\]
-\[i_C=\qty(-\frac{v(0^+)}{R}-i_L(0^+)+\qty(\frac{v(0^+)}{2R}+i_L(0^+))\omega_0t)e^{-\omega_0t}\]
+\[L\dv{i_L}{t}=(v(0^-)-(v(0^-)+2i_L(0^-)R)\omega_0t)e^{-\omega_0t}\]
+\[i_R=\qty(\frac{v(0^-)}{R}-\qty(\frac{v(0^-)}{R}+2i_L(0^-))\omega_0t)e^{-\omega_0t}\]
+\[i_C=\qty(-\frac{v(0^-)}{R}-i_L(0^-)+\qty(\frac{v(0^-)}{2R}+i_L(0^-))\omega_0t)e^{-\omega_0t}\]
 \end{proof}
 \item $0<\zeta<1$ Underdamped response:
-\[v=e^{-\omega_0\zeta t}\qty(v(0^+)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(v(0^+)+2i_L(0^+)R)\frac{\zeta}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
-\[i_R=e^{-\omega_0\zeta t}\qty(\frac{v(0^+)}{R}\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(\frac{v(0^+)}{R}+2i_L(0^+))\frac{\zeta}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
-\[i_L=e^{-\omega_0\zeta t}\qty(i_L(0^+)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(\frac{1}{2}\frac{v(0^+)}{R\zeta\sqrt{1-\zeta^2}}+i_L(0^+)\frac{\zeta}{\sqrt{1-\zeta^2}})\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
-\[i_C=e^{-\omega_0\zeta t}\qty(\qty(\frac{v(0^+)}{R}+i_L(0^+))\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(\frac{v(0^+)}{2R}\frac{1-2\zeta^2}{\zeta\sqrt{1-\zeta^2}}-i_L(0^+)\frac{\zeta}{\sqrt{1-\zeta^2}})\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
+\[v=e^{-\omega_0\zeta t}\qty(v(0^-)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(v(0^-)+2i_L(0^-)R)\frac{\zeta}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
+\[i_R=e^{-\omega_0\zeta t}\qty(\frac{v(0^-)}{R}\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(\frac{v(0^-)}{R}+2i_L(0^-))\frac{\zeta}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
+\[i_L=e^{-\omega_0\zeta t}\qty(i_L(0^-)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(\frac{1}{2}\frac{v(0^-)}{R\zeta\sqrt{1-\zeta^2}}+i_L(0^-)\frac{\zeta}{\sqrt{1-\zeta^2}})\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
+\[i_C=e^{-\omega_0\zeta t}\qty(\qty(\frac{v(0^-)}{R}+i_L(0^-))\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(\frac{v(0^-)}{2R}\frac{1-2\zeta^2}{\zeta\sqrt{1-\zeta^2}}-i_L(0^-)\frac{\zeta}{\sqrt{1-\zeta^2}})\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
 \begin{proof}
 \[v=e^{-\omega_0\zeta t}\qty(A\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+B\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
-\[A=i(0^+)\]
-\[v=e^{-\omega_0\zeta t}\qty(v(0^+)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+B\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
-\[i_R=\frac{1}{R}e^{-\omega_0\zeta t}\qty(v(0^+)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+B\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
+\[A=i(0^-)\]
+\[v=e^{-\omega_0\zeta t}\qty(v(0^-)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+B\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
+\[i_R=\frac{1}{R}e^{-\omega_0\zeta t}\qty(v(0^-)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+B\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
 \[\ba
 i_C&=C\dv{v}{t}\\
-&=\frac{1}{2R\omega_0\zeta}e^{-\omega_0\zeta t}\qty(-\omega_0\zeta v(0^+)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\omega_0\zeta B\sin\qty(\omega_0\sqrt{1-\zeta^2}t)-\omega_0\sqrt{1-\zeta^2}v(0^+)\sin\qty(\omega_0\sqrt{1-\zeta^2}t)+\omega_0\sqrt{1-\zeta^2}B\cos\qty(\omega_0\sqrt{1-\zeta^2}t))\\
-&=-\frac{1}{2R}e^{-\omega_0\zeta t}\qty(\qty(v(0^+)-B\frac{\sqrt{1-\zeta^2}}{\zeta})\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(v(0^+)\frac{\sqrt{1-\zeta^2}}{\zeta}+B)\sin\qty(\omega_0\sqrt{1-\zeta^2}t))
+&=\frac{1}{2R\omega_0\zeta}e^{-\omega_0\zeta t}\qty(-\omega_0\zeta v(0^-)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\omega_0\zeta B\sin\qty(\omega_0\sqrt{1-\zeta^2}t)-\omega_0\sqrt{1-\zeta^2}v(0^-)\sin\qty(\omega_0\sqrt{1-\zeta^2}t)+\omega_0\sqrt{1-\zeta^2}B\cos\qty(\omega_0\sqrt{1-\zeta^2}t))\\
+&=-\frac{1}{2R}e^{-\omega_0\zeta t}\qty(\qty(v(0^-)-B\frac{\sqrt{1-\zeta^2}}{\zeta})\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(v(0^-)\frac{\sqrt{1-\zeta^2}}{\zeta}+B)\sin\qty(\omega_0\sqrt{1-\zeta^2}t))
 \ea\]
 \[\ba
 i_L&=-i_R-i_C\\
-&=\frac{1}{2R}e^{-\omega_0\zeta t}\qty(-\qty(v(0^+)+B\frac{\sqrt{1-\zeta^2}}{\zeta})\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(v(0^+)\frac{\sqrt{1-\zeta^2}}{\zeta}-B)\sin\qty(\omega_0\sqrt{1-\zeta^2}t))
+&=\frac{1}{2R}e^{-\omega_0\zeta t}\qty(-\qty(v(0^-)+B\frac{\sqrt{1-\zeta^2}}{\zeta})\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(v(0^-)\frac{\sqrt{1-\zeta^2}}{\zeta}-B)\sin\qty(\omega_0\sqrt{1-\zeta^2}t))
 \ea\]
-\[i_L(0^+)=-\frac{1}{2R}\qty(v(0^+)+B\frac{\sqrt{1-\zeta^2}}{\zeta})\]
-\[B=-\qty(v(0^+)+2i_L(0^+)R)\frac{\zeta}{\sqrt{1-\zeta^2}}\]
-\[v=e^{-\omega_0\zeta t}\qty(v(0^+)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(v(0^+)+2i_L(0^+)R)\frac{\zeta}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
-\[i_L=e^{-\omega_0\zeta t}\qty(i_L(0^+)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(\frac{1}{2}\frac{v(0^+)}{R\zeta\sqrt{1-\zeta^2}}+i_L(0^+)\frac{\zeta}{\sqrt{1-\zeta^2}})\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
+\[i_L(0^-)=-\frac{1}{2R}\qty(v(0^-)+B\frac{\sqrt{1-\zeta^2}}{\zeta})\]
+\[B=-\qty(v(0^-)+2i_L(0^-)R)\frac{\zeta}{\sqrt{1-\zeta^2}}\]
+\[v=e^{-\omega_0\zeta t}\qty(v(0^-)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(v(0^-)+2i_L(0^-)R)\frac{\zeta}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
+\[i_L=e^{-\omega_0\zeta t}\qty(i_L(0^-)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(\frac{1}{2}\frac{v(0^-)}{R\zeta\sqrt{1-\zeta^2}}+i_L(0^-)\frac{\zeta}{\sqrt{1-\zeta^2}})\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
 Check $v=L\dv{i_L}{t}$:
 \[\ba
-L\dv{i_L}{t}&=2R\zeta e^{-\omega_0\zeta t}\qty(-i_L(0^+)\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(\frac{1}{2}\frac{v(0^+)}{R\sqrt{1-\zeta^2}}+i_L(0^+)\frac{\zeta^2}{\sqrt{1-\zeta^2}})\sin\qty(\omega_0\sqrt{1-\zeta^2}t)-i_L(0^+)\sqrt{1-\zeta^2}\sin\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(\frac{1}{2}\frac{v(0^+)}{R\zeta}+i_L(0^+)\zeta)\cos\qty(\omega_0\sqrt{1-\zeta^2}t))\\
-&=e^{-\omega_0\zeta t}\qty(v(0^+)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(v(0^+)+2i_L(0^+)R)\frac{\zeta}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))
+L\dv{i_L}{t}&=2R\zeta e^{-\omega_0\zeta t}\qty(-i_L(0^-)\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(\frac{1}{2}\frac{v(0^-)}{R\sqrt{1-\zeta^2}}+i_L(0^-)\frac{\zeta^2}{\sqrt{1-\zeta^2}})\sin\qty(\omega_0\sqrt{1-\zeta^2}t)-i_L(0^-)\sqrt{1-\zeta^2}\sin\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(\frac{1}{2}\frac{v(0^-)}{R\zeta}+i_L(0^-)\zeta)\cos\qty(\omega_0\sqrt{1-\zeta^2}t))\\
+&=e^{-\omega_0\zeta t}\qty(v(0^-)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(v(0^-)+2i_L(0^-)R)\frac{\zeta}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))
 \ea\]
-\[i_R=e^{-\omega_0\zeta t}\qty(\frac{v(0^+)}{R}\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(\frac{v(0^+)}{R}+2i_L(0^+))\frac{\zeta}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
-\[i_C=e^{-\omega_0\zeta t}\qty(\qty(\frac{v(0^+)}{R}+i_L(0^+))\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(\frac{v(0^+)}{2R}\frac{1-2\zeta^2}{\zeta\sqrt{1-\zeta^2}}-i_L(0^+)\frac{\zeta}{\sqrt{1-\zeta^2}})\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
+\[i_R=e^{-\omega_0\zeta t}\qty(\frac{v(0^-)}{R}\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(\frac{v(0^-)}{R}+2i_L(0^-))\frac{\zeta}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
+\[i_C=e^{-\omega_0\zeta t}\qty(\qty(\frac{v(0^-)}{R}+i_L(0^-))\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(\frac{v(0^-)}{2R}\frac{1-2\zeta^2}{\zeta\sqrt{1-\zeta^2}}-i_L(0^-)\frac{\zeta}{\sqrt{1-\zeta^2}})\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
 \end{proof}
 \eit
 Natural response (Laplace domain):
 \[\ba
-V&=\frac{v(0^+)RLCs-i_L(0^+)RL}{RLCs^2+Ls+R}\\
-&=\frac{v(0^+)s-2i_L(0^+)R\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
+V&=\frac{v(0^-)RLCs-i_L(0^-)RL}{RLCs^2+Ls+R}\\
+&=\frac{v(0^-)s-2i_L(0^-)R\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
 \[\ba
-I_R&=\frac{v(0^+)LCs-i_L(0^+)L}{RLCs^2+Ls+R}\\
-&=\frac{\frac{v(0^+)s}{R}-2i_L(0^+)\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
+I_R&=\frac{v(0^-)LCs-i_L(0^-)L}{RLCs^2+Ls+R}\\
+&=\frac{\frac{v(0^-)s}{R}-2i_L(0^-)\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
 \[\ba
-I_L&=\frac{i_L(0^+)RLCs+v(0^+)RC+i_L(0^+)L}{RLCs^2+Ls+R}\\
-&=\frac{i_L(0^+)s+\frac{v(0^+)\omega_0}{2R\zeta}+2i_L(0^+)\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
+I_L&=\frac{i_L(0^-)RLCs+v(0^-)RC+i_L(0^-)L}{RLCs^2+Ls+R}\\
+&=\frac{i_L(0^-)s+\frac{v(0^-)\omega_0}{2R\zeta}+2i_L(0^-)\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
 \[\ba
-I_C&=-\frac{\qty(v(0^+)+i_L(0^+)R)LCs+v(0^+)RC}{RLCs^2+Ls+R}\\
-&=-\frac{\qty(\frac{v(0^+)}{R}+i_L(0^+))s+\frac{v(0^+)\omega_0}{2R\zeta}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
+I_C&=-\frac{\qty(v(0^-)+i_L(0^-)R)LCs+v(0^-)RC}{RLCs^2+Ls+R}\\
+&=-\frac{\qty(\frac{v(0^-)}{R}+i_L(0^-))s+\frac{v(0^-)\omega_0}{2R\zeta}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
 \begin{proof}
 \[\ba
-V&=\frac{v(0^+)C-\frac{i_L(0^+)}{s}}{Cs+\frac{1}{R}+\frac{1}{Ls}}\\
-&=\frac{v(0^+)RLCs-i_L(0^+)RL}{RLCs^2+Ls+R}\\
-&=\frac{v(0^+)s-2i_L(0^+)R\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
+V&=\frac{v(0^-)C-\frac{i_L(0^-)}{s}}{Cs+\frac{1}{R}+\frac{1}{Ls}}\\
+&=\frac{v(0^-)RLCs-i_L(0^-)RL}{RLCs^2+Ls+R}\\
+&=\frac{v(0^-)s-2i_L(0^-)R\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
 \[\ba
-I_R&=\frac{v(0^+)LCs-i_L(0^+)L}{RLCs^2+Ls+R}\\
-&=\frac{\frac{v(0^+)s}{R}-2i_L(0^+)\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
+I_R&=\frac{v(0^-)LCs-i_L(0^-)L}{RLCs^2+Ls+R}\\
+&=\frac{\frac{v(0^-)s}{R}-2i_L(0^-)\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
 \[\ba
-I_L&=\frac{V}{Ls}+\frac{i_L(0^+)}{s}\\
-&=\frac{v(0^+)RC-\frac{i_L(0^+)R}{s}+i_L(0^+)RLCs+i_L(0^+)L+\frac{i_L(0^+)R}{s}}{RLCs^2+Ls+R}\\
-&=\frac{i_L(0^+)RLCs+v(0^+)RC+i_L(0^+)L}{RLCs^2+Ls+R}\\
-&=\frac{i_L(0^+)s+\frac{v(0^+)\omega_0}{2R\zeta}+2i_L(0^+)\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
+I_L&=\frac{V}{Ls}+\frac{i_L(0^-)}{s}\\
+&=\frac{v(0^-)RC-\frac{i_L(0^-)R}{s}+i_L(0^-)RLCs+i_L(0^-)L+\frac{i_L(0^-)R}{s}}{RLCs^2+Ls+R}\\
+&=\frac{i_L(0^-)RLCs+v(0^-)RC+i_L(0^-)L}{RLCs^2+Ls+R}\\
+&=\frac{i_L(0^-)s+\frac{v(0^-)\omega_0}{2R\zeta}+2i_L(0^-)\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
 \[\ba
-I_C&=CsV-Cv(0^+)\\
-&=\frac{v(0^+)RLC^2s^2-i_L(0^+)RLCs-v(0^+)RLC^2s^2-v(0^+)LCs-v(0^+)RC}{RLCs^2+Ls+R}\\
-&=-\frac{\qty(v(0^+)+i_L(0^+)R)LCs+v(0^+)RC}{RLCs^2+Ls+R}\\
-&=-\frac{\qty(\frac{v(0^+)}{R}+i_L(0^+))s+\frac{v(0^+)\omega_0}{2R\zeta}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
+I_C&=CsV-Cv(0^-)\\
+&=\frac{v(0^-)RLC^2s^2-i_L(0^-)RLCs-v(0^-)RLC^2s^2-v(0^-)LCs-v(0^-)RC}{RLCs^2+Ls+R}\\
+&=-\frac{\qty(v(0^-)+i_L(0^-)R)LCs+v(0^-)RC}{RLCs^2+Ls+R}\\
+&=-\frac{\qty(\frac{v(0^-)}{R}+i_L(0^-))s+\frac{v(0^-)\omega_0}{2R\zeta}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
 Check consistency:
 \bit
 \item $\zeta>1$ Overdamped response:
 \[\ba
-\mathcal{L}\{v\}&=-\qty(v(0^+)\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^+)R\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{1}{s+\omega_0\qty(\zeta-\sqrt{\zeta^2-1})}+\qty(v(0^+)\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^+)R\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{1}{s+\omega_0\qty(\zeta+\sqrt{\zeta^2-1})}\\
-&=\frac{-\qty(v(0^+)\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^+)R\frac{\zeta}{\sqrt{\zeta^2-1}})\qty(s+\omega_0\qty(\zeta+\sqrt{\zeta^2-1}))+\qty(v(0^+)\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^+)R\frac{\zeta}{\sqrt{\zeta^2-1}})\qty(s+\omega_0\qty(\zeta-\sqrt{\zeta^2-1}))}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}\\
-&=\frac{v(0^+)s-2i_L(0^+)R\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
+\mathcal{L}\{v\}&=-\qty(v(0^-)\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)R\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{1}{s+\omega_0\qty(\zeta-\sqrt{\zeta^2-1})}+\qty(v(0^-)\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)R\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{1}{s+\omega_0\qty(\zeta+\sqrt{\zeta^2-1})}\\
+&=\frac{-\qty(v(0^-)\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)R\frac{\zeta}{\sqrt{\zeta^2-1}})\qty(s+\omega_0\qty(\zeta+\sqrt{\zeta^2-1}))+\qty(v(0^-)\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)R\frac{\zeta}{\sqrt{\zeta^2-1}})\qty(s+\omega_0\qty(\zeta-\sqrt{\zeta^2-1}))}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}\\
+&=\frac{v(0^-)s-2i_L(0^-)R\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
 \[\ba
-\mathcal{L}\{i_L\}&=\qty(\frac{v(0^+)}{R}\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^+)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}\frac{1}{s+\omega_0\qty(\zeta-\sqrt{\zeta^2-1})}-\qty(\frac{v(0^+)}{R}\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^+)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}\frac{1}{s+\omega_0\qty(\zeta+\sqrt{\zeta^2-1})}\\
-&=\frac{\qty(\frac{v(0^+)}{R}\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^+)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}\qty(s+\omega_0\qty(\zeta+\sqrt{\zeta^2-1}))-\qty(\frac{v(0^+)}{R}\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^+)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}\qty(s+\omega_0\qty(\zeta-\sqrt{\zeta^2-1}))}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}\\
-&=\frac{i_L(0^+)s+\frac{v(0^+)\omega_0}{2R\zeta}+2i_L(0^+)\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
+\mathcal{L}\{i_L\}&=\qty(\frac{v(0^-)}{R}\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}\frac{1}{s+\omega_0\qty(\zeta-\sqrt{\zeta^2-1})}-\qty(\frac{v(0^-)}{R}\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}\frac{1}{s+\omega_0\qty(\zeta+\sqrt{\zeta^2-1})}\\
+&=\frac{\qty(\frac{v(0^-)}{R}\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}\qty(s+\omega_0\qty(\zeta+\sqrt{\zeta^2-1}))-\qty(\frac{v(0^-)}{R}\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}\qty(s+\omega_0\qty(\zeta-\sqrt{\zeta^2-1}))}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}\\
+&=\frac{i_L(0^-)s+\frac{v(0^-)\omega_0}{2R\zeta}+2i_L(0^-)\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
 \[\ba
-\mathcal{L}\{i_C\}&=\qty(\frac{v(0^+)}{R}\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^+)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}\frac{1}{s+\omega_0\qty(\zeta-\sqrt{\zeta^2-1})}-\qty(\frac{v(0^+)}{R}\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^+)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}\frac{1}{s+\omega_0\qty(\zeta+\sqrt{\zeta^2-1})}\\
-&=\frac{\qty(\frac{v(0^+)}{R}\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^+)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}\qty(s+\omega_0\qty(\zeta+\sqrt{\zeta^2-1}))-\qty(\frac{v(0^+)}{R}\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^+)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}\qty(s+\omega_0\qty(\zeta-\sqrt{\zeta^2-1}))}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}\\
-&=-\frac{\qty(\frac{v(0^+)}{R}+i_L(0^+))s+\frac{v(0^+)\omega_0}{2R\zeta}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
+\mathcal{L}\{i_C\}&=\qty(\frac{v(0^-)}{R}\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}\frac{1}{s+\omega_0\qty(\zeta-\sqrt{\zeta^2-1})}-\qty(\frac{v(0^-)}{R}\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}\frac{1}{s+\omega_0\qty(\zeta+\sqrt{\zeta^2-1})}\\
+&=\frac{\qty(\frac{v(0^-)}{R}\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}\qty(s+\omega_0\qty(\zeta+\sqrt{\zeta^2-1}))-\qty(\frac{v(0^-)}{R}\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}\qty(s+\omega_0\qty(\zeta-\sqrt{\zeta^2-1}))}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}\\
+&=-\frac{\qty(\frac{v(0^-)}{R}+i_L(0^-))s+\frac{v(0^-)\omega_0}{2R\zeta}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
 \item $\zeta=1$ Critically damped response:
 \[\ba
-\mathcal{L}\{v\}&=\frac{v(0^+)}{s+\omega_0}-\frac{(v(0^+)+2i_L(0^+)R)\omega_0}{s^2+2\omega_0s+\omega_0^{\pht{0}2}}\\
-&=\frac{v(0^+)s-2i_L(0^+)R\omega_0}{s^2+2\omega_0s+\omega_0^{\pht{0}2}}
+\mathcal{L}\{v\}&=\frac{v(0^-)}{s+\omega_0}-\frac{(v(0^-)+2i_L(0^-)R)\omega_0}{s^2+2\omega_0s+\omega_0^{\pht{0}2}}\\
+&=\frac{v(0^-)s-2i_L(0^-)R\omega_0}{s^2+2\omega_0s+\omega_0^{\pht{0}2}}
 \ea\]
 \[\ba
-\mathcal{L}\{i_L\}&=\frac{i_L(0^+)}{s+\omega_0}+\frac{(\frac{1}{2}\frac{v(0^+)}{R}+i_L(0^+))\omega_0}{s^2+2\omega_0s+\omega_0^{\pht{0}2}}\\
-&=\frac{i_L(0^+)s+\frac{v(0^+)\omega_0}{2R}+2i_L(0^+)\omega_0}{s^2+2\omega_0s+\omega_0^{\pht{0}2}}
+\mathcal{L}\{i_L\}&=\frac{i_L(0^-)}{s+\omega_0}+\frac{(\frac{1}{2}\frac{v(0^-)}{R}+i_L(0^-))\omega_0}{s^2+2\omega_0s+\omega_0^{\pht{0}2}}\\
+&=\frac{i_L(0^-)s+\frac{v(0^-)\omega_0}{2R}+2i_L(0^-)\omega_0}{s^2+2\omega_0s+\omega_0^{\pht{0}2}}
 \ea\]
 \[\ba
-\mathcal{L}\{i_C\}&=-\frac{\frac{v(0^+)}{R}+i_L(0^+)}{s+\omega_0}+\frac{\qty(\frac{v(0^+)}{2R}+i_L(0^+))\omega_0}{s^2+2\omega_0s+\omega_0^{\pht{0}2}}\\
-&=-\frac{\qty(\frac{v(0^+)}{R}+i_L(0^+))s+\frac{v(0^+)\omega_0}{2R}}{s^2+2\omega_0s+\omega_0^{\pht{0}2}}
+\mathcal{L}\{i_C\}&=-\frac{\frac{v(0^-)}{R}+i_L(0^-)}{s+\omega_0}+\frac{\qty(\frac{v(0^-)}{2R}+i_L(0^-))\omega_0}{s^2+2\omega_0s+\omega_0^{\pht{0}2}}\\
+&=-\frac{\qty(\frac{v(0^-)}{R}+i_L(0^-))s+\frac{v(0^-)\omega_0}{2R}}{s^2+2\omega_0s+\omega_0^{\pht{0}2}}
 \ea\]
 \item $0<\zeta<1$ Underdamped response:
 \[\ba
-\mathcal{L}\{v\}&=\frac{v(0^+)\qty(s+\omega\zeta)-\qty(v(0^+)+2i_L(0^+)R)\frac{\zeta}{\sqrt{1-\zeta^2}}\omega_0\sqrt{1-\zeta^2}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}\\
-&=\frac{v(0^+)s-2i_L(0^+)R\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
+\mathcal{L}\{v\}&=\frac{v(0^-)\qty(s+\omega\zeta)-\qty(v(0^-)+2i_L(0^-)R)\frac{\zeta}{\sqrt{1-\zeta^2}}\omega_0\sqrt{1-\zeta^2}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}\\
+&=\frac{v(0^-)s-2i_L(0^-)R\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
 \[\ba
-\mathcal{L}\{i_L\}&=\frac{i_L(0^+)\qty(s+\omega\zeta)+\qty(\frac{1}{2}\frac{v(0^+)}{R\zeta\sqrt{1-\zeta^2}}+i_L(0^+)\frac{\zeta}{\sqrt{1-\zeta^2}})\omega_0\sqrt{1-\zeta^2}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}\\
-&=\frac{i_L(0^+)s+\frac{v(0^+)\omega_0}{2R\zeta}+2i_L(0^+)\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
+\mathcal{L}\{i_L\}&=\frac{i_L(0^-)\qty(s+\omega\zeta)+\qty(\frac{1}{2}\frac{v(0^-)}{R\zeta\sqrt{1-\zeta^2}}+i_L(0^-)\frac{\zeta}{\sqrt{1-\zeta^2}})\omega_0\sqrt{1-\zeta^2}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}\\
+&=\frac{i_L(0^-)s+\frac{v(0^-)\omega_0}{2R\zeta}+2i_L(0^-)\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
 \[\ba
-\mathcal{L}\{i_C\}&=\frac{\qty(\frac{v(0^+)}{R}+i_L(0^+))\qty(s+\omega\zeta)+\qty(\frac{v(0^+)}{2R}\frac{1-2\zeta^2}{\zeta\sqrt{1-\zeta^2}}-i_L(0^+)\frac{\zeta}{\sqrt{1-\zeta^2}})\omega_0\sqrt{1-\zeta^2}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}\\
-&=-\frac{\qty(\frac{v(0^+)}{R}+i_L(0^+))s+\frac{v(0^+)\omega_0}{2R\zeta}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
+\mathcal{L}\{i_C\}&=\frac{\qty(\frac{v(0^-)}{R}+i_L(0^-))\qty(s+\omega\zeta)+\qty(\frac{v(0^-)}{2R}\frac{1-2\zeta^2}{\zeta\sqrt{1-\zeta^2}}-i_L(0^-)\frac{\zeta}{\sqrt{1-\zeta^2}})\omega_0\sqrt{1-\zeta^2}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}\\
+&=-\frac{\qty(\frac{v(0^-)}{R}+i_L(0^-))s+\frac{v(0^-)\omega_0}{2R\zeta}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
 \eit
 \end{proof}
@@ -1757,7 +1803,7 @@ Forced response (time domain):
 \[\frac{1}{v_1v_2'-v_2v_1'}=-\frac{1}{2\omega_0\sqrt{\zeta^2-1}}e^{2\omega_0\zeta t}\]
 \[\ba
 v&=\frac{R\zeta}{\sqrt{\zeta^2-1}}\qty(e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}\int_0^te^{\omega_0\qty(\zeta-\sqrt{\zeta^2-1})\tau}\dv{i_{in}}{\tau}\dd{\tau}-e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}\int_0^te^{\omega_0\qty(\zeta+\sqrt{\zeta^2-1})\tau}\dv{i_{in}}{\tau}\dd{\tau})\\
-&=\frac{R\zeta}{\sqrt{\zeta^2-1}}\qty(e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}\qty(e^{\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}(i_{in}-i_{in}(0^+))-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})\int_0^te^{\omega_0\qty(\zeta-\sqrt{\zeta^2-1})\tau}i_{in}(\tau)\dd{\tau})-e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}\qty(e^{\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}(i_{in}-i_{in}(0^+))-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})\int_0^te^{\omega_0\qty(\zeta+\sqrt{\zeta^2-1})\tau}i_{in}(\tau)\dd{\tau}))\\
+&=\frac{R\zeta}{\sqrt{\zeta^2-1}}\qty(e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}\qty(e^{\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}(i_{in}-i_{in}(0^-))-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})\int_0^te^{\omega_0\qty(\zeta-\sqrt{\zeta^2-1})\tau}i_{in}(\tau)\dd{\tau})-e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}\qty(e^{\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}(i_{in}-i_{in}(0^-))-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})\int_0^te^{\omega_0\qty(\zeta+\sqrt{\zeta^2-1})\tau}i_{in}(\tau)\dd{\tau}))\\
 &=\frac{R\omega_0\zeta}{\sqrt{\zeta^2-1}}\qty(-e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}\qty(\zeta-\sqrt{\zeta^2-1})\int_0^te^{\omega_0\qty(\zeta-\sqrt{\zeta^2-1})\tau}i_{in}(\tau)\dd{\tau}+e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}\qty(\zeta+\sqrt{\zeta^2-1})\int_0^te^{\omega_0\qty(\zeta+\sqrt{\zeta^2-1})\tau}i_{in}(\tau)\dd{\tau})\\
 &=\frac{R\omega_0\zeta}{\sqrt{\zeta^2-1}}\int_0^t\qty(-\qty(\zeta-\sqrt{\zeta^2-1})e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})(t-\tau)}+\qty(\zeta+\sqrt{\zeta^2-1})e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})(t-\tau)})i_{in}(\tau)\dd{\tau}\\
 &=\frac{R\omega_0\zeta}{\sqrt{\zeta^2-1}}\int_0^t\qty(-\zeta e^{-\omega_0\zeta(t-\tau)}\qty(e^{\omega_0\sqrt{\zeta^2-1}(t-\tau)}-e^{-\omega_0\sqrt{\zeta^2-1}(t-\tau)})+\sqrt{\zeta^2-1}e^{-\omega_0\zeta(t-\tau)}\qty(e^{\omega_0\sqrt{\zeta^2-1}(t-\tau)}+e^{-\omega_0\sqrt{\zeta^2-1}(t-\tau)}))i_{in}(\tau)\dd{\tau}\\
@@ -1788,7 +1834,7 @@ Check $v=L\dv{i_L}{t}$:
 \[\frac{1}{v_1v_2'-v_2v_1'}=e^{2\omega_0t}\]
 \[\ba
 v&=2R\omega_0\qty(-e^{-\omega_0t}\int_0^t te^{\omega_0\tau}\dv{i_{in}}{\tau}\dd{\tau}+te^{-\omega_0t}\int_0^t e^{\omega_0\tau}\dv{i_{in}}{\tau}\dd{\tau})\\
-&=2R\omega_0\qty(-e^{-\omega_0t}\qty(te^{\omega_0t}(i_{in}-i_{in}(0^+))-\int_0^t(1+\omega_0\tau)e^{\omega_0\tau}i_{in}(\tau)\dd{\tau})+te^{-\omega_0t}\qty(e^{\omega_0t}(i_{in}-i_{in}(0^+))-\int_0^t\omega_0e^{\omega_0\tau}i_{in}(\tau)\dd{\tau}))\\
+&=2R\omega_0\qty(-e^{-\omega_0t}\qty(te^{\omega_0t}(i_{in}-i_{in}(0^-))-\int_0^t(1+\omega_0\tau)e^{\omega_0\tau}i_{in}(\tau)\dd{\tau})+te^{-\omega_0t}\qty(e^{\omega_0t}(i_{in}-i_{in}(0^-))-\int_0^t\omega_0e^{\omega_0\tau}i_{in}(\tau)\dd{\tau}))\\
 &=2R\omega_0\int_0^t(1-\omega_0(t-\tau))e^{-\omega_0(t-\tau)}i_{in}(\tau)\dd{\tau}
 \ea\]
 \[i_R=2\omega_0\int_0^t(1-\omega_0(t-\tau))e^{-\omega_0(t-\tau)}i_{in}(\tau)\dd{\tau}\]
@@ -1820,7 +1866,7 @@ Check $v=L\dv{i_L}{t}$:
 \ea\]
 \[\ba
 v&=\frac{2R\zeta}{\sqrt{1-\zeta^2}}\qty(-e^{-\omega_0\zeta t}\cos\qty(\omega_0\sqrt{1-\zeta^2}t)\int_0^te^{\omega_0\zeta\tau}\sin\qty(\omega_0\sqrt{1-\zeta^2}\tau)\dv{i_{in}}{\tau}\dd{\tau}+e^{-\omega_0\zeta t}\sin\qty(\omega_0\sqrt{1-\zeta^2}t)\int_0^te^{\omega_0\zeta\tau}\cos\qty(\omega_0\sqrt{1-\zeta^2}\tau)\dv{i_{in}}{\tau}\dd{\tau})\\
-&=\frac{2R\zeta}{\sqrt{1-\zeta^2}}\qty(-e^{-\omega_0\zeta t}\cos\qty(\omega_0\sqrt{1-\zeta^2}t)\qty(e^{\omega_0\zeta t}\sin\qty(\omega_0\sqrt{1-\zeta^2}t)(i_{in}-i_{in}(0^+))-\omega_0\int_0^te^{\omega_0\zeta\tau}\qty(\sqrt{1-\zeta^2}\cos\qty(\omega_0\sqrt{1-\zeta^2}\tau)+\zeta\sin\qty(\omega_0\sqrt{1-\zeta^2}\tau))i_{in}(\tau)\dd{\tau})+e^{-\omega_0\zeta t}\sin\qty(\omega_0\sqrt{1-\zeta^2}t)\qty(e^{\omega_0\zeta t}\cos\qty(\omega_0\sqrt{1-\zeta^2}t)(i_{in}-i_{in}(0^+))-\omega_0\int_0^te^{\omega_0\zeta\tau}\qty(\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}\tau)-\sqrt{1-\zeta^2}\sin\qty(\omega_0\sqrt{1-\zeta^2}\tau))i_{in}(\tau)\dd{\tau}))\\
+&=\frac{2R\zeta}{\sqrt{1-\zeta^2}}\qty(-e^{-\omega_0\zeta t}\cos\qty(\omega_0\sqrt{1-\zeta^2}t)\qty(e^{\omega_0\zeta t}\sin\qty(\omega_0\sqrt{1-\zeta^2}t)(i_{in}-i_{in}(0^-))-\omega_0\int_0^te^{\omega_0\zeta\tau}\qty(\sqrt{1-\zeta^2}\cos\qty(\omega_0\sqrt{1-\zeta^2}\tau)+\zeta\sin\qty(\omega_0\sqrt{1-\zeta^2}\tau))i_{in}(\tau)\dd{\tau})+e^{-\omega_0\zeta t}\sin\qty(\omega_0\sqrt{1-\zeta^2}t)\qty(e^{\omega_0\zeta t}\cos\qty(\omega_0\sqrt{1-\zeta^2}t)(i_{in}-i_{in}(0^-))-\omega_0\int_0^te^{\omega_0\zeta\tau}\qty(\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}\tau)-\sqrt{1-\zeta^2}\sin\qty(\omega_0\sqrt{1-\zeta^2}\tau))i_{in}(\tau)\dd{\tau}))\\
 &=\frac{2R\omega_0\zeta}{\sqrt{1-\zeta^2}}\qty(e^{-\omega_0\zeta t}\cos\qty(\omega_0\sqrt{1-\zeta^2}t)\int_0^te^{\omega_0\zeta\tau}\qty(\sqrt{1-\zeta^2}\cos\qty(\omega_0\sqrt{1-\zeta^2}\tau)+\zeta\sin\qty(\omega_0\sqrt{1-\zeta^2}\tau))i_{in}(\tau)\dd{\tau}-e^{-\omega_0\zeta t}\sin\qty(\omega_0\sqrt{1-\zeta^2}t)\int_0^te^{\omega_0\zeta\tau}\qty(\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}\tau)-\sqrt{1-\zeta^2}\sin\qty(\omega_0\sqrt{1-\zeta^2}\tau))i_{in}(\tau)\dd{\tau})\\
 &=\frac{2R\omega_0\zeta}{\sqrt{1-\zeta^2}}\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(\sqrt{1-\zeta^2}\cos\qty(\omega_0\sqrt{1-\zeta^2}t)\cos\qty(\omega_0\sqrt{1-\zeta^2}\tau)+\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}t)\sin\qty(\omega_0\sqrt{1-\zeta^2}\tau)-\zeta\sin\qty(\omega_0\sqrt{1-\zeta^2}t)\cos\qty(\omega_0\sqrt{1-\zeta^2}\tau)+\sqrt{1-\zeta^2}\sin\qty(\omega_0\sqrt{1-\zeta^2}t)\sin\qty(\omega_0\sqrt{1-\zeta^2}\tau))i_{in}(\tau)\dd{\tau}\\
 &=2R\omega_0\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))-\frac{\zeta^2}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau)))i_{in}(\tau)\dd{\tau}
@@ -1900,37 +1946,37 @@ Check consistency:
 Total response (time domain):
 \bit
 \item $\zeta>1$ Overdamped response:
-\[v=2R\omega_0\zeta\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(\cosh(\omega_0\sqrt{\zeta^2-1}(t-\tau))-\frac{\zeta}{\sqrt{\zeta^2-1}}\sinh(\omega_0\sqrt{\zeta^2-1}(t-\tau)))i_{in}(\tau)\dd{\tau}-\qty(v(0^+)\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^+)R\frac{\zeta}{\sqrt{\zeta^2-1}})e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\qty(v(0^+)\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^+)R\frac{\zeta}{\sqrt{\zeta^2-1}})e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
-\[i_R=2\omega_0\zeta\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(\cosh(\omega_0\sqrt{\zeta^2-1}(t-\tau))-\frac{\zeta}{\sqrt{\zeta^2-1}}\sinh(\omega_0\sqrt{\zeta^2-1}(t-\tau)))i_{in}(\tau)\dd{\tau}-\qty(\frac{v(0^+)}{R}\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^+)\frac{\zeta}{\sqrt{\zeta^2-1}})e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\qty(\frac{v(0^+)}{R}\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^+)\frac{\zeta}{\sqrt{\zeta^2-1}})e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
-\[i_L=\frac{\omega_0}{\sqrt{\zeta^2-1}}\int_0^te^{-\omega_0\zeta(t-\tau)}\sinh(\omega_0\sqrt{\zeta^2-1}(t-\tau))i_{in}(\tau)\dd{\tau}+\qty(\frac{v(0^+)}{R}\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^+)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-\qty(\frac{v(0^+)}{R}\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^+)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
-\[i_C=i_{in}-\omega_0\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(2\zeta\cosh(\omega_0\sqrt{\zeta^2-1}(t-\tau))-\frac{2\zeta^2-1}{\sqrt{\zeta^2-1}}\sinh(\omega_0\sqrt{\zeta^2-1}(t-\tau)))i_{in}(\tau)\dd{\tau}+\qty(\frac{v(0^+)}{R}\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^+)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-\qty(\frac{v(0^+)}{R}\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^+)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
+\[v=2R\omega_0\zeta\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(\cosh(\omega_0\sqrt{\zeta^2-1}(t-\tau))-\frac{\zeta}{\sqrt{\zeta^2-1}}\sinh(\omega_0\sqrt{\zeta^2-1}(t-\tau)))i_{in}(\tau)\dd{\tau}-\qty(v(0^-)\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)R\frac{\zeta}{\sqrt{\zeta^2-1}})e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\qty(v(0^-)\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)R\frac{\zeta}{\sqrt{\zeta^2-1}})e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
+\[i_R=2\omega_0\zeta\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(\cosh(\omega_0\sqrt{\zeta^2-1}(t-\tau))-\frac{\zeta}{\sqrt{\zeta^2-1}}\sinh(\omega_0\sqrt{\zeta^2-1}(t-\tau)))i_{in}(\tau)\dd{\tau}-\qty(\frac{v(0^-)}{R}\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)\frac{\zeta}{\sqrt{\zeta^2-1}})e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\qty(\frac{v(0^-)}{R}\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)\frac{\zeta}{\sqrt{\zeta^2-1}})e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
+\[i_L=\frac{\omega_0}{\sqrt{\zeta^2-1}}\int_0^te^{-\omega_0\zeta(t-\tau)}\sinh(\omega_0\sqrt{\zeta^2-1}(t-\tau))i_{in}(\tau)\dd{\tau}+\qty(\frac{v(0^-)}{R}\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-\qty(\frac{v(0^-)}{R}\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
+\[i_C=i_{in}-\omega_0\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(2\zeta\cosh(\omega_0\sqrt{\zeta^2-1}(t-\tau))-\frac{2\zeta^2-1}{\sqrt{\zeta^2-1}}\sinh(\omega_0\sqrt{\zeta^2-1}(t-\tau)))i_{in}(\tau)\dd{\tau}+\qty(\frac{v(0^-)}{R}\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-\qty(\frac{v(0^-)}{R}\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
 \item $\zeta=1$ Critically damped response:
-\[v=2R\omega_0\int_0^t(1-\omega_0(t-\tau))e^{-\omega_0(t-\tau)}i_{in}(\tau)\dd{\tau}+(v(0^+)-(v(0^+)+2i_L(0^+)R)\omega_0t)e^{-\omega_0t}\]
-\[i_R=2\omega_0\int_0^t(1-\omega_0(t-\tau))e^{-\omega_0(t-\tau)}i_{in}(\tau)\dd{\tau}+\qty(\frac{v(0^+)}{R}-\qty(\frac{v(0^+)}{R}+2i_L(0^+))\omega_0t)e^{-\omega_0t}\]
-\[i_L=\omega_0^{\pht{0}2}\int_0^t(t-\tau)e^{-\omega_0(t-\tau)}i_{in}(\tau)\dd{\tau}+\qty(i_L(0^+)+(\frac{1}{2}\frac{v(0^+)}{R}+i_L(0^+))\omega_0t)e^{-\omega_0t}\]
-\[i_C=i_{in}-\omega_0\int_0^t\qty(2-\omega_0(t-\tau))e^{-\omega_0(t-\tau)}i_{in}(\tau)\dd{\tau}+\qty(-\frac{v(0^+)}{R}-i_L(0^+)+\qty(\frac{v(0^+)}{2R}+i_L(0^+))\omega_0t)e^{-\omega_0t}\]
+\[v=2R\omega_0\int_0^t(1-\omega_0(t-\tau))e^{-\omega_0(t-\tau)}i_{in}(\tau)\dd{\tau}+(v(0^-)-(v(0^-)+2i_L(0^-)R)\omega_0t)e^{-\omega_0t}\]
+\[i_R=2\omega_0\int_0^t(1-\omega_0(t-\tau))e^{-\omega_0(t-\tau)}i_{in}(\tau)\dd{\tau}+\qty(\frac{v(0^-)}{R}-\qty(\frac{v(0^-)}{R}+2i_L(0^-))\omega_0t)e^{-\omega_0t}\]
+\[i_L=\omega_0^{\pht{0}2}\int_0^t(t-\tau)e^{-\omega_0(t-\tau)}i_{in}(\tau)\dd{\tau}+\qty(i_L(0^-)+(\frac{1}{2}\frac{v(0^-)}{R}+i_L(0^-))\omega_0t)e^{-\omega_0t}\]
+\[i_C=i_{in}-\omega_0\int_0^t\qty(2-\omega_0(t-\tau))e^{-\omega_0(t-\tau)}i_{in}(\tau)\dd{\tau}+\qty(-\frac{v(0^-)}{R}-i_L(0^-)+\qty(\frac{v(0^-)}{2R}+i_L(0^-))\omega_0t)e^{-\omega_0t}\]
 \item $0<\zeta<1$ Underdamped response:
-\[v=2R\omega_0\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))-\frac{\zeta^2}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau)))i_{in}(\tau)\dd{\tau}+e^{-\omega_0\zeta t}\qty(v(0^+)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(v(0^+)+2i_L(0^+)R)\frac{\zeta}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
-\[i_R=2\omega_0\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))-\frac{\zeta^2}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau)))i_{in}(\tau)\dd{\tau}+e^{-\omega_0\zeta t}\qty(\frac{v(0^+)}{R}\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(\frac{v(0^+)}{R}+2i_L(0^+))\frac{\zeta}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
-\[i_L=\frac{\omega_0}{\sqrt{1-\zeta^2}}\int_0^te^{-\omega_0\zeta(t-\tau)}\sin\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))i_{in}(\tau)\dd{\tau}+e^{-\omega_0\zeta t}\qty(i_L(0^+)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(\frac{1}{2}\frac{v(0^+)}{R\zeta\sqrt{1-\zeta^2}}+i_L(0^+)\frac{\zeta}{\sqrt{1-\zeta^2}})\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
-\[i_C=i_{in}-\omega_0\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(2\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))-\frac{2\zeta^2-1}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau)))i_{in}(\tau)\dd{\tau}+e^{-\omega_0\zeta t}\qty(\qty(\frac{v(0^+)}{R}+i_L(0^+))\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(\frac{v(0^+)}{2R}\frac{1-2\zeta^2}{\zeta\sqrt{1-\zeta^2}}-i_L(0^+)\frac{\zeta}{\sqrt{1-\zeta^2}})\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
+\[v=2R\omega_0\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))-\frac{\zeta^2}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau)))i_{in}(\tau)\dd{\tau}+e^{-\omega_0\zeta t}\qty(v(0^-)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(v(0^-)+2i_L(0^-)R)\frac{\zeta}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
+\[i_R=2\omega_0\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))-\frac{\zeta^2}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau)))i_{in}(\tau)\dd{\tau}+e^{-\omega_0\zeta t}\qty(\frac{v(0^-)}{R}\cos\qty(\omega_0\sqrt{1-\zeta^2}t)-\qty(\frac{v(0^-)}{R}+2i_L(0^-))\frac{\zeta}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
+\[i_L=\frac{\omega_0}{\sqrt{1-\zeta^2}}\int_0^te^{-\omega_0\zeta(t-\tau)}\sin\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))i_{in}(\tau)\dd{\tau}+e^{-\omega_0\zeta t}\qty(i_L(0^-)\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(\frac{1}{2}\frac{v(0^-)}{R\zeta\sqrt{1-\zeta^2}}+i_L(0^-)\frac{\zeta}{\sqrt{1-\zeta^2}})\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
+\[i_C=i_{in}-\omega_0\int_0^te^{-\omega_0\zeta(t-\tau)}\qty(2\zeta\cos\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau))-\frac{2\zeta^2-1}{\sqrt{1-\zeta^2}}\sin\qty(\omega_0\sqrt{1-\zeta^2}(t-\tau)))i_{in}(\tau)\dd{\tau}+e^{-\omega_0\zeta t}\qty(\qty(\frac{v(0^-)}{R}+i_L(0^-))\cos\qty(\omega_0\sqrt{1-\zeta^2}t)+\qty(\frac{v(0^-)}{2R}\frac{1-2\zeta^2}{\zeta\sqrt{1-\zeta^2}}-i_L(0^-)\frac{\zeta}{\sqrt{1-\zeta^2}})\sin\qty(\omega_0\sqrt{1-\zeta^2}t))\]
 \eit
 Total response (Laplace domain):
 \[\ba
-V&=\frac{I_{in}RLs+v(0^+)RLCs-i_L(0^+)RL}{RLCs^2+Ls+R}\\
-&=\frac{2I_{in}R\omega_0\zeta s+v(0^+)s-2i_L(0^+)R\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
+V&=\frac{I_{in}RLs+v(0^-)RLCs-i_L(0^-)RL}{RLCs^2+Ls+R}\\
+&=\frac{2I_{in}R\omega_0\zeta s+v(0^-)s-2i_L(0^-)R\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
 \[\ba
-I_R&=\frac{I_{in}Ls+v(0^+)LCs-i_L(0^+)L}{RLCs^2+Ls+R}\\
-&=\frac{2I_{in}\omega_0\zeta s+\frac{v(0^+)s}{R}-2i_L(0^+)\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
+I_R&=\frac{I_{in}Ls+v(0^-)LCs-i_L(0^-)L}{RLCs^2+Ls+R}\\
+&=\frac{2I_{in}\omega_0\zeta s+\frac{v(0^-)s}{R}-2i_L(0^-)\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
 \[\ba
-I_L&=\frac{I_{in}R+i_L(0^+)RLCs+v(0^+)RC+i_L(0^+)L}{RLCs^2+Ls+R}\\
-&=\frac{I_{in}\omega_0^{\pht{0}2}+i_L(0^+)s+\frac{v(0^+)\omega_0}{2R\zeta}+2i_L(0^+)\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}\\
+I_L&=\frac{I_{in}R+i_L(0^-)RLCs+v(0^-)RC+i_L(0^-)L}{RLCs^2+Ls+R}\\
+&=\frac{I_{in}\omega_0^{\pht{0}2}+i_L(0^-)s+\frac{v(0^-)\omega_0}{2R\zeta}+2i_L(0^-)\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}\\
 \ea\]
 \[\ba
-I_C&=\frac{I_{in}RLCs^2-\qty(v(0^+)+i_L(0^+)R)LCs-v(0^+)RC}{RLCs^2+Ls+R}\\
-&=\frac{I_{in}s^2-\qty(\frac{v(0^+)}{R}+i_L(0^+))s-\frac{v(0^+)\omega_0}{2R\zeta}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
+I_C&=\frac{I_{in}RLCs^2-\qty(v(0^-)+i_L(0^-)R)LCs-v(0^-)RC}{RLCs^2+Ls+R}\\
+&=\frac{I_{in}s^2-\qty(\frac{v(0^-)}{R}+i_L(0^-))s-\frac{v(0^-)\omega_0}{2R\zeta}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
 Impulse response:
 \bit
@@ -2031,19 +2077,19 @@ An inverting integrator consists of an op amp where input voltage $v_i$ is conne
 
 Time domain:
 \[i_i=\frac{v_i}{R_i}=i_f=-C_f\dv{v_o}{t},\]
-\[v_o=v_o(0^+)-\int_0^t\frac{v_i(\tau)}{R_iC_f}\dd{\tau}.\]
+\[v_o=v_o(0^-)-\int_0^t\frac{v_i(\tau)}{R_iC_f}\dd{\tau}.\]
 Laplace domain:
-\[I_i=\frac{V_i}{R_i}=I_f=-C_fsV_o+C_fv_o(0^+),\]
-\[V_o=\frac{v_o(0^+)}{s}-\frac{V_i}{R_iC_fs}.\]
+\[I_i=\frac{V_i}{R_i}=I_f=-C_fsV_o+C_fv_o(0^-),\]
+\[V_o=\frac{v_o(0^-)}{s}-\frac{V_i}{R_iC_fs}.\]
 \sssc{Inverting differentiator}
 An inverting differentiator consists of an op amp where input voltage $v_i$ is connected to $v_-$ through an input capacitor $C_i$, $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through a feedback resistor $R_f$.
 
 Time domain:
 \[i_i=C_i\dv{v_i}{t}=i_f=\frac{-v_o}{R_f},\]
-\[v_o=R_fC_i\qty(v_i(0^+)-\int_0^tv_i(\tau)\dd{\tau}).\]
+\[v_o=R_fC_i\qty(v_i(0^-)-\int_0^tv_i(\tau)\dd{\tau}).\]
 Laplace domain:
-\[I_i=C_isV_i-C_iv_i(0^+)=I_f=\frac{-V_o}{R_f},\]
-\[V_o=R_fC_i\qty(v_i(0^+)-sV_i).\]
+\[I_i=C_isV_i-C_iv_i(0^-)=I_f=\frac{-V_o}{R_f},\]
+\[V_o=R_fC_i\qty(v_i(0^-)-sV_i).\]
 \sssc{Active filter}
 Given a (passive or active) filter $v_f$ of an input $v_s$ and an inverting amplifier, noninverting amplifier, or unit gain buffer enforcing $v_o=Kv_i$, by connecting the ground and $v_i$ of the amplifier to the two terminals of the $v_f$, the two terminals ground and $v_o$ become an active filter of $v_s$ enforcing $v_o=Kv_f$.
 

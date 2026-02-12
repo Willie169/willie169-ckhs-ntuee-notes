@@ -1,0 +1,332 @@
+\documentclass[a4paper,12pt]{article}
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{3}
+\input{/usr/share/latex-toolkit/template.tex}
+\begin{document}
+\title{Integral Transform}
+\author{沈威宇}
+\date{\temtoday}
+\titletocdoc
+\sct{Integral Transform}
+\ssc{Integral Transform (積分變換)}
+PLACEHOLDER
+\ssc{(Unilateral or One-sided) Laplace transform (（單邊）拉普拉斯變換)}
+\sssc{Introduction}
+The (unilateral or one-sided) Laplace transform is an integral transform that converts a function of a real variable $t$, called time domain, to a complex function of a complex variable $s$, called (complex) frequency domain, (complex) frequency plane, $s$-domain, $s$-plane, or Laplace domain. The functions are often denoted in lowercase for the time-domain and uppercase for the frequency-domain.
+\sssc{Definition as Lebesgue integral}
+For any set $S$, for any complex-valued functions $g_j(t)$ defined on $D_j\superseteq\mathbb{R}_{\geq 0}$, for any indexed family $A_j\colon I_j\to\mathcal{A}_j\subseteq D_j;\;i\mapsto A_{j_i}$ with $I_j=J_j\cap\bbN$ for some interval $J_j$, the Laplace transform of the distribution (often called function)
+\[f(t)=\sum_{j\in S}g_j(t)\sum_{i\in I_j}\delta(A_{j_i}),\]
+denoted as $\mathcal{L}\qty\{f(t)\}(s)$ or $F(s)$, is defined as
+\[\mathcal{L}\qty\{f(t)\}(s)=F(s)=\int_0^{\infty}f(t)e^{-st}\dd{t},\]
+with integrals involving Dirac detla functions defined via Dirac measures.
+
+The convergence of a Laplace transform at a value of $s$ is defined as the existence of such Lebesgue integral.
+\sssc{Definition as improper Riemann–Stieltjes integral}
+For any set $S$, for any complex-valued functions $g_j(t)$ defined on $D_j\superseteq\mathbb{R}_{\geq 0}$, for any indexed family $A_j\colon I_j\to\mathcal{A}_j\subseteq D_j;\;i\mapsto A_{j_i}$ with $I_j=J_j\cap\bbN$ for some interval $J_j$, the Laplace transform of the distribution (often called function)
+\[f(t)=\sum_{j\in S}g_j(t)\sum_{i\in I_j}\delta(A_{j_i}),\]
+denoted as $\mathcal{L}\qty\{f(t)\}(s)$ or $F(s)$, is defined, with $\mathcal{f}(t)$, typically denoted simply as $f(t)$, defined as any function such that
+\bit
+\item its domain is a super set of an interval $[a,\infty)$ for some $a\in\bbR_{<0}$,
+\item $\mathcal{f}(t)=f(t)$ for all $t\in\bbR_{\geq 0}$, and
+\item it's continuous on some interval $[a,0)$ for some $a\in\bbR_{<0}$,
+\eit
+as,
+\[\mathcal{L}\qty\{f(t)\}(s)=F(s)=\lim_{\varepsilon\to 0^+}\int_{-\varepsilon}^{\infty}\mathcal{f}(t)e^{-st}\dd{t},\]
+with integrals involving Dirac detla functions defined via improper Riemann–Stieltjes integral, where $\lim_{\varepsilon\to 0^+}\int_{-\varepsilon}^{\infty}$ is typically denoted as $\int_{0^-}^{\infty}$.
+
+The convergence of a Laplace transform at a value of $s$ is defined as the absolute convergence of such improper Riemann–Stieltjes integral.
+\sssc{Definition as distribution}
+PLACEHOLDER
+
+PLACEHOLDER bilateral move here, below all add for it too
+\sssc{Region of convergence (ROC)}
+The set of values of $s$ for which $F(s)$ converges, called region of convergence (ROC), is a class of either $\Re(s) > a$ or $\Re(s) \geq a$ for some extended real constant $a$, called abscissa of convergence.
+\sssc{Laplace transformability}
+A such $f(t)$ is called Laplace-transformable iff there exists some real number $a$ such that $F(a)$ converges.
+\sssc{Laplace transformability theorem}
+A complex-valued function $f(t)$ defined on $[0,\infty)$ is Laplace-transformable iff it is piecewise continuous on all closed subintervals of $[0,\infty)$ and of exponential order.
+\begin{proof}
+Assume that a $f(t)$ is piecewise continuous on $[0,\infty)$ and there exists $M>0$ and $T>0$ such that:
+\[|f(t)|\leq Me^{\alpha t}\quad \forall t>T.\]
+
+For $s>\alpha$, since $f(t)$ is piecewise continuous on $[0,\infty)$, there exist a locally finite indexed family $A=\{[a_i,b_i]\mid i\in I\}$ such that for each $i\in I\setminus\{j\}$, the integral
+\[\int_{a_i}^{b_i} |f(t)| e^{-st}\dd{t}\]
+exists and is finite.
+
+Split the integral:
+\[\int_0^{\infty}f(t)e^{-st}\dd{t}=\int_0^Tf(t)e^{-st}\dd{t}+\int_T^{\infty}f(t)e^{-st}\dd{t}.\]
+For the first integral, by local finiteness, there exists a finite cover of $[0,T]$ that is a subset of $A$. The sum over finitely many finite integral is finite.
+
+For the second integral, since $|f(t)| \le M e^{\alpha t}$, we have
+\[\int_T^\infty |f(t)| e^{-st}\dd{t}\le \int_T^\infty M e^{\alpha t} e^{-st}\dd{t} = M \int_T^\infty e^{-(s-\alpha)t}\dd{t},\]
+which converges since $\Re(s)>\alpha$.
+\end{proof}
+For any complex function $g(t)$ defined on $D\superseteq\mathbb{R}_{\geq 0}$, for any indexed family $A\colon I\to\mathcal{A}\subseteq D;\;i\mapsto A_i$ with $I=J\cap\bbN$ for some interval $J\ni 0$, the function
+\[f(t)=g(t)\sum_{i\in I}\delta(A_i)\]
+is Laplace-transformable iff $g(t)$ is Laplace-transformable and that $\sum_{a\in\mathcal{A}}a$ converges.
+
+If $f(t)$ and $g(t)$ are Laplace-transformable, then $f(t)+g(t)$ is Laplace-transformable.
+\sssc{Unit impulses and abscissa of convergence theorem}
+For any indexed family $A\colon I\to\mathcal{A}\subseteq D;\;i\mapsto A_i$ with $I=J\cap\bbN$ for some interval $J\ni 1$ and $A_i\leq A_{i+1}$ for all $i\in I\land (i+1)\in I$,
+\[\mathcal{L}\qty\{\sum_{i\in I}\delta(t-A_i)\}=\sum_{i\in I}e^{-sA_i},\quad \mathcal{A}\subseteq\bbR_{\geq 0}.\]
+The ROC is $\sum_{i\in I}e^{-\Re(s)A_i}<\infty$, which, for $|I|<\aleph_0$, is $\bbC$, for $\abs{\{i\in I\mid A_i=0\}}=\aleph_0$, is $\varnothing$, and otherwise, with
+\[N(x)\coloneq\abs{\{i\in I\mid A_i\leq x\}},\]
+is,
+\[\int_0^{\infty}e^{-\Re(s)x}\dd{N(x)}<\infty,\]
+that is,
+\[\Re(s)>\limsup_{x\to\infty}\frac{\ln(N(x))}{x},\]
+that is,
+\bit
+\item for $\limsup_{i\to\infty}\frac{\ln(i)}{A_i}=\infty$, $\varnothing$, and
+\item for $L\coloneq\limsup_{i\to\infty}\frac{\ln(i)}{A_i}\in\bbR$, $\Re(s)>L$.
+\eit
+The ROC of
+\[\mathcal{L}\qty\{f(t)\sum_{i\in I}\delta(t-A_i)\},\]
+where $f(t)$ is a complex Laplace-transformable function, is $\sum_{i\in I}\abs{f\qty(A_i)}e^{-\Re(s)A_i}<\infty$, which, for $|I|<\aleph_0$, is $\bbC$, for $\abs{\{i\in I\mid A_i=0\}}=\aleph_0\land f(0)\neq 0$, is $\varnothing$, and otherwise, with
+\[N(x)\coloneq\abs{\{i\in I\mid A_i\leq x\}},\]
+is,
+\[\int_0^{\infty}f(x)e^{-\Re(s)x}\dd{N(x)}<\infty,\]
+that is,
+\[\Re(s)>\limsup_{x\to\infty}\frac{\ln(f(x)N(x))}{x},\]
+that is,
+\bit
+\item for $\limsup_{i\to\infty}\frac{\ln(f\qty(A_i)i)}{A_i}=\infty$, $\varnothing$,
+\item for $L\coloneq\limsup_{i\to\infty}\frac{\ln(f\qty(A_i)i)}{A_i}\in\bbR$, $\Re(s)>L$, and
+\item for $\limsup_{i\to\infty}\frac{\ln(f\qty(A_i)i)}{A_i}=\infty$, $\bbC$.
+\eit
+\sssc{Linearity}
+\[\mathcal{L}\qty\{af(t)+bg(t)\}=a\mathcal{L}\qty\{f(t)\}+b\mathcal{L}\qty\{g(t)\},\quad a,b\in\bbC.\]
+The ROC is the intersection of the ROC of $\mathcal{L}\qty\{f(t)\}$ and $\mathcal{L}\qty\{g(t)\}$.
+\sssc{Exponential function}
+\[\mathcal{L}\qty\{e^{at}\}(s) = \frac{1}{s-a},\quad a\in\bbC.\]
+\sssc{First shifting theorem or Frequency shift}
+\[\mathcal{L}\qty\{e^{at} f(t)\}(s) = F(s-a),\quad a\in\bbC.\]
+The ROC shifts right by $\Re(a)$.
+\begin{proof}
+\[\mathcal{L}\qty\{e^{at} f(t)\}(s)=\int_0^{\infty}e^{-(s-a)t}f(t)=F(s-a)\]
+\end{proof}
+\sssc{Unit step function}
+\[\mathcal{L}\qty\{u(t-a)\}(s) = \frac{e^{-as}}{s},\quad a\in\bbR_{\geq 0}.\]
+\sssc{Second shifting theorem, Time delay, or Time shift}
+\[\mathcal{L}\qty\{f(t-a)u(t-a)\}=e^{-as}F(s), \quad a\in\bbR_{\geq 0}.\]
+The ROC doesn't change.
+\begin{proof}
+\[\ba
+\mathcal{L}\qty\{f(t-a)u(t-a)\}(s)&=\int_a^{\infty} e^{-st}f(t-a)\dd{t}\\
+&=\int_0^{\infty}e^{-s\tau}e^{-as}f(\tau)\dd{\tau}\\
+&=e^{-as}F(s)
+\ea\]
+\end{proof}
+\sssc{Differentiation in Time Domain}
+\[\mathcal{L}\qty\{f'(t)\}(s) = sF(s) - f(0^-).\]
+\[\mathcal{L}\qty\{f^{(n)}(t)\}(s) = s^n F(s) - \sum_{i=0}^{n-1}s^{n-1-i}f^{(i)}(0^-).\]
+\begin{proof}
+\[u = e^{-st}, \quad \dd{u} = -s e^{-st} \dd{t}.\]
+\[\dd{v} = f'(t)\dd{t}, \quad v = f(t).\]
+\[\ba
+\mathcal{L}\qty\{f'(t)\}(s)&=\int_0^\infty e^{-st} f'(t)\dd{t}\\
+&=\qty(e^{-st}f(t))\big\vert_0^\infty+\int_0^\infty f(t)se^{-st}\dd{t}\\
+&=s\mathcal{L}\qty\{f(t)\}(s)-f(0^-)
+\ea\]
+Nota that $0^-$ is required instead of $0$ in the cases where $f'(t)$ contains $\delta(0)$.
+\end{proof}
+\sssc{Integration in Time Domain}
+\[\mathcal{L}\left\{\int_0^t f(\tau)\dd{\tau}\right\}(s) = \frac{1}{s} F(s).\]
+\begin{proof}
+\bma
+\mathcal{L}\qty\{\int_0^t f(\tau)\dd{\tau}\}(s) &= \int_0^{\infty} e^{-st} \int_0^t f(\tau)\dd{\tau}\dd{t}\\
+&=\qty(-\frac{1}{s}e^{-st}\int_0^t f(\tau)\dd{\tau})\big\vert_0^\infty+\int_0^{\infty} \frac{1}{s}e^{-st}f(t)\dd{t}\\
+&=\frac{1}{s}\int_0^{\infty} e^{-st}f(t)\dd{t}.
+\eam
+\end{proof}
+\sssc{Differentiation in Frequency Domain}
+\[\mathcal{L}\qty\{t f(t)\}(s) = -\dv{}{s} F(s).\]
+\[\mathcal{L}\qty\{t^n f(t)\}(s) = (-1)^n \dv[n]{}{s} F(s).\]
+\begin{proof}
+By Leibniz integral rule,
+\bma
+-\dv{}{s} F(s)&=-\dv{}{s}\int_0^{\infty} e^{-st} f(t)\,\mathrm{d}t\\
+&=-\int_0^{\infty} \pdv{}{s}\qty(e^{-st} f(t))\,\mathrm{d}t\\
+&=-\int_0^{\infty} -te^{-st} f(t)\,\mathrm{d}t\\
+&=\int_0^{\infty} te^{-st} f(t)\,\mathrm{d}t\\
+&=\mathcal{L}\qty\{t f(t)\}(s)
+\eam
+\end{proof}
+\sssc{Scaling in Time Domain}
+\[\mathcal{L}\qty\{f(at)\}(s) = \frac{1}{a} F\left(\frac{s}{a}\right), \quad a>0.\]
+\sssc{Convolution (卷積)}
+The convolution of two functions $f(t)$ and $g(t)$ defined on $\bbR_{\geq 0}$ is a function denoted as $(f * g)(t)$ and defined as
+\[(f * g)(t) = \int_0^t f(\tau)g(t-\tau)\dd{\tau}.\]
+The convolution of two functions $f(t)$ and $g(t)$ defined on $\bbR$ is a function denoted as $(f * g)(t)$ and defined as
+\[(f * g)(t) = \int_{-\infty}^{\infty} f(\tau)g(t-\tau)\dd{\tau}.\]
+PLACEHOLDER
+\sssc{Convolution Theorem}
+If $h(t) = (f * g)(t)$, then
+\[\mathcal{L}\qty\{h(t)\}(s) = F(s)G(s).\]
+\begin{proof}
+\[\mathcal{L}\qty\{h(t)\}(s)=\int_0^{\infty} e^{-st} \qty(\int_0^t f(\tau)g(t-\tau)\dd{\tau})\dd{t}\]
+By Fubini's theorem,
+\[\mathcal{L}\qty\{h(t)\}(s)=\int_0^\infty\int_\tau^\infty e^{-st} f(\tau)g(t-\tau)\dd{t}\dd{\tau}\]
+Let $u=t-\tau$. $\dd{t}=\dd{u}$.
+\[\begin{aligned}
+\mathcal{L}\qty\{h(t)\}(s)&=\int_0^\infty f(\tau)\int_0^\infty e^{-s(u+\tau)} g(u)\dd{u}\dd{\tau}\\
+&=\int_0^\infty f(\tau)e^{-s\tau}\int_0^\infty e^{-su} g(u)\dd{u}\dd{\tau}\\
+&=F(s)G(s)
+\end{aligned}\]
+\end{proof}
+Note that $\int_0^tf(\tau)\dd{\tau}=(f*u)(t)$.
+PLACEHOLDER bilateral
+\sssc{Initial Value Theorem}
+If $f(t)$ and $f'(t)$ are Laplace-transformable and $f(t)$ contains no unit impulses at origin:
+PLACEHOLDER: condition
+\[\lim_{t\to 0^+}f(t)=\lim_{s\to\infty}sF(s).\]
+\begin{proof}
+\[sF(s)=\int_0^\infty sf(t)e^{-st}\dd{t}.\]
+Let $u=st$, $\dd{t}=\frac{\dd{u}}{s}$.
+\[sF(s)=\int_0^\infty f\qty(\frac{u}{s})e^{-u}\dd{u}.\]
+\[\lim_{s\to\infty}sF(s)=\int_0^\infty f\qty(\frac{u}{s})e^{-u}\dd{u}.\]
+We define a net of functions $\langle f_s(u)=f\qty(\frac{u}{s})\rangle_{s\in\mathbb{R}_{>s_0}}$, where $s_0$ is such that $F(s)$ converges for all $\Re(s)>s_0$.
+
+For every fixed $u\in\mathbb{R}_{>0}$, $\lim_{s\to\infty}\frac{u}{s}\to 0^+$, so $f_s(u)$ pointwise converges to $f(0^+)$.
+
+For dominated convergence theorem, we require an integrable function $g(u)$ such that
+\[\abs{f\qty(\frac{u}{s})e^{-u}}\le g(u),\quad\forall s>0.\]
+Since $f(t)$ is Laplace-transformable, it is of exponential order, that is, there exists $\alpha>0$, $M>0$, and $T>0$ such that:
+\[|f(t)|\le Me^{\alpha t}\quad\forall t>T.\]
+\[Me^{\alpha\frac{u}{s}}e^{-u}=Me^{-u\qty(1-\frac{\alpha}{s})}\le Me^{-\frac{u}{2}},\quad\forall s>2\alpha.\]
+By dominated convergence theorem, we obtain:
+\[\lim_{s\to\infty}sF(s)=\lim_{n\to\infty}\int_0^\infty f(0^+)e^{-u}\dd{u}=f(0^+)\int_0^\infty e^{-u}\dd{u}=f(0^+).\]
+\end{proof}
+\sssc{Final Value Theorem (FVT)}
+PLACEHOLDER
+\sssc{Cosine and sine functions}
+\[\mathcal{L}\{\cos(\omega t)\}=\frac{s}{s^2+\omega^2}.\]
+\begin{proof}
+\[\ba
+\mathcal{L}\{\cos(\omega t)\}&=\frac{1}{2}\qty(\mathcal{L}\{e^{i\omega t}\}+\mathcal{L}\{e^{-i\omega t}\})\\
+&=\frac{1}{2}\qty(\frac{1}{s-i\omega}+\frac{1}{s+i\omega})\\
+&=\frac{1}{2}\frac{2s}{s^2+\omega^2}\\
+&=\frac{s}{s^2+\omega^2}
+\ea\]
+\end{proof}
+\[\mathcal{L}\{\sin(\omega t)\}=\frac{\omega}{s^2+\omega^2}.\]
+\begin{proof}
+\[\ba
+\mathcal{L}\{\sin(\omega t)\}&=\frac{1}{2i}\qty(\mathcal{L}\{e^{i\omega t}\}-\mathcal{L}\{e^{-i\omega t}\})\\
+&=\frac{1}{2i}\qty(\frac{1}{s-i\omega}-\frac{1}{s+i\omega})\\
+&=\frac{1}{2i}\frac{2i\omega}{s^2+\omega^2}\\
+&=\frac{\omega}{s^2+\omega^2}
+\ea\]
+\end{proof}
+\[\mathcal{L}\{\cos(\omega t-\varphi)\}=\frac{\cos\varphi s+\sin\varphi\omega}{s^2+\omega^2}.\]
+\begin{proof}
+\[\ba
+\mathcal{L}\{\cos(\omega t-\varphi)\}&=\mathcal{L}\{\cos\varphi\cos(\omega t)+\sin\varphi\sin(\omega t)\}\\
+&=\frac{\cos\varphi s+\sin\varphi\omega}{s^2+\omega^2}
+\ea\]
+\end{proof}
+\[\mathcal{L}\{\sin(\omega t-\varphi)\}=\frac{\cos\varphi\omega-\sin\varphi s}{s^2+\omega^2}.\]
+\begin{proof}
+\[\ba
+\mathcal{L}\{\sin(\omega t-\varphi)\}&=\mathcal{L}\{\cos\varphi\sin(\omega t)-\sin\varphi\cos(\omega t)\}\\
+&=\frac{\cos\varphi\omega-\sin\varphi s}{s^2+\omega^2}
+\ea\]
+\end{proof}
+\sssc{Hyperbolic cosine and sine functions}
+\[\mathcal{L}\{\cosh(\omega t)\}=\frac{s}{s^2-\omega^2}.\]
+\begin{proof}
+\[\ba
+\mathcal{L}\{\cosh(\omega t)\}&=\frac{1}{2}\qty(\mathcal{L}\{e^{\omega t}\}+\mathcal{L}\{e^{-\omega t}\})\\
+&=\frac{1}{2}\qty(\frac{1}{s-\omega}+\frac{1}{s+\omega})\\
+&=\frac{1}{2}\frac{2s}{s^2-\omega^2}\\
+&=\frac{s}{s^2-\omega^2}
+\ea\]
+\end{proof}
+\[\mathcal{L}\{\sinh(\omega t)\}=\frac{\omega}{s^2-\omega^2}.\]
+\begin{proof}
+\[\ba
+\mathcal{L}\{\sinh(\omega t)\}&=\frac{1}{2}\qty(\mathcal{L}\{e^{\omega t}\}-\mathcal{L}\{e^{-\omega t}\})\\
+&=\frac{1}{2}\qty(\frac{1}{s-\omega}-\frac{1}{s+\omega})\\
+&=\frac{1}{2}\frac{2\omega}{s^2-\omega^2}\\
+&=\frac{\omega}{s^2-\omega^2}
+\ea\]
+\end{proof}
+\[\mathcal{L}\{\cosh(\omega t-\varphi)\}=\frac{\cosh\varphi s-\sinh\varphi\omega}{s^2-\omega^2}.\]
+\begin{proof}
+\[\ba
+\mathcal{L}\{\cosh(\omega t-\varphi)\}&=\mathcal{L}\{\cosh\varphi\cosh(\omega t)-\sinh\varphi\sinh(\omega t)\}\\
+&=\frac{\cosh\varphi s-\sinh\varphi\omega}{s^2-\omega^2}
+\ea\]
+\end{proof}
+\[\mathcal{L}\{\sinh(\omega t-\varphi)\}=\frac{\cosh\varphi\omega-\sinh\varphi s}{s^2-\omega^2}.\]
+\begin{proof}
+\[\ba
+\mathcal{L}\{\sinh(\omega t-\varphi)\}&=\mathcal{L}\{\cosh\varphi\sinh(\omega t)-\sinh\varphi\cosh(\omega t)\}\\
+&=\frac{\cosh\varphi\omega-\sinh\varphi s}{s^2-\omega^2}
+\ea\]
+\end{proof}
+\sssc{Power function}
+\[\mathcal{L}\{t^q\}=\frac{q!}{s^{q+1}},\quad q\in\bbN_0.\]
+\[\mathcal{L}\{t^q\}=\frac{\Gamma(q+1)}{s^{q+1}},\quad\Re(q)>-1.\]
+The ROC is $\Re(s)>0$.
+\begin{proof}
+Let $u=st,\quad\dd{u}=s\dd{t}$.
+\[\ba
+\mathcal{L}\{t^q\}&=\frac{1}{s}\int_0^{\infty}e^{-u}\qty(\frac{u}{s})^q\dd{u}\\
+&=\frac{1}{s^{q+1}}\int_0^{\infty}u^qe^{-u}\dd{u}\\
+&=\frac{\Gamma(q+1)}{s^{q+1}}
+\ea\]
+\end{proof}
+PLACEHOLDER: pole of order $\Re(q+1)$ at $s=0$. branches for $q\notin\bbZ$.
+\ssc{Mellin's inverse formula, Bromwich integral, or Fourier–Mellin integral of Inverse Laplace transform (反拉普拉斯變換)}
+PLACEHOLDER: mb move up
+The inverse Laplace transform of a complex function $F(s)$, denoted as $\mathcal{L}^{-1}\{F(s)\}(t)$ or $f(t)$, is a defined as
+\[\mathcal{L}^{-1}\{F(s)\}(t)=f(t)=\frac{1}{2\pi i}\lim_{T\to\infty}\int_{\gamma-iT}^{\gamma+iT}F(s)e^{st}\dd{s},\]
+called Mellin's inverse formula, Bromwich integral, or Fourier–Mellin integral, where $\gamma$ is any real number such that it is greater than the real part of all singularities of $F$ and that $F$ is bounded on the line $s=\gamma$, and is such that
+\[\mathcal{L}\qty\{f(t)\}(s) = F(s).\]
+\begin{proof}
+We want to show that for all Laplace-transformable complex function $f$ without removable discontinuity and with $f(t)=0$ for all $\Re(t)<0$:
+\[f(t)=\frac{1}{2\pi i}\lim_{T\to\infty}\int_{\gamma-iT}^{\gamma+iT}e^{st}\int_0^{\infty}f(u)e^{-su}\dd{u}\dd{s}.\]
+By Fubini's theorem:
+\[\frac{1}{2\pi i}\lim_{T\to\infty}\int_{\gamma-iT}^{\gamma+iT}e^{st}\int_0^{\infty}f(u)e^{-su}\dd{u}\dd{s}=\lim_{T\to\infty}\int_0^{\infty}f(u)\frac{1}{2\pi i}\int_{\gamma-iT}^{\gamma+iT}e^{s(t-u)}\dd{s}\dd{u}\]
+Let
+\[K_T(t-u)=\frac{1}{2\pi i}\int_{\gamma-iT}^{\gamma+iT}e^{s(t-u)}\dd{s}.\]
+Let
+\[s=\gamma+i\omega.\]
+\[K_T(\tau)=\frac{e^{\gamma\tau}}{2\pi}\int_{-T}^Te^{i\omega\tau}\dd{\omega}=e^{\gamma\tau}\frac{\sin(T\tau)}{\pi\tau}.\]
+Let
+\[g(u)=f(u)e^{-\gamma u}.\]
+Let
+\[v=t-u.\]
+\[\ba
+\lim_{T\to\infty}\int_0^{\infty}f(u)\frac{1}{2\pi i}\int_{\gamma-iT}^{\gamma+iT}e^{s(t-u)}\dd{s}\dd{u}&=\lim_{T\to\infty}\int_0^{\infty}f(u)e^{\gamma(t-u)}\frac{\sin(T(t-u))}{\pi(t-u)}\dd{u}\\
+&=e^{\gamma t}\lim_{T\to\infty}\int_0^{\infty}g(u)\frac{\sin(T(t-u))}{\pi(t-u)}\dd{u}\\
+&=e^{\gamma t}\lim_{T\to\infty}\int_0^{\infty}g(t-v)\frac{\sin(Tv)}{\pi v}\dd{v}\\
+&=e^{\gamma t}g(t)\\
+&=f(t)
+\ea\]
+\end{proof}
+\ssc{(Bilateral or Two-sided) Laplace Transform (（雙邊）拉普拉斯變換)}
+PLACEHOLDER: move up and theorems add both uni and bi versions.
+
+The (bilateral or two-sided) Laplace transform is an integral transform that converts a function of a real variable (usually $t$, in the time domain) to a function of a complex variable (usually $s$, in the complex-valued angular frequency domain, also known as $s$-domain or $s$-plane). The functions are often denoted in lowercase for the time-domain representation and uppercase for the frequency-domain.
+
+The Laplace transform of a real function $f(t)$, denoted as $\mathcal{B}\{f(t)\}(s)$, is defined by the improper integral
+\[\mathcal{B}\{f(t)\}(s) = \int_{-\infty}^{\infty} e^{-st} f(t)\,\mathrm{d}t.\]
+\ssc{Fourier Transform (FT) (傅立葉變換)}
+PLACEHOLDER: as Laplace tranform special case
+\sssc{Fourier Transform (FT)}
+Fourier transform is an integral transform that converts a function of a real variable (usually $t$, in the time domain) to a function of another real variable (usually $\omega$, in the frequency or Fourier domain). The functions are often denoted in lowercase for the time-domain representation and uppercase for the frequency-domain.
+
+The Fourier transform, denoted as $\mathcal{F}\{f(t)\}(\omega)$ or $F(\omega)$, is defined by the improper integral
+\[\mathcal{F}\{f(t)\}(\omega) = F(\omega) = \int_{-\infty}^{\infty}e^{-i\omega t}f(t)\dd{t}.\]
+\sssc{Inverse Fourier Transform (反傅立葉變換)}
+The inverse Fourier transform of a complex function $F(s)$, denoted as $\mathcal{F}^{-1}\{F(s)\}(t)$ or $f(t)$, is defined as a real function such that
+\[\mathcal{F}\{f(t)\}(s) = F(s),\]
+where $\mathcal {F}$ denotes the Fourier transform.
+
+The inverse Laplace transform of a complex function $F(s)$ is given by the line integral:
+\[f(t) = \frac{1}{2\pi}\int_{-\infty}^{\infty} F(\omega) e^{i\omega t}\dd{\omega} .\]
+\ssc{Dirichlet kernel}
+PLACEHOLDER
+\end{document}
