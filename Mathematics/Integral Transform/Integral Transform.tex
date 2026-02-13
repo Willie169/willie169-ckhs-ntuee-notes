@@ -8,43 +8,38 @@
 \date{\temtoday}
 \titletocdoc
 \sct{Integral Transform}
-\ssc{Integral Transform (積分變換)}
-PLACEHOLDER
-\ssc{(Unilateral or One-sided) Laplace transform (（單邊）拉普拉斯變換)}
+\ssc{Laplace Transform (拉普拉斯變換)}
 \sssc{Introduction}
-The (unilateral or one-sided) Laplace transform is an integral transform that converts a function of a real variable $t$, called time domain, to a complex function of a complex variable $s$, called (complex) frequency domain, (complex) frequency plane, $s$-domain, $s$-plane, or Laplace domain. The functions are often denoted in lowercase for the time-domain and uppercase for the frequency-domain.
-\sssc{Definition as Lebesgue integral}
-For any set $S$, for any complex-valued functions $g_j(t)$ defined on $D_j\superseteq\mathbb{R}_{\geq 0}$, for any indexed family $A_j\colon I_j\to\mathcal{A}_j\subseteq D_j;\;i\mapsto A_{j_i}$ with $I_j=J_j\cap\bbN$ for some interval $J_j$, the Laplace transform of the distribution (often called function)
+The one-sided or unilateral Laplace transform and two-sided or bilateral Laplace transform, where Laplace tranform may refer to either of them or both of them depending on context and often refer to the former when not clear, are two integral transform that convert a function, often denoted in lowercase such as $f$ or $f(t)$, of a real variable $t$, called time domain, to a complex function, often denoted in uppercase such as $F$ or $F(s)$, as $\mathcal{L}\{f\}$, $\mathcal{L}\{f(t)\}$, $\mathcal{L}\{f\}(s)$, or $\mathcal{L}\{f(t)\}(s)$ for both one-sided and two-sided, or $\mathcal{B}\{f\}$, $\mathcal{B}\{f(t)\}$, $\mathcal{B}\{f\}(s)$, or $\mathcal{B}\{f(t)\}(s)$ for two-sided, of a complex variable $s$, called (complex) frequency domain, (complex) frequency plane, $s$-domain, $s$-plane, Laplace domain, or Laplace plane.
+\sssc{Definition}
+Given the distribution, often called function, $f$,
 \[f(t)=\sum_{j\in S}g_j(t)\sum_{i\in I_j}\delta(A_{j_i}),\]
-denoted as $\mathcal{L}\qty\{f(t)\}(s)$ or $F(s)$, is defined as
-\[\mathcal{L}\qty\{f(t)\}(s)=F(s)=\int_0^{\infty}f(t)e^{-st}\dd{t},\]
-with integrals involving Dirac detla functions defined via Dirac measures.
+for any set $S$, for any complex-valued functions $g_j(t)$ defined on $D_j\superseteq\mathbb{R}_{\geq 0}$ for one-sided Laplace tranform and $D_j=\mathbb{R}$ for two-sided Laplace tranform, for any indexed family $A_j\colon I_j\to\mathcal{A}_j\subseteq D_j;\;i\mapsto A_{j_i}$ with $I_j=J_j\cap\bbN$ for some interval $J_j$.
 
-The convergence of a Laplace transform at a value of $s$ is defined as the existence of such Lebesgue integral.
-\sssc{Definition as improper Riemann–Stieltjes integral}
-For any set $S$, for any complex-valued functions $g_j(t)$ defined on $D_j\superseteq\mathbb{R}_{\geq 0}$, for any indexed family $A_j\colon I_j\to\mathcal{A}_j\subseteq D_j;\;i\mapsto A_{j_i}$ with $I_j=J_j\cap\bbN$ for some interval $J_j$, the Laplace transform of the distribution (often called function)
-\[f(t)=\sum_{j\in S}g_j(t)\sum_{i\in I_j}\delta(A_{j_i}),\]
-denoted as $\mathcal{L}\qty\{f(t)\}(s)$ or $F(s)$, is defined, with $\mathcal{f}(t)$, typically denoted simply as $f(t)$, defined as any function such that
+As Lebesgue integrals with integrals involving Dirac detla functions defined via Dirac measures and convergence of a Laplace transform at a value $z$ of $s$ defined as the existence of such Lebesgue integral as $s=z$, the one-sided Laplace transform of it is defined  as
+\[\int_0^{\infty}f(t)e^{-st}\dd{t},\]
+and the two-sided Laplace transform of it is defined as
+\[\int_{-\infty}^{\infty}f(t)e^{-st}\dd{t}.\]
+As improper Riemann–Stieltjes integrals with integrals involving Dirac detla functions defined via Riemann–Stieltjes integrals and convergence of a Laplace transform at a value $z$ of $s$ defined as the absolute convergence of such improper Riemann–Stieltjes integral as $s=z$, the one-sided Laplace transform of it is defined, with $\mathcal{f}(t)$, typically denoted simply as $f(t)$, defined as any function such that
 \bit
 \item its domain is a super set of an interval $[a,\infty)$ for some $a\in\bbR_{<0}$,
 \item $\mathcal{f}(t)=f(t)$ for all $t\in\bbR_{\geq 0}$, and
-\item it's continuous on some interval $[a,0)$ for some $a\in\bbR_{<0}$,
+\item it's continuous on some interval $[b,0)$ for some $b\in\bbR_{<0}$,
 \eit
-as,
-\[\mathcal{L}\qty\{f(t)\}(s)=F(s)=\lim_{\varepsilon\to 0^+}\int_{-\varepsilon}^{\infty}\mathcal{f}(t)e^{-st}\dd{t},\]
-with integrals involving Dirac detla functions defined via improper Riemann–Stieltjes integral, where $\lim_{\varepsilon\to 0^+}\int_{-\varepsilon}^{\infty}$ is typically denoted as $\int_{0^-}^{\infty}$.
-
-The convergence of a Laplace transform at a value of $s$ is defined as the absolute convergence of such improper Riemann–Stieltjes integral.
-\sssc{Definition as distribution}
+as
+\[\lim_{\varepsilon\to 0^+}\int_{-\varepsilon}^{\infty}\mathcal{f}(t)e^{-st}\dd{t},\]
+where $\lim_{\varepsilon\to 0^+}\int_{-\varepsilon}^{\infty}$ is typically denoted as $\int_{0^-}^{\infty}$, and the two-sided Laplace transform of it is defined as
+\[\int_{-\infty}^{\infty}f(t)e^{-st}\dd{t}.\]
+As distribution
 PLACEHOLDER
-
-PLACEHOLDER bilateral move here, below all add for it too
 \sssc{Region of convergence (ROC)}
-The set of values of $s$ for which $F(s)$ converges, called region of convergence (ROC), is a class of either $\Re(s) > a$ or $\Re(s) \geq a$ for some extended real constant $a$, called abscissa of convergence.
-\sssc{Laplace transformability}
-A such $f(t)$ is called Laplace-transformable iff there exists some real number $a$ such that $F(a)$ converges.
+The set of values of $s$ for which $F(s)$ converges is called region of convergence (ROC). A function is called Laplace-transformable iff the ROC of its Laplace transform is nonempty.
+
+For one-sided Laplace tranform, ROC is a class of the form of either $\Re(s) > a$ or $\Re(s) \geq a$ for some extended real constant $a$, called abscissa of convergence.
+
+For two-sided Laplace tranform, ROC is a class of the form of either $\Re(s) > a$ or $\Re(s) \geq a$ and either $\Re(s) <  $ or $\Re(s) \leq b$ for some extended real constants $a$ and $b$, called abscissas of convergence.
 \sssc{Laplace transformability theorem}
-A complex-valued function $f(t)$ defined on $[0,\infty)$ is Laplace-transformable iff it is piecewise continuous on all closed subintervals of $[0,\infty)$ and of exponential order.
+A complex-valued function $f(t)$ defined on $[0,\infty)$ is one-sided Laplace-transformable if it is piecewise continuous on all closed subintervals of $[0,\infty)$ and of exponential order.
 \begin{proof}
 Assume that a $f(t)$ is piecewise continuous on $[0,\infty)$ and there exists $M>0$ and $T>0$ such that:
 \[|f(t)|\leq Me^{\alpha t}\quad \forall t>T.\]
@@ -61,28 +56,24 @@ For the second integral, since $|f(t)| \le M e^{\alpha t}$, we have
 \[\int_T^\infty |f(t)| e^{-st}\dd{t}\le \int_T^\infty M e^{\alpha t} e^{-st}\dd{t} = M \int_T^\infty e^{-(s-\alpha)t}\dd{t},\]
 which converges since $\Re(s)>\alpha$.
 \end{proof}
-For any complex function $g(t)$ defined on $D\superseteq\mathbb{R}_{\geq 0}$, for any indexed family $A\colon I\to\mathcal{A}\subseteq D;\;i\mapsto A_i$ with $I=J\cap\bbN$ for some interval $J\ni 0$, the function
-\[f(t)=g(t)\sum_{i\in I}\delta(A_i)\]
-is Laplace-transformable iff $g(t)$ is Laplace-transformable and that $\sum_{a\in\mathcal{A}}a$ converges.
-
-If $f(t)$ and $g(t)$ are Laplace-transformable, then $f(t)+g(t)$ is Laplace-transformable.
-\sssc{Unit impulses and abscissa of convergence theorem}
-For any indexed family $A\colon I\to\mathcal{A}\subseteq D;\;i\mapsto A_i$ with $I=J\cap\bbN$ for some interval $J\ni 1$ and $A_i\leq A_{i+1}$ for all $i\in I\land (i+1)\in I$,
-\[\mathcal{L}\qty\{\sum_{i\in I}\delta(t-A_i)\}=\sum_{i\in I}e^{-sA_i},\quad \mathcal{A}\subseteq\bbR_{\geq 0}.\]
+A complex-valued function $f(t)$ defined on $\bbR$ is two-sided Laplace-transformable if it is piecewise continuous on all closed intervals and of exponential order and that $f(-t)$ is of exponential order.
+\sssc{Unit impulses abscissa of convergence theorem for one-sided Laplace tranform}
+For any indexed family $A\colon I\to\mathcal{A}\subseteq\bbR_{\geq 0};\;i\mapsto A_i$ with $I=J\cap\bbN$ for some interval $J\ni 1$ and $A_i\leq A_{i+1}$ for all $i\in I\land (i+1)\in I$,
+\[\mathcal{L}\qty\{\sum_{i\in I}\delta(t-A_i)\}=\sum_{i\in I}e^{-sA_i}.\]
 The ROC is $\sum_{i\in I}e^{-\Re(s)A_i}<\infty$, which, for $|I|<\aleph_0$, is $\bbC$, for $\abs{\{i\in I\mid A_i=0\}}=\aleph_0$, is $\varnothing$, and otherwise, with
 \[N(x)\coloneq\abs{\{i\in I\mid A_i\leq x\}},\]
-is,
+is
 \[\int_0^{\infty}e^{-\Re(s)x}\dd{N(x)}<\infty,\]
 that is,
-\[\Re(s)>\limsup_{x\to\infty}\frac{\ln(N(x))}{x},\]
+\[\limsup_{x\to-\infty}\frac{\ln(N(x))}{x}>\Re(s)>\limsup_{x\to\infty}\frac{\ln(N(x))}{x},\]
 that is,
 \bit
 \item for $\limsup_{i\to\infty}\frac{\ln(i)}{A_i}=\infty$, $\varnothing$, and
 \item for $L\coloneq\limsup_{i\to\infty}\frac{\ln(i)}{A_i}\in\bbR$, $\Re(s)>L$.
 \eit
-The ROC of
-\[\mathcal{L}\qty\{f(t)\sum_{i\in I}\delta(t-A_i)\},\]
-where $f(t)$ is a complex Laplace-transformable function, is $\sum_{i\in I}\abs{f\qty(A_i)}e^{-\Re(s)A_i}<\infty$, which, for $|I|<\aleph_0$, is $\bbC$, for $\abs{\{i\in I\mid A_i=0\}}=\aleph_0\land f(0)\neq 0$, is $\varnothing$, and otherwise, with
+For any complex-valued function $f(t)$, the ROC of
+\[\mathcal{L}\qty\{f(t)\sum_{i\in I}\delta(t-A_i)\}\]
+is $\sum_{i\in I}\abs{f\qty(A_i)}e^{-\Re(s)A_i}<\infty$, which, for $|I|<\aleph_0$, is $\bbC$, for $\abs{\{i\in I\mid A_i=0\}}=\aleph_0\land f(0)\neq 0$, is $\varnothing$, and otherwise, with
 \[N(x)\coloneq\abs{\{i\in I\mid A_i\leq x\}},\]
 is,
 \[\int_0^{\infty}f(x)e^{-\Re(s)x}\dd{N(x)}<\infty,\]
@@ -90,13 +81,70 @@ that is,
 \[\Re(s)>\limsup_{x\to\infty}\frac{\ln(f(x)N(x))}{x},\]
 that is,
 \bit
-\item for $\limsup_{i\to\infty}\frac{\ln(f\qty(A_i)i)}{A_i}=\infty$, $\varnothing$,
-\item for $L\coloneq\limsup_{i\to\infty}\frac{\ln(f\qty(A_i)i)}{A_i}\in\bbR$, $\Re(s)>L$, and
-\item for $\limsup_{i\to\infty}\frac{\ln(f\qty(A_i)i)}{A_i}=\infty$, $\bbC$.
+\item for $\limsup_{i\to\infty}\frac{\ln(\abs{f\qty(A_i)}i)}{A_i}=\infty$, $\varnothing$, and
+\item for $L\coloneq\limsup_{i\to\infty}\frac{\ln(\abs{f\qty(A_i)}i)}{A_i}\in\bbR$, $\Re(s)>L$, and
+\item for $\limsup_{i\to\infty}\frac{\ln(\abs{f\qty(A_i)}i)}{A_i}=\infty$, $\bbC$.
+\eit
+\sssc{Unit impulses abscissa of convergence theorem for two-sided Laplace tranform}
+For any two indexed families $A\colon I\to\mathcal{A}\subseteq\bbR_{>0};\;i\mapsto A_i$ with $I=J\cap\bbN$ for some interval $J$ and $A_i\leq A_{i+1}$ for all $i\in I\land (i+1)\in I$ and $B\colon K\to\mathcal{B}\subseteq\bbR_{<0};\;i\mapsto B_i$ with $K=L\cap\bbN$ for some interval $L$ and $B_i\geq B_{i+1}$ for all $i\in I\land (i+1)\in K$, and $C\in\bbN_0\cup\{\aleph_0\}$, with either $1\in J\cup L$ or $C>0$,
+\[\mathcal{L}\qty\{\sum_{i\in I}\delta(t-A_i)+\sum_{i\in K}\delta(t-B_i)+C\delta(t)\}=\sum_{i\in I}e^{-sA_i}+\sum_{i\in K}e^{-sB_i}+C.\]
+The ROC is $\sum_{i\in I}e^{-sA_i}+\sum_{i\in K}e^{-sB_i}+C<\infty$, which is the intersection of the following two regions given by:
+\bit
+\item First region: for $|I|+C<\aleph_0$, is $\bbC$, for $C=\aleph_0$, is $\varnothing$, and otherwise, with
+\[N_+(x)\coloneq\abs{\{i\in I\mid A_i\leq x\}}+C,\]
+is
+\[\int_0^{\infty}e^{-\Re(s)x}\dd{N_+(x)}<\infty,\]
+that is,
+\[\Re(s)>\limsup_{x\to\infty}\frac{\ln(N_+(x))}{x},\]
+that is,
+\bit
+\item for $\limsup_{i\to\infty}\frac{\ln(i)}{A_i}=\infty$, $\varnothing$, and
+\item for $L\coloneq\limsup_{i\to\infty}\frac{\ln(i)}{A_i}\in\bbR$, $\Re(s)>L$.
+\eit
+\item Second region: for $|K|+C<\aleph_0$, is $\bbC$, for $C=\aleph_0$, is $\varnothing$, and otherwise, with
+\[N_-(x)\coloneq\abs{\{i\in I\mid B_i\geq -x\}}+C,\]
+is
+\[\int_0^{\infty}e^{\Re(s)x}\dd{N_-(x)}<\infty,\]
+that is,
+\[\Re(s)<-\limsup_{x\to-\infty}\frac{\ln(N_-(x))}{-x},\]
+that is,
+\bit
+\item for $\limsup_{i\to\infty}\frac{\ln(i)}{-B_i}=\infty$, $\varnothing$, and
+\item for $L\coloneq\limsup_{i\to\infty}\frac{\ln(i)}{-B_i}\in\bbR$, $\Re(s)<L$.
+\eit
+\eit
+For any complex-valued function $f(t)$, the ROC of
+\[\mathcal{L}\qty\{f(t)\sum_{i\in I}\delta(t-A_i)\}\]
+is the intersection of the following two regions given by:
+\bit
+\item First region: for $|I|+C<\aleph_0$, is $\bbC$, for $C=\aleph_0\land f(0)\neq 0$, is $\varnothing$, and otherwise, with
+\[N_+(x)\coloneq\abs{\{i\in I\mid A_i\leq x\}}+C,\]
+is
+\[\int_0^{\infty}f(x)e^{-\Re(s)x}\dd{N_+(x)}<\infty,\]
+that is,
+\[\Re(s)>\limsup_{x\to\infty}\frac{\ln(f(x)N_+(x))}{x},\]
+that is,
+\bit
+\item for $\limsup_{i\to\infty}\frac{\ln(\abs{f\qty(A_i)}i)}{A_i}=\infty$, $\varnothing$, and
+\item for $L\coloneq\limsup_{i\to\infty}\frac{\ln(\abs{f\qty(A_i)}i)}{A_i}\in\bbR$, $\Re(s)>L$, and
+\item for $\limsup_{i\to\infty}\frac{\ln(\abs{f\qty(A_i)}i)}{A_i}=\infty$, $\bbC$.
+\eit
+\item Second region: for $|K|+C<\aleph_0$, is $\bbC$, for $C=\aleph_0\land f(0)\neq 0$, is $\varnothing$, and otherwise, with
+\[N_-(x)\coloneq\abs{\{i\in I\mid B_i\geq -x\}}+C,\]
+is
+\[\int_0^{\infty}f(x)e^{\Re(s)x}\dd{N_-(x)}<\infty,\]
+that is,
+\[\Re(s)<-\limsup_{x\to-\infty}\frac{\ln(N_-(x))}{-x},\]
+that is,
+\bit
+\item for $\limsup_{i\to\infty}\frac{\ln(\abs{f\qty(B_i)}i)}{-B_i}=\infty$, $\varnothing$, and
+\item for $L\coloneq\limsup_{i\to\infty}\frac{\ln(\abs{f\qty(B_i)}i)}{-B_i}\in\bbR$, $\Re(s)<L$, and
+\item for $\limsup_{i\to\infty}\frac{\ln(\abs{f\qty(B_i)}i)}{-B_i}=\infty$, $\bbC$.
+\eit
 \eit
 \sssc{Linearity}
 \[\mathcal{L}\qty\{af(t)+bg(t)\}=a\mathcal{L}\qty\{f(t)\}+b\mathcal{L}\qty\{g(t)\},\quad a,b\in\bbC.\]
-The ROC is the intersection of the ROC of $\mathcal{L}\qty\{f(t)\}$ and $\mathcal{L}\qty\{g(t)\}$.
+For $a,b\neq 0$, the ROC is the intersection of the ROC of $\mathcal{L}\qty\{f(t)\}$ and $\mathcal{L}\qty\{g(t)\}$.
 \sssc{Exponential function}
 \[\mathcal{L}\qty\{e^{at}\}(s) = \frac{1}{s-a},\quad a\in\bbC.\]
 \sssc{First shifting theorem or Frequency shift}
@@ -117,7 +165,7 @@ The ROC doesn't change.
 &=e^{-as}F(s)
 \ea\]
 \end{proof}
-\sssc{Differentiation in Time Domain}
+\sssc{Differentiation in time domain for one-sided Laplace transform}
 \[\mathcal{L}\qty\{f'(t)\}(s) = sF(s) - f(0^-).\]
 \[\mathcal{L}\qty\{f^{(n)}(t)\}(s) = s^n F(s) - \sum_{i=0}^{n-1}s^{n-1-i}f^{(i)}(0^-).\]
 \begin{proof}
@@ -128,8 +176,23 @@ The ROC doesn't change.
 &=\qty(e^{-st}f(t))\big\vert_0^\infty+\int_0^\infty f(t)se^{-st}\dd{t}\\
 &=s\mathcal{L}\qty\{f(t)\}(s)-f(0^-)
 \ea\]
-Nota that $0^-$ is required instead of $0$ in the cases where $f'(t)$ contains $\delta(0)$.
 \end{proof}
+The ROC is the same as that of $F(s)$.
+\sssc{Differentiation in time domain for two-sided Laplace transform}
+\[\mathcal{L}\qty\{f'(t)\}(s) = sF(s).\]
+\[\mathcal{L}\qty\{f^{(n)}(t)\}(s) = s^n F(s).\]
+\begin{proof}
+\[u = e^{-st}, \quad \dd{u} = -s e^{-st} \dd{t}.\]
+\[\dd{v} = f'(t)\dd{t}, \quad v = f(t).\]
+\[\ba
+\mathcal{L}\qty\{f'(t)\}(s)&=\int_{-\infty}^\infty e^{-st} f'(t)\dd{t}\\
+&=\qty(e^{-st}f(t))\big\vert_{-\infty}^\infty+\int_{-\infty}^\infty f(t)se^{-st}\dd{t}\\
+&=s\mathcal{L}\qty\{f(t)\}(s)
+\ea\]
+\end{proof}
+The ROC is the same as that of $F(s)$.
+
+
 \sssc{Integration in Time Domain}
 \[\mathcal{L}\left\{\int_0^t f(\tau)\dd{\tau}\right\}(s) = \frac{1}{s} F(s).\]
 \begin{proof}
@@ -175,7 +238,7 @@ Let $u=t-\tau$. $\dd{t}=\dd{u}$.
 \end{aligned}\]
 \end{proof}
 Note that $\int_0^tf(\tau)\dd{\tau}=(f*u)(t)$.
-PLACEHOLDER bilateral
+PLACEHOLDER two-sided
 \sssc{Initial Value Theorem}
 If $f(t)$ and $f'(t)$ are Laplace-transformable and $f(t)$ contains no unit impulses at origin:
 PLACEHOLDER: condition
@@ -306,13 +369,6 @@ Let
 &=f(t)
 \ea\]
 \end{proof}
-\ssc{(Bilateral or Two-sided) Laplace Transform (（雙邊）拉普拉斯變換)}
-PLACEHOLDER: move up and theorems add both uni and bi versions.
-
-The (bilateral or two-sided) Laplace transform is an integral transform that converts a function of a real variable (usually $t$, in the time domain) to a function of a complex variable (usually $s$, in the complex-valued angular frequency domain, also known as $s$-domain or $s$-plane). The functions are often denoted in lowercase for the time-domain representation and uppercase for the frequency-domain.
-
-The Laplace transform of a real function $f(t)$, denoted as $\mathcal{B}\{f(t)\}(s)$, is defined by the improper integral
-\[\mathcal{B}\{f(t)\}(s) = \int_{-\infty}^{\infty} e^{-st} f(t)\,\mathrm{d}t.\]
 \ssc{Fourier Transform (FT) (傅立葉變換)}
 PLACEHOLDER: as Laplace tranform special case
 \sssc{Fourier Transform (FT)}
