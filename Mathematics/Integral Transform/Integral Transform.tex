@@ -10,28 +10,26 @@
 \sct{Integral Transform}
 \ssc{Laplace Transform (拉普拉斯變換)}
 \sssc{Introduction}
-The one-sided or unilateral Laplace transform and two-sided or bilateral Laplace transform, where Laplace tranform may refer to either of them or both of them depending on context and often refer to the former when not clear, are two integral transform that convert a function, often denoted in lowercase such as $f$ or $f(t)$, of a real variable $t$, called time domain, to a complex function, often denoted in uppercase such as $F$ or $F(s)$, as $\mathcal{L}\{f\}$, $\mathcal{L}\{f(t)\}$, $\mathcal{L}\{f\}(s)$, or $\mathcal{L}\{f(t)\}(s)$ for both one-sided and two-sided, or $\mathcal{B}\{f\}$, $\mathcal{B}\{f(t)\}$, $\mathcal{B}\{f\}(s)$, or $\mathcal{B}\{f(t)\}(s)$ for two-sided, of a complex variable $s$, called (complex) frequency domain, (complex) frequency plane, $s$-domain, $s$-plane, Laplace domain, or Laplace plane.
+The one-sided or unilateral Laplace transform and two-sided or bilateral Laplace transform, where Laplace tranform may refer to either of them or both of them depending on context and often refer to the former when not clear, are two integral transform that convert a complex-valued distribution, often denoted in lowercase such as $f$ or $f(t)$, of a real variable $t$, called time domain, to a complex-valued distribution, often denoted in uppercase such as $F$ or $F(s)$, as $\mathcal{L}\{f\}$, $\mathcal{L}\{f(t)\}$, $\mathcal{L}\{f\}(s)$, or $\mathcal{L}\{f(t)\}(s)$ for both one-sided and two-sided, or $\mathcal{B}\{f\}$, $\mathcal{B}\{f(t)\}$, $\mathcal{B}\{f\}(s)$, or $\mathcal{B}\{f(t)\}(s)$ for two-sided, of a complex variable $s$, called (complex) frequency domain, (complex) frequency plane, $s$-domain, $s$-plane, Laplace domain, or Laplace plane.
 \sssc{Definition}
-Given the distribution, often called function, $f$,
-\[f(t)=\sum_{j\in S}g_j(t)\sum_{i\in I_j}\delta(A_{j_i}),\]
-for any set $S$, for any complex-valued functions $g_j(t)$ defined on $D_j\superseteq\mathbb{R}_{\geq 0}$ for one-sided Laplace tranform and $D_j=\mathbb{R}$ for two-sided Laplace tranform, for any indexed family $A_j\colon I_j\to\mathcal{A}_j\subseteq D_j;\;i\mapsto A_{j_i}$ with $I_j=J_j\cap\bbN$ for some interval $J_j$.
-
-As Lebesgue integrals with integrals involving Dirac detla functions defined via Dirac measures and convergence of a Laplace transform at a value $z$ of $s$ defined as the existence of such Lebesgue integral as $s=z$, the one-sided Laplace transform of it is defined  as
-\[\int_0^{\infty}f(t)e^{-st}\dd{t},\]
+For any complex-valued functions $f,g$ defined on $\bbR_{\geq0}$ for one-sided Laplace transform and $\bbR$ for two-sided Laplace transform, for any indexed family with $(A_i)_{i\in I}\subseteq\bbR_{\geq0}$ for one-sided Laplace transform and $\bbR$ for two-sided Laplace transform, for any real number $a$, the one-sided Laplace transform of $f(t)+g(t)\sum_{i\in I}\delta(t-A_i)$ is defined as
+\[\int_0^{\infty}e^{-st}\qty(f(t)+g(t)\sum_{i\in I}\delta(t-A_i))\dd{t},\]
+and the two-sided Laplace transform of the notation $f(t)+g(t)\sum_{i\in I}\delta(t-A_i)$ is defined as
+\[\int_{-\infty}^{\infty}e^{-st}f(t)\qty(f(t)+g(t)\sum_{i\in I}\delta(t-A_i))\dd{t},\]
+where convergence of the Laplace transform is determined by $f(t)$ term, where at a value of $s$, convergence is defined as the existence of such integral at it, and, if $I\neq\varnothing$, since the support of $\sum_{i\in I}\delta(t-A_i)$ is a locally finite set, we can always multiply $e^{-st}g(t)$ with a function $\chi(t)$ that is 1 at all $A_i$ such that for all $s$, $e^{-st}g(t)\chi(t)\in\mathcal{D}(\bbR_{\geq 0})$ for one-sided Laplace transform and $e^{-st}g(t)\chi(t)\in\mathcal{D}(\bbR)$ for two-sided Laplace transform, and the integral of $e^{-st}g(t)\sum_{i\in I}\delta(t-A_i)$ is to be interpreted as
+\[\langle\sum_{i\in I}\delta_{A_i}(t),e^{-st}g(t)\chi(t)\rangle,\]
+and the derivative of $g(t)\sum_{i\in I}\delta(t-A_i)$ is taken distributionally as
+\[\dv{}{t}(g(t)\sum_{i\in I}\delta(t-A_i))=\sum_{i\in I}g(A_i)\delta'(t-A_i).\]
+\sssc{As improper Riemann–Stieltjes integral}
+When Dirac delta is to be interpreted as Riemann–Stieltjes integral, the one-sided Laplace transform is defined as
+\[\lim_{\varepsilon\to 0^+}\int_{-\varepsilon}^{\infty}e^{-st}f(t)\sum_{i\in I}\delta(t-A_i)\dd{t},\]
 and the two-sided Laplace transform of it is defined as
-\[\int_{-\infty}^{\infty}f(t)e^{-st}\dd{t}.\]
-As improper Riemann–Stieltjes integrals with integrals involving Dirac detla functions defined via Riemann–Stieltjes integrals and convergence of a Laplace transform at a value $z$ of $s$ defined as the absolute convergence of such improper Riemann–Stieltjes integral as $s=z$, the one-sided Laplace transform of it is defined, with $\mathcal{f}(t)$, typically denoted simply as $f(t)$, defined as any function such that
-\bit
-\item its domain is a super set of an interval $[a,\infty)$ for some $a\in\bbR_{<0}$,
-\item $\mathcal{f}(t)=f(t)$ for all $t\in\bbR_{\geq 0}$, and
-\item it's continuous on some interval $[b,0)$ for some $b\in\bbR_{<0}$,
-\eit
-as
-\[\lim_{\varepsilon\to 0^+}\int_{-\varepsilon}^{\infty}\mathcal{f}(t)e^{-st}\dd{t},\]
-where $\lim_{\varepsilon\to 0^+}\int_{-\varepsilon}^{\infty}$ is typically denoted as $\int_{0^-}^{\infty}$, and the two-sided Laplace transform of it is defined as
-\[\int_{-\infty}^{\infty}f(t)e^{-st}\dd{t}.\]
-As distribution
-PLACEHOLDER
+\[\int_{-\infty}^{\infty}e^{-st}f(t)\sum_{i\in I}\delta(t-A_i)\dd{t},\]
+where $\lim_{\varepsilon\to 0^+}\int_{-\varepsilon}^{\infty}$ is also denoted as $\int_{0^-}^{\infty}$.
+
+Convergence of a Laplace transform at a value $z$ of $s$ is defined as the absolute convergence of the integral with $s=z$.
+
+When denoting $f(t)\sum_{i\in I}\delta(t-A_i)$ as a single function, say $g(t)$, $g(0)$ or $g(0^-)$ and $\dv[n]{}{t}g(0)$ or $\dv[n]{}{t}g(0^-)$ are to be interpreted as $f(0)$ and $\dv[n]{}{t}f(0)$.
 \sssc{Region of convergence (ROC)}
 The set of values of $s$ for which $F(s)$ converges is called region of convergence (ROC). A function is called Laplace-transformable iff the ROC of its Laplace transform is nonempty.
 
@@ -150,9 +148,6 @@ For $a,b\neq 0$, the ROC is the intersection of the ROC of $\mathcal{L}\qty\{f(t
 \sssc{First shifting theorem or Frequency shift}
 \[\mathcal{L}\qty\{e^{at} f(t)\}(s) = F(s-a),\quad a\in\bbC.\]
 The ROC shifts right by $\Re(a)$.
-\begin{proof}
-\[\mathcal{L}\qty\{e^{at} f(t)\}(s)=\int_0^{\infty}e^{-(s-a)t}f(t)=F(s-a)\]
-\end{proof}
 \sssc{Unit step function}
 \[\mathcal{L}\qty\{u(t-a)\}(s) = \frac{e^{-as}}{s},\quad a\in\bbR_{\geq 0}.\]
 \sssc{Second shifting theorem, Time delay, or Time shift}
@@ -161,7 +156,6 @@ The ROC doesn't change.
 \begin{proof}
 \[\ba
 \mathcal{L}\qty\{f(t-a)u(t-a)\}(s)&=\int_a^{\infty} e^{-st}f(t-a)\dd{t}\\
-&=\int_0^{\infty}e^{-s\tau}e^{-as}f(\tau)\dd{\tau}\\
 &=e^{-as}F(s)
 \ea\]
 \end{proof}
@@ -191,57 +185,74 @@ The ROC is the same as that of $F(s)$.
 \ea\]
 \end{proof}
 The ROC is the same as that of $F(s)$.
-
-
-\sssc{Integration in Time Domain}
+\sssc{Integration in time domain for one-sided Laplace transform}
 \[\mathcal{L}\left\{\int_0^t f(\tau)\dd{\tau}\right\}(s) = \frac{1}{s} F(s).\]
 \begin{proof}
 \bma
 \mathcal{L}\qty\{\int_0^t f(\tau)\dd{\tau}\}(s) &= \int_0^{\infty} e^{-st} \int_0^t f(\tau)\dd{\tau}\dd{t}\\
 &=\qty(-\frac{1}{s}e^{-st}\int_0^t f(\tau)\dd{\tau})\big\vert_0^\infty+\int_0^{\infty} \frac{1}{s}e^{-st}f(t)\dd{t}\\
-&=\frac{1}{s}\int_0^{\infty} e^{-st}f(t)\dd{t}.
+&=\frac{1}{s}F(s)
 \eam
 \end{proof}
-\sssc{Differentiation in Frequency Domain}
+\sssc{Integration in time domain for two-sided Laplace transform}
+\[\mathcal{L}\left\{\int_{-\infty}^t f(\tau)\dd{\tau}\right\}(s) = \frac{1}{s} F(s).\]
+\begin{proof}
+\bma
+\mathcal{L}\qty\{\int_{-\infty}^t f(\tau)\dd{\tau}\}(s) &= \int_{-\infty}^{\infty} e^{-st} \int_{-\infty}^t f(\tau)\dd{\tau}\dd{t}\\
+&=\qty(-\frac{1}{s}e^{-st}\int_{-\infty}^t f(\tau)\dd{\tau})\big\vert_{-\infty}^\infty+\int_{-\infty}^{\infty} \frac{1}{s}e^{-st}f(t)\dd{t}\\
+&=\frac{1}{s}F(s)
+\eam
+\end{proof}
+\sssc{Differentiation in frequency domain}
 \[\mathcal{L}\qty\{t f(t)\}(s) = -\dv{}{s} F(s).\]
 \[\mathcal{L}\qty\{t^n f(t)\}(s) = (-1)^n \dv[n]{}{s} F(s).\]
 \begin{proof}
-By Leibniz integral rule,
+One-sided: By Leibniz integral rule,
 \bma
--\dv{}{s} F(s)&=-\dv{}{s}\int_0^{\infty} e^{-st} f(t)\,\mathrm{d}t\\
-&=-\int_0^{\infty} \pdv{}{s}\qty(e^{-st} f(t))\,\mathrm{d}t\\
-&=-\int_0^{\infty} -te^{-st} f(t)\,\mathrm{d}t\\
-&=\int_0^{\infty} te^{-st} f(t)\,\mathrm{d}t\\
+-\dv{}{s} F(s)&=-\dv{}{s}\int_0^{\infty} e^{-st} f(t)\dd{t}\\
+&=-\int_0^{\infty} \pdv{}{s}\qty(e^{-st} f(t))\dd{t}\\
+&=-\int_0^{\infty} -te^{-st} f(t)\dd{t}\\
+&=\mathcal{L}\qty\{t f(t)\}(s)
+\eam
+Two-sided: By Leibniz integral rule,
+\bma
+-\dv{}{s} F(s)&=-\dv{}{s}\int_{-\infty}^{\infty} e^{-st} f(t)\dd{t}\\
+&=-\int_{-\infty}^{\infty} \pdv{}{s}\qty(e^{-st} f(t))\dd{t}\\
+&=-\int_{-\infty}^{\infty} -te^{-st} f(t)\dd{t}\\
 &=\mathcal{L}\qty\{t f(t)\}(s)
 \eam
 \end{proof}
-\sssc{Scaling in Time Domain}
+\sssc{Scaling in time domain for one-sided Laplace transform}
 \[\mathcal{L}\qty\{f(at)\}(s) = \frac{1}{a} F\left(\frac{s}{a}\right), \quad a>0.\]
-\sssc{Convolution (卷積)}
-The convolution of two functions $f(t)$ and $g(t)$ defined on $\bbR_{\geq 0}$ is a function denoted as $(f * g)(t)$ and defined as
-\[(f * g)(t) = \int_0^t f(\tau)g(t-\tau)\dd{\tau}.\]
-The convolution of two functions $f(t)$ and $g(t)$ defined on $\bbR$ is a function denoted as $(f * g)(t)$ and defined as
-\[(f * g)(t) = \int_{-\infty}^{\infty} f(\tau)g(t-\tau)\dd{\tau}.\]
-PLACEHOLDER
-\sssc{Convolution Theorem}
-If $h(t) = (f * g)(t)$, then
-\[\mathcal{L}\qty\{h(t)\}(s) = F(s)G(s).\]
+\sssc{Scaling in time domain for two-sided Laplace transform}
+\[\mathcal{L}\qty\{f(at)\}(s) = \frac{1}{a} F\left(\frac{s}{a}\right), \quad a\neq 0.\]
+\sssc{Convolution theorem}
+\[\mathcal{L}\qty\{(f*g)(t)\}(s) = F(s)G(s).\]
 \begin{proof}
-\[\mathcal{L}\qty\{h(t)\}(s)=\int_0^{\infty} e^{-st} \qty(\int_0^t f(\tau)g(t-\tau)\dd{\tau})\dd{t}\]
+One-sided:
+\[\mathcal{L}\qty\{(f*g)(t)\}(s)=\int_0^{\infty} e^{-st} \qty(\int_0^t f(\tau)g(t-\tau)\dd{\tau})\dd{t}\]
 By Fubini's theorem,
-\[\mathcal{L}\qty\{h(t)\}(s)=\int_0^\infty\int_\tau^\infty e^{-st} f(\tau)g(t-\tau)\dd{t}\dd{\tau}\]
+\[\mathcal{L}\qty\{(f*g)(t)\}(s)=\int_0^\infty\int_\tau^\infty e^{-st} f(\tau)g(t-\tau)\dd{t}\dd{\tau}\]
 Let $u=t-\tau$. $\dd{t}=\dd{u}$.
 \[\begin{aligned}
-\mathcal{L}\qty\{h(t)\}(s)&=\int_0^\infty f(\tau)\int_0^\infty e^{-s(u+\tau)} g(u)\dd{u}\dd{\tau}\\
+\mathcal{L}\qty\{(f*g)(t)\}(s)&=\int_0^\infty f(\tau)\int_0^\infty e^{-s(u+\tau)} g(u)\dd{u}\dd{\tau}\\
 &=\int_0^\infty f(\tau)e^{-s\tau}\int_0^\infty e^{-su} g(u)\dd{u}\dd{\tau}\\
 &=F(s)G(s)
 \end{aligned}\]
+Two-sided:
+\[\mathcal{L}\qty\{(f*g)(t)\}(s)=\int_{-\infty}^{\infty} e^{-st} \qty(\int_{-\infty}^t f(\tau)g(t-\tau)\dd{\tau})\dd{t}\]
+By Fubini's theorem,
+\[\mathcal{L}\qty\{(f*g)(t)\}(s)=\int_{-\infty}^\infty\int_\tau^\infty e^{-st} f(\tau)g(t-\tau)\dd{t}\dd{\tau}\]
+Let $u=t-\tau$. $\dd{t}=\dd{u}$.
+\[\begin{aligned}
+\mathcal{L}\qty\{(f*g)(t)\}(s)&=\int_{-\infty}^\infty f(\tau)\int_{-\infty}^\infty e^{-s(u+\tau)} g(u)\dd{u}\dd{\tau}\\
+&=\int_{-\infty}^\infty f(\tau)e^{-s\tau}\int_0
+{-\infty}^\infty e^{-su} g(u)\dd{u}\dd{\tau}\\
+&=F(s)G(s)
+\end{aligned}\]
 \end{proof}
-Note that $\int_0^tf(\tau)\dd{\tau}=(f*u)(t)$.
-PLACEHOLDER two-sided
-\sssc{Initial Value Theorem}
-If $f(t)$ and $f'(t)$ are Laplace-transformable and $f(t)$ contains no unit impulses at origin:
-PLACEHOLDER: condition
+\sssc{Initial Value Theorem (IVT) for one-sided Laplace tranform}
+If $f$ has not unit impulse at $0$, then
 \[\lim_{t\to 0^+}f(t)=\lim_{s\to\infty}sF(s).\]
 \begin{proof}
 \[sF(s)=\int_0^\infty sf(t)e^{-st}\dd{t}.\]

@@ -800,8 +800,14 @@ Let $f$ be a function on some measurable subset $B$ of $E$ into $\mathbb{R}\cup\
 If
 \[\int |f|\,\mathrm {d} \mu <\infty ,\]
 we say that $f$ is Lebesgue integrable.
-\sssc{$L^p$ spaces ($L^p$ 空間)}
-PLACEHOLDER
+\sssc{$L^p$ spaces ($L^p$ 空間) or Lebesgue space}
+For set $X$ and measure $\mu$, the vector space $L^p(X,\mu)$ consists of the equivalence class under the equivalence relation of equality $\mu$-a.e. of measurable functions $f\colon X\to\bbR$ (or $\bbC$) that
+\[\int_X\abs{f(x)}^p\dd{\mu(x)}<\infty.\]
+For $1\leq p<\infty$, define $L^p$ norm:
+\[\|f\|_p\coloneq\qty(\int_X\abs{f(x)}^p\dd{\mu(x)})^{1/p}.\]
+$L^p(X,\mu)$ is also denoted as $L^p(X)$ when $\mu$ is clear.
+\sssc{Locally integrable $L^p$ space}
+For set $X$ and measure $\mu$, the vector space $L^p_{\tx{loc}}(X,\mu)$ consists of the equivalence class under the equivalence relation of equality $\mu$-a.e. of measurable functions $f\colon X\to\bbR$ (or $\bbC$) that for all compact subset $K\subseteq X$, $f\in L^p(K,\mu)$. $L^p_{\tx{loc}}(X,\mu)$ is also denoted as $L^p_{\tx{loc}}(X)$ when $\mu$ is clear.
 \ssc{Bochner integral (博赫納積分)}
 \sssc{Premise}
 Let $(E,\Sigma ,\mu )$ be a measure space and $X$ be a Banach space with norm $\|\cdot\|_X$. Below, we will define the Bochner integral of measurable functions on $E$ to $X$.
@@ -840,37 +846,7 @@ PLACEHOLDER
 PLACEHOLDER
 \sssc{Space of BV functions}
 PLACEHOLDER (is a Banach space)
-\ssc{Dirac delta function or unit impulse}
-\sssc{As fake function with informally assigned properties}
-The Dirac delta function $\delta(x)$ defined on $\bbR$ is a fake function denoted as
-\[\delta(x)
-\begin{cases}
-\infty, & x = 0, \\
-0, & x \neq 0.
-\end{cases}\]
-\[0\delta(x)=0.\]
-For all $0\in\Omega\subseteq D_f\subseteq\bbR$, for all indexed family $A\colon I\to\mathcal{A}\subseteq D_f;\;i\mapsto A_i$ with $I=J\cap\bbN$ for some interval $J$,
-\[\int f(x)\sum_{i\in I}\delta(A_i)\dd{x}\coloneq\sum_{i\in I}u(f(A_i)),\]
-\[\int_{\Omega}f(x)\sum_{i\in I}\delta(A_i)\dd{x}\coloneq\sum_{i\in I}f(A_i).\]
-Let
-\[u_U(x)\coloneq\sum_{i\in I}u(A_i),\]
-\[u_U'(x)\coloneq\sum_{i\in I}\delta(A_i).\]
-\sssc{As a measure}
-For all indexed family $A\colon I\to\mathcal{A}\subseteq\bbR;\;i\mapsto A_i$ with $I=J\cap\bbN$ for some interval $J$, the definite integrals involving the sum of Dirac delta functions $\sum_{i\in I}\delta(A_i)$ can be rigorously defined via a Radon measure called Dirac measure $\delta_A$ that for any $\Omega\in\bbR$,
-\[\delta_A(\Omega)\coloneq\abs{\Omega\cap A(I)}.\]
-Thus for any function $f$ such that $0\in\Omega\subseteq D_f\subseteq\bbR$, for all such indexed family with $A(I)\subseteq D_f$,
-\[\int_{\Omega}f(x)\sum_{i\in I}\delta(A_i)\dd{x}\coloneq\int_{\Omega}f(x)\dd{\delta_A(x)}=\sum_{i\in I}f(A_i).\]
-\sssc{As proper or improper Riemann–Stieltjes integral}
-For any function $f$ such that $0\in\Omega\subseteq D_f\subseteq\bbR$, for all indexed family $A\colon I\to\mathcal{A}\subseteq D_f;\;i\mapsto A_i$ with $I=J\cap\bbN$ for some interval $J$, with
-\[u_A(x)\coloneq\sum_{i\in I}u(A_i),\]
-where $u$ is the unit step function, we define
-\[\int_{\Omega}f(x)\sum_{i\in I}\delta(A_i)\dd{x}\coloneq\int_{\Omega}f(x)\dd{u_A(x)}=\sum_{i\in I}f(A_i),\]
-where $\int_{\Omega}f(x)\dd{u_A(x)}$ is a proper or improper Riemann–Stieltjes integral.
-\sssc{As a distribution}
-PLACEHOLDER
-\sssc{Sinc function as nascent delta function}
-For every Laplace-transformable complex function $\varphi(x)$:
-\[\lim_{a\to 0}\int_{-\infty}^{\infty}\frac{\sin(\frac{\pi x}{a})}{\pi x}\varphi(x)\dd{x}=\lim_{a\to 0}\int_{-\infty}^{\infty}\frac{1}{a}\frac{\sin(\pi x)}{\pi x}\varphi(x)\dd{x}=\varphi(0).\]
+
 
 
 \sct{Mean}
@@ -3048,15 +3024,20 @@ A triangular wave with period $T$, crest $A_1$, and trough $A_0$ is
 A sawtooth wave with period $T$, crest $A_1$, and trough $A_0$ is
 \[f(t)=\frac{A_0+A_1}{2}+\qty(A_1-A_0)\qty(\frac{t}{T}-\left\lfloor\frac{t}{T}+\frac{1}{2}\right\rfloor).\]
 \sssc{Heaviside step function (黑維塞階躍函數) or Unit step function (單位階躍函數)}
-The Heaviside step function or unit step function $u(x)\colon\bbR\to\bbR$ (also denoted as $H(x)$) is defined as either
+The Heaviside step function or unit step function $u(x)\colon\bbR\to\bbR$, also denoted as $H(x)$, is defined as
 \[u(x)=
 \begin{cases}0,\quad &x<0\\
 1,\quad &x\geq 0
 \end{cases}.\]
+Some sources define $u(0)=0$, $u(0)=\frac{1}{2}$, or $u$ not defined at $0$.
 \sssc{Ramp function}
-The ramp function is $xu(x)$.
+The ramp function $R(x)\colon\bbR\to\bbR$ is defined as
+\[R(x)=
+\begin{cases}0,\quad &x<0\\
+x,\quad &x\geq 0
+\end{cases}.\]
 \ssc{List of Limits of Real Functions}
-\sssc{Limit of sine function over independent variable at zero}
+\sssc{Limit of sinc function at zero}
 \[\lim_{h\to 0}\frac{\sin h}{h}=1.\]
 \begin{proof}
 On a unit circle with center $O$, consider the arc $\arc{AB}=h$ subtended by acute angle $h$ (i.e. $\frac{\pi}{2}>h>0$), the chord length $\ol{BC}=\sin(h)$ with $C$ be the intersection of the chord and $\ora{OA}$, and the tangent length $\ol{AD}=\tan(h)$ with $D$ be the intersection of the tangent and $\ora{OB}$.
