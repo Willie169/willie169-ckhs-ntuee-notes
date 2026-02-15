@@ -26,39 +26,33 @@ where Laplace transform is always convergent.
 
 Distributions are often denoted in function notation but should be interpreted as distribution.
 
-Laplace transform of sum of distribution and functional should be interpreted as the sum of the Laplace transform of them, and the convergence of Laplace transform is defined as the convergence of Laplace transform of the functional.
+Laplace transform and derivative of sum of distribution and functional should be interpreted as the sum of the Laplace transform and derivative of them.
 
-
-
-
-
-
-where for all $j$, we can always find a complex-valued (or real-valued) function $\chi(t)$ such that for all $i$, $\chi(A_{ji})=a_{ji}$ and that $e^{-st}\chi(t)\in\mathcal{D}(R)$, and the integral of $e^{-st}\chi(t)\sum_{i\in I_j}a_{ji}\dv[j]{}{t}\delta(t-A_{ji})$ is to be interpreted as
-\[\langle\sum_{i\in I_j}\abs{a_{ji}}\dv[j]{}{t}\delta(t-A_{ji}),e^{-st}\chi(t)\rangle,\]
-and the derivative of $\sum_{i\in I_j}a_{ji}\dv[j]{}{t}\delta(t-A_{ji})$ is taken distributionally, that is,
-\[\dv{}{t}(\sum_{i\in I_j}a_{ji}\dv[j]{}{t}\delta(t-A_{ji}))=\sum_{i\in I_j}a_{ji}\dv[j+1]{}{t}\delta(t-A_{ji}).\]
-
-Dirac delta can also be interpreted as Dirac measure or Stieltjes integral over $u(x)$ if no derivative is involved. As improper Riemann–Stieltjes integral, the one-sided Laplace transform can be defined as
-\[\lim_{\varepsilon\to 0^+}\int_{-\varepsilon}^{\infty}e^{-st}\qty(f(t)+\sum_{j=0}^{\infty}\sum_{i\in I_j}a_{ji}\dv[j]{}{t}\delta(t-A_{ji}))\dd{t},\]
-where $\lim_{\varepsilon\to 0^+}\int_{-\varepsilon}^{\infty}$ is also denoted as $\int_{0^-}^{\infty}$, and $e^{-zt}f(t)\in L^1(R)$ can be replaced with the absolute convergence of the improper Riemann–Stieltjes integral with $s=z$.
-
-When denoting $f(t)+\sum_{j=0}^{\infty}\sum_{i\in I_j}a_{ji}\dv[j]{}{t}\delta(t-A_{ji})$ as a single notation, say $g(t)$, for all $n\in\bbN_0$, $\dv[n]{}{t}g(0)$, $\dv[n]{}{t}g(0^-)$, or $\dv[n]{}{t}g(0^+)$ are to be interpreted as $\dv[n]{}{t}f(0)$.
+For one-sided Laplace transform, $\int_0^{\infty}$ is also denoted as $\int_{0^-}^{\infty}$ or $\lim_{\varepsilon\to 0^+}\int_{-\varepsilon}^{\infty}$, and $0$ is also denoted as $0^-$. This is for compatibility of Riemann–Stieltjes integral interpretation of Dirac delta and does not imply that the signal needs to be defined on $[a,0)$ for some $a<0$.
 \sssc{Region of convergence (ROC)}
 The set of values of $s$ for which $F(s)$ converges is called region of convergence (ROC). A function is called Laplace-transformable iff the ROC of its Laplace transform is nonempty.
 
 For one-sided Laplace tranform, ROC is a class of the form of either $\Re(s) > a$ or $\Re(s) \geq a$ for some extended real constant $a$, called abscissa of convergence.
 
 For two-sided Laplace tranform, ROC is a class of the form of either $\Re(s) > a$ or $\Re(s) \geq a$ and either $\Re(s) <  $ or $\Re(s) \leq b$ for some extended real constants $a$ and $b$, called abscissas of convergence.
-\sssc{Linearity}
-\[\mathcal{L}\qty\{af(t)+bg(t)\}=a\mathcal{L}\qty\{f(t)\}+b\mathcal{L}\qty\{g(t)\},\quad a,b\in\bbC.\]
-For $a,b\neq 0$, the ROC is the intersection of the ROC of $\mathcal{L}\qty\{f(t)\}$ and $\mathcal{L}\qty\{g(t)\}$.
+\sssc{Of exponential order}
+A complex-valued (or real-valued) functional $f$ defined on $\mathbb{R}_{\geq a}$ for some $a\in\bbR$ is of exponential order $\alpha\in\mathbb{R}_{>0}$ iff there exists $M>0$ and $T>0$ such that:
+\[|f(t)|\leq Me^{\alpha t}\quad\forall t>T.\]
+A complex-valued (or real-valued) functional $f$ defined on $\mathbb{R}_{\geq a}$ for some $a\in\bbR$ is of strict exponential order $\alpha\in\mathbb{R}_{>0}$ iff there exists $M>0$ and $T>0$ such that:
+\[|f(t)|<Me^{\alpha t}\quad\forall t>T.\]
+A complex-valued (or real-valued) functional $f$ defined on $\mathbb{R}_{\leq a}$ for some $a\in\bbR$ is of exponential order $\alpha\in\mathbb{R}_{<0}$ iff there exists $M>0$ and $T<0$ such that:
+\[|f(t)|\leq Me^{\alpha t}\quad\forall t<T.\]
+A complex-valued (or real-valued) functional $f$ defined on $\mathbb{R}_{\leq a}$ for some $a\in\bbR$ is of strict exponential order $\alpha\in\mathbb{R}_{<0}$ iff there exists $M>0$ and $T<0$ such that:
+\[|f(t)|<Me^{\alpha t}\quad\forall t<T.\]
+A complex-valued (or real-valued) functional $f$ defined on $\mathbb{R}$ is of exponential order iff both $f_{\bbR_{\geq0}}$ and $f_{\bbR_{\leq0}}$ are of exponential order.
 \sssc{Laplace transformability theorem}
-A complex-valued (or real-valued) function $f(t)$ defined on $[0,\infty)$ is one-sided Laplace-transformable if it is piecewise continuous on all closed subintervals of $[0,\infty)$ and of exponential order.
+A complex-valued (or real-valued) functional $f$ defined on $R$ is one-sided Laplace-transformable if it is piecewise continuous on all closed subintervals of $R$ and of exponential order.
 \begin{proof}
-Assume that a $f(t)$ is piecewise continuous on $[0,\infty)$ and there exists $M>0$ and $T>0$ such that:
-\[|f(t)|\leq Me^{\alpha t}\quad \forall t>T.\]
+We will show the proof for one-sided Laplace transform, the proof for two-sided Laplace transforme is similar.
 
-For $s>\alpha$, since $f(t)$ is piecewise continuous on $[0,\infty)$, there exist a locally finite indexed family $A=\{[a_i,b_i]\mid i\in I\}$ such that for each $i\in I\setminus\{j\}$, the integral
+Assume that $f(t)$ is piecewise continuous on $[0,\infty)$ and there exists $M>0$ and $T>0$ such that:
+\[|f(t)|\leq Me^{\alpha t}\quad \forall t>T.\]
+For $\Re(s)>\alpha$, since $f(t)$ is piecewise continuous on $[0,\infty)$, there exist a locally finite indexed family $A=\{[a_i,b_i]\mid i\in I\}$ such that for each $i\in I\setminus\{j\}$, the integral
 \[\int_{a_i}^{b_i} |f(t)| e^{-st}\dd{t}\]
 exists and is finite.
 
@@ -70,195 +64,173 @@ For the second integral, since $|f(t)| \le M e^{\alpha t}$, we have
 \[\int_T^\infty |f(t)| e^{-st}\dd{t}\le \int_T^\infty M e^{\alpha t} e^{-st}\dd{t} = M \int_T^\infty e^{-(s-\alpha)t}\dd{t},\]
 which converges since $\Re(s)>\alpha$.
 \end{proof}
-A complex-valued (or real-valued) function $f(t)$ defined on $\bbR$ is two-sided Laplace-transformable if it is piecewise continuous on all closed intervals and of exponential order and that $f(-t)$ is of exponential order.
-\sssc{Unit impulses abscissa of convergence theorem for one-sided Laplace tranform}
-For any indexed family $A\colon I\to\mathcal{A}\subseteq\bbR_{\geq 0};\;i\mapsto A_i$ with $I=J\cap\bbN$ for some interval $J\ni 1$ and $A_i\leq A_{i+1}$ for all $i\in I\land (i+1)\in I$,
-\[\mathcal{L}\qty\{\sum_{i\in I}\delta(t-A_i)\}=\sum_{i\in I}e^{-sA_i}.\]
-The ROC is $\sum_{i\in I}e^{-\Re(s)A_i}<\infty$, which, for $|I|<\aleph_0$, is $\bbC$, for $\abs{\{i\in I\mid A_i=0\}}=\aleph_0$, is $\varnothing$, and otherwise, with
-\[N(x)\coloneq\abs{\{i\in I\mid A_i\leq x\}},\]
-is
-\[\int_0^{\infty}e^{-\Re(s)x}\dd{N(x)}<\infty,\]
-that is,
-\[\limsup_{x\to-\infty}\frac{\ln(N(x))}{x}>\Re(s)>\limsup_{x\to\infty}\frac{\ln(N(x))}{x},\]
-that is,
+For one-sided Laplace transform, the ROC is
 \bit
-\item for $\limsup_{i\to\infty}\frac{\ln(i)}{A_i}=\infty$, $\varnothing$, and
-\item for $L\coloneq\limsup_{i\to\infty}\frac{\ln(i)}{A_i}\in\bbR$, $\Re(s)>L$.
+\item $\Re(s)\geq\alpha$ if $f$ is of strict exponential order $\alpha$ and not of exponential order $\beta$ for all $0<\beta<\alpha$, or
+\item $\Re(s)>\alpha$ if $f$ is of exponential order $\alpha$, not of strict exponential order $\alpha$, and not of exponential order $\beta$ for all $0<\beta<\alpha$.
 \eit
-For any complex-valued function $f(t)$, the ROC of
-\[\mathcal{L}\qty\{f(t)\sum_{i\in I}\delta(t-A_i)\}\]
-is $\sum_{i\in I}\abs{f\qty(A_i)}e^{-\Re(s)A_i}<\infty$, which, for $|I|<\aleph_0$, is $\bbC$, for $\abs{\{i\in I\mid A_i=0\}}=\aleph_0\land f(0)\neq 0$, is $\varnothing$, and otherwise, with
-\[N(x)\coloneq\abs{\{i\in I\mid A_i\leq x\}},\]
-is,
-\[\int_0^{\infty}f(x)e^{-\Re(s)x}\dd{N(x)}<\infty,\]
-that is,
-\[\Re(s)>\limsup_{x\to\infty}\frac{\ln(f(x)N(x))}{x},\]
-that is,
+For two-sided Laplace transform, the ROC is the intersection of the following two regions:
 \bit
-\item for $\limsup_{i\to\infty}\frac{\ln(\abs{f\qty(A_i)}i)}{A_i}=\infty$, $\varnothing$, and
-\item for $L\coloneq\limsup_{i\to\infty}\frac{\ln(\abs{f\qty(A_i)}i)}{A_i}\in\bbR$, $\Re(s)>L$, and
-\item for $\limsup_{i\to\infty}\frac{\ln(\abs{f\qty(A_i)}i)}{A_i}=\infty$, $\bbC$.
+\item First region:
+\bit
+\item $\Re(s)\geq\alpha_1$ if $f_{\bbR_{\geq0}}$ is of strict exponential order $\alpha_1$ and not of exponential order $\beta$ for all $0<\beta<\alpha_1$, or
+\item $\Re(s)>\alpha_1$ if $f_{\bbR_{\geq0}}$ is of exponential order $\alpha_1$, not of strict exponential order $\alpha_1$, and not of exponential order $\beta$ for all $0<\beta<\alpha_1$.
 \eit
-\sssc{Unit impulses abscissa of convergence theorem for two-sided Laplace tranform}
-For any two indexed families $A\colon I\to\mathcal{A}\subseteq\bbR_{>0};\;i\mapsto A_i$ with $I=J\cap\bbN$ for some interval $J$ and $A_i\leq A_{i+1}$ for all $i\in I\land (i+1)\in I$ and $B\colon K\to\mathcal{B}\subseteq\bbR_{<0};\;i\mapsto B_i$ with $K=L\cap\bbN$ for some interval $L$ and $B_i\geq B_{i+1}$ for all $i\in I\land (i+1)\in K$, and $C\in\bbN_0\cup\{\aleph_0\}$, with either $1\in J\cup L$ or $C>0$,
-\[\mathcal{L}\qty\{\sum_{i\in I}\delta(t-A_i)+\sum_{i\in K}\delta(t-B_i)+C\delta(t)\}=\sum_{i\in I}e^{-sA_i}+\sum_{i\in K}e^{-sB_i}+C.\]
-The ROC is $\sum_{i\in I}e^{-sA_i}+\sum_{i\in K}e^{-sB_i}+C<\infty$, which is the intersection of the following two regions given by:
+\item Second region:
 \bit
-\item First region: for $|I|+C<\aleph_0$, is $\bbC$, for $C=\aleph_0$, is $\varnothing$, and otherwise, with
-\[N_+(x)\coloneq\abs{\{i\in I\mid A_i\leq x\}}+C,\]
-is
-\[\int_0^{\infty}e^{-\Re(s)x}\dd{N_+(x)}<\infty,\]
-that is,
-\[\Re(s)>\limsup_{x\to\infty}\frac{\ln(N_+(x))}{x},\]
-that is,
-\bit
-\item for $\limsup_{i\to\infty}\frac{\ln(i)}{A_i}=\infty$, $\varnothing$, and
-\item for $L\coloneq\limsup_{i\to\infty}\frac{\ln(i)}{A_i}\in\bbR$, $\Re(s)>L$.
-\eit
-\item Second region: for $|K|+C<\aleph_0$, is $\bbC$, for $C=\aleph_0$, is $\varnothing$, and otherwise, with
-\[N_-(x)\coloneq\abs{\{i\in I\mid B_i\geq -x\}}+C,\]
-is
-\[\int_0^{\infty}e^{\Re(s)x}\dd{N_-(x)}<\infty,\]
-that is,
-\[\Re(s)<-\limsup_{x\to-\infty}\frac{\ln(N_-(x))}{-x},\]
-that is,
-\bit
-\item for $\limsup_{i\to\infty}\frac{\ln(i)}{-B_i}=\infty$, $\varnothing$, and
-\item for $L\coloneq\limsup_{i\to\infty}\frac{\ln(i)}{-B_i}\in\bbR$, $\Re(s)<L$.
+\item $\Re(s)\leq\alpha_2$ if $f_{\bbR_{\leq0}}$ is of strict exponential order $\alpha_2$ and not of exponential order $\beta$ for all $0<\beta<\alpha_2$, or
+\item $\Re(s)<\alpha_2$ if $f_{\bbR_{\leq0}}$ is of exponential order $\alpha_2$, not of strict exponential order $\alpha_2$, and not of exponential order $\beta$ for all $0<\beta<\alpha_2$.
 \eit
 \eit
-For any complex-valued function $f(t)$, the ROC of
-\[\mathcal{L}\qty\{f(t)\sum_{i\in I}\delta(t-A_i)\}\]
-is the intersection of the following two regions given by:
-\bit
-\item First region: for $|I|+C<\aleph_0$, is $\bbC$, for $C=\aleph_0\land f(0)\neq 0$, is $\varnothing$, and otherwise, with
-\[N_+(x)\coloneq\abs{\{i\in I\mid A_i\leq x\}}+C,\]
-is
-\[\int_0^{\infty}f(x)e^{-\Re(s)x}\dd{N_+(x)}<\infty,\]
-that is,
-\[\Re(s)>\limsup_{x\to\infty}\frac{\ln(f(x)N_+(x))}{x},\]
-that is,
-\bit
-\item for $\limsup_{i\to\infty}\frac{\ln(\abs{f\qty(A_i)}i)}{A_i}=\infty$, $\varnothing$, and
-\item for $L\coloneq\limsup_{i\to\infty}\frac{\ln(\abs{f\qty(A_i)}i)}{A_i}\in\bbR$, $\Re(s)>L$, and
-\item for $\limsup_{i\to\infty}\frac{\ln(\abs{f\qty(A_i)}i)}{A_i}=\infty$, $\bbC$.
-\eit
-\item Second region: for $|K|+C<\aleph_0$, is $\bbC$, for $C=\aleph_0\land f(0)\neq 0$, is $\varnothing$, and otherwise, with
-\[N_-(x)\coloneq\abs{\{i\in I\mid B_i\geq -x\}}+C,\]
-is
-\[\int_0^{\infty}f(x)e^{\Re(s)x}\dd{N_-(x)}<\infty,\]
-that is,
-\[\Re(s)<-\limsup_{x\to-\infty}\frac{\ln(N_-(x))}{-x},\]
-that is,
-\bit
-\item for $\limsup_{i\to\infty}\frac{\ln(\abs{f\qty(B_i)}i)}{-B_i}=\infty$, $\varnothing$, and
-\item for $L\coloneq\limsup_{i\to\infty}\frac{\ln(\abs{f\qty(B_i)}i)}{-B_i}\in\bbR$, $\Re(s)<L$, and
-\item for $\limsup_{i\to\infty}\frac{\ln(\abs{f\qty(B_i)}i)}{-B_i}=\infty$, $\bbC$.
-\eit
-\eit
-\sssc{Exponential function}
-\[\mathcal{L}\qty\{e^{at}\}(s) = \frac{1}{s-a},\quad a\in\bbC.\]
-\sssc{First shifting theorem or Frequency shift}
-\[\mathcal{L}\qty\{e^{at} f(t)\}(s) = F(s-a),\quad a\in\bbC.\]
-The ROC shifts right by $\Re(a)$.
+\sssc{Linearity}
+\[\mathcal{L}\qty\{af(t)+bg(t)\}=a\mathcal{L}\qty\{f(t)\}+b\mathcal{L}\qty\{g(t)\},\quad a,b\in\bbC_{\neq0}.\]
+The ROC is the intersection of the ROC of $\mathcal{L}\qty\{f(t)\}$ and $\mathcal{L}\qty\{g(t)\}$.
 \sssc{Unit step function}
-\[\mathcal{L}\qty\{u(t-a)\}(s) = \frac{e^{-as}}{s},\quad a\in\bbR_{\geq 0}.\]
-\sssc{Second shifting theorem, Time delay, or Time shift}
+\[\mathcal{L}\qty\{u(t-a)\} = \frac{e^{-as}}{s},\quad a\in R.\]
+The ROC is $\Re(s)>0$.
+\sssc{Delta distribution}
+\[\mathcal{L}\{\dv[n]{}{t}\delta(t-a)\}=s^ne^{-sa},\quad n\in\bbN_0\land a\in R.\]
+The ROC is $\bbC$.
+\sssc{Exponential function}
+\[\mathcal{L}\qty\{e^{at}\} = \frac{1}{s-a},\quad a\in\bbC_{\neq0}.\]
+For one-sided Laplace transformer, the ROC is $\Re(s)>\Re(a)$.
+
+For two-sided Laplace transformer, the ROC is $\varnothing$.
+\sssc{First shifting theorem or frequency shift}
+\[\mathcal{L}\qty\{e^{at}f(t)\}=F(s-a),\quad a\in\bbC_{\neq0}.\]
+For one-sided Laplace transformer, the ROC shifts right by $\Re(a)$.
+\sssc{Second shifting theorem, time delay, or time shift}
 \[\mathcal{L}\qty\{f(t-a)u(t-a)\}=e^{-as}F(s), \quad a\in\bbR_{\geq 0}.\]
 The ROC doesn't change.
 \begin{proof}
 \[\ba
-\mathcal{L}\qty\{f(t-a)u(t-a)\}(s)&=\int_a^{\infty} e^{-st}f(t-a)\dd{t}\\
+\mathcal{L}\qty\{f(t-a)u(t-a)\}&=\int_a^{\infty}e^{-st}f(t-a)\dd{t}\\
 &=e^{-as}F(s)
 \ea\]
 \end{proof}
-\sssc{Differentiation in time domain for one-sided Laplace transform}
-\[\mathcal{L}\qty\{f'(t)\}(s) = sF(s) - f(0^-).\]
-\[\mathcal{L}\qty\{f^{(n)}(t)\}(s) = s^n F(s) - \sum_{i=0}^{n-1}s^{n-1-i}f^{(i)}(0^-).\]
-\begin{proof}
-\[u = e^{-st}, \quad \dd{u} = -s e^{-st} \dd{t}.\]
-\[\dd{v} = f'(t)\dd{t}, \quad v = f(t).\]
+\sssc{Differentiation in time domain}
+For one-sided Laplace transform of functional:
+\[\mathcal{L}\qty\{f'(t)\}=sF(s)-f(0)+\lim_{t\to\infty}e^{-st}f(t).\]
+\bpr
+\[u=e^{-st},\quad\dd{u}=-se^{-st}\dd{t}.\]
+\[\dd{v}=f'(t)\dd{t},\quad v=f(t).\]
 \[\ba
-\mathcal{L}\qty\{f'(t)\}(s)&=\int_0^\infty e^{-st} f'(t)\dd{t}\\
+\mathcal{L}\qty\{f'(t)\}&=\int_0^\infty e^{-st}f'(t)\dd{t}\\
 &=\qty(e^{-st}f(t))\big\vert_0^\infty+\int_0^\infty f(t)se^{-st}\dd{t}\\
-&=s\mathcal{L}\qty\{f(t)\}(s)-f(0^-)
+&=sF(s)-f(0)+\lim_{t\to\infty}e^{-st}f(t)
 \ea\]
-\end{proof}
+\epr
 The ROC is the same as that of $F(s)$.
-\sssc{Differentiation in time domain for two-sided Laplace transform}
-\[\mathcal{L}\qty\{f'(t)\}(s) = sF(s).\]
-\[\mathcal{L}\qty\{f^{(n)}(t)\}(s) = s^n F(s).\]
-\begin{proof}
-\[u = e^{-st}, \quad \dd{u} = -s e^{-st} \dd{t}.\]
-\[\dd{v} = f'(t)\dd{t}, \quad v = f(t).\]
+
+If $f$ is of exponential order, $\lim_{t\to\infty}e^{-st}f(t)=0$, and
+\[\mathcal{L}\qty\{f'(t)\}=sF(s)-f(0).\]
+For two-sided Laplace transform of functional:
+\[\mathcal{L}\qty\{f'(t)\}=sF(s)-\lim_{t\to-\infty}e^{-st}f(t)+\lim_{t\to\infty}e^{-st}f(t).\]
+\bpr
+\[u=e^{-st},\quad\dd{u}=-se^{-st}\dd{t}.\]
+\[\dd{v}=f'(t)\dd{t},\quad v=f(t).\]
 \[\ba
-\mathcal{L}\qty\{f'(t)\}(s)&=\int_{-\infty}^\infty e^{-st} f'(t)\dd{t}\\
+\mathcal{L}\qty\{f'(t)\}&=\int_{-\infty}^\infty e^{-st}f'(t)\dd{t}\\
 &=\qty(e^{-st}f(t))\big\vert_{-\infty}^\infty+\int_{-\infty}^\infty f(t)se^{-st}\dd{t}\\
-&=s\mathcal{L}\qty\{f(t)\}(s)
+&=sF(s)-\lim_{t\to-\infty}e^{-st}f(t)+\lim_{t\to\infty}e^{-st}f(t)
 \ea\]
-\end{proof}
+\epr
 The ROC is the same as that of $F(s)$.
-\sssc{Integration in time domain for one-sided Laplace transform}
-\[\mathcal{L}\left\{\int_0^t f(\tau)\dd{\tau}\right\}(s) = \frac{1}{s} F(s).\]
-\begin{proof}
-\bma
-\mathcal{L}\qty\{\int_0^t f(\tau)\dd{\tau}\}(s) &= \int_0^{\infty} e^{-st} \int_0^t f(\tau)\dd{\tau}\dd{t}\\
-&=\qty(-\frac{1}{s}e^{-st}\int_0^t f(\tau)\dd{\tau})\big\vert_0^\infty+\int_0^{\infty} \frac{1}{s}e^{-st}f(t)\dd{t}\\
-&=\frac{1}{s}F(s)
-\eam
-\end{proof}
-\sssc{Integration in time domain for two-sided Laplace transform}
-\[\mathcal{L}\left\{\int_{-\infty}^t f(\tau)\dd{\tau}\right\}(s) = \frac{1}{s} F(s).\]
-\begin{proof}
-\bma
-\mathcal{L}\qty\{\int_{-\infty}^t f(\tau)\dd{\tau}\}(s) &= \int_{-\infty}^{\infty} e^{-st} \int_{-\infty}^t f(\tau)\dd{\tau}\dd{t}\\
-&=\qty(-\frac{1}{s}e^{-st}\int_{-\infty}^t f(\tau)\dd{\tau})\big\vert_{-\infty}^\infty+\int_{-\infty}^{\infty} \frac{1}{s}e^{-st}f(t)\dd{t}\\
-&=\frac{1}{s}F(s)
-\eam
-\end{proof}
+
+If $f$ is of exponential order, $\lim_{t\to-\infty}e^{-st}f(t)=\lim_{t\to\infty}e^{-st}f(t)=0$, and
+\[\mathcal{L}\qty\{f'(t)\}=sF(s).\]
+For Laplace transform of distribution:
+\[\mathcal{L}\{T'\}=s\mathcal{L}\{T\}.\]
+\bpr
+\[\ba
+\langle T',e^{-st}\rangle&=-\langle T,-se^{-st}\rangle\\
+&=s\langle T,e^{-st}\rangle\\
+&=s\mathcal{L}\{T\}
+\ea\]
+\epr
+\sssc{Integration in time domain}
+For one-sided Laplace transform of functional:
+\[\mathcal{L}\qty\{\int_0^tf(\tau)\dd{\tau}\}=\frac{1}{s}F(s)-\frac{1}{s}\lim_{t\to\infty}e^{-st}\int_0^tf(\tau)\dd{\tau}.\]
+\bpr
+\[\ba
+\mathcal{L}\qty\{\int_0^tf(\tau)\dd{\tau}\}&=\int_0^{\infty}e^{-st}\int_0^tf(\tau)\dd{\tau}\dd{t}\\
+&=\qty(-\frac{1}{s}e^{-st}\int_0^tf(\tau)\dd{\tau})\big\vert_0^\infty+\int_0^{\infty}\frac{1}{s}e^{-st}f(t)\dd{t}\\
+&=\frac{1}{s}F(s)-\frac{1}{s}\lim_{t\to\infty}e^{-st}\int_0^tf(\tau)\dd{\tau}
+\ea\]
+\epr
+If $f$ is of exponential order, $\lim_{t\to\infty}e^{-st}\int_0^tf(\tau)\dd{\tau}=0$ for all $s$ in its ROC,
+\[\mathcal{L}\qty\{\int_0^tf(\tau)\dd{\tau}\}=\frac{1}{s}F(s),\]
+and the ROC is the same as that of $F(s)$.
+
+For two-sided Laplace transform of functional:
+\[\mathcal{L}\qty\{\int_{-\infty}^tf(\tau)\dd{\tau}\}=\frac{1}{s}F(s)-\frac{1}{s}\lim_{t\to\infty}e^{-st}\int_{-\infty}^tf(\tau)\dd{\tau}.\]
+\bpr
+\[\ba
+\mathcal{L}\qty\{\int_{-\infty}^tf(\tau)\dd{\tau}\}&=\int_{-\infty}^{\infty}e^{-st}\int_{-\infty}^tf(\tau)\dd{\tau}\dd{t}\\
+&=\qty(-\frac{1}{s}e^{-st}\int_{-\infty}^tf(\tau)\dd{\tau})\big\vert_{-\infty}^\infty+\int_{-\infty}^{\infty}\frac{1}{s}e^{-st}f(t)\dd{t}\\
+&=\frac{1}{s}F(s)-\frac{1}{s}\lim_{t\to\infty}e^{-st}\int_{-\infty}^tf(\tau)\dd{\tau}
+\ea\]
+\epr
+If $f$ is of exponential order, $\lim_{t\to\infty}e^{-st}\int_{-\infty}^tf(\tau)\dd{\tau}=0$ for all $s$ in its ROC,
+\[\mathcal{L}\qty\{\int_{-\infty}^tf(\tau)\dd{\tau}\}=\frac{1}{s}F(s),\]
+and the ROC is the same as that of $F(s)$.
+\[\mathcal{L}\qty\{\int_t^{\infty}f(\tau)\dd{\tau}\}=\frac{1}{s}F(s)-\frac{1}{s}\lim_{t\to-\infty}e^{-st}\int_t^{\infty}f(\tau)\dd{\tau}.\]
+\bpr
+\[\ba
+\mathcal{L}\qty\{\int_t^{\infty}f(\tau)\dd{\tau}\}&=\int_{-\infty}^{\infty}e^{-st}\int_t^{\infty}f(\tau)\dd{\tau}\dd{t}\\
+&=\qty(-\frac{1}{s}e^{-st}\int_t^{\infty}f(\tau)\dd{\tau})\big\vert_{-\infty}^\infty+\int_{-\infty}^{\infty}\frac{1}{s}e^{-st}f(t)\dd{t}\\
+&=\frac{1}{s}F(s)-\frac{1}{s}\lim_{t\to-\infty}e^{-st}\int_t^{\infty}f(\tau)\dd{\tau}
+\ea\]
+\epr
+If $f$ is of exponential order, $\lim_{t\to-\infty}e^{-st}\int_t^{\infty}f(\tau)\dd{\tau}=0$ for all $s$ in its ROC,
+\[\mathcal{L}\qty\{\int_t^{\infty}f(\tau)\dd{\tau}\}=\frac{1}{s}F(s),\]
+and the ROC is the same as that of $F(s)$.
+
+PLACEHOLDER 以下
+
 \sssc{Differentiation in frequency domain}
-\[\mathcal{L}\qty\{t f(t)\}(s) = -\dv{}{s} F(s).\]
-\[\mathcal{L}\qty\{t^n f(t)\}(s) = (-1)^n \dv[n]{}{s} F(s).\]
+\[\mathcal{L}\qty\{t f(t)\} = -\dv{}{s} F(s).\]
+\[\mathcal{L}\qty\{t^n f(t)\} = (-1)^n \dv[n]{}{s} F(s).\]
 \begin{proof}
 One-sided: By Leibniz integral rule,
 \bma
 -\dv{}{s} F(s)&=-\dv{}{s}\int_0^{\infty} e^{-st} f(t)\dd{t}\\
 &=-\int_0^{\infty} \pdv{}{s}\qty(e^{-st} f(t))\dd{t}\\
 &=-\int_0^{\infty} -te^{-st} f(t)\dd{t}\\
-&=\mathcal{L}\qty\{t f(t)\}(s)
+&=\mathcal{L}\qty\{t f(t)\}
 \eam
 Two-sided: By Leibniz integral rule,
 \bma
 -\dv{}{s} F(s)&=-\dv{}{s}\int_{-\infty}^{\infty} e^{-st} f(t)\dd{t}\\
 &=-\int_{-\infty}^{\infty} \pdv{}{s}\qty(e^{-st} f(t))\dd{t}\\
 &=-\int_{-\infty}^{\infty} -te^{-st} f(t)\dd{t}\\
-&=\mathcal{L}\qty\{t f(t)\}(s)
+&=\mathcal{L}\qty\{t f(t)\}
 \eam
 \end{proof}
 \sssc{Scaling in time domain for one-sided Laplace transform}
-\[\mathcal{L}\qty\{f(at)\}(s) = \frac{1}{a} F\left(\frac{s}{a}\right), \quad a>0.\]
+\[\mathcal{L}\qty\{f(at)\} = \frac{1}{a} F\left(\frac{s}{a}\right), \quad a>0.\]
 \sssc{Scaling in time domain for two-sided Laplace transform}
-\[\mathcal{L}\qty\{f(at)\}(s) = \frac{1}{a} F\left(\frac{s}{a}\right), \quad a\neq 0.\]
+\[\mathcal{L}\qty\{f(at)\} = \frac{1}{a} F\left(\frac{s}{a}\right), \quad a\neq 0.\]
 \sssc{Convolution theorem}
-\[\mathcal{L}\qty\{(f*g)(t)\}(s) = F(s)G(s).\]
+\[\mathcal{L}\qty\{(f*g)(t)\} = F(s)G(s).\]
 \begin{proof}
 One-sided:
-\[\mathcal{L}\qty\{(f*g)(t)\}(s)=\int_0^{\infty} e^{-st} \qty(\int_0^t f(\tau)g(t-\tau)\dd{\tau})\dd{t}\]
+\[\mathcal{L}\qty\{(f*g)(t)\}=\int_0^{\infty} e^{-st} \qty(\int_0^t f(\tau)g(t-\tau)\dd{\tau})\dd{t}\]
 By Fubini's theorem,
-\[\mathcal{L}\qty\{(f*g)(t)\}(s)=\int_0^\infty\int_\tau^\infty e^{-st} f(\tau)g(t-\tau)\dd{t}\dd{\tau}\]
+\[\mathcal{L}\qty\{(f*g)(t)\}=\int_0^\infty\int_\tau^\infty e^{-st} f(\tau)g(t-\tau)\dd{t}\dd{\tau}\]
 Let $u=t-\tau$. $\dd{t}=\dd{u}$.
 \[\begin{aligned}
-\mathcal{L}\qty\{(f*g)(t)\}(s)&=\int_0^\infty f(\tau)\int_0^\infty e^{-s(u+\tau)} g(u)\dd{u}\dd{\tau}\\
+\mathcal{L}\qty\{(f*g)(t)\}&=\int_0^\infty f(\tau)\int_0^\infty e^{-s(u+\tau)} g(u)\dd{u}\dd{\tau}\\
 &=\int_0^\infty f(\tau)e^{-s\tau}\int_0^\infty e^{-su} g(u)\dd{u}\dd{\tau}\\
 &=F(s)G(s)
 \end{aligned}\]
 Two-sided:
-\[\mathcal{L}\qty\{(f*g)(t)\}(s)=\int_{-\infty}^{\infty} e^{-st} \qty(\int_{-\infty}^t f(\tau)g(t-\tau)\dd{\tau})\dd{t}\]
+\[\mathcal{L}\qty\{(f*g)(t)\}=\int_{-\infty}^{\infty} e^{-st} \qty(\int_{-\infty}^t f(\tau)g(t-\tau)\dd{\tau})\dd{t}\]
 By Fubini's theorem,
-\[\mathcal{L}\qty\{(f*g)(t)\}(s)=\int_{-\infty}^\infty\int_\tau^\infty e^{-st} f(\tau)g(t-\tau)\dd{t}\dd{\tau}\]
+\[\mathcal{L}\qty\{(f*g)(t)\}=\int_{-\infty}^\infty\int_\tau^\infty e^{-st} f(\tau)g(t-\tau)\dd{t}\dd{\tau}\]
 Let $u=t-\tau$. $\dd{t}=\dd{u}$.
 \[\begin{aligned}
-\mathcal{L}\qty\{(f*g)(t)\}(s)&=\int_{-\infty}^\infty f(\tau)\int_{-\infty}^\infty e^{-s(u+\tau)} g(u)\dd{u}\dd{\tau}\\
+\mathcal{L}\qty\{(f*g)(t)\}&=\int_{-\infty}^\infty f(\tau)\int_{-\infty}^\infty e^{-s(u+\tau)} g(u)\dd{u}\dd{\tau}\\
 &=\int_{-\infty}^\infty f(\tau)e^{-s\tau}\int_0
 {-\infty}^\infty e^{-su} g(u)\dd{u}\dd{\tau}\\
 &=F(s)G(s)
@@ -370,7 +342,7 @@ PLACEHOLDER: mb move up
 The inverse Laplace transform of a complex function $F(s)$, denoted as $\mathcal{L}^{-1}\{F(s)\}(t)$ or $f(t)$, is a defined as
 \[\mathcal{L}^{-1}\{F(s)\}(t)=f(t)=\frac{1}{2\pi i}\lim_{T\to\infty}\int_{\gamma-iT}^{\gamma+iT}F(s)e^{st}\dd{s},\]
 called Mellin's inverse formula, Bromwich integral, or Fourier–Mellin integral, where $\gamma$ is any real number such that it is greater than the real part of all singularities of $F$ and that $F$ is bounded on the line $s=\gamma$, and is such that
-\[\mathcal{L}\qty\{f(t)\}(s) = F(s).\]
+\[\mathcal{L}\qty\{f(t)\} = F(s).\]
 \begin{proof}
 We want to show that for all Laplace-transformable complex function $f$ without removable discontinuity and with $f(t)=0$ for all $\Re(t)<0$:
 \[f(t)=\frac{1}{2\pi i}\lim_{T\to\infty}\int_{\gamma-iT}^{\gamma+iT}e^{st}\int_0^{\infty}f(u)e^{-su}\dd{u}\dd{s}.\]
@@ -401,12 +373,7 @@ Fourier transform is an integral transform that converts a function of a real va
 The Fourier transform, denoted as $\mathcal{F}\{f(t)\}(\omega)$ or $F(\omega)$, is defined by the improper integral
 \[\mathcal{F}\{f(t)\}(\omega) = F(\omega) = \int_{-\infty}^{\infty}e^{-i\omega t}f(t)\dd{t}.\]
 \sssc{Inverse Fourier Transform (反傅立葉變換)}
-The inverse Fourier transform of a complex function $F(s)$, denoted as $\mathcal{F}^{-1}\{F(s)\}(t)$ or $f(t)$, is defined as a real function such that
-\[\mathcal{F}\{f(t)\}(s) = F(s),\]
-where $\mathcal {F}$ denotes the Fourier transform.
-
-The inverse Laplace transform of a complex function $F(s)$ is given by the line integral:
-\[f(t) = \frac{1}{2\pi}\int_{-\infty}^{\infty} F(\omega) e^{i\omega t}\dd{\omega} .\]
+PLACEHOLDER
 \ssc{Dirichlet kernel}
 PLACEHOLDER
 \end{document}
