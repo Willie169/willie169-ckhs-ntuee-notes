@@ -20,14 +20,19 @@ f(t)+\sum_{i\in I}a_i\dv[n_i]{}{t}\delta(t-A_i) is a vector space?
 theorem L(\dv[n]{}{}\delta)=s^n
 f(0) etc. notation
 
-Let $R$ be $\bbR_{\geq0}$ for one-sided Laplace transform and $\bbR$ for two-sided Laplace transform. For any complex-valued functions $f$ defined on R$ for two-sided Laplace transform, for any indexed family with $(A_i)_{i\in I}\subseteq R$, for any indexed family $(a_i)_{i\in I}\subseteq\bbR_{\neq 0}$, the one-sided Laplace transform of $f(t)+\sum_{i\in I}a_i\delta(t-A_i)$ is defined as
-\[\int_0^{\infty}e^{-st}\qty(f(t)+\sum_{i\in I}a_i\delta(t-A_i))\dd{t},\]
-and the two-sided Laplace transform of $f(t)+\sum_{i\in I}a_i\delta(t-A_i)$ is defined as
-\[\int_{-\infty}^{\infty}e^{-st}\qty(f(t)+\sum_{i\in I}a_i\delta(t-A_i))\dd{t},\]
-where convergence of the Laplace transform is determined solely by the $f(t)$ term, where at a value of $s$, convergence is defined as the existence of the integral at it, and, if $I\neq\varnothing$, since the support of $\sum_{i\in I}a_i\delta(t-A_i)$ is a locally finite set, we can always multiply $e^{-st}$ with a function $\chi(t)$ that is 1 at all $A_i$ such that $e^{-st}\chi(t)\in\mathcal{D}(\bbR_{\geq 0})$ for one-sided Laplace transform and $e^{-st}\chi(t)\in\mathcal{D}(\bbR)$ for two-sided Laplace transform, and the integral of $e^{-st}g(t)\sum_{i\in I}\delta(t-A_i)$ is to be interpreted as
-\[\langle\sum_{i\in I}\delta_{A_i}(t),e^{-st}g(t)\chi(t)\rangle,\]
-and the derivative of $g(t)\sum_{i\in I}\delta(t-A_i)$ is taken distributionally as
-\[\dv{}{t}(g(t)\sum_{i\in I}\delta(t-A_i))=\sum_{i\in I}g(A_i)\delta'(t-A_i).\]
+Let $R$ be $\bbR_{\geq0}$ for one-sided Laplace transform and $\bbR$ for two-sided Laplace transform. The vector space over $\bbC$, $\mathscr{L}$ of Laplace transform integrands consists of all $f(t)+\sum_{j=0}^{\infty}\sum_{i\in I_j}a_{ji}\dv[j]{}{t}\delta(t-A_{ji})$, for any complex-valued functions $f$ defined on $R$, for any indexed families $(A_{ji})_{i\in I_j}\subseteq R$ and $(a_{ji})_{i\in I_j}\subseteq\bbC_{\neq 0}$, the one-sided Laplace transform is defined as
+\[\int_0^{\infty}e^{-st}\qty(f(t)+\sum_{j=0}^{\infty}\sum_{i\in I_j}a_{ji}\dv[j]{}{t}\delta(t-A_{ji}))\dd{t},\]
+and the two-sided Laplace transform is defined as
+\[\int_{-\infty}^{\infty}e^{-st}\qty(f(t)+\sum_{j=0}^{\infty}\sum_{i\in I_j}a_{ji}\dv[j]{}{t}\delta(t-A_{ji}))\dd{t},\]
+where:
+\bit
+\item Convergence of the Laplace transform at a value $z$ of $s$ is defined as
+\[e^{-zt}f(t)\in L^1(R)\land\sum_{i\in I_0}a_{0i}\exp(-zA_{0i})<\infty.\]
+\item Since the support of $\sum_{i\in I_j}a_{ji}\dv[j]{}{t}\delta(t-A_{ji})$ is a locally finite set $\{A_{ji}\}$, we can always find a function $\chi(t)$ that is $a_{ji}$ at $A_{ji}$ such that $e^{-st}\chi(t)\in\mathcal{D}(R)$, and the integral of $e^{-st}\chi(t)\sum_{i\in I_j}a_{ji}\dv[j]{}{t}\delta(t-A_{ji})$ is to be interpreted as
+\[\langle\sum_{i\in I_j}a_{ji}\dv[j]{}{t}\delta(t-A_{ji}),e^{-st}\chi(t)\rangle,\]
+and the derivative of $\sum_{i\in I_j}a_{ji}\dv[j]{}{t}\delta(t-A_{ji})$ is taken distributionally as
+\[\dv{}{t}(\sum_{i\in I_j}a_{ji}\dv[j]{}{t}\delta(t-A_{ji}))=\sum_{i\in I_j}a_{ji}\dv[j+1]{}{t}\delta(t-A_{ji}).\]
+\eit
 \sssc{As improper Riemann–Stieltjes integral}
 When Dirac delta is to be interpreted as Riemann–Stieltjes integral, the one-sided Laplace transform is defined as
 \[\lim_{\varepsilon\to 0^+}\int_{-\varepsilon}^{\infty}e^{-st}f(t)\sum_{i\in I}\delta(t-A_i)\dd{t},\]
