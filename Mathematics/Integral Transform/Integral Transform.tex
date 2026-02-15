@@ -10,41 +10,50 @@
 \sct{Integral Transform}
 \ssc{Laplace Transform (拉普拉斯變換)}
 \sssc{Introduction}
-The one-sided or unilateral Laplace transform and two-sided or bilateral Laplace transform, where Laplace tranform may refer to either of them or both of them depending on context and often refer to the former when not clear, are two integral transform that convert a complex-valued distribution, often denoted in lowercase such as $f$ or $f(t)$, of a real variable $t$, called time domain, to a complex-valued distribution, often denoted in uppercase such as $F$ or $F(s)$, as $\mathcal{L}\{f\}$, $\mathcal{L}\{f(t)\}$, $\mathcal{L}\{f\}(s)$, or $\mathcal{L}\{f(t)\}(s)$ for both one-sided and two-sided, or $\mathcal{B}\{f\}$, $\mathcal{B}\{f(t)\}$, $\mathcal{B}\{f\}(s)$, or $\mathcal{B}\{f(t)\}(s)$ for two-sided, of a complex variable $s$, called (complex) frequency domain, (complex) frequency plane, $s$-domain, $s$-plane, Laplace domain, or Laplace plane.
+The one-sided or unilateral Laplace transform and two-sided or bilateral Laplace transform, where Laplace tranform may refer to either of them or both of them depending on context and often refer to the former when not clear, are two integral transform that convert a complex-valued signal, often denoted in lowercase such as $f$ or $f(t)$, of a real variable $t$, called time domain, to a complex-valued function, often denoted in uppercase such as $F$ or $F(s)$, as $\mathcal{L}\{f\}$, $\mathcal{L}\{f(t)\}$, $\mathcal{L}\{f\}(s)$, or $\mathcal{L}\{f(t)\}(s)$ for both one-sided and two-sided, or $\mathcal{B}\{f\}$, $\mathcal{B}\{f(t)\}$, $\mathcal{B}\{f\}(s)$, or $\mathcal{B}\{f(t)\}(s)$ for two-sided, of a complex variable $s$, called (complex) frequency domain, (complex) frequency plane, $s$-domain, $s$-plane, Laplace domain, or Laplace plane.
 \sssc{Definition}
-Let $R$ be $\bbR_{\geq0}$ for one-sided Laplace transform and $\bbR$ for two-sided Laplace transform. The vector space over $\bbC$, $\mathscr{L}$ of Laplace transform integrands consists of all $f(t)+\sum_{j=0}^{\infty}\sum_{i\in I_j}a_{ji}\dv[j]{}{t}\delta(t-A_{ji})$, for any complex-valued functions $f$ defined on $R$, for any intervals $K_j\ni 0$, for $I_j=\bbZ\cap R\cap K_j$, for any indexed families $(A_{ji})_{i\in I_j}\subseteq R$ with $A_{ji}<A_{j(i+1)}$ for any $i$ such that $i\in I_j\land i+1\in I_j$, for any indexed families $(a_{ji})_{i\in I_j}\subseteq\bbC_{\neq 0}$, the one-sided Laplace transform is defined as
-\[\int_0^{\infty}e^{-st}\qty(f(t)+\sum_{j=0}^{\infty}\sum_{i\in I_j}a_{ji}\dv[j]{}{t}\delta(t-A_{ji}))\dd{t},\]
+Let $R$ be $\bbR_{\geq0}$ for one-sided Laplace transform and $\bbR$ for two-sided Laplace transform.
+
+For any complex-valued (or real-valued) functionals $f$ defined on $R$, the one-sided Laplace transform is defined as
+\[\int_0^{\infty}e^{-st}f(t)\dd{t},\]
 and the two-sided Laplace transform is defined as
-\[\int_{-\infty}^{\infty}e^{-st}\qty(f(t)+\sum_{j=0}^{\infty}\sum_{i\in I_j}a_{ji}\dv[j]{}{t}\delta(t-A_{ji}))\dd{t},\]
-where:
-\bit
-\item Convergence of the Laplace transform at a value $z$ of $s$ is defined as
-\[e^{-zt}f(t)\in L^1(R)\land\sum_{i\in I_0}a_{0i}\exp(-zA_{0i})<\infty.\]
-\item Since the support of $\sum_{i\in I_j}a_{ji}\dv[j]{}{t}\delta(t-A_{ji})$ is a locally finite set $\{A_{ji}\}$, we can always find a function $\chi(t)$ that is $a_{ji}$ at $A_{ji}$ such that $e^{-st}\chi(t)\in\mathcal{D}(R)$, and the integral of $e^{-st}\chi(t)\sum_{i\in I_j}a_{ji}\dv[j]{}{t}\delta(t-A_{ji})$ is to be interpreted as
-\[\langle\sum_{i\in I_j}a_{ji}\dv[j]{}{t}\delta(t-A_{ji}),e^{-st}\chi(t)\rangle,\]
-and the derivative of $\sum_{i\in I_j}a_{ji}\dv[j]{}{t}\delta(t-A_{ji})$ is taken distributionally as
+\[\int_{-\infty}^{\infty}e^{-st}f(t)\dd{t},\]
+where convergence of Laplace transform is defined as the finiteness of integral.
+
+For any complex-valued (or real-valued) distribution $T\in\mathcal{D}(R)$ with compact support, the Laplace transform is defined as
+\[\langle T,e^{-st}\rangle,\]
+where Laplace transform is always convergent.
+
+Distributions are often denoted in function notation but should be interpreted as distribution.
+
+Laplace transform of sum of distribution and functional should be interpreted as the sum of the Laplace transform of them, and the convergence of Laplace transform is defined as the convergence of Laplace transform of the functional.
+
+
+
+
+
+
+where for all $j$, we can always find a complex-valued (or real-valued) function $\chi(t)$ such that for all $i$, $\chi(A_{ji})=a_{ji}$ and that $e^{-st}\chi(t)\in\mathcal{D}(R)$, and the integral of $e^{-st}\chi(t)\sum_{i\in I_j}a_{ji}\dv[j]{}{t}\delta(t-A_{ji})$ is to be interpreted as
+\[\langle\sum_{i\in I_j}\abs{a_{ji}}\dv[j]{}{t}\delta(t-A_{ji}),e^{-st}\chi(t)\rangle,\]
+and the derivative of $\sum_{i\in I_j}a_{ji}\dv[j]{}{t}\delta(t-A_{ji})$ is taken distributionally, that is,
 \[\dv{}{t}(\sum_{i\in I_j}a_{ji}\dv[j]{}{t}\delta(t-A_{ji}))=\sum_{i\in I_j}a_{ji}\dv[j+1]{}{t}\delta(t-A_{ji}).\]
-\eit
 
+Dirac delta can also be interpreted as Dirac measure or Stieltjes integral over $u(x)$ if no derivative is involved. As improper Riemann–Stieltjes integral, the one-sided Laplace transform can be defined as
+\[\lim_{\varepsilon\to 0^+}\int_{-\varepsilon}^{\infty}e^{-st}\qty(f(t)+\sum_{j=0}^{\infty}\sum_{i\in I_j}a_{ji}\dv[j]{}{t}\delta(t-A_{ji}))\dd{t},\]
+where $\lim_{\varepsilon\to 0^+}\int_{-\varepsilon}^{\infty}$ is also denoted as $\int_{0^-}^{\infty}$, and $e^{-zt}f(t)\in L^1(R)$ can be replaced with the absolute convergence of the improper Riemann–Stieltjes integral with $s=z$.
 
-\sssc{As improper Riemann–Stieltjes integral}
-When Dirac delta is to be interpreted as Riemann–Stieltjes integral, the one-sided Laplace transform is defined as
-\[\lim_{\varepsilon\to 0^+}\int_{-\varepsilon}^{\infty}e^{-st}f(t)\sum_{i\in I}\delta(t-A_i)\dd{t},\]
-and the two-sided Laplace transform of it is defined as
-\[\int_{-\infty}^{\infty}e^{-st}f(t)\sum_{i\in I}\delta(t-A_i)\dd{t},\]
-where $\lim_{\varepsilon\to 0^+}\int_{-\varepsilon}^{\infty}$ is also denoted as $\int_{0^-}^{\infty}$.
-
-Convergence of a Laplace transform at a value $z$ of $s$ is defined as the absolute convergence of the integral with $s=z$.
-
-When denoting $f(t)\sum_{i\in I}\delta(t-A_i)$ as a single function, say $g(t)$, $g(0)$ or $g(0^-)$ and $\dv[n]{}{t}g(0)$ or $\dv[n]{}{t}g(0^-)$ are to be interpreted as $f(0)$ and $\dv[n]{}{t}f(0)$.
+When denoting $f(t)+\sum_{j=0}^{\infty}\sum_{i\in I_j}a_{ji}\dv[j]{}{t}\delta(t-A_{ji})$ as a single notation, say $g(t)$, for all $n\in\bbN_0$, $\dv[n]{}{t}g(0)$, $\dv[n]{}{t}g(0^-)$, or $\dv[n]{}{t}g(0^+)$ are to be interpreted as $\dv[n]{}{t}f(0)$.
 \sssc{Region of convergence (ROC)}
 The set of values of $s$ for which $F(s)$ converges is called region of convergence (ROC). A function is called Laplace-transformable iff the ROC of its Laplace transform is nonempty.
 
 For one-sided Laplace tranform, ROC is a class of the form of either $\Re(s) > a$ or $\Re(s) \geq a$ for some extended real constant $a$, called abscissa of convergence.
 
 For two-sided Laplace tranform, ROC is a class of the form of either $\Re(s) > a$ or $\Re(s) \geq a$ and either $\Re(s) <  $ or $\Re(s) \leq b$ for some extended real constants $a$ and $b$, called abscissas of convergence.
+\sssc{Linearity}
+\[\mathcal{L}\qty\{af(t)+bg(t)\}=a\mathcal{L}\qty\{f(t)\}+b\mathcal{L}\qty\{g(t)\},\quad a,b\in\bbC.\]
+For $a,b\neq 0$, the ROC is the intersection of the ROC of $\mathcal{L}\qty\{f(t)\}$ and $\mathcal{L}\qty\{g(t)\}$.
 \sssc{Laplace transformability theorem}
-A complex-valued function $f(t)$ defined on $[0,\infty)$ is one-sided Laplace-transformable if it is piecewise continuous on all closed subintervals of $[0,\infty)$ and of exponential order.
+A complex-valued (or real-valued) function $f(t)$ defined on $[0,\infty)$ is one-sided Laplace-transformable if it is piecewise continuous on all closed subintervals of $[0,\infty)$ and of exponential order.
 \begin{proof}
 Assume that a $f(t)$ is piecewise continuous on $[0,\infty)$ and there exists $M>0$ and $T>0$ such that:
 \[|f(t)|\leq Me^{\alpha t}\quad \forall t>T.\]
@@ -61,7 +70,7 @@ For the second integral, since $|f(t)| \le M e^{\alpha t}$, we have
 \[\int_T^\infty |f(t)| e^{-st}\dd{t}\le \int_T^\infty M e^{\alpha t} e^{-st}\dd{t} = M \int_T^\infty e^{-(s-\alpha)t}\dd{t},\]
 which converges since $\Re(s)>\alpha$.
 \end{proof}
-A complex-valued function $f(t)$ defined on $\bbR$ is two-sided Laplace-transformable if it is piecewise continuous on all closed intervals and of exponential order and that $f(-t)$ is of exponential order.
+A complex-valued (or real-valued) function $f(t)$ defined on $\bbR$ is two-sided Laplace-transformable if it is piecewise continuous on all closed intervals and of exponential order and that $f(-t)$ is of exponential order.
 \sssc{Unit impulses abscissa of convergence theorem for one-sided Laplace tranform}
 For any indexed family $A\colon I\to\mathcal{A}\subseteq\bbR_{\geq 0};\;i\mapsto A_i$ with $I=J\cap\bbN$ for some interval $J\ni 1$ and $A_i\leq A_{i+1}$ for all $i\in I\land (i+1)\in I$,
 \[\mathcal{L}\qty\{\sum_{i\in I}\delta(t-A_i)\}=\sum_{i\in I}e^{-sA_i}.\]
@@ -147,9 +156,6 @@ that is,
 \item for $\limsup_{i\to\infty}\frac{\ln(\abs{f\qty(B_i)}i)}{-B_i}=\infty$, $\bbC$.
 \eit
 \eit
-\sssc{Linearity}
-\[\mathcal{L}\qty\{af(t)+bg(t)\}=a\mathcal{L}\qty\{f(t)\}+b\mathcal{L}\qty\{g(t)\},\quad a,b\in\bbC.\]
-For $a,b\neq 0$, the ROC is the intersection of the ROC of $\mathcal{L}\qty\{f(t)\}$ and $\mathcal{L}\qty\{g(t)\}$.
 \sssc{Exponential function}
 \[\mathcal{L}\qty\{e^{at}\}(s) = \frac{1}{s-a},\quad a\in\bbC.\]
 \sssc{First shifting theorem or Frequency shift}
