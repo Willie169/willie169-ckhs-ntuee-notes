@@ -24,9 +24,9 @@ For any complex-valued (or real-valued) distribution $T\in\mathcal{D}(R)$ with c
 \[\langle T,e^{-st}\rangle,\]
 where Laplace transform is always convergent.
 
-Distributions are often denoted in function notation but should be interpreted as distribution.
+Distributions are often denoted in function inside integral notation, notably such as Dirac distribution, but should be interpreted as distribution.
 
-Laplace transform and derivative of sum of distribution and functional should be interpreted as the sum of the Laplace transform and derivative of them.
+Laplace transform and derivative of a sum of functional and distribution in function inside integral notation should be interpreted as the sum of the Laplace transform and derivative of it. Function value at a point of a functional and distribution in function inside integral notation should be interpreted as function value of the functional.
 
 For one-sided Laplace transform, $\int_0^{\infty}$ is also denoted as $\int_{0^-}^{\infty}$ or $\lim_{\varepsilon\to 0^+}\int_{-\varepsilon}^{\infty}$, and $0$ is also denoted as $0^-$. This is for compatibility of Riemann–Stieltjes integral interpretation of Dirac delta and does not imply that the signal needs to be defined on $[a,0)$ for some $a<0$.
 \sssc{Region of convergence (ROC)}
@@ -110,37 +110,42 @@ The ROC doesn't change.
 \end{proof}
 \sssc{Differentiation in time domain}
 For one-sided Laplace transform of functional:
-\[\mathcal{L}\qty\{f'(t)\}=sF(s)-f(0)+\lim_{t\to\infty}e^{-st}f(t).\]
+\[\mathcal{L}\qty\{f'(t)\}=sF(s)+\lim_{t\to\infty}e^{-st}f(t)-f(0),\]
+\[\mathcal{L}\qty\{\dv[n]{f}{t}(t)\}=s^nF(s)+\sum_{i=0}^{n-1}s^{n-1-i}\qty(\lim_{t\to\infty}e^{-st}\dv[i]{f}{t}(t)-\dv[i]{f}{t}(0)).\]
 \bpr
 \[u=e^{-st},\quad\dd{u}=-se^{-st}\dd{t}.\]
 \[\dd{v}=f'(t)\dd{t},\quad v=f(t).\]
 \[\ba
 \mathcal{L}\qty\{f'(t)\}&=\int_0^\infty e^{-st}f'(t)\dd{t}\\
 &=\qty(e^{-st}f(t))\big\vert_0^\infty+\int_0^\infty f(t)se^{-st}\dd{t}\\
-&=sF(s)-f(0)+\lim_{t\to\infty}e^{-st}f(t)
+&=sF(s)+\lim_{t\to\infty}e^{-st}f(t)-f(0)
 \ea\]
 \epr
-The ROC is the same as that of $F(s)$.
+If $f$ is of exponential order, $\lim_{t\to\infty}e^{-st}f(t)=0$,
+\[\mathcal{L}\qty\{f'(t)\}=sF(s)-f(0),\]
+\[\mathcal{L}\qty\{\dv[n]{f}{t}(t)\}=s^nF(s)-\sum_{i=0}^{n-1}s^{n-1-i}\dv[i]{f}{t}(0),\]
+and the ROC is a superset of that of $F(s)$.
 
-If $f$ is of exponential order, $\lim_{t\to\infty}e^{-st}f(t)=0$, and
-\[\mathcal{L}\qty\{f'(t)\}=sF(s)-f(0).\]
 For two-sided Laplace transform of functional:
-\[\mathcal{L}\qty\{f'(t)\}=sF(s)-\lim_{t\to-\infty}e^{-st}f(t)+\lim_{t\to\infty}e^{-st}f(t).\]
+\[\mathcal{L}\qty\{f'(t)\}=sF(s)+\lim_{t\to\infty}e^{-st}f(t)-\lim_{t\to-\infty}e^{-st}f(t),\]
+\[\mathcal{L}\qty\{\dv[n]{f}{t}(t)\}=s^nF(s)+\sum_{i=0}^{n-1}s^{n-1-i}\qty(\lim_{t\to\infty}e^{-st}\dv[i]{f}{t}(t)-\lim_{t\to-\infty}e^{-st}\dv[i]{f}{t}(t)).\]
 \bpr
 \[u=e^{-st},\quad\dd{u}=-se^{-st}\dd{t}.\]
 \[\dd{v}=f'(t)\dd{t},\quad v=f(t).\]
 \[\ba
 \mathcal{L}\qty\{f'(t)\}&=\int_{-\infty}^\infty e^{-st}f'(t)\dd{t}\\
 &=\qty(e^{-st}f(t))\big\vert_{-\infty}^\infty+\int_{-\infty}^\infty f(t)se^{-st}\dd{t}\\
-&=sF(s)-\lim_{t\to-\infty}e^{-st}f(t)+\lim_{t\to\infty}e^{-st}f(t)
+&=sF(s)+\lim_{t\to\infty}e^{-st}f(t)-\lim_{t\to-\infty}e^{-st}f(t)
 \ea\]
 \epr
-The ROC is the same as that of $F(s)$.
+If $f$ is of exponential order, $\lim_{t\to-\infty}e^{-st}f(t)=\lim_{t\to\infty}e^{-st}f(t)=0$,
+\[\mathcal{L}\qty\{f'(t)\}=sF(s),\]
+\[\mathcal{L}\qty\{\dv[n]{f}{t}(t)\}=s^nF(s),\]
+and the ROC is a superset of that of $F(s)$.
 
-If $f$ is of exponential order, $\lim_{t\to-\infty}e^{-st}f(t)=\lim_{t\to\infty}e^{-st}f(t)=0$, and
-\[\mathcal{L}\qty\{f'(t)\}=sF(s).\]
 For Laplace transform of distribution:
-\[\mathcal{L}\{T'\}=s\mathcal{L}\{T\}.\]
+\[\mathcal{L}\{T'\}=s\mathcal{L}\{T\},\]
+\[\mathcal{L}\{\dv[n]{T}{t}\}=s^n\mathcal{L}\{T\}.\]
 \bpr
 \[\ba
 \langle T',e^{-st}\rangle&=-\langle T,-se^{-st}\rangle\\
@@ -160,7 +165,7 @@ For one-sided Laplace transform of functional:
 \epr
 If $f$ is of exponential order, $\lim_{t\to\infty}e^{-st}\int_0^tf(\tau)\dd{\tau}=0$ for all $s$ in its ROC,
 \[\mathcal{L}\qty\{\int_0^tf(\tau)\dd{\tau}\}=\frac{1}{s}F(s),\]
-and the ROC is the same as that of $F(s)$.
+and the ROC is $F(s)$ if there is a zero at $0$ of $F(s)$ and $F(s)\cap\{s\in\bbC\mid\Re(s)>0\}$ otherwise.
 
 For two-sided Laplace transform of functional:
 \[\mathcal{L}\qty\{\int_{-\infty}^tf(\tau)\dd{\tau}\}=\frac{1}{s}F(s)-\frac{1}{s}\lim_{t\to\infty}e^{-st}\int_{-\infty}^tf(\tau)\dd{\tau}.\]
@@ -173,39 +178,33 @@ For two-sided Laplace transform of functional:
 \epr
 If $f$ is of exponential order, $\lim_{t\to\infty}e^{-st}\int_{-\infty}^tf(\tau)\dd{\tau}=0$ for all $s$ in its ROC,
 \[\mathcal{L}\qty\{\int_{-\infty}^tf(\tau)\dd{\tau}\}=\frac{1}{s}F(s),\]
-and the ROC is the same as that of $F(s)$.
-\[\mathcal{L}\qty\{\int_t^{\infty}f(\tau)\dd{\tau}\}=\frac{1}{s}F(s)-\frac{1}{s}\lim_{t\to-\infty}e^{-st}\int_t^{\infty}f(\tau)\dd{\tau}.\]
+and the ROC is $F(s)$ if there is a zero at $0$ of $F(s)$ and $F(s)\cap\{s\in\bbC\mid\Re(s)>0\}$$ otherwise.
+\[\mathcal{L}\qty\{\int_t^{\infty}f(\tau)\dd{\tau}\}=-\frac{1}{s}F(s)-\frac{1}{s}\lim_{t\to-\infty}e^{-st}\int_t^{\infty}f(\tau)\dd{\tau}.\]
 \bpr
 \[\ba
 \mathcal{L}\qty\{\int_t^{\infty}f(\tau)\dd{\tau}\}&=\int_{-\infty}^{\infty}e^{-st}\int_t^{\infty}f(\tau)\dd{\tau}\dd{t}\\
-&=\qty(-\frac{1}{s}e^{-st}\int_t^{\infty}f(\tau)\dd{\tau})\big\vert_{-\infty}^\infty+\int_{-\infty}^{\infty}\frac{1}{s}e^{-st}f(t)\dd{t}\\
-&=\frac{1}{s}F(s)-\frac{1}{s}\lim_{t\to-\infty}e^{-st}\int_t^{\infty}f(\tau)\dd{\tau}
+&=\qty(-\frac{1}{s}e^{-st}\int_t^{\infty}f(\tau)\dd{\tau})\big\vert_{-\infty}^\infty-\int_{-\infty}^{\infty}\frac{1}{s}e^{-st}f(t)\dd{t}\\
+&=-\frac{1}{s}F(s)-\frac{1}{s}\lim_{t\to-\infty}e^{-st}\int_t^{\infty}f(\tau)\dd{\tau}
 \ea\]
 \epr
 If $f$ is of exponential order, $\lim_{t\to-\infty}e^{-st}\int_t^{\infty}f(\tau)\dd{\tau}=0$ for all $s$ in its ROC,
-\[\mathcal{L}\qty\{\int_t^{\infty}f(\tau)\dd{\tau}\}=\frac{1}{s}F(s),\]
-and the ROC is the same as that of $F(s)$.
+\[\mathcal{L}\qty\{\int_t^{\infty}f(\tau)\dd{\tau}\}=-\frac{1}{s}F(s),\]
+and the ROC is $F(s)$ if there is a zero at $0$ of $F(s)$ and $F(s)\cap\{s\in\bbC\mid\Re(s)<0\}$ otherwise.
 
-PLACEHOLDER 以下
+PLACEHOLDER
 
 \sssc{Differentiation in frequency domain}
-\[\mathcal{L}\qty\{t f(t)\} = -\dv{}{s} F(s).\]
-\[\mathcal{L}\qty\{t^n f(t)\} = (-1)^n \dv[n]{}{s} F(s).\]
+For Laplace transform of functional:
+\[\mathcal{L}\{tf(t)\}=-\dv{}{s}F(s).\]
+\[\mathcal{L}\qty\{t^nf(t)\}=(-1)^n\dv[n]{}{s}F(s).\]
 \begin{proof}
-One-sided: By Leibniz integral rule,
-\bma
--\dv{}{s} F(s)&=-\dv{}{s}\int_0^{\infty} e^{-st} f(t)\dd{t}\\
-&=-\int_0^{\infty} \pdv{}{s}\qty(e^{-st} f(t))\dd{t}\\
-&=-\int_0^{\infty} -te^{-st} f(t)\dd{t}\\
-&=\mathcal{L}\qty\{t f(t)\}
-\eam
-Two-sided: By Leibniz integral rule,
-\bma
--\dv{}{s} F(s)&=-\dv{}{s}\int_{-\infty}^{\infty} e^{-st} f(t)\dd{t}\\
-&=-\int_{-\infty}^{\infty} \pdv{}{s}\qty(e^{-st} f(t))\dd{t}\\
-&=-\int_{-\infty}^{\infty} -te^{-st} f(t)\dd{t}\\
-&=\mathcal{L}\qty\{t f(t)\}
-\eam
+By Leibniz integral rule,
+\[\ba
+-\dv{}{s}F(s)&=-\dv{}{s}\int_Re^{-st}f(t)\dd{t}\\
+&=-\int_R\pdv{}{s}\qty(e^{-st}f(t))\dd{t}\\
+&=-\int_R-te^{-st}f(t)\dd{t}\\
+&=\mathcal{L}\{tf(t)\}
+\ea\]
 \end{proof}
 \sssc{Scaling in time domain for one-sided Laplace transform}
 \[\mathcal{L}\qty\{f(at)\} = \frac{1}{a} F\left(\frac{s}{a}\right), \quad a>0.\]
