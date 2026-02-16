@@ -29,6 +29,8 @@ Distributions are often denoted in function inside integral notation, notably su
 Laplace transform and derivative of a sum of functional and distribution in function inside integral notation should be interpreted as the sum of the Laplace transform and derivative of it. Function value at a point of a functional and distribution in function inside integral notation should be interpreted as function value of the functional.
 
 For one-sided Laplace transform, $\int_0^{\infty}$ is also denoted as $\int_{0^-}^{\infty}$ or $\lim_{\varepsilon\to 0^+}\int_{-\varepsilon}^{\infty}$, and $0$ is also denoted as $0^-$. This is for compatibility of Riemann–Stieltjes integral interpretation of Dirac delta and does not imply that the signal needs to be defined on $[a,0)$ for some $a<0$.
+
+For one-sided transform, functional and distribution are implicitly assigned $0$ for all $t<0$.
 \sssc{Region of convergence (ROC)}
 The set of values of $s$ for which $F(s)$ converges is called region of convergence (ROC). A function is called Laplace-transformable iff the ROC of its Laplace transform is nonempty.
 
@@ -99,14 +101,34 @@ For two-sided Laplace transformer, the ROC is $\varnothing$.
 \sssc{First shifting theorem or frequency shift}
 \[\mathcal{L}\qty\{e^{at}f(t)\}=F(s-a),\quad a\in\bbC_{\neq0}.\]
 For one-sided Laplace transformer, the ROC shifts right by $\Re(a)$.
+
+For two-sided Laplace transformer, the ROC change depends on $f$.
 \sssc{Second shifting theorem, time delay, or time shift}
-\[\mathcal{L}\qty\{f(t-a)u(t-a)\}=e^{-as}F(s), \quad a\in\bbR_{\geq 0}.\]
+For one-sided Laplace transform:
+\[\mathcal{L}\qty\{f(t-a)\}=e^{-as}F(s),\quad a\in\bbR_{\geq 0}.\]
 The ROC doesn't change.
 \begin{proof}
+For functional:
 \[\ba
-\mathcal{L}\qty\{f(t-a)u(t-a)\}&=\int_a^{\infty}e^{-st}f(t-a)\dd{t}\\
+\mathcal{L}\qty\{f(t-a)\}&=\int_a^{\infty}e^{-st}f(t-a)\dd{t}\\
+&=\int_0^{\infty}e^{-s(u+a)}f(u)\dd{u}\\
 &=e^{-as}F(s)
 \ea\]
+For distribution:
+\[\langle\tau_aT,e^{-st}\rangle=\langle T,e^{-s(t+a)}\rangle=e^{-as}\langle T,e^{-st}.\]
+\end{proof}
+For two-sided Laplace transform:
+\[\mathcal{L}\qty\{f(t-a)\}=e^{-as}F(s),\quad a\in\bbR_{\neq 0}.\]
+The ROC doesn't change.
+\begin{proof}
+For functional:
+\[\ba
+\mathcal{L}\qty\{f(t-a)\}&=\int_{-\infty}^{\infty}e^{-st}f(t-a)\dd{t}\\
+&=\int_{-\infty}^{\infty}e^{-s(u+a)}f(u)\dd{u}\\
+&=e^{-as}F(s)
+\ea\]
+For distribution:
+\[\langle\tau_aT,e^{-st}\rangle=\langle T,e^{-s(t+a)}\rangle=e^{-as}\langle T,e^{-st}.\]
 \end{proof}
 \sssc{Differentiation in time domain}
 For one-sided Laplace transform of functional:
@@ -190,26 +212,35 @@ and the ROC is $F(s)$ if there is a zero at $0$ of $F(s)$ and $F(s)\cap\{s\in\bb
 If $f$ is of exponential order, $\lim_{t\to-\infty}e^{-st}\int_t^{\infty}f(\tau)\dd{\tau}=0$ for all $s$ in its ROC,
 \[\mathcal{L}\qty\{\int_t^{\infty}f(\tau)\dd{\tau}\}=-\frac{1}{s}F(s),\]
 and the ROC is $F(s)$ if there is a zero at $0$ of $F(s)$ and $F(s)\cap\{s\in\bbC\mid\Re(s)<0\}$ otherwise.
-
-PLACEHOLDER
-
 \sssc{Differentiation in frequency domain}
-For Laplace transform of functional:
-\[\mathcal{L}\{tf(t)\}=-\dv{}{s}F(s).\]
+\[\mathcal{L}\{tf(t)\}=-\dv{}{s}F(s),\]
 \[\mathcal{L}\qty\{t^nf(t)\}=(-1)^n\dv[n]{}{s}F(s).\]
 \begin{proof}
-By Leibniz integral rule,
+For functional, by Leibniz integral rule,
 \[\ba
 -\dv{}{s}F(s)&=-\dv{}{s}\int_Re^{-st}f(t)\dd{t}\\
 &=-\int_R\pdv{}{s}\qty(e^{-st}f(t))\dd{t}\\
 &=-\int_R-te^{-st}f(t)\dd{t}\\
 &=\mathcal{L}\{tf(t)\}
 \ea\]
+For distribution:
+\[\dv{}{s}\mathcal{L}\{T\}=\langle T,-te^{-st}\rangle=-\mathcal{L}\{tT\}.\]
 \end{proof}
-\sssc{Scaling in time domain for one-sided Laplace transform}
+\sssc{Scaling in time domain}
+For one-sided Laplace transform:
 \[\mathcal{L}\qty\{f(at)\} = \frac{1}{a} F\left(\frac{s}{a}\right), \quad a>0.\]
-\sssc{Scaling in time domain for two-sided Laplace transform}
+For two-sided Laplace transform:
 \[\mathcal{L}\qty\{f(at)\} = \frac{1}{a} F\left(\frac{s}{a}\right), \quad a\neq 0.\]
+\bpr
+For functional:
+\[u=at,\quad\dd{t}=\frac{1}{a}\dd{u}\]
+\[\int_Re^{-st}f(at)\dd{t}=\frac{1}{a}\int_Re^{-\frac{s}{a}u}f(u)\dd{u}\]
+For distribution:
+\[\langle S_aT,e^{-st}\rangle=\frac{1}{a}\langle T,e^{-\frac{st}{a}}\rangle.\]
+\epr
+
+PLACEHOLDER
+
 \sssc{Convolution theorem}
 \[\mathcal{L}\qty\{(f*g)(t)\} = F(s)G(s).\]
 \begin{proof}
