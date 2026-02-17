@@ -238,56 +238,59 @@ For functional:
 For distribution:
 \[\langle S_aT,e^{-st}\rangle=\frac{1}{a}\langle T,e^{-\frac{st}{a}}\rangle.\]
 \epr
-
-PLACEHOLDER
-
-\sssc{Convolution theorem}
-\[\mathcal{L}\qty\{(f*g)(t)\} = F(s)G(s).\]
-\begin{proof}
-One-sided:
-\[\mathcal{L}\qty\{(f*g)(t)\}=\int_0^{\infty} e^{-st} \qty(\int_0^t f(\tau)g(t-\tau)\dd{\tau})\dd{t}\]
+\sssc{Convolution theorem for functionals}
+For functionals:
+\[\mathcal{L}\qty\{(f*g)(t)\}=F(s)G(s).\]
+\bpr
 By Fubini's theorem,
-\[\mathcal{L}\qty\{(f*g)(t)\}=\int_0^\infty\int_\tau^\infty e^{-st} f(\tau)g(t-\tau)\dd{t}\dd{\tau}\]
-Let $u=t-\tau$. $\dd{t}=\dd{u}$.
-\[\begin{aligned}
-\mathcal{L}\qty\{(f*g)(t)\}&=\int_0^\infty f(\tau)\int_0^\infty e^{-s(u+\tau)} g(u)\dd{u}\dd{\tau}\\
-&=\int_0^\infty f(\tau)e^{-s\tau}\int_0^\infty e^{-su} g(u)\dd{u}\dd{\tau}\\
+\[\ba
+\mathcal{L}\qty\{(f*g)(t)\}&=\int_Re^{-st}\int_Rf(\tau)g(t-\tau)\dd{\tau}\dd{t},\quad u=t-\tau\\
+&=\int_Re^{-s\tau}f(\tau)\dd{\tau}\int_Re^{-su}g(u)\dd{u}\\
 &=F(s)G(s)
-\end{aligned}\]
-Two-sided:
-\[\mathcal{L}\qty\{(f*g)(t)\}=\int_{-\infty}^{\infty} e^{-st} \qty(\int_{-\infty}^t f(\tau)g(t-\tau)\dd{\tau})\dd{t}\]
-By Fubini's theorem,
-\[\mathcal{L}\qty\{(f*g)(t)\}=\int_{-\infty}^\infty\int_\tau^\infty e^{-st} f(\tau)g(t-\tau)\dd{t}\dd{\tau}\]
-Let $u=t-\tau$. $\dd{t}=\dd{u}$.
-\[\begin{aligned}
-\mathcal{L}\qty\{(f*g)(t)\}&=\int_{-\infty}^\infty f(\tau)\int_{-\infty}^\infty e^{-s(u+\tau)} g(u)\dd{u}\dd{\tau}\\
-&=\int_{-\infty}^\infty f(\tau)e^{-s\tau}\int_0
-{-\infty}^\infty e^{-su} g(u)\dd{u}\dd{\tau}\\
-&=F(s)G(s)
-\end{aligned}\]
-\end{proof}
-\sssc{Initial Value Theorem (IVT) for one-sided Laplace tranform}
-If $f$ has not unit impulse at $0$, then
+\ea\]
+\epr
+\sssc{Initial Value Theorem (IVT) for one-sided Laplace tranform of functional}
+For functional $f$ of expertial order and $s\in\bbR$,
 \[\lim_{t\to 0^+}f(t)=\lim_{s\to\infty}sF(s).\]
 \begin{proof}
+For $s\in\bbR$:
 \[sF(s)=\int_0^\infty sf(t)e^{-st}\dd{t}.\]
 Let $u=st$, $\dd{t}=\frac{\dd{u}}{s}$.
 \[sF(s)=\int_0^\infty f\qty(\frac{u}{s})e^{-u}\dd{u}.\]
-\[\lim_{s\to\infty}sF(s)=\int_0^\infty f\qty(\frac{u}{s})e^{-u}\dd{u}.\]
-We define a net of functions $\langle f_s(u)=f\qty(\frac{u}{s})\rangle_{s\in\mathbb{R}_{>s_0}}$, where $s_0$ is such that $F(s)$ converges for all $\Re(s)>s_0$.
+\[\lim_{s\to\infty}sF(s)=\lim_{s\to\infty}\int_0^\infty f\qty(\frac{u}{s})e^{-u}\dd{u}.\]
+Define a net of functions $\langle f_s(u)=f\qty(\frac{u}{s})\rangle$ where $s$ is in the ROC of $F(s)$.
 
-For every fixed $u\in\mathbb{R}_{>0}$, $\lim_{s\to\infty}\frac{u}{s}\to 0^+$, so $f_s(u)$ pointwise converges to $f(0^+)$.
+Since $f(t)$ is in $L^1(\bbR_{\geq0})$, $f(0^+)$ exists. For any fixed $u\in\mathbb{R}_{>0}$, $\lim_{s\to\infty}\frac{u}{s}\to 0^+$, so $f_s(u)$ pointwise converges to $f(0^+)$, and $f_s(u)e^{-u}$ pointwise converges to $f(0^+)e^{-u}$.
 
 For dominated convergence theorem, we require an integrable function $g(u)$ such that
-\[\abs{f\qty(\frac{u}{s})e^{-u}}\le g(u),\quad\forall s>0.\]
-Since $f(t)$ is Laplace-transformable, it is of exponential order, that is, there exists $\alpha>0$, $M>0$, and $T>0$ such that:
+\[\abs{f\qty(\frac{u}{s})e^{-u}}\le g(u)\]
+a.e. for all $s>0$.
+
+Since $f(t)$ is in $L^1(\bbR_{\geq0})$, there exists $C\in\bbR$ such that
+\[|f(t)|\le C\quad\forall 0\leq t\leq T.\]
+Since $f(t)$ is of exponential order, there exists $\alpha>0$, $M>0$, and $T>0$ such that:
 \[|f(t)|\le Me^{\alpha t}\quad\forall t>T.\]
-\[Me^{\alpha\frac{u}{s}}e^{-u}=Me^{-u\qty(1-\frac{\alpha}{s})}\le Me^{-\frac{u}{2}},\quad\forall s>2\alpha.\]
+\[f\qty(\frac{u}{s})e^{-u}\leq Ce^{-u}+Me^{\alpha\frac{u}{s}}e^{-u}=Ce^{-u}+Me^{-u\qty(1-\frac{\alpha}{s})}\leq Ce^{-u}+Me^{-\frac{u}{2}},\quad\forall s>2\alpha.\]
 By dominated convergence theorem, we obtain:
-\[\lim_{s\to\infty}sF(s)=\lim_{n\to\infty}\int_0^\infty f(0^+)e^{-u}\dd{u}=f(0^+)\int_0^\infty e^{-u}\dd{u}=f(0^+).\]
+\[\ba
+\lim_{s\to\infty}\int_0^\infty f_s(u)e^{-u}\dd{u}&=\lim_{n\to\infty}\int_0^\infty f(0^+)e^{-u}\dd{u}\\
+&=f(0^+)\int_0^\infty e^{-u}\dd{u}\\
+&=f(0^+).
+\ea\]
 \end{proof}
-\sssc{Final Value Theorem (FVT)}
+\sssc{Final Value Theorem (FVT) for one-sided Laplace tranform of functional}
+For functional $f(t)$ with finite limit at $\infty$ and its Laplace transform $F(s)$ with no pole in $\{s\in\bbC\mid \Re(s)\geq 0\}\setminus\{0\}$, for $\{s\in\bbC\mid \Re(s)\geq 0\}$,
+\[\lim_{t\to\infty}f(t)=\lim_{s\to 0}sF(s).\]
+For functional $f(t)$ and its Laplace transform $F(s)$ with no pole in $\{s\in\bbC\mid \Re(s)\geq 0\}\setminus\{0\}$, for $\{s\in\bbC\mid \Re(s)\geq 0\}$,
+\[\abs{\lim_{t\to\infty}f(t)}=\abs{\lim_{s\to 0}sF(s)},\]
+and if there is no multiple pole of $F(s)$ at $s=0$,
+\[\lim_{t\to\infty}f(t)=\lim_{s\to 0}sF(s).\]
+\bpr
 PLACEHOLDER
+\epr
+
+
+
 \sssc{Cosine and sine functions}
 \[\mathcal{L}\{\cos(\omega t)\}=\frac{s}{s^2+\omega^2}.\]
 \begin{proof}
