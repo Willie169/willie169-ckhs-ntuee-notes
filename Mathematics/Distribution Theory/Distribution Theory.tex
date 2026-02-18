@@ -72,25 +72,45 @@ For any open subset $U\subseteq\bbR^n$, for any $T\in\mathcal{D}'(U)$, $T$ trans
 \sssc{Derivative of distribution}
 For any open subset $U\subseteq\bbR^n$, for any $T\in\mathcal{D}'(U)$, for any $\varphi\in\mathcal{D}(U)$, for any multi-index $\alpha=(\alpha_1,\alpha_2,\ldots,\alpha_n)$, the distributional derivative $D^{\alpha}T$ of $T$ is defined by,
 \[\langle D^{\alpha}T,\varphi\rangle=(-1)^{\abs{\alpha}}\langle T,D^{\alpha}\varphi\rangle.\]
-\sssc{Convolution of functions}
-For any open subset $U\subseteq\bbR^n$, for any functionals $f$ defined on $U$ and $g$ defined on $\{u-v\mid u,v\in U\}$, the convolution of $f$ and $g$, which is a functional defined on $U$, denoted as $f*g$, is defined as
-\[f*g(x)=\int_Uf(y)g(x-y)\dd{y}.\]
+\sssc{Convolution of functionals}
+For any functionals $f,g$ defined on $\bbR^n$, the convolution of $f$ and $g$, denoted as $f*g$, is a functional on $\bbR^n$ defined as
+\[f*g(x)=\int_{\bbR^n}f(y)g(x-y)\dd{y}.\]
+If $\supp(f)\cup\supp(g)\subseteq U$, then
+\[f*g(x)=\int_{U}f(y)g(x-y)\dd{y}.\]
 Commutativity:
 \[f*g=g*f.\]
-\bpr
-PLACEHOLDER
-\epr
-\sssc{Convolution of test function and distribution}
+Associativity:
+\[(f*g)*h=f*(g*h).\]
+Translation:
+\[\tau_a(f*g)=\tau_af*g=f*\tau_ag.\]
+Differentiation:
+\[D^{\alpha}(f*g)=D^{\alpha}f*g=f*D^{\alpha}g.\]
+\sssc{Convolution of functional and distribution}
 For any function $f\in C^{\infty}(\bbR^n)$, for any $T\in\mathcal{D}'(\bbR^n)$, with the constraint that either $f$ or $T$ is with compact support, the convolution of $f$ and $T$, which is an element of $C^{\infty}(\bbR^n)$, denoted as $f*T$, is defined as
 \[f*T\coloneq x\mapsto\langle T,f(x-\cdot)\rangle.\]
+Translation:
+\[\tau_a(f*T)=\tau_af*T=f*\tau_aT.\]
+Differentiation:
+\[D^{\alpha}(f*T)=D^{\alpha}f*T=f*D^{\alpha}T.\]
 \sssc{Convolution of distributions}
 For any open subset $U\subseteq\bbR^n$, for any distributions $S,T\in\mathcal{D}'(\bbR^n)$ with the constraint that at least one of them is with compact support, for any $f\in\mathcal{D}(\bbR^n)$, the convolution of $S$ and $T$, which is an element of $\mathcal{D}'(U)$, denoted as $S*T$, is defined as
 \[\langle S*T,f\rangle\coloneq\langle S,x\mapsto\langle T,\tau_{-x}f\rangle\rangle.\]
 Commutativity:
 \[S*T=T*S.\]
-\bpr
-PLACEHOLDER
-\epr
+Associativity:
+\[(R*S)*T=R*(S*T).\]
+Translation:
+\[\tau_a(S*T)=\tau_aS*T=S*\tau_aT.\]
+Differentiation:
+\[D^{\alpha}(S*T)=D^{\alpha}S*T=S*D^{\alpha}T.\]
+\sssc{Cross-correlation}
+\[f\star g\coloneq(\hat{R}f)^**g.\]
+Conjugate symmetry:
+\[f\star g=(\hat{R}(g\star f))^*.\]
+Translation:
+\[\tau_a(f*g)=\tau_{-a}f*g=f*\tau_ag.\]
+Differentiation:
+\[D^{\alpha}(f*g)=D^{\alpha}f*g=f*D^{\alpha}g.\]
 \ssc{Constant one distribution}
 For all $\varphi\in\mathcal{D}(U)$,
 \[\langle 1,\varphi\rangle=\int_U\varphi(x)\dd{x}.\]
