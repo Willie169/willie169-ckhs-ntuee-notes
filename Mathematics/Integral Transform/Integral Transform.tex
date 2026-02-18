@@ -14,7 +14,7 @@ The one-sided or unilateral Laplace transform and two-sided or bilateral Laplace
 \sssc{Definition}
 Let $R$ be $\bbR_{\geq0}$ for one-sided Laplace transform and $\bbR$ for two-sided Laplace transform.
 
-For any complex-valued (or real-valued) functionals $f$ defined on $R$, the one-sided Laplace transform is defined as
+For any complex-valued (or real-valued) functional $f$ defined on $R$, the one-sided Laplace transform is defined as
 \[\int_0^{\infty}e^{-st}f(t)\dd{t},\]
 and the two-sided Laplace transform is defined as
 \[\int_{-\infty}^{\infty}e^{-st}f(t)\dd{t},\]
@@ -250,7 +250,7 @@ By Fubini's theorem,
 \ea\]
 \epr
 \sssc{Initial Value Theorem (IVT) for one-sided Laplace tranform of functional}
-For functional $f$ of expertial order and $s\in\bbR$,
+For functional $f$ of expertial order and its one-sided Laplace transform $F(s)$, for $s\in\bbR$,
 \[\lim_{t\to 0^+}f(t)=\lim_{s\to\infty}sF(s).\]
 \begin{proof}
 For $s\in\bbR$:
@@ -279,18 +279,25 @@ By dominated convergence theorem, we obtain:
 \ea\]
 \end{proof}
 \sssc{Final Value Theorem (FVT) for one-sided Laplace tranform of functional}
-For functional $f(t)$ with finite limit at $\infty$ and its Laplace transform $F(s)$ with no pole in $\{s\in\bbC\mid \Re(s)\geq 0\}\setminus\{0\}$, for $\{s\in\bbC\mid \Re(s)\geq 0\}$,
-\[\lim_{t\to\infty}f(t)=\lim_{s\to 0}sF(s).\]
-For functional $f(t)$ and its Laplace transform $F(s)$ with no pole in $\{s\in\bbC\mid \Re(s)\geq 0\}\setminus\{0\}$, for $\{s\in\bbC\mid \Re(s)\geq 0\}$,
-\[\abs{\lim_{t\to\infty}f(t)}=\abs{\lim_{s\to 0}sF(s)},\]
-and if there is no multiple pole of $F(s)$ at $s=0$,
+For functional $f(t)$ with $\lim_{t\to\infty}f(t)\in\bbC$ and its one-sided Laplace transform $F(s)$ with no pole in $\{s\in\bbC\mid \Re(s)\geq 0\}\setminus\{0\}$, for $\{s\in\bbC\mid \Re(s)\geq 0\}$, with $\lim_{s\to 0}sF(s)\in\bbC$,
 \[\lim_{t\to\infty}f(t)=\lim_{s\to 0}sF(s).\]
 \bpr
-PLACEHOLDER
+Since $\lim_{t\to\infty}f(t)$, there exists $M$ such that $\abs{f(t)}\leq M\in\bbR$ a.e. on $(a,\infty)$ for some $a\geq0$. Let
+\[L=\lim_{t\to\infty}f(t).\]
+For all $\varepsilon>0$, there exists $\delta>0$ such that $t>\delta$ implies $\abs{f(t)-L}\leq\varepsilon$.
+
+Since
+\[s\int_0^{\infty}e^{-st}\dd{t}=1,\]
+for every $s$,
+\[sF(s)-L=s\int_0^{\infty}(f(t)-L)e^{-st}\dd{t}.\]
+Therefore,
+\[\ba
+\abs{sF(s)-L}&\leq s\int_0^{\infty}\abs{f(t)-L}e^{-st}\dd{t}\\
+&\leq 2Ms\int_0^{\delta}e^{-st}\dd{t}+\varepsilon s\int_{\delta}^{\infty}e^{-st}\\
+&\leq 2M\qty(1-e^{-s\delta})+\varepsilon s\int_0^{\infty}e^{-st}\\
+&\leq 2Ms\delta+\varepsilon
+\ea\]
 \epr
-
-
-
 \sssc{Cosine and sine functions}
 \[\mathcal{L}\{\cos(\omega t)\}=\frac{s}{s^2+\omega^2}.\]
 \begin{proof}
@@ -369,18 +376,19 @@ Let $u=st,\quad\dd{u}=s\dd{t}$.
 &=\frac{\Gamma(q+1)}{s^{q+1}}
 \ea\]
 \end{proof}
-PLACEHOLDER: pole of order $\Re(q+1)$ at $s=0$. branches for $q\notin\bbZ$.
-\ssc{Mellin's inverse formula, Bromwich integral, or Fourier–Mellin integral of Inverse Laplace transform (反拉普拉斯變換)}
-PLACEHOLDER: mb move up
-The inverse Laplace transform of a complex function $F(s)$, denoted as $\mathcal{L}^{-1}\{F(s)\}(t)$ or $f(t)$, is a defined as
+\sssc{Mellin's inverse formula, Bromwich integral, or (Fourier–Mellin integral of) inverse Laplace transform}
+The inverse Laplace transform of a complex function $F(s)$, denoted as $\mathcal{L}^{-1}\{F(s)\}(t)$ or $f(t)$, is a complex-valued functional over the reals defined as
 \[\mathcal{L}^{-1}\{F(s)\}(t)=f(t)=\frac{1}{2\pi i}\lim_{T\to\infty}\int_{\gamma-iT}^{\gamma+iT}F(s)e^{st}\dd{s},\]
-called Mellin's inverse formula, Bromwich integral, or Fourier–Mellin integral, where $\gamma$ is any real number such that it is greater than the real part of all singularities of $F$ and that $F$ is bounded on the line $s=\gamma$, and is such that
-\[\mathcal{L}\qty\{f(t)\} = F(s).\]
+where $\gamma$ is any real number such that it is greater than the real parts of all singularities of $F$ and that $F$ is bounded on the line $s=\gamma$.
+
+For any complex-valued functional $f$ defined on $\bbR$ such that $f(t)e^{-\gamma t}\in L^1(\bbR)$, the inverse Laplace transform of the two-sided Laplace transform of $f(t)$, $F(s)$, is equal to $f(t)$ a.e.
 \begin{proof}
-We want to show that for all Laplace-transformable complex function $f$ without removable discontinuity and with $f(t)=0$ for all $\Re(t)<0$:
-\[f(t)=\frac{1}{2\pi i}\lim_{T\to\infty}\int_{\gamma-iT}^{\gamma+iT}e^{st}\int_0^{\infty}f(u)e^{-su}\dd{u}\dd{s}.\]
+We want to show that:
+\[f(t)=\frac{1}{2\pi i}\lim_{T\to\infty}\int_{\gamma-iT}^{\gamma+iT}e^{st}\int_{-\infty}^{\infty}f(u)e^{-su}\dd{u}\dd{s}\]
+a.e.
+
 By Fubini's theorem:
-\[\frac{1}{2\pi i}\lim_{T\to\infty}\int_{\gamma-iT}^{\gamma+iT}e^{st}\int_0^{\infty}f(u)e^{-su}\dd{u}\dd{s}=\lim_{T\to\infty}\int_0^{\infty}f(u)\frac{1}{2\pi i}\int_{\gamma-iT}^{\gamma+iT}e^{s(t-u)}\dd{s}\dd{u}\]
+\[\frac{1}{2\pi i}\lim_{T\to\infty}\int_{\gamma-iT}^{\gamma+iT}e^{st}\int_{-\infty}^{\infty}f(u)e^{-su}\dd{u}\dd{s}=\lim_{T\to\infty}\int_{-\infty}^{\infty}f(u)\frac{1}{2\pi i}\int_{\gamma-iT}^{\gamma+iT}e^{s(t-u)}\dd{s}\dd{u}.\]
 Let
 \[K_T(t-u)=\frac{1}{2\pi i}\int_{\gamma-iT}^{\gamma+iT}e^{s(t-u)}\dd{s}.\]
 Let
@@ -391,15 +399,21 @@ Let
 Let
 \[v=t-u.\]
 \[\ba
-\lim_{T\to\infty}\int_0^{\infty}f(u)\frac{1}{2\pi i}\int_{\gamma-iT}^{\gamma+iT}e^{s(t-u)}\dd{s}\dd{u}&=\lim_{T\to\infty}\int_0^{\infty}f(u)e^{\gamma(t-u)}\frac{\sin(T(t-u))}{\pi(t-u)}\dd{u}\\
-&=e^{\gamma t}\lim_{T\to\infty}\int_0^{\infty}g(u)\frac{\sin(T(t-u))}{\pi(t-u)}\dd{u}\\
-&=e^{\gamma t}\lim_{T\to\infty}\int_0^{\infty}g(t-v)\frac{\sin(Tv)}{\pi v}\dd{v}\\
+\lim_{T\to\infty}\int_{-\infty}^{\infty}f(u)\frac{1}{2\pi i}\int_{\gamma-iT}^{\gamma+iT}e^{s(t-u)}\dd{s}\dd{u}&=\lim_{T\to\infty}\int_{-\infty}^{\infty}f(u)e^{\gamma(t-u)}\frac{\sin(T(t-u))}{\pi(t-u)}\dd{u}\\
+&=e^{\gamma t}\lim_{T\to\infty}\int_{-\infty}^{\infty}g(u)\frac{\sin(T(t-u))}{\pi(t-u)}\dd{u}\\
+&=e^{\gamma t}\lim_{T\to\infty}\int_{-\infty}^{\infty}g(t-v)\frac{\sin(Tv)}{\pi v}\dd{v}\\
 &=e^{\gamma t}g(t)\\
 &=f(t)
 \ea\]
 \end{proof}
+For any complex-valued functional $f$ defined on $\bbR$ such that $f(t)=0$ for all $\Re(t)<0$ and $f(t)e^{-\gamma t}\in L^1(\bbR_{\geq0})$, the inverse Laplace transform of the one-sided Laplace transform of $f(t)$, $F(s)$, is equal to $f(t)$ a.e.
+
+
+
+
+PLACEHOLDER
 \ssc{Fourier Transform (FT) (傅立葉變換)}
-PLACEHOLDER: as Laplace tranform special case
+PLACEHOLDER: mb as Laplace tranform special case?
 \sssc{Fourier Transform (FT)}
 Fourier transform is an integral transform that converts a function of a real variable (usually $t$, in the time domain) to a function of another real variable (usually $\omega$, in the frequency or Fourier domain). The functions are often denoted in lowercase for the time-domain representation and uppercase for the frequency-domain.
 
