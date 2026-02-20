@@ -14,13 +14,11 @@ The one-sided or unilateral Laplace transform and two-sided or bilateral Laplace
 \sssc{Definition}
 Let $R$ be $\bbR_{\geq0}$ for one-sided Laplace transform and $\bbR$ for two-sided Laplace transform.
 
-For any complex-valued (or real-valued) functional $f$ defined on $R$, the one-sided Laplace transform is defined as
-\[\int_0^{\infty}e^{-st}f(t)\dd{t},\]
-and the two-sided Laplace transform is defined as
-\[\int_{-\infty}^{\infty}e^{-st}f(t)\dd{t},\]
+For any complex-valued (or real-valued) functional $f$ with support on $R$, the Laplace transform is defined as
+\[\int_Re^{-st}f(t)\dd{t},\]
 where convergence of Laplace transform is defined as the finiteness of integral.
 
-For any complex-valued (or real-valued) distribution $T\in\mathcal{D}(R)$ with compact support, the Laplace transform is defined as
+For any complex-valued (or real-valued) distribution $T\in\mathcal{D}(\bbR)$ with compact support on $R$, the Laplace transform is defined as
 \[\langle T,e^{-st}\rangle,\]
 where Laplace transform is always convergent.
 
@@ -28,9 +26,11 @@ Distributions are often denoted in function inside integral notation, notably su
 
 Laplace transform and derivative of a sum of functional and distribution in function inside integral notation should be interpreted as the sum of the Laplace transform and derivative of it. Function value at a point of a functional and distribution in function inside integral notation should be interpreted as function value of the functional.
 
-For one-sided Laplace transform, $\int_0^{\infty}$ is also denoted as $\int_{0^-}^{\infty}$ or $\lim_{\varepsilon\to 0^+}\int_{-\varepsilon}^{\infty}$, and $0$ is also denoted as $0^-$. This is for compatibility of Riemann–Stieltjes integral interpretation of Dirac delta and does not imply that the signal needs to be defined on $[a,0)$ for some $a<0$.
-
-For one-sided transform, functional and distribution are implicitly assigned $0$ for all $t<0$.
+For one-sided Laplace transform:
+\bit
+\item Restriction of functional or distribution on $R$ is represented with the same symbol of the functional or distribution and interpreted as either depending on context.
+\item $\int_0^{\infty}$ is also denoted as $\int_{0^-}^{\infty}$ or $\lim_{\varepsilon\to 0^+}\int_{-\varepsilon}^{\infty}$, and $0$ is also denoted as $0^-$. This is for compatibility of Riemann–Stieltjes integral interpretation of Dirac delta.
+\eit
 \sssc{Region of convergence (ROC)}
 The set of values of $s$ for which $F(s)$ converges is called region of convergence (ROC). A function is called Laplace-transformable iff the ROC of its Laplace transform is nonempty.
 
@@ -244,7 +244,7 @@ The ROC is the same.
 \bpr
 \[\int_R\ol{f(t)}e^{-st}\dd{t}=\int_R\ol{f(t)e^{-\ol{s}t}}\dd{t}=\ol{\int_Rf(t)e^{-\ol{s}t}\dd{t}}.\]
 \epr
-\sssc{Convolution theorem for functionals}
+\sssc{Convolution theorem}
 For functionals:
 \[\mathcal{L}\qty\{(f*g)(t)\}=F(s)G(s).\]
 \bpr
@@ -255,7 +255,32 @@ By Fubini's theorem,
 &=F(s)G(s)
 \ea\]
 \epr
-\sssc{Cross-correlation theorem for two-sided Laplace transform of functionals}
+For functional and distribution:
+\[\mathcal{L}\qty\{f*T\}=F(s)\mathcal{L}\{T\}.\]
+\bpr
+By Fubini's theorem,
+\[\ba
+\mathcal{L}\qty\{f*T\}&=\int_R\langle T(x),f(t-x)\rangle e^{-st}\dd{t}\\
+&=\lange T(x),\int_Rf(t-x)e^{-st}\dd{t}\rangle
+\ea\]
+\[u=t-x,\quad\dd{t}=\dd{u}\]
+\[\ba
+\int_Rf(t-x)e^{-st}\dd{t}&=e^{-sx}\int_Rf(u)e^{-su}\dd{u}\\
+&=e^{-sx}F(s)
+\ea\]
+\[\lange T,e^{-sx}F(s)\rangle=F(s))\mathcal{L}\{T\}\]
+\epr
+For distributions:
+\[\mathcal{L}\qty\{S*T\}=\mathcal{L}\{S\}\mathcal{L}\{T\}.\]
+\bpr
+By Fubini's theorem,
+\[\ba
+\mathcal{L}\qty\{S*T\}&=\langle S(t),\langle T(x),e^{-s(t+x)}\rangle\rangle\\
+&=\langle S(t),e^{-st}\langle T(x),e^{-sx}\rangle\rangle\\
+&=\mathcal{L}\{S\}\mathcal{L}\{T\}
+\ea\]
+\epr
+\sssc{Cross-correlation theorem for two-sided Laplace transform}
 For two-sided Laplace transform of functionals:
 \[\mathcal{L}\qty\{(f\star g)(t)\}=\ol{F(s)}G(s).\]
 \bpr
@@ -266,6 +291,8 @@ By Fubini's theorem,
 &=\ol{F(s)}G(s)
 \ea\]
 \epr
+PLACEHOLDER: For two-sided Laplace transform of functional and distribution:
+PLACEHOLDER: For two-sided Laplace transform of distributions:
 \sssc{Initial Value Theorem (IVT) for one-sided Laplace tranform of functional}
 For functional $f$ of expertial order and its one-sided Laplace transform $F(s)$, for $s\in\bbR$,
 \[\lim_{t\to 0^+}f(t)=\lim_{s\to\infty}sF(s).\]
