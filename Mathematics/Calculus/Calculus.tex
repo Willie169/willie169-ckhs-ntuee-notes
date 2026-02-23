@@ -277,19 +277,6 @@ and
 Let $(X,d_1)$ and $(Y,d_2)$ be metric spaces, and $f\colon D\subseteq X\to Y$ be a function. $f$ is called to be locally Lipschitz if $\forall x\in D$, there exists a real constant $K$ and an open set $V\subseteq D$ with $x\in V$ such that $d_{2}(f(y),f(z))\leq Kd_{1}(y,z)$ for all $y,z\in V$.
 
 Let $(X,d_1)$ and $(Y,d_2)$ be metric spaces, and $f\colon O\subseteq X\to Y$ be a function. $f$ is called to be locally Lipschitz on $D\subseteq O$ if $\forall x\in D$, there exists a real constant $K$ and an open set $V\subseteq D$ with $x\in V$ such that $d_{2}(f(y),f(z))\leq Kd_{1}(y,z)$ for all $y,z\in V$.
-\ssc{(Topological) curve}
-\sssc{Definition}
-A (parameterized) (topological) curve in a topological space $X$ is a continuous map $\gamma\colon I\to X$ for some interval $I$. In some context, the curve refers to the image and the parameterization refers to the map.
-\sssc{Closed curve or loop}
-A curve is closed or is a loop if $I=[a,b]$ and $\gamma(a)=\gamma(b)$.
-\sssc{Path or arc}
-A curve is a path or an arc if $I$ is closed and bounded.
-\sssc{Simple curve}
-A curve is simple if $I=[a,b]$ and for all $s\neq t\in[a,b)$, $\gamma(s)\neq\gamma(t)$.
-\sssc{Curve in Enclidean space}
-A plane curve is a curve on a plane.
-
-A Jordan curve is a plane simple closed curve. And the region enclosed by a Jordan curve is called Jordan domain.
 
 
 \section{Derivative (導數)}
@@ -2786,98 +2773,6 @@ Green's theorem is a special case of Stokes' theorem.
 \sssc{Generalized Stokes theorem, Stokes–Cartan theorem, or fundamental theorem of multivariable calculus}
 The generalized Stokes theorem says that the integral of a differential form $\omega$ over the boundary $\partial\Omega$ of some orientable manifold $\Omega$ is equal to the integral of its exterior derivative $\mathrm{d}\boldsymbol{\omega}$ over the whole of $\Omega$, i.e.,
 \[\int _{\partial\Omega}\omega=\int_{\Omega}\mathrm{d}\boldsymbol{\omega}\]
-\ssc{Arc Length}
-\sssc{Definition}
-Given a curve $\gamma(t)=(x_1(t),x_2(t),\quad,x_n(t)),\quad t\in[a,b]$. Let $P(t,k)$ be a partition of interval $[a,b]$. Define the polygonal length of $\gamma$ along $P(t,k)$ as
-\[s(P(t,k))=\sum_{i=1}^k\|\gamma(i)-\gamma(i-1)\|.\]
-The arc length of the curve is
-\[s=\sup_{P\in\mathcal{P}}s(P),\]
-where $\mathcal{P}$ is the set of all partitions of interval $[a,b]$.
-
-The curve is called rectifiable iff $s$ is finite.
-
-$s$ is finite iff all $x_i(t)$ is of bounded variation.
-\begin{proof}
-"If" direction:
-
-By triangular inequality,
-\[\|\gamma(i)-\gamma(i-1)\|\leq\sum_{j=1}^n\abs{x_j(i)-x_j(i-1)}.\]
-\[\sum_{i=1}^k\|\gamma(i)-\gamma(i-1)\|\leq\sum_{i=1}^k\sum_{j=1}^n\abs{x_j(i)-x_j(i-1)}=\sum_{j=1}^n\sum_{i=1}^k\abs{x_j(i)-x_j(i-1)}<\infty.\]
-
-"Only if" direction:
-
-By triangular inequality, for every $j\in\bbN\land j\leq n$,
-\[\abs{x_j(i)-x_j(i-1)}\leq\|\gamma(i)-\gamma(i-1)\|.\]
-\[\sum_{i=1}^k\abs{x_j(i)-x_j(i-1)}\leq\sum_{i=1}^k\|\gamma(i)-\gamma(i-1)\|<\infty.\]
-\end{proof}
-
-The arc length function of the curve from $a$ is defined a function of $t$ that maps $t\geq a$ to the arc length of $\gamma$ between $a$ and $t$.
-\sssc{For differentiable curve}
-If $\gamma$ is differentiable, the arc length is
-\[s=\int_a^b\|\dv{\gamma(t)}{t}\|\dd{t},\]
-and the arc length function of it from $a$ is
-\[s(t)=\int_a^t\|\dv{\gamma(u)}{u}\|\dd{u},\quad t\geq a.\]
-\sssc{For differentiable function}
-Given differentiable function $y=f(x),\quad x\in[a,b]$. The arc length of it is
-\[s=\int_a^b\|1+f'(x)\|\dd{x}.\]
-$s$ is finite iff $f(x)$ is of bounded variation.
-
-The arc length function of it from $a$ is
-\[s(x)=\int_a^x\|1+f'(t)\|\dd{t},\quad x\geq a.\]
-\ssc{Surface of revolution}
-\sssc{Definition}
-The surface formed by rotating the curve $\gamma(t)=(x(t),y(t),z(t)),\quad t\in[a,b]$ about rotational axis $\mb{P}+\mb{k}s,\quad s\in\bbR$ with $\mb{P},\mb{k}\in\bbR^3$ and $\|\mb{k}\|=1$ is parameterized as
-\[R(t,\theta)=\mb{P}+\qty(\gamma(t)-\mb{P})\cos\theta+(\mb{k}\times\qty(\gamma(t)-\mb{P}))\sin\theta+\mb{k}(\mb{k}\cdot\qty(\gamma(t)-\mb{P}))(1-\cos\theta),\quad t\in[a,b]\land\theta\in[0,2\pi].\]
-And its area is
-\[A=2\pi\int_{t=a}^b\norm{\gamma(t)-\mb{P}-\mb{k}(\mb{k}\cdot\qty(\gamma(t)-\mb{P}))}\dd{s(t)},\]
-where $s(t)$ is the arc length function of $\gamma$ from $a$.
-
-The area is called rectifiable iff $A$ is finite.
-
-$A$ is finite iff $x(t)$, $y(t)$, and $z(t)$ are all of bounded variation iff $s(t)$ is of bounded variation.
-\sssc{Two-dimensional curve about principal axis on the same plane}
-The area of the surface formed by rotating the curve $\gamma(t)=(x(t),y(t)),\quad t\in[a,b]$ about $y=d$ is
-\[A=2\pi\int_{t=a}^b\abs{y(t)-d}\dd{s(t)},\]
-where $s(t)$ is the arc length function of $\gamma$ from $a$.
-\sssc{Pappus's (centroid) theorem I or (Pappus–)Guldinus theorem I}
-The area of the surface formed by rotating a two-dimensional curve with arc length $s$ and centroid $\mb{P}$ about a rotational axis on the same plane of the curve that doesn't cut the curve in a distance $d$ from $\mb{P}$ is
-\[A=2\pi sd.\]
-\begin{proof}
-Let the curve be $\gamma(t)=(x(t),y(t)),\quad t\in[a,b]$, $s(t)$ be the arc length function of it, the centroid of it be the origin, that is, 
-\[\int\gamma(t)\dd{s(t)}=(0,0),\]
-and the rotational axis is $y=d$.
-\[\ba
-A&=2\pi\int_{t=a}^b\abs{y(t)-d}\dd{s(t)}\\
-&=2\pi\abs{\int_{t=a}^by(t)\dd{s(t)}-\int_{t=a}^bd\dd{s(t)}}\\
-&=2\pi sd
-\ea\]
-\end{proof}
-\ssc{Solid of revolution}
-\sssc{Disc method or disc integration}
-The volume of the solid formed by rotating the area bounded by $y=f(x)$,$y=g(x)$, $x=a$, and $x=b$ with $a<b$ about the $x$-axis is given by 
-\[V=\pi\int_a^b\abs{f(x)^2-g(x)^2}\dd{x},\]
-aka Washer method.
-
-If $g(x)=0$ (e.g. revolving an area between the curve and the y-axis), this reduces to: 
-\[V=\pi\int_a^bf(x)^2\dd{x}.\]
-\sssc{Shell method or shell integration}
-The volume of the solid formed by rotating the area bounded by $y=f(x)$,$y=g(x)$, $x=a$, and $x=b$ with $a<b$ about the $y$-axis is given by 
-\[V=2\pi\int_a^bx\abs{f(x)-g(x)}\dd{x}.\]
-\sssc{Pappus's (centroid) theorem II or (Pappus–)Guldinus theorem II}
-The volume of the solid formed by rotating a plane region with area $A$ and centroid $\mb{P}$ about a rotational axis on the same plane of the region that doesn't cut the region in a distance $d$ from $\mb{P}$ is
-\[V=2\pi Ad.\]
-\begin{proof}
-Let the rotational axis be the $y$-axis. Split the region to subregions such that each subregion is bounded by $y=f(x)$,$y=g(x)$, $x=a$, and $x=b$, for some functions $f(x)$ and $g(x)$ and some constant $a<b$.
-
-For each subregion,
-\[V=2\pi\int_a^bx\abs{f(x)-g(x)}\dd{x}.\]
-\[Ad=\int_a^bx\abs{f(x)-g(x)}\dd{x}.\]
-\[V=2\pi Ad.\]
-
-The sum of the volume of the solid formed by rotating the subregions is the volume of the solid formed by rotating the original region. The average of the centroids $\mb{P}_i=(d_i,y_i)$ of the subregions weighted by their areas $A_i$ is the centroid $\mb{P}=(d,p_y)$ of the original region.
-\[\mb{P}=\frac{\sum_iA_i\mb{P}_i}{A}\]
-\[V=\sum_iV_i=\sum_iA_id_i=A\frac{\sum_iA_id_i}{A}=Ad.\]
-\end{proof}
 \ssc{Numerical integration (數值積分)}
 \sssc{Left and right endpoint rule}
 Let $f$ be a continuous real-valued function on $[a,b]$. The left endpoint rule gives the approximation of $\int_a^bf(x)\dd{x}$
@@ -2921,6 +2816,142 @@ Let $f\colon X\subseteq\bbR\to\bbR$ be a function. If $f$ is differentiable over
 \sssc{Theorem of total variation of differentiable real fields}
 PLACEHOLDER
 
+
+\sct{Curve}
+\ssc{Curve}
+\sssc{Definition}
+A (parameterized or parametric) (topological) curve in a topological space $X$ is a continuous map $\gamma(t)\colon I\to X$ for some interval $I$, where $t$ is called parameter and either $\gamma(t)$ or the image of $\gamma(t)$ is called curve, and $\gamma(t)$ is also called the parameterization of the curve.
+
+If $I=[a,b]$, $\gamma(a)$ is called initial point, and $\gamma(b)$ is called terminal point.
+\sssc{Closed curve or loop}
+A curve is closed or is a loop if $I=[a,b]$ and $\gamma(a)=\gamma(b)$.
+\sssc{Path or arc}
+A curve is a path or an arc if $I$ is closed and bounded.
+\sssc{Simple curve}
+A curve is simple if $I=[a,b]$ and for all $s\neq t\in[a,b)$, $\gamma(s)\neq\gamma(t)$.
+\sssc{Curve in Enclidean space}
+A plane curve is a curve on a plane.
+
+A Jordan curve is a plane simple closed curve. And the region enclosed by a Jordan curve is called Jordan domain.
+
+Below, unless otherwise specified or can be inferred from context, curves are in Enclidean space, and curves in Enclidean space are in Cartesian coordinate.
+\ssc{Polar curve}
+\sssc{Definition}
+Plane curve in polar coordinate.
+\sssc{Radical scaling}
+Replacing $r$ with $kr$ scales the curve by $k$.
+\sssc{Rotation}
+Replacing $\theta$ with $(\theta-\varphi)$ rotates the curve counterclockwise by $\varphi$.
+\sssc{Reflection and symmetry}
+Replacing $\theta$ with $-\theta$ reflects the curve through the polar axis.
+
+If a polar curve is unchanged when $\theta$ is replaced with $-\theta$, then it is symmetric about the polar axis.
+
+Replacing $\theta$ with $(\pi-\theta)$ reflects the curve through $\theta=\frac{\pi}{2}$.
+
+If a polar curve is unchanged when $\theta$ is replaced with $(\pi-\theta)$, then it is symmetric about $\theta=\frac{\pi}{2}$.
+
+Replacing either $\theta$ with $(\pi+\theta)$ or $r$ with $-r$ reflects the curve through the pole.
+
+If a polar curve is unchanged when $\theta$ is replaced with $(\pi+\theta)$ or when $r$ is replaced with $-r$, then it is symmetric about the pole.
+\ssc{Tangent}
+\sssc{Definition}
+The tangent of a curve at $t$ is $\gamma'(t)$.
+\ssc{Arc Length}
+\sssc{Definition}
+Given a curve $\gamma(t)=(x_1(t),x_2(t),\quad,x_n(t)),\quad t\in[a,b]$. Let $P(t,k)$ be a partition of interval $[a,b]$. Define the polygonal length of $\gamma$ along $P(t,k)$ as
+\[s(P(t,k))=\sum_{i=1}^k\|\gamma(i)-\gamma(i-1)\|.\]
+The arc length of the curve is
+\[s=\sup_{P\in\mathcal{P}}s(P),\]
+where $\mathcal{P}$ is the set of all partitions of interval $[a,b]$.
+
+The curve is called rectifiable iff $s$ is finite.
+
+$s$ is finite iff all $x_i(t)$ is of bounded variation.
+\begin{proof}
+"If" direction:
+
+By triangular inequality,
+\[\|\gamma(i)-\gamma(i-1)\|\leq\sum_{j=1}^n\abs{x_j(i)-x_j(i-1)}.\]
+\[\sum_{i=1}^k\|\gamma(i)-\gamma(i-1)\|\leq\sum_{i=1}^k\sum_{j=1}^n\abs{x_j(i)-x_j(i-1)}=\sum_{j=1}^n\sum_{i=1}^k\abs{x_j(i)-x_j(i-1)}<\infty.\]
+
+"Only if" direction:
+
+By triangular inequality, for every $j\in\bbN\land j\leq n$,
+\[\abs{x_j(i)-x_j(i-1)}\leq\|\gamma(i)-\gamma(i-1)\|.\]
+\[\sum_{i=1}^k\abs{x_j(i)-x_j(i-1)}\leq\sum_{i=1}^k\|\gamma(i)-\gamma(i-1)\|<\infty.\]
+\end{proof}
+
+The arc length function of the curve from $a$ is defined a function of $t$ that maps $t\geq a$ to the arc length of $\gamma$ between $a$ and $t$.
+\sssc{For differentiable curve}
+If $\gamma$ is differentiable, the arc length is
+\[s=\int_a^b\|\dv{\gamma(t)}{t}\|\dd{t}.\]
+\sssc{Polar curve}
+The arc length of differentiable polar curve $(r(t),\theta(t))$ from $a$ to $b$ is
+\[s=\int_a^b\sqrt{\qty(r'(t))^2+\qty(r(t)\theta'(t))^2}\dd{t}.\]
+\bpr
+\[x(t)=r(t)\cos(\theta(t))\]
+\[y(t)=r(t)\sin(\theta(t))\]
+\[x'(t)=r'(t)\cos(\theta(t))-r(t)\sin(\theta(t))\theta'(t)\]
+\[y(t)=r'(t)\sin(\theta(t))+r(t)\cos(\theta(t))\theta'(t)\]
+\[\qty(x'(t))^2+\qty(y'(t))^2=\qty(r'(t))^2+\qty(r'(t))^2+\qty(r(t)\theta'(t))^2\]
+\epr
+The arc length of differentiable polar curve $r(\theta)$ from $a$ to $b$ is
+\[s=\int_a^b\sqrt{\qty(r'(\theta))^2+\qty(r(\theta))^2}\dd{\theta}.\]
+\ssc{Surface of revolution}
+\sssc{Definition}
+The surface formed by rotating the curve $\gamma(t)=(x(t),y(t),z(t)),\quad t\in[a,b]$ about rotational axis $\mb{P}+\mb{k}s,\quad s\in\bbR$ with $\mb{P},\mb{k}\in\bbR^3$ and $\|\mb{k}\|=1$ is parameterized as
+\[R(t,\theta)=\mb{P}+\qty(\gamma(t)-\mb{P})\cos\theta+(\mb{k}\times\qty(\gamma(t)-\mb{P}))\sin\theta+\mb{k}(\mb{k}\cdot\qty(\gamma(t)-\mb{P}))(1-\cos\theta),\quad t\in[a,b]\land\theta\in[0,2\pi].\]
+And its area is
+\[A=2\pi\int_{t=a}^b\norm{\gamma(t)-\mb{P}-\mb{k}(\mb{k}\cdot\qty(\gamma(t)-\mb{P}))}\dd{s(t)},\]
+where $s(t)$ is the arc length function of $\gamma$ from $a$.
+
+The area is called rectifiable iff $A$ is finite.
+
+$A$ is finite iff $x(t)$, $y(t)$, and $z(t)$ are all of bounded variation iff $s(t)$ is of bounded variation.
+\sssc{Two-dimensional curve about principal axis on the same plane}
+The area of the surface formed by rotating the curve $\gamma(t)=(x(t),y(t)),\quad t\in[a,b]$ about $y=d$ is
+\[A=2\pi\int_{t=a}^b\abs{y(t)-d}\dd{s(t)},\]
+where $s(t)$ is the arc length function of $\gamma$ from $a$.
+\sssc{Pappus's (centroid) theorem I or (Pappus–)Guldinus theorem I}
+The area of the surface formed by rotating a two-dimensional curve with arc length $s$ and centroid $\mb{P}$ about a rotational axis on the same plane of the curve that doesn't cut the curve in a distance $d$ from $\mb{P}$ is
+\[A=2\pi sd.\]
+\begin{proof}
+Let the curve be $\gamma(t)=(x(t),y(t)),\quad t\in[a,b]$, $s(t)$ be the arc length function of it, the centroid of it be the origin, that is, 
+\[\int\gamma(t)\dd{s(t)}=(0,0),\]
+and the rotational axis is $y=d$.
+\[\ba
+A&=2\pi\int_{t=a}^b\abs{y(t)-d}\dd{s(t)}\\
+&=2\pi\abs{\int_{t=a}^by(t)\dd{s(t)}-\int_{t=a}^bd\dd{s(t)}}\\
+&=2\pi sd
+\ea\]
+\end{proof}
+\ssc{Solid of revolution}
+\sssc{Disc method or disc integration}
+The volume of the solid formed by rotating the area bounded by $y=f(x)$,$y=g(x)$, $x=a$, and $x=b$ with $a<b$ about the $x$-axis is given by 
+\[V=\pi\int_a^b\abs{f(x)^2-g(x)^2}\dd{x},\]
+aka Washer method.
+
+If $g(x)=0$, this reduces to: 
+\[V=\pi\int_a^bf(x)^2\dd{x}.\]
+\sssc{Shell method or shell integration}
+The volume of the solid formed by rotating the area bounded by $y=f(x)$,$y=g(x)$, $x=a$, and $x=b$ with $a<b$ about the $y$-axis is given by 
+\[V=2\pi\int_a^bx\abs{f(x)-g(x)}\dd{x}.\]
+\sssc{Pappus's (centroid) theorem II or (Pappus–)Guldinus theorem II}
+The volume of the solid formed by rotating a plane region with area $A$ and centroid $\mb{P}$ about a rotational axis on the same plane of the region that doesn't cut the region in a distance $d$ from $\mb{P}$ is
+\[V=2\pi Ad.\]
+\begin{proof}
+Let the rotational axis be the $y$-axis. Split the region to subregions such that each subregion is bounded by $y=f(x)$,$y=g(x)$, $x=a$, and $x=b$, for some functions $f(x)$ and $g(x)$ and some constant $a<b$.
+
+For each subregion,
+\[V=2\pi\int_a^bx\abs{f(x)-g(x)}\dd{x}.\]
+\[Ad=\int_a^bx\abs{f(x)-g(x)}\dd{x}.\]
+\[V=2\pi Ad.\]
+
+The sum of the volume of the solid formed by rotating the subregions is the volume of the solid formed by rotating the original region. The average of the centroids $\mb{P}_i=(d_i,y_i)$ of the subregions weighted by their areas $A_i$ is the centroid $\mb{P}=(d,p_y)$ of the original region.
+\[\mb{P}=\frac{\sum_iA_i\mb{P}_i}{A}\]
+\[V=\sum_iV_i=\sum_iA_id_i=A\frac{\sum_iA_id_i}{A}=Ad.\]
+\end{proof}
 
 
 \sct{Lists}
