@@ -741,7 +741,7 @@ The definition of improper integral and Cauchy principal value as extensions of 
 \subsection{Lebesgue integral (勒貝格積分)}
 A definition of definite integral.
 \sssc{Premise}
-Let $(E,\Sigma,\mu)$ be a measure space. Below, we will define the Lebesgue integral of measurable functions on $E$ to $\mathbb{R}\cup\{-\infty,\infty\}$.
+Let $(E,\Sigma,\mu)$ be a measure space with possibly signed measure $\mu$. Below, we will define the Lebesgue integral of measurable functions on $E$ to $\mathbb{R}\cup\{-\infty,\infty\}$.
 \subsubsection{Of an indicator functions}
 The integral of an indicator function $1_S$ of a measurable subset $S$ of $E$ is defined to be
 \[\int 1_{S}\,\mathrm{d}{\mu} =\mu (S).\]
@@ -797,14 +797,42 @@ For $1\leq p<\infty$, define $L^p$ norm:
 $L^p(X,\mu)$ is also denoted as $L^p(X)$ when $\mu$ is clear.
 \sssc{Locally integrable $L^p$ space}
 For set $X$ and measure $\mu$, the vector space $L^p_{\tx{loc}}(X,\mu)$ consists of the equivalence class under the equivalence relation of equality $\mu$-a.e. of measurable functions $f\colon X\to\bbR$ (or $\bbC$) that for all compact subset $K\subseteq X$, $f\in L^p(K,\mu)$. $L^p_{\tx{loc}}(X,\mu)$ is also denoted as $L^p_{\tx{loc}}(X)$ when $\mu$ is clear.
+\ssc{Total variation, functions of bounded variation (BV functions), and functions of locally bounded variation (locally BV functions)}
+\sssc{Of real functions}
+Let $f\colon X\subseteq\bbR\to\bbR$ be a function. The total variation of $f$ over interval $[a,b]\subseteq X$ is
+\[V_a^b(f)=\sup_{P(x,n_p)\in\mathcal{P}}\sum_{i=0}^{n_p-1}\abs{f\qty(x_{i+1})-f\qty(x)},\]
+where $\mathcal{P}$ is the set of all partitions of $f$ over $[a,b]$.
+
+$f$ is called of bounded variation or called a (globally) BV function over $[a,b]$ iff $V_a^b(f)$ is finite.
+
+$f$ is called of locally bounded variation or called a locally BV function over an open interval $(a,b)$ iff $V_c^d(f)$ is finite for all $[c,d]\in (a,b)$.
+
+The space of all (globally) BV functions over $[a,b]$ is denoted as $\operatorname{BV}([a,b])$. The space of all locally BV functions over $(a,b)$ is denoted as
+\[\operatorname{BV}_{\tx{loc}}((a,b)).\]
+
+If $f$ is monotone on $[a,b]$, it is BV over $[a,b]$.
+\sssc{Of real fields}
+PLACEHOLDER
+\sssc{In measure theory}
+PLACEHOLDER
+\sssc{Space of BV functions}
+PLACEHOLDER (is a Banach space)
+\sssc{Mesure induced by function}
+For a BV function $g\colon(a,b)\subseteq\bbR\to\bbR$, the signed measure $\mu_g(x)$ induced by $g$, is defined for any interval $(c,d)\subseteq (a,b)$, as
+\[\mu_g((c,d))=g(d)-g(c).\]
+If $g$ is non-decreasing, then $\mu_g$ is non-negative. If $g$ is non-increasing, then $\mu_g$ is non-positive.
+\sssc{Function induced by measure}
+For a signed measure $\mu$ defined on any measurable set $I$ that is a subset of an interval $(a,b)$, the function $g$ induced by the measure with respect to $a$ is defined, for any $c\in (a,b)$, as
+\[g(c)=\mu((a,c)).\]
+If $\mu$ is non-positive, $g$ is non-increasing. If $\mu$ is non-negative, $g$ is non-decreasing.
+\sssc{Jordan decomposition}
+The Jordan decomposition $g^+$ and $g^-$, which are non-decreasing, of a BV function $g$ is defined as the functions induced by the Jordan decomposition $\mu^+$ and $\mu^-$ of the signed measure $\mu_g$ induced by $g$.
 \ssc{Lebesgue–Stieltjes integral}
 \sssc{Definition}
 Below, we will define the Lebesgue–Stieltjes integral of a function $f\colon X\subseteq\bbR\to\bbR$ over a BV function $g\colon Y\subseteq\bbR\to\bbR$ over an interval $[a,b]\subseteq (X\cap Y)$, denoted as
 \[\int_{x=a}^bf(x)\dd{g(x)},\]
 or
 \[\int_a^bf(x)\dd{g(x)}.\]
-We first define the measure $\mu_g(x)$ induced by $g$, for any interval $[c,d]\subseteq [a,b]$, as
-\[\mu_g([c,d])=g(d)-g(c).\]
 The Lebesgue–Stieltjes integral of $f$ with respect to $g$ over $[a,b]$ is defined as the Lebesgue integral
 \[\int_a^bf(x)\dd{\mu_g(x)}.\]
 \sssc{Connection with improper Riemann–Stieltjes integral}
@@ -829,27 +857,6 @@ The Bochner space $L^p(E;X)$ with $p\in\mathbb{N}\cup\{\infty\}$ is defined to b
 and
 \[\|f(t)\|_{L^{\infty }(E;X)}\coloneq\operatorname{ess\,sup}_{t\in E}\|f(t)\|_{X},\]
 is finite by the equivalence relation of equality almost everywhere.
-\ssc{Total variation, functions of bounded variation (BV functions), and functions of locally bounded variation (locally BV functions)}
-\sssc{Of real functions}
-Let $f\colon X\subseteq\bbR\to\bbR$ be a function. The total variation of $f$ over interval $[a,b]\subseteq X$ is
-\[V_a^b(f)=\sup_{P(x,n_p)\in\mathcal{P}}\sum_{i=0}^{n_p-1}\abs{f\qty(x_{i+1})-f\qty(x)},\]
-where $\mathcal{P}$ is the set of all partitions of $f$ over $[a,b]$.
-
-$f$ is called of bounded variation or called a (globally) BV function over $[a,b]$ iff $V_a^b(f)$ is finite.
-
-$f$ is called of locally bounded variation or called a locally BV function over an open interval $(a,b)$ iff $V_c^d(f)$ is finite for all $[c,d]\in (a,b)$.
-
-The space of all (globally) BV functions over $[a,b]$ is denoted as $\operatorname{BV}([a,b])$. The space of all locally BV functions over $(a,b)$ is denoted as
-\[\operatorname{BV}_{\tx{loc}}((a,b)).\]
-
-If $f$ is monotone on $[a,b]$, it is BV over $[a,b]$.
-\sssc{Of real fields}
-PLACEHOLDER
-\sssc{In measure theory}
-PLACEHOLDER
-\sssc{Space of BV functions}
-PLACEHOLDER (is a Banach space)
-
 
 
 \sct{Mean}
@@ -1291,33 +1298,40 @@ so,
 Since $\varepsilon > 0$ was arbitrary, by definition of limit:
 \[\lim_{x\to a}h(x)=L.\]
 \end{proof}
-\ssc{Limit of real sequence theorems}
-\subsubsection{Monotone Convergence Theorem (單調收斂定理) or Completeness of the Real Numbers (實數的完備性)}
-\textit{Statement.}
-\begin{enumerate}[label=(\Alph*)]
-\item For a non-decreasing and bounded-above sequence of real numbers $\langle a_n\rangle_{n\in\mathbb {N}}$:
-\[\lim_{n\to\infty}a_n=\sup_n a_n.\]
-\item For a non-increasing and bounded-below sequence of real numbers $\langle a_n\rangle_{n\in\mathbb {N}}$:
-\[\lim_{n\to\infty}a_n=\inf_n a_n.\]
-\end{enumerate}
+\ssc{Limit of real-valued net theorems}
+\sssc{Continuity principle}
+If real-valued net $\langle x_a\rangle_{a\in A}$ with $\lim_ax_a=L\in\bbR$, then for any real-valued function $f$ continuous at $L$,
+\[\lim_af(x_a)=f(L).\]
+If real-valued net $\langle x_a\rangle_{a\in A}$ with $\lim_ax_a=\pm\infty$, then for any real-valued function $f$ such that $\lim_{x\to\pm\infty}f(x)=L\in\bbR\cup\{-\infty,\infty\}$,
+\[\lim_af(x_a)=L.\]
+\subsubsection{Monotone Convergence Theorem (單調收斂定理)}
+For any nonempty, non-decreasing net of real numbers $\langle a_n\rangle_{n\in A}$, it is bounded-above iff it converges to a real number, and its limit is its supremum.
 \begin{proof}
-Let $\{a_{n}\}$ be the set of values of $\langle a_n\rangle_{n\in\mathbb {N}}$. By assumption, $\{a_n\}$ is non-empty and bounded-above by $\sup_n a_n$. Let $c=\sup_n a_n$.
-\[\forall\varepsilon>0:\,\exists M\in\mathbb {N}\text{\ s.t.\ }c\geq a_M>c-\varepsilon,\]
+$\Rightarrow$ direction:
+
+Let $\{a_n\}$ be the set of values of $\langle a_n\rangle_{n\in A}$. Assume that $\{a_n\}$ is nonempty and bounded-above by $c=\sup_na_n$.
+
+We have
+\[\forall\varepsilon>0:\,\exists M\in A\text{\ s.t.\ }c\geq a_M>c-\varepsilon,\]
 since otherwise $c-\varepsilon$ is a strictly smaller upper bound of $\langle a_n\rangle$, contradicting the definition of the supremum. 
 
 Then since $\langle a_n\rangle$ is non-decreasing, and $c$ is an upper bound:
-\[\forall\varepsilon>0:\,\exists M\in\mathbb {N}\text{\ s.t.\ }\forall n\geq M:\,|c-a_n|=c-a_n\leq c-a_M=|c-a_M|<\varepsilon.\]
-The proof of the (B) part is analogous or follows from (A) by considering $\langle -a_{n}\rangle_{n\in \mathbb{N}}$.
-\end{proof}
-\textit{Statement.}
+\[\forall\varepsilon>0:\,\exists M\in A\text{\ s.t.\ }\forall n\geq M:\,|c-a_n|=c-a_n\leq c-a_M=|c-a_M|<\varepsilon.\]
+$\Leftarrow$ direction:
 
-If $\langle a_n\rangle_{n\in\mathbb {N}}$ is a monotone sequence of real numbers, i.e., if 
-$a_n\leq a_{n+1}$ for every $n\geq 1$ or $a_n\geq a_{n+1}$ for every $n\geq 1$, then this sequence has a finite limit if and only if the sequence is bounded.
-\begin{proof}
-"If"-direction: The proof follows directly from the proposition.
-
-"Only If"-direction: By $(\varepsilon,\delta)$-definition of limit, every sequence $\langle a_n\rangle_{n\in\mathbb {N}}$ with a finite limit $L$ is necessarily bounded.
+Assume that $\lim_na_n=L\in\bbR$. Assume for contradiction that for some $M\in A$,
+\[a_M>L.\]
+Let
+\[\varepsilon=\frac{a_M-L}{2}>0.\]
+Since
+\[\forall n\geq M:\, a_n\geq a_M>L,\]
+we have
+\[\forall n\geq M:\,|a_n-L|=(a_n-a_M)+(a_M-L)\geq a_M-L>\varepsilon.\]
+This contradicts that
+\[\lim_na_n=L.\]
 \end{proof}
+For any nonempty, non-increasing net of real numbers $\langle a_n\rangle_{n\in A}$, it is bounded-below iff it converges to a real number, and its limit is its infimum.
+\ssc{Limit of real sequence theorems}
 \sssc{Bolzano–Weierstrass Theorem (波爾查諾-魏爾斯特拉斯定理)}
 Every bounded sequence in an Euclidean space $\bbR^n$ has a convergent subsequence.
 
@@ -1346,12 +1360,6 @@ Let $\langle f_k\rangle$ and $\langle g_k\rangle$ be two sequences.
 \[\sum_{k=m}^nf_k\qty(g_{k+1}-g_k)=\qty(f_{n+1}g_{n+1}-f_mg_m)-\sum_{k=m}^ng_{k+1}\qty(f_{k+1}-f_k).\]
 \[\sum_{k=m}^nf_k\qty(g_k-g_{k-1})=\qty(f_ng_n-f_{m-1}g_{m-1})-\sum_{k=m}^ng_{k-1}\qty(f_k-f_{k-1}).\]
 \[\sum_{k=m}^n\qty(f_k\qty(g_{k+1}-g_k)+g_k\qty(f_k-f_{k-1}))=f_ng_{n+1}-f_{m-1}g_m.\]
-\ssc{Limit of real-valued net theorems}
-\sssc{Continuity principle}
-If real-valued net $\langle x_a\rangle_{a\in A}$ with $\lim_ax_a=L\in\bbR$, then for any real-valued function $f$ continuous at $L$,
-\[\lim_af(x_a)=f(L).\]
-If real-valued net $\langle x_a\rangle_{a\in A}$ with $\lim_ax_a=\pm\infty$, then for any real-valued function $f$ such that $\lim_{x\to\pm\infty}f(x)=L\in\bbR\cup\{-\infty,\infty\}$,
-\[\lim_af(x_a)=L.\]
 \ssc{Limit of real function theorems}
 \sssc{Limits involving quotient functions}
 Let \( a \) and \( b \) be real numbers, set
@@ -1372,15 +1380,27 @@ PLACEHOLDER
 A series $\sum_{n=0}^{\infty}a_n$ converges iff for every $\varepsilon>0$, there is a natural number $N$ such that
 \[\abs{\sum_{i=n+1}^{n+p}a_i}<\varepsilon\]
 for all $n\geq N$ and $p\geq 1$.
-\sssc{Term test}
-If $\sum_{n=0}^{\infty}a_n$ converges, then $\lim_{n\to\infty}a_n=0$.
 \sssc{Convergence and Mertens' theorem}
 If $\sum_{n=0}^{\infty}a_n$ converges to $A$, $\sum_{n=0}^{\infty}b_n$ converges to $B$, and at least one of them converges absolutely, then their Cauchy product converges to $AB$.
 \begin{proof}
 PLACEHOLDER
 \end{proof}
-\ssc{Improper integral theorems}
-\sssc{p-test I}
+\ssc{Monotone function have at most countably many discontinuities}
+Suppose a real-valued function $f$ is monotone on an interval $(a,b)$, then it has at most countably many discontinuities on $(a,b)$.
+\bpr
+Suppose $f$ is non-decreasing on $(a,b)$. For any $x\in(a,b)$, $f(x^-)$ and $f(x^+)$ both exist and $f(x^-)\leq f(x)\leq f(x^+)$. For any discontinuity $x$, assign a rational index $r_x\in(f(x^-),f(x^+))$. This is always possible since $(f(x^-),f(x^+))$ is nonempty and $\bbQ$ is dense in $\bbR$. The cardinality of the set of cardinality is the same as that of the set of the indices, which is at most $|\bbQ|=\aleph_0$.
+\epr
+\ssc{Integral test}
+Suppose $f(x)\colon [1,\infty)$ is bounded and monotone, and $\lim_{x\to\infty}f(x)=0$. Let $\langle a_n\rangle_{n\in\bbN}$ be the sequence defined by $a_n=f(n)$. Then, $\int_1^{\infty}f(x)\dd{x}$ is convergent iff $\sum_{n=1}^{\infty}a_n$ is convergent.
+\bpr
+Since $f$ is monotone, it is 
+
+PLACEHOLDER NOW
+
+
+
+\ssc{p-test I}
+\sssc{For improper integral}
 $\int_a^{\infty}x^p\dd{x},\quad a>0$ converges iff $p<-1$. And for $p<-1\land a>0$,
 \[\int_a^{\infty}x^p\dd{x}=-\frac{1}{p+1}a^{p+1}.\]
 \begin{proof}
@@ -1392,6 +1412,10 @@ $\int_a^{\infty}x^p\dd{x},\quad a>0$ converges iff $p<-1$. And for $p<-1\land a>
 \[\nexists\lim_{x\to\infty}\ln(x)\]
 \[\forall p<-1\lim_{x\to\infty}\frac{1}{p+1}x^{p+1}=0\]
 \end{proof}
+\sssc{For real series}
+
+
+
 \sssc{p-test II}
 $\int_0^ax^p\dd{x},\quad a>0$ converges iff $p>-1$. And for $p>-1\land a>0$,
 \[\int_0^ax^p\dd{x}=\frac{1}{p+1}a^{p+1}.\]
@@ -1404,6 +1428,9 @@ $\int_0^ax^p\dd{x},\quad a>0$ converges iff $p>-1$. And for $p>-1\land a>0$,
 \[\nexists\lim_{x\to 0^+}\ln(x)\]
 \[\forall p>-1\lim_{x\to 0^+}\frac{1}{p+1}x^{p+1}=0\]
 \end{proof}
+
+
+
 \sssc{$x^p(\ln x)^q$-test I}
 $\int_a^{\infty}x^p(\ln x)^q\dd{x},\quad a>0$ converges iff $p<-1\lor (p=-1\land q<-1)$.
 \begin{proof}
@@ -1429,6 +1456,9 @@ For $p=-1$:
 \[\int_a^{\infty}\frac{(\ln x)^q}{x}\dd{x}=\int_{\ln a}^{\infty}u^q\dd{u},\]
 which converges iff $q<-1$.
 \end{proof}
+
+
+
 \sssc{$x^p(\ln x)^q$-test II}
 $\int_0^ax^p(\ln x)^q\dd{x},\quad a>0$ converges iff $p>-1\lor (p=-1\land q>-1)$.
 \begin{proof}
@@ -1454,11 +1484,9 @@ For $p=-1$:
 \[\int_0^a\frac{(\ln x)^q}{x}\dd{x}=\int_0^au^q\dd{u},\]
 which converges iff $q>-1$.
 \end{proof}
-\sssc{Convergent improper integral of BV integrand implies limit of integrand converges to 0}
-If function $f\colon[a,\infty)\to\bbR$ is of bounded variation on $[a,\infty)$ and $\int_a^{\infty}f(x)\dd{x}$ converges, then $\lim_{x\to\infty}f(x)=0$.
-\begin{proof}
-PLACEHOLDER
-\end{proof}
+
+
+\ssc{Improper integral theorems}
 \sssc{Convergent improper integral of nonnegative and non-increasing integrand implies limit of product of integrand and independent variable converges to 0}
 If function $f\colon[a,\infty)\to\bbR$ is nonnegative and non-increasing on $[a,\infty)$ and $\int_a^{\infty}f(x)\dd{x}$ converges, then $\lim_{x\to\infty}xf(x)=0$.
 \begin{proof}
@@ -1484,7 +1512,35 @@ An improper integral is convergent if it is absolutely convergent.
 \sssc{For real series}
 For real sequence $\langle a_i\rangle_{i=m}^{\infty}$, $\sum_{i=m}^{\infty}a_i$ converges iff $\sum_{i=m+n}^{\infty}a_i$ converges, for all $n\in\bbN$.
 \sssc{For improper integral}
-If function $f\colon [a,b)\to\bbR$ is measurable with $b\in(a,\infty]$, $\int_a^bf(x)\dd{x}$ is improper integral, $\int_a^cf(x)\dd{x}$ is proper integral for any $a<c<b$, then $\int_a^bf(x)\dd{x}$ converges iff $\int_c^bf(x)\dd{x} converges, for all $a<c<b$.
+If function $f\colon [a,b)\to\bbR$ is measurable with $b\in(a,\infty]$, $\int_a^bf(x)\dd{x}$ is improper integral, and $\int_a^cf(x)\dd{x}$ is proper integral for any $a<c<b$, then $\int_a^bf(x)\dd{x}$ converges iff $\int_c^bf(x)\dd{x} converges, for all $a<c<b$.
+\ssc{Term test}
+\sssc{For real series}
+If $\sum_{n=0}^{\infty}a_n$ converges, then $\lim_{n\to\infty}a_n=0$.
+\bpr
+Let
+\[S_n=\sum_{k=0}^na_k\]
+and $S_{-1}=0$.
+\[a_n=S_n-S_{n-1}.\]
+Suppose $S_n$ converges to $S$. Then $S_{n-1}$ converges to $S$. Then $S_n-S_{n-1}$ converges to $S-S=0$.
+\epr
+\sssc{For improper integral}
+If function $f\colon [a,\infty)\to\bbR$ is measurable and of bounded variation, $\int_a^bf(x)\dd{x}$ is proper integral for any $b>a$, and $\int_a^{\infty}f(x)\dd{x}$ converges to some real number, then
+\[\lim_{x\to\infty}f(x)=0.\]
+\bpr
+Let $f^+$ and $f^-$ be the Jordan decomposition of $f$ such that $f=f^+-f^-$.
+\[\int_a^{\infty}f(x)\dd{x}=\int_a^{\infty}f^+(x)\dd{x}-\int_a^{\infty}f^-(x)\dd{x}\]
+and that LHS converges iff both terms of RHS converges.
+
+$\lim_{x\to\infty}f(x)=0$ iff $\lim_{x\to\infty}f^+(x)=\lim_{x\to\infty}f^-(x)$.
+
+Assume for contradiction that there exists $\varepsilon>0$ and $M\geq a$ such that
+\[\forall x\geq M:\,f^+(x)>\varepsilon.\]
+Then, $\int_M^{\infty}f^+(x)$ diverges.
+
+Assume for contradiction that there exists $\varepsilon>0$ and $M\geq a$ such that
+\[\forall x\geq M:\,f^-(x)>\varepsilon.\]
+Then, $\int_M^{\infty}f^-(x)$ diverges.
+\epr
 \ssc{(Direct) comparison theorem}
 \sssc{For real series}
 If real sequences $\langle a_n\rangle_{n=1}^{\infty}$ and $\langle b_n\rangle_{n=1}^{\infty}$ are such that $a_n\geq b_n\geq 0$ for all $n\in\bbN$, then
