@@ -1391,14 +1391,22 @@ Suppose a real-valued function $f$ is monotone on an interval $(a,b)$, then it h
 Suppose $f$ is non-decreasing on $(a,b)$. For any $x\in(a,b)$, $f(x^-)$ and $f(x^+)$ both exist and $f(x^-)\leq f(x)\leq f(x^+)$. For any discontinuity $x$, assign a rational index $r_x\in(f(x^-),f(x^+))$. This is always possible since $(f(x^-),f(x^+))$ is nonempty and $\bbQ$ is dense in $\bbR$. The cardinality of the set of cardinality is the same as that of the set of the indices, which is at most $|\bbQ|=\aleph_0$.
 \epr
 \ssc{Integral test}
-Suppose $f(x)\colon [1,\infty)$ is bounded and monotone, and $\lim_{x\to\infty}f(x)=0$. Let $\langle a_n\rangle_{n\in\bbN}$ be the sequence defined by $a_n=f(n)$. Then, $\int_1^{\infty}f(x)\dd{x}$ is convergent iff $\sum_{n=1}^{\infty}a_n$ is convergent.
+Suppose $f(x)\colon [1,\infty)$ is bounded and monotone, and $\lim_{x\to\infty}f(x)=0$. Then, $\int_1^{\infty}f(x)\dd{x}$ is convergent iff $\sum_{n=1}^{\infty}f(n)$ is convergent, and for any $N\in\bbN$,
+\[\int_1^Nf(x)\dd{x}\geq\sum_{n=1}^Nf(n)\geq\int_1^{N+1}f(x)\dd{x}.\]
 \bpr
-Since $f$ is monotone, it is 
+Suppose $f$ is non-increasing. It has at most countably many discontinuities.
+\[0\geq f(1)\geq\int_1^2\dd{x},\]
+and for any $n\geq 2$,
+\[\int_{n-1}^nf(x)\dd{x}\geq f(n)\geq\int_n^{n+1}\dd{x}.\]
+Summing over $n\in\bbN$, we obtain, for any $N\in\bbN$,
+\[\int_1^Nf(x)\dd{x}\geq\sum_{n=1}^Nf(n)\geq\int_1^{N+1}f(x)\dd{x}.\]
+Take limit $\lim_{N\to\infy}$, we have
+\[\int_1^{\infty}f(x)\dd{x}\geq\sum_{n=1}^{\infty}f(n)\geq\int_1^{\infty}f(x)\dd{x},\]
+that is,
+\[\int_1^{\infty}f(x)\dd{x}=\sum_{n=1}^{\infty}f(n).\]
+\epr
 
-PLACEHOLDER NOW
-
-
-
+PLACEHOLDER NOW BELOW ACCORDING TO BOOK
 \ssc{p-test I}
 \sssc{For improper integral}
 $\int_a^{\infty}x^p\dd{x},\quad a>0$ converges iff $p<-1$. And for $p<-1\land a>0$,
