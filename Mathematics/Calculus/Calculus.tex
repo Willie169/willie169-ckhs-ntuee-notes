@@ -175,36 +175,8 @@ A point is a singularity or a singular point of a function $f$ over a topologica
 For a function $f$ over a topological space and a singularity $a$ of $f$, $a$ is an isolated singularity iff there exists an open set $U\subseteq D_f\cup\{a\}$ such that there is no singularity of $f$ in $U\setmimus\{a\}$.
 \sssc{Removable singularity}
 An isolated singularity $a$ of a function $f$ over a topological space is a removable singularity iff there exists a function $g$ defined on $D_f\cup\{a\}$ such that $f(x)=g(x)\forall x\in D_f\setmimus\{a\}$ and $a$ is not a singularity of $g$.
-\sssc{Arithmetic Laws}
-If $f$ and $g$ are continuous at $a$ and $c$ is a constant, then the following functions are also continuous at $a$:
-\[f+g;\quad f-g;\quad cf;\quad fg;\]
-\[\frac{f}{g}\text{\ if\ }g(a)\neq 0.\]
-\sssc{Composte Laws}
-If $g$ is continuous at $a$ and $f$ is continuous at $g(a)$, then the composite function $f\circ g$ is continuous at $a$.
 \sssc{Examples of continuous real functions}
 The following types of functions are continuous at every number in their domains: algebraic functions, trigonometric functions, inverse trigonometric functions, exponential functions, logarithmic functions.
-\ssc{Intermediate Value Theorem (IVT) (中間值定理)}
-\sssc{Intermediate value theorem of real functions}
-Let $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ be a function, then for any interval $[a,b]\subseteq I$ such that $f$ is continuous on $[a,b]$ and $f(a)\neq f(b)$, $N$ is strictly between $f(a)$ and $f(b)$ implies there exists $c\in (a,b)$ such that $f(c)=N$.
-\begin{proof}
-Without loss of generality, assume $f(a)<N<f(b)$.
-
-Consider the set
-\[S=\{x\in [a,b]\mid f(x)\leq N\}.\]
-Since $f(a)<N$, $a\in S$; since $f(b)>N$, $b\notin S$. So $S$ is nonempty and bounded-above by $b$.
-
-Let $c=\sup S$. We claim that $f(c)=N$. Argue by contradiction.
-
-Assume $f(c)<N$. By continuity, there exists $\delta>0$ such that for all $x\in (c,c+\delta)\cap [a,b]$, $|f(x)-f(c)|<N-f(c)$. So $f(x)<N$ for some $x>c$. Contradicting that $c$ is the least upper bound.
-
-Assume $f(c)>N$. By continuity, there exists $\delta>0$ such that for all $x\in (c-\delta,c)\cap [a,b]$, $|f(x)-f(c)|<f(c)-N$. So $f(x)>N$ for some $x<c$. Contradicting that $c$ is the least upper bound.
-
-Therefore, $f(c)=N$.
-\end{proof}
-\sssc{Intermediate value theorem of functions between topological spaces}
-Let $X$ and $Y$ be topological spaces and function $f\colon I\subseteq X\to Y$ be continuous on a subset $J$ of $I$, then for any connected subset $K$ of $J$, $f(K)$ is a connected subset of $Y$.
-
-Let $X$ and $Y$ be topological spaces and function $f\colon I\subseteq X\to Y$ be continuous on a subset $J$ of $I$, then for any path-connected subset $K$ of $J$, $f(K)$ is a path-connected subset of $Y$.
 \ssc{Piecewise continuity}
 \sssc{Piecewise continuity of real functions}
 Let $f\colon B\subseteq\bbR\to\bbR$ be a function and $D$ be subset of $B$. If there exists an indexed family $\{[a_i,b_i]\mid i\in I\}$ of closed intervals such that:
@@ -231,14 +203,10 @@ We say $f$ is piecewise continuous iff it is piecewise continuous on $B$.
 Let $(X,d_1)$ and $(Y,d_2)$ be metric spaces, and $f\colon D\subseteq X\to Y$ be a function. $f$ is called to be uniformly continuous if for every real number $\varepsilon >0$ there exists a real number $\delta >0$ such that $x,y\in D$ with $d_{1}(x,y)<\delta$ implies $d_{2}(f(x),f(y))<\varepsilon$.
 
 Let $(X,d_1)$ and $(Y,d_2)$ be metric spaces, and $f\colon O\subseteq X\to Y$ be a function. $f$ is called to be uniformly continuous on $D\subseteq O$ if for every real number $\varepsilon >0$ there exists a real number $\delta >0$ such that $x,y\in D$ with $d_{1}(x,y)<\delta$ implies $d_{2}(f(x),f(y))<\varepsilon$.
-
-Uniform continuity implies continuity.
 \sssc{Uniform continuity of functions between topological vector spaces}
 Let $X$ and $Y$ be topological vector spaces, and $f\colon D\subseteq X\to Y$ be a function. $f$ is called to be uniformly continuous if for every neighborhood $V$ of the zero vector in $Y$, there exists a neighborhood $U$ of the zero vector in $X$ such that $x,y\in D$ with $x-y\in U$ implies $f(x)-f(y)\in V$.
 
 Let $X$ and $Y$ be topological vector spaces, and $f\colon O\subseteq X\to Y$ be a function. $f$ is called to be uniformly continuous on $D\subseteq O$ if for every neighborhood $V$ of the zero vector in $Y$, there exists a neighborhood $U$ of the zero vector in $X$ such that $x,y\in D$ with $x-y\in U$ implies $f(x)-f(y)\in V$.
-
-Uniform continuity implies continuity.
 \ssc{Absolute continuity (絕對連續) of functions from an interval to a metric space}
 Let $(X, d)$ be a metric space and $I\subseteq\mathbb{R}$ be an interval. A function $f\colon I \to X$ is absolutely continuous on $I$ if for every positive number $\varepsilon$, there exists a positive number $\delta$ such that for any finite sequence of disjoint subintervals $[x_k, y_k]$ of $I$,
 \[\sum _{k}\left|y_{k}-x_{k}\right|<\delta\]
@@ -250,33 +218,23 @@ Let $(X, d)$ be a metric space and $I\subseteq\mathbb{R}$ be an interval. A func
 \[\sum _{k}\left|y_{k}-x_{k}\right|<\delta\]
 implies
 \[\sum _{k}d\left(f(y_{k}),f(x_{k})\right)<\varepsilon.\]
-
-Absolute continuity implies uniform continuity.
-\sssc{(Golbal/regular) Lipschitz continuity (利普希茨連續) of functions between metric spaces}
+\ssc{Lipschitz continuity (利普希茨連續)}
+\sssc{(Golbal/regular) Lipschitz (continuity) of functions between metric spaces}
 Let $(X,d_1)$ and $(Y,d_2)$ be metric spaces, and $f\colon D\subseteq X\to Y$ be a function. $f$ is called to be Lipschitz continuous if there exists a real constant $K$ such that $\forall x,y\in D$, $d_{2}(f(x),f(y))\leq Kd_{1}(x,y)$.
 
 Let $(X,d_1)$ and $(Y,d_2)$ be metric spaces, and $f\colon O\subseteq X\to Y$ be a function. $f$ is called to be Lipschitz continuous on $D\subseteq O$ if there exists a real constant $K$ such that $\forall x,y\in D$, $d_{2}(f(x),f(y))\leq Kd_{1}(x,y)$.
 
-Lipschitz continuity implies absolute continuity.
-
 If a function $f\colon D\subseteq X\to Y$ between metric spaces $(X,d_1)$ and $(Y,d_2)$ is such that there exists a real constant $K$ such that $\forall x,y\in D$, $d_{2}(f(x),f(y))\leq Kd_{1}(x,y)$, then, any such $K$ is called a Lipschitz constant (利普希茨常數) of the function $f$, and $f$ is called to be $K$-Lipschitz or Lipschitz continuous with constant $K$. The smallest such $K$ is called (best) Lipschitz constant or dilation of $f$.
+\sssc{Local Lipschitz (continuity) of functions between metric spaces}
+Let $(X,d_1)$ and $(Y,d_2)$ be metric spaces, and $f\colon D\subseteq X\to Y$ be a function. $f$ is called to be locally Lipschitz continuous at $u\in D$, if there exists a neighborhood $U$ of $u$ and a real constant $K$ such that $\forall x,y\in U$, $d_{2}(f(x),f(y))\leq Kd_{1}(x,y)$.
+
+Let $(X,d_1)$ and $(Y,d_2)$ be metric spaces, and $f\colon D\subseteq X\to Y$ be a function. $f$ is called to be locally Lipschitz continuous if for any $u\in D$, it is locally continuous at $u$.
+
+Let $(X,d_1)$ and $(Y,d_2)$ be metric spaces, and $f\colon O\subseteq X\to Y$ be a function. $f$ is called to be locally Lipschitz continuous on $D\subseteq O$ if for any $u\in D$, it is locally continuous at $u$.
 \sssc{Short map}
 A short map is a function between metric spaces that is $1$-Lipschitz.
 \sssc{Contraction mapping, contraction map, contraction, contractive mapping, contractive map, or contractor (壓縮映射)}
 A contraction mapping is a function $f$ from a metric space to itself such that there exists a real number $0\leq K<1$ such that $f$ is $K$-Lipschitz, in which $K$ is sometimes called a contraction constant and the smallest such $K$ is sometimes called the best contraction constant or the contraction constant.
-\sssc{Banach fixed-point theorem (巴拿赫不動點定理), contraction mapping theorem (壓縮映射定理), contraction principle, or Banach–Caccioppoli theorem}
-For any contraction mapping $T$ over a non-empty complete metric space $X$ with best contraction constant $K$, there must exist a unique fixed-point $x^*$ of $T$ in $X$, and for any $x\in X$, for any sequence $\langle x_n\rangle_{n\in \mathbb {N}_0}$ defined as
-\[\begin{cases}
-&x_0=x\\
-&x_n=T\qty(x_{n-1}),n\in\mathbb{N}
-\end{cases},\]
-\[\lim_{n\to \infty }x_{n}=x^{*}\]
-and
-\[d(x_n,x^*)\leq\frac{K^n}{1-K}d(x_1,x_0).\]
-\sssc{Locally Lipschitz of functions between metric spaces}
-Let $(X,d_1)$ and $(Y,d_2)$ be metric spaces, and $f\colon D\subseteq X\to Y$ be a function. $f$ is called to be locally Lipschitz if $\forall x\in D$, there exists a real constant $K$ and an open set $V\subseteq D$ with $x\in V$ such that $d_{2}(f(y),f(z))\leq Kd_{1}(y,z)$ for all $y,z\in V$.
-
-Let $(X,d_1)$ and $(Y,d_2)$ be metric spaces, and $f\colon O\subseteq X\to Y$ be a function. $f$ is called to be locally Lipschitz on $D\subseteq O$ if $\forall x\in D$, there exists a real constant $K$ and an open set $V\subseteq D$ with $x\in V$ such that $d_{2}(f(y),f(z))\leq Kd_{1}(y,z)$ for all $y,z\in V$.
 
 
 \section{Derivative (導數)}
@@ -1098,6 +1056,63 @@ for all $\mb{x}\in U$.
 \eit
 
 
+\sct{Continuity Theorems}
+\ssc{Basic laws}
+\sssc{Arithmetic Laws}
+If $f$ and $g$ are continuous at $a$ and $c$ is a constant, then the following functions are also continuous at $a$:
+\[f+g;\quad f-g;\quad cf;\quad fg;\]
+\[\frac{f}{g}\text{\ if\ }g(a)\neq 0.\]
+\sssc{Composte Laws}
+If $g$ is continuous at $a$ and $f$ is continuous at $g(a)$, then the composite function $f\circ g$ is continuous at $a$.
+\ssc{Intermediate Value Theorem (IVT) (中間值定理)}
+\sssc{For real functions}
+Let $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ be a function, then for any interval $[a,b]\subseteq I$ such that $f$ is continuous on $[a,b]$ and $f(a)\neq f(b)$, $N$ is strictly between $f(a)$ and $f(b)$ implies there exists $c\in (a,b)$ such that $f(c)=N$.
+\begin{proof}
+Without loss of generality, assume $f(a)<N<f(b)$.
+
+Consider the set
+\[S=\{x\in [a,b]\mid f(x)\leq N\}.\]
+Since $f(a)<N$, $a\in S$; since $f(b)>N$, $b\notin S$. So $S$ is nonempty and bounded-above by $b$.
+
+Let $c=\sup S$. We claim that $f(c)=N$. Argue by contradiction.
+
+Assume $f(c)<N$. By continuity, there exists $\delta>0$ such that for all $x\in (c,c+\delta)\cap [a,b]$, $|f(x)-f(c)|<N-f(c)$. So $f(x)<N$ for some $x>c$. Contradicting that $c$ is the least upper bound.
+
+Assume $f(c)>N$. By continuity, there exists $\delta>0$ such that for all $x\in (c-\delta,c)\cap [a,b]$, $|f(x)-f(c)|<f(c)-N$. So $f(x)>N$ for some $x<c$. Contradicting that $c$ is the least upper bound.
+
+Therefore, $f(c)=N$.
+\end{proof}
+\sssc{For functions between topological spaces}
+Let $X$ and $Y$ be topological spaces and function $f\colon I\subseteq X\to Y$ be continuous on a subset $J$ of $I$, then for any connected subset $K$ of $J$, $f(K)$ is a connected subset of $Y$.
+
+Let $X$ and $Y$ be topological spaces and function $f\colon I\subseteq X\to Y$ be continuous on a subset $J$ of $I$, then for any path-connected subset $K$ of $J$, $f(K)$ is a path-connected subset of $Y$.
+\ssc{Monotone function have at most countably many discontinuities}
+Suppose a real-valued function $f$ is monotone on an interval $(a,b)$, then it has at most countably many discontinuities on $(a,b)$.
+\bpr
+Suppose $f$ is non-decreasing on $(a,b)$. For any $x\in(a,b)$, $f(x^-)$ and $f(x^+)$ both exist and $f(x^-)\leq f(x)\leq f(x^+)$. For any discontinuity $x$, assign a rational index $r_x\in(f(x^-),f(x^+))$. This is always possible since $(f(x^-),f(x^+))$ is nonempty and $\bbQ$ is dense in $\bbR$. The cardinality of the set of cardinality is the same as that of the set of the indices, which is at most $|\bbQ|=\aleph_0$.
+\epr
+\ssc{Uniform continuity implies continuity}
+\sssc{For functions between metric spaces}
+PLACEHOLDER
+\sssc{For functions between topological vector spaces}
+PLACEHOLDER
+\ssc{Absolute continuity implies uniform continuity for functions from an interval to a metric space}
+PLACEHOLDER
+\ssc{Lipschitz continuity theorems}
+\sssc{Lipschitz continuity implies absolute continuity for functions from an interval to a metric space}
+PLACEHOLDER
+\sssc{Local Lipschitz continuity on compact set implies global Lipschitz continuity on it}
+PLACEHOLDER
+\sssc{Banach fixed-point theorem (巴拿赫不動點定理), contraction mapping theorem (壓縮映射定理), contraction principle, or Banach–Caccioppoli theorem}
+For any contraction mapping $T$ over a non-empty complete metric space $X$ with best contraction constant $K$, there must exist a unique fixed-point $x^*$ of $T$ in $X$, and for any $x\in X$, for any sequence $\langle x_n\rangle_{n\in \mathbb {N}_0}$ defined as
+\[\begin{cases}
+&x_0=x\\
+&x_n=T\qty(x_{n-1}),n\in\mathbb{N}
+\end{cases},\]
+\[\lim_{n\to \infty }x_{n}=x^{*}\]
+and
+\[d(x_n,x^*)\leq\frac{K^n}{1-K}d(x_1,x_0).\]
+
 
 \sct{Limit Theorems and Methods}
 \ssc{Uniqueness and Existence}
@@ -1390,14 +1405,11 @@ $\sum_{n=1}^{\infty}\frac{1}{n^p}$ converges iff $p>1$.
 \bpr
 By integral test and p-test I for improper integral, it holds.
 \epr
-\ssc{Monotone function have at most countably many discontinuities}
-Suppose a real-valued function $f$ is monotone on an interval $(a,b)$, then it has at most countably many discontinuities on $(a,b)$.
-\bpr
-Suppose $f$ is non-decreasing on $(a,b)$. For any $x\in(a,b)$, $f(x^-)$ and $f(x^+)$ both exist and $f(x^-)\leq f(x)\leq f(x^+)$. For any discontinuity $x$, assign a rational index $r_x\in(f(x^-),f(x^+))$. This is always possible since $(f(x^-),f(x^+))$ is nonempty and $\bbQ$ is dense in $\bbR$. The cardinality of the set of cardinality is the same as that of the set of the indices, which is at most $|\bbQ|=\aleph_0$.
-\epr
-\ssc{Integral test}
-Suppose $f(x)\colon [1,\infty)$ is bounded and monotone, and $\lim_{x\to\infty}f(x)=0$. Then, $\int_1^{\infty}f(x)\dd{x}$ is convergent iff $\sum_{n=1}^{\infty}f(n)$ is convergent, and for any $N\in\bbN$,
-\[\int_1^Nf(x)\dd{x}\geq\sum_{n=1}^Nf(n)\geq\int_1^{N+1}f(x)\dd{x}.\]
+\sssc{Integral test}
+Suppose $f(x)\colon [1,\infty)$ is bounded and non-decreasing, and $\lim_{x\to\infty}f(x)=0$. Then, $\int_1^{\infty}f(x)\dd{x}$ is convergent iff $\sum_{n=1}^{\infty}f(n)$ is convergent, and for any $N\in\bbN$,
+\[\int_1^Nf(x)\dd{x}\geq\sum_{n=1}^Nf(n)\geq\int_1^{N+1}f(x)\dd{x},\]
+\[\int_N^{\infty}f(x)\dd{x}\leq\sum_{n=N+1}^{\infty}f(n)\leq\int_{N+1}^{\infty}f(x)\dd{x},\]
+where the latter is called remainder estimate of integral test.
 \bpr
 Suppose $f$ is non-increasing. It has at most countably many discontinuities.
 \[0\geq f(1)\geq\int_1^2\dd{x},\]
@@ -1410,6 +1422,10 @@ Take limit $\lim_{N\to\infy}$, we have
 that is,
 \[\int_1^{\infty}f(x)\dd{x}=\sum_{n=1}^{\infty}f(n).\]
 \epr
+Suppose $f(x)\colon [1,\infty)$ is bounded and non-increasing, and $\lim_{x\to\infty}f(x)=0$. Then, $\int_1^{\infty}f(x)\dd{x}$ is convergent iff $\sum_{n=1}^{\infty}f(n)$ is convergent, and for any $N\in\bbN$,
+\[\int_1^Nf(x)\dd{x}\leq\sum_{n=1}^Nf(n)\leq\int_1^{N+1}f(x)\dd{x},\]
+\[\int_N^{\infty}f(x)\dd{x}\geq\sum_{n=N+1}^{\infty}f(n)\geq\int_{N+1}^{\infty}f(x)\dd{x},\]
+where the latter is called remainder estimate of integral test.
 \ssc{Improper integral theorems}
 \sssc{p-test I}
 $\int_a^{\infty}x^p\dd{x},\quad a>0$ converges iff $p<-1$. And for $p<-1\land a>0$,
