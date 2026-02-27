@@ -1390,7 +1390,7 @@ If function $f\colon[a,b)\to\bbR$ with $b\in(a,\infty]$ is of bounded variation 
 \begin{proof}
 PLACEHOLDER
 \end{proof}
-\ssc{Real series theorems}
+\ssc{Limit of real series theorems}
 \sssc{Cauchy's convergence test}
 A series $\sum_{n=0}^{\infty}a_n$ converges iff for every $\varepsilon>0$, there is a natural number $N$ such that
 \[\abs{\sum_{i=n+1}^{n+p}a_i}<\varepsilon\]
@@ -1426,6 +1426,32 @@ Suppose $f(x)\colon [1,\infty)$ is bounded and non-increasing, and $\lim_{x\to\i
 \[\int_1^Nf(x)\dd{x}\leq\sum_{n=1}^Nf(n)\leq\int_1^{N+1}f(x)\dd{x},\]
 \[\int_N^{\infty}f(x)\dd{x}\geq\sum_{n=N+1}^{\infty}f(n)\geq\int_{N+1}^{\infty}f(x)\dd{x},\]
 where the latter is called remainder estimate of integral test.
+\sssc{Alternating series test or Leibniz's test}
+If a series $\sum_{n=1}^{\infty}(-1)^{n-1}b_n$ satisfies that
+\[b_n\geq b_{n+1}\geq 0,\quad n\in\bbN,\]
+\[\lim_{n\to\infty}b_n=0,\]
+then it is convergent, and
+\[0\leq\abs{\sum_{k=n}^{\infty}(-1)^{k-1}b_k}\leq b_n,\forall n\in\bbN,\]
+where the latter is called alternating series estimation theorem.
+\bpr
+Let
+\[c_1=b_1,\]
+\[c_n=b_{2n-1}-b_{2n-2},\quad n\in\bbN\land n>1,\]
+\[S_n=\sum_{k=1}^n(-1)^{k-1}b_k,\]
+\[S=\sum_{n=1}^{\infty}(-1)^{n-1}b_n,\]
+\[S_{2n-1}=T_n=\sum_{k=1}^nc_n.\]
+$T_n$ is non-increasing since
+\[c_n\leq 0,\quad\forall n\in\bbN\land n>1.\]
+$T_n$ is bounced-below by $0$ since
+\[c_1\geq b_2\geq-\sum_{k=2}^{\infty}c_k,\]
+\[T_n\geq 0.\]
+By monotone convergence theorem, $T_n$ is convergent, and thus $S_n$ is convergent.
+\[b_{2n-2}\geq-\sum_{k=n}^{\infty}c_k=S-T_{n-1}=S-S_{2n-3}.\]
+Thus for even $n$,
+\[b_n\geq\sum_{k=n}^{\infty}(-1)^{k-1}b_k=\abs{\sum_{k=n}^{\infty}(-1)^{k-1}b_k}.\]
+For odd $n$,
+\[\abs{\sum_{k=n}^{\infty}(-1)^{k-1}b_k}=-\sum_{k=n}^{\infty}(-1)^{k-1}b_k=-b_n+\sum_{k=n+1}^{\infty}(-1)^{k-1}b_k\geq -b_n.\]
+\epr
 \ssc{Improper integral theorems}
 \sssc{p-test I}
 $\int_a^{\infty}x^p\dd{x},\quad a>0$ converges iff $p<-1$. And for $p<-1\land a>0$,
