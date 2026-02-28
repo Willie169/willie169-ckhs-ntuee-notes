@@ -1489,7 +1489,65 @@ For the second statement,
 Thus $\sum_{n=1}^{\infty}a_n$ is divergent.
 \epr
 \sssc{Riemann series theorem}
-PLACEHOLDER 
+Let $\langle a_n\rangle_{n=1}^{\infty}$ be a real sequence, and that $\sum_{n=1}^{\infty}a_n$ is conditionally convergent. Then, for any extended-real number $M$, there exists a permutation $\sigma$ on $\bbN$ such that
+\[\sum_{n=1}^{\infty}a_{\sigma(n)}=M.\]
+\bpr
+Since $\sum_{n=1}^{\infty}a_n$ is conditionally convergent, $\langle a_n\rangle$ has infinitely many positive terms and infinitely many negative terms. Let
+\[a_n^+=\bcs a_n,\quad&a_n>0\\0,\quad&a_n\leq 0\ecs,\]
+\[a_n^-=\bcs a_n,\quad&a_n<0\\0,\quad&a_n\geq 0\ecs.\]
+Since $\sum_{n=1}^{\infty}a_n$ is conditionally convergent,
+\[\sum_{n=1}^{\infty}a_n^+=\infty,\]
+\[\sum_{n=1}^{\infty}a_n^-=-\infty.\]
+For any real number $M$, let $p_1$ be the smallest positive integer such that
+\[M<\sum_{n=1}^{p_1}a_n^+,\]
+and let $q_1$ be the smallest positive integer such that
+\[M>\sum_{n=1}^{p_1}a_n^++\sum_{n=1}^{q_1}a_n^-.\]
+Now recursively, for all $k\in\bbN_{>1}$, let $p_k$ be the smallest integer such that $p_k>p_{k-1}$ and
+\[M<\sum_{n=1}^{p_k}a_n^++\sum_{n=1}^{q_{k-1}}a_n^-,\]
+and let $q_k$ be the smallest integer such that $q_k>q_{k-1}$ and
+\[M>\sum_{n=1}^{p_k}a_n^++\sum_{n=1}^{q_k}a_n^-.\]
+The new sequence is defined as
+\[\langle a_n^+\rangle_{n=1\land a_n\geq 0}^{p_1}\langle a_n^-\rangle_{n=1\land a_n<0}^{q_1}\langle\langle a_n^+\rangle_{n=p_k+1\land a_n\geq 0}^{p_{k+1}}\langle a_n^-\rangle_{n=q_k+1\land a_n<0}^{q_{k+1}}\rangle_{k=1}^{\infty}.\]
+We have
+\[\sum_{n=1}^{p_{k+1}-1}a_n^++\sum_{n=1}^{q_k}a_n^-\leq M<\sum_{n=1}^{p_{k+1}}a_n^++\sum_{n=1}^{q_k}a_n^-,\]
+\[0<\qty(\sum_{n=1}^{p_{k+1}}a_n^++\sum_{n=1}^{q_k}a_n^-)-M\leq a_{p_{k+1}}^+.\]
+Since $\sum_{n=1}^{\infty}a_n$ is conditionally convergent,
+\[\lim_{k\to\infty}a_{p_{k+1}}^+=0.\]
+By squeeze theorem,
+\[\lim_{k\to\infty}\sum_{n=1}^{p_{k+1}}a_n^++\sum_{n=1}^{q_k}a_n^-=M.\]
+Similarly,
+\[\sum_{n=1}^{p_k}a_n^++\sum_{n=1}^{q_k-1}a_n^-\geq M>\sum_{n=1}^{p_k}a_n^++\sum_{n=1}^{q_k}a_n^-,\]
+\[0\geq M-\qty(\sum_{n=1}^{p_k}a_n^++\sum_{n=1}^{q_k-1}a_n^-)>a_{q_k}^-.\]
+Since $\sum_{n=1}^{\infty}a_n$ is convergent,
+\[\lim_{k\to\infty}a_{q_k}^-=0.\]
+By squeeze theorem,
+\[\lim_{k\to\infty}\sum_{n=1}^{p_k}a_n^++\sum_{n=1}^{q_k}a_n^-=M.\]
+Since for all $p_k<p<p_{k+1}$,
+\[\sum_{n=1}^{p_k}a_n^++\sum_{n=1}^{q_k}a_n^-\leq\sum_{n=1}^pa_n^++\sum_{n=1}^{q_k}a_n^-\leq\sum_{n=1}^{p_{k+1}}a_n^++\sum_{n=1}^{q_k}a_n^-,\]
+and for all $q_k<q<q_{k+1}$,
+\[\sum_{n=1}^{p_{k+1}}a_n^++\sum_{n=1}^{q_k}a_n^-\geq\sum_{n=1}^{p_{k+1}}a_n^++\sum_{n=1}^qa_n^-\geq\sum_{n=1}^{p_{k+1}}a_n^++\sum_{n=1}^{q_{k+1}}a_n^-,\]
+by squeeze theorem, the new sequence converges to $M$.
+
+For $\infty$ case ($-\infty$ case can be proven similarly), let $p_1$ be the smallest positive integer such that
+\[1<\sum_{n=1}^{p_1}a_n^+,\]
+and let $q_1$ be the smallest positive integer such that
+\[1>\sum_{n=1}^{p_1}a_n^++\sum_{n=1}^{q_1}a_n^-.\]
+Now recursively, for all $k\in\bbN_{>1}$, let $p_k$ be the smallest integer such that $p_k>p_{k-1}$ and
+\[k<\sum_{n=1}^{p_k}a_n^++\sum_{n=1}^{q_{k-1}}a_n^-,\]
+and let $q_k$ be the smallest integer such that $q_k>q_{k-1}$ and
+\[k>\sum_{n=1}^{p_k}a_n^++\sum_{n=1}^{q_k}a_n^-.\]
+The new sequence is defined as
+\[\langle a_n^+\rangle_{n=1\land a_n\geq 0}^{p_1}\langle a_n^-\rangle_{n=1\land a_n<0}^{q_1}\langle\langle a_n^+\rangle_{n=p_k+1\land a_n\geq 0}^{p_{k+1}}\langle a_n^-\rangle_{n=q_k+1\land a_n<0}^{q_{k+1}}\rangle_{k=1}^{\infty}.\]
+Thus for arbitrary large $k$, we have
+\[k<\sum_{n=1}^{p_k}a_n^++\sum_{n=1}^{q_{k-1}}a_n^-,\]
+and
+\[k<\sum_{n=1}^{p_k}a_n^-+\sum_{n=1}^{q_k-1}a_n^+.\]
+Since for all $p_k<p<p_{k+1}$,
+\[\sum_{n=1}^{p_k}a_n^++\sum_{n=1}^{q_k}a_n^-\leq\sum_{n=1}^pa_n^++\sum_{n=1}^{q_k}a_n^-\leq\sum_{n=1}^{p_{k+1}}a_n^++\sum_{n=1}^{q_k}a_n^-,\]
+and for all $q_k-1<q<q_{k+1}-1$,
+\[\sum_{n=1}^{p_{k+1}}a_n^++\sum_{n=1}^{q_k-1}a_n^-\geq\sum_{n=1}^{p_{k+1}}a_n^++\sum_{n=1}^qa_n^-\geq\sum_{n=1}^{p_{k+1}}a_n^++\sum_{n=1}^{q_{k+1}-1}a_n^-,\]
+by squeeze theorem, the new sequence has limit $\infty$.
+\epr
 \ssc{Improper integral theorems}
 \sssc{p-test I}
 $\int_a^{\infty}x^p\dd{x},\quad a>0$ converges iff $p<-1$. And for $p<-1\land a>0$,
@@ -4215,5 +4273,68 @@ It is related to the cosine integral by
 \begin{proof}
 PLACEHOLDER
 \end{proof}
+
+
+\sct{Riemann zeta function or Euler–Riemann zeta function}
+\ssc{Harmonic series (調和級數) and alternating harmonic series}
+\sssc{Harmonic series}
+\[H_M=\sum_{n=1}^M\frac{1}{n}.\]
+\sssc{Alternating harmonic series}
+\[S_M=\sum_{n=1}^M\frac{(-1)^{n+1}}{n}.\]
+\sssc{Relation}
+\[S_{2M}=H_{2M}-H_M.\]
+\bpr
+PLACEHOLDER
+\epr
+\sssc{Euler–Mascheroni constant or Euler's constant}
+\[\begin{aligned}
+\gamma &\coloneq \lim _{n\to \infty }\left(\left(\sum _{k=1}^n\frac {1}{k}\right)-\ln(n)\right)\\
+&= \int _1^\infty \left(\frac{1}{\lfloor x\rfloor}-\frac{1}{x}\right)\,\mathrm{d}x
+\end{aligned}\]
+\bpr
+PLACEHOLDER
+\epr
+\sssc{Alternating harmonic series convergence}
+\[\sum_{n=1}^\infty\frac{(-1)^{n+1}}{n}=\ln 2.\]
+\bpr
+PLACEHOLDER
+\epr
+\ssc{Riemann zeta function or Euler–Riemann zeta function}
+\sssc{Definition}
+The Riemann zeta function or Euler–Riemann zeta function $\zeta(s)$ is a complex function defined as the analytic extension of
+\[\zeta(s)=\sum_{n=1}^\infty\frac{1}{n^s},\quad\forall\Re(s)>1\]
+such that it is meromorphic and with an only pole at $s=1$.
+
+PLACEHOLDER
+
+\sssc{With Gamma function}
+\[\frac{1}{\Gamma(s)}\int_0^\infty\frac{x^{s-1}}{e^x-1}\dd{x}.\]
+\bpr
+PLACEHOLDER
+\epr
+
+Functional equation
+
+Euler product formula
+
+PLACEHOLDER
+PLACEHOLDERS Below
+
+Basel Problem (巴塞爾問題):
+\[\zeta(2)=\frac{\pi^2}{6}\]
+
+Other Even Positive Integers:
+\[\zeta(4)=\frac{\pi^4}{90}\]
+\[\zeta(6)=\frac{\pi^6}{945}\]
+\[\zeta(8)=\frac{\pi^8}{9450}\]
+\[\zeta(10)=\frac{\pi^{10}}{93555}\]
+\[\zeta(12)=\frac{691\pi^{12}}{638512875}\]
+\[\zeta(14)=\frac{2\pi^{14}}{18243225}\]
+
+Infinity:
+\[\lim_{n\to\infty}\zeta(n)=1\]
+
+Derivative
+
 \end{document}
 
