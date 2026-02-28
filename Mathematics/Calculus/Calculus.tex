@@ -1452,6 +1452,44 @@ Thus for even $n$,
 For odd $n$,
 \[\abs{\sum_{k=n}^{\infty}(-1)^{k-1}b_k}=-\sum_{k=n}^{\infty}(-1)^{k-1}b_k=-b_n+\sum_{k=n+1}^{\infty}(-1)^{k-1}b_k\geq -b_n.\]
 \epr
+\sssc{Ratio test}
+\ben
+\item If $\lim_{n\to\infty}\abs{\frac{a_{n+1}}{a_n}}=L<1$, then the series $\sum_{n=1}^{\infty}a_n$ is absolutely convergent.
+\item If $\lim_{n\to\infty}\abs{\frac{a_{n+1}}{a_n}}=L>1$ or $\lim_{n\to\infty}\abs{\frac{a_{n+1}}{a_n}}=\infty$, then the series $\sum_{n=1}^{\infty}a_n$ is divergent.
+\een
+\bpr
+For the first statement, choose an arbitrary $L<r<1$. There exists an integer $N$ such that
+\[\abs{\frac{a_{n+1}}{a_n}}<r,\quad\forall n\geq N.\]
+Thus,
+\[\abs{a_{N+k}}<\abs{a_N}r^k,\quad\forall k\geq 1.\]
+Since
+\[\sum_{k=1}^{\infty}\abs{a_N}r^k\]
+is convergent, by comparison test, $\sum_{n=1}^{\infty}\abs{a_n}$ is convergent.
+
+For the second statement,
+\[\lim_{n\to\infty}a_n\neq 0,\]
+thus $\sum_{n=1}^{\infty}a_n$ is divergent.
+\epr
+\sssc{(Cauchy) root test}
+\ben
+\item If $\lim_{n\to\infty}\sqrt[n]{\abs{a_n}}=L<1$, then the series $\sum_{n=1}^{\infty}a_n$ is absolutely convergent.
+\item If $\lim_{n\to\infty}\sqrt[n]{\abs{a_n}}=L>1$ or $\lim_{n\to\infty}\sqrt[n]{\abs{a_n}}=\infty$, then the series $\sum_{n=1}^{\infty}a_n$ is divergent.
+\een
+\bpr
+For the first statement, choose an arbitrary $L<r<1$. There exists an integer $N$ such that
+\[\sqrt[n]{\abs{a_n}}<r,\quad\forall n\geq N.\]
+Thus,
+\[\abs{a_n}<r^n,\quad\forall n\geq N.\]
+Since
+\[\sum_{n=1}^{\infty}r^n\]
+is convergent, by comparison test, $\sum_{n=1}^{\infty}\abs{a_n}$ is convergent.
+
+For the second statement,
+\[\lim_{n\to\infty}a_n>0.\]
+Thus $\sum_{n=1}^{\infty}a_n$ is divergent.
+\epr
+\sssc{Riemann series theorem}
+PLACEHOLDER 
 \ssc{Improper integral theorems}
 \sssc{p-test I}
 $\int_a^{\infty}x^p\dd{x},\quad a>0$ converges iff $p<-1$. And for $p<-1\land a>0$,
@@ -1546,8 +1584,24 @@ that is,
 \ssc{Absolute convergence implies convergence}
 \sssc{For real series}
 A real series is convergent if it is absolutely convergent.
+\bpr
+Suppose $\sum_{n=1}^{\infty}\abs{a_n}$ is convergent.
+\[0\leq\sum_{n=1}^{\infty}a_n+\abs{a_n}\leq\sum_{n=1}^{\infty}2\abs{a_n}\]
+By comparison test theorem, $\sum_{n=1}^{\infty}a_n+\abs{a_n}$ is convergent.
+\[\sum_{n=1}^{\infty}a_n+\abs{a_n}-\sum_{n=1}^{\infty}\abs{a_n}=\sum_{n=1}^{\infty}a_n\]
+\epr
 \sssc{For improper integral}
 An improper integral is convergent if it is absolutely convergent.
+\bpr
+Suppose
+\[\int_a^b\abs{f(x)}\dd{x}\]
+is a convergent improper integral and
+\[\int_a^c\abs{f(x)}\dd{x}\]
+is proper integral for any $a<c<b$.
+\[0\leq\int_a^bf(x)+\abs{f(x)}\dd{x}\leq\int_a^b2\abs{f(x)}\dd{x}\]
+By comparison test theorem, $\int_a^bf(x)+\abs{f(x)}\dd{x}$ is convergent.
+\[\int_a^bf(x)+\abs{f(x)}\dd{x}-\int_a^b\abs{f(x)}\dd{x}=\int_a^bf(x)\dd{x}\]
+\epr
 \ssc{Deleting head}
 \sssc{For real series}
 For real sequence $\langle a_i\rangle_{i=m}^{\infty}$, $\sum_{i=m}^{\infty}a_i$ converges iff $\sum_{i=m+n}^{\infty}a_i$ converges, for all $n\in\bbN$.
