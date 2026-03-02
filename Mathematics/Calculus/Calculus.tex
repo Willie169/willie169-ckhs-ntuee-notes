@@ -4284,15 +4284,36 @@ PLACEHOLDER
 \sssc{Relation}
 \[S_{2M}=H_{2M}-H_M.\]
 \bpr
-PLACEHOLDER
+\[\ba
+S_{2M}=H_{2M}-2\sum_{n=1}^M\frac{1}{2n}\\
+&=H_{2M}-H_M
+\ea\]
 \epr
 \sssc{Euler–Mascheroni constant or Euler's constant}
 \[\begin{aligned}
-\gamma &\coloneq \lim _{n\to \infty }\left(\left(\sum _{k=1}^n\frac {1}{k}\right)-\ln(n)\right)\\
-&= \int _1^\infty \left(\frac{1}{\lfloor x\rfloor}-\frac{1}{x}\right)\,\mathrm{d}x
+\lim_{n\to\infty }\left(\sum_{k=1}^n\frac{1}{k}\right)-\ln(n)\\
+&=\int_1^\infty\left(\frac{1}{\lfloor x\rfloor}-\frac{1}{x}\right)\dd{x}
 \end{aligned}\]
+is convergent, and its limit is called Euler–Mascheroni constant or Euler's constant $\gamma$.
 \bpr
-PLACEHOLDER
+Suppose sequence $\langle a_n=\left(\sum_{k=1}^n\frac{1}{k}\right)-\ln(n)\rangle_{n=1}^{\infty}$.
+Lemma:
+\[\ln(1+x)\ge \frac{x}{1+x}, \quad x>-1.\]
+\[\ln(1+\frac{1}{n})\ge\frac{1}{n\qty(1+\frac{1}{n})}=\frac{1}{n+1}\]
+$a_n$ is non-increasing:
+\[a_{n+1}-a_n=\frac{1}{n+1}-\ln(1+\frac{1}{n})\le 0\]
+\[\int_k^{k+1}\frac{\dd{x}}{x}\leq\frac{1}{k},\quad k\geq 1\]
+\[\ln(n)=\int_1^n\frac{\dd{x}}{x}\leq\sum_{k=1}^n\frac{1}{k},\quad k\geq 1\]
+$a_n$ is bounded-below:
+\[\sum_{k=1}^n\frac{1}{k}-\ln(n)\geq 0\]
+Thus, by monotone convergence theorem, $a_n$ is convergent.
+
+Proof of Lemma:
+\[\ln(1+0)=\frac{0}{1+0}=0.\]
+\[\dv{}{x}\ln(1+x)=\frac{1}{1+x}\]
+\[\dv{}{x}\qty(\frac{x}{1+x})=\frac{1+x-x}{(1+x)^2}=\frac{1}{(1+x)^2}\]
+\[0>x>-1\implies 1>1+x>0\implies 1+x>(1+x)^2\implies\frac{1}{(1+x)^2}>\frac{1}{1+x}\implies \ln(1+x)>\frac{x}{1+x}\]
+\[x>0\implies 1+x>1\implies 1+x<(1+x)^2\implies\frac{1}{(1+x)^2}<\frac{1}{1+x}\implies \ln(1+x)>\frac{x}{1+x}\]
 \epr
 \sssc{Alternating harmonic series convergence}
 \[\sum_{n=1}^\infty\frac{(-1)^{n+1}}{n}=\ln 2.\]
