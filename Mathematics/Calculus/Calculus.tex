@@ -1472,10 +1472,12 @@ thus $\sum_{n=1}^{\infty}a_n$ is divergent.
 \epr
 \sssc{(Cauchy) root test}
 \ben
-\item If $\lim_{n\to\infty}\sqrt[n]{\abs{a_n}}=L<1$, then the series $\sum_{n=1}^{\infty}a_n$ is absolutely convergent.
-\item If $\lim_{n\to\infty}\sqrt[n]{\abs{a_n}}=L>1$ or $\lim_{n\to\infty}\sqrt[n]{\abs{a_n}}=\infty$, then the series $\sum_{n=1}^{\infty}a_n$ is divergent.
+\item If $\limsup_{n\to\infty}\sqrt[n]{\abs{a_n}}<1$, then the series $\sum_{n=1}^{\infty}a_n$ is absolutely convergent.
+\item If $\limsup_{n\to\infty}\sqrt[n]{\abs{a_n}}>1$, then the series $\sum_{n=1}^{\infty}a_n$ is divergent.
 \een
 \bpr
+Let
+\[L=\limsup_{n\to\infty}\sqrt[n]{\abs{a_n}}.\]
 For the first statement, choose an arbitrary $L<r<1$. There exists an integer $N$ such that
 \[\sqrt[n]{\abs{a_n}}<r,\quad\forall n\geq N.\]
 Thus,
@@ -1485,7 +1487,7 @@ Since
 is convergent, by comparison test, $\sum_{n=1}^{\infty}\abs{a_n}$ is convergent.
 
 For the second statement,
-\[\lim_{n\to\infty}a_n>0.\]
+\[\neg\lim_{n\to\infty}a_n=0.\]
 Thus $\sum_{n=1}^{\infty}a_n$ is divergent.
 \epr
 \sssc{Riemann series theorem}
@@ -1547,6 +1549,32 @@ Since for all $p_k<p<p_{k+1}$,
 and for all $q_k-1<q<q_{k+1}-1$,
 \[\sum_{n=1}^{p_{k+1}}a_n^++\sum_{n=1}^{q_k-1}a_n^-\geq\sum_{n=1}^{p_{k+1}}a_n^++\sum_{n=1}^qa_n^-\geq\sum_{n=1}^{p_{k+1}}a_n^++\sum_{n=1}^{q_{k+1}-1}a_n^-,\]
 by squeeze theorem, the new sequence has limit $\infty$.
+\epr
+\sssc{Cauchy–Hadamard theorem}
+For any given power series $\sum_{n=0}^{\infty}c_n(x-a)^n$, let
+\[L=\limsup_{n\to\infty}\sqrt[n]{\abs{c_n}}\in\bar{\bbR}_{\geq 0},\]
+then,
+\[R=\bcs\infty,\quad&L=0\\\frac{1}{L},\quad&L\in\bbR_{>0}\\0,\quad&L=\infty\ecs,\]
+called radius of convergence, is such that the series is absolute convergent if $|x-a|<R$ and divergent if $|x-a|>R$, and if $R=0$, the series is absolutely convergent at $x=a$ and divergent elsewhere.
+\bpr
+Let $r=|x-a|$.
+\[\limsup_{n\to\infty}\sqrt[n]{\abs{c_n(x-a)^n}}=\bcs Lr,\quad&r\neq 0\\0,\quad&r=0\ecs.\]
+
+If $L=0$, then the series is absolutely convergent for all $x$, thus $R=\infty$.
+
+Else if $L\in\bbR_{>0}$, then the series is absolutely convergent for $r<\frac{1}{L}$ and divergent for $r>\frac{1}{L}$, thus $R=\frac{1}{L}$.
+
+Else if $L=\infty$, then the series is absolutely convergent at $x=a$ and divergent elsewhere, thus $R=0$.
+\epr
+\sssc{Power series term-by-term differentiation and integration theorem}
+If the power series $\sum_{n=0}^{\infty}c_n(x-a)^n$ has radius of convergence $R>0$, then the function $f$ defined as
+\[f(x)=\sum_{n=0}^{\infty}c_n(x-a)^n\]
+is differentiable on $(a-R,a+R)$, and
+\[f'(x)=\sum_{n=0}^{\infty}nc_n(x-a)^{n-1},\]
+\[\int f(x)\dd{x}=C+\sum_{n=0}^{\infty}c_n\frac{(x-a)^{n+1}}{n+1},\]
+and the radii of convergence of both of them are $R$.
+\bpr
+PLACEHOLDER
 \epr
 \ssc{Improper integral theorems}
 \sssc{p-test I}
