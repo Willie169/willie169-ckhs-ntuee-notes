@@ -554,13 +554,13 @@ When computing indefinite integral, we usually absorb constants into $C$ without
 \[\int f(x)\dd{x}=\ldots=F(x)+a+C=F(x)+C.\]
 \ssc{Taylor series}
 \sssc{Taylor series (泰勒級數) or Taylor expansion (泰勒展開)}
-Let $f\colon D\subseteq\mathbb{R}\to\mathbb{R}$ be a function and $I\subseteq D$ be an interval such that $f\in C^{\infty}(I)$, then the Taylor series of $f$ at $a\in I$ (or about $a$, near $a$, or centered at $a$) is
+Let $f\colon D\subseteq\mathbb{R}\to\mathbb{R}$ be a function and $I=(a-R,a+R)\subseteq D$ be an interval such that $f\in C^{\infty}(I)$, then the Taylor series of $f$ at $a\in I$ (or about $a$, near $a$, or centered at $a$) is
 \[\sum_{n=0}^{\infty}\frac{f^{(n)}(a)}{n!}(x-a)^n,\]
 of which convergence is not guaranteed, and convergence to $f$ is not guaranteed even if it's convergent.
 
 Taylor series of at $0$ is called Maclaurin series (馬克勞林級數) or Maclaurin expansion (馬克勞林展開).
 \sssc{Taylor polynomial}
-Let $f\colon D\subseteq\mathbb{R}\to\mathbb{R}$ be a function and $I\subseteq D$ be an interval $f$ is $k$ times differentiable on, then the $k$-th degree (or order) Taylor polynomial (or approximation) of $f$ at $a\in I$ (or about $a$, near $a$, or centered at $a$) is
+Let $f\colon D\subseteq\mathbb{R}\to\mathbb{R}$ be a function and $I=(a-R,a+R)\subseteq D$ be an interval where $f$ is $k$ times differentiable, then the $k$-th degree (or order) Taylor polynomial (or approximation) of $f$ at $a$ (or about $a$, near $a$, or centered at $a$) is
 \[T_n(x)=\sum_{n=0}^k\frac{f^{(n)}(a)}{n!}(x-a)^n,\]
 in which the first degree one is also called linear approximation, linearization, or tangent line, and
 \[R_n(x)=f(x)-T_n(x)\]
@@ -1050,14 +1050,14 @@ The $k$th order derivative of $\mathbf{F}:\,\mathbb{R}^n\to\mathbb{R}^m$, denote
 \[D^{k}\mathbf{F}(\mathbf{x})=\sum_{\|\alpha\|=k} \left(D^\alpha \mathbf{F}(\mathbf{a})\right).\]
 In particular, the first-order derivative of $\mathbf{F}$ is the gradient of it.
 \sssc{Taylor series or Taylor expansion}
-Let $f\colon D\subseteq\mathbb{R}^m\to\mathbb{R}$ be a function and $I\subseteq D$ be an open ball such that $f\in C^{\infty}(I)$, then the Taylor series of $f$ at $a\in I$ (or about $a$, near $a$, or centered at $a$) is
+Let $f\colon D\subseteq\mathbb{R}^m\to\mathbb{R}$ be a function and $I\subseteq D$ be an open ball centered at $a$ such that $f\in C^{\infty}(I)$, then the Taylor series of $f$ at $a$ (or about $a$, near $a$, or centered at $a$) is
 \[\sum_{\alpha\in\mathbb{N}_0^{\pht{0}m}}\frac{D^{\alpha}f(a)}{\alpha !}(x-a)^{\alpha},\]
 of which convergence is not guaranteed, and convergence to $f$ is not guaranteed even if it's convergent.
 
 Taylor series of at $0$ is called Maclaurin series 
 or Maclaurin expansion.
 \sssc{Taylor polynomial}
-Let $f\colon D\subseteq\mathbb{R}^m\to\mathbb{R}$ be a function and $I\subseteq D$ be an open ball $f$ is $k$ times differentiable on, then the $k$-th degree (or order) Taylor polynomial (or approximation) of $f$ at $a\in I$ (or about $a$, near $a$, or centered at $a$) is
+Let $f\colon D\subseteq\mathbb{R}^m\to\mathbb{R}$ be a function and $I\subseteq D$ be an open ball centered at $a$ where $f$ is $k$ times differentiable, then the $k$-th degree (or order) Taylor polynomial (or approximation) of $f$ at $a$ (or about $a$, near $a$, or centered at $a$) is
 \[T_n(x)=\sum_{\alpha\in\mathbb{N}_0^{\pht{0}m}\land\|\alpha\|\leq k}\frac{D^{\alpha}f(a)}{\alpha !}(x-a)^{\alpha},\]
 in which the first degree one is also called linear approximation, linearization, or tangent line, and
 \[R_n(x)=f(x)-T_n(x)\]
@@ -2559,6 +2559,15 @@ which is in indeterminate form of $0\cdot\infty$ because $\lim_{x\to -\infty}\ln
 Let $f(x)$ and $g(x)$ be functions differentiable on $(-\infty,a)$. If $\lim_{x\to -\infty}f(x)=1$ and $\lim_{x\to -\infty}g(x)=\infty$, where $\lim_{x\to -\infty}f(x)^{g(x)}$ is called indeterminate form of type $1^{\infty}$, we may find $\lim_{x\to -\infty}f(x)^{g(x)}$ by taking natural logarithm:
 \[g(x)\ln(f(x)),\]
 which is in indeterminate form of $0\cdot\infty$ because $\lim_{x\to -\infty}\ln(f(x))=0$.
+\ssc{Taylor series}
+\sssc{Uniqueness}
+Let $f\colon D\subseteq\mathbb{R}^m\to\mathbb{R}$ be a function, let $a$ be any point, $I\subseteq D$ be any open ball centered $a$, if there exists a series such that:
+\[f(x)=\sum_{\alpha\in\mathbb{N}_0^{\pht{0}m}}\frac{c_{\alpha}}{\alpha !}(x-a)^{\alpha},\]
+for all $x\in I$, then
+\[c_{\alpha}=D^{\alpha}f(a).\]
+
+PLACEHOLDER
+
 \subsection{Lagrange multiplier (method) (拉格朗日乘數/乘子（法）)}
 The Lagrange multiplier method is a method for finding the points where extremes occur of a differentiable function under constraints.
 \sssc{Univariate form}
