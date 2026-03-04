@@ -552,18 +552,21 @@ where $C$ is to be understood as notation for a locally constant function of $x$
 
 When computing indefinite integral, we usually absorb constants into $C$ without changing its symbol, that is,
 \[\int f(x)\dd{x}=\ldots=F(x)+a+C=F(x)+C.\]
-\subsection{Taylor series (泰勒級數) or Taylor expansion (泰勒展開)}
-Assume that $F:\,\mathbb{R}\to\mathbb{R}$ is an infinitely differentiable function, and its derivatives of every order exist on $\mathbb{R}$, then the Taylor series of $F$ at $a$ is
-\[F(x) = \sum_{n\in\mathbb{N}_0} \frac{F^{(n)}(a)}{n!}(x-a)^n,\]
-that is,
-\[F(x) = \sum^k_{n=0} \frac{F^{(n)}(a)}{n!}(x-a)^n+\int_0^1\frac{(1-t)^k}{k!}F^{(k+1)}(a+t(x-a))(x-a)^{k+1}\,\mathrm{d}t.\]
-Also, the $k$th-order approximation of $f$ near $a$ is
-\[F(x) \approx \sum^k_{n=0} \frac{F^{(n)}(a)}{n!}(x-a)^n,\]
-and the first-order (aka linear or tangent line) approximation of $f$ near $a$ is
-\[F(x) \approx F(a)+F'(a)(x-a).\]
-THe linearization of $f$ near $a$ is
-\[L(x)=F(a)+F'(a)(x-a).\]
-The Taylor series of $F$ at $0$ is called Maclaurin series (馬克勞林級數) or Maclaurin expansion (馬克勞林展開).
+\ssc{Taylor series}
+\sssc{Taylor series (泰勒級數) or Taylor expansion (泰勒展開)}
+Let $f\colon D\subseteq\mathbb{R}\to\mathbb{R}$ be a function and $I\subseteq D$ be an interval such that $f\in C^{\infty}(I)$, then the Taylor series of $f$ at $a\in I$ (or about $a$, near $a$, or centered at $a$) is
+\[\sum_{n=0}^{\infty}\frac{f^{(n)}(a)}{n!}(x-a)^n,\]
+of which convergence is not guaranteed, and convergence to $f$ is not guaranteed even if it's convergent.
+
+Taylor series of at $0$ is called Maclaurin series (馬克勞林級數) or Maclaurin expansion (馬克勞林展開).
+\sssc{Taylor polynomial}
+Let $f\colon D\subseteq\mathbb{R}\to\mathbb{R}$ be a function and $I\subseteq D$ be an interval $f$ is $k$ times differentiable on, then the $k$-th degree (or order) Taylor polynomial (or approximation) of $f$ at $a\in I$ (or about $a$, near $a$, or centered at $a$) is
+\[T_n(x)=\sum_{n=0}^k\frac{f^{(n)}(a)}{n!}(x-a)^n,\]
+in which the first degree one is also called linear approximation, linearization, or tangent line, and
+\[R_n(x)=f(x)-T_n(x)\]
+is called remainder.
+
+Taylor polynomial of at $0$ is called Maclaurin polynomial.
 \ssc{Differential equation (微分方程)}
 \sssc{Differential Equation}
 An equation containing the derivatives of one or more unknown functions or dependent variables, with respect to one or more independent variables, is said to be a differential equation (DE).
@@ -997,19 +1000,21 @@ D^\alpha f = \frac{\partial^{\|\alpha\|} f}{\partial x_1^{\alpha_1} \partial x_2
 The $k$th order derivative of $\mathbf{F}:\,\mathbb{R}^n\to\mathbb{R}^m$, denoted as $\mathbf{F}^{(k)}(\mathbf{x})$ or $D^{k}\mathbf{F}(\mathbf{x})$, is a $(\mathbb{R}^n)^k\to\mathbb{R}$ function, where $(\mathbb{R}^n)^k$ is a Cartesian product of $k$ copies of $\mathbb{R}^n$ vector, that is,
 \[D^{k}\mathbf{F}(\mathbf{x})=\sum_{\|\alpha\|=k} \left(D^\alpha \mathbf{F}(\mathbf{a})\right).\]
 In particular, the first-order derivative of $\mathbf{F}$ is the gradient of it.
-\sssc{Taylor expansion}
-Assume that $\mathbf{F}:\,\mathbb{R}^n\to\mathbb{R}^m$ is an infinitely differentiable function, and its partial derivatives of every order exist on $\mathbb{R}^n$, then the Taylor expansion of $\mathbf{F}$ at $\mathbf{a}$ is
-\[\mathbf{F}(\mathbf{x}) = \sum_{\|\alpha\|\in\mathbb{N}_0} \frac{D^\alpha \mathbf{F}(\mathbf{a})}{\alpha!} (\mathbf{x} - \mathbf{a})^\alpha,\]
-that is,
-\[\mathbf{F}(\mathbf{x}) = \sum_{\|\alpha\|\leq k} \frac{D^\alpha \mathbf{F}(\mathbf{a})}{\alpha!} (\mathbf{x} - \mathbf{a})^\alpha+\int_0^1\frac{(1-t)^k}{k!} D^{k+1}\mathbf{F}(\mathbf{a} + t(\mathbf{x} - \mathbf{a})) (\mathbf{x} - \mathbf{a})^{k+1} \, \mathrm{d}t.\]
-Also, the $k$th-order approximation of $\mathbf{F}$ near $\mathbf{a}$ is
-\[\mathbf{F}(\mathbf{x}) \approx \sum_{\|\alpha\|\leq k} \frac{D^\alpha \mathbf{F}(\mathbf{a})}{\alpha!} (\mathbf{x} - \mathbf{a})^\alpha,\]
-the first-order (aka linear or tangent line) approximation of $f$ near $\mathbf{a}$ is
-\[\mathbf{F}(\mathbf{x}) \approx \mathbf{F}(\mathbf{a}) + \nabla \mathbf{F}(\mathbf{a}) \cdot (\mathbf{x} - \mathbf{a}),\]
-and the second-order approximation of $f$ near $\mathbf{a}$ is
-\[\mathbf{F}(\mathbf{x}) \approx \mathbf{F}(\mathbf{a}) + \nabla \mathbf{F}(\mathbf{a}) \cdot (\mathbf{x} - \mathbf{a}) + \frac{1}{2}(\mathbf{x} - \mathbf{a})^\top H(\mb{F})(\mb{a})(\mathbf{x} - \mathbf{a}).\]
-The linearization of $f$ near $\mathbf{a}$ is
-\[\mathbf{L}(\mathbf{x})= \mathbf{F}(\mathbf{a}) + \nabla \mathbf{F}(\mathbf{a}) \cdot (\mathbf{x} - \mathbf{a}).\]
+\sssc{Taylor series or Taylor expansion}
+Let $f\colon D\subseteq\mathbb{R}^m\to\mathbb{R}$ be a function and $I\subseteq D$ be an open ball such that $f\in C^{\infty}(I)$, then the Taylor series of $f$ at $a\in I$ (or about $a$, near $a$, or centered at $a$) is
+\[\sum_{\alpha\in\mathbb{N}_0^{\pht{0}m}}\frac{D^{\alpha}f(a)}{\alpha !}(x-a)^{\alpha},\]
+of which convergence is not guaranteed, and convergence to $f$ is not guaranteed even if it's convergent.
+
+Taylor series of at $0$ is called Maclaurin series 
+or Maclaurin expansion.
+\sssc{Taylor polynomial}
+Let $f\colon D\subseteq\mathbb{R}^m\to\mathbb{R}$ be a function and $I\subseteq D$ be an open ball $f$ is $k$ times differentiable on, then the $k$-th degree (or order) Taylor polynomial (or approximation) of $f$ at $a\in I$ (or about $a$, near $a$, or centered at $a$) is
+\[T_n(x)=\sum_{\alpha\in\mathbb{N}_0^{\pht{0}m}\land\|\alpha\|\leq k}\frac{D^{\alpha}f(a)}{\alpha !}(x-a)^{\alpha},\]
+in which the first degree one is also called linear approximation, linearization, or tangent line, and
+\[R_n(x)=f(x)-T_n(x)\]
+is called remainder.
+
+Taylor polynomial of at $0$ is called Maclaurin polynomial.
 \sssc{Definiteness (正定性)}
 \bit
 \item Positive definite: We say the Hessian $H(\mb{F})$ of $\mb{F}$ at $\mb{a}$ is positive definite if the second derivative term in Taylor series is positive for all inifinisimal changes $\delta\mb{x}$ near $\mb{a}$, that is,
