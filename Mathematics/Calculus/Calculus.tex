@@ -1023,7 +1023,7 @@ A real function $A$ with real independent variables that is second-order differe
 \sssc{Multi-index notation (多重指標記號)}
 Suppose there are \( n \) variables \( x_1, x_2, \dots, x_n \), then a multi-index $\alpha$ is a vector of \( n \) nonnegative integers: 
 \[
-\alpha = (\alpha_1, \alpha_2,\ldots,, \alpha_n), \quad \text{where\ } \alpha_i \in \mathbb{N}_0.
+\alpha = (\alpha_1, \alpha_2,\ldots,\alpha_n), \quad \text{where\ } \alpha_i \in \mathbb{N}_0.
 \]
 Define: 
 \begin{itemize}
@@ -1040,6 +1040,9 @@ If \( \mathbf{x} = (x_1, x_2,\ldots, x_n) \), then
 \[
 \mathbf{x}^\alpha = x_1^{\alpha_1} \cdot x_2^{\alpha_2} \ldots  x_n^{\alpha_n}.
 \]
+\item Order:
+\[(\beta_1, \beta_2,\ldots,\beta_n)\leq(\alpha_1, \alpha_2,\ldots, \alpha_n)\coloneq\beta_1\leq\alpha_1\land\beta_2\leq\alpha_2\land\ldots\beta_n\leq\alpha_n\]
+\[(\beta_1, \beta_2,\ldots,\beta_n)<(\alpha_1, \alpha_2,\ldots, \alpha_n)\coloneq\beta_1<\alpha_1\land\beta_2<\alpha_2\land\ldots\beta_n<\alpha_n\]
 \item Higher-order mixed partial derivatives $D^\alpha f$ or $\partial^\alpha f$: 
 \[
 D^\alpha f = \frac{\partial^{\|\alpha\|} f}{\partial x_1^{\alpha_1} \partial x_2^{\alpha_2} \ldots  \partial x_n^{\alpha_n}}.
@@ -2565,8 +2568,25 @@ Let $f\colon D\subseteq\mathbb{R}^m\to\mathbb{R}$ be a function, let $a$ be any 
 \[f(x)=\sum_{\alpha\in\mathbb{N}_0^{\pht{0}m}}\frac{c_{\alpha}}{\alpha !}(x-a)^{\alpha},\]
 for all $x\in I$, then
 \[c_{\alpha}=D^{\alpha}f(a).\]
+\bpr
+Fix any multi-index $\beta$. Apply $D^{\beta}$ to both sides
+\[D^{\beta}f(x)=\sum_{\alpha\in\bbN_0^{\pht{0}m}}\frac{c_{\alpha}}{\alpha !}D^{\beta}(x-a)^{\alpha}\]
+\[D^{\beta}(x-a)^{\alpha}=\bcs
+\frac{\alpha !}{(\alpha-\beta)!}(x-a)^{\alpha-\beta},\quad&\beta\leq\alpha\\
+0,\quad&\tx{otherwise}\ecs.\]
+\[D^{\beta}f(x)=\sum_{\alpha\in\bbN_0^{\pht{0}m}\land\beta\leq\alpha}\frac{c_{\alpha}}{(\alpha-\beta)!}(x-a)^{\alpha-\beta}\]
+Evaluate $a$, only $\alpha=\beta$ term survives. Thus,
+\[D^{\beta}f(a)=c_{\beta}.\]
+\epr
+\sssc{Taylor's theorem}
+Let $k,m\in\bbN$, and function $f\colon D\subseteq\bbR^m\to\bbR$ be $k$ times differentiable at a point $a\in D$. Then there exists a real-valued function $R_k$ defined on a neighborhood of $a$ such that
+\[f(x)=\sum_{\alpha\in\mathbb{N}_0^{\pht{0}m}\land\|\alpha\|\leq k}\frac{D^{\alpha}f(a)}{\alpha !}(x-a)^{\alpha}+R_k(x),\]
+and that
+\ben
+\item Peano form of remainder:
+\[\lim_{x\to a}R_k(x)|x-a|^{-k}=0.\]
+\item 
 
-PLACEHOLDER
 
 \subsection{Lagrange multiplier (method) (拉格朗日乘數/乘子（法）)}
 The Lagrange multiplier method is a method for finding the points where extremes occur of a differentiable function under constraints.
