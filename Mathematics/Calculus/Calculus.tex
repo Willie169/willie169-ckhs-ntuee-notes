@@ -1027,9 +1027,9 @@ Suppose there are \( n \) variables \( x_1, x_2, \dots, x_n \), then a multi-ind
 \]
 Define: 
 \begin{itemize}
-\item Norm or length \( \|\alpha\| \) or $|\alpha|$: 
+\item Norm or length $|\alpha|$ or \( \|\alpha\| \): 
 \[
-\|\alpha\| = \alpha_1 + \alpha_2 + \ldots\alpha_n.
+|\alpha| = \alpha_1 + \alpha_2 + \ldots\alpha_n.
 \]
 \item Factorial \( \alpha! \): 
 \[
@@ -1045,12 +1045,12 @@ If \( \mathbf{x} = (x_1, x_2,\ldots, x_n) \), then
 \[(\beta_1, \beta_2,\ldots,\beta_n)<(\alpha_1, \alpha_2,\ldots, \alpha_n)\coloneq\beta_1<\alpha_1\land\beta_2<\alpha_2\land\ldots\beta_n<\alpha_n\]
 \item Higher-order mixed partial derivatives $D^\alpha f$ or $\partial^\alpha f$: 
 \[
-D^\alpha f = \frac{\partial^{\|\alpha\|} f}{\partial x_1^{\alpha_1} \partial x_2^{\alpha_2} \ldots  \partial x_n^{\alpha_n}}.
+D^\alpha f = \frac{\partial^{|\alpha|} f}{\partial x_1^{\alpha_1} \partial x_2^{\alpha_2} \ldots  \partial x_n^{\alpha_n}}.
 \]
 \end{itemize}
 \sssc{Higher-order derivative}
 The $k$th order derivative of $\mathbf{F}:\,\mathbb{R}^n\to\mathbb{R}^m$, denoted as $\mathbf{F}^{(k)}(\mathbf{x})$ or $D^{k}\mathbf{F}(\mathbf{x})$, is a $(\mathbb{R}^n)^k\to\mathbb{R}$ function, where $(\mathbb{R}^n)^k$ is a Cartesian product of $k$ copies of $\mathbb{R}^n$ vector, that is,
-\[D^{k}\mathbf{F}(\mathbf{x})=\sum_{\|\alpha\|=k} \left(D^\alpha \mathbf{F}(\mathbf{a})\right).\]
+\[D^{k}\mathbf{F}(\mathbf{x})=\sum_{|\alpha|=k} \left(D^\alpha \mathbf{F}(\mathbf{a})\right).\]
 In particular, the first-order derivative of $\mathbf{F}$ is the gradient of it.
 \sssc{Taylor series or Taylor expansion}
 Let $f\colon D\subseteq\mathbb{R}^m\to\mathbb{R}$ be a function and $I\subseteq D$ be an open ball centered at $a$ such that $f\in C^{\infty}(I)$, then the Taylor series of $f$ at $a$ (or about $a$, near $a$, or centered at $a$) is
@@ -1061,7 +1061,7 @@ Taylor series of at $0$ is called Maclaurin series
 or Maclaurin expansion.
 \sssc{Taylor polynomial}
 Let $f\colon D\subseteq\mathbb{R}^m\to\mathbb{R}$ be a function and $I\subseteq D$ be an open ball centered at $a$ where $f$ is $k$ times differentiable, then the $k$-th degree (or order) Taylor polynomial (or approximation) of $f$ at $a$ (or about $a$, near $a$, or centered at $a$) is
-\[T_n(x)=\sum_{\alpha\in\mathbb{N}_0^{\pht{0}m}\land\|\alpha\|\leq k}\frac{D^{\alpha}f(a)}{\alpha !}(x-a)^{\alpha},\]
+\[T_n(x)=\sum_{\alpha\in\mathbb{N}_0^{\pht{0}m}\land|\alpha|\leq k}\frac{D^{\alpha}f(a)}{\alpha !}(x-a)^{\alpha},\]
 in which the first degree one is also called linear approximation, linearization, or tangent line, and
 \[R_n(x)=f(x)-T_n(x)\]
 is called remainder.
@@ -2578,16 +2578,36 @@ Fix any multi-index $\beta$. Apply $D^{\beta}$ to both sides
 Evaluate $a$, only $\alpha=\beta$ term survives. Thus,
 \[D^{\beta}f(a)=c_{\beta}.\]
 \epr
-\sssc{Taylor's theorem}
-Let $k,m\in\bbN$, and function $f\colon D\subseteq\bbR^m\to\bbR$ be $k$ times differentiable at a point $a\in D$. Then there exists a real-valued function $R_k$ defined on a neighborhood of $a$ such that
-\[f(x)=\sum_{\alpha\in\mathbb{N}_0^{\pht{0}m}\land\|\alpha\|\leq k}\frac{D^{\alpha}f(a)}{\alpha !}(x-a)^{\alpha}+R_k(x),\]
+\sssc{Taylor's theorem on the reals}
+Let $k\in\bbN$, and function $f\colon D\subseteq\bbR\to\bbR$ be $k$ times differentiable at a point $a\in D$. Then there exists a real-valued function $R_k$ defined on an open interval containing $a$ such that
+\[f(x)=\sum_{n=0}^k\frac{f^{(n)}(a)}{n!}(x-a)^n+R_k(x),\]
 and that
-\ben
+\bit
 \item Peano form of remainder:
-\[\lim_{x\to a}R_k(x)|x-a|^{-k}=0.\]
-\item 
-
-
+\[\lim_{x\to a}\frac{R_k(x)}{|x-a|^k}=0.\]
+\item Lagrange form of remainder: Suppose $f^{(k+1)}$ exists on $[a,x)$ for $x\geq a$ and $(x,a]$ for $x\leq a$, and $f^{(k)}$ is continuous on $[a,x]$ for $x\geq a$ and $[x,a]$ for $x\leq a$. Then, there exists $\xi$ in $[a,x]$ for $x\geq a$ and $[x,a]$ for $x\leq a$:
+\[R_k(x)=\frac{f^{(k+1)}(\xi)}{(k+1)!}(x-a)^{k+1}.\]
+\item Integral form of the remainder: Suppose $f^{(k)}$ is absolutely continuous on $[a,x]$ for $x\geq a$ and $[x,a]$ for $x\leq a$. Then
+\[R_k(x)=\frac{1}{k!}(x-a)^{k+1}\int_0^1(1-t)^kf^{(k+1)}\qty(a+t(x-a))\dd{t}.\]
+\eit
+\bpr
+PLACEHOLDER
+\epr
+\sssc{Taylor's theorem on higher dimensions}
+Let $k,m\in\bbN$, and function $f\colon D\subseteq\bbR^m\to\bbR$ be $k$ times differentiable at a point $a\in D$. Then there exists a real-valued function $R_k$ defined on a neighborhood of $a$ such that
+\[f(x)=\sum_{\alpha\in\mathbb{N}_0^{\pht{0}m}\land |\alpha|\leq k}\frac{D^{\alpha}f(a)}{\alpha !}(x-a)^{\alpha}+R_k(x),\]
+and that
+\bit
+\item Peano form of remainder:
+\[\lim_{x\to a}\frac{R_k(x)}{|x-a|^k}=0.\]
+\item Lagrange form of remainder: Suppose for all $\alpha\in\mathbb{N}_0^{\pht{0}m}\land |\alpha|=k+1$, $f^{\alpha}$ exists on a neighborhood of $a$ whose closure contains $x$, and for all $\alpha\in\mathbb{N}_0^{\pht{0}m}\land |\alpha|=k$, $f^{\alpha}$ is continuous on a neighborhood of $a$ containing $x$. Then, there exists $t\in (0,1)$ such that for $\xi=a+t(x-a)$:
+\[R_k(x)=\sum_{\beta\in\mathbb{N}_0^{\pht{0}m}\land |\beta|=k+1}\frac{D^{\beta}f(\xi)}{\beta!}(x-a)^{\beta}.\]
+\item Integral form of the remainder: Suppose for all $\alpha\in\mathbb{N}_0^{\pht{0}m}\land |\alpha|=k$, $f^{\alpha}$ is absolutely continuous on a neighborhood of $a$ containing $x$. Then
+\[R_k(x)=\sum_{\beta\in\mathbb{N}_0^{\pht{0}m}\land |\beta|=k+1}\frac{k+1}{\beta!}(x-a)^{\beta}\int_0^1(1-t)^k\qty(D^{\beta}f)\qty(a+t(x-a))\dd{t}.\]
+\eit
+\bpr
+PLACEHOLDER
+\epr
 \subsection{Lagrange multiplier (method) (拉格朗日乘數/乘子（法）)}
 The Lagrange multiplier method is a method for finding the points where extremes occur of a differentiable function under constraints.
 \sssc{Univariate form}
