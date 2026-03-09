@@ -1,12 +1,75 @@
-\documentclass[a4paper,12pt]{article}
+\documentclass[a4paper,12pt]{report}
 \setcounter{secnumdepth}{5}
 \setcounter{tocdepth}{3}
+\newcounter{ZhRenew}
+\setcounter{ZhRenew}{1}
+\newcounter{SectionLanguage}
+\setcounter{SectionLanguage}{1}
 \input{/usr/share/latex-toolkit/template.tex}
 \begin{document}
 \title{Quadratic Curve and Quadric Surface}
 \author{沈威宇}
 \date{\temtoday}
 \titletocdoc
+\ch{Quadratic Curve and Quadric Surface}
+\sct{Quadratic Equation}
+\ssc{General form}
+In $\bbR^n$,
+\[C+\sum_{j=1}^nx_j\qty(B_j+\sum_{k=j}^nA_{jk}x_k),\quad A_{jk},B_j,C\in\bbR\]
+or
+\[\mb{x}^{\top}\mb{A}\mb{x}+\mb{B}^{\top}\mb{x}+C=0,\quad\mb{A}\in\bbR^{n\times n},\mb{B}\in\bbR^n,C\in\bbR\]
+where
+\[\mb{A}_{jj}=A_{jj},\]
+\[\mb{A}_{jk}=\mb{A}_{kj}=\frac{A_{jk}}{2},\quad j\neq k,\]
+\[\mb{B}_j=B_j,\]
+\[\prod_{j=1}^n\prod_{k=j}^nA_{jk}\neq 0.\]
+$\mb{A}$ is symmetric.
+\ssc{Reduction to standard form}
+If $\mb{A}$ is invertible, translate
+\[\mb{x}=\mb{y}-\frac{1}{2}\mb{A}^{-1}\mb{B},\]
+diagonalize with orthogonal matrix $Q$ such that
+\[Q^{\top}\mb{A}Q=\diag(\lambda_1,\lambda_2,\ldots,\lambda_n),\]
+rotate to
+\[\mb{y}=Q\mb{z},\]
+and obtain the standard form
+\[\sum_{i=1}^n\lambda_i\mb{z}_i^{\pht{i}2}+C-\frac{1}{4}\mb{B}^{\top}\mb{A}^{-1}\mb{B}=0.\]
+\bpr
+If $\mb{A}$ is invertible, first remove linear form. Let $\mb{x}=\mb{y}+\mb{x}_0$,
+\[\qty(\mb{y}+\mb{x}_0)^{\top}\mb{A}\qty(\mb{y}+\mb{x}_0)+\mb{B}^{\top}\qty(\mb{y}+\mb{x}_0)+C=0\]
+\[\mb{y}^{\top}\mb{A}\mb{y}+\qty(2\mb{A}\mb{x}_0+\mb{B})^{\top}\mb{y}+\qty(\mb{x}_0\mb{A}\mb{x}_0+\mb{B}^{\top}\mb{x}_0+C)=0\]
+\[2\mb{A}\mb{x}_0+\mb{B}=0\]
+\[\mb{x}_0=-\frac{1}{2}\mb{A}^{-1}\mb{B}\]
+\[\mb{y}^{\top}\mb{A}\mb{y}+C'=0\]
+\[C'=C-\frac{1}{4}\mb{B}^{\top}\mb{A}^{-1}\mb{B}\]
+By spectral theorem, there exists orthogonal matrix $Q$ such that
+\[Q^{\top}\mb{A}Q=\Lambda=\diag(\lambda_1,\lambda_2,\ldots,\lambda_n).\]
+Assign new coordinate
+\[\mb{y}=Q\mb{z}\]
+\[\mb{z}^{\top}\Lambda\mb{z}+C'=0\]
+\[\sum_{i=1}^n\lambda_i\mb{z}_i^{\pht{i}2}+C'=0\]
+\epr
+If $\mb{A}$ is singular, diagonalize with orthogonal matrix $Q$ such that
+\[Q^{\top}\mb{A}Q=\diag(\lambda_1,\lambda_2,\ldots,\lambda_r,0,\ldots,0),\quad r=\rank(\mb{A}),\]
+rotate
+\[\mb{x}=Q\mb{y}\]
+with $b=Q^{\top}B$, translate
+\[y_i=z_i-\frac{b_i}{\lambda_i},\quad i\le r\]
+\[y_i=z_i,\quad i>r,\]
+obtain
+\[\sum_{i=1}^r\lambda_i\mb{z}_i^{\pht{i}2}+\sum_{i=r+1}^nb_i\mb{z}_i+C-\sum_{i=1}^rb_i^{\pht{i}2}=0\]
+if there exists any $b_k\neq 0$ for $k>r$, pick any one of them and translate
+\[\mb{w}_k=\mb{z}_k+C-\sum_{i=1}^rb_i^{\pht{i}2}\]
+\[\mb{w}_j=\mb{z}_j,\quad j\neq k,\]
+obtain paranoid-type standard form
+\[\sum_{i=1}^r\lambda_i\mb{w}_i^{\pht{i}2}+\sum_{i=r+1}^nb_i\mb{w}_i=0\]
+if $b_k=0$ for all $k>r$, it is degenerate
+\[\sum_{i=1}^r\lambda_i\mb{z}_i^{\pht{i}2}+C-\sum_{i=1}^rb_i^{\pht{i}2}=0.\]
+\bpr
+\[\mb{x}=Q\mb{y}\]
+\[\mb{y}^{\top}\Lambda\mb{y}+\qty(Q^{\top}B)^{\top}\mb{y}+C=0\]
+\[\mb{y}^{\top}\Lambda\mb{y}+\qty(Q^{\top}B)^{\top}\mb{y}+C=0\]
+\[\mb{z}^{\top}\Lambda\mb{z}+C-\sum_{i=1}^rb_i^{\pht{i}2}=0\]
+\epr
 \section{圓錐曲線/圓錐截痕（conic section, quadratic curve）}
 \subsection{約定}
 若無另聲明：
@@ -525,5 +588,7 @@ By translation and rotation, it can be brought into either of the two standard f
 \[Ax^2+By^2+Cz^2+J=0\]
 or
 \[Ax^2+By^2+Iz=0\]
+
+
 
 \end{document}
