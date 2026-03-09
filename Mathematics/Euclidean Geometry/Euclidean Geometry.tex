@@ -1,4 +1,4 @@
-\documentclass[a4paper,12pt]{report}
+\documentclass[a4paper,12pt]{article}
 \setcounter{secnumdepth}{5}
 \setcounter{tocdepth}{3}
 \input{/usr/share/LaTeX-ToolKit/template.tex}
@@ -7,7 +7,7 @@
 \author{沈威宇}
 \date{\temtoday}
 \titletocdoc
-\ch{Euclidean Geometry (歐幾里德幾何學)}
+\sct{Euclidean Geometry (歐幾里德幾何學)}
 \ssc{Plane angle (平面角) or angle}
 \sssc{Degree, deg, degree of arc, arc degree, or arcdegree (角度)}
 One degree, deg, degree of arc, arc degree, or arcdegree, denoted as $^\circ$, is defined such that one full revolution is 360 degrees.
@@ -350,14 +350,20 @@ If the polar axis and the auxiliary axis of a spherical coordinate system is the
 \[\varphi=\varphi.\]
 Volume integral:
 \[\iiint_Vf(x,y,z)\dd{V}=\int_{r_\text{min}}^{r_\text{max}}\int_{\theta_\text{min}}^{\theta_\text{max}}\int_{\varphi_\text{min}}^{\varphi_\text{max}}f(r\sin\theta\cos\varphi,r\sin\theta\sin\varphi,r\cos\theta)r^2\sin\theta\dd{\varphi}\dd{\theta}\dd{r}.\]
-\sct{Analytic Geometry (解析幾何)}
-下：空間為歐幾里德空間；位置$\mathbf{x}=(x_1,x_2,\ldots)$；第$i$軸正方向單位向量$\mathbf{e}_i$；一向量空間中兩點$P$、$Q$，$\ora{PQ}\coloneq Q-P$；$\hat{\mathbf{v}}$為$\mathbf{v}$正方向單位向量。
 \ssc{正整數維空間}
-$n\in\mathbb{N}$
+$\bbR^n,\quad n\in\mathbb{N}$
 \sssc{仿射子空間一般式}
 $\mathbb{R}^n$中，一$n-1$維仿射子空間可以表示成：
 \[\mathbf{n}\cdot\mathbf{x}+c=0\]
-稱此表達方法為一般式。
+\sssc{仿射子空間向量式（vector equation）}
+$\mathbb{R}^n$中，一$n-1$維仿射子空間可以表示成：
+\[\mathbf{n}\cdot\qty(\mathbf{x}-\mb{x}_0)=0\]
+\sssc{仿射子空間純量式（scalar equation）}
+$\mathbb{R}^n$中，一$n-1$維仿射子空間可以表示成：
+\[\sum_{k=1}^na_k\qty(x_k-x_{k_0})=0\]
+\sssc{仿射子空間線性式（linear equation）}
+$\mathbb{R}^n$中，一$n-1$維仿射子空間可以表示成：
+\[\sum_{k=1}^na_kx_k+c=0\]
 \sssc{仿射子空間截距式}
 $\mathbb{R}^n$中，$n-1$維仿射子空間：
 \[E\colon\sum_{i=1}^n\frac{x_1}{a_1}=1\]
@@ -366,16 +372,27 @@ $\mathbb{R}^n$中，$n-1$維仿射子空間：
 $\mathbb{R}^n$中，一個$m\in\mathbb{N}\land m<n$維仿射子空間$E$可表示成：
 \[\mathbf{A}\mathbf{x}=\mathbf{c},\quad\mathbf{A}\in\mathbb{R}^{(n-m)\times n}\land\operatorname{rank}(\mathbf{A})=n-m\land\mathbb{c}\in\mathbb{R}^{n-m}\]
 稱此表達方法為隱式方程或多面式，對於三維空間中的直線特稱兩面式。令$\mb{A}$的第$i$列為$\mb{A}_i$、$\mb{c}$的第$i$列為$\mb{c}_i$，則$\mb{A}_i\mathbf{x}=\mathbf{c}_i$代表一個$(n-1)$維仿射子空間，且這$(n-m)$個$(n-1)$維仿射子空間的交集為$E$。對於三維空間中的直線$E$，特稱所有使得$E\subseteq F$的$(n-1)$維仿射子空間$F$的集合為平面系。
-\sssc{直線參數式}
+\sssc{直線向量式（Vector equation）}
 $\mathbb{R}^n$中，一直線可表示成：
 \[\mathbf{x}=\mathbf{a}+\mathbf{v}t,\quad t\in\mathbb{R}\]
-稱$\mathbf{v}$為此直線之方向向量，稱此表達方法為參數式。
-\sssc{直線（對稱）比例式}
+稱$\mathbf{v}$為此直線之方向向量（direction vector）, and each component of it is called direction number。
+\sssc{直線參數式（Parametric equation）}
+$\mathbb{R}^n$中，一直線可表示成：
+\[\bcs
+x_1&=a_1+v_1t\\
+x_2&=a_2+v_2t\\
+&\vdots
+x_n&=a_n+v_nt\\
+\ecs,\quad t\in\mathbb{R}\]
+\sssc{直線對稱式（symmetric equation）/比例式}
 $\mathbb{R}^n$中，直線：
 \[\forall i,j\in\mathbb{N}\land i<j\leq n\colon\frac{x_i-a_i}{v_i}=\frac{x_j-a_j}{v_j}\]
 與直線
 \[\mathbf{x}=(a_1,a_2,\ldots,a_n)+(v_1,v_2,\ldots,v_n)t,\quad t\in\mathbb{R}\]
 相同，稱前一種表達方法為（對稱）比例式。
+\sssc{Line segment}
+The line segment between $\mb{r}_0$ and $\mb{r}_1$ is given by the vector equation
+\[\mb{r}_0+(\mb{r}_1-\mb{r}_0)t,\quad t\in[0,1].\]
 \sssc{點與仿射子空間關係}
 $\mathbb{R}^n$中，一$(n-1)$維仿射子空間$E\colon\mathbf{n}\cdot\mathbf{x}+c=0$與一點$\mathbf{P}$可能的關係與其充要條件為：
 \begin{itemize}
@@ -414,7 +431,7 @@ $\mathbb{R}^n$中，兩不平行$(n-1)$維仿射子空間$E\colon\mathbf{m}\cdot
 若$\mathbf{m}\cdot\mathbf{n}\neq 0$，則$\pm$取與$\mathbf{m}\cdot\mathbf{n}$同號者為鈍角分角面，取與$\mathbf{m}\cdot\mathbf{n}$異號者為銳角分角面。
 \item $E$、$F$的交集為一$(n-2)$維仿射子空間，稱稜。
 \end{enumerate}
-\sssc{點積/內積的幾何意義}
+\sssc{點積的幾何意義}
 兩向量$\mb{a}$、$\mb{b}$夾角$\theta$，則
 \[\mb{a}\cdot\mb{b}=|\mb{a}\mb{b}\cos\theta|.\]
 \sssc{多點共仿射子空間}
