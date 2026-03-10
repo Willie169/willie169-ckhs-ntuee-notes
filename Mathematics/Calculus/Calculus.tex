@@ -1188,32 +1188,6 @@ If a polar curve is unchanged when $\theta$ is replaced with $(\pi-\theta)$, the
 Replacing either $\theta$ with $(\pi+\theta)$ or $r$ with $-r$ reflects the curve through the pole.
 
 If a polar curve is unchanged when $\theta$ is replaced with $(\pi+\theta)$ or when $r$ is replaced with $-r$, then it is symmetric about the pole.
-\ssc{Frenet-Serret frame}
-\sssc{Unit tangent vector or tangent}
-The unit tangent vector of a curve $\mb{r}(t)$ at $t$ is
-\[\mb{T}(t)=\frac{\mb{r}'(t)}{\abs{\mb{r}'(t)}}.\]
-\sssc{Unit normal vector or normal}
-\[\mb{N}(t)=\frac{\mb{T}'(t)}{\abs{\mb{T}'(t)}}.\]
-\[\mb{T}\cdot\mb{N}=0.\]
-\bpr
-\[\ba
-T'&=\dv{}{t}\qty(\frac{\mb{r}'}{\norm{\mb{r}'}})\\
-&=\frac{\mb{r}''\norm{\mb{r}'}-\mb{r}'\frac{\mb{r}'\cdot\mb{r}''}{\norm{\mb{r}'}}}{\norm{\mb{r}'}^2}\\
-&=\frac{\norm{\mb{r}'}^2\mb{r}''-\qty(\mb{r}'\cdot\mb{r}'')\mb{r}'}{\norm{\mb{r}'}^3}
-\ea\]
-\[\mb{N}=\frac{\norm{\mb{r}'}^2\mb{r}''-\qty(\mb{r}'\cdot\mb{r}'')\mb{r}'}{\norm{\norm{\mb{r}'}^2\mb{r}''-\qty(\mb{r}'\cdot\mb{r}'')\mb{r}'}}\]
-\[\norm{\mb{r}'}\norm{\norm{\mb{r}'}^2\mb{r}''-\qty(\mb{r}'\cdot\mb{r}'')\mb{r}'}\mb{T}\cdot\mb{N}=\norm{\mb{r}'}^2\qty(\mb{r}\cdot\mb{r}'')-\qty(\mb{r}'\cdot\mb{r}'')\qty(\mb{r}'\cdot\mb{r}')=0\]
-\epr
-In three dimensions,
-\[\mb{N}=\frac{\mb{r}'\times\mb{r}''}{\norm{\mb{r}'\times\mb{r}''}}.\]
-\sssc{Unit binormal vector or binormal}
-In three dimensions,
-\[\ba
-\mb{B}(t)&\coloneq\mb{T}(t)\times\mb{N}(t)\\
-&=\frac{\mb{r}'\times\qty(\mb{r}'\times\mb{r}'')}{\norm{\mb{r}'}\norm{\mb{r}'\times\mb{r}''}}
-\ea\]
-\sssc{Frenet-Serret frame}
-$\mb{T},\mb{N},\mb{B}$ are collectively called Frenet-Serret basis or TNB basis. This basis with origin being the point $\mb{r}(t)$ is called Frenet-Serret frame.
 \ssc{Arc Length}
 \sssc{Definition}
 Given a curve $\mb{r}(t)=(x_1(t),x_2(t),\quad,x_n(t)),\quad t\in[a,b]$. Let $P(t,k)$ be a partition of interval $[a,b]$. Define the polygonal length of $\mb{r}$ along $P(t,k)$ as
@@ -1253,58 +1227,97 @@ The arc length of differentiable polar curve $r(\theta)$ from $a$ to $b$ is
 \[y'(\theta)=r\cos(\theta)+r'\sin(\theta)\]
 \[(x'(\theta))^2+(y'(\theta))^2=\qty(r(\theta))^2+\qty(r'(\theta))^2\]
 \epr
-\ssc{Curvature}
-\sssc{Definition}
-The curvature $\kappa$ of a curve $\mb{r}$ at $t$ is defined, with unit tagent vector $\mb{T}$ and arc length $s$, as
-\[\kappa\coloneq\norm{\dv{\mb{T}}{s}}.\]
-\sssc{In all dimensions}
+\ssc{Tangent, normal, binormal, curvature, and torsion}
+\sssc{(Unit) tangent (vector)}
+The unit tangent vector of a curve $\mb{r}$ at $t$ is
+\[\mb{T}=\hat{\mb{r}'}=\frac{\mb{r}'}{\abs{\mb{r}'}}.\]
+\sssc{(Principal/unit) normal (vector)}
+\[\mb{N}=\hat{\mb{T}'}=\frac{\mb{T}'}{\abs{\mb{T}'}}.\]
+\[\mb{T}\cdot\mb{N}=0.\]
 \[\ba
-\kappa&=\norm{\flatfrac{\dv{T}{t}}{\dv{s}{t}}\\
-&=\frac{\norm{\norm{\mb{r}'}^2\mb{r}''-\qty(\mb{r}'\cdot\mb{r}'')\mb{r}'}}{\norm{\mb{r}'}^4}\\
-&=\frac{\abs{\mb{r}''_{\perp\mb{r}'}}}{\norm{\mb{r}'}^2}
+\mb{N}&=\frac{\norm{\mb{r}'}^2\mb{r}''-\qty(\mb{r}''\cdot\mb{r}')\mb{r}'}{\norm{\norm{\mb{r}'}^2\mb{r}''-\qty(\mb{r}''\cdot\mb{r}')\mb{r}'}}\\
+&=\hat{\mb{r}''_{\perp\mb{r}'}}\\
+&=\frac{\mb{r}''-(\mb{r}''\cdot\mb{T})\mb{T}}{\norm{\mb{r}''-(\mb{r}''\cdot\mb{T})\mb{T}}}
 \ea\]
+In three dimensions,
+\[\mb{N}=\frac{\qty(\mb{r}'\times\mb{r}'')\times\mb{r}'}{\norm{\qty(\mb{r}'\times\mb{r}'')\times\mb{r}'}}\]
+In two dimensions, $\mb{N}$ is $\frac{\pi}{2}$ counterclockwise rotated from $\mb{T}$ if $x'y''-x''y'>0$, and $\mb{N}$ is $\frac{\pi}{2}$ clockwise rotated from $\mb{T}$ if $x'y''-x''y'<0$.
 \bpr
 \[\ba
-\dv{}{t}\norm{\mb{r}'(t)}&=\dv{\sqrt{\mb{r}'\cdot\mb{r}'}}{t}\\
-&=\frac{2\mb{r}'\cdot\mb{r}''}{2\sqrt{\mb{r}'\cdot\mb{r}'}}\\
-&=\frac{\mb{r}'\cdot\mb{r}''}{\norm{\mb{r}'}}
-\ea\]
-\[\ba
-\dv{T}{t}&=\dv{}{t}\qty(\frac{\mb{r}'}{\norm{\mb{r}'}})\\
+T'&=\dv{}{t}\qty(\frac{\mb{r}'}{\norm{\mb{r}'}})\\
 &=\frac{\mb{r}''\norm{\mb{r}'}-\mb{r}'\frac{\mb{r}'\cdot\mb{r}''}{\norm{\mb{r}'}}}{\norm{\mb{r}'}^2}\\
-&=\frac{\norm{\mb{r}'}^2\mb{r}''-\qty(\mb{r}'\cdot\mb{r}'')\mb{r}'}{\norm{\mb{r}'}^3}
-\ea\]
-\[\dv{s}{t}=\norm{\mb{r}'}\]
-\[\ba
-\kappa&=\frac{\norm{\norm{\mb{r}'}^2\mb{r}''-\qty(\mb{r}'\cdot\mb{r}'')\mb{r}'}}{\norm{\mb{r}'}^4}\\
-&=\frac{\abs{\mb{r}''_{\perp\mb{r}'}}}{\norm{\mb{r}'}^2}
+&=\frac{\norm{\mb{r}'}^2\mb{r}''-\qty(\mb{r}''\cdot\mb{r}')\mb{r}'}{\norm{\mb{r}'}^3}\\
+&=\frac{\mb{r}''_{\perp\mb{r}'}}{\norm{\mb{r}'}}\\
+&=\frac{\mb{r}''-\qty(\mb{r}''\cdot\mb{T})\mb{T}}{\norm{\mb{r}'}}
 \ea\]
 \epr
-\sssc{In two dimensions}
-Let $\mb{r}(t)=(x(t),y(t))$.
-\[\kappa=\frac{\norm{x''y'-x'y''}{\qty(x'^2+y'^2)^{3/2}}.\]
-\sssc{In three dimensions}
-Let $\mb{r}\in\bbR_3$.
+\sssc{(Unit) binormal (vector)}
+In three dimensions,
+\[\ba
+\mb{B}&\coloneq\mb{T}\times\mb{N}\\
+&=\frac{\mb{r}'\times\mb{r}''}{\norm{\mb{r}'\times\mb{r}''}}
+\ea\]
+\sssc{Frenet-Serret frame}
+$\mb{T},\mb{N},\mb{B}$ are collectively called Frenet-Serret basis or TNB basis. This basis with origin being the point $\mb{r}(t)$ is called Frenet-Serret frame.
+\sssc{Curvature}
+The curvature $\kappa$ and curvature vector $\mb{K}$ of a curve $\mb{r}$ at $t$ are defined, with unit tagent vector $\mb{T}$ and arc length $s$, as
+\[\ba
+\mb{K}&\coloneq\dv{\mb{T}}{s}\\
+&=\flatfrac{\dv{\mb{T}}{t}}{\dv{s}{t}}\\
+&=\frac{\mb{T}'}{\norm{\mb{r}'}}\\
+&=\frac{\norm{\mb{r}'}^2\mb{r}''-\qty(\mb{r}''\cdot\mb{r}')\mb{r}'}{\norm{\mb{r}'}^4}\\
+&=\frac{\mb{r}''_{\perp\mb{r}'}}{\norm{\mb{r}'}^2}\\
+&=\frac{\mb{r}''-\qty(\mb{r}''\cdot\mb{T})\mb{T}}{\norm{\mb{r}'}^2}
+\ea\]
+\[\kappa\coloneq\norm{\mb{K}}\]
+\[\mb{K}=\kappa\mb{N}\]
+In three dimensions,
+\[\mb{K}=\frac{\qty(\mb{r}'\times\mb{r}'')\times\mb{r}'}{\norm{\mb{r}'}^4}\]
 \[\kappa=\frac{\norm{\mb{r}'\times\mb{r}''}}{\norm{\mb{r}'}^3}.\]
-\ssc{Torsion}
+In two dimensions, let $\mb{r}(t)=(x(t),y(t))$,
+\[\kappa=\frac{\norm{x'y''-x''y'}}{\qty(x'^2+y'^2)^{3/2}},\]
+and signed curvature $k$ is defined as
+\[k=\frac{x'y''-x''y'}{\qty(x'^2+y'^2)^{3/2}}.\]
+\sssc{Torsion}
 The torsion $\tau$ of a curve $\mb{r}$ at $t$ is defined, with unit normal vector $\mb{N}$ and unit binormal vector $\mb{B}$, as
 \[\ba
-\tau&\coloneq-\mb{B}'\cdot\mb{N}\\
+\tau&\coloneq-\dv{\mb{B}}{s}\cdot\mb{N}\\
 &=\frac{\det(\mb{r}',\mb{r}'',\mb{r}''')}{\norm{\mb{r}'\times\mb{r}''}^2}
 \ea\]
 \bpr
-\[\mb{B}=\frac{\mb{r}'\times\qty(\mb{r}'\times\mb{r}'')}{\norm{\mb{r}'}\norm{\mb{r}'\times\mb{r}''}}\]
-\[\dv{}{t}\qty(\mb{r}'\times\qty(\mb{r}'\times\mb{r}''))=\mb{r}''\times\qty(\mb{r}'\times\mb{r}'')+\mb{r}'\times\qty(\mb{r}'\times\mb{r}''')\]
-\[\dv{}{t}\qty(\norm{\mb{r}'}\norm{\mb{r}'\times\mb{r}''})=\frac{\mb{r}'\cdot\mb{r}''}{\norm{\mb{r}'}}\norm{\mb{r}'\times\mb{r}''}+\norm{\mb{r}'}\frac{\mb{r}'\times\mb{r}'''}{\norm{\mb{r}'\times\mb{r}''}}\]
+\[\dv{\mb{B}}{t}=\frac{\qty(\mb{r}'\times\mb{r}'')'}{\norm{\mb{r}'\times\mb{r}''}}-
+\mb{r}'\times\mb{r}''\frac{\norm{\mb{r}'\times\mb{r}''}^2'}{\norm{\mb{r}'\times\mb{r}''}^3}\]
+Since the second term is orthogonal to $\mb{N}$,
 \[\ba
-
-
-\[\mb{N}=\frac{\mb{r}'\times\mb{r}''}{\norm{\mb{r}'\times\mb{r}''}}.\]
-
+-\dv{\mb{B}}{s}\cdot\mb{N}&=-\frac{\mb{r}'\times\mb{r}'''}{\norm{\mb{r}'\times\mb{r}''}\norm{\mb{r}'}}\cdot\frac{\qty(\mb{r}'\times\mb{r}'')\times\mb{r}'}{\norm{\qty(\mb{r}'\times\mb{r}'')\times\mb{r}'}}\\
+&=\frac{\qty(\mb{r}'''\times\mb{r}')\cdot\qty(\qty(\mb{r}'\times\mb{r}'')\times\mb{r}')}{\norm{\mb{r}'\times\mb{r}''}^2\norm{\mb{r}'}^2}\\
+&=\frac{\det(\mb{r}'',\mb{r}''',\mb{r}')}{\norm{\mb{r}'\times\mb{r}''}^2}\\
+&=\frac{\det(\mb{r}',\mb{r}'',\mb{r}''')}{\norm{\mb{r}'\times\mb{r}''}^2}
+\ea\]
+\epr
+\ssc{Frenet-Serret formulas or Frenet–Serret theorem}
+\[\dv{T}{s}=\kappa\mb{N},\]
+\[\dv{N}{s}=\kappa\mb{T}+\tau\mb{B},\]
+\[\dv{B}{s}=-\tau\mb{N},\]
+\[\begin{bmatrix}
+\dv{\mb{T}}{s}\\
+\dv{\mb{N}}{s}\\
+\dv{\mb{B}}{s}
+\end{bmatrix}
+=
+\begin{bmatrix}
+0 & \kappa & 0\\
+-\kappa & 0 & \tau\\
+0 & -\tau & 0
+\end{bmatrix}
+\begin{bmatrix}
+\mb{T}\\
+\mb{N}\\
+\mb{B}
+\end{bmatrix}
+\bpr
 PLACEHOLDER
 \epr
-\ssc{Frenet-Serret formulas}
-PLACEHOLDER
 \ssc{Surface of revolution}
 \sssc{Definition}
 In $\bbR_n$, the area of the surface formed by rotating the curve $\mb{r}(t),\quad t\in[a,b]$ about a rotational axis $\mb{P}+\mb{k}u,\quad u\in\bbR$ with $\|\mb{k}\|=1$ is
