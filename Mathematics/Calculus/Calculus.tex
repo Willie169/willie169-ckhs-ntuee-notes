@@ -1149,7 +1149,7 @@ For a function $f(x)$ defined on $(-\infty,\infty)$ with $\int_a^bf(x)\dd{x}$ be
 \sct{Differential Geometry (微分幾何)}
 \ssc{Curve}
 \sssc{Definition}
-A (parameterized or parametric) (topological) curve in a topological space $X$ is a continuous map $\gamma(t)\colon I\to X$ for some interval $I$, where $t$ is called parameter and either $\gamma(t)$ or the image of $\gamma(t)$ is called curve, and $\gamma(t)$ is also called the parametrization of the curve.
+A (parameterized or parametric) (topological) curve in a topological space $X$ is a continuous map $\gamma(t)\colon I\to X$ for some interval $I$, where $t$ is called parameter, and either $\gamma(t)$ or the image of $\gamma(t)$ is called curve, and $\gamma(t)$ is also called the parametrization of the curve.
 
 If $I=[a,b]$, $\gamma(a)$ is called initial point, and $\gamma(b)$ is called terminal point.
 \sssc{Closed curve or loop}
@@ -1188,12 +1188,32 @@ If a polar curve is unchanged when $\theta$ is replaced with $(\pi-\theta)$, the
 Replacing either $\theta$ with $(\pi+\theta)$ or $r$ with $-r$ reflects the curve through the pole.
 
 If a polar curve is unchanged when $\theta$ is replaced with $(\pi+\theta)$ or when $r$ is replaced with $-r$, then it is symmetric about the pole.
-\ssc{Tangent}
-\sssc{Definition}
-The tangent of a curve $\mb{r}$ at $t$ is $\mb{r}'(t)$.
-\sssc{Unit tangent vector}
+\ssc{Frenet-Serret frame}
+\sssc{Unit tangent vector or tangent}
 The unit tangent vector of a curve $\mb{r}(t)$ at $t$ is
 \[\mb{T}(t)=\frac{\mb{r}'(t)}{\abs{\mb{r}'(t)}}.\]
+\sssc{Unit normal vector or normal}
+\[\mb{N}(t)=\frac{\mb{T}'(t)}{\abs{\mb{T}'(t)}}.\]
+\[\mb{T}\cdot\mb{N}=0.\]
+\bpr
+\[\ba
+T'&=\dv{}{t}\qty(\frac{\mb{r}'}{\norm{\mb{r}'}})\\
+&=\frac{\mb{r}''\norm{\mb{r}'}-\mb{r}'\frac{\mb{r}'\cdot\mb{r}''}{\norm{\mb{r}'}}}{\norm{\mb{r}'}^2}\\
+&=\frac{\norm{\mb{r}'}^2\mb{r}''-\qty(\mb{r}'\cdot\mb{r}'')\mb{r}'}{\norm{\mb{r}'}^3}
+\ea\]
+\[\mb{N}=\frac{\norm{\mb{r}'}^2\mb{r}''-\qty(\mb{r}'\cdot\mb{r}'')\mb{r}'}{\norm{\norm{\mb{r}'}^2\mb{r}''-\qty(\mb{r}'\cdot\mb{r}'')\mb{r}'}}\]
+\[\norm{\mb{r}'}\norm{\norm{\mb{r}'}^2\mb{r}''-\qty(\mb{r}'\cdot\mb{r}'')\mb{r}'}\mb{T}\cdot\mb{N}=\norm{\mb{r}'}^2\qty(\mb{r}\cdot\mb{r}'')-\qty(\mb{r}'\cdot\mb{r}'')\qty(\mb{r}'\cdot\mb{r}')=0\]
+\epr
+In three dimensions,
+\[\mb{N}=\frac{\mb{r}'\times\mb{r}''}{\norm{\mb{r}'\times\mb{r}''}}.\]
+\sssc{Unit binormal vector or binormal}
+In three dimensions,
+\[\ba
+\mb{B}(t)&\coloneq\mb{T}(t)\times\mb{N}(t)\\
+&=\frac{\mb{r}'\times\qty(\mb{r}'\times\mb{r}'')}{\norm{\mb{r}'}\norm{\mb{r}'\times\mb{r}''}}
+\ea\]
+\sssc{Frenet-Serret frame}
+$\mb{T},\mb{N},\mb{B}$ are collectively called Frenet-Serret basis or TNB basis. This basis with origin being the point $\mb{r}(t)$ is called Frenet-Serret frame.
 \ssc{Arc Length}
 \sssc{Definition}
 Given a curve $\mb{r}(t)=(x_1(t),x_2(t),\quad,x_n(t)),\quad t\in[a,b]$. Let $P(t,k)$ be a partition of interval $[a,b]$. Define the polygonal length of $\mb{r}$ along $P(t,k)$ as
@@ -1265,7 +1285,20 @@ Let $\mb{r}(t)=(x(t),y(t))$.
 \[\kappa=\frac{\norm{x''y'-x'y''}{\qty(x'^2+y'^2)^{3/2}}.\]
 \sssc{In three dimensions}
 Let $\mb{r}\in\bbR_3$.
-\[\kappa=\frac{\norm{\mb{r}'\times\mb{r}''}{\norm{\mb{r}'}^3}.\]
+\[\kappa=\frac{\norm{\mb{r}'\times\mb{r}''}}{\norm{\mb{r}'}^3}.\]
+\ssc{Torsion}
+The torsion $\tau$ of a curve $\mb{r}$ at $t$ is defined, with unit normal vector $\mb{N}$ and unit binormal vector $\mb{B}$, as
+\[\ba
+\tau&\coloneq-\mb{B}'\cdot\mb{N}\\
+&=\frac{\det(\mb{r}',\mb{r}'',\mb{r}''')}{\norm{\mb{r}'\times\mb{r}''}^2}
+\ea\]
+\bpr
+\[\mb{B}=\frac{\mb{r}'\times\qty(\mb{r}'\times\mb{r}'')}{\norm{\mb{r}'}\norm{\mb{r}'\times\mb{r}''}}\]
+\[\mb{N}=\frac{\mb{r}'\times\mb{r}''}{\norm{\mb{r}'\times\mb{r}''}}.\]
+PLACEHOLDER
+\epr
+\ssc{Frenet-Serret formulas}
+PLACEHOLDER
 \ssc{Surface of revolution}
 \sssc{Definition}
 In $\bbR_n$, the area of the surface formed by rotating the curve $\mb{r}(t),\quad t\in[a,b]$ about a rotational axis $\mb{P}+\mb{k}u,\quad u\in\bbR$ with $\|\mb{k}\|=1$ is
