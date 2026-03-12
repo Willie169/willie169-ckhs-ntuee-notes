@@ -27,7 +27,8 @@ The range (值域) or image (像), denoted as $R_f$ or $f(X)$, is defined as:
 \[\{ y \mid \exists x \in X, (x, y) \in R \}.\]
 
 If $x\in X$ and $(x, y) \in R$, we write $y = f(x)$, in which $f(x)$ is called the image of $x$ under $f$, $x$ is called the independent variable (自變數 or 獨立變數) or input, and $y$ is called the dependent variable (應變數 or 依賴變數) or output; and the function $f$ is also denoted as:
-\[f \colon X \to Y;\, x \mapsto y.\]
+\[f \colon X \to Y;\, x \mapsto y,\]
+and $f$ and $y$ is used interchangeablely.
 
 If $I$ is a subset of the domain of $f$, $f(I)$ is defined as
 \[f(I)\coloneq\{y\mid\exists x\in I \tx{\ s.t.\ }f(x)=y\}.\]
@@ -222,13 +223,16 @@ If the phase difference of $f(t)$ and $g(t)$ is 0, they are called in phase (同
 
 
 \section{Limit (極限)}
-\subsection{Extended real number system}
+\ssc{Convention}
+\sssc{Extended real number system}
 When using the extended real number system as the codomain of limits:
 \[\forall a\in\bbR\land a>0\colon a/0=\infty,\]
 \[\forall a\in\bbR\land a<0\colon a/0=-\infty,\]
 when the numerator $0$ is a limit and the result is to be put in a limit or assigned as a result of a limit by limit definition.
 
 When using the extended real number system as the codomain of limits, any function $f$ with limit at $a\in\{-\infty,\infty\}$ being $\pm\infty$ is extended by $f(a)=\pm\infty$ when the input $a$ is a limit and the result is to be put in a limit or assigned as a result of a limit by limit definition.
+\sssc{Notation and reading}
+$\lim_{x\to a}f(x)=L$ is also denoted as $f(x)\to L$ as $x\to a$, and read $f(x)$ approaches $L$ (for $L=\infty$ also $f(x)$ gets arbitrarily large and for $L=-\infty$ also $f(x)$ gets arbitrarily small) as $x$ approaches (or gets arbitrarily close to) $a$ (for $a=\infty$ also $x$ gets arbitrarily large and for $a=-\infty$ also $x$ gets arbitrarily small).
 \subsection{Of Real Sequence}
 \subsubsection{Limit}
 For a real sequence \(\langle a_n\rangle_{n=l}^{\infty}\), the limit of it (as $n$ approaches infinity) is denoted as $\lim_{n \to \infty} a_n$ or $\lim_n a_n$. For $L\in\bbR$:
@@ -328,7 +332,8 @@ Let $(X,\tau)$ be a topological space, $a\in E\subseteq X$, and $f$ be a functio
 and the limit superior of $f$ as $x$ approaches $a\in E$ is defined as
 \[\limsup_{x\to a}f(x)\coloneq\inf\{\sup\{f(x)\mid x\in E\cap U\setminus\{a\}\}\mid a\in U\in\tau\}.\]
 \subsection{Of function between normed spaces}
-Let $V,W$ be two normed spaces. Let $I$ be an open subset of $V$ containing the point $a$. Let $f$ be a function with codomain $W$ defined on $I$, except possibly at $a$ itself. The limit of $f(x)$ as $x$ approaches $a$ is denoted as $\lim_{x\to a}f(x)$ or $\lim_{\|x-a\|_V\to0}f(x)$. For $L\in W$:
+\sssc{Definition}
+Let $V,W$ be two normed spaces. Let $I$ be an open subset of $V$ containing the point $a$. Let $f$ be a function with codomain $W$ defined on $I$, except possibly at $a$ itself. The limit of $f(x)$ as $x$ approaches $a$ is denoted as $\lim_{x\to a}f(x)$ or $\lim_{\|x-a\|_V\to0}f(x)$, and for $x=(x_1,x_2,\ldots,x_n)$ and $a=(a_1,a_2,\ldots,a_n)$ also $\lim_{(x_1,x_2,\ldots,x_n)\to(a_1,a_2,\ldots,a_n)}f(x_1,x_2,\ldots,x_n)$, $\lim_{\substack{x_1\to a_1\\x_2\to a_2\\\vdots\\x_n\to a_n}}f(x_1,x_2,\ldots,x_n)$. For $L\in W$:
 \[\lim_{x\to a}f(x)=L\equiv\forall\varepsilon\exists\delta>0\tx{\ s.t.\ }0<\|x-a\|_V<\delta\implies\|f(x)-L\|_W<\varepsilon.\]
 If such $M$ exist for some $L\in W$, we say the limit exists; otherwise, we say the limit doesn't exist.
 \subsection{Of Nets of Fuctions}
@@ -739,14 +744,11 @@ Let $f$ be a function with domain being $\bbR$ or $\bbR_{\geq 0}$. If we interpr
 \item $f$ is called benefit (aka revenue) or cost (function) of $y$, and
 \item $f'(a)$ where defined is called the margin benefit (aka revenue) or cost of $y$ at $a$.
 \eit
-\subsection{Differential (微分子) or total differential}
-Suppose a dependent variable $y$ represents a function $f$ of an independent variable $x$, that is,
-\[y=f(x),\]
-with the domain $V$ of $f$ being a subset of some vector space.
-
-If $y$ or $f$ is defined and differentiable on some set $U\subseteq V$ with the derivative function denoted as $y'$ or $f'(x)$, then we define the (total) differentials of them, denoted as $\dd{y}$ and $\dd{f}$ respectively, in terms of the differential of $x$, denoted as $\dd{x}$, by the equations
-\[\dd{y}=y'\dd{x},\quad \tx{and\ }\dd{f}=f'\dd{x}\]
-respectively, in which the differentials of $x$, $y$, or $f$ are often called to be an infinitesimal changes in $x$, $y$, or $f$.
+\subsection{Differential, total differential, or infinitesimal change}
+For a normed vector-valued function $f$ of an independent variable $x$, we define the differential of it, $\dd{f}$, in terms of the differential of $x$, denoted as $\dd{x}$, as
+\[\dd{f}=f'\dd{x}.\]
+For a normed vector-valued function $f$ of independent variables $x_1,x_2,\ldots,x_n$, we define the differential of it, $\dd{f}$, in terms of the differentials of $x_1,x_2,\ldots,x_n$, denoted as $\dd{x_1},\dd{x_2},\ldots,\dd{x_n}$, as
+\[\dd{f}=\sum_{k=1}^nf_{x_k}\dd{x_k}.\]
 \subsection{Antiderivative (反導函數), inverse derivative, primitive function, primitive integral, or indefinite integral (不定積分)}
 \subsubsection{Definition}
 An antiderivative (aka inverse derivative, primitive function, primitive integral, or indefinite integral) of a function $f(x)$ on subset $I$ of the domain of $f$ is a differentiable function $F(x)$ such that
@@ -2404,6 +2406,28 @@ Let $V,W$ be two normed spaces. Let $I$ be an open subset of $V$ containing the 
 or either $\lim_{t\to 0}f(C(t))$ or $\lim_{t\to 0}f(D(t))$ doesn't exist, then
 \[\lim_{x\to a}f(x)\]
 doesn't exist.
+\sssc{Polar coordinate method}
+In $\bbR^2$, for any normed vector-valued function $f(x,y)$, if there exists a constant $L$ in the codomain of $f$ such that
+\[\lim_{r\to 0}f(r\cos\theta,r\sin\theta)=L\]
+then
+\[\lim_{(x,y)\to(0,0)}f(x,y)=L.\]
+\sssc{Cylindrical coordinate method}
+In $\bbR^3$, for any normed vector-valued function $f(x,y,z)$, if there exists a constant $L$ in the codomain of $f$ such that
+\[\lim_{(\rho,z)\to(0,0)}f(\rho\cos\varphi,\rho\sin\varphi,z)=L\]
+then
+\[\lim_{(x,y,z)\to(0,0,0)}f(x,y,z)=L.\]
+\sssc{Spherical coordinate method}
+In $\bbR^3$, for any normed vector-valued function $f(x,y,z)$, if there exists a constant $L$ in the codomain of $f$ such that
+\[\lim_{r\to 0}f(r\sin\theta\cos\phi,r\sin\theta\sin\phi,r\cos\theta)=L\]
+then
+\[\lim_{(x,y,z)\to(0,0,0)}f(x,y,z)=L.\]
+\sssc{Generalized polar coodinate method}
+Suppose there is a coordinate of $n$ real number components that can express each point in $\bbR^n$ uniquely, for any fixed point $\mb{a}=(a_1,a_2,\ldots,a_n)\in\bbR^n$, if the coordinate is such that, for any point $\mb{x}=(x_1,x_2,\ldots,x_n)$ in a neighborhood of $\mb{a}$, for any real numbers $y_1,y_2,\ldots,y_m$ with $m\leq n$ such that $\mb{y}=(x_1+y_1,x_2+y_2,\ldots,x_m+y_m,x_{m+1},x_{m+2},\ldots,x_n)$ is a point in $\bbR^n$,
+\[\norm{\mb{x}-\mb{a}}=\norm{\mb{y}-\mb{a}},\]
+then for any normed vector-valued function $f$ defined on some neighborhood of $\mb{a}$, if there exists a constant $L$ in the codomain of $f$ such that
+\[\lim_{(x_{m+1},x_{m+2},\ldots,x_n)\to(a_{m+1},a_{m+2},\ldots,a_n}f(\mb{x})=L\]
+then,
+\[\lim_{\mb{x}\to\mb{a}}f(\mb{x})=L.\]
 
 
 \section{Differential theorems and methods}
@@ -2462,7 +2486,7 @@ If functions $f$ and $g$ are differentiable on $I$ and $g\neq 0$ on $I$, then th
 &=\frac{f'(x)g(x)-f(x)g'(x)}{g(x)^2}
 \end{aligned}\]
 \end{proof}
-\subsubsection{Chain rule (連鎖律) of real-domain functions}
+\subsubsection{Chain rule (連鎖律) of real functions}
 Let $f\colon X\subseteq\bbR\to\bbR$ and $g\colon Y\subseteq\bbR\to\bbR$ be functions, $g$ be differentiable on $I\subseteq\bbR$, and $f$ be differentiable on $g(I)$. Then the composite $f\circ g$ is differentiable on $I$ and its derivative on $I$ is given by
 \[\dv{}{x}\qty((f\circ g)(x))=f'\qty(g(x))g'(x).\]
 \begin{proof}
@@ -2472,6 +2496,11 @@ Let $f\colon X\subseteq\bbR\to\bbR$ and $g\colon Y\subseteq\bbR\to\bbR$ be funct
 &=f'\qty(g(x))g'(x)
 \ea\]
 \end{proof}
+\sssc{Multivariable chain rule}
+Suppose
+\[F\qty(t,\mb{s}_1,\mb{s}_2,\ldots,\mb{s}_n)=f\qty(x_1(t,\mb{s}_1),x_2(t,\mb{s}_2),\ldots,x_n(t,\mb{s}_n)),\]
+then
+\[\pdv{F}{t}=\sum_{i=1}^n\pdv{f}{x_i}\pdv{x_i}{t}.\]
 \subsubsection{Faà di Bruno's formula}
 \bma
 &\frac{\mathrm{d}^n}{\mathrm{d}x}f\left(g(x)\right)\\
@@ -2479,7 +2508,7 @@ Let $f\colon X\subseteq\bbR\to\bbR$ and $g\colon Y\subseteq\bbR\to\bbR$ be funct
 &f^{\qty(\sum_{j=1}^nm_j)}\left(g(x)\right)\cdot\\
 &\prod_{j=1}^n\left(\frac {g^{(j)}(x)}{j!}\right)^{m_j}.
 \eam
-\subsubsection{Chain rule of real-vector-space-domain fields}
+\subsubsection{Chain rule of real vector functions}
 Let $f\colon X\subseteq\bbR^n\to\bbR^p$ and $g\colon Y\subseteq\bbR^m\to\bbR^n$ be functions, $g$ be differentiable on $\Omega\subseteq\bbR^m$, and $f$ be differentiable on $g(\Omega)$. Then the composite $f\circ g$ is differentiable on $\Omega$ and its derivative on $\Omega$ is given by
 \[\nabla\qty(f\circ g)(\mb{x})=(\nabla f)(g(\mb{x}))\cdot(\nabla g)(\mb{x}).\]
 \subsubsection{Exponential Bell polynomials}
@@ -2505,12 +2534,31 @@ Differentiate both sides:
 \end{proof}
 \[\dv[n]{f^{-1}(x)}{x}=\frac{(-1)^{n-1}}{\qty(f'\qty(f^{-1}(x)))^{2n-1}}B_{n-1}\sum_{i=2}^{n}f^{(i)}\qty(f^{-1}(x)),\quad n\in\bbN,\]
 where $B_n$ is complete exponential Bell polynomial.
-\subsubsection{Implicit differentiation (隱函數微分)}
-If $x$ and $y$ are related by an equation $F(x,y)=0$, then we can differentiate both sides with respect to $x$, treating $y$ as a function of $x$.
+\subsubsection{Implicit function theorem (隱函數定理) of real-valued function of two real variables}
+If $f(x,y)$ is a function that is continuously differentiable on a neighborhood of a point $(x_0,y_0)$ and $\pdv{f}{y}(x_0,y_0)\neq 0$ on a neighborhood of $(x_0,y_0)$, then $f$ is injective w.r.t. $y$ on a neighborhood of $(x_0,y_0)$, and there exists a unique differentiable function $g$ such that $y_0=g(x_0)$ and $f(x,g(x))=0$ in a neighborhood of $x_0$. Moreover,
+\[g'(x)=-\frac{\pdv{f}{x}(x,g(x))}{\pdv{f}{y}(x,\varphi(x))}.\]
+\bpr
+Differentiate both sides of $f(x,g(x))=0$.
+\epr
 
-Whenever we differentiate a term involving $y$, we apply the chain rule, which introduces a factor of $\dv{y}{x}$.
 
-We can compute derivatives of $y$ with respect to $x$ without solving for $y$ by implicit differentiation.
+\subsubsection{Implicit function theorem of real-valued function of multiple real variables}
+\subsubsection{Implicit function theorem of real vector-valued function of multiple real variables}
+
+
+
+
+Given a function $f\colon D\subseteq\bbR^{(n+m)}\to\bbR^m$ that is continuously differentiable on a neighborhood of a point $(\mb{a},\mb{b})$ and such that $f(\mb{a},\mb{b})=\mb{0}$. If $J_{f,\mb{y})$ is invertible, then there exists a neighborhood $U$ of $\mb{a}$ such that there exists a unique function $g\colon U\to\bbR^m$ such that $g(\mb{a})=\mb{b}$ and $f(\mb{x},g(\mb{x}))=\mb{0}$ for all $x\in U$. Moreover,
+\[(\nabla g)(\mb{x})=-\qty[J_{f,\mb{y}}(\mb{x},g(\mb{x}))]^{-1}\qty[J_{f,\mb{x}}(\mb{x},g(\mb{x}))].\]
+\bpr
+PLACEHOLDER
+\epr
+\subsubsection{Implicit function theorem of multiple variables}
+Below, we will denote $(\mb{x},\mb{y})$ as an element of $\bbR^{(n+m)}$ for some $\mb{x}\in\bbR^n$ and $\mb{y}\in\bbR^m$, and denote the left $n$ columns of $\nabla f(\mb{a},\mb{b})$ as $J_{f,\mb{x})$, and the right $m$ columns of $\nabla f(\mb{a},\mb{b})$ as $J_{f,\mb{y})$. Given a function $f\colon D\subseteq\bbR^{(n+m)}\to\bbR^m$ that is continuously differentiable on a neighborhood of a point $(\mb{a},\mb{b})$ and such that $f(\mb{a},\mb{b})=\mb{0}$. If $J_{f,\mb{y})$ is invertible, then there exists a neighborhood $U$ of $\mb{a}$ such that there exists a unique function $g\colon U\to\bbR^m$ such that $g(\mb{a})=\mb{b}$ and $f(\mb{x},g(\mb{x}))=\mb{0}$ for all $x\in U$. Moreover,
+\[(\nabla g)(\mb{x})=-\qty[J_{f,\mb{y}}(\mb{x},g(\mb{x}))]^{-1}\qty[J_{f,\mb{x}}(\mb{x},g(\mb{x}))].\]
+\bpr
+PLACEHOLDER
+\epr
 \subsubsection{Derivative of natural logarithm of absolute value of function}
 If functions $f$ is differentiable and nonzero on $I$, then $\ln|f(x)|$ is also differentiable on $I$ and its derivative is given by
 \[\dv{\ln|f(x)|}{x}=\frac{f'(x)}{f(x)}.\]
