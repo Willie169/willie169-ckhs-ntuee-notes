@@ -744,10 +744,10 @@ Let $f$ be a function with domain being $\bbR$ or $\bbR_{\geq 0}$. If we interpr
 \item $f$ is called benefit (aka revenue) or cost (function) of $y$, and
 \item $f'(a)$ where defined is called the margin benefit (aka revenue) or cost of $y$ at $a$.
 \eit
-\subsection{Differential, total differential, or infinitesimal change}
+\subsection{Differential}
 For a normed vector-valued function $f$ of an independent variable $x$, we define the differential of it, $\dd{f}$, in terms of the differential of $x$, denoted as $\dd{x}$, as
 \[\dd{f}=f'\dd{x}.\]
-For a normed vector-valued function $f$ of independent variables $x_1,x_2,\ldots,x_n$, we define the differential of it, $\dd{f}$, in terms of the differentials of $x_1,x_2,\ldots,x_n$, denoted as $\dd{x_1},\dd{x_2},\ldots,\dd{x_n}$, as
+For a normed vector-valued function $f$ of independent variables $x_1,x_2,\ldots,x_n$, we define the (total) differential of it, $\dd{f}$, in terms of the differentials of $x_1,x_2,\ldots,x_n$, denoted as $\dd{x_1},\dd{x_2},\ldots,\dd{x_n}$, as
 \[\dd{f}=\sum_{k=1}^nf_{x_k}\dd{x_k}.\]
 \subsection{Antiderivative (反導函數), inverse derivative, primitive function, primitive integral, or indefinite integral (不定積分)}
 \subsubsection{Definition}
@@ -815,7 +815,7 @@ If a DE contains partial derivatives of one or more unknown functions of two or 
 The order of a differential equation is the order of the highest derivative in the equation.
 \subsection{Graph-related}
 \subsubsection{Critical point (臨界點)}
-Let $f$ be a function with codomain $\bbR$ and \( c \) be a point in the domain of $f$, if \( f'(c) = 0 \) or \( f' \) does not exist at \( c \), then \( c \) is a critical point, of \( f \), and $f(c)$ is called a critical value of $f$.
+Let $f$ be a function with domain being a subset of a LCTVS and codomain $\bbR$ and \( c \) be a point in the domain of $f$, if \( f'(c) = 0 \) or \( f' \) does not exist at \( c \), then \( c \) is a critical point, of \( f \), and $f(c)$ is called a critical value of $f$.
 
 If the domain of $f$ is a subset of $\bbR$ or $\bbC$, a critical point is also called a critical number.
 \subsubsection{Relative extremum (相對極值), local extremum (局部極值), or extremum (極值)}
@@ -836,7 +836,7 @@ Let $f\colon D\to\bbR$ be a function. It is said that a absolute maximum (絕對
 Let $f\colon D\to\bbR$ be a function. It is said that a absolute minimum (絕對極小值 or 最小值) \( f(c) \) of \(f\) occurs at $c\in D$ if \( \forall x\in D\colon f(c) \leq f(x) \).
 
 Absolute maximum and absolute minimum are collectively called absolute extreme.
-\subsubsection{Saddle point (鞍點)}
+\subsubsection{Saddle point (鞍點) or minimax}
 Let $f$ be a function with codomain $\bbR$ and \( c \) be a point in the domain of $f$ , if \( f'(c) = 0 \) and $c$ is not a local extremum of $f$, then $c$ is a saddle point of $f$.
 \subsubsection{Concavity (凹性)}
 Let $V$ be a vector space and function $f\colon J\subseteq V\to\bbR$ be continuous on a convex set $I\subseteq J$.
@@ -850,7 +850,7 @@ The terms without weakly and strictly are define to be either weakly or strictly
 \subsubsection{Point of inflection or inflection point (反曲點 or 拐點)}
 Let $V$ be a vector space, $f\colon J\subseteq V\to\bbR$ be a function, and $I\subseteq J$ be a convex set. If $f$ is concave upward on $(a,b)$ and concave downward on $(b,c)$, or, concave downward on $(a,b)$ and concave upward on $(b,c)$, then $(b,f(b))$ is called an inflection point of $f$.
 \subsubsection{Kink}
-A kink is a point $x$ on the graph of a real function $f$ such that $f$ is continuous but not differentiable at $x$.
+A kink is a point $x$ on the graph of a function $f$ such that $f$ is continuous but not differentiable at $x$.
 \subsubsection{Corner or sharp corner}
 A corner or sharp corner is a point $x$ on the graph of a real function $f$ such that $f$ is continuous but not differentiable at $x$ and that the left-hand derivative and the right-hand derivative of $f$ at $x$ both exist and are finite.
 \subsubsection{Vertical tangent}
@@ -1487,22 +1487,6 @@ in which the first degree one is also called linear approximation, or linearizat
 is called remainder.
 
 Taylor polynomial of at $0$ is called Maclaurin polynomial.
-\subsubsection{Definiteness (正定性)}
-\bit
-\item Positive definite: We say the Hessian $H(\mb{F})$ of $\mb{F}$ at $\mb{a}$ is positive definite if the second derivative term in Taylor series is positive for all inifinisimal changes $\delta\mb{x}$ near $\mb{a}$, that is,
-\[(\delta\mb{x})^\top H(\mb{F})(\mb{a})\delta\mb{x}>0,\quad\forall \delta\mb{x}.\]
-\item Negative definite: We say the Hessian $H(\mb{F})$ of $\mb{F}$ at $\mb{a}$ is positive definite if the second derivative term in Taylor series is negative for all inifinisimal changes $\delta\mb{x}$ near $\mb{a}$, that is,
-\[(\delta\mb{x})^\top H(\mb{F})(\mb{a})\delta\mb{x}<0,\quad\forall \delta\mb{x}.\]
-\item Neutral semidefinite: We say the Hessian $H(\mb{F})$ of $\mb{F}$ at $\mb{a}$ is zero semidefinite if the second derivative term in Taylor series is zero for all inifinisimal changes $\delta\mb{x}$ near $\mb{a}$, that is,
-\[(\delta\mb{x})^\top H(\mb{F})(\mb{a})\delta\mb{x}=0,\quad\forall \delta\mb{x}.\]
-\item Nonnegative semidefinite: We say the Hessian $H(\mb{F})$ of $\mb{F}$ at $\mb{a}$ is nonnegative semidefinite if the second derivative term in Taylor series is nonnegative for all inifinisimal changes $\delta\mb{x}$ near $\mb{a}$ but not all positive, that is,
-\[(\delta\mb{x})^\top H(\mb{F})(\mb{a})\delta\mb{x}\geq 0,\quad\forall \delta\mb{x},\quad\land\]
-\[(\delta\mb{x})^\top H(\mb{F})(\mb{a})\delta\mb{x}=0,\quad\exists \delta\mb{x}.\]
-\item Nonpositive semidefinite: We say the Hessian $H(\mb{F})$ of $\mb{F}$ at $\mb{a}$ is nonpositive semidefinite if the second derivative term in Taylor series is nonpositive for all inifinisimal changes $\delta\mb{x}$ near $\mb{a}$ but not all negative, that is,
-\[(\delta\mb{x})^\top H(\mb{F})(\mb{a})\delta\mb{x}\leq 0,\quad\forall \delta\mb{x},\quad\land\]
-\[(\delta\mb{x})^\top H(\mb{F})(\mb{a})\delta\mb{x}=0,\quad\exists \delta\mb{x}.\]
-\item Indefinite: We say the Hessian $H(\mb{F})$ of $\mb{F}$ at $\mb{a}$ is indefinite if it is neither definite nor semidefinite.
-\eit
 \subsection{Line integral (線積分) or Path integral (路徑積分)}
 \subsubsection{Definition}
 For a parameterized curve $\gamma(t)\colon[a,b]\to\bbR^n$ that is piecewise $C^1$, the line integral of a function $f$ defined on the image of $\gamma$ over $\gamma$ is defined as the Riemann–Stieltjes integral:
@@ -2641,20 +2625,32 @@ Similarly, we can prove that there exists $d\in [a,b]$ such that $f(d)=m$.
 Let $X$ be a topological space, and function $f\colon I\subset X\to\mathbb{R}$ be continuous on a compact set $D\subseteq I$, then
 \[\exists a,b \in D \text{\ s.t.\ }\forall x \in D\colon f(a)\geq f(x)\geq f(b).\]
 \subsubsection{Fermat's Theorem (費馬引理) or Interior Extremum Theorem (內部極值定理)}
-Let function $f\colon D\subseteq\mathbb{R}\to\mathbb{R}$ be differentiable on an open interval $I\subseteq D$ and $c\in I$ be a local extreme of $f$, then
-\[f'(c)=0.\]
+Let $X$ be a LCTVS and function $f\colon D\subseteq X\to\mathbb{R}$ be differentiable on an open set $U\subseteq D$ and $c\in U$ be a local extreme of $f$, then
+\[f'(c)=0,\]
+where $f'(c)\in L(X,\bbR)$ and $0$ is the zero element of $L(X,\bbR)$.
 \begin{proof}
-Without loss of generality, suppose $c$ is a local extreme. Then there exists $\delta>0$ such that for all $x\in (c-\delta,c+\delta)\colon f(x)\leq f(c)$.
+Let $h\in X$ be arbitrary.
 
-Thus,
-\[\lim_{h\to 0^+}\frac{f(x+h)-f(x)}{h}\leq 0\]
-and
-\[\lim_{h\to 0^-}\frac{f(x+h)-f(x)}{h}\geq 0.\]
+Because $U$ is open, there exists $\varepsilon>0$ such that $c+th\in U$ for $\abs{t}<\varepsilon$. Define
+\[g(t)=f(c+th),\quad\abs{t}<\varepsilon.\]
+Since $f$ is differentiable on $U$, $g$ is differentiable and
+\[g'(0)=f'(c)(h).\]
+Without loss of generality, suppose $c$ is a local maximum. Then, there exists $\delta>0$ such that
+\[g(t)\leq g(0)\]
+for all $\abs{t}<\delta$.
 
-Since $f$ is differentiable at $c$,
-\[\lim_{h\to 0^+}\frac{f(x+h)-f(x)}{h}=\lim_{h\to 0^-}\frac{f(x+h)-f(x)}{h}=0=f'(c).\]
+Thus for all $\delta>t>0$,
+\[\frac{g(t)-g(0)}{t}\leq 0\]
+and for all $-\delta<t<0$,
+\[\frac{g(t)-g(0)}{t}\geq 0.\]
+Therefore
+\[g'(0)=0.\]
+Since
+\[g'(0)=f'(c)(h)=0\]
+for all $h\in X$
+\[f'(c)=0.\]
 \end{proof}
-In terms of critical point, Fermat's Theorem can be rephrased as, if function $f\colon D\subseteq\mathbb{R}\to\mathbb{R}$ has a local extreme $c$ of $f$, then $c$ is a critical point of $f$.
+In terms of critical point, Fermat's Theorem can be rephrased as, a local extreme is a critical point.
 \subsubsection{Rolle's Theorem (羅爾定理)}
 Let function $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ be continuous on an interval $[a, b]\subseteq I$ and differentiable on $(a,b)$, and $f(a)=f(b)$, then
 \[\exists c\in (a, b)\text{\ s.t.\ }f'(c)=0.\]
@@ -2763,35 +2759,31 @@ eme at $c$.
 \begin{proof}
     By Increasing/Decreasing Test Theorem, it is obvious.
 \end{proof}
-\subsubsection{Second Derivative Test for Local Extrema Theorem of Real Functions}
+\subsubsection{Second derivative test of one variable}
 Let $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ be a function, $c$ be a critical point of $f$, and $f$ be twice differentiable at $c$.
 \bit
 \item If $f''<0$, then $f$ has a strict local maximum at $c$.
 \item If $f''>0$, then $f$ has a strict local minimum at $c$.
 \eit
-\begin{proof}
-By First Derivative Test for Local Extrema Theorem, it is obvious.
-\end{proof}
-\subsubsection{Eigenvalues Test of Definiteness for Symmetric Hessians of Scalar Fields}
-If a Hessian $H$ of a scalar field is symmetric, that is,
-\[H=H^\top,\]
-then:
+\subsubsection{Second (partial) derivative test of two variables}
+Let $f(x,y)\colon I\subseteq\mathbb{R}^2\to\mathbb{R}$ be a function, $c$ be a critical point of $f$, $f$ be twice differentiable at $c$, and
+\[D=\begin{vmatrix}
+f_{xx} & f_{xy}\\
+f_{yx} & f_{yy}
+\end{vmatrix}.\]
 \bit
-\item $H$ is positive definte if $\lambda>0$ for all eigenvalues $\lambda$ of $H$.
-\item $H$ is negative definte if $\lambda<0$ for all eigenvalues $\lambda$ of $H$.
-\item $H$ is nonnegative semidefinte if $\lambda\geq 0$ for all eigenvalues $\lambda$ of $H$.
-\item $H$ is nonpositive semidefinte if $\lambda\leq 0$ for all eigenvalues $\lambda$ of $H$.
-\item $H$ is neutral semidefinte if $\lambda=0$ for all eigenvalues $\lambda$ of $H$.
-\item $H$ is indefinte if none of above conditions is true.
+\item If $D(c)>0$ and $f_{xx}(c)<0$, then $f$ has a strict local maximum at $c$.
+\item If $D(c)>0$ and $f_{xx}(c)>0$, then $f$ has a strict local minimum at $c$.
+\item If $D(c)<0$, then $f$ has a saddle point at $c$.
 \eit
-\subsubsection{Second Derivative Test for Local Extrema Theorem of Scalar Fields}
+\subsubsection{Second derivative test of multiple derivatives}
 Let $f\colon I\subseteq\mathbb{R}^n\to\mathbb{R}$ be a function, $c$ be a critical point of $f$, and $f$ be twice differentiable at $c$.
 \bit
-\item If $f''$ is negative definite, then $f$ has a strict local maximum at $c$.
-\item If $f''$ is nonpositive definite, then $f$ has a local maximum at $c$.
-\item If $f''$ is positive definite, then $f$ has a strict local minimum at $c$.
-\item If $f''$ is nonnegative definite, then $f$ has a local minimum at $c$.
-\item If $f''$ is indefinite, then $f$ has no local exteme at $c$.
+\item If $H(f)$ is negative definite, then $f$ has a strict local maximum at $c$.
+\item If $H(f)$ is postive definite, then $f$ has a strict local minimum at $c$.
+\item If $H(f)$ is negative semidefinite, then $f$ has a local maximum at $c$.
+\item If $H(f)$ is postive semidefinite, then $f$ has a local minimum at $c$.
+\item If $H(f)$ is indefinite, then $f$ has a saddle point at $c$.
 \eit
 \subsubsection{First Derivative Test for Concavity Theorem}
 Let $f\colon I\subseteq\bbR\to\bbR$ be a function and $(a,b)\subseteq I$ be an open interval.
