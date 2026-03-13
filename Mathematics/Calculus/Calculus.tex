@@ -1357,15 +1357,6 @@ where $s(t)$ is the arc length function of $\mb{r}$ from $a$ to $t$.
 
 
 \section{Multivariable (多變數 or 多變量 or 多元) Calculus}
-\ssc{Graph}
-\sssc{Level curve, level slice, or contour line}
-For a real-valued function $f$ of two variables, the level curve of $f$ at level $k\in\bbR$ is defined as the set of $\mb{x}$ such that
-\[f(\mb{x})=k.\]
-\sssc{Contour map or contour plot}
-Contour map or contour plot is the graphical representation of the level curves of a function of two variable, typical represented with a collection of level curves labelled with corresponding levels that are often of same difference relative to their adjacent curves, or with color or height ($z$-axis) showing function value at all points.
-\sssc{Level surface}
-For a real-valued function $f$ of three variables, the level surface of $f$ at level $k\in\bbR$ is defined as the set of $\mb{x}$ such that
-\[f(\mb{x})=k.\]
 \subsection{Operators}
 \begin{itemize}
 \item Dot product (點積) operator: $\cdot$
@@ -1374,7 +1365,7 @@ For a real-valued function $f$ of three variables, the level surface of $f$ at l
 \item Jacobian matrix (雅可比矩陣): $\nabla$, or $\mathbf{J}(\mathbf{F})$, $J(\mathbf{F})$, $\mb{J}_{\mb{F}}$, or $J_{\mathbf{F}}$ for operand $\mb{F}$.
 \item Divergence (散度) operator: $\nabla \cdot$ or $\operatorname{div}$
 \item Curl (旋度) operator: $\nabla \times$ or $\operatorname{curl}$
-\item Directional derivative (方向導數) operator: $\cdot\nabla$
+\item Directional derivative (方向導數) operator: $(\mb{F}\cdot\nabla)\mb{A}$ or $D_{\mb{F}}\mb{A}$
 \item Hessian (黑塞) (matrix): $\nabla\nabla$, $\nabla^2$, $\nabla\otimes\nabla$, $D^2$, or $\mb{H}(f)$, $H(f)$, $\mb{H}_f$ or $H_f$ for operand $f$, or simply as second derivative.
 \item Laplace operator (拉普拉斯算子): $\nabla\cdot\nabla$, $\nabla^2$, or $\Delta$. For clarity, we use $\nabla\cdot\nabla$ here.
 \item Line or Path integral operator: $\int$
@@ -1428,7 +1419,9 @@ T_1 & T_2 & T_3 \\
 \]
 The curl of a three-dimensional vector field is a three-dimensional vector field.
 \subsubsection{Directional derivative (方向導數)}
-\[(\mathbf{f}\cdot\nabla)\mathbf{g}=\sum_{i=1}^n f_i\pdv{g}{x_i}\]
+For $\mb{A}\colon D\subseteq\bbR^n\to\bbR$ and $\mb{F}\colon E\subseteq\bbR^n\to\bbR^n$,
+\[(\mb{F}\cdot\nabla)\mb{A}=D_{\mb{F}}\mb{A}=\lim_{h\to 0}\frac{\mb{A}(\mb{x}+h\mb{F}(\mb{x}))-\mb{A}(\mb{x})}{h}=\sum_{i=1}^nF_i\pdv{\mb{A}}{x_i}=\mb{F}\cdot\nabla\mb{A}.\]
+In $D_{\mb{F}}\mb{A}$ notation, $\mb{F}$ is often assumed constant unit vector.
 \subsection{Higher order}
 \subsubsection{Hessian (黑塞) (matrix) or second derivative}
 The Hessian or second derivative $H_f$ of field $f$ is defined as a matrix such that
@@ -1537,6 +1530,24 @@ wherever it is defined.
 \[\nabla\times f(\mb{x})=0\]
 for all $\mb{x}\in U$.
 \eit
+\ssc{Graph}
+\sssc{Level curve, level slice, or contour line}
+For a real-valued function $f$ of two variables, the level curve of $f$ at level $k\in\bbR$ is defined as the set of $\mb{x}$ such that
+\[f(\mb{x})=k.\]
+\sssc{Contour map or contour plot}
+Contour map or contour plot is the graphical representation of the level curves of a function of two variable, typical represented with a collection of level curves labelled with corresponding levels that are often of same difference relative to their adjacent curves, or with color or height ($z$-axis) showing function value at all points.
+\sssc{Level surface}
+For a real-valued function $f$ of three variables, the level surface of $f$ at level $k\in\bbR$ is defined as the set of $\mb{x}$ such that
+\[f(\mb{x})=k.\]
+\sssc{Gradient perpendicular to tangent of level}
+For function $F(\mb{x})\colon D\subseteq\bbR^n\to\bbR$, suppose $\mb{r}(t)$ is any parameterized curve lies on $F(\mb{x})=k$, then
+\[\nabla F\cdot\mb{r}'=0.\]
+\sssc{Tangent flat}
+For function $F(\mb{x})\colon D\subseteq\bbR^n\to\bbR$, for each point $\mb{x}_0\in D$, the tangent flat of $F$ at it is given by
+\[\nabla F\cdot(\mb{x}-\mb{x}_0)=0.\]
+\sssc{Normal line}
+For function $F(\mb{x})\colon D\subseteq\bbR^n\to\bbR$, for each point $\mb{x}_0\in D$, the normal line of $F$ at it is given by
+\[\mb{x}(t)=t\nabla F(\mb{x}_0)+\mb{x}_0,\quad t\in\bbR.\]
 
 
 \section{Continuity Theorems}
@@ -2876,6 +2887,12 @@ Let $f\colon I\subseteq\bbR\to\bbR$ be a function. If $(c,f(c))$ is an inflectio
 \begin{proof}
 By the First Derivative Test for Concavity Theorem, it is obvious.
 \end{proof}
+\sssc{Extremum of direction derivatives}
+For each point $\mb{x}$,
+\[\max_{\|\mb{u}\|=1}D_{\mb{u}}\mb{A}(\mb{x})=\|\nabla\mb{A}(\mb{x})\|,\]
+\[\arg_{\mb{u}}\max_{\|\mb{u}\|=1}D_{\mb{u}}\mb{A}(\mb{x})=\frac{\nabla\mb{A}(\mb{x})}{\|\nabla\mb{A}(\mb{x})\|},\]
+\[\min_{\|\mb{u}\|=1}D_{\mb{u}}\mb{A}(\mb{x})=-\|\nabla\mb{A}(\mb{x})\|,\]
+\[\arg_{\mb{u}}\min_{\|\mb{u}\|=1}D_{\mb{u}}\mb{A}(\mb{x})=-\frac{\nabla\mb{A}(\mb{x})}{\|\nabla\mb{A}(\mb{x})\|}.\]
 \subsection{Indeterminate forms and L'Hôpital's rule (羅必達法則) or Bernoulli's rule}
 \subsubsection{(General form of) L'Hôpital's rule or Bernoulli's rule and indeterminate quotients}
 Let $I$ be an open interval and $a\in I$, and $f(x)$ and $g(x)$ be functions differentiable on $I\setminus\{a\}$. If
