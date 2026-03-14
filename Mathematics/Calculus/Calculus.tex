@@ -2569,7 +2569,21 @@ Take differentiation of both sides:
 \[y'=\qty(f(x))^{g(x)}\qty(g'(x)\ln(f(x))+g(x)\frac{f'(x)}{f(x)}).\]
 \end{proof}
 \sssc{Existence of total derivative}
-For a real vector-valued function and a point $a$ in its domain, all $n$th order partial derivatives exist at $a$, iff $n$th order total derivative exists at $a$.
+For a function $f\colon D\subseteq\bbR^n\to\bbR^m$, $f'$ exists at a point $a\in D$ iff
+\[\lim_{h\to 0}\frac{f(a+h)-L(a+h)}{\|h\|}=0,\]
+where $L$ is the linearization of $f$ at $a$, that is,
+\[L(x)=f(a)+\nabla f(a)(x-a),\]
+and the derivative of $f$ at $a$ is $\nabla f(a)$.
+\bpr
+$f'(a)$ exists iff there exists a bounded linear operator $A\colon\bbR^n\to\bbR^m$ such that
+\[\lim_{h\to0}\frac{f(a+h)-f(a)-A(h)}{\|h\|}=0.\]
+Suppose the limit is 0. For each $x_i$, let the unit vector along its positive direction be $e_i$, along the line $x_it,\quad t\in\bbR$,
+\[\lim_{t\to0}\frac{f(a+e_it)-f(a)-A(e_it)}{t}=\pdv{f}{x_i}(a)-A(e_i)\]
+Thus $A_i=\pdv{f}{x_i}(a)$, and
+\[A=\nabla f(a)\]
+And
+\[\frac{f(a+h)-f(a)-A(h)}{\|h\|}=\frac{f(a+h)-f(a)+\nabla f(a)(h)}{\|h\|}=\frac{f(a+h)-L(a+h)}{\|h\|}\]
+\epr
 \subsection{Graph-related}
 \subsubsection{Differentiability implies continuity}
 Let $V$ and $W$ be normed vector spaces, $U$ be an open subset of $V$, and $f\colon U\subseteq V\to W$ be a function. For a point $a\in U$, $f$ is differentiable at $a$ implies it is continuous at $a$; for an open subset $I\subseteq U$, $f$ is differentiable on $I$ implies it is continuous on $I$.
