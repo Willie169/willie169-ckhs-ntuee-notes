@@ -9,40 +9,94 @@
 \titletocdoc
 \sct{Probability Theory (機率論)}
 \subsection{Definition}
-\sssc{Basic terms}
-\begin{itemize}
-\item (Random) Experiment or Trial (（隨機）試驗): A process that can be repeated and the results may be different each time. It has repeatability, that is, the test can be repeated under the same conditions, and randomness, that is, the results of each test may be different, with randomness and uncertainty.
-\item Sample space (樣本空間): The set of all possible outcomes of an experiment. For example, the sample space for flipping a coin is $\{\text{head}, \text{tail}\}$.
-\item Event (事件): A subset of the sample space. For example, the event of rolling a die and getting an even number is $\{2, 4, 6\}$.
-\item Probability (機率): The likelihood of an event occurring, a number between 0 and 1. The closer the probability is to 1, the more likely the event is to occur.
-\item Impossible event (空事件): An event with zero probability.
-\item Sure event (全事件): An event with one probability.
-\item Sum event (和事件): The sum event of event $A$ and event $B$ is $A\cup B$.
-\item Product event (積事件): The product event of event $A$ and event $B$ is $A\cap B$.
-\item Complement event (餘事件): The complement event of event $A$ in sample space $S$ is $A'=S\setminus A$.
-\item Classical probability (古典機率): If the number of all possible outcomes of an event is finite or countable infinite, and the chance of each outcome occurring in the sample space is equal, then the probability of the event occurring can be calculated by:
-\[ P(A)= \frac{\text{The number of outcomes of event A}}{\text{The number of all possible outcomes}} \]
-\item Objective probability (客觀機率) or Frequency probability (頻率機率): An objective probability value obtained based on past experience or statistical data, usually the frequency of past events or repeated experiments to obtain the probability of an event occurring.
-\item Subjective probability (主觀機率): A probability value that is not supported by statistical data.
-\item Conditional probability (條件機率): The probability of another event occurring given that a certain event has occurred. Usually expressed as $P(A|B)$, which is the probability of event $A$ occurring given that event $B$ has occurred.$P(A|B)= \frac{P\qty(A\cap B)}{P\qty(B)}$.
-\item Mutually exclusive events (互斥事件): Two or more events cannot occur at the same time, that is, $A_1,A_2,\ldots,A_n$ are mutually exclusive events if and only if:
+\sssc{(Random) Experiment or Trial (（隨機）試驗)}
+A (random) experiment or trial is a test that has repeatability, that is, the test can be repeated under the same conditions, and randomness, that is, the results of each test may be different.
+\sssc{(Elementary) outcome and sample space (樣本空間)}
+The sample space of an experiment is the finest-grain, mutually exclusive, collectively exhaustive set of all possible (elementary) outcomes. For example, the sample space for flipping a coin is $\{\text{head}, \text{tail}\}$.
+
+The singleton of an outcome is sometimes denoted the same as the outcome.
+\sssc{Event (事件)}
+A subset of the sample space. For example, the event of rolling a die and getting an even number is $\{2, 4, 6\}$.
+\sssc{Event space}
+The set of all events of an experiment.
+\sssc{Probability (機率)}
+The likelihood of an event occuring, which is a real number in $[0,1]$. The closer the probability is to 1, the more likely the event is to occur. The probability of an event $A$ occuring is denoted as $P(A)$ or $P[A]$.
+\sssc{Impossible event (空事件)}
+An event with zero probability.
+\sssc{Sure event (全事件)}
+An event with one probability.
+\sssc{Sum event (和事件)}
+The sum event of event $A$ and event $B$ is $A\cup B$, also denoted as $A+B$.
+\sssc{Product event (積事件)}
+The product event of event $A$ and event $B$ is $A\cap B$, also denoted as $AB$ or $A,B$.
+\sssc{Complement event (餘事件)}
+The complement event of event $A$ in sample space $S$ is $S\setminus A$, denoted as $A'$, $A^c$, or $A^C$.
+\sssc{Classical probability (古典機率) or equally likely outcomes}
+If the number of all possible outcomes in the sample space $S$ of an experiment is finite or countable infinite, and the chance of each outcome occurring is equal, then the probability of an event $A$ occurring can be calculated by:
+\[P(A)=\frac{|A|}{|S|}.\]
+\sssc{Objective probability (客觀機率) or Frequency probability (頻率機率)}
+An objective probability value obtained based on past experience or statistical data, usually the frequency of past events or repeated experiments to obtain the probability of an event occurring.
+\sssc{Subjective probability (主觀機率)}
+A probability value that is not supported by statistical data.
+\sssc{Conditional probability (條件機率)}
+The probability of another event $A$ occurring given that a certain event $B$ has occurred, denoted as $P(A|B)$.
+\[P(A|B)= \frac{P\qty(A\cap B)}{P\qty(B)}.\]
+\sssc{Repeated trials}
+A trial that consists of repeated independent trials. The probability of an event $A$ where events $A_i$ occured in each trial $i$ is $\prod_iP(A_i)$.
+\sssc{Probability space (機率空間)}
+A probability space $(\Omega,\Sigma,P)$ is a measure space of which $\Omega$ is the sample space of an experiment, $\Sigma$ is the event space of the experiment, and $P$ is the probability measure with $P(\Omega)=1$ that maps each event to the probability of it. The probability axioms are
+\begin{enumerate}
+\item Nonnegativity:
+\[\forall E\in\Sigma\colon P(E)\geq 0.\]
+\item Normalization:
+\[P(\Omega)=1.\]
+\item Countable additivity or \text{\textsigma}-additivity: For all finite or countable infinite indexed family $(E_k)_{k\in K}$ of pairwise disjoint sets in $\Sigma$,
+\[P\left(\bigcup_{k\in K}E_k\right)=\sum_{k=1}^\inftyP(E_k).\]
+This implies $P(\varnothing)=0$.
+\end{enumerate}
+\sssc{Complement law}
+\[P(A')=1-P(A).\]
+\sssc{De Morgan's laws}
+\[P((A\cup B)')=P(A'\cap B').\]
+\[P((A\cap B)')=P(A'\cup B').\]
+\sssc{Principle of inclusion-exclusion}
+For event space $\Sigma$ and indexed family $(A_i)_{i=1}^n\subseteq\Sigma$ with $n\in\bbN$,
+\[P\qty(\bigcup_{i=1}^nA_i)=\sum_{J\subseteq\bbN_{\leq n}\land J\neq\varnothing}(-1)^{|J|+1}P\qty(\bigcap_{j\in J}A_j).\]
+\sssc{Subset law}
+\[A\subseteq B\implies P(A)\le P(B).\]
+\sssc{Partition laws}
+Let $(A_i)_{i=1}^n\subseteq\Sigma$ be a partition of $A\in\Sigma$.
+\[P(A)=\sum_{i=1}^nP(A_i).\]
+Let $B\in\Sigma$.
+\[P(B|A)=\sum_{i=1}^nP(B|A_i).\]
+Let $C\subseteq A$.
+\[C=\bigcup_{i=1}^n(A_i\cap C).\]
+\[P(C)=\sum_{i=1}^nP(A_i\cap C).\]
+Law of total probability:
+\[P(C)=\sum_{i=1}^nP(C|A_i)P(A_i).\]
+\sssc{Bayes' theorem (貝葉斯定理或貝氏定理)}
+For an indexed family $(A_i)_{i=1}^n$ that is a partition of a sample space $S$ and an event $B\subseteq S$,
+\[P\qty(A_k\mid B)=\frac{P\qty(B|A_k)P(A_k)}{\sum_{i=1}^nP\qty(B\mid A_i)P(A_i)}.\]
+\sssc{Mutually exclusive events (互斥事件)}
+Two or more events $A_1,A_2,\ldots,A_n$ are mutually exclusive events iff:
 \[\forall J\neq\varnothing\land J\subseteq\{a\mid a\in\mathbb{N}\land 1\leq a\leq n\}\colon P\qty(\bigcap_{j\in J} A_j)=0.\]
-\item Independent events (獨立事件): Two or more events have no effect on each other, that is, $A_1,A_2,\ldots,A_n$ are independent events if and only if:
-\[\forall J\neq\varnothing\land J\subseteq\{a\mid a\in\mathbb{N}\land 1\leq a\leq n\}\colon P\qty(\bigcap_{j\in J} A_j)=\prod_{j\in J}P\qty(A_j).\]
-\item Repeated trials: A trial that consists of repeated independent trials. The probability of an event $A$ where events $A_i$ occured in each trial $i$ is $\prod_iP(A_i)$.
-\item Partitions (分割或劃分): If \( \{A_i\}_{i \in I} \) is a set of partitions of the sample space \( \Omega \) then the following conditions are met:
-\[\begin{aligned}
-& \forall i \in I\colon A_i \subseteq \Omega,\\
-& \forall i,\, j \in I \land i\neq j\colon A_i \cap A_j = \emptyset,\\
-& \bigcup_{i \in I} A_i = \Omega. 
-\end{aligned}\]
-\item Bayes' Theorem (貝葉斯定理或貝氏定理): If \( \{A_i\}_{i \in I} \) is a set of partitions of a sample space \( \Omega \), then,
-\[ \forall 1\leq j\leq |I|\colon P(A_j|B)= \frac{P\qty(A_j)\times P\qty(B\left| A_j\right.)}{\sum_{k=1}^{\qty|I|} P\qty(A_k)\times P\qty(B\left| A_k\right.)} \]
-\end{itemize}
-\subsection{Random Variable (隨機變數)}
-The random variable is a measurable function of which the domain is the sample space of a probability space and the range is typically a subset of real numbers. If the range of it is finite or countable infinite, it is called a discrete random variable; if the range of it is continuous, it is called a continuous random variable; if the range of it is continuous in some parts and discrete in others, it is called a mixed random variable. Given ramdom variable $X$ and sample space $\Omega$, $X=x$ means that event $\{\omega \in \Omega \mid X(\omega) = x\}$ occured. If a random variable $X$ follows a probability distribution $P$, we write $X\sim P$.
-\subsection{Probability space (機率空間)}
-A probability space $(\Omega,\Sigma,\mu)$ is a measure space of which $\Omega$ is the sample space of an experiment, $\mu$ is called the probability measure, indicating the probability of events, such that $\mu\colon\Sigma\to [0,1]$, $\mu(\Omega)=1$. The composition function of the random variable and the probability function of an experiment is the probability measure of that experiment.
+\sssc{Independent events (獨立事件)}
+Two or more events $A_1,A_2,\ldots,A_n$ are independent events iff:
+\[\forall J\subseteq\bbN_{\leq n}\land J\neq\varnothing\colon P\qty(\bigcap_{j\in J} A_j)=\prod_{j\in J}P\qty(A_j).\]
+\sssc{Random variable (隨機變數)}
+Given a probability space $(\Omega,\Sigma,P)$, a random variable $X$ is a measurable function $X\colon\Omega\to\bbR$ such that for each Borel set $B\subseteq\bbR$, the preimage $X^{-1}(B)\in\Sigma$. For each $x\in X(\Omega)$, $X=x$ denotes the event $\{\omega\in\Omega\mid X(\omega)=x\}$.
+
+
+
+
+
+
+If a random variable $X$ follows a probability distribution $P$, we write $X\sim P$.
+
+If the range of it is finite or countable infinite, it is called a discrete random variable; if the range of it is continuous, it is called a continuous random variable; if the range of it is continuous in some parts and discrete in others, it is called a mixed random variable.
+
+
+
 
 PLACEHOLDER
 discrete = weighted delta measure

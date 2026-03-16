@@ -23,13 +23,13 @@
 \[n(2^A)=2^{n\qty(A)}\]
 \ssc{排容原理/取捨原理（Principle of inclusion-exclusion or inclusion–exclusion principle, PIE）}
 \textit{Statement:}
-\[ \left|\bigcup _{i=1}^n A_i\right| = \sum _{\emptyset \neq J\subseteq \{a|a \in \mathbb{N} \wedge 1\leq a\leq n\}}\left((-1)^{|J|-1}\cdot{\Biggl |}\bigcap _{j\in J}A_j{\Biggr |}\right) \]
+\[\abs{\bigcup_{i=1}^nA_i}=\sum_{J\subseteq\bbN_{\leq n}\land J\neq\varnothing}(-1)^{|J|+1}\abs{\bigcap_{j\in J}A_j}.\]
 
 \tb{以元素證明：}
 \begin{proof}
 \[
 \begin{aligned}
-& \left|\bigcup _{i=1}^n A_i\right| = \sum _{\emptyset \neq J\subseteq \{a|a \in \mathbb{N} \wedge 1\leq a\leq n\}}\left((-1)^{|J|-1}\cdot{\Biggl |}\bigcap _{j\in J}A_j{\Biggr |}\right) \\
+& \left|\bigcup _{i=1}^n A_i\right| = \sum _{\varnothing \neq J\subseteq \{a|a \in \mathbb{N} \wedge 1\leq a\leq n\}}\left((-1)^{|J|-1}\cdot{\Biggl |}\bigcap _{j\in J}A_j{\Biggr |}\right) \\
 & \equiv 1_{\bigcup _{i=1}^n A_i} = \sum _{k=1}^{n}\left((-1)^{k-1}\cdot\sum _{I\subseteq \{a|a \in \mathbb{N} \wedge 1\leq a\leq n\} \wedge |I|=k}1_{A_{I}}\right) \\
 & \equiv \forall \left( x \in \bigcup_{i=1}^n A_i, m = \sum_{i: x \in A_i}1\right): 1 = \sum _{k=1}^{m}\left((-1)^{k-1}\sum _{I\subset \{a|a \in \mathbb{N} \wedge 1\leq a\leq m\} \wedge |I|=k}1\right) \\
 & \equiv \forall \left( x \in \bigcup_{i=1}^n A_i, m = \sum_{i: x \in A_i}1\right): {\binom{m}{0}} = \sum _{k=1}^{m}\left((-1)^{k-1}{\binom {m}{k}}\right) \\
@@ -47,7 +47,7 @@
 & \text{則當\ } n=k+1,\\
 & \left| \bigcup_{i=1}^{k+1} A_i \right| \\
 & = \left| \left(\bigcup_{i=1}^k A_i\right)\cup A_{k+1} \right| \\
-& = \sum _{\emptyset \neq J\subseteq \{a|a \in \mathbb{N} \wedge 1\leq a\leq k+1\}}\left((-1)^{|J|-1}\cdot{\Biggl |}\bigcap _{j\in J}A_j{\Biggr |}\right) \\
+& = \sum _{\varnothing \neq J\subseteq \{a|a \in \mathbb{N} \wedge 1\leq a\leq k+1\}}\left((-1)^{|J|-1}\cdot{\Biggl |}\bigcap _{j\in J}A_j{\Biggr |}\right) \\
 & \text{，命題亦成立。} \\
 & \text{由數學歸納法，得證。}
 \end{aligned}
@@ -123,7 +123,7 @@ $n$ 不盡相異物，全取作環狀排列，求其方法數。
 \text{令\protect\ }g & \text{之所有相異質因數由小到大依序為}p_1, p_2, p_3, \ldots, p_q。 \\
 R &= \sum_{j=0}^q \left((-1)^j \cdot \sum_{\left|Y\right|=j} \frac{\left(\sum_{i=1}^k \frac{m_i}{\prod_{y \in Y} y}\right)!}{\prod_{i=1}^k \left(\frac{m_i}{\prod_{y \in Y} y}!\right)}\right) \\
 & \text{，其中 } Y \subseteq \{p_1, p_2, p_3, \ldots, p_q\} \\
-& \text{，定義 } \prod_{y \in \emptyset} y = 1
+& \text{，定義 } \prod_{y \in \varnothing} y = 1
 \end{aligned}
 \]
 \end{itemize}

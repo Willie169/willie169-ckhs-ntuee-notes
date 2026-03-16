@@ -18,14 +18,13 @@ Let $X$ be some set, and let $P(X)$ represent its power set. Then a subset $\Sig
 \subsection{Measurable space (可測空間)}
 Consider a set $X$ and a \text{\textsigma}-algebra $\Sigma$ on $X$. Then the tuple $(X,\Sigma)$ is called a measurable space.
 \subsection{Measure (測度)}
-Let $X$ be a set and $\Sigma$ be a \text{\textsigma}-algebra over $X$. A set function $\mu$ from $\Sigma$ to the extended real number line, defined to be $[-\infty,\infty]$ or $\mathbb{R}\cup\{-\infty,\infty\}$, is called a measure or positive measure on $(X,\Sigma)$ if the following conditions hold:
-\begin{enumerate}
-\item Non-negativity: \[\forall E\in\Sigma:\,\mu(E)\geq 0\]
-\item $\mu (\varnothing )=0$.
-\item Countable additivity (or \text{\textsigma}-additivity): For all countable collection $\{E_k\}_{k=1}^\infty$ of pairwise disjoint sets in $\Sigma$ (i.e. $\forall i\neq j:\,E_i\cap E_j=\varnothing$),
-\[\mu\left(\bigcup_{k=1}^\infty E_k\right)=\sum_{k=1}^\infty\mu(E_k)\]
-\end{enumerate}
-If the condition of non-negativity is dropped, then $\mu$ is called a signed measure.
+Let $X$ be a set and $\Sigma$ be a \text{\textsigma}-algebra over $X$. A set function $\mu$ from $\Sigma$ to the extended real number line $[-\infty,\infty]$ is called a signed measure if it satisfies the countable additivity or \text{\textsigma}-additivity: For all finite or countable infinite indexed family $(E_k)_{k\in K}$ of pairwise disjoint sets in $\Sigma$,
+\[\mu\left(\bigcup_{k\in K}E_k\right)=\sum_{k=1}^\infty\mu(E_k).\]
+This implies $\mu(\varnothing)=0$.
+
+If it also satisfies nonnegativity:
+\[\forall E\in\Sigma\colon\mu(E)\geq 0,\]
+it is called a measure or positive measure.
 \subsection{\text{\textsigma}-finite measure (\text{\textsigma}有限測度)}
 Let $(X,\Sigma)$ be a measurable space and $\mu$ be a positive measure or signed measure on it. $\mu$ is called a \text{\textsigma}-finite measure, if:
 \[\exists\{A_n\}_{n\in\mathbb{N}}\subseteq\Sigma\text{ s.t. }\forall n\in\mathbb{N}:\,\mu(A_n)<\infty\land\bigcup_{n\in\mathbb{N}}A_n=X.\]
