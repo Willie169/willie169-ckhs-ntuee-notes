@@ -40,18 +40,17 @@
 
 \tb{以數學歸納法證明：}
 \begin{proof}
-\[
-\begin{aligned}
-& \text{當\ } n=2, |A_1\bigcup A_2| = |A_1|+|A_2| - |A_1\cap A_2)\text{，命題成立；} \\
-& \text{假設當\ } n=k\geq 2, k \in \mathbb{N} \text{，命題成立，} \\
-& \text{則當\ } n=k+1,\\
-& \left| \bigcup_{i=1}^{k+1} A_i \right| \\
-& = \left| \left(\bigcup_{i=1}^k A_i\right)\cup A_{k+1} \right| \\
-& = \sum _{\varnothing \neq J\subseteq \{a|a \in \mathbb{N} \wedge 1\leq a\leq k+1\}}\left((-1)^{|J|-1}\cdot{\Biggl |}\bigcap _{j\in J}A_j{\Biggr |}\right) \\
-& \text{，命題亦成立。} \\
-& \text{由數學歸納法，得證。}
-\end{aligned}
-\]
+When $n=1$,
+\[|A_1|=|A_1|.\]
+When $n=2$,
+\[\abs{A_1\cup A_2}=\abs{A_1\setminus(A_1\cap A_2)}+\abs{A_2\setminus(A_1\cap A_2)}+\abs{A_1\cap A_2}=\abs{A_1}+\abs{A_2}-\abs{A_1\cap A_2}.\}
+Assume that is holds for $n\in\mathbb{N}_{\ge 2}$. For $n+1$,
+\[\ba
+\abs{\bigcup_{i=1}^{n+1}A_i}&=\abs{\bigcup_{i=1}^nA_i}+\abs{A_{n+1}}-\abs{\qty(\bigcup_{i=1}^nA_i)\cap A_{n+1}}\\
+&=\sum_{i=1}^n\abs{A_i}-\sum_{1\le i<j\le n}\abs{A_i\cap A_j}+\sum_{1\le i<j<k\le n}\abs{A_i\cap A_j\cap A_k}-\cdots+(-1)^{n+1}\abs{\bigcap_{i=1}^nA_i}+\abs{A_{n+1}}-\qty(\sum_{i=1}^n\abs{A_i\cap A_{n+1}}-\sum_{1\le i<j\le n}\abs{A_i\cap A_j\cap A_{n+1}}+\sum_{1\le i<j<k\le n}\abs{A_i\cap A_j\cap A_{n+1}}-\cdots+(-1)^{n+1}\abs{\qty(\bigcap_{i=1}^nA_i)\cap A_{n+1}})\\
+&=\sum_{i=1}^{n+1}\abs{A_i}-\sum_{1\le i<j\le n+1}\abs{A_i\cap A_j}+\sum_{1\le i<j<k\le n+1}\abs{A_i\cap A_j\cap A_k}-\cdots+(-1)^{n+2}\abs{\bigcap_{i=1}^{n+1}A_i}
+\ea\}
+By mathematical induction, the statement is true for all $n\in\mathbb{N}$.
 \end{proof}
 \subsection{階乘（Factorial）與伽瑪函數（Gamma function）}
 \sssc{階乘（Factorial）}
