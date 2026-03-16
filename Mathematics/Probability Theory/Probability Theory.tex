@@ -41,10 +41,9 @@ A probability value that is not supported by statistical data.
 \sssc{Conditional probability (條件機率)}
 The probability of another event $A$ occurring given that a certain event $B$ has occurred, denoted as $P(A|B)$.
 \[P(A|B)= \frac{P\qty(A\cap B)}{P\qty(B)}.\]
-\sssc{Repeated trials}
-A trial that consists of repeated independent trials. The probability of an event $A$ where events $A_i$ occured in each trial $i$ is $\prod_iP(A_i)$.
 \sssc{Probability space (機率空間)}
-A probability space $(\Omega,\Sigma,P)$ is a measure space of which $\Omega$ is the sample space of an experiment, $\Sigma$ is the event space of the experiment, and $P$ is the probability measure with $P(\Omega)=1$ that maps each event to the probability of it. The probability axioms are
+A probability space $(\Omega,\Sigma,P)$ is a measure space of which $\Omega$ is the sample space of an experiment, $\Sigma$ is the event space of the experiment, and $P$ is the probability measure with $P(\Omega)=1$ that maps each event to the probability of it.
+\sssc{Probability axioms or Kolmogorov axioms}
 \begin{enumerate}
 \item Nonnegativity:
 \[\forall E\in\Sigma\colon P(E)\geq 0.\]
@@ -85,6 +84,24 @@ Two or more events $A_1,A_2,\ldots,A_n$ are independent events iff:
 \[\forall J\subseteq\bbN_{\leq n}\land J\neq\varnothing\colon P\qty(\bigcap_{j\in J} A_j)=\prod_{j\in J}P\qty(A_j).\]
 \sssc{Random variable (隨機變數)}
 Given a probability space $(\Omega,\Sigma,P)$, a random variable $X$ is a measurable function $X\colon\Omega\to\bbR$ such that for each Borel set $B\subseteq\bbR$, the preimage $X^{-1}(B)\in\Sigma$. For each $x\in X(\Omega)$, $X=x$ denotes the event $\{\omega\in\Omega\mid X(\omega)=x\}$.
+PLACEHOLDER discrete satisfies X^{-1}(B)\in\Sigma?
+\sssc{Sequential experiment}
+A sequential experiment is an experiment that
+\bit
+\item Consists of two or more stages (also called subexperiment).
+\item Has outcomes at each stage, which may depend on the outcome of the previous stages.
+\item The overall outcome of the experiment is an ordered tuple of stage outcomes
+\[\omega=(\omega_1,\omega_2,\ldots,\omega_n).\]
+\eit
+\sssc{Tree diagram}
+Tree diagram is often used to represent the possible outcomes, in which the root is the beginning of the experiment, each branch represents a possible stage outcome, and a path from the root to a leaf represents a complete outcome of the sequential experiment. Conditional probabilities can be assigned to branches to compute the probability of each path as the product of the conditional probabilities of all branches in the path.
+
+
+
+
+
+
+
 
 
 
@@ -94,9 +111,6 @@ Given a probability space $(\Omega,\Sigma,P)$, a random variable $X$ is a measur
 If a random variable $X$ follows a probability distribution $P$, we write $X\sim P$.
 
 If the range of it is finite or countable infinite, it is called a discrete random variable; if the range of it is continuous, it is called a continuous random variable; if the range of it is continuous in some parts and discrete in others, it is called a mixed random variable.
-
-
-
 
 PLACEHOLDER
 discrete = weighted delta measure
