@@ -12,33 +12,16 @@
 \date{\temtoday}
 \titletocdoc
 \section{Combinatorics (組合數學)}
-\subsection{計數原理（Counting principle）/基本計數原理（Fundamental principle of counting）}
-\begin{itemize}
-\item \tb{窮舉法（Proof by exhaustion）}：將所有可能一一列舉出而計算數目的方法。
-\item \tb{樹狀圖（Tree structure）}：畫出樹狀圖列舉而計算數目的方法。
-\item \tb{乘法原理（Rule of product or multiplication principle）}：若有$a$種方法做事$A$，$b$種方法做事$B$，則合共有$a\cdot b$種方法做事$A\land B$。
-\item \tb{加法原理（Rule of sum or addition principle）}：若有$a$種方法做事$A$，$b$種方法做事$B$，則合共有$a+b$種方法做事$A\lor B$。
-\end{itemize}
-\ssc{冪集計數原理（Counting principle for power sets）}
-\[n(2^A)=2^{n\qty(A)}\]
-\ssc{排容原理/取捨原理（Principle of inclusion-exclusion or inclusion–exclusion principle, PIE）}
-\textit{Statement:}
+\subsection{Counting principle (計數原理) or Fundamental principle of counting (基本計數原理)}
+\sssc{Rule of sum or addition principle (加法原理)}
+If there are $a$ possible outcomes for an event (or ways to do something) and $b$ possible outcomes for another event (or ways to do another thing), and the two events cannot both occur (or the two things can't both be done), then there are $a+b$ total possible outcomes for the events (or total possible ways to do one of the things).
+\sssc{Rule of product or multiplication principle (乘法原理)}
+If there are $a$ possible outcomes for an experiment (or ways to do something) and $b$ possible outcomes for another experiment (or ways to do another thing), and the two experiments are independent (or the two things must both be done), then there are $a\cdot b$ total possible outcomes for the sequential experiment of the two experiments (or total possible ways to do both things).
+\sssc{Counting principle for power sets (冪集計數原理)}
+\[\abs{2^A}=2^{\abs{A}}\]
+\sssc{Principle of inclusion-exclusion or inclusion–exclusion principle, PIE (排容原理/取捨原理)}
+For indexed family $(A_i)_{i=1}^n$ with $n\in\bbN$,
 \[\abs{\bigcup_{i=1}^nA_i}=\sum_{J\subseteq\bbN_{\leq n}\land J\neq\varnothing}(-1)^{|J|+1}\abs{\bigcap_{j\in J}A_j}.\]
-
-\tb{以元素證明：}
-\begin{proof}
-\[
-\begin{aligned}
-& \left|\bigcup _{i=1}^n A_i\right| = \sum _{\varnothing \neq J\subseteq \{a|a \in \mathbb{N} \wedge 1\leq a\leq n\}}\left((-1)^{|J|-1}\cdot{\Biggl |}\bigcap _{j\in J}A_j{\Biggr |}\right) \\
-& \equiv 1_{\bigcup _{i=1}^n A_i} = \sum _{k=1}^{n}\left((-1)^{k-1}\cdot\sum _{I\subseteq \{a|a \in \mathbb{N} \wedge 1\leq a\leq n\} \wedge |I|=k}1_{A_{I}}\right) \\
-& \equiv \forall \left( x \in \bigcup_{i=1}^n A_i, m = \sum_{i: x \in A_i}1\right): 1 = \sum _{k=1}^{m}\left((-1)^{k-1}\sum _{I\subset \{a|a \in \mathbb{N} \wedge 1\leq a\leq m\} \wedge |I|=k}1\right) \\
-& \equiv \forall \left( x \in \bigcup_{i=1}^n A_i, m = \sum_{i: x \in A_i}1\right): {\binom{m}{0}} = \sum _{k=1}^{m}\left((-1)^{k-1}{\binom {m}{k}}\right) \\
-& \equiv \forall \left( x \in \bigcup_{i=1}^n A_i, m = \sum_{i: x \in A_i}1\right): (1-1)^m = 0
-\end{aligned}
-\]
-\end{proof}
-
-\tb{以數學歸納法證明：}
 \begin{proof}
 When $n=1$,
 \[|A_1|=|A_1|.\]
@@ -49,34 +32,42 @@ Assume that is holds for $n\in\mathbb{N}_{\ge 2}$. For $n+1$,
 \abs{\bigcup_{i=1}^{n+1}A_i}&=\abs{\bigcup_{i=1}^nA_i}+\abs{A_{n+1}}-\abs{\qty(\bigcup_{i=1}^nA_i)\cap A_{n+1}}\\
 &=\sum_{i=1}^n\abs{A_i}-\sum_{1\le i<j\le n}\abs{A_i\cap A_j}+\sum_{1\le i<j<k\le n}\abs{A_i\cap A_j\cap A_k}-\cdots+(-1)^{n+1}\abs{\bigcap_{i=1}^nA_i}+\abs{A_{n+1}}-\qty(\sum_{i=1}^n\abs{A_i\cap A_{n+1}}-\sum_{1\le i<j\le n}\abs{A_i\cap A_j\cap A_{n+1}}+\sum_{1\le i<j<k\le n}\abs{A_i\cap A_j\cap A_{n+1}}-\cdots+(-1)^{n+1}\abs{\qty(\bigcap_{i=1}^nA_i)\cap A_{n+1}})\\
 &=\sum_{i=1}^{n+1}\abs{A_i}-\sum_{1\le i<j\le n+1}\abs{A_i\cap A_j}+\sum_{1\le i<j<k\le n+1}\abs{A_i\cap A_j\cap A_k}-\cdots+(-1)^{n+2}\abs{\bigcap_{i=1}^{n+1}A_i}
-\ea\}
+\ea\]
 By mathematical induction, the statement is true for all $n\in\mathbb{N}$.
 \end{proof}
-\subsection{階乘（Factorial）與伽瑪函數（Gamma function）}
-\sssc{階乘（Factorial）}
-\[n! = \begin{cases}\prod_{i=1}^n i, & \text{if } n \in \mathbb{N}, \\1, & \text{if } n = 0.\end{cases}\]
-\sssc{伽瑪函數（Gamma function）}
-階乘函數在正實部複數域上的擴展。
-\[\Gamma(z) = \int_0^{\infty} t^{z-1} e^{-t} \, \mathrm{d}t, \quad \Re(z) > 0\]
-其中$\Re(z)$指$z$之實部。
-
-特別地，對於正實數$z$：
-\[\Gamma(z) = (z-1)!\]
+\sssc{Pigeonhole principle (鴿籠原理/鴿洞原理/鴿巢原理) or Dirichlet's drawer principle (狄利克雷抽屜原理)}
+Given $n,k\in\bbN$, if $k$ pigeons fly into $n$ cages, then there must be at least one cage containing at least $\lceil\frac{k}{n}\rceil$ pigeons.
+\sssc{Generalized pigeonhole principle}
+Given $n,k_1,k_2,\ldots,k_n\in\bbN$, if $\sum_{i=1}^nk_i-n+1$ pigeons fly into $n$ cages, then there exists at least one $i\in\bbN_{\le n}$ such that the $i$th cage contains at least $k_i$ pigeons.
+ \subsection{Factorial (階乘)}
+\sssc{Factorial}
+\[n!\coloneq\prod_{i=1}^ni,\quad n\in\bbN_0.\]
+\sssc{Falling factorial}
+\[(n)_m\coloneq\prod_{i=0}^{m-1}(n-i),\quad n\in\bbC\land m\in\bbN.\]
+\ssc{Gamma function (伽瑪函數)}
+\sssc{Definition}
+\[\Gamma(z)\coloneq\int_0^{\infty}t^{z-1}e^{-t}\dd{t},\quad\Re(z)>-1.\]
+The integral diverges if $\Re(z)\leq -1$.
 \begin{proof}
 PLACEHOLDER
 \end{proof}
-The integral diverges if $\Re(z)\leq 0$.
+\sssc{Recurrence}
+\[\Gamma(z+1)=z\Gamma(z),\quad\Re(z)>-1.\]
 \begin{proof}
 PLACEHOLDER
 \end{proof}
-\subsection{排列（Permutation）}
+For $z\in\bbN$,
+\[\Gamma(z)=(z-1)!.\]
+For $m\in\bbN\land z\notin\bbN_{\le m}$,
+\[\frac{\Gamma(z)}{\Gamma(z-m)}=(z-1)_m.\]
+\subsection{直線排列}
 \sssc{盡相異物排列}
 從$n$相異物中取$m$個排成一直列（$0\leq m\leq n$），正逆序視為二，其排列總數$P_m^n=\frac{n!}{\qty(n-m)!}$。
 \sssc{不盡相異物排列}
 設有$n$物，共有$k$種，第$i$種有$m_i$個。全取排成一直列，正逆序視為二，其排列總數為$\frac{n!}{\prod_{i=1}^n m_i!}$。
 \sssc{盡相異物重複排列}
 從$n$類相異物中，任取$m$個排成一直列，正逆序視為二，其中每類物品的個數均不小於$m$且可重複選取，其排列總數為$n^m$。
-\subsection{錯排（Derangement）}
+\sssc{錯排（Derangement）}
 $n$相異物全取作直線排列，其中$m$物（$m\leq n$）依次被限制不能排列於相異單一指定位置之排列，其方法數稱$D_m^n$；當$m=n$，錯排方法數稱$D_n$。
 \subsubsection{全錯排}
 \tb{遞迴式}：
@@ -127,43 +118,110 @@ R &= \sum_{j=0}^q \left((-1)^j \cdot \sum_{\left|Y\right|=j} \frac{\left(\sum_{i
 \]
 \end{itemize}
 \end{itemize}
-\subsection{組合數（Combinatorics）}
-組合數記作$\binom{n}{m}$或$C_m^n$。
-\subsubsection{組合數非負整數域定義}
-從$n$相異物中每次取$m$個為一組（$0 \leq m \leq n, m,n \in \mathbb{N}_0$）之組合數，即：
-\[\binom{n}{m} = \frac{n!}{m!\qty(n-m)!}, \quad 0 \leq m \leq n\land m,n \in \mathbb{N}_0.\]
-\subsubsection{組合數非負實數域定義}
-\[\binom{n}{m} = \frac{\prod_{i=0}^{m-1} \left(n-i\right)}{m!}, \quad 0 \leq m \leq n\land m \in \mathbb{N}_0\land n \in \mathbb{R}_{\geq 0}.\]
-\subsubsection{組合數實數域定義}
-\[\binom{n}{m} = 
-\begin{cases}
-& \frac{\prod_{i=0}^{m-1} \left(n-i\right)}{m!}, \quad 0 \leq m \leq n\land m \in \mathbb{N}_0\land n \in \mathbb{R}_{\geq 0},\\
-& (-1)^m \cdot \binom{-n+m-1}{m}, \quad 0 \leq m \leq -n+m-1\land m \in \mathbb{N}_0\land n \in \mathbb{R}_{<0}.
-\end{cases}\]
-\subsubsection{組合數大於負一複數域定義}
-\[\binom{n}{m} = \frac{\Gamma(n+1)}{\Gamma(m+1)\Gamma(n-m+1)}, \quad 0 \leq \Re(m) \leq \Re(n)\land m,n\in\mathbb{C}\land \Re(n),\Re(m),\Re(n-m) \in \mathbb{R}_{>-1}.\]
-\subsubsection{組合數複數域定義}
-\[\begin{aligned}
-&\binom{n}{m} \\
-=& \begin{cases}
-\frac{\Gamma(n+1)}{\Gamma(m+1)\Gamma(n-m+1)}, \quad & 0 \leq \Re(m) \leq \Re(n)\land m,n\in\mathbb{C}\land \Re(n),\Re(m),\Re(n-m) \in \mathbb{R}_{>-1},\\
-(-1)^m \cdot\binom{-n+m-1}{m}, \quad & 0 \leq \Re(m) \leq \Re(-n+m-1)\land m,n\in\mathbb{C}\land\Re(-n+m),\Re(m+1),\Re(-n) \in \mathbb{R}_{>0}.
-\end{cases}
-\end{aligned}\]
-\sssc{二項式定理（Binomial theorem）}
-\[\begin{aligned}
-& (a+b)^n,\quad a,b,n\in\mathbb{C}\land a+b\neq 0\\
-=& \begin{cases}
-& \sum_{m=0}^n \binom{n}{m} \cdot a^m \cdot b^{n-m},\quad\Re(n)\in\mathbb{N}_0,\\
-& \sum_{m=0}^{\infty} \binom{n}{m} \cdot a^m \cdot b^{n-m},\quad\Re(n)\notin\mathbb{N}_0\land\text{\ 此表達式收斂}.
-\end{cases}\end{aligned}\]
-\sssc{多項式定理（Multinomial theorem）}
+\ssc{Choose with replacement}
+Choose with replacement refers to a selection process where each item can be selected multiple times, because after you pick an item, you put it back before the next pick.
+\sssc{Distinguishable objects choose with replacement}
+The number of ways to choose with replacement $m$ objects out of $n$ distinguishable objects is
+\[m^n.\]
+\subsection{Binomial coefficients (二項次係數) or combinations (組合數)}
+Below, we will define binomial coefficient $\binom{n}{m}$, also known as combination $C_m^n$, called $n$ choose $m$.
+\subsubsection{Nonnegative integer}
+The number of ways to choose $m$ objects out of $n$ distinguishable objects is
+\[\frac{n!}{m!(n-m)!}.\]
+For all $n,m\in\bbN_0$, define
+\[\binom{n}{m}=\bcs
+\frac{n!}{m!(n-m)!},\quad&m\le n\\
+0,\quad&\tx{otherwise}
+\ecs.\]
+\subsubsection{Complex number $n$ and nonnegative integer $m$}
+For all $n\in\bbC$ and $m\in\bbN_0$, define
+\[\binom{n}{m}=\frac{\prod_{i=0}^{m-1}(n-i)}{m!}.\]
+It satisfies
+\[\binom{n}{m}=(-1)^m\cdot\binom{-n+m-1}{m}.\]
+\subsubsection{$\Re(m),\Re(n-m)>-1$}
+For all $n,m\in\bbC$ with $\Re(m),\Re(n-m)>-1$,
+\[\binom{n}{m}=\frac{\Gamma(n+1)}{\Gamma(m+1)\Gamma(n-m+1)}.\]
+\subsubsection{Complex number}
+For all $n,m\in\bbC$,
+\[\binom{n}{m}=\bcs
+\frac{\Gamma(n+1)}{\Gamma(m+1)\Gamma(n-m+1)},\quad&\Re(m),\Re(n-m)>-1\\
+(-1)^m\cdot\binom{-n+m-1}{m},\quad&\Re(n)\le -1\\
+0,\quad&\tx{otherwise}
+\ecs.\]
+\subsubsection{Binomial theorem (二項式定理)}
+For $m,x\in\bbC$, if either 
+\bit
+\item $|x|<1$, or
+\item $-1<\Re(m)$ and $x=1$, or
+\item $m\ge 0$ and $|x|=1$, or
+\item $m\in\bbN_0$,
+\eit
+\[\qty(1+x)^m=\sum_{n=0}^{\infty}\binom{m}{n}x^n,\]
+where the RHS is called binomial series.
+\bpr
+PLACEHOLDER
+\epr
+\ssc{Multinomial coefficient}
+\subsubsection{Nonnegative integer}
+The number of ways to partition $n$ distinguishable objects into $m$ labeled groups with size $n_1,n_2,\ldots,n_m$ is
+\[\frac{n!}{\prod_{i=1}^mn_i!}.\]
+For all $n,m,n_1,n_2,\ldots,n_m\in\bbN_0$ with $\sum_{i=1}^mn_i=n$, define
+\[\binom{n}{n_1,n_2,\ldots,n_m}=\bcs
+\frac{n!}{\prod_{i=1}^mn_i!},\quad&m\le n\\
+0,\quad&\tx{otherwise}
+\ecs.\]
+The number of ways to partition $k$ of $n$ distinguishable objects into $m$ labeled groups with size $n_1,n_2,\ldots,n_m$ is
+\[\frac{(n)_k}{\prod_{i=1}^mn_i!}.\]
+For all $n,m,n_1,n_2,\ldots,n_m\in\bbN_0$, let $k=\sum_{i=1}^mn_i\le n$, define
+\[\binom{n}{n_1,n_2,\ldots,n_m}=\bcs
+\frac{(n)_k}{\prod_{i=1}^mn_i!},\quad&m\le n\\
+0,\quad&\tx{otherwise}
+\ecs.\]
+\subsubsection{Complex number $n$ and nonnegative integer $n_i$}
+For all $n\in\bbC$ and $m,n_1,n_2,\ldots,n_m\in\bbN_0$, let $k=\sum_{i=1}^mn_i$, define
+\[\binom{n}{n_1,n_2,\ldots,n_m}=\frac{(n)_k}{\prod_{i=1}^mn_i!}.\]
+It satisfies
+\[\binom{n}{n_1,n_2,\ldots,n_m}=(-1)^k\cdot\binom{-n+m-1}{n_1,n_2,\ldots,n_m}.\]
+\subsubsection{$\Re(n_i),\Re(n-k)>-1$}
+For all $m\in\bbN_0$ and $n,n_1,n_2,\ldots,n_m\in\bbC$ with $\Re(n_i),\Re(n-k)>-1$, let $k=\sum_{i=1}^mn_i$, define
+\[\binom{n}{n_1,n_2,\ldots,n_m}=\frac{\Gamma(n+1)}{\prod_{i=1}^m\Gamma(n_i+1)\Gamma(n-k+1)}.\]
+\subsubsection{Complex number}
+For all $m\in\bbN_0$ and $n,n_1,n_2,\ldots,n_m\in\bbC$, let $k=\sum_{i=1}^mn_i$, define
+\[\binom{n}{n_1,n_2,\ldots,n_m}=\bcs\frac{\Gamma(n+1)}{\prod_{i=1}^m\Gamma(n_i+1)\Gamma(n-k+1)},\quad&\Re(n_i),\Re(n-k)>-1\\
+(-1)^k\cdot\binom{-n+m-1}{n_1,n_2,\ldots,n_m},\quad&\Re(n_i),\Re(-n+m-1-k)>-1\\
+0,\quad&\tx{otherwise}
+\ecs.\]
+PLACEHOLDER: Multinomial theorem
+\subsubsection{Multinomial theorem (多項式定理)}
+For $m,x\in\bbC$, if either 
+\bit
+\item $|x|<1$, or
+\item $-1<\Re(m)$ and $x=1$, or
+\item $m\ge 0$ and $|x|=1$, or
+\item $m\in\bbN_0$,
+\eit
+\[\qty(1+x)^m=\sum_{n=0}^{\infty}\binom{m}{n}x^n,\]
+where the RHS is called binomial series.
+\bpr
+PLACEHOLDER
+\epr
+
+
+
+
+old:
 \[\begin{aligned}
 &\left(\sum_{i=1}^mx_i\right)^n,\quad x_i,n\in\mathbb{C}\land\sum_{i=1}^mx_i\neq 0\\
 =& \begin{cases}
 & \sum_{\substack{\sum_{i=1}^mk_i=n\\k_i\in\mathbb{N}_0}}\frac{n!}{\prod_{i=1}^n(k_i!)}\prod_{i=1}^nx_i^{\phantom{i}k_i},\quad \Re(n)\in\mathbb{N}_0,\\
 & \sum_{k_i\in\mathbb{N}_0}\frac{\Gamma(n+1)}{\prod_{i=1}^n\Gamma(k_i+1)}\prod_{i=1}^nx_i^{\phantom{i}k_i},\quad\Re(n)\notin\mathbb{N}_0\land\text{\ 此表達式收斂}.
 \end{cases}\end{aligned}\]
+PLACEHOLDER
+
+
+
+
+
 \sssc{范德蒙恆等式（Vandermonde identity）}
 \[\sum_{k=0}^n\binom{n}{k}^2=\binom{2n}{n}.\]
 \begin{proof}\mbox{}\\
