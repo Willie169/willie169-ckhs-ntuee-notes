@@ -8,7 +8,7 @@
 \date{\temtoday}
 \titletocdoc
 \sct{Probability Theory (機率論)}
-\subsection{Basics}
+\subsection{Basic definitions}
 \sssc{(Random) Experiment or Trial (（隨機）試驗)}
 A (random) experiment or trial is a test that has repeatability, that is, the test can be repeated under the same conditions, and randomness, that is, the results of each test may be different.
 \sssc{(Elementary) outcome and sample space (樣本空間)}
@@ -53,15 +53,30 @@ The probability of another event $A$ occurring given that a certain event $B$ ha
 \[P(A|B)= \frac{P\qty(A\cap B)}{P\qty(B)}.\]
 \sssc{Mutually exclusive events (互斥事件)}
 Two or more events $A_1,A_2,\ldots,A_n$ are mutually exclusive events iff:
-\[\forall J\neq\varnothing\land J\subseteq\{a\mid a\in\mathbb{N}\land 1\leq a\leq n\}\colon P\qty(\bigcap_{j\in J} A_j)=0.\]
-\sssc{Independent events (獨立事件)}
-Two or more events $A_1,A_2,\ldots,A_n$ are independent events iff:
+\[\forall i,j\in\bbN_{\le n}\land i\ne j\colon P(A_i\cap A_j)=0.\]
+\sssc{(Mutually) independent events (獨立事件)}
+Two or more events $A_1,A_2,\ldots,A_n$ are (mutually) independent events iff:
 \[\forall J\subseteq\bbN_{\leq n}\land J\neq\varnothing\colon P\qty(\bigcap_{j\in J} A_j)=\prod_{j\in J}P\qty(A_j).\]
+\sssc{Sequential experiment}
+A sequential experiment is an experiment that
+\bit
+\item Consists of two or more experiments called subexperiments or stages.
+\item Has outcomes at each stage, which may depend on the outcome of the previous stages.
+\item The overall outcome of the experiment is an ordered tuple of stage outcomes
+\[\omega=(\omega_1,\omega_2,\ldots,\omega_n).\]
+\eit
+\sssc{Tree diagram}
+Tree diagram is often used to represent the possible outcomes, in which the root is the beginning of the experiment, each branch represents a possible stage outcome, and a path from the root to a leaf represents a complete outcome of the sequential experiment. Conditional probabilities can be assigned to branches to compute the probability of each path as the product of the conditional probabilities of all branches in the path.
+\sssc{Independent trials}
+Independent trials are identical subexperiments in a sequential experiment. The probability space of all the subexperiments are identical and independent of the outcomes of previous subexperiments. Let an event of the sequential experiment be
+\[\omega=(\omega_1,\omega_2,\ldots,\omega_n),\]
+then
+\[P(\omega)=\prod_{i=1}^nP(\omega_i).\]
+\sssc{Reliability theory}
+A system is in series if all components work iff the system work.
+
+A system is in parallel if at least one component works iff the system work.
 \ssc{Counting principle (計數原理) or fundamental principle of counting (基本計數原理)}
-\sssc{Rule of sum or addition principle (加法原理)}
-If events $A$ and $B$ are mutually exclusive, $P(A)+P(B)=P(A\cup B)$.
-\sssc{Rule of product or multiplication principle (乘法原理)}
-If events $A$ and $B$ are independent, $P(A)\cdot P(B)=P(A\cap B)$.
 \sssc{Complement principle}
 \[P(A')=1-P(A).\]
 \sssc{De Morgan's laws}
@@ -92,34 +107,20 @@ Let $(A_i)_{i=1}^n\subseteq\Sigma$ be a partition, and $B$ be an event. Then
 \sssc{Bayes' theorem (貝葉斯定理或貝氏定理)}
 Let $(A_i)_{i=1}^n\subseteq\Sigma$ be a partition, and $B$ be an event. Then,
 \[P\qty(A_k\mid B)=\frac{P\qty(B|A_k)P(A_k)}{\sum_{i=1}^nP\qty(B\mid A_i)P(A_i)}.\]
-\ssc{Sequential experiment}
-\sssc{Sequential experiment}
-A sequential experiment is an experiment that
-\bit
-\item Consists of two or more experiments called subexperiments or stages.
-\item Has outcomes at each stage, which may depend on the outcome of the previous stages.
-\item The overall outcome of the experiment is an ordered tuple of stage outcomes
-\[\omega=(\omega_1,\omega_2,\ldots,\omega_n).\]
-\eit
-\sssc{Tree diagram}
-Tree diagram is often used to represent the possible outcomes, in which the root is the beginning of the experiment, each branch represents a possible stage outcome, and a path from the root to a leaf represents a complete outcome of the sequential experiment. Conditional probabilities can be assigned to branches to compute the probability of each path as the product of the conditional probabilities of all branches in the path.
-\sssc{Independent trials}
-Independent trials are identical subexperiments in a sequential experiment. The probability space of all the subexperiments are identical and independent of the outcomes of previous subexperiments. Let an event of the sequential experiment be
-\[\omega=(\omega_1,\omega_2,\ldots,\omega_n),\]
-then
-\[P(\omega)=\prod_{i=1}^nP(\omega_i).\]
+\ssc{Independence theorems}
+\sssc{Product rule}
+If events $A$ and $B$ are independent, $P(A)\cdot P(B)=P(A\cap B)$.
+\sssc{Complement independence}
+If $A_1,A_2,\ldots,A_n$ are independent, then they, with arbitrary ones replaced with their complement, are still independent.
+\sssc{Pairwise and mutal}
+Pairwise independence is implied by but do not imply mutual independence.
 \sssc{Multinominal distribution}
 Suppose a subexperiment has sample space $S=\{s_0,s_1,\ldots,s_{m-1}\}$ with $P(s_i)=p_i$. For $n=\sum_{i=0}^{m-1}n_i$ independent trials, the probability of $n_i$ occurrences of $s_i$ is
 \[\binom{n}{n_0,n_1,\ldots,n_{m-1}}\prod_{i=0}^{m-1}p_i^{\pht{i}n_i}.\]
-\ssc{Reliability theory}
-\sssc{Series}
-A system is in series if all components work iff the system work.
-
+\sssc{Components in series}
 Suppose a system $W$ consists of components $W_1,W_2,\ldots,W_n$ in series with probability to work $p_1,p_2,\ldots,p_n$, then the probability for the system to work is
 \[P(W)=\prod_{i=1}^np_i.\]
-\sssc{Parallel}
-A system is in parallel if at least one component works iff the system work.
-
+\sssc{Components in parallel}
 Suppose a system $W$ consists of components $W_1,W_2,\ldots,W_n$ in parallel with probability to work $p_1,p_2,\ldots,p_n$, then the probability for the system to work is
 \[P(W)=1-\prod_{i=1}^n(1-p_i).\]
 
