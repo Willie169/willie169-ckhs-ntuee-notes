@@ -52,8 +52,8 @@ The number of arguments taken by a function. A function with arity of zero is ca
 
 A function of $n$ real variables $x_1,x_2,\ldots,x_n$ is used interchangeablely with a function of a vector variable $\mb{x}=(x_1,x_2,\ldots,x_n)$ in $\bbR^n$.
 \subsection{Restriction and extension (延拓)}
-We say that a function $f\colon X\to Y$ is an extension of another function $g\colon U\subseteq X\to Y$ and that $g$ is a restriction of $f$ iff $\forall u\in U\colon f(u)=g(u)$.
-
+We say that a function $f\colon X\to Y$ is an extension of another function $g\colon U\subseteq X\to Y$ to $X$ and that $g$ is a restriction of $f$ to $U$ iff $\forall u\in U\colon f(u)=g(u)$. If $Y$ has zero element $0$, the trivial extension of $g$ to $X$ is $h\colon X\to Y$ defined as
+\[h(x)=\bcs g(x),\quad&x\in U\\0,\quad&x\in X\setminus U\ecs.\]
 Let $f\colon X\to Y$ be a function and $I$ be a set. $f\vert_I$ or $f\upharpoonright I$ is defined as a function $f\vert_I\colon I\cap X\to Y$ such that for every $x\in I\cap X$, $f\vert_I(x)=f(x)$.
 \subsection{Property in a variable}
 Unless otherwise specified, given a property $P$ defined for a function $f(w_1,\dots w_n,x,y_1,\dots y_n)$ in which $w_1,\dots w_n,x,y_1,\dots y_n$ are independent variables, we say $f$ is with property $P$ in $x$ if the function $g(x)$ that is defined to map $x$ to $f(w_1,\dots w_n,x,y_1,\dots y_n)$ for any $x$ such that $w_1,\dots w_n,x,y_1,\dots y_n$ is in the domain of $f$ for any fixed $w_1,\dots w_n,y_1,\dots y_n$ is with property $P$.
@@ -61,8 +61,6 @@ Unless otherwise specified, given a property $P$ defined for a function $f(w_1,\
 Unless otherwise specified, given a property $P$ defined for a function $f(w_1,\dots w_n,x,y_1,\dots y_n)$ in which $w_1,\dots w_n,x,y_1,\dots y_n$ are independent variables, we say $f$ is with property $P$ in $x$ for a fixed $w_1,\dots w_n,y_1,\dots y_n$ if the function $g(x)$ that is defined to map $x$ to $f(w_1,\dots w_n,x,y_1,\dots y_n)$ for any $x$ such that $w_1,\dots w_n,x,y_1,\dots y_n$ is in the domain of $f$ is with property $P$.
 
 Unless otherwise specified, given a property $P$ defined for a function $f(w_1,\dots w_n,x,y_1,\dots y_n)$ in which $w_1,\dots w_n,x,y_1,\dots y_n$ are independent variables, we say $f$ is with property $P$ in $x$ at a point $w_1,\dots w_n,x_0,y_1,\dots y_n$ in the domain of $f$ if there exists a neighbourhood $X$ of $x_0$ such that the function $g(x)$ that is defined to map $x$ to $f(w_1,\dots w_n,x,y_1,\dots y_n)$ for any $x\in X$ such that $w_1,\dots w_n,x,y_1,\dots y_n$ is in the domain of $f$ is with property $P$.
-\subsection{Indicator function (指示函數或示性函數) or characteristic function (特徵函數)}
-An indicator function or a characteristic function of a subset $A$ of a set $X$ is a function that maps elements of the subset to one, and all other elements to zero, often denoted as $1_A$.
 \subsection{(Indexed) family}
 An indexed family is a function $f$ from a set $I$ called index set to a set. $f(i)$ for any $i\in I$ is denoted as $x_i$. The image of $f$ is denoted as $(x_i)_{i\in I}$ or $\{x_i\}_{i\in I}$, or $(x_i)$ or $\{x_i\}$ if $I$ is assumed to be known, often $\bbN_0$ or $\bbN$.
 \subsection{Sequences (數列)}
@@ -257,7 +255,7 @@ We say a real series $S_n=\sum_{i=1}^{\infty}a_i$ converges absolutely to $L$ if
 \subsection{Of real-valued net}
 Below, we will discuss limits of nets in the set of real number.
 \subsubsection{Limit}
-For a real-valued net $\langle x_a\rangle_{a\in A}$ in which $A$ is a directed set, the limit of $\langle x_a\rangle_{a\in A}$ is denoted as $\lim_a x_a$. For $L\in\bbR$:
+For a real-valued net $\langle x_a\rangle_{a\in A}$ in which $A$ is a directed set, the limit of $\langle x_a\rangle_{a\in A}$ is denoted as $\lim_a x_a$ or $\lim_{a\to\infty} x_a$. For $L\in\bbR$:
 \[\lim_ax_a = L \equiv \forall \varepsilon > 0:\, \exists a_0 \in A\text{\ s.t.\ } a\in A\land a\ge a_0\implies |x_a - L| < \varepsilon.\]
 
 If such $a_0$ exists for some $L\in\bbR$, we say the limit exists or the net converges to $L$; otherwise, we say the limit doesn't exist.
@@ -1489,9 +1487,27 @@ in which the first degree one is also called linear approximation, or linearizat
 is called remainder.
 
 Taylor polynomial of at $0$ is called Maclaurin polynomial.
+\ssc{Graph}
+\sssc{Level curve, level slice, or contour line}
+For a real-valued function $f$ of two variables, the level curve of $f$ at level $k\in\bbR$ is defined as the set of $\mb{x}$ such that
+\[f(\mb{x})=k.\]
+\sssc{Contour map or contour plot}
+Contour map or contour plot is the graphical representation of the level curves of a function of two variable, typical represented with a collection of level curves labelled with corresponding levels that are often of same difference relative to their adjacent curves, or with color or height ($z$-axis) showing function value at all points.
+\sssc{Level surface}
+For a real-valued function $f$ of three variables, the level surface of $f$ at level $k\in\bbR$ is defined as the set of $\mb{x}$ such that
+\[f(\mb{x})=k.\]
+\sssc{Gradient perpendicular to tangent of level}
+For function $F(\mb{x})\colon D\subseteq\bbR^n\to\bbR$, suppose $\mb{r}(t)$ is any parameterized curve lies on $F(\mb{x})=k$, then
+\[\nabla F\cdot\mb{r}'=0.\]
+\sssc{Tangent flat}
+For function $F(\mb{x})\colon D\subseteq\bbR^n\to\bbR$, for each point $\mb{x}_0\in D$, the tangent flat of $F$ at it is given by
+\[\nabla F\cdot(\mb{x}-\mb{x}_0)=0.\]
+\sssc{Normal line}
+For function $F(\mb{x})\colon D\subseteq\bbR^n\to\bbR$, for each point $\mb{x}_0\in D$, the normal line of $F$ at it is given by
+\[\mb{x}(t)=t\nabla F(\mb{x}_0)+\mb{x}_0,\quad t\in\bbR.\]
 \subsection{Line integral (線積分) or Path integral (路徑積分)}
 \subsubsection{Definition}
-For a parameterized curve $\gamma(t)\colon[a,b]\to\bbR^n$ that is piecewise $C^1$, the line integral of a function $f$ defined on the image of $\gamma$ over $\gamma$ is defined as the Riemann–Stieltjes integral:
+For a parameterized simple curve $\gamma(t)\colon[a,b]\to\bbR^n$ that is piecewise $C^1$, the line integral of a function $f$ defined on the image of $\gamma$ over $\gamma$ is defined as the Riemann–Stieltjes integral:
 \[\int_{\gamma}f(\mb{x})\dd{\mb(x)}\coloneq\int_{t=a}^bf(\gamma(t))\dd{\gamma(t)},\]
 In which $\gamma$ is called the integral path.
 
@@ -1516,24 +1532,23 @@ wherever it is defined.
 \[\nabla\times f(\mb{x})=0\]
 for all $\mb{x}\in U$.
 \eit
-\ssc{Graph}
-\sssc{Level curve, level slice, or contour line}
-For a real-valued function $f$ of two variables, the level curve of $f$ at level $k\in\bbR$ is defined as the set of $\mb{x}$ such that
-\[f(\mb{x})=k.\]
-\sssc{Contour map or contour plot}
-Contour map or contour plot is the graphical representation of the level curves of a function of two variable, typical represented with a collection of level curves labelled with corresponding levels that are often of same difference relative to their adjacent curves, or with color or height ($z$-axis) showing function value at all points.
-\sssc{Level surface}
-For a real-valued function $f$ of three variables, the level surface of $f$ at level $k\in\bbR$ is defined as the set of $\mb{x}$ such that
-\[f(\mb{x})=k.\]
-\sssc{Gradient perpendicular to tangent of level}
-For function $F(\mb{x})\colon D\subseteq\bbR^n\to\bbR$, suppose $\mb{r}(t)$ is any parameterized curve lies on $F(\mb{x})=k$, then
-\[\nabla F\cdot\mb{r}'=0.\]
-\sssc{Tangent flat}
-For function $F(\mb{x})\colon D\subseteq\bbR^n\to\bbR$, for each point $\mb{x}_0\in D$, the tangent flat of $F$ at it is given by
-\[\nabla F\cdot(\mb{x}-\mb{x}_0)=0.\]
-\sssc{Normal line}
-For function $F(\mb{x})\colon D\subseteq\bbR^n\to\bbR$, for each point $\mb{x}_0\in D$, the normal line of $F$ at it is given by
-\[\mb{x}(t)=t\nabla F(\mb{x}_0)+\mb{x}_0,\quad t\in\bbR.\]
+\ssc{Multiple integral}
+\sssc{Lebesgue integral}
+Defined via product measure space.
+\sssc{Riemann integral}
+For rectangle
+\[R=\prod_{i=1}^n[x_{i0},x_{i1}],\]
+and function $f$ bounded on $R$,
+\[\int_Rf(\mb{x})\dd{V}\coloneq\lim_{(m_1,m_2,\ldots,m_n)\to\infty}\qty(\sum_{j_i=1}^{m_i})_{i=1}^nf\qty(\mb{x}_{(j_i)_{i=1}^n}*)\Delta V,\]
+called multiple Riemann sum, where
+\[\Delta x_i=\frac{\qty(x_{i1}-x_{i0})}{m_i},\]
+\[\Delta V=\prod_{i=1}^n\Delta x_i,\]
+and $\mb{x}_{(j_i)_{i=1}^n}*$ is an arbitrary chosen sample point in
+\[\prod_{i=1}^n\qty[x_{i0}+\qty(j_i-1)\Delta x_i,x_{i0}+j_i\Delta x_i.\]
+For arbitrary subset $E\subseteq R$ and function $g$ bounded on $E$, let $h$ be the trivial extension of $g_E$ to $R$,
+\[\int_Eg(\mb{x})\dd{V}\coloneq\int_Rh(\mb{x})\dd{V}.\]
+\sssc{Iterated integral}
+An integral whose integrand is an integral.
 
 
 \section{Continuity Theorems}
@@ -1799,7 +1814,7 @@ If real-valued net $\langle x_a\rangle_{a\in A}$ with $\lim_ax_a=L\in\bbR$, then
 \[\lim_af(x_a)=f(L).\]
 If real-valued net $\langle x_a\rangle_{a\in A}$ with $\lim_ax_a=\pm\infty$, then for any real-valued function $f$ such that $\lim_{x\to\pm\infty}f(x)=L\in\bbR\cup\{-\infty,\infty\}$,
 \[\lim_af(x_a)=L.\]
-\subsubsection{Monotone Convergence Theorem (單調收斂定理)}
+\subsubsection{Monotone Convergence Theorem (MCT) (單調收斂定理)}
 For any nonempty, non-decreasing net of real numbers $\langle a_n\rangle_{n\in A}$, it is bounded-above iff it converges to a real number, and its limit is its supremum.
 \begin{proof}
 $\Rightarrow$ direction:
@@ -3566,10 +3581,33 @@ Let $X$ be an open subset of $\mathbb{R}$, and $\Omega$ be a measure space. Supp
 Then, for all $x\in X$,
 \[\dv{}{x}\int_{\Omega}f(x,\omega)\dd{\omega}=\int_{\Omega}\pdv{f}{x}\qty(x,\omega)\dd{\omega}.\]
 \subsection{Fubini's theorem (富比尼定理)}
-If a function is Lebesgue integrable on $X\times Y$, then:
-\[\iint_{X\times Y}f(x,y)\dd{(x,y)}=\int_X\qty\int_Yf(x,y)\dd{y}\dd{x}=\int_Y\int_Xf(x,y)\dd{x}\dd{y}.\]
+If real-valued function $f\in L^1(X\times Y)$, then:
+\[\int_{X\times Y}f(x,y)\dd{(x,y)}=\int_X\int_Yf(x,y)\dd{y}\dd{x}=\int_Y\int_Xf(x,y)\dd{x}\dd{y}.\]
 \bpr
-PLACEHOLDER
+For nonnegative simple function, it is obvious.
+
+For a nonnegative measurable function $f$, construct a monotone series of nonnegative simple functions $f_n$ that converges pointwise to $f$:
+\[f_n=\sum_{k=0}^{2^nn-1}\frac{k}{2^n}\cdot\mb{1}_{\left\{x\mid\frac{x}{2^n}\le f(x)<\frac{k+1}{2^n}\right\}}(x)+n\cdot 1_{\{x\mid f(x)\ge n\}}(x)\]
+with
+\[\lim_{n\to\infty}f_n=f.\]
+By monotone convergence theorem, the statement holds for all nonnegative measurable functions.
+
+For measurable function, define
+\[\begin{aligned}
+f^{+}(x)&=
+\begin{cases}
+f(x),\quad&\text{if\ }f(x)>0\\
+0,\quad &\text{otherwise}
+\end{cases},\quad\tx{and}\\
+f^{-}(x)&=
+\begin{cases}
+-f(x),\quad&\text{if\ }f(x)<0\\
+0,\quad&\text{otherwise}
+\end{cases}.
+\end{aligned}\]
+Note that both $f^+$ and $f^-$ are nonnegative and that
+\[f=f^+-f^-,\quad |f|=f^++f^-.\]
+Thus, the statement holds for all measurable functions.
 \epr
 \subsection{(Lebesgue's) Dominated convergence theorem (DCT) (（勒貝格）控制/受制收斂定理)}
 Let $\langle f_n\rangle_{n\in I}$ be a net of real or complex-valued measurable functions on a measure space $(S,\Sigma,\mu)$. If $f_n$ is almost everywhere pointwise convergent to a function $f$, and there is a Lebesgue-integrable function $g$ such that
