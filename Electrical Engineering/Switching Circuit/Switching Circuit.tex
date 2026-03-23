@@ -197,8 +197,8 @@ Two binary numbers in a binary encoding are called (gray) adjacent iff they diff
 \sssc{Reflected binary code (RBC), reflected binary (RB), or (reflecting) gray code}
 Let the $n$-bit gray code be denoted as $G_n$ for all $n\in\bbN_0$, and integer $0\leq m\leq 2^n-1$ in $G_n$ be denoted as $G_n(m)$. The gray code is defined as follows:
 \[G_0(0)=\varepsilon,\]
-\[\forall n\in\bbN\colon\forall m\in\bbN_0\land m<2^{n-1}\colon G_n(m)=0G_{n-1)(m),\]
-\[\forall n\in\bbN\colon\forall m\in\bbN_0\land m\geq 2^{n-1}\colon G_n(m)=1G_{n-1)\qty(m-2^{n-1}),\]
+\[\forall n\in\bbN\colon\forall m\in\bbN_0\land m<2^{n-1}\colon G_n(m)=0G_{n-1}(m),\]
+\[\forall n\in\bbN\colon\forall m\in\bbN_0\land m\geq 2^{n-1}\colon G_n(m)=1G_{n-1}\qty(m-2^{n-1}),\]
 where $\varepsilon$ denotes the zero-bit code in $G_0$, and juxtaposition denotes concatenation.
 \sssc{One-hot and one-cold encoding}
 A one-hot (encoding) is an encoding where each code is a unique binary sequence with only one 1 bit.
@@ -1571,7 +1571,7 @@ For disjoint window sequence detector, we can AND the original output $Z$ togeth
 0,\quad&s\in S\setminus\{S_{n-1}\}\lor a\neq a_n
 \end{cases}.\]
 \eit
-\item Define the \tb{prefix/failure function/link} $\pi\colon S\setminus\to S$ such that $\pi(S_0)=S_0$, and for any $S_i\in S\setminus\{S_0\} with $S_p=\pi(S_i)$, it satisfies that $p<i$, that $w_p$ equals to the string of the last $p$ characters of $w_i$, and that for any $q\in(p,i)$, $w_q$ doesn't equal to the string of the last $q$ characters of $w_i$. However for
+\item Define the \tb{prefix/failure function/link} $\pi\colon S\to S$ such that $\pi(S_0)=S_0$, and for any $S_i\in S\setminus\{S_0\}$ with $S_p=\pi(S_i)$, it satisfies that $p<i$, that $w_p$ equals to the string of the last $p$ characters of $w_i$, and that for any $q\in(p,i)$, $w_q$ doesn't equal to the string of the last $q$ characters of $w_i$. However for
 \bit
 \item \textbf{Non-overlapping sliding window sequence detector Moore circuit implementation:}
 \[\pi(S_n)=S_0\]
@@ -1581,7 +1581,7 @@ instead.
 \[\delta(S_i,a_{i+1}')=\delta(\pi(S_i),a_{i+1})\]
 for any $0\leq i\leq n-1$, and
 \[\delta(S_n,a)=\delta(\pi(S_n),a)\]
-for any $a\in\{0,1\}.
+for any $a\in\{0,1\}$.
 \item Draw a state graph that:
 \bit
 \item \textbf{Moore circuit implementation:}
@@ -1754,7 +1754,7 @@ First eliminate all unreachable states. Let the set of all remaining states be $
 \[\delta(S_j,X_k)\neq\delta(S_i,X_k)\land\{\delta(S_j,X_k),\delta(S_i,X_k)\}\neq\{S_i,S_j\},\]
 otherwise.
 \eit
-\item For each entry $a_{ij}$ that has not been filled with $\times$, fill it with $\times iff any pair of states $(S_p,S_q)$ in it is such that $a_{\max(p,q)\min(p,q)}$ has been filled with $\times$. Repeatedly iterate through all entries that has not been filled with $\times$ until no entry is filled with $\times$ in an iteration.
+\item For each entry $a_{ij}$ that has not been filled with $\times$, fill it with $\times$ iff any pair of states $(S_p,S_q)$ in it is such that $a_{\max(p,q)\min(p,q)}$ has been filled with $\times$. Repeatedly iterate through all entries that has not been filled with $\times$ until no entry is filled with $\times$ in an iteration.
 \item For each entry $a_{ij}$ that has not been filled with $\times$, $S_j\equiv S_i$. For all equivalence classes under $\equiv$, merge all states in it to one.
 \een
 \sssc{Compatible states}
@@ -1790,7 +1790,7 @@ First eliminate all unreachable states. Let the set of all remaining states be $
 \[\delta(S_j,X_k)\neq\delta(S_i,X_k)\land\{\delta(S_j,X_k),\delta(S_i,X_k)\}\neq\{S_i,S_j\},\]
 otherwise.
 \eit
-\item For each entry $a_{ij}$ that has not been filled with $\times$, fill it with $\times iff any pair of states $(S_p,S_q)$ in it is such that $a_{\max(p,q)\min(p,q)}$ has been filled with $\times$. Repeatedly iterate through all entries that has not been filled with $\times$ until no entry is filled with $\times$ in an iteration.
+\item For each entry $a_{ij}$ that has not been filled with $\times$, fill it with $\times$ iff any pair of states $(S_p,S_q)$ in it is such that $a_{\max(p,q)\min(p,q)}$ has been filled with $\times$. Repeatedly iterate through all entries that has not been filled with $\times$ until no entry is filled with $\times$ in an iteration.
 \item For each entry $a_{ij}$ that has not been filled with $\times$, $S_j\sim S_i$. Draw a undirected graph with each state being a vertex and an edge exists between two vertices iff the two states are compatible, called compatibility graph.
 \item Find all maximal cliques of the graph using the Bron–Kerbosch algorithm.
 \item Draw a undirected graph with each maximal clique found in the last step being a vertex and an edge exists between two vertices iff the two cliques are disjoint.
