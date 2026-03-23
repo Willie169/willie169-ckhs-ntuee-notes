@@ -359,15 +359,15 @@ Two linear circuit are dual if their governing equations in terms of variables b
 Two linear circuit are exact dual if their governing equations in terms of numerical values become identical after systematically exchanging voltage and current, capacitance and inductance, impedance and admittance, open circuit and short circuit, KCL and KVL, Thévenin's theorem and Norton's theorem, series and parallel, node and loop, etc.
 \ssc{Thévenin's theorem and Norton's theorem}
 \sssc{Thévenin's theorem}
-Any linear network with two terminals is equivalent to a voltage source with a voltage called Thévenin voltage in a series connection with a linear element (or resistor for DC) with an impedance (or resistance for DC) called Thévenin impedance (or resistance for DC), such equivalent circuit is called Thévenin equivalent.
+Any linear network with two terminals is equivalent to a voltage source with a voltage called Thévenin voltage in a series connection with a linear element (or resistor for DC) with an impedance (or resistance for DC) called Thévenin impedance (or resistance for DC), such equivalent circuit is called Thévenin equivalent. Thévenin voltage and Thévenin impedance are called Thévenin parameters.
 \sssc{Norton's theorem}
-Any linear network with two terminals is equivalent to a current source with a current called Norton current in a parallel connection with a linear element (or resistor for DC) with an impedance (or resistance for DC) called Norton impedance (or resistance for DC), such equivalent circuit is called Norton equivalent.
+Any linear network with two terminals is equivalent to a current source with a current called Norton current in a parallel connection with a linear element (or resistor for DC) with an impedance (or resistance for DC) called Norton impedance (or resistance for DC), such equivalent circuit is called Norton equivalent. Norton voltage and Norton impedance are called Norton parameters.
 \sssc{Finding Thévenin voltage}
-Remove any load, and the open-circuit voltage is the Thévenin voltage.
+Remove all loads, and the open-circuit voltage $v_{oc}$ between the two terminals is the Thévenin voltage.
 \sssc{Finding Norton current}
-Add a short circuit between the two terminals, and the current on the it is the Norton current.
+Add a short circuit between the two terminals, and the short circuit current $i_{sc}$ on it is the Norton current.
 \sssc{Finding Thévenin impedance or Norton impedance}
-Thévenin impedance and Norton impedance are the same and can be found with:
+Thévenin and Norton impedance $Z_{th}$ (or resistance $R_{th}$ for DC) are the same and can be found with:
 \bit
 \item \tb{Source deactivation method}: Replace all independent voltage sources with short circuits and independent current sources with open circuits, and the impedance between the two terminals is the Thévenin impedance or Norton impedance.
 \item \tb{Division method}: The Thévenin impedance or Norton impedance is the Thévenin voltage divided by the Norton current.
@@ -390,7 +390,7 @@ The (nodal) admittance (conductance for DC) matrix $\mb{Y}$ of a linear circuit 
 \item For each voltage source whose neither endpoint is the reference node, enclose both nodes and the source as a supernode.
 \item Excluding all supernodes and all edges connected to supernode, form a system of linear equations given by KCL:
 \[\mb{Y}\mathcal{V}=\mathcal{I},\]
-where $\mathcal{V}$ is the column vector of the nodal voltage variables and known nodal voltages, $\mathcal{I}$ is the column vector of current injected into the nodes, where each entry $I_k$ is zero if node $k$ is not connected to a current source and $I_s$ if node $k$ is connected to a current source of current $I_s$ injected to the node (negative for absorption, VCCSs and CCCSs directly replaced with the control functions), and $\mb{Y}$ is the admittance (conductance for DC) matrix of the linear circuit.
+where $\mathcal{V}$ is the column vector of the nodal voltage variables and known nodal voltages, $\mathcal{I}$ is the column vector of current injected into the nodes, where each entry $I_k$ is zero if node $k$ is not connected to a current source and $I_s$ if node $k$ is connected to a current source of current $I_s$ injected to the node (negative for absorption, VCCSs and CCCSs directly replaced with the control functions), and $\mb{Y}$ is the admittance (conductance for DC) matrix of the linear circuit. Nodes with known nodal voltage and current injected to it are typically omitted from the equation, where edges to them still count in $\mb{Y}$ but columns and rows of them are omitted.
 \item For each supernode, write the equation given by KCL in terms of nodal voltage variables, that is, the sum of the currents leave the boundary of the supernode is zero.
 \item For each voltage source, write the equation where the enforced voltage in one side and the difference of two nodal voltage variables in the other side.
 \item Solve the system of linear equations.
