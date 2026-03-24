@@ -237,10 +237,8 @@ Adding a wire directly between two nodes is called adding a short circuit.
 The algebraic sum of the currents entering any node is zero.
 \sssc{Kirchhoff's voltage law (KVL), Kirchhoff's second law, or Kirchhoff's loop rule}
 The algebraic sum of the voltages around any closed path is zero.
-\sssc{Network as graph}
-A network is a graph with nodes being vertices and branches without nodes inside except ends being edges.
 \sssc{Planar network}
-A network that is planar as a graph.
+A network that is planar as a graph with nodes being vertices and branches as edges.
 \sssc{Series connection}
 Two or more elements are connected in series if they are connected along a single path, and each component has the same current through it, equal to the current through the network. The voltage across the network is equal to the sum of the voltages across each element.
 \sssc{Parallel connection}
@@ -359,9 +357,9 @@ Two linear circuit are dual if their governing equations in terms of variables b
 Two linear circuit are exact dual if their governing equations in terms of numerical values become identical after systematically exchanging voltage and current, capacitance and inductance, impedance and admittance, open circuit and short circuit, KCL and KVL, Thévenin's theorem and Norton's theorem, series and parallel, node and loop, etc.
 \ssc{Thévenin's theorem and Norton's theorem}
 \sssc{Thévenin's theorem}
-Any linear network with two terminals is equivalent to a voltage source with a voltage called Thévenin voltage in a series connection with a linear element (or resistor for DC) with an impedance (or resistance for DC) called Thévenin impedance (or resistance for DC), such equivalent circuit is called Thévenin equivalent.
+Any linear network with two terminals is equivalent to a voltage source with a voltage called Thévenin voltage in a series connection with a linear element (or resistor for DC) with an impedance (or resistance for DC) called Thévenin or equivalent impedance (or resistance for DC), such equivalent circuit is called Thévenin equivalent.
 \sssc{Norton's theorem}
-Any linear network with two terminals is equivalent to a current source with a current called Norton current in a parallel connection with a linear element (or resistor for DC) with an impedance (or resistance for DC) called Norton impedance (or resistance for DC), such equivalent circuit is called Norton equivalent.
+Any linear network with two terminals is equivalent to a current source with a current called Norton current in a parallel connection with a linear element (or resistor for DC) with an impedance (or resistance for DC) called Norton or equivalent impedance (or resistance for DC), such equivalent circuit is called Norton equivalent.
 \sssc{Finding Thévenin voltage}
 Remove all loads, and the open-circuit voltage $v_{oc}$ between the two terminals is the Thévenin voltage.
 \sssc{Finding Norton current}
@@ -369,17 +367,21 @@ Add a short circuit between the two terminals, and the short circuit current $i_
 \sssc{Finding Thévenin impedance or Norton impedance}
 Thévenin and Norton impedance $Z_{th}$ (or resistance $R_{th}$ for DC) are the same and can be found with:
 \bit
-\item \tb{Source deactivation method}: Replace all independent voltage sources with short circuits and independent current sources with open circuits, if there are no dependent sources, the impedance between the two terminals is the Thévenin impedance; otherwise, put a nonzero independent voltage or current source between the two terminals, and the voltage divided by the current of the added source is the Thévenin impedance.
+\item \tb{Source deactivation method}: Replace all independent voltage sources with short circuits and independent current sources with open circuits,
+\bit
+\item If there are no dependent sources, the impedance between the two terminals is the Thévenin impedance; otherwise,
+\item \tb{Driving-point impedance method or test source method}: Put an arbitrary nonzero-valued independent voltage $V_t$ or current $I_t$ source between the two terminals, and the voltage divided by the current of the added source $\frac{V_t}{I_t}$, called driving-point impedance, is the Thévenin impedance.
+\eit
 \item \tb{Division method}: The Thévenin impedance or Norton impedance is the Thévenin voltage divided by the Norton current.
 \eit
 \sssc{Thévenin parameters}
 Thévenin voltage, Norton current, and Thévenin impedance are called Thévenin parameters.
 \sssc{Maximum power theorem}
 A one-port linear network delivers maximum power to a load impedance when it is equal to the Thévenin impedance or its conjugate of the network.
-\ssc{Nodal analysis or node-voltage analysis of linear circuits}
+\ssc{(Matrix) nodal analysis or node-voltage analysis of linear circuits}
 \sssc{(Nodal) admittance matrix}
-The (nodal) admittance (conductance for DC) matrix $\mb{Y}$ of a linear circuit that is a simple graph with all sources omitted is the Laplacian matrix of it with all sources omitted.
-\sssc{Supernode method}
+The (nodal) admittance (conductance for DC) matrix $\mb{Y}$ of a linear circuit that is a simple graph is the Laplacian matrix of it with all sources omitted, admittances as weights, and circuit as weighted undirected graph.
+\sssc{Method}
 \ben
 \item Choose a reference node and assign a voltage for it (typically 0).
 \item For each pair of nodes, if there exists an edge with zero impedance and no source, merge the two nodes, and discard all edges between them.
@@ -392,12 +394,15 @@ The (nodal) admittance (conductance for DC) matrix $\mb{Y}$ of a linear circuit 
 \item For each voltage source whose neither endpoint is the reference node, enclose both nodes and the source as a supernode.
 \item Excluding all supernodes and all edges connected to supernode, form a system of linear equations given by KCL:
 \[\mb{Y}\mathcal{V}=\mathcal{I},\]
-where $\mathcal{V}$ is the column vector of the nodal voltage variables and known nodal voltages, $\mathcal{I}$ is the column vector of current injected into the nodes, where each entry $I_k$ is zero if node $k$ is not connected to a current source and $I_s$ if node $k$ is connected to a current source of current $I_s$ injected to the node (negative for absorption, VCCSs and CCCSs directly replaced with the control functions), and $\mb{Y}$ is the admittance (conductance for DC) matrix of the linear circuit. Nodes with known nodal voltage and current injected to it are typically omitted from the equation, where edges to them still count in $\mb{Y}$ but columns and rows of them are omitted.
+where $\mathcal{V}$ is the column vector of the nodal voltage variables and known nodal voltages, $\mathcal{I}$ is the column vector of the sum of currents injected into the nodes from current sources with VCCSs and CCCSs directly replaced with the control functions, and $\mb{Y}$ is the (nodal) admittance (conductance for DC) matrix of the circuit. Nodes with known nodal voltage and current injected to it are typically omitted from the equation, where edges to them still count in $\mb{Y}$ but columns and rows of them are omitted.
 \item For each supernode, write the equation given by KCL in terms of nodal voltage variables, that is, the sum of the currents leave the boundary of the supernode is zero.
 \item For each voltage source, write the equation where the enforced voltage in one side and the difference of two nodal voltage variables in the other side.
 \item Solve the system of linear equations.
 \een
 \ssc{Mesh analysis of planar linear circuit}
+\sssc{(Mesh) impedance matrix}
+The (mesh) impedance (resistance for DC) matrix $\mb{Z}$ of a linear circuit that is a simple planar graph is the matrix with entry $Z_{ii}$ being the sum of the impedances of the branches in the $i$th mesh and $Z_{ij}$ for $i\neq j$ being the sum of the impedances of the branches shared between the $i$th and $j$th meshes.
+\sssc{Method}
 \ben
 \item For each pair of nodes, if there exists an edge with zero impedance and no source, merge the two nodes, and discard all edges between them.
 \item For each pair of nodes, use series and parallel connections to combine all edges without sources between them.
@@ -405,9 +410,11 @@ where $\mathcal{V}$ is the column vector of the nodal voltage variables and know
 \item For each collection of current sources in parallel connection between two nodes, combine them to one.
 \item For each pair of node with a current source in parallel connection with an nonzero impedance (resistance for DC) connecting them, convert it to its Thévenin equivalent.
 \item Indentify all meshes.
-\item Assign an arbitrary but consistent direction (clockwise or counterclockwise) of current for all meshes, and assign a mesh current variable for each mesh.
+\item Assign an arbitrary but consistent direction (usually clockwise) of current for all meshes, and assign a mesh current variable for each mesh.
 \item For each current source, if it lies on two meshes, exclude the edge with the current source, and merge the two meshes into one, called a supermesh.
-\item For each mesh (including supermesh), write the linear equation given by KVL with VCVSs and CCVSs directly replaced with the control functions.
+\item Excluding all current sources, form a system of linear equations given by KVL:
+\[\mb{Z}\mathcal{I}=\mathcal{V},\]
+where $\mathcal{I}$ is the column vector of the mesh current variables, $\mathcal{V}$ is the column vector of the sum of voltage delivered from the voltage sources in the mesh with mesh current variable direction as positive direction and with VCVSs and CCVSs directly replaced with the control functions, and $\mb{Z}$ is the (mesh) impedance (resistance for DC) matrix of the circuit.
 \item For each current source, write the equation where the enforced current in one side and the result of additions and subtractions of mesh current variables in the other side.
 \item Solve the system of linear equations.
 \een
