@@ -396,11 +396,10 @@ The (nodal) admittance (conductance for DC) matrix $\mb{Y}$ of a linear circuit 
 \item For each voltage source whose either endpoint is the reference node, the nodal voltage of the other endpoint is immediately known.
 \item For each node with unknown voltage, assign a nodal voltage variable.
 \item For each voltage source whose neither endpoint is the reference node, enclose both nodes and the source as a supernode.
-\item Excluding all supernodes and all edges connected to supernode, form a system of linear equations given by KCL:
+\item Omitting all voltage sources, form a system of linear equations given by KCL:
 \[\mb{Y}\mathcal{V}=\mathcal{I},\]
-where $\mathcal{V}$ is the column vector of the nodal voltage variables and known nodal voltages, $\mathcal{I}$ is the column vector of the sum of currents injected into the nodes from current sources with VCCSs and CCCSs directly replaced with the control functions, and $\mb{Y}$ is the (nodal) admittance (conductance for DC) matrix of the circuit. Nodes with known nodal voltage and current injected to it are typically omitted from the equation, where edges to them still count in $\mb{Y}$ but columns and rows of them are omitted.
-\item For each supernode, write the equation given by KCL in terms of nodal voltage variables, that is, the sum of the currents leave the boundary of the supernode is zero.
-\item For each voltage source, write the equation where the enforced voltage in one side and the difference of two nodal voltage variables in the other side.
+where $\mathcal{V}$ is the column vector of the nodal voltage variables and known nodal voltages, $\mathcal{I}$ is the column vector of the sum of currents injected into the nodes from current sources with VCCSs and CCCSs directly replaced with the control functions, and $\mb{Y}$ is the (nodal) admittance (conductance for DC) matrix of the circuit. Nodes with known nodal voltage and current injected to it are omitted from the equation, where edges to them still count in $\mb{Y}$ but columns and rows of them are omitted.
+\item For each voltage source, append the equation to the system with the enforced voltage under $\calI$ and the row vector of weights of nodal voltage variables under $\mb{Y}$.
 \item Solve the system of linear equations.
 \een
 \ssc{(Matrix) mesh analysis of planar linear circuit}
@@ -416,10 +415,10 @@ The (mesh) impedance (resistance for DC) matrix $\mb{Z}$ of a linear circuit tha
 \item Indentify all meshes.
 \item Assign an arbitrary but consistent direction (usually clockwise) of current for all meshes, and assign a mesh current variable for each mesh.
 \item For each current source, if it lies on two meshes, exclude the edge with the current source, and merge the two meshes into one, called a supermesh.
-\item Excluding all current sources, form a system of linear equations given by KVL:
+\item Omitting all current sources, form a system of linear equations given by KVL:
 \[\mb{Z}\mathcal{I}=\mathcal{V},\]
 where $\mathcal{I}$ is the column vector of the mesh current variables, $\mathcal{V}$ is the column vector of the sum of voltage delivered from the voltage sources in the mesh with mesh current variable direction as positive direction and with VCVSs and CCVSs directly replaced with the control functions, and $\mb{Z}$ is the (mesh) impedance (resistance for DC) matrix of the circuit.
-\item For each current source, write the equation where the enforced current in one side and the result of additions and subtractions of mesh current variables in the other side.
+\item For each current source, append the equation to the system with the enforced current under $\calV$ and the row vector of weights of mesh current variables under $\mb{Z}$.
 \item Solve the system of linear equations.
 \een
 \ssc{Transformations}
