@@ -193,6 +193,18 @@ Given two affine spaces $A$ and $B$ whose associated vector spaces are $\mathscr
 is a well-defined linear map.
 \sssc{Affine transformation (仿射變換)}
 An affine transformation is a bijection from an affine space onto itself that is an affine map.
+\sssc{Euclidean vector space}
+A Euclidean vector space $E$ is a finite-dimensional vector space over the real numbers equipped with an inner product
+\[\langle \cdot ,\cdot \rangle \colon E\times E\to\mathbb{R},\]
+and a norm $\|\cdot\|$ defined as:
+\[\|v\|=\sqrt{\langle v,v\rangle},\]
+and a metric, called the Euclidean distance $d(\cdot,\cdot)\colon E\times E\to\mathbb{R}$, defined as:
+\[d(v,w)=\|v-w\|.\]
+\sssc{Euclidean affine space (歐幾里德仿射空間) or Euclidean space (歐幾里得空間)}
+A Euclidean space, also known as Euclidean affine space, is an affine space over $\mathbb{R}$ such that the associated vector space is a Euclidean vector space.
+
+A Euclidean space is equipped with a metric, called the Euclidean distance $d(\cdot,\cdot)\colon E\times E\to\mathbb{R}$, defined as:
+\[d(v,w)=\|v-w\|.\]
 \sssc{Tagent space (切空間)}
 Suppose that $M$ is an $n$-dimensional $C^k$ manifold (with smoothness $k\geq 1$) and that $x\in M$. Pick a coordinate chart $\varphi\colon U\to\mathbb{R}^n$, where $U$ is an open subset of $M$ containing $x$. Suppose further that two curves $\gamma_1,\gamma_2\colon (-1,1)\to M$ with $\gamma_1(0)=\gamma_2(0)=x$ are given such that both $\varphi\circ\gamma_1,\varphi\circ\gamma_2\colon (-1,1)\to\mathbb{R}^n$ are differentiable. We call these differentiable curves initialized at $x$. Then $\gamma_1$ and $\gamma_2$ are said to be equivalent at $0$ if and only if the derivatives of $\varphi\circ\gamma_1$ and $\varphi\circ\gamma_2$ at $0$ coincide. This defines an equivalence relation on the set of all differentiable curves initialized at $x$, and equivalence classes of such curves are called tangent vectors (切向量) of $M$ at $x$. The tangent space of $M$ at (or near) $x$, denoted by $T_xM$, is then defined as the set of all tangent vectors at $x$, which does not depend on the choice of coordinate chart $\varphi$.
 \sssc{Tagent bundle (切叢)}
@@ -279,6 +291,30 @@ are affine independent and called vertices of the simplex.
 A standard simplex or probability simplex is a simplex in $\bbR^{k+1}$ whose vertices are unit vectors, that is, the set
 \[\{(p_0,p_1,\ldots,p_k)\mid\sum_{i=0}^kp_i=1\}.\]
 And each point $(p_0,p_1,\ldots,p_k)$ corresponds to a PMF $p$ with target sample space $\{x_0,x_2,\ldots,x_k\}$ and $p(x_i)=p_i$.
+\ssc{In three dimensions}
+\sssc{Cross product (叉積), external product (外積), or vector product (向量積)}
+The cross product of vector $\mathbf{a}=(a_1,a_2,a_3)$ and $\mathbf{b}=(b_1,b_2,b_3)$ is defined as:
+\[\mathbf{a}\times\mathbf{b}=\det\begin{pmatrix}\mathbf{i} & \mathbf{j} & \mathbf{k}\\a_1 & a_2 & a_3\\b_1 & b_2 & b_3\end{pmatrix},\]
+where $\mb{i}=(1,0,0)$, $\mb{j}=(0,1,0)$, $\mb{k}=(0,0,1)$.
+\sssc{Basic properties of cross product}
+\bit
+\item Self cross product is the zero vector:
+\[\mb{a}\times\mb{a}=\mb{0}.\]
+\item Anticommutative law (反交換律):
+\[\mathbf{a}\times\mathbf{b}=-\mathbf{b}\times\mathbf{a}.\]
+\item Left and right distributive over addition and substraction:
+\[\mb{a}\times(\mb{b}\pm\mb{c})=\mb{a}\times\mb{b}\pm\mb{a}\times\mb{c}.\]
+\[(\mb{b}\pm\mb{c})\times\mb{a}=\mb{b}\times\mb{a}\pm\mb{c}\times\mb{a}.\]
+\item Commutative and associative over scalar multiplication:
+\[(r\mb{a})\times\mb{b}=a\times(r\mb{b})=r(\mb{a}\times\mb{b}).\]
+\item Two vector in $\bbR^3$ are parallel iff their cross product is the zero vector.
+\eit
+\sssc{Triple product identity (三重積恆等式)/Jacobi identity (雅可比恆等式)}
+\[\mathbf{A}\times(\mathbf{B}\times\mathbf{C})+\mathbf{B}\times(\mathbf{C}\times\mathbf{A})+\mathbf{C}\times(\mathbf{A}\times\mathbf{B})=0.\]
+\[\mathbf{A}\cdot(\mathbf{B}\times\mathbf{C})=\mathbf{B}\cdot(\mathbf{C}\times\mathbf{A})=\mathbf{C}\cdot(\mathbf{A}\times\mathbf{B})=\det\begin{pmatrix}\mathbf{A}\\\mathbf{B}\\\mathbf{C}\end{pmatrix}\]
+\[(\mathbf{A}\times\mathbf{B})\times\mathbf{C}=(\mathbf{A}\cdot\mathbf{C})\mathbf{B}-(\mathbf{B}\cdot\mathbf{C})\mathbf{A}.\]
+\sssc{Scalar triple product}
+\[[\mb{a},\mb{b},\mb{c}]=\det(\mb{a},\mb{b},\mb{c})=\mb{a}\cdot(\mb{b}\times\mb{c})\]
 \section{Matrix (矩陣)}
 \subsection{Matrix}
 A matrix is a rectangular array of numbers (or other mathematical objects), called the entries (元或元素) of the matrix. Most commonly, a matrix over a field $F$ is a rectangular array of elements of $F$.

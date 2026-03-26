@@ -82,7 +82,7 @@ The sequence of partial sums of an infinite sequence.
 \subsubsection{Cauchy product}
 \[\qty(\sum_{i=0}^{\infty}a_i)\qty(\sum_{j=0}^{\infty}b_j)=\sum_{k=0}^{\infty}\sum_{l=0}^ka_lb_{k-l}.\]
 \subsubsection{Power series}
-A power series (in $x$) is a series in the form
+A power series (in $x$) is a series of the form
 \[\sum_{n=0}^{\infty}c_nx^n,\]
 where $c_n$ are constants called coefficients and $x$ is variable.
 \[\sum_{n=0}^{\infty}c_n(x-a)^n\]
@@ -155,7 +155,7 @@ Given an open subset $B$ of the codomain of a function $f$ the preimage or inver
 For a map $M$ defined for some functions, translation invariance is defined as: for all $a$ such that $M(f(x))$ and $f(x+a)$ are both defined,
 \[M(f(x+a))=M(f(x)).\]
 \subsection{Piecewise function (分段函數)}
-A piecewise function is a function defined in the form:
+A piecewise function is a function defined of the form:
 \[f(x) =
 \begin{cases}
 f_1(x), & \quad x\in A_1, \\
@@ -762,7 +762,7 @@ If a function $F(x)$ with codomain $Y$ is an antiderivative of a function $f(x)$
 \[\int f(x)\dd{x}=F(x)+C,\]
 where $C$ denotes an arbitrary constant in $Y$ that does not depend on $x$, called constant of integration. The symbol $\int$ is called integral sign, introduced by Leibniz.
 
-An indefinite integral in the form
+An indefinite integral of the form
 \[\int f(x)\dd{x}=
 \begin{cases}
 F(x)+C_1,\quad & x\in A_1\\
@@ -1167,193 +1167,6 @@ For a function $f(x)$ defined on $(-\infty,\infty)$ with $\int_a^bf(x)\dd{x}$ be
 \[f_{rms}=\sqrt{\lim_{n\to\infty}\frac{1}{2n}\int_{-n}^n(f(x))^2\dd{x}}.\]
 
 
-\section{Curve}
-\subsection{Curve}
-\subsubsection{Definition}
-A (parameterized or parametric) (topological) curve in a topological space $X$ is a continuous map $\gamma(t)\colon I\to X$ for some interval $I$, where $t$ is called parameter, and either $\gamma(t)$ or the image of $\gamma(t)$ is called curve, and $\gamma(t)$ is also called the parametrization of the curve.
-
-If $I=[a,b]$, $\gamma(a)$ is called initial point, and $\gamma(b)$ is called terminal point.
-\subsubsection{Closed curve or loop}
-A curve is closed or is a loop if $I=[a,b]$ and $\gamma(a)=\gamma(b)$.
-\subsubsection{Path or arc}
-A curve is a path or an arc if $I$ is closed and bounded.
-\subsubsection{Simple curve}
-A curve is simple if $I=[a,b]$ and for all $s\neq t\in[a,b)$, $\gamma(s)\neq\gamma(t)$.
-\subsubsection{Curve in Enclidean space}
-A plane curve is a curve on a plane. A space curve is a curve in a three-dimensional space.
-
-A Jordan curve is a plane simple closed curve. And the region enclosed by a Jordan curve is called Jordan domain.
-\subsubsection{Orientation}
-Two parameterized curves with same range $\gamma\colon T\to X$ and $\zeta\colon U\to X$ with $T,U$ being intervals, are called of different orientations if there exists $t_1<t_2\in T,u_1<u_2\in U$ such that
-\[\gamma(t_1)=\zeta(u_2)\land\gamma(t_2)=\zeta(u_1)\land\gamma(t_1)\neq\gamma(t_2).\]
-\subsection{Polar curve}
-\subsubsection{Definition}
-Plane curve or polar equation is a plane curve in the form $r=f(\theta)$, also denoted as $r(\theta)$.
-\subsubsection{Radical scaling}
-Replacing $r$ with $kr$ scales the curve by $k$.
-\subsubsection{Rotation}
-Replacing $\theta$ with $(\theta-\varphi)$ rotates the curve counterclockwise by $\varphi$.
-\subsubsection{Reflection and symmetry}
-Replacing $\theta$ with $-\theta$ reflects the curve through the polar axis.
-
-If a polar curve is unchanged when $\theta$ is replaced with $-\theta$, then it is symmetric about the polar axis.
-
-Replacing $\theta$ with $(\pi-\theta)$ reflects the curve through $\theta=\frac{\pi}{2}$.
-
-If a polar curve is unchanged when $\theta$ is replaced with $(\pi-\theta)$, then it is symmetric about $\theta=\frac{\pi}{2}$.
-
-Replacing either $\theta$ with $(\pi+\theta)$ or $r$ with $-r$ reflects the curve through the pole.
-
-If a polar curve is unchanged when $\theta$ is replaced with $(\pi+\theta)$ or when $r$ is replaced with $-r$, then it is symmetric about the pole.
-\subsection{Arc Length}
-\subsubsection{Definition}
-Given a curve $\mb{r}(t)=(x_1(t),x_2(t),\quad,x_n(t)),\quad t\in[a,b]$. Let $P(t,k)$ be a partition of interval $[a,b]$. Define the polygonal length of $\mb{r}$ along $P(t,k)$ as
-\[s(P(t,k))=\sum_{i=1}^k\|\mb{r}(i)-\mb{r}(i-1)\|.\]
-The arc length of the curve is
-\[s=\sup_{P\in\mathcal{P}}s(P),\]
-where $\mathcal{P}$ is the set of all partitions of interval $[a,b]$.
-
-The curve is called rectifiable iff $s$ is finite.
-
-$s$ is finite iff all $x_i(t)$ is of bounded variation.
-\begin{proof}
-"If" direction:
-
-By triangular inequality,
-\[\|\mb{r}(i)-\mb{r}(i-1)\|\leq\sum_{j=1}^n\abs{x_j(i)-x_j(i-1)}.\]
-\[\sum_{i=1}^k\|\mb{r}(i)-\mb{r}(i-1)\|\leq\sum_{i=1}^k\sum_{j=1}^n\abs{x_j(i)-x_j(i-1)}=\sum_{j=1}^n\sum_{i=1}^k\abs{x_j(i)-x_j(i-1)}<\infty.\]
-
-"Only if" direction:
-
-By triangular inequality, for every $j\in\bbN\land j\leq n$,
-\[\abs{x_j(i)-x_j(i-1)}\leq\|\mb{r}(i)-\mb{r}(i-1)\|.\]
-\[\sum_{i=1}^k\abs{x_j(i)-x_j(i-1)}\leq\sum_{i=1}^k\|\mb{r}(i)-\mb{r}(i-1)\|<\infty.\]
-\end{proof}
-
-The arc length (function) of the curve from $a$ is defined a function of $t$ that maps $t\geq a$ to the arc length of $\mb{r}_{[a,t]}$.
-\subsubsection{For differentiable curve}
-If $\mb{r}$ is differentiable, the arc length from $a$ to $b$ is
-\[s=\int_a^b\|\dv{\mb{r}(t)}{t}\|\dd{t}.\]
-\subsubsection{For polar curve}
-The arc length of differentiable polar curve $r(\theta)$ from $a$ to $b$ is
-\[s=\int_a^b\sqrt{\qty(r(\theta))^2+\qty(r'(\theta))^2}\dd{\theta}.\]
-\bpr
-\[x(\theta)=r\cos(\theta)\]
-\[y(\theta)=r\sin(\theta)\]
-\[x'(\theta)=-r\sin(\theta)+r'\cos(\theta)\]
-\[y'(\theta)=r\cos(\theta)+r'\sin(\theta)\]
-\[(x'(\theta))^2+(y'(\theta))^2=\qty(r(\theta))^2+\qty(r'(\theta))^2\]
-\epr
-\subsubsection{Parameterization}
-It's often useful and sometimes assumed to parameterize a curve w.r.t. its arc length.
-\subsection{Mechanical term}
-In three dimensions, the terms in mechanics are often used to describe a function $\mb{r}$ w.r.t. a real number $t$, e.g., position $\mb{r}$, velocity $\mb{r}'$, speed $\norm{\mb{r}'}$, acceleration $\mb{r}''$, and jerk or jolt $\mb{r}'''$.
-\subsection{Tangent, normal, binormal, curvature, and torsion}
-\subsubsection{(Unit) tangent (vector)}
-The unit tangent vector of a curve $\mb{r}$ at $t$ is
-\[\mb{T}=\hat{\mb{r}'}=\frac{\mb{r}'}{\abs{\mb{r}'}}.\]
-\subsubsection{(Principal/unit) normal (vector)}
-\[\mb{N}=\hat{\mb{T}'}=\frac{\mb{T}'}{\abs{\mb{T}'}}.\]
-\[\mb{T}\cdot\mb{N}=0.\]
-\[\ba
-\mb{N}&=\frac{\norm{\mb{r}'}^2\mb{r}''-\qty(\mb{r}''\cdot\mb{r}')\mb{r}'}{\norm{\norm{\mb{r}'}^2\mb{r}''-\qty(\mb{r}''\cdot\mb{r}')\mb{r}'}}\\
-&=\hat{\mb{r}''_{\perp\mb{r}'}}\\
-&=\frac{\mb{r}''-(\mb{r}''\cdot\mb{T})\mb{T}}{\norm{\mb{r}''-(\mb{r}''\cdot\mb{T})\mb{T}}}
-\ea\]
-In three dimensions,
-\[\mb{N}=\frac{\qty(\mb{r}'\times\mb{r}'')\times\mb{r}'}{\norm{\qty(\mb{r}'\times\mb{r}'')\times\mb{r}'}}\]
-In two dimensions, $\mb{N}$ is $\frac{\pi}{2}$ counterclockwise rotated from $\mb{T}$ if $x'y''-x''y'>0$, and $\mb{N}$ is $\frac{\pi}{2}$ clockwise rotated from $\mb{T}$ if $x'y''-x''y'<0$.
-\bpr
-\[\ba
-T'&=\dv{}{t}\qty(\frac{\mb{r}'}{\norm{\mb{r}'}})\\
-&=\frac{\mb{r}''\norm{\mb{r}'}-\mb{r}'\frac{\mb{r}'\cdot\mb{r}''}{\norm{\mb{r}'}}}{\norm{\mb{r}'}^2}\\
-&=\frac{\norm{\mb{r}'}^2\mb{r}''-\qty(\mb{r}''\cdot\mb{r}')\mb{r}'}{\norm{\mb{r}'}^3}\\
-&=\frac{\mb{r}''_{\perp\mb{r}'}}{\norm{\mb{r}'}}\\
-&=\frac{\mb{r}''-\qty(\mb{r}''\cdot\mb{T})\mb{T}}{\norm{\mb{r}'}}
-\ea\]
-\epr
-\subsubsection{(Unit) binormal (vector)}
-In three dimensions,
-\[\ba
-\mb{B}&\coloneq\mb{T}\times\mb{N}\\
-&=\frac{\mb{r}'\times\mb{r}''}{\norm{\mb{r}'\times\mb{r}''}}
-\ea\]
-\subsubsection{Frenet-Serret frame}
-$\mb{T},\mb{N},\mb{B}$ are collectively called Frenet-Serret basis or TNB basis. This basis with origin being the point $\mb{r}(t)$ is called Frenet-Serret frame.
-\subsubsection{Curvature (曲率)}
-The curvature $\kappa$ and curvature vector $\mb{K}$ of a curve $\mb{r}$ at $t$ are defined, with unit tagent vector $\mb{T}$ and arc length $s$, as
-\[\ba
-\mb{K}&\coloneq\dv{\mb{T}}{s}\\
-&=\flatfrac{\dv{\mb{T}}{t}}{\dv{s}{t}}\\
-&=\frac{\mb{T}'}{\norm{\mb{r}'}}\\
-&=\frac{\norm{\mb{r}'}^2\mb{r}''-\qty(\mb{r}''\cdot\mb{r}')\mb{r}'}{\norm{\mb{r}'}^4}\\
-&=\frac{\mb{r}''_{\perp\mb{r}'}}{\norm{\mb{r}'}^2}\\
-&=\frac{\mb{r}''-\qty(\mb{r}''\cdot\mb{T})\mb{T}}{\norm{\mb{r}'}^2}
-\ea\]
-\[\kappa\coloneq\norm{\mb{K}}\]
-\[\mb{K}=\kappa\mb{N}\]
-In two dimensions, let $\mb{r}(t)=(x(t),y(t))$,
-\[\kappa=\frac{\norm{x'y''-x''y'}}{\qty(x'^2+y'^2)^{3/2}},\]
-and signed curvature $k$ is defined as
-\[k=\frac{x'y''-x''y'}{\qty(x'^2+y'^2)^{3/2}}.\]
-In three dimensions,
-\[\mb{K}=\frac{\qty(\mb{r}'\times\mb{r}'')\times\mb{r}'}{\norm{\mb{r}'}^4}\]
-\[\kappa=\frac{\norm{\mb{r}'\times\mb{r}''}}{\norm{\mb{r}'}^3}.\]
-\subsubsection{Torsion}
-The torsion $\tau$ of a curve $\mb{r}$ at $t$ is defined, with unit normal vector $\mb{N}$ and unit binormal vector $\mb{B}$, as
-\[\ba
-\tau&\coloneq-\dv{\mb{B}}{s}\cdot\mb{N}\\
-&=\frac{\det(\mb{r}',\mb{r}'',\mb{r}''')}{\norm{\mb{r}'\times\mb{r}''}^2}
-\ea\]
-\bpr
-\[\dv{\mb{B}}{t}=\frac{\qty(\mb{r}'\times\mb{r}'')'}{\norm{\mb{r}'\times\mb{r}''}}-
-\mb{r}'\times\mb{r}''\frac{\norm{\mb{r}'\times\mb{r}''}^2'}{\norm{\mb{r}'\times\mb{r}''}^3}\]
-Since the second term is orthogonal to $\mb{N}$,
-\[\ba
--\dv{\mb{B}}{s}\cdot\mb{N}&=-\frac{\mb{r}'\times\mb{r}'''}{\norm{\mb{r}'\times\mb{r}''}\norm{\mb{r}'}}\cdot\frac{\qty(\mb{r}'\times\mb{r}'')\times\mb{r}'}{\norm{\qty(\mb{r}'\times\mb{r}'')\times\mb{r}'}}\\
-&=\frac{\qty(\mb{r}'''\times\mb{r}')\cdot\qty(\qty(\mb{r}'\times\mb{r}'')\times\mb{r}')}{\norm{\mb{r}'\times\mb{r}''}^2\norm{\mb{r}'}^2}\\
-&=\frac{\det(\mb{r}'',\mb{r}''',\mb{r}')}{\norm{\mb{r}'\times\mb{r}''}^2}\\
-&=\frac{\det(\mb{r}',\mb{r}'',\mb{r}''')}{\norm{\mb{r}'\times\mb{r}''}^2}
-\ea\]
-\epr
-\subsection{Frenet-Serret formulas or Frenet–Serret theorem}
-\[\dv{T}{s}=\kappa\mb{N},\]
-\[\dv{N}{s}=\kappa\mb{T}+\tau\mb{B},\]
-\[\dv{B}{s}=-\tau\mb{N},\]
-\[\begin{bmatrix}
-\dv{\mb{T}}{s}\\
-\dv{\mb{N}}{s}\\
-\dv{\mb{B}}{s}
-\end{bmatrix}
-=
-\begin{bmatrix}
-0 & \kappa & 0\\
--\kappa & 0 & \tau\\
-0 & -\tau & 0
-\end{bmatrix}
-\begin{bmatrix}
-\mb{T}\\
-\mb{N}\\
-\mb{B}
-\end{bmatrix}
-\bpr
-PLACEHOLDER
-\epr
-\subsection{Surface of revolution}
-\subsubsection{Definition}
-In $\bbR_n$, the area of the surface formed by rotating the curve $\mb{r}(t),\quad t\in[a,b]$ about a rotational axis $\mb{P}+\mb{k}u,\quad u\in\bbR$ with $\|\mb{k}\|=1$ is
-\[A=2\pi\int_{t=a}^b\norm{\mb{r}(t)-\mb{P}-\qty(\mb{k}\cdot\qty(\mb{r}(t)-\mb{P}))\mb{k}}\dd{s(t)},\]
-where $s(t)$ is the arc length function of $\mb{r}(t)$ from $a$ to $t$.
-
-The area is called rectifiable iff $A$ is finite.
-
-$A$ is finite if all components of $\mb{r}$ are all of bounded variation.
-\subsubsection{Two-dimensional curve about principal axis on the same plane}
-The area of the surface formed by rotating the curve $\mb{r}(t)=(x(t),y(t)),\quad t\in[a,b]$ about $y=d$ is
-\[A=2\pi\int_{t=a}^b\abs{y(t)-d}\dd{s(t)},\]
-where $s(t)$ is the arc length function of $\mb{r}$ from $a$ to $t$.
-
-
 \section{Multivariable (多變數 or 多變量 or 多元) Calculus}
 \subsection{Operators}
 \begin{itemize}
@@ -1366,11 +1179,11 @@ where $s(t)$ is the arc length function of $\mb{r}$ from $a$ to $t$.
 \item Directional derivative (方向導數) operator: $(\mb{F}\cdot\nabla)\mb{A}$ or $D_{\mb{F}}\mb{A}$ for directional derivative of scalar field $\mb{A}$ along a vector $\mb{F}$, typically unit vector and $D_{\mb{F}}\mb{A}$ is typically used, or vector field $\mb{F}$ and $(\mb{F}\cdot\nabla)\mb{A}$ is typically used.
 \item Hessian (黑塞) (matrix): $D^2f$, $\mb{H}(f)$, $H(f)$, $\mb{H}_f$, $H_f$, or $\nabla\otimes\nabla f$ for operand $f$.
 \item Laplace operator (拉普拉斯算子): $\nabla\cdot\nabla$, $\nabla^2$, or $\Delta$. For clarity, we use $\nabla\cdot\nabla$ here.
-\item Line or Path integral operator: $\int$
-\item Surface integral operator: $\iint$
-\item Volume integration operator: $\iiint$
+\item Line/path integral operator: $\int$
+\item Double/surface integral operator: $\iint$
+\item Triple/volume integration operator: $\iiint$
 \item Closed line integral operator: $\oint$
-\item Closed surface Integral Operator: $\oiint$
+\item Closed surface/double integral operator: $\oiint$
 \item $\int\mathbf{F}\cdot\mathrm{d}\mathbf{S}$ is used as a shorthand for $\int(\mathbf{F}\cdot\mathbf{\hat{n}})\,\mathrm{d}S$, where $\hat{n}$ is the outward pointing unit normal at almost each point on $S$.
 \end{itemize}
 \subsection{Convention}
@@ -1549,6 +1362,15 @@ For arbitrary subset $E\subseteq R$ and function $g$ bounded on $E$, let $h$ be 
 \[\int_Eg(\mb{x})\dd{V}\coloneq\int_Rh(\mb{x})\dd{V}.\]
 \sssc{Iterated integral}
 An integral whose integrand is an integral.
+\sssc{Type I and Type II region in two dimensions}
+A Type I region is a subset of $\bbR^2$ of the form
+\[D=\{(x,y)\mid a\le x\le b\land g_1(x)\le y\le g_2(x)\}\]
+where $g_1,g_2$ are continuous functions defined on $[a,b]$.
+
+A Type II region is a subset of $\bbR^2$ of the form
+\[D=\{(x,y)\mid a\le y\le b\land g_1(y)\le x\le g_2(y)\}\]
+where $g_1,g_2$ are continuous functions defined on $[a,b]$.
+
 
 
 \section{Continuity Theorems}
@@ -3580,7 +3402,8 @@ Let $X$ be an open subset of $\mathbb{R}$, and $\Omega$ be a measure space. Supp
 \een
 Then, for all $x\in X$,
 \[\dv{}{x}\int_{\Omega}f(x,\omega)\dd{\omega}=\int_{\Omega}\pdv{f}{x}\qty(x,\omega)\dd{\omega}.\]
-\subsection{Fubini's theorem (富比尼定理)}
+\ssc{Lebesgue integral theorems}
+\sssc{Fubini's theorem (富比尼定理)}
 If real-valued function $f\in L^1(X\times Y)$, then:
 \[\int_{X\times Y}f(x,y)\dd{(x,y)}=\int_X\int_Yf(x,y)\dd{y}\dd{x}=\int_Y\int_Xf(x,y)\dd{x}\dd{y}.\]
 \bpr
@@ -3609,7 +3432,10 @@ Note that both $f^+$ and $f^-$ are nonnegative and that
 \[f=f^+-f^-,\quad |f|=f^++f^-.\]
 Thus, the statement holds for all measurable functions.
 \epr
-\subsection{(Lebesgue's) Dominated convergence theorem (DCT) (（勒貝格）控制/受制收斂定理)}
+\sssc{Countable additivity}
+For an indexed family $(A_i)_{i=1}^n$ of piecewise disjoint measurable sets with $n\in\bbN\cup\{\infty\}$, if $f\in L^1(A_i)$ for all $i$, then
+\[\int_{\bigcup_{i=1}^nA_i}f\dd{\mu}=\sum_{i=1}^n\int_{A_i}f\dd{\mu}.\]
+\sssc{(Lebesgue's) Dominated convergence theorem (DCT) (（勒貝格）控制/受制收斂定理)}
 Let $\langle f_n\rangle_{n\in I}$ be a net of real or complex-valued measurable functions on a measure space $(S,\Sigma,\mu)$. If $f_n$ is almost everywhere pointwise convergent to a function $f$, and there is a Lebesgue-integrable function $g$ such that
 \[\abs{f_n}\leq g\]
 almost everywhere for all $n\in I$.
@@ -3688,6 +3514,304 @@ The sum of the volume of the solid formed by rotating the subregions is the volu
 \[\mb{P}=\frac{\sum_iA_i\mb{P}_i}{A}\]
 \[V=\sum_iV_i=\sum_iA_id_i=A\frac{\sum_iA_id_i}{A}=Ad.\]
 \end{proof}
+\ssc{Multiple integral theorems}
+\sssc{Multiple integral to iterated integral theorem}
+For a region $D$ in $\bbR^n$ of the form
+\[D=\left\{(x_1,x_2,\ldots,x_n)\middle|\bigwedge_{i=0}^{n-1}f_i\qty(x_{\sigma(1)},x_{\sigma(2)},\ldots,x_{\sigma(i)})\le x_{\sigma(i+1)}\le g_i\qty(x_{\sigma(1)},x_{\sigma(2)},\ldots,x_{\sigma(i)}),\]
+where $\sigma$ is any permutation on $[1,n]\cap\bbN$, $f_0,g_0$ are real numbers, and $f_i,g_i$ are $i$-ary functions continuous on $\qty[f_{i-1}\qty(x_{\sigma(1)},x_{\sigma(2)},\ldots,x_{\sigma(i-1)}),g_{i-1}\qty(x_{\sigma(1)},x_{\sigma(2)},\ldots,x_{\sigma(i-1)})]$, and function $F\in L^1(D)$,
+\[\int_DF(x_1,x_2,\ldots,x_n)\dd{\mb{x}}=\qty(\int_{f_i\qty(x_{\sigma(1)},x_{\sigma(2)},\ldots,x_{\sigma(i)})}^{g_i\qty(x_{\sigma(1)},x_{\sigma(2)},\ldots,x_{\sigma(i)})})_{i=0}^{n-1}F(x_1,x_2,\ldots,x_n)\qty(\dd{x_{\sigma(n-i)})_{i=0}^{n-1}.\]
+
+
+\sct{Coordinate Systems}
+\ssc{Coordinate system (座標/坐標系統)}
+A coordinate system is a system that uses one or more numbers, or coordinates, to uniquely determine the points on a manifold.
+\ssc{Cartesian coordinate system (笛卡爾座標系統) or rectangular coordinate system (直角座標系統)}
+\sssc{Definition}
+The Cartesian or rectangular coordinate system is a coordinate system in a Euclidean vector space $E$ determined by an orthogonal basis of unit vectors such that the inner product of two vectors in $E$ equals to the dot product of them, and that the norm of $E$ is 2-norm.
+\sssc{Lattice points (格子點)}
+In a Cartesian coordinate system, vectors whose components are all integers are called lattice points.
+\sssc{Quadrant (象限)}
+In two dimensions,
+\RNum{1}(+, +), \RNum{2}(-, +), \RNum{3}(-, -), \RNum{4}(+, -).
+\sssc{Right-hand rule (右手定則)}
+Right-hand rule is a common used orientation for a three-dimensional space. In a right-handed Cartesian coordinate system, if you point the thumb of your right hand in the positive $x$-axis direction and your index finger in the positive $y$-axis direction, then your middle finger (extended perpendicularly from the palm) will point in the positive $z$-axis direction. If not specified otherwise, right-handed Cartesian coordinate system is usually used.
+\sssc{Octant (卦限)}
+In three dimensions, \RNum{1}(+, +, +), \RNum{2}(-, +, +), \RNum{3}(-, -, +), \RNum{4}(+, -, +), \RNum{5}(+, +, -), \RNum{6}(-, +, -), \RNum{7}(-, -, -), \RNum{8}(+, -, -).
+\ssc{Polar coordinate system (極座標系)}
+\sssc{Definition}
+A polar coordinate system is a two-dimensional coordinate system that specifies point positions by a point called pole and a polar axis (a reference ray) that starts from the pole. The two polar coordinates $(r,\theta)$ are:
+\bit
+\item the radial distance $r\in\bbR_{\geq 0}$ defined as the distance of the point from the origin; and
+\item the polar angle, azimuth, or azimuthal angle $\theta$ defined as any signed angle of the ray from the pole to the point from the polar axis with counterclockwise being positive and clockwise being negative.
+\eit
+For $r<0$, $(r,\theta)$ is defined as $(-r,\theta+\pi)$.
+\sssc{Conversion between Cartesian coordinate system}
+If the pole and polar axis of a polar coordinate system is the origin and the positive direction of the $x$ axis of a Cartesian coordinate system, then
+\[x=r\cos\theta,\]
+\[y=r\sin\theta;\]
+\[r=\sqrt{x^2+y^2},\]
+\[\theta=\operatorname{arctan2}(y,x)+2k\pi,\quad k\in\bbZ.\]
+\sssc{Polar rectangle}
+A polar rectangle is a region in $\bbR^2$ of the form
+\[R=\{(r,\theta)\mid a\le r\le b\land\alpha\le\theta\le\beta\}\]
+where $0\le a\le b$ and $0\le\beta-\alpha\le 2\pi$.
+\sssc{Double integral}
+Let
+\[R=\{(r,\theta)\mid a\le r\le b\land\alpha\le\theta\le\beta\}\]
+where $0\le a\le b$ and $0\le\beta-\alpha\le 2\pi$. Then,
+\[\iint_Rf(x,y)\dd{A}=\int_{\alpha}^{\beta}\int_a^bf(r\cos\theta,r\sin\theta)r\dd{r}\dd{\theta}.\]
+\ssc{ISO 31-11 cylindrical coordinate system (圓柱座標系)}
+\sssc{Definition}
+A cylindrical coordinate system is a three-dimensional coordinate system that specifies point positions by a main axis (a chosen directed line) and an auxiliary axis (a reference ray) with the intersection of the two axes called the origin and the plane passing through the origin and perpendicular to the main axis equipped with polar coordinate system with the polar axis being the auxiliary axis called the reference plane. The three cylindrical coordinates $(\rho,\varphi,z)$ are:
+\bit
+\item the radial distance $\rho\in\bbR_{\geq 0}$ defined as the perpendicular distance of the point from the main axis;
+\item the azimuth or azimuthal angle $\varphi\in(-\pi,\pi]$ defined as the polar angle of the projection of the point on the reference plane and undefined on the main axis; and
+\item the axial coordinate or height $z\in\bbR_{\geq 0}$ defined as the signed distance of the point from the reference plane where the sign is defined to be positive if the direction is the same as the main axis and negative if the direction is the negation of the direction of the main axis.
+\eit
+\sssc{Conversion between Cartesian coordinate system}
+If the main axis and the auxiliary axis of a cyclindrical coordinate system is the $z$ axis and the positive direction of the $x$ axis of a Cartesian coordinate system, then
+\[x=\rho\cos\varphi,\]
+\[y=\rho\sin\varphi,\]
+\[z=z;\]
+\[\rho=\sqrt{x^2+y^2},\]
+\[\varphi=\begin{cases}\sgn(y)\arccos\frac{x}{\sqrt{x^2+y^2}},\quad&y\neq 0\lor x>0\\\pi,\quad&y=0\land x<0\end{cases},\]
+\[z=z.\]
+\sssc{Triple integral}
+\[\iiint_Vf(x,y,z)\dd{V}=\int_{z_\text{min}}^{z_\text{max}}\int_{\rho_\text{min}}^{\rho_\text{max}}\int_{\varphi_\text{min}}^{\varphi_\text{max}}f(\rho\cos\varphi,\rho\sin\varphi,z)\rho\dd{\varphi}\dd{\rho}\dd{z}.\]
+\ssc{ISO 80000-2, inclination-azimuth, or physics convention spherical coordinate system (球座標系)}
+A spherical coordinate system is a three-dimensional coordinate system that specifies point positions by a polar axis (a chosen directed line) and an auxiliary axis (a reference ray) with the intersection of the two axes called the origin and the plane passing through the origin and perpendicular to the polar axis equipped with polar coordinate system with the polar axis being the auxiliary axis called the reference plane. The three spherical coordinates $(r,\theta,\varphi)$ are:
+\bit
+\item the radial distance or radius $r\in\bbR_{\geq 0}$ defined as the distance of the point from the origin;
+\item the polar angle, inclination, or zenith angle $\theta\in[0,\pi]$ defined as the angle between the ray from the origin to the point and the positive half of the polar axis and undefined at the origin; and
+\item the azimuth or azimuthal angle $\varphi\in(-\pi,\pi]$ defined as the polar angle of the projection of the point on the reference plane and undefined on the polar axis (of the coordinate system not the reference plane).
+\eit
+\sssc{Conversion between Cartesian coordinate system}
+If the polar axis and the auxiliary axis of a spherical coordinate system is the $z$ axis and the positive direction of the $x$ axis of a Cartesian coordinate system, then
+\[x=r\sin\theta\cos\phi,\]
+\[y=r\sin\theta\sin\phi,\]
+\[z=r\cos\theta;\]
+\[r=\sqrt{x^2+y^2+z^2},\]
+\[\theta=\arccos\frac{z}{r},\]
+\[\varphi=\begin{cases}\sgn(y)\arccos\frac{x}{\sqrt{x^2+y^2}},\quad&y\neq 0\lor x>0\\\pi,\quad&y=0\land x<0\end{cases}.\]
+If the polar axis and the auxiliary axis of a spherical coordinate system is the main axis and the auxiliary axis of a cyclindrical coordinate system, then
+\[\rho=r\sin\theta,\]
+\[\varphi=\varphi,\]
+\[z=r\cos\theta;\]
+\[r=\sqrt{\rho^2+z^2},\]
+\[\theta=\arctan\frac{\rho}{z},\]
+\[\varphi=\varphi.\]
+\sssc{Triple integral}
+\[\iiint_Vf(x,y,z)\dd{V}=\int_{r_\text{min}}^{r_\text{max}}\int_{\theta_\text{min}}^{\theta_\text{max}}\int_{\varphi_\text{min}}^{\varphi_\text{max}}f(r\sin\theta\cos\varphi,r\sin\theta\sin\varphi,r\cos\theta)r^2\sin\theta\dd{\varphi}\dd{\theta}\dd{r}.\]
+
+
+\section{Curve}
+\subsection{Curve}
+\subsubsection{Definition}
+A (parameterized or parametric) (topological) curve in a topological space $X$ is a continuous map $\gamma(t)\colon I\to X$ for some interval $I$, where $t$ is called parameter, and either $\gamma(t)$ or the image of $\gamma(t)$ is called curve, and $\gamma(t)$ is also called the parametrization of the curve.
+
+If $I=[a,b]$, $\gamma(a)$ is called initial point, and $\gamma(b)$ is called terminal point.
+\subsubsection{Closed curve or loop}
+A curve is closed or is a loop if $I=[a,b]$ and $\gamma(a)=\gamma(b)$.
+\subsubsection{Path or arc}
+A curve is a path or an arc if $I$ is closed and bounded.
+\subsubsection{Simple curve}
+A curve is simple if $I=[a,b]$ and for all $s\neq t\in[a,b)$, $\gamma(s)\neq\gamma(t)$.
+\subsubsection{Curve in Enclidean space}
+A plane curve is a curve on a plane. A space curve is a curve in a three-dimensional space.
+
+A Jordan curve is a plane simple closed curve. And the region enclosed by a Jordan curve is called Jordan domain.
+\subsubsection{Orientation}
+Two parameterized curves with same range $\gamma\colon T\to X$ and $\zeta\colon U\to X$ with $T,U$ being intervals, are called of different orientations if there exists $t_1<t_2\in T,u_1<u_2\in U$ such that
+\[\gamma(t_1)=\zeta(u_2)\land\gamma(t_2)=\zeta(u_1)\land\gamma(t_1)\neq\gamma(t_2).\]
+\sssc{Roulette curve}
+PLACEHOLDER
+tracing point
+\subsection{Polar curve}
+\subsubsection{Definition}
+Plane curve or polar equation is a plane curve of the form $r=f(\theta)$, also denoted as $r(\theta)$.
+\subsubsection{Radical scaling}
+Replacing $r$ with $kr$ scales the curve by $k$.
+\subsubsection{Rotation}
+Replacing $\theta$ with $(\theta-\varphi)$ rotates the curve counterclockwise by $\varphi$.
+\subsubsection{Reflection and symmetry}
+Replacing $\theta$ with $-\theta$ reflects the curve through the polar axis.
+
+If a polar curve is unchanged when $\theta$ is replaced with $-\theta$, then it is symmetric about the polar axis.
+
+Replacing $\theta$ with $(\pi-\theta)$ reflects the curve through $\theta=\frac{\pi}{2}$.
+
+If a polar curve is unchanged when $\theta$ is replaced with $(\pi-\theta)$, then it is symmetric about $\theta=\frac{\pi}{2}$.
+
+Replacing either $\theta$ with $(\pi+\theta)$ or $r$ with $-r$ reflects the curve through the pole.
+
+If a polar curve is unchanged when $\theta$ is replaced with $(\pi+\theta)$ or when $r$ is replaced with $-r$, then it is symmetric about the pole.
+
+A polar equation of the form $r=f(\cos(\theta-\varphi))$ is symmetric about the line $\theta=\varphi$.
+\sssc{Circle}
+\[r=2a\cos(\theta-\varphi),\quad 0\le\theta<\pi\]
+is a circle centered at $(a,\varphi)$ with radius $a$.
+\sssc{Quadratic curve}
+\[r=\frac{\ell}{1-\varepsilon\cos(\theta+\varphi),\quad\ell>0\land\varepsilon\geq0\]
+is a quadratic curve with semi-latus rectum $\ell$, eccentricity $\varepsilon$, and one focus at origin.
+\sssc{Limaçon (蝸線)}
+A limaçon or limacon [limasɔ̃], also known as a limaçon of Pascal or Pascal's Snail, is defined as a roulette curve formed by the path of a point fixed to a circle when that circle rolls around the outside of a circle of equal radius. The polar equation of a limaçon has the form
+\[r=b+a\cos(\theta-\varphi),\quad a,b>0,\]
+and for $b>a$ also with constraint $r\neq 0$, where $b$ is the radius of the circles and $a$ is the distance from rolling circle center to tracing point.
+\bit
+\item $b>a$: the curve is a simple closed loop, the tracing point is inside the rolling circle, and the origin satisfies the polar equation while not on the curve.
+\item $b>2a$: the area bounded by the curve is strictly convex.
+\item $b=2a$: the point $(-a,0)$ is a point with $0$ curvature.
+\item $a<b<2a$: the curve has two inflection points.
+\item $a=b$: the curve is called cardioid (心臟線) and has a cusp at origin, and the tracing point in on the circumference (圓周) of the rolling circle.
+\item $a>b$: the curve has an inner loop and passes origin twice, and the tracing point is outside the rolling circle.
+\eit
+\subsection{Arc Length}
+\subsubsection{Definition}
+Given a curve $\mb{r}(t)=(x_1(t),x_2(t),\quad,x_n(t)),\quad t\in[a,b]$. Let $P(t,k)$ be a partition of interval $[a,b]$. Define the polygonal length of $\mb{r}$ along $P(t,k)$ as
+\[s(P(t,k))=\sum_{i=1}^k\|\mb{r}(i)-\mb{r}(i-1)\|.\]
+The arc length of the curve is
+\[s=\sup_{P\in\mathcal{P}}s(P),\]
+where $\mathcal{P}$ is the set of all partitions of interval $[a,b]$.
+
+The curve is called rectifiable iff $s$ is finite.
+
+$s$ is finite iff all $x_i(t)$ is of bounded variation.
+\begin{proof}
+"If" direction:
+
+By triangular inequality,
+\[\|\mb{r}(i)-\mb{r}(i-1)\|\leq\sum_{j=1}^n\abs{x_j(i)-x_j(i-1)}.\]
+\[\sum_{i=1}^k\|\mb{r}(i)-\mb{r}(i-1)\|\leq\sum_{i=1}^k\sum_{j=1}^n\abs{x_j(i)-x_j(i-1)}=\sum_{j=1}^n\sum_{i=1}^k\abs{x_j(i)-x_j(i-1)}<\infty.\]
+
+"Only if" direction:
+
+By triangular inequality, for every $j\in\bbN\land j\leq n$,
+\[\abs{x_j(i)-x_j(i-1)}\leq\|\mb{r}(i)-\mb{r}(i-1)\|.\]
+\[\sum_{i=1}^k\abs{x_j(i)-x_j(i-1)}\leq\sum_{i=1}^k\|\mb{r}(i)-\mb{r}(i-1)\|<\infty.\]
+\end{proof}
+
+The arc length (function) of the curve from $a$ is defined a function of $t$ that maps $t\geq a$ to the arc length of $\mb{r}_{[a,t]}$.
+\subsubsection{For differentiable curve}
+If $\mb{r}$ is differentiable, the arc length from $a$ to $b$ is
+\[s=\int_a^b\|\dv{\mb{r}(t)}{t}\|\dd{t}.\]
+\subsubsection{For polar curve}
+The arc length of differentiable polar curve $r(\theta)$ from $a$ to $b$ is
+\[s=\int_a^b\sqrt{\qty(r(\theta))^2+\qty(r'(\theta))^2}\dd{\theta}.\]
+\bpr
+\[x(\theta)=r\cos(\theta)\]
+\[y(\theta)=r\sin(\theta)\]
+\[x'(\theta)=-r\sin(\theta)+r'\cos(\theta)\]
+\[y'(\theta)=r\cos(\theta)+r'\sin(\theta)\]
+\[(x'(\theta))^2+(y'(\theta))^2=\qty(r(\theta))^2+\qty(r'(\theta))^2\]
+\epr
+\subsubsection{Parameterization}
+It's often useful and sometimes assumed to parameterize a curve w.r.t. its arc length.
+\subsection{Mechanical term}
+In three dimensions, the terms in mechanics are often used to describe a function $\mb{r}$ w.r.t. a real number $t$, e.g., position $\mb{r}$, velocity $\mb{r}'$, speed $\norm{\mb{r}'}$, acceleration $\mb{r}''$, and jerk or jolt $\mb{r}'''$.
+\subsection{Tangent, normal, binormal, curvature, and torsion}
+\subsubsection{(Unit) tangent (vector)}
+The unit tangent vector of a curve $\mb{r}$ at $t$ is
+\[\mb{T}=\hat{\mb{r}'}=\frac{\mb{r}'}{\abs{\mb{r}'}}.\]
+\subsubsection{(Principal/unit) normal (vector)}
+\[\mb{N}=\hat{\mb{T}'}=\frac{\mb{T}'}{\abs{\mb{T}'}}.\]
+\[\mb{T}\cdot\mb{N}=0.\]
+\[\ba
+\mb{N}&=\frac{\norm{\mb{r}'}^2\mb{r}''-\qty(\mb{r}''\cdot\mb{r}')\mb{r}'}{\norm{\norm{\mb{r}'}^2\mb{r}''-\qty(\mb{r}''\cdot\mb{r}')\mb{r}'}}\\
+&=\hat{\mb{r}''_{\perp\mb{r}'}}\\
+&=\frac{\mb{r}''-(\mb{r}''\cdot\mb{T})\mb{T}}{\norm{\mb{r}''-(\mb{r}''\cdot\mb{T})\mb{T}}}
+\ea\]
+In three dimensions,
+\[\mb{N}=\frac{\qty(\mb{r}'\times\mb{r}'')\times\mb{r}'}{\norm{\qty(\mb{r}'\times\mb{r}'')\times\mb{r}'}}\]
+In two dimensions, $\mb{N}$ is $\frac{\pi}{2}$ counterclockwise rotated from $\mb{T}$ if $x'y''-x''y'>0$, and $\mb{N}$ is $\frac{\pi}{2}$ clockwise rotated from $\mb{T}$ if $x'y''-x''y'<0$.
+\bpr
+\[\ba
+T'&=\dv{}{t}\qty(\frac{\mb{r}'}{\norm{\mb{r}'}})\\
+&=\frac{\mb{r}''\norm{\mb{r}'}-\mb{r}'\frac{\mb{r}'\cdot\mb{r}''}{\norm{\mb{r}'}}}{\norm{\mb{r}'}^2}\\
+&=\frac{\norm{\mb{r}'}^2\mb{r}''-\qty(\mb{r}''\cdot\mb{r}')\mb{r}'}{\norm{\mb{r}'}^3}\\
+&=\frac{\mb{r}''_{\perp\mb{r}'}}{\norm{\mb{r}'}}\\
+&=\frac{\mb{r}''-\qty(\mb{r}''\cdot\mb{T})\mb{T}}{\norm{\mb{r}'}}
+\ea\]
+\epr
+\subsubsection{(Unit) binormal (vector)}
+In three dimensions,
+\[\ba
+\mb{B}&\coloneq\mb{T}\times\mb{N}\\
+&=\frac{\mb{r}'\times\mb{r}''}{\norm{\mb{r}'\times\mb{r}''}}
+\ea\]
+\subsubsection{Frenet-Serret frame}
+$\mb{T},\mb{N},\mb{B}$ are collectively called Frenet-Serret basis or TNB basis. This basis with origin being the point $\mb{r}(t)$ is called Frenet-Serret frame.
+\subsubsection{Curvature (曲率)}
+The curvature $\kappa$ and curvature vector $\mb{K}$ of a curve $\mb{r}$ at $t$ are defined, with unit tagent vector $\mb{T}$ and arc length $s$, as
+\[\ba
+\mb{K}&\coloneq\dv{\mb{T}}{s}\\
+&=\flatfrac{\dv{\mb{T}}{t}}{\dv{s}{t}}\\
+&=\frac{\mb{T}'}{\norm{\mb{r}'}}\\
+&=\frac{\norm{\mb{r}'}^2\mb{r}''-\qty(\mb{r}''\cdot\mb{r}')\mb{r}'}{\norm{\mb{r}'}^4}\\
+&=\frac{\mb{r}''_{\perp\mb{r}'}}{\norm{\mb{r}'}^2}\\
+&=\frac{\mb{r}''-\qty(\mb{r}''\cdot\mb{T})\mb{T}}{\norm{\mb{r}'}^2}
+\ea\]
+\[\kappa\coloneq\norm{\mb{K}}\]
+\[\mb{K}=\kappa\mb{N}\]
+In two dimensions, let $\mb{r}(t)=(x(t),y(t))$,
+\[\kappa=\frac{\norm{x'y''-x''y'}}{\qty(x'^2+y'^2)^{3/2}},\]
+and signed curvature $k$ is defined as
+\[k=\frac{x'y''-x''y'}{\qty(x'^2+y'^2)^{3/2}}.\]
+In three dimensions,
+\[\mb{K}=\frac{\qty(\mb{r}'\times\mb{r}'')\times\mb{r}'}{\norm{\mb{r}'}^4}\]
+\[\kappa=\frac{\norm{\mb{r}'\times\mb{r}''}}{\norm{\mb{r}'}^3}.\]
+\subsubsection{Torsion}
+The torsion $\tau$ of a curve $\mb{r}$ at $t$ is defined, with unit normal vector $\mb{N}$ and unit binormal vector $\mb{B}$, as
+\[\ba
+\tau&\coloneq-\dv{\mb{B}}{s}\cdot\mb{N}\\
+&=\frac{\det(\mb{r}',\mb{r}'',\mb{r}''')}{\norm{\mb{r}'\times\mb{r}''}^2}
+\ea\]
+\bpr
+\[\dv{\mb{B}}{t}=\frac{\qty(\mb{r}'\times\mb{r}'')'}{\norm{\mb{r}'\times\mb{r}''}}-
+\mb{r}'\times\mb{r}''\frac{\norm{\mb{r}'\times\mb{r}''}^2'}{\norm{\mb{r}'\times\mb{r}''}^3}\]
+Since the second term is orthogonal to $\mb{N}$,
+\[\ba
+-\dv{\mb{B}}{s}\cdot\mb{N}&=-\frac{\mb{r}'\times\mb{r}'''}{\norm{\mb{r}'\times\mb{r}''}\norm{\mb{r}'}}\cdot\frac{\qty(\mb{r}'\times\mb{r}'')\times\mb{r}'}{\norm{\qty(\mb{r}'\times\mb{r}'')\times\mb{r}'}}\\
+&=\frac{\qty(\mb{r}'''\times\mb{r}')\cdot\qty(\qty(\mb{r}'\times\mb{r}'')\times\mb{r}')}{\norm{\mb{r}'\times\mb{r}''}^2\norm{\mb{r}'}^2}\\
+&=\frac{\det(\mb{r}'',\mb{r}''',\mb{r}')}{\norm{\mb{r}'\times\mb{r}''}^2}\\
+&=\frac{\det(\mb{r}',\mb{r}'',\mb{r}''')}{\norm{\mb{r}'\times\mb{r}''}^2}
+\ea\]
+\epr
+\subsection{Frenet-Serret formulas or Frenet–Serret theorem}
+\[\dv{T}{s}=\kappa\mb{N},\]
+\[\dv{N}{s}=\kappa\mb{T}+\tau\mb{B},\]
+\[\dv{B}{s}=-\tau\mb{N},\]
+\[\begin{bmatrix}
+\dv{\mb{T}}{s}\\
+\dv{\mb{N}}{s}\\
+\dv{\mb{B}}{s}
+\end{bmatrix}
+=
+\begin{bmatrix}
+0 & \kappa & 0\\
+-\kappa & 0 & \tau\\
+0 & -\tau & 0
+\end{bmatrix}
+\begin{bmatrix}
+\mb{T}\\
+\mb{N}\\
+\mb{B}
+\end{bmatrix}
+\bpr
+PLACEHOLDER
+\epr
+\subsection{Surface of revolution}
+\subsubsection{Definition}
+In $\bbR_n$, the area of the surface formed by rotating the curve $\mb{r}(t),\quad t\in[a,b]$ about a rotational axis $\mb{P}+\mb{k}u,\quad u\in\bbR$ with $\|\mb{k}\|=1$ is
+\[A=2\pi\int_{t=a}^b\norm{\mb{r}(t)-\mb{P}-\qty(\mb{k}\cdot\qty(\mb{r}(t)-\mb{P}))\mb{k}}\dd{s(t)},\]
+where $s(t)$ is the arc length function of $\mb{r}(t)$ from $a$ to $t$.
+
+The area is called rectifiable iff $A$ is finite.
+
+$A$ is finite if all components of $\mb{r}$ are all of bounded variation.
+\subsubsection{Two-dimensional curve about principal axis on the same plane}
+The area of the surface formed by rotating the curve $\mb{r}(t)=(x(t),y(t)),\quad t\in[a,b]$ about $y=d$ is
+\[A=2\pi\int_{t=a}^b\abs{y(t)-d}\dd{s(t)},\]
+where $s(t)$ is the arc length function of $\mb{r}$ from $a$ to $t$.
 
 
 \section{Numerical differentiation and integration}
