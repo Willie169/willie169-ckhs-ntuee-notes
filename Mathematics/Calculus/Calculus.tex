@@ -3166,18 +3166,24 @@ which matches the structure of the right-hand Riemann sum \(T_Q\) if we let \(\x
 As the partition \(P\) of \([a, b]\) gets finer, the Riemann sum \(S_P\) converges to \(\int_a^b f(g(x)) g'(x) \, \mathrm{d}x\). Similarly, as the partition \(Q\) of \([g(a), g(b)]\) gets finer, the Riemann sum \(T_Q\) converges to \(\int_{g(a)}^{g(b)} f(u) \, \mathrm{d}u\).
 \end{proof}
 \subsubsection{Multivariate form}
-Let $\mathbf{T}:\,I\subseteq\mathbb{R}^n\to\mathbb{R}^n$ be injective and differentiable on $D\subseteq I$, with all elements of its gradient (i.e. Jacobian matrix) $\nabla\mathbf{T}$ being continuous on $D$, and $f:\,K\supseteq\mathbf{T}(D)\to\mathbb{R}$ be integrable on $\mathbf{T}(D)$. Then:
-\[\int_D f(u_1\,u_2\,\dots\,u_n)\abs{\det\left(\nabla\mathbf{T}\right)}\,\mathrm{d}u_1\,\mathrm{d}u_2\,\dots\,\mathrm{d}u_n=\int_{\mathbf{T}(D)}f(x_1\,x_2\,\dots\,x_n)\cdot\dd{x}_1\dd{x}_2\,\dots\dd{x}_n,\]
+Let $\mathbf{T}\colon I\subseteq\mathbb{R}^n\to\mathbb{R}^n;\;\mb{x}\mapsto\mb{y}$ be injective and differentiable on $D\subseteq I$, its Jacobian matrix $\nabla\mathbf{T}$ being continuous on $D$, and $f\colon K\supseteq\mathbf{T}(D)\to\mathbb{R}$ be integrable on $\mathbf{T}(D)$. Then
+\[\int_Df\qty(\mb{x})\abs{\det\left(\nabla\mathbf{T}\right)}\dd{V}=\int_{\mathbf{T}(D)}f\qty(\mb{T}^{-1}(\mb{y}))\dd{V}\]
 and
-\[\int f(u_1\,u_2\,\dots\,u_n)\abs{\det\left(\nabla\mathbf{T}\right)}\,\mathrm{d}u_1\,\mathrm{d}u_2\,\dots\,\mathrm{d}u_n=\int f(x_1\,x_2\,\dots\,x_n)\cdot\dd{x}_1\dd{x}_2\,\dots\dd{x}_n.\]
+\[\int f\qty(\mb{x})\abs{\det\left(\nabla\mathbf{T}\right)}\dd{V}=\int f\qty(\mb{T}^{-1}(\mb{y}))\dd{V}.\]
 Substitutions from RHS to LHS are also called inverse substitution.
+\bpr
+PLACEHOLDER
+\epr
 \subsubsection{Measure theory form}
-Let $X$ be a locally compact Hausdorff space equipped with a finite Radon measure $μ$, and let $Y$ be a \text{\textsigma}-compact Hausdorff space with a \text{\textsigma}-finite Radon measure $\rho$. Let $\phi:\,X\to Y$ be an absolutely continuous function, (which implies that $\mu(E)=0\implies\rho(\phi(E))=0$). Then there exists a real-valued Borel measurable function $w$ on $X$ such that for every Lebesgue integrable function $f:\,Y\to\mathbb{R}$, the function $(f\circ\phi)\cdot w$ is Lebesgue integrable on $X$, and for every open subset $U$ of $X$
-\[\int_U(f\circ\phi)(x)\cdot w(x)\,\mathrm{d}\mu(x)=\int_{\phi(U)}f(y)\,\mathrm{d}\rho(y).\]
+Let $X$ be a locally compact Hausdorff space equipped with a finite Radon measure $μ$, and let $Y$ be a \text{\textsigma}-compact Hausdorff space with a \text{\textsigma}-finite Radon measure $\rho$. Let $\phi\colon X\to Y$ be an absolutely continuous function. Then there exists a real-valued Borel measurable function $w$ on $X$ such that, for every function $f\colon Y\to\mathbb{R}$ in $L^1(Y)$, the function $(f\circ\phi)\cdot w$ is in $L^1(X)$, and for every open subset $U$ of $X$
+\[\int_U(f\circ\phi)(x)\cdot w(x)\dd{\mu(x)}=\int_{\phi(U)}f(y)\dd{\rho(y)}.\]
 Substitutions from RHS to LHS are also called inverse substitution.
 
-Furthermore, there exists some Borel measurable function $g$ such that 
+Furthermore, there exists some real-valued Borel measurable function $g$ such that 
 \[w(x)=(g\circ\phi)(x).\]
+\bpr
+PLACEHOLDER
+\epr
 \subsection{Integration by parts (IBP) (分部積分法) or partial integration (部分積分法)}
 \subsubsection{Theorem}
 \[\frac{\mathrm{d}}{\mathrm{d}x}\prod_{i=1}^nf_i(x)=\sum_{j=1}^n\left(\frac{\mathrm{d}f_j(x)}{\mathrm{d}x}\frac{\prod_{\substack{i=1\\i\neq j}}^n f_i(x)}{f_j(x)}\right)\]
@@ -3524,6 +3530,8 @@ For a region $D$ in $\bbR^n$ of the form
 \[D=\left\{(x_1,x_2,\ldots,x_n)\middle|\bigwedge_{i=0}^{n-1}f_i\qty(x_{\sigma(1)},x_{\sigma(2)},\ldots,x_{\sigma(i)})\le x_{\sigma(i+1)}\le g_i\qty(x_{\sigma(1)},x_{\sigma(2)},\ldots,x_{\sigma(i)}),\]
 where $\sigma$ is any permutation on $[1,n]\cap\bbN$, $f_0,g_0$ are real numbers, and $f_i,g_i$ are $i$-ary functions continuous on $\qty[f_{i-1}\qty(x_{\sigma(1)},x_{\sigma(2)},\ldots,x_{\sigma(i-1)}),g_{i-1}\qty(x_{\sigma(1)},x_{\sigma(2)},\ldots,x_{\sigma(i-1)})]$, and function $F\in L^1(D)$,
 \[\int_DF(x_1,x_2,\ldots,x_n)\dd{\mb{x}}=\qty(\int_{f_i\qty(x_{\sigma(1)},x_{\sigma(2)},\ldots,x_{\sigma(i)})}^{g_i\qty(x_{\sigma(1)},x_{\sigma(2)},\ldots,x_{\sigma(i)})})_{i=0}^{n-1}F(x_1,x_2,\ldots,x_n)\qty(\dd{x_{\sigma(n-i)})_{i=0}^{n-1}.\]
+\sssc{Surface area}
+PLACEHOLDERPLACEHOLDER 
 
 
 \sct{Coordinate Systems}
@@ -3559,11 +3567,30 @@ If the pole and polar axis of a polar coordinate system is the origin and the po
 A polar rectangle is a region in $\bbR^2$ of the form
 \[R=\{(r,\theta)\mid a\le r\le b\land\alpha\le\theta\le\beta\}\]
 where $0\le a\le b$ and $0\le\beta-\alpha\le 2\pi$.
-\sssc{Double integral}
+\sssc{Lebesgue double integral}
+\[\iint_Df(x,y)\dd{\mu(x,y)}=\iint_Df(r\cos\theta,r\sin\theta)r\dd{\mu(r,\theta)}.\]
+\bpr
+\[T\colon(r,\theta)\mapsto(x,y)=(r\cos\theta,r\sin\theta).\]
+\[J_T=\begin{pmatrix}
+\cos\theta & -r\sin\theta\\
+\sin\theta & r \cos\theta
+\end{pmatrix}\]
+\[\abs{\det(J_T)}=r\]
+\epr
+\sssc{Riemann double integral}
 Let
-\[R=\{(r,\theta)\mid a\le r\le b\land\alpha\le\theta\le\beta\}\]
-where $0\le a\le b$ and $0\le\beta-\alpha\le 2\pi$. Then,
+\[R=\{(r,\theta)\mid a\le r\le b\land\alpha\le\theta\le\beta\},\quad0\le a\le b\land0\le\beta-\alpha\le 2\pi.\]
+Then,
 \[\iint_Rf(x,y)\dd{A}=\int_{\alpha}^{\beta}\int_a^bf(r\cos\theta,r\sin\theta)r\dd{r}\dd{\theta}.\]
+\bpr
+For each
+\[R_{ij}=[r_{i-1},r_i]\times[\theta_{i-1},\theta_i],\]
+let
+\[r_i^*=\frac{1}{2}(r_{i-1}+r_i)\]
+\[\theta_i^*=\frac{1}{2}(\theta_{i-1}+\theta_i)\]
+\[\Delta A_i=r_i^*\Delta r\Delta\theta\]
+\[\sum_{i=1}^m\sum_{j=1}^nf(r_i^*\cos\theta_j^*,r_i^*\sin\theta_j^*)\Delta A_i=\sum_{i=1}^m\sum_{j=1}^nf(r_i^*\cos\theta_j^*,r_i^*\sin\theta_j^*)r_i^*\Delta r\Delta\theta\]
+\epr
 \ssc{ISO 31-11 cylindrical coordinate system (圓柱座標系)}
 \sssc{Definition}
 A cylindrical coordinate system is a three-dimensional coordinate system that specifies point positions by a main axis (a chosen directed line) and an auxiliary axis (a reference ray) with the intersection of the two axes called the origin and the plane passing through the origin and perpendicular to the main axis equipped with polar coordinate system with the polar axis being the auxiliary axis called the reference plane. The three cylindrical coordinates $(\rho,\varphi,z)$ are:
@@ -3580,8 +3607,10 @@ If the main axis and the auxiliary axis of a cyclindrical coordinate system is t
 \[\rho=\sqrt{x^2+y^2},\]
 \[\varphi=\begin{cases}\sgn(y)\arccos\frac{x}{\sqrt{x^2+y^2}},\quad&y\neq 0\lor x>0\\\pi,\quad&y=0\land x<0\end{cases},\]
 \[z=z.\]
-\sssc{Triple integral}
-\[\iiint_Vf(x,y,z)\dd{V}=\int_{z_\text{min}}^{z_\text{max}}\int_{\rho_\text{min}}^{\rho_\text{max}}\int_{\varphi_\text{min}}^{\varphi_\text{max}}f(\rho\cos\varphi,\rho\sin\varphi,z)\rho\dd{\varphi}\dd{\rho}\dd{z}.\]
+\sssc{Lebesgue triple integral}
+\bpr
+PLACEHOLDER
+\epr
 \ssc{ISO 80000-2, inclination-azimuth, or physics convention spherical coordinate system (球座標系)}
 A spherical coordinate system is a three-dimensional coordinate system that specifies point positions by a polar axis (a chosen directed line) and an auxiliary axis (a reference ray) with the intersection of the two axes called the origin and the plane passing through the origin and perpendicular to the polar axis equipped with polar coordinate system with the polar axis being the auxiliary axis called the reference plane. The three spherical coordinates $(r,\theta,\varphi)$ are:
 \bit
@@ -3604,8 +3633,10 @@ If the polar axis and the auxiliary axis of a spherical coordinate system is the
 \[r=\sqrt{\rho^2+z^2},\]
 \[\theta=\arctan\frac{\rho}{z},\]
 \[\varphi=\varphi.\]
-\sssc{Triple integral}
-\[\iiint_Vf(x,y,z)\dd{V}=\int_{r_\text{min}}^{r_\text{max}}\int_{\theta_\text{min}}^{\theta_\text{max}}\int_{\varphi_\text{min}}^{\varphi_\text{max}}f(r\sin\theta\cos\varphi,r\sin\theta\sin\varphi,r\cos\theta)r^2\sin\theta\dd{\varphi}\dd{\theta}\dd{r}.\]
+\sssc{Lebesgue triple integral}
+\bpr
+PLACEHOLDER
+\epr
 
 
 \section{Curve}
