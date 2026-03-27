@@ -1,0 +1,101 @@
+\section{Continuity (連續性)}
+\subsection{Continuity}
+\subsubsection{Definition of continuity of real functions}
+\begin{itemize}
+\item For a point $a$ in the domain of a function $f$, if and only if $\exists\lim_{x\to a}f(x)$ and $\lim_{x\to a}f(x)=f(a)$, we say $f(x)$ is continuous (連續的) at $a$.
+\item For a point $a$ in the domain of a function $f$, if and only if $\exists\lim_{x\to a^+}f(x)$ and $\lim_{x\to a^+}f(x)=f(a)$, we say $f(x)$ is continuous from the right or right-continuous at $a$; if and only if $\exists \lim_{x\to a^-} f(x)$ and $\lim_{x\to a^-} f(x)=f(a)$, we say $f(x)$ is continuous from the left or left-continuous at $a$.
+\item For an open interval $I$ that is a subset of the domain of a function $f$, if and only if $f(x)$ is continuous at all points in $I$, we say $f(x)$ is continuous on $I$.
+\item For an right-open interval $[a,b)$ that is a subset of the domain of a function $f$, if and only if $f(x)$ is continuous on $(a,b)$ and continuous from the right at $a$, we say $f(x)$ is continuous on $[a,b)$.
+\item For an left-open interval $(a,b]$ that is a subset of the domain of a function $f$, if and only if $f(x)$ is continuous on $(a,b)$ and continuous from the left at $b$, we say $f(x)$ is continuous on $(a,b]$.
+\item For an closed interval $[a,b]$ that is a subset of the domain of a function $f$, if and only if $f(x)$ is continuous on both $[a,b)$ and $(a,b]$, we say $f(x)$ is continuous on $[a,b]$.
+\item if and only if $f(x)$ is continuous at all points in its domain, we say $f(x)$ is continuous.
+\item $f$ is called continuous at $\infty$ if $\lim_{x\to\infty}f(x)\in\bbR\cup\{-\infty,\infty\}$.
+\item $f$ is called continuous at $-\infty$ if $\lim_{x\to-\infty}f(x)\in\bbR\cup\{-\infty,\infty\}$.
+\eit
+\subsubsection{Definition of continuity of functions between topological spaces}
+\begin{itemize}
+\item A function $f\colon I\subseteq X\to Y$ where $X$ and $Y$ are topological spaces is continuous at a point $x\in I$ if and only if for any neighborhood $V$ of $f(x)$ in $Y$, there is a neighborhood $U$ of $x$ such that $f(U)\subseteq V$.
+\item A function $f\colon I\subseteq X\to Y$ where $X$ and $Y$ are topological spaces is continuous if and only if for any open subset $V$ of $Y$, the preimage of $f$ on $V$ is an open subset of $X$.
+\item A function $f\colon I\subseteq X\to Y$ where $X$ and $Y$ are topological spaces is continuous on a subset $J$ of $I$ if and only if for any open subset $V$ of $Y$, the joint set of the preimage of $f$ on $V$ and $J$ is open in the subspace topology of $X$ in $J$.
+\eit
+\subsubsection{Discontinuity (不連續（點）)}
+A point is a discontinuity of a function $f$ if it is in the domain of $f$ but $f$ is not continuous on it.
+\subsubsection{Type of discontinuity of real functions}
+For a function $f$ with domain $U\subseteq\mathbb{R}$ and a point $a\in U$ that $f$ is discontinuous at, the discontinuity $a$ of $f$ can be classified as below:
+\bit
+\item \tb{Removable (可去) discontinuity}: If $\exists\lim_{x\to a}f(x)\land\lim_{x\to a}f(x)\neq f(a)$, we call $f(a)$ a removable discontinuity. A discontinuity that is not a removable discontinuity is called a non-removable discontinuity.
+\item \tb{Jump (跳躍) discontinuity}: If $\exists\lim_{x\to a^-}f(x)\land\exists\lim_{x\to a^+}f(x)\land\lim_{x\to a^-}f(x)\neq\lim_{x\to a^+}f(x)$, we call $f(a)$ a jump discontinuity.
+\item\tb{Infinite (無窮) discontinuity}: If at least one of $\lim_{x\to a^-}f(x)$ and $\lim_{x\to a^+}f(x)$ does not exist, and that those in $\lim_{x\to a^-}f(x)$ and $\lim_{x\to a^+}f(x)$ that do not exist are either $\infty$ or $-\infty$, we call $f(a)$ an infinite discontinuity.
+\item\tb{Type I discontinuity}: A discontinuity of $f$ that is either a removable discontinuity or a jump discontinuity is called a type I discontinuity of $f$.
+\item\tb{Essential (本質) discontinuity or type II discontinuity}: A discontinuity of $f$ that is not a type I discontinuity is called an essential discontinuity or a type II discontinuity of $f$.
+\eit
+\subsubsection{Removable discontinuity of functions between topological spaces}
+Let $f\colon I\subseteq X\to Y$ be a function where $X$ and $Y$ are topological spaces. We say that $f(a)$ is a removable discontinuity of $f$ iff $f$ is discontinuous at $a$ and there exists $L\in Y$ such that the function
+\[g(x)=\begin{cases}L,\quad&x=a\\f(x),\quad&x\in I\setminus\{a\}\end{cases}\]
+is continuous at $a$. A discontinuity that is not a removable discontinuity is called a non-removable discontinuity.
+\subsubsection{Singularity or singular point (奇點)}
+A point is a singularity or a singular point of a function $f$ over a topological space iff it is either in the relative complement of $D_f$ in the closure of $D_f$ or a discontinuity of $f$.
+\subsubsection{Isolated singularity}
+For a function $f$ over a topological space and a singularity $a$ of $f$, $a$ is an isolated singularity iff there exists an open set $U\subseteq D_f\cup\{a\}$ such that there is no singularity of $f$ in $U\setmimus\{a\}$.
+\subsubsection{Removable singularity}
+An isolated singularity $a$ of a function $f$ over a topological space is a removable singularity iff there exists a function $g$ defined on $D_f\cup\{a\}$ such that $f(x)=g(x)\forall x\in D_f\setmimus\{a\}$ and $a$ is not a singularity of $g$.
+\subsubsection{Examples of continuous real functions}
+The following types of functions are continuous at every number in their domains: algebraic functions, trigonometric functions, inverse trigonometric functions, exponential functions, logarithmic functions.
+\subsection{Piecewise continuity}
+\subsubsection{Piecewise continuity of real functions}
+Let $f\colon B\subseteq\bbR\to\bbR$ be a function and $D$ be subset of $B$. If there exists an indexed family $\{[a_i,b_i]\mid i\in I\}$ of closed intervals such that:
+\begin{itemize}
+\item for every closed interval $V$, the set $\{i\in I\mid V\cap [a_i,b_i]\neq\varnothing\}$ is finite (some sources require instead that $n(I)$ is finite, which is stronger and not used here),
+\item $D\subseteq\bigcup_{i\in I}[a_i,b_i]\subseteq B$,
+\item function $f\big\vert_{a_i}^{b_i}\colon(a_i,b_i)\to Y$ is continuous for every $i\in I$, and
+\item there exist finite $\lim_{x\to a_i^{\phantom{i}+}}f(x)$ and $\lim_{x\to b_i^{\phantom{i}-}}f(x)$ for every $i\in I$.
+\end{itemize},
+we say $f$ is piecewise continuous on $D$.
+
+We say $f$ is piecewise continuous iff it is piecewise continuous on $B$.
+\subsubsection{Piecewise continuity of functions between topological spaces}
+Let $X$ and $Y$ be topological spaces, $f\colon B\subseteq X\to Y$ be a function, and $D$ be a subset of $B$. If there exists a locally finite (some sources require instead finite, which is stronger and not used here) indexed family $\{U_i\mid i\in I\}$ of closed subsets of $X$ such that:
+\begin{itemize}
+\item $D\subseteq\bigcup_{i\in I}U_i\subseteq B$, and
+\item there exists a function $g_i\colon U_i\to Y$ that is continuous on $U_i$ such that $\forall x\in\operatorname{int}\left(U_i\right)\colon f(x)=g_i(x)$ for every $i\in I$.
+\end{itemize},
+we say $f$ is piecewise continuous on $B$.
+
+We say $f$ is piecewise continuous iff it is piecewise continuous on $B$.
+\subsection{Uniform continuity (一致連續)}
+\subsubsection{Uniform continuity of functions between metric spaces}
+Let $(X,d_1)$ and $(Y,d_2)$ be metric spaces, and $f\colon D\subseteq X\to Y$ be a function. $f$ is called to be uniformly continuous if for every real number $\varepsilon >0$ there exists a real number $\delta >0$ such that $x,y\in D$ with $d_{1}(x,y)<\delta$ implies $d_{2}(f(x),f(y))<\varepsilon$.
+
+Let $(X,d_1)$ and $(Y,d_2)$ be metric spaces, and $f\colon O\subseteq X\to Y$ be a function. $f$ is called to be uniformly continuous on $D\subseteq O$ if for every real number $\varepsilon >0$ there exists a real number $\delta >0$ such that $x,y\in D$ with $d_{1}(x,y)<\delta$ implies $d_{2}(f(x),f(y))<\varepsilon$.
+\subsubsection{Uniform continuity of functions between topological vector spaces}
+Let $X$ and $Y$ be topological vector spaces, and $f\colon D\subseteq X\to Y$ be a function. $f$ is called to be uniformly continuous if for every neighborhood $V$ of the zero vector in $Y$, there exists a neighborhood $U$ of the zero vector in $X$ such that $x,y\in D$ with $x-y\in U$ implies $f(x)-f(y)\in V$.
+
+Let $X$ and $Y$ be topological vector spaces, and $f\colon O\subseteq X\to Y$ be a function. $f$ is called to be uniformly continuous on $D\subseteq O$ if for every neighborhood $V$ of the zero vector in $Y$, there exists a neighborhood $U$ of the zero vector in $X$ such that $x,y\in D$ with $x-y\in U$ implies $f(x)-f(y)\in V$.
+\subsection{Absolute continuity (絕對連續) of functions from an interval to a metric space}
+Let $(X, d)$ be a metric space and $I\subseteq\mathbb{R}$ be an interval. A function $f\colon I \to X$ is absolutely continuous on $I$ if for every positive number $\varepsilon$, there exists a positive number $\delta$ such that for any finite sequence of disjoint subintervals $[x_k, y_k]$ of $I$,
+\[\sum _{k}\left|y_{k}-x_{k}\right|<\delta\]
+implies
+\[\sum _{k}d\left(f(y_{k}),f(x_{k})\right)<\varepsilon.\]
+The collection of all absolutely continuous functions from $I$ into $X$ is denoted $AC(I; X)$.
+
+Let $(X, d)$ be a metric space and $I\subseteq\mathbb{R}$ be an interval. A function $f\colon I \to X$ is absolutely continuous on $J\subseteq I$ if for every positive number $\varepsilon$, there exists a positive number $\delta$ such that for any finite sequence of disjoint subintervals $[x_k, y_k]$ of $J$,
+\[\sum _{k}\left|y_{k}-x_{k}\right|<\delta\]
+implies
+\[\sum _{k}d\left(f(y_{k}),f(x_{k})\right)<\varepsilon.\]
+\subsection{Lipschitz continuity (利普希茨連續)}
+\subsubsection{(Golbal/regular) Lipschitz (continuity) of functions between metric spaces}
+Let $(X,d_1)$ and $(Y,d_2)$ be metric spaces, and $f\colon D\subseteq X\to Y$ be a function. $f$ is called to be Lipschitz continuous if there exists a real constant $K$ such that $\forall x,y\in D$, $d_{2}(f(x),f(y))\leq Kd_{1}(x,y)$.
+
+Let $(X,d_1)$ and $(Y,d_2)$ be metric spaces, and $f\colon O\subseteq X\to Y$ be a function. $f$ is called to be Lipschitz continuous on $D\subseteq O$ if there exists a real constant $K$ such that $\forall x,y\in D$, $d_{2}(f(x),f(y))\leq Kd_{1}(x,y)$.
+
+If a function $f\colon D\subseteq X\to Y$ between metric spaces $(X,d_1)$ and $(Y,d_2)$ is such that there exists a real constant $K$ such that $\forall x,y\in D$, $d_{2}(f(x),f(y))\leq Kd_{1}(x,y)$, then, any such $K$ is called a Lipschitz constant (利普希茨常數) of the function $f$, and $f$ is called to be $K$-Lipschitz or Lipschitz continuous with constant $K$. The smallest such $K$ is called (best) Lipschitz constant or dilation of $f$.
+\subsubsection{Local Lipschitz (continuity) of functions between metric spaces}
+Let $(X,d_1)$ and $(Y,d_2)$ be metric spaces, and $f\colon D\subseteq X\to Y$ be a function. $f$ is called to be locally Lipschitz continuous at $u\in D$, if there exists a neighborhood $U$ of $u$ and a real constant $K$ such that $\forall x,y\in U$, $d_{2}(f(x),f(y))\leq Kd_{1}(x,y)$.
+
+Let $(X,d_1)$ and $(Y,d_2)$ be metric spaces, and $f\colon D\subseteq X\to Y$ be a function. $f$ is called to be locally Lipschitz continuous if for any $u\in D$, it is locally continuous at $u$.
+
+Let $(X,d_1)$ and $(Y,d_2)$ be metric spaces, and $f\colon O\subseteq X\to Y$ be a function. $f$ is called to be locally Lipschitz continuous on $D\subseteq O$ if for any $u\in D$, it is locally continuous at $u$.
+\subsubsection{Short map}
+A short map is a function between metric spaces that is $1$-Lipschitz.
+\subsubsection{Contraction mapping, contraction map, contraction, contractive mapping, contractive map, or contractor (壓縮映射)}
+A contraction mapping is a function $f$ from a metric space to itself such that there exists a real number $0\leq K<1$ such that $f$ is $K$-Lipschitz, in which $K$ is sometimes called a contraction constant and the smallest such $K$ is sometimes called the best contraction constant or the contraction constant.

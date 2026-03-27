@@ -1,0 +1,758 @@
+\section{Derivative Theorems and Methods}
+\subsection{Differentiation Theorems and Methods}
+\subsubsection{Linearity, or sum rule, difference rule, and constant multiple rule}
+If functions $f$ and $g$ are differentiable on $I$ and $a,b\in\mathbb{R}$, then $af(x)+bg(x)$ is also differentiable on $I$ and its derivative is given by
+\[\dv{}{x}\qty(af(x)+bg(x))=af'(x)+bg'(x).\]
+\begin{proof}
+\[\ba
+\dv{}{x}\qty(af(x)+bg(x))&=\lim_{h\to 0}\frac{af(x+h)+bg(x+h)-af(x)-bg(x)}{h}\\
+&=af'(x)+bg'(x)
+\ea\]
+\end{proof}
+\subsubsection{Product rule (乘法定則)}
+If functions $f$ and $g$ are differentiable on $I$, then the product $fg$ is also differentiable on $I$ and its derivative is given by
+\[\dv{x}\qty(f(x)g(x))=f'(x)g(x)+f(x)g'(x).\]
+\begin{proof}
+\[\begin{aligned}
+\dv{f(x)g(x)}{x}&=\lim_{h\to 0}\frac{f(x+h)g(x+h)-f(x)g(x)}{h}\\
+&=\lim_{h\to 0}\frac{f(x+h)(g(x+h)-g(x))+g(x)(f(x+h)-f(x))}{h}\\
+&=f(x)g'(x)+f'(x)g(x).
+\end{aligned}\]
+\end{proof}
+\subsubsection{General Leibniz rule}
+If functions $f$ and $g$ are $n$-times differentiable on $I$, then the product $fg$ is also $n$-times differentiable on $I$ and its derivative is given by
+\[(fg)^{(n)}=\sum _{k=0}^{n}{n \choose k}f^{(n-k)}g^{(k)}.\]
+\subsubsection{Product rule for dot product}
+If functions $f$ and $g$ are differentiable on $I\subseteq\bbR^n$, then the dot product $f\cdot g$ is also differentiable on $I$ and its derivative is given by
+\[\dv{x}\qty(f(x)\cdot g(x))=f'(x)\cdot g(x)+f(x)\cdot g'(x).\]
+\begin{proof}
+\[\begin{aligned}
+\dv{f(x)\cdot g(x)}{x}&=\lim_{h\to 0}\frac{f(x+h)\cdot g(x+h)-f(x)\cdot g(x)}{h}\\
+&=\lim_{h\to 0}\frac{f(x+h)\cdot (g(x+h)-g(x))+g(x)\cdot (f(x+h)-f(x))}{h}\\
+&=f(x)\cdot g'(x)+f'(x)\cdot g(x).
+\end{aligned}\]
+\end{proof}
+\subsubsection{Product rule for cross product}
+If functions $f$ and $g$ are differentiable on $I\subseteq\bbR^3$, then the cross product $f\times g$ is also differentiable on $I$ and its derivative is given by
+\[\dv{x}\qty(f(x)\times g(x))=f'(x)\times g(x)+f(x)\times g'(x).\]
+\begin{proof}
+\[\begin{aligned}
+\dv{f(x)\times g(x)}{x}&=\lim_{h\to 0}\frac{f(x+h)\times g(x+h)-f(x)\times g(x)}{h}\\
+&=\lim_{h\to 0}\frac{f(x+h)\times (g(x+h)-g(x))+g(x)\times (f(x+h)-f(x))}{h}\\
+&=f(x)\times g'(x)+f'(x)\times g(x).
+\end{aligned}\]
+\end{proof}
+\subsubsection{Quotient rule (除法定則)}
+If functions $f$ and $g$ are differentiable on $I$ and $g\neq 0$ on $I$, then the quotient $\frac{f}{g}$ is also differentiable on $I$ and its derivative is given by
+\[\dv{x}\qty(\frac{f(x)}{g(x)})=\frac{f'(x)g(x)-f(x)g'(x)}{\qty(g(x))^2}.\]
+\begin{proof}
+\[\begin{aligned}
+\dv{}{x}\frac{f(x)}{g(x)}&=\lim_{h\to 0}\frac{\frac{f(x+h)}{g(x+h)}-\frac{f(x)}{g(x)}}{h}\\
+&=\lim_{h\to 0}\frac{f(x+h)g(x)-f(x)g(x+h)}{h\,g(x+h)g(x)}\\
+&=\lim_{h\to 0}\frac{(f(x+h)-f(x))g(x)-f(x)(g(x+h)-g(x))}{h\,g(x+h)g(x)}\\
+&=\lim_{h\to 0}\frac{f(x+h)-f(x)}{h\,g(x+h)}-f(x)\lim_{h\to 0}\frac{g(x+h)-g(x)}{h\,g(x+h)g(x)}\\
+&=\frac{f'(x)g(x)-f(x)g'(x)}{g(x)^2}
+\end{aligned}\]
+\end{proof}
+\subsubsection{Chain rule (連鎖律) of real functions}
+Let $f\colon X\subseteq\bbR\to\bbR$ and $g\colon Y\subseteq\bbR\to\bbR$ be functions, $g$ be differentiable on $I\subseteq\bbR$, and $f$ be differentiable on $g(I)$. Then the composite $f\circ g$ is differentiable on $I$ and its derivative on $I$ is given by
+\[\dv{}{x}\qty((f\circ g)(x))=f'\qty(g(x))g'(x).\]
+\begin{proof}
+\[\ba
+\dv{}{x}\qty((f\circ g)(x))&=\lim_{h\to 0}\frac{f\qty(g(x+h))-f\qty(g(x))}{h}\\
+&=\lim_{h\to 0}\frac{f\qty(g(x+h))-f\qty(g(x))}{g(x+h)-g(x)}\cdot\frac{g(x+h)-g(x)}{h}\\
+&=f'\qty(g(x))g'(x)
+\ea\]
+\end{proof}
+\sssc{Multivariable chain rule}
+Suppose
+\[F\qty(t,\mb{s}_1,\mb{s}_2,\ldots,\mb{s}_n)=f\qty(x_1(t,\mb{s}_1),x_2(t,\mb{s}_2),\ldots,x_n(t,\mb{s}_n)),\]
+then
+\[\pdv{F}{t}=\sum_{i=1}^n\pdv{f}{x_i}\pdv{x_i}{t}.\]
+\subsubsection{Faà di Bruno's formula}
+\bma
+&\frac{\mathrm{d}^n}{\mathrm{d}x}f\left(g(x)\right)\\
+=&\sum_{\sum_{i=1}^nim_i=n,\quad m_i\in\mathbb{N}_0}\frac{n!}{\prod_{j=1}^nm_j!}\cdot\\
+&f^{\qty(\sum_{j=1}^nm_j)}\left(g(x)\right)\cdot\\
+&\prod_{j=1}^n\left(\frac {g^{(j)}(x)}{j!}\right)^{m_j}.
+\eam
+\subsubsection{Chain rule of real vector functions}
+Let $f\colon X\subseteq\bbR^n\to\bbR^p$ and $g\colon Y\subseteq\bbR^m\to\bbR^n$ be functions, $g$ be differentiable on $\Omega\subseteq\bbR^m$, and $f$ be differentiable on $g(\Omega)$. Then the composite $f\circ g$ is differentiable on $\Omega$ and its derivative on $\Omega$ is given by
+\[\nabla\qty(f\circ g)(\mb{x})=(\nabla f)(g(\mb{x}))\cdot(\nabla g)(\mb{x}).\]
+\subsubsection{Exponential Bell polynomials}
+Partially or incomplete exponential Bell polynomials $B_{n,k}\qty(x_1,x_2,\ldots, x_{n-k+1})$ is defined as
+\[B_{n,k}\qty(x_1,x_2,\ldots, x_{n-k+1})=n!\sum_{\langle j_i\rangle\in C}\prod_{i=1}^{n-k+1}\frac{x_i^{\phantom{i}j_i}}{(i!)^{j_i}j_i!},\]
+where
+\[C=\left\{\langle j_i\rangle_{i=1}^{n-k+1}\middle|\sum_{i=1}^{n-k+1}=k\land\sum_{i=1}^{n-k+1}ij_i=n\right\}.\]
+Complete exponential Bell polynomial $B_n\qty(x_1,x_2,\ldots, x_n)$ is defined as
+\[B_n\qty(x_1,x_2,\ldots, x_n)=n!\sum_{k=0}^nB_{n,k}\qty(x_1,x_2,\ldots, x_{n-k+1}).\]
+\subsubsection{Derivative of inverse functions}
+\[\qty(f^{-1})'(x)=\frac{1}{f'\qty(f^{-1}(x)).\]
+\begin{proof}
+\[f\qty(f^{-1}(x))=x.\]
+Differentiate both sides:
+\[f'\qty(f^{-1}(x))\qty(f^{-1})'(x)=1.\]
+\end{proof}
+\[\qty(f^{-1})''(x)=\frac{f''\qty(f^{-1}(x))}{\qty(f'\qty(f^{-1}(x)))^3}.\]
+\begin{proof}
+\[f'\qty(f^{-1}(x))\qty(f^{-1})'(x)=1.\]
+Differentiate both sides:
+\[f''\qty(f^{-1}(x))\qty(\qty(f^{-1})'(x))^2+f'\qty(f^{-1}(x))\qty(f^{-1})''(x)=0.\]
+\[\qty(f^{-1})''(x)=\frac{f''\qty(f^{-1}(x))\qty(\qty(f^{-1})'(x))^2}{f'\qty(f^{-1}(x))}=\frac{f''\qty(f^{-1}(x))}{\qty(f'\qty(f^{-1}(x)))^3}.\]
+\end{proof}
+\[\dv[n]{f^{-1}(x)}{x}=\frac{(-1)^{n-1}}{\qty(f'\qty(f^{-1}(x)))^{2n-1}}B_{n-1}\sum_{i=2}^{n}f^{(i)}\qty(f^{-1}(x)),\quad n\in\bbN,\]
+where $B_n$ is complete exponential Bell polynomial.
+\subsubsection{Implicit function theorem (隱函數定理) of two real variables}
+Given a function $f(x,y)$ is a function that is continuously differentiable on a neighborhood of a point $(x_0,y_0)$, $f(x_0,y_0)=0$, and $\pdv{f}{y}(x_0,y_0)\neq 0$ on a neighborhood of $(x_0,y_0)$, then there exists a unique differentiable function $g$ such that $y_0=g(x_0)$ and $f(x,g(x))=0$ on a neighborhood of $x_0$. Moreover, by differentiating both sides of $f(x,g(x))=0$, called implicit differentiation, we obtain
+\[g'(x)=-\frac{\pdv{f}{x}(x,g(x))}{\pdv{f}{y}(x,\varphi(x))}.\]
+\subsubsection{Implicit function theorem of multiple real variables}
+Below, we will denote $(\mb{x},\mb{y})$ as an element of $\bbR^{(n+m)}$ for some $\mb{x}\in\bbR^n$ and $\mb{y}\in\bbR^m$, and denote the left $n$ columns of $(Df)(\mb{a},\mb{b})$ as $J_{f,\mb{x})$, and the right $m$ columns of $(Df)(\mb{a},\mb{b})$ as $J_{f,\mb{y})$. Given a function $f\colon D\subseteq\bbR^{(n+m)}\to\bbR^m$ that is continuously differentiable on a neighborhood of a point $(\mb{a},\mb{b})$, $f(\mb{a},\mb{b})=\mb{0}$, and $J_{f,\mb{y})(\mb{a},\mb{b})$ is invertible, then there exists a unique function $g$ such that $\mb{b}=g(\mb{a})$ and $f(\mb{x},g(\mb{x}))=\mb{0}$ on a neighborhood of $\mb{a}$. Moreover, by differentiating both sides of $f(\mb{x},g(\mb{x}))=\mb{0}$, called implicit differentiation, we obtain
+\[(Dg)(\mb{x})=-\qty[J_{f,\mb{y}}(\mb{x},g(\mb{x}))]^{-1}\qty[J_{f,\mb{x}}(\mb{x},g(\mb{x}))],\]
+or for each component $x_i$ of $\mb{x}$,
+\[\pdv{g}{x_i}=-\qty[J_{f,\mb{y}}(\mb{x},g(\mb{x}))]^{-1}\pdv{f}{x_i}.\]
+\subsubsection{Derivative of natural logarithm of absolute value of function}
+If functions $f$ is differentiable and nonzero on $I$, then $\ln|f(x)|$ is also differentiable on $I$ and its derivative is given by
+\[\dv{\ln|f(x)|}{x}=\frac{f'(x)}{f(x)}.\]
+\subsubsection{Logarithmic differentiation}
+Logarithmic differentiation is a method for finding derivatives by taking the natural logarithm of (the absolute values of) both sides of an equation first, and then differentiating.
+
+It’s especially useful when the function involves products or quotients of many factors, or variables in both the base and the exponent.
+\subsubsection{Derivative of variable base, constant exponent funcion}
+If $n\in\bbR$ and $f(x)$ is differentiable on $I$, then $\qty(f(x))^n$ is also differentiable on $I$ and its derivative is given by
+\[\dv{}{x}\qty(f(x))^n=n\qty(f(x))^{n-1}f'(x).\]
+\subsubsection{Derivative of constant base, variable exponent funcion}
+If $n\in\bbR$ and $f(x)$ is differentiable on $I$, then $n^{f(x)}$ is also differentiable on $I$ and its derivative is given by
+\[\dv{}{x}n^{f(x)}=n^{f(x)}\qty(\ln n)f'(x).\]
+\subsubsection{Derivative of variable base, variable exponent funcion}
+\[\dv{}{x}\qty(f(x))^{g(x)}=\qty(f(x))^{g(x)}\qty(g'(x)\ln(f(x))+g(x)\frac{f'(x)}{f(x)}).\]
+\begin{proof}
+\[y\coloneq\qty(f(x))^{g(x)}\]
+Take natural logarithm of both sides:
+\[\ln y=g(x)\ln(f(x)).\]
+Take differentiation of both sides:
+\[\frac{y'}{y}=g'(x)\ln(f(x))+g(x)\frac{f'(x)}{f(x)}.\]
+\[y'=\qty(f(x))^{g(x)}\qty(g'(x)\ln(f(x))+g(x)\frac{f'(x)}{f(x)}).\]
+\end{proof}
+\sssc{Existence of total derivative}
+For a function $f\colon D\subseteq\bbR^n\to\bbR^m$, $f'$ exists at a point $a\in D$ iff
+\[\lim_{h\to 0}\frac{f(a+h)-L(a+h)}{\|h\|}=0,\]
+where $L$ is the linearization of $f$ at $a$, that is,
+\[L(x)=f(a)+\nabla f(a)(x-a),\]
+and the derivative of $f$ at $a$ is $\nabla f(a)$.
+\bpr
+$f'(a)$ exists iff there exists a bounded linear operator $A\colon\bbR^n\to\bbR^m$ such that
+\[\lim_{h\to0}\frac{f(a+h)-f(a)-A(h)}{\|h\|}=0.\]
+Suppose the limit is 0. For each $x_i$, let the unit vector along its positive direction be $e_i$, along the line $x_it,\quad t\in\bbR$,
+\[\lim_{t\to0}\frac{f(a+e_it)-f(a)-A(e_it)}{t}=\pdv{f}{x_i}(a)-A(e_i)\]
+Thus $A_i=\pdv{f}{x_i}(a)$, and
+\[A=\nabla f(a)\]
+And
+\[\frac{f(a+h)-f(a)-A(h)}{\|h\|}=\frac{f(a+h)-f(a)+\nabla f(a)(h)}{\|h\|}=\frac{f(a+h)-L(a+h)}{\|h\|}\]
+\epr
+\subsection{Graph-related}
+\subsubsection{Differentiability implies continuity}
+Let $V$ and $W$ be normed vector spaces, $U$ be an open subset of $V$, and $f\colon U\subseteq V\to W$ be a function. For a point $a\in U$, $f$ is differentiable at $a$ implies it is continuous at $a$; for an open subset $I\subseteq U$, $f$ is differentiable on $I$ implies it is continuous on $I$.
+\begin{proof}
+$f$ is differentiable at $a$ iff there exists bounded linear operator $A\colon V\to W$ such that
+\[\lim_{\|h\|_V\to 0}\frac{\|f(a+h)-f(a)-A(h)\|_W}{\|h\|_V}=0,\]
+that is,
+\[\forall\varepsilon>0\colon\exists\delta>0\text{\ s.t.\ }\|h\|_V<\delta\implies\|f(a+h)-f(a)-A(h)\|_W\leq\varepsion\|h\|_V.\]
+By the triangular identity,
+\[\|f(a+h)-f(a)\|_W\leq\|A(h)\|_W+\|f(a+h)-f(a)-A(h)\|_W.\]
+By the definition of bounded linear operator, there exists $C\in\bbR_{>0}$ such that
+\[\|A(h)\|_W\leq C\|h\|_V.\]
+\[\|f(a+h)-f(a)\|_W\leq (C+\varepsilon)\|h\|_V.\]
+Thus,
+\[\forall\varepsilon>0\colon\exists\delta'=\frac{\varepsilon}{C+\varepsilon}\text{\ s.t.\ }\|h\|_V<\delta'\implies\|f(a+h)-f(a)\|_W\leq(C+\varepsilon)\|h\|_V<(C+\varepsilon)\delta'=\varepsilon.\]
+\end{proof}
+\subsubsection{Extreme Value Theorem (EVT) (極值定理)}
+Let function $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ be continuous on an interval $[a,b]\subseteq I$, then
+\[\exists c,d \in [a, b] \text{\ s.t.\ }\forall x \in [a, b]\colon f(c)\geq f(x)\geq f(d).\]
+\begin{proof}
+We first claim that $f$ is bounded on $[a,b]$. Argue by contradiction. Suppose $f$ is not bounded-above.
+
+For any $n\in\mathbb{N}$, there exists $x_n\in [a,b]$ such that $f\qty(x_n)>n$. This defines a sequence $\langle x_n\rangle$.
+
+By the Bolzano-Weierstrass Theorem and that $[a,b]$ is bounded, it has a convergent subsequence $x_{n_k}$ that converges to some limit $L$. Since $[a,b]$ is closed, $L\in [a,b]$.
+
+Since $f$ is continuous on $[a,b]$, the sequence $f\qty(x_{n_k})$ converges to $f(L)$, which is finite.
+
+This contradicts $f\qty(x_n)>n$ for every $n\in\mathbb{N}$. So the set
+\[S=\{f(x)\mid x\in [a,b]\}.\]
+must be bounded-above.
+
+By considering $-f$, we obtain that $S$ is also bounded-below.
+
+By the Completeness of the Real Numbers, every non-empty set bounded-above has a least upper bound; every non-empty set bounded-below has a greatest lower bound.
+
+Let
+\[M=\sup S,\quad m=\inf S.\]
+
+Since $M$ is the least upper bound of $S$, for any $n\in\mathbb{N}$, $M-\frac{1}{n}$ is not an upper bound of $S$. This means that for each $n\in\mathbb{N}$, there exists a point $y_n\in [a,b]$ such that:
+\[M-\frac{1}{n}<f(y_n)\leq M.\]
+This defines another sequence $\langle y_n\rangle$ within $[a, b]$.
+
+By the Bolzano-Weierstrass Theorem and that $[a,b]$ is bounded, it has a convergent subsequence $y_{n_k}$ that converges to some limit $c$. Since $[a,b]$ is closed, $c\in [a,b]$.
+\[\lim_{n_k\to \infty}\qty(M - \frac{1}{n_k}) = M.\]
+By the Squeeze Theorem:
+\[\lim_{n_k \to \infty} f\qty(y_{n_k}) = M.\]
+Since $f$ is continuous on $[a,b]$, the sequence $f\qty(y_{n_k})$ converges to $f(c)$.
+
+Similarly, we can prove that there exists $d\in [a,b]$ such that $f(d)=m$.
+\end{proof}
+\subsubsection{Extreme Value Theorem (EVT) for compact set}
+Let $X$ be a topological space, and function $f\colon I\subset X\to\mathbb{R}$ be continuous on a compact set $D\subseteq I$, then
+\[\exists a,b \in D \text{\ s.t.\ }\forall x \in D\colon f(a)\geq f(x)\geq f(b).\]
+\subsubsection{Fermat's Theorem (費馬引理) or Interior Extremum Theorem (內部極值定理)}
+Let $X$ be a LCTVS and function $f\colon D\subseteq X\to\mathbb{R}$ be differentiable on an open set $U\subseteq D$ and $c\in U$ be a local extreme of $f$, then
+\[f'(c)=0,\]
+where $f'(c)\in L(X,\bbR)$ and $0$ is the zero element of $L(X,\bbR)$.
+\begin{proof}
+Let $h\in X$ be arbitrary.
+
+Because $U$ is open, there exists $\varepsilon>0$ such that $c+th\in U$ for $\abs{t}<\varepsilon$. Define
+\[g(t)=f(c+th),\quad\abs{t}<\varepsilon.\]
+Since $f$ is differentiable on $U$, $g$ is differentiable and
+\[g'(0)=f'(c)(h).\]
+Without loss of generality, suppose $c$ is a local maximum. Then, there exists $\delta>0$ such that
+\[g(t)\leq g(0)\]
+for all $\abs{t}<\delta$.
+
+Thus for all $\delta>t>0$,
+\[\frac{g(t)-g(0)}{t}\leq 0\]
+and for all $-\delta<t<0$,
+\[\frac{g(t)-g(0)}{t}\geq 0.\]
+Therefore
+\[g'(0)=0.\]
+Since
+\[g'(0)=f'(c)(h)=0\]
+for all $h\in X$
+\[f'(c)=0.\]
+\end{proof}
+In terms of critical point, Fermat's Theorem can be rephrased as, a local extreme is a critical point.
+\subsubsection{Rolle's Theorem (羅爾定理)}
+Let function $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ be continuous on an interval $[a, b]\subseteq I$ and differentiable on $(a,b)$, and $f(a)=f(b)$, then
+\[\exists c\in (a, b)\text{\ s.t.\ }f'(c)=0.\]
+\begin{proof}
+By the Extreme Value Theorem, $f$ must have maximum and minimum on $[a,b]$.
+
+Let
+\[M=\max_{x\in [a,b]}f(x),\quad m=\min_{x\in [a,b]}f(x).\]
+If $M=m$, then $f$ is constant on $[a,b]$, then $f'(x)=0$ for any $c\in (a,b)$.
+
+Otherwise, $M>m$. Because $f(a)=f(b)$. 
+
+We claim that there must be $c\in (a,b)$ such that $M=f(c)$ or $m=f(c)$. Argue by contradiction. If the claim is false, then $M=m=f(a)=f(b)$, contradicting $M>m$.
+
+By Fermat's Theorem,
+\[f'(c)=0.\]
+\end{proof}
+\subsubsection{Mean Value Theorem (MVT) (均值定理) (for Derivatives)}
+Let function $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ be continuous on an interval $[a, b]\subseteq I$ and differentiable on $(a,b)$ with $a<b$, then
+\[\exists c\in (a, b)\text{\ s.t.\ }f'(c)=\frac{f(b)-f(a)}{b-a}.\]
+\begin{proof}
+Let
+\[\phi(x) = f(x) - \frac{f(b)-f(a)}{b-a} (x-a).\]
+\[\phi(a)=\phi(b)=f(a).\]
+By Rolle's Theorem, there exists $c\in (a,b)$ such that $\phi'(c)=0$.
+\[\phi'(c)=f'(c)-\frac{f(b)-f(a)}{b-a}.\]
+\end{proof}
+\subsubsection{Cauchy's Mean Value Theorem (CMVT) (柯西均值定理)}
+Let functions $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ and $g\colon J\subseteq\mathbb{R}\to\mathbb{R}$ be continuous on an interval $[a, b]\subseteq I\cap J$ and differentiable on $(a,b)$ with $a<b$, then
+\[\exists c\in (a,b)\text{\ s.t.\ }\qty(f(b)-f(a))g'(c)=\qty(g(b)-g(a))f'(c).\]
+\begin{proof}
+    If $f(b)-f(a)=g(b)-g(a)=0$, it holds. For the other cases, without loss of generality, assume $g(b)-g(a)\neq 0$.
+
+    Define a function $\phi(x)$
+    \[\phi(x)=f(x)-\frac{f(b)-f(a)}{g(b)-g(a)}g(x).\]
+    \[\phi(b)-\phi(a)=\qty(f(b)-f(a))-\frac{f(b)-f(a)}{g(b)-g(a)}\qty(g(b)-g(a))=0.\]
+    By Rolle's Theorem, there exists $c\in (a,b)$ such that $\phi'(c)=0$.
+    \[\phi'(x)=f'(x)-\frac{f(b)-f(a)}{g(b)-g(a)}g'(x).\]
+\end{proof}
+\subsubsection{Generalized Racetrack principle}
+If $f'(x)>g'(x)$ for all $x\in (a,b)$ with $b\in\bbR_{>a}\cup\{\infty\}$, and $f(a)=g(a)$, then $f(x)>g(x)$ for all $x\in(a,b)$.
+
+If $f'(x)>g'(x)$ for all $x\in (a,b)$ with $b\in\bbR_{>a}\cup\{\infty\}$, $f$ is continuous on $(a,b]$, and $f(a)=g(a)$, then $f(x)>g(x)$ for all $x\in(a,b]$.
+
+If $f'(x)\geq g'(x)$ for all $x\in (a,b)$ with $b\in\bbR_{>a}\cup\{\infty\}$, and $f(a)=g(a)$, then $f(x)\geq g(x)$ for all $x\in(a,b]$.
+
+If $f'(x)\geq g'(x)$ for all $x\in (a,b)$ with $b\in\bbR_{>a}\cup\{\infty\}$, $f$ is continuous on $(a,b]$, and $f(a)=g(a)$, then $f(x)\geq g(x)$ for all $x\in(a,b]$.
+\begin{proof}
+    For the first and second statements, define a function
+    \[h(x)=f(x)-g(x).\]
+    \[h'(x)=f'(x)-g'(x)>0,\quad\forall x\in(a,b).\]
+    \[h(a)=f(a)-g(a)=0.\]
+    By MVT, for all $x\in(a,b)$ for the first statement and $x\in(a,b]$ for the second statement, there exists $c\in(a,x)$ such that
+    \[\frac{h(x)-h(a)}{x-a}=h'(c)>0.\]
+    \[f(x)-g(x)=h(x)=(x-a)h'(c)>0.\]
+    The other statements can be proven similarly.
+\end{proof}
+\subsubsection{Increasing/Decreasing Test (I/D Test) Theorem}
+Let function $f\colon I\subseteq\bbR\to\bbR$ be differentiable on an open interval $(a,b)\subseteq I$.
+\bit
+\item if $f'(x)>0$ for any $x\in (a,b)$, then $f$ is strictly increasing on $(a,b)$.
+\item If $f'(x)>0$ for any $x\in (a,b)$ and $f$ is continuous on $[a,b)$, then $f$ is strictly increasing on $[a,b)$.
+\item If $f'(x)>0$ for any $x\in (a,b)$ and $f$ is continuous on $(a,b]$, then $f$ is strictly increasing on $(a,b]$.
+\item if $f'(x)<0$ for any $x\in (a,b)$, then $f$ is strictly decreasing on $(a,b)$.
+\item If $f'(x)<0$ for any $x\in (a,b)$ and $f$ is continuous on $[a,b)$, then $f$ is strictly decreasing on $[a,b)$.
+\item If $f'(x)<0$ for any $x\in (a,b)$ and $f$ is continuous on $(a,b]$, then $f$ is strictly decreasing on $(a,b]$.
+\item $f'(x)\geq 0$ for any $x\in (a,b)$ iff $f$ is non-decreasing on $(a,b)$.
+\item If $f'(x)\geq 0$ for any $x\in (a,b)$ and $f$ is continuous on $[a,b)$, then $f$ is non-decreasing on $[a,b)$.
+\item If $f'(x)\geq 0$ for any $x\in (a,b)$ and $f$ is continuous on $(a,b]$, then $f$ is non-decreasing on $(a,b]$.
+\item $f'(x)\leq 0$ for any $x\in (a,b)$ iff $f$ is non-increasing on $(a,b)$.
+\item If $f'(x)\leq 0$ for any $x\in (a,b)$ and $f$ is continuous on $[a,b)$, then $f$ is non-increasing on $[a,b)$.
+\item If $f'(x)\leq 0$ for any $x\in (a,b)$ and $f$ is continuous on $(a,b]$, then $f$ is non-increasing on $(a,b]$.
+\eit
+\begin{proof}
+    For the first statement, we want to show that $\forall c,d\in (a,b)\colon c<d\implies f(c)<f(d)$ if $f'(x)>0$ for any $x\in (a,b)$.
+
+    Take any two points $c,d\in (a,b)$ with $c<d$. By MVT, there exists $g\in (c,d)$ such that
+    \[f'(g)=\frac{f(d)-f(c)}{d-c}.\]
+    Because $f'(g)>0$ and $d-c>0$, we get $f(d)-f(c)>0$.
+    
+    The second and third statements are obviously true as the first holds.
+    
+    The "if" directions of the other statements can be proven similarly.
+    
+    For the "only if" direction of the seventh statement, we want to show that $f'(x)\geq 0$ if $\forall c,d\in (a,b)\colon c<d\implies f(c)\leq f(d)$ and $f$ is differentiable on $(a,b)$.
+    
+    Fix any $x\in (a,b)$. For any $h>0$ with $(x+h)\in(a,b)$, we have
+    \[f(x)\leq f(x+h).\]
+    For any $h<0$ with $(x+h)\in(a,b)$, we have
+    \[f(x)\geq f(x+h).\]
+    Thus for any $h$ with $(x+h)\in(a,b)$, we have
+    \[\frac{x+h}-f(x)}{h}\geq 0.\]
+    The "only if" direction of the tenth statement can be proven similarly.
+\end{proof}
+\subsubsection{First Derivative Test for Local Extrema Theorem}
+Let $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ be a function, $c$ be a critical point of $f$, and $f'$ be continuous at $c$.
+\bit
+\item If exist $a<c<b$ such that $f'(c)>0$ for any $x\in (a,c)$ and $f'(c)<0$ for any $x\in (c,b)$, then $f$ has a strict local maximum at $c$.
+\item If exist $a<c<b$ such that $f'(c)\geq 0$ for any $x\in (a,c)$ and $f'(c)\leq 0$ for any $x\in (c,b)$, then $f$ has a local maximum at $c$.
+\item If exist $a<c<b$ such that $f'(c)<0$ for any $x\in (a,c)$ and $f'(c)>0$ for any $x\in (c,b)$, then $f$ has a strict local minimum at $c$.
+\item If exist $a<c<b$ such that $f'(c)\leq 0$ for any $x\in (a,c)$ and $f'(c)\geq 0$ for any $x\in (c,b)$, then $f$ has a local minimum at $c$.
+\item If exist $a<c<b$ such that $f'(c)>0$ for any $x\in (a,b)$, then $f$ has no local exteme at $c$.
+\item If exist $a<c<b$ such that $f'(c)<0$ for any $x\in (a,b)$, then $f$ has no local ext
+eme at $c$.
+\eit
+\begin{proof}
+    By Increasing/Decreasing Test Theorem, it is obvious.
+\end{proof}
+\subsubsection{Second derivative test of one variable}
+Let $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ be a function, $c$ be a critical point of $f$, and $f$ be twice differentiable at $c$.
+\bit
+\item If $f''<0$, then $f$ has a strict local maximum at $c$.
+\item If $f''>0$, then $f$ has a strict local minimum at $c$.
+\eit
+\subsubsection{Second (partial) derivative test of two variables}
+Let $f(x,y)\colon I\subseteq\mathbb{R}^2\to\mathbb{R}$ be a function, $c$ be a critical point of $f$, $f$ be twice differentiable at $c$, and
+\[D=\begin{vmatrix}
+f_{xx} & f_{xy}\\
+f_{yx} & f_{yy}
+\end{vmatrix}.\]
+\bit
+\item If $D(c)>0$ and $f_{xx}(c)<0$, then $f$ has a strict local maximum at $c$.
+\item If $D(c)>0$ and $f_{xx}(c)>0$, then $f$ has a strict local minimum at $c$.
+\item If $D(c)<0$, then $f$ has a saddle point at $c$.
+\eit
+\subsubsection{Second derivative test of multiple derivatives}
+Let $f\colon I\subseteq\mathbb{R}^n\to\mathbb{R}$ be a function, $c$ be a critical point of $f$, and $f$ be twice differentiable at $c$.
+\bit
+\item If $H(f)$ is negative definite, then $f$ has a strict local maximum at $c$.
+\item If $H(f)$ is postive definite, then $f$ has a strict local minimum at $c$.
+\item If $H(f)$ is negative semidefinite, then $f$ has a local maximum at $c$.
+\item If $H(f)$ is postive semidefinite, then $f$ has a local minimum at $c$.
+\item If $H(f)$ is indefinite, then $f$ has a saddle point at $c$.
+\eit
+\subsubsection{First Derivative Test for Concavity Theorem}
+Let $f\colon I\subseteq\bbR\to\bbR$ be a function and $(a,b)\subseteq I$ be an open interval.
+\bit
+\item If $f'$ is strictly increasing on $(a,b)$, often called "$f$ lies strictly below all its tagent lines on $(a,b)$", then $f$ is strictly concave upward on $(a,b)$.
+\item If $f'$ is strictly increasing on $(a,b)$ and $f$ is continuous on $[a,b)$, then $f$ is strictly concave upward on $[a,b)$.
+\item If $f'$ is strictly increasing on $(a,b)$ and $f$ is continuous on $(a,b]$, then $f$ is strictly concave upward on $(a,b]$.
+\item If $f'$ is strictly decreasing on $I$, often called "$f$ lies strictly above all its tagent lines on $(a,b)$", then $f$ is strictly concave downward on $(a,b)$.
+\item If $f'$ is strictly decreasing on $(a,b)$ and $f$ is continuous on $[a,b)$, then $f$ is strictly concave downward on $[a,b)$.
+\item If $f'$ is strictly decreasing on $(a,b)$ and $f$ is continuous on $(a,b]$, then $f$ is strictly concave downward on $(a,b]$.
+\item $f'$ is non-decreasing on $(a,b)$, often called "$f$ lies weakly below all its tagent lines on $(a,b)$", iff $f$ is weakly concave upward on $(a,b)$.
+\item If $f'$ is non-decreasing on $(a,b)$ and $f$ is continuous on $[a,b)$, then $f$ is weakly concave upward on $[a,b)$.
+\item If $f'$ is non-decreasing on $(a,b)$ and $f$ is continuous on $(a,b]$, then $f$ is weakly concave upward on $(a,b]$.
+\item $f'$ is non-increasing on $(a,b)$, often called "$f$ lies weakly above all its tagent lines on $(a,b)$", iff $f$ is weakly concave downward on $(a,b)$.
+\item If $f'$ is non-increasing on $(a,b)$ and $f$ is continuous on $[a,b)$, then $f$ is weakly concave downward on $[a,b)$.
+\item If $f'$ is non-increasing on $(a,b)$ and $f$ is continuous on $(a,b]$, then $f$ is weakly concave downward on $(a,b]$.
+\eit
+\begin{proof}
+    For the first statement, we want to show that for any $c,d\in (a,b)$ and $\alpha\in(0,1)$, $f((1-\alpha)c+\alpha d)<(1-\alpha)f(c)+\alpha f(d)$ if for any $a\leq A<B\leq b$, $f'(A)<f'(B)$.
+
+    Fix any $a\leq c<x<d\leq b$. By MVT, there exists $A\in (c,x)$ such that
+    \[f'(A)=\frac{f(x)-f(c)}{x-c}.\]
+    By MVT, there exists $B\in (b,c)$ such that
+    \[f'(B)=\frac{f(d)-f(x)}{d-x}.\]
+    Since $A<B$, $f'(A)\leq f'(B)$.
+    \[\frac{f(x)-f(c)}{x-c}\leq\frac{f(d)-f(x)}{d-x}.\]
+    \[(f(x)-f(c))(d-x)\leq(f(d)-f(x))(x-c).\]
+    \[(d-c)f(x)\leq(d-x)f(c)+(x-c)f(d).\]
+    \[f(x)\leq\frac{(d-x)}{(d-c)}f(c)+\frac{(x-c)}{(d-c)}f(d).\]
+    Set
+    \[\alpha=\frac{(x-c)}{(d-c)}\in(0,1).\]
+    Then
+    \[x=(1-\alpha)c+\alpha d.\]
+    Thus the inequality becomes
+    \[f\qty((1-\alpha)c+\alpha d)\leq(1-\alpha)f(c)+\alpha f(d).\]
+    
+    For the second statement, argue by contradiction. Assume that there exists $d\in(a,b)$ and $\alpha\in(0,1)$ such that
+    \[f((1-\alpha)a+\alpha d)\geq (1-\alpha)f(a)+\alpha f(d).\]
+    Let $x=(1-\alpha)a+\alpha d$.
+    \[f(x)-f(a)\geq\alpha(f(d)-f(a)).\]
+    By MVT, there exists $B\in (a,x)$ such that
+    \[f(x)-f(a)=f'(B)(x-a)=f'(B)\alpha (d-a).\]
+    By MVT, there exists $c\in (x,d)$ such that
+    \[f(d)-f(x)=f'(C)(d-x)=f'(C)(1-\alpha)(d-a).\]
+    \[f(d)-f(a)=(f'(B)\alpha+f'(C)(1-\alpha))(d-a).\]
+    \[f(x)-f(a)=f'(B)\alpha (d-a)\geq\alpha(f'(B)\alpha+f'(C)(1-\alpha))(d-a).\]
+    \[f'(B)\geq f'(B)\alpha+f'(C)(1-\alpha).\]
+    \[f'(B)\geq f'(C).\]
+    This contradicts the condition that $B<C\implies f'(B)<f'(C)$ for any $a<B<C<b$.
+    
+    The third statement can be proven similarly.
+    
+    The "if" directions of the other statements can be proven similarly.
+    
+    For the "only if" direction of the seventh statement, we want to show that for any $c,d\in (a,b)$ and $\alpha\in(0,1)$, $f((1-\alpha)c+\alpha d)\leq (1-\alpha)f(c)+\alpha f(d)$ if $\forall c,d\in (a,b)\colon c<d\implies f'(c)\leq f'(d)$.
+    
+    Fix any $c,d\in(a,b)$ with $c<d$.
+    
+    By MVT, there exists $g\in(c,((1-\alpha)c+\alpha d))$ such that
+    \[f((1-\alpha)c+\alpha d)-f(c)=f'(g)((1-\alpha)c+\alpha d-c)=f'(g)\alpha(d-c).\]
+    By MVT, there exists $h\in(((1-\alpha)c+\alpha d)),d)$ such that
+    \[f(d)-f((1-\alpha)c+\alpha d)=f'(h)(d-(1-\alpha)c-\alpha d)=f'(h)(1-\alpha)(d-c).\]
+    Thus,
+    \[f((1-\alpha)c+\alpha d)=f(c)+f'(g)\alpha(d-c)=f(d)-f'(h)(1-\alpha)(d-c).\]
+    \[f'(g)\alpha+f'(h)(1-\alpha)=\frac{f(d)-f(c)}{d-c}.\]
+    Because $f'(g)\leq f'(h)$, we have
+    \[f'(g)(d-c)\leq f(d)-f(c).\]
+    Substitute:
+    \[f((1-\alpha)c+\alpha d)\leq f(c)+\alpha(f(d)-f(c))=(1-\alpha)f(c)+\alpha f(d).\]
+    The "only if" direction of the tenth statement can be proven similarly.
+\end{proof}
+\subsubsection{Concavity Test Theorem or Second Derivative Test for Concavity Theorem}
+Let function $f\colon I\subseteq\bbR\to\bbR$ be twice differentiable on an open interval $(a,b)\subseteq I$.
+\bit
+\item If $f''>0$ for any $x\in (a,b)$, then the graph of $f$ is strictly concave upward on $(a,b)$.
+\item If $f''>0$ for any $x\in (a,b)$ and $f'$ is continuous on $[a,b)$, then the graph of $f$ is strictly concave upward on $[a,b)$.
+\item If $f''>0$ for any $x\in (a,b)$ and $f'$ is continuous on $(a,b]$, then the graph of $f$ is strictly concave upward on $(a,b]$.
+\item If $f''<0$ for any $x\in (a,b)$, then the graph of $f$ is strictly concave downward on $(a,b)$.
+\item If $f''<0$ for any $x\in (a,b)$ and $f'$ is continuous on $[a,b)$, then the graph of $f$ is strictly concave downward on $[a,b)$.
+\item If $f''<0$ for any $x\in (a,b)$ and $f'$ is continuous on $(a,b]$, then the graph of $f$ is strictly concave downward on $(a,b]$.
+\item $f''\geq 0$ for any $x\in (a,b)$ iff the graph of $f$ is weakly concave upward on $(a,b)$.
+\item If $f''\geq 0$ for any $x\in (a,b)$ and $f'$ is continuous on $[a,b)$, then the graph of $f$ is weakly concave upward on $[a,b)$.
+\item If $f''\geq 0$ for any $x\in (a,b)$ and $f'$ is continuous on $(a,b]$, then the graph of $f$ is weakly concave upward on $(a,b]$.
+\item $f''\leq 0$ for any $x\in (a,b)$ iff the graph of $f$ is weakly concave downward on $(a,b)$.
+\item If $f''\leq 0$ for any $x\in (a,b)$ and $f'$ is continuous on $[a,b)$, then the graph of $f$ is weakly concave downward on $[a,b)$.
+\item If $f''\leq 0$ for any $x\in (a,b)$ and $f'$ is continuous on $(a,b]$, then the graph of $f$ is weakly concave downward on $(a,b]$.
+\eit
+\begin{proof}
+By Increasing/Decreasing Test Theorem and First Derivative Test for Concavity Theorem, it is obvious.
+\end{proof}
+\subsubsection{Inflection Point Theorem}
+Let $f\colon I\subseteq\bbR\to\bbR$ be a function. If $(c,f(c))$ is an inflection point of $f$ and $f$ is differentiable at $c$, then $c$ is a critical point of $f'$.
+\begin{proof}
+By the First Derivative Test for Concavity Theorem, it is obvious.
+\end{proof}
+\sssc{Extremum of direction derivatives}
+For each point $\mb{x}$,
+\[\max_{\|\mb{u}\|=1}D_{\mb{u}}\mb{A}(\mb{x})=\|\nabla\mb{A}(\mb{x})\|,\]
+\[\arg_{\mb{u}}\max_{\|\mb{u}\|=1}D_{\mb{u}}\mb{A}(\mb{x})=\frac{\nabla\mb{A}(\mb{x})}{\|\nabla\mb{A}(\mb{x})\|},\]
+\[\min_{\|\mb{u}\|=1}D_{\mb{u}}\mb{A}(\mb{x})=-\|\nabla\mb{A}(\mb{x})\|,\]
+\[\arg_{\mb{u}}\min_{\|\mb{u}\|=1}D_{\mb{u}}\mb{A}(\mb{x})=-\frac{\nabla\mb{A}(\mb{x})}{\|\nabla\mb{A}(\mb{x})\|}.\]
+\subsection{Indeterminate forms and L'Hôpital's rule (羅必達法則) or Bernoulli's rule}
+\subsubsection{(General form of) L'Hôpital's rule or Bernoulli's rule and indeterminate quotients}
+Let $I$ be an open interval and $a\in I$, and $f(x)$ and $g(x)$ be functions differentiable on $I\setminus\{a\}$. If
+\bit
+\item $\lim_{x\to a}f(x)=\lim_{x\to a}g(x)=0$, where $\lim_{x\to a}\frac{f(x)}{g(x)}$ is called indeterminate form of type $\frac{0}{0}$, or $\abs{\lim_{x\to a}f(x)}=\abs{\lim_{x\to a}g(x)}=\infty$, where $\lim_{x\to a}\frac{f(x)}{g(x)}$ is called indeterminate form of type $\frac{\infty}{\infty}$, and
+\item $\lim_{x\to a}\frac{f'(x)}{g'(x)}\in\mathbb{R}\cup\{-\infty,\infty\}$,
+\eit
+then:
+\[\lim_{x\to a}\frac{f(x)}{g(x)}=\lim_{x\to a}\frac{f'(x)}{g'(x)}.\]
+
+Let $f(x)$ and $g(x)$ be functions differentiable on $(a,b)$ with $a<b$. If
+\bit
+\item $\lim_{x\to a^+}f(x)=\lim_{x\to a^+}g(x)=0$, where $\lim_{x\to a^+}\frac{f(x)}{g(x)}$ is called indeterminate form of type $\frac{0}{0}$, or $\abs{\lim_{x\to a^+}f(x)}=\abs{\lim_{x\to a^+}g(x)}=\infty$, where $\lim_{x\to a^+}\frac{f(x)}{g(x)}$ is called indeterminate form of type $\frac{\infty}{\infty}$, and
+\item $\lim_{x\to a^+}\frac{f'(x)}{g'(x)}\in\mathbb{R}\cup\{-\infty,\infty\}$,
+\eit
+then:
+\[\lim_{x\to a^+}\frac{f(x)}{g(x)}=\lim_{x\to a^+}\frac{f'(x)}{g'(x)}.\]
+
+Let $f(x)$ and $g(x)$ be functions differentiable on $(b,a)$ with $a>b$. If
+\bit
+\item $\lim_{x\to a^-}f(x)=\lim_{x\to a^-}g(x)=0$, where $\lim_{x\to a^-}\frac{f(x)}{g(x)}$ is called indeterminate form of type $\frac{0}{0}$, or $\abs{\lim_{x\to a^-}f(x)}=\abs{\lim_{x\to a^-}g(x)}=\infty$, where $\lim_{x\to a^-}\frac{f(x)}{g(x)}$ is called indeterminate form of type $\frac{\infty}{\infty}$, and
+\item $\lim_{x\to a^-}\frac{f'(x)}{g'(x)}\in\mathbb{R}\cup\{-\infty,\infty\}$,
+\eit
+then:
+\[\lim_{x\to a^-}\frac{f(x)}{g(x)}=\lim_{x\to a^-}\frac{f'(x)}{g'(x)}.\]
+
+Let $f(x)$ and $g(x)$ be functions differentiable on $(a,\infty)$. If
+\bit
+\item $\lim_{x\to\infty}f(x)=\lim_{x\to\infty}g(x)=0$, where $\lim_{x\to\infty}\frac{f(x)}{g(x)}$ is called indeterminate form of type $\frac{0}{0}$, or $\abs{\lim_{x\to\infty}f(x)}=\abs{\lim_{x\to\infty}g(x)}=\infty$, where $\lim_{x\to\infty}\frac{f(x)}{g(x)}$ is called indeterminate form of type $\frac{\infty}{\infty}$, and
+\item $\lim_{x\to\infty}\frac{f'(x)}{g'(x)}\in\mathbb{R}\cup\{-\infty,\infty\}$,
+\eit
+then:
+\[\lim_{x\to\infty}\frac{f(x)}{g(x)}=\lim_{x\to\infty}\frac{f'(x)}{g'(x)}.\]
+
+Let $f(x)$ and $g(x)$ be functions differentiable on $(-\infty,a)$. If
+\bit
+\item $\lim_{x\to -\infty}f(x)=\lim_{x\to -\infty}g(x)=0$, where $\lim_{x\to -\infty}\frac{f(x)}{g(x)}$ is called indeterminate form of type $\frac{0}{0}$, or $\abs{\lim_{x\to -\infty}f(x)}=\abs{\lim_{x\to -\infty}g(x)}=\infty$, where $\lim_{x\to -\infty}\frac{f(x)}{g(x)}$ is called indeterminate form of type $\frac{\infty}{\infty}$, and
+\item $\lim_{x\to -\infty}\frac{f'(x)}{g'(x)}\in\mathbb{R}\cup\{-\infty,\infty\}$,
+\eit
+then:
+\[\lim_{x\to -\infty}\frac{f(x)}{g(x)}=\lim_{x\to -\infty}\frac{f'(x)}{g'(x)}.\]
+\begin{proof}
+Let $f(x)$ and $g(x)$ be functions differentiable on $(a,b)$ with $a<b$. We want to show that if $\lim_{x\to a^+}f(x)=\lim_{x\to a^+}g(x)=0$ and $\lim_{x\to a^+}\frac{f'(x)}{g'(x)}\in\mathbb{R}\cup\{-\infty,\infty\}$, then
+\[\lim_{x\to a^+}\frac{f(x)}{g(x)}=\lim_{x\to a^+}\frac{f'(x)}{g'(x)}.\]
+Because the existence of the limits, we know that there exists interval $(a,c)$ such that $g(x)$ and $g'(x)$ both $\neq 0$ on $(a,c)$. Let
+\[F(x)=\begin{cases}f(x),\quad & x\in (a,c)\\
+0,\quad & x=a\end{cases}\]
+and
+\[G(x)=\begin{cases}g(x),\quad & x\in (a,c)\\
+0,\quad & x=a\end{cases}\]
+By CMVT, for any $x\in (a,c)$, there exists $c\in (a,x)$ such that
+\[\qty(F(x)-F(a))G'(c)=\qty(G(x)-G(a))F'(c).\]
+Since $F(a)=G(a)=0$,
+\[F(x)G'(c)=G(x)F'(c).\]
+Thus,
+\[\lim_{x\to a^+}\frac{f(x)}{g(x)}=\lim_{x\to a^+}\frac{F(x)}{G(x)}=\lim_{x\to a^+}\frac{F'(x)}{G'(x)}=\lim_{x\to a^+}\frac{f'(x)}{g'(x)}.\]
+
+Let $f(x)$ and $g(x)$ be functions differentiable on $(a,b)$ with $a<b$. We want to show that if $\lim_{x\to a^+}f(x)=\lim_{x\to a^+}g(x)=\infty$ and $\lim_{x\to a^+}\frac{f'(x)}{g'(x)}\in\mathbb{R}\cup\{-\infty,\infty\}$, then
+\[\lim_{x\to a^+}\frac{f(x)}{g(x)}=\lim_{x\to a^+}\frac{f'(x)}{g'(x)}.\]
+Because $\lim_{x\to a^+}f(x)=\lim_{x\to a^+}g(x)=\infty$, by quotient law, we know that
+\[\lim_{x\to a^+}\frac{1}{f(x)}=\lim_{x\to a^+}\frac{1}{g(x)}=0.\]
+Because the existence of the limits, there exists interval $(a,c)$ such that $\frac{1}{f(x)}$ and $\frac{1}{g(x)}$ both $\neq 0$ on $(a,c)$. Let
+\[F(x)=\begin{cases}\frac{1}{f(x)},\quad & x\in (a,b)\\
+0,\quad & x=a\end{cases}\]
+and
+\[G(x)=\begin{cases}\frac{1}{g(x)},\quad & x\in (a,b)\\
+0,\quad & x=a\end{cases}\]
+\[F'(x)=\frac{-f'(x)}{\qty(f(x))^2}.\]
+\[G'(x)=\frac{-g'(x)}{\qty(g(x))^2}.\]
+By CMVT, for any $x\in (a,c)$, there exists $c\in (a,x)$ such that
+\[\qty(F(x)-F(a))G'(c)=\qty(G(x)-G(a))F'(c).\]
+Since $F(a)=G(a)=0$,
+\[F(x)G'(c)=G(x)F'(c).\]
+Thus,
+\[\ba
+\lim_{x\to a^+}\frac{f(x)}{g(x)}&=\lim_{x\to a^+}\frac{G(x)}{F(x)}=\lim_{x\to a^+}\frac{G'(x)}{F'(x)}\\
+&=\lim_{x\to a^+}\frac{g'(x)}{f'(x)}\lim_{x\to a^+}\qty(\frac{f(x)}{g(x)})^2
+\ea\]
+\[\lim_{x\to a^+}\frac{f(x)}{g(x)}=\lim_{x\to a^+}\frac{f'(x)}{g'(x)}.\]
+
+All other statements can be proven either similarly or by applying other statements.
+\end{proof}
+\subsubsection{Indeterminate products}
+Let $I$ be an open interval and $a\in I$, and $f(x)$ and $g(x)$ be functions differentiable on $I\setminus\{a\}$. If $\lim_{x\to a}f(x)=0$ and $\abs{\lim_{x\to a}g(x)}=\infty$, where $\lim_{x\to a}f(x)g(x)$ is called indeterminate form of type $0\cdot\infty$, we may find $\lim_{x\to a}f(x)g(x)$ by writing the product $f(x)g(x)$ as a quotient:
+\[fg=\frac{f}{1/g},\quad\tx{or\ }fg=\frac{g}{1/f}\]
+and use general form of L'Hôpital's rule.
+
+Let $f(x)$ and $g(x)$ be functions differentiable on $(a,b)$ with $a<b$. If $\lim_{x\to a^+}f(x)=0$ and $\abs{\lim_{x\to a^+}g(x)}=\infty$, where $\lim_{x\to a^+}f(x)g(x)$ is called indeterminate form of type $0\cdot\infty$, we may find $\lim_{x\to a^+}f(x)g(x)$ by writing the product $f(x)g(x)$ as a quotient:
+\[fg=\frac{f}{1/g},\quad\tx{or\ }fg=\frac{g}{1/f}\]
+and use general form of L'Hôpital's rule.
+
+Let $f(x)$ and $g(x)$ be functions differentiable on $(b,a)$ with $a>b$. If $\lim_{x\to a^-}f(x)=0$ and $\abs{\lim_{x\to a^-}g(x)}=\infty$, where $\lim_{x\to a^-}f(x)g(x)$ is called indeterminate form of type $0\cdot\infty$, we may find $\lim_{x\to a^-}f(x)g(x)$ by writing the product $f(x)g(x)$ as a quotient:
+\[fg=\frac{f}{1/g},\quad\tx{or\ }fg=\frac{g}{1/f}\]
+and use general form of L'Hôpital's rule.
+
+Let $f(x)$ and $g(x)$ be functions differentiable on $(a,\infty)$. If $\lim_{x\to\infty}f(x)=0$ and $\abs{\lim_{x\to\infty}g(x)}=\infty$, where $\lim_{x\to\infty}f(x)g(x)$ is called indeterminate form of type $0\cdot\infty$, we may find $\lim_{x\to\infty}f(x)g(x)$ by writing the product $f(x)g(x)$ as a quotient:
+\[fg=\frac{f}{1/g},\quad\tx{or\ }fg=\frac{g}{1/f}\]
+and use general form of L'Hôpital's rule.
+
+Let $f(x)$ and $g(x)$ be functions differentiable on $(-\infty,a)$. If $\lim_{x\to -\infty}f(x)=0$ and $\abs{\lim_{x\to -\infty}g(x)}=\infty$, where $\lim_{x\to -\infty}f(x)g(x)$ is called indeterminate form of type $0\cdot\infty$, we may find $\lim_{x\to -\infty}f(x)g(x)$ by writing the product $f(x)g(x)$ as a quotient:
+\[fg=\frac{f}{1/g},\quad\tx{or\ }fg=\frac{g}{1/f}\]
+and use general form of L'Hôpital's rule.
+\subsubsection{Indeterminate differences}
+Let $I$ be an open interval and $a\in I$, and $f(x)$ and $g(x)$ be functions differentiable on $I\setminus\{a\}$. If $\lim_{x\to a}f(x)=\lim_{x\to a}g(x)\in\{\infty,-\infty\}$, where $\lim_{x\to a}\qty(f(x)-g(x))$ is called indeterminate form of type $\infty-\infty$, we may find $\lim_{x\to a}\qty(f(x)-g(x))$ by writing the difference $f(x)-g(x)$ as a quotient and use general form of L'Hôpital's rule.
+
+Let $f(x)$ and $g(x)$ be functions differentiable on $(a,b)$ with $a<b$. If $\lim_{x\to a^+}f(x)=\lim_{x\to a^+}g(x)\in\{\infty,-\infty\}$, where $\lim_{x\to a^+}\qty(f(x)-g(x))$ is called indeterminate form of type $\infty-\infty$, we may find $\lim_{x\to a^+}\qty(f(x)-g(x))$ by writing the difference $f(x)-g(x)$ as a quotient and use general form of L'Hôpital's rule.
+
+Let $f(x)$ and $g(x)$ be functions differentiable on $(b,a)$ with $a>b$. If $\lim_{x\to a^-}f(x)=\lim_{x\to a^-}g(x)\in\{\infty,-\infty\}$, where $\lim_{x\to a^-}\qty(f(x)-g(x))$ is called indeterminate form of type $\infty-\infty$, we may find $\lim_{x\to a^-}\qty(f(x)-g(x))$ by writing the difference $f(x)-g(x)$ as a quotient and use general form of L'Hôpital's rule.
+
+Let $f(x)$ and $g(x)$ be functions differentiable on $(a,\infty)$. If $\lim_{x\to\infty}f(x)=\lim_{x\to\infty}g(x)\in\{\infty,-\infty\}$, where $\lim_{x\to\infty}\qty(f(x)-g(x))$ is called indeterminate form of type $\infty-\infty$, we may find $\lim_{x\to\infty}\qty(f(x)-g(x))$ by writing the difference $f(x)-g(x)$ as a quotient and use general form of L'Hôpital's rule.
+
+Let $f(x)$ and $g(x)$ be functions differentiable on $(-\infty,a)$. If $\lim_{x\to -\infty}f(x)=\lim_{x\to -\infty}g(x)\in\{\infty,-\infty\}$, where $\lim_{x\to -\infty}\qty(f(x)-g(x))$ is called indeterminate form of type $\infty-\infty$, we may find $\lim_{x\to -\infty}\qty(f(x)-g(x))$ by writing the difference $f(x)-g(x)$ as a quotient and use general form of L'Hôpital's rule.
+\subsubsection{Indeterminate powers/exponentials}
+Let $I$ be an open interval and $a\in I$, and $f(x)$ and $g(x)$ be functions differentiable on $I\setminus\{a\}$. If $\lim_{x\to a}f(x)=\lim_{x\to a}g(x)=0$, where $\lim_{x\to a}f(x)^{g(x)}$ is called indeterminate form of type $0^0$, we may find $\lim_{x\to a}f(x)^{g(x)}$ by taking natural logarithm:
+\[g(x)\ln(f(x)),\]
+which is in indeterminate form of $0\cdot\infty$ because $\lim_{x\to a}\ln(f(x))=-\infty$.
+
+Let $I$ be an open interval and $a\in I$, and $f(x)$ and $g(x)$ be functions differentiable on $I\setminus\{a\}$. If $\lim_{x\to a}f(x)=\infty$ and $\lim_{x\to a}g(x)=0$, where $\lim_{x\to a}f(x)^{g(x)}$ is called indeterminate form of type $\infty^0$, we may find $\lim_{x\to a}f(x)^{g(x)}$ by taking natural logarithm:
+\[g(x)\ln(f(x)),\]
+which is in indeterminate form of $0\cdot\infty$ because $\lim_{x\to a}\ln(f(x))=\infty$.
+
+Let $I$ be an open interval and $a\in I$, and $f(x)$ and $g(x)$ be functions differentiable on $I\setminus\{a\}$. If $\lim_{x\to a}f(x)=1$ and $\lim_{x\to a}g(x)=\infty$, where $\lim_{x\to a}f(x)^{g(x)}$ is called indeterminate form of type $1^{\infty}$, we may find $\lim_{x\to a}f(x)^{g(x)}$ by taking natural logarithm:
+\[g(x)\ln(f(x)),\]
+which is in indeterminate form of $0\cdot\infty$ because $\lim_{x\to a}\ln(f(x))=0$.
+
+Let $f(x)$ and $g(x)$ be functions differentiable on $(a,b)$ with $a<b$. If $\lim_{x\to a^+}f(x)=\lim_{x\to a^+}g(x)=0$, where $\lim_{x\to a^+}f(x)^{g(x)}$ is called indeterminate form of type $0^0$, we may find $\lim_{x\to a^+}f(x)^{g(x)}$ by taking natural logarithm:
+\[g(x)\ln(f(x)),\]
+which is in indeterminate form of $0\cdot\infty$ because $\lim_{x\to a^+}\ln(f(x))=-\infty$.
+
+Let $f(x)$ and $g(x)$ be functions differentiable on $(a,b)$ with $a<b$. If $\lim_{x\to a^+}f(x)=\infty$ and $\lim_{x\to a^+}g(x)=0$, where $\lim_{x\to a^+}f(x)^{g(x)}$ is called indeterminate form of type $\infty^0$, we may find $\lim_{x\to a^+}f(x)^{g(x)}$ by taking natural logarithm:
+\[g(x)\ln(f(x)),\]
+which is in indeterminate form of $0\cdot\infty$ because $\lim_{x\to a^+}\ln(f(x))=\infty$.
+
+Let $f(x)$ and $g(x)$ be functions differentiable on $(a,b)$ with $a<b$. If $\lim_{x\to a^+}f(x)=1$ and $\lim_{x\to a^+}g(x)=\infty$, where $\lim_{x\to a^+}f(x)^{g(x)}$ is called indeterminate form of type $1^{\infty}$, we may find $\lim_{x\to a^+}f(x)^{g(x)}$ by taking natural logarithm:
+\[g(x)\ln(f(x)),\]
+which is in indeterminate form of $0\cdot\infty$ because $\lim_{x\to a^+}\ln(f(x))=0$.
+
+Let $f(x)$ and $g(x)$ be functions differentiable on $(b,a)$ with $a>b$. If $\lim_{x\to a^-}f(x)=\lim_{x\to a^-}g(x)=0$, where $\lim_{x\to a^-}f(x)^{g(x)}$ is called indeterminate form of type $0^0$, we may find $\lim_{x\to a^-}f(x)^{g(x)}$ by taking natural logarithm:
+\[g(x)\ln(f(x)),\]
+which is in indeterminate form of $0\cdot\infty$ because $\lim_{x\to a^-}\ln(f(x))=-\infty$.
+
+Let $f(x)$ and $g(x)$ be functions differentiable on $(b,a)$ with $a>b$. If $\lim_{x\to a^-}f(x)=\infty$ and $\lim_{x\to a^-}g(x)=0$, where $\lim_{x\to a^-}f(x)^{g(x)}$ is called indeterminate form of type $\infty^0$, we may find $\lim_{x\to a^-}f(x)^{g(x)}$ by taking natural logarithm:
+\[g(x)\ln(f(x)),\]
+which is in indeterminate form of $0\cdot\infty$ because $\lim_{x\to a^-}\ln(f(x))=\infty$.
+
+Let $f(x)$ and $g(x)$ be functions differentiable on $(b,a)$ with $a>b$. If $\lim_{x\to a^-}f(x)=1$ and $\lim_{x\to a^-}g(x)=\infty$, where $\lim_{x\to a^-}f(x)^{g(x)}$ is called indeterminate form of type $1^{\infty}$, we may find $\lim_{x\to a^-}f(x)^{g(x)}$ by taking natural logarithm:
+\[g(x)\ln(f(x)),\]
+which is in indeterminate form of $0\cdot\infty$ because $\lim_{x\to a^-}\ln(f(x))=0$.
+
+Let $f(x)$ and $g(x)$ be functions differentiable on $(a,\infty)$. If $\lim_{x\to\infty}f(x)=\lim_{x\to\infty}g(x)=0$, where $\lim_{x\to\infty}f(x)^{g(x)}$ is called indeterminate form of type $0^0$, we may find $\lim_{x\to\infty}f(x)^{g(x)}$ by taking natural logarithm:
+\[g(x)\ln(f(x)),\]
+which is in indeterminate form of $0\cdot\infty$ because $\lim_{x\to\infty}\ln(f(x))=-\infty$.
+
+Let $f(x)$ and $g(x)$ be functions differentiable on $(a,\infty)$. If $\lim_{x\to\infty}f(x)=\infty$ and $\lim_{x\to\infty}g(x)=0$, where $\lim_{x\to\infty}f(x)^{g(x)}$ is called indeterminate form of type $\infty^0$, we may find $\lim_{x\to\infty}f(x)^{g(x)}$ by taking natural logarithm:
+\[g(x)\ln(f(x)),\]
+which is in indeterminate form of $0\cdot\infty$ because $\lim_{x\to\infty}\ln(f(x))=\infty$.
+
+Let $f(x)$ and $g(x)$ be functions differentiable on $(a,\infty)$. If $\lim_{x\to\infty}f(x)=1$ and $\lim_{x\to\infty}g(x)=\infty$, where $\lim_{x\to\infty}f(x)^{g(x)}$ is called indeterminate form of type $1^{\infty}$, we may find $\lim_{x\to\infty}f(x)^{g(x)}$ by taking natural logarithm:
+\[g(x)\ln(f(x)),\]
+which is in indeterminate form of $0\cdot\infty$ because $\lim_{x\to\infty}\ln(f(x))=0$.
+
+Let $f(x)$ and $g(x)$ be functions differentiable on $(-\infty,a)$. If $\lim_{x\to -\infty}f(x)=\lim_{x\to -\infty}g(x)=0$, where $\lim_{x\to -\infty}f(x)^{g(x)}$ is called indeterminate form of type $0^0$, we may find $\lim_{x\to -\infty}f(x)^{g(x)}$ by taking natural logarithm:
+\[g(x)\ln(f(x)),\]
+which is in indeterminate form of $0\cdot\infty$ because $\lim_{x\to -\infty}\ln(f(x))=-\infty$.
+
+Let $f(x)$ and $g(x)$ be functions differentiable on $(-\infty,a)$. If $\lim_{x\to -\infty}f(x)=\infty$ and $\lim_{x\to -\infty}g(x)=0$, where $\lim_{x\to -\infty}f(x)^{g(x)}$ is called indeterminate form of type $\infty^0$, we may find $\lim_{x\to -\infty}f(x)^{g(x)}$ by taking natural logarithm:
+\[g(x)\ln(f(x)),\]
+which is in indeterminate form of $0\cdot\infty$ because $\lim_{x\to -\infty}\ln(f(x))=\infty$.
+
+Let $f(x)$ and $g(x)$ be functions differentiable on $(-\infty,a)$. If $\lim_{x\to -\infty}f(x)=1$ and $\lim_{x\to -\infty}g(x)=\infty$, where $\lim_{x\to -\infty}f(x)^{g(x)}$ is called indeterminate form of type $1^{\infty}$, we may find $\lim_{x\to -\infty}f(x)^{g(x)}$ by taking natural logarithm:
+\[g(x)\ln(f(x)),\]
+which is in indeterminate form of $0\cdot\infty$ because $\lim_{x\to -\infty}\ln(f(x))=0$.
+\subsection{Taylor series}
+\subsubsection{Uniqueness}
+Let $f\colon D\subseteq\mathbb{R}^m\to\mathbb{R}$ be a function, let $a$ be any point, $I\subseteq D$ be any open ball centered $a$, if there exists a series such that:
+\[f(x)=\sum_{\alpha\in\mathbb{N}_0^{\pht{0}m}}\frac{c_{\alpha}}{\alpha !}(x-a)^{\alpha},\]
+for all $x\in I$, then
+\[c_{\alpha}=D^{\alpha}f(a).\]
+\bpr
+Fix any multi-index $\beta$. Apply $D^{\beta}$ to both sides
+\[D^{\beta}f(x)=\sum_{\alpha\in\bbN_0^{\pht{0}m}}\frac{c_{\alpha}}{\alpha !}D^{\beta}(x-a)^{\alpha}\]
+\[D^{\beta}(x-a)^{\alpha}=\bcs
+\frac{\alpha !}{(\alpha-\beta)!}(x-a)^{\alpha-\beta},\quad&\beta\leq\alpha\\
+0,\quad&\tx{otherwise}\ecs.\]
+\[D^{\beta}f(x)=\sum_{\alpha\in\bbN_0^{\pht{0}m}\land\beta\leq\alpha}\frac{c_{\alpha}}{(\alpha-\beta)!}(x-a)^{\alpha-\beta}\]
+Evaluate $a$, only $\alpha=\beta$ term survives. Thus,
+\[D^{\beta}f(a)=c_{\beta}.\]
+\epr
+\subsubsection{Taylor's theorem on the reals}
+Let $k\in\bbN$, and function $f\colon D\subseteq\bbR\to\bbR$ be $k$ times differentiable at a point $a\in D$. Then there exists a real-valued function $R_k$ defined on an open interval containing $a$ such that
+\[f(x)=\sum_{n=0}^k\frac{f^{(n)}(a)}{n!}(x-a)^n+R_k(x),\]
+and that
+\bit
+\item Peano form of remainder:
+\[\lim_{x\to a}\frac{R_k(x)}{|x-a|^k}=0.\]
+\item Lagrange form of remainder: Suppose $f^{(k+1)}$ exists on $[a,x)$ for $x\geq a$ and $(x,a]$ for $x\leq a$, and $f^{(k)}$ is continuous on $[a,x]$ for $x\geq a$ and $[x,a]$ for $x\leq a$. Then, there exists $\xi$ in $[a,x]$ for $x\geq a$ and $[x,a]$ for $x\leq a$:
+\[R_k(x)=\frac{f^{(k+1)}(\xi)}{(k+1)!}(x-a)^{k+1}.\]
+\item Integral form of the remainder: Suppose $f^{(k)}$ is absolutely continuous on $[a,x]$ for $x\geq a$ and $[x,a]$ for $x\leq a$. Then
+\[R_k(x)=\frac{1}{k!}(x-a)^{k+1}\int_0^1(1-t)^kf^{(k+1)}\qty(a+t(x-a))\dd{t}.\]
+\eit
+\bpr
+PLACEHOLDER
+\epr
+\subsubsection{Taylor's theorem on higher dimensions}
+Let $k,m\in\bbN$, and function $f\colon D\subseteq\bbR^m\to\bbR$ be $k$ times differentiable at a point $a\in D$. Then there exists a real-valued function $R_k$ defined on a neighborhood of $a$ such that
+\[f(x)=\sum_{\alpha\in\mathbb{N}_0^{\pht{0}m}\land |\alpha|\leq k}\frac{D^{\alpha}f(a)}{\alpha !}(x-a)^{\alpha}+R_k(x),\]
+and that
+\bit
+\item Peano form of remainder:
+\[\lim_{x\to a}\frac{R_k(x)}{|x-a|^k}=0.\]
+\item Lagrange form of remainder: Suppose for all $\alpha\in\mathbb{N}_0^{\pht{0}m}\land |\alpha|=k+1$, $f^{\alpha}$ exists on a neighborhood of $a$ whose closure contains $x$, and for all $\alpha\in\mathbb{N}_0^{\pht{0}m}\land |\alpha|=k$, $f^{\alpha}$ is continuous on a neighborhood of $a$ containing $x$. Then, there exists $t\in (0,1)$ such that for $\xi=a+t(x-a)$:
+\[R_k(x)=\sum_{\beta\in\mathbb{N}_0^{\pht{0}m}\land |\beta|=k+1}\frac{D^{\beta}f(\xi)}{\beta!}(x-a)^{\beta}.\]
+\item Integral form of the remainder: Suppose for all $\alpha\in\mathbb{N}_0^{\pht{0}m}\land |\alpha|=k$, $f^{\alpha}$ is absolutely continuous on a neighborhood of $a$ containing $x$. Then
+\[R_k(x)=\sum_{\beta\in\mathbb{N}_0^{\pht{0}m}\land |\beta|=k+1}\frac{k+1}{\beta!}(x-a)^{\beta}\int_0^1(1-t)^k\qty(D^{\beta}f)\qty(a+t(x-a))\dd{t}.\]
+\eit
+\bpr
+PLACEHOLDER
+\epr
+\subsubsection{Taylor's inequality}
+If $\abs{f^{(n+1)}(x)}\leq M$ for $|x-a|\le d$, then the remainder $R_n(x)$ of the Taylor series satisfies the inequality
+\[\abs{R_n(x)}\le\frac{M}{(n+1)!}\abs{x-a}^{n+1},\quad\abs{x-a}\le d.\]
+\bpr
+PLACEHOLDER
+\epr
+\subsection{Lagrange multiplier (method) (拉格朗日乘數/乘子（法）)}
+The Lagrange multiplier method is a method for finding the points where extremes occur of a differentiable function under constraints.
+\subsubsection{Univariate form}
+Let $f:\,\mathbb{R} \rightarrow \mathbb{R}$ and $g:\,\mathbb{R} \rightarrow \mathbb{R}$ . We want to find the points where extremes of \( f(x) \) under the constraint \( g(x) = \mathbf{0} \) occur. 
+
+First, construct the Lagrangian function \( \mathcal{L}(x,\lambda) \):
+\[\mathcal{L}(x,\lambda) = f(x) - \lambda \cdot g(x),\]
+where \( \lambda\in\mathbb{R} \) is the Lagrange multiplier (拉格朗日乘數 or 乘子).
+
+Find the derivative of $\mathcal{L}$ and set it to zero:
+\[
+\dv{\mathcal{L}}{x} = 0
+\]
+Solve the equation to find \( x \) and \( \lambda \) . 
+
+\text{Statement:} Let $A$ be the set of all solutions for \( x \) such that $\dv{\mathcal{L}}{x} = 0$, and $B$ be the set of all points where extremes of \( f(x) \) under the constraint \( g(x) = \mathbf{0} \) occur. We claim that $B\subseteq A$.
+\subsubsection{Multivariate form}
+Let \( \mathbf{x} = (x_1, x_2, \dots, x_n) \) be the independent variable vector and $\mathbf{0}$ be the zero vector. Now we have $f:\,\mathbb{R}^n \rightarrow \mathbb{R}$ and $g:\,\mathbb{R}^n \rightarrow \mathbb{R}^c$. We want to find the points where extremes of \( f(\mathbf{x}) \) under the constraint \( g(\mathbf{x}) = \mathbf{0}\) occur. 
+
+First, construct the Lagrangian function \( \mathcal{L}(\mathbf{x},\lambda) \):
+\[
+\mathcal{L}(\mathbf{x},\lambda) = f(\mathbf{x}) - \lambda \cdot g(\mathbf{x}),
+\]
+where \( \lambda\in\mathbb{R}^c \) is the Lagrange multiplier vector.
+
+Find the gradient of $\mathcal{L}$ and set it to zero:
+\[
+\nabla \mathcal{L} = \mathbf{0}
+\]
+Solve the equation to find \( \mathbf{x} \) and \( \lambda \) . 
+
+\text{Statement:} Let $A$ be the set of all solutions for \( \mathbf{x} \) such that $\nabla \mathcal{L} = \mathbf{0}$, and $B$ be the set of all points where extremes of \( f(\mathbf{x}) \) under the constraint \( g(\mathbf{x}) = \mathbf{0}\) occur. We claim that $B\subseteq A$.
+\begin{proof}
+Consider $\mathbf{x}^*\in B$. It must satisfy the constraint:
+\[g(\mathbf{x}^*) = \mathbf{0}.\]
+Any feasible point $\mathbf{x}$ near $\mathbf{x}^*$ must satisfy the constraint. We can represent $\mathbf{x}$ as:
+\[\mathbf{x} = \mathbf{x}^* + \delta\mathbf{x},\]
+where $\delta\mathbf{x}$ is a differential change tangent to the manifold defined by $g(\mathbf{x})$, that is, it lies in the kernel of $\nabla g(\mathbf{x}^*)$, that is,
+\[g(\mathbf{x}^* + \delta\mathbf{x}) = \mathbf{0}.\]
+Find the first-order approximation of $f$ at $\mathbf{x}^*$:
+\[f(\mathbf{x}^*+ \delta\mathbf{x}) \approx f(\mathbf{x}^*) + \nabla f(\mathbf{x}^*) \cdot \delta\mathbf{x} + O(\|\delta\mathbf{x}\|^2)\]
+Find the first-order approximation of $g$ at $\mathbf{x}^*$:
+\[g(\mathbf{x}^*+ \delta\mathbf{x}) \approx g(\mathbf{x}^*) + \nabla g(\mathbf{x}^*) \cdot \delta\mathbf{x} + O(\|\delta\mathbf{x}\|^2)\]
+Since $\mathbf{x}^*\in B$, for any feasible $\delta\mathbf{x}$ we must have:
+\[\nabla f(\mathbf{x}^*) \cdot \delta\mathbf{x} = 0.\]
+Since $g(\mathbf{x}^*) = \mathbf{0}$, we have
+\[\nabla g(\mathbf{x}^*) \cdot \delta\mathbf{x} = O(\|\delta\mathbf{x}\|^2).\]
+Because \( \delta\mathbf{x} \in \ker(\nabla g(\mathbf{x}^)) \), \( \nabla f(\mathbf{x}^) \) can be expressed as a linear combination of \( \nabla g(\mathbf{x}^) \) . This means that there exists a vector to $\lambda$ such that:
+\[\nabla\mathcal{L} = \nabla \qty(f(\mathbf{x}) - \lambda \cdot g(\mathbf{x})) = \mathbf{0} \]
+\end{proof}
+\subsection{Generalized Schwarz's Theorem, Young's Theorem, or Clairaut's Theorem on equality or symmetry of mixed partial derivatives}
+For a function $f\colon\Omega\subseteq\mathbb{R}^n\to\mathbb{R}^o$, for any indexed family $A\colon\bbN_{\leq m}\to\bbN_{\leq n}$, for any permutation $\sigma$ of $\bbN_{\leq m}$, define
+\[D_{A,\sigma}f=\frac{\partial^mf}{\prod_{k=1}^m\partial x_{A_{\sigma(k)}}.\]
+If for all permutations $\sigma$ of $\bbN_{\leq m}$, $D_{A,\sigma}f$ exist on a neighborhood of a fixed point $\mathbf{p}\in\Omega$ and is continuous at $\mathbf{p}$, then all of them are equal at $\mb{p}$.
+\subsection{Numerical differentiation (數值微分)}
+\subsubsection{Newton's Method (牛頓法) or Newton-Raphson Method (牛頓-拉普森法)}
+Newton's method, also known as Newton-Raphson method, is an iterative technique used to approximate the roots of a real-valued function. Given a function $f(x)$ and an initial guess \( x_0 \), Newton's method refines this guess by repeatedly applying the formula:
+\[
+x_{n+1} = x_n - \frac{f(x_n)}{f'(x_n)},\quad n\in\mathbb{N}
+\]
+where:
+\begin{itemize}
+\item \( x_n \) is the current approximation,
+\item \( f(x_n) \) is the value of the function at \( x_n \),
+\item \( f'(x_n) \) is the derivative of \( f(x) \) evaluated at \( x_n \).
+\end{itemize}
+PLACEHOLDER: Newton's method converges quadratically or faster if and proof
+PLACEHOLDER: Given convergence, suppose that we want the error to be less than a given value $v$, we can take $x_n$ such that $\abs{x_n-x_{n-1}}<v$?

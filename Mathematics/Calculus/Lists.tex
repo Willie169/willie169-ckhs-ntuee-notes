@@ -1,0 +1,1252 @@
+\section{Lists}
+\subsection{List of Sequences}
+\subsubsection{Arithmetic progression or sequence (等差數列)}
+An arithmetic sequence is a sequence $\langle a_n\rangle=\langle a_1+(n-1)d\rangle$. 
+
+Given $a$ and $b$, $\frac{a+b}{2}$ is called the median of an arithmetic sequence (等差中項).
+
+\[\nexists\lim_{n\to\infty}a_n,\quad d\neq 0\]
+\[\lim_{n\to\infty}a_n=a_1,\quad d=0\]
+\subsubsection{Geometric progression or sequence (等比 or 幾何數列)}
+A geometric sequence is a sequence $\langle a_n\rangle=\langle a_1\cdot r^{n-1}\rangle$, where $a_1r\neq 0$.
+
+Given $a$ and $b$, $\pm\sqrt{ab}$ is called the median of an geometric sequence (等比中項).
+\[\nexists\lim_{n\to\infty}a_n,\quad |d|\geq 1\land d\neq 1\]
+\[\lim_{n\to\infty}a_n=a_1,\quad d=1\]
+\[\lim_{n\to\infty}a_n=0,\quad |d|<1\]
+\subsection{List of Series}
+\subsubsection{Arithmetic series (等差級數)}
+An arithmetic series is a series $S_n=\sum_{i=1}^na_i$, where $\langle a_n\rangle$ is an arithmetic sequence.
+\[S_n=\frac{n}{2}\qty(a_1+a_n)=\frac{n}{2}\qty(2a_1+(n-1)d)=na_1+\frac{n(n-1)d}{2}\]
+\[\nexists\lim_{n\to\infty}S_n,\quad a_1\neq 0\lor d\neq 0\]
+\[\lim_{n\to\infty}S_n=0,\quad a_1=0\land d=0\]
+\subsubsection{Geometric series (等比 or 幾何級數)}
+A geometric series is a series $S_n=\sum_{i=1}^na_i$, where $\langle a_n\rangle$ is a geometric sequence.
+
+\[S_n=\frac{a_1\qty(1-r^n)}{1-r},\quad r\neq 1\]
+\[S_n=na_1,\quad r=1\]
+\[\lim_{n\to\infty}S_n=\frac{a_1}{1-r},\quad \abs{r}<1\]
+\[\nexists\lim_{n\to\infty}S_n,\quad \abs{r}\geq 1\]
+\subsubsection{Power series (冪級數)}
+\[\begin{aligned}
+\sum_{i=1}^ni &= \frac{n\qty(n+1)}{2}\\
+\sum_{i=1}^ni^2 &= \frac{n\qty(n+1)\qty(2n+1)}{6}\\
+\sum_{i=1}^ni^3 &= \qty(\frac{n(n+1)}{2})^2\\
+\sum_{i=1}^ni^r &= n + \sum_{k=1}^{n-1} (n-k)((k+1)^r - k^r)\\
+&= n + \sum_{k=1}^{n-1} (n-k)\sum_{j=0}^{r-1}\binom{r}{j}k^{j}
+\end{aligned}\]
+\subsection{List of piecewise Functions}
+\subsubsection{Absolute value (絕對值) or modulus (模)}
+The absolute value or modulus function $|\cdot|\colon\bbR\to\bbR$ is defined as:
+\[|x|=\bcs x,\quad&x\geq 0\\-x,\quad&x<0\ecs.\]
+\subsubsection{Sign function or signum function (符號函數)}
+The sign function $\sgn\colon\bbR\to\bbR$ is defined as:
+\[\sgn(x)=\bcs\frac{x}{|x|},\quad & x\neq 0\\0,\quad & x=0\end{cases}.\]
+\subsubsection{Floor function (下取整函數), integral part, integer part (整數部份), greatest integer, entier, rounding down (無條件捨去), or rounding toward negative infinity}
+The floor function $\lfloor\cdot\rfloor\colon\bbR\to\bbR$ or $[\cdot]\colon\bbR\to\bbR$ is defined as:
+\[\lfloor x\rfloor=[x]=\max\{m\in\bbZ\mid m\leq x\},\]
+in which $[\cdot]$ is called the Gauss sign (高斯符號).
+\subsubsection{Ceiling function (上取整函數), rounding up (無條件進位), or rounding toward positive infinity}
+The ceiling function $\lceil\cdot\rceil\colon\bbR\to\bbR$ is defined as:
+\[\lceil x\rceil=\min\{m\in\bbZ\mid m\geq x\}.\]
+\subsubsection{Truncation, rounding toward zero, or rounding away from infinity}
+The truncation $\operatorname{truncate}\colon\bb{R}\to\bb{R}$ is defined as:
+\[\operatorname{truncate}(x)=
+\bcs
+\lfloor x\rfloor,\quad & x\geq 0\\
+\lceil x\rceil,\quad & x<0
+\ecs\]
+\subsubsection{Rounding half up (四捨五入) or rounding half toward positive infinity}
+The rounding half up $\operatorname{roundhalfup}\colon\bbR\to\bbR$ is defined as:
+\[\operatorname{roundhalfup}(x)=\left\lfloor x+\frac{1}{2}\right\rfloor.\]
+\subsubsection{Rounding half down (五捨六入) or rounding half toward negative infinity}
+The rounding half down $\operatorname{roundhalfdown}\colon\bbR\to\bbR$ is defined as:
+\[\operatorname{roundhalfdown}(x)=\left\lceil x-\frac{1}{2}\right\rceil.\]
+\subsubsection{Rounding half toward zero or rounding half away from infinity}
+The rounding half toward zero $\operatorname{roundhalftowardzero}\colon\bbR\to\bbR$ is defined as:
+\[\operatorname{roundhalftowardzero}(x)=\sgn(x)\left\lceil |x|-\frac{1}{2}\right\rceil.\]
+\subsubsection{Rounding half away from zero or rounding half toward infinity}
+The rounding half away from zero $\operatorname{roundhalfawayfromzero}\colon\bbR\to\bbR$ is defined as:
+\[\operatorname{roundhalfawayfromzero}(x)=\sgn(x)\left\lfloor |x|+\frac{1}{2}\right\rfloor.\]
+\subsubsection{Rounding half to even (四捨六入五成雙) or banker's rounding}
+The rounding half to even $\operatorname{roundhalftoeven}\colon\bbR\to\bbR$ is defined as:
+\[\operatorname{roundhalftoeven}(x)=\bcs
+\left\lfloor x+\frac{1}{2}\right\rfloor,\quad & \frac{1}{2}\left\lfloor x+\frac{1}{2}\right\rfloor\in\mathbb{Z}\\
+\left\lceil x-\frac{1}{2}\right\rceil,\quad & \frac{1}{2}\left\lfloor x+\frac{1}{2}\right\rfloor\notin\mathbb{Z}
+\ecs.\]
+\subsubsection{Rounding half to odd (四捨六入五成單)}
+The rounding half to odd $\operatorname{roundhalftoodd}\colon\bbR\to\bbR$ is defined as:
+\[\operatorname{roundhalftoodd}(x)=\bcs
+\left\lfloor x+\frac{1}{2}\right\rfloor,\quad & \frac{1}{2}\left\lfloor x+\frac{1}{2}\right\rfloor\notin\mathbb{Z}\\
+\left\lceil x-\frac{1}{2}\right\rceil,\quad & \frac{1}{2}\left\lfloor x+\frac{1}{2}\right\rfloor\in\mathbb{Z}
+\ecs.\]
+\subsubsection{Pulse wave, pulse train, or rectangular wave}
+A pulse wave with period $T$, duty cycle $D$, crest $A_1$, and trough $A_0$ is
+\[f(t)=A_0+\qty(A_1-A_0)\qty(\left\lfloor\frac{t}{T}+D\rfloor\right-\left\lfloor\frac{t}{T}\rfloor\right).\]
+The ratio of the high period to the total period of a pulse wave is called the duty cycle.
+
+When the duty cycle is $50\%$, the pulse wave is called square wave.
+\subsubsection{Triangular wave or triangle wave}
+A triangular wave with period $T$, crest $A_1$, and trough $A_0$ is
+\[f(t)=A_0+2\qty(A_1-A_0)\abs{\frac{t}{T}-\left\lfloor\frac{t}{T}+\frac{1}{2}\right\rfloor}.\]
+\subsubsection{Sawtooth wave or saw wave}
+A sawtooth wave with period $T$, crest $A_1$, and trough $A_0$ is
+\[f(t)=\frac{A_0+A_1}{2}+\qty(A_1-A_0)\qty(\frac{t}{T}-\left\lfloor\frac{t}{T}+\frac{1}{2}\right\rfloor).\]
+\subsubsection{Heaviside step function (黑維塞階躍函數) or Unit step function (單位階躍函數)}
+The Heaviside step function or unit step function $u(x)\colon\bbR\to\bbR$, also denoted as $H(x)$, is defined as
+\[u(x)=
+\begin{cases}0,\quad &x<0\\
+1,\quad &x\geq 0
+\end{cases}.\]
+Some sources define $u(0)=0$, $u(0)=\frac{1}{2}$, or $u$ not defined at $0$.
+\subsubsection{Ramp function}
+The ramp function $R(x)\colon\bbR\to\bbR$ is defined as
+\[R(x)=
+\begin{cases}0,\quad &x<0\\
+x,\quad &x\geq 0
+\end{cases}.\]
+\subsection{List of Limits of Real Functions}
+\subsubsection{Limit of sinc function at zero}
+\[\lim_{h\to 0}\frac{\sin h}{h}=1.\]
+\begin{proof}
+On a unit circle with center $O$, consider the arc $\arc{AB}=h$ subtended by acute angle $h$ (i.e. $\frac{\pi}{2}>h>0$), the chord length $\ol{BC}=\sin(h)$ with $C$ be the intersection of the chord and $\ora{OA}$, and the tangent length $\ol{AD}=\tan(h)$ with $D$ be the intersection of the tangent and $\ora{OB}$.
+
+We can observe that
+\[\ol{BC}<\arc{AB}.\]
+
+Take tangent of the circle at $B$. Let it intersects $\ol{AD}$ at $E$. We can observe that the adjacent $\ol{BE}$ is less than the hypothenuse $\ol{DE}$. Thus
+\[\arc{AB}<\ol{BE}+\ol{AE}<\ol{DE}+\ol{AE}=\ol{AD}.\]
+
+Thus,
+\[\sin h<h<\tan h.\]
+\[1<\frac{h}{\sin h}<\frac{1}{\cos h}.\]
+\[\cos h<\frac{\sin h}{h}<1.\]
+\[\lim_{h\to 0}\cos h=1.\]
+
+By the squeeze theorem:
+\[\lim_{h\to 0}\frac{\sin h}{h}=1.\]
+\end{proof}
+\subsubsection{Limit of power over factorial}
+\[\lim_{n\to\infty}\frac{x^n}{n!}=0,\quad x\in\bbR\]
+\bpr
+PLACEHOLDER
+\epr
+\subsection{List of Derivatives of Real Functions and Real Functions as Definite Integrals}
+\subsubsection{Power function}
+\[\dv{x^n}{x}=nx^{n-1}.\]
+\[x^n=n\int_0^xt^{n-1}\dd{t}.\]
+\begin{proof}
+\[\dv{x^n}{x}=\lim_{h\to 0}\frac{(x+h)^n-x^n}{h}=\lim_{h\to 0}\frac{\sum_{k=1}^{\infty}\binom{n}{k}x^{n-k}h^k}{h}=nx^{n-1}.\]
+\end{proof}
+\subsubsection{Absolute value function}
+\[\dv{|x|}{x}=\sgn(x),\quad x\neq 0.\]
+\subsubsection{Logarithmic function}
+\[\dv{\ln(x)}{x}=\frac{1}{x}.\]
+\[\ln(x)=\int_1^x\frac{1}{t}\dd{t},\quad x>0.\]
+\subsubsection{Exponential function}
+\[\dv{a^x}{x}=\ln(a)a^x.\]
+\[a^x=1+\int_0^x\ln(a)a^t\dd{t}.\]
+\begin{proof}
+\[\ba
+\dv{a^x}{x}&=\lim_{h\to 0}\frac{a^{x+h}-a^x}{h}\\
+&=a^x\lim_{h\to 0}\frac{a^h-1}{h}\\
+&=a^x\lim_{h\to 0}\frac{e^{\ln(a)h}-1}{h}\\
+&=a^x\lim_{h\to 0}\frac{\lim_{n\to\infty}\sum_{k=0}^n\frac{\qty(\ln(a)h)^k}{k!}-1}{h}\\
+&=a^x\lim_{h\to 0}\frac{\lim_{n\to\infty}\sum_{k=1}^n\frac{\qty(\ln(a)h)^k}{k!}}{h}\\
+&=\ln(a)a^x
+\ea\]
+\end{proof}
+\subsubsection{Sine function}
+\[\dv{\sin(x)}{x}=\cos(x).\]
+\[\sin(x)=\int_0^x\cos(t)\dd{t}.\]
+\begin{proof}
+\[\begin{aligned}
+\dv{\sin(x)}{x}&=\lim_{h\to 0}\frac{\sin(x+h)-\sin(x)}{h}\\
+&=\lim_{h\to 0}\frac{\sin(x)(\cos (h)-1)+\cos(x)\sin(h)}{h}
+\end{aligned}\]
+\[\cos(h)-1=-2\sin^2\qty(\frac{h}{2}),\]
+\[\frac{\sin^2\qty(\frac{h}{2})}{h}=\frac{\sin\qty(\frac{h}{2})}{\frac{h}{2}}\cdot\frac{\sin\qty(\frac{h}{2})}{2}.\]
+By
+\[\lim_{h\to 0}\frac{\sin(h)}{h}=1.\]
+we have:
+\[\lim_{h\to 0}\frac{\cos(h)-1}{h}=0.\]
+\[\begin{aligned}
+&=\lim_{h\to 0}\sin(x)\cdot 0+\cos(x)\cdot 1\\
+&=\cos(x).
+\end{aligned}\]
+\end{proof}
+\subsubsection{Cosine function}
+\[\dv{\cos(x)}{x}=-\sin(x).\]
+\[\cos(x)=1-\int_0^x\sin(t)\dd{t}.\]
+\subsubsection{Tangent function}
+\[\dv{\tan(x)}{x}=\sec^2(x).\]
+\[\tan(x)=\int_{\operatorname{round}\qty(\frac{x}{\pi})\pi}^x\sec^2(t)\dd{t},\quad x\in\bbR\setminus\{\frac{\pi}{2}+k\pi\mid k\in\bbZ\},\]
+in which $\operatorname{round}(x)=\left\lfloor x+\frac{1}{2}\right\rfloor$.
+\begin{proof}
+\[\begin{aligned}
+\dv{\tan(x)}{x}&=\dv{}{x}\frac{\sin(x)}{\cos(x)}\\
+&=\frac{\cos^2(x)+\sin^2(x)}{\cos^2(x)}\\
+&=\sec^2(x).
+\end{aligned}\]
+\end{proof}
+\subsubsection{Cotangent function}
+\[\dv{\cot(x)}{x}=-\csc^2(x).\]
+\[\cot(x)=-\int_{\frac{\pi}{2}+\operatorname{round}\qty(\frac{x}{\pi}-\frac{1}{2})\pi}^x\csc^2(t)\dd{t},\quad x\in\bbR\setminus\{k\pi\mid k\in\bbZ\},\]
+in which $\operatorname{round}(x)=\left\lfloor x+\frac{1}{2}\right\rfloor$.
+\begin{proof}
+\[\cot(x)=\frac{\cos(x)}{\sin(x)}.\]
+\[\begin{aligned}
+\dv{\cot(x)}{x}&=\dv{}{x}\frac{\cos(x)}{\sin(x)}\\
+&=\frac{-\sin^2(x)-\cos^2(x)}{\sin^2(x)}\\
+&=-\csc^2(x).
+\end{aligned}\]
+\end{proof}
+\subsubsection{Secant function}
+\[\dv{\sec(x)}{x}=\tan(x)\sec(x).\]
+\[\sec(x)=\int_{\operatorname{round}\qty(\frac{x}{\pi})\pi}^x\tan(t)\sec(t)\dd{t},\quad x\in\bbR\setminus\{\frac{\pi}{2}+k\pi\mid k\in\bbZ\},\]
+in which $\operatorname{round}(x)=\left\lfloor x+\frac{1}{2}\right\rfloor$.
+\begin{proof}
+\[\ba
+\dv{\sec(x)}{x}&=\dv{}{x}\frac{1}{\cos(x)}\\
+&=\frac{\sin(x)}{\cos^2(x)}\\
+&=\tan(x)\sec(x).
+\ea\]
+\end{proof}
+\subsubsection{Cosecant function}
+\[\dv{\csc(x)}{x}=-\cot(x)\csc(x).\]
+\[\csc(x)=-\int_{\frac{\pi}{2}+\operatorname{round}\qty(\frac{x}{\pi}-\frac{1}{2})\pi}^x\cot(t)\csc(t)\dd{t},\]
+in which $\operatorname{round}(x)=\left\lfloor x+\frac{1}{2}\right\rfloor$.
+\begin{proof}
+\[\ba
+\dv{\csc(x)}{x}&=\dv{}{x}\frac{1}{\sin(x)}\\
+&=\frac{-\cos(x)}{\sin^2(x)}\\
+&=-\cot(x)\csc(x).
+\ea\]
+\end{proof}
+\subsubsection{Inverse sine function}
+\[\dv{\arcsin(x)}{x}=\frac{1}{\sqrt{1-x^2}}.\]
+\[\arcsin(x)=\int_0^x\frac{1}{\sqrt{1-t^2}}\dd{t},\quad\abs{x}\leq 1.\]
+\begin{proof}
+Let $y=\arcsin(x)$. $\sin(y)=x$.
+\[\dv{}{x}\sin(y)=\dv{}{x}(x).\]
+Using the chain rule on the left:
+\[\cos(y)\dv{y}{x}=1.\]
+\[\dv{y}{x}=\frac{1}{\cos(y)}=\frac{1}{\sqrt{1-x^2}}.\]
+\end{proof}
+\subsubsection{Inverse cosine function}
+\[\dv{\arccos(x)}{x}=-\frac{1}{\sqrt{1-x^2}}.\]
+\[\arccos(x)=\int_x^1\frac{1}{\sqrt{1-t^2}}\dd{t},\quad\abs{x}\leq 1.\]
+\begin{proof}
+Let $y=\arccos(x)$. $\cos(y)=x$.
+\[\dv{}{x}\cos(y)=\dv{}{x}(x).\]
+Using the chain rule on the left:
+\[-\sin(y)\dv{y}{x}=1.\]
+\[\dv{y}{x}=-\frac{1}{\cos(y)}=-\frac{1}{\sqrt{1-x^2}}.\]
+\end{proof}
+\subsubsection{Inverse tangent function}
+\[\dv{\arctan(x)}{x}=\frac{1}{1+x^2}.\]
+\[\arctan(x)=\int_0^x\frac{1}{1+t^2}\dd{t}.\]
+\begin{proof}
+Let $y=\arctan(x)$. $\tan(y)=x$.
+\[\dv{}{x}\tan(y)=\dv{}{x}(x).\]
+Using the chain rule on the left:
+\[\sec^2(y)\dv{y}{x}=1.\]
+\[\dv{y}{x}=\cos^2(y)=\frac{1}{1+x^2}.\]
+\end{proof}
+\subsubsection{Inverse cotangent function}
+\[\dv{\arccot(x)}{x}=-\frac{1}{1+x^2}.\]
+\[\arccot(x)=\int_x^{\infty}\frac{1}{1+t^2}\dd{t}.\]
+\begin{proof}
+Let $y=\arccot(x)$. $\cot(y)=x$.
+\[\dv{}{x}\cot(y)=\dv{}{x}(x).\]
+Using the chain rule on the left:
+\[-\csc^2(y)\dv{y}{x}=1.\]
+\[\dv{y}{x}=-\sin^2(y)=-\frac{1}{1+x^2}.\]
+\end{proof}
+\subsubsection{Inverse secant function}
+\[\dv{\arcsec(x)}{x}=\frac{1}{|x|\sqrt{x^2-1}}.\]
+\[\arcsec(x)=\sgn(x)\int_1^{\abs{x}}\frac{1}{t\sqrt{t^2-1}}\dd{t}+(1-\sgn(x))\frac{\pi}{2},\quad\abs{x}\geq 1.\]
+\begin{proof}
+\[\ba
+\dv{\arcsec(x)}{x}&=\dv{\arccos(\frac{1}{x})}{x}\\
+&=-\frac{1}{\sqrt{1-x^{-2}}}\qty(-x^{-2})\\
+&=\frac{1}{|x|\sqrt{x^2-1}}
+\ea\]
+\end{proof}
+\subsubsection{Inverse cosecant function}
+\[\dv{\arccsc(x)}{x}=-\frac{1}{|x|\sqrt{x^2-1}}.\]
+\[\arccsc(x)=\sgn(x)\int_{\abs{x}}^{\infty}\frac{1}{t\sqrt{t^2-1}}\dd{t},\quad\abs{x}\geq 1.\]
+\begin{proof}
+\[\ba
+\dv{\arccsc(x)}{x}&=\dv{\arcsin(\frac{1}{x})}{x}\\
+&=\frac{1}{\sqrt{1-x^{-2}}}\qty(-x^{-2})\\
+&=-\frac{1}{|x|\sqrt{x^2-1}}
+\ea\]
+\end{proof}
+\subsubsection{Hyperbolic sine function}
+\[\dv{\sinh(x)}{x}=\cosh(x).\]
+\begin{proof}
+\[\ba
+\dv{\sinh(x)}{x}&=\dv{}{x}\qty(\frac{e^x-e^{-x}}{2})\\
+&=\frac{e^x+e^{-x}}{2}=\cosh(x)
+\ea\]
+\end{proof}
+\subsubsection{Hyperbolic cosine function}
+\[\dv{\cosh(x)}{x}=\sinh(x).\]
+\begin{proof}
+\[\ba
+\dv{\cosh(x)}{x}&=\dv{}{x}\qty(\frac{e^x+e^{-x}}{2})\\
+&=\frac{e^x-e^{-x}}{2}=\sinh(x)
+\ea\]
+\end{proof}
+\subsubsection{Hyperbolic tangent function}
+\[\dv{\tanh(x)}{x}=\sech^2(x).\]
+\begin{proof}
+\[\ba
+\dv{\tanh(x)}{x}&=\dv{}{x}\qty(\frac{e^{2x}-1}{e^{2x}+1})\\
+&=\frac{2e^{2x}\qty(e^{2x}+1)-\qty(e^{2x}-1)2e^{2x}}{\qty(e^{2x}+1)^2}\\
+&=\frac{4e^{2x}}{\qty(e^{2x}+1)^2}\\
+&=\qty((\frac{2}{e^x+e^{-x}})^2\\
+&=\sech^2(x)
+\ea\]
+\end{proof}
+\subsubsection{Hyperbolic cotangent function}
+\[\dv{\coth(x)}{x}=-\csch^2(x).\]
+\begin{proof}
+\[\ba
+\dv{\coth(x)}{x}&=\dv{}{x}\qty(\frac{e^{2x}+1}{e^{2x}-1})\\
+&=\frac{2e^{2x}\qty(e^{2x}-1)-\qty(e^{2x}+1)2e^{2x}}{\qty(e^{2x}-1)^2}\\
+&=\frac{-4e^{2x}}{\qty(e^{2x}-1)^2}\\
+&=-\qty((\frac{2}{e^x-e^{-x}})^2\\
+&=-\csch^2(x)
+\ea\]
+\end{proof}
+\subsubsection{Hyperbolic secant function}
+\[\dv{\sech(x)}{x}=-\tanh(x)\sech(x).\]
+\begin{proof}
+\[\ba
+\dv{\sech(x)}{x}&=\dv{}{x}\qty(\frac{2}{e^x+e^{-x}})\\
+&=\dv{}{x}\qty(\frac{-2\qty(e^x-e^{-x})}{\qty(e^x+e^{-x})^2})\\
+&=-\tanh(x)\sech(x)
+\ea\]
+\end{proof}
+\subsubsection{Hyperbolic cosecant function}
+\[\dv{\csch(x)}{x}=-\coth(x)\csch(x).\]
+\begin{proof}
+\[\ba
+\dv{\csch(x)}{x}&=\dv{}{x}\qty(\frac{2}{e^x-e^{-x}})\\
+&=\dv{}{x}\qty(\frac{-2\qty(e^x+e^{-x})}{\qty(e^x-e^{-x})^2})\\
+&=-\coth(x)\csch(x)
+\ea\]
+\end{proof}
+\subsubsection{Inverse hyperbolic sine function}
+\[\dv{\arcsinh(x)}{x}=\frac{1}{\sqrt{x^2+1}}.\]
+\begin{proof}
+\[\ba
+\dv{\arcsinh(x)}{x}&=\dv{}{x}\ln(x+\sqrt{x^2+1})\\
+&=\frac{1+\frac{x}{\sqrt{x^2+1}}}{x+\sqrt{x^2+1}}\\
+&=\frac{1}{\sqrt{x^2+1}}
+\ea\]
+\end{proof}
+\subsubsection{Inverse hyperbolic cosine function}
+\[\dv{\arccosh(x)}{x}=\frac{1}{\sqrt{x^2-1}}.\]
+\begin{proof}
+\[\ba
+\dv{\arccosh(x)}{x}&=\dv{}{x}\ln(x+\sqrt{x^2-1})\\
+&=\frac{1+\frac{x}{\sqrt{x^2-1}}}{x+\sqrt{x^2-1}}\\
+&=\frac{1}{\sqrt{x^2-1}}
+\ea\]
+\end{proof}
+\subsubsection{Inverse hyperbolic tangent function}
+\[\dv{\arctanh(x)}{x}=\frac{1}{1-x^2},\quad|x|<1.\]
+\begin{proof}
+\[\ba
+\dv{\arctanh(x)}{x}&=\frac{1}{2}\dv{}{x}\ln(\frac{1+x}{1-x})\\
+&=\frac{1}{2}\frac{1-x}{1+x}\frac{(1-x)-(-1)(1+x)}{(1-x)^2}\\
+&=\frac{1}{2}\frac{1}{1+x}\frac{2}{1-x}\\
+&=\frac{1}{1-x^2}
+\ea\]
+\end{proof}
+\subsubsection{Inverse hyperbolic cotangent function}
+\[\dv{\arccoth(x)}{x}=\frac{1}{1-x^2},\quad|x|>1.\]
+\begin{proof}
+\[\ba
+\dv{\arccoth(x)}{x}&=\frac{1}{2}\dv{}{x}\ln(\frac{x+1}{x-1})\\
+&=\frac{1}{2}\frac{x-1}{x+1}\frac{(x-1)-(x+1)}{(x-1)^2}\\
+&=\frac{1}{2}\frac{1}{x+1}\frac{-2}{x-1}\\
+&=\frac{1}{1-x^2}
+\ea\]
+\end{proof}
+\subsubsection{Inverse hyperbolic secant function}
+\[\dv{\arcsech(x)}{x}=-\frac{1}{x\sqrt{1-x^2}}.\]
+\begin{proof}
+\[\ba
+\dv{\arcsech(x)}{x}&=\dv{}{x}\ln(\frac{1}{x}+\frac{\sqrt{1-x^2}}{x})\\
+&=\frac{x}{1+\sqrt{1-x^2}}\frac{\frac{-x}{\sqrt{1-x^2}}x-\qty(1+\sqrt{1-x^2})}{x^2}\\
+&=\frac{1}{1+\sqrt{1-x^2}}\frac{-x^2-\sqrt{1-x^2}-1+x^2}{x\sqrt{1-x^2}}\\
+&=-\frac{1}{x\sqrt{1-x^2}}
+\ea\]
+\end{proof}
+\subsubsection{Inverse hyperbolic cosecant function}
+\[\dv{\arccsch(x)}{x}=-\frac{1}{|x|\sqrt{1+x^2}}.\]
+\begin{proof}
+\[\ba
+\dv{\arccsch(x)}{x}&=\dv{}{x}\ln(\frac{1}{x}+\frac{\sqrt{1+x^2}}{|x|})\\
+&=\dv{}{x}\ln(\frac{1+\sgn(x)\sqrt{1+x^2}}{x})\\
+&=\frac{x}{1+\sgn(x)\sqrt{1+x^2}}\frac{\frac{\sgn(x)x}{\sqrt{1+x^2}}x-\qty(1+\sgn(x)\sqrt{1+x^2})}{x^2}\\
+&=\frac{1}{1+\sgn(x)\sqrt{1+x^2}}\frac{-\sqrt{1+x^2}-\sgn(x)}{x\sqrt{1+x^2}}\\
+&=\frac{-\sgn(x)}{x\sqrt{1+x^2}}\\
+&=-\frac{1}{|x|\sqrt{1+x^2}}
+\ea\]
+\end{proof}
+\subsection{List of Integrals of Real Functions}
+\subsubsection{Power function}
+\[\int x^{-1}\dd{x}=\ln|x|+C.\]
+\[\int x^n\dd{x}=\frac{1}{n+1}x^{n+1}+C,\quad n\neq -1\]
+\subsubsection{Logarithmic function}
+\[\int\ln(x)\dd{x}=x\ln(x)-x+C.\]
+\begin{proof}
+    \[\int\ln(x)\dd{x}=x\ln(x)-\int x\frac{1}{x}\dd{x}=x\ln(x)-x+C.\]
+\end{proof}
+\[\int\qty(\ln(x))^n\dd{x}=x\qty(\ln(x))^n-n\int\qty(\ln(x))^{n-1}\dd{x},\quad n\in\bbN.\]
+\subsubsection{Exponential function}
+\[\int e^{nx}\dd{x}=\frac{1}{n}e^{nx}+C,\quad n\neq 0.\]
+\subsubsection{Sine function}
+\[\int\sin(x)\dd{x}=-\cos(x)+C.\]
+\[\int\sin^2(x)\dd{x}=\frac{x}{2}-\frac{\sin(2x)}{4}+C.\]
+\begin{proof}
+    \[\sin^2(x)=\frac{1}{2}\qty(1-\cos(2x)).\]
+    \[\int\sin^2(x)\dd{x}=\frac{x}{2}-\frac{1}{2}\int\cos(2x)\dd{x}=\frac{x}{2}-\frac{\sin(2x)}{4}+C.\]
+\end{proof}
+\[\int\sin^n(x)\dd{x}=-\frac{1}{n}\sin^{n-1}(x)\cos(x)+\frac{n-1}{n}\int\sin^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
+\begin{proof}
+\[\ba
+\int\sin^n(x)\dd{x}&=-\sin^{n-1}(x)\cos(x)-(n-1)\int\sin^{n-2}(x)\cos^2(x)\dd{x}\\
+&=-\sin^{n-1}(x)\cos(x)-(n-1)\int\sin^{n-2}(x)\dd{x}+(n-1)\int\sin^n(x)\dd{x}\\
+&=-\frac{1}{n}\sin^{n-1}(x)\cos(x)+\frac{n-1}{n}\int\sin^{n-2}(x)\dd{x}
+\ea\]
+\end{proof}
+\subsubsection{Cosine function}
+\[\int\cos(x)\dd{x}=\sin(x)+C.\]
+\[\int\cos^2(x)\dd{x}=\frac{x}{2}+\frac{\sin(2x)}{4}+C.\]
+\begin{proof}
+    \[\sin^2(x)=\frac{1}{2}\qty(1+\cos(2x)).\]
+    \[\int\sin^2(x)\dd{x}=\frac{x}{2}+\frac{1}{2}\int\cos(2x)\dd{x}=\frac{x}{2}+\frac{\sin(2x)}{4}+C.\]
+\end{proof}
+\[\int\cos^n(x)\dd{x}=\frac{1}{n}\cos^{n-1}(x)\sin(x)+\frac{n-1}{n}\int\cos^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
+\begin{proof}
+\[\ba
+\int\cos^n(x)\dd{x}&=\cos^{n-1}(x)\sin(x)+(n-1)\int\cos^{n-2}(x)\sin^2(x)\dd{x}\\
+&=\cos^{n-1}(x)\sin(x)+(n-1)\int\cos^{n-2}(x)\dd{x}-(n-1)\int\cos^n(x)\dd{x}\\
+&=\frac{1}{n}\cos^{n-1}(x)\sin(x)+\frac{n-1}{n}\int\cos^{n-2}(x)\dd{x}
+\ea\]
+\end{proof}
+\subsubsection{Tangent function}
+\[\int\tan(x)\dd{x}=-\ln\abs{\cos(x)}+C=\ln\abs{\sec(x)}+C.\]
+\begin{proof}
+\[\ba
+\int\tan(x)\dd{x}&=-\int\frac{-\sin(x)}{\cos(x)}\dd{x}\\
+&=-\ln\abs{\cos(x)}+C=\ln\abs{\sec(x)}+C
+\ea\]
+\end{proof}
+\[\int\tan^2(x)\dd{x}=\tan(x)-x+C.\]
+\begin{proof}
+\[\ba
+\int\tan^2(x)\dd{x}&=\int\sec^2(x)-1\dd{x}\\
+&=\tan(x)-x+C
+\ea\]
+\end{proof}
+\[\int\tan^n(x)\dd{x}=\frac{1}{n-1}\tan^{n-1}(x)-\int\tan^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
+\begin{proof}
+\[\int\tan^n(x)\dd{x}=\int\tan^{n-2}(x)\sec^2(x)\dd{x}-\int\tan^{n-2}(x)\dd{x}\]
+\[u=\tan^{n-2}(x),\quad\dd{v}=\sec^2(x)\dd{x},\dd{u}=(n-2)\tan^{n-3}(x)\sec^2(x),\quad v=\tan(x).\]
+\[\ba
+\int\tan^{n-2}(x)\sec^2(x)\dd{x}&=\tan^{n-1}(x)-(n-2)\int\tan^{n-2}(x)\sec^2(x)\dd{x}\\
+&=\frac{1}{n-1}\tan^{n-1}(x)
+\ea\]
+\[\int\tan^n(x)\dd{x}=\frac{1}{n-1}\tan^{n-1}(x)-\int\tan^{n-2}(x)\dd{x}.\]
+\end{proof}
+\subsubsection{Cotangent function}
+\[\int\cot(x)\dd{x}=\ln\abs{\sin(x)}+C.\]
+\begin{proof}
+\[\ba
+\int\cot(x)\dd{x}&=\int\frac{-\cos(x)}{\sin(x)}\dd{x}\\
+&=\ln\abs{\sin(x)}+C
+\ea\]
+\end{proof}
+\[\int\cot^2(x)\dd{x}=-\cot(x)-x+C.\]
+\begin{proof}
+\[\ba
+\int\cot^2(x)\dd{x}&=\int\csc^2(x)-1\dd{x}\\
+&=-\cot(x)-x+C
+\ea\]
+\end{proof}
+\[\int\cot^n(x)\dd{x}=-\frac{1}{n-1}\cot^{n-1}(x)-\int\cot^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
+\begin{proof}
+\[\int\cot^n(x)\dd{x}=\int\cot^{n-2}(x)\csc^2(x)\dd{x}-\int\cot^{n-2}(x)\dd{x}\]
+\[u=\cot^{n-2}(x),\quad\dd{v}=\csc^2(x)\dd{x},\dd{u}=-(n-2)\cot^{n-3}(x)\csc^2(x),\quad v=-\cot(x).\]
+\[\ba
+\int\cot^{n-2}(x)\csc^2(x)\dd{x}&=-\cot^{n-1}(x)+(n-2)\int\cot^{n-2}(x)\csc^2(x)\dd{x}\\
+&=\frac{1}{n-1}\cot^{n-1}(x)
+\[\int\cot^n(x)\dd{x}=-\frac{1}{n-1}\cot^{n-1}(x)-\int\cot^{n-2}(x)\dd{x}.\]
+\ea\]
+\end{proof}
+\subsubsection{Secant function}
+\[\int\sec(x)\dd{x}=\ln\abs{\tan(x)+\sec(x)}+C=\ln\abs{\tan(\frac{x}{2}+\frac{\pi}{4})}+C.\]
+\begin{proof}
+\[\ba
+\int\sec(x)\dd{x}&=\int\sec(x)\frac{\tan(x)+\sec(x)}{\tan(x)+\sec(x)}\dd{x}\\
+&=\int u^{-1}\dd{u},\quad u=\tan(x)+\sec(x),\quad\dd{u}=\sec(x)\qty(\tan(x)+\sec(x))\dd{x}\\
+&=\ln|u|+C=\ln\abs{\tan(x)+\sec(x)}+C\\
+&=\ln|\tan(\frac{x}{2}+\frac{\pi}{4})+C
+\ea\]
+\end{proof}
+\[\int\sec^2(x)\dd{x}=\tan(x)+C.\]
+\[\int\sec^n(x)\dd{x}=\frac{1}{n-1}\tan(x)\sec^{n-2}(x)+\frac{n-2}{n-1}\int\sec^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
+\begin{proof}
+\[\ba
+\int\sec^n(x)\dd{x}&=\tan(x)\sec^{n-2}(x)-\int\tan(x)(n-2)\sec^{n-3}(x)\tan(x)\sec(x)\dd{x}\\
+&=\tan(x)\sec^{n-2}(x)-(n-2)\int\sec^n(x)-\sec^{n-2}(x)\dd{x}\\
+&=\frac{1}{n-1}\tan(x)\sec^{n-2}(x)+\frac{n-2}{n-1}\int\sec^{n-2}(x)\dd{x}\\
+\ea\]
+\end{proof}
+\subsubsection{Cosecant function}
+\[\int\csc(x)\dd{x}=-\ln\abs{\cot(x)+\csc(x)}+C=-\ln\abs{\cot(\frac{x}{2})}+C.\]
+\begin{proof}
+\[\ba
+\int\csc(x)\dd{x}&=\int\csc(x)\frac{\cot(x)+\csc(x)}{\cot(x)+\csc(x)}\dd{x}\\
+&=-\int u^{-1}\dd{u},\quad u=\cot(x)+\csc(x),\quad\dd{u}=-\cot(x)\qty(\cot(x)+\csc(x))\dd{x}\\
+&=-\ln|u|+C=\ln\abs{\cot(x)+\csc(x)}+C\\
+&=-\ln\abs{\cot(\frac{x}{2})}+C
+\ea\]
+\end{proof}
+\[\int\csc^2(x)\dd{x}=-\cot(x)+C.\]
+\[\int\csc^n(x)\dd{x}=-\frac{1}{n-1}\cot(x)\csc^{n-2}(x)+\frac{n-2}{n-1}\int\csc^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
+\begin{proof}
+\[\ba
+\int\csc^n(x)\dd{x}&=-\cot(x)\csc^{n-2}(x)+\int\cot(x)(n-2)\csc^{n-3}(x)(-1)\cot(x)\csc(x)\dd{x}\\
+&=-\cot(x)\csc^{n-2}(x)-(n-2)\int\csc^n(x)-\csc^{n-2}(x)\dd{x}\\
+&=-\frac{1}{n-1}\cot(x)\csc^{n-2}(x)+\frac{n-2}{n-1}\int\csc^{n-2}(x)\dd{x}\\
+\ea\]
+\end{proof}
+\subsubsection{Inverse sine function}
+\[\int\arcsin(x)\dd{x}=x\arcsin(x)+\sqrt{1-x^2}+C.\]
+\subsubsection{Inverse cosine function}
+\[\int\arccos(x)\dd{x}=x\arccos(x)-\sqrt{1-x^2}+C.\]
+\subsubsection{Inverse tangent function}
+\[\int\arctan(x)\dd{x}=x\arctan(x)-\frac{1}{2}\ln(1+x^2)+C.\]
+\subsubsection{Inverse cotangent function}
+\[\int\arccot(x)\dd{x}=x\arccot(x)+\frac{1}{2}\ln(1+x^2)+C.\]
+\subsubsection{Inverse secant function}
+\[\int\arcsec(x)\dd{x}=x\arcsec(x)-\sgn(x)\ln\abs{x+\sqrt{x^2-1}}+C,\quad|x|\geq 1.\]
+\subsubsection{Inverse cosecant function}
+\[\int\arccsc(x)\dd{x}=x\arccsc(x)+\sgn(x)\ln\abs{x+\sqrt{x^2-1}}+C,\quad|x|\geq 1.\]
+\subsubsection{Hyperbolic sine function}
+\[\int\sinh(x)\dd{x}=\cosh(x)+C.\]
+\[\int\sinh^2(x)\dd{x}=-\frac{x}{2}+\frac{\sinh(2x)}{4}+C.\]
+\begin{proof}
+PLACEHOLDER
+\end{proof}
+\[\int\sinh^n(x)\dd{x}=\frac{1}{n}\sinh^{n-1}(x)\cosh(x)-\frac{n-1}{n}\int\sinh^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
+\begin{proof}
+PLACEHOLDER
+\end{proof}
+\subsubsection{Hyperbolic cosine function}
+\[\int\cosh(x)\dd{x}=\sinh(x)+C.\]
+\[\int\cosh^2(x)\dd{x}=\frac{x}{2}+\frac{\sinh(2x)}{4}+C.\]
+\begin{proof}
+PLACEHOLDER
+\end{proof}
+\[\int\cosh^n(x)\dd{x}=\frac{1}{n}\cosh^{n-1}(x)\sinh(x)+\frac{n-1}{n}\int\cosh^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
+\begin{proof}
+PLACEHOLDER
+\end{proof}
+\subsubsection{Hyperbolic tangent function}
+\[\int\tanh(x)\dd{x}=\ln(\cosh(x))+C.\]
+\begin{proof}
+\[\ba
+\int\tanh(x)\dd{x}&=\int\frac{\sinh(x)}{\cosh(x)}\dd{x}\\
+&=\ln(\cosh(x))+C
+\ea\]
+\end{proof}
+\[\int\tanh^2(x)\dd{x}=x-\tanh(x)+C.\]
+\begin{proof}
+PLACEHOLDER
+\end{proof}
+\[\int\tanh^n(x)\dd{x}=\frac{1}{n-1}\tanh^{n-1}(x)-\int\tanh^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
+\begin{proof}
+PLACEHOLDER
+\end{proof}
+\subsubsection{Hyperbolic cotangent function}
+\[\int\coth(x)\dd{x}=\ln\abs{\sinh(x)}+C.\]
+\begin{proof}
+\[\ba
+\int\coth(x)\dd{x}&=\int\frac{\cosh(x)}{\sinh(x)}\dd{x}\\
+&=\ln\abs{\sinh(x)}+C
+\ea\]
+\end{proof}
+\[\int\coth^2(x)\dd{x}=x-\coth(x)+C.\]
+\begin{proof}
+PLACEHOLDER
+\end{proof}
+\[\int\coth^n(x)\dd{x}=-\frac{1}{n-1}\coth^{n-1}(x)-\int\coth^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
+\begin{proof}
+PLACEHOLDER
+\end{proof}
+\subsubsection{Hyperbolic secant function}
+\[\int\sech(x)\dd{x}=2\arctan(\tanh(\frac{x}{2}))+C=\arctan(\sinh(x))+C=\arcsin(\tanh(x))+C.\]
+\begin{proof}
+\[\ba
+\int\sech(x)\dd{x}&=\int\frac{1-t^2}{1+t^2}\dd{x},\quad t=\tanh(\frac{x}{2})\\
+&=2\int\frac{1}{1+t^2}\dd{t},\quad\dd{t}=\frac{1}{2}\sech^2\qty(\frac{x}{2})\dd{x}=\frac{1}{2}\qty(1-\tanh^2\qty(\frac{x}{2}))\dd{x}\\
+&=2\arctan(\tanh(\frac{x}{2}))+C\\
+&=\arctan(\sinh(x))+C\\
+&=\arcsin(\tanh(x))+C
+\ea\]
+\end{proof}
+\[\int\sech^2(x)\dd{x}=\tanh(x)+C.\]
+\[\int\sech^n(x)\dd{x}=\frac{1}{n-1}\tanh(x)\sech^{n-1}(x)+\frac{n-2}{n-1}\int\sech^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
+\begin{proof}
+PLACEHOLDER
+\end{proof}
+\subsubsection{Hyperbolic cosecant function}
+\[\int\csch(x)\dd{x}=\ln\abs{\tanh(\frac{x}{2})}+C=\ln\abs{\coth(x)-\csch(x)}+C.\]
+\begin{proof}
+\[\ba
+\int\csch(x)\dd{x}&=\int\frac{1-t^2}{2t}\dd{x},\quad t=\tanh(\frac{x}{2})\\
+&=\int\frac{1}{t}\dd{t},\quad\dd{t}=\frac{1}{2}\sech^2\qty(\frac{x}{2})\dd{x}=\frac{1}{2}\qty(1-\tanh^2\qty(\frac{x}{2}))\dd{x}\\
+&=\ln\abs{\tanh(\frac{x}{2})}+C\\
+&=\ln\abs{\coth(x)-\csch(x)}+C
+\ea\]
+\end{proof}
+\[\int\csch^2(x)\dd{x}=-\coth(x)+C.\]
+\[\int\csch^n(x)\dd{x}=-\frac{1}{n-1}\coth(x)\csch^{n-1}(x)+\frac{n-2}{n-1}\int\csch^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}.\]
+\begin{proof}
+PLACEHOLDER
+\end{proof}
+\subsubsection{Inverse hyperbolic sine function}
+\[\int\arcsinh(x)\dd{x}=x\arcsinh(x)-\sqrt{x^2+1}+C.\]
+\subsubsection{Inverse hyperbolic cosine function}
+\[\int\arccosh(x)\dd{x}=x\arccosh(x)-\sqrt{x^2-1}+C.\]
+\subsubsection{Inverse hyperbolic tangent function}
+\[\int\arctanh(x)\dd{x}=x\arctanh(x)+\frac{1}{2}\ln(1-x^2)+C.\]
+\subsubsection{Inverse hyperbolic cotangent function}
+\[\int\arccoth(x)\dd{x}=x\arccoth(x)+\frac{1}{2}\ln(x^2-1)+C.\]
+\subsubsection{Inverse hyperbolic secant function}
+\[\int\arcsech(x)\dd{x}=x\arcsech(x)+\arctan\qty(\frac{\sqrt{1-x^2}}{x})+C.\]
+\subsubsection{Inverse hyperbolic cosecant function}
+\[\int\arccsch(x)\dd{x}=x\arccsch(x)+\ln\abs{x+\sqrt{x^2+1}}+C.\]
+\subsubsection{Derivative over function}
+\[\int\frac{f'(x)}{f(x)}\dd{x}=\ln|f(x)|+C,\quad f(x)\neq 0.\]
+\subsubsection{$\frac{1}{x^2+a^2}$}
+\[\int\frac{1}{x^2+a^2}\dd{x}=\frac{1}{a}\arctan(\frac{x}{a})+C,\quad a>0.\]
+\begin{proof}
+\[\ba
+\int\frac{1}{x^2+a^2}\dd{x}&=\frac{1}{a}\int\frac{1}{u^2+1^2}\dd{u},\quad u=\frac{x}{a},\quad\dd{u}=\frac{1}{a}\dd{x}\\
+&=\frac{1}{a}\arctan(\frac{x}{a})+C
+\ea\]
+\end{proof}
+\subsubsection{$\frac{1}{x^2-a^2}$}
+\[\int\frac{1}{x^2-a^2}\dd{x}=\frac{1}{2a}\ln(\frac{x-a}{x+a})+C=\frac{1}{a}\arccoth(\frac{x}{a})+C,\quad a>0\land x^2-a^2>0.\]
+\begin{proof}
+\[\ba
+\int\frac{1}{x^2-a^2}\dd{x}&=\int\frac{1}{2a}\qty(\frac{1}{x-a}-\frac{1}{x+a})\dd{x}\\
+&=\frac{1}{2a}\ln(\frac{x-a}{x+a})+C
+\ea\]
+\end{proof}
+\subsubsection{$\frac{1}{a^2-x^2}$}
+\[\int\frac{1}{a^2-x^2}\dd{x}=\frac{1}{2a}\ln(\frac{a-x}{a+x})+C=\frac{1}{a}\arctanh(\frac{x}{a})+C,\quad a>0\land a^2-x^2>0.\]
+\begin{proof}
+\[\ba
+\int\frac{1}{a^2-x^2}\dd{x}&=\int\frac{1}{2a}\qty(\frac{1}{a-x}-\frac{1}{a+x})\dd{x}\\
+&=\frac{1}{2a}\ln(\frac{a-x}{a+x})+C
+\ea\]
+\end{proof}
+\subsubsection{$ax+b$}
+\[\int\frac{1}{ax+b}\dd{x}=\frac{1}{a}\ln\abs{ax+b}+C,\quad a>0.\]
+\begin{proof}
+\[\ba
+\int\frac{1}{ax+b}\dd{x}&=\frac{1}{a}\int\frac{1}{u}\dd{u},\quad u=ax+b,\quad\dd{u}=a\dd{x}\\
+&=\frac{1}{a}\ln\abs{ax+b}+C
+\ea\]
+\end{proof}
+\[\int(ax+b)^n\dd{x}=\frac{1}{a(n+1)}(ax+b)^{n+1}+C,\quad a\neq 0\land n\neq -1.\]
+\begin{proof}
+\[\ba
+\int(ax+b)^n\dd{x}&=\frac{1}{a}\int u^n\dd{u},\quad u=ax+b,\quad \dd{u}=a\dd{x}\\
+&=\frac{1}{a}u^{n+1}+C\\
+&=\frac{1}{a(n+1)}(ax+b)^{n+1}+C
+\ea\]
+\end{proof}
+\[\int\frac{x}{ax+b}\dd{x}=\frac{x}{a}-\frac{b}{a^2}\ln\abs{ax+b}+C,\quad a>0.\]
+\begin{proof}
+\[\ba
+\int\frac{x}{ax+b}\dd{x}&=\int\frac{u-b}{a^2u}\dd{u},\quad u=ax+b,\quad \dd{u}=a\dd{x}\\
+&=\frac{ax+b}{a^2}-\frac{b}{a^2}\ln\abs{ax+b}+C\\
+&=\frac{x}{a}-\frac{b}{a^2}\ln\abs{ax+b}+C
+\ea\]
+\end{proof}
+\[\int\frac{x}{(ax+b)^2}\dd{x}=\frac{1}{a^2}\ln\abs{ax+b}+\frac{b}{a^2(ax+b)}+C,\quad a>0.\]
+\begin{proof}
+\[\ba
+\int\frac{x}{(ax+b)^2}\dd{x}&=\int\frac{u-b}{a^2u^2}\dd{u},\quad u=ax+b,\quad \dd{u}=a\dd{x}\\
+&=\frac{1}{a^2}\ln\abs{ax+b}+\frac{b}{a^2(ax+b)}
+\ea\]
+\end{proof}
+\[\int x(ax+b)^n\dd{x}=\frac{a(n+1)x-b}{a^2(n+1)(n+2)}(ax+b)^{n+1}+C,\quad a\neq 0\land n\notin\{-1,-2\}.\]
+\begin{proof}
+\[\ba
+\int x(ax+b)^n\dd{x}&=\int\frac{u-b}{a^2}u^n\dd{u},\quad u=ax+b,\quad \dd{u}=a\dd{x}\\
+&=\frac{(ax+b)^{n+2}}{a^2(n+2)}-\frac{b(ax+b)^{n+1}}{a^2(n+1)}\\
+&=\frac{(ax+b)(n+1)-b(n+2)}{a^2(n+1)(n+2)}(ax+b)^{n+1}+C\\
+&=\frac{a(n+1)x-b}{a^2(n+1)(n+2)}(ax+b)^{n+1}+C
+\ea\]
+\end{proof}
+\subsubsection{$\sqrt{a^2+x^2}$}
+Let $r=\sqrt{a^2+x^2}$.
+\[\int r\dd{x}=\frac{1}{2}\qty(xr+a^2\ln(x+r))+C.\]
+\begin{proof}
+\[\ba
+\int r\dd{x}&=a^2\int\sqrt{1+u^2}\dd{u},\quad u=\frac{x}{|a|},\quad\dd{u}=\frac{1}{|a|}\dd{x}\\
+&=a^2\int\sqrt{1+\sinh^2t}\cosh t\dd{t},\quad u=\sinh t,\quad\dd{u}=\cosh t\dd{t}\\
+&=a^2\int\cosh^2t\dd{t}\\
+&=a^2\int\frac{\cosh(2t)+1}{2}\dd{t}\\
+&=\frac{a^2\sinh(2t)}{4}+\frac{a^2t}{2}+C\\
+&=\frac{a^2u\sqrt{1+u^2}}{2}+\frac{a^2}{2}\ln(u+\sqrt{1+u^2})+C\\
+&=\frac{xr}{2}+\frac{a^2}{2}\ln(\frac{x}{|a|}+\frac{1}{|a|}r)+C\\
+&=\frac{xr}{2}+\frac{a^2}{2}\ln(x+r)+C\\
+&=\frac{1}{2}\qty(xr+a^2\ln(x+r))+C
+\ea\]
+Alternatively,
+\[\ba
+\int r\dd{x}&=xr-\int\frac{x^2}{r}\dd{x}\\
+&=xr-a^2\int\frac{u^2}{\sqrt{1+u^2}}\dd{u},\quad u=\frac{x}{|a|},\quad\dd{u}=\frac{1}{|a|}\dd{x}\\
+&=xr-a^2\int\tan^2t\sec t\dd{t},\quad u=\tan t,\quad\dd{u}=\sec^2t\dd{t}\\
+&=xr-a^2\int\sec^3t-\sec t\dd{t}\\
+&=xr-\frac{a^2}{2}\tan(t)\sec(t)-\frac{a^2}{2}\ln|\tan t+\sec t|+a^2\ln|\tan t+\sec t|+C\\
+&=xr-\frac{a^2}{2}u\sqrt{1+u^2}+\frac{a^2}{2}\ln|u+\sqrt{1+u^2}|+C\\
+&=\frac{xr}{2}+\frac{a^2}{2}\ln(\frac{x}{|a|}+\frac{1}{|a|}r)+C\\
+&=\frac{xr}{2}+\frac{a^2}{2}\ln(x+r)+C\\
+&=\frac{1}{2}\qty(xr+a^2\ln(x+r))+C
+\ea\]
+\end{proof}
+\[\int xr\dd{x}=\frac{1}{3}r^3+C.\]
+\begin{proof}
+\[\ba
+\int xr\dd{x}&=\int r^2\dd{r},\quad\dd{r}=\frac{x}{r}\dd{x}\\
+&=\frac{1}{3}r^3+C\\
+\ea\]
+\end{proof}
+\[\int\frac{1}{r}\dd{x}=\arcsinh(\frac{x}{|a|})+C=\ln(x+r)+C.\]
+\begin{proof}
+\[\ba
+\int\frac{1}{r}\dd{x}&=\int\frac{1}{\sqrt{1+u^2}}\dd{x},\quad u=\frac{x}{|a|},\quad\dd{u}=\frac{1}{|a|}\dd{x}\\
+&=\int 1\dd{t},\quad u=\sinh t,\quad\dd{u}=\cosh t\dd{t}\\
+&=t+C=\arcsinh u+C=\arcsinh(\frac{x}{|a|})+C\\
+&=\ln(\frac{x}{|a|}+\sqrt{1+\qty(\frac{x}{|a|})^2})\\
+&=\ln(x+r)+C
+\ea\]
+\end{proof}
+\[\int\frac{x}{r}\dd{x}=r+C.\]
+\subsubsection{$\sqrt{x^2-a^2}$}
+Let $s=\sqrt{x^2-a^2},\quad x^2>a^2$.
+\[\int s\dd{x}=\frac{1}{2}\qty(xs-a^2\ln(x+s))+C.\]
+\begin{proof}
+\[\ba
+\int s\dd{x}&=a^2\int\sqrt{u^2-1}\dd{u},\quad u=\frac{x}{|a|},\quad\dd{u}=\frac{1}{|a|}\dd{x}\\
+&=a^2\int\sinh^2t\dd{t},\quad u=\cosh t,\quad\dd{u}=\sinh t\dd{t}\\
+&=a^2\int\frac{\cosh(2t)-1}{2}\dd{t}\\
+&=\frac{a^2\sinh(2t)}{4}-\frac{a^2t}{2}+C\\
+&=\frac{a^2u\sqrt{u^2-1}}{2}-\frac{a^2}{2}\ln(u+\sqrt{u^2-1})+C\\
+&=\frac{xs}{2}+\frac{a^2}{2}\ln(\frac{x}{|a|}+\frac{1}{|a|}s)+C\\
+&=\frac{xs}{2}-\frac{a^2}{2}\ln(x+s)+C\\
+&=\frac{1}{2}\qty(xs-a^2\ln(x+s))+C
+\ea\]
+\end{proof}
+\[\int xs\dd{x}=\frac{1}{3}s^3+C.\]
+\begin{proof}
+\[\ba
+\int xs\dd{x}&=\int s^2\dd{s},\quad\dd{s}=\frac{x}{s}\dd{x}\\
+&=\frac{1}{3}s^3+C
+\ea\]
+\end{proof}
+\[\int\frac{1}{s}\dd{x}=\arcsin(\frac{x}{|a|})+C.\]
+\begin{proof}
+\[\ba
+\int\frac{1}{s}\dd{x}&=\int\frac{1}{\sqrt{u^2-1}}\dd{x},\quad u=\frac{x}{|a|},\quad\dd{u}=\frac{1}{|a|}\dd{x}\\
+&=\int 1\dd{t},\quad u=\cosh t,\quad\dd{u}=\sinh t\dd{t}\\
+&=t+C=\sgn(u)\arccosh u+C\\
+&=\sgn(x)\arccosh\abs{\frac{x}{a}}+C\\
+&=\ln\abs{\frac{x}{a}+\sqrt{\qty(\frac{x}{a})^2-1}}+C
+&=\ln\abs{x+s}+C
+\ea\]
+\end{proof}
+\[\int\frac{x}{s}\dd{x}=-s+C.\]
+\subsubsection{$\sqrt{a^2-x^2}$}
+Let $q=\sqrt{a^2-x^2},\quad a^2\geq x^2$.
+\[\int q\dd{x}=\frac{1}{2}\qty(q+a^2\arcsin(\frac{x}{|a|}))+C.\]
+\begin{proof}
+\[\ba
+\int q\dd{x}&=a^2\int\sqrt{1-u^2}\dd{u},\quad u=\frac{x}{|a|},\quad\dd{u}=\frac{1}{|a|}\dd{x}\\
+&=a^2\int\cos^2t\dd{t},\quad u=\sin t,\quad\dd{u}=\cos t\dd{t}\\
+&=a^2\int\frac{\cos(2t)+1}{2}\dd{t}\\
+&=\frac{a^2\sin(2t)}{4}+\frac{a^2t}{2}+C\\
+&=\frac{a^2}{2}\sqrt{1-u^2}+\frac{a^2}{2}\arcsin(\frac{x}{|a|})+C\\
+&=\frac{1}{2}\qty(q+a^2\arcsin(\frac{x}{|a|}))+C
+\ea\]
+\end{proof}
+\[\int xq\dd{x}=\frac{1}{3}q^3+C.\]
+\begin{proof}
+\[\ba
+\int xq\dd{x}&=\int q^2\dd{q},\quad\dd{q}=\frac{x}{q}\dd{x}\\
+&=\frac{1}{3}q^3+C
+\ea\]
+\end{proof}
+\[\int\frac{1}{q}\dd{x}=\arcsin(\frac{x}{|a|})+C.\]
+\begin{proof}
+\[\ba
+\int\frac{1}{q}\dd{x}&=\int\frac{1}{\sqrt{1-u^2}}\dd{x},\quad u=\frac{x}{|a|},\quad\dd{u}=\frac{1}{|a|}\dd{x}\\
+&=\int 1\dd{t},\quad u=\sin t,\quad\dd{u}=\cos t\dd{t}\\
+&=t+C=\arccos u+C\\
+&=\arccos(\frac{x}{|a|})+C
+\ea\]
+\end{proof}
+\[\int\frac{x}{q}\dd{x}=q+C.\]
+\subsubsection{$\sqrt{ax+b}$}
+Let $R=\sqrt{ax+b},\quad a\neq 0$.
+\[\int R\dd{x}=\frac{2}{3a}R^3+C.\]
+\begin{proof}
+\[\ba
+\int R\dd{x}&=\frac{2}{a}\int R^2\dd{R},\quad\dd{R}=\frac{a}{2R}\dd{x}\\
+&=\frac{2}{3a}R^3+C
+\ea\]
+\end{proof}
+\[\int x^nR\dd{x}=\frac{2}{a(2n+3)}\qty(x^nR^3-bn\int x^{n-1}R\dd{x}),\quad n\in\bbN.\]
+\begin{proof}
+\[\ba
+\int x^nR\dd{x}&=\frac{2}{3a}x^nR^3-\frac{2n}{3a}\int x^{n-1}R^3\dd{x}\\
+&=\frac{2}{3a}x^nR^3-\frac{2n}{3}\int x^nR\dd{x}-\frac{2bn}{3a}\int x^{n-1}R\dd{x}\\
+&=\frac{2}{a(2n+3)}\qty(x^nR^3-bn\int x^{n-1}R\dd{x})
+\ea\]
+\end{proof}
+\[\int\frac{1}{R}\dd{x}=\frac{2R}{a}+C.\]
+\begin{proof}
+\[\ba
+\int\frac{1}{R}\dd{x}&=\frac{2}{a}\int 1\dd{R},\quad\dd{R}=\frac{a}{2R}\dd{x}\\
+&=\frac{2R}{a}+C
+\ea\]
+\end{proof}
+\[\int\frac{x^n}{R}\dd{x}=\frac{2}{a}\qty(x^nR-n\int x^{n-1}R\dd{x})=\frac{2}{a(2n+1)}\qty(x^nR-bn\int\frac{x^{n-1}}{R}\dd{x}),\quad n\in\bbN.\]
+\begin{proof}
+\[\ba
+\int\frac{x^n}{R}\dd{x}&=x^n\frac{2R}{a}-\frac{2n}{a}\int x^{n-1}R\dd{x}\\
+&=\frac{2}{a}\qty(x^nR-n\int x^{n-1}R\dd{x})\\
+&=\frac{2}{a}x^nR-2n\int\frac{x^n}{R}\dd{x})-\frac{2bn}{a}\int\frac{x^{n-1}}{R}\dd{x})\\
+&=\frac{2}{a(2n+1)\qty(x^nR-bn\int \frac{x^{n-1}}{R}\dd{x})
+\ea\]
+\end{proof}
+\subsubsection{Gaussian integral (高斯積分) or Euler–Poisson integral}
+\[\int_{-\infty}^{\infty}e^{-t^2}\dd{t}=\sqrt{\pi}.\]
+\[\int_0^{\infty}e^{-t^2}\dd{t}=\frac{\sqrt{\pi}}{2}.\]
+\begin{proof}
+Let
+\[I=\int_0^{\infty}e^{-t^2}\dd{t}.\]
+\[\ba
+I^2&=\qty(\int_0^{\infty}e^{-x^2}\dd{x})\qty(\int_0^{\infty}e^{-y^2}\dd{y})\\
+&=\int_0^{\infty}\int_0^{\infty}e^{-x^2}e^{-y^2}\dd{x}\dd{y}\\
+&=\int_0^{\pi/2}\int_0^{\infty}e^{-r^2}r\dd{r}\dd{\theta}\\
+&=\frac{1}{2}\int_0^{\pi/2}\int_0^{\infty}e^{-u}\dd{u}\dd{\theta},\quad u=r^2\\
+&=\frac{1}{2}\int_0^{\pi/2}1\dd{\theta}\\
+&=\frac{\pi}{4}
+\ea\]
+\end{proof}
+\subsubsection{Euler's constant or Euler–Mascheroni constant}
+PLACEHOLDER
+\subsection{List of Maclaurin Series and Taylor Series of Real Functions}
+\subsubsection{Power function}
+\[x^n=\sum_{k=0}^{\infty}\binom{n}{k}a^{n-k}(x-a)^k,\quad |x-a|<|a|.\]
+\subsubsection{$\frac{1}{1-x}$}
+\[\frac{1}{1-x}=\sum_{n=0}^{\infty}x^n,\quad |x|<1.\]
+\[\frac{1}{1-x}=\frac{1}{1-a}\sum_{n=0}^{\infty}\qty(\frac{x-a}{1-a})^n,\quad |x-a|<|1-a|.\]
+\begin{proof}
+\[\dv{}{x}\qty(\frac{1}{1-x})=(1-x)^{-2}\]
+\[\dv{}{x}\qty((1-x)^{-n})=n(1-x)^{-n-1},\quad n\neq 0\]
+\[\dv[n]{}{x}\qty(\frac{1}{1-x})=\frac{n}{1-x}\dv[n-1]{}{x}\qty(\frac{1}{1-x}),\quad n\in\bbN\]
+\[\dv[n]{}{x}\qty(\frac{1}{1-x})=\frac{n!}{(1-x)^{n+1}},\quad n\in\bbN_0\]
+\end{proof}
+\subsubsection{$\frac{1}{1+x}$}
+\[\frac{1}{1+x}=\sum_{n=0}^{\infty}(-1)^nx^n,\quad |x|<1.\]
+\[\frac{1}{1-x}=\frac{1}{1+a}\sum_{n=0}^{\infty}\qty(-\frac{x-a}{1+a})^n,\quad |x-a|<|1+a|.\]
+\begin{proof}
+\[\dv{}{x}\qty(\frac{1}{1+x})=-(1+x)^{-2}\]
+\[\dv{}{x}\qty((-1)^{n+1}(1+x)^{-n})=(-1)^nn(1+x)^{-n-1},\quad n\neq 0\]
+\[\dv[n]{}{x}\qty(\frac{1}{1+x})=-\frac{n}{1+x}\dv[n-1]{}{x}\qty(\frac{1}{1+x}),\quad n\in\bbN\]
+\[\dv[n]{}{x}\qty(\frac{1}{1+x})=\frac{(-1)^nn!}{(1+x)^{n+1}},\quad n\in\bbN_0\]
+\end{proof}
+\subsubsection{Logarithmic function}
+\[\ln(x)=\ln(a)+\sum_{n=1}^{\infty}\frac{(-1)^{n-1}}{na^n}(x-a)^n,\quad x\leq a.\]
+\begin{proof}
+\[\dv{\ln(x)}{x}=x^{-1}.\]
+Thus for $n\in\mathbb{N}$:
+\[\ba
+\dv[n]{\ln(x)}{x}&=\prod_{j=1}^{n-1}(-j)x^{-n}\\
+&=(-1)^{n-1}\frac{(n-1)!}{x^n}
+\ea\]
+The series converges iff $-1<\frac{(x-a)^n}{a^n}\leq 1$ ($\leq 1$ since alternating harmonic series converges) iff $0<x\leq a$.
+\end{proof}
+\[\ln(1+x)=\sum_{n=1}^{\infty}\frac{(-1)^{n-1}}{n}x^n,\quad x\leq 1.\]
+\[\ln(1+x)=\ln(1+a)+\sum_{n=1}^{\infty}\frac{(-1)^{n-1}}{n(1+a)^n}(x-a)^n,\quad x\leq 1+a.\]
+\subsubsection{Exponential function}
+\[e^x=\sum_{n=0}^{\infty}\frac{x^n}{n!}.\]
+\[e^x=e^a\sum_{n=0}^{\infty}\frac{(x-a)^n}{n!}.\]
+\[b^x=\sum_{n=0}^{\infty}\frac{(\ln b)^n}{n!}x^n,\quad b>0.\]
+\[b^x=b^a\sum_{n=0}^{\infty}\frac{(\ln b)^n}{n!}(x-a)^n,\quad b>0.\]
+\subsubsection{Sine function}
+\[\sin(x)=\sum_{n=0}^{\infty}\frac{(-1)^n}{(2n+1)!}x^{2n+1}.\]
+\[\sin(x)=\sum_{n=0}^{\infty}\frac{\sin\qty(a+\frac{n\pi}{2})}{n!}(x-a)^n.\]
+\subsubsection{Cosine function}
+\[\cos(x)=\sum_{n=0}^{\infty}\frac{(-1)^n}{(2n)!}x^{2n}.\]
+\[\cos(x)=\sum_{n=0}^{\infty}\frac{\cos\qty(a+\frac{n\pi}{2})}{n!}(x-a)^n.\]
+\subsubsection{Tangent function}
+Define the derivative polynomials $P_n$ such that $P_n\qty(\tan(x))=\tan^{(n)}(x)$ with recursion as:
+\[\begin{cases}
+&P_0(y)=y,\\
+&P_n(y)=(1+y^2)P_{n-1}'(y),\quad n\in\mathbb{N}.
+\end{cases}\]
+
+The Taylor expansion of the tangent function at $a$ is:
+\[\tan(x)=\sum_{n=0}^{\infty}\frac{P_n\qty(\tan(x))(a)}{n!}(x-a)^n.\]
+\begin{proof}
+Let $y=\tan(x)$.
+\[y'=1+y^2.\]
+Prove by mathematical induction. When $n=0$,
+\[P_0(y)=y.\]
+Assume:
+\[P_{n-1}(y)=y^{(n-1)}.\]
+Differentiate both side:
+\[y'P_{n-1}'(y)=y^{(n)}=(1+y^2)P_{n-1}'(y)=P_n(y).\]
+\end{proof}
+\subsubsection{Cotangent function}
+Define the derivative polynomials $P_n$ such that $P_n\qty(\cot(x))=\cot^{(n)}(x)$ with recursion as:
+\[\begin{cases}
+&P_0(y)=y,\\
+&P_n(y)=-(1+y^2)P_{n-1}'(y),\quad n\in\mathbb{N}.
+\end{cases}\]
+
+The Taylor expansion of the cotangent function at $a$ is:
+\[\cot(x)=\sum_{n=0}^{\infty}\frac{P_n\qty(\cot(x))(a)}{n!}(x-a)^n.\]
+\begin{proof}
+Let $y=\cot(x)$.
+\[y'=-(1+y^2).\]
+Prove by mathematical induction. When $n=0$,
+\[P_0(y)=y.\]
+Assume:
+\[P_{n-1}(y)=y^{(n-1)}.\]
+Differentiate both side:
+\[y'P_{n-1}'(y)=y^{(n)}=-(1+y^2)P_{n-1}'(y)=P_n(y).\]
+\end{proof}
+\subsection{List of Counterexamples}
+\subsubsection{Dirichlet function (狄利克雷函數)}
+The Dirichlet function is a function $f\colon\mathbb{R}\to\mathbb{R};$
+\[f(x)=\begin{cases}1,\quad & x\in\mathbb{Q}\\
+0,\quad & x\in\mathbb{R}\setminus\mathbb{Q}
+\end{cases},\]
+which is discontinuous everywhere and measurable.
+\subsubsection{Weierstrass function (魏爾施特拉斯函數)}
+The Weierstrass function is a function $f\colon\mathbb{R}\to\mathbb{R};$
+\[f(x)=\sum_{n=0}^{\infty}a^n\cos\left(b^n\pi x\right),\]
+in which $0<a<1$, $b$ is a positive odd integer, and $ab>1+\frac{3}{2}\pi$, which is continuous everywhere and differentiable nowhere.
+\subsubsection{Differentiable but derivative not continuous}
+The function $f\colon\mathbb{R}\to\mathbb{R};$
+\[f(x)=\begin{cases}x^2\sin\qty(\frac{1}{x}),\quad&x\neq 0\\0,\quad&x=0\end{cases},\]
+is differentiable but its derivative is not continuous at $0$. (Note that because $\{0\}$ has Lebesgue measure $0$, $f'\colon\mathbb{R}\to\mathbb{R}$ is continuous almost everywhere, that is, $f'$ is Riemann integrable on any closed interval.)
+\begin{proof}
+\[f'(x)=2x\sin\qty(\frac{1}{x})-x^2\cos\qty(\frac{1}{x}),\quad x\neq 0\]
+\bma
+f'(0)&=\lim_{h\to 0}\frac{f(h)}{h}\\
+&=\lim_{h\to 0}h\sin\qty(\frac{1}{h})
+\eam
+For any $|h|>0$, we have $-|h|\leq h\sin\qty(\frac{1}{h})\leq |h|$. By the squeeze theorem, $\lim_{h\to 0}-|h|=\lim_{h\to 0}|h|=0$ implies $\lim_{h\to 0}h\sin\qty(\frac{1}{h})=0$.
+\bma
+\lim_{x\to 0}f'(x)&=2\lim_{x\to 0}x\sin\qty(\frac{1}{x})-\lim_{x\to 0}\cos\qty(\frac{1}{x})\\
+&=-\lim_{x\to 0}\cos\qty(\frac{1}{x})\\
+\eam
+$\lim_{x\to 0}\cos\qty(\frac{1}{x})$ doesn't exist, so $\lim_{x\to 0}f'(x)$ doesn't exist.
+\end{proof}
+\subsubsection{Differentiable at one point and discontinuous everywhere else}
+The function $f\colon\mathbb{R}\to\mathbb{R};$
+\[f(x)=\begin{cases}1,\quad & x^2\in\mathbb{Q}\\
+0,\quad & x\in\mathbb{R}\setminus\mathbb{Q}
+\end{cases}\]
+which is differentiable at $0$ with $f'(0)=0$ and discontinuous everywhere else.
+\subsubsection{Derivative being zero at a point where no local extreme occurs}
+\[f(x)=x^3,\quad f'(x)=3x^2.\]
+\[f'(0)=0\]
+$f(x)$ has no local extreme at $0$.
+\subsection{List of implicitly defined functions}
+\subsubsection{Lambert W function, omega function, or product logarithm}
+Lambert W function, omega function, or product logarithm $W(z)$ is defined implicitly by
+\[W(z)e^{W(z)}=z,\quad z\in\bbC.\]
+Each branch $k$, starting from $0$ as the principal branch, is denoted as $W_k(z)$.
+
+In the reals, there are two branches: $W_0(x)\colon[-\frac{1}{e},\infty)\to\bbR$ is the inverse of
+\[xe^x,\quad x\geq-1.\]
+$W_{-1}(x)\colon[-\frac{1}{e},0)\to\bbR$ is the inverse of
+\[xe^x,\quad x\leq-1.\]
+
+Derivative:
+\[\dv{W_0(x)}{x}=\begin{cases}
+\frac{W_0(x)}{x(1+W_0(x))},\quad&x\neq 0,-\frac{1}{e}\\
+1,\quad&x=0
+\end{cases}.\]
+\[\lim_{x\to-\frac{1}{e}^+}\dv{W_0(x)}{x}=\infty.\]
+\[\dv{W_{-1}(x)}{x}=\frac{W_{-1}(x)}{x(1+W_{-1}(x))},\quad x\neq -\frac{1}{e}.\]
+\[\lim_{x\to-\frac{1}{e}^+}\dv{W_{-1}(x)}{x}=-\infty.\]
+\[\lim_{x\to 0^-}\dv{W_{-1}(x)}{x}=-\infty.\]
+\begin{proof}
+\[W(x)e^{W(x)}=x\]
+\[\dv{W(x)}{x}e^{W(x)}+W(x)\dv{W(x)}{x}e^{W(x)}=1\]
+\[\dv{W(x)}{x}e^{W(x)}(1+W(x))=1\]
+\[\dv{W(x)}{x}W(x)e^{W(x)}(1+W(x))=W(x)\]
+\[\dv{W(x)}{x}x(1+W(x))=W(x)\]
+\[\dv{W_0(0)}{x}e^{W_0(0)}(1+W_0(0))=1\]
+\[\dv{W_0(0)}{x}1(1+0)=1\]
+\[\dv{W_0(0)}{x}=1\]
+\[W\qty(-\frac{1}{e})=-1\]
+Solve below equation for $\varepsilon$:
+\[\qty(-1+\varepsilon)e^{-1+\varepsilon}=-\frac{1}{e}+\detla.\]
+\[\qty(-1+\varepsilon)e^{\varepsilon}=-1+e\detla\]
+\[\qty(-1+\varepsilon)\sum_{i=0}^{\infty}\frac{\varepsilon^i}{i!}=-1+e\detla\]
+\[-\sum_{i=0}^{\infty}\frac{\varepsilon^i}{i!}+\sum_{i=1}^{\infty}\frac{\varepsilon^i}{(i-1)!}=-1+e\detla\]
+\[\sum_{i=2}^{\infty}\frac{\varepsilon^i}{(i-2)!i!}=e\detla\]
+\[\frac{\varepsilon^2}{2}+O(\varepsilon^3)=e\delta\]
+\[\varepsilon=O(\sqrt{\delta})\]
+\[W_0\qty(-\frac{1}{e}+\detla)=-1+\varepsilon=-1+O(\sqrt{\delta})\]
+\[\frac{W\qty(-\frac{1}{e}+\detla)-W\qty(-\frac{1}{e})}{\delta}=O\qty((\delta)^{-1/2})\]
+\[\lim_{\delta\to 0}\dv{W(x)}{x}=\lim_{\delta\to 0}O\qty((\delta)^{-1/2})=\pm\infty\]
+\[\lim_{x\to 0^-}W_{-1}(x)=-\infty\]
+\[\ba
+\lim_{x\to 0^-}xW_{-1}(x)&=\lim_{x\to 0^-}\frac{W_{-1}(x)}{x^{-1}}\\
+&=\lim_{x\to 0^-}\frac{\frac{W_{-1}(x)}{x(1+W_{-1}(x))}}{-x^{-2}}\\
+&=-\lim_{x\to 0^-}\frac{xW_{-1}(x)}{1+W_{-1}(x)}
+\ea\]
+Let
+\[L=\lim_{x\to 0^-}xW_{-1}(x).\]
+\[L=-\frac{L}{-\infty}\]
+\[L=-\infty\]
+\end{proof}
+
+Integral:
+\[\int W(x)\dd{x}=x(W(x)-1)+e^{W(x)}+C.\]
+\begin{proof}
+\[\ba
+\int W(x)\dd{x}&=xW(x)-\int\frac{W(x)}{1+W(x)}\dd{x}\\
+&=xW(x)-x+\int\frac{1}{1+W(x)}\frac{W(x)}{x}\frac{x}{W(x)}\dd{x}\\
+&=x(W(x)-1)+\int\dv{W(x)}{x}\frac{W(x)e^{W(x)}}{W(x)}\dd{x}\\
+&=x(W(x)-1)+\int e^W\dd{W}\\
+&=x(W(x)-1)+e^{W(x)}+C
+\ea\]
+\end{proof}
+\subsection{List of integral defined functions}
+\subsubsection{Error funcction (誤差函數) or Gauss error function (高斯誤差函數)}
+The error function or Gauss error function $\erf\colon\bbC\to\bbC$ or $\erf\colon\bbR\to\bbR$ is defined as:
+\[\erf(z)=\frac{2}{\sqrt{\pi}}\int_0^ze^{-t^2}\dd{t}.\]
+\subsubsection{Complementary error function (互補誤差函數)}
+The complementary error function $\erfc\colon\bbC\to\bbC$ or $\erfc\colon\bbR\to\bbR$ is defined as:
+\[\erfc(z)=1-\erf(z)=\int_z^{\infty}e^{-t^2}\dd{t}.\]
+\subsubsection{Imaginary error function (虛誤差函數)}
+The imaginary error function $\erfi\colon\bbC\to\bbC$ or $\erfi\colon\bbR\to\bbR$ is defined as:
+\[\erfi(z)=-i\erf(iz).\]
+\subsubsection{Fresnel Integrals}
+Fresnel integrals $S(x)$ and $C(x)$, and their auxiliary functions $F(x)$ and $G(x)$ are defined as
+\[S(x)=\int_0^x\sin(t^2)\dd{t},\]
+\[C(x)=\int_0^x\cos(t^2)\dd{t},\]
+\[F(x)=\qty(\frac{1}{2}-S(x))\cos(x^2)-\qty(\frac{1}{2}-C(x))\sin(x^2),\]
+\[G(x)=\qty(\frac{1}{2}-S(x))\sin(x^2)+\qty(\frac{1}{2}-C(x))\cos(x^2).\]
+
+The Auxiliary functions $F(x)$ and $G(x)$ provide monotonic bounds for the Fresnel Integrals:
+\[\frac{1}{2}-F(x)-G(x)\leq S(x)\leq\frac{1}{2}+F(x)+G(x),\]
+\[\frac{1}{2}-F(x)-G(x)\leq C(x)\leq\frac{1}{2}+F(x)+G(x).\]
+\begin{proof}
+PLACEHOLDER
+\end{proof}
+\subsubsection{Sine Integral}
+The two different sine integral definitions are
+\[\operatorname{Si}(x)=\int_0^x\frac{\sin(t)}{t}\dd{t},\]
+\[\operatorname{si}(x)=-\int_x^\infty\frac{\sin(t)}{t}\dd{t}.\]
+Their difference is
+\[\operatorname{Si}(x)-\operatorname{si}(x)=\int_0^\infty\frac{\sin(t)}{t}\dd{t}=\frac{\pi}{2}.\]
+\begin{proof}
+PLACEHOLDER
+\end{proof}
+\subsubsection{Cosine Integral}
+The two different cosine integral definitions are
+\[\operatorname{Cin}(x)=\int_0^x\frac{1-\cos(t)}{t}\dd{t},\]
+\[\operatorname{Ci}(x)=-\int_x^\infty\frac{\cos(t)}{t}\dd{t}.\]
+Their sum is
+\[\operatorname{Cin}(x)+\operatorname{Ci}(x)=\ln(x)+\gamma.\]
+where $\gamma$ is the Euler–Mascheroni constant.
+\begin{proof}
+PLACEHOLDER
+\end{proof}
+\subsubsection{Hyperbolic Sine Integral}
+The hyperbolic sine integral is defined as:
+\[\operatorname{Shi}(x)=\int_0^x\frac{\sinh(t)}{t}\dd{t}.\]
+It is related to the sine integral by
+\[\operatorname{Si}(ix)=i\operatorname{Shi}(x).\]
+\begin{proof}
+PLACEHOLDER
+\end{proof}
+\subsubsection{Hyperbolic Cosine Integral}
+The hyperbolic cosine integral is defined as
+\[\operatorname{Chi}(x)=\gamma+\ln(x)+\int_0^x\frac{\cosh(t)-1}{t}\dd{t},\]
+where $\gamma$ is the Euler–Mascheroni constant.
+
+It is related to the cosine integral by
+\[\operatorname{Ci}(ix)=i\operatorname{Chi}(x)-\frac{\pi}{2}.\]
+\begin{proof}
+PLACEHOLDER
+\end{proof}
+\ssc{List of curves}
+\sssc{Circle}
+\[r=2a\cos(\theta-\varphi),\quad 0\le\theta<\pi\]
+is a circle centered at $(a,\varphi)$ with radius $a$.
+\sssc{Quadratic curve}
+\[r=\frac{\ell}{1-\varepsilon\cos(\theta+\varphi),\quad\ell>0\land\varepsilon\geq0\]
+is a quadratic curve with semi-latus rectum $\ell$, eccentricity $\varepsilon$, and one focus at origin.
+\sssc{Limaçon (蝸線)}
+A limaçon or limacon [limasɔ̃], also known as a limaçon of Pascal or Pascal's Snail, is defined as a roulette curve formed by the path of a point fixed to a circle when that circle rolls around the outside of a circle of equal radius. The polar equation of a limaçon has the form
+\[r=b+a\cos(\theta-\varphi),\quad a,b>0,\]
+and for $b>a$ also with constraint $r\neq 0$, where $b$ is the radius of the circles and $a$ is the distance from rolling circle center to tracing point.
+\bit
+\item $b>a$: the curve is a simple closed loop, the tracing point is inside the rolling circle, and the origin satisfies the polar equation while not on the curve.
+\item $b>2a$: the area bounded by the curve is strictly convex.
+\item $b=2a$: the point $(-a,0)$ is a point with $0$ curvature.
+\item $a<b<2a$: the curve has two inflection points.
+\item $a=b$: the curve is called cardioid (心臟線) and has a cusp at origin, and the tracing point in on the circumference (圓周) of the rolling circle.
+\item $a>b$: the curve has an inner loop and passes origin twice, and the tracing point is outside the rolling circle.
+\eit
+\sssc{Rose}
+A rose is a polar curve of the cosine form
+\[r=a\cos(k\theta),\quad a,k>0,\]
+or the sine form
+\[r=a\sin(k\theta),\quad a,k>0.\]
+Suppose $k=\frac{p}{q}$ with $p,q\in\bbN$ and $p\perp q$. We define a petal as a maximal curve segment traced between two consecutive zeros of $r$, which is a closed loop. A petal is a rotation of another petal about the pole, and adjacent petals has angular difference $\frac{\pi}{k}$. The rose is inscribed in the circle $r=a$.
+\bit
+\item For consine form, the rose is symmetric about $\theta=0$. A petals is the rose restricted to $\theta\in\left.\left[\frac{n\pi}{k}-\frac{\pi}{2k},\frac{(n+1)\pi}{k}-\frac{\pi}{2k}\right.\right)$ for some $n\in\bbZ$.
+\item For sine form, the rose is symmetric about $\theta=\frac{\pi}{2}$. A petals is the rose restricted to $\theta\in\left.\left[\frac{n\pi}{k},\frac{(n+1)\pi}{k}\right.\right)$ for some $n\in\bbZ$.
+\item In the case when both $p$ and $q$ are odd, the rose has $p$ petals and is not changed when restricted to $\theta\in[\varphi,\varphi+q\pi)$ for any $\varphi\in\bbR$.
+\item In the case when either $p$ or $q$ is even, the rose has $2p$ petals and is not changed when restricted to $\theta\in[\varphi,\varphi+2q\pi)$ for any $\varphi\in\bbR$.
+\item In the case when $p$ is odd and $q$ is even, the rose of cosin form and sine form are coincident.
+\item In the case when $k\in\bbN$, petals are pairwise disjoint except at origin.
+\item In the case when $k\ge\frac{1}{2}$, a petal is a simple closed loop.
+\item In the case when $k<\frac{1}{2}$, a petal intersects itself.
+\eit
+A rose with irrational $k$ is a dense subset of $r\le a$, and if $\theta$ is restricted to $S\subseteq\bbR$, the resulting graph is a dense subset of $r\le a$ iff $S\mod 2\pi$ is a dense subset of $[0,2\pi)$.
+\sssc{Lemniscate of Bernoulli}
+A lemniscate of Bernoulli can be defined from two given points $F,G$ called foci, as the locus of points $P$ satisfying the relation
+\[\abs{PF}\cdot\abs{PG}=c^2,\]
+where $c=\frac{1}{2}\abs{FG}$.
+
+The lemniscate of Bernoulli may be described using either the focal parameter $c$ or the half-width ⁠$a=c\sqrt{2}$.
+
+In Cartesian coordinates
+\[(x^2+y^2)^2=2c^2(x^2-y^2),\]
+or in polar coordinates
+\[r^2=a^2\cos(2\theta).\]
+
+
+\section{Riemann zeta function or Euler–Riemann zeta function}
+\subsection{Harmonic series (調和級數) and alternating harmonic series}
+\subsubsection{Harmonic series}
+\[H_M=\sum_{n=1}^M\frac{1}{n}.\]
+\subsubsection{Alternating harmonic series}
+\[S_M=\sum_{n=1}^M\frac{(-1)^{n+1}}{n}.\]
+\subsubsection{Relation}
+\[S_{2M}=H_{2M}-H_M.\]
+\bpr
+\[\ba
+S_{2M}=H_{2M}-2\sum_{n=1}^M\frac{1}{2n}\\
+&=H_{2M}-H_M
+\ea\]
+\epr
+\subsubsection{Euler–Mascheroni constant or Euler's constant}
+\[\begin{aligned}
+\lim_{n\to\infty }\left(\sum_{k=1}^n\frac{1}{k}\right)-\ln(n)\\
+&=\int_1^\infty\left(\frac{1}{\lfloor x\rfloor}-\frac{1}{x}\right)\dd{x}
+\end{aligned}\]
+is convergent, and its limit is called Euler–Mascheroni constant or Euler's constant $\gamma$.
+\bpr
+Suppose sequence $\langle a_n=\left(\sum_{k=1}^n\frac{1}{k}\right)-\ln(n)\rangle_{n=1}^{\infty}$.
+Lemma:
+\[\ln(1+x)\ge \frac{x}{1+x}, \quad x>-1.\]
+\[\ln(1+\frac{1}{n})\ge\frac{1}{n\qty(1+\frac{1}{n})}=\frac{1}{n+1}\]
+$a_n$ is non-increasing:
+\[a_{n+1}-a_n=\frac{1}{n+1}-\ln(1+\frac{1}{n})\le 0\]
+\[\int_k^{k+1}\frac{\dd{x}}{x}\leq\frac{1}{k},\quad k\geq 1\]
+\[\ln(n)=\int_1^n\frac{\dd{x}}{x}\leq\sum_{k=1}^n\frac{1}{k},\quad k\geq 1\]
+$a_n$ is bounded-below:
+\[\sum_{k=1}^n\frac{1}{k}-\ln(n)\geq 0\]
+Thus, by monotone convergence theorem, $a_n$ is convergent.
+
+Proof of Lemma:
+\[\ln(1+0)=\frac{0}{1+0}=0.\]
+\[\dv{}{x}\ln(1+x)=\frac{1}{1+x}\]
+\[\dv{}{x}\qty(\frac{x}{1+x})=\frac{1+x-x}{(1+x)^2}=\frac{1}{(1+x)^2}\]
+\[0>x>-1\implies 1>1+x>0\implies 1+x>(1+x)^2\implies\frac{1}{(1+x)^2}>\frac{1}{1+x}\implies \ln(1+x)>\frac{x}{1+x}\]
+\[x>0\implies 1+x>1\implies 1+x<(1+x)^2\implies\frac{1}{(1+x)^2}<\frac{1}{1+x}\implies \ln(1+x)>\frac{x}{1+x}\]
+\epr
+\subsubsection{Alternating harmonic series convergence}
+\[\sum_{n=1}^\infty\frac{(-1)^{n+1}}{n}=\ln 2.\]
+\bpr
+\[\ba
+\ln 2&=\ln(1+1)\\
+&=\int_0^1\frac{1}{1+x}\dd{x}\\
+&=\int_0^1\sum_{n=0}^{\infty}(-x)^n\dd{x}\\
+&=\sum_{n=0}^{\infty}\int_0^1(-x)^n\dd{x}\\
+&=\sum_{n=0}^{\infty}(-1)^n\frac{1}{n+1}\\
+&=\sum_{n=1}^\infty\frac{(-1)^{n+1}}{n}
+\ea\]
+\epr
+\subsection{Riemann zeta function or Euler–Riemann zeta function}
+\subsubsection{Definition}
+The Riemann zeta function or Euler–Riemann zeta function $\zeta(s)$ is a complex function defined as the analytic extension of
+\[\zeta(s)=\sum_{n=1}^\infty\frac{1}{n^s},\quad\forall\Re(s)>1\]
+such that it is meromorphic and with an only pole at $s=1$.
+
+PLACEHOLDER
+
+\subsubsection{With Gamma function}
+\[\frac{1}{\Gamma(s)}\int_0^\infty\frac{x^{s-1}}{e^x-1}\dd{x}.\]
+\bpr
+PLACEHOLDER
+\epr
+
+Functional equation
+
+Euler product formula
+
+PLACEHOLDER
+
+Basel Problem (巴塞爾問題):
+\[\zeta(2)=\frac{\pi^2}{6}\]
+
+PLACEHOLDER
+
+Other Even Positive Integers:
+\[\zeta(4)=\frac{\pi^4}{90}\]
+\[\zeta(6)=\frac{\pi^6}{945}\]
+\[\zeta(8)=\frac{\pi^8}{9450}\]
+\[\zeta(10)=\frac{\pi^{10}}{93555}\]
+\[\zeta(12)=\frac{691\pi^{12}}{638512875}\]
+\[\zeta(14)=\frac{2\pi^{14}}{18243225}\]
+
+PLACEHOLDER
+
+Infinity:
+\[\lim_{n\to\infty}\zeta(n)=1\]
+
+PLACEHOLDER
+
+Derivative
+PLACEHOLDER

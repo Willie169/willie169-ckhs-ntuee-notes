@@ -1,0 +1,602 @@
+\sct{Series and Improper Integral Theorems and Methods}
+\subsection{Limit of real series theorems}
+\subsubsection{p-series}
+$\sum_{n=1}^{\infty}\frac{1}{n^p}$ converges iff $p>1$.
+\bpr
+By integral test and p-test I for improper integral, it holds.
+\epr
+\subsubsection{Integral test}
+Suppose $f(x)\colon [1,\infty)$ is bounded and non-decreasing, and $\lim_{x\to\infty}f(x)=0$. Then, $\int_1^{\infty}f(x)\dd{x}$ is convergent iff $\sum_{n=1}^{\infty}f(n)$ is convergent, and for any $N\in\bbN$,
+\[\int_1^Nf(x)\dd{x}\geq\sum_{n=1}^Nf(n)\geq\int_1^{N+1}f(x)\dd{x},\]
+\[\int_N^{\infty}f(x)\dd{x}\leq\sum_{n=N+1}^{\infty}f(n)\leq\int_{N+1}^{\infty}f(x)\dd{x},\]
+where the latter is called remainder estimate of integral test.
+\bpr
+Suppose $f$ is non-increasing. It has at most countably many discontinuities.
+\[0\geq f(1)\geq\int_1^2\dd{x},\]
+and for any $n\geq 2$,
+\[\int_{n-1}^nf(x)\dd{x}\geq f(n)\geq\int_n^{n+1}\dd{x}.\]
+Summing over $n\in\bbN$, we obtain, for any $N\in\bbN$,
+\[\int_1^Nf(x)\dd{x}\geq\sum_{n=1}^Nf(n)\geq\int_1^{N+1}f(x)\dd{x}.\]
+Take limit $\lim_{N\to\infy}$, we have
+\[\int_1^{\infty}f(x)\dd{x}\geq\sum_{n=1}^{\infty}f(n)\geq\int_1^{\infty}f(x)\dd{x},\]
+that is,
+\[\int_1^{\infty}f(x)\dd{x}=\sum_{n=1}^{\infty}f(n).\]
+\epr
+Suppose $f(x)\colon [1,\infty)$ is bounded and non-increasing, and $\lim_{x\to\infty}f(x)=0$. Then, $\int_1^{\infty}f(x)\dd{x}$ is convergent iff $\sum_{n=1}^{\infty}f(n)$ is convergent, and for any $N\in\bbN$,
+\[\int_1^Nf(x)\dd{x}\leq\sum_{n=1}^Nf(n)\leq\int_1^{N+1}f(x)\dd{x},\]
+\[\int_N^{\infty}f(x)\dd{x}\geq\sum_{n=N+1}^{\infty}f(n)\geq\int_{N+1}^{\infty}f(x)\dd{x},\]
+where the latter is called remainder estimate of integral test.
+\subsubsection{Alternating series test or Leibniz's test}
+If a series $\sum_{n=1}^{\infty}(-1)^{n-1}b_n$ satisfies that
+\[b_n\geq b_{n+1}\geq 0,\quad n\in\bbN,\]
+\[\lim_{n\to\infty}b_n=0,\]
+then it is convergent, and
+\[0\leq\abs{\sum_{k=n}^{\infty}(-1)^{k-1}b_k}\leq b_n,\forall n\in\bbN,\]
+where the latter is called alternating series estimation theorem.
+\bpr
+Let
+\[c_1=b_1,\]
+\[c_n=b_{2n-1}-b_{2n-2},\quad n\in\bbN\land n>1,\]
+\[S_n=\sum_{k=1}^n(-1)^{k-1}b_k,\]
+\[S=\sum_{n=1}^{\infty}(-1)^{n-1}b_n,\]
+\[S_{2n-1}=T_n=\sum_{k=1}^nc_n.\]
+$T_n$ is non-increasing since
+\[c_n\leq 0,\quad\forall n\in\bbN\land n>1.\]
+$T_n$ is bounced-below by $0$ since
+\[c_1\geq b_2\geq-\sum_{k=2}^{\infty}c_k,\]
+\[T_n\geq 0.\]
+By monotone convergence theorem, $T_n$ is convergent, and thus $S_n$ is convergent.
+\[b_{2n-2}\geq-\sum_{k=n}^{\infty}c_k=S-T_{n-1}=S-S_{2n-3}.\]
+Thus for even $n$,
+\[b_n\geq\sum_{k=n}^{\infty}(-1)^{k-1}b_k=\abs{\sum_{k=n}^{\infty}(-1)^{k-1}b_k}.\]
+For odd $n$,
+\[\abs{\sum_{k=n}^{\infty}(-1)^{k-1}b_k}=-\sum_{k=n}^{\infty}(-1)^{k-1}b_k=-b_n+\sum_{k=n+1}^{\infty}(-1)^{k-1}b_k\geq -b_n.\]
+\epr
+\subsubsection{Ratio test}
+\ben
+\item If $\lim_{n\to\infty}\abs{\frac{a_{n+1}}{a_n}}=L<1$, then the series $\sum_{n=1}^{\infty}a_n$ is absolutely convergent.
+\item If $\lim_{n\to\infty}\abs{\frac{a_{n+1}}{a_n}}=L>1$ or $\lim_{n\to\infty}\abs{\frac{a_{n+1}}{a_n}}=\infty$, then the series $\sum_{n=1}^{\infty}a_n$ is divergent.
+\een
+\bpr
+For the first statement, choose an arbitrary $L<r<1$. There exists an integer $N$ such that
+\[\abs{\frac{a_{n+1}}{a_n}}<r,\quad\forall n\geq N.\]
+Thus,
+\[\abs{a_{N+k}}<\abs{a_N}r^k,\quad\forall k\geq 1.\]
+Since
+\[\sum_{k=1}^{\infty}\abs{a_N}r^k\]
+is convergent, by comparison test, $\sum_{n=1}^{\infty}\abs{a_n}$ is convergent.
+
+For the second statement,
+\[\lim_{n\to\infty}a_n\neq 0,\]
+thus $\sum_{n=1}^{\infty}a_n$ is divergent.
+\epr
+\subsubsection{(Cauchy) root test}
+\ben
+\item If $\limsup_{n\to\infty}\sqrt[n]{\abs{a_n}}<1$, then the series $\sum_{n=1}^{\infty}a_n$ is absolutely convergent.
+\item If $\limsup_{n\to\infty}\sqrt[n]{\abs{a_n}}>1$, then the series $\sum_{n=1}^{\infty}a_n$ is divergent.
+\een
+\bpr
+Let
+\[L=\limsup_{n\to\infty}\sqrt[n]{\abs{a_n}}.\]
+For the first statement, choose an arbitrary $L<r<1$. There exists an integer $N$ such that
+\[\sqrt[n]{\abs{a_n}}<r,\quad\forall n\geq N.\]
+Thus,
+\[\abs{a_n}<r^n,\quad\forall n\geq N.\]
+Since
+\[\sum_{n=1}^{\infty}r^n\]
+is convergent, by comparison test, $\sum_{n=1}^{\infty}\abs{a_n}$ is convergent.
+
+For the second statement,
+\[\neg\lim_{n\to\infty}a_n=0.\]
+Thus $\sum_{n=1}^{\infty}a_n$ is divergent.
+\epr
+\subsubsection{Riemann series theorem}
+Let $\langle a_n\rangle_{n=1}^{\infty}$ be a real sequence, and that $\sum_{n=1}^{\infty}a_n$ is conditionally convergent. Then, for any extended-real number $M$, there exists a permutation $\sigma$ on $\bbN$ such that
+\[\sum_{n=1}^{\infty}a_{\sigma(n)}=M.\]
+\bpr
+Since $\sum_{n=1}^{\infty}a_n$ is conditionally convergent, $\langle a_n\rangle$ has infinitely many positive terms and infinitely many negative terms. Let
+\[a_n^+=\bcs a_n,\quad&a_n>0\\0,\quad&a_n\leq 0\ecs,\]
+\[a_n^-=\bcs a_n,\quad&a_n<0\\0,\quad&a_n\geq 0\ecs.\]
+Since $\sum_{n=1}^{\infty}a_n$ is conditionally convergent,
+\[\sum_{n=1}^{\infty}a_n^+=\infty,\]
+\[\sum_{n=1}^{\infty}a_n^-=-\infty.\]
+For any real number $M$, let $p_1$ be the smallest positive integer such that
+\[M<\sum_{n=1}^{p_1}a_n^+,\]
+and let $q_1$ be the smallest positive integer such that
+\[M>\sum_{n=1}^{p_1}a_n^++\sum_{n=1}^{q_1}a_n^-.\]
+Now recursively, for all $k\in\bbN_{>1}$, let $p_k$ be the smallest integer such that $p_k>p_{k-1}$ and
+\[M<\sum_{n=1}^{p_k}a_n^++\sum_{n=1}^{q_{k-1}}a_n^-,\]
+and let $q_k$ be the smallest integer such that $q_k>q_{k-1}$ and
+\[M>\sum_{n=1}^{p_k}a_n^++\sum_{n=1}^{q_k}a_n^-.\]
+The new sequence is defined as
+\[\langle a_n^+\rangle_{n=1\land a_n\geq 0}^{p_1}\langle a_n^-\rangle_{n=1\land a_n<0}^{q_1}\langle\langle a_n^+\rangle_{n=p_k+1\land a_n\geq 0}^{p_{k+1}}\langle a_n^-\rangle_{n=q_k+1\land a_n<0}^{q_{k+1}}\rangle_{k=1}^{\infty}.\]
+We have
+\[\sum_{n=1}^{p_{k+1}-1}a_n^++\sum_{n=1}^{q_k}a_n^-\leq M<\sum_{n=1}^{p_{k+1}}a_n^++\sum_{n=1}^{q_k}a_n^-,\]
+\[0<\qty(\sum_{n=1}^{p_{k+1}}a_n^++\sum_{n=1}^{q_k}a_n^-)-M\leq a_{p_{k+1}}^+.\]
+Since $\sum_{n=1}^{\infty}a_n$ is conditionally convergent,
+\[\lim_{k\to\infty}a_{p_{k+1}}^+=0.\]
+By squeeze theorem,
+\[\lim_{k\to\infty}\sum_{n=1}^{p_{k+1}}a_n^++\sum_{n=1}^{q_k}a_n^-=M.\]
+Similarly,
+\[\sum_{n=1}^{p_k}a_n^++\sum_{n=1}^{q_k-1}a_n^-\geq M>\sum_{n=1}^{p_k}a_n^++\sum_{n=1}^{q_k}a_n^-,\]
+\[0\geq M-\qty(\sum_{n=1}^{p_k}a_n^++\sum_{n=1}^{q_k-1}a_n^-)>a_{q_k}^-.\]
+Since $\sum_{n=1}^{\infty}a_n$ is convergent,
+\[\lim_{k\to\infty}a_{q_k}^-=0.\]
+By squeeze theorem,
+\[\lim_{k\to\infty}\sum_{n=1}^{p_k}a_n^++\sum_{n=1}^{q_k}a_n^-=M.\]
+Since for all $p_k<p<p_{k+1}$,
+\[\sum_{n=1}^{p_k}a_n^++\sum_{n=1}^{q_k}a_n^-\leq\sum_{n=1}^pa_n^++\sum_{n=1}^{q_k}a_n^-\leq\sum_{n=1}^{p_{k+1}}a_n^++\sum_{n=1}^{q_k}a_n^-,\]
+and for all $q_k<q<q_{k+1}$,
+\[\sum_{n=1}^{p_{k+1}}a_n^++\sum_{n=1}^{q_k}a_n^-\geq\sum_{n=1}^{p_{k+1}}a_n^++\sum_{n=1}^qa_n^-\geq\sum_{n=1}^{p_{k+1}}a_n^++\sum_{n=1}^{q_{k+1}}a_n^-,\]
+by squeeze theorem, the new sequence converges to $M$.
+
+For $\infty$ case ($-\infty$ case can be proven similarly), let $p_1$ be the smallest positive integer such that
+\[1<\sum_{n=1}^{p_1}a_n^+,\]
+and let $q_1$ be the smallest positive integer such that
+\[1>\sum_{n=1}^{p_1}a_n^++\sum_{n=1}^{q_1}a_n^-.\]
+Now recursively, for all $k\in\bbN_{>1}$, let $p_k$ be the smallest integer such that $p_k>p_{k-1}$ and
+\[k<\sum_{n=1}^{p_k}a_n^++\sum_{n=1}^{q_{k-1}}a_n^-,\]
+and let $q_k$ be the smallest integer such that $q_k>q_{k-1}$ and
+\[k>\sum_{n=1}^{p_k}a_n^++\sum_{n=1}^{q_k}a_n^-.\]
+The new sequence is defined as
+\[\langle a_n^+\rangle_{n=1\land a_n\geq 0}^{p_1}\langle a_n^-\rangle_{n=1\land a_n<0}^{q_1}\langle\langle a_n^+\rangle_{n=p_k+1\land a_n\geq 0}^{p_{k+1}}\langle a_n^-\rangle_{n=q_k+1\land a_n<0}^{q_{k+1}}\rangle_{k=1}^{\infty}.\]
+Thus for arbitrary large $k$, we have
+\[k<\sum_{n=1}^{p_k}a_n^++\sum_{n=1}^{q_{k-1}}a_n^-,\]
+and
+\[k<\sum_{n=1}^{p_k}a_n^-+\sum_{n=1}^{q_k-1}a_n^+.\]
+Since for all $p_k<p<p_{k+1}$,
+\[\sum_{n=1}^{p_k}a_n^++\sum_{n=1}^{q_k}a_n^-\leq\sum_{n=1}^pa_n^++\sum_{n=1}^{q_k}a_n^-\leq\sum_{n=1}^{p_{k+1}}a_n^++\sum_{n=1}^{q_k}a_n^-,\]
+and for all $q_k-1<q<q_{k+1}-1$,
+\[\sum_{n=1}^{p_{k+1}}a_n^++\sum_{n=1}^{q_k-1}a_n^-\geq\sum_{n=1}^{p_{k+1}}a_n^++\sum_{n=1}^qa_n^-\geq\sum_{n=1}^{p_{k+1}}a_n^++\sum_{n=1}^{q_{k+1}-1}a_n^-,\]
+by squeeze theorem, the new sequence has limit $\infty$.
+\epr
+\subsubsection{Cauchy–Hadamard theorem}
+For any given power series $\sum_{n=0}^{\infty}c_n(x-a)^n$, let
+\[L=\limsup_{n\to\infty}\sqrt[n]{\abs{c_n}}\in\bar{\bbR}_{\geq 0},\]
+then,
+\[R=\bcs\infty,\quad&L=0\\\frac{1}{L},\quad&L\in\bbR_{>0}\\0,\quad&L=\infty\ecs,\]
+called radius of convergence, is such that the series is absolute convergent if $|x-a|<R$ and divergent if $|x-a|>R$, and if $R=0$, the series is absolutely convergent at $x=a$ and divergent elsewhere.
+\bpr
+Let $r=|x-a|$.
+\[\limsup_{n\to\infty}\sqrt[n]{\abs{c_n(x-a)^n}}=\bcs Lr,\quad&r\neq 0\\0,\quad&r=0\ecs.\]
+
+If $L=0$, then the series is absolutely convergent for all $x$, thus $R=\infty$.
+
+Else if $L\in\bbR_{>0}$, then the series is absolutely convergent for $r<\frac{1}{L}$ and divergent for $r>\frac{1}{L}$, thus $R=\frac{1}{L}$.
+
+Else if $L=\infty$, then the series is absolutely convergent at $x=a$ and divergent elsewhere, thus $R=0$.
+\epr
+\subsubsection{Power series term-by-term differentiation and integration theorem}
+If the power series $\sum_{n=0}^{\infty}c_n(x-a)^n$ has radius of convergence $R>0$, then the function $f$ defined as
+\[f(x)=\sum_{n=0}^{\infty}c_n(x-a)^n\]
+is differentiable on $(a-R,a+R)$, and
+\[f'(x)=\sum_{n=0}^{\infty}nc_n(x-a)^{n-1},\]
+\[\int f(x)\dd{x}=C+\sum_{n=0}^{\infty}c_n\frac{(x-a)^{n+1}}{n+1},\]
+and the radii of convergence of both of them are $R$.
+\bpr
+PLACEHOLDER
+\epr
+\subsubsection{Cauchy's convergence test}
+A series $\sum_{n=0}^{\infty}a_n$ converges iff for every $\varepsilon>0$, there is a natural number $N$ such that
+\[\abs{\sum_{i=n+1}^{n+p}a_i}<\varepsilon\]
+for all $n\geq N$ and $p\geq 1$.
+\subsubsection{Mertens' theorem of Cauchy product}
+If $\sum_{n=0}^{\infty}a_n$ converges to $A$, $\sum_{n=0}^{\infty}b_n$ converges to $B$, and at least one of them converges absolutely, then their Cauchy product converges to $AB$.
+
+If $\sum_{n=0}^{\infty}a_n$ converges to $A$, $\sum_{n=0}^{\infty}b_n$ converges to $B$, and both of them converge absolutely, then their Cauchy product converges absolutely to $AB$.
+\begin{proof}
+PLACEHOLDER
+\end{proof}
+\subsubsection{Multiplication of power series}
+If $f(x)=\sum_{n=0}^{\infty}a_nx^n$ and $g(x)=\sum_{n=0}^{\infty}b_nx^n$ for $x\in R$ then for $x\in R$,
+\[f(x)g(x)=\sum_{n=0}^{\infty}a_nb_nx^n.\]
+\bpr
+PLACEHOLDER
+\epr
+\subsubsection{Division of power series}
+If $f(x)=\sum_{n=0}^{\infty}a_nx^n$ and $g(x)=\sum_{n=0}^{\infty}b_nx^n$ for $x\in R$ and $b_0\neq 0$, then, with
+\[c_0=\frac{a_0}{b_0},\]
+\[c_n=\frac{1}{b_0}\qty(a_n-\sum_{k=1}^nb_kc_{n-k}),\]
+for $x\in R$,
+\[\frac{f(x)}{g(x)}=\sum_{n=0}^{\infty}c_nx^n.\]
+\bpr
+PLACEHOLDER
+\epr
+\subsection{Improper integral theorems}
+\subsubsection{p-test I}
+$\int_a^{\infty}x^p\dd{x},\quad a>0$ converges iff $p<-1$. And for $p<-1\land a>0$,
+\[\int_a^{\infty}x^p\dd{x}=-\frac{1}{p+1}a^{p+1}.\]
+\begin{proof}
+\[\int x^p\dd{x}=\begin{cases}
+\frac{1}{p+1}x^{p+1},\quad&p\neq -1\\
+\ln(x),\quad&p=-1
+\end{cases}\]
+\[\forall p>-1\nexists\lim_{x\to\infty}\frac{1}{p+1}x^{p+1}\]
+\[\nexists\lim_{x\to\infty}\ln(x)\]
+\[\forall p<-1\lim_{x\to\infty}\frac{1}{p+1}x^{p+1}=0\]
+\end{proof}
+\subsubsection{p-test II}
+$\int_0^ax^p\dd{x},\quad a>0$ converges iff $p>-1$. And for $p>-1\land a>0$,
+\[\int_0^ax^p\dd{x}=\frac{1}{p+1}a^{p+1}.\]
+\begin{proof}
+\[\int x^p\dd{x}=\begin{cases}
+\frac{1}{p+1}x^{p+1},\quad&p\neq -1\\
+\ln(x),\quad&p=-1
+\end{cases}\]
+\[\forall p<-1\nexists\lim_{x\to 0^+}\frac{1}{p+1}x^{p+1}\]
+\[\nexists\lim_{x\to 0^+}\ln(x)\]
+\[\forall p>-1\lim_{x\to 0^+}\frac{1}{p+1}x^{p+1}=0\]
+\end{proof}
+\subsubsection{$x^p(\ln x)^q$-test I}
+$\int_a^{\infty}x^p(\ln x)^q\dd{x},\quad a>0$ converges iff $p<-1\lor (p=-1\land q<-1)$.
+\begin{proof}
+\[\lim_{x\to\infty}\frac{(\ln x)^q}{x^{\varepsilon}}=\lim_{u\to\infty}\frac{u^q}{e^{\varepsilon u}}=0,\quad\forall\varepsilon>0,\quad\forall q.\]
+For all $p<-1$, take $-1-p>\varepsilon>0$, $p+\varepsilon<-1$:
+\[\lim_{x\to\infty}\frac{x^p(\ln x)^q}{x^{p+\varepsilon}}=0.\]
+Thus, by one-sided LCT, since
+\[\int_a^{\infty}x^{p+\varepsilon}\dd{x}\]
+is convergent,
+\[\int_a^{\infty}x^p(\ln x)^q\dd{x}\]
+is convergent.
+\[\lim_{x\to\infty}\frac{(\ln x)^q}{x^{\varepsilon}}=\lim_{u\to\infty}\frac{u^q}{e^{\varepsilon u}}=\infty,\quad\forall\varepsilon<0,\quad\forall q.\]
+For all $p>-1$, take $-1-p<\varepsilon<0$, $p+\varepsilon>-1$:
+\[\lim_{x\to\infty}\frac{x^p(\ln x)^q}{x^{p+\varepsilon}}=\infty.\]
+Thus, by one-sided LCT, since
+\[\int_a^{\infty}x^{p+\varepsilon}\dd{x}\]
+is divergent,
+\[\int_a^{\infty}x^p(\ln x)^q\dd{x}\]
+is divergent.
+
+For $p=-1$:
+\[u=\ln x,\quad\dd{u}=\frac{1}{x}\dd{x}.\]
+\[\int_a^{\infty}\frac{(\ln x)^q}{x}\dd{x}=\int_{\ln a}^{\infty}u^q\dd{u},\]
+which converges iff $q<-1$.
+\end{proof}
+\subsubsection{$x^p(\ln x)^q$-test II}
+$\int_0^ax^p(\ln x)^q\dd{x},\quad a>0$ converges iff $p>-1\lor (p=-1\land q>-1)$.
+\begin{proof}
+\[\lim_{x\to 0^+}\frac{(\ln x)^q}{x^{\varepsilon}}=\lim_{u\to-\infty}\frac{u^q}{e^{\varepsilon u}}=0,\quad\forall\varepsilon<0,\quad\forall q.\]
+For all $p>-1$, take $-1-p<\varepsilon<0$, $p+\varepsilon>-1$:
+\[\lim_{x\to 0^+}\frac{x^p(\ln x)^q}{x^{p+\varepsilon}}=0.\]
+Thus, by one-sided LCT, since
+\[\int_0^ax^{p+\varepsilon}\dd{x}\]
+is convergent,
+\[\int_0^ax^p(\ln x)^q\dd{x}\]
+is convergent.
+\[\lim_{x\to 0^+}\frac{(\ln x)^q}{x^{\varepsilon}}=\lim_{u\to-\infty}\frac{u^q}{e^{\varepsilon u}}=\infty,\quad\forall\varepsilon>0,\quad\forall q.\]
+For all $p<-1$, take $-1-p>\varepsilon>0$, $p+\varepsilon<-1$:
+\[\lim_{x\to 0^+}\frac{x^p(\ln x)^q}{x^{p+\varepsilon}}=\infty.\]
+Thus, by one-sided LCT, since
+\[\int_0^ax^{p+\varepsilon}\dd{x}\]
+is divergent,
+\[\int_0^ax^p(\ln x)^q\dd{x}\]
+is divergent.
+
+For $p=-1$:
+\[u=\ln x,\quad\dd{u}=\frac{1}{x}\dd{x}.\]
+\[\int_0^a\frac{(\ln x)^q}{x}\dd{x}=\int_0^au^q\dd{u},\]
+which converges iff $q>-1$.
+\end{proof}
+\subsubsection{Convergent improper integral of nonnegative and non-increasing integrand implies limit of product of integrand and independent variable converges to 0}
+If function $f\colon[a,\infty)\to\bbR$ is nonnegative and non-increasing on $[a,\infty)$ and $\int_a^{\infty}f(x)\dd{x}$ converges, then $\lim_{x\to\infty}xf(x)=0$.
+\begin{proof}
+Since $\int_a^{\infty}f(x)\dd{x}$ and $f(x)$ is nonnegative, $\forall\varepsilon>0$, there exists $M>a$ such that $\forall A>M$:
+\[0\leq\int_A^{\infty}f(x)\dd{x}<\varepsilon.\]
+Thus for $t>2M$,
+\[0\leq\int_{t/2}^tf(x)\dd{x}=\int_{t/2}^{\infty}f(x)\dd{x}-\int_t^{\infty}f(x)\dd{x}<2\varepsilon.\]
+Since $f(x)$ is non-increasing,
+\[f(x)\geq f(t),\quad\forall x\in[t/2,t]\]
+\[\int_{t/2}^tf(x)\dd{x}\geq\int_{t/2}^tf(t)\dd{x}=\frac{t}{2}f(t)\]
+\[tf(t)<4\varepsilon.\]
+Thus, $\forall\varepsilon>0$, there exists $2M>0$ such that $\forall t>2M$,
+\[tf(t)<\varepsilon,\]
+that is,
+\[\lim_{x\to\infty}xf(x)=0.\]
+\end{proof}
+\subsection{Absolute convergence implies convergence}
+\subsubsection{For real series}
+A real series is convergent if it is absolutely convergent.
+\bpr
+Suppose $\sum_{n=1}^{\infty}\abs{a_n}$ is convergent.
+\[0\leq\sum_{n=1}^{\infty}a_n+\abs{a_n}\leq\sum_{n=1}^{\infty}2\abs{a_n}\]
+By comparison test theorem, $\sum_{n=1}^{\infty}a_n+\abs{a_n}$ is convergent.
+\[\sum_{n=1}^{\infty}a_n+\abs{a_n}-\sum_{n=1}^{\infty}\abs{a_n}=\sum_{n=1}^{\infty}a_n\]
+\epr
+\subsubsection{For improper integral}
+An improper integral is convergent if it is absolutely convergent.
+\bpr
+Suppose
+\[\int_a^b\abs{f(x)}\dd{x}\]
+is a convergent improper integral and
+\[\int_a^c\abs{f(x)}\dd{x}\]
+is proper integral for any $a<c<b$.
+\[0\leq\int_a^bf(x)+\abs{f(x)}\dd{x}\leq\int_a^b2\abs{f(x)}\dd{x}\]
+By comparison test theorem, $\int_a^bf(x)+\abs{f(x)}\dd{x}$ is convergent.
+\[\int_a^bf(x)+\abs{f(x)}\dd{x}-\int_a^b\abs{f(x)}\dd{x}=\int_a^bf(x)\dd{x}\]
+\epr
+\subsection{Deleting head}
+\subsubsection{For real series}
+For real sequence $\langle a_i\rangle_{i=m}^{\infty}$, $\sum_{i=m}^{\infty}a_i$ converges iff $\sum_{i=m+n}^{\infty}a_i$ converges, for all $n\in\bbN$.
+\subsubsection{For improper integral}
+If function $f\colon [a,b)\to\bbR$ is measurable with $b\in(a,\infty]$, $\int_a^bf(x)\dd{x}$ is improper integral, and $\int_a^cf(x)\dd{x}$ is proper integral for any $a<c<b$, then $\int_a^bf(x)\dd{x}$ converges iff $\int_c^bf(x)\dd{x} converges, for all $a<c<b$.
+\subsection{Term test}
+\subsubsection{For real series}
+If $\sum_{n=0}^{\infty}a_n$ converges, then $\lim_{n\to\infty}a_n=0$.
+\bpr
+Let
+\[S_n=\sum_{k=0}^na_k\]
+and $S_{-1}=0$.
+\[a_n=S_n-S_{n-1}.\]
+Suppose $S_n$ converges to $S$. Then $S_{n-1}$ converges to $S$. Then $S_n-S_{n-1}$ converges to $S-S=0$.
+\epr
+\subsubsection{For improper integral}
+If function $f\colon [a,\infty)\to\bbR$ is measurable and of bounded variation, $\int_a^bf(x)\dd{x}$ is proper integral for any $b>a$, and $\int_a^{\infty}f(x)\dd{x}$ converges to some real number, then
+\[\lim_{x\to\infty}f(x)=0.\]
+\bpr
+Let $f^+$ and $f^-$ be the Jordan decomposition of $f$ such that $f=f^+-f^-$.
+\[\int_a^{\infty}f(x)\dd{x}=\int_a^{\infty}f^+(x)\dd{x}-\int_a^{\infty}f^-(x)\dd{x}\]
+and that LHS converges iff both terms of RHS converges.
+
+$\lim_{x\to\infty}f(x)=0$ iff $\lim_{x\to\infty}f^+(x)=\lim_{x\to\infty}f^-(x)$.
+
+Assume for contradiction that there exists $\varepsilon>0$ and $M\geq a$ such that
+\[\forall x\geq M:\,f^+(x)>\varepsilon.\]
+Then, $\int_M^{\infty}f^+(x)$ diverges.
+
+Assume for contradiction that there exists $\varepsilon>0$ and $M\geq a$ such that
+\[\forall x\geq M:\,f^-(x)>\varepsilon.\]
+Then, $\int_M^{\infty}f^-(x)$ diverges.
+\epr
+\subsection{(Direct) comparison theorem}
+\subsubsection{For real series}
+If real sequences $\langle a_n\rangle_{n=1}^{\infty}$ and $\langle b_n\rangle_{n=1}^{\infty}$ are such that $a_n\geq b_n\geq 0$ for all $n\in\bbN$, then
+\ben
+\item $\sum_{n=1}^{\infty}a_n$ is convergent implies $\sum_{n=1}^{\infty}b_n$ is convergent.
+\item $\sum_{n=1}^{\infty}b_n$ is divergent implies $\sum_{n=1}^{\infty}a_n$ is divergent.
+\een
+\begin{proof}
+Let $\left\langle s_n=\sum_{i=1}^na_i\right\rangle_{i=1}^{\infty}$ and $\left\langle t_n=\sum_{i=1}^nb_i\right\rangle_{i=1}^{\infty}$ be the sequences of partial sums of $\langle a_n\rangle_{n=1}^{\infty}$ and $\langle b_n\rangle_{n=1}^{\infty}$.
+
+$s_n$ and $t_n$ are monotone increasing for all $n\in\bbN$ since $a_n,b_n\geq 0$. $s_n\geq t_n$ for all $n\in\bbN$ since $a_n\geq b_n$.
+
+Statement 1:
+\[\sum_{n=1}^{\infty}a_n=\lim_{n\to\infty}s_n=L.\]
+Since
+\[0\leq t_n\leq s_n,\]
+then,
+\[\sum_{n=1}^{\infty}b_n=\lim_{n\to\infty}t_n\]
+exists and $\in[0,L]$.
+
+Statement 2 is the contrapositive of statement 1.
+\end{proof}
+\subsubsection{For improper integral}
+If functions $f\colon [a,b)\to\bbR$ and $g\colon [a,b)\to\bbR$ are measurable with $b\in(a,\infty]$, $\int_a^bf(x)\dd{x}$ and $\int_a^bg(x)\dd{x}$ are improper integrals, $\int_a^cf(x)\dd{x}$ and $\int_a^cg(x)\dd{x}$ are proper integrals for any $a<c<b$,
+and $f(x)\geq g(x)\geq 0$ a.e. for $x\in[a,b)$, then
+\ben
+\item $\int_a^bf(x)\dd{x}$ is convergent implies $\int_a^bg(x)\dd{x}$ is convergent.
+\item $\int_a^bg(x)\dd{x}$ is divergent implies $\int_a^bf(x)\dd{x}$ is divergent.
+\een
+\begin{proof}
+Let
+\[F(t)=\int_a^tf(x)\dd{x},\quad t\in[a,b),\]
+\[G(t)=\int_a^tg(x)\dd{x},\quad t\in[a,b).\]
+$F$ and $G$ are monotone increasing since $f(x),g(x)\geq 0$ a.e. for $x\in[a,b)$.
+
+$F(x)\geq G(x)$ since $f(x)\geq g(x)$ a.e. for $x\in[a,b)$.
+
+Statement 1:
+\[\int_a^bf(x)\dd{x}=\lim_{t\to b}F(t)=L.\]
+Since
+\[0\leq G(x)\leq F(x),\]
+then,
+\[\int_a^bg(x)\dd{x}=\lim_{t\to b}G(t)\]
+exists and $\in [0,L]$.
+
+Statement 2 is the contrapositive of statement 1.
+\end{proof}
+\subsection{Limit comparison theorem (LCT)}
+\subsubsection{For real series}
+If real sequences $\langle a_n\rangle_{n=1}^{\infty}$ and $\langle b_n\rangle_{n=1}^{\infty}$ are such that $a_n\geq 0$ and $b_n>0$ for all $n\geq m$ for some $m\in\bbN$, if
+\[L=\lim_{n\to\infty}\frac{a_n}{b_n}\in[0,\infty],\]
+then:
+\ben
+\item If $0<L<\infty$, then $\sum_{n=1}^{\infty}a_n$ is convergent iff $\sum_{n=1}^{\infty}b_n$ is convergent. (classical LCT)
+\item if $L=0$, then:
+\ben
+\item $\sum_{n=1}^{\infty}b_n$ is convergent implies $\sum_{n=1}^{\infty}a_n$ is convergent.
+\item $\sum_{n=1}^{\infty}a_n$ is divergent implies $\sum_{n=1}^{\infty}b_n$ is divergent.
+\een
+(one-sided LCT)
+\item If $L=\infty$, then:
+\ben
+\item $\sum_{n=1}^{\infty}a_n$ is convergent implies $\sum_{n=1}^{\infty}b_n$ is convergent.
+\item $\sum_{n=1}^{\infty}b_n$ is divergent implies $\sum_{n=1}^{\infty}a_n$ is divergent.
+\een
+(one-sided LCT)
+\een
+\begin{proof}
+Statement 1:
+
+For every $\varepsilon>0$, there exists $N\in\bbN$ such that for all $n\geq N$, $\abs{\frac{a_n}{b_n}-L}<\varepsilon$, equivalently,
+\[(L-\varepsilon)b_n<a_n<(L+\varepsilon)b_n.\]
+As $L>0$, choose $\varepsilon$ such that $L-\varepsilon>0$, so that
+\[\frac{a_n}{L+\varepsilon}<b_n<\frac{a_n}{L-\varepsilon}.\]
+$\sum_{n=1}^{\infty}\frac{a_n}{L+\varepsilon}$ is convergent iff $\sum_{n=1}^{\infty}a_n$ is convergent iff $\sum_{n=1}^{\infty}\frac{a_n}{L-\varepsilon}$ is convergent.
+
+And by direct comparison test,
+\bit
+\item $\sum_{n=1}^{\infty}\frac{a_n}{L-\varepsilon}$ is convergent implies $\sum_{n=1}^{\infty}b_n$ is convergent,
+\item $\sum_{n=1}^{\infty}b_n$ is convergent implies $\sum_{n=1}^{\infty}\frac{a_n}{L+\varepsilon}$ is convergent.
+\eit
+
+Statement 2:
+
+There exists $N\in\bbN$ such that for all $n\geq N$, $0\leq\frac{a_n}{b_n}<1$, equivalently,
+\[0\leq a_n<b_n.\]
+
+By direct comparison test of $\sum_{n=N}^{\infty}a_n$ and $\sum_{n=N}^{\infty}b_n$, the statements hold.
+
+Statement 3:
+
+There exists $N\in\bbN$ such that for all $n\geq N$, $\frac{a_n}{b_n}>1$, equivalently,
+\[a_n>b_n>0.\]
+
+By direct comparison test of $\sum_{n=N}^{\infty}a_n$ and $\sum_{n=N}^{\infty}b_n$, the statements hold.
+\end{proof}
+\subsubsection{For improper integral}
+If functions $f\colon [a,b)\to\bbR$ and $g\colon [a,b)\to\bbR$ are measurable with $b\in(a,\infty]$, $\int_a^bf(x)\dd{x}$ and $\int_a^bg(x)\dd{x}$ are improper integrals, $\int_a^cf(x)\dd{x}$ and $\int_a^cg(x)\dd{x}$ are proper integrals for any $a<c<b$, $f(x)\geq 0$ and $g(x)>0$ for $x\in[a,b)$, if
+\[L=\lim_{x\to b^-}\frac{f(x)}{g(x)}\in[0,\infty],\]
+then:
+\ben
+\item If $0<L<\infty$, then $\int_a^bf(x)\dd{x}$ is convergent iff $\int_a^bg(x)\dd{x}$ is convergent. (classical LCT)
+\item if $L=0$, then:
+\ben
+\item $\int_a^bg(x)\dd{x}$ is convergent implies $\int_a^bf(x)\dd{x}$ is convergent.
+\item $\int_a^bf(x)\dd{x}$ is divergent implies $\int_a^bg(x)\dd{x}$ is divergent.
+\een
+(one-sided LCT)
+\item If $L=\infty$, then:
+\ben
+\item $\int_a^bg(x)\dd{x}$ is divergent implies $\int_a^bf(x)\dd{x}$ is divergent.
+\item $\int_a^bf(x)\dd{x}$ is convergent implies $\int_a^bg(x)\dd{x}$ is convergent.
+\een
+(one-sided LCT)
+\een
+\begin{proof}
+Statement 1:
+
+For every $\varepsilon>0$, there exists $a\leq M<b$ such that for all $b>x\geq M$, $\abs{\frac{f(x)}{g(x)}-L}<\varepsilon$, equivalently,
+\[(L-\varepsilon)g(x)<f(x)<(L+\varepsilon)g(x).\]
+As $L>0$, we can choose $\varepsilon$ such that $L-\varepsilon>0$, so that
+\[\frac{f(x)}{L+\varepsilon}<g(x)<\frac{f(x)}{L-\varepsilon}.\]
+$\int_a^b\frac{f(x)}{L+\varepsilon}\dd{x}$ is convergent iff $\int_a^bf(x)\dd{x}$ is convergent iff $\int_a^b\frac{f(x)}{L-\varepsilon}\dd{x}$ is convergent.
+
+And by direct comparison test,
+\bit
+\item $\int_a^b\frac{f(x)}{L-\varepsilon}\dd{x}$ is convergent implies $\int_a^bg(x)\dd{x}$ is convergent,
+\item $\int_a^bg(x)\dd{x}$ is convergent implies $\int_a^b\frac{f(x)}{L+\varepsilon}\dd{x}$ is convergent.
+\eit
+
+Statement 2:
+
+There exists $a\leq M<b$ such that for all $b>x\geq M$, $0\leq\frac{f(x)}{g}<1$, equivalently,
+\[0\leq f(x)<g(x).\]
+
+By direct comparison test of $\int_M^bf(x)\dd{x}$ and $\int_M^bg(x)\dd{x}$, the statements hold.
+
+Statement 3:
+
+There exists $a\leq M<b$ such that for all $b>x\geq M$, $\frac{f(x)}{g(x)}>1$, equivalently,
+\[f(x)>g(x)>0.\]
+
+By direct comparison test of $\int_M^bf(x)\dd{x}$ and $\int_M^bg(x)\dd{x}$, the statements hold.
+\end{proof}
+\subsection{Dirichlet test or Abel's test}
+\subsubsection{For real series}
+If $\langle a_n\rangle_{n=1}^{\infty}$ is a sequence such that the sequence of partial sums $\langle s_n=\sum_{i=0}^na_i\rangle_{n=0}^{\infty}$ where $s_0=0$ is bounded and $\langle b_n\rangle_{n=1}^{\infty}$ is a monotone sequence such that $\lim_{n\to\infty}b_n=0$, then
+\[\sum_{n=1}^{\infty}a_nb_n\]
+converges.
+\begin{proof}
+Choose $M$ such that $\langle\abs{s_n}\rangle_{n=0}^{\infty}$ is bounded above by $M$.
+
+For any $\varepsilon>0$, there is $N\in\bbN$ such that $\abs{b_m}<\frac{\varepsilon}{2M}$ for all $m\geq N$.
+
+For any $N\leq p\leq q$, using Abel transformation,
+\[\ba
+\abs{\sum_{n=p}^qa_nb_n}&=\abs{\sum_{n=p}^q\qty(s_{n+1}-s_n)b_n}\\
+&=\abs{s_{q+1}b_{q+1}-s_pb_p-\sum_{n=p}^qs_{n+1}\qty(b_{n+1}-b_n)}\\
+&\leq M\qty(\abs{b_{q+1}}+\abs{b_p}+\sum_{n=p}^q\abs{b_{n+1}-b_n})\\
+&=M\qty(\abs{b_{q+1}}+\abs{b_p}+\abs{b_{q+1}-b_p})\\
+&=M\qty(\abs{b_{q+1}}+\abs{b_p}+\abs{b_p}-\abs{b_{q+1}})\\
+&=2M\abs{b_p}\\
+&\leq\varepsilon
+\ea\]
+\end{proof}
+\subsubsection{For improper integral}
+If $f\colon [a,b)\to\bbR$ with $b\in(a,\infty]$ is a function such that the function
+\[F(x)=\int_a^xf(t)\dd{t},\quad b>x\geq a\]
+is bounded, $g\colon [a,b)\to\bbR$ is a monotone and measurable function such that $\lim_{x\to b^-}g(x)=0$, then
+\[\int_a^bf(x)g(x)\dd{x}\]
+converges.
+\begin{proof}
+Rewrite as Riemann–Stieltjes integral
+\[\int_a^bf(x)g(x)\dd{x}=\int_{x=a}^bg(x)\dd{F(x)}.\]
+
+Choose $M$ such that $\abs{F(x)}$ is bounded above by $M$.
+
+For any $\varepsilon>0$, there is $a\leq N<b$ such that $\abs{g(N)}<\frac{\varepsilon}{2M}$ for all $m\geq N$.
+
+For any $N\leq p\leq q<b$, using integration by parts of Riemann–Stieltjes integral,
+\[\ba
+\abs{\int_{x=p}^qg(x)\dd{F(x)}}&=\abs{F(q)g(q)-F(p)g(p)-\int_{x=p}^qf(x)\dd{g(x)}}\\
+&\leq M\qty(\abs{g(q)}+\abs{g(p)}+\int_{x=p}^q\dd{g(x)})\\
+&=M\qty(\abs{g(q)}+\abs{g(p)}+\abs{g(q)-g(p)})\\
+&=M\qty(\abs{g(q)}+\abs{g(p)}+\abs{g(p)}-\abs{g(q)})\\
+&=2M\abs{g(p)}\\
+&\leq\varepsilon
+\ea\]
+\end{proof}
+\subsection{Cesàro-summability theorem}
+\subsubsection{For real sequence}
+If a real sequence converges to $L\in\bbR$, then the sequence is Cesàro-summable and its Cesàro sum is $L$.
+\begin{proof}
+PLACEHOLDER
+\end{proof}
+\subsubsection{For real function}
+If a real function $f$ and $a\in\bbR$ is such that $\lim_{x\to\infty}f(x)=L\in\bbR$ and $\int_a^bf(x)\dd{x}$ is a proper integral for all $b\in[a,\infty)$, then the function is Cesàro-summable over $[a,\infty)$ and its Cesàro sum over $[a,\infty)$ is $L$.
+\begin{proof}
+PLACEHOLDER
+\end{proof}
+If a real function $f$ and $b\in\bbR$ is such that $\lim_{x\to-\infty}f(x)=L\in\bbR$ and $\int_a^bf(x)\dd{x}$ is a proper integral for all $a\in(-\infty,b)$, then the function is Cesàro-summable over $(-\infty,b]$ and its Cesàro sum over $(-\infty,b]$ is $L$.
+\subsection{Limit of function between normed spaces theorem}
+\subsubsection{Different paths criterion for nonexistence of a limit}
+Let $V,W$ be two normed spaces. Let $I$ be an open subset of $V$ containing the point $a$. Let $f$ be a function with codomain $W$ defined on $I$, except possibly at $a$ itself. Let $C(t),D(t)$ be two paths in $I\cup\{a\}$ over $[0,\tau]$ for some positive real number $\tau$ such that $C(0)=D(0)=a$. If
+\[\lim_{t\to 0}f(C(t))\neq\lim_{t\to 0}f(D(t))\]
+or either $\lim_{t\to 0}f(C(t))$ or $\lim_{t\to 0}f(D(t))$ doesn't exist, then
+\[\lim_{x\to a}f(x)\]
+doesn't exist.
+\sssc{Polar coordinate method}
+In $\bbR^2$, for any normed vector-valued function $f(x,y)$, if there exists a constant $L$ in the codomain of $f$ such that
+\[\lim_{r\to 0}f(r\cos\theta,r\sin\theta)=L\]
+then
+\[\lim_{(x,y)\to(0,0)}f(x,y)=L.\]
+\sssc{Cylindrical coordinate method}
+In $\bbR^3$, for any normed vector-valued function $f(x,y,z)$, if there exists a constant $L$ in the codomain of $f$ such that
+\[\lim_{(\rho,z)\to(0,0)}f(\rho\cos\varphi,\rho\sin\varphi,z)=L\]
+then
+\[\lim_{(x,y,z)\to(0,0,0)}f(x,y,z)=L.\]
+\sssc{Spherical coordinate method}
+In $\bbR^3$, for any normed vector-valued function $f(x,y,z)$, if there exists a constant $L$ in the codomain of $f$ such that
+\[\lim_{r\to 0}f(r\sin\theta\cos\phi,r\sin\theta\sin\phi,r\cos\theta)=L\]
+then
+\[\lim_{(x,y,z)\to(0,0,0)}f(x,y,z)=L.\]
+\sssc{Generalized polar coodinate method}
+Suppose there is a coordinate of $n$ real number components that can express each point in $\bbR^n$ uniquely, for any fixed point $\mb{a}=(a_1,a_2,\ldots,a_n)\in\bbR^n$, if the coordinate is such that, for any point $\mb{x}=(x_1,x_2,\ldots,x_n)$ in a neighborhood of $\mb{a}$, for any real numbers $y_1,y_2,\ldots,y_m$ with $m\leq n$ such that $\mb{y}=(x_1+y_1,x_2+y_2,\ldots,x_m+y_m,x_{m+1},x_{m+2},\ldots,x_n)$ is a point in $\bbR^n$,
+\[\norm{\mb{x}-\mb{a}}=\norm{\mb{y}-\mb{a}},\]
+then for any normed vector-valued function $f$ defined on some neighborhood of $\mb{a}$, if there exists a constant $L$ in the codomain of $f$ such that
+\[\lim_{(x_{m+1},x_{m+2},\ldots,x_n)\to(a_{m+1},a_{m+2},\ldots,a_n}f(\mb{x})=L\]
+then,
+\[\lim_{\mb{x}\to\mb{a}}f(\mb{x})=L.\]
+\sssc{Homogenous decomposition}
+For a neighborhood $D$ of a point $\mb{a}\in\bbR^n$ and functions $P,Q\colon D\subseteq\bbR^n\to\bbR$ that are analytic at some neighborhood of $\mb{a}$,
+\b
+\item If $Q(\mb{a})\neq 0$,
+\[\lim_{\mb{x}\to\mb{a}}\frac{P(\mb{x})}{Q(\mb{x})}=\frac{P(\mb{a})}{Q(\mb{a})}.\]
+\item If $Q(\mb{a})=0$ and $P(\mb{a})\neq 0$,
+the limit doesn't exists.
+\item If $P(\mb{a})=Q(\mb{a})=0$, use homogenous decomposition. Let
+\[P_i(\mb{x})=\frac{P^{(i)}(\mb{a})}{i!}\mb{x}^i,\]
+\[Q_i(\mb{x})=\frac{Q^{(i)}(\mb{a})}{i!}\mb{x}^i,\]
+which are homogeneous. Suppose that $k$ is the smallest integer such that $P_k$ is nonzero, and $m$ is the smallest integer such that $Q_m$ is nonzero.
+\[\ba
+\lim_{\mb{x}\to\mb{a}}\frac{P(\mb{x})}{Q(\mb{x})}&=\lim_{\mb{x}\to\mb{a}}\frac{P_k(\mb{x}-\mb{a})}{Q_m(\mb{x}-\mb{a})}\\
+&=\lim_{\mb{x}\to\mb{0}}\norm{\mb{x}}^{k-m}\frac{P_k\qty(\hat{\mb{x}})}{Q_m\qty(\hat{\mb{x}})}
+\ea\]
+\bit
+\item If $k-m>0$, the limit is $0$.
+\item If $k-m<0$, the limit doesn't exists.
+\item If $k=m$, if
+\[\frac{P_k\qty(\hat{\mb{x}})}{Q_m\qty(\hat{\mb{x}})}\]
+is a constant $L\in\bbR^m$, then the limit is $L$; otherwise the limit doesn't exist.
+\eit
+\eit

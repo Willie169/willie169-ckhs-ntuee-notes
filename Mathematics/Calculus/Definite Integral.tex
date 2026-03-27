@@ -1,0 +1,233 @@
+\section{Definte Integration (定積分)}
+\subsection{Notation}
+The integral of a function $f(x)$ with domain being a subset of $\bbR$, called integrand (被積函數), with respect to $x$, called integration variable (積分變數), from $a$ to $b$, which the open interval between $a$ and $b$ is called the domain of integration (積分域) or interval of integration (積分區間) and $a,b$ are called limits of integration (積分極限 or 積分上下限), is denoted as
+\[\int_a^bf(x)\dd{x},\]
+in which when $a>b$, the integral is defined as
+\[\int_a^bf(x)\dd{x}\coloneq-\int_b^af(x)\dd{x}.\]
+
+The integral of a function $f(\omega)$ with respect to $\omega$ over $\Omega$, called the domain of integration and which the limit points of $\Omega$ are called are called limits of integration (積分極限), is denoted as
+\[\int_{\Omega}f(\omega)\dd{\omega}.\]
+\subsection{(Proper) Riemann integral (黎曼積分) and Darboux integral (達布積分)}
+\subsubsection{Premise}
+(Proper) Riemann integral and Darboux integral are two equivalant definitions of definite integral of functions over compact intervals of $\mathbb{R}$ to $\mathbb{R}$.
+\subsubsection{Partition of an interval}
+A partition $P(x, n)$ of a compact interval $[a,b]$ is a finite sequence of numbers of the form
+\[P(x, n):=\{x_i\colon x_0=a\land x_n=b\land\forall 1\leq i<j\leq n\colon x_i<x_j\}_{i=0}^n.\]
+
+Each $[x_i, x_{i+1}]$ is called a subinterval of the partition. The length of a closed interval $[c,d]$ is defined as $d-c$. The mesh or norm of a partition is defined as
+\[\max_i\left(x_{i+1}-x_{i}\right)\]
+for every integer $i\in [0,n-1]$.
+
+A tagged partition $P(x,n,\xi)$ of a interval $(a,b)$ is a partition together with a choice of a sample point or tag within each of all $n$ subintervals, that is, numbers $\{\xi_i\}_{i=0}^{n-1}$ with $\xi_i\in [x_i,x_{i+1}]$ for each integer $i\in [0,n-1]$. The mesh of a tagged partition is the same as that of an ordinary partition.
+
+Suppose that two tagged partitions $P(x,n,\xi)$ and $Q(y,m,\zeta)$ are both partitions of the interval $[a,b]$. We say that $Q(y,m,\zeta)$ is a refinement of $P(x,n,\xi)$ if for each integer $i\in [0,n-1]$, there exists an integer $r(i)\in [0,m-1]$ such that $x_i = y_{r(i)}$ and that $\forall i\in [0,n-1]\colon\exists j\in [r(i),r(i + 1)] \text{\ s.t.\ }\xi_i = \zeta_j$. That is, a tagged partition breaks up some of the subintervals and adds sample points where necessary, "refining" the accuracy of the partition.
+
+We can turn the set of all tagged partitions into a directed set by saying that one tagged partition is greater than or equal to another if the former is a refinement of the latter.
+\subsubsection{Riemann sum}
+Let $f$ be a real-valued function defined on a interval $[a,b]$. The Riemann sum of $f$ over a tagged partition $P(x,n,\xi)$ of $[a,b]$ is defined to be
+\[R(f,P):=\sum_{i=0}^{n-1}f(\xi_i)\left(x_{i+1}-x_i\right).\]
+Each term in the sum is the product of the value of the function at a given point and the length of an interval. Consequently, each term represents the signed area of a rectangle with height $f(\xi_i)$ and width $x_{i + 1} − x_i$. Thus the Riemann sum is the signed area of all the rectangles.
+\subsubsection{Darboux sum}
+Let $f$ be a real-valued function defined on a interval $[a,b]$. The lower and upper Darboux sums, $L(f,P)$ and $U(f,P)$, of $f$ over a partition $P(x,n)$ of $[a,b]$, are two specific Riemann sums of which the tags are chosen to be the infimum and supremum (respectively) of $f$ on each subinterval:
+\[\begin{aligned}
+L(f,P)&:=\sum_{i=0}^{n-1}\inf_{\xi\in [x_i,x_{i+1}]}f(\xi)(x_{i+1}-x_i),\\
+U(f,P)&:=\sum_{i=0}^{n-1}\sup_{\xi\in [x_i,x_{i+1}]}f(\xi)(x_{i+1}-x_i).
+\end{aligned}\]
+\subsubsection{Riemann left, right, and midpoint sums}
+Let $f$ be a real-valued function defined on a interval $[a,b]$. The Riemann left (aka left-sided), right (aka right-sided), and midpoint sums, $R_L(f,P)$, $R_R(f,P)$, and $R_M(f,P)$, of $f$ over a partition $P(x,n)$ of $[a,b]$, are three specific Riemann sums of which the tags are chosen to be the left endpoint, right endpoint, and midpoint (respectively) on each subinterval:
+\[\begin{aligned}
+R_L(f,P)&:=\sum_{i=0}^{n-1}f\qty(x_i)(x_{i+1}-x_i),\\
+R_L(f,P)&:=\sum_{i=0}^{n-1}f\qty(x_{i+1})(x_{i+1}-x_i),\\
+R_M(f,P)&:=\sum_{i=0}^{n-1}f\qty(\frac{x_i+x_{i+1}}{2})(x_{i+1}-x_i).
+\end{aligned}\]
+\subsubsection{Riemann sums over partition that divides interval equally}
+A Riemann sum of $f$ over a tagged partition $P(x,n,\xi)$ that divides an interval into subintervals of equal length is denoted as $R_n(f)$.
+
+A lower Darboux sum, an upper Darboux sum, a Riemann left sum, a Riemann right sum, and a Riemann midpoint sum of $f$ over a partition $P(x,n)$ that divides an interval into subintervals of equal length are sometimes denoted as $L_n(f),U_n(f),{R_L}_n(f),{R_R}_n(f)$, and ${R_M}_n(f)$ respectively.
+\subsubsection{Riemann integral}
+Let $f$ be a real-valued function defined on a interval $[a,b]$. The Riemann integral of $f$ on $[a,b]$ exists and equals $s$ if for all $\varepsilon > 0$, there exists $\delta > 0$ such that for any tagged partition $P(x,n,\xi)$ whose mesh is less than $\delta$,
+\[\abs{R(f,P)-s}<\varepsilon .\]
+\subsubsection{Darboux integral}
+Let $f$ be a real-valued function defined on a interval $[a,b]$. The Darboux integral of $f$ on $[a,b]$ exists and equals $s$ if for all $\varepsilon > 0$, there exists $\delta > 0$ such that for any partition $P$ whose mesh is less than $\delta$,
+\[\abs{U(f,P)-s}<\varepsilon \land \abs{L(f,P)-s}<\varepsilon.\]
+\subsection{Extensions of Riemann integral}
+\subsubsection{Improper (Riemann) integral (瑕（黎曼）積分)}
+An integral $\int _{a}^{b}f(x)\dd{x}$ is an improper integral if it satisfies one or more of the below conditions:
+\ben
+\item $a=-\infty$,
+\item $b=\infty$,
+\item $f(x)$ is unbounded or undefined somewhere in $[a,b]$.
+\een
+
+The improper integrals are defined by limits recursively as:
+\bit
+\item For $a=-\infty$:
+\[\int _{-\infty }^bf(x)\dd{x}=\lim _{a\to -\infty }\int _{a}^{b}f(x)\dd{x},\]
+called improper integrals of type 1.
+\item For $b=\infty$:
+\[\int _{a}^{\infty }f(x)\dd{x}=\lim _{b\to \infty }\int _{a}^{b}f(x)\dd{x},\]
+called improper integrals of type 1.
+\item For $f(x)$ that is unbounded or undefined at $a$:
+\[\int_a^bf(x)\dd{x}=\lim_{c\to a^+}\int_c^bf(x)\dd{x},\]
+called improper integrals of type 2.
+\item For $f(x)$ that is unbounded or undefined at $b$:
+\[\int_a^bf(x)\dd{x}=\lim_{c\to b^-}\int_a^cf(x)\dd{x},\]
+called improper integrals of type 2.
+\item For $f(x)$ that is unbounded or undefined at $c\in(a,b)$:
+\[\int _{a}^{b}f(x)\dd{x}=\lim_{t\to c^-}\int _{a}^{t}f(x)\dd{x}+\lim_{t\to c^+}\int _{t}^{b}f(x)\dd{x},\]
+called improper integrals of type 2.
+\eit
+In which if any of the terms diverge or is undefined, the improper integral diverges and is undefined; otherwise, the improper integral exists finitely and converges to a finite value.
+
+We say an improper integral of $f(x)$ over interval $I$ converges absolutely to $L$ iff the improper integral of $\abs{f(x)}$ over $I$ converges to $L$. If an improper integral is convergent but not convergent absolutely, we say it is convergent conditionally.
+\subsubsection{Cauchy principal value (柯西主值) or PV integral}
+The Cauchy principal value or PV integral, denoted as p.v., is a weaker notion of convergence, defined by taking symmetric limits. 
+
+The p.v. of $\int _{-\infty}^{\infty}f(x)\dd{x}$, denoted as $\PV{\int_{-\infty}^{\infty} f(x)\dd{x}}$ or $\pv{\int_{-\infty}^{\infty} f(x)\dd{x}}$, is defined with:
+\[\PV{\int_{-\infty}^{\infty} f(x)\dd{x}}\coloneq\lim_{R\to\infty} \int_{-R}^{R} f(x)\dd{x},\]
+if the limit exists.
+
+The p.v. of $\int _{a}^{b}f(x)\dd{x}$, in which $f(x)$ is unbounded or undefined at $c\in (a,b)$, denoted as $\PV{\int_{a}^{b} f(x)\dd{x}}$ or $\pv{\int_{a}^{b} f(x)\dd{x}}$, is defined with:
+\[\PV{\int_{a}^{b} f(x)\dd{x}}\coloneq\lim_{\varepsilon\to 0}\qty(\int_a^{c-\varepsilon}f(x)\dd{x}+\int_{c+\varepsilon}^bf(x)\dd{x}),\]
+if the limit exists.
+
+If an improper integral converges, the p.v. of it converges.
+\subsection{Riemann–Stieltjes integral}
+\subsubsection{Definition}
+Below, we will define the Riemann–Stieltjes integral of a function $f\colon X\subseteq\bbR\to\bbR$ over a BV function $g\colon Y\subseteq\bbR\to\bbR$ over an interval $[a,b]\subseteq (X\cap Y)$, denoted as
+\[\int_{x=a}^bf(x)\dd{g(x)},\]
+or
+\[\int_a^bf(x)\dd{g(x)}.\]
+The Riemann–Stieltjes sum of $f$ with respect to $g$ over a tagged partition $P(x,n,\xi)$ is defined as
+\[S(f,g,P):=\sum_{i=0}^{n-1}f(\xi_i)\left(g\qty(x_{i+1})-g(x_i)\right).\]
+The Riemann–Stieltjes integral
+\[\int_{x=a}^bf(x)\dd{g(x)}\]
+exists and equals $s$ if for all $\varepsilon > 0$, there exists $\delta > 0$ such that for any tagged partition $P(x,n,\xi)$ whose mesh is less than $\delta$,
+\[\abs{S(f,g,P)-s}<\varepsilon.\]
+\subsection{Extensions of Riemann–Stieltjes integral}
+An integral $\int_{x=a}^bf(x)\dd{g(x)}$ is an improper integral if it satisfies one or more of the below conditions:
+\ben
+\item $a=-\infty$,
+\item $b=\infty$,
+\item $f(x)$ is unbounded or undefined somewhere in $[a,b]$.
+\een
+The definition of improper integral and Cauchy principal value as extensions of the Riemann–Stieltjes integral are the same as those for the Riemann integral.
+\subsection{Lebesgue integral (勒貝格積分)}
+A definition of definite integral.
+\subsubsection{Premise}
+Let $(E,\Sigma,\mu)$ be a measure space with possibly signed measure $\mu$. Below, we will define the Lebesgue integral of measurable functions on $E$ to $\mathbb{R}\cup\{-\infty,\infty\}$.
+\subsubsection{Of an indicator functions}
+The integral of an indicator function $1_S$ of a measurable subset $S$ of $E$ is defined to be
+\[\int 1_{S}\,\mathrm{d}{\mu} =\mu (S).\]
+\subsubsection{Of a nonnegative simple function}
+A simple function $s$ is a finite real linear combinations of indicator functions of disjoint measurable subsets of $E$, that is,
+\[s\colon\sum_ka_k1_{S_k},\]
+where the coefficients $a_k$ are real numbers and $S_k$ are disjoint measurable sets. When the coefficients $a_k$ are positive real numbers, $s$ is called nonnegative.
+
+The integral of a nonnegative simple function $s=\sum_ka_k1_{S_k}$ over $E$ is defined to be
+\[\int_Es\,\mathrm{d}\mu=\sum_ka_k\int 1_{S_k}\,\mathrm{d}\mu=\sum_ka_k\mu(S_k),\]
+where this sum can be finite or $\infty$.
+
+The integral of a nonnegative simple function $s=\sum_ka_k1_{S_k}$ over a subset $B$ of $E$ is defined to be:
+\[\int_Bs\,\mathrm{d}\mu=\sum_ka_k\mu \qty(S_k\cap B).\]
+\subsubsection{Of a nonnegative measurable function}
+Let $f$ be a nonnegative measurable function on some measurable subset $B$ of $E$ into $\mathbb{R}\cup\{-\infty,\infty\}$. We define
+\[\int_Bf\,\mathrm{d}\mu=\sup\left\{\int_Bs\,\mathrm{d}\mu\mid\forall x\in B\colon 0\leq s(x)\leq f(x)\land s\text{\ is a nonnegative simple function}\right\}.\]
+\subsubsection{Of a measurable function}
+Let $f$ be a measurable function on some measurable subset $B$ of $E$ into $\mathbb{R}\cup\{-\infty,\infty\}$. We first define
+\[\begin{aligned}
+f^{+}(x)&=
+\begin{cases}
+f(x),\quad&\text{if\ }f(x)>0\\
+0,\quad &\text{otherwise}
+\end{cases},\quad\tx{and}\\
+f^{-}(x)&=
+\begin{cases}
+-f(x),\quad&\text{if\ }f(x)<0\\
+0,\quad&\text{otherwise}
+\end{cases}.
+\end{aligned}\]
+Note that both $f^+$ and $f^-$ are nonnegative and that
+\[f=f^+-f^-,\quad |f|=f^++f^-.\]
+Then we define the Lebesgue integral of $f$ to exist if
+\[ \min \left(\int f^{+}\,\mathrm{d}\mu ,\int f^{-}\,\mathrm{d}\mu \right)<\infty.\]
+In this case we define
+\[ \int f\,\mathrm{d}\mu =\int f^{+}\,\mathrm{d}\mu -\int f^{-}\,\mathrm{d}\mu.\]
+\subsubsection{Integrability}
+Let $f$ be a function on some measurable subset $B$ of $E$ into $\mathbb{R}\cup\{-\infty,\infty\}$.
+
+If
+\[\int |f|\,\mathrm {d} \mu <\infty ,\]
+we say that $f$ is Lebesgue integrable.
+\subsubsection{Connection with improper Riemann integral}
+An integral as Lebesgue integral is finite if it is either proper Riemann integrable or absolute convergent as improper Riemann integral, and the Lebesgue integral and proper or improper Riemann integral agree on the result.
+
+An integral as Lebesgue integral is not finite if it is conditionally convergent as improper Riemann integral.
+\subsubsection{$L^p$ spaces ($L^p$ 空間) or Lebesgue space}
+For set $X$ and measure $\mu$, the vector space $L^p(X,\mu)$ consists of the equivalence class under the equivalence relation of equality $\mu$-a.e. of measurable functions $f\colon X\to\bbR$ (or $\bbC$) that
+\[\int_X\abs{f(x)}^p\dd{\mu(x)}<\infty.\]
+For $1\leq p<\infty$, define $L^p$ norm:
+\[\|f\|_p\coloneq\qty(\int_X\abs{f(x)}^p\dd{\mu(x)})^{1/p}.\]
+$L^p(X,\mu)$ is also denoted as $L^p(X)$ when $\mu$ is clear.
+\subsubsection{Locally integrable $L^p$ space}
+For set $X$ and measure $\mu$, the vector space $L^p_{\tx{loc}}(X,\mu)$ consists of the equivalence class under the equivalence relation of equality $\mu$-a.e. of measurable functions $f\colon X\to\bbR$ (or $\bbC$) that for all compact subset $K\subseteq X$, $f\in L^p(K,\mu)$. $L^p_{\tx{loc}}(X,\mu)$ is also denoted as $L^p_{\tx{loc}}(X)$ when $\mu$ is clear.
+\subsection{Total variation, functions of bounded variation (BV functions), and functions of locally bounded variation (locally BV functions)}
+\subsubsection{Of real functions}
+Let $f\colon X\subseteq\bbR\to\bbR$ be a function. The total variation of $f$ over interval $[a,b]\subseteq X$ is
+\[V_a^b(f)=\sup_{P(x,n_p)\in\mathcal{P}}\sum_{i=0}^{n_p-1}\abs{f\qty(x_{i+1})-f\qty(x)},\]
+where $\mathcal{P}$ is the set of all partitions of $f$ over $[a,b]$.
+
+$f$ is called of bounded variation or called a (globally) BV function over $[a,b]$ iff $V_a^b(f)$ is finite.
+
+$f$ is called of locally bounded variation or called a locally BV function over an open interval $(a,b)$ iff $V_c^d(f)$ is finite for all $[c,d]\in (a,b)$.
+
+The space of all (globally) BV functions over $[a,b]$ is denoted as $\operatorname{BV}([a,b])$. The space of all locally BV functions over $(a,b)$ is denoted as
+\[\operatorname{BV}_{\tx{loc}}((a,b)).\]
+
+If $f$ is monotone on $[a,b]$, it is BV over $[a,b]$.
+\subsubsection{Of real fields}
+PLACEHOLDER
+\subsubsection{In measure theory}
+PLACEHOLDER
+\subsubsection{Space of BV functions}
+PLACEHOLDER (is a Banach space)
+\subsubsection{Mesure induced by function}
+For a BV function $g\colon(a,b)\subseteq\bbR\to\bbR$, the signed measure $\mu_g(x)$ induced by $g$, is defined for any interval $(c,d)\subseteq (a,b)$, as
+\[\mu_g((c,d))=g(d)-g(c).\]
+If $g$ is non-decreasing, then $\mu_g$ is non-negative. If $g$ is non-increasing, then $\mu_g$ is non-positive.
+\subsubsection{Function induced by measure}
+For a signed measure $\mu$ defined on any measurable set $I$ that is a subset of an interval $(a,b)$, the function $g$ induced by the measure with respect to $a$ is defined, for any $c\in (a,b)$, as
+\[g(c)=\mu((a,c)).\]
+If $\mu$ is non-positive, $g$ is non-increasing. If $\mu$ is non-negative, $g$ is non-decreasing.
+\subsubsection{Jordan decomposition}
+The Jordan decomposition $g^+$ and $g^-$, which are non-decreasing, of a BV function $g$ is defined as the functions induced by the Jordan decomposition $\mu^+$ and $\mu^-$ of the signed measure $\mu_g$ induced by $g$.
+\subsection{Lebesgue–Stieltjes integral}
+\subsubsection{Definition}
+Below, we will define the Lebesgue–Stieltjes integral of a function $f\colon X\subseteq\bbR\to\bbR$ over a BV function $g\colon Y\subseteq\bbR\to\bbR$ over an interval $[a,b]\subseteq (X\cap Y)$, denoted as
+\[\int_{x=a}^bf(x)\dd{g(x)},\]
+or
+\[\int_a^bf(x)\dd{g(x)}.\]
+The Lebesgue–Stieltjes integral of $f$ with respect to $g$ over $[a,b]$ is defined as the Lebesgue integral
+\[\int_a^bf(x)\dd{\mu_g(x)}.\]
+\subsubsection{Connection with improper Riemann–Stieltjes integral}
+An integral as Lebesgue–Stieltjes integral is finite if it is either proper Riemann–Stieltjes integrable or absolute convergent as improper Riemann–Stieltjes integral, and the Lebesgue–Stieltjes integral and proper or improper Riemann–Stieltjes integral agree on the result.
+
+An integral as Lebesgue–Stieltjes integral is not finite if it is conditionally convergent as improper Riemann–Stieltjes integral.
+\subsection{Bochner integral (博赫納積分)}
+\subsubsection{Premise}
+Let $(E,\Sigma ,\mu )$ be a measure space and $X$ be a Banach space with norm $\|\cdot\|_X$. Below, we will define the Bochner integral of measurable functions on $E$ to $X$.
+\subsubsection{Of an indicator functions}
+The integral of an indicator function $1_S$ of a measurable subset $S$ of $E$ is defined to be
+\[\int 1_{S}\,\mathrm{d}{\mu} =\mu (S).\]
+\subsubsection{Of a simple function}
+PLACEHOLDER
+\subsubsection{Of a measurable function}
+PLACEHOLDER
+\subsubsection{Bochner spaces (博赫納空間)}
+Let $(E,\Sigma,\mu)$ be a measure space and $X$ be a topological space. 
+
+The Bochner space $L^p(E;X)$ with $p\in\mathbb{N}\cup\{\infty\}$ is defined to be the quotient space of the space of all Bochner measurable functions $f(t)\colon E\to X$ such that the norm $\|f(t)\|_{L^p(E;X)}$ of it, defined with
+\[\|f(t)\|_{L^p(E;X)}\coloneq\left(\int_E\|f(t)\|_X^{\phantom{X}p}\,\mathrm{d}\mu\right)^{1/p},\quad p\in\mathbb{N},\]
+and
+\[\|f(t)\|_{L^{\infty }(E;X)}\coloneq\operatorname{ess\,sup}_{t\in E}\|f(t)\|_{X},\]
+is finite by the equivalence relation of equality almost everywhere.

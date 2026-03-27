@@ -1,0 +1,56 @@
+\section{Continuity Theorems}
+\subsection{Basic laws}
+\subsubsection{Arithmetic Laws}
+If $f$ and $g$ are continuous at $a$ and $c$ is a constant, then the following functions are also continuous at $a$:
+\[f+g;\quad f-g;\quad cf;\quad fg;\]
+\[\frac{f}{g}\text{\ if\ }g(a)\neq 0.\]
+\subsubsection{Composte Laws}
+If $g$ is continuous at $a$ and $f$ is continuous at $g(a)$, then the composite function $f\circ g$ is continuous at $a$.
+\subsection{Intermediate Value Theorem (IVT) (中間值定理)}
+\subsubsection{For real functions}
+Let $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ be a function, then for any interval $[a,b]\subseteq I$ such that $f$ is continuous on $[a,b]$ and $f(a)\neq f(b)$, $N$ is strictly between $f(a)$ and $f(b)$ implies there exists $c\in (a,b)$ such that $f(c)=N$.
+\begin{proof}
+Without loss of generality, assume $f(a)<N<f(b)$.
+
+Consider the set
+\[S=\{x\in [a,b]\mid f(x)\leq N\}.\]
+Since $f(a)<N$, $a\in S$; since $f(b)>N$, $b\notin S$. So $S$ is nonempty and bounded-above by $b$.
+
+Let $c=\sup S$. We claim that $f(c)=N$. Argue by contradiction.
+
+Assume $f(c)<N$. By continuity, there exists $\delta>0$ such that for all $x\in (c,c+\delta)\cap [a,b]$, $|f(x)-f(c)|<N-f(c)$. So $f(x)<N$ for some $x>c$. Contradicting that $c$ is the least upper bound.
+
+Assume $f(c)>N$. By continuity, there exists $\delta>0$ such that for all $x\in (c-\delta,c)\cap [a,b]$, $|f(x)-f(c)|<f(c)-N$. So $f(x)>N$ for some $x<c$. Contradicting that $c$ is the least upper bound.
+
+Therefore, $f(c)=N$.
+\end{proof}
+\subsubsection{For functions between topological spaces}
+Let $X$ and $Y$ be topological spaces and function $f\colon I\subseteq X\to Y$ be continuous on a subset $J$ of $I$, then for any connected subset $K$ of $J$, $f(K)$ is a connected subset of $Y$.
+
+Let $X$ and $Y$ be topological spaces and function $f\colon I\subseteq X\to Y$ be continuous on a subset $J$ of $I$, then for any path-connected subset $K$ of $J$, $f(K)$ is a path-connected subset of $Y$.
+\subsection{Monotone function have at most countably many discontinuities}
+Suppose a real-valued function $f$ is monotone on an interval $(a,b)$, then it has at most countably many discontinuities on $(a,b)$.
+\bpr
+Suppose $f$ is non-decreasing on $(a,b)$. For any $x\in(a,b)$, $f(x^-)$ and $f(x^+)$ both exist and $f(x^-)\leq f(x)\leq f(x^+)$. For any discontinuity $x$, assign a rational index $r_x\in(f(x^-),f(x^+))$. This is always possible since $(f(x^-),f(x^+))$ is nonempty and $\bbQ$ is dense in $\bbR$. The cardinality of the set of cardinality is the same as that of the set of the indices, which is at most $|\bbQ|=\aleph_0$.
+\epr
+\subsection{Uniform continuity implies continuity}
+\subsubsection{For functions between metric spaces}
+PLACEHOLDER
+\subsubsection{For functions between topological vector spaces}
+PLACEHOLDER
+\subsection{Absolute continuity implies uniform continuity for functions from an interval to a metric space}
+PLACEHOLDER
+\subsection{Lipschitz continuity theorems}
+\subsubsection{Lipschitz continuity implies absolute continuity for functions from an interval to a metric space}
+PLACEHOLDER
+\subsubsection{Local Lipschitz continuity on compact set implies global Lipschitz continuity on it}
+PLACEHOLDER
+\subsubsection{Banach fixed-point theorem (巴拿赫不動點定理), contraction mapping theorem (壓縮映射定理), contraction principle, or Banach–Caccioppoli theorem}
+For any contraction mapping $T$ over a non-empty complete metric space $X$ with best contraction constant $K$, there must exist a unique fixed-point $x^*$ of $T$ in $X$, and for any $x\in X$, for any sequence $\langle x_n\rangle_{n\in \mathbb {N}_0}$ defined as
+\[\begin{cases}
+&x_0=x\\
+&x_n=T\qty(x_{n-1}),n\in\mathbb{N}
+\end{cases},\]
+\[\lim_{n\to \infty }x_{n}=x^{*}\]
+and
+\[d(x_n,x^*)\leq\frac{K^n}{1-K}d(x_1,x_0).\]
