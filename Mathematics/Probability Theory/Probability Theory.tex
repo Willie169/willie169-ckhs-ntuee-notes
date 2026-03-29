@@ -172,15 +172,15 @@ Define
 \sssc{Discrete random variable}
 A discrete random variable is a real random variable with a countable sample space.
 \sssc{Continuous random variable}
-A continuous random variable is a real random variable with a uncountable sample space.
+A continuous random variable is a real random variable with continuous CDF.
 \ssc{Discrete Random Variables}
 \sssc{Probability mass function (PMF) or probability function of discrete random variable}
-For a discrete random variable or probability distribution of discrete random variable $X$ with target sample space $\Omega_t=\{a_1,a_2,\ldots\}$, we define the probability mass function of $X$ as
+For a discrete random variable $X$ with target sample space $\Omega_t=\{a_1,a_2,\ldots\}$, we define the probability mass function of $X$ as
 \[p_X(a_i)=P(X=a_i)\]
 for each $a_i\in\Omega_t$.
 
 It has the following properties:
-\[p_X(a_i\ge 0,\quad\forall a_i\in\Omega_t.\]
+\[p_X(a_i)\ge 0,\quad\forall a_i\in\Omega_t.\]
 \[\sum_{a_i\in\Omega_t}p_X(a_i)=1.\]
 That the PMF of $X$ is $p$ is denoted as $X\sim p$.
 \sssc{PMF determines CDF}
@@ -189,7 +189,27 @@ For a discrete random variable $X$ with PMF $p_X$, the CDF $F_X$ can be expresse
 for all $x\in\bbR$.
 \ssc{Continuous Random Variables}
 \sssc{Probability density function (PDF) or probability function of continuous random variable}
-The probability density function, denoted as $f(x)$, is a function of which the domain is the range of a continuous random variable and the codomain is $[0,1]$, indicating the probability of events, such that the probability sum of the probability density function of all elements in its domain is 1.
+For a continuous random variable $X$, we define the probability density function of $X$ as
+\[f_X(x)=\dv{}{x}F_X(x)\]
+for all $x$ such that RHS exists.
+
+It has the following properties:
+\[f_X(x)\ge 0.\]
+\[\int_{-\infty}^{\infty}f_X(x)\dd{x}=1.\]
+That the PDF of $X$ is $p$ is denoted as $X\sim p$.
+\sssc{PDF determines CDF}
+For a continuous random variable $X$ with PDF $f_X$, the CDF $F_X$ can be expressed in terms of the PMF as
+\[F_X(x)=\int_{-\infty}^xf_x(t)\dd{t}\]
+for all $x\in\bbR$.
+
+
+
+
+
+
+
+
+
 \subsection{(Mathematical) Expected Value/Expectation/Expectancy (期望值) or Mean (平均值)}
 \sssc{For discrete random variables}
 For a discrete random variable \( X \) with probability mass function \( P(x) \), the expected value, $E[X]$ or $E(X)$, or mean $\mu_X$, is given by:
