@@ -123,7 +123,7 @@ Suppose a system $W$ consists of components $W_1,W_2,\ldots,W_n$ in series with 
 \sssc{Components in parallel}
 Suppose a system $W$ consists of components $W_1,W_2,\ldots,W_n$ in parallel with probability to work $p_1,p_2,\ldots,p_n$, then the probability for the system to work is
 \[P(W)=1-\prod_{i=1}^n(1-p_i).\]
-\ssc{Random variable (隨機變數)}
+\ssc{Random variable (RV) (隨機變數)}
 \sssc{Random variable}
 For a probability spaces $(\Omega_s,\calF_s,P_s)$ and a measurable space $(\Omega_t,\calF_t)$, a random variable $X$ is a measurable function $X\colon\Omega_s\to\Omega_t$ such that for each $E\subseteq\calF_t$, the preimage $X^{-1}(E)\in\calF_s$, and the induced probability spaces $(\Omega_t,\calF_t,P_t)$ of target sample space $\Omega_t$, target event space, and $P_t(E)\coloneq P_s(X^{-1}(E))$. It is often the case that $\calF_t$ is the Borel $\text{\textsigma}$-algebra of $\Omega_t$.
 \sssc{Real(-valued) random variable}
@@ -131,6 +131,9 @@ A random variable is a real(-valued) random variable if $\Omega_t\subseteq\bbR$ 
 \sssc{Cumulative distribution function (CDF)}
 The cumulative distribution function (CDF) of a real random valuable $X$ is defined as
 \[F_X(x)\coloneq P(X\le x).\]
+\sssc{CDF difference theorem}
+For $a\ge b$,
+\[F_X(b)-F_X(a)=P(X\in(a,b]).\]
 \sssc{Non-decreasing property of CDF}
 A CDF is non-decreasing.
 \bpr
@@ -174,8 +177,8 @@ A discrete random variable is a real random variable with a countable sample spa
 \sssc{Continuous random variable}
 A continuous random variable is a real random variable with continuous CDF.
 \ssc{Discrete Random Variables}
-\sssc{Probability mass function (PMF) or probability function of discrete random variable}
-For a discrete random variable $X$ with target sample space $\Omega_t=\{a_1,a_2,\ldots\}$, we define the probability mass function of $X$ as
+\sssc{Probability mass function (PMF)}
+For a discrete random variable $X$ with target sample space $\Omega_t=\{a_1,a_2,\ldots\}$, the probability mass function of $X$, denoted as $p_X$ or $P_X$, is defined as
 \[p_X(a_i)=P(X=a_i)\]
 for each $a_i\in\Omega_t$.
 
@@ -188,8 +191,8 @@ For a discrete random variable $X$ with PMF $p_X$, the CDF $F_X$ can be expresse
 \[F_X(x)=\sum_{a_i\le x}p_X(a_i)\]
 for all $x\in\bbR$.
 \ssc{Continuous Random Variables}
-\sssc{Probability density function (PDF) or probability function of continuous random variable}
-For a continuous random variable $X$, we define the probability density function of $X$ as
+\sssc{Probability density function (PDF)}
+For a continuous random variable $X$, the probability density function of $X$, denoted as $f_X$, is defined as
 \[f_X(x)=\dv{}{x}F_X(x)\]
 for all $x$ such that RHS exists.
 
@@ -201,13 +204,6 @@ That the PDF of $X$ is $p$ is denoted as $X\sim p$.
 For a continuous random variable $X$ with PDF $f_X$, the CDF $F_X$ can be expressed in terms of the PMF as
 \[F_X(x)=\int_{-\infty}^xf_x(t)\dd{t}\]
 for all $x\in\bbR$.
-
-
-
-
-
-
-
 
 
 \subsection{(Mathematical) Expected Value/Expectation/Expectancy (期望值) or Mean (平均值)}
@@ -255,7 +251,9 @@ If $X$ is discrete,
 \[H(Y)=\begin{cases}H(X),\quad &a\neq 0\\0,\quad &a=0\end{cases};\]
 if $X$ is continuous,
 \[H(Y)=\begin{cases}H(X)+\log|a|,\quad &a\neq 0\\0,\quad &a=0\end{cases}.\]
-\subsection{Discrete Random Variables}
+
+
+\subsection{Families of Discrete Random Variables}
 \sssc{Bernoulli random variable}
 A Bernoulli trial (伯努力試驗) is an experiment with exactly two possible outcomes, "success" and "failure". The PMF of Bernoulli random variable $X$ $X\sim\operatorname{Bern}(p)$, read as $X$ is Bernoulli distributed with parameter $p$, is with target sample space $\{0,1\}$ and defined as
 \[p_X(x)=\bcs p,\quad&x=1\\1-p,\quad&x=0\ecs.\]
@@ -341,12 +339,21 @@ The CDF is
 \[F_X(k)=\sum_{i=r}^{\lfloor k\rfloor}\binom{i-1}{r-1}p^r(1-p)^{i-r}.\]
 \sssc{Poisson random variable}
 A Poisson trial is counts the number of independent events that occur in a fixed interval with a known constant mean. The PMF of Poisson random variable $X$ $X\sim\operatorname{Poisson}(\lambda)$, read as $X$ is Poisson distributed with parameter $\lambda$, is with target sample space $\bbN_0$ and defined as
-\[p_X(k)=\frac{\lambda^ke^{-\lambda}}{k!}.\]
+\[p_X(k)=\frac{\lambda^ke^{-\lambda}}{k!}, x\in\bbN 0\otherwise.\]
 The CDF is
 \[F_X(k)=e^{-\lambda}\sum_{i=0}^{\lfloor k\rfloor}\frac{\lambda^i}{i!}.\]
 \sssc{Poisson limit of binomials}
 For fixed $\lambda>0$, for every integer $n>\lambda$, let $Q_n$ denote the binomial PMF with parameters $n$ anf $p=\frac{\lambda}{n}$. Then, for every $k\in\bbN$, $\lim_{n\to\infty}Q_n(k)=Q(k)$, where $Q$ is the Poisson PMF with parameter $\lambda$.
-\ssc{Continuous Random Variables}
+\sssc{Discrete uniform random variable}
+A discrete uniform $(k,l)$ random variable, read $X$ is uniformly distributed between $k$ and $l$ has PMF
+\[P_X(x)=\bcs\frac{1}{l-k+1},\quad&x\in\bbN\cap[k,l]\\0&\otherwise\ecs.\]
+where $k,l\in\bbN$ and $k<l$.
+\ssc{Families of Continuous Random Variables}
+\sssc{Uniform random variable}
+A uniform random variable $X$ is a continuous random variable that has a constant probability density function over a specified interval $(a,b)$ and $0$ elsewhere, denoted as $X\sim\operatorname{Unitform}(a,b)$ and read $X$ is uniformly distributed on the interval $(a,b)$. The PDF of it can be expressed as
+\[f_X(x)=\bcs\frac{1}{b-a},\quad&a<x<b\\0,\quad&\tx{otherwise}\ecs.\]
+The CDF of it can be expressed as
+\[F_X(x)=\bcs0,\quad&x<a\\\frac{x-a}{b-a},\quad&a\le x<b\\1,\quad&x\ge b\ecs.\]
 \sssc{Normal distribution (常態分布/正態分布)/Gaussian distribution (高斯分布)}
 The general normal distribution or Gaussian distribution given by mean $\mu$ and standard deviation $\sigma$ is a continuous probability distribution for a real-valued random variable defined by the probability density function:
 \[f(x|\mu,\sigma^2)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}.\]
@@ -356,7 +363,7 @@ where $\operatorname{erf}$ is the error function.
 \[\text{Mode}(x)=\mu\]
 \[\text{Median}(x)=\mu\]
 \[H(x)=\frac{1}{2}\log\qty(2\pi e\sigma^2).\]
-If the random variable $X$ follows the general normal distribution given by mean $\mu$ and standard deviation $\sigma$, we write $X\sim\mathcal{N}(\mu,\sigma^2)$.
+If the random variable $X$ follows the general normal distribution given by mean $\mu$ and standard deviation $\sigma$, we write $X\sim\mathcal{N}(\mu,\sigma^2)$ and read $X$ is Gaussian distributed with mean $\mu$ and variance $\sigma^2$.
 
 The standard normal distribution or unit normal distribution is the normal distribution given by mean $\mu=0$ and standard deviation $\sigma=1$.
 \begin{itemize}
@@ -369,4 +376,29 @@ The standard normal distribution or unit normal distribution is the normal distr
 \item CDF of general normal distribution:
 \[F(x|\mu,\sigma^2)=\Phi\left(\frac{x-\mu}{\sigma}\right).\]
 \end{itemize}
+\sssc{Exponential random variable}
+An exponential random variable models the time between events in a Poisson process, where events occur continuously and independently at a constant average rate. The PDF of it $X\sim\Exp(\lambda)$, read as $X$ is exponentially distributed with rate $\lambda$, can be expressed as
+\[f_X(x)=\bcs\lambda e^{-\lambda x},\quad&x\ge 0\\0\quad&\tx{otherwise}\ecs.\]
+The CDF is
+\[F_X(x)=\bcs0,\quad&x<0\\1-e^{\lambda x},\quad&x\ge 0\ecs.\]
+\sssc{Geometric converges to exponential}
+Let the average number of occurrence per unit time be $\lambda$. Let $X_n$ be the geometric random variable obtained by dividing a unit time into $n$ equal intervals and counting the number of intervals and counting the number of intervals until the first success, that is, $X_n\sim G\qty(\frac{\lambda}{n})$ and the occurrence time $T_n=\frac{X_n}{n}$, whose CDF can be expressed as, for $t\ge 0$,
+\[\qty(1-\frac{\lambda}{n})^{nt+1}\le 1-F_{T_n}(t)=\qty(1-\frac{\lambda}{n})^{\lceil nt\rceil+1}\le\qty(1-\frac{\lambda}{n})^{nt}.\]
+As $n\to\infty$, both sides converge to the CDF of $\Exp(\lambda)$, i.e.,
+\[\lim_{n\to\infty}F_{T_n}(t)=1-e^{-\lambda t}.\]
+\sssc{Erlang random variable}
+Model the sum of $k$ independent exponential random variables with the same $\lambda$. It's a special case of Gamma distribution. PDF $X\sim\Erlang(k,\lambda)$ read $X$ is Erlang distribued with shape $k$ and rate $\lambda$,
+\[f_X(x)=\bcs\frac{\lambda^kx^{k-1}e^{-\lambda x}}{(k-1)!},\quad&x\ge 0\\0,\quad&\tx{otherwise}\ecs.\]
+CDF:
+\[F_X(x)=\bcs0,\quad&x<0\\1-e^{-\lambda x}\sum_{i=0}^{k-1}\frac{(\lambda x)^i}{i!},\quad&x\ge 0\ecs.\]
+Exponential is a special case of Erlang with $k=1$.
+\sssc{Pascal converges to Erlang}
+Let the average number of occurrence per unit time be $\lambda$. Let $X_n$ be the Pascal random variable obtained by dividing a unit time into $n$ equal intervals and counting the number of intervals and counting the number of intervals until the $k$th success, that is, $X_n\sim\Pascal\qty(\frac{\lambda}{n})$ and the occurrence time $T_n=\frac{X_n}{n}$, whose CDF can be expressed as, for $t\ge 0$,
+\[\sum_{i=0}^{k-1}\binom{nt}{i}\qty(\frac{\lambda}{n})^i\qty(1-\frac{\lambda}{n})^{nt-i+1}\le 1-F_{T_n}(t)=\sum_{i=0}^{k-1}\binom{nt}{i}\qty(\frac{\lambda}{n})^i\qty(1-\frac{\lambda}{n})^{\lceil nt\rceil-i+1}\le\sum_{i=0}^{k-1}\binom{nt}{i}\qty(\frac{\lambda}{n})^i\qty(1-\frac{\lambda}{n})^{nt-i}.\]
+
+As $n\to\infty$, both sides converge to the CDF of $\Erlang(k,\lambda)$, i.e.,
+\[\lim_{n\to\infty}F_{T_n}(t)=1-e^{-\lambda t}\sum_{i=0}^{k-1}\frac{(\lambda t)^i}{i!}.\]
+\sssc{Gamma distribution}
+PLACEHOLDER
+
 \end{document}
