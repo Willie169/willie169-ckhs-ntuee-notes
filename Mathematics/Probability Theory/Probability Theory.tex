@@ -125,12 +125,13 @@ Suppose a system $W$ consists of components $W_1,W_2,\ldots,W_n$ in parallel wit
 \[P(W)=1-\prod_{i=1}^n(1-p_i).\]
 \ssc{Random variable (RV) (隨機變數)}
 \sssc{Random variable}
-For a probability spaces $(\Omega_s,\calF_s,P_s)$ and a measurable space $(\Omega_t,\calF_t)$, a random variable $X$ is a measurable function $X\colon\Omega_s\to\Omega_t$ such that for each $E\subseteq\calF_t$, the preimage $X^{-1}(E)\in\calF_s$, and the induced probability spaces $(\Omega_t,\calF_t,P_t)$ of target sample space $\Omega_t$, target event space, and $P_t(E)\coloneq P_s(X^{-1}(E))$. It is often the case that $\calF_t$ is the Borel $\text{\textsigma}$-algebra of $\Omega_t$.
+For a probability spaces $(\Omega_s,\calF_s,P_s)$ and a measurable space $(\Omega_t,\calF_t)$, a random variable $X$ is a measurable function $X\colon\Omega_s\to\Omega_t$ such that for each $E\subseteq\calF_t$, the preimage $X^{-1}(E)\in\calF_s$, and the induced probability spaces $(\Omega_t,\calF_t,P_t)$ of target sample space $\Omega_t$, target event space, and pushforward probability measure $P_t(E)\coloneq P_s(X^{-1}(E))$. It is often the case that $\calF_t$ is the Borel $\text{\textsigma}$-algebra of $\Omega_t$.
 \sssc{Real(-valued) random variable}
 A random variable is a real(-valued) random variable if $\Omega_t\subseteq\bbR$ and $\calF_t$ is the Borel $\text{\textsigma}$-algebra of $\Omega_t$.
 \sssc{Cumulative distribution function (CDF)}
 The cumulative distribution function (CDF) of a real random valuable $X$ is defined as
-\[F_X(x)\coloneq P(X\le x).\]
+\[F_X(x)\coloneq P(X\le x)=\int_{\Omega_t}\mb{1}_{(-\infty,x]}(t)\dd{P_t(t)}.\]
+$\bar{F}_X(x)$ denotes $1-F_X(x)$.
 \sssc{CDF difference theorem}
 For $a\ge b$,
 \[F_X(b)-F_X(a)=P(X\in(a,b]).\]
@@ -177,7 +178,8 @@ A discrete random variable is a real random variable with a countable sample spa
 \sssc{Continuous random variable}
 A continuous random variable is a real random variable with continuous CDF.
 \sssc{Simple random variable}
-A simple random variable is a discrete random variable $X$ such that there exist a finite partition $\{A_1,\ldots,A_n\}$ of sample space $\Omega$ such that $X=\sum_{i=1}^na_i\mb{1}_{A_i}$ where $a_i$ are real numbers and $\mb{1}_{A_i}$ is the indicator function of $A_i$.
+A simple random variable is a discrete random variable $X$ such that there exist a finite partition $\{A_1,\ldots,A_n\}$ of source sample space $\Omega$ such that $X=\sum_{i=1}^na_i\mb{1}_{A_i}$ where $a_i$ are real numbers and $\mb{1}_{A_i}$ is the indicator function of $A_i$, that is,
+\[\mb{1}_{A_i}(\omega)=\bcs1,\quad&\omega\in A_i\\0,\quad&\omega\notin A_i\ecs.\]
 \ssc{Discrete Random Variables}
 \sssc{Probability mass function (PMF)}
 For a discrete random variable $X$ with target sample space $\Omega_t=\{a_1,a_2,\ldots\}$, the probability mass function of $X$, denoted as $p_X$ or $P_X$, is defined as
@@ -206,28 +208,58 @@ That the PDF of $X$ is $p$ is denoted as $X\sim p$.
 For a continuous random variable $X$ with PDF $f_X$, the CDF $F_X$ can be expressed in terms of the PMF as
 \[F_X(x)=\int_{-\infty}^xf_x(t)\dd{t}\]
 for all $x\in\bbR$.
-
-
-\ssc{(Mathematical) Expected Value, Expectation (期望值), Average or Mean (平均值)}
+\ssc{(Mathematical) Expected Value, Expectation (期望值), or Mean (平均值)}
+\sssc{Definition}
+For a random variable $X$ on $(\Omega_s,\calF_s,P_s)$ with induced probability space $(\Omega_t,\calF_t,P_t)$, the expected value or expectation $E(X)$, $\bbE(X)$, $E[X]$, or $\bbE[X]$, or mean $\mu_X$, of it is defined as the Lebesgue integral
+\[E(X)=\int_{\Omega_s}X(\omega_s)\dd{P_s(\omega_s)}\]
+or equivalently,
+\[E(X)=\int_{\Omega_t}x\dd{P_t(x)}.\]
 \sssc{For discrete random variables}
-For a discrete random variable $X$ with target sample space $\Omega_t$ and probability mass function \( p_X(x) \), the expected value $E(X)$, $\bbE(X)$, $E[X]$, or $\bbE[X]$, or mean $\mu_X$, of it is defined as:
-\[E(X)=\mu_X=\sum_{x\in\Omega_t}xp_X(x).\]
+For a discrete random variable $X$ with target sample space $\Omega_t$ and probability mass function $p_X(x)$, the expected value or expectation $E(X)$, $\bbE(X)$, $E[X]$, or $\bbE[X]$, or mean $\mu_X$, of it is
+\[E(X)=\sum_{x\in\Omega_t}xp_X(x)\]
+if $\Omega_t$ is a finite set or $\Omega_t$ is a countably infinite set and
+\[\sum_{x\in\Omega_t}\abs{x}p_X(x)\]
+is convergent, and doesn't exist if $\Omega_t$ is a countably infinite set and
+\[\sum_{x\in\Omega_t}\abs{x}p_X(x)\]
+is divergent.
 \sssc{For continuous random variables}
-For a continuous random variable $X$ with probability density function $f_X(x)$, the expected value, $E(X)$, $\bbE(X)$, $E[X]$, or $\bbE[X]$, or mean $\mu_X$, of it is defined as:
-\[E(X)=\mu_X=\int_{-\infty}^{\infty}xf_X(x)\dd{x}.\]
+For a continuous random variable $X$ with probability density function $f_X(x)$, the expected value or expectation $E(X)$, $\bbE(X)$, $E[X]$, or $\bbE[X]$, or mean $\mu_X$, of it is
+\[E(X)=\int_{-\infty}^{\infty}xf_X(x)\dd{x}\]
+if it converges absolutely.
+\sssc{Linearity}
+For finitely or countably and convergent many random variables $(X_i)_{i\in I}$,
+\[E(\sum_{i\in I}a_iX_i)=\sum_{i\in I}a_iE(X_i).\]
+\sssc{Function of random variable theorem}
+\[E(f(X))=\int_{\Omega_t}f(x)\dd{P_t(x)}\]
+if $f\in L^1(\Omega_t,P_t)$.
+\sssc{Expected value from CDF}
+For a non-negative real random variable $X$,
+\[E(X)=\int_0^{\infty}P(X\ge x)\dd{x}=\int_0^{\infty}1-F_X(x)\dd{x}.\]
+\bpr
+\[\ba
+E(X)&=\int_{\Omega_t}x\dd{P_t(x)}\\
+&=\int_{\Omega_t}\int_0^x1\dd{t}\dd{P_t(x)}\\
+&=\int_0^{\infty}\int_{\Omega_t}\mb{1}_{t\in[0,x)}(x,t)\dd{P_t(x)}\dd{t}\\
+&=\int_0^{\infty}P(X\ge t)\dd{t}
+\ea\]
+\epr
+For real random variable $X$, let
+\[X^+=\bcs X,\quad&X>0\\0,\quad&X\le 0\ecs\]
+and
+\[X^+=\bcs -X,\quad&X<0\\0,\quad&X\ge 0\ecs,\]
+then,
+\[E(X^+)=\int_0^{\infty}P(X\ge x)\dd{x}=\int_0^{\infty}1-F_X(x)\dd{x},\]
+\[E(X^-)=\int_{-\infty}^0P(X\le x)\dd{x}=\int_{-\infty}^0F_X(x)\dd{x},\]
+and
+\[E(X)=E(X^+)-E(X^-).\]
+\sssc{Variance (變異數/方差) and Standard Deviation (標準差)}
+For real random variable $X$, variance $\Var(X)$ or $\sigma_X^{\phantom{X}2}$ of it is given by
+\[\Var(X)=E((X-E(X))^2),\]
+and standard deviation $\SD(X)$ or $\sigma_X$ of it is given by
+\[\SD(X)=\sqrt{\Var(X)}.\]
 
 
 
-\subsection{Variance (變異數)}
-\sssc{For discrete random variables}
-For a discrete random variable \( X \) with probability mass function \( P(x) \), the variance, $\text{Var}(X)$ or $\sigma_X^{\phantom{X}2}$, is given by:
-\[\text{Var}(X) = E[(X - E[X])^2] = \sum_{x \in \text{range}(X)} (x - E[X])^2 \cdot P(x).\]
-\sssc{For continuous random variables}
-For a continuous random variable \( X \) with probability density function \( f(x) \), the variance, $\text{Var}(X)$ or $\sigma_X^{\phantom{X}2}$, is given by:
-\[\text{Var}(X) = E[(X - E[X])^2] = \int_{-\infty}^{\infty} (x - E[X])^2 \cdot f(x) \, \mathrm{d}x.\]
-\subsection{Standard Deviation (標準差)}
-The standard deviation, $\text{SD}(X)$ or $\sigma_X$, is the positive square root of the variance, that is,
-\[\text{SD}(X) = \sqrt{\text{Var}(X)}.\]
 \ssc{Mode (眾數)}
 For a discrete or continuous random variable $X$ with probability function $p(x)$, the mode, $\text{Mode}(X)$, is given by:
 \[\text{Mode}(X)=\arg\max_x(p(x)).\]
