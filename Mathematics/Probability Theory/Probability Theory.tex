@@ -180,6 +180,8 @@ A continuous random variable is a real random variable with continuous CDF.
 \sssc{Simple random variable}
 A simple random variable is a discrete random variable $X$ such that there exist a finite partition $\{A_1,\ldots,A_n\}$ of source sample space $\Omega$ such that $X=\sum_{i=1}^na_i\mb{1}_{A_i}$ where $a_i$ are real numbers and $\mb{1}_{A_i}$ is the indicator function of $A_i$, that is,
 \[\mb{1}_{A_i}(\omega)=\bcs1,\quad&\omega\in A_i\\0,\quad&\omega\notin A_i\ecs.\]
+\sssc{Derived ramdom variable}
+For random variables $X_1,\ldots,X_n$ and an $n$-ary function $f$, a random variable $Y=f(X_1,\ldots,X_n)$ is a derived ramdom variable.
 \ssc{Discrete Random Variables}
 \sssc{Probability mass function (PMF)}
 For a discrete random variable $X$ with target sample space $\Omega_t=\{a_1,a_2,\ldots\}$, the probability mass function of $X$, denoted as $p_X$ or $P_X$, is defined as
@@ -208,13 +210,45 @@ That the PDF of $X$ is $p$ is denoted as $X\sim p$.
 For a continuous random variable $X$ with PDF $f_X$, the CDF $F_X$ can be expressed in terms of the PMF as
 \[F_X(x)=\int_{-\infty}^xf_x(t)\dd{t}\]
 for all $x\in\bbR$.
+\ssc{Sum random variable}
+\sssc{General case}
+For two independent real random variables $X,Y$ with the same source sample space and event space, and with pushforward probability measure $P_X$ and $P_Y$ respectively, let the Schwartz distributions induced by $P_X$ and $P_Y$ be $T_X$ and $T_Y$ respectively. Then the Schwartz distribution $T_{X+Y}$ induced by the pushforward probability measure $P_{X+Y}$ of the sum random variable $X+Y$ is the distributional convolution of $T_1$ and $T_2$, that is,
+\[T=T_1*T_2.\]
+\sssc{For discrete random variables}
+For two independent discrete random variables $X,Y$,
+\[p_{X+Y}(z)=\sum_{x\in\bbR}p_X(x)p_Y(z-x).\]
+\sssc{Sum of independent continuous random variables}
+For two independent continuous random variables $X,Y$,
+\[f_{X+Y}(z)=\int_{-\infty}^{\infty}f_X(x)f_Y(z-x)\dd{x}.\]
+\ssc{Multivariate or joint random variable}
+\sssc{Definition}
+For $n$ real random variables $X_1,X_2,\ldots,X_n$ with the same source sample space $\Omega$ and event space $\calF$, the multivariate or joint random variable $X_1,X_2,\ldots,X_n$ is defined for all $\omega\in\Omega^n$ as
+\[X_1,X_2,\ldots,X_n(\omega)=(X_1(\omega),X_2(\omega),\ldots,X_n(\omega)).\]
+\sssc{Cumulative distribution function (CDF)}
+For $n$ real random variables $X_1,X_2,\ldots,X_n$ with the same source sample space $\Omega$ and event space $\calF$,
+\[F_{X_1,X_2,\ldots,X_n}(x_1,x_2,\ldots,x_n)=P(X_1\le x_1,X_2\le x_2,\ldots,X_n\le x_n).\]
+$X_1,X_2,\ldots,X_n$ are independent iff
+\[F_{X_1,X_2,\ldots,X_n}(x_1,x_2,\ldots,x_n)=\prod_{i=1}^nF_{X_i}(x_i).\]
+\sssc{Probability mass function (PMF)}
+For discrete random variables $X_1,X_2,\ldots,X_n$ with the same source sample space $\Omega$ and event space $\calF$,
+\[\ba
+p_{X_1,X_2,\ldots,X_n}(x_1,x_2,\ldots,x_n)&=P(X_1=x_1,X_2=x_2,\ldots,X_n=x_n)\\
+&=P(X_1=x_1)\cdot P(X_2=x_2\mid X_1=x_1)\cdot P(X_3=x_3\mid X_1=x_1,X_2=x_2)\cdot\ldots\cdot P(X_n=x_n\mid X_1=x_1,X_2=x_2\ldots X_{n-1}=x_{n-1})
+\ea\]
+If $X_1,X_2,\ldots,X_n$ are independent
+\[p_{X_1,X_2,\ldots,X_n}(x_1,x_2,\ldots,x_n)=\prod_{i=1}^np_{X_i}(x_i).\]
+\sssc{Probability density function (PDF)}
+For continuous random variables $X_1,X_2,\ldots,X_n$ with the same source sample space $\Omega$ and event space $\calF$,
+\[f_{X_1,X_2,\ldots,X_n}(x_1,x_2,\ldots,x_n)&=\frac{\partial^nF_{X_1,X_2,\ldots,X_n}(x_1,x_2,\ldots,x_n)}{\partial x_1\partial x_2\ldots\partial x_n}.\]
+If $X_1,X_2,\ldots,X_n$ are independent
+\[f_{X_1,X_2,\ldots,X_n}(x_1,x_2,\ldots,x_n)=\prod_{i=1}^nf_{X_i}(x_i).\]
 \ssc{(Mathematical) Expected Value, Expectation (期望值), or Mean (平均值)}
 \sssc{Definition}
 For a random variable $X$ on $(\Omega_s,\calF_s,P_s)$ with induced probability space $(\Omega_t,\calF_t,P_t)$, the expected value or expectation $E(X)$, $\bbE(X)$, $E[X]$, or $\bbE[X]$, or mean $\mu_X$, of it is defined as the Lebesgue integral
 \[E(X)=\int_{\Omega_s}X(\omega_s)\dd{P_s(\omega_s)}\]
 or equivalently,
 \[E(X)=\int_{\Omega_t}x\dd{P_t(x)}.\]
-\sssc{For discrete random variables}
+\sssc{For discrete random variable}
 For a discrete random variable $X$ with target sample space $\Omega_t$ and probability mass function $p_X(x)$, the expected value or expectation $E(X)$, $\bbE(X)$, $E[X]$, or $\bbE[X]$, or mean $\mu_X$, of it is
 \[E(X)=\sum_{x\in\Omega_t}xp_X(x)\]
 if $\Omega_t$ is a finite set or $\Omega_t$ is a countably infinite set and
@@ -222,14 +256,11 @@ if $\Omega_t$ is a finite set or $\Omega_t$ is a countably infinite set and
 is convergent, and doesn't exist if $\Omega_t$ is a countably infinite set and
 \[\sum_{x\in\Omega_t}\abs{x}p_X(x)\]
 is divergent.
-\sssc{For continuous random variables}
+\sssc{For continuous random variable}
 For a continuous random variable $X$ with probability density function $f_X(x)$, the expected value or expectation $E(X)$, $\bbE(X)$, $E[X]$, or $\bbE[X]$, or mean $\mu_X$, of it is
 \[E(X)=\int_{-\infty}^{\infty}xf_X(x)\dd{x}\]
 if it converges absolutely.
-\sssc{Linearity}
-For finitely or countably and convergent many random variables $(X_i)_{i\in I}$,
-\[E(\sum_{i\in I}a_iX_i)=\sum_{i\in I}a_iE(X_i).\]
-\sssc{Function of random variable theorem}
+\sssc{Derived random variable theorem}
 \[E(f(X))=\int_{\Omega_t}f(x)\dd{P_t(x)}\]
 if $f\in L^1(\Omega_t,P_t)$.
 \sssc{Expected value from CDF}
@@ -252,42 +283,75 @@ then,
 \[E(X^-)=\int_{-\infty}^0P(X\le x)\dd{x}=\int_{-\infty}^0F_X(x)\dd{x},\]
 and
 \[E(X)=E(X^+)-E(X^-).\]
-\sssc{Variance (變異數/方差) and Standard Deviation (標準差)}
-For real random variable $X$, variance $\Var(X)$ or $\sigma_X^{\phantom{X}2}$ of it is given by
-\[\Var(X)=E((X-E(X))^2),\]
-and standard deviation $\SD(X)$ or $\sigma_X$ of it is given by
+\sssc{Linearity}
+For indexed families of real random variables $(X_i)_{i\in I}$ and real numbers $(a_i)_{i\in I}$ with $\abs{I}\in\bbN\cup\{\aleph_0\}$, where for $\abs{I}=\aleph_0$ suppose RHS is convergent,
+\[E(\sum_{i\in I}a_iX_i)=\sum_{i\in I}a_iE(X_i).\]
+\ssc{Variance and Mean square error (MSE)}
+\sssc{Variance (變異數/方差)}
+For a real random variable $X$, variance $\Var(X)$ or $\sigma_X^{\phantom{X}2}$ of it is defined as
+\[\Var(X)=E((X-E(X))^2).\]
+\sssc{Standard Deviation (標準差)}
+For a real random variable $X$, standard deviation $\SD(X)$ or $\sigma_X$ of it is defined as
 \[\SD(X)=\sqrt{\Var(X)}.\]
-
-
-
+\sssc{Covariance (共變異數/共方差)}
+For two real random variables $X,Y$, their covariance $\Sigma$ or $\Cov(X,Y)$ is defined as
+\[\Cov(X,Y)=E\qty((X-E(X))(Y-E(Y))=E(X)E(Y)-E(XY).\]
+For an $n$-dimensional vector of real random variables $\mb{X}=(X_1,X_2,\ldots)$ with $n\in\bbN\cup\{\aleph_0\}$, the covariance matrix $\Sigma$ or $\Cov(\mb{X})$ is defined as
+\[\Sigma=\Cov(\mb{X})=E\qty((\mb{X}-E(\mb{X})(\mb{X}-E(\mb{X})^{\top}),\]
+that is,
+\[\Sigma_{ij}=\Cov(X_i,X_j)=E\qty((X_i-E(X_i))(X_j-E(X_j)).\]
+\sssc{Independent random variables covariance matrix}
+If all $X_i$ are independent, then $\Cov(\mb{X})$ is a diagonal matrix where $\Sigma_{ii}=\Var(X_i)$.
+\sssc{Sum random variable variance}
+For $n$-dimensional vectors of real random variables $\mb{X}=(X_1,X_2,\ldots,X_n)$ and real numbers $\mb{a}=(a_1,a_2,\ldots,X_n)$ with $n\in\bbN$,
+\[\Var(\sum_{i=1}^na_iX_i)=\mb{a}\Cov(\mb{X})\mb{a}^{\top}.\]
+For real random variables $X,Y$ and real numbers $a,b$,
+\[\Var(X+Y)=\Var(X)+\Var(Y)+2\Cov(X,Y).\]
+\sssc{Mean square error (MSE) (均方（誤）差) or Expected square error}
+For a real random variable $X$ and a prediction or (blind) estimate $\hat{x}$, the mean square error $\MSE_X(\hat{x})$ or expected square error of the prediction is defined as
+\[\MSE_X(\hat{x})=E\qty((X-\hat{x})^2).\]
+\sssc{Minimum mean square error}
+The minimum mean square error estimate of a real random variable $X$ is $E(X)$, and the MSE of it is $\Var(X)$.
 \ssc{Mode (眾數)}
-For a discrete or continuous random variable $X$ with probability function $p(x)$, the mode, $\text{Mode}(X)$, is given by:
-\[\text{Mode}(X)=\arg\max_x(p(x)).\]
+\sssc{For discrete random variable}
+For a discrete random variable $X$ with PMF $p_X(x)$, $\Mode(X)$ is defined as
+\[\Mode(X)=\arg\max_xp_X(x),\]
+which is not necessarily unique.
+\sssc{For continuous random variable}
+For a continuous random variable $X$ with PDF $f_X(x)$, $\Mode(X)$ is defined as
+\[\Mode(X)=\arg\max_xf_X(x),\]
+which is not necessarily unique.
 \ssc{Median (中位數)}
-\sssc{For all random variables}
-For a random variable \( X \), the median, $\text{Median}(X)$, is an element in the range of $X$ that satisfies:
-\[P(X\leq \text{Median}(X))\geq\frac{1}{2}\land P(X\geq \text{Median}(X))\geq\frac{1}{2}.\]
-\sssc{For continuous random variables}
-For a continuous random variable $X$ with probability density function $f(x)$, the median, $\text{Median}(X)$, is an element in the range of $X$ such that the cumulative distribution function $F(x)$ of it is $\frac{1}{2}$, that is,
-\[F(\text{Median}(X))=\int_{-\infty}^{\text{Median}(X)}f(x)\,\mathrm{d}x=\frac{1}{2}.\]
-\ssc{Entropy (熵)}
-\sssc{For discrete random variables}
-For a discrete random variable \( X \) with probability mass function \( P(x) \), the entropy, $H(X)$, is given by:
-\[H(X)=-\sum_{i\in D_P}P(i)\log P(i).\]
-\sssc{For continuous random variables}
-For a continuous random variable \( X \) with probability density function \( f(x) \), the entropy, $H(X)$, is given by:
-\[H(X)=-\int_{-\infty}^{\infty}f(x)\log f(x)\,\mathrm{d}x.\]
-\subsection{Affine Transformation}
-There are two random variable $X$ and $Y=aX+b$ where $a,b\in\mathbb{R}$, then,
-\[E[X]=aE[X]+b.\]
-\[\text{Var}(Y)=a^2\text{Var}(X).\]
-\[\text{SD}(Y)=|a|\text{SD}(X).\]
-\[\text{Mode}(Y)=a\text{Mode}(X)+b.\]
-\[\text{Median}(Y)=a\text{Median}(X)+b.\]
+For a real variable \( X \), the median $\Median(X)$ of it is define by
+\[P(X\leq\Median(X))\geq\frac{1}{2}\land P(X\geq\Median(X))\geq\frac{1}{2}.\]
+\ssc{Entropy (熵) for discrete random variables}
+\sssc{Definition}
+For a discrete random variable $X$ with target sample space $\Omega$ and PMF $p_X(x)$, the entropy $H(X)$ of base $b$ is defined as
+\[H(X)=E(-\log_b(p_X(x)))=-\sum_{x\in\Omega}p_X(x)\log_b(p_X(x)),\]
+where base $b=2$ gives the unit of bits or shannons, base $b=e$ gives natural units or nat, and base $b=10$ gives the unit of dits, bans, or hartleys.
+\sssc{Non-negativity}
+\[H(X)\ge 0.\]
+\sssc{Maximum entropy}
+If $\abs{\Omega}=n$,
+\[H(X)\le\log_bn,\]
+and $H(X)=\log_bn$ occurs when $p_X(x)=\frac{1}{n}$.
+\ssc{Differential entropy or continuous entropy for continuous random variables}
+For a continuous random variable $X$ with target sample space $\Omega$ and PDF $f_X(x)$, the differential entropy or continuous entropy $h(X)$ of base $b$ is defined as
+\[h(X)=E(-\log_b(f_X(x)))=-\int_{\Omega}f(x)\log_b(f(x))\dd{x},\]
+where base $b=2$ gives the unit of bits or shannons, base $b=e$ gives natural units or nat, and base $b=10$ gives the unit of dits, bans, or hartleys.
+\ssc{Affine Transformation}
+For a real random variable $X$ with target sample space $\Omega$ and $a,b\in\mathbb{R}$ where $a\neq 0$ if $\Omega$ is not finite, then,
+\[E(Y)=aE(X)+b.\]
+\[\Var(Y)=a^2\Var(X).\]
+\[\SD(Y)=|a|\SD(X).\]
+\[\Mode(Y)=a\Mode(X)+b.\]
+\[\Median(Y)=a\Median(X)+b.\]
 If $X$ is discrete,
-\[H(Y)=\begin{cases}H(X),\quad &a\neq 0\\0,\quad &a=0\end{cases};\]
-if $X$ is continuous,
-\[H(Y)=\begin{cases}H(X)+\log|a|,\quad &a\neq 0\\0,\quad &a=0\end{cases}.\]
+\[H(Y)=\begin{cases}H(X),\quad &a\neq 0\\0,\quad &a=0\end{cases}.\]
+If $X$ is continuous and thus $a\neq 0$,
+\[h(Y)=h(X)+\log|a|.\]
+
+
 
 
 \subsection{Families of Discrete Random Variables}
