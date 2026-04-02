@@ -395,7 +395,7 @@ For a continuous random variable $X$, $a\in\bbR_{\neq0}$, and $b\in\mathbb{R}$,
 \sssc{Binomial random variable}
 \bit
 \item Trial: A binomial random variable counts the number of successes in $n$ Bernoulli trials with success probability $p$.
-\item Notation: $X\sim\operatorname{Bin}(n,p)$, $X\sim B(n,p)$, or $X\sim\operatorname{Binomial}(n,p)$, read as $X$ is binomial distributed with parameters $n$ and $p$
+\item Notation: $X\sim\operatorname{Bin}(n,p)$, $X\sim B(n,p)$, $X\sim\operatorname{Binom}(n,p)$, or $X\sim\operatorname{Binomial}(n,p)$, read as $X$ is binomial distributed with parameters $n$ and $p$
 \item Parameters: $n\in\bbN$, $p\in[0,1]$
 \item Support: $\bbZ\cap[0,n]$
 \item PMF:
@@ -573,7 +573,7 @@ p_X(k+1)-p_X(k)&=\binom{k}{r-1}p^r(1-p)^{k-r+1}-\binom{k-1}{r-1}p^r(1-p)^{k-r}\\
 \sssc{Poisson random variable}
 \bit
 \item Trial: A Poisson random variable counts the number of events occurring in a fixed interval of time if these events occur with a known constant mean rate $\lambda$ and independently of the time since the last event.
-\item Notation: $X\sim\operatorname{Pois}(p)$ or $X\sim\operatorname{Poisson}(p)$, read as $X$ is Poisson distributed with parameter $\lambda$
+\item Notation: $X\sim\operatorname{Pois}(\lambda)$ or $X\sim\operatorname{Poisson}(\lambda)$, read as $X$ is Poisson distributed with parameter $\lambda$
 \item Parameters: $\lambda\in(0,\infty)$
 \item Support: $\bbN_0$
 \item PMF:
@@ -585,7 +585,7 @@ Let $N(t)$ denotes the number of events occuring in $[0,t]$, and let $p_k(t)=P(N
 \[\lim_{h\to0^+}\frac{p_k(h)}{h}=0,\quad k\in\bbZ\cap[2,\infty)\]
 \[\ba
 p_k'(t)&=\lim_{h\to0}\frac{p_k(t+h)-p_k(t)}{h}\\
-&=\frac{p_k(t)(1-\lambda h)-p_{k-1}(t)(\lambda h)-p_k(t)}{h}\\
+&=\frac{p_k(t)(1-\lambda h)+p_{k-1}(t)(\lambda h)-p_k(t)}{h}\\
 &=-\lambda p_k(t)+\lambda p_{k-1}(t)
 \ea\]
 \[p_0'(t)=-\lambda p_0(t)\]
@@ -593,7 +593,7 @@ p_k'(t)&=\lim_{h\to0}\frac{p_k(t+h)-p_k(t)}{h}\\
 \[p_1'(t)=-\lambda p_1(t)+\lambda e^{-\lambda t}\]
 \[\mu(t)=e^{\int\lambda\dd{t}}=e^{\lambda t}\]
 \[e^{\lambda t}p_1(t)=\lambda t\]
-\[p_1(t)=\lambda te^{-\lamdba t}\]
+\[p_1(t)=\lambda te^{-\lambda t}\]
 Assume
 \[p_k(t)=\frac{(\lambda t)^ke^{-\lambda t}}{k!}.\]
 Prove by mathematical induction. It holds for $k=0$ and $1$. Suppose it holds for $k\in\bbZ\cap[0,n]$. For $k=n+1$,
@@ -602,9 +602,73 @@ Prove by mathematical induction. It holds for $k=0$ and $1$. Suppose it holds fo
 \[e^{\lambda t}p_{n+1}(t)=\int\frac{\lambda(\lambda t)^n}{n!}\dd{t}=\frac{(\lambda t)^{n+1}}{(n+1)!}\]
 \[p_{n+1}(t)=\frac{(\lambda t)^{n+1}e^{-\lambda t}}{(n+1)!}\]
 \epr
-
-
-
+\item CDF:
+\[F_X(k)=e^{-\lambda}\sum_{i=0}^{\lfloor k\rfloor}\frac{\lambda^i}{i!}\]
+\item Mean:
+\[E(X)=\lambda\]
+\bpr
+\[\ba
+E(X)&=\sum_{k=0}^{\infty}k\frac{\lambda^ke^{-\lambda}}{k!}\\
+&=\lambda e^{-\lambda}\sum_{k=0}^{\infty}\frac{\lambda^k}{k!}\\
+&=\lambda e^{-\lambda}e^{\lambda}\\
+&=\lambda
+\ea\]
+\epr
+\item Variance:
+\[\operatorname{Var}(X)=\lambda\]
+\bpr
+\[\ba
+E(X^2)&=\sum_{k=0}^{\infty}k^2\frac{\lambda^ke^{-\lambda}}{k!}\\
+&=\lambda e^{-\lambda}\sum_{k=0}^{\infty}(k+1)\frac{\lambda^k}{k!}\\
+&=\lambda e^{-\lambda}\sum_{k=1}^{\infty}\frac{\lambda^k}{(k-1)!}+\lambda\\
+&=\lambda^2+\lambda
+\ea\]
+\[\operatorname{Var}(X)=E(X^2)-E(X)^2=\lambda\]
+\epr
+\item Mode:
+\[\operatorname{Mode}(X)=\lceil\lambda\rceil-1,\lfloor\lambda\rfloor\]
+\bpr
+\[\ba
+p_X(k+1)-p_X(k)&=\frac{\lambda^{k+1}e^{-\lambda}}{(k+1)!}-\frac{\lambda^ke^{-\lambda}}{k!}\\
+&=\qty(\lambda-k-1)\frac{\lambda^ke^{-\lambda}}{(k+1)!}
+\ea\]
+\[p_X(k+1)>p_X(k)\iff k<\lambda-1\]
+\[p_X(k+1)<p_X(k)\iff k>\lambda-1\]
+\epr
+\item Entropy:
+\[H(X)=\lambda\qty(1-\ln\lambda)+e^{-\lambda}\sum_{k=0}^{\infty}\frac{\lambda^k\ln(k!)}{k!}\]
+\bpr
+\[\ba
+H(X)&=-\sum_{k=0}^{\infty}\frac{\lambda^ke^{-\lambda}}{k!}\ln(\frac{\lambda^ke^{-\lambda}}{k!})\\
+&=-e^{-\lambda}\sum_{k=0}^{\infty}\frac{\lambda^k}{k!}\qty(k\ln\lambda-\lambda-\ln(k!))\\
+&=-e^{-\lambda}\ln\lambda\sum_{k=0}^{\infty}k\frac{\lambda^k}{k!}+e^{-\lambda}\lambda\sum_{k=0}^{\infty}\frac{\lambda^k}{k!}+e^{-\lambda}\sum_{k=0}^{\infty}\frac{\lambda^k\ln(k!)}{k!}\\
+&=-e^{-\lambda}\lambda\ln\lambda\sum_{k=0}^{\infty}\frac{\lambda^k}{k!}+\lambda+e^{-\lambda}\sum_{k=0}^{\infty}\frac{\lambda^k\ln(k!)}{k!}\\
+&=\lambda\qty(1-\ln\lambda)+e^{-\lambda}\sum_{k=0}^{\infty}\frac{\lambda^k\ln(k!)}{k!}
+\ea\]
+\epr
+\item PMF monotonicity: strictly increasing for $k\le\lambda-1$ and strictly decreasing for $k\ge\lambda-1$
+\item Addictivity: For any $n\in\bbN$, for any $X_i\sim\operatorname{Pois}(\lambda_i)$ for all $i\in\bbN\cap[1,n]$,
+\[\sum_{i=1}^nX_i\sim\operatorname{Pois}\qty(\sum_{i=1}^n\lambda_i)\]
+\bpr
+Suppose $X\sim\operatorname{Pois}(\lambda)$ and $Y\sim\operatorname{Pois}(\rho)$.
+\[\ba
+P(X_i+Y_i=k)&=\sum_{x=0}^kp_X(x)p_Y(k-x)\\
+&=\sum_{x=0}^k\frac{\lambda^xe^{-\lambda}}{x!}\frac{\rho^{k-x}e^{-\rho}}{(k-x)!}\\
+&=\frac{e^{-\lambda-\rho}}{k!}\sum_{x=0}^k\binom{k}{x}\lambda^x\rho^{k-x}\\
+&=\frac{(\lambda+\rho)^ke^{-\lambda-\rho}}{k!}
+\ea\]
+\epr
+\item Thinning property: Given $X\sim\operatorname{Pois}(\lambda)$ for some $\lambda\in(0,\infty)$, a random variable $Y$ such that $Y\mid(X=k)\sim\operatorname{Bin}(k,p)$ for some $p\in(0,1]$ must satisfy $Y\sim\operatorname{Pois}(\lambda p)$.
+\bpr
+\[\ba
+P(Y=m)&=\sum_{k=1}^{\infty}P(Y=m\mid X=k)P(X=k)\\
+&=\sum_{k=m}^{\infty}\binom{k}{m}p^m(1-p)^{k-m}\frac{\lambda^ke^{-\lambda}}{k!}
+&=\frac{(\lambda p)^me^{-\lambda}}{m!}\sum_{k=m}^{\infty}\frac{(\lambda(1-p))^{k-m}{(k-m)!}\\
+&=\frac{(\lambda p)^me^{-\lambda}}{m!}e^{\lambda(1-p)}\\
+&=\frac{(\lambda p)^me^{-\lambda p}}{m!}
+\ea\]
+\epr
+\eit
 
 
 
