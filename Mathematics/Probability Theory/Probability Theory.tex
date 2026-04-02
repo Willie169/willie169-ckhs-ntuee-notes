@@ -173,6 +173,9 @@ Define
 \[X(u)\coloneq\inf\{x\in\bbR\mid F(x)\ge u\},\quad u\in(0,1)\]
 \[F_X(x)=F(x)\]
 \epr
+\sssc{Quantile}
+Quantile $Q$ is the inverse of CDF, that is,
+\[P(X\le Q(p))=p.\]
 \sssc{Discrete random variable}
 A discrete random variable is a real random variable with a countable sample space.
 \sssc{Continuous random variable}
@@ -182,6 +185,8 @@ A simple random variable is a discrete random variable $X$ such that there exist
 \[\mb{1}_{A_i}(\omega)=\bcs1,\quad&\omega\in A_i\\0,\quad&\omega\notin A_i\ecs.\]
 \sssc{Derived ramdom variable}
 For random variables $X_1,\ldots,X_n$ and an $n$-ary function $f$, a random variable $Y=f(X_1,\ldots,X_n)$ is a derived ramdom variable.
+\sssc{Independent and identically distributed (i.i.d.) random variables}
+Identical random variables that are mutually independent.
 \ssc{Discrete Random Variables}
 \sssc{Probability mass function (PMF)}
 For a discrete random variable $X$ with target sample space $\Omega_t=\{a_1,a_2,\ldots\}$, the probability mass function of $X$, denoted as $p_X$ or $P_X$, is defined as
@@ -292,7 +297,7 @@ For a real random variable $X$, $a\in\bbR_{\neq0}$, and $b\in\mathbb{R}$,
 \ssc{Variance and Mean square error (MSE)}
 \sssc{Variance (變異數/方差)}
 For a real random variable $X$, variance $\Var(X)$ or $\sigma_X^{\phantom{X}2}$ of it is defined as
-\[\Var(X)=E((X-E(X))^2).\]
+\[\Var(X)=E((X-E(X))^2)=E(X^2)-2E(XE(X))+E(X)^2=E(X^2)-2E(X)^2+E(X)^2=E(X^2)-E(X)^2.\]
 \sssc{Standard Deviation (標準差)}
 For a real random variable $X$, standard deviation $\SD(X)$ or $\sigma_X$ of it is defined as
 \[\SD(X)=\sqrt{\Var(X)}.\]
@@ -305,7 +310,7 @@ that is,
 \[\Sigma_{ij}=\Cov(X_i,X_j)=E\qty((X_i-E(X_i))(X_j-E(X_j)).\]
 \sssc{Independent random variables covariance matrix}
 If all $X_i$ are independent, then $\Cov(\mb{X})$ is a diagonal matrix where $\Sigma_{ii}=\Var(X_i)$.
-\sssc{Sum random variable variance}
+\sssc{Sum of independent random variables variance}
 For $n$-dimensional vectors of real random variables $\mb{X}=(X_1,X_2,\ldots,X_n)$ and real numbers $\mb{a}=(a_1,a_2,\ldots,X_n)$ with $n\in\bbN$,
 \[\Var(\sum_{i=1}^na_iX_i)=\mb{a}\Cov(\mb{X})\mb{a}^{\top}.\]
 For real random variables $X,Y$ and real numbers $a,b$,
@@ -335,7 +340,11 @@ For a real random variable $X$, $a\in\bbR_{\neq0}$, and $b\in\mathbb{R}$,
 \sssc{Definition}
 For a real variable \( X \), the median 
 $\Median(X)$ of it is define by
-\[P(X\leq\Median(X))\geq\frac{1}{2}\land P(X\geq\Median(X))\geq\frac{1}{2}.\]
+\[P(X\leq\Median(X))\geq\frac{1}{2}\land P(X\geq\Median(X))\geq\frac{1}{2},\]
+which is not necessarily unique.
+
+When we denote $\Median(X)$ to be an interval $I$, it means that for all $x\in I$,
+\[P(X\leq x)\geq\frac{1}{2}\land P(X\geq x)\geq\frac{1}{2}.\]
 \sssc{Affine Transformation}
 For a real random variable $X$, $a\in\bbR_{\neq0}$, and $b\in\mathbb{R}$,
 \[\Median(Y)=a\Median(X)+b.\]
@@ -343,7 +352,7 @@ For a real random variable $X$, $a\in\bbR_{\neq0}$, and $b\in\mathbb{R}$,
 \sssc{Definition}
 For a discrete random variable $X$ with target sample space $\Omega$ and PMF $p_X(x)$, the entropy $H(X)$ of base $b$ is defined as
 \[H(X)=E(-\log_b(p_X(x)))=-\sum_{x\in\Omega}p_X(x)\log_b(p_X(x)),\]
-where base $b=2$ gives the unit of bits or shannons, base $b=e$ gives natural units or nat, and base $b=10$ gives the unit of dits, bans, or hartleys.
+where base $b=2$ gives the unit of bits or shannons, base $b=e$ gives natural units or nat, and base $b=10$ gives the unit of dits, bans, or hartleys. When not specified, $b=e$ is used.
 \sssc{Non-negativity}
 \[H(X)\ge 0.\]
 \sssc{Maximum entropy}
@@ -356,99 +365,215 @@ For a discrete random variable $X$, $a\in\bbR_{\neq0}$, and $b\in\mathbb{R}$,
 \ssc{Differential entropy or continuous entropy for continuous random variables}
 For a continuous random variable $X$ with target sample space $\Omega$ and PDF $f_X(x)$, the differential entropy or continuous entropy $h(X)$ of base $b$ is defined as
 \[h(X)=E(-\log_b(f_X(x)))=-\int_{\Omega}f(x)\log_b(f(x))\dd{x},\]
-where base $b=2$ gives the unit of bits or shannons, base $b=e$ gives natural units or nat, and base $b=10$ gives the unit of dits, bans, or hartleys.
+where base $b=2$ gives the unit of bits or shannons, base $b=e$ gives natural units or nat, and base $b=10$ gives the unit of dits, bans, or hartleys. When not specified, $b=e$ is used.
 \sssc{Affine Transformation}
 For a continuous random variable $X$, $a\in\bbR_{\neq0}$, and $b\in\mathbb{R}$,
 \[h(Y)=h(X)+\log|a|.\]
-
-
-
-
-
 \subsection{Families of Discrete Random Variables}
-\sssc{Bernoulli random variable}
-A Bernoulli trial (伯努力試驗) is an experiment with exactly two possible outcomes, "success" and "failure". The PMF of Bernoulli random variable $X$ $X\sim\operatorname{Bern}(p)$, read as $X$ is Bernoulli distributed with parameter $p$, is with target sample space $\{0,1\}$ and defined as
-\[p_X(x)=\bcs p,\quad&x=1\\1-p,\quad&x=0\ecs.\]
-The CDF is
-\[F_X(x)=\bcs 0,\quad&x<0\\1-p,\quad&0\le x<1\\1,\quad&x\ge 1\ecs.\]
+\sssc{Bernoulli (伯努力) random variable}
+\bit
+\item Trial: A Bernoulli random variable models a single Bernoulli trial (aka binary trial) with exactly two possible outcomes, success or 1, with probability $p$, and failure or 0, with probability $1-p$.
+\item Notation: $X\sim\operatorname{Bern}(p)$, read as $X$ is Bernoulli distributed with parameter $p$
+\item Parameters: $p\in[0,1]$
+\item Support: $\{0,1\}$
+\item PMF:
+\[p_X(k)=\bcs p,\quad&k=1\\1-p,\quad&k=0\ecs\]
+\item CDF:
+\[F_X(k)=\bcs 0,\quad&k<0\\1-p,\quad&0\le k<1\\1,\quad&k\ge 1\ecs\]
+\item Mean:
+\[E(X)=p\]
+\item Variance:
+\[\operatorname{Var}(X)=p-p^2=p(1-p)\]
+\item Mode:
+\[\opetarname{Mode}(X)=\bcs0,\quad&p<\frac{1}{2}\\0,1,\quad&p=\frac{1}{2}\\1,\quad&p>\frac{1}{2}\ecs\]
+\item Median:
+\[\opetarname{Median}(X)=\bcs0,\quad&p<\frac{1}{2}\\[0,1],\quad&p=\frac{1}{2}\\1,\quad&p>\frac{1}{2}\ecs\]
+\item Entropy:
+\[H(X)=-p\ln p-(1-p)\ln(1-p)\]
+\item PMF monotonicity: strictly increasing if $p>\frac{1}{2}$, constant if $p=\frac{1}{2}$, and strictly decreasing if $p<\frac{1}{2}$
+\eit
 \sssc{Binomial random variable}
-A binomial trial is $n$ repeated independent Bournoulli trials, where each trial has a success probability of $p$. The PMF of binomial random variable $X$ $X\sim\operatorname{Bin}(n,p)$ or $X\sim B(n,p)$, read as $X$ is binomial distributed with parameter $n$ and $p$, is with target sample space $\bbN_{0,\le n}$ and defined as
-\[p_X(k)=\binom{n}{k}p^k(1-p)^{n-k}.\]
-The CDF is
-\[F_X(k)=\sum_{i=0}^{\lfloor k\rfloor}\binom{n}{i}p^i(1-p)^{n-i}.\]
-It has the following property:
-\begin{itemize}
-\item If $(n+1)p\in\mathbb{N}\land p\neq 1$, the probability mass function has two modes at $k=(n+1)p$ and $k=(n+1)p-1$; if $p=1$, it has one mode at $k=(n+1)p-1$; otherwise, it has one mode at $\lfloor(n+1)p\rfloor$. The probability mass function is strictly increasing for $k<(n+1)p$ and strictly decreasing for $k>(n+1)p$
-\begin{proof}
-\[K:=\arg\max_{k\in\mathbb{Z},0\leq k\leq n}\left(\binom{n}{k}p^k(1-p)^{n-k}\right),\quad n\in\mathbb{N},p>0.\]
-If $p=1$, it has one mode at $k=(n+1)p-1$; otherwise, let:
-\[g(k):=\frac{P(X=k+1)}{P(X=k)}=\frac{(n-k)p}{(k+1)(1-p)}.\]
-\[g'(k)=\frac{-(n+1)p}{(k+1)^2(1-p)}\leq 0.\]
-\[K-1=\{\min\left(k\text{\ s.t.\ }\frac{n-k}{k+1}>\frac{1-p}{p}\right),\min\left(k\text{\ s.t.\ }\frac{n-k}{k+1}\geq\frac{1-p}{p}\right)\}.\]
-Solve $g(k*)=0$ for $k*$:
-\[\frac{n-(k^*+1)}{(k^*+1)+1}=\frac{1-p}{p}\]
-\[np-(k^*+1)p=(k^*+1)+1-(k^*+1)-p.\]
-\[k^*=(n+1)p.\]
-\end{proof}
-\item The expected value of it is $np$.
-\begin{proof}
-\[\begin{aligned}
-E[X]=&\sum_{k=1}^nk\binom{n}{k}p^k(1-p)^{n-k}\\
-=&\sum_{k=1}^nn\binom{n-1}{k-1}p^k(1-p)^{n-k}\\
-=&np\sum_{k=1}^n\binom{n-1}{k-1}p^{k-1}(1-p)^{n-k}\\
-=&np(p+1-p)^{n-1}\\
-=&np.
-\end{aligned}\]
-\end{proof}
-\item The variance of it is $np(1-p)$.
-\begin{proof}
-\[\begin{aligned}
-E[X^2]=&\sum_{k=0}^nk^2\binom{n}{k}p^k(1-p)^{n-k}\\
-=&np\sum_{k=1}^nk\binom{n-1}{k-1}p^{k-1}(1-p)^{n-k}\\
-=&np\sum_{k=1}^{n-1}k\binom{n-1}{k}p^k(1-p)^{n-1-k}+np\\
-=&np(n-1)p+np\\
-=&n^2p^2-np^2+np
-\end{aligned}\]
-\[\text{Var}(X)=E[X^2]-(E[X])^2=n^2p^2-np^2+np-n^2p^2=np(1-p).\]
-\end{proof}
-\end{itemize}
+\bit
+\item Trial: A binomial random variable counts the number of successes in $n$ Bernoulli trials with success probability $p$.
+\item Notation: $X\sim\operatorname{Bin}(n,p)$, $X\sim B(n,p)$, or $X\sim\operatorname{Binomial}(n,p)$, read as $X$ is binomial distributed with parameters $n$ and $p$
+\item Parameters: $n\in\bbN$, $p\in[0,1]$
+\item Support: $\bbZ\cap[0,n]$
+\item PMF:
+\[p_X(k)=\binom{n}{k}p^k(1-p)^{n-k},\quad k\in\bbZ\cap[0,n]\]
+\item CDF:
+\[F_X(k)=\bcs 0,\quad&k<0\\\sum_{i=0}^{\lfloor k\rfloor}\binom{n}{i}p^i(1-p)^{n-i},\quad&0\le k<n\\1,\quad&k\ge n\ecs\]
+\item Mean:
+\[E(X)=np\]
+\bpr
+\[\ba
+E(X)&=\sum_{k=1}^nk\binom{n}{k}p^k(1-p)^{n-k}\\
+&=\sum_{k=1}^nn\binom{n-1}{k-1}p^k(1-p)^{n-k}\\
+&=np\sum_{k=1}^n\binom{n-1}{k-1}p^{k-1}(1-p)^{n-k}\\
+&=np(p+1-p)^{n-1}\\
+&=np
+\ea\]
+Alternatively, decompose it to $n$ i.i.d. Bernoulli random variable with parameter $p$. Thus, the mean of $X$ is $n$ times that of the Bernoulli random variable.
+\epr
+\item Variance:
+\[\operatorname{Var}(X)=np(1-p)\]
+\bpr
+\[\ba
+E(X^2)&=\sum_{k=0}^nk^2\binom{n}{k}p^k(1-p)^{n-k}\\
+&=np\sum_{k=1}^nk\binom{n-1}{k-1}p^{k-1}(1-p)^{n-k}\\
+&=np\sum_{k=1}^{n-1}k\binom{n-1}{k}p^k(1-p)^{n-1-k}+np\\
+&=np(n-1)p+np\\
+&=n^2p^2-np^2+np
+\ea\]
+\[\operatorname{Var}(X)=E(X^2)-E(X)^2=-np^2+np=np(1-p)\]
+Alternatively, use decomposition.
+\epr
+\item Mode:
+\[\opetarname{Mode}(X)=\bcs n,\quad&p=1\\(n+1)p-1,(n+1)p,\quad&(n+1)p\in\bbN\land p\notin\bbZ\\\lfloor(n+1)p\rfloor,\quad&\text{otherwise}\ecs\]
+\bpr
+If $p=0$, $p_X(k)=0$. If $p=1$, $p_X(k)=n$.
+Let
+\[K\coloneq\arg\max_kp_X(k)\]
+Let
+\[g(k)\coloneq\frac{p_X(k+1)}{p_X(k)}=\frac{\binom{n}{k+1}p^{k+1}(1-p)^{n-k-1}}{\binom{n}{k}p^k(1-p)^{n-k}}=\frac{(n-k)p}{(k+1)(1-p)}\]
+Extend $g(k)$ to the $\bbR\cap[0,n]$. For $k\in(0,n)$,
+\[\ba
+g'(k)&=\frac{-(k+1)-(n-k)}{(k+1)^2}\frac{p}{1-p}\\
+&=\frac{-n+1}{(k+1)^2}\frac{p}{1-p}\\
+&\le 0
+\ea\]
+\[K=1+\min\{k\mid g(k)>1\},1+\min\{k\mid g(k)\ge1\}\]
+Solve $g(k*)=1$ for $k*$.
+\[\frac{n-k*}{k*+1}=\frac{1-p}{p}\]
+\[np-k*p=k*+1-k*p-p\]
+\[k*=(n+1)p-1\]
+\epr
+\item PMF monotonicity: strictly increasing for $k\le(n+1)p$ and strictly decreasing for $k\ge(n+1)p$
+\item Decomposition: sum of $n$ i.i.d. Bernoulli random variable with parameter $p$
+\eit
 \sssc{Geometric random variable}
-A geometric trial is repeated independent Bournoulli trials until the first success, where each trial has a success probability of $p$. The PMF of geometric random variable $X$ $X\sim\operatorname{Geom}(p)$ or $X\sim G(p)$, read as $X$ is geometric distributed with parameter $p$, is with target sample space $\bbN$ and defined as
-\[p_X(k)=p(1-p)^{k-1}.\]
-The CDF is
-\[F_X(k)=1-(1-p)^k.\]
-It has the following property:
-\begin{itemize}
-\item The probability mass function is strictly decreasing.
-\begin{proof}
-\[g(k):=p(1-p)^{k-1}.\]
-\[g'(k)=p\ln(1-p)(1-p)^{k-1}<0.\]
-\end{proof}
-\item $k>j\in\mathbb{N}$,
-\[P(X=k|X>j)=P(X=k-j).\]
-\begin{proof}
-\[\frac{p(1-p)^k}{(1-p)^j}=p(1-p)^{k-j}.\]
-\end{proof}
-\item The expected value of it is $\frac{1}{p}$.
-\begin{proof}
-\[E[X]=\sum_{k=1}^{\infty}kp(1-p)^{k-1}=\sum_{k=1}^{\infty}(k-1)p(1-p)^{k-1}+\sum_{k=1}^{\infty}p(1-p)^{k-1}\]
-\[(1-p)E[X]=\sum_{k=1}^{\infty}kp(1-p)^k\]
-\[E[X]-(1-p)E[X]=pE[X]=\sum_{k=1}^{\infty}p(1-p)^{k-1}=p\frac{1}{1-(1-p)}=1.\]
-\end{proof}
-\item The variance of it is $\frac{1-p}{p^2}$.
-\begin{proof}
-\[E[X^2]=\sum_{k=1}^{\infty}k^2p(1-p)^{k-1}=\sum_{k=1}^{\infty}(k-1)^2p(1-p)^{k-1}+2\sum_{k=1}^{\infty}kp(1-p)^{k-1}-\sum_{k=1}^{\infty}p(1-p)^{k-1}.\]
-\[(1-p)E[X^2]=\sum_{k=1}^{\infty}k^2p(1-p)^k.\]
-\[E[X^2]-2E[X]+1-(1-p)E[X^2]=pE[X^2]-2E[X]+1=0.\]
-\[E[X^2]=\frac{2E[X]-1}{p}=\frac{2-p}{p^2}.\]
-\[\text{Var}(X)=E[X^2]-(E[X])^2=\frac{1-p}{p^2}.\]
-\end{proof}
-\end{itemize}
-\sssc{Pascal random variable}
-A Pascal trial is repeated independent Bournoulli trials until the $r$th success, where each trial has a success probability of $p$. The PMF of Pascal random variable or negative binominal random variable $X$ $X\sim\operatorname{Pascal}(p)$, read as $X$ is Pascal distributed with parameter $r$ and $p$, is with target sample space $\bbN_{\ge r}$ and defined as
-\[p_X(k)=\binom{k-1}{r-1}p^r(1-p)^{k-r}.\]
-The CDF is
-\[F_X(k)=\sum_{i=r}^{\lfloor k\rfloor}\binom{i-1}{r-1}p^r(1-p)^{i-r}.\]
+\bit
+\item Trial: A geometric random variable counts the number of independent Bernoulli trials with success probability $p$ until the first success.
+\item Notation: $X\sim\operatorname{Geom}(p)$, $X\sim G(p)$, or $X\sim\operatorname{Geometric}(p)$, read as $X$ is geometric distributed with parameter $p$
+\item Parameters: $p\in(0,1]$
+\item Support: $\bbN$
+\item PMF:
+\[p_X(k)=p(1-p)^{k-1},\quad k\in\bbN\]
+\item CDF:
+\[F_X(k)=\bcs 0,\quad&k<1\\1-(1-p)^{\lfloor k\rfloor},\quad&k\ge1\ecs\]
+\bpr
+\[\ba
+P(X\le k)&=\sum_{i=1}^{\lfloor k\rfloor}p(1-p)^{i-1}\\
+&=\sum_{i=1}^{\lfloor k\rfloor}p(1-p)^{i-1}\\
+&=\sum_{i=1}^{\infty}p(1-p)^{i-1}-\sum_{i=\lfloor k\rfloor+1}^{\infty}p(1-p)^{i-1}\\
+&=1-(1-p)^{\lfloor k\rfloor}\sum_{i=1}^{\infty}p(1-p)^{i-1}\\
+&=1-(1-p)^{\lfloor k\rfloor}
+\ea\]
+\epr
+\item Mean:
+\[E(X)=\frac{1}{p}\]
+\bpr
+\[\ba
+E(X)&=\sum_{k=1}^{\infty}kp(1-p)^{k-1}\\
+&=\sum_{k=1}^{\infty}(k-1)p(1-p)^{k-1}+\sum_{k=1}^{\infty}p(1-p)^{k-1}\\
+&=\sum_{k=1}^{\infty}kp(1-p)^k+\sum_{k=1}^{\infty}p(1-p)^{k-1}
+\ea\]
+\[(1-p)E(X)=\sum_{k=1}^{\infty}kp(1-p)^k\]
+\[E(X)-(1-p)E(X)=pE(X)=\sum_{k=1}^{\infty}p(1-p)^{k-1}=\frac{p}{1-(1-p)}=1\]
+\epr
+\item Variance:
+\[\operatorname{Var}(X)=\frac{1-p}{p^2}\]
+\bpr
+\[\ba
+E(X^2)&=\sum_{k=1}^{\infty}k^2p(1-p)^{k-1}\\
+&=\sum_{k=1}^{\infty}(k-1)^2p(1-p)^{k-1}+2\sum_{k=1}^{\infty}kp(1-p)^{k-1}-\sum_{k=1}^{\infty}p(1-p)^{k-1}\\
+&=\sum_{k=1}^{\infty}k^2p(1-p)^k+2E(X)-1
+\ea\]
+\[(1-p)E(X^2)=\sum_{k=1}^{\infty}k^2p(1-p)^k\]
+\[E(X^2)-2E(X)+1-(1-p)E(X^2)=pE(X^2)-2E(X)+1=0\]
+\[E(X^2)=\frac{2E(X)-1}{p}=\frac{2-p}{p^2}\]
+\[\operatorname{Var}(X)=E(X^2)-E(X)^2=\frac{1-p}{p^2}\]
+\epr
+\item Mode:
+\[\opetarname{Mode}(X)=1\]
+\bpr
+\[p_X(k+1)-p_X(k)=p(1-p)^k-p(1-p)^{k-1}=-p^2(1-p)^{k-1}<0\]
+\epr
+\item Median:
+\[\opetarname{Median}(X)=\bcs\qty[\frac{-\ln 2}{\ln(1-p)},\frac{-\ln 2}{\ln(1-p)}+1],\quad&\frac{-\ln 2}{\ln(1-p)}\in\bbN\\\left\lceil\frac{-\ln 2}{\ln(1-p)}\right\rceil,\quad&\text{otherwise}\ecs\]
+\bpr
+\[P(X\le k)\ge\frac{1}{2}\]
+\[1-(1-p)^{\lfloor k\rfloor}\ge\frac{1}{2}\]
+\[(1-p)^{\lfloor k\rfloor}\le\frac{1}{2}\]
+\[\lfloor k\rfloor\ge\frac{-\ln 2}{\ln(1-p)}\]
+\[P(X\ge k)\ge\frac{1}{2}\]
+\[\sum_{i=\lceil k\rceil}^{\infty}p(1-p)^{i-1}=(1-p)^{\lceil k\rceil-1}\sum_{i=1}^{\infty}p(1-p)^{i-1}=(1-p)^{\lceil k\rceil-1}\ge\frac{1}{2}\]
+\[\lceil k\rceil-1\le\frac{-\ln 2}{\ln(1-p)}\]
+\epr
+\item Entropy:
+\[H(X)=\frac{-p\ln p-(1-p)\ln(1-p)}{p}\]
+\bpr
+\[\ba
+H(X)&=-\sum_{k=1}^{\infty}p(1-p)^{k-1}\ln(p(1-p)^{k-1})\\
+&=-\sum_{k=1}^{\infty}p(1-p)^{k-1}\qty(\ln p+(k-1)\ln(1-p))\\
+&=-\ln p-\ln(1-p)\sum_{k=1}^{\infty}kp(1-p)^{k-1}+\ln(1-p)\\
+&=-\ln p-\ln(1-p)p\sum_{k=1}^{\infty}k(1-p)^{k-1}+\ln(1-p)
+\ea\]
+Let
+\[\ba
+S&=\sum_{k=1}^{\infty}k(1-p)^{k-1}\\
+&=\sum_{k=1}^{\infty}(k-1)(1-p)^{k-1}+\sum_{k=1}^{\infty}(1-p)^{k-1}\\
+&=\sum_{k=1}^{\infty}k(1-p)^k+\frac{1}{p}
+\ea\]
+\[(1-p)S=\sum_{k=1}^{\infty}k(1-p)^k\]
+\[S-(1-p)S=pS=\frac{1}{p}\]
+\[S=\frac{1}{p^2}\]
+\[H(X)=-\ln p-\ln(1-p)p\frac{1}{p^2}+\ln(1-p)=\frac{-p\ln p-(1-p)\ln(1-p)}{p}\]
+\epr
+\item PMF monotonicity: strictly decreasing
+\item Conditional probability:
+\[P(X=j+k\mid X>j)=P(X=k)\quad j,k\in\bbN\]
+\bpr
+\[\frac{p(1-p)^{j+k}}{(1-p)^j}=p(1-p)^k.\]
+\epr
+\eit
+\sssc{Negative binomial or Pascal random variable}
+\bit
+\item Trial: A negative binomial or Pascal random variable counts the number of independent Bernoulli trials with success probability $p$ until the $r$th success.
+\item Notation: $X\sim\operatorname{NB}(r,p)$, $X\sim\operatorname{NegBin}(r,p)$, or $X\sim\operatorname{Pascal}(r,p)$, read as $X$ is negative binomial or Pascal distributed with parameters $r$ and $p$
+\item Parameters: $r\in\bbN$, $p\in(0,1]$
+\item Support: $\bbN\cap[r,\infty)$
+\item PMF:
+\[p_X(k)=\binom{k-1}{r-1}p^r(1-p)^{k-r},\quad k\in\bbN\cap[r,\infty)\]
+\item Mean:
+\[E(X)=\frac{r}{p}\]
+\bpr
+Consider a sequnce of i.i.d. Bernoulli trial with success probability $p$ with $T_i$ defined as the random variable of the number of trials until the $i$th success for $i\in\bbN\cap[1,r]$. Define $X_1=T_1$, and for $i\in\bbN\cap[2,r]$, define $X_i=T_i-T_{i-1}$. Then
+\[X=T_r=\sum_{i=1}^rX_i.\]
+And the $X_i$s are i.i.d. geometric random variable with parameter $p$. Thus, the mean of $X$ is $r$ times that of the geometric random variable.
+\epr
+\item Variance:
+\[\operatorname{Var}(X)=\frac{r(1-p)}{p^2}\]
+\bpr
+Decomposition.
+\epr
+\item Mode:
+\[\opetarname{Mode}(X)=\left\lfloor\frac{r-1}{p}\right\rfloor\]
+\bpr
+\[\ba
+p_X(k+1)-p_X(k)&=\binom{k}{r-1}p^r(1-p)^{k-r+1}-\binom{k-1}{r-1}p^r(1-p)^{k-r}\\
+&=\qty(k(1-p)-(k-r+1))\frac{(k-1)!}{(r-1)!(k-r+1)!}p^r(1-p)^{k-r}\\
+&=\qty(-kp+r-1)\frac{(k-1)!}{(r-1)!(k-r+1)!}p^r(1-p)^{k-r}
+\ea\]
+\[p_X(k+1)>p_X(k)\iff-kp+r-1>0\iff k<\frac{r-1}{p}\]
+\[p_X(k+1)<p_X(k)\iff-kp+r-1<0\iff k>\frac{r-1}{p}\]
+\epr
+\item PMF monotonicity: strictly increasing for $k\le\frac{r-1}{p}$ and strictly decreasing for $k\ge\frac{r-1}{p}$
+\item Decomposition: sum of $r$ i.i.d. geometric random variable with parameter $p$
+\eit
+
+
+
+
 \sssc{Poisson random variable}
 A Poisson trial is counts the number of independent events that occur in a fixed interval with a known constant mean. The PMF of Poisson random variable $X$ $X\sim\operatorname{Poisson}(\lambda)$, read as $X$ is Poisson distributed with parameter $\lambda$, is with target sample space $\bbN_0$ and defined as
 \[p_X(k)=\bcs\frac{\lambda^ke^{-\lambda}}{k!}, \quad&x\in\bbN\\0,\quad&\otherwise\ecs.\]
@@ -460,6 +585,7 @@ For fixed $\lambda>0$, for every integer $n>\lambda$, let $Q_n$ denote the binom
 A discrete uniform $(k,l)$ random variable, read $X$ is uniformly distributed between $k$ and $l$ has PMF
 \[P_X(x)=\bcs\frac{1}{l-k+1},\quad&x\in\bbN\cap[k,l]\\0&\otherwise\ecs.\]
 where $k,l\in\bbN$ and $k<l$.
+
 \ssc{Families of Continuous Random Variables}
 \sssc{Uniform random variable}
 A uniform random variable $X$ is a continuous random variable that has a constant probability density function over a specified interval $(a,b)$ and $0$ elsewhere, denoted as $X\sim\operatorname{Unitform}(a,b)$ and read $X$ is uniformly distributed on the interval $(a,b)$. The PDF of it can be expressed as
@@ -512,6 +638,12 @@ As $n\to\infty$, both sides converge to the CDF of $\Erlang(k,\lambda)$, i.e.,
 \[\lim_{n\to\infty}F_{T_n}(t)=1-e^{-\lambda t}\sum_{i=0}^{k-1}\frac{(\lambda t)^i}{i!}.\]
 \sssc{Gamma distribution}
 PLACEHOLDER
+Beta
+Chi-squared
+Student's t
+F-distribution
+Cauchy
+Log-normal
 
 sum of $n$ exponential ($\lambda$) random variables is an Erlang $(n,\lambda)$ random variable
 \end{document}
