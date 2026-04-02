@@ -570,15 +570,45 @@ p_X(k+1)-p_X(k)&=\binom{k}{r-1}p^r(1-p)^{k-r+1}-\binom{k-1}{r-1}p^r(1-p)^{k-r}\\
 \item PMF monotonicity: strictly increasing for $k\le\frac{r-1}{p}$ and strictly decreasing for $k\ge\frac{r-1}{p}$
 \item Decomposition: sum of $r$ i.i.d. geometric random variable with parameter $p$
 \eit
-
-
-
-
 \sssc{Poisson random variable}
-A Poisson trial is counts the number of independent events that occur in a fixed interval with a known constant mean. The PMF of Poisson random variable $X$ $X\sim\operatorname{Poisson}(\lambda)$, read as $X$ is Poisson distributed with parameter $\lambda$, is with target sample space $\bbN_0$ and defined as
-\[p_X(k)=\bcs\frac{\lambda^ke^{-\lambda}}{k!}, \quad&x\in\bbN\\0,\quad&\otherwise\ecs.\]
-The CDF is
-\[F_X(k)=e^{-\lambda}\sum_{i=0}^{\lfloor k\rfloor}\frac{\lambda^i}{i!}.\]
+\bit
+\item Trial: A Poisson random variable counts the number of events occurring in a fixed interval of time if these events occur with a known constant mean rate $\lambda$ and independently of the time since the last event.
+\item Notation: $X\sim\operatorname{Pois}(p)$ or $X\sim\operatorname{Poisson}(p)$, read as $X$ is Poisson distributed with parameter $\lambda$
+\item Parameters: $\lambda\in(0,\infty)$
+\item Support: $\bbN_0$
+\item PMF:
+\[p_X(k)=\frac{\lambda^ke^{-\lambda}}{k!}\]
+\bpr
+Let $N(t)$ denotes the number of events occuring in $[0,t]$, and let $p_k(t)=P(N(t)=k)$.
+\[\lim_{h\to0^+}p_0(h)=1\]
+\[\lim_{h\to0^+}\frac{p_1(h)}{h}=\lambda\]
+\[\lim_{h\to0^+}\frac{p_k(h)}{h}=0,\quad k\in\bbZ\cap[2,\infty)\]
+\[\ba
+p_k'(t)&=\lim_{h\to0}\frac{p_k(t+h)-p_k(t)}{h}\\
+&=\frac{p_k(t)(1-\lambda h)-p_{k-1}(t)(\lambda h)-p_k(t)}{h}\\
+&=-\lambda p_k(t)+\lambda p_{k-1}(t)
+\ea\]
+\[p_0'(t)=-\lambda p_0(t)\]
+\[p_0(t)=e^{-\lambda t}\]
+\[p_1'(t)=-\lambda p_1(t)+\lambda e^{-\lambda t}\]
+\[\mu(t)=e^{\int\lambda\dd{t}}=e^{\lambda t}\]
+\[e^{\lambda t}p_1(t)=\lambda t\]
+\[p_1(t)=\lambda te^{-\lamdba t}\]
+Assume
+\[p_k(t)=\frac{(\lambda t)^ke^{-\lambda t}}{k!}.\]
+Prove by mathematical induction. It holds for $k=0$ and $1$. Suppose it holds for $k\in\bbZ\cap[0,n]$. For $k=n+1$,
+\[p_{n+1}'(t)=-\lambda p_{n+1}(t)+\frac{\lambda(\lambda t)^ne^{-\lambda t}}{n!}\]
+\[\mu(t)=e^{\int\lambda\dd{t}}=e^{\lambda t}\]
+\[e^{\lambda t}p_{n+1}(t)=\int\frac{\lambda(\lambda t)^n}{n!}\dd{t}=\frac{(\lambda t)^{n+1}}{(n+1)!}\]
+\[p_{n+1}(t)=\frac{(\lambda t)^{n+1}e^{-\lambda t}}{(n+1)!}\]
+\epr
+
+
+
+
+
+
+
 \sssc{Poisson limit of binomials}
 For fixed $\lambda>0$, for every integer $n>\lambda$, let $Q_n$ denote the binomial PMF with parameters $n$ anf $p=\frac{\lambda}{n}$. Then, for every $k\in\bbN$, $\lim_{n\to\infty}Q_n(k)=Q(k)$, where $Q$ is the Poisson PMF with parameter $\lambda$.
 \sssc{Discrete uniform random variable}
