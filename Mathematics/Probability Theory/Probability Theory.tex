@@ -362,14 +362,58 @@ and $H(X)=\log_bn$ occurs when $p_X(x)=\frac{1}{n}$.
 \sssc{Affine Transformation}
 For a discrete random variable $X$, $a\in\bbR_{\neq0}$, and $b\in\mathbb{R}$,
 \[H(Y)=\begin{cases}H(X),\quad &a\neq 0\\0,\quad &a=0\end{cases}.\]
-\ssc{Differential entropy or continuous entropy for continuous random variables}
-For a continuous random variable $X$ with target sample space $\Omega$ and PDF $f_X(x)$, the differential entropy or continuous entropy $h(X)$ of base $b$ is defined as
+\ssc{(Differential or continuous) entropy for continuous random variables}
+For a continuous random variable $X$ with target sample space $\Omega$ and PDF $f_X(x)$, the (differential or continuous) entropy $h(X)$ of base $b$ is defined as
 \[h(X)=E(-\log_b(f_X(x)))=-\int_{\Omega}f(x)\log_b(f(x))\dd{x},\]
 where base $b=2$ gives the unit of bits or shannons, base $b=e$ gives natural units or nat, and base $b=10$ gives the unit of dits, bans, or hartleys. When not specified, $b=e$ is used.
 \sssc{Affine Transformation}
 For a continuous random variable $X$, $a\in\bbR_{\neq0}$, and $b\in\mathbb{R}$,
 \[h(Y)=h(X)+\log|a|.\]
 \subsection{Families of Discrete Random Variables}
+\sssc{Discrete uniform random variable}
+\bit
+\item Notation: $X\sim\calU\{a,b\}$, $X\sim\operatorname{Unif}\{a,b\}$, $X\sim\operatorname{Uniform}\{a,b\}$, $X\sim\calU\{a,a+1,\ldots,b\}$, $X\sim\operatorname{Unif}\{a,a+1,\ldots,b\}$, or $X\sim\operatorname{Uniform}\{a,a+1,\ldots,b\}$, read as $X$ is discretely uniform distributed with parameters $a$ and $b$
+\item Parameters: $a,b\in\bbZ\land a\le b$
+\item Support: $\bbZ\cap[a,b]$
+\item PMF:
+\[p_X(k)=\frac{1}{b-a+1},\quad k\in\bbZ\cap[a,b]\]
+\item CDF:
+\[F_X(k)=\bcs0,\quad&k<a\\\frac{\floor k\rfloor-a+1}{b-a+1},\quad&a\le k<b\\1,\quad&k\ge b\ecs\]
+\item Mean:
+\[E(X)=\frac{a+b}{2}\]
+\item Variance:
+\[\operatorname{Var}(X)=\frac{(b-a+1)^2-1}{12}\]
+\bpr
+\[\ba
+E(X^2)&=\sum_{k=a}^b\frac{k^2}{b-a+1}\\
+&=\frac{1}{b-a+1}\sum_{k=0}^{b-a}(a+k)^2\\
+&=\frac{1}{b-a+1}\qty((b-a+1)a^2+2a\frac{(b-a+1)(b-a)}{2}+\frac{(b-a+1)(b-a)(2b-2a+1)}{6})\\
+&=a^2+a(b-a)+\frac{(b-a)(2b-2a+1)}{6}\\
+&=ab+\frac{2b^2-2ab+b-2ab+2a^2-a}{6}\\
+&=\frac{2a^2+2b^2+2ab-a+b}{6}
+\ea\]
+\[\ba
+\operatorname{Var}(X)&=E(X^2)-E(X)^2\\
+&=\frac{2a^2+2b^2+2ab-a+b}{6}-\frac{a^2+b^2+2ab}{4}\\
+&=\frac{4a^2+4b^2+4ab-2a+2b-3a^2-3b^2-6ab}{12}\\
+&=\frac{a^2+b^2-2ab-2a+2b}{12}\\
+&=\frac{(b-a+1)^2-1}{12}
+\ea\]
+\epr
+\item Mode:
+\[\operatorname{Mode}(X)=\bbZ\cap[a,b]\]
+\item Median:
+\[\operatorname{Median}(X)=\bcs\frac{a+b}{2},\quad&\frac{b-a}{2}\in\bbZ\\\qty[\frac{a+b-1}{2},\frac{a+b+1}{2}],\quad&\frac{b-a+1}{2}\in\bbZ\ecs\]
+\item Entropy:
+\[H(X)=-\ln(b-a+1)\]
+\bpr
+\[\ba
+H(X)&=-\sum_{k=a}^b\frac{1}{b-a+1}\ln(\frac{1}{b-a+1})\\
+&=-\ln(b-a+1)
+\ea\]
+\item Symmetry: about $\frac{b-a}{2}$
+\item PMF monotonicity: constant
+\eit
 \sssc{Bernoulli (伯努力) random variable}
 \bit
 \item Trial: A Bernoulli random variable models a single Bernoulli trial (aka binary trial) with exactly two possible outcomes, success or 1, with probability $p$, and failure or 0, with probability $1-p$.
@@ -669,23 +713,67 @@ P(Y=m)&=\sum_{k=1}^{\infty}P(Y=m\mid X=k)P(X=k)\\
 \ea\]
 \epr
 \eit
-
-
-
-
 \sssc{Poisson limit of binomials}
-For fixed $\lambda>0$, for every integer $n>\lambda$, let $Q_n$ denote the binomial PMF with parameters $n$ anf $p=\frac{\lambda}{n}$. Then, for every $k\in\bbN$, $\lim_{n\to\infty}Q_n(k)=Q(k)$, where $Q$ is the Poisson PMF with parameter $\lambda$.
-\sssc{Discrete uniform random variable}
-A discrete uniform $(k,l)$ random variable, read $X$ is uniformly distributed between $k$ and $l$ has PMF
-\[P_X(x)=\bcs\frac{1}{l-k+1},\quad&x\in\bbN\cap[k,l]\\0&\otherwise\ecs.\]
-where $k,l\in\bbN$ and $k<l$.
-
+For any fixed $\lambda\in(0,\infty)$, let $X\sim\operatorname{Pois}(\lambda)$ and $X_n\sim\operatorname{Bin}\qty(n,\frac{\lambda}{n})$ for any $n\in\bbN$. Then for any $k\in\bbN_0$,
+\[\lim_{n\to\infty}P(X_n=k)=P(X=k).\]
+\bpr
+\[\ba
+\lim_{n\to\infty}P(X_n=k)&=\lim_{n\to\infty}\binom{n}{k}\frac{\lambda^k}{n^k}\qty(1-\frac{\lambda}{n})^{n-k}\\
+&=\lim_{n\to\infty}\frac{n^k}{k!}\frac{\lambda^k}{n^k}e^{-\lambda}\qty(1-\frac{\lambda}{n})^{-k}\\
+&=\lim_{n\to\infty}\frac{\lambda^k}{k!}e^{-\lambda}\qty(1-\frac{\lambda}{n})^{-k}\\
+&=\frac{\lambda^ke^{-\lambda}}{k!}
+\ea\]
+\epr
 \ssc{Families of Continuous Random Variables}
-\sssc{Uniform random variable}
-A uniform random variable $X$ is a continuous random variable that has a constant probability density function over a specified interval $(a,b)$ and $0$ elsewhere, denoted as $X\sim\operatorname{Unitform}(a,b)$ and read $X$ is uniformly distributed on the interval $(a,b)$. The PDF of it can be expressed as
-\[f_X(x)=\bcs\frac{1}{b-a},\quad&a<x<b\\0,\quad&\tx{otherwise}\ecs.\]
-The CDF of it can be expressed as
-\[F_X(x)=\bcs0,\quad&x<a\\\frac{x-a}{b-a},\quad&a\le x<b\\1,\quad&x\ge b\ecs.\]
+\sssc{Continuous uniform random variable}
+\bit
+\item Notation: $X\sim\calU_{[a,b]}$, $X\sim\operatorname{Unif}(a,b)$, or $X\sim\operatorname{Uniform}(a,b)$, read as $X$ is continuously uniform distributed with parameters $a$ and $b$
+\item Parameters: $a,b\in\bbR\land a<b$
+\item Support: $[a,b]$
+\item PDF:
+\[f_X(x)=\bcs\frac{1}{b-a},\quad&x\in[a,b]\\0,\quad&\tx{otherwise}\ecs\]
+\item CDF:
+\[F_X(x)=\bcs 0,\quad&x<a\\ \frac{x-a}{b-a},\quad&x\in[a,b]\\1,\quad&x>b\ecs\]
+\item Mean:
+\[\operatorname{Mean}(X)=\frac{a+b}{2}\]
+\item Variance:
+\[\operatorname{Var}(X)=\frac{(b-a)^2}{12}\]
+\bpr
+\[\ba
+E(X^2)&=\int_a^b\frac{x^2}{b-a}\dd{x}\\
+&=\frac{1}{b-a}\evlp(\frac{x^3}{3})_a^b\\
+&=\frac{a^2+b^2+ab}{3}
+\ea\]
+\[\ba
+\operatorname{Var}(X)&=E(X^2)-E(X)^2\\
+&=\frac{a^2+b^2+ab}{3}-\frac{a^2+b^2+2ab}{4}\\
+&=\frac{4a^2+4b^2+4ab-3a^2-3b^2-6ab}{12}\\
+&=\frac{(b-a)^2}{12}
+\ea\]
+\epr
+\item Mode:
+\[\operatorname{Mode}(X)=[a,b]\]
+\item Median:
+\[\operatorname{Median}(X)=\frac{a+b}{2}\]
+\item Entropy
+\[h(X)=\ln(b-a)\]
+\bpr
+\[\ba
+h(X)&=-\int_a^b\frac{1}{b-a}\ln(\frac{1}{b-a})\dd{x}\\
+&=\ln(b-a)
+\ea\]
+\epr
+\item Transition invariance:
+PLACEHOLDER
+\item Scaling:
+PLACEHOLDER
+\item Symmetry: about $\frac{b-a}{2}$
+\item PDF monotonicity: constant
+\epr
+
+
+
+
 \sssc{Normal distribution (常態分布/正態分布)/Gaussian distribution (高斯分布)}
 The general normal distribution or Gaussian distribution given by mean $\mu$ and standard deviation $\sigma$ is a continuous probability distribution for a real-valued random variable defined by the probability density function:
 \[f(x|\mu,\sigma^2)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}.\]
