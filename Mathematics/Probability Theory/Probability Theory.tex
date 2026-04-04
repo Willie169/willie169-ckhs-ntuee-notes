@@ -201,6 +201,8 @@ That the PMF of $X$ is $p$ is denoted as $X\sim p$.
 For a discrete random variable $X$ with PMF $p_X$, the CDF $F_X$ can be expressed in terms of the PMF as
 \[F_X(x)=\sum_{a_i\le x}p_X(a_i)\]
 for all $x\in\bbR$.
+\sssc{Support}
+The support of a discrete random variable is the support of the PMF.
 \ssc{Continuous Random Variables}
 \sssc{Probability density function (PDF)}
 For a continuous random variable $X$, the probability density function of $X$, denoted as $f_X$, is defined as
@@ -215,6 +217,8 @@ That the PDF of $X$ is $p$ is denoted as $X\sim p$.
 For a continuous random variable $X$ with PDF $f_X$, the CDF $F_X$ can be expressed in terms of the PMF as
 \[F_X(x)=\int_{-\infty}^xf_x(t)\dd{t}\]
 for all $x\in\bbR$.
+\sssc{Support}
+The support of a discrete random variable is the support of the PDF.
 \ssc{Sum random variable}
 \sssc{General case}
 For two independent real random variables $X,Y$ with the same source sample space and event space, and with pushforward probability measure $P_X$ and $P_Y$ respectively, let the Schwartz distributions induced by $P_X$ and $P_Y$ be $T_X$ and $T_Y$ respectively. Then the Schwartz distribution $T_{X+Y}$ induced by the pushforward probability measure $P_{X+Y}$ of the sum random variable $X+Y$ is the distributional convolution of $T_1$ and $T_2$, that is,
@@ -363,12 +367,17 @@ and $H(X)=\log_bn$ occurs when $p_X(x)=\frac{1}{n}$.
 For a discrete random variable $X$, $a\in\bbR_{\neq0}$, and $b\in\mathbb{R}$,
 \[H(Y)=\begin{cases}H(X),\quad &a\neq 0\\0,\quad &a=0\end{cases}.\]
 \ssc{(Differential or continuous) entropy for continuous random variables}
+\sssc{Definition}
 For a continuous random variable $X$ with target sample space $\Omega$ and PDF $f_X(x)$, the (differential or continuous) entropy $h(X)$ or $H(X)$ of base $b$ is defined as
 \[h(X)=E(-\log_b(f_X(x)))=-\int_{\Omega}f(x)\log_b(f(x))\dd{x},\]
 where base $b=2$ gives the unit of bits or shannons, base $b=e$ gives natural units or nat, and base $b=10$ gives the unit of dits, bans, or hartleys. When not specified, $b=e$ is used. Differential entropy can be positive.
 \sssc{Affine Transformation}
 For a continuous random variable $X$, $a\in\bbR_{\neq0}$, and $b\in\mathbb{R}$,
 \[h(Y)=h(X)+\log|a|.\]
+\ssc{Discrete to continuous limit}
+Suppose $\langle X_n\rangle_{n\in\bbN}$ is a sequence of discrete random variables. Define $Y_n=\frac{X_n}{n}$. Let $C$ be a continuous random variable defined on $\bbR$. We write
+\[\lim_{n\to\infty}Y_n=C\]
+iff the sequence $\langle F_{Y_n}\rangle_{n\in\bbN}$ of CDF of $Y_n$ pointwise converges to the CDF $F_C$ of $C$.
 \subsection{Families of Discrete Random Variables}
 \sssc{Discrete uniform random variable}
 \bit
@@ -587,6 +596,8 @@ S&=\sum_{k=1}^{\infty}k(1-p)^{k-1}\\
 \item Support: $\bbN\cap[r,\infty)$
 \item PMF:
 \[p_X(k)=\binom{k-1}{r-1}p^r(1-p)^{k-r},\quad k\in\bbN\cap[r,\infty)\]
+\item CDF:
+\[F_X(k)=\bcs0,\quad & k<r\\\frac{p^r}{(r-1)!}\sum_{i=0}^{\lfloor k\rfloor-r}(i+r-1)_i(1-p)^i,\quad&k\ge r\ecs\]
 \item Mean:
 \[E(X)=\frac{r}{p}\]
 \bpr
@@ -615,8 +626,8 @@ p_X(k+1)-p_X(k)&=\binom{k}{r-1}p^r(1-p)^{k-r+1}-\binom{k-1}{r-1}p^r(1-p)^{k-r}\\
 \eit
 \sssc{Poisson random variable}
 \bit
-\item Trial: A Poisson random variable counts the number of events occurring in a fixed interval of time if these events occur with a known constant mean rate $\lambda$ and independently of the time since the last event.
-\item Notation: $X\sim\operatorname{Pois}(\lambda)$ or $X\sim\operatorname{Poisson}(\lambda)$, read as $X$ is Poisson distributed with parameter $\lambda$
+\item Trial: A Poisson random variable counts the number of events occurring in a fixed interval of time in a Poisson (point) process, in which events occur with a known constant mean rate $\lambda$ and independently of the time since the last event.
+\item Notation: $X\sim\operatorname{Pois}(\lambda)$ or $X\sim\operatorname{Poisson}(\lambda)$, read as $X$ is Poisson distributed with parameter or rate $\lambda$
 \item Parameters: $\lambda\in(0,\infty)$
 \item Support: $\bbN_0$
 \item PMF:
@@ -730,7 +741,7 @@ For any fixed $\lambda\in(0,\infty)$, let $X\sim\operatorname{Pois}(\lambda)$ an
 \item Parameters: $a,b\in\bbR\land a<b$
 \item Support: $[a,b]$
 \item PDF:
-\[f_X(x)=\bcs\frac{1}{b-a},\quad&x\in[a,b]\\0,\quad&\tx{otherwise}\ecs\]
+\[f_X(x)=\frac{1}{b-a},\quad x\in[a,b]\]
 \item CDF:
 \[F_X(x)=\bcs 0,\quad&x<a\\ \frac{x-a}{b-a},\quad&x\in[a,b]\\1,\quad&x>b\ecs\]
 \item Mean:
@@ -763,15 +774,20 @@ h(X)&=-\int_a^b\frac{1}{b-a}\ln(\frac{1}{b-a})\dd{x}\\
 \ea\]
 \epr
 \item Transition:
-\[X-c\sim\operatorname{Unif}(a-c,b-c)\]
+\[X-c\sim\operatorname{Unif}(a-c,b-c),\quad c\in\bbR\]
 \item Scaling:
-\[cX\sim\operatorname{Unif}(ca,cb)\]
+\[cX\sim\operatorname{Unif}(ca,cb),\quad c\in\bbR_{>0}\]
+\[cX\sim\operatorname{Unif}(cb,ca),\quad c\in\bbR_{<0}\]
 \item Symmetry: about $\frac{b-a}{2}$
 \item PDF monotonicity: constant
 \epr
 \sssc{Normal (常態/正態) or Gaussian (高斯) random variable}
 \bit
-\item Notation: $X\sim\calN(\mu,\sigma^2)$ or $X\sim N(\mu,\sigma^2)$, read as $X$ is normal or Gaussian distributed with mean $\mu$ and standard deviation $\sigma$
+\item Notation:
+\bit
+\item $X\sim\calN(\mu,\sigma^2)$ or $X\sim N(\mu,\sigma^2)$, read as $X$ is normal or Gaussian distributed with mean $\mu$ and standard deviation $\sigma$
+\item $Z\sim\calN(0,1)$ or $Z\sim N(0,1)$, read as $X$ is standard or unit normal or Gaussian distributed
+\eit
 \item Parameters: $\mu\in\bbR$ and $\sigma\in(0,\infty)$
 \item Support: $\bbR$
 \item PDF:
@@ -779,11 +795,11 @@ h(X)&=-\int_a^b\frac{1}{b-a}\ln(\frac{1}{b-a})\dd{x}\\
 f_X(x)&=\frac{1}{\sqrt{2\pi}\sigma}\exp(-\frac{(x-\mu)^2}{2\sigma^2})\\
 &=\frac{1}{\sigma}\varphi\left(\frac{x-\mu}{\sigma}\right),
 \ea\]
-where $\varphi(x)$ is the PDF of the standard or unit normal distribution $\calN(0,1)$, that is,
+where $\varphi(x)$ is the PDF of $Z$, that is,
 \[\varphi(x)=\frac{1}{\sqrt{2\pi}}\exp(-\frac{x^2}{2})\]
 \item CDF:
 \[F_X(x)=\Phi\qty(\frac{x-\mu}{\sigma}),\]
-where $\Phi(x)$ is the CDF of the standard or unit normal distribution $\calN(0,1)$, that is,
+where $\Phi(x)$ is the CDF of $Z$, that is,
 \[\Phi(x)=\frac{1}{2}\qty(1+\operatorname{erf}\qty(\frac{x}{\sqrt{2}})),\]
 where $\operatorname{erf}(x)$ is the (Gaussian) error function, that is,
 \[\erf(x)=\frac{2}{\sqrt{\pi}}\int_0^xe^{-t^2}\dd{t}\]
@@ -866,40 +882,141 @@ h(X)&=-\int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}\sigma}\exp(-\frac{(x-\mu)^2}{
 &=\frac{1}{2}\ln(2\pi e\sigma^2)
 \ea\]
 \epr
+\item Standardization:
+\[X=\mu+\sigma Z\]
 \item Transition:
-\[X-c\sim\calN(\mu-c,\sigma^2)\]
+\[X-c\sim\calN(\mu-c,\sigma^2),\quad c\in\bbR\]
 \item Scaling:
-\[cX\sim\calN(c\mu,c^2\sigma^2)\]
+\[cX\sim\calN(c\mu,c^2\sigma^2),\quad c\in\bbR_{\neq 0}\]
 \item Symmetry: about $\mu$
 \item PDF monotonicity: strictly increasing for $x\le\mu$ and strictly decreasing for $x\ge\mu$
 \epr
-
-
-
-
-
 \sssc{Exponential random variable}
-An exponential random variable models the time between events in a Poisson process, where events occur continuously and independently at a constant average rate. The PDF of it $X\sim\Exp(\lambda)$, read as $X$ is exponentially distributed with rate $\lambda$, can be expressed as
-\[f_X(x)=\bcs\lambda e^{-\lambda x},\quad&x\ge 0\\0\quad&\tx{otherwise}\ecs.\]
-The CDF is
-\[F_X(x)=\bcs0,\quad&x<0\\1-e^{\lambda x},\quad&x\ge 0\ecs.\]
-\sssc{Geometric converges to exponential}
-Let the average number of occurrence per unit time be $\lambda$. Let $X_n$ be the geometric random variable obtained by dividing a unit time into $n$ equal intervals and counting the number of intervals and counting the number of intervals until the first success, that is, $X_n\sim G\qty(\frac{\lambda}{n})$ and the occurrence time $T_n=\frac{X_n}{n}$, whose CDF can be expressed as, for $t\ge 0$,
-\[\qty(1-\frac{\lambda}{n})^{nt+1}\le 1-F_{T_n}(t)=\qty(1-\frac{\lambda}{n})^{\lceil nt\rceil+1}\le\qty(1-\frac{\lambda}{n})^{nt}.\]
-As $n\to\infty$, both sides converge to the CDF of $\Exp(\lambda)$, i.e.,
-\[\lim_{n\to\infty}F_{T_n}(t)=1-e^{-\lambda t}.\]
+\bit
+\item Trial: An exponential random variable models the distance between adjacent events in a Poisson process with rate $\lambda$.
+\item Notation: $X\sim\operatorname{Exp}(\lambda)$ or $X\sim\operatorname{Exponential}(\lambda)$, read as $X$ is exponential distributed with parameter or rate $\lambda$
+\item Parameters: $\lambda\in(0,\infty)$
+\item Support: $[0,\infty)$
+\item PDF:
+\[f_X(x)=\lambda e^{-\lambda x},\quad x\in\bbR_{>0}\]
+\bpr
+Let $N(x)$ denotes the number of events occuring in $[0,x]$. We already know that
+\[P(N(x)=k)=\frac{(\lambda x)^ke^{-\lambda t}}{k!}.\]
+\[X=\inf\{x>0\mid N(x)\ge 1\}\]
+\[\{X>x\}\iff\{N(x)=0\}.\]
+\[P(X>x)=P(N(x)=0)=e^{-\lambda x}\]
+\[F_X(x)=P(X\le x)=1-e^{-\lambda x}\]
+\[f_X(x)=\lambda e^{-\lambda x}\]
+\epr
+\item CDF:
+\[F_X(x)=\bcs0,\quad&x<0\\1-e^{-\lambda x},\quad&x\ge0\ecs\]
+\item Quantile:
+\[Q(p)=-\frac{\ln(1-p)}{\lambda}\]
+\item Mean:
+\[E(X)=\frac{1}{\lambda}\]
+\bpr
+\[\ba
+E(X)&=\int_0^{\infty}x\lambda e^{-\lambda x}\dd{x}\\
+&=\evlp(-xe^{-\lambda x})_0^{\infty}+\int_0^{\infty}e^{-\lambda x}\dd{x}\\
+&=\evlp(-\frac{1}{\lambda}e^{-\lambda x})_0^{\infty}\\
+&=\frac{1}{\lambda}
+\ea\]
+\epr
+\item Variance:
+\[\operatorname{Var}(X)=\frac{1}{\lambda^2}\]
+\bpr
+\[\ba
+E(X^2)&=\int_0^{\infty}x^2\lambda e^{-\lambda x}\dd{x}\\
+&=\evlp(-x^2e^{-\lambda x})_0^{\infty}+\int_0^{\infty}2xe^{-\lambda x}\dd{x}\\
+&=\frac{2}{\lambda^2}
+\ea\]
+\[\operatorname{Var}(X)=E(X^2)-E(X)^2=\frac{2}{\lambda^2}-\frac{1}{\lambda^2}=\frac{1}{\lambda^2}\]
+\epr
+\item Mode:
+\[\operatorname{Mode}(X)=0\]
+\bpr
+\[f_X'(x)=-\lambda^2e^{-\lambda x}<0\]
+\epr
+\item Median:
+\[\operatorname{Median}(X)=\frac{\ln 2}{\lambda}\]
+\item Entropy:
+\[h(X)=1-\ln\lambda\]
+\bpr
+\[\ba
+h(X)&=-\lambda\int_0^{\infty}e^{-\lambda x}\qty(\ln(\lambda)-\lambda x)\dd{x}\\
+&=\evlp(e^{-\lambda x}\ln(\lambda))_0^{\infty}+\lambda^2\int_0^{\infty}xe^{-\lambda x}\dd{x}\\
+&=1-\ln\lambda
+\ea\]
+\epr
+\item Scaling:
+\[cX\sim\operatorname{Exp}\qty(\frac{\lambda}{c}),\quad c\in\bbR_{>0}\]
+\item Memorylessness
+\[P(X>x+y|X>x)=P(X>y),\quad x,y\in\bbR_{\ge0}\]
+\bpr
+\[\frac{e^{-\lambda (x+y)}}{e^{-\lambda x}}=e^{-\lambda y}\]
+\epr
+\item PDF monotonicity: strictly decreasing
+\epr
 \sssc{Erlang random variable}
-Model the sum of $k$ independent exponential random variables with the same $\lambda$. It's a special case of Gamma distribution. PDF $X\sim\Erlang(k,\lambda)$ read $X$ is Erlang distribued with shape $k$ and rate $\lambda$,
-\[f_X(x)=\bcs\frac{\lambda^kx^{k-1}e^{-\lambda x}}{(k-1)!},\quad&x\ge 0\\0,\quad&\tx{otherwise}\ecs.\]
-CDF:
-\[F_X(x)=\bcs0,\quad&x<0\\1-e^{-\lambda x}\sum_{i=0}^{k-1}\frac{(\lambda x)^i}{i!},\quad&x\ge 0\ecs.\]
-Exponential is a special case of Erlang with $k=1$.
-\sssc{Pascal converges to Erlang}
-Let the average number of occurrence per unit time be $\lambda$. Let $X_n$ be the Pascal random variable obtained by dividing a unit time into $n$ equal intervals and counting the number of intervals and counting the number of intervals until the $k$th success, that is, $X_n\sim\Pascal\qty(\frac{\lambda}{n})$ and the occurrence time $T_n=\frac{X_n}{n}$, whose CDF can be expressed as, for $t\ge 0$,
-\[\sum_{i=0}^{k-1}\binom{nt}{i}\qty(\frac{\lambda}{n})^i\qty(1-\frac{\lambda}{n})^{nt-i+1}\le 1-F_{T_n}(t)=\sum_{i=0}^{k-1}\binom{nt}{i}\qty(\frac{\lambda}{n})^i\qty(1-\frac{\lambda}{n})^{\lceil nt\rceil-i+1}\le\sum_{i=0}^{k-1}\binom{nt}{i}\qty(\frac{\lambda}{n})^i\qty(1-\frac{\lambda}{n})^{nt-i}.\]
-
-As $n\to\infty$, both sides converge to the CDF of $\Erlang(k,\lambda)$, i.e.,
-\[\lim_{n\to\infty}F_{T_n}(t)=1-e^{-\lambda t}\sum_{i=0}^{k-1}\frac{(\lambda t)^i}{i!}.\]
-
-sum of $n$ exponential ($\lambda$) random variables is an Erlang $(n,\lambda)$ random variable
+\bit
+\item Trial/Decomposition: An random variable with shape $k$ and rate $\lambda$ is the sum of $k$ i.i.d. exponential variables with rate $\lambda$.
+\item Notation: $X\sim\operatorname{Erlang}(k,\lambda)$, read as $X$ is Erlang distributed with shape $k$ and rate $\lambda$, or parameters $k$ and $\lambda$
+\item Parameters: $k\in\bbN$ and $\lambda\in(0,\infty)$
+\item Support: $[0,\infty)$
+\item PDF:
+\[f_X(x)=\frac{\lambda^kx^{k-1}e^{-\lambda x}}{(k-1)!},\quad x\in\bbR_{>0}\]
+\bpr
+Prove by mathematical induction. For $k=1$,
+\[f_1(x)=\lambda e^{-\lambda x}\]
+Assume for $k=n$,
+\[f_n(x)=\frac{\lambda^nx^{n-1}e^{-\lambda x}}{(n-1)!}\]
+For $k=n+1$,
+\[\ba
+f_{n+1}(x)&=\int_0^xf_n(t)f_1(x-t)\dd{t}\\
+&=\int_0^x\frac{\lambda^nt^{n-1}e^{-\lambda t}}{(n-1)!}\lambda e^{-\lambda(x-t)}\dd{t}\\
+&=\int_0^x\frac{\lambda^{n+1}t^{n-1}e^{-\lambda x}}{(n-1)!}\dd{t}\\
+&=\frac{\lambda^{n+1}x^ne^{-\lambda x}}{n!}
+\ea\]
+\epr
+\item CDF:
+\[F_X(x)=\bcs0,\quad&x<0\\1-\sum_{n=0}^{k-1}\frac{(\lambda x)^ne^{-\lambda x}}{n!},\quad&x\ge0\ecs\]
+\bpr
+\[\ba
+F_k(x)&=\int_0^x\frac{\lambda^kt^{k-1}e^{-\lambda t}}{(k-1)!}\dd{t}\\
+&=\frac{\lambda^{k-1}}{(k-1)!}\qty(\evlp(-t^{k-1}e^{-\lambda t})_0^x+(k-1)\int_0^xt^{k-2}e^{-\lambda t}\dd{t}
+)\\
+&=-\frac{(\lambda x)^{k-1}e^{-\lambda x}}{(k-1)!}+\frac{\lambda^{k-1}}{(k-2)!}\int_0^xt^{k-2}e^{-\lambda t}\dd{t}\\
+&=-\frac{(\lambda x)^{k-1}e^{-\lambda x}}{(k-1)!}+F_{k-1}(x)
+\ea\]
+\[F_1(x)=1-e^{-\lambda x}\]
+\[F_k(x)=1-\sum_{n=0}^{k-1}\frac{(\lambda x)^ne^{-\lambda x}}{n!}\]
+\epr
+\item Mean:
+\[E(X)=\frac{k}{\lambda}\]
+\item Variance:
+\[\operatorname{Var}(X)=\frac{k}{\lambda^2}\]
+\item Mode:
+\[\operatorname{Mode}(X)=\frac{k-1}{\lambda}\]
+\bpr
+\[f_X'(x)=\frac{(k-1-\lambda x)\lambda^kx^{k-2}e^{-\lambda x}}{(k-1)!}\]
+\[f_X'(x)>0\iff x<\frac{k-1}{\lambda}\]
+\[f_X'(x)<0\iff x>\frac{k-1}{\lambda}\]
+\epr
+\item Scaling:
+\[cX\sim\operatorname{Exp}\qty(k,\frac{\lambda}{c}),\quad c\in\bbR_{>0}\]
+\item PDF monotonicity: strictly increasing for $x\le\frac{k-1}{\lambda}$ and strictly decreasing for $x\ge\frac{k-1}{\lambda}$
+\epr
+\sssc{Geometric to exponential limit theorem}
+For any fixed $\lambda\in(0,\infty)$, let $X_n\sim\operatorname{Geom}\qty(\frac{\lambda}{n})$ and $Y_n=\frac{X_n}{n}$. Then
+\[\lim_{n\to\infty}Y_n=\operatorname{Exp}(\lambda).\]
+\bpr
+\[F_{Y_n}(x)=1-\qty(1-\frac{\lambda}{n})^{\lfloor nx\rfloor}\]
+\[\lim_{n\to\infty}F_{Y_n}(x)=1-e^{-\lambda x}\]
+\epr
+\sssc{Negative binomial to Erlang limit theorem}
+For any fixed $\lambda\in(0,\infty)$, let $X_n\sim\operatorname{NegBin}\qty(r,\frac{\lambda}{n})$ and $Y_n=\frac{X_n}{n}$. Then
+\[\lim_{n\to\infty}Y_n=\operatorname{Erlang}(r,\lambda).\]
+\bpr
+PLACEHOLDER
+\epr
 \end{document}
