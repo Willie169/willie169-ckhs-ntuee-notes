@@ -174,7 +174,7 @@ Define
 \[F_X(x)=F(x)\]
 \epr
 \sssc{Quantile}
-Quantile $Q$ is the inverse of CDF, that is,
+Quantile $Q(p)$ is the inverse of CDF, that is,
 \[P(X\le Q(p))=p.\]
 \sssc{Discrete random variable}
 A discrete random variable is a real random variable with a countable sample space.
@@ -590,7 +590,7 @@ S&=\sum_{k=1}^{\infty}k(1-p)^{k-1}\\
 \item Mean:
 \[E(X)=\frac{r}{p}\]
 \bpr
-Consider a sequnce of i.i.d. Bernoulli trial with success probability $p$ with $T_i$ defined as the random variable of the number of trials until the $i$th success for $i\in\bbN\cap[1,r]$. Define $X_1=T_1$, and for $i\in\bbN\cap[2,r]$, define $X_i=T_i-T_{i-1}$. Then
+Consider a sequence of i.i.d. Bernoulli trial with success probability $p$ with $T_i$ defined as the random variable of the number of trials until the $i$th success for $i\in\bbN\cap[1,r]$. Define $X_1=T_1$, and for $i\in\bbN\cap[2,r]$, define $X_i=T_i-T_{i-1}$. Then
 \[X=T_r=\sum_{i=1}^rX_i.\]
 And the $X_i$s are i.i.d. geometric random variable with parameter $p$. Thus, the mean of $X$ is $r$ times that of the geometric random variable.
 \epr
@@ -724,9 +724,9 @@ For any fixed $\lambda\in(0,\infty)$, let $X\sim\operatorname{Pois}(\lambda)$ an
 \ea\]
 \epr
 \ssc{Families of Continuous Random Variables}
-\sssc{Continuous uniform random variable}
+\sssc{Continuous or rectangular uniform random variable}
 \bit
-\item Notation: $X\sim\calU_{[a,b]}$, $X\sim\operatorname{Unif}(a,b)$, or $X\sim\operatorname{Uniform}(a,b)$, read as $X$ is continuously uniform distributed with parameters $a$ and $b$
+\item Notation: $X\sim\calU_{[a,b]}$, $X\sim\operatorname{Unif}(a,b)$, or $X\sim\operatorname{Uniform}(a,b)$, read as $X$ is continuously or rectangularly uniform distributed with parameters $a$ and $b$
 \item Parameters: $a,b\in\bbR\land a<b$
 \item Support: $[a,b]$
 \item PDF:
@@ -734,7 +734,7 @@ For any fixed $\lambda\in(0,\infty)$, let $X\sim\operatorname{Pois}(\lambda)$ an
 \item CDF:
 \[F_X(x)=\bcs 0,\quad&x<a\\ \frac{x-a}{b-a},\quad&x\in[a,b]\\1,\quad&x>b\ecs\]
 \item Mean:
-\[\operatorname{Mean}(X)=\frac{a+b}{2}\]
+\[E(X)=\frac{a+b}{2}\]
 \item Variance:
 \[\operatorname{Var}(X)=\frac{(b-a)^2}{12}\]
 \bpr
@@ -754,7 +754,7 @@ E(X^2)&=\int_a^b\frac{x^2}{b-a}\dd{x}\\
 \[\operatorname{Mode}(X)=[a,b]\]
 \item Median:
 \[\operatorname{Median}(X)=\frac{a+b}{2}\]
-\item Entropy
+\item Entropy:
 \[h(X)=\ln(b-a)\]
 \bpr
 \[\ba
@@ -762,39 +762,122 @@ h(X)&=-\int_a^b\frac{1}{b-a}\ln(\frac{1}{b-a})\dd{x}\\
 &=\ln(b-a)
 \ea\]
 \epr
-\item Transition invariance:
+\item Transition:
 \[X-c\sim\operatorname{Unif}(a-c,b-c)\]
 \item Scaling:
 \[cX\sim\operatorname{Unif}(ca,cb)\]
 \item Symmetry: about $\frac{b-a}{2}$
 \item PDF monotonicity: constant
 \epr
+\sssc{Normal (常態/正態) or Gaussian (高斯) random variable}
+\bit
+\item Notation: $X\sim\calN(\mu,\sigma^2)$ or $X\sim N(\mu,\sigma^2)$, read as $X$ is normal or Gaussian distributed with mean $\mu$ and standard deviation $\sigma$
+\item Parameters: $\mu\in\bbR$ and $\sigma\in(0,\infty)$
+\item Support: $\bbR$
+\item PDF:
+\[\ba
+f_X(x)&=\frac{1}{\sqrt{2\pi}\sigma}\exp(-\frac{(x-\mu)^2}{2\sigma^2})\\
+&=\frac{1}{\sigma}\varphi\left(\frac{x-\mu}{\sigma}\right),
+\ea\]
+where $\varphi(x)$ is the PDF of the standard or unit normal distribution $\calN(0,1)$, that is,
+\[\varphi(x)=\frac{1}{\sqrt{2\pi}}\exp(-\frac{x^2}{2})\]
+\item CDF:
+\[F_X(x)=\Phi\qty(\frac{x-\mu}{\sigma}),\]
+where $\Phi(x)$ is the CDF of the standard or unit normal distribution $\calN(0,1)$, that is,
+\[\Phi(x)=\frac{1}{2}\qty(1+\operatorname{erf}\qty(\frac{x}{\sqrt{2}})),\]
+where $\operatorname{erf}(x)$ is the (Gaussian) error function, that is,
+\[\erf(x)=\frac{2}{\sqrt{\pi}}\int_0^xe^{-t^2}\dd{t}\]
+\bpr
+Lemma:
+\[I=\int_0^{\infty}e^{-t^2}\dd{t}=\frac{\sqrt{\pi}}{2}\]
+Proof of lemma:
+\[\ba
+I^2&=\qty(\int_0^{\infty}e^{-x^2}\dd{x})\qty(\int_0^{\infty}e^{-y^2}\dd{y})\\
+&=\int_0^{\infty}\int_0^{\infty}e^{-x^2}e^{-y^2}\dd{x}\dd{y}\\
+&=\int_0^{\pi/2}\int_0^{\infty}e^{-r^2}r\dd{r}\dd{\theta}\\
+&=\frac{1}{2}\int_0^{\pi/2}\int_0^{\infty}e^{-u}\dd{u}\dd{\theta},\quad u=r^2\\
+&=\frac{1}{2}\int_0^{\pi/2}1\dd{\theta}\\
+&=\frac{\pi}{4}
+\ea\]
+\[F_X(x)=\int_{-\infty}^x\frac{1}{\sqrt{2\pi}\sigma}\exp(-\frac{(t-\mu)^2}{2\sigma^2})\dd{t}\]
+\[u=\frac{t-\mu}{\sqrt{2}\sigma},\quad\dd{u}=\frac{1}{\sqrt{2}\sigma}\dd{t}\]
+\[\ba
+F_X(x)&=\frac{1}{\sqrt{\pi}}\int_{-\infty}^{\frac{x-\mu}{\sqrt{2}\sigma}}e^{-u^2}\dd{u}\\
+&=\frac{1}{\sqrt{\pi}}\int_{-\infty}^{\frac{x-\mu}{\sqrt{2}\sigma}}e^{-u^2}\dd{u}\\
+&=\frac{1}{\sqrt{\pi}}\qty(\frac{\sqrt{\pi}}{2}+\int_0^{\frac{x-\mu}{\sqrt{2}\sigma}}e^{-u^2}\dd{u})\\
+&=\frac{1}{2}+\frac{1}{\sqrt{\pi}}\int_0^{\frac{x-\mu}{\sqrt{2}\sigma}}e^{-u^2}\dd{u}\\
+&=\frac{1}{2}\qty(1+\operatorname{erf}\qty(\frac{x-\mu}{\sqrt{2}\sigma}))
+\ea\]
+\epr
+\item Quantile:
+\[\ba
+Q(p)&=\mu+\sigma\Phi^{-1}(p)\\
+&=\mu+\sqrt{2}\sigma\operatorname{erf}^{-1}(2p-1)
+\ea\]
+\item Mean:
+\[E(X)=\mu\]
+\bpr
+\[E(X)=\int_{-\infty}^{\infty}\frac{x}{\sqrt{2\pi}\sigma}\exp(-\frac{(x-\mu)^2}{2\sigma^2})\dd{x}\]
+\[u=\frac{x-\mu}{\sqrt{2}\sigma},\quad\dd{u}=\frac{1}{\sqrt{2}\sigma}\dd{x}\]
+\[\ba
+E(X)&=\int_{-\infty}^{\infty}\frac{x}{\sqrt{2\pi}\sigma}\exp(-\frac{(x-\mu)^2}{2\sigma^2})\dd{x}\\
+&=\frac{1}{\sqrt{\pi}}\int_{-\infty}^{\infty}\qty(\sqrt{2}\sigma u+\mu)e^{-u^2}\dd{u}\\
+&=\mu
+\ea\]
+\epr
+\item Variance:
+\[\operatorname{Var}(X)=\sigma^2\]
+\bpr
+\[E(X^2)=\int_{-\infty}^{\infty}\frac{x^2}{\sqrt{2\pi}\sigma}\exp(-\frac{(x-\mu)^2}{2\sigma^2})\dd{x}\]
+\[u=\frac{x-\mu}{\sqrt{2}\sigma},\quad\dd{u}=\frac{1}{\sqrt{2}\sigma}\dd{x}\]
+\[\ba
+E(X^2)&=\frac{1}{\sqrt{\pi}}\int_{-\infty}^{\infty}\qty(\sqrt{2}\sigma u+\mu)^2e^{-u^2}\dd{u}\\
+&=\frac{1}{\sqrt{\pi}}\int_{-\infty}^{\infty}2\sigma^2u^2e^{-u^2}\dd{u}+\mu^2\\
+&=\frac{2\sigma^2}{\sqrt{\pi}}\int_{-\infty}^{\infty}u^2e^{-u^2}\dd{u}+\mu^2\\
+&=\frac{2\sigma^2}{\sqrt{\pi}}\qty(\evlp(-\frac{1}{2}ue^{-u^2})_{-\infty}^{\infty}+\int_{-\infty}^{\infty}ue^{-u^2}\dd{u})+\mu^2\\
+&=-\frac{2\sigma^2}{\sqrt{\pi}}\qty(\evlp(-\frac{1}{2}e^{-u^2})_{-\infty}^{\infty}+\int_{-\infty}^{\infty}\frac{1}{2}e^{-u^2}\dd{u})+\mu^2\\
+&=\sigma^2+\mu^2
+\ea\]
+\[\operatorname{Var}(X)=E(X^2)-E(X)^2=\sigma^2+\mu^2-\mu^2=\sigma^2\]
+\epr
+\item Mode:
+\[\operatorname{Mode}(X)=\mu\]
+\bpr
+\[\ba
+f_X'(x)&=-\frac{1}{\sqrt{2\pi}\sigma}\frac{2(x-\mu)}{2\sigma^2}\exp(-\frac{(x-\mu)^2}{2\sigma^2})\\
+&=-\frac{(x-\mu)}{\sqrt{2\pi}\sigma^3}\exp(-\frac{(x-\mu)^2}{2\sigma^2})
+\ea\]
+\[f_X'(x)>0\iff x<\mu\]
+\[f_X'(x)<0\iff x>\mu\]
+\epr
+\item Median:
+\[\operatorname{Median}(X)=\mu\]
+\item Entropy:
+\[h(X)=\frac{1}{2}\ln(2\pi e\sigma^2)\]
+\bpr
+\[u=\frac{x-\mu}{\sqrt{2}\sigma},\quad\dd{u}=\frac{1}{\sqrt{2}\sigma}\dd{x}\]
+\[\ba
+h(X)&=-\int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}\sigma}\exp(-\frac{(x-\mu)^2}{2\sigma^2})\ln(\frac{1}{\sqrt{2\pi}\sigma}\exp(-\frac{(x-\mu)^2}{2\sigma^2}))\dd{x}\\
+&=-\frac{1}{\sqrt{2\pi}\sigma}\int_{-\infty}^{\infty}\exp(-\frac{(x-\mu)^2}{2\sigma^2})\qty(\ln(\frac{1}{\sqrt{2\pi}\sigma})-\frac{(x-\mu)^2}{2\sigma^2})\dd{x}\\
+&=\frac{\ln(\sqrt{2\pi}\sigma)}{\sqrt{2\pi}\sigma}\int_{-\infty}^{\infty}\exp(-\frac{(x-\mu)^2}{2\sigma^2})\dd{x}+\frac{1}{\sqrt{2\pi}\sigma}\int_{-\infty}^{\infty}\exp(-\frac{(x-\mu)^2}{2\sigma^2})\frac{(x-\mu)^2}{2\sigma^2}\dd{x}\\
+&=\frac{\ln(2\pi\sigma^2)}{2\sqrt{\pi}}\int_{-\infty}^{\infty}e^{-u^2}\dd{u}+\frac{1}{\sqrt{\pi}}\int_{-\infty}^{\infty}u^2e^{-u^2}\dd{u}\\
+&=\frac{\ln(2\pi\sigma^2)}{2}+\frac{1}{\sqrt{\pi}}\qty(\evlp(-\frac{1}{2}ue^{-u^2})_{-\infty}^{\infty}+\frac{1}{2}\int_{-\infty}^{\infty}e^{-u^2}\dd{x})\\
+&=\frac{\ln(2\pi\sigma^2)}{2}+\frac{1}{2}\\
+&=\frac{1}{2}\ln(2\pi e\sigma^2)
+\ea\]
+\epr
+\item Transition:
+\[X-c\sim\calN(\mu-c,\sigma^2)\]
+\item Scaling:
+\[cX\sim\calN(c\mu,c^2\sigma^2)\]
+\item Symmetry: about $\mu$
+\item PDF monotonicity: strictly increasing for $x\le\mu$ and strictly decreasing for $x\ge\mu$
+\epr
 
 
 
 
-\sssc{Normal distribution (常態分布/正態分布)/Gaussian distribution (高斯分布)}
-The general normal distribution or Gaussian distribution given by mean $\mu$ and standard deviation $\sigma$ is a continuous probability distribution for a real-valued random variable defined by the probability density function:
-\[f(x|\mu,\sigma^2)=\frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}.\]
-\sssc{Cumulative distribution function}
-\[F(x|\mu,\sigma^2)=\frac{1}{2}\left(1+\operatorname{erf}\left(\frac{x-\mu}{\sigma\sqrt{2}}\right)\right),\]
-where $\operatorname{erf}$ is the error function.
-\[\text{Mode}(x)=\mu\]
-\[\text{Median}(x)=\mu\]
-\[H(x)=\frac{1}{2}\log\qty(2\pi e\sigma^2).\]
-If the random variable $X$ follows the general normal distribution given by mean $\mu$ and standard deviation $\sigma$, we write $X\sim\mathcal{N}(\mu,\sigma^2)$ and read $X$ is Gaussian distributed with mean $\mu$ and variance $\sigma^2$.
 
-The standard normal distribution or unit normal distribution is the normal distribution given by mean $\mu=0$ and standard deviation $\sigma=1$.
-\begin{itemize}
-\item The probability density function of standard normal distribution, $\varphi(z)$, is
-\[\varphi(z)=\frac{1}{\sqrt{2\pi}}e^{-\frac{z^2}{2}}.\]
-\item The cumulative distribution function of standard normal distribution, $\Phi(z)$, is
-\[\Phi(z)=\frac{1}{2}\left(1+\operatorname{erf}\left(\frac{z}{\sqrt{2}}\right)\right).\]
-\item PDF of general normal distribution:
-\[f(x|\mu,\sigma^2)=\frac{1}{\sigma}\varphi\left(\frac{x-\mu}{\sigma}\right).\]
-\item CDF of general normal distribution:
-\[F(x|\mu,\sigma^2)=\Phi\left(\frac{x-\mu}{\sigma}\right).\]
-\end{itemize}
 \sssc{Exponential random variable}
 An exponential random variable models the time between events in a Poisson process, where events occur continuously and independently at a constant average rate. The PDF of it $X\sim\Exp(\lambda)$, read as $X$ is exponentially distributed with rate $\lambda$, can be expressed as
 \[f_X(x)=\bcs\lambda e^{-\lambda x},\quad&x\ge 0\\0\quad&\tx{otherwise}\ecs.\]
@@ -817,14 +900,6 @@ Let the average number of occurrence per unit time be $\lambda$. Let $X_n$ be th
 
 As $n\to\infty$, both sides converge to the CDF of $\Erlang(k,\lambda)$, i.e.,
 \[\lim_{n\to\infty}F_{T_n}(t)=1-e^{-\lambda t}\sum_{i=0}^{k-1}\frac{(\lambda t)^i}{i!}.\]
-\sssc{Gamma distribution}
-PLACEHOLDER
-Beta
-Chi-squared
-Student's t
-F-distribution
-Cauchy
-Log-normal
 
 sum of $n$ exponential ($\lambda$) random variables is an Erlang $(n,\lambda)$ random variable
 \end{document}
