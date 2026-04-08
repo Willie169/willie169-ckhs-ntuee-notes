@@ -48,9 +48,6 @@ A partition is a partition of sample space that is a subset of the event space.
 \sssc{Classical probability (古典機率) or equally likely outcomes}
 If the number of all possible outcomes in the sample space $S$ of an experiment is finite, and the chance of each outcome occurring is equal, then the probability of an event $A$ occurring can be calculated by:
 \[P(A)=\frac{|A|}{|S|}.\]
-\sssc{Conditional probability (條件機率)}
-The probability of another event $A$ occurring given that a certain event $B$ has occurred, denoted as $P(A|B)$.
-\[P(A|B)= \frac{P\qty(A\cap B)}{P\qty(B)}.\]
 \sssc{Mutually exclusive events (互斥事件)}
 Two or more events $A_1,A_2,\ldots,A_n$ are mutually exclusive events iff:
 \[\forall i,j\in\bbN_{\le n}\land i\ne j\colon P(A_i\cap A_j)=0.\]
@@ -89,24 +86,6 @@ For event space $\calF$ and indexed family $(A_i)_{i=1}^n\subseteq\calF$ with $n
 \[A\subseteq B\implies P(A)\le P(B).\]
 \sssc{Union bound}
 P(\bigcup_{i=1}^nA_i)\le\sim_{i=1}^nP(A_i).\]
-\ssc{Conditional probability laws}
-\sssc{Conditional probability space}
-For a probability space $(\Omega,\calF,P)$ and a fixed event $B$ with $P(B)>0$, the function $P(\cdot|B)\colon\calF\to[0,1]$ defined by $A\mapsto P(A|B)$ is itself a probability measure on the same measurable space $(\Omega,\calF)$.
-\bpr
-By distributivity of $\cap$ over $\cup$, it satisfies countable additivity.
-\epr
-\sssc{Law of multiplication}
-For sample space $\Omega$ and $n$ events $A_1,A_2,\ldots,A_n$, define $B_i=\bigcap_{j=1}^{i-1}A_j$ for $i\in\bbN_{\ge 2,\le n+1}$ and $B_1=\Omega$. Then,
-\[P(\bigcap_{i=1}^nA_i)=\bcs\prod_{i=1}^nP(A_i|B_i),\quad&\forall i\in\bbN_{\le n}\colon P(B_i)>0\\0,\quad&\exists i\in\bbN_{\le n}\colon P(B_i)=0\ecs.\]
-\bpr
-\[\prod_{i=1}^nP(A_i|B_i)=\prod_{i=1}^n\frac{P(B_{i+1})}{P(B_i)}=\frac{P(B_{n+1})}{P(B_1)}=\frac{P(\bigcap_{i=1}^nA_i)}{1}=P(\bigcap_{i=1}^nA_i).\]
-\epr
-\sssc{Law of total probability}
-Let $(A_i)_{i=1}^n\subseteq\calF$ be a partition, and $B$ be an event. Then
-\[P(B)=\sum_{i=1}^nP(A_i\cap B)=\sum_{i=1}^nP(B|A_i)P(A_i).\]
-\sssc{Bayes' theorem (貝葉斯定理或貝氏定理)}
-Let $(A_i)_{i=1}^n\subseteq\calF$ be a partition, and $B$ be an event. Then,
-\[P\qty(A_k\mid B)=\frac{P\qty(B|A_k)P(A_k)}{\sum_{i=1}^nP\qty(B\mid A_i)P(A_i)}.\]
 \ssc{Independence theorems}
 \sssc{Product rule}
 If events $A$ and $B$ are independent, $P(A)\cdot P(B)=P(A\cap B)$.
@@ -229,6 +208,40 @@ For two independent discrete random variables $X,Y$,
 \sssc{Sum of independent continuous random variables}
 For two independent continuous random variables $X,Y$,
 \[f_{X+Y}(z)=\int_{-\infty}^{\infty}f_X(x)f_Y(z-x)\dd{x}.\]
+\ssc{Conditional Probability (條件機率)}
+\sssc{Conditional probability}
+The probability of another event $A$ occurring given that a certain event $B$ has occurred, denoted as $P(A|B)$.
+\[P(A|B)= \frac{P\qty(A\cap B)}{P\qty(B)}.\]
+\sssc{Conditional probability space}
+For a probability space $(\Omega,\calF,P)$ and a fixed event $B\in\calF$ with $P(B)>0$, the function $P(\cdot|B)\colon\calF\to[0,1]$ defined by $A\mapsto P(A|B)$ is a probability measure on the same measurable space $(\Omega,\calF)$.
+\sssc{Conditional random variable}
+For a probability space $(\Omega_s,\calF_s,P_s)$, a measurable space $(\Omega_t,\calF_t)$, a random variable $X\colon\Omega_s\to\Omega_t$ with pushforward probability measure $P_t$, and a fixed event $A\in\calF_t$ with $P_t(A)>0$, the condition random variable $X|B$ is a randm variable over $(\Omega_s,\calF_s,P_s(\cdot|X^{-1}(A)))$ with pushforward probability measure $P_t(\cdot|B)$.
+\sssc{Conditional CDF}
+For a real random variable $X$ and an event $A\subseteq X(\Omega)$ such that $P(A)>0$, the conditional CDF of $X$ given $A$ follows
+\[F_{X|A}(x)=P(X\le x|A)=\frac{P(X\le x,A)}{P(A)},\quad\forall x\in\bbR.\]
+\sssc{Conditional PMF of discrete random variable}
+For a discrete random variable $X$ and an event $A\subseteq X(\Omega)$ such that $P(A)>0$, the conditional PMF of $X$ given $A$ follows
+\[p_{X|A}(x)=P(X=x|A)=\frac{P(X=x,A)}{P(A)}=\frac{P(X=x)\cdot\mb{1}_A(x)}{P(A)},\quad\forall x\in\bbR.\]
+\sssc{Conditional PDF of continuous random variable}
+For a continuous random variable $X$ and an event $A\subseteq X(\Omega)$ such that $P(A)>0$, the conditional PDF of $X$ given $A$ follows
+\[f_{X|A}(x)=\dv{}{x}F_{x|A}(x)=\dv{}{x}(\frac{P(X\le x,A)}{P(A)})=\frac{f_X(x)\cdot\mb{1}_A(x)}{P(A)},\quad\forall x\in\bbR.\]
+\ssc{Conditional probability laws}
+\sssc{Law of multiplication}
+For sample space $\Omega$ and $n$ events $A_1,A_2,\ldots,A_n$, define $B_i=\bigcap_{j=1}^{i-1}A_j$ for $i\in\bbN_{\ge 2,\le n+1}$ and $B_1=\Omega$. Then,
+\[P(\bigcap_{i=1}^nA_i)=\bcs\prod_{i=1}^nP(A_i|B_i),\quad&\forall i\in\bbN_{\le n}\colon P(B_i)>0\\0,\quad&\exists i\in\bbN_{\le n}\colon P(B_i)=0\ecs.\]
+\bpr
+\[\prod_{i=1}^nP(A_i|B_i)=\prod_{i=1}^n\frac{P(B_{i+1})}{P(B_i)}=\frac{P(B_{n+1})}{P(B_1)}=\frac{P(\bigcap_{i=1}^nA_i)}{1}=P(\bigcap_{i=1}^nA_i).\]
+\epr
+\sssc{Law of total probability}
+Let $(A_i)_{i=1}^n\subseteq\calF$ be a partition, and $B$ be an event. Then
+\[P(B)=\sum_{i=1}^nP(A_i\cap B)=\sum_{i=1}^nP(B|A_i)P(A_i).\]
+Let $X$ be a discrete random variable. Then
+\[p_X(x)=\sum_{i=1}^np_{X|A_i}(x)P(A_i).\]
+Let $X$ be a continuous random variable. Then
+\[f_X(x)=\sum_{i=1}^nf_{X|A_i}(x)P(A_i).\]
+\sssc{Bayes' theorem (貝葉斯定理或貝氏定理)}
+Let $(A_i)_{i=1}^n\subseteq\calF$ be a partition, and $B$ be an event. Then,
+\[P\qty(A_k\mid B)=\frac{P\qty(B|A_k)P(A_k)}{\sum_{i=1}^nP\qty(B\mid A_i)P(A_i)}.\]
 \ssc{Multivariate or joint random variable}
 \sssc{Definition}
 For $n$ real random variables $X_1,X_2,\ldots,X_n$ with the same source sample space $\Omega$ and event space $\calF$, the multivariate or joint random variable $X_1,X_2,\ldots,X_n$ is defined for all $\omega\in\Omega^n$ as
@@ -298,6 +311,11 @@ For indexed families of real random variables $(X_i)_{i\in I}$ and real numbers 
 \sssc{Affine Transformation}
 For a real random variable $X$, $a\in\bbR_{\neq0}$, and $b\in\mathbb{R}$,
 \[E(Y)=aE(X)+b.\]
+\sssc{Conditional expectation}
+\[E(X|A)=\frac{E(X\cdot\mb{1}_A)}{P(A)}\]
+\sssc{Law of total expectation}
+Let $(A_i)_{i=1}^n\subseteq\calF$ be a partition. Then
+\[E(X)=\sum_{i=1}^nE(X|A_i)P(A_i)\]
 \ssc{Variance and Mean square error (MSE)}
 \sssc{Variance (變異數/方差)}
 For a real random variable $X$, variance $\Var(X)$ or $\sigma_X^{\phantom{X}2}$ of it is defined as
