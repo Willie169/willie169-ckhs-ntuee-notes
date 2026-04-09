@@ -269,7 +269,9 @@ If $X_1,X_2,\ldots,X_n$ are independent
 For a random variable $X$ on $(\Omega_s,\calF_s,P_s)$ with induced probability space $(\Omega_t,\calF_t,P_t)$, the expected value or expectation $E(X)$, $\bbE(X)$, $E[X]$, or $\bbE[X]$, or mean $\mu_X$, of it is defined as the Lebesgue integral
 \[E(X)=\int_{\Omega_s}X(\omega_s)\dd{P_s(\omega_s)}\]
 or equivalently,
-\[E(X)=\int_{\Omega_t}x\dd{P_t(x)}.\]
+\[E(X)=\int_{\Omega_t}x\dd{P_t(x)},\]
+or in Stieltjes integral
+\[E(X)=\int_{x=-\infty}^{\infty}x\dd{F_X(x)},\]
 \sssc{For discrete random variable}
 For a discrete random variable $X$ with target sample space $\Omega_t$ and probability mass function $p_X(x)$, the expected value or expectation $E(X)$, $\bbE(X)$, $E[X]$, or $\bbE[X]$, or mean $\mu_X$, of it is
 \[E(X)=\sum_{x\in\Omega_t}xp_X(x)\]
@@ -305,12 +307,12 @@ then,
 \[E(X^-)=\int_{-\infty}^0P(X\le x)\dd{x}=\int_{-\infty}^0F_X(x)\dd{x},\]
 and
 \[E(X)=E(X^+)-E(X^-).\]
+\sssc{Affine Transformation}
+For a real random variable $X$, $a\in\bbR_{\neq0}$, and $b\in\mathbb{R}$,
+\[E(aX+b)=aE(X)+b.\]
 \sssc{Linearity}
 For indexed families of real random variables $(X_i)_{i\in I}$ and real numbers $(a_i)_{i\in I}$ with $\abs{I}\in\bbN\cup\{\aleph_0\}$, where for $\abs{I}=\aleph_0$ suppose RHS is convergent,
 \[E(\sum_{i\in I}a_iX_i)=\sum_{i\in I}a_iE(X_i).\]
-\sssc{Affine Transformation}
-For a real random variable $X$, $a\in\bbR_{\neq0}$, and $b\in\mathbb{R}$,
-\[E(Y)=aE(X)+b.\]
 \sssc{Conditional expectation}
 \[E(X|A)=\frac{E(X\cdot\mb{1}_A)}{P(A)}\]
 \sssc{Law of total expectation}
@@ -332,15 +334,15 @@ that is,
 \[\Sigma_{ij}=\Cov(X_i,X_j)=E\qty((X_i-E(X_i))(X_j-E(X_j)).\]
 \sssc{Independent random variables covariance matrix}
 If all $X_i$ are independent, then $\Cov(\mb{X})$ is a diagonal matrix where $\Sigma_{ii}=\Var(X_i)$.
-\sssc{Sum of independent random variables variance}
+\sssc{Sum of independent random variables}
 For $n$-dimensional vectors of real random variables $\mb{X}=(X_1,X_2,\ldots,X_n)$ and real numbers $\mb{a}=(a_1,a_2,\ldots,X_n)$ with $n\in\bbN$,
 \[\Var(\sum_{i=1}^na_iX_i)=\mb{a}\Cov(\mb{X})\mb{a}^{\top}.\]
 For real random variables $X,Y$ and real numbers $a,b$,
 \[\Var(X+Y)=\Var(X)+\Var(Y)+2\Cov(X,Y).\]
 \sssc{Affine Transformation}
 For a real random variable $X$, $a\in\bbR_{\neq0}$, and $b\in\mathbb{R}$,
-\[\Var(Y)=a^2\Var(X).\]
-\[\SD(Y)=|a|\SD(X).\]
+\[\Var(aX+b)=a^2\Var(X).\]
+\[\SD(aX+b)=|a|\SD(X).\]
 \sssc{Mean square error (MSE) (均方（誤）差) or Expected square error}
 For a real random variable $X$ and a prediction or (blind) estimate $\hat{x}$, the mean square error $\MSE_X(\hat{x})$ or expected square error of the prediction is defined as
 \[\MSE_X(\hat{x})=E\qty((X-\hat{x})^2).\]
@@ -370,6 +372,42 @@ p_1 \\ p_2 \\ \vdots \\ p_n
 \mu_0 \\ \mu_1 \\ \vdots \\ \mu_{n-1}
 \end{bmatrix}\]
 \epr
+\sssc{Moment generating function (MGF)}
+The moment generating function (MGF) of a random variable $X$ is defined as
+\[M_X(t)=E\qty(e^{tX}),\quad t\in\bbR.\]
+\sssc{MGF as Laplace transform}
+In Stieltjes integral,
+\[M_X(t)=\int_{x=-\infty}^{\infty}e^{tx}\dd{F_x(x)}.\]
+\sssc{MGF determines CDF}
+If the MGF of $X$ exists in a neighborhood of $t=0$, it uniquely determines the distribution of $X$.
+\bpr
+By Mellin's inverse formula.
+\epr
+\sssc{MGF generating moments}
+If the MGF of $X$ exists in a neighborhood of $t=0$, $E(X^n)=M_X^{\pht{X}(n)}(0)$.
+\bpr
+Suppose the MGF of $X$ exists in $(-h,\vespilon)$ for some $\vespilon>0$ and $J=\qty(-\frac{h}{2},\frac{h}{2})$.
+
+For any $\delta>0$ and $n\in\bbN_0$, there exists $C_n>0$ such that
+\[|X|^n\le C_ne^{\delta|X|}\]
+Take some $\delta$ such that $0<\delta<\frac{h}{2}$,
+\[\abs{\dv[n]{}{t}e^{tX}}=|X|^ne^{tX}\le C_ne^{(\delta+t)|X|}\le C_ne^{\frac{h}{2}|X|}\le C_n\qty(e^{\frac{h}{2}X}+e^{-\frac{h}{2}X})\]
+Thus, $\dv[n]{}{t}e^{tX}$ is uniformly bounded in $J$.
+
+By Leibniz integral rule, since the integrands are uniformly bounded and thus the integrals are finite, for $t\in J$,
+\[\dv{}{t}E\qty(e^{tX})=\dv{}{t}\int_{\bbR}e^{tX}\dd{P(X)}=\int_{\bbR}\dv{}{t}e^{tX}\dd{P(X)}=E(\dv{}{t}e^{tX})\]
+Apply Leibniz integral rule iteratively, we obtain
+\[\dv[n]{}{t}E\qty(e^{tX})=E\qty(\dv[n]{}{t}e^{tX})\]
+Thus,
+\[M_X^{\pht{X}(n)}(t)=E(X^ne^{tX})=\sum_{k=n}^{\infty}\frac{t^{k-n}}{(k-n)!}E(X^k)\]
+\[M_X^{\pht{X}(n)}(0)=E(X^k)\]
+\epr
+\sssc{Affine Transformation}
+For a real random variable $X$, $a\in\bbR_{\neq0}$, and $b\in\mathbb{R}$,
+\[M_{aX+b}(t)=e^{bt}M_X(at).\]
+\sssc{Logarithmic Linearity}
+For indexed families of real random variables $(X_i)_{i\in I}$ and real numbers $(a_i)_{i\in I}$ with $\abs{I}\in\bbN\cup\{\aleph_0\}$, where for $\abs{I}=\aleph_0$ suppose RHS is convergent,
+\[M_{\sum_{i\in I}a_iX_i}(t)=\prod_{i\in I}M_{X_i}\qty(a_it).\]
 \ssc{Mode (眾數)}
 \sssc{For discrete random variable}
 For a discrete random variable $X$ with PMF $p_X(x)$, $\Mode(X)$ is defined as
@@ -381,7 +419,7 @@ For a continuous random variable $X$ with PDF $f_X(x)$, $\Mode(X)$ is defined as
 which is not necessarily unique.
 \sssc{Affine Transformation}
 For a real random variable $X$, $a\in\bbR_{\neq0}$, and $b\in\mathbb{R}$,
-\[\Mode(Y)=a\Mode(X)+b.\]
+\[\Mode(aX+b)=a\Mode(X)+b.\]
 \ssc{Median (中位數)}
 \sssc{Definition}
 For a real variable \( X \), the median 
@@ -393,7 +431,7 @@ When we denote $\Median(X)$ to be an interval $I$, it means that for all $x\in I
 \[P(X\leq x)\geq\frac{1}{2}\land P(X\geq x)\geq\frac{1}{2}.\]
 \sssc{Affine Transformation}
 For a real random variable $X$, $a\in\bbR_{\neq0}$, and $b\in\mathbb{R}$,
-\[\Median(Y)=a\Median(X)+b.\]
+\[\Median(aX+b)=a\Median(X)+b.\]
 \ssc{Entropy (熵) for discrete random variables}
 \sssc{Definition}
 For a discrete random variable $X$ with target sample space $\Omega$ and PMF $p_X(x)$, the entropy $H(X)$ of base $b$ is defined as
@@ -407,7 +445,7 @@ If $\abs{\Omega}=n$,
 and $H(X)=\log_bn$ occurs when $p_X(x)=\frac{1}{n}$.
 \sssc{Affine Transformation}
 For a discrete random variable $X$, $a\in\bbR_{\neq0}$, and $b\in\mathbb{R}$,
-\[H(Y)=\begin{cases}H(X),\quad &a\neq 0\\0,\quad &a=0\end{cases}.\]
+\[H(aX+b)=\begin{cases}H(X),\quad &a\neq 0\\0,\quad &a=0\end{cases}.\]
 \ssc{(Differential or continuous) entropy for continuous random variables}
 \sssc{Definition}
 For a continuous random variable $X$ with target sample space $\Omega$ and PDF $f_X(x)$, the (differential or continuous) entropy $h(X)$ or $H(X)$ of base $b$ is defined as
@@ -451,6 +489,11 @@ E(X^2)&=\sum_{k=a}^b\frac{k^2}{b-a+1}\\
 &=\frac{(b-a+1)^2-1}{12}
 \ea\]
 \epr
+\item MGF:
+\[M_X(t)=\frac{e^{at}-e^{(b+1)t}}{(b-a+1)(1-e^t)}\]
+\bpr
+\[E(e^{tX})=\frac{1}{b-a+1}\sum_{k=a}^be^{kt}=\frac{1}{b-a+1}e^{at}\frac{1-e^{(b-a+1)t}}{1-e^t}=\frac{e^{at}-e^{(b+1)t}}{(b-a+1)(1-e^t)}\]
+\epr
 \item Mode:
 \[\operatorname{Mode}(X)=\bbZ\cap[a,b]\]
 \item Median:
@@ -478,6 +521,8 @@ H(X)&=-\sum_{k=a}^b\frac{1}{b-a+1}\ln(\frac{1}{b-a+1})\\
 \[E(X)=p\]
 \item Variance:
 \[\operatorname{Var}(X)=p-p^2=p(1-p)\]
+\item MGF:
+\[M_X(t)=pe^t+1-p\]
 \item Mode:
 \[\opetarname{Mode}(X)=\bcs0,\quad&p<\frac{1}{2}\\0,1,\quad&p=\frac{1}{2}\\1,\quad&p>\frac{1}{2}\ecs\]
 \item Median:
@@ -521,6 +566,8 @@ E(X^2)&=\sum_{k=0}^nk^2\binom{n}{k}p^k(1-p)^{n-k}\\
 \[\operatorname{Var}(X)=E(X^2)-E(X)^2=-np^2+np=np(1-p)\]
 Alternatively, use decomposition.
 \epr
+\item MGF:
+\[M_X(t)=\qty(pe^t+1-p)^n\]
 \item Mode:
 \[\opetarname{Mode}(X)=\bcs n,\quad&p=1\\(n+1)p-1,(n+1)p,\quad&(n+1)p\in\bbN\land p\notin\bbZ\\\lfloor(n+1)p\rfloor,\quad&\text{otherwise}\ecs\]
 \bpr
@@ -587,6 +634,14 @@ E(X^2)&=\sum_{k=1}^{\infty}k^2p(1-p)^{k-1}\\
 \[E(X^2)=\frac{2E(X)-1}{p}=\frac{2-p}{p^2}\]
 \[\operatorname{Var}(X)=E(X^2)-E(X)^2=\frac{1-p}{p^2}\]
 \epr
+\item MGF:
+\[M_X(t)=\frac{pe^t}{1-(1-p)e^t},\quad t<-\ln(1-p)\]
+\bpr
+\[\ba
+E(e^{tX})&=\sum_{k=1}^{\infty}e^{kt}p(1-p)^{k-1}\\
+&=\frac{pe^{t}}{1-(1-p)e^t}
+\ea\]
+\epr
 \item Mode:
 \[\opetarname{Mode}(X)=1\]
 \bpr
@@ -649,9 +704,8 @@ And the $X_i$s are i.i.d. geometric random variable with parameter $p$. Thus, th
 \epr
 \item Variance:
 \[\operatorname{Var}(X)=\frac{r(1-p)}{p^2}\]
-\bpr
-Decomposition.
-\epr
+\item MGF:
+\[M_X(t)=\qty(\frac{pe^{t}}{1-(1-p)e^t})^r,\quad t<-\ln(1-p)\]
 \item Mode:
 \[\opetarname{Mode}(X)=\left\lfloor\frac{r-1}{p}\right\rfloor\]
 \bpr
@@ -720,6 +774,16 @@ E(X^2)&=\sum_{k=0}^{\infty}k^2\frac{\lambda^ke^{-\lambda}}{k!}\\
 &=\lambda^2+\lambda
 \ea\]
 \[\operatorname{Var}(X)=E(X^2)-E(X)^2=\lambda\]
+\epr
+\item MGF:
+\[M_X(t)=\exp(\lambda\qty(e^t-1))\]
+\bpr
+\[\ba
+E(e^{tX})&=\sum_{k=0}^{\infty}e^{kt}\frac{\lambda^ke^{-\lambda}}{k!}\\
+&=e^{-\lambda}\sum_{k=0}^{\infty}\frac{\qty(\lambda e^t)^k}{k!}\\
+&=e^{-\lambda}\exp(\lambda e^t)\\
+&=\exp(\lambda\qty(e^t-1))
+\ea\]
 \epr
 \item Mode:
 \[\operatorname{Mode}(X)=\lceil\lambda\rceil-1,\lfloor\lambda\rfloor\]
@@ -801,6 +865,14 @@ E(X^2)&=\int_a^b\frac{x^2}{b-a}\dd{x}\\
 &=\frac{a^2+b^2+ab}{3}-\frac{a^2+b^2+2ab}{4}\\
 &=\frac{4a^2+4b^2+4ab-3a^2-3b^2-6ab}{12}\\
 &=\frac{(b-a)^2}{12}
+\ea\]
+\epr
+\item MGF:
+\[M_X(t)&=\bcs\frac{e^{bt}-e^{at}}{(b-a)t},\quad&t\ne 0\\1,\quad&t=0\ecs\]
+\bpr
+\[\ba
+E(e^{tX})&=\int_a^b\frac{e^{tx}}{b-a}\dd{x}\\
+&=\bcs\frac{e^{bt}-e^{at}}{(b-a)t},\quad&t\ne 0\\1,\quad&t=0\ecs
 \ea\]
 \epr
 \item Mode:
@@ -898,6 +970,16 @@ E(X^2)&=\frac{1}{\sqrt{\pi}}\int_{-\infty}^{\infty}\qty(\sqrt{2}\sigma u+\mu)^2e
 \ea\]
 \[\operatorname{Var}(X)=E(X^2)-E(X)^2=\sigma^2+\mu^2-\mu^2=\sigma^2\]
 \epr
+\item MGF:
+\[M_X(t)=\exp(\mu t+\frac{\sigma^2t^2}{2})\]
+\bpr
+\[\ba
+E(e^{tX})&=\frac{1}{\sqrt{2\pi}\sigma}\int_{-\infty}^{\infty}\exp(-\frac{(x-\mu)^2}{2\sigma^2}+tx)\dd{x}\\
+&=\frac{1}{\sqrt{2\pi}\sigma}\int_{-\infty}^{\infty}\exp(-\frac{(x-\mu-\sigma^2t)^2}{2\sigma^2}+\frac{\sigma^2t^2}{2}+\mu t)\dd{x}\\
+&=\frac{\exp(\frac{\sigma^2t^2}{2}+\mu t)}{\sqrt{2\pi}\sigma}\int_{-\infty}^{\infty}\exp(-\frac{(x-\mu-\sigma^2t)^2}{2\sigma^2})\dd{x}\\
+&=\exp(\mu t+\frac{\sigma^2t^2}{2})
+\ea\]
+\epr
 \item Mode:
 \[\operatorname{Mode}(X)=\mu\]
 \bpr
@@ -940,7 +1022,7 @@ h(X)&=-\int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}\sigma}\exp(-\frac{(x-\mu)^2}{
 \item Parameters: $\lambda\in(0,\infty)$
 \item Support: $[0,\infty)$
 \item PDF:
-\[f_X(x)=\lambda e^{-\lambda x},\quad x\in\bbR_{>0}\]
+\[f_X(x)=\lambda e^{-\lambda x},\quad x\in\bbR_{\ge 0}\]
 \bpr
 Let $N(x)$ denotes the number of events occuring in $[0,x]$. We already know that
 \[P(N(x)=k)=\frac{(\lambda x)^ke^{-\lambda t}}{k!}.\]
@@ -974,6 +1056,16 @@ E(X^2)&=\int_0^{\infty}x^2\lambda e^{-\lambda x}\dd{x}\\
 \ea\]
 \[\operatorname{Var}(X)=E(X^2)-E(X)^2=\frac{2}{\lambda^2}-\frac{1}{\lambda^2}=\frac{1}{\lambda^2}\]
 \epr
+\item MGF:
+\[M_X(t)=\qty(1-\frac{t}{\lambda})^{-1},\quad t<\lambda\]
+\bpr
+\[\ba
+E(e^{tX})&=\int_0^{\infty}\lambda e^{(t-\lambda)x}\dd{x}\\
+&=\evlp(\frac{\lambda e^{(t-\lambda)x}}{t-\lambda})_0^{\infty}\\
+&=\frac{\lambda}{\lambda-t}\\
+&=\qty(1-\frac{t}{\lambda})^{-1}
+\ea\]
+\epr
 \item Mode:
 \[\operatorname{Mode}(X)=0\]
 \bpr
@@ -1006,7 +1098,7 @@ h(X)&=-\lambda\int_0^{\infty}e^{-\lambda x}\qty(\ln(\lambda)-\lambda x)\dd{x}\\
 \item Parameters: $k\in\bbN$ and $\lambda\in(0,\infty)$
 \item Support: $[0,\infty)$
 \item PDF:
-\[f_X(x)=\frac{\lambda^kx^{k-1}e^{-\lambda x}}{(k-1)!},\quad x\in\bbR_{>0}\]
+\[f_X(x)=\frac{\lambda^kx^{k-1}e^{-\lambda x}}{(k-1)!},\quad x\in\bbR_{\ge0}\]
 \bpr
 Prove by mathematical induction. For $k=1$,
 \[f_1(x)=\lambda e^{-\lambda x}\]
@@ -1037,6 +1129,8 @@ F_k(x)&=\int_0^x\frac{\lambda^kt^{k-1}e^{-\lambda t}}{(k-1)!}\dd{t}\\
 \[E(X)=\frac{k}{\lambda}\]
 \item Variance:
 \[\operatorname{Var}(X)=\frac{k}{\lambda^2}\]
+\item MGF:
+\[M_X(t)=\qty(1-\frac{t}{\lambda})^{-k}\]
 \item Mode:
 \[\operatorname{Mode}(X)=\frac{k-1}{\lambda}\]
 \bpr
