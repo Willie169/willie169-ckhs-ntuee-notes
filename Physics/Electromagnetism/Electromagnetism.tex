@@ -904,7 +904,7 @@ I_{rms}=&\sqrt{\frac{1}{T}\int_0^TI^2\,\mathrm{d}t}\\
 \subsection{安培（Ampère）右手定則（Right-hand rule）}
 \begin{itemize}
 \item 用右手握住長直載流導線，大拇指的指向為電流的方向，則其餘四指彎曲所指的方向為磁場方向，即磁力線方向。
-\item 用右手握住圓形載流導線或載流螺線管（solenoid），四指彎曲所指的方向為其電流方向，則大拇指的指向為磁場方向，即磁力線方向。
+\item 用右手握住圓形載流導線或載流螺線管，四指彎曲所指的方向為其電流方向，則大拇指的指向為磁場方向，即磁力線方向。
 \end{itemize}
 \subsection{必歐–沙伐定律（Biot–Savart law）}
 \subsubsection{必歐–沙伐定律（Biot–Savart law）–微分形式}
@@ -970,7 +970,7 @@ I_{rms}=&\sqrt{\frac{1}{T}\int_0^TI^2\,\mathrm{d}t}\\
 \[B=\frac{\mu_0NIR^2}{2}\frac{2}{\left(\left(\frac{R}{2}\right)^2+R^2\right)^{\frac{3}{2}}}=\frac{8\mu_0NI}{\sqrt{125}R}.\]
 該處附近磁場近似為均勻，常用於物理實驗，如質譜儀實驗。
 \subsubsection{載流螺線管（Solenoid）}
-無限長的長直載流螺線管或半徑$r\gg1$的螺線環（Toroid），令管半徑$R$，電流強度$I$，線圈線密度（指單位螺線管長度上的線圈匝數）$n$，管內中心軸處磁場量值$B$為：
+螺線管為線圈不斷繞一軸形成之管，繞之圈數稱匝數（winding）。無限長的長直載流螺線管或半徑$r\gg1$的螺線環（Toroid），令管半徑$R$，電流強度$I$，線圈線密度（指單位螺線管長度上的線圈匝數）$n$，管內中心軸處磁場量值$B$為：
 \[B=\mu_0I\int_{-\infty}^{\infty}\frac{nR^2}{2(a^2+R^2)^{\frac{3}{2}}}\dd{a}.\]
 若線圈線密度均勻：
 \[B=\mu_0nI.\]
@@ -1328,6 +1328,8 @@ E&=I\int_l\mathbf{E}\cdot\mathrm{d}\mathbf{l}+I\int_l((\mathrm{d}\mathbf{l}\time
 \end{itemize}
 \end{proof}
 \subsection{動生電動勢產生電流}
+\sssc{長方線圈拉離均勻磁場}
+一長方形線圈平行紙面、電阻$R$位於入指面均勻磁場$\mb{B}$中，一邊長$L$位於磁場邊緣，現拉該邊等速度拉出磁場，垂直於該邊方向速度分量$\mb{v}$，則磁通量時變率即動生電動勢$\calE=BLv$，感應電流$I=\frac{BLv}{R}$順時針，定向$\mb{L}$向下，則外拉力$\mb{F}=I\mb{L}\times\mb{B}$，量值$F=\frac{B^2L^2v}{R}$，做功$P=Fv=\frac{B^2L^2v^2}{R}$轉換為電阻熱功率$P=\calE I=\frac{B^2L^2v^2}{R}$。
 \subsubsection{渦電流（Eddy current）}
 導體板受電磁感應形成漩渦狀的感應電流，並產生阻尼效應。當垂直導體面磁矩$\mathbf{m}$物相對導體以速度$\mathbf{v}$移動，導體上：
 \begin{itemize}
@@ -1663,18 +1665,23 @@ Capacitance:
 \[C=4\pi\varepsilon R\]
 \subsubsection{電容式觸控螢幕（Capacitive touchscreen）}
 螢幕表面覆蓋一層透明的導電材料（如氧化銦錫，ITO），當手指、摻入石墨的手套或其他導體接觸螢幕時，會改變該點附近的電場分布，感應器陣列檢測到電場變化，透過運算轉換為觸控位置。電容式觸控是現今智慧型手機和平板電腦最常用者。
-\subsection{電感器（inductor）與電感（(Electric) inductance）}
+\subsection{電感（(Electric) inductance）與電感器（inductor）}
 \subsubsection{自感（Self-inductance）/電感（(Electric) inductance）}
-電感衡量系統抵抗電流的能力，自感$L$定義為單位端電流變化$\dv{I}{t}$使其在自身迴路產生的反向電動勢$\mathcal{E}$，即：
+自感$L$定義為單位端電流變化$\dv{I}{t}$使其在自身迴路產生的抵抗方向感應電動勢$\mathcal{E}$，即：
 \[\mathcal{E}=L\dv{I}{t}.\]
-
-存有能量：
-\[\frac{LI^2}{2}\]
+Power absorbed:
+\[P=LI\dv{I}{t}\]
+Energy stored:
+\[E=\int_{-\infty}^tLI\dv{I}{\tau}\dd{\tau}=\frac{LI^2}{2}\]
 \subsubsection{互感（Mutual-inductance）}
-某電路元件的互感$M$定義為單位電流變化$\dv{I}{t}$使其在另一迴路產生的電動勢$\mathcal{E}$，即：
-\[\mathcal{E}=M\dv{I}{t}.\]
-
-兩迴路互相之互感相同。
+電路元件2對（with respect to）1的互感$M_{21}$定義為1之單位電流變化$\dv{I_1}{t}$使2產生的抵抗方向電動勢$\mathcal{E}_2$，即：
+\[\mathcal{E}_2=M_{21}\dv{I_1}{t}.\]
+\sssc{互感相同}
+電路元件1,2：
+\[M=M_{21}=M_{12}\]
+\bpr
+PLACEHOLDER
+\epr
 \subsubsection{紐曼公式（Neumann formula）}
 令兩迴路$l_1$、$l_2$上電路元位置分別為$\mathbf{r_1}$、$\mathbf{r_2}$，其互相之互感$M$服從：
 \[M=\frac{\mu_0}{4\pi}\oint_{l_1}\oint_{l_2}\frac{\dd\mathbf{l_1}\cdot\dd\mathbf{l_2}}{|\mathbf{r_2}-\mathbf{r_1}|}\]
@@ -1693,10 +1700,14 @@ Capacitance:
 \subsubsection{電感器}
 螺線管因為電磁感應，在電流改變時會產生磁場變化，因此產生感應電動勢與感應電場，方向為抵抗電流改變，可以作為電感器。
 
-理想電感器面積$S$、匝數$N$、長度$l$、電流$I$時有均勻磁場：
-\[B=\frac{\mu_0NI}{l}\]
-則其自感為：
-\[L=\frac{\mu_0N^2S}{l}\]
+理想電感器面積$A$、匝數$N$、長度$\ell$之螺線管，電流$I$時有磁場：
+\[B=\frac{\mu_0NI}{\ell}\]
+單匝線圈磁通量：
+\[\Phi_B=\frac{\mu_0NIA}{\ell}\]
+動生電動勢：
+\[\calE=-N\dv{\Phi_B}{t}=-\frac{\mu_0N^2A}{\ell}\dv{I}{t}\]
+故其自感為：
+\[L=\frac{\mu_0N^2A}{\ell}\]
 \ssc{無線電發射器（Transmitter）}
 在 RLC 電路的電感旁置另一電感，該電感兩側經匹配網路（matching network）各通向一金屬導線，稱天線（Antenna），是無線電發射器的原理，匹配網路與天線有多種。
 \ssc{二極體（Diode）}
