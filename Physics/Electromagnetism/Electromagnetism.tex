@@ -1368,7 +1368,7 @@ P_e=&IV=I_mV_m\sin^2(\omega t+\varphi)\\
 \subsection{變壓器（Transformer）}
 變壓器是一種被動元件，可將電能從一個電路傳輸到其他電路且電壓不同。變壓器由一磁芯（magnetic core）上纏繞輸入交流電的主/初級線圈（Primary coil）與輸出交流電的一或多個副/次級線圈（Secondary coil）組成，各線圈間互不導通。副線圈匝數大於主線圈為升壓變壓器，副線圈匝數小於主線圈為降壓變壓器。副線圈可由中間抽頭（tapped），可視為兩個副線圈串聯，可用於整流器中。下以一主線圈、一副線圈為例。
 \subsubsection{主線圈}
-輸入端電壓$V_p$加上感應電動勢$\mathcal{E}_p$（負值，因與端電壓反向）等於其電流$I_p$乘以其電阻$R_p$加上等效鐵損電路的電流$I_{cp}$乘以其電阻$R_{cp}$：
+輸入端電壓$V_p$加上感應電動勢$\mathcal{E}_p$（負值，與端電壓反向）等於其電流$I_p$乘以其電阻$R_p$加上等效鐵損電路的電流$I_{cp}$乘以其電阻$R_{cp}$：
 \[V_p+\mathcal{E}_p=I_pR_p+I_{cp}R_{cp}\]
 截面磁通量$\Phi_p$、匝數$N_p$：
 \[\mathcal{E}_p=-N_p\dv{\Phi_p}{t}\]
@@ -1407,6 +1407,20 @@ P_e=&IV=I_mV_m\sin^2(\omega t+\varphi)\\
 減少輸入電流（即增加輸入電壓）可以減少磁滯損耗。
 \subsubsection{理想變壓器}
 $k=1$、無銅損、無鐵損，線圈的磁通量變化率比值等於匝數比值等於感應電動勢量值比值等於端電壓量值比值等於倒數電流比值。
+
+Suppose the primary and secondary coils have $N_p$ and $N_s$ turns and no resistance. The primary coil is connected to a source with emf $\calE=\calE_m\sin(\omega t)$. The secondary circuit is connected to a resistive load $R$. The equivalent resistance of secondary coil, as seen by generator, is $R_{eq}$. The emf per turn is
+\[\calE_t=-\dv{\Phi_B}{t}=\frac{V_p}{N_p}=\frac{V_s}{N_s}\]
+Thus
+\[V_s=V_p\frac{N_s}{N_p}\]
+The transformer is called set-up transformer if $N_s>N_p$, and set-down transformer if $N_s<N_p$.
+The power transfered is
+\[P=I_pV_p=I_sV_s\]
+Thus
+\[I_s=I_p\frac{N_p}{N_s}\]
+And
+\[V_s=I_sR\]
+Therefore, the equivalent resistance, as seen by the source, $R_{eq}$, is
+\[R_{eq}=\frac{V_p}{I_p}=\qty(\frac{N_s}{N_p})^2R\]
 \subsection{電磁爐（Induction cooker）}
 電磁爐的主要功能是將電能轉換成熱能，加熱金屬鍋具。其基本結構包括：
 \begin{itemize}
