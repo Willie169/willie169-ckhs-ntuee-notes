@@ -1,7 +1,7 @@
 \documentclass[a4paper,12pt]{report}
 \setcounter{secnumdepth}{5}
 \setcounter{tocdepth}{3}
-\input{/usr/share/latex-toolkit/template.tex}
+\input{/usr/share/LaTeX-ToolKit/template.tex}
 \begin{document}
 \title{Probability Theory}
 \author{沈威宇}
@@ -40,7 +40,7 @@ A probability space $(\Omega,\calF,P)$ is a measure space of which $\Omega$ is t
 \item Unit measure or normalization:
 \[P(\Omega)=1.\]
 \item Countable additivity or \text{\textsigma}-additivity: For all finite or countable infinite indexed family $(E_k)_{k\in K}$ of pairwise disjoint sets in $\calF$,
-\[P\left(\bigcup_{k\in K}E_k\right)=\sum_{k=1}^\inftyP(E_k).\]
+\[P\left(\bigcup_{k\in K}E_k\right)=\sum_{k=1}^\infty P(E_k).\]
 This implies $P(\varnothing)=0$.
 \end{enumerate}
 \sssc{Partition (分割)}
@@ -85,7 +85,7 @@ For event space $\calF$ and indexed family $(A_i)_{i=1}^n\subseteq\calF$ with $n
 \sssc{Subset law}
 \[A\subseteq B\implies P(A)\le P(B).\]
 \sssc{Union bound}
-P(\bigcup_{i=1}^nA_i)\le\sim_{i=1}^nP(A_i).\]
+\[P(\bigcup_{i=1}^nA_i)\le\sum_{i=1}^nP(A_i).\]
 \ssc{Independence theorems}
 \sssc{Product rule}
 If events $A$ and $B$ are independent, $P(A)\cdot P(B)=P(A\cap B)$.
@@ -122,7 +122,7 @@ For $x<y$, $\{X|X\le x\}\subseteq\{X|X\le y$, thus $P(X\le x)\le P(X\le y)$.
 \sssc{Limit at negative infinity of CDF}
 For a CDF $F_X(x)$, $\lim_{x\to-\infty}F_x(x)=0$.
 \bpr
-\[x_1>x_2\implies\{X\le x_1\}\superseteq\{X\le x_2\}\]
+\[x_1>x_2\implies\{X\le x_1\}\supseteq\{X\le x_2\}\]
 \[\bigcap_{x\in\bbR}\{X\le x\}=\varnothing\]
 By continuity of measure from above,
 \[\lim_{x\to-\infty}P(X\le x)=P(\varnothing)=0\]
@@ -138,7 +138,7 @@ By continuity of measure from below,
 \sssc{Right-continuous property of CDF}
 A CDF is right-continuous.
 \bpr
-\[h_1>h_2\implies\{X\le x+h_1\}\superseteq\{X\le x+h_2\}\]
+\[h_1>h_2\implies\{X\le x+h_1\}\supseteq\{X\le x+h_2\}\]
 \[\bigcap_{h>0}\{X\le x+h\}=\{X\le x\}\]
 By continuity of measure from above,
 \[\lim_{h\to 0^+}P(X\le x+h)=P\qty(\bigcap_{h>0}\{X\le x+h\})=P(X\le x)\]
@@ -255,13 +255,14 @@ $X_1,X_2,\ldots,X_n$ are independent iff
 For discrete random variables $X_1,X_2,\ldots,X_n$ with the same source sample space $\Omega$ and event space $\calF$,
 \[\ba
 p_{X_1,X_2,\ldots,X_n}(x_1,x_2,\ldots,x_n)&=P(X_1=x_1,X_2=x_2,\ldots,X_n=x_n)\\
-&=P(X_1=x_1)\cdot P(X_2=x_2\mid X_1=x_1)\cdot P(X_3=x_3\mid X_1=x_1,X_2=x_2)\cdot\ldots\cdot P(X_n=x_n\mid X_1=x_1,X_2=x_2\ldots X_{n-1}=x_{n-1})
+&=P(X_1=x_1)\cdot P(X_2=x_2\mid X_1=x_1)\cdot P(X_3=x_3\mid X_1=x_1,X_2=x_2)\cdot\\
+&\ldots\cdot P(X_n=x_n\mid X_1=x_1,X_2=x_2\ldots X_{n-1}=x_{n-1})
 \ea\]
 If $X_1,X_2,\ldots,X_n$ are independent
 \[p_{X_1,X_2,\ldots,X_n}(x_1,x_2,\ldots,x_n)=\prod_{i=1}^np_{X_i}(x_i).\]
 \sssc{Probability density function (PDF)}
 For continuous random variables $X_1,X_2,\ldots,X_n$ with the same source sample space $\Omega$ and event space $\calF$,
-\[f_{X_1,X_2,\ldots,X_n}(x_1,x_2,\ldots,x_n)&=\frac{\partial^nF_{X_1,X_2,\ldots,X_n}(x_1,x_2,\ldots,x_n)}{\partial x_1\partial x_2\ldots\partial x_n}.\]
+\[f_{X_1,X_2,\ldots,X_n}(x_1,x_2,\ldots,x_n)=\frac{\partial^nF_{X_1,X_2,\ldots,X_n}(x_1,x_2,\ldots,x_n)}{\partial x_1\partial x_2\ldots\partial x_n}.\]
 If $X_1,X_2,\ldots,X_n$ are independent
 \[f_{X_1,X_2,\ldots,X_n}(x_1,x_2,\ldots,x_n)=\prod_{i=1}^nf_{X_i}(x_i).\]
 \ssc{(Mathematical) Expected Value, Expectation (期望值), or Mean (平均值)}
@@ -329,11 +330,11 @@ For a real random variable $X$, standard deviation $\SD(X)$ or $\sigma_X$ of it 
 Variance of a real random variable $X$ is zero iff $X$ is almost surely a constant, that is, there exists a constant $c$ such that $P(X=c)=1$.
 \sssc{Covariance (共變異數/共方差)}
 For two real random variables $X,Y$, their covariance $\Sigma$ or $\Cov(X,Y)$ is defined as
-\[\Cov(X,Y)=E\qty((X-E(X))(Y-E(Y))=E(X)E(Y)-E(XY).\]
+\[\Cov(X,Y)=E\qty((X-E(X))(Y-E(Y)))=E(X)E(Y)-E(XY).\]
 For an $n$-dimensional vector of real random variables $\mb{X}=(X_1,X_2,\ldots)$ with $n\in\bbN\cup\{\aleph_0\}$, the covariance matrix $\Sigma$ or $\Cov(\mb{X})$ is defined as
-\[\Sigma=\Cov(\mb{X})=E\qty((\mb{X}-E(\mb{X})(\mb{X}-E(\mb{X})^{\top}),\]
+\[\Sigma=\Cov(\mb{X})=E\qty((\mb{X}-E(\mb{X}))(\mb{X}-E(\mb{X}))^{\top}),\]
 that is,
-\[\Sigma_{ij}=\Cov(X_i,X_j)=E\qty((X_i-E(X_i))(X_j-E(X_j)).\]
+\[\Sigma_{ij}=\Cov(X_i,X_j)=E\qty((X_i-E(X_i))(X_j-E(X_j))).\]
 \sssc{Independent random variables covariance matrix}
 If all $X_i$ are independent, then $\Cov(\mb{X})$ is a diagonal matrix where $\Sigma_{ii}=\Var(X_i)$.
 \sssc{Sum of independent random variables}
@@ -388,7 +389,7 @@ By Mellin's inverse formula.
 \sssc{MGF generating moments}
 If the MGF of $X$ exists in a neighborhood of $t=0$, $E(X^n)=M_X^{\pht{X}(n)}(0)$.
 \bpr
-Suppose the MGF of $X$ exists in $(-h,\vespilon)$ for some $\vespilon>0$ and $J=\qty(-\frac{h}{2},\frac{h}{2})$.
+Suppose the MGF of $X$ exists in $(-h,\vepsilon)$ for some $\vepsilon>0$ and $J=\left(-\frac{h}{2},\frac{h}{2}\right)$.
 
 For any $\delta>0$ and $n\in\bbN_0$, there exists $C_n>0$ such that
 \[|X|^n\le C_ne^{\delta|X|}\]
@@ -469,7 +470,7 @@ iff the sequence $\langle F_{Y_n}\rangle_{n\in\bbN}$ of CDF of $Y_n$ pointwise c
 \item PMF:
 \[p_X(k)=\frac{1}{b-a+1},\quad k\in\bbZ\cap[a,b]\]
 \item CDF:
-\[F_X(k)=\bcs0,\quad&k<a\\\frac{\floor k\rfloor-a+1}{b-a+1},\quad&a\le k<b\\1,\quad&k\ge b\ecs\]
+\[F_X(k)=\bcs0,\quad&k<a\\\frac{\lfloor k\rfloor-a+1}{b-a+1},\quad&a\le k<b\\1,\quad&k\ge b\ecs\]
 \item Mean:
 \[E(X)=\frac{a+b}{2}\]
 \item Variance:
@@ -507,6 +508,7 @@ E(X^2)&=\sum_{k=a}^b\frac{k^2}{b-a+1}\\
 H(X)&=-\sum_{k=a}^b\frac{1}{b-a+1}\ln(\frac{1}{b-a+1})\\
 &=-\ln(b-a+1)
 \ea\]
+\epr
 \item PMF monotonicity: constant
 \eit
 \sssc{Bernoulli (伯努力) random variable}
@@ -526,9 +528,13 @@ H(X)&=-\sum_{k=a}^b\frac{1}{b-a+1}\ln(\frac{1}{b-a+1})\\
 \item MGF:
 \[M_X(t)=pe^t+1-p\]
 \item Mode:
-\[\opetarname{Mode}(X)=\bcs0,\quad&p<\frac{1}{2}\\0,1,\quad&p=\frac{1}{2}\\1,\quad&p>\frac{1}{2}\ecs\]
+\[\operatorname{Mode}(X)=\bcs0,\quad&p<\frac{1}{2}\\0,1,\quad&p=\frac{1}{2}\\1,\quad&p>\frac{1}{2}\ecs\]
 \item Median:
-\[\opetarname{Median}(X)=\bcs0,\quad&p<\frac{1}{2}\\[0,1],\quad&p=\frac{1}{2}\\1,\quad&p>\frac{1}{2}\ecs\]
+\[\operatorname{Median}(X)=\bcs
+0,\quad&p<\frac{1}{2}\\
+[0,1],\quad&p=\frac{1}{2}\\
+1,\quad&p>\frac{1}{2}
+\ecs\]
 \item Entropy:
 \[H(X)=-p\ln p-(1-p)\ln(1-p)\]
 \item PMF monotonicity: strictly increasing if $p>\frac{1}{2}$, constant if $p=\frac{1}{2}$, and strictly decreasing if $p<\frac{1}{2}$
@@ -571,7 +577,7 @@ Alternatively, use decomposition.
 \item MGF:
 \[M_X(t)=\qty(pe^t+1-p)^n\]
 \item Mode:
-\[\opetarname{Mode}(X)=\bcs n,\quad&p=1\\(n+1)p-1,(n+1)p,\quad&(n+1)p\in\bbN\land p\notin\bbZ\\\lfloor(n+1)p\rfloor,\quad&\text{otherwise}\ecs\]
+\[\operatorname{Mode}(X)=\bcs n,\quad&p=1\\(n+1)p-1,(n+1)p,\quad&(n+1)p\in\bbN\land p\notin\bbZ\\\lfloor(n+1)p\rfloor,\quad&\text{otherwise}\ecs\]
 \bpr
 If $p=0$, $p_X(k)=0$. If $p=1$, $p_X(k)=n$.
 Let
@@ -645,12 +651,12 @@ E(e^{tX})&=\sum_{k=1}^{\infty}e^{kt}p(1-p)^{k-1}\\
 \ea\]
 \epr
 \item Mode:
-\[\opetarname{Mode}(X)=1\]
+\[\operatorname{Mode}(X)=1\]
 \bpr
 \[p_X(k+1)-p_X(k)=p(1-p)^k-p(1-p)^{k-1}=-p^2(1-p)^{k-1}<0\]
 \epr
 \item Median:
-\[\opetarname{Median}(X)=\bcs\qty[\frac{-\ln 2}{\ln(1-p)},\frac{-\ln 2}{\ln(1-p)}+1],\quad&\frac{-\ln 2}{\ln(1-p)}\in\bbN\\\left\lceil\frac{-\ln 2}{\ln(1-p)}\right\rceil,\quad&\text{otherwise}\ecs\]
+\[\operatorname{Median}(X)=\bcs\qty[\frac{-\ln 2}{\ln(1-p)},\frac{-\ln 2}{\ln(1-p)}+1],\quad&\frac{-\ln 2}{\ln(1-p)}\in\bbN\\\left\lceil\frac{-\ln 2}{\ln(1-p)}\right\rceil,\quad&\text{otherwise}\ecs\]
 \bpr
 \[P(X\le k)\ge\frac{1}{2}\]
 \[1-(1-p)^{\lfloor k\rfloor}\ge\frac{1}{2}\]
@@ -709,7 +715,7 @@ And the $X_i$s are i.i.d. geometric random variable with parameter $p$. Thus, th
 \item MGF:
 \[M_X(t)=\qty(\frac{pe^{t}}{1-(1-p)e^t})^r,\quad t<-\ln(1-p)\]
 \item Mode:
-\[\opetarname{Mode}(X)=\left\lfloor\frac{r-1}{p}\right\rfloor\]
+\[\operatorname{Mode}(X)=\left\lfloor\frac{r-1}{p}\right\rfloor\]
 \bpr
 \[\ba
 p_X(k+1)-p_X(k)&=\binom{k}{r-1}p^r(1-p)^{k-r+1}-\binom{k-1}{r-1}p^r(1-p)^{k-r}\\
@@ -825,7 +831,7 @@ P(X_i+Y_i=k)&=\sum_{x=0}^kp_X(x)p_Y(k-x)\\
 \[\ba
 P(Y=m)&=\sum_{k=1}^{\infty}P(Y=m\mid X=k)P(X=k)\\
 &=\sum_{k=m}^{\infty}\binom{k}{m}p^m(1-p)^{k-m}\frac{\lambda^ke^{-\lambda}}{k!}
-&=\frac{(\lambda p)^me^{-\lambda}}{m!}\sum_{k=m}^{\infty}\frac{(\lambda(1-p))^{k-m}{(k-m)!}\\
+&=\frac{(\lambda p)^me^{-\lambda}}{m!}\sum_{k=m}^{\infty}\frac{(\lambda(1-p))^{k-m}}{(k-m)!}\\
 &=\frac{(\lambda p)^me^{-\lambda}}{m!}e^{\lambda(1-p)}\\
 &=\frac{(\lambda p)^me^{-\lambda p}}{m!}
 \ea\]
@@ -870,7 +876,7 @@ E(X^2)&=\int_a^b\frac{x^2}{b-a}\dd{x}\\
 \ea\]
 \epr
 \item MGF:
-\[M_X(t)&=\bcs\frac{e^{bt}-e^{at}}{(b-a)t},\quad&t\ne 0\\1,\quad&t=0\ecs\]
+\[M_X(t)=\bcs\frac{e^{bt}-e^{at}}{(b-a)t},\quad&t\ne 0\\1,\quad&t=0\ecs\]
 \bpr
 \[\ba
 E(e^{tX})&=\int_a^b\frac{e^{tx}}{b-a}\dd{x}\\
@@ -896,7 +902,7 @@ h(X)&=-\int_a^b\frac{1}{b-a}\ln(\frac{1}{b-a})\dd{x}\\
 \[cX\sim\operatorname{Unif}(cb,ca),\quad c\in\bbR_{<0}\]
 \item Symmetry: about $\frac{b-a}{2}$
 \item PDF monotonicity: constant
-\epr
+\eit
 \sssc{Normal (常態/正態) or Gaussian (高斯) random variable}
 \bit
 \item Notation:
@@ -1016,7 +1022,7 @@ h(X)&=-\int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}\sigma}\exp(-\frac{(x-\mu)^2}{
 \[cX\sim\calN(c\mu,c^2\sigma^2),\quad c\in\bbR_{\neq 0}\]
 \item Symmetry: about $\mu$
 \item PDF monotonicity: strictly increasing for $x\le\mu$ and strictly decreasing for $x\ge\mu$
-\epr
+\eit
 \sssc{Exponential random variable}
 \bit
 \item Trial: An exponential random variable models the distance between adjacent events in a Poisson process with rate $\lambda$.
@@ -1092,7 +1098,7 @@ h(X)&=-\lambda\int_0^{\infty}e^{-\lambda x}\qty(\ln(\lambda)-\lambda x)\dd{x}\\
 \[\frac{e^{-\lambda (x+y)}}{e^{-\lambda x}}=e^{-\lambda y}\]
 \epr
 \item PDF monotonicity: strictly decreasing
-\epr
+\eit
 \sssc{Erlang random variable}
 \bit
 \item Trial/Decomposition: An random variable with shape $k$ and rate $\lambda$ is the sum of $k$ i.i.d. exponential variables with rate $\lambda$.
@@ -1143,7 +1149,7 @@ F_k(x)&=\int_0^x\frac{\lambda^kt^{k-1}e^{-\lambda t}}{(k-1)!}\dd{t}\\
 \item Scaling:
 \[cX\sim\operatorname{Exp}\qty(k,\frac{\lambda}{c}),\quad c\in\bbR_{>0}\]
 \item PDF monotonicity: strictly increasing for $x\le\frac{k-1}{\lambda}$ and strictly decreasing for $x\ge\frac{k-1}{\lambda}$
-\epr
+\eit
 \sssc{Geometric to exponential limit theorem}
 For any fixed $\lambda\in(0,\infty)$, let $X_n\sim\operatorname{Geom}\qty(\frac{\lambda}{n})$ and $Y_n=\frac{X_n}{n}$. Then
 \[\lim_{n\to\infty}Y_n=\operatorname{Exp}(\lambda).\]
