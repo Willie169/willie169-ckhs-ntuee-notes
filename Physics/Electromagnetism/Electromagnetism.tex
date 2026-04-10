@@ -927,6 +927,10 @@ I_{rms}=&\sqrt{\frac{1}{T}\int_0^TI^2\,\mathrm{d}t}\\
 若繞$\mathbf{l}$電流為逆時針為正均勻電流$I$：
 \[\oint_{l}\mathbf{B}\cdot\mathrm{d}\mathbf{l}=\mu_0I+\mu_0\varepsilon_0\pdv{\Phi_E}{t}.\]
 其中$\oint_{l}\mathbf{B}\cdot\mathrm{d}\mathbf{l}$稱磁環場積、當$l$為線圈稱安培環（Ampèrian loop）。
+\sssc{Displacement current}
+Displacement current is defined as
+\[I_d=\varepsilon\pdv{\Phi_E}{t}\]
+and is not an actual current, a transfer of charge.
 \subsection{旋磁比/磁旋比（Gyromagnetic ratio）}
 旋磁比指磁偶極子的磁矩與角動量之比值。
 \subsection{載流導線產生磁場}
@@ -1643,8 +1647,14 @@ Energy stored:
 極板$S$在給定輸出電壓（額定電壓內）下可以放出的電量$q$（即自由電荷）為：
 \[q=\iint_S\sigma_f\,\mathrm{d}S.\]
 對於線性極化的介電質，$q$與直流供電端電壓$V$（額定電壓內）正比，即電容$C$不隨電壓改變。
+\sssc{Displacement current equal current}
+For a capacitor consists of two plates, the current $I$ at the terminals is the same in direction and magnitude as the displacement current $I_d$ between them.
+\bpr
+\[\Phi_E=\frac{q}{\varepsilon}\]
+\[I_d=\varepsilon\dv{\Phi_E}{t}=\dv{q}{t}=I\]
+\epr
 \subsubsection{Parallel plate capacitor}
-Two parallel metal plate with area $A$ and charges $q$ and $-q$, in distance $d$ seperated by dielectric medium with permittivity $\varepsilon$. Let the unit vector from the former to the later be $\hat{k}$. Edge field effect ignored.
+Two parallel circular metal plate of radius $R$ with area $A=\pi R^2$ and charges $q$ and $-q$, in distance $d$ seperated by dielectric medium with permittivity $\varepsilon$. Let the unit vector from the former to the later be $\hat{k}$. Let $r$ be the radial distance relative to their center axis. Edge field effect ignored.
 
 Electric field between them:
 \[\mb{E}=\frac{q\hat{k}}{A\varepsilon}\]
@@ -1652,6 +1662,8 @@ Potential difference (later relative to inner):
 \[V=\frac{qd}{A\varepsilon}\]
 Capacitance:
 \[C=\frac{A\varepsilon}{d}\]
+Magnetic field:
+\[B=\bcs\frac{\mu_0Ir}{2\pi R^2},\quad& r\le R\\ \frac{\mu_0I}{2\pi R},\quad & r>R\ecs\]
 \subsubsection{Cylindrical capacitor}
 Two coaxial cylindrical metal shell with radius $a<b$, charges $q$ and $-q$, and length $L$, seperated by dielectric medium with permittivity $\varepsilon$. Let $\mb{r}$ be the vector relative to a point on the axis such that $\mb{r}$ is perpendicular to the axis. Edge field effect ignored.
 
@@ -1917,8 +1929,8 @@ u&=\frac{\varepsilon}{2}|\mathbf{E}|^2+\frac{1}{2\mu}|\mathbf{B}|^2\\
 &=\frac{\varepsilon|\mathbf{E}_0|^2}{2}
 \eam
 \sssc{輻射通量（Radiant flux）/輻射功率（Radiant power）/光度（Luminosity）}
-電磁波的功率。定向表面$S$的輻射通量$\Phi_e$為坡印廷向量的面積積分，即：
-\[\Phi_e=\iint_S(\mathbf{E}\times\mathbf{H})\cdot\mathrm{d}\mathbf{S}\]
+電磁波的平均功率。定向表面$S$的輻射通量$\Phi_e$為坡印廷向量的面積積分的時間平均，即：
+\[\Phi_e=\langle\iint_S(\mathbf{E}\times\mathbf{H})\cdot\mathrm{d}\mathbf{S}\rangle\]
 \sssc{頻率光譜通量（Spectral flux in frequency）}
 \[\Phi_{\nu}=\pdv{\Phi_e}{\nu}\]
 \sssc{波長光譜通量（Spectral flux in wavelength）}
@@ -1929,12 +1941,14 @@ u&=\frac{\varepsilon}{2}|\mathbf{E}|^2+\frac{1}{2\mu}|\mathbf{B}|^2\\
 頻率光譜強度$I_{\nu}$為每立體角（Solid angle）的頻率光譜通量。
 \sssc{波長光譜強度（Spectral intensity in wavelength）}
 波長光譜強度$I_{\lambda}$為每立體角（Solid angle）的波長光譜通量。
-\sssc{輻照度（Irradiance）、輻射出射度/輻出度（Radiant exitance）與光強度（Light intensity）}
+\sssc{輻照度（Irradiance）、輻射出射度/輻出度（Radiant exitance）與（光）強度（(Light) intensity）}
 \bit
 \item 輻照度：指單位面積射入輻射通量。
 \item 輻射出射度：指單位面積射出輻射通量。
-\item 光強度：指電磁波垂直波向量截面上單位面積的輻射通量，即該面的輻照度與輻出度。
+\item 光強度$I_l$：指電磁波垂直波向量截面上單位面積的輻射通量，即該面的輻照度與輻出度，即坡印廷向量的垂直分量的時間平均。
 \eit
+\sssc{點光源}
+距輻射功率$\Phi_e$點光源$r$之光強度為$\frac{\Phi_e}{4\pi r^2}$。
 \sssc{頻率光譜輻照度（Spectral irradiance in frequency）與頻率光譜出射度（Spectral exitance in frequency）}
 \[M_{\nu}=\pdv{M_e}{\nu}\]
 \sssc{波長光譜輻照度（Spectral irradiance in wavelength）與波長光譜出射度（Spectral exitance in wavelength）}
@@ -1942,11 +1956,16 @@ u&=\frac{\varepsilon}{2}|\mathbf{E}|^2+\frac{1}{2\mu}|\mathbf{B}|^2\\
 \sssc{輻射率（Radiance）}
 令立體角$\Omega$、$A\cos\theta$為表面$A$在垂直輻射面的投影面積：
 \[L_e=\frac{\partial^2\Phi_e}{\partial\Omega\partial(A\cos\theta)}\]
+\sssc{動量}
+\[\mb{p}=\frac{E}{v}\hat{\mb{v}}\]
 \sssc{光壓/輻射壓（Radiation pressure）}
-一光在一單位法向量$\hat{n}$的表面（等效）反射，令$M_e$為入射光強度乘以入射角餘弦值的平方加上反射光強度乘以反射角餘弦值的平方（餘弦值的平方來自輻照度與輻出度分別為入射與反射光強度乘以入射與反射角餘弦值，與入射光與反射光單位波向量垂直表面分量），即輻出度加上輻照度再乘以入射角餘弦值，令光速$v$，則光壓$p$服從：
-\[p=\frac{M_e}{v}\]
-或用坡印廷向量表示：
-\[p=\frac{\langle(\mathbf{E}\times\mathbf{H})\cdot\hat{n}\rangle}{v}\]
+令一入射垂直截面光強度$I_l$，照射一表面，入射光與表面法向量夾$\theta$，光速$v$，則光壓$p$服從：
+\[p=\frac{\Delta I_l}{v}=\frac{\langle(\mathbf{E}\times\mathbf{H})\cdot\hat{n}\rangle}{v}\]
+若全數吸收則
+\[\Delta I_l=I_l\cos^2\theta\]
+若全數反射則：
+\[\Delta I_l=2I_l\cos^2\theta\]
+餘弦平方因一為光強度投影，一為動量投影。
 \subsection{電磁（波）屏蔽效應/法拉第籠（Faraday cage）}
 由於電荷載子受電磁波會產生感應電流，感應電流產生感應電磁波，而與原電磁波產生破壞性干涉，故導體包圍的區域無法接受外部電磁波或發送電磁波到外部，此效應稱電磁（波）屏蔽效應，受到靜電屏蔽效應與電磁波屏蔽效應的區域稱法拉第籠。
 
@@ -2089,73 +2108,26 @@ RFID 使用的電磁波頻率愈大，適用距離愈大：
 \item 負撓曲電效應：在表面施加電位差，撓曲電材料的晶格變形以使電偶極矩改變以響應電位差，導致材料發生不均勻機械變形。
 \end{itemize}
 同一撓曲電材料，電位差與變形梯度的比值在正撓曲電效應與負撓曲電效應中相同。撓曲電效應主要在奈米尺度下較為顯著。
-\subsection{（永久（Permanent））磁鐵（Magnet）}
-A material that produces a persistent magnization $\mb{M}$ on its own due to microscopic magnetic moments.
-\subsection{磁性（magnetism）}
-指物質對外加磁場的響應。
-\subsubsection{硬磁鐵（Hard magnet）/永久磁鐵（Permanent magnet）}
-當無外加磁場時仍具有磁性的磁鐵。
-\subsubsection{軟磁鐵（Soft magnet）/暫時磁鐵（Temporary magnet）}
-當無外加磁場時不具有磁性的磁鐵。
-\subsection{磁性物質}
-存在特定條件使其具有磁性的物質，即具有非零磁化率。具有非零磁化率的物質較少。物質的磁性來自於磁性原子本身的磁矩與磁性原子的電子之間的交換作用。
-\subsection{磁性原子本身的磁矩}
-\subsubsection{電子自旋磁矩（Spin Magnetic Moment）}
-電子自旋（spin）的角動量產生的磁矩$\mu_S$：
-\[\mu_S=g_s\frac{-e}{2m_e}S=-g_ss\mu_B\]
-其中：
-\begin{itemize}
-\item 自旋 g 因子（spin g-factor）：$g_s\approx 2$
-\item 基本電荷：$e$
-\item 電子質量：$m_e$
-\item 電子自旋角動量：$S$，$|S|=\frac{\hbar}{2}$
-\item 自旋量子數（spin quantum number）：$s=\frac{S}{\hbar}=\pm\frac{1}{2}$
-\item 玻爾磁子（Bohr magneton）：$\mu_B=\frac{e\hbar}{2m_e}$
-\end{itemize}
-\subsubsection{電子軌道磁矩（Orbital Magnetic Moment）}
-電子在原子核周圍繞行運動產生的磁矩$\mu_L$：
-\[\mu_L=-g_L\frac{e}{2m_e}L=-g_L\sqrt{l(l+1)}\mu_B.\]
-其在$z$軸的分量為：
-\[\mu_{Lz}=-g_Lm_L\mu_B.\]
-其中：
-\begin{itemize}
-\item 軌道 g 因子（orbital g-factor）：$g_L=1$
-\item 電子軌道運動角動量：$L=\sqrt{l(l+1)}\hbar$
-\item 電子軌道運動角動量$z$軸分量：$L_z$
-\item 角量子數（azimuthal quantum number）：$l$，為小於主量子數（main quantum number）的正整數
-\item 磁量子數（magnetic quantum number）：$m_L=\frac{L_z}{\hbar}$，為絕對值小於等於角量子數的整數
-\end{itemize}
-\subsubsection{自旋-軌道耦合（Spin-Orbit Coupling）}
-電子自旋與其軌道運動磁矩的疊加，其總磁矩的$\mu$為：
-\[\mu=-g_J\frac{e}{2m}J=-g_J\mu_Bj.\]
-其中：
-\begin{itemize}
-\item 朗德 g 因子（Landé g-factor）：$g_J$
-\[g_J=g_L\frac{j(j+1)-s(s+1)+l(l+1)}{2j(j+1)}+g_s\frac{j(j+1)+s(s+1)-l(l+1)}{2j(j+1)}.\]
-當$g_L=1$、$g_s=2$：
-\[g_J=1+\frac{j(j+1)+s(s+1)-l(l+1)}{2j(j+1)}.\]
-\item 電子總角動量：$J$
-\item 總角動量量子數（total angular momentum）：$j=s+l$
-\end{itemize}
-\subsubsection{原子核具有的磁矩}
-極小，通常可忽略。
-\subsection{磁性原子的電子之間的交換作用（Exchange Interaction）}
-部分物質的電子之間的量子力學交換作用會使自旋排列有特定規則，產生磁性。
+\ssc{磁性（magnetism）}
+\sssc{磁性}
+磁性指物質對外加磁場的響應。
 \subsubsection{反磁性/逆磁性/抗磁性（Diamagnetism）}
-指的是某些材料在無外加磁場時有零磁矩；在有外加磁場時呈現磁矩，且該磁矩方向與外磁場之點積為負，即磁化率為負，由拉莫爾反磁效應（Larmor Diamagnetism）產生。拉莫爾反磁效應指當施加外磁場時電子的軌道磁矩會產生抵抗外磁場的微小變化。所有物質都具有反磁性效應，但反磁性通常極小，一般磁化係數量值在 $10^{-5}$ 量級，故若同時具有順磁性則反磁性通常被掩蓋。
+指的是某些材料在無外加磁場時有零磁矩；在有外加磁場時呈現磁矩，且該磁矩方向與外磁場之點積為負，即磁化率為負，由拉莫爾反磁效應（Larmor Diamagnetism）產生。反磁性通常極小，一般磁化係數量值在 $10^{-5}$ 量級，故若同時具有順磁性或鐵磁性則反磁性通常被掩蓋，故Diamagnetic material一般指僅具有反磁性而無順磁性或鐵磁性之物質。
 \subsubsection{順磁性（Paramagnetism）}
-指的是某些材料在無外加磁場時有零磁矩；在有外加磁場時呈現磁矩，且該磁矩方向與外磁場之點積為正，即磁化率為正，一般磁化係數量值在 $10^{-5}\sim 10^{-3}$ 量級。其成因有：
+指的是某些材料在無外加磁場時有零磁矩；在有外加磁場時呈現磁矩，且該磁矩方向與外磁場之點積為正，即磁化率為正，一般磁化係數量值在 $10^{-5}\sim 10^{-3}$ 量級。具之之物質稱paramagnetic material。其成因有：
 \begin{itemize}
 \item 未成對電子的磁矩：當施加非零外加磁場時，未成對電子的磁矩會趨向與磁場方向對齊（部分電子沿磁場方向，部分電子反向，但沿磁場方向的數量略多），導致淨磁化。
 \item 玻爾-范佛磁性（Bohr-Van Vleck Paramagnetism）：在某些分子中，即使沒有未成對電子，外磁場仍可能影響電子軌道，使其自旋與磁場產生相互作用。主要發生在具有填充電子殼層但可透過量子躍遷產生磁矩的材料中。
 \end{itemize}
-順磁性物質可用於超低溫冷凍技術，通過外加磁場使其粒子排列有序而降低熵，再於絕熱下移去磁場，系統熵不變。
+順磁性物質可用於超低溫冷凍技術，通過外加磁場使其粒子排列有序而降低熵，再於絕熱下移去磁場，系統熵不變。Paramagnetism subjects to thermal agitation a lot.
+\sssc{Curie's law}
+The magnetization $\mb{M}$ of a paramagnetic material is
+\[\mb{M}=\frac{C}{\mathscr{T}}\mb{B}\]
+where $C$ is the material's Curie constant and $\mathscr{T}$ is Kelvin temperature. This is an approximation when the magnetic field not too strong; when it gets stronger, it gets sublinear.
 \subsubsection{鐵磁性（Ferromagnetism）/強磁性}
-指的是某些材料相鄰電子自旋呈相同方向排列，使其在無外加磁場時可以具有自發磁化（spontaneous magnetization），且該磁化方向在施加足夠強的外加磁場時可以翻轉（switchability），且翻轉後的磁矩方向與外磁場之點積為正。
+指的是某些材料相鄰電子自旋呈相同方向排列，使其在無外加磁場時可以具有自發磁化（spontaneous magnetization），且該磁化方向在施加足夠強的外加磁場時可以翻轉（switchability），且翻轉後的磁矩方向與外磁場之點積為正。Ferromagnetism subjects to thermal agitation a lot. 磁域/磁田/磁疇（Magnetic domain）指鐵磁性物質的一小區域的磁原子經交換作用成群向同一方向排列，其邊界稱磁田壁（domain wall）。未經磁化時各磁田磁矩方向散亂分布，無淨巨觀磁矩。磁化過的鐵磁性物質即使外加磁場移除仍保有磁矩，稱自發磁矩。具之之物質稱ferromagnetic material or magnetic material（磁性物質）。\ce{Fe}、\ce{Co}、\ce{Ni} 具有鐵磁性。具有鐵磁性的物質較具有鐵電性的物質多。
 
-磁域/磁田/磁疇（Magnetic domain）指鐵磁性物質的一小區域的磁原子經交換作用成群向同一方向排列，其邊界稱磁田壁（domain wall）。未經磁化時各磁田磁矩方向散亂分布，無淨巨觀磁矩；磁化過程中，發生磁田壁移動，與外加磁場同向的磁田變大，其餘方向的磁田變小；足夠強的外加磁場可以產生磁田旋轉，直到所有磁田轉到與外加磁場同向，稱磁化飽和狀態；磁化過的鐵磁性物質即使外加磁場移除仍保有磁矩，稱自發磁矩；若欲去除自發磁矩，可使用反向弱磁場使其淨磁矩變弱。
-
-\ce{Fe}、\ce{Co}、\ce{Ni} 具有鐵磁性。具有鐵磁性的物質較具有鐵電性的物質多。
+將未被磁化的鐵磁性物質置於一可施加外加  處，隨著外加磁場逐漸增強，各磁域盡量與外加磁場同方向，自發磁化方向和外加磁場方向相近的磁域擴大，總磁化強度也隨之增加；反之則縮小。當所有磁域的磁矩方向一致，則達到磁性飽和（saturation），此時再加強外加磁場其磁化強度不再增加。再逐漸減小外加磁場，則磁化強度亦隨之減小，但程度較緩，並不沿原磁化曲線（magnetization curve） 返回，而是沿另一斜率較小之曲線變化，直到外加磁場降為零，而鐵磁性物質仍保有磁矩，此即磁滯現象（hysteresis），該磁矩稱該物質之殘磁（remanence）。接著再通以反向之外加磁場並逐漸加大，當鐵磁物質之磁性為零時之外加 H-field 大小即為此物質之抗磁力或矯頑力（coercive force）或抗磁場強度（coercive field intensity）。反向磁場大到某一程度，鐵磁性物質磁化強度亦會達到飽和，再減小反向磁場至零點，鐵磁性物質仍具磁性。再通以正向磁場，直到飽和。整個過程紀錄在 M-H 圖上的封閉曲線即稱為磁滯曲線（hysteresis curve or loop）。
 \subsubsection{反鐵磁性（Antiferromagnetism）/反強磁性}
 指的是某些材料的相鄰電子自旋呈相反方向排列且大小相等，使其始終具有零或小磁矩。\ce{Mn}、\ce{NiO} 具有反鐵磁性。
 \subsubsection{亞鐵磁性（Ferrimagnetism）}
@@ -2164,29 +2136,104 @@ A material that produces a persistent magnization $\mb{M}$ on its own due to mic
 指的是某些材料在一定溫度以下呈現鐵磁性或亞鐵磁性，在該溫度以上則否，該溫度稱居禮溫度。
 \sssc{奈爾溫度（Néel temperature）}
 指的是某些材料在一定溫度以下呈現反鐵磁性，在該溫度以上則否，該溫度稱奈爾溫度。
-\sssc{遲滯現象（Hysteresis）/滯後現象}
-指的是具有鐵電性、壓電性、撓曲電性、鐵磁性、反鐵磁性、亞鐵磁性、鐵彈性（Ferroelasticity）等的材料的狀態對其歷史具有依賴性，在外在改變時具有對原先狀態的記憶性。
+\sssc{Rowland ring}
+The primary winding is an $N$-turn toroid winding around a ferromagnetic material ring of radius $R$ to be studied. The secondary winding measures the magnetic field of the primary winding using induction. When the primary winding is given current $I$, the H field in the primary winding is
+\[H=\mu B=\frac{NI}{2\pi R}\]
+\sssc{交流去磁/退磁（demagnetization）法}
+將鐵磁性物質置於通交流電之螺線管中並緩慢抽出，放置於其中之時間不可太長。交流電線圈產生的磁場方向會不斷反轉，當鐵磁性物質之磁疇會隨著外加磁場的方向不停嘗試重新排列，隨緩慢抽出，外加磁場逐漸衰減，磁疇的排列變得隨機分布，淨磁矩趨近零，達到去磁效果。
 \sssc{超順磁性（Superparamagnetism）}
 出現在鐵磁性或亞鐵磁性物質的奈米粒子中的磁性形式，磁化可以在溫度的影響下隨機翻轉方向，兩次翻轉之間的典型時間稱為尼爾弛豫時間（Néel relaxation time），在沒有外部磁場的情況下，當測量超順磁性奈米粒子磁化強度的時間遠長於尼爾弛豫時間時，它們的磁化強度平均為零。磁各向異性愈強，出現超順磁性效應的臨界體積就愈小。
 \sssc{超導體（Superconductor）}
 電阻為零、完全抗磁性的材料。
 \sssc{臨界溫度（Critical temperature）}
 超導體材料在臨界溫度以上不再是超導體。現有的超導體臨界溫度溫度都在 -100°C 以下，如\ce{YBa2Cu3O7}是92 K。
+\subsubsection{硬磁鐵（Hard magnet）/永久磁鐵（Permanent magnet）}
+當無外加磁場時仍具有磁性的物質。
+\subsubsection{軟磁鐵（Soft magnet）/暫時磁鐵（Temporary magnet）}
+當無外加磁場時不具有磁性的物質。
+\sssc{Compass}
+A compass is simply a needle-shaped magnet that is mounted so it can rotate freely about a vertical axis.
+\sssc{Dip meter}
+A dip meter is a similar magnet that can rotate freely about a horizontal axis.
+\ssc{微觀磁矩}
+\subsubsection{電子自旋磁矩（Spin Magnetic Dipole Moment）}
+電子自旋（spin）的角動量產生的磁矩$\boldsymbol{\mu_S}$：
+\[\boldsymbol{\mu_S}=-g_s\frac{e}{2m_e}\mb{S}=-g_ss\mu_B\hat{k}\]
+其中：
+\begin{itemize}
+\item 自旋 g 因子（spin g-factor）：$g_s\approx 2$
+\item 基本電荷：$e$
+\item 電子質量：$m_e$
+\item 電子自旋角動量：$\mb{S}$，$|\mb{S}|=\frac{\hbar}{2}$
+\item 自旋量子數（spin quantum number）：$s=\pm\frac{1}{2}$ and $\mb{S}=\hbar s\hat{k}$
+\item 玻爾磁子（Bohr magneton）：$\mu_B=\frac{e\hbar}{2m_e}\pporox 9.27\times 10^{-24}$ J/T
+\end{itemize}
+\subsubsection{電子軌道磁矩（Orbital Magnetic Dipole Moment）}
+電子在原子核周圍繞行運動產生的磁矩$\boldsymbol{\mu_L}$：
+\[\boldsymbol{\mu_L}=-g_L\frac{e}{2m_e}\mb{L}=-g_L\sqrt{l(l+1)}\mu_B\hat{\mb{L}}.\]
+其在$z$軸的分量為：
+\[\mu_{Lz}=-g_Lm_L\mu_B.\]
+其中：
+\begin{itemize}
+\item 軌道 g 因子（orbital g-factor）：$g_L=1$
+\item 電子軌道運動角動量：$\mb{L}=\sqrt{l(l+1)}\hbar\hat{\mb{L}}$
+\item 電子軌道運動角動量$z$軸分量：$L_z$
+\item 角量子數（azimuthal quantum number）：$l$，為小於主量子數（main quantum number）的正整數
+\item 磁量子數（magnetic quantum number）：$m_L=\frac{L_z}{\hbar}$，為絕對值小於等於角量子數的整數
+\end{itemize}
+\subsubsection{自旋-軌道耦合（Spin-Orbit Coupling）}
+電子自旋與其軌道運動磁矩的疊加，其總磁矩的$\boldsymbol{\mu}$為：
+\[\boldsymbol{\mu}=-g_J\frac{e}{2m}\mb{J}=-g_J\mu_Bj\hat{\mb{J}}.\]
+其中：
+\begin{itemize}
+\item 朗德 g 因子（Landé g-factor）：$g_J$
+\[g_J=g_L\frac{j(j+1)-s(s+1)+l(l+1)}{2j(j+1)}+g_s\frac{j(j+1)+s(s+1)-l(l+1)}{2j(j+1)}.\]
+當$g_L=1$、$g_s=2$：
+\[g_J=1+\frac{j(j+1)+s(s+1)-l(l+1)}{2j(j+1)}.\]
+\item 電子總角動量：$\mb{J}$
+\item 總角動量量子數（total angular momentum）：$j=s+l$
+\end{itemize}
+\sssc{Loop model and Larmor Diamagnetism}
+Electrons in an atom undergo orbital motion of fixed radius $r$ and mutable speed $v$, equivalent to current
+\[I=-\frac{ev}{2\pi r}\]
+The angular momentum is
+\[L=m_evr\]
+The dipole moment $m$ is
+\[m=-I\pi r^2=-\frac{evr}{2}=-\frac{e}{2m_e}L\]
+When subjected to a small external magnetic field with component $B$ perpendicular to the loop with the electron circulating $B$ clockwisely being positive (at which $B$ is of the same direction of the magnetic field of the electron circulation), suppose original $v$ is $v_0$ and new $v$ is $v_0+\Delta v$, the Lorentz force pointing to the center is
+\[F=-ev_0B\]
+and
+\[\frac{m_e}{r}(v_0+\Delta v)^2=\frac{m_ev_0^{\pht{0}2}}{r}-ev_0B\]
+$(\Delta v)^2\approx 0$,
+\[2m_ev_0(\Delta v)=-ev_0B\]
+Thus
+\[\Delta v=-\frac{eB}{2m_e}\]
+\[\Delta m=-\frac{e^2Br}{4m_e}\]
+The external magnetic field induces Larmor precession, and the magnetic susceptibility
+\[\chi_v=-\frac{\mu e^2r}{4m_eV}<0\]
+This explains diamagnetism.
+\sssc{其他}
+其他造成的磁矩遠小於電子而可忽略。
+\ssc{地磁（場）（Earth's magnetic field/Geomagnetic field）}
+\subsubsection{Field}
+The Earth's magnetic field is approximated as a best-fit dipole model. The axis of the ideal dipole is called dipole axis (MM). The point where its S pole direction intersects Earth's surface is the geomagnetic north pole off the northwest coast of Greenland. The point where its N pole direction intersects Earth's surface is the geomagnetic south pole off Antarctica. The dipole axis and rotation axis (RR) makes an angle about 11.5°.
 
+The dipole is approximately \scinote{5}{-5} Tesla, which is stronger when closer to the poles and approximately \scinote{6}{-5} Tesla at the poles.
 
-\section{地磁（Earth's Magnetic Field）}
-\subsection{地磁（場）（Earth's magnetic field/Geomagnetic field）}
+The dip north pole is the place where the field goes straight down up the surface, in the Queen Elizabeth Islands in northern Canada. The dip south pole is the place where the field goes straight up the surface.
+
+The field observed at any location on the surface of Earth varies with time. For example, between 1580 and 1820 the direction indicated by compass needles in London changed by 35°.
+
+Study of this solidified magma across the ocean floor reveals that Earth's field has reversed its polarity (directions of the north pole and south pole) about every million years.
+\subsubsection{磁偏角（Magnetic/field declination/variation）}
+測量地至地磁北極射線相對於測量地至地理北極射線的夾角$\theta$，東為正，因地而異，略與緯度正相關。赤道磁偏角最大處約 11°，臺北約 -3°至-4°。
+\subsubsection{磁傾角（Magnetic/field dip/inclination） }
+地磁磁場與地平線的夾角$\varphi$，向下為正，略為愈接近地磁北極愈正、愈接近地磁南極愈負、地磁赤道為零、地磁北極為 90°、地磁南極為 -90°。臺北磁傾角約 37°。
 \subsubsection{可能成因}
 地核溫度遠高於鐵和鎳的居禮溫度，鐵、鎳失去鐵磁性。一般認為，地球液態外核乃富含鐵之導電流體，受熱能供給形成對流，再因地球自轉感應出地磁。一般認為，地核熱能主要源自於放射性元素衰變。
 \subsubsection{自然存磁性/天然剩餘磁性/天然剩磁（Natural remanent magnetization）}
 是岩石或沉積物的永久磁力，保留了礦物在岩漿中結晶時或沉積物在沉積時的地球磁場方向的記錄。
-\subsubsection{地磁極}
-地球表面地球磁場方向垂直向下的點稱地磁 S 極/地磁北極（Geomagnetic north pole），約在加拿大西北方與地理北極相距約 1000 公里處；地球表面地球磁場方向垂直向上的點稱地磁 N 極/地磁南極（Geomagnetic south pole），約在澳洲南方與地理南極相距約 2860 公里處。地磁軸與地軸約夾 11°。地表地磁場大小約 \scinote{5}{-5} 特斯拉，愈近地磁極愈大，兩極約 \scinote{6}{-5} 特斯拉。
-\subsubsection{磁偏角（Magnetic declination/variation）}
-測量地至地磁北極射線相對於測量地至地理北極射線的夾角$\theta$，東為正，因地而異，略與緯度正相關。赤道磁偏角最大處約 11°，臺北約 -3°至-4°。
-\subsubsection{磁傾角（Magnetic dip/inclination） }
-地磁磁場與地平線的夾角$\varphi$，向下為正，略為愈接近地磁北極愈正、愈接近地磁南極愈負、地磁赤道為零、地磁北極為 90°、地磁南極為 -90°。臺北磁傾角約 37°。
-\subsection{磁層（Magnetosphere）}
+\sssc{磁層（Magnetosphere）}
 當太陽風與具有發達磁場的行星（例如地球、木星或土星）相交時，粒子會因洛倫茲力而偏轉。這個區域被稱為磁層，使粒子繞著行星飛行，而不是轟擊大氣層或表面。磁層在面向太陽的一側大致呈弓狀突起，地球者半徑約為地球的半徑十倍，另一側則拉出一條長尾跡，地球者半徑約為地球的半徑千倍。
 \subsubsection{磁層頂（Magnetopause）}
 磁層的外邊界。
@@ -2194,7 +2241,7 @@ A material that produces a persistent magnization $\mb{M}$ on its own due to mic
 是太陽風與行星的磁層頂相遇處形成的震波。
 \subsubsection{磁鞘（Magnetosheath）}
 介於弓形衝擊波面與磁層頂間的區域。
-\subsection{范艾倫輻射帶（Van Allen radiation belt）}
+\sssc{范艾倫輻射帶（Van Allen radiation belt）}
 是一個高能帶電粒子的區域，其中大部分粒子來自太陽風，少部分來自宇宙射線，被行星的磁層捕獲並環繞在該行星周圍。地球有兩層這樣的環帶，有時可以臨時創建其它的，內范艾倫輻射帶通常在地球上空從0.2到2個地球半徑的高度，外范艾倫輻射帶通常在地球上空3到10個地球半徑的高度，其中主要由高能（0.1–10MeV）電子組成。
 \sssc{帶電粒子受地磁運動}
 帶電粒子射入地磁場，若其速度垂直磁場則行等速率迴旋運動，若其速度有平行磁場的分量則行螺旋運動靠近地磁極，且由於地磁愈近兩極愈大，故其運動軌跡曲率半徑漸減。由於帶電粒子向兩磁極集中，故極光好發於兩磁極附近。
