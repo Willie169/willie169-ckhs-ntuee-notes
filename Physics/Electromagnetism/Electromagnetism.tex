@@ -100,7 +100,7 @@
 \item 表面（總）電荷密度（Surface (total) charge density）：$\sigma$ (C m$^{-2}$ = A s m$^{-2}$)
 \item 表面束縛電荷密度（Surface bound charge density）：$\sigma_b$ (C m$^{-2}$ = A s m$^{-2}$)
 \item 表面自由電荷密度（Surface free charge density）：$\sigma_f$ (C m$^{-2}$ = A s m$^{-2}$)
-\item 線電荷密度：$\Lambda$ (C m$^{-1}$)
+\item 線電荷密度：$\lambda$ (C m$^{-1}$)
 \item 電流（(Electric) current）：$I$ (A)
 \item 自由電流（Free current）：$I_f$ (A)
 \item 電壓（Voltage）/電位差（Electric potential difference）：$V$ (V = volt = kg m$^2$ s$^{-3}$ A$^{-1}$)
@@ -211,6 +211,7 @@
 \subsubsection{（電）偶極矩（(Electric) dipole moment）}
 一物體的電偶極矩$\mathscr{p}$根據其在電場$\mathbf{E}$中所受電力矩$\boldsymbol{\tau}$定義為：
 \[\boldsymbol{\tau} = \mathscr{p} \times \mathbf{E}.\]
+$\mathscr{p}$所在直線稱dipole axis。
 \subsubsection{電偶極子（Electric dipole）}
 兩點電荷電荷$+q$、$-q$，自電荷$-q$指向電荷$q$的向量為$\mathbf{d}$，稱電偶極子，具有電偶極矩：
 \[\mathscr{p}=q\mathbf{d}.\]
@@ -238,6 +239,7 @@
 \subsubsection{磁矩（Magnetic moment）/磁偶極矩（Magnetic dipole moment）}
 一物體的磁偶極矩$\mathbf{m}$根據其在磁場$\mathbf{B}$中所受磁力矩$\boldsymbol{\tau}$定義為：
 \[\boldsymbol{\tau} = \mathbf{m} \times \mathbf{B}.\]
+$\mb{m}$所在直線稱dipole axis。
 \subsubsection{磁極（Magnetic pole）}
 定義$\mathbf{m}$自 S 極指向 N 極。
 \subsubsection{磁化強度（Magnetization）}
@@ -563,20 +565,42 @@ For $z\ll R$,
 For $z\gg R$,
 \[\mb{E}=\frac{q\hat{k}}{4\pi\vepsilon_0z^2}\]
 \[\phi=\frac{q}{4\pi\vepsilon_0\abs{z}}\]
-\sssc{Electric field of a uniformly charged rod}
-At the point at a distance $d$ from one of the endpoint of the rod with length $\ell$ on the plane containing the endpoint perpendicular to the rod
-\[\mb{E}=\frac{q}{4\pi\vepsilon_0\ell}\int_0^{\ell}\frac{d}{(x^2+d^2)^{3/2}}\dd{x}=\frac{q}{4\pi\vepsilon_0 d\sqrt{\ell^2+d^2}}\]
+\sssc{Electric field of uniformly charged rod}
+For a rod with length $\ell$ and charge $q$ uniformly distributed, let the two endpoints be $(0,0)$ and $(-\ell,0)$. At $(0,d)$:
+\[E_x=\frac{q}{4\pi\vepsilon_0\ell}\int_0^{\ell}\frac{x}{(x^2+d^2)^{3/2}}\dd{x}=\frac{q}{4\pi\vepsilon_0\ell}\qty(\frac{1}{d}-\frac{1}{\sqrt{\ell^2+d^2}})\]
+\[E_y=\frac{q}{4\pi\vepsilon_0\ell}\int_0^{\ell}\frac{d}{(x^2+d^2)^{3/2}}\dd{x}=\frac{q}{4\pi\vepsilon_0d\sqrt{\ell^2+d^2}}\]
 \[\phi=\frac{q}{4\pi\vepsilon_0\ell}\int_0^{\ell}\frac{1}{\sqrt{x^2+d^2}}\dd{x}=\frac{q}{4\pi\vepsilon_0\ell}\ln(\frac{\ell+\sqrt{\ell^2+d^2}}{d})\]
+At $(d,0)$ for $d\ge0$:
+\[E_x=\frac{q}{4\pi\vepsilon_0\ell}\int_0^{\ell}\frac{1}{(x+d)^2}\dd{x}=\frac{q}{4\pi\vepsilon_0\ell}\qty(\frac{1}{d}-\frac{1}{\ell+d})\]
+\[E_y=0\]
+\[\phi=\frac{q}{4\pi\vepsilon_0\ell}\int_0^{\ell}\frac{1}{x+d}\dd{x}=\frac{q}{4\pi\vepsilon_0\ell}\ln(\frac{\ell+d}{d})\]
+\sssc{Electric field of uniformly charged semi-infinite rod}
+For a semi-infinite rod $(t,0),\quad t\le 0$ with uniform linear charge density $\lambda$. At $(0,d)$:
+\[E_x=\frac{\lambda}{4\pi\vepsilon_0}\int_0^{\infty}\frac{x}{(x^2+d^2)^{3/2}}\dd{x}=\frac{\lambda}{4\pi\vepsilon_0d}\]
+\[E_y=\frac{\lambda}{4\pi\vepsilon_0}\int_0^{\infty}\frac{d}{(x^2+d^2)^{3/2}}\dd{x}=\frac{\lambda}{4\pi\vepsilon_0d}\]
+\[\phi=\frac{\lambda}{4\pi\vepsilon_0}\int_0^{\infty}\frac{1}{\sqrt{x^2+d^2}}\dd{x}=\frac{\lambda}{4\pi\vepsilon_0}\ln(\frac{\infty+\sqrt{\infty^2+d^2}}{d})=\infty\]
+At $(d,0)$ for $d\ge0$:
+\[E_x=\frac{\lambda}{4\pi\vepsilon_0}\int_0^{\ell}\frac{1}{(x+d)^2}\dd{x}=\frac{\lambda}{4\pi\vepsilon_0d}]
+\[E_y=0\]
+\[\phi=\frac{\lambda}{4\pi\vepsilon_0}\int_0^{\infty}\frac{1}{x+d}\dd{x}=\frac{\lambda}{4\pi\vepsilon_0}\ln(\frac{\infty+d}{d})=\infty\]
+\sssc{圓柱}
+一半徑$R$圓柱殼，高方向線電荷密度$\lambda$，其外半徑$r$同心圓柱殼上之電場為向外
+\[E=\frac{\lambda}{2\pi\vepsilon_0r}\]
+\bpr
+高斯定律取小圓柱可知$E2\pi r\dd{\ell}=\frac{\lambda\dd{\ell}}{\vepsilon_0}$。
+\epr
 \subsubsection{帶電之無限大平板}
 令有一無限大平板表面電荷密度$\sigma$，平板厚度相對於$r$忽略，電荷可分離於兩表面或僅在一表面。則距離平板$r$之電場（正表遠板向，負表近板向）為：
 \[\begin{aligned}
-& \mathbf{E}(r)\\
-=& k_e\sigma r\int_{-\infty}^\infty\int_{-\infty}^\infty\left(r^2+x^2+y^2\right)^{-\frac{3}{2}}\,\mathrm{d}x\mathrm{d}y\\
+E=& k_e\sigma r\int_{-\infty}^\infty\int_{-\infty}^\infty\left(r^2+x^2+y^2\right)^{-\frac{3}{2}}\,\mathrm{d}x\mathrm{d}y\\
 =& k_e\sigma r\int_0^{2\pi}\int_0^\infty\left(r^2+t^2\right)^{-\frac{3}{2}}t\,\mathrm{d}t\mathrm{d}\theta\\
 =& k_e\sigma r\frac{2\pi}{2}\\
 =& 2\pi k_e\sigma\\
 =& \frac{\sigma}{2\varepsilon_0}
 \end{aligned}\]
+或以高斯定律取小圓柱可知
+\[E2\pi\qty(\dd{r})^2=\frac{\sigma}{\vepsilon_0\pi\qty(\dd{r})^2\]
+\[E=\frac{\sigma}{2\varepsilon_0}\]
 若兩平板平行而置，帶均勻異號電，帶正電板相對於帶負電板電位差$V$，相距$d$，則兩板表面電荷密度量值均為$\sigma$，且整個空間的電場均為自帶正電板指向帶負電板方向量值$E$：
 \[E=\frac{V}{d}=4\pi k_e\sigma=\frac{\sigma}{\varepsilon_0}.\]
 \subsubsection{帶電粒子在均勻電場中的運動}
@@ -596,6 +620,7 @@ For $\abs{\mb{r}}\gg\abs{\mb{d}}$,
 \[\phi(\mb{r})=\frac{q\mb{d}\cdot\hat{\mb{r}}}{4\pi\vepsilon_0\abs{\mb{r}}^2}\]
 For $\mb{r}=t\mb{d},\quad t\in\bbR$ and $|t|\gg1$,
 \[\mb{E}(\mb{r})=\frac{\mathscr{p}\cdot\hat{\mb{r}}}{2\pi\vepsilon_0\abs{\mb{r}}^3}\]
+\[\phi(\mb{r})=\frac{q\abs{\mb{d}}}{4\pi\vepsilon_0\abs{\mb{r}}^2}\]
 \sssc{Electric dipole in electric field}
 An electric dipole at origin, $|\mb{d}|\to0$,
 \[\mb{F}=(\mathscr{p}\cdot\nabla)\mb{E}\]
