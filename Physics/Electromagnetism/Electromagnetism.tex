@@ -943,11 +943,13 @@ I_{rms}=&\sqrt{\frac{1}{T}\int_0^TI^2\,\mathrm{d}t}\\
 \end{itemize}
 \subsection{必歐–沙伐定律（Biot–Savart law）}
 \subsubsection{必歐–沙伐定律（Biot–Savart law）–微分形式}
-一電流元長度$\mathrm{d}l$（定向為電流方向）、載有電流強度$I$，在$\mathbf{r}$產生磁場$\mathrm{d}\mathbf{B}$：
-\[\mathrm{d}\mathbf{B}=\frac{\mu_0}{4\pi}\frac{I\,\mathrm{d}\mathbf{l}\times\hat{\mathbf{r}}}{\abs{\mathbf{r}}^2}.\]
+$\mb{r}'$一電流元電流$I$、長度$\mathrm{d}l$定向為電流方向，在$\mathbf{r}$產生微小磁場$\mathrm{d}\mathbf{B}$：
+\[\mathrm{d}\mathbf{B}=\frac{\mu_0}{4\pi}\frac{I\dd{\mathbf{l}}\times\qty(\mathbf{r}-\mb{r}')}{\abs{\mathbf{r}-\mb{r}'}^3}.\]
+微小體積元$\mathrm{d}^3\mb{r}'$在$\mathbf{r}$產生微小磁場$\mathrm{d}\mathbf{B}$：
+\[\mathrm{d}\mathbf{B}=\frac{\mu_0}{4\pi}\frac{\mb{J}(\mb{r}')\times\qty(\mathbf{r}-\mb{r}')}{\abs{\mathbf{r}-\mb{r}'}^3}\mathrm{d}^3\mb{r}'.\]
 \subsubsection{必歐–沙伐定律（Biot–Savart law）–積分形式}
-電路$l$（定向為電流方向）上載有電流強度$I$（可不均勻），在$\mathbf{r}$產生磁場$\mathbf{B}$：
-\[\mathbf{B}=\frac{\mu_0}{4\pi}\int_{l}\frac{I\,\mathrm{d}\mathbf{l}\times\hat{\mathbf{r}}}{\abs{\mathbf{r}}^2}.\]
+\[\mathbf{B}=\frac{\mu_0}{4\pi}\int_l\frac{I\dd{\mathbf{l}}\times\qty(\mathbf{r}-\mb{r}')}{\abs{\mathbf{r}-\mb{r}'}^3}.\]
+\[\mathbf{B}=\frac{\mu_0}{4\pi}\iiint_V\frac{\mb{J}(\mb{r}')\times\qty(\mathbf{r}-\mb{r}')}{\abs{\mathbf{r}-\mb{r}'}^3}\mathrm{d}^3\mb{r}'.\]
 \subsection{馬克士威第四方程（Maxwell's fourth equation）-安培環路定律（Ampère's circuital law）/安培定律（Ampère's law）/安培–馬克士威方程（Ampère–Maxwell equation）}
 描述變動電場產生磁場/電動生磁/電流磁效應。
 \subsubsection{安培–馬克士威方程–微分形式}
@@ -959,16 +961,22 @@ I_{rms}=&\sqrt{\frac{1}{T}\int_0^TI^2\,\mathrm{d}t}\\
 \[\oint_{l}\mathbf{H}\cdot\mathrm{d}\mathbf{l}=\iint_S\mathbf{J}_f\cdot\mathrm{d}\mathbf{S}+\frac{\partial}{\partial t}\iint_S\mathbf{D}\cdot\mathrm{d}\mathbf{S}=I_f+I_d.\]
 即：
 \[\oint_{l}\mathbf{B}\cdot\mathrm{d}\mathbf{l}=\mu_0\iint_S\mathbf{J}\cdot\mathrm{d}\mathbf{S}+\mu_0\varepsilon_0\frac{\partial}{\partial t}\iint_S\mathbf{E}\cdot\mathrm{d}\mathbf{S}=\mu_0I+\mu_0\varepsilon_0\pdv{\Phi_E}{t}.\]
-其中$\oint_{l}\mathbf{H}\cdot\mathrm{d}\mathbf{l}$與$\oint_{l}\mathbf{B}\cdot\mathrm{d}\mathbf{l}$稱磁環場積、當$l$為線圈稱安培環（Ampèrian loop）。
+其中$\oint_{l}\mathbf{B}\cdot\mathrm{d}\mathbf{l}$稱磁環場積、當$l$為線圈稱安培環（Ampèrian loop）、$I$為通過$S$之電流。
 \subsection{旋磁比/磁旋比（Gyromagnetic ratio）}
 旋磁比指磁偶極子的磁矩與角動量之比值。
 \subsection{載流導線產生磁場}
 \subsubsection{長直載流導線}
-長直載流導線上載有電流強度$I$，在徑向距離$r$產生磁場量值$B$：
-\[B=\frac{\mu_0I}{2\pi r}.\]
-\subsubsection{長直粗載流導線}
-長直載流導線上半徑$R$載有電流強度$I$，在徑向距離軸$r$產生磁場量值$B$：
-\[B=\frac{\mu_0Ir}{2\pi R^2}.\]
+A wire carrying current $I$ from $(0,R\sec\theta_1)$ to $(0,R\sec\theta_2)$ with $0\le\theta_1<\theta_2$ has a magnetic field $B$ at origin pointing downwards:
+\[\ba
+B&=\frac{\mu_0I}{4\pi}\int_{R\tan\theta_1}^{R\tan\theta_2}\frac{R}{\qty(x^2+R^2)^{3/2}}\dd{x},\quad u=\frac{x}{R}\\
+&=\frac{\mu_0I}{4\pi R}\int_{\tan\theta_1}^{\tan\theta_2}\frac{1}{\qty(u^2+1)^{3/2}}\dd{u},\quad u=\tan\theta\\
+&=\frac{\mu_0I}{4\pi R}\int_{\theta_1}^{\theta_2}\cos\theta\dd{\theta}\\
+&=\frac{\mu_0I}{4\pi R}\qty(\sin(\theta_2)-\sin(\theta_1))
+\ea\]
+For semi-infinite wire with $\theta_1=0$ and $\theta_2=\frac{\pi}{2}$,
+\[B=\frac{\mu_0I}{4\pi R}\]
+For infinite wire with $\theta_1=-\frac{\pi}{2}$ and $\theta_2=\frac{\pi}{2}$,
+\[B=\frac{\mu_0I}{2\pi R}\]
 \subsubsection{弧形載流導線}
 平面$S$上半徑$R$弧形載流導線$l$（定向為電流方向，長度$l$等於弧角$\theta$乘以$R$）上載有電流強度$I$（均勻），在$\mathbf{r}$產生磁場$\mathbf{B}$：
 \[\mathbf{B}=\frac{\mu_0I}{4\pi}\int_{l}\frac{\mathrm{d}\mathbf{l}\times\hat{\mathbf{r}}}{\abs{\mathbf{r}}^2}.\]
@@ -1016,6 +1024,7 @@ I_{rms}=&\sqrt{\frac{1}{T}\int_0^TI^2\,\mathrm{d}t}\\
 \item 靠近管壁處磁場量值接近管口大於遠離管口。
 \item 管內遠離管口處可近似為無限長的載流螺線管。
 \end{itemize}
+普通物理假設螺線管內磁場均勻均同軸上遠離管口處。
 \subsubsection{電磁鐵（Electromagnet）}
 載流螺線管內插軟鐵芯等磁化率高的物體可增加磁場，稱電磁鐵。若通交流電則等效磁矩方向不斷反轉，可用於產生相同頻率的振動。電磁鐵可用於起重機、電鈴、電話聽筒、揚聲器、磁浮列車等。
 \subsection{載流導線受磁力}
@@ -1088,7 +1097,8 @@ Thus no net force in uniform field.
 &=\mb{m}\times\mb{B}
 \ea\]
 \epr
-Let $\mb{m}\cdot\mb{B}=0$ be potential $U=0$ and $\theta=\pi$.
+\sssc{Orientation energy}
+Let $\mb{m}\cdot\mb{B}=0$ be orientation energy $U=0$ and $\theta=\pi$.
 \[U=-\mb{m}\cdot\mb{B}\]
 \bpr
 \[\ba
@@ -1218,13 +1228,13 @@ $v_x$的特徵方程式：
 \end{itemize}
 檢測器檢測落點，得質譜（Mass spectrum），可推知莫耳質量，常用於檢測同位素、食安、有機化合物分析等。
 \subsubsection{迴旋加速器（Cyclotron）}
-兩片 D 形柱（指截面為半圓形之柱體），均提供垂直半圓面的同向均勻磁場，令磁場量值$B$，兩者平邊相對略成一圓，而中有無磁場之溝隙相隔。帶電質點，令質量$m$、電荷量值$q$，從溝隙中心略高於 D 形柱高垂直溝隙方向加電壓射出，令電壓量值$V$，於 D 形柱上時做迴旋運動（若帶電質點帶正電荷則 D 形柱磁場方向與帶電質點相對於初始發射處角速度反向，帶負電荷則同向），令迴旋週期$T$，每次通過溝隙時所加電壓同值異號，使之每次通過溝隙均加速並增加迴旋半徑，令第$i$次通過溝隙後帶電質點速率$v_i$、迴旋半徑$r_i$（初始發射視為第1次通過），當達最大半徑時離開 D 形柱進入實驗區（進行粒子對撞實驗等）。
+兩片 D 形柱（截面為半圓形之柱體），稱dee，均提供垂直半圓面的同向均勻磁場，令磁場量值$B$，兩者平邊相對略成一圓，而中有無磁場之溝隙相隔。帶電質點，令質量$m$、電荷量值$q$，從溝隙中心略高於 D 形柱高垂直溝隙方向加電壓$V$射出，速率$v_1$，於 D 形柱上時做迴旋運動（若帶電質點帶正電荷則 D 形柱磁場方向與帶電質點相對於初始發射處角速度反向，帶負電荷則同向），令迴旋週期$T$，每次通過溝隙時所加電壓同值$V$異號，使之每次通過溝隙均加速並增加迴旋半徑，令第$i-1$次通過溝隙後帶電質點速率$v_i$、迴旋半徑$r_i$（初始發射視為第1次通過），當達最大半徑時離開 D 形柱進入實驗區（進行粒子對撞實驗等）。
 \[T=\frac{2\pi m}{qB}.\]
-\[v_1^{\phantom{0}2}=\frac{2qV}{m}.\]
-\[v_{n+1}^{\phantom{n+1}2}=\frac{2qV}{m}+v_n^{\phantom{n}2},\quad n\in\mathbb{N}.\]
+\[v_1^{\phantom{1}2}=\frac{2qV}{m}.\]
+\[v_{n+1}^{\phantom{n+1}2}=\frac{2qV}{m}+v_n^{\phantom{n}2},\quad n\in\mathbb{N}_{>1}.\]
 \[v_n=\sqrt{n}v_1=\sqrt{\frac{2nqV}{m}},\quad n\in\mathbb{N}.\]
-\[r_1=\frac{mv_0}{qB}=\frac{\sqrt{2mqV}}{qB}.\]
-\[r_n=\frac{mv_n}{qB}=\frac{1}{B}\sqrt{\frac{2nVm}{q}},\quad n\in\mathbb{N}.\]
+\[r_1=\frac{mv_1}{qB}=\frac{1}{B}\sqrt{\frac{2mV}{q}}.\]
+\[r_n=\frac{mv_n}{qB}=\frac{1}{B}\sqrt{\frac{2nmV}{q}}=\sqrt{n}r_1,\quad n\in\mathbb{N}_{>1}.\]
 \sssc{同步加速器（Synchrotron）}
 As s the speed of a approaches that of light, the assumption of cyclotron that the frequency of revolution of a charged particle circulating in a magnetic field is independent of the particle's speed begin to fail.According to relativity theory, the frequency of revolution decreases steadily as speed increases. Synchrotron's frequeny changes accodingly, unlike cyclotron's fixed frequency.
 \subsection{電流天平（Current balance）}
