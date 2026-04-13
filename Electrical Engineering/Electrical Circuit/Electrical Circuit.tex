@@ -1250,7 +1250,7 @@ $I_C$ being high-pass filter:
 \[\lim_{\omega\to\infty}\abs{H_{I_C}(j\omega)}=\lim_{\omega\to\infty}\abs{\frac{-LC\omega^2}{1-LC\omega^2}}=1\]
 \end{proof}
 \sssc{Series RLC circuit}
-A series RLC (oscillator) circuit consists of a resistor with resistance $R$, an inductor with inductance $L$, a capacitor with capacitance $C$, and an independent voltage source $v_{in}$ in series connection. Neper frequency (奈培頻率) or attenuation (衰減量) $\alpha$, angular resonance frequency $\omega_0$, damping factor (阻尼係數) $\zeta$, characteristic roots $r$.
+A series RLC (oscillator) circuit consists of a resistor with resistance $R$, an inductor with inductance $L$, a capacitor with capacitance $C$, and an independent voltage source $v_{in}$ in series connection. Neper frequency (奈培頻率) or attenuation (衰減量) $\alpha$, angular resonance frequency $\omega_0$, damping factor (阻尼係數) $\zeta$, characteristic roots $r$, for underdamped response, angular frequency $\omega$, $t_n=\frac{2\pi n}{\omega}$, stored energy in the inductor and capacitor $E_L$ and $E_C$, $E=E_L+E_C$, dissipated energy of the resistor in $E_R$.
 
 Natural response (time domain):
 \[\dv[2]{i}{t}+\frac{R}{L}\dv{i}{t}+\frac{i}{LC}=0\]
@@ -1362,6 +1362,14 @@ C\dv{v_C}{t}&=\qty(-v_C(0^-)\frac{2}{R}+\qty(\frac{1}{2}i(0^-)R+v_C(0^-))\frac{2
 \[v_R=e^{-\omega_0\zeta t}\qty(i(0^-)R\cos(\omega_0\sqrt{1-\zeta^2}t)-\qty(2v_C(0^-)+i(0^-)R)\frac{\zeta}{\sqrt{1-\zeta^2}}\sin(\omega_0\sqrt{1-\zeta^2}t))\]
 \[v_L=e^{-\omega_0\zeta t}\qty(-\qty(v_C(0^-)+i(0^-)R)\cos(\omega_0\sqrt{1-\zeta^2}t)+\frac{v_C(0^-)\zeta+\frac{1}{2}i(0^-)R\frac{2\zeta^2-1}{\zeta}}{\sqrt{1-\zeta^2}}\sin(\omega_0\sqrt{1-\zeta^2}t))\]
 \[v_C=e^{-\omega_0\zeta t}\qty(v_C(0^-)\cos(\omega_0\sqrt{1-\zeta^2}t)+\qty(v_C(0^-)\frac{\zeta}{\sqrt{1-\zeta^2}}+\frac{1}{2}\frac{i(0^-)R}{\zeta\sqrt{1-\zeta^2}})\sin(\omega_0\sqrt{1-\zeta^2}t))\]
+\[\omega=\omega_0\sqrt{1-\zeta^2}\]
+\[t_n=\frac{2\pi n}{\omega_0\sqrt{1-\zeta^2}}\]
+\[i(t_n)=e^{-\omega_0\zeta t_n}i(0^-)\]
+\[v_C(t_n)=e^{-\omega_0\zeta t_n}v_C(0^-)\]
+\[E_L(t_n)=\frac{1}{2}L\qty(i(0^-))^2e^{-2\omega_0\zeta t_n}\]
+\[E_C(t_n)=\frac{1}{2}C\qty(v_C(0^-))^2e^{-2\omega_0\zeta t_n}\]
+\[E(t_n)=\qty(\frac{1}{2}L\qty(i(0^-))^2+\frac{1}{2}C\qty(v_C(0^-))^2)e^{-2\omega_0\zeta t_n}\]
+\[E_R(t_n)=\qty(\frac{1}{2}L\qty(i(0^-))^2+\frac{1}{2}C\qty(v_C(0^-))^2)\qty(1-e^{-2\omega_0\zeta t_n})\]
 \begin{proof}
 \[i=e^{-\omega_0\zeta t}\qty(A\cos(\omega_0\sqrt{1-\zeta^2}t)+B\sin(\omega_0\sqrt{1-\zeta^2}t))\]
 \[A=i(0^-)\]
@@ -1833,7 +1841,7 @@ $V_C$ being low-pass filter:
 \[\lim_{\omega\to 0}\abs{H_{V_C}(j\omega)}=1\]
 \[\lim_{\omega\to\infty}\abs{H_{V_C}(j\omega)}=0\]
 \sssc{Parallel RLC circuit}
-A parallel RLC (oscillator) circuit consists of a resistor with resistance $R$, an inductor with inductance $L$, a capacitor with capacitance $C$, and an independent current source $i_{in}$ in parallel connection. Neper frequency or attenuation $\alpha$, angular resonance frequency $\omega_0$, damping factor $\zeta$, characteristic roots $r$.
+A parallel RLC (oscillator) circuit consists of a resistor with resistance $R$, an inductor with inductance $L$, a capacitor with capacitance $C$, and an independent current source $i_{in}$ in parallel connection. Neper frequency or attenuation $\alpha$, angular resonance frequency $\omega_0$, damping factor $\zeta$, characteristic roots $r$, for underdamped response, angular frequency $\omega$, $t_n=\frac{2\pi n}{\omega}$, stored energy in the inductor and capacitor $E_L$ and $E_C$, $E=E_L+E_C$, dissipated energy of the resistor in $E_R$.
 
 Natural response (time domain):
 \[\dv[2]{v}{t}+\frac{1}{RC}\dv{v}{t}+\frac{v}{LC}=0\]
@@ -1924,6 +1932,14 @@ Check $v=L\dv{i_L}{t}$:
 \[i_R=e^{-\omega_0\zeta t}\qty(\frac{v(0^-)}{R}\cos(\omega_0\sqrt{1-\zeta^2}t)-\qty(\frac{v(0^-)}{R}+2i_L(0^-))\frac{\zeta}{\sqrt{1-\zeta^2}}\sin(\omega_0\sqrt{1-\zeta^2}t))\]
 \[i_L=e^{-\omega_0\zeta t}\qty(i_L(0^-)\cos(\omega_0\sqrt{1-\zeta^2}t)+\qty(\frac{1}{2}\frac{v(0^-)}{R\zeta\sqrt{1-\zeta^2}}+i_L(0^-)\frac{\zeta}{\sqrt{1-\zeta^2}})\sin(\omega_0\sqrt{1-\zeta^2}t))\]
 \[i_C=e^{-\omega_0\zeta t}\qty(\qty(\frac{v(0^-)}{R}+i_L(0^-))\cos(\omega_0\sqrt{1-\zeta^2}t)+\qty(\frac{1}{2}\frac{v(0^-)}{R}\frac{1-2\zeta^2}{\zeta\sqrt{1-\zeta^2}}-i_L(0^-)\frac{\zeta}{\sqrt{1-\zeta^2}})\sin(\omega_0\sqrt{1-\zeta^2}t))\]
+\[\omega=\omega_0\sqrt{1-\zeta^2}\]
+\[t_n=\frac{2\pi n}{\omega_0\sqrt{1-\zeta^2}}\]
+\[v(t_n)=e^{-\omega_0\zeta t_n}v(0^-)\]
+\[i_L(t_n)=e^{-\omega_0\zeta t}i_L(0^-)\]
+\[E_C(t_n)=\frac{1}{2}C\qty(v(0^-))^2e^{-2\omega_0\zeta t_n}\]
+\[E_L(t_n)=\frac{1}{2}L\qty(i_L(0^-))^2e^{-2\omega_0\zeta t_n}\]
+\[E(t_n)=\qty(\frac{1}{2}L\qty(i_L(0^-))^2+\frac{1}{2}C\qty(v(0^-))^2)e^{-2\omega_0\zeta t_n}\]
+\[E_R(t_n)=\qty(\frac{1}{2}L\qty(i_L(0^-))^2+\frac{1}{2}C\qty(v(0^-))^2)\qty(1-e^{-2\omega_0\zeta t_n})\]
 \begin{proof}
 \[v=e^{-\omega_0\zeta t}\qty(A\cos(\omega_0\sqrt{1-\zeta^2}t)+B\sin(\omega_0\sqrt{1-\zeta^2}t))\]
 \[A=i(0^-)\]
