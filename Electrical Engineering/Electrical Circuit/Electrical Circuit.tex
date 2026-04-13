@@ -318,21 +318,21 @@ A practical independent current source can be approximated with an ideal indepen
 \ssc{Power of steady-state sinusoidal current}
 Here, the current under discussion is a steady-state sinusoidal current of the form
 \[v(t)=v_m\cos(\omega t+\theta),\]
-\[i(t)=i_m\cos(\omega t+\theta-\phi),\]
+\[i(t)=i_m\cos(\omega t+\theta-\varphi),\]
 or in phasors,
-\[\mb{V}=v_m\angle\varphi=v_me^{j\theta},\]
-\[\mb{I}=i_m\angle\theta=i_me^{j\theta-\phi}.\]
+\[\mb{V}=v_m\angle\theta=v_me^{j\theta},\]
+\[\mb{I}=i_m\angle(\theta-\varphi)=i_me^{j(\theta-\varphi)}.\]
 \sssc{Instantaneous power}
 \[\ba
-p(t)&=v(t)i(t)=v_mi_m\cos(\omega t+\theta)\cos(\omega t+\theta-\phi)\\
-&=\frac{v_mi_m}{2}\cos\phi\cos(2\omega t+2\theta-\phi)
+p(t)&=v(t)i(t)=v_mi_m\cos(\omega t+\theta)\cos(\omega t+\theta-\varphi)\\
+&=\frac{v_mi_m}{2}\cos\varphi\cos(2\omega t+2\theta-\varphi)
 \ea\]
 \sssc{Complex power}
 The complex power $\mb{S}$ with unit volt-ampere (VA) of a steady-state sinusoidal current is defined as
-\[\mb{S}=\mb{V}\mb{I}^*=v_mi_me^{j\phi}.\]
+\[\mb{S}=\mb{V}\mb{I}^*=v_mi_me^{j\varphi}.\]
 \sssc{Real, average, or active power}
 The real, average, or active power $P$ with unit watt (W) of a steady-state sinusoidal current is defined as the average power of it, that is
-\[P=\frac{v_mi_m}{2}\cos\phi=v_{rms}i_{rms}\cos\phi=\Re(\mb{S}).\]
+\[P=\frac{v_mi_m}{2}\cos\varphi=v_{rms}i_{rms}\cos\varphi=\Re(\mb{S}).\]
 \sssc{Apparent power}
 The apparent power $S$ with unit volt-ampere (VA) of a steady-state sinusoidal current is defined as
 \[S=v_mi_m=\abs{\mb{S}}.\]
@@ -342,7 +342,7 @@ The power factor (PF) of a steady-state sinusoidal current is defined as
 PF = 1 is called ideal.
 \sssc{Reactive power}
 The reactive power $Q$ with unit volt-ampere-reactive (VAR) of a steady-state sinusoidal current is defined as
-\[Q=\Im(\mb{S})=\frac{v_mi_m}{2}\sin\phi.\]
+\[Q=\Im(\mb{S})=\frac{v_mi_m}{2}\sin\varphi.\]
 It's the power oscillates between sources and reactive elements.
 \sssc{Power triangle}
 The triangle on the complex plane of $\mb{S}$, $P$, and $jQ$ showing
@@ -976,6 +976,14 @@ v_C&=v_{in}-v_L\\
 &=i(0^-)\sqrt{\frac{L}{C}}\sin(\frac{1}{\sqrt{LC}}t)+\qty(v_{in}+v_C(0^-))\cos(\frac{1}{\sqrt{LC}}t)\\
 &=i(0^-)L\omega_0\sin(\omega_0t)+\qty(v_{in}+v_C(0^-))\cos(\omega_0t)
 \ea\]
+Resonance state (time domain):
+\[v_{in}=v_m\cos(\omega_0t+\theta)\]
+\[i=i_m\cos(\omega_0t+\theta),\quad i_m=\infty\]
+\[v_C=-v_L=\frac{i_m}{C\omgea_0}\sin(\omega_0t+\theta)=i_mL\omega_0\sin(\omega_0t+\theta)\]
+Resonance state (phasor domain):
+\[\mb{V}_{in}=v_me^{j\theta}\]
+\[\mb{I}=i_me^{j\theta},\quad i_m=\infty\]
+\[\mb{V}_C=-\mb{V}_L=-\frac{ji_m}{C\omega_0}e^{j\theta}=-ji_mL\omega_0e^{j\theta}\]
 Impulse response:
 \[\ba
 h_i&=\frac{1}{L}\cos(\frac{1}{\sqrt{LC}}t)u(t)\\
@@ -1215,6 +1223,14 @@ i_L&=i_{in}-i_C\\
 &=v(0^-)\sqrt{\frac{C}{L}}\sin(\frac{1}{\sqrt{LC}}t)-\qty(i_{in}-i_L(0^-))\cos(\frac{1}{\sqrt{LC}}t)\\
 &=v(0^-)\sqrt{\frac{C}{L}}\sin(\frac{1}{\sqrt{LC}}t)+\qty(i_{in}-i_L(0^-))\cos(\omega_0t)
 \ea\]
+Resonance state (time domain):
+\[i_{in}=i_m\cos(\omega_0t+\theta)\]
+\[v=v_m\cos(\omega_0t+\theta),\quad v_m=\infty\]
+\[i_C=-i_L=-v_mC\omega_0\sin(\omega_0t+\theta)=\frac{v_m}{L\omega_0}\sin(\omega_0t+\theta)\]
+Resonance state (phasor domain):
+\[\mb{I}_{in}=i_me^{j\theta}\]
+\[\mb{V}=v_me^{j\theta},\quad v_m=\infty\]
+\[\mb{I}_C=-\mb{I}_L=-jv_mC\omega_0e^{j\theta}=-\frac{jv_m}{L\omega_0}e^{j\theta}\]
 Impulse response:
 \[\ba
 h_i&=\frac{1}{C}\cos(\frac{1}{\sqrt{LC}}t)u(t)\\
@@ -1802,6 +1818,14 @@ Constant source total response (time domain):
 \[i_L=i_{in}-e^{-\omega_0\zeta t}\qty(\qty(i_{in}-i_L(0^-))\cos(\omega_0\sqrt{1-\zeta^2}t)+\qty(i_{in}-\frac{1}{2}\frac{v(0^-)}{R\zeta\sqrt{1-\zeta^2}}-i_L(0^-)\frac{\zeta}{\sqrt{1-\zeta^2}})\sin(\omega_0\sqrt{1-\zeta^2}t))\]
 \[i_C=e^{-\omega_0\zeta t}\qty(\qty(i_{in}+\frac{v(0^-)}{R}+i_L(0^-))\cos(\omega_0\sqrt{1-\zeta^2}t)-\qty(i_{in}-\frac{v(0^-)}{2R}\frac{1-2\zeta^2}{\zeta\sqrt{1-\zeta^2}}+i_L(0^-)\frac{\zeta}{\sqrt{1-\zeta^2}})\sin(\omega_0\sqrt{1-\zeta^2}t))\]
 \eit
+Resonance state (time domain):
+\[v_{in}=v_m\cos(\omega_0t+\theta)\]
+\[i=\frac{v_m}{R}\cos(\omega_0t+\theta)\]
+\[v_C=-v_L=\frac{v_m}{RC\omgea_0}\sin(\omega_0t+\theta)=\frac{v_mL\omega_0}{R}\sin(\omega_0t+\theta)\]
+Resonance state (phasor domain):
+\[\mb{V}_{in}=v_me^{j\theta}\]
+\[\mb{I}=\frac{v_m}{R}e^{j\theta}\]
+\[\mb{V}_C=-\mb{V}_L=-\frac{jv_m}{RC\omgea_0}e^{j\theta}=-\frac{jv_mL\omega_0}{R}e^{j\theta}\]
 Impulse response:
 \bit
 \item $\zeta>1$ Overdamped response:
@@ -2254,6 +2278,14 @@ I_L&=\frac{I_{in}R+i_L(0^-)RLCs+v(0^-)RC+i_L(0^-)L}{RLCs^2+Ls+R}\\
 I_C&=\frac{I_{in}RLCs^2-\qty(v(0^-)+i_L(0^-)R)LCs-v(0^-)RC}{RLCs^2+Ls+R}\\
 &=\frac{I_{in}s^2-\qty(\frac{v(0^-)}{R}+i_L(0^-))s-\frac{v(0^-)\omega_0}{2R\zeta}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
+Resonance state (time domain):
+\[i_{in}=i_m\cos(\omega_0t+\theta)\]
+\[v=i_mR\cos(\omega_0t+\theta)\]
+\[i_C=-i_L=-i_mR\omega_0\sin(\omega_0t+\theta)=\frac{i_mR}{L\omega_0}\sin(\omega_0t+\theta)\]
+Resonance state (phasor domain):
+\[\mb{I}_{in}=i_me^{j\theta}\]
+\[\mb{V}=i_mRe^{j\theta}\]
+\[\mb{I}_C=-\mb{I}_L=-ji_mRC\omega_0e^{j\theta}=-\frac{ji_mR}{L\omega_0}e^{j\theta}\]
 Impulse response:
 \bit
 \item $\zeta>1$ Overdamped response:
