@@ -1713,6 +1713,8 @@ Potential difference (later relative to inner):
 \[V=\frac{q_fd}{A\varepsilon}\]
 Capacitance:
 \[C=\frac{A\varepsilon}{d}\]
+Force between them:
+\[F=\dv{}{d}\frac{CV^2}{2}=\dv{}{d}\frac{q_f^{\pht{f}2}d}{2A\varepsilon}=\frac{q_f^{\pht{f}2}}{2A\varepsilon}=\frac{q_fV}{2d}\]
 If the plates are circular and of radius $R$, thus $A=\pi R^2$, then the magnetic field:
 \[B=\bcs\frac{\mu_0Ir}{2\pi R^2},\quad& r\le R\\ \frac{\mu_0I}{2\pi R},\quad & r>R\ecs\]
 \subsubsection{Cylindrical capacitor}
@@ -1946,7 +1948,8 @@ $S=\partial V$,
 &\nabla\times\mathbf{E}=\pdv{\mathbf{B}}{t}\\
 &v^2\nabla\times\mathbf{B}=\pdv{\mathbf{E}}{t}
 \end{aligned}\]
-\subsubsection{平面波（Plane wave）解}
+\ssc{平面波（Plane wave）解}
+\sssc{平面波解}
 令電場有向振幅$\mathbf{E}_0$、磁場有向振幅$\mathbf{B}_0$，$\mathbf{k}$、$\mathbf{E}$、$\mathbf{B}$互相垂直，齊次電磁波方程的解為：
 \[\begin{aligned}
 &\mathbf{E}(\mathbf{r},t)=\mathbf{E}_0\sin(\mathbf{k}\cdot\mathbf{r}-\omega t+\varphi)\\
@@ -1955,7 +1958,7 @@ $S=\partial V$,
 &\mathbf{E}=-\frac{\mathbf{k}\times\mathbf{B}}{\omega}=-\frac{\mathbf{v}\times\mathbf{B}}{|\mathbf{v}|^2}\\
 &\frac{\mathbf{k}}{\omega}=\frac{1}{\mathbf{v}}=\frac{\mathbf{E}\times\mathbf{B}}{\abs{\mathbf{B}}^2}
 \end{aligned}\]
-\subsubsection{參數關係}
+\subsubsection{波參數關係}
 \[\begin{aligned}
 \omega &= 2\pi \nu \\
 \mathbf{k} &= \frac{2\pi}{\lambda}\hat{\mathbf{v}} \\
@@ -1968,26 +1971,28 @@ n &= \frac{c}{v} = c\mu\varepsilon\\
 &= \mathbf{v}+\lambda \pdv{\mathbf{v}}{\lambda} \\
 &= \mathbf{v}+\mathbf{k} \cdot\pdv{\mathbf{v}}{\mathbf{k}}
 \end{aligned}\]
-\subsubsection{解釋}
-\bit
-\item 電荷加速運動，即電流變化時，會在空間中產生電磁波。
-\item 電磁波為橫波。
-\item 折射率為$n=\frac{c}{v}=\sqrt{\frac{\mu\varepsilon}{\mu_0\varepsilon_0}}$，對於一些物質，不同頻率的電磁波會不同程度地改變$\mu$和/或$\varepsilon$，使折射率和波長有關，產生色散現象。
-\eit
-\ssc{能量}
+\subsubsection{折射率（index of refraction）}
+$n=\frac{c}{v}=\sqrt{\frac{\mu\varepsilon}{\mu_0\varepsilon_0}}$，對於一些物質，不同頻率的電磁波會不同程度地改變$\mu$和/或$\varepsilon$，使折射率和波長有關，產生色散現象。
 \subsubsection{能量密度}
 \bma
 u&=\frac{\varepsilon}{2}|\mathbf{E}|^2+\frac{1}{2\mu}|\mathbf{B}|^2\\
 &=\varepsilon|\mathbf{E}|^2\\
-&=\varepsilon|\mathbf{E}_0|^2\sin^2(\mathbf{k}\cdot\mathbf{r}-\omega t+\varphi)
+&=\frac{1}{\mu}|\mathbf{B}|^2\\
+&=\varepsilon|\mathbf{E}_0|^2\sin^2(\mathbf{k}\cdot\mathbf{r}-\omega t+\varphi)\\
+&=\frac{1}{\mu}|\mathbf{B}_0|^2\sin^2(\mathbf{k}\cdot\mathbf{r}-\omega t+\varphi)
 \eam
-平均能量密度：
-\bma
-\langle u\rangle&=\frac{\omega}{2\pi}\varepsilon|\mathbf{E}_0|^2\int_0^{\frac{2\pi}{\omega}}\sin^2(\mathbf{k}\cdot\mathbf{r}-\omega t+\varphi)\,\mathrm{d}t\\
-&=\frac{\varepsilon|\mathbf{E}_0|^2}{2}
-\eam
-\sssc{輻射通量（Radiant flux）/輻射功率（Radiant power）/光度（Luminosity）}
-電磁波的平均功率。定向表面$S$的輻射通量$\Phi_e$為坡印廷向量的面積積分的時間平均，即：
+\sssc{平均能量密度}
+\[\langle u\rangle=\frac{\varepsilon|\mathbf{E}_0|^2}{2}=\frac{|\mathbf{B}_0|^2}{2\mu}\]
+\sssc{功率表面密度}
+\[\ba
+\dv{p}{S}&=uv\\
+&=\varepsilon c\mathbf{E}_0|^2\sin^2(\mathbf{k}\cdot\mathbf{r}-\omega t+\varphi)\\
+&=\frac{c}{\mu}|\mathbf{B}_0|^2\sin^2(\mathbf{k}\cdot\mathbf{r}-\omega t+\varphi)
+\ea\]
+\sssc{平均功率表面密度}
+\[\langle\dv{p}{S}\rangle=\frac{\varepsilon c|\mathbf{E}_0|^2}{2}=\frac{c|\mathbf{B}_0|^2}{2\mu}\]
+\sssc{輻射通量（Radiant flux）/（輻射）功率（(Radiant) power）/光度（Luminosity）}
+電磁波在一表面的平均功率。定向表面$S$的輻射通量$\Phi_e$為坡印廷向量的面積積分的時間平均，即：
 \[\Phi_e=\langle\iint_S(\mathbf{E}\times\mathbf{H})\cdot\mathrm{d}\mathbf{S}\rangle\]
 \sssc{頻率光譜通量（Spectral flux in frequency）}
 \[\Phi_{\nu}=\pdv{\Phi_e}{\nu}\]
@@ -2024,6 +2029,8 @@ u&=\frac{\varepsilon}{2}|\mathbf{E}|^2+\frac{1}{2\mu}|\mathbf{B}|^2\\
 若全數反射則：
 \[\Delta I_l=2I_l\cos^2\theta\]
 餘弦平方因一為光強度投影，一為動量投影。
+
+光壓乘以面積即輻射力（radiation force）。
 \subsection{電磁（波）屏蔽效應/法拉第籠（Faraday cage）}
 由於電荷載子受電磁波會產生感應電流，感應電流產生感應電磁波，而與原電磁波產生破壞性干涉，故導體包圍的區域無法接受外部電磁波或發送電磁波到外部，此效應稱電磁（波）屏蔽效應，受到靜電屏蔽效應與電磁波屏蔽效應的區域稱法拉第籠。
 
@@ -2185,7 +2192,7 @@ where $C$ is the material's Curie constant and $\mathscr{T}$ is Kelvin temperatu
 \subsubsection{鐵磁性（Ferromagnetism）/強磁性}
 指的是某些材料相鄰電子自旋呈相同方向排列，使其在無外加磁場時可以具有自發磁化（spontaneous magnetization），且該磁化方向在施加足夠強的外加磁場時可以翻轉（switchability），且翻轉後的磁矩方向與外磁場之點積為正。Ferromagnetism subjects to thermal agitation a lot. 磁域/磁田/磁疇（Magnetic domain）指鐵磁性物質的一小區域的磁原子經交換作用成群向同一方向排列，其邊界稱磁田壁（domain wall）。未經磁化時各磁田磁矩方向散亂分布，無淨巨觀磁矩。磁化過的鐵磁性物質即使外加磁場移除仍保有磁矩，稱自發磁矩。具之之物質稱ferromagnetic material or magnetic material（磁性物質）。\ce{Fe}、\ce{Co}、\ce{Ni} 具有鐵磁性。具有鐵磁性的物質較具有鐵電性的物質多。
 
-將未被磁化的鐵磁性物質置於一可施加外加  處，隨著外加磁場逐漸增強，各磁域盡量與外加磁場同方向，自發磁化方向和外加磁場方向相近的磁域擴大，總磁化強度也隨之增加；反之則縮小。當所有磁域的磁矩方向一致，則達到磁性飽和（saturation），此時再加強外加磁場其磁化強度不再增加。再逐漸減小外加磁場，則磁化強度亦隨之減小，但程度較緩，並不沿原磁化曲線（magnetization curve） 返回，而是沿另一斜率較小之曲線變化，直到外加磁場降為零，而鐵磁性物質仍保有磁矩，此即磁滯現象（hysteresis），該磁矩稱該物質之殘磁（remanence）。接著再通以反向之外加磁場並逐漸加大，當鐵磁物質之磁性為零時之外加 H-field 大小即為此物質之抗磁力或矯頑力（coercive force）或抗磁場強度（coercive field intensity）。反向磁場大到某一程度，鐵磁性物質磁化強度亦會達到飽和，再減小反向磁場至零點，鐵磁性物質仍具磁性。再通以正向磁場，直到飽和。整個過程紀錄在 M-H 圖上的封閉曲線即稱為磁滯曲線（hysteresis curve or loop）。
+將未被磁化的鐵磁性物質置於一可施加外加  處，隨著外加磁場逐漸增強，各磁域盡量與外加磁場同方向，自發磁化方向和外加磁場方向相近的磁域擴大，總磁化強度也隨之增加；反之則縮小。當所有磁域的磁矩方向一致，則達到飽和磁化（saturation magnetization），此時再加強外加磁場其磁化強度不再增加。再逐漸減小外加磁場，則磁化強度亦隨之減小，但程度較緩，並不沿原磁化曲線（magnetization curve） 返回，而是沿另一斜率較小之曲線變化，直到外加磁場降為零，而鐵磁性物質仍保有磁矩，此即磁滯現象（hysteresis），該磁矩稱該物質之殘磁（remanence）。接著再通以反向之外加磁場並逐漸加大，當鐵磁物質之磁性為零時之外加 H-field 大小即為此物質之抗磁力或矯頑力（coercive force）或抗磁場強度（coercive field intensity）。反向磁場大到某一程度，鐵磁性物質磁化強度亦會達到飽和，再減小反向磁場至零點，鐵磁性物質仍具磁性。再通以正向磁場，直到飽和。整個過程紀錄在 M-H 圖上的封閉曲線即稱為磁滯曲線（hysteresis curve or loop）。
 \subsubsection{反鐵磁性（Antiferromagnetism）/反強磁性}
 指的是某些材料的相鄰電子自旋呈相反方向排列且大小相等，使其始終具有零或小磁矩。\ce{Mn}、\ce{NiO} 具有反鐵磁性。
 \subsubsection{亞鐵磁性（Ferrimagnetism）}
