@@ -133,7 +133,7 @@ Phasor domain (steady-state sinusoidal AC with angular frequency $\omega$):
 Laplace domain:
 \[I(s)=CsV(s)-Cv(0^-).\]
 \[V(s)=\frac{I(s)}{Cs}+\frac{v(0^-)}{s}.\]
-A capacitor with capacitance $C$ is equivalent to a capacitance $C$ without initial energy in parallel connection with an independent current source enforcing current $Cv(0^-)\delta(t)$ (time domain), i.e., $Cv(0^-)$ (Laplace domain), or a capacitance $C$ without initial energy in series connection with an independent voltage source enforcing voltage $-v(0^-)u(t)$ (time domain), i.e., $-\frac{v(0^-)}{s}$ (Laplace domain).
+A capacitor with capacitance $C$ is equivalent to a capacitance $C$ without initial energy in parallel connection with an independent current source enforcing current $Cv(0^-)\delta(t)$ (time domain), i.e., $Cv(0^-)$ (Laplace domain), where the real current through the capacitor is the sum of that of the two, or a capacitance $C$ without initial energy in series connection with an independent voltage source enforcing voltage $-v(0^-)u(t)$ (time domain), i.e., $-\frac{v(0^-)}{s}$ (Laplace domain), where the real voltage across the capacitor is the sum of that of the two.
 
 Integral voltage-current relationship:
 \[v(t)=\frac{1}{C}\int_{t_0}^ti(\tau)\dd{\tau}+v(t_0^{\pht{0}-})=\frac{1}{C}\int_{-\infty}^ti(\tau)\dd{\tau}.\]
@@ -159,7 +159,7 @@ Phasor domain (steady-state sinusoidal AC with angular frequency $\omega$):
 Laplace domain:
 \[V(s)=LsI(s)-Li(0^-).\]
 \[I(s)=\frac{V(s)}{Ls}+\frac{i(0^-)}{s}.\]
-An inductor with inductance $L$ is equivalent to a inductance $L$ without initial energy in series connection with an independent voltage source enforcing voltage $Li(0^-)\delta(t)$ (time domain), i.e., $Li(0^-)$ (Laplace domain), or a inductance $L$ without initial energy in parallel connection with an independent current source enforcing current $-i(0^-)u(t)$ (time domain), i.e., $-\frac{i(0^-)}{s}$ (Laplace domain).
+An inductor with inductance $L$ is equivalent to a inductance $L$ without initial energy in series connection with an independent voltage source enforcing voltage $Li(0^-)\delta(t)$ (time domain), i.e., $Li(0^-)$ (Laplace domain), where the real voltage across the inductor is the sum of that of the two, or a inductance $L$ without initial energy in parallel connection with an independent current source enforcing current $-i(0^-)u(t)$ (time domain), i.e., $-\frac{i(0^-)}{s}$ (Laplace domain), where the real current through the inductor is the sum of that of the two.
 
 Integral voltage-current relationship:
 \[i(t)=\frac{1}{L}\int_{t_0}^tv(\tau)\dd{\tau}+i(t_0^{\pht{0}-})=\frac{1}{L}\int_{-\infty}^tv(\tau)\dd{\tau}.\]
@@ -350,21 +350,28 @@ The triangle on the complex plane of $\mb{S}$, $P$, and $jQ$ showing
 is called the power triangle.
 \ssc{Linear circuit}
 \sssc{Linear element}
-A linear element is a passive element whose resistance $R$, capacitance $C$, and inductance $L$ are independent of voltage and current, that is, equivalent to a one-port network consists of ideal resistors, capacitors, and inductors, that is, the voltage-current relationship is a complex equation $v=Z\cdot i$ ($v=R\cdot i$ for DC) with voltage $v$, current $i$, and impedance $Z$ (resistance $R$ for DC). The assumption for resistance is the Ohm's law.
+A linear element is a passive element whose inputs $\mb{x}$ and outputs $\mb{F}(\mb{x})$ satisfy linearity:
+\[\mb{F}(a\mb{x}+b\mb{y})=a\mb{F}(\mb{x})+b\mb{F}(\mb{y})\]
 \sssc{Linear network}
-A linear network is a network which consists of only linear elements, independent sources, and linear dependent sources.
+A linear network is a network whose inputs $\mb{x}$ and outputs $\mb{F}(\mb{x})$ satisfy linearity:
+\[\mb{F}(a\mb{x}+b\mb{y})=a\mb{F}(\mb{x})+b\mb{F}(\mb{y})\]
+A linear network consists of only linear elements, independent sources, and linear dependent sources.
 \sssc{Linear circuit}
-A linear circuit is a circuit consists of only linear elements, independent sources, and linear dependent sources.
-
-Linear time-invariant circuits satisfy superposition principle, that is, the voltage across or current through any one-port subnetwork of any linear time-invariant circuit, called (total or complete) response, is the sum of the response with all independent sources in the linear circuit turned off and initial states preserved, called natural, homogeneous, unforced, or zero input response (ZIR), and the responses with only one of the independent sources in the linear circuit, called forcing function, is turned on and with zero initial state, called forced, driven, particular, or zero state responses (ZSR). The ZIR is the solution of an IVP of a linear homogenous ODE, called governing equation, with initial states given by the initial states of inductors and capacitors. Each ZSR is the response of a causal continuous-time linear time-invariant (LTI) systems with its forcing function as forcing function and the complementary equation of its governing equation being the governing equation of ZIR. A response component that converges to an equilibrium is called a transient response.
-\sssc{Linear circuit superposition principle}
-For a linear circuit,
-\ben
-\item Select one of the independent sources. Set all other independent sources to zero. This means voltage sources are replaced with short circuits and current sources are replaced with open circuits. Leave dependent sources in the circuit.
-\item Analyze the simplified circuit to find the desired currents and voltages.
-\item Repeat previous steps until each independent source has been considered.
-\item Sum the currents and voltages obtained from the separate analyses above.
-\een
+A linear network is a circuit whose inputs $\mb{x}$ and outputs $\mb{F}(\mb{x})$ satisfy linearity:
+\[\mb{F}(a\mb{x}+b\mb{y})=a\mb{F}(\mb{x})+b\mb{F}(\mb{y})\]
+A linear circuit consists of only linear elements, independent sources, and linear dependent sources.
+\sssc{One-port linear element}
+A one-port linear element is a passive element with resistance $R$, capacitance $C$, and inductance $L$ that are independent of voltage and current, that is, equivalent to a one-port network consists of ideal resistors, capacitors, and inductors, that is, the voltage-current relationship is a Laplace-domain equation $V(s)=Z(s)I(s)$ with voltage $V$, current $I$, and impedance $Z$.
+\sssc{Time-invariant circuit}
+A circuit whose outputs as a function of the inputs is time-invariant.
+\sssc{Response of linear time-invariant circuit}
+\bit
+\item (Total or complete) response: the reponse as-is.
+\item Natural, homogeneous, unforced, or zero input response (ZIR): the response with all independent sources in the linear circuit turned off and initial states preserved, called natural, homogeneous, unforced, or zero input response (ZIR). The ZIR is the solution of an IVP of a linear homogenous ODE, called governing equation, with initial states given by the initial states of inductors and capacitors.
+\item Forced, driven, particular, or zero state responses (ZSR): the responses with only one of the independent sources in the linear circuit, called forcing function, is turned on and with zero initial state. Each ZSR is the response of a causal continuous-time linear time-invariant (LTI) systems with its forcing function as forcing function and the complementary equation of its governing equation being the governing equation of ZIR.
+\item Superposition principle: The sum of ZIR and all ZSRs is the total response.
+\item Transient response: a response component that converges to an equilibrium.
+\eit
 \sssc{Series connection}
 For linear networks, the impedance, reciprocal of capacitance, and inductance of the network are equal to the sums of those of each element. When steady, the charges in each capacitor and the equivalent capacitor are the the same.
 \sssc{Parallel connection}
@@ -635,11 +642,11 @@ Total response (Laplace domain):
 \[V_R=\frac{RLi(0^-)+RV_{in}}{R+Ls}\]
 \[V_L=\frac{LsV_{in}-RLi(0^-)}{R+Ls}\]
 Constant source forced response (time domain):
-\[i=\frac{v_{in}}{R}\qty(1-e^{-\frac{R}{L}t})\]
-\[v_R=v_{in}-v_L=v_{in}\qty(1-e^{-\frac{R}{L}t})\]
+\[i=\frac{v_{in}}{R}\qty(1-e^{-\frac{R}{L}t})=i(\infty)-i(\infty)e^{-\frac{R}{L}t}\]
+\[v_L=v_{in}-v_R=v_{in}e^{-\frac{R}{L}t}=i(\infty)Re^{-\frac{R}{L}t}\]
 Constant source total response (time domain):
-\[i=\frac{v_{in}}{R}-\qty(\frac{v_{in}}{R}-(0^-))e^{-\frac{R}{L}t}\]
-\[v_R=v_{in}-v_L=v_{in}-\qty(v_{in}-(0^-))e^{-\frac{R}{L}t}\]
+\[i=\frac{v_{in}}{R}-\qty(\frac{v_{in}}{R}-i(0^-))e^{-\frac{R}{L}t}=i(\infty)+\qty(i(0^-)-i(\infty))e^{-\frac{R}{L}t}\]
+\[v_L=v_{in}-v_R=\qty(v_{in}-i(0^-)R)e^{-\frac{R}{L}t}=-\qty(i(0^-)-i(\infty))Re^{-\frac{R}{L}t}\]
 Impulse response:
 \[h_i=\frac{1}{L}u(t)e^{-\frac{R}{L}t}\]
 \[h_{v_R}=\frac{R}{L}u(t)e^{-\frac{R}{L}t}\]
@@ -740,11 +747,11 @@ Total response (Laplace domain):
 \[V_R=\frac{-RCv_C(0^-)+RCsV_{in}}{1+RCs}\]
 \[I=-\frac{Cv_C(0^-)+CsV_{in}}{1+RCs}\]
 Constant source forced response (time domain):
-\[v_C=v_{in}-v_R=v_{in}\qty(1-e^{-\frac{1}{RC}t})\]
-\[i=\frac{v_{in}}{R}e^{-\frac{1}{RC}t}\]
+\[v_C=v_{in}-v_R=v_{in}\qty(1-e^{-\frac{1}{RC}t})=v_C(\infty)-v_C(\infty)e^{-\frac{1}{RC}t}\]
+\[i=\frac{v_{in}}{R}e^{-\frac{1}{RC}t}=\frac{v_C(\infty)}{R}e^{-\frac{1}{RC}t}\]
 Constant source total response (time domain):
-\[v_C=v_{in}-v_R=v_{in}-\qty(v_{in}-v_C(0^-))e^{-\frac{1}{RC}t}\]
-\[i=\frac{v_{in}-v_C(0^-)}{R}e^{-\frac{1}{RC}t}\]
+\[v_C=v_{in}-v_R=v_{in}-\qty(v_{in}-v_C(0^-))e^{-\frac{1}{RC}t}=v_C(\infty)+(v_C(0^-)-v_C(\infty))e^{-\frac{1}{RC}t}\]
+\[i=\frac{v_{in}-v_C(0^-)}{R}e^{-\frac{1}{RC}t}=-\frac{v_C(0^-)-v_C(\infty)}{R}e^{-\frac{1}{RC}t}\]
 Impulse response:
 \[h_{v_C}=\frac{1}{RC}u(t)e^{-\frac{1}{RC}t}\]
 \[h_{v_R}=\delta(t)-\frac{1}{RC}u(t)e^{-\frac{1}{RC}t}\]
@@ -2327,6 +2334,52 @@ $I_L$ being low-pass filter:
 $I_C$ being high-pass filter:
 \[\lim_{\omega\to 0}\abs{H_{I_C}(j\omega)}=0\]
 \[\lim_{\omega\to\infty}\abs{H_{I_C}(j\omega)}=1\]
+\ssc{Transformer}
+\sssc{Ideal transformer}
+An ideal transformer is a two-port, linear, time-invariant, lossless network consists of two magnetically coupled windings, arbitrarily assigned as primary and secondary coil respectively, where the primary coil has $N_1$ turns, voltage $v_1$, and current $i_1$, and the secondar coil has $N_2$ turns, voltage $v_2$, and current $i_2$. Here, the voltage and current of the two coils are assumed to be measured from opposite directions, that is, dots on the same side. The turn ratio $n$ is defined as
+\[n=\frac{N_1}{N_2}.\]
+Magnetic coupling of same magnetic flux per turn enforces
+\[\frac{v_1}{N_1}=\frac{v_2}{N_2}.\]
+Power consistency enforces 
+\[v_1i_1=v_2i_2.\]
+Thus
+\[\frac{i_1}{N_2}=\frac{i_2}{N_1}.\]
+That is,
+\[\begin{bmatrix}v_1\\i_1\end{bmatrix}=\begin{bmatrix}n&0\\0&\frac{1}{n}\end{bmatrix}\begin{bmatrix}v_2\\i_2\end{bmatrix}.\]
+\sssc{Diagram}
+\begin{center}
+\begin{circuitikz}
+\draw (0,0) node[transformer]{Transformer} (3,0);
+\draw (5,0) node[transformer core]{Transformer with Core} (8,0);
+\end{circuitikz}
+\end{center}
+\sssc{Dot convention}
+On diagram, a dot is drawn on one terminal of each coil. If dots of the two coils are on the same side, the voltages (and currents) of them as measured in the same direction are in-phase; if dots of the two coils are on the opposite side, the voltages (and currents) of them as measured in the same direction are out-of-phase. Equivalently, if the voltage (and current) of one coil is measured from the dotted terminal to the undotted terminal and the voltage (and current) of the other coil is measured from the undotted terminal to the dotted terminal, the measured voltages (and currents) of them in-phase.
+\sssc{Coupled inductors model}
+Primary and secondary coils are inductors with self inductance $L_1$ and $L_2$ and mutual inductance $M$, that is,
+\[v_1=L_1\dv{i_1}{dt}+M\dv{i_2}{t}\]
+\[v_2=L_2\dv{i_2}{dt}+M\dv{i_1}{t},\]
+with constraints that inductive coupling factor is one,
+\[\frac{M}{\sqrt{L_1L_2}}=1\]
+and
+\[L_1=n^2L_2\]
+i.e.,
+\[M=nL_2\]
+\[L_1=n^2L_2\]
+i.e.,
+\[M=\frac{L_1}{n}\]
+\[L_2=\frac{L_1}{n^2}.\]
+This leaves one degree of freedom, thus an arbitrary positive $L_1$ or $L_2$ can be assigned.
+\sssc{VCVS and CCVS model}
+Primary coil is replaced with a VCVS
+\[v_1=nv_2.\]
+Second coil is replaced with a CCCS
+\[i_2=ni_1.\]
+\sssc{Impedance reflection model}
+Only works if the two coils' circuit are only coupled by the transformer.
+
+If a load impedance $Z_s$ is on secondary coil, seen from primary coil, it's a load impedance
+\[Z_p=n^2Z_s.\]
 \ssc{Operational Amplifier (op amp or op-amp)}
 \sssc{Definition}
 An op amp has five terminals:
@@ -2337,19 +2390,21 @@ An op amp has five terminals:
 \item $v_{CC+}$: positive supply voltage, denoted on the $+$ side of an op-amp or omitted;
 \item $v_{CC-}$: negative supply voltage, denoted on the $-$ side of an op-amp or omitted.
 \eit
+\[v_o=A(v_+-v_--v_{os}),\]
+where $A$ is open-loop gain, and $v_{os}$ is input offset voltage.
+\sssc{Diagram}
 \begin{center}
 \begin{circuitikz}
 \draw (0,0) node[op amp] (op amp) {};
 \end{circuitikz}
 \end{center}
-\[v_o=A(v_+-v_--v_{os}),\]
-where $A$ is open-loop gain, and $v_{os}$ is input offset voltage.
 \sssc{Ideal op amp}
 \bit
 \item Infinite open-loop gain, infinite bandwidth, and zero output impedance: $A=\infty$ and is independent of frequency and output voltage.
 \item Zero input offset voltage: $v_{os}=0$.
 \item No current flow into either of the input terminals.
 \eit
+This is a linear element with inputs $v_+$ and $v_-$ and output $v_o$.
 \sssc{Inverting amplifier}
 An inverting amplifier consists of an op amp where input voltage $v_i$ is connected to $v_-$ through an input resistor $R_i$, $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through a feedback resistor $R_f$.
 \[i_i=\frac{v_i}{R_i}=i_f=\frac{-v_o}{R_f},\]
@@ -2439,13 +2494,6 @@ Given a (passive or active) filter $v_f$ of an input $v_s$ and an inverting ampl
 \draw (0,0) to[voltmeter, l=Voltmeter] (3,0);
 \draw (5,0) to[ammeter, l=Ammeter] (8,0);
 \draw (10,0) to[ohmmeter, l=Ohmmeter] (13,0);
-\end{circuitikz}
-\end{center}
-\subsubsection{Transformers}
-\begin{center}
-\begin{circuitikz}
-\draw (0,0) node[transformer]{Transformer} (3,0);
-\draw (5,0) node[transformer core]{Transformer Core} (8,0);
 \end{circuitikz}
 \end{center}
 \end{document}

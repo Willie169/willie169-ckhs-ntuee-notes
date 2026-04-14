@@ -1414,62 +1414,6 @@ P_e=&IV=I_mV_m\sin^2(\omega t+\varphi)\\
 \langle P_e\rangle=&\frac{I_mV_m}{2}=I_{rms}V_{rms}\\
 \eta=&\frac{P_e}{P_m}=\frac{\langle P_e\rangle}{\langle P_m\rangle}=\frac{V}{\mathcal{E}}=\frac{V_m}{\omega NSB}=\frac{V_m}{V_m+I_mR}=\frac{V_{rms}}{V_{rms}+I_{rms}R}
 \end{aligned}\]
-\subsection{變壓器（Transformer）}
-變壓器是一種被動元件，可將電能從一個電路傳輸到其他電路且電壓不同。變壓器由一磁芯（magnetic core）上纏繞輸入交流電的主/初級線圈（Primary coil）與輸出交流電的一或多個副/次級線圈（Secondary coil）組成，各線圈間互不導通。副線圈匝數大於主線圈為升壓變壓器，副線圈匝數小於主線圈為降壓變壓器。副線圈可由中間抽頭（tapped），可視為兩個副線圈串聯，可用於整流器中。下以一主線圈、一副線圈為例。
-\subsubsection{主線圈}
-輸入端電壓$V_p$加上感應電動勢$\mathcal{E}_p$（負值，與端電壓反向）等於其電流$I_p$乘以其電阻$R_p$加上等效鐵損電路的電流$I_{cp}$乘以其電阻$R_{cp}$：
-\[V_p+\mathcal{E}_p=I_pR_p+I_{cp}R_{cp}\]
-截面磁通量$\Phi_p$、匝數$N_p$：
-\[\mathcal{E}_p=-N_p\dv{\Phi_p}{t}\]
-輸入功率：
-\[P_p=V_p(I_p+I_{cp})\]
-輸出功率：
-\[P_{ep}=-\mathcal{E}_pI_p\]
-銅損：
-\[P_{hp}=I_p^{\phantom{p}2}R_p\]
-鐵損：
-\[P_{cp}=I_{cp}^{\phantom{cp}2}R_{cp}\]
-\subsubsection{副線圈}
-感應電動勢$\mathcal{E}_s$等於其輸出端電壓$V_s$加上其電流$I_s$乘以其電阻$R_s$加上等效鐵損電路的電流$I_{cs}$乘以其電阻$R_{cs}$：
-\[\mathcal{E}_s=V_s+I_sR_s+I_{cs}R_{cs}\]
-截面磁通量$\Phi_s$、匝數$N_s$：
-\[\mathcal{E}_s=-N_s\dv{\Phi_s}{t}\]
-輸入功率：
-\[P_s=\mathcal{E}_s(I_s+I_{cs})\]
-輸出功率：
-\[P_{es}=V_sI_s\]
-銅損：
-\[P_{hs}=I_s^{\phantom{s}2}R_s\]
-鐵損：
-\[P_{cs}=I_{cs}^{\phantom{cs}2}R_{cs}\]
-\subsubsection{漏磁通（Leakage magnet flux）}
-電感耦合係數$k_c<1$有漏磁通，可能影響鐵損，其餘則可用串聯漏感$L_I$進行等效。
-
-提高磁芯的磁導率、使用環狀磁芯、減少線圈間距等可以增加互感，降低漏磁通。
-\subsubsection{渦電流損耗（Eddy-current loss）}
-磁芯的渦電流的熱損耗，略正比於磁芯垂直磁場的投影面積，屬於鐵損的一部分，可以等效於與線圈並聯的鐵損電路中，表現為降低線圈的電流。
-
-分片鐵芯/層壓鐵芯（laminated iron core）有助於減少渦電流的能量損失。
-\subsubsection{磁滯損耗（Hysteresis Loss）}
-磁芯的磁化強度改變時的熱損耗，屬於鐵損的一部分，會增加線圈的等效電阻，可以等效於與線圈並聯的鐵損電路中，表現為降低線圈的電流。
-
-減少輸入電流（即增加輸入電壓）可以減少磁滯損耗。
-\subsubsection{理想變壓器}
-$k=1$、無銅損、無鐵損，線圈的磁通量變化率比值等於匝數比值等於感應電動勢量值比值等於端電壓量值比值等於倒數電流比值。
-
-Suppose the primary and secondary coils have $N_p$ and $N_s$ turns and no resistance. The primary coil is connected to a source with emf $\calE=\calE_m\sin(\omega t)$. The secondary circuit is connected to a resistive load $R$. The equivalent resistance of secondary coil, as seen by generator, is $R_{eq}$. The emf per turn is
-\[\calE_t=-\dv{\Phi_B}{t}=\frac{V_p}{N_p}=\frac{V_s}{N_s}\]
-Thus
-\[V_s=V_p\frac{N_s}{N_p}\]
-The transformer is called set-up transformer if $N_s>N_p$, and set-down transformer if $N_s<N_p$.
-The power transfered is
-\[P=I_pV_p=I_sV_s\]
-Thus
-\[I_s=I_p\frac{N_p}{N_s}\]
-And
-\[V_s=I_sR\]
-Therefore, the equivalent resistance, as seen by the source, $R_{eq}$, is
-\[R_{eq}=\frac{V_p}{I_p}=\qty(\frac{N_s}{N_p})^2R\]
 \subsection{電磁爐（Induction cooker）}
 電磁爐的主要功能是將電能轉換成熱能，加熱金屬鍋具。其基本結構包括：
 \begin{itemize}
@@ -1772,6 +1716,7 @@ PLACEHOLDER
 \subsubsection{電感耦合係數（Inductive coupling factor）}
 令$M$為兩迴路之互感，$L_p$、$L_s$為其個別的自感，定義其電感耦合係數$k_c$為：
 \[k_c=\frac{M}{\sqrt{L_pL_s}}\]
+\[0\le k_c\le 1\]
 \subsubsection{漏（電）感（Leakage inductance）}
 漏感$L_l$定義為自感乘以$1-k_c$，可以等效為一有該值自感與零互感的電感器串聯於迴路中。
 
@@ -1792,6 +1737,73 @@ PLACEHOLDER
 \[\calE=-N\dv{\Phi_B}{t}=-\frac{\mu_0N^2A}{\ell}\dv{I}{t}\]
 故其自感為：
 \[L=\frac{\mu_0N^2A}{\ell}\]
+\subsection{變壓器（Transformer）}
+變壓器是一種被動元件，可將電能從一個電路傳輸到其他電路且電壓不同。變壓器由一磁芯（magnetic core）上纏繞輸入交流電的主/初級線圈（Primary coil）與輸出交流電的一或多個副/次級線圈（Secondary coil）組成，各線圈間互不導通。副線圈匝數大於主線圈為升壓變壓器，副線圈匝數小於主線圈為降壓變壓器。副線圈可由中間抽頭（tapped），可視為兩個副線圈串聯，可用於整流器中。下以一主線圈、一副線圈為例。
+\subsubsection{主線圈}
+輸入端電壓$V_p$加上感應電動勢$\mathcal{E}_p$（負值，與端電壓反向）等於其電流$I_p$乘以其電阻$R_p$加上等效鐵損電路的電流$I_{cp}$乘以其電阻$R_{cp}$：
+\[V_p+\mathcal{E}_p=I_pR_p+I_{cp}R_{cp}\]
+截面磁通量$\Phi_p$、匝數$N_p$：
+\[\mathcal{E}_p=-N_p\dv{\Phi_p}{t}\]
+輸入功率：
+\[P_p=V_p(I_p+I_{cp})\]
+輸出功率：
+\[P_{ep}=-\mathcal{E}_pI_p\]
+銅損：
+\[P_{hp}=I_p^{\phantom{p}2}R_p\]
+鐵損：
+\[P_{cp}=I_{cp}^{\phantom{cp}2}R_{cp}\]
+\subsubsection{副線圈}
+感應電動勢$\mathcal{E}_s$等於其輸出端電壓$V_s$加上其電流$I_s$乘以其電阻$R_s$加上等效鐵損電路的電流$I_{cs}$乘以其電阻$R_{cs}$：
+\[\mathcal{E}_s=V_s+I_sR_s+I_{cs}R_{cs}\]
+截面磁通量$\Phi_s$、匝數$N_s$：
+\[\mathcal{E}_s=-N_s\dv{\Phi_s}{t}\]
+輸入功率：
+\[P_s=\mathcal{E}_s(I_s+I_{cs})\]
+輸出功率：
+\[P_{es}=V_sI_s\]
+銅損：
+\[P_{hs}=I_s^{\phantom{s}2}R_s\]
+鐵損：
+\[P_{cs}=I_{cs}^{\phantom{cs}2}R_{cs}\]
+\subsubsection{漏磁通（Leakage magnet flux）}
+電感耦合係數$k_c<1$有漏磁通，可能影響鐵損，其餘則可用串聯漏感$L_I$進行等效。
+
+提高磁芯的磁導率、使用環狀磁芯、減少線圈間距等可以增加互感，降低漏磁通。
+\subsubsection{渦電流損耗（Eddy-current loss）}
+磁芯的渦電流的熱損耗，略正比於磁芯垂直磁場的投影面積，屬於鐵損的一部分，可以等效於與線圈並聯的鐵損電路中，表現為降低線圈的電流。
+
+分片鐵芯/層壓鐵芯（laminated iron core）有助於減少渦電流的能量損失。
+\subsubsection{磁滯損耗（Hysteresis Loss）}
+磁芯的磁化強度改變時的熱損耗，屬於鐵損的一部分，會增加線圈的等效電阻，可以等效於與線圈並聯的鐵損電路中，表現為降低線圈的電流。
+
+減少輸入電流（即增加輸入電壓）可以減少磁滯損耗。
+\subsubsection{理想變壓器}
+$k=1$、無銅損、無鐵損，線圈的磁通量變化率比值等於匝數比值等於感應電動勢量值比值等於端電壓量值比值等於倒數電流比值。
+
+An ideal transformer is a two-port, linear, time-invariant, lossless network consists of two magnetically coupled windings, arbitrarily assigned as primary and secondary coil respectively, where the primary coil has $N_1$ turns, voltage $v_1$, and current $i_1$, and the secondar coil has $N_2$ turns, voltage $v_2$, and current $i_2$. Here, the voltage and current of the two coils are assumed to be measured from opposite directions. The turn ratio $n$ is defined as
+\[n=\frac{N_1}{N_2}.\]
+Magnetic coupling of same magnetic flux per turn enforces
+\[\frac{v_1}{N_1}=\frac{v_2}{N_2}.\]
+Power consistency enforces 
+\[v_1i_1=v_2i_2.\]
+Thus
+\[\frac{i_1}{N_2}=\frac{i_2}{N_1}.\]
+That is,
+\[\begin{bmatrix}v_1\\i_1\end{bmatrix}=\begin{bmatrix}n&0\\0&\frac{1}{n}\end{bmatrix}\begin{bmatrix}v_2\\i_2\end{bmatrix}.\]
+Primary and secondary coils are inductors with self inductance $L_1$ and $L_2$ and mutual inductance $M$, that is,
+\[v_1=L_1\dv{i_1}{dt}+M\dv{i_2}{t}\]
+\[v_2=L_2\dv{i_2}{dt}+M\dv{i_1}{t},\]
+with constraints that inductive coupling factor is one,
+\[\frac{M}{\sqrt{L_1L_2}}=1\]
+and
+\[L_1=n^2L_2\]
+i.e.,
+\[M=nL_2\]
+\[L_1=n^2L_2\]
+i.e.,
+\[M=\frac{L_1}{n}\]
+\[L_2=\frac{L_1}{n^2}.\]
+This leaves one degree of freedom, thus an arbitrary positive $L_1$ or $L_2$ can be assigned.
 \ssc{無線電發射器（Transmitter）}
 在 RLC 電路的電感旁置另一電感，該電感兩側經匹配網路（matching network）各通向一金屬導線，稱天線（Antenna），是無線電發射器的原理，匹配網路與天線有多種。
 \ssc{二極體（Diode）}
