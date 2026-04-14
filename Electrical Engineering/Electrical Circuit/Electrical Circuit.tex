@@ -206,16 +206,12 @@ The admittance $Y(s)$ of a one-port network is defined as the reciprocal of its 
 The conductance $G$ of a circuit element is defined as the real part of its admittance.
 \sssc{Susceptance (phasor domain)}
 The susceptance $B$ of a circuit element is defined as the imaginary part of its admittance.
-\sssc{Capacitor under DC}
-A capacitor with initial voltage $v(0^-)$ behaves as an independent voltage source of voltage $v(0^-)$ at $t=0$.
-
-A capacitor behaves as open circuit as $t\to\infty$.
+\sssc{Capacitor in steady state}
+Current through a capacitor in steady state is 0.
 \sssc{Capacitor under steady-state sinusoidal AC}
 Current leads voltage by $\frac{\pi}{2}$.
 \sssc{Inductor under DC}
-An inductor with initial current $i(0^-)$ behaves as an independent current source of voltage $i(0^-)$ at $t=0$.
-
-An inductor behaves as short circuit as $t\to\infty$.
+Voltage across an inductor in steady state is 0.
 \sssc{Inductor under steady-state sinusoidal AC}
 Current lags voltage by $\frac{\pi}{2}$.
 \sssc{Node}
@@ -533,7 +529,7 @@ Forced/total response (time domain):
 \[v=L\dv{i_{in}}{t}\]
 Forced/total response (Laplace domain):
 \[V=I_{in}Ls\]
-Constant source forced/total response (time domain):
+Constant source forced/total response/steady state (time domain):
 \[v=0\]
 Impulse response:
 \[h_v=\delta'(t)L\]
@@ -550,7 +546,7 @@ Forced/total response (time domain):
 \[i=C\dv{v_{in}}{t}\]
 Forced/total response (Laplace domain):
 \[I=V_{in}Cs\]
-Constant source forced/total response (time domain):
+Constant source forced/total response/steady state (time domain):
 \[i=0\]
 Impulse response:
 \[h_i=\delta'(t)C\]
@@ -641,6 +637,10 @@ Total response (Laplace domain):
 \[I=\frac{Li(0^-)+V_{in}}{R+Ls}\]
 \[V_R=\frac{RLi(0^-)+RV_{in}}{R+Ls}\]
 \[V_L=\frac{LsV_{in}-RLi(0^-)}{R+Ls}\]
+Steady state (time domain):
+\[i=\frac{v_{in}}{R}\]
+\[v_R=v_{in}\]
+\[v_L=0\]
 Constant source forced response (time domain):
 \[i=\frac{v_{in}}{R}\qty(1-e^{-\frac{R}{L}t})=i(\infty)-i(\infty)e^{-\frac{R}{L}t}\]
 \[v_L=v_{in}-v_R=v_{in}e^{-\frac{R}{L}t}=i(\infty)Re^{-\frac{R}{L}t}\]
@@ -746,6 +746,10 @@ Total response (Laplace domain):
 \[V_C=\frac{RCv_C(0^-)+V_{in}}{1+RCs}\]
 \[V_R=\frac{-RCv_C(0^-)+RCsV_{in}}{1+RCs}\]
 \[I=-\frac{Cv_C(0^-)+CsV_{in}}{1+RCs}\]
+Steady state (time domain):
+\[v_C=v_{in}\]
+\[v_R=0\]
+\[i=0\]
 Constant source forced response (time domain):
 \[v_C=v_{in}-v_R=v_{in}\qty(1-e^{-\frac{1}{RC}t})=v_C(\infty)-v_C(\infty)e^{-\frac{1}{RC}t}\]
 \[i=\frac{v_{in}}{R}e^{-\frac{1}{RC}t}=\frac{v_C(\infty)}{R}e^{-\frac{1}{RC}t}\]
@@ -963,6 +967,10 @@ V_C&=\frac{LCsv_C(0^-)+Li(0^-)+V_{in}}{LCs^2+1}\\
 V_L&=\frac{LCs^2V_{in}-LCsv_C(0^-)-Li(0^-)}{LCs^2+1}\\
 &=\frac{s^2V_{in}-sv_C(0^-)-L\omega_0^{\pht{0}2}i(0^-)}{s^2+\omega_0^{\pht{0}2}}
 \ea\]
+Steady state (time domain):
+\[v_C=v_{in}\]
+\[v_L=0\]
+\[i=0\]
 Constant source forced response (time domain):
 \[\ba
 i&=v_{in}\sqrt{\frac{C}{L}}\sin(\frac{1}{\sqrt{LC}}t)\\
@@ -1210,6 +1218,10 @@ I_L&=\frac{I_{in}+Cv(0^-)+LCsi_L(0^-)}{LCs^2+1}\\
 I_C&=\frac{LCs^2I_{in}-Cv(0^-)-LCsi_L(0^-)}{LCs^2+1}\\
 &=\frac{s^2I_{in}-C\omega_0^{\pht{0}2}v(0^-)-si_L(0^-)}{s^2+\omega_0^{\pht{0}2}}
 \ea\]
+Steady state (time domain):
+\[i_L=i_{in}\]
+\[i_C=0\]
+\[v=0\]
 Constant source forced response (time domain):
 \[\ba
 v&=i_{in}\sqrt{\frac{L}{C}}\sin(\frac{1}{\sqrt{LC}}t)\\
@@ -1753,6 +1765,10 @@ V_L&=\frac{V_{in}LCs^2-\qty(i(0^-)R+v_C(0^-))LCs-i(0^-)L}{LCs^2+RCs+1}\\
 V_C&=\frac{V_{in}+v_C(0^-)LCs+i(0^-)L+v_C(0^-)RC}{LCs^2+RCs+1}\\
 &=\frac{V_{in}\omega_0^{\pht{0}2}+v_C(0^-)s+\frac{1}{2}\frac{i(0^-)R\omega_0}{\zeta}+2v_C(0^-)\omega_0\zeta}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
+Steady state (time domain):
+\[v_C=v_{in}\]
+\[v_R=v_L=0\]
+\[i=0\]
 Constant source forced response (time domain):
 \bit
 \item $\zeta>1$ Overdamped response:
@@ -1788,42 +1804,6 @@ Constant source total response (time domain):
 \[v_R=e^{-\omega_0\zeta t}\qty(i(0^-)R\cos(\omega_0\sqrt{1-\zeta^2}t)+\qty(2\qty(v_{in}-v_C(0^-))-i(0^-)R)\frac{\zeta}{\sqrt{1-\zeta^2}}\sin(\omega_0\sqrt{1-\zeta^2}t))\]
 \[v_L=e^{-\omega_0\zeta t}\qty(\qty(v_{in}-v_C(0^-)-i(0^-)R)\cos(\omega_0\sqrt{1-\zeta^2}t)-\frac{v_{in}-v_C(0^-)\zeta-\frac{1}{2}i(0^-)R\frac{2\zeta^2-1}{\zeta}}{\sqrt{1-\zeta^2}}\sin(\omega_0\sqrt{1-\zeta^2}t))\]
 \[v_C=v_{in}-e^{-\omega_0\zeta t}\qty(\qty(v_{in}-v_C(0^-))\cos(\omega_0\sqrt{1-\zeta^2}t)+\qty(\qty(v_{in}-v_C(0^-))\frac{\zeta}{\sqrt{1-\zeta^2}}-\frac{1}{2}\frac{i(0^-)R}{\zeta\sqrt{1-\zeta^2}})\sin(\omega_0\sqrt{1-\zeta^2}t))\]
-\eit
-Constant source forced response (time domain):
-\bit
-\item $\zeta>1$ Overdamped response:
-\[v=2i_{in}Re^{-\omega_0\zeta t}\frac(\zeta}{\sqrt{\zeta^2-1}}\sinh(\omega_0\sqrt{\zeta^2-1}t)\]
-\[i_R=2i_{in}e^{-\omega_0\zeta t}\frac(\zeta}{\sqrt{\zeta^2-1}}\sinh(\omega_0\sqrt{\zeta^2-1}t)\]
-\[i_L=i_{in}\qty(1-e^{-\omega_0\zeta t}\qty(\cosh(\omega_0\sqrt{\zeta^2-1}t)+\frac(\zeta}{\sqrt{\zeta^2-1}}\sinh(\omega_0\sqrt{\zeta^2-1}t)))\]
-\[i_C=i_{in}e^{-\omega_0\zeta t}\qty(\cosh(\omega_0\sqrt{\zeta^2-1}t)-\frac(\zeta}{\sqrt{\zeta^2-1}}\sinh(\omega_0\sqrt{\zeta^2-1}t))\]
-\item $\zeta=1$ Critically damped response:
-\[v=2i_{in}R\omega_0te^{-\omega_0t}\]
-\[i_R=2i_{in}\omega_0te^{-\omega_0t}\]
-\[i_L=i_{in}\qty(1-\qty(1+\omega_0t)e^{-\omega_0t})\]
-\[i_C=i_{in}\qty(1-\omega_0t)e^{-\omega_0t}\]
-\item $0<\zeta<1$ Underdamped response:
-\[v=2i_{in}Re^{-\omega_0\zeta t}\frac{\zeta}{\sqrt{1-\zeta^2}}\sin(\omega_0\sqrt{1-\zeta^2}t)\]
-\[i_R=2i_{in}e^{-\omega_0\zeta t}\frac{\zeta}{\sqrt{1-\zeta^2}}\sin(\omega_0\sqrt{1-\zeta^2}t)\]
-\[i_L=i_{in}\qty(1-e^{-\omega_0\zeta t}\qty(\cos(\omega_0\sqrt{\zeta^2-1}t)+\frac(\zeta}{\sqrt{\zeta^2-1}}\sin(\omega_0\sqrt{\zeta^2-1}t)))\]
-\[i_C=i_{in}e^{-\omega_0\zeta t}\qty(\cos(\omega_0\sqrt{\zeta^2-1}t)-\frac(\zeta}{\sqrt{\zeta^2-1}}\sin(\omega_0\sqrt{\zeta^2-1}t))\]
-\eit
-Constant source total response (time domain):
-\bit
-\item $\zeta>1$ Overdamped response:
-\[v=2i_{in}Re^{-\omega_0\zeta t}\frac(\zeta}{\sqrt{\zeta^2-1}}\sinh(\omega_0\sqrt{\zeta^2-1}t)-\qty(v(0^-)\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)R\frac{\zeta}{\sqrt{\zeta^2-1}})e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\qty(v(0^-)\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)R\frac{\zeta}{\sqrt{\zeta^2-1}})e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
-\[i_R=2i_{in}e^{-\omega_0\zeta t}\frac(\zeta}{\sqrt{\zeta^2-1}}\sinh(\omega_0\sqrt{\zeta^2-1}t)-\qty(\frac{v(0^-)}{R}\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)\frac{\zeta}{\sqrt{\zeta^2-1}})e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\qty(\frac{v(0^-)}{R}\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)\frac{\zeta}{\sqrt{\zeta^2-1}})e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
-\[i_L=i_{in}\qty(1-e^{-\omega_0\zeta t}\qty(\cosh(\omega_0\sqrt{\zeta^2-1}t)+\frac(\zeta}{\sqrt{\zeta^2-1}}\sinh(\omega_0\sqrt{\zeta^2-1}t)))+\qty(\frac{v(0^-)}{R}\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-\qty(\frac{v(0^-)}{R}\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
-\[i_C=i_{in}e^{-\omega_0\zeta t}\qty(\cosh(\omega_0\sqrt{\zeta^2-1}t)-\frac(\zeta}{\sqrt{\zeta^2-1}}\sinh(\omega_0\sqrt{\zeta^2-1}t))+\qty(\frac{v(0^-)}{R}\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-\qty(\frac{v(0^-)}{R}\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
-\item $\zeta=1$ Critically damped response:
-\[v=(v(0^-)+(2i_{in}R-v(0^-)-2i_L(0^-)R)\omega_0t)e^{-\omega_0t}\]
-\[i_R=\qty(\frac{v(0^-)}{R}+(2i_{in}-\frac{v(0^-)}{R}-2i_L(0^-))\omega_0t)e^{-\omega_0t}\]
-\[i_L=i_{in}-\qty(i_{in}-i_L(0^-)+(i_{in}-\frac{1}{2}\frac{v(0^-)}{R}-i_L(0^-))\omega_0t)e^{-\omega_0t}\]
-\[i_C=\qty(i_{in}-\frac{v(0^-)}{R}-i_L(0^-)-\qty(i_{in}-\frac{1}{2}\frac{v(0^-)}{R}-i_L(0^-))\omega_0t)e^{-\omega_0t}\]
-\item $0<\zeta<1$ Underdamped response:
-\[v=e^{-\omega_0\zeta t}\qty(v(0^-)\cos(\omega_0\sqrt{1-\zeta^2}t)+\qty(2i_{in}R-v(0^-)-2i_L(0^-)R)\frac{\zeta}{\sqrt{1-\zeta^2}}\sin(\omega_0\sqrt{1-\zeta^2}t))\]
-\[i_R=e^{-\omega_0\zeta t}\qty(\frac{v(0^-)}{R}\cos(\omega_0\sqrt{1-\zeta^2}t)+\qty(i_{in}-\frac{v(0^-)}{R}-2i_L(0^-))\frac{\zeta}{\sqrt{1-\zeta^2}}\sin(\omega_0\sqrt{1-\zeta^2}t))\]
-\[i_L=i_{in}-e^{-\omega_0\zeta t}\qty(\qty(i_{in}-i_L(0^-))\cos(\omega_0\sqrt{1-\zeta^2}t)+\qty(i_{in}-\frac{1}{2}\frac{v(0^-)}{R\zeta\sqrt{1-\zeta^2}}-i_L(0^-)\frac{\zeta}{\sqrt{1-\zeta^2}})\sin(\omega_0\sqrt{1-\zeta^2}t))\]
-\[i_C=e^{-\omega_0\zeta t}\qty(\qty(i_{in}+\frac{v(0^-)}{R}+i_L(0^-))\cos(\omega_0\sqrt{1-\zeta^2}t)-\qty(i_{in}-\frac{v(0^-)}{2R}\frac{1-2\zeta^2}{\zeta\sqrt{1-\zeta^2}}+i_L(0^-)\frac{\zeta}{\sqrt{1-\zeta^2}})\sin(\omega_0\sqrt{1-\zeta^2}t))\]
 \eit
 Resonance state (time domain):
 \[v_{in}=v_m\cos(\omega_0t+\theta)\]
@@ -2285,6 +2265,46 @@ I_L&=\frac{I_{in}R+i_L(0^-)RLCs+v(0^-)RC+i_L(0^-)L}{RLCs^2+Ls+R}\\
 I_C&=\frac{I_{in}RLCs^2-\qty(v(0^-)+i_L(0^-)R)LCs-v(0^-)RC}{RLCs^2+Ls+R}\\
 &=\frac{I_{in}s^2-\qty(\frac{v(0^-)}{R}+i_L(0^-))s-\frac{v(0^-)\omega_0}{2R\zeta}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
+Steady state (time domain):
+\[i_L=i_{in}\]
+\[i_R=i_L=0\]
+\[v=0\]
+Constant source forced response (time domain):
+\bit
+\item $\zeta>1$ Overdamped response:
+\[v=2i_{in}Re^{-\omega_0\zeta t}\frac(\zeta}{\sqrt{\zeta^2-1}}\sinh(\omega_0\sqrt{\zeta^2-1}t)\]
+\[i_R=2i_{in}e^{-\omega_0\zeta t}\frac(\zeta}{\sqrt{\zeta^2-1}}\sinh(\omega_0\sqrt{\zeta^2-1}t)\]
+\[i_L=i_{in}\qty(1-e^{-\omega_0\zeta t}\qty(\cosh(\omega_0\sqrt{\zeta^2-1}t)+\frac(\zeta}{\sqrt{\zeta^2-1}}\sinh(\omega_0\sqrt{\zeta^2-1}t)))\]
+\[i_C=i_{in}e^{-\omega_0\zeta t}\qty(\cosh(\omega_0\sqrt{\zeta^2-1}t)-\frac(\zeta}{\sqrt{\zeta^2-1}}\sinh(\omega_0\sqrt{\zeta^2-1}t))\]
+\item $\zeta=1$ Critically damped response:
+\[v=2i_{in}R\omega_0te^{-\omega_0t}\]
+\[i_R=2i_{in}\omega_0te^{-\omega_0t}\]
+\[i_L=i_{in}\qty(1-\qty(1+\omega_0t)e^{-\omega_0t})\]
+\[i_C=i_{in}\qty(1-\omega_0t)e^{-\omega_0t}\]
+\item $0<\zeta<1$ Underdamped response:
+\[v=2i_{in}Re^{-\omega_0\zeta t}\frac{\zeta}{\sqrt{1-\zeta^2}}\sin(\omega_0\sqrt{1-\zeta^2}t)\]
+\[i_R=2i_{in}e^{-\omega_0\zeta t}\frac{\zeta}{\sqrt{1-\zeta^2}}\sin(\omega_0\sqrt{1-\zeta^2}t)\]
+\[i_L=i_{in}\qty(1-e^{-\omega_0\zeta t}\qty(\cos(\omega_0\sqrt{\zeta^2-1}t)+\frac(\zeta}{\sqrt{\zeta^2-1}}\sin(\omega_0\sqrt{\zeta^2-1}t)))\]
+\[i_C=i_{in}e^{-\omega_0\zeta t}\qty(\cos(\omega_0\sqrt{\zeta^2-1}t)-\frac(\zeta}{\sqrt{\zeta^2-1}}\sin(\omega_0\sqrt{\zeta^2-1}t))\]
+\eit
+Constant source total response (time domain):
+\bit
+\item $\zeta>1$ Overdamped response:
+\[v=2i_{in}Re^{-\omega_0\zeta t}\frac(\zeta}{\sqrt{\zeta^2-1}}\sinh(\omega_0\sqrt{\zeta^2-1}t)-\qty(v(0^-)\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)R\frac{\zeta}{\sqrt{\zeta^2-1}})e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\qty(v(0^-)\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)R\frac{\zeta}{\sqrt{\zeta^2-1}})e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
+\[i_R=2i_{in}e^{-\omega_0\zeta t}\frac(\zeta}{\sqrt{\zeta^2-1}}\sinh(\omega_0\sqrt{\zeta^2-1}t)-\qty(\frac{v(0^-)}{R}\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)\frac{\zeta}{\sqrt{\zeta^2-1}})e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+\qty(\frac{v(0^-)}{R}\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)\frac{\zeta}{\sqrt{\zeta^2-1}})e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
+\[i_L=i_{in}\qty(1-e^{-\omega_0\zeta t}\qty(\cosh(\omega_0\sqrt{\zeta^2-1}t)+\frac(\zeta}{\sqrt{\zeta^2-1}}\sinh(\omega_0\sqrt{\zeta^2-1}t)))+\qty(\frac{v(0^-)}{R}\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-\qty(\frac{v(0^-)}{R}\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
+\[i_C=i_{in}e^{-\omega_0\zeta t}\qty(\cosh(\omega_0\sqrt{\zeta^2-1}t)-\frac(\zeta}{\sqrt{\zeta^2-1}}\sinh(\omega_0\sqrt{\zeta^2-1}t))+\qty(\frac{v(0^-)}{R}\frac{\zeta-\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta-\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}-\qty(\frac{v(0^-)}{R}\frac{\zeta+\sqrt{\zeta^2-1}}{2\sqrt{\zeta^2-1}}+i_L(0^-)\frac{\zeta}{\sqrt{\zeta^2-1}})\frac{\zeta+\sqrt{\zeta^2-1}}{2\zeta}e^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
+\item $\zeta=1$ Critically damped response:
+\[v=(v(0^-)+(2i_{in}R-v(0^-)-2i_L(0^-)R)\omega_0t)e^{-\omega_0t}\]
+\[i_R=\qty(\frac{v(0^-)}{R}+(2i_{in}-\frac{v(0^-)}{R}-2i_L(0^-))\omega_0t)e^{-\omega_0t}\]
+\[i_L=i_{in}-\qty(i_{in}-i_L(0^-)+(i_{in}-\frac{1}{2}\frac{v(0^-)}{R}-i_L(0^-))\omega_0t)e^{-\omega_0t}\]
+\[i_C=\qty(i_{in}-\frac{v(0^-)}{R}-i_L(0^-)-\qty(i_{in}-\frac{1}{2}\frac{v(0^-)}{R}-i_L(0^-))\omega_0t)e^{-\omega_0t}\]
+\item $0<\zeta<1$ Underdamped response:
+\[v=e^{-\omega_0\zeta t}\qty(v(0^-)\cos(\omega_0\sqrt{1-\zeta^2}t)+\qty(2i_{in}R-v(0^-)-2i_L(0^-)R)\frac{\zeta}{\sqrt{1-\zeta^2}}\sin(\omega_0\sqrt{1-\zeta^2}t))\]
+\[i_R=e^{-\omega_0\zeta t}\qty(\frac{v(0^-)}{R}\cos(\omega_0\sqrt{1-\zeta^2}t)+\qty(i_{in}-\frac{v(0^-)}{R}-2i_L(0^-))\frac{\zeta}{\sqrt{1-\zeta^2}}\sin(\omega_0\sqrt{1-\zeta^2}t))\]
+\[i_L=i_{in}-e^{-\omega_0\zeta t}\qty(\qty(i_{in}-i_L(0^-))\cos(\omega_0\sqrt{1-\zeta^2}t)+\qty(i_{in}-\frac{1}{2}\frac{v(0^-)}{R\zeta\sqrt{1-\zeta^2}}-i_L(0^-)\frac{\zeta}{\sqrt{1-\zeta^2}})\sin(\omega_0\sqrt{1-\zeta^2}t))\]
+\[i_C=e^{-\omega_0\zeta t}\qty(\qty(i_{in}+\frac{v(0^-)}{R}+i_L(0^-))\cos(\omega_0\sqrt{1-\zeta^2}t)-\qty(i_{in}-\frac{v(0^-)}{2R}\frac{1-2\zeta^2}{\zeta\sqrt{1-\zeta^2}}+i_L(0^-)\frac{\zeta}{\sqrt{1-\zeta^2}})\sin(\omega_0\sqrt{1-\zeta^2}t))\]
+\eit
 Resonance state (time domain):
 \[i_{in}=i_m\cos(\omega_0t+\theta)\]
 \[v=i_mR\cos(\omega_0t+\theta)\]
