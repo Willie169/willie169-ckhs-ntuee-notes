@@ -340,7 +340,7 @@ that is,
 \sssc{Independent random variables covariance matrix}
 If all $X_i$ are independent, then $\Cov(\mb{X})$ is a diagonal matrix where $\Sigma_{ii}=\Var(X_i)$.
 \sssc{Sum of independent random variables}
-For $n$-dimensional vectors of real random variables $\mb{X}=(X_1,X_2,\ldots,X_n)$ and real numbers $\mb{a}=(a_1,a_2,\ldots,X_n)$ with $n\in\bbN$,
+For $n$-dimensional vectors of real random variables $\mb{X}=(X_1,X_2,\ldots,X_n)$ and real numbers $\mb{a}=(a_1,a_2,\ldots,a_n)$ with $n\in\bbN$,
 \[\Var(\sum_{i=1}^na_iX_i)=\mb{a}\Cov(\mb{X})\mb{a}^{\top}.\]
 For real random variables $X,Y$ and real numbers $a,b$,
 \[\Var(X+Y)=\Var(X)+\Var(Y)+2\Cov(X,Y).\]
@@ -440,14 +440,17 @@ For a real random variable $X$, $a\in\bbR_{\neq0}$, and $b\in\mathbb{R}$,
 \ssc{Entropy (熵) for discrete random variables}
 \sssc{Definition}
 For a discrete random variable $X$ with target sample space $\Omega$ and PMF $p_X(x)$, the entropy $H(X)$ of base $b$ is defined as
-\[H(X)=E(-\log_b(p_X(x)))=-\sum_{x\in\Omega}p_X(x)\log_b(p_X(x)),\]
+\[H(X)=E(-\log_b(p_X(x)))=-\sum_{x\in\Omega\land p_X(x)>0}p_X(x)\log_b(p_X(x)),\]
 where base $b=2$ gives the unit of bits or shannons, base $b=e$ gives natural units or nat, and base $b=10$ gives the unit of dits, bans, or hartleys. When not specified, $b=e$ is used.
-\sssc{Non-negativity}
+\sssc{Nonnegativity}
 \[H(X)\ge 0.\]
+\bpr
+If $p_X(x)=1$ for some $x$, $H(X)=0$; otherwise, for all $x\in\Omega$ such that $p_X(x)>0$, $p_X(x)\in(0,1)$, $\log_b(p_X(x))\in(-\infty,0)$, and $p_X(x)\log(p_X(x))<0$.
+\epr
 \sssc{Maximum entropy}
 If $\abs{\Omega}=n$,
 \[H(X)\le\log_bn,\]
-and $H(X)=\log_bn$ occurs when $p_X(x)=\frac{1}{n}$.
+and $H(X)=\log_bn$ occurs when $p_X(x)=\frac{1}{n}$ for all $x\in\Omega$.
 \sssc{Affine Transformation}
 For a discrete random variable $X$, $a\in\bbR_{\neq0}$, and $b\in\mathbb{R}$,
 \[H(aX+b)=\begin{cases}H(X),\quad &a\neq 0\\0,\quad &a=0\end{cases}.\]
@@ -522,7 +525,11 @@ H(X)&=-\sum_{k=a}^b\frac{1}{b-a+1}\ln(\frac{1}{b-a+1})\\
 \item Mean:
 \[E(X)=p\]
 \item Variance:
+\[\operatorname{Var}(X)=p(1-p)\]
+\bpr
+\[E(X^2)=p\]
 \[\operatorname{Var}(X)=p-p^2=p(1-p)\]
+\epr
 \item MGF:
 \[M_X(t)=pe^t+1-p\]
 \item Mode:
