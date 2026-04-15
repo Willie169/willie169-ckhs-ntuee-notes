@@ -182,6 +182,11 @@ For a discrete random variable $X$ with PMF $p_X$, the CDF $F_X$ can be expresse
 for all $x\in\bbR$.
 \sssc{Support}
 The support of a discrete random variable is the support of the PMF.
+\sssc{Probability simplex}
+Given a sample space $(x_0,x_1,x_2,\ldots,x_k)$, each point $(p_0,p_1,\ldots,p_k)$ in the probability $k$-simplex
+\[\{(p_0,p_1,\ldots,p_k)\mid\sum_{i=0}^kp_i=1\}\]
+corresponds to the PMF $p$ defined as
+\[p(x_i)=p_i,\quad i\in[0,k]\cap\bbZ.\]
 \ssc{Continuous Random Variables}
 \sssc{Probability density function (PDF)}
 For a continuous random variable $X$, the probability density function of $X$, denoted as $f_X$, is defined as
@@ -304,10 +309,18 @@ E(X)&=\int_{\Omega_t}x\dd{P_t(x)}\\
 For real random variable $X$, let
 \[X^+=\bcs X,\quad&X>0\\0,\quad&X\le 0\ecs\]
 and
-\[X^+=\bcs -X,\quad&X<0\\0,\quad&X\ge 0\ecs,\]
-then,
+\[X^-=\bcs -X,\quad&X<0\\0,\quad&X\ge 0\ecs.\]
+Then,
 \[E(X^+)=\int_0^{\infty}P(X\ge x)\dd{x}=\int_0^{\infty}1-F_X(x)\dd{x},\]
 \[E(X^-)=\int_{-\infty}^0P(X\le x)\dd{x}=\int_{-\infty}^0F_X(x)\dd{x},\]
+\bpr
+\[\ba
+E(X^-)&=\int_0^{\infty}P(X^-\ge u)\dd{u}\\
+&=\int_0^{\infty}P(X\le -u)\dd{u},\quad x=-u\\
+&=\int_{-\infty}^0P(X\le x)\dd{x}\\
+&=\int_{-\infty}^0F_X(x)\dd{x}
+\ea\]
+\epr
 and
 \[E(X)=E(X^+)-E(X^-).\]
 \sssc{Affine Transformation}
@@ -448,9 +461,23 @@ where base $b=2$ gives the unit of bits or shannons, base $b=e$ gives natural un
 If $p_X(x)=1$ for some $x$, $H(X)=0$; otherwise, for all $x\in\Omega$ such that $p_X(x)>0$, $p_X(x)\in(0,1)$, $\log_b(p_X(x))\in(-\infty,0)$, and $p_X(x)\log(p_X(x))<0$.
 \epr
 \sssc{Maximum entropy}
-If $\abs{\Omega}=n$,
+If $\abs{\Omega}=n\in\bbN$,
 \[H(X)\le\log_bn,\]
 and $H(X)=\log_bn$ occurs when $p_X(x)=\frac{1}{n}$ for all $x\in\Omega$.
+\bpr
+\[H(X)=-\sum_{x\in\Omega\land p_X(x)>0}p_X(x)\log_b(p_X(x))\]
+For each $x_i\in\Omega$, let $p_i=p_X(x_i)$,
+\[H(X)=-\sum_{i=1}^np_i\log_b(p_i)\]
+\[\pdv{H(X)}{p_i}=-\log_b(p_i)-1\]
+\[\sum_{i=1}^np_i=1\]
+\[\pdv{\sum_{i=1}^np_i-1}{p_i}=1\]
+\[-\log_b(p_i)-1-\lambda=0\]
+\[p_i=b^{-1-\lambda}\lor0\]
+Suppose $m$ out of $n$ $p_i$ are not $0$,
+\[H(X)=-mb^{-1-\lambda}(-1-\lambda)\]
+Thus when $m=n$, $H(X)$ has maximum, and $p_i=\frac{1}{n}$, and
+\[H(X)=-n\frac{1}{n}(-\log_bn)=\log_bn\]
+\epr
 \sssc{Affine Transformation}
 For a discrete random variable $X$, $a\in\bbR_{\neq0}$, and $b\in\mathbb{R}$,
 \[H(aX+b)=\begin{cases}H(X),\quad &a\neq 0\\0,\quad &a=0\end{cases}.\]
