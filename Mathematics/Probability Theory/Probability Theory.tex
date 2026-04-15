@@ -1132,6 +1132,19 @@ h(X)&=-\lambda\int_0^{\infty}e^{-\lambda x}\qty(\ln(\lambda)-\lambda x)\dd{x}\\
 \[\frac{e^{-\lambda (x+y)}}{e^{-\lambda x}}=e^{-\lambda y}\]
 \epr
 \item PDF monotonicity: strictly decreasing
+\item Relation to Poisson random variable: For $\lambda,x>0$,
+\[P(\operatorname{Exp}(\lambda)>x)=P(\operatorname{Pois}(\lambda x)=0),\]
+equivalently,
+\[P(\operatorname{Exp}(\lambda)\le x)=P(\operatorname{Pois}(\lambda x)\ge 1).\]
+\bpr
+\[\ba
+P(\operatorname{Exp}(\lambda)>x)&=1-F_X(x)\\
+&=e^{-\lambda x}\\
+&=\frac{\lambda^0e^{-\lambda}}{0!}
+\ea\]
+\epr
+\item Rates add under minimum: For an index family of i.i.d. random variables $(X_i\sim\operatorname{Exp}(\lambda_i))_{i\in I}$ with $\abs{I}\in\bbN$, if $P(X>x)=P(\min_{i\in I}X_i>x)$, then
+\[X\sim\operatorname{Exp}(\sum_{i\in I}\lambda_i).\]
 \eit
 \sssc{Erlang random variable}
 \bit
@@ -1183,6 +1196,16 @@ F_k(x)&=\int_0^x\frac{\lambda^kt^{k-1}e^{-\lambda t}}{(k-1)!}\dd{t}\\
 \item Scaling:
 \[cX\sim\operatorname{Exp}\qty(k,\frac{\lambda}{c}),\quad c\in\bbR_{>0}\]
 \item PDF monotonicity: strictly increasing for $x\le\frac{k-1}{\lambda}$ and strictly decreasing for $x\ge\frac{k-1}{\lambda}$
+\item Relation to Poisson random variable: For $\lambda,x>0$,
+\[P(\operatorname{Erlang}(k,\lambda)>x)=P(\operatorname{Pois}(\lambda x)\le k-1),\]
+equivalently,
+\[P(\operatorname{Erlang}(k,\lambda)\le x)=P(\operatorname{Pois}(\lambda x)\ge k.\]
+\bpr
+\[\ba
+P(\operatorname{Erlang}(k,\lambda)>x)&=1-F_X(x)\\
+&=\sum_{n=0}^{k-1}\frac{(\lambda x)^ne^{-\lambda x}}{n!}
+\ea\]
+\epr
 \eit
 \sssc{Geometric to exponential limit theorem}
 For any fixed $\lambda\in(0,\infty)$, let $X_n\sim\operatorname{Geom}\qty(\frac{\lambda}{n})$ and $Y_n=\frac{X_n}{n}$. Then
