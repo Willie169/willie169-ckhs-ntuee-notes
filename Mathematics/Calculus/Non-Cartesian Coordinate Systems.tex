@@ -78,8 +78,8 @@ let
 \[\Delta A_i=r_i^*\Delta r\Delta\theta\]
 \[\sum_{i=1}^m\sum_{j=1}^nf(r_i^*\cos\theta_j^*,r_i^*\sin\theta_j^*)\Delta A_i=\sum_{i=1}^m\sum_{j=1}^nf(r_i^*\cos\theta_j^*,r_i^*\sin\theta_j^*)r_i^*\Delta r\Delta\theta\]
 \epr
-\ssc{ISO 31-11 cylindrical coordinate system (圓柱座標系)}
-\sssc{Definition}
+\ssc{Cylindrical coordinate system (圓柱座標系)}
+\sssc{ISO 31-11 Definition}
 A cylindrical coordinate system is a three-dimensional coordinate system that specifies point positions by a main axis (a chosen directed line) and an auxiliary axis (a reference ray) with the intersection of the two axes called the origin and the plane passing through the origin and perpendicular to the main axis equipped with polar coordinate system with the polar axis being the auxiliary axis called the reference plane. The three cylindrical coordinates $(r,\theta,z)$ are:
 \bit
 \item the radial distance $r\in\bbR_{\geq 0}$ defined as the perpendicular distance of the point from the main axis;
@@ -121,15 +121,22 @@ $\theta=$ constant:
 \[\dd{\mb{S}}=\hat{\mb{e}}_{\theta}\dd{r}\dd{z}\]
 $z=$ constant:
 \[\dd{\mb{S}}=\hat{\mb{e}}_zr\dd{r}\dd{\theta}\]
-\ssc{ISO 80000-2, inclination-azimuth, or physics convention spherical coordinate system (球座標系)}
+\ssc{Spherical coordinate system (球座標系)}
+\sssc{Physics convention, ISO 80000-2, or inclination-azimuth convention definition}
 A spherical coordinate system is a three-dimensional coordinate system that specifies point positions by a polar axis (a chosen directed line) and an auxiliary axis (a reference ray) with the intersection of the two axes called the origin and the plane passing through the origin and perpendicular to the polar axis equipped with polar coordinate system with the polar axis being the auxiliary axis called the reference plane. The three spherical coordinates $(r,\theta,\varphi)$ are:
 \bit
 \item the radial distance or radius $r\in\bbR_{\geq 0}$ defined as the distance of the point from the origin;
-\item the polar angle, inclination, or zenith angle $\theta\in[0,\pi]$ defined as the angle between the ray from the origin to the point and the positive half of the polar axis and undefined at the origin; and
+\item the polar angle, zenith angle, or inclination angle $\theta\in[0,\pi]$ defined as the angle between the ray from the origin to the point and the positive half of the polar axis and undefined at the origin; and
 \item the azimuth or azimuthal angle $\varphi\in(-\pi,\pi]$ defined as the polar angle of the projection of the point on the reference plane and undefined on the polar axis (of the coordinate system instead of the reference plane).
 \eit
-\ti{Calculus: Early Transcendentals} by James Stewart exchanges the definition of $\theta$ and $\varphi$ and uses $\rho$ to denote $r$.
-\sssc{Conversion from and to Cartesian coordinate system}
+\sssc{Mathematics convention or azimuth-inclination convention definition}
+A spherical coordinate system is a three-dimensional coordinate system that specifies point positions by a polar axis (a chosen directed line) and an auxiliary axis (a reference ray) with the intersection of the two axes called the origin and the plane passing through the origin and perpendicular to the polar axis equipped with polar coordinate system with the polar axis being the auxiliary axis called the reference plane. The three spherical coordinates $(\rho,\theta,\varphi)$ are:
+\bit
+\item the radial distance or radius $\rho\in\bbR_{\geq 0}$ defined as the distance of the point from the origin;
+\item the azimuth or azimuthal angle $\theta\in(-\pi,\pi]$ defined as the polar angle of the projection of the point on the reference plane and undefined on the polar axis (of the coordinate system instead of the reference plane); and
+\item the polar angle, zenith angle, or inclination angle $\varphi\in[0,\pi]$ defined as the angle between the ray from the origin to the point and the positive half of the polar axis and undefined at the origin.
+\eit
+\sssc{Conversion from and to Cartesian coordinate system (physics convention)}
 If the polar axis and the auxiliary axis of a spherical coordinate system is the $z$ axis and the positive direction of the $x$ axis of a Cartesian coordinate system, then:
 
 To:
@@ -139,8 +146,19 @@ To:
 From:
 \[r=\sqrt{x^2+y^2+z^2},\]
 \[\theta=\arccos\frac{z}{r},\]
-\[\varphi=\begin{cases}\sgn(y)\arccos\frac{x}{\sqrt{x^2+y^2}},\quad&y\neq 0\lor x>0\\\pi,\quad&y=0\land x<0\end{cases}.\]
-\sssc{Conversion from and to cylindrical coordinate system}
+\[\varphi=\operatorname{atan2}(y,x)=\begin{cases}\sgn(y)\arccos\frac{x}{\sqrt{x^2+y^2}},\quad&y\neq 0\lor x>0\\\pi,\quad&y=0\land x<0\end{cases}.\]
+\sssc{Conversion from and to Cartesian coordinate system (mathematics convention)}
+If the polar axis and the auxiliary axis of a spherical coordinate system is the $z$ axis and the positive direction of the $x$ axis of a Cartesian coordinate system, then:
+
+To:
+\[x=\rho\sin\varphi\cos\theta,\]
+\[y=\rho\sin\varphi\sin\theta,\]
+\[z=\rho\cos\varphi;\]
+From:
+\[\rho=\sqrt{x^2+y^2+z^2},\]
+\[\theta=\operatorname{atan2}(y,x)=\begin{cases}\sgn(y)\arccos\frac{x}{\sqrt{x^2+y^2}},\quad&y\neq 0\lor x>0\\\pi,\quad&y=0\land x<0\end{cases},\]
+\[\varphi=\arccos\frac{z}{r}.\]
+\sssc{Conversion from and to cylindrical coordinate system (physics convention)}
 If the polar axis and the auxiliary axis of a spherical coordinate system is the main axis and the auxiliary axis of a cyclindrical coordinate system, then:
 
 To:
@@ -151,18 +169,44 @@ From:
 \[r=\sqrt{r^2+z^2},\]
 \[\theta=\arctan\frac{r}{z},\]
 \[\varphi=\theta.\]
-\sssc{Local orthogonal basis}
-Radial unit vector $\hat{\mb{e}}_r$ is $(\sin\theta\cos\varphi,\sin\theta\sin\varphi,\cos\theta)$ (Cartesian). Polar unit vector $\hat{\mb{e}}_{\theta}$ is $(\cos\theta\cos\varphi,\cos\theta\sin\varphi,-\sin\theta)$ (Cartesian). Azimuthal unit vector $\hat{\mb{e}}_{\varphi}$ is $(-\sin\varphi,\cos\varphi,0)$ (Cartesian).
-\sssc{Scale factor}
+\sssc{Conversion from and to cylindrical coordinate system (mathematics convention)}
+If the polar axis and the auxiliary axis of a spherical coordinate system is the main axis and the auxiliary axis of a cyclindrical coordinate system, then:
+
+To:
+\[r=\rho\sin\varphi,\]
+\[\theta=\theta,\]
+\[z=\rho\cos\varphi;\]
+From:
+\[\rho=\sqrt{r^2+z^2},\]
+\[\theta=\theta,\]
+\[\varphi=\arctan\frac{r}{z}.\]
+\sssc{Local orthogonal basis (physics convention)}
+Radial unit vector $\hat{\mb{e}}_r$ is $(\sin\theta\cos\varphi,\sin\theta\sin\varphi,\cos\theta)$ (Cartesian). Zenith unit vector $\hat{\mb{e}}_{\theta}$ is $(\cos\theta\cos\varphi,\cos\theta\sin\varphi,-\sin\theta)$ (Cartesian). Azimuthal unit vector $\hat{\mb{e}}_{\varphi}$ is $(-\sin\varphi,\cos\varphi,0)$ (Cartesian).
+\sssc{Local orthogonal basis (mathematics convention)}
+Radial unit vector $\hat{\mb{e}}_{\rho}$ is $(\sin\varphi\cos\theta,\sin\varphi\sin\theta,\cos\varphi)$ (Cartesian). Azimuthal unit vector $\hat{\mb{e}}_{\theta}$ is $(-\sin\theta,\cos\theta,0)$ (Cartesian). Zenith unit vector $\hat{\mb{e}}_{\varphi}$ is $(\cos\varphi\cos\theta,\cos\varphi\sin\theta,-\sin\varphi)$ (Cartesian).
+\sssc{Scale factor (physics convention)}
 \[(h_r,h_{\theta},h_{\varphi})=(1,r,r\sin\theta)\]
-\sssc{Line element}
+\sssc{Scale factor (mathematics convention)}
+\[(h_r,h_{\theta},h_{\varphi})=(1,\rho\sin\varphi,\rho)\]
+\sssc{Line element (physics convention)}
 \[\dd{\mb{r}}=\dd{r}\hat{\mb{e}}_r+r\dd{\theta}\hat{\mb{e}}_{\theta}+r\sin\theta\dd{\varphi}\hat{\mb{e}}_{\varphi}\]
-\sssc{Volume element}
+\sssc{Line element (mathematics convention)}
+\[\dd{\mb{r}}=\dd{\rho}\hat{\mb{e}}_{\rho}+\rho\sin\varphi\dd{\theta}\hat{\mb{e}}_{\theta}+\rho\dd{\varphi}\hat{\mb{e}}_{\varphi}\]
+\sssc{Volume element (physics convention)}
 \[\dd{V}=r^2\sin\theta\dd{r}\dd{\theta}\dd{\varphi}\]
-\sssc{Surface elements}
+\sssc{Volume element (mathematics convention)}
+\[\dd{V}=\rho^2\sin\varphi\dd{r}\dd{\theta}\dd{\varphi}\]
+\sssc{Surface elements (physics convention)}
 $r=$ constant:
 \[\dd{\mb{S}}=\hat{\mb{e}}_rr^2\sin\theta\dd{\theta}\dd{\varphi}\]
 $\theta=$ constant:
 \[\dd{\mb{S}}=\hat{\mb{e}}_{\theta}r\sin\theta\dd{r}\dd{\varphi}\]
 $\varphi=$ constant:
 \[\dd{\mb{S}}=\hat{\mb{e}}_{\varphi}r\dd{r}\dd{\theta}\]
+\sssc{Surface elements (mathematics convention)}
+$\rho=$ constant:
+\[\dd{\mb{S}}=\hat{\mb{e}}_{\rho}\rho^2\sin\varphi\dd{\theta}\dd{\varphi}\]
+$\theta=$ constant:
+\[\dd{\mb{S}}=\hat{\mb{e}}_{\theta}\rho\dd{\rho}\dd{\varphi}\]
+$\varphi=$ constant:
+\[\dd{\mb{S}}=\hat{\mb{e}}_{\varphi}\rho\sin\varphi\dd{\rho}\dd{\theta}\]
