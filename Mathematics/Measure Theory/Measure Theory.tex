@@ -15,8 +15,19 @@ Let $X$ be some set, and let $\calP(X)$ represent its power set. A set $\Sigma \
 \item $X\in\Sigma$.
 \item Closed under complementation:
 \[A\in\Sigma\implies X\setminus A\in\Sigma.\]
-\item Closed under countable unions:
-\[\forall\mathcal{S}\subseteq\Sigma\text{ s.t. }\abs{\mathcal{S}}\in\bbN\cup\{\aleph_0\}\colon\bigcup_{A\in\mathcal{S}}A\in\Sigma.\]
+\item Closed under countable unions: For all indexed family $(A_i)_{i\in\bbN}\subseteq\Sigma$,
+\[\bigcup_{i\in\bbN}A_i\inSigma.\]
+\epr
+These imply:
+\[\varnothing\inSigma\]
+\bpr
+\[X\in\Sigma\implies X\setminus X=\varnothing\in\Sigma.\]
+\epr
+These imply closed under finite unions: For all indexed family $(A_i)_{i\in\bbN\cap[1,n]}\subseteq\Sigma$,
+\[\bigcup_{i=1}^nA_i\inSigma.\]
+\bpr
+Let $(B_i)_{i\in\bbN}$ be defined as $B_i=A_i$ for $i\in[1,n]$ and $B_i=\varnothing$ for $i\in(n,\infty)$ and apply closed under countable unions.
+\epr
 \end{enumerate}
 \sssc{Measurable space (可測空間)}
 A tuple $(X,\Sigma)$ of a set $X$ and a \text{\textsigma}-algebra $\Sigma$ on $X$ is called a measurable space.
@@ -45,12 +56,21 @@ For every $a<b$, the interval $(a,b)$ can be expressed as
 \sssc{Measure (測度)}
 Let $(X,\Sigma)$ be a measurable space. A function $\mu\colon\Sigma\to[-\infty,+\infty]$ is called a (positive) measure on $\Sigma$ iff it satisfies
 \bit
-\item Countable additivity, also called \text{\textsigma}-additivity, that, for all finite or countable infinite indexed family $(E_k)_{k\in K}$ of pairwise disjoint sets in $\Sigma$,
-\[\mu\left(\bigcup_{k\in K}E_k\right)=\sum_{k=1}^\infty\mu(E_k),\]
-which implies $\mu(\varnothing)=0$, and
-\item Nonnegativity
+\item Countable additivity, also called \text{\textsigma}-additivity: For all indexed family $(E_k)_{k\in\bbN}$ of pairwise disjoint sets in $\Sigma$,
+\[\mu\left(\bigcup_{k\in\bbN}E_k\right)=\sum_{k=1}^\infty\mu(E_k).\]
+\item Nonnegativity:
 \[\forall E\in\Sigma\colon\mu(E)\geq 0,\]
 \eit
+Countable additivity implies $\mu(\varnothing)=0$.
+\bpr
+By applying for $(\varnothing)_{k\in\bbN}$,
+\[\mu(\varnothing)=\sum_{k=1}^{\infty}\mu(\varnothing)\]
+\epr
+Countable additivity implies finite additivity: For all indexed family $(E_k)_{k\in\bbN\cap[1,n]}$ of pairwise disjoint sets in $\Sigma$,
+\[\mu\left(\bigcup_{k=1}^nE_k\right)=\sum_{k=1}^n\mu(E_k).\]
+\bpr
+Let $(F_k)_{k\in\bbN}$ be defined as $F_k=E_k$ for $k\in[1,n]$ and $F_k=\varnothing$ for $k\in(n,\infty)$ and countable additivity.
+\epr
 If $\mu(E)\geq 0$ is replaced with $\mu(E)\in\bbR$, it's called a signed measure.
 
 If $\mu(E)\geq 0$ is replaced with $\mu(E)\in\bbC$, it's called a complex-valued measure.
