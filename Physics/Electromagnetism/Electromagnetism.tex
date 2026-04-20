@@ -1810,66 +1810,28 @@ This leaves one degree of freedom, thus an arbitrary positive $L_1$ or $L_2$ can
 指一方向高電阻（理想上不導通）、另一方向低電阻（理想上零電阻），使電流只能單向通過的電路元件。
 
 
-\section{電磁場的勢}
-PLACEHOLDER
-relativity?
-\subsection{電位（Electric potential）/電純量勢（Electric scalar potential）/純量勢（Scalar potential）與磁向量勢（Magnetic vector potential）/向量勢（Vector potential）定義}
-電純量勢$\phi$與磁向量勢$\mathbf{A}$服從：
-\[ \nabla \times \mathbf{A} = \mathbf{B}\]
-\[\mathbf{E} = - \nabla \phi - \pdv{\mathbf{A} }{t}.\]
-\subsection{規範固定（Gauge fixing）/規範選擇（Choosing a gauge）}
-規範固定，或稱規範選擇，表示處理場變數中冗餘自由度的數學過程。
-\subsubsection{庫侖規範（Coulomb gauge）/Transverse gauge}
-\[ \nabla \cdot \mathbf{A} = 0\]
-\subsubsection{勞侖茲規範（Lorenz guage）}
-\[\nabla \cdot \mathbf{A} + \frac{1}{c^2} \pdv{\phi}{t} = 0\]
-\subsubsection{達朗貝爾算符（d'Alembert operator）}
-定義達朗貝爾算符$\square$為：
-\[\square = \frac{1}{c^2}\frac{\partial^2}{\partial t^2} - \nabla^2\]
-\subsection{勞侖茲規範下的馬克士威方程組}
-\[\square \phi = \frac{\rho}{\varepsilon_0}.\]
-\[\square \mathbf{A} = \mu_0 \mathbf{J}.\]
-\subsection{庫侖規範下磁矩的磁向量勢}
-位於原點磁矩$\mathbf{m}$的磁偶極子在$\mathbf{r}$產生的磁場$\mathbf{B}$為：
-\[\mathbf{B}=\frac{\mu_0}{4\pi}\frac{3\hat{\mathbf{r}}\left(\hat{\mathbf{r}}\cdot\mathbf{m}\right)-\mathbf{m}}{|\mathbf{r}|^3}.\]
-等價於其在$\mathbf{r}$產生的磁向量勢$\mathbf{A}$（庫侖規範）為：
-\[\mathbf{A} = \frac{\mu_0}{4\pi} \frac{\mathbf{m} \times \hat{\mathbf{r}}}{|\mathbf{r}|^2},\]
-\begin{proof}
-\[\begin{aligned}
-\mathbf{B}=&\nabla\times\mathbf{A}\\
-=&\frac{\mu_0}{4\pi}\nabla\times\frac{\mathbf{m}\times\mathbf{r}}{|\mathbf{r}|^3}\\
-=&\frac{\mu_0}{4\pi}\left(\frac{\nabla\times(\mathbf{m}\times\mathbf{r})}{|\mathbf{r}|^3}-\frac{(\nabla|\mathbf{r}|^3)\times(\mathbf{m}\times\mathbf{r})}{|\mathbf{r}|^6}\right)\\
-=&\frac{\mu_0}{4\pi}\left(\frac{2\mathbf{m}}{|\mathbf{r}|^3}-\frac{3\mathbf{r}\times(\mathbf{m}\times\mathbf{r})}{|\mathbf{r}|^5}\right)\\
-=&\frac{\mu_0}{4\pi}\left(\frac{2\mathbf{m}}{|\mathbf{r}|^3}-\frac{3\left(|\mathbf{r}|^2\mathbf{m}-(\mathbf{r}\cdot\mathbf{m})\mathbf{r}\right)}{|\mathbf{r}|^5}\right)\\
-=&\frac{\mu_0}{4\pi}\frac{3\hat{\mathbf{r}}\left(\hat{\mathbf{r}}\cdot\mathbf{m}\right)-\mathbf{m}}{|\mathbf{r}|^3}
-\end{aligned}\]
-\end{proof}
-
-
 \section{電磁場的能量}
-假設均為線性磁化、線性極化、各向同性、非色散材料。
 \ssc{勞侖茲力功率密度}
-一點有體積電荷密度 $\rho$、自由電流密度 $\mb{J}_f$、速度 $\mb{v}$，受電場 $\mb{E}$ 與磁場 $\mb{B}$ 之勞侖茲力密度 $\mb{f}$ 與功率密度（獲得為正）$\dv{P}{V}$：
-\[\dv{P}{V}=\mb{f}\cdot\mb{v}=\rho\mb{E}\cdot\mb{v}+\mb{J}_f\times\mb{B}\cdot\mb{v}=\mathbf{J}_f\cdot\mathbf{E}\]
-\ssc{電磁場的能量}
-電磁場的能量密度$u$為：
-\[u=\frac{1}{2}(\mathbf{E}\cdot\mathbf{D}+\mathbf{B}\cdot\mathbf{H})=\frac{\varepsilon}{2}|\mathbf{E}|^2+\frac{1}{2\mu}|\mathbf{B}|^2.\]
-This is justified by Poynting's theorem as power density into matter plus time derivative of energy density plus net outward EM energy flux (divergence of Poynting vector) is 0.
+一體積元 $\dd{V}$ 有體積電荷密度 $\rho$、自由電流密度 $\mb{J}_f$、速度 $\mb{v}$，受電場 $\mb{E}$ 與磁場 $\mb{B}$ 之勞侖茲力密度 $\mb{f}$ 有功率（獲得為正）$\delta P$：
+\[\delta P=\mb{f}\cdot\mb{v}\dd{V}=\qty(\rho\mb{E}\cdot\mb{v}+(\mb{J}_f\times\mb{B})\cdot\mb{v})\dd{V}=\mathbf{J}_f\cdot\mathbf{E}\dd{V}\]
 \ssc{坡印廷定理（Poynting's theorem）–微分形式}
-\[\mathbf{J}_f\cdot\mathbf{E}+\pdv{u}{t}+\nabla\cdot(\mathbf{E}\times\mathbf{H})=0.\]
-where $\mathbf{E}\times\mathbf{H}$ is called Poynting vector.
+\[\mathbf{J}_f\cdot\mathbf{E}+\mathbf{E}\cdot\pdv{D}{t}+\mathbf{H}\cdot\pdv{\mathbf{B}}{t}+\nabla\cdot(\mathbf{E}\times\mathbf{H})=0.\]
+其中 $\mathbf{E}\times\mathbf{H}$ 稱坡印廷向量，又作 $\mb{S}$。
 \begin{proof}
 \[\begin{aligned}
-\pdv{u}{t}&=\pdv{t}\frac{1}{2}(\mathbf{E}\cdot\mathbf{D}+\mathbf{B}\cdot\mathbf{H})\\
-&=\mathbf{E}\cdot\pdv{D}{t}+\mathbf{H}\cdot\pdv{\mathbf{B}}{t}\\
-&=\mathbf{E}\cdot(\nabla\times\mathbf{H})-\mathbf{E}\cdot\mathbf{J}_f-\mathbf{H}\cdot\nabla \times \mathbf{E}
+\mathbf{E}\cdot\pdv{D}{t}+\mathbf{H}\cdot\pdv{\mathbf{B}}{t}&=\mathbf{E}\cdot(\nabla\times\mathbf{H})-\mathbf{E}\cdot\mathbf{J}_f-\mathbf{H}\cdot\nabla \times \mathbf{E}
 &=-\nabla\cdot(\mathbf{E}\times\mathbf{H})-\mathbf{J}_f\cdot\mathbf{E}
 \end{aligned}\]
 \end{proof}
 \ssc{坡印廷定理–積分形式}
-$S=\partial V$,
-\[\int_V\mathbf{J}_f\cdot\mathbf{E}\dd{V}+\dv{}{t}\qty(\int_Vu\dd{V})+\oiint_S(\mathbf{E}\times\mathbf{H})\cdot\dd{\mathbf{S}}=0\]
-PLACEHOLDER: non linear also work, generalized force, dW=H\cdot dB
+$S=\partial V$，
+\[\iiint_V\mathbf{J}_f\cdot\mathbf{E}+\mathbf{E}\cdot\pdv{D}{t}+\mathbf{H}\cdot\pdv{\mathbf{B}}{t}\dd{V}+\oiint_S(\mathbf{E}\times\mathbf{H})\cdot\dd{\mathbf{S}}=0\]
+\ssc{電磁場的能量}
+對於線性磁化、線性極化、各向同性、非色散材料，電磁場的能量密度$u$為：
+\[u=\frac{1}{2}(\mathbf{E}\cdot\mathbf{D}+\mathbf{B}\cdot\mathbf{H})=\frac{\varepsilon}{2}|\mathbf{E}|^2+\frac{1}{2\mu}|\mathbf{B}|^2.\]
+\bpr
+\[\pdv{u}{t}=\mathbf{E}\cdot\pdv{D}{t}+\mathbf{H}\cdot\pdv{\mathbf{B}}{t}\]
+\epr
 
 
 \section{電磁波（Electromagnetic Waves）}
@@ -2333,4 +2295,40 @@ Study of this solidified magma across the ocean floor reveals that Earth's field
 帶電粒子射入地磁場，若其速度垂直磁場則行等速率迴旋運動，若其速度有平行磁場的分量則行螺旋運動靠近地磁極，且由於地磁愈近兩極愈大，故其運動軌跡曲率半徑漸減。由於帶電粒子向兩磁極集中，故極光好發於兩磁極附近。
 \sssc{極光（Aurora）}
 地球上的極光是由於來自范艾倫輻射帶的帶電高能粒子被地磁場導引帶進地球大氣層，並與大氣電離層中的原子碰撞導致電子向外躍遷，並在向內躍遷時造成發光現象。好發於太陽發生磁暴時。一般來說，氧放出綠色或褐紅色，氮放出藍色、紫色或紅色。
+
+
+\section{電純量勢（Electric scalar potential）與磁向量勢（Magnetic vector potential）}
+PLACEHOLDER
+relativity?
+\subsection{電位（Electric potential）/電純量勢（Electric scalar potential）/純量勢（Scalar potential）與磁向量勢（Magnetic vector potential）/向量勢（Vector potential）定義}
+電純量勢$\phi$與磁向量勢$\mathbf{A}$服從：
+\[ \nabla \times \mathbf{A} = \mathbf{B}\]
+\[\mathbf{E} = - \nabla \phi - \pdv{\mathbf{A} }{t}.\]
+\subsection{規範固定（Gauge fixing）/規範選擇（Choosing a gauge）}
+規範固定，或稱規範選擇，表示處理場變數中冗餘自由度的數學過程。
+\subsubsection{庫侖規範（Coulomb gauge）/Transverse gauge}
+\[ \nabla \cdot \mathbf{A} = 0\]
+\subsubsection{勞侖茲規範（Lorenz guage）}
+\[\nabla \cdot \mathbf{A} + \frac{1}{c^2} \pdv{\phi}{t} = 0\]
+\subsubsection{達朗貝爾算符（d'Alembert operator）}
+定義達朗貝爾算符$\square$為：
+\[\square = \frac{1}{c^2}\frac{\partial^2}{\partial t^2} - \nabla^2\]
+\subsection{勞侖茲規範下的馬克士威方程組}
+\[\square \phi = \frac{\rho}{\varepsilon_0}.\]
+\[\square \mathbf{A} = \mu_0 \mathbf{J}.\]
+\subsection{庫侖規範下磁矩的磁向量勢}
+位於原點磁矩$\mathbf{m}$的磁偶極子在$\mathbf{r}$產生的磁場$\mathbf{B}$為：
+\[\mathbf{B}=\frac{\mu_0}{4\pi}\frac{3\hat{\mathbf{r}}\left(\hat{\mathbf{r}}\cdot\mathbf{m}\right)-\mathbf{m}}{|\mathbf{r}|^3}.\]
+等價於其在$\mathbf{r}$產生的磁向量勢$\mathbf{A}$（庫侖規範）為：
+\[\mathbf{A} = \frac{\mu_0}{4\pi} \frac{\mathbf{m} \times \hat{\mathbf{r}}}{|\mathbf{r}|^2},\]
+\begin{proof}
+\[\begin{aligned}
+\mathbf{B}=&\nabla\times\mathbf{A}\\
+=&\frac{\mu_0}{4\pi}\nabla\times\frac{\mathbf{m}\times\mathbf{r}}{|\mathbf{r}|^3}\\
+=&\frac{\mu_0}{4\pi}\left(\frac{\nabla\times(\mathbf{m}\times\mathbf{r})}{|\mathbf{r}|^3}-\frac{(\nabla|\mathbf{r}|^3)\times(\mathbf{m}\times\mathbf{r})}{|\mathbf{r}|^6}\right)\\
+=&\frac{\mu_0}{4\pi}\left(\frac{2\mathbf{m}}{|\mathbf{r}|^3}-\frac{3\mathbf{r}\times(\mathbf{m}\times\mathbf{r})}{|\mathbf{r}|^5}\right)\\
+=&\frac{\mu_0}{4\pi}\left(\frac{2\mathbf{m}}{|\mathbf{r}|^3}-\frac{3\left(|\mathbf{r}|^2\mathbf{m}-(\mathbf{r}\cdot\mathbf{m})\mathbf{r}\right)}{|\mathbf{r}|^5}\right)\\
+=&\frac{\mu_0}{4\pi}\frac{3\hat{\mathbf{r}}\left(\hat{\mathbf{r}}\cdot\mathbf{m}\right)-\mathbf{m}}{|\mathbf{r}|^3}
+\end{aligned}\]
+\end{proof}
 \end{document}
