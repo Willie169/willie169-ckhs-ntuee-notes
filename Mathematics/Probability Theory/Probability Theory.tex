@@ -1066,6 +1066,20 @@ h(X)&=-\int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}\sigma}\exp(-\frac{(x-\mu)^2}{
 \item Symmetry: about $\mu$
 \item PDF monotonicity: strictly increasing for $x\le\mu$ and strictly decreasing for $x\ge\mu$
 \eit
+\sssc{Stein's Lemma}
+Suppose $X\sim N(\mu,\sigma)$ and $g\colon\bbR\to\bbR$ is a differentiable function, and both $E(g(X)(X-\mu))$ and $E(g'(X))$ both exist. Then
+\[E(g(X)(X-\mu))=\sigma^2E(g'(X)).\]
+\bpr
+\[\ba
+E(g(X)(X-\mu))=&\frac{1}{\sqrt{2\pi}\sigma}\int_{-\infty}^{\infty}g(x)(x-\mu)\exp(-\frac{(x-\mu)^2}{2\sigma^2})\dd{x}\\
+=&\frac{\sigma}{\sqrt{2\pi}}\int_{-\infty}^{\infty}-g(x)\frac{x-\mu}{\sigma^2}\exp(-\frac{(x-\mu)^2}{2\sigma^2})\dd{x}\\
+=&\frac{\sigma}{\sqrt{2\pi}}\int_{-\infty}^{\infty}g'(x)\exp(-\frac{(x-\mu)^2}{2\sigma^2})\dd{x}\\
+=&E(g'(X))
+\ea\]
+\epr
+\sssc{Multidimensional Stein's Lemma}
+Suppose $X_i\sim N(\mu_i,\sigma)$ are independent, $\mb{X}=(X_1,\ldots,X_n)$, $\boldsymbol{\mu}=(\mu_1,\ldots,\mu_n)$, and $f\colon\bbR^n\to\bbR^m$ is a differentiable function, and both $E((\mb{X}-\boldsymbol{\mu})f(\mb{X})^{\top})$ and $E(\nabla f(\mb{X})^{\top})$ both exist. Then
+\[E((\mb{X}-\boldsymbol{\mu})f(\mb{X})^{\top})=\sigma^2E(\nabla f(\mb{X})^{\top}).\]
 \sssc{Exponential random variable}
 \bit
 \item Trial: An exponential random variable models the distance between adjacent events in a Poisson process with rate $\lambda$.
