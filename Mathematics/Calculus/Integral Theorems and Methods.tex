@@ -402,7 +402,7 @@ and
 PLACEHOLDER
 \epr
 \subsection{Fundamental theorem of multivariable calculus (多變數微積分基本定理)}
-\subsubsection{Gradient theorem (梯度定理)}
+\subsubsection{Gradient theorem (梯度定理) or Fundamental theorem of linear integral}
 Suppose $r$ is a oriented differentiable curve that starts at a point $\mathbf{p}$ and ends at a point $\mathbf{q}$. If $\mathbf{F}$ is a differentiable tensor field defined on a neighborhood of $\mathbf{F}$, then,
 \[\int_r(\nabla\mathbf{F})\cdot\mathrm{d}\mathbf{r}=\mathbf{F}\left(\mathbf{q}\right)-\mathbf{F}\left(\mathbf{p}\right).\]
 Gradient theorem is a special case of generalized Stokes theorem.
@@ -423,6 +423,57 @@ Green's theorem is a special case of Stokes' theorem.
 \subsubsection{Generalized Stokes theorem, Stokes–Cartan theorem, or fundamental theorem of multivariable calculus}
 The generalized Stokes theorem says that the integral of a differential form $\omega$ over the boundary $\partial\Omega$ of some orientable manifold $\Omega$ is equal to the integral of its exterior derivative $\mathrm{d}\boldsymbol{\omega}$ over the whole of $\Omega$, i.e.,
 \[\int _{\partial\Omega}\omega=\int_{\Omega}\mathrm{d}\boldsymbol{\omega}\]
+\ssc{Conservative field}
+\sssc{Path independence equivalent to zero closed path integral}
+For an $n$-dimensional vector field $\mb{v}$ defined on an open subset $U$ of $\bbR^n$, for any two piecewise $C^1$ paths $C,D\subseteq U$ with same initial and terminal points,
+\[\int_C\mb{v}\cdot\dd{\mb{x}}=\int_D\mb{v}\cdot\dd{\mb{x}}\]
+iff for any piecewise $C^1$ closed path $E\subseteq U$,
+\[\oint_E\mb{v}\cdot\dd{\mb{x}}=0.\]
+\bpr
+By $\int_C\mb{v}\cdot\dd{\mb{x}}=-\int_{-C}\mb{v}\cdot\dd{\mb{x}}$ and $\int_{C+D}\mb{v}\cdot\dd{\mb{x}}=\int_{C}\mb{v}\cdot\dd{\mb{x}}+\int_{D}\mb{v}\cdot\dd{\mb{x}}$.
+\epr
+\sssc{Conservative equivalent to path independence}
+For a conservative field $f$ on an open subset $U$ of $\bbR^n$ and any two piecewise $C^1$ paths $C,D\subseteq U$ with same initial point $a$ and terminal point $b$,
+\[\int_Cf\cdot\dd{\mb{x}}=\int_Df\cdot\dd{\mb{x}}.\]
+\bpr
+Let $f=\nabla\varphi$, by Gradient theorem, both equal to $\varphi(b)-\varphi(a)$.
+\epr
+\sssc{One dimension}
+A one-dimensional field is conservative on an open interval iff it is continuous on it.
+\sssc{Two dimensions}
+If a two-dimensional field $f=(f_1,f_2)$ is conservative on a connected open set $U$, then
+\[\pdv{f_2}{x}-\pdv{f_1}{y}=0\]
+on the subset of $U$ where LHS exists.
+\bpr
+Let $f=\nabla\varphi$. $f_1=\varphi_x$, $f_2=\varphi_y$,
+\[\pdv{f_2}{x}=\pdv{f_1}{y}=\varphi_{xy}.\]
+\epr
+A $C^1$ two-dimensional field $f=(f_1,f_2)$ is conservative on a simply-connected open set $U$ iff
+\[\pdv{f_2}{x}-\pdv{f_1}{y}=0\]
+on $U$.
+\bpr
+If: By Green's theorem, let $C$ be a piecewise smooth curve in $U$ and surrounds surface $S$.
+\[\oint_Cf\cdot\dd{(x,y)}=\iint_S\pdv{f_2}{x}-\pdv{f_1}{y}\dd{S}=0\]
+\epr
+\sssc{Three dimensions}
+If a three-dimensional field $f$ is conservative on a connected open set $U$, then
+\[\nabla\times f=\mb{0}\]
+on the subset of $U$ where LHS exists.
+\bpr
+Let $f=\nabla\varphi=(f_1,f_2,f_3)$. $f_1=\varphi_x$, $f_2=\varphi_y$, $f_3=\varphi_z$,
+\[\ba
+\nabla\times f=&\qty(\pdv{f_3}{y}-\pdv{f_2}{z},\pdv{f_1}{z}-\pdv{f_3}{x},\pdv{f_2}{x}-\pdv{f_1}{y})\\
+=&\qty(\varphi_{yz}-\varphi_{yz},\varphi_{xz}-\varphi_{xz},\varphi_{xy}-\varphi_{xy})\\
+=&(0,0,0)
+\ea\]
+\epr
+A $C^1$ three-dimensional field $f$ is conservative on a simply-connected open set $U$ iff
+\[\nabla\times f=\mb{0}\]
+on $U$.
+\bpr
+If: By Stokes' theorem, let $C$ be a piecewise smooth curve in $U$ and surrounds surface $S$.
+\[\oint_Cf\cdot\dd{(x,y,z)}=\iint_S\nabla\times f\dd{S}=0\]
+\epr
 \subsection{Total variation of differentiable function theorem}
 \subsubsection{Total variation of differentiable real function theorem}
 Let $f\colon X\subseteq\bbR\to\bbR$ be a function. If $f$ is differentiable over $[a,b]\subseteq X$ and $f'$ is Riemann integrable over $[a,b]$, then the total variation of $f$ over $[a,b]$ is
