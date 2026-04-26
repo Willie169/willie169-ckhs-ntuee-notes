@@ -453,9 +453,34 @@ By divergence theorem,
 Suppose $S\subseteq\bbR^3$ is a compact surface with positively-oriented, piecewise $C^1$ boundary $\partial S=\ell$. If a three-dimensional vector field $\mb{F}$ is continuous and piecewise $C^1$ on a neighborhood of $S$, then
 \[\iint_S(\nabla\times\mathbf{F})\cdot \dd{\mathbf{S}}=\oint_{\ell}\mathbf{F}\cdot\dd{\boldsymbol{\ell}}.\]
 \bpr
+Parameteriz $S$ and $\ell$ as $T$ and $\omega$ in parameters $u,v$. Let $T$ be $\mb{r}(u,v)=(x(u,v),y(u,v),z(u,v))$, and
+\[\dd{\mb{T}}=\pdv{\mb{r}}{u}\times\pdv{\mb{r}}{v}\dd{u}\dd{v}.\]
+\[\iint_S(\nabla\times\mb{F})\dd{\mb{S}}=\iint_T(\nabla\times\mb{F})(\mb{r}(u,v))\cdot\qty(\pdv{\mb{r}}{u}\times\pdv{\mb{r}}{v})\dd{u}\dd{v}\]
+Define the pulled-back vector fields in parameter space
+\[\mb{G}(u,v)=\mb{F}(\mb{r}(u,v))\]
+\[\mb{P}(u,v)=\mb{F}\cdot\pdv{\mb{r}}{u}\]
+\[\mb{Q}(u,v)=\mb{F}\cdot\pdv{\mb{r}}{v}\]
 Let $\mb{F}=(F_1,F_2,F_3)$.
-\[\nabla\times\mb{F}=\qty(\pdv{F_3}{x_2}-\pdv{F_2}{x_3},\pdv{F_1}{x_3}-\pdv{F_3}{x_2},\pdv{F_2}{x_1}-\pdv{F_1}{x_2})\]
-PLACEHOLDER
+\[\ba
+&{}(\nabla\times\mb{F})(\mb{r}(u,v))\cdot\qty(\pdv{\mb{r}}{u}\times\pdv{\mb{r}}{v})\\
+=&\begin{vmatrix}
+\pdv{F_3}{y}-\pdv{F_2}{z} & \pdv{F_1}{z}-\pdv{F_3}{x} & \pdv{F_2}{x}-\pdv{F_1}{y}\\
+\pdv{x}{u} & \pdv{y}{u} & \pdv{z}{u}\\
+\pdv{x}{v} & \pdv{y}{v} & \pdv{z}{v}
+\end{vmatrix}\\
+=&\qty(\pdv{F_3}{y}-\pdv{F_2}{z})\qty(\pdv{y}{u}\pdv{z}{v}-\pdv{y}{v}\pdv{z}{u})-\qty(\pdv{F_1}{z}-\pdv{F_3}{x})\qty(\pdv{x}{u}\pdv{z}{v}-\pdv{x}{v}\pdv{z}{u})+\qty(\pdv{F_2}{x}-\pdv{F_1}{y})\qty(\pdv{x}{u}\pdv{y}{v}-\pdv{x}{v}\pdv{y}{u})\\
+=&\pdv{F_3}{y}\pdv{y}{u}\pdv{z}{v}-\pdv{F_3}{y}\pdv{y}{v}\pdv{z}{u}-\pdv{F_2}{z}\pdv{y}{u}\pdv{z}{v}+\pdv{F_2}{z}\pdv{y}{v}\pdv{z}{u}-\pdv{F_1}{z}\pdv{x}{u}\pdv{z}{v}+\pdv{F_1}{z}\pdv{x}{v}\pdv{z}{u}-\pdv{F_3}{x}\pdv{x}{u}\pdv{z}{v}+\pdv{F_3}{x}\pdv{x}{v}\pdv{z}{u}+\pdv{F_2}{x}\pdv{x}{u}\pdv{y}{v}-\pdv{F_2}{x}\pdv{x}{v}\pdv{y}{u}-\pdv{F_1}{y}\pdv{x}{u}\pdv{y}{v}+\pdv{F_1}{y}\pdv{x}{v}\pdv{y}{u}\\
+=&\qty(\pdv{F_1}{x}\pdv{x}{u}+\pdv{F_1}{y}\pdv{y}{u}+\pdv{F_1}{z}\pdv{z}{u})\pdv{x}{v}-\pdv{F_1}{x}\pdv{x}{u}\pdv{x}{v}-\qty(\pdv{F_1}{x}\pdv{x}{v}+\pdv{F_1}{y}\pdv{y}{v}+\pdv{F_1}{z}\pdv{z}{v})\pdv{x}{u}+\pdv{F_1}{x}\pdv{x}{u}\pdv{x}{v}+\qty(\pdv{F_2}{x}\pdv{x}{u}+\pdv{F_2}{y}\pdv{y}{u}+\pdv{F_2}{z}\pdv{z}{u})\pdv{x}{v}-\pdv{F_2}{y}\pdv{y}{u}\pdv{y}{v}-\qty(\pdv{F_2}{x}\pdv{x}{v}+\pdv{F_2}{y}\pdv{y}{v}+\pdv{F_2}{z}\pdv{z}{v})\pdv{x}{u}+\pdv{F_2}{y}\pdv{y}{u}\pdv{y}{v}+\qty(\pdv{F_3}{x}\pdv{x}{u}+\pdv{F_3}{y}\pdv{y}{u}+\pdv{F_3}{z}\pdv{z}{u})\pdv{x}{v}-\pdv{F_3}{z}\pdv{z}{u}\pdv{z}{v}-\qty(\pdv{F_3}{x}\pdv{x}{v}+\pdv{F_3}{y}\pdv{y}{v}+\pdv{F_3}{z}\pdv{z}{v})\pdv{x}{u}+\pdv{F_3}{z}\pdv{z}{u}\pdv{z}{v}\\
+=&\qty(\pdv{F_1}{u}\pdv{x}{v}+\pdv{F_2}{u}\pdv{y}{v}+\pdv{F_3}{u}\pdv{z}{v})-\qty(\pdv{F_1}{v}\pdv{x}{u}+\pdv{F_2}{v}\pdv{y}{u}+\pdv{F_3}{v}\pdv{z}{u})\\
+=&\pdv{}{u}\qty(\mb{F}\cdot\pdv{\mb{r}}{v})-\pdv{}{v}\qty(\mb{F}\cdot\pdv{\mb{r}}{u})\\
+=&\pdv{\mb{Q}}{u}-\pdv{\mb{P}}{v}
+\ea\]
+By Green's theorem,
+\[\ba
+\iint_T\pdv{\mb{Q}}{u}-\pdv{\mb{P}}{v}\dd{u}\dd{v}=&\oint_{\omega}\qty(\mb{P}\dd{u}+\mb{Q}\dd{v})\\
+=&\oint_{\omega}\mb{G}\dd{\boldsymbol{\omega}}\\
+=&\oint_{\ell}\mb{F}\dd{\boldsymbol{\ell}}
+\ea\]
 \epr
 \subsubsection{Generalized Stokes theorem, Stokes–Cartan theorem, or fundamental theorem of multivariable calculus}
 The generalized Stokes theorem says that the integral of a differential form $\omega$ over the boundary $\partial\Omega$ of some orientable manifold $\Omega$ is equal to the integral of its exterior derivative $\mathrm{d}\boldsymbol{\omega}$ over the whole of $\Omega$, i.e.,
