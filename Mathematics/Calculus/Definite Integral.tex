@@ -13,11 +13,10 @@ The integral of a function $f(\omega)$ with respect to $\omega$ over $\Omega$, c
 \subsubsection{Partition of an interval}
 A partition $P(x, n)$ of a compact interval $[a,b]$ is a finite sequence of numbers of the form
 \[P(x, n):=\{x_i\colon x_0=a\land x_n=b\land\forall 1\leq i<j\leq n\colon x_i<x_j\}_{i=0}^n.\]
-
-Each $[x_i, x_{i+1}]$ is called a subinterval of the partition. The length of a closed interval $[c,d]$ is defined as $d-c$. The mesh or norm of a partition is defined as
+Each $[x_i, x_{i+1}]$ is called a subinterval in the partition. The length of a closed interval $[c,d]$ is defined as $d-c$. The mesh or norm of a partition is defined as
 \[\max_i\left(x_{i+1}-x_{i}\right)\]
 for every integer $i\in [0,n-1]$.
-
+\sssc{Tagged partition}
 A tagged partition $P(x,n,\xi)$ of a interval $(a,b)$ is a partition together with a choice of a sample point or tag within each of all $n$ subintervals, that is, numbers $\{\xi_i\}_{i=0}^{n-1}$ with $\xi_i\in [x_i,x_{i+1}]$ for each integer $i\in [0,n-1]$. The mesh of a tagged partition is the same as that of an ordinary partition.
 
 Suppose that two tagged partitions $P(x,n,\xi)$ and $Q(y,m,\zeta)$ are both partitions of the interval $[a,b]$. We say that $Q(y,m,\zeta)$ is a refinement of $P(x,n,\xi)$ if for each integer $i\in [0,n-1]$, there exists an integer $r(i)\in [0,m-1]$ such that $x_i = y_{r(i)}$ and that $\forall i\in [0,n-1]\colon\exists j\in [r(i),r(i + 1)] \text{\ s.t.\ }\xi_i = \zeta_j$. That is, a tagged partition breaks up some of the subintervals and adds sample points where necessary, "refining" the accuracy of the partition.
@@ -186,36 +185,6 @@ The Sobolev spaces are equipped with a norm
 \[\|f\|_{k,p}=\qty(\sum_{i=0}^k\norm{f^{(k)}}_p^{\pht{p}p})^{\frac{1}{p}},\quad p\in\bbN,\]
 and
 \[\|f\|_{k,\infty}=\max_{i=0,1,\ldots,k}\|f^{(i)}\|_{\infty}.\]
-\subsection{Total variation, functions of bounded variation (BV functions), and functions of locally bounded variation (locally BV functions)}
-\subsubsection{Of real functions}
-Let $f\colon X\subseteq\bbR\to\bbR$ be a function. The total variation of $f$ over interval $[a,b]\subseteq X$ is
-\[V_a^b(f)=\sup_{P(x,n_p)\in\mathcal{P}}\sum_{i=0}^{n_p-1}\abs{f\qty(x_{i+1})-f\qty(x)},\]
-where $\mathcal{P}$ is the set of all partitions of $f$ over $[a,b]$.
-
-$f$ is called of bounded variation or called a (globally) BV function over $[a,b]$ iff $V_a^b(f)$ is finite.
-
-$f$ is called of locally bounded variation or called a locally BV function over an open interval $(a,b)$ iff $V_c^d(f)$ is finite for all $[c,d]\in (a,b)$.
-
-The space of all (globally) BV functions over $[a,b]$ is denoted as $\operatorname{BV}([a,b])$. The space of all locally BV functions over $(a,b)$ is denoted as
-\[\operatorname{BV}_{\tx{loc}}((a,b)).\]
-
-If $f$ is monotone on $[a,b]$, it is BV over $[a,b]$.
-\subsubsection{Of real fields}
-PLACEHOLDER
-\subsubsection{In measure theory}
-PLACEHOLDER
-\subsubsection{Space of BV functions}
-PLACEHOLDER (is a Banach space)
-\subsubsection{Mesure induced by function}
-For a BV function $g\colon(a,b)\subseteq\bbR\to\bbR$, the signed measure $\mu_g(x)$ induced by $g$, is defined for any interval $(c,d)\subseteq (a,b)$, as
-\[\mu_g((c,d))=g(d)-g(c).\]
-If $g$ is non-decreasing, then $\mu_g$ is non-negative. If $g$ is non-increasing, then $\mu_g$ is non-positive.
-\subsubsection{Function induced by measure}
-For a signed measure $\mu$ defined on any measurable set $I$ that is a subset of an interval $(a,b)$, the function $g$ induced by the measure with respect to $a$ is defined, for any $c\in (a,b)$, as
-\[g(c)=\mu((a,c)).\]
-If $\mu$ is non-positive, $g$ is non-increasing. If $\mu$ is non-negative, $g$ is non-decreasing.
-\subsubsection{Jordan decomposition}
-The Jordan decomposition $g^+$ and $g^-$, which are non-decreasing, of a BV function $g$ is defined as the functions induced by the Jordan decomposition $\mu^+$ and $\mu^-$ of the signed measure $\mu_g$ induced by $g$.
 \subsection{Lebesgue–Stieltjes integral}
 \subsubsection{Definition}
 Below, we will define the Lebesgue–Stieltjes integral of a function $f\colon X\subseteq\bbR\to\bbR$ over a BV function $g\colon Y\subseteq\bbR\to\bbR$ over an interval $[a,b]\subseteq (X\cap Y)$, denoted as

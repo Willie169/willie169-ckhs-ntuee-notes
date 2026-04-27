@@ -167,9 +167,11 @@ Define
 Quantile $Q(p)$ is the inverse of CDF, that is,
 \[P(X\le Q(p))=p.\]
 \sssc{Discrete random variable}
-A discrete random variable is a real random variable with a countable sample space.
+A discrete random variable is a real random variable such that there exists a countable subset $A$ of sample space such that $P(A)=1$.
 \sssc{Continuous random variable}
 A continuous random variable is a real random variable with continuous CDF.
+\sssc{Absolutely continuous random variable}
+A continuous random variable is a real random variable with absolutely continuous CDF. Absolutely continuous random variable is often mistakenly written as continuous random variable in textbooks.
 \sssc{Simple random variable}
 A simple random variable is a discrete random variable $X$ such that there exist a finite partition $\{A_1,\ldots,A_n\}$ of source sample space $\Omega$ such that $X=\sum_{i=1}^na_i\mb{1}_{A_i}$ where $a_i$ are real numbers and $\mb{1}_{A_i}$ is the indicator function of $A_i$, that is,
 \[\mb{1}_{A_i}(\omega)=\bcs1,\quad&\omega\in A_i\\0,\quad&\omega\notin A_i\ecs.\]
@@ -183,10 +185,10 @@ For a discrete random variable $X$ with target sample space $\Omega_t=\{a_1,a_2,
 \[p_X(a_i)=P(X=a_i)\]
 for each $a_i\in\Omega_t$.
 
-It has the following properties:
+That the PMF of $X$ is $p$ is denoted as $X\sim p$.
+\sssc{Properties of PMF}
 \[p_X(a_i)\ge 0,\quad\forall a_i\in\Omega_t.\]
 \[\sum_{a_i\in\Omega_t}p_X(a_i)=1.\]
-That the PMF of $X$ is $p$ is denoted as $X\sim p$.
 \sssc{PMF determines CDF}
 For a discrete random variable $X$ with PMF $p_X$, the CDF $F_X$ can be expressed in terms of the PMF as
 \[F_X(x)=\sum_{a_i\le x}p_X(a_i)\]
@@ -198,22 +200,30 @@ Given a sample space $(x_0,x_1,x_2,\ldots,x_k)$, each point $(p_0,p_1,\ldots,p_k
 \[\{(p_0,p_1,\ldots,p_k)\mid\sum_{i=0}^kp_i=1\}\]
 corresponds to the PMF $p$ defined as
 \[p(x_i)=p_i,\quad i\in[0,k]\cap\bbZ.\]
-\ssc{Continuous Random Variables}
+\ssc{Absolutely Continuous Random Variables}
 \sssc{Probability density function (PDF)}
-For a continuous random variable $X$, the probability density function of $X$, denoted as $f_X$, is defined as
-\[f_X(x)=\dv{}{x}F_X(x)\]
-for all $x$ such that RHS exists.
+For an absolutely continuous random variable $X$, the probability density function of $X$, denoted as $f_X$, is defined as
+\[f_X(x)=\dv{}{x}F_X(x),\]
+and for those points at which $F_X$ is not differentiable, arbitrary real number value.
 
-It has the following properties:
+Since $F_X$ is absolutely continuous, it is differentiable a.e., and for all $f_X,g_X$ such that
+\[\int_{-\infty}^xf_X(t)\dd{t}=\int_{-\infty}^xg_X(t)\dd{t}=F_X(x),\]
+we have
+\[f_X(x)=g_X(x)\]
+a.e., and
+\[f_X(x)=F_X'(x)\]
+a.e.
+
+That the PDF of $X$ is $p$ is denoted as $X\sim p$.
+\sssc{Properties of PDF}
 \[f_X(x)\ge 0.\]
 \[\int_{-\infty}^{\infty}f_X(x)\dd{x}=1.\]
-That the PDF of $X$ is $p$ is denoted as $X\sim p$.
 \sssc{PDF determines CDF}
-For a continuous random variable $X$ with PDF $f_X$, the CDF $F_X$ can be expressed in terms of the PMF as
+For an absolutely continuous random variable $X$ with PDF $f_X$, the CDF $F_X$ can be expressed in terms of the PMF as
 \[F_X(x)=\int_{-\infty}^xf_x(t)\dd{t}\]
 for all $x\in\bbR$.
 \sssc{Support}
-The support of a discrete random variable is the support of the PDF.
+The support of an absolutely continuous random variable is the support of the PDF.
 \ssc{Sum random variable}
 \sssc{General case}
 For two independent real random variables $X,Y$ with the same source sample space and event space, and with pushforward probability measure $P_X$ and $P_Y$ respectively, let the Schwartz distributions induced by $P_X$ and $P_Y$ be $T_X$ and $T_Y$ respectively. Then the Schwartz distribution $T_{X+Y}$ induced by the pushforward probability measure $P_{X+Y}$ of the sum random variable $X+Y$ is the distributional convolution of $T_1$ and $T_2$, that is,
@@ -221,8 +231,8 @@ For two independent real random variables $X,Y$ with the same source sample spac
 \sssc{For discrete random variables}
 For two independent discrete random variables $X,Y$,
 \[p_{X+Y}(z)=\sum_{x\in\bbR}p_X(x)p_Y(z-x).\]
-\sssc{Sum of independent continuous random variables}
-For two independent continuous random variables $X,Y$,
+\sssc{Sum of independent absolutely continuous random variables}
+For two independent absolutely continuous random variables $X,Y$,
 \[f_{X+Y}(z)=\int_{-\infty}^{\infty}f_X(x)f_Y(z-x)\dd{x}.\]
 \ssc{Conditional Probability (條件機率)}
 \sssc{Conditional probability}
@@ -238,8 +248,8 @@ For a real random variable $X$ and an event $A\subseteq X(\Omega)$ such that $P(
 \sssc{Conditional PMF of discrete random variable}
 For a discrete random variable $X$ and an event $A\subseteq X(\Omega)$ such that $P(A)>0$, the conditional PMF of $X$ given $A$ follows
 \[p_{X|A}(x)=P(X=x|A)=\frac{P(X=x,A)}{P(A)}=\frac{P(X=x)\cdot\mb{1}_A(x)}{P(A)},\quad\forall x\in\bbR.\]
-\sssc{Conditional PDF of continuous random variable}
-For a continuous random variable $X$ and an event $A\subseteq X(\Omega)$ such that $P(A)>0$, the conditional PDF of $X$ given $A$ follows
+\sssc{Conditional PDF of absolutely continuous random variable}
+For an absolutely continuous random variable $X$ and an event $A\subseteq X(\Omega)$ such that $P(A)>0$, the conditional PDF of $X$ given $A$ follows
 \[f_{X|A}(x)=\dv{}{x}F_{x|A}(x)=\dv{}{x}(\frac{P(X\le x,A)}{P(A)})=\frac{f_X(x)\cdot\mb{1}_A(x)}{P(A)},\quad\forall x\in\bbR.\]
 \ssc{Conditional probability laws}
 \sssc{Law of multiplication}
@@ -253,34 +263,80 @@ Let $(A_i)_{i=1}^n\subseteq\calF$ be a partition, and $B$ be an event. Then
 \[P(B)=\sum_{i=1}^nP(A_i\cap B)=\sum_{i=1}^nP(B|A_i)P(A_i).\]
 Let $X$ be a discrete random variable. Then
 \[p_X(x)=\sum_{i=1}^np_{X|A_i}(x)P(A_i).\]
-Let $X$ be a continuous random variable. Then
+Let $X$ be an absolutely continuous random variable. Then
 \[f_X(x)=\sum_{i=1}^nf_{X|A_i}(x)P(A_i).\]
 \sssc{Bayes' theorem (貝葉斯定理或貝氏定理)}
 Let $(A_i)_{i=1}^n\subseteq\calF$ be a partition, and $B$ be an event. Then,
 \[P\qty(A_k\mid B)=\frac{P\qty(B|A_k)P(A_k)}{\sum_{i=1}^nP\qty(B\mid A_i)P(A_i)}.\]
-\ssc{Multivariate or joint random variable}
+\ssc{Multivariate random variable, joint random variable, or randm vector}
 \sssc{Definition}
-For $n$ real random variables $X_1,X_2,\ldots,X_n$ with the same source sample space $\Omega$ and event space $\calF$, the multivariate or joint random variable $X_1,X_2,\ldots,X_n$ is defined for all $\omega\in\Omega^n$ as
-\[X_1,X_2,\ldots,X_n(\omega)=(X_1(\omega),X_2(\omega),\ldots,X_n(\omega)).\]
-\sssc{Cumulative distribution function (CDF)}
-For $n$ real random variables $X_1,X_2,\ldots,X_n$ with the same source sample space $\Omega$ and event space $\calF$,
-\[F_{X_1,X_2,\ldots,X_n}(x_1,x_2,\ldots,x_n)=P(X_1\le x_1,X_2\le x_2,\ldots,X_n\le x_n).\]
-$X_1,X_2,\ldots,X_n$ are independent iff
-\[F_{X_1,X_2,\ldots,X_n}(x_1,x_2,\ldots,x_n)=\prod_{i=1}^nF_{X_i}(x_i).\]
-\sssc{Probability mass function (PMF)}
-For discrete random variables $X_1,X_2,\ldots,X_n$ with the same source sample space $\Omega$ and event space $\calF$,
+For $d$ real random variables $X_1,\ldots,X_d$ with source sample spaces $\Omega_1,\ldots,\Omega_d$ and source event spaces $\calF_1,\ldots,\calF_d$, the multivariate random variable, joint random variable, or random vector $X=(X_1,\ldots,X_d)$ has source sample space $\Omega=\prod_{i=1}^d\Omega_i$ and source event space $\calF=\prod_{i=1}^d\calF_i$ and is defined for all $\omega=(\omega_1,\ldots,\omega_d)\in\Omega$ as
+\[X(\omega)=(X_1(\omega_1),\ldots,X_d(\omega_d)).\]
+For $\calF_1,\ldots,\calF_d=\calB(\bbR)$, $\calF=\calB(\bbR^d)$.
+\sssc{(Joint) cumulative distribution function (CDF)}
+\[F_X(x_1,\ldots,x_d)=P(X_1\le x_1,\ldots,X_d\le x_d),\]
+where $,$ denotes logical AND.
+\sssc{Properties of CDF}
+\bit
+\item
+\[0\le F_X(x_1,\ldots,x_d)\le 1\]
+\item For events $(a_1,\ldots,a_d)$ and $(b_1,\ldots,b_d)$ with $a_i\le b_i$ for $i\in\bbZ\cap[1,d]$,
+\[F_X(a_1,\ldots,a_d)\le F_X(b_1,\ldots,b_d).\]
+\item
+\[\lim_{(x_1,\ldots,x_d)\to(\infty,\ldots,\infty)}F_X(x_1,\ldots,x_d)=1\]
+\item For any $i\in\bbZ\cap[1,d]$,
+\[\lim_{x_i\to-\infty}F_X(x_1,\ldots,x_d)=0.\]
+\item Right-continuity:
+\[\lim_{x_1\to a_1^{\pht{1}+},\ldots,x_d\to a_d^{\pht{d}+}}F_X(x_1,\ldots,x_d)=F_X(a_1,\ldots,a_d)\]
+\item $X_1,\ldots,X_d$ are independent iff
+\[F_X(x_1,\ldots,x_d)=\prod_{i=1}^dF_{X_i}(x_i).\]
+\eit
+\sssc{Marginal CDF}
+The marginal CDF of the sub-vector $Y=(X_{i1},\ldots,X_{ik})$ is defined as
 \[\ba
-p_{X_1,X_2,\ldots,X_n}(x_1,x_2,\ldots,x_n)&=P(X_1=x_1,X_2=x_2,\ldots,X_n=x_n)\\
-&=P(X_1=x_1)\cdot P(X_2=x_2\mid X_1=x_1)\cdot P(X_3=x_3\mid X_1=x_1,X_2=x_2)\cdot\\
-&\ldots\cdot P(X_n=x_n\mid X_1=x_1,X_2=x_2\ldots X_{n-1}=x_{n-1})
+F_Y(x_{i1},\ldots,x_{ik})=&P(X_{i1}\le x_{i1},\ldots,X_{ik}\le x_{ik})\\
+=&\lim_{\forall j\in\bbZ\cap[1,d]\setminus\{i_l\colon l\in[1,k]\}\colon x_j\to\infty}F_X(x_1,\ldots,x_d)
 \ea\]
-If $X_1,X_2,\ldots,X_n$ are independent
-\[p_{X_1,X_2,\ldots,X_n}(x_1,x_2,\ldots,x_n)=\prod_{i=1}^np_{X_i}(x_i).\]
-\sssc{Probability density function (PDF)}
-For continuous random variables $X_1,X_2,\ldots,X_n$ with the same source sample space $\Omega$ and event space $\calF$,
-\[f_{X_1,X_2,\ldots,X_n}(x_1,x_2,\ldots,x_n)=\frac{\partial^nF_{X_1,X_2,\ldots,X_n}(x_1,x_2,\ldots,x_n)}{\partial x_1\partial x_2\ldots\partial x_n}.\]
-If $X_1,X_2,\ldots,X_n$ are independent
-\[f_{X_1,X_2,\ldots,X_n}(x_1,x_2,\ldots,x_n)=\prod_{i=1}^nf_{X_i}(x_i).\]
+\ssc{Discrete random vector}
+\sssc{Discrete random vector}
+A random vector of discrete random variables.
+\sssc{(Joint) probability mass function (PMF)}
+\[\ba
+p_X(x_1,\ldots,x_d)&=P(X_1=x_1,\ldots,X_d=x_d)\\
+&=P(X_1=x_1)\cdot P(X_2=x_2\mid X_1=x_1)\cdot P(X_3=x_3\mid X_1=x_1,X_2=x_2)\cdot\\
+&\ldots\cdot P(X_d=x_d\mid X_1=x_1,X_2=x_2\ldots X_{d-1}=x_{d-1})
+\ea\]
+\sssc{Properties of discrete random vector}
+\bit
+\item Let target sample space be $A$ and $B\subseteq A$.
+\[P(X\in B)=\sum_{x\in B}p_X(x).\]
+\item $X_1,\ldots,X_d$ are independent iff
+\[p_X(x_1,\ldots,x_d)=\prod_{i=1}^dp_{X_i}(x_i).\]
+\eit
+\sssc{Marginal PMF}
+The marginal PMF of the sub-vector $Y=(X_{i1},\ldots,X_{ik})$ is defined as
+\[\ba
+p_Y(x_{i1},\ldots,x_{ik})=&P(X_{i1}=x_{i1},\ldots,X_{ik}=x_{ik})\\
+=&\sum_{\forall j\in\bbZ\cap[1,d]\setminus\{i_l\colon l\in[1,k]\}\colon x_j}p_X(x_1,\ldots,x_d)
+\ea\]
+\ssc{Absolutely Continuous Random Vector}
+\sssc{Absolutely continuous random vector}
+A random vector of absolutely continuous random variables.
+\sssc{(Joint) probability density function (PDF)}
+\[f_X(x_1,\ldots,x_d)=\frac{\partial^nF_X(x_1,\ldots,x_d)}{\partial x_1\ldots\partial x_d}.\]
+\sssc{Properties of discrete random vector}
+\bit
+\item Let target sample space be $A$ and $B\subseteq A$.
+\[P(X\in B)=\int_Bf(x_1,\ldots,x_d)\dd{x_1}\ldots\dd{x_d}.\]
+\item $X_1,\ldots,X_d$ are independent iff
+\[f_X(x_1,\ldots,x_d)=\prod_{i=1}^df_{X_i}(x_i).\]
+\eit
+\sssc{Marginal PDF}
+For the sub-vector $Y=(X_{i1},\ldots,X_{ik})$, suppose marginal CDF of it is $F_Y(x_{i1},\ldots,x_{ik})$, the marginal PDF is defined as
+\[\ba
+f_Y(X_{i1},\ldots,X_{ik})(x_{i1},\ldots,x_{ik})=&\frac{\partial^nF_Y(x_{i1},\ldots,x_{ik})}{\partial x_{i1}\ldots\partial x_{ik}}\\
+=&\int_{-\infty}^{\infty}\ldots\int_{-\infty}^{\infty}f_X(x_1,\ldots,x_d)\prod_{j\in\bbZ\cap[1,d]\setminus\{i_l\colon l\in[1,k]}\dd{x_j}
+\ea\]
 \ssc{Discrete to continuous limit}
 We say a sequence or net $\langle X_n\rangle$ of discrete random variables converge to a continuous random variable $X$ if $F_{X_n}$ converges pointwise to $F_X$.
 \ssc{(Mathematical) Expected Value, Expectation (期望值), or Mean (平均值)}
@@ -299,8 +355,8 @@ if $\Omega_t$ is a finite set or $\Omega_t$ is a countably infinite set and
 is convergent, and doesn't exist if $\Omega_t$ is a countably infinite set and
 \[\sum_{x\in\Omega_t}\abs{x}p_X(x)\]
 is divergent.
-\sssc{For continuous random variable}
-For a continuous random variable $X$ with probability density function $f_X(x)$, the expected value or expectation $E(X)$, $\bbE(X)$, $E[X]$, or $\bbE[X]$, or mean $\mu_X$, of it is
+\sssc{For absolutely continuous random variable}
+For an absolutely continuous random variable $X$ with probability density function $f_X(x)$, the expected value or expectation $E(X)$, $\bbE(X)$, $E[X]$, or $\bbE[X]$, or mean $\mu_X$, of it is
 \[E(X)=\int_{-\infty}^{\infty}xf_X(x)\dd{x}\]
 if it converges absolutely.
 \sssc{Derived random variable theorem}
@@ -442,8 +498,8 @@ For indexed families of real random variables $(X_i)_{i\in I}$ and real numbers 
 For a discrete random variable $X$ with PMF $p_X(x)$, $\Mode(X)$ is defined as
 \[\Mode(X)=\arg\max_xp_X(x),\]
 which is not necessarily unique.
-\sssc{For continuous random variable}
-For a continuous random variable $X$ with PDF $f_X(x)$, $\Mode(X)$ is defined as
+\sssc{For absolutely continuous random variable}
+For an absolutely continuous random variable $X$ with PDF $f_X(x)$, $\Mode(X)$ is defined as
 \[\Mode(X)=\arg\max_xf_X(x),\]
 which is not necessarily unique.
 \sssc{Affine Transformation}
@@ -492,13 +548,13 @@ Thus when $m=n$, $H(X)$ has maximum, and $p_i=\frac{1}{n}$, and
 \sssc{Affine Transformation}
 For a discrete random variable $X$, $a\in\bbR_{\neq0}$, and $b\in\mathbb{R}$,
 \[H(aX+b)=\begin{cases}H(X),\quad &a\neq 0\\0,\quad &a=0\end{cases}.\]
-\ssc{(Differential or continuous) entropy for continuous random variables}
+\ssc{(Differential or continuous) entropy for absolutely continuous random variables}
 \sssc{Definition}
-For a continuous random variable $X$ with target sample space $\Omega$ and PDF $f_X(x)$, the (differential or continuous) entropy $h(X)$ or $H(X)$ of base $b$ is defined as
+For an absolutely continuous random variable $X$ with target sample space $\Omega$ and PDF $f_X(x)$, the (differential or continuous) entropy $h(X)$ or $H(X)$ of base $b$ is defined as
 \[h(X)=E(-\log_b(f_X(x)))=-\int_{\Omega}f(x)\log_b(f(x))\dd{x},\]
 where base $b=2$ gives the unit of bits or shannons, base $b=e$ gives natural units or nat, and base $b=10$ gives the unit of dits, bans, or hartleys. When not specified, $b=e$ is used. Differential entropy can be positive.
 \sssc{Affine Transformation}
-For a continuous random variable $X$, $a\in\bbR_{\neq0}$, and $b\in\mathbb{R}$,
+For an absolutely continuous random variable $X$, $a\in\bbR_{\neq0}$, and $b\in\mathbb{R}$,
 \[h(Y)=h(X)+\log|a|.\]
 \subsection{Families of Discrete Random Variables}
 \sssc{Discrete uniform random variable}
@@ -891,7 +947,7 @@ For any fixed $\lambda\in(0,\infty)$, let $X\sim\operatorname{Pois}(\lambda)$ an
 &=\frac{\lambda^ke^{-\lambda}}{k!}
 \ea\]
 \epr
-\ssc{Families of Continuous Random Variables}
+\ssc{Families of Absolutely Continuous Random Variables}
 \sssc{Continuous or rectangular uniform random variable}
 \bit
 \item Notation: $X\sim\calU_{[a,b]}$, $X\sim\operatorname{Unif}(a,b)$, or $X\sim\operatorname{Uniform}(a,b)$, read as $X$ is continuously or rectangularly uniform distributed with parameters $a$ and $b$
