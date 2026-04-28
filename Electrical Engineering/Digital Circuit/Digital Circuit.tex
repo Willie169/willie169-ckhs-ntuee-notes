@@ -264,13 +264,15 @@ NIMPLY gate & \cktus{and gate}{ni} & \cktiec{and gate}{ni} & NIMPLY \\\hline
 
 Sometimes multiple (typically two) outputs are drawn on a gate with some of them (typically one of the two) with inversion bubble. This is logically equivalent to drawing one gate of that type for each of the noninverted or inverted outputs with the same input lines.
 \sssc{Fan-ins}
-The maximum number of inputs to a gate is called the fan-in of the gate.
+The maximum or actual number of inputs to a device is called the fan-in or fanin.
 
 An AND, OR, NAND, NOR, XOR, or XNOR gate with $n$ inputs or fan-in $n$ is sometimes called with suffix $n$, e.g. NAND2 gate is a NAND gate with 2 inputs or fan-in 2.
 
 An AND, OR, NAND, NOR, XOR, or XNOR gate without fan-in specified is sometimes assumed to have fan-in 2.
 
 The fan-in of a practical logic gate is limited and may be two, three, four, eight, or some other number depending on the type of gates used.
+\sssc{Fan-out}
+The maximum or actual number of inputs driven by a device's output is called the fan-out or fanout.
 \sssc{Buffer}
 A gate output can only be connected to a limited number of other device inputs without degrading the performance of a digital system. A simple buffer may be used to increase the driving capability of a gate output.
 \ssc{Digital circuit}
@@ -727,6 +729,17 @@ For carry-skip adder with fixed block size, say $s$ bit, and thus $b=\frac{n}{s}
 the optimal worst-case time complexity is $O(\sqrt{n})$, and such adder is of block size $\sqrt{\frac{n}{2}}$ bits.
 
 The speed can be further increased by making middle blocks larger than end blocks.
+\sssc{Parallel prefix adder (PPA)}
+Parallel prefix adders are a class of adders consist of three stages, preprocessing, prefix network, and postprocessing. For an $n$-bit parallel prefix adder adding operands $A_0A_1\ldots B_{n-1}$ and $B_0B_1\ldots B_{n-1}$, preprocessing stage computes generate $G_i=A_i\cdot B_i$ and propagate $P_i=A_i\oplus B_i$ for each bit, and then a prefix operation $\circ$ is defined as
+\[(G_k,P_k)\circ (G_j,P_j)=(G_k+P_kG_j,P_kP_j),\]
+which is associative, and the prefix network starts with $n$ roots, $(G_0,P_0)$ to $(G_{n-1},P_{n-1})$, to compute $n$ goals,
+\[(G_i^*,P_i^*)\coloneq\bigcirc_{j=0}^i(G_{i-j},P_{i-j})\]
+for all $i\in\bbZ\cap[0,n-1]$, where $C_{i+1}=G_i^*+P_i^*C_0$, each route from $(G_i,P_i)$ to $(G_i^*,P_i^*)$ for all $i\in\bbZ\cap[0,n-1]$ is hereafter called the $i$ span, and the data in the $i$ span is hereafter denoted $(g_i,p_i)$, and finally, the postprocessing stage computes $S_i=P_i\oplus C_i$ for all $i\in\bbZ\cap[0,n-1]$. For $i\ne j$, that the $j$ span is combined with $i$ span means the $j$ span is replaced with $(g_j,p_j)\circ(g_i,p_i)$ and the $i$ span is unchanged. This class of adder has time complexity $O(\log n)$, which is optimal. Different designs differ in the prefix network stage and can be different in area, wiring complexity, and fan-out.
+\sssc{Kogge-Stone adder (KSA or KS)}
+Kogge-Stone adder is a type of parallel prefix adder optimized for minimum logic depth, i.e., shortest combinational path, and has fan-out of 2, but with larger area and wiring complexity. The prefix network of it consists of $\lceil\log_2(n)\rceil$ stages. For all $i\in[0,\lceil\log_2(n)\rceil-1]$, in the $(i+1)$th stage, for $j\in\bbZ\cap[i+1,n-1]$, the $j$ span is combined with the $(j-2^i)$ span.
+\sssc{Brent-Kung adder (BKA or BK)}
+Brent-Kung adder is a type of parallel prefix adder with smaller area and wiring complexity than Kogge-Stone adder but longer logic depth. The prefix network of it is split into reduction phase or up-sweep phase, with $\lceil\log_2(n)\rceil$ stages, and distribution phase or down-sweep phase, with $\lceil\log_2(n)\rceil-1$ stages, which are $2\lceil\log_2(n)\rceil-1$ stages in total. Suppose $n=2^k$. For all $i\in\bbZ\cap[1,k]$, in the $i$th stage of reduction phase, for all $j\in\bbZ\cap[1,2^{k-i}]$, the $j*2^i-1$ span is combined with the $j*2^i-2^{i-1}-1$ span. For all $i\in\bbZ\cap[1,k-1]$, in the $i$th stage of distribution phase, for all $j\in\bbZ\cap[1,2^i-1]$, the $j*2^{k-i}+2^{k-i-1}-1$ span is combined with $j*2^{k-i}-1$ span.
+PLACEHOLDER
 \sssc{Decoders}
 A decoder is a combinational circuit that converts binary input codes into a single active output line. An $n$-to-$2^n$ decoder has $n$ input signals and $2^n$ output signals realizing a one-to-one Boolean vector function $\{0,1\}^n\to\{0,1\}^{2^n}$ that map each input combination to an output vector of which the 1-norm is $1$ (noninverted/active-high outputs) or $2^n-1$ (inverted/active-low outputs).
 
@@ -758,7 +771,8 @@ However, the left end cell (cell $n-1$) has no input $gt_n$ and $lt_n$, and
 \[gt_{n-1}=A_iB_{n-1}',\]
 \[lt_{n-1}=A_i'B_{n-1}.\]
 Comparison proceeds from left to right, $gt=gt_0$, $lt=lt_0$, and $eq=gt\odot lt$.
-\ssc{Read-only memory (ROM)}
+\ssc{Devices}
+\sssc{Read-only memory (ROM)}
 A read-only memory (ROM) is a non-volatile (data is kept even when power is off) memory consists of an array of semiconductor devices that are interconnected to store an array of binary data. Once binary data is stored in the ROM, it can be read out whenever desired, but the data that is stored cannot be changed under normal operating conditions.
 
 A $k$(-word)$\times m$-bit ROM has $n=\lceil\log_2k\rceil$ input lines and $m$ output lines, and contains an array of $k$ words, each word of width $m$ bits, where $k$ often equals $2^n$. An input combination serves as an address to select one of the $k$ words and output it from the ROM, that is, $m$ $n$-variable functions are stored in it.. Typical sizes for commercially available ROMs range from 32 words $\times$ 4 bits to 512K words $\times$ 8 bits, or larger.
@@ -793,7 +807,7 @@ QLC (Quad-Level Cell) & 4 & Denser, slower, less endurable \\\hline
 \end{longtable}
 Flash memories usually have built-in programming and erase capability so that data can be written to the flash memory while it is in place in a circuit without the need for a separate programmer.
 \eit
-\ssc{Programmable Logic Devices (PLDs)}
+\sssc{Programmable Logic Devices (PLDs)}
 A programmable logic device (PLD) is a general name for a digital integrated circuit capable of being programmed to provide a variety of different logic function. Simple combinational PLDs are capable of realizing from 2 to 10 functions of 4 to 16 variables with a single integrated circuit. More complex sequential PLDs may contain thousands of gates and flip-flops. When a digital system is designed using a PLD, changes in the design can easily be made by changing the programming of the PLD without having to change the wiring in the system, which leads to lower cost designs.
 \sssc{Programmable Logic Arrays (PLAs)}
 A programmable logic array (PLA) performs the same basic function as a ROM. However, the internal organization of the PLA is different from that of the ROM. The decoder is replaced with an AND array which realizes selected product terms of the input variables. The OR array ORs together the product terms needed to form the output functions, so a PLA implements a sum-of-products expression, while a ROM directly implements a truth table. Product terms are formed in the AND array by connecting diodes as switching elements at appropriate points in the array. Outputs are formed in the OR array by connecting diodes as switching elements at appropriate points in the array.
