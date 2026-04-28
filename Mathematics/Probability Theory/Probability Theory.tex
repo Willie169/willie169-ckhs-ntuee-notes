@@ -170,15 +170,27 @@ Quantile $Q(p)$ is the inverse of CDF, that is,
 A discrete random variable is a real random variable such that there exists a countable subset $A$ of sample space such that $P(A)=1$.
 \sssc{Continuous random variable}
 A continuous random variable is a real random variable with continuous CDF.
+\sssc{Properties of continuous random variable}
+For all $\omega\in\Omega_t$,
+\[P(X=\omega)=0.\]
 \sssc{Absolutely continuous random variable}
-A continuous random variable is a real random variable with absolutely continuous CDF. Absolutely continuous random variable is often mistakenly written as continuous random variable in textbooks.
+A continuous random variable is a real random variable with absolutely continuous CDF. Absolutely continuous random variable is often mistakenly written as continuous random variable, even in many textbooks.
+\sssc{Mixed random variable}
+A mixed random variable is a real random variable $X$ whose CDF $F_X$ is
+\[pF_Y+(1-p)F_Z\]
+for some $p\in(0,1)$, discrete random variable $Y$, and absolutely continuous random variable $Z$.
+\sssc{Singular random variable}
+A singular random variable is a real random variable that is neither discrete random variable, continuous random variable, nor mixed random variable.
 \sssc{Simple random variable}
 A simple random variable is a discrete random variable $X$ such that there exist a finite partition $\{A_1,\ldots,A_n\}$ of source sample space $\Omega$ such that $X=\sum_{i=1}^na_i\mb{1}_{A_i}$ where $a_i$ are real numbers and $\mb{1}_{A_i}$ is the indicator function of $A_i$, that is,
 \[\mb{1}_{A_i}(\omega)=\bcs1,\quad&\omega\in A_i\\0,\quad&\omega\notin A_i\ecs.\]
+\sssc{Decomposition}
+For the CDF $F_X$ of any real random variable $X$, there exist $p\in[0,1]$, $q\in[0,1]$, discrete random variable $Y$, absolutely continuous random variable $Z$, and singular random variable $W$ such that
+\[F_X=pF_Y+qF_z+(1-p-q)F_W.\]
 \sssc{Derived ramdom variable}
 For random variables $X_1,\ldots,X_n$ and an $n$-ary function $f$, a random variable $Y=f(X_1,\ldots,X_n)$ is a derived ramdom variable.
 \sssc{Independent and identically distributed (i.i.d.) random variables}
-Identical random variables that are mutually independent.
+Random variables with identical CDF that are mutually independent.
 \ssc{Discrete Random Variables}
 \sssc{Probability mass function (PMF)}
 For a discrete random variable $X$ with target sample space $\Omega_t=\{a_1,a_2,\ldots\}$, the probability mass function of $X$, denoted as $p_X$ or $P_X$, is defined as
@@ -186,15 +198,17 @@ For a discrete random variable $X$ with target sample space $\Omega_t=\{a_1,a_2,
 for each $a_i\in\Omega_t$.
 
 That the PMF of $X$ is $p$ is denoted as $X\sim p$.
-\sssc{Properties of PMF}
-\[p_X(a_i)\ge 0,\quad\forall a_i\in\Omega_t.\]
-\[\sum_{a_i\in\Omega_t}p_X(a_i)=1.\]
 \sssc{PMF determines CDF}
 For a discrete random variable $X$ with PMF $p_X$, the CDF $F_X$ can be expressed in terms of the PMF as
 \[F_X(x)=\sum_{a_i\le x}p_X(a_i)\]
 for all $x\in\bbR$.
 \sssc{Support}
 The support of a discrete random variable is the support of the PMF.
+\sssc{Properties}
+\[p_X(a_i)\ge 0,\quad\forall a_i\in\Omega_t.\]
+\[\sum_{a_i\in\Omega_t}p_X(a_i)=1.\]
+\[P(X\in A)=\sum_{a_i\in A}p_X(a_i),\quad A\subseteq\Omega_t.\]
+\[\dv{F_X}{x}=0\quad\tx{a.e.}.\]
 \sssc{Probability simplex}
 Given a sample space $(x_0,x_1,x_2,\ldots,x_k)$, each point $(p_0,p_1,\ldots,p_k)$ in the probability $k$-simplex
 \[\{(p_0,p_1,\ldots,p_k)\mid\sum_{i=0}^kp_i=1\}\]
@@ -215,15 +229,47 @@ a.e., and
 a.e.
 
 That the PDF of $X$ is $p$ is denoted as $X\sim p$.
-\sssc{Properties of PDF}
-\[f_X(x)\ge 0.\]
-\[\int_{-\infty}^{\infty}f_X(x)\dd{x}=1.\]
 \sssc{PDF determines CDF}
 For an absolutely continuous random variable $X$ with PDF $f_X$, the CDF $F_X$ can be expressed in terms of the PMF as
 \[F_X(x)=\int_{-\infty}^xf_x(t)\dd{t}\]
 for all $x\in\bbR$.
 \sssc{Support}
 The support of an absolutely continuous random variable is the support of the PDF.
+\sssc{Properties}
+\[f_X(x)\ge 0.\]
+\[\int_{-\infty}^{\infty}f_X(x)\dd{x}=1.\]
+\[P(a\le X\le b)=\int_a^bf_X(x)\dd{x}\]
+\sssc{Discrete to continuous limit}
+We say a sequence or net $\langle X_n\rangle$ of discrete random variables converge to a continuous random variable $X$ if $F_{X_n}$ converges pointwise to $F_X$.
+\ssc{As Schwartz distribution}
+\sssc{CDF as a distribution}
+$F_X$ is bounded and monotone, thus in $L^1_{\tx{loc}}$. So it induces a distribution $T_X$:
+\[\langle T_X,\varphi\rangle=\int_{-\infty}^{\infty}F_X(x)\varphi(x)\dd{x}\]
+\sssc{PDF and probability measure as a distribution}
+PDF as a distribution $t_X=T_F'$, that is,
+\[\langle t_X,\varphi\rangle=-\int_{-\infty}^{\infty}F_X(x)\varphi'(x)\dd{x}\]
+It is the same as the pushforward probability measure $P_t$ of $X$ as a distribution:
+\[-\int_{-\infty}^{\infty}F_X(x)\varphi'(x)\dd{x}=\int_{-\infty}^{\infty}\varphi(x)\dd{P_t(x)}.\]
+\sssc{Absolutely continuous case}
+$t_X$ is the same as $f_X$ as a distribution.
+\sssc{Discrete case}
+\[t_X=\sum_{\omega\in\Omega_t}p_X(\omega)\delta_{\omega}\]
+\sssc{Mixed case}
+Suppose
+\[pF_Y+(1-p)F_Z\]
+for some $p\in(0,1)$, discrete random variable $Y$, and absolutely continuous random variable $Z$.
+
+PDF as a distribution $t_X$ of $X$ is
+\[t_X=pt_Y+(1-p)t_Z.\]
+\sssc{Properties of impulse}
+Suppose
+\[F_X=pF_Y+qF_z+(1-p-q)F_W\]
+for some $p\in[0,1]$, $q\in[0,1]$, discrete random variable $Y$, absolutely continuous random variable $Z$, and singular random variable $W$. The following statements are equivalent:
+\[P(X=a)=r\]
+\[F_X(a^+)-F_X(a^-)=\frac{r}{p}\land p>0\]
+\[P(Y=a)=pr\]
+\[t_X=r\delta_a+t_V\]
+for some real random variable $V$ with $P(V=a)=0$.
 \ssc{Sum random variable}
 \sssc{General case}
 For two independent real random variables $X,Y$ with the same source sample space and event space, and with pushforward probability measure $P_X$ and $P_Y$ respectively, let the Schwartz distributions induced by $P_X$ and $P_Y$ be $T_X$ and $T_Y$ respectively. Then the Schwartz distribution $T_{X+Y}$ induced by the pushforward probability measure $P_{X+Y}$ of the sum random variable $X+Y$ is the distributional convolution of $T_1$ and $T_2$, that is,
@@ -337,8 +383,6 @@ For the sub-vector $Y=(X_{i1},\ldots,X_{ik})$, suppose marginal CDF of it is $F_
 f_Y(X_{i1},\ldots,X_{ik})(x_{i1},\ldots,x_{ik})=&\frac{\partial^nF_Y(x_{i1},\ldots,x_{ik})}{\partial x_{i1}\ldots\partial x_{ik}}\\
 =&\int_{-\infty}^{\infty}\ldots\int_{-\infty}^{\infty}f_X(x_1,\ldots,x_d)\prod_{j\in\bbZ\cap[1,d]\setminus\{i_l\colon l\in[1,k]}\dd{x_j}
 \ea\]
-\ssc{Discrete to continuous limit}
-We say a sequence or net $\langle X_n\rangle$ of discrete random variables converge to a continuous random variable $X$ if $F_{X_n}$ converges pointwise to $F_X$.
 \ssc{(Mathematical) Expected Value, Expectation (期望值), or Mean (平均值)}
 \sssc{Definition}
 For a random variable $X$ on $(\Omega_s,\calF_s,P_s)$ with induced probability space $(\Omega_t,\calF_t,P_t)$, the expected value or expectation $E(X)$, $\bbE(X)$, $E[X]$, or $\bbE[X]$, or mean $\mu_X$, of it is defined as the Lebesgue integral
@@ -1001,6 +1045,10 @@ h(X)&=-\int_a^b\frac{1}{b-a}\ln(\frac{1}{b-a})\dd{x}\\
 \[cX\sim\operatorname{Unif}(cb,ca),\quad c\in\bbR_{<0}\]
 \item Symmetry: about $\frac{b-a}{2}$
 \item PDF monotonicity: constant
+\item Floor:
+\[\lfloor X\rfloor\sim\calU\{a,b-1\}.\]
+\item Ceiling:
+\[\lceil X\rceil\sim\calU\{a+1,b\}.\]
 \eit
 \sssc{Normal (常態/正態) or Gaussian (高斯) random variable}
 \bit
@@ -1121,6 +1169,15 @@ h(X)&=-\int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}\sigma}\exp(-\frac{(x-\mu)^2}{
 \[cX\sim\calN(c\mu,c\sigma),\quad c\in\bbR_{\neq 0}\]
 \item Symmetry: about $\mu$
 \item PDF monotonicity: strictly increasing for $x\le\mu$ and strictly decreasing for $x\ge\mu$
+\item CCDF:
+\[1-F(x)=F(-x)\]
+\bpr
+\[\ba
+\Phi(-z)+\Phi(z)=&\int_{-\infty}^{-z}\frac{1}{\sqrt{2\pi}}\exp(-\frac{x^2}{2})\dd{x}+\int_{-\infty}^z\frac{1}{\sqrt{2\pi}}\exp(-\frac{x^2}{2})\dd{x}\\
+=&\int_z^{\infty}\frac{1}{\sqrt{2\pi}}\exp(-\frac{x^2}{2})\dd{x}+\int_{-\infty}^z\frac{1}{\sqrt{2\pi}}\exp(-\frac{x^2}{2})\dd{x}\\
+=&1
+\ea\]
+\epr
 \eit
 \sssc{Stein's Lemma}
 Suppose $X\sim N(\mu,\sigma)$ and $g\colon\bbR\to\bbR$ is a differentiable function, and both $E(g(X)(X-\mu))$ and $E(g'(X))$ both exist. Then:
@@ -1139,6 +1196,8 @@ Suppose $X_i\sim N(\mu_i,\sigma)$ for $i\in\bbZ\cap[1,n]$ are independent, $\mb{
 \bpr
 By independency, apply Stein's lemma for each entry.
 \epr
+\sssc{Central limit theorem (CLT)}
+PLACEHOLDER
 \sssc{Exponential random variable}
 \bit
 \item Trial: An exponential random variable models the distance between adjacent events in a Poisson process with rate $\lambda$.
@@ -1227,6 +1286,17 @@ P(\operatorname{Exp}(\lambda)>x)&=1-F_X(x)\\
 \epr
 \item Rates add under minimum: For an index family of i.i.d. random variables $(X_i\sim\operatorname{Exp}(\lambda_i))_{i\in I}$ with $\abs{I}\in\bbN$, if $P(X>x)=P(\min_{i\in I}X_i>x)$, then
 \[X\sim\operatorname{Exp}(\sum_{i\in I}\lambda_i).\]
+\item Ceiling:
+\[\lceil X\rceil\simX\sim\operatorname{Geom}(1-e^{-\lambda}).\]
+\bpr
+\[\ba
+P(k-1<x\le k)=&\int_{k-1}^k\lambda e^{-\lambda x}\dd{x}\\
+=&\evlp(-e^{-\lambda x})_{k-1}^k\\
+=&e^{-\lambda(k-1)}-e^{-\lambda k}\\
+=&e^{-\lambda(k-1)}\qty(1-e^{-\lambda})\\
+=&\qty(1-e^{-\lambda})\qty(e^{-\lambda})^{k-1}
+\ea\]
+\epr
 \eit
 \sssc{Erlang random variable}
 \bit
