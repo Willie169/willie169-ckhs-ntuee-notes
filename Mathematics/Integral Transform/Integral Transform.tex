@@ -10,17 +10,17 @@
 \sct{Integral Transform}
 \ssc{Laplace Transform (拉普拉斯變換)}
 \sssc{Introduction}
-The one-sided or unilateral Laplace transform and two-sided or bilateral Laplace transform, where Laplace tranform may refer to either of them or both of them depending on context and often refer to the former when not clear, are two integral transform that convert a complex-valued signal, often denoted in lowercase such as $f$ or $f(t)$, of a real variable $t$, called time domain, to a complex-valued function, often denoted in uppercase such as $F$ or $F(s)$, as $\mathcal{L}\{f\}$, $\mathcal{L}\{f(t)\}$, $\mathcal{L}\{f\}(s)$, or $\mathcal{L}\{f(t)\}(s)$ for both one-sided and two-sided, or $\mathcal{B}\{f\}$, $\mathcal{B}\{f(t)\}$, $\mathcal{B}\{f\}(s)$, or $\mathcal{B}\{f(t)\}(s)$ for two-sided, of a complex variable $s$, called (complex) frequency domain, (complex) frequency plane, $s$-domain, $s$-plane, Laplace domain, or Laplace plane.
+The one-sided or unilateral Laplace transform and two-sided or bilateral Laplace transform, where Laplace tranform may refer to either of them or both of them depending on context and often refer to the former when not clear, are two integral transform that convert a complex-valued signal, for both one-sided and two-sided, often denoted in lowercase such as $f$ or $f(t)$, of a real variable $t$, called time domain, to a complex-valued function, often denoted in uppercase of the same letter, $F$ or $F(s)$, or as $\mathcal{L}\{f\}$, $\mathcal{L}\{f(t)\}$, $\mathcal{L}\{f\}(s)$, or $\mathcal{L}\{f(t)\}(s)$, and for two-sided, also denoted as $\mathcal{B}\{f\}$, $\mathcal{B}\{f(t)\}$, $\mathcal{B}\{f\}(s)$, or $\mathcal{B}\{f(t)\}(s)$, of a complex variable $s$, called (complex) frequency domain, (complex) frequency plane, $s$-domain, $s$-plane, Laplace domain, or Laplace plane.
 \sssc{Definition}
 Let $R$ be $\bbR_{\geq0}$ for one-sided Laplace transform and $\bbR$ for two-sided Laplace transform.
 
 For any complex-valued (or real-valued) functional $f$ with support on $R$, the Laplace transform is defined as
 \[\int_Re^{-st}f(t)\dd{t},\]
-where convergence of Laplace transform is defined as the finiteness of integral.
+of which convergence is defined as the finiteness of the integral, on the subset of $\bbC$ where it converges.
 
 For any complex-valued (or real-valued) distribution $T\in\mathcal{D}(\bbR)$ with compact support on $R$, the Laplace transform is defined as
 \[\langle T,e^{-st}\rangle,\]
-where Laplace transform is always convergent.
+which is always convergent, on $\bbC$.
 
 Distributions are often denoted in function inside integral notation, notably such as Dirac distribution, but should be interpreted in distributional definition.
 
@@ -29,7 +29,7 @@ Laplace transform and derivative of a sum of functional and distribution in func
 For one-sided Laplace transform:
 \bit
 \item Restriction of functional or distribution on $R$ is represented with the same symbol of the functional or distribution and interpreted as either depending on context.
-\item $\int_0^{\infty}$ is also denoted as $\int_{0^-}^{\infty}$ or $\lim_{\varepsilon\to 0^+}\int_{-\varepsilon}^{\infty}$, and $0$ is also denoted as $0^-$. This is for compatibility of Riemann–Stieltjes integral interpretation of Dirac delta.
+\item $\int_0^{\infty}$ is also denoted as $\int_{0^-}^{\infty}$, i.e., $\lim_{\varepsilon\to 0^+}\int_{-\varepsilon}^{\infty}$, and $0$ as input of a time domain signal is also denoted as $0^-$. This notation is intuitive in Riemann–Stieltjes integral interpretation of Dirac delta.
 \eit
 \sssc{Region of convergence (ROC)}
 The set of values of $s$ for which $F(s)$ converges is called region of convergence (ROC). A function is called Laplace-transformable iff the ROC of its Laplace transform is nonempty.
@@ -425,7 +425,7 @@ The inverse Laplace transform of a complex function $F(s)$, denoted as $\mathcal
 \[\mathcal{L}^{-1}\{F(s)\}(t)=f(t)=\frac{1}{2\pi i}\lim_{T\to\infty}\int_{\gamma-iT}^{\gamma+iT}F(s)e^{st}\dd{s},\]
 where $\gamma$ is any real number such that it is greater than the real parts of all singularities of $F$ and that $F$ is bounded on the line $s=\gamma$.
 
-For any complex-valued functional $f$ defined on $\bbR$ such that $f(t)e^{-\gamma t}\in L^1(\bbR)$, the inverse Laplace transform of the two-sided Laplace transform of $f(t)$, $F(s)$, is equal to $f(t)$ a.e.
+For any complex-valued functional $f$ defined on $\bbR$ such that $f(t)e^{-\gamma t}\in L^1(\bbR)$, the inverse Laplace transform of the two-sided Laplace transform of $f(t)$ is equal to $f(t)$ a.e.
 \begin{proof}
 We want to show that:
 \[f(t)=\frac{1}{2\pi i}\lim_{T\to\infty}\int_{\gamma-iT}^{\gamma+iT}e^{st}\int_{-\infty}^{\infty}f(u)e^{-su}\dd{u}\dd{s}\]
@@ -450,7 +450,7 @@ Let
 &=f(t)
 \ea\]
 \end{proof}
-For any complex-valued functional $f$ defined on $\bbR$ such that $f(t)=0$ for all $\Re(t)<0$ and $f(t)e^{-\gamma t}\in L^1(\bbR_{\geq0})$, the inverse Laplace transform of the one-sided Laplace transform of $f(t)$, $F(s)$, is equal to $f(t)$ a.e.
+For any complex-valued functional $f$ defined on $\bbR$ such that $f(t)=0$ for all $\Re(t)<0$ and $f(t)e^{-\gamma t}\in L^1(\bbR_{\geq0})$, the inverse Laplace transform of the one-sided Laplace transform of $f(t)$ is equal to $f(t)$ a.e.
 
 
 

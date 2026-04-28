@@ -1,0 +1,239 @@
+\documentclass[a4paper,12pt]{article}
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{3}
+\input{/usr/share/LaTeX-ToolKit/template.tex}
+\begin{document}
+\title{Differential Geometry}
+\author{沈威宇}
+\date{\temtoday}
+\titletocdoc
+\sct{Differential Geometry (微分幾何)}
+\ssc{Curve}
+\subsubsection{Definition}
+A (parameterized or parametric) (topological) curve in a topological space $X$ is (the image of) a continuous map $\gamma(t)\colon I\to X$ for some interval $I$, where $t$ is called parameter. $\gamma(t)$ is also called the parametrization of the curve.
+
+If $I=[a,b]$, $\gamma(a)$ is called initial point, and $\gamma(b)$ is called terminal point.
+\subsubsection{Closed curve or loop}
+A curve is closed or is a loop if $I=[a,b]$ and $\gamma(a)=\gamma(b)$.
+
+For $X=\bbR^n$, the equations of each component being equal to a function of $t$ are called parametric equations.
+\subsubsection{Path or arc}
+A curve is a path or an arc if $I$ is closed and bounded.
+\subsubsection{Simple curve}
+A curve is simple if $I=[a,b]$ and for all $s\neq t\in[a,b)$, $\gamma(s)\neq\gamma(t)$.
+\subsubsection{Curve in Enclidean space}
+A plane curve is a curve on a plane. A space curve is a curve in a three-dimensional space.
+
+A Jordan curve is a plane simple closed curve. And the region enclosed by a Jordan curve is called Jordan domain.
+\subsubsection{Orientation}
+Two parameterized curves with same range $\gamma\colon T\to X$ and $\zeta\colon U\to X$ with $T,U$ being intervals, are called of different orientations if there exists $t_1<t_2\in T,u_1<u_2\in U$ such that
+\[\gamma(t_1)=\zeta(u_2)\land\gamma(t_2)=\zeta(u_1)\land\gamma(t_1)\neq\gamma(t_2).\]
+\sssc{Mechanical term}
+The terms in mechanics are sometimes used to describe derivatives of curve, e.g., position $\mb{r}$, velocity $\mb{r}'$, speed $\norm{\mb{r}'}$, acceleration $\mb{r}''$, and jerk or jolt $\mb{r}'''$.
+\ssc{Arc length}
+\sssc{Definition}
+Given a curve $\mb{r}(t)=(x_1(t),x_2(t),\quad,x_n(t)),\quad t\in[a,b]$. Let $P(t,k)$ be a partition of interval $[a,b]$. Define the polygonal length of $\mb{r}$ along $P(t,k)$ as
+\[s(P(t,k))=\sum_{i=1}^k\|\mb{r}(i)-\mb{r}(i-1)\|.\]
+The arc length of the curve is
+\[s=\sup_{P\in\mathcal{P}}s(P),\]
+where $\mathcal{P}$ is the set of all partitions of interval $[a,b]$.
+
+The curve is called rectifiable iff $s$ is finite.
+
+$s$ is finite iff all $x_i(t)$ is of bounded variation.
+\begin{proof}
+"If" direction:
+
+By triangular inequality,
+\[\|\mb{r}(i)-\mb{r}(i-1)\|\leq\sum_{j=1}^n\abs{x_j(i)-x_j(i-1)}.\]
+\[\sum_{i=1}^k\|\mb{r}(i)-\mb{r}(i-1)\|\leq\sum_{i=1}^k\sum_{j=1}^n\abs{x_j(i)-x_j(i-1)}=\sum_{j=1}^n\sum_{i=1}^k\abs{x_j(i)-x_j(i-1)}<\infty.\]
+
+"Only if" direction:
+
+By triangular inequality, for every $j\in\bbN\land j\leq n$,
+\[\abs{x_j(i)-x_j(i-1)}\leq\|\mb{r}(i)-\mb{r}(i-1)\|.\]
+\[\sum_{i=1}^k\abs{x_j(i)-x_j(i-1)}\leq\sum_{i=1}^k\|\mb{r}(i)-\mb{r}(i-1)\|<\infty.\]
+\end{proof}
+
+The arc length (function) of the curve from $a$ is defined a function of $t$ that maps $t\geq a$ to the arc length of $\mb{r}_{[a,t]}$.
+\sssc{For differentiable curve}
+If $\mb{r}$ is differentiable, the arc length from $a$ to $b$ is
+\[s=\int_a^b\|\dv{\mb{r}(t)}{t}\|\dd{t}.\]
+It's often useful and in some context assumed to parameterize a curve w.r.t. its arc length.
+\subsubsection{Surface of revolution}
+In $\bbR^n$, the area of the surface formed by rotating the curve $\mb{r}(t),\quad t\in[a,b]$ about a rotational axis $\mb{P}+\mb{k}u,\quad u\in\bbR$ with $\|\mb{k}\|=1$ is
+\[A=2\pi\int_{t=a}^b\norm{\mb{r}(t)-\mb{P}-\qty(\mb{k}\cdot\qty(\mb{r}(t)-\mb{P}))\mb{k}}\dd{s(t)},\]
+where $s(t)$ is the arc length function of $\mb{r}(t)$ from $a$ to $t$.
+
+The area is called rectifiable iff $A$ is finite.
+
+$A$ is finite if all components of $\mb{r}$ are all of bounded variation.
+\ssc{Tangent, normal, binormal, curvature, and torsion}
+\subsubsection{(Unit) tangent (vector)}
+The unit tangent vector of a curve $\mb{r}$ at $t$ is
+\[\mb{T}=\hat{\mb{r}'}=\frac{\mb{r}'}{\abs{\mb{r}'}}.\]
+\subsubsection{(Principal/unit) normal (vector)}
+\[\mb{N}=\hat{\mb{T}'}=\frac{\mb{T}'}{\abs{\mb{T}'}}.\]
+\[\mb{T}\cdot\mb{N}=0.\]
+\[\ba
+\mb{N}&=\frac{\norm{\mb{r}'}^2\mb{r}''-\qty(\mb{r}''\cdot\mb{r}')\mb{r}'}{\norm{\norm{\mb{r}'}^2\mb{r}''-\qty(\mb{r}''\cdot\mb{r}')\mb{r}'}}\\
+&=\hat{\mb{r}''_{\perp\mb{r}'}}\\
+&=\frac{\mb{r}''-(\mb{r}''\cdot\mb{T})\mb{T}}{\norm{\mb{r}''-(\mb{r}''\cdot\mb{T})\mb{T}}}
+\ea\]
+In three dimensions,
+\[\mb{N}=\frac{\qty(\mb{r}'\times\mb{r}'')\times\mb{r}'}{\norm{\qty(\mb{r}'\times\mb{r}'')\times\mb{r}'}}\]
+In two dimensions, $\mb{N}$ is $\frac{\pi}{2}$ counterclockwise rotated from $\mb{T}$ if $x'y''-x''y'>0$, and $\mb{N}$ is $\frac{\pi}{2}$ clockwise rotated from $\mb{T}$ if $x'y''-x''y'<0$.
+\bpr
+\[\ba
+T'&=\dv{}{t}\qty(\frac{\mb{r}'}{\norm{\mb{r}'}})\\
+&=\frac{\mb{r}''\norm{\mb{r}'}-\mb{r}'\frac{\mb{r}'\cdot\mb{r}''}{\norm{\mb{r}'}}}{\norm{\mb{r}'}^2}\\
+&=\frac{\norm{\mb{r}'}^2\mb{r}''-\qty(\mb{r}''\cdot\mb{r}')\mb{r}'}{\norm{\mb{r}'}^3}\\
+&=\frac{\mb{r}''_{\perp\mb{r}'}}{\norm{\mb{r}'}}\\
+&=\frac{\mb{r}''-\qty(\mb{r}''\cdot\mb{T})\mb{T}}{\norm{\mb{r}'}}
+\ea\]
+\epr
+\subsubsection{(Unit) binormal (vector)}
+In three dimensions,
+\[\ba
+\mb{B}&\coloneq\mb{T}\times\mb{N}\\
+&=\frac{\mb{r}'\times\mb{r}''}{\norm{\mb{r}'\times\mb{r}''}}
+\ea\]
+\subsubsection{Frenet-Serret frame}
+$\mb{T},\mb{N},\mb{B}$ are collectively called Frenet-Serret basis or TNB basis, which is a local orthogonal basis. This basis with origin being the point $\mb{r}(t)$ is called Frenet-Serret frame.
+\subsubsection{Curvature (曲率)}
+The curvature $\kappa$ and curvature vector $\mb{K}$ of a curve $\mb{r}$ at $t$ are defined, with unit tagent vector $\mb{T}$ and arc length $s$, as
+\[\ba
+\mb{K}&\coloneq\dv{\mb{T}}{s}\\
+&=\flatfrac{\dv{\mb{T}}{t}}{\dv{s}{t}}\\
+&=\frac{\mb{T}'}{\norm{\mb{r}'}}\\
+&=\frac{\norm{\mb{r}'}^2\mb{r}''-\qty(\mb{r}''\cdot\mb{r}')\mb{r}'}{\norm{\mb{r}'}^4}\\
+&=\frac{\mb{r}''_{\perp\mb{r}'}}{\norm{\mb{r}'}^2}\\
+&=\frac{\mb{r}''-\qty(\mb{r}''\cdot\mb{T})\mb{T}}{\norm{\mb{r}'}^2}
+\ea\]
+\[\kappa\coloneq\norm{\mb{K}}\]
+\[\mb{K}=\kappa\mb{N}\]
+In two dimensions, let $\mb{r}(t)=(x(t),y(t))$,
+\[\kappa=\frac{\norm{x'y''-x''y'}}{\qty(x'^2+y'^2)^{3/2}},\]
+and signed curvature $k$ is defined as
+\[k=\frac{x'y''-x''y'}{\qty(x'^2+y'^2)^{3/2}}.\]
+In three dimensions,
+\[\mb{K}=\frac{\qty(\mb{r}'\times\mb{r}'')\times\mb{r}'}{\norm{\mb{r}'}^4}\]
+\[\kappa=\frac{\norm{\mb{r}'\times\mb{r}''}}{\norm{\mb{r}'}^3}.\]
+\subsubsection{Torsion}
+The torsion $\tau$ of a curve $\mb{r}$ at $t$ is defined, with unit normal vector $\mb{N}$ and unit binormal vector $\mb{B}$, as
+\[\ba
+\tau&\coloneq-\dv{\mb{B}}{s}\cdot\mb{N}\\
+&=\frac{\det(\mb{r}',\mb{r}'',\mb{r}''')}{\norm{\mb{r}'\times\mb{r}''}^2}
+\ea\]
+\bpr
+\[\dv{\mb{B}}{t}=\frac{\qty(\mb{r}'\times\mb{r}'')'}{\norm{\mb{r}'\times\mb{r}''}}-
+\mb{r}'\times\mb{r}''\frac{\norm{\mb{r}'\times\mb{r}''}^2'}{\norm{\mb{r}'\times\mb{r}''}^3}\]
+Since the second term is orthogonal to $\mb{N}$,
+\[\ba
+-\dv{\mb{B}}{s}\cdot\mb{N}&=-\frac{\mb{r}'\times\mb{r}'''}{\norm{\mb{r}'\times\mb{r}''}\norm{\mb{r}'}}\cdot\frac{\qty(\mb{r}'\times\mb{r}'')\times\mb{r}'}{\norm{\qty(\mb{r}'\times\mb{r}'')\times\mb{r}'}}\\
+&=\frac{\qty(\mb{r}'''\times\mb{r}')\cdot\qty(\qty(\mb{r}'\times\mb{r}'')\times\mb{r}')}{\norm{\mb{r}'\times\mb{r}''}^2\norm{\mb{r}'}^2}\\
+&=\frac{\det(\mb{r}'',\mb{r}''',\mb{r}')}{\norm{\mb{r}'\times\mb{r}''}^2}\\
+&=\frac{\det(\mb{r}',\mb{r}'',\mb{r}''')}{\norm{\mb{r}'\times\mb{r}''}^2}
+\ea\]
+\epr
+\sssc{Frenet-Serret formulas or Frenet–Serret theorem}
+\[\dv{T}{s}=\kappa\mb{N},\]
+\[\dv{N}{s}=\kappa\mb{T}+\tau\mb{B},\]
+\[\dv{B}{s}=-\tau\mb{N},\]
+\[\begin{bmatrix}
+\dv{\mb{T}}{s}\\
+\dv{\mb{N}}{s}\\
+\dv{\mb{B}}{s}
+\end{bmatrix}
+=
+\begin{bmatrix}
+0 & \kappa & 0\\
+-\kappa & 0 & \tau\\
+0 & -\tau & 0
+\end{bmatrix}
+\begin{bmatrix}
+\mb{T}\\
+\mb{N}\\
+\mb{B}
+\end{bmatrix}
+\bpr
+PLACEHOLDER
+\epr
+\subsection{Polar curve}
+\subsubsection{Definition}
+Plane curve or polar equation is a plane curve of the form $r=f(\theta)$, also denoted as $r(\theta)$.
+\subsubsection{Radical scaling}
+Replacing $r$ with $kr$ scales the curve by $k$.
+\subsubsection{Rotation}
+Replacing $\theta$ with $(\theta-\varphi)$ rotates the curve counterclockwise by $\varphi$.
+\subsubsection{Reflection and symmetry}
+Replacing $\theta$ with $-\theta$ reflects the curve through the polar axis.
+
+If a polar curve is unchanged when $\theta$ is replaced with $-\theta$, then it is symmetric about the polar axis.
+
+Replacing $\theta$ with $(\pi-\theta)$ reflects the curve through $\theta=\frac{\pi}{2}$.
+
+If a polar curve is unchanged when $\theta$ is replaced with $(\pi-\theta)$, then it is symmetric about $\theta=\frac{\pi}{2}$.
+
+Replacing either $\theta$ with $(\pi+\theta)$ or $r$ with $-r$ reflects the curve through the pole.
+
+If a polar curve is unchanged when $\theta$ is replaced with $(\pi+\theta)$ or when $r$ is replaced with $-r$, then it is symmetric about the pole.
+
+A polar equation of the form $r=f(\cos(\theta-\varphi))$ is symmetric about the line $\theta=\varphi$.
+\subsubsection{Arc length}
+The arc length of differentiable polar curve $r(\theta)$ from $a$ to $b$ is
+\[s=\int_a^b\sqrt{\qty(r(\theta))^2+\qty(r'(\theta))^2}\dd{\theta}.\]
+\bpr
+\[x(\theta)=r\cos(\theta)\]
+\[y(\theta)=r\sin(\theta)\]
+\[x'(\theta)=-r\sin(\theta)+r'\cos(\theta)\]
+\[y'(\theta)=r\cos(\theta)+r'\sin(\theta)\]
+\[(x'(\theta))^2+(y'(\theta))^2=\qty(r(\theta))^2+\qty(r'(\theta))^2\]
+\epr
+\ssc{Tangent space}
+\sssc{Tagent space (切空間)}
+Suppose that $M$ is an $n$-dimensional $C^1$ manifold and $x\in M$. Pick a coordinate chart $\varphi\colon U\to\mathbb{R}^n$, where $U$ is an open subset of $M$ containing $x$. Suppose further that two curves $\gamma_1,\gamma_2\colon (-1,1)\to M$ with $\gamma_1(0)=\gamma_2(0)=x$ are given such that both $\varphi\circ\gamma_1,\varphi\circ\gamma_2\colon (-1,1)\to\mathbb{R}^n$ are differentiable. We call these differentiable curves initialized at $x$. Then $\gamma_1$ and $\gamma_2$ are said to be equivalent at $0$ if and only if the derivatives of $\varphi\circ\gamma_1$ and $\varphi\circ\gamma_2$ at $0$ coincide. This defines an equivalence relation on the set of all differentiable curves initialized at $x$, and equivalence classes of such curves are called tangent vectors (切向量) of $M$ at $x$, sometimes denoted as $\gamma'$ for some curve $\gamma$ in the equivalence class. The tangent space of $M$ at (or near) $x$, denoted by $T_xM$, is then defined as the set of all tangent vectors at $x$, which does not depend on the choice of coordinate chart $\varphi$.
+\sssc{Tagent bundle (切叢)}
+A tangent bundle $TM$ of a smooth manifold $M$ is defined to be
+\[TM=\{(x,v)\colon x\in M\land v\in T_xM\},\]
+where $T_xM$ is the tangent space at $x$.
+\sssc{Normal space (法空間)}
+Suppose that $M$ is a $C^k$ differentiable $n$-dimensional manifold (with smoothness $k\geq 1$) in a vector space $V$ equipped with a bilinear form $B$ and that $x\in M$. The normal space of $M$ at $x$, denoted by $N_xM$, is defined as the orthogonal complement of the tangent space of $M$ at $x$. A vector $v\in N_xM$ such that $B(v,v)\neq 0$ is called a normal vector (法向量) of $M$ at $x$.
+\sssc{Direction space}
+The direction space of an affine subspace is the tangent space of it at any point on it. Note that the tangent spaces of an affine subspace at any two points on it are the same.
+\ssc{Differentiable map between differentiable manifolds}
+Let $\varphi\colon M\to N$ be a $C^1$ map between $C^1$ manifolds $M,N$.
+\sssc{Differential, derivative, or total derivative}
+Given $x\in M$, the differential, derivative, or total derivative of $\varphi at $x$, denoted as $\dd{\varphi_x}$ or $D_x\varphi$, is a linear map
+\[\dd{\varphi_x}\colon T_xM\to T_{\varphi(x)}N,\]
+where $T_xM$ is the tangent space of $M$ at $x$ and $T_{\varphi(x)}N$ is the tangent space of $N$ at $\varphi(x)$, that maps a tangent vector $v\in T_xM$, which is the equivalence class of curves including a curve $\gamma$, to a tangent vector $w\in T_{\varphi(x)}N$ that is the equivalence class of curves including the curve $\varphi\circ\gamma$, called the pushforward of $v$ by $\varphi$.
+\sssc{Rank}
+\[\rank(\dd{\varphi_x})=\dim(\dd{\varphi_x}(T_xM)).\]
+\sssc{Regular or smooth}
+$\dd{\varphi_x}$ is injective, also called regular or smooth, iff
+\[\rank(\dd{\varphi_x})=\dim(T_xM).\]
+\sssc{Immersion}
+Let $\varphi\colon M\to N$ be a $C^1$ map between $C^1$ manifolds $M,N$. It's called an immersion if $\dd{\varphi_x}$ is an injective function for all $x\in M$.
+\ssc{Parametric manifold}
+\sssc{Parametric manifold}
+An $m$-dimensional (parameterized or parametric) (topological) manifold in a topological space $X$ is (the image of) a continuous map $\gamma(u_1,\ldots,u_m)\colon D\subseteq\bbR^m\to X$ whose domain is an open rectangle and range is an $m$-dimensional manifold, where $u_1,\ldots,u_m$ are called parameters. $\gamma(u_1,\ldots,u_m)$ is also called the parametrization of the curve.
+
+For $X=\bbR^n$, the equations of each component being equal to a function of $u_1,\ldots,u_m$ are called parametric equations.
+
+A uniary function obtained by fixing $m-1$ of $u_1,\ldots,u_m$ is called grid curve.
+\sssc{Regular or smooth}
+A parametric manifold whose image is differentiable is called regular or smooth at a point if its differential at the point is an injective function. For parametric surface $\mb{r}(s,t)$ in $\bbR^3$, that is,
+\[\mb{r}_s\timed\mb{r}_t \ne 0.\]
+
+A parametric manifold whose image is differentiable is called regular or smooth if it's regular at all points.
+\sssc{Fundamental tangent vector}
+For an $n$-dimensional differentiable parametric manifold $\mb{r}(\mb{x})$ where $\mb{x}\in\bbR^n$ and $\mb{r}\in\bbR^m$ with $n<m$, each $\pdv{\mb{r}}{x_i}$ is a fundamental tangent vector.
+\sssc{Hausdorff measure}
+An $m$-dimensional parameterized manifold in $\bbR^n$ with $1\le m\le n$ of the form
+\[\mb{r}(t_1,t_2,\ldots,t_m),\quad\forall i\colon t_i\in(a_i,b_i)\]
+has $m$-dimensional Hausdorff measure
+\[\int_{a_m}^{b_m}\int_{a_{m-1}}^{b_{m-1}}\ldots\int_{a_1}^{b_1}\sqrt{\det(G)}\dd{t_1}\dd{t_2}\ldots\dd{t_m},\]
+where $\det(G)$ is the Gram determinant of $\mb{r}$.
+\sssc{Hausdorff measure of hypersurface as graph}
+An $(n-1)$-dimensional differentiable hypersurface in $\bbR^n$ parameterized into $n-1$ of the coordinates, say, $x_1,x_2,\ldots,x_{n-1})$, as $x_n=f(x_1,x_2,\ldots,x_{n-1}),\quad (x_1,x_2,\ldots,x_{n-1})\in D$, where $f\in W^{1,1}(\bbR)$, has $(n-1)$-dimensional Hausdorff measure
+\[\int_D\sqrt{1+\abs{\nabla f}^2}\dd{\mu}.\]
