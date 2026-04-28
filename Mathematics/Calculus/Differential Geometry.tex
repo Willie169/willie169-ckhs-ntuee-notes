@@ -1,12 +1,3 @@
-\documentclass[a4paper,12pt]{article}
-\setcounter{secnumdepth}{5}
-\setcounter{tocdepth}{3}
-\input{/usr/share/LaTeX-ToolKit/template.tex}
-\begin{document}
-\title{Differential Geometry}
-\author{沈威宇}
-\date{\temtoday}
-\titletocdoc
 \sct{Differential Geometry (微分幾何)}
 \ssc{Curve}
 \subsubsection{Definition}
@@ -192,17 +183,29 @@ The arc length of differentiable polar curve $r(\theta)$ from $a$ to $b$ is
 \epr
 \ssc{Tangent space}
 \sssc{Tagent space (切空間)}
-Suppose that $M$ is an $n$-dimensional $C^1$ manifold and $x\in M$. Pick a coordinate chart $\varphi\colon U\to\mathbb{R}^n$, where $U$ is an open subset of $M$ containing $x$. Suppose further that two curves $\gamma_1,\gamma_2\colon (-1,1)\to M$ with $\gamma_1(0)=\gamma_2(0)=x$ are given such that both $\varphi\circ\gamma_1,\varphi\circ\gamma_2\colon (-1,1)\to\mathbb{R}^n$ are differentiable. We call these differentiable curves initialized at $x$. Then $\gamma_1$ and $\gamma_2$ are said to be equivalent at $0$ if and only if the derivatives of $\varphi\circ\gamma_1$ and $\varphi\circ\gamma_2$ at $0$ coincide. This defines an equivalence relation on the set of all differentiable curves initialized at $x$, and equivalence classes of such curves are called tangent vectors (切向量) of $M$ at $x$, sometimes denoted as $\gamma'$ for some curve $\gamma$ in the equivalence class. The tangent space of $M$ at (or near) $x$, denoted by $T_xM$, is then defined as the set of all tangent vectors at $x$, which does not depend on the choice of coordinate chart $\varphi$.
+Suppose that $M$ is an $n$-dimensional differentiable manifold and $x\in M$. Pick a coordinate chart $\varphi\colon U\to\mathbb{R}^n$, where $U$ is an open subset of $M$ containing $x$. Suppose further that two curves $\gamma_1,\gamma_2\colon (-1,1)\to M$ with $\gamma_1(0)=\gamma_2(0)=x$ are given such that both $\varphi\circ\gamma_1,\varphi\circ\gamma_2\colon (-1,1)\to\mathbb{R}^n$ are differentiable. We call these differentiable curves initialized at $x$. Then $\gamma_1$ and $\gamma_2$ are said to be equivalent at $0$ if and only if the derivatives of $\varphi\circ\gamma_1$ and $\varphi\circ\gamma_2$ at $0$ coincide. This defines an equivalence relation on the set of all differentiable curves initialized at $x$, and equivalence classes of such curves are called tangent vectors (切向量) of $M$ at $x$, sometimes denoted as $\gamma'$ for some curve $\gamma$ in the equivalence class. The tangent space of $M$ at (aka near) $x$, denoted by $T_xM$, is then defined as the set of all tangent vectors at $x$, which does not depend on the choice of coordinate chart $\varphi$.
+\sssc{Dimension of tangent space}
+The dimension of $T_xM$ is the same as $M$.
+PLACEHOLDER?
+\bpr
+PLACEHOLDER 
+\epr
 \sssc{Tagent bundle (切叢)}
 A tangent bundle $TM$ of a smooth manifold $M$ is defined to be
 \[TM=\{(x,v)\colon x\in M\land v\in T_xM\},\]
 where $T_xM$ is the tangent space at $x$.
 \sssc{Normal space (法空間)}
-Suppose that $M$ is a $C^k$ differentiable $n$-dimensional manifold (with smoothness $k\geq 1$) in a vector space $V$ equipped with a bilinear form $B$ and that $x\in M$. The normal space of $M$ at $x$, denoted by $N_xM$, is defined as the orthogonal complement of the tangent space of $M$ at $x$. A vector $v\in N_xM$ such that $B(v,v)\neq 0$ is called a normal vector (法向量) of $M$ at $x$.
+Suppose that $M$ is a differentiable $n$-dimensional manifold in a vector space $V$ equipped with a bilinear form $B$ and that $x\in M$. The normal space of $M$ at $x$, denoted by $N_xM$, is defined as the orthogonal complement of the tangent space of $M$ at $x$. A vector $v\in N_xM$ such that $B(v,v)\neq 0$ is called a normal vector (法向量) of $M$ at $x$.
+\sssc{Dimension of normal space}
+Suppose further that $V$ is a $k$-dimensional manifold and $M$ is an topological embedding, the dimension of $N_xM$ is $k-m$.
+PLACEHOLDER?
+\bpr
+PLACEHOLDER 
+\epr
 \sssc{Direction space}
 The direction space of an affine subspace is the tangent space of it at any point on it. Note that the tangent spaces of an affine subspace at any two points on it are the same.
 \ssc{Differentiable map between differentiable manifolds}
-Let $\varphi\colon M\to N$ be a $C^1$ map between $C^1$ manifolds $M,N$.
+Let $\varphi\colon M\to N$ be a differentiable map between differentiable manifolds $M,N$.
 \sssc{Differential, derivative, or total derivative}
 Given $x\in M$, the differential, derivative, or total derivative of $\varphi at $x$, denoted as $\dd{\varphi_x}$ or $D_x\varphi$, is a linear map
 \[\dd{\varphi_x}\colon T_xM\to T_{\varphi(x)}N,\]
@@ -213,27 +216,23 @@ where $T_xM$ is the tangent space of $M$ at $x$ and $T_{\varphi(x)}N$ is the tan
 $\dd{\varphi_x}$ is injective, also called regular or smooth, iff
 \[\rank(\dd{\varphi_x})=\dim(T_xM).\]
 \sssc{Immersion}
-Let $\varphi\colon M\to N$ be a $C^1$ map between $C^1$ manifolds $M,N$. It's called an immersion if $\dd{\varphi_x}$ is an injective function for all $x\in M$.
+Let $\varphi\colon M\to N$ be a differentiable map between differentiable manifolds $M,N$. It's called an immersion if $\dd{\varphi_x}$ is an injective function for all $x\in M$.
 \ssc{Parametric manifold}
 \sssc{Parametric manifold}
-An $m$-dimensional (parameterized or parametric) (topological) manifold in a topological space $X$ is (the image of) a continuous map $\gamma(u_1,\ldots,u_m)\colon D\subseteq\bbR^m\to X$ whose domain is an open rectangle and range is an $m$-dimensional manifold, where $u_1,\ldots,u_m$ are called parameters. $\gamma(u_1,\ldots,u_m)$ is also called the parametrization of the curve.
+An $m$-dimensional (parameterized or parametric) (topological) manifold in a topological space $X$ is (the image of) a continuous map $\gamma(u_1,\ldots,u_m)\colon D\subseteq\bbR^m\to X$ whose domain is an open set and range is an $m$-dimensional manifold, where $u_1,\ldots,u_m$ are called parameters. $\gamma(u_1,\ldots,u_m)$ is also called the parametrization of the curve.
 
 For $X=\bbR^n$, the equations of each component being equal to a function of $u_1,\ldots,u_m$ are called parametric equations.
 
 A uniary function obtained by fixing $m-1$ of $u_1,\ldots,u_m$ is called grid curve.
 \sssc{Regular or smooth}
-A parametric manifold whose image is differentiable is called regular or smooth at a point if its differential at the point is an injective function. For parametric surface $\mb{r}(s,t)$ in $\bbR^3$, that is,
-\[\mb{r}_s\timed\mb{r}_t \ne 0.\]
+A parametric manifold whose image is differentiable is called regular or smooth at a point if its differential at the point is an injective function.
+
+For differentiable two-dimensional manifold $S$ in $\bbR^3$ parameterized as $\mb{r}(s,t)$, that is,
+\[\pdv{\mb{r}}{s}\time\pdv{\mb{r}}{t}\ne\mb{0}.\]
 
 A parametric manifold whose image is differentiable is called regular or smooth if it's regular at all points.
 \sssc{Fundamental tangent vector}
 For an $n$-dimensional differentiable parametric manifold $\mb{r}(\mb{x})$ where $\mb{x}\in\bbR^n$ and $\mb{r}\in\bbR^m$ with $n<m$, each $\pdv{\mb{r}}{x_i}$ is a fundamental tangent vector.
-\sssc{Hausdorff measure}
-An $m$-dimensional parameterized manifold in $\bbR^n$ with $1\le m\le n$ of the form
-\[\mb{r}(t_1,t_2,\ldots,t_m),\quad\forall i\colon t_i\in(a_i,b_i)\]
-has $m$-dimensional Hausdorff measure
-\[\int_{a_m}^{b_m}\int_{a_{m-1}}^{b_{m-1}}\ldots\int_{a_1}^{b_1}\sqrt{\det(G)}\dd{t_1}\dd{t_2}\ldots\dd{t_m},\]
-where $\det(G)$ is the Gram determinant of $\mb{r}$.
-\sssc{Hausdorff measure of hypersurface as graph}
-An $(n-1)$-dimensional differentiable hypersurface in $\bbR^n$ parameterized into $n-1$ of the coordinates, say, $x_1,x_2,\ldots,x_{n-1})$, as $x_n=f(x_1,x_2,\ldots,x_{n-1}),\quad (x_1,x_2,\ldots,x_{n-1})\in D$, where $f\in W^{1,1}(\bbR)$, has $(n-1)$-dimensional Hausdorff measure
-\[\int_D\sqrt{1+\abs{\nabla f}^2}\dd{\mu}.\]
+\ssc{Orientation of differentiable hypersurface}
+For a differentiable hypersurface $S$, if it is possible to choose a unit normal vector for each point on it such that the unit normal vectors as a function of the points is a continuous vector field over $S$, then $S$ is orientable, and an orientation is a choice of such unit normal vectors, where there are two choices.
+PLACEHOLDER

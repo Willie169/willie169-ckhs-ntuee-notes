@@ -1,6 +1,9 @@
 \section{Multivariable Calculus}
-\subsection{Operators}
+\subsection{Notation}
 \begin{itemize}
+\item $\mathbf{0}$ or $0$ refers to the zero tensor (零張量) in the interested Euclidean tensor space $V$, that is, it satisfies 
+\[\forall\mathbf{v}\in V:\,\mathbf{v}+\mathbf{0}=\mathbf{v}.\]
+\item Unit vector (單位向量): $\mathbf{e}_i$ is the unit vector in the $i$th direction, i.e., a vector with zero norm.
 \item Dot product (點積) operator: $\cdot$
 \item Cross product (叉積) operator: $\times$
 \item Gradient (梯度) operator: $\nabla$ or $\operatorname{grad}$
@@ -16,16 +19,18 @@
 \item Triple/volume integration operator: $\iiint$
 \item Closed line integral operator: $\oint$
 \item Closed surface/double integral operator: $\oiint$
-\item Positive orientation: For boundary $\ell$ of a compact surface $S$, $\dd{\boldsymbol{\ell}}$ is used as a shorthand for $\hat{T}\dd{S}$, where $\hat{T}$ is the unit tangent vector at almost each point on $\ell$ transverses counterclockwise around $S$, with respect to the orientation of $S$. In $\bbR^2$, $S$ is oriented upward, that is, $\dd{\boldsymbol{\ell}}=\qty(\dv{y}{\ell}-\dv{x}{\ell})\dd{\ell}$ where $\ell$ is arc length.
-\item Outward orientation: For boundary $S$ of a region in $\bbR^3$, $\dd{\mb{S}}$ is used as a shorthand for $\hat{n}\dd{S}$, where $\hat{n}$ is the outward pointing unit normal vector at almost each point on $S$.
+\item Arc length element: $\dd{\ell}$
+\item Vector arc length element: $\dd{\boldsymbol{\ell}}$, which is defined as unit tangent vector multiplied by $\dd{\ell}$
+\item Surface element: $\dd{S}$
+\item Vector surface element: $\dd{\mb{S}}$, which is defined as unit normal vector in the orientation multiplied by $\dd{S}$ and is only defined for orientable surface equipped with an orientation. For a vector field $\mb{F}$, $\iint_S\mb{F}\cdot\dd{\mb{S}}$ is called flux of $f$ across $S$.
+\item Positive orientation: The boundary curve $\ell$ of a compact surface $S$, $\dd{\boldsymbol{\ell}}$ transverses counterclockwise around $S$ unless otherwise specified.
+\item Upward orientation: In $\bbR^2$, a surface is oriented upward unless otherwise specified.
+\item Outward orientation: The boundary surface $S$ of a compact region of the same dimension of the space is oriented outward unless otherwise specified.
 \end{itemize}
-\subsection{Convention}
-If not otherwise specified:
+\subsection{Notation used here}
+Unless otherwise specified:
 \begin{itemize}
 \item The domain of the funcitons or maps below are subsets of a Euclidean vector space. If not otherwise specified, the coordinates are the Cartesian coordinates, the norms are the Euclidean norms, and the measures are the Lebesgue measures.
-\item $\mathbf{0}$ or $0$ refers to the zero tensor (零張量) in the interested Euclidean tensor space $V$, that is, it satisfies 
-\[\forall\mathbf{v}\in V:\,\mathbf{v}+\mathbf{0}=\mathbf{v}.\]
-\item Unit vector (單位向量): $\mathbf{e}_i$ is the unit vector in the $i$th direction, i.e., a vector with zero norm.
 \item Independent variable vector: $\mathbf{x}=(x_1,x_2,\dots,x_n)$
 \item Vector fields: $\mathbf{F}(\mathbf{x}) = \sum_{i=1}^n F_i(\mathbf{x}) \mathbf{e}_i$、$\mathbf{G}$
 \item Scalar fields: $A(\mathbf{x})$、$B(\mathbf{x})$
@@ -224,3 +229,23 @@ where $E$ is a plane $g_1,g_2$ are continuous functions defined on $E$.
 A Type III region is a subset of $\bbR^3$ of the form
 \[D=\{(x,y,z)\mid (x,z)\in E\land g_1(x,z)\le y\le g_2(x,z)\}\]
 where $E$ is a plane $g_1,g_2$ are continuous functions defined on $E$.
+\ssc{Manifold element in terms of Hausdorff measure}
+\sssc{Differentiable parametric manifold}
+An $m$-dimensional differentiable manifold $S$ in $\bbR^n$ with $1\le m<n$ parameterized as $\mb{r}(t_1,t_2,\ldots,t_m)$ on domain $D$ has $m$-dimensional Hausdorff measure
+\[\int_D\sqrt{\det(G)}\dd{t_1}\dd{t_2}\ldots\dd{t_m}\]
+and manifold element
+\[\dd{S}=\sqrt{\det(G)}\dd{t_1}\dd{t_2}\ldots\dd{t_m},\]
+where $\det(G)$ is the Gram determinant of $\mb{r}$.
+\sssc{Differentiable parametric surface}
+A differentiable surface $S$ in $\bbR^3$ parameterized as $\mb{r}(s,t)$ on domain $D$ has two-dimensional Hausdorff measure
+\[\int_D\abs{\pdv{\mb{r}}{s}\time\pdv{\mb{r}}{t}}\dd{s}\dd{t}\]
+and surface element
+\[\dd{S}=\abs{\pdv{\mb{r}}{s}\time\pdv{\mb{r}}{t}}\dd{s}\dd{t}.\]
+If $S$ is orientable and equipped with an orientation, the vector surface element is
+\[\dd{\mb{S}}=\pm\pdv{\mb{r}}{s}\time\pdv{\mb{r}}{t}\dd{s}\dd{t},\]
+where $\pm$ is such that $\pm\UnitVector(\pdv{\mb{r}}{s}\time\pdv{\mb{r}}{t})$ is in the orientation.
+\sssc{Hypersurface as graph}
+An $(n-1)$-dimensional differentiable hypersurface $S$ in $\bbR^n$ parameterized w.r.t. $n-1$ of the Cartesian coordinates, say, $x_1,x_2,\ldots,x_{n-1}$, as $x_n=f(x_1,x_2,\ldots,x_{n-1}),\quad (x_1,x_2,\ldots,x_{n-1})\in D$, where $f\in W^{1,1}(\bbR)$, has $(n-1)$-dimensional Hausdorff measure
+\[\int_D\sqrt{1+\abs{\nabla f}^2}\dd{\mu(x_1,x_2,\ldots,x_{n-1})}\]
+and Hausdorff measure element
+\[\dd{S}=\sqrt{1+\abs{\nabla f}^2}\dd{\mu(x_1,x_2,\ldots,x_{n-1})}\]
