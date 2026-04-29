@@ -113,9 +113,9 @@ Suppose a system $W$ consists of components $W_1,W_2,\ldots,W_n$ in parallel wit
 \[P(W)=1-\prod_{i=1}^n(1-p_i).\]
 \ssc{Random variable (RV) (隨機變數)}
 \sssc{Random variable}
-For a probability spaces $(\Omega_s,\calF_s,P_s)$ and a measurable space $(\Omega_t,\calF_t)$, a random variable $X$ is a measurable function $X\colon\Omega_s\to\Omega_t$ such that for each $E\subseteq\calF_t$, the preimage $X^{-1}(E)\in\calF_s$, and the induced probability spaces $(\Omega_t,\calF_t,P_t)$ of target sample space $\Omega_t$, target event space, and pushforward probability measure $P_t(E)\coloneq P_s(X^{-1}(E))$. It is often the case that $\calF_t$ is the Borel $\text{\textsigma}$-algebra of $\Omega_t$.
+For a probability spaces $(\Omega_s,\calF_s,P_s)$ and a measurable space $(\Omega_t,\calF_t)$, a random variable $X$ is a measurable function $X\colon\Omega_s\to\Omega_t$ such that for each $E\subseteq\calF_t$, the preimage $X^{-1}(E)\in\calF_s$, and the induced probability spaces $(\Omega_t,\calF_t,P_t)$ of target sample space $\Omega_t$, target event space, and (pushforward) probability measure $P_t(E)\coloneq P_s(X^{-1}(E))$. It is often the case that $\calF_t$ is the Borel $\text{\textsigma}$-algebra of $\Omega_t$.
 \sssc{Real(-valued) random variable}
-A random variable is a real(-valued) random variable if $\Omega_t\subseteq\bbR$ (equipped with subspace topology) and $\calF_t$ is the Borel $\text{\textsigma}$-algebra of $\Omega_t$.
+A random variable is a real(-valued) random variable if $\Omega_t\subseteq\bbR$ (equipped with subspace topology) and $\calF_t$ is the Borel $\text{\textsigma}$-algebra of $\Omega_t$. Random variable often refers to real(-valued) random variable.
 \sssc{Cumulative distribution function (CDF)}
 The cumulative distribution function (CDF) of a real random valuable $X$ is defined as
 \[F_X(x)\coloneq P(X\le x)=\int_{\Omega_t}\mb{1}_{(-\infty,x]}(t)\dd{P_t(t)}.\]
@@ -212,7 +212,7 @@ The support of a discrete random variable is the support of the PMF.
 \sssc{Properties}
 \[p_X(a_i)\ge 0,\quad\forall a_i\in\Omega_t.\]
 \[\sum_{a_i\in\Omega_t}p_X(a_i)=1.\]
-\[P(X\in A)=\sum_{a_i\in A}p_X(a_i),\quad A\subseteq\Omega_t.\]
+\[P(X\in A)=\sum_{a_i\in A}p_X(a_i),\quad\forall A\in\calF_t.\]
 \[\dv{F_X}{x}=0\quad\tx{a.e.}.\]
 \sssc{Probability simplex}
 Given a sample space $(x_0,x_1,x_2,\ldots,x_k)$, each point $(p_0,p_1,\ldots,p_k)$ in the probability $k$-simplex
@@ -231,7 +231,7 @@ we have
 \[f_X(x)=g_X(x)\]
 a.e., and
 \[f_X(x)=F_X'(x)\]
-a.e. Equality of PDF means equality a.e.
+a.e. Equality or inequality involving PDF means a.e.
 
 That the PDF of $X$ is $p$ is denoted as $X\sim p$.
 \sssc{PDF determines CDF}
@@ -243,7 +243,7 @@ The support of an absolutely continuous random variable is the support of the PD
 \sssc{Properties}
 \[f_X(x)\ge 0.\]
 \[\int_{-\infty}^{\infty}f_X(x)\dd{x}=1.\]
-\[P(a\le X\le b)=\int_a^bf_X(x)\dd{x}\]
+\[P(a\le X\le b)=\int_a^bf_X(x)\dd{x}.\]
 \sssc{Discrete to continuous limit}
 We say a sequence or net $\langle X_n\rangle$ of discrete random variables converge to a continuous random variable $X$ if $F_{X_n}$ converges pointwise to $F_X$.
 \ssc{As Schwartz distribution}
@@ -374,30 +374,34 @@ p_X(x_1,\ldots,x_d)&=P(X_1=x_1,\ldots,X_d=x_d)\\
 &=P(X_1=x_1)\cdot P(X_2=x_2\mid X_1=x_1)\cdot P(X_3=x_3\mid X_1=x_1,X_2=x_2)\cdot\\
 &\ldots\cdot P(X_d=x_d\mid X_1=x_1,X_2=x_2\ldots X_{d-1}=x_{d-1})
 \ea\]
-\sssc{Probability of an event}
-Let target sample space be $A$ and $B\subseteq A$.
-\[P(X\in B)=\sum_{x\in B}p_X(x).\]
 \sssc{Marginal PMF}
 The marginal PMF of the sub-vector $Y=(X_{i1},\ldots,X_{ik})$ is
 \[\ba
 p_Y(x_{i1},\ldots,x_{ik})=&P(X_{i1}=x_{i1},\ldots,X_{ik}=x_{ik})\\
 =&\sum_{\forall j\in\bbZ\cap[1,d]\setminus\{i_l\colon l\in[1,k]\}\colon x_j}p_X(x_1,\ldots,x_d)
 \ea\]
+\sssc{Properties}
+Let target sample space be $\Omega$ and target event space be $\calF$.
+\[p_X(\mb{a})\ge 0,\quad\forall\mb{a}\in\Omega.\]
+\[\sum_{\mb{a}\in\Omega}p_X(\mb{a})=1.\]
+\[P(X\in A)=\sum_{\mb{a}\in A}p_X(\mb{a}),\quad\forall A\in\calF_t.\]
+\[\nabla F_X=\mb{0}\quad\tx{a.e.}.\]
 \ssc{Absolutely Continuous Random Vector}
 \sssc{Absolutely continuous random vector}
 A random vector of absolutely continuous random variables.
 \sssc{(Joint, multivariable, or multivariate) probability density function (PDF)}
 \[f_X(x_1,\ldots,x_d)=\frac{\partial^nF_X(x_1,\ldots,x_d)}{\partial x_1\ldots\partial x_d}.\]
 Equality of joint PDF means equality a.e.
-\sssc{Probability of an event}
-Let target sample space be $A$ and $B\subseteq A$.
-\[P(X\in B)=\int_Bf(x_1,\ldots,x_d)\dd{x_1}\ldots\dd{x_d}.\]
 \sssc{Marginal PDF}
 For the sub-vector $Y=(X_{i1},\ldots,X_{ik})$, suppose marginal CDF of it is $F_Y(x_{i1},\ldots,x_{ik})$, the marginal PDF is
 \[\ba
 f_Y(X_{i1},\ldots,X_{ik})(x_{i1},\ldots,x_{ik})=&\frac{\partial^nF_Y(x_{i1},\ldots,x_{ik})}{\partial x_{i1}\ldots\partial x_{ik}}\\
 =&\int_{-\infty}^{\infty}\ldots\int_{-\infty}^{\infty}f_X(x_1,\ldots,x_d)\prod_{j\in\bbZ\cap[1,d]\setminus\{i_l\colon l\in[1,k]}\dd{x_j}
 \ea\]
+\sssc{Properties}
+\[f_X(\mb{x})\ge 0.\]
+\[\int_{-\infty}^{\infty}\ldots\int_{-\infty}^{\infty}f_X(x_1,\ldots,x_d)\dd{x_1}\ldots\dd{x_d}=1.\]
+\[P(X\in B)=\int_Bf_X(x_1,\ldots,x_d)\dd{x_1}\ldots\dd{x_d},\quad\forall B\in\calB(\bbR).\]
 \ssc{Independent random variables}
 \sssc{Definition}
 Real random variables $X_1,\ldots,X_n$ are (mutually) independent if for all Borel sets $A_1,\ldots,A_n$,
@@ -447,24 +451,34 @@ P(g_1(X_1)\in A_1,\ldots,g_n(X_n)\in A_n)=&P(X_1\in g_1^{\pht{1}-1}(A_1),\ldots,
 =&\prod_{i=1}^nP(g_i(X_i)\in A_i)
 \ea\]
 \epr
-\ssc{Sum of independent random variables}
-\sssc{Sum of independent random variables}
+\ssc{Product of random variable}
+\sssc{Definition}
+For two real random variables $X,Y$ with target sample space $\Omega$, the product of random variable $XY$ is defined with
+\[(XY)(\omega)=X(\omega)Y(\omega),\quad\forall\omega\in\Omega.\]
+\sssc{For discrete random variable}
+For two discrete random variables $X,Y$ with target sample space $\Omega$, for all $z\in\Omega$,
+\[p_{XY}(z)=\sum_{x,z-x\in\Omega}P(X=x,Y=z-x).\]
+\sssc{For absolutely continuous random variable}
+For two absolutely continuous random variables $X,Y$,
+\[f_{XY}(z)=\int_{-\infty}^0f_{X,Y}\qty(x,\frac{z}{x})\frac{1}{\abs{x}}\dd{x}+\int_0^{\infty}f_{X,Y}\qty(x,\frac{z}{x})\frac{1}{\abs{x}}\dd{x}.\]
+\ssc{Sum of random variables}
+\sssc{Sum of independent random variables theorem}
 For two independent real random variables $X,Y$ with the same source sample space and event space, and with pushforward probability measure $P_X$ and $P_Y$ respectively, let the Schwartz distributions induced by $P_X$ and $P_Y$ be $T_X$ and $T_Y$ respectively. Then the Schwartz distribution $T_{X+Y}$ induced by the pushforward probability measure $P_{X+Y}$ of the sum random variable $X+Y$ is the distributional convolution of $T_1$ and $T_2$, that is,
 \[T=T_1*T_2.\]
-\sssc{Sum of independent discrete random variables}
+\sssc{Sum of independent discrete random variables theorem}
 For two independent discrete random variables $X,Y$,
 \[p_{X+Y}(z)=\sum_{x\in\bbR}p_X(x)p_Y(z-x).\]
-\sssc{Sum of independent absolutely continuous random variables}
+\sssc{Sum of independent absolutely continuous random variables theorem}
 For two independent absolutely continuous random variables $X,Y$,
 \[f_{X+Y}(z)=\int_{-\infty}^{\infty}f_X(x)f_Y(z-x)\dd{x}.\]
 \ssc{(Mathematical) Expected Value, Expectation (期望值), or Mean (平均值)}
 \sssc{Definition}
-For a random variable $X$ on $(\Omega_s,\calF_s,P_s)$ with induced probability space $(\Omega_t,\calF_t,P_t)$, the expected value or expectation $E(X)$, $\bbE(X)$, $E[X]$, or $\bbE[X]$, or mean $\mu_X$, of it is defined as the Lebesgue integral
-\[E(X)=\int_{\Omega_s}X(\omega_s)\dd{P_s(\omega_s)}\]
+For a real random variable $X$ on $(\Omega_s,\calF_s,P_s)$ with induced probability space $(\Omega_t,\calF_t,P_t)$, the expected value or expectation $E(X)$, $\bbE(X)$, $E[X]$, or $\bbE[X]$, or mean $\mu_X$, of it is defined as the Lebesgue integral
+\[E(X)=\int_{\Omega_s}X(\omega_s)\dd{P_s(\omega_s)},\]
 or equivalently,
 \[E(X)=\int_{\Omega_t}x\dd{P_t(x)},\]
 or in Stieltjes integral
-\[E(X)=\int_{x=-\infty}^{\infty}x\dd{F_X(x)},\]
+\[E(X)=\int_{x=-\infty}^{\infty}x\dd{F_X(x)}.\]
 \sssc{For discrete random variable}
 For a discrete random variable $X$ with target sample space $\Omega_t$ and probability mass function $p_X(x)$, the expected value or expectation $E(X)$, $\bbE(X)$, $E[X]$, or $\bbE[X]$, or mean $\mu_X$, of it is
 \[E(X)=\sum_{x\in\Omega_t}xp_X(x)\]
@@ -478,8 +492,10 @@ For an absolutely continuous random variable $X$ with probability density functi
 \[E(X)=\int_{-\infty}^{\infty}xf_X(x)\dd{x}\]
 if it converges absolutely.
 \sssc{Derived random variable theorem}
-\[E(f(X))=\int_{\Omega_t}f(x)\dd{P_t(x)}\]
-if $f\in L^1(\Omega_t,P_t)$.
+For a unary function $f\in L^1(\Omega_t,P_t)$,
+\[E(f(X))=\int_{\Omega_t}f(x)\dd{P_t(x)}.\]
+For a real random vector $X_1,\ldots,X_d$ with target sample spaces $\Omega_1,\ldots,\Omega_d$, pushforward probability measures $P_1,\ldots,P_d$, and an $n$-ary function $f\in L^1(\prod_{i=1}^d\Omega_i,P)$, where $P$ is the product measure in the product space $\prod_{i=1}^d\Omega_i$,
+\[E(f(X_1,\ldots,X_d))=\int_{\Omega_1}\ldots\int_{\Omega_d}f(x_1,\ldots,x_d)\dd{P_1(x_1)}\ldots\dd{P_d(x_d)}.\]
 \sssc{Expected value from CDF}
 For a non-negative real random variable $X$,
 \[E(X)=\int_0^{\infty}P(X\ge x)\dd{x}=\int_0^{\infty}1-F_X(x)\dd{x}.\]
@@ -519,7 +535,10 @@ For indexed families of real random variables $(X_i)_{i\in I}$ and real numbers 
 \sssc{Law of total expectation}
 Let $(A_i)_{i=1}^n\subseteq\calF$ be a partition. Then
 \[E(X)=\sum_{i=1}^nE(X|A_i)P(A_i)\]
-\ssc{Variance and Mean square error (MSE)}
+\sssc{Product of independent random variable}
+If $X,Y$ are independent,
+\[E(XY)=E(X)E(Y).\]
+\ssc{Variance and Covariance}
 \sssc{Variance (變異數/方差)}
 For a real random variable $X$, variance $\Var(X)$, $V(X)$, or $\sigma_X^{\phantom{X}2}$ of it is defined as
 \[\Var(X)=E((X-E(X))^2)=E(X^2)-2E(XE(X))+E(X)^2=E(X^2)-2E(X)^2+E(X)^2=E(X^2)-E(X)^2.\]
@@ -528,29 +547,75 @@ For a real random variable $X$, standard deviation $\SD(X)$ or $\sigma_X$ of it 
 \[\SD(X)=\sqrt{\Var(X)}.\]
 \sssc{Zero variance}
 Variance of a real random variable $X$ is zero iff $X$ is almost surely a constant, that is, there exists a constant $c$ such that $P(X=c)=1$.
-\sssc{Covariance (共變異數/共方差)}
+\sssc{Covariance (共變異數/共方差) and covariance matrix}
 For two real random variables $X,Y$, their covariance $\Sigma$ or $\Cov(X,Y)$ is defined as
-\[\Cov(X,Y)=E\qty((X-E(X))(Y-E(Y)))=E(X)E(Y)-E(XY).\]
+\[\Cov(X,Y)=E\qty((X-E(X))(Y-E(Y)))=E(XY)-E(X)E(Y).\]
+Thus
+\[\Cov(X,X)=\Var(X).\]
 For an $n$-dimensional vector of real random variables $\mb{X}=(X_1,X_2,\ldots)$ with $n\in\bbN\cup\{\aleph_0\}$, the covariance matrix $\Sigma$ or $\Cov(\mb{X})$ is defined as
 \[\Sigma=\Cov(\mb{X})=E\qty((\mb{X}-E(\mb{X}))(\mb{X}-E(\mb{X}))^{\top}),\]
 that is,
-\[\Sigma_{ij}=\Cov(X_i,X_j)=E\qty((X_i-E(X_i))(X_j-E(X_j))).\]
-\sssc{Independent random variables covariance matrix}
-If all $X_i$ are independent, then $\Cov(\mb{X})$ is a diagonal matrix where $\Sigma_{ii}=\Var(X_i)$.
-\sssc{Sum of independent random variables}
-For $n$-dimensional vectors of real random variables $\mb{X}=(X_1,X_2,\ldots,X_n)$ and real numbers $\mb{a}=(a_1,a_2,\ldots,a_n)$ with $n\in\bbN$,
-\[\Var(\sum_{i=1}^na_iX_i)=\mb{a}\Cov(\mb{X})\mb{a}^{\top}.\]
-For real random variables $X,Y$ and real numbers $a,b$,
-\[\Var(X+Y)=\Var(X)+\Var(Y)+2\Cov(X,Y).\]
-\sssc{Affine Transformation}
-For a real random variable $X$, $a\in\bbR_{\neq0}$, and $b\in\mathbb{R}$,
-\[\Var(aX+b)=a^2\Var(X).\]
-\[\SD(aX+b)=|a|\SD(X).\]
+\[\Sigma_{ij}=\Cov(X_i,X_j)=E\qty((X_i-E(X_i))(X_j-E(X_j)))=E(X_iX_j)-E(X_i)E(X_j).\]
 \sssc{Mean square error (MSE) (均方（誤）差) or Expected square error}
 For a real random variable $X$ and a prediction or (blind) estimate $\hat{x}$, the mean square error $\MSE_X(\hat{x})$ or expected square error of the prediction is defined as
 \[\MSE_X(\hat{x})=E\qty((X-\hat{x})^2).\]
 \sssc{Minimum mean square error}
 The minimum mean square error estimate of a real random variable $X$ is $E(X)$, and the MSE of it is $\Var(X)$.
+\sssc{Pearson correlation coefficient (PCC), Pearson's r, Pearson product-moment correlation coefficient (PPMCC), or correlation coefficient}
+For two real random variables $X,Y$, the Pearson correlation coefficient (PCC), Pearson's r, Pearson product-moment correlation coefficient (PPMCC), or correlation coefficient of them, $\rho_{X,Y}$, is defined as
+\[\rho_{X,Y}=\frac{\Cov(X,Y)}{\sqrt{\Var(X)\Var(Y)}}.\]
+Thus
+\[\rho_{XX}=1\]
+\sssc{Correlation}
+For two real random variables $X,Y$, the correlation $r_{X,Y}$ is defined as
+\[r_{X,Y}=E(XY).\]
+Thus
+\[r_{XX}=E(X^2).\]
+\sssc{Sum of random variables}
+For $n$-dimensional real random vector $\mb{X}=(X_1,X_2,\ldots,X_n)$ and real vector $\mb{a}=(a_1,a_2,\ldots,a_n)$ with $n\in\bbN$,
+\[\Var(\sum_{i=1}^na_iX_i)=\mb{a}\Cov(\mb{X})\mb{a}^{\top}.\]
+For real random variables $X,Y$ and real numbers $a,b$,
+\[\Var(X+Y)=\Var(X)+\Var(Y)+2\Cov(X,Y).\]
+\sssc{Independent random variables}
+For $n$-dimensional real random vector $\mb{X}=(X_1,X_2,\ldots,X_n)$ of independent random variables, $\Cov(\mb{X})$ is a diagonal matrix where $\Sigma_{ii}=\Var(X_i)$
+
+If $X,Y$ are independent,
+\[r_{X,Y}=E(XY)=E(X)E(Y)\]
+\[E(g(X)h(Y))=E(g(X))E(h(Y))\]
+\[\Cov(X,Y)=\rho_{X,Y}=0\]
+\[\Var(X+Y)=\Var(X)+\Var(Y)\]
+\sssc{Affine Transformation}
+For a real random variable $X$, $a\in\bbR$, and $b\in\mathbb{R}$, let $W=aX+b$,
+\[\Var(W)=a^2\Var(X).\]
+\[\SD(W)=|a|\SD(X).\]
+\[\rho_{WX}=\bcs\sgn(a),\quad&a\ne0\\0,\quad&a=0\ecs.\]
+For two real random variables $X,Y$, $a,c\in\bbR$, and $b,d\in\mathbb{R}$, let $U=aX+b$ and $V=cY+b$,
+\[\Cov(U,V)=ac\Cov(X,Y).\]
+\[\rho_{UV}=\bcs\sgn(a)\sgn(c)\rho_{X,Y},\quad&ac\ne0\\0,\quad&ac=0\ecs.\]
+\sssc{Correlation coefficient range}
+\[-1\le \rho_{X,Y}\le 1\]
+\bpr
+For any fixed constant $a$, let $W=X-aY$. Then,
+\[\ba
+\Var(W)=&E((X-aY)^2)-(E(X-aY))^2\\
+=&E(X^2-2aXY+a^2Y^2)-\qty(E(X)^2-2aE(X)E(Y)+a^2E(Y))^2\\
+=&\Var(X)-2a\Cov(XY)+a^2\Var(Y)
+\ea\]
+Since $\Var(W)\ge0$, we have
+\[2a\Cov(X,Y)\le\Var(X)+a^2\Var(Y)\]
+Choosing
+\[a=\frac{\sigma_X}{\sigma_Y}\]
+yields
+\[\Cov(X,Y)\le\sigma_X\sigma_Y.\]
+Choosing
+\[a=-\frac{\sigma_X}{\sigma_Y}\]
+yields
+\[\Cov(X,Y)\ge-\sigma_X\sigma_Y.\]
+\epr
+\sssc{Orthogonal random variables}
+Random variables $X,Y$ are orthogonal if $r_{XY}=0$.
+\sssc{Uncorrelated random variables}
+Random variables $X,Y$ are uncorrelated if $\Cov(X,Y)=0$.
 \ssc{Moment}
 \sssc{Moment}
 The $n$th moment of $X$ is defined as $E(X^n)$ for $n\in\bbN$. The zero-th moment $E(X^0)$ is defined as $1$.
