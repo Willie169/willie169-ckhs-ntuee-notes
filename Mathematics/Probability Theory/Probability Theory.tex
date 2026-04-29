@@ -122,8 +122,10 @@ The cumulative distribution function (CDF) of a real random valuable $X$ is defi
 \sssc{Complementary cumulative distribution function (CCDF)}
 The complementary cumulative distribution function (CCDF) of a real random valuable $X$ is defined as
 \[\bar{F}_X(x)=1-F_X(x).\]
+\sssc{CDF range}
+\[0\le F_X(x)\le 1\]
 \sssc{CDF difference theorem}
-For $a\ge b$,
+For any $a\ge b$,
 \[F_X(b)-F_X(a)=P(X\in(a,b]).\]
 \sssc{Non-decreasing property of CDF}
 A CDF is non-decreasing.
@@ -131,7 +133,7 @@ A CDF is non-decreasing.
 For $x<y$, $\{X|X\le x\}\subseteq\{X|X\le y$, thus $P(X\le x)\le P(X\le y)$.
 \epr
 \sssc{Limit at negative infinity of CDF}
-For a CDF $F_X(x)$, $\lim_{x\to-\infty}F_x(x)=0$.
+\[\lim_{x\to-\infty}F_X(x)=0.\]
 \bpr
 \[x_1>x_2\implies\{X\le x_1\}\supseteq\{X\le x_2\}\]
 \[\bigcap_{x\in\bbR}\{X\le x\}=\varnothing\]
@@ -139,14 +141,14 @@ By continuity of measure from above,
 \[\lim_{x\to-\infty}P(X\le x)=P(\varnothing)=0\]
 \epr
 \sssc{Limit at positive infinity of CDF}
-For a sample space $\Omega$ and CDF $F_X(x)$, $\lim_{x\to\infty}F_x(x)=1$.
+\[\lim_{x\to\infty}F_x(x)=1.\]
 \bpr
 \[x_1<x_2\implies\{X\le x_1\}\subseteq\{X\le x_2\}\]
-\[\bigcup_{x\in\bbR}\{X\le x\}=\Omega\]
+\[\bigcup_{x\in\bbR}\{X\le x\}=\Omega_t\]
 By continuity of measure from below,
-\[\lim_{x\to\infty}P(X\le x)=P(\Omega)=1\]
+\[\lim_{x\to\infty}P(X\le x)=P(\Omega_t)=1\]
 \epr
-\sssc{Right-continuous property of CDF}
+\sssc{Right-continuity of CDF}
 A CDF is right-continuous.
 \bpr
 \[h_1>h_2\implies\{X\le x+h_1\}\supseteq\{X\le x+h_2\}\]
@@ -155,9 +157,9 @@ By continuity of measure from above,
 \[\lim_{h\to 0^+}P(X\le x+h)=P\qty(\bigcap_{h>0}\{X\le x+h\})=P(X\le x)\]
 \epr
 \sssc{Converse property of CDF}
-If a function $F\colon\bbR\to[0,1]$ is non-decreasing, has limits $0$ at $-\infty$ and $1$ at $\infty$, and is right-continuous, then there exists a probability space $(\Omega,\calF,P)$ and and real random variable $X$ such that $F_X=F$.
+If a function $F\colon\bbR\to[0,1]$ is non-decreasing, has limits $0$ at $-\infty$ and $1$ at $\infty$, and is right-continuous, then there exists a real random variable $X$ such that $F_X=F$.
 \bpr
-Let $\Omega=(0,1)$, $\calF=\calB(\Omega)$, and $P$ be Lebesgue measure.
+Let $\Omega_t=(0,1)$, $\calF=\calB(\Omega)$, and $P_t$ be Lebesgue measure.
 
 Define
 \[X(u)\coloneq\inf\{x\in\bbR\mid F(x)\ge u\},\quad u\in(0,1)\]
@@ -307,29 +309,58 @@ Let $X$ be an absolutely continuous random variable. Then
 \sssc{Bayes' theorem (貝葉斯定理或貝氏定理)}
 Let $(A_i)_{i=1}^n\subseteq\calF$ be a partition, and $B$ be an event. Then,
 \[P\qty(A_k\mid B)=\frac{P\qty(B|A_k)P(A_k)}{\sum_{i=1}^nP\qty(B\mid A_i)P(A_i)}.\]
-\ssc{Multivariate random variable, joint random variable, or randm vector}
+\ssc{Joint random variable, multivariate random variable, or random vector}
 \sssc{Definition}
 For $d$ real random variables $X_1,\ldots,X_d$ with source sample spaces $\Omega_1,\ldots,\Omega_d$ and source event spaces $\calF_1,\ldots,\calF_d$, the multivariate random variable, joint random variable, or random vector $X=(X_1,\ldots,X_d)$ has source sample space $\Omega=\prod_{i=1}^d\Omega_i$ and source event space $\calF=\prod_{i=1}^d\calF_i$ and is defined for all $\omega=(\omega_1,\ldots,\omega_d)\in\Omega$ as
 \[X(\omega)=(X_1(\omega_1),\ldots,X_d(\omega_d)).\]
 For $\calF_1,\ldots,\calF_d=\calB(\bbR)$, $\calF=\calB(\bbR^d)$.
-\sssc{(Joint) cumulative distribution function (CDF)}
+\sssc{(Joint, multivariable, or multivariate) cumulative distribution function (CDF)}
 \[F_X(x_1,\ldots,x_d)=P(X_1\le x_1,\ldots,X_d\le x_d),\]
 where $,$ denotes logical AND.
-\sssc{Properties of CDF}
-\bit
-\item
+\sssc{Joint CDF range}
 \[0\le F_X(x_1,\ldots,x_d)\le 1\]
-\item For events $(a_1,\ldots,a_d)$ and $(b_1,\ldots,b_d)$ with $a_i\le b_i$ for $i\in\bbZ\cap[1,d]$,
+\sssc{Coordinate non-decreasing property of joint CDF}
+For any $(a_1,\ldots,a_d)$ and $(b_1,\ldots,b_d)$ with $a_i\le b_i$ for all $i\in\bbZ\cap[1,d]$,
 \[F_X(a_1,\ldots,a_d)\le F_X(b_1,\ldots,b_d).\]
-\item
-\[\lim_{(x_1,\ldots,x_d)\to(\infty,\ldots,\infty)}F_X(x_1,\ldots,x_d)=1\]
-\item For any $i\in\bbZ\cap[1,d]$,
+\sssc{Limit as any to negative infinity of joint CDF}
+For any $i\in\bbZ\cap[1,d]$,
 \[\lim_{x_i\to-\infty}F_X(x_1,\ldots,x_d)=0.\]
-\item Right-continuity:
-\[\lim_{x_1\to a_1^{\pht{1}+},\ldots,x_d\to a_d^{\pht{d}+}}F_X(x_1,\ldots,x_d)=F_X(a_1,\ldots,a_d)\]
-\eit
+\sssc{Limit as all to positive infinity of CDF}
+\[\lim_{(x_1,\ldots,x_d)\to(\infty,\ldots,\infty)}F_X(x_1,\ldots,x_d)=1.\]
+\sssc{Right-continuity of CDF}
+\[\lim_{x_1\to a_1^{\pht{1}+},\ldots,x_d\to a_d^{\pht{d}+}}F_X(x_1,\ldots,x_d)=F_X(a_1,\ldots,a_d).\]
+\sssc{Rectangle increment}
+For any rectangle $R=\prod_{i=1}^d(a_i,b_i]$, $\Delta F_X(R)$ denotes $P(a_1<X_1\le b_1,\ldots,a_d<X_d\le b_d)$, that is,
+\[\Delta F_X(R)=\sum_{(\varepsilon_1,\ldots,\varepsilon_d)\in\{0,1\}^d}(-1)^{d-\sum_{i=1}^d\varepsilon_i}F_X(a_1+\varepsilon_1(b_1-a_1),\ldots,a_d+\varepsilon_d(b_d-a_d)).\]
+\bpr
+Define $A_i=X_i\le b_i$, $B_i=X_i\le a_i$, $A_i\supseteq B_i$. Then $A_i\setminus B_i=A_i\cap B_i^{\pht{i}c}=a_i<X_i\le b_i$. By inclusion-exclusion principle,
+\[\ba
+\Delta F_X(R)=&P\qty(\bigcap_{i=1}^dA_i\cap B_i^{\pht{i}c})\\
+=&P\qty(\qty(\bigcap_{i=1}^dA_i)\cap\qty(\bigcap_{i=1}^dB_i^{\pht{i}c}))\\
+=&P\qty(\qty(\bigcap_{i=1}^dA_i)\cap\qty(\bigcup_{i=1}^dB_i)^c)\\
+=&P\qty(\qty(\bigcap_{i=1}^dA_i)\setminus\qty(\bigcup_{i=1}^dB_i))\\
+=&P\qty(\qty(\bigcap_{i=1}^dA_i))-P\qty(\qty(\bigcap_{i=1}^dA_i)\cap\qty(\bigcup_{i=1}^dB_i))\\
+=&P\qty(\qty(\bigcap_{i=1}^dA_i))-P\qty(\qty(\bigcup_{i=1}^dA_i\cap B_i))\\
+=&P\qty(\qty(\bigcap_{i=1}^dA_i))+\sum_{J\subseteq\bbN_{\leq d}\land J\neq\varnothing}(-1)^{|J|}P\qty(\qty(\bigcap_{j\in\bbN_{\leq d}\setminus J}A_j)\cap\qty(\bigcap_{j\in J}B_j))\\
+=&\sum_{J\subseteq\bbN_{\leq d}}(-1)^{|J|}P\qty(\qty(\bigcap_{j\in\bbN_{\leq d}\setminus J}A_j)\cap\qty(\bigcap_{j\in J}B_j))\\
+\sum_{(\varepsilon_1,\ldots,\varepsilon_d)\in\{0,1\}^d}(-1)^{d-\sum_{i=1}^d\varepsilon_i}F_X(a_1+\varepsilon_1(b_1-a_1),\ldots,a_d+\varepsilon_d(b_d-a_d)).
+\ea\]
+\epr
+\sssc{Rectangle increasing property of joint CDF}
+For any rectangle $R=\prod_{i=1}^d(a_i,b_i]$,
+\[\Delta F_X(R)\ge 0.\]
+\sssc{Converse property of CDF}
+If a function $F\colon\bbR^d\to[0,1]$ is such that for any $(a_1,\ldots,a_d)$ and $(b_1,\ldots,b_d)$ with $a_i\le b_i$ for all $i\in\bbZ\cap[1,d]$,
+\[F(a_1,\ldots,a_d)\le F(b_1,\ldots,b_d),\]
+for any $i\in\bbZ\cap[1,d]$,
+\[\lim_{x_i\to-\infty}F(x_1,\ldots,x_d)=0,\]
+\[\lim_{(x_1,\ldots,x_d)\to(\infty,\ldots,\infty)}F(x_1,\ldots,x_d)=1,\]
+\[\lim_{x_1\to a_1^{\pht{1}+},\ldots,x_d\to a_d^{\pht{d}+}}F(x_1,\ldots,x_d)=F(a_1,\ldots,a_d),\]
+and, for any rectangle $R=\prod_{i=1}^d(a_i,b_i]$,
+\[\Delta F(R)\ge 0,\]
+then there exists a real random vector $X$ such that $F_X=F$.
 \sssc{Marginal CDF}
-The marginal CDF of the sub-vector $Y=(X_{i1},\ldots,X_{ik})$ is defined as
+The marginal CDF of the sub-vector $Y=(X_{i1},\ldots,X_{ik})$ is
 \[\ba
 F_Y(x_{i1},\ldots,x_{ik})=&P(X_{i1}\le x_{i1},\ldots,X_{ik}\le x_{ik})\\
 =&\lim_{\forall j\in\bbZ\cap[1,d]\setminus\{i_l\colon l\in[1,k]\}\colon x_j\to\infty}F_X(x_1,\ldots,x_d)
@@ -337,7 +368,7 @@ F_Y(x_{i1},\ldots,x_{ik})=&P(X_{i1}\le x_{i1},\ldots,X_{ik}\le x_{ik})\\
 \ssc{Discrete random vector}
 \sssc{Discrete random vector}
 A random vector of discrete random variables.
-\sssc{(Joint) probability mass function (PMF)}
+\sssc{(Joint, multivariable, or multivariate) probability mass function (PMF)}
 \[\ba
 p_X(x_1,\ldots,x_d)&=P(X_1=x_1,\ldots,X_d=x_d)\\
 &=P(X_1=x_1)\cdot P(X_2=x_2\mid X_1=x_1)\cdot P(X_3=x_3\mid X_1=x_1,X_2=x_2)\cdot\\
@@ -347,7 +378,7 @@ p_X(x_1,\ldots,x_d)&=P(X_1=x_1,\ldots,X_d=x_d)\\
 Let target sample space be $A$ and $B\subseteq A$.
 \[P(X\in B)=\sum_{x\in B}p_X(x).\]
 \sssc{Marginal PMF}
-The marginal PMF of the sub-vector $Y=(X_{i1},\ldots,X_{ik})$ is defined as
+The marginal PMF of the sub-vector $Y=(X_{i1},\ldots,X_{ik})$ is
 \[\ba
 p_Y(x_{i1},\ldots,x_{ik})=&P(X_{i1}=x_{i1},\ldots,X_{ik}=x_{ik})\\
 =&\sum_{\forall j\in\bbZ\cap[1,d]\setminus\{i_l\colon l\in[1,k]\}\colon x_j}p_X(x_1,\ldots,x_d)
@@ -355,14 +386,14 @@ p_Y(x_{i1},\ldots,x_{ik})=&P(X_{i1}=x_{i1},\ldots,X_{ik}=x_{ik})\\
 \ssc{Absolutely Continuous Random Vector}
 \sssc{Absolutely continuous random vector}
 A random vector of absolutely continuous random variables.
-\sssc{(Joint) probability density function (PDF)}
+\sssc{(Joint, multivariable, or multivariate) probability density function (PDF)}
 \[f_X(x_1,\ldots,x_d)=\frac{\partial^nF_X(x_1,\ldots,x_d)}{\partial x_1\ldots\partial x_d}.\]
 Equality of joint PDF means equality a.e.
 \sssc{Probability of an event}
 Let target sample space be $A$ and $B\subseteq A$.
 \[P(X\in B)=\int_Bf(x_1,\ldots,x_d)\dd{x_1}\ldots\dd{x_d}.\]
 \sssc{Marginal PDF}
-For the sub-vector $Y=(X_{i1},\ldots,X_{ik})$, suppose marginal CDF of it is $F_Y(x_{i1},\ldots,x_{ik})$, the marginal PDF is defined as
+For the sub-vector $Y=(X_{i1},\ldots,X_{ik})$, suppose marginal CDF of it is $F_Y(x_{i1},\ldots,x_{ik})$, the marginal PDF is
 \[\ba
 f_Y(X_{i1},\ldots,X_{ik})(x_{i1},\ldots,x_{ik})=&\frac{\partial^nF_Y(x_{i1},\ldots,x_{ik})}{\partial x_{i1}\ldots\partial x_{ik}}\\
 =&\int_{-\infty}^{\infty}\ldots\int_{-\infty}^{\infty}f_X(x_1,\ldots,x_d)\prod_{j\in\bbZ\cap[1,d]\setminus\{i_l\colon l\in[1,k]}\dd{x_j}
