@@ -214,6 +214,12 @@ Current leads voltage by $\frac{\pi}{2}$.
 Voltage across an inductor in steady state is 0.
 \sssc{Inductor under steady-state sinusoidal AC}
 Current lags voltage by $\frac{\pi}{2}$.
+\sssc{Resonance}
+A network is called in resonance or resonant if its voltage and current are in phase.
+\sssc{Quality factor}
+The quality factor $Q$ of a network is $2\pi$ multiplied by the maximum energy stored $E_m$ divided by the total energy lost per period $E_l$:
+\[Q=\frac{2\pi E_m}{E_l}.\]
+The quality factor in resonance is denoted as $Q_0$.
 \sssc{Node}
 A node is a point in a network where two or more elements are connected.
 \sssc{Pole or terminal}
@@ -991,10 +997,15 @@ v_C&=v_{in}-v_L\\
 &=i(0^-)\sqrt{\frac{L}{C}}\sin(\frac{1}{\sqrt{LC}}t)+\qty(v_{in}+v_C(0^-))\cos(\frac{1}{\sqrt{LC}}t)\\
 &=i(0^-)L\omega_0\sin(\omega_0t)+\qty(v_{in}+v_C(0^-))\cos(\omega_0t)
 \ea\]
-Resonance state (time domain):
+Resonance state (time domain): Maximum energy stored $E_m$, total energy lost per period $E_l$, quality factor $Q_0$.
 \[v_{in}=v_m\cos(\omega_0t+\theta)\]
-\[i=i_m\cos(\omega_0t+\theta),\quad i_m=\infty\]
+\[i_m=i(0^-)=\infty\]
+\[v_C(0^-)=0\]
+\[i=i_m\cos(\omega_0t+\theta)\]
 \[v_C=-v_L=\frac{i_m}{C\omgea_0}\sin(\omega_0t+\theta)=i_mL\omega_0\sin(\omega_0t+\theta)\]
+\[E_m=\frac{Li_m^{\pht{m}2}}{2}\]
+\[E_l=\frac{v_mi_m\pi}{\omega_0}\]
+\[Q_0=\frac{Li_m\omega_0}{v_m}=\frac{i_m}{v_m}\sqrt{\frac{L}{C}}\]
 Resonance state (phasor domain):
 \[\mb{V}_{in}=v_me^{j\theta}\]
 \[\mb{I}=i_me^{j\theta},\quad i_m=\infty\]
@@ -1242,10 +1253,15 @@ i_L&=i_{in}-i_C\\
 &=v(0^-)\sqrt{\frac{C}{L}}\sin(\frac{1}{\sqrt{LC}}t)-\qty(i_{in}-i_L(0^-))\cos(\frac{1}{\sqrt{LC}}t)\\
 &=v(0^-)\sqrt{\frac{C}{L}}\sin(\frac{1}{\sqrt{LC}}t)+\qty(i_{in}-i_L(0^-))\cos(\omega_0t)
 \ea\]
-Resonance state (time domain):
+Resonance state (time domain): Maximum energy stored $E_m$, total energy lost per period $E_l$, quality factor $Q_0$.
 \[i_{in}=i_m\cos(\omega_0t+\theta)\]
-\[v=v_m\cos(\omega_0t+\theta),\quad v_m=\infty\]
+\[v(0^-)=v_m=\infty\]
+\[v=v_m\cos(\omega_0t+\theta)\]
+\[i_L(0^-)=0\]
 \[i_C=-i_L=-v_mC\omega_0\sin(\omega_0t+\theta)=\frac{v_m}{L\omega_0}\sin(\omega_0t+\theta)\]
+\[E_m=\frac{Cv_m^{\pht{m}2}}{2}\]
+\[E_l=\frac{v_mi_m\pi}{\omega_0}\]
+\[Q_0=\frac{Cv_m\omega_0}{i_m}=\frac{v_m}{i_m}\sqrt{\frac{C}{L}}\]
 Resonance state (phasor domain):
 \[\mb{I}_{in}=i_me^{j\theta}\]
 \[\mb{V}=v_me^{j\theta},\quad v_m=\infty\]
@@ -1805,10 +1821,15 @@ Constant source total response (time domain):
 \[v_L=e^{-\omega_0\zeta t}\qty(\qty(v_{in}-v_C(0^-)-i(0^-)R)\cos(\omega_0\sqrt{1-\zeta^2}t)-\frac{v_{in}-v_C(0^-)\zeta-\frac{1}{2}i(0^-)R\frac{2\zeta^2-1}{\zeta}}{\sqrt{1-\zeta^2}}\sin(\omega_0\sqrt{1-\zeta^2}t))\]
 \[v_C=v_{in}-e^{-\omega_0\zeta t}\qty(\qty(v_{in}-v_C(0^-))\cos(\omega_0\sqrt{1-\zeta^2}t)+\qty(\qty(v_{in}-v_C(0^-))\frac{\zeta}{\sqrt{1-\zeta^2}}-\frac{1}{2}\frac{i(0^-)R}{\zeta\sqrt{1-\zeta^2}})\sin(\omega_0\sqrt{1-\zeta^2}t))\]
 \eit
-Resonance state (time domain):
+Resonance state (time domain): Maximum energy stored $E_m$, total energy lost per period $E_l$, quality factor $Q_0$.
 \[v_{in}=v_m\cos(\omega_0t+\theta)\]
+\[i(0^-)=\frac{v_m}{R}\]
+\[v_C(0^-)=0\]
 \[i=\frac{v_m}{R}\cos(\omega_0t+\theta)\]
 \[v_C=-v_L=\frac{v_m}{RC\omgea_0}\sin(\omega_0t+\theta)=\frac{v_mL\omega_0}{R}\sin(\omega_0t+\theta)\]
+\[E_m=\frac{Lv_m^{\pht{m}2}}{2R^2}\]
+\[E_l=\frac{v_m^{\pht{m}2}\pi}{R\omega_0}\]
+\[Q_0=\frac{L\omega_0}{R}=\frac{1}{R}\sqrt{\frac{L}{C}}\]
 Resonance state (phasor domain):
 \[\mb{V}_{in}=v_me^{j\theta}\]
 \[\mb{I}=\frac{v_m}{R}e^{j\theta}\]
@@ -2305,10 +2326,15 @@ Constant source total response (time domain):
 \[i_L=i_{in}-e^{-\omega_0\zeta t}\qty(\qty(i_{in}-i_L(0^-))\cos(\omega_0\sqrt{1-\zeta^2}t)+\qty(i_{in}-\frac{1}{2}\frac{v(0^-)}{R\zeta\sqrt{1-\zeta^2}}-i_L(0^-)\frac{\zeta}{\sqrt{1-\zeta^2}})\sin(\omega_0\sqrt{1-\zeta^2}t))\]
 \[i_C=e^{-\omega_0\zeta t}\qty(\qty(i_{in}+\frac{v(0^-)}{R}+i_L(0^-))\cos(\omega_0\sqrt{1-\zeta^2}t)-\qty(i_{in}-\frac{v(0^-)}{2R}\frac{1-2\zeta^2}{\zeta\sqrt{1-\zeta^2}}+i_L(0^-)\frac{\zeta}{\sqrt{1-\zeta^2}})\sin(\omega_0\sqrt{1-\zeta^2}t))\]
 \eit
-Resonance state (time domain):
+Resonance state (time domain): Maximum energy stored $E_m$, total energy lost per period $E_l$, quality factor $Q_0$.
 \[i_{in}=i_m\cos(\omega_0t+\theta)\]
+\[v(0^-)=i_mR\]
+\[i_L(0^-)=0\]
 \[v=i_mR\cos(\omega_0t+\theta)\]
 \[i_C=-i_L=-i_mR\omega_0\sin(\omega_0t+\theta)=\frac{i_mR}{L\omega_0}\sin(\omega_0t+\theta)\]
+\[E_m=\frac{Ci_m^{\pht{m}2}R^2}{2}\]
+\[E_l=\frac{i_m^{\pht{m}2}R\pi}{\omega_0}\]
+\[Q_0=CR\omega_0=R\sqrt{\frac{C}{L}}\]
 Resonance state (phasor domain):
 \[\mb{I}_{in}=i_me^{j\theta}\]
 \[\mb{V}=i_mRe^{j\theta}\]
@@ -2425,10 +2451,19 @@ where $A$ is open-loop gain, and $v_{os}$ is input offset voltage.
 \item No current flow into either of the input terminals.
 \eit
 This is a linear element with inputs $v_+$ and $v_-$ and output $v_o$.
+\sssc{General amplifier with inverting configuration}
+A general amplifier with inverting configuration consists of an op amp where input voltage $v_i$ is connected to $v_-$ through an input impedance $Z_i$, $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through a feedback impedance $Z_f$.
+\[I_i=\frac{V_i}{Z_i}=I_f=\frac{-V_o}{Z_f},\]
+\[V_o=-\frac{Z_f}{Z_i}V_i.\]
+When $\abs{\Re(\frac{Z_f}{Z_i})}<1$, it's called an attenuator.
 \sssc{Inverting amplifier}
 An inverting amplifier consists of an op amp where input voltage $v_i$ is connected to $v_-$ through an input resistor $R_i$, $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through a feedback resistor $R_f$.
 \[i_i=\frac{v_i}{R_i}=i_f=\frac{-v_o}{R_f},\]
 \[v_o=-\frac{R_f}{R_i}v_i.\]
+\sssc{General amplifier with noninverting configuration}
+A general amplifier with noninverting configuration consist of an op amp where input voltage $v_i$ is connected to $v_+$, $v_-$ is connected ground through a ground impedance $Z_g$, and $v_o$ is fed back to $v_-$ through a feedback impedance $Z_f$.
+\[V_i=V_o\frac{Z_g}{Z_f+Z_g},\]
+\[V_o=\qty(1+\frac{Z_f}{Z_g})V_i.\]
 \sssc{Noninverting amplifier}
 A noninverting amplifier consist of an op amp where input voltage $v_i$ is connected to $v_+$, $v_-$ is connected ground through a ground resistor $R_g$, and $v_o$ is fed back to $v_-$ through a feedback resistor $R_f$.
 \[v_i=v_o\frac{R_g}{R_f+R_g},\]
