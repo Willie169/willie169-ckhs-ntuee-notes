@@ -115,7 +115,7 @@ Suppose a system $W$ consists of components $W_1,W_2,\ldots,W_n$ in parallel wit
 \sssc{Random variable}
 For a probability spaces $(\Omega_s,\calF_s,P_s)$ and a measurable space $(\Omega_t,\calF_t)$, a random variable $X$ is a measurable function $X\colon\Omega_s\to\Omega_t$ such that for each $E\subseteq\calF_t$, the preimage $X^{-1}(E)\in\calF_s$, and the induced probability spaces $(\Omega_t,\calF_t,P_t)$ of target sample space $\Omega_t$, target event space, and pushforward probability measure $P_t(E)\coloneq P_s(X^{-1}(E))$. It is often the case that $\calF_t$ is the Borel $\text{\textsigma}$-algebra of $\Omega_t$.
 \sssc{Real(-valued) random variable}
-A random variable is a real(-valued) random variable if $\Omega_t\subseteq\bbR$ and $\calF_t$ is the Borel $\text{\textsigma}$-algebra of $\Omega_t$.
+A random variable is a real(-valued) random variable if $\Omega_t\subseteq\bbR$ (equipped with subspace topology) and $\calF_t$ is the Borel $\text{\textsigma}$-algebra of $\Omega_t$.
 \sssc{Cumulative distribution function (CDF)}
 The cumulative distribution function (CDF) of a real random valuable $X$ is defined as
 \[F_X(x)\coloneq P(X\le x)=\int_{\Omega_t}\mb{1}_{(-\infty,x]}(t)\dd{P_t(t)}.\]
@@ -189,8 +189,11 @@ For the CDF $F_X$ of any real random variable $X$, there exist $p\in[0,1]$, $q\i
 \[F_X=pF_Y+qF_z+(1-p-q)F_W.\]
 \sssc{Derived ramdom variable}
 For random variables $X_1,\ldots,X_n$ and an $n$-ary function $f$, a random variable $Y=f(X_1,\ldots,X_n)$ is a derived ramdom variable.
-\sssc{Independent and identically distributed (i.i.d.) random variables}
-Random variables with identical CDF that are mutually independent.
+\sssc{Equality in distribution}
+Two real random variables are equal in distribution or law, i.e., has the same pushforward probability measure, if they have the same CDF.
+\bpr
+By measures agree on generating \textpi-system agree theorem.
+\epr
 \ssc{Discrete Random Variables}
 \sssc{Probability mass function (PMF)}
 For a discrete random variable $X$ with target sample space $\Omega_t=\{a_1,a_2,\ldots\}$, the probability mass function of $X$, denoted as $p_X$ or $P_X$, is defined as
@@ -226,7 +229,7 @@ we have
 \[f_X(x)=g_X(x)\]
 a.e., and
 \[f_X(x)=F_X'(x)\]
-a.e.
+a.e. Equality of PDF means equality a.e.
 
 That the PDF of $X$ is $p$ is denoted as $X\sim p$.
 \sssc{PDF determines CDF}
@@ -270,16 +273,6 @@ for some $p\in[0,1]$, $q\in[0,1]$, discrete random variable $Y$, absolutely cont
 \[P(Y=a)=pr\]
 \[t_X=r\delta_a+t_V\]
 for some real random variable $V$ with $P(V=a)=0$.
-\ssc{Sum random variable}
-\sssc{General case}
-For two independent real random variables $X,Y$ with the same source sample space and event space, and with pushforward probability measure $P_X$ and $P_Y$ respectively, let the Schwartz distributions induced by $P_X$ and $P_Y$ be $T_X$ and $T_Y$ respectively. Then the Schwartz distribution $T_{X+Y}$ induced by the pushforward probability measure $P_{X+Y}$ of the sum random variable $X+Y$ is the distributional convolution of $T_1$ and $T_2$, that is,
-\[T=T_1*T_2.\]
-\sssc{For discrete random variables}
-For two independent discrete random variables $X,Y$,
-\[p_{X+Y}(z)=\sum_{x\in\bbR}p_X(x)p_Y(z-x).\]
-\sssc{Sum of independent absolutely continuous random variables}
-For two independent absolutely continuous random variables $X,Y$,
-\[f_{X+Y}(z)=\int_{-\infty}^{\infty}f_X(x)f_Y(z-x)\dd{x}.\]
 \ssc{Conditional Probability (條件機率)}
 \sssc{Conditional probability}
 The probability of another event $A$ occurring given that a certain event $B$ has occurred, denoted as $P(A|B)$.
@@ -334,8 +327,6 @@ where $,$ denotes logical AND.
 \[\lim_{x_i\to-\infty}F_X(x_1,\ldots,x_d)=0.\]
 \item Right-continuity:
 \[\lim_{x_1\to a_1^{\pht{1}+},\ldots,x_d\to a_d^{\pht{d}+}}F_X(x_1,\ldots,x_d)=F_X(a_1,\ldots,a_d)\]
-\item $X_1,\ldots,X_d$ are independent iff
-\[F_X(x_1,\ldots,x_d)=\prod_{i=1}^dF_{X_i}(x_i).\]
 \eit
 \sssc{Marginal CDF}
 The marginal CDF of the sub-vector $Y=(X_{i1},\ldots,X_{ik})$ is defined as
@@ -352,13 +343,9 @@ p_X(x_1,\ldots,x_d)&=P(X_1=x_1,\ldots,X_d=x_d)\\
 &=P(X_1=x_1)\cdot P(X_2=x_2\mid X_1=x_1)\cdot P(X_3=x_3\mid X_1=x_1,X_2=x_2)\cdot\\
 &\ldots\cdot P(X_d=x_d\mid X_1=x_1,X_2=x_2\ldots X_{d-1}=x_{d-1})
 \ea\]
-\sssc{Properties of discrete random vector}
-\bit
-\item Let target sample space be $A$ and $B\subseteq A$.
+\sssc{Probability of an event}
+Let target sample space be $A$ and $B\subseteq A$.
 \[P(X\in B)=\sum_{x\in B}p_X(x).\]
-\item $X_1,\ldots,X_d$ are independent iff
-\[p_X(x_1,\ldots,x_d)=\prod_{i=1}^dp_{X_i}(x_i).\]
-\eit
 \sssc{Marginal PMF}
 The marginal PMF of the sub-vector $Y=(X_{i1},\ldots,X_{ik})$ is defined as
 \[\ba
@@ -370,19 +357,75 @@ p_Y(x_{i1},\ldots,x_{ik})=&P(X_{i1}=x_{i1},\ldots,X_{ik}=x_{ik})\\
 A random vector of absolutely continuous random variables.
 \sssc{(Joint) probability density function (PDF)}
 \[f_X(x_1,\ldots,x_d)=\frac{\partial^nF_X(x_1,\ldots,x_d)}{\partial x_1\ldots\partial x_d}.\]
-\sssc{Properties of discrete random vector}
-\bit
-\item Let target sample space be $A$ and $B\subseteq A$.
+Equality of joint PDF means equality a.e.
+\sssc{Probability of an event}
+Let target sample space be $A$ and $B\subseteq A$.
 \[P(X\in B)=\int_Bf(x_1,\ldots,x_d)\dd{x_1}\ldots\dd{x_d}.\]
-\item $X_1,\ldots,X_d$ are independent iff
-\[f_X(x_1,\ldots,x_d)=\prod_{i=1}^df_{X_i}(x_i).\]
-\eit
 \sssc{Marginal PDF}
 For the sub-vector $Y=(X_{i1},\ldots,X_{ik})$, suppose marginal CDF of it is $F_Y(x_{i1},\ldots,x_{ik})$, the marginal PDF is defined as
 \[\ba
 f_Y(X_{i1},\ldots,X_{ik})(x_{i1},\ldots,x_{ik})=&\frac{\partial^nF_Y(x_{i1},\ldots,x_{ik})}{\partial x_{i1}\ldots\partial x_{ik}}\\
 =&\int_{-\infty}^{\infty}\ldots\int_{-\infty}^{\infty}f_X(x_1,\ldots,x_d)\prod_{j\in\bbZ\cap[1,d]\setminus\{i_l\colon l\in[1,k]}\dd{x_j}
 \ea\]
+\ssc{Independent random variables}
+\sssc{Definition}
+Real random variables $X_1,\ldots,X_n$ are (mutually) independent if for all Borel sets $A_1,\ldots,A_n$,
+\[P(X_1\in A_1,\ldots,X_n\in A_n)=\prod_{i=1}^nP(X_i\in A_i).\]
+\sssc{\textpi-system}
+Real random variables $X_1,\ldots,X_n$ are (mutually) independent if there exists \textpi-system $I$ on the real numbers that generates the Borel algebra such that for all sets $A_1,\ldots,A_n\in I$,
+\[P(X_1\in A_1,\ldots,X_n\in A_n)=\prod_{i=1}^nP(X_i\in A_i).\]
+\bpr
+By measures agree on generating \textpi-system agree theorem.
+\epr
+A particularly useful \textpi-system on the real numbers that generates the Borel algebra is the set $C$ of all $(-\infty,x]$ with $x\in\bbR$. And when $\bbR$ is restricted to a countable subspace $U\subseteq\bbR$ with subspace topology, $C$ is restricted to the power set of $U$ and generates the Borel algebra of $U$, which is also the power set of $U$.
+\sssc{Subset independence}
+If real random variables $X_1,\ldots,X_n$ are independent, then for any permutation $\sigma$ on $\bbZ\cap[1,n]$, for any positive integer $m\le n$, $X_{\sigma(1)},\ldots,X_{\sigma(m)}$ are independent.
+\sssc{CDF factorization}
+$X_1,\ldots,X_d$ are independent iff
+\[F_X(x_1,\ldots,x_d)=\prod_{i=1}^dF_{X_i}(x_i).\]
+\bpr
+Only if: trivial.
+
+If: By \textpi-system of $(-\infty,x]$ with $x\in\bbR$.
+\epr
+\sssc{PMF factorization}
+$X_1,\ldots,X_d$ are independent iff
+\[p_X(x_1,\ldots,x_d)=\prod_{i=1}^dp_{X_i}(x_i).\]
+\bpr
+Only if: trivial.
+
+If: By subspace \textpi-system.
+\epr
+\sssc{PDF factorization}
+$X_1,\ldots,X_d$ are independent iff
+\[f_X(x_1,\ldots,x_d)=\prod_{i=1}^df_{X_i}(x_i).\]
+\bpr
+Only if: trivial.
+
+If: By CDF factorization and absolute continuity.
+\epr
+\sssc{Independent and identically distributed (i.i.d.) random variables}
+$X_1,\ldots,X_d$ are said to be independent and identically distributed (i.i.d.) if they are independent and the marginal CDFs $F_{X_i}$ for all $i\in\bbZ\cap[1,d]$ are identical.
+\sssc{Functions on independent random variables are independent}
+Let $X_1,\ldots,X_n$ be independent real random variables and $g_1,\ldots,g_n\colon\bbR\to\bbR$ be measurable functions. Then $g_1(X_1),\ldots,g_n(X_n)$ are independent.
+\bpr
+For Borel sets $A_1,\ldots,A_n$,
+\[\ba
+P(g_1(X_1)\in A_1,\ldots,g_n(X_n)\in A_n)=&P(X_1\in g_1^{\pht{1}-1}(A_1),\ldots,X_n\in g_n^{\pht{n}-1}(A_n))\\
+=&\prod_{i=1}^nP(X_i\in g_i^{\pht{i}-1}(A_i))\\
+=&\prod_{i=1}^nP(g_i(X_i)\in A_i)
+\ea\]
+\epr
+\ssc{Sum of independent random variables}
+\sssc{Sum of independent random variables}
+For two independent real random variables $X,Y$ with the same source sample space and event space, and with pushforward probability measure $P_X$ and $P_Y$ respectively, let the Schwartz distributions induced by $P_X$ and $P_Y$ be $T_X$ and $T_Y$ respectively. Then the Schwartz distribution $T_{X+Y}$ induced by the pushforward probability measure $P_{X+Y}$ of the sum random variable $X+Y$ is the distributional convolution of $T_1$ and $T_2$, that is,
+\[T=T_1*T_2.\]
+\sssc{Sum of independent discrete random variables}
+For two independent discrete random variables $X,Y$,
+\[p_{X+Y}(z)=\sum_{x\in\bbR}p_X(x)p_Y(z-x).\]
+\sssc{Sum of independent absolutely continuous random variables}
+For two independent absolutely continuous random variables $X,Y$,
+\[f_{X+Y}(z)=\int_{-\infty}^{\infty}f_X(x)f_Y(z-x)\dd{x}.\]
 \ssc{(Mathematical) Expected Value, Expectation (期望值), or Mean (平均值)}
 \sssc{Definition}
 For a random variable $X$ on $(\Omega_s,\calF_s,P_s)$ with induced probability space $(\Omega_t,\calF_t,P_t)$, the expected value or expectation $E(X)$, $\bbE(X)$, $E[X]$, or $\bbE[X]$, or mean $\mu_X$, of it is defined as the Lebesgue integral
