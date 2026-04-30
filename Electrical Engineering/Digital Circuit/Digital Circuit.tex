@@ -40,7 +40,7 @@ The MSB represents sign, in which $0$ represents positive and $1$ represents neg
 It can represent numbers range from $-(2^{N-1}-1)$ to $2^{N-1}-1$. It has two zero ($+0$ and $-0$).
 
 It might be the easiest to read, but its arithmetic is the hardest to compute.
-\sssc{1's complement}
+\sssc{One's complement}
 The nonnegative numbers are the same as those in sign and magnitude; the negative numbers invert all bits of its absolute value, i.e. $(2^N-1)$ minus its absolute value, that is, if a negative integer $B$ written in 1's complement is
 \[B=b_{N-1}b_{N-2}\ldots b_1b_0,\]
 then
@@ -117,7 +117,7 @@ Case 5: $0>B>A$
 \end{proof}
 
 If the difference of a positive number and a negative number is greater than $2^{N-1}-1$, it overflows into the negative range; if the difference of a negative number and a positive number is less than $-2^{N-1}+1$, it overflows into the positive range. This makes overflow detection straightforward.
-\sssc{2's complement}
+\sssc{Two's complement}
 The nonnegative numbers are the same as those in sign and magnitude; the negative numbers invert all bits of its absolute value and add $1$, i.e. $2^N$ minus its absolute value, where $-2^{N-1}$ is only MSB being $1$ and others being $0$, that is, if a negative integer $B$ written in 1's complement is
 \[B=b_{N-1}b_{N-2}\ldots b_1b_0,\]
 then
@@ -642,8 +642,8 @@ It can be implemented with
 \end{proof}
 
 The symbol of a full subtractor in block diagrams is a square with "full subtractor" in it with minuend bit and subtrahend bit inputs lines and difference output line on two parallel sides; let $x$-axis be the line perpendicular to the two sides oriented from minuend bit and subtrahend bit inputs lines and difference output line, $z$-axis be oriented out of the paper; borrow-in input and borrow-out output with arrows on the other two sides respectively with direction of them in positivite $y$ direction and from borrow-in input to borrow-out output.
-\sssc{Parallel (binary) adder, ripple-carry adder (RCA), or adder}
-An $n$-bit parallel adder or ripple-carry adder, or simply adder is a combinational circuit consisting of $n$ full adders called cells or stages. It has two $n$-bits unsigned or two's complement binary numbers as inputs (MSB to LSB), $A_{n-1}A_{n-2}\ldots A_0$ (augend) and $B_{n-1}B_{n-2}\ldots B_0$ (addned), and a constant $0$ input, $C_{in_0}=0$, and produces the $(n+1)$-bit sum of the two numbers as outputs, $C_{out_{n-1}}S_{n-1}S_{n-2}\ldots S_0$, in which the $(i+1)$th cell takes $A_i$ as augend bit, $B_i$ as addend bit, and $C_{in_i}$ as carry-in, and produces sum $S_i$ and carry-out $C_{out_i}$, that is,
+\sssc{Parallel (binary) adder, ripple-carry adder (RCA), or carry propagate adder (CPA)}
+An $n$-bit parallel adder or ripple-carry adder, or carry propagate adder is a combinational circuit consisting of $n$ full adders called cells or stages. It has two $n$-bits unsigned or two's complement binary numbers as inputs (MSB to LSB), $A_{n-1}A_{n-2}\ldots A_0$ (augend) and $B_{n-1}B_{n-2}\ldots B_0$ (addned), and a constant $0$ input, $C_{in_0}=0$, and produces the $(n+1)$-bit sum of the two numbers as outputs, $C_{out_{n-1}}S_{n-1}S_{n-2}\ldots S_0$, in which the $(i+1)$th cell takes $A_i$ as augend bit, $B_i$ as addend bit, and $C_{in_i}$ as carry-in, and produces sum $S_i$ and carry-out $C_{out_i}$, that is,
 \[S_i=A_i\oplus B_i\oplus C_{in_i},\]
 \[C_{out_i}=A_iB_i+A_iC_{in_i}+B_iC_{in_i},\]
 where $C_{in_i}$ for $n\geq i>0$ and $C_{out_i}$ for $n-1>i\geq 0$ are interconnections in the parallel adder, and for the first cell,
@@ -654,8 +654,8 @@ The first cell can be replaced with a half adder.
 The ripple-carry adder is relatively slow because, in the worst case, a carry propagates through all $n$ stages of the adder before it stabilizes, and there are approximately two gate delays per stage.
 
 A logical equivalent of an $n$-bit ripple-carry adder, that is, with two $n$-bits unsigned or two's complement binary numbers as inputs (MSB to LSB), $A_{n-1}A_{n-2}\ldots A_0$ (augend) and $B_{n-1}B_{n-2}\ldots B_0$ (addned), (and a $C_{in_0}$ input set 0), and produces the $(n+1)$-bit sum of the two numbers as outputs, $C_nS_{n-1}S_{n-2}\ldots S_0$, is called an $n$-bit adder.
-\sssc{Parallel (binary) subtractor, ripple-borrow subtractor (RBS), or subtractor}
-An $n$-bit parallel subtractor, ripple-borrow subtractor, or simply subtractor is a combinational circuit consisting of $n$ full subtractors called cells or stages. It has two $n$-bits unsigned or two's complement binary numbers as inputs (MSB to LSB), $A_{n-1}A_{n-2}\ldots A_0$ (minuend) and $B_{n-1}B_{n-2}\ldots B_0$ (subtrahend), and a constant $0$ input, $B_{in_0}=0$, and produces the $(n+1)$-bit two's complement difference of the two numbers as outputs, $B_{out_{n-1}}D_{n-1}D_{n-2}\ldots D_0$, in which the $(i+1)$th cell takes $A_i$ as minuend bit, $B_i$ as subtrahend bit, and $B_{in_i}$ as borrow-in, and produces difference $D_i$ and borrow-out $B_{out_i}$, that is,
+\sssc{Parallel (binary) subtractor, ripple-borrow subtractor (RBS), or borrow propagate subtractor (BPS)}
+An $n$-bit parallel subtractor, ripple-borrow subtractor, or borrow propagate subtractor is a combinational circuit consisting of $n$ full subtractors called cells or stages. It has two $n$-bits unsigned or two's complement binary numbers as inputs (MSB to LSB), $A_{n-1}A_{n-2}\ldots A_0$ (minuend) and $B_{n-1}B_{n-2}\ldots B_0$ (subtrahend), and a constant $0$ input, $B_{in_0}=0$, and produces the $(n+1)$-bit two's complement difference of the two numbers as outputs, $B_{out_{n-1}}D_{n-1}D_{n-2}\ldots D_0$, in which the $(i+1)$th cell takes $A_i$ as minuend bit, $B_i$ as subtrahend bit, and $B_{in_i}$ as borrow-in, and produces difference $D_i$ and borrow-out $B_{out_i}$, that is,
 \[D_i=A_i\oplus B_i\oplus B_{in_i},\]
 \[B_{out_i}=A_i'B_i+A_i'B_{in_i}+B_iB_{in_i},\]
 where $B_{in_i}$ for $n\geq i>0$ and $B_{out_i}$ for $n-1>i\geq 0$ are interconnections in the parallel subtractor, and for the first cell,
@@ -774,6 +774,8 @@ However, the left end cell (cell $n-1$) has no input $gt_n$ and $lt_n$, and
 \[gt_{n-1}=A_iB_{n-1}',\]
 \[lt_{n-1}=A_i'B_{n-1}.\]
 Comparison proceeds from left to right, $gt=gt_0$, $lt=lt_0$, and $eq=gt\odot lt$.
+\sssc{Lookup table (LUT)}
+A lookup table is a possibly multidimensional array implemented in software or hardware that replaces runtime computation of a function with an array indexing retrieval, where the dimension of the array is the arity of the function.
 \ssc{Devices}
 \sssc{Read-only memory (ROM)}
 A read-only memory (ROM) is a non-volatile (data is kept even when power is off) memory consists of an array of semiconductor devices that are interconnected to store an array of binary data. Once binary data is stored in the ROM, it can be read out whenever desired, but the data that is stored cannot be changed under normal operating conditions.
@@ -1909,23 +1911,47 @@ Testing of sequential circuits is generally more difficult than testing combinat
 In the cases where a sequential circuit is implemented as part of an integrated circuit, only the inputs and outputs are available at the IC pins, and observing the state of the internal flip-flops is Impossible, test must be done by applying input sequences to the circuit and observing the output sequences. The set of test sequences must traverse all arcs on the state graph, but this is typically not a sufficient test.
 \ssc{Multiplier}
 \sssc{General}
-Multiplication of two unsigned binary numbers $A=A_{n-1}A_{n-2}\ldots A_0$ and $B=B_{n-1}B_{n-2}\ldots B_0$ involves two steps, computing the $n$ partial products $P_0=A_{n-1}A_{n-2}\ldots A_0*B_0$, $P_1=A_{n-1}A_{n-2}\ldots A_0*B_10$, $\ldots$, $P_{n-1}=A_{n-1}A_{n-2}\ldots A_0*B_{n-1}0\ldots0$, where $P_i=0$ if $B_i=0$ and $P_i=A<<i$ if $B_i=1$ where $<<i$ means shifting $i$ bits towards MSB, and computing multi-operand addition $\sum_{i=0}^{n-1}P_i$ to get the final result.
+Multiplication of two unsigned binary numbers $A=A_{n-1}A_{n-2}\ldots A_0$ and $B=B_{n-1}B_{n-2}\ldots B_0$ involves two steps, computing the $n$ partial products $P_i=AB_i<<i$ where $<<i$ means shifting $i$ bits towards MSB for $i\in\bbZ\cap[0,n-1]$, and computing multi-operand addition $\sum_{i=0}^{n-1}P_i$ to get the final result.
 
-In the bit heap of partial products (one partial product per row), each column (also called weight) $i$ (starting at 0) has $i+1$ bits for $i\in\bbZ\cap[0,n-1]$ and $2n-i-1$ bits for $i\in\bbZ\cap[n,2n-2]$, where the maximum height is $n$ at column $n-1$.
+Bit heap is the heap of partial products one partial product per row, where each column is also called weight and the number of partial products containing that column is called height. For the plain $n$ partial products described above, column $i$ (starting at 0) has $i+1$ bits for $i\in\bbZ\cap[0,n-1]$ and $2n-i-1$ bits for $i\in\bbZ\cap[n,2n-2]$, and the maximum height is $n$ at column $n-1$.
+
+A full adder can reduce 3 bits of the same column to one bit of the same column and one bit of the next column. A half adder can reduce 2 bits of the same column to one bit of the same column and one bit of the next column.
 \sssc{Shift-add multiplier}
 Use a shifter and an accumulator to sum each partial product one by one, trading of speed for area.
 \sssc{Array multiplier}
-Sum partial products with carry-save adder until the operands left is two, and use an adder (such as a carry-lookahead adder or parallel prefix adder) to sum the two. The number of stage is $O(n)$.
+Sum partial products with carry-save adder until the number of operands left is two, and use an adder to sum the two. The number of stage is $O(n)$.
 \sssc{Wallace (tree/reduction) multiplier}
-In each stage of the Wallace tree, for each column of bit heap independently, if the bits left $\ge 3$, a full adder is used to reduce 3 bits of the same column to one of the same column and one bit of the next column, until all columns left $\le 2$ bits. And then an adder (such as a carry-lookahead adder or parallel prefix adder) is used to sum up the final result. The number of stage is $O(\log n)$.
+In each stage of Wallace multiplier, for each column of bit heap with height $h$ in parallel, $\floor{\frac{h}{3}}$ full adders are used, and if $h\mod 3=2$, a half adder is also used, until all columns have height $\le 2$. And then an adder is used to get the final result. The number of stage in total is $O(\log n)$.
 \sssc{Dadda (tree/reduction) multiplier}
 Dadda defined a sequence $\langle d_k\rangle$:
 \[d_1=2,\]
 \[d_{k+1}=\lfloor\frac{3}{2}d_k\rfloor,\quad k\in\bbN,\]
 that is, $2,3,4,6,9,13,19,\ldots$.
 
-In each stage of the Dadda tree, choose the largest $k$ such that $d_k\le$ the height of the highest column, for each column of bit heap independently, if the bits left $\ge d_k$, a full adder is used to reduce 3 bits of the same column to one of the same column and one bit of the next column, until all columns left $\le 2$ bit. And then an adder (such as a carry-lookahead adder or parallel prefix adder) is used to sum up the final result. The number of stage is $O(\log n)$ and is sometimes slightly more than that of Wallace multiplier, and the number of full adders used is usually less than that of Wallace multiplier.
+In each stage of Dadda multiplier, choose the largest $k$ such that $d_k\le$ the height of the highest column, for each column of bit heap with height $h$ in parallel but with carry bit from last column in current stage (if any) counted when calculating full and half adders used, $\floor{\frac{h-d_k}{2}}$ full adders are used, and if $(h-d_k)\mod 2=1$, a half adder is also used, until all columns have height $\le 2$. And then an adder is used to get the final result. The number of stage in total is $O(\log n)$, and the gates and area used is less than that of Wallace multiplier except some small $n$.
+\sssc{Booth's multiplication algorithm or Booth encoding}
+Booth's multiplication algorithm or Booth encoding is a technique to reduce the number of partial products and makes them work for two's complement numbers (but not for unsigned numbers without tweak or constraint). Those partial products are then fed in to Wallace or Dadda tree. 
 
+Suppose there are two two's complement signed numbers, multiplicand $A=A_{n-1}A_{n-2}\ldots A_0$ and multiplier $B=B_{n-1}B_{n-2}\ldots B_0$, $B_{-1}$ is defined as 0.
 
+Consider a run of ones $B_sB_{s-1}\ldots B_t$, called starting at bit $t$ and ending at bit $s+1$. It contributes $B^{s+1}-B^t$. If bit $i$ is 0 and bit $i-1$ is 1, there is a end of a run of ones at bit $i$, contributing $2^i$. If bit $i$ is 1 and bit $i-1$ is 0, there is a start of a run of ones at bit $i$, contributing $-2^i$. If bits $i$ and $i-1$ are the same, there is no start or end of a run of ones at bit $i$, contributing $0$. Thus bit $i$ contributes $(B_{i-1}-B_i)*2^i$. If $B_0$ is 1, there is a start of a run of ones at bit $0$. This is why $B_{-1}$ is defined as $0$. Consider last bit, bit $n-1$. If bit $n-1$ is 0 and bit $n-2$ is 1, there is a end of a run of ones at bit $n-1$, contributing $2^{n-1}$. If bit $n-1$ is 1 and bit $n-2$ is 0, the number is negative, contributing $-2^{n-1}$. If bit $n-1$ is 0 and bit $n-2$ is 0, there is no end of a run of ones at bit $n-1$, contributing $0$. If bit $n-1$ is 1 and bit $n-2$ is 1, the number is negative, contributing $-2^{n-1}$, and there is an end of run of ones at bit $n-1$, contributing $2^{n-1}$, thus contributing $0$ in total. Therefore, the same rule can be applied directly to the last bit.
+
+Consider $B_{k(i+1)-1}\ldots B_{ki-1}$. $B_{k(i+1)-1}\ldots B_{ki}$ contributes
+\[\ba
+m=&\sum_{j=ki}^{k(i+1)-1}(B_{j-1}-B_j)*2^j\\
+=&\sum_{j=ki}^{k(i+1)-1}B_{j-1}*2^j-\sum_{j=ki}^{k(i+1)-1}B_j*2^j\\
+=&B_{ki-1}*2^{ki}+\sum_{j=ki}^{k(i+1)-2}B_j*2^{j+1}-\sum_{j=ki}^{k(i+1)-2}B_j*2^j-B_{k(i+1)-1}*2^{k(i+1)-1}\\
+=&B_{ki-1}*2^{ki}+\sum_{j=ki}^{k(i+1)-2}B_j*2^j-B_{k(i+1)-1}*2^{k(i+1)-1}\\
+=&\qty(B_{ki-1}+\sum_{j=0}^{k-2}B_{ki+j}*2^j-B_{k(i+1)-1}*2^{k-1})*2^{ki},
+\ea\]
+which has range $[-2^{k-1},2^{k-1}]*2^{ki}$.
+
+When using Booth radix-$2^k$ encoding, assuming $n$ is a multiple of $k$, the algorithm scans the multiplier $k+1$ bits at a time with one bit overlapping with last scan and starting from $B_{k-1}\ldots B_{-1}$ to $B_{n-1}\ldots B_{n-k-1}$, which are $\frac{n}{k}$ windows in total and $B_{k(i+1)-1}\ldots B_{ki-1}$ in each scan $i\in\bbZ\cap\qty[0,\frac{n}{k}-1]$, and computes partial product $m*A*2^{ki}$ where $m=B_{ki-1}+\sum_{j=0}^{k-2}B_{ki+j}*2^j-B_{k(i+1)-1}*2^{k-1}$ is retrieved from a lookup table given $B_{k(i+1)-1}\ldots B_{ki-1}$.
+
+The $2^z$ multiples of $A$ for $z\in\bbN$ can be computed by shifting $A$ $z$ bits towards MSB. Only radix-2 and radix-4 has $m$ that ranges only on exponents of 2, which are $\{-1,0,1\}$ and $\{-2,-1,0,1,2\}$ respectively. And radix-4 has fewer windows than radix-2 and is the most used one.
+
+If only $n$ bits is needed, we can simply discard upper bits from partial products.
+
+Now consider unsigned $A,B$. The result is the result of two's complement plus $A*B_{n-1}*2^n$, which can be computed by adding it as another partial product, or, if only $n$ bits is needed, be ignored since it's in the overflowing bits.
 \end{document}
 
