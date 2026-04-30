@@ -1512,7 +1512,7 @@ The initial state of an LFSR is called seed.
 
 For each $n\in\bbN$, the maximal count cycle of $n$-bit LFSRs is $2^n-1$, in which all possible states except the state where all bits are zero are included. An $n$-bit LFSR has count cycle $2^n-1$ iff its feedback polynomial is primitive over $\bbF_2$.
 
-PLACEHOLDER: primitive, irreducible, Primitive trinomials after learned in abstract algebra
+PLACEHOLDER: primitive, irreducible, Primitive trinomials in abstract algebra
 
 PLACEHOLDER: The state graph of an $n$-bit LFSR (with $2^n-1$ vertices) consists of only disjoint cycles and loops, and the state where all bits are zero is always with a loop.
 
@@ -1907,5 +1907,25 @@ Testing of sequential circuits is generally more difficult than testing combinat
 \een
 
 In the cases where a sequential circuit is implemented as part of an integrated circuit, only the inputs and outputs are available at the IC pins, and observing the state of the internal flip-flops is Impossible, test must be done by applying input sequences to the circuit and observing the output sequences. The set of test sequences must traverse all arcs on the state graph, but this is typically not a sufficient test.
+\ssc{Multiplier}
+\sssc{General}
+Multiplication of two unsigned binary numbers $A=A_{n-1}A_{n-2}\ldots A_0$ and $B=B_{n-1}B_{n-2}\ldots B_0$ involves two steps, computing the $n$ partial products $P_0=A_{n-1}A_{n-2}\ldots A_0*B_0$, $P_1=A_{n-1}A_{n-2}\ldots A_0*B_10$, $\ldots$, $P_{n-1}=A_{n-1}A_{n-2}\ldots A_0*B_{n-1}0\ldots0$, where $P_i=0$ if $B_i=0$ and $P_i=A<<i$ if $B_i=1$ where $<<i$ means shifting $i$ bits towards MSB, and computing multi-operand addition $\sum_{i=0}^{n-1}P_i$ to get the final result.
+
+In the bit heap of partial products (one partial product per row), each column (also called weight) $i$ (starting at 0) has $i+1$ bits for $i\in\bbZ\cap[0,n-1]$ and $2n-i-1$ bits for $i\in\bbZ\cap[n,2n-2]$, where the maximum height is $n$ at column $n-1$.
+\sssc{Shift-add multiplier}
+Use a shifter and an accumulator to sum each partial product one by one, trading of speed for area.
+\sssc{Array multiplier}
+Sum partial products with carry-save adder until the operands left is two, and use an adder (such as a carry-lookahead adder or parallel prefix adder) to sum the two. The number of stage is $O(n)$.
+\sssc{Wallace (tree/reduction) multiplier}
+In each stage of the Wallace tree, for each column of bit heap independently, if the bits left $\ge 3$, a full adder is used to reduce 3 bits of the same column to one of the same column and one bit of the next column, until all columns left $\le 2$ bits. And then an adder (such as a carry-lookahead adder or parallel prefix adder) is used to sum up the final result. The number of stage is $O(\log n)$.
+\sssc{Dadda (tree/reduction) multiplier}
+Dadda defined a sequence $\langle d_k\rangle$:
+\[d_1=2,\]
+\[d_{k+1}=\lfloor\frac{3}{2}d_k\rfloor,\quad k\in\bbN,\]
+that is, $2,3,4,6,9,13,19,\ldots$.
+
+In each stage of the Dadda tree, choose the largest $k$ such that $d_k\le$ the height of the highest column, for each column of bit heap independently, if the bits left $\ge d_k$, a full adder is used to reduce 3 bits of the same column to one of the same column and one bit of the next column, until all columns left $\le 2$ bit. And then an adder (such as a carry-lookahead adder or parallel prefix adder) is used to sum up the final result. The number of stage is $O(\log n)$ and is sometimes slightly more than that of Wallace multiplier, and the number of full adders used is usually less than that of Wallace multiplier.
+
+
 \end{document}
 
