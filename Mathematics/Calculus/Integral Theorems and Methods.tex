@@ -411,7 +411,7 @@ PLACEHOLDER
 \epr
 \subsection{Fundamental theorem of multivariable calculus (多變數微積分基本定理)}
 \subsubsection{Gradient theorem or Fundamental theorem for linear integral}
-Suppose $C$ is a piecewise $C^1$, oriented curve with initial point $a$ and terminal point $b$. If $\mb{F}$ is a scalar or vector field differentiable on a neighborhood of $C$, then
+Suppose $C$ is a piecewise $C^1$, oriented, simple curve with initial point $a$ and terminal point $b$. If $\mb{F}$ is a scalar or vector field differentiable on a neighborhood of $C$, then
 \[\int_C(\nabla\mathbf{F})\cdot\dd{\mb{r}}=\mb{F}(b)-\mb{F}(a).\]
 \bpr
 Let $C$ be $\mb{r}(t),\quad t\in[\alpha,\beta]$, where $\mb{r}(\alpha)=a$ and $\mb{r}(\beta)=b$.
@@ -499,7 +499,7 @@ also statement
 \epr
 \ssc{Conservative field}
 \sssc{Path independence equivalent to zero closed path integral}
-For an $n$-dimensional vector field $\mb{v}$ defined on an open subset $U$ of $\bbR^n$, for any two piecewise $C^1$ paths $C,D\subseteq U$ with same initial and terminal points,
+For an $n$-dimensional vector field $\mb{v}$ in $L^1(U)$ for an open subset $U$ of $\bbR^n$, for any two piecewise $C^1$ paths $C,D\subseteq U$ with same initial and terminal points,
 \[\int_C\mb{v}\cdot\dd{\mb{x}}=\int_D\mb{v}\cdot\dd{\mb{x}}\]
 iff for any piecewise $C^1$ closed path $E\subseteq U$,
 \[\oint_E\mb{v}\cdot\dd{\mb{x}}=0.\]
@@ -510,7 +510,7 @@ By $\int_C\mb{v}\cdot\dd{\mb{x}}=-\int_{-C}\mb{v}\cdot\dd{\mb{x}}$ and $\int_{C+
 For a conservative field $f$ on an open subset $U$ of $\bbR^n$ and any two piecewise $C^1$ paths $C,D\subseteq U$ with same initial point $a$ and terminal point $b$,
 \[\int_Cf\cdot\dd{\mb{x}}=\int_Df\cdot\dd{\mb{x}}.\]
 \bpr
-Let $f=\nabla\varphi$, by Gradient theorem, both equal to $\varphi(b)-\varphi(a)$.
+Let $f=\nabla\varphi$. By Gradient theorem, both equal to $\varphi(b)-\varphi(a)$.
 \epr
 \sssc{One dimension}
 A one-dimensional field is conservative on an open interval iff it is continuous on it.
@@ -522,11 +522,11 @@ on the subset of $U$ where LHS exists.
 Let $f=\nabla\varphi$. $f_1=\varphi_x$, $f_2=\varphi_y$,
 \[\pdv{f_2}{x}=\pdv{f_1}{y}=\varphi_{xy}.\]
 \epr
-A $C^1$ two-dimensional field $f=(f_1,f_2)$ is conservative on a simply-connected open set $U$ iff
+A differentiable, two-dimensional field $f=(f_1,f_2)$ is conservative on a simply-connected open set $U$ iff
 \[\pdv{f_2}{x}-\pdv{f_1}{y}=0\]
 on $U$.
 \bpr
-If: By Green's theorem, let $C$ be a piecewise smooth curve in $U$ and surrounds surface $S$.
+If: Any piecewise $C^1$, simple, closed curve $C$ in $U$ bounds a simply-connected surface $S\subseteq U$, by Green's theorem,
 \[\oint_Cf\cdot\dd{(x,y)}=\iint_S\pdv{f_2}{x}-\pdv{f_1}{y}\dd{S}=0\]
 \epr
 \sssc{Three dimensions}
@@ -541,15 +541,15 @@ Let $f=\nabla\varphi=(f_1,f_2,f_3)$. $f_1=\varphi_x$, $f_2=\varphi_y$, $f_3=\var
 =&(0,0,0)
 \ea\]
 \epr
-A $C^1$ three-dimensional field $f$ is conservative on a simply-connected open set $U$ iff
+A differentiable, three-dimensional field $f$ is conservative on a simply-connected open set $U$ iff
 \[\nabla\times f=\mb{0}\]
 on $U$.
 \bpr
-If: By Stokes' theorem, let $C$ be a piecewise smooth curve in $U$ and surrounds surface $S$.
+If: Any piecewise $C^1$, simple, closed curve $C$ in $U$ bounds a simply-connected surface $S\subseteq U$, by Stokes' theorem,
 \[\oint_Cf\cdot\dd{(x,y,z)}=\iint_S\nabla\times f\dd{S}=0\]
 \epr
 \ssc{Divergence of curl}
-For a two times differentiable three-dimensional field $\mb{T}$, $\nabla\cdot(\nabla\times\mb{T})=0.\]
+For a twice differentiable, three-dimensional field $\mb{T}$, $\nabla\cdot(\nabla\times\mb{T})=0.\]
 \bpr
 \[\ba
 \nabla\cdot(\nabla\times\mb{T})=&\nabla\cdot\qty(\pdv{T_3}{y}-\pdv{T_2}{z},\pdv{T_1}{z}-\pdv{T_3}{x},\pdv{T_2}{x}-\pdv{T_1}{y})\\
@@ -558,12 +558,12 @@ For a two times differentiable three-dimensional field $\mb{T}$, $\nabla\cdot(\n
 \ea\]
 \epr
 \ssc{Two-dimensional curve rotates about principal axis on the same plane}
-The area of the surface formed by rotating the curve $\mb{r}(t)=(x(t),y(t)),\quad t\in[a,b]$ about $y=d$ is
+The area of the surface formed by rotating the simple curve $\mb{r}(t)=(x(t),y(t)),\quad t\in[a,b]$ about $y=d$ is
 \[A=2\pi\int_{t=a}^b\abs{y(t)-d}\dd{s(t)},\]
 where $s(t)$ is the arc length function of $\mb{r}$ from $a$ to $t$.
 \subsection{Solid of revolution}
 \subsubsection{Pappus's (centroid) theorem I or (Pappus–)Guldinus theorem I}
-The area of the surface formed by rotating a two-dimensional curve with arc length $s$ and centroid $\mb{P}$ about a rotational axis on the same plane of the curve that doesn't cut the curve in a distance $d$ from $\mb{P}$ is
+The area of the surface formed by rotating a two-dimensional simple curve with arc length $s$ and centroid $\mb{P}$ about a rotational axis on the same plane of the curve that doesn't cut the curve in a distance $d$ from $\mb{P}$ is
 \[A=2\pi sd.\]
 \begin{proof}
 Let the curve be $\mb{r}(t)=(x(t),y(t)),\quad t\in[a,b]$, $s(t)$ be the arc length function of it, the centroid of it be the origin, that is, 
