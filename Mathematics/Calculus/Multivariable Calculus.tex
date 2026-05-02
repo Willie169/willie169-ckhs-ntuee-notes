@@ -1,140 +1,121 @@
 \section{Multivariable Calculus}
-\subsection{Notation}
+\subsection{Notation and convention}
 \begin{itemize}
-\item $\mathbf{0}$ or $0$ refers to the zero tensor (零張量) in the interested Euclidean tensor space $V$, that is, it satisfies 
-\[\forall\mathbf{v}\in V:\,\mathbf{v}+\mathbf{0}=\mathbf{v}.\]
-\item Unit vector (單位向量): $\mathbf{e}_i$ is the unit vector in the $i$th direction, i.e., a vector with zero norm.
+\item $\mathbf{0}$ or $0$ refers to the zero element of a space $V$, that is, 
+\[\forall\mathbf{v}\in V\colon\mathbf{v}+\mathbf{0}=\mathbf{v}.\]
+\item Independent variable vector: $\mathbf{x}=(x_1,x_2,\dots,x_n)$. For two dimensions also $\mathbf{x}=(x,y)$. For three dimensions also $\mathbf{x}=(x,y,z)$.
+\item Basis: $\mathbf{e}_i$ is the unit vector in the direction of $x_i$. For two or three dimensions also $\mb{i}=\mb{e}_i$ and $\mb{j}=\mb{e}_2$. For three dimensions also $\mathbf{k}=\mb{e}_3$.
+\item Vector field: A function, often denoted with bold uppercase Latin letter, whose domain is a subset of $\bbR^n$ and codomain is $\bbR^m$, whose $i$th component is often denoted as the same character with subscript $i$, e.g., $F_i$ or $\mb{F}_i$ for vector field $\mb{F}$.
+\item Scalar field: A function, often denoted with non-bold Latin or Greek letter, whose domain is a subset of $\bbR^n$ and codomain is $\bbR$.
+\item $k$th total derivative function operator: $D^k$
 \item Dot product (點積) operator: $\cdot$
 \item Cross product (叉積) operator: $\times$
 \item Gradient (梯度) operator: $\nabla$ or $\operatorname{grad}$
-\item Jacobian matrix (雅可比矩陣): $\nabla$, or $\mathbf{J}(\mathbf{F})$, $J(\mathbf{F})$, $\mb{J}_{\mb{F}}$, or $J_{\mathbf{F}}$ for operand $\mb{F}$.
-\item Gram matrix, Gramian matrix, or Gramian: $G(\mb{F})$, $G_{\mb{F}}$ for operand $\mb{F}$.
+\item Jacobian matrix (雅可比矩陣): $\nabla$, $\mathbf{J}(\mathbf{F})$, $J(\mathbf{F})$, $\mb{J}_{\mb{F}}$, or $J_{\mathbf{F}}$ for operand vector field $\mb{F}$.
+\item Gram matrix, Gramian matrix, or Gramian: $\mathbf{G}(\mathbf{F})$, $G(\mathbf{F})$, $\mb{G}_{\mb{F}}$, or $G_{\mathbf{F}}$ for operand vector field $\mb{F}$.
 \item Divergence (散度) operator: $\nabla \cdot$ or $\operatorname{div}$
-\item Curl (旋度) (three dimension) operator: $\nabla \times$ or $\operatorname{curl}$
-\item Directional derivative (方向導數) operator: $(\mb{F}\cdot\nabla)\mb{A}$ or $D_{\mb{F}}\mb{A}$ for directional derivative of scalar field $\mb{A}$ along a vector $\mb{F}$, typically unit vector and $D_{\mb{F}}\mb{A}$ is typically used, or vector field $\mb{F}$ and $(\mb{F}\cdot\nabla)\mb{A}$ is typically used.
-\item Hessian (黑塞) (matrix): $D^2f$, $\mb{H}(f)$, $H(f)$, $\mb{H}_f$, $H_f$, or $\nabla\otimes\nabla f$ for operand $f$.
-\item Laplace operator (拉普拉斯算子): $\nabla\cdot\nabla$, $\nabla^2$, or $\Delta$. For clarity, we use $\nabla\cdot\nabla$ here.
-\item Line/path integral operator: $\int$
+\item Curl (旋度) operator (three dimension): $\nabla\times$ or $\operatorname{curl}$
+\item Directional derivative (方向導數) operator: $(\mb{F}\cdot\nabla)\mb{G}$ or $D_{\mb{F}}\mb{G}$ for directional derivative of tensor field $\mb{G}$ along/in the direction of a vector field $\mb{F}\colon\bbR^n\to\bbR^n$. For constant vector $\mb{F}$, $D_{\mb{F}}\mb{G}$ notation is typically used and $\mb{F}$ is typically a unit vector.
+\item Hessian (黑塞) (matrix): 
+$D^2f$, $\nabla\nabla$, $\nabla^2f$, $\mathbf{H}(f)$, $H(f)$, $\mb{H}_f$, $H_f$, or $\nabla\otimes\nabla f$ for operand scalar field $f$.
+\item Laplace operator (拉普拉斯算子) or Laplacian: $\nabla\cdot\nabla$, $\nabla^2$, or $\Delta$. For clarity, we'll use $\nabla\cdot\nabla$ here.
+\item Vector and covector convention: We use column vector convention of vectors and row vector convention of covectors here, and tensor convention follows. Note that a derivative function of a scalar field is a covector. We use the convention that the notation of partial derivative w.r.t. a column vector $v$ means the column vector of the partial derivatives w.r.t. each component of $v$.
+\item Line/path/general integral operator: $\int$
 \item Double/surface integral operator: $\iint$
 \item Triple/volume integration operator: $\iiint$
 \item Closed line integral operator: $\oint$
-\item Closed surface/double integral operator: $\oiint$
+\item Closed surface integral operator: $\oiint$
 \item Arc length element: $\dd{\ell}$
-\item Vector arc length element: $\dd{\boldsymbol{\ell}}$, which is defined as unit tangent vector multiplied by $\dd{\ell}$
+\item Vector arc length element: $\dd{\boldsymbol{\ell}}$, which is defined as unit tangent vector multiplied by $\dd{\ell}$.
 \item Surface element: $\dd{S}$
 \item Vector surface element: $\dd{\mb{S}}$, which is defined as unit normal vector in the orientation multiplied by $\dd{S}$ and is only defined for orientable surface equipped with an orientation. For a vector field $\mb{F}$, $\iint_S\mb{F}\cdot\dd{\mb{S}}$ is called flux of $f$ across $S$.
 \item Positive orientation: The boundary curve $\ell$ of a compact surface $S$, $\dd{\boldsymbol{\ell}}$ transverses counterclockwise around $S$ unless otherwise specified.
 \item Upward/Positive orientation: In $\bbR^2$, a surface is oriented upward unless otherwise specified.
 \item Outward/Positive orientation: The boundary surface $S$ of a compact region of the same dimension of the space is oriented outward unless otherwise specified.
 \end{itemize}
-\subsection{Notation used here}
-Unless otherwise specified:
-\begin{itemize}
-\item The domain of the funcitons or maps below are subsets of a Euclidean vector space. If not otherwise specified, the coordinates are the Cartesian coordinates, the norms are the Euclidean norms, and the measures are the Lebesgue measures.
-\item Independent variable vector: $\mathbf{x}=(x_1,x_2,\dots,x_n)$
-\item Vector fields: $\mathbf{F}(\mathbf{x}) = \sum_{i=1}^n F_i(\mathbf{x}) \mathbf{e}_i$、$\mathbf{G}$
-\item Scalar fields: $A(\mathbf{x})$、$B(\mathbf{x})$
-\item Tensor fields: $f(\mathbf{x})$、$g(\mathbf{x})$
-\item Three-dimensional tensor space field: $\mathbf{T}(\mathbf{x})$
-\item The $i$th component of the map $f$: $f_i$
-\end{itemize}
-\subsection{First order}
-\subsubsection{Gradient (梯度) or first derivative, and Jacobian matrix}
-\[
-\nabla f = \pdv{f}{(x_1,x_2,\ldots,x_n)} = \begin{pmatrix}\qty(\pdv{f}{x_1}) & \qty(\pdv{f}{x_2}) & \dots  & \qty(\pdv{f}{x_n})\end{pmatrix}
-\]
-The gradient of a scalar field is a vector field, the gradient of a vector field is a second-order tensor (matrix) field, and the gradient of a $k$-order tensor field is a $k+1$-order tensor field. 
+\subsection{Nabla operators}
+\subsubsection{Gradient and Jacobian matrix}
+The gradient of a tensor field $f$ is
+\[\nabla f = \pdv{f}{(x_1,x_2,\ldots,x_n)} = \begin{bmatrix}\qty(\pdv{f}{x_1})^{\top} & \qty(\pdv{f}{x_2})^{\top} & \cdots  & \qty(\pdv{f}{x_n})^{\top}\end{bmatrix},\]
+that is, the transpose of the first-order derivative of $f$. Some sources define gradient as the transpose of the definition here.
 
-In particular, the gradient of a scalar field $A$ is
-\[
-\nabla A = \sum_{i=1}^n \pdv{A}{x_i}e_i.
-\]
-And the gradient of an $m$-dimensional vector field $\mathbf{F}$, also called the Jacobian matrix (雅可比矩陣) of $\mb{F}$, is a matrix whose $( i,j )$th entry is
-\[(J(\mb{F}))_{ij}=\frac{\partial F_i}{\partial x_j},\]
-The determinant of Jacobian matrix is called Jacobian determinant, or Jacobian.
+The gradient of a scalar field is a vector field. The gradient of a vector field is a bilinear form field (i.e., also a matrix) and is also called the Jacobian matrix of it. Some sources use the term gradient only for scalar fields.
 
-The Jacobian matrix or sometimes Jacobian is also denoted as
-\[\pdv{(F_1,\ldots,F_m)}{(x_1,\ldots,x_n)}.\]
-\sssc{Gram matrix, Gramian matrix, or Gramian}
-The Gram matrix, Gramian matrix, or Gramian of $G$ of $\mb{F}$ is defined as an $n\times n$ matrix where
-\[G_{ij}=\pdv{\mb{F}}{x_i}\cdot\pdv{\mb{F}}{x_j},\]
-that is,
-\[G=J^{\top}J,\]
-where $J$ is the Jacobian matrix of $\mb{F}$.
- 
-The Gram determinant or Gramian is the determinant of the Gram matrix.
-\subsubsection{Divergence (散度)}
-\[
-\nabla \cdot f = \sum_{i=1}^n\frac{\partial f_i}{\partial x_i}
-\]
-The divergence of a vector field is a scalar field, the gradient of a second-order tensor (i.e. matrix) field is a vector field, and the divergence of a $k+1$-order tensor field is a $k$-order tensor field.
-\subsubsection{Curl (旋度) (three dimension)}
-The curl is only defined on three-dimensional vector field.
-\[\ba
-\nabla \times \mathbf{T} =& 
-\begin{pmatrix}
-\mathbf{e}_1 & \mathbf{e}_2 & \mathbf{e}_3 \\
-\frac{\partial}{\partial x_1} & \frac{\partial}{\partial x_2} & \frac{\partial}{\partial x_3} \\
-T_1 & T_2 & T_3
-\end{pmatrix}\\
-=&\qty(\pdv{T_3}{x_2}-\pdv{T_2}{x_3},\pdv{T_1}{x_3}-\pdv{T_3}{x_1},\pdv{T_2}{x_1}-\pdv{T_1}{x_2})
-\ea\]
-The curl of a three-dimensional vector field is a three-dimensional vector field.
-\subsubsection{Curl (two dimension)}
-In two dimensions, $\pdv{T_2}{x_1}-\pdv{T_1}{x_2}$ is called curl.
+The $(i,j)$th entry of the Jacobian matrix of a vector field $\mb{F}$ is
+\[(J(\mb{F}))_{ij}=\pdv{F_i}{x_j}.\]
+The determinant of Jacobian matrix is called Jacobian determinant or Jacobian.
+
+The notation
+\[\pdv{(F_1,\ldots,F_m)}{(x_1,\ldots,x_n)}\]
+denotes the Jacobian matrix or sometimes Jacobian of $\mb{F}$.
 \subsubsection{Directional derivative (方向導數)}
-For $\mb{A}\colon D\subseteq\bbR^n\to\bbR$ and $\mb{F}\colon E\subseteq\bbR^n\to\bbR^n$,
-\[(\mb{F}\cdot\nabla)\mb{A}=D_{\mb{F}}\mb{A}\coloneq\lim_{h\to 0}\frac{\mb{A}(\mb{x}+h\mb{F}(\mb{x}))-\mb{A}(\mb{x})}{h}.\]
-For points where $\mb{A}$ is differentiable,
-\[(\mb{F}\cdot\nabla)\mb{A}=\sum_{i=1}^nF_i\pdv{\mb{A}}{x_i}=\mb{F}\cdot\nabla\mb{A}.\]
-In $D_{\mb{F}}\mb{A}$ notation, $\mb{F}$ is often constant and often unit vector.
-\subsection{Higher order}
-\subsubsection{Hessian (黑塞) (matrix) or second derivative}
-The Hessian or second derivative $H_f$ of field $f$ is defined as a matrix such that
-\[(H(f))_{ij}=\frac{\partial f}{\partial x_i\partial x_j},\]
+For a tensor field $\mb{G}\colon U\subseteq\bbR^n\to X$ and $\mb{F}\colon V\subseteq\bbR^n\to\bbR^n$, the directional derivative of $\mb{G}$ in the direction of $\mb{F}$ is a function $((\mb{F}\cdot\nabla)\mb{G})\colon W\subseteq\bbR^n\to X$ defined as
+\[(\mb{F}\cdot\nabla)\mb{G}\coloneq\lim_{h\to 0}\frac{\mb{G}(\mb{x}+h\mb{F}(\mb{x}))-\mb{G}(\mb{x})}{h},\]
+where $W$ is a subset of $U\cap V$ where the definition is defined.
+
+For points where $\mb{G}$ is differentiable,
+\[(\mb{F}\cdot\nabla)\mb{G}=\sum_{i=1}^nF_i\pdv{\mb{G}}{x_i}=\mb{F}(D\mb{A})=\mb{F}\cdot(\nabla\mb{G}).\]
+\sssc{Gram matrix, Gramian matrix, or Gramian}
+The Gram matrix, Gramian matrix, or Gramian $G(\mb{F})$ of a vector field $\mb{F}$ is defined as the transpose of the Jacobian matrix of $\mb{F}$ right multiplied by the Jacobian matrix of $\mb{F}$
+\[G(\mb{F})=J(\mb{F})^{\top}J(\mb{F}),\]
 that is,
-\[H(f)=\nabla\qty((\nabla f)^\top).\]
+\[G_{ij}=\pdv{\mb{F}}{x_i}\cdot\pdv{\mb{F}}{x_j}.\]
+The determinant of Gram matrix is called Gram determinant or Gramian.
+\subsubsection{Divergence (散度)}
+For an $n$-dimensional vector field $\mb{F}$,
+\[\nabla\cdot\mb{F}=\sum_{i=1}^n\pdv{F_i}{x_i},\]
+which is a scalar field.
+\subsubsection{Curl (旋度) (three dimension)}
+For a three-dimensional vector field $\mb{F}(x,y,z)$ defined on a subset of $\bbR^3$,
+\[\ba
+\nabla\times\mathbf{F}=&\begin{bmatrix}
+\mathbf{i} & \mathbf{j} & \mathbf{k} \\
+\frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
+F_1 & F_2 & F_3
+\end{bmatrix}\\
+=&\qty(\pdv{F_3}{y}-\pdv{F_y}{z},\pdv{F_1}{z}-\pdv{F_3}{x},\pdv{F_2}{x}-\pdv{F_1}{y})
+\ea\]
+\subsubsection{Curl (two dimension)}
+For a two-dimensional vector field $\mb{F}(x,y)$ defined on a subset of $\bbR^2$, $\pdv{F_2}{x}-\pdv{F_1}{y}$ is called curl, and $F_1,F_2$ are often denoted $P,Q$ respectively.
+\subsubsection{Hessian (黑塞) (matrix)}
+The Hessian matrix $H(f)$ of a scalar field $f$ is its second derivative, which is a tensor field of type $(0,2)$, represented as a matrix, that is,
+\[(H(f))_{ij}=\frac{\partial^2f}{\partial x_i\partial x_j},\]
+that is,
+\[H(f)=J((\nabla f)).\]
 \subsubsection{Laplace operator (拉普拉斯算子)}
-\[\nabla\cdot\nabla f = \nabla \cdot (\nabla f) = \tr(H(f))=\sum_{i=1}^n\frac{\partial^2 f}{\partial x_i^{\phantom{i}2}}\]
-The Laplace operator applied to a tensor field is a tensor field of the same order and same dimension.
+The Laplace operator applied to a scalar field $f$ is
+\[\nabla\cdot\nabla f = \nabla \cdot (\nabla f) = \tr(H(f))=\sum_{i=1}^n\frac{\partial^2 f}{\partial x_i^{\phantom{i}2}}.\]
 \subsubsection{Poisson's equation (卜瓦松 or 帕松 or 泊松方程)}
-\[
-\nabla\cdot\nabla A = B(\mathbf{x})
-\]
+An equation in the form
+\[\nabla\cdot\nabla f = g(\mathbf{x})\]
+for scalar fields $f,g$.
 \subsubsection{Laplace's equation (拉普拉斯方程)}
-\[
-\nabla\cdot\nabla A = 0
-\]
-A real function $A$ with real independent variables that is second-order differentiable for all independent variables is called a harmonic function if $A$ satisfies Laplace's equation.
-\subsubsection{Multi-index notation (多重指標記號)}
-Suppose there are \( n \) variables \( x_1, x_2, \dots, x_n \), then a multi-index $\alpha$ is a vector of \( n \) nonnegative integers: 
-\[
-\alpha = (\alpha_1, \alpha_2,\ldots,\alpha_n), \quad \text{where\ } \alpha_i \in \mathbb{N}_0.
-\]
-Define: 
-\begin{itemize}
-\item Norm or length $|\alpha|$ or \( \|\alpha\| \): 
-\[
-|\alpha| = \alpha_1 + \alpha_2 + \ldots\alpha_n.
-\]
-\item Factorial \( \alpha! \): 
-\[
-\alpha! = \alpha_1! \cdot \alpha_2! \cdot \ldots \alpha_n!.
-\]
-\item Power \( \mathbf{x}^\alpha \): 
-If \( \mathbf{x} = (x_1, x_2,\ldots, x_n) \), then
-\[
-\mathbf{x}^\alpha = x_1^{\alpha_1} \cdot x_2^{\alpha_2} \ldots  x_n^{\alpha_n}.
-\]
-\item Order:
-\[(\beta_1, \beta_2,\ldots,\beta_n)\leq(\alpha_1, \alpha_2,\ldots, \alpha_n)\coloneq\beta_1\leq\alpha_1\land\beta_2\leq\alpha_2\land\ldots\beta_n\leq\alpha_n\]
-\[(\beta_1, \beta_2,\ldots,\beta_n)<(\alpha_1, \alpha_2,\ldots, \alpha_n)\coloneq\beta_1<\alpha_1\land\beta_2<\alpha_2\land\ldots\beta_n<\alpha_n\]
-\item Higher-order mixed partial derivatives $D^\alpha f$ or $\partial^\alpha f$: 
-\[
-D^\alpha f = \frac{\partial^{|\alpha|} f}{\partial x_1^{\alpha_1} \partial x_2^{\alpha_2} \ldots  \partial x_n^{\alpha_n}}.
-\]
-\end{itemize}
-\subsubsection{Higher-order derivative}
+An equation in the form
+\[\nabla\cdot\nabla f = 0\]
+for scalar field $f$.
+
+A twice differentiable scalar field $f$ is called a harmonic function if $f$ satisfies Laplace's equation.
+\ssc{Multi-index notation (多重指標記號)}
+\sssc{Definition}
+Suppose there are \( n \) variables \( x_1, x_2, \ldots, x_n \), then a multi-index $\alpha$ is a vector of \( n \) nonnegative integers $\alpha_1, \alpha_2,\ldots,\alpha_n$:
+\[\alpha = (\alpha_1, \alpha_2,\ldots,\alpha_n).\]
+\sssc{Norm or length}
+The space is equipped with norm or length $|\alpha|$ or \( \|\alpha\| \);
+\[|\alpha| = \alpha_1 + \alpha_2 + \ldots\alpha_n,\]
+i.e., one-norm.
+\sssc{Factorial}
+The factorial \( \alpha! \) of it is defined as:
+\[\alpha! = \alpha_1! \cdot \alpha_2! \cdot \ldots \alpha_n!.\]
+\sssc{Exponent}
+If \( \mathbf{x} = (x_1, x_2,\ldots, x_n) \), $\mathbf{x}^\alpha$ is defined as:
+\[\mathbf{x}^\alpha = x_1^{\alpha_1} \cdot x_2^{\alpha_2} \ldots  x_n^{\alpha_n}.\]
+\sssc{Order}
+For two multi-indices $\alpha=(\alpha_1, \alpha_2,\ldots, \alpha_n)$ and $\beta=(\beta_1, \beta_2,\ldots,\beta_n)$, $\alpha\le\beta$ if $\alpha_i\le\beta_i$ for all $i\in\bbZ\cap[1,n]$.
+\ssc{Higher-order derivatives}
+\sssc{Higher-order mixed partial derivatives}
+For a tensor field $f$ defined on a subset of $\bbR^n$ and a multi-index $\alpha=(\alpha_1, \alpha_2,\ldots, \alpha_n)$, $D^\alpha f$ or $\partial^\alpha f$ is defined as
+\[D^\alpha f = \frac{\partial^{|\alpha|} f}{\partial x_1^{\pht{1}\alpha_1} \partial x_2^{\pht{2}\alpha_2} \ldots  \partial x_n^{\pht{n}\alpha_n}}.\]
+\sssc{Higher-order derivative}
 The $k$th order derivative of $\mathbf{F}:\,\mathbb{R}^n\to\mathbb{R}^m$, denoted as $\mathbf{F}^{(k)}(\mathbf{x})$ or $D^{k}\mathbf{F}(\mathbf{x})$, is a $(\mathbb{R}^n)^k\to\mathbb{R}$ function, where $(\mathbb{R}^n)^k$ is a Cartesian product of $k$ copies of $\mathbb{R}^n$ vector, that is,
 \[D^{k}\mathbf{F}(\mathbf{x})=\sum_{|\alpha|=k} \left(D^\alpha \mathbf{F}(\mathbf{a})\right).\]
 In particular, the first-order derivative of $\mathbf{F}$ is the gradient of it.
@@ -143,8 +124,7 @@ Let $f\colon D\subseteq\mathbb{R}^m\to\mathbb{R}$ be a function and $I\subseteq 
 \[\sum_{\alpha\in\mathbb{N}_0^{\pht{0}m}}\frac{D^{\alpha}f(a)}{\alpha !}(x-a)^{\alpha},\]
 of which convergence is not guaranteed, and convergence to $f$ is not guaranteed even if it's convergent.
 
-Taylor series of at $0$ is called Maclaurin series 
-or Maclaurin expansion.
+Taylor series of at $0$ is called Maclaurin series or Maclaurin expansion.
 \subsubsection{Taylor polynomial}
 Let $f\colon D\subseteq\mathbb{R}^m\to\mathbb{R}$ be a function and $I\subseteq D$ be an open ball centered at $a$ where $f$ is $k$ times differentiable, then the $k$-th degree (or order) Taylor polynomial (or approximation) of $f$ at $a$ (or about $a$, near $a$, or centered at $a$) is
 \[T_n(x)=\sum_{\alpha\in\mathbb{N}_0^{\pht{0}m}\land|\alpha|\leq k}\frac{D^{\alpha}f(a)}{\alpha !}(x-a)^{\alpha},\]
