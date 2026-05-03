@@ -482,7 +482,7 @@ jL\omega i_me^{j(\omega t+\theta)}=&L\omega i_m\qty(j\cos(\omega t+\theta)+\sin(
 \ea\]
 \epr
 \ssc{Steady-state sinusoidal AC power analysis}
-\sssc{Phasor}
+\sssc{RMS phasor}
 Suppose
 \[v(t)=v_m\cos(\omega t+\theta),\]
 \[i(t)=i_m\cos(\omega t+\theta-\varphi).\]
@@ -516,10 +516,39 @@ The triangle on the complex plane of $\mb{S}$, $P$, and $jQ$ showing
 \[\mb{S}=P+jQ\]
 is called the power triangle.
 \sssc{Wattmeter}
+A wattmeter measuring a load $Z$ contains a current-sensing coil with current $i_i(t)$ in series connection with the load, and a voltage-sensing coil with current $i_v(t)$ in series connection with an impedance $Z_m$, in parallel connection with the load. Electrodynamic interaction produce a torque proportional to $i_v(t)i_i(t)$ on the rotating pointor. The steady-state deflection angle $\gamma$ of the rotating pointor is proportional to the average of $i_v(t)i_i(t)$:
+\[\gamma=\frac{K_M}{T}\int_{t_1}^{t_1+T}i_v(t)i_i(t)\dd{t},\]
+where $K_M$ is a proportionality constant and $T$ is the period of the current. The impedance $Z_m$ is a large resistance $R_m\gg|Z|$. If the load has
+\[v(t)=\sqrt{2}v_{rms}\cos(\omega t+\theta)\]
+\[i(t)=\sqrt{2}i_{rms}\cos(\omega t+\theta-\varphi),\]
+then
+\[i_v(t)=\frac{\sqrt{2}v_{rms}}{R_M}\cos(\omega t+\theta)\]
+\[i_i(t)\approx\sqrt{2}i_{rms}\cos(\omega t+\theta-\varphi).\]
+Then,
+\[\gamma\approx\frac{K_M}{R_M}v_{rms}i_{rms}\cos\varphi=\frac{K_M}{R_M}P,\]
+and reads approximately $P$.
 
+An ideal wattmeter reads exactly $P$ and $i_v\to0$.
 
+By convention, the current input terminal is labeled $\pm$.
+\sssc{Balanced three-phase circuit}
+A power system supplied by just one sinusoidal AC source is called single-phase (1-$\varphi$). The oscillatory behavior of instantaneous power puts pulsating strain on the generating and load equipments. Polyphase circuit with multiple sources were developed in response to this problem. The most common one us the balanced three-phase (3-$\varphi$) circuit, which has three sources with $\frac{2\pi}{3}$ phase difference and has constant instantaneous power.
 
+The equation
+\[v_a(t)=\sqrt{2}v_{rms}\cos(\omega t+\theta)\]
+\[v_b(t)=\sqrt{2}v_{rms}\cos(\omega t+\theta-\frac{2\pi}{3})\]
+\[v_c(t)=\sqrt{2}v_{rms}\cos(\omega t+\theta+\frac{2\pi}{3})\]
+defines a symmetrical three-phase set with phase sequence $a-b-c$, where the phase sequence indicates the time sequence of the waveform peaks. Their sum is zero.
 
+A (balanced) wye (Y) generator consists of a node called neutral and three branches with phase voltages $\mb{V}_{rms,a},\mb{V}_{rms,b},\mb{V}_{rms,c}$ w.r.t. the neutral that have phase difference $\frac{2\pi}{3}$ among each other, and line voltages $\mb{V}_{rms,ab},\mb{V}_{rms,bc},\mb{V}_{rms,ca}$ are defined across each pairs of their terminals.
+\[\mb{V}_{rms,ab}=\mb{V}_{rms,a}-\mb{V}_{rms,b}\]
+\[\mb{V}_{rms,bc}=\mb{V}_{rms,b}-\mb{V}_{rms,c}\]
+\[\mb{V}_{rms,ca}=\mb{V}_{rms,c}-\mb{V}_{rms,a}\]
+An equivalent generator is (balanced) delta (Δ) generator obtained by applying Y-Δ transformation to the Y generator, in which the neutral and phase voltages do not physically exist.
+
+Similarly, a (balanced) wye load has a neutral and three branches with identical phase impedances, and a (balanced) delta (Δ) load is it applied Y-Δ transformation.
+
+A three-phase circuit with wye generator and loads with neutrals of all elements form a circuit, terminals of each branch of all elements form identical circuit, is called balanced (wye) (three-phase) circuit, and the circuit obtain by applying Y-Δ transformation to all wye generator and loads is called balanced (delta) (three-phase) circuit.
 \ssc{R, L, C, RL, RC, LC, and RLC Circuits}
 \sssc{Resistor with voltage source}
 A resistor with resistance $R$ and an independent voltage source $v_{in}$ in series connection.
