@@ -84,7 +84,7 @@ A steady-state sinusoidal alternating current is a current whose voltage $v(t)$ 
 \[v(t)=v_m\cos(\omega t+\varphi),\]
 \[i(t)=i_m\cos(\omega t+\theta),\]
 where $\omega$ is the angular frequency of them and the period of them is
-\[T\frac{2\pi}{\omega}.\]
+\[T=\frac{2\pi}{\omega}.\]
 The RMSs are
 \[v_{rms}=\sqrt{\frac{1}{T}\int_0^T(v(t))^2\dd{t}}=\frac{v_m}{\sqrt{2}},\]
 \[i_{rms}=\sqrt{\frac{1}{T}\int_0^T(i(t))^2\dd{t}}=\frac{i_m}{\sqrt{2}}.\]
@@ -273,6 +273,14 @@ A ground is a node designated to have 0 electric potential. All other electric p
 The steady-state DC voltage and current values of a circuit when no input signal is applied.
 \sssc{Biasing resistor}
 A biasing resistor is a resistor used to achieve a desired operating point.
+\sssc{Resonance}
+A network is called in resonance or resonant if its voltage and current are in phase.
+
+In series resonance, the phenomenon that amplitude of voltage of element is larger than that of source is called resonant voltage rise. In parallel resonance, the phenomenon that amplitude of voltage of element is larger than that of source is called resonant current rise.
+\sssc{Quality factor}
+The quality factor $Q$ of a network is $2\pi$ multiplied by the maximum energy stored $E_m$ divided by the total energy lost per period $E_l$:
+\[Q=\frac{2\pi E_m}{E_l}.\]
+The quality factor in resonance is denoted as $Q_0$.
 \sssc{Filter}
 A filter circuit applies a frequency-dependent gain/attenuation $\abs{H(j\omega)}$ to signals. Bandwidth is an interval of $\omega$ such that
 \[\abs{H(j\omega)}\ge\frac{1}{\sqrt{2}}\max_{\omega}(\abs{H(j\omega)})\]
@@ -442,8 +450,7 @@ Capacitor with initial voltage $v(0^-)$ under DC has time constant $\tau=R_{th}C
 Inductor with initial current $i(0^-)$ under DC has time constant $\tau=\frac{L}{R_{th}}$ where $R_{th}$ is the Thevenin resistance seen by the inductor, current $i(\infty)$ and voltage $0$ at steady state, and transient response:
 \[i(t)=i(\infty)+(i(0^-)-i(\infty))e^{-\frac{t}{\tau}}\]
 \[v(t)=(i(\infty)-i(0^-))R_{th}e^{-\frac{t}{\tau}}\]
-\ssc{Steady-state sinusoidal AC}
-$v_m,i_m$ are amplitude of voltage and current. $\varphi$ is phase angle difference of current relative to voltage.
+\ssc{Steady-state sinusoidal AC response}
 \sssc{Capacitor response}
 For a capacitor, if
 \[v(t)=v_m\cos(\omega t+\theta),\]
@@ -474,44 +481,40 @@ jL\omega i_me^{j(\omega t+\theta)}=&L\omega i_m\qty(j\cos(\omega t+\theta)+\sin(
 =&L\omega i_me^{j(\omega t+\theta-\frac{\pi}{2})}
 \ea\]
 \epr
-\sssc{Instantaneous power}
+\ssc{Steady-state sinusoidal AC power}
+\sssc{Phasor}
 Suppose
 \[v(t)=v_m\cos(\omega t+\theta),\]
 \[i(t)=i_m\cos(\omega t+\theta-\varphi).\]
-Then,
+The phasors used here are
+\[\mb{V}_{rms}=v_{rms}e^{j\theta}=\frac{v_m}{\sqrt{2}}e^{j\theta}=\frac{\mb{V}}{\sqrt{2}},\]
+\[\mb{I}_{rms}=i_{rms}e^{j(\theta-\varphi)}=\frac{i_m}{\sqrt{2}}e^{j(\theta-\varphi)}=\frac{\mb{I}}{\sqrt{2}}.\]
+\sssc{Instantaneous power}
 \[\ba
 p(t)&=v(t)i(t)=v_mi_m\cos(\omega t+\theta)\cos(\omega t+\theta-\varphi)\\
-&=\frac{v_mi_m}{2}\cos\varphi\cos(2\omega t+2\theta-\varphi)
+&=v_{rms}i_{rms}\qty(\cos\varphi+\cos(2\omega t+2\theta-\varphi))
 \ea\]
 \sssc{Complex power}
 The complex power $\mb{S}$ with unit volt-ampere (VA) of a steady-state sinusoidal AC is defined as
-\[\mb{S}=\mb{V}\mb{I}^*=v_mi_me^{j\varphi}.\]
+\[\mb{S}=\mb{V}_{rms}\mb{I}_{rms}^{\pht{rms}*}=v_{rms}i_{rms}e^{j\varphi}.\]
 \sssc{Real, average, or active power}
 The real, average, or active power $P$ with unit watt (W) of a steady-state sinusoidal AC is defined as the average power of it, that is,
-\[P=\langle p(t)\rangle=\frac{v_mi_m}{2}\cos\varphi=v_{rms}i_{rms}\cos\varphi=\Re(\mb{S}).\]
+\[P=\langle p(t)\rangle=v_{rms}i_{rms}\cos\varphi=\Re(\mb{S}).\]
 \sssc{Apparent power}
 The apparent power $S$ with unit volt-ampere (VA) of a steady-state sinusoidal AC is defined as
-\[S=v_mi_m=\abs{\mb{S}}.\]
+\[S=\abs{\mb{S}}=v_{rms}i_{rms}.\]
 \sssc{Power factor (PF)}
 The power factor (PF) of a steady-state sinusoidal AC is defined as
-\[\tx{PF}=\frac{P}{S}.\]
+\[\tx{PF}=\frac{P}{S}=\cos\varphi.\]
 PF = 1 is called ideal.
 \sssc{Reactive power}
-The reactive power $Q$ with unit volt-ampere-reactive (VAR) of a steady-state sinusoidal AC is defined as
-\[Q=\Im(\mb{S})=\frac{v_mi_m}{2}\sin\varphi.\]
+The reactive power $Q$ with unit volt-ampere-reactive (VAR or VAr) of a steady-state sinusoidal AC is defined as
+\[Q=\Im(\mb{S})=v_{rms}i_{rms}\sin\varphi.\]
 It's the power that oscillates between sources and reactive elements.
 \sssc{Power triangle}
 The triangle on the complex plane of $\mb{S}$, $P$, and $jQ$ showing
 \[\mb{S}=P+jQ\]
 is called the power triangle.
-\sssc{Resonance}
-A network is called in resonance or resonant if its voltage and current are in phase.
-
-In series resonance, the phenomenon that amplitude of voltage of element is larger than that of source is called resonant voltage rise. In parallel resonance, the phenomenon that amplitude of voltage of element is larger than that of source is called resonant current rise.
-\sssc{Quality factor}
-The quality factor $Q$ of a network is $2\pi$ multiplied by the maximum energy stored $E_m$ divided by the total energy lost per period $E_l$:
-\[Q=\frac{2\pi E_m}{E_l}.\]
-The quality factor in resonance is denoted as $Q_0$.
 \ssc{R, L, C, RL, RC, LC, and RLC Circuits}
 \sssc{Resistor with voltage source}
 A resistor with resistance $R$ and an independent voltage source $v_{in}$ in series connection.
