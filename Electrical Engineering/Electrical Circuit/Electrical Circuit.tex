@@ -14,7 +14,7 @@
 \item Time $t$ (s)
 \item Complex frequency (Laplace domain) $s$ (Hz = 1 / s)
 \item Angular or radial frequency $\omega$ (Hz = 1 / s)
-\item Voltage $v$ (time domain) $\mb{V}$ (phasor domain) $V$ (Laplace domain) (volt = V) across (跨壓)
+\item Voltage $v$ (time domain) $\mb{V}$ ((magnitude) phasor domain) $\mb{V}_{rms}$ (RMS phasor domain) $V$ (Laplace domain) (volt = V) across (跨壓)
 \item Current $i$ (time domain) $\mb{I}$ (phasor domain) $I$ (Laplace domain) (ampere = A) through
 \item Powe $p$ (watt = W = A V)
 \item Real, average, or active power $P$ (W)
@@ -80,23 +80,22 @@ A direct current is a current that is one-directional and with constant voltage 
 \sssc{Effective value or root mean square (RMS)}
 The effective value or root mean square (RMS) of a voltage or current is defined as its RMS over $[0,\infty)$.
 \sssc{Steady-state sinusoidal alternating current (AC) and phasor domain}
-A steady-state sinusoidal alternating current is a current whose voltage $v(t)$ and current $i(t)$ are of the form:
+A steady-state sinusoidal alternating current (AC), often simply called alternating current (AC), is a current whose voltage $v(t)$ and current $i(t)$ are of the form:
 \[v(t)=v_m\cos(\omega t+\varphi),\]
 \[i(t)=i_m\cos(\omega t+\theta),\]
-where $\omega$ is the angular frequency of them and the period of them is
-\[T=\frac{2\pi}{\omega}.\]
+where $\omega$ is the angular frequency of them, and the period $T$ and critical frequency $f$ of them are
+\[T=\frac{2\pi}{\omega},\]
+\[f=\frac{1}{T}=\frac{\omega}{2\pi}.\]
 The RMSs are
 \[v_{rms}=\sqrt{\frac{1}{T}\int_0^T(v(t))^2\dd{t}}=\frac{v_m}{\sqrt{2}},\]
 \[i_{rms}=\sqrt{\frac{1}{T}\int_0^T(i(t))^2\dd{t}}=\frac{i_m}{\sqrt{2}}.\]
-They can be represented in phasor as
+They can be represented in (magnitude) phasor as
 \[\mb{V}=v_m\angle\varphi=v_me^{j\varphi},\]
-\[\mb{I}=i_m\angle\theta=i_me^{j\theta}.\]
-$A\cos(\omega t+\varph_1)$ is called to be lagging $A\cos(\omega t+\varphi_2)$ by $\varphi_2-\varphi_1$ and leading $A\cos(\omega t+\varphi_2)$ by $\varphi_1-\varphi_2$.
-
-Alternating current (AC) often refere to it.
-
-Critical frequency:
-\[f=\frac{1}{T}=\frac{\omega}{2\pi}.\]
+\[\mb{I}=i_m\angle\theta=i_me^{j\theta},\]
+or RMS phasor as
+\[\mb{V}_{rms}=v_{rms}\angle\varphi=v_{rms}e^{j\varphi},\]
+\[\mb{I}_{rms}=i_{rms}\angle\theta=i_{rms}e^{j\theta},\]
+where RMS phasors are used in power analysis.
 \sssc{General current and Laplace domain}
 Given a general current with voltage $v(t)$ and current $i(t)$ over time since $t=0$, we can perform Laplace transforms,
 \[V(s)=\mathcal{L}\{v(t)\}(s)=\int_0^{\infty}e^{-st}v(t)\dd{t},\]
@@ -599,6 +598,26 @@ Constant source forced response (time domain):
 \[i=\frac{v_{in}t}{L}\]
 Constant source total response (time domain):
 \[i=i(0^-)+\frac{v_{in}t}{L}\]
+
+
+待
+Resonance state (time domain): Source angular frequency $\omega_0$, maximum energy stored $E_m$, total energy lost per period $E_l$, quality factor $Q_0$.
+\[v_{in}=v_m\cos(\omega_0t+\theta)\]
+\[i_m=i(0^-)=\infty\]
+\[v_C(0^-)=0\]
+\[i=i_m\cos(\omega_0t+\theta)\]
+\[v_C=-v_L=\frac{i_m}{C\omgea_0}\sin(\omega_0t+\theta)=i_mL\omega_0\sin(\omega_0t+\theta)\]
+\[E_m=\frac{Li_m^{\pht{m}2}}{2}\]
+\[E_l=\frac{v_mi_m\pi}{\omega_0}\]
+\[Q_0=\frac{Li_m\omega_0}{v_m}=\frac{i_m}{v_m}\sqrt{\frac{L}{C}}\]
+Resonance state (phasor domain):
+\[\mb{V}_{in}=v_me^{j\theta}\]
+\[\mb{I}=\frac{v_m}{L\omega}e^{j\qty(\theta+\frac{\pi}{2})}\]
+
+\[\mb{V}_C=-\mb{V}_L=-\frac{ji_m}{C\omega_0}e^{j\theta}=-ji_mL\omega_0e^{j\theta}\]
+待
+
+
 Impulse response:
 \[h_i=\frac{u(t)}{L}\]
 Transfer function:
