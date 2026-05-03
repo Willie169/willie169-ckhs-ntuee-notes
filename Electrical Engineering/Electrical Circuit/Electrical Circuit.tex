@@ -77,12 +77,10 @@ If the current arrow enters the - terminal, the element is said to follow the ac
 with negative power means absorbing. This convention is used for active elements.
 \sssc{Direct current (DC)}
 A direct current is a current that is one-directional and with constant voltage and current over time.
-\sssc{Alternating current (AC)}
-An alternating current is a current whose voltage and current change over time and are of zero average over $[0,\infty)$.
 \sssc{Effective value or root mean square (RMS)}
 The effective value or root mean square (RMS) of a voltage or current is defined as its RMS over $[0,\infty)$.
-\sssc{Steady-state sinusoidal current and phasor domain}
-A steady-state sinusoidal current is a current whose voltage $v(t)$ and current $i(t)$ are of the form:
+\sssc{Steady-state sinusoidal alternating current (AC) and phasor domain}
+A steady-state sinusoidal alternating current is a current whose voltage $v(t)$ and current $i(t)$ are of the form:
 \[v(t)=v_m\cos(\omega t+\varphi),\]
 \[i(t)=i_m\cos(\omega t+\theta),\]
 where $\omega$ is the angular frequency of them and the period of them is
@@ -94,6 +92,11 @@ They can be represented in phasor as
 \[\mb{V}=v_m\angle\varphi=v_me^{j\varphi},\]
 \[\mb{I}=i_m\angle\theta=i_me^{j\theta}.\]
 $A\cos(\omega t+\varph_1)$ is called to be lagging $A\cos(\omega t+\varphi_2)$ by $\varphi_2-\varphi_1$ and leading $A\cos(\omega t+\varphi_2)$ by $\varphi_1-\varphi_2$.
+
+Alternating current (AC) often refere to it.
+
+Critical frequency:
+\[f=\frac{1}{T}=\frac{\omega}{2\pi}.\]
 \sssc{General current and Laplace domain}
 Given a general current with voltage $v(t)$ and current $i(t)$ over time since $t=0$, we can perform Laplace transforms,
 \[V(s)=\mathcal{L}\{v(t)\}(s)=\int_0^{\infty}e^{-st}v(t)\dd{t},\]
@@ -206,20 +209,6 @@ The admittance $Y(s)$ of a one-port network is defined as the reciprocal of its 
 The conductance $G$ of a circuit element is defined as the real part of its admittance.
 \sssc{Susceptance (phasor domain)}
 The susceptance $B$ of a circuit element is defined as the imaginary part of its admittance.
-\sssc{Capacitor in steady state}
-Current through a capacitor in steady state is 0.
-\sssc{Capacitor under steady-state sinusoidal AC}
-Current leads voltage by $\frac{\pi}{2}$.
-\sssc{Inductor under DC}
-Voltage across an inductor in steady state is 0.
-\sssc{Inductor under steady-state sinusoidal AC}
-Current lags voltage by $\frac{\pi}{2}$.
-\sssc{Resonance}
-A network is called in resonance or resonant if its voltage and current are in phase.
-\sssc{Quality factor}
-The quality factor $Q$ of a network is $2\pi$ multiplied by the maximum energy stored $E_m$ divided by the total energy lost per period $E_l$:
-\[Q=\frac{2\pi E_m}{E_l}.\]
-The quality factor in resonance is denoted as $Q_0$.
 \sssc{Node}
 A node is a point in a network where two or more elements are connected.
 \sssc{Pole or terminal}
@@ -321,39 +310,6 @@ Ideal current sources are active elements with infinite output resistance. To tu
 A practical independent voltage source can be approximated with an ideal independent voltage source in series connection with a resistor.
 
 A practical independent current source can be approximated with an ideal independent current source in parallel connection with a resistor.
-\ssc{Power of steady-state sinusoidal current}
-Here, the current under discussion is a steady-state sinusoidal current of the form
-\[v(t)=v_m\cos(\omega t+\theta),\]
-\[i(t)=i_m\cos(\omega t+\theta-\varphi),\]
-or in phasors,
-\[\mb{V}=v_m\angle\theta=v_me^{j\theta},\]
-\[\mb{I}=i_m\angle(\theta-\varphi)=i_me^{j(\theta-\varphi)}.\]
-\sssc{Instantaneous power}
-\[\ba
-p(t)&=v(t)i(t)=v_mi_m\cos(\omega t+\theta)\cos(\omega t+\theta-\varphi)\\
-&=\frac{v_mi_m}{2}\cos\varphi\cos(2\omega t+2\theta-\varphi)
-\ea\]
-\sssc{Complex power}
-The complex power $\mb{S}$ with unit volt-ampere (VA) of a steady-state sinusoidal current is defined as
-\[\mb{S}=\mb{V}\mb{I}^*=v_mi_me^{j\varphi}.\]
-\sssc{Real, average, or active power}
-The real, average, or active power $P$ with unit watt (W) of a steady-state sinusoidal current is defined as the average power of it, that is
-\[P=\frac{v_mi_m}{2}\cos\varphi=v_{rms}i_{rms}\cos\varphi=\Re(\mb{S}).\]
-\sssc{Apparent power}
-The apparent power $S$ with unit volt-ampere (VA) of a steady-state sinusoidal current is defined as
-\[S=v_mi_m=\abs{\mb{S}}.\]
-\sssc{Power factor (PF)}
-The power factor (PF) of a steady-state sinusoidal current is defined as
-\[\tx{PF}=\frac{P}{S}.\]
-PF = 1 is called ideal.
-\sssc{Reactive power}
-The reactive power $Q$ with unit volt-ampere-reactive (VAR) of a steady-state sinusoidal current is defined as
-\[Q=\Im(\mb{S})=\frac{v_mi_m}{2}\sin\varphi.\]
-It's the power oscillates between sources and reactive elements.
-\sssc{Power triangle}
-The triangle on the complex plane of $\mb{S}$, $P$, and $jQ$ showing
-\[\mb{S}=P+jQ\]
-is called the power triangle.
 \ssc{Linear circuit}
 \sssc{Linear element}
 A linear element is a passive element whose inputs $\mb{x}$ and outputs $\mb{F}(\mb{x})$ satisfy linearity:
@@ -388,6 +344,12 @@ A linear circuit is a graph with nodes with all voltage sources enclosed as supe
 Two linear circuit are dual if their governing equations in terms of variables become identical after systematically exchanging voltage and current, capacitance and inductance, impedance and admittance, open circuit and short circuit, KCL and KVL, Thévenin's theorem and Norton's theorem, series and parallel, node and loop, etc.
 
 Two linear circuit are exact dual if their governing equations in terms of numerical values become identical after systematically exchanging voltage and current, capacitance and inductance, impedance and admittance, open circuit and short circuit, KCL and KVL, Thévenin's theorem and Norton's theorem, series and parallel, node and loop, etc.
+\sssc{Resonance}
+A network is called in resonance or resonant if its voltage and current are in phase.
+\sssc{Quality factor}
+The quality factor $Q$ of a network is $2\pi$ multiplied by the maximum energy stored $E_m$ divided by the total energy lost per period $E_l$:
+\[Q=\frac{2\pi E_m}{E_l}.\]
+The quality factor in resonance is denoted as $Q_0$.
 \ssc{Thévenin's theorem and Norton's theorem}
 \sssc{Thévenin's theorem}
 Any linear network with two terminals is equivalent to a voltage source with a voltage called Thévenin voltage in a series connection with a linear element (or resistor for DC) with an impedance (or resistance for DC) called Thévenin or equivalent impedance (or resistance for DC), such equivalent circuit is called Thévenin equivalent.
@@ -474,6 +436,75 @@ For all integer $n\geq 3$:
 \item Star-mesh transformation: The two networks are equivalent if
 \[Z_{ij}=Z_i+Z_j+\frac{Z_iZ_j}{-Z_i-Z_j+\sum_{k=1}^nZ_k}.\]
 \eit
+\ssc{Transient response}
+\sssc{Capacitor transient response}
+Capacitor with initial voltage $v(0^-)$ under DC has time constant $\tau=R_{th}C$ where $R_{th}$ is the Thevenin resistance seen by the capacitor, voltage $v(\infty)$ and current $0$ at steady state, and transient response:
+\[v(t)=v(\infty)+(v(0^-)-v(\infty))e^{-\frac{t}{\tau}}\]
+\[i(t)=\frac{v(\infty)-v(0^-)}{R_{th}}e^{-\frac{t}{\tau}}\]
+\sssc{Inductor transient response}
+Inductor with initial current $i(0^-)$ under DC has time constant $\tau=\frac{L}{R_{th}}$ where $R_{th}$ is the Thevenin resistance seen by the inductor, current $i(\infty)$ and voltage $0$ at steady state, and transient response:
+\[i(t)=i(\infty)+(i(0^-)-i(\infty))e^{-\frac{t}{\tau}}\]
+\[v(t)=(i(\infty)-i(0^-))R_{th}e^{-\frac{t}{\tau}}\]
+\ssc{Steady-state sinusoidal AC}
+$v_m,i_m$ are amplitude of voltage and current. $\varphi$ is phase angle difference of current relative to voltage.
+\sssc{Capacitor response}
+For a capacitor, if
+\[v(t)=v_m\cos(\omega t+\theta),\]
+\[\mb{V}=v_me^{j\theta},\]
+then
+\[i(t)=C\omega v_m\cos(\omega t+\theta-\frac{\pi}{2}),\]
+\[\mb{I}=C\omega v_me^{j(\theta-\frac{\pi}{2})}.\]
+\bpr
+\[\ba
+jC\omega v_me^{j(\omega t+\theta)}=&C\omega v_m\qty(j\cos(\omega t+\theta)+\sin(\omega t+\theta))\\
+=&C\omega v_m\qty(-j\sin(\omega t+\theta-\frac{\pi}{2})+\cos(\omega t+\theta-\frac{\pi}{2}))\\
+=&C\omega v_me^{j(\omega t+\theta-\frac{\pi}{2})}
+\ea\]
+\epr
+\sssc{Inductor response}
+For an inductor, if
+\[i(t)=i_m\cos(\omega t+\theta),\]
+\[\mb{I}=i_me^{j\theta},\]
+then
+\[v(t)=L\omega i_m\cos(\omega t+\theta-\frac{\pi}{2}),\]
+\[\mb{V}=L\omega i_me^{j(\theta-\frac{\pi}{2})}.\]
+\bpr
+\[\ba
+jL\omega i_me^{j(\omega t+\theta)}=&L\omega i_m\qty(j\cos(\omega t+\theta)+\sin(\omega t+\theta))\\
+=&L\omega i_m\qty(-j\sin(\omega t+\theta-\frac{\pi}{2})+\cos(\omega t+\theta-\frac{\pi}{2}))\\
+=&L\omega i_me^{j(\omega t+\theta-\frac{\pi}{2})}
+\ea\]
+\epr
+\sssc{Instantaneous power}
+Suppose
+\[v(t)=v_m\cos(\omega t+\theta),\]
+\[i(t)=i_m\cos(\omega t+\theta-\varphi).\]
+Then,
+\[\ba
+p(t)&=v(t)i(t)=v_mi_m\cos(\omega t+\theta)\cos(\omega t+\theta-\varphi)\\
+&=\frac{v_mi_m}{2}\cos\varphi\cos(2\omega t+2\theta-\varphi)
+\ea\]
+\sssc{Complex power}
+The complex power $\mb{S}$ with unit volt-ampere (VA) of a steady-state sinusoidal AC is defined as
+\[\mb{S}=\mb{V}\mb{I}^*=v_mi_me^{j\varphi}.\]
+\sssc{Real, average, or active power}
+The real, average, or active power $P$ with unit watt (W) of a steady-state sinusoidal AC is defined as the average power of it, that is,
+\[P=\langle p(t)\rangle=\frac{v_mi_m}{2}\cos\varphi=v_{rms}i_{rms}\cos\varphi=\Re(\mb{S}).\]
+\sssc{Apparent power}
+The apparent power $S$ with unit volt-ampere (VA) of a steady-state sinusoidal AC is defined as
+\[S=v_mi_m=\abs{\mb{S}}.\]
+\sssc{Power factor (PF)}
+The power factor (PF) of a steady-state sinusoidal AC is defined as
+\[\tx{PF}=\frac{P}{S}.\]
+PF = 1 is called ideal.
+\sssc{Reactive power}
+The reactive power $Q$ with unit volt-ampere-reactive (VAR) of a steady-state sinusoidal AC is defined as
+\[Q=\Im(\mb{S})=\frac{v_mi_m}{2}\sin\varphi.\]
+It's the power that oscillates between sources and reactive elements.
+\sssc{Power triangle}
+The triangle on the complex plane of $\mb{S}$, $P$, and $jQ$ showing
+\[\mb{S}=P+jQ\]
+is called the power triangle.
 \ssc{R, L, C, RL, RC, LC, and RLC Circuits}
 \sssc{Resistor with voltage source}
 A resistor with resistance $R$ and an independent voltage source $v_{in}$ in series connection.
