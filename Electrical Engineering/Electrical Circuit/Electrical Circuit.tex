@@ -356,9 +356,9 @@ Two linear circuit are dual if their governing equations in terms of variables b
 Two linear circuit are exact dual if their governing equations in terms of numerical values become identical after systematically exchanging voltage and current, capacitance and inductance, impedance and admittance, open circuit and short circuit, KCL and KVL, Thévenin's theorem and Norton's theorem, series and parallel, node and loop, etc.
 \ssc{Thévenin's theorem and Norton's theorem}
 \sssc{Thévenin's theorem}
-Any linear network with two terminals is equivalent to a voltage source with a voltage called Thévenin voltage in a series connection with a linear element (or resistor for DC) with an impedance (or resistance for DC) called Thévenin or equivalent impedance (or resistance for DC), such equivalent circuit is called Thévenin equivalent.
+Any linear network with two terminals is equivalent to a voltage source with a voltage called Thévenin voltage in a series connection with a linear element (or resistor for DC) with an impedance (or resistance for DC) called Thévenin, series, or equivalent impedance (or resistance for DC), such equivalent circuit is called Thévenin equivalent.
 \sssc{Norton's theorem}
-Any linear network with two terminals is equivalent to a current source with a current called Norton current in a parallel connection with a linear element (or resistor for DC) with an impedance (or resistance for DC) called Norton or equivalent impedance (or resistance for DC), such equivalent circuit is called Norton equivalent.
+Any linear network with two terminals is equivalent to a current source with a current called Norton current in a parallel connection with a linear element (or resistor for DC) with an impedance (or resistance for DC) called Norton, parallel, or equivalent impedance (or resistance for DC), such equivalent circuit is called Norton equivalent.
 \sssc{Finding Thévenin voltage}
 Remove all loads, and the open-circuit voltage $v_{oc}$ between the two terminals is the Thévenin voltage.
 \sssc{Finding Norton current}
@@ -375,8 +375,9 @@ Thévenin and Norton impedance $Z_{th}$ (or resistance $R_{th}$ for DC) are the 
 \eit
 \sssc{Thévenin parameters}
 Thévenin voltage, Norton current, and Thévenin impedance are called Thévenin parameters.
-\sssc{Maximum power theorem}
-A one-port linear network delivers maximum power to a load impedance when the load impedance is equal to the conjugate of the Thévenin impedance of the network.
+\sssc{Maximum power theorem under DC}
+A one-port linear network delivers maximum power to a load resistance when the load resistance is equal to the Thévenin resistance $R_{th}$ of the network, and the power delivered is
+\[P=\frac{\abs{V_{oc}}^2}{4R_{th}}.\]
 \ssc{(Matrix) nodal analysis or node-voltage analysis of linear circuits}
 \sssc{(Nodal) admittance matrix}
 The (nodal) admittance (conductance for DC) matrix $\mb{Y}$ of a linear circuit that is a simple graph is the Laplacian matrix of it with all sources omitted, admittances as weights, and circuit as weighted undirected graph.
@@ -502,6 +503,9 @@ The triangle on the complex plane of $\mb{S}$, $P$, and $jQ$ showing
 is called the power triangle.
 \sssc{Source power factor}
 A source's power factor is in $[-1,1]$, and is $\pm 1$ iff the sum of $Q$ of all other elements is 0, and $0$ iff the sum of $P$ of all other elements is 0.
+\sssc{Maximum power theorem under steady-state sinusoidal AC}
+A one-port linear network delivers maximum power to a load impedance when the load impedance is equal to the conjugate of the Thévenin impedance $Z_{th}$ of the network, and the average power delivered is
+\[P=\frac{\abs{V_{oc}}^2}{4\Re(Z_{th})}.\]
 \sssc{Wattmeter}
 A wattmeter measuring a load $Z$ contains a current-sensing coil with current $i_i(t)$ in series connection with the load, and a voltage-sensing coil with current $i_v(t)$ in series connection with an impedance $Z_m$, in parallel connection with the load. Electrodynamic interaction produce a torque proportional to $i_v(t)i_i(t)$ on the rotating pointor. The steady-state deflection angle $\gamma$ of the rotating pointor is proportional to the average of $i_v(t)i_i(t)$:
 \[\gamma=\frac{K_M}{T}\int_{t_1}^{t_1+T}i_v(t)i_i(t)\dd{t},\]
