@@ -562,53 +562,68 @@ For a real random variable $X$, variance $\Var(X)$, $V(X)$, or $\sigma_X^{\phant
 \sssc{Standard Deviation (標準差)}
 For a real random variable $X$, standard deviation $\SD(X)$ or $\sigma_X$ of it is defined as
 \[\SD(X)=\sqrt{\Var(X)}.\]
+\sssc{Covariance (共變異數/共方差) and covariance matrix}
+For two real random variables $X,Y$, their covariance $\Sigma(X,Y)$ or $\Cov(X,Y)$ is defined as
+\[\Cov(X,Y)=E\qty((X-E(X))(Y-E(Y)))=E(XY)-E(X)E(Y).\]
+Thus,
+\[\Cov(X,X)=\Var(X).\]
+For an $n$-dimensional vector of real random variables $X=(X_1,X_2,\ldots)$ with $n\in\bbN\cup\{\aleph_0\}$, the covariance matrix $\Sigma(X)$, $\Cov(X)$, or $\CovMat(X)$ is defined as
+\[\CovMat(X)=E\qty((\mb{X}-E(\mb{X}))(\mb{X}-E(\mb{X}))^{\top}),\]
+that is,
+\[\CovMat(X)_{ij}=\Cov(X_i,X_j)=E\qty((X_i-E(X_i))(X_j-E(X_j)))=E(X_iX_j)-E(X_i)E(X_j).\]
+Thus, for a real random variable $X$,
+\[\CovMat(X,\ldots,X)_{ij}=\Var(X).\]
 \sssc{Zero variance}
 Variance of a real random variable $X$ is zero iff $X$ is almost surely a constant, that is, there exists a constant $c$ such that $P(X=c)=1$.
-\sssc{Covariance (共變異數/共方差) and covariance matrix}
-For two real random variables $X,Y$, their covariance $\Sigma$ or $\Cov(X,Y)$ is defined as
-\[\Cov(X,Y)=E\qty((X-E(X))(Y-E(Y)))=E(XY)-E(X)E(Y).\]
-Thus
-\[\Cov(X,X)=\Var(X).\]
-For an $n$-dimensional vector of real random variables $\mb{X}=(X_1,X_2,\ldots)$ with $n\in\bbN\cup\{\aleph_0\}$, the covariance matrix $\Sigma$ or $\Cov(\mb{X})$ is defined as
-\[\Sigma=\Cov(\mb{X})=E\qty((\mb{X}-E(\mb{X}))(\mb{X}-E(\mb{X}))^{\top}),\]
-that is,
-\[\Sigma_{ij}=\Cov(X_i,X_j)=E\qty((X_i-E(X_i))(X_j-E(X_j)))=E(X_iX_j)-E(X_i)E(X_j).\]
+
+If $X$ has zero variance, then for any real random variable $Y$,
+\[\Cov(X,Y)=0.\]
 \sssc{Mean square error (MSE) (均方（誤）差) or Expected square error}
-For a real random variable $X$ and a prediction or (blind) estimate $\hat{x}$, the mean square error $\MSE_X(\hat{x})$ or expected square error of the prediction is defined as
+For a real random variable $X$ and a prediction, predictor, or (blind) estimate $\hat{x}$, the mean square error $\MSE_X(\hat{x})$ or expected square error of the prediction is defined as
 \[\MSE_X(\hat{x})=E\qty((X-\hat{x})^2).\]
 \sssc{Minimum mean square error}
 The minimum mean square error estimate of a real random variable $X$ is $E(X)$, and the MSE of it is $\Var(X)$.
 \sssc{Pearson correlation coefficient (PCC), Pearson's r, Pearson product-moment correlation coefficient (PPMCC), or correlation coefficient}
 For two real random variables $X,Y$, the Pearson correlation coefficient (PCC), Pearson's r, Pearson product-moment correlation coefficient (PPMCC), or correlation coefficient of them, $\rho_{X,Y}$, is defined as
-\[\rho_{X,Y}=\frac{\Cov(X,Y)}{\sqrt{\Var(X)\Var(Y)}}.\]
-Thus
-\[\rho_{XX}=1\]
+\[\rho_{X,Y}=\frac{\Cov(X,Y)}{\SD(X)\SD(Y)}=\Cov(\frac{X-E(X)}{\SD(X)},\frac{Y-E(Y)}{\SD(Y)}).\]
+Thus,
+\[\rho_{X,X}=1\]
 \sssc{Correlation}
 For two real random variables $X,Y$, the correlation $r_{X,Y}$ is defined as
 \[r_{X,Y}=E(XY).\]
-Thus
-\[r_{XX}=E(X^2).\]
+Thus,
+\[r_{X,X}=E(X^2).\]
 \sssc{Sum of random variables}
-For $n$-dimensional real random vector $\mb{X}=(X_1,X_2,\ldots,X_n)$ and real vector $\mb{a}=(a_1,a_2,\ldots,a_n)$ with $n\in\bbN$,
-\[\Var(\sum_{i=1}^na_iX_i)=\mb{a}\Cov(\mb{X})\mb{a}^{\top}.\]
+For $n$-dimensional real random vector $X=(X_1,X_2,\ldots,X_n)$ and real vector $a=(a_1,a_2,\ldots,a_n)$ with $n\in\bbN$,
+\[\Var(\sum_{i=1}^na_iX_i)=a^{\top}\CovMat(X)a=\sum_{i=1}^na_i^{\pht{i}2}\Var(X_i)+2a_ia_j\sum_{i=1}^n\sum_{j=i+1}^n\Cov(X_i,X_j).\]
 For real random variables $X,Y$ and real numbers $a,b$,
 \[\Var(X+Y)=\Var(X)+\Var(Y)+2\Cov(X,Y).\]
+For real ranom variables $X_1,\ldots,X_c,Y_1,\ldots,Y_d$ and real numbers $a_1,\ldots,_c,b_1,\ldots,b_d$,
+\[\Cov(\sum_{i=1}^ca_iX_i,\sum_{i=1}^db_iY_i)=\sum_{i=1}^c\sum_{j=1}^da_ib_j\Cov(X_i,Y_j).\]
 \sssc{Independent random variables}
-For $n$-dimensional real random vector $X=(X_1,X_2,\ldots,X_d)$ of independent random variables, $\Cov(X)$ is a diagonal matrix where $\Sigma_{ii}=\Var(X_i)$.
-
 If $X,Y$ are independent,
 \[r_{X,Y}=E(XY)=E(X)E(Y)\]
 \[\Cov(X,Y)=\rho_{X,Y}=0\]
-If $X_1,\ldots,X_d$ are independent,
-\[\Var(\sum_{i=1}^dX_i)=\sum_{i=1}^d\Var(X_i).\]
 \sssc{Affine Transformation}
 For a real random variable $X$, $a\in\bbR$, and $b\in\mathbb{R}$, let $W=aX+b$,
 \[\Var(W)=a^2\Var(X).\]
 \[\SD(W)=|a|\SD(X).\]
-\[\rho_{WX}=\bcs\sgn(a),\quad&a\ne0\\0,\quad&a=0\ecs.\]
+\[\rho_{W,X}=\bcs\sgn(a),\quad&a\ne0\\0,\quad&a=0\ecs.\]
 For two real random variables $X,Y$, $a,c\in\bbR$, and $b,d\in\mathbb{R}$, let $U=aX+b$ and $V=cY+b$,
 \[\Cov(U,V)=ac\Cov(X,Y).\]
-\[\rho_{UV}=\bcs\sgn(a)\sgn(c)\rho_{X,Y},\quad&ac\ne0\\0,\quad&ac=0\ecs.\]
+\[\rho_{U,V}=\bcs\sgn(a)\sgn(c)\rho_{X,Y},\quad&ac\ne0\\0,\quad&ac=0\ecs.\]
+\sssc{Orthogonal random variables}
+Two real random variables $X,Y$ are orthogonal if $r_{X,Y}=0$.
+\sssc{Uncorrelated random variables}
+Two real random variables $X,Y$ are uncorrelated if $\Cov(X,Y)=0$.
+\sssc{Converse of independent implies uncorrelated is not true}
+Two real random variables $X,Y$ such that $\Cov(X,Y)=0$ are not necessarily independent.
+\bpr
+A counterexample is $X\sim N(0,1)$ and $Y=X^2$.
+\epr
+\sssc{Uncorrelated random variables properties}
+For $n$-dimensional real random vector $X=(X_1,X_2,\ldots,X_d)$ of pairwise uncorrelated random variables, $\CovMat(X)$ is a diagonal matrix where $\CovMat(X)_{ii}=\Var(X_i)$, and
+\[\Var(\sum_{i=1}^dX_i)=\sum_{i=1}^d\Var(X_i).\]
 \sssc{Correlation coefficient range}
 \[-1\le \rho_{X,Y}\le 1\]
 \bpr
@@ -629,10 +644,36 @@ Choosing
 yields
 \[\Cov(X,Y)\ge-\sigma_X\sigma_Y.\]
 \epr
-\sssc{Orthogonal random variables}
-Random variables $X,Y$ are orthogonal if $r_{XY}=0$.
-\sssc{Uncorrelated random variables}
-Random variables $X,Y$ are uncorrelated if $\Cov(X,Y)=0$.
+When $\rho_{X,Y}>0$, $X$ and $Y$ are called positively correlated. When $\rho_{X,Y}<0$, $X$ and $Y$ are called negatively correlated. When $\rho_{X,Y}=0$, $X$ and $Y$ are uncorrelated.
+\sssc{Best linear predictor}
+The best linear predictor $\hat{Y}$ of a real random variable $Y$ based on another real random variable $X$ in terms of mean squared error $E((Y-\hat{Y})^2)$ is given by $\hat{Y}=aX+b$, where
+\[a=\bcs\frac{\Cov(X,Y)}{\Var(X)}=\rho_{X,Y}\frac{\SD(Y}}{\SD(X)},\quad&\Var(X)\ne 0,\\\tx{arbitrary},\quad&\Var(X)=0,\ecs\]
+\[b=E(Y)-aE(X),\]
+and the mean squared error $E((Y-aX-b)^2)$ then is
+\[E((Y-aX-b)^2)=\qty(1-\rho_{X,Y}^{\pht{X,Y}2})^2\Var(Y).\]
+When $\rho_{X,Y}=1$, $E((Y-aX-b)^2)=0$ and $Y=\hat{Y}$.
+\bpr
+Let
+\[X'=X-E(X)\]
+\[Y'=Y-E(Y)\]
+\[Y-aX-b=(Y'-aX')+(E(Y)-aE(X)-b)\]
+\[E((Y-aX-b)^2)=E((Y'-aX')^2)+2(E(Y)-aE(X)-b)E(Y'-aX')+(E(Y)-aE(X)-b)^2\]
+\[E(X')=E(Y')=E(Y'-aX')=0\]
+\[E((Y-aX-b)^2)=E((Y'-aX')^2)+(E(Y)-aE(X)-b)^2\]
+\[b=E(Y)-aE(X)\]
+\[\ba
+E((Y'-aX'-(E(Y)-aE(X)))^2)=&E((Y'-aX')^2)\\
+=&E(Y'^2)-2aE(X'Y')+a^2E(X'^2)\\
+=&\Var(Y)-2a\Cov(X,Y)+a^2\Var(X)
+\ea\]
+\[\dv{\qty(\Var(Y)-2a\Cov(X,Y)+a^2\Var(X))}{a}=-2\Cov(X,Y)+2a\Var(X)=0\]
+\[a=\frac{\Cov(X,Y)}{\Var(X)}\]
+\[\ba
+\Var(Y)-2a\Cov(X,Y)+a^2\Var(X)=&\Var(Y)-\frac{\Cov(X,Y)^2}{\Var(X)}\\
+=&\Var(Y)\qty(1-\frac{\Cov(X,Y)^2}{\Var(X)\Var(Y)})\\
+=&\qty(1-\rho_{X,Y}^{\pht{X,Y}2})^2\Var(Y)
+\ea\]
+\epr
 \ssc{Moment}
 \sssc{Moment}
 The $n$th moment of $X$ is defined as $E(X^n)$ for $n\in\bbN$. The zero-th moment $E(X^0)$ is defined as $1$.
