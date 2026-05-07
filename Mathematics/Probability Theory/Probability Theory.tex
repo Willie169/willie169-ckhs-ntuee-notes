@@ -210,7 +210,7 @@ For a discrete random variable $X$ with PMF $p_X$, the CDF $F_X$ can be expresse
 \[F_X(x)=\sum_{a_i\le x}p_X(a_i)\]
 for all $x\in\bbR$.
 \sssc{Support}
-The support of a discrete random variable is the support of the PMF.
+The support $\Supp(X)$ of a discrete random variable $X$ is the support of its PMF.
 \sssc{Properties}
 \[p_X(a_i)\ge 0,\quad\forall a_i\in\Omega_t.\]
 \[\sum_{a_i\in\Omega_t}p_X(a_i)=1.\]
@@ -241,7 +241,7 @@ For an absolutely continuous random variable $X$ with PDF $f_X$, the CDF $F_X$ c
 \[F_X(x)=\int_{-\infty}^xf_x(t)\dd{t}\]
 for all $x\in\bbR$.
 \sssc{Support}
-The support of an absolutely continuous random variable is the support of the PDF.
+The support $\Supp(X)$ of an absolutely continuous random variable $X$ is the support of its PDF.
 \sssc{Properties}
 \[f_X(x)\ge 0.\]
 \[\int_{-\infty}^{\infty}f_X(x)\dd{x}=1.\]
@@ -382,6 +382,8 @@ The marginal PMF of the sub-vector $Y=(X_{i1},\ldots,X_{ik})$ is
 p_Y(x_{i1},\ldots,x_{ik})=&P(X_{i1}=x_{i1},\ldots,X_{ik}=x_{ik})\\
 =&\sum_{\forall j\in\bbZ\cap[1,d]\setminus\{i_l\colon l\in[1,k]\}\colon x_j}p_X(x_1,\ldots,x_d)
 \ea\]
+\sssc{Support}
+\[\Supp(X)=\prod_{i=1}^d\Supp(X_i).\]
 \sssc{Properties}
 Let target sample space be $\Omega$ and target event space be $\calF$.
 \[p_X(\mb{a})\ge 0,\quad\forall\mb{a}\in\Omega.\]
@@ -400,6 +402,8 @@ For the sub-vector $Y=(X_{i1},\ldots,X_{ik})$, suppose marginal CDF of it is $F_
 f_Y(X_{i1},\ldots,X_{ik})(x_{i1},\ldots,x_{ik})=&\frac{\partial^nF_Y(x_{i1},\ldots,x_{ik})}{\partial x_{i1}\ldots\partial x_{ik}}\\
 =&\int_{-\infty}^{\infty}\ldots\int_{-\infty}^{\infty}f_X(x_1,\ldots,x_d)\prod_{j\in\bbZ\cap[1,d]\setminus\{i_l\colon l\in[1,k]}\dd{x_j}
 \ea\]
+\sssc{Support}
+\[\Supp(X)=\prod_{i=1}^d\Supp(X_i).\]
 \sssc{Properties}
 \[f_X(\mb{x})\ge 0.\]
 \[\int_{-\infty}^{\infty}\ldots\int_{-\infty}^{\infty}f_X(x_1,\ldots,x_d)\dd{x_1}\ldots\dd{x_d}=1.\]
@@ -493,11 +497,22 @@ is divergent.
 For an absolutely continuous random variable $X$ with probability density function $f_X(x)$, the expected value or expectation $E(X)$, $\bbE(X)$, $E[X]$, or $\bbE[X]$, or mean $\mu_X$, of it is
 \[E(X)=\int_{-\infty}^{\infty}xf_X(x)\dd{x}\]
 if it converges absolutely.
-\sssc{Derived random variable theorem}
-For a unary function $f\in L^1(\Omega_t,P_t)$,
-\[E(f(X))=\int_{\Omega_t}f(x)\dd{P_t(x)}.\]
-For a real random vector $X_1,\ldots,X_d$ with target sample spaces $\Omega_1,\ldots,\Omega_d$, pushforward probability measures $P_1,\ldots,P_d$, and an $n$-ary function $f\in L^1(\prod_{i=1}^d\Omega_i,P)$, where $P$ is the product measure in the product space $\prod_{i=1}^d\Omega_i$,
-\[E(f(X_1,\ldots,X_d))=\int_{\Omega_1}\ldots\int_{\Omega_d}f(x_1,\ldots,x_d)\dd{P_1(x_1)}\ldots\dd{P_d(x_d)}.\]
+\sssc{Derived random variable theorem - unary case}
+For a real ramdom variable and a unary function $g\in L^1(\Omega_t,P_t)$,
+\[E(g(X))=\int_{\Omega_t}g(x)\dd{P_t(x)},\]
+that is,
+\[E(g(X))=\int_{-\infty}^{\infty}g(x)f_X(x)\dd{x}\]
+for absolutely continuous random variable and
+\[E(g(X))=\sum_{x\in\Supp(X)}g(x)p_X(x)\]
+for discrete random variable.
+\sssc{Derived random variable theorem - general case}
+For a real random vector $X=(X_1,\ldots,X_d)$ with target sample spaces $\Omega_1,\ldots,\Omega_d$, pushforward probability measures $P_1,\ldots,P_d$, and an $n$-ary function $g\in L^1(\prod_{i=1}^d\Omega_i,P)$, where $P$ is the product measure in the product space $\prod_{i=1}^d\Omega_i$,
+\[E(g(X))=\int_{\prod_{i=1}^d\Omega_i}g(x_1,\ldots,x_d)\dd{P(x_1,\ldots,x_d)}=\int_{\Omega_1}\ldots\int_{\Omega_d}g(x_1,\ldots,x_d)\dd{P_1(x_1)}\ldots\dd{P_d(x_d)},\]
+that is,
+\[E(g(X))=\int_{-\infty}^{\infty}\ldots\int_{-\infty}^{\infty}g(x_1,\ldots,x_d)f_X(x_1,\ldots,x_d)\dd{x_1}\ldots\dd{x_n}\]
+for absolutely continuous random vector and
+\[E(g(X))=\sum_{(x_1,\ldots,x_d)\in\Supp(X)}g(x_1,\ldots,x_d)p_X(x_1,\ldots,x_d)\]
+for discrete random vector.
 \sssc{Expected value from CDF}
 For a non-negative real random variable $X$,
 \[E(X)=\int_0^{\infty}P(X\ge x)\dd{x}=\int_0^{\infty}1-F_X(x)\dd{x}.\]
@@ -527,19 +542,19 @@ E(X^-)&=\int_0^{\infty}P(X^-\ge u)\dd{u}\\
 and
 \[E(X)=E(X^+)-E(X^-).\]
 \sssc{Affine Transformation}
-For a real random variable $X$, $a\in\bbR_{\neq0}$, and $b\in\mathbb{R}$,
+For a real random variable or real random vector $X$, $a\in\bbR_{\neq0}$, and $b\in\mathbb{R}$,
 \[E(aX+b)=aE(X)+b.\]
 \sssc{Linearity}
-For indexed families of real random variables $(X_i)_{i\in I}$ and real numbers $(a_i)_{i\in I}$ with $\abs{I}\in\bbN\cup\{\aleph_0\}$, where for $\abs{I}=\aleph_0$ suppose RHS is convergent,
+For indexed families of real random variables or real random vectors $(X_i)_{i\in I}$ and real numbers $(a_i)_{i\in I}$ with $\abs{I}\in\bbN\cup\{\aleph_0\}$, where for $\abs{I}=\aleph_0$ suppose RHS is convergent,
 \[E(\sum_{i\in I}a_iX_i)=\sum_{i\in I}a_iE(X_i).\]
 \sssc{Conditional expectation}
 \[E(X|A)=\frac{E(X\cdot\mb{1}_A)}{P(A)}\]
 \sssc{Law of total expectation}
 Let $(A_i)_{i=1}^n\subseteq\calF$ be a partition. Then
 \[E(X)=\sum_{i=1}^nE(X|A_i)P(A_i)\]
-\sssc{Product of independent random variable}
-If $X,Y$ are independent,
-\[E(XY)=E(X)E(Y).\]
+\sssc{Independent random variables}
+If $X_1,\ldots,X_d$ are independent,
+\[E(\prod_{i=1}^dX_i)=\prod_{i=1}^dE(X_i).\]
 \ssc{Variance and Covariance}
 \sssc{Variance (變異數/方差)}
 For a real random variable $X$, variance $\Var(X)$, $V(X)$, or $\sigma_X^{\phantom{X}2}$ of it is defined as
@@ -579,13 +594,13 @@ For $n$-dimensional real random vector $\mb{X}=(X_1,X_2,\ldots,X_n)$ and real ve
 For real random variables $X,Y$ and real numbers $a,b$,
 \[\Var(X+Y)=\Var(X)+\Var(Y)+2\Cov(X,Y).\]
 \sssc{Independent random variables}
-For $n$-dimensional real random vector $\mb{X}=(X_1,X_2,\ldots,X_n)$ of independent random variables, $\Cov(\mb{X})$ is a diagonal matrix where $\Sigma_{ii}=\Var(X_i)$
+For $n$-dimensional real random vector $X=(X_1,X_2,\ldots,X_d)$ of independent random variables, $\Cov(X)$ is a diagonal matrix where $\Sigma_{ii}=\Var(X_i)$.
 
 If $X,Y$ are independent,
 \[r_{X,Y}=E(XY)=E(X)E(Y)\]
-\[E(g(X)h(Y))=E(g(X))E(h(Y))\]
 \[\Cov(X,Y)=\rho_{X,Y}=0\]
-\[\Var(X+Y)=\Var(X)+\Var(Y)\]
+If $X_1,\ldots,X_d$ are independent,
+\[\Var(\sum_{i=1}^dX_i)=\sum_{i=1}^d\Var(X_i).\]
 \sssc{Affine Transformation}
 For a real random variable $X$, $a\in\bbR$, and $b\in\mathbb{R}$, let $W=aX+b$,
 \[\Var(W)=a^2\Var(X).\]
@@ -678,6 +693,10 @@ For a real random variable $X$, $a\in\bbR_{\neq0}$, and $b\in\mathbb{R}$,
 \sssc{Logarithmic Linearity}
 For indexed families of real random variables $(X_i)_{i\in I}$ and real numbers $(a_i)_{i\in I}$ with $\abs{I}\in\bbN\cup\{\aleph_0\}$, where for $\abs{I}=\aleph_0$ suppose RHS is convergent,
 \[M_{\sum_{i\in I}a_iX_i}(t)=\prod_{i\in I}M_{X_i}\qty(a_it).\]
+\sssc{Independent random variables}
+If $X_1,\ldots,X_d$ are independent,
+\[E(\prod_{i=1}^dX_i^{\pht{i}n})=\prod_{i=1}^dE(X_i^{\pht{i}n})\]
+\[M_{\sum_{i=1}^dX_i}(t)=\prod_{i=1}^dM_{X_i}(t)\]
 \ssc{Mode (眾數)}
 \sssc{For discrete random variable}
 For a discrete random variable $X$ with PMF $p_X(x)$, $\Mode(X)$ is defined as
@@ -1513,4 +1532,7 @@ For any fixed $\lambda\in(0,\infty)$, let $X_n\sim\operatorname{NegBin}\qty(r,\f
 \bpr
 PLACEHOLDER
 \epr
+\ssc{Families of Absolutely Continuous Random Vector}
+\sssc{Multivariate or Joint Normal or Gaussian random variable}
+PLACEHOLDER
 \end{document}
