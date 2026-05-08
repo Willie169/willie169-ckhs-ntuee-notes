@@ -87,6 +87,17 @@ we have
 a.e. on $(a,b)$, and
 \[f_1(x)=F'(x)\]
 a.e. on $(a,b)$. (Note that $F$ is differentiable a.e. since it's absolutely continuous.)
+\ssc{Jacobian matrix of injective function}
+If $\mb{F}\colon U\subseteq\bbR^n\to\bbR^n$ is injective and differentiable, and $\mb{F}^{-1}\colon V\subseteq\bbR^n\to\bbR^n$ is differentiable, then for all $\mb{x}\in U$,
+\[(J(\mb{F}))(\mb{x})(J(\mb{F}^{-1}))(\mb{F}(\mb{x}))=I_n,\]
+and for all $\mb{y}\in V$,
+\[(J(\mb{F}))(\mb{F}^{-1}(\mb{y}))(J(\mb{F}^{-1}))(\mb{y})=I_n.\]
+\bpr
+\[(\mb{F}\circ\mb{F}^{-1})(\mb{x})=\mb{x},\quad\mb{x}\in V\]
+\[(J(\mb{F})\circ\mb{F}^{-1}\cdot J(\mb{F}^{-1}))(\mb{x})=I_n,\quad\mb{x}\in V\]
+\[(\mb{F}^{-1}\circ\mb{F})(\mb{x})=\mb{x},\quad\mb{x}\in U\]
+\[(J(\mb{F}^{-1})\circ\mb{F}\cdot J(\mb{F}))(\mb{x})=I_n,\quad\mb{x}\in U\]
+\epr
 \subsection{Integration by substitution (代換積分法), integration by change of variables (換元積分法), u-substitution (u-代換), reverse chain rule, substitution theroem (代換定理), change of variables theorem (換元定理), or transformation theorem (變換定理)}
 \subsubsection{Univariate form}
 Let $g:\,I\subseteq\mathbb{R}\to\mathbb{R}$ be injective and differentiable on $[a,b]\subseteq I$, with $g'$ being integrable on $[a,b]$, and $f:\,K\supseteq g([a,b])\to\mathbb{R}$ be integrable on $g([a,b])$. Then:
@@ -116,20 +127,19 @@ which matches the structure of the right-hand Riemann sum \(T_Q\) if we let \(\x
 As the partition \(P\) of \([a, b]\) gets finer, the Riemann sum \(S_P\) converges to \(\int_a^b f(g(x)) g'(x) \, \mathrm{d}x\). Similarly, as the partition \(Q\) of \([g(a), g(b)]\) gets finer, the Riemann sum \(T_Q\) converges to \(\int_{g(a)}^{g(b)} f(u) \, \mathrm{d}u\).
 \end{proof}
 \subsubsection{Multivariate form}
-Let $\mathbf{T}\colon I\subseteq\mathbb{R}^n\to\mathbb{R}^n;\;\mb{x}\mapsto\mb{y}$ be injective and differentiable on $D\subseteq I$, its Jacobian matrix $\nabla\mathbf{T}$ being continuous on $D$, and $f\colon K\supseteq\mathbf{T}(D)\to\mathbb{R}$ be integrable on $\mathbf{T}(D)$. Then
-\[\int_Df\qty(\mb{x})\abs{\det\left(\nabla\mathbf{T}\right)}\dd{V}=\int_{\mathbf{T}(D)}f\qty(\mb{T}^{-1}(\mb{y}))\dd{V}\]
+Let $D\subseteq\mathbb{R}^n$ be an open set, $\mathbf{F}\colon D\to\mathbb{R}^n$ be injective and differentiable on $D$ and $C^1$ a.e. on $D$, $\abs{\det(J(\mb{F}))}$ be nonzero on $D$. Then for any piecewise continuous function $f\colon\mb{F}(D)\to\mathbb{R}$ with compact support on $D$,
+\[\int_Df(\mb{F}(\mb{x}))\abs{\det((J(\mb{F}))(\mb{x}))}\dd{\mb{x}}=\int_{\mb{F}(D)}f(\mb{y})\dd{\mb{y}}\]
 and
-\[\int f\qty(\mb{x})\abs{\det\left(\nabla\mathbf{T}\right)}\dd{V}=\int f\qty(\mb{T}^{-1}(\mb{y}))\dd{V}.\]
+\[\int f(\mb{F}(\mb{x}))\abs{\det((J(\mb{F}))(\mb{x}))}\dd{\mb{x}}=\int f(\mb{y})\dd{\mb{y}}.\]
 Substitutions from RHS to LHS are also called inverse substitution.
 \bpr
 PLACEHOLDER
 \epr
-If $T^{-1}$ is differentiable,
-\[\det\left(\nabla\mathbf{T}\right)\det\left(\nabla(\mathbf{T}^{-1})\right)=1\]
-Thus,
-\[\int_Df\qty(\mb{x})\dd{V}=\int_{\mathbf{T}(D)}f\qty(\mb{T}^{-1}(\mb{y}))\abs{\det\left(\nabla(\mathbf{T}^{-1})\right)}\dd{V}\]
+If also that $\mb{F}^{-1}$ is differentiable on $\mb{F}(D)$ and $C^1$ a.e. on $\mb{F}(D)$, since
+\[(J(\mb{F}))(\mb{x})(J(\mb{F}^{-1}))(\mb{F}(\mb{x}))=I_n,\]
+\[\int_Df(\mb{F}(\mb{x}))\dd{\mb{x}}=\int_{\mb{F}(D)}f(\mb{y})\abs{\det((J(\mb{F}^{-1}))(\mb{y}))}\dd{\mb{y}}\]
 and
-\[\int f\qty(\mb{x})l\dd{V}=\int f\qty(\mb{T}^{-1}(\mb{y}))\abs{\det\left(\nabla(\mathbf{T}^{-1})\right)}\dd{V}.\]
+\[\int f(\mb{F}(\mb{x}))\dd{\mb{x}}=\int f(\mb{y})\abs{\det((J(\mb{F}^{-1}))(\mb{y}))}\dd{\mb{y}}.\]
 \subsubsection{Measure theory form}
 Let $X$ be a locally compact Hausdorff space equipped with a finite Radon measure $μ$, and let $Y$ be a \text{\textsigma}-compact Hausdorff space with a \text{\textsigma}-finite Radon measure $\rho$. Let $\phi\colon X\to Y$ be an absolutely continuous function. Then there exists a real-valued Borel measurable function $w$ on $X$ such that, for every function $f\colon Y\to\mathbb{R}$ in $L^1(Y)$, the function $(f\circ\phi)\cdot w$ is in $L^1(X)$, and for every open subset $U$ of $X$
 \[\int_U(f\circ\phi)(x)\cdot w(x)\dd{\mu(x)}=\int_{\phi(U)}f(y)\dd{\rho(y)}.\]

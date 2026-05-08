@@ -191,8 +191,6 @@ A simple random variable is a discrete random variable $X$ such that there exist
 \sssc{Decomposition}
 For the CDF $F_X$ of any real random variable $X$, there exist $p\in[0,1]$, $q\in[0,1]$, discrete random variable $Y$, absolutely continuous random variable $Z$, and singular random variable $W$ such that
 \[F_X=pF_Y+qF_z+(1-p-q)F_W.\]
-\sssc{Derived ramdom variable}
-For random variables $X_1,\ldots,X_n$ and an $n$-ary function $f$, a random variable $Y=f(X_1,\ldots,X_n)$ is a derived ramdom variable.
 \sssc{Equality in distribution}
 Two real random variables are equal in distribution or law, i.e., has the same pushforward probability measure, if they have the same CDF.
 \bpr
@@ -408,6 +406,33 @@ f_Y(X_{i1},\ldots,X_{ik})(x_{i1},\ldots,x_{ik})=&\frac{\partial^nF_Y(x_{i1},\ldo
 \[f_X(\mb{x})\ge 0.\]
 \[\int_{-\infty}^{\infty}\ldots\int_{-\infty}^{\infty}f_X(x_1,\ldots,x_d)\dd{x_1}\ldots\dd{x_d}=1.\]
 \[P(X\in B)=\int_Bf_X(x_1,\ldots,x_d)\dd{x_1}\ldots\dd{x_d},\quad\forall B\in\calB(\bbR).\]
+\ssc{Derived Random Vector}
+\sssc{Derived random variable}
+A real random variable $Y$ defined as $Y=g(X_1,\ldots,X_n)$ for some real random variables $X_1,\ldots,X_n$ and measurable function $g\colon\bbR^n\to\bbR$ is called a derived random variable.
+\sssc{Derived random vector}
+A real random vector $Y=(Y_1,\ldots,Y_m)$ defined as $Y=g(X)$ for some real random vector $X=(X_1,\ldots,X_n)$ and measurable function $g\colon\bbR^n\to\bbR^m$ is called a derived random vector.
+\sssc{Maximum and minimum of random variables}
+Consider a real random vector $X=(X_1,\ldots,X_d)$, and define $Y=\max(X_1,\ldots,X_d)$ and $Z=\min(X_1,\ldots,X_d)$.
+\[F_Y(y)=P(X_1\le y\land\ldots\land X_d\le y)=F_X(y,\ldots,y)\]
+\[\ba
+F_Z(z)=&P(X_1\le z\lor\ldots\lor X_d\le z)\\
+=&1-P(X_1>z,\ldots,X_d>z)\\
+=&1-\prod_{i=1}^d\qty(1-F_{X_i}(z))\\
+=&\sum_{J\subseteq\bbN_{\leq d}\land J\neq\varnothing}(-1)^{|J|+1}P\qty(X_j\le z\forall j\in J)\\
+=&\sum_{J\subseteq\bbN_{\leq d}\land J\neq\varnothing}(-1)^{|J|+1}F_{(X_j)_{j\in J}}(z,\ldots,z)
+\ea\]
+\sssc{CDF of derived random vector}
+\[F_Y(y_1,\ldots,y_m)=P(Y_1\le y_1,\ldots,Y_m\le y_m)\]
+\sssc{PMF of derived random vector}
+\[p_Y(y_1,\ldots,y_m)=P(Y_1=y_1,\ldots,Y_m=y_m)\]
+\sssc{PDF of derived random vector}
+\[f_Y(y_1,\ldots,y_m)=\frac{\partial^m}{\partial y_1\ldots\partial y_m}F_Y(y_1,\ldots,y_m)\]
+\sssc{Special case of injective function}
+Let $X=(X_1,\ldots,X_n)$ be an absolutely continuous random vector, $g\colon\bbR^n\to\bbR^n$ be injective and differentiable, and $C^1$ a.e., $\abs{\det(J(g))}$ be nonzero, $g^{-1}$ be differentiable, and $C^1$ a.e., and $Y=g(X)$. Then
+\[f_Y(y)=f_X(g^{-1}(y))\abs{\det((J(g^{-1}))(y))}.\]
+\sssc{Affine transformation}
+Let $X=(X_1,\ldots,X_n)$ be an absolutely continuous random vector, $A$ be an invertible $n\times n$ matrix, and $b$ be an $m$-dimensional vector, and $Y=AX+b$. Then
+\[f_Y(y)=\frac{1}{\det(A)}f_X(A^{-1}(y-b)).\]
 \ssc{Independent random variables}
 \sssc{Definition}
 Real random variables $X_1,\ldots,X_n$ are (mutually) independent if for all Borel sets $A_1,\ldots,A_n$,
@@ -447,7 +472,7 @@ If: By CDF factorization and absolute continuity.
 \epr
 \sssc{Independent and identically distributed (i.i.d.) random variables}
 $X_1,\ldots,X_d$ are said to be independent and identically distributed (i.i.d.) if they are independent and the marginal CDFs $F_{X_i}$ for all $i\in\bbZ\cap[1,d]$ are identical.
-\sssc{Functions on independent random variables are independent}
+\sssc{Functions of independent random variables are independent}
 Let $X_1,\ldots,X_n$ be independent real random variables and $g_1,\ldots,g_n\colon\bbR\to\bbR$ be measurable functions. Then $g_1(X_1),\ldots,g_n(X_n)$ are independent.
 \bpr
 For Borel sets $A_1,\ldots,A_n$,
