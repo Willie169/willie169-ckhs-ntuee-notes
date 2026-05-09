@@ -433,7 +433,7 @@ By FTC part 2,
 \[\int_a^b\dv{}{t}\mb{F}(\mb{r}(t))\dd{t}=\mb{F}(\mb{r}(b))-\mb{F}(\mb{r}(a))\]
 \epr
 \subsubsection{Divergence theorem, Gauss's theorem, or Ostrogradsky's theorem (高斯散度定理)}
-Suppose $V\subseteq\mathbb{R}^n$ is a compact volume with outward-oriented, piecewise $C^1$ boundary $\partial V=S$. If $\mb{F}$ is a vector field differentiable and piecewise $C^1$ on a neighborhood of $V$, then
+Suppose $V\subseteq\mathbb{R}^n$ is a compact region with outward-oriented, piecewise $C^1$ boundary $\partial V=S$. If $\mb{F}$ is a vector field differentiable and piecewise $C^1$ on a neighborhood of $V$, then
 \[\int_V\nabla\cdot\mb{F}\dd{V}=\oint_S\mb{F}\cdot\dd{\mb{S}}.\]
 \bpr
 Simple regions case: Let $\sigma$ be a permutation on $(x_1,\ldots,x_n)$ and
@@ -456,11 +456,41 @@ Finite union of simple regions case: Both sides are additive. Internal faces can
 
 Any compact region with piecewise $C^1$ boundary has finite cover of simple regions. So the identity still holds.
 \epr
+\sssc{Divergence product rule}
+For a scalar field $f$ and a vector field $\mb{G}$,
+\[\nabla\cdot(f\mb{G})=\nabla f\cdot\mb{G}+f\nabla\cdot\mb{G}.\]
+\sssc{Green's first identity}
+Suppose $V\subseteq\mathbb{R}^n$ is a compact region with outward-oriented, piecewise $C^1$ boundary $\partial V=S$. If a scalar field $f$ is continuous and piecewise $C^1$ on a neighborhood of $S$ and a scalar field $g$ is $C^1$ and piecewise $C^2$ on a neighborhood of $S$, then
+\[\int_Vf\nabla^2g+\nabla f\cdot\nabla g\dd{V}=\oint_Sf\nabla g\cdot\dd{\mb{S}}.\]
+\bpr
+By divergence theorem and divergence product rule,
+\[\ba
+\oint_S(f\nabla g)\cdot\dd{\mb{S}}=&\int_V\nabla\cdot(f\nabla g)\dd{V}\\
+=&\int_V\nabla f\cdot\nabla g+f\nabla\cdot(\nabla g)\dd{V}\\
+=&\int_Vf\nabla^2g+\nabla f\cdot\nabla g\dd{V}
+\ea\]
+\epr
+\sssc{Green's second identity}
+Suppose $V\subseteq\mathbb{R}^n$ is a compact region with outward-oriented, piecewise $C^1$ boundary $\partial V=S$. If two scalar fields $f,g$ are $C^1$ and piecewise $C^2$ on a neighborhood of $V$, and a scalar field $\varepsilon$ is continuous and piecewise $C^1$ on a neighborhood of $V$, then
+\[\int_Vf\nabla\cdot(\varepsilon\nabla g)-g\nabla\cdot(\varepsilon\nabla f)\dd{V}=\oint_S\varepsilon\qty(f\nabla g-g\nabla f)\cdot\dd{\mb{S}}.\]
+\bpr
+By divergence theorem and divergence product rule,
+\[\ba
+\oint_S\varepsilon\qty(f\nabla g-g\nabla f)\dd{\mb{S}}=&\int_V\nabla\cdot\qty(\varepsilon\qty(f\nabla g-g\nabla f))\dd{V}\\
+=&\int_V\nabla\varepsilon\cdot\qty(f\nabla g-g\nabla f)+\varepsilon\nabla\cdot\qty(f\nabla g-g\nabla f)\dd{V}\\
+=&\int_Vf\nabla\varepsilon\cdot\nabla g-g\nabla\varepsilon\cdot\nabla f+\varepsilon\qty(\nabla f\cdot\nabla g+f\nabla^2g-\nabla g\cdot\nabla f-g\nabla^2f)\dd{V}\\
+=&\int_Vf\nabla\cdot(\varepsilon\nabla g)-f\varepsilon\nabla^2g-g\nabla\cdot(\varepsilon\nabla f)+g\varepsilon\nabla^2f+\varepsilon\qty(f\nabla^2g-g\nabla^2f)\dd{V}\\
+=&\int_Vf\nabla\cdot(\varepsilon\nabla g)-g\nabla\cdot(\varepsilon\nabla f)\dd{V}
+\ea\]
+\epr
+For $\varepsilon=1$,
+\[\int_Vf\nabla^2g-g\nabla^2f\dd{V}=\oint_S\qty(f\nabla g-g\nabla f)\cdot\dd{\mb{S}}.\]
 \subsubsection{Green's theorem (格林定理或綠定理)}
 Suppose $S\subseteq\bbR^2$ is a compact surface with positively-oriented, piecewise $C^1$ boundary $\partial S=\ell$. If two scalar functions $P(x,y)$ and $Q(x,y)$ are continuous and piecewise $C^1$ on a neighborhood of $S$, then
-\[\iint_S\pdv{Q}{x}-\pdv{P}{y}\dd{S}=\oint_{\ell}P\dd{x}+Q\dd{y}.\]
+\[\iint_S\pdv{Q}{x}-\pdv{P}{y}\dd{S}=\oint_{\ell}P\dd{x}+Q\dd{y},\]
+that is, let $\mb{F}=(Q,-P)$,
+\[\iint_S\nabla\cdot\mb{F}\dd{S}=\oint_{\ell}\mb{F}\cdot\dd{\boldsymbol{\ell}}.\]
 \bpr
-Let $\mb{F}=(Q,-P)$.
 \[\nabla\cdot\mb{F}=\pdv{Q}{x}-\pdv{P}{y}\]
 \[\dd{\boldsymbol{\ell}}=\dd{y}-\dd{x}\]
 By divergence theorem,
@@ -505,6 +535,25 @@ The generalized Stokes theorem says that the integral of a differential form $\o
 \bpr
 PLACEHOLDER
 also statement
+\epr
+\sssc{Curl of curl}
+For a vector field $\mb{F}\colon U\subseteq\bbR^3\to\bbR^3$, at a point where it's $C^2$,
+\[\nabla\times(\nabla\times\mb{F})=\nabla(\nabla\cdot\mb{F})-\nabla^2\mb{F}.\]
+\bpr
+\[\ba
+\nabla\times(\nabla\times\mb{F})=&\nabla\times\qty(\pdv{F_3}{y}-\pdv{F_2}{z},\pdv{F_1}{z}-\pdv{F_3}{x},\pdv{F_2}{x}-\pdv{F_1}{y})\\
+=&\qty(\pdv{\pdv{F_2}{x}-\pdv{F_1}{y}}{y}-\pdv{\pdv{F_1}{z}-\pdv{F_3}{x}}{z},\pdv{\pdv{F_3}{y}-\pdv{F_2}{z}}{z}-\pdv{\pdv{F_2}{x}-\pdv{F_1}{y}}{x},\pdv{\pdv{F_1}{z}-\pdv{F_3}{x}}{x}-\pdv{\pdv{F_3}{y}-\pdv{F_2}{z}}{y})\\
+=&\qty(\frac{\partial^2F_2}{\partial x\partial y}-\frac{\partial^2F_1}{\partial y^2}+\frac{\partial^2F_3}{\partial x\partial z}-\frac{\partial^2F_1}{\partial z^2},\frac{\partial^2F_3}{\partial y\partial z}-\frac{\partial^2F_2}{\partial z^2}+\frac{\partial^2F_1}{\partial x\partial y}-\frac{\partial^2F_2}{\partial x^2},\frac{\partial^2F_1}{\partial x\partial z}-\frac{\partial^2F_3}{\partial x^2}+\frac{\partial^2F_2}{\partial y\partial z}-\frac{\partial^2F_3}{\partial y^2})
+\ea\]
+\[\ba
+\nabla(\nabla\cdot\mb{F})=&\nabla\qty(\pdv{F_1}{x}+\pdv{F_2}{y}+\pdv{F_3}{z})\\
+=&\qty(\frac{\partial^2F_1}{\partial x^2}+\frac{\partial^2F_2}{\partial x\partial y}+\frac{\partial^2F_3}{\partial x\partial z},\frac{\partial^2F_1}{\partial x\partial y}+\frac{\partial^2F_2}{\partial y^2}+\frac{\partial^2F_3}{\partial x\partial z},\frac{\partial^2F_1}{\partial x\partial z}+\frac{\partial^2F_2}{\partial y\partial z}+\frac{\partial^2F_3}{\partial z^2})
+\ea\]
+\[\ba
+\nabla\times(\nabla\times\mb{F})-\nabla(\nabla\cdot\mb{F})=&\qty(-\frac{\partial^2F_1}{\partial x^2}-\frac{\partial^2F_1}{\partial y^2}-\frac{\partial^2F_1}{\partial z^2},-\frac{\partial^2F_2}{\partial x^2}-\frac{\partial^2F_2}{\partial y^2}-\frac{\partial^2F_2}{\partial z^2},-\frac{\partial^2F_3}{\partial x^2}-\frac{\partial^2F_3}{\partial y^2}-\frac{\partial^2F_3}{\partial z^2})\\
+=&-\qty(\nabla^2F_1,\nabla^2F_2,\nabla^2F_3)\\
+=&-\nabla^2\mb{F}
+\ea\]
 \epr
 \ssc{Conservative field}
 \sssc{Path independence equivalent to zero closed path integral}

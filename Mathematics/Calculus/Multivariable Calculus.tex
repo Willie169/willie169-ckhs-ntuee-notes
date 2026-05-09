@@ -5,7 +5,9 @@
 \[\forall\mathbf{v}\in V\colon\mathbf{v}+\mathbf{0}=\mathbf{v}.\]
 \item Independent variable vector: $\mathbf{x}=(x_1,x_2,\dots,x_n)$. For two dimensions also $\mathbf{x}=(x,y)$. For three dimensions also $\mathbf{x}=(x,y,z)$.
 \item Basis: $\mathbf{e}_i$ is the unit vector in the direction of $x_i$. For two or three dimensions also $\mb{i}=\mb{e}_i$ and $\mb{j}=\mb{e}_2$. For three dimensions also $\mathbf{k}=\mb{e}_3$.
-\item Vector field: A function, often denoted with bold uppercase Latin letter, whose domain is a subset of $\bbR^n$ and codomain is $\bbR^m$, whose $i$th component is often denoted as the same character with subscript $i$, e.g., $F_i$ or $\mb{F}_i$ for vector field $\mb{F}$.
+\item Unit normal vector: $\hat{\mb{n}}$ or $\mb{n}$
+\item Vector field: A function, often denoted with bold uppercase Latin letter, whose domain is a subset of $\bbR^n$ and codomain is $\bbR^m$.
+\item Vector component: For a type $(r,1)$ tensor in multidimensional array representation, its $i$th component is often denoted as the same character with subscript $i$, e.g., $F_i$ or $\mb{F}_i$ for $\mb{F}$.
 \item Scalar field: A function, often denoted with non-bold Latin or Greek letter, whose domain is a subset of $\bbR^n$ and codomain is $\bbR$.
 \item $k$th total derivative function operator: $D^k$
 \item Dot product (點積) operator: $\cdot$
@@ -15,10 +17,10 @@
 \item Gram matrix, Gramian matrix, or Gramian: $\mathbf{G}(\mathbf{F})$, $G(\mathbf{F})$, $\mb{G}_{\mb{F}}$, or $G_{\mathbf{F}}$ for operand vector field $\mb{F}$.
 \item Divergence (散度) operator: $\nabla \cdot$ or $\operatorname{div}$
 \item Curl (旋度) operator (three dimension): $\nabla\times$ or $\operatorname{curl}$
-\item Directional derivative (方向導數) operator: $(\mb{F}\cdot\nabla)\mb{G}$ or $D_{\mb{F}}\mb{G}$ for directional derivative of tensor field $\mb{G}$ along/in the direction of a vector field $\mb{F}\colon\bbR^n\to\bbR^n$. For constant vector $\mb{F}$, $D_{\mb{F}}\mb{G}$ notation is typically used and $\mb{F}$ is typically a unit vector.
+\item Directional derivative (方向導數) operator: $(\mb{F}\cdot\nabla)\mb{G}$, $D_{\mb{F}}\mb{G}$, $\pdv{\mb{G}}{\mb{F}}$, or $\nabla_{\mb{F}}\mb{G}$ for directional derivative of tensor field $\mb{G}$ along/in the direction of a vector field $\mb{F}\colon\bbR^n\to\bbR^n$. For constant vector $\mb{F}$, $D_{\mb{F}}\mb{G}$ notation is typically used and $\mb{F}$ is typically a unit vector.
 \item Hessian (黑塞) (matrix): 
 $D^2f$, $\nabla\nabla$, $\nabla^2f$, $\mathbf{H}(f)$, $H(f)$, $\mb{H}_f$, $H_f$, or $\nabla\otimes\nabla f$ for operand scalar field $f$.
-\item Laplace operator (拉普拉斯算子) or Laplacian: $\nabla\cdot\nabla$, $\nabla^2$, or $\Delta$. For clarity, we'll use $\nabla\cdot\nabla$ here.
+\item Laplace operator (拉普拉斯算子) or Laplacian: $\nabla\cdot\nabla$, $\nabla^2$, or $\Delta$
 \item Vector and covector convention: We use column vector convention of vectors and row vector convention of covectors here, and tensor convention follows. Note that a derivative function of a scalar field is a covector. We use the convention that the notation of partial derivative w.r.t. a column vector $v$ means the column vector of the partial derivatives w.r.t. each component of $v$.
 \item Line/path/general integral operator: $\int$
 \item Double/surface integral operator: $\iint$
@@ -26,16 +28,16 @@ $D^2f$, $\nabla\nabla$, $\nabla^2f$, $\mathbf{H}(f)$, $H(f)$, $\mb{H}_f$, $H_f$,
 \item Closed line integral operator: $\oint$
 \item Closed surface integral operator: $\oiint$
 \item Arc length element: $\dd{\ell}$
-\item Vector arc length element: $\dd{\boldsymbol{\ell}}$, which is defined as unit tangent vector multiplied by $\dd{\ell}$.
+\item Vector arc length element: $\dd{\boldsymbol{\ell}}$, which is defined as $\mb{n}\dd{\ell}$.
 \item Surface element: $\dd{S}$
-\item Vector surface element: $\dd{\mb{S}}$, which is defined as unit normal vector in the orientation multiplied by $\dd{S}$ and is only defined for orientable surface equipped with an orientation. For a vector field $\mb{F}$, $\iint_S\mb{F}\cdot\dd{\mb{S}}$ is called flux of $f$ across $S$.
+\item Vector surface element: $\dd{\mb{S}}$, which is defined as $\mb{n}\dd{S}$ and is only defined for orientable surface equipped with an orientation. For a vector field $\mb{F}$, $\iint_S\mb{F}\cdot\dd{\mb{S}}$ is called flux of $f$ across $S$.
 \item Positive orientation: The boundary curve $\ell$ of a compact surface $S$, $\dd{\boldsymbol{\ell}}$ transverses counterclockwise around $S$ unless otherwise specified.
 \item Upward/Positive orientation: In $\bbR^2$, a surface is oriented upward unless otherwise specified.
-\item Outward/Positive orientation: The boundary surface $S$ of a compact region of the same dimension of the space is oriented outward unless otherwise specified.
+\item Outward/Positive orientation: The boundary region $S$ of a compact region is oriented outward unless otherwise specified.
 \end{itemize}
 \subsection{Nabla operators}
 \subsubsection{Gradient and Jacobian matrix}
-The gradient of a tensor field $f$ is
+The gradient of a type $(r,1)$ tensor field $f$ is a type $(r+1,1)$ tensor field
 \[\nabla f = \pdv{f}{(x_1,x_2,\ldots,x_n)} = \begin{bmatrix}\qty(\pdv{f}{x_1})^{\top} & \qty(\pdv{f}{x_2})^{\top} & \cdots  & \qty(\pdv{f}{x_n})^{\top}\end{bmatrix},\]
 that is, the transpose of the first-order derivative of $f$. Some sources define gradient as the transpose of the definition here.
 
@@ -55,7 +57,7 @@ The notation
 \[\pdv{(F_1,\ldots,F_m)}{(x_1,\ldots,x_n)}\]
 denotes the Jacobian matrix or sometimes Jacobian of $\mb{F}$.
 \subsubsection{Directional derivative (方向導數)}
-For a tensor field $\mb{G}\colon U\subseteq\bbR^n\to X$ and $\mb{F}\colon V\subseteq\bbR^n\to\bbR^n$, the directional derivative of $\mb{G}$ in the direction of $\mb{F}$ is a function $((\mb{F}\cdot\nabla)\mb{G})\colon W\subseteq\bbR^n\to X$ defined as
+For tensor fields $\mb{G}\colon U\subseteq\bbR^n\to X$ and $\mb{F}\colon V\subseteq\bbR^n\to\bbR^n$, the directional derivative of $\mb{G}$ in the direction of $\mb{F}$ is a function $((\mb{F}\cdot\nabla)\mb{G})\colon W\subseteq\bbR^n\to X$ defined as
 \[(\mb{F}\cdot\nabla)\mb{G}\coloneq\lim_{h\to 0}\frac{\mb{G}(\mb{x}+h\mb{F}(\mb{x}))-\mb{G}(\mb{x})}{h},\]
 where $W$ is a subset of $U\cap V$ where the definition is defined.
 
@@ -68,9 +70,8 @@ that is,
 \[G_{ij}=\pdv{\mb{F}}{x_i}\cdot\pdv{\mb{F}}{x_j}.\]
 The determinant of Gram matrix is called Gram determinant or Gramian.
 \subsubsection{Divergence (散度)}
-For an $n$-dimensional vector field $\mb{F}$,
-\[\nabla\cdot\mb{F}=\sum_{i=1}^n\pdv{F_i}{x_i},\]
-which is a scalar field.
+For a type $(r,1)$ tensor field $\mb{F}$,
+\[\nabla\cdot\mb{F}=\sum_{i=1}^n\pdv{F_i}{x_i}.\]
 \subsubsection{Curl (旋度) (three dimension)}
 For a three-dimensional vector field $\mb{F}(x,y,z)$ defined on a subset of $\bbR^3$,
 \[\ba
@@ -79,7 +80,7 @@ For a three-dimensional vector field $\mb{F}(x,y,z)$ defined on a subset of $\bb
 \frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\
 F_1 & F_2 & F_3
 \end{bmatrix}\\
-=&\qty(\pdv{F_3}{y}-\pdv{F_y}{z},\pdv{F_1}{z}-\pdv{F_3}{x},\pdv{F_2}{x}-\pdv{F_1}{y})
+=&\qty(\pdv{F_3}{y}-\pdv{F_2}{z},\pdv{F_1}{z}-\pdv{F_3}{x},\pdv{F_2}{x}-\pdv{F_1}{y})
 \ea\]
 \subsubsection{Curl (two dimension)}
 For a two-dimensional vector field $\mb{F}(x,y)$ defined on a subset of $\bbR^2$, $\pdv{F_2}{x}-\pdv{F_1}{y}$ is called curl, and $F_1,F_2$ are often denoted $P,Q$ respectively.
@@ -87,17 +88,28 @@ For a two-dimensional vector field $\mb{F}(x,y)$ defined on a subset of $\bbR^2$
 The Hessian matrix $H(f)$ of a scalar field $f$ is its second derivative, which is a tensor field of type $(0,2)$, represented as a matrix, that is,
 \[(H(f))_{ij}=\frac{\partial^2f}{\partial x_i\partial x_j},\]
 that is,
-\[H(f)=J((\nabla f)).\]
+\[H(f)=J(\nabla f).\]
 \subsubsection{Laplace operator (拉普拉斯算子)}
-The Laplace operator applied to a scalar field $f$ is
-\[\nabla\cdot\nabla f = \nabla \cdot (\nabla f) = \tr(H(f))=\sum_{i=1}^n\frac{\partial^2 f}{\partial x_i^{\phantom{i}2}}.\]
+The Laplace operator applied to a type $(r,1)$ tensor $f$ is
+\[\nabla^2 f = \nabla \cdot (\nabla f).\]
+For one-dimensional $f$,
+\[\nabla^2 f = \tr(H(f))=\sum_{i=1}^n\frac{\partial^2 f}{\partial x_i^{\phantom{i}2}}.\]
+For $m$-dimensional $f$, let $f=\mb{F}=(F_1,\ldots,F_m)$,
+\[\nabla^2\mb{F}=&\nabla\cdot\begin{bmatrix}
+\pdv{F_1}{x_1} & \cdots & \pdv{F_1}{x_n}\\
+\vdots & \ddots & \vdots\\
+\pdv{F_m}{x_1} & \cdots & \pdv{F_m}{x_n}
+\end{bmatrix}\\
+=&\qty(\sum_{i=1}^n\frac{\partial^2F_1}{\partial x_i^{\pht{i}2}},\ldots,\sum_{i=1}^n\frac{\partial^2F_m}{\partial x_i^{\pht{i}2}})\\
+=&\qty(\nabla^2F_1,\ldots,\nabla^2F_n)
+\ea\]
 \subsubsection{Poisson's equation (卜瓦松 or 帕松 or 泊松方程)}
 An equation in the form
-\[\nabla\cdot\nabla f = g(\mathbf{x})\]
+\[\nabla^2 f = g(\mathbf{x})\]
 for scalar fields $f,g$.
 \subsubsection{Laplace's equation (拉普拉斯方程)}
 An equation in the form
-\[\nabla\cdot\nabla f = 0\]
+\[\nabla^2 f = 0\]
 for scalar field $f$.
 
 A twice differentiable scalar field $f$ is called a harmonic function if $f$ satisfies Laplace's equation.
