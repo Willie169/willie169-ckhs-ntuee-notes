@@ -510,7 +510,7 @@ For two independent absolutely continuous random variables $X,Y$,
 \[f_{X+Y}(z)=\int_{-\infty}^{\infty}f_X(x)f_Y(z-x)\dd{x}.\]
 \ssc{Conditioning}
 \sssc{Definition}
-For two real random variables $X,Y$, for every $y\in\Omega_y$ and $A\in\calB(\Omega_X), the conditional distribution of $X$ given $Y=y$ is,
+For two real random variables $X,Y$, for every $y\in\Omega_y$ and $A\in\calB(\Omega_X), the conditional probability measure $P_{X|Y}(\cdot\mid y)$ of $X$ given $Y=y$ is,
 \[P_{X|Y}(A\mid y)=\lim_{h\to0}P(A,y-h\le Y\le y+h)=\lim_{h\to0}\frac{P(A,y-h\le Y\le Y+h)}{P(y-h\le Y\le y+h)}.\]
 If $\lim_{h\to0}P(X\le x\mid y-h\le Y\le y+h)$ exists for all $x\in\bbR$, we can define the conditional CDF of $X$ given $Y=y$ as
 \[F_{X|Y}(x|y)=\lim_{h\to0}P(X\le x\mid y-h\le Y\le y+h)=\lim_{h\to0}\frac{P(X\le x,y-h\le Y\le y+h)}{P(y-h\le Y\le y+h)}.\]
@@ -546,6 +546,7 @@ F_{X|Y}(x|y)=&\lim_{h\to0}\frac{P(X\le x,y-h\le Y\le y+h)}{P(y-h\le Y\le y+h)}\\
 =&\lim_{h\to0}\frac{\int_{y-h}^{y+h}\int_{-\infty}^xf_{X,Y}(u,v)\dd{u}\dd{v}}{\int_{y-h}^{y+h}f_Y(v)\dd{v}}\\
 =&\frac{\int_{-\infty}^xf_{X,Y}(u,y)\dd{y}}{f_Y(y)}
 \ea\]
+By L'Hôpital's rule,
 \[\ba
 f_{X|Y}(x|y)=&\dv{}{x}F_{X|Y}(x|y)\\
 =&\frac{\dv{}{x}\qty(\int_{-\infty}^xf_{X,Y}(u,y)\dd{y})}{f_Y(y)}\\
@@ -622,11 +623,30 @@ For a real random variable or real random vector $X$, $a\in\bbR_{\neq0}$, and $b
 \sssc{Linearity}
 For indexed families of real random variables or real random vectors $(X_i)_{i\in I}$ and real numbers $(a_i)_{i\in I}$ with $\abs{I}\in\bbN\cup\{\aleph_0\}$, where for $\abs{I}=\aleph_0$ suppose RHS is convergent,
 \[E(\sum_{i\in I}a_iX_i)=\sum_{i\in I}a_iE(X_i).\]
-\sssc{Conditional expectation}
+\sssc{Conditional expectation of event}
 \[E(X|A)=\frac{E(X\cdot\mb{1}_A)}{P(A)}\]
-\sssc{Law of total expectation}
+\sssc{Law of total expectation of event}
 Let $(A_i)_{i=1}^n\subseteq\calF$ be a partition. Then
 \[E(X)=\sum_{i=1}^nE(X|A_i)P(A_i)\]
+\sssc{Law of total probability of conditioning}
+For two real random variables $X,Y$ and an event $R$ of the random vector $X,Y$,
+\[P((X,Y)\in R)=E_Y(P(X\in R_Y\mid Y)),\]
+where $R_Y=\{x\colon(x,Y)\in R\}$.
+\bpr
+\[\ba
+E_Y(P(X\in R_Y\mid Y))=&\int_{\Omega_Y}\int_{R_y}\dd{P_{X|Y}(x\mid y)}\dd{P_Y(y)}\\
+=&\int_R\dd{P_{X,Y}(x,y)}\\
+=&P((X,Y)\in R)
+\ea\]
+\epr
+\sssc{Conditional expectation of conditioning}
+PLACEHOLDER
+\[E(X|A)=\frac{E(X\cdot\mb{1}_A)}{P(A)}\]
+\sssc{Law of total expectation of conditioning}
+PLACEHOLDER
+Let $(A_i)_{i=1}^n\subseteq\calF$ be a partition. Then
+\[E(X)=\sum_{i=1}^nE(X|A_i)P(A_i)\]
+
 \sssc{Independent random variables}
 If $X_1,\ldots,X_d$ are independent,
 \[E(\prod_{i=1}^dX_i)=\prod_{i=1}^dE(X_i).\]
