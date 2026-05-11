@@ -113,12 +113,12 @@ Suppose a system $W$ consists of components $W_1,W_2,\ldots,W_n$ in parallel wit
 \[P(W)=1-\prod_{i=1}^n(1-p_i).\]
 \ssc{Random variable (RV) (隨機變數)}
 \sssc{Random variable}
-For a probability spaces $(\Omega_s,\calF_s,P_s)$ and a measurable space $(\Omega_t,\calF_t)$, a random variable $X$ is a measurable function $X\colon\Omega_s\to\Omega_t$ such that for each $E\subseteq\calF_t$, the preimage $X^{-1}(E)\in\calF_s$, and the induced probability spaces $(\Omega_t,\calF_t,P_t)$ of target sample space $\Omega_t$, target event space, and (pushforward) probability measure $P_t(E)\coloneq P_s(X^{-1}(E))$. It is often the case that $\calF_t$ is the Borel $\text{\textsigma}$-algebra of $\Omega_t$.
+For a probability spaces $(\Omega_s,\calF_s,P_s)$ and a measurable space $(\Omega_X,\calF_X)$, a random variable $X$ is a measurable function $X\colon\Omega_s\to\Omega_X$ such that for each $E\subseteq\calF_X$, the preimage $X^{-1}(E)\in\calF_s$, and the induced probability spaces $(\Omega_X,\calF_X,P_X)$ of target sample space $\Omega_X$, target event space, and (pushforward) probability measure $P_X(E)\coloneq P_s(X^{-1}(E))$. It is often the case that $\calF_X$ is the Borel $\text{\textsigma}$-algebra of $\Omega_X$.
 \sssc{Real(-valued) random variable}
-A random variable is a real(-valued) random variable if $\Omega_t\subseteq\bbR$ (equipped with subspace topology) and $\calF_t$ is the Borel $\text{\textsigma}$-algebra of $\Omega_t$. Random variable often refers to real(-valued) random variable.
+A random variable is a real(-valued) random variable if $\Omega_X\subseteq\bbR$ (equipped with subspace topology) and $\calF_X$ is the Borel $\text{\textsigma}$-algebra of $\Omega_X$. Random variable often refers to real(-valued) random variable.
 \sssc{Cumulative distribution function (CDF)}
 The cumulative distribution function (CDF) of a real random valuable $X$ is defined as
-\[F_X(x)\coloneq P(X\le x)=\int_{\Omega_t}\mb{1}_{(-\infty,x]}(t)\dd{P_t(t)}.\]
+\[F_X(x)\coloneq P(X\le x)=\int_{\Omega_X}\mb{1}_{(-\infty,x]}(t)\dd{P_X(t)}.\]
 \sssc{Complementary cumulative distribution function (CCDF)}
 The complementary cumulative distribution function (CCDF) of a real random valuable $X$ is defined as
 \[\bar{F}_X(x)=1-F_X(x).\]
@@ -144,9 +144,9 @@ By continuity of measure from above,
 \[\lim_{x\to\infty}F_x(x)=1.\]
 \bpr
 \[x_1<x_2\implies\{X\le x_1\}\subseteq\{X\le x_2\}\]
-\[\bigcup_{x\in\bbR}\{X\le x\}=\Omega_t\]
+\[\bigcup_{x\in\bbR}\{X\le x\}=\Omega_X\]
 By continuity of measure from below,
-\[\lim_{x\to\infty}P(X\le x)=P(\Omega_t)=1\]
+\[\lim_{x\to\infty}P(X\le x)=P(\Omega_X)=1\]
 \epr
 \sssc{Right-continuity of CDF}
 A CDF is right-continuous.
@@ -159,7 +159,7 @@ By continuity of measure from above,
 \sssc{Converse property of CDF}
 If a function $F\colon\bbR\to[0,1]$ is non-decreasing, has limits $0$ at $-\infty$ and $1$ at $\infty$, and is right-continuous, then there exists a real random variable $X$ such that $F_X=F$.
 \bpr
-Let $\Omega_t=(0,1)$, $\calF=\calB(\Omega)$, and $P_t$ be Lebesgue measure.
+Let $\Omega_X=(0,1)$, $\calF=\calB(\Omega)$, and $P_X$ be Lebesgue measure.
 
 Define
 \[X(u)\coloneq\inf\{x\in\bbR\mid F(x)\ge u\},\quad u\in(0,1)\]
@@ -169,13 +169,13 @@ Define
 Quantile $Q(p)$ is the inverse of CDF, that is,
 \[P(X\le Q(p))=p.\]
 \sssc{Distribution or law}
-The distribution or law of $X$ is a complete model that uniquely determines $P_t$, or equivalently, a complete model that uniquely determines $F_X$.
+The distribution or law of $X$ is a complete model that uniquely determines $P_X$, or equivalently, a complete model that uniquely determines $F_X$.
 \sssc{Discrete random variable}
 A discrete random variable is a real random variable such that there exists a countable subset $A$ of sample space such that $P(A)=1$.
 \sssc{Continuous random variable}
 A continuous random variable is a real random variable with continuous CDF.
 \sssc{Properties of continuous random variable}
-For all $\omega\in\Omega_t$,
+For all $\omega\in\Omega_X$,
 \[P(X=\omega)=0.\]
 \sssc{Absolutely continuous random variable}
 A continuous random variable is a real random variable with absolutely continuous CDF. Absolutely continuous random variable is often mistakenly written as continuous random variable, even in many textbooks.
@@ -198,9 +198,9 @@ By measures agree on generating \textpi-system agree theorem.
 \epr
 \ssc{Discrete Random Variables}
 \sssc{Probability mass function (PMF)}
-For a discrete random variable $X$ with target sample space $\Omega_t=\{a_1,a_2,\ldots\}$, the probability mass function of $X$, denoted as $p_X$ or $P_X$, is defined as
+For a discrete random variable $X$ with target sample space $\Omega_X=\{a_1,a_2,\ldots\}$, the probability mass function of $X$, denoted as $p_X$ or $P_X$, is defined as
 \[p_X(a_i)=P(X=a_i)\]
-for each $a_i\in\Omega_t$.
+for each $a_i\in\Omega_X$.
 
 That the PMF of $X$ is $p$ is denoted as $X\sim p$.
 \sssc{PMF determines CDF}
@@ -208,11 +208,17 @@ For a discrete random variable $X$ with PMF $p_X$, the CDF $F_X$ can be expresse
 \[F_X(x)=\sum_{a_i\le x}p_X(a_i)\]
 for all $x\in\bbR$.
 \sssc{Support}
-The support $\Supp(X)$ of a discrete random variable $X$ is the support of its PMF.
+The support $\Supp(X)$ of a discrete random variable $X$ is the support of its PMF, which is a finite or countable set.
+\sssc{CDF as combination of indicator functions}
+A real random variable $X$ is a discrete random variable iff its CDF $F_X$ is such that there exists a finite or countable set $A\subseteq\bbR\times(0,1]$ such that
+\[\sum_{(a,p)\in A}p=1\]
+and
+\[F_X(x)=\sum_{(a,p)\in A}p\mb{1}_{[a,\infty)}(x).\]
+If so, $\pi_1(A)=\Supp(X)$, and for any $(a,p)\in A$, $p=p_X(a)$.
 \sssc{Properties}
-\[p_X(a_i)\ge 0,\quad\forall a_i\in\Omega_t.\]
-\[\sum_{a_i\in\Omega_t}p_X(a_i)=1.\]
-\[P(X\in A)=\sum_{a_i\in A}p_X(a_i),\quad\forall A\in\calF_t.\]
+\[p_X(a_i)\ge 0,\quad\forall a_i\in\Omega_X.\]
+\[\sum_{a_i\in\Omega_X}p_X(a_i)=1.\]
+\[P(X\in A)=\sum_{a_i\in A}p_X(a_i),\quad\forall A\in\calF_X.\]
 \[\dv{F_X}{x}=0\quad\tx{a.e.}.\]
 \sssc{Probability simplex}
 Given a sample space $(x_0,x_1,x_2,\ldots,x_k)$, each point $(p_0,p_1,\ldots,p_k)$ in the probability $k$-simplex
@@ -253,12 +259,12 @@ $F_X$ is bounded and monotone, thus in $L^1_{\tx{loc}}$. So it induces a distrib
 \sssc{PDF and probability measure as a distribution}
 PDF as a distribution $t_X=T_F'$, that is,
 \[\langle t_X,\varphi\rangle=-\int_{-\infty}^{\infty}F_X(x)\varphi'(x)\dd{x}\]
-It is the same as the pushforward probability measure $P_t$ of $X$ as a distribution:
-\[-\int_{-\infty}^{\infty}F_X(x)\varphi'(x)\dd{x}=\int_{-\infty}^{\infty}\varphi(x)\dd{P_t(x)}.\]
+It is the same as the pushforward probability measure $P_X$ of $X$ as a distribution:
+\[-\int_{-\infty}^{\infty}F_X(x)\varphi'(x)\dd{x}=\int_{-\infty}^{\infty}\varphi(x)\dd{P_X(x)}.\]
 \sssc{Absolutely continuous case}
 $t_X$ is the same as $f_X$ as a distribution.
 \sssc{Discrete case}
-\[t_X=\sum_{\omega\in\Omega_t}p_X(\omega)\delta_{\omega}\]
+\[t_X=\sum_{\omega\in\Omega_X}p_X(\omega)\delta_{\omega}\]
 \sssc{Mixed case}
 Suppose
 \[pF_Y+(1-p)F_Z\]
@@ -282,7 +288,7 @@ The probability of another event $A$ occurring given that a certain event $B$ ha
 \sssc{Conditional probability space}
 For a probability space $(\Omega,\calF,P)$ and a fixed event $B\in\calF$ with $P(B)>0$, the function $P(\cdot|B)\colon\calF\to[0,1]$ defined by $A\mapsto P(A|B)$ is a probability measure on the same measurable space $(\Omega,\calF)$.
 \sssc{Conditional random variable}
-For a probability space $(\Omega_s,\calF_s,P_s)$, a measurable space $(\Omega_t,\calF_t)$, a random variable $X\colon\Omega_s\to\Omega_t$ with pushforward probability measure $P_t$, and a fixed event $A\in\calF_t$ with $P_t(A)>0$, the condition random variable $X|B$ is a randm variable over $(\Omega_s,\calF_s,P_s(\cdot|X^{-1}(A)))$ with pushforward probability measure $P_t(\cdot|B)$.
+For a probability space $(\Omega_s,\calF_s,P_s)$, a measurable space $(\Omega_X,\calF_X)$, a random variable $X\colon\Omega_s\to\Omega_X$ with pushforward probability measure $P_X$, and a fixed event $A\in\calF_X$ with $P_X(A)>0$, the condition random variable $X|B$ is a randm variable over $(\Omega_s,\calF_s,P_s(\cdot|X^{-1}(A)))$ with pushforward probability measure $P_X(\cdot|B)$.
 \sssc{Conditional CDF}
 For a real random variable $X$ and an event $A\subseteq X(\Omega)$ such that $P(A)>0$, the conditional CDF of $X$ given $A$ follows
 \[F_{X|A}(x)=P(X\le x|A)=\frac{P(X\le x,A)}{P(A)},\quad\forall x\in\bbR.\]
@@ -386,7 +392,7 @@ p_Y(x_{i1},\ldots,x_{ik})=&P(X_{i1}=x_{i1},\ldots,X_{ik}=x_{ik})\\
 Let target sample space be $\Omega$ and target event space be $\calF$.
 \[p_X(\mb{a})\ge 0,\quad\forall\mb{a}\in\Omega.\]
 \[\sum_{\mb{a}\in\Omega}p_X(\mb{a})=1.\]
-\[P(X\in A)=\sum_{\mb{a}\in A}p_X(\mb{a}),\quad\forall A\in\calF_t.\]
+\[P(X\in A)=\sum_{\mb{a}\in A}p_X(\mb{a}),\quad\forall A\in\calF_X.\]
 \[\nabla F_X=\mb{0}\quad\tx{a.e.}.\]
 \ssc{Absolutely Continuous Random Vector}
 \sssc{Absolutely continuous random vector}
@@ -450,7 +456,7 @@ If real random variables $X_1,\ldots,X_n$ are independent, then for any permutat
 $X_1,\ldots,X_d$ are independent iff
 \[F_X(x_1,\ldots,x_d)=\prod_{i=1}^dF_{X_i}(x_i).\]
 \bpr
-Only if: trivial.
+Only if: Trivial.
 
 If: By \textpi-system of $(-\infty,x]$ with $x\in\bbR$.
 \epr
@@ -458,7 +464,7 @@ If: By \textpi-system of $(-\infty,x]$ with $x\in\bbR$.
 $X_1,\ldots,X_d$ are independent iff
 \[p_X(x_1,\ldots,x_d)=\prod_{i=1}^dp_{X_i}(x_i).\]
 \bpr
-Only if: trivial.
+Only if: Trivial.
 
 If: By subspace \textpi-system.
 \epr
@@ -466,7 +472,7 @@ If: By subspace \textpi-system.
 $X_1,\ldots,X_d$ are independent iff
 \[f_X(x_1,\ldots,x_d)=\prod_{i=1}^df_{X_i}(x_i).\]
 \bpr
-Only if: trivial.
+Only if: Trivial.
 
 If: By CDF factorization and absolute continuity.
 \epr
@@ -502,29 +508,76 @@ For two independent discrete random variables $X,Y$,
 \sssc{Sum of independent absolutely continuous random variables theorem}
 For two independent absolutely continuous random variables $X,Y$,
 \[f_{X+Y}(z)=\int_{-\infty}^{\infty}f_X(x)f_Y(z-x)\dd{x}.\]
+\ssc{Conditioning}
+\sssc{Definition}
+For two real random variables $X,Y$, for every $y\in\Omega_y$ and $A\in\calB(\Omega_X), the conditional distribution of $X$ given $Y=y$ is,
+\[P_{X|Y}(A\mid y)=\lim_{h\to0}P(A,y-h\le Y\le y+h)=\lim_{h\to0}\frac{P(A,y-h\le Y\le Y+h)}{P(y-h\le Y\le y+h)}.\]
+If $\lim_{h\to0}P(X\le x\mid y-h\le Y\le y+h)$ exists for all $x\in\bbR$, we can define the conditional CDF of $X$ given $Y=y$ as
+\[F_{X|Y}(x|y)=\lim_{h\to0}P(X\le x\mid y-h\le Y\le y+h)=\lim_{h\to0}\frac{P(X\le x,y-h\le Y\le y+h)}{P(y-h\le Y\le y+h)}.\]
+If $P(Y=y)>0$,
+\[P_{X|Y}(A|y)=P(X\in A|Y=y)=\frac{P(X\in A,Y=y)}{P(Y=y)}\]
+and
+\[F_{X|Y}(x|y)=P(X\le x,Y=y).\]
+\sssc{Conditional PMF}
+If $F_{X|Y}$ is such that there exists a finite or countable set $A\subseteq\bbR\times(0,1]$ such that
+\[\sum_{(a,p)\in A}p=1\]
+and
+\[F_{X|Y}(x|y)=\sum_{(a,p)\in A}p\mb{1}_{[a,\infty)}(x),\]
+we can define the conditional PMF of $X$ given $Y=y$ as
+\[p_{X|Y}(x|y)=F_{X|Y}(x|y)-\lim_{a\to x^-}F_{X|Y}(a|y),\]
+equivalently,
+\[p_{X|Y}(x|y)=\lim_{h\to0}P(X=x\mid y-h\le Y\le y+h).\]
+If $P(Y=y)>0$,
+\[p_{X|Y}(x|y)=P(X=x\mid Y=y).\]
+The support $\Supp(X|Y)$ of $X|Y$ is defined as the support of $p_{X|Y}$.
+\sssc{Conditional PDF}
+If $F_{X|Y}$ is absolutely continuous, we can define the conditional PDF of $X$ given $Y=y$ as
+\[f_{X|Y}(x|y)=\dv{}{x}F_{X|Y}(x|y).\]
+The support $\Supp(X|Y)$ of $X|Y$ is defined as the support of $f_{X|Y}$.
+\sssc{Both discrete}
+If $X$ and $Y$ are both discrete,
+\[p_{X|Y}(x|y)=\frac{p_{X,Y}(x,y)}{p_Y(y)},\quad y\in\Supp(Y).\]
+\sssc{Both absolutely continuous}
+If $X$ and $Y$ are both absolutely continuous,
+\[f_{X|Y}(x|y)=\frac{f_{X,Y}(x,y)}{f_Y(y)},\quad y\in\Supp(Y).\]
+\bpr
+\[\ba
+F_{X|Y}(x|y)=&\lim_{h\to0}\frac{P(X\le x,y-h\le Y\le y+h)}{P(y-h\le Y\le y+h)}\\
+=&\lim_{h\to0}\frac{\int_{y-h}^{y+h}\int_{-\infty}^xf_{X,Y}(u,v)\dd{u}\dd{v}}{\int_{y-h}^{y+h}f_Y(v)\dd{v}}\\
+=&\frac{\int_{-\infty}^xf_{X,Y}(u,y)\dd{y}}{f_Y(y)}
+\ea\]
+\[\ba
+f_{X|Y}(x|y)=&\dv{}{x}F_{X|Y}(x|y)\\
+=&\frac{\dv{}{x}\qty(\int_{-\infty}^xf_{X,Y}(u,y)\dd{y})}{f_Y(y)}\\
+=&\frac{f_{X,Y}(x,y)}{f_Y(y)}
+\ea\]
+\epr
+
+
+
 \ssc{(Mathematical) Expected Value, Expectation (期望值), or Mean (平均值)}
 \sssc{Definition}
-For a real random variable $X$ on $(\Omega_s,\calF_s,P_s)$ with induced probability space $(\Omega_t,\calF_t,P_t)$, the expected value or expectation $E(X)$, $\bbE(X)$, $E[X]$, or $\bbE[X]$, or mean $\mu_X$, of it is defined as the Lebesgue integral
+For a real random variable $X$ on $(\Omega_s,\calF_s,P_s)$ with induced probability space $(\Omega_X,\calF_X,P_X)$, the expected value or expectation $E(X)$, $\bbE(X)$, $E[X]$, or $\bbE[X]$, or mean $\mu_X$, of it is defined as the Lebesgue integral
 \[E(X)=\int_{\Omega_s}X(\omega_s)\dd{P_s(\omega_s)},\]
 or equivalently,
-\[E(X)=\int_{\Omega_t}x\dd{P_t(x)},\]
+\[E(X)=\int_{\Omega_X}x\dd{P_X(x)},\]
 or in Stieltjes integral
 \[E(X)=\int_{x=-\infty}^{\infty}x\dd{F_X(x)}.\]
 \sssc{For discrete random variable}
-For a discrete random variable $X$ with target sample space $\Omega_t$ and probability mass function $p_X(x)$, the expected value or expectation $E(X)$, $\bbE(X)$, $E[X]$, or $\bbE[X]$, or mean $\mu_X$, of it is
-\[E(X)=\sum_{x\in\Omega_t}xp_X(x)\]
-if $\Omega_t$ is a finite set or $\Omega_t$ is a countably infinite set and
-\[\sum_{x\in\Omega_t}\abs{x}p_X(x)\]
-is convergent, and doesn't exist if $\Omega_t$ is a countably infinite set and
-\[\sum_{x\in\Omega_t}\abs{x}p_X(x)\]
+For a discrete random variable $X$ with target sample space $\Omega_X$ and probability mass function $p_X(x)$, the expected value or expectation $E(X)$, $\bbE(X)$, $E[X]$, or $\bbE[X]$, or mean $\mu_X$, of it is
+\[E(X)=\sum_{x\in\Omega_X}xp_X(x)\]
+if $\Omega_X$ is a finite set or $\Omega_X$ is a countably infinite set and
+\[\sum_{x\in\Omega_X}\abs{x}p_X(x)\]
+is convergent, and doesn't exist if $\Omega_X$ is a countably infinite set and
+\[\sum_{x\in\Omega_X}\abs{x}p_X(x)\]
 is divergent.
 \sssc{For absolutely continuous random variable}
 For an absolutely continuous random variable $X$ with probability density function $f_X(x)$, the expected value or expectation $E(X)$, $\bbE(X)$, $E[X]$, or $\bbE[X]$, or mean $\mu_X$, of it is
 \[E(X)=\int_{-\infty}^{\infty}xf_X(x)\dd{x}\]
 if it converges absolutely.
 \sssc{Derived random variable theorem - unary case}
-For a real ramdom variable and a unary function $g\in L^1(\Omega_t,P_t)$,
-\[E(g(X))=\int_{\Omega_t}g(x)\dd{P_t(x)},\]
+For a real ramdom variable and a unary function $g\in L^1(\Omega_X,P_X)$,
+\[E(g(X))=\int_{\Omega_X}g(x)\dd{P_X(x)},\]
 that is,
 \[E(g(X))=\int_{-\infty}^{\infty}g(x)f_X(x)\dd{x}\]
 for absolutely continuous random variable and
@@ -543,9 +596,9 @@ For a non-negative real random variable $X$,
 \[E(X)=\int_0^{\infty}P(X\ge x)\dd{x}=\int_0^{\infty}1-F_X(x)\dd{x}.\]
 \bpr
 \[\ba
-E(X)&=\int_{\Omega_t}x\dd{P_t(x)}\\
-&=\int_{\Omega_t}\int_0^x1\dd{t}\dd{P_t(x)}\\
-&=\int_0^{\infty}\int_{\Omega_t}\mb{1}_{t\in[0,x)}(x,t)\dd{P_t(x)}\dd{t}\\
+E(X)&=\int_{\Omega_X}x\dd{P_X(x)}\\
+&=\int_{\Omega_X}\int_0^x1\dd{t}\dd{P_X(x)}\\
+&=\int_0^{\infty}\int_{\Omega_X}\mb{1}_{t\in[0,x)}(x,t)\dd{P_X(x)}\dd{t}\\
 &=\int_0^{\infty}P(X\ge t)\dd{t}
 \ea\]
 \epr
