@@ -52,6 +52,9 @@ Countable additivity implies finite additivity: For all indexed family $(E_k)_{k
 \bpr
 Let $(F_k)_{k\in\bbN}$ be defined as $F_k=E_k$ for $k\in[1,n]$ and $F_k=\varnothing$ for $k\in(n,\infty)$ and countable additivity.
 \epr
+\sssc{Conditional probability (條件機率)}
+The probability of another event $A$ occurring given that a certain event $B$ has occurred, denoted as $P(A|B)$, is defined as
+\[P(A|B)= \frac{P\qty(A\cap B)}{P\qty(B)}.\]
 \sssc{Partition (分割)}
 A partition is a partition of sample space that is a subset of the event space.
 \sssc{Classical probability (古典機率) or equally likely outcomes}
@@ -281,10 +284,7 @@ for some $p\in[0,1]$, $q\in[0,1]$, discrete random variable $Y$, absolutely cont
 \[P(Y=a)=pr\]
 \[t_X=r\delta_a+t_V\]
 for some real random variable $V$ with $P(V=a)=0$.
-\ssc{Conditional Probability (條件機率)}
-\sssc{Conditional probability}
-The probability of another event $A$ occurring given that a certain event $B$ has occurred, denoted as $P(A|B)$.
-\[P(A|B)= \frac{P\qty(A\cap B)}{P\qty(B)}.\]
+\ssc{Conditional Probability Given an Event of Source Space}
 \sssc{Conditional probability space}
 For a probability space $(\Omega,\calF,P)$ and a fixed event $B\in\calF$ with $P(B)>0$, the function $P(\cdot|B)\colon\calF\to[0,1]$ defined by $A\mapsto P(A|B)$ is a probability measure on the same measurable space $(\Omega,\calF)$.
 \sssc{Conditional random variable}
@@ -510,7 +510,7 @@ For two independent absolutely continuous random variables $X,Y$,
 \[f_{X+Y}(z)=\int_{-\infty}^{\infty}f_X(x)f_Y(z-x)\dd{x}.\]
 \ssc{Conditioning}
 \sssc{Definition}
-For two real random variables $X,Y$, for every $y\in\Omega_y$ and $A\in\calB(\Omega_X), the conditional probability measure $P_{X|Y}(\cdot\mid y)$ of $X$ given $Y=y$ is,
+For two real random variables $X,Y$, for every $y\in\Omega_y$ and $A\in\calB(\Omega_X), the conditional probability measure $P_{X|Y}(\cdot\mid y)$ of $X$ given $Y=y$, denoted as $X|Y=y$, is,
 \[P_{X|Y}(A\mid y)=\lim_{h\to0}P(A,y-h\le Y\le y+h)=\lim_{h\to0}\frac{P(A,y-h\le Y\le Y+h)}{P(y-h\le Y\le y+h)}.\]
 If $\lim_{h\to0}P(X\le x\mid y-h\le Y\le y+h)$ exists for all $x\in\bbR$, we can define the conditional CDF of $X$ given $Y=y$ as
 \[F_{X|Y}(x|y)=\lim_{h\to0}P(X\le x\mid y-h\le Y\le y+h)=\lim_{h\to0}\frac{P(X\le x,y-h\le Y\le y+h)}{P(y-h\le Y\le y+h)}.\]
@@ -518,7 +518,7 @@ If $P(Y=y)>0$,
 \[P_{X|Y}(A|y)=P(X\in A|Y=y)=\frac{P(X\in A,Y=y)}{P(Y=y)}\]
 and
 \[F_{X|Y}(x|y)=P(X\le x,Y=y).\]
-\sssc{Conditional PMF}
+\sssc{Discrete case}
 If $F_{X|Y}$ is such that there exists a finite or countable set $A\subseteq\bbR\times(0,1]$ such that
 \[\sum_{(a,p)\in A}p=1\]
 and
@@ -530,7 +530,7 @@ equivalently,
 If $P(Y=y)>0$,
 \[p_{X|Y}(x|y)=P(X=x\mid Y=y).\]
 The support $\Supp(X|Y)$ of $X|Y$ is defined as the support of $p_{X|Y}$.
-\sssc{Conditional PDF}
+\sssc{Absolutely continuous case}
 If $F_{X|Y}$ is absolutely continuous, we can define the conditional PDF of $X$ given $Y=y$ as
 \[f_{X|Y}(x|y)=\dv{}{x}F_{X|Y}(x|y).\]
 The support $\Supp(X|Y)$ of $X|Y$ is defined as the support of $f_{X|Y}$.
@@ -617,18 +617,21 @@ E(X^-)&=\int_0^{\infty}P(X^-\ge u)\dd{u}\\
 \epr
 and
 \[E(X)=E(X^+)-E(X^-).\]
+\sssc{Independent random variables}
+If $X_1,\ldots,X_d$ are independent,
+\[E(\prod_{i=1}^dX_i)=\prod_{i=1}^dE(X_i).\]
 \sssc{Affine Transformation}
 For a real random variable or real random vector $X$, $a\in\bbR_{\neq0}$, and $b\in\mathbb{R}$,
 \[E(aX+b)=aE(X)+b.\]
 \sssc{Linearity}
 For indexed families of real random variables or real random vectors $(X_i)_{i\in I}$ and real numbers $(a_i)_{i\in I}$ with $\abs{I}\in\bbN\cup\{\aleph_0\}$, where for $\abs{I}=\aleph_0$ suppose RHS is convergent,
 \[E(\sum_{i\in I}a_iX_i)=\sum_{i\in I}a_iE(X_i).\]
-\sssc{Conditional expectation of event}
+\sssc{Conditional expectation given an event of source space}
 \[E(X|A)=\frac{E(X\cdot\mb{1}_A)}{P(A)}\]
-\sssc{Law of total expectation of event}
+\sssc{Law of total expectation given an event of source space}
 Let $(A_i)_{i=1}^n\subseteq\calF$ be a partition. Then
 \[E(X)=\sum_{i=1}^nE(X|A_i)P(A_i)\]
-\sssc{Law of total probability of conditioning}
+\sssc{Law of total probability given a random variable}
 For two real random variables $X,Y$ and an event $R$ of the random vector $X,Y$,
 \[P((X,Y)\in R)=E_Y(P(X\in R_Y\mid Y)),\]
 where $R_Y=\{x\colon(x,Y)\in R\}$.
@@ -639,17 +642,18 @@ E_Y(P(X\in R_Y\mid Y))=&\int_{\Omega_Y}\int_{R_y}\dd{P_{X|Y}(x\mid y)}\dd{P_Y(y)
 =&P((X,Y)\in R)
 \ea\]
 \epr
-\sssc{Conditional expectation of conditioning}
-PLACEHOLDER
-\[E(X|A)=\frac{E(X\cdot\mb{1}_A)}{P(A)}\]
-\sssc{Law of total expectation of conditioning}
-PLACEHOLDER
-Let $(A_i)_{i=1}^n\subseteq\calF$ be a partition. Then
-\[E(X)=\sum_{i=1}^nE(X|A_i)P(A_i)\]
-
-\sssc{Independent random variables}
-If $X_1,\ldots,X_d$ are independent,
-\[E(\prod_{i=1}^dX_i)=\prod_{i=1}^dE(X_i).\]
+\sssc{Conditional expectation given a random variable}
+For a derived random variable $(g(X,Y)|Y=y)\in L^1(\Omega_X,P_{X|Y}(x|y))$,
+\[E(g(X,Y)|Y=y)=\int_{\Omega_X}g(x,y)\dd{P_{X|Y}(x|y)}.\]
+For absolutely continuous $X|Y$ given $Y=y$,
+\[E(g(X,Y)|Y=y)=\int_{-\infty}^{\infty}g(x,y)f_{X|Y}(x|y)\dd{x}.\]
+For discrete $X|Y$ given $Y=y$,
+\[E(g(X,Y)|Y=y)=\sum_{\Supp(X)}g(x,y)p_{X|Y}(x|y).\]
+\sssc{Law of total expectation given a random variable}
+For a derived random variable $(g(X,Y)|Y=y)\in L^1(\Omega_X,P_{X|Y}(x|y))$,
+\[E_Y(E(g(X,Y)|Y=y))=E(g(X,Y)).\]
+\bpr
+\[\int_{\Omega_Y}\int_{\Omega_X}g(x,y)\dd{P_{X|Y}(x|y)}\dd{P_Y(y)}=\int_{\Omega_{X,Y}}g(X,Y)\dd{P_{X,Y}(x,y)=E(g(X,Y)).\]
 \ssc{Variance and Covariance}
 \sssc{Variance (變異數/方差)}
 For a real random variable $X$, variance $\Var(X)$, $V(X)$, or $\sigma_X^{\phantom{X}2}$ of it is defined as
