@@ -654,6 +654,18 @@ For a derived random variable $(g(X,Y)|Y=y)\in L^1(\Omega_X,P_{X|Y}(x|y))$,
 \[E_Y(E(g(X,Y)|Y=y))=E(g(X,Y)).\]
 \bpr
 \[\int_{\Omega_Y}\int_{\Omega_X}g(x,y)\dd{P_{X|Y}(x|y)}\dd{P_Y(y)}=\int_{\Omega_{X,Y}}g(X,Y)\dd{P_{X,Y}(x,y)=E(g(X,Y)).\]
+\sssc{Conditional expectation random variable}
+For two real random variables $X,Y$, $E(X|Y)$ is a random variable that is a function of $Y$ defined as
+\[E(X|Y)(y)=E(X|Y=y),\quad y\in\Omega_Y.\]
+Suppose the set $A$ is defined recursively as
+\ben
+\item $X$ is in $A$.
+\item Any real number is in $A$.
+\item Any expectation of 
+\item Any expectation of real random variable that is a function of $X$ and elements of $A$ is in $A$.
+\een
+For any $h(X)\in A$, $h(X|Y)$ is a random variable derived from $Y$ defined as that for any $y\in\Omega_Y$, $h(X|Y)(y)$ is defined by replacing all $E()$ with $E(\cdot|Y=y)$ in the definition of $h(X)$.
+PLACEHOLDER
 \ssc{Variance and Covariance}
 \sssc{Variance (變異數/方差)}
 For a real random variable $X$, variance $\Var(X)$, $V(X)$, or $\sigma_X^{\phantom{X}2}$ of it is defined as
@@ -771,6 +783,23 @@ E((Y'-aX'-(E(Y)-aE(X)))^2)=&E((Y'-aX')^2)\\
 \Var(Y)-2a\Cov(X,Y)+a^2\Var(X)=&\Var(Y)-\frac{\Cov(X,Y)^2}{\Var(X)}\\
 =&\Var(Y)\qty(1-\frac{\Cov(X,Y)^2}{\Var(X)\Var(Y)})\\
 =&\qty(1-\rho_{X,Y}^{\pht{X,Y}2})^2\Var(Y)
+\ea\]
+\epr
+\sssc{Conditional variance given a random variable}
+For two real random variables $X,Y$,
+\[\Var(X|Y=y)=E((X-E(X|Y=y))^2|Y=y).\]
+\sssc{Conditional variance random variable}
+For two real random variables $X,Y$, $\Var(X|Y)$ is a random variable derived from $Y$ defined as
+\[\Var(X|Y)(y)=\Var(X|Y=y),\quad y\in\Omega_Y.\]
+\sssc{Law of total variance}
+PLACEHOLDER
+For two real random variables $X,Y$,
+\[\Var(X)=\Var(E(X|Y=y))+E(\Var(X|Y=y)).\]
+\bpr
+\[\ba
+\Var(X)=&E(X^2)-E(X)^2\\
+=&E_Y(E(X^2|Y=y))
+
 \ea\]
 \epr
 \ssc{Moment}
