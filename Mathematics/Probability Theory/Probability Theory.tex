@@ -194,8 +194,10 @@ A simple random variable is a discrete random variable $X$ such that there exist
 \sssc{Decomposition}
 For the CDF $F_X$ of any real random variable $X$, there exist $p\in[0,1]$, $q\in[0,1]$, discrete random variable $Y$, absolutely continuous random variable $Z$, and singular random variable $W$ such that
 \[F_X=pF_Y+qF_z+(1-p-q)F_W.\]
-\sssc{Equality in distribution}
-Two real random variables are equal in distribution or law, i.e., has the same pushforward probability measure, if they have the same CDF.
+\sssc{Equality in distribution or law}
+Two real random variables are called equal in distribution or law if they have the same pushforward probability measure.
+
+Two real random variables are equal in distribution iff they have the same CDF.
 \bpr
 By measures agree on generating \textpi-system agree theorem.
 \epr
@@ -508,51 +510,6 @@ For two independent discrete random variables $X,Y$,
 \sssc{Sum of independent absolutely continuous random variables theorem}
 For two independent absolutely continuous random variables $X,Y$,
 \[f_{X+Y}(z)=\int_{-\infty}^{\infty}f_X(x)f_Y(z-x)\dd{x}.\]
-\ssc{Conditioning}
-\sssc{Definition}
-For two real random variables $X,Y$, for every $y\in\Omega_y$ and $A\in\calB(\Omega_X), the conditional probability measure $P_{X|Y}(\cdot\mid y)$ of $X$ given $Y=y$, denoted as $X|Y=y$, is,
-\[P_{X|Y}(A\mid y)=\lim_{h\to0}P(A,y-h\le Y\le y+h)=\lim_{h\to0}\frac{P(A,y-h\le Y\le Y+h)}{P(y-h\le Y\le y+h)}.\]
-If $\lim_{h\to0}P(X\le x\mid y-h\le Y\le y+h)$ exists for all $x\in\bbR$, we can define the conditional CDF of $X$ given $Y=y$ as
-\[F_{X|Y}(x|y)=\lim_{h\to0}P(X\le x\mid y-h\le Y\le y+h)=\lim_{h\to0}\frac{P(X\le x,y-h\le Y\le y+h)}{P(y-h\le Y\le y+h)}.\]
-If $P(Y=y)>0$,
-\[P_{X|Y}(A|y)=P(X\in A|Y=y)=\frac{P(X\in A,Y=y)}{P(Y=y)}\]
-and
-\[F_{X|Y}(x|y)=P(X\le x,Y=y).\]
-\sssc{Discrete case}
-If $F_{X|Y}$ is such that there exists a finite or countable set $A\subseteq\bbR\times(0,1]$ such that
-\[\sum_{(a,p)\in A}p=1\]
-and
-\[F_{X|Y}(x|y)=\sum_{(a,p)\in A}p\mb{1}_{[a,\infty)}(x),\]
-we can define the conditional PMF of $X$ given $Y=y$ as
-\[p_{X|Y}(x|y)=F_{X|Y}(x|y)-\lim_{a\to x^-}F_{X|Y}(a|y),\]
-equivalently,
-\[p_{X|Y}(x|y)=\lim_{h\to0}P(X=x\mid y-h\le Y\le y+h).\]
-If $P(Y=y)>0$,
-\[p_{X|Y}(x|y)=P(X=x\mid Y=y).\]
-The support $\Supp(X|Y)$ of $X|Y$ is defined as the support of $p_{X|Y}$.
-\sssc{Absolutely continuous case}
-If $F_{X|Y}$ is absolutely continuous, we can define the conditional PDF of $X$ given $Y=y$ as
-\[f_{X|Y}(x|y)=\dv{}{x}F_{X|Y}(x|y).\]
-The support $\Supp(X|Y)$ of $X|Y$ is defined as the support of $f_{X|Y}$.
-\sssc{Both discrete}
-If $X$ and $Y$ are both discrete,
-\[p_{X|Y}(x|y)=\frac{p_{X,Y}(x,y)}{p_Y(y)},\quad y\in\Supp(Y).\]
-\sssc{Both absolutely continuous}
-If $X$ and $Y$ are both absolutely continuous,
-\[f_{X|Y}(x|y)=\frac{f_{X,Y}(x,y)}{f_Y(y)},\quad y\in\Supp(Y).\]
-\bpr
-\[\ba
-F_{X|Y}(x|y)=&\lim_{h\to0}\frac{P(X\le x,y-h\le Y\le y+h)}{P(y-h\le Y\le y+h)}\\
-=&\lim_{h\to0}\frac{\int_{y-h}^{y+h}\int_{-\infty}^xf_{X,Y}(u,v)\dd{u}\dd{v}}{\int_{y-h}^{y+h}f_Y(v)\dd{v}}\\
-=&\frac{\int_{-\infty}^xf_{X,Y}(u,y)\dd{y}}{f_Y(y)}
-\ea\]
-By L'Hôpital's rule,
-\[\ba
-f_{X|Y}(x|y)=&\dv{}{x}F_{X|Y}(x|y)\\
-=&\frac{\dv{}{x}\qty(\int_{-\infty}^xf_{X,Y}(u,y)\dd{y})}{f_Y(y)}\\
-=&\frac{f_{X,Y}(x,y)}{f_Y(y)}
-\ea\]
-\epr
 \ssc{(Mathematical) Expected Value, Expectation (期望值), or Mean (平均值)}
 \sssc{Definition}
 For a real random variable $X$ on $(\Omega_s,\calF_s,P_s)$ with induced probability space $(\Omega_X,\calF_X,P_X)$, the expected value or expectation $E(X)$, $\bbE(X)$, $E[X]$, or $\bbE[X]$, or mean $\mu_X$, of it is defined as the Lebesgue integral
@@ -642,30 +599,6 @@ E_Y(P(X\in R_Y\mid Y))=&\int_{\Omega_Y}\int_{R_y}\dd{P_{X|Y}(x\mid y)}\dd{P_Y(y)
 =&P((X,Y)\in R)
 \ea\]
 \epr
-\sssc{Conditional expectation given a random variable}
-For a derived random variable $(g(X,Y)|Y=y)\in L^1(\Omega_X,P_{X|Y}(x|y))$,
-\[E(g(X,Y)|Y=y)=\int_{\Omega_X}g(x,y)\dd{P_{X|Y}(x|y)}.\]
-For absolutely continuous $X|Y$ given $Y=y$,
-\[E(g(X,Y)|Y=y)=\int_{-\infty}^{\infty}g(x,y)f_{X|Y}(x|y)\dd{x}.\]
-For discrete $X|Y$ given $Y=y$,
-\[E(g(X,Y)|Y=y)=\sum_{\Supp(X)}g(x,y)p_{X|Y}(x|y).\]
-\sssc{Law of total expectation given a random variable}
-For a derived random variable $(g(X,Y)|Y=y)\in L^1(\Omega_X,P_{X|Y}(x|y))$,
-\[E_Y(E(g(X,Y)|Y=y))=E(g(X,Y)).\]
-\bpr
-\[\int_{\Omega_Y}\int_{\Omega_X}g(x,y)\dd{P_{X|Y}(x|y)}\dd{P_Y(y)}=\int_{\Omega_{X,Y}}g(X,Y)\dd{P_{X,Y}(x,y)=E(g(X,Y)).\]
-\sssc{Conditional expectation random variable}
-For two real random variables $X,Y$, $E(X|Y)$ is a random variable that is a function of $Y$ defined as
-\[E(X|Y)(y)=E(X|Y=y),\quad y\in\Omega_Y.\]
-Suppose the set $A$ is defined recursively as
-\ben
-\item $X$ is in $A$.
-\item Any real number is in $A$.
-\item Any expectation of 
-\item Any expectation of real random variable that is a function of $X$ and elements of $A$ is in $A$.
-\een
-For any $h(X)\in A$, $h(X|Y)$ is a random variable derived from $Y$ defined as that for any $y\in\Omega_Y$, $h(X|Y)(y)$ is defined by replacing all $E()$ with $E(\cdot|Y=y)$ in the definition of $h(X)$.
-PLACEHOLDER
 \ssc{Variance and Covariance}
 \sssc{Variance (變異數/方差)}
 For a real random variable $X$, variance $\Var(X)$, $V(X)$, or $\sigma_X^{\phantom{X}2}$ of it is defined as
@@ -783,23 +716,6 @@ E((Y'-aX'-(E(Y)-aE(X)))^2)=&E((Y'-aX')^2)\\
 \Var(Y)-2a\Cov(X,Y)+a^2\Var(X)=&\Var(Y)-\frac{\Cov(X,Y)^2}{\Var(X)}\\
 =&\Var(Y)\qty(1-\frac{\Cov(X,Y)^2}{\Var(X)\Var(Y)})\\
 =&\qty(1-\rho_{X,Y}^{\pht{X,Y}2})^2\Var(Y)
-\ea\]
-\epr
-\sssc{Conditional variance given a random variable}
-For two real random variables $X,Y$,
-\[\Var(X|Y=y)=E((X-E(X|Y=y))^2|Y=y).\]
-\sssc{Conditional variance random variable}
-For two real random variables $X,Y$, $\Var(X|Y)$ is a random variable derived from $Y$ defined as
-\[\Var(X|Y)(y)=\Var(X|Y=y),\quad y\in\Omega_Y.\]
-\sssc{Law of total variance}
-PLACEHOLDER
-For two real random variables $X,Y$,
-\[\Var(X)=\Var(E(X|Y=y))+E(\Var(X|Y=y)).\]
-\bpr
-\[\ba
-\Var(X)=&E(X^2)-E(X)^2\\
-=&E_Y(E(X^2|Y=y))
-
 \ea\]
 \epr
 \ssc{Moment}
@@ -929,6 +845,102 @@ where base $b=2$ gives the unit of bits or shannons, base $b=e$ gives natural un
 \sssc{Affine Transformation}
 For an absolutely continuous random variable $X$, $a\in\bbR_{\neq0}$, and $b\in\mathbb{R}$,
 \[h(Y)=h(X)+\log|a|.\]
+\ssc{Conditioning}
+\sssc{Conditional random variable given a random variable}
+For two real random variables $X,Y$, for any fixed $y\in\Omega_y$, we define the pushforward probability measure $P_{X|Y}(\cdot\mid y)\colon\calB(\Omega_X)\to[0,1]$ of the conditional random variable of $X$ given $Y=y$, denoted as $X|Y=y$, which has the same source and target measurable spaces as $X$, as
+\[P_{X|Y}(A\mid y)=\lim_{h\to0}\frac{P(A,y-h\le Y\le Y+h)}{P(y-h\le Y\le y+h)}\]
+if the denominator is nonzero and the limit exists for all $A\in\calB(\Omega_X)$.
+
+If $P(Y=y)>0$,
+\[P_{X|Y}(A|y)=P(X\in A|Y=y)=\frac{P(X\in A,Y=y)}{P(Y=y)}.\]
+\sssc{Conditional CDF}
+We define the conditional CDF of $X$ given $Y=y$ as
+\[F_{X|Y}(x|y)=\lim_{h\to0}P(X\le x\mid y-h\le Y\le y+h)=\lim_{h\to0}\frac{P(X\le x,y-h\le Y\le y+h)}{P(y-h\le Y\le y+h)}.\]
+If $P(Y=y)>0$,
+\[F_{X|Y}(x|y)=P(X\le x,Y=y).\]
+\sssc{Discrete case}
+If $F_{X|Y}$ is such that there exists a finite or countable set $A\subseteq\bbR\times(0,1]$ such that
+\[\sum_{(a,p)\in A}p=1\]
+and
+\[F_{X|Y}(x|y)=\sum_{(a,p)\in A}p\mb{1}_{[a,\infty)}(x),\]
+we can define the conditional PMF of $X$ given $Y=y$ as
+\[p_{X|Y}(x|y)=F_{X|Y}(x|y)-\lim_{a\to x^-}F_{X|Y}(a|y),\]
+equivalently,
+\[p_{X|Y}(x|y)=\lim_{h\to0}P(X=x\mid y-h\le Y\le y+h).\]
+If $P(Y=y)>0$,
+\[p_{X|Y}(x|y)=P(X=x\mid Y=y).\]
+The support $\Supp(X|Y)$ of $X|Y$ is defined as the support of $p_{X|Y}$.
+\sssc{Absolutely continuous case}
+If $F_{X|Y}$ is absolutely continuous, we can define the conditional PDF of $X$ given $Y=y$ as
+\[f_{X|Y}(x|y)=\dv{}{x}F_{X|Y}(x|y).\]
+The support $\Supp(X|Y)$ of $X|Y$ is defined as the support of $f_{X|Y}$.
+\sssc{Both discrete}
+If $X$ and $Y$ are both discrete,
+\[p_{X|Y}(x|y)=\frac{p_{X,Y}(x,y)}{p_Y(y)},\quad y\in\Supp(Y).\]
+\sssc{Both absolutely continuous}
+If $X$ and $Y$ are both absolutely continuous,
+\[f_{X|Y}(x|y)=\frac{f_{X,Y}(x,y)}{f_Y(y)},\quad y\in\Supp(Y).\]
+\bpr
+\[\ba
+F_{X|Y}(x|y)=&\lim_{h\to0}\frac{P(X\le x,y-h\le Y\le y+h)}{P(y-h\le Y\le y+h)}\\
+=&\lim_{h\to0}\frac{\int_{y-h}^{y+h}\int_{-\infty}^xf_{X,Y}(u,v)\dd{u}\dd{v}}{\int_{y-h}^{y+h}f_Y(v)\dd{v}}\\
+=&\frac{\int_{-\infty}^xf_{X,Y}(u,y)\dd{y}}{f_Y(y)}
+\ea\]
+By L'Hôpital's rule,
+\[\ba
+f_{X|Y}(x|y)=&\dv{}{x}F_{X|Y}(x|y)\\
+=&\frac{\dv{}{x}\qty(\int_{-\infty}^xf_{X,Y}(u,y)\dd{y})}{f_Y(y)}\\
+=&\frac{f_{X,Y}(x,y)}{f_Y(y)}
+\ea\]
+\epr
+\sssc{Regular conditional version}
+If $P_{X|Y}(A\mid y)$ is defined for every $A\in\calB(\Omega_X)$ for $P_Y$-almost every $y\in\Omega_y$, the regular conditional versions $X|Y$ of $X$ given $Y$ exist, and $y\mapsto X|Y=y$ for all $y$ such that $P_{X|Y}(A\mid y)$ is defined is a version of it, which means it's equal to all other regular conditional versions $P_Y$-a.e.
+\sssc{Conditional expectation given a random variable}
+For a derived random variable $(g(X,Y)|Y=y)\in L^1(\Omega_X,P_{X|Y}(x|y))$,
+\[E(g(X,Y)|Y=y)=\int_{\Omega_X}g(x,y)\dd{P_{X|Y}(x|y)}.\]
+For absolutely continuous $X|Y$ given $Y=y$,
+\[E(g(X,Y)|Y=y)=\int_{-\infty}^{\infty}g(x,y)f_{X|Y}(x|y)\dd{x}.\]
+For discrete $X|Y$ given $Y=y$,
+\[E(g(X,Y)|Y=y)=\sum_{\Supp(X)}g(x,y)p_{X|Y}(x|y).\]
+\sssc{Law of total expectation given a random variable}
+For regular conditional versions $g(X,Y)|Y$,
+\[E_Y(E(g(X,Y)|Y=y))=E(g(X,Y)).\]
+\bpr
+\[\int_{\Omega_Y}\int_{\Omega_X}g(x,y)\dd{P_{X|Y}(x|y)}\dd{P_Y(y)}=\int_{\Omega_{X,Y}}g(X,Y)\dd{P_{X,Y}(x,y)=E(g(X,Y)).\]
+\epr
+\sssc{Conditional expectation random variable}
+For two real random variables $X,Y$, $E(X|Y)$ is a random variable that is a function of $Y$ defined as
+\[E(X|Y)(y)=E(X|Y=y),\quad y\in\Omega_Y.\]
+Suppose the set $A$ is defined recursively as
+\bit
+\item $X$ is in $A$.
+\item Any real number is in $A$.
+\item Any defined arithmetic operation of elements of $A$ is in $A$.
+\item Any expectation of element of $A$ is in $A$,
+\eit
+and the set $B$ is defined as the expectation of any element of $A$.
+
+For any $h(X)\in B$, $h(X|Y)$ is a random variable derived from $Y$ defined as that for any $y\in\Omega_Y$, $h(X|Y)(y)$ is defined by replacing all $E()$ with $E(\cdot|Y=y)$ in the definition of $h(X)$.
+PLACEHOLDER
+\sssc{Conditional variance given a random variable}
+For two real random variables $X,Y$,
+\[\Var(X|Y=y)=E((X-E(X|Y=y))^2|Y=y).\]
+\sssc{Conditional variance random variable}
+For two real random variables $X,Y$, $\Var(X|Y)$ is a random variable derived from $Y$ defined as
+\[\Var(X|Y)(y)=\Var(X|Y=y),\quad y\in\Omega_Y.\]
+\sssc{Law of total variance}
+PLACEHOLDER
+For two real random variables $X,Y$,
+\[\Var(X)=\Var(E(X|Y=y))+E(\Var(X|Y=y)).\]
+\bpr
+\[\ba
+\Var(X)=&E(X^2)-E(X)^2\\
+=&E_Y(E(X^2|Y=y))
+
+\ea\]
+\epr
+
+
 \subsection{Families of Discrete Random Variables}
 \sssc{Discrete uniform random variable}
 \bit
