@@ -32,7 +32,7 @@ The product event of event $A$ and event $B$ is $A\cap B$, also denoted as $AB$ 
 \sssc{Complement event (餘事件)}
 The complement event of event $A$ in sample space $S$ is $S\setminus A$, denoted as $A'$, $A^c$, or $A^C$.
 \sssc{Probability space (機率空間)}
-A probability space $(\Omega,\calF,P)$ is a measure space of which $\Omega$ is the sample space of an experiment, $\calF$ is the event space of the experiment, and $P$ is the probability measure with unit measure axiom $P(\Omega)=1$ that maps each event to the probability of it.
+A probability space $(\Omega,\calF,P)$ is a measure space of which $\Omega$ is the sample space of an experiment, $\calF$ is the event space of the experiment, and $P$ is the probability measure with unit measure axiom $P(\Omega)=1$ that maps each event to the probability of it. The measurable space (sample space and event space tuple) is called state space.
 \sssc{Probability axioms or Kolmogorov axioms}
 \begin{enumerate}
 \item Nonnegativity:
@@ -286,20 +286,33 @@ for some $p\in[0,1]$, $q\in[0,1]$, discrete random variable $Y$, absolutely cont
 \[P(Y=a)=pr\]
 \[t_X=r\delta_a+t_V\]
 for some real-valued random variable $V$ with $P(V=a)=0$.
-\ssc{Conditional Probability Given an Event of Source Space}
+\ssc{Conditional Probability}
 \sssc{Conditional probability space}
 For a probability space $(\Omega,\calF,P)$ and a fixed event $B\in\calF$ with $P(B)>0$, the function $P(\cdot|B)\colon\calF\to[0,1]$ defined by $A\mapsto P(A|B)$ is a probability measure on the same measurable space $(\Omega,\calF)$.
 \sssc{Conditional random variable}
-For a probability space $(\Omega_s,\calF_s,P_s)$, a measurable space $(\Omega_X,\calF_X)$, a random variable $X\colon\Omega_s\to\Omega_X$ with pushforward probability measure $P_X$, and a fixed event $A\in\calF_X$ with $P_X(A)>0$, the condition random variable $X|B$ is a randm variable over $(\Omega_s,\calF_s,P_s(\cdot|X^{-1}(A)))$ with pushforward probability measure $P_X(\cdot|B)$.
+For a probability space $(\Omega_s,\calF_s,P_s)$, a measurable space $(\Omega_X,\calF_X)$, a random variable $X\colon\Omega_s\to\Omega_X$ with pushforward probability measure $P_X$, and a fixed event $A\in\calF_X$ with $P_X(A)>0$, the condition random variable $X|A$ is a randm variable over $(\Omega_s,\calF_s,P_s(\cdot|X^{-1}(A)))$ with pushforward probability measure $P_X(\cdot|A)$.
 \sssc{Conditional CDF}
-For a real-valued random variable $X$ and an event $A\subseteq X(\Omega)$ such that $P(A)>0$, the conditional CDF of $X$ given $A$ follows
+For a real-valued random variable $X$ and an event $A\in\calF_X$ such that $P(A)>0$, the conditional CDF of $X$ given $A$ follows
 \[F_{X|A}(x)=P(X\le x|A)=\frac{P(X\le x,A)}{P(A)},\quad\forall x\in\bbR.\]
 \sssc{Conditional PMF of discrete random variable}
-For a discrete random variable $X$ and an event $A\subseteq X(\Omega)$ such that $P(A)>0$, the conditional PMF of $X$ given $A$ follows
+For a discrete random variable $X$ and an event $A\in\calF_X$ such that $P(A)>0$, the conditional PMF of $X$ given $A$ follows
 \[p_{X|A}(x)=P(X=x|A)=\frac{P(X=x,A)}{P(A)}=\frac{P(X=x)\cdot\mb{1}_A(x)}{P(A)},\quad\forall x\in\bbR.\]
 \sssc{Conditional PDF of absolutely continuous random variable}
-For an absolutely continuous random variable $X$ and an event $A\subseteq X(\Omega)$ such that $P(A)>0$, the conditional PDF of $X$ given $A$ follows
+For an absolutely continuous random variable $X$ and an event $A\in\calF_X$ such that $P(A)>0$, the conditional PDF of $X$ given $A$ follows
 \[f_{X|A}(x)=\dv{}{x}F_{x|A}(x)=\dv{}{x}(\frac{P(X\le x,A)}{P(A)})=\frac{f_X(x)\cdot\mb{1}_A(x)}{P(A)},\quad\forall x\in\bbR.\]
+\sssc{Regular conditional probability}
+Let $(\Omega,\calF,P)$ be a probability space, and let $T\colon\Omega\to E$ be a random variable that is a measurable function to measurable space $(E,\calE)$ with pushforwad probability measure $P\circ T^{-1}$. A regular conditional probability or transition probability is defined as a function $\nu\colon E\times\calF\to[0,1]$, where:
+\bit
+\item For every $x\in E$, $\nu(x,\cdot)$ is a probability measure on $\calF$,
+\item For every $A\in\calF$, $\nu(\cdot,A)$ is $\calE-measurable, and
+\item For every $A\in\calF$ and $B\in\calE$,
+\[P(A\cap T^{-1}(B))=\int_B\nu(x,A)\dd{(P\circ T^{-1})(x)}.\]
+\eit
+$\nu(x,A)$ is typically denoted as $P(A|T=x)$.
+
+For any teo regular conditional probabilities $\nu_1,\nu_2$, for every $A\in\calF$,
+\[\nu_1(x,A)=\nu_2(x,A)\]
+for $P\circ T^{-1}$-almost every $x\in E$.
 \ssc{Conditional probability laws}
 \sssc{Law of multiplication}
 For sample space $\Omega$ and $n$ events $A_1,A_2,\ldots,A_n$, define $B_i=\bigcap_{j=1}^{i-1}A_j$ for $i\in\bbN_{\ge 2,\le n+1}$ and $B_1=\Omega$. Then,
@@ -583,22 +596,11 @@ For a real-valued random variable or real-valued random vector $X$, $a\in\bbR_{\
 \sssc{Linearity}
 For indexed families of real-valued random variables or real-valued random vectors $(X_i)_{i\in I}$ and real numbers $(a_i)_{i\in I}$ with $\abs{I}\in\bbN\cup\{\aleph_0\}$, where for $\abs{I}=\aleph_0$ suppose RHS is convergent,
 \[E(\sum_{i\in I}a_iX_i)=\sum_{i\in I}a_iE(X_i).\]
-\sssc{Conditional expectation given an event of source space}
+\sssc{Conditional expectation}
 \[E(X|A)=\frac{E(X\cdot\mb{1}_A)}{P(A)}\]
-\sssc{Law of total expectation given an event of source space}
+\sssc{Law of total expectation}
 Let $(A_i)_{i=1}^n\subseteq\calF$ be a partition. Then
 \[E(X)=\sum_{i=1}^nE(X|A_i)P(A_i)\]
-\sssc{Law of total probability given a random variable}
-For two real-valued random variables $X,Y$ and an event $R$ of the random vector $X,Y$,
-\[P((X,Y)\in R)=E_Y(P(X\in R_Y\mid Y)),\]
-where $R_Y=\{x\colon(x,Y)\in R\}$.
-\bpr
-\[\ba
-E_Y(P(X\in R_Y\mid Y))=&\int_{\Omega_Y}\int_{R_y}\dd{P_{X|Y}(x\mid y)}\dd{P_Y(y)}\\
-=&\int_R\dd{P_{X,Y}(x,y)}\\
-=&P((X,Y)\in R)
-\ea\]
-\epr
 \ssc{Variance and Covariance}
 \sssc{Variance (變異數/方差)}
 For a real-valued random variable $X$, variance $\Var(X)$, $V(X)$, or $\sigma_X^{\phantom{X}2}$ of it is defined as
@@ -623,8 +625,8 @@ Variance of a real-valued random variable $X$ is zero iff $X$ is almost surely a
 If $X$ has zero variance, then for any real-valued random variable $Y$,
 \[\Cov(X,Y)=0.\]
 \sssc{Mean square error (MSE) (均方（誤）差) or Expected square error}
-For a real-valued random variable $X$ and a prediction, predictor, or (blind) estimate $\hat{x}$, the mean square error $\MSE_X(\hat{x})$ or expected square error of the prediction is defined as
-\[\MSE_X(\hat{x})=E\qty((X-\hat{x})^2).\]
+For a real-valued random variable $X$ and a prediction, predictor, or (blind) estimate $\hat{x}$, the mean square error $\MSE(\hat{x})$ or expected square error of the prediction is defined as
+\[\MSE(\hat{x})=E\qty((X-\hat{x})^2).\]
 \sssc{Minimum mean square error}
 The minimum mean square error estimate of a real-valued random variable $X$ is $E(X)$, and the MSE of it is $\Var(X)$.
 \sssc{Pearson correlation coefficient (PCC), Pearson's r, Pearson product-moment correlation coefficient (PPMCC), or correlation coefficient}
@@ -846,21 +848,40 @@ where base $b=2$ gives the unit of bits or shannons, base $b=e$ gives natural un
 For an absolutely continuous random variable $X$, $a\in\bbR_{\neq0}$, and $b\in\mathbb{R}$,
 \[h(Y)=h(X)+\log|a|.\]
 \ssc{Conditioning}
-\sssc{Conditional probability distribution}
-Consider two real-valued random variables $X,Y$. The conditional probability distribution 
-
-
-
-
-\sssc{Conditional random variable given a random variable}
-For two real-valued random variables $X,Y$, for any fixed $y\in\Omega_y$, we define the pushforward probability measure $P_{X|Y}(\cdot\mid y)\colon\calB(\Omega_X)\to[0,1]$ of the conditional random variable of $X$ given $Y=y$, denoted as $X|Y=y$, which has the same source and target measurable spaces as $X$, as
-\[P_{X|Y}(A\mid y)=\lim_{h\to0}\frac{P(A,y-h\le Y\le Y+h)}{P(y-h\le Y\le y+h)}\]
-if the denominator is nonzero and the limit exists for all $A\in\calB(\Omega_X)$.
-
-If $P(Y=y)>0$,
+\sssc{Conditioning on the discrete level}
+For two real-valued random variables $X,Y$, for any $A\in\calF_X$, for any $y\in\Omega_y$ such that $P(Y=y)>0$,
 \[P_{X|Y}(A|y)=P(X\in A|Y=y)=\frac{P(X\in A,Y=y)}{P(Y=y)}.\]
+\sssc{Conditioning using limit}
+For two real-valued random variables $X,Y$, for any $A\in\calF_X$, for any $y\in\Omega_y$, we define
+\[P_{X|Y}(A\mid y)=\lim_{h\to0}\frac{P(A,y-h\le Y\le Y+h)}{P(y-h\le Y\le y+h)}\]
+if the denominator is nonzero and the limit exists.
+
+For any $y$ such that $P(Y=y)>0$, $P_{X|Y}$ defined here is the same as in conditioning on the discrete level.
+
+For any fixed $A\in\calF_X$, define a measure on $\calF_Y$ $\mu_A=P(X\in A,Y\in\cdot)$, if $\mu_A\ll P_Y$, then $P_{X|Y}(A\mid y)$ is defined for $P_Y$-almost every $y\in\Omega_y$, and the function
+\[P_{X|Y}(A\mid\cdot)\colon\Omega_y\to[0,1];\;y\mapsto P_{X|Y}(A\mid y)\]
+is a Radon–Nikodym derivative $\dv{\mu_A}{P_Y}$, and thus
+\[P_{X|Y}\colon\calF_X\times\Omega_y\to[0,1];\;A,y\mapsto P_{X|Y}(A\mid y)\]
+is a regular conditional probability.
+\bpr
+PLACEHOLDER
+\epr
+
+For any fixed $y\in\Omega_y$, if
+\[\lim_{h\to0}\frac{\int_{|t-y|<h}\abs{P_{X|Y}(A\mid t)-P_{X|Y}(A\mid y)}\dd{P_Y(t)}}{P_Y(|t-y|<h)}=0\]
+for every $A\in\calF$, we can define a conditional random variable of $X$ given $Y=y$, denoted as $X|Y=y$, with pushforward probability
+\[P_{X|Y}(\cdot\mid y)\colon\calF_X\to[0,1].\]
+
+If for any fixed $A\in\calF_X$, $\mu_A\ll P_Y$, then any subset $N$ of $\Omega_y$ such that for all $y\in N$, there exists some $A\in\calF$ such that
+\[\lim_{h\to0}\frac{\int_{|t-y|<h}\abs{P_{X|Y}(A\mid t)-P_{X|Y}(A\mid y)}\dd{P_Y(t)}}{P_Y(|t-y|<h)}>0,\]
+is a $P_Y$-null set.
+\bpr
+PLACEHOLDER
+\epr
+
+Unless otherwise specified, we discuss conditioning using limit below.
 \sssc{Conditional CDF}
-We define the conditional CDF of $X$ given $Y=y$ as
+We define the conditional CDF of $X|Y=y$ as
 \[F_{X|Y}(x|y)=\lim_{h\to0}P(X\le x\mid y-h\le Y\le y+h)=\lim_{h\to0}\frac{P(X\le x,y-h\le Y\le y+h)}{P(y-h\le Y\le y+h)}.\]
 If $P(Y=y)>0$,
 \[F_{X|Y}(x|y)=P(X\le x,Y=y).\]
@@ -869,7 +890,7 @@ If $F_{X|Y}$ is such that there exists a finite or countable set $A\subseteq\bbR
 \[\sum_{(a,p)\in A}p=1\]
 and
 \[F_{X|Y}(x|y)=\sum_{(a,p)\in A}p\mb{1}_{[a,\infty)}(x),\]
-we can define the conditional PMF of $X$ given $Y=y$ as
+we can define the conditional PMF of $X|Y=y$ as
 \[p_{X|Y}(x|y)=F_{X|Y}(x|y)-\lim_{a\to x^-}F_{X|Y}(a|y),\]
 equivalently,
 \[p_{X|Y}(x|y)=\lim_{h\to0}P(X=x\mid y-h\le Y\le y+h).\]
@@ -877,11 +898,11 @@ If $P(Y=y)>0$,
 \[p_{X|Y}(x|y)=P(X=x\mid Y=y).\]
 The support $\Supp(X|Y)$ of $X|Y$ is defined as the support of $p_{X|Y}$.
 \sssc{Absolutely continuous case}
-If $F_{X|Y}$ is absolutely continuous, we can define the conditional PDF of $X$ given $Y=y$ as
+If $F_{X|Y}$ is absolutely continuous, we can define the conditional PDF of $X|Y=y$ as
 \[f_{X|Y}(x|y)=\dv{}{x}F_{X|Y}(x|y).\]
 The support $\Supp(X|Y)$ of $X|Y$ is defined as the support of $f_{X|Y}$.
 \sssc{Both discrete}
-If $X$ and $Y$ are both discrete,
+If $X$ and $Y$ are both discrete, conditioning on discrete level is enough to define $P_{X|Y}$ for $P_Y$-almost every $y\in\Omega_y$, and
 \[p_{X|Y}(x|y)=\frac{p_{X,Y}(x,y)}{p_Y(y)},\quad y\in\Supp(Y).\]
 \sssc{Both absolutely continuous}
 If $X$ and $Y$ are both absolutely continuous,
@@ -899,56 +920,79 @@ f_{X|Y}(x|y)=&\dv{}{x}F_{X|Y}(x|y)\\
 =&\frac{f_{X,Y}(x,y)}{f_Y(y)}
 \ea\]
 \epr
-\sssc{Regular conditional version}
-If $P_{X|Y}(A\mid y)$ is defined for every $A\in\calB(\Omega_X)$ for $P_Y$-almost every $y\in\Omega_y$, the regular conditional versions $X|Y$ of $X$ given $Y$ exist, and $y\mapsto X|Y=y$ for all $y$ such that $P_{X|Y}(A\mid y)$ is defined is a version of it, which means it's equal to all other regular conditional versions $P_Y$-a.e.
+\sssc{Independent discrete random variables}
+If $X$ and $Y$ are independent and both discrete,
+\[p_{X|Y}(x|y)=p_X(x)\]
+for $P_Y$-almost every $y\in\Omega_y$.
+\bpr
+\[\ba
+p_{X|Y}(x|y)=&\frac{p_{X,Y}(x)}{p_Y(x)}\\
+=&\frac{p_X(x)p_Y(x)}{p_Y(x)}\\
+=&p_X(x)
+\ea\]
+\epr
+\sssc{Independent absolutely continuous random variables}
+If $X$ and $Y$ are independent and both absolutely continuous,
+\[f_{X|Y}(x|y)=f_X(x)\]
+for $P_Y$-almost every $y\in\Omega_y$.
+\bpr
+\[\ba
+f_{X|Y}(x|y)=&\frac{f_{X,Y}(x)}{f_Y(x)}\\
+=&\frac{f_X(x)f_Y(x)}{f_Y(x)}\\
+=&f_X(x)
+\ea\]
+\epr
 \sssc{Conditional expectation given a random variable}
-For a derived random variable $g(X,Y)$ such that $(g(X,Y)|Y=y)\in L^1(\Omega_X,P_{X|Y}(x|y))$,
+For a derived random variable $g(X,Y)$ such that $g(X,Y)|Y=y\in L^1(\Omega_X,P_{X|Y}(x|y))$,
 \[E(g(X,Y)|Y=y)=\int_{\Omega_X}g(x,y)\dd{P_{X|Y}(x|y)}.\]
-For absolutely continuous $X|Y$ given $Y=y$,
+For absolutely continuous $X|Y=y$,
 \[E(g(X,Y)|Y=y)=\int_{-\infty}^{\infty}g(x,y)f_{X|Y}(x|y)\dd{x}.\]
-For discrete $X|Y$ given $Y=y$,
+For discrete $X|Y=y$,
 \[E(g(X,Y)|Y=y)=\sum_{\Supp(X)}g(x,y)p_{X|Y}(x|y).\]
 \sssc{Law of total expectation given a random variable}
-For two real-valued random variables $X,Y$ and a regular conditional version $g(X,Y)|Y$,
-\[E_Y(E(g(X,Y)|Y))=E(g(X,Y)).\]
+For two real-valued random variables $X,Y$  such that $P_{X|Y}$ is a regular conditional probability and a derived random variable $g(X,Y)$ such that $g(X,Y)|Y=y\in L^1(\Omega_X,P_{X|Y}(x|y))$,
+\[E(E(g(X,Y)|Y))=E(g(X,Y)).\]
 \bpr
-\[E_Y(E(g(X,Y)|Y))=\int_{\Omega_Y}\int_{\Omega_X}g(x,y)\dd{P_{X|Y}(x|y)}\dd{P_Y(y)}=\int_{\Omega_{X,Y}}g(X,Y)\dd{P_{X,Y}(x,y)=E(g(X,Y))=E(g(X,Y)).\]
+\[E(E(g(X,Y)|Y))=\int_{\Omega_Y}\int_{\Omega_X}g(x,y)\dd{P_{X|Y}(x|y)}\dd{P_Y(y)}=\int_{\Omega_{X,Y}}g(X,Y)\dd{P_{X,Y}(x,y)=E(g(X,Y))=E(g(X,Y)).\]
 \epr
-\sssc{Conditional expectation random variable}
-For two real-valued random variables $X,Y$ and a regular conditional version $X|Y$, $E(X|Y)$ is defined as
-\[E(X|Y)(y)=E(X|Y=y)\]
-for all $y$ such that $X|Y=y$ is defined.
-
-Suppose the set $A$ is defined recursively as
+\sssc{Conditional expectation}
+For two real-valued random variables $X,Y$, the conditional expectation $E(X|Y)$ is a random variable on $\calF_Y$ defined as
+\[(E(X|Y))(K)=E(X|Y\in K),\quad K\in\calF_Y.\]
+Suppose the set $A$ is defined recursively by the conditions that
 \bit
-\item $X$ is in $A$.
-\item Any real number is in $A$.
-\item Any defined arithmetic operation of elements of $A$ is in $A$.
-\item Any expectation of element of $A$ is in $A$,
+\item $X$ is in $A$,
+\item any real number is in $A$,
+\item any defined arithmetic operation of elements of $A$ is in $A$, and
+\item any expectation of element of $A$ is in $A$,
 \eit
-and the set $B$ is defined as the expectation of any element of $A$.
-
-For any $h(X)\in B$, $h(X|Y)$ is a random variable derived from $Y$ defined as that for any $y\in\Omega_Y$, $h(X|Y)(y)$ is defined by replacing all $E()$ with $E(\cdot|Y=y)$ in the definition of $h(X)$.
-PLACEHOLDER
-\sssc{Conditional variance given a random variable}
-For two real-valued random variables $X,Y$,
-\[\Var(X|Y=y)=E((X-E(X|Y=y))^2|Y=y).\]
-\sssc{Conditional variance random variable}
-For two real-valued random variables $X,Y$, $\Var(X|Y)$ is a random variable derived from $Y$ defined as
-\[\Var(X|Y)(y)=\Var(X|Y=y),\quad y\in\Omega_Y.\]
+and the set $B$ is defined as the expectation of any element of $A$. For any $h(X)\in B$, $h(X|Y)$ is a random variable on $\calF_Y$ defined for any $K\in\calF_Y$ by replacing all $E(\cdot)$ with $E(\cdot|Y\in K)$ in the definition of $h(X)$.
+\sssc{Law of total probability}
+For two real-valued random variables $X,Y$ (such that $P_{X|Y}$ is a regular conditional probability, otherwise RHS is not defined) and an event $R$ of the random vector $X,Y$,
+\[P((X,Y)\in R)=E(P(X\in R_Y\mid Y)),\]
+where $R_Y=\{x\colon(x,Y)\in R\}$.
+\bpr
+\[\ba
+E(P(X\in R_Y\mid Y))=&\int_{\Omega_Y}\int_{R_y}\dd{P_{X|Y}(x\mid y)}\dd{P_Y(y)}\\
+=&\int_R\dd{P_{X,Y}(x,y)}\\
+=&P((X,Y)\in R)
+\ea\]
+\epr
+\sssc{Conditional variance}
+For two real-valued random variables $X,Y$, the conditional variance $\Var(X|Y)$ is a random variable defined for any $K\in\calF_Y$ as
+\[\Var(X|Y)(K)=\Var(X|Y\in K)=E((X-E(X|Y\in K))^2|Y\in K).\]
 \sssc{Law of total variance}
-PLACEHOLDER
-For two real-valued random variables $X,Y$,
-\[\Var(X)=\Var(E(X|Y=y))+E(\Var(X|Y=y)).\]
+For two real-valued random variables $X,Y$  (such that $P_{X|Y}$ is a regular conditional probability, otherwise RHS is not defined),
+\[\Var(X)=E(\Var(X|Y))+\Var(E(X|Y)).\]
 \bpr
 \[\ba
 \Var(X)=&E(X^2)-E(X)^2\\
-=&E_Y(E(X^2|Y=y))
-
+=&E(E(X^2|Y))-E(E(X|Y))^2\\
+=&E(\Var(X|Y)+E(X|Y)^2)-E(E(X|Y))^2\\
+=&E(\Var(X|Y)+E(X|Y)^2)-E(E(X|Y))^2\\
+=&E(\Var(X|Y))+E(E(X|Y)^2)-E(E(X|Y))^2\\
+=&E(\Var(X|Y))+E(\Var(X|Y))
 \ea\]
 \epr
-
-
 \subsection{Families of Discrete Random Variables}
 \sssc{Discrete uniform random variable}
 \bit
