@@ -122,7 +122,7 @@ A random variable is a real-valued or real random variable if $\Omega_X\subseteq
 \sssc{Cumulative distribution function (CDF)}
 The cumulative distribution function (CDF) of a real-valued random valuable $X$ is defined as
 \[F_X(x)\coloneq P(X\le x)=\int_{\Omega_X}\mb{1}_{(-\infty,x]}(t)\dd{P_X(t)}.\]
-\sssc{Complementary cumulative distribution function (CCDF)}
+\sssc{Complementary cumulative distribution function (CCDF), tail distribution function, or exceedance}
 The complementary cumulative distribution function (CCDF) of a real-valued random valuable $X$ is defined as
 \[\bar{F}_X(x)=1-F_X(x).\]
 \sssc{CDF range}
@@ -169,8 +169,8 @@ Define
 \[F_X(x)=F(x)\]
 \epr
 \sssc{Quantile}
-Quantile $Q(p)$ is the inverse of CDF, that is,
-\[P(X\le Q(p))=p.\]
+Quantile $Q_X(p)$ is the inverse of CDF, that is,
+\[P(X\le Q_X(p))=p.\]
 \sssc{Distribution or law}
 The distribution or law of $X$ is a complete model that uniquely determines $P_X$, or equivalently, a complete model that uniquely determines $F_X$.
 \sssc{Discrete random variable}
@@ -1000,7 +1000,7 @@ For two real-valued random variables $X,Y$  (such that $P_{X|Y}$ is a regular co
 \subsection{Families of Discrete Random Variables}
 \sssc{Discrete uniform random variable}
 \bit
-\item Notation: $X\sim\calU\{a,b\}$, $X\sim\operatorname{Unif}\{a,b\}$, $X\sim\operatorname{Uniform}\{a,b\}$, $X\sim\calU\{a,a+1,\ldots,b\}$, $X\sim\operatorname{Unif}\{a,a+1,\ldots,b\}$, or $X\sim\operatorname{Uniform}\{a,a+1,\ldots,b\}$, read as $X$ is discretely uniform distributed with parameters $a$ and $b$
+\item Notation: $X\sim\calU\{a,b\}$, $X\sim\operatorname{Unif}\{a,b\}$, $X\sim\operatorname{Uniform}\{a,b\}$, $X\sim\calU\{a,a+1,\ldots,b\}$, $X\sim\operatorname{Unif}\{a,a+1,\ldots,b\}$, or $X\sim\operatorname{Uniform}\{a,a+1,\ldots,b\}$, read as $X$ is discretely uniform distributed with parameters $a$ and $b$.
 \item Parameters: $a,b\in\bbZ\land a\le b$
 \item Support: $\bbZ\cap[a,b]$
 \item PMF:
@@ -1050,7 +1050,7 @@ H(X)&=-\sum_{k=a}^b\frac{1}{b-a+1}\ln(\frac{1}{b-a+1})\\
 \sssc{Bernoulli (伯努力) random variable}
 \bit
 \item Trial: A Bernoulli random variable models a single Bernoulli trial (aka binary trial) with exactly two possible outcomes, success or 1, with probability $p$, and failure or 0, with probability $1-p$.
-\item Notation: $X\sim\operatorname{Bern}(p)$, read as $X$ is Bernoulli distributed with parameter $p$
+\item Notation: $X\sim\operatorname{Bern}(p)$, read as $X$ is Bernoulli distributed with parameter $p$.
 \item Parameters: $p\in[0,1]$
 \item Support: $\{0,1\}$
 \item PMF:
@@ -1082,7 +1082,7 @@ H(X)&=-\sum_{k=a}^b\frac{1}{b-a+1}\ln(\frac{1}{b-a+1})\\
 \sssc{Binomial random variable}
 \bit
 \item Trial: A binomial random variable counts the number of successes in $n$ Bernoulli trials with success probability $p$.
-\item Notation: $X\sim\operatorname{Bin}(n,p)$, $X\sim B(n,p)$, $X\sim\operatorname{Binom}(n,p)$, or $X\sim\operatorname{Binomial}(n,p)$, read as $X$ is binomial distributed with parameters $n$ and $p$
+\item Notation: $X\sim\operatorname{Bin}(n,p)$, $X\sim B(n,p)$, $X\sim\operatorname{Binom}(n,p)$, or $X\sim\operatorname{Binomial}(n,p)$, read as $X$ is binomial distributed with parameters $n$ and $p$.
 \item Parameters: $n\in\bbN$, $p\in[0,1]$
 \item Support: $\bbZ\cap[0,n]$
 \item PMF:
@@ -1142,7 +1142,7 @@ Solve $g(k*)=1$ for $k*$.
 \sssc{Geometric random variable}
 \bit
 \item Trial: A geometric random variable counts the number of independent Bernoulli trials with success probability $p$ until the first success.
-\item Notation: $X\sim\operatorname{Geom}(p)$, $X\sim G(p)$, or $X\sim\operatorname{Geometric}(p)$, read as $X$ is geometric distributed with parameter $p$
+\item Notation: $X\sim\operatorname{Geom}(p)$, $X\sim G(p)$, or $X\sim\operatorname{Geometric}(p)$, read as $X$ is geometric distributed with parameter $p$.
 \item Parameters: $p\in(0,1]$
 \item Support: $\bbN$
 \item PMF:
@@ -1236,7 +1236,7 @@ S&=\sum_{k=1}^{\infty}k(1-p)^{k-1}\\
 \sssc{Negative binomial or Pascal random variable}
 \bit
 \item Trial: A negative binomial or Pascal random variable counts the number of independent Bernoulli trials with success probability $p$ until the $r$th success.
-\item Notation: $X\sim\operatorname{NB}(r,p)$, $X\sim\operatorname{NegBin}(r,p)$, or $X\sim\operatorname{Pascal}(r,p)$, read as $X$ is negative binomial or Pascal distributed with parameters $r$ and $p$
+\item Notation: $X\sim\operatorname{NB}(r,p)$, $X\sim\operatorname{NegBin}(r,p)$, or $X\sim\operatorname{Pascal}(r,p)$, read as $X$ is negative binomial or Pascal distributed with parameters $r$ and $p$.
 \item Parameters: $r\in\bbN$, $p\in(0,1]$
 \item Support: $\bbN\cap[r,\infty)$
 \item PMF:
@@ -1271,7 +1271,7 @@ p_X(k+1)-p_X(k)&=\binom{k}{r-1}p^r(1-p)^{k-r+1}-\binom{k-1}{r-1}p^r(1-p)^{k-r}\\
 \sssc{Poisson random variable}
 \bit
 \item Trial: A Poisson random variable counts the number of events occurring in a fixed interval of time in a Poisson (point) process, in which events occur with a known constant mean rate $\lambda$ and independently of the time since the last event.
-\item Notation: $X\sim\operatorname{Pois}(\lambda)$ or $X\sim\operatorname{Poisson}(\lambda)$, read as $X$ is Poisson distributed with parameter or rate $\lambda$
+\item Notation: $X\sim\operatorname{Pois}(\lambda)$ or $X\sim\operatorname{Poisson}(\lambda)$, read as $X$ is Poisson distributed with parameter or rate $\lambda$.
 \item Parameters: $\lambda\in(0,\infty)$
 \item Support: $\bbN_0$
 \item PMF:
@@ -1391,7 +1391,7 @@ For any fixed $\lambda\in(0,\infty)$, let $X\sim\operatorname{Pois}(\lambda)$ an
 \ssc{Families of Absolutely Continuous Random Variables}
 \sssc{Continuous or rectangular uniform random variable}
 \bit
-\item Notation: $X\sim\calU_{[a,b]}$, $X\sim\operatorname{Unif}(a,b)$, $X\sim\operatorname{Unif}[a,b]$, $X\sim\operatorname{Uniform}(a,b)$, or $X\sim\operatorname{Uniform}[a,b]$, read as $X$ is continuously or rectangularly uniform distributed with parameters $a$ and $b$
+\item Notation: $X\sim\calU_{[a,b]}$, $X\sim\operatorname{Unif}(a,b)$, $X\sim\operatorname{Unif}[a,b]$, $X\sim\operatorname{Uniform}(a,b)$, or $X\sim\operatorname{Uniform}[a,b]$, read as $X$ is continuously or rectangularly uniform distributed with parameters $a$ and $b$.
 \item Parameters: $a,b\in\bbR\land a<b$
 \item Support: $[a,b]$
 \item PDF:
@@ -1467,8 +1467,8 @@ P(X\le\frac{l}{2}\sin\Theta)=&\int_0^{\frac{\pi}{2}}P(X\le\frac{l}{2}\sin\theta)
 \bit
 \item Notation:
 \bit
-\item $X\sim\calN(\mu,\sigma)$, $X\sim N(\mu,\sigma)$, $X\sim\operatorname{Gaussian}(\mu,\sigma)$, $X\sim\calN(\mu,\sigma^2)$, $X\sim N(\mu,\sigma^2)$, or $X\sim\operatorname{Gaussian}(\mu,\sigma^2)$, read as $X$ is normal or Gaussian distributed with mean $\mu$ and standard deviation $\sigma$
-\item $Z\sim\calN(0,1)$, $Z\sim N(0,1)$, or $X\sim\operatorname{Gaussian}(0,1)$ read as $X$ is standard or unit normal or Gaussian distributed
+\item $X\sim\calN(\mu,\sigma)$, $X\sim N(\mu,\sigma)$, $X\sim\operatorname{Gaussian}(\mu,\sigma)$, $X\sim\calN(\mu,\sigma^2)$, $X\sim N(\mu,\sigma^2)$, or $X\sim\operatorname{Gaussian}(\mu,\sigma^2)$, read as $X$ is normal or Gaussian distributed with mean $\mu$ and standard deviation $\sigma$, where the $\sigma^2$ ones are not used here.
+\item $Z\sim\calN(0,1)$, $Z\sim N(0,1)$, or $X\sim\operatorname{Gaussian}(0,1)$ read as $X$ is standard or unit normal or Gaussian distributed.
 \eit
 \item Parameters: $\mu\in\bbR$ and $\sigma\in(0,\infty)$
 \item Support: $\bbR$
@@ -1509,7 +1509,7 @@ F_X(x)&=\frac{1}{\sqrt{\pi}}\int_{-\infty}^{\frac{x-\mu}{\sqrt{2}\sigma}}e^{-u^2
 \epr
 \item Quantile:
 \[\ba
-Q(p)&=\mu+\sigma\Phi^{-1}(p)\\
+Q_X(p)&=\mu+\sigma\Phi^{-1}(p)\\
 &=\mu+\sqrt{2}\sigma\operatorname{erf}^{-1}(2p-1)
 \ea\]
 \item Mean:
@@ -1583,7 +1583,7 @@ h(X)&=-\int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}\sigma}\exp(-\frac{(x-\mu)^2}{
 \item Symmetry: about $\mu$
 \item PDF monotonicity: strictly increasing for $x\le\mu$ and strictly decreasing for $x\ge\mu$
 \item CCDF:
-\[1-F(x)=F(-x)\]
+\[\bar{F}_X(x)=F_X(-x)\]
 \bpr
 \[\ba
 \Phi(-z)+\Phi(z)=&\int_{-\infty}^{-z}\frac{1}{\sqrt{2\pi}}\exp(-\frac{x^2}{2})\dd{x}+\int_{-\infty}^z\frac{1}{\sqrt{2\pi}}\exp(-\frac{x^2}{2})\dd{x}\\
@@ -1591,6 +1591,7 @@ h(X)&=-\int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}\sigma}\exp(-\frac{(x-\mu)^2}{
 =&1
 \ea\]
 \epr
+The CCDF of $Z$ is called Q-function and denoted as $Q(x)$.
 \eit
 \sssc{Stein's Lemma}
 Suppose $X\sim N(\mu,\sigma)$ and $g\colon\bbR\to\bbR$ is a differentiable function, and both $E(g(X)(X-\mu))$ and $E(g'(X))$ both exist. Then:
@@ -1614,7 +1615,7 @@ PLACEHOLDER
 \sssc{Exponential random variable}
 \bit
 \item Trial: An exponential random variable models the distance between adjacent events in a Poisson process with rate $\lambda$.
-\item Notation: $X\sim\operatorname{Exp}(\lambda)$ or $X\sim\operatorname{Exponential}(\lambda)$, read as $X$ is exponential distributed with parameter or rate $\lambda$
+\item Notation: $X\sim\operatorname{Exp}(\lambda)$ or $X\sim\operatorname{Exponential}(\lambda)$, read as $X$ is exponential distributed with parameter or rate $\lambda$.
 \item Parameters: $\lambda\in(0,\infty)$
 \item Support: $[0,\infty)$
 \item PDF:
@@ -1631,7 +1632,7 @@ Let $N(x)$ denotes the number of events occuring in $[0,x]$. We already know tha
 \item CDF:
 \[F_X(x)=\bcs0,\quad&x<0\\1-e^{-\lambda x},\quad&x\ge0\ecs\]
 \item Quantile:
-\[Q(p)=-\frac{\ln(1-p)}{\lambda}\]
+\[Q_X(p)=-\frac{\ln(1-p)}{\lambda}\]
 \item Mean:
 \[E(X)=\frac{1}{\lambda}\]
 \bpr
@@ -1714,7 +1715,7 @@ P(k-1<x\le k)=&\int_{k-1}^k\lambda e^{-\lambda x}\dd{x}\\
 \sssc{Erlang random variable}
 \bit
 \item Trial/Decomposition: An random variable with shape $k$ and rate $\lambda$ is the sum of $k$ i.i.d. exponential variables with rate $\lambda$.
-\item Notation: $X\sim\operatorname{Erlang}(k,\lambda)$, read as $X$ is Erlang distributed with shape $k$ and rate $\lambda$, or parameters $k$ and $\lambda$
+\item Notation: $X\sim\operatorname{Erlang}(k,\lambda)$, read as $X$ is Erlang distributed with shape $k$ and rate $\lambda$, or parameters $k$ and $\lambda$.
 \item Parameters: $k\in\bbN$ and $\lambda\in(0,\infty)$
 \item Support: $[0,\infty)$
 \item PDF:
