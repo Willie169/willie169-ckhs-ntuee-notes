@@ -1593,6 +1593,33 @@ h(X)&=-\int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}\sigma}\exp(-\frac{(x-\mu)^2}{
 \epr
 The CCDF of $Z$ is called Q-function and denoted as $Q(x)$.
 \eit
+\sssc{Q-function bounds}
+\[\qty(\frac{x}{1+x^2})\varphi(x)<Q(x)<\frac{\varphi(x)}{x}\]
+\bpr
+\[\ba
+Q(x)=&\int_x^{\infty}\varphi(u)\dd{u}\\
+<&\int_x^{\infty}\frac{u}{x}\varphi(u)\dd{u}=&\frac{1}{\sqrt{2\pi}}\int_x^{\infty}\frac{u}{x}e^{-\frac{x^2}{2}}\dd{u},\quad v=\frac{u^2}{2}\\
+=&\frac{1}{\sqrt{2\pi}}\int_x^{\infty}\frac{u}{x}\exp(-\frac{u^2}{2})\dd{u},\quad v=\frac{u^2}{2},\dd{v}=u\dd{u}\\
+=&\frac{1}{x\sqrt{2\pi}}\int_{\frac{x^2}{2}}^{\infty}e^{-v}\dd{v}\\
+=&\frac{1}{x\sqrt{2\pi}}\evlp(-e^{-v})_{\frac{x^2}{2}}^{\infty}\\
+=&\frac{1}{x\sqrt{2\pi}}e^{-\frac{x^2}{2}}\\
+=&\frac{\varphi(x)}{x}
+\ea\]
+\[\ba
+\dv{}{u}\qty(\frac{\varphi(u)}{u})=&\frac{-u\varphi(u)u-\varphi(u)}{u^2}\\
+=&-\qty(1+\frac{1}{u^2})\varphi(u)
+\ea\]
+\[\ba
+\qty(1+\frac{1}{x^2})Q(x)=&\int_x^{\infty}\qty(1+\frac{1}{x^2})\varphi(u)\dd{u}\\
+>&\int_x^{\infty}\qty(1+\frac{1}{u^2})\varphi(u)\dd{u}\\
+=&\evlp(-\frac{\varphi(u)}{u})_x^{\infty}\\
+=&\frac{\varphi(x)}{x}
+\ea\]
+\[\ba
+Q(x)>&\frac{\varphi(x)}{x}\qty(1+\frac{1}{x^2})^{-1}\\
+=&\qty(\frac{x}{1+x^2})\varphi(x)
+\ea\]
+\epr
 \sssc{Stein's Lemma}
 Suppose $X\sim N(\mu,\sigma)$ and $g\colon\bbR\to\bbR$ is a differentiable function, and both $E(g(X)(X-\mu))$ and $E(g'(X))$ both exist. Then:
 \[E(g(X)(X-\mu))=\sigma^2E(g'(X)).\]
