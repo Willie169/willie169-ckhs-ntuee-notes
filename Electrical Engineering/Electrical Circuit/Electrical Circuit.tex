@@ -12,6 +12,7 @@
 \sssc{Convention}
 \bit
 \item Time $t$ (s)
+\item Period $T$ (s)
 \item Complex frequency (Laplace domain) $s$ (Hz = 1 / s)
 \item Angular or radial frequency $\omega$ (Hz = 1 / s)
 \item Voltage $v$ (time domain) $\mb{V}$ (phasor domain (in (peak) (magnitude))) $\mb{V}_{rms}$ (phasor domain in RMS) $V$ (Laplace domain) (volt = V) across (跨壓)
@@ -36,6 +37,8 @@
 \item Unit step function $u(t)$
 \item Impulse response function $h(t)$
 \item Transfer function $H(s)$
+\item Phase (angle) $\varphi$:
+\[\varphi=2\pi\qty(\frac{t-t_0}{T}-\left\lfloor\frac{t-t_0}{T}\right\rfloor).\]
 \eit
 \sssc{Electrical network}
 An electrical network or simply network is an interconnection of electrical components or a model of such an interconnection, consisting of electrical elements.
@@ -272,18 +275,8 @@ A ground is a node designated to have 0 electric potential. All other electric p
 The steady-state DC voltage and current values of a circuit when no input signal is applied.
 \sssc{Biasing resistor}
 A biasing resistor is a resistor used to achieve a desired operating point.
-\sssc{Resonance}
-A network is called in resonance or resonant if its voltage and current are in phase.
-
-In series resonance, the phenomenon that amplitude of voltage of element is larger than that of source is called resonant voltage rise. In parallel resonance, the phenomenon that amplitude of voltage of element is larger than that of source is called resonant current rise.
-\sssc{Quality factor}
-The quality factor $Q$ of a network is $2\pi$ multiplied by the maximum energy stored $E_m$ divided by the total energy lost per period $E_l$:
-\[Q=\frac{2\pi E_m}{E_l}.\]
-The quality factor in resonance is denoted as $Q_0$.
 \sssc{Filter}
-A filter circuit applies a frequency-dependent gain/attenuation $\abs{H(j\omega)}$ to signals. Bandwidth is an interval of $\omega$ such that
-\[\abs{H(j\omega)}\ge\frac{1}{\sqrt{2}}\max_{\omega}(\abs{H(j\omega)})\]
-(or other similar criterion).
+A filter circuit applies a frequency-dependent gain/attenuation $\abs{H(j\omega)}$ to signals.
 \sssc{SPICE}
 SPICE (Simulation Program with Integrated Circuit Emphasis) is a general-purpose, open-source analog electronic circuit simulator. It is a program used in integrated circuit and board-level design to check the integrity of circuit designs and to predict circuit behavior.
 \ssc{Souce}
@@ -545,6 +538,65 @@ An equivalent generator is (balanced) delta (Δ) generator obtained by applying 
 Similarly, a (balanced) wye load has a neutral and three branches with identical phase impedances, and a (balanced) delta (Δ) load is it applied Y-Δ transformation.
 
 A three-phase circuit with wye generator and loads with neutrals of all elements form a circuit, terminals of each branch of all elements form identical circuit, is called balanced (wye) (three-phase) circuit, and the circuit obtain by applying Y-Δ transformation to all wye generator and loads is called balanced (delta) (three-phase) circuit.
+\ssc{Second-order circuit}
+\sssc{Resonance}
+A network is called in resonance or resonant if its voltage and current are in phase. The angular frequency at which is called (angular) resonance/resonant frequency $\omega_0$.
+
+In series resonance, the phenomenon that amplitude of voltage of element is larger than that of source is called resonant voltage rise. In parallel resonance, the phenomenon that amplitude of voltage of element is larger than that of source is called resonant current rise.
+\sssc{Quality factor}
+The quality factor $Q_0$ (or $Q$) of a network is $2\pi$ multiplied by the maximum energy stored $E_m$ divided by the total energy lost per period $E_l$:
+\[Q_0=\frac{2\pi E_m}{E_l}.\]
+\sssc{Second-order circuit}
+The characteristic equation of a second-order circuit is in the form
+\[s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}=0\]
+where $\alpha=\omega_0\zeta$ is called neper frequency (奈培頻率) or attenuation (衰減量) and $\zeta$ is called damping factor/ratio (阻尼係數/比) $\zeta$.
+
+The characteristic roots $s$ are
+\[s_1,s_2=-\omega_0\qty(\zeta\pm\sqrt{\zeta^2-1})\]
+Response $f(t)$ is
+\bit
+\item $\zeta>1$ Overdamped response:
+\[f(t)=Ae^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+Be^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
+\item $\zeta=1$ Critically damped response:
+\[f(t)=\qty(A+Bt)e^{-\omega_0t}\]
+\item $0<\zeta<1$ Underdamped response:
+\[f(t)=e^{-\omega_0\zeta t}\qty(A\cos(\omega_0\sqrt{1-\zeta^2}t)-B\sin(\omega_0\sqrt{1-\zeta^2}t))\]
+\eit
+Transfer function is
+\[H(s)=\frac{A}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}\]
+\sssc{Underdamped response high-Q circuit and bandwidth}
+The angular frequency of the damped oscillation of the underdamped response is damped frequency $\omega_d$:
+\[\omega_d=\omega_0\sqrt{1-\zeta^2}\]
+Let each $A$ denotes an arbitrary constant.
+\[f(t)=Ae^{(-\alpha+j\omega_d)t+\varphi}\]
+The poles on the complex plane are $s_1,s_2=-\alpha\pm j\omega_d$.
+\[E_m=Ae^{-2\alpha t_n+2\varphi}\]
+\[E_l=\qty(1-e^{-\frac{4\pi\alpha}{\omega_d}})E_m\]
+\[Q_0=\frac{2\pi}{1-e^{-\frac{4\pi\alpha}{\omega_d}}}\]
+\[H(s)=\frac{1}{(s-s_1)(s-s_2)}=\frac{1}{(s+\alpha+j\omega_d)(s+\alpha-j\omega_d)}\]
+The maximum output power occurs when input frequency is $\omega_0$:
+\[\arg_{\omega}\max_{\omega}(\abs{H(j\omega)})=\omega_0\]
+\[\max_{\omega}(\abs{H(j\omega)})=\frac{A}{2j\omega_0^{\pht{0}2}\zeta}\]
+For circuit with large $Q_0$, called high-Q circuit, $\zeta\ll1$, $\omega_0\approx\omega_d$, by $e^{-x}\approx1-x$ for small $x$, we have
+\[e^{-\frac{4\pi\alpha}{\omega_d}}\approx1-\frac{4\pi\alpha}{\omega_d}\]
+\[Q_0\approx\frac{\omega_d}{2\alpha}\approx\frac{\omega_0}{2\alpha}\approx\frac{1}{2\zeta}\]
+We typically call $Q_0>5$ i.e. $\zeta<0.1$ high-Q circuit.
+
+The input frequencies such that the output power is half its maximum value, that is,
+\[\abs{H(j\omega)}=\frac{1}{\sqrt{2}}\max_{\omega}(\abs{H(j\omega)})\]
+are the half-power frequencies $\omega_2>\omega_1$ where $\omega_2$ is called upper half-power frequency and $\omega_1$ is called lower half-power frequency,
+\[\omega_1,\omega_2=
+\bpr
+Let $\omega_1,\omega_2=a\omega_0$.
+\[\abs{1-a^2+2ja\zeta}=2\sqrt{2}\zeta\]
+
+
+
+Bandwidth is an interval of $\omega$ such that
+\[\abs{H(j\omega)}\ge\frac{1}{\sqrt{2}}\max_{\omega}(\abs{H(j\omega)})\]
+
+
+
 \ssc{R, L, C, RL, RC, LC, and RLC Circuits}
 \sssc{Resistor with voltage source}
 A resistor with resistance $R$ and an independent voltage source $v_{in}$ in series connection.
@@ -1442,7 +1494,7 @@ $I_C$ being high-pass filter:
 \[\lim_{\omega\to\infty}\abs{H_{I_C}(j\omega)}=\lim_{\omega\to\infty}\abs{\frac{-LC\omega^2}{1-LC\omega^2}}=1\]
 \end{proof}
 \sssc{Series RLC circuit}
-A series RLC (oscillator) circuit consists of a resistor with resistance $R$, an inductor with inductance $L$, a capacitor with capacitance $C$, and an independent voltage source $v_{in}$ in series connection. Neper frequency (奈培頻率) or attenuation (衰減量) $\alpha$, angular resonance/resonant frequency $\omega_0$, damping factor/ratio (阻尼係數) $\zeta$, characteristic roots $r$, critical resistance $R_c$ (the resistance for critically damped response), angular frequency of the damped oscillation of the underdamped response $\omega_d$, $t_n=\frac{2\pi n}{\omega}$, stored energy in the inductor and capacitor $E_L$ and $E_C$, $E=E_L+E_C$, dissipated energy of the resistor in $E_R$.
+A series RLC (oscillator) circuit consists of a resistor with resistance $R$, an inductor with inductance $L$, a capacitor with capacitance $C$, and an independent voltage source $v_{in}$ in series connection. Neper frequency or attenuation $\alpha$, angular resonance/resonant frequency $\omega_0$, damping factor/ratio $\zeta$, characteristic roots $s_1,s_2$, critical resistance $R_c$ (the resistance for critically damped response), damping angular frequency $\omega_d$, $t_n=\frac{2\pi n}{\omega}$, stored energy in the inductor and capacitor $E_L$ and $E_C$, $E=E_L+E_C$, dissipated energy of the resistor in $E_R$.
 
 Natural response (time domain):
 \[\dv[2]{i}{t}+\frac{R}{L}\dv{i}{t}+\frac{i}{LC}=0\]
@@ -1452,7 +1504,7 @@ Natural response (time domain):
 \[R_c=2\sqrt{\frac{L}{C}}\]
 \[\omega_d=\omega_0\sqrt{1-\zeta^2}\]
 \[\dv[2]{i}{t}+2\omega_0\zeta\dv{i}{t}+\omega_0^{\pht{0}2}i=0\]
-\[r=-\omega_0\qty(\zeta\pm\sqrt{\zeta^2-1})\]
+\[s_1,s_2=-\omega_0\qty(\zeta\pm\sqrt{\zeta^2-1})\]
 \begin{proof}
 \[v_R+v_C+v_L=0\]
 \[v_R=Ri\]
@@ -1464,9 +1516,9 @@ Natural response (time domain):
 \[\omega_0=\frac{1}{\sqrt{LC}}\]
 \[\zeta=\frac{\alpha}{\omega_0}=\frac{R}{2}\sqrt{\frac{C}{L}}\]
 \[\dv[2]{i}{t}+2\omega_0\zeta\dv{i}{t}+\omega_0^{\pht{0}2}i=0\]
-\[r^2+2\omega_0\zeta+\omega_0^{\pht{0}2}=0\]
+\[s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}=0\]
 \[\ba
-r&=\frac{-2\omega_0\zeta\pm\sqrt{4\omega_0^{\pht{0}2}\zeta^2-4\omega_0^{\pht{0}2}}}{2}\\
+s_1,s_2&=\frac{-2\omega_0\zeta\pm\sqrt{4\omega_0^{\pht{0}2}\zeta^2-4\omega_0^{\pht{0}2}}}{2}\\
 &=-\omega_0\qty(\zeta\pm\sqrt{\zeta^2-1})
 \ea\]
 \end{proof}
@@ -2016,8 +2068,7 @@ $V_C$ being low-pass filter:
 \[\lim_{\omega\to 0}\abs{H_{V_C}(j\omega)}=1\]
 \[\lim_{\omega\to\infty}\abs{H_{V_C}(j\omega)}=0\]
 \sssc{Parallel RLC circuit}
-A parallel RLC (oscillator) circuit consists of a resistor with resistance $R$, an inductor with inductance $L$, a capacitor with capacitance $C$, and an independent current source $i_{in}$ in parallel connection. Neper frequency or attenuation $\alpha$, angular resonance/resonant frequency $\omega_0$, damping factor/ratio $\zeta$, characteristic roots $r$, critical resistance $R_c$ (the resistance for critically damped
-response), angular frequency of the damped oscillation of the underdamped response $\omega_d$, $t_n=\frac{2\pi n}{\omega}$, stored energy in the inductor and capacitor $E_L$ and $E_C$, $E=E_L+E_C$, dissipated energy of the resistor in $E_R$.
+A parallel RLC (oscillator) circuit consists of a resistor with resistance $R$, an inductor with inductance $L$, a capacitor with capacitance $C$, and an independent current source $i_{in}$ in parallel connection. Neper frequency or attenuation $\alpha$, angular resonance/resonant frequency $\omega_0$, damping factor/ratio $\zeta$, characteristic roots $s_1,s_2$, critical resistance $R_c$ (the resistance for critically damped response), damping angular frequency $\omega_d$, $t_n=\frac{2\pi n}{\omega}$, stored energy in the inductor and capacitor $E_L$ and $E_C$, $E=E_L+E_C$, dissipated energy of the resistor in $E_R$.
 
 Natural response (time domain):
 \[\dv[2]{v}{t}+\frac{1}{RC}\dv{v}{t}+\frac{v}{LC}=0\]
@@ -2027,7 +2078,7 @@ Natural response (time domain):
 \[R_c=\frac{1}{2}\sqrt{\frac{L}{C}}\]
 \[\omega_d=\omega_0\sqrt{1-\zeta^2}\]
 \[\dv[2]{v}{t}+2\omega_0\zeta\dv{v}{t}+\omega_0^{\pht{0}2}v=0\]
-\[r=-\omega_0\qty(\zeta\pm\sqrt{\zeta^2-1})\]
+\[s_1,s_2=-\omega_0\qty(\zeta\pm\sqrt{\zeta^2-1})\]
 \begin{proof}
 \[i_R+i_L+i_C=0\]
 \[v=Ri_R\]
@@ -2039,9 +2090,9 @@ Natural response (time domain):
 \[\omega_0=\frac{1}{\sqrt{LC}}\]
 \[\zeta=\frac{\alpha}{\omega_0}=\frac{1}{2R}\sqrt{\frac{L}{C}}\]
 \[\dv[2]{v}{t}+2\omega_0\zeta\dv{v}{t}+\omega_0^{\pht{0}2}v=0\]
-\[r^2+2\omega_0\zeta+\omega_0^{\pht{0}2}=0\]
+\[s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}=0\]
 \[\ba
-r&=\frac{-2\omega_0\zeta\pm\sqrt{4\omega_0^{\pht{0}2}\zeta^2-4\omega_0^{\pht{0}2}}}{2}\\
+s_1,s_2&=\frac{-2\omega_0\zeta\pm\sqrt{4\omega_0^{\pht{0}2}\zeta^2-4\omega_0^{\pht{0}2}}}{2}\\
 &=-\omega_0\qty(\zeta\pm\sqrt{\zeta^2-1})
 \ea\]
 \end{proof}
@@ -2502,19 +2553,19 @@ Impulse response:
 \eit
 Transfer function:
 \[\ba
-V&=\frac{RLs}{RLCs^2+Ls+R}\\
+H_V&=\frac{RLs}{RLCs^2+Ls+R}\\
 &=\frac{2R\omega_0\zeta s}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
 \[\ba
-I_R&=\frac{Ls}{RLCs^2+Ls+R}\\
+H_{I_R}&=\frac{Ls}{RLCs^2+Ls+R}\\
 &=\frac{2\omega_0\zeta s}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
 \[\ba
-I_L&=\frac{R}{RLCs^2+Ls+R}\\
+H_{I_L}&=\frac{R}{RLCs^2+Ls+R}\\
 &=\frac{\omega_0^{\pht{0}2}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}\\
 \ea\]
 \[\ba
-I_C&=\frac{RLCs^2}{RLCs^2+Ls+R}\\
+H_{I_C}&=\frac{RLCs^2}{RLCs^2+Ls+R}\\
 &=\frac{s^2}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}
 \ea\]
 $I_L$ being low-pass filter:
