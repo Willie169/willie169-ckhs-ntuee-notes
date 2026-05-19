@@ -275,8 +275,6 @@ A ground is a node designated to have 0 electric potential. All other electric p
 The steady-state DC voltage and current values of a circuit when no input signal is applied.
 \sssc{Biasing resistor}
 A biasing resistor is a resistor used to achieve a desired operating point.
-\sssc{Filter}
-A filter circuit applies a frequency-dependent gain/attenuation $\abs{H(j\omega)}$ to signals.
 \sssc{SPICE}
 SPICE (Simulation Program with Integrated Circuit Emphasis) is a general-purpose, open-source analog electronic circuit simulator. It is a program used in integrated circuit and board-level design to check the integrity of circuit designs and to predict circuit behavior.
 \ssc{Souce}
@@ -341,6 +339,8 @@ A circuit whose outputs as a function of the inputs is time-invariant.
 For a response function in the form $y(t)=y_0e^{-\alpha t}$ with constants $y_0\neq 0$ and $\alpha>0$, the time constant $\tau$ is defined as $\frac{1}{\alpha}$, that is, $y(\tau)=y_0e^{-1}$. For the smallest positive integer (or rational number to a number of decimals) $k$ such that $\frac{y(k\tau)}{y_0}<0.01$ (or other designated number), we typically call that $y(t)$ decays to $0$ about $k$ times time constants. The falling time or pulse decay time is defined as the time $y(t)$ changes from $0.9y_0$ to $0.1y_0$, which is approximately $22\tau$.
 
 For a response function in the form $y(t)=y_0\qty(1-e^{-\alpha t})$ with constants $y_0\neq 0$ and $\alpha>0$, the time constant $\tau$ is defined as $\frac{1}{\alpha}$, that is, $y(\tau)=y_0\qty(1-e^{-1})$. For the smallest positive integer (or rational number to a number of decimals) $k$ such that $\frac{y(k\tau)}{y_0}>0.99$ (or other designated number), we typically call that $y(t)$ decays to $0$ about $k$ times time constants. The rising time or pulse grow time is defined as the time $y(t)$ changes from $0.1y_0$ to $0.9y_0$, which is approximately $22\tau$.
+\sssc{Gain or attenuation}
+$\abs{H(s)}$, often $\abs{H(j\omega)}$, is called gain, or attenuation if negative.
 \sssc{Series connection}
 For linear networks, the impedance, reciprocal of capacitance, and inductance of the network are equal to the sums of those of each element. When steady, the charges in each capacitor and the equivalent capacitor are the the same.
 \sssc{Parallel connection}
@@ -538,7 +538,7 @@ An equivalent generator is (balanced) delta (Δ) generator obtained by applying 
 Similarly, a (balanced) wye load has a neutral and three branches with identical phase impedances, and a (balanced) delta (Δ) load is it applied Y-Δ transformation.
 
 A three-phase circuit with wye generator and loads with neutrals of all elements form a circuit, terminals of each branch of all elements form identical circuit, is called balanced (wye) (three-phase) circuit, and the circuit obtain by applying Y-Δ transformation to all wye generator and loads is called balanced (delta) (three-phase) circuit.
-\ssc{Second-order circuit}
+\ssc{Filter circuit}
 \sssc{Resonance}
 A network is called in resonance or resonant if its voltage and current are in phase. The angular frequency at which is called (angular) resonance/resonant frequency $\omega_0$.
 
@@ -546,6 +546,25 @@ In series resonance, the phenomenon that amplitude of voltage of element is larg
 \sssc{Quality factor}
 The quality factor $Q_0$ (or $Q$) of a network is $2\pi$ multiplied by the maximum energy stored $E_m$ divided by the total energy lost per period $E_l$:
 \[Q_0=\frac{2\pi E_m}{E_l}.\]
+\sssc{Filter}
+A filter circuit applies a frequency-dependent gain/attenuation $\abs{H(j\omega)}$ to signals.
+\sssc{dB or decibels}
+For a filter voltage or current response with a given transfer function $H$, for an angular frequency $\omega$, its dB is
+\[20\log_{10}\qty(\abs{H(j\omega)}).\]
+For a filter power response $P_{out}$ of a power input $P_{in}$, for an angular frequency $\omega$, its dB is
+\[10\log_{10}\qty(\frac{P_{out}}{P_{in}}).\]
+\sssc{Octave and decade}
+In logarithmic scale, changing by 8 times is called an octave, and changing by 10 times is called a decade.
+\sssc{Half-power, 3dB, cutoff, or corner frequency}
+An angular or non-angular frequency such that the output is 3dB, that is, $\frac{1}{\sqrt{2}}$ for transfer function or $P_{out}=\frac{1}{2}P_{in}$, is called 3dB frequency and denoted $\omega_{3dB}$ and $f_{3dB}$ respectively, and for power, also called half-power frequency.
+\sssc{Bandwidth}
+Bandwidth is an interval of $\omega$ (or $f$) such that
+\[\abs{H(j\omega)}\ge\frac{1}{\sqrt{2}}\]
+or
+\[P_{out}\ge P_{in},\]
+or the length $\calB$ of it.
+\sssc{Bode plot}
+A Bode plot has two graphs, the $20\log_{10}\abs{H(j\omega)}$ (dB)-$\log_{10}\omega$ (decade) graph and $\Arg(H(j\omega))$ ($^{\circ}$)-$\log_{10}\omega$ (decade) graph.
 \sssc{Second-order circuit}
 The characteristic equation of a second-order circuit is in the form
 \[s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}=0\]
@@ -564,42 +583,39 @@ Response $f(t)$ is
 \eit
 Transfer function is
 \[H(s)=\frac{As}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}\]
-\sssc{Underdamped response and bandwidth}
-The angular frequency of the damped oscillation of the underdamped response is damped frequency $\omega_d$:
-\[\omega_d=\omega_0\sqrt{1-\zeta^2}\]
+\sssc{Underdamped response}
 Let each $A$ denotes an arbitrary constant.
-\[f(t)=Ae^{(-\alpha+j\omega_d)t+\varphi}\]
+
+The damped oscillation of the underdamped response to a constant source has damped frequency $\omega_d$:
+\[\omega_d=\omega_0\sqrt{1-\zeta^2}\]
+and response
+\[f(t)=Ae^{(-\alpha+j\omega_d)t+\varphi}.\]
 The poles on the complex plane are $s_{1,2}=-\alpha\pm j\omega_d$.
 \[E_m=Ae^{-2\alpha t_n+2\varphi}\]
 \[E_l=\qty(1-e^{-\frac{4\pi\alpha}{\omega_d}})E_m\]
 \[Q_0=\frac{2\pi}{1-e^{-\frac{4\pi\alpha}{\omega_d}}}\]
 \[H(s)=\frac{s}{(s-s_1)(s-s_2)}=\frac{s}{(s+\alpha+j\omega_d)(s+\alpha-j\omega_d)}\]
-The maximum output power occurs when input frequency is $\omega_0$:
+The maximum output power $P_{out}=P_{in}$, i.e., 0dB, occurs when input frequency is $\omega_0$:
 \[\arg_{\omega}\max_{\omega}(\abs{H(j\omega)})=\omega_0\]
-\[\max_{\omega}(\abs{H(j\omega)})=\frac{A}{2j\omega_0\zeta}\]
-The input frequencies such that the output power is half its maximum value, that is,
-\[\abs{H(j\omega)}=\frac{1}{\sqrt{2}}\max_{\omega}(\abs{H(j\omega)})\]
-are the half-power (or 3dB) frequencies $\omega_2>\omega_1$ where $\omega_2$ is called upper half-power frequency and $\omega_1$ is called lower half-power frequency, also denoted as $\omega_{3dB}$,
+\[\max_{\omega}(\abs{H(j\omega)})=\abs{\frac{B}{2j\omega_0\zeta}}=1,\quad 2j\omega_0\zeta=1\]
+The half-power frequencies such that
+\[\abs{H(j\omega)}=\frac{1}{\sqrt{2}},\]
+$\omega_2>\omega_1$, where $\omega_2$ is called upper half-power frequency and $\omega_1$ is called lower half-power frequency, are
 \[\omega_{1,2}=\omega_0\sqrt{1-2\zeta^2\mp2\zeta\sqrt{1-\zeta^2}}.\]
 \bpr
 Let $\omega_{1,2}=a\omega_0$.
 \[\ba
-H(j\omega_{1,2})=&\frac{Aja\omega_0}{(ja\omega_0+\alpha+j\omega_d)(ja\omega_0+\alpha-j\omega_d)}\\
-=&\frac{Aja}{\omega_0((ja+\zeta)^2+1-\zeta^2)}\\
-=&\frac{Aja}{\omega_0(-a^2+2ja\zeta+1)}
+H(j\omega_{1,2})=&\frac{Bja\omega_0}{(ja\omega_0+\alpha+j\omega_d)(ja\omega_0+\alpha-j\omega_d)}\\
+=&\frac{Bja}{\omega_0((ja+\zeta)^2+1-\zeta^2)}\\
+=&\frac{2a\zeta}{a^2-2ja\zeta-1}
 \ea\]
-\[\abs{H(j\omega_{1,2})}^2=\frac{A^2}{4\omega_0^{\pht{0}2}\zeta^2}\]
-\[\frac{a^2}{(1-a^2)^2+4a^2\zeta^2}=\frac{1}{4\zeta^2}\]
+\[\abs{H(j\omega_{1,2})}^2=\frac{1}{2}\]
+\[8a^2\zeta^2=(a^2-1)^2+4a^2\zeta^2\]
 \[a^4-2a^2(1-2\zeta^2)+1=0\]
 \[a^2=1-2\zeta^2\pm\sqrt{1-4\zeta^2+4\zeta^4-1}=1-2\zeta^2\pm2\zeta\sqrt{1-\zeta^2}\]
 \[\omega_{1,2}=\omega_0\sqrt{1-2\zeta^2\mp2\zeta\sqrt{1-\zeta^2}}\]
 \epr
-Similar for non-angular frequency $f$, also denoted as $f_{3dB}$.
-
-Bandwidth is an interval of $\omega$ (or $f$) such that
-\[\abs{H(j\omega)}\ge\frac{1}{\sqrt{2}}\max_{\omega}(\abs{H(j\omega)}),\]
-that is, $[\omega_1,\omega_2]$, or the length of it
-\[\calB=\omega_2-\omega_1\]
+\[\calB=\omega_2-\omega_1.\]
 \sssc{High-Q circuit}
 For circuit with large $Q_0$, i.e., small $\zeta$, called high-Q circuit, which we usually take $Q_0>5$, i.e., $\zeta<0.1$, we have $\zeta\ll1$, $\omega_0\approx\omega_d$, by $e^{-x}\approx1-x$ for small $x$, thus
 \[e^{-\frac{4\pi\alpha}{\omega_d}}\approx1-\frac{4\pi\alpha}{\omega_d}\]
