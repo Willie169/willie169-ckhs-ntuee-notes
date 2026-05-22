@@ -567,13 +567,18 @@ A Bode plot has two graphs,
 \item the phase response: $\Arg(H(j\omega))$ ($^{\circ}$)-$\log_{10}\omega$ (decade) (or $\log_8\omega$ (octave)).
 \eit
 \sssc{Second-order circuit}
-The characteristic equation of a second-order circuit is in the form
-\[s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}=0\]
-where $\alpha=\omega_0\zeta$ is called neper frequency (奈培頻率) or attenuation (衰減量) and $\zeta$ is called damping factor/ratio (阻尼係數/比) $\zeta$.
+A response $f(t)$ of a second-order circuit to an input $u_{in}$ has the form
+\[f''(t)+2\omega_0\zeta f'(t)+\omega_0^{\pht{0}2}f(t)=ku_{in},\]
+and its characteristic equation is
+\[r^2+2\omega_0\zeta r+\omega_0^{\pht{0}2}=0,\]
+where $\alpha=\omega_0\zeta$ is called neper frequency (奈培頻率) or attenuation (衰減量) and $\zeta$ is called damping factor/ratio (阻尼係數/比).
 
-The characteristic roots $s$ are
-\[s_{1,2}=-\omega_0\qty(\zeta\pm\sqrt{\zeta^2-1})\]
-Response $f(t)$ is
+The characteristic roots $r$ are
+\[r_{1,2}=-\omega_0\qty(\zeta\pm\sqrt{\zeta^2-1}).\]
+Let $U(s)=\calL\{u_{in}\}$.
+\[s^2F(s)+2\omega_0\zeta sF(s)+\omega_0^{\pht{0}2}F(s)=kU(s).\]
+\[F(s)=\frac{sf(0)+(2\omega_0\zeta f(0)+f'(0))+kU(s)}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}.\]
+Natural response (i.e. $u_{in}=0$) is
 \bit
 \item $\zeta>1$ Overdamped response:
 \[f(t)=Ae^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+Be^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
@@ -582,22 +587,29 @@ Response $f(t)$ is
 \item $0<\zeta<1$ Underdamped response:
 \[f(t)=e^{-\omega_0\zeta t}\qty(A\cos(\omega_0\sqrt{1-\zeta^2}t)-B\sin(\omega_0\sqrt{1-\zeta^2}t))\]
 \eit
-Transfer function is
-\[H(s)=\frac{2A\omega_0\zeta s}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}},\]
-where
-\[A\coloneq H(j\omega_0).\]
-\[H(j\omega)=\frac{j2A\omega_0\omega\zeta}{\omega_0^{\pht{0}2}-\omega^2+j2\omega_0\omega\zeta}\]
-Normalized:
-\[\frac{H(j\omega)}{H(j\omega_0)}=\frac{j2\omega_0\omega\zeta}{\omega_0^{\pht{0}2}-\omega^2+j2\omega_0\omega\zeta}\]
-\sssc{Underdamped response}
 The damped oscillation of the underdamped response to a constant source has damped frequency $\omega_d$:
 \[\omega_d=\omega_0\sqrt{1-\zeta^2}\]
-and response
+and the response is
 \[f(t)=Ae^{(-\alpha+j\omega_d)t+\varphi}.\]
-The poles on the complex plane are $s_{1,2}=-\alpha\pm j\omega_d$.
+
+
+
+
+
+
+
+
+
+PLACEHOLDER
+
+
+The poles on the complex plane are $r_{1,2}=-\alpha\pm j\omega_d$.
 \[E_m=Ae^{-2\alpha t_n+2\varphi}\]
 \[E_l=\qty(1-e^{-\frac{4\pi\alpha}{\omega_d}})E_m\]
 \[Q_0=\frac{2\pi}{1-e^{-\frac{4\pi\alpha}{\omega_d}}}\]
+
+
+
 \[H(s)=\frac{As}{(s-s_1)(s-s_2)}=\frac{As}{(s+\alpha+j\omega_d)(s+\alpha-j\omega_d)}\]
 0 dB occurs at $\omega_0$, at which
 \[H(j\omega_0)=\frac{1}{2\zeta}.\]
@@ -619,12 +631,27 @@ H(j\omega_{1,2})=&\frac{Bja\omega_0}{(ja\omega_0+\alpha+j\omega_d)(ja\omega_0+\a
 \[\omega_{1,2}=\omega_0\sqrt{1-2\zeta^2\mp2\zeta\sqrt{1-\zeta^2}}\]
 \epr
 \[\calB=\omega_2-\omega_1.\]
+
+
+
+low-pass high-pass canonical
+
+
+
+
+
 \sssc{High-Q circuit}
 For circuit with large $Q_0$, i.e., small $\zeta$, called high-Q circuit, which we usually take $Q_0>5$, i.e., $\zeta<0.1$, we have $\zeta\ll1$, $\omega_0\approx\omega_d$, by $e^{-x}\approx1-x$ for small $x$, thus
 \[e^{-\frac{4\pi\alpha}{\omega_d}}\approx1-\frac{4\pi\alpha}{\omega_d}\]
 \[Q_0\approx\frac{\omega_d}{2\alpha}\approx\frac{\omega_0}{2\alpha}\approx\frac{1}{2\zeta}\]
 \[\omega_{1,2}\approx\omega_0\qty(1\mp\zeta)=\omega\mp\alpha=\omega_0\mp\frac{\omega_0}{2Q_0}\]
 \[\calB=2\alpha=\frac{\omega_0}{Q_0}\]
+
+
+
+PLACEHOLDER
+
+
 \ssc{R, L, C, RL, RC, LC, and RLC Circuits}
 \sssc{Resistor with voltage source}
 A resistor with resistance $R$ and an independent voltage source $v_{in}$ in series connection.
@@ -1522,7 +1549,7 @@ $I_C$ being high-pass filter:
 \[\lim_{\omega\to\infty}\abs{H_{I_C}(j\omega)}=\lim_{\omega\to\infty}\abs{\frac{-LC\omega^2}{1-LC\omega^2}}=1\]
 \end{proof}
 \sssc{Series RLC circuit}
-A series RLC (oscillator) circuit consists of a resistor with resistance $R$, an inductor with inductance $L$, a capacitor with capacitance $C$, and an independent voltage source $v_{in}$ in series connection. Neper frequency or attenuation $\alpha$, angular resonance/resonant frequency $\omega_0$, damping factor/ratio $\zeta$, characteristic roots $s_{1,2}$, critical resistance $R_c$ (the resistance for critically damped response), damping angular frequency $\omega_d$, $t_n=\frac{2\pi n}{\omega}$, stored energy in the inductor and capacitor $E_L$ and $E_C$, $E=E_L+E_C$, dissipated energy of the resistor in $E_R$.
+A series RLC (oscillator) circuit consists of a resistor with resistance $R$, an inductor with inductance $L$, a capacitor with capacitance $C$, and an independent voltage source $v_{in}$ in series connection. Neper frequency or attenuation $\alpha$, angular resonance/resonant frequency $\omega_0$, damping factor/ratio $\zeta$, characteristic roots $r_{1,2}$, critical resistance $R_c$ (the resistance for critically damped response), damping angular frequency $\omega_d$, $t_n=\frac{2\pi n}{\omega}$, stored energy in the inductor and capacitor $E_L$ and $E_C$, $E=E_L+E_C$, dissipated energy of the resistor in $E_R$.
 
 Natural response (time domain):
 \[\dv[2]{i}{t}+\frac{R}{L}\dv{i}{t}+\frac{i}{LC}=0\]
@@ -1532,7 +1559,7 @@ Natural response (time domain):
 \[R_c=2\sqrt{\frac{L}{C}}\]
 \[\omega_d=\omega_0\sqrt{1-\zeta^2}\]
 \[\dv[2]{i}{t}+2\omega_0\zeta\dv{i}{t}+\omega_0^{\pht{0}2}i=0\]
-\[s_{1,2}=-\omega_0\qty(\zeta\pm\sqrt{\zeta^2-1})\]
+\[r_{1,2}=-\omega_0\qty(\zeta\pm\sqrt{\zeta^2-1})\]
 \begin{proof}
 \[v_R+v_C+v_L=0\]
 \[v_R=Ri\]
@@ -1544,9 +1571,9 @@ Natural response (time domain):
 \[\omega_0=\frac{1}{\sqrt{LC}}\]
 \[\zeta=\frac{\alpha}{\omega_0}=\frac{R}{2}\sqrt{\frac{C}{L}}\]
 \[\dv[2]{i}{t}+2\omega_0\zeta\dv{i}{t}+\omega_0^{\pht{0}2}i=0\]
-\[s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}=0\]
+\[r^2+2\omega_0\zeta r+\omega_0^{\pht{0}2}=0\]
 \[\ba
-s_{1,2}&=\frac{-2\omega_0\zeta\pm\sqrt{4\omega_0^{\pht{0}2}\zeta^2-4\omega_0^{\pht{0}2}}}{2}\\
+r_{1,2}&=\frac{-2\omega_0\zeta\pm\sqrt{4\omega_0^{\pht{0}2}\zeta^2-4\omega_0^{\pht{0}2}}}{2}\\
 &=-\omega_0\qty(\zeta\pm\sqrt{\zeta^2-1})
 \ea\]
 \end{proof}
@@ -2096,7 +2123,7 @@ $V_C$ being low-pass filter:
 \[\lim_{\omega\to 0}\abs{H_{V_C}(j\omega)}=1\]
 \[\lim_{\omega\to\infty}\abs{H_{V_C}(j\omega)}=0\]
 \sssc{Parallel RLC circuit}
-A parallel RLC (oscillator) circuit consists of a resistor with resistance $R$, an inductor with inductance $L$, a capacitor with capacitance $C$, and an independent current source $i_{in}$ in parallel connection. Neper frequency or attenuation $\alpha$, angular resonance/resonant frequency $\omega_0$, damping factor/ratio $\zeta$, characteristic roots $s_{1,2}$, critical resistance $R_c$ (the resistance for critically damped response), damping angular frequency $\omega_d$, $t_n=\frac{2\pi n}{\omega}$, stored energy in the inductor and capacitor $E_L$ and $E_C$, $E=E_L+E_C$, dissipated energy of the resistor in $E_R$.
+A parallel RLC (oscillator) circuit consists of a resistor with resistance $R$, an inductor with inductance $L$, a capacitor with capacitance $C$, and an independent current source $i_{in}$ in parallel connection. Neper frequency or attenuation $\alpha$, angular resonance/resonant frequency $\omega_0$, damping factor/ratio $\zeta$, characteristic roots $r_{1,2}$, critical resistance $R_c$ (the resistance for critically damped response), damping angular frequency $\omega_d$, $t_n=\frac{2\pi n}{\omega}$, stored energy in the inductor and capacitor $E_L$ and $E_C$, $E=E_L+E_C$, dissipated energy of the resistor in $E_R$.
 
 Natural response (time domain):
 \[\dv[2]{v}{t}+\frac{1}{RC}\dv{v}{t}+\frac{v}{LC}=0\]
@@ -2106,7 +2133,7 @@ Natural response (time domain):
 \[R_c=\frac{1}{2}\sqrt{\frac{L}{C}}\]
 \[\omega_d=\omega_0\sqrt{1-\zeta^2}\]
 \[\dv[2]{v}{t}+2\omega_0\zeta\dv{v}{t}+\omega_0^{\pht{0}2}v=0\]
-\[s_{1,2}=-\omega_0\qty(\zeta\pm\sqrt{\zeta^2-1})\]
+\[r_{1,2}=-\omega_0\qty(\zeta\pm\sqrt{\zeta^2-1})\]
 \begin{proof}
 \[i_R+i_L+i_C=0\]
 \[v=Ri_R\]
@@ -2118,9 +2145,9 @@ Natural response (time domain):
 \[\omega_0=\frac{1}{\sqrt{LC}}\]
 \[\zeta=\frac{\alpha}{\omega_0}=\frac{1}{2R}\sqrt{\frac{L}{C}}\]
 \[\dv[2]{v}{t}+2\omega_0\zeta\dv{v}{t}+\omega_0^{\pht{0}2}v=0\]
-\[s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}=0\]
+\[r^2+2\omega_0\zeta r+\omega_0^{\pht{0}2}=0\]
 \[\ba
-s_{1,2}&=\frac{-2\omega_0\zeta\pm\sqrt{4\omega_0^{\pht{0}2}\zeta^2-4\omega_0^{\pht{0}2}}}{2}\\
+r_{1,2}&=\frac{-2\omega_0\zeta\pm\sqrt{4\omega_0^{\pht{0}2}\zeta^2-4\omega_0^{\pht{0}2}}}{2}\\
 &=-\omega_0\qty(\zeta\pm\sqrt{\zeta^2-1})
 \ea\]
 \end{proof}
