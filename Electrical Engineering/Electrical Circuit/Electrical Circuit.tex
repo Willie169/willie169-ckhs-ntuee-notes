@@ -547,22 +547,25 @@ The quality factor $Q_0$ or $Q$ of a network is $2\pi$ multiplied by the maximum
 \sssc{Filter}
 A filter circuit applies a frequency-dependent gain/attenuation $\abs{H(j\omega)}$ to signals.
 \sssc{dB or decibels}
-For a filter voltage or current response with a given transfer function $H$, for an angular frequency $\omega$, its dB is
-\[20\log_{10}\qty(\abs{H(j\omega)}).\]
-For a filter power response $P_{out}$ of a power input $P_{in}$, for an angular frequency $\omega$, its dB is
-\[10\log_{10}\qty(\frac{P_{out}}{P_{in}}).\]
+For a filter circuit voltage or current response with a transfer function $H$, its magnitude dB at an angular frequency $\omega$ is
+\[20\log_{10}\qty(\frac{\abs{H(j\omega)}}{\max_{\omega}\abs{H(j\omega)}}).\]
+For a filter circuit power response $P_{out}$, its power dB at an angular frequency $\omega$ is
+\[10\log_{10}\qty(\frac{P_{out}}{\max_{\omega}P_{out}}).\]
+Both are $\le 0$. At resonance, both are 0 dB.
+
+Dividing magnitude by $\max_{\omega}\abs{H(j\omega)}=1$ is called normalizing.
 \sssc{Octave (oct) and decade (dec)}
 In logarithmic scale, changing by 8 times is called an octave or oct, and changing by 10 times is called a decade or dec.
-\sssc{Half-power, cutoff (截止), or corner frequency}
-An angular or non-angular frequency such that the output is -3\tx{dB}, that is, $\abs{H(j\omega)}\frac{1}{\sqrt{2}}$ or $P_{out}=\frac{1}{2}P_{in}$, is called cutoff frequency and denoted $\omega_c$, $\omega_{3\tx{dB}}$, or $\omega_{-3\tx{dB}}$ and $f_c$, $f_{\tx{3dB}}$, or $f_{-3\tx{dB}}$ respectively, and for power, also called half-power frequency.
+\sssc{Cutoff (截止), half-power, or corner frequency}
+An angular or non-angular frequency such that the output is -3\tx{dB}, that is, $\abs{H(j\omega)}=\frac{1}{\sqrt{2}}\max_{\omega}\abs{H(j\omega)}$ or $P_{out}=\frac{1}{2}\max_{\omega}P_{out}$, is called cutoff or corner, or half-power for power response, angular frequency $\omega_c$, $\omega_{3\tx{dB}}$, $\omega_{-3\tx{dB}}$ and non-angular frequency $f_c$, $f_{3\tx{dB}}$, or $f_{-3\tx{dB}}$ respectively.
 \sssc{Bandwidth}
-Bandwidth is an interval of $\omega$ (or $f$) such that
-\[\abs{H(j\omega)}\ge\frac{1}{\sqrt{2}}\]
-or
-\[P_{out}\ge P_{in},\]
-or the length $\calB$ of it.
+Bandwidth is an interval of $\omega$ (or $f$) $\ge -3$dB, or the length $\calB$ of it.
 \sssc{Bode plot (波德圖)}
-A Bode plot has two graphs, the $20\log_{10}\abs{H(j\omega)}$ (dB)-$\log_{10}\omega$ (decade (or octave)) graph called magnitude response and $\Arg(H(j\omega))$ ($^{\circ}$)-$\log_{10}\omega$ (decade (or octave)) graph called phase response.
+A Bode plot has two graphs,
+\bit
+\item the magnitude response: magnitude dB (dB)-$\log_{10}\omega$ (decade) (or $\log_8\omega$ (octave)), and
+\item the phase response: $\Arg(H(j\omega))$ ($^{\circ}$)-$\log_{10}\omega$ (decade) (or $\log_8\omega$ (octave)).
+\eit
 \sssc{Second-order circuit}
 The characteristic equation of a second-order circuit is in the form
 \[s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}=0\]
@@ -580,10 +583,13 @@ Response $f(t)$ is
 \[f(t)=e^{-\omega_0\zeta t}\qty(A\cos(\omega_0\sqrt{1-\zeta^2}t)-B\sin(\omega_0\sqrt{1-\zeta^2}t))\]
 \eit
 Transfer function is
-\[H(s)=\frac{As}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}\]
+\[H(s)=\frac{2A\omega_0\zeta s}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}},\]
+where
+\[A\coloneq H(j\omega_0).\]
+\[H(j\omega)=\frac{j2A\omega_0\omega\zeta}{\omega_0^{\pht{0}2}-\omega^2+j2\omega_0\omega\zeta}\]
+Normalized:
+\[\frac{H(j\omega)}{H(j\omega_0)}=\frac{j2\omega_0\omega\zeta}{\omega_0^{\pht{0}2}-\omega^2+j2\omega_0\omega\zeta}\]
 \sssc{Underdamped response}
-Let each $A$ denotes an arbitrary constant.
-
 The damped oscillation of the underdamped response to a constant source has damped frequency $\omega_d$:
 \[\omega_d=\omega_0\sqrt{1-\zeta^2}\]
 and response
@@ -592,12 +598,11 @@ The poles on the complex plane are $s_{1,2}=-\alpha\pm j\omega_d$.
 \[E_m=Ae^{-2\alpha t_n+2\varphi}\]
 \[E_l=\qty(1-e^{-\frac{4\pi\alpha}{\omega_d}})E_m\]
 \[Q_0=\frac{2\pi}{1-e^{-\frac{4\pi\alpha}{\omega_d}}}\]
-\[H(s)=\frac{s}{(s-s_1)(s-s_2)}=\frac{s}{(s+\alpha+j\omega_d)(s+\alpha-j\omega_d)}\]
-The maximum output power $P_{out}=P_{in}$, i.e., 0dB, occurs when input frequency is $\omega_0$:
-\[\arg_{\omega}\max_{\omega}(\abs{H(j\omega)})=\omega_0\]
-\[\max_{\omega}(\abs{H(j\omega)})=\abs{\frac{B}{2j\omega_0\zeta}}=1,\quad 2j\omega_0\zeta=1\]
-The half-power frequencies such that
-\[\abs{H(j\omega)}=\frac{1}{\sqrt{2}},\]
+\[H(s)=\frac{As}{(s-s_1)(s-s_2)}=\frac{As}{(s+\alpha+j\omega_d)(s+\alpha-j\omega_d)}\]
+0 dB occurs at $\omega_0$, at which
+\[H(j\omega_0)=\frac{1}{2\zeta}.\]
+The cutoff frequencies such that
+\[\abs{H(j\omega)}=\frac{1}{\sqrt{2}}\max_{\omega}\abs{H(j\omega)},\]
 $\omega_2>\omega_1$, where $\omega_2$ is called upper half-power frequency and $\omega_1$ is called lower half-power frequency, are
 \[\omega_{1,2}=\omega_0\sqrt{1-2\zeta^2\mp2\zeta\sqrt{1-\zeta^2}}.\]
 \bpr
