@@ -1,10 +1,5 @@
 \sct{Series and Improper Integral Theorems and Methods}
 \subsection{Limit of real series theorems}
-\subsubsection{p-series}
-$\sum_{n=1}^{\infty}\frac{1}{n^p}$ converges iff $p>1$.
-\bpr
-By integral test and p-test I for improper integral, it holds.
-\epr
 \subsubsection{Integral test (for convergence) or Maclaurin–Cauchy test}
 Suppose $f(x)\colon[a,\infty)\to\bbR$ for some $a\in\bbN$ is monotone and $\lim_{x\to\infty}f(x)=0$. Then $\int_a^{\infty}f(x)\dd{x}$ is convergent iff $\sum_{k=a}^{\infty}f(k)$ is convergent. And if $\int_a^{\infty}f(x)\dd{x}$ is convergent and $f(x)$ is monotone decreasing, for any $n\in\bbN_{\ge a}$,
 \[\int_n^{\infty}f(x)\dd{x}\le\sum_{k=n}^{\infty}f(k)\le f(n)+\int_n^{\infty}f(x)\dd{x};\]
@@ -200,81 +195,52 @@ for $x\in R$,
 \bpr
 PLACEHOLDER
 \epr
-\subsection{Improper integral theorems}
-\subsubsection{p-test I}
-$\int_a^{\infty}x^p\dd{x},\quad a>0$ converges iff $p<-1$. And for $p<-1\land a>0$,
-\[\int_a^{\infty}x^p\dd{x}=-\frac{1}{p+1}a^{p+1}.\]
+\ssc{p-test, p-series, $\frac{1}{x^p(\ln x)^q}$ test, and $\frac{1}{x^p(\ln x)^q}$ series}
+\subsubsection{p-test}
+For any fixed $a>0$, $\int_a^{\infty}\frac{1}{x^p}\dd{x}$ converges iff $p>1$, and if so,
+\[\int_a^{\infty}\frac{1}{x^p}\dd{x}=\frac{1}{(p-1)a^{p-1}};\]
+$\int_0^a\frac{1}{x^p}\dd{x}$ converges iff $p<1$, and if so,
+\[\int_0^a\frac{1}{x^p}\dd{x}=-\frac{1}{(p-1)a^{p-1}}.\]
 \begin{proof}
-\[\int x^p\dd{x}=\begin{cases}
-\frac{1}{p+1}x^{p+1},\quad&p\neq -1\\
-\ln(x),\quad&p=-1
+\[\int\frac{1}{x^p}\dd{x}=\begin{cases}
+-\frac{1}{(p-1)x^{p-1}},\quad&p\neq 1\\
+\ln(x),\quad&p=1
 \end{cases}\]
-\[\forall p>-1\nexists\lim_{x\to\infty}\frac{1}{p+1}x^{p+1}\]
+\[\forall p<1\colon\nexists\lim_{x\to\infty}-\frac{1}{(p-1)x^{p-1}}\]
 \[\nexists\lim_{x\to\infty}\ln(x)\]
-\[\forall p<-1\lim_{x\to\infty}\frac{1}{p+1}x^{p+1}=0\]
-\end{proof}
-\subsubsection{p-test II}
-$\int_0^ax^p\dd{x},\quad a>0$ converges iff $p>-1$. And for $p>-1\land a>0$,
-\[\int_0^ax^p\dd{x}=\frac{1}{p+1}a^{p+1}.\]
-\begin{proof}
-\[\int x^p\dd{x}=\begin{cases}
-\frac{1}{p+1}x^{p+1},\quad&p\neq -1\\
-\ln(x),\quad&p=-1
-\end{cases}\]
-\[\forall p<-1\nexists\lim_{x\to 0^+}\frac{1}{p+1}x^{p+1}\]
+\[\forall p>1\colon\lim_{x\to\infty}-\frac{1}{(p-1)x^{p-1}}=0\quad\int_a^{\infty}\frac{1}{x^p}\dd{x}=\frac{1}{(p-1)a^{p-1}}\]
+\[\forall p>1\colon\nexists\lim_{x\to 0^+}-\frac{1}{(p-1)x^{p-1}}\]
 \[\nexists\lim_{x\to 0^+}\ln(x)\]
-\[\forall p>-1\lim_{x\to 0^+}\frac{1}{p+1}x^{p+1}=0\]
+\[\forall p<1\colon\lim_{x\to 0^+}-\frac{1}{(p-1)x^{p-1}}=0\quad\int_0^a\frac{1}{x^p}\dd{x}=-\frac{1}{(p-1)a^{p-1}}\]
 \end{proof}
-\subsubsection{$x^p(\ln x)^q$-test I}
-$\int_a^{\infty}x^p(\ln x)^q\dd{x},\quad a>0$ converges iff $p<-1\lor (p=-1\land q<-1)$.
-\begin{proof}
-\[\lim_{x\to\infty}\frac{(\ln x)^q}{x^{\varepsilon}}=\lim_{u\to\infty}\frac{u^q}{e^{\varepsilon u}}=0,\quad\forall\varepsilon>0,\quad\forall q.\]
-For all $p<-1$, take $-1-p>\varepsilon>0$, $p+\varepsilon<-1$:
-\[\lim_{x\to\infty}\frac{x^p(\ln x)^q}{x^{p+\varepsilon}}=0.\]
-Thus, by one-sided LCT, since
-\[\int_a^{\infty}x^{p+\varepsilon}\dd{x}\]
-is convergent,
-\[\int_a^{\infty}x^p(\ln x)^q\dd{x}\]
-is convergent.
-\[\lim_{x\to\infty}\frac{(\ln x)^q}{x^{\varepsilon}}=\lim_{u\to\infty}\frac{u^q}{e^{\varepsilon u}}=\infty,\quad\forall\varepsilon<0,\quad\forall q.\]
-For all $p>-1$, take $-1-p<\varepsilon<0$, $p+\varepsilon>-1$:
-\[\lim_{x\to\infty}\frac{x^p(\ln x)^q}{x^{p+\varepsilon}}=\infty.\]
-Thus, by one-sided LCT, since
-\[\int_a^{\infty}x^{p+\varepsilon}\dd{x}\]
-is divergent,
-\[\int_a^{\infty}x^p(\ln x)^q\dd{x}\]
-is divergent.
+\subsubsection{p-series}
+For any fixed $a\in\bbN$, $\sum_{n=a}^{\infty}\frac{1}{n^p}$, called p-series, converges iff $p>1$.
+\bpr
+For $p\le0$, it's obviously $\infty$. For $p>0$, $f(x)=\frac{1}{x^p}$ is monotone decreasing on $[1,\infty)$. By integral test and p-test, the statement holds.
+\epr
+\subsubsection{$\frac{1}{x^p(\ln x)^q}$ test}
+For any fixed $a>1$, $\int_a^{\infty}\frac{1}{x^p(\ln x)^q}\dd{x}$ converges iff $p>1\lor(p=1\land q>1)$.
 
-For $p=-1$:
-\[u=\ln x,\quad\dd{u}=\frac{1}{x}\dd{x}.\]
-\[\int_a^{\infty}\frac{(\ln x)^q}{x}\dd{x}=\int_{\ln a}^{\infty}u^q\dd{u},\]
-which converges iff $q<-1$.
-\end{proof}
-\subsubsection{$x^p(\ln x)^q$-test II}
-$\int_0^ax^p(\ln x)^q\dd{x},\quad a>0$ converges iff $p>-1\lor (p=-1\land q>-1)$.
+For any fixed $0<a<1$,
+$\int_0^a\frac{1}{x^p(\ln x)^q}\dd{x}$ converges iff $p<1\lor(p=1\land q<1)$.
 \begin{proof}
-\[\lim_{x\to 0^+}\frac{(\ln x)^q}{x^{\varepsilon}}=\lim_{u\to-\infty}\frac{u^q}{e^{\varepsilon u}}=0,\quad\forall\varepsilon<0,\quad\forall q.\]
-For all $p>-1$, take $-1-p<\varepsilon<0$, $p+\varepsilon>-1$:
-\[\lim_{x\to 0^+}\frac{x^p(\ln x)^q}{x^{p+\varepsilon}}=0.\]
-Thus, by one-sided LCT, since
-\[\int_0^ax^{p+\varepsilon}\dd{x}\]
-is convergent,
-\[\int_0^ax^p(\ln x)^q\dd{x}\]
-is convergent.
-\[\lim_{x\to 0^+}\frac{(\ln x)^q}{x^{\varepsilon}}=\lim_{u\to-\infty}\frac{u^q}{e^{\varepsilon u}}=\infty,\quad\forall\varepsilon>0,\quad\forall q.\]
-For all $p<-1$, take $-1-p>\varepsilon>0$, $p+\varepsilon<-1$:
-\[\lim_{x\to 0^+}\frac{x^p(\ln x)^q}{x^{p+\varepsilon}}=\infty.\]
-Thus, by one-sided LCT, since
-\[\int_0^ax^{p+\varepsilon}\dd{x}\]
-is divergent,
-\[\int_0^ax^p(\ln x)^q\dd{x}\]
-is divergent.
+For $p>1$, take a $\varepsilon$ such that $p-1>\varepsilon>0$. $\frac{1}{x^{p-\varepsilon}}\ge\frac{1}{x^p(\ln x)^q}$ for all $x\ge b$ and $\frac{1}{x^{p-\varepsilon}}\le\frac{1}{x^p(\ln x)^q}$ for all $0<x\le b$ for some $b>0$. $\int_a^{\infty}\frac{1}{x^p(\ln x)^q}\dd{x}$ converges by p-test. Thus, by comparison theorem, $\int_a^{\infty}\frac{1}{x^p(\ln x)^q}\dd{x}$ converges. $\int_0^a\frac{1}{x^p(\ln x)^q}\dd{x}$ diverges by p-test. Thus, by comparison theorem, $\int_0^a\frac{1}{x^p(\ln x)^q}\dd{x}$ diverges.
 
-For $p=-1$:
+For $p<1$, take a $\varepsilon$ such that $1-p>\varepsilon>0$. $\frac{1}{x^{p-\varepsilon}}\le\frac{1}{x^p(\ln x)^q}$ for all $x\ge b$ and $\frac{1}{x^{p-\varepsilon}}\ge\frac{1}{x^p(\ln x)^q}$ for all $0<x\le b$ for some $b>0$. $\int_a^{\infty}\frac{1}{x^p(\ln x)^q}\dd{x}$ diverges by p-test. Thus, by comparison theorem, $\int_a^{\infty}\frac{1}{x^p(\ln x)^q}\dd{x}$ diverges. $\int_0^a\frac{1}{x^p(\ln x)^q}\dd{x}$ converges by p-test. Thus, by comparison theorem, $\int_0^a\frac{1}{x^p(\ln x)^q}\dd{x}$ converges.
+
+For $p=1$,
 \[u=\ln x,\quad\dd{u}=\frac{1}{x}\dd{x}.\]
-\[\int_0^a\frac{(\ln x)^q}{x}\dd{x}=\int_0^au^q\dd{u},\]
-which converges iff $q>-1$.
+\[\int_a^{\infty}\frac{1}{x(\ln x)^q}\dd{x}=\int_{\ln a}^{\infty}\frac{1}{u^q}\dd{u},\]
+which converges iff $q>1$ by p-test;
+\[\int_0^a\frac{1}{x(\ln x)^q}\dd{x}=\int_0^{\ln a}\frac{1}{u^q}\dd{u},\]
+which converges iff $q<1$ by p-test.
 \end{proof}
+\subsubsection{$\frac{1}{x^p(\ln x)^q}$ series}
+For any fixed $a\in\bbN$, $\sum_{n=a}^{\infty}\frac{1}{n^p(\ln n)^q}$ converges iff $p>1\lor(p=1\land q>1)$.
+\bpr
+For $p\le0$, it's obviously $\infty$. For $p>0$, $f(x)=\frac{1}{x^p(\ln x)^q}$ is monotone decreasing on $[b,\infty)$ for some $b>1$. By integral test and $\frac{1}{x^p(\ln x)^q}$ test, the statement holds.
+\epr
+\subsection{Improper integral theorems}
 \sssc{Convergence of improper integral of monotone increasing/decreasing integrand implies non-positive/non-negative integrand}
 If function $f\colon[a,\infty)\to\bbR$ for some $a\in\bbR$ is monotone increasing and such that $\int_a^{\infty}f(x)\dd{x}$ converges, then $f(x)$ is non-positive.
 \bpr
