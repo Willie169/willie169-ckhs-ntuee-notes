@@ -5,27 +5,25 @@ $\sum_{n=1}^{\infty}\frac{1}{n^p}$ converges iff $p>1$.
 \bpr
 By integral test and p-test I for improper integral, it holds.
 \epr
-\subsubsection{Integral test}
-Suppose $f(x)\colon [1,\infty)$ is bounded and non-decreasing, and $\lim_{x\to\infty}f(x)=0$. Then, $\int_1^{\infty}f(x)\dd{x}$ is convergent iff $\sum_{n=1}^{\infty}f(n)$ is convergent, and for any $N\in\bbN$,
-\[\int_1^Nf(x)\dd{x}\geq\sum_{n=1}^Nf(n)\geq\int_1^{N+1}f(x)\dd{x},\]
-\[\int_N^{\infty}f(x)\dd{x}\leq\sum_{n=N+1}^{\infty}f(n)\leq\int_{N+1}^{\infty}f(x)\dd{x},\]
-where the latter is called remainder estimate of integral test.
+\subsubsection{Integral test (for convergence) or Maclaurin–Cauchy test}
+Suppose $f(x)\colon[a,\infty)\to\bbR$ for some $a\in\bbN$ is monotone and $\lim_{x\to\infty}f(x)=0$. Then $\int_a^{\infty}f(x)\dd{x}$ is convergent iff $\sum_{k=a}^{\infty}f(k)$ is convergent. And if $\int_a^{\infty}f(x)\dd{x}$ is convergent and $f(x)$ is monotone decreasing, for any $n\in\bbN_{\ge a}$,
+\[\int_n^{\infty}f(x)\dd{x}\le\sum_{k=n}^{\infty}f(k)\le f(n)+\int_n^{\infty}f(x)\dd{x};\]
+if $\int_a^{\infty}f(x)\dd{x}$ is convergent and $f(x)$ is monotone increasing, for any $n\in\bbN_{\ge a}$,
+\[\int_n^{\infty}f(x)\dd{x}\ge\sum_{k=n}^{\infty}f(k)\ge f(n)+\int_n^{\infty}f(x)\dd{x},\]
+called remainder estimate for integral test.
 \bpr
-Suppose $f$ is non-increasing. It has at most countably many discontinuities.
-\[0\geq f(1)\geq\int_1^2\dd{x},\]
-and for any $n\geq 2$,
-\[\int_{n-1}^nf(x)\dd{x}\geq f(n)\geq\int_n^{n+1}\dd{x}.\]
-Summing over $n\in\bbN$, we obtain, for any $N\in\bbN$,
-\[\int_1^Nf(x)\dd{x}\geq\sum_{n=1}^Nf(n)\geq\int_1^{N+1}f(x)\dd{x}.\]
-Take limit $\lim_{N\to\infy}$, we have
-\[\int_1^{\infty}f(x)\dd{x}\geq\sum_{n=1}^{\infty}f(n)\geq\int_1^{\infty}f(x)\dd{x},\]
-that is,
-\[\int_1^{\infty}f(x)\dd{x}=\sum_{n=1}^{\infty}f(n).\]
+Consider the case where $f(x)$ is monotone increasing. The case where $f(x)$ is monotone decreasing can be proven similarly.
+
+First consider the case where $\int_a^{\infty}f(x)\dd{x}$ is convergent. This implies that $f(x)$ is non-positive. Thus, for any fixed $n\in\bbN_{\ge a},
+\[\int_n^{n+1}f(x)\dd{x}\ge f(n),\]
+and for any $k\geq n+1$,
+\[\int_k^{k+1}f(x)\dd{x}\ge f(k)\ge\int_{k-1}^kf(x)\dd{x}.\]
+For any $N\in\bbN_{\ge n}$, summing over all $k\in\bbN_{\ge n}$, we obtain, 
+\[\int_n^{N+1}f(x)\dd{x}\ge\sum_{k=n}^Nf(k)\ge f(n)+\int_n^Nf(x)\dd{x}.\]
+Take limit $\lim_{N\to\infty}$, we obtain
+\[\int_n^{\infty}f(x)\dd{x}\ge\sum_{k=n}^{\infty}f(n)\ge f(n)+\int_n^{\infty}f(x)\dd{x}.\]
+Second, consider the case where $\int_a^{\infty}f(x)\dd{x}$ is divergent. Since $f(x)$ is monotone. Either $\int_a^{\infty}f(x)\dd{x}=-\infty$ or $\int_a^{\infty}f(x)\dd{x}=\infty$. For the former, the supremum of $f(x)$ is negative, and $\sum_{k=a}^{\infty}f(k)=-\infty$. For the latter, there exists $x_0>a$ such that $f(x)>0$ for all $x\ge x_0$, and thus $\sum_{k=a}^{\infty}f(k)=\infty$.
 \epr
-Suppose $f(x)\colon [1,\infty)$ is bounded and non-increasing, and $\lim_{x\to\infty}f(x)=0$. Then, $\int_1^{\infty}f(x)\dd{x}$ is convergent iff $\sum_{n=1}^{\infty}f(n)$ is convergent, and for any $N\in\bbN$,
-\[\int_1^Nf(x)\dd{x}\leq\sum_{n=1}^Nf(n)\leq\int_1^{N+1}f(x)\dd{x},\]
-\[\int_N^{\infty}f(x)\dd{x}\geq\sum_{n=N+1}^{\infty}f(n)\geq\int_{N+1}^{\infty}f(x)\dd{x},\]
-where the latter is called remainder estimate of integral test.
 \subsubsection{Alternating series test or Leibniz's test}
 If a series $\sum_{n=1}^{\infty}(-1)^{n-1}b_n$ satisfies that
 \[b_n\geq b_{n+1}\geq 0,\quad n\in\bbN,\]
@@ -277,10 +275,20 @@ For $p=-1$:
 \[\int_0^a\frac{(\ln x)^q}{x}\dd{x}=\int_0^au^q\dd{u},\]
 which converges iff $q>-1$.
 \end{proof}
-\subsubsection{Convergent improper integral of nonnegative and non-increasing integrand implies limit of product of integrand and independent variable converges to 0}
-If function $f\colon[a,\infty)\to\bbR$ is nonnegative and non-increasing on $[a,\infty)$ and $\int_a^{\infty}f(x)\dd{x}$ converges, then $\lim_{x\to\infty}xf(x)=0$.
+\sssc{Convergence of improper integral of monotone increasing/decreasing integrand implies non-positive/non-negative integrand}
+If function $f\colon[a,\infty)\to\bbR$ for some $a\in\bbR$ is monotone increasing and such that $\int_a^{\infty}f(x)\dd{x}$ converges, then $f(x)$ is non-positive.
+\bpr
+Use proof by contradiction. Suppose there exists $x_0>a$ such that $f(x_0)>0$. Then $f(x)>0$ for all $x\ge x_0$ and
+\[\int_{x_0}^{\infty}f(x)\dd{x}=\infty.\]
+Since $f(x)$ is monotone on $[a,x_0]$, it's BV and bounded on it, thus $\int_a^{x_0}f(x)\dd{x}\in\bbR$.
+\epr
+If function $f\colon[a,\infty)\to\bbR$ is monotone decreasing and such that $\int_a^{\infty}f(x)\dd{x}$ converges, then $f(x)$ is non-negative.
+\subsubsection{Convergence of improper integral of monotone integrand implies limit of product of integrand and independent variable converges to 0}
+If function $f\colon[a,\infty)\to\bbR$ for some $a\in\bbR$ is motone and $\int_a^{\infty}f(x)\dd{x}$ converges, then $\lim_{x\to\infty}xf(x)=0$.
 \begin{proof}
-Since $\int_a^{\infty}f(x)\dd{x}$ and $f(x)$ is nonnegative, $\forall\varepsilon>0$, there exists $M>a$ such that $\forall A>M$:
+$f(x)$ is either non-negative and non-increasing or non-positive and non-decreasing. Consider the former case.
+
+Since $\int_a^{\infty}f(x)\dd{x}$ and $f(x)$ is non-negative, $\forall\varepsilon>0$, there exists $M>a$ such that $\forall A>M$:
 \[0\leq\int_A^{\infty}f(x)\dd{x}<\varepsilon.\]
 Thus for $t>2M$,
 \[0\leq\int_{t/2}^tf(x)\dd{x}=\int_{t/2}^{\infty}f(x)\dd{x}-\int_t^{\infty}f(x)\dd{x}<2\varepsilon.\]
