@@ -274,3 +274,55 @@ If function $f\colon[a,b)\to\bbR$ with $b\in(a,\infty]$ is of bounded variation 
 \begin{proof}
 PLACEHOLDER
 \end{proof}
+\ssc{Limit of function between normed spaces theorem}
+\sssc{Different paths criterion for nonexistence of a limit}
+Let $V,W$ be two normed spaces. Let $I$ be an open subset of $V$ containing the point $a$. Let $f$ be a function with codomain $W$ defined on $I$, except possibly at $a$ itself. Let $C(t),D(t)$ be two paths in $I\cup\{a\}$ over $[0,\tau]$ for some positive real number $\tau$ such that $C(0)=D(0)=a$. If
+\[\lim_{t\to 0}f(C(t))\neq\lim_{t\to 0}f(D(t))\]
+or either $\lim_{t\to 0}f(C(t))$ or $\lim_{t\to 0}f(D(t))$ doesn't exist, then
+\[\lim_{x\to a}f(x)\]
+doesn't exist.
+\sssc{Polar coordinate method}
+In $\bbR^2$, for any normed vector-valued function $f(x,y)$, if there exists a constant $L$ in the codomain of $f$ such that
+\[\lim_{r\to 0}f(r\cos\theta,r\sin\theta)=L\]
+then
+\[\lim_{(x,y)\to(0,0)}f(x,y)=L.\]
+\sssc{Cylindrical coordinate method}
+In $\bbR^3$, for any normed vector-valued function $f(x,y,z)$, if there exists a constant $L$ in the codomain of $f$ such that
+\[\lim_{(\rho,z)\to(0,0)}f(\rho\cos\varphi,\rho\sin\varphi,z)=L\]
+then
+\[\lim_{(x,y,z)\to(0,0,0)}f(x,y,z)=L.\]
+\sssc{Spherical coordinate method}
+In $\bbR^3$, for any normed vector-valued function $f(x,y,z)$, if there exists a constant $L$ in the codomain of $f$ such that
+\[\lim_{r\to 0}f(r\sin\theta\cos\phi,r\sin\theta\sin\phi,r\cos\theta)=L\]
+then
+\[\lim_{(x,y,z)\to(0,0,0)}f(x,y,z)=L.\]
+\sssc{Generalized polar coodinate method}
+Suppose there is a coordinate of $n$ real number components that can express each point in $\bbR^n$ uniquely, for any fixed point $\mb{a}=(a_1,a_2,\ldots,a_n)\in\bbR^n$, if the coordinate is such that, for any point $\mb{x}=(x_1,x_2,\ldots,x_n)$ in a neighborhood of $\mb{a}$, for any real numbers $y_1,y_2,\ldots,y_m$ with $m\leq n$ such that $\mb{y}=(x_1+y_1,x_2+y_2,\ldots,x_m+y_m,x_{m+1},x_{m+2},\ldots,x_n)$ is a point in $\bbR^n$,
+\[\norm{\mb{x}-\mb{a}}=\norm{\mb{y}-\mb{a}},\]
+then for any normed vector-valued function $f$ defined on some neighborhood of $\mb{a}$, if there exists a constant $L$ in the codomain of $f$ such that
+\[\lim_{(x_{m+1},x_{m+2},\ldots,x_n)\to(a_{m+1},a_{m+2},\ldots,a_n}f(\mb{x})=L\]
+then,
+\[\lim_{\mb{x}\to\mb{a}}f(\mb{x})=L.\]
+\sssc{Homogenous decomposition}
+For a neighborhood $D$ of a point $\mb{a}\in\bbR^n$ and functions $P,Q\colon D\subseteq\bbR^n\to\bbR$ that are analytic at some neighborhood of $\mb{a}$,
+\b
+\item If $Q(\mb{a})\neq 0$,
+\[\lim_{\mb{x}\to\mb{a}}\frac{P(\mb{x})}{Q(\mb{x})}=\frac{P(\mb{a})}{Q(\mb{a})}.\]
+\item If $Q(\mb{a})=0$ and $P(\mb{a})\neq 0$,
+the limit doesn't exists.
+\item If $P(\mb{a})=Q(\mb{a})=0$, use homogenous decomposition. Let
+\[P_i(\mb{x})=\frac{P^{(i)}(\mb{a})}{i!}\mb{x}^i,\]
+\[Q_i(\mb{x})=\frac{Q^{(i)}(\mb{a})}{i!}\mb{x}^i,\]
+which are homogeneous. Suppose that $k$ is the smallest integer such that $P_k$ is nonzero, and $m$ is the smallest integer such that $Q_m$ is nonzero.
+\[\ba
+\lim_{\mb{x}\to\mb{a}}\frac{P(\mb{x})}{Q(\mb{x})}&=\lim_{\mb{x}\to\mb{a}}\frac{P_k(\mb{x}-\mb{a})}{Q_m(\mb{x}-\mb{a})}\\
+&=\lim_{\mb{x}\to\mb{0}}\norm{\mb{x}}^{k-m}\frac{P_k\qty(\hat{\mb{x}})}{Q_m\qty(\hat{\mb{x}})}
+\ea\]
+\bit
+\item If $k-m>0$, the limit is $0$.
+\item If $k-m<0$, the limit doesn't exists.
+\item If $k=m$, if
+\[\frac{P_k\qty(\hat{\mb{x}})}{Q_m\qty(\hat{\mb{x}})}\]
+is a constant $L\in\bbR^m$, then the limit is $L$; otherwise the limit doesn't exist.
+\eit
+\eit
