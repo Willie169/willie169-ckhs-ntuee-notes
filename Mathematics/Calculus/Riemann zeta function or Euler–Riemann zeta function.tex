@@ -12,32 +12,24 @@ S_{2M}=H_{2M}-2\sum_{n=1}^M\frac{1}{2n}\\
 &=H_{2M}-H_M
 \ea\]
 \epr
-\subsubsection{Euler–Mascheroni constant or Euler's constant}
-\[\begin{aligned}
-\lim_{n\to\infty }\left(\sum_{k=1}^n\frac{1}{k}\right)-\ln(n)\\
-&=\int_1^\infty\left(\frac{1}{\lfloor x\rfloor}-\frac{1}{x}\right)\dd{x}
-\end{aligned}\]
-is convergent, and its limit is called Euler–Mascheroni constant or Euler's constant $\gamma$.
+\subsubsection{Euler's constant or Euler–Mascheroni constant}
+Let
+\[H_n=\sum_{n=1}^{\infty}\frac{1}{n}\]
+\[t_n=H_n-\ln n\]
+\[\lim_{n\to\infty}t_n=\int_1^{\infty}\frac{1}{\floor{x}}-\frac{1}{x}\dd{x}=\gamma\in\bbR,\]
+which is called Euler's constant or Euler–Mascheroni constant and approximately 0.57721.
 \bpr
-Suppose sequence $\langle a_n=\left(\sum_{k=1}^n\frac{1}{k}\right)-\ln(n)\rangle_{n=1}^{\infty}$.
-Lemma:
-\[\ln(1+x)\ge \frac{x}{1+x}, \quad x>-1.\]
-\[\ln(1+\frac{1}{n})\ge\frac{1}{n\qty(1+\frac{1}{n})}=\frac{1}{n+1}\]
-$a_n$ is non-increasing:
-\[a_{n+1}-a_n=\frac{1}{n+1}-\ln(1+\frac{1}{n})\le 0\]
-\[\int_k^{k+1}\frac{\dd{x}}{x}\leq\frac{1}{k},\quad k\geq 1\]
-\[\ln(n)=\int_1^n\frac{\dd{x}}{x}\leq\sum_{k=1}^n\frac{1}{k},\quad k\geq 1\]
-$a_n$ is bounded-below:
-\[\sum_{k=1}^n\frac{1}{k}-\ln(n)\geq 0\]
-Thus, by monotone convergence theorem, $a_n$ is convergent.
-
-Proof of Lemma:
-\[\ln(1+0)=\frac{0}{1+0}=0.\]
-\[\dv{}{x}\ln(1+x)=\frac{1}{1+x}\]
-\[\dv{}{x}\qty(\frac{x}{1+x})=\frac{1+x-x}{(1+x)^2}=\frac{1}{(1+x)^2}\]
-\[0>x>-1\implies 1>1+x>0\implies 1+x>(1+x)^2\implies\frac{1}{(1+x)^2}>\frac{1}{1+x}\implies \ln(1+x)>\frac{x}{1+x}\]
-\[x>0\implies 1+x>1\implies 1+x<(1+x)^2\implies\frac{1}{(1+x)^2}<\frac{1}{1+x}\implies \ln(1+x)>\frac{x}{1+x}\]
+\[t_n=\sum_{k=1}^n\frac{1}{k}-\sum_{k=1}^{n-1}\ln(k+1)-\ln k=\sum_{k=1}^{n-1}\int_k^{k+1}\frac{1}{k}-\frac{1}{x}\dd{x}+\frac{1}{n}=\int_1^n\frac{1}{\floor{x}}-\frac{1}{x}\dd{x}+\frac{1}{n}\]
+\[\lim_{n\to\infty}\frac{1}{n}=0\]
+\[\frac{1}{\floor{x}}-\frac{1}{x}\ge0\]
+\[\frac{1}{n}>0\]
+\[t_n>0\]
+\[t_n-t_{n+1}=\ln(n+1)-\ln n-\frac{1}{n+1}=\int_n^{n+1}\frac{1}{x}-\frac{1}{n+1}\dd{x}\]
+Since $\frac{1}{x}\ge\frac{1}{n+1}$ for $x\in[n,n+1]$,
+\[\int_n^{n+1}\frac{1}{x}-\frac{1}{n+1}\dd{x}>0\]
+$t_n$ is bounded below by 0, and $t_n$ is decreasing, hence $t_n$ is convergent.
 \epr
+It's unknown whether $\gamma$ is irrational.
 \subsubsection{Alternating harmonic series convergence}
 \[\sum_{n=1}^\infty\frac{(-1)^{n+1}}{n}=\ln 2.\]
 \bpr
