@@ -1114,10 +1114,25 @@ A non-causal continuous-time linear time-invariant (LTI) system of a variable $t
 \[y(t)=(x*h)(t)\coloneq\int_{-\infty}^{\infty} x(\tau)h(t-\tau)\dd{\tau}.\]
 Applying bilateral Laplace transform \[Y(s)=X(s)\cdot H(s),\]
 where $H(s)$ is called transfer function, and its absolute value is called gain, or attenuation if $<1$.
+\sssc{Transient response}
+A response component that converges to an equilibrium as $t$ gets large.
 \sssc{Time constant}
 For a response function in the form $y(t)=y_0e^{-\alpha t}$ with constants $y_0\neq 0$ and $\alpha>0$, the time constant $\tau$ is defined as $\frac{1}{\alpha}$, that is, $y(\tau)=y_0e^{-1}$.
 
 For a response function in the form $y(t)=y_0\qty(1-e^{-\alpha t})$ with constants $y_0\neq 0$ and $\alpha>0$, the time constant $\tau$ is defined as $\frac{1}{\alpha}$, that is, $y(\tau)=y_0\qty(1-e^{-1})$.
+\sssc{Frequency response}
+When the input is $x(t)=e^{i\omega t}$, $X(s)=\frac{1}{s-i\omega}$, the response is
+\[Y(s)=\frac{H(s)}{s-i\omega}.\]
+We assume the system is stable, that is, all poles $a_1,\ldots,a_n$ of $Y(s)$ except $s=i\omega$ are in the left half-plane.
+\[y(t)=\frac{1}{2\pi i}\lim_{T\to\infty}\int_{-iT}^{iT}\frac{H(s)e^{st}}{s-i\omega}\dd{s}\]
+Since $H(s)$ is meromorphic, by residue theorem,
+\[y(t)=\Res(Y,i\omega)+\sum_{k=1}^n\Res(Y,a_k)\]
+\[\Res(Y,i\omega)=\lim_{s\to i\omega}(s-i\omega)\frac{H(s)e^{st}}{s-i\omega}=H(i\omega)e^{i\omega t}\]
+The other residues contribute multiple of $e^{-a_kt}$, which vanish as $t\to\infty$.
+
+Thus, the steady response is
+\[H(i\omega)e^{i\omega t}\]
+$H(i\omega)$ is called frequency response, $\abs{H(i\omega)}$ is called magnitude response, and $\Arg(H(i\omega))$ is called phase (angle) response.
 \sssc{Filter}
 A continuous-time linear time-invariant system is a low-pass (低通) filter (LPF) iff $H(i\omega)$ where $i=\sqrt{-1}$ as a function of a real variable $\omega$ is such that
 \[\lim_{\omega\to 0}\abs{H(i\omega)}=1\]

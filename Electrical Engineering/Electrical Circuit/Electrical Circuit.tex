@@ -236,6 +236,9 @@ A short circuit is a path with zero impedance. Short circuit current is denoted 
 A port is a pair of terminals through which current can enter or leave a network and satisfies the port condition: the current flowing into one pole from outside is equal to the current flowing out of the other pole to outside.
 
 An $n$-port network is a network with $2n$ poles forming $n$ ports.
+\sssc{Quality factor (品質因數)}
+The quality factor $Q_0$ or $Q$ of a network is $2\pi$ multiplied by the maximum energy stored in a period, $E_m$, divided by the total energy lost in the period, $E_l$:
+\[Q_0=\frac{2\pi E_m}{E_l}.\]
 \sssc{Wire or lead}
 Circuit elements in a network are connected with wires (aka leads), which are assumed to have zero impedance.
 \begin{center}
@@ -329,11 +332,11 @@ A one-port linear element is a passive element with resistance $R$, capacitance 
 A circuit whose outputs as a function of the inputs is time-invariant.
 \sssc{Response of linear time-invariant circuit}
 \bit
-\item (Total or complete) response: the reponse as-is.
-\item Natural, homogeneous, unforced, or zero input response (ZIR): the response with all independent sources in the linear circuit turned off and initial states preserved, called natural, homogeneous, unforced, or zero input response (ZIR). The ZIR is the solution of an IVP of a linear homogenous ODE, called governing equation, with initial states given by the initial states of inductors and capacitors.
-\item Forced, driven, particular, or zero state responses (ZSR): the responses with only one of the independent sources in the linear circuit, called forcing function, is turned on and with zero initial state. Each ZSR is the response of a causal continuous-time linear time-invariant (LTI) systems with its forcing function as forcing function and the complementary equation of its governing equation being the governing equation of ZIR.
+\item (Total or complete) response: the reponse.
+\item Natural, homogeneous, unforced, or zero input response (ZIR): The response with all independent sources in the linear circuit turned off and initial states preserved. The ZIR is the solution of an IVP of a linear homogenous ODE, called governing equation, with initial states given by the initial states of inductors and capacitors.
+\item Forced, driven, particular, or zero state responses (ZSR): A response with only one of the independent sources in the linear circuit, called forcing function, is turned on, and with zero initial state. Each ZSR is the response of a causal continuous-time linear time-invariant (LTI) systems with its forcing function as forcing function and the complementary equation of its governing equation being the governing equation of ZIR.
 \item Superposition principle: The sum of ZIR and all ZSRs is the total response.
-\item Transient response: a response component that converges to an equilibrium.
+\item Transient response: A response component that converges to an equilibrium as $t$ gets large.
 \eit
 \sssc{Time constant, rising time, and falling time}
 For a response function in the form $y(t)=y_0e^{-\alpha t}$ with constants $y_0\neq 0$ and $\alpha>0$, the time constant $\tau$ is defined as $\frac{1}{\alpha}$, that is, $y(\tau)=y_0e^{-1}$. For the smallest positive integer (or rational number to a number of decimals) $k$ such that $\frac{y(k\tau)}{y_0}<0.01$ (or other designated number), we typically call that $y(t)$ decays to $0$ about $k$ times time constants. The falling time or pulse decay time is defined as the time $y(t)$ changes from $0.9y_0$ to $0.1y_0$, which is approximately $22\tau$.
@@ -462,6 +465,49 @@ then
 \[v(t)=L\omega i_m\cos(\omega t+\theta+\frac{\pi}{2}),\]
 \[\mb{V}=L\omega i_me^{j(\theta+\frac{\pi}{2})}.\]
 The current lags voltage by $\frac{\pi}{2}$, and the higher angular frequency $\omega$ is, the higher $\frac{v_m}{i_m}=L\omega$ is.
+\sssc{Second-order circuit}
+A natural response $f(t)$ of a second-order circuit has the form
+\[f''(t)+2\omega_0\zeta f'(t)+\omega_0^{\pht{0}2}f(t)=0,\]
+and its characteristic equation is
+\[r^2+2\omega_0\zeta r+\omega_0^{\pht{0}2}=0,\]
+where $\alpha=\omega_0\zeta$ is called neper frequency (奈培頻率) or attenuation (衰減量) and $\zeta$ is called damping factor/ratio (阻尼係數/比).
+
+The characteristic roots $r$ are
+\[r_{1,2}=-\omega_0\qty(\zeta\pm\sqrt{\zeta^2-1}).\]
+Natural response (i.e. $x(t)=0$) is
+\bit
+\item $\zeta>1$ Overdamped response:
+\[f(t)=Ae^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+Be^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
+\item $\zeta=1$ Critically damped response:
+\[f(t)=\qty(A+Bt)e^{-\omega_0t}\]
+\item $0<\zeta<1$ Underdamped response:
+\[f(t)=e^{-\omega_0\zeta t}\qty(A\cos(\omega_0\sqrt{1-\zeta^2}t)-B\sin(\omega_0\sqrt{1-\zeta^2}t))\]
+\eit
+The damped oscillation of the underdamped response to a constant source has damped frequency $\omega_d$:
+\[\omega_d=\omega_0\sqrt{1-\zeta^2}\]
+and the response is
+\[f(t)=Ae^{-\alpha t}\cos(\omega_dt+\varphi).\]
+\sssc{High-Q circuit}
+For circuit with large $Q_0$, i.e., small $\zeta$, called high-Q circuit, which we usually take $Q_0>5$, i.e., $\zeta<0.1$, we have $\zeta\approx0$, $\omega_0\approx\omega_d$. Suppose
+\[p(t)=Ae^{-2\alpha t}\cos^2(\omega_dt+\theta)\]
+
+
+
+
+
+
+
+\[Q_0=\frac{2\pi}{1-e^{-\frac{4\pi\alpha}{\omega_d}}}\]
+
+
+\[e^{-\frac{4\pi\alpha}{\omega_d}}\approx1-\frac{4\pi\alpha}{\omega_d}\]
+\[Q_0\approx\frac{\omega_d}{2\alpha}\approx\frac{\omega_0}{2\alpha}\approx\frac{1}{2\zeta}\]
+
+
+
+
+
+
 \ssc{Steady-state sinusoidal AC power analysis}
 \sssc{Phasor in RMS}
 Suppose
@@ -537,16 +583,10 @@ Similarly, a (balanced) wye load has a neutral and three branches with identical
 
 A three-phase circuit with wye generator and loads with neutrals of all elements form a circuit, terminals of each branch of all elements form identical circuit, is called balanced (wye) (three-phase) circuit, and the circuit obtain by applying Y-Δ transformation to all wye generator and loads is called balanced (delta) (three-phase) circuit.
 \ssc{Frequency response}
-Frequency response is the behaviour of a circuit when the input is sinusoidal AC of different frequency.
 \sssc{Resonance}
 A network is called in resonance or resonant if its voltage and current are in phase. The angular frequency and frequency at which are called resonance/resonant/natural and denoted $\omega_0$ and $f_0$.
 
 In series resonance, the phenomenon that amplitude of voltage of element is larger than that of source is called resonant voltage rise. In parallel resonance, the phenomenon that amplitude of voltage of element is larger than that of source is called resonant current rise.
-\sssc{Quality factor (品質因數)}
-The quality factor $Q_0$ or $Q$ of a network is $2\pi$ multiplied by the maximum energy stored $E_m$ divided by the total energy lost per period $E_l$:
-\[Q_0=\frac{2\pi E_m}{E_l}.\]
-\sssc{Filter}
-A filter circuit applies a frequency-dependent gain/attenuation $\abs{H(j\omega)}$ to signals.
 \sssc{dB or decibels}
 For a filter circuit voltage or current response with a transfer function $H$, its magnitude dB at an angular frequency $\omega$ is
 \[20\log_{10}\qty(\frac{\abs{H(j\omega)}}{\max_{\omega}\abs{H(j\omega)}}).\]
@@ -567,47 +607,23 @@ A Bode plot has two graphs,
 \item the magnitude response: magnitude dB (dB)-$\log_{10}\omega$ (decade) (or $\log_8\omega$ (octave)), and
 \item the phase response: $\Arg(H(j\omega))$ ($^{\circ}$)-$\log_{10}\omega$ (decade) (or $\log_8\omega$ (octave)).
 \eit
-\sssc{Second-order circuit}
-A response $f(t)$ of a second-order circuit to an input $u_{in}$ has the form
-\[f''(t)+2\omega_0\zeta f'(t)+\omega_0^{\pht{0}2}f(t)=ku_{in},\]
-and its characteristic equation is
-\[r^2+2\omega_0\zeta r+\omega_0^{\pht{0}2}=0,\]
-where $\alpha=\omega_0\zeta$ is called neper frequency (奈培頻率) or attenuation (衰減量) and $\zeta$ is called damping factor/ratio (阻尼係數/比).
-
-The characteristic roots $r$ are
-\[r_{1,2}=-\omega_0\qty(\zeta\pm\sqrt{\zeta^2-1}).\]
-Let $U(s)=\calL\{u_{in}\}$.
-\[s^2F(s)+2\omega_0\zeta sF(s)+\omega_0^{\pht{0}2}F(s)=kU(s).\]
-\[F(s)=\frac{sf(0)+(2\omega_0\zeta f(0)+f'(0))+kU(s)}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}.\]
-Natural response (i.e. $u_{in}=0$) is
-\bit
-\item $\zeta>1$ Overdamped response:
-\[f(t)=Ae^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+Be^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
-\item $\zeta=1$ Critically damped response:
-\[f(t)=\qty(A+Bt)e^{-\omega_0t}\]
-\item $0<\zeta<1$ Underdamped response:
-\[f(t)=e^{-\omega_0\zeta t}\qty(A\cos(\omega_0\sqrt{1-\zeta^2}t)-B\sin(\omega_0\sqrt{1-\zeta^2}t))\]
-\eit
-The damped oscillation of the underdamped response to a constant source has damped frequency $\omega_d$:
-\[\omega_d=\omega_0\sqrt{1-\zeta^2}\]
-and the response is
-\[f(t)=Ae^{(-\alpha+j\omega_d)t+\varphi}.\]
-
-
-
-
-
-
+\[s^2F(s)+2\omega_0\zeta sF(s)+\omega_0^{\pht{0}2}F(s)=skX(s)\]
+\[H(s)=\frac{F(s)}{X(s)}=\frac{ks}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}.\]
+The poles on the complex plane are $r_{1,2}=-\alpha\pm j\omega_d$.
+The frequency response is
+\[H(j\omega)=\frac{jk\omega}{\omega_0^{\pht{0}2}-\omega^2+j2\zeta\omega_0\omega}.\]
+At natural frequency,
+\[H(j\omega_0)=\frac{k}{2\zeta\omega_0}\]
+Let
+\[M=\frac{k}{2\zeta\omega_0}\]
+\[F(t)=Me^{-i\omega_0t\]
 
 
 
 PLACEHOLDER
 
 
-The poles on the complex plane are $r_{1,2}=-\alpha\pm j\omega_d$.
-\[E_m=Ae^{-2\alpha t_n+2\varphi}\]
-\[E_l=\qty(1-e^{-\frac{4\pi\alpha}{\omega_d}})E_m\]
-\[Q_0=\frac{2\pi}{1-e^{-\frac{4\pi\alpha}{\omega_d}}}\]
+
 
 
 
