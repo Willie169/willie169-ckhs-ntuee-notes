@@ -237,8 +237,8 @@ A port is a pair of terminals through which current can enter or leave a network
 
 An $n$-port network is a network with $2n$ poles forming $n$ ports.
 \sssc{Quality factor (品質因數)}
-The quality factor $Q_0$ or $Q$ of a network is $2\pi$ multiplied by the maximum energy stored in a period, $E_m$, divided by the total energy lost in the period, $E_l$:
-\[Q_0=\frac{2\pi E_m}{E_l}.\]
+The quality factor $Q$ (or $Q_0$) of a network is $2\pi$ multiplied by the maximum energy stored in a period, $E_m$, divided by the total energy lost in the period, $E_l$, during natural response, that is,
+\[Q=\frac{2\pi E_m}{E_l}.\]
 \sssc{Wire or lead}
 Circuit elements in a network are connected with wires (aka leads), which are assumed to have zero impedance.
 \begin{center}
@@ -476,11 +476,11 @@ The characteristic roots $r$ are
 \[r_{1,2}=-\omega_0\qty(\zeta\pm\sqrt{\zeta^2-1}).\]
 Natural response (i.e. $x(t)=0$) is
 \bit
-\item $\zeta>1$ Overdamped response:
+\item $\zeta>1$ Overdamped (過阻尼) response:
 \[f(t)=Ae^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+Be^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
-\item $\zeta=1$ Critically damped response:
+\item $\zeta=1$ Critically damped (臨界阻尼) response:
 \[f(t)=\qty(A+Bt)e^{-\omega_0t}\]
-\item $0<\zeta<1$ Underdamped response:
+\item $0<\zeta<1$ Underdamped (欠/輕/次阻尼) response:
 \[f(t)=e^{-\omega_0\zeta t}\qty(A\cos(\omega_0\sqrt{1-\zeta^2}t)-B\sin(\omega_0\sqrt{1-\zeta^2}t))\]
 \eit
 The damped oscillation of the underdamped response to a constant source has damped frequency $\omega_d$:
@@ -491,10 +491,10 @@ The energy stored must be in the form
 \[E(t)=Ke^{-2\alpha t}\cos^2(\omega_dt+\theta)\]
 \[E_m=Ke^{-2\alpha t_n}\]
 \[E_l=Ke^{-2\alpha t_n}-Ke^{-2\alpha (t_n+\frac{2\pi}{\omega_d}}=E_m\qty(1-e^{-\frac{4\pi\alpha}{\omega_d})=E_m\qty(1-e^{-\frac{4\pi\zeta}{\sqrt{1-\zeta^2}})\]
-\[Q_0=\frac{2\pi E_m}{E_l}=\frac{2\pi}{1-e^{-\frac{4\pi\zeta}{\sqrt{1-\zeta^2}}}\]
+\[Q=\frac{2\pi E_m}{E_l}=\frac{2\pi}{1-e^{-\frac{4\pi\zeta}{\sqrt{1-\zeta^2}}}\]
 \sssc{High-Q circuit}
-For circuit with large $Q_0$, i.e., small $\zeta$, called high-Q circuit, which we usually take $Q_0>5$, i.e., $\zeta<0.1$, we have $\zeta\approx0$, and $1-e^{-x}\approx x$ for $x\approx 0$, thus
-\[Q_0\approx\frac{2\pi}{\frac{4\pi\zeta}{\sqrt{1-\zeta^2}}=\frac{\sqrt{1-\zeta^2}}{2\zeta}\approx\frac{1}{2\zeta}\]
+For circuit with large $Q$, i.e., small $\zeta$, called high-Q circuit, which we usually take $Q>5$, i.e., $\zeta<0.1$, we have $\zeta\approx0$, and $1-e^{-x}\approx x$ for $x\approx 0$, thus
+\[Q\approx\frac{2\pi}{\frac{4\pi\zeta}{\sqrt{1-\zeta^2}}=\frac{\sqrt{1-\zeta^2}}{2\zeta}\approx\frac{1}{2\zeta}\]
 \ssc{Steady-state sinusoidal AC power analysis}
 \sssc{Phasor in RMS}
 Suppose
@@ -570,10 +570,14 @@ Similarly, a (balanced) wye load has a neutral and three branches with identical
 
 A three-phase circuit with wye generator and loads with neutrals of all elements form a circuit, terminals of each branch of all elements form identical circuit, is called balanced (wye) (three-phase) circuit, and the circuit obtain by applying Y-Δ transformation to all wye generator and loads is called balanced (delta) (three-phase) circuit.
 \ssc{Frequency response}
+\sssc{DC gain}
+Low-pass gain is also called DC gain.
 \sssc{Resonance}
-A network is called in resonance or resonant if its voltage and current are in phase. The angular frequency and frequency at which are called resonance/resonant/natural and denoted $\omega_0$ and $f_0$.
+A network is called in resonance or resonant if its voltage and current are in phase. The angular frequency and frequency at which are called resonance/resonant frequency and denoted $\omega_r$ and $f_r$.
 
 In series resonance, the phenomenon that amplitude of voltage of element is larger than that of source is called resonant voltage rise. In parallel resonance, the phenomenon that amplitude of voltage of element is larger than that of source is called resonant current rise.
+\sssc{Natural frequency}
+The natural frequency is the magnitude of poles on $s$-plane if they are the same.
 \sssc{dB or decibels}
 For a filter circuit voltage or current response with a transfer function $H$, its magnitude dB at an angular frequency $\omega$ is
 \[20\log_{10}\qty(\frac{\abs{H(j\omega)}}{\max_{\omega}\abs{H(j\omega)}}).\]
@@ -585,7 +589,7 @@ Dividing magnitude by $\max_{\omega}\abs{H(j\omega)}=1$ is called normalizing.
 \sssc{Octave (oct) and decade (dec)}
 In logarithmic scale, changing by 8 times is called an octave or oct, and changing by 10 times is called a decade or dec.
 \sssc{Cutoff (截止), half-power, or corner frequency}
-An angular or non-angular frequency such that the output is -3\tx{dB}, that is, $\abs{H(j\omega)}=\frac{1}{\sqrt{2}}\max_{\omega}\abs{H(j\omega)}$ or $P_{out}=\frac{1}{2}\max_{\omega}P_{out}$, is called cutoff or corner, or half-power for power response, angular frequency $\omega_c$, $\omega_{3\tx{dB}}$, $\omega_{-3\tx{dB}}$ and non-angular frequency $f_c$, $f_{3\tx{dB}}$, or $f_{-3\tx{dB}}$ respectively.
+An angular or non-angular frequency such that the output is -3\tx{dB}, that is, $\abs{H(j\omega)}=\frac{1}{\sqrt{2}}\max_{\omega}\abs{H(j\omega)}$ or $P_{out}=\frac{1}{2}\max_{\omega}P_{out}$, is called cutoff or corner, or half-power for power response, angular frequency $\omega_c$, $\omega_{3\tx{dB}}$, $\omega_{-3\tx{dB}}$ and non-angular frequency $f_c$, $f_{3\tx{dB}}$, or $f_{-3\tx{dB}}$ respectively. For prototype/canonical filter, $\max_{\omega}\abs{H(j\omega)}=1$ and $\max_{\omega}P_{out}=P_{in}$.
 \sssc{Bandwidth}
 Bandwidth is an interval of $\omega$ (or $f$) $\ge -3$dB, or the length $\calB$ of it.
 \sssc{Bode plot (波德圖)}
@@ -594,10 +598,64 @@ A Bode plot has two graphs,
 \item the magnitude response: magnitude dB (dB)-$\log_{10}\omega$ (decade) (or $\log_8\omega$ (octave)), and
 \item the phase response: $\Arg(H(j\omega))$ ($^{\circ}$)-$\log_{10}\omega$ (decade) (or $\log_8\omega$ (octave)).
 \eit
+PLACEHOLDER first-order
+\sssc{Second-order low-pass circuit}
+A second-order low-pass filter with low-pass gain $K$ has the form
+\[s^2F(s)+2\omega_0\zeta sF(s)+\omega_0^{\pht{0}2}F(s)=K\omega_0^{\pht{0}2}X(s)\]
+\[F(s)=\frac{K\omega_0^{\pht{0}2}X(s)}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}\]
+\[H(s)=\frac{F(s)}{X(s)}=\frac{K\omega_0^{\pht{0}2}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}.\]
+The poles on the complex plane are
+\[r_{1,2}=-\alpha\pm j\omega_d.\]
+The frequency response is
+\[H(j\omega)=\frac{K\omega_0^{\pht{0}2}}{\omega_0^{\pht{0}2}-\omega^2+j2\zeta\omega_0\omega}.\]
+Magnitude response is
+\[\abs{H(j\omega)}^2=\frac{K^2\omega_0^{\pht{0}4}}{(\omega_0^{\pht{0}2}-\omega^2)^2+(2\zeta\omega_0\omega)^2}.\]
+Low-pass filter with low-pass gain $K$:
+\[\lim_{\omega\to0}\abs{H(j\omega)}=K\]
+\[\lim_{\omega\to\infty}\abs{H(j\omega)}=0\]
+When $\zeta<\frac{1}{\sqrt{2}}$ resonance frequency $\omega_r$ is
+\[\omega_r=\arg_{\omega}\max_{\omega}\abs{H(j\omega)}=\omega_0\sqrt{1-2\zeta^2},\]
+and
+\[\max_{\omega}\abs{H(j\omega)}=\abs{H(j\omega_r)}=\frac{K}{2\zeta\sqrt{1-\zeta^2}}.\]
+\bpr
+\[\dv{\abs{H(j\omega)}^2}{\omega}=-\frac{K^2\omega_0^{\pht{0}4}}{\qty((\omega_0^{\pht{0}2}-\omega^2)^2+(2\zeta\omega_0\omega)^2)^2}\dv{}{\omega}((\omega_0^{\pht{0}2}-\omega^2)^2+(2\zeta\omega_0\omega)^2)\]
+\[\ba
+\dv{}{\omega}((\omega_0^{\pht{0}2}-\omega^2)^2+(2\zeta\omega_0\omega)^2)=&\dv{}{\omega}(\omega_0^{\pht{0}4}-2\omega_0^{\pht{0}2}\omega^2+\omega^4+4\zeta^2\omega_0^{\pht{0}2}\omega^2)\\
+=&-4\omega_0^{\pht{0}2}\omega+4\omega^3+8\zeta^2\omega_0^{\pht{0}2}\omega\\
+=&4\omega\qty(\omega^2-\qty(1-2\zeta^2)\omega_0^{\pht{0}2})
+\ea\]
+\[\omega=0\lor\omega_0\sqrt{1-2\zeta^2}\]
+\[\abs{H(j0)}^2=K^2\]
+\[\ba
+\abs{H(j\omega_0\sqrt{1-2\zeta^2})}^2=&\frac{K^2}{(2\zeta^2)^2+(2\zeta\sqrt{1-2\zeta^2})^2}\\
+=&\frac{K^2}{4\zeta^2-4\zeta^4}
+\ea\]
+\epr
+The cutoff frequency $\omega_{1,2}$ such that
+\[\abs{H(j\omega_{1,2})}=\frac{\abs{H(j\omega_r)}}{\sqrt{2}}\]
+are
+\[\omega_{1,2}=\sqrt{1-2\zeta^2\mp2\zeta\sqrt{1-\zeta^2}}\omega_0.\]
+where $\omega_2$ is called upper half-power frequency and $\omega_1$ is called lower half-power frequency.
+\bpr
+Let $\omega_{1,2}=a\omega_0$.
+\[\abs{H(j\omega_c)}^2=\frac{K^2}{(1-a^2)^2+(2\zeta a)^2}=\frac{K^2}{1-2a^2+a^4+4\zeta^2a^2}\]
+\[\qty(\frac{\abs{H(j\omega_r)}}{\sqrt{2}})^2=\frac{K^2}{8\zeta^2-8\zeta^4}\]
+\[a^4-2(1-2\zeta^2)a^2+1-8\zeta^2+8\zeta^4=0\]
+\[a^2=1-2\zeta^2\pm\sqrt{1-4\zeta^2+4\zeta^4-1+8\zeta^2-8\zeta^4}=1-2\zeta^2\pm2\zeta\sqrt{1-\zeta^2}\]
+\epr
+For high-Q circuit,
+\[H(j\omega)=\frac{K\omega_0^{\pht{0}2}}{\omega_0^{\pht{0}2}-\omega^2+j\frac{\omega_0}{Q}\omega},\]
+since $\sqrt{1\mp2x}\approx1-x$,
+\[\omega_{1,2}\approx(1-\zeta)\omega_0=\omega_0-\alpha\approx\omega_0\qty(1-\frac{1}{2Q}),\]
+\[\calB=\omega_2-\omega_1\approx2\alpha\approx\frac{\omega_0}{Q}\]
+
+PLACEHOLDER band-pass high-pass
+
+
 \sssc{Second-order band-pass circuit}
-\[s^2F(s)+2\omega_0\zeta sF(s)+\omega_0^{\pht{0}2}F(s)=skX(s)\]
-\[F(s)=\frac{skX(s)}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}\]
-\[H(s)=\frac{F(s)}{X(s)}=\frac{ks}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}.\]
+\[s^2F(s)+2\omega_0\zeta sF(s)+\omega_0^{\pht{0}2}F(s)=s2\zeta\omega_0X(s)\]
+\[F(s)=\frac{sK\omega_0X(s)}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}\]
+\[H(s)=\frac{F(s)}{X(s)}=\frac{sK\omega_0}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}.\]
 The normalized form is defined as
 \[\frac{s}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}\]
 The poles on the complex plane are $r_{1,2}=-\alpha\pm j\omega_d$.
@@ -620,8 +678,8 @@ Let $\omega_{1,2}=a\omega_0$.
 \epr
 \[\calB=\omega_2-\omega_1.\]
 For high-Q circuit, since $\sqrt{1\mp 2x}=1\mp x$ near 0,
-\[\omega_{1,2}\approx\omega_0\qty(1\mp\zeta)=\omega\mp\alpha=\omega_0\mp\frac{\omega_0}{2Q_0}\]
-\[\calB=2\alpha=\frac{\omega_0}{Q_0}\]
+\[\omega_{1,2}\approx\omega_0\qty(1\mp\zeta)=\omega\mp\alpha=\omega_0\mp\frac{\omega_0}{2Q}\]
+\[\calB=2\alpha=\frac{\omega_0}{Q}\]
 
 
 
@@ -1225,7 +1283,7 @@ v_C&=v_{in}-v_L\\
 &=i(0^-)\sqrt{\frac{L}{C}}\sin(\frac{1}{\sqrt{LC}}t)+\qty(v_{in}+v_C(0^-))\cos(\frac{1}{\sqrt{LC}}t)\\
 &=i(0^-)L\omega_0\sin(\omega_0t)+\qty(v_{in}+v_C(0^-))\cos(\omega_0t)
 \ea\]
-Resonance state (time domain): Maximum energy stored $E_m$, total energy lost per period $E_l$, quality factor $Q_0$.
+Resonance state (time domain): Maximum energy stored $E_m$, total energy lost per period $E_l$, quality factor $Q$.
 \[v_{in}=v_m\cos(\omega_0t+\theta)\]
 \[i_m=i(0^-)=\infty\]
 \[v_C(0^-)=0\]
@@ -1233,7 +1291,7 @@ Resonance state (time domain): Maximum energy stored $E_m$, total energy lost pe
 \[v_C=-v_L=\frac{i_m}{C\omgea_0}\sin(\omega_0t+\theta)=i_mL\omega_0\sin(\omega_0t+\theta)\]
 \[E_m=\frac{Li_m^{\pht{m}2}}{2}\]
 \[E_l=\frac{v_mi_m\pi}{\omega_0}\]
-\[Q_0=\frac{Li_m\omega_0}{v_m}=\frac{i_m}{v_m}\sqrt{\frac{L}{C}}\]
+\[Q=\frac{Li_m\omega_0}{v_m}=\frac{i_m}{v_m}\sqrt{\frac{L}{C}}\]
 Resonance state (phasor domain):
 \[\mb{V}_{in}=v_me^{j\theta}\]
 \[\mb{I}=i_me^{j\theta},\quad i_m=\infty\]
@@ -1481,7 +1539,7 @@ i_L&=i_{in}-i_C\\
 &=v(0^-)\sqrt{\frac{C}{L}}\sin(\frac{1}{\sqrt{LC}}t)-\qty(i_{in}-i_L(0^-))\cos(\frac{1}{\sqrt{LC}}t)\\
 &=v(0^-)\sqrt{\frac{C}{L}}\sin(\frac{1}{\sqrt{LC}}t)+\qty(i_{in}-i_L(0^-))\cos(\omega_0t)
 \ea\]
-Resonance state (time domain): Maximum energy stored $E_m$, total energy lost per period $E_l$, quality factor $Q_0$.
+Resonance state (time domain): Maximum energy stored $E_m$, total energy lost per period $E_l$, quality factor $Q$.
 \[i_{in}=i_m\cos(\omega_0t+\theta)\]
 \[v(0^-)=v_m=\infty\]
 \[v=v_m\cos(\omega_0t+\theta)\]
@@ -1489,7 +1547,7 @@ Resonance state (time domain): Maximum energy stored $E_m$, total energy lost pe
 \[i_C=-i_L=-v_mC\omega_0\sin(\omega_0t+\theta)=\frac{v_m}{L\omega_0}\sin(\omega_0t+\theta)\]
 \[E_m=\frac{Cv_m^{\pht{m}2}}{2}\]
 \[E_l=\frac{v_mi_m\pi}{\omega_0}\]
-\[Q_0=\frac{Cv_m\omega_0}{i_m}=\frac{v_m}{i_m}\sqrt{\frac{C}{L}}\]
+\[Q=\frac{Cv_m\omega_0}{i_m}=\frac{v_m}{i_m}\sqrt{\frac{C}{L}}\]
 Resonance state (phasor domain):
 \[\mb{I}_{in}=i_me^{j\theta}\]
 \[\mb{V}=v_me^{j\theta},\quad v_m=\infty\]
@@ -2051,7 +2109,7 @@ Constant source total response (time domain):
 \[v_L=e^{-\omega_0\zeta t}\qty(\qty(v_{in}-v_C(0^-)-i(0^-)R)\cos(\omega_0\sqrt{1-\zeta^2}t)-\frac{v_{in}-v_C(0^-)\zeta-\frac{1}{2}i(0^-)R\frac{2\zeta^2-1}{\zeta}}{\sqrt{1-\zeta^2}}\sin(\omega_0\sqrt{1-\zeta^2}t))\]
 \[v_C=v_{in}-e^{-\omega_0\zeta t}\qty(\qty(v_{in}-v_C(0^-))\cos(\omega_0\sqrt{1-\zeta^2}t)+\qty(\qty(v_{in}-v_C(0^-))\frac{\zeta}{\sqrt{1-\zeta^2}}-\frac{1}{2}\frac{i(0^-)R}{\zeta\sqrt{1-\zeta^2}})\sin(\omega_0\sqrt{1-\zeta^2}t))\]
 \eit
-Resonance state (time domain): Maximum energy stored $E_m$, total energy lost per period $E_l$, quality factor $Q_0$.
+Resonance state (time domain): Maximum energy stored $E_m$, total energy lost per period $E_l$, quality factor $Q$.
 \[v_{in}=v_m\cos(\omega_0t+\theta)\]
 \[i(0^-)=\frac{v_m}{R}\]
 \[v_C(0^-)=0\]
@@ -2059,7 +2117,7 @@ Resonance state (time domain): Maximum energy stored $E_m$, total energy lost pe
 \[v_C=-v_L=\frac{v_m}{RC\omgea_0}\sin(\omega_0t+\theta)=\frac{v_mL\omega_0}{R}\sin(\omega_0t+\theta)\]
 \[E_m=\frac{Lv_m^{\pht{m}2}}{2R^2}\]
 \[E_l=\frac{v_m^{\pht{m}2}\pi}{R\omega_0}\]
-\[Q_0=\frac{L\omega_0}{R}=\frac{1}{R}\sqrt{\frac{L}{C}}\]
+\[Q=\frac{L\omega_0}{R}=\frac{1}{R}\sqrt{\frac{L}{C}}\]
 Resonance state (phasor domain):
 \[\mb{V}_{in}=v_me^{j\theta}\]
 \[\mb{I}=\frac{v_m}{R}e^{j\theta}\]
@@ -2558,7 +2616,7 @@ Constant source total response (time domain):
 \[i_L=i_{in}-e^{-\omega_0\zeta t}\qty(\qty(i_{in}-i_L(0^-))\cos(\omega_0\sqrt{1-\zeta^2}t)+\qty(i_{in}-\frac{1}{2}\frac{v(0^-)}{R\zeta\sqrt{1-\zeta^2}}-i_L(0^-)\frac{\zeta}{\sqrt{1-\zeta^2}})\sin(\omega_0\sqrt{1-\zeta^2}t))\]
 \[i_C=e^{-\omega_0\zeta t}\qty(\qty(i_{in}+\frac{v(0^-)}{R}+i_L(0^-))\cos(\omega_0\sqrt{1-\zeta^2}t)-\qty(i_{in}-\frac{v(0^-)}{2R}\frac{1-2\zeta^2}{\zeta\sqrt{1-\zeta^2}}+i_L(0^-)\frac{\zeta}{\sqrt{1-\zeta^2}})\sin(\omega_0\sqrt{1-\zeta^2}t))\]
 \eit
-Resonance state (time domain): Maximum energy stored $E_m$, total energy lost per period $E_l$, quality factor $Q_0$.
+Resonance state (time domain): Maximum energy stored $E_m$, total energy lost per period $E_l$, quality factor $Q$.
 \[i_{in}=i_m\cos(\omega_0t+\theta)\]
 \[v(0^-)=i_mR\]
 \[i_L(0^-)=0\]
@@ -2566,7 +2624,7 @@ Resonance state (time domain): Maximum energy stored $E_m$, total energy lost pe
 \[i_C=-i_L=-i_mR\omega_0\sin(\omega_0t+\theta)=\frac{i_mR}{L\omega_0}\sin(\omega_0t+\theta)\]
 \[E_m=\frac{Ci_m^{\pht{m}2}R^2}{2}\]
 \[E_l=\frac{i_m^{\pht{m}2}R\pi}{\omega_0}\]
-\[Q_0=CR\omega_0=R\sqrt{\frac{C}{L}}\]
+\[Q=CR\omega_0=R\sqrt{\frac{C}{L}}\]
 Resonance state (phasor domain):
 \[\mb{I}_{in}=i_me^{j\theta}\]
 \[\mb{V}=i_mRe^{j\theta}\]
