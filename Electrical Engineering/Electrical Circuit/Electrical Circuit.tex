@@ -599,13 +599,13 @@ A Bode plot has two graphs,
 \item the phase response: $\Arg(H(j\omega))$ ($^{\circ}$)-$\log_{10}\omega$ (decade), $\log_8\omega$ (octave), $\log_{10}f$ (decade) or $\log_8f$ (octave)
 \eit
 
-
 PLACEHOLDER first-order
+
 \sssc{Second-order low-pass circuit}
 A second-order low-pass filter with low-pass gain $K$ has the form
-\[s^2F(s)+2\omega_0\zeta sF(s)+\omega_0^{\pht{0}2}F(s)=K\omega_0^{\pht{0}2}X(s)\]
-\[F(s)=\frac{K\omega_0^{\pht{0}2}X(s)}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}\]
-\[H(s)=\frac{F(s)}{X(s)}=\frac{K\omega_0^{\pht{0}2}}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}.\]
+\[s^2F(s)+2\zeta\omega_0 sF(s)+\omega_0^{\pht{0}2}F(s)=K\omega_0^{\pht{0}2}X(s)\]
+\[F(s)=\frac{K\omega_0^{\pht{0}2}X(s)}{s^2+2\zeta\omega_0 s+\omega_0^{\pht{0}2}}\]
+\[H(s)=\frac{F(s)}{X(s)}=\frac{K\omega_0^{\pht{0}2}}{s^2+2\zeta\omega_0 s+\omega_0^{\pht{0}2}}.\]
 The poles on the complex plane are
 \[r_{1,2}=-\alpha\pm j\omega_d.\]
 The frequency response is
@@ -614,7 +614,7 @@ Magnitude response is
 \[\abs{H(j\omega)}^2=\frac{K^2\omega_0^{\pht{0}4}}{(\omega_0^{\pht{0}2}-\omega^2)^2+(2\zeta\omega_0\omega)^2}.\]
 Low-pass filter with low-pass gain $K$:
 \[\lim_{\omega\to0}\abs{H(j\omega)}=K\]
-\[\lim_{\omega\to\infty}\abs{H(j\omega)}=0\]
+\[\lim_{\omega\to\infty}\abs{H(j\omega)}=0.\]
 When $\zeta<\frac{1}{\sqrt{2}}$ resonance frequency $\omega_r$ is
 \[\omega_r=\arg_{\omega}\max_{\omega}\abs{H(j\omega)}=\omega_0\sqrt{1-2\zeta^2},\]
 and
@@ -634,67 +634,100 @@ and
 \ea\]
 \epr
 The cutoff frequency $\omega_{1,2}$ such that
-\[\abs{H(j\omega_{1,2})}=\frac{\abs{H(j\omega_r)}}{\sqrt{2}}\]
+\[\abs{H(j\omega_{1,2})}=\frac{K}{2\sqrt{2}\zeta\sqrt{1-\zeta^2}}\]
 are
-\[\omega_{1,2}=\sqrt{1-2\zeta^2\mp2\zeta\sqrt{1-\zeta^2}}\omega_0.\]
+\[\omega_{1,2}=\sqrt{1-2\zeta^2\mp2\zeta\sqrt{1-\zeta^2}}\omega_0,\]
 where $\omega_2$ is called upper half-power frequency and $\omega_1$ is called lower half-power frequency.
 \bpr
 Let $\omega_{1,2}=a\omega_0$.
-\[\abs{H(j\omega_c)}^2=\frac{K^2}{(1-a^2)^2+(2\zeta a)^2}=\frac{K^2}{1-2a^2+a^4+4\zeta^2a^2}\]
+\[\abs{H(j\omega_{1,2})}^2=\frac{K^2}{(1-a^2)^2+(2\zeta a)^2}=\frac{K^2}{1-2a^2+a^4+4\zeta^2a^2}\]
 \[\qty(\frac{\abs{H(j\omega_r)}}{\sqrt{2}})^2=\frac{K^2}{8\zeta^2-8\zeta^4}\]
 \[a^4-2(1-2\zeta^2)a^2+1-8\zeta^2+8\zeta^4=0\]
 \[a^2=1-2\zeta^2\pm\sqrt{1-4\zeta^2+4\zeta^4-1+8\zeta^2-8\zeta^4}=1-2\zeta^2\pm2\zeta\sqrt{1-\zeta^2}\]
 \epr
 For high-Q circuit,
 \[H(j\omega)=\frac{K\omega_0^{\pht{0}2}}{\omega_0^{\pht{0}2}-\omega^2+j\frac{\omega_0}{Q}\omega},\]
-since $\sqrt{1\mp2x}\approx1-x$,
+since $\sqrt{1\mp2x}\approx1\mp x$,
 \[\omega_{1,2}\approx(1\mp\zeta)\omega_0=\omega_0\mp\alpha\approx\omega_0\qty(1\mp\frac{1}{2Q}),\]
-\[\calB=\omega_2-\omega_1\approx2\omega_0\zeta=2\alpha\approx\frac{\omega_0}{Q}\]
-
-PLACEHOLDER band-pass high-pass
-
-
+\[\calB=\omega_2-\omega_1\approx2\zeta\omega_0=2\alpha\approx\frac{\omega_0}{Q}\]
 \sssc{Second-order band-pass circuit}
-\[s^2F(s)+2\omega_0\zeta sF(s)+\omega_0^{\pht{0}2}F(s)=s2\zeta\omega_0X(s)\]
-\[F(s)=\frac{sK\omega_0X(s)}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}\]
-\[H(s)=\frac{F(s)}{X(s)}=\frac{sK\omega_0}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}.\]
-The normalized form is defined as
-\[\frac{s}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}\]
-The poles on the complex plane are $r_{1,2}=-\alpha\pm j\omega_d$.
+A second-order band-pass filter with band-pass gain $K$ has the form
+\[s^2F(s)+2\zeta\omega_0 sF(s)+\omega_0^{\pht{0}2}F(s)=K2\zeta\omega_0sX(s)\]
+\[F(s)=\frac{K2\zeta\omega_0 sX(s)}{s^2+2\zeta\omega_0 s+\omega_0^{\pht{0}2}}\]
+\[H(s)=\frac{F(s)}{X(s)}=\frac{K2\zeta\omega_0 s}{s^2+2\zeta\omega_0s+\omega_0^{\pht{0}2}}.\]
+The poles on the complex plane are
+\[r_{1,2}=-\alpha\pm j\omega_d.\]
 The frequency response is
-\[H(j\omega)=\frac{jk\omega}{\omega_0^{\pht{0}2}-\omega^2+j2\zeta\omega_0\omega}.\]
-At natural frequency $\omega_0$,
-\[H(j\omega_0)=\frac{k}{2\zeta\omega_0}\]
-The cutoff frequencies $\omega_2>\omega_1$ are such that
-\[\abs{H(j\omega_{1,2})}=\frac{k}{2\sqrt{2}\zeta\omega_0},\]
-where $\omega_2$ is called upper half-power frequency and $\omega_1$ is called lower half-power frequency, which are
-\[\omega_{1,2}=\omega_0\sqrt{1-2\zeta^2\mp2\zeta\sqrt{1-\zeta^2}}.\]
+\[H(j\omega)=\frac{jK2\zeta\omega_0\omega}{\omega_0^{\pht{0}2}-\omega^2+j2\zeta\omega_0\omega}.\]
+Magnitude response is
+\[\abs{H(j\omega)}^2=\frac{K^2(2\zeta\omega_0\omega)^2}{(\omega_0^{\pht{0}2}-\omega^2)^2+(2\zeta\omega_0\omega)^2}.\]
+Band-pass filter with band-pass gain $K$, at which the resonance frequency is the natural frequency $\omega_0$:
+\[\arg_{\omega}\max_{\omega}\abs{H(j\omega)}=\omega_0\]
+\[\max_{\omega}\abs{H(j\omega)}=\abs{H(j\omega_0)}=K.\]
+\bpr
+\[\frac{1}{K^2(2\zeta\omega_0)^2}\dv{\abs{H(j\omega)}^2}{\omega}=\frac{2\omega\qty((\omega_0^{\pht{0}2}-\omega^2)^2+(2\zeta\omega_0\omega)^2)-\omega^2\dv{}{\omega}\qty((\omega_0^{\pht{0}2}-\omega^2)^2+(2\zeta\omega_0\omega)^2)}{\qty((\omega_0^{\pht{0}2}-\omega^2)^2+(2\zeta\omega_0\omega)^2)^2}\]
+\[\dv{}{\omega}\qty((\omega_0^{\pht{0}2}-\omega^2)^2+(2\zeta\omega_0\omega)^2)=4\omega^3-4\omega_0^{\pht{0}2}\omega+8\zeta^2\omega_0^{\pht{0}2}\omega\]
+\[\omega_0^{\pht{0}4}-2\omega_0^{\pht{0}2}\omega^2+\omega^4+4\zeta^2\omega_0^{\pht{0}2}\omega^2-2\omega^4+2\omega_0^{\pht{0}2}\omega^2-4\zeta^2\omega_0^{\pht{0}2}\omega^2=0\]
+\[\omega_0^{\pht{0}4}-\omega^4=0\]
+\[\omega=\omega_0\]
+\epr
+The cutoff frequency $\omega_{1,2}$ such that
+\[\abs{H(j\omega_{1,2})}=\frac{K}{\sqrt{2}}\]
+are
+\[\omega_{1,2}=\sqrt{1+2\zeta^2\mp2\zeta\sqrt{1+\zeta^2}}\omega_0,\]
+where $\omega_2$ is called upper half-power frequency and $\omega_1$ is called lower half-power frequency.
 \bpr
 Let $\omega_{1,2}=a\omega_0$.
-\[H(j\omega_{1,2})=\frac{jka}{(1-a^2+j2a\zeta)\omega_0}\]
-\[\abs{H(j\omega_{1,2})}^2=\frac{k^2a^2}{((1-a^2)^2+(2a\zeta)^2)\omega_0^{\pht{0}2}}=\frac{k^2}{8\zeta^2\omega_0^{\pht{0}2}}\]
-\[8a^2\zeta^2=1-2a^2+a^4+4a^2\zeta^2\]
+\[\abs{H(j\omega_{1,2})}^2=\frac{K^2(2\zeta a)^2}{(1-a^2)^2+(2\zeta a)^2}=\frac{K^2}{2}\]
+\[1-2a^2+a^4+4\zeta^2a^2=8\zeta^2a^2\]
 \[a^4-2(1+2\zeta^2)a^2+1=0\]
-\[a^2=\frac{2(1+2\zeta^2)\pm\sqrt{4(1+2\zeta^2)^2-4}}{2}=1+2\zeta^2\pm2\zeta\sqrt{1+\zeta^2}\]
-\[\omega_{1,2}=\omega_0\sqrt{1+2\zeta^2\mp2\zeta\sqrt{1+\zeta^2}}\]
+\[a^2=1+2\zeta^2\pm\sqrt{(1+2\zeta^2)^2-1}=1+2\zeta^2\pm2\zeta\sqrt{1+\zeta^2}\]
 \epr
-\[\calB=\omega_2-\omega_1.\]
-For high-Q circuit, since $\sqrt{1\mp 2x}=1\mp x$ near 0,
-\[\omega_{1,2}\approx\omega_0\qty(1\mp\zeta)=\omega\mp\alpha=\omega_0\mp\frac{\omega_0}{2Q}\]
-\[\calB=2\alpha=\frac{\omega_0}{Q}\]
-
-
-
-
-
-
-
-
-
-
-PLACEHOLDER
-
-
+For high-Q circuit,
+\[H(j\omega)=\frac{jK\frac{\omega_0}{Q}\omega}{\omega_0^{\pht{0}2}-\omega^2+j\frac{\omega_0}{Q}\omega},\]
+since $\sqrt{1\mp2x}\approx1\mp x$,
+\[\omega_{1,2}\approx(1\mp\zeta)\omega_0=\omega_0\mp\alpha\approx\omega_0\qty(1\mp\frac{1}{2Q}),\]
+\[\calB=\omega_2-\omega_1\approx2\zeta\omega_0=2\alpha\approx\frac{\omega_0}{Q}\]
+\sssc{Second-order high-pass circuit}
+A second-order high-pass filter with high-pass gain $K$ has the form
+\[s^2F(s)+2\zeta\omega_0 sF(s)+\omega_0^{\pht{0}2}F(s)=Ks^2X(s)\]
+\[F(s)=\frac{Ks^2X(s)}{s^2+2\zeta\omega_0 s+\omega_0^{\pht{0}2}}\]
+\[H(s)=\frac{F(s)}{X(s)}=\frac{Ks^2}{s^2+2\zeta\omega_0s+\omega_0^{\pht{0}2}}.\]
+The poles on the complex plane are
+\[r_{1,2}=-\alpha\pm j\omega_d.\]
+The frequency response is
+\[H(j\omega)=\frac{-K\omega^2}{\omega_0^{\pht{0}2}-\omega^2+j2\zeta\omega_0\omega}.\]
+Magnitude response is
+\[\abs{H(j\omega)}^2=\frac{K^2\omega^4}{(\omega_0^{\pht{0}2}-\omega^2)^2+(2\zeta\omega_0\omega)^2}.\]
+High-pass filter with high-pass gain $K$:
+\[\lim_{\omega\to0}\abs{H(j\omega)}=0\]
+\[\lim_{\omega\to\infty}\abs{H(j\omega)}=K.\]
+The resonance frequency is the natural frequency $\omega_0$:
+\[\arg_{\omega}\max_{\omega}\abs{H(j\omega)}=\omega_0\]
+\[\max_{\omega}\abs{H(j\omega)}=\abs{H(j\omega_0)}=\frac{K}{2\zeta}.\]
+\bpr
+\[\frac{1}{K^2}\dv{\abs{H(j\omega)}^2}{\omega}=\frac{4\omega^3\qty((\omega_0^{\pht{0}2}-\omega^2)^2+(2\zeta\omega_0\omega)^2)-\omega^4\dv{}{\omega}\qty((\omega_0^{\pht{0}2}-\omega^2)^2+(2\zeta\omega_0\omega)^2)}{\qty((\omega_0^{\pht{0}2}-\omega^2)^2+(2\zeta\omega_0\omega)^2)^2}\]
+\[\dv{}{\omega}\qty((\omega_0^{\pht{0}2}-\omega^2)^2+(2\zeta\omega_0\omega)^2)=4\omega^3-4\omega_0^{\pht{0}2}\omega+8\zeta^2\omega_0^{\pht{0}2}\omega\]
+\[4\omega_0^{\pht{0}4}-8\omega_0^{\pht{0}2}\omega^2+4\omega^4+8\zeta^2\omega_0^{\pht{0}2}\omega^2-4\omega^4+4\omega_0^{\pht{0}2}\omega^2-8\zeta^2\omega_0^{\pht{0}2}\omega^2=0\]
+\[\omega=\omega_0\]
+\epr
+The cutoff frequency $\omega_{1,2}$ such that
+\[\abs{H(j\omega_{1,2})}=\frac{K}{2\sqrt{2}\zeta}\]
+are
+\[\omega_{1,2}=\sqrt{1+2\zeta^2\mp2\zeta\sqrt{1+\zeta^2}}\omega_0,\]
+where $\omega_2$ is called upper half-power frequency and $\omega_1$ is called lower half-power frequency.
+\bpr
+Let $\omega_{1,2}=a\omega_0$.
+\[\abs{H(j\omega_{1,2})}^2=\frac{K^2a^4}{(1-a^2)^2+(2\zeta a)^2}=\frac{K^2}{8\zeta^2}\]
+\[1-2a^2+a^4+4\zeta^2a^2=8\zeta^2a^4\]
+\[a^4-2a^2(1+2\zeta^2)+1=0\]
+\[a^2=1+2\zeta^2\pm\sqrt{(1+2\zeta^2)^2-1}=1+2\zeta^2\pm2\zeta\sqrt{1+\zeta^2}\]
+\epr
+For high-Q circuit,
+\[H(j\omega)=\frac{-K\omega^2}{\omega_0^{\pht{0}2}-\omega^2+j\frac{\omega_0}{Q}\omega},\]
+since $\sqrt{1\mp2x}\approx1\mp x$,
+\[\omega_{1,2}\approx(1\mp\zeta)\omega_0=\omega_0\mp\alpha\approx\omega_0\qty(1\mp\frac{1}{2Q}),\]
+\[\calB=\omega_2-\omega_1\approx2\zeta\omega_0=2\alpha\approx\frac{\omega_0}{Q}\]
 \ssc{R, L, C, RL, RC, LC, and RLC Circuits}
 \sssc{Resistor with voltage source}
 A resistor with resistance $R$ and an independent voltage source $v_{in}$ in series connection.
