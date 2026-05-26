@@ -594,62 +594,41 @@ A Bode plot has two graphs,
 \item the magnitude response: magnitude dB (dB)-$\log_{10}\omega$ (decade) (or $\log_8\omega$ (octave)), and
 \item the phase response: $\Arg(H(j\omega))$ ($^{\circ}$)-$\log_{10}\omega$ (decade) (or $\log_8\omega$ (octave)).
 \eit
+\sssc{Second-order band-pass circuit}
 \[s^2F(s)+2\omega_0\zeta sF(s)+\omega_0^{\pht{0}2}F(s)=skX(s)\]
+\[F(s)=\frac{skX(s)}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}\]
 \[H(s)=\frac{F(s)}{X(s)}=\frac{ks}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}.\]
+The normalized form is defined as
+\[\frac{s}{s^2+2\omega_0\zeta s+\omega_0^{\pht{0}2}}\]
 The poles on the complex plane are $r_{1,2}=-\alpha\pm j\omega_d$.
 The frequency response is
 \[H(j\omega)=\frac{jk\omega}{\omega_0^{\pht{0}2}-\omega^2+j2\zeta\omega_0\omega}.\]
-At natural frequency,
+At natural frequency $\omega_0$,
 \[H(j\omega_0)=\frac{k}{2\zeta\omega_0}\]
-Let
-\[M=\frac{k}{2\zeta\omega_0}\]
-
-
-
-
-PLACEHOLDER
-
-
-
-
-
-
-\[H(s)=\frac{As}{(s-s_1)(s-s_2)}=\frac{As}{(s+\alpha+j\omega_d)(s+\alpha-j\omega_d)}\]
-0 dB occurs at $\omega_0$, at which
-\[H(j\omega_0)=\frac{1}{2\zeta}.\]
-The cutoff frequencies such that
-\[\abs{H(j\omega)}=\frac{1}{\sqrt{2}}\max_{\omega}\abs{H(j\omega)},\]
-$\omega_2>\omega_1$, where $\omega_2$ is called upper half-power frequency and $\omega_1$ is called lower half-power frequency, are
+The cutoff frequencies $\omega_2>\omega_1$ are such that
+\[\abs{H(j\omega_{1,2})}=\frac{k}{2\sqrt{2}\zeta\omega_0},\]
+where $\omega_2$ is called upper half-power frequency and $\omega_1$ is called lower half-power frequency, which are
 \[\omega_{1,2}=\omega_0\sqrt{1-2\zeta^2\mp2\zeta\sqrt{1-\zeta^2}}.\]
 \bpr
 Let $\omega_{1,2}=a\omega_0$.
-\[\ba
-H(j\omega_{1,2})=&\frac{Bja\omega_0}{(ja\omega_0+\alpha+j\omega_d)(ja\omega_0+\alpha-j\omega_d)}\\
-=&\frac{Bja}{\omega_0((ja+\zeta)^2+1-\zeta^2)}\\
-=&\frac{2a\zeta}{a^2-2ja\zeta-1}
-\ea\]
-\[\abs{H(j\omega_{1,2})}^2=\frac{1}{2}\]
-\[8a^2\zeta^2=(a^2-1)^2+4a^2\zeta^2\]
-\[a^4-2a^2(1-2\zeta^2)+1=0\]
-\[a^2=1-2\zeta^2\pm\sqrt{1-4\zeta^2+4\zeta^4-1}=1-2\zeta^2\pm2\zeta\sqrt{1-\zeta^2}\]
-\[\omega_{1,2}=\omega_0\sqrt{1-2\zeta^2\mp2\zeta\sqrt{1-\zeta^2}}\]
+\[H(j\omega_{1,2})=\frac{jka}{(1-a^2+j2a\zeta)\omega_0}\]
+\[\abs{H(j\omega_{1,2})}^2=\frac{k^2a^2}{((1-a^2)^2+(2a\zeta)^2)\omega_0^{\pht{0}2}}=\frac{k^2}{8\zeta^2\omega_0^{\pht{0}2}}\]
+\[8a^2\zeta^2=1-2a^2+a^4+4a^2\zeta^2\]
+\[a^4-2(1+2\zeta^2)a^2+1=0\]
+\[a^2=\frac{2(1+2\zeta^2)\pm\sqrt{4(1+2\zeta^2)^2-4}}{2}=1+2\zeta^2\pm2\zeta\sqrt{1+\zeta^2}\]
+\[\omega_{1,2}=\omega_0\sqrt{1+2\zeta^2\mp2\zeta\sqrt{1+\zeta^2}}\]
 \epr
 \[\calB=\omega_2-\omega_1.\]
-
-
-
-low-pass high-pass canonical
-
-
-
-
-
-\sssc{High-Q circuit}
-For circuit with large $Q_0$, i.e., small $\zeta$, called high-Q circuit, which we usually take $Q_0>5$, i.e., $\zeta<0.1$, we have $\zeta\ll1$, $\omega_0\approx\omega_d$, by $e^{-x}\approx1-x$ for small $x$, thus
-\[e^{-\frac{4\pi\alpha}{\omega_d}}\approx1-\frac{4\pi\alpha}{\omega_d}\]
-\[Q_0\approx\frac{\omega_d}{2\alpha}\approx\frac{\omega_0}{2\alpha}\approx\frac{1}{2\zeta}\]
+For high-Q circuit, since $\sqrt{1\mp 2x}=1\mp x$ near 0,
 \[\omega_{1,2}\approx\omega_0\qty(1\mp\zeta)=\omega\mp\alpha=\omega_0\mp\frac{\omega_0}{2Q_0}\]
 \[\calB=2\alpha=\frac{\omega_0}{Q_0}\]
+
+
+
+
+
+
+
 
 
 
