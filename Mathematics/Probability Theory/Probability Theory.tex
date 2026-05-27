@@ -1467,8 +1467,8 @@ P(X\le\frac{l}{2}\sin\Theta)=&\int_0^{\frac{\pi}{2}}P(X\le\frac{l}{2}\sin\theta)
 \bit
 \item Notation:
 \bit
-\item $X\sim\calN(\mu,\sigma)$, $X\sim N(\mu,\sigma)$, $X\sim\operatorname{Gaussian}(\mu,\sigma)$, $X\sim\calN(\mu,\sigma^2)$, $X\sim N(\mu,\sigma^2)$, or $X\sim\operatorname{Gaussian}(\mu,\sigma^2)$, read as $X$ is normal or Gaussian distributed with mean $\mu$ and standard deviation $\sigma$, where the $\sigma^2$ ones are not used here.
-\item $Z\sim\calN(0,1)$, $Z\sim N(0,1)$, or $X\sim\operatorname{Gaussian}(0,1)$ read as $X$ is standard or unit normal or Gaussian distributed.
+\item $X\sim\calN(\mu,\sigma^2)$, $X\sim N(\mu,\sigma^2)$, or $X\sim\operatorname{Gaussian}(\mu,\sigma^2)$, read as $X$ is normal or Gaussian distributed with mean $\mu$ and standard deviation $\sigma$ or variance $\sigma^2$.
+\item $Z\sim\calN(0,1)$, $Z\sim N(0,1)$, or $X\sim\operatorname{Gaussian}(0,1)$, read as $X$ is standard or unit normal or Gaussian distributed.
 \eit
 \item Parameters: $\mu\in\bbR$ and $\sigma\in(0,\infty)$
 \item Support: $\bbR$
@@ -1577,9 +1577,24 @@ h(X)&=-\int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}\sigma}\exp(-\frac{(x-\mu)^2}{
 \item Standardization:
 \[X=\mu+\sigma Z\]
 \item Transition:
-\[X-c\sim\calN(\mu-c,\sigma),\quad c\in\bbR\]
+\[X-c\sim\calN(\mu-c,\sigma^2),\quad c\in\bbR\]
 \item Scaling:
-\[cX\sim\calN(c\mu,c\sigma),\quad c\in\bbR_{\neq 0}\]
+\[cX\sim\calN(c\mu,c^2\sigma^2),\quad c\in\bbR_{\neq 0}\]
+\item Sum of independent Gaussian random variables: Suppose $X_i\sim\calN(\mu_i,\sigma_i^{\pht{i}2})$ for $i\in\bbN_{\le n}$ are independent random variables. Then
+\[\sum_{i=1}^nX_i\sim\calN(\sum_{i=1}^n\mu_i,\sum_{i=1}^n\sigma_i^{\pht{i}2}).\]
+\bpr
+Prove for two independent Gaussian random variables $X\sim(\mu,\sigma^2)$ and $Y\sim(\lambda,\gamma^2)$.
+\[\ba
+f_{X+Y}(z)=&\int_{-\infty}^{\infty)\frac{1}{\sqrt{2\pi}\sigma}\exp(-\frac{(x-\mu)^2}{2\sigma^2})\frac{1}{\sqrt{2\pi}\gamma}\exp(-\frac{(z-x-\lambda)^2}{2\gamma^2})\dd{x}\\
+=&\frac{1}{2\pi\sigma\gamma}\int_{-\infty}^{\infty)\exp(-\frac{1}{2}\qty(\frac{(x-\mu)^2}{\sigma^2}+\frac{(x-(z-\lambda))^2}{\gamma^2}))\dd{x}\\
+=&\frac{1}{2\pi\sigma\gamma}\int_{-\infty}^{\infty)\exp(-\frac{1}{2}\qty(x^2\qty(\frac{1}{\sigma^2}+\frac{1}{\gamma^2})-2x\qty(\frac{\mu}{\sigma^2}+\frac{z-\lambda}{\gamma^2})+\qty(\frac{\mu^2}{\sigma^2}+\frac{(z-\lambda)^2}{\gamma^2})))\dd{x},\quad\alpha=\frac{1}{\sigma^2}+\frac{1}{\gamma^2},\beta=\frac{\mu}{\sigma^2}+\frac{z-\lambda}{\gamma^2},C(z)=\frac{\mu^2}{\sigma^2}+\frac{(z-\lambda)^2}{\gamma^2}\\
+=&\frac{1}{2\pi\sigma\gamma}\exp(\frac{1}{2}\qty(\frac{\beta^2}{\alpha}-C(z)))\int_{-\infty}^{\infty)\exp(-\frac{\alpha}{2}\qty(x-\frac{\beta}{\alpha})^2)\dd{x},\quad u=\frac{\sqrt{\alpha}}{\sqrt{2}}\qty(x-\frac{\beta}{\alpha})\\
+=&\frac{1}{\pi\sqrt{2\alpha}\sigma\gamma}\exp(\frac{1}{2}\qty(\frac{\beta^2}{\alpha}-C(z)))\int_{-\infty}^{\infty)\exp(-u^2)\dd{u}\\
+=&\frac{1}{\sqrt{2\pi\qty(\sigma^2+\gamma^2)}}\exp(\frac{1}{2}\qty(\frac{\qty(\mu\gamma^2+\qty(z-\lambda)\sigma^2)^2}{\sigma^2\gamma^2\qty(\sigma^2+\gamma^2)}-\frac{\mu^2}{\sigma^2}-\frac{(z-\lambda)^2}{\gamma^2}))\\
+=&\frac{1}{\sqrt{2\pi\qty(\sigma^2+\gamma^2)}}\exp(\frac{1}{2}\frac{\mu^2\gamma^4+2z\mu\sigma^2\gamma^2-2\mu\lambda\sigma^2\gamma^2+z^2\sigma^4-2z\lambda\sigma^4+\lambda^2\sigma^4-\mu^2\sigma^2\gamma^2-\mu^2\gamma^4-z^2\sigma^4+2z\lambda\sigma^4-\lambda^2\sigma^4-z^2\sigma^2\gamma^2+2z\lambda\sigma^2\gamma^2-\lambda^2\sigma^2\gamma^2}{\sigma^2\gamma^2\qty(\sigma^2+\gamma^2)})\\
+=&\frac{1}{\sqrt{2\pi\qty(\sigma^2+\gamma^2)}}\exp(-\frac{\qty(z-(\mu+\lambda))^2}{2\qty(\sigma^2+\gamma^2)})
+\ea\]
+\epr
 \item Symmetry: about $\mu$
 \item PDF monotonicity: strictly increasing for $x\le\mu$ and strictly decreasing for $x\ge\mu$
 \item CCDF:
