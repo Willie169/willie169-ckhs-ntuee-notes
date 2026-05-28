@@ -991,7 +991,7 @@ For two real-valued random variables $X,Y$  (such that $P_{X|Y}$ is a regular co
 =&E(\Var(X|Y))+E(\Var(X|Y))
 \ea\]
 \epr
-\ssc{Sum of independent random variables}
+\ssc{Sum of independent random variables and Inequalities}
 \sssc{Sum of independent random variables}
 For two independent real-valued random variables $X,Y$ with the same source sample space and event space, and with pushforward probability measure $P_X$ and $P_Y$ respectively, let the Schwartz distributions induced by $P_X$ and $P_Y$ be $T_X$ and $T_Y$ respectively. Then the Schwartz distribution $T_{X+Y}$ induced by the pushforward probability measure $P_{X+Y}$ of the sum random variable $X+Y$ is the distributional convolution of $T_1$ and $T_2$, that is,
 \[T=T_1*T_2.\]
@@ -1011,10 +1011,10 @@ For two independent absolutely continuous random variables $X,Y$,
 \[F_{X+Y}(z)=\int_{-\infty}^{\infty}\int_{-\infty}^{z-x}f_X(x)f_Y(y)\dd{y}\dd{x}=\int_{-\infty}^{\infty}f_X(x)F_Y(z-x)\dd{x}.\]
 \[f_{X+Y}(z)=\dv{}{z}F_{X+Y}(z)=\int_{-\infty}^{\infty}f_X(x)f_Y(z-x)\dd{x}.\]
 \epr
-\ssc{Random sum of i.i.d. random variables}
 \sssc{Random sum of random variables}
-Let $X_1,X_2\ldots$ be a sequence of random variables, and let $N$ be a positive-integer-valued random variable. We are interested in the distribution of the random sum $S_N=\sum_{i=1}^NX_i$. Here, we will focus on the case where $X_i$'s are i.i.d. and independent of $N$, let $X_i\sim X$ for all $i$.
-\sssc{MGF}
+Let $N$ be a positive-integer-valued random variable. Let $X_1,X_2\ldots$ be a sequence of random variables. We are interested in the distribution of the random sum $S_N=\sum_{i=1}^NX_i$. Here, we will focus on the case where $X_i$'s are i.i.d. and independent of $N$.
+\sssc{MGF of random sum of i.i.d. random variables}
+Let $N$ be a positive-integer-valued random variable. Let $X_1,X_2\ldots$ be a sequence of i.i.d. random variables independent from $N$ and $X_i\sim X$ for all $i$. Let $S_N=\sum_{i=1}^NX_i$.
 \[M_{S_N}(t)=M_N(\ln(M_X(t))).\]
 \bpr
 \[\ba
@@ -1025,7 +1025,58 @@ M_{S_N}(t)=&E(e^{tS_N})\\
 =&M_N(\ln(M_X(t)))
 \ea\]
 \epr
-PLACEHOLDER HERE
+\sssc{Sample mean of i.i.d. random variables}
+Let $X_1,X_2\ldots,X_n$ be a sequence of i.i.d. random variables and $X_i\sim X$ for all $i$. The sample mean of $X_1,X_2\ldots,X_n$ is defined as
+\[\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i,\]
+which is a random variable that depends on $X_1,X_2\ldots,X_n$.
+\sssc{Mean and variance of sample mean}
+\[E(\bar{X})=E(X).\]
+\[\Var(\bar{X})=\frac{1}{n}\Var(X).\]
+\bpr
+\[\ba
+\Var(\bar{X})=&\Var(\frac{1}{n}\sum_{i=1}^nX_i)\\
+=&\frac{1}{n^2}\Var(\sum_{i=1}^nX_i)
+=&\frac{1}{n^2}\qty(\sum_{i=1}^n\Var(X_i)+\sum_{i=1}^n\sum_{j=i+1}^n\Cov(X_i,X_j)),\quad \Cov(X_i,X_j)=0\\
+=&\frac{1}{n}\Var(X)
+\ea\]
+\epr
+\sssc{Markov's inequality}
+Let $X$ be a non-negative random variable. Then for any $a>0$,
+\[P(X\ge a)\le\frac{E(X)}{a}.\]
+\bpr
+Consider the derived random variable
+\[Y=\bcs a,\quad&X\ge a,\\0,\quad&\tx{otherwise}.\ecs\]
+$Y\le X$ a.s., so $E(Y)=a\cdot P(X\ge a)\le E(X)$.
+\epr
+\sssc{Chebyshev's inequality}
+Let $X$ be a random variable with mean $\mu$ and variance $\sigma^2$. Then for any $\varepsilon>0$,
+\[P(\abs{X-\mu}\ge\varepsilon)\le\frac{\sigma^2}{\varepsilon^2}.\]
+\bpr
+Consider the derived random variable $Y=(X-\mu)^2$. $Y\ge0$ a.s., so we can apply Markov's inequality to get
+\[P(\abs{X-\mu}\ge\varepsilon)=P(Y\ge\varepsilon^2)\le\frac{E(Y)}{\varepsilon^2}=\frac{\sigma^2}{\varepsilon^2}.\]
+\epr
+Equivalently, for any $k>0$,
+\[P(\abs{X-\mu}\ge k\sigma)\le\frac{1}{k^2}.\]
+\sssc{Concentration inequality and weak law of large numbers (WLLN) for sample mean}
+Apply Chebyshev's inequality to $\bar{X}$, for any $\varepsilon>0$,
+\[P(\abs{\bar{X}-\mu}\ge\varepsilon)\le\frac{\Var(\bar{X})}{\varepsilon^2}=\frac{\sigma^2}{n\varepsilon^2},\]
+or equivalently, for any $k>0$,
+\[P(\abs{\bar{X}-\mu}\ge k\sigma)\le\frac{1}{nkn^2}.\]
+Thus if $\sigma$ is finite, for any $\varepsilon,\delta>0$, there exists $n\in\bbN$ such that
+\[P(\abs{\bar{X}-\mu}\ge\varepsilon)\le\delta.\]
+This kind of convergence is also called $\bar{X}$ converges to $\mu$ in probability, denoted as
+\[\bar{X}_n\xrightarrow{p}\mu\tx{\ as\ }n\to\infty\]
+or
+\[\lim_{n\to\infty}\bar{X}_n=\mu.\]
+\sssc{Chernoff bound}
+Let $X$ be a random variable. Then for $a\in\bbR$,
+\[P(X\ge a)\le\inf_{t\ge0}e^{-at}M_X(t).\]
+\bpr
+For any $t\ge0$,
+\[P(X\ge a)=P(e^{tX}\ge e^{ta})\]
+Apply Markov's inequality,
+\[P(e^{tX}\ge e^{ta})\le\frac{E(e^{tX})}{e^{ta}}=e^{-at}M_X(t).\]
+\epr
 \subsection{Families of Discrete Random Variables}
 \sssc{Discrete uniform random variable}
 \bit
@@ -1912,8 +1963,6 @@ PLACEHOLDER
 \ssc{Families of Absolutely Continuous Random Vector}
 \sssc{Multivariate or Joint Normal or Gaussian random variable}
 PLACEHOLDER
-
-
 \ssc{Central limit theorem (CLT)}
 PLACEHOLDER
 Continuity correction
