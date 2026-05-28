@@ -201,6 +201,79 @@ Two real-valued random variables are equal in distribution iff they have the sam
 \bpr
 By measures agree on generating \textpi-system agree theorem.
 \epr
+\sssc{Infinitely often (i.o.)}
+For a sequence $(A_n)_{n\in\bbZ{\ge k}} event for some $k\in\bbZ$,
+\[A_n\tx{\ i.o.}\coloneq\bigcap_{m=k}^{\infty}\bigcup_{n\ge m}A_n.\]
+\sssc{Almost sure (a.s.) convergence}
+A sequence $(X_n)_{n\in\bbZ{\ge k}}$ of random variables for some $k\in\bbZ$ almost surely coverges to a random variable $X$, denoted as
+\[X_n\xrightarrow{a.s.}X\tx{\ as\ }n\to\infty,\]
+\[\lim_{n\to\infty}X_n\overset{\tx{a.s.}}{=}X,\]
+if
+\[P(\lim_{n\to\infty}X_n=X)=1.\]
+\sssc{Convergence in probability}
+A sequence $(X_n)_{n\in\bbZ{\ge k}}$ of random variables for some $k\in\bbZ$ of random variables coverges in probability to a random variable $X$, denoted as
+\[X_n\xrightarrow{p}X\tx{\ as\ }n\to\infty,\]
+\[X_n\xrightarrow{P}X\tx{\ as\ }n\to\infty,\]
+\[\lim_{n\to\infty}X_n\overset{\tx{p}}{=}X,\]
+\[\lim_{n\to\infty}X_n\overset{\tx{P}}{=}X,\]
+if for all $\varepsilon>0$,
+\[\lim_{n\to\infty}P(\abs{X_n-X}>\varepsilon)=0.\]
+\sssc{Convergence in distribution or weak convergence}
+A sequence $(X_n)_{n\in\bbZ{\ge k}}$ of random variables for some $k\in\bbZ$ of random variables coverges in distribution or weakly converges to a random variable $X$, denoted as
+\[X_n\xrightarrow{d}X\tx{\ as\ }n\to\infty,\]
+\[\lim_{n\to\infty}X_n\overset{\tx{d}}{=}X,\]
+if for all $x$ such that $F_X(x)$ is continuous at $x$,
+\[\lim_{n\to\infty}F_{X_n}(x)=F_X(x).\]
+\sssc{Almost sure convergence implies convergence in probability}
+For a sequence $(X_n)_{n\in\bbZ{\ge k}}$ of random variables for some $k\in\bbZ$ of random variables, if
+\[X_n\xrightarrow{a.s.}X\tx{\ as\ }n\to\infty,\]
+then
+\[X_n\xrightarrow{p}X\tx{\ as\ }n\to\infty.\]
+\bpr
+For any fixed $\varepsilon>0$. Define
+\[A_n=\{\omega\colon\abs{X_n(\omega)-X(\omega)}>\varepsilon\}.\]
+Almost sure convergence implies that for almost every $\omega$, there exists $N(\omega)\in\bbN$ such that
+\[n\ge N(\omega)\implies\abs{X_n(\omega)-X(\omega)}\le\varepsilon.\]
+Thus for almost every $\omega$, there exists $N(\omega)\in\bbN$ such that
+\[n\ge N(\omega)\implies\omega\notin A_n.\]
+Thus,
+\[P(\bigcap_{m=1}^{\infty}\bigcup_{n\ge m}A_n)=0.\]
+Observe that for all $n$,
+\[P(A_n)\le P(\bigcup_{m\ge n}A_m)\]
+Let
+\[B_n\coloneq\bigcup_{m\ge n}A_m,\]
+which is a decreasing sequence
+\[B_k\supseteq B_{k+1}\supseteq\ldots\]
+and
+\[\bigcap_{n=k}^{\infty}B_n=\bigcap_{m=1}^{\infty}\bigcup_{n\ge m}A_n\]
+Thus by continuity of probability measure from above,
+\[\lim_{n\to\infty}P(B_n)=P(\bigcap_{m=1}^{\infty}\bigcup_{n\ge m}A_n)=0\]
+Since
+\[P(A_n)\le P(B_n),\]
+we have
+\[\lim_{n\to\infty}P(A_n)=0.\]
+That is,
+\[\lim_{n\to\infty}P(\abs{X_n-X}>\varepsilon)=0.\]
+\epr
+\sssc{Convergence in probability implies convergence in distribution}
+For a sequence $(X_n)_{n\in\bbZ{\ge k}}$ of random variables for some $k\in\bbZ$ of random variables, if
+\[X_n\xrightarrow{p}X\tx{\ as\ }n\to\infty,\]
+then
+\[X_n\xrightarrow{d}X\tx{\ as\ }n\to\infty.\]
+\bpr
+For any fixed $x$ such that $F_X(x)$ is continuous at $x$, for any fixed $\varepsilon>0$,
+\[\{X\le x-\varepsilon\}\cap\{\abs{X_n-X}\le\varepsilon\}\subseteq\{X_n\le X\}\subseteq\{X\le x+\varepsilon\}\cup\{\abs{X_n-X}>\varepsilon\}.\]
+\[P(X\le x-\varepsilon)-P(\abs{X_n-X}>\varepsilon)\le P(X_n\le X)\le P(X\le x+\varepsilon)+P(\abs{X_n-X}>\varepsilon).\]
+Since
+\[\lim_{n\to\infty}P(\abs{X_n-X}>\varepsilon)=0,\]
+\[\liminf_{n\to\infty}P(X_n\le X)\ge P(X\le x-\varepsilon)\]
+and
+\[\limsup_{n\to\infty}P(X_n\le X)\le P(X\le x+\varepsilon).\]
+Since $F_X(x)$ is continuous at $x$,
+\[\lim_{\varepsilon\to0}P(X\le x-\varepsilon)=\lim_{\varepsilon\to0}P(X\le x+\varepsilon)=P(X\le x).\]
+By squeeze theorem,
+\[\lim_{n\to\infty}P(X_n\le X)=P(X\le x).\]
+\epr
 \ssc{Discrete Random Variables}
 \sssc{Probability mass function (PMF)}
 For a discrete random variable $X$ with target sample space $\Omega_X=\{a_1,a_2,\ldots\}$, the probability mass function of $X$, denoted as $p_X$ or $P_X$, is defined as
@@ -255,8 +328,6 @@ The support $\Supp(X)$ of an absolutely continuous random variable $X$ is the su
 \[f_X(x)\ge 0.\]
 \[\int_{-\infty}^{\infty}f_X(x)\dd{x}=1.\]
 \[P(a\le X\le b)=\int_a^bf_X(x)\dd{x}.\]
-\sssc{Discrete to continuous limit}
-We say a sequence or net $\langle X_n\rangle$ of discrete random variables converge to a continuous random variable $X$ if $F_{X_n}$ converges pointwise to $F_X$.
 \ssc{As Schwartz distribution}
 \sssc{CDF as a distribution}
 $F_X$ is bounded and monotone, thus in $L^1_{\tx{loc}}$. So it induces a distribution $T_X$:
@@ -1025,58 +1096,6 @@ M_{S_N}(t)=&E(e^{tS_N})\\
 =&M_N(\ln(M_X(t)))
 \ea\]
 \epr
-\sssc{Sample mean of i.i.d. random variables}
-Let $X_1,X_2\ldots,X_n$ be a sequence of i.i.d. random variables and $X_i\sim X$ for all $i$. The sample mean of $X_1,X_2\ldots,X_n$ is defined as
-\[\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i,\]
-which is a random variable that depends on $X_1,X_2\ldots,X_n$.
-\sssc{Mean and variance of sample mean}
-\[E(\bar{X})=E(X).\]
-\[\Var(\bar{X})=\frac{1}{n}\Var(X).\]
-\bpr
-\[\ba
-\Var(\bar{X})=&\Var(\frac{1}{n}\sum_{i=1}^nX_i)\\
-=&\frac{1}{n^2}\Var(\sum_{i=1}^nX_i)
-=&\frac{1}{n^2}\qty(\sum_{i=1}^n\Var(X_i)+\sum_{i=1}^n\sum_{j=i+1}^n\Cov(X_i,X_j)),\quad \Cov(X_i,X_j)=0\\
-=&\frac{1}{n}\Var(X)
-\ea\]
-\epr
-\sssc{Markov's inequality}
-Let $X$ be a non-negative random variable. Then for any $a>0$,
-\[P(X\ge a)\le\frac{E(X)}{a}.\]
-\bpr
-Consider the derived random variable
-\[Y=\bcs a,\quad&X\ge a,\\0,\quad&\tx{otherwise}.\ecs\]
-$Y\le X$ a.s., so $E(Y)=a\cdot P(X\ge a)\le E(X)$.
-\epr
-\sssc{Chebyshev's inequality}
-Let $X$ be a random variable with mean $\mu$ and variance $\sigma^2$. Then for any $\varepsilon>0$,
-\[P(\abs{X-\mu}\ge\varepsilon)\le\frac{\sigma^2}{\varepsilon^2}.\]
-\bpr
-Consider the derived random variable $Y=(X-\mu)^2$. $Y\ge0$ a.s., so we can apply Markov's inequality to get
-\[P(\abs{X-\mu}\ge\varepsilon)=P(Y\ge\varepsilon^2)\le\frac{E(Y)}{\varepsilon^2}=\frac{\sigma^2}{\varepsilon^2}.\]
-\epr
-Equivalently, for any $k>0$,
-\[P(\abs{X-\mu}\ge k\sigma)\le\frac{1}{k^2}.\]
-\sssc{Concentration inequality and weak law of large numbers (WLLN) for sample mean}
-Apply Chebyshev's inequality to $\bar{X}$, for any $\varepsilon>0$,
-\[P(\abs{\bar{X}-\mu}\ge\varepsilon)\le\frac{\Var(\bar{X})}{\varepsilon^2}=\frac{\sigma^2}{n\varepsilon^2},\]
-or equivalently, for any $k>0$,
-\[P(\abs{\bar{X}-\mu}\ge k\sigma)\le\frac{1}{nkn^2}.\]
-Thus if $\sigma$ is finite, for any $\varepsilon,\delta>0$, there exists $n\in\bbN$ such that
-\[P(\abs{\bar{X}-\mu}\ge\varepsilon)\le\delta.\]
-This kind of convergence is also called $\bar{X}$ converges to $\mu$ in probability, denoted as
-\[\bar{X}_n\xrightarrow{p}\mu\tx{\ as\ }n\to\infty\]
-or
-\[\lim_{n\to\infty}\bar{X}_n=\mu.\]
-\sssc{Chernoff bound}
-Let $X$ be a random variable. Then for $a\in\bbR$,
-\[P(X\ge a)\le\inf_{t\ge0}e^{-at}M_X(t).\]
-\bpr
-For any $t\ge0$,
-\[P(X\ge a)=P(e^{tX}\ge e^{ta})\]
-Apply Markov's inequality,
-\[P(e^{tX}\ge e^{ta})\le\frac{E(e^{tX})}{e^{ta}}=e^{-at}M_X(t).\]
-\epr
 \subsection{Families of Discrete Random Variables}
 \sssc{Discrete uniform random variable}
 \bit
@@ -1493,8 +1512,8 @@ p_{X+Y}(k)=&\sum_{j=0}^k\frac{\mu^je^{-\mu}}{j!}\frac{\lambda^{k-j}e^{-\lambda}}
 \epr
 \eit
 \sssc{Poisson limit of binomials}
-For any fixed $\lambda\in(0,\infty)$, let $X\sim\operatorname{Pois}(\lambda)$ and $X_n\sim\operatorname{Bin}\qty(n,\frac{\lambda}{n})$ for any $n\in\bbN$. Then for any $k\in\bbN_0$,
-\[\lim_{n\to\infty}P(X_n=k)=P(X=k).\]
+For any fixed $\lambda\in(0,\infty)$, suppose $X\sim\operatorname{Pois}(\lambda)$ and sequence $\qty(X_n\sim\operatorname{Bin}\qty(n,\frac{\lambda}{n}))_{n\in\bbN}$. Then
+\[X_n\xrightarrow{\tx{d}}X\;\tx{as}\;n\to\infty.\]
 \bpr
 \[\ba
 \lim_{n\to\infty}P(X_n=k)&=\lim_{n\to\infty}\binom{n}{k}\frac{\lambda^k}{n^k}\qty(1-\frac{\lambda}{n})^{n-k}\\
@@ -1948,22 +1967,80 @@ P(\operatorname{Erlang}(k,\lambda)>x)&=1-F_X(x)\\
 \epr
 \eit
 \sssc{Geometric to exponential limit theorem}
-For any fixed $\lambda\in(0,\infty)$, let $X_n\sim\operatorname{Geom}\qty(\frac{\lambda}{n})$ and $Y_n=\frac{X_n}{n}$. Then
-\[\lim_{n\to\infty}Y_n=\operatorname{Exp}(\lambda).\]
+For any fixed $\lambda\in(0,\infty)$, let $\qty(X_n\sim\operatorname{Geom}\qty(\frac{\lambda}{n}))_{n\in\bbN}$, $\qty(Y_n=\frac{X_n}{n})_{n\in\bbN}$, and $Y\sim\operatorname{Exp}(\lambda)$. Then
+\[Y_n\xrightarrow{\tx{d}}Y\;\tx{as}\;n\to\infty.\]
 \bpr
 \[F_{Y_n}(x)=1-\qty(1-\frac{\lambda}{n})^{\lfloor nx\rfloor}\]
 \[\lim_{n\to\infty}F_{Y_n}(x)=1-e^{-\lambda x}\]
 \epr
 \sssc{Negative binomial to Erlang limit theorem}
-For any fixed $\lambda\in(0,\infty)$, let $X_n\sim\operatorname{NegBin}\qty(r,\frac{\lambda}{n})$ and $Y_n=\frac{X_n}{n}$. Then
-\[\lim_{n\to\infty}Y_n=\operatorname{Erlang}(r,\lambda).\]
+For any fixed $\lambda\in(0,\infty)$, let $\qty(X_n\sim\operatorname{NegBin}\qty(r,\frac{\lambda}{n}))_{n\in\bbN}$, $\qty(Y_n=\frac{X_n}{n})_{n\in\bbN}$, and $Y\sim\operatorname{Erlang}(r,\lambda)$. Then
+\[Y_n\xrightarrow{\tx{d}}Y\;\tx{as}\;n\to\infty.\]
 \bpr
 PLACEHOLDER
 \epr
 \ssc{Families of Absolutely Continuous Random Vector}
 \sssc{Multivariate or Joint Normal or Gaussian random variable}
 PLACEHOLDER
-\ssc{Central limit theorem (CLT)}
+\ssc{Sample Mean}
+\sssc{Sample mean of i.i.d. random variables}
+Let $X_1,X_2\ldots,X_n$ be a sequence of i.i.d. random variables and $X_i\sim X$ for all $i$. The sample mean of $X_1,X_2\ldots,X_n$ is defined as
+\[\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i,\]
+which is a random variable that depends on $X_1,X_2\ldots,X_n$.
+\sssc{Mean and variance of sample mean}
+\[E(\bar{X})=E(X).\]
+\[\Var(\bar{X})=\frac{1}{n}\Var(X).\]
+\bpr
+\[\ba
+\Var(\bar{X})=&\Var(\frac{1}{n}\sum_{i=1}^nX_i)\\
+=&\frac{1}{n^2}\Var(\sum_{i=1}^nX_i)
+=&\frac{1}{n^2}\qty(\sum_{i=1}^n\Var(X_i)+\sum_{i=1}^n\sum_{j=i+1}^n\Cov(X_i,X_j)),\quad \Cov(X_i,X_j)=0\\
+=&\frac{1}{n}\Var(X)
+\ea\]
+\epr
+\sssc{Markov's inequality}
+Let $X$ be a non-negative random variable. Then for any $a>0$,
+\[P(X\ge a)\le\frac{E(X)}{a}.\]
+\bpr
+Consider the derived random variable
+\[Y=\bcs a,\quad&X\ge a,\\0,\quad&\tx{otherwise}.\ecs\]
+$Y\le X$ a.s., so $E(Y)=a\cdot P(X\ge a)\le E(X)$.
+\epr
+\sssc{Chebyshev's inequality}
+Let $X$ be a random variable with mean $\mu$ and variance $\sigma^2$. Then for any $\varepsilon>0$,
+\[P(\abs{X-\mu}\ge\varepsilon)\le\frac{\sigma^2}{\varepsilon^2}.\]
+\bpr
+Consider the derived random variable $Y=(X-\mu)^2$. $Y\ge0$ a.s., so we can apply Markov's inequality to get
+\[P(\abs{X-\mu}\ge\varepsilon)=P(Y\ge\varepsilon^2)\le\frac{E(Y)}{\varepsilon^2}=\frac{\sigma^2}{\varepsilon^2}.\]
+\epr
+Equivalently, for any $k>0$,
+\[P(\abs{X-\mu}\ge k\sigma)\le\frac{1}{k^2}.\]
+\sssc{Concentration inequality for sample mean}
+Apply Chebyshev's inequality to $\bar{X}$, for any $\varepsilon>0$,
+\[P(\abs{\bar{X}-\mu}\ge\varepsilon)\le\frac{\Var(\bar{X})}{\varepsilon^2}=\frac{\sigma^2}{n\varepsilon^2},\]
+or equivalently, for any $k>0$,
+\[P(\abs{\bar{X}-\mu}\ge k\sigma)\le\frac{1}{nkn^2}.\]
+Thus if $\sigma$ is finite, for any $\varepsilon,\delta>0$, there exists $n\in\bbN$ such that
+\[P(\abs{\bar{X}-\mu}\ge\varepsilon)\le\delta.\]
+\sssc{Weak law of large numbers (WLLN) or Khinchin's law}
+
+This kind of convergence is also called $\bar{X}$ converges to $\mu$ in probability, denoted as
+\[\bar{X}_n\xrightarrow{p}\mu\tx{\ as\ }n\to\infty\]
+or
+\[\lim_{n\to\infty}\bar{X}_n=\mu.\]
+
+
+
+\sssc{Chernoff bound}
+Let $X$ be a random variable. Then for $a\in\bbR$,
+\[P(X\ge a)\le\inf_{t\ge0}e^{-at}M_X(t).\]
+\bpr
+For any $t\ge0$,
+\[P(X\ge a)=P(e^{tX}\ge e^{ta})\]
+Apply Markov's inequality,
+\[P(e^{tX}\ge e^{ta})\le\frac{E(e^{tX})}{e^{ta}}=e^{-at}M_X(t).\]
+\epr
+\sssc{Central limit theorem (CLT)}
 PLACEHOLDER
 Continuity correction
 
