@@ -513,16 +513,6 @@ For two discrete random variables $X,Y$ with target sample space $\Omega$, for a
 \sssc{For absolutely continuous random variable}
 For two absolutely continuous random variables $X,Y$,
 \[f_{XY}(z)=\int_{-\infty}^0f_{X,Y}\qty(x,\frac{z}{x})\frac{1}{\abs{x}}\dd{x}+\int_0^{\infty}f_{X,Y}\qty(x,\frac{z}{x})\frac{1}{\abs{x}}\dd{x}.\]
-\ssc{Sum of random variables}
-\sssc{Sum of independent random variables theorem}
-For two independent real-valued random variables $X,Y$ with the same source sample space and event space, and with pushforward probability measure $P_X$ and $P_Y$ respectively, let the Schwartz distributions induced by $P_X$ and $P_Y$ be $T_X$ and $T_Y$ respectively. Then the Schwartz distribution $T_{X+Y}$ induced by the pushforward probability measure $P_{X+Y}$ of the sum random variable $X+Y$ is the distributional convolution of $T_1$ and $T_2$, that is,
-\[T=T_1*T_2.\]
-\sssc{Sum of independent discrete random variables theorem}
-For two independent discrete random variables $X,Y$,
-\[p_{X+Y}(z)=\sum_{x\in\bbR}p_X(x)p_Y(z-x).\]
-\sssc{Sum of independent absolutely continuous random variables theorem}
-For two independent absolutely continuous random variables $X,Y$,
-\[f_{X+Y}(z)=\int_{-\infty}^{\infty}f_X(x)f_Y(z-x)\dd{x}.\]
 \ssc{(Mathematical) Expected Value, Expectation (期望值), or Mean (平均值)}
 \sssc{Definition}
 For a real-valued random variable $X$ on $(\Omega_s,\calF_s,P_s)$ with induced probability space $(\Omega_X,\calF_X,P_X)$, the expected value or expectation $E(X)$, $\bbE(X)$, $E[X]$, or $\bbE[X]$, or mean $\mu_X$, of it is defined as the Lebesgue integral
@@ -590,7 +580,7 @@ and
 \sssc{Product of random variables}
 For $d$ real-valued random variables $X_1,X_2,\ldots,X_d$,
 \[E(\prod_{i=1}^dX_i)=\int_{-\infty}^{\infty}\ldots\int_{-\infty}^{\infty}\prod_{i=1}^dx_if_{X_1,X_2,\ldots,X_d}(x_1,x_2,\ldots,x_d)\dd{x_1}\ldots\dd{x_d}.\]
-\sssc{Independent random variables}
+\sssc{Product of independent random variables}
 If $X_1,\ldots,X_d$ are independent,
 \[E(\prod_{i=1}^dX_i)=\prod_{i=1}^dE(X_i).\]
 \sssc{Affine Transformation}
@@ -616,6 +606,8 @@ For two real-valued random variables $X,Y$, their covariance $\Sigma(X,Y)$ or $\
 \[\Cov(X,Y)=E\qty((X-E(X))(Y-E(Y)))=E(XY)-E(X)E(Y).\]
 Thus,
 \[\Cov(X,X)=\Var(X).\]
+If $X,Y$ are independent,
+\[\Cov(X,Y)=0.\]
 For an $n$-dimensional vector of real-valued random variables $X=(X_1,X_2,\ldots)$ with $n\in\bbN\cup\{\aleph_0\}$, the covariance matrix $\Sigma(X)$, $\Cov(X)$, or $\CovMat(X)$ is defined as
 \[\CovMat(X)=E\qty((\mb{X}-E(\mb{X}))(\mb{X}-E(\mb{X}))^{\top}),\]
 that is,
@@ -637,11 +629,15 @@ For two real-valued random variables $X,Y$, the Pearson correlation coefficient 
 \[\rho_{X,Y}=\frac{\Cov(X,Y)}{\SD(X)\SD(Y)}=\Cov(\frac{X-E(X)}{\SD(X)},\frac{Y-E(Y)}{\SD(Y)}).\]
 Thus,
 \[\rho_{X,X}=1\]
+If $X,Y$ are independent,
+\[\rho_{X,Y}=0.\]
 \sssc{Correlation}
 For two real-valued random variables $X,Y$, the correlation $r_{X,Y}$ is defined as
 \[r_{X,Y}=E(XY).\]
 Thus,
 \[r_{X,X}=E(X^2).\]
+If $X,Y$ are independent,
+\[r_{X,Y}=E(XY)=E(X)E(Y).\]
 \sssc{Sum of random variables}
 For $n$-dimensional real-valued random vector $X=(X_1,X_2,\ldots,X_n)$ and real vector $a=(a_1,a_2,\ldots,a_n)$ with $n\in\bbN$,
 \[\Var(\sum_{i=1}^na_iX_i)=a^{\top}\CovMat(X)a=\sum_{i=1}^na_i^{\pht{i}2}\Var(X_i)+2a_ia_j\sum_{i=1}^n\sum_{j=i+1}^n\Cov(X_i,X_j).\]
@@ -650,10 +646,6 @@ For real-valued random variables $X,Y$ and real numbers $a,b$,
 For real ranom variables $X_1,\ldots,X_c,Y_1,\ldots,Y_d$ and real numbers $a_1,\ldots,_c,b_1,\ldots,b_d$,
 \[\Cov(\sum_{i=1}^ca_iX_i,\sum_{i=1}^db_iY_i)=\sum_{i=1}^c\sum_{j=1}^da_ib_j\Cov(X_i,Y_j)\]
 (bilinearity).
-\sssc{Independent random variables}
-If $X,Y$ are independent,
-\[r_{X,Y}=E(XY)=E(X)E(Y)\]
-\[\Cov(X,Y)=\rho_{X,Y}=0\]
 \sssc{Affine Transformation}
 For a real-valued random variable $X$, $a\in\bbR$, and $b\in\mathbb{R}$, let $W=aX+b$,
 \[\Var(W)=a^2\Var(X).\]
@@ -784,9 +776,11 @@ For a real-valued random variable $X$, $a\in\bbR_{\neq0}$, and $b\in\mathbb{R}$,
 \sssc{Logarithmic Linearity}
 For indexed families of real-valued random variables $(X_i)_{i\in I}$ and real numbers $(a_i)_{i\in I}$ with $\abs{I}\in\bbN\cup\{\aleph_0\}$, where for $\abs{I}=\aleph_0$ suppose RHS is convergent,
 \[M_{\sum_{i\in I}a_iX_i}(t)=\prod_{i\in I}M_{X_i}\qty(a_it).\]
-\sssc{Independent random variables}
+\sssc{Moments of poduct of independent random variables}
 If $X_1,\ldots,X_d$ are independent,
 \[E(\prod_{i=1}^dX_i^{\pht{i}n})=\prod_{i=1}^dE(X_i^{\pht{i}n})\]
+\sssc{MGF of sum of independent random variables}
+If $X_1,\ldots,X_d$ are independent,
 \[M_{\sum_{i=1}^dX_i}(t)=\prod_{i=1}^dM_{X_i}(t)\]
 \ssc{Mode (眾數)}
 \sssc{For discrete random variable}
@@ -997,6 +991,41 @@ For two real-valued random variables $X,Y$  (such that $P_{X|Y}$ is a regular co
 =&E(\Var(X|Y))+E(\Var(X|Y))
 \ea\]
 \epr
+\ssc{Sum of independent random variables}
+\sssc{Sum of independent random variables}
+For two independent real-valued random variables $X,Y$ with the same source sample space and event space, and with pushforward probability measure $P_X$ and $P_Y$ respectively, let the Schwartz distributions induced by $P_X$ and $P_Y$ be $T_X$ and $T_Y$ respectively. Then the Schwartz distribution $T_{X+Y}$ induced by the pushforward probability measure $P_{X+Y}$ of the sum random variable $X+Y$ is the distributional convolution of $T_1$ and $T_2$, that is,
+\[T=T_1*T_2.\]
+\bpr
+By invertibility of Laplace transform and MGF of sum of independent random variables.
+\epr
+\sssc{Sum of independent discrete random variables}
+For two independent discrete random variables $X,Y$,
+\[p_{X+Y}(z)=\sum_{x\in\bbR}p_X(x)p_Y(z-x).\]
+\bpr
+\[P(X+Y=z)=\sum_{x\in\bbR}P(X=x)P(Y=z-x).\]
+\epr
+\sssc{Sum of independent absolutely continuous random variables}
+For two independent absolutely continuous random variables $X,Y$,
+\[f_{X+Y}(z)=\int_{-\infty}^{\infty}f_X(x)f_Y(z-x)\dd{x}.\]
+\bpr
+\[F_{X+Y}(z)=\int_{-\infty}^{\infty}\int_{-\infty}^{z-x}f_X(x)f_Y(y)\dd{y}\dd{x}=\int_{-\infty}^{\infty}f_X(x)F_Y(z-x)\dd{x}.\]
+\[f_{X+Y}(z)=\dv{}{z}F_{X+Y}(z)=\int_{-\infty}^{\infty}f_X(x)f_Y(z-x)\dd{x}.\]
+\epr
+\ssc{Random sum of i.i.d. random variables}
+\sssc{Random sum of random variables}
+Let $X_1,X_2\ldots$ be a sequence of random variables, and let $N$ be a positive-integer-valued random variable. We are interested in the distribution of the random sum $S_N=\sum_{i=1}^NX_i$. Here, we will focus on the case where $X_i$'s are i.i.d. and independent of $N$, let $X_i\sim X$ for all $i$.
+\sssc{MGF}
+\[M_{S_N}(t)=M_N(\ln(M_X(t))).\]
+\bpr
+\[\ba
+M_{S_N}(t)=&E(e^{tS_N})\\
+=&E(E(e^{tS_N}|N))\\
+=&E(M_X(t)^N)\\
+=&E(e^{\ln(M_X(t))N)\\
+=&M_N(\ln(M_X(t)))
+\ea\]
+\epr
+PLACEHOLDER HERE
 \subsection{Families of Discrete Random Variables}
 \sssc{Discrete uniform random variable}
 \bit
@@ -1078,6 +1107,11 @@ H(X)&=-\sum_{k=a}^b\frac{1}{b-a+1}\ln(\frac{1}{b-a+1})\\
 \item Entropy:
 \[H(X)=-p\ln p-(1-p)\ln(1-p)\]
 \item PMF monotonicity: strictly increasing if $p>\frac{1}{2}$, constant if $p=\frac{1}{2}$, and strictly decreasing if $p<\frac{1}{2}$
+\item Sum of independent random variables: Suppose $X_i\sim\operatorname{Bern}(p)$ for $i\in\bbN_{\le n}$ are independent random variables. Then
+\[\sum_{i=1}^nX_i\sim\operatorname{Bin}(n,p).\]
+\bpr
+\[p_{\sum_{i=1}^nX_i}(k)=\binom{n}{k}p^k(1-p)^{n-k},\quad k\in\bbZ\cap[0,n]\]
+\epr
 \eit
 \sssc{Binomial random variable}
 \bit
@@ -1137,7 +1171,12 @@ Solve $g(k*)=1$ for $k*$.
 \[k*=(n+1)p-1\]
 \epr
 \item PMF monotonicity: strictly increasing for $k\le(n+1)p$ and strictly decreasing for $k\ge(n+1)p$
-\item Decomposition: sum of $n$ i.i.d. Bernoulli random variable with parameter $p$
+\item Decomposition: sum of $n$ i.i.d. Bernoulli random variables with parameter $p$
+\item Sum of independent random variables: Suppose $X_i\sim\operatorname{Bin}(n_i,p)$ for $i\in\bbN_{\le n}$ are independent random variables. Then
+\[\sum_{i=1}^nX_i\sim\operatorname{Bin}(\sum_{i=1}^nn_i,p).\]
+\bpr
+Decompose to Bernoulli random variables.
+\epr
 \eit
 \sssc{Geometric random variable}
 \bit
@@ -1232,11 +1271,21 @@ S&=\sum_{k=1}^{\infty}k(1-p)^{k-1}\\
 \bpr
 \[\frac{p(1-p)^{j+k}}{(1-p)^j}=p(1-p)^k.\]
 \epr
+\item Sum of independent random variables: Suppose $X_i\sim\operatorname{Geom}(p)$ for $i\in\bbN_{\le n}$ are independent random variables. Then
+\[\sum_{i=1}^nX_i\sim\operatorname{NegBin}(n,p).\]
+\bpr
+Prove by mathematical induction. For $n=1$, $\operatorname{NegBin}(1,p)=\operatorname{Geom}(p)$. Assume $\sum_{i=1}^{n-1}X_i\sim\operatorname{NegBin}(n-1,p)$, we show that $\sum_{i=1}^nX_i\sim\operatorname{NegBin}(n,p)$.
+\[\ba
+p_{\sum_{i=1}^nX_i}(k)=&\sum_{i=n-1}^{k-1}\binom{i-1}{n-2}p^{n-1}(1-p)^{i-n+1}p(1-p)^{k-i-1}\\
+=&p^n(1-p)^{k-n}\sum_{i=n-1}^{k-1}\binom{i-1}{n-2}
+=&\binom{k-1}{n-1}p^n(1-p)^{k-n}
+\ea\]
+\epr
 \eit
 \sssc{Negative binomial or Pascal random variable}
 \bit
 \item Trial: A negative binomial or Pascal random variable counts the number of independent Bernoulli trials with success probability $p$ until the $r$th success.
-\item Notation: $X\sim\operatorname{NB}(r,p)$, $X\sim\operatorname{NegBin}(r,p)$, or $X\sim\operatorname{Pascal}(r,p)$, read as $X$ is negative binomial or Pascal distributed with parameters $r$ and $p$.
+\item Notation: $X\sim\operatorname{NegBin}(r,p)$, $X\sim\operatorname{Pascal}(r,p)$, or $X\sim\operatorname{NB}(r,p)$, read as $X$ is negative binomial or Pascal distributed with parameters $r$ and $p$.
 \item Parameters: $r\in\bbN$, $p\in(0,1]$
 \item Support: $\bbN\cap[r,\infty)$
 \item PMF:
@@ -1267,6 +1316,11 @@ p_X(k+1)-p_X(k)&=\binom{k}{r-1}p^r(1-p)^{k-r+1}-\binom{k-1}{r-1}p^r(1-p)^{k-r}\\
 \epr
 \item PMF monotonicity: strictly increasing for $k\le\frac{r-1}{p}$ and strictly decreasing for $k\ge\frac{r-1}{p}$
 \item Decomposition: sum of $r$ i.i.d. geometric random variable with parameter $p$
+\item Sum of independent random variables: Suppose $X_i\sim\operatorname{NegBin}(r_i,p)$ for $i\in\bbN_{\le n}$ are independent random variables. Then
+\[\sum_{i=1}^nX_i\sim\operatorname{NegBin}(\sum_{i=1}^nr_i,p).\]
+\bpr
+Decompose to geometric random variables.
+\epr
 \eit
 \sssc{Poisson random variable}
 \bit
@@ -1374,6 +1428,16 @@ P(Y=m)&=\sum_{k=1}^{\infty}P(Y=m\mid X=k)P(X=k)\\
 &=\frac{(\lambda p)^me^{-\lambda}}{m!}\sum_{k=m}^{\infty}\frac{(\lambda(1-p))^{k-m}}{(k-m)!}\\
 &=\frac{(\lambda p)^me^{-\lambda}}{m!}e^{\lambda(1-p)}\\
 &=\frac{(\lambda p)^me^{-\lambda p}}{m!}
+\ea\]
+\epr
+\item Sum of independent random variables: Suppose $X_i\sim\operatorname{Pois}(\lambda_i)$ for $i\in\bbN_{\le n}$ are independent random variables. Then
+\[\sum_{i=1}^nX_i\sim\operatorname{Pois}(\sum_{i=1}^n\lambda_i).\]
+\bpr
+Prove for two independent random variables $X\sim\operatorname{Pois}(\mu)$ and $Y\sim\operatorname{Pois}(\lambda)$.
+\[\ba
+p_{X+Y}(k)=&\sum_{j=0}^k\frac{\mu^je^{-\mu}}{j!}\frac{\lambda^{k-j}e^{-\lambda}}{(k-j)!}\\
+=&\frac{e^{-(\mu+\lambda)}}{k!}\sum_{j=0}^k\binom{k}{j}\mu^j\lambda^{k-j}\\
+=&\frac{(\mu+\lambda)^ke^{-(\mu+\lambda)}}{k!}
 \ea\]
 \epr
 \eit
@@ -1580,21 +1644,6 @@ h(X)&=-\int_{-\infty}^{\infty}\frac{1}{\sqrt{2\pi}\sigma}\exp(-\frac{(x-\mu)^2}{
 \[X-c\sim\calN(\mu-c,\sigma^2),\quad c\in\bbR\]
 \item Scaling:
 \[cX\sim\calN(c\mu,c^2\sigma^2),\quad c\in\bbR_{\neq 0}\]
-\item Sum of independent Gaussian random variables: Suppose $X_i\sim\calN(\mu_i,\sigma_i^{\pht{i}2})$ for $i\in\bbN_{\le n}$ are independent random variables. Then
-\[\sum_{i=1}^nX_i\sim\calN(\sum_{i=1}^n\mu_i,\sum_{i=1}^n\sigma_i^{\pht{i}2}).\]
-\bpr
-Prove for two independent Gaussian random variables $X\sim(\mu,\sigma^2)$ and $Y\sim(\lambda,\gamma^2)$.
-\[\ba
-f_{X+Y}(z)=&\int_{-\infty}^{\infty)\frac{1}{\sqrt{2\pi}\sigma}\exp(-\frac{(x-\mu)^2}{2\sigma^2})\frac{1}{\sqrt{2\pi}\gamma}\exp(-\frac{(z-x-\lambda)^2}{2\gamma^2})\dd{x}\\
-=&\frac{1}{2\pi\sigma\gamma}\int_{-\infty}^{\infty)\exp(-\frac{1}{2}\qty(\frac{(x-\mu)^2}{\sigma^2}+\frac{(x-(z-\lambda))^2}{\gamma^2}))\dd{x}\\
-=&\frac{1}{2\pi\sigma\gamma}\int_{-\infty}^{\infty)\exp(-\frac{1}{2}\qty(x^2\qty(\frac{1}{\sigma^2}+\frac{1}{\gamma^2})-2x\qty(\frac{\mu}{\sigma^2}+\frac{z-\lambda}{\gamma^2})+\qty(\frac{\mu^2}{\sigma^2}+\frac{(z-\lambda)^2}{\gamma^2})))\dd{x},\quad\alpha=\frac{1}{\sigma^2}+\frac{1}{\gamma^2},\beta=\frac{\mu}{\sigma^2}+\frac{z-\lambda}{\gamma^2},C(z)=\frac{\mu^2}{\sigma^2}+\frac{(z-\lambda)^2}{\gamma^2}\\
-=&\frac{1}{2\pi\sigma\gamma}\exp(\frac{1}{2}\qty(\frac{\beta^2}{\alpha}-C(z)))\int_{-\infty}^{\infty)\exp(-\frac{\alpha}{2}\qty(x-\frac{\beta}{\alpha})^2)\dd{x},\quad u=\frac{\sqrt{\alpha}}{\sqrt{2}}\qty(x-\frac{\beta}{\alpha})\\
-=&\frac{1}{\pi\sqrt{2\alpha}\sigma\gamma}\exp(\frac{1}{2}\qty(\frac{\beta^2}{\alpha}-C(z)))\int_{-\infty}^{\infty)\exp(-u^2)\dd{u}\\
-=&\frac{1}{\sqrt{2\pi\qty(\sigma^2+\gamma^2)}}\exp(\frac{1}{2}\qty(\frac{\qty(\mu\gamma^2+\qty(z-\lambda)\sigma^2)^2}{\sigma^2\gamma^2\qty(\sigma^2+\gamma^2)}-\frac{\mu^2}{\sigma^2}-\frac{(z-\lambda)^2}{\gamma^2}))\\
-=&\frac{1}{\sqrt{2\pi\qty(\sigma^2+\gamma^2)}}\exp(\frac{1}{2}\frac{\mu^2\gamma^4+2z\mu\sigma^2\gamma^2-2\mu\lambda\sigma^2\gamma^2+z^2\sigma^4-2z\lambda\sigma^4+\lambda^2\sigma^4-\mu^2\sigma^2\gamma^2-\mu^2\gamma^4-z^2\sigma^4+2z\lambda\sigma^4-\lambda^2\sigma^4-z^2\sigma^2\gamma^2+2z\lambda\sigma^2\gamma^2-\lambda^2\sigma^2\gamma^2}{\sigma^2\gamma^2\qty(\sigma^2+\gamma^2)})\\
-=&\frac{1}{\sqrt{2\pi\qty(\sigma^2+\gamma^2)}}\exp(-\frac{\qty(z-(\mu+\lambda))^2}{2\qty(\sigma^2+\gamma^2)})
-\ea\]
-\epr
 \item Symmetry: about $\mu$
 \item PDF monotonicity: strictly increasing for $x\le\mu$ and strictly decreasing for $x\ge\mu$
 \item CCDF:
@@ -1607,6 +1656,21 @@ f_{X+Y}(z)=&\int_{-\infty}^{\infty)\frac{1}{\sqrt{2\pi}\sigma}\exp(-\frac{(x-\mu
 \ea\]
 \epr
 The CCDF of $Z$ is called Q-function and denoted as $Q(x)$.
+\item Sum of independent random variables: Suppose $X_i\sim\calN(\mu_i,\sigma_i^{\pht{i}2})$ for $i\in\bbN_{\le n}$ are independent random variables. Then
+\[\sum_{i=1}^nX_i\sim\calN(\sum_{i=1}^n\mu_i,\sum_{i=1}^n\sigma_i^{\pht{i}2}).\]
+\bpr
+Prove for two independent random variables $X\sim\calN(\mu,\sigma^2)$ and $Y\sim\calN(\lambda,\gamma^2)$.
+\[\ba
+f_{X+Y}(z)=&\int_{-\infty}^{\infty)\frac{1}{\sqrt{2\pi}\sigma}\exp(-\frac{(x-\mu)^2}{2\sigma^2})\frac{1}{\sqrt{2\pi}\gamma}\exp(-\frac{(z-x-\lambda)^2}{2\gamma^2})\dd{x}\\
+=&\frac{1}{2\pi\sigma\gamma}\int_{-\infty}^{\infty)\exp(-\frac{1}{2}\qty(\frac{(x-\mu)^2}{\sigma^2}+\frac{(x-(z-\lambda))^2}{\gamma^2}))\dd{x}\\
+=&\frac{1}{2\pi\sigma\gamma}\int_{-\infty}^{\infty)\exp(-\frac{1}{2}\qty(x^2\qty(\frac{1}{\sigma^2}+\frac{1}{\gamma^2})-2x\qty(\frac{\mu}{\sigma^2}+\frac{z-\lambda}{\gamma^2})+\qty(\frac{\mu^2}{\sigma^2}+\frac{(z-\lambda)^2}{\gamma^2})))\dd{x},\quad\alpha=\frac{1}{\sigma^2}+\frac{1}{\gamma^2},\beta=\frac{\mu}{\sigma^2}+\frac{z-\lambda}{\gamma^2},C(z)=\frac{\mu^2}{\sigma^2}+\frac{(z-\lambda)^2}{\gamma^2}\\
+=&\frac{1}{2\pi\sigma\gamma}\exp(\frac{1}{2}\qty(\frac{\beta^2}{\alpha}-C(z)))\int_{-\infty}^{\infty)\exp(-\frac{\alpha}{2}\qty(x-\frac{\beta}{\alpha})^2)\dd{x},\quad u=\frac{\sqrt{\alpha}}{\sqrt{2}}\qty(x-\frac{\beta}{\alpha})\\
+=&\frac{1}{\pi\sqrt{2\alpha}\sigma\gamma}\exp(\frac{1}{2}\qty(\frac{\beta^2}{\alpha}-C(z)))\int_{-\infty}^{\infty)\exp(-u^2)\dd{u}\\
+=&\frac{1}{\sqrt{2\pi\qty(\sigma^2+\gamma^2)}}\exp(\frac{1}{2}\qty(\frac{\qty(\mu\gamma^2+\qty(z-\lambda)\sigma^2)^2}{\sigma^2\gamma^2\qty(\sigma^2+\gamma^2)}-\frac{\mu^2}{\sigma^2}-\frac{(z-\lambda)^2}{\gamma^2}))\\
+=&\frac{1}{\sqrt{2\pi\qty(\sigma^2+\gamma^2)}}\exp(\frac{1}{2}\frac{\mu^2\gamma^4+2z\mu\sigma^2\gamma^2-2\mu\lambda\sigma^2\gamma^2+z^2\sigma^4-2z\lambda\sigma^4+\lambda^2\sigma^4-\mu^2\sigma^2\gamma^2-\mu^2\gamma^4-z^2\sigma^4+2z\lambda\sigma^4-\lambda^2\sigma^4-z^2\sigma^2\gamma^2+2z\lambda\sigma^2\gamma^2-\lambda^2\sigma^2\gamma^2}{\sigma^2\gamma^2\qty(\sigma^2+\gamma^2)})\\
+=&\frac{1}{\sqrt{2\pi\qty(\sigma^2+\gamma^2)}}\exp(-\frac{\qty(z-(\mu+\lambda))^2}{2\qty(\sigma^2+\gamma^2)})
+\ea\]
+\epr
 \eit
 \sssc{Q-function bounds and limit}
 \[\frac{x}{1+x^2}\varphi(x)<Q(x)<\frac{\varphi(x)}{x}\]
@@ -1657,8 +1721,6 @@ Suppose $X_i\sim N(\mu_i,\sigma)$ for $i\in\bbZ\cap[1,n]$ are independent, $\mb{
 \bpr
 By independency, apply Stein's lemma for each entry.
 \epr
-\sssc{Central limit theorem (CLT)}
-PLACEHOLDER
 \sssc{Exponential random variable}
 \bit
 \item Trial: An exponential random variable models the distance between adjacent events in a Poisson process with rate $\lambda$.
@@ -1745,8 +1807,6 @@ P(\operatorname{Exp}(\lambda)>x)&=1-F_X(x)\\
 &=\frac{\lambda^0e^{-\lambda}}{0!}
 \ea\]
 \epr
-\item Rates add under minimum: For an index family of i.i.d. random variables $(X_i\sim\operatorname{Exp}(\lambda_i))_{i\in I}$ with $\abs{I}\in\bbN$, if $P(X>x)=P(\min_{i\in I}X_i>x)$, then
-\[X\sim\operatorname{Exp}(\sum_{i\in I}\lambda_i).\]
 \item Ceiling:
 \[\lceil X\rceil\simX\sim\operatorname{Geom}(1-e^{-\lambda}).\]
 \bpr
@@ -1758,6 +1818,22 @@ P(k-1<x\le k)=&\int_{k-1}^k\lambda e^{-\lambda x}\dd{x}\\
 =&\qty(1-e^{-\lambda})\qty(e^{-\lambda})^{k-1}
 \ea\]
 \epr
+\item CCDF:
+\[\bar{F}_X(x)=e^{-\lambda x}.\]
+\item Rates add under minimum: Suppose $X_i\sim\operatorname{Exp}(\lambda_i)$ for $i\in\bbN_{\le n}$ are independent random variables.
+\[\min_{i\in\bbN_{\le n}}X_i\sim\operatorname{Exp}(\sum_{i\in I}\lambda_i).\]
+\bpr
+\[P(\min_{i\in\bbN_{\le n}}X_i>x)=\prod_{i=1}^ne^{-\lambda_ix}=e^{-\sum_{i=1}^n\lambda_ix}\]
+\epr
+\item Sum of independent random variables: Suppose $X_i\sim\operatorname{Exp}(\lambda)$ for $i\in\bbN_{\le n}$ are independent random variables. Then
+\[\sum_{i=1}^nX_i\sim\operatorname{Erlang}(n,\lambda).\]
+\bpr
+Prove by mathematical induction. For $n=1$, $\operatorname{Erlang}(1,\lambda)=\operatorname{Exp}(\lambda)$. Assume $\sum_{i=1}^{n-1}X_i\sim\operatorname{Erlang}(n-1,\lambda)$, we show that $\sum_{i=1}^nX_i\sim\operatorname{Erlang}(n,\lambda)$.
+\[\ba
+f_{\sum_{i=1}^nX_i}(z)=&\int_0^{\infty}\frac{\lambda^kx^{k-1}e^{-\lambda x}}{(k-1)!}\lambda e^{-\lambda(z-x)}\dd{x}\\
+=&\int_0^{\infty}\frac{\lambda^{k+1}x^{k-1}e^{-\lambda z}}{(k-1)!}\dd{x}\\
+=&\frac{\lambda^{k+1}x^ke^{-\lambda z}}{k!}
+\ea\]
 \eit
 \sssc{Erlang random variable}
 \bit
@@ -1836,4 +1912,10 @@ PLACEHOLDER
 \ssc{Families of Absolutely Continuous Random Vector}
 \sssc{Multivariate or Joint Normal or Gaussian random variable}
 PLACEHOLDER
+
+
+\ssc{Central limit theorem (CLT)}
+PLACEHOLDER
+Continuity correction
+
 \end{document}
