@@ -207,6 +207,7 @@ For a sequence $(A_n)_{n\in\bbZ{\ge k}} event for some $k\in\bbZ$,
 \sssc{Almost sure (a.s.) convergence}
 A sequence $(X_n)_{n\in\bbZ{\ge k}}$ of random variables for some $k\in\bbZ$ almost surely coverges to a random variable $X$, denoted as
 \[X_n\xrightarrow{a.s.}X\tx{\ as\ }n\to\infty,\]
+\[X_n\xrightarrow{a.s.}X\tx{\ when\ }n\to\infty,\]
 \[\lim_{n\to\infty}X_n\overset{\tx{a.s.}}{=}X,\]
 if
 \[P(\lim_{n\to\infty}X_n=X)=1.\]
@@ -214,6 +215,8 @@ if
 A sequence $(X_n)_{n\in\bbZ{\ge k}}$ of random variables for some $k\in\bbZ$ of random variables coverges in probability to a random variable $X$, denoted as
 \[X_n\xrightarrow{p}X\tx{\ as\ }n\to\infty,\]
 \[X_n\xrightarrow{P}X\tx{\ as\ }n\to\infty,\]
+\[X_n\xrightarrow{p}X\tx{\ when\ }n\to\infty,\]
+\[X_n\xrightarrow{P}X\tx{\ when\ }n\to\infty,\]
 \[\lim_{n\to\infty}X_n\overset{\tx{p}}{=}X,\]
 \[\lim_{n\to\infty}X_n\overset{\tx{P}}{=}X,\]
 if for all $\varepsilon>0$,
@@ -221,7 +224,11 @@ if for all $\varepsilon>0$,
 \sssc{Convergence in distribution or weak convergence}
 A sequence $(X_n)_{n\in\bbZ{\ge k}}$ of random variables for some $k\in\bbZ$ of random variables coverges in distribution or weakly converges to a random variable $X$, denoted as
 \[X_n\xrightarrow{d}X\tx{\ as\ }n\to\infty,\]
+\[X_n\xrightarrow{\calD}X\tx{\ as\ }n\to\infty,\]
+\[X_n\xrightarrow{d}X\tx{\ when\ }n\to\infty,\]
+\[X_n\xrightarrow{\calD}X\tx{\ when\ }n\to\infty,\]
 \[\lim_{n\to\infty}X_n\overset{\tx{d}}{=}X,\]
+\[\lim_{n\to\infty}X_n\overset{\tx{\calD}}{=}X,\]
 if for all $x$ such that $F_X(x)$ is continuous at $x$,
 \[\lim_{n\to\infty}F_{X_n}(x)=F_X(x).\]
 \sssc{Almost sure convergence implies convergence in probability}
@@ -273,6 +280,20 @@ Since $F_X(x)$ is continuous at $x$,
 \[\lim_{\varepsilon\to0}P(X\le x-\varepsilon)=\lim_{\varepsilon\to0}P(X\le x+\varepsilon)=P(X\le x).\]
 By squeeze theorem,
 \[\lim_{n\to\infty}P(X_n\le X)=P(X\le x).\]
+\epr
+\sssc{Convergence in distribution to a constant implies convergence in probability to it}
+For a sequence $(X_n)_{n\in\bbZ{\ge k}}$ of random variables for some $k\in\bbZ$ of random variables and a constant $C$, if
+\[X_n\xrightarrow{d}C\tx{\ as\ }n\to\infty,\]
+then
+\[X_n\xrightarrow{p}C\tx{\ as\ }n\to\infty.\]
+\bpr
+\[F_C(x)=\bcs0,\quad&x\le c,\\1,\quad&x>c.\ecs\]
+Convergence in distribution means
+\[\forall x<c\colon P(X_n\le x)\to0\]
+\[\forall x>c\colon P(X_n\le x)\to1\]
+\[\lim_{n\to\infty}P(X_n\le c-\varepsilon)=0.\]
+\[\lim_{n\to\infty}P(X_n\le c+\varepsilon)=1.\]
+\[\lim_{n\to\infty}P(X_n>c+\varepsilon)=\lim_{n\to\infty}1-P(X_n\le c+\varepsilon)=0.\]
 \epr
 \ssc{Discrete Random Variables}
 \sssc{Probability mass function (PMF)}
@@ -787,7 +808,7 @@ E((Y'-aX'-(E(Y)-aE(X)))^2)=&E((Y'-aX')^2)\\
 =&\qty(1-\rho_{X,Y}^{\pht{X,Y}2})^2\Var(Y)
 \ea\]
 \epr
-\ssc{Moment}
+\ssc{Moment, Moment generating function (MGF), and Characteristic function (CF)}
 \sssc{Moment}
 The $n$th moment of $X$ is defined as $E(X^n)$ for $n\in\bbN$. The zero-th moment $E(X^0)$ is defined as $1$.
 \sssc{Central moment}
@@ -812,7 +833,7 @@ p_1 \\ p_2 \\ \vdots \\ p_n
 \end{bmatrix}\]
 \epr
 \sssc{Moment generating function (MGF)}
-The moment generating function (MGF) of a random variable $X$, denoted as $M_X(t)$ or $\varphi_X(t)$, is defined as
+The moment generating function (MGF) of a random variable $X$, denoted as $M_X(t)$, is defined as
 \[M_X(t)=E\qty(e^{tX}),\quad t\in\bbR.\]
 \sssc{MGF as Laplace transform}
 In Stieltjes integral,
@@ -841,6 +862,9 @@ Thus,
 \[M_X^{\pht{X}(n)}(t)=E(X^ne^{tX})=\sum_{k=n}^{\infty}\frac{t^{k-n}}{(k-n)!}E(X^k)\]
 \[M_X^{\pht{X}(n)}(0)=E(X^k)\]
 \epr
+\sssc{Characteristic function (CF)}
+The moment generating function (MGF) of a random variable $X$, denoted as $\varphi_X(t)$, is defined as
+\[\varphi_X(t)=E\qty(e^{itX}),\quad t\in\bbR.\]
 \sssc{Affine Transformation}
 For a real-valued random variable $X$, $a\in\bbR_{\neq0}$, and $b\in\mathbb{R}$,
 \[M_{aX+b}(t)=e^{bt}M_X(at).\]
@@ -1982,9 +2006,9 @@ PLACEHOLDER
 \ssc{Families of Absolutely Continuous Random Vector}
 \sssc{Multivariate or Joint Normal or Gaussian random variable}
 PLACEHOLDER
-\ssc{Sample Mean}
+\ssc{Sample Mean, Bounds, and Convergences}
 \sssc{Sample mean of i.i.d. random variables}
-Let $X_1,X_2\ldots,X_n$ be a sequence of i.i.d. random variables and $X_i\sim X$ for all $i$. The sample mean of $X_1,X_2\ldots,X_n$ is defined as
+Let $\{X_n\}_{n=1}^{\infty}$ be a sequence of i.i.d. random variables and $X_i\sim X$ for all $i$. The sample mean of $X_1,X_2\ldots,X_n$ is defined as
 \[\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i,\]
 which is a random variable that depends on $X_1,X_2\ldots,X_n$.
 \sssc{Mean and variance of sample mean}
@@ -1999,7 +2023,7 @@ which is a random variable that depends on $X_1,X_2\ldots,X_n$.
 \ea\]
 \epr
 \sssc{Markov's inequality}
-Let $X$ be a non-negative random variable. Then for any $a>0$,
+Let $X$ be a non-negative random variable with finite mean. Then for any $a>0$,
 \[P(X\ge a)\le\frac{E(X)}{a}.\]
 \bpr
 Consider the derived random variable
@@ -2007,7 +2031,7 @@ Consider the derived random variable
 $Y\le X$ a.s., so $E(Y)=a\cdot P(X\ge a)\le E(X)$.
 \epr
 \sssc{Chebyshev's inequality}
-Let $X$ be a random variable with mean $\mu$ and variance $\sigma^2$. Then for any $\varepsilon>0$,
+Let $X$ be a random variable with finite mean $\mu$ and finite variance $\sigma^2$. Then for any $\varepsilon>0$,
 \[P(\abs{X-\mu}\ge\varepsilon)\le\frac{\sigma^2}{\varepsilon^2}.\]
 \bpr
 Consider the derived random variable $Y=(X-\mu)^2$. $Y\ge0$ a.s., so we can apply Markov's inequality to get
@@ -2015,22 +2039,6 @@ Consider the derived random variable $Y=(X-\mu)^2$. $Y\ge0$ a.s., so we can appl
 \epr
 Equivalently, for any $k>0$,
 \[P(\abs{X-\mu}\ge k\sigma)\le\frac{1}{k^2}.\]
-\sssc{Concentration inequality for sample mean}
-Apply Chebyshev's inequality to $\bar{X}$, for any $\varepsilon>0$,
-\[P(\abs{\bar{X}-\mu}\ge\varepsilon)\le\frac{\Var(\bar{X})}{\varepsilon^2}=\frac{\sigma^2}{n\varepsilon^2},\]
-or equivalently, for any $k>0$,
-\[P(\abs{\bar{X}-\mu}\ge k\sigma)\le\frac{1}{nkn^2}.\]
-Thus if $\sigma$ is finite, for any $\varepsilon,\delta>0$, there exists $n\in\bbN$ such that
-\[P(\abs{\bar{X}-\mu}\ge\varepsilon)\le\delta.\]
-\sssc{Weak law of large numbers (WLLN) or Khinchin's law}
-
-This kind of convergence is also called $\bar{X}$ converges to $\mu$ in probability, denoted as
-\[\bar{X}_n\xrightarrow{p}\mu\tx{\ as\ }n\to\infty\]
-or
-\[\lim_{n\to\infty}\bar{X}_n=\mu.\]
-
-
-
 \sssc{Chernoff bound}
 Let $X$ be a random variable. Then for $a\in\bbR$,
 \[P(X\ge a)\le\inf_{t\ge0}e^{-at}M_X(t).\]
@@ -2040,8 +2048,52 @@ For any $t\ge0$,
 Apply Markov's inequality,
 \[P(e^{tX}\ge e^{ta})\le\frac{E(e^{tX})}{e^{ta}}=e^{-at}M_X(t).\]
 \epr
-\sssc{Central limit theorem (CLT)}
+\sssc{Tight}
+Let $\{X_n\}_{n=1}^{\infty}$ be a sequence of random variables. It is called tight if
+\[\lim_{x\to\infty}\qty(\sup_nP(\abs{X_n}>x))=0.\]
+\sssc{Lévy’s continuity theorem or Lévy’s convergence theorem}
+Let $\{X_n\}_{n=1}^{\infty}$ be a sequence of random variables with characteristic functions $\{\varphi_n(t)=E\qty(e^{itX_n})\}_{n=1}^{\infty}$. If $\varphi_n(t)$ converges pointwise to some function $\varphi(t)$, then the following statements are equivalent
+\ben
+\item $X_n$ converges in distribution to some random variable $X$.
+\item $\varphi(t)$ is a characteristic function of some random variable $X$.
+\item $\{X_n\}_{n=1}^{\infty}$ is tight:
+\[\lim_{x\to\infty}\qty(\sup_nP(\abs{X_n}>x))=0.\]
+\item $\varphi(t)$ is continuous.
+\item $\varphi(t)$ is continuous at $t=0$.
+\eit
+And the $X$ in the first statement has characteristic function $\varphi(t)$.
+\bpr
 PLACEHOLDER
+\epr
+\sssc{Concentration inequality for sample mean}
+Suppse $X$ has finite mean and finite variance, apply Chebyshev's inequality to $\bar{X}$, for any $\varepsilon>0$,
+\[P(\abs{\bar{X}-\mu}\ge\varepsilon)\le\frac{\Var(\bar{X})}{\varepsilon^2}=\frac{\sigma^2}{n\varepsilon^2},\]
+or equivalently, for any $k>0$,
+\[P(\abs{\bar{X}-\mu}\ge k\sigma)\le\frac{1}{nkn^2}.\]
+\sssc{Weak law of large numbers (WLLN) or Khinchin's law}
+Let $\{X_n\}_{n=1}^{\infty}$ be a sequence of i.i.d. random variables with finite mean $\mu$ and $X_i\sim X$ for all $i$. Then
+\[\bar{X}_n\xrightarrow{\tx{p}}\mu\;\tx{as}\;n\to\infty.\]
+\bpr
+If $\Var(X)=\sigma^2$ is finite, we can prove by applying Chebyshev's inequality to $\bar{X}$, for any $\varepsilon,\delta>0$, there exists $n\in\bbN$ such that
+\[P(\abs{\bar{X}-\mu}\ge\varepsilon)\le\delta.\]
+By Taylor's theorem, the characteristic function of any random variable with finite mean $\mu$ can be written as
+\[\varphi_X(t)=1+it\mu+o(t),\quad t\to0.\]
+\[\varphi_{\bar{X}_n}(t)=\qty(\varphi_X\qty(\frac{t}{n}))^n=\qty(1+i\mu\frac{t}{n}+o\qty(\frac{t}{n}))^n\to e^{i\mu t}\;\tx{as}\;n\to\infty.\]
+By Lévy’s continuity theorem,
+\[\bar{X}_n\xrightarrow{\tx{d}}\mu\;\tx{as}\;n\to\infty.\]
+Since $\mu$ is a constant
+\[\bar{X}_n\xrightarrow{\tx{d}}\mu\;\tx{as}\;n\to\infty\]
+is equivalent to
+\[\bar{X}_n\xrightarrow{\tx{p}}\mu\;\tx{as}\;n\to\infty.\]
+\epr
+\sssc{Strong law of large numbers (SLLN) or Kolmogorov's law}
+Let $\{X_n\}_{n=1}^{\infty}$ be a sequence of i.i.d. random variables, $X_i\sim X$ for all $i$, and $E(\abs{X})<\infty$, $\mu=E(X)$. Then
+\[\bar{X}_n\xrightarrow{\tx{a.s.}}\mu\;\tx{as}\;n\to\infty.\]
+\bpr
+PLACEHOLDER
+\epr
+\sssc{Central limit theorem (CLT)}
+
 Continuity correction
 
 \end{document}
