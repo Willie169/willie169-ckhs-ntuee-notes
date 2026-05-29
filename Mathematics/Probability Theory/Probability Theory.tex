@@ -2008,7 +2008,7 @@ PLACEHOLDER
 PLACEHOLDER
 \ssc{Sample Mean, Bounds, and Convergences}
 \sssc{Sample mean of i.i.d. random variables}
-Let $\{X_n\}_{n=1}^{\infty}$ be a sequence of i.i.d. random variables and $X_i\sim X$ for all $i$. The sum of $X_1,X_2\ldots,X_n$ is
+Let $\{X_i\}_{i=1}^n$ be a sequence of i.i.d. random variables and $X_i\sim X$ for all $i$. The sum of $X_1,X_2\ldots,X_n$ is
 \[S_n=\sum_{i=1}^nX_i,\]
 and the sample mean of $X_1,X_2\ldots,X_n$ is defined as
 \[\bar{X}=\frac{S_n}{n},\]
@@ -2056,7 +2056,7 @@ Let $\{X_n\}_{n=1}^{\infty}$ be a sequence of random variables. It is called tig
 \sssc{Lévy’s continuity theorem or Lévy’s convergence theorem}
 Let $\{X_n\}_{n=1}^{\infty}$ be a sequence of random variables with characteristic functions $\{\varphi_n(t)=E\qty(e^{itX_n})\}_{n=1}^{\infty}$. If $\varphi_n(t)$ converges pointwise to some function $\varphi(t)$, then the following statements are equivalent
 \ben
-\item $X_n$ converges in distribution to some random variable $X$.
+\item $\{X_n\}_{n=1}^{\infty}$ converges in distribution to some random variable $X$.
 \item $\varphi(t)$ is a characteristic function of some random variable $X$.
 \item $\{X_n\}_{n=1}^{\infty}$ is tight:
 \[\lim_{x\to\infty}\qty(\sup_nP(\abs{X_n}>x))=0.\]
@@ -2068,12 +2068,12 @@ And the $X$ in the first statement has characteristic function $\varphi(t)$.
 PLACEHOLDER
 \epr
 \sssc{Concentration inequality for sample mean}
-Suppse $X$ has finite mean and finite variance, apply Chebyshev's inequality to $\bar{X}$, for any $\varepsilon>0$,
+Let $\{X_i\}_{i=1}^n$ be a sequence of i.i.d. random variables with finite mean and finite variance, $X_i\sim X$ for all $i$, and $\bar{X}=\frac{1}{n}\sum_{i=1}^nX_i$. Apply Chebyshev's inequality to $\bar{X}$, for any $\varepsilon>0$,
 \[P(\abs{\bar{X}-\mu}\ge\varepsilon)\le\frac{\Var(\bar{X})}{\varepsilon^2}=\frac{\sigma^2}{n\varepsilon^2},\]
 or equivalently, for any $k>0$,
 \[P(\abs{\bar{X}-\mu}\ge k\sigma)\le\frac{1}{nkn^2}.\]
 \sssc{Weak law of large numbers (WLLN) or Khinchin's law}
-Let $\{X_n\}_{n=1}^{\infty}$ be a sequence of i.i.d. random variables with finite mean $\mu$ and $X_i\sim X$ for all $i$. Then
+Let $\{X_i\}_{i=1}^{\infty}$ be a sequence of i.i.d. random variables with finite mean $\mu$, $X_i\sim X$ for all $i$, and $\bar{X}_n=\frac{1}{n}\sum_{i=1}^nX_i$. Then
 \[\bar{X}_n\xrightarrow{\tx{p}}\mu\;\tx{as}\;n\to\infty.\]
 \bpr
 If $\Var(X)=\sigma^2$ is finite, we can prove by applying Chebyshev's inequality to $\bar{X}$, for any $\varepsilon,\delta>0$, there exists $n\in\bbN$ such that
@@ -2089,13 +2089,13 @@ is equivalent to
 \[\bar{X}_n\xrightarrow{\tx{p}}\mu\;\tx{as}\;n\to\infty.\]
 \epr
 \sssc{Strong law of large numbers (SLLN) or Kolmogorov's law}
-Let $\{X_n\}_{n=1}^{\infty}$ be a sequence of i.i.d. random variables, $X_i\sim X$ for all $i$, and $E(\abs{X})<\infty$, $\mu=E(X)$. Then
+Let $\{X_i\}_{i=1}^{\infty}$ be a sequence of i.i.d. random variables with mean $\mu$, $X_i\sim X$ for all $i$, $\bar{X}_n=\frac{1}{n}\sum_{i=1}^nX_i$, and $E(\abs{X})<\infty$. Then
 \[\bar{X}_n\xrightarrow{\tx{a.s.}}\mu\;\tx{as}\;n\to\infty.\]
 \bpr
 PLACEHOLDER
 \epr
-\sssc{(Lindeberg–Lévy) central limit theorem (CLT)}
-Let $\{X_n\}_{n=1}^{\infty}$ be a sequence of i.i.d. random variables with finite mean $\mu$ and finite standard deviation $\sigma$, and $X_i\sim X$ for all $i$. Then
+\sssc{(Lindeberg–Lévy or classical) central limit theorem (CLT)}
+Let $\{X_i\}_{i=1}^{\infty}$ be a sequence of i.i.d. random variables with finite mean $\mu$ and finite positive standard deviation $\sigma$, $X_i\sim X$ for all $i$, $S_n=\sum_{i=1}^nX_i$, and $\bar{X}_n=\frac{S_n}{n}$. Then
 \[\frac{S_n-n\mu}{\sigma\sqrt{n}}\xrightarrow{\tx{d}}\calN(0,1)\;\tx{as}\;n\to\infty,\]
 equivalently,
 \[\frac{S_n-n\mu}{\sqrt{n}}\xrightarrow{\tx{d}}\calN(0,\sigma^2)\;\tx{as}\;n\to\infty,\]
@@ -2104,11 +2104,41 @@ equivalently,
 equivalently,
 \[\sqrt{n}(\bar{X}_n-\mu)\xrightarrow{\tx{d}}\calN(0,\sigma^2)\;\tx{as}\;n\to\infty.\]
 \bpr
+Define $Y_i=\frac{X_i-\mu}{\sigma}\sim Y$. Then
+\[E[Y]=0,\quad\Var(Y)=1\]
+Define
+\[Z_n=\frac{\sqrt{n}\qty(\bar{X}_n-\mu)}{\sigma}=\frac{1}{\sqrt{n}}\sum_{i=1}^nY_i\]
+Let $\varphi(t)=E\qty(e^{itY})$ be the characteristic function of $Y$.
+\[\varphi_{Z_n}(t)=\qty(\varphi\qty(\frac{t}{\sqrt{n}}))^n\]
+By Taylor's theorem,
+\[\varphi(u)=1-\frac{u^2}{2}+o(u^2)\]
+\[\varphi\qty(\frac{t}{\sqrt{n}})=1-\frac{t^2}{2n}+o\qty(\frac{1}{n})\]
+\[\varphi_{Z_n}(t)=\qty(1-\frac{t^2}{2n}+o\qty(\frac{1}{n}))^n\]
+\[\lim_{n\to\infty}\varphi_{Z_n}(t)=e^{-\frac{t^2}{2}},\]
+which is the characteristic function of $\calN(0,1)$.
 
+By Lévy’s continuity theorem,
+\[Z_n\xrightarrow{\tx{d}}\calN(0,1).\]
 \epr
-
-
-
-Continuity correction
+For large $n$, we often approx $S_n$ with
+\[S_n\approx\calN(n\mu,n\sigma^2)\;\tx{as}\;n\to\infty.\]
+\sssc{Continuity correction}
+Continuity correction is an adjustment made when a discrete random variable is approximated using a continuous random variable.
+\ssc{Approximate binomial random variable using CLT}
+Let
+\[X\sim\operatorname{Bin}(n,p).\]
+For large $n$,
+\[X\approx\calN(np,np(1-p))\]
+\[P(X\le k)\approx\Phi\qty(\frac{k+0.5-np}{\sqrt{np(1-p)}})\]
+\[P(X<k)\approx\Phi\qty(\frac{k-0.5-np}{\sqrt{np(1-p)}})\]
+\[P(X=k)\approx\Phi\qty(\frac{k+0.5-np}{\sqrt{np(1-p)}})-\Phi\qty(\frac{k-0.5-np}{\sqrt{np(1-p)}})\]
+\ssc{Approximate Poisson random variable using CLT}
+Let
+\[X\sim\operatorname{Pois}(\lambda).\]
+For large $n$,
+\[X\approx\calN(\lambda,\lambda)\]
+\[P(X\le k)\approx\Phi\qty(\frac{k+0.5-\lambda}{\sqrt{\lambda}})\]
+\[P(X<k)\approx\Phi\qty(\frac{k-0.5-\lambda}{\sqrt{\lambda}})\]
+\[P(X=k)\approx\Phi\qty(\frac{k+0.5-\lambda}{\sqrt{\lambda}})-\Phi\qty(\frac{k-0.5-\lambda}{\sqrt{\lambda}})\]
 
 \end{document}
