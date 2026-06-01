@@ -845,10 +845,12 @@ The (overall) angular magnification $m_{\theta}$ is
 單位面積光度。
 
 
-\section{惠更斯（－菲涅耳）原理（Huygens(–Fresnel) principle）與干涉（Inference）}
-\ssc{惠更斯（－菲涅耳）原理（Huygens(–Fresnel) principle）}
+\section{惠更斯原理（Huygens principle）、惠更斯－菲涅耳/菲涅耳－惠更斯原理（Huygens–Fresnel/Fresnel－Huygens principle）與干涉（Inference）}
+\ssc{惠更斯原理（Huygens principle）}
 惠更斯指出當波行進時，波前上的每一點都可以視為新的點波源，以其為球心，各自發出與原波同樣維度的球面子波（Wavelet），稱惠更斯原理。在某一時刻，和這些子波相切的流形，稱為包絡（線/面）（Envelope），形成新的波前。
 
+惠更斯原理可以解釋反射、折射、干涉等現象。
+\ssc{惠更斯－菲涅耳/菲涅耳－惠更斯原理（Huygens–Fresnel/Fresnel－Huygens principle）}
 對於源自於點波源 $\mathbf{0}$ 的波函數：
 \[y=\frac{A}{\|\mathbf{x}\|}e^{i\mathbf{k}\cdot\mathbf{x}-\omega t}\]
 其中 $\mathbf{k}$ 為已知的 $d$ 維波向量；$\mathbf{x}$ 為 $d$ 維空間中的一個任意位置；$y$ 的自變數為 $\mathbf{x}$ 和 $t$。
@@ -863,8 +865,7 @@ The (overall) angular magnification $m_{\theta}$ is
 \[y=\frac{A}{2\|\mathbf{x}_0\|}\left(1+\frac{\left(\mathbf{x}-\mathbf{x}_0\right)\cdot\mathbf{x}_0}{\|\mathbf{x}-\mathbf{x}_0\|\cdot\|\mathbf{x}_0\|}\right)e^{i\qty(\mathbf{k}\cdot\left(\mathbf{x}-\mathbf{x}_0\right)-\omega \left(t-t_0\right))}\]
 其中：
 \[\|\mathbf{x}_0\|=\frac{\omega}{\|\mathbf{k}\|}t_0\]
-惠更斯－菲涅耳原理可以解釋反射、折射、干涉等現象。
-\sssc{解釋司乃耳定律}
+\sssc{惠更斯原理解釋司乃耳定律}
 考慮一頻率$f$入射光以入射角$\frac{\pi}{2}-\theta_1$從折射率$n_1$介質進入折射率$n_2$介質，折射角$\frac{\pi}{2}-\theta_2$。考慮一波前，一點在界面上，一點距界面在光方向上距離$\lambda_1=\frac{c}{n_1f}$。考慮下一波前，時間相同可見
 \[\lambda_2\frac{n_2}{c}=\lambda_1\frac{n_1}{c}\]
 兩共斜邊直角三角形可見
@@ -925,22 +926,32 @@ I(\theta) &= I_0\qty(\frac{\sin\varphi}{\sin\frac{\varphi}{2}})^2\\
 \[I(y)=4I_0\cos^2\qty(\frac{\pi by}{L\lambda})\]
 \subsection{遠場忽略繞射之多狹縫干涉}
 \sssc{Setup}
-同調光通過狹縫射向屏幕。令有$k$個狹縫，狹縫寬忽略，相鄰狹縫間距$b\gg\lambda$，屏幕距狹縫片$L$，$L\gg b$。屏幕平行任二狹縫各自中線之公垂線，對於屏幕上某點，令其在中央狹縫中線上之垂線與屏幕平面之法線過中央狹縫中線者之夾角$\theta$，取正，屏幕上某點距狹縫片中線在屏幕上正射影距離$y=L\tan\theta$。令$\beta=\frac{\pi b\sin\theta}{\lambda}$。
+同調光通過狹縫射向屏幕。令有$k$個狹縫，其中$k$為偶數，狹縫寬忽略，相鄰狹縫間距$b\gg\lambda$，屏幕距狹縫片$L$，$L\gg b$。屏幕平行任二狹縫各自中線之公垂線，對於屏幕上某點，令其在中央狹縫中線上之垂線與屏幕平面之法線過中央狹縫中線者之夾角$\theta$，取正，屏幕上某點距狹縫片中線在屏幕上正射影距離$y=L\tan\theta$。令$\beta=\frac{\pi b\sin\theta}{\lambda}$。
 \sssc{場強分布}
+\( I_0 \) 是入射光的場強，場強分布為：
 \[\ba
 I(\theta)=&I_0\qty(\frac{\sin(k\beta)}{\sin\beta})^2\\
 =& I_0\qty(\frac{\sin\qty(k\frac{\pi b\sin\theta}{\lambda})}{\sin\qty(\frac{\pi b\sin\theta}{\lambda})})^2
 \ea\]
 \bpr
-Consider electric field in the center
+\[\ba
+D=&\sqrt{\qty(L\tan\theta+\frac{c}{2})^2+L^2}-\sqrt{\qty(L\tan\theta)^2+L^2}\\
+=&\sqrt{L^2\sec^2\theta+cL\tan\theta+\frac{c^2}{4}}-L\sec\theta\\
+\approx&\frac{cL\tan\theta}{2L\sec\theta}\\
+\approx&\frac{c}{2}\sin\theta
+\ea\]
+\[c=(i-0.5)b\]
 \[E_0=E\sin(\omega t+\psi)\]
 Let electric field through the $i$th slit with top half being positive and bottom half be negative being $E_i$. For $i\in\bbN$,
 \[E_i=E\sin(\omega t+\psi+\frac{2\pi(i-0.5)b\sin\theta}{\lambda}+\psi)=E\sin(\omega t+\psi+(2i-1)\beta+\psi)\]
 \[E_{-i}=E\sin(\omega t+\psi-\frac{2\pi(i-0.5)b\sin\theta}{\lambda}+\psi)=E\sin(\omega t-\psi+(2i-1)\beta+\psi)\]
 \[E_i+E_{-i}=2E\sin(\omega t+\psi)\cos((2i-1)\beta)\]
-
-
-PLACEHOLDER HERE
+\[\ba
+\sum_{i=1}^{\frac{k}{2}}E_i+E_{-i}=&2E\sin(\omega t+\psi)\sum_{i=1}^{\frac{k}{2}}\cos((2i-1)\beta)\\
+=&2E\sin(\omega t+\psi)\frac{\sin(k\beta)}{2\sin\beta}\\
+=&E\sin(\omega t+\psi)\frac{\sin(k\beta)}{\sin\beta}
+\ea\]
+\[\frac{I}{I_0}=\qty(\frac{\sum_{i=1}^{\frac{k}{2}}E_i+E_{-i}}{E\sin(\omega t+\psi)})^2=\qty(\frac{\sin(k\beta)}{\sin\beta})^2\]
 \epr
 \subsubsection{折射率效應}
 折射率$n$的介質，因波長為真空$\frac{1}{n}$倍，故$m$為真空$n$倍。
@@ -948,6 +959,8 @@ PLACEHOLDER HERE
 入射光為白光時，中央亮紋兩側可見黃色，因紫色$m$最小，而其互補色為黃色。
 \subsubsection{夾角效應}
 屏幕面與狹縫面夾角$\theta$時，狹縫有效間距為$b\cos\theta$。
+\sssc{透鏡}
+可用焦距$f$匯聚透鏡在狹縫面與屏幕之間讓$y\approx f\theta$，使不依賴$L$。
 \ssc{薄膜（Thin-film）干涉}
 折射率$n_1$介質一波長$\lambda$入射光入射薄膜上表面，薄膜折射率$n_2>n_1$、厚$L$，裡面光波長$\lambda_2=\frac{n_1}{n_2}\lambda$，折射角$\frac{\pi}{2}-\theta_t\approx\frac{\pi}{2}$，下表面以下為折射率$n_3<n_2$介質，波程差：
 \[2L\cos\theta_t\approx 2L\]
@@ -1044,36 +1057,50 @@ U(P) = \frac{e^{ikz}}{i\lambda z} e^{i \frac{k}{2z}(x^2 + y^2)} \mathcal{F}\{U_0
 第$m$暗紋發生於：
 \[y=m\frac{L\lambda}{a},\quad m\in\mathbb{N}\]
 \subsubsection{光強度}
-\( I_0 \) 是中心極大處的波強，場強分布為：
+\( I_0 \) 是中心極大處的場強，場強分布為：
 \[\begin{aligned}
 I(\theta) &= I_0 \left( \frac{\sin\alpha}{\alpha} \right)^2\\
 &= I_0 \left( \frac{\sin \left( \frac{\pi a \sin\theta}{\lambda} \right)}{\frac{\pi a \sin\theta}{\lambda}} \right)^2
 \end{aligned}\]
 \bpr
-PLACEHOLDER HERE
+\[\ba
+D=&\sqrt{\qty(L\tan\theta+y)^2+L^2}-\sqrt{\qty(L\tan\theta)^2+L^2}\\
+=&\sqrt{L^2\sec^2\theta+2yL\tan\theta+y^2}-L\sec\theta\\
+\approx&\frac{yL\tan\theta}{L\sec\theta}\\
+\approx&y\sin\theta
+\ea\]
+Let electric field at $\theta$ be $E(\theta)$ and $E$ be the total electric field of incident light. Consider the infinitesimal phasors of the electric field of the light from each point in th slit. They form an arc of arc length $E$, angle $2\pi\frac{a\sin\theta}{\lambda}=2\alpha$, radius $R=\frac{E}{2\alpha}$, and length beaten the two endpoints $E(\theta)$. Thus
+\[E(\theta)=2R\sin\alpha=\frac{E}{\alpha}\sin\alpha\]
+\[\frac{I}{I_0}=\qty(\frac{E(\theta)}{E})^2=\left( \frac{\sin\alpha}{\alpha} \right)^2\]
 \epr
 \subsubsection{觀察}
 當狹縫甚寬，$\theta$甚小，則亮帶窄而鄰近，難觀察到暗紋。
-\subsection{遠場（夫朗和斐）多狹縫繞射與干涉}
-\sssc{Setup}
-波長$\lambda$同調波通過平面上$k$個相鄰狹縫射向屏幕，縫寬$a\gg\lambda$、兩相鄰狹縫中線相距$b\gg\lambda$，屏幕平面平行狹縫平面，兩者距離$L$使得$L\gg a$、$L\gg b$，中央亮紋場強$I_0$。對於屏幕上某點，令其與狹縫平面中線之最短連線與該點上狹縫平面法線之夾角$\theta$。令$\alpha=\frac{\pi a\sin\theta}{\lambda}$，$\beta=\frac{\pi b\sin\theta}{\lambda}$。
-\sssc{場強分布}
-場強分布$I(\theta)$為：
-\[\ba
-I(\theta)=&I_0\qty(\frac{\sin\alpha}{\alpha})^2\qty(\frac{\sin(k\beta)}{\sin\beta})^2\\
-=&I_0\qty(\frac{\sin(\frac{\pi a\sin\theta}{\lambda})}{\frac{\pi a\sin\theta}{\lambda}})^2\qty(\frac{\sin(k\frac{\pi b\sin\theta}{\lambda})}{\sin(\frac{\pi b\sin\theta}{\lambda})})^2
-\ea\]
 \subsubsection{折射率效應}
 折射率$n$的介質，因波長為真空$\frac{1}{n}$倍，故$m$為真空$n$倍。
 \subsubsection{非單色光效應}
 入射光為白光時，中央亮紋兩側可見黃色，因紫色$m$最小，而其互補色為黃色。
 \subsubsection{夾角效應}
 屏幕面與狹縫面夾角$\theta$時，狹縫有效間距為$b\cos\theta$，有效縫寬為$a\cos\theta$。
-\ssc{透鏡}
-可用匯聚透鏡在狹縫面與屏幕之間替代$L\gg a$、$L\gg b$，達成相同效果。
+\sssc{透鏡}
+可用焦距$f$匯聚透鏡在狹縫面與屏幕之間讓$y\approx f\theta$，使不依賴$L$。
+\subsection{遠場（夫朗和斐）多狹縫繞射與干涉}
+\sssc{Setup}
+波長$\lambda$同調波通過平面上$k$個相鄰狹縫射向屏幕，縫寬$a\gg\lambda$、兩相鄰狹縫中線相距$b\gg\lambda$，屏幕平面平行狹縫平面，兩者距離$L$使得$L\gg a$、$L\gg b$，中央亮紋場強$I_0$。對於屏幕上某點，令其與狹縫平面中線之最短連線與該點上狹縫平面法線之夾角$\theta$。令$\alpha=\frac{\pi a\sin\theta}{\lambda}$，$\beta=\frac{\pi b\sin\theta}{\lambda}$。
+\sssc{場強分布}
+\( I_0 \) 是中心極大處的場強，場強分布$I(\theta)$為：
+\[\ba
+I(\theta)=&I_0\qty(\frac{\sin\alpha}{\alpha})^2\qty(\frac{\sin(k\beta)}{\sin\beta})^2\\
+=&I_0\qty(\frac{\sin(\frac{\pi a\sin\theta}{\lambda})}{\frac{\pi a\sin\theta}{\lambda}})^2\qty(\frac{\sin(k\frac{\pi b\sin\theta}{\lambda})}{\sin(\frac{\pi b\sin\theta}{\lambda})})^2
+\ea\]
 \ssc{阿拉戈（Arago）/帕松
 （Poisson）/菲涅耳（Fresnel）光斑（(light) spot）}
-一點光源照射一直徑$a$之圓球之中心，圓球後距離$b$處一屏幕，在屏幕上呈現一以圓球中心投影處為圓心的光斑，菲涅耳繞射下（即進場近似下），$\frac{b^2}{b^2+a^2}$愈大，光斑愈小，強度愈強。
+一點光源照射一直徑$a$之圓球之中心，圓球後距離$b$處一屏幕，在屏幕上的影子正中呈現一光斑，菲涅耳繞射下（即進場近似下），$\frac{b^2}{b^2+a^2}$愈大，光斑愈小，強度愈強。
+\ssc{Diffraction by a circular aperture (光圈) and Rayleigh's criterion}
+波長$\lambda$光自一直徑$d$光圈正中入射，將產生同心圓干涉圖樣，正中為較大亮斑，第一最小值發生於
+\[\sin\theta\approx1.22\frac{\lambda}{d}.\]
+Rayleigh's criterion: Two objects that are barely resolvable have angular separation
+\[\theta_R=\arcsin\frac{1.22\lambda}{d}\]
+
 
 
 \section{都卜勒效應（Doppler effect）}
