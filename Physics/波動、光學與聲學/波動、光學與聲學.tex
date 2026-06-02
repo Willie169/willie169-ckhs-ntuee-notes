@@ -897,7 +897,7 @@ The (overall) angular magnification $m_{\theta}$ is
 \begin{itemize}
 \item 亮紋：
 \[(m+1)\in\mathbb{N}\]
-，稱第$m$亮紋（$m$th-order maximum），$m=0$為中央亮紋（Central maximum）。
+，稱第$m$亮紋（$m$th-order maximum），$m=0$為中央亮紋（Central maximum）。$m$稱order number.
 \item 暗紋：
 \[\qty(m+\frac{1}{2})\in\mathbb{N}\]
 ，稱第$m$暗紋（$m$th-order minimum）。
@@ -907,6 +907,11 @@ The (overall) angular magnification $m_{\theta}$ is
 \[m=\frac{by}{L\lambda}\]
 故條紋間距$\Delta y$：
 \[\Delta y=\frac{L\lambda}{b}\]
+Angular separation $\Delta\theta$:
+\[b\sin\theta=m\lambda\]
+\[b\cos\theta\dd{\theta}=m\dd{\lambda}\]
+\[\dv{\theta}{\lambda}=\frac{m}{b\cos\theta}\]
+\[\Delta\theta\approx\frac{m}{b\cos\theta}\Delta\lambda\]
 第$m$亮紋發生於：
 \[y=m\frac{\lambda L}{b},\quad m\in\mathbb{N}_0\]
 第$m$暗紋發生於：
@@ -924,7 +929,7 @@ I(\theta) &= I_0\qty(\frac{\sin\varphi}{\sin\frac{\varphi}{2}})^2\\
 \end{aligned}\]
 對於小角度令$\tan\theta=\sin\theta$：
 \[I(y)=4I_0\cos^2\qty(\frac{\pi by}{L\lambda})\]
-\subsection{遠場忽略繞射之多狹縫干涉}
+\subsection{遠場忽略繞射之多狹縫/光柵（grating）干涉}
 \sssc{Setup}
 同調光通過狹縫射向屏幕。令有$k$個狹縫，其中$k$為偶數，狹縫寬忽略，相鄰狹縫間距$b\gg\lambda$，屏幕距狹縫片$L$，$L\gg b$。屏幕平行任二狹縫各自中線之公垂線，對於屏幕上某點，令其在中央狹縫中線上之垂線與屏幕平面之法線過中央狹縫中線者之夾角$\theta$，取正，屏幕上某點距狹縫片中線在屏幕上正射影距離$y=L\tan\theta$。令$\beta=\frac{\pi b\sin\theta}{\lambda}$。
 \sssc{場強分布}
@@ -1043,7 +1048,7 @@ U(P) = \frac{e^{ikz}}{i\lambda z} e^{i \frac{k}{2z}(x^2 + y^2)} \mathcal{F}\{U_0
 亮紋（bright band, bright fringe, or maximum）指同相處，即光強度極大值處，其中中央者稱中央亮紋（central maximum），其餘者稱次（secondary）/側（side）亮紋；暗紋（dark band, dark fringe, or minimum）指反相處，即光強度極小值處；亮帶（bright band or bright fringe）中線指兩相鄰暗紋之中線；暗帶（dark band or dark fringe）；此種圖樣稱繞射圖樣（diffraction pattern）。
 \begin{itemize}
 \item 中央亮紋：$\theta=0$。
-\item 暗紋：$m\in\mathbb{N}$，稱第$m$暗紋，狹縫兩邊緣光程差$m$。將狹縫分為$2m$等分，自上起第$k$與$k+1$等分將完全相消干涉，由此可知。
+\item 暗紋：$m\in\mathbb{N}$，稱第$m$暗紋，狹縫兩邊緣光程差$m$。將狹縫分為$2m$等分，自上起第$k$與$k+1$等分將完全相消干涉，由此可知。$m$稱order number.
 \item 亮紋：$\alpha=\tan\alpha$時。
 \item 除中央亮帶亮紋與亮帶中線相同外，亮紋與亮帶中線不同且亮帶中線亮度小於亮紋。
 \item 愈遠離中央之亮帶亮度愈小。
@@ -1083,7 +1088,7 @@ Let electric field at $\theta$ be $E(\theta)$ and $E$ be the total electric fiel
 屏幕面與狹縫面夾角$\theta$時，狹縫有效間距為$b\cos\theta$，有效縫寬為$a\cos\theta$。
 \sssc{透鏡}
 可用焦距$f$匯聚透鏡在狹縫面與屏幕之間讓$y\approx f\theta$，使不依賴$L$。
-\subsection{遠場（夫朗和斐）多狹縫繞射與干涉}
+\subsection{遠場（夫朗和斐）多狹縫/（繞射）光柵（(diffraction) grating）繞射與干涉}
 \sssc{Setup}
 波長$\lambda$同調波通過平面上$k$個相鄰狹縫射向屏幕，縫寬$a\gg\lambda$、兩相鄰狹縫中線相距$b\gg\lambda$，屏幕平面平行狹縫平面，兩者距離$L$使得$L\gg a$、$L\gg b$，中央亮紋場強$I_0$。對於屏幕上某點，令其與狹縫平面中線之最短連線與該點上狹縫平面法線之夾角$\theta$。令$\alpha=\frac{\pi a\sin\theta}{\lambda}$，$\beta=\frac{\pi b\sin\theta}{\lambda}$。
 \sssc{場強分布}
@@ -1092,10 +1097,28 @@ Let electric field at $\theta$ be $E(\theta)$ and $E$ be the total electric fiel
 I(\theta)=&I_0\qty(\frac{\sin\alpha}{\alpha})^2\qty(\frac{\sin(k\beta)}{\sin\beta})^2\\
 =&I_0\qty(\frac{\sin(\frac{\pi a\sin\theta}{\lambda})}{\frac{\pi a\sin\theta}{\lambda}})^2\qty(\frac{\sin(k\frac{\pi b\sin\theta}{\lambda})}{\sin(\frac{\pi b\sin\theta}{\lambda})})^2
 \ea\]
+\sssc{亮暗紋}
+條紋間距、angular separation等同忽略繞射之多狹縫干涉。
+
+Angular half-width of the bright fringe whose center is at $\theta$ is
+\[\Delta\theta_{\tx{hw}}=\frac{\lambda}{kb\cos\theta}.\]
+$m$ is called order number.
+\sssc{Dispersion}
+The dispersion $D$ of a diffraction grating is defined as
+\[D=\dv{\theta}{\lambda}\]
+where $\theta$ is the angular separation of lines produced.
+
+The dispersion of a diffraction grating at angle $\theta$ is
+\[D=\frac{m}{b\cos\theta}.\]
+\sssc{Resolving power}
+Rayleigh's criterion: two waves with average wavelength $\bar{\lambda}$ and wavelength difference $\Delta\lambda$ are barely distinguishable when their angular separation $\frac{m}{b\cos\theta}\Delta\lambda$ is the same as instrinct peak width $\frac{\bar{\lambda}}{kb\cos\theta}$.
+
+For two waves that are barely distinguishable, the resolving power $R$ of a diffraction grating is defined as
+\[R=\frac{\bar{\lambda}}{\Delta\lambda}=km.\]
 \ssc{阿拉戈（Arago）/帕松
 （Poisson）/菲涅耳（Fresnel）光斑（(light) spot）}
 一點光源照射一直徑$a$之圓球之中心，圓球後距離$b$處一屏幕，在屏幕上的影子正中呈現一光斑，菲涅耳繞射下（即進場近似下），$\frac{b^2}{b^2+a^2}$愈大，光斑愈小，強度愈強。
-\ssc{Diffraction by a circular aperture (光圈) and Rayleigh's criterion}
+\ssc{Diffraction by a circular aperture (光圈)}
 波長$\lambda$光自一直徑$d$光圈正中入射，將產生同心圓干涉圖樣，正中為較大亮斑，第一最小值發生於
 \[\sin\theta\approx1.22\frac{\lambda}{d}.\]
 Rayleigh's criterion: Two objects that are barely resolvable have angular separation
