@@ -2166,4 +2166,49 @@ For large $r$,
 \[P(X_r\le k)\approx\Phi\qty(\frac{k+0.5-\frac{r(1-p)}{p}}{\sqrt{\frac{r(1-p)}{p^2}}})\]
 \[P(X_r<k)\approx\Phi\qty(\frac{k-0.5-\frac{r(1-p)}{p}}{\sqrt{\frac{r(1-p)}{p^2}}})\]
 \[P(X_r=k)\approx\Phi\qty(\frac{k+0.5-\frac{r(1-p)}{p}}{\sqrt{\frac{r(1-p)}{p^2}}})-\Phi\qty(\frac{k-0.5-\frac{r(1-p)}{p}}{\sqrt{\frac{r(1-p)}{p^2}}})\]
-\end{document}
+\ssc{Statistical Inference}
+\sssc{Statistical inference}
+For some parameter space $\Theta$, we can estimate some properties $t(\theta)$, i.e., a function of $\theta\in\Theta$, by sampling some distribution $P_{\theta}$:
+\bit
+\item Data generation: Collects samples $C\sim P_{\theta}$.
+\item Estimate via an inference algorithm (also called rule): Compute a function $\varphi$ of the observed data which gives an estimate of $t(\theta)$. The algorithm may be deterministic, i.e., purely a function of $X$, or randomized, i.e., $\varphi(X,U)$ also depends on some random seed $U$.
+\item Performance evaluation: We measure the performance by some loss function $\ell(\varphi(X,Y),t(\theta))$. We want to design an inference algorithm that minimizes the expected loss (also called the risk) $R(\varphi;\theta)=E_{X\sim P_{\theta},U}(\ell(\varphi(X,Y),t(\theta)))$.
+\eit
+\sssc{Point estimation}
+The problem of point estimation is where we want to estimate the unknown parameter $\theta$ itself.
+
+The loss function by collecting data $x$ can be squared error loss:
+\[\ell(\varphi(x),t(\theta))=\abs{\varphi(x)-\theta}^2.\]
+Then
+\[R(\varphi;\theta)=E_{X\sim P_{\theta}}((\varphi(x)-\theta)^2).\]
+\sssc{Interval estimation}
+The problem of interval estimation is where we want to estimate an interval that contains unknown parameter $\theta$ with high probability.
+
+The loss function by collecting data $x$ can be the 0-1 loss:
+\[\ell(\varphi(x),t(\theta))=\bcs0,\quad&\theta\in\varphi(x)\\1,\quad&\theta\notin\varphi(x)\ecs\]
+Then
+\[R(\varphi;\theta)=P_{X\sim P_{\theta}}(\theta\notin\varphi(X)).\]
+\sssc{Determine the best inference algorithm}
+A goal of statistical inference is to determine the best inference algorithm that mimizes the risk for a given loss function and parameter space, i.e., find $\varphi^*$ such that
+\[R(\varphi^*;\theta)\le R(\varphi;\theta)\]
+for all $\theta\in\Theta$ for all inference algorithms $\varphi$.
+
+However, this is not always possible.
+
+There are two main paradigms for statistical inference: the minimax paradigm and Bayesian paradigm.
+\sssc{Minimax paradigm}
+In the minimax paradism, the risk $R(\varphi)$ of an inference algorithm $\varphi$ is defined as the worst-case expected loss over all possible values of $\theta$, called worst-case risk, that is,
+\[R(\varphi)=\max_{\theta\in\Theta}R(\varphi;\theta).\]
+The minimax risk is defined as
+\[R^*=\min_{\varphi}R(\varphi),\]
+and the minimax optimal rule is defined as
+\[\varphi^*=\arg_{\varphi}\min_{\varphi}R(\varphi).\]
+\sssc{Bayesian paradigm}
+In Bayesian paradigm, we incorporate prior knowledge about the parameter and treat the unknown parameter $\theta$ as a random variable with a prior distribution $\pi(\theta)$, and the risk $R(\varphi)$ of an inference algorithm $\varphi$ is defined as the expected loss with respect to the prior distribution, called average-case risk, that is,
+\[R(\varphi)=E_{\theta\sim\pi}R(\varphi;\theta).\]
+The Bayes risk is defined as
+\[R^*=\min_{\varphi}R(\varphi),\]
+and the Bayes optimal rule is defined as
+\[\varphi^*=\arg_{\varphi}\min_{\varphi}R(\varphi).\]
+
+
