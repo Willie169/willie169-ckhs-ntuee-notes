@@ -64,7 +64,7 @@ An example of conditionally convergent $\sum_{n=1}^{\infty}a_n$ with convergent 
 \[a_n=\frac{(-1)^{n-1}}{n},\]
 where $\sum_{n=1}^{\infty}a_n$ is convergent by alternating series test and $\sum_{n=1}^{\infty}na_n=\sum_{n=1}^{\infty}(-1)^{n-1}$ is divergent since $\lim_{n\to\infty}a_n$ is divergent.
 \epr
-\sssc{Ratio test}
+\sssc{(d'Alembert's ratio or Cauchy) ratio test}
 \ben
 \item If $\lim_{n\to\infty}\abs{\frac{a_{n+1}}{a_n}}=L<1$, then the series $\sum_{n=1}^{\infty}a_n$ is absolutely convergent.
 \item If $\lim_{n\to\infty}\abs{\frac{a_{n+1}}{a_n}}=L>1$ or $\lim_{n\to\infty}\abs{\frac{a_{n+1}}{a_n}}=\infty$, then the series $\sum_{n=1}^{\infty}a_n$ is divergent.
@@ -117,6 +117,33 @@ is convergent, by comparison test, $\sum_{n=1}^{\infty}\abs{a_n}$ is convergent.
 For the second statement,
 \[\neg\lim_{n\to\infty}a_n=0.\]
 Thus $\sum_{n=1}^{\infty}a_n$ is divergent.
+\epr
+\sssc{Raabe's test or Rabbe–Duhamel test}
+For a series $\sum_{n=1}^{\infty}a_n$ of positive terms, define
+\[R_n=n\qty(\frac{a_n}{a_{n+1}}-1)\]
+\bit
+\item If $\liminf_{n\to\infty}R_n>1$, the series converges.
+\item If $\limsup_{n\to\infty}R_n<1$, the series converges.
+\eit
+\bpr
+Case $\limsup_{n\to\infty}R_n<0$: $a_{n+1}\ge a_n$ for sufficiently large $n$, so the series diverges.
+
+Case $0\le\limsup_{n\to\infty}R_n<1$: There exists $R<1$ and $N\in\bbN$ such that $R_n\le R$ for all $n\ge N$, that is,
+\[\frac{a_n}{a_{n+1}}\le\qty(1+\frac{R}{n})\le e^{\frac{R}{n}}.\]
+Thus
+\[a_{n+1}\ge a_ne^{-\frac{R}{n}}\]
+This implies that
+\[a_{n+1}\ge a_Ne^{-R\sum_{i=N}^ni^{-1}}\ge ca_Ne^{-R\ln n}=ca_Nn^{-R}\]
+Since $R<1$, by p-series test, the series diverges.
+
+Case $\liminf_{n\to\infty}R_n>1$: There exists $R>1$ and $N\in\bbN$ such that $R_n\ge R$ for all $n\ge N$, that is,
+\[\frac{a_n}{a_{n+1}}\ge1+\frac{R}{n}\]
+Thus
+\[\ln a_n-\ln a_{n+1}\ge\ln(1+\frac{R}{n})\]
+\[\ln a_{n+1}\le\ln a_N-\sum_{i=N}^n\ln(1+\frac{R}{i})\le -R\ln N+O(1)\]
+This implies that
+\[a_{n+1}\le cN^{-R}\]
+Since $R>1$, by p-series test, the series diverges.
 \epr
 \sssc{Riemann series theorem or Riemann rearrangement theorem}
 Let $\langle a_n\rangle_{n=1}^{\infty}$ be a real sequence, and that $\sum_{n=1}^{\infty}a_n$ is conditionally convergent. Then, for any extended-real number $M$, there exists a permutation $\sigma$ on $\bbN$ such that

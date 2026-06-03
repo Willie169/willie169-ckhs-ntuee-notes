@@ -874,16 +874,7 @@ I^2&=\qty(\int_0^{\infty}e^{-x^2}\dd{x})\qty(\int_0^{\infty}e^{-y^2}\dd{y})\\
 \subsection{List of Maclaurin Series and Taylor Series of Real Functions}
 \subsubsection{Power function}
 \[x^n=\sum_{k=0}^{\infty}\binom{n}{k}a^{n-k}(x-a)^k,\quad |x-a|<|a|.\]
-\subsubsection{$\frac{1}{1-x}$}
-\[\frac{1}{1-x}=\sum_{n=0}^{\infty}x^n,\quad |x|<1.\]
-\[\frac{1}{1-x}=\frac{1}{1-a}\sum_{n=0}^{\infty}\qty(\frac{x-a}{1-a})^n,\quad |x-a|<|1-a|.\]
-\begin{proof}
-\[\dv{}{x}\qty(\frac{1}{1-x})=(1-x)^{-2}\]
-\[\dv{}{x}\qty((1-x)^{-n})=n(1-x)^{-n-1},\quad n\neq 0\]
-\[\dv[n]{}{x}\qty(\frac{1}{1-x})=\frac{n}{1-x}\dv[n-1]{}{x}\qty(\frac{1}{1-x}),\quad n\in\bbN\]
-\[\dv[n]{}{x}\qty(\frac{1}{1-x})=\frac{n!}{(1-x)^{n+1}},\quad n\in\bbN_0\]
-\end{proof}
-\subsubsection{$\frac{1}{1+x}$}
+\subsubsection{$(1+x)^r$}
 \[\frac{1}{1+x}=\sum_{n=0}^{\infty}(-1)^nx^n,\quad |x|<1.\]
 \[\frac{1}{1-x}=\frac{1}{1+a}\sum_{n=0}^{\infty}\qty(-\frac{x-a}{1+a})^n,\quad |x-a|<|1+a|.\]
 \begin{proof}
@@ -892,6 +883,34 @@ I^2&=\qty(\int_0^{\infty}e^{-x^2}\dd{x})\qty(\int_0^{\infty}e^{-y^2}\dd{y})\\
 \[\dv[n]{}{x}\qty(\frac{1}{1+x})=-\frac{n}{1+x}\dv[n-1]{}{x}\qty(\frac{1}{1+x}),\quad n\in\bbN\]
 \[\dv[n]{}{x}\qty(\frac{1}{1+x})=\frac{(-1)^nn!}{(1+x)^{n+1}},\quad n\in\bbN_0\]
 \end{proof}
+\[(1+x)^r=\sum_{n=0}^{\infty}\binom{r}{n}x^n,\quad r\in\bbN_0\lor-1<x<1\lor(-1\le x\le1\land r>0)\lor(x=1\land-1<r<0).\]
+\bpr
+Apply ratio test,
+\[\lim_{n\to\infty}\abs{\frac{\binom{r}{n+1}x^{n+1}}{\binom{r}{n}x^n}}=\lim_{n\to\infty}\abs{\frac{r-n}{n+1}x}=\abs{x}\]
+For $\abs{x}=1$, apply Raabe's test,
+\[\ba
+\lim_{n\to\infty}n\qty(\abs{\frac{\binom{r}{n}}{\binom{r}{n+1}}}-1)=&\lim_{n\to\infty}n\qty(\frac{n+1}{n-r}-1)\\
+=&\lim_{n\to\infty}\frac{n}{n-r}(1+r)\\
+=&1+r
+\ea\]
+For $r<0$, $\binom{r}{n}>0$ for even $n$ and $<0$ for odd $n$, apply alternating series on $b_n=(-1)^n\binom{r}{n}$,
+\[\lim_{n\to\infty}b_n=0,\]
+\[\frac{b_n}{b_{n+1}}=\frac{n+1}{n-r},\]
+which $>0$ for $-1<r<0$.
+\epr
+\subsubsection{$(1-x)^r$}
+\[\frac{1}{1-x}=\sum_{n=0}^{\infty}x^n,\quad |x|<1.\]
+\[\frac{1}{1-x}=\frac{1}{1-a}\sum_{n=0}^{\infty}\qty(\frac{x-a}{1-a})^n,\quad |x-a|<|1-a|.\]
+\begin{proof}
+\[\dv{}{x}\qty(\frac{1}{1-x})=(1-x)^{-2}\]
+\[\dv{}{x}\qty((1-x)^{-n})=n(1-x)^{-n-1},\quad n\neq 0\]
+\[\dv[n]{}{x}\qty(\frac{1}{1-x})=\frac{n}{1-x}\dv[n-1]{}{x}\qty(\frac{1}{1-x}),\quad n\in\bbN\]
+\[\dv[n]{}{x}\qty(\frac{1}{1-x})=\frac{n!}{(1-x)^{n+1}},\quad n\in\bbN_0\]
+\end{proof}
+\[(1-x)^r=\sum_{n=0}^{\infty}\binom{r}{n}(-x)^n,\quad r\in\bbN_0\lor-1<x<1\lor(-1\le x\le1\land r>0)\lor(x=-1\land-1<r<0).\]
+\bpr
+Similar to that of $(1+x)^r$.
+\epr
 \subsubsection{Logarithmic function}
 \[\ln(x)=\ln(a)+\sum_{n=1}^{\infty}\frac{(-1)^{n-1}}{na^n}(x-a)^n,\quad x\leq a.\]
 \begin{proof}
@@ -903,8 +922,10 @@ Thus for $n\in\mathbb{N}$:
 \ea\]
 The series converges iff $-1<\frac{(x-a)^n}{a^n}\leq 1$ ($\leq 1$ since alternating harmonic series converges) iff $0<x\leq a$.
 \end{proof}
-\[\ln(1+x)=\sum_{n=1}^{\infty}\frac{(-1)^{n-1}}{n}x^n,\quad x\leq 1.\]
-\[\ln(1+x)=\ln(1+a)+\sum_{n=1}^{\infty}\frac{(-1)^{n-1}}{n(1+a)^n}(x-a)^n,\quad x\leq 1+a.\]
+\[\ln(1+x)=\sum_{n=1}^{\infty}\frac{(-1)^{n-1}}{n}x^n,\quad -1<x\le 1.\]
+\[\ln(1+x)=\ln(1+a)+\sum_{n=1}^{\infty}\frac{(-1)^{n-1}}{n(1+a)^n}(x-a)^n,\quad -1<x\le 1+2a.\]
+\[\ln(1-x)=-\sum_{n=1}^{\infty}\frac{1}{n}x^n,\quad -1\le x<1.\]
+\[\ln(1-x)=\ln(1-a)-\sum_{n=1}^{\infty}\frac{1}{n(1-a)^n}(x-a)^n,\quad 2a-1\le x<1.\]
 \subsubsection{Exponential function}
 \[e^x=\sum_{n=0}^{\infty}\frac{x^n}{n!}.\]
 \[e^x=e^a\sum_{n=0}^{\infty}\frac{(x-a)^n}{n!}.\]
@@ -954,6 +975,11 @@ Assume:
 Differentiate both side:
 \[y'P_{n-1}'(y)=y^{(n)}=-(1+y^2)P_{n-1}'(y)=P_n(y).\]
 \end{proof}
+
+PLACEHOLDER
+anti trig
+hyperbolic
+
 \ssc{List of Nablas}
 $\mb{r}=(x,y,z)$, $r=\abs{\mb{r}}$
 \sssc{Gradient of $r$}
