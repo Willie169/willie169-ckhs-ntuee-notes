@@ -171,20 +171,29 @@ This replaces the $u'=u-v$ in Galilean relativity.
 \ssc{Four-vector, 4-vector, Lorentz vector, Minkowski space, or Minkowski spacetime}
 \sssc{Four-vector, 4-vector, or Lorentz vector}
 A four-vector or a contravariant four-tensor is of the form $A^{\mu}=(A^0,A^1,A^2,A^3)$.
+
+$\mb{e}^0$ is the vector $(1,0,0,0)$, $\mb{e}^1$ is the vector $(0,1,0,0)$, $\mb{e}^2$ is the vector $(0,0,1,0)$, $\mb{e}^3$ is the vector $(0,0,0,1)$.
 \sssc{Four-covectors or covariant four-tensors}
 For a four-vector $A^{\mu}=(A^0,A^1,A^2,A^3)$, the corresponding four-covectors, i.e., covariant four-tensors is defined as
 \[A_{\mu}=(A^0,-A^1,-A^2,-A^3)\]
-in tomelike convention and
+in timelike convention and
 \[A_{\mu}=(-A^0,A^1,A^2,A^3)\]
 in spacelike convention.
-\sssc{Minkowski metric tensor}
-The Minkowski metric tensor, denoted as $\eta$, is defined such that
+
+$\mb{e}_0$ is the covector $(1,0,0,0)$, $\mb{e}_1$ is the covector $(0,1,0,0)$, $\mb{e}_2$ is the covector $(0,0,1,0)$, $\mb{e}_3$ is the covector $(0,0,0,1)$.
+\sssc{Minkowski metric tensor, Minkowski tensor, or metric}
+The Minkowski metric tensor, Minkowski tensor, or metric, denoted as $\eta$, is defined such that
 \[\eta_{\mu\nu}A^{\mu}=A_{\nu}\]
 \[\eta^{\mu\nu}A_{\mu}=A^{\nu}.\]
 For timelike convention, that is,
-\[\eta=\begin{bmatrix}1&0&0&0\\0&-1&0&0\\0&0&-1&0\\0&0&0&-1\end{bmatrix}.\]
+\[\eta=\begin{bmatrix}1&0&0&0\\0&-1&0&0\\0&0&-1&0\\0&0&0&-1\end{bmatrix},\]
+which has signature $(+,-,-,-)$.
+
 For spacelike convention, that is,
-\[\eta=\begin{bmatrix}-1&0&0&0\\0&1&0&0\\0&0&1&0\\0&0&0&1\end{bmatrix}.\]
+\[\eta=\begin{bmatrix}-1&0&0&0\\0&1&0&0\\0&0&1&0\\0&0&0&1\end{bmatrix},\]
+which has signature $(-,+,+,+)$.
+\sssc{Minkowski dot product}
+\[A^{\mu}\cdot B^{\mu}\coloneq A^{\mu}\eta_{\mu\nu}B^{\nu}\]
 \sssc{Position four-vector, four-position, or 4-position}
 In Newtonian physics, we use three-position
 \[\mb{r}=(x,y,z)\]
@@ -193,38 +202,83 @@ to represent space. In special relativity, we combine space and time into a sing
 called position four-vector, four-position, or 4-position.
 \sssc{Lorentz transformation matrix}
 The Lorentz transformation from system $S$ with coordinate $x^{\mu}$ and to system $S'$ with coordinate $x'^{\mu}$ is
-\[x'^{\nu}=\Lambda^{\nu}_{\mu}x^{\mu}\]
+\[x'^{\mu}=\Lambda^{\mu}_{\nu}x^{\nu}\]
 where
 \[\Lambda=\begin{bmatrix}\gamma&-\beta\gamma&0&0\\-\beta\gamma&\gamma&0&0\\0&0&1&0\\0&0&0&1\end{bmatrix}.\]
 This $\Lambda$ is called a Lorentz transformation matrix.
+
+For any Lorentz transformation matrix, we have
+\[\Lambda^{\top}\eta\Lambda.\]
+\bpr
+Timelike convention:
+\[\ba
+&{}\begin{bmatrix}\gamma&-\beta\gamma&0&0\\-\beta\gamma&\gamma&0&0\\0&0&1&0\\0&0&0&1\end{bmatrix}\begin{bmatrix}1&0&0&0\\0&-1&0&0\\0&0&-1&0\\0&0&0&-1\end{bmatrix}\begin{bmatrix}\gamma&-\beta\gamma&0&0\\-\beta\gamma&\gamma&0&0\\0&0&1&0\\0&0&0&1\end{bmatrix}\\
+=&\begin{bmatrix}\gamma&\beta\gamma&0&0\\-\beta\gamma&-\gamma&0&0\\0&0&-1&0\\0&0&0&-1\end{bmatrix}\begin{bmatrix}\gamma&-\beta\gamma&0&0\\-\beta\gamma&\gamma&0&0\\0&0&1&0\\0&0&0&1\end{bmatrix}\\
+=&\begin{bmatrix}(1-\beta^2)\gamma^2&0&0&0\\0&-(1-\beta^2)\gamma^2&0&0\\0&0&-1&0\\0&0&0&-1\end{bmatrix}\\
+=&\begin{bmatrix}1&0&0&0\\0&-1&0&0\\0&0&-1&0\\0&0&0&-1\end{bmatrix}
+\ea\]
+Spacelike convention: Timelike convention multiplied by $-1$.
+\epr
 \sssc{Minkowski invariant}
 For a four-vector $A^{\mu}=(A^0,A^1,A^2,A^3)$, the Minkowski invariant is defined as $A^{\mu}A_{\mu}$, which equals to $(A^0)^2-(A^1)^2-(A^2)^3-(A^3)^2$ for timelike convention and $-(A^0)^2+(A^1)^2+(A^2)^3+(A^3)^2$ for spacelike convention.
 
 This quantity is invariant under Lorentz transformations.
 \bpr
-
-
-
+\[A'^{\mu}=\Lambda^{\mu}_{\nu}A^{\nu}\]
+We want to show that
+\[A'^{\mu}A'_{\mu}=A^{\mu}A_{\mu}.\]
+\[A'_{\mu}=\eta_{\mu\rho}A'^{\rho}=\eta_{\mu\rho}\Lambda^{\rho}_{\nu}A^{\nu}\]
+\[\ba
+A'^{\mu}A'_{\mu}=&\qty(\Lambda^{\mu}_{\alpha}A^{\alpha})\qty(\eta_{\mu\rho}\Lambda^{\rho}_{\beta}A^{\beta})\\
+=&A^{\alpha}A^{\beta}\qty(\Lambda^{\mu}_{\alpha}\eta_{\mu\rho}\Lambda^{\rho}_{\beta})\\
+=&A^{\alpha}A^{\beta}\eta_{\alpha\beta}\\
+=&A^{\alpha}A_{\alpha}\\
+=&A^{\mu}A_{\mu}
+\ea\]
 \epr
-
-
-\sssc{Displacement four-vector}
+\sssc{Differential four-vector}
+The differential four-vector is defined as
+\[\dd{A^{\mu}}=\qty(\dd{A^0},\dd{A^1},\dd{A^2},\dd{A^3}).\]
+\sssc{Displacement four-vector or four-displacement}
 The displacement four-vector is defined as
 \[\Delta x^{\mu}=(c\Delta t,\Delta x,\Delta y,\Delta z).\]
 \sssc{Proper time differential}
 Proper time differential $\dd{\tau}$ is defined as
 \[\dd{\tau}=\frac{1}{c}\sqrt{c^2(\dd{t})^2-(\dd{x})^2-(\dd{y})^2-(\dd{z})^2}=\sqrt{(\dd{t})^2-\frac{(\dd{x})^2+(\dd{y})^2+(\dd{z})^2}{c^2}}.\]
-\sssc{Velocity four-vector}
+\sssc{Velocity four-vector or four-velocity}
 The velocity four-vector is defined as
 \[u^{\mu}=\frac{\mathrm{d}x^{\mu}}{\mathrm{d}\tau}.\]
+\sssc{Acceleration four-vector or four-acceleration}
+The acceleration four-vector is defined as
+\[a^{\mu}=\frac{\mathrm{d}u^{\mu}}{\mathrm{d}\tau}.\]
+\sssc{Four-gradient}
+In timelike convention, the four-gradient for vector $\partial^{\mu}$ is defined as
+\[\ba
+\partial^{\mu}=&\qty(\pdv{}{x_0},-\pdv{}{x_1},-\pdv{}{x_2},-\pdv{}{x_3})\\
+=&\mb{e}_0\frac{1}{c}\pdv{}{t}-\nabla
+\ea\]
+the four-gradient for covector $\partial_{\mu}$ is defined as
+\[\ba
+\partial_{\mu}=&\qty(\pdv{}{x^0},\pdv{}{x^1},\pdv{}{x^2},\pdv{}{x^3})\\
+=&\mb{e}^0\frac{1}{c}\pdv{}{t}+\nabla
+\ea\]
+and
+\[\partial^{\mu}\partial_{\mu}=\frac{1}{c^2}\pdv[2]{}{t}-\nabla^2.\]
 
-
-
-
-
-
+In spacelike convention, the four-gradient for vector $\partial^{\mu}$ is defined as
+\[\ba
+\partial^{\mu}=&\qty(-\pdv{}{x_0},\pdv{}{x_1},\pdv{}{x_2},\pdv{}{x_3})\\
+=&-\mb{e}_0\frac{1}{c}\pdv{}{t}+\nabla
+\ea\]
+the four-gradient for covector $\partial_{\mu}$ is defined as
+\[\ba
+\partial_{\mu}=&\qty(\pdv{}{x^0},\pdv{}{x^1},\pdv{}{x^2},\pdv{}{x^3})\\
+=&\mb{e}^0\frac{1}{c}\pdv{}{t}+\nabla
+\ea\]
+and
+\[\partial^{\mu}\partial_{\mu}=-\frac{1}{c^2}\pdv[2]{}{t}+\nabla^2.\]
 \ssc{Relativistic Doppler Effect in Vacuum}
-Let the unit vector in the direction from the source to the receiver be $\hat{\mb{n}}$, $c$ be the speed of light, $v$ be the speed of the receiver relative to the source, $\beta=\frac{v}{c}$, $\theta$ be the polar angle of the velocity of the receiver relative to the source in the polar coordinate system on the common plane of the velocity of the receiver relative to the source and $\hat{\mb{n}}$ with $\hat{\mb{n}}$ as $\theta=0$, $f_s$, $\lambda_s$ be the frequency and wavelength of the light as observed by the source, and $f_r$ and $\lambda_r$ be the frequency and wavelength of the light as observed by the receiver.Relativistic Doppler effect states that
+Let the unit vector in the direction from the source to the receiver be $\hat{\mb{n}}$, $c$ be the speed of light, $v$ be the speed of the receiver relative to the source, $\beta=\frac{v}{c}$, $\theta$ be the polar angle of the velocity of the receiver relative to the source in the polar coordinate system on the common plane of the velocity of the receiver relative to the source and $\hat{\mb{n}}$ with $\hat{\mb{n}}$ as $\theta=0$, $f_s$, $\lambda_s$ be the frequency and wavelength of the light as observed by the source, and $f_r$ and $\lambda_r$ be the frequency and wavelength of the light as observed by the receiver. Relativistic Doppler effect states that
 \[\lambda_s=\frac{c}{f_s}\]
 \[f_r=\frac{\sqrt{1-\beta^2}}{1-\beta\cos\theta}f_s\]
 \[\lambda_r=\frac{c}{f_r}=\frac{1-\beta\cos\theta}{\sqrt{1-\beta^2}}\lambda_s\]
