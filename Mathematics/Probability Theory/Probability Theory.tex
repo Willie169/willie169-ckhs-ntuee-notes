@@ -2171,7 +2171,7 @@ For large $r$,
 For some parameter space $\Theta$, we can estimate some properties $t(\theta)$, i.e., a function of $\theta\in\Theta$, by sampling some distribution $P_{\theta}$:
 \bit
 \item Data generation: Collects samples $C\sim P_{\theta}$.
-\item Estimate via an inference algorithm (also called rule): Compute a function $\varphi$ of the observed data which gives an estimate of $t(\theta)$. The algorithm may be deterministic, i.e., purely a function of $X$, or randomized, i.e., $\varphi(X,U)$ also depends on some random seed $U$.
+\item Estimate via an inference algorithm (also called (decision) rule): Compute a function $\varphi$ of the observed data which gives an estimate of $t(\theta)$. The algorithm may be deterministic, i.e., purely a function of $X$, or randomized, i.e., $\varphi(X,U)$ also depends on some random seed $U$.
 \item Performance evaluation: We measure the performance by some loss function $\ell(\varphi(X,Y),t(\theta))$. We want to design an inference algorithm that minimizes the expected loss (also called the risk) $R(\varphi;\theta)=E_{X\sim P_{\theta},U}(\ell(\varphi(X,Y),t(\theta)))$.
 \eit
 \sssc{Point estimation}
@@ -2205,10 +2205,30 @@ and the minimax optimal rule is defined as
 \[\varphi^*=\arg_{\varphi}\min_{\varphi}R(\varphi).\]
 \sssc{Bayesian paradigm}
 In Bayesian paradigm, we incorporate prior knowledge about the parameter and treat the unknown parameter $\theta$ as a random variable with a prior distribution $\pi(\theta)$, and the risk $R(\varphi)$ of an inference algorithm $\varphi$ is defined as the expected loss with respect to the prior distribution, called average-case risk, that is,
-\[R(\varphi)=E_{\theta\sim\pi}R(\varphi;\theta).\]
+\[R(\varphi)=E_{\Theta\sim\pi}R(\varphi;\theta).\]
 The Bayes risk is defined as
 \[R^*=\min_{\varphi}R(\varphi),\]
 and the Bayes optimal rule is defined as
 \[\varphi^*=\arg_{\varphi}\min_{\varphi}R(\varphi).\]
+\sssc{Hypothesis testing}
+There are $m$ hypotheses $H_0,H_1,\ldots,H_{m-1}$
+\[H_{\theta}\colon X\sim P_{\theta},\quad\thera\in\{0,1,\ldots,m-1\},\]
+and we have to determine which hypothesis is true based on the observed data $x\in\Chi$.
 
+The goal is to design a (decision) rule $\varphi\colon\Chi\to\{0,1,\ldots,m-1\}$ that maps the observed data to a hypothesis, so that a certain risk is minimized.
+
+A common loss function is the 0-1 loss:
+\[\ell(\varphi(X),\theta)=\bcs0,\quad\varphi(X)=\theta\\1,\quad\varphi(X)\ne\theta\ecs\]
+The risk is
+\[R(\varphi;\theta)=P_{X\sim P_{\theta}}(\varphi\ne\theta).\]
+\sssc{Best Bayesian decision rule}
+If we have a prior distribution $\pi(\theta)$ over the hypothesis, the Bayesian optimal rule $\varphi^*$ that minimized the average-case risk $E_{\Theta\sim\pi}R(\varphi;\theta)$ is the maximum a posteriori (MAP) rule defined as, for every $x\in\Chi$,
+\[\varphi^*(x)=\arg_{\theta}\max_{\theta}P_{\theta}(x)\pi(\theta),\]
+where $P_{\theta}(x)$ is the PDF of absolutely continuous $X|\theta$ or PMF of discrete $X|\theta$.
+\bpr
+Recall that minimize the risk is equivalent to maximizing $P_{X,\Theta}(\varphi(X)=\Theta)$. For discrete $X$ and $\Theta$
+
+
+
+\epr
 
