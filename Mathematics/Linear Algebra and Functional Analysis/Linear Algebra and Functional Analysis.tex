@@ -323,11 +323,26 @@ Let $V$ be a vector space and $V^*$ be its dual. A tensor of type $(r,s)$ is a m
 \[T\colon (V^*)^r\times V^s\to\bbR,\]
 where $r$ is the number of contravariant slots, which take covectors in $V^*$, and $s$ is the number of covariant slots, which take vectors in $V$. The order or rank of it is $r+s$.
 
-A scalar is a tensor of type $(0,0)$. A vector is a tensor of type $(1,0)$. A covector is a tensor of type $(0,1)$. A matrix as a linear map $V\to V$ is a tensor of type $(1,1)$. A matrix as a bilinear form $V\times V\to\bbR$ is a tensor of type $(0,2)$. A matrix as $V^*\times V^*\to\bbR$ is a tensor of type $\bbR$.
+This map
+\[T\colon (V^*)^r\times V^s\to\bbR\]
+is also a map
+\[T\colon (V^*)^q\times V^t\to\{S\colon (S\colon(V^*)^{r-q}\times V^{s-t}\to\bbR)\}\]
+for any $q\in\bbZ\cap[0,r]$ and $t\in\bbZ\cap[0,s]$.
+
+A scalar is a tensor of type $(0,0)$. A vector is a tensor of type $(1,0)$, which maps a covector to a real number, thus also called a contravariant tensor. A covector is a tensor of type $(0,1)$, which maps a vector to a real number, thus also called a covariant tensor.. A matrix as a linear map $V\to V$ is a tensor of type $(1,1)$. A matrix as a bilinear form $V\times V\to\bbR$ is a tensor of type $(0,2)$. A matrix as $V^*\times V^*\to\bbR$ is a tensor of type $\bbR$.
 
 It's conventional that a vector is a column vector and a covector is a row vector. Tensor convention follows.
 
 A tensor can be represented as an array whose dimension is its rank when a basis is chosen.
+\sssc{Upper and lower indices}
+Dummy indices such as $\mu$ and $\nu$ are used to indicate contravariant and covariant vectors and tensors.
+
+We use a superscript of $r$ dummy indices and a subscript of $s$ dummy indices to indicate a tensor of type $(r,s)$, i.e., $(V^*)^r\times V^s\to\bbR$ for vector space $V$, such as $T^{\mu_1\ldots\mu_r}_{\nu_1\ldots\nu_s}$. Each $i$th component of each upper index $\mu$ is denoted by replacing $\mu$ with $i$. Each $i$th component of each lower index $\mu$ is denoted by replacing $\mu$ with $i$. For vectors, that is, $A^{\mu}=(A^0,A^1,A^2,A^3)$. For covectors, that is, $A_{\mu}=(A_0,A_1,A_2,A_3)$.
+
+Each upper index $\mu$ is fixed to a summation $\sum_{\mu=0}^{\dim(V)}$ when it takes an input of the same upper index $\mu$, i.e.
+\[T^{\mu\ldots_1}_{\ldots_2}U^{\mu\ldots_3}_{\ldots_4}=\sum_{\mu=0}^{\dim(V)}T^{\mu\ldots_1}_{\ldots_2}U^{\mu\ldots_3}_{\ldots_4}.\]
+Each lower index $\mu$ is fixed to a summation $\sum_{\mu=0}^{\dim(V)}$ when it takes an input of the same lower index $\mu$, i.e.
+\[T^{\ldots_1}_{\mu\ldots_2}U^{\ldots_3}_{\mu\ldots_4}=\sum_{\mu=0}^{\dim(V)}T^{\ldots_1}_{\mu\ldots_2}U^{\ldots_3}_{\mu\ldots_4}.\]
 \ssc{In three dimensions}
 \sssc{Cross product (叉積), external product (外積), or vector product (向量積)}
 The cross product of vector $\mathbf{a}=(a_1,a_2,a_3)$ and $\mathbf{b}=(b_1,b_2,b_3)$ is defined as:
