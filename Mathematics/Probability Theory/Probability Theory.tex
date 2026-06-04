@@ -208,17 +208,14 @@ For a sequence $(A_n)_{n\in\bbZ{\ge k}} event for some $k\in\bbZ$,
 A sequence $(X_n)_{n\in\bbZ{\ge k}}$ of random variables for some $k\in\bbZ$ almost surely coverges to a random variable $X$, denoted as
 \[X_n\xrightarrow{a.s.}X\tx{\ as\ }n\to\infty,\]
 \[X_n\xrightarrow{a.s.}X\tx{\ when\ }n\to\infty,\]
-\[\lim_{n\to\infty}X_n\overset{\tx{a.s.}}{=}X,\]
 if
 \[P(\lim_{n\to\infty}X_n=X)=1.\]
 \sssc{Convergence in probability}
 A sequence $(X_n)_{n\in\bbZ{\ge k}}$ of random variables for some $k\in\bbZ$ of random variables coverges in probability to a random variable $X$, denoted as
-\[X_n\xrightarrow{p}X\tx{\ as\ }n\to\infty,\]
 \[X_n\xrightarrow{P}X\tx{\ as\ }n\to\infty,\]
-\[X_n\xrightarrow{p}X\tx{\ when\ }n\to\infty,\]
+\[X_n\xrightarrow{p}X\tx{\ as\ }n\to\infty,\]
 \[X_n\xrightarrow{P}X\tx{\ when\ }n\to\infty,\]
-\[\lim_{n\to\infty}X_n\overset{\tx{p}}{=}X,\]
-\[\lim_{n\to\infty}X_n\overset{\tx{P}}{=}X,\]
+\[X_n\xrightarrow{p}X\tx{\ when\ }n\to\infty,\]
 if for all $\varepsilon>0$,
 \[\lim_{n\to\infty}P(\abs{X_n-X}>\varepsilon)=0.\]
 \sssc{Convergence in distribution or weak convergence}
@@ -227,15 +224,13 @@ A sequence $(X_n)_{n\in\bbZ{\ge k}}$ of random variables for some $k\in\bbZ$ of 
 \[X_n\xrightarrow{\calD}X\tx{\ as\ }n\to\infty,\]
 \[X_n\xrightarrow{d}X\tx{\ when\ }n\to\infty,\]
 \[X_n\xrightarrow{\calD}X\tx{\ when\ }n\to\infty,\]
-\[\lim_{n\to\infty}X_n\overset{\tx{d}}{=}X,\]
-\[\lim_{n\to\infty}X_n\overset{\tx{\calD}}{=}X,\]
 if for all $x$ such that $F_X(x)$ is continuous at $x$,
 \[\lim_{n\to\infty}F_{X_n}(x)=F_X(x).\]
 \sssc{Almost sure convergence implies convergence in probability}
 For a sequence $(X_n)_{n\in\bbZ{\ge k}}$ of random variables for some $k\in\bbZ$ of random variables, if
 \[X_n\xrightarrow{a.s.}X\tx{\ as\ }n\to\infty,\]
 then
-\[X_n\xrightarrow{p}X\tx{\ as\ }n\to\infty.\]
+\[X_n\xrightarrow{P}X\tx{\ as\ }n\to\infty.\]
 \bpr
 For any fixed $\varepsilon>0$. Define
 \[A_n=\{\omega\colon\abs{X_n(\omega)-X(\omega)}>\varepsilon\}.\]
@@ -264,7 +259,7 @@ That is,
 \epr
 \sssc{Convergence in probability implies convergence in distribution}
 For a sequence $(X_n)_{n\in\bbZ{\ge k}}$ of random variables for some $k\in\bbZ$ of random variables, if
-\[X_n\xrightarrow{p}X\tx{\ as\ }n\to\infty,\]
+\[X_n\xrightarrow{P}X\tx{\ as\ }n\to\infty,\]
 then
 \[X_n\xrightarrow{d}X\tx{\ as\ }n\to\infty.\]
 \bpr
@@ -285,7 +280,7 @@ By squeeze theorem,
 For a sequence $(X_n)_{n\in\bbZ{\ge k}}$ of random variables for some $k\in\bbZ$ of random variables and a constant $C$, if
 \[X_n\xrightarrow{d}C\tx{\ as\ }n\to\infty,\]
 then
-\[X_n\xrightarrow{p}C\tx{\ as\ }n\to\infty.\]
+\[X_n\xrightarrow{P}C\tx{\ as\ }n\to\infty.\]
 \bpr
 \[F_C(x)=\bcs0,\quad&x\le c,\\1,\quad&x>c.\ecs\]
 Convergence in distribution means
@@ -1815,6 +1810,60 @@ Suppose $X_i\sim N(\mu_i,\sigma)$ for $i\in\bbZ\cap[1,n]$ are independent, $\mb{
 \bpr
 By independency, apply Stein's lemma for each entry.
 \epr
+\sssc{Student's t-distribution, Student's t distribution, t-distribution, or t distribution}
+\bit
+\item Notation: $X\sim t_{\nu}$, read as $X$ is student's t distributed with degrees of freedom $\nu$.
+\item Parameters: $\nu\in\bbN$
+\item Support: $\bbR$
+\item PDF:
+\[f_X(x)=\frac{\Gamma\qty(\frac{\nu+1}{2})}{\sqrt{\pi\nu}\Gamma\qty(\frac{\nu}{2})}\qty(1+\frac{x^2}{\nu})^{-\frac{\nu+1}{2}},\]
+where $\Gamma(x)$ is the Gamma function:
+\[\Gamma(x)=\int_0^{\infty}u^{x-1}e^{-u}\dd{u},\quad x>0.\]
+\item Mean:
+\[\operatorname{Mean}(X)=\bcs0,\quad&\nu>1,\\\tx{undefined},\quad&\tx{otherwise}.\ecs\]
+\bpr
+PLACEHOLDER
+\epr
+\item Variance:
+\[\Var(x)=\bcs\frac{\nu}{\nu-2},\quad&\nu>2,\\\infty,\quad&1<\nu\le2,\\\tx{undefined},\quad&\tx{otherwise}.\ecs\]
+\bpr
+PLACEHOLDER
+\epr
+\item MGF:
+\[M_X(t)=\tx{undefined}.\]
+\bpr
+PLACEHOLDER
+\epr
+\item Mode:
+\[\operatorname{Mode}(X)=0\]
+\bpr
+PLACEHOLDER
+\epr
+\item Median:
+\[\operatorname{Median}(X)=0\]
+\bpr
+PLACEHOLDER
+\epr
+\item Symmetry: about $0$
+\bpr
+PLACEHOLDER
+\epr
+\item PDF monotonicity: strictly increasing for $x\le0$ and strictly decreasing for $x\ge0$
+\bpr
+PLACEHOLDER
+\epr
+\item Relation to standard normal random variable: Suppose $Z_i\sim\calN(0,1)$ for $i\in\bbZ\cap[0,\nu]$ are independent random variables.
+\[X=\frac{Z_0}{\sqrt{\frac{1}{\nu}\sum_{i=1}^{\nu}Z_i^{\pht{i}2}}}.\]
+\bpr
+PLACEHOLDER
+\epr
+\eit
+\sssc{Student's t-distribution to standard normal distribution limit theorem}
+Let $(t_{\nu})_{i=1}^{\infty}$ be a sequence and $Z\sim\calN(0,1)$. Then
+\[t_{\nu}\xrightarrow{\tx{d}}Z\;\tx{as}\;\nu\to\infty.\]
+\bpr
+PLACEHOLDER
+\epr
 \sssc{Exponential random variable}
 \bit
 \item Trial: An exponential random variable models the distance between adjacent events in a Poisson process with rate $\lambda$.
@@ -2003,9 +2052,6 @@ For any fixed $\lambda\in(0,\infty)$, let $\qty(X_n\sim\operatorname{NegBin}\qty
 \bpr
 PLACEHOLDER
 \epr
-\ssc{Families of Absolutely Continuous Random Vector}
-\sssc{Multivariate or Joint Normal or Gaussian random variable}
-PLACEHOLDER
 \ssc{Sample Mean, Bounds, and Convergences}
 \sssc{Sample mean of i.i.d. random variables}
 Let $\{X_i\}_{i=1}^n$ be a sequence of i.i.d. random variables and $X_i\sim X$ for all $i$. The sum of $X_1,X_2\ldots,X_n$ is
@@ -2168,27 +2214,20 @@ For large $r$,
 \[P(X_r=k)\approx\Phi\qty(\frac{k+0.5-\frac{r(1-p)}{p}}{\sqrt{\frac{r(1-p)}{p^2}}})-\Phi\qty(\frac{k-0.5-\frac{r(1-p)}{p}}{\sqrt{\frac{r(1-p)}{p^2}}})\]
 \ssc{Statistical Inference}
 \sssc{Statistical inference}
-For some parameter space $\Theta$, we can estimate some properties $t(\theta)$, i.e., a function of $\theta\in\Theta$, by sampling some distribution $P_{\theta}$:
+For some parameter space $\Theta$, we can estimate some properties $t(\theta)$, i.e., a function of $\theta\in\Theta$, by sampling some (probability) distribution or statistical model $P_{\theta}$:
 \bit
-\item Data generation: Collects samples $X\sim P_{\theta}$.
-\item Estimate via an inference algorithm (also called (decision) rule): Compute a function $\varphi$ of the observed data $x$ which gives an estimate of $t(\theta)$. The algorithm may be deterministic, i.e., purely a function of $X$, or randomized, i.e., $\varphi(X,U)$ also depends on some random seed $U$.
+\item Data generation: Collects samples. A typical scenario of the data is a sequence of samples drawn i.i.d. from the same distribution $X\sim P_{\theta}$.
+\item Estimate via an inference algorithm (also called (decision) rule): Compute a function $\varphi$ of the observed data $x$ which gives an estimate of $t(\theta)$, called estimator and denoted $\hat{\theta}$. The algorithm may be deterministic, i.e., purely a function of $X$, or randomized, i.e., $\varphi(X,U)$ also depends on some random seed $U$.
 \item Performance evaluation: We measure the performance by some loss function $\ell(\varphi(X,U),t(\theta))$. We want to design an inference algorithm that minimizes the expected loss (also called the risk) $R(\varphi;\theta)=E_{X\sim P_{\theta},U}(\ell(\varphi(X,U),t(\theta)))$.
 \eit
-When $t(\theta)=\theta$, it is called parameter estimation. Two main parameter estimations are point estimation and interval estimation.
+\sssc{Parameter estimation}
+Parameter estimation is the estimation of the parameters of a probability distribution or statistical model. The target parameters to be estimated may determine the distribution or partially determine it. We may estimate mean, variance, probability of an event, etc.
+
+Two main scenarios of parameter estimation are point estimation and interval estimation.
 \sssc{Point estimation}
-The problem of point estimation is where we want to estimate the unknown parameter $\theta$ itself.
-
-The loss function by collecting data $x$ can be squared error loss:
-\[\ell(\varphi(x),t(\theta))=\abs{\varphi(x)-\theta}^2.\]
-Then
-\[R(\varphi;\theta)=E_{X\sim P_{\theta}}((\varphi(x)-\theta)^2).\]
+In point estimation, we estimate the target parameter $\theta$ itself. The estimator is called point estimator.
 \sssc{Interval estimation}
-The problem of interval estimation is where we want to estimate an interval that contains unknown parameter $\theta$ with high probability.
-
-The loss function by collecting data $x$ can be the 0-1 loss:
-\[\ell(\varphi(x),t(\theta))=\bcs0,\quad&\theta\in\varphi(x)\\1,\quad&\theta\notin\varphi(x)\ecs\]
-Then
-\[R(\varphi;\theta)=P_{X\sim P_{\theta}}(\theta\notin\varphi(X)).\]
+In interval estimation, we estimate an interval that contains the target parameter $\theta$ with high probability. The estimator is called interval estimator.
 \sssc{Determine the best inference algorithm}
 A goal of statistical inference is to determine the best inference algorithm that mimizes the risk for a given loss function and parameter space, i.e., find $\varphi^*$ such that
 \[R(\varphi^*;\theta)\le R(\varphi;\theta)\]
@@ -2224,7 +2263,7 @@ A common loss function is the 0-1 loss:
 The risk is
 \[R(\varphi;\theta)=P_{X\sim P_{\theta}}(\varphi\ne\theta).\]
 \sssc{Best Bayesian decision rule}
-If we have a prior discrete distribution $\pi(\theta)$ over the hypothesis, the Bayesian optimal rule $\varphi^*$ that minimized the average-case risk $E_{\theta\sim\pi}R(\varphi;\theta)$ is the maximum a posteriori (MAP) rule defined as, for every $x\in\Chi$,
+If we have a prior discrete distribution $\pi(\theta)$ over the hypothesis, the Bayesian optimal rule $\varphi^*$ that minimized the average-case risk $E_{\theta\sim\pi}R(\varphi;\theta)$ is, for every $x\in\Chi$,
 \[\varphi^*(x)=\arg_{\theta}\max_{\theta}P_{\theta}(x)\pi(\theta),\]
 where $P_{\theta}(x)$ is the PDF of absolutely continuous $X$ or PMF of discrete $X$.
 \bpr
@@ -2239,6 +2278,103 @@ For absolutely continuous $X$,
 and
 \[\varphi(x)=\arg_{\theta}\max_{\theta}P_{\theta}(x)\pi(\theta).\]
 \epr
-\sssc{Posterior distribution}
+\sssc{Maximum a posteriori (MAP) decision rule}
 For discrete $X$,
-\[P_{\theta}(x)\pi(\theta)=p_{X,\Theta}(x,\theta)=
+\[P_{\theta}(x)\pi(\theta)=p_{X,\Theta}(x,\theta)=p_X(x)p_{\Theta|X}(\theta|x).\]
+For continuous $X$,
+\[P_{\theta}(x)\pi(\theta)=\dv{}{x}F_{X,\Theta}(x,\theta)=f_X(x)p_{\Theta|X}(\theta|x).\]
+$p_X(x)$ and $f_X(x)$ is not dependent on $\theta$, and $p_{\Theta|X}(\theta|x)$ is the posterior distribution of $\Theta$ given $X=x$. Thus the rule can be rewritten as
+\[\varphi^*(x)=\arg_{\theta}\max_{\theta}p_{\Theta|X}(\theta|x).\]
+This is called the maximum a posteriori (MAP) (decision) rule, which chooses the hypothesis with highest posterior probability given data $x$.
+\sssc{Maximum likelihood (ML) decision rule}
+In the case of $\pi(\theta)=\frac{1}{m}$ for all $\theta$, the MAP decision rule reduces to the maximum likelihood (ML) decision rule:
+\[\varphi^*(x)=\arg_{\theta}\max_{\theta}P_{\theta}(x)=\arg_{\theta}\max_{\theta}L(\theta|x),\]
+where $L(\theta|x)\colon P_{\theta}(x)$ is called likelihood function.
+\sssc{Binary hypothesis testing}
+In the special case of binary hypothesis testing, there are only two hypotheses $H_0\colon X\sim P_0$ and $H_1\colon X\sim P_1$. If the goal is the 0-1 loss, there are two kinds of errors:
+\bit
+\item Type I error or false positive: Rejecting $H_0$ when $H_0$ is true, which occurs with probability $R(\varphi;0)=P_{X\sim P_0}(\varphi(X)=1)$.
+\item Type II error or false positive: Accepting $H_0$ when $H_1$ is true, which occurs with probability $R(\varphi;1)=P_{X\sim P_1}(\varphi(X)=0)$.
+\eit
+\sssc{Bayesian-optimal test for binary hypothesis testing}
+\[R(\varphi)=E_{\theta\sim\pi}R(\varphi;\theta)=\pi(0)R(\varphi;0)+\pi(1)R(\varphi;1).\]
+The MAP rule $\varphi^*$ can be shown to be the likelihood ratio rule, for everyn$x\in\Chi$,
+\[\varphi^*(x)=\bcs1,\quad&\frac{P_1(x)}{P_0(x)}>\frac{\pi(0)}{\pi(1)}\\0,\quad&\tx{otherwise}\ecs\]
+The ratio $\frac{P_1(x)}{P_0(x)}$ is called the likelihood ratio, which measures how much more likely the observed data $x$ is under $H_1$ compared to $H_0$.
+\sssc{Mean squared error (MSE) of point estimators}
+The loss function by collecting data $x$ can be squared error loss:
+\[\ell(\varphi(x),t(\theta))=\abs{\varphi(x)-\theta}^2.\]
+Then
+\[R(\varphi;\theta)=\MSE(\hat{\theta})=E_{X\sim P_{\theta}}((\varphi(x)-\theta)^2).\]
+\sssc{Bias of point estimators}
+The bias of $\varphi(X)$ is defined as 
+\[\Bias(\varphi(X))=E(\varphi(X))-t(\theta).\]
+The estimator is called unbiased if $\Bias(\varphi(X))=0$ for all $\theta$.
+\sssc{Weak consistency of point estimators}
+An estimator $\varphi(X)$ is weakly consistent if $\varphi(X_1,\ldots,X_n)\xrightarrow{P}t(\theta)$ as $n\to\infty$ for all $\theta$.
+\sssc{Point estimation of variance}
+If the samples $X_1,\ldots,X_n\sim P_{\theta}$ where $\theta=(\mu,\sigma^2)$ and $\mu$ is known, then we can estimate $\sigma^2$ using the estimator
+\[\varphi(X_1,\ldots,X_n)=\frac{1}{n}\sum_{i=1}^n\qty(X_i-\mu)^2.\]
+The estimator is unbiased, since $E(\varphi(X_1,\ldots,X_n))=\sigma^2$.
+
+If $\mu$ is unknown, we may use sample mean $\bar{X}$ to estimate $\mu$ and get the estimator for variance
+\[\varphi(X_1,\ldots,X_n)=\frac{1}{n}\sum_{i=1}^n\qty(X_i-\bar{X})^2.\]
+However, this estimator is biased, since
+\[E(\varphi(X_1,\ldots,X_n))=\frac{n-1}{n}\sigma^2\ne\sigma^2.\]
+\bpr
+\[X_i-\bar{X}=\frac{n-1}{n}X_i+\frac{1}{n}\sum_{j\ne i}X_j\]
+\[E((X_i-\bar{X})^2)=\qty(\frac{n-1}{n})^2\sigma^2+\frac{n-1}{n^2}\sigma^2=\frac{n-2}{n}\sigma^2.\]
+\epr
+The estimator is weakly consistent since $\varphi(X_1,\ldots,X_n)\xrightarrow{P}\sigma^2$ as $n\to\infty$.
+
+To get an unbiased estimator of $\sigma^2$, we can multiply the previous estimator by $\frac{n}{n-1}$ as
+\[\bar{V}_n=\frac{1}{n-1}\sum_{i=1}^n\qty(X_i-\bar{X})^2,\]
+called sample variance.
+
+Hence, the sample mean $\bar{X}_n$ and sample variance $\bar{V}_n$ are unbiased and weakly consistent estimators of the population mean $\mu$ and variance $\sigma^2$ respectively.
+\sssc{Estimation of the probability of an event}
+Estimating the probability $P(A)$ of an event $A$ is just estimating the mean of a Bernoulli variable $Y\sim\Bern(P(A))$. We can just use the sample mean of $Y$ to estimate $P(A)$, i.e.,
+\[\bar{P}_n(A)=\frac{1}{n}\sum_{i=1}^n\mb{1}_A(X_i).\]
+It's an unbiased and weakly consistent estimator of $P(A)$ since $E(\bar{P}_n(A))=P(A)$ and $\bar{P}_n(A)\xrightarrow{P}P(A)$ as $n\to\infty}$.
+\sssc{Non-asymptotic performance}
+Statistical risks, either in the minimax or Bayesian sense, can be used to quatify the non-asymptotic performance of an estimator, that is, we may want to know how fast the convergence
+\[\lim_{n\to\infty}P(\abs{\varphi(X_1,\ldots,X_n)-t(\theta)}>\varepsilon)=0\]
+is, that is, find the minimum number of samples $n$ such that
+\[P(\abs{\varphi(X_1,\ldots,X_n)-t(\theta)}>\varepsilon)\le\delta\]
+for each $\delta$.
+\sssc{0-1 loss of interval estimator}
+The loss function by collecting data $x$ can be the 0-1 loss:
+\[\ell(\varphi(x),t(\theta))=\bcs0,\quad&\theta\in\varphi(x)\\1,\quad&\theta\notin\varphi(x)\ecs\]
+Then
+\[R(\varphi;\theta)=P_{X\sim P_{\theta}}(\theta\notin\varphi(X)).\]
+\sssc{Coverage probability and confidence coefficient of interval estimator}
+The coverage probability of an interval estimator $I(X)=[L(X),U(X)]$ for a parameter $\theta$ is defined as $P(\theta\in I(X))$ whre the probability is taken over the distribution of the data $X$.
+
+The confidence coefficient of the interval estimator is the minimum of the coverage probability over all possible values of $\theta$, i.e., $\min_{\theta}P(\theta\in I(X))$.
+
+An estimated interval with a confidence coefficient is also called confidence interval.
+
+For an interval estimator, there are two key performance factors that quantify it,
+\bit
+\item Coverage probability.
+\item Interval width: the length of the interval, which reflects the precision of the estimation.
+\eit
+\sssc{Interval estimation of the population mean}
+Given an interval width parameter $\varepsilon$ and a confidence level $1-\delta$, our goal is to find an interval of width $2\varepsilon$ such that the population mean $\mu$ is contained in the interval with probability at least $1-\delta$.
+
+The interval can be found by taking samples $X_1,\ldots,X_n$ from the distribution and computing sample mean $\bar{X}_n$. Then the interval can be constructed as $[\bar{X}_n-\varepsilon,\bar{X}_n+\varepsilon]$.
+\sssc{Chebyshev's inequality on confidence coefficient of interval estimator of the population mean}
+If the distribution has a upper bound of variance $\sigma^2\le b$, then by Chebyshev's inequality, we have
+\[P(\abs{\bar{X}_n-\mu}>\varepsilon)\le\frac{b}{n\varepsilon^2}.\]
+Hence, for any $\delta>0$,
+\[n\ge\frac{b}{\delta\varepsilon^2}\implies P(\abs{\bar{X}_n-\mu}>\varepsilon)\le\delta.\]
+And the confidence coefficient of the interval estimator for this case is at least
+\[1-\frac{b}{\delta\varepsilon^2}.\]
+\sssc{Interval estimator of Guassian distribution}
+If the distribution is Guassian distribution with unknown mean $\mu$ and variance, then we can use the sample variance $\bar{V}_n$ to perform interval estimation.
+
+In this case, $\frac{\bar{X}_n-\mu}{\sqrt{\frac{\bar{V}_n}{n}}}$ follows the Student's t-distribution with $n-1$ degrees of freedom:
+\[T\coloneq\frac{\bar{X}_n-\mu}{\sqrt{\frac{\bar{V}_n}{n}}}\sim t_{n-1}.\]
+Then, for any $\delta>0$, there exists a constant $t^*$ such that $P(T>t^*)=\frac{\delta}{2}$. Then the confidence interval with confidence coefficient $1-\delta$ is
+\[\qty[\bar{X}_n-t^*\sqrt{\frac{\bar{V}_n}{n}},\bar{X}_n+t^*\sqrt{\frac{\bar{V}_n}{n}}].\]
+\end{document}
