@@ -2170,10 +2170,11 @@ For large $r$,
 \sssc{Statistical inference}
 For some parameter space $\Theta$, we can estimate some properties $t(\theta)$, i.e., a function of $\theta\in\Theta$, by sampling some distribution $P_{\theta}$:
 \bit
-\item Data generation: Collects samples $C\sim P_{\theta}$.
-\item Estimate via an inference algorithm (also called (decision) rule): Compute a function $\varphi$ of the observed data which gives an estimate of $t(\theta)$. The algorithm may be deterministic, i.e., purely a function of $X$, or randomized, i.e., $\varphi(X,U)$ also depends on some random seed $U$.
-\item Performance evaluation: We measure the performance by some loss function $\ell(\varphi(X,Y),t(\theta))$. We want to design an inference algorithm that minimizes the expected loss (also called the risk) $R(\varphi;\theta)=E_{X\sim P_{\theta},U}(\ell(\varphi(X,Y),t(\theta)))$.
+\item Data generation: Collects samples $X\sim P_{\theta}$.
+\item Estimate via an inference algorithm (also called (decision) rule): Compute a function $\varphi$ of the observed data $x$ which gives an estimate of $t(\theta)$. The algorithm may be deterministic, i.e., purely a function of $X$, or randomized, i.e., $\varphi(X,U)$ also depends on some random seed $U$.
+\item Performance evaluation: We measure the performance by some loss function $\ell(\varphi(X,U),t(\theta))$. We want to design an inference algorithm that minimizes the expected loss (also called the risk) $R(\varphi;\theta)=E_{X\sim P_{\theta},U}(\ell(\varphi(X,U),t(\theta)))$.
 \eit
+When $t(\theta)=\theta$, it is called parameter estimation. Two main parameter estimations are point estimation and interval estimation.
 \sssc{Point estimation}
 The problem of point estimation is where we want to estimate the unknown parameter $\theta$ itself.
 
@@ -2205,11 +2206,12 @@ and the minimax optimal rule is defined as
 \[\varphi^*=\arg_{\varphi}\min_{\varphi}R(\varphi).\]
 \sssc{Bayesian paradigm}
 In Bayesian paradigm, we incorporate prior knowledge about the parameter and treat the unknown parameter $\theta$ as a random variable with a prior distribution $\pi(\theta)$, and the risk $R(\varphi)$ of an inference algorithm $\varphi$ is defined as the expected loss with respect to the prior distribution, called average-case risk, that is,
-\[R(\varphi)=E_{\Theta\sim\pi}R(\varphi;\theta).\]
+\[R(\varphi)=E_{\theta\sim\pi}R(\varphi;\theta).\]
 The Bayes risk is defined as
 \[R^*=\min_{\varphi}R(\varphi),\]
 and the Bayes optimal rule is defined as
 \[\varphi^*=\arg_{\varphi}\min_{\varphi}R(\varphi).\]
+For discrete prior random variable, $\pi(\theta)$ is its PMF and point estimation is used. For absolutely continuous prior random variable, $\pi(\theta)$ is its PDF and interval estimation is used.
 \sssc{Hypothesis testing}
 There are $m$ hypotheses $H_0,H_1,\ldots,H_{m-1}$
 \[H_{\theta}\colon X\sim P_{\theta},\quad\thera\in\{0,1,\ldots,m-1\},\]
@@ -2222,13 +2224,21 @@ A common loss function is the 0-1 loss:
 The risk is
 \[R(\varphi;\theta)=P_{X\sim P_{\theta}}(\varphi\ne\theta).\]
 \sssc{Best Bayesian decision rule}
-If we have a prior distribution $\pi(\theta)$ over the hypothesis, the Bayesian optimal rule $\varphi^*$ that minimized the average-case risk $E_{\Theta\sim\pi}R(\varphi;\theta)$ is the maximum a posteriori (MAP) rule defined as, for every $x\in\Chi$,
+If we have a prior discrete distribution $\pi(\theta)$ over the hypothesis, the Bayesian optimal rule $\varphi^*$ that minimized the average-case risk $E_{\theta\sim\pi}R(\varphi;\theta)$ is the maximum a posteriori (MAP) rule defined as, for every $x\in\Chi$,
 \[\varphi^*(x)=\arg_{\theta}\max_{\theta}P_{\theta}(x)\pi(\theta),\]
-where $P_{\theta}(x)$ is the PDF of absolutely continuous $X|\theta$ or PMF of discrete $X|\theta$.
+where $P_{\theta}(x)$ is the PDF of absolutely continuous $X$ or PMF of discrete $X$.
 \bpr
-Recall that minimize the risk is equivalent to maximizing $P_{X,\Theta}(\varphi(X)=\Theta)$. For discrete $X$ and $\Theta$
+Recall that minimize the risk is equivalent to maximizing $P_{X,\Theta}(\varphi(X)=\Theta)$.
 
-
-
+For discrete $X$,
+\[\max_{\varphi}E_{X,\Theta}\qty(\mb{1}_{\{\varphi(X)=\Theta\}})=\max_{\varphi}\sum_x\sum_{\theta}\mb{1}_{\{\varphi(X)=\theta\}}P_{\theta}(x)\pi(\theta)=\sum_x\max_{\theta}P_{\theta}(x)\pi(\theta)\]
+and
+\[\varphi(x)=\arg_{\theta}\max_{\theta}P_{\theta}(x)\pi(\theta).\]
+For absolutely continuous $X$,
+\[\max_{\varphi}E_{X,\Theta}\qty(\mb{1}_{\{\varphi(X)=\Theta\}})=\max_{\varphi}\int_{-\infty}^{\infty}\sum_{\theta}\mb{1}_{\{\varphi(X)=\theta\}}P_{\theta}(x)\pi(\theta)\dd{x}=\int_{-\infty}^{\infty}\max_{\theta}P_{\theta}(x)\pi(\theta)\dd{x}\]
+and
+\[\varphi(x)=\arg_{\theta}\max_{\theta}P_{\theta}(x)\pi(\theta).\]
 \epr
-
+\sssc{Posterior distribution}
+For discrete $X$,
+\[P_{\theta}(x)\pi(\theta)=p_{X,\Theta}(x,\theta)=
