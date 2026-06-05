@@ -410,9 +410,13 @@ The peak with wavelength $\lambda$ arises from interactions between x rays and t
 \ssc{Schrödinger's equation (薛丁格方程)}
 \sssc{Wave function}
 Similar to that of a sound or light wave, a matter wave has a wave function $\Psi(x,y,z,t)$, which is a complex function of space $(x,y,z)$ and time $t$.
-
+\sssc{Probability density}
 The probability density of finding the matter in the space is
 \[\abs{\Psi(x,y,z,t)}^2.\]
+\sssc{Probability current or probability flux}
+The probability current or probability flux is defined as
+\[\frac{\hbar}{2mi}\qty(\Psi^*\nabla\Psi-\Psi\nabla\Psi^*),\]
+where $^*$ denotes complex conjugate and $m$ is mass.
 \sssc{Hamiltonian operator}
 The Hamiltonian operator $\hat{H}$ represents the total energy of a system and is the generator of time evolution.
 
@@ -424,7 +428,7 @@ the Hamiltonian operator $\hat{H}$ is
 \[\hat{H}=\hat{T}+\hat{V}=-\frac{\hbar^2}{2m}\nabla^2+V(x,y,z,t)\]
 For non-relativistic $n$ particles, the kinetic energy operator $\hat{T}$ is
 \[\hat{T}=-\sum_{i=1}^n\frac{\hbar^2}{2m_i}\nabla_i^{\pht{i}2}\]
-the potential energy operator $\hat{V}$ is
+the potential (energy) operator $\hat{V}$ is
 \[\hat{V}=V(x,y,z,t)\]
 the Hamiltonian operator $\hat{H}$ is
 \[\hat{H}=\hat{T}+\hat{V}=-\sum_{i=1}^n\frac{\hbar^2}{2m_i}\nabla_i^{\pht{i}2}+V(x,y,z,t)\]
@@ -454,7 +458,7 @@ Since $\abs{T(t)}^2=1$, the probability density is $\abs{\psi(x,y,z)}^2$. Such s
 
 For non-relativistic single particle, equivalently,
 \[\nabla^2\psi(x,y,z)+\frac{2m}{\hbar^2}(E-V(x,y,z))\psi(x,y,z)=0.\]
-\sssc{One-dimensional non-relativistic single particle}
+\sssc{TISE of one-dimensional non-relativistic single particle}
 \[\dv[2]{\psi(x)}{x}+\frac{2m}{\hbar^2}(E-V(x))\psi(x)=0.\]
 Assume $V(x)$ is uniform and constant $V$.
 \[E-V=\frac{p^2}{2m}=\frac{1}{2m}\qty(\frac{k}{\hbar})^2\]
@@ -470,5 +474,55 @@ The first term represents a wave traveling in the positive direction of $x$. The
 Let $B=0$.
 \[\psi(x)=Ae^{ikx}\]
 \[\abs{\psi(x)}^2=A^2\]
+\sssc{Reflection from a potential step}
+A potential step with boundary at $x=0$ is
+\[V(x)=\bcs0,\quad&x<0\\V_0,\quad&x\ge0\ecs\]
+A particle with energy $E$ comes from $x<0$ in positive direction of $x$.
+
+Solve TISE for incoming and reflected waves in region I $x<0$ and transmitted wave in region II $x>0$.
+
+If $E>V_0$, classical physics would predict it to not be reflected, but it actually would be partially reflected.
+\[\psi_I(x)=Ae^{ik_1x}+Be^{-ik_1x}\]
+\[k_1=\frac{\sqrt{2mE}}{\hbar}\]
+\[\psi_{II}(x)=Ce^{ik_2x}\]
+\[k_2=\frac{\sqrt{2m(E-V_0)}}{\hbar}\]
+\bit
+\item $Ae^{ik_1x}$: incoming wave
+\item $Be^{-ik_1x}$: reflected wave
+\item $Ce^{ik_2x}$: transmitted wave
+\eit
+Reflection coefficient $R$ is defined as
+\[R=\frac{B^2}{A^2}\]
+Transmission coefficient $T$ is defined as
+\[T=\frac{k_2}{k_1}\frac{C^2}{A^2}\]
+which are the probability current ratios of reflected and transmitted waves over incoming wave respectively and satisfy
+\[R+T=1.\]
+If $E<V_0$, classical physics would predict it to totally be reflected immediately, but it actually would penetrate across the boundary with exponential decay despite no propagating transmitted wave.
+\[\psi_I(x)=Ae^{ikx}+Be^{-ikx}\]
+\[k=\frac{\sqrt{2mE}}{\hbar}\]
+\[\psi_{II}(x)=Ce^{-\kappa x}\]
+\[\kappa=\frac{\sqrt{2m(V_0-E)}}{\hbar}\]
+\sssc{Quantum tunnelling (量子穿隧) through a potential barrier}
+A potential barrier with boundary at $x=0$ and $x=a$ is
+\[V(x)=\bcs0,\quad&x<0\\V_0,\quad&0\le x\le a\\0,\quad&x>a\ecs\]
+A particle with energy $E<V_0$ comes from $x<0$ in positive direction of $x$.
+
+Classical physics would predict it to totally be reflected immediately at $x=0$, but it would actually penetrates and decays in $0\le x\le a$ and then be transmitted to $x>a$.
+
+Solve TISE for incoming and reflected at $x=0$ waves in region I $x<0$ and transmitted at $x=0$ and reflected at $x=a$ waves in region II $0\le x\le a$ and transmitted wave in region III $x>a$, called tunnelled through the potential barrier.
+\[\psi_I(x)=Ae^{ikx}+Be^{-ikx}\]
+\[k=\frac{\sqrt{2mE}}{\hbar}\]
+\[\psi_{II}(x)=Ce^{\kappa x}+De^{-\kappa x}\]
+\[\kappa=\frac{\sqrt{2m(V_0-E)}}{\hbar}\]
+\[\psi_{III}(x)=Fe^{ikx}\]
+\bit
+\item $Ae^{ikx}$: incoming wave
+\item $Be^{-ikx}$: reflected at $x=0$ wave
+\item $Ce^{\kappa x}$: transmitted at $x=0$ wave
+\item $De^{-\kappa x}$: reflected at $x=a$ wave
+\item $Fe^{ikx}$: transmitted wave
+\eit
+\sssc{Scanning Tunneling Microscope (STM)}
+In an STM, a fine metallic tip, mounted at the intersection of three mutually perpendicular quartz rods, is placed close to the conducting or semiconducting surface to be examined. A small potential difference, perhaps only 10 mV, is applied between tip and surface. Crystalline quartz has an interesting property called piezoelectricity: When an electric potential difference is applied across a sample of crystalline quartz, the dimensions of the sample change slightly. This property is used to change the length of each of the three rods smoothly and by tiny amounts, so that the tip can be scanned back and forth over the surface and lowered or raised with respect to the surface. The space between the surface and the tip forms a potential energy barrier. If the tip is close enough to the surface, electrons from the sample can tunnel through this barrier from the surface to the tip, forming a tunneling current. In operation, an electronic feedback arrangement adjusts the vertical position of the tip to keep the tunneling current constant as the tip is scanned over the surface. This means that the tip–surface separation also remains constant during the scan. The output of the device is a video display of the varying vertical position of the tip, hence of the surface contour, as a function of the tip position projected to surface plane. An STM not only can provide an image of a static surface, it can also be used to manipulate atoms and molecules on a surface. In a process known as lateral manipulation, the STM probe is initially brought down near a molecule, close enough that the molecule is attracted to the probe without actually  touching it. The probe is then moved across the background surface (such as copper), dragging the molecule with it until the molecule is in the desired location. Then the probe is backed up away from the molecule, weakening and then eliminating the attractive force on the molecule.
 
 \end{document}
