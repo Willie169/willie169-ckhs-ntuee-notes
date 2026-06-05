@@ -291,7 +291,7 @@ Convergence in distribution means
 \[\lim_{n\to\infty}P(X_n>c+\varepsilon)=\lim_{n\to\infty}1-P(X_n\le c+\varepsilon)=0.\]
 \epr
 \ssc{Discrete Random Variables}
-\sssc{Probability mass function (PMF)}
+\sssc{Probability mass (function) (PMF) or probability function/distribution for absolutely continuous random variable}
 For a discrete random variable $X$ with target sample space $\Omega_X=\{a_1,a_2,\ldots\}$, the probability mass function of $X$, denoted as $p_X$ or $P_X$, is defined as
 \[p_X(a_i)=P(X=a_i)\]
 for each $a_i\in\Omega_X$.
@@ -320,7 +320,7 @@ Given a sample space $(x_0,x_1,x_2,\ldots,x_k)$, each point $(p_0,p_1,\ldots,p_k
 corresponds to the PMF $p$ defined as
 \[p(x_i)=p_i,\quad i\in[0,k]\cap\bbZ.\]
 \ssc{Absolutely Continuous Random Variables}
-\sssc{Probability density function (PDF) or density}
+\sssc{Probability density (function) (PDF), density, or probability function/distribution for absolutely continuous random variable}
 For an absolutely continuous random variable $X$, the probability density function of $X$, denoted as $f_X$, is defined as
 \[f_X(x)=\dv{}{x}F_X(x),\]
 and for those points at which $F_X$ is not differentiable, arbitrary real number value.
@@ -1410,6 +1410,16 @@ p_X(k+1)-p_X(k)&=\binom{k}{r-1}p^r(1-p)^{k-r+1}-\binom{k-1}{r-1}p^r(1-p)^{k-r}\\
 \bpr
 Decompose to geometric random variables.
 \epr
+\item Relation to binomial random variable: 
+Suppose $X\sim\operatorname{NegBin}(r,p)$ and $Y_n\sim\operatorname{Bin}(n,p)$. Then, for all $n\in\bbN\cap[r,\infty)$,
+\[F_X(n)+F_{Y_n}(r-1)=1.\]
+\bpr
+$F_X(n)$ means that the $r$th success occurs before or at the $n$th trial, that is, there are at least $r$ successes in the first $n$ trials.
+
+$F_{Y_n}(r-1)$ means that there are at most $r-1$ successes in the first $n$ trials.
+
+There are either at least $r$ successes or at most $r-1$ successes in the first $n$ trials. Thus their sum is one.
+\epr
 \eit
 \sssc{Poisson random variable}
 \bit
@@ -1530,7 +1540,7 @@ p_{X+Y}(k)=&\sum_{j=0}^k\frac{\mu^je^{-\mu}}{j!}\frac{\lambda^{k-j}e^{-\lambda}}
 \ea\]
 \epr
 \eit
-\sssc{Poisson limit of binomials}
+\sssc{Binomial random variables converge in distribution to Poisson random variables theorem}
 For any fixed $\lambda\in(0,\infty)$, suppose $X\sim\operatorname{Pois}(\lambda)$ and sequence $\qty(X_n\sim\operatorname{Bin}\qty(n,\frac{\lambda}{n}))_{n\in\bbN}$. Then
 \[X_n\xrightarrow{\tx{d}}X\;\tx{as}\;n\to\infty.\]
 \bpr
@@ -1858,7 +1868,7 @@ PLACEHOLDER
 PLACEHOLDER
 \epr
 \eit
-\sssc{Student's t-distribution to standard normal distribution limit theorem}
+\sssc{Student's t-distributions converge in distribution to standard normal distribution theorem}
 Let $(t_{\nu})_{i=1}^{\infty}$ be a sequence and $Z\sim\calN(0,1)$. Then
 \[t_{\nu}\xrightarrow{\tx{d}}Z\;\tx{as}\;\nu\to\infty.\]
 \bpr
@@ -2017,7 +2027,7 @@ F_k(x)&=\int_0^x\frac{\lambda^kt^{k-1}e^{-\lambda t}}{(k-1)!}\dd{t}\\
 \item Variance:
 \[\operatorname{Var}(X)=\frac{k}{\lambda^2}\]
 \item MGF:
-\[M_X(t)=\qty(1-\frac{t}{\lambda})^{-k}\]
+\[M_X(t)=\qty(1-\frac{t}{\lambda})^{-k},\quad t<\lambda\]
 \item Mode:
 \[\operatorname{Mode}(X)=\frac{k-1}{\lambda}\]
 \bpr
@@ -2039,18 +2049,18 @@ P(\operatorname{Erlang}(k,\lambda)>x)&=1-F_X(x)\\
 \ea\]
 \epr
 \eit
-\sssc{Geometric to exponential limit theorem}
+\sssc{Geometric random variables converge in distribution to exponential random variables theorem}
 For any fixed $\lambda\in(0,\infty)$, let $\qty(X_n\sim\operatorname{Geom}\qty(\frac{\lambda}{n}))_{n\in\bbN}$, $\qty(Y_n=\frac{X_n}{n})_{n\in\bbN}$, and $Y\sim\operatorname{Exp}(\lambda)$. Then
 \[Y_n\xrightarrow{\tx{d}}Y\;\tx{as}\;n\to\infty.\]
 \bpr
 \[F_{Y_n}(x)=1-\qty(1-\frac{\lambda}{n})^{\lfloor nx\rfloor}\]
 \[\lim_{n\to\infty}F_{Y_n}(x)=1-e^{-\lambda x}\]
 \epr
-\sssc{Negative binomial to Erlang limit theorem}
+\sssc{Negative binomial random variables converge in distribution to Erlang random variables theorem}
 For any fixed $\lambda\in(0,\infty)$, let $\qty(X_n\sim\operatorname{NegBin}\qty(r,\frac{\lambda}{n}))_{n\in\bbN}$, $\qty(Y_n=\frac{X_n}{n})_{n\in\bbN}$, and $Y\sim\operatorname{Erlang}(r,\lambda)$. Then
 \[Y_n\xrightarrow{\tx{d}}Y\;\tx{as}\;n\to\infty.\]
 \bpr
-PLACEHOLDER
+By decomposition to geometric and exponential random variables respectively and geometric random variables converge in distribution to exponential random variables theorem.
 \epr
 \ssc{Sample Mean, Bounds, and Convergences}
 \sssc{Sample mean of i.i.d. random variables}
@@ -2214,9 +2224,9 @@ For large $r$,
 \[P(X_r=k)\approx\Phi\qty(\frac{k+0.5-\frac{r(1-p)}{p}}{\sqrt{\frac{r(1-p)}{p^2}}})-\Phi\qty(\frac{k-0.5-\frac{r(1-p)}{p}}{\sqrt{\frac{r(1-p)}{p^2}}})\]
 \ssc{Statistical Inference}
 \sssc{Statistical inference}
-For some parameter space $\Theta$, we can estimate some properties $t(\theta)$, i.e., a function of $\theta\in\Theta$, by sampling some (probability) distribution or statistical model $P_{\theta}$:
+For some parameter space $\Theta$, we can estimate some properties $t(\theta)$, i.e., a function of $\theta\in\Theta$, by sampling some (probability) distribution or statistical model:
 \bit
-\item Data generation: Collects samples. A typical scenario of the data is a sequence of samples drawn i.i.d. from the same distribution $X\sim P_{\theta}$.
+\item Data generation: Collects samples. A typical scenario of the data is a sequence of samples drawn i.i.d. from the same distribution $X\sim P_{\theta}$, where $P_{\theta}$ is the PDF of absolutely continuous $X$ or PMF of discrete $X$.
 \item Estimate via an inference algorithm (also called (decision) rule): Compute a function $\varphi$ of the observed data $x$ which gives an estimate of $t(\theta)$, called estimator and denoted $\hat{\theta}$. The algorithm may be deterministic, i.e., purely a function of $X$, or randomized, i.e., $\varphi(X,U)$ also depends on some random seed $U$.
 \item Performance evaluation: We measure the performance by some loss function $\ell(\varphi(X,U),t(\theta))$. We want to design an inference algorithm that minimizes the expected loss (also called the risk) $R(\varphi;\theta)=E_{X\sim P_{\theta},U}(\ell(\varphi(X,U),t(\theta)))$.
 \eit
@@ -2262,10 +2272,9 @@ A common loss function is the 0-1 loss:
 \[\ell(\varphi(X),\theta)=\bcs0,\quad\varphi(X)=\theta\\1,\quad\varphi(X)\ne\theta\ecs\]
 The risk is
 \[R(\varphi;\theta)=P_{X\sim P_{\theta}}(\varphi\ne\theta).\]
-\sssc{Best Bayesian decision rule}
+\sssc{Best Bayesian decision rule or Maximum a posteriori (MAP) decision rule}
 If we have a prior discrete distribution $\pi(\theta)$ over the hypothesis, the Bayesian optimal rule $\varphi^*$ that minimized the average-case risk $E_{\theta\sim\pi}R(\varphi;\theta)$ is, for every $x\in\Chi$,
-\[\varphi^*(x)=\arg_{\theta}\max_{\theta}P_{\theta}(x)\pi(\theta),\]
-where $P_{\theta}(x)$ is the PDF of absolutely continuous $X$ or PMF of discrete $X$.
+\[\varphi^*(x)=\arg_{\theta}\max_{\theta}P_{\theta}(x)\pi(\theta).\]
 \bpr
 Recall that minimize the risk is equivalent to maximizing $P_{X,\Theta}(\varphi(X)=\Theta)$.
 
@@ -2278,7 +2287,6 @@ For absolutely continuous $X$,
 and
 \[\varphi(x)=\arg_{\theta}\max_{\theta}P_{\theta}(x)\pi(\theta).\]
 \epr
-\sssc{Maximum a posteriori (MAP) decision rule}
 For discrete $X$,
 \[P_{\theta}(x)\pi(\theta)=p_{X,\Theta}(x,\theta)=p_X(x)p_{\Theta|X}(\theta|x).\]
 For continuous $X$,
@@ -2291,11 +2299,19 @@ In the case of $\pi(\theta)=\frac{1}{m}$ for all $\theta$, the MAP decision rule
 \[\varphi^*(x)=\arg_{\theta}\max_{\theta}P_{\theta}(x)=\arg_{\theta}\max_{\theta}L(\theta|x),\]
 where $L(\theta|x)\colon P_{\theta}(x)$ is called likelihood function.
 \sssc{Binary hypothesis testing}
-In the special case of binary hypothesis testing, there are only two hypotheses $H_0\colon X\sim P_0$ and $H_1\colon X\sim P_1$, called null hypothesis and alternative hypothesis respectively. If the goal is the 0-1 loss, there are two kinds of errors:
+In the special case of binary hypothesis testing, there are only two hypotheses $H_0\colon X\sim P_0$ and $H_1\colon X\sim P_1$, called null hypothesis and alternative hypothesis respectively.
+
+The likelihood ratio is
+\[L(x)=\frac{P_1(x){P_0(x)}\]
+and the MAP decision rule is
+\[\varphi^*(x)=\bcs1,\quad&L(x)>\frac{\pi(1)}{\pi(0)}\\0,\quad&L(x)\le\frac{\pi(1)}{\pi(0)}.\ecs\]
+If the goal is the 0-1 loss, there are two kinds of errors:
 \bit
-\item Type I error, false positive, or false alarm: Rejecting $H_0$ when $H_0$ is true, which occurs with probability $R(\varphi;0)=P_{X\sim P_0}(\varphi(X)=1)$.
-\item Type II error, false positive, or missing: Accepting $H_0$ when $H_1$ is true, which occurs with probability $R(\varphi;1)=P_{X\sim P_1}(\varphi(X)=0)$.
+\item Type I error, false positive, or false alarm: Rejecting $H_0$ when $H_0$ is true, which occurs with probability $R(\varphi;0)=P_{X\sim P_0}(\varphi(X)=1)$, called false alarm probability and denoted $P_{\tx{FA}}$.
+\item Type II error, false positive, or missing: Accepting $H_0$ when $H_1$ is true, which occurs with probability $R(\varphi;1)=P_{X\sim P_1}(\varphi(X)=0)$, called missing probability and denoted $P_{\tx{MISS}}$.
 \eit
+Total error probability is
+\[P_{\tx{ERR}}=P_{\tx{FA}}\pi(0)+P_{\tx{MISS}}\pi(1).\]
 \sssc{Bayesian-optimal test for binary hypothesis testing}
 \[R(\varphi)=E_{\theta\sim\pi}R(\varphi;\theta)=\pi(0)R(\varphi;0)+\pi(1)R(\varphi;1).\]
 The MAP rule $\varphi^*$ can be shown to be the likelihood ratio rule, for everyn$x\in\Chi$,
