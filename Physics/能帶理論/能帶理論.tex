@@ -1,0 +1,120 @@
+\documentclass[a4paper,12pt]{article}
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{3}
+\input{/usr/share/LaTeX-ToolKit/template.tex}
+\begin{document}
+\title{能帶理論}
+\author{沈威宇}
+\date{\temtoday}
+\titletocdoc
+\sct{能帶理論（(Energy) band theory）}
+能帶理論描述固體材料中電子的能量分布和電子在材料中的行為。
+\ssc{（電子）能帶結構（(Electronic) band structure）}
+\sssc{能帶（Band）}
+多個原子的原子軌域依分子軌域理論產生鍵結、反鍵結等分子軌域，當數目非常巨大（通常數量級 $10^{20}$ 或更多）的原子結合成固體時，分子軌域間的能階能量差將會變的非常小，一群能量相鄰的能階，可以被視為一個連續能帶，分為：
+\bit
+\item\tb{價帶（Valence band）}：充滿電子的最高能帶。
+\item\tb{導帶（Conduction band）}：空的或部分填充的能帶。其中電子為自由電子（Free electron），可以自由移動形成電流。
+\item\tb{能隙（Band gap）}$E_g$：導帶底部（Conduction Band Minimum）的能量減去價帶頂部（Valence Band Maximum）的能量。
+\eit
+以Li為例，單一原子則電子位於固定能階的2s軌域，Li$_2$分子則兩個2s軌域結合成兩個能量不同的分子軌域，一個較原本高，另一較原本低。若有極多個Li原子時，可視為形成兩個能量幾乎連續的能帶，其中較低能量者為價帶，被電子填滿，較高能量者無電子或部分填充電子為導帶，兩能帶間的能量差即能隙。
+\sssc{絕緣體（Insulators）、半導體（Semiconductors）和導體（Conductors）}
+\bit
+\item 絕緣體：具有較大能隙，電子不易躍遷到導帶。
+\item 半導體：具有較小能隙，電子在適當條件下可以激發到導帶。鍺的能隙約 \(0.67\,\text{eV}\)。
+\item 導體：價帶和導帶重疊或能隙極小，電子可以自由移動到導帶。
+\eit
+\sssc{費米能階（Fermi level）}
+費米能階 $E_f$ 為一個電子的假設能階，使得在 0 K 溫度且熱力學平衡時，該能階有 50\% 的機率在任何給定時間都被占用。
+\bit
+\item 絕緣體中，$E_f$ 位於能隙中，與導帶和價帶相距甚遠。
+\item 金屬或退化半導體中，$E_f$ 位於導帶上。
+\item 無或少量摻雜的半導體中，$E_f$ 雖位於能隙中，但與導帶和價帶較近。
+\eit
+\sssc{功函數（Work function）}
+令材料的費米能階 $E_f$、基本電荷 $e$、電子在無限遠真空處的能量 $E_{\text{vac}}$，則功函數 $W$ 為：
+\[W=E_{\text{vac}}-E_f.\]
+功函數與光電效應底限頻率關係為：
+\[W= hf_0.\]
+\ssc{有效質量（effective mass）與電洞/空穴（Hole）/電子電洞（Electron hole）}
+\sssc{電子的能量與有效質量}
+電子的能量 \(E\) 並非如自由電子般與波數 \(k\) 成簡單的二次方關係，而是呈現複雜的週期性函數。但在能帶的極值附近，\(E(k)\) 仍可近似為拋物線：
+\[E(k) \approx E_0 + \frac{\hbar^2 k^2}{2m^*}.\]
+其中 \(m^*\) 為有效質量，定義為
+\[\frac{1}{m^*}=\frac{1}{\hbar^2} \frac{\mathrm{d}^2E}{\mathrm{d}k^2}.\]
+有效質量並非電子的真實質量，而是描述電子在晶格作用下，對外加電磁場響應的等效慣性。
+\sssc{不同位置電子的有效質量}
+當電子處於導帶底部時，能帶開口向上，$\frac{\mathrm{d}^2E}{\mathrm{d}k^2}>0$，有效質量為正。這類電子如同自由電子，只是有效質量被修正。
+
+當電子處於價帶頂部時，能帶開口向下，$\frac{\mathrm{d}^2E}{\mathrm{d}k^2}<0$，有效質量為負。負有效質量意味著當施加一個外加電場時，價帶頂電子的加速度方向與電場力方向相反，使得像是帶有正電荷的粒子在運動。
+\sssc{電洞}
+考慮一個接近填滿的價帶。若其中缺失了一個電子，留下的空缺即稱「電洞」，常記作 $h^+$。當外加電場驅動電子移動時，鄰近電子可能躍入此空缺，導致空缺反方向移動，即等價於一個帶正電荷 \(+e\)、有效質量為正值（\(+|m^*|\)）的粒子。
+\ssc{載子產生（Carrier generation）}
+指一個電子從價帶中被激發到導帶，會在價帶中留下一個電洞，產生兩個等值異號的電荷載子。
+\ssc{光生伏打效應/光伏效應（Photovoltaic effect）/內光電效應（Internal photoelectric effect）}
+指在光的照射下，物質材料中電子的被激發而自價帶躍遷至導帶，稱光生電子，並在價帶留下電洞，稱光生電洞，即產生光生電子電洞對的現象。有時也被視為光電效應的一種。
+
+若入射光頻率大於等於該物質的底限頻率（threshold frequency）$f_0$則立即產生光生電子電洞對，若入射光頻率小於該物質的底限頻率則永不產生光生電子電洞對。類似於光電效應，可用光量子論和能帶理論解釋。令物質能隙$E_g$，則底限頻率為：
+\[f_0=\frac{E_g}{h}\]
+
+常用於太陽能電池（Solar cell）、電荷耦合元件（Charge coupled device, CCD）、光敏電阻（Photoresistor）、光控繼電器（Light-controlled relay）。
+\ssc{載子複合（Carrier recombination）與電致發光/電激發光（Electroluminescence）}
+指電子和電洞複合，會以光子的形式釋放能量，釋放的能量等於能隙$E_g=hf$，故能隙不同的物質放出不同頻率的光。常用於發光二極體（Light emitting diode, LED）。
+\ssc{激子（Exciton）}
+描述了一對電子與電洞由靜電力相互吸引而構成的束縛態，可視為電中性的准粒子。
+\ssc{量子限制（Quantum confinement）}
+\sssc{量子井/量子阱（Quantum well）}
+指奈米材料的厚度與載子的物質波長具有相同的數量級，材料不呈現連續能帶而是呈現離散的子能帶（energy subbands）的現象，使得能隙增大。
+\sssc{量子線（Quantum wire）}
+指一維奈米材料的直徑與載子的物質波長具有相同的數量級，載子於其中只能在一個方向上移動的一維量子系統，不遵循電阻等於電阻率乘以長度除以截面積的公式，電導率小於等於基本電荷的平方乘以二除以普朗克常數，其中無內部散射時等於之，與奈米結構極其相關，可以此利用金屬或奈米碳管等製造出導體至絕緣體。
+\sssc{量子點（Quantum dot, QD）/半導體奈米晶體（Semiconductor nanocrystal）}
+半導體的一種能夠在三維空間中限制載子的零維奈米結構，激子的束縛能取決於量子點的尺寸，可以此調整其吸收與發射光譜。
+\ssc{半導體（Semiconductor）}
+能隙介於導體與絕緣體之間的物質。
+\sssc{無機半導體}
+1947年，諾基亞貝爾實驗室（Nokia Bell Labs）的巴丁（John Bardeen）、布拉頓（Walter Houser Brattain）和肖克利（William Shockley）以鍺材料發明點接觸電晶體（point-contact transistor），是史上首個半導體電子元件，獲1956年諾貝爾物理獎。
+
+無機半導體材料如矽 \ce{Si}（現最常用）、鍺 \ce{Ge}（最早使用）、砷化鎵 \ce{GaAs}（常用於場效電晶體）、磷化鎵 \ce{GaP}（常用於發光二極體）、磷化鎵鋁銦 \ce{AlGaInP}（常用於發光二極體）、砷化鎵鋁 \ce{AlGaAs}、二氧化鈦 \ce{TiO2}（能隙較大）。
+\sssc{有機半導體（Organic semiconductor）}
+有機導電聚合物等，如聚乙炔及其衍生物。有機半導體製成的元件通常操作電壓較低、耗電較低、製程簡單、能量密度較高、體積小、重量輕、可撓曲性遠高於類金屬半導體，可用導電塑膠薄膜代替許多類金屬半導體材料，可用於有機發光二極體顯示器、可撓式太陽能電池、可撓式觸控面板、充電電池材料等，以聚苯胺用於充電電池電極的應用最多。但缺點如，有機分子易氧化使生命週期縮短、高分子材料一般導熱性差使廢熱不易導出等，後者可能通過在導電聚合物材料中添加金屬粉末的複合材料解決。
+\sssc{溫度效應}
+溫度增加時，電子獲得更多能量，更容易躍遷到導帶，故溫度升高會增加半導體的電導率。
+\ssac{晶格結構效應}
+不同晶格排列可能導致不同的能帶寬度和能隙。
+\sssc{本徵半導體（Intrinsic semiconductor）/無摻雜半導體（Undoped semiconductor）/純半導體（Pure semiconductor）}
+指沒有摻雜的純晶體半導體，其參與導電的自由電子和電洞濃度約相等。
+\sssc{摻雜（Doping）}
+指透過在半導體晶體結構中添加雜質，可以改變其能隙，亦可增加載子，稱之非本徵半導體（Extrinsic semiconductor）/摻雜半導體（Doped semiconductor）。
+\sssc{N 型半導體}
+引入更多自由電子，使費米能階上移而靠近導帶，導電性增加。對於類金屬半導體通常是在高純度半導體中加入少量第15族元素，如 P、As。
+\sssc{P 型半導體}
+引入更多電洞，費米能階下而靠近價帶，導電性增加。對於類金屬半導體通常是在高純度半導體中加入少量第13族元素，如 B、Al。
+\sssc{p–n 接面（p–n junction）}
+指 n 型和 p 型半導體的接合面。
+\sssc{半導體二極體（Semiconductor diode）}
+利用 p–n 接面，順向偏壓時電子從 n 型流向 p 型，逆向偏壓時無電流，可用於整流等。
+\sssc{發光二極體（Light emitting diode, LED）}
+將順向偏壓通入半導體二極體，使載子複合而電致發光。
+
+早期研發出的紅色和綠色單色發光二極體用途較受限，1992年赤崎勇、天野浩與中村修二以氮化鎵材料發明藍光 LED，始可用光的三原色調配任意所需的顏色，尤其用作照明的白光，較傳統白熾燈泡與日光燈更省電、體積更小、壽命更長，共同獲2014年諾貝爾物理獎。
+\sssc{有機發光二極體（Organic light-emitting diode, OLED）}
+有機半導體製成的二極體，原料如「三(8-羥基喹啉)鋁/三[8-羥基(苯[b]氮雜環己-1,3,5-三烯)]鋁（tris(8-hydroxyquinolinato) aluminium(III)）\ce{Al(C9H6NO)3}」或「聚對苯乙炔（Poly(p-phenylene vinylene), PPV） [-c1ccc(cc1)C=C-]$_n$」。
+\sssc{光伏電池（Photovoltaic cell）/太陽能電池（Solar cell）}
+通常由一個或多個 p–n 接面組成，吸收光子並輸出直流電。種類如：
+\begin{itemize}
+\item 單結晶矽太陽能電池：高效率但成本較高。
+\item 多晶矽太陽能電池：效率較低但成本較低。
+\item 薄膜太陽能電池：輕薄柔軟，適用於特定場景。
+\end{itemize}
+效率提升方法：
+\begin{itemize}
+\item 減少表面反射：透明導電層和抗反射層減少光子的反射。
+\item 改進材料：新材料如有機太陽能電池和混合鈣鈦礦太陽能電池提高效率。
+\item 多接面結構：提高光吸收和轉換效率。
+\item 雷射細工：提高電池表面光陽極的粗糙度，增加光吸收。
+\end{itemize}
+\sssc{場效電晶體（Field-effect transistor, FET）}
+FET 具有四個端子：源極（source）、閘極（gate）和汲極（drain）、體（body）/基（base）/塊體（bulk）/基板（substrate）。通過在閘極施加電壓，可以改變源極與汲極之間的電導率，從而控制電流，分為需加閘極電壓方能導通源極與汲極的增強模式（enhancement-mode），較常見；與預設導通源極與汲極，加閘極電壓可減弱或關閉它的空乏模式/減少模式（depletion-mode）。體則可以將電晶體調變至運行，在電路設計中少用。
+
+FET 僅使用電子與電洞的其中一種作為電荷載子，前者稱 n-通道（n-channel），後者稱 p-通道（p-channel）。源極與汲極下方的摻雜半導體具有該種載子，在增強模式中預設不相連而斷路，但加閘極電壓可以引入載子使相連而導通；在空乏模式中預設相連而導通，但加閘極電壓可以引入相反的載子使變窄增加電阻，繼而不相連而斷路。
+\end{document}
