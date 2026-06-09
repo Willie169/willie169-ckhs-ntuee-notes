@@ -87,7 +87,7 @@ where
 Complete exponential Bell polynomial $B_n\qty(x_1,x_2,\ldots, x_n)$ is defined as
 \[B_n\qty(x_1,x_2,\ldots, x_n)=n!\sum_{k=0}^nB_{n,k}\qty(x_1,x_2,\ldots, x_{n-k+1}).\]
 \subsubsection{Derivative of inverse functions}
-\[\qty(f^{-1})'(x)=\frac{1}{f'\qty(f^{-1}(x)).\]
+\[\qty(f^{-1})'(x)=\frac{1}{f'\qty(f^{-1}(x))}.\]
 \begin{proof}
 \[f\qty(f^{-1}(x))=x.\]
 Differentiate both sides:
@@ -113,7 +113,7 @@ PLACEHOLDER
 Given a function $f(x,y)$ is a function that is continuously differentiable on a neighborhood of a point $(x_0,y_0)$, $f(x_0,y_0)=0$, and $\pdv{f}{y}(x_0,y_0)\neq 0$ on a neighborhood of $(x_0,y_0)$, then there exists a unique differentiable function $g$ such that $y_0=g(x_0)$ and $f(x,g(x))=0$ on a neighborhood of $x_0$. Moreover, by differentiating both sides of $f(x,g(x))=0$, called implicit differentiation, we obtain
 \[g'(x)=-\frac{\pdv{f}{x}(x,g(x))}{\pdv{f}{y}(x,\varphi(x))}.\]
 \subsubsection{Implicit function theorem of multiple real variables}
-Below, we will denote $(\mb{x},\mb{y})$ as an element of $\bbR^{(n+m)}$ for some $\mb{x}\in\bbR^n$ and $\mb{y}\in\bbR^m$, and denote the left $n$ columns of $(Df)(\mb{a},\mb{b})$ as $J_{f,\mb{x})$, and the right $m$ columns of $(Df)(\mb{a},\mb{b})$ as $J_{f,\mb{y})$. Given a function $f\colon D\subseteq\bbR^{(n+m)}\to\bbR^m$ that is continuously differentiable on a neighborhood of a point $(\mb{a},\mb{b})$, $f(\mb{a},\mb{b})=\mb{0}$, and $J_{f,\mb{y})(\mb{a},\mb{b})$ is invertible, then there exists a unique function $g$ such that $\mb{b}=g(\mb{a})$ and $f(\mb{x},g(\mb{x}))=\mb{0}$ on a neighborhood of $\mb{a}$. Moreover, by differentiating both sides of $f(\mb{x},g(\mb{x}))=\mb{0}$, called implicit differentiation, we obtain
+Below, we will denote $(\mb{x},\mb{y})$ as an element of $\bbR^{(n+m)}$ for some $\mb{x}\in\bbR^n$ and $\mb{y}\in\bbR^m$, and denote the left $n$ columns of $(Df)(\mb{a},\mb{b})$ as $J_{f,\mb{x}}$, and the right $m$ columns of $(Df)(\mb{a},\mb{b})$ as $J_{f,\mb{y}}$. Given a function $f\colon D\subseteq\bbR^{(n+m)}\to\bbR^m$ that is continuously differentiable on a neighborhood of a point $(\mb{a},\mb{b})$, $f(\mb{a},\mb{b})=\mb{0}$, and $J_{f,\mb{y}}(\mb{a},\mb{b})$ is invertible, then there exists a unique function $g$ such that $\mb{b}=g(\mb{a})$ and $f(\mb{x},g(\mb{x}))=\mb{0}$ on a neighborhood of $\mb{a}$. Moreover, by differentiating both sides of $f(\mb{x},g(\mb{x}))=\mb{0}$, called implicit differentiation, we obtain
 \[(Dg)(\mb{x})=-\qty[J_{f,\mb{y}}(\mb{x},g(\mb{x}))]^{-1}\qty[J_{f,\mb{x}}(\mb{x},g(\mb{x}))],\]
 or for each component $x_i$ of $\mb{x}$,
 \[\pdv{g}{x_i}=-\qty[J_{f,\mb{y}}(\mb{x},g(\mb{x}))]^{-1}\pdv{f}{x_i}.\]
@@ -169,7 +169,7 @@ Let $V$ and $W$ be normed vector spaces, $U$ be an open subset of $V$, and $f\co
 $f$ is differentiable at $a$ iff there exists bounded linear operator $A\colon V\to W$ such that
 \[\lim_{\|h\|_V\to 0}\frac{\|f(a+h)-f(a)-A(h)\|_W}{\|h\|_V}=0,\]
 that is,
-\[\forall\varepsilon>0\colon\exists\delta>0\text{\ s.t.\ }\|h\|_V<\delta\implies\|f(a+h)-f(a)-A(h)\|_W\leq\varepsion\|h\|_V.\]
+\[\forall\varepsilon>0\colon\exists\delta>0\text{\ s.t.\ }\|h\|_V<\delta\implies\|f(a+h)-f(a)-A(h)\|_W\leq\varepsilon\|h\|_V.\]
 By the triangular identity,
 \[\|f(a+h)-f(a)\|_W\leq\|A(h)\|_W+\|f(a+h)-f(a)-A(h)\|_W.\]
 By the definition of bounded linear operator, there exists $C\in\bbR_{>0}$ such that
@@ -334,7 +334,7 @@ Let function $f\colon I\subseteq\bbR\to\bbR$ be differentiable on an open interv
     For any $h<0$ with $(x+h)\in(a,b)$, we have
     \[f(x)\geq f(x+h).\]
     Thus for any $h$ with $(x+h)\in(a,b)$, we have
-    \[\frac{x+h}-f(x)}{h}\geq 0.\]
+    \[\frac{f(x+h)-f(x)}{h}\geq 0.\]
     The "only if" direction of the tenth statement can be proven similarly.
 \end{proof}
 \subsubsection{First Derivative Test for Local Extrema Theorem}
@@ -753,7 +753,7 @@ Because \( \delta\mathbf{x} \in \ker(\nabla g(\mathbf{x}^)) \), \( \nabla f(\mat
 \end{proof}
 \subsection{Generalized Schwarz's Theorem, Young's Theorem, or Clairaut's Theorem on equality or symmetry of mixed partial derivatives}
 For a function $f\colon\Omega\subseteq\mathbb{R}^n\to\mathbb{R}^o$, for any indexed family $A\colon\bbN_{\leq m}\to\bbN_{\leq n}$, for any permutation $\sigma$ of $\bbN_{\leq m}$, define
-\[D_{A,\sigma}f=\frac{\partial^mf}{\prod_{k=1}^m\partial x_{A_{\sigma(k)}}.\]
+\[D_{A,\sigma}f=\frac{\partial^mf}{\prod_{k=1}^m\partial x_{A_{\sigma(k)}}}.\]
 If for all permutations $\sigma$ of $\bbN_{\leq m}$, $D_{A,\sigma}f$ exist on a neighborhood of a fixed point $\mathbf{p}\in\Omega$ and is continuous at $\mathbf{p}$, then all of them are equal at $\mb{p}$.
 \subsection{Numerical differentiation (數值微分)}
 \subsubsection{Newton's Method (牛頓法) or Newton-Raphson Method (牛頓-拉普森法)}

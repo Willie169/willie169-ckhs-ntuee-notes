@@ -297,7 +297,7 @@ with respect to $x$ where $R$ is a rational function and $a\neq 0$, it may be ef
 \ben
 \item let $h=\frac{b}{2|a|}$ and $k=-\frac{b^2}{4a^2}+\frac{c}{a}$, rewrite $\sqrt{ax^2+bx+c}$ as
 \[\sqrt{ax^2+bx+c}=\sqrt{|ak|}\sqrt{\sgn(a)\qty(\frac{x}{\sqrt{|k|}}+\frac{h}{\sqrt{|k|}})^2+\sgn(k)},\]
-\iten use substitution $u=\frac{x}{\sqrt{|k|}}+\frac{h}{\sqrt{|k|}}$, which makes the integrand,
+\item use substitution $u=\frac{x}{\sqrt{|k|}}+\frac{h}{\sqrt{|k|}}$, which makes the integrand,
 \[\sqrt{|k|}R\qty(\sqrt{|k|}u-h,\sqrt{|ak|}\sqrt{\sgn(a)u^2+\sgn(k)}),\]
 which is a rational function of $u$ and $\sqrt{\sgn(a)u^2+\sgn(k)}$, and,
 \item depending on $\sgn(a)$ and $\sgn(k)$,
@@ -308,20 +308,20 @@ which is a rational function of $u$ and $\sqrt{\sgn(a)u^2+\sgn(k)}$, and,
 \item $a<0$ and $k>0$: try the substitution $u=\sin(t)$, $u=\cos(t)$, $u=\tanh(t)$, or $u=\sech(t)$.
 \eit
 \een
-\subsubsection{Euler substitutions}
+\subsubsection{Euler('s) substitution(s)}
 When computing an integral of
 \[R(x,\sqrt{ax^2+bx+c})\]
 with respect to $x$ where $R$ is a rational function, the three Euler('s) substitutions may be effective.
 \ben
-\item First substitution: For $a\geq 0$, substitute
+\item Euler's first substitution: For $a\geq 0$, substitute
 \[\sqrt{ax^2+bx+c}=\pm x\sqrt{a}+t\]
 \[x=\frac{c-t^2}{\pm 2t\sqrt{a}-b}\]
 where either the positive sign or the negative sign can be chosen.
-\item Second substitution: For $c\geq 0$, substitute
+\item Euler's second substitution: For $c\geq 0$, substitute
 \[\sqrt{ax^2+bx+c}=xt\pm\sqrt{c}\]
-\[x=\pm 2t\sqrt{c}-b}\]
+\[x=\frac{\pm 2t\sqrt{c}-b}{a-t^2}\]
 where either the positive sign or the negative sign can be chosen.
-\item Third substitution: For $b^2-4ac\geq 0$, let
+\item Euler's third substitution: For $b^2-4ac\geq 0$, let
 \[ax^2+bx+c=a(x-\alpha)(x-\beta),\]
 substitute
 \[\sqrt{ax^2+bx+c}=(x-\alpha)t\]
@@ -437,13 +437,13 @@ Suppose $V\subseteq\mathbb{R}^n$ is a compact region with outward-oriented, piec
 \[\int_V\nabla\cdot\mb{F}\dd{V}=\oint_S\mb{F}\cdot\dd{\mb{S}}.\]
 \bpr
 Simple regions case: Let $\sigma$ be a permutation on $(x_1,\ldots,x_n)$ and
-\[V=\left\{(x_1,\ldots,x_n)\colon\forall i\in\bbZ\cap[1,n]\colon\varphi_i\qty(x_{\sigma(j)}_{j=1}^i)\le x_{\sigma(i)}\le\psi_i\qty(x_{\sigma(j)}_{j=1}^i)\right\},\]
+\[V=\left\{(x_1,\ldots,x_n)\colon\forall i\in\bbZ\cap[1,n]\colon\varphi_i\qty(\qty(x_{\sigma(j)})_{j=1}^i)\le x_{\sigma(i)}\le\psi_i\qty(\qty(x_{\sigma(j)})_{j=1}^i)\right\},\]
 where $\varphi_i,\psi_i$ are $(i-1)$-ary $C^1$ functions.
 \[\int_V\nabla\cdot\mb{F}\dd{V}=\sum_{i=1}^n\int_V\pdv{F_{\sigma(i)}}{x_{\sigma(i)}}\dd{V}\]
 For each term, by FTC part 2,
 \[\ba
 \int_V\pdv{F_i}{x_i}\dd{V}=&\int_{\varphi_1}^{\psi_1}\ldots\int_{\varphi_n(x_{\sigma(1)},\ldots,x_{\sigma(n-1)})}^{\psi_n(x_{\sigma(1)},\ldots,x_{\sigma(n-1)})}\pdv{F_{\sigma(i)}}{x_{\sigma(i)}}\dd{x_{\sigma(n)}}\ldots\dd{x_{\sigma(1)}}\\
-=&\int_{\varphi_1}^{\psi_1}\ldots\int_{\varphi_{i-1}(x_{\sigma(1)},\ldots,x_{\sigma(i-2)})}^{\psi_{i-1}(x_{\sigma(1)},\ldots,x_{\sigma(i-2)})}\int_{\varphi_{i+1}(x_{\sigma(1)},\ldots,x_{\sigma(i)})}^{\psi_{i+1}(x_{\sigma(1)},\ldots,x_{\sigma(i)})}\ldots\int_{\varphi_n(x_{\sigma(1)},\ldots,x_{\sigma(n-1)})}^{\psi_n(x_{\sigma(1)},\ldots,x_{\sigma(n-1)})}F_{\sigma(i)}}\qty(x_1,\ldots,x_{i-1},\psi_i(x_{\sigma(1)},\ldots,x_{\sigma(i-1)}),x_{i+1},\ldots,x_n)-F_{\sigma(i)}}\qty(x_1,\ldots,x_{i-1},\varphi_i(x_{\sigma(1)},\ldots,x_{\sigma(i-1)}),x_{i+1},\ldots,x_n)\dd{x_{\sigma(n)}}\ldots\dd{x_{\sigma(i+1)}}\dd{x_{\sigma(i-1)}}\ldots\dd{x_{\sigma(1)}}\\
+=&\int_{\varphi_1}^{\psi_1}\ldots\int_{\varphi_{i-1}(x_{\sigma(1)},\ldots,x_{\sigma(i-2)})}^{\psi_{i-1}(x_{\sigma(1)},\ldots,x_{\sigma(i-2)})}\int_{\varphi_{i+1}(x_{\sigma(1)},\ldots,x_{\sigma(i)})}^{\psi_{i+1}(x_{\sigma(1)},\ldots,x_{\sigma(i)})}\ldots\int_{\varphi_n(x_{\sigma(1)},\ldots,x_{\sigma(n-1)})}^{\psi_n(x_{\sigma(1)},\ldots,x_{\sigma(n-1)})}F_{\sigma(i)}\qty(x_1,\ldots,x_{i-1},\psi_i(x_{\sigma(1)},\ldots,x_{\sigma(i-1)}),x_{i+1},\ldots,x_n)-F_{\sigma(i)}\qty(x_1,\ldots,x_{i-1},\varphi_i(x_{\sigma(1)},\ldots,x_{\sigma(i-1)}),x_{i+1},\ldots,x_n)\dd{x_{\sigma(n)}}\ldots\dd{x_{\sigma(i+1)}}\dd{x_{\sigma(i-1)}}\ldots\dd{x_{\sigma(1)}}\\
 =&\int_{\varphi_1}^{\psi_1}\ldots\int_{\varphi_{i-1}(x_{\sigma(1)},\ldots,x_{\sigma(i-2)})}^{\psi_{i-1}(x_{\sigma(1)},\ldots,x_{\sigma(i-2)})}\int_{\varphi_{i+1}(x_{\sigma(1)},\ldots,x_{\sigma(i)})}^{\psi_{i+1}(x_{\sigma(1)},\ldots,x_{\sigma(i)})}\ldots\int_{\varphi_n(x_{\sigma(1)},\ldots,x_{\sigma(n-1)})}^{\psi_n(x_{\sigma(1)},\ldots,x_{\sigma(n-1)})}
 (\mb{F}\cdot\mb{e}_i)\qty(\psi_i(x_{\sigma(1)},\ldots,x_{\sigma(i-1)}))+(\mb{F}\cdot(-\mb{e}_i))\qty(\varphi_i(x_{\sigma(1)},\ldots,x_{\sigma(i-1)}))\dd{x_{\sigma(n)}}\ldots\dd{x_{\sigma(i+1)}}\dd{x_{\sigma(i-1)}}\ldots\dd{x_{\sigma(1)}}\\
 =&\int_{x_{\sigma(i)}=\psi_i(x_{\sigma(1)},\ldots,x_{\sigma(i-1)})}\mb{F}\cdot\dd{\mb{S}}+\int_{x_i=\varphi_i(x_{\sigma(1)},\ldots,x_{\sigma(i-1)})}\mb{F}\cdot\dd{\mb{S}}
@@ -509,7 +509,7 @@ Define the pulled-back vector fields in parameter space
 \[\mb{Q}(u,v)=\mb{F}\cdot\pdv{\mb{r}}{v}\]
 Let $\mb{F}=(F_1,F_2,F_3)$.
 \[\ba
-&{}(\nabla\times\mb{F})(\mb{r}(u,v))\cdot\qty(\pdv{\mb{r}}{u}\times\pdv{\mb{r}}{v})\\
+{}&(\nabla\times\mb{F})(\mb{r}(u,v))\cdot\qty(\pdv{\mb{r}}{u}\times\pdv{\mb{r}}{v})\\
 =&\begin{vmatrix}
 \pdv{F_3}{y}-\pdv{F_2}{z} & \pdv{F_1}{z}-\pdv{F_3}{x} & \pdv{F_2}{x}-\pdv{F_1}{y}\\
 \pdv{x}{u} & \pdv{y}{u} & \pdv{z}{u}\\
@@ -687,7 +687,7 @@ If $f\in C^2([a,b])$, then
 for some $\xi\in[a,b]$.
 \subsubsection{Simpson's rule or Simpson's 1/3 rule}
 Let $f$ be a continuous real-valued function on $[a,b]$, the Simpson's rule gives the approximation of $\int_a^bf(x)\dd{x}$
-\[S_n=\frac{b-a}{3n}\qty(f(a)+f(b)+2\sum_{i=1}^{n-1}f\qty(a+\frac{i(i\mod 2+1)}{n}(b-a)),\quad\frac{n}{2}\in\bbN.\]
+\[S_n=\frac{b-a}{3n}\qty(f(a)+f(b)+2\sum_{i=1}^{n-1}f\qty(a+\frac{i(i\mod 2+1)}{n}(b-a))),\quad\frac{n}{2}\in\bbN.\]
 The error is
 \[E_S=\int_a^bf(x)\dd{x}-S_n.\]
 If $f^{(4)}$ exists a.e. on $[a,b]$ and $\abs{f^{(4)}(x)}\leq K$ for all $x\in[a,b]$ such that $f^{(4)}(x)$ exist, then
@@ -714,6 +714,6 @@ For a rectangle
 \[\int_R\prod_{i=1}^nf_i(x_i)\dd{V}=\prod_{i=1}^n\int_{a_i}^{b_i}f_i(x)\dd{x}.\]
 \sssc{Multiple integral to iterated integral theorem}
 For a region $D$ in $\bbR^n$ of the form
-\[D=\left\{(x_1,x_2,\ldots,x_n)\middle|\bigwedge_{i=0}^{n-1}f_i\qty(x_{\sigma(1)},x_{\sigma(2)},\ldots,x_{\sigma(i)})\le x_{\sigma(i+1)}\le g_i\qty(x_{\sigma(1)},x_{\sigma(2)},\ldots,x_{\sigma(i)}),\]
+\[D=\left\{(x_1,x_2,\ldots,x_n)\middle|\bigwedge_{i=0}^{n-1}f_i\qty(x_{\sigma(1)},x_{\sigma(2)},\ldots,x_{\sigma(i)})\le x_{\sigma(i+1)}\le g_i\qty(x_{\sigma(1)},x_{\sigma(2)},\ldots,x_{\sigma(i)})\right\},\]
 where $\sigma$ is any permutation on $[1,n]\cap\bbN$, $f_0,g_0$ are real numbers, and $f_i,g_i$ are $i$-ary functions continuous on $\qty[f_{i-1}\qty(x_{\sigma(1)},x_{\sigma(2)},\ldots,x_{\sigma(i-1)}),g_{i-1}\qty(x_{\sigma(1)},x_{\sigma(2)},\ldots,x_{\sigma(i-1)})]$, and function $F\in L^1(D)$,
-\[\int_DF(x_1,x_2,\ldots,x_n)\dd{\mb{x}}=\qty(\int_{f_i\qty(x_{\sigma(1)},x_{\sigma(2)},\ldots,x_{\sigma(i)})}^{g_i\qty(x_{\sigma(1)},x_{\sigma(2)},\ldots,x_{\sigma(i)})})_{i=0}^{n-1}F(x_1,x_2,\ldots,x_n)\qty(\dd{x_{\sigma(n-i)})_{i=0}^{n-1}.\]
+\[\int_DF(x_1,x_2,\ldots,x_n)\dd{\mb{x}}=\qty(\int_{f_i\qty(x_{\sigma(1)},x_{\sigma(2)},\ldots,x_{\sigma(i)})}^{g_i\qty(x_{\sigma(1)},x_{\sigma(2)},\ldots,x_{\sigma(i)})})_{i=0}^{n-1}F(x_1,x_2,\ldots,x_n)\qty(\dd{x_{\sigma(n-i)}})_{i=0}^{n-1}.\]
