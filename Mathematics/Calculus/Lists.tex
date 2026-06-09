@@ -509,7 +509,7 @@ Using the chain rule on the left:
 \int\sec(x)\dd{x}&=\int\sec(x)\frac{\tan(x)+\sec(x)}{\tan(x)+\sec(x)}\dd{x}\\
 &=\int u^{-1}\dd{u},\quad u=\tan(x)+\sec(x),\quad\dd{u}=\sec(x)\qty(\tan(x)+\sec(x))\dd{x}\\
 &=\ln|u|+C=\ln\abs{\tan(x)+\sec(x)}+C\\
-&=\ln|\tan(\frac{x}{2}+\frac{\pi}{4})+C
+&=\ln|\tan(\frac{x}{2}+\frac{\pi}{4})|+C
 \ea\]
 \end{proof}
 \[\int\sec^2(x)\dd{x}=\tan(x)+C.\]
@@ -550,9 +550,9 @@ Using the chain rule on the left:
 \subsubsection{Inverse cotangent function}
 \[\int\arccot(x)\dd{x}=x\arccot(x)+\frac{1}{2}\ln(1+x^2)+C.\]
 \subsubsection{Inverse secant function}
-\[\int\arcsec(x)\dd{x}=x\arcsec(x)-\sgn(x)\ln\abs{x+\sqrt{x^2-1}}+C,\quad|x|\geq 1.\]
+\[\int\arcsec(x)\dd{x}=x\arcsec(x)-\sgn(x)\ln\abs{x+\sqrt{x^2-1}}+C,\quad\abs{x}\ge1.\]
 \subsubsection{Inverse cosecant function}
-\[\int\arccsc(x)\dd{x}=x\arccsc(x)+\sgn(x)\ln\abs{x+\sqrt{x^2-1}}+C,\quad|x|\geq 1.\]
+\[\int\arccsc(x)\dd{x}=x\arccsc(x)+\sgn(x)\ln\abs{x+\sqrt{x^2-1}}+C,\quad\abs{x}\geq 1.\]
 \subsubsection{Hyperbolic sine function}
 \[\int\sinh(x)\dd{x}=\cosh(x)+C.\]
 \[\int\sinh^2(x)\dd{x}=-\frac{x}{2}+\frac{\sinh(2x)}{4}+C.\]
@@ -981,10 +981,10 @@ Let $\mb{r}=(x,y,z)$, $r=\abs{\mb{r}}$.
 \sssc{Gradient of $r$}
 \[\nabla r^n=nr^{n-2}\mb{r}\]
 \bpr
-\[\nabla r=nr^{n-1}\nablar\]
+\[\nabla r=nr^{n-1}\nabla r\]
 \[\nabla r=\qty(\frac{x}{r},\frac{y}{r},\frac{z}{r})=\frac{\mb{r}}{r}\]
 \epr
-\sssc{Curl of $\mb{r}$}
+\sssc{Curl of position}
 \[\nabla\times\mb{r}=\mb{0}\]
 \bpr
 \[\nabla\times\mb{r}=\begin{bmatrix}\mb{i}&\mb{j}&\mb{k}\\\pdv{}{x}&\pdv{}{y}&\pdv{}{z}\\x&y&z\end{bmatrix}=\mb{0}\]
@@ -1063,15 +1063,15 @@ Derivative:
 \[\dv{W_0(0)}{x}=1\]
 \[W\qty(-\frac{1}{e})=-1\]
 Solve below equation for $\varepsilon$:
-\[\qty(-1+\varepsilon)e^{-1+\varepsilon}=-\frac{1}{e}+\detla.\]
-\[\qty(-1+\varepsilon)e^{\varepsilon}=-1+e\detla\]
-\[\qty(-1+\varepsilon)\sum_{i=0}^{\infty}\frac{\varepsilon^i}{i!}=-1+e\detla\]
-\[-\sum_{i=0}^{\infty}\frac{\varepsilon^i}{i!}+\sum_{i=1}^{\infty}\frac{\varepsilon^i}{(i-1)!}=-1+e\detla\]
-\[\sum_{i=2}^{\infty}\frac{\varepsilon^i}{(i-2)!i!}=e\detla\]
+\[\qty(-1+\varepsilon)e^{-1+\varepsilon}=-\frac{1}{e}+\delta.\]
+\[\qty(-1+\varepsilon)e^{\varepsilon}=-1+e\delta\]
+\[\qty(-1+\varepsilon)\sum_{i=0}^{\infty}\frac{\varepsilon^i}{i!}=-1+e\delta\]
+\[-\sum_{i=0}^{\infty}\frac{\varepsilon^i}{i!}+\sum_{i=1}^{\infty}\frac{\varepsilon^i}{(i-1)!}=-1+e\delta\]
+\[\sum_{i=2}^{\infty}\frac{\varepsilon^i}{(i-2)!i!}=e\delta\]
 \[\frac{\varepsilon^2}{2}+O(\varepsilon^3)=e\delta\]
 \[\varepsilon=O(\sqrt{\delta})\]
-\[W_0\qty(-\frac{1}{e}+\detla)=-1+\varepsilon=-1+O(\sqrt{\delta})\]
-\[\frac{W\qty(-\frac{1}{e}+\detla)-W\qty(-\frac{1}{e})}{\delta}=O\qty((\delta)^{-1/2})\]
+\[W_0\qty(-\frac{1}{e}+\delta)=-1+\varepsilon=-1+O(\sqrt{\delta})\]
+\[\frac{W\qty(-\frac{1}{e}+\delta)-W\qty(-\frac{1}{e})}{\delta}=O\qty((\delta)^{-1/2})\]
 \[\lim_{\delta\to 0}\dv{W(x)}{x}=\lim_{\delta\to 0}O\qty((\delta)^{-1/2})=\pm\infty\]
 \[\lim_{x\to 0^-}W_{-1}(x)=-\infty\]
 \[\ba
@@ -1161,7 +1161,7 @@ PLACEHOLDER
 \[r=2a\cos(\theta-\varphi),\quad 0\le\theta<\pi\]
 is a circle centered at $(a,\varphi)$ with radius $a$.
 \sssc{Quadratic curve}
-\[r=\frac{\ell}{1-\varepsilon\cos(\theta+\varphi),\quad\ell>0\land\varepsilon\geq0\]
+\[r=\frac{\ell}{1-\varepsilon\cos(\theta+\varphi)},\quad\ell>0\land\varepsilon\geq0\]
 is a quadratic curve with semi-latus rectum $\ell$, eccentricity $\varepsilon$, and one focus at origin.
 \sssc{Limaçon (蝸線)}
 A limaçon or limacon [limasɔ̃], also known as a limaçon of Pascal or Pascal's Snail, is defined as a roulette curve formed by the path of a point fixed to a circle when that circle rolls around the outside of a circle of equal radius. The polar equation of a limaçon has the form
