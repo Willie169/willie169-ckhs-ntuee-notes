@@ -66,11 +66,12 @@ where $\sum_{n=1}^{\infty}a_n$ is convergent by alternating series test and $\su
 \epr
 \sssc{(d'Alembert's ratio or Cauchy) ratio test}
 \ben
-\item If $\lim_{n\to\infty}\abs{\frac{a_{n+1}}{a_n}}=L<1$, then the series $\sum_{n=1}^{\infty}a_n$ is absolutely convergent.
-\item If $\lim_{n\to\infty}\abs{\frac{a_{n+1}}{a_n}}=L>1$ or $\lim_{n\to\infty}\abs{\frac{a_{n+1}}{a_n}}=\infty$, then the series $\sum_{n=1}^{\infty}a_n$ is divergent.
+\item If $\limsup_{n\to\infty}\abs{\frac{a_{n+1}}{a_n}}<1$, then the series $\sum_{n=1}^{\infty}a_n$ is absolutely convergent.
+\item If $\liminf_{n\to\infty}\abs{\frac{a_{n+1}}{a_n}}>1$, then the series $\sum_{n=1}^{\infty}a_n$ is divergent.
+\item Otherwise, the test is inconclusive.
 \een
 \bpr
-For the first statement, choose an arbitrary $L<r<1$. There exists an integer $N$ such that
+For the first statement, choose an arbitrary $r$ such that $\limsup_{n\to\infty}\abs{\frac{a_{n+1}}{a_n}}<r<1$. There exists an integer $N$ such that
 \[\abs{\frac{a_{n+1}}{a_n}}<r,\quad\forall n\geq N.\]
 Thus,
 \[\abs{a_{N+k}}<\abs{a_N}r^k,\quad\forall k\geq 1.\]
@@ -101,12 +102,11 @@ Thus, $L$ is the radius of convergence of $\sum_{n=0}^{\infty}c_n(x-a)^n$.
 \sssc{(Cauchy) root test}
 \ben
 \item If $\limsup_{n\to\infty}\sqrt[n]{\abs{a_n}}<1$, then the series $\sum_{n=1}^{\infty}a_n$ is absolutely convergent.
-\item If $\limsup_{n\to\infty}\sqrt[n]{\abs{a_n}}>1$, then the series $\sum_{n=1}^{\infty}a_n$ is divergent.
+\item If $\liminf_{n\to\infty}\sqrt[n]{\abs{a_n}}>1$, then the series $\sum_{n=1}^{\infty}a_n$ is divergent.
+\item Otherwise, the test is inconclusive.
 \een
 \bpr
-Let
-\[L=\limsup_{n\to\infty}\sqrt[n]{\abs{a_n}}.\]
-For the first statement, choose an arbitrary $L<r<1$. There exists an integer $N$ such that
+For the first statement, choose an arbitrary $r$ such that $\limsup_{n\to\infty}\sqrt[n]{\abs{a_n}}<r<1$. There exists an integer $N$ such that
 \[\sqrt[n]{\abs{a_n}}<r,\quad\forall n\geq N.\]
 Thus,
 \[\abs{a_n}<r^n,\quad\forall n\geq N.\]
@@ -122,8 +122,9 @@ Thus $\sum_{n=1}^{\infty}a_n$ is divergent.
 For a series $\sum_{n=1}^{\infty}a_n$ of positive terms, define
 \[R_n=n\qty(\frac{a_n}{a_{n+1}}-1)\]
 \bit
-\item If $\liminf_{n\to\infty}R_n>1$, the series converges.
-\item If $\limsup_{n\to\infty}R_n<1$, the series converges.
+\item If $\limsup_{n\to\infty}R_n<1$, then the series converges.
+\item If $\liminf_{n\to\infty}R_n>1$, then the series converges.
+\item Otherwise, the test is inconclusive.
 \eit
 \bpr
 Case $\limsup_{n\to\infty}R_n<0$: $a_{n+1}\ge a_n$ for sufficiently large $n$, so the series diverges.
