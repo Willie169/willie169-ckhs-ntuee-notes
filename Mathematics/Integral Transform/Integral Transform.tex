@@ -1,7 +1,7 @@
 \documentclass[a4paper,12pt]{article}
 \setcounter{secnumdepth}{5}
 \setcounter{tocdepth}{3}
-\input{/usr/share/latex-toolkit/template.tex}
+\input{/usr/share/LaTeX-ToolKit/template.tex}
 \begin{document}
 \title{Integral Transform}
 \author{沈威宇}
@@ -85,32 +85,32 @@ For two-sided Laplace transform, the ROC is the intersection of the following tw
 \eit
 \eit
 \sssc{Linearity}
-\[\mathcal{L}\qty\{af(t)+bg(t)\}=a\mathcal{L}\qty\{f(t)\}+b\mathcal{L}\qty\{g(t)\},\quad a,b\in\bbC_{\neq0}.\]
-The ROC is the intersection of the ROC of $\mathcal{L}\qty\{f(t)\}$ and $\mathcal{L}\qty\{g(t)\}$.
+\[\mathcal{L}\{af(t)+bg(t)\}=a\mathcal{L}\{f(t)\}+b\mathcal{L}\{g(t)\},\quad a,b\in\bbC_{\neq0}.\]
+The ROC is the intersection of the ROC of $\mathcal{L}\{f(t)\}$ and $\mathcal{L}\{g(t)\}$.
 \sssc{Unit step function}
-\[\mathcal{L}\qty\{u(t-a)\} = \frac{e^{-as}}{s},\quad a\in R.\]
+\[\mathcal{L}\{u(t-a)\} = \frac{e^{-as}}{s},\quad a\in R.\]
 The ROC is $\Re(s)>0$.
 \sssc{Delta distribution}
 \[\mathcal{L}\{\dv[n]{}{t}\delta(t-a)\}=s^ne^{-sa},\quad n\in\bbN_0\land a\in R.\]
 The ROC is $\bbC$.
 \sssc{Exponential function}
-\[\mathcal{L}\qty\{e^{at}\} = \frac{1}{s-a},\quad a\in\bbC_{\neq0}.\]
+\[\mathcal{L}\left\{e^{at}\right\} = \frac{1}{s-a},\quad a\in\bbC_{\neq0}.\]
 For one-sided Laplace transformer, the ROC is $\Re(s)>\Re(a)$.
 
 For two-sided Laplace transformer, the ROC is $\varnothing$.
 \sssc{First shifting theorem or frequency shift}
-\[\mathcal{L}\qty\{e^{at}f(t)\}=F(s-a),\quad a\in\bbC_{\neq0}.\]
+\[\mathcal{L}\left\{e^{at}f(t)\right\}=F(s-a),\quad a\in\bbC_{\neq0}.\]
 For one-sided Laplace transformer, the ROC shifts right by $\Re(a)$.
 
 For two-sided Laplace transformer, the ROC change depends on $f$.
 \sssc{Second shifting theorem, time delay, or time shift}
 For one-sided Laplace transform:
-\[\mathcal{L}\qty\{f(t-a)\}=e^{-as}F(s),\quad a\in\bbR_{\geq 0}.\]
+\[\mathcal{L}\left\{f(t-a)\right\}=e^{-as}F(s),\quad a\in\bbR_{\geq 0}.\]
 The ROC doesn't change.
 \begin{proof}
 For functional:
 \[\ba
-\mathcal{L}\qty\{f(t-a)\}&=\int_a^{\infty}e^{-st}f(t-a)\dd{t}\\
+\mathcal{L}\left\{f(t-a)\right\}&=\int_a^{\infty}e^{-st}f(t-a)\dd{t}\\
 &=\int_0^{\infty}e^{-s(u+a)}f(u)\dd{u}\\
 &=e^{-as}F(s)
 \ea\]
@@ -118,12 +118,12 @@ For distribution:
 \[\langle\tau_aT,e^{-st}\rangle=\langle T,e^{-s(t+a)}\rangle=e^{-as}\langle T,e^{-st}.\]
 \end{proof}
 For two-sided Laplace transform:
-\[\mathcal{L}\qty\{f(t-a)\}=e^{-as}F(s),\quad a\in\bbR_{\neq 0}.\]
+\[\mathcal{L}\left\{f(t-a)\right\}=e^{-as}F(s),\quad a\in\bbR_{\neq 0}.\]
 The ROC doesn't change.
 \begin{proof}
 For functional:
 \[\ba
-\mathcal{L}\qty\{f(t-a)\}&=\int_{-\infty}^{\infty}e^{-st}f(t-a)\dd{t}\\
+\mathcal{L}\left\{f(t-a)\right\}&=\int_{-\infty}^{\infty}e^{-st}f(t-a)\dd{t}\\
 &=\int_{-\infty}^{\infty}e^{-s(u+a)}f(u)\dd{u}\\
 &=e^{-as}F(s)
 \ea\]
@@ -132,37 +132,37 @@ For distribution:
 \end{proof}
 \sssc{Differentiation in time domain}
 For one-sided Laplace transform of functional:
-\[\mathcal{L}\qty\{f'(t)\}=sF(s)+\lim_{t\to\infty}e^{-st}f(t)-f(0),\]
-\[\mathcal{L}\qty\{\dv[n]{f}{t}(t)\}=s^nF(s)+\sum_{i=0}^{n-1}s^{n-1-i}\qty(\lim_{t\to\infty}e^{-st}\dv[i]{f}{t}(t)-\dv[i]{f}{t}(0)).\]
+\[\mathcal{L}\left\{f'(t)\right\}=sF(s)+\lim_{t\to\infty}e^{-st}f(t)-f(0),\]
+\[\mathcal{L}\left\{\dv[n]{f}{t}(t)\right\}=s^nF(s)+\sum_{i=0}^{n-1}s^{n-1-i}\qty(\lim_{t\to\infty}e^{-st}\dv[i]{f}{t}(t)-\dv[i]{f}{t}(0)).\]
 \bpr
 \[u=e^{-st},\quad\dd{u}=-se^{-st}\dd{t}.\]
 \[\dd{v}=f'(t)\dd{t},\quad v=f(t).\]
 \[\ba
-\mathcal{L}\qty\{f'(t)\}&=\int_0^\infty e^{-st}f'(t)\dd{t}\\
+\mathcal{L}\left\{f'(t)\right\}&=\int_0^\infty e^{-st}f'(t)\dd{t}\\
 &=\qty(e^{-st}f(t))\big\vert_0^\infty+\int_0^\infty f(t)se^{-st}\dd{t}\\
 &=sF(s)+\lim_{t\to\infty}e^{-st}f(t)-f(0)
 \ea\]
 \epr
 If $f$ is of exponential order, $\lim_{t\to\infty}e^{-st}f(t)=0$,
-\[\mathcal{L}\qty\{f'(t)\}=sF(s)-f(0),\]
-\[\mathcal{L}\qty\{\dv[n]{f}{t}(t)\}=s^nF(s)-\sum_{i=0}^{n-1}s^{n-1-i}\dv[i]{f}{t}(0),\]
+\[\mathcal{L}\left\{f'(t)\right\}=sF(s)-f(0),\]
+\[\mathcal{L}\left\{\dv[n]{f}{t}(t)\right\}=s^nF(s)-\sum_{i=0}^{n-1}s^{n-1-i}\dv[i]{f}{t}(0),\]
 and the ROC is a superset of that of $F(s)$.
 
 For two-sided Laplace transform of functional:
-\[\mathcal{L}\qty\{f'(t)\}=sF(s)+\lim_{t\to\infty}e^{-st}f(t)-\lim_{t\to-\infty}e^{-st}f(t),\]
-\[\mathcal{L}\qty\{\dv[n]{f}{t}(t)\}=s^nF(s)+\sum_{i=0}^{n-1}s^{n-1-i}\qty(\lim_{t\to\infty}e^{-st}\dv[i]{f}{t}(t)-\lim_{t\to-\infty}e^{-st}\dv[i]{f}{t}(t)).\]
+\[\mathcal{L}\left\{f'(t)\right\}=sF(s)+\lim_{t\to\infty}e^{-st}f(t)-\lim_{t\to-\infty}e^{-st}f(t),\]
+\[\mathcal{L}\left\{\dv[n]{f}{t}(t)\right\}=s^nF(s)+\sum_{i=0}^{n-1}s^{n-1-i}\qty(\lim_{t\to\infty}e^{-st}\dv[i]{f}{t}(t)-\lim_{t\to-\infty}e^{-st}\dv[i]{f}{t}(t)).\]
 \bpr
 \[u=e^{-st},\quad\dd{u}=-se^{-st}\dd{t}.\]
 \[\dd{v}=f'(t)\dd{t},\quad v=f(t).\]
 \[\ba
-\mathcal{L}\qty\{f'(t)\}&=\int_{-\infty}^\infty e^{-st}f'(t)\dd{t}\\
+\mathcal{L}\{f'(t)\}&=\int_{-\infty}^\infty e^{-st}f'(t)\dd{t}\\
 &=\qty(e^{-st}f(t))\big\vert_{-\infty}^\infty+\int_{-\infty}^\infty f(t)se^{-st}\dd{t}\\
 &=sF(s)+\lim_{t\to\infty}e^{-st}f(t)-\lim_{t\to-\infty}e^{-st}f(t)
 \ea\]
 \epr
 If $f$ is of exponential order, $\lim_{t\to-\infty}e^{-st}f(t)=\lim_{t\to\infty}e^{-st}f(t)=0$,
-\[\mathcal{L}\qty\{f'(t)\}=sF(s),\]
-\[\mathcal{L}\qty\{\dv[n]{f}{t}(t)\}=s^nF(s),\]
+\[\mathcal{L}\{f'(t)\}=sF(s),\]
+\[\mathcal{L}\left\{\dv[n]{f}{t}(t)\right\}=s^nF(s),\]
 and the ROC is a superset of that of $F(s)$.
 
 For Laplace transform of distribution:
@@ -177,44 +177,44 @@ For Laplace transform of distribution:
 \epr
 \sssc{Integration in time domain}
 For one-sided Laplace transform of functional:
-\[\mathcal{L}\qty\{\int_0^tf(\tau)\dd{\tau}\}=\frac{1}{s}F(s)-\frac{1}{s}\lim_{t\to\infty}e^{-st}\int_0^tf(\tau)\dd{\tau}.\]
+\[\mathcal{L}\left\{\int_0^tf(\tau)\dd{\tau}\right\}=\frac{1}{s}F(s)-\frac{1}{s}\lim_{t\to\infty}e^{-st}\int_0^tf(\tau)\dd{\tau}.\]
 \bpr
 \[\ba
-\mathcal{L}\qty\{\int_0^tf(\tau)\dd{\tau}\}&=\int_0^{\infty}e^{-st}\int_0^tf(\tau)\dd{\tau}\dd{t}\\
+\mathcal{L}\left\{\int_0^tf(\tau)\dd{\tau}\right\}&=\int_0^{\infty}e^{-st}\int_0^tf(\tau)\dd{\tau}\dd{t}\\
 &=\qty(-\frac{1}{s}e^{-st}\int_0^tf(\tau)\dd{\tau})\big\vert_0^\infty+\int_0^{\infty}\frac{1}{s}e^{-st}f(t)\dd{t}\\
 &=\frac{1}{s}F(s)-\frac{1}{s}\lim_{t\to\infty}e^{-st}\int_0^tf(\tau)\dd{\tau}
 \ea\]
 \epr
 If $f$ is of exponential order, $\lim_{t\to\infty}e^{-st}\int_0^tf(\tau)\dd{\tau}=0$ for all $s$ in its ROC,
-\[\mathcal{L}\qty\{\int_0^tf(\tau)\dd{\tau}\}=\frac{1}{s}F(s),\]
+\[\mathcal{L}\left\{\int_0^tf(\tau)\dd{\tau}\right\}=\frac{1}{s}F(s),\]
 and the ROC is $F(s)$ if there is a zero at $0$ of $F(s)$ and $F(s)\cap\{s\in\bbC\mid\Re(s)>0\}$ otherwise.
 
 For two-sided Laplace transform of functional:
-\[\mathcal{L}\qty\{\int_{-\infty}^tf(\tau)\dd{\tau}\}=\frac{1}{s}F(s)-\frac{1}{s}\lim_{t\to\infty}e^{-st}\int_{-\infty}^tf(\tau)\dd{\tau}.\]
+\[\mathcal{L}\left\{\int_{-\infty}^tf(\tau)\dd{\tau}\right\}=\frac{1}{s}F(s)-\frac{1}{s}\lim_{t\to\infty}e^{-st}\int_{-\infty}^tf(\tau)\dd{\tau}.\]
 \bpr
 \[\ba
-\mathcal{L}\qty\{\int_{-\infty}^tf(\tau)\dd{\tau}\}&=\int_{-\infty}^{\infty}e^{-st}\int_{-\infty}^tf(\tau)\dd{\tau}\dd{t}\\
+\mathcal{L}\left\{\int_{-\infty}^tf(\tau)\dd{\tau}\right\}&=\int_{-\infty}^{\infty}e^{-st}\int_{-\infty}^tf(\tau)\dd{\tau}\dd{t}\\
 &=\qty(-\frac{1}{s}e^{-st}\int_{-\infty}^tf(\tau)\dd{\tau})\big\vert_{-\infty}^\infty+\int_{-\infty}^{\infty}\frac{1}{s}e^{-st}f(t)\dd{t}\\
 &=\frac{1}{s}F(s)-\frac{1}{s}\lim_{t\to\infty}e^{-st}\int_{-\infty}^tf(\tau)\dd{\tau}
 \ea\]
 \epr
 If $f$ is of exponential order, $\lim_{t\to\infty}e^{-st}\int_{-\infty}^tf(\tau)\dd{\tau}=0$ for all $s$ in its ROC,
-\[\mathcal{L}\qty\{\int_{-\infty}^tf(\tau)\dd{\tau}\}=\frac{1}{s}F(s),\]
+\[\mathcal{L}\left\{\int_{-\infty}^tf(\tau)\dd{\tau}\right\}=\frac{1}{s}F(s),\]
 and the ROC is $F(s)$ if there is a zero at $0$ of $F(s)$ and $F(s)\cap\{s\in\bbC\mid\Re(s)>0\}$$ otherwise.
-\[\mathcal{L}\qty\{\int_t^{\infty}f(\tau)\dd{\tau}\}=-\frac{1}{s}F(s)-\frac{1}{s}\lim_{t\to-\infty}e^{-st}\int_t^{\infty}f(\tau)\dd{\tau}.\]
+\[\mathcal{L}\left\{\int_t^{\infty}f(\tau)\dd{\tau}\right\}=-\frac{1}{s}F(s)-\frac{1}{s}\lim_{t\to-\infty}e^{-st}\int_t^{\infty}f(\tau)\dd{\tau}.\]
 \bpr
 \[\ba
-\mathcal{L}\qty\{\int_t^{\infty}f(\tau)\dd{\tau}\}&=\int_{-\infty}^{\infty}e^{-st}\int_t^{\infty}f(\tau)\dd{\tau}\dd{t}\\
+\mathcal{L}\left\{\int_t^{\infty}f(\tau)\dd{\tau}\right\}&=\int_{-\infty}^{\infty}e^{-st}\int_t^{\infty}f(\tau)\dd{\tau}\dd{t}\\
 &=\qty(-\frac{1}{s}e^{-st}\int_t^{\infty}f(\tau)\dd{\tau})\big\vert_{-\infty}^\infty-\int_{-\infty}^{\infty}\frac{1}{s}e^{-st}f(t)\dd{t}\\
 &=-\frac{1}{s}F(s)-\frac{1}{s}\lim_{t\to-\infty}e^{-st}\int_t^{\infty}f(\tau)\dd{\tau}
 \ea\]
 \epr
 If $f$ is of exponential order, $\lim_{t\to-\infty}e^{-st}\int_t^{\infty}f(\tau)\dd{\tau}=0$ for all $s$ in its ROC,
-\[\mathcal{L}\qty\{\int_t^{\infty}f(\tau)\dd{\tau}\}=-\frac{1}{s}F(s),\]
+\[\mathcal{L}\left\{\int_t^{\infty}f(\tau)\dd{\tau}\right\}=-\frac{1}{s}F(s),\]
 and the ROC is $F(s)$ if there is a zero at $0$ of $F(s)$ and $F(s)\cap\{s\in\bbC\mid\Re(s)<0\}$ otherwise.
 \sssc{Differentiation in frequency domain}
 \[\mathcal{L}\{tf(t)\}=-\dv{}{s}F(s),\]
-\[\mathcal{L}\qty\{t^nf(t)\}=(-1)^n\dv[n]{}{s}F(s).\]
+\[\mathcal{L}\left\{t^nf(t)\right\}=(-1)^n\dv[n]{}{s}F(s).\]
 \begin{proof}
 For functional, by Leibniz integral rule,
 \[\ba
@@ -228,9 +228,9 @@ For distribution:
 \end{proof}
 \sssc{Scaling in time domain}
 For one-sided Laplace transform:
-\[\mathcal{L}\qty\{f(at)\} = \frac{1}{a} F\left(\frac{s}{a}\right), \quad a>0.\]
+\[\mathcal{L}\{f(at)\} = \frac{1}{a} F\left(\frac{s}{a}\right), \quad a>0.\]
 For two-sided Laplace transform:
-\[\mathcal{L}\qty\{f(at)\} = \frac{1}{a} F\left(\frac{s}{a}\right), \quad a\neq 0.\]
+\[\mathcal{L}\{f(at)\} = \frac{1}{a} F\left(\frac{s}{a}\right), \quad a\neq 0.\]
 \bpr
 For functional:
 \[u=at,\quad\dd{t}=\frac{1}{a}\dd{u}\]
@@ -246,21 +246,21 @@ The ROC is the same.
 \epr
 \sssc{Convolution theorem}
 For functionals:
-\[\mathcal{L}\qty\{(f*g)(t)\}=F(s)G(s).\]
+\[\mathcal{L}\{(f*g)(t)\}=F(s)G(s).\]
 \bpr
 By Fubini's theorem,
 \[\ba
-\mathcal{L}\qty\{(f*g)(t)\}&=\int_Re^{-st}\int_Rf(\tau)g(t-\tau)\dd{\tau}\dd{t},\quad u=t-\tau\\
+\mathcal{L}\{(f*g)(t)\}&=\int_Re^{-st}\int_Rf(\tau)g(t-\tau)\dd{\tau}\dd{t},\quad u=t-\tau\\
 &=\int_Re^{-s\tau}f(\tau)\dd{\tau}\int_Re^{-su}g(u)\dd{u}\\
 &=F(s)G(s)
 \ea\]
 \epr
 For functional and distribution:
-\[\mathcal{L}\qty\{f*T\}=F(s)\mathcal{L}\{T\}.\]
+\[\mathcal{L}\{f*T\}=F(s)\mathcal{L}\{T\}.\]
 \bpr
 By Fubini's theorem,
 \[\ba
-\mathcal{L}\qty\{f*T\}&=\int_R\langle T(x),f(t-x)\rangle e^{-st}\dd{t}\\
+\mathcal{L}\{f*T\}&=\int_R\langle T(x),f(t-x)\rangle e^{-st}\dd{t}\\
 &=\lange T(x),\int_Rf(t-x)e^{-st}\dd{t}\rangle
 \ea\]
 \[u=t-x,\quad\dd{t}=\dd{u}\]
@@ -271,22 +271,22 @@ By Fubini's theorem,
 \[\lange T,e^{-sx}F(s)\rangle=F(s))\mathcal{L}\{T\}\]
 \epr
 For distributions:
-\[\mathcal{L}\qty\{S*T\}=\mathcal{L}\{S\}\mathcal{L}\{T\}.\]
+\[\mathcal{L}\{S*T\}=\mathcal{L}\{S\}\mathcal{L}\{T\}.\]
 \bpr
 By Fubini's theorem,
 \[\ba
-\mathcal{L}\qty\{S*T\}&=\langle S(t),\langle T(x),e^{-s(t+x)}\rangle\rangle\\
+\mathcal{L}\{S*T\}&=\langle S(t),\langle T(x),e^{-s(t+x)}\rangle\rangle\\
 &=\langle S(t),e^{-st}\langle T(x),e^{-sx}\rangle\rangle\\
 &=\mathcal{L}\{S\}\mathcal{L}\{T\}
 \ea\]
 \epr
 \sssc{Cross-correlation theorem for two-sided Laplace transform}
 For two-sided Laplace transform of functionals:
-\[\mathcal{L}\qty\{(f\star g)(t)\}=\ol{F(s)}G(s).\]
+\[\mathcal{L}\left\{(f\star g)(t)\right\}=\ol{F(s)}G(s).\]
 \bpr
 By Fubini's theorem,
 \[\ba
-\mathcal{L}\qty\{(f\star g)(t)\}&=\int_{-\infty}^{\infty}e^{-st}\int_{-\infty}^{\infty}\ol{f(-\tau)}g(t-\tau)\dd{\tau}\dd{t},\quad u=t-\tau\\
+\mathcal{L}\left\{(f\star g)(t)\right\}&=\int_{-\infty}^{\infty}e^{-st}\int_{-\infty}^{\infty}\ol{f(-\tau)}g(t-\tau)\dd{\tau}\dd{t},\quad u=t-\tau\\
 &=\int_{-\infty}^{\infty}e^{-s\tau}\ol{f(-\tau)}\dd{\tau}\int_{-\infty}^{\infty}e^{-su}g(u)\dd{u}\\
 &=\ol{F(s)}G(s)
 \ea\]
