@@ -25,7 +25,7 @@ These theories, also abbreviated as set theory, have been the standard way to pr
 Let $\varphi$ be any formula in the language of ZFC with free variables $x,z,w_1,w_2,\ldots,w_n$. Then:
 \[\forall z\forall w_1\forall w_2\ldots\forall w_n\exists y\forall x\qty[x\in y\iff\qty(x\in z\land\varphi\qty(x,z,w_1,w_2,\ldots,w_n))].\]
 This axiom can be applied to obtain the axiom of empty set:
-\[\exists x\forall y(y\notin x),\]
+\[\exists x\forall y(y\ni x),\]
 and empty set, denoted as $\varnothing$, is defined as the $x$ above and can be constructed as
 \[\varnothing=\{u\in w\mid(u\in u)\land\neg(u\in u)\}.\]
 \sssc{Axiom of paring}
@@ -39,11 +39,11 @@ can be obtained by applying the axiom schema of specification:
 and the set $\bigcup_{u\in w}u$ is defined and constructed as the $X$ above.
 \sssc{Axiom schema of replacement}
 Let $\varphi$ be any formula in the language of ZFC with free variables $x,y,z,w_1,w_2,\ldots,w_n$. Then:
-\[\forall z\forall w_1\forall w_2\ldots\forall w_n\qty[\forall x\qty(x\in z\implies\exists y\qty(\varphi\qty(x,y,z,w_1,w_2,\ldots,w_n)\land\forall v\qty(\varphi\qty(x,v,z,w_1,w_2,\ldots,w_n)\implies v=y)))\implies\exists u\forall x\qty(x\in u\implies\exists y(y\in u\land\varphi\qty(x,y,z,w_1,w_2,\ldots,w_n))],\]
+\[\forall z\forall w_1\forall w_2\ldots\forall w_n\qty[\forall x\qty(x\in z\implies\exists y\qty(\varphi\qty(x,y,z,w_1,w_2,\ldots,w_n)\land\forall v\qty(\varphi\qty(x,v,z,w_1,w_2,\ldots,w_n)\implies v=y)))\implies\exists u\forall x\qty(x\in u\implies\exists y(y\in u\land\varphi\qty(x,y,z,w_1,w_2,\ldots,w_n)))],\]
 called the weak axiom schema of replacement or axiom schema of collection, and the strong axiom schema of replacement:
-\[\forall z\forall w_1\forall w_2\ldots\forall w_n\qty[\forall x\qty(x\in z\implies\exists y\qty(\varphi\qty(x,y,z,w_1,w_2,\ldots,w_n)\land\forall v\qty(\varphi\qty(x,v,z,w_1,w_2,\ldots,w_n)\implies v=y)))\implies\exists U\forall x\qty(x\in U\iff\exists y(y\in U\land\varphi\qty(x,y,z,w_1,w_2,\ldots,w_n))],\]
+\[\forall z\forall w_1\forall w_2\ldots\forall w_n\qty[\forall x\qty(x\in z\implies\exists y\qty(\varphi\qty(x,y,z,w_1,w_2,\ldots,w_n)\land\forall v\qty(\varphi\qty(x,v,z,w_1,w_2,\ldots,w_n)\implies v=y)))\implies\exists U\forall x\qty(x\in U\iff\exists y\qty(y\in U\land\varphi\qty(x,y,z,w_1,w_2,\ldots,w_n)))],\]
 can be obtained by applying the axiom schema of specification:
-\[U=\{x\in u\mid\exists y(y\in U\land\varphi\qty(x,y,z,w_1,w_2,\ldots,w_n))\}.\]
+\[U=\{x\in u\mid\exists y(y\in U\land\varphi(x,y,z,w_1,w_2,\ldots,w_n))\}.\]
 \sssc{Axiom of infinity}
 \[\exists x\qty[\exists w\qty(\forall z\neg(z\in w)\land w\in x)\land\forall y\qty(y\in x\implies S(y)\in x)],\]
 where $S(y)$ denotes the union of $y$ and $\{y\}$, which exists uniquely by axiom of pairing and strong axiom of union, and by axiom of empty set, equivalently
@@ -53,21 +53,21 @@ The von Neumann ordinal $\omega$, or $\mathbb{N}_0$ with $0=\varnothing$ and suc
 \[\forall x\exists y\forall z\qty(z\in y\iff z\subseteq x).\]
 The power set of $x$ is defined as $y$.
 \sssc{Axiom of choice (AC or AoC) or axiom of well-ordering}
-\[\forall x\qty(\exists e\qty(e\in x\land\neg\exists y(y\in e))\lor\exists a\exists b\exists c\qty(a\in x\land b\in x\land c\in a\land c\in b\land\neg(a=b))\lor\exists c\forall e\qty(e\in x\implies\exists a\qty(a\in e\land a\in c\land\forall b\qty((b\in e\land b\in c)\implies a=b)))),\]
+\[\forall x\qty(\exists e\qty(e\in x\land\neg\exists y(y\in e))\lor\exists a\exists b\exists c\qty(a\in x\land b\in x\land c\in a\land c\in b\land\neg(a=b))\lor\exists c\forall e\qty(e\in x\implies\exists a\qty(a\in e\land a\in c\land\forall b\qty(\qty(b\in e\land b\in c)\implies a=b)))),\]
 that is, for any set $x$ of pairwise disjoint nonempty sets, there exists a set $c$ such that its intersection any element of $x$ contains exactly one element, that is, for any set $x$ of pairwise disjoint nonempty sets, there exists a choice function (also called selector or selection) $f$ on $x$, i.e., a function that maps each element $a$ of $x$ to an element of $a$.
 \sssc{Singleton}
 A set $x$ such that
 \[\forall a\forall b\qty((a\in x\land b\in x)\implies a=b)\]
 is called a singleton.
 \sssc{Russell's paradox or Russell's antinomy}
-ZF $\cup\{\exists R\forall x(x\in R\iff x\notin x)\}$ is inconsistent and proves $R\in R\iff R\not\in R$.
+ZF $\cup\{\exists R\forall x(x\in R\iff x\ni x)\}$ is inconsistent and proves $R\in R\iff R\ni R$.
 \sssc{Non-existence of univere}
-ZF $\cup\{\exists U\forall x(x\in U)\}$ is inconsistent and with $R=\{x\in U\mid x\notin x\}$, which is a set by axiom schema of specification, proves $R\in R\iff R\not\in R$.
+ZF $\cup\{\exists U\forall x(x\in U)\}$ is inconsistent and with $R=\{x\in U\mid x\ni x\}$, which is a set by axiom schema of specification, proves $R\in R\iff R\ni R$.
 \ssc{Notations and properties}
 \sssc{Collection}
 A collection, family, or naive set, sometimes informally called a set, is a collection of different objects. Theses things are called elements or members.
 
-If $a$ is an element of a collection $S$, we say that $a$ belongs to $S$ or is in $S$, denoted as $a\in S$; if $b$ is not an element of a collection $S$, we say that $b$ does not belong to $S$ or is not in $S$, denoted as $b\notin S$.
+If $a$ is an element of a collection $S$, we say that $a$ belongs to $S$ or is in $S$, denoted as $a\in S$; if $b$ is not an element of a collection $S$, we say that $b$ does not belong to $S$ or is not in $S$, denoted as $b\ni S$.
 \sssc{Roster notation or enumeration notation} Specify a collection by listing its elements between braces $\{\,\}$, separated by commas $,$, e.g. $\{\,\}$, $\{x\}$, and $\{x,y\}$. When there is a clear pattern for generating all elements, one can use ellipses $\ldots$ for abbreviating the notation.
 \sssc{(Set) builder notation}
 Specify a collection as being the collection of all objects that satisfy some logical formula. More precisely, if $P(x)$ is a logical formula depending on a variable ⁠$x$, which evaluates to true or false depending on the value of $x$, then
@@ -113,7 +113,7 @@ that is,
 \end{itemize}
 \sssc{(Relative) complement}
 The relative complement of $B$ in $A$ is
-\[A\setminus B\coloneq\{x\mid x\in A \land x\notin B\}\]
+\[A\setminus B\coloneq\{x\mid x\in A \land x\ni B\}\]
 \sssc{Power set}
 \[2^A=\mathcal{P}(A)\coloneq\{B\mid B\subseteq A\}\]
 \sssc{Cartesian product}
@@ -201,7 +201,7 @@ Aleph numbers, a system to describe infinite cardinals, denoted as $\aleph_0, \a
 \item for any successor ordinal $n$, $\aleph_n$ is defined inductively as:
 \[\aleph_n=\min\{b\mid b\tx{\ is an cardinal and\ }b>\aleph_{n-1}\};\]
 \item for any limit ordinal $\lambda$, $\aleph_{\lambda}$ is defined as:
-\[\aleph_{\lambda}=\sup\{\aleph_{\alpha}\mid\alpha<\lambda}.\]
+\[\aleph_{\lambda}=\sup\{\aleph_{\alpha}\mid\alpha<\lambda\}.\]
 \eit
 \sssc{Beth numbers}
 Beth numbers, a system to describe infinite cardinals, denoted as $\beth_0, \beth_1, \beth_2, \ldots \beth_\omega, \beth_{\omega+1}, \ldots$, in which the subscripts are ordinal numbers, are defined with:
@@ -210,7 +210,7 @@ Beth numbers, a system to describe infinite cardinals, denoted as $\beth_0, \bet
 \item for any successor ordinal $n$, $\beth_n$ is defined inductively as:
 \[\beth_n=2^{\aleph_{n-1}};\]
 \item for any limit ordinal $\lambda$, $\aleph_{\lambda}$ is defined as:
-\[\aleph_{\lambda}=\sup\{\beth_{\alpha}\mid\alpha<\lambda}.\]
+\[\aleph_{\lambda}=\sup\{\beth_{\alpha}\mid\alpha<\lambda\}.\]
 \eit
 \sssc{Countable}
 A set is countable if either it is finite or it can be made in one to one correspondence with the set of natural numbers.
@@ -226,4 +226,5 @@ CH is independent from ZFC, that is, proving or disproving the CH within ZFC is 
 The generalized continuum hypothesis (GCH) or Cantor's aleph hypothesis states that, if a set's cardinality lies between that of an infinite set $S$ and that of the power set $P(S)$ of $S$, then it has the same cardinality as either $S$ or $P(s)$, that is, for any infinite cardinal $\lambda$, there is no cardinal $\kappa$ such that $\lambda <\kappa <2^{\lambda }$, that is, $\aleph _{\alpha +1}=2^{\aleph _{\alpha }}$ for every ordinal $\alpha$.
 
 GCH is independent from ZFC, that is, proving or disproving the GCH within ZFC is impossible.
+\end{document}
 \end{document}

@@ -29,7 +29,6 @@ Second-order Peano Axioms (aka Dedekind–Peano axioms or Peano postulates) (PA$
 \[\forall n\in\bbN_0\colon S(n)\neq 0.\]
 \item $S$ is an injection, that is,
 \[\forall m,n\in\bbN_0\colon S(m)=S(n)\implies m=n\]
-\eit
 \item The (second-order) induction axiom: If $K$ is a subset of $\mathbb{N}_0$ such that, $0$ is in $K$, and, for every $n\in\mathbb{N}_0$, $n\in K\implies S(n)\in K$, then $\mathbb{N}_0=K$.
 \eit
 \sssc{Peano Arithmetic (皮亞諾算術)}
@@ -96,7 +95,7 @@ Below, we will construct the integers as the equivalence classes of ordered pair
 \item \tb{Equivalence relation}: Define an equivalence relation $\sim$ on $\bbN_0^{\pht{0}2}$ as
 \[\forall(a,b),(c,d)\in\bbN_0^{\pht{0}2}\colon(a,b)\sim(c,d)\iff a+d=b+c.\]
 An equivalence class of $(a,b)$ is
-\[[(a,b)]=\qty\{(c,d)\in\bbN_0^{\pht{0}2}\middle|(a,b)\sim(c,d)\}.\]
+\[[(a,b)]=\{(c,d)\in\bbN_0^{\pht{0}2}|(a,b)\sim(c,d)\}.\]
 The integers $\bbZ$ is defined as the quotient set of $\bbN_0^{\pht{0}2}$ by the equivalence relation $\sim$.
 \item \tb{Total order}: Total order $\leq$ over $\bbZ$ is defined given order $\leq$ over $\bbN_0$ as:
 \[[(a,b)]\leq[(c,d)]\iff a+d\leq b+c.\]
@@ -107,7 +106,8 @@ The integers $\bbZ$ is defined as the quotient set of $\bbN_0^{\pht{0}2}$ by the
 \item \tb{Negation or additive inverse}: Negation (or additive inverse) is a function $\bbZ\to\bbZ$ defined as
 \[-[(a,b)]\coloneq[(b,a)].\]
 \item \tb{Absolute value}: Absolute value is a function $\bbZ\to\bbZ$ defined as
-\[\abs{[(a,b)]}\coloneq\begin{cases}[(a,b)],\quad&a\geq [(0,0)]\\[(b,a)],\quad&a\leq [(0,0)]\end{cases}.\]
+\[\abs{[(a,b)]}\coloneq\bcs[(a,b)],\quad&a\ge[(0,0)]\\
+[(b,a)],\quad&a<[(0,0)]\ecs.\]
 \item \tb{Multiplication}: Multiplication is a function $\bbZ^2\to\bbZ$ defined as
 \[[(a,b)]\cdot [(c,d)]\coloneq[(ac+bd,ad+bc)].\]
 \item \tb{Notation}: $[a,b]\in\bbZ$ is denoted as
@@ -124,7 +124,7 @@ Below, we will construct the rationals as the equivalence classes of ordered pai
 \item \tb{Equivalence relation}: Define an equivalence relation $\sim$ on $\bbZ\times\qty(\bbZ\setminus\{0\})$ as
 \[\forall(a,b),(c,d)\in\bbZ\times\qty(\bbZ\setminus\{0\})\colon(a,b)\sim(c,d)\iff ad=bc.\]
 An equivalence class of $(a,b)$ is
-\[[(a,b)]=\qty\{(c,d)\in\bbZ\times\qty(\bbZ\setminus\{0\})\middle|(a,b)\sim(c,d)\}.\]
+\[[(a,b)]=\qty\{(c,d)\in\bbZ\times\qty(\bbZ\setminus\{0\})|(a,b)\sim(c,d)\}.\]
 The rationals $\bbQ$ is defined as the quotient set of $\bbZ\times\qty(\bbZ\setminus\{0\})$ by the equivalence relation $\sim$.
 \item \tb{Total order}: Total order $\leq$ over $\bbQ$ is defined given order $\leq$ over $\bbZ$ as:
 \[[(a,b)]\leq[(c,d)]\iff ad\leq bc.\]
@@ -135,7 +135,8 @@ The rationals $\bbQ$ is defined as the quotient set of $\bbZ\times\qty(\bbZ\setm
 \item \tb{Negation or additive inverse}: Negation (or additive inverse) is a function $\bbQ\to\bbQ$ defined as
 \[-[(a,b)]\coloneq[(-a,b)].\]
 \item \tb{Absolute value}: Absolute value is a function $\bbQ\to\bbQ$ defined as
-\[\abs{[(a,b)]}\coloneq\begin{cases}[(a,b)],\quad&a\geq [(0,1)]\\[(-a,b)],\quad&a\leq [(0,1)]\end{cases}.\]
+\[\abs{[(a,b)]}\coloneq\begin{cases}[(a,b)],\quad&a\geq [(0,1)]\\
+[(-a,b)],\quad&a\leq [(0,1)]\end{cases}.\]
 \item \tb{Multiplication}: Multiplication is a function $\bbQ^2\to\bbQ$ defined as
 \[[(a,b)]\cdot [(c,d)]\coloneq[(ac,bd)].\]
 \item \tb{Division}: Division is a function $\bbQ\times\bbQ\setminus\{[0,1]\}\to\bbQ$ defined as
@@ -153,7 +154,7 @@ Let $R$ be the set of Cauchy sequences of the rational numbers.
 \item \tb{Equivalence relation}: Define an equivalence relation $\sim$ on $R$ as $(x_n)\sim(y_n)$ iff for every rational number $\varepsilon>0$, there exists a positive integer $N$ such that $n\geq N\implies|x_n−y_n|\leq\varepsilon$.
 
 An equivalence class of $(x_n)$ is
-\[[(x_n)]=\qty\{(y_n)\in R\middle|(x_n)\sim(y_n)\}.\]
+\[[(x_n)]=\qty\{(y_n)\in R|(x_n)\sim(y_n)\}.\]
 
 The reals $\bbR$ is defined as the quotient set of $R$ by the equivalence relation $\sim$.
 \item \tb{Total order}: Total order $\leq$ over $\bbR$ is defined given order $\leq$ over $\bbQ$ as,
@@ -166,7 +167,8 @@ for every rational number $\varepsilon>0$, there exists a positive integer $N$ s
 \item \tb{Negation or additive inverse}: Negation (or additive inverse) is a function $\bbR\to\bbR$ defined as
 \[-[(x_n)]\coloneq[(-x_n)].\]
 \item \tb{Absolute value}: Absolute value is a function $\bbR\to\bbR$ defined as
-\[\abs{[(x_n)]}\coloneq\begin{cases}[(x_n)],\quad&[(x_n)]\geq [(0)]\\[(-x_n)],\quad&[(x_n)]\leq [(0)]\end{cases}.\]
+\[\abs{[(x_n)]}\coloneq\begin{cases}[(x_n)],\quad&[(x_n)]\geq [(0)]\\
+[(-x_n)],\quad&[(x_n)]\leq [(0)]\end{cases}.\]
 \item \tb{Multiplication}: Multiplication is a function $\bbR^2\to\bbR$ defined as
 \[[(x_n)]\cdot[(y_n)]\coloneq[(x_n\cdot y_n)].\]
 \item \tb{Division}: Division is a function $\bbR\times\bbR\setminus\{[(0)]\}\to\bbR$ defined as
@@ -273,6 +275,10 @@ A set $U\subseteq\ol{\bbR}$ is a neighborhood of $-\infty$ if and only if $\exis
 For any function $f$ defined on $(a,\infty)$ with $a\in\bbR$ and $\lim_{x\to\infty}f(x)=L$, it can be extended with
 \[f(\infty)=L.\]
 For any function $f$ defined on $(-\infty,a)$ with $a\in\bbR$ and $\lim_{x\to-\infty}f(x)=L$, it can be extended with
+\[f(-\infty)=L.\]
+\eit
+\end{document}
+ended with
 \[f(-\infty)=L.\]
 \eit
 \end{document}

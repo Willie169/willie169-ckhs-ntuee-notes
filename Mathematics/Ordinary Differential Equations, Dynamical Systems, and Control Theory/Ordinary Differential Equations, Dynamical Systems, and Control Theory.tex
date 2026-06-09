@@ -641,12 +641,12 @@ PLACEHOLDER
 \ssc{Formation of solutions of linear nonhomogeneous equation}
 \sssc{Wrońskian or Wronskian}
 For $n$ functions $f_1,f_2,\ldots,f_n$ that are $(n-1)$ times differentiable on an interval $I$, the Wrońskian (also called Wronskian) of them, $W(f_1,f_2,\ldots,f_n)$, is a function on $I$ defined by
-\[W(f_1,f_2,\ldots,f_n)(x)=\det\begin{bmatrix}
+\[W(f_1,f_2,\ldots,f_n)(x)=\begin{vmatrix}
 f_1(x) & f_2(x) & \cdots & f_n(x) \\
 f_1'(x) & f_2(x) & \cdots & f_n'(x) \\
 \vdots & \vdots & \ddots & \vdots \\
 f_1^{(n-1)}(x) & f_2^{(n-1)}(x) & \cdots & f_n^{(n-1)}(x)
-\end{bmatrix}.\]
+\end{vmatrix}.\]
 If $f_1,f_2,\ldots,f_n$ are not linearly independent, then $W=0$.
 \sssc{Second-order Abel's (differential equation) identity/formula}
 A second-order linear homogeneous ODE
@@ -679,45 +679,45 @@ for any $x_0\in I$.
 \begin{proof}
 Differentiate row by row:
 \[\ba
-W'&=\dv{}{x}\qty(\det\begin{bmatrix}
+W'&=\dv{}{x}\begin{vmatrix}
 y_1 & y_2 & \cdots & y_n \\
 y_1' & y_2' & \cdots & y_n' \\
 \vdots & \vdots & \ddots & \vdots \\
 y_1^{(n-1)} & y_2^{(n-1)} & \cdots & y_n^{(n-1)}
-\end{bmatrix})\\
-&=\det\begin{bmatrix}
+\end{vmatrix}\\
+&=\begin{vmatrix}
 y_1' & y_2' & \cdots & y_n' \\
 y_1' & y_2' & \cdots & y_n' \\
 \vdots & \vdots & \ddots & \vdots \\
 y_1^{(n-1)} & y_2^{(n-1)} & \cdots & y_n^{(n-1)}
-\end{bmatrix}+\det\begin{bmatrix}
+\end{vmatrix}+\begin{vmatrix}
 y_1 & y_2 & \cdots & y_n \\
 y_1'' & y_2'' & \cdots & y_n'' \\
 \vdots & \vdots & \ddots & \vdots \\
 y_1^{(n-1)} & y_2^{(n-1)} & \cdots & y_n^{(n-1)}
-\end{bmatrix}+\ldots+\det\begin{bmatrix}
+\end{vmatrix}+\ldots+\begin{vmatrix}
 y_1 & y_2 & \cdots & y_n \\
 y_1' & y_2' & \cdots & y_n' \\
 \vdots & \vdots & \ddots & \vdots \\
 y_1^{(n)} & y_2^{(n)} & \cdots & y_n^{(n)}
-\end{bmatrix}
+\end{vmatrix}
 \ea\]
 All these determinants except the last one contain linearly dependent rows and thus equal to 0.
-\[W'=\det\begin{bmatrix}
+\[W'=\begin{vmatrix}
 y_1 & y_2 & \cdots & y_n \\
 y_1' & y_2' & \cdots & y_n' \\
 \vdots & \vdots & \ddots & \vdots \\
 y_1^{(n)} & y_2^{(n)} & \cdots & y_n^{(n)}
-\end{bmatrix}.\]
+\end{vmatrix}.\]
 For all $i\in\bbN\land i\leq n$:
 \[y_i^{(n)}+\sum_{i=0}^{n-2}p_i(x)y^{(i)}=-p_{n-1}(x)y^{(n-1)}.\]
 Hence, we can add to the last row of the above determinant $p_i$ times its $(i+1)$th row for all $i\in\bbN_0\land i<n-1$, the value of the determinant is unchanged, and we get
-\[W'=\det\begin{bmatrix}
+\[W'=\begin{vmatrix}
 y_1 & y_2 & \cdots & y_n \\
 y_1' & y_2' & \cdots & y_n' \\
 \vdots & \vdots & \ddots & \vdots \\
 -p_{n-1}(x)y_1^{(n-1)} & -p_{n-1}(x)y_2^{(n-1)} & \cdots & -p_{n-1}(x)y_n^{(n-1)}
-\end{bmatrix}=-p_{n-1}(x)W.\]
+\end{vmatrix}=-p_{n-1}(x)W.\]
 $W'+p_{n-1}(x)W=0$ is a first-order linear homogenous ODE that can be solved by the integrating factor
 \[\mu(x)=\exp(\int p_{n-1}(x)\dd{x})\]
 and initial condition $W(x_0)$:
@@ -896,8 +896,8 @@ where:
 \[\sin(x)=\sum_{n=0}^{\infty}\frac{(-1)^n}{(2n+1)!}x^{2n+1}\]
 \[\sum_{n=0}^{\infty}a_{n+2}(n+2)(n+1)x^n+\sum_{n=0}^{\infty}\frac{(-1)^n}{(2n+1)!}x^{2n+1}\sum_{n=0}^{\infty}a_{n+1}(n+1)x^n+x^2\sum_{n=0}^{\infty}a_nx^n=0.\]
 \[\ba
-\sum_{n=0}^{\infty}\frac{(-1)^n}{(2n+1)!}x^{2n+1}\sum_{n=0}^{\infty}a_{n+1}(n+1)x^n&=\sum_{n=0)^{\infty}\sum_{k=0}^n\frac{(-1)^k}{(2k+1)!}x^{2k+1}a_{n-k+1}(n-k+1)x^{n-k}\\
-&=\sum_{n=0)^{\infty}\sum_{k=0}^n\frac{(-1)^k}{(2k+1)!}a_{n-k+1}(n-k+1)x^{n+k+1}\\
+\sum_{n=0}^{\infty}\frac{(-1)^n}{(2n+1)!}x^{2n+1}\sum_{n=0}^{\infty}a_{n+1}(n+1)x^n&=\sum_{n=0}^{\infty}\sum_{k=0}^n\frac{(-1)^k}{(2k+1)!}x^{2k+1}a_{n-k+1}(n-k+1)x^{n-k}\\
+&=\sum_{n=0}^{\infty}\sum_{k=0}^n\frac{(-1)^k}{(2k+1)!}a_{n-k+1}(n-k+1)x^{n+k+1}\\
 &=\sum_{n=0}^{\infty}\sum_{k=0}^{\left\lfloor\frac{n-1}{2}\right\rfloor}\frac{(-1)^k}{(2k+1)!}a_{n-2k}(n-2k)x^n
 \ea\]
 \[\sum_{n=0}^{\infty}\qty(a_{n+2}(n+2)(n+1)+\sum_{k=0}^{\left\lfloor\frac{n-1}{2}\right\rfloor}\frac{(-1)^k}{(2k+1)!}a_{n-2k}(n-2k)+a_{n-2})x^n=0,\quad a_{-1}=a_{-2}=0\]
@@ -1103,14 +1103,14 @@ An equilibrium that is in a repeller is necessarily unstable.
 \sct{Control Theory (控制理論)}
 \ssc{Continuous-time linear time-invariant (LTI) system}
 \sssc{Causal (因果的) continuous-time linear time-invariant (LTI) system}
-A causal continuous-time linear time-invariant (LTI) system of a variable $t\in\bbR$ is a system that accept an input (distribution) (often called function) $x(t)$ and produces a response (distribution) (often called function) $y(t)$ that is the solution of a linear autonomous ODE whose forcing term is $x(t)$, called governing equation, given initial condition $y(0)=0$. It can be completely characterized by a distribution called impulse response (function) $h(t)$, which is the output when the input is the Dirac delta function $\detla(t)$ and is such that $h(t)=0$ for all $t<0$, that
+A causal continuous-time linear time-invariant (LTI) system of a variable $t\in\bbR$ is a system that accept an input (distribution) (often called function) $x(t)$ and produces a response (distribution) (often called function) $y(t)$ that is the solution of a linear autonomous ODE whose forcing term is $x(t)$, called governing equation, given initial condition $y(0)=0$. It can be completely characterized by a distribution called impulse response (function) $h(t)$, which is the output when the input is the Dirac delta function $\delta(t)$ and is such that $h(t)=0$ for all $t<0$, that
 \[y(t)=(x*h)(t),\]
 where
 \[(x*h)(t)\coloneq\int_0^tx(\tau)h(t-\tau)\dd{\tau}.\]
 Applying unilateral Laplace transform \[Y(s)=X(s)\cdot H(s),\]
 where $H(s)$ is called transfer function (轉移函數), and its absolute value is called gain, or attenuation if $<1$.
 \sssc{Non-causal continuous-time linear time-invariant (LTI) system}
-A non-causal continuous-time linear time-invariant (LTI) system of a variable $t\in\bbR$ is a system that accept an input (distribution) (often called function) $x(t)$ and produces a response (distribution) (often called function) $y(t)$ that is the solution of a linear autonomous ODE whose forcing term is $x(t)$, called governing equation. It can be completely characterized by a distribution called impulse response (function) $h(t)$, which is the output when the input is the Dirac delta function $\detla(t)$, that
+A non-causal continuous-time linear time-invariant (LTI) system of a variable $t\in\bbR$ is a system that accept an input (distribution) (often called function) $x(t)$ and produces a response (distribution) (often called function) $y(t)$ that is the solution of a linear autonomous ODE whose forcing term is $x(t)$, called governing equation. It can be completely characterized by a distribution called impulse response (function) $h(t)$, which is the output when the input is the Dirac delta function $\delta(t)$, that
 \[y(t)=(x*h)(t)\coloneq\int_{-\infty}^{\infty} x(\tau)h(t-\tau)\dd{\tau}.\]
 Applying bilateral Laplace transform \[Y(s)=X(s)\cdot H(s),\]
 where $H(s)$ is called transfer function, and its absolute value is called gain (增益), or attenuation (衰減量) if $<1$.
@@ -1154,6 +1154,11 @@ and
 where $K$ is called band-pass gain. The filter is called prototype or canonical if $K=1$.
 \sssc{Pole–zero plot or pole–zero constellation}
 A pole–zero plot or pole–zero constellation is a graphical representation showing poles and zeros of a transfer function in the complex plane.
+
+
+
+\end{document}
+ complex plane.
 
 
 

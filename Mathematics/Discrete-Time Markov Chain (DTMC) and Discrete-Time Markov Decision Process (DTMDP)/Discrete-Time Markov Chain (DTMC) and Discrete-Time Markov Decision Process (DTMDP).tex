@@ -198,7 +198,7 @@ Then
 \[v^*=r_{\pi^*}+\gamma P_{\pi^*}v^*.\]
 $v^*$ is the optimal state value, and $\pi^*$ is the optimal policy.
 \subsubsection{Optimal Policy Invariance Theorem}
-Consider a Markov decision process with $v^*\in\mathbb{R}^{|S|}$ as the optimal state value satisfying $v^*=\max_{\pi}(r_{\pi}+\gamma P_{\pi}v^*$. If every reward $r$ is changed by an affine transformation to $ar+b$, where $a,b\in\mathbb{R}$ and $a\neq 0$, then the corresponding optimal state value $v'$ is also an affine transformation of $v^*$:
+Consider a Markov decision process with $v^*\in\mathbb{R}^{|S|}$ as the optimal state value satisfying $v^*=\max_{\pi}(r_{\pi}+\gamma P_{\pi}v^*)$. If every reward $r$ is changed by an affine transformation to $ar+b$, where $a,b\in\mathbb{R}$ and $a\neq 0$, then the corresponding optimal state value $v'$ is also an affine transformation of $v^*$:
 \[v'=av^*+\frac{b}{1-\gamma}\mathbf{1},\]
 where $\gamma\in[0,1)$ is the discount rate and $\mathbf{1}=[1,\ldots,1]^{\top}\in\mathbb{R}^{|S|}$.
 
@@ -238,4 +238,3 @@ In practice, we usually stop when $|v_{\pi_k}(s)-v_{\pi_{k-1}}(s)|$ is sufficien
 \subsubsection{Truncated Policy Iteration}
 The truncated policy iteration is the same as policy iteration with the policy evaluation step using the iterative solution but stopped when $\|v_k-v_{k-1}\|$ is sufficiently small or when $k$ is sufficiently large. If stopping when $k=1$, the truncated policy iteration becomes value iteration except that the first iteration lacks value update and is initialized with an arbitrary policy; if stopping when $k=\infty$, the truncated policy iteration becomes policy iteration.
 \end{document}
-
