@@ -803,11 +803,13 @@ E\qty((Y'-aX'-(E\qty(Y)-aE\qty(X)))^2)=&E\qty((Y'-aX')^2)\\
 =&\qty(1-\rho_{X,Y}^{\pht{X,Y}2})^2\Var(Y)
 \ea\]
 \epr
-\ssc{Moment, Moment generating function (MGF), and Characteristic function (CF)}
-\sssc{Moment}
-The $n$th moment of $X$ is defined as $E\qty(X^n)$ for $n\in\bbN$. The zero-th moment $E\qty(X^0)$ is defined as $1$.
-\sssc{Central moment}
-The $n$th central moment of $X$ is defined as $E\qty((X-E\qty(X))^n)$. The zero-th central moment $E\qty((X-E\qty(X))^0)$ is defined as $1$.
+\ssc{Moments}
+\sssc{(Raw or ordinary) moments}
+For $n\in\bbN$, the $n$th (raw or ordinary) moment of $X$ is defined as $E\qty(X^n)$ for $n\in\bbN$. The zero-th moment $E\qty(X^0)$ is defined as $1$.
+\sssc{Central moments}
+For $n\in\bbN$, the $n$th central moment of $X$ is defined as $E\qty((X-E\qty(X))^n)$. The zero-th central moment $E\qty((X-E\qty(X))^0)$ is $1$.
+\sssc{Factorial moments}
+For $n\in\bbN$, the $n$th factorial moment of $X$ is defined as $E\qty(\prod_{k=0}^{n-1}(X-k))$. The zero-th factorial moment $E\qty(1)$ is $1$.
 \sssc{Moments determine finite-range random variable theorem}
 A random variable $X$ with finite range is uniquely determined by the zero-th to $(n-1)$th moments $\mu_0=1,\mu_1,\ldots,\mu_{n-1}$.
 \bpr
@@ -827,13 +829,23 @@ p_1 \\ p_2 \\ \vdots \\ p_n
 \mu_0 \\ \mu_1 \\ \vdots \\ \mu_{n-1}
 \end{bmatrix}\]
 \epr
-\sssc{Moment generating function (MGF)}
-The moment generating function (MGF) of a random variable $X$, denoted as $M_X(t)$, is defined as
-\[M_X(t)=E\qty(e^{tX}),\quad t\in\bbR.\]
-\sssc{MGF as Laplace transform}
+\sssc{Moments of poduct of independent random variables}
+If $X_1,\ldots,X_d$ are independent,
+\[E\qty(\prod_{i=1}^dX_i^{\pht{i}n})=\prod_{i=1}^dE\qty(X_i^{\pht{i}n})\]
+\ssc{Moment generating function (MGF)}
+\sssc{Definition}
+The moment generating function (MGF) of a random variable $X$, denoted as $M_X(t)$ or $\varphi_X(t)$ but the later is not used here and reserved for characteristic function (CF), is defined as
+\[M_X(t)=E\qty(e^{tX}),\]
+$t\in\bbR$ or sometimes $\bbC$.
+\sssc{Existence}
+MGF may not exist.
+\bpr
+PLACEHOLDER
+\epr
+\sssc{MGF as bilateral Laplace transform}
 In Stieltjes integral,
 \[M_X(t)=\int_{x=-\infty}^{\infty}e^{tx}\dd{F_x(x)}.\]
-\sssc{MGF determines CDF}
+\sssc{MGF uniquely determines distribution}
 If the MGF of $X$ exists in a neighborhood of $t=0$, it uniquely determines the distribution of $X$.
 \bpr
 By Mellin's inverse formula.
@@ -857,21 +869,72 @@ Thus,
 \[M_X^{\pht{X}(n)}(t)=E\qty(X^ne^{tX})=\sum_{k=n}^{\infty}\frac{t^{k-n}}{(k-n)!}E\qty(X^k)\]
 \[M_X^{\pht{X}(n)}(0)=E\qty(X^k)\]
 \epr
-\sssc{Characteristic function (CF)}
-The moment generating function (MGF) of a random variable $X$, denoted as $\varphi_X(t)$, is defined as
-\[\varphi_X(t)=E\qty(e^{itX}),\quad t\in\bbR.\]
 \sssc{Affine Transformation}
 For a real-valued random variable $X$, $a\in\bbR_{\neq0}$, and $b\in\mathbb{R}$,
 \[M_{aX+b}(t)=e^{bt}M_X(at).\]
 \sssc{Logarithmic Linearity}
-For indexed families of real-valued random variables $(X_i)_{i\in I}$ and real numbers $(a_i)_{i\in I}$ with $\abs{I}\in\bbN\cup\{\aleph_0\}$, where for $\abs{I}=\aleph_0$ suppose RHS is convergent,
+For indexed families of independent real-valued random variables $(X_i)_{i\in I}$ and real numbers $(a_i)_{i\in I}$ with $\abs{I}\in\bbN\cup\{\aleph_0\}$, where for $\abs{I}=\aleph_0$ suppose RHS is convergent,
 \[M_{\sum_{i\in I}a_iX_i}(t)=\prod_{i\in I}M_{X_i}\qty(a_it).\]
-\sssc{Moments of poduct of independent random variables}
-If $X_1,\ldots,X_d$ are independent,
-\[E\qty(\prod_{i=1}^dX_i^{\pht{i}n})=\prod_{i=1}^dE\qty(X_i^{\pht{i}n})\]
-\sssc{MGF of sum of independent random variables}
-If $X_1,\ldots,X_d$ are independent,
-\[M_{\sum_{i=1}^dX_i}(t)=\prod_{i=1}^dM_{X_i}(t)\]
+\ssc{Characteristic function (CF)}
+\sssc{Definition}
+The characteristic function (CF) of a random variable $X$, denoted as $\varphi_X(t)$, is defined as
+\[\varphi_X(t)=E\qty(e^{itX}),\quad t\in\bbR.\]
+\sssc{Existence}
+CF always exists.
+\bpr
+$\abs{e^{itX}}=1$.
+PLACEHOLDER
+\epr
+\sssc{CF as Fourier transform}
+PLACEHOLDER
+\sssc{CF uniquely determines distribution}
+$\varphi_X(t)$ uniquely determines the distribution of $X$.
+\bpr
+PLACEHOLDER
+\epr
+\sssc{CF and MGF}
+\[\varphi_X(t)=M_X(it)\]
+if RHS exists in a neighborhood of $t=0$.
+\sssc{Affine Transformation}
+For a real-valued random variable $X$, $a\in\bbR_{\neq0}$, and $b\in\mathbb{R}$,
+\[\varphi_{aX+b}(t)=e^{bit}\varphi_X(at).\]
+\sssc{Logarithmic Linearity}
+For indexed families of independent real-valued random variables $(X_i)_{i\in I}$ and real numbers $(a_i)_{i\in I}$ with $\abs{I}\in\bbN\cup\{\aleph_0\}$,
+\[\varphi_{\sum_{i\in I}a_iX_i}(t)=\prod_{i\in I}\varphi_{X_i}\qty(a_it).\]
+\ssc{Probability generating function (PGF)}
+\sssc{Definition}
+The probability generating function (PGF) of a nonnegative integer-valued discrete random variable $X$, denoted as $G_X(z)$, is defined as
+\[G_X(z)=E\qty(z^X)=\sum_{k=0}^{\infty}p_X(k)z^k,\quad z\in\bbC\land \abs{z}\le1.\]
+\sssc{Recover PMF using PGF}
+\[p_X(k)=\frac{G^{(k)}(0)}{k!}.\]
+\sssc{PGF uniquely determines distribution}
+$G_X(z)$ uniquely determines the distribution of $X$.
+\bpr
+Since it can recover PMF.
+\epr
+\sssc{PGF generating factorial moments}
+For $n\in\bbN_0$, the $n$th factorial moment is
+\[E\qty(\prod_{k=0}^{n-1}(X-k))=G^{(n)}(1^-).\]
+\bpr
+\[G^{(n)}(1^-)=\sum_{k=0}^{\infty}p_X(k)\prod_{i=0}^{n-1}(k-i)=E\qty(\prod_{i=0}^{n-1}(X-i))\]
+\epr
+\sssc{PGF generating variance}
+\[\Var(X)=G''(1^-)+G'(1^-)-G'(1^-)^2\]
+\bpr
+\[G''(1^-)+G'(1^-)-G'(1^-)^2=E(X(X-1))+E(X)-E(X)^2=E\qty(X^2)-E(X)^2=\Var(X)\]
+\epr
+\sssc{MGF and PGF}
+\[M_X(t)=G_X(e^t)\]
+\[M_X(\ln t)=G_X(t)\]
+\sssc{CF and PGF}
+\[\varphi_X(t)=G_X(e^{it})\]
+\[\varphi_X(-i\ln t)=G_X(t)\]
+\sssc{Transition}
+For a nonnegative integer-valued discrete random variable $X$ and $b\in\bbN_0$,
+\[G_{X+b}(z)=z^bG_X(z).\]
+\sssc{Logarithmic additivity}
+For indexed families of independent nonnegative integer-valued discrete random variables $(X_i)_{i\in I}$ with $\abs{I}\in\bbN\cup\{\aleph_0\}$,
+\[G_{\sum_{i\in I}X_i}(z)=\prod_{i\in I}G_{X_i}(z).\]
 \ssc{Mode (眾數)}
 \sssc{For discrete random variable}
 For a discrete random variable $X$ with PMF $p_X(x)$, $\Mode\qty(X)$ is defined as
@@ -1151,6 +1214,10 @@ E\qty(X^2)&=\sum_{k=a}^b\frac{k^2}{b-a+1}\\
 \bpr
 \[E\qty(e^{tX})=\frac{1}{b-a+1}\sum_{k=a}^be^{kt}=\frac{1}{b-a+1}e^{at}\frac{1-e^{(b-a+1)t}}{1-e^t}=\frac{e^{at}-e^{(b+1)t}}{(b-a+1)(1-e^t)}\]
 \epr
+\item CF:
+\[\varphi_X(t)=\frac{e^{ait}-e^{(b+1)it}}{(b-a+1)(1-e^{it})}\]
+\item PGF
+\[G_X(z)=\frac{z^a-z^{b+1}}(b-a+1)(1-z)}\]
 \item Mode:
 \[\operatorname{Mode}(X)=\bbZ\cap[a,b]\]
 \item Median:
@@ -1178,13 +1245,17 @@ H(X)&=-\sum_{k=a}^b\frac{1}{b-a+1}\ln(\frac{1}{b-a+1})\\
 \item Mean:
 \[E\qty(X)=p\]
 \item Variance:
-\[\operatorname{Var}(X)=P\qty(1-p)\]
+\[\operatorname{Var}(X)=p\qty(1-p)\]
 \bpr
 \[E\qty(X^2)=p\]
-\[\operatorname{Var}(X)=p-p^2=P\qty(1-p)\]
+\[\operatorname{Var}(X)=p-p^2=p\qty(1-p)\]
 \epr
 \item MGF:
 \[M_X(t)=pe^t+1-p\]
+\item CF:
+\[\varphi_X(t)=pe^{it}+1-p\]
+\item PGF:
+\[G_X(z)=pz+1-p\]
 \item Mode:
 \[\operatorname{Mode}(X)=\bcs0,\quad&p<\frac{1}{2}\\0,1,\quad&p=\frac{1}{2}\\1,\quad&p>\frac{1}{2}\ecs\]
 \item Median:
@@ -1239,6 +1310,10 @@ Alternatively, use decomposition.
 \epr
 \item MGF:
 \[M_X(t)=\qty(pe^t+1-p)^n\]
+\item CF:
+\[\varphi_X(t)=\qty(pe^{it}+1-p)^n\]
+\item PGF:
+\[G_X(z)=\qty(pz+1-p)^n\]
 \item Mode:
 \[\operatorname{Mode}(X)=\bcs n,\quad&p=1\\(n+1)p-1,(n+1)p,\quad&(n+1)p\in\bbN\land p\notin\bbZ\\\lfloor(n+1)p\rfloor,\quad&\text{otherwise}\ecs\]
 \bpr
@@ -1274,15 +1349,15 @@ Decompose to Bernoulli random variables.
 \item Parameters: $p\in(0,1]$
 \item Support: $\bbN$
 \item PMF:
-\[p_X(k)=P\qty(1-p)^{k-1},\quad k\in\bbN\]
+\[p_X(k)=p(1-p)^{k-1},\quad k\in\bbN\]
 \item CDF:
 \[F_X(k)=\bcs 0,\quad&k<1\\1-(1-p)^{\lfloor k\rfloor},\quad&k\ge1\ecs\]
 \bpr
 \[\ba
-P\qty(X\le k)&=\sum_{i=1}^{\lfloor k\rfloor}P\qty(1-p)^{i-1}\\
-&=\sum_{i=1}^{\lfloor k\rfloor}P\qty(1-p)^{i-1}\\
-&=\sum_{i=1}^{\infty}P\qty(1-p)^{i-1}-\sum_{i=\lfloor k\rfloor+1}^{\infty}P\qty(1-p)^{i-1}\\
-&=1-(1-p)^{\lfloor k\rfloor}\sum_{i=1}^{\infty}P\qty(1-p)^{i-1}\\
+P\qty(X\le k)&=\sum_{i=1}^{\lfloor k\rfloor}p(1-p)^{i-1}\\
+&=\sum_{i=1}^{\lfloor k\rfloor}p(1-p)^{i-1}\\
+&=\sum_{i=1}^{\infty}p(1-p)^{i-1}-\sum_{i=\lfloor k\rfloor+1}^{\infty}p(1-p)^{i-1}\\
+&=1-(1-p)^{\lfloor k\rfloor}\sum_{i=1}^{\infty}p(1-p)^{i-1}\\
 &=1-(1-p)^{\lfloor k\rfloor}
 \ea\]
 \epr
@@ -1290,22 +1365,22 @@ P\qty(X\le k)&=\sum_{i=1}^{\lfloor k\rfloor}P\qty(1-p)^{i-1}\\
 \[E\qty(X)=\frac{1}{p}\]
 \bpr
 \[\ba
-E\qty(X)&=\sum_{k=1}^{\infty}kP\qty(1-p)^{k-1}\\
-&=\sum_{k=1}^{\infty}(k-1)P\qty(1-p)^{k-1}+\sum_{k=1}^{\infty}P\qty(1-p)^{k-1}\\
-&=\sum_{k=1}^{\infty}kP\qty(1-p)^k+\sum_{k=1}^{\infty}P\qty(1-p)^{k-1}
+E\qty(X)&=\sum_{k=1}^{\infty}kp(1-p)^{k-1}\\
+&=\sum_{k=1}^{\infty}(k-1)p(1-p)^{k-1}+\sum_{k=1}^{\infty}p(1-p)^{k-1}\\
+&=\sum_{k=1}^{\infty}kp(1-p)^k+\sum_{k=1}^{\infty}p(1-p)^{k-1}
 \ea\]
-\[(1-p)E\qty(X)=\sum_{k=1}^{\infty}kP\qty(1-p)^k\]
-\[E\qty(X)-(1-p)E\qty(X)=pE\qty(X)=\sum_{k=1}^{\infty}P\qty(1-p)^{k-1}=\frac{p}{1-(1-p)}=1\]
+\[(1-p)E\qty(X)=\sum_{k=1}^{\infty}kp(1-p)^k\]
+\[E\qty(X)-(1-p)E\qty(X)=pE\qty(X)=\sum_{k=1}^{\infty}p(1-p)^{k-1}=\frac{p}{1-(1-p)}=1\]
 \epr
 \item Variance:
 \[\operatorname{Var}(X)=\frac{1-p}{p^2}\]
 \bpr
 \[\ba
-E\qty(X^2)&=\sum_{k=1}^{\infty}k^2P\qty(1-p)^{k-1}\\
-&=\sum_{k=1}^{\infty}(k-1)^2P\qty(1-p)^{k-1}+2\sum_{k=1}^{\infty}kP\qty(1-p)^{k-1}-\sum_{k=1}^{\infty}P\qty(1-p)^{k-1}\\
-&=\sum_{k=1}^{\infty}k^2P\qty(1-p)^k+2E\qty(X)-1
+E\qty(X^2)&=\sum_{k=1}^{\infty}k^2p(1-p)^{k-1}\\
+&=\sum_{k=1}^{\infty}(k-1)^2p(1-p)^{k-1}+2\sum_{k=1}^{\infty}kp(1-p)^{k-1}-\sum_{k=1}^{\infty}p(1-p)^{k-1}\\
+&=\sum_{k=1}^{\infty}k^2p(1-p)^k+2E\qty(X)-1
 \ea\]
-\[(1-p)E\qty(X^2)=\sum_{k=1}^{\infty}k^2P\qty(1-p)^k\]
+\[(1-p)E\qty(X^2)=\sum_{k=1}^{\infty}k^2p(1-p)^k\]
 \[E\qty(X^2)-2E\qty(X)+1-(1-p)E\qty(X^2)=pE\qty(X^2)-2E\qty(X)+1=0\]
 \[E\qty(X^2)=\frac{2E\qty(X)-1}{p}=\frac{2-p}{p^2}\]
 \[\operatorname{Var}(X)=E\qty(X^2)-E\qty(X)^2=\frac{1-p}{p^2}\]
@@ -1314,14 +1389,18 @@ E\qty(X^2)&=\sum_{k=1}^{\infty}k^2P\qty(1-p)^{k-1}\\
 \[M_X(t)=\frac{pe^t}{1-(1-p)e^t},\quad t<-\ln(1-p)\]
 \bpr
 \[\ba
-E\qty(e^{tX})&=\sum_{k=1}^{\infty}e^{kt}P\qty(1-p)^{k-1}\\
+E\qty(e^{tX})&=\sum_{k=1}^{\infty}e^{kt}p(1-p)^{k-1}\\
 &=\frac{pe^{t}}{1-(1-p)e^t}
 \ea\]
 \epr
+\item CF:
+\[\varphi_X(t)=\frac{pe^{it)}{1-(1-p)e^{it}}\]
+\item PGF:
+\[G_X(z)=\frac{pz}{1-(1-p)z}\]
 \item Mode:
 \[\operatorname{Mode}(X)=1\]
 \bpr
-\[p_X(k+1)-p_X(k)=P\qty(1-p)^k-P\qty(1-p)^{k-1}=-p^2(1-p)^{k-1}<0\]
+\[p_X(k+1)-p_X(k)=p(1-p)^k-p(1-p)^{k-1}=-p^2(1-p)^{k-1}<0\]
 \epr
 \item Median:
 \[\operatorname{Median}(X)=\bcs\qty[\frac{-\ln 2}{\ln(1-p)},\frac{-\ln 2}{\ln(1-p)}+1],\quad&\frac{-\ln 2}{\ln(1-p)}\in\bbN\\\left\lceil\frac{-\ln 2}{\ln(1-p)}\right\rceil,\quad&\text{otherwise}\ecs\]
@@ -1331,16 +1410,16 @@ E\qty(e^{tX})&=\sum_{k=1}^{\infty}e^{kt}P\qty(1-p)^{k-1}\\
 \[(1-p)^{\lfloor k\rfloor}\le\frac{1}{2}\]
 \[\lfloor k\rfloor\ge\frac{-\ln 2}{\ln(1-p)}\]
 \[P\qty(X\ge k)\ge\frac{1}{2}\]
-\[\sum_{i=\lceil k\rceil}^{\infty}P\qty(1-p)^{i-1}=(1-p)^{\lceil k\rceil-1}\sum_{i=1}^{\infty}P\qty(1-p)^{i-1}=(1-p)^{\lceil k\rceil-1}\ge\frac{1}{2}\]
+\[\sum_{i=\lceil k\rceil}^{\infty}p(1-p)^{i-1}=(1-p)^{\lceil k\rceil-1}\sum_{i=1}^{\infty}p(1-p)^{i-1}=(1-p)^{\lceil k\rceil-1}\ge\frac{1}{2}\]
 \[\lceil k\rceil-1\le\frac{-\ln 2}{\ln(1-p)}\]
 \epr
 \item Entropy:
 \[H(X)=\frac{-p\ln p-(1-p)\ln(1-p)}{p}\]
 \bpr
 \[\ba
-H(X)&=-\sum_{k=1}^{\infty}P\qty(1-p)^{k-1}\ln(P\qty(1-p)^{k-1})\\
-&=-\sum_{k=1}^{\infty}P\qty(1-p)^{k-1}\qty(\ln p+(k-1)\ln(1-p))\\
-&=-\ln p-\ln(1-p)\sum_{k=1}^{\infty}kP\qty(1-p)^{k-1}+\ln(1-p)\\
+H(X)&=-\sum_{k=1}^{\infty}p(1-p)^{k-1}\ln(p(1-p)^{k-1})\\
+&=-\sum_{k=1}^{\infty}p(1-p)^{k-1}\qty(\ln p+(k-1)\ln(1-p))\\
+&=-\ln p-\ln(1-p)\sum_{k=1}^{\infty}kp(1-p)^{k-1}+\ln(1-p)\\
 &=-\ln p-\ln(1-p)p\sum_{k=1}^{\infty}k(1-p)^{k-1}+\ln(1-p)
 \ea\]
 Let
@@ -1358,14 +1437,14 @@ S&=\sum_{k=1}^{\infty}k(1-p)^{k-1}\\
 \item Memorylessness:
 \[P\qty(X=j+k\mid X>j)=P\qty(X=k)\quad j,k\in\bbN\]
 \bpr
-\[\frac{P\qty(1-p)^{j+k}}{(1-p)^j}=P\qty(1-p)^k.\]
+\[\frac{p(1-p)^{j+k}}{(1-p)^j}=p(1-p)^k.\]
 \epr
 \item Sum of independent random variables: Suppose $X_i\sim\operatorname{Geom}(p)$ for $i\in\bbN_{\le n}$ are independent random variables. Then
 \[\sum_{i=1}^nX_i\sim\NegBin(n,p).\]
 \bpr
 Prove by mathematical induction. For $n=1$, $\NegBin(1,p)=\operatorname{Geom}(p)$. Assume $\sum_{i=1}^{n-1}X_i\sim\NegBin(n-1,p)$, we show that $\sum_{i=1}^nX_i\sim\NegBin(n,p)$.
 \[\ba
-p_{\sum_{i=1}^nX_i}(k)=&\sum_{i=n-1}^{k-1}\binom{i-1}{n-2}p^{n-1}(1-p)^{i-n+1}P\qty(1-p)^{k-i-1}\\
+p_{\sum_{i=1}^nX_i}(k)=&\sum_{i=n-1}^{k-1}\binom{i-1}{n-2}p^{n-1}(1-p)^{i-n+1}p(1-p)^{k-i-1}\\
 =&p^n(1-p)^{k-n}\sum_{i=n-1}^{k-1}\binom{i-1}{n-2}
 =&\binom{k-1}{n-1}p^n(1-p)^{k-n}
 \ea\]
@@ -1392,6 +1471,10 @@ And the $X_i$s are i.i.d. geometric random variable with parameter $p$. Thus, th
 \[\operatorname{Var}(X)=\frac{r(1-p)}{p^2}\]
 \item MGF:
 \[M_X(t)=\qty(\frac{pe^{t}}{1-(1-p)e^t})^r,\quad t<-\ln(1-p)\]
+\item CF:
+\[\varphi_X(t)=\qty(\frac{pe^{it)}{1-(1-p)e^{it}})^r\]
+\item PGF:
+\[G_X(z)=\qty(\frac{pz}{1-(1-p)z})^r\]
 \item Mode:
 \[\operatorname{Mode}(X)=\left\lfloor\frac{r-1}{p}\right\rfloor\]
 \bpr
@@ -1486,6 +1569,10 @@ E\qty(e^{tX})&=\sum_{k=0}^{\infty}e^{kt}\frac{\lambda^ke^{-\lambda}}{k!}\\
 &=\exp\qty(\lambda\qty(e^t-1))
 \ea\]
 \epr
+\item CF:
+\[\varphi_X(t)=\exp\qty(\lambda\qty(e^{it}-1))\]
+\item PGF:
+\[G_X(z)=\exp\qty(\lambda\qty(z-1))\]
 \item Mode:
 \[\operatorname{Mode}(X)=\lceil\lambda\rceil-1,\lfloor\lambda\rfloor\]
 \bpr
@@ -1586,6 +1673,8 @@ E\qty(e^{tX})&=\int_a^b\frac{e^{tx}}{b-a}\dd{x}\\
 &=\bcs\frac{e^{bt}-e^{at}}{(b-a)t},\quad&t\ne 0\\1,\quad&t=0\ecs
 \ea\]
 \epr
+\item CF:
+\[\varphi_X(t)=\bcs\frac{e^{bit}-e^{ait}}{(b-a)it},\quad&t\ne 0\\1,\quad&t=0\ecs\]
 \item Mode:
 \[\operatorname{Mode}(X)=[a,b]\]
 \item Median:
@@ -1711,6 +1800,8 @@ E\qty(e^{tX})&=\frac{1}{\sqrt{2\pi}\sigma}\int_{-\infty}^{\infty}\exp\qty(-\frac
 &=\exp\qty(\mu t+\frac{\sigma^2t^2}{2})
 \ea\]
 \epr
+\item CF:
+\[\varphi_X(t)=\exp\qty(\mu it-\frac{\sigma^2t^2}{2})\]
 \item Mode:
 \[\operatorname{Mode}(X)=\mu\]
 \bpr
@@ -1844,6 +1935,11 @@ PLACEHOLDER
 \bpr
 PLACEHOLDER
 \epr
+\item CF:
+\[\varphi_X(t)=\tx{PLACEHOLDER}\]
+\bpr
+PLACEHOLDER
+\epr
 \item Mode:
 \[\operatorname{Mode}(X)=0\]
 \bpr
@@ -1925,6 +2021,8 @@ E\qty(e^{tX})&=\int_0^{\infty}\lambda e^{(t-\lambda)x}\dd{x}\\
 &=\qty(1-\frac{t}{\lambda})^{-1}
 \ea\]
 \epr
+\item CF:
+\[\varphi_X(t)=\qty(1-\frac{it}{\lambda})^{-1}\]
 \item Mode:
 \[\operatorname{Mode}(X)=0\]
 \bpr
@@ -2029,6 +2127,8 @@ F_k(x)&=\int_0^x\frac{\lambda^kt^{k-1}e^{-\lambda t}}{(k-1)!}\dd{t}\\
 \[\operatorname{Var}(X)=\frac{k}{\lambda^2}\]
 \item MGF:
 \[M_X(t)=\qty(1-\frac{t}{\lambda})^{-k},\quad t<\lambda\]
+\item CF:
+\[\varphi_X(t)=\qty(1-\frac{it}{\lambda})^{-k}\]
 \item Mode:
 \[\operatorname{Mode}(X)=\frac{k-1}{\lambda}\]
 \bpr
@@ -2191,7 +2291,7 @@ Let
 Then
 \[\frac{X_n-np}{\sqrt{np(1-p)}}\xrightarrow{\tx{d}}\calN\qty(0,1).\]
 \bpr
-Suppose $\qty(X_i\sim\Bern(p))_{i\in\bbN}$ is an i.i.d. sequence of random variables, which has mean $p$ and variance $P\qty(1-p)$. $X_n=\sum_{i=1}^nX_i$. By CLT,
+Suppose $\qty(X_i\sim\Bern(p))_{i\in\bbN}$ is an i.i.d. sequence of random variables, which has mean $p$ and variance $p(1-p)$. $X_n=\sum_{i=1}^nX_i$. By CLT,
 \[\frac{X_n-np}{\sqrt{np(1-p)}}\xrightarrow{\tx{d}}\calN\qty(0,1).\]
 \epr
 For large $n$,
@@ -2307,16 +2407,21 @@ where $L(\theta|x)\colon P_{\theta}(x)$ is called likelihood function.
 In the special case of binary hypothesis testing, there are only two hypotheses $H_0\colon X\sim P_0$ and $H_1\colon X\sim P_1$, called null hypothesis and alternative hypothesis respectively.
 
 The likelihood ratio is
-\[L(x)=\frac{P_1(x)}{P_0(x)}\]
+\[L(x)=\frac{P(X=x|H_1)}{P(X=x|H_0)}\]
 and the MAP decision rule is
-\[\varphi^*(x)=\bcs1,\quad&L(x)>\frac{\pi(1)}{\pi(0)}\\0,\quad&L(x)\le\frac{\pi(1)}{\pi(0)}.\ecs\]
+\[\varphi^*(x)=\bcs1,\quad&L(x)>\frac{\pi(0)}{\pi(1)}\\0,\quad&\tx{otherwise}.\ecs\]
+Selecting $H_1$ is called positive, and selecting $H_0$ is called negative.
+
 If the goal is the 0-1 loss, there are two kinds of errors:
 \bit
-\item Type I error, false positive, or false alarm: Rejecting $H_0$ when $H_0$ is true, which occurs with probability $R(\varphi;0)=P_{X\sim P_0}(\varphi(X)=1)$, called false alarm probability and denoted $P_{\tx{FA}}$.
-\item Type II error, false positive, or missing: Accepting $H_0$ when $H_1$ is true, which occurs with probability $R(\varphi;1)=P_{X\sim P_1}(\varphi(X)=0)$, called missing probability and denoted $P_{\tx{MISS}}$.
+\item Type I error, false positive, or false alarm: Rejecting $H_0$ when $H_0$ is true, which occurs with probability $R(\varphi;0)=P_{X\sim P_0}(\varphi(X)=1)$, called false alarm probability and denoted $\alpha$ or $P_{\tx{FA}}$.
+\item Type II error, false negative, or missing: Accepting $H_0$ when $H_1$ is true, which occurs with probability $R(\varphi;1)=P_{X\sim P_1}(\varphi(X)=0)$, called missing probability and denoted $\beta$ or $P_{\tx{MISS}}$.
 \eit
 Total error probability is
 \[P_{\tx{ERR}}=P_{\tx{FA}}\pi(0)+P_{\tx{MISS}}\pi(1).\]
+The power of a test is defined as
+\[1-\beta,\]
+which is the probability of correctly rejecting a false null hypothesis.
 \sssc{Bayesian-optimal test for binary hypothesis testing}
 \[R(\varphi)=E_{\theta\sim\pi}R(\varphi;\theta)=\pi(0)R(\varphi;0)+\pi(1)R(\varphi;1).\]
 The MAP rule $\varphi^*$ can be shown to be the likelihood ratio rule, for everyn$x\in\Chi$,
