@@ -900,7 +900,7 @@ which $>0$ for $-1<r<0$.
 \[\dv[n]{}{x}\qty(\frac{1}{1+x})=-\frac{n}{1+x}\dv[n-1]{}{x}\qty(\frac{1}{1+x}),\quad n\in\bbN\]
 \[\dv[n]{}{x}\qty(\frac{1}{1+x})=\frac{(-1)^nn!}{(1+x)^{n+1}},\quad n\in\bbN_0\]
 \end{proof}
-\[\sqrt{a^2+x^2}=\sum_{n=0}^{\infty}\frac{(-1)^{n-1}(2n)!}{4^n(n!)^2(2n-1)}\frac{x^{2n}}{a^{2n-1}},\quad\abs{x}<\abs{a}.\]
+\[\sqrt{a^2+x^2}=\sum_{n=0}^{\infty}\frac{(-1)^{n+1}(2n)!}{4^n(n!)^2(2n-1)}\frac{x^{2n}}{a^{2n-1}},\quad\abs{x}<\abs{a}.\]
 \subsubsection{$(1-x)^r$}
 \[(1-x)^r=\sum_{n=0}^{\infty}\binom{r}{n}(-x)^n,\quad r\in\bbN_0\lor-1<x<1\lor(-1\le x\le1\land r>0)\lor(x=-1\land-1<r<0).\]
 \bpr
@@ -916,20 +916,20 @@ Similar to that of $(1+x)^r$.
 \end{proof}
 \[\sqrt{a^2-x^2}=-\sum_{n=0}^{\infty}\frac{(2n)!}{4^n(n!)^2(2n-1)}\frac{x^{2n}}{a^{2n-1}},\quad\abs{x}<\abs{a}.\]
 \subsubsection{Logarithmic function}
-\[\ln(x)=\ln(a)+\sum_{n=1}^{\infty}\frac{(-1)^{n-1}}{na^n}(x-a)^n,\quad x\leq a.\]
+\[\ln(x)=\ln(a)+\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n}\qty(\frac{x-a}{a})^n,\quad 0\le x\le 2a\land a>0.\]
 \begin{proof}
 \[\dv{\ln(x)}{x}=x^{-1}.\]
 Thus for $n\in\mathbb{N}$:
 \[\ba
 \dv[n]{\ln(x)}{x}&=\prod_{j=1}^{n-1}(-j)x^{-n}\\
-&=(-1)^{n-1}\frac{(n-1)!}{x^n}
+&=(-1)^{n+1}\frac{(n-1)!}{x^n}
 \ea\]
 The series converges iff $-1<\frac{(x-a)^n}{a^n}\leq 1$ ($\leq 1$ since alternating harmonic series converges) iff $0<x\leq a$.
 \end{proof}
-\[\ln(1+x)=\sum_{n=1}^{\infty}\frac{(-1)^{n-1}}{n}x^n,\quad -1<x\le 1.\]
-\[\ln(1+x)=\ln(1+a)+\sum_{n=1}^{\infty}\frac{(-1)^{n-1}}{n}\qty(\frac{x-a}{1+a})^n,\quad -1<x\le 1+2a.\]
+\[\ln(1+x)=\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n}x^n,\quad -1<x\le 1.\]
+\[\ln(1+x)=\ln(1+a)+\sum_{n=1}^{\infty}\frac{(-1)^{n+1}}{n}\qty(\frac{x-a}{1+a})^n,\quad -1<x\le 1+2a\land a>-1.\]
 \[\ln(1-x)=-\sum_{n=1}^{\infty}\frac{1}{n}x^n,\quad -1\le x<1.\]
-\[\ln(1-x)=\ln(1-a)-\sum_{n=1}^{\infty}\frac{1}{n}\qty(\frac{x-a}{1-a})^n,\quad 2a-1\le x<1.\]
+\[\ln(1-x)=\ln(1-a)-\sum_{n=1}^{\infty}\frac{1}{n}\qty(\frac{x-a}{1-a})^n,\quad 2a-1\le x<1\land a>1.\]
 \subsubsection{Exponential function}
 \[e^x=\sum_{n=0}^{\infty}\frac{x^n}{n!}.\]
 \[e^x=e^a\sum_{n=0}^{\infty}\frac{(x-a)^n}{n!}.\]
@@ -983,8 +983,10 @@ Differentiate both side:
 \[\arccot(x)=\frac{\pi}{2}-\sum_{n=0}^{\infty}\frac{(-1)^n}{2n+1}x^{2n+1},\quad\abs{x}\le1.\]
 \sssc{Hyperbolic sine function}
 \[\sinh(x)=\sum_{n=0}^{\infty}\frac{1}{(2n+1)!}x^{2n+1}.\]
+\[\sinh(x)=\sum_{n=0}^{\infty}\frac{((n+1)\mod 2)\sinh a+(n\mod 2)\cosh a}{n!}(x-a)^n.\]
 \sssc{Hyperbolic cosine function}
 \[\cosh(x)=\sum_{n=0}^{\infty}\frac{1}{(2n)!}x^{2n}.\]
+\[\cosh(x)=\sum_{n=0}^{\infty}\frac{((n+1)\mod 2)\cosh a+(n\mod 2)\sinh a}{n!}(x-a)^n.\]
 \ssc{List of Nablas}
 Let $\mb{r}=(x,y,z)$, $r=\abs{\mb{r}}$.
 \sssc{Gradient of $r$}
