@@ -65,7 +65,7 @@ An orthogonal trajectory of a family of curves is a curve that intersects each c
 An isogonal trajectory of a family of curves is a curve that intersects each curve of the family at a same angle $\alpha$.
 \ssc{Conversion of order to variable}
 Any $n$th-order system of ODEs of $m$ variables $x_1,x_2,\ldots,x_m$ can be converted to a first-order system of ODEs of $m\cdot n$ variables by, for each variable $x$, assigning $(n-1)$ new variables defined as the first to $(n-1)$th derivatives of $x$.
-\sct{First-order ODEs}
+\sct{First-order ODE}
 Unless otherwise specified, the variables and functions are in $\mathbb{R}$.
 \ssc{Differential form}
 The differential form of a first-order ODE $M(x,y)+N(x,y)\dv{y}{x}=0$ is
@@ -77,12 +77,6 @@ In a first-order ODE in the form $\dv{y}{x}=f(x,y)$, $f$ is called the slope fun
 In a first-order ODE in the form $\dv{y}{x}=f(x,y)$, if we evaluate $f$ over a rectangle grid of points and draw a lineal element at each point $(x,y)$ of the grid with slope $f(x,y)$, then the collection of all these lineal elements is called a direction field or a slope field of the ODE.
 \sssc{Isocline}
 In a first-order ODE in the form $\dv{y}{x}=f(x,y)$, the isocline for slope $m$ is defined as the family of points $\{(x,y)\mid f(x,y)=m\}$. In the method of isocline, we draw a lineal element at each point in the isocline for slope $m$ of $f$ with slope $m$.
-\sssc{Euler method or forward Euler method}
-Approximate values for the solution of the initial-value problem $y'=f(x,y)$, $y(x_0)=y_0$, with step size $h$, at $x_n=x_{n-1}+h$, are
-\[y_n=y_{n-1}+hf(x_{n-1},y_{n-1}),\quad n\in\bbN.\]
-\sssc{Backward Euler method}
-Approximate values for the solution of the initial-value problem $y'=f(x,y)$, $y(x_0)=y_0$, with step size $h$, at $x_n=x_{n-1}+h$, are the solutions of the equations
-\[y_n=y_{n-1}+hf(x_n,y_n),\quad n\in\bbN.\]
 \ssc{Autonomous System}
 \sssc{Autonomous system (自治系統)}
 A system of $n$th-order ODEs is called autonomous if it can be written in the form
@@ -238,7 +232,7 @@ A first-order ODE in the form
 \[M(x,y)\dd{x}+N(x,y)\dd{y}=0\]
 where $\frac{\partial^2M}{\partial x\partial y}$ and $\frac{\partial^2N}{\partial x\partial y}$ is continuous and
 \[\pdv{M}{y}=\pdv{N}{x}\]
-is said to be exact.
+is said to be exact, and its LHS is called exact differential.
 
 By Schwarz's Theorem, the criterion holds iff there exists a function $F\colon R\to\bbR$ such that
 \[\pdv{F}{x}=M,\quad\pdv{F}{y}=N,\]
@@ -368,11 +362,11 @@ Solutions:
 \sssc{Definition}
 A first-order ODE in the form
 \[\dv{y}{x}=F(x,y)\]
-with $F(x,y)$ be a homogeneous function of degree $0$ is said to be homogeneous. 
+with $F(x,y)$ be a homogeneous function of degree $0$, i.e., $F(tx.ty)=F(x,y)$, is said to be homogeneous. 
 
-For first-order ODE in the form
+A first-order ODE in the form
 \[M(x,y)\dd{x}+N(x,y)\dd{y}=0,\]
-if $M(x,y)$ and $N(x,y)$ are homogeneous functions of the same degree, $F(x,y)=-\frac{M(x,y)}{N(x,y)}$ is a homogeneous function of degree $0$.
+where $M(x,y)$ and $N(x,y)$ are homogeneous functions of the same degree is homogeneous since $F(x,y)=-\frac{M(x,y)}{N(x,y)}$ is a homogeneous function of degree $0$.
 \sssc{Solutions by substitutions}
 For any homogeneous function $F(x,y)$ of $2$ variables, there exists a function $f$ of $1$ variable such that $F(x,y)=f\qty(\frac{y}{x})$ for all $x\neq 0$ such that $(x,y)$ is in the domain of $F$.
 
@@ -437,13 +431,13 @@ Constant solution:
 \[\arctan(\frac{2\sqrt{3}}{3}\qty(\frac{y}{x}+\frac{1}{2}))=\frac{\sqrt{3}}{2}\ln\abs{\frac{x^2}{y}}+C\]
 \[F(0,y)=0,\quad y=0\]
 \end{proof}
-\ssc{Bernoulli differential equation}
+\ssc{Bernoulli equation}
 \sssc{Definition}
 A first-order ODE in the form
 \[\dv{y}{x}+P(x)y=Q(x)y^n,\quad n\in\mathbb{R}\setminus\{0,1\}\]
-is called a Bernoulli differential equation.
+is called a Bernoulli equation.
 
-Remark: When $n=0$ or $1$, it is a first-order linear equation.
+When $n=0$ or $1$, it is a first-order linear equation.
 \sssc{Solutions by substitutions}
 Divide both sides by $y^n$:
 \[y^{-n}\dv{y}{x}+P(x)y^{1-n}=Q(x).\]
@@ -1100,6 +1094,14 @@ For linear autonomous continuous-time dynamical system, $x^*$ is called to be ma
 $x^*$ is called to be unstable iff it is not (Lyapunov) stable.
 
 An equilibrium that is in a repeller is necessarily unstable.
+\sct{Numerical Method}
+\ssc{First-order ODE}
+\sssc{(Forward) Euler('s) method}
+Approximate values for the solution of the initial-value problem $y'=f(x,y)$, $y(x_0)=y_0$, with step size $h$, at $x_n=x_{n-1}+h$, are
+\[y_n=y_{n-1}+hf(x_{n-1},y_{n-1}),\quad n\in\bbN.\]
+\sssc{Backward Euler('s) method}
+Approximate values for the solution of the initial-value problem $y'=f(x,y)$, $y(x_0)=y_0$, with step size $h$, at $x_n=x_{n-1}+h$, are the solutions of the equations
+\[y_n=y_{n-1}+hf(x_n,y_n),\quad n\in\bbN.\]
 \sct{Control Theory (控制理論)}
 \ssc{Continuous-time linear time-invariant (LTI) system}
 \sssc{Causal (因果的) continuous-time linear time-invariant (LTI) system}
