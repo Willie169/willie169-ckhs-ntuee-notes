@@ -516,31 +516,111 @@ This is separable.
 \end{proof}
 \sct{Linear ODE}
 Unless otherwise specified, the variables and functions are in $\mathbb{R}$.
-\ssc{Definition}
+\ssc{Basics}
+\sssc{Definition}
 An $n$th-order ODE of a dependent variable $y$ with respect to an independent variable $x$ is linear iff it can be written in the form
 \[\sum_{i=0}^np_i(x)y^{(i)}=q(x),\]
 where $p_0(x),\dots p_n(x)$, called the coefficients, and $q(x)$, called the forcing term, are functions of $x$, and $p_n(x)$ is nontrivial.
-
-An ODE is nonlinear if it is not linear.
-\ssc{Linearity}
+\sssc{Linearity}
 Let $L[y]=\sum_{i=0}^np_i(x)y^{(i)}$ denotes the left-hand side, then $L[\alpha y_1+\beta y_2]=\alpha L[y_1]+\beta L[y_2]$. That's why it's called to be linear.
-\ssc{Homogeneity}
-A linear ODE is called a linear homgeneous ODE iff the forcing term is 0 for all $x$; otherwise, it is called a linear nonhomogeneous ODE. The associated homogeneous equation of a nonhomogeneous equation is it with forcing term replaced with 0.
-\ssc{Superposition principle}
-If $y_1(x)$ and $y_2(x)$ are both solutions of a linear homgeneous ODE on an interval, then $c_1y_1(x)+c_2y_2(x)$ is also a solution of the ODE on the interval for any constants $c_1,c_2$.
-\ssc{Linear independence}
-$n$ functions of the same domain and codomain $y_1(x),y_2(x),\ldots y_n(x)$ are said to be linearly independent iff
-\[\sum_{i=1}^nc_iy_i(x)=0\implies\forall i\colon c_i=0.\]
-\ssc{Solutions of linear homogenous ODE as vector space}
-The general solutions of an $n$th-order linear homogenous ODE is a vector space of dimension $n$.
-\ssc{Basis of solutions of linear homogenous ODE}
-If $y_1(x),y_2(x),\ldots y_n(x)$ are $n$ linearly independent solutions of an $n$th-order linear homgeneous ODE on an interval, then they are a basis of the vector space of the general solutions of the ODE on the interval, and $\sum_{i=1}^nc_iy_i(x)$ is the family general solutions of the ODE on the interval with $n$ parameter $c_1,c_2,\ldots c_n$.
-\ssc{Complementary equation and particularly solution}
+\sssc{Homogeneity}
+A linear ODE is called a linear homgeneous ODE iff the forcing term is 0 for all $x$; otherwise, it is called a linear nonhomogeneous ODE.
+\sssc{Complementary or associated (homogeneous) equation, natural solution or homogeneous solution, and particularly solution}
 Given an $n$th-order linear nonhomogeneous ODE
 \[y^{(n)}+\sum_{i=0}^{n-1}p_i(x)y^{(i)}=q(x),\]
 the $n$th-order linear homogeneous ODE,
 \[y^{(n)}+\sum_{i=0}^{n-1}p_i(x)y^{(i)}=0,\]
-is called its complementary equation, and the general solutions of the original equation is the sum of the general solutions $y_c$ of the complementary equation, also called natural solution or homogeneous solution, and a particular solution $y_p$.
+is called its complementary or associated (homogeneous) equation, and the general solutions of the original equation is the sum of the general solutions $y_c$ of the complementary equation, called natural solution or homogeneous solution, and a particular solution $y_p$.
+\sssc{Superposition principle}
+If $y_1(x)$ and $y_2(x)$ are both solutions of a linear homgeneous ODE on an interval, then $c_1y_1(x)+c_2y_2(x)$ is also a solution of the ODE on the interval for any constants $c_1,c_2$.
+\sssc{Linear independence}
+$n$ functions of the same domain and codomain $y_1(x),y_2(x),\ldots y_n(x)$ are said to be linearly independent iff
+\[\sum_{i=1}^nc_iy_i(x)=0\implies\forall i\in[1,n]\cap\bbZ\colon c_i=0\]
+\sssc{Wrońskian or Wronskian}
+For $n$ functions $f_1,f_2,\ldots,f_n$ that are $(n-1)$ times differentiable on an interval $I$, the Wrońskian (also called Wronskian) of them, $W(f_1,f_2,\ldots,f_n)$, is a function on $I$ defined by
+\[W(f_1,f_2,\ldots,f_n)(x)=\begin{vmatrix}
+f_1(x) & f_2(x) & \cdots & f_n(x) \\
+f_1'(x) & f_2(x) & \cdots & f_n'(x) \\
+\vdots & \vdots & \ddots & \vdots \\
+f_1^{(n-1)}(x) & f_2^{(n-1)}(x) & \cdots & f_n^{(n-1)}(x)
+\end{vmatrix}.\]
+If $f_1,f_2,\ldots,f_n$ are not linearly independent, then $W=0$.
+\sssc{Abel's identity}
+For $n$ $(n-1)$ times differentiable solutions $y_1,y_2,\ldots,y_n$ of $y^{(n)}+\sum_{i=0}^{n-1}p_i(x)y^{(i)}=0$ on an interval $I$ where $p_i(x)$ are continuous for all $i\in[0,n-1]\cap\bbZ$, for any $x_0\in I$,
+\[W(y_1,y_2,\ldots,y_n)(x)=W(y_1,y_2,\ldots,y_n)(x_0)\exp(-\int_{x_0}^Xp_{n-1}(t)\dd{t}).\]
+\b
+Let $W$ denote $W(y_1,y_2,\ldots,y_n)$.
+\[w(x)=\begin{vmatrix}
+y_1(x) & y_2(x) & \cdots & y_n(x) \\
+y_1'(x) & y_2'(x) & \cdots & y_n'(x) \\
+\vdots & \vdots & \ddots & \vdots \\
+y_1^{(n-1)}(x) & y_2^{(n-1)}(x) & \cdots & y_n^{(n-1)}(x)
+\end{vmatrix}.\]
+\[\ba
+W'(x)&=\begin{vmatrix}
+y_1(x) & y_2(x) & \cdots & y_n(x) \\
+y_1'(x) & y_2'(x) & \cdots & y_n'(x) \\
+\vdots & \vdots & \ddots & \vdots \\
+y_1^{(n)}(x) & y_2^{(n)}(x) & \cdots & y_n^{(n)}(x)
+\end{vmatrix}\\
+&=\begin{vmatrix}
+y_1(x) & y_2(x) & \cdots & y_n(x) \\
+y_1'(x) & y_2'(x) & \cdots & y_n'(x) \\
+\vdots & \vdots & \ddots & \vdots \\
+y_1^{(n)}(x)+\sum_{i=0}^{n-2}p_i(x)y_1^{\pht{1}(i)} & y_2^{(n)}(x)+\sum_{i=0}^{n-2}p_i(x)y_2^{\pht{2}(i)} & \cdots & y_n^{(n)}(x)+\sum_{i=0}^{n-2}p_i(x)y_n^{\pht{n}(i)}
+\end{vmatrix}\\
+&=\begin{vmatrix}
+y_1(x) & y_2(x) & \cdots & y_n(x) \\
+y_1'(x) & y_2'(x) & \cdots & y_n'(x) \\
+\vdots & \vdots & \ddots & \vdots \\
+-p_{n-1}(x)y_1^{(n-1)}(x) & -p_{n-1}(x)y_2^{(n-1)}(x) & \cdots & -p_{n-1}(x)y_n^{(n-1)}(x)
+\end{vmatrix}\\
+&=-p_{n-1}(x)W(x)
+\ea\]
+Solve $W'(x)+p_{n-1}(x)W(x)$ using integrating factor $\exp(-\int_{x_0}^xp_{n-1}(t)\dd{t})$.
+\[W(x)=W(x_0)\exp(-\int_{x_0}^Xp_{n-1}(t)\dd{t}).\]
+\epr
+\sssc{Non-zero Wrońskian implies linear independence}
+For $n$ $(n-1)$ times differentiable functions $y_1,y_2,\ldots,y_n$ on an interval $I$, for any $x_0\in I$, $W(y_1,y_2,\ldots,y_n)(x_0)\ne 0$ implies $y_1,y_2,\ldots,y_n$ are linearly independent.
+\bpr
+Suppose
+\[\sum_{i=1}^nc_iy_i(x)=0\]
+Let
+\[\Omega=\begin{bmatrix}
+y_1(x_0) & y_2(x_0) & \cdots & y_n(x_0) \\
+y_1'(x_0) & y_2'(x_0) & \cdots & y_n'(x_0) \\
+\vdots & \vdots & \ddots & \vdots \\
+y_1^{(n-1)}(x_0) & y_2^{(n-1)}(x_0) & \cdots & y_n^{(n-1)}(x_0)
+\end{bmatrix}\]
+Differentiating $n-1$ times gives
+\[\Omega\begin{bmatrix}c_1\\c_2\\\vdots\\c_n\end{bmatrix}=\begin{bmatrix}0\\0\\\vdots\\0\end{bmatrix}\]
+Since $W(y_1,y_2,\ldots,y_n)(x_0)=\det(\Omega)\ne0$, $\Omega$ is invertible.
+\[\begin{bmatrix}c_1\\c_2\\\vdots\\c_n\end{bmatrix}=\Omega^{-1}\begin{bmatrix}0\\0\\\vdots\\0\end{bmatrix}=0\]
+\epr
+\sssc{Non-zero Wrońskian of solutions of linear homogeneous equation iff linear independence of them}
+For $n$ $(n-1)$ times differentiable solutions $y_1,y_2,\ldots,y_n$ of $y^{(n)}+\sum_{i=0}^{n-1}p_i(x)y^{(i)}=0$ on an interval $I$ where $p_i(x)$ are continuous for all $i\in[0,n-1]\cap\bbZ$, for any $x_0\in I$, $W(y_1,y_2,\ldots,y_n)(x_0)\ne 0$ iff $y_1,y_2,\ldots,y_n$ are linearly independent.
+\bpr
+Abel's identiity shows that
+\[W(y_1,y_2,\ldots,y_n)(x)=W(y_1,y_2,\ldots,y_n)(x_0)\exp(-\int_{x_0}^Xp_{n-1}(t)\dd{t}).\]
+$\exp(-\int_{x_0}^Xp_{n-1}(t)\dd{t})$ is always non-zero. Thus $W(y_1,y_2,\ldots,y_n)(x)$ is either zero for all $x\in I$ or non-zero for all $x\in I$.
+
+If $y_1,y_2,\ldots,y_n$ are linearly dependent, there exists $\begin{bmatrix}c_1\\c_2\\\vdots\\c_n\end{bmatrix}\ne\begin{bmatrix}0\\0\\\vdots\\0\end{bmatrix}$ such that
+\[\sum_{i=1}^nc_iy_i(x)=0\]
+For any fixed $x_0\in I$, let
+\[\Omega=\begin{bmatrix}
+y_1(x_0) & y_2(x_0) & \cdots & y_n(x_0) \\
+y_1'(x_0) & y_2'(x_0) & \cdots & y_n'(x_0) \\
+\vdots & \vdots & \ddots & \vdots \\
+y_1^{(n-1)}(x_0) & y_2^{(n-1)}(x_0) & \cdots & y_n^{(n-1)}(x_0)
+\end{bmatrix}\]
+Differentiating $n-1$ times gives
+\[\Omega\begin{bmatrix}c_1\\c_2\\\vdots\\c_n\end{bmatrix}=\begin{bmatrix}0\\0\\\vdots\\0\end{bmatrix}\]
+Prove by contradiction. If $\det(\Omega)=0$, by Cramer formula, $c_1\\c_2\\\vdots\\c_n\end{bmatrix}=\begin{bmatrix}0\\0\\\vdots\\0\end{bmatrix}$.
+\epr
+\sssc{Solutions of linear homogenous ODE as vector space}
+The general solutions of an $n$th-order linear homogenous ODE is a vector space of dimension $n$.
+\sssc{Basis of solutions of linear homogenous ODE}
+If $y_1(x),y_2(x),\ldots y_n(x)$ are $n$ linearly independent solutions of an $n$th-order linear homgeneous ODE on an interval, then they are a basis of the vector space of the general solutions of the ODE on the interval, and $\sum_{i=1}^nc_iy_i(x)$ is the family general solutions of the ODE on the interval with $n$ parameter $c_1,c_2,\ldots c_n$.
 \ssc{Solutions of linear nonhomogenous ODE as affine space}
 The general solutions of a linear nonhomogenous ODE is an affine space whose associated vector space is the general solutions of its complementary equation.
 \ssc{Characteristic equation or auxiliary equation for constant coefficient linear homogeneous ODE}
@@ -633,15 +713,6 @@ and the general solutions of the origin ODE is
 \sssc{Example: Forced oscillation and resonance}
 PLACEHOLDER
 \ssc{Formation of solutions of linear nonhomogeneous equation}
-\sssc{Wrońskian or Wronskian}
-For $n$ functions $f_1,f_2,\ldots,f_n$ that are $(n-1)$ times differentiable on an interval $I$, the Wrońskian (also called Wronskian) of them, $W(f_1,f_2,\ldots,f_n)$, is a function on $I$ defined by
-\[W(f_1,f_2,\ldots,f_n)(x)=\begin{vmatrix}
-f_1(x) & f_2(x) & \cdots & f_n(x) \\
-f_1'(x) & f_2(x) & \cdots & f_n'(x) \\
-\vdots & \vdots & \ddots & \vdots \\
-f_1^{(n-1)}(x) & f_2^{(n-1)}(x) & \cdots & f_n^{(n-1)}(x)
-\end{vmatrix}.\]
-If $f_1,f_2,\ldots,f_n$ are not linearly independent, then $W=0$.
 \sssc{Second-order Abel's (differential equation) identity/formula}
 A second-order linear homogeneous ODE
 \[y''+p(x)y'+q(x)y=0\]
@@ -1160,11 +1231,6 @@ and
 where $K$ is called band-pass gain. The filter is called prototype or canonical if $K=1$.
 \sssc{Pole–zero plot or pole–zero constellation}
 A pole–zero plot or pole–zero constellation is a graphical representation showing poles and zeros of a transfer function in the complex plane.
-
-
-
-\end{document}
- complex plane.
 
 
 
