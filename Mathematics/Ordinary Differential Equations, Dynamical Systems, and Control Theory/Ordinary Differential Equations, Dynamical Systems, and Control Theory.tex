@@ -521,6 +521,8 @@ Unless otherwise specified, the variables and functions are in $\mathbb{R}$.
 An $n$th-order ODE of a dependent variable $y$ with respect to an independent variable $x$ is linear iff it can be written in the form
 \[\sum_{i=0}^np_i(x)y^{(i)}=q(x),\]
 where $p_0(x),\dots p_n(x)$, called the coefficients, and $q(x)$, called the forcing term, are functions of $x$, and $p_n(x)$ is nontrivial.
+\sssc{Linear differential operator}
+A linear differential operator is a polynomial of the differential operators $D$, i.e., $\dv{}{x}$.
 \sssc{Linearity}
 Let $L[y]=\sum_{i=0}^np_i(x)y^{(i)}$ denotes the left-hand side, then $L[\alpha y_1+\beta y_2]=\alpha L[y_1]+\beta L[y_2]$. That's why it's called to be linear.
 \sssc{Homogeneity}
@@ -623,6 +625,8 @@ The general solutions of an $n$th-order linear homogenous ODE is a vector space 
 If $y_1(x),y_2(x),\ldots y_n(x)$ are $n$ linearly independent solutions of an $n$th-order linear homgeneous ODE on an interval, then they are a basis of the vector space of the general solutions of the ODE on the interval, and $\sum_{i=1}^nc_iy_i(x)$ is the family of general solutions of the ODE on the interval with $n$ parameter $c_1,c_2,\ldots c_n$.
 \sssc{Solutions of linear nonhomogenous ODE as affine space}
 The general solutions of a linear nonhomogenous ODE is an affine space whose associated vector space is the vector space of the solutions of its complementary equation.
+\sssc{Annihilator}
+An annihilator of a function $f$ is a linear differential operator $L$ such that $L(f)=0$.
 \ssc{Characteristic equation or auxiliary equation for constant coefficient linear homogeneous ODE}
 \sssc{Method}
 Consider an $n$th-order constant coefficient linear homogeneous ODE
@@ -710,6 +714,44 @@ with constants $C_{jk},D_{jk}\in\bbR$.
 and the general solutions of the origin ODE is
 \[y=y_c+y_p.\]
 \een
+\sssc{Annihilator approach}
+Consider an $n$th-order constant coefficient linear nonhomogeneous ODE
+\[\sum_{j=0}^na_jy^{(j)}=g(x),\quad a_n\neq 0,\]
+with $g(x)$ being able to be written in the form
+\[g(x)=\sum_{j=1}^pk_jx^{m_j}e^{\alpha_jx}+\sum_{j=p+1}^{p+q}x^{m_j}e^{\alpha_jx}\qty(k_j\cos(\beta_jx)+l_j\sin(\beta_jx)),\]
+for some constants $p,q,m_j\in\bbN_0$ and $\alpha_j,\beta_j,k_j,l_j\in\bbR$.
+
+The formation of its general solutions using the method of undetermined coefficients is as follows:
+\ben
+\item For each term, an annihilator is listed:
+\bit
+\item $x^me^{\alpla x}$: $(D-\alpha)^{m+1}$
+\bpr
+Prove by Laplace transform.
+\[\mathcal{L}\{x^me^{\alpla x}\}=\frac{m!}{(s-\alpha)^{m+1}}\]
+\[\mathcal{L}^{-1}\{m!\}=0\]
+\epr
+\item $x^me^{\alpla x}\qty(k\cos(\beta x)+l\sin(\beta x))$: $(D^2-2\alpha D+\alpha^2+\beta^2)^{m+1}$
+\bpr
+Prove by Laplace transform.
+\[\ba
+\mathcal{L}\{x^me^{\alpla x}\qty(k\cos(\beta x)+l\sin(\beta x))\}&=\mathcal{L}\{x^me^{\alpla x}\qty((k+l)e^{i\beta x}-(k-l)ie^{-i\beta x})\}\\
+&=(k+l)\mathcal{L}\{x^me^{\alpla x+i\beta x}\}-(k-l)i\mathcal{L}\{x^me^{\alpla x-i\beta x}\}\\
+&=\frac{(k+l)m!}{(s-\alpha-i\beta)^{m+1}}-\frac{(k-l)im!}{(s-\alpha+i\beta)^{m+1}}\\
+&=\frac{(k+l)m!(s-\alpha+i\beta)^{m+1}-(k-l)im!(s-\alpha-i\beta)^{m+1}}{(s-\alpha-i\beta)^{m+1}(s-\alpha+i\beta)^{m+1}}\\
+&=\frac{(k+l)m!(s-\alpha+i\beta)^{m+1}-(k-l)im!(s-\alpha-i\beta)^{m+1}}{(s^2-2\alpha+\alpha^2+\beta^2)^{m+1}}
+\ea\]
+\[\mathcal{L}^{-1}\{(k+l)m!(s-\alpha+i\beta)^{m+1}-(k-l)im!(s-\alpha-i\beta)^{m+1}\}=0\]
+\epr
+\eit
+
+PLACEHOLDER
+\een
+
+
+
+
+
 \sssc{Example: Forced oscillation and resonance}
 PLACEHOLDER
 \ssc{Formation of solutions of linear nonhomogeneous equation}
