@@ -525,7 +525,7 @@ An ODE is nonlinear if it is not linear.
 \ssc{Linearity}
 Let $L[y]=\sum_{i=0}^np_i(x)y^{(i)}$ denotes the left-hand side, then $L[\alpha y_1+\beta y_2]=\alpha L[y_1]+\beta L[y_2]$. That's why it's called to be linear.
 \ssc{Homogeneity}
-A linear ODE is called a linear homgeneous ODE iff the forcing term is 0 for all $x$; otherwise, it is called a linear nonhomogeneous ODE.
+A linear ODE is called a linear homgeneous ODE iff the forcing term is 0 for all $x$; otherwise, it is called a linear nonhomogeneous ODE. The associated homogeneous equation of a nonhomogeneous equation is it with forcing term replaced with 0.
 \ssc{Superposition principle}
 If $y_1(x)$ and $y_2(x)$ are both solutions of a linear homgeneous ODE on an interval, then $c_1y_1(x)+c_2y_2(x)$ is also a solution of the ODE on the interval for any constants $c_1,c_2$.
 \ssc{Linear independence}
@@ -973,7 +973,7 @@ Laplace transform both sides, solve the polynomial equation to get the function 
 PLACEHOLDER
 : below waiting for change to "Ordinary Differential Equations and Dynamical Systems" version.
 : above things e.g. solutions as vector space etc. mb need conditions or assumptions of existence and/or uniqueness.
-\ssc{Existence of Solution}
+\ssc{Existence and Uniqueness of Solution}
 \sssc{Peano existence theorem (皮亞諾存在性定理), Peano theorem (皮亞諾定理), or Cauchy–Peano theorem (柯西-皮亞諾定理)}
 Let $D$ be an open subset of $\mathbb{R}\times\mathbb{R}^n$ and $f\colon D\to \mathbb {R}$ be a continuous function, then every initial value problem given by explicit first-order ODE $y'(t)=f\left(t,y(t)\right)$ defined on $D$ and initial condition $y\left(t_{0}\right)=y_{0}$ with $(t_{0},y_{0})\in D$ has a local solution $z\colon I\to \mathbb {R}^n$ where $I$ is a neighbourhood of $t_0$ in $\mathbb {R} $.
 \sssc{Carathéodory's existence theorem}
@@ -994,13 +994,17 @@ Let $I$ be an open interval of $\mathbb{R}$ and $f(t,y)\colon I\times\mathbb{R}^
 \item such that there is a Lebesgue-integrable function $m\colon I\to [0,\infty )$ such that $|f(t,y)|\leq m(t)$ for all $(t,y)\in I\times\mathbb{R}^n$,
 \end{itemize}
 then every initial value problem given by explicit first-order ODE $y'(t)=f\left(t,y(t)\right)$ defined on $I\times\mathbb{R}^n$ and initial condition $y\left(t_{0}\right)=y_{0}$ with $(t_{0},y_{0})\in I\times\mathbb{R}^n$ has a local solution $z\colon I\to \mathbb {R}^n$ where $I$ is a neighbourhood of $t_0$ in $\mathbb{R}$.
-\ssc{Uniqueness of Solution}
 \sssc{Picard–Lindelöf theorem (皮卡-林德勒夫定理) or Cauchy–Lipschitz theorem (柯西-利普希茨定理) local version}
 Let
 \[D=\{(t,y)\mid|t-T|\leq a\land\forall\tx{\ integer\ }1\leq i\leq n\colon |y_i-Y_i|\leq b_i\}\]
-be a rectangle in $\mathbb{R}\times\mathbb{R}^n$ where $t,T\in\mathbb{R}$, $y=(y_1, y_2,\dots  y_n)\in\mathbb{R}^n$, $Y=(Y_1, Y_2,\dots  Y_n)\in\mathbb{R}^n$, and constant $a,b_i\in\mathbb{R}_{>0}$, and $f(t,y)\colon D\to \mathbb {R}$ be a function that is continuous in $t$ andi locally Lipschitz on $D$ in all $y_i$, then every initial value problem given by explicit first-order ODE $y'(t)=f\left(t,y(t)\right)$ defined on $D$ and initial condition $y\left(t_{0}\right)=y_{0}$ with $(t_{0},y_{0})\in D$ has a unique local solution $z\colon I\to \mathbb {R}^n$ where $I$ is a neighbourhood of $t_0$ in $\mathbb {R} $, that is, let $I_1,I_2$ be two neighbourhoods of $t_0$ in $\mathbb{R}$ and $z_i\colon I_i\to\mathbb{R}^n$ for $i\in\{1,2\}$ be two differentiable functions such that $z_i'(t)=f\left(t,z_i(t)\right)$ for all $t\in I_i$, for $i\in\{1,2\}$, then $\exists t_0\in I_1\cap I_2\text{\ s.t.\ }z_1(t_0)=z_2(t_0)\implies\forall t\in I_1\cap I_2\colon z_1(t)=z_2(t)$.
+be a rectangle in $\mathbb{R}\times\mathbb{R}^n$ where $t,T\in\mathbb{R}$, $y=(y_1, y_2,\dots  y_n)\in\mathbb{R}^n$, $Y=(Y_1, Y_2,\dots  Y_n)\in\mathbb{R}^n$, and constant $a,b_i\in\mathbb{R}_{>0}$, and $f(t,y)\colon D\to \mathbb {R}$ be a function that is continuous in $t$ and locally Lipschitz on $D$ in all $y_i$, then every initial value problem given by explicit first-order ODE $y'(t)=f\left(t,y(t)\right)$ defined on $D$ and initial condition $y\left(t_{0}\right)=y_{0}$ with $(t_{0},y_{0})\in D$ has a unique local solution $z\colon I\to \mathbb {R}^n$ where $I$ is a neighbourhood of $t_0$ in $\mathbb {R} $, that is, let $I_1,I_2$ be two neighbourhoods of $t_0$ in $\mathbb{R}$ and $z_i\colon I_i\to\mathbb{R}^n$ for $i\in\{1,2\}$ be two differentiable functions such that $z_i'(t)=f\left(t,z_i(t)\right)$ for all $t\in I_i$, for $i\in\{1,2\}$, then $\exists t_0\in I_1\cap I_2\text{\ s.t.\ }z_1(t_0)=z_2(t_0)\implies\forall t\in I_1\cap I_2\colon z_1(t)=z_2(t)$.
 
 Let $I$ be an open interval of $\mathbb{R}$ and $f(t,y)\colon I\times\mathbb{R}^n\to\mathbb{R}$ where $t\in\mathbb{R}$, $y=(y_1, y_2,\dots  y_n)\in\mathbb{R}^n$ be a function that is continuous in $t$ and locally Lipschitz in all $y_i$, then every initial value problem given by explicit first-order ODE $y'(t)=f\left(t,y(t)\right)$ defined on $I\times\mathbb{R}^n$ and initial condition $y\left(t_{0}\right)=y_{0}$ with $(t_{0},y_{0})\in I\times\mathbb{R}^n$ has a unique solution $z\colon I\to\mathbb {R}^n$, that is, let $I_1,I_2\subseteq\mathbb{R}$ and $z_i\colon I_i\to\mathbb{R}^n$ for $i\in\{1,2\}$ be two differentiable functions such that $z_i'(t)=f\left(t,z_i(t)\right)$ for all $t\in I_i$, for $i\in\{1,2\}$, then $\exists t_0\in I_1\cap I_2\text{\ s.t.\ }z_1(t_0)=z_2(t_0)\implies\forall t\in I_1\cap I_2\colon z_1(t)=z_2(t)$.
+\sssc{Existence of a unique solution of linear ODE}
+Let $n\in\bbZ$, $a_i(x)$ for all $i\in[0,n]\cap\bbZ$ and $g(x)$ be continuous on an interval $I$, $a_n(x)\ne0$ on $I$, and $x_0\in I$. Then the IVP of
+\[\sum_{i=0}^na_i(x)\dv[i](y)(x)=g(x)\]
+subjected to $y^{(i)}(x_0)=y_i$ for all $i\in[0,n-1]\cap\bbZ$ has a solution $y(x)$ on $I$ and the solution is unique.
+PLACEHOLDER: BVP can have many, one, or no solution
 PLACEHOLDER: end
 \sct{Dynamical system (動態系統 or 動力系統)}
 \ssc{Dynamical system (DS)}
