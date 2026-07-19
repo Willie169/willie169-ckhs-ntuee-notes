@@ -756,21 +756,21 @@ PLACEHOLDER
 \sssc{Method of solution}
 Given an $n$th-order linear nonhomogeneous ODE
 \[y^{(n)}+\sum_{i=0}^{n-1}p_i(x)y^{(i)}=q(x),\]
-let $y_1(x),y_2(x),\ldots,y_n(x)$ be a basis of the vector space of the solutions of the complementary equation,
+where $p_i(x)$ for all $i\in [0,n-1]\cap\bbZ$ are continuous on An interval $I$.
+\ben
+\item Let $y_1(x),y_2(x),\ldots,y_n(x)$ be a basis of the vector space of the solutions of the complementary equation,
 \[y^{(n)}+\sum_{i=0}^{n-1}p_i(x)y^{(i)}=0.\]
-The particular solution $y_p$ such that the general solutions are $y=y_c+y_p$ of the original ODE (or general solutions $y$ with the integral constants treated as parameters of the family) is given by:
-\[\sum_{i=1}^ny_i(x)\int\frac{W_i(x)}{W(x)}\dd{x},\]
+\item The particular solution $y_p$ is given by:
+\[y_p=\sum_{i=1}^ny_i(x)\int_{x_0}^x\frac{W_i(t)}{W(t)}\dd{t},\]
 where
 \bit
+\item $x_0$ is an arbitraty point in $I$,
 \item $W(x)$ is the Wrońskian of $y_1(x),y_2(x),\ldots,y_n(x)$,
 \item $W_i(x)$ is the Wrońskian of $W(x)$ but with the $i$th column replaced by $(0,0,\ldots,0,q(x))$.
 \eit
-For second-order equation
-\[y''+p_1(x)y'+p_0(x)y=q(x),\]
-let $y_1(x),y_2(x)$ be two linearly independent solutions of its complementary equation
-\[y''+p_1(x)y'+p_0(x)y=0,\]
-the particular solution (or family of general solutions with the integral constants being parameters) is given by
-\[y_p(x)=-y_1(x)\int\frac{y_2(x)q(x)}{y_1(x)y_2'(x)-y_2(x)y_1'(x)}\dd{x}+y_2(x)\int\frac{y_1(x)q(x)}{y_1(x)y_2'(x)-y_2(x)y_1'(x)}\dd{x}.\]
+\item The general solutions are given by
+\[y=y_c+y_p.\]
+\een
 \begin{proof}
 The particular solution is given by
 \[y_p=\sum_{i=1}^nc_i(x)y_i(x),\]
@@ -797,6 +797,18 @@ for all $j\in\bbN_0\land j\leq n-2$, and
 By Cramer Rule, we have
 \[c_i'(x)=\frac{W_i(x)}{W(x)},\quad i\in\bbN\land i\leq n.\]
 \end{proof}
+\sssc{For second-order equation, Green's function}
+For second-order equation
+\[y''+p_1(x)y'+p_0(x)y=q(x).\]
+Let $y_1(x),y_2(x)$ be two linearly independent solutions of its complementary equation
+\[y''+p_1(x)y'+p_0(x)y=0.\]
+The particular solution (or family of general solutions with the integral constants being parameters) is given by
+\[y_p(x)=-y_1(x)\int_{x_0}^x\frac{y_2(t)q(t)}{y_1(t)y_2'(t)-y_2(t)y_1'(t)}\dd{t}+y_2(x)\int_{x_0}^x\frac{y_1(t)q(t)}{y_1(t)y_2'(t)-y_2(t)y_1'(t)}\dd{t}.\]
+This can be written as
+\[y_p(x)=\int_{x_0}^xG(x,t)q(t)\dd{t},\]
+where
+\[G(x,t)=\frac{y_1(t)y_2(x)-y_1(x)y_2(t)}{y_1(t)y_2'(t)-y_2(t)y_1'(t)}\]
+and is called the Green's function for the ODE and the linear differential operator $D^2+p_1(x)D+p_0(x)$.
 \ssc{Reduction of order}
 \sssc{Method}
 Given an $n$th-order linear homogeneous ODE
@@ -851,13 +863,16 @@ The formation of its general solutions using the characteristic equation (also c
 with parameters $A_{ju},B_{ju},C_{ju}$.
 \item Then, we use variation of parameters. Let $y_1(x),y_2(x),\ldots,y_n(x)$ be a basis of the vector space of $y_c$.
 
-The particular solution $y_p$ such that the general solutions are $y=y_c+y_p$ of the original ODE (or general solutions $y$ with the integral constants treated as parameters of the family) is given by:
-\[\sum_{i=1}^ny_i(x)\int\frac{W_i(x)}{W(x)}\dd{x},\]
+The particular solution $y_p$ is given by:
+\[y_p=\sum_{i=1}^ny_i(x)\int_{x_0}^x\frac{W_i(t)}{W(t)}\dd{t},\]
 where
 \bit
+\item $x_0$ is an arbitraty point in the interval of interest,
 \item $W(x)$ is the Wrońskian of $y_1(x),y_2(x),\ldots,y_n(x)$,
 \item $W_i(x)$ is the Wrońskian of $W(x)$ but with the $i$th column replaced by $(0,0,\ldots,0,g(x))$.
 \eit
+\item The general solutions are given by
+\[y=y_c+y_p.\]
 \een
 \ssc{Power series solutions and Frobenius method for second-order linear homogenous ODE}
 \sssc{Power series solutions}
