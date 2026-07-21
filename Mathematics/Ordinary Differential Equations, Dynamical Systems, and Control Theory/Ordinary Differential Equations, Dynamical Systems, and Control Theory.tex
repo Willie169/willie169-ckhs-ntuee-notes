@@ -875,15 +875,17 @@ where
 \[y=y_c+y_p.\]
 \een
 \ssc{Power series solutions and Frobenius method for second-order linear homogenous ODE}
-\sssc{Ordinary and Singular Points}
+\sssc{Type of Points}
 Consider a second-order linear homogenous ODE
 \[f(x)y''+g(x)y'+h(x)y=0\]
 where $f,g,h$ are continuous on interval $I$.
 
 Let
 \[p(x)=\frac{g(x)}{f(x)},\quad q(x)=\frac{h(x)}{f(x)}.\]
-For any $a\in I$, $a$ is called an ordinary point iff $p$ and $q$ are both analytic at $a$ and called a singular point otherwise.
-\sssc{Power series solutions}
+For any $a\in I$, it is called an ordinary point iff $p(x)$ and $q(x)$ are both analytic at $a$ and called a singular point otherwise.
+
+For a singular point $a$, it is called a regular singular point iff $(x-a)p(x)$ and $(x-a)^2q(x)$ are both analytic at $a$ and called an irregular singular point otherwise.
+\sssc{Power series solution or solution about ordinary points}
 Consider a second-order linear homogenous ODE
 \[f(x)y''+g(x)y'+h(x)y=0\]
 where $f,g,h$ are continuous on interval $I$.
@@ -891,56 +893,62 @@ where $f,g,h$ are continuous on interval $I$.
 Let
 \[p(x)=\frac{g(x)}{f(x)},\quad q(x)=\frac{h(x)}{f(x)}.\]
 \ben
-\item We seek a solution in the form:
+\item We seek a power series solution of
+\[y''+p(x)y'+q(x)y=0\]
+in the form:
 \[y=\sum_{n=0}^{\infty}a_n(x-x_0)^n,\]
-where $x_0$ is a fixed point called expansion point and $a_n$ are constants to be determined, called power series.
+where $x_0$ is a fixed ordinary point called expansion point and $a_n$ are constants to be determined. There are always two linearly independent solutions of this form.
 \item Differentiate the series term by term:
 \[y'=\sum_{n=0}^{\infty}a_nn(x-x_0)^{n-1}=\sum_{n=0}^{\infty}a_{n+1}(n+1)(x-x_0)^n,\]
 \[y''=\sum_{n=0}^{\infty}a_nn(n-1)(x-x_0)^{n-2}=\sum_{n=0}^{\infty}a_{n+2}(n+2)(n+1)(x-x_0)^n.\]
 \item Substitute into the ODE, rewrite $p(x)$ and $q(x)$ into Taylor expansion at $x_0$, rewrite the infinite series products (if any) into Cauchy products, and rewrite the LHS as a power series in $x^n$.
 \item Solve for the recurrence relation of $a_n$. We may set $a_0$ as any nonzero constant, typically 1.
-\item The two-parameter family of general solutions for all $0<|x-x_0|<R$ where $R$ is the distance between $x_0$ and the nearest to $x_0$ singular point of $p(x)$ or $q(x)$ with parameters $a_0,a_1$ is:
+\item The two-parameter family of general solutions for all $0<|x-x_0|<R$ where $R$ is the distance between $x_0$ and the nearest singular point with parameters $a_0,a_1$ is:
 \[y=\sum_{n=0}^{\infty}a_n(x-x_0)^n.\]
 \een
-\sssc{Frobenius method}
+\bpr
+PLACEHOLDER
+\epr
+\sssc{Frobenius method or solution about singular points}
 Consider a second-order linear homogenous ODE
 \[f(x)y''+g(x)y'+h(x)y=0.\]
 Let
 \[p(x)=\frac{g(x)}{f(x)},\quad q(x)=\frac{h(x)}{f(x)}.\]
-For any $x_0$ in the intersection of the domain of $p$ and the domain of $q$, $x_0$ is called a regular singular point iff it is not an ordinary point and $(x-x_0)p(x)$ and $(x-x_0)^2q(x)$ are both analytic at $a$.
 \ben
-\item The Frobenius method seeks a solution in the form:
+\item We seek a solution, called Frobenius series, of
+\[(x-x_0)^2y''+(x-x_0)r(x)y'+s(x)y=0\]
+in the form:
 \[y=\sum_{n=0}^{\infty}a_n(x-x_0)^{n+r},\quad a_0\neq 0,\]
-where $x_0$ is called expansion point and $a_n$ are constants to be determined, called Frobenius series.
+where $x_0$ is a fixed regular singular point called expansion point, $r(x)=(x-x_0)p(x)$ and $s(x)=(x-x_0)^2q(x)$ are analytic at $x_0$, and $a_n$ are constants to be determined.
 \item Differentiate the series term by term:
 \[y'=\sum_{n=0}^{\infty}a_n(n+r)(x-x_0)^{n+r-1},\]
 \[y''=\sum_{n=0}^{\infty}a_n(n+r)(n+r-1)(x-x_0)^{n+r-2}.\]
-\item Substitute into $(x-x_0)^2y''$, $(x-x_0)^2p(x)y'$, and $(x-x_0)^2q(x)y$ respectively, rewrite $(x-x_0)^2p(x)$ and $(x-x_0)^2q(x)$ into Taylor expansion at $x_0$, rewrite the infinite series products (if any) into Cauchy products, and let the sum of all terms involving $a_0$ of the three be $L$.
+\item Substitute into the ODE, rewrite $(x-x_0)r(x)$ and $s(x)$ into Taylor expansion at $x_0$, rewrite the infinite series products (if any) into Cauchy products, and let the sum of all terms involving $a_0$ of the three be $L$.
 \item The indicial polynomial $I(r)$ is defined as the coefficient of the lowest power term of $L$, and the indicial equation is defined as
 \[I(r)=0,\]
 which is a quadratic equation for $r$.
-network.trr.mode\item Solve the indicial equation for $r$. Let the roots be $r_1\geq r_2$.
-\item Depending on the relation of $r_1$ and $r_2$:
+\item Solve the indicial equation for $r$. Let the roots be $r_1\geq r_2$.
+\item Let $R$ be the distance between $x_0$ and the nearest regular singular point. Depending on the relation of $r_1$ and $r_2$:
 \bit
-\item Case $r_1-r_2\notin\bbZ\land r_1,r_2\in\bbR$: Two linearly independent solutions for all $0<|x-x_0|<R$ where $R$ is the distance between $x_0$ and the nearest to $x_0$ regular singular point of $(x-x_0)p(x)$ or $(x-x_0)^2q(x)$ are:
+\item Case $r_1-r_2\notin\bbZ\land r_1,r_2\in\bbR$: Two linearly independent solutions for all $0<|x-x_0|<R$ are:
 \[y_1(x)=(x-x_0)^{r_1}\sum_{n=0}^{\infty}A_n(x-x_0)^n,\quad A_0\neq 0\land A_n\in\bbR,\]
 \[y_2(x)=(x-x_0)^{r_2}\sum_{n=0}^{\infty}B_n(x-x_0)^n,\quad B_0\neq 0\land B_n\in\bbR.\]
-\item Case $r_1,r_2$ are conjugate imaginary roots: Let $r_1,r_2=\alpha\pm\beta i$. Two linearly independent solutions for all $0<|x-x_0|<R$ where $R$ is the distance between $x_0$ and the nearest to $x_0$ regular singular point of $(x-x_0)p(x)$ or $(x-x_0)^2q(x)$ are:
+\item Case $r_1,r_2=\alpha\pm\beta i,\quad\beta\ne0$: Two linearly independent solutions for all $0<|x-x_0|<R$ are:
 \[y_1(x)=(x-x_0)^{\alpha}\cos(\beta\ln|x-x_0|)\sum_{n=0}^{\infty}A_n(x-x_0)^n,\quad A_0\neq 0\land A_n\in\bbR,\]
 \[y_2(x)=(x-x_0)^{\alpha}\sin(\beta\ln|x-x_0|)\sum_{n=0}^{\infty}B_n(x-x_0)^n,\quad B_0\neq 0\land B_n\in\bbR.\]
-\item Case $r_1-r_2\in\bbN_0$: Two solutions for all $0<|x-x_0|<R$ where $R$ is the distance between $x_0$ and the nearest to $x_0$ regular singular point of $(x-x_0)p(x)$ or $(x-x_0)^2q(x)$ are:
+\item Case $r_1-r_2\in\bbN_0$: Two solutions for all $0<|x-x_0|<R$ are:
 \[y_1(x)=(x-x_0)^{r_1}\sum_{n=0}^{\infty}A_n(x-x_0)^n,\quad A_0\neq 0\land A_n\in\bbR,\]
 \[y_2(x)=(x-x_0)^{r_2}\sum_{n=0}^{\infty}B_n(x-x_0)^n,\quad B_0\neq 0\land B_n\in\bbR.\]
-If they both exist and are linearly independent, no modification is needed; otherwise, $y_2$ is modified to
+If they are linearly independent, no modification is needed; otherwise, $y_2$ is modified to
 \[y_2(x)=\ln|x-x_0|y_1(x)+(x-x_0)^{r_2}\sum_{n=0}^{\infty}B_n(x-x_0)^n,\quad B_0\neq 0\land B_n\in\bbR.\]
 \eit 
-\item Substitute $y_1,y_1',y_1''$ and $y_2,y_2',y_2''$ into the ODE respectively, rewrite $p(x)$ and $q(x)$ into Taylor expansion at $x_0$, rewrite the products into Cauchy products, and rewrite LHSs as power series in $x^n$.
+\item Substitute into the ODE, rewrite $(x-x_0)r(x)$ and $s(x)$ into Taylor expansion at $x_0$, rewrite the infinite series products (if any) into Cauchy products, and rewrite the LHS as a power series in $x^n$.
 \item Solve for the recurrence relations of $A_n$ and $B_n$.
 \bit
-\item Case $r_1-r_2\notin\bbZ\land r_1,r_2\in\bbR$ and Case $r_1,r_2$ are conjugate imaginary roots: We may set $A_0$ and $B_0$ as any nonzero constants (typically 1).
-\item Case $r_1-r_2\in\bbN_0$: The terms multiplied by $\ln|x-x_0|$ in the substitution of $y_2(x)$ yield the same recurrence relation for $A_n$ as that obtained from the substitution of $y_1(x)$, and therefore need not be solved again. We may set $A_0$ as any nonzero constant (typically 1). The lowest-two-order equations in the substitution of $y_2(x)$ may determine $B_0$ and/or $B_1$, or relation of $B_0$ and $B_1$. If one of them remains free after applying this constraint, it may be chosen arbitrarily except that $B_0\neq 0$, with the remaining determined uniquely by the recurrence relation.
+\item Case $(r_1-r_2\notin\bbZ\land r_1,r_2\in\bbR)\lor (r_1,r_2=\alpha\pm\beta i,\quad\beta\ne0)$: We may set $A_0$ and $B_0$ as any nonzero constants (typically 1).
+\item Case $r_1-r_2\in\bbN_0$: The terms multiplied by $\ln|x-x_0|$ in the substitution of $y_2(x)$ yield the same recurrence relation for $A_n$ as that obtained from the substitution of $y_1(x)$, and therefore need not be solved again. We may set $A_0$ as any nonzero constant (typically 1). The lowest two-order equations in the substitution of $y_2(x)$ may determine $B_0$ and/or $B_1$, or relation of $B_0$ and $B_1$. If one of them remains free after applying the constraint, it may be chosen arbitrarily with the constraint that $B_0$ can't be 0, and the remaining can be determined uniquely by the recurrence relation.
 \eit
-\item The two-parameter family of general solutions for all $0<|x-x_0|<R$ where $R$ is the distance between $x_0$ and the nearest to $x_0$ regular singular point of $(x-x_0)p(x)$ or $(x-x_0)^2q(x)$ is:
+\item The two-parameter family of general solutions for all $0<|x-x_0|<R$ is:
 \[y=C_1y_1(x)+C_2y_2(x),\quad C_1,C_2\in\bbR.\]
 \een
 \begin{proof}
