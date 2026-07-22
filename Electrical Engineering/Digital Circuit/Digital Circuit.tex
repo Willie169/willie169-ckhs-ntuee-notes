@@ -1885,7 +1885,7 @@ Bit heap is the heap of partial products one partial product per row, where each
 
 A full adder can reduce 3 bits of the same column to one bit of the same column and one bit of the next column. A half adder can reduce 2 bits of the same column to one bit of the same column and one bit of the next column.
 \sssc{Shift-add multiplier}
-Use a shifter and an accumulator to sum each partial product one by one, trading of speed for area.
+Use a shifter and an accumulator to sum each partial product one by one, trading off speed for area.
 \sssc{Array multiplier}
 Sum partial products with carry-save adder until the number of operands left is two, and use an adder to sum the two. The number of stage is $O(n)$.
 \sssc{Wallace (tree/reduction) multiplier}
@@ -1921,5 +1921,45 @@ The $2^z$ multiples of $A$ for $z\in\bbN$ can be computed by shifting $A$ $z$ bi
 If only $n$ bits is needed, we can simply discard upper bits from partial products.
 
 Now consider unsigned $A,B$. The result is the result of two's complement plus $A*B_{n-1}*2^n$, which can be computed by adding it as another partial product, or, if only $n$ bits is needed, be ignored since it's in the overflowing bits.
+\ssc{Divider}
+\sssc{General}
+Division of two unsigned binary number, dividend $N=N_{n-1}N_{n-2}\ldots N_0$ and divisor $D=D_{n-1}D_{n-2}\ldots D_0$, gives two unsigned binary number, quotient $Q=Q_{n-1}Q_{n-2}\ldots Q_0$ and remainder $R=R_{n-1}R_{n-2}\ldots R_0$ such that
+\[N=D*Q+R\]
+and
+\[0\le R\le D.\]
+\sssc{Restoring Divider}
+Three $n$-bit registers, remainder register $R$, quotient register $Q$ initially holding dividend $N$, and divisor register $D$, and one subtractor are used. Treat ${R,Q}$ as one combined register. In each iteration,
+\ben
+\item Shift ${R,Q}$ left by one.
+\item Assign $R-D$ to $R$.
+\item Check $R$ in 2's complement.
+\bit
+\item If $R>0$, set the LSB of $Q$ to 1.
+\item If $R<0$, assign $R+D$ to $R$, called restoring.
+\eit
+\een
+Iterate $n$ times to obtain the final result.
+\sssc{Non-restoring Divider}
+Three $n$-bit registers, remainder register $R$, quotient register $Q$ initially holding dividend $N$, and divisor register $D$, and one subtractor are used. Treat ${R,Q}$ as one combined register. A flag bit $F$ exists and initially set to 0. In each iteration,
+\ben
+\item Shift ${R,Q}$ left by one.
+\item Check $F$.
+\bit
+\item If $F=0$, assign $R-D$ to $R$.
+\item If $F=1$, assign $R+D$ to $R$.
+\eit
+\item Check $R$ in 2's complement.
+\bit
+\item If $R>0$, set the LSB of $Q$ to 1 and $F$ to 0.
+\item If $R<0$, set $F$ to 1.
+\eit
+\een
+Iterate $n$ times. And then check $F$.
+\bit
+\item If $F=0$, do nothing.
+\item If $F=1$, assign $R+D$ to $R$.
+\eit
+Now we've obtained the final result.
+\sssc{SRT Divider}
 \end{document}
 
