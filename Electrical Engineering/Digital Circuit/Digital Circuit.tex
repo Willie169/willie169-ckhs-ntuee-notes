@@ -1926,7 +1926,7 @@ Now consider unsigned $A,B$. The result is the result of two's complement plus $
 Division of two unsigned binary number, dividend $N=N_{n-1}N_{n-2}\ldots N_0$ and divisor $D=D_{n-1}D_{n-2}\ldots D_0$, gives two unsigned binary number, quotient $Q=Q_{n-1}Q_{n-2}\ldots Q_0$ and remainder $R=R_{n-1}R_{n-2}\ldots R_0$ such that
 \[N=D*Q+R\]
 and
-\[0\le R\le D.\]
+\[0\le R<D.\]
 Three $n$-bit registers, remainder register $R$ holding partial remainder and finally holding remainder, quotient register $Q$ initially holding dividend $N$, and divisor register $D$ holding divisor, and one subtractor are used. Treat ${R,Q}$ as one combined register.
 \sssc{Restoring Divider}
 In each iteration,
@@ -1969,8 +1969,8 @@ For a radix-$2^k$ SRT divider, assuming $n$ is a multiple of $k$, an extra $\fra
 In each $i$th iteration,
 \ben
 \item Shift ${R,Q}$ left by $k$ bits.
-\item Use a LUT with a number of leading bits of $D$ and a number of leading bits of $R$ as inputs to determine an integer $q_i\in[-2^{k-1},2^{k-1}]$ such that $\abs(R+q_iD)\le D$.
-\item Assign $R+q_iD$ to $R$ and store $q_i$ to the $i$th cell of $Q'$.
+\item Use a LUT with a number of leading bits of $D$ and a number of leading bits of $R$ as inputs to determine an integer $q_i\in[-2^{k-1},2^{k-1}]$ such that $\abs{R-q_iD}<D$.
+\item Assign $R-q_iD$ to $R$ and store $q_i$ to the $i$th cell of $Q'$.
 \een
 Iterate $\frac{n}{k}$ times.
 
