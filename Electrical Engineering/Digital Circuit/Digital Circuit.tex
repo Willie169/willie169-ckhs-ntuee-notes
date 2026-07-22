@@ -1927,10 +1927,11 @@ Division of two unsigned binary number, dividend $N=N_{n-1}N_{n-2}\ldots N_0$ an
 \[N=D*Q+R\]
 and
 \[0\le R\le D.\]
+Three $n$-bit registers, remainder register $R$ holding partial remainder and finally holding remainder, quotient register $Q$ initially holding dividend $N$, and divisor register $D$ holding divisor, and one subtractor are used. Treat ${R,Q}$ as one combined register.
 \sssc{Restoring Divider}
-Three $n$-bit registers, remainder register $R$, quotient register $Q$ initially holding dividend $N$, and divisor register $D$, and one subtractor are used. Treat ${R,Q}$ as one combined register. In each iteration,
+In each iteration,
 \ben
-\item Shift ${R,Q}$ left by one.
+\item Shift ${R,Q}$ left by one bit.
 \item Assign $R-D$ to $R$.
 \item Check $R$ in 2's complement.
 \bit
@@ -1940,9 +1941,9 @@ Three $n$-bit registers, remainder register $R$, quotient register $Q$ initially
 \een
 Iterate $n$ times to obtain the final result.
 \sssc{Non-restoring Divider}
-Three $n$-bit registers, remainder register $R$, quotient register $Q$ initially holding dividend $N$, and divisor register $D$, and one subtractor are used. Treat ${R,Q}$ as one combined register. A flag bit $F$ exists and initially set to 0. In each iteration,
+Let a flag bit $F$ exist and be initially set to 0. In each iteration,
 \ben
-\item Shift ${R,Q}$ left by one.
+\item Shift ${R,Q}$ left by one bit.
 \item Check $F$.
 \bit
 \item If $F=0$, assign $R-D$ to $R$.
@@ -1954,7 +1955,7 @@ Three $n$-bit registers, remainder register $R$, quotient register $Q$ initially
 \item If $R<0$, set $F$ to 1.
 \eit
 \een
-Iterate $n$ times. And then check $F$.
+Iterate $n$ times.
 \bit
 \item If $F=0$, do nothing.
 \item If $F=1$, assign $R+D$ to $R$.
@@ -1962,5 +1963,39 @@ Iterate $n$ times. And then check $F$.
 Now we've obtained the final result.
 \sssc{SRT Divider}
 The algorithm is named after D. W. Sweeney of IBM, James E. Robertson of University of Illinois, and K. D. Tocher of Imperial College London. They all developed the algorithm independently at approximately the same time (published in February 1957, September 1958, and January 1958 respectively).
+
+For a radix-$2^k$ SRT divider, assuming $n$ is a multiple of $k$, an extra $\frac{n}{k}$-cell storage $Q'$ where each cell can store an integer in $[-2^{k-1},2^{k-1}]$ is used to store intermediate quotient in that form. 
+
+In each $i$th iteration,
+\ben
+\item Shift ${R,Q}$ left by $k$ bits.
+\item Use a LUT with a number of leading bits of $D$ and a number of leading bits of $R$ as inputs to determine an integer $q_i\in[-2^{k-1},2^{k-1}]$ such that $\abs(R+q_iD)\le D$.
+\item Assign $R+q_iD$ to $R$ and store $q_i$ to the $i$th cell of $Q'$.
+\een
+Iterate $\frac{n}{k}$ times.
+
+Let a flag bit $F$ exist and be initially set to 0. If $R<0$, assign $R+D$ to $R$ and $F$ to 1.
+
+Translate $Q'$ to final quotient $Q$:
+\[Q=\sum_{i=1}^{\frac{n}{k}}q_i*2^{i-1}-F.\]
+Now we've obtained the final result.
+
+A fast $Q'$ storage is carry-save storage. It consists of an $n$-bit register $Q_s$, an $n+1$-bit register $Q_c$, and an $n$-bit carry-save adder. $Q_s,Q_c$ are set to zero initially. $q_i$ are represented in $k+1$ bit two's complement. Each $i$th iteration,
+\ben
+\item $Q_s,Q_c$ are both shifted left $k$ bits.
+\item The carry-save adder takes $Q_s,Q_c,q_i$ as inputs and $Q_s,Q_c$ as sum and carry outputs.
+\een
+And the final quotient $Q$ is
+\[Q=Q_s+Q_c-F.\]
+\ssc{Arithmetic Logic Unit (ALU)}
+An arithmetic logic unit (ALU) is a combinational digital circuit that performs operations on integer binary numbers. The common operations include:
+\bit
+\item Unsigned and two's complement arithmetic operations: addition, subtraction, increment, decrement, negation.
+\item Bitwise logical operations: AND, OR, XOR.
+\item Bit shift operations: Logical right shift (SRL) (0 as new MSB), logical left shift (SLL) (0 as new LSB), arithmetic right shift (SRA) (old MSB as new MSB), arithmetic left shift (SRL) (old LSB as new LSB), rotate right (old LSB as new MSB), rotate left (old MSB as new LSB).
+\eit
+Comparison operations are typically done by checking flags of subtraction.
+
+Multiplication and division usually have their seperate units.
 \end{document}
 
