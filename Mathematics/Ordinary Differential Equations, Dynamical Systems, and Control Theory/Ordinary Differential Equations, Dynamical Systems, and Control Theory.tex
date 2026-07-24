@@ -903,7 +903,7 @@ where $x_0$ is a fixed ordinary point called expansion point and $a_n$ are const
 \[y''=\sum_{n=0}^{\infty}a_nn(n-1)(x-x_0)^{n-2}=\sum_{n=0}^{\infty}a_{n+2}(n+2)(n+1)(x-x_0)^n.\]
 \item Substitute into the ODE, rewrite $p(x)$ and $q(x)$ into Taylor expansion at $x_0$, rewrite the infinite series products (if any) into Cauchy products, and rewrite the LHS as a power series in $x^n$.
 \item Solve for the recurrence relation of $a_n$. We may set $a_0$ as any nonzero constant, typically 1.
-\item The two-parameter family of general solutions for all $0<|x-x_0|<R$ where $R$ is the distance between $x_0$ and the nearest singular point with parameters $a_0,a_1$ is:
+\item Let $R$ be the distance between $x_0$ and the nearest singular point if there is one or $\infty$ if there is none. The two-parameter family of general solutions for all $0<|x-x_0|<R$ with parameters $a_0,a_1$ is:
 \[y=\sum_{n=0}^{\infty}a_n(x-x_0)^n.\]
 \een
 \bpr
@@ -924,11 +924,11 @@ where $x_0$ is a fixed regular singular point called expansion point, $r(x)=(x-x
 \[y'=\sum_{n=0}^{\infty}a_n(n+r)(x-x_0)^{n+r-1},\]
 \[y''=\sum_{n=0}^{\infty}a_n(n+r)(n+r-1)(x-x_0)^{n+r-2}.\]
 \item Substitute into the ODE, rewrite $(x-x_0)r(x)$ and $s(x)$ into Taylor expansion at $x_0$, rewrite the infinite series products (if any) into Cauchy products, and let the sum of all terms involving $a_0$ of the three be $L$.
-\item The indicial polynomial $I(r)$ is defined as the coefficient of the lowest power term of $L$, and the indicial equation is defined as
+\item The indicial polynomial $I(r)$ is defined as the coefficient of the lowest power term of $\frac{L}{a_0}$, and the indicial equation is defined as
 \[I(r)=0,\]
 which is a quadratic equation for $r$.
-\item Solve the indicial equation for $r$. Let the roots be $r_1\geq r_2$.
-\item Let $R$ be the distance between $x_0$ and the nearest regular singular point. Depending on the relation of $r_1$ and $r_2$:
+\item Solve the indicial equation for $r$. Let the roots be $r_1\geq r_2$, called indical roots or exponents.
+\item Let $R$ be the distance between $x_0$ and the nearest singular point if there is one or $\infty$ if there is none. Depending on the relation of $r_1$ and $r_2$:
 \bit
 \item Case $r_1-r_2\notin\bbZ\land r_1,r_2\in\bbR$: Two linearly independent solutions for all $0<|x-x_0|<R$ are:
 \[y_1(x)=(x-x_0)^{r_1}\sum_{n=0}^{\infty}A_n(x-x_0)^n,\quad A_0\neq 0\land A_n\in\bbR,\]
@@ -1098,30 +1098,50 @@ where $x\in\bbR$ is the independent variable and $\nu\in\bbR$ is called order.
 The general solutions are the linear combinations of two linearly independent solutions.
 \bit
 \item Bessel function of the first kind:
-    \[J_{\nu}(x)=\sum_{m=0}^{\infty}\frac{(-1)^m}{m!\Gamma(m+\nu-1)}\qty(\frac{x}{2})^{2m+\nu}.\]
+    \[J_{\nu}(x)=\sum_{m=0}^{\infty}\frac{(-1)^m}{m!\Gamma(m+\nu+1)}\qty(\frac{x}{2})^{2m+\nu}.\]
     $J_{\nu}(x)$ is defined on $\bbR$ for $\nu\in\bbZ$, on $\bbR_{>=0}$ for $\nu\in\bbR_{>0}\setminus\bbZ$, and on $\bbR_{>0}$ for $\bbR_{<0}$. $J_0(0)=1$. $J_{\nu}(0)=0$ for $\nu\in\bbR_{>0}\cup\bbZ$.
 
-    $J_{\nu}$ and $J_{-\nu}$ are two linearly independent solutions of the Bessel's equation for $\nu\in\bbZ$.  $J_{-\nu}(x)=(-1)^{\abs{\nu}}J_{\nu}(x)$ for $\nu\in\bbR\setminus\bbZ$.
+    $J_{\nu}$ and $J_{-\nu}$ are two linearly independent solutions of the Bessel's equation for $\nu\in\bbR\setminus\bbZ$.  $J_{-\nu}(x)=(-1)^{\nu}J_{\nu}(x)$ for $\nu\in\bbZ$.
 \item Bessel function of the second kind:
 \bit
-\item For $\nu\notin\bbZ$:
+\item For $\nu\in\bbR\setminus\bbZ$:
     \[Y_{\nu}(x)=\frac{J_{\nu}(x)\cos(\nu\pi)-J_{-\nu}(x)}{\sin(\nu\pi)},\]
     which is a linear combination of $J_{\nu}(x)$ and $J_{-\nu}(x)$.
 \item For $\nu\in\bbZ$:
-    \[Y_{\nu}(x)=\lim_{\mu\to\nu}\frac{J_{\mu}(x)\cos(\mu\pi)-J_{-\mu}(x)}{\sin(\mu\pi)},\]
-    which is a solution that is linearly independent to $J_{\nu}(x)$. $Y_{-\nu}(x)=(-1)^{\abs{\nu}}Y_{\nu}(x)$. $Y_{\nu}(x)$ is defined on $\bbR_{>0}$.
-
-
-
-
-
+    \[Y_{\nu}(x)=\lim_{\mu\to\nu}Y_{\mu}(x),\]
+    which is a solution that is linearly independent to $J_{\nu}(x)$. $Y_{-\nu}(x)=(-1)^{\nu}Y_{\nu}(x)$. $Y_{\nu}(x)$ is defined on $\bbR_{>0}$.
+\eit
 \eit
 \bpr
 PLACEHOLDER
 \epr
+\sssc{Modified Bessel function}
+Modified Bessel functions are a family of special functions that are solutions to the modified Bessel's equation:
+\[x^2y''+xy'-(x^2-\nu^2)y=0,\]
+where $x\in\bbR$ is the independent variable and $\nu\in\bbR$ is called order.
 
+The general solutions are the linear combinations of two linearly independent solutions.
+\bit
+\item Modified Bessel function of the first kind:
+    \[I_{\nu}(x)=i^{-\nu}J_{\nu}(ix)=\sum_{m=0}^{\infty}\frac{1}{m!\Gamma(m+\nu+1)}\qty(\frac{x}{2})^{2m+\nu}.\]
+    $I_{\nu}(x)$ is defined on $\bbR$ for $\nu\in\bbZ$, on $\bbR_{>=0}$ for $\nu\in\bbR_{>0}\setminus\bbZ$, and on $\bbR_{>0}$ for $\bbR_{<0}$. $I_0(0)=1$. $I_{\nu}(0)=0$ for $\nu\in\bbR_{>0}\cup\bbZ$.
 
+    $I_{\nu}$ and $I_{-\nu}$ are two linearly independent solutions of the Bessel's equation for $\nu\in\bbR\setminus\bbZ$.  $I_{-\nu}(x)=(-1)^{\nu}I_{\nu}(x)$ for $\nu\in\bbZ$.
+\item Modified Bessel function of the second kind:
+\bit
+\item For $\nu\in\bbR\setminus\bbZ$:
+    \[K_{\nu}(x)=\frac{\pi}{2}\frac{I_{-\nu}(x)-I_{\nu}(x)}{\sin(\nu\pi)},\]
+    which is a linear combination of $I_{\nu}(x)$ and $I_{-\nu}(x)$.
+\item For $\nu\in\bbZ$:
+    \[K_{\nu}(x)=\lim_{\mu\to\nu}K_{\mu}(x),\]
+    which is a solution that is linearly independent to $I_{\nu}(x)$. $K_{-\nu}(x)=(-1)^{\nu}K_{\nu}(x)$. $K_{\nu}(x)$ is defined on $\bbR_{>0}$.
+\eit
+\eit
+\bpr
+PLACEHOLDER
+\epr
 \sssc{Parametric Bessel equation}
+PLACEHOLDER
 
 
 
