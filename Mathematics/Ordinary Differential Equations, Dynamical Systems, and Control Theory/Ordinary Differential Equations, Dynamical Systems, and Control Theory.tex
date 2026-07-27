@@ -1097,6 +1097,7 @@ Bessel functions are a family of special functions that are solutions to the Bes
 where $x\in\bbR$ is the independent variable and $\nu\in\bbR$ is called order.
 \bit
 \item Bessel function of the first kind:
+    \[J_{\nu}(x)=\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(-1)^m}{m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu}.\]
 \bit
 \item For $\nu\in\bbR\setminus\bbZ$:
     \[J_{\nu}(x)=\sum_{m=0}^{\infty}\frac{(-1)^m}{m!\Gamma(m+\nu+1)}\qty(\frac{x}{2})^{2m+\nu}.\]
@@ -1116,16 +1117,20 @@ where $x\in\bbR$ is the independent variable and $\nu\in\bbR$ is called order.
 \[J_{-\nu}(x)=\sum_{m=0}^{\infty}\frac{(-1)^m}{m!(m-\nu)!}\qty(\frac{x}{2})^{2m-\nu}\]
 \eit
 and
-\[J_{-\nu}(x)=(-1)^{\nu}J_{\nu}(x)\]
-$J_{\nu}(x)$ is defined on $\bbR$. $J_0(0)=1$. $J_{\nu}(0)=0$ for $\nu\in\bbZ_{\ne0}$. 
+\[J_{-\nu}(x)=J_{\nu}(-x)=(-1)^{\nu}J_{\nu}(x)\]
+$J_{\nu}(x)$ is defined on $\bbR$. $J_0(0)=1$. $J_{\nu}(0)=0$ for $\nu\in\bbZ_{\ne0}$.
+\eit
 \item Bessel function of the second kind:
+    \[Y_{\nu}(x)=\lim_{\mu\to\nu}\frac{J_{\mu}(x)\cos(\mu\pi)-J_{-\mu}(x)}{\sin(\mu\pi)}.\]
 \bit
 \item For $\nu\in\bbR\setminus\bbZ$:
     \[Y_{\nu}(x)=\frac{J_{\nu}(x)\cos(\nu\pi)-J_{-\nu}(x)}{\sin(\nu\pi)},\]
     which is a linear combination of $J_{\nu}(x)$ and $J_{-\nu}(x)$.
 \item For $\nu\in\bbZ$:
     \[Y_{\nu}(x)=\lim_{\mu\to\nu}Y_{\mu}(x),\]
-    which is a solution that is linearly independent to $J_{\nu}(x)$. $Y_{-\nu}(x)=(-1)^{\nu}Y_{\nu}(x)$. $Y_{\nu}(x)$ is defined on $\bbR_{>0}$.
+    which is a solution that is linearly independent to $J_{\nu}(x)$. $Y_{\nu}(x)$ is defined on $\bbR_{>0}$.
+    \[\lim_{x\to0^+}Y_{\nu}(x)=-\infty.\]
+    \[Y_0(x)=\frac{2}{\pi}J_0(x)\qty(\gamma+\ln(\frac{x}{2}))-\frac{2}{\pi}\sum_{k=1}^{\infty}\frac{(-1)^k}{(k!)^2}\qty(sum_{j=1}^k\frac{1}{j})\qty(\frac{x}{2})^{2k}.\]
 \eit
 \eit
 The general solution is:
@@ -1208,22 +1213,25 @@ Modified Bessel functions are a family of special functions that are solutions t
 where $x\in\bbR$ is the independent variable and $\nu\in\bbR$ is called order.
 \bit
 \item Modified Bessel function of the first kind:
-    \[I_{\nu}(x)=i^{-\nu}J_{\nu}(ix)=\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{1}{m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu}.\]
+    \[I_{\nu}(x)=\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{1}{m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu}.\]
 \bit
 \item For $\nu\in\bbR\setminus\bbZ$:
     \[I_{\nu}(x)=\sum_{m=0}^{\infty}\frac{1}{m!\Gamma(m+\nu+1)}\qty(\frac{x}{2})^{2m+\nu}.\]
     $I_{\nu}(x)$ and $I_{-\nu}(x)$ are two linearly independent solutions of the modified Bessel's equation. $I_{\nu}(x)$ is defined on $\bbR_{>=0}$ for $\nu\in\bbR_{>0}\setminus\bbZ$, and on $\bbR_{>0}$ for $\nu\in\bbR_{<0}\setminus\bbZ$. $I_{\nu}(0)=0$ for $\nu\in\bbR_{>0}\setminus\bbZ$.
 \item For $\nu\in\bbZ$:
-    \[I_{\nu}(x)=I_{-\nu}(x)=\sum_{m=0}^{\infty}\frac{1}{m!(m+\abs{\nu})!}\qty(\frac{x}{2})^{2m+\abs{\nu}}\]
+    \[I_{\nu}(x)=I_{-\nu}(x)=I_{\nu}(-x)=\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{1}{m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu}=\sum_{m=0}^{\infty}\frac{1}{m!(m+\abs{\nu})!}\qty(\frac{x}{2})^{2m+\abs{\nu}}\]
     $I_{\nu}(x)$ is defined on $\bbR$. $I_0(0)=1$. $I_{\nu}(0)=0$ for $\nu\in\bbZ_{\ne0}$. 
+\eit
 \item Modified Bessel function of the second kind:
+    \[K_{\nu}(x)=\lim_{\mu\to\nu}\frac{\pi}{2}\frac{I_{-\mu}(x)-I_{\mu}(x)}{\sin(\mu\pi)}.\]
 \bit
 \item For $\nu\in\bbR\setminus\bbZ$:
     \[K_{\nu}(x)=\frac{\pi}{2}\frac{I_{-\nu}(x)-I_{\nu}(x)}{\sin(\nu\pi)},\]
     which is a linear combination of $I_{\nu}(x)$ and $I_{-\nu}(x)$.
 \item For $\nu\in\bbZ$:
     \[K_{\nu}(x)=\lim_{\mu\to\nu}K_{\mu}(x),\]
-    which is a solution that is linearly independent to $I_{\nu}(x)$. $K_{-\nu}(x)=K_{\nu}(x)$. $K_{\nu}(x)$ is defined on $\bbR_{>0}$.
+    which is a solution that is linearly independent to $I_{\nu}(x)$. $K_{\nu}(x)$ is defined on $\bbR_{>0}$.
+    \[\lim_{x\to0^+}K_{\nu}(x)=\infty.\]
 \eit
 \eit
 The general solution is:
@@ -1319,6 +1327,62 @@ Let
 \[z^2u''+zu'-(z^2+\nu^2)u=0\]
 \[u(z)=CI_{\nu}(z)+DK_{\nu}(z).\]
 \epr
+\sssc{Derivative of Bessel function of first kind}
+\[\dv{}{x}\qty(x^{-\nu}J_{\nu}(x))=-x^{-\nu}J_{\nu+1}(x).\]
+\bpr
+\[\ba
+\dv{}{x}\qty(x^{-\nu}J_{\nu}(x))&=-\nu x^{-\nu-1}J_{\nu}(x)+x^{-\nu}J_{\nu}'(x)\\
+&=-\nu x^{-\nu-1}\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(-1)^m}{m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu}+x^{-\nu}\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(-1)^m(2m+\nu)}{2m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu-1}\\
+&=-x^{-\nu}\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(-1)^m\nu}{2m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu-1}+x^{-\nu}\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(-1)^m(2m+\nu)}{2m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu-1}\\
+&=x^{-\nu}\sum_{m=1}^{\infty}\lim_{\mu\to\nu}\frac{(-1)^m}{(m-1)!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu-1}\\
+&=x^{-\nu}\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(-1)^{m+1}}{m!\Gamma(m+\mu)}\qty(\frac{x}{2})^{2m+\nu+1}\\
+&=-x^{-\nu}J_{\nu+1}(x)
+\ea\]
+\epr
+\[\dv{}{x}\qty(x^{\nu}J_{\nu}(x))=x^{\nu}J_{\nu-1}(x).\]
+\bpr
+\[\ba
+\dv{}{x}\qty(x^{\nu}J_{\nu}(x))&=\nu x^{\nu-1}J_{\nu}(x)+x^{\nu}J_{\nu}'(x)\\
+&=\nu x^{\nu-1}\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(-1)^m}{m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu}+x^{\nu}\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(-1)^m(2m+\nu)}{2m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu-1}\\
+&=x^{\nu}\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(-1)^m\nu}{2m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu-1}+x^{\nu}\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(-1)^m(2m+\nu)}{2m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu-1}\\
+&=x^{\nu}\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(-1)^m}{m!\Gamma(m+\mu)}\qty(\frac{x}{2})^{2m+\nu-1}\\
+&=x^{\nu}J_{\nu-1}(x)
+\ea\]
+\epr
+\[xJ_{\nu}'(x)=\nu J_{\nu}(x)-xJ_{\nu+1}(x).\]
+\bpr
+\[\ba
+xJ_{\nu}'(x)&=\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(-1)^m(2m+\nu)}{m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu}\\
+&=\nu\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(-1)^m}{m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu}+2\sum_{m=1}^{\infty}\lim_{\mu\to\nu}\frac{(-1)^m}{(m-1)!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu}\\
+&=\nu J_{\nu}(x)+x\sum_{m=1}^{\infty}\lim_{\mu\to\nu}\frac{(-1)^m}{(m-1)!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu-1}\\
+&=\nu J_{\nu}(x)+x\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(-1)^{m+1}}{m!\Gamma(m+\mu+2)}\qty(\frac{x}{2})^{2m+\nu+1}\\
+&=\nu J_{\nu}(x)-xJ_{\nu+1}(x)
+\ea\]
+\epr
+\[xJ_{\nu}'(x)=xJ_{\nu-1}(x)-\nu J_{\nu}(x).\]
+\bpr
+\[\ba
+xJ_{\nu}'(x)&=\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(-1)^m(2m+\nu)}{m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu}\\
+&=2\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(-1)^m(m+\nu)}{m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu}-\nu\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(-1)^m}{m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu}\\
+&=x\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(-1)^m}{m!\Gamma(m+\mu)}\qty(\frac{x}{2})^{2m+\nu-1}-\nu\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(-1)^m}{m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu}\\
+&=xJ_{\nu-1}(x)-\nu J_{\nu}(x)
+\ea\]
+\epr
+\[J_{\nu}'(x)=\frac{1}{2}\qty(J_{\nu-1}(x)-J_{\nu+1}(x)).\]
+\bpr
+\[\ba
+J_{\nu}'(x)&=\frac{1}{2}\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(-1)^m(2m+\nu)}{m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu-1}\\
+&=\frac{1}{2}\qty(\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(-1)^m(m+\nu)}{m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu-1}+\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(-1)^mm}{m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu-1})\\
+&=\frac{1}{2}\qty(\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(-1)^m}{m!\Gamma(m+\mu)}\qty(\frac{x}{2})^{2m+\nu-1}+\sum_{m=1}^{\infty}\lim_{\mu\to\nu}\frac{(-1)^{m+1}}{m!\Gamma(m+\mu+2)}\qty(\frac{x}{2})^{2m+\nu+1})\\
+&=\frac{1}{2}\qty(J_{\nu-1}(x)-J_{\nu+1}(x))
+\ea\]
+\epr
+\sssc{Derivative of modified Bessel function of first kind}
+
+
+
+
+
 \sct{Classical theory}
 PLACEHOLDER
 : below waiting for change to "Ordinary Differential Equations and Dynamical Systems" version.
