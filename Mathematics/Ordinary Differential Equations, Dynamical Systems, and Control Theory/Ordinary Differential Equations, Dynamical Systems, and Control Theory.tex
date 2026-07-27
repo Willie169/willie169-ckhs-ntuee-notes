@@ -1095,8 +1095,6 @@ Here we discuss in real numbers.
 Bessel functions are a family of special functions that are solutions to the Bessel's equation:
 \[x^2y''+xy'+(x^2-\nu^2)y=0,\]
 where $x\in\bbR$ is the independent variable and $\nu\in\bbR$ is called order.
-
-The general solutions are the linear combinations of two linearly independent solutions.
 \bit
 \item Bessel function of the first kind:
 \bit
@@ -1129,6 +1127,13 @@ $J_{\nu}(x)$ is defined on $\bbR$. $J_0(0)=1$. $J_{\nu}(0)=0$ for $\nu\in\bbZ_{\
     \[Y_{\nu}(x)=\lim_{\mu\to\nu}Y_{\mu}(x),\]
     which is a solution that is linearly independent to $J_{\nu}(x)$. $Y_{-\nu}(x)=(-1)^{\nu}Y_{\nu}(x)$. $Y_{\nu}(x)$ is defined on $\bbR_{>0}$.
 \eit
+\eit
+The general solution is:
+\bit
+\item For $\nu\in\bbR$:
+    \[y(x)=CJ_{\nu}(x)+DY_{\nu}(x).\]
+\item For $\nu\in\bbR\setminus\bbZ$:
+    \[y(x)=CJ_{\nu}(x)+DJ_{-\nu}(x).\]
 \eit
 \bpr
 \[x^2y''+xy'+(x^2-\nu^2)y=0\]
@@ -1201,8 +1206,6 @@ How this = Y
 Modified Bessel functions are a family of special functions that are solutions to the modified Bessel's equation:
 \[x^2y''+xy'-(x^2+\nu^2)y=0,\]
 where $x\in\bbR$ is the independent variable and $\nu\in\bbR$ is called order.
-
-The general solutions are the linear combinations of two linearly independent solutions.
 \bit
 \item Modified Bessel function of the first kind:
     \[I_{\nu}(x)=i^{-\nu}J_{\nu}(ix)=\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{1}{m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu}.\]
@@ -1222,6 +1225,13 @@ The general solutions are the linear combinations of two linearly independent so
     \[K_{\nu}(x)=\lim_{\mu\to\nu}K_{\mu}(x),\]
     which is a solution that is linearly independent to $I_{\nu}(x)$. $K_{-\nu}(x)=K_{\nu}(x)$. $K_{\nu}(x)$ is defined on $\bbR_{>0}$.
 \eit
+\eit
+The general solution is:
+\bit
+\item For $\nu\in\bbR$:
+    \[y(x)=CI_{\nu}(x)+DK_{\nu}(x).\]
+\item For $\nu\in\bbR\setminus\bbZ$:
+    \[y(x)=CI_{\nu}(x)+DI_{-\nu}(x).\]
 \eit
 \bpr
 \[x^2y''+xy'-(x^2+\nu^2)y=0\]
@@ -1282,13 +1292,33 @@ PLACEHOLDER
 How this = K
 \epr
 \sssc{Parametric Bessel equation}
-PLACEHOLDER
-
-
-
-
-
-
+ODE:
+\[x^2y''+xy'+(\alpha^2x^2-\nu^2)y=0,\quad\alpha\ne 0\]
+Solution:
+\[y(x)=CJ_{\nu}(\alpha x)+DY_{\nu}(\alpha x).\]
+\bpr
+Let
+\[z=\alpha x\]
+\[y(x)=u(z)\]
+\[y'(x)=\alpha u'(z)\]
+\[y''(x)=\alpha^2u''(z)\]
+\[z^2u''+zu'+(z^2-\nu^2)u=0\]
+\[u(z)=CJ_{\nu}(z)+DY_{\nu}(z).\]
+\epr
+\sssc{Parametric Modified Bessel equation}
+ODE:
+\[x^2y''+xy'-(\alpha^2x^2+\nu^2)y=0,\quad\alpha\ne 0\]
+Solution:
+\[y(x)=CI_{\nu}(\alpha x)+DK_{\nu}(\alpha x).\]
+\bpr
+Let
+\[z=\alpha x\]
+\[y(x)=u(z)\]
+\[y'(x)=\alpha u'(z)\]
+\[y''(x)=\alpha^2u''(z)\]
+\[z^2u''+zu'-(z^2+\nu^2)u=0\]
+\[u(z)=CI_{\nu}(z)+DK_{\nu}(z).\]
+\epr
 \sct{Classical theory}
 PLACEHOLDER
 : below waiting for change to "Ordinary Differential Equations and Dynamical Systems" version.
