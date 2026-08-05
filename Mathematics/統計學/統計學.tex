@@ -30,18 +30,6 @@ x_{\frac{n+1}{2}},\quad & n\text{\ is odd.}\\
 \[\sqrt[n]{\prod_{i=1}^n x_i}\]
 \subsection{百分位數（Percentile, Percentile score）}
 令：第$k$百分位數為$P_k$，$m=n\frac{k}{100}$，$i=\lfloor m\rfloor$，$j=i+1$，$g=m-i$，$h=\frac{k}{100}\qty(n-\alpha -\beta +1)+\alpha$，$r=(n-1)\frac{k}{100}$，$s=\lfloor r\rfloor+1$，$t=s+1$。\\
-令：
-\[\begin{aligned}
-& \text{RoundHalfToEven}(x) = \left\{
-  \begin{array}{ll}
-  \lfloor x \rfloor, & \text{if\ } x - \lfloor x \rfloor < 0.5 \\
-  \lceil x \rceil, & \text{if\ } x - \lfloor x \rfloor > 0.5 \\
-  2\left\lfloor \frac{x}{2} \right\rfloor, & \text{if } x - \lfloor x \rfloor = 0.5 \text{\ and\ } \lfloor x \rfloor \text{\ is even} \\
-  2\left\lfloor \frac{x}{2} \right\rfloor + 1, & \text{if } x - \lfloor x \rfloor = 0.5 \text{\ and\ } \lfloor x \rfloor \text{\ is odd}
-  \end{array}
-\right.\\
-& x_h = x_{\left\lfloor h \right\rfloor} + (h-\lfloor h\rfloor)(x_{\left\lceil h \right\rceil}-x_{\left\lfloor h \right\rfloor}).
-\end{aligned}\]
 各種百分位數定義主要分為兩類：
 \begin{itemize}
 \item 包含性定義（Inclusive definition）：較常用。至少有$k$\%的項$\leq P_k$，且至少有$(100-k)\%$的項$\geq P_k$。
@@ -142,7 +130,8 @@ s^2 &= \frac{\sum_{i=1}^n (x_i-\mu)^2}{n-1}\\
 s &= \sqrt{s^2}
 \eam
 \ssc{仿射變換}
-$\mathbf{X}$的仿射變換$\mathbf{Y}=(y_i\mid y_i=ax_i+b,i=1,2,\ldots,n)$，記作$\mathbf{Y}=a\mathbf{X}+b$。\\
+$\mathbf{X}$的仿射變換$\mathbf{Y}=(y_i\middle y_i=ax_i+b,i=1,2,\ldots,n)$，記作$\mathbf{Y}=a\mathbf{X}+b$。
+
 性質：
 \[\mu_\mathbf{Y}=a\mu_\mathbf{X}+b\]
 \[\sigma_\mathbf{Y}=|a|\sigma_\mathbf{X}\]
@@ -151,14 +140,14 @@ $\mathbf{X}$的仿射變換$\mathbf{Y}=(y_i\mid y_i=ax_i+b,i=1,2,\ldots,n)$，�
 \[\text{Median}(\mb{Y})=a\text{Median}(\mb{X})+b.\]
 \ssc{標準分數（Standard score）/Z分數（z-score）}
 $\mathbf{Z}$，定義為：
-\[\mathbf{Z}=\left\{z_i\middle| z_i=\frac{x_i-\mu}{\sigma},i=1,2,\ldots,n\right\}.\]
+\[\mathbf{Z}=\left\{z_i\middle z_i=\frac{x_i-\mu}{\sigma},i=1,2,\ldots,n\right\}.\]
 將數據轉換為標準分數的過程稱標準化（standardizing or normalizing）。
 
 性質：
 \[\mu_\mathbf{Z}=0,\quad\sigma_\mathbf{Z}=1\]
 \[\sum_{i=1}^n z_i^{\pht{i}2}=n\]
 \sct{二維數據分析}
-今有由小到大排列的實數序列\(\mathbf{X}=(x_1,x_2,\ldots,x_n)\)與\(\mathbf{Y}=(y_1,y_2,\ldots,y_n)\)，標準差分別為$\sigma_\mathbf{X},\sigma_\mathbf{Y}$，算術平均數分別為$\mu_\mathbf{X},\mu_\mathbf{Y}$，標準分數分別為\(\mathbf{X}'=\qty(x_i' \middle | x_i'=\frac{x_i-\mu_\mathbf{X}}{\sigma_\mathbf{X}},i=1,2,\ldots,n)\)與\(\mathbf{Y}'=\qty(y_i' \middle | y_i'=\frac{y_i-\mu_\mathbf{Y}}{\sigma_\mathbf{Y}},i=1,2,\ldots,n)\)。
+今有由小到大排列的實數序列\(\mathbf{X}=(x_1,x_2,\ldots,x_n)\)與\(\mathbf{Y}=(y_1,y_2,\ldots,y_n)\)，標準差分別為$\sigma_\mathbf{X},\sigma_\mathbf{Y}$，算術平均數分別為$\mu_\mathbf{X},\mu_\mathbf{Y}$，標準分數分別為\(\mathbf{X}'=\qty(x_i' \middle x_i'=\frac{x_i-\mu_\mathbf{X}}{\sigma_\mathbf{X}},i=1,2,\ldots,n)\)與\(\mathbf{Y}'=\qty(y_i' \middle y_i'=\frac{y_i-\mu_\mathbf{Y}}{\sigma_\mathbf{Y}},i=1,2,\ldots,n)\)。
 \ssc{散布圖}
 將數據點每個$(x_i,y_i),i=1,2,\ldots,n$描繪在$xy$平面直角座標平面。
 \ssc{皮爾森積動差相關係數（Pearson product-moment correlation coefficient, PPMCC, PCC）/相關係數（Correlation coefficient）}
