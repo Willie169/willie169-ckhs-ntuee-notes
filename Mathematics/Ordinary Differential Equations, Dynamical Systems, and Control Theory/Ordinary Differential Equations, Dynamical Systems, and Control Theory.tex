@@ -1323,44 +1323,31 @@ TODO
 How this = K
 \epr
 \sssc{Spherical Bessel functions}
-Spherical Bessel functions are a family of special functions that are solutions to the Spherical Bessel's equation:
-
-
-\[x^2y''+xy'-(x^2+\nu^2)y=0,\]
-where $x\in\bbR$ is the independent variable and $\nu\in\bbR$ is called order.
+Spherical Bessel functions are a family of special functions that are solutions to the equation:
+\[x^2y''+2xy'+(x^2-n(n-1))y=0,\]
+where $x\in\bbR$ is the independent variable and $n\in\bbZ$.
 \bit
-\item Modified Bessel function of the first kind:
-    \[I_{\nu}(x)=\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{1}{m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu}.\]
-\bit
-\item For $\nu\in\bbR\setminus\bbZ$:
-    \[I_{\nu}(x)=\sum_{m=0}^{\infty}\frac{1}{m!\Gamma(m+\nu+1)}\qty(\frac{x}{2})^{2m+\nu}.\]
-    $I_{\nu}(x)$ and $I_{-\nu}(x)$ are two linearly independent solutions of the modified Bessel's equation. $I_{\nu}(x)$ is defined on $\bbR_{>=0}$ for $\nu\in\bbR_{>0}\setminus\bbZ$, and on $\bbR_{>0}$ for $\nu\in\bbR_{<0}\setminus\bbZ$. $I_{\nu}(0)=0$ for $\nu\in\bbR_{>0}\setminus\bbZ$.
-\item For $\nu\in\bbZ$:
-    \[I_{\nu}(x)=I_{-\nu}(x)=I_{\nu}(-x)=\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{1}{m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu}=\sum_{m=0}^{\infty}\frac{1}{m!(m+\abs{\nu})!}\qty(\frac{x}{2})^{2m+\abs{\nu}}\]
-    $I_{\nu}(x)$ is defined on $\bbR$. $I_0(0)=1$. $I_{\nu}(0)=0$ for $\nu\in\bbZ_{\ne0}$. 
-\eit
-\item Modified Bessel function of the second kind:
-    \[K_{\nu}(x)=\lim_{\mu\to\nu}\frac{\pi}{2}\frac{I_{-\mu}(x)-I_{\mu}(x)}{\sin(\mu\pi)}.\]
-\bit
-\item For $\nu\in\bbR\setminus\bbZ$:
-    \[K_{\nu}(x)=\frac{\pi}{2}\frac{I_{-\nu}(x)-I_{\nu}(x)}{\sin(\nu\pi)},\]
-    which is a linear combination of $I_{\nu}(x)$ and $I_{-\nu}(x)$.
-\item For $\nu\in\bbZ$:
-    \[K_{\nu}(x)=\lim_{\mu\to\nu}K_{\mu}(x),\]
-    which is a solution that is linearly independent to $I_{\nu}(x)$. $K_{\nu}(x)$ is defined on $\bbR_{>0}$.
-    \[\lim_{x\to0^+}K_{\nu}(x)=\infty.\]
-\eit
+\item Spherical Bessel function of the first kind:
+    \[j_n(x)=\sqrt{\frac{\pi}{2x}}J_{n+\frac{1}{2}}(x).\]
+\item Spherical Bessel function of the second kind:
+    \[y_n(x)=\sqrt{\frac{\pi}{2x}}Y_{n+\frac{1}{2}}(x)=(-1)^{n+1\sqrt{\frac{\pi}{2x}}J_{-n-\frac{1}{2}}(x),\]
+    which is linearly independent from $j_n(x)$.
+    \[j_n(x)=(-1)^ny_{-n-1}(x)\]
+    \[y_n(x)=(-1)^{n+1}j_{-n-1}(x)\]
 \eit
 The general solution is:
-\bit
-\item For $\nu\in\bbR$:
-    \[y(x)=CI_{\nu}(x)+DK_{\nu}(x).\]
-\item For $\nu\in\bbR\setminus\bbZ$:
-    \[y(x)=CI_{\nu}(x)+DI_{-\nu}(x).\]
-\eit
+\[y=Cj_n(x)+Dy_n(x).\]
 \bpr
+\[u=xy\]
+\[u'=y+xy'\]
+\[u''=y''\]
+
 \epr
 
+
+
+
+The Rayleigh's formula.
 
 
 
