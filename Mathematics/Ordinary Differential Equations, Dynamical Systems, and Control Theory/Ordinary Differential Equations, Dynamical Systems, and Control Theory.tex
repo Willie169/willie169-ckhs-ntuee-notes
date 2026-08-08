@@ -1348,41 +1348,6 @@ The general solution is:
 \[x^2u''+xu'+(x^2-(n-0.5)^2)u=0\]
 \[u=CJ_{n+0.5}(x)+DY_{n+0.5}(x)\]
 \epr
-
-
-
-TODO
-\sssc{Helmholtz equation}
-Helmholtz equation is
-\[\nabla^2f+k^2f=0.\]
-\sssc{Helmholtz equation assumed separation of variables in Cartesian coordinate}
-\[\nabla^2=\pdv[2]{x}+\pdv[2]{y}+\pdv[2]{z}\]
-Assume separation of variables $f(x,y,z)=X(x)Y(y)Z(z)$.
-
-The $x$-equation is a homogeneous linear equation:
-\[X''+\lambda X=0\]
-The solution is
-\[X=C\cos(\sqrt{\lambda}x)+D\sin(\sqrt{\lambda}x)\]
-\sssc{Helmholtz equation assumed separation of variables in cylindrical coordinate}
-\[\nabla^2=\frac{1}{r}\pdv{r}\qty(r\pdv{}{r})+\frac{1}{r^2}\pdv[2]{\theta}+\pdv[2]{z}\]
-Assume separation of variables $f(r,\theta,z)=R(r)\Theta(\theta)Z(z)$.
-
-The $z$-equation is a homogeneous linear equation:
-\[Z''+\lambda Z=0\]
-The solution is
-\[Z=C\cos(\sqrt{\lambda}z)+D\sin(\sqrt{\lambda}z)\]
-$\Theta$ must be periodic of period $2\pi$. This leads to
-\[\Theta=C\cos(m\theta)+D\sin(m\theta)\]
-\[\Theta''+m^2\Theta=0\]
-where $m\in\bbN_0$.
-
-
-
-
-
-
-
-
 \sssc{Parametric Bessel equation}
 ODE:
 \[x^2y''+xy'+(\alpha^2x^2-\nu^2)y=0,\quad\alpha\ne 0\]
@@ -1419,7 +1384,7 @@ Let
 &=-\nu x^{-\nu-1}\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(-1)^m}{m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu}+x^{-\nu}\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(-1)^m(2m+\nu)}{2m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu-1}\\
 &=-x^{-\nu}\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(-1)^m\nu}{2m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu-1}+x^{-\nu}\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(-1)^m(2m+\nu)}{2m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu-1}\\
 &=x^{-\nu}\sum_{m=1}^{\infty}\lim_{\mu\to\nu}\frac{(-1)^m}{(m-1)!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu-1}\\
-&=x^{-\nu}\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(-1)^{m+1}}{m!\Gamma(m+\mu)}\qty(\frac{x}{2})^{2m+\nu+1}\\
+&=x^{-\nu}\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(-1)^{m+1}}{m!\Gamma(m+\mu+2)}\qty(\frac{x}{2})^{2m+\nu+1}\\
 &=-x^{-\nu}J_{\nu+1}(x)
 \ea\]
 \epr
@@ -1462,7 +1427,62 @@ J_{\nu}'(x)&=\frac{1}{2}\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(-1)^m(2m+\nu)}
 \ea\]
 \epr
 \sssc{Derivative of modified Bessel function of first kind}
+\[\dv{}{x}\qty(x^{-\nu}I_{\nu}(x))=x^{-\nu}I_{\nu+1}(x).\]
+\bpr
+\[\ba
+\dv{}{x}\qty(x^{-\nu}I_{\nu}(x))&=-\nu x^{-\nu-1}I_{\nu}(x)+x^{-\nu}I_{\nu}'(x)\\
+&=-\nu x^{-\nu-1}\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{1}{m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu}+x^{-\nu}\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(2m+\nu)}{2m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu-1}\\
+&=-x^{-\nu}\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{\nu}{2m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu-1}+x^{-\nu}\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(2m+\nu)}{2m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu-1}\\
+&=x^{-\nu}\sum_{m=1}^{\infty}\lim_{\mu\to\nu}\frac{1}{(m-1)!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu-1}\\
+&=x^{-\nu}\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{1}{m!\Gamma(m+\mu+2)}\qty(\frac{x}{2})^{2m+\nu+1}\\
+&=x^{-\nu}I_{\nu+1}(x)
+\ea\]
+\epr
+\[\dv{}{x}\qty(x^{\nu}I_{\nu}(x))=x^{\nu}I_{\nu-1}(x).\]
+\bpr
+\[\ba
+\dv{}{x}\qty(x^{\nu}I_{\nu}(x))&=\nu x^{\nu-1}I_{\nu}(x)+x^{\nu}I_{\nu}'(x)\\
+&=\nu x^{\nu-1}\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{1}{m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu}+x^{\nu}\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(2m+\nu)}{2m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu-1}\\
+&=x^{\nu}\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{\nu}{2m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu-1}+x^{\nu}\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(2m+\nu)}{2m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu-1}\\
+&=x^{\nu}\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{1}{m!\Gamma(m+\mu)}\qty(\frac{x}{2})^{2m+\nu-1}\\
+&=x^{\nu}I_{\nu-1}(x)
+\ea\]
+\epr
+\[xI_{\nu}'(x)=\nu I_{\nu}(x)+xI_{\nu+1}(x).\]
+\bpr
+\[\ba
+xI_{\nu}'(x)&=\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(2m+\nu)}{m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu}\\
+&=\nu\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{1}{m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu}+2\sum_{m=1}^{\infty}\lim_{\mu\to\nu}\frac{1}{(m-1)!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu}\\
+&=\nu I_{\nu}(x)+x\sum_{m=1}^{\infty}\lim_{\mu\to\nu}\frac{1}{(m-1)!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu-1}\\
+&=\nu I_{\nu}(x)+x\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{1}{m!\Gamma(m+\mu+2)}\qty(\frac{x}{2})^{2m+\nu+1}\\
+&=\nu I_{\nu}(x)+xI_{\nu+1}(x)
+\ea\]
+\epr
+\[xI_{\nu}'(x)=xI_{\nu-1}(x)-\nu I_{\nu}(x).\]
+\bpr
+\[\ba
+xI_{\nu}'(x)&=\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(2m+\nu)}{m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu}\\
+&=2\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(m+\nu)}{m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu}-\nu\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{1}{m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu}\\
+&=x\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{1}{m!\Gamma(m+\mu)}\qty(\frac{x}{2})^{2m+\nu-1}-\nu\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{1}{m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu}\\
+&=xI_{\nu-1}(x)-\nu I_{\nu}(x)
+\ea\]
+\epr
 TODO
+\[J_{\nu}'(x)=\frac{1}{2}\qty(J_{\nu-1}(x)-J_{\nu+1}(x)).\]
+\bpr
+\[\ba
+J_{\nu}'(x)&=\frac{1}{2}\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(-1)^m(2m+\nu)}{m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu-1}\\
+&=\frac{1}{2}\qty(\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(-1)^m(m+\nu)}{m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu-1}+\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(-1)^mm}{m!\Gamma(m+\mu+1)}\qty(\frac{x}{2})^{2m+\nu-1})\\
+&=\frac{1}{2}\qty(\sum_{m=0}^{\infty}\lim_{\mu\to\nu}\frac{(-1)^m}{m!\Gamma(m+\mu)}\qty(\frac{x}{2})^{2m+\nu-1}+\sum_{m=1}^{\infty}\lim_{\mu\to\nu}\frac{(-1)^{m+1}}{m!\Gamma(m+\mu+2)}\qty(\frac{x}{2})^{2m+\nu+1})\\
+&=\frac{1}{2}\qty(J_{\nu-1}(x)-J_{\nu+1}(x))
+\ea\]
+\epr
+
+
+
+
+
+
 
 
 
