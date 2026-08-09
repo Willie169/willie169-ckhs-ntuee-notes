@@ -52,26 +52,6 @@ $\vdash^*$ is the reflexive and transitive closure of the binary relation $\vdas
 \[C_0\vdash C_1\vdash\ldots\vdash C_k,\]
 then
 \[C_0\vdash^*C_k.\]
-\sssc{(Unrestricted or type 0) (formal) grammar}
-A grammar can be defined as a four-tuple
-\[G=(V,\Sigma,R,S)\]
-where
-\bit
-\item $V$ is a set of nonterminal symbols, abstract symbols that represent syntactic categories.
-\item $\Sigma$ is a set of terminal symbols, the actual characters that can appear in a string, i.e., alphabet, with $V\cap\Sigma=\varnothing$.
-\item $R\subseteq (V\cup\Sigma)^*V(V\cup\Sigma)^*\times (V\cup\Sigma)^*$ is a set of production rules (also called rewrite rules), which are pairs of a nonempty string of nonterminal symbols and terminal symbols and a string of nonterminal symbols and terminal symbols, in which a rule is denoted as
-\[A\to a\]
-for $(A,a)\in R$ and called $A$ rewrites to $a$. For any $v,w\in(V\cup\Sigma)^*$ and $A\to a$, we write $vAw\vdash vaw$.
-\item $S\in V$ is a start symbol.
-\eit
-The language defined by a grammar $G$, i.e., all $w\in\Sigma^*$ such that $S\vdash^*w$, is denoted as $L(G)$.
-\sssc{Context-free grammar (CFG) or type 2 grammar}
-A context-free grammar is a grammar of which the production rules are pairs of a nonterminal symbol and a string of nonterminal symbols and terminal symbols, i.e.,
-\[R\subseteq V\times (V\cup\Sigma)^*.\]
-\sssc{Context-free language (CFL) or type 2 language}
-A context-free language is a language defined by a context-free grammar.
-\sssc{Deterministic context-free language (DCFL)}
-A language is a deterministic context-free language iff there exists a deterministic pushdown automaton (DFPA) that recognize it.
 \sssc{Regular grammar or type 3 grammar}
 A regular grammar is a grammar of which either all the production rules are right-linear or all the production rules are left-linear.
 
@@ -91,12 +71,32 @@ The collection of regular languages over an alphabet $\Sigma$ can be defined rec
 \item If $A$ and $B$ are regular languages, then $A\cup B$ and $A\cdot B$ are regular languages.
 \item No other languages over $\Sigma$ are regular.
 \end{itemize}
+\sssc{Context-free grammar (CFG) or type 2 grammar}
+A context-free grammar is a grammar of which the production rules are pairs of a nonterminal symbol and a string of nonterminal symbols and terminal symbols, i.e.,
+\[R\subseteq V\times (V\cup\Sigma)^*.\]
+\sssc{Context-free language (CFL) or type 2 language}
+A context-free language is a language defined by a context-free grammar.
+\sssc{Deterministic context-free language (DCFL)}
+A language is a deterministic context-free language iff there exists a deterministic pushdown automaton (DFPA) that recognize it.
 \sssc{Context-sensitive grammar (CSG) or type 1 grammar}
 A context-sensitive grammar is a grammar such that all production rules are either $S\to\varepsilon$ or in the form
 \[vAw\to vaw\]
 where $A\in V$, $v,w\in(V\cup\Sigma\setminus\{S\})^*$, and $a\in(V\cup\Sigma\setminus\{S\})^+$.
 \sssc{Context-sensitive language (CSL) or type 1 language}
 A context-sensitive language is a language defined by a context-sensitive grammar.
+\sssc{(Unrestricted or type 0) (formal) grammar}
+A grammar can be defined as a four-tuple
+\[G=(V,\Sigma,R,S)\]
+where
+\bit
+\item $V$ is a set of nonterminal symbols, abstract symbols that represent syntactic categories.
+\item $\Sigma$ is a set of terminal symbols, the actual characters that can appear in a string, i.e., alphabet, with $V\cap\Sigma=\varnothing$.
+\item $R\subseteq (V\cup\Sigma)^*V(V\cup\Sigma)^*\times (V\cup\Sigma)^*$ is a set of production rules (also called rewrite rules), which are pairs of a nonempty string of nonterminal symbols and terminal symbols and a string of nonterminal symbols and terminal symbols, in which a rule is denoted as
+\[A\to a\]
+for $(A,a)\in R$ and called $A$ rewrites to $a$. For any $v,w\in(V\cup\Sigma)^*$ and $A\to a$, we write $vAw\vdash vaw$.
+\item $S\in V$ is a start symbol.
+\eit
+The language defined by a grammar $G$, i.e., all $w\in\Sigma^*$ such that $S\vdash^*w$, is denoted as $L(G)$.
 \sssc{Recursively enumerable (RE), recognizable, partially decidable, semidecidable, Turing-acceptable, Turing-recognizable, or type 0 language}
 A recursively enumerable language is a language defined by an unrestricted grammar.
 \ssc{Automata Theory}
