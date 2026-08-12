@@ -1091,15 +1091,25 @@ Solutions:
 \sssc{Constant coefficients}
 To solve
 \[\sum_{i=0}^na_iy^{(i)}=g(x)\]
-\ben
-\item Laplace transform both sides:
-    \[
-        \sum_{i=0}^na_is^iY(s)-\sum_{j=1}^i
-    \]
+assuming that $y$ is of exponential order.
 
-TODO
-\sssc{Polynomial coefficients}
+Laplace transform both sides:
+\[\sum_{j=0}^na_j\qty(s^jY(s)-\sum_{i=0}^{j-1}s^{j-1-i}\dv[i]{y}{t}(0))=G(s)\]
+Let
+\[P(s)=\sum_{j=0}^na_js^j\]
+\[Q(s)=\sum_{j=0}^na_j\sum_{i=0}^{j-1}s^{j-1-i}\dv[i]{y}{t}(0)\]
+Thus
+\[P(s)Y(s)=Q(s)+G(s),\]
+where \(P(s)\) and \(Q(s)\) are polynomials of $s$ of degrees $n$ and $<n$.
 
+We call
+\[W(s)=\frac{1}{P(s)}\]
+transfer function of the system and write
+\[Y(s)=W(s)Q(s)+W(s)G(s)\]
+\[y_0(t)=\mathcal{L}^{-1}\{W(s)Q(s)\}\]
+\[y_1(t)=\mathcal{L}^{-1}\{W(s)G(s)\}\]
+\[y(t)=y_0(t)+y_1(t)\]
+We call $y_0(t)$ natural, homogeneous, unforced, or zero-input response (ZIR) and $y_1(t)$ forced, driven, particular, or zero-state responses (ZSR).
 \ssc{Bessel functions and Legendre polynomials}
 \sssc{Bessel functions}
 Bessel functions are a family of special functions that are solutions to the Bessel's equation:
