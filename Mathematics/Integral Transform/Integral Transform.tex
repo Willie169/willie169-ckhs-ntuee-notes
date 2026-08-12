@@ -21,7 +21,7 @@ is a linear transform iff
 whenever the LHS exists.
 \ssc{Laplace Transform (拉普拉斯變換)}
 \sssc{Introduction}
-The one-sided or unilateral Laplace transform and two-sided or bilateral Laplace transform, where Laplace tranform may refer to either of them or both of them depending on context and often refer to the former when not clear, are two integral transform that convert a complex-valued signal, for both one-sided and two-sided, often denoted in lowercase such as $f$ or $f(t)$, of a real variable $t$, called time domain, to a complex-valued function, often denoted in uppercase of the same letter, $F$ or $F(s)$, or as $\mathcal{L}\{f\}$, $\mathcal{L}\{f(t)\}$, $\mathcal{L}\{f\}(s)$, or $\mathcal{L}\{f(t)\}(s)$, and for two-sided, also denoted as $\mathcal{B}\{f\}$, $\mathcal{B}\{f(t)\}$, $\mathcal{B}\{f\}(s)$, or $\mathcal{B}\{f(t)\}(s)$, of a complex variable $s$, called (complex) frequency domain, (complex) frequency plane, $s$-domain, $s$-plane, Laplace domain, or Laplace plane.
+The one-sided or unilateral Laplace transform and two-sided or bilateral Laplace transform, where Laplace transform may refer to either of them or both of them depending on context and often refer to the former when not clear, are two integral transform that convert a complex-valued signal, for both one-sided and two-sided, often denoted in lowercase such as $f$ or $f(t)$, of a real variable $t$, called time domain, to a complex-valued function, often denoted in uppercase of the same letter, $F$ or $F(s)$, or as $\mathcal{L}\{f\}$, $\mathcal{L}\{f(t)\}$, $\mathcal{L}\{f\}(s)$, or $\mathcal{L}\{f(t)\}(s)$, and for two-sided, also denoted as $\mathcal{B}\{f\}$, $\mathcal{B}\{f(t)\}$, $\mathcal{B}\{f\}(s)$, or $\mathcal{B}\{f(t)\}(s)$, of a complex variable $s$, called (complex) frequency domain, (complex) frequency plane, $s$-domain, $s$-plane, Laplace domain, or Laplace plane.
 \sssc{Definition}
 Let $R$ be $\bbR_{\geq0}$ for one-sided Laplace transform and $\bbR$ for two-sided Laplace transform.
 
@@ -45,9 +45,9 @@ For one-sided Laplace transform:
 \sssc{Region of convergence (ROC)}
 The set of values of $s$ for which $F(s)$ converges is called region of convergence (ROC). A function is called Laplace-transformable iff the ROC of its Laplace transform is nonempty.
 
-For one-sided Laplace tranform, ROC is a class of the form of either $\Re(s) > a$ or $\Re(s) \geq a$ for some extended real constant $a$, called abscissa of convergence.
+For one-sided Laplace transform, ROC is a class of the form of either $\Re(s) > a$ or $\Re(s) \geq a$ for some extended real constant $a$, called abscissa of convergence.
 
-For two-sided Laplace tranform, ROC is a class of the form of either $\Re(s) > a$ or $\Re(s) \geq a$ and either $\Re(s) <  $ or $\Re(s) \leq b$ for some extended real constants $a$ and $b$, called abscissas of convergence.
+For two-sided Laplace transform, ROC is a class of the form of either $\Re(s) > a$ or $\Re(s) \geq a$ and either $\Re(s) <  $ or $\Re(s) \leq b$ for some extended real constants $a$ and $b$, called abscissas of convergence.
 \sssc{Of exponential order}
 A complex-valued (or real-valued) functional $f$ defined on $\mathbb{R}_{\geq a}$ for some $a\in\bbR$ is of exponential order $\alpha\in\mathbb{R}_{>0}$ iff there exists $M>0$ and $T>0$ such that:
 \[|f(t)|\leq Me^{\alpha t}\quad\forall t>T.\]
@@ -304,7 +304,7 @@ By Fubini's theorem,
 \epr
 TODO: For two-sided Laplace transform of functional and distribution:
 TODO: For two-sided Laplace transform of distributions:
-\sssc{Initial Value Theorem (IVT) for one-sided Laplace tranform of functional}
+\sssc{Initial Value Theorem (IVT) for one-sided Laplace transform of functional}
 For functional $f$ of expertial order and its one-sided Laplace transform $F(s)$, for $s\in\bbR$,
 \[\lim_{t\to 0^+}f(t)=\lim_{s\to\infty}sF(s).\]
 \begin{proof}
@@ -333,7 +333,7 @@ By dominated convergence theorem, we obtain:
 &=f(0^+).
 \ea\]
 \end{proof}
-\sssc{Final Value Theorem (FVT) for one-sided Laplace tranform of functional}
+\sssc{Final Value Theorem (FVT) for one-sided Laplace transform of functional}
 For functional $f(t)$ with $\lim_{t\to\infty}f(t)\in\bbC$ and its one-sided Laplace transform $F(s)$ with no pole in $\{s\in\bbC\mid \Re(s)\geq 0\}\setminus\{0\}$, for $\{s\in\bbC\mid \Re(s)\geq 0\}$, with $\lim_{s\to 0}sF(s)\in\bbC$,
 \[\lim_{t\to\infty}f(t)=\lim_{s\to 0}sF(s).\]
 \bpr
@@ -481,12 +481,40 @@ Suppose $P(s)$ is a polynomial of $s$ and is not divisible by any of $(s-a_i)$, 
 \[\frac{P(s)}{\prod_{i=1}^n(s-a_i)^{b_i}}=\sum_{i=1}^n\sum_{j=1}^{b_i}\frac{A_{i,j}}{(s-a_i)^j}.\]
 Then
 \[A_{k,b_k-m}=\frac{1}{m!}\evlp{\dv[m]{s}(\frac{P(s)}{\prod_{\substrack{i=1\\i\ne k}}^n(s-a_i)^{b_i}})}_{s=a_k}.\]
+\sssc{Transform of a periodic function}
+Suppose $f(t)$ is periodic with period $T>0$ and of exponential order.
+
+For one-sided Laplace transform:
+\[\calL\{f(t)\}=\frac{1}{1-e^{-sT}}\int_0^Te^{-st}f(t)\dd{t}\]
+\bpr
+\[\calL\{f(t)\}=\int_0^Te^{-st}f(t)\dd{t}+\int_T^{\infty}e^{-st}f(t)\dd{t}\]
+Let $t=u+T$.
+\[\int_T^{\infty}e^{-st}f(t)\dd{t}=\int_0^{\infty}e^{-s(u+T)}f(u+T)\dd{u}=e^{-sT}\calL\{f(t)\}\]
+\epr
+For two-sided Laplace transform: The two-sided Laplace transform of a periodic function of period $T$ such that $\int_0^Te^{-su}f(u)\dd{u}\ne 0$ must diverge.
+\bpr
+\[\calL\{f(t)\}=\sum_{k=-\infty}^{\infty}\int_{kT}^{(k+1)T}e^{-st}f(t)\dd{t}\]
+Let $u=kT$.
+\[\sum_{k=-\infty}^{\infty}\int_{kT}^{(k+1)T}e^{-st}f(t)\dd{t}=\int_0^Te^{-su}f(u)\dd{u}\sum_{k=-\infty}^{\infty}e^{-skT}\]
+$\sum_{k=-\infty}^{\infty}e^{-skT}$ diverges for all $s$.
+\epr
 
 
 
-TODO
+
+
+
+
+
+
+
+
+
+
+
 \ssc{Fourier Transform (FT) (傅立葉變換)}
-TODO: mb as Laplace tranform special case?
+TODO
+TODO: mb as Laplace transform special case?
 \sssc{Fourier Transform (FT)}
 Fourier transform is an integral transform that converts a function of a real variable (usually $t$, in the time domain) to a function of another real variable (usually $\omega$, in the frequency or Fourier domain). The functions are often denoted in lowercase for the time-domain representation and uppercase for the frequency-domain.
 
