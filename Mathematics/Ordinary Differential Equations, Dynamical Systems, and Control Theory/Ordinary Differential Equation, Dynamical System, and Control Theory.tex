@@ -3,31 +3,33 @@
 \setcounter{tocdepth}{3}
 \input{/usr/share/LaTeX-ToolKit/template.tex}
 \begin{document}
-\title{Ordinary Differential Equations, Dynamical Systems, and Control Theory}
+\title{Ordinary Differential Equation, Dynamical System, and Control Theory}
 \author{沈威宇}
 \date{\temtoday}
 \titletocdoc
-\ch{Ordinary Differential Equations (常微分方程), Dynamical Systems (動態系統 or 動力系統), and Control Theory (控制理論)}
-\sct{Ordinary Differential Equations}
-\ssc{Definitions}
-\sssc{Normal form}
-The normal form of an $n$th-order ODE of a dependent variable $y$ in codomain $Y$ with respect to an independent variable $x$ in domain $X$ is
-\[\dv[n]{y}{x}=F(x,y,y',y'',\dots y^{(n-1)}),\]
-in which $F$ is a function of $(n+1)$ variables with codomain $Y$.
-\sssc{System of ODEs (常微分方程組)}
-A system of ODEs is two or more equations involving the derivatives of two or more unknown functions or dependent variables of a single independent variable.
+\ch{Ordinary Differential Equation (常微分方程), Dynamical System (動態系統 or 動力系統), and Control Theory (控制理論)}
+\sct{Ordinary Differential Equation}
+\ssc{Definition}
+\sssc{Ordinary Differential Equation (ODE) and System of ODEs (常微分方程組)}
+An $n$th-order ODE or system of ODEs of a unknown function or dependent variable unknown functions or dependent variables $\mb{y}\colon\bbR\to\bbR^m$ with respect to an independent variable $x\in\bbR$ can be written in the form, called normal form,
+\[\mb{y}^{(n)}=F(x,mb{y},mb{y}',mb{y}'',\ldots,\mb{y}^{(n-1)}),\]
+in which $F\colon\Omega\subseteq\bbR\times\bbR^{m\times n}\to\bbR^m$ is a function.
 \sssc{Initial-value problem (IVP) (初值問題)}
-An $n$th-order initial-value problem is an $n$th-order ODE with $n$ conditions for $y$ and all $k$th derivative functions with $k\in\bbN\land k<n$ of $y$ at the same point $x=x_0$, that is,
-\[\left\{y^{(k)}(x_0)=y_k\middle| k\in\bbN\land k<n\right\},\]
-called initial conditions (ICs) (初始條件).
+An $n$th-order initial-value problem is to solve an $n$th-order ODE or system of ODEs
+\[\mb{y}^{(n)}=F(x,mb{y},mb{y}',mb{y}'',\ldots,\mb{y}^{(n-1)})\]
+that subjects to an condition called initial condition (IC) (初始條件) or conditions called initial conditions at a point $x_0\in\bbR$ that can be written in the form
+\[\mb{y}^{(i)}(x_0)=y_i,\quad\forall i\in\bbN_{0,<n}\]
+and such that $(t,y_0,\ldots,y_{n-1})\in\Omega$.
 
-A solution of an IVP is a solution of the ODE that complies with all the ICs.
+A function $\mb{y}\colon\bbR\to\bbR^m$ that complies with the system of ODEs and the ICs is called a solution or solution vector.
 
-The interval of existence of an IVP is the largest open interval containing $x_0$ where a solution of the IVP exists; the interval of existence of an IVP is the largest open interval containing $x_0$ where a unique solution of the IVP exists.
+The interval of existence of an IVP is the largest open interval containing $x_0$ where a solution of the IVP exists.
+
+The interval of uniqueness of an IVP is the largest open interval containing $x_0$ where a unique solution of the IVP exists.
 \sssc{Boundary-value problem (BVP) (邊值問題)}
-An $n$th-order boundary-value problem is an $n$th-order ODE with some conditions called boundary conditions (BCs) (邊界條件).
+An $n$th-order initial-value problem is to solve an $n$th-order ODE or system of ODEs that subjects to a condition called boundary condition (BC) (邊界條件) or conditions called boundary conditions.
 
-A solution of an BVP is a solution of the ODE that complies with all the BCs.
+A function $\mb{y}\colon\bbR\to\bbR^m$ that complies with the system of ODEs and the BCs is called a solution or solution vector.
 \ssc{Solutions of ODEs}
 \sssc{Solution or flow of an ODE}
 Any function $f$ that is defined on an interval $I$, called interval of definition, the interval of existence, the interval of validity, or the domain of the solution, and of class $C^n$ on $I$, and when substituted into an $n$th-order ordinary differential equation reduces the equation to an identity, is said to be a solution (aka flow) of the equation on $I$.
@@ -515,18 +517,17 @@ This is separable.
 \[\int\frac{1}{f(u)-u}\dd{u}=\ln|x-\alpha|+C\]
 \end{proof}
 \sct{Linear ODE}
-Unless otherwise specified, the variables and functions are in $\mathbb{R}$.
-\ssc{Basics}
-\sssc{Definition}
-An $n$th-order ODE of a dependent variable $y$ with respect to an independent variable $x$ is linear iff it can be written in the form
-\[\sum_{i=0}^np_i(x)y^{(i)}=q(x),\]
-where $p_0(x),\dots p_n(x)$, called the coefficients, and $q(x)$, called the forcing term, are functions of $x$, and $p_n(x)$ is nontrivial.
+\ssc{Definition}
+\sssc{Linear ODE and system of linear ODEs or linear system}
+An $n$th-order linear ODE or system of linear ODEs of a unknown function or dependent variable unknown functions or dependent variables $\mb{y}\colon\bbR\to\bbR^m$ with respect to an independent variable $x\in\bbR$ can be written in the form, called normal form,
+\[\sum_{i=0}^na_i(x)\mb{y}^{(i)}=\mb{f}(x),\]
+in which $a_i(x)\colon\Omega_i\subseteq\bbR^{m\times m}\to\bbR$ are called coefficients and $\mb{f}(x)\colon\bbR\to\bbR^m$ is called forcing term.
 \sssc{Linear differential operator}
 A linear differential operator is a polynomial of the differential operators $D$, i.e., $\dv{}{x}$, and its order is the degree of the polynomial.
 \sssc{Linearity}
-Let $L[y]=\sum_{i=0}^np_i(x)y^{(i)}$ denotes the left-hand side, then $L[\alpha y_1+\beta y_2]=\alpha L[y_1]+\beta L[y_2]$. That's why it's called to be linear.
+Let $L$ be the linear differential operator $L[\mb{y}]=\sum_{i=0}^na_i(x)\mb{y}^{(i)}$. Then $L[\alpha\mb{y}_1+\beta\mb{y}_2]=\alpha L[\mb{y}_1]+\beta L[\mb{y}_2]$. That's why it's called to be linear.
 \sssc{Homogeneity}
-A linear ODE is called a linear homgeneous ODE iff the forcing term is 0 for all $x$; otherwise, it is called a linear non-homogeneous ODE.
+A linear ODE is called a linear homogeneous ODE iff the forcing term is 0 for all $x$; otherwise, it is called a linear non-homogeneous ODE.
 \sssc{Complementary or associated (homogeneous) equation, natural, complementary, or homogeneous solution or function, and particularly solution}
 Given an $n$th-order linear non-homogeneous ODE
 \[y^{(n)}+\sum_{i=0}^{n-1}p_i(x)y^{(i)}=q(x),\]
@@ -534,10 +535,22 @@ the $n$th-order linear homogeneous ODE,
 \[y^{(n)}+\sum_{i=0}^{n-1}p_i(x)y^{(i)}=0,\]
 is called its complementary or associated (homogeneous) equation, and the general solutions of the original equation is the sum of the general solutions $y_c$ of the complementary equation, called natural, complementary, or homogeneous solution or function, and a particular solution $y_p$.
 \sssc{Superposition principle}
-If $y_1(x)$ and $y_2(x)$ are both solutions of a linear homgeneous ODE on an interval, then $c_1y_1(x)+c_2y_2(x)$ is also a solution of the ODE on the interval for any constants $c_1,c_2$.
+If $y_1(x)$ and $y_2(x)$ are both solutions of a linear homogeneous ODE on an interval, then $c_1y_1(x)+c_2y_2(x)$ is also a solution of the ODE on the interval for any constants $c_1,c_2$.
 \sssc{Linear independence}
 $n$ functions of the same domain and codomain $y_1(x),y_2(x),\ldots y_n(x)$ are said to be linearly independent iff
 \[\sum_{i=1}^nc_iy_i(x)=0\implies\forall i\in[1,n]\cap\bbZ\colon c_i=0\]
+\sssc{System of linear first-order ODEs or linear first-order system}
+A linear first-order system can be written in matrix form
+\[\mb{y}'(x)=\mb{A}(x)\mb{y}(x)+\mb{f}(x),\]
+where
+\[\mb{y}(x)=\begin{bmatrix}y_1(x)\\\vdots\\y_n(x)\end{bmatrix}\]
+is called solution vector,
+\[\mb{A}(x)=\begin{bmatrix}a_{1,1}(x) & \cdots & a_{1,n}(x)\\\vdots & \ddots & \vdots\\a_{n,1}(x) & \cdots & a_{n,n}(x)\end{bmatrix}\]
+is called coefficient matrix, and
+\[\mb{f}(x)=\begin{bmatrix}f_1(x)\\\vdots\\f_n(x)\end{bmatrix}\]
+And an IC of an IVP of it can be written in the form
+\[\mb{y}(x_0)=\mb{y}_0=\begin{bmatrix}\gamma_1\\\vdots\\\gamma_n\end{bmatrix}\]
+where $x_0$ is a constant in the domain of $\mb{A}$ and $\mb{f}$, and $\mb{y}_0$ is a constant vector.
 \sssc{Wrońskian or Wronskian}
 For $n$ functions $f_1,f_2,\ldots,f_n$ that are $(n-1)$ times differentiable on an interval $I$, the Wrońskian (also called Wronskian) of them, $W(f_1,f_2,\ldots,f_n)$, is a function on $I$ defined by
 \[W(f_1,f_2,\ldots,f_n)(x)=\begin{vmatrix}
@@ -622,7 +635,7 @@ Prove by contradiction. If $\det(\Omega)=0$, by Cramer formula, $\begin{bmatrix}
 \sssc{Solutions of linear homogeneous ODE as vector space}
 The general solutions of an $n$th-order linear homogeneous ODE is a vector space of dimension $n$. A basis of it is called a fundamental set of solutions.
 
-If $y_1(x),y_2(x),\ldots y_n(x)$ are $n$ linearly independent solutions of an $n$th-order linear homgeneous ODE on an interval, then they are a basis of the vector space of the general solutions of the ODE on the interval, and $\sum_{i=1}^nc_iy_i(x)$ is the family of general solutions of the ODE on the interval with $n$ parameter $c_1,c_2,\ldots c_n$.
+If $y_1(x),y_2(x),\ldots y_n(x)$ are $n$ linearly independent solutions of an $n$th-order linear homogeneous ODE on an interval, then they are a basis of the vector space of the general solutions of the ODE on the interval, and $\sum_{i=1}^nc_iy_i(x)$ is the family of general solutions of the ODE on the interval with $n$ parameter $c_1,c_2,\ldots c_n$.
 \sssc{Solutions of linear non-homogeneous ODE as affine space}
 The general solutions of a linear non-homogeneous ODE is an affine space whose associated vector space is the vector space of the solutions of its complementary equation.
 \sssc{Annihilator}
@@ -1514,19 +1527,10 @@ The Legendre polynomials are given by
 \begin{proof}
 TODO 
 \end{proof}
-\ssc{System of linear first-order ODEs or linear first-order system}
-\sssc{Definition}
-For $n$ unknown functions $x_1(t),\ldots x_n(t)$, a linear first-order system can be written as normal form
-\[x_j'(t)=\sum_{i=1}^na_{j,i}(t)x_i(t)+f_j(t),\quad\forall j\in\bbN_{\le n}\]
-or matrix form
-\[\mb{x}'(t)=A(t)\mb{x}(t)+\mb{f}(t),\]
-where
-\[\mb{x}(t)=\begin{bmatrix}x_1(t)\\\vdots\\x_n(t)\end{bmatrix}\]
-is called solution vector,
-\[\mb{A}(t)=\begin{bmatrix}a_{1,1}(t) & \cdots & a_{1,n}(t)\\\vdots & \ddots & \vdots\\a_{n,1}(t) & \cdots & a_{n,n}(t)\end{bmatrix}\]
-is called coefficient matrix, and
-\[\mb{f}(t)=\begin{bmatrix}f_1(t)\\\vdots\\f_n(t)\end{bmatrix}\]
-If $\mb{f}(t)=\mb{0}$, that is, all of the ODEs are homogeneous, then the system is homogeneous; otherwise the system is non-homogeneous.
+
+
+
+
 TODO
 
 \sssc{Solving by Elimination}
