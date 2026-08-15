@@ -518,10 +518,10 @@ This is separable.
 \end{proof}
 \sct{Linear ODE}
 \ssc{Definition}
-\sssc{Linear ODE and system of linear ODEs or linear system}
-An $n$th-order linear ODE or system of linear ODEs of a unknown function or dependent variable unknown functions or dependent variables $\mb{y}\colon\bbR\to\bbR^m$ with respect to an independent variable $x\in\bbR$ can be written in the form, called normal form,
-\[\sum_{i=0}^na_i(x)\mb{y}^{(i)}=\mb{f}(x),\]
-in which $a_i(x)\colon\Omega_i\subseteq\bbR^{m\times m}\to\bbR$ are called coefficients and $\mb{f}(x)\colon\bbR\to\bbR^m$ is called forcing term.
+\sssc{Linear ODE}
+An $n$th-order linear ODE of a unknown function or dependent variable $y\colon\bbR\to\bbR$ with respect to an independent variable $x\in\bbR$ can be written in the form, called normal form,
+\[\sum_{i=0}^na_i(x)y^{(i)}=f(x),\]
+in which $a_i(x)\colon\Omega_i\subseteq\bbR\to\bbR$ are called coefficients and $f(x)\colon\Omega\subseteq\bbR\to\bbR^m$ is called forcing term.
 \sssc{Linear differential operator}
 A linear differential operator is a polynomial of the differential operators $D$, i.e., $\dv{}{x}$, and its order is the degree of the polynomial.
 \sssc{Linearity}
@@ -529,32 +529,21 @@ Let $L$ be the linear differential operator $L[\mb{y}]=\sum_{i=0}^na_i(x)\mb{y}^
 \sssc{Homogeneity}
 A linear ODE is called a linear homogeneous ODE iff the forcing term is 0 for all $x$; otherwise, it is called a linear non-homogeneous ODE.
 \sssc{Complementary or associated (homogeneous) equation, natural, complementary, or homogeneous solution or function, and particularly solution}
-Given an $n$th-order system of linear ODEs
-\[\sum_{i=0}^na_i(x)\mb{y}^{(i)}=\mb{f}(x),\]
-\[\sum_{i=0}^na_i(x)\mb{y}^{(i)}=0,\]
+Given an $n$th-order linear ODE
+\[\sum_{i=0}^na_i(x)y^{(i)}=f(x),\]
+\[\sum_{i=0}^na_i(x)y^{(i)}=0,\]
 is called its complementary or associated (homogeneous) equation, and the general solutions of the original equation is the sum of the general solutions $y_c$ of the complementary equation, called natural, complementary, or homogeneous solution or function, and a particular solution $y_p$.
 \sssc{Superposition principle}
-If $\mb{y}_1(x)$ and $\mb{y}_2(x)$ are both solutions to a system of linear ODEs on an interval, then $c_1\mb{y}_1(x)+c_2\mb{y}_2(x)$ is also a solution to it on the interval for any $c_1,c_2\in\bbR$.
-\sssc{System of linear first-order ODEs or linear first-order system}
-A linear first-order system can be written in matrix form
-\[\mb{y}'(x)=\mb{A}(x)\mb{y}(x)+\mb{f}(x),\]
-where
-\[\mb{y}(x)=\begin{bmatrix}y_1(x)\\\vdots\\y_n(x)\end{bmatrix}\]
-is called solution vector,
-\[\mb{A}(x)=\begin{bmatrix}a_{1,1}(x) & \cdots & a_{1,n}(x)\\\vdots & \ddots & \vdots\\a_{n,1}(x) & \cdots & a_{n,n}(x)\end{bmatrix}\]
-is called coefficient matrix, and
-\[\mb{f}(x)=\begin{bmatrix}f_1(x)\\\vdots\\f_n(x)\end{bmatrix}\]
-And an IC of an IVP of it can be written in the form
-\[\mb{y}(x_0)=\mb{y}_0=\begin{bmatrix}\gamma_1\\\vdots\\\gamma_n\end{bmatrix}\]
-where $x_0$ is a constant in the domain of $\mb{A}$ and $\mb{f}$, and $\mb{y}_0$ is a constant vector.
+If $y_1(x)$ and $y_2(x)$ are both solutions to a linear ODE on an interval, then $c_1y_1(x)+c_2y_2(x)$ is also a solution to it on the interval for any $c_1,c_2\in\bbR$.
 \sssc{Wrońskian or Wronskian}
-For $n$ functions $f_1,f_2,\ldots,f_n$ that are $(n-1)$ times differentiable on an interval $I$, the Wrońskian (also called Wronskian) of them, $W(f_1,f_2,\ldots,f_n)$, is a function on $I$ defined by
+For $n$ functions $f_i\colon\Omega_i\subseteq\bbR\to\bbR$ for all $i\in\bbN_{\le n}$ that are $(n-1)$ times differentiable on an interval $I$, the Wrońskian (also called Wronskian) of them, $W(f_1,f_2,\ldots,f_n)$, is a function on $I$ defined by
 \[W(f_1,f_2,\ldots,f_n)(x)=\begin{vmatrix}
 f_1(x) & f_2(x) & \cdots & f_n(x) \\
 f_1'(x) & f_2(x) & \cdots & f_n'(x) \\
 \vdots & \vdots & \ddots & \vdots \\
 f_1^{(n-1)}(x) & f_2^{(n-1)}(x) & \cdots & f_n^{(n-1)}(x)
 \end{vmatrix}.\]
+\sssc{Wrońskian and linear independence}
 If $f_1,f_2,\ldots,f_n$ are not linearly independent, then $W=0$.
 \sssc{General Abel's (differential equation) identity/formula}
 For $n$ $(n-1)$ times differentiable solutions $y_1,y_2,\ldots,y_n$ of $y^{(n)}+\sum_{i=0}^{n-1}p_i(x)y^{(i)}=0$ on an interval $I$ where $p_i(x)$ are continuous for all $i\in[0,n-1]\cap\bbZ$, for any $x_0\in I$,
@@ -611,7 +600,7 @@ Since $W(y_1,y_2,\ldots,y_n)(x_0)=\det(\Omega)\ne0$, $\Omega$ is invertible.
 \sssc{Non-zero Wrońskian of solutions of linear homogeneous equation iff linear independence of them}
 For $n$ $(n-1)$ times differentiable solutions $y_1,y_2,\ldots,y_n$ of $y^{(n)}+\sum_{i=0}^{n-1}p_i(x)y^{(i)}=0$ on an interval $I$ where $p_i(x)$ are continuous for all $i\in[0,n-1]\cap\bbZ$, for any $x_0\in I$, $W(y_1,y_2,\ldots,y_n)(x_0)\ne 0$ iff $y_1,y_2,\ldots,y_n$ are linearly independent.
 \bpr
-Abel's identiity shows that
+Abel's identity shows that
 \[W(y_1,y_2,\ldots,y_n)(x)=W(y_1,y_2,\ldots,y_n)(x_0)\exp(-\int_{x_0}^Xp_{n-1}(t)\dd{t}).\]
 $\exp(-\int_{x_0}^Xp_{n-1}(t)\dd{t})$ is always non-zero. Thus $W(y_1,y_2,\ldots,y_n)(x)$ is either zero for all $x\in I$ or non-zero for all $x\in I$.
 
@@ -628,15 +617,15 @@ Differentiating $n-1$ times gives
 \[\Omega\begin{bmatrix}c_1\\c_2\\\vdots\\c_n\end{bmatrix}=\begin{bmatrix}0\\0\\\vdots\\0\end{bmatrix}\]
 Prove by contradiction. If $\det(\Omega)=0$, by Cramer formula, $\begin{bmatrix}c_1\\c_2\\\vdots\\c_n\end{bmatrix}=\begin{bmatrix}0\\0\\\vdots\\0\end{bmatrix}$.
 \epr
-\sssc{Solutions of linear homogeneous ODE as vector space}
-The general solutions of an $n$th-order linear homogeneous ODE is a vector space of dimension $n$. A basis of it is called a fundamental set of solutions.
+\sssc{Solutions of linear ODE as vector space}
+The general solutions to an $n$th-order linear ODE is a vector space of dimension $n$. A basis of it is called a fundamental set of solutions.
 
-If $y_1(x),y_2(x),\ldots y_n(x)$ are $n$ linearly independent solutions of an $n$th-order linear homogeneous ODE on an interval, then they are a basis of the vector space of the general solutions of the ODE on the interval, and $\sum_{i=1}^nc_iy_i(x)$ is the family of general solutions of the ODE on the interval with $n$ parameter $c_1,c_2,\ldots c_n$.
+If $y_1(x),y_2(x),\ldots y_n(x)$ are $n$ linearly independent solutions of an $n$th-order linear homogeneous ODE on an interval, then they are a basis of the vector space of the general solutions of the ODE on the interval, and $\sum_{i=1}^nc_iy_i(x)$ is the family of general solutions to it on the interval with $n$ parameter $c_1,c_2,\ldots c_n$.
 \sssc{Solutions of linear non-homogeneous ODE as affine space}
-The general solutions of a linear non-homogeneous ODE is an affine space whose associated vector space is the vector space of the solutions of its complementary equation.
+The general solutions to a linear non-homogeneous ODE is an affine space whose associated vector space is the vector space of the solutions to its complementary equation.
 \sssc{Annihilator}
 An annihilator of a function $f$ is a linear differential operator $L$ such that $L(f)=0$.
-
+\sssc{Annihilator multiplication property}
 If $P$ is an annihilator of $f$, then for any linear differential operator $Q$, $PQ$ is an annihilator of $f$.
 \ssc{Characteristic equation or auxiliary equation for constant coefficient linear homogeneous ODE}
 \sssc{Method of solution}
@@ -1527,8 +1516,23 @@ TODO
 
 
 
-TODO
 
+TODO
+\sct{Linear First-order System}
+\sssc{System of linear first-order ODEs or linear first-order system or linear system}
+A linear first-order system can be written in matrix form
+\[\mb{y}'(x)=\mb{A}(x)\mb{y}(x)+\mb{f}(x),\]
+where
+\[\mb{y}(x)=\begin{bmatrix}y_1(x)\\\vdots\\y_n(x)\end{bmatrix}\]
+is called solution vector,
+\[\mb{A}(x)=\begin{bmatrix}a_{1,1}(x) & \cdots & a_{1,n}(x)\\\vdots & \ddots & \vdots\\a_{n,1}(x) & \cdots & a_{n,n}(x)\end{bmatrix}\]
+is called coefficient matrix, and
+\[\mb{f}(x)=\begin{bmatrix}f_1(x)\\\vdots\\f_n(x)\end{bmatrix}\]
+And an IC of an IVP of it can be written in the form
+\[\mb{y}(x_0)=\mb{y}_0=\begin{bmatrix}\gamma_1\\\vdots\\\gamma_n\end{bmatrix}\]
+where $x_0$ is a constant in the domain of $\mb{A}$ and $\mb{f}$, and $\mb{y}_0$ is a constant vector.
+
+A homogeneous one is called homogeneous system.
 \sssc{Solving by Elimination}
 \ben
 \item Write the system in terms of differential operator $D$.
@@ -1555,8 +1559,20 @@ Solutions:
 \[(D^2+D-6)x=0\]
 \[x(t)=Ce^{2t}+De^{-3t}\]
 \epr
+\sssc{Wrońskian}
+Suppose $\mb{y}_i\colon\Omega_i\subseteq\bbR\to\bbR^n$ for all $i\in\bbN_{\le n}$ are solution vectors to a homogeneous system on an interval and
+\[\mb{y}_i=\begin{bmatrix}y_{1i}\\\vdots\\y_{ni}\end{bmatrix}.\]
+Then the Wrońskian of them is defined as
+\[W(\mb{y}_1,\ldots,\mb{y}_n)=\begin{vmatrix}\mb{y}_1&\ldots&\mb{y}_n\end{vmatrix}=\begin{vmatrix}y_{11}&\ldots&y_{1n}\\\vdots&\ddots&\vdots\\y_{n1}&\ldots&y_{nn}\end{vmatrix}.\]
+\sssc{Wrońskian and linear independence}
+If 
 
 
+
+
+
+\sssc{Superposition principle}
+If $\mb{y}_1(x)$ and $\mb{y}_2(x)$ are both solutions to a system of linear ODEs on an interval, then $c_1\mb{y}_1(x)+c_2\mb{y}_2(x)$ is also a solution to it on the interval for any $c_1,c_2\in\bbR$.
 
 
 
