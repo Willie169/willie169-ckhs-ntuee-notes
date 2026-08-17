@@ -527,7 +527,7 @@ A linear differential operator is a polynomial of the differential operators $D$
 \sssc{Linearity}
 Let $L$ be the linear differential operator $L[\mb{y}]=\sum_{i=0}^na_i(x)\mb{y}^{(i)}$. Then $L[\alpha\mb{y}_1+\beta\mb{y}_2]=\alpha L[\mb{y}_1]+\beta L[\mb{y}_2]$. That's why it's called to be linear.
 \sssc{Homogeneity}
-A linear ODE is called a linear homogeneous ODE iff the forcing term is 0 for all $x$; otherwise, it is called a linear non-homogeneous ODE.
+A linear ODE is called a homogeneous linear ODE iff the forcing term is 0 for all $x$; otherwise, it is called a non-homogeneous linear ODE.
 \sssc{Complementary or associated (homogeneous) equation, natural, complementary, or homogeneous solution or function, and particularly solution}
 Given an $n$th-order linear ODE
 \[\sum_{i=0}^na_i(x)y^{(i)}=f(x),\]
@@ -543,8 +543,19 @@ f_1'(x) & f_2(x) & \cdots & f_n'(x) \\
 \vdots & \vdots & \ddots & \vdots \\
 f_1^{(n-1)}(x) & f_2^{(n-1)}(x) & \cdots & f_n^{(n-1)}(x)
 \end{vmatrix}.\]
-\sssc{Wrońskian and linear independence}
-If $f_1,f_2,\ldots,f_n$ are not linearly independent, then $W(f_1,f_2,\ldots,f_n)=0$.
+\sssc{Non-zero Wrońskian implies linear independence}
+For $n$ functions $f_i\colon\Omega_i\subseteq\bbR\to\bbR$ for all $i\in\bbN_{\le n}$ that are $(n-1)$ times differentiable on an interval $I$, if $W(f_1,f_2,\ldots,f_n)\ne0$, then they are linearly independent.
+\begin{proof}
+If they are not linearly independent, there exists not all zero $c_1,\ldots,c_n$ such that
+\[\sum_{i=1}^nc_if_i=0\]
+\[\begin{bmatrix}
+f_1(x) & f_2(x) & \cdots & f_n(x) \\
+f_1'(x) & f_2(x) & \cdots & f_n'(x) \\
+\vdots & \vdots & \ddots & \vdots \\
+f_1^{(n-1)}(x) & f_2^{(n-1)}(x) & \cdots & f_n^{(n-1)}(x)
+\end{bmatrix}\begin{bmatrix}c_1\\c_2\\\vdots\\c_n\end{bmatrix}=\begin{bmatrix}0\\0\\\vdots\\0\end{bmatrix}\]
+All $c_i=0$ if $W(f_1,f_2,\ldots,f_n)(x)\ne 0$ by Cramer rule, thus $W(f_1,f_2,\ldots,f_n)(x)=0$.
+\end{proof}
 \sssc{General Abel's (differential equation) identity/formula}
 For $n$ $(n-1)$ times differentiable solutions $y_1,y_2,\ldots,y_n$ of $y^{(n)}+\sum_{i=0}^{n-1}p_i(x)y^{(i)}=0$ on an interval $I$ where $p_i(x)$ are continuous for all $i\in[0,n-1]\cap\bbZ$, for any $x_0\in I$,
 \[W(y_1,y_2,\ldots,y_n)(x)=W(y_1,y_2,\ldots,y_n)(x_0)\exp(-\int_{x_0}^Xp_{n-1}(t)\dd{t}).\]
@@ -580,24 +591,7 @@ y_1'(x) & y_2'(x) & \cdots & y_n'(x) \\
 Solve $W'(x)+p_{n-1}(x)W(x)$ using integrating factor $\exp(-\int_{x_0}^xp_{n-1}(t)\dd{t})$.
 \[W(x)=W(x_0)\exp(-\int_{x_0}^Xp_{n-1}(t)\dd{t}).\]
 \epr
-\sssc{Non-zero Wrońskian implies linear independence}
-For $n$ $(n-1)$ times differentiable functions $y_1,y_2,\ldots,y_n$ on an interval $I$, for any $x_0\in I$, $W(y_1,y_2,\ldots,y_n)(x_0)\ne 0$ implies $y_1,y_2,\ldots,y_n$ are linearly independent.
-\bpr
-Suppose
-\[\sum_{i=1}^nc_iy_i(x)=0\]
-Let
-\[\Omega=\begin{bmatrix}
-y_1(x_0) & y_2(x_0) & \cdots & y_n(x_0) \\
-y_1'(x_0) & y_2'(x_0) & \cdots & y_n'(x_0) \\
-\vdots & \vdots & \ddots & \vdots \\
-y_1^{(n-1)}(x_0) & y_2^{(n-1)}(x_0) & \cdots & y_n^{(n-1)}(x_0)
-\end{bmatrix}\]
-Differentiating $n-1$ times gives
-\[\Omega\begin{bmatrix}c_1\\c_2\\\vdots\\c_n\end{bmatrix}=\begin{bmatrix}0\\0\\\vdots\\0\end{bmatrix}\]
-Since $W(y_1,y_2,\ldots,y_n)(x_0)=\det(\Omega)\ne0$, $\Omega$ is invertible.
-\[\begin{bmatrix}c_1\\c_2\\\vdots\\c_n\end{bmatrix}=\Omega^{-1}\begin{bmatrix}0\\0\\\vdots\\0\end{bmatrix}=0\]
-\epr
-\sssc{Non-zero Wrońskian of solutions of linear homogeneous equation iff linear independence of them}
+\sssc{Non-zero Wrońskian of solutions of homogeneous linear equation iff linear independence of them}
 For $n$ $(n-1)$ times differentiable solutions $y_1,y_2,\ldots,y_n$ of $y^{(n)}+\sum_{i=0}^{n-1}p_i(x)y^{(i)}=0$ on an interval $I$ where $p_i(x)$ are continuous for all $i\in[0,n-1]\cap\bbZ$, for any $x_0\in I$, $W(y_1,y_2,\ldots,y_n)(x_0)\ne 0$ iff $y_1,y_2,\ldots,y_n$ are linearly independent.
 \bpr
 Abel's identity shows that
@@ -620,16 +614,16 @@ Prove by contradiction. If $\det(\Omega)=0$, by Cramer formula, $\begin{bmatrix}
 \sssc{Solutions of linear ODE as vector space}
 The general solutions to an $n$th-order linear ODE is a vector space of dimension $n$. A basis of it is called a fundamental set of solutions.
 
-If $y_1(x),y_2(x),\ldots y_n(x)$ are $n$ linearly independent solutions of an $n$th-order linear homogeneous ODE on an interval, then they are a basis of the vector space of the general solutions of the ODE on the interval, and $\sum_{i=1}^nc_iy_i(x)$ is the family of general solutions to it on the interval with $n$ parameter $c_1,c_2,\ldots c_n$.
-\sssc{Solutions of linear non-homogeneous ODE as affine space}
-The general solutions to a linear non-homogeneous ODE is an affine space whose associated vector space is the vector space of the solutions to its complementary equation.
+If $y_1(x),y_2(x),\ldots y_n(x)$ are $n$ linearly independent solutions of an $n$th-order homogeneous linear ODE on an interval, then they are a basis of the vector space of the general solutions of the ODE on the interval, and $\sum_{i=1}^nc_iy_i(x)$ is the family of general solutions to it on the interval with $n$ parameter $c_1,c_2,\ldots c_n$.
+\sssc{Solutions of non-homogeneous linear ODE as affine space}
+The general solutions to a non-homogeneous linear ODE is an affine space whose associated vector space is the vector space of the solutions to its complementary equation.
 \sssc{Annihilator}
 An annihilator of a function $f$ is a linear differential operator $L$ such that $L(f)=0$.
 \sssc{Annihilator multiplication property}
 If $P$ is an annihilator of $f$, then for any linear differential operator $Q$, $PQ$ is an annihilator of $f$.
-\ssc{Characteristic equation or auxiliary equation for constant coefficient linear homogeneous ODE}
+\ssc{Characteristic equation or auxiliary equation for constant coefficient homogeneous linear ODE}
 \sssc{Method of solution}
-Consider an $n$th-order constant coefficient linear homogeneous ODE
+Consider an $n$th-order constant coefficient homogeneous linear ODE
 \[\sum_{j=0}^na_jy^{(j)}=0,\quad a_n\neq 0.\]
 The formation of its general solutions using the characteristic equation (also called auxiliary equation) is as follows:
 \ben
@@ -641,7 +635,7 @@ The formation of its general solutions using the characteristic equation (also c
 with parameters $A_{ju},B_{ju},C_{ju}$.
 \een
 \sssc{Exponential order}
-For any solution $f(t)$ of any linear non-homogeneous ODE of one variable $t$, there exists some $M,T\geq 0$ and $\alpha\in\bbR$ such that for all $t>T$ $\abs{f(t)}\leq e^{M\alpha t}$, and the smallest such $\alpha$ is the largest real part among all roots of its characteristic equation.
+For any solution $f(t)$ of any non-homogeneous linear ODE of one variable $t$, there exists some $M,T\geq 0$ and $\alpha\in\bbR$ such that for all $t>T$ $\abs{f(t)}\leq e^{M\alpha t}$, and the smallest such $\alpha$ is the largest real part among all roots of its characteristic equation.
 \sssc{Example: simple harmonic motion}
 ODE:
 \[\ddot{x}=-\omega^2x,\quad\omega\in\bbR_{>0}.\]
@@ -678,9 +672,9 @@ Case $b^2>4k$:
 \[\lambda=\frac{-b\pm\sqrt{b^2-4k}}{2}\]
 \[x-C=A\qty(e^{\frac{-b+\sqrt{b^2-4k}}{2}t}+Be^{\frac{-b-\sqrt{b^2-4k}}{2}t})=Ae^{\frac{-b}{2}t}\qty(e^{\frac{\sqrt{b^2-4k}}{2}t}+Be^{\frac{-\sqrt{b^2-4k}}{2}t})\]
 \end{proof}
-\ssc{Method of undetermined coefficients (MUC) for constant coefficient linear non-homogeneous ODE}
+\ssc{Method of undetermined coefficients (MUC) for constant coefficient non-homogeneous linear ODE}
 \sssc{Superposition approach}
-Consider an $n$th-order constant coefficient linear non-homogeneous ODE
+Consider an $n$th-order constant coefficient non-homogeneous linear ODE
 \[\sum_{j=0}^na_jy^{(j)}=g(x),\quad a_n\neq 0,\]
 with $g(x)$ being able to be written in the form
 \[g(x)=\sum_{j=1}^pk_jx^{m_j}e^{\alpha_jx}+\sum_{j=p+1}^{p+q}x^{m_j}e^{\alpha_jx}\qty(k_j\cos(\beta_jx)+l_j\sin(\beta_jx)),\]
@@ -697,7 +691,7 @@ to obtain its general solutions $y_c$.
 \item The ansatz is
 \[y_j=x^{s_j}e^{\alpha_jx}\sum_{k=0}^{m_j}C_{jk}x^k,\]
 with constants $C_{jk}\in\bbR$.
-\item Solve for $C_{jk}$ such that $y_j$ is a particular solution of the constant coefficient linear non-homogeneous ODE
+\item Solve for $C_{jk}$ such that $y_j$ is a particular solution of the constant coefficient non-homogeneous linear ODE
 \[\sum_{j=0}^na_jy^{(j)}=k_jx^{m_j}e^{\alpha_jx}.\]
 \een
 \item For each term $x^{m_j}e^{\alpha_jx}\qty(k_j\cos(\beta_jx)+l_j\sin(\beta_jx))$ of $g(x)$ for $j\in\bbN\land p<j\leq p+q$, construct a particular solution $y_j$:
@@ -706,7 +700,7 @@ with constants $C_{jk}\in\bbR$.
 \item The ansatz is
 \[y_j=x^{s_j}e^{\alpha_jx}\sum_{k=0}^{m_j}\qty(C_{jk}\cos(\beta_jx)+D_{jk}\sin(\beta_jx))x^k,\]
 with constants $C_{jk},D_{jk}\in\bbR$.
-\item Solve for $C_{jk},D_{jk}$ such that $y_j$ is a particular solution of the constant coefficient linear non-homogeneous ODE
+\item Solve for $C_{jk},D_{jk}$ such that $y_j$ is a particular solution of the constant coefficient non-homogeneous linear ODE
 \[\sum_{j=0}^na_jy^{(j)}=x^{m_j}e^{\alpha_jx}\qty(k_j\cos(\beta_jx)+l_j\sin(\beta_jx)).\]
 \een
 \item A particular solution of the origin ODE is
@@ -715,7 +709,7 @@ and the general solutions of the origin ODE is
 \[y=y_c+y_p.\]
 \een
 \sssc{Annihilator approach}
-Consider an $n$th-order constant coefficient linear non-homogeneous ODE
+Consider an $n$th-order constant coefficient non-homogeneous linear ODE
 \[\sum_{j=0}^na_jy^{(j)}=g(x),\quad a_n\neq 0,\]
 with $g(x)$ being able to be written in the form
 \[g(x)=\sum_{j=1}^pk_jx^{m_j}e^{\alpha_jx}+\sum_{j=p+1}^{p+q}x^{m_j}e^{\alpha_jx}\qty(k_j\cos(\beta_jx)+l_j\sin(\beta_jx)),\]
@@ -740,7 +734,7 @@ Prove by Laplace transform.
 &=\frac{(k_j+l_j)m_j!}{(s-\alpha_j-i\beta_j)^{m_j+1}}-\frac{(k_j-l_j)im_j!}{(s-\alpha_j+i\beta_j)^{m_j+1}}
 \ea\]
 \epr
-\item Find a lowest-order annihilator of $g(x)$, $L_1$, and apply it on both sides to obtain a linear homogeneous ODE
+\item Find a lowest-order annihilator of $g(x)$, $L_1$, and apply it on both sides to obtain a homogeneous linear ODE
 \[L_1(\sum_{j=0}^na_jy^{(j)})=0.\]
 \item Solve it and obtain its general solutions.
 \item Substitute the solutions into the original ODE to obtain an explicit particular solution $y_p$, and the general solutions of the origin ODE is
@@ -750,9 +744,9 @@ Prove by Laplace transform.
 TODO
 example with both approaches
 TODO
-\ssc{Variation of parameters or variation of constants method of solution of linear non-homogeneous equation}
+\ssc{Variation of parameters or variation of constants method of solution of non-homogeneous linear equation}
 \sssc{Method of solution}
-Given an $n$th-order linear non-homogeneous ODE
+Given an $n$th-order non-homogeneous linear ODE
 \[y^{(n)}+\sum_{i=0}^{n-1}p_i(x)y^{(i)}=q(x),\]
 where $p_i(x)$ for all $i\in [0,n-1]\cap\bbZ$ are continuous on An interval $I$.
 \ben
@@ -809,15 +803,15 @@ where
 and is called the Green's function for the ODE and the linear differential operator $D^2+p_1(x)D+p_0(x)$.
 \ssc{Reduction of order}
 \sssc{Method}
-Given an $n$th-order linear homogeneous ODE
+Given an $n$th-order homogeneous linear ODE
 \[\sum_{i=0}^np_i(x)y^{(i)}=0,\]
 if a nontrivial particular solution $y_1(x)$ has been known, we can reduce the order of the ODE by 1 by the substitution
 \[y=vy_1\]
 and then the substitution
 \[u=v'\]
 to an $(n-1)$th-order linear ODE.
-\sssc{Closed-form formula for second-order linear homogeneous ODEs}
-Given a second-order linear homogeneous ODE
+\sssc{Closed-form formula for second-order homogeneous linear ODEs}
+Given a second-order homogeneous linear ODE
 \[y''+p(x)y'+q(x)y=0,\]
 if a nontrivial particular solution $y_1(x)$ that has been known, then the general solutions of the ODE is
 \[y=y_1\int\frac{e^{-\int p(x)\dd{x}}}{y_1(x)^2}\dd{x}.\]
@@ -872,9 +866,9 @@ where
 \item The general solutions are given by
 \[y=y_c+y_p.\]
 \een
-\ssc{Power series solutions and Frobenius method for second-order linear homogeneous ODE}
+\ssc{Power series solutions and Frobenius method for second-order homogeneous linear ODE}
 \sssc{Type of Points}
-Consider a second-order linear homogeneous ODE
+Consider a second-order homogeneous linear ODE
 \[f(x)y''+g(x)y'+h(x)y=0\]
 where $f,g,h$ are continuous on interval $I$.
 
@@ -884,7 +878,7 @@ For any $a\in I$, it is called an ordinary point iff $p(x)$ and $q(x)$ are both 
 
 For a singular point $a$, it is called a regular singular point iff $(x-a)p(x)$ and $(x-a)^2q(x)$ are both analytic at $a$ and called an irregular singular point otherwise.
 \sssc{Power series solution or solution about ordinary points}
-Consider a second-order linear homogeneous ODE
+Consider a second-order homogeneous linear ODE
 \[f(x)y''+g(x)y'+h(x)y=0\]
 where $f,g,h$ are continuous on interval $I$.
 
@@ -908,7 +902,7 @@ where $x_0$ is a fixed ordinary point called expansion point and $a_n$ are const
 TODO
 \epr
 \sssc{Frobenius method or solution about singular points}
-Consider a second-order linear homogeneous ODE
+Consider a second-order homogeneous linear ODE
 \[f(x)y''+g(x)y'+h(x)y=0.\]
 Let
 \[p(x)=\frac{g(x)}{f(x)},\quad q(x)=\frac{h(x)}{f(x)}.\]
@@ -1523,6 +1517,8 @@ is called solution vector,
 \[\mb{A}(x)=\begin{bmatrix}a_{1,1}(x) & \cdots & a_{1,n}(x)\\\vdots & \ddots & \vdots\\a_{n,1}(x) & \cdots & a_{n,n}(x)\end{bmatrix}\]
 is called coefficient matrix, and
 \[\mb{f}(x)=\begin{bmatrix}f_1(x)\\\vdots\\f_n(x)\end{bmatrix}\]
+is called forcing term.
+
 And an IC of an IVP of it can be written in the form
 \[\mb{y}(x_0)=\mb{y}_0=\begin{bmatrix}\gamma_1\\\vdots\\\gamma_n\end{bmatrix}\]
 where $x_0$ is a constant in the domain of $\mb{A}$ and $\mb{f}$, and $\mb{y}_0$ is a constant vector.
@@ -1555,19 +1551,31 @@ Solutions:
 \[x(t)=Ce^{2t}+De^{-3t}\]
 \epr
 \sssc{Wrońskian}
-Suppose $\mb{y}_i\colon\Omega_i\subseteq\bbR\to\bbR^n$ for all $i\in\bbN_{\le n}$ are solution vectors to a homogeneous system on an interval and
+Suppose $n$ functions $\mb{y}_i\colon\Omega_i\subseteq\bbR\to\bbR^n$ for all $i\in\bbN_{\le n}$ are solution vectors to a homogeneous system on an interval and
 \[\mb{y}_i=\begin{bmatrix}y_{1i}\\\vdots\\y_{ni}\end{bmatrix}.\]
 Then the Wrońskian of them is defined as
 \[W(\mb{y}_1,\ldots,\mb{y}_n)=\begin{vmatrix}\mb{y}_1&\ldots&\mb{y}_n\end{vmatrix}=\begin{vmatrix}y_{11}&\ldots&y_{1n}\\\vdots&\ddots&\vdots\\y_{n1}&\ldots&y_{nn}\end{vmatrix}.\]
-\sssc{Wrońskian and linear independence}
-If $\mb{y}_1,\ldots,\mb{y}_n$ are not linearly independent, then $W(\mb{y}_1,\ldots,\mb{y}_n)=0$.
 \sssc{Non-zero Wrońskian implies linear independence}
-
-
-
-
+For $n$ functions $\mb{y}_i\colon\Omega_i\subseteq\bbR\to\bbR^n$ for all $i\in\bbN_{\le n}$, if $W(\mb{y}_1,\ldots,\mb{y}_n)\ne0$, then they are linearly independent.
+\begin{proof}
+If they are not linearly independent, there exists not all zero $c_1,\ldots,c_n$ such that
+\[\sum_{i=1}^nc_i\mb{y}_i=0,\]
+tha is,
+\[\begin{bmatrix}y_{11}&\ldots&y_{1n}\\\vdots&\ddots&\vdots\\y_{n1}&\ldots&y_{nn}\end{bmatrix}=\begin{bmatrix}c_1\\c_2\\\vdots\\c_n\end{bmatrix}=\begin{bmatrix}0\\0\\\vdots\\0\end{bmatrix}\]
+All $c_i=0$ if $W(\mb{y}_1,\ldots,\mb{y}_n)\ne 0$ by Cramer rule, thus $W(\mb{y}_1,\ldots,\mb{y}_n)=0$.
+\end{proof}
+\sssc{Homogeneity}
+A linear first-order system is called a homogeneous linear first-order system iff the forcing term is 0 for all $x$; otherwise, it is called a non-homogeneous linear first-order system.
+\sssc{Complementary or associated (homogeneous) function, natural, complementary, or homogeneous solution or function, and particularly solution}
+Given an $n$th-order linear first-order system 
+\[\mb{y}'(x)=\mb{A}(x)\mb{y}(x)+\mb{f}(x),\]
+\[\mb{y}'(x)=\mb{A}(x)\mb{y}(x),\]
+is called its complementary or associated (homogeneous) function, and the general solutions of the original equation is the sum of the general solutions $\mb{y}_c$ of the complementary function, called natural, complementary, or homogeneous solution or function, and a particular solution $\mb{y}_p$.
 \sssc{Superposition principle}
-If $\mb{y}_1(x)$ and $\mb{y}_2(x)$ are both solutions to a system of linear ODEs on an interval, then $c_1\mb{y}_1(x)+c_2\mb{y}_2(x)$ is also a solution to it on the interval for any $c_1,c_2\in\bbR$.
+If $\mb{y}_1(x)$ and $\mb{y}_2(x)$ are both solutions to a linear first-order system on an interval, then $c_1\mb{y}_1(x)+c_2\mb{y}_2(x)$ is also a solution to it on the interval for any $c_1,c_2\in\bbR$.
+\ssc{Homogeneous linear first-order system}
+
+
 
 
 
