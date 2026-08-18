@@ -89,10 +89,11 @@
 \subsection{繩波}
 \sssc{純量}
 \begin{itemize}
-\item $F$：繩張力在波前進方向的分量量值
-\item $\mu$：（繩子等的）線密度
-\item $u_K$：動能密度
-\item $u_U$：位能密度
+\item $F$：繩張力（tension）在波前進方向的分量量值
+\item $m$：質量
+\item $\mu=\dv{m}{x}$：（繩子等的）線密度
+\item $K$：動能
+\item $U$：位能
 \end{itemize}
 \subsection{聲波}
 \subsubsection{純量}
@@ -1245,41 +1246,33 @@ T &= \sqrt{\frac{4L}{g}}
 \end{aligned}\]
 \subsection{能量}
 \subsubsection{繩波能量一般式}
-假設一條張緊的繩子上有一個橫波：
-\[ u = \frac{1}{2} \mu \left( \frac{\partial y}{\partial t} \right)^2 + \frac{1}{2} F \left( \frac{\partial y}{\partial x} \right)^2 \]
-\begin{proof}
-動能密度 \( u_K \)：\\
-對於一小段長度 \(\Delta x\) 的繩子，其質量為 \(\mu \Delta x\)。這段繩子的動能 \(\Delta K\) 為：
-\[ \Delta K = \frac{1}{2} (\mu \Delta x) \left( \frac{\partial y}{\partial t} \right)^2 \]
-\[ u_K = \frac{\Delta K}{\Delta x} = \frac{1}{2} \mu \left( \frac{\partial y}{\partial t} \right)^2 \]
-位能密度 \( u_U \)：
+假設一條張緊的繩子上有一個小振幅橫波:
 
-對於一小段長度 \(\Delta x\) 的繩子，其位能 \(\Delta U\) 為：
-\[ \Delta U = \frac{1}{2} F \left( \frac{\partial y}{\partial x} \right)^2 \Delta x \]
-\[ u_U = \frac{\Delta U}{\Delta x} = \frac{1}{2} F \left( \frac{\partial y}{\partial x} \right)^2 \]
-能量密度 \( u \)：
-\[ u = u_K + u_U = \frac{1}{2} \mu \left( \frac{\partial y}{\partial t} \right)^2 + \frac{1}{2} F \left( \frac{\partial y}{\partial x} \right)^2 \]
+Kinetic energy density:
+\[\dv{K}{x}=\frac{1}{2}\mu\qty(\pdv{y}{t})^2\]
+Potential energy density:
+\[\dv{U}{x}=\frac{1}{2}v^2\mu\qty(\pdv{y}{x})^2\]
+Energy density:
+\[\dv{E}{x}=\dv{K}{x}+\dv{U}{x}\]
+\begin{proof}
+    \[\dd{K}=\frac{1}{2}\dd{m}\qty(\pdv{y}{t})^2\]
+    \[\dv{K}{x}=\frac{1}{2}\mu\qty(\pdv{y}{t})^2\]
+    \[\dd{U}=\frac{1}{2}F\dd{x}\qty(\pdv{y}{x})^2\]
+    \[\dv{U}{x}=\frac{1}{2}v^2\mu\qty(\pdv{y}{x})^2\]
 \end{proof}
 \subsubsection{正弦繩波}
 設一條張緊的繩子上有一個弦繩波，波的位移函數 \( y(x,t) = A \sin(kx - \omega t) \)，則：
-\[ u_K = u_U = \mu A^2 \omega^2 \cos^2(kx - \omega t) \]
-\[ u = \mu A^2 \omega^2 \cos^2(kx - \omega t) \]
+\[ \dv{K}{x} = \dv{U}{x} = \frac{1}{2}\mu A^2 \omega^2 \cos^2(kx - \omega t) \]
+\[ \dv{E}{x} = \mu A^2 \omega^2 \cos^2(kx - \omega t) \]
+The average rate at which kinetic energy is transported:
+\[\left\langle\dv{K}{t}\right\rangle=\frac{1}{4}\mu vA^2\omega^2\]
 \begin{proof}
 \[ \frac{\partial y}{\partial t} = -A \omega \cos(kx - \omega t) \]
 \[ \frac{\partial y}{\partial x} = A k \cos(kx - \omega t) \]
-\[ \omega = k \sqrt{\frac{F}{\mu}} \]
-\[\begin{aligned}
-u_K &= \frac{1}{2} \mu \left( \frac{\partial y}{\partial t} \right)^2 \\
-&= \frac{1}{2} \mu (A \omega)^2 \cos^2(kx - \omega t) \\
-&= \frac{1}{2} \mu \left( A k \sqrt{\frac{F}{\mu}} \right)^2 \cos^2(kx - \omega t)\\
-&= \frac{1}{2} A^2 k^2 F \cos^2(kx - \omega t)\\
-&= \frac{1}{2} \mu A^2 \omega^2 \cos^2(kx - \omega t)\\
-u_U &= \frac{1}{2} F \left( \frac{\partial y}{\partial x} \right)^2\\
-&= \frac{1}{2} F (A k)^2 \cos^2(kx - \omega t) \\
-&=  \frac{1}{2} F (A k)^2 \cos^2(kx - \omega t) \\
-&= \frac{1}{2} \mu A^2 \omega^2 \cos^2(kx - \omega t)
-\end{aligned}\]
-\[ u = u_K + u_U = \mu A^2 \omega^2 \cos^2(kx - \omega t) \]
+\[ \omega = k v \]
+\[\dv{K}{x}=\frac{1}{2}\mu\qty(\pdv{y}{t})^2=\frac{1}{2}\mu A^2\omega^2\cos^2(kx - \omega t)\]
+\[\dv{U}{x}=\frac{1}{2}\mu A^2\omega^2\cos^2(kx - \omega t)\]
+\[\left\langle\dv{K}{t}\right\rangle=\dv{K}{x}\dv{x}{t}=\frac{1}{2}\mu vA^2\omega^2\frac{\omega}{2\pi}\int_0^{\frac{2\pi}{\omega}}\cos^2(kx-\omega t)\dd{t}=\frac{1}{2}\mu vA^2\omega^2\frac{\omega}{2\pi}\frac{\pi}{\omega}=\frac{1}{4}\mu vA^2\omega^2\]
 \end{proof}
 \subsection{反射與透射}
 繩波是一維波，必為垂直入射。
