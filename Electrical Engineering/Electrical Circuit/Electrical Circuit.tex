@@ -275,16 +275,18 @@ A ground is a node designated to have 0 electric potential. All other electric p
 \end{circuitikz}
 \end{center}
 \sssc{Operating point, Q-point, quiescent point, or bias point}
-The steady-state DC voltage and current values of a circuit when no input signal is applied.
+The steady-state DC voltage and current values of a circuit, called biasing circuit, when no input signal is applied.
 \sssc{Biasing resistor}
 A biasing resistor is a resistor used to achieve a desired operating point.
+\sssc{Ladder network}
+A network whose circuit diagram forms a ladder.
 \sssc{Quality factor (品質因數)}
 The quality factor $Q$ (or $Q_0$) of a network is $2\pi$ multiplied by the maximum energy stored in a period, $E_m$, divided by the total energy lost in the period, $E_l$, during natural response, that is,
 \[Q=\frac{2\pi E_m}{E_l}.\]
 \sssc{SPICE}
 SPICE (Simulation Program with Integrated Circuit Emphasis) is a general-purpose, open-source analog electronic circuit simulator. It is a program used in integrated circuit and board-level design to check the integrity of circuit designs and to predict circuit behavior.
-\ssc{Souce}
-\sssc{Ideal sources}
+\ssc{Source}
+\sssc{Ideal source}
 Ideal voltage sources are active elements with zero output resistance. To turn off an ideal voltage source means replace it with short circuit.
 
 Ideal current sources are active elements with infinite output resistance. To turn off an ideal current source means replace it with open circuit.
@@ -301,6 +303,7 @@ Ideal current sources are active elements with infinite output resistance. To tu
 \end{circuitikz}
 \end{center}
 \sssc{Linear dependent or controlled source}
+Control voltages and currents are called control variables.
 \bit
 \item A voltage-controlled voltage source enforces a DC or sinusoidal AC voltage $v_s=\mu v_x$ across its terminals, where $v_x$ is control voltage and real for DC or complex for AC constant $\mu$ is dimensionless voltage gain.
 \item A current-controlled voltage source enforces a DC or sinusoidal AC voltage $v_s=ri_x$ across its terminals, where $i_x$ is control current and real for DC or complex for AC constant $r$ is transresistance.
@@ -313,7 +316,17 @@ Ideal current sources are active elements with infinite output resistance. To tu
 \draw (5,0) node[cisourceAMshape]{} (5,1) node[above]{Controlled Current Source};
 \end{circuitikz}
 \end{center}
-\sssc{Practical souce}
+\sssc{Load network (負載網路)}
+A two-terminal network containing no independent sources and no controlled sources whose control variable is not within the network.
+\sssc{Equivalent resistance and impedance theorem}
+For a load network consisting entirely of resistances and controlled sources, the terminal voltage and current can be related by
+\[v=R_{eq}i,\]
+where $R_{eq}$ is called equivalent resistance.
+
+For a load network consisting entirely of impedances and controlled sources, the terminal voltage and current in Laplace domain can be related by
+\[V=Z_{eq}I,\]
+where $Z_{eq}$ is called equivalent impedance.
+\sssc{Practical source}
 A practical independent voltage source can be approximated with an ideal independent voltage source in series connection with a resistor.
 
 A practical independent current source can be approximated with an ideal independent current source in parallel connection with a resistor.
