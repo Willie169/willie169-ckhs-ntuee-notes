@@ -1,0 +1,84 @@
+\documentclass[a4paper,12pt]{article}
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{3}
+\input{/usr/share/LaTeX-ToolKit/template.tex}
+\begin{document}
+\title{Microelectronics}
+\author{沈威宇}
+\date{\temtoday}
+\titletocdoc
+\sct{Microelectronics}
+\ssc{Signals}
+\sssc{Signal}
+A signal is a function that conveys information about a phenomenon. Signal processing is usually most conveniently performed by electronic systems, and voltage and current signals are studied here.
+\sssc{Transducer}
+A transducer is a device that convert a signal to a voltage signal.
+\sssc{Signal source}
+A signal source is typically represented in the Thévenin form, a voltage source in a series connection with a resistance, or the Norton form, a current source in a parallel connection with a resistance.
+\sssc{Symbol convention}
+\bit
+\item Lowercase character with uppercase subscript means total signal, e.g. $i_C(t)$.
+\item Lowercase character with lowercase subscript means AC signal, e.g. $i_c(t)$.
+\item Uppercase character with uppercase subscript means DC signal, e.g. $I_C$.
+\item Uppercase character with lowercase subscript means peak signal, e.g. $I_c$.
+\eit
+Their relation is
+\[i_C(t)=i_c(t)+I_C\]
+\[i_c(t)=I_c\sin(\omega t+\varphi)\]
+\ssc{Amplifier}
+\sssc{Amplifier}
+An electronic device which amplifies an electrical signal by a scale called amplifier gain $A$ and optionally convert voltage signal to current signal or vice versa.
+\sssc{Circuit model of voltage amplifier}
+A voltage amplifier draws current from a source $v_s$ with internal resistance $R_s$ with input resistance $R_i$ and voltage $v_{in}$ across it and supplies $v_c=\mu v_{in}$ to a load network with output resistance $R_o$ and load $R_L$.
+\[\frac{v_{in}}{v_s}=\frac{R_i}{R_s+R_i}\]
+\[\frac{v_c}{v_{in}}=\mu\]
+\[\frac{v_{out}}{v_c}=\frac{R_L}{R_o+R_L}\]
+Voltage gain:
+\[A_v=\frac{v_{out}}{v_{in}}=\mu\frac{R_iR_L}{(R_s+R_i)(R_o+R_L)}\]
+$\abs{A}<\abs{\mu}$ due to loading effects.
+
+A good amplifier requires small loading effect:
+\[R_i\gg R_s,\quad R_o\ll R_L,\quad A_v\approx\mu.\]
+\sssc{Circuit model of current amplifier}
+A current amplifier draws current from a current source $i_s$ with internal resistance $R_s$ in parallel with input resistance $R_i$ and current $i_{in}$ through it and supplies $i_c=\beta i_{in}$ by CCCS to a load network with output resistance $R_o$ in parallel and load $R_L$.
+\[\frac{i_{in}}{i_s}=\frac{R_s}{R_s+R_i}\]
+\[\frac{i_c}{i_{in}}=\beta\]
+\[\frac{i_{out}}{i_c}=\frac{R_o}{R_o+R_L}\]
+Current gain:
+\[A_c=\frac{i_{out}}{i_{in}}=\beta\frac{R_sR_o}{(R_s+R_i)(R_o+R_L)}\]
+$\abs{A}<\abs{\beta}$ due to loading effects.
+
+A good amplifier requires small loading effect:
+\[R_i\ll R_s,\quad R_o\gg R_L,\quad A_c\approx\beta.\]
+\sssc{Circuit model of transconductance amplifier}
+A transconductance amplifier draws current from a voltage source $v_s$ with internal resistance $R_s$ in series with input resistance $R_i$ and current $i_{in}$ through it and supplies $i_c=gv_{in}$ by VCCS to a load network with output resistance $R_o$ in parallel and load $R_L$.
+\[\frac{v_{in}}{v_s}=\frac{R_i}{R_s+R_i}\]
+\[\frac{i_c}{v_{in}}=g\]
+\[\frac{i_{out}}{i_c}=\frac{R_o}{R_o+R_L}\]
+Gain:
+\[A_g=\frac{i_{out}}{v_{in}}=g\frac{R_iR_o}{(R_s+R_i)(R_o+R_L)}\]
+$\abs{A}<\abs{g}$ due to loading effects.
+
+A good amplifier requires small loading effect:
+\[R_i\gg R_s,\quad R_o\gg R_L,\quad A_g\approx g.\]
+\sssc{Circuit model of transresistance amplifier}
+A transresistance amplifier draws current from a current source $i_s$ with internal resistance $R_s$ in parallel with input resistance $R_i$ and current $i_{in}$ through it and supplies $v_c=ri_{in}$ by CCVS to a load network with output resistance $R_o$ in series and load $R_L$.
+\[\frac{i_{in}}{i_s}=\frac{R_s}{R_s+R_i}\]
+\[\frac{v_c}{i_{in}}=r\]
+\[\frac{v_{out}}{v_c}=\frac{R_L}{R_o+R_L}\]
+Gain:
+\[A_r=\frac{v_{out}}{i_{in}}=\beta\frac{R_sR_L}{(R_s+R_i)(R_o+R_L)}\]
+$\abs{A}<\abs{r}$ due to loading effects.
+
+A good amplifier requires small loading effect:
+\[R_i\ll R_s,\quad R_o\ll R_L,\quad A_c\approx r.\]
+\sssc{Amplifier gain in decibels (dB)}
+A power gain $A_p$ in dB is defined as
+\[G_p=10\log_{10}(A_p).\]
+A voltage gain $A_v$ in dB is defined as
+\[G_v=20\log_{10}(A_v).\]
+A current gain $A_c$ in dB is defined as
+\[G_c=20\log_{10}(A_c).\]
+\sssc{Amplifiers in cascade}
+Output of an amplifier as input of another amplifier.
+\end{document}
