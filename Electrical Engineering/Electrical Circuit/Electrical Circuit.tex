@@ -403,14 +403,15 @@ A one-port linear network delivers maximum power to a load resistance when the l
 \sssc{KCL form}
 List KCL of each node and solve them.
 \sssc{(Nodal) admittance and conductance matrix}
-The (nodal) admittance (conductance for DC) matrix $\mb{Y}$ of a linear circuit that is a simple graph when all sources are omitted is the Laplacian matrix of the circuit as weighted undirected graph with all sources omitted and admittances (conductances for DC) as weights but nodes not connected as connected with zero admittance (conductance for DC) and thus 0 weight, that is, a matrix of number of nodes rows and columns with $a_{ii}$ being the total admittances (conductances for DC) of branch connecting node $i$ and adjacent nodes without source on the branch and $a_{ij}$ being $0$ if nodes $i$ and $j$ are not connected and the negation of the admittance of the branch between them.
+The (nodal) admittance (conductance for DC) matrix $\mb{Y}$ of a linear circuit that is a simple graph when all sources are omitted is the Laplacian matrix of the circuit as weighted undirected graph with all sources omitted and admittances (conductances for DC) as weights but nodes not connected as connected with zero admittance (conductance for DC) and thus 0 weight, that is, a matrix of number of nodes rows and columns with $a_{ii}$ being the total admittances (conductances for DC) of branch connecting node $i$ and adjacent nodes without source on the branch and $a_{ij}$ with $i\ne j$ being $0$ if nodes $i$ and $j$ are not connected and the negation of the admittance of the branch between them.
 
 For linear circuit that is not simple graph when all sources are omitted, convert it to so.
 \sssc{Matrix form}
+For a linear circuit,
 \ben
 \item Choose a reference node and assign a voltage for it (typically 0 and denoted ground symbol).
 \item For each pair of nodes, if there exists an edge with zero impedance and no source, merge the two nodes, and discard all edges between them.
-\item For each pair of nodes, use series and parallel connections to combine all edges without sources between them.
+\item For each pair of nodes, use series and parallel connections to combine all edges without source on it between them.
 \item For each collection of voltage sources in series connection between two nodes, combine them to one.
 \item For each collection of current sources in parallel connection between two nodes, combine them to one.
 \item For each pair of node with a voltage source in series connection with an nonzero impedance (resistance for DC) connecting them, convert it to its Norton equivalent.
@@ -419,7 +420,7 @@ For linear circuit that is not simple graph when all sources are omitted, conver
 \item For each voltage source whose neither endpoint is the reference node, enclose both nodes and the source as a supernode.
 \item Omitting all voltage sources, form a system of linear equations given by KCL:
 \[\mb{Y}\mathcal{V}=\mathcal{I},\]
-where $\mathcal{V}$ is the column vector of the nodal voltage variables and known nodal voltages, $\mathcal{I}$ is the column vector of the sum of currents injected into the nodes from current sources with VCCSs and CCCSs directly replaced with the control functions, and $\mb{Y}$ is the (nodal) admittance (conductance for DC) matrix of the circuit. Nodes with known nodal voltage and current injected to it are omitted from the equation, where edges to them still count in $\mb{Y}$ but columns and rows of them are omitted.
+where $\mathcal{V}$ is the column vector of the nodal voltage variables, $\mathcal{I}$ is the column vector of the sum of currents injected into the nodes from current sources with VCCSs and CCCSs directly replaced with the control functions, and $\mb{Y}$ is the (nodal) admittance (conductance for DC) matrix of the circuit. Note that nodes with known nodal voltage are not in $\mathcal{V}$ but admittances of edges to them still count when building $a_{ii}$ of $\mb{Y}$.
 \item For each voltage source, append the equation to the system with the enforced voltage under $\calI$ and the row vector of weights of nodal voltage variables under $\mb{Y}$.
 \item Solve the system of linear equations.
 \een
