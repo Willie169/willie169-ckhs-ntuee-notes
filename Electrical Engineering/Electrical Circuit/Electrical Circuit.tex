@@ -399,12 +399,16 @@ Thévenin voltage, Norton current, and Thévenin impedance are called Thévenin 
 \sssc{Maximum power theorem under DC}
 A one-port linear network delivers maximum power to a load resistance when the load resistance is equal to the Thévenin resistance $R_{th}$ of the network, and the power delivered is
 \[P=\frac{V_{oc}^{\pht{oc}2}}{4R_{th}}.\]
-\ssc{(Matrix) nodal analysis or node-voltage analysis of linear circuits}
-\sssc{(Nodal) admittance matrix}
-The (nodal) admittance (conductance for DC) matrix $\mb{Y}$ of a linear circuit that is a simple graph is the Laplacian matrix of it with all sources omitted, admittances as weights, and circuit as weighted undirected graph.
-\sssc{Method}
+\ssc{Nodal/node analysis or node-voltage analysis of linear circuits}
+\sssc{KCL form}
+List KCL of each node and solve them.
+\sssc{(Nodal) admittance and conductance matrix}
+The (nodal) admittance (conductance for DC) matrix $\mb{Y}$ of a linear circuit that is a simple graph when all sources are omitted is the Laplacian matrix of the circuit as weighted undirected graph with all sources omitted and admittances (conductances for DC) as weights but nodes not connected as connected with zero admittance (conductance for DC) and thus 0 weight, that is, a matrix of number of nodes rows and columns with $a_{ii}$ being the total admittances (conductances for DC) of branch connecting node $i$ and adjacent nodes without source on the branch and $a_{ij}$ being $0$ if nodes $i$ and $j$ are not connected and the negation of the admittance of the branch between them.
+
+For linear circuit that is not simple graph when all sources are omitted, convert it to so.
+\sssc{Matrix form}
 \ben
-\item Choose a reference node and assign a voltage for it (typically 0).
+\item Choose a reference node and assign a voltage for it (typically 0 and denoted ground symbol).
 \item For each pair of nodes, if there exists an edge with zero impedance and no source, merge the two nodes, and discard all edges between them.
 \item For each pair of nodes, use series and parallel connections to combine all edges without sources between them.
 \item For each collection of voltage sources in series connection between two nodes, combine them to one.
@@ -429,7 +433,7 @@ The (mesh) impedance (resistance for DC) matrix $\mb{Z}$ of a linear circuit tha
 \item For each collection of voltage sources in series connection between two nodes, combine them to one.
 \item For each collection of current sources in parallel connection between two nodes, combine them to one.
 \item For each pair of node with a current source in parallel connection with an nonzero impedance (resistance for DC) connecting them, convert it to its Thévenin equivalent.
-\item Indentify all meshes.
+\item Identify all meshes.
 \item Assign an arbitrary but consistent direction (usually clockwise) of current for all meshes, and assign a mesh current variable for each mesh.
 \item For each current source, if it lies on two meshes, exclude the edge with the current source, and merge the two meshes into one, called a supermesh.
 \item Omitting all current sources, form a system of linear equations given by KVL:
