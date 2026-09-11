@@ -414,11 +414,17 @@ For a linear circuit,
 \item For each collection of current sources in parallel connection between two nodes, combine them to one.
 \item For each pair of node with a voltage source in series connection with an nonzero impedance (resistance for DC) connecting them, optionally convert it to its Norton equivalent.
 \item For each voltage source whose either endpoint is the reference node, the nodal voltage of the other endpoint is immediately known.
-\item For each node with unknown voltage, assign a nodal voltage variable.
 \item For each voltage source whose neither endpoint is the reference node, enclose both nodes and the source as a supernode.
+\item For each node with unknown voltage, assign a nodal voltage variable, where for supernodes, assign for one of them.
 \item Omitting all voltage sources, form a system of linear equations given by KCL:
 \[\mb{Y}\mathcal{V}=\mathcal{I},\]
-where $\mathcal{V}$ is the column vector of the nodal voltage variables, $\mathcal{I}$ is the column vector of the sum of currents injected into the nodes from current sources and voltages adjacent nodes of known nodal voltages multiplied by the equivalent admittance (conductance for DC) between them, with control functions used when involving controlled sources, and $\mb{Y}$ is the (nodal) admittance (conductance for DC) matrix of the circuit. Note that nodes with known nodal voltage are not in $\mathcal{V}$ but admittances of edges to them still count when building $a_{ii}$ of $\mb{Y}$.
+where $\mathcal{V}$ is the column vector of the nodal voltage variables, $\mathcal{I}$ is the column vector of, for each node $k$, the sum of
+\bit
+\item currents injected into node $k$ from current sources,
+\item voltages of adjacent nodes $j$ of known nodal voltages multiplied by the equivalent admittance (conductance for DC) between nodes $j$ and $k$, that is, the current injected into node $k$ from node $j$ if node $k$ is ground, and
+\item for supernodes, for each node that is not assigned nodal variable, the voltage of it relative to the one that is assigned nodal variable multiplied boundary  the sum of the equivalent admittance of branches to it,
+\eit
+all with control functions used when involving controlled sources, and $\mb{Y}$ is the (nodal) admittance (conductance for DC) matrix of the circuit. Note that nodes with known nodal voltage are not in $\mathcal{V}$ but admittances of edges to them still count when building $a_{ii}$ of $\mb{Y}$.
 \item Solve the system of linear equations.
 \een
 \ssc{(Matrix) mesh analysis of planar linear circuit}
