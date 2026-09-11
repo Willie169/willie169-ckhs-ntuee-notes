@@ -400,15 +400,14 @@ Thévenin voltage, Norton current, and Thévenin impedance are called Thévenin 
 A one-port linear network delivers maximum power to a load resistance when the load resistance is equal to the Thévenin resistance $R_{th}$ of the network, and the power delivered is
 \[P=\frac{V_{oc}^{\pht{oc}2}}{4R_{th}}.\]
 \ssc{Nodal/node analysis or node-voltage analysis of linear circuits}
-\sssc{KCL form}
+\sssc{Nodal analysis}
 List KCL of each node and solve them.
 \sssc{(Nodal) admittance and conductance matrix}
-The (nodal) admittance (conductance for DC) matrix $\mb{Y}$ ($\mb{G}$ for DC) of a linear circuit is the Laplacian matrix of the circuit as weighted undirected graph with all sources omitted and equivalent admittances (conductances for DC) as weights and nodes not connected as connected with zero admittance (conductance for DC) and thus 0 weight, that is, a matrix of number of nodes rows and columns with $a_{ii}$ being the total equivalent admittances (conductances for DC) connecting node $i$ and adjacent nodes with branches with sources omitted and $a_{ij}$ with $i\ne j$ being $0$ if nodes $i$ and $j$ are not connected and the negation of the equivalent admittance between them with branches with sources omitted otherwise.
-\sssc{Matrix form including modified nodal analysis (MNA)}
+The (nodal) admittance (conductance for DC) matrix $\mb{Y}$ ($\mb{G}$ for DC) of a linear circuit is the Laplacian matrix of the circuit as weighted undirected graph with all sources omitted and equivalent admittances (conductances for DC) as weights and nodes not connected as connected with zero admittance (conductance for DC) and thus 0 weight, that is, a matrix of number of nodes rows and columns with $Y_{ii}$ being the total equivalent admittances (conductances for DC) connecting node $i$ and adjacent nodes with branches with sources omitted and $Y_{ij}$ for $i\ne j$ being $0$ if nodes $i$ and $j$ are not connected and the negation of the equivalent admittance between them with branches with sources omitted otherwise.
+\sssc{Nodal matrix equation and modified nodal analysis (MNA)}
 For a linear circuit,
 \ben
 \item Choose a reference node and assign a voltage for it (typically 0 and denoted ground symbol).
-\item For each pair of nodes, if there exists an edge with zero impedance and no source, merge the two nodes, and discard all edges between them.
 \item For each voltage source whose either endpoint is the reference node, the voltage of the other is known.
 \item For each pair of node with a voltage source in series connection with an nonzero impedance (resistance for DC) connecting them, convert it to its Norton equivalent if for normal nodal analysis.
 \item For each node with unknown voltage, assign a nodal voltage variable.
@@ -425,14 +424,11 @@ all with control functions used when involving controlled sources.
 \item Solve the system of linear equations:
 \[\mb{Y}\mathcal{V}=\mathcal{I}.\]
 \een
-Otherwise, the analysis is called modified nodal analysis (MNA), and
+Otherwise, current through such voltage source from positive terminal to negative terminal is called fictitious source current, the analysis is called modified nodal analysis (MNA), and each $k$th such source are referred to as source $k$ below.
 \ben
-\item For each such voltage source $k$,
-\bit
-\item define the $k$th column of the matrix $\mb{A}_v$ as 1 for $i$th row such that the source's positive terminal is node $i$, -1 for $j$th row such that the source's negative terminal is node $j$, and 0 for all other rows,
-\item define the $k$th row of the column vector $\mb{V}_s$ as its voltage, and
-\item assign current variable $i_k$ as the current through it from positive to negative terminals, and define the $k$th row of the column vector $\calI_v$ as $i_k$.
-\eit
+\item Define the $k$th column of the matrix $\mb{A}_v$ as 1 for $i$th row such that source $k$'s positive terminal is node $i$, -1 for $j$th row such that source $k$'s negative terminal is node $j$, and 0 for all other rows.
+\item Define the $k$th row of the column vector $\mb{V}_s$ as source $k$'s voltage.
+\item Assign current variable $i_k$ as the fictitious current of source $k$, and define the $k$th row of the column vector $\calI_v$ as $i_k$.
 \item Solve the system of linear equations:
 \[\begin{bmatrix}\mb{Y}&\mb{A}_v\\\mb{A}_v^{\top}&\mb{0}\end{bmatrix}\begin{bmatrix}\mathcal{V}\\\calI_v\end{bmatrix}=\begin{bmatrix}\mathcal{I}\\\mb{V}_s\end{bmatrix}.\]
 \een
@@ -440,21 +436,33 @@ Otherwise, the analysis is called modified nodal analysis (MNA), and
 \ssc{(Matrix) mesh analysis of planar linear circuit}
 \sssc{(Mesh) impedance matrix}
 The (mesh) impedance (resistance for DC) matrix $\mb{Z}$ of a linear circuit that is a simple planar graph is the matrix with entry $Z_{ii}$ being the sum of the impedances of the branches in the $i$th mesh and $Z_{ij}$ for $i\neq j$ being the sum of the impedances of the branches shared between the $i$th and $j$th meshes.
-\sssc{Method}
+\sssc{Mesh analysis}
 \ben
-\item For each pair of nodes, if there exists an edge with zero impedance and no source, merge the two nodes, and discard all edges between them.
-\item For each pair of nodes, use series and parallel connections to combine all edges without sources between them.
-\item For each collection of voltage sources in series connection between two nodes, combine them to one.
-\item For each collection of current sources in parallel connection between two nodes, combine them to one.
 \item For each pair of node with a current source in parallel connection with an nonzero impedance (resistance for DC) connecting them, optionally convert it to its Thévenin equivalent.
-\item Identify all meshes.
 \item Assign an arbitrary but consistent direction (usually clockwise) of current for all meshes, and assign a mesh current variable for each mesh.
-\item For each current source, if it lies on two meshes, exclude the edge with the current source, and merge the two meshes into one, called a supermesh.
-\item Omitting all current sources, form a system of linear equations given by KVL:
-\[\mb{Z}\mathcal{I}=\mathcal{V},\]
-where $\mathcal{I}$ is the column vector of the mesh current variables, $\mathcal{V}$ is the column vector of the sum of voltage delivered from the voltage sources in the mesh with mesh current variable direction as positive direction and with VCVSs and CCVSs directly replaced with the control functions, and $\mb{Z}$ is the (mesh) impedance (resistance for DC) matrix of the circuit.
+\item For each current source that lies on two meshes, called interior current source, exclude the edge with the current source, and merge the two meshes into one mesh, called supermesh.
+\item Suppress all current sources. Solve the system of linear equations of KVL of the meshes.
+\een
+\sssc{Mesh matrix equation and modified kesh analysis (MMA)}
+\ben
+\item Construct mesh and assign variables the same as mesh analysis except that interior current sources are preserved and supermeshes are not formed.
+\item Define $\mathcal{I}$ as the column vector of the mesh current variables.
+\item Define $\mathcal{V}$ as the column vector of the sum of voltage delivered from the voltage sources in the mesh with mesh current variable direction as positive direction.
+\item Define $\mb{Z}$ as the (mesh) impedance (resistance for DC) matrix of the circuit.
 \item For each current source, append the equation to the system with the enforced current under $\calV$ and the row vector of weights of mesh current variables under $\mb{Z}$.
-\item Solve the system of linear equations.
+\item If there is no interior current source,
+\ben
+\item Solve the system of linear equations:
+\[\mb{Z}\mathcal{I}=\mathcal{V}.\]
+\een
+Otherwise, voltage across such current source of output terminal relative to input terminal is called fictitious source voltage, the analysis is called modified mesh analysis (MMA), and each $k$th such source are referred to as source $k$ below.
+\ben
+\item Define the $k$th column of the matrix $\mb{A}_c$ as 1 for $i$th mesh such that source $k$'s is on mesh $i$ and of thr same current direction, -1 for $j$th row such that source $k$ is on mesh $j$ and of opposite current direction, and 0 for all other rows.
+\item Define the $k$th row of the column vector $\mb{I}_s$ as source $k$'s current.
+\item Assign voltage variable $v_k$ as the fictitious voltage of source $k$, and define the $k$th row of the column vector $\calV_c$ as $v_k$.
+\item Solve the system of linear equations:
+\[\begin{bmatrix}\mb{Z}&\mb{A}_i\\\mb{A}_i^{\top}&\mb{0}\end{bmatrix}\begin{bmatrix}\mathcal{I}\\\calV_c\end{bmatrix}=\begin{bmatrix}\mathcal{V}\\\mb{I}_s\end{bmatrix}.\]
+\een
 \een
 \ssc{Transformations}
 \sssc{Source transformation}
