@@ -404,28 +404,37 @@ A one-port linear network delivers maximum power to a load resistance when the l
 List KCL of each node and solve them.
 \sssc{(Nodal) admittance and conductance matrix}
 The (nodal) admittance (conductance for DC) matrix $\mb{Y}$ ($\mb{G}$ for DC) of a linear circuit is the Laplacian matrix of the circuit as weighted undirected graph with all sources omitted and equivalent admittances (conductances for DC) as weights and nodes not connected as connected with zero admittance (conductance for DC) and thus 0 weight, that is, a matrix of number of nodes rows and columns with $a_{ii}$ being the total equivalent admittances (conductances for DC) connecting node $i$ and adjacent nodes with branches with sources omitted and $a_{ij}$ with $i\ne j$ being $0$ if nodes $i$ and $j$ are not connected and the negation of the equivalent admittance between them with branches with sources omitted otherwise.
-\sssc{Matrix form}
+\sssc{Matrix form including modified nodal analysis (MNA)}
 For a linear circuit,
 \ben
 \item Choose a reference node and assign a voltage for it (typically 0 and denoted ground symbol).
 \item For each pair of nodes, if there exists an edge with zero impedance and no source, merge the two nodes, and discard all edges between them.
-\item For each pair of nodes, use series and parallel connections to combine all edges without source on it between them.
-\item For each collection of voltage sources in series connection between two nodes, combine them to one.
-\item For each collection of current sources in parallel connection between two nodes, combine them to one.
-\item For each pair of node with a voltage source in series connection with an nonzero impedance (resistance for DC) connecting them, optionally convert it to its Norton equivalent.
-\item For each voltage source whose either endpoint is the reference node, the nodal voltage of the other endpoint is immediately known.
-\item For each voltage source whose neither endpoint is the reference node, enclose both nodes and the source as a supernode.
-\item For each node with unknown voltage, assign a nodal voltage variable, where for supernodes, assign for one of them.
-\item Omitting all voltage sources, form a system of linear equations given by KCL:
-\[\mb{Y}\mathcal{V}=\mathcal{I},\]
-where $\mathcal{V}$ is the column vector of the nodal voltage variables, $\mathcal{I}$ is the column vector of, for each node $k$, the sum of
+\item For each voltage source whose either endpoint is the reference node, the voltage of the other is known.
+\item For each pair of node with a voltage source in series connection with an nonzero impedance (resistance for DC) connecting them, convert it to its Norton equivalent if for normal nodal analysis.
+\item For each node with unknown voltage, assign a nodal voltage variable.
+\item Define $\mathcal{V}$ as the column vector of the nodal voltage variables.
+\item Define $\mathcal{I}$ as the column vector of, for each node $k$, the sum of
 \bit
-\item currents injected into node $k$ from current sources,
-\item voltages of adjacent nodes $j$ of known nodal voltages multiplied by the equivalent admittance (conductance for DC) between nodes $j$ and $k$, that is, the current injected into node $k$ from node $j$ if node $k$ is ground, and
-\item for supernodes, for each node that is not assigned nodal variable, the negation of the voltage of it relative to the one that is assigned nodal variable multiplied by the sum of the equivalent admittance of branches to it,
+\item currents injected into node $k$ from current sources, and
+\item voltages of adjacent nodes $j$ of known nodal voltages multiplied by the equivalent admittance (conductance for DC) between nodes $j$ and $k$, that is, the current injected into node $k$ from node $j$ if node $k$ is ground,
 \eit
-all with control functions used when involving controlled sources, and $\mb{Y}$ is the (nodal) admittance (conductance for DC) matrix of the circuit. Note that nodes with known nodal voltage are not in $\mathcal{V}$ but admittances of edges to them still count when building $a_{ii}$ of $\mb{Y}$.
-\item Solve the system of linear equations.
+all with control functions used when involving controlled sources.
+\item Define $\mb{Y}$ as the (nodal) admittance (conductance for DC) matrix of the circuit. Note that nodes with known nodal voltage are not in $\mathcal{V}$ but admittances of edges to them still count when building $a_{ii}$ of $\mb{Y}$.
+\item If there isn't voltage source whose neither endpoint is the reference node,
+\ben
+\item Solve the system of linear equations:
+\[\mb{Y}\mathcal{V}=\mathcal{I}.\]
+\een
+Otherwise, the analysis is called modified nodal analysis (MNA), and
+\ben
+\item For each such voltage source $k$,
+\bit
+\item define the $k$th column of the matrix $\mb{A}_v$ as 1 for $i$th row such that the source's positive terminal is node $i$, -1 for $j$th row such that the source's negative terminal is node $j$, and 0 for all other rows,
+\item define the $k$th row of the column vector $\mb{V}_s$ as its voltage, and
+\item assign current variable $i_k$ as the current through it from positive to negative terminals, and define the $k$th row of the column vector $\calI_v$ as $i_k$.
+\item Solve the system of linear equations:
+\[\begin{bmatrix}\mb{Y}&\mb{A}_v\\\mb{A}_v^{\top}&\mb{0}\end{matrix}\begin{bmatrix}\mathcal{V}\\\calI_v\end{bmatrix}=\begin{bmatrix}\mathcal{I}\\\mb{V}_s\end{bmayrix}.\]
+\een
 \een
 \ssc{(Matrix) mesh analysis of planar linear circuit}
 \sssc{(Mesh) impedance matrix}
