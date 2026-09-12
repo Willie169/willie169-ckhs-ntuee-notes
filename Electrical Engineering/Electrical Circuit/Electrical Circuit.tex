@@ -215,6 +215,8 @@ The admittance $Y(s)$ of a one-port network is defined as the reciprocal of its 
 The conductance $G$ of a circuit element is defined as the real part of its admittance.
 \sssc{Susceptance (phasor domain)}
 The susceptance $B$ of a circuit element is defined as the imaginary part of its admittance.
+\sssc{Dynamic circuit}
+A circuit containing capacitance or inductance.
 \sssc{Node}
 A node is a point in a network where two or more elements are connected.
 \sssc{Supernode}
@@ -288,9 +290,8 @@ External input to a network.
 Any branch variable.
 \sssc{Power transfer efficiency}
 Power transferred to the interested load divided by total power.
-\sssc{Quality factor (品質因數)}
-The quality factor $Q$ (or $Q_0$) of a network is $2\pi$ multiplied by the maximum energy stored in a period, $E_m$, divided by the total energy lost in the period, $E_l$, during natural response, that is,
-\[Q=\frac{2\pi E_m}{E_l}.\]
+\sssc{$n$th-order circuit}
+Circuit whose response is governed by a $n$-th order differential equation.
 \sssc{SPICE}
 SPICE (Simulation Program with Integrated Circuit Emphasis) is a general-purpose, open-source analog electronic circuit simulator. It is a program used in integrated circuit and board-level design to check the integrity of circuit designs and to predict circuit behavior.
 \ssc{Source}
@@ -355,18 +356,21 @@ Equivalently, a linear network is a network consisting only of linear elements a
 A linear circuit is a circuit consisting only of linear elements and independent sources.
 \sssc{Response of linear time-invariant circuit}
 \bit
-\item (Total or complete) response: the reponse.
-\item Natural, homogeneous, unforced, or zero-input response (ZIR): The response with all independent sources in the linear circuit turned off and initial states preserved. The ZIR is the solution of an IVP of a linear homogenous ODE, called governing equation, with initial states given by the initial states of inductors and capacitors.
+\item (Total or complete) response: the response.
+\item Natural, homogeneous, unforced, or zero-input response (ZIR): The response with all independent sources in the linear circuit turned off and initial states preserved. The ZIR is the solution of an IVP of a linear homogeneous ODE, called governing equation, with initial states given by the initial states of inductors and capacitors.
 \item Forced, driven, particular, or zero-state responses (ZSR): A response with only one of the independent sources in the linear circuit, called forcing function, is turned on, and with zero initial state. Each ZSR is the response of a causal continuous-time linear time-invariant (LTI) systems with its forcing function as forcing function and the complementary equation of its governing equation being the governing equation of ZIR.
 \item Superposition principle/theorem: The sum of ZIR and all ZSRs is the total response.
 \item Transient response: A response component that converges to an equilibrium as $t$ gets large.
 \eit
+\sssc{Quality factor (品質因數)}
+The quality factor $Q$ (or $Q_0$) of a network is $2\pi$ multiplied by the maximum energy stored in a period, $E_m$, divided by the total energy lost in the period, $E_l$, during natural response, that is,
+\[Q=\frac{2\pi E_m}{E_l}.\]
 \sssc{Time constant, rising time, and falling time}
 For a response function in the form $y(t)=y_0e^{-\alpha t}$ with constants $y_0\neq 0$ and $\alpha>0$, the time constant $\tau$ is defined as $\frac{1}{\alpha}$, that is, $y(\tau)=y_0e^{-1}$. For the smallest positive integer (or rational number to a number of decimals) $k$ such that $\frac{y(k\tau)}{y_0}<0.01$ (or other designated number), we typically call that $y(t)$ decays to $0$ about $k$ times time constants. The falling time or pulse decay time is defined as the time $y(t)$ changes from $0.9y_0$ to $0.1y_0$, which is approximately $22\tau$.
 
 For a response function in the form $y(t)=y_0\qty(1-e^{-\alpha t})$ with constants $y_0\neq 0$ and $\alpha>0$, the time constant $\tau$ is defined as $\frac{1}{\alpha}$, that is, $y(\tau)=y_0\qty(1-e^{-1})$. For the smallest positive integer (or rational number to a number of decimals) $k$ such that $\frac{y(k\tau)}{y_0}>0.99$ (or other designated number), we typically call that $y(t)$ decays to $0$ about $k$ times time constants. The rising time or pulse grow time is defined as the time $y(t)$ changes from $0.1y_0$ to $0.9y_0$, which is approximately $22\tau$.
 \sssc{Series connection}
-For linear networks, the impedance, reciprocal of capacitance, and inductance of the network are equal to the sums of those of each element. When steady, the charges in each capacitor and the equivalent capacitor are the the same.
+For linear networks, the impedance, reciprocal of capacitance, and inductance of the network are equal to the sums of those of each element. When steady, the charges in each capacitor and the equivalent capacitor are the same.
 \sssc{Parallel connection}
 For linear networks, the admittance, capacitance, and reciprocal of inductance of the network are equal to the sums of those of each element. When steady, the flux linkage in each inductor and the equivalent inductor are the same.
 \sssc{Linear circuit as graph}
