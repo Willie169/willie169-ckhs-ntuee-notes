@@ -267,7 +267,7 @@ A ground is a node designated to have 0 electric potential. All other electric p
 \bit
 \item \tb{Earth ground}: Earth ground is a point in the network that is physically connected to the Earth.
 \item \tb{Signal ground}: Signal ground is a ground in the network provided by an external signal, which can be float relative to Earth and such circuit is called float. An example of signal ground is a GND pin on a microcontroller board.
-\item \tb{Chassis ground}: Chassis ground is a point in the circuit that is physically connected to a devices's metal frame. The metal frame acts as a shield against electromagnetic interference and can be connected to Earth for safety in AC-powered devices.
+\item \tb{Chassis ground}: Chassis ground is a point in the circuit that is physically connected to a devices' metal frame. The metal frame acts as a shield against electromagnetic interference and can be connected to Earth for safety in AC-powered devices.
 \eit
 \begin{center}
 \begin{circuitikz}
@@ -283,15 +283,13 @@ A biasing resistor is a resistor used to achieve a desired operating point.
 \sssc{Ladder network}
 A network whose circuit diagram forms a ladder.
 \sssc{Time-invariant circuit}
-A circuit whose outputs as a function of the inputs is time-invariant.
+A circuit whose outputs as a function of the inputs is time-invariant. All circuits discussed here are time-invariant circuit.
 \sssc{Input or excitation}
 External input to a network.
 \sssc{Response}
 Any branch variable.
 \sssc{Power transfer efficiency}
 Power transferred to the interested load divided by total power.
-\sssc{$n$th-order circuit}
-Circuit whose response is governed by a $n$-th order differential equation.
 \sssc{SPICE}
 SPICE (Simulation Program with Integrated Circuit Emphasis) is a general-purpose, open-source analog electronic circuit simulator. It is a program used in integrated circuit and board-level design to check the integrity of circuit designs and to predict circuit behavior.
 \ssc{Source}
@@ -339,7 +337,7 @@ where $Z_{eq}$ is called equivalent impedance.
 A real independent voltage source can be modeled with an ideal independent voltage source in series connection with a resistor.
 
 A real independent current source can be modeled with an ideal independent current source in parallel connection with a resistor.
-\ssc{Linear circuit}
+\ssc{Linear time-invariant (LTI) circuit}
 \sssc{Linear element}
 A linear element is an element whose inputs $\mb{x}$ and outputs $\mb{F}(\mb{x})$ satisfy linearity:
 \[\mb{F}(a\mb{x}+b\mb{y})=a\mb{F}(\mb{x})+b\mb{F}(\mb{y})\]
@@ -354,31 +352,12 @@ A linear network is a network whose inputs $\mb{x}$ and outputs $\mb{F}(\mb{x})$
 Equivalently, a linear network is a network consisting only of linear elements and independent sources.
 \sssc{Linear circuit}
 A linear circuit is a circuit consisting only of linear elements and independent sources.
-\sssc{Response of linear time-invariant circuit}
-\bit
-\item (Total or complete) response: the response.
-\item Natural, homogeneous, unforced, or zero-input response (ZIR): The response with all independent sources in the linear circuit turned off and initial states preserved. The ZIR is the solution of an IVP of a linear homogeneous ODE, called governing equation, with initial states given by the initial states of inductors and capacitors.
-\item Forced, driven, particular, or zero-state responses (ZSR): A response with only one of the independent sources in the linear circuit, called forcing function, is turned on, and with zero initial state. Each ZSR is the response of a causal continuous-time linear time-invariant (LTI) systems with its forcing function as forcing function and the complementary equation of its governing equation being the governing equation of ZIR.
-\item Superposition principle/theorem: The sum of ZIR and all ZSRs is the total response.
-\item Transient response: A response component that converges to an equilibrium as $t$ gets large.
-\eit
-\sssc{Quality factor (品質因數)}
-The quality factor $Q$ (or $Q_0$) of a network is $2\pi$ multiplied by the maximum energy stored in a period, $E_m$, divided by the total energy lost in the period, $E_l$, during natural response, that is,
-\[Q=\frac{2\pi E_m}{E_l}.\]
-\sssc{Time constant, rising time, and falling time}
-For a response function in the form $y(t)=y_0e^{-\alpha t}$ with constants $y_0\neq 0$ and $\alpha>0$, the time constant $\tau$ is defined as $\frac{1}{\alpha}$, that is, $y(\tau)=y_0e^{-1}$. For the smallest positive integer (or rational number to a number of decimals) $k$ such that $\frac{y(k\tau)}{y_0}<0.01$ (or other designated number), we typically call that $y(t)$ decays to $0$ about $k$ times time constants. The falling time or pulse decay time is defined as the time $y(t)$ changes from $0.9y_0$ to $0.1y_0$, which is approximately $22\tau$.
-
-For a response function in the form $y(t)=y_0\qty(1-e^{-\alpha t})$ with constants $y_0\neq 0$ and $\alpha>0$, the time constant $\tau$ is defined as $\frac{1}{\alpha}$, that is, $y(\tau)=y_0\qty(1-e^{-1})$. For the smallest positive integer (or rational number to a number of decimals) $k$ such that $\frac{y(k\tau)}{y_0}>0.99$ (or other designated number), we typically call that $y(t)$ decays to $0$ about $k$ times time constants. The rising time or pulse grow time is defined as the time $y(t)$ changes from $0.1y_0$ to $0.9y_0$, which is approximately $22\tau$.
 \sssc{Series connection}
 For linear networks, the impedance, reciprocal of capacitance, and inductance of the network are equal to the sums of those of each element. When steady, the charges in each capacitor and the equivalent capacitor are the same.
 \sssc{Parallel connection}
 For linear networks, the admittance, capacitance, and reciprocal of inductance of the network are equal to the sums of those of each element. When steady, the flux linkage in each inductor and the equivalent inductor are the same.
 \sssc{Linear circuit as graph}
 A linear circuit is a graph with nodes with all voltage sources enclosed as supernodes being vertices, branches without nodes inside except ends being edges, and admittances (or conductance for DC) being weights.
-\sssc{Duality}
-Two linear circuit are dual if their governing equations in terms of variables become identical after systematically exchanging voltage and current, capacitance and inductance, impedance and admittance, open circuit and short circuit, KCL and KVL, Thévenin's theorem and Norton's theorem, series and parallel, node and loop, etc.
-
-Two linear circuit are exact dual if their governing equations in terms of numerical values become identical after systematically exchanging voltage and current, capacitance and inductance, impedance and admittance, open circuit and short circuit, KCL and KVL, Thévenin's theorem and Norton's theorem, series and parallel, node and loop, etc.
 \ssc{Thévenin's theorem and Norton's theorem}
 \sssc{Thévenin's theorem}
 Any linear network with two terminals is equivalent to a voltage source with a voltage called Thévenin voltage in a series connection with a linear element (or resistor for DC) with an impedance (or resistance for DC) called Thévenin, series, or equivalent impedance (or resistance for DC), such equivalent circuit is called Thévenin equivalent.
@@ -498,6 +477,32 @@ For all integer $n\geq 3$:
 \item Star-mesh transformation: The two networks are equivalent if
 \[Z_{ij}=Z_i+Z_j+\frac{Z_iZ_j}{-Z_i-Z_j+\sum_{k=1}^nZ_k}.\]
 \eit
+\ssc{Responses of LTI circuits}
+\sssc{Natural, homogeneous, unforced, or zero-input response (ZIR)}
+The response with all independent sources in a LTI circuit turned off and initial states preserved.
+
+The ZIR is the solution of an IVP of a linear homogeneous ODE, called governing equation, with initial states given by the initial states of inductors and capacitors.
+
+Circuit whose governing equation is an $n$th-order differential equation is called an $n$th-order circuit.
+\sssc{Forced, driven, particular, or zero-state responses (ZSR)}
+The response with only one of the independent sources in the LTI circuit, called forcing function, turned on, and with zero initial state.
+
+Each ZSR is the response of a causal continuous-time linear time-invariant (LTI) systems with its forcing function as forcing function and the complementary equation of its governing equation being the governing equation of ZIR.
+\sssc{Total or complete response}
+The response of the original circuit.
+\sssc{Superposition principle/theorem}
+The sum of ZIR and all ZSRs is the total response.
+\sssc{Quality factor (品質因數)}
+The quality factor $Q$ (or $Q_0$) of a network is $2\pi$ multiplied by the maximum energy stored in a period, $E_m$, divided by the total energy lost in the period, $E_l$, during natural response, that is,
+\[Q=\frac{2\pi E_m}{E_l}.\]
+\sssc{Time constant, rising time, and falling time}
+For a response function in the form $y(t)=y_0e^{-\alpha t}$ with constants $y_0\neq 0$ and $\alpha>0$, the time constant $\tau$ is defined as $\frac{1}{\alpha}$, that is, $y(\tau)=y_0e^{-1}$. For the smallest positive integer (or rational number to a number of decimals) $k$ such that $\frac{y(k\tau)}{y_0}<0.01$ (or other designated number), we typically call that $y(t)$ decays to $0$ about $k$ times time constants. The falling time or pulse decay time is defined as the time $y(t)$ changes from $0.9y_0$ to $0.1y_0$, which is approximately $22\tau$.
+
+For a response function in the form $y(t)=y_0\qty(1-e^{-\alpha t})$ with constants $y_0\neq 0$ and $\alpha>0$, the time constant $\tau$ is defined as $\frac{1}{\alpha}$, that is, $y(\tau)=y_0\qty(1-e^{-1})$. For the smallest positive integer (or rational number to a number of decimals) $k$ such that $\frac{y(k\tau)}{y_0}>0.99$ (or other designated number), we typically call that $y(t)$ decays to $0$ about $k$ times time constants. The rising time or pulse grow time is defined as the time $y(t)$ changes from $0.1y_0$ to $0.9y_0$, which is approximately $22\tau$.
+\sssc{Duality}
+Two linear circuit are dual if their governing equations in terms of variables become identical after systematically exchanging voltage and current, capacitance and inductance, impedance and admittance, open circuit and short circuit, KCL and KVL, Thévenin's theorem and Norton's theorem, series and parallel, node and loop, etc.
+
+Two linear circuit are exact dual if their governing equations in terms of numerical values become identical after systematically exchanging voltage and current, capacitance and inductance, impedance and admittance, open circuit and short circuit, KCL and KVL, Thévenin's theorem and Norton's theorem, series and parallel, node and loop, etc.
 \ssc{Transient response}
 \sssc{Capacitor transient response}
 Capacitor with initial voltage $v(0^-)$ under DC has time constant $\tau=R_{th}C$ where $R_{th}$ is the Thévenin resistance seen by the capacitor, voltage $v(\infty)$ and current $0$ at steady state, and transient response:
