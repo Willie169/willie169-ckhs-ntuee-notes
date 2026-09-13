@@ -204,6 +204,13 @@ Circuit elements in a network are connected with wires (aka leads), which are as
 \end{circuitikz}
 \end{center}
 Adding a wire directly between two nodes is called adding a short circuit.
+\subsubsection{Switches}
+\begin{center}
+\begin{circuitikz}
+\draw (0,0) to[switch, l=Switch] (3,0);
+\draw (5,0) node[spdt]{} (5,0.5) node[above]{SPDT Switch};
+\end{circuitikz}
+\end{center}
 \sssc{Kirchhoff's current law (KCL), Kirchhoff's first law, or Kirchhoff's junction rule}
 The algebraic sum of the currents entering any node is zero.
 \sssc{Kirchhoff's voltage law (KVL), Kirchhoff's second law, or Kirchhoff's loop rule}
@@ -446,6 +453,8 @@ Each ZSR is the response of a causal continuous-time linear time-invariant (LTI)
 The response of the original circuit.
 \sssc{Superposition principle/theorem}
 The sum of ZIR and all ZSRs is the total response.
+\sssc{Step response}
+ZSR of step source, that is, an independent source whose enforced voltage or current is a multiple of the step function $u(t)$.
 \sssc{Stability}
 The Stability of a LTI circuit is defined as the stability of the causal continuous-time linear time-invariant (LTI) systems with the complementary equation of its governing equation being the governing equation of ZIR.
 
@@ -582,59 +591,6 @@ and reads approximately $P$.
 An ideal wattmeter reads exactly $P$ and $i_v\to0$.
 
 By convention, the current input terminal is labeled $\pm$.
-\ssc{Transient response}
-\sssc{Capacitor transient response}
-Capacitor with initial voltage $v(0^-)$ under DC has time constant $\tau=R_{th}C$ where $R_{th}$ is the Thévenin resistance seen by the capacitor, voltage $v(\infty)$ and current $0$ at steady state, and transient response:
-\[v(t)=v(\infty)+(v(0^-)-v(\infty))e^{-\frac{t}{\tau}}\]
-\[i(t)=\frac{v(\infty)-v(0^-)}{R_{th}}e^{-\frac{t}{\tau}}\]
-\sssc{Inductor transient response}
-Inductor with initial current $i(0^-)$ under DC has time constant $\tau=\frac{L}{R_{th}}$ where $R_{th}$ is the Thévenin resistance seen by the inductor, current $i(\infty)$ and voltage $0$ at steady state, and transient response:
-\[i(t)=i(\infty)+(i(0^-)-i(\infty))e^{-\frac{t}{\tau}}\]
-\[v(t)=(i(\infty)-i(0^-))R_{th}e^{-\frac{t}{\tau}}\]
-
-
-
-
-\sssc{Second-order circuit}
-A natural response $f(t)$ of a second-order circuit has the form
-\[f''(t)+2\omega_0\zeta f'(t)+\omega_0^{\pht{0}2}f(t)=0,\]
-and its characteristic equation is
-\[r^2+2\omega_0\zeta r+\omega_0^{\pht{0}2}=0,\]
-where $\alpha=\omega_0\zeta$ is called neper frequency (奈培頻率) or attenuation (衰減量) and $\zeta$ is called damping factor/ratio (阻尼係數/比).
-
-The characteristic roots $r$ are
-\[r_{1,2}=-\omega_0\qty(\zeta\pm\sqrt{\zeta^2-1}).\]
-Natural response (i.e. $x(t)=0$) is
-\bit
-\item $\zeta>1$ Overdamped (過阻尼) response:
-\[f(t)=Ae^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+Be^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}\]
-\item $\zeta=1$ Critically damped (臨界阻尼) response:
-\[f(t)=\qty(A+Bt)e^{-\omega_0t}\]
-\item $0<\zeta<1$ Underdamped (欠/輕/次阻尼) response:
-\[f(t)=e^{-\omega_0\zeta t}\qty(A\cos(\omega_0\sqrt{1-\zeta^2}t)-B\sin(\omega_0\sqrt{1-\zeta^2}t))\]
-\eit
-The damped oscillation of the underdamped response to a constant source has damped frequency $\omega_d$:
-\[\omega_d=\omega_0\sqrt{1-\zeta^2}\]
-and the response is
-\[f(t)=Ae^{-\alpha t}\cos(\omega_dt+\varphi).\]
-The energy stored must be in the form
-\[E(t)=Ke^{-2\alpha t}\cos^2(\omega_dt+\theta)\]
-\[E_m=Ke^{-2\alpha t_n}\]
-\[E_l=Ke^{-2\alpha t_n}-Ke^{-2\alpha (t_n+\frac{2\pi}{\omega_d})}=E_m\qty(1-e^{-\frac{4\pi\alpha}{\omega_d}})=E_m\qty(1-e^{-\frac{4\pi\zeta}{\sqrt{1-\zeta^2}}})\]
-\[Q=\frac{2\pi E_m}{E_l}=\frac{2\pi}{1-e^{-\frac{4\pi\zeta}{\sqrt{1-\zeta^2}}}}\]
-\sssc{High-Q circuit}
-For circuit with large $Q$, i.e., small $\zeta$, called high-Q circuit, which we usually take $Q>5$, i.e., $\zeta<0.1$, we have $\zeta\approx0$, and $1-e^{-x}\approx x$ for $x\approx 0$, thus
-\[Q\approx\frac{2\pi}{\frac{4\pi\zeta}{\sqrt{1-\zeta^2}}}=\frac{\sqrt{1-\zeta^2}}{2\zeta}\approx\frac{1}{2\zeta}\]
-
-
-
-
-
-
-
-
-
-
 \sssc{Balanced three-phase circuit}
 A power system supplied by just one sinusoidal AC source is called single-phase (1-$\varphi$). The oscillatory behavior of instantaneous power puts pulsating strain on the generating and load equipments. Polyphase circuit with multiple sources were developed in response to this problem. The most common one us the balanced three-phase (3-$\varphi$) circuit, which has three sources with $\frac{2\pi}{3}$ phase difference and has constant instantaneous power.
 
@@ -653,6 +609,58 @@ An equivalent generator is (balanced) delta (Δ) generator obtained by applying 
 Similarly, a (balanced) wye load has a neutral and three branches with identical phase impedances, and a (balanced) delta (Δ) load is it applied Y-Δ transformation.
 
 A three-phase circuit with wye generator and loads with neutrals of all elements form a circuit, terminals of each branch of all elements form identical circuit, is called balanced (wye) (three-phase) circuit, and the circuit obtain by applying Y-Δ transformation to all wye generator and loads is called balanced (delta) (three-phase) circuit.
+\ssc{Transient response}
+\sssc{RC circuit transient response}
+The response of a capacitor with initial voltage $v(0^-)$ in series connection with a resistance $R$ and step voltage source $v(\infty)u(t)$ is:
+\[v(t)=v(\infty)+(v(0^-)-v(\infty))e^{-\frac{t}{\tau}}\]
+\[i(t)=\frac{v(\infty)-v(0^-)}{R}e^{-\frac{t}{\tau}}\]
+where $\tau=RC$ is the time constant.
+\sssc{RL circuit transient response}
+The response of an inductor with initial current $i(0^-)$ in parallel connection with a resistance $R$ and a step current source $i(\infty)u(t)$ is:
+\[i(t)=i(\infty)+(i(0^-)-i(\infty))e^{-\frac{t}{\tau}}\]
+\[v(t)=(i(\infty)-i(0^-))Re^{-\frac{t}{\tau}}\]
+where $\tau=\frac{L}{R}$ is the time constant.
+\sssc{Second-order circuit transient response}
+The response $f(t)$ of a second-order circuit with no independent source other than possibly one step source has the governing equation for $t\ge0$:
+\[f''(t)+2\omega_0\zeta f'(t)+\omega_0^{\pht{0}2}f(t)=\omega_0^{\pht{0}2}f(\infty),\]
+where $\alpha=\omega_0\zeta$ is called neper frequency (奈培頻率) or attenuation (衰減量) and $\zeta>0$ is called damping factor/ratio (阻尼係數/比).
+
+The characteristic equation is
+\[r^2+2\omega_0\zeta r+\omega_0^{\pht{0}2}=0.\]
+The characteristic roots $r$ are
+\[r_{1,2}=-\omega_0\qty(\zeta\pm\sqrt{\zeta^2-1}).\]
+The transient response has three cases:
+\bit
+\item overdamped (過阻尼) response for $\zeta>1$:
+\[f(t)=f(\infty)+Ae^{-\omega_0\qty(\zeta-\sqrt{\zeta^2-1})t}+Be^{-\omega_0\qty(\zeta+\sqrt{\zeta^2-1})t}.\]
+$f$ is always on the same side of $f(\infty)$ for $t>0$.
+\item critically damped (臨界阻尼) response for $\zeta=1$:
+\[f(t)=f(\infty)+\qty(A+Bt)e^{-\omega_0t}.\]
+$f$ is always on the same side of $f(\infty)$ for $t>0$.
+\item underdamped (欠/輕/次阻尼) response for $0<\zeta<1$:
+\[f(t)=f(\infty)+e^{-\omega_0\zeta t}\qty(A\cos(\omega_0\sqrt{1-\zeta^2}t)-B\sin(\omega_0\sqrt{1-\zeta^2}t)).\]
+$f$ is not always on the same side of $f(\infty)$ for $t>0$, but has damped oscillation.
+
+The damped frequency $\omega_d$ of it is:
+\[\omega_d=\omega_0\sqrt{1-\zeta^2}\]
+\[f(t)=Ae^{-\alpha t}\cos(\omega_dt+\varphi).\]
+The energy stored must be in the form
+\[E(t)=Ke^{-2\alpha t}\cos^2(\omega_dt+\theta)\]
+\[E_m=Ke^{-2\alpha t_n}\]
+\[E_l=Ke^{-2\alpha t_n}-Ke^{-2\alpha (t_n+\frac{2\pi}{\omega_d})}=E_m\qty(1-e^{-\frac{4\pi\alpha}{\omega_d}})=E_m\qty(1-e^{-\frac{4\pi\zeta}{\sqrt{1-\zeta^2}}})\]
+\[Q=\frac{2\pi E_m}{E_l}=\frac{2\pi}{1-e^{-\frac{4\pi\zeta}{\sqrt{1-\zeta^2}}}}\]
+For circuit with large quality factor $Q$, i.e., small $\zeta$, called high-Q circuit, which we usually take $Q>5$, i.e., $\zeta<0.1$, we have $\zeta\approx0$, and $1-e^{-x}\approx x$ for $x\approx 0$, thus
+\[Q\approx\frac{2\pi}{\frac{4\pi\zeta}{\sqrt{1-\zeta^2}}}=\frac{\sqrt{1-\zeta^2}}{2\zeta}\approx\frac{1}{2\zeta}\]
+\eit
+For any small enough fixed $M>0$, the min $t_m$ such that $t>t_m\implies\abs{f(t)-f(\infty)}<M$ is smallest at $\zeta=1$ and grows as $\zeta$ increases or decreases.
+
+
+
+
+
+
+
+
 \ssc{Frequency response}
 \sssc{DC gain}
 Low-pass gain is also called DC gain.
@@ -2916,45 +2924,4 @@ Laplace domain:
 \[V_o=R_fC_i\qty(v_i(0^-)-sV_i).\]
 \sssc{Active filter}
 Given a (passive or active) filter $v_f$ of an input $v_s$ and an inverting amplifier, noninverting amplifier, or unit gain buffer enforcing $v_o=Kv_i$, by connecting the ground and $v_i$ of the amplifier to the two terminals of the $v_f$, the two terminals ground and $v_o$ become an active filter of $v_s$ enforcing $v_o=Kv_f$.
-
-
-
-
-
-
-
-
-\subsubsection{Switches}
-\begin{center}
-\begin{circuitikz}
-\draw (0,0) to[switch, l=Switch] (3,0);
-\draw (5,0) node[spdt]{} (5,0.5) node[above]{SPDT Switch};
-\end{circuitikz}
-\end{center}
-\subsubsection{Diodes}
-\begin{center}
-\begin{circuitikz}
-\draw (0,0) to[D, l=Diode] (3,0);
-\draw (5,0) to[zDo, l=Zener Diode] (8,0);
-\draw (10,0) to[pDo, l=Photodiode] (13,0);
-\draw (15,0) to[led, l=LED] (18,0);
-\end{circuitikz}
-\end{center}
-\subsubsection{Transistors}
-\begin{center}
-\begin{circuitikz}
-\draw (0,0) node[npn]{} (0,1) node[above]{NPN Transistor};
-\draw (5,0) node[pnp]{} (5,1) node[above]{PNP Transistor};
-\draw (10,0) node[nmos]{} (10,1) node[above]{N-MOSFET};
-\draw (15,0) node[pmos]{} (15,1) node[above]{P-MOSFET};
-\end{circuitikz}
-\end{center}
-\subsubsection{Measuring Instruments}
-\begin{center}
-\begin{circuitikz}
-\draw (0,0) to[voltmeter, l=Voltmeter] (3,0);
-\draw (5,0) to[ammeter, l=Ammeter] (8,0);
-\draw (10,0) to[ohmmeter, l=Ohmmeter] (13,0);
-\end{circuitikz}
-\end{center}
 \end{document}
