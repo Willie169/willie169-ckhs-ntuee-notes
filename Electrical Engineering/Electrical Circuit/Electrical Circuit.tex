@@ -649,23 +649,30 @@ For circuit with large quality factor $Q$, i.e., small $\zeta$, called high-Q ci
 \[Q\approx\frac{2\pi}{\frac{4\pi\zeta}{\sqrt{1-\zeta^2}}}=\frac{\sqrt{1-\zeta^2}}{2\zeta}\approx\frac{1}{2\zeta}\]
 \eit
 For any small enough fixed $M>0$, the min $t_m$ such that $t>t_m\implies\abs{f(t)-f(\infty)}<M$ is smallest at $\zeta=1$ and grows as $\zeta$ increases or decreases.
-\ssc{Laplace domain analysis}
+\ssc{s-domain analysis}
 \sssc{LTI system}
 A LTI network is used interchangeably with the causal continuous-time linear time-invariant (LTI) systems with the complementary equation of its governing equation being the governing equation of ZIR and the transfer function $H(s)$ of the system. The transfer function is also called network function. The response is taken $\Re(Y(t))$ to obtain real voltage or current response.
-\sssc{Stability and controlled sources}
-A LTI circuit is stable if but not only if it there is no controlled source in it.
-\sssc{Poles and modes}
+\sssc{Poles, modes, and natural response}
 The number of poles is the order of the circuit.
 
-Poles determine natural response.
-
-Suppose $H(s)$ has distinct pairs of conjugate poles $\sigma_1\pm j\omega_1,\ldots,\sigma_n\pm j\omega_n$ with multiplicity $m_1,\ldots,m_n$, each of them determines a mode of the natural response
-\[y_i(t)=\sum_{j=1}^{m_i}\abs{A_{ij}}e^{\sigma_it}\cos(\omega_i+\Arg(A_{ij})),\]
+Poles determine natural response. Suppose $H(s)$ (with no pole-zero cancellation) has distinct pairs of conjugate poles $\sigma_1\pm j\omega_1,\ldots,\sigma_n\pm j\omega_n$ with multiplicity $m_1,\ldots,m_n$. Each of them determines a mode of the natural response
+\[y_i(t)=\sum_{j=1}^{m_i}\abs{A_{ij}}t^{j-1}e^{\sigma_it}\cos(\omega_it+\Arg(A_{ij})),\]
 where $A_{ij}$ is arbitrary complex constant.
 
 The sum of all modes is the natural response.
+\[y_N(t)=\sum_{i=1}^ny_i(t).\]
+\sssc{Stability}
+Stable circuit sometimes refers to BIBO stable and sometimes refers to Lyapunov stable of the LTI system.
+
+Marginal stable circuit with pure imaginary poles is also called oscillatory or AC circuit, or oscillator.
+
+Marginal stable circuit with no pure imaginary pole is also called DC circuit.
+
+A LTI circuit is Lyapunov stable if but not only if it there is no controlled source in it.
 \sssc{Zeros}
 A zero on the imaginary axis $j\omega_0$ means that sinusoidal input of frequency $\omega_0$ (DC for $\omega_0=0$) produces $0$ output.
+\sssc{Pole-zero cancellation}
+When analyzing forced responses, each multiplicity of a pole and a zero at same place can cancel, while they can't when analyzing natural response since the two are two independent energy-storage elements.
 
 
 
