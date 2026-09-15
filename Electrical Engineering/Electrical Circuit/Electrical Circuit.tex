@@ -456,9 +456,9 @@ The sum of ZIR and all ZSRs is the total response.
 \sssc{Step response}
 ZSR of step source, that is, an independent source whose enforced voltage or current is a multiple of the step function $u(t)$.
 \sssc{Time constant, rising time, and falling time}
-For a response function in the form $y(t)=y_0e^{-\alpha t}$ with constants $y_0\neq 0$ and $\alpha>0$, the time constant $\tau$ is defined as $\frac{1}{\alpha}$, that is, $y(\tau)=y_0e^{-1}$. For the smallest positive integer (or rational number to a number of decimals) $k$ such that $\frac{y(k\tau)}{y_0}<0.01$ (or other designated number), we typically call that $y(t)$ decays to $0$ about $k$ times time constants. The falling time or pulse decay time is defined as the time $y(t)$ changes from $0.9y_0$ to $0.1y_0$, which is approximately $22\tau$.
+Given time constant $\tau$, for the smallest positive integer (or rational number to a number of decimals) $k$ such that $\frac{y(k\tau)}{y_0}<0.01$ (or other designated number), we typically call that $y(t)$ decays to $0$ about $k$ times time constants. The falling time or pulse decay time is defined as the time $y(t)$ changes from $0.9y_0$ to $0.1y_0$, which is approximately $22\tau$.
 
-For a response function in the form $y(t)=y_0\qty(1-e^{-\alpha t})$ with constants $y_0\neq 0$ and $\alpha>0$, the time constant $\tau$ is defined as $\frac{1}{\alpha}$, that is, $y(\tau)=y_0\qty(1-e^{-1})$. For the smallest positive integer (or rational number to a number of decimals) $k$ such that $\frac{y(k\tau)}{y_0}>0.99$ (or other designated number), we typically call that $y(t)$ decays to $0$ about $k$ times time constants. The rising time or pulse grow time is defined as the time $y(t)$ changes from $0.1y_0$ to $0.9y_0$, which is approximately $22\tau$.
+Given time constant $\tau$, for the smallest positive integer (or rational number to a number of decimals) $k$ such that $\frac{y(k\tau)}{y_0}>0.99$ (or other designated number), we typically call that $y(t)$ decays to $0$ about $k$ times time constants. The rising time or pulse grow time is defined as the time $y(t)$ changes from $0.1y_0$ to $0.9y_0$, which is approximately $22\tau$.
 \sssc{Duality}
 Two linear circuit are dual if their governing equations in terms of variables become identical after systematically exchanging voltage and current, capacitance and inductance, impedance and admittance, open circuit and short circuit, KCL and KVL, Thévenin's theorem and Norton's theorem, series and parallel, node and loop, etc.
 
@@ -651,10 +651,8 @@ For circuit with large quality factor $Q$, i.e., small $\zeta$, called high-Q ci
 For any small enough fixed $M>0$, the min $t_m$ such that $t>t_m\implies\abs{f(t)-f(\infty)}<M$ is smallest at $\zeta=1$ and grows as $\zeta$ increases or decreases.
 \ssc{s-domain analysis}
 \sssc{LTI system}
-A LTI network is used interchangeably with the causal continuous-time linear time-invariant (LTI) systems with the complementary equation of its governing equation being the governing equation of ZIR and the transfer function $H(s)$ of the system. The transfer function is also called network function. The response is taken $\Re(Y(t))$ to obtain real voltage or current response.
-\sssc{Poles, modes, and natural response}
-The number of poles is the order of the circuit.
-
+A LTI network is used interchangeably with the causal continuous-time linear time-invariant (LTI) systems with the complementary equation of its governing equation being the governing equation of ZIR and the transfer function $H(s)$ of the system. The transfer function is also called network function. The response is taken $\Re(Y(t))$ to obtain real voltage or current response. The order of the LTI system is the order of the circuit and is the order of the governing ODE.
+\sssc{Modes of natural response}
 Poles determine natural response. Suppose $H(s)$ (with no pole-zero cancellation) has distinct pairs of conjugate poles $\sigma_1\pm j\omega_1,\ldots,\sigma_n\pm j\omega_n$ with multiplicity $m_1,\ldots,m_n$. Each of them determines a mode of the natural response
 \[y_i(t)=\sum_{j=1}^{m_i}\abs{A_{ij}}t^{j-1}e^{\sigma_it}\cos(\omega_it+\Arg(A_{ij})),\]
 where $A_{ij}$ is arbitrary complex constant.
@@ -662,8 +660,6 @@ where $A_{ij}$ is arbitrary complex constant.
 The sum of all modes is the natural response.
 \[y_N(t)=\sum_{i=1}^ny_i(t).\]
 \sssc{Stability}
-Stable circuit sometimes refers to BIBO stable and sometimes refers to Lyapunov stable of the LTI system.
-
 Marginal stable circuit with pure imaginary poles is also called oscillatory or AC circuit, or oscillator.
 
 Marginal stable circuit with no pure imaginary pole is also called DC circuit.
@@ -673,23 +669,22 @@ A LTI circuit is Lyapunov stable if but not only if it there is no controlled so
 A zero on the imaginary axis $j\omega_0$ means that sinusoidal input of frequency $\omega_0$ (DC for $\omega_0=0$) produces $0$ output.
 \sssc{Pole-zero cancellation}
 When analyzing forced responses, each multiplicity of a pole and a zero at same place can cancel, while they can't when analyzing natural response since the two are two independent energy-storage elements.
-
-
-
-
-
-
-\ssc{Frequency response}
 \sssc{DC gain}
 Low-pass gain is also called DC gain.
-\sssc{Resonance}
-A network is called in resonance or resonant if its voltage and current are in phase. The angular frequency and frequency at which are called resonance/resonant frequency and denoted $\omega_r$ and $f_r$.
+\sssc{Resonant rise}
+In series resonance, the phenomenon that amplitude of voltage of element is larger than that of source is called resonant voltage rise.
 
-In series resonance, the phenomenon that amplitude of voltage of element is larger than that of source is called resonant voltage rise. In parallel resonance, the phenomenon that amplitude of voltage of element is larger than that of source is called resonant current rise.
-\sssc{Natural frequency}
-The natural frequency is the magnitude of poles on $s$-plane if they are the same.
+In parallel resonance, the phenomenon that amplitude of voltage of element is larger than that of source is called resonant current rise.
 \sssc{Octave (oct) and decade (dec)}
 In logarithmic scale, changing by 8 times is called an octave or oct, and changing by 10 times is called a decade or dec.
+
+
+
+
+
+
+
+
 \sssc{Cutoff (截止), break, corner, or half-power frequency}
 An angular or non-angular frequency such that the output is -3\tx{dB}, that is, $\abs{H(j\omega)}=\frac{1}{\sqrt{2}}$ or $P_{out}=\frac{1}{2}P_{in}$, is called break, corner, or half-power angular frequency $\omega_c$, $\omega_{3\tx{dB}}$, $\omega_{-3\tx{dB}}$ and non-angular frequency $f_c$, $f_{3\tx{dB}}$, or $f_{-3\tx{dB}}$ respectively.
 \sssc{Bandwidth}
