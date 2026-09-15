@@ -1775,37 +1775,57 @@ is called steady-state (sinusoidal) response.
 \item $a(\omega)\coloneq\abs{H(i\omega)}$ is called magnitude/amplitude response/ratio,
 \item $\theta(\omega)\coloneq\Arg(H(i\omega))$ is called phase (angle) response/shift.
 \eit
+$\omega$ is called angular frequency and $f\coloneq\frac{\omega}{2\pi}$ is called non-angular frequency. Both can be called frequency and can be differentiated with symbol, and angular frequency is used below.
 \sssc{Resonance}
 Resonance occurs when the input and transfer function have common poles on the imaginary axis. Such natural frequency is called resonant/resonance frequency.
+\sssc{Normalizing}
+For a transfer function $H(s)$ such that
+\[\max_{\omega}\abs{H(i\omega)}=K\in\bbR_{>0},\]
+normalizing means dividing $H(s)$ by $K$, called pass gain. The following filter definitions are normalized. Multiple by $K$ for pass gain $K$. 
+\sssc{Logarithmic scale, Bode plot (波德圖), and decibel (dB)}
+Normalized frequency response are often expressed in logarithmic scale:
+\bit
+\item Bode plot of magnitude: Magnitude response plotted in logarithmic (frequency)-logarithmic (magnitude response) scale.
+\item Bode plot of phase: Phase response is often plotted in logarithmic (frequency)-linear (phase response) scale.
+\item Changing by 8 times is called an octave or oct, and changing by 10 times is called a decade or dec.
+\item Magnitude response, input, and output can be expressed in decibel (dB) as $20\log(\abs{H(i\omega)})$, $20\log(x)$, and $20\log(y)$.
+\eit
 \sssc{Cutoff (截止), break, or corner (angular) frequency}
-A frequency $\omega_c$ such that
-\[\abs{H(j\omega_c)}=\frac{1}{\sqrt{2}}.\]
+For a normalized transfer function, cutoff frequency $\omega_c$ is a frequency such that
+\[\abs{H(i\omega_c)}=\frac{1}{\sqrt{2}}.\]
+$20\log(\frac{1}{\sqrt{2}})\approx -3$, thus this frequency is also denoted $\omega_{-3\tx{dB}}$ or $\omega_{3\tx{dB}}$.
 \sssc{Low-pass (低通) (LP), high-cut, or bass-cut filter (LPF)}
-A continuous-time linear time-invariant system is a low-pass filter iff $H(i\omega)$ as a function of a real variable $\omega$ is such that
-\[\lim_{\omega\to 0}\abs{H(i\omega)}=K\in\bbR_{>0}\]
-and
-\[\lim_{\omega\to\infty}\abs{H(i\omega)}=0,\]
-where $K$ is called low-pass gain.
+A continuous-time linear time-invariant system is a normalized low-pass filter iff $H(i\omega)$ as a function of a real variable $\omega$ is such that
+\[\lim_{\omega\to 0}\abs{H(i\omega)}=1\]
+\[\lim_{\omega\to\infty}\abs{H(i\omega)}=0\]
 \sssc{High-pass (高通) (HP), low-cut, or treble-cut filter (HPF)}
-A continuous-time linear time-invariant system is a high-pass filter iff $H(i\omega)$ as a function of a real variable $\omega$ is such that
+A continuous-time linear time-invariant system is a normalized high-pass filter iff $H(i\omega)$ as a function of a real variable $\omega$ is such that
 \[\lim_{\omega\to 0}\abs{H(i\omega)}=0\]
-and
-\[\lim_{\omega\to\infty}\abs{H(i\omega)}=K\in\bbR_{>0},\]
-where $K$ is called high-pass gain.
-\sssc{Band-pass (BP) filter (BPF)}
-A continuous-time linear time-invariant system is a band-pass filter iff $H(i\omega)$ as a function of a real variable $\omega$ is such that
+\[\lim_{\omega\to\infty}\abs{H(i\omega)}=1\]
+\sssc{Standard band-pass (BP) filter (BPF)}
+A continuous-time linear time-invariant system is a standard normalized band-pass filter iff $H(i\omega)$ as a function of a real variable $\omega$ is such that
 \[\lim_{\omega\to 0}\abs{H(i\omega)}=0\]
 \[\lim_{\omega\to\infty}\abs{H(i\omega)}=0\]
-and
-\[\max_{\omega}\abs{H(i\omega)}=K\in\bbR_{>0},\]
-where $K$ is called band-pass gain.
-\sssc{Band-stop (BS) or notch filter (BSF)}
-A continuous-time linear time-invariant system is a band-stop filter iff $H(i\omega)$ as a function of a real variable $\omega$ is such that
-\[\lim_{\omega\to 0}\abs{H(i\omega)}=K_1\in\bbR_{>0},\]
-\[\lim_{\omega\to\infty}\abs{H(i\omega)}=K_2\in\bbR_{>0},\]
-and
-\[\min_{\omega}\abs{H(i\omega)}=0,\]
-where $K_1$ is called low-pass notch gain and $K_2$ is called high-pass notch gain.
+\[\arg_{\omega}\left\{\abs{H(i\omega)}=\frac{1}{\sqrt{2}}\right\}=\omega_L,\omega_H\]
+\[\abs{H(\sqrt{\omega_L\omega_H})}=1\]
+where $\omega_L<\omega_H$ are called band edge, $\omega_H-\omega_L$ is called bandwidth, and $\omega_0=\sqrt{\omega_L\omega_H}$ is called central passed frequency.
+\sssc{Standard band-stop (BS) or notch filter (BSF)}
+A continuous-time linear time-invariant system is a standard normalized band-stop filter iff $H(i\omega)$ as a function of a real variable $\omega$ is such that
+\[\arg_{\omega}\left\{\abs{H(i\omega)}=\frac{1}{\sqrt{2}}\right\}=\omega_L,\omega_H\]
+\[\abs{H(\sqrt{\omega_L\omega_H})}=0\]
+where $\omega_L<\omega_H$ are called band edge, $\omega_H-\omega_L$ is called bandwidth, and $\omega_0=\sqrt{\omega_L\omega_H}$ is called central rejected frequency.
 \sssc{Normalized low-pass prototype filter}
+A normalized low-pass prototype filter is a low-pass filter with cutoff frequency $\omega_c=1$. Suppose the transfer function of it is $H_P(s)$.
+
+To transform an $n$th-order normalized low-pass prototype filter to an $n$th-order low-pass filter with cutoff frequency $\omega_c$, use the transfer function
+\[H_{LP}(s)=H_P\qty(\frac{s}{\omega_c}).\]
+To transform an $n$th-order normalized low-pass prototype filter to an $n$th-order high-pass filter with cutoff frequency $\omega_c$, use the transfer function
+\[H_{HP}(s)=H_P\qty(\frac{\omega_c}{s}).\]
+To transform an $n$th-order normalized low-pass prototype filter to a $2n$th-order standard band-pass filter with cutoff frequency $\omega_c$, use the transfer function
+\[H_{BP}(s)=H_P\qty(\frac{Bs}{s^2+\omega_0^{\pht{0}2}}).\]
+To transform an $n$th-order normalized low-pass prototype filter to a $2n$th-order standard band-stop filter with cutoff frequency $\omega_c$, use the transfer function
+\[H_{BS}(s)=H_P\qty(\frac{s^2+\omega_0^{\pht{0}2}}{Bs}).\]
+
+
 
 \end{document}
