@@ -463,8 +463,8 @@ Given time constant $\tau$, for the smallest positive integer (or rational numbe
 Two linear circuit are dual if their governing equations in terms of variables become identical after systematically exchanging voltage and current, capacitance and inductance, impedance and admittance, open circuit and short circuit, KCL and KVL, Thévenin's theorem and Norton's theorem, series and parallel, node and loop, etc.
 
 Two linear circuit are exact dual if their governing equations in terms of numerical values become identical after systematically exchanging voltage and current, capacitance and inductance, impedance and admittance, open circuit and short circuit, KCL and KVL, Thévenin's theorem and Norton's theorem, series and parallel, node and loop, etc.
-\sssc{Quality factor (品質因數)}
-The quality factor $Q$ (or $Q_0$) of a network is $2\pi$ multiplied by the maximum energy stored in a period, $E_m$, divided by the total energy lost in the period, $E_l$, during natural response, that is,
+\sssc{Quality factor (品質因數) or Q factor}
+The quality factor or Q factor $Q$ of a network is $2\pi$ multiplied by the maximum energy stored in a period, $E_m$, divided by the total energy lost in the period, $E_l$, during natural response, that is,
 \[Q=\frac{2\pi E_m}{E_l}.\]
 \ssc{Steady-state sinusoidal AC}
 \sssc{Effective value or root mean square (RMS)}
@@ -640,16 +640,17 @@ $f$ is not always on the same side of $f(\infty)$ for $t>0$, but has damped osci
 The damped frequency $\omega_d$ of it is:
 \[\omega_d=\omega_0\sqrt{1-\zeta^2}\]
 \[f(t)=Ae^{-\alpha t}\cos(\omega_dt+\varphi).\]
-The energy stored must be in the form
+\eit
+For any small enough fixed $M>0$, the min $t_m$ such that $t>t_m\implies\abs{f(t)-f(\infty)}<M$ is smallest at $\zeta=1$ and grows as $\zeta$ increases or decreases.
+\sssc{Quality factor of second-order circuit}
+For a second-order circuit with $0<\zeta<1$, the energy stored must be in the form
 \[E(t)=Ke^{-2\alpha t}\cos^2(\omega_dt+\theta)\]
 \[E_m=Ke^{-2\alpha t_n}\]
 \[E_l=Ke^{-2\alpha t_n}-Ke^{-2\alpha (t_n+\frac{2\pi}{\omega_d})}=E_m\qty(1-e^{-\frac{4\pi\alpha}{\omega_d}})=E_m\qty(1-e^{-\frac{4\pi\zeta}{\sqrt{1-\zeta^2}}})\]
 \[Q=\frac{2\pi E_m}{E_l}=\frac{2\pi}{1-e^{-\frac{4\pi\zeta}{\sqrt{1-\zeta^2}}}}\]
-For circuit with large quality factor $Q$, i.e., small $\zeta$, called high-Q circuit, which we usually take $Q>5$, i.e., $\zeta<0.1$, we have $\zeta\approx0$, and $1-e^{-x}\approx x$ for $x\approx 0$, thus
+For circuit with large quality factor $Q$, i.e., small $\zeta$, called high-Q or high Q circuit, which we usually take $Q>5$, i.e., $\zeta<0.1$, we have $\zeta\approx0$, and $1-e^{-x}\approx x$ for $x\approx 0$, thus
 \[Q\approx\frac{2\pi}{\frac{4\pi\zeta}{\sqrt{1-\zeta^2}}}=\frac{\sqrt{1-\zeta^2}}{2\zeta}\approx\frac{1}{2\zeta}\]
-In many contexts, high-Q circuit is assumed.
-\eit
-For any small enough fixed $M>0$, the min $t_m$ such that $t>t_m\implies\abs{f(t)-f(\infty)}<M$ is smallest at $\zeta=1$ and grows as $\zeta$ increases or decreases.
+In most contexts, $Q$ is redefined as $\frac{1}{2\zeta}$ for all second order circuits even if they are not high-Q circuit.
 \ssc{s-domain analysis}
 \sssc{LTI system}
 A LTI network is used interchangeably with the causal continuous-time linear time-invariant (LTI) systems with the complementary equation of its governing equation being the governing equation of ZIR and the transfer function $H(s)$ of the system. The transfer function is also called network function. The response is taken $\Re(Y(t))$ to obtain real voltage or current response. The order of the LTI system is the order of the circuit and is the order of the governing ODE.
@@ -678,6 +679,30 @@ In series resonance, the phenomenon that amplitude of voltage of element is larg
 In parallel resonance, the phenomenon that amplitude of voltage of element is larger than that of source is called resonant current rise.
 \sssc{Cutoff frequency}
 For a filter with pass gain 1, cutoff frequency is also called half-power frequency since $P_{out}=\frac{1}{2}P_{in}$ at it.
+\sssc{Butterworth band-pass filter}
+Transform LP:
+\[H(s)\frac{1}{s+1}\]
+to BP:
+\[H(s)=\frac{1}{\frac{Bs}{s^2+\omega_0^{\pht{0}2}}+1}=\frac{s^2+\omega_0^{\pht{0}2}}{s^2+Bs+\omega_0^{\pht{0}2}}\]
+\[B=2\alpha=2\omega_0\zeta=\frac{\omega_0}{Q}\]
+\[\omega_H\omega_L=\omega_0^{\pht{0}2}\]
+\[\omega_H-\omega_L=B\]
+\[\omega_L^{\pht{L}2}+B\omega_L-\omega_0^{\pht{0}2}=0\]
+\[\omega_L=\frac{-B+\sqrt{B^2+4\omega_0^{\pht{0}2}}}{2}\]
+\[\frac{\omega_H+\omega_L}{2}=\omega_L+\frac{B}{2}=\frac{\sqrt{B^2+\omega_0^{\pht{0}2}}}{2}=\omega_0\sqrt{1+\qty(\frac{B}{2\omega_0})^2}=\omega_0\sqrt{1+\qty(\frac{1}{2Q})^2}\]
+For high-Q circuit, $\omega_0\gg B$, called narrow band-pass filter,
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
