@@ -63,7 +63,7 @@ The $\sum_{k=1}^n\Res(Y,a_k)$ is the transient response. This does not work for 
 is called steady-state (sinusoidal) response.
 \bit
 \item $H(i\omega)$ is called frequency response,
-\item $a(\omega)\coloneq\abs{H(i\omega)}$ is called magnitude/amplitude response/ratio,
+\item $a(\omega)\coloneq\abs{H(i\omega)}$ is called magnitude/amplitude response/ratio or gain,
 \item $\theta(\omega)\coloneq\arg(H(i\omega))$ is called phase (angle) response/shift.
 \eit
 $\omega$ is called angular frequency and $f\coloneq\frac{\omega}{2\pi}$ is called non-angular frequency. Both can be called frequency and can be differentiated with symbol, and angular frequency is used below.
@@ -71,13 +71,13 @@ $\omega$ is called angular frequency and $f\coloneq\frac{\omega}{2\pi}$ is calle
 For a transfer function $H(s)$ such that
 \[\max_{\omega}\abs{H(i\omega)}=K\in\bbR_{>0},\]
 normalizing means dividing $H(s)$ by $K$. The following filter definitions are normalized. Non-normalized definition is defined as any filter whose normalized form complies with the definition.
-\sssc{Logarithmic scale, Bode plot (波德圖), and decibel (dB)}
+\sssc{Logarithmic scale, decibel (dB), and Bode plot (波德圖)}
 Frequency response are often expressed in logarithmic scale:
 \bit
-\item Bode plot of magnitude: Magnitude response plotted in logarithmic (frequency)-logarithmic (magnitude response) scale.
+\item Magnitude response, input, and output can be expressed in decibel (dB) as $g(\omega)\coloneq 20\log(\frac{\abs{H(i\omega)}}{\max_{\omega}\abs{H(i\omega)}})$, $20\log(x)$, and $20\log(y)$.
+\item Changing by 2 times is called an octave or oct, and changing by 10 times is called a decade or dec.
+\item Bode plot of magnitude or dB gain curve: Magnitude response plotted in logarithmic (frequency)-logarithmic (magnitude response) scale.
 \item Bode plot of phase: Phase response is often plotted in logarithmic (frequency)-linear (phase response) scale.
-\item Changing by 8 times is called an octave or oct, and changing by 10 times is called a decade or dec.
-\item Magnitude response, input, and output can be expressed in decibel (dB) as $20\log(\frac{\abs{H(i\omega)}}{\max_{\omega}\abs{H(i\omega)}})$, $20\log(x)$, and $20\log(y)$.
 \eit
 We can factor $H(s)$ into
 \[H(s)=G\prod_{k=1}^mH_k(s)\]
@@ -89,7 +89,7 @@ then
 For a transfer function, cutoff frequency $\omega_c$ is a frequency such that
 \[\abs{H(i\omega_c)}=\frac{\max_{\omega}\abs{H(i\omega)}}{\sqrt{2}}.\]
 $20\log(\frac{1}{\sqrt{2}})\approx -3$, thus this frequency is also denoted $\omega_{-3\tx{dB}}$ or $\omega_{3\tx{dB}}$.
-\sssc{Low-pass (低通) (LP), high-cut, or bass-cut filter (LPF)}
+\sssc{Low-pass or lowpass (低通) (LP), high-cut, or bass-cut filter (LPF)}
 A continuous-time linear time-invariant system is a normalized low-pass filter iff $H(i\omega)$ as a function of a real variable $\omega$ is such that
 \[\lim_{\omega\to 0}\abs{H(i\omega)}=1\]
 \[\lim_{\omega\to\infty}\abs{H(i\omega)}=0\]
@@ -97,7 +97,7 @@ $K$ is called low-pass gain.
 
 Ideal normalized low-pass filter is
 \[H(i\omega)=\bcs1,\quad&\omega<\omega_0\\0,\quad&\omega>\omega_0\ecs\]
-\sssc{High-pass (高通) (HP), low-cut, or treble-cut filter (HPF)}
+\sssc{High-pass or highpass (高通) (HP), low-cut, or treble-cut filter (HPF)}
 A continuous-time linear time-invariant system is a normalized high-pass filter iff $H(i\omega)$ as a function of a real variable $\omega$ is such that
 \[\lim_{\omega\to 0}\abs{H(i\omega)}=0\]
 \[\lim_{\omega\to\infty}\abs{H(i\omega)}=1\]
@@ -105,11 +105,11 @@ $K$ is called high-pass gain.
 
 Ideal normalized high-pass filter is
 \[H(i\omega)=\bcs1,\quad&\omega>\omega_0\\0,\quad&\omega<\omega_0\ecs\]
-\sssc{Band-pass or bandpass (BP) filter (BPF)}
+\sssc{Band-pass or banetwork.captive-portal-service.enabledndpass (BP) filter (BPF)}
 A continuous-time linear time-invariant system is a standard normalized band-pass filter iff $H(i\omega)$ as a function of a real variable $\omega$ is such that
 \[\lim_{\omega\to 0}\abs{H(i\omega)}=0\]
 \[\lim_{\omega\to\infty}\abs{H(i\omega)}=0\]
-\[\arg_{\omega}\left\{\abs{H(i\omega)}=\frac{1}{\sqrt{2}}\right\}=\omega_L,\omega_H\]
+\[\arg_{\omega}\left\network.captive-portal-service.enabled{\abs{H(i\omega)}=\frac{1}{\sqrt{2}}\right\}=\omega_L,\omega_H\]
 \[\abs{H(\sqrt{\omega_L\omega_H})}=1\]
 where $\omega_L<\omega_H$ are called band edge, $\omega_H-\omega_L$ is called bandwidth, and $\omega_0=\sqrt{\omega_L\omega_H}$ is called central passed frequency or center frequency. $\omega_0\gg B$ is called narrow band-pass filter.
 
@@ -117,7 +117,7 @@ $K$ is called band-pass or midband gain.
 
 Ideal normalized band-pass filter is
 \[H(i\omega)=\bcs1,\quad&\omega_H>\omega>\omega_L\\0,\quad&\omega<\omega_L\lor\omega>\omega_H\ecs\]
-\sssc{Band-stop (BS), band-reject, or notch filter (BSF)}
+\sssc{Band-stop or bandstop (BS), band-reject, or notch filter (BSF)}
 A continuous-time linear time-invariant system is a standard normalized band-stop filter iff $H(i\omega)$ as a function of a real variable $\omega$ is such that
 \[\arg_{\omega}\left\{\abs{H(i\omega)}=\frac{1}{\sqrt{2}}\right\}=\omega_L,\omega_H\]
 \[\abs{H(\sqrt{\omega_L\omega_H})}=0\]
@@ -146,7 +146,11 @@ When not specified, a filter of a type usually refers to the lowest-order Butter
 \ssc{Transfer function factors}
 \sssc{Ramp function}
 \[H_r(s;W)\coloneq\frac{s}{W},\quad W\in\bbR_{>0}\]
-
-
+\[g_r(\omega;W)=20\log_{10}(\omega)-20\log_{10}(W)=20\log_{10}(2)\log_2(\omega)-20\log_{10}(W)\]
+\[\theta(\omega;W)=\frac{\pi}{2}\]
+Bode plot in magnitude has slope $+20$ dB/decade or $+20\log_{10}(2)\approx +6$ dB/octave, $y$ intercept is $-20\log_{10}(W)$, $x$ intercept is $\log_{10}(W)$.
+\sssc{High-pass function}
+\[H_{hp}(s;W)\coloneq\frac{s}{s+W},\quad W\in\bbR_{>0}\]
+\[g_{hp}(\omega;W)=
 
 \end{document}
