@@ -146,7 +146,7 @@ $n$th-order Butterworth low-pass prototype filter is
 When not specified, a filter of a type usually refers to the lowest-order Butterworth filter of the type.
 \ssc{Transfer function factors}
 Variables after $;$ are parameters, which are positive real numbers unless otherwise specified.
-\sssc{Ramp function}
+\sssc{Ramp factor}
 \[H_r(s;W)\coloneq\frac{s}{W}\]
 \[H_r(i\omega;W)=\frac{i\omega}{W}\]
 \[\abs{H_r(i\omega;W)}=\frac{\omega}{W}\]
@@ -157,7 +157,7 @@ The cutoff frequency is:
 \[\abs{H_r(i\omega_c;W)}=\frac{1}{\sqrt{2}}\]
 \[\omega_c=\frac{W}{\sqrt{2}}\]
 \[\theta_r(\omega;W)=\frac{\pi}{2}\]
-\sssc{Low-pass function}
+\sssc{Low-pass factor}
 \[H_{LP}(s;W)\coloneq\frac{W}{s+W}\]
 \[H_{LP}(i\omega;W)=\frac{W}{i\omega+W}\]
 \[\abs{H_{LP}(i\omega;W)}=\frac{W}{\sqrt{\omega^2+W^2}}\]
@@ -167,7 +167,7 @@ Asymptotic Bode plot and cutoff frequency:
 \bit
 \item For $\omega\gg W$:
 \[g_{LP}(\omega;W)\approx 20\log_{10}(W)-20\log_{10}(\omega),\]
-which has slope $-20$ dB/dec, $y$ intercept $20\log_{10}(W)$, and $x$ intercept $\log_{10}(W)$.
+which is slant asymptote with slope $-20$ dB/dec, $y$ intercept $20\log_{10}(W)$, and $x$ intercept $\log_{10}(W)$.
 \[\theta_{LP}(\omega;W)\approx0.\]
 \item For $\omega=W$:
 \[g_{LP}(W;W)=20\log_{10}(W)-10\log_{10}(2W^2)=-10\log_{10}(2).\]
@@ -175,10 +175,10 @@ Thus the cutoff frequency is $\omega_c=W$.
 \[\theta_{LP}(W;W)=-\frac{\pi}{4}.\]
 \item For $\omega\ll W$:
 \[g_{LP}(\omega;W)=0,\]
-which is horizontal equilibrium $g_{LP}=0$, i.e., $\abs{H(i\omega)}=1$. 
+which is horizontal asymptote $g_{LP}=0$, i.e., $\abs_{LP}{H(i\omega)}=1$.
 \[\theta_{LP}(\omega;W)\approx-\frac{\pi}{2}.\]
 \eit
-\sssc{High-pass function}
+\sssc{High-pass factor}
 \[H_{HP}(s;\omega_c)\coloneq\frac{s}{s+\omega_c}\]
 \[H_{HP}(i\omega;\omega_c)=\frac{i\omega}{i\omega+\omega_c}\]
 \[\abs{H_{HP}(i\omega;\omega_c)}=\frac{\omega}{\sqrt{\omega^2+\omega_c^{\pht{c}2}}}\]
@@ -188,7 +188,7 @@ Asymptotic Bode plot and cutoff frequency:
 \bit
 \item For $\omega\ll \omega_c$:
 \[g_{HP}(\omega;\omega_c)\approx 20\log_{10}(\omega)-20\log_{10}(\omega_c),\]
-which has slope $20$ dB/dec, $y$ intercept $-20\log_{10}(\omega_c)$, and $x$ intercept $\log_{10}(\omega_c)$.
+which is slant asymptote slope $20$ dB/dec, $y$ intercept $-20\log_{10}(\omega_c)$, and $x$ intercept $\log_{10}(\omega_c)$.
 \[\theta_{HP}(\omega;\omega_c)\approx\frac{\pi}{2}.\]
 \item For $\omega=\omega_c$:
 \[g_{HP}(\omega_c;\omega_c)=20\log_{10}(\omega_c)-10\log_{10}(2\omega_c^{\pht{c}2})=-10\log_{10}(2).\]
@@ -196,26 +196,92 @@ Thus the cutoff frequency is $\omega_c=\omega_c$.
 \[\theta_{HP}(\omega_c;\omega_c)=\frac{\pi}{2}-\frac{\pi}{4}=\frac{\pi}{4}.\]
 \item For $\omega\gg \omega_c$:
 \[g_{HP}(\omega;\omega_c)=0,\]
-which is horizontal equilibrium $g_{HP}=0$, i.e., $\abs{H(i\omega)}=1$. 
+which is horizontal asymptote $g_{HP}=0$, i.e., $\abs{H_{HP}(i\omega)}=1$.
 \[\theta_{HP}(\omega;\omega_c)\approx\frac{\pi}{2}-\frac{\pi}{2}=0.\]
 \eit
-\sssc{Band-pass function}
+
+
+
+PLACEHOLDER damp
+\sssc{Quadratic factor}
+\[H_{QD}(s;B,\omega_0)\coloneq\frac{\omega_0^{\pht{0}2}}{s^2+Bs+\omega_0^{\pht{0}2}}\]
+\[H_{QD}(i\omega;B,\omega_0)=\frac{\omega_0^{\pht{0}2}}{-\omega^2+iB\omega+\omega_0^{\pht{0}2}}\]
+\[\abs{H_{QD}(i\omega;B,\omega_0)}=\frac{\omega_0^{\pht{0}2}}{\sqrt{B^2\omega^2+\omega^4+\omega_0^{\pht{0}4}-2\omega^2\omega_0^{\pht{0}2}}}\]
+\[\theta_{QD}(\omega;B,\omega_0)=-\arg(-\omega^2+iB\omega+\omega_0^{\pht{0}2})\]
+Asymptotic Bode plot and center frequencies:
+\bit
+\item For $\omega\ll\omega_0,B$:
+\[\abs{H_{QD}(i\omega;B,\omega_0)}\approx1\]
+\[g_{QD}(\omega;B,\omega_0)\approx0\]
+which is horizontal asymptote $g_{QD}=0$, i.e., $\abs{H_{QD}(i\omega)}=1$.
+\[\theta_{QD}(\omega;B,\omega_0)\approx\frac{\pi}{2}\]
+\item For $\omega=\omega_0$:
+\[\abs{H_{QD}(i\omega;B,\omega_0)}=\frac{\omega_0}{B}\]
+\[g_{QD}(\omega;B,\omega_0)=20\log_{10}(\omega_0)-20\log_{10}(B)\]
+which has horizontal tangent $g_{QD}=20\log_{10}(\omega_0)-20\log_{10}(B)$, i.e., $\abs{H_{QD}(i\omega)}=\frac{\omega_0}{B}$.
+\[\theta_{QD}(\omega;B,\omega_0)=-\frac{\pi}{2}\]
+\item For $\omega\gg\omega_0,B$:
+\[\abs{H_{QD}(i\omega;B,\omega_0)}=\frac{\omega_0^{\pht{0}2}}{\omega^2}\]
+\[g_{QD}(\omega;B,\omega_0)=40\log_{10}(\omega_0)-40\log_{10}(\omega)\]
+which is slant asymptote slope $-40$ dB/dec, $y$ intercept $40\log_{10}(\omega_0)$, and $x$ intercept $\log_{10}(\omega_0)$.
+\[\theta_{QD}(\omega;B,\omega_0)=-\pi\]
+\eit
+
+
+
+\sssc{Band-pass factor}
 \[H_{BP}(s;B,\omega_0)\coloneq\frac{Bs}{s^2+Bs+\omega_0^{\pht{0}2}}\]
 \[H_{BP}(i\omega;B,\omega_0)=\frac{iB\omega}{-\omega^2+iB\omega+\omega_0^{\pht{0}2}}\]
-\[\abs{H_{BP}(i\omega;B,\omega_0)}=\frac{B\omega}{\sqrt{B^2\omega^2+\omega^4+\omega_0^{\pht{0}4}}-2\omega^2\omega_0^{\pht{0}2}}\]
-Asymptotic Bode plot and important frequencies:
+\[\abs{H_{BP}(i\omega;B,\omega_0)}=\frac{B\omega}{\sqrt{B^2\omega^2+\omega^4+\omega_0^{\pht{0}4}-2\omega^2\omega_0^{\pht{0}2}}}\]
+\[\theta_{BP}(\omega;B,\omega_0)=\frac{\pi}{2}-\arg(-\omega^2+iB\omega+\omega_0^{\pht{0}2})\]
+Asymptotic Bode plot and center frequencies:
 \bit
 \item For $\omega\ll\omega_0,B$:
 \[\abs{H_{BP}(i\omega;B,\omega_0)}\approx\frac{B\omega}{\omega_0^{\pht{0}2}}\]
 \[g_{BP}(\omega;B,\omega_0)\approx 20\log_{10}(\omega)+20\log_{10}(B)-40\log_{10}(\omega_0)\]
-
-
-
-
-
-
-
+which has slope $20$ dB/dec, $y$ intercept $20\log_{10}(B)-40\log_{10}(\omega_0)$, and $x$ intercept $2\log_{10}(\omega_0)-\log_{10}(B)$.
+\[\theta_{BP}(\omega;B,\omega_0)\approx\frac{\pi}{2}\]
+\item For $\omega=\omega_0$:
+\[\abs{H_{BP}(i\omega;B,\omega_0)}=1\]
+\[g_{BP}(\omega;B,\omega_0)=0\]
+which has horizontal tangent $g_{BP}=0$, i.e., $\abs{H_{BP}(i\omega)}=1$.
+\[\theta_{BP}(\omega;B,\omega_0)=0\]
+\item For $\omega\gg\omega_0,B$:
+\[\abs{H_{BP}(i\omega;B,\omega_0)}\approx\frac{B}{\omega}\]
+\[g_{BP}(\omega;B,\omega_0)=-20\log_{10}(\omega)+20\log_{10}(B)\]
+which has slope $-20$ dB/dec, $y$ intercept $20\log_{10}(B)$, and $x$ intercept $\log_{10}(B)$.
+\[\theta_{BP}(\omega;B,\omega_0)=-\frac{\pi}{2}\]
 \eit
+\sssc{Band-stop factor}
+\[H_{BS}(s;B,\omega_0)\coloneq\frac{s^2+\omega_0^{\pht{0}2}}{s^2+Bs+\omega_0^{\pht{0}2}}\]
+\[H_{BS}(i\omega;B,\omega_0)=\frac{-\omega^2+\omega_0^{\pht{0}2}}{-\omega^2+iB\omega+\omega_0^{\pht{0}2}}\]
+\[\abs{H_{BS}(i\omega;B,\omega_0)}=\frac{-\omega^2+\omega_0^{\pht{0}2}}{\sqrt{B^2\omega^2+\omega^4+\omega_0^{\pht{0}4}-2\omega^2\omega_0^{\pht{0}2}}}\]
+\[\theta_{BS}(\omega;B,\omega_0)=\arg(\frac{-\omega^2+\omega_0^{\pht{0}2}}{-\omega^2+iB\omega+\omega_0^{\pht{0}2}})\]
+Asymptotic Bode plot and center frequencies:
+\bit
+\item For $\omega\ll\omega_0,B$:
+\[\abs{H_{BS}(i\omega;B,\omega_0)}\approx1\]
+\[g_{BS}(\omega;B,\omega_0)\approx0\]
+which is horizontal asymptote $g_{BS}=0$, i.e., $\abs{H_{BS}(i\omega)}=1$.
+\[\theta_{BS}(\omega;B,\omega_0)=0\]
+\item For $\omega=\omega_0$:
+\[\abs{H_{BS}(i\omega;B,\omega_0)}=0\]
+\[g_{BS}(\omega;B,\omega_0)=-\infty\]
+\[\theta_{BS}(\omega;B,\omega_0)=\arg(0)=\tx{undefined}\]
+\item For $\omega\gg\omega_0,B$:
+\[\abs{H_{BS}(i\omega;B,\omega_0)}\approx1\]
+\[g_{BS}(\omega;B,\omega_0)=0\]
+which is horizontal asymptote $g_{BS}=0$, i.e., $\abs{H_{BS}(i\omega)}=1$.
+\[\theta_{BS}(\omega;B,\omega_0)=0\]
+\eit
+
+
+
+
+
+
+
+
 
 
 
