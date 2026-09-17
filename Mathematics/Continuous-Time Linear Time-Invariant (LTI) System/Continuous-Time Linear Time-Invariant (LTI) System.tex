@@ -199,12 +199,13 @@ Thus the cutoff frequency is $\omega_c=\omega_c$.
 which is horizontal asymptote $g_{HP}=0$, i.e., $\abs{H_{HP}}=1$.
 \[\theta_{HP}(\omega;\omega_c)\approx\frac{\pi}{2}-\frac{\pi}{2}=0.\]
 \eit
-
-PLACEHOLDER peak is not omega_0
-\sssc{Quadratic factor}
+\sssc{Quadratic low-pass factor}
 \[H_{QD}(s;B,\omega_0)\coloneq\frac{\omega_0^{\pht{0}2}}{s^2+Bs+\omega_0^{\pht{0}2}}\]
 \[H_{QD}(i\omega;B,\omega_0)=\frac{\omega_0^{\pht{0}2}}{-\omega^2+iB\omega+\omega_0^{\pht{0}2}}\]
 \[\abs{H_{QD}(i\omega;B,\omega_0)}=\frac{\omega_0^{\pht{0}2}}{\sqrt{B^2\omega^2+\omega^4+\omega_0^{\pht{0}4}-2\omega^2\omega_0^{\pht{0}2}}}\]
+\[\dv{}{\omega}\qty(\abs{H_{QD}(i\omega;B,\omega_0)})=\frac{-\omega\omega_0^{\pht{0}2}\qty(2\omega^2+B^2-2\omega_0^{\pht{0}2})}{\qty(B^2\omega^2+\omega^4+\omega_0^{\pht{0}4}-2\omega^2\omega_0^{\pht{0}2})^{\frac{3}{2}}}\]
+\[\evlv{\dv{}{\omega}\qty(\abs{H_{QD}(i\omega;B,\omega_0)})}_{\omega=\omega_p}=0\]
+\[\omega_p=\sqrt{\omega_0^{\pht{0}2}-\frac{B^2}{2}}\]
 \[\theta_{QD}(\omega;B,\omega_0)=-\arg(-\omega^2+iB\omega+\omega_0^{\pht{0}2})\]
 Asymptotic Bode plot, center, and peak frequencies:
 \bit
@@ -216,13 +217,20 @@ which is horizontal asymptote $g_{QD}=0$, i.e., $\abs{H_{QD}}=1$.
 \item For $\omega=\omega_0$:
 \[\abs{H_{QD}(i\omega;B,\omega_0)}=\frac{\omega_0}{B}\]
 \[g_{QD}(\omega;B,\omega_0)=20\log_{10}(\omega_0)-20\log_{10}(B)\]
-which has horizontal tangent $g_{QD}=20\log_{10}(\omega_0)-20\log_{10}(B)$, i.e., $\abs{H_{QD}}=\frac{\omega_0}{B}$.
+\[\theta_{QD}(\omega;B,\omega_0)=-\frac{\pi}{2}\]
+\item For $\omega=\omega_p=\sqrt{\omega_0^{\pht{0}2}-\frac{B^2}{2}}$:
+\[\abs{H_{QD}(i\omega;B,\omega_0)}=\frac{\omega_0^{\pht{0}2}}{\sqrt{B^2\omega_0^{\pht{0}2}-\frac{B^4}{2}+\omega_0^{\pht{0}4}+\frac{B^4}{4}-B^2\omega_0^{\pht{0}2}+\omega_0^{\pht{0}4}-2\omega_0^{\pht{0}4}+B^2\omega_0^{\pht{0}2}}}=\frac{\omega_0^{\pht{0}2}}{B\sqrt{\omega_0^{\pht{0}2}-\frac{B^2}{4}}}\]
+
+
+
 \bit
 \item $\omega_0>B$ overdamped response: $g_{QD}>0$
 \item $\omega_0=B$ critically damped response: $g_{QD}=0$
 \item $\omega_0<B$ underdamped response: $g_{QD}<0$
 \eit
-\[\theta_{QD}(\omega;B,\omega_0)=-\frac{\pi}{2}\]
+
+
+
 \item For $\omega\gg\omega_0,B$:
 \[\abs{H_{QD}(i\omega;B,\omega_0)}=\frac{\omega_0^{\pht{0}2}}{\omega^2}\]
 \[g_{QD}(\omega;B,\omega_0)=40\log_{10}(\omega_0)-40\log_{10}(\omega)\]
@@ -230,17 +238,14 @@ which is slant asymptote slope $-40$ dB/dec, $y$ intercept $40\log_{10}(\omega_0
 \[\theta_{QD}(\omega;B,\omega_0)=-\pi\]
 \eit
 
+
 \sssc{Band-pass factor}
 \[H_{BP}(s;B,\omega_0)\coloneq\frac{Bs}{s^2+Bs+\omega_0^{\pht{0}2}}\]
 \[H_{BP}(i\omega;B,\omega_0)=\frac{iB\omega}{-\omega^2+iB\omega+\omega_0^{\pht{0}2}}\]
 \[\abs{H_{BP}(i\omega;B,\omega_0)}=\frac{B\omega}{\sqrt{B^2\omega^2+\omega^4+\omega_0^{\pht{0}4}-2\omega^2\omega_0^{\pht{0}2}}}\]
-
-
-\[\dv{\abs{H_{BP}(i\omega;B,\omega_0)}}{\omega}=\frac{B\qty(\omega^4+\omega_0^{\pht{0}4}-2\omega^2\omega_0^{\pht{0}2}+2\omega^3-2\omega\omega_0^{\pht{0}2})}{\qty(B^2\omega^2+\omega^4+\omega_0^{\pht{0}4}-2\omega^2\omega_0^{\pht{0}2})^{\frac{3}{2}}}\]
-
-
+\[\dv{}{\omega}\qty(\abs{H_{BP}(i\omega;B,\omega_0)})=\frac{B\qty(\omega^4+\omega_0^{\pht{0}4}-2\omega^2\omega_0^{\pht{0}2}+2\omega^3-2\omega\omega_0^{\pht{0}2})}{\qty(B^2\omega^2+\omega^4+\omega_0^{\pht{0}4}-2\omega^2\omega_0^{\pht{0}2})^{\frac{3}{2}}}\]
 \[\theta_{BP}(\omega;B,\omega_0)=\frac{\pi}{2}-\arg(-\omega^2+iB\omega+\omega_0^{\pht{0}2})\]
-Asymptotic Bode plot and center frequency:
+Asymptotic Bode plot and center/peak frequency:
 \bit
 \item For $\omega\ll\omega_0,B$:
 \[\abs{H_{BP}(i\omega;B,\omega_0)}\approx\frac{B\omega}{\omega_0^{\pht{0}2}}\]
@@ -250,7 +255,8 @@ which has slope $20$ dB/dec, $y$ intercept $20\log_{10}(B)-40\log_{10}(\omega_0)
 \item For $\omega=\omega_0$:
 \[\abs{H_{BP}(i\omega;B,\omega_0)}=1\]
 \[g_{BP}(\omega;B,\omega_0)=0\]
-which has horizontal tangent $g_{BP}=0$, i.e., $\abs{H_{BP}}=1$.
+\[\evlv{\dv{}{\omega}\qty(\abs{H_{BP}(i\omega;B,\omega_0)})}_{\omega=\omega_0}=0\]
+which is maximum $g_{BP}=0$, i.e., $\abs{H_{BP}}=1$.
 \[\theta_{BP}(\omega;B,\omega_0)=0\]
 \item For $\omega\gg\omega_0,B$:
 \[\abs{H_{BP}(i\omega;B,\omega_0)}\approx\frac{B}{\omega}\]
