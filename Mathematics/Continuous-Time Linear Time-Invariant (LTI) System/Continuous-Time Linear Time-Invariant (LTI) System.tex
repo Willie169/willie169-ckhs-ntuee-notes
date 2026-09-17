@@ -8,6 +8,7 @@
 \date{\temtoday}
 \titletocdoc
 \sct{Continuous-Time Linear Time-Invariant (LTI) System}
+\ssc{Definition}
 \sssc{Causal (因果的) continuous-time linear time-invariant (LTI) system}
 A causal continuous-time linear time-invariant (LTI) system of a variable $t\in\bbR$ is a system that accept an input (distribution) (often called function) $x(t)$ and produces a response (distribution) (often called function) $y(t)$ that is the solution of a linear autonomous ODE whose forcing term is $x(t)$, called governing equation, given initial condition $y(0)=0$. It can be completely characterized by a distribution called impulse response (function) $h(t)$, which is the output when the input is the Dirac delta function $\delta(t)$ and is such that $h(t)=0$ for all $t<0$, that
 \[y(t)=(x*h)(t),\]
@@ -30,14 +31,6 @@ The number of poles of $H(s)$ is called the order of the system.
 Since $H(s)$ is rational, a complex conjugate of a pole is a pole of same order, and a complex conjugate of a zero is a zero of same order.
 
 A pole–zero plot or pole–zero constellation is a graphical representation showing poles and zeros of a transfer function in the complex plane.
-\sssc{Asymptotically stable or bounded-input bounded-output (BIBO) stable}
-A LTI system is called asymptotically stable or bounded-input bounded-output stable iff bounded input implies bounded response, iff all poles of it are on the left half-plane iff $h(t)$ is absolutely integrable.
-\sssc{(Lyapunov) stable}
-A LTI system is called (Lyapunov) stable iff there is no pole of it on the right half-plane and no multiple pole of it on the imaginary axis iff $h(t)$ is bounded.
-\sssc{Marginally stable}
-A LTI system is called marginally stable iff it is stable but not asymptotically stable.
-\sssc{Unstable}
-A LTI system is called unstable iff it is not stable.
 \sssc{Transient response}
 A response component that converges to an equilibrium as $t$ gets large. Such converged state is called steady state or transient state.
 \sssc{Time constant}
@@ -46,6 +39,18 @@ For a response function in the form $y(t)=y_0e^{-\alpha t}$ with constants $y_0\
 For a response function in the form $y(t)=y_0\qty(1-e^{-\alpha t})$ with constants $y_0\neq 0$ and $\alpha>0$, the time constant $\tau$ is defined as $\frac{1}{\alpha}$, that is, $y(\tau)=y_0\qty(1-e^{-1})$.
 \sssc{Natural frequency}
 For a pair of conjugate poles $\pm i\omega$ of $H(s)$, $\omega$ is called a natural frequency of the system.
+\sssc{Resonance}
+Resonance occurs when the input and transfer function have common poles on the imaginary axis. Such natural frequency is called resonant/resonance frequency.
+\ssc{Stability}
+\sssc{Asymptotically stable or bounded-input bounded-output (BIBO) stable}
+A LTI system is called asymptotically stable or bounded-input bounded-output stable iff bounded input implies bounded response, iff all poles of it are on the left half-plane iff $h(t)$ is absolutely integrable.
+\sssc{(Lyapunov) stable}
+A LTI system is called (Lyapunov) stable iff there is no pole of it on the right half-plane and no multiple pole of it on the imaginary axis iff $h(t)$ is bounded.
+\sssc{Marginally stable}
+A LTI system is called marginally stable iff it is stable but not asymptotically stable.
+\sssc{Unstable}
+A LTI system is called unstable iff it is not stable.
+\ssc{Frequency response}
 \sssc{Frequency response}
 Assume the system is asymptotically stable. When the input is $x(t)=e^{i\omega t}$, $X(s)=\frac{1}{s-i\omega}$, the response is
 \[Y(s)=\frac{H(s)}{s-i\omega}.\]
@@ -62,8 +67,6 @@ is called steady-state (sinusoidal) response.
 \item $\theta(\omega)\coloneq\arg(H(i\omega))$ is called phase (angle) response/shift.
 \eit
 $\omega$ is called angular frequency and $f\coloneq\frac{\omega}{2\pi}$ is called non-angular frequency. Both can be called frequency and can be differentiated with symbol, and angular frequency is used below.
-\sssc{Resonance}
-Resonance occurs when the input and transfer function have common poles on the imaginary axis. Such natural frequency is called resonant/resonance frequency.
 \sssc{Normalizing}
 For a transfer function $H(s)$ such that
 \[\max_{\omega}\abs{H(i\omega)}=K\in\bbR_{>0},\]
@@ -140,6 +143,7 @@ $n$th-order Butterworth low-pass prototype filter is
 \[\abs{H(i\omega)}^2=\frac{1}{1+\omega^{2n}}\]
 \[H(s)=\prod_{k=1}^n\frac{1}{s-e^{\frac{j(2k+n-1)\pi}{2n}}}\]
 When not specified, a filter of a type usually refers to the lowest-order Butterworth filter of the type.
+\ssc{Transfer function factors}
 \sssc{Ramp function}
 \[H_r(s;W)\coloneq\frac{s}{W},\quad W\in\bbR_{>0}\]
 
