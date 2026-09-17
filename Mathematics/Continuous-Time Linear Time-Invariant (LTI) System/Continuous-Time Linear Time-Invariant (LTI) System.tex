@@ -175,7 +175,7 @@ Thus the cutoff frequency is $\omega_c=W$.
 \[\theta_{LP}(W;W)=-\frac{\pi}{4}.\]
 \item For $\omega\ll W$:
 \[g_{LP}(\omega;W)=0,\]
-which is horizontal asymptote $g_{LP}=0$, i.e., $\abs{H_{LP}(i\omega)}=1$.
+which is horizontal asymptote $g_{LP}=0$, i.e., $\abs{H_{LP}}=1$.
 \[\theta_{LP}(\omega;W)\approx-\frac{\pi}{2}.\]
 \eit
 \sssc{High-pass factor}
@@ -196,13 +196,9 @@ Thus the cutoff frequency is $\omega_c=\omega_c$.
 \[\theta_{HP}(\omega_c;\omega_c)=\frac{\pi}{2}-\frac{\pi}{4}=\frac{\pi}{4}.\]
 \item For $\omega\gg \omega_c$:
 \[g_{HP}(\omega;\omega_c)=0,\]
-which is horizontal asymptote $g_{HP}=0$, i.e., $\abs{H_{HP}(i\omega)}=1$.
+which is horizontal asymptote $g_{HP}=0$, i.e., $\abs{H_{HP}}=1$.
 \[\theta_{HP}(\omega;\omega_c)\approx\frac{\pi}{2}-\frac{\pi}{2}=0.\]
 \eit
-
-
-
-PLACEHOLDER damp
 \sssc{Quadratic factor}
 \[H_{QD}(s;B,\omega_0)\coloneq\frac{\omega_0^{\pht{0}2}}{s^2+Bs+\omega_0^{\pht{0}2}}\]
 \[H_{QD}(i\omega;B,\omega_0)=\frac{\omega_0^{\pht{0}2}}{-\omega^2+iB\omega+\omega_0^{\pht{0}2}}\]
@@ -213,12 +209,17 @@ Asymptotic Bode plot and center frequencies:
 \item For $\omega\ll\omega_0,B$:
 \[\abs{H_{QD}(i\omega;B,\omega_0)}\approx1\]
 \[g_{QD}(\omega;B,\omega_0)\approx0\]
-which is horizontal asymptote $g_{QD}=0$, i.e., $\abs{H_{QD}(i\omega)}=1$.
+which is horizontal asymptote $g_{QD}=0$, i.e., $\abs{H_{QD}}=1$.
 \[\theta_{QD}(\omega;B,\omega_0)\approx\frac{\pi}{2}\]
 \item For $\omega=\omega_0$:
 \[\abs{H_{QD}(i\omega;B,\omega_0)}=\frac{\omega_0}{B}\]
 \[g_{QD}(\omega;B,\omega_0)=20\log_{10}(\omega_0)-20\log_{10}(B)\]
-which has horizontal tangent $g_{QD}=20\log_{10}(\omega_0)-20\log_{10}(B)$, i.e., $\abs{H_{QD}(i\omega)}=\frac{\omega_0}{B}$.
+which has horizontal tangent $g_{QD}=20\log_{10}(\omega_0)-20\log_{10}(B)$, i.e., $\abs{H_{QD}}=\frac{\omega_0}{B}$.
+\bit
+\item $\omega_0>B$ overdamped response: $g_{QD}>0$
+\item $\omega_0=B$ critically damped response: $g_{QD}=0$
+\item $\omega_0<B$ underdamped response: $g_{QD}<0$
+\eit
 \[\theta_{QD}(\omega;B,\omega_0)=-\frac{\pi}{2}\]
 \item For $\omega\gg\omega_0,B$:
 \[\abs{H_{QD}(i\omega;B,\omega_0)}=\frac{\omega_0^{\pht{0}2}}{\omega^2}\]
@@ -226,9 +227,6 @@ which has horizontal tangent $g_{QD}=20\log_{10}(\omega_0)-20\log_{10}(B)$, i.e.
 which is slant asymptote slope $-40$ dB/dec, $y$ intercept $40\log_{10}(\omega_0)$, and $x$ intercept $\log_{10}(\omega_0)$.
 \[\theta_{QD}(\omega;B,\omega_0)=-\pi\]
 \eit
-
-
-
 \sssc{Band-pass factor}
 \[H_{BP}(s;B,\omega_0)\coloneq\frac{Bs}{s^2+Bs+\omega_0^{\pht{0}2}}\]
 \[H_{BP}(i\omega;B,\omega_0)=\frac{iB\omega}{-\omega^2+iB\omega+\omega_0^{\pht{0}2}}\]
@@ -244,7 +242,7 @@ which has slope $20$ dB/dec, $y$ intercept $20\log_{10}(B)-40\log_{10}(\omega_0)
 \item For $\omega=\omega_0$:
 \[\abs{H_{BP}(i\omega;B,\omega_0)}=1\]
 \[g_{BP}(\omega;B,\omega_0)=0\]
-which has horizontal tangent $g_{BP}=0$, i.e., $\abs{H_{BP}(i\omega)}=1$.
+which has horizontal tangent $g_{BP}=0$, i.e., $\abs{H_{BP}}=1$.
 \[\theta_{BP}(\omega;B,\omega_0)=0\]
 \item For $\omega\gg\omega_0,B$:
 \[\abs{H_{BP}(i\omega;B,\omega_0)}\approx\frac{B}{\omega}\]
@@ -262,7 +260,7 @@ Asymptotic Bode plot and center frequencies:
 \item For $\omega\ll\omega_0,B$:
 \[\abs{H_{BS}(i\omega;B,\omega_0)}\approx1\]
 \[g_{BS}(\omega;B,\omega_0)\approx0\]
-which is horizontal asymptote $g_{BS}=0$, i.e., $\abs{H_{BS}(i\omega)}=1$.
+which is horizontal asymptote $g_{BS}=0$, i.e., $\abs{H_{BS}}=1$.
 \[\theta_{BS}(\omega;B,\omega_0)=0\]
 \item For $\omega=\omega_0$:
 \[\abs{H_{BS}(i\omega;B,\omega_0)}=0\]
@@ -271,18 +269,7 @@ which is horizontal asymptote $g_{BS}=0$, i.e., $\abs{H_{BS}(i\omega)}=1$.
 \item For $\omega\gg\omega_0,B$:
 \[\abs{H_{BS}(i\omega;B,\omega_0)}\approx1\]
 \[g_{BS}(\omega;B,\omega_0)=0\]
-which is horizontal asymptote $g_{BS}=0$, i.e., $\abs{H_{BS}(i\omega)}=1$.
+which is horizontal asymptote $g_{BS}=0$, i.e., $\abs{H_{BS}}=1$.
 \[\theta_{BS}(\omega;B,\omega_0)=0\]
 \eit
-
-
-
-
-
-
-
-
-
-
-
 \end{document}
