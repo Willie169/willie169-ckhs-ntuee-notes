@@ -1,0 +1,148 @@
+\documentclass[a4paper,12pt]{report}
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{3}
+\input{/usr/share/LaTeX-ToolKit/template.tex}
+\begin{document}
+\title{Continuous-Time Linear Time-Invariant (LTI) System}
+\author{沈威宇}
+\date{\temtoday}
+\titletocdoc
+\sct{Continuous-Time Linear Time-Invariant (LTI) System}
+\sssc{Causal (因果的) continuous-time linear time-invariant (LTI) system}
+A causal continuous-time linear time-invariant (LTI) system of a variable $t\in\bbR$ is a system that accept an input (distribution) (often called function) $x(t)$ and produces a response (distribution) (often called function) $y(t)$ that is the solution of a linear autonomous ODE whose forcing term is $x(t)$, called governing equation, given initial condition $y(0)=0$. It can be completely characterized by a distribution called impulse response (function) $h(t)$, which is the output when the input is the Dirac delta function $\delta(t)$ and is such that $h(t)=0$ for all $t<0$, that
+\[y(t)=(x*h)(t),\]
+where
+\[(x*h)(t)\coloneq\int_0^tx(\tau)h(t-\tau)\dd{\tau}.\]
+Applying unilateral Laplace transform
+\[Y(s)=X(s)\cdot H(s),\]
+where $H(s)$ is a rational function called transfer function (轉移函數).
+\sssc{Non-causal continuous-time linear time-invariant (LTI) system}
+A non-causal continuous-time linear time-invariant (LTI) system of a variable $t\in\bbR$ is a system that accept an input (distribution) (often called function) $x(t)$ and produces a response (distribution) (often called function) $y(t)$ that is the solution of a linear autonomous ODE whose forcing term is $x(t)$, called governing equation. It can be completely characterized by a distribution called impulse response (function) $h(t)$, which is the output when the input is the Dirac delta function $\delta(t)$, that
+\[y(t)=(x*h)(t)\coloneq\int_{-\infty}^{\infty} x(\tau)h(t-\tau)\dd{\tau}.\]
+Applying bilateral Laplace transform
+\[Y(s)=X(s)\cdot H(s),\]
+where $H(s)$ is a rational function called transfer function.
+\sssc{Gain}
+$\abs{H(s)}$ is called gain (增益), or attenuation (衰減量) if $<1$.
+\sssc{Order}
+The number of poles of $H(s)$ is called the order of the system.
+\sssc{Poles and zeros}
+Since $H(s)$ is rational, a complex conjugate of a pole is a pole of same order, and a complex conjugate of a zero is a zero of same order.
+
+A pole–zero plot or pole–zero constellation is a graphical representation showing poles and zeros of a transfer function in the complex plane.
+\sssc{Asymptotically stable or bounded-input bounded-output (BIBO) stable}
+A LTI system is called asymptotically stable or bounded-input bounded-output stable iff bounded input implies bounded response, iff all poles of it are on the left half-plane iff $h(t)$ is absolutely integrable.
+\sssc{(Lyapunov) stable}
+A LTI system is called (Lyapunov) stable iff there is no pole of it on the right half-plane and no multiple pole of it on the imaginary axis iff $h(t)$ is bounded.
+\sssc{Marginally stable}
+A LTI system is called marginally stable iff it is stable but not asymptotically stable.
+\sssc{Unstable}
+A LTI system is called unstable iff it is not stable.
+\sssc{Transient response}
+A response component that converges to an equilibrium as $t$ gets large. Such converged state is called steady state or transient state.
+\sssc{Time constant}
+For a response function in the form $y(t)=y_0e^{-\alpha t}$ with constants $y_0\neq 0$ and $\alpha>0$, the time constant $\tau$ is defined as $\frac{1}{\alpha}$, that is, $y(\tau)=y_0e^{-1}$.
+
+For a response function in the form $y(t)=y_0\qty(1-e^{-\alpha t})$ with constants $y_0\neq 0$ and $\alpha>0$, the time constant $\tau$ is defined as $\frac{1}{\alpha}$, that is, $y(\tau)=y_0\qty(1-e^{-1})$.
+\sssc{Natural frequency}
+For a pair of conjugate poles $\pm i\omega$ of $H(s)$, $\omega$ is called a natural frequency of the system.
+\sssc{Frequency response}
+Assume the system is asymptotically stable. When the input is $x(t)=e^{i\omega t}$, $X(s)=\frac{1}{s-i\omega}$, the response is
+\[Y(s)=\frac{H(s)}{s-i\omega}.\]
+\[y(t)=\frac{1}{2\pi i}\lim_{T\to\infty}\int_{\gamma-iT}^{\gamma+iT}\frac{H(s)e^{st}}{s-i\omega}\dd{s},\quad\gamma>0.\]
+Since $H(s)$ is meromorphic, by residue theorem,
+\[y(t)=\Res(Y,i\omega)+\sum_{k=1}^n\Res(Y,a_k)\]
+\[\Res(Y,i\omega)=\lim_{s\to i\omega}(s-i\omega)\frac{H(s)e^{st}}{s-i\omega}=H(i\omega)e^{i\omega t}\]
+The $\sum_{k=1}^n\Res(Y,a_k)$ is the transient response. This does not work for marginally stable systems since $\sum_{k=1}^n\Res(Y,a_k)$ term is not transient for them.
+\[H(i\omega)e^{i\omega t}\]
+is called steady-state (sinusoidal) response.
+\bit
+\item $H(i\omega)$ is called frequency response,
+\item $a(\omega)\coloneq\abs{H(i\omega)}$ is called magnitude/amplitude response/ratio,
+\item $\theta(\omega)\coloneq\arg(H(i\omega))$ is called phase (angle) response/shift.
+\eit
+$\omega$ is called angular frequency and $f\coloneq\frac{\omega}{2\pi}$ is called non-angular frequency. Both can be called frequency and can be differentiated with symbol, and angular frequency is used below.
+\sssc{Resonance}
+Resonance occurs when the input and transfer function have common poles on the imaginary axis. Such natural frequency is called resonant/resonance frequency.
+\sssc{Normalizing}
+For a transfer function $H(s)$ such that
+\[\max_{\omega}\abs{H(i\omega)}=K\in\bbR_{>0},\]
+normalizing means dividing $H(s)$ by $K$. The following filter definitions are normalized. Non-normalized definition is defined as any filter whose normalized form complies with the definition.
+\sssc{Logarithmic scale, Bode plot (波德圖), and decibel (dB)}
+Frequency response are often expressed in logarithmic scale:
+\bit
+\item Bode plot of magnitude: Magnitude response plotted in logarithmic (frequency)-logarithmic (magnitude response) scale.
+\item Bode plot of phase: Phase response is often plotted in logarithmic (frequency)-linear (phase response) scale.
+\item Changing by 8 times is called an octave or oct, and changing by 10 times is called a decade or dec.
+\item Magnitude response, input, and output can be expressed in decibel (dB) as $20\log(\frac{\abs{H(i\omega)}}{\max_{\omega}\abs{H(i\omega)}})$, $20\log(x)$, and $20\log(y)$.
+\eit
+We can factor $H(s)$ into
+\[H(s)=G\prod_{k=1}^mH_k(s)\]
+then
+\[\abs{H(i\omega)}=\abs{G}\prod_{k=1}^m\abs{H_k(i\omega)}\]
+\[\log_{10}\abs{H(i\omega)}=\log_{10}\abs{G}+\sum_{k=1}^m\log_{10}\abs{H_k(i\omega)}\]
+\[\arg(H(i\omega))=\arg(G)+\sum_{k=1}^m\arg(H_k(i\omega))\]
+\sssc{Cutoff (截止), break, or corner (angular) frequency}
+For a transfer function, cutoff frequency $\omega_c$ is a frequency such that
+\[\abs{H(i\omega_c)}=\frac{\max_{\omega}\abs{H(i\omega)}}{\sqrt{2}}.\]
+$20\log(\frac{1}{\sqrt{2}})\approx -3$, thus this frequency is also denoted $\omega_{-3\tx{dB}}$ or $\omega_{3\tx{dB}}$.
+\sssc{Low-pass (低通) (LP), high-cut, or bass-cut filter (LPF)}
+A continuous-time linear time-invariant system is a normalized low-pass filter iff $H(i\omega)$ as a function of a real variable $\omega$ is such that
+\[\lim_{\omega\to 0}\abs{H(i\omega)}=1\]
+\[\lim_{\omega\to\infty}\abs{H(i\omega)}=0\]
+$K$ is called low-pass gain.
+
+Ideal normalized low-pass filter is
+\[H(i\omega)=\bcs1,\quad&\omega<\omega_0\\0,\quad&\omega>\omega_0\ecs\]
+\sssc{High-pass (高通) (HP), low-cut, or treble-cut filter (HPF)}
+A continuous-time linear time-invariant system is a normalized high-pass filter iff $H(i\omega)$ as a function of a real variable $\omega$ is such that
+\[\lim_{\omega\to 0}\abs{H(i\omega)}=0\]
+\[\lim_{\omega\to\infty}\abs{H(i\omega)}=1\]
+$K$ is called high-pass gain.
+
+Ideal normalized high-pass filter is
+\[H(i\omega)=\bcs1,\quad&\omega>\omega_0\\0,\quad&\omega<\omega_0\ecs\]
+\sssc{Band-pass or bandpass (BP) filter (BPF)}
+A continuous-time linear time-invariant system is a standard normalized band-pass filter iff $H(i\omega)$ as a function of a real variable $\omega$ is such that
+\[\lim_{\omega\to 0}\abs{H(i\omega)}=0\]
+\[\lim_{\omega\to\infty}\abs{H(i\omega)}=0\]
+\[\arg_{\omega}\left\{\abs{H(i\omega)}=\frac{1}{\sqrt{2}}\right\}=\omega_L,\omega_H\]
+\[\abs{H(\sqrt{\omega_L\omega_H})}=1\]
+where $\omega_L<\omega_H$ are called band edge, $\omega_H-\omega_L$ is called bandwidth, and $\omega_0=\sqrt{\omega_L\omega_H}$ is called central passed frequency or center frequency. $\omega_0\gg B$ is called narrow band-pass filter.
+
+$K$ is called band-pass or midband gain.
+
+Ideal normalized band-pass filter is
+\[H(i\omega)=\bcs1,\quad&\omega_H>\omega>\omega_L\\0,\quad&\omega<\omega_L\lor\omega>\omega_H\ecs\]
+\sssc{Band-stop (BS), band-reject, or notch filter (BSF)}
+A continuous-time linear time-invariant system is a standard normalized band-stop filter iff $H(i\omega)$ as a function of a real variable $\omega$ is such that
+\[\arg_{\omega}\left\{\abs{H(i\omega)}=\frac{1}{\sqrt{2}}\right\}=\omega_L,\omega_H\]
+\[\abs{H(\sqrt{\omega_L\omega_H})}=0\]
+where $\omega_L<\omega_H$ are called band edge, $\omega_H-\omega_L$ is called bandwidth, and $\omega_0=\sqrt{\omega_L\omega_H}$ is called central rejected frequency or center frequency. $\omega_0\gg B$ is called narrow band-stop filter.
+
+$K$ is called notch gain.
+
+Ideal normalized band-stop filter is
+\[H(i\omega)=\bcs0,\quad&\omega_H>\omega>\omega_L\\1,\quad&\omega<\omega_L\lor\omega>\omega_H\ecs\]
+\sssc{Normalized low-pass prototype filter}
+A normalized low-pass prototype filter is a low-pass filter with cutoff frequency $\omega_c=1$. Suppose the transfer function of it is $H_P(s)$. A normalized low-pass prototype filter is usually defined with $\abs{H(i\omega)}^2=H(i\omega)H(-i\omega)$ or $H(s)$.
+
+To transform an $n$th-order normalized low-pass prototype filter to an $n$th-order low-pass filter with cutoff frequency $\omega_c$, use the transfer function
+\[H_{LP}(s)=H_P\qty(\frac{s}{\omega_c}).\]
+To transform an $n$th-order normalized low-pass prototype filter to an $n$th-order high-pass filter with cutoff frequency $\omega_c$, use the transfer function
+\[H_{HP}(s)=H_P\qty(\frac{\omega_c}{s}).\]
+To transform an $n$th-order normalized low-pass prototype filter to a $2n$th-order standard band-pass filter with cutoff frequency $\omega_c$, use the transfer function
+\[H_{BP}(s)=H_P\qty(\frac{s^2+\omega_0^{\pht{0}2}}{Bs}).\]
+To transform an $n$th-order normalized low-pass prototype filter to a $2n$th-order standard band-stop filter with cutoff frequency $\omega_c$, use the transfer function
+\[H_{BS}(s)=H_P\qty(\frac{Bs}{s^2+\omega_0^{\pht{0}2}}).\]
+\sssc{Butterworth filter or maximally flat magnitude filter}
+$n$th-order Butterworth low-pass prototype filter is
+\[\abs{H(i\omega)}^2=\frac{1}{1+\omega^{2n}}\]
+\[H(s)=\prod_{k=1}^n\frac{1}{s-e^{\frac{j(2k+n-1)\pi}{2n}}}\]
+When not specified, a filter of a type usually refers to the lowest-order Butterworth filter of the type.
+\sssc{Ramp function}
+\[H_r(s;W)\coloneq\frac{s}{W},\quad W\in\bbR_{>0}\]
+
+
+
+\end{document}
