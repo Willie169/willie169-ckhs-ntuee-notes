@@ -200,41 +200,40 @@ which is horizontal asymptote $g_{HP}=0$, i.e., $\abs{H_{HP}}=1$.
 \[\theta_{HP}(\omega;\omega_c)\approx\frac{\pi}{2}-\frac{\pi}{2}=0.\]
 \eit
 \sssc{Quadratic low-pass factor}
-\[H_{QD}(s;B,\omega_0)\coloneq\frac{\omega_0^{\pht{0}2}}{s^2+Bs+\omega_0^{\pht{0}2}}\]
-\[H_{QD}(i\omega;B,\omega_0)=\frac{\omega_0^{\pht{0}2}}{-\omega^2+iB\omega+\omega_0^{\pht{0}2}}\]
-\[\abs{H_{QD}(i\omega;B,\omega_0)}=\frac{\omega_0^{\pht{0}2}}{\sqrt{B^2\omega^2+\omega^4+\omega_0^{\pht{0}4}-2\omega^2\omega_0^{\pht{0}2}}}\]
-\[\dv{}{\omega}\qty(\abs{H_{QD}(i\omega;B,\omega_0)})=\frac{-\omega\omega_0^{\pht{0}2}\qty(2\omega^2+B^2-2\omega_0^{\pht{0}2})}{\qty(B^2\omega^2+\omega^4+\omega_0^{\pht{0}4}-2\omega^2\omega_0^{\pht{0}2})^{\frac{3}{2}}}\]
-\[\evlv{\dv{}{\omega}\qty(\abs{H_{QD}(i\omega;B,\omega_0)})}_{\omega=\omega_p}=0\]
-\[\omega_p=\sqrt{\omega_0^{\pht{0}2}-\frac{B^2}{2}}\]
-\[\theta_{QD}(\omega;B,\omega_0)=-\arg(-\omega^2+iB\omega+\omega_0^{\pht{0}2})\]
-Asymptotic Bode plot, center, and peak frequencies:
+\[H_{QD}(s;\omega_0,Q)\coloneq\frac{\omega_0^{\pht{0}2}}{s^2+\frac{\omega_0}{Q}s+\omega_0^{\pht{0}2}}\]
+\[H_{QD}(i\omega;\omega_0,Q)=\frac{\omega_0^{\pht{0}2}}{-\omega^2+i\frac{\omega_0}{Q}\omega+\omega_0^{\pht{0}2}}\]
+\[\abs{H_{QD}(i\omega;\omega_0,Q)}=\frac{\omega_0^{\pht{0}2}}{\sqrt{\frac{\omega_0^{\pht{0}2}}{Q^2}\omega^2+\omega^4+\omega_0^{\pht{0}4}-2\omega^2\omega_0^{\pht{0}2}}}\]
+\[\dv{}{\omega}\qty(\abs{H_{QD}(i\omega;\omega_0,Q)})=\frac{-\frac{\omega_0^{\pht{0}4}}{Q^2}\omega-2\omega^3\omega_0^{\pht{0}2}+2\omega\omega_0^{\pht{0}4}}{\qty(\frac{\omega_0^{\pht{0}2}}{Q^2}\omega^2+\omega^4+\omega_0^{\pht{0}4}-2\omega^2\omega_0^{\pht{0}2})^{\frac{3}{2}}}\]
+\[\evlv{\dv{}{\omega}\qty(\abs{H_{QD}(i\omega;\omega_0,Q)})}_{\omega=\omega_p}=0\]
+\[\omega_p=\omega_0\sqrt{1-\frac{1}{2Q^2}},\quad Q>\frac{1}{\sqrt{2}}\]
+\[\theta_{QD}(\omega;\omega_0,Q)=-\arg(-\omega^2+i\frac{\omega_0}{Q}\omega+\omega_0^{\pht{0}2})\]
+Asymptotic Bode plot and important frequencies:
 \bit
-\item For $\omega\ll\omega_0,B$:
-\[\abs{H_{QD}(i\omega;B,\omega_0)}\approx1\]
-\[g_{QD}(\omega;B,\omega_0)\approx0\]
+\item For $\omega\ll\omega_0,\frac{\omega_0}{Q}$:
+\[\abs{H_{QD}(i\omega;\omega_0,Q)}\approx1\]
+\[g_{QD}(\omega;\omega_0,Q)\approx0\]
 which is horizontal asymptote $g_{QD}=0$, i.e., $\abs{H_{QD}}=1$.
-\[\theta_{QD}(\omega;B,\omega_0)\approx\frac{\pi}{2}\]
+\[\theta_{QD}(\omega;\omega_0,Q)\approx\frac{\pi}{2}\]
 \item For $\omega=\omega_0$:
-\[\abs{H_{QD}(i\omega;B,\omega_0)}=\frac{\omega_0}{B}\]
-\[g_{QD}(\omega;B,\omega_0)=20\log_{10}(\omega_0)-20\log_{10}(B)\]
-\[\theta_{QD}(\omega;B,\omega_0)=-\frac{\pi}{2}\]
-\item For $\omega=\omega_p=\sqrt{\omega_0^{\pht{0}2}-\frac{B^2}{2}}$:
-\[\abs{H_{QD}(i\omega_p;B,\omega_0)}=\frac{\omega_0^{\pht{0}2}}{\sqrt{B^2\omega_0^{\pht{0}2}-\frac{B^4}{2}+\omega_0^{\pht{0}4}+\frac{B^4}{4}-B^2\omega_0^{\pht{0}2}+\omega_0^{\pht{0}4}-2\omega_0^{\pht{0}4}+B^2\omega_0^{\pht{0}2}}}=\frac{\omega_0}{B\sqrt{1-\frac{B^2}{4\omega_0^{\pht{0}2}}}}\]
-\[g_{QD}(\omega;B,\omega_0)=20\log_{10}(\omega_0)-20\log_{10}(B)-10\log_{10}(1-\frac{B^2}{4\omega_0^{\pht{0}2}})\]
-\bit
-\item $\omega_0>\frac{B}{2}$ overdamped response: $g_{QD}>0$
-\item $\omega_0=\frac{B}{2}$ critically damped response: $g_{QD}=0$
-\item $\omega_0<\frac{B}{2}$ underdamped response: $g_{QD}<0$
-\eit
-
-
-
-\item For $\omega\gg\omega_0,B$:
-\[\abs{H_{QD}(i\omega;B,\omega_0)}=\frac{\omega_0^{\pht{0}2}}{\omega^2}\]
-\[g_{QD}(\omega;B,\omega_0)=40\log_{10}(\omega_0)-40\log_{10}(\omega)\]
+\[\abs{H_{QD}(i\omega;\omega_0,Q)}=Q\]
+\[g_{QD}(\omega;\omega_0,Q)=20\log_{10}(Q)\]
+\[\theta_{QD}(\omega;\omega_0,Q)=-\frac{\pi}{2}\]
+\item For $\omega=\omega_p=\omega_0\sqrt{1-\frac{1}{2Q^2}},\quad Q>\frac{1}{\sqrt{2}}$:
+\[\abs{H_{QD}(i\omega;\omega_0,Q)}=\frac{\omega_0^{\pht{0}2}}{\sqrt{\frac{\omega_0^{\pht{0}4}}{Q^2}-\frac{\omega_0^{\pht{0}4}}{2Q^4}+\omega_0^{\pht{0}4}-\frac{\omega_0^{\pht{0}4}}{Q^2}+\frac{\omega_0^{\pht{0}4}}{4Q^4}+\omega_0^{\pht{0}4}-2\omega_0^{\pht{0}4}+\frac{\omega_0^{\pht{0}4}}{Q^2}}}=\frac{Q}{\sqrt{1+\frac{1}{2Q^2}}}\]
+\[g_{QD}(\omega;\omega_0,Q)=20\log_{10}(Q)-10\log_{10}(1+\frac{1}{2Q^2})\]
+\item For $\omega\gg\omega_0,\frac{\omega_0}{Q}$:
+\[\abs{H_{QD}(i\omega;\omega_0,Q)}=\frac{\omega_0^{\pht{0}2}}{\omega^2}\]
+\[g_{QD}(\omega;\omega_0,Q)=40\log_{10}(\omega_0)-40\log_{10}(\omega)\]
 which is slant asymptote slope $-40$ dB/dec, $y$ intercept $40\log_{10}(\omega_0)$, and $x$ intercept $\log_{10}(\omega_0)$.
-\[\theta_{QD}(\omega;B,\omega_0)=-\pi\]
+\[\theta_{QD}(\omega;\omega_0,Q)=-\pi\]
 \eit
+
+\bit
+\item $\omega_0>\frac{(2\alpha)}{2}$ overdamped response: $g_{QD}>0$
+\item $\omega_0=\frac{(2\alpha)}{2}$ critically damped response: $g_{QD}=0$
+\item $\omega_0<\frac{(2\alpha)}{2}$ underdamped response: $g_{QD}<0$
+\eit
+
 
 
 \sssc{Band-pass factor}
