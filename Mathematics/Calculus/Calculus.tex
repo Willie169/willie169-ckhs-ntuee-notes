@@ -375,35 +375,36 @@ For real-valued functions $f$ and $g$ defined on some interval $[a,\infty)$,
 \item $\exists M>0,T\ge a\colon x\ge T\implies\abs{f(x)}\le M\abs{g(x)}$ iff $f(x)\in O(g(x))$ and $\abs{g(x)}$ is an asymptotic upper bound of $\abs{f(x)}$.
 \item $\exists M>0,T\ge a\colon x\ge T\implies\abs{f(x)}\ge M\abs{g(x)}$ iff $f(x)\in \Omega(g(x))$ and $\abs{g(x)}$ is an asymptotic lower bound of $\abs{f(x)}$.
 \item $\exists M_1,M_2>0,T\ge a\colon x\ge T\implies M_1\abs{g(x)}\le\abs{f(x)}\le M_2\abs{g(x)}$ iff $f(x)\in \Theta(g(x))$.
-\item $\forall M>0\colon\exists T\ge a\colon\abs{f(x)}<M\abs{g(x)}$ iff $f(x)\in o(g(x))$.
-\item $\forall M>0\colon\exists T\ge a\colon\abs{f(x)}>M\abs{g(x)}$ iff $f(x)\in \omega(g(x))$.
+\item $\forall M>0\colon\exists T\ge a\colon x\ge T\implies\abs{f(x)}<M\abs{g(x)}$ iff $f(x)\in o(g(x))$.
+\item $\forall M>0\colon\exists T\ge a\colon x\ge T\implies\abs{f(x)}>M\abs{g(x)}$ iff $f(x)\in \omega(g(x))$.
 \eit
+$\in$ is also denoted as $=$ for them.
 \sssc{Limit}
 If $g(x)\ne0$,
 \bit
 \item $\limsup\abs{\frac{f(x)}{g(x)}}<\infty$ iff $f(x)\in O(g(x))$.
 \bpr
-\[\abs{f(x)}\le M\abs{g(x)}\qc xge T\]
-\[\abs{\frac{f(x)}{g(x)}}\le M\qc xge T\]
-\[\sup\abs{\frac{f(x)}{g(x)}}\le M\qc xge T\]
+\[\abs{f(x)}\le M\abs{g(x)}\qc x\ge T\]
+\[\abs{\frac{f(x)}{g(x)}}\le M\qc x\ge T\]
+\[\sup\abs{\frac{f(x)}{g(x)}}\le M\qc x\ge T\]
 \[\limsup\abs{\frac{f(x)}{g(x)}}\le M<\infty\]
 \epr
 \item $\liminf\abs{\frac{f(x)}{g(x)}}>0$ iff $f(x)\in \Omega(g(x))$.
 \bpr
-\[\abs{f(x)}\ge M\abs{g(x)}\qc xge T\]
-\[\abs{\frac{f(x)}{g(x)}}\ge M\qc xge T\]
-\[\inf\abs{\frac{f(x)}{g(x)}}\ge M\qc xge T\]
+\[\abs{f(x)}\ge M\abs{g(x)}\qc x\ge T\]
+\[\abs{\frac{f(x)}{g(x)}}\ge M\qc x\ge T\]
+\[\inf\abs{\frac{f(x)}{g(x)}}\ge M\qc x\ge T\]
 \[\liminf\abs{\frac{f(x)}{g(x)}}\ge M>0\]
 \epr
 \item $\infty>\limsup\abs{\frac{f(x)}{g(x)}}\ge\liminf\abs{\frac{f(x)}{g(x)}}>0$ iff $f(x)\in \Theta(g(x))$.
 \bpr
-\[\abs{f(x)}\ge M_1\abs{g(x)}\qc xge T\]
-\[\abs{\frac{f(x)}{g(x)}}\ge M_1\qc xge T\]
-\[\inf\abs{\frac{f(x)}{g(x)}}\ge M_1\qc xge T\]
+\[\abs{f(x)}\ge M_1\abs{g(x)}\qc x\ge T\]
+\[\abs{\frac{f(x)}{g(x)}}\ge M_1\qc x\ge T\]
+\[\inf\abs{\frac{f(x)}{g(x)}}\ge M_1\qc x\ge T\]
 \[\liminf\abs{\frac{f(x)}{g(x)}}\ge M_1>0\]
-\[\abs{f(x)}\le M_2\abs{g(x)}\qc xge T\]
-\[\abs{\frac{f(x)}{g(x)}}\le M_2\qc xge T\]
-\[\sup\abs{\frac{f(x)}{g(x)}}\le M_2\qc xge T\]
+\[\abs{f(x)}\le M_2\abs{g(x)}\qc x\ge T\]
+\[\abs{\frac{f(x)}{g(x)}}\le M_2\qc x\ge T\]
+\[\sup\abs{\frac{f(x)}{g(x)}}\le M_2\qc x\ge T\]
 \[\limsup\abs{\frac{f(x)}{g(x)}}\le M_2<\infty\]
 \epr
 \item $\lim_{x\to\infty}\abs{\frac{f(x)}{g(x)}}=0$ iff $f(x)\in o(g(x))$.
@@ -416,24 +417,88 @@ If $g(x)\ne0$,
 \[\lim_{x\to\infty}\abs{\frac{f(x)}{g(x)}}=\infty\]
 \eit
 \sssc{Relation}
-$o$, $\Theta$, and $\omega$ are mutually exclusive.
-\[\Theta\subseteq O\cap\Omega\]
-\[O\subseteq o\cup\Theta\]
-\[\Omega\subseteq\omega\cup\Theta\]
+For any fixed $g(x)$:
+
+$o(g(x))$, $\Theta(g(x))$, and $\omega(g(x))$ are mutually exclusive.
 \bpr
-Obvious.
+Prove by contradiction.
+
+If $f\in o(g(x))\cap\Theta(g(x))$,
+\[\forall M>0\colon\exists T\ge a\colon x\ge T\implies\abs{f(x)}<M\abs{g(x)}\]
+\[\exists M_1,M_2>0,U\ge a\colon x\ge U\implies M_1\abs{g(x)}\le\abs{f(x)}\le M_2\abs{g(x)}\]
+then set $M=M_1$, for $x\ge\max\{T,U\}$
+\[M_1\abs{g(x)}\le\abs{f(x)}<M_1\abs{g(x)},\]
+which can't happen.
+
+If $f\in \omega(g(x))\cap\Theta(g(x))$,
+\[\forall M>0\colon\exists T\ge a\colon x\ge T\implies\abs{f(x)}>M\abs{g(x)}\]
+\[\exists M_1,M_2>0,U\ge a\colon x\ge U\implies M_1\abs{g(x)}\le\abs{f(x)}\le M_2\abs{g(x)}\]
+then set $M=M_2$, for $x\ge\max\{T,U\}$
+\[M_2\abs{g(x)}\ge\abs{f(x)}>M_2\abs{g(x)},\]
+which can't happen.
+
+If $f\in o(g(x))\cap\omega(g(x))$,
+\[\forall M>0\colon\exists T\ge a\colon x\ge T\implies\abs{f(x)}<M\abs{g(x)}\]
+\[\forall M>0\colon\exists U\ge a\colon x\ge U\implies\abs{f(x)}>M\abs{g(x)}\]
+then set any fixed $M$,
+\[M\abs{g(x)}<\abs{f(x)}<M\abs{g(x)},\]
+which can't happen.
 \epr
-\[O\setminus o\not\subseteq\Theta\]
-\[\Omega\setminus\omega\not\subseteq\Theta\]
+\[\Theta(g(x))=O(g(x))\cap\Omega(g(x))\]
 \bpr
-Counterexample
-\[\frac{f(x)}{g(x)}=\bcs 1,\quad & x\in\bbQ\\\frac{1}{x},\quad & x\notin\bbQ\ecs\]
+Prove
+\[\Theta(g(x))\subseteq O(g(x))\cap\Omega(g(x))\]
+\[\exists M>0,T\ge a\colon x\ge T\implies\abs{f(x)}\le M\abs{g(x)}\]
+\[\exists N>0,U\ge a\colon x\ge U\implies\abs{f(x)}\ge N\abs{g(x)}\]
+then
+\[\exists M,N>0,\max\{T,U\}\ge a\colon x\ge \max\{T,U\}\implies N\abs{g(x)}\le\abs{f(x)}\le M\abs{g(x)}\]
+
+Prove
+\[\Theta(g(x))\supseteq O(g(x))\cap\Omega(g(x))\]
+\[\exists M_1,M_2>0,T\ge a\colon x\ge T\implies M_1\abs{g(x)}\le\abs{f(x)}\le M_2\abs{g(x)}\]
+then
+\[\exists M_2>0,T\ge a\colon x\ge T\implies\abs{f(x)}\le M_2\abs{g(x)}\]
+\[\exists M_1>0,T\ge a\colon x\ge T\implies\abs{f(x)}\ge M_1\abs{g(x)}\]
 \epr
-Binary relation:
+\[O(g(x))\setminus (o(g(x))\cup\Theta(g(x)))\ne\varnothing\]
+\bpr
+Counterexample:
+\[f(x)=\bcs 1,\quad & x\in\bbQ\\0,\quad & x\notin\bbQ\ecs\]
+\[g(x)=1\]
+$f\in O(g(x))$:
+\[\exists 1>0,1\ge a\colon x\ge 1\implies\abs{f(x)}\le \abs{g(x)}\]
+$f\notin o(g(x))$:
+\[\forall 1>0,T\ge a\colon\exists x\ge T,x\in\bbQ\colon\abs{f(x)}=\abs{g(x)}\]
+$f\notin\Theta(g(x))$:
+\[\forall M_1>0,x\ge a,x\notin\bbQ\colon M_1\abs{g(x)}=M_1>\abs{f(x)}=0\]
+\epr
+\[\Omega(g(x))\setminus (\omega(g(x))\cup\Theta(g(x)))\ne\varnothing\]
+\bpr
+Counterexample:
+\[f(x)=1\]
+\[g(x)=\bcs 1,\quad & x\in\bbQ\\0,\quad & x\notin\bbQ\ecs\]
+$f\in \Omega(g(x))$:
+\[\exists 1>0,1\ge a\colon x\ge 1\implies\abs{f(x)}\ge \abs{g(x)}\]
+$f\notin \omega(g(x))$:
+\[\forall 1>0,T\ge a\colon\exists x\ge T,x\in\bbQ\colon\abs{f(x)}=\abs{g(x)}\]
+$f\notin\Theta(g(x))$:
+\[\forall M_2>0,x\ge a,x\notin\bbQ\colon M_2\abs{g(x)}=0<\abs{f(x)}=1\]
+\epr
+\sssc{Binary relation}
+For any fixed $g(x)$,
 \bit
-\item $\Theta$ is an equivalence class
-\item $O$ and $\Omega$ are partial-ordered sets.
-\item $o$ and $\omega$ are strictly partially-ordered sets.
+\item $\Theta(g(x))$ is an equivalence class.
+\bpr
+PLACEHOLDER
+\epr
+\item $O(g(x))$ and $\Omega(g(x))$ are partial-ordered sets.
+\bpr
+PLACEHOLDER
+\epr
+\item $o(g(x))$ and $\omega(g(x))$ are strictly partially-ordered sets.
+\bpr
+PLACEHOLDER
+\epr
 \eit
 
 
