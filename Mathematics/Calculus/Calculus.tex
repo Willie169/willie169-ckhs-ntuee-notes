@@ -371,43 +371,39 @@ iff
 \ssc{Big O, little o, theta, big Omega, and small omega notation}
 For a point $a$ in a topological space and real-valued functions $f$ and $g$ defined on some neighborhood of $a$ except possibly at $a$, iff there exists some neighborhood $I$ of $a$ and positive real numbers $M,M_1,M_2$ such that
 \bit
-\item $\abs{f(x)}\le M\abs{g(x)}$, then $f(x)=O(g(x))$ as $x\to a$.
-\item $\abs{f(x)}\ge M\abs{g(x)}$, then $f(x)=\Omega(g(x))$ as $x\to a$.
-\item $M_1\abs{g(x)}\le\abs{f(x)}\le M_2\abs{g(x)}$, then $f(x)=\Theta(g(x))$ as $x\to a$.
-\item $\lim_{x\to a}\abs{\frac{f(x)}{g(x)}}=0$, then $f(x)=o(g(x))$ as $x\to a$.
-\item $\lim_{x\to a}\abs{\frac{g(x)}{f(x)}}=0$, then $f(x)=\omega(g(x))$ as $x\to a$.
+\item $\abs{f(x)}\le M\abs{g(x)}$, then $f(x)\in O(g(x))$ as $x\to a$.
+\item $\abs{f(x)}\ge M\abs{g(x)}$, then $f(x)\in \Omega(g(x))$ as $x\to a$.
+\item $M_1\abs{g(x)}\le\abs{f(x)}\le M_2\abs{g(x)}$, then $f(x)\in \Theta(g(x))$ as $x\to a$.
+\item $\lim_{x\to a}\abs{\frac{f(x)}{g(x)}}=0$, then $f(x)\in o(g(x))$ as $x\to a$.
+\item $\lim_{x\to a}\abs{\frac{g(x)}{f(x)}}=0$, then $f(x)\in \omega(g(x))$ as $x\to a$.
 \eit
 For real-valued functions $f$ and $g$ defined on some interval $[a,\infty)$, if there exists some real number $T$ and positive real numbers $M,M_1,M_2$ such that for all $x\geq T$,
 \bit
-\item $\abs{f(x)}\le M\abs{g(x)}$, then $f(x)=O(g(x))$ as $x\to\infty$.
-\item $\abs{f(x)}\ge M\abs{g(x)}$, then $f(x)=\Omega(g(x))$ as $x\to\infty$.
-\item $M_1\abs{g(x)}\le\abs{f(x)}\le M_2\abs{g(x)}$, then $f(x)=\Theta(g(x))$ as $x\to\infty$.
-\item $\lim_{x\to\infty}\abs{\frac{f(x)}{g(x)}}=0$, then $f(x)=o(g(x))$ as $x\to\infty$.
-\item $\lim_{x\to\infty}\abs{\frac{g(x)}{f(x)}}=0$, then $f(x)=\omega(g(x))$ as $x\to\infty$.
+\item $\abs{f(x)}\le M\abs{g(x)}$, then $f(x)\in O(g(x))$ as $x\to\infty$.
+\item $\abs{f(x)}\ge M\abs{g(x)}$, then $f(x)\in \Omega(g(x))$ as $x\to\infty$.
+\item $M_1\abs{g(x)}\le\abs{f(x)}\le M_2\abs{g(x)}$, then $f(x)\in \Theta(g(x))$ as $x\to\infty$.
+\item $\lim_{x\to\infty}\abs{\frac{f(x)}{g(x)}}=0$, then $f(x)\in o(g(x))$ as $x\to\infty$.
+\item $\lim_{x\to\infty}\abs{\frac{g(x)}{f(x)}}=0$, then $f(x)\in \omega(g(x))$ as $x\to\infty$.
 \eit
 $o$, $\Theta$, and $\omega$ are mutually exclusive.
+\[\Theta\subseteq O\cap\Omega\]
+\[O\subseteq o\cup\Theta\]
+\[\Omega\subseteq\omega\cup\Theta\]
 \bpr
 Obvious.
 \epr
-$O\land\Omega\implies\Theta$.
+\[O\setminus o\not\subseteq\Theta\]
+\[\Omega\setminus\omega\not\subseteq\Theta\]
 \bpr
-Obvious.
-\epr
-$o\lor\Theta\implies O$, but the inverse is not true.
-
-$\omega\lor\Theta\implies\Omega$, but the inverse is not true.
-\bpr
-Obvious.
-
-Counterexample for the inverse:
+Counterexample
 \[\frac{f(x)}{g(x)}=\bcs 1,\quad & x\in\bbQ\\\abs{x-a},\quad & x\notin\bbQ\ecs\]
 \[\frac{f(x)}{g(x)}=\bcs 1,\quad & x\in\bbQ\\\frac{1}{x},\quad & x\notin\bbQ\ecs\]
 \epr
 Binary relation:
 \bit
-\item $\Theta$ is an equivalent relation.
-\item $O$ and $\Omega$ are partial orderings.
-\item $o$ and $\omega$ are strict partial orderings.
+\item $\Theta$ is an equivalence class
+\item $O$ and $\Omega$ are partial-ordered sets.
+\item $o$ and $\omega$ are strictly partially-ordered sets.
 \eit
 
 
