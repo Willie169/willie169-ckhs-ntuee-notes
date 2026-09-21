@@ -369,21 +369,13 @@ Let $X$ be a connected topological space and $(Y,d)$ be a metric space. A net of
 iff
 \[\forall\varepsilon\in\mathbb{R}_{>0}\exists N\in A\forall b\in A\forall\langle x_a(x)\rangle_{a\in A}\colon\qty(\forall a\in A\colon x_a(x)\in X_a)\land\qty(\forall x\in X\colon\lim_ax_a(x)=x)\land N\leq b)\implies\sup_{x\in X}d(f_b(x_b),f(x))<\varepsilon).\]
 \ssc{Big O, little o, theta, big Omega, and small omega notation}
-For a point $a$ in a topological space and real-valued functions $f$ and $g$ defined on some neighborhood of $a$ except possibly at $a$, iff there exists some neighborhood $I$ of $a$ and positive real numbers $M,M_1,M_2$ such that
+For real-valued functions $f$ and $g$ defined on some interval $[a,\infty)$,
 \bit
-\item $\abs{f(x)}\le M\abs{g(x)}$, then $f(x)\in O(g(x))$ as $x\to a$.
-\item $\abs{f(x)}\ge M\abs{g(x)}$, then $f(x)\in \Omega(g(x))$ as $x\to a$.
-\item $M_1\abs{g(x)}\le\abs{f(x)}\le M_2\abs{g(x)}$, then $f(x)\in \Theta(g(x))$ as $x\to a$.
-\item $\lim_{x\to a}\abs{\frac{f(x)}{g(x)}}=0$, then $f(x)\in o(g(x))$ as $x\to a$.
-\item $\lim_{x\to a}\abs{\frac{g(x)}{f(x)}}=0$, then $f(x)\in \omega(g(x))$ as $x\to a$.
-\eit
-For real-valued functions $f$ and $g$ defined on some interval $[a,\infty)$, if there exists some real number $T$ and positive real numbers $M,M_1,M_2$ such that for all $x\geq T$,
-\bit
-\item $\abs{f(x)}\le M\abs{g(x)}$, then $f(x)\in O(g(x))$ as $x\to\infty$ and $\abs{g(x)}$ is an asymptotic upper bound of $\abs{f(x)}$.
-\item $\abs{f(x)}\ge M\abs{g(x)}$, then $f(x)\in \Omega(g(x))$ as $x\to\infty$ and $\abs{g(x)}$ is an asymptotic lower bound of $\abs{f(x)}$.
-\item $M_1\abs{g(x)}\le\abs{f(x)}\le M_2\abs{g(x)}$, then $f(x)\in \Theta(g(x))$ as $x\to\infty$.
-\item $\lim_{x\to\infty}\abs{\frac{f(x)}{g(x)}}=0$, then $f(x)\in o(g(x))$ as $x\to\infty$.
-\item $\lim_{x\to\infty}\abs{\frac{g(x)}{f(x)}}=0$, then $f(x)\in \omega(g(x))$ as $x\to\infty$.
+\item $\exists M>0,T\ge a\colon x\ge T\implies\abs{f(x)}\le M\abs{g(x)}$, i.e., $\limsup\abs{\frac{f(x)}{g(x)}}<\infty$, then $f(x)\in O(g(x))$ as $x\to\infty$ and $\abs{g(x)}$ is an asymptotic upper bound of $\abs{f(x)}$.
+\item $\exists M>0,T\ge a\colon x\ge T\implies\abs{f(x)}\ge M\abs{g(x)}$, i.e., $\liminf\abs{\frac{f(x)}{g(x)}}>0$, then $f(x)\in \Omega(g(x))$ as $x\to\infty$ and $\abs{g(x)}$ is an asymptotic lower bound of $\abs{f(x)}$.
+\item $\exists M_1,M_2>0,T\ge a\colon x\ge T\implies M_1\abs{g(x)}\le\abs{f(x)}\le M_2\abs{g(x)}$, then $f(x)\in \Theta(g(x))$ as $x\to\infty$.
+\item $\forall M>0\colon\exists T\ge a\colon\abs{f(x)}<M\abs{g(x)}$, i.e., $\lim_{x\to\infty}\abs{\frac{f(x)}{g(x)}}=0$, then $f(x)\in o(g(x))$ as $x\to\infty$.
+\item $\forall M>0\colon\exists T\ge a\colon\abs{f(x)}>M\abs{g(x)}$, i.e., $\lim_{x\to\infty}\abs{\frac{f(x)}{g(x)}}=\infty$, then $f(x)\in \omega(g(x))$ as $x\to\infty$.
 \eit
 $o$, $\Theta$, and $\omega$ are mutually exclusive.
 \[\Theta\subseteq O\cap\Omega\]
@@ -396,7 +388,6 @@ Obvious.
 \[\Omega\setminus\omega\not\subseteq\Theta\]
 \bpr
 Counterexample
-\[\frac{f(x)}{g(x)}=\bcs 1,\quad & x\in\bbQ\\\abs{x-a},\quad & x\notin\bbQ\ecs\]
 \[\frac{f(x)}{g(x)}=\bcs 1,\quad & x\in\bbQ\\\frac{1}{x},\quad & x\notin\bbQ\ecs\]
 \epr
 Binary relation:
