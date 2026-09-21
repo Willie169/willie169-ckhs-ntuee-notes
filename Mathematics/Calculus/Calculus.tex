@@ -368,23 +368,35 @@ Let $X$ be a connected topological space and $(Y,d)$ be a metric space. A net of
 \[\lim_af_a=f\text{\ uniformly},\]
 iff
 \[\forall\varepsilon\in\mathbb{R}_{>0}\exists N\in A\forall b\in A\forall\langle x_a(x)\rangle_{a\in A}\colon\qty(\forall a\in A\colon x_a(x)\in X_a)\land\qty(\forall x\in X\colon\lim_ax_a(x)=x)\land N\leq b)\implies\sup_{x\in X}d(f_b(x_b),f(x))<\varepsilon).\]
-\ssc{Big O notation and little notation}
-\sssc{Big O notation at a point}
-For a point $a$ in a topological space and real-valued functions $f$ and $g$ defined on some neighborhood of $a$ except possibly at $a$, $f(x)=O(g(x))$ as $x\to a$ if there exists some neighborhood $I$ of $a$ and positive real number $M$ such that 
-\[\abs{f(x)}\leq M\abs{g(x)}.\]
-\sssc{Little o notation at a point}
-For a point $a$ in a normed space and real-valued functions $f$ and $g$ defined on some neighborhood of $a$ except possibly at $a$, $f(x)=o(g(x))$ as $x\to a$ if
-\[\lim_{x\to a}\frac{f(x)}{g(x)}=0.\]
-\sssc{Big O notation at infinity}
-For real-valued functions $f$ and $g$ defined on some interval $[a,\infty)$, $f(x)=O(g(x))$ as $x\to\infty$ if there exists some real number $T$ such that for all $x\geq T$,
-\[\abs{f(x)}\leq\abs{g(x)}.\]
-For real-valued functions $f$ and $g$ defined on some interval $(-\infty,b]$, $f(x)=O(g(x))$ as $x\to-\infty$ if there exists some real number $T$ such that for all $x\leq T$,
-\[\abs{f(x)}\leq\abs{g(x)}.\]
-\sssc{Little o notation at infinity}
-For real-valued functions $f$ and $g$ defined on some interval $[a,\infty)$, $f(x)=o(g(x))$ as $x\to\infty$ if
-\[\lim_{x\to\infty}\frac{f(x)}{g(x)}=0.\]
-For real-valued functions $f$ and $g$ defined on some interval $(-\infty,b]$, $f(x)=o(g(x))$ as $x\to-\infty$ if
-\[\lim_{x\to-\infty}\frac{f(x)}{g(x)}=0.\]
+\ssc{Big O, little o, theta, big Omega, and small omega notation}
+\sssc{At a point}
+For a point $a$ in a topological space and non-negative functions $f$ and $g$ defined on some neighborhood of $a$ except possibly at $a$, iff there exists some neighborhood $I$ of $a$ and positive real numbers $M,M_1,M_2$ such that
+\bit
+\item $f(x)\le Mg(x)$, then $f(x)=O(g(x))$ as $x\to a$.
+\item $f(x)\ge Mg(x)$, then $f(x)=\Omega(g(x))$ as $x\to a$.
+\item $M_1g(x)\le f(x)\le M_2g(x)$, then $f(x)=\Theta(g(x))$ as $x\to a$.
+\item $\lim_{x\to a}\frac{f(x)}{g(x)}=0$, then $f(x)=o(g(x))$ as $x\to a$.
+\item $\lim_{x\to a}\frac{g(x)}{f(x)}=0$, then $f(x)=\omega(g(x))$ as $x\to a$.
+\eit
+$o$, $\Theta$, and $\omega$ are mutual exclusive.
+
+$o\lor\Theta\implies O$, but the inverse is not true.
+
+$\omega\lor\Theta\implies\Omega$, but the inverse is not true.
+\sssc{At infinity}
+For non-negative functions $f$ and $g$ defined on some interval $[a,\infty)$, if there exists some real number $T$ and positive real numbers $M,M_1,M_2$ such that for all $x\geq T$,
+\bit
+\item $f(x)\le Mg(x)$, then $f(x)=O(g(x))$ as $x\to a$.
+\item $f(x)\ge Mg(x)$, then $f(x)=\Omega(g(x))$ as $x\to a$.
+\item $M_1g(x)\le f(x)\le M_2g(x)$, then $f(x)=\Theta(g(x))$ as $x\to a$.
+\item $\lim_{x\to a}\frac{f(x)}{g(x)}=0$, then $f(x)=o(g(x))$ as $x\to a$.
+\item $\lim_{x\to a}\frac{g(x)}{f(x)}=0$, then $f(x)=\omega(g(x))$ as $x\to a$.
+\eit
+$o$, $\Theta$, and $\omega$ are mutual exclusive.
+
+$o\lor\Theta\implies O$, but the inverse is not true.
+
+$\omega\lor\Theta\implies\Omega$, but the inverse is not true.
 
 
 
