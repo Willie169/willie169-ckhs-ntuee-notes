@@ -369,7 +369,6 @@ Let $X$ be a connected topological space and $(Y,d)$ be a metric space. A net of
 iff
 \[\forall\varepsilon\in\mathbb{R}_{>0}\exists N\in A\forall b\in A\forall\langle x_a(x)\rangle_{a\in A}\colon\qty(\forall a\in A\colon x_a(x)\in X_a)\land\qty(\forall x\in X\colon\lim_ax_a(x)=x)\land N\leq b)\implies\sup_{x\in X}d(f_b(x_b),f(x))<\varepsilon).\]
 \ssc{Big O, little o, theta, big Omega, and small omega notation}
-\sssc{Definition}
 For real-valued functions $f$ and $g$ defined on some interval $[a,\infty)$,
 \bit
 \item $\exists M>0,T\ge a\colon x\ge T\implies\abs{f(x)}\le M\abs{g(x)}$ iff $f(x)\in O(g(x))$ and $\abs{g(x)}$ is an asymptotic upper bound of $\abs{f(x)}$.
@@ -379,194 +378,6 @@ For real-valued functions $f$ and $g$ defined on some interval $[a,\infty)$,
 \item $\forall M>0\colon\exists T\ge a\colon x\ge T\implies\abs{f(x)}>M\abs{g(x)}$ iff $f(x)\in \omega(g(x))$.
 \eit
 $\in$ is also denoted as $=$ for them.
-\sssc{Limit}
-If $g(x)\ne0$,
-\bit
-\item $\limsup\abs{\frac{f(x)}{g(x)}}<\infty$ iff $f(x)\in O(g(x))$.
-\bpr
-\[\abs{f(x)}\le M\abs{g(x)}\qc x\ge T\]
-\[\abs{\frac{f(x)}{g(x)}}\le M\qc x\ge T\]
-\[\sup\abs{\frac{f(x)}{g(x)}}\le M\qc x\ge T\]
-\[\limsup\abs{\frac{f(x)}{g(x)}}\le M<\infty\]
-\epr
-\item $\liminf\abs{\frac{f(x)}{g(x)}}>0$ iff $f(x)\in \Omega(g(x))$.
-\bpr
-\[\abs{f(x)}\ge M\abs{g(x)}\qc x\ge T\]
-\[\abs{\frac{f(x)}{g(x)}}\ge M\qc x\ge T\]
-\[\inf\abs{\frac{f(x)}{g(x)}}\ge M\qc x\ge T\]
-\[\liminf\abs{\frac{f(x)}{g(x)}}\ge M>0\]
-\epr
-\item $\infty>\limsup\abs{\frac{f(x)}{g(x)}}\ge\liminf\abs{\frac{f(x)}{g(x)}}>0$ iff $f(x)\in \Theta(g(x))$.
-\bpr
-\[\abs{f(x)}\ge M_1\abs{g(x)}\qc x\ge T\]
-\[\abs{\frac{f(x)}{g(x)}}\ge M_1\qc x\ge T\]
-\[\inf\abs{\frac{f(x)}{g(x)}}\ge M_1\qc x\ge T\]
-\[\liminf\abs{\frac{f(x)}{g(x)}}\ge M_1>0\]
-\[\abs{f(x)}\le M_2\abs{g(x)}\qc x\ge T\]
-\[\abs{\frac{f(x)}{g(x)}}\le M_2\qc x\ge T\]
-\[\sup\abs{\frac{f(x)}{g(x)}}\le M_2\qc x\ge T\]
-\[\limsup\abs{\frac{f(x)}{g(x)}}\le M_2<\infty\]
-\epr
-\item $\lim_{x\to\infty}\abs{\frac{f(x)}{g(x)}}=0$ iff $f(x)\in o(g(x))$.
-\[\abs{f(x)}<M\abs{g(x)}\]
-\[\abs{\frac{f(x)}{g(x)}}<M\]
-\[\lim_{x\to\infty}\abs{\frac{f(x)}{g(x)}}=0\]
-\item $\lim_{x\to\infty}\abs{\frac{f(x)}{g(x)}}=\infty$ iff $f(x)\in \omega(g(x))$.
-\[\abs{f(x)}>M\abs{g(x)}\]
-\[\abs{\frac{f(x)}{g(x)}}>M\]
-\[\lim_{x\to\infty}\abs{\frac{f(x)}{g(x)}}=\infty\]
-\eit
-\sssc{Relation}
-For any fixed $g(x)$:
-
-$o(g(x))$, $\Theta(g(x))$, and $\omega(g(x))$ are mutually exclusive.
-\bpr
-Prove by contradiction.
-
-If $f\in o(g(x))\cap\Theta(g(x))$,
-\[\forall M>0\colon\exists T\ge a\colon x\ge T\implies\abs{f(x)}<M\abs{g(x)}\]
-\[\exists M_1,M_2>0,U\ge a\colon x\ge U\implies M_1\abs{g(x)}\le\abs{f(x)}\le M_2\abs{g(x)}\]
-then set $M=M_1$, for $x\ge\max\{T,U\}$
-\[M_1\abs{g(x)}\le\abs{f(x)}<M_1\abs{g(x)},\]
-which can't happen.
-
-If $f\in \omega(g(x))\cap\Theta(g(x))$,
-\[\forall M>0\colon\exists T\ge a\colon x\ge T\implies\abs{f(x)}>M\abs{g(x)}\]
-\[\exists M_1,M_2>0,U\ge a\colon x\ge U\implies M_1\abs{g(x)}\le\abs{f(x)}\le M_2\abs{g(x)}\]
-then set $M=M_2$, for $x\ge\max\{T,U\}$
-\[M_2\abs{g(x)}\ge\abs{f(x)}>M_2\abs{g(x)},\]
-which can't happen.
-
-If $f\in o(g(x))\cap\omega(g(x))$,
-\[\forall M>0\colon\exists T\ge a\colon x\ge T\implies\abs{f(x)}<M\abs{g(x)}\]
-\[\forall M>0\colon\exists U\ge a\colon x\ge U\implies\abs{f(x)}>M\abs{g(x)}\]
-then set any fixed $M$,
-\[M\abs{g(x)}<\abs{f(x)}<M\abs{g(x)},\]
-which can't happen.
-\epr
-\[o(g(x))\subseteq O(g(x))\]
-\bpr
-Peak any $M>0$.
-\epr
-\[\omega(g(x))\subseteq\Omega(g(x))\]
-\bpr
-Peak any $M>0$.
-\epr
-\[\Theta(g(x))=O(g(x))\cap\Omega(g(x))\]
-\bpr
-Prove
-\[\Theta(g(x))\subseteq O(g(x))\cap\Omega(g(x))\]
-\[\exists M>0,T\ge a\colon x\ge T\implies\abs{f(x)}\le M\abs{g(x)}\]
-\[\exists N>0,U\ge a\colon x\ge U\implies\abs{f(x)}\ge N\abs{g(x)}\]
-then
-\[\exists M,N>0,\max\{T,U\}\ge a\colon x\ge \max\{T,U\}\implies N\abs{g(x)}\le\abs{f(x)}\le M\abs{g(x)}\]
-
-Prove
-\[\Theta(g(x))\supseteq O(g(x))\cap\Omega(g(x))\]
-\[\exists M_1,M_2>0,T\ge a\colon x\ge T\implies M_1\abs{g(x)}\le\abs{f(x)}\le M_2\abs{g(x)}\]
-then
-\[\exists M_2>0,T\ge a\colon x\ge T\implies\abs{f(x)}\le M_2\abs{g(x)}\]
-\[\exists M_1>0,T\ge a\colon x\ge T\implies\abs{f(x)}\ge M_1\abs{g(x)}\]
-\epr
-\[O(g(x))\setminus (o(g(x))\cup\Theta(g(x)))\ne\varnothing\]
-\bpr
-Counterexample:
-\[f(x)=\bcs 1,\quad & x\in\bbQ\\0,\quad & x\notin\bbQ\ecs\]
-\[g(x)=1\]
-$f\in O(g(x))$:
-\[\exists 1>0,1\ge a\colon x\ge 1\implies\abs{f(x)}\le \abs{g(x)}\]
-$f\notin o(g(x))$:
-\[\forall 1>0,T\ge a\colon\exists x\ge T,x\in\bbQ\colon\abs{f(x)}=\abs{g(x)}\]
-$f\notin\Theta(g(x))$:
-\[\forall M_1>0,x\ge a,x\notin\bbQ\colon M_1\abs{g(x)}=M_1>\abs{f(x)}=0\]
-\epr
-\[\Omega(g(x))\setminus (\omega(g(x))\cup\Theta(g(x)))\ne\varnothing\]
-\bpr
-Counterexample:
-\[f(x)=1\]
-\[g(x)=\bcs 1,\quad & x\in\bbQ\\0,\quad & x\notin\bbQ\ecs\]
-$f\in \Omega(g(x))$:
-\[\exists 1>0,1\ge a\colon x\ge 1\implies\abs{f(x)}\ge \abs{g(x)}\]
-$f\notin \omega(g(x))$:
-\[\forall 1>0,T\ge a\colon\exists x\ge T,x\in\bbQ\colon\abs{f(x)}=\abs{g(x)}\]
-$f\notin\Theta(g(x))$:
-\[\forall M_2>0,x\ge a,x\notin\bbQ\colon M_2\abs{g(x)}=0<\abs{f(x)}=1\]
-\epr
-\[f(x)\in O(g(x))\iff g(x)\in\Omega(f(x))\]
-\bpr
-$\implies$:
-\[\exists M>0,T\ge a\colon x\ge T\implies\abs{f(x)}\le M\abs{g(x)}\]
-then
-\[\exists \frac{1}{M}>0,T\ge a\colon x\ge T\implies\abs{g(x)}\ge \frac{1}{M}\abs{g(x)}\]
-$\Leftarrow$:
-\[\exists M>0,T\ge a\colon x\ge T\implies\abs{f(x)}\ge M\abs{g(x)}\]
-then
-\[\exists \frac{1}{M}>0,T\ge a\colon x\ge T\implies\abs{g(x)}\le \frac{1}{M}\abs{g(x)}\]
-\epr
-\[f(x)\in o(g(x))\iff g(x)\in\Omega(f(x))\]
-\bpr
-$\implies$:
-\[\forall M>0\colon\exists T\ge a\colon x\ge T\implies\abs{f(x)}<M\abs{g(x)}\]
-then
-\[\forall \frac{1}{M}>0\colon\exists T\ge a\colon x\ge T\implies\abs{g(x)}>\frac{1}{M}\abs{f(x)}\]
-$\Leftarrow$:
-\[\forall M>0\colon\exists T\ge a\colon x\ge T\implies\abs{f(x)}>M\abs{g(x)}\]
-then
-\[\forall \frac{1}{M}>0\colon\exists T\ge a\colon x\ge T\implies\abs{g(x)}<\frac{1}{M}\abs{f(x)}\]
-\epr
-\sssc{Binary relation}
-\bit
-\item $\Theta(g(x))$ is an equivalence class.
-\bpr
-Transitive:
-\[\exists M_1,M_2>0,T\ge a\colon x\ge T\implies M_1\abs{g(x)}\le\abs{f(x)}\le M_2\abs{g(x)}\]
-\[\exists N_1,N_2>0,U\ge a\colon x\ge U\implies N_1\abs{h(x)}\le\abs{g(x)}\le N_2\abs{h(x)}\]
-then
-\[\exists M_1N_1,M_2N_2>0,\max\{T,U\}\ge a\colon x\ge \max\{T,U\}\implies M_1N_1\abs{h(x)}\le\abs{f(x)}\le M_2N_2\abs{h(x)}\]
-Reflexive:
-\[f(x)\in\Theta(f(x))\]
-\[\exists 1,1>0,a\ge a\colon x\ge a\implies 1\abs{f(x)}\le\abs{f(x)}\le 1\abs{f(x)}\]
-Symmetric:
-\[\exists M_1,M_2>0,T\ge a\colon x\ge T\implies M_1\abs{g(x)}\le\abs{f(x)}\le M_2\abs{g(x)}\]
-then
-\[\exists \frac{1}{M_2},\frac{1}{M_1}>0,T\ge a\colon x\ge T\implies \frac{1}{M_2}\abs{f(x)}\le\abs{f(x)}\le\frac{1}{M_1}\abs{f(x)}\]
-\epr
-\item $O(g(x))$ is partial-ordered set with $\Theta$ as $=$.
-\bpr
-Transitive:
-\[\exists M>0,T\ge a\colon x\ge T\implies\abs{f(x)}\le M\abs{g(x)}\]
-\[\exists N>0,U\ge a\colon x\ge U\implies\abs{g(x)}\le N\abs{h(x)}\]
-then
-\[\exists MN>0,\max\{T,U\}\ge a\colon x\ge\max\{T,U\}\implies\abs{f(x)}\le MN\abs{h(x)}\]
-Reflexive:
-\[\exists M>0,T\ge a\colon x\ge T\implies\abs{f(x)}\le M\abs{g(x)}\]
-then
-\[\exists \frac{1}{M}>0,T\ge a\colon x\ge T\implies\abs{g(x)}\le \frac{1}{M}\abs{f(x)}\]
-Antisymmetric:
-\[\exists M>0,T\ge a\colon x\ge T\implies\abs{f(x)}\le M\abs{g(x)}\]
-\[\exists N>0,U\ge a\colon x\ge U\implies\abs{g(x)}\le N\abs{f(x)}\]
-then
-\[\exists M,\frac{1}{N}>0,\max\{T,U\}\ge a\colon x\ge \max\{T,U\}\implies\frac{1}{N}\abs{g(x)}\le\abs{f(x)}\le M\abs{g(x)}\]
-\epr
-\item $\Omega(g(x))$ is partial-ordered set with $\Theta$ as $=$.
-\bpr
-Similar to that of $O$.
-\epr
-\item $o(g(x))$ is a strictly partially-ordered set.
-\bpr
-Asymmetry:
-\[f(x)\in o(g(x))\iff g(x)\in\omega(f(x))\implies g\notin o(f(x))\]
-Transitivity:
-\[\forall M>0\colon\exists T\ge a\colon x\ge T\implies\abs{f(x)}<M\abs{g(x)}\]
-\[\exists U\ge a\colon x\ge U\implies\abs{g(x)}<\abs{h(x)}\]
-then
-\[\forall M>0\colon\exists \max\{T,U\}\ge a\colon x\ge \max\{T,U\}\implies\abs{f(x)}<M\abs{h(x)}\]
-\epr
-\item $\omega(g(x))$ is a strictly partially-ordered set.
-\bpr
-Similar to that of $o$.
-\epr
-\eit
 
 
 
@@ -2058,8 +1869,48 @@ $\varphi=$ constant:
 \subsubsection{For real sequence}
 \bit
 \item A limit inferior must exist uniquely in $[-\infty,\infty)$.
+\bpr
+Let $(a_n)_{n\in\bbN}$ be a real sequence. Let
+\[i_n=\inf_{k\ge n}a_k\]
+$i_n$ is non-decreasing.
+
+By Monotone Convergence Theorem,
+\[\liminf_{n\to\infty}a_n=\lim_{n\to\infty}i_n\]
+exists in $[-\infty,\infty]$.
+
+If $\liminf_{n\to\infty}a_n=\infty$, all $a_n$ must be $\infty$, but $a_n\in\bbR$.
+\epr
 \item A limit superior must exist uniquely in $(-\infty,\infty]$.
+\bpr
+Let $(a_n)_{n\in\bbN}$ be a real sequence. Let
+\[s_n=\sup_{k\ge n}a_k\]
+$s_n$ is non-increasing. 
+
+By Monotone Convergence Theorem,
+\[\limsup_{n\to\infty}a_n=\lim_{n\to\infty}s_n\]
+exists in $[-\infty,\infty]$.
+
+If $\limsup_{n\to\infty}a_n=-\infty$, all $a_n$ must be $-\infty$, but $a_n\in\bbR$.
+\epr
 \item If a limit exists, it is unique, and the limit inferior and limit superior are it.
+\bpr
+Let $(a_n)_{n\in\bbN}$ be a real sequence. Let
+\[i_n=\inf_{k\ge n}a_k\]
+\[s_n=\sup_{k\ge n}a_k\]
+$i_n$ is non-decreasing, and $s_n$ is non-increasing. 
+\[i_n\le a_n\le s_n\]
+Let
+\[\lim_{n \to \infty} a_n = L\]
+For any fixed $\varepsilon>0$,
+\[\exists M\in\bbN\colon n\ge M\implies\abs{a_n-L}<\varepsilon\implies L-\varepsilon<a_n<L+\varepsilon\]
+\[(n\ge M\implies L-\varepsilon<a_n)\implies L-\varepsilon\le i_n\]
+\[(n\ge M\implies a_n<L+\varepsilon)\implies s_n\le L+\varepsilon\]
+Thus
+\[\exists M\in\bbN\colon n\ge M\implies L-\varepsilon\le i_n\le a_n\le s_n\le L+\varepsilon\]
+Thus
+\[\lim_{n \to \infty} i_n = L\]
+\[\lim_{n \to \infty} s_n = L\]
+\epr
 \eit
 \subsubsection{For real series}
 If a limit exists, it is unique.
@@ -2394,6 +2245,195 @@ Define
 \[\lim_{n\to\infty}n\ln(1+x_n)=\lim_{n\to\infty}a_n=a\]
 \[\lim_{n\to\infty}\qty(1+\frac{a_n}{n})^n=\lim_{n\to\infty}\exp(n\ln(1+x_n))=e^a\]
 \epr
+\ssc{Big O, little o, theta, big Omega, and small omega notation}
+\sssc{Limit}
+If $g(x)\ne0$,
+\bit
+\item $\limsup\abs{\frac{f(x)}{g(x)}}<\infty$ iff $f(x)\in O(g(x))$.
+\bpr
+\[\abs{f(x)}\le M\abs{g(x)}\qc x\ge T\]
+\[\abs{\frac{f(x)}{g(x)}}\le M\qc x\ge T\]
+\[\sup\abs{\frac{f(x)}{g(x)}}\le M\qc x\ge T\]
+\[\limsup\abs{\frac{f(x)}{g(x)}}\le M<\infty\]
+\epr
+\item $\liminf\abs{\frac{f(x)}{g(x)}}>0$ iff $f(x)\in \Omega(g(x))$.
+\bpr
+\[\abs{f(x)}\ge M\abs{g(x)}\qc x\ge T\]
+\[\abs{\frac{f(x)}{g(x)}}\ge M\qc x\ge T\]
+\[\inf\abs{\frac{f(x)}{g(x)}}\ge M\qc x\ge T\]
+\[\liminf\abs{\frac{f(x)}{g(x)}}\ge M>0\]
+\epr
+\item $\infty>\limsup\abs{\frac{f(x)}{g(x)}}\ge\liminf\abs{\frac{f(x)}{g(x)}}>0$ iff $f(x)\in \Theta(g(x))$.
+\bpr
+\[\abs{f(x)}\ge M_1\abs{g(x)}\qc x\ge T\]
+\[\abs{\frac{f(x)}{g(x)}}\ge M_1\qc x\ge T\]
+\[\inf\abs{\frac{f(x)}{g(x)}}\ge M_1\qc x\ge T\]
+\[\liminf\abs{\frac{f(x)}{g(x)}}\ge M_1>0\]
+\[\abs{f(x)}\le M_2\abs{g(x)}\qc x\ge T\]
+\[\abs{\frac{f(x)}{g(x)}}\le M_2\qc x\ge T\]
+\[\sup\abs{\frac{f(x)}{g(x)}}\le M_2\qc x\ge T\]
+\[\limsup\abs{\frac{f(x)}{g(x)}}\le M_2<\infty\]
+\epr
+\item $\lim_{x\to\infty}\abs{\frac{f(x)}{g(x)}}=0$ iff $f(x)\in o(g(x))$.
+\[\abs{f(x)}<M\abs{g(x)}\]
+\[\abs{\frac{f(x)}{g(x)}}<M\]
+\[\lim_{x\to\infty}\abs{\frac{f(x)}{g(x)}}=0\]
+\item $\lim_{x\to\infty}\abs{\frac{f(x)}{g(x)}}=\infty$ iff $f(x)\in \omega(g(x))$.
+\[\abs{f(x)}>M\abs{g(x)}\]
+\[\abs{\frac{f(x)}{g(x)}}>M\]
+\[\lim_{x\to\infty}\abs{\frac{f(x)}{g(x)}}=\infty\]
+\eit
+\sssc{Relation}
+For any fixed $g(x)$:
+
+$o(g(x))$, $\Theta(g(x))$, and $\omega(g(x))$ are mutually exclusive.
+\bpr
+Prove by contradiction.
+
+If $f\in o(g(x))\cap\Theta(g(x))$,
+\[\forall M>0\colon\exists T\ge a\colon x\ge T\implies\abs{f(x)}<M\abs{g(x)}\]
+\[\exists M_1,M_2>0,U\ge a\colon x\ge U\implies M_1\abs{g(x)}\le\abs{f(x)}\le M_2\abs{g(x)}\]
+then set $M=M_1$, for $x\ge\max\{T,U\}$
+\[M_1\abs{g(x)}\le\abs{f(x)}<M_1\abs{g(x)},\]
+which can't happen.
+
+If $f\in \omega(g(x))\cap\Theta(g(x))$,
+\[\forall M>0\colon\exists T\ge a\colon x\ge T\implies\abs{f(x)}>M\abs{g(x)}\]
+\[\exists M_1,M_2>0,U\ge a\colon x\ge U\implies M_1\abs{g(x)}\le\abs{f(x)}\le M_2\abs{g(x)}\]
+then set $M=M_2$, for $x\ge\max\{T,U\}$
+\[M_2\abs{g(x)}\ge\abs{f(x)}>M_2\abs{g(x)},\]
+which can't happen.
+
+If $f\in o(g(x))\cap\omega(g(x))$,
+\[\forall M>0\colon\exists T\ge a\colon x\ge T\implies\abs{f(x)}<M\abs{g(x)}\]
+\[\forall M>0\colon\exists U\ge a\colon x\ge U\implies\abs{f(x)}>M\abs{g(x)}\]
+then set any fixed $M$,
+\[M\abs{g(x)}<\abs{f(x)}<M\abs{g(x)},\]
+which can't happen.
+\epr
+\[o(g(x))\subseteq O(g(x))\]
+\bpr
+Peak any $M>0$.
+\epr
+\[\omega(g(x))\subseteq\Omega(g(x))\]
+\bpr
+Peak any $M>0$.
+\epr
+\[\Theta(g(x))=O(g(x))\cap\Omega(g(x))\]
+\bpr
+Prove
+\[\Theta(g(x))\subseteq O(g(x))\cap\Omega(g(x))\]
+\[\exists M>0,T\ge a\colon x\ge T\implies\abs{f(x)}\le M\abs{g(x)}\]
+\[\exists N>0,U\ge a\colon x\ge U\implies\abs{f(x)}\ge N\abs{g(x)}\]
+then
+\[\exists M,N>0,\max\{T,U\}\ge a\colon x\ge \max\{T,U\}\implies N\abs{g(x)}\le\abs{f(x)}\le M\abs{g(x)}\]
+
+Prove
+\[\Theta(g(x))\supseteq O(g(x))\cap\Omega(g(x))\]
+\[\exists M_1,M_2>0,T\ge a\colon x\ge T\implies M_1\abs{g(x)}\le\abs{f(x)}\le M_2\abs{g(x)}\]
+then
+\[\exists M_2>0,T\ge a\colon x\ge T\implies\abs{f(x)}\le M_2\abs{g(x)}\]
+\[\exists M_1>0,T\ge a\colon x\ge T\implies\abs{f(x)}\ge M_1\abs{g(x)}\]
+\epr
+\[O(g(x))\setminus (o(g(x))\cup\Theta(g(x)))\ne\varnothing\]
+\bpr
+Counterexample:
+\[f(x)=\bcs 1,\quad & x\in\bbQ\\0,\quad & x\notin\bbQ\ecs\]
+\[g(x)=1\]
+$f\in O(g(x))$:
+\[\exists 1>0,1\ge a\colon x\ge 1\implies\abs{f(x)}\le \abs{g(x)}\]
+$f\notin o(g(x))$:
+\[\forall 1>0,T\ge a\colon\exists x\ge T,x\in\bbQ\colon\abs{f(x)}=\abs{g(x)}\]
+$f\notin\Theta(g(x))$:
+\[\forall M_1>0,x\ge a,x\notin\bbQ\colon M_1\abs{g(x)}=M_1>\abs{f(x)}=0\]
+\epr
+\[\Omega(g(x))\setminus (\omega(g(x))\cup\Theta(g(x)))\ne\varnothing\]
+\bpr
+Counterexample:
+\[f(x)=1\]
+\[g(x)=\bcs 1,\quad & x\in\bbQ\\0,\quad & x\notin\bbQ\ecs\]
+$f\in \Omega(g(x))$:
+\[\exists 1>0,1\ge a\colon x\ge 1\implies\abs{f(x)}\ge \abs{g(x)}\]
+$f\notin \omega(g(x))$:
+\[\forall 1>0,T\ge a\colon\exists x\ge T,x\in\bbQ\colon\abs{f(x)}=\abs{g(x)}\]
+$f\notin\Theta(g(x))$:
+\[\forall M_2>0,x\ge a,x\notin\bbQ\colon M_2\abs{g(x)}=0<\abs{f(x)}=1\]
+\epr
+\[f(x)\in O(g(x))\iff g(x)\in\Omega(f(x))\]
+\bpr
+$\implies$:
+\[\exists M>0,T\ge a\colon x\ge T\implies\abs{f(x)}\le M\abs{g(x)}\]
+then
+\[\exists \frac{1}{M}>0,T\ge a\colon x\ge T\implies\abs{g(x)}\ge \frac{1}{M}\abs{g(x)}\]
+$\Leftarrow$:
+\[\exists M>0,T\ge a\colon x\ge T\implies\abs{f(x)}\ge M\abs{g(x)}\]
+then
+\[\exists \frac{1}{M}>0,T\ge a\colon x\ge T\implies\abs{g(x)}\le \frac{1}{M}\abs{g(x)}\]
+\epr
+\[f(x)\in o(g(x))\iff g(x)\in\Omega(f(x))\]
+\bpr
+$\implies$:
+\[\forall M>0\colon\exists T\ge a\colon x\ge T\implies\abs{f(x)}<M\abs{g(x)}\]
+then
+\[\forall \frac{1}{M}>0\colon\exists T\ge a\colon x\ge T\implies\abs{g(x)}>\frac{1}{M}\abs{f(x)}\]
+$\Leftarrow$:
+\[\forall M>0\colon\exists T\ge a\colon x\ge T\implies\abs{f(x)}>M\abs{g(x)}\]
+then
+\[\forall \frac{1}{M}>0\colon\exists T\ge a\colon x\ge T\implies\abs{g(x)}<\frac{1}{M}\abs{f(x)}\]
+\epr
+\sssc{Binary relation}
+\bit
+\item $\Theta(g(x))$ is an equivalence class.
+\bpr
+Transitive:
+\[\exists M_1,M_2>0,T\ge a\colon x\ge T\implies M_1\abs{g(x)}\le\abs{f(x)}\le M_2\abs{g(x)}\]
+\[\exists N_1,N_2>0,U\ge a\colon x\ge U\implies N_1\abs{h(x)}\le\abs{g(x)}\le N_2\abs{h(x)}\]
+then
+\[\exists M_1N_1,M_2N_2>0,\max\{T,U\}\ge a\colon x\ge \max\{T,U\}\implies M_1N_1\abs{h(x)}\le\abs{f(x)}\le M_2N_2\abs{h(x)}\]
+Reflexive:
+\[f(x)\in\Theta(f(x))\]
+\[\exists 1,1>0,a\ge a\colon x\ge a\implies 1\abs{f(x)}\le\abs{f(x)}\le 1\abs{f(x)}\]
+Symmetric:
+\[\exists M_1,M_2>0,T\ge a\colon x\ge T\implies M_1\abs{g(x)}\le\abs{f(x)}\le M_2\abs{g(x)}\]
+then
+\[\exists \frac{1}{M_2},\frac{1}{M_1}>0,T\ge a\colon x\ge T\implies \frac{1}{M_2}\abs{f(x)}\le\abs{f(x)}\le\frac{1}{M_1}\abs{f(x)}\]
+\epr
+\item $O(g(x))$ is partial-ordered set with $\Theta$ as $=$.
+\bpr
+Transitive:
+\[\exists M>0,T\ge a\colon x\ge T\implies\abs{f(x)}\le M\abs{g(x)}\]
+\[\exists N>0,U\ge a\colon x\ge U\implies\abs{g(x)}\le N\abs{h(x)}\]
+then
+\[\exists MN>0,\max\{T,U\}\ge a\colon x\ge\max\{T,U\}\implies\abs{f(x)}\le MN\abs{h(x)}\]
+Reflexive:
+\[\exists M>0,T\ge a\colon x\ge T\implies\abs{f(x)}\le M\abs{g(x)}\]
+then
+\[\exists \frac{1}{M}>0,T\ge a\colon x\ge T\implies\abs{g(x)}\le \frac{1}{M}\abs{f(x)}\]
+Antisymmetric:
+\[\exists M>0,T\ge a\colon x\ge T\implies\abs{f(x)}\le M\abs{g(x)}\]
+\[\exists N>0,U\ge a\colon x\ge U\implies\abs{g(x)}\le N\abs{f(x)}\]
+then
+\[\exists M,\frac{1}{N}>0,\max\{T,U\}\ge a\colon x\ge \max\{T,U\}\implies\frac{1}{N}\abs{g(x)}\le\abs{f(x)}\le M\abs{g(x)}\]
+\epr
+\item $\Omega(g(x))$ is partial-ordered set with $\Theta$ as $=$.
+\bpr
+Similar to that of $O$.
+\epr
+\item $o(g(x))$ is a strictly partially-ordered set.
+\bpr
+Asymmetry:
+\[f(x)\in o(g(x))\iff g(x)\in\omega(f(x))\implies g\notin o(f(x))\]
+Transitivity:
+\[\forall M>0\colon\exists T\ge a\colon x\ge T\implies\abs{f(x)}<M\abs{g(x)}\]
+\[\exists U\ge a\colon x\ge U\implies\abs{g(x)}<\abs{h(x)}\]
+then
+\[\forall M>0\colon\exists \max\{T,U\}\ge a\colon x\ge \max\{T,U\}\implies\abs{f(x)}<M\abs{h(x)}\]
+\epr
+\item $\omega(g(x))$ is a strictly partially-ordered set.
+\bpr
+Similar to that of $o$.
+\epr
+\eit
 
 
 
