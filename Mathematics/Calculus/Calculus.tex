@@ -444,6 +444,14 @@ then set any fixed $M$,
 \[M\abs{g(x)}<\abs{f(x)}<M\abs{g(x)},\]
 which can't happen.
 \epr
+\[o(g(x))\subseteq O(g(x))\]
+\bpr
+Peak any $M>0$.
+\epr
+\[\omega(g(x))\subseteq\Omega(g(x))\]
+\bpr
+Peak any $M>0$.
+\epr
 \[\Theta(g(x))=O(g(x))\cap\Omega(g(x))\]
 \bpr
 Prove
@@ -488,6 +496,11 @@ $f\notin\Theta(g(x))$:
 \bit
 \item $\Theta(g(x))$ is an equivalence class.
 \bpr
+Transitive:
+\[\exists M_1,M_2>0,T\ge a\colon x\ge T\implies M_1\abs{g(x)}\le\abs{f(x)}\le M_2\abs{g(x)}\]
+\[\exists N_1,N_2>0,U\ge a\colon x\ge U\implies N_1\abs{h(x)}\le\abs{g(x)}\le N_2\abs{h(x)}\]
+then
+\[\exists M_1N_1,M_2N_2>0,\max\{T,U\}\ge a\colon x\ge \max\{T,U\}\implies M_1N_1\abs{h(x)}\le\abs{f(x)}\le M_2N_2\abs{h(x)}\]
 Reflexive:
 \[f(x)\in\Theta(f(x))\]
 \[\exists 1,1>0,a\ge a\colon x\ge a\implies 1\abs{f(x)}\le\abs{f(x)}\le 1\abs{f(x)}\]
@@ -495,19 +508,31 @@ Symmetric:
 \[\exists M_1,M_2>0,T\ge a\colon x\ge T\implies M_1\abs{g(x)}\le\abs{f(x)}\le M_2\abs{g(x)}\]
 then
 \[\exists \frac{1}{M_2},\frac{1}{M_1}>0,T\ge a\colon x\ge T\implies \frac{1}{M_2}\abs{f(x)}\le\abs{f(x)}\le\frac{1}{M_1}\abs{f(x)}\]
-Transitive:
-\[\exists M_1,M_2>0,T\ge a\colon x\ge T\implies M_1\abs{g(x)}\le\abs{f(x)}\le M_2\abs{g(x)}\]
-\[\exists N_1,N_2>0,U\ge a\colon x\ge U\implies N_1\abs{h(x)}\le\abs{g(x)}\le N_2\abs{h(x)}\]
-then
-\[\exists M_1N_1,M_2N_2>0,\max\{T,U\}\ge a\colon x\ge \max\{T,U\}\implies M_1N_1\abs{h(x)}\le\abs{f(x)}\le M_2N_2\abs{h(x)}\]
 \epr
-\item $O(g(x))$ and $\Omega(g(x))$ are partial-ordered sets.
+\item $O(g(x))$ is partial-ordered set.
 \bpr
-PLACEHOLDER
+Transitive:
+\[\exists M>0,T\ge a\colon x\ge T\implies\abs{f(x)}\le M\abs{g(x)}\]
+\[\exists N>0,U\ge a\colon x\ge U\implies\abs{g(x)}\le N\abs{h(x)}\]
+then
+\[\exists MN>0,\max\{T,U\}\ge a\colon x\ge\max\{T,U\}\implies\abs{f(x)}\le MN\abs{h(x)}\]
+Reflexive:
+\[\exists M>0,T\ge a\colon x\ge T\implies\abs{f(x)}\le M\abs{g(x)}\]
+Antisymmetric:
+\[\exists M>0,T\ge a\colon x\ge T\implies\abs{f(x)}\le M\abs{g(x)}\]
 \epr
+\item $\Omega(g(x))$ is partial-ordered set.
+$\exists M>0,T\ge a\colon x\ge T\implies\abs{f(x)}\ge M\abs{g(x)}$ iff $f(x)\in \Omega(g(x))$ and $\abs{g(x)}$ is an asymptotic lower bound of $\abs{f(x)}$.
 \item $o(g(x))$ and $\omega(g(x))$ are strictly partially-ordered sets.
 \bpr
 PLACEHOLDER
+A strict partial order, strict preorder, strict quasiorder, or strict quasi-order is a transitive relation $<$ that is asymmetric.
+\item Reflexivity: $aRa$,
+\item Irreflexivity or anti-reflexive: $\neq aRa$,
+\item Symmetry: $aRb\implies bRa$,
+\item Asymmetry: $aRb\implies \neg bRa$ (which implies irreflexivity),
+\item Antisymmetry: $aRb\land bRa\implies a=b$,
+\item Transitivity: $(aRb\land bRc)\implies aRc$,
 \epr
 \eit
 
