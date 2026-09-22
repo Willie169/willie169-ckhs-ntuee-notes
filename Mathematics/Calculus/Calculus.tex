@@ -492,6 +492,28 @@ $f\notin \omega(g(x))$:
 $f\notin\Theta(g(x))$:
 \[\forall M_2>0,x\ge a,x\notin\bbQ\colon M_2\abs{g(x)}=0<\abs{f(x)}=1\]
 \epr
+\[f(x)\in O(g(x))\iff g(x)\in\Omega(f(x))\]
+\bpr
+$\implies$:
+\[\exists M>0,T\ge a\colon x\ge T\implies\abs{f(x)}\le M\abs{g(x)}\]
+then
+\[\exists \frac{1}{M}>0,T\ge a\colon x\ge T\implies\abs{g(x)}\ge \frac{1}{M}\abs{g(x)}\]
+$\Leftarrow$:
+\[\exists M>0,T\ge a\colon x\ge T\implies\abs{f(x)}\ge M\abs{g(x)}\]
+then
+\[\exists \frac{1}{M}>0,T\ge a\colon x\ge T\implies\abs{g(x)}\le \frac{1}{M}\abs{g(x)}\]
+\epr
+\[f(x)\in o(g(x))\iff g(x)\in\Omega(f(x))\]
+\bpr
+$\implies$:
+\[\forall M>0\colon\exists T\ge a\colon x\ge T\implies\abs{f(x)}<M\abs{g(x)}\]
+then
+\[\forall \frac{1}{M}>0\colon\exists T\ge a\colon x\ge T\implies\abs{g(x)}>\frac{1}{M}\abs{f(x)}\]
+$\Leftarrow$:
+\[\forall M>0\colon\exists T\ge a\colon x\ge T\implies\abs{f(x)}>M\abs{g(x)}\]
+then
+\[\forall \frac{1}{M}>0\colon\exists T\ge a\colon x\ge T\implies\abs{g(x)}<\frac{1}{M}\abs{f(x)}\]
+\epr
 \sssc{Binary relation}
 \bit
 \item $\Theta(g(x))$ is an equivalence class.
@@ -509,7 +531,7 @@ Symmetric:
 then
 \[\exists \frac{1}{M_2},\frac{1}{M_1}>0,T\ge a\colon x\ge T\implies \frac{1}{M_2}\abs{f(x)}\le\abs{f(x)}\le\frac{1}{M_1}\abs{f(x)}\]
 \epr
-\item $O(g(x))$ is partial-ordered set.
+\item $O(g(x))$ is partial-ordered set with $\Theta$ as $=$.
 \bpr
 Transitive:
 \[\exists M>0,T\ge a\colon x\ge T\implies\abs{f(x)}\le M\abs{g(x)}\]
@@ -518,21 +540,31 @@ then
 \[\exists MN>0,\max\{T,U\}\ge a\colon x\ge\max\{T,U\}\implies\abs{f(x)}\le MN\abs{h(x)}\]
 Reflexive:
 \[\exists M>0,T\ge a\colon x\ge T\implies\abs{f(x)}\le M\abs{g(x)}\]
+then
+\[\exists \frac{1}{M}>0,T\ge a\colon x\ge T\implies\abs{g(x)}\le \frac{1}{M}\abs{f(x)}\]
 Antisymmetric:
 \[\exists M>0,T\ge a\colon x\ge T\implies\abs{f(x)}\le M\abs{g(x)}\]
+\[\exists N>0,U\ge a\colon x\ge U\implies\abs{g(x)}\le N\abs{f(x)}\]
+then
+\[\exists M,\frac{1}{N}>0,\max\{T,U\}\ge a\colon x\ge \max\{T,U\}\implies\frac{1}{N}\abs{g(x)}\le\abs{f(x)}\le M\abs{g(x)}\]
 \epr
-\item $\Omega(g(x))$ is partial-ordered set.
-$\exists M>0,T\ge a\colon x\ge T\implies\abs{f(x)}\ge M\abs{g(x)}$ iff $f(x)\in \Omega(g(x))$ and $\abs{g(x)}$ is an asymptotic lower bound of $\abs{f(x)}$.
-\item $o(g(x))$ and $\omega(g(x))$ are strictly partially-ordered sets.
+\item $\Omega(g(x))$ is partial-ordered set with $\Theta$ as $=$.
 \bpr
-PLACEHOLDER
-A strict partial order, strict preorder, strict quasiorder, or strict quasi-order is a transitive relation $<$ that is asymmetric.
-\item Reflexivity: $aRa$,
-\item Irreflexivity or anti-reflexive: $\neq aRa$,
-\item Symmetry: $aRb\implies bRa$,
-\item Asymmetry: $aRb\implies \neg bRa$ (which implies irreflexivity),
-\item Antisymmetry: $aRb\land bRa\implies a=b$,
-\item Transitivity: $(aRb\land bRc)\implies aRc$,
+Similar to that of $O$.
+\epr
+\item $o(g(x))$ is a strictly partially-ordered set.
+\bpr
+Asymmetry:
+\[f(x)\in o(g(x))\iff g(x)\in\omega(f(x))\implies g\notin o(f(x))\]
+Transitivity:
+\[\forall M>0\colon\exists T\ge a\colon x\ge T\implies\abs{f(x)}<M\abs{g(x)}\]
+\[\exists U\ge a\colon x\ge U\implies\abs{g(x)}<\abs{h(x)}\]
+then
+\[\forall M>0\colon\exists \max\{T,U\}\ge a\colon x\ge \max\{T,U\}\implies\abs{f(x)}<M\abs{h(x)}\]
+\epr
+\item $\omega(g(x))$ is a strictly partially-ordered set.
+\bpr
+Similar to that of $o$.
 \epr
 \eit
 
