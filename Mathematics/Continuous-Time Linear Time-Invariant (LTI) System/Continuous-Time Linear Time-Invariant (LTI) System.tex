@@ -34,9 +34,24 @@ A pole–zero plot or pole–zero constellation is a graphical representation sh
 \sssc{Transient response}
 A response component that converges to an equilibrium as $t$ gets large. Such converged state is called steady state or transient state.
 \sssc{Time constant}
-For a response function in the form $y(t)=y_0e^{-\alpha t}$ with constants $y_0\neq 0$ and $\alpha>0$, the time constant $\tau$ is defined as $\frac{1}{\alpha}$, that is, $y(\tau)=y_0e^{-1}$.
+For a response in the form
+\[y(t)=A+\sum_{j=1}^nB_je^{-\frac{t}{\tau_j}}\]
+with $A\in\bbR$, $B_j\ne 0$, and $\tau_j>0$.
 
-For a response function in the form $y(t)=y_0\qty(1-e^{-\alpha t})$ with constants $y_0\neq 0$ and $\alpha>0$, the time constant $\tau$ is defined as $\frac{1}{\alpha}$, that is, $y(\tau)=y_0\qty(1-e^{-1})$.
+Each $\tau_j$ is called a time constant, and the system is called a $n$-time-constant system, e.g., single-time-constant (STC), two-time-constant (TTC).
+
+For each term
+\[y_j(t)=B_je^{-\frac{t}{\tau_j}}\]
+if $B_j>0$, we typically call that 
+\bit
+\item $y_j(t)$ decays to $0$ about $5\tau_j$.
+\item The falling time or pulse decay time is defined as the time $y_j(t)$ changes from $0.9B_j$ to $0.1B_j$, which is $\ln 9\tau_j\approx 2.2\tau$.
+\eit
+if $B_j<0$, we typically call that 
+\bit
+\item $y_j(t)$ grows to $B_j$ about $5\tau_j$.
+\item The rising time or pulse grow time is defined as the time $y_j(t)$ changes from $0.1B_j$ to $0.9B_j$, which is $\ln 9\tau_j\approx 2.2\tau$.
+\eit
 \sssc{Natural frequency}
 For a pair of conjugate poles $\pm i\omega$ of $H(s)$, $\omega$ is called a natural frequency of the system.
 \sssc{Resonance}
