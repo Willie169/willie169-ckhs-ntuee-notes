@@ -2427,6 +2427,70 @@ then
 Similar to that of $o$.
 \epr
 \eit
+\ssc{Master Theorem}
+\sssc{Master Theorem}
+For a positive valued net $T(n)$ defined as
+\[T(n)=aT\qty(\frac{n}{b})+f(n)\]
+for some constants $a>0$ and $b>1$, and non-negative-valued function $f(n)$, where $\log_ba$ is called critical exponent $c_{crit}$,
+\ben
+\item If for some $c<\log_ba$,
+\[f(n)=O(n^c),\]
+then
+\[T(n)=\Theta(n^{\log_ba}).\]
+\item \mbox{}
+\ben
+\item If for some positive integers $m$, 
+\[f(n)=\Theta(n^{\log_ba}(\ln n)^{m-1}),\]
+then
+\[T(n)=\Theta(n^{\log_ba}(\ln n)^m).\]
+\item If
+\[f(n)=o(n^{\log_ba}(\ln n)^{-1}),\]
+then
+\[T(n)=\Theta(n^{\log_ba}\ln(\ln n)).\]
+\item If for some positive integers $m$,
+\[f(n)=\Theta(n^{\log_ba}(\ln n)^{-m-1}),\]
+then
+\[T(n)=\Theta(n^{\log_ba}).\]
+\een
+\item If $f(n)=\Omega(n^c)$ for some $c>\log_ba$, and the regularity condition that $\exists m\in\bbR,k<1$ such that $n\ge m$ implies
+\[af\qty(\frac{n}{b})\le kf(n)\]
+is satisfied, then
+\[T(n)=\Theta(f(n)).\]
+\een
+\sssc{Generalized Master Theorem}
+For a positive valued net $T(n)$ defined as
+\[T(n)=aT\qty(\frac{n}{b})+f(n)\]
+for some constants $a>0$ and $b>1$, and non-negative-valued function $f(n)$, where $\log_ba$ is called critical exponent $c_{crit}$,
+\ben
+\item If for some $c<\log_ba$,
+\[f(n)=O(n^c),\]
+then
+\[T(n)=\Theta(n^{\log_ba}).\]
+\item Define iterated logarithm $\operatorname{ilog}(a,x)$ as
+\[\operatorname{ilog}(0,x)=x,\]
+\[\operatorname{ilog}(n,x)=\ln(\operatorname{ilog}(n-1,x)),\quad n\in\bbN.\]
+\ben
+\item If for some positive integers $k,m$, 
+\[f(n)=\Theta(n^{\log_ba}\qty(\prod_{i=1}^{k-1}(\operatorname{ilog}(i,n))^{-1})\qty(\operatorname{ilog}(k,n))^{m-1}),\]
+then
+\[T(n)=\Theta(n^{\log_ba}(\operatorname{ilog}(k,n))^m).\]
+\item If for some positive integer $k$, 
+\[f(n)=o(n^{\log_ba}\prod_{i=1}^k(\operatorname{ilog}(i,n))^{-1}),\]
+then
+\[T(n)=\Theta(n^{\log_ba}\operatorname{ilog}(k-1,n)).\]
+\item If for some positive integers $k,m$,
+\[f(n)=\Theta(n^{\log_ba}\qty(\prod_{i=1}^{k-1}(\operatorname{ilog}(i,n))^{-1})\qty(\operatorname{ilog}(k,n))^{-m-1}),\]
+then
+\[T(n)=\Theta(n^{\log_ba}).\]
+\een
+\item If $f(n)=\Omega(n^c)$ for some $c>\log_ba$, and the regularity condition that $\exists m\in\bbR,k<1$ such that $n\ge m$ implies
+\[af\qty(\frac{n}{b})\le kf(n)\]
+is satisfied, then
+\[T(n)=\Theta(f(n)).\]
+\een
+\bpr
+PLACEHOLDER
+\epr
 
 
 
@@ -4314,7 +4378,7 @@ for $x\in R$,
 \bpr
 TODO
 \epr
-\ssc{p-test and $\frac{1}{x^p(\ln x)^q}$-test}
+\ssc{p-test and generalization}
 \sssc{p-test (for improper integral)}
 For any fixed $a>0$, $\int_a^{\infty}\frac{1}{x^p}\dd{x}$ converges iff $p>1$, and if so,
 \[\int_a^{\infty}\frac{1}{x^p}\dd{x}=\frac{1}{(p-1)a^{p-1}};\]
@@ -4358,6 +4422,30 @@ which converges iff $q<1$ by p-test.
 For any fixed $a\in\bbN$, $\sum_{n=a}^{\infty}\frac{1}{n^p(\ln n)^q}$ converges iff $p>1\lor(p=1\land q>1)$.
 \bpr
 For $p\le0$, it's obviously $\infty$. For $p>0$, $f(x)=\frac{1}{x^p(\ln x)^q}$ is monotone decreasing on $[b,\infty)$ for some $b>1$. By integral test and $\frac{1}{x^p(\ln x)^q}$-test for improper integral, the statement holds.
+\epr
+\sssc{Generalized p-test (for improper integral)}
+Define iterated logarithm $\operatorname{ilog}(a,x)$ as
+\[\operatorname{ilog}(0,x)=x,\]
+\[\operatorname{ilog}(n,x)=\ln(\operatorname{ilog}(n-1,x)),\quad n\in\bbN.\]
+For any fixed $a>1,k\in\bbN$,
+\[\int_a^{\infty}\frac{1}{\qty(\prod_{i=0}^{k-1}\operatorname{ilog}(i,x))\qty(\operatorname{ilog}(k,x))^m}\dd{x}\]
+converges iff $m>1$.
+
+For any fixed $0<a<1,k\in\bbN$,
+\[\int_0^a\frac{1}{\qty(\prod_{i=0}^{k-1}\operatorname{ilog}(i,x))\qty(\operatorname{ilog}(k,x))^m}\dd{x}\]
+converges iff $m<1$.
+\bpr
+PLACEHOLDER
+\epr
+\sssc{Generalized p-test for series or generalized p-series test}
+Define iterated logarithm $\operatorname{ilog}(a,x)$ as
+\[\operatorname{ilog}(0,x)=x,\]
+\[\operatorname{ilog}(n,x)=\ln(\operatorname{ilog}(n-1,x)),\quad n\in\bbN.\]
+For any fixed $a\in\bbN$,
+\[\sum_{n=a}^{\infty}\frac{1}{\qty(\prod_{i=0}^{k-1}\operatorname{ilog}(i,x))\qty(\operatorname{ilog}(k,x))^m}\]
+converges iff $m>1$.
+\bpr
+PLACEHOLDER
 \epr
 \ssc{Improper integral theorems}
 \sssc{Convergence of improper integral of monotone increasing/decreasing integrand implies non-positive/non-negative integrand}
