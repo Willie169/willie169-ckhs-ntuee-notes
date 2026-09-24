@@ -2427,40 +2427,10 @@ then
 Similar to that of $o$.
 \epr
 \eit
-\ssc{Master Theorem}
-\sssc{Master Theorem}
-For a positive valued net $T(n)$ defined as
-\[T(n)=aT\qty(\frac{n}{b})+f(n)\]
-for some constants $a>0$ and $b>1$, and non-negative-valued function $f(n)$, where $\log_ba$ is called critical exponent $c_{crit}$,
-\ben
-\item If for some $c<\log_ba$,
-\[f(n)=O(n^c),\]
-then
-\[T(n)=\Theta(n^{\log_ba}).\]
-\item \mbox{}
-\ben
-\item If for some positive integers $m$, 
-\[f(n)=\Theta(n^{\log_ba}(\ln n)^{m-1}),\]
-then
-\[T(n)=\Theta(n^{\log_ba}(\ln n)^m).\]
-\item If
-\[f(n)=o(n^{\log_ba}(\ln n)^{-1}),\]
-then
-\[T(n)=\Theta(n^{\log_ba}\ln(\ln n)).\]
-\item If for some positive integers $m$,
-\[f(n)=\Theta(n^{\log_ba}(\ln n)^{-m-1}),\]
-then
-\[T(n)=\Theta(n^{\log_ba}).\]
-\een
-\item If $f(n)=\Omega(n^c)$ for some $c>\log_ba$, and the regularity condition that $\exists m\in\bbR,k<1$ such that $n\ge m$ implies
-\[af\qty(\frac{n}{b})\le kf(n)\]
-is satisfied, then
-\[T(n)=\Theta(f(n)).\]
-\een
 \sssc{Generalized Master Theorem}
-For a positive valued net $T(n)$ defined as
+For a positive valued net $T(n)$ defined on $n=b^h$ for any $h\in\bbN_0$ as
 \[T(n)=aT\qty(\frac{n}{b})+f(n)\]
-for some constants $a>0$ and $b>1$, and non-negative-valued function $f(n)$, where $\log_ba$ is called critical exponent $c_{crit}$,
+for some constants $a>0$ and $b>1$, and non-negative-valued function $f(n)$,
 \ben
 \item If for some $c<\log_ba$,
 \[f(n)=O(n^c),\]
@@ -2489,9 +2459,59 @@ is satisfied, then
 \[T(n)=\Theta(f(n)).\]
 \een
 \bpr
-PLACEHOLDER
-\epr
+Let $r=\log_ba$.
 
+At level $j$, there are $a^j$ nodes, each of size $\frac{n}{b^j}$. Thus, the total non-recursive work at level $j$ is
+\[a^jf\qty(\frac{n}{b^j}).\]
+Hence
+\[\ba
+T(n)=&\sum_{j=0}^{h-1}a^jf\qty(\frar{n}{b^j})+n^rT(1)\|
+=&\sum_{j=0}^{h-1}b^{rj}f\qty(\frar{n}{b^j})+\Theta(n^r)
+\ea\]
+Let
+\[f(x)=x^rg(x)\]
+\[T(n)=n^r\sum_{j=0}^{h-1}g\qty(\frar{n}{b^j})+\Theta(n^r)\]
+Case 1: If for some $c<\log_ba$,
+\[f(n)=O(n^c),\]
+then
+\[T(n)=\Theta(n^{\log_ba}).\]
+Case 2:
+\[\operatorname{ilog}(k,b^x)=\Theta(\operatorname{ilog}(k-1,x))\]
+
+Case 3: If $f(n)=\Omega(n^c)$ for some $c>\log_ba$, and the regularity condition that $\exists m\in\bbR,0<k<1$ such that $n\ge m$ implies
+\[af\qty(\frac{n}{b})\le kf(n)\]
+is satisfied, then
+\[af\qty(\frac{n}{b})\le kf(n)\]
+\[a^jf\qty(\frac{n}{b^j})\le a^{j-1}kf\qty(\frac{n}{b^{j-1}})\le k^jf(n)\]
+\[\ba
+T(n)=&\sum_{j=0}^{h-1}a^jf\qty(\frar{n}{b^j})+n^rT(1)\\
+=&f(n)+\sum_{j=1}^{h-1}O(k^jf(n))+\Theta(n^r)
+\ea\]
+\[\sum_{j=1}^{\infty}k^jf(n)=\frac{f(n)}{1-k}\]
+\[T(n)=f(n)+O(f(n))+\Theta(n^r)=\Theta(f(n))\]
+\epr
+Terms:
+\bit
+\item $h$ is called recursion level.
+\item $\log_ba$ is called critical exponent $c_{crit}$.
+\item $T(1)$ is called leaf cost.
+\item At each node, the first term is called recursive work, and the second term is called non-recursive work.
+\eit
+For original master theorem, the second case is
+\ben
+\item If for some positive integers $m$, 
+\[f(n)=\Theta(n^{\log_ba}(\ln n)^{m-1}),\]
+then
+\[T(n)=\Theta(n^{\log_ba}(\ln n)^m).\]
+\item If
+\[f(n)=o(n^{\log_ba}(\ln n)^{-1}),\]
+then
+\[T(n)=\Theta(n^{\log_ba}\ln(\ln n)).\]
+\item If for some positive integers $m$,
+\[f(n)=\Theta(n^{\log_ba}(\ln n)^{-m-1}),\]
+then
+\[T(n)=\Theta(n^{\log_ba}).\]
+\een
 
 
 \section{Continuity Theorems}
