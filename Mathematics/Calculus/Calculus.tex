@@ -2427,104 +2427,7 @@ then
 Similar to that of $o$.
 \epr
 \eit
-\sssc{Generalized Master Theorem}
-For a positive valued net $T(n)$ defined on $n=b^h$ for any $h\in\bbN_0$ as
-\[T(n)=aT\qty(\frac{n}{b})+f(n)\]
-for some constants $a>0$ and $b>1$, and non-negative-valued function $f(n)$,
-\ben
-\item If for some $c<\log_ba$,
-\[f(n)=O(n^c),\]
-then
-\[T(n)=\Theta(n^{\log_ba}).\]
-\item Define iterated logarithm $\operatorname{ilog}(a,x)$ as
-\[\operatorname{ilog}(0,x)=x,\]
-\[\operatorname{ilog}(n,x)=\ln(\operatorname{ilog}(n-1,x)),\quad n\in\bbN.\]
-\ben
-\item If for some positive integers $k$ and positive number $m$, 
-\[f(n)=\Theta(n^{\log_ba}\qty(\prod_{i=1}^{k-1}(\operatorname{ilog}(i,n))^{-1})\qty(\operatorname{ilog}(k,n))^{m-1}),\]
-then
-\[T(n)=\Theta(n^{\log_ba}(\operatorname{ilog}(k,n))^m).\]
-\item If for some positive integer $k$, 
-\[f(n)=o(n^{\log_ba}\prod_{i=1}^k(\operatorname{ilog}(i,n))^{-1}),\]
-then
-\[T(n)=\Theta(n^{\log_ba}\operatorname{ilog}(k-1,n)).\]
-\item If for some positive integers $k$ and some positive number $m$,
-\[f(n)=\Theta(n^{\log_ba}\qty(\prod_{i=1}^{k-1}(\operatorname{ilog}(i,n))^{-1})\qty(\operatorname{ilog}(k,n))^{-m-1}),\]
-then
-\[T(n)=\Theta(n^{\log_ba}).\]
-\een
-\item If $f(n)=\Omega(n^c)$ for some $c>\log_ba$, and the regularity condition that $\exists m\in\bbR,k<1$ such that $n\ge m$ implies
-\[af\qty(\frac{n}{b})\le kf(n)\]
-is satisfied, then
-\[T(n)=\Theta(f(n)).\]
-\een
-\bpr
-Let $s=\log_ba$, $n=b^h$, and $f(x)=x^sg(x)$. At level $j$, there are $a^j$ nodes, each of size $\frac{n}{b^j}$. Thus, the total non-recursive work at level $j$ is
-\[a^jf\qty(\frac{n}{b^j}).\]
-Hence
-\[\ba
-T(n)=&\sum_{j=0}^{h-1}a^jf\qty(\frac{n}{b^j})+n^sT(1)\\
-=&\sum_{j=0}^{h-1}b^{sj}f\qty(\frac{b^h}{b^j})+\Theta\qty(n^s)\\
-=&n^s\sum_{j=0}^{h-1}g\qty(b^{h-j})+\Theta\qty(n^s)
-=&n^s\sum_{r=1}^hg\qty(b^r)+\Theta\qty(n^s)
-\ea\]
-Case 1: If for some $c<\log_ba$,
-\[f(n)=O(n^c),\]
-then
-\[T(n)=\Theta(n^{\log_ba}).\]
-Case 2:
-\[\operatorname{ilog}(k,b^x)=\Theta(\operatorname{ilog}(k-1,x))\]
-\[f(n)=\Theta(n^{\log_ba}\qty(\prod_{i=1}^{k-1}(\operatorname{ilog}(i,n))^{-1})\qty(\operatorname{ilog}(k,n))^{m-1})\]
-\[g(b^r)=\Theta(\qty(\prod_{i=1}^{k-2}(\operatorname{ilog}(i,r))^{-1})\qty(\operatorname{ilog}(k-1,r))^{m-1})\]
 
-
-If $\int_a^{\infty}f(x)\dd{x}$ is convergent and $f(x)$ is monotone decreasing, for any $n\in\bbN_{\ge a}$,
-\[\int_n^{\infty}f(x)\dd{x}\le\sum_{k=n}^{\infty}f(k)\le f(n)+\int_n^{\infty}f(x)\dd{x},\]
-
-Sub-case 1 $m>0$: By generalized p-test for series
-\[\sum_{r=1}^hg\qty(b^r)\]
-is divergent. Thus,
-\[T(n)=\Theta(n^{\log_ba}(\operatorname{ilog}(k,n))^m).\]
-Sub-case 2 $m=0$:
-\[T(n)=\Theta(n^{\log_ba}\operatorname{ilog}(k-1,n)).\]
-Sub-case 3 $m=0$:
-\[T(n)=\Theta(n^{\log_ba}).\]
-
-
-Case 3: If $f(n)=\Omega(n^c)$ for some $c>\log_ba$, and the regularity condition that $\exists m\in\bbR,0<k<1$ such that $n\ge m$ implies
-\[af\qty(\frac{n}{b})\le kf(n)\]
-is satisfied, then
-\[af\qty(\frac{n}{b})\le kf(n)\]
-\[a^jf\qty(\frac{n}{b^j})\le a^{j-1}kf\qty(\frac{n}{b^{j-1}})\le k^jf(n)\]
-\[\ba
-T(n)=&\sum_{j=0}^{h-1}a^jf\qty(\frac{n}{b^j})+n^sT(1)\\
-=&f(n)+\sum_{j=1}^{h-1}O(k^jf(n))+\Theta\qty(n^s)
-\ea\]
-\[\sum_{j=1}^{\infty}k^jf(n)=\frac{f(n)}{1-k}\]
-\[T(n)=f(n)+O(f(n))+\Theta\qty(n^s)=\Theta(f(n))\]
-\epr
-Terms:
-\bit
-\item $h$ is called recursion level.
-\item $\log_ba$ is called critical exponent $c_{crit}$.
-\item $T(1)$ is called leaf cost.
-\item At each node, the first term is called recursive work, and the second term is called non-recursive work.
-\eit
-For original master theorem, the second case is
-\ben
-\item If for some positive integers $m$, 
-\[f(n)=\Theta(n^{\log_ba}(\ln n)^{m-1}),\]
-then
-\[T(n)=\Theta(n^{\log_ba}(\ln n)^m).\]
-\item If
-\[f(n)=o(n^{\log_ba}(\ln n)^{-1}),\]
-then
-\[T(n)=\Theta(n^{\log_ba}\ln(\ln n)).\]
-\item If for some positive integers $m$,
-\[f(n)=\Theta(n^{\log_ba}(\ln n)^{-m-1}),\]
-then
-\[T(n)=\Theta(n^{\log_ba}).\]
-\een
 
 
 \section{Continuity Theorems}
@@ -4118,7 +4021,7 @@ Thus
 \[V_a^b(f)<N<\infty.\]
 \epr
 \sssc{Differentiability}
-A function of bouned variation on an interval is differentiable a.e. on it.
+A function of bounded variation on an interval is differentiable a.e. on it.
 \bpr
 Both functions in the Jordan decomposition is monotone and thus differentiable a.e.
 \epr
@@ -4413,7 +4316,7 @@ for $x\in R$,
 \bpr
 TODO
 \epr
-\ssc{p-test and generalization}
+\ssc{p-test and Master Theorem}
 \sssc{p-test (for improper integral)}
 For any fixed $a>0$, $\int_a^{\infty}\frac{1}{x^p}\dd{x}$ converges iff $p>1$, and if so,
 \[\int_a^{\infty}\frac{1}{x^p}\dd{x}=\frac{1}{(p-1)a^{p-1}};\]
@@ -4435,12 +4338,6 @@ $\int_0^a\frac{1}{x^p}\dd{x}$ converges iff $p<1$, and if so,
 For any fixed $a\in\bbN$, $\sum_{n=a}^{\infty}\frac{1}{n^p}$, called p-series, converges iff $p>1$.
 \bpr
 For $p\le0$, $\sum_{n=a}^{\infty}\frac{1}{n^p}=\infty$. For $p>0$, $f(x)=\frac{1}{x^p}$ is monotone decreasing on $[1,\infty)$. By integral test and p-test, the statement holds.
-\epr
-\sssc{$\frac{1}{x^p(\ln x)^q}$-test (for improper integral)}
-\sssc{$\frac{1}{x^p(\ln x)^q}$-test for series or $\frac{1}{x^p(\ln x)^q}$-series test}
-For any fixed $a\in\bbN$, $\sum_{n=a}^{\infty}\frac{1}{n^p(\ln n)^q}$ converges iff $p>1\lor(p=1\land q>1)$.
-\bpr
-For $p\le0$, it's obviously $\infty$. For $p>0$, $f(x)=\frac{1}{x^p(\ln x)^q}$ is monotone decreasing on $[b,\infty)$ for some $b>1$. By integral test and $\frac{1}{x^p(\ln x)^q}$-test for improper integral, the statement holds.
 \epr
 \sssc{Generalized p-test (for improper integral)}
 Define iterated logarithm $\operatorname{ilog}(a,x)$ as
@@ -4473,6 +4370,10 @@ which converges iff $q>1$ by p-test;
 which converges iff $q<1$ by p-test.
 \end{proof}
 By p-test and lemma,
+
+PLACEHOLDER: \Theta
+PLACEHOLDER: proof
+
 \epr
 \sssc{Generalized p-test for series or generalized p-series test}
 Define iterated logarithm $\operatorname{ilog}(a,x)$ as
@@ -4482,8 +4383,110 @@ For any fixed $a\in\bbN$,
 \[\sum_{n=a}^{\infty}\frac{1}{\qty(\prod_{i=0}^{k-1}\operatorname{ilog}(i,x))\qty(\operatorname{ilog}(k,x))^m}\]
 converges iff $m>1$.
 \bpr
+For any fixed $a\in\bbN$, $\sum_{n=a}^{\infty}\frac{1}{n^p(\ln n)^q}$ converges iff $p>1\lor(p=1\land q>1)$.
+\bpr
+For $p\le0$, it's obviously $\infty$. For $p>0$, $f(x)=\frac{1}{x^p(\ln x)^q}$ is monotone decreasing on $[b,\infty)$ for some $b>1$. By integral test and $\frac{1}{x^p(\ln x)^q}$-test for improper integral, the statement holds.
+\epr
 PLACEHOLDER
 \epr
+\sssc{Generalized Master Theorem}
+For a positive valued net $T(n)$ defined on $n=b^h$ for any $h\in\bbN_0$ as
+\[T(n)=aT\qty(\frac{n}{b})+f(n)\]
+for some constants $a>0$ and $b>1$, and non-negative-valued function $f(n)$,
+\ben
+\item If for some $c<\log_ba$,
+\[f(n)=O(n^c),\]
+then
+\[T(n)=\Theta(n^{\log_ba}).\]
+\item Define iterated logarithm $\operatorname{ilog}(a,x)$ as
+\[\operatorname{ilog}(0,x)=x,\]
+\[\operatorname{ilog}(n,x)=\ln(\operatorname{ilog}(n-1,x)),\quad n\in\bbN.\]
+\ben
+\item If for some positive integers $k$ and positive number $m$, 
+\[f(n)=\Theta(n^{\log_ba}\qty(\prod_{i=1}^{k-1}(\operatorname{ilog}(i,n))^{-1})\qty(\operatorname{ilog}(k,n))^{m-1}),\]
+then
+\[T(n)=\Theta(n^{\log_ba}(\operatorname{ilog}(k,n))^m).\]
+\item If for some positive integer $k$, 
+\[f(n)=o(n^{\log_ba}\prod_{i=1}^k(\operatorname{ilog}(i,n))^{-1}),\]
+then
+\[T(n)=\Theta(n^{\log_ba}\operatorname{ilog}(k-1,n)).\]
+\item If for some positive integers $k$ and some positive number $m$,
+\[f(n)=\Theta(n^{\log_ba}\qty(\prod_{i=1}^{k-1}(\operatorname{ilog}(i,n))^{-1})\qty(\operatorname{ilog}(k,n))^{-m-1}),\]
+then
+\[T(n)=\Theta(n^{\log_ba}).\]
+\een
+\item If $f(n)=\Omega(n^c)$ for some $c>\log_ba$, and the regularity condition that $\exists m\in\bbR,k<1$ such that $n\ge m$ implies
+\[af\qty(\frac{n}{b})\le kf(n)\]
+is satisfied, then
+\[T(n)=\Theta(f(n)).\]
+\een
+\bpr
+Let $s=\log_ba$, $n=b^h$, and $f(x)=x^sg(x)$. At level $j$, there are $a^j$ nodes, each of size $\frac{n}{b^j}$. Thus, the total non-recursive work at level $j$ is
+\[a^jf\qty(\frac{n}{b^j}).\]
+Hence
+\[\ba
+T(n)=&\sum_{j=0}^{h-1}a^jf\qty(\frac{n}{b^j})+n^sT(1)\\
+=&\sum_{j=0}^{h-1}b^{sj}f\qty(\frac{b^h}{b^j})+\Theta\qty(n^s)\\
+=&n^s\sum_{j=0}^{h-1}g\qty(b^{h-j})+\Theta\qty(n^s)
+=&n^s\sum_{r=1}^hg\qty(b^r)+\Theta\qty(n^s)
+\ea\]
+Case 1: If for some $c<\log_ba$,
+\[f(n)=O(n^c),\]
+then
+\[T(n)=\Theta(n^{\log_ba}).\]
+Case 2:
+\[\operatorname{ilog}(k,b^x)=\Theta(\operatorname{ilog}(k-1,x))\]
+\[f(n)=\Theta(n^{\log_ba}\qty(\prod_{i=1}^{k-1}(\operatorname{ilog}(i,n))^{-1})\qty(\operatorname{ilog}(k,n))^{m-1})\]
+\[g(b^r)=\Theta(\qty(\prod_{i=1}^{k-2}(\operatorname{ilog}(i,r))^{-1})\qty(\operatorname{ilog}(k-1,r))^{m-1})\]
+
+
+If $\int_a^{\infty}f(x)\dd{x}$ is convergent and $f(x)$ is monotone decreasing, for any $n\in\bbN_{\ge a}$,
+\[\int_n^{\infty}f(x)\dd{x}\le\sum_{k=n}^{\infty}f(k)\le f(n)+\int_n^{\infty}f(x)\dd{x},\]
+
+Sub-case 1 $m>0$: By generalized p-test for series
+\[\sum_{r=1}^hg\qty(b^r)\]
+is divergent. Thus,
+\[T(n)=\Theta(n^{\log_ba}(\operatorname{ilog}(k,n))^m).\]
+Sub-case 2 $m=0$:
+\[T(n)=\Theta(n^{\log_ba}\operatorname{ilog}(k-1,n)).\]
+Sub-case 3 $m=0$:
+\[T(n)=\Theta(n^{\log_ba}).\]
+
+
+Case 3: If $f(n)=\Omega(n^c)$ for some $c>\log_ba$, and the regularity condition that $\exists m\in\bbR,0<k<1$ such that $n\ge m$ implies
+\[af\qty(\frac{n}{b})\le kf(n)\]
+is satisfied, then
+\[af\qty(\frac{n}{b})\le kf(n)\]
+\[a^jf\qty(\frac{n}{b^j})\le a^{j-1}kf\qty(\frac{n}{b^{j-1}})\le k^jf(n)\]
+\[\ba
+T(n)=&\sum_{j=0}^{h-1}a^jf\qty(\frac{n}{b^j})+n^sT(1)\\
+=&f(n)+\sum_{j=1}^{h-1}O(k^jf(n))+\Theta\qty(n^s)
+\ea\]
+\[\sum_{j=1}^{\infty}k^jf(n)=\frac{f(n)}{1-k}\]
+\[T(n)=f(n)+O(f(n))+\Theta\qty(n^s)=\Theta(f(n))\]
+\epr
+Terms:
+\bit
+\item $h$ is called recursion level.
+\item $\log_ba$ is called critical exponent $c_{crit}$.
+\item $T(1)$ is called leaf cost.
+\item At each node, the first term is called recursive work, and the second term is called non-recursive work.
+\eit
+For original master theorem, the second case is
+\ben
+\item If for some positive integers $m$, 
+\[f(n)=\Theta(n^{\log_ba}(\ln n)^{m-1}),\]
+then
+\[T(n)=\Theta(n^{\log_ba}(\ln n)^m).\]
+\item If
+\[f(n)=o(n^{\log_ba}(\ln n)^{-1}),\]
+then
+\[T(n)=\Theta(n^{\log_ba}\ln(\ln n)).\]
+\item If for some positive integers $m$,
+\[f(n)=\Theta(n^{\log_ba}(\ln n)^{-m-1}),\]
+then
+\[T(n)=\Theta(n^{\log_ba}).\]
+\een
 \ssc{Improper integral theorems}
 \sssc{Convergence of improper integral of monotone increasing/decreasing integrand implies non-positive/non-negative integrand}
 If function $f\colon[a,\infty)\to\bbR$ for some $a\in\bbR$ is monotone increasing and such that $\int_a^{\infty}f(x)\dd{x}$ converges, then $f(x)$ is non-positive.
