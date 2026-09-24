@@ -2440,7 +2440,7 @@ then
 \[\operatorname{ilog}(0,x)=x,\]
 \[\operatorname{ilog}(n,x)=\ln(\operatorname{ilog}(n-1,x)),\quad n\in\bbN.\]
 \ben
-\item If for some positive integers $k,m$, 
+\item If for some positive integers $k$ and positive number $m$, 
 \[f(n)=\Theta(n^{\log_ba}\qty(\prod_{i=1}^{k-1}(\operatorname{ilog}(i,n))^{-1})\qty(\operatorname{ilog}(k,n))^{m-1}),\]
 then
 \[T(n)=\Theta(n^{\log_ba}(\operatorname{ilog}(k,n))^m).\]
@@ -2448,7 +2448,7 @@ then
 \[f(n)=o(n^{\log_ba}\prod_{i=1}^k(\operatorname{ilog}(i,n))^{-1}),\]
 then
 \[T(n)=\Theta(n^{\log_ba}\operatorname{ilog}(k-1,n)).\]
-\item If for some positive integers $k,m$,
+\item If for some positive integers $k$ and some positive number $m$,
 \[f(n)=\Theta(n^{\log_ba}\qty(\prod_{i=1}^{k-1}(\operatorname{ilog}(i,n))^{-1})\qty(\operatorname{ilog}(k,n))^{-m-1}),\]
 then
 \[T(n)=\Theta(n^{\log_ba}).\]
@@ -2459,24 +2459,33 @@ is satisfied, then
 \[T(n)=\Theta(f(n)).\]
 \een
 \bpr
-Let $r=\log_ba$.
-
-At level $j$, there are $a^j$ nodes, each of size $\frac{n}{b^j}$. Thus, the total non-recursive work at level $j$ is
+Let $s=\log_ba$, $n=b^h$, and $f(x)=x^sg(x)$. At level $j$, there are $a^j$ nodes, each of size $\frac{n}{b^j}$. Thus, the total non-recursive work at level $j$ is
 \[a^jf\qty(\frac{n}{b^j}).\]
 Hence
 \[\ba
-T(n)=&\sum_{j=0}^{h-1}a^jf\qty(\frar{n}{b^j})+n^rT(1)\|
-=&\sum_{j=0}^{h-1}b^{rj}f\qty(\frar{n}{b^j})+\Theta(n^r)
+T(n)=&\sum_{j=0}^{h-1}a^jf\qty(\frac{n}{b^j})+n^sT(1)\\
+=&\sum_{j=0}^{h-1}b^{sj}f\qty(\frac{b^h}{b^j})+\Theta\qty(n^s)\\
+=&n^s\sum_{j=0}^{h-1}g\qty(b^{h-j})+\Theta\qty(n^s)
+=&n^s\sum_{r=1}^hg\qty(b^r)+\Theta\qty(n^s)
 \ea\]
-Let
-\[f(x)=x^rg(x)\]
-\[T(n)=n^r\sum_{j=0}^{h-1}g\qty(\frar{n}{b^j})+\Theta(n^r)\]
 Case 1: If for some $c<\log_ba$,
 \[f(n)=O(n^c),\]
 then
 \[T(n)=\Theta(n^{\log_ba}).\]
 Case 2:
 \[\operatorname{ilog}(k,b^x)=\Theta(\operatorname{ilog}(k-1,x))\]
+\[f(n)=\Theta(n^{\log_ba}\qty(\prod_{i=1}^{k-1}(\operatorname{ilog}(i,n))^{-1})\qty(\operatorname{ilog}(k,n))^{m-1})\]
+\[g(b^r)=\Theta(\qty(\prod_{i=1}^{k-2}(\operatorname{ilog}(i,r))^{-1})\qty(\operatorname{ilog}(k-1,r))^{m-1})\]
+n^s\sum_{r=1}^hg\qty(b^r)+\Theta\qty(n^s)
+
+PLACEHOLDER: Use integral test
+Sub-case 1 $m>0$:
+\[T(n)=\Theta(n^{\log_ba}(\operatorname{ilog}(k,n))^m).\]
+Sub-case 2 $m=0$:
+\[T(n)=\Theta(n^{\log_ba}\operatorname{ilog}(k-1,n)).\]
+Sub-case 3 $m=0$:
+\[T(n)=\Theta(n^{\log_ba}).\]
+
 
 Case 3: If $f(n)=\Omega(n^c)$ for some $c>\log_ba$, and the regularity condition that $\exists m\in\bbR,0<k<1$ such that $n\ge m$ implies
 \[af\qty(\frac{n}{b})\le kf(n)\]
@@ -2484,11 +2493,11 @@ is satisfied, then
 \[af\qty(\frac{n}{b})\le kf(n)\]
 \[a^jf\qty(\frac{n}{b^j})\le a^{j-1}kf\qty(\frac{n}{b^{j-1}})\le k^jf(n)\]
 \[\ba
-T(n)=&\sum_{j=0}^{h-1}a^jf\qty(\frar{n}{b^j})+n^rT(1)\\
-=&f(n)+\sum_{j=1}^{h-1}O(k^jf(n))+\Theta(n^r)
+T(n)=&\sum_{j=0}^{h-1}a^jf\qty(\frac{n}{b^j})+n^sT(1)\\
+=&f(n)+\sum_{j=1}^{h-1}O(k^jf(n))+\Theta\qty(n^s)
 \ea\]
 \[\sum_{j=1}^{\infty}k^jf(n)=\frac{f(n)}{1-k}\]
-\[T(n)=f(n)+O(f(n))+\Theta(n^r)=\Theta(f(n))\]
+\[T(n)=f(n)+O(f(n))+\Theta\qty(n^s)=\Theta(f(n))\]
 \epr
 Terms:
 \bit
