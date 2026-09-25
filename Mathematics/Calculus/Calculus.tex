@@ -882,7 +882,7 @@ A cusp is a point $x$ on the graph of a real function $f$ such that:
 
 
 
-\sct{Total Variation}
+\section{Total Variation}
 \ssc{Of real functions}
 \subsubsection{Partition of an interval}
 A partition $P(x, n)$ of a compact interval $[a,b]$ is a finite sequence of numbers of the form
@@ -1141,7 +1141,7 @@ is finite by the equivalence relation of equality almost everywhere.
 
 
 
-\sct{Differential Geometry (微分幾何)}
+\section{Differential Geometry (微分幾何)}
 \ssc{Curve}
 \subsubsection{Definition}
 A (parameterized or parametric) (topological) curve in a topological space $X$ is (the image or graph of) a continuous map $\gamma(t)\colon I\to X$ for some interval $I$, where $t$ is called parameter. $\gamma(t)$ is also called the parametrization of the curve.
@@ -1649,7 +1649,7 @@ and Hausdorff measure element
 
 
 
-\sct{Non-Cartesian Coordinate Systems}
+\section{Non-Cartesian Coordinate Systems}
 \ssc{General}
 \sssc{Scale factors}
 For a coordinate system, the scale factor $h_a$ of each coordinate $a$ is defined as
@@ -3986,7 +3986,7 @@ where $\sigma$ is any permutation on $[1,n]\cap\bbN$, $f_0,g_0$ are real numbers
 
 
 
-\sct{Total Variation Theorems}
+\section{Total Variation Theorems}
 \ssc{Bounded}
 If real function is BV over an interval, it's bounded on it.
 \bpr
@@ -4035,7 +4035,7 @@ Obviously.
 
 
 
-\sct{Series and Improper Integral Theorems and Methods}
+\section{Series and Improper Integral Theorems and Methods}
 \ssc{Limit of real series theorems}
 \sssc{Integral test (for convergence) or Maclaurin–Cauchy test}
 Suppose $f(x)\colon[a,\infty)\to\bbR$ for some $a\in\bbN$ is monotone and $\lim_{x\to\infty}f(x)=0$. Then $\int_a^{\infty}f(x)\dd{x}$ is convergent iff $\sum_{k=a}^{\infty}f(k)$ is convergent. And,
@@ -4340,17 +4340,19 @@ For any fixed $a\in\bbN$, $\sum_{n=a}^{\infty}\frac{1}{n^p}$, called p-series, c
 For $p\le0$, $\sum_{n=a}^{\infty}\frac{1}{n^p}=\infty$. For $p>0$, $f(x)=\frac{1}{x^p}$ is monotone decreasing on $[1,\infty)$. By integral test and p-test, the statement holds.
 \epr
 \sssc{Generalized p-test (for improper integral)}
-Define iterated logarithm $\operatorname{ilog}(a,x)$ as
-\[\operatorname{ilog}(0,x)=x,\]
-\[\operatorname{ilog}(n,x)=\ln(\operatorname{ilog}(n-1,x)),\quad n\in\bbN.\]
+Define iterated logarithm $L_a(x)$ as
+\[L_{0}(x)=x,\]
+\[L_{n}(x)=\ln(L_{n-1}(x)),\quad n\in\bbN.\]
 For any fixed $a>1,k\in\bbN$,
-\[\int_a^{\infty}\frac{1}{\qty(\prod_{i=0}^{k-1}\operatorname{ilog}(i,x))\qty(\operatorname{ilog}(k,x))^m}\dd{x}\]
+\[\int_a^{\infty}\frac{1}{\qty(\prod_{i=0}^{k-1}L_{i}(x))\qty(L_{k}(x))^m}\dd{x}\]
 converges iff $m>1$.
 
 For any fixed $0<a<1,k\in\bbN$,
-\[\int_0^a\frac{1}{\qty(\prod_{i=0}^{k-1}\operatorname{ilog}(i,x))\qty(\operatorname{ilog}(k,x))^m}\dd{x}\]
+\[\int_0^a\frac{1}{\qty(\prod_{i=0}^{k-1}L_{i}(x))\qty(L_{k}(x))^m}\dd{x}\]
 converges iff $m<1$.
 \bpr
+
+
 Lemma:
 
 For any fixed $a>1$, $\int_a^{\infty}\frac{1}{x^p(\ln x)^q}\dd{x}$ converges iff $p>1\lor(p=1\land q>1)$.
@@ -4376,11 +4378,11 @@ PLACEHOLDER: proof
 
 \epr
 \sssc{Generalized p-test for series or generalized p-series test}
-Define iterated logarithm $\operatorname{ilog}(a,x)$ as
-\[\operatorname{ilog}(0,x)=x,\]
-\[\operatorname{ilog}(n,x)=\ln(\operatorname{ilog}(n-1,x)),\quad n\in\bbN.\]
+Define iterated logarithm $L_{a}(x)$ as
+\[L_{0}(x)=x,\]
+\[L_{n}(x)=\ln(L_{n-1}(x)),\quad n\in\bbN.\]
 For any fixed $a\in\bbN$,
-\[\sum_{n=a}^{\infty}\frac{1}{\qty(\prod_{i=0}^{k-1}\operatorname{ilog}(i,x))\qty(\operatorname{ilog}(k,x))^m}\]
+\[\sum_{n=a}^{\infty}\frac{1}{\qty(\prod_{i=0}^{k-1}L_{i}(x))\qty(L_{k}(x))^m}\]
 converges iff $m>1$.
 \bpr
 For any fixed $a\in\bbN$, $\sum_{n=a}^{\infty}\frac{1}{n^p(\ln n)^q}$ converges iff $p>1\lor(p=1\land q>1)$.
@@ -4398,20 +4400,20 @@ for some constants $a>0$ and $b>1$, and non-negative-valued function $f(n)$,
 \[f(n)=O(n^c),\]
 then
 \[T(n)=\Theta(n^{\log_ba}).\]
-\item Define iterated logarithm $\operatorname{ilog}(a,x)$ as
-\[\operatorname{ilog}(0,x)=x,\]
-\[\operatorname{ilog}(n,x)=\ln(\operatorname{ilog}(n-1,x)),\quad n\in\bbN.\]
+\item Define iterated logarithm $L_{a}(x)$ as
+\[L_{0}(x)=x,\]
+\[L_{n}(x)=\ln(L_{n-1}(x)),\quad n\in\bbN.\]
 \ben
 \item If for some positive integers $k$ and positive number $m$, 
-\[f(n)=\Theta(n^{\log_ba}\qty(\prod_{i=1}^{k-1}(\operatorname{ilog}(i,n))^{-1})\qty(\operatorname{ilog}(k,n))^{m-1}),\]
+\[f(n)=\Theta(n^{\log_ba}\qty(\prod_{i=1}^{k-1}(L_{i}(n))^{-1})\qty(L_{k}(n))^{m-1}),\]
 then
-\[T(n)=\Theta(n^{\log_ba}(\operatorname{ilog}(k,n))^m).\]
+\[T(n)=\Theta(n^{\log_ba}(L_{k}(n))^m).\]
 \item If for some positive integer $k$, 
-\[f(n)=o(n^{\log_ba}\prod_{i=1}^k(\operatorname{ilog}(i,n))^{-1}),\]
+\[f(n)=o(n^{\log_ba}\prod_{i=1}^k(L_{i}(n))^{-1}),\]
 then
-\[T(n)=\Theta(n^{\log_ba}\operatorname{ilog}(k-1,n)).\]
+\[T(n)=\Theta(n^{\log_ba}L_{k-1}(n)).\]
 \item If for some positive integers $k$ and some positive number $m$,
-\[f(n)=\Theta(n^{\log_ba}\qty(\prod_{i=1}^{k-1}(\operatorname{ilog}(i,n))^{-1})\qty(\operatorname{ilog}(k,n))^{-m-1}),\]
+\[f(n)=\Theta(n^{\log_ba}\qty(\prod_{i=1}^{k-1}(L_{i}(n))^{-1})\qty(L_{k}(n))^{-m-1}),\]
 then
 \[T(n)=\Theta(n^{\log_ba}).\]
 \een
@@ -4435,9 +4437,9 @@ Case 1: If for some $c<\log_ba$,
 then
 \[T(n)=\Theta(n^{\log_ba}).\]
 Case 2:
-\[\operatorname{ilog}(k,b^x)=\Theta(\operatorname{ilog}(k-1,x))\]
-\[f(n)=\Theta(n^{\log_ba}\qty(\prod_{i=1}^{k-1}(\operatorname{ilog}(i,n))^{-1})\qty(\operatorname{ilog}(k,n))^{m-1})\]
-\[g(b^r)=\Theta(\qty(\prod_{i=1}^{k-2}(\operatorname{ilog}(i,r))^{-1})\qty(\operatorname{ilog}(k-1,r))^{m-1})\]
+\[L_{k}(b^x)=\Theta(L_{k-1}(x))\]
+\[f(n)=\Theta(n^{\log_ba}\qty(\prod_{i=1}^{k-1}(L_{i}(n))^{-1})\qty(L_{k}(n))^{m-1})\]
+\[g(b^r)=\Theta(\qty(\prod_{i=1}^{k-2}(L_{i}(r))^{-1})\qty(L_{k-1}(r))^{m-1})\]
 
 
 If $\int_a^{\infty}f(x)\dd{x}$ is convergent and $f(x)$ is monotone decreasing, for any $n\in\bbN_{\ge a}$,
@@ -4446,9 +4448,9 @@ If $\int_a^{\infty}f(x)\dd{x}$ is convergent and $f(x)$ is monotone decreasing, 
 Sub-case 1 $m>0$: By generalized p-test for series
 \[\sum_{r=1}^hg\qty(b^r)\]
 is divergent. Thus,
-\[T(n)=\Theta(n^{\log_ba}(\operatorname{ilog}(k,n))^m).\]
+\[T(n)=\Theta(n^{\log_ba}(L_{k}(n))^m).\]
 Sub-case 2 $m=0$:
-\[T(n)=\Theta(n^{\log_ba}\operatorname{ilog}(k-1,n)).\]
+\[T(n)=\Theta(n^{\log_ba}L_{k-1}(n)).\]
 Sub-case 3 $m=0$:
 \[T(n)=\Theta(n^{\log_ba}).\]
 
@@ -5340,6 +5342,15 @@ Using the chain rule on the left:
 &=-\frac{1}{|x|\sqrt{1+x^2}}
 \ea\]
 \end{proof}
+\sssc{Iterated logarithmic function}
+Define iterated logarithm $L_{a}(x)$ as
+\[L_{0}(x)=x,\]
+\[L_{n}(x)=\ln(L_{n-1}(x)),\quad n\in\bbN.\]
+\[\dv{}{x}L_{k}(x)=\frac{1}{\prod_{i=0}^{k-1}L_{i}(x)}\]
+\bpr
+
+
+\epr
 \subsection{List of Integrals of Real Functions}
 \subsubsection{Power function}
 \[\int x^{-1}\dd{x}=\ln|x|+C.\]
