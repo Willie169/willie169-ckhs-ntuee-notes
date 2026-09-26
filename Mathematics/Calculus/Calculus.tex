@@ -1,5 +1,4 @@
-\documentclass[a4paper,12pt]{report}
-\setcounter{secnumdepth}{5}
+\documentclass[a4paper,12pt]{rearticle\setcounter{secnumdepth}{5}
 \setcounter{tocdepth}{3}
 \input{/usr/share/LaTeX-ToolKit/template.tex}
 \begin{document}
@@ -4319,144 +4318,144 @@ TODO
 \subsection{p-test and Master Theorem}
 \subsubsection{p-test (for improper integral)}
 For any fixed $a>0$, $\int_a^{\infty}\frac{1}{x^p}\dd{x}$ converges iff $p>1$, and if so,
-\[\int_a^{\infty}\frac{1}{x^p}\dd{x}=\frac{1}{(p-1)a^{p-1}};\]
+\[\int_a^{\infty}\frac{1}{x^p}\dd{x}=\frac{1}{\qty(p-1)a^{p-1}};\]
 $\int_0^a\frac{1}{x^p}\dd{x}$ converges iff $p<1$, and if so,
-\[\int_0^a\frac{1}{x^p}\dd{x}=-\frac{1}{(p-1)a^{p-1}}.\]
+\[\int_0^a\frac{1}{x^p}\dd{x}=-\frac{1}{\qty(p-1)a^{p-1}}.\]
 \begin{proof}
 \[\int\frac{1}{x^p}\dd{x}=\begin{cases}
--\frac{1}{(p-1)x^{p-1}},\quad&p\neq 1\\
-\ln(x),\quad&p=1
+-\frac{1}{\qty(p-1)x^{p-1}},\quad&p\neq 1\\
+\ln\qty(x),\quad&p=1
 \end{cases}\]
-\[\forall p<1\colon\nexists\lim_{x\to\infty}-\frac{1}{(p-1)x^{p-1}}\]
-\[\nexists\lim_{x\to\infty}\ln(x)\]
-\[\forall p>1\colon\lim_{x\to\infty}-\frac{1}{(p-1)x^{p-1}}=0\quad\int_a^{\infty}\frac{1}{x^p}\dd{x}=\frac{1}{(p-1)a^{p-1}}\]
-\[\forall p>1\colon\nexists\lim_{x\to 0^+}-\frac{1}{(p-1)x^{p-1}}\]
-\[\nexists\lim_{x\to 0^+}\ln(x)\]
-\[\forall p<1\colon\lim_{x\to 0^+}-\frac{1}{(p-1)x^{p-1}}=0\quad\int_0^a\frac{1}{x^p}\dd{x}=-\frac{1}{(p-1)a^{p-1}}\]
+\[\forall p<1\colon\nexists\lim_{x\to\infty}-\frac{1}{\qty(p-1)x^{p-1}}\]
+\[\nexists\lim_{x\to\infty}\ln\qty(x)\]
+\[\forall p>1\colon\lim_{x\to\infty}-\frac{1}{\qty(p-1)x^{p-1}}=0\quad\int_a^{\infty}\frac{1}{x^p}\dd{x}=\frac{1}{\qty(p-1)a^{p-1}}\]
+\[\forall p>1\colon\nexists\lim_{x\to 0^+}-\frac{1}{\qty(p-1)x^{p-1}}\]
+\[\nexists\lim_{x\to 0^+}\ln\qty(x)\]
+\[\forall p<1\colon\lim_{x\to 0^+}-\frac{1}{\qty(p-1)x^{p-1}}=0\quad\int_0^a\frac{1}{x^p}\dd{x}=-\frac{1}{\qty(p-1)a^{p-1}}\]
 \end{proof}
 \subsubsection{p-test for series or p-series test}
 For any fixed $a\in\bbN$, $\sum_{n=a}^{\infty}\frac{1}{n^p}$, called p-series, converges iff $p>1$.
 \bpr
-For $p\le0$, $\sum_{n=a}^{\infty}\frac{1}{n^p}=\infty$. For $p>0$, $f(x)=\frac{1}{x^p}$ is monotone decreasing on $[1,\infty)$. By integral test and p-test, the statement holds.
+For $p\le0$, $\sum_{n=a}^{\infty}\frac{1}{n^p}=\infty$. For $p>0$, $f\qty(x)=\frac{1}{x^p}$ is monotone decreasing on $[1,\infty)$. By integral test and p-test, the statement holds.
 \epr
 \subsubsection{Generalized p-test (for improper integral)}
-Define iterated logarithmic function $L_n(x)$ as
-\[L_{0}(x)=x,\quad x\in\bbR_{>0}\]
-\[L_{n}(x)=\ln(L_{n-1}(x)),\quad n\in\bbN,x\in\bbR_{>0}.\]
+Define iterated logarithmic function $L_n\qty(x)$ as
+\[L_{0}\qty(x)=x,\quad x\in\bbR_{>0}\]
+\[L_{n}\qty(x)=\ln\qty(L_{n-1}\qty(x)),\quad n\in\bbN,x\in\bbR_{>0}.\]
 For any fixed $a>1,k\in\bbN$,
-\[\int_a^{\infty}\frac{1}{\qty(\prod_{i=0}^{k-1}L_{i}(x))\qty(L_{k}(x))^m}\dd{x}\]
+\[\int_a^{\infty}\frac{1}{\qty(\prod_{i=0}^{k-1}L_{i}\qty(x))\qty(L_{k}\qty(x))^m}\dd{x}\]
 converges iff $m>1$.
 
 For any fixed $0<a<1,k\in\bbN$,
-\[\int_0^a\frac{1}{\qty(\prod_{i=0}^{k-1}L_{i}(x))\qty(L_{k}(x))^m}\dd{x}\]
+\[\int_0^a\frac{1}{\qty(\prod_{i=0}^{k-1}L_{i}\qty(x))\qty(L_{k}\qty(x))^m}\dd{x}\]
 converges iff $m<1$.
 \bpr
 Let
-\[u=L_k(x)\]
-\[\dd{u}=\frac{\dd{x}}{\prod_{i=0}^{k-1}L_{i}(x)}\]
-\[\int\frac{1}{\qty(\prod_{i=0}^{k-1}L_{i}(x))\qty(L_{k}(x))^m}\dd{x}=\int\frac{1}{u^m}\dd{u}\]
+\[u=L_k\qty(x)\]
+\[\dd{u}=\frac{\dd{x}}{\prod_{i=0}^{k-1}L_{i}\qty(x)}\]
+\[\int\frac{1}{\qty(\prod_{i=0}^{k-1}L_{i}\qty(x))\qty(L_{k}\qty(x))^m}\dd{x}=\int\frac{1}{u^m}\dd{u}\]
 By p-test, the statement holds.
 \epr
 \subsubsection{Generalized p-test for series or generalized p-series test}
-Define iterated logarithmic function $L_n(x)$ as
-\[L_{0}(x)=x,\quad x\in\bbR_{>0}\]
-\[L_{n}(x)=\ln(L_{n-1}(x)),\quad n\in\bbN,x\in\bbR_{>0}.\]
+Define iterated logarithmic function $L_n\qty(x)$ as
+\[L_{0}\qty(x)=x,\quad x\in\bbR_{>0}\]
+\[L_{n}\qty(x)=\ln\qty(L_{n-1}\qty(x)),\quad n\in\bbN,x\in\bbR_{>0}.\]
 For any fixed $a\in\bbN$,
-\[\sum_{n=a}^{\infty}\frac{1}{\qty(\prod_{i=0}^{k-1}L_{i}(x))\qty(L_{k}(x))^m}\]
+\[\sum_{n=a}^{\infty}\frac{1}{\qty(\prod_{i=0}^{k-1}L_{i}\qty(x))\qty(L_{k}\qty(x))^m}\]
 converges iff $m>1$.
 \bpr
 By integral test and generalized p-test for improper integral, the statement holds.
 \epr
 \subsubsection{Generalized Master Theorem}
-For a positive valued net $T(n)$ defined on $n=b^h$ for any $h\in\bbN_0$ as
-\[T(n)=aT\qty(\frac{n}{b})+f(n)\]
-for some constants $a>0$ and $b>1$, and non-negative-valued function $f(n)$,
+For a positive valued net $T\qty(n)$ defined on $n=b^h$ for any $h\in\bbN_0$ as
+\[T\qty(n)=aT\qty(\frac{n}{b})+f\qty(n)\]
+for some constants $a>0$ and $b>1$, and non-negative-valued function $f\qty(n)$,
 \ben
 \item If for some $c<\log_ba$,
-\[f(n)=O(n^c),\]
+\[f\qty(n)=O\qty(n^c),\]
 then
-\[T(n)=\Theta(n^{\log_ba}).\]
-\item Define iterated logarithmic function $L_n(x)$ as
-\[L_{0}(x)=x,\quad x\in\bbR_{>0}\]
-\[L_{n}(x)=\ln(L_{n-1}(x)),\quad n\in\bbN,x\in\bbR_{>0}.\]
+\[T\qty(n)=\Theta\qty(n^{\log_ba}).\]
+\item Define iterated logarithmic function $L_n\qty(x)$ as
+\[L_{0}\qty(x)=x,\quad x\in\bbR_{>0}\]
+\[L_{n}\qty(x)=\ln\qty(L_{n-1}\qty(x)),\quad n\in\bbN,x\in\bbR_{>0}.\]
 \ben
 \item If for some positive integers $k$ and positive number $m$, 
-\[f(n)=\Theta(n^{\log_ba}\qty(\prod_{i=1}^{k-1}(L_{i}(n))^{-1})\qty(L_{k}(n))^{m-1}),\]
+\[f\qty(n)=\Theta\qty(n^{\log_ba}\qty(\prod_{i=1}^{k-1}\qty(L_{i}\qty(n))^{-1})\qty(L_{k}\qty(n))^{m-1}),\]
 then
-\[T(n)=\Theta(n^{\log_ba}(L_{k}(n))^m).\]
+\[T\qty(n)=\Theta\qty(n^{\log_ba}\qty(L_{k}\qty(n))^m).\]
 \item If for some positive integer $k$, 
-\[f(n)=o(n^{\log_ba}\prod_{i=1}^k(L_{i}(n))^{-1}),\]
+\[f\qty(n)=o\qty(n^{\log_ba}\prod_{i=1}^k\qty(L_{i}\qty(n))^{-1}),\]
 then
-\[T(n)=\Theta(n^{\log_ba}L_{k-1}(n)).\]
+\[T\qty(n)=\Theta\qty(n^{\log_ba}L_{k-1}\qty(n)).\]
 \item If for some positive integers $k$ and some positive number $m$,
-\[f(n)=\Theta(n^{\log_ba}\qty(\prod_{i=1}^{k-1}(L_{i}(n))^{-1})\qty(L_{k}(n))^{-m-1}),\]
+\[f\qty(n)=\Theta\qty(n^{\log_ba}\qty(\prod_{i=1}^{k-1}\qty(L_{i}\qty(n))^{-1})\qty(L_{k}\qty(n))^{-m-1}),\]
 then
-\[T(n)=\Theta(n^{\log_ba}).\]
+\[T\qty(n)=\Theta\qty(n^{\log_ba}).\]
 \een
-\item If $f(n)=\Omega(n^c)$ for some $c>\log_ba$, and the regularity condition that $\exists m\in\bbR,k<1$ such that $n\ge m$ implies
-\[af\qty(\frac{n}{b})\le kf(n)\]
+\item If $f\qty(n)=\Omega\qty(n^c)$ for some $c>\log_ba$, and the regularity condition that $\exists m\in\bbR,k<1$ such that $n\ge m$ implies
+\[af\qty(\frac{n}{b})\le kf\qty(n)\]
 is satisfied, then
-\[T(n)=\Theta(f(n)).\]
+\[T\qty(n)=\Theta\qty(f\qty(n)).\]
 \een
 \bpr
-Let $s=\log_ba$, $n=b^h$, and $f(x)=x^sg(x)$. At level $j$, there are $a^j$ nodes, each of size $\frac{n}{b^j}$. Thus, the total non-recursive work at level $j$ is
+Let $s=\log_ba$, $n=b^h$, and $f\qty(x)=x^sg\qty(x)$. At level $j$, there are $a^j$ nodes, each of size $\frac{n}{b^j}$. Thus, the total non-recursive work at level $j$ is
 \[a^jf\qty(\frac{n}{b^j}).\]
 Hence
 \[\ba
-T(n)=&\sum_{j=0}^{h-1}a^jf\qty(\frac{n}{b^j})+n^sT(1)\\
+T\qty(n)=&\sum_{j=0}^{h-1}a^jf\qty(\frac{n}{b^j})+n^sT\qty(1)\\
 =&\sum_{j=0}^{h-1}b^{sj}f\qty(\frac{b^h}{b^j})+\Theta\qty(n^s)\\
 =&n^s\sum_{j=0}^{h-1}g\qty(b^{h-j})+\Theta\qty(n^s)
 =&n^s\sum_{r=1}^hg\qty(b^r)+\Theta\qty(n^s)
 \ea\]
 Case 1: If for some $c<\log_ba$,
-\[f(n)=O(n^c),\]
+\[f\qty(n)=O\qty(n^c),\]
 then
-\[T(n)=\Theta(n^{\log_ba}).\]
+\[T\qty(n)=\Theta\qty(n^{\log_ba}).\]
 Case 2:
-\[L_{k}(b^x)=\Theta(L_{k-1}(x))\]
-\[f(n)=\Theta(n^{\log_ba}\qty(\prod_{i=1}^{k-1}(L_{i}(n))^{-1})\qty(L_{k}(n))^{m-1})\]
-\[g(b^r)=\Theta(\qty(\prod_{i=1}^{k-2}(L_{i}(r))^{-1})\qty(L_{k-1}(r))^{m-1})\]
+\[L_{k}\qty(b^x)=\Theta\qty(L_{k-1}\qty(x))\]
+\[f\qty(n)=\Theta\qty(n^{\log_ba}\qty(\prod_{i=1}^{k-1}\qty(L_{i}\qty(n))^{-1})\qty(L_{k}\qty(n))^{m-1})\]
+\[g\qty(b^r)=\Theta\qty(\qty(\prod_{i=1}^{k-2}\qty(L_{i}\qty(r))^{-1})\qty(L_{k-1}\qty(r))^{m-1})\]
 By generalized p-test for series:
 
 Sub-case 1 $m>0$:
-\[T(n)=\Theta(n^{\log_ba}(L_{k}(n))^m).\]
+\[T\qty(n)=\Theta\qty(n^{\log_ba}\qty(L_{k}\qty(n))^m).\]
 Sub-case 2 $m=0$:
-\[T(n)=\Theta(n^{\log_ba}L_{k-1}(n)).\]
+\[T\qty(n)=\Theta\qty(n^{\log_ba}L_{k-1}\qty(n)).\]
 Sub-case 3 $m=0$:
-\[T(n)=\Theta(n^{\log_ba}).\]
-Case 3: If $f(n)=\Omega(n^c)$ for some $c>\log_ba$, and the regularity condition that $\exists m\in\bbR,0<k<1$ such that $n\ge m$ implies
-\[af\qty(\frac{n}{b})\le kf(n)\]
+\[T\qty(n)=\Theta\qty(n^{\log_ba}).\]
+Case 3: If $f\qty(n)=\Omega\qty(n^c)$ for some $c>\log_ba$, and the regularity condition that $\exists m\in\bbR,0<k<1$ such that $n\ge m$ implies
+\[af\qty(\frac{n}{b})\le kf\qty(n)\]
 is satisfied, then
-\[af\qty(\frac{n}{b})\le kf(n)\]
-\[a^jf\qty(\frac{n}{b^j})\le a^{j-1}kf\qty(\frac{n}{b^{j-1}})\le k^jf(n)\]
+\[af\qty(\frac{n}{b})\le kf\qty(n)\]
+\[a^jf\qty(\frac{n}{b^j})\le a^{j-1}kf\qty(\frac{n}{b^{j-1}})\le k^jf\qty(n)\]
 \[\ba
-T(n)=&\sum_{j=0}^{h-1}a^jf\qty(\frac{n}{b^j})+n^sT(1)\\
-=&f(n)+\sum_{j=1}^{h-1}O(k^jf(n))+\Theta\qty(n^s)
+T\qty(n)=&\sum_{j=0}^{h-1}a^jf\qty(\frac{n}{b^j})+n^sT\qty(1)\\
+=&f\qty(n)+\sum_{j=1}^{h-1}O\qty(k^jf\qty(n))+\Theta\qty(n^s)
 \ea\]
-\[\sum_{j=1}^{\infty}k^jf(n)=\frac{f(n)}{1-k}\]
-\[T(n)=f(n)+O(f(n))+\Theta\qty(n^s)=\Theta(f(n))\]
+\[\sum_{j=1}^{\infty}k^jf\qty(n)=\frac{f\qty(n)}{1-k}\]
+\[T\qty(n)=f\qty(n)+O\qty(f\qty(n))+\Theta\qty(n^s)=\Theta\qty(f\qty(n))\]
 \epr
 Terms:
 \bit
 \item $h$ is called recursion level.
 \item $\log_ba$ is called critical exponent $c_{crit}$.
-\item $T(1)$ is called leaf cost.
+\item $T\qty(1)$ is called leaf cost.
 \item At each node, the first term is called recursive work, and the second term is called non-recursive work.
 \eit
 For original master theorem, the second case is
 \ben
 \item If for some positive integers $m$, 
-\[f(n)=\Theta(n^{\log_ba}(\ln n)^{m-1}),\]
+\[f\qty(n)=\Theta\qty(n^{\log_ba}\qty(\ln n)^{m-1}),\]
 then
-\[T(n)=\Theta(n^{\log_ba}(\ln n)^m).\]
+\[T\qty(n)=\Theta\qty(n^{\log_ba}\qty(\ln n)^m).\]
 \item If
-\[f(n)=o(n^{\log_ba}(\ln n)^{-1}),\]
+\[f\qty(n)=o\qty(n^{\log_ba}\qty(\ln n)^{-1}),\]
 then
-\[T(n)=\Theta(n^{\log_ba}\ln(\ln n)).\]
+\[T\qty(n)=\Theta\qty(n^{\log_ba}\ln\qty(\ln n)).\]
 \item If for some positive integers $m$,
-\[f(n)=\Theta(n^{\log_ba}(\ln n)^{-m-1}),\]
+\[f\qty(n)=\Theta\qty(n^{\log_ba}\qty(\ln n)^{-m-1}),\]
 then
-\[T(n)=\Theta(n^{\log_ba}).\]
+\[T\qty(n)=\Theta\qty(n^{\log_ba}).\]
 \een
 \subsection{Improper integral theorems}
 \subsubsection{Convergence of improper integral of monotone increasing/decreasing integrand implies non-positive/non-negative integrand}
