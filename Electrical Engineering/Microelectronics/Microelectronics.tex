@@ -31,6 +31,8 @@ A capacitor connected in series between stages to pass AC signal while blocking 
 Their relation is
 \[i_C(t)=i_c(t)+I_C\]
 \[i_c(t)=I_c\sin(\omega t+\varphi)\]
+\sssc{differential and common-mode signal}
+For a component with two input signals, the differential signal (AC signal) $v_{ld}$ is the difference between the two input signals, and the common-mode signal (DC signal) $v_{lcm}$ is the algebraic average of the two input signals.
 \ssc{Amplifier (amp)}
 \sssc{Amplifier}
 An electronic device which amplifies an electrical signal by a scale called amplifier gain $A$ and optionally convert voltage signal to current signal or vice versa.
@@ -101,7 +103,10 @@ If the energy enters through port $i$ and emerges from port $j$, the S parameter
 An unilateral amplifier is an amplifier in which the signal transfer is effectively one-way, that is, the output signal is only dependent on the input signal but not what is connected to the output terminal. That is for each output port $j$ and each input port $i$, $S_{ij}=0$.
 \sssc{Power supply}
 To amplify signal, power supplies are needed, but often omitted in the diagram.
-
+\bit
+\item $V_{CC+}$ or $V_{CC}$: positive supply voltage, denoted on the $+$ side of an op-amp or omitted;
+\item $V_{CC-}$ or $-V_{EE}$: negative supply voltage, denoted on the $-$ side of an op-amp or omitted.
+\eit
 The DC power delivered is the sum of power from the positive and negative power supply terminals $V_{CC}$ and $V_{EE}$
 \[P_{DC}=V_{CC}I_{CC}+V_{EE}I_{EE}\]
 Suppose input and output signals have power $P_I$ and $P_L$.
@@ -117,17 +122,23 @@ An op amp has five terminals:
 \item $v_-$: inverting input voltage of the terminal at the $-$ sign;
 \item $v_o$: output voltage of the terminal at the opposite side of inputs;
 \item $V_{CC+}$ or $V_{CC}$: positive supply voltage, denoted on the $+$ side of an op-amp or omitted;
-\item $V_{CC-}$ or $V_{EE}$: negative supply voltage, denoted on the $-$ side of an op-amp or omitted.
+\item $V_{CC-}$ or $-V_{EE}$: negative supply voltage, denoted on the $-$ side of an op-amp or omitted.
 \eit
 \[v_o=A(v_+-v_--v_{os}),\]
-where $A$ is open-loop gain, and $v_{os}$ is input offset voltage.
+where $A$ is open-circuit gain or open-loop gain, and $v_{os}$ is input offset voltage.
+\[v_{ld}=v_+-v_-\]
+\[v_{lcm}=\frac{v_++v_-}{2}\]
 \sssc{Ideal op amp}
 \bit
-\item Infinite open-loop gain, infinite bandwidth, and zero output impedance: $A=\infty$ and is independent of frequency and output voltage.
-\item Zero input offset voltage: $v_{os}=0$.
-\item No current flow into either of the input terminals.
+\item Infinite input impedance: No signal current flowing into $v_+$ and $v_-$.
+\item Infinite open-circuit gain.
+\item Infinite bandwidth: Open-circuit gain remains constant in all frequencies.
+\item Zero output impedance: The amplifier is unilateral.
+\item Zero input offset voltage: $v_{os}=0$, which implies zero common-mode gain, i.e., infinite common-mode rejection.
 \eit
 This is a linear element with inputs $v_+$ and $v_-$ and output $v_o$.
+\sssc{Feedback configuration}
+To have stable signal, op amp in a circuit is connected with a negative feedback configuration, which consists of the op amp and a connection from $v_o$ to either of the input terminals with an impedance on it, called feedback connection. When the feedback connection connects to $v_-$, it is called inverting configuration. When the feedback connection connects to $v_+$, it is called non-inverting configuration.
 \sssc{General amplifier with inverting configuration}
 A general amplifier with inverting configuration consists of an op amp where input voltage $v_i$ is connected to $v_-$ through an input impedance $Z_i$, $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through a feedback impedance $Z_f$.
 \[I_i=\frac{V_i}{Z_i}=I_f=\frac{-V_o}{Z_f},\]
@@ -146,17 +157,17 @@ A noninverting amplifier consist of an op amp where input voltage $v_i$ is conne
 \[v_i=v_o\frac{R_g}{R_f+R_g},\]
 \[v_o=\qty(1+\frac{R_f}{R_g})v_i.\]
 \sssc{Unity gain amplifier, unity gain buffer, or voltage follower}
-A unity gain amplifier consist of an op amp where input voltage $v_i$ is connected to $v_+$ and $v_o$ is fed back to $v_-$.
+A unity gain amplifier consist of an op amp where input voltage $v_i$ is connected to $v_+$ and $v_o$ is fed back to $v_-$.\sum{i=1}^n\log i
 \[v_o=v_i.\]
 \sssc{Summing amplifier}
-A summing amplifier consists of an op amp, input voltages $v_1,v_2,\ldots,v_n$, $n$ input resistors $R_1,R_2,\ldots,R_n$, and a feedback resistor $R_f$, where for any $k\in\bbN\land k\leq n$, $v_k$ is connected to $v_-$ through $R_k$, $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through $R_f$.
+A summing amplifier consists of an op amp, input voltages $v_1,v_2,\ldots,v_n$, $n$ input resistors $R_1,R_2,\ldots,R_n$, and a feedback resistor $R_f$, where for any $k\in\bbN\land k\leq n$, $v_k$ is connected to $v_-$ through $R_k$, $v_+$ is connec\sum{i=1}^n\log ited to ground, and $v_o$ is fed back to $v_-$ through $R_f$.
 \[i_k=\frac{v_k}{R_k},\]
 \[\sum_{k=1}^ni_k=i_f=\frac{-v_o}{R_f},\]
 \[v_o=-R_f\sum_{k=1}^n\frac{v_k}{R_k}.\]
 When $R_k=R$ for all $k\in\bbN\land k\leq n$:
 \[v_o=-\frac{R_f}{R}\sum_{k=1}^nv_k.\]
 \sssc{Difference amplifier or differential amplifier}
-A difference amplifier consists of a minuend $v_1$, a subtrahend $v_2$, and four resistors $R_1,R_2,R_3,R_4$ satisfying the condition
+A difference amplifier consist\sum{i=1}^n\log is of a minuend $v_1$, a subtrahend $v_2$, and four resistors $R_1,R_2,R_3,R_4$ satisfying the condition
 \[\frac{R_1}{R_2}=\frac{R_3}{R_4},\]
 where $v_1,v_2$ are connected to $v_-,v_+$ through $R_1,R_2$ respectively, $v_o$ is fed back to $v_-$ through $R_3$, and $v_+$ is connected to ground through $R_4$.
 \[v_+=v_2\frac{R_4}{R_2+R_4},\]
