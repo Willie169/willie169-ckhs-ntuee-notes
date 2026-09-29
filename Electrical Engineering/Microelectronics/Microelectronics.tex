@@ -17,8 +17,6 @@ A signal source is typically represented in the Thévenin form, a voltage source
 A transducer is a device that convert a signal to a voltage or current signal or vice versa.
 \sssc{Signal processing}
 Signal processing includes analog signal processing (ASP), analog-to-digital converter (ADC), digital signal processor (DSP), digital-to-analog converter (DAC), amplifier, etc.
-
-
 \sssc{Symbol convention}
 \bit
 \item Lowercase character with uppercase subscript means total signal, e.g. $i_C(t)$.
@@ -29,13 +27,19 @@ Signal processing includes analog signal processing (ASP), analog-to-digital con
 Their relation is
 \[i_C(t)=i_c(t)+I_C\]
 \[i_c(t)=I_c\sin(\omega t+\varphi)\]
-
-\ssc{Amplifier}
+\ssc{Amplifier (amp)}
 \sssc{Amplifier}
 An electronic device which amplifies an electrical signal by a scale called amplifier gain $A$ and optionally convert voltage signal to current signal or vice versa.
-
+\sssc{Diagram}
+\begin{center}
+\begin{circuitikz}
+\draw (0,0) node[op amp] (op amp) {};
+\end{circuitikz}
+\end{center}
+\sssc{Two-port model}
+An amplifier can be modeled as a two port model, where an one input port and one output port is related by the amplifier, which acts as a controlled source controlled by the input port voltage or current which enforces voltage or current on the output port.
 \sssc{Circuit model of voltage amplifier}
-A voltage amplifier draws current from a source $v_s$ with internal resistance $R_s$ with input resistance $R_i$ and voltage $v_{in}$ across it and supplies $v_c=\mu v_{in}$ to a load network with output resistance $R_o$ and load $R_L$.
+A voltage amplifier draws current from a source $v_s$ with internal resistance $R_s$ with input resistance $R_i$ and voltage $v_{in}$ across it and supplies $v_c=\mu v_{in}$ to a load network with output resistance $R_o$ and load $R_L$, where $\mu$, also denoted $A_{vo}$, is open-circuit voltage gain factor.
 \[\frac{v_{in}}{v_s}=\frac{R_i}{R_s+R_i}\]
 \[\frac{v_c}{v_{in}}=\mu\]
 \[\frac{v_{out}}{v_c}=\frac{R_L}{R_o+R_L}\]
@@ -46,7 +50,7 @@ $\abs{A}<\abs{\mu}$ due to loading effects.
 A good amplifier requires small loading effect:
 \[R_i\gg R_s,\quad R_o\ll R_L,\quad A_v\approx\mu.\]
 \sssc{Circuit model of current amplifier}
-A current amplifier draws current from a current source $i_s$ with internal resistance $R_s$ in parallel with input resistance $R_i$ and current $i_{in}$ through it and supplies $i_c=\beta i_{in}$ by CCCS to a load network with output resistance $R_o$ in parallel and load $R_L$.
+A current amplifier draws current from a current source $i_s$ with internal resistance $R_s$ in parallel with input resistance $R_i$ and current $i_{in}$ through it and supplies $i_c=\beta i_{in}$ by CCCS to a load network with output resistance $R_o$ in parallel and load $R_L$, where $\beta$, also denoted $A_{cs}$, is short-circuit current gain factor.
 \[\frac{i_{in}}{i_s}=\frac{R_s}{R_s+R_i}\]
 \[\frac{i_c}{i_{in}}=\beta\]
 \[\frac{i_{out}}{i_c}=\frac{R_o}{R_o+R_L}\]
@@ -57,7 +61,7 @@ $\abs{A}<\abs{\beta}$ due to loading effects.
 A good amplifier requires small loading effect:
 \[R_i\ll R_s,\quad R_o\gg R_L,\quad A_c\approx\beta.\]
 \sssc{Circuit model of transconductance amplifier}
-A transconductance amplifier draws current from a voltage source $v_s$ with internal resistance $R_s$ in series with input resistance $R_i$ and current $i_{in}$ through it and supplies $i_c=gv_{in}$ by VCCS to a load network with output resistance $R_o$ in parallel and load $R_L$.
+A transconductance amplifier draws current from a voltage source $v_s$ with internal resistance $R_s$ in series with input resistance $R_i$ and current $i_{in}$ through it and supplies $i_c=gv_{in}$ by VCCS to a load network with output resistance $R_o$ in parallel and load $R_L$, where $\mu$ is open-circuit transconductance factor.
 \[\frac{v_{in}}{v_s}=\frac{R_i}{R_s+R_i}\]
 \[\frac{i_c}{v_{in}}=g\]
 \[\frac{i_{out}}{i_c}=\frac{R_o}{R_o+R_L}\]
@@ -68,7 +72,7 @@ $\abs{A}<\abs{g}$ due to loading effects.
 A good amplifier requires small loading effect:
 \[R_i\gg R_s,\quad R_o\gg R_L,\quad A_g\approx g.\]
 \sssc{Circuit model of transresistance amplifier}
-A transresistance amplifier draws current from a current source $i_s$ with internal resistance $R_s$ in parallel with input resistance $R_i$ and current $i_{in}$ through it and supplies $v_c=ri_{in}$ by CCVS to a load network with output resistance $R_o$ in series and load $R_L$.
+A transresistance amplifier draws current from a current source $i_s$ with internal resistance $R_s$ in parallel with input resistance $R_i$ and current $i_{in}$ through it and supplies $v_c=ri_{in}$ by CCVS to a load network with output resistance $R_o$ in series and load $R_L$, where $r$ is short-circuit transresistance factor.
 \[\frac{i_{in}}{i_s}=\frac{R_s}{R_s+R_i}\]
 \[\frac{v_c}{i_{in}}=r\]
 \[\frac{v_{out}}{v_c}=\frac{R_L}{R_o+R_L}\]
@@ -87,8 +91,20 @@ A current gain $A_c$ in dB is defined as
 \[G_c=20\log_{10}(A_c).\]
 \sssc{Amplifiers in cascade}
 Output of an amplifier as input of another amplifier.
+\sssc{Saturation}
+The linear characteristic only remains within a range. A positive and negative saturation levels can be observed.
+\sssc{S parameter}
+If the energy enters through port $i$ and emerges from port $j$, the S parameter is named $S_{ji}$.
+\sssc{Unilateral amplifier}
+An unilateral amplifier is an amplifier in which the signal transfer is effectively one-way, that is, the output signal is only dependent on the input signal but not what is connected to the output terminal. That is for each output port $j$ and each input port $i$, $S_{ij}=0$.
+\sssc{Power supply}
+To amplify signal, power supplies are needed, but often omitted in the diagram.
 
-
+The DC power delivered is the sum of power from the positive and negative power supply terminals $V_{CC}$ and $V_{EE}$
+\[P_{DC}=V_{CC}I_{CC}+V_{EE}I_{EE}\]
+Suppose input and output signals have power $P_I$ and $P_L$.
+\[P_{DC}+P_I=P_L+P_{\tx{dissipated}}\]
+where $P_{\tx{dissipated}}$ is the power dissipated.
 \ssc{Operational Amplifier (op amp or op-amp)}
 \sssc{Definition}
 An op amp has five terminals:
@@ -96,17 +112,11 @@ An op amp has five terminals:
 \item $v_+$: non-inverting input voltage of the terminal at the $+$ sign;
 \item $v_-$: inverting input voltage of the terminal at the $-$ sign;
 \item $v_o$: output voltage of the terminal at the opposite side of inputs;
-\item $v_{CC+}$: positive supply voltage, denoted on the $+$ side of an op-amp or omitted;
-\item $v_{CC-}$: negative supply voltage, denoted on the $-$ side of an op-amp or omitted.
+\item $V_{CC+}$ or $V_{CC}$: positive supply voltage, denoted on the $+$ side of an op-amp or omitted;
+\item $V_{CC-}$ or $V_{EE}$: negative supply voltage, denoted on the $-$ side of an op-amp or omitted.
 \eit
 \[v_o=A(v_+-v_--v_{os}),\]
 where $A$ is open-loop gain, and $v_{os}$ is input offset voltage.
-\sssc{Diagram}
-\begin{center}
-\begin{circuitikz}
-\draw (0,0) node[op amp] (op amp) {};
-\end{circuitikz}
-\end{center}
 \sssc{Ideal op amp}
 \bit
 \item Infinite open-loop gain, infinite bandwidth, and zero output impedance: $A=\infty$ and is independent of frequency and output voltage.
