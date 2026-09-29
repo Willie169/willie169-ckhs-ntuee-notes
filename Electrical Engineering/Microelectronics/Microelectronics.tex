@@ -81,4 +81,90 @@ A current gain $A_c$ in dB is defined as
 \[G_c=20\log_{10}(A_c).\]
 \sssc{Amplifiers in cascade}
 Output of an amplifier as input of another amplifier.
+
+
+\ssc{Operational Amplifier (op amp or op-amp)}
+\sssc{Definition}
+An op amp has five terminals:
+\bit
+\item $v_+$: non-inverting input voltage of the terminal at the $+$ sign;
+\item $v_-$: inverting input voltage of the terminal at the $-$ sign;
+\item $v_o$: output voltage of the terminal at the opposite side of inputs;
+\item $v_{CC+}$: positive supply voltage, denoted on the $+$ side of an op-amp or omitted;
+\item $v_{CC-}$: negative supply voltage, denoted on the $-$ side of an op-amp or omitted.
+\eit
+\[v_o=A(v_+-v_--v_{os}),\]
+where $A$ is open-loop gain, and $v_{os}$ is input offset voltage.
+\sssc{Diagram}
+\begin{center}
+\begin{circuitikz}
+\draw (0,0) node[op amp] (op amp) {};
+\end{circuitikz}
+\end{center}
+\sssc{Ideal op amp}
+\bit
+\item Infinite open-loop gain, infinite bandwidth, and zero output impedance: $A=\infty$ and is independent of frequency and output voltage.
+\item Zero input offset voltage: $v_{os}=0$.
+\item No current flow into either of the input terminals.
+\eit
+This is a linear element with inputs $v_+$ and $v_-$ and output $v_o$.
+\sssc{General amplifier with inverting configuration}
+A general amplifier with inverting configuration consists of an op amp where input voltage $v_i$ is connected to $v_-$ through an input impedance $Z_i$, $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through a feedback impedance $Z_f$.
+\[I_i=\frac{V_i}{Z_i}=I_f=\frac{-V_o}{Z_f},\]
+\[V_o=-\frac{Z_f}{Z_i}V_i.\]
+When $\abs{\Re(\frac{Z_f}{Z_i})}<1$, it's called an attenuator.
+\sssc{Inverting amplifier}
+An inverting amplifier consists of an op amp where input voltage $v_i$ is connected to $v_-$ through an input resistor $R_i$, $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through a feedback resistor $R_f$.
+\[i_i=\frac{v_i}{R_i}=i_f=\frac{-v_o}{R_f},\]
+\[v_o=-\frac{R_f}{R_i}v_i.\]
+\sssc{General amplifier with noninverting configuration}
+A general amplifier with noninverting configuration consist of an op amp where input voltage $v_i$ is connected to $v_+$, $v_-$ is connected ground through a ground impedance $Z_g$, and $v_o$ is fed back to $v_-$ through a feedback impedance $Z_f$.
+\[V_i=V_o\frac{Z_g}{Z_f+Z_g},\]
+\[V_o=\qty(1+\frac{Z_f}{Z_g})V_i.\]
+\sssc{Noninverting amplifier}
+A noninverting amplifier consist of an op amp where input voltage $v_i$ is connected to $v_+$, $v_-$ is connected ground through a ground resistor $R_g$, and $v_o$ is fed back to $v_-$ through a feedback resistor $R_f$.
+\[v_i=v_o\frac{R_g}{R_f+R_g},\]
+\[v_o=\qty(1+\frac{R_f}{R_g})v_i.\]
+\sssc{Unity gain amplifier, unity gain buffer, or voltage follower}
+A unity gain amplifier consist of an op amp where input voltage $v_i$ is connected to $v_+$ and $v_o$ is fed back to $v_-$.
+\[v_o=v_i.\]
+\sssc{Summing amplifier}
+A summing amplifier consists of an op amp, input voltages $v_1,v_2,\ldots,v_n$, $n$ input resistors $R_1,R_2,\ldots,R_n$, and a feedback resistor $R_f$, where for any $k\in\bbN\land k\leq n$, $v_k$ is connected to $v_-$ through $R_k$, $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through $R_f$.
+\[i_k=\frac{v_k}{R_k},\]
+\[\sum_{k=1}^ni_k=i_f=\frac{-v_o}{R_f},\]
+\[v_o=-R_f\sum_{k=1}^n\frac{v_k}{R_k}.\]
+When $R_k=R$ for all $k\in\bbN\land k\leq n$:
+\[v_o=-\frac{R_f}{R}\sum_{k=1}^nv_k.\]
+\sssc{Difference amplifier or differential amplifier}
+A difference amplifier consists of a minuend $v_1$, a subtrahend $v_2$, and four resistors $R_1,R_2,R_3,R_4$ satisfying the condition
+\[\frac{R_1}{R_2}=\frac{R_3}{R_4},\]
+where $v_1,v_2$ are connected to $v_-,v_+$ through $R_1,R_2$ respectively, $v_o$ is fed back to $v_-$ through $R_3$, and $v_+$ is connected to ground through $R_4$.
+\[v_+=v_2\frac{R_4}{R_2+R_4},\]
+\[\frac{v_1-v_-}{R_1}=\frac{v_--v_o}{R_3},\]
+\[\frac{v_1}{R_2}-v_2\frac{R_4}{R_2+R_4}\frac{R_2+R_4}{R_2R_4}+\frac{v_o}{R_4}=0,\]
+\[v_o=\frac{R_4}{R_2}\qty(v_2-v_1).\]
+When $R_1=R_2=R_3=R_4$:
+\[v_o=(v_2-v_1).\]
+\sssc{Comparator}
+A comparator is an op amp with $v_+$ and $v_-$ connected to the voltage sources to be compared, in which $v_o$ is high when $v_+>v_-$ and low when $v_+<v_-$.
+\sssc{Inverting integrator}
+An inverting integrator consists of an op amp where input voltage $v_i$ is connected to $v_-$ through an input resistor $R_i$, $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through a feedback capacitor $C_f$.
+
+Time domain:
+\[i_i=\frac{v_i}{R_i}=i_f=-C_f\dv{v_o}{t},\]
+\[v_o=v_o(0^-)-\int_0^t\frac{v_i(\tau)}{R_iC_f}\dd{\tau}.\]
+Laplace domain:
+\[I_i=\frac{V_i}{R_i}=I_f=-C_fsV_o+C_fv_o(0^-),\]
+\[V_o=\frac{v_o(0^-)}{s}-\frac{V_i}{R_iC_fs}.\]
+\sssc{Inverting differentiator}
+An inverting differentiator consists of an op amp where input voltage $v_i$ is connected to $v_-$ through an input capacitor $C_i$, $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through a feedback resistor $R_f$.
+
+Time domain:
+\[i_i=C_i\dv{v_i}{t}=i_f=\frac{-v_o}{R_f},\]
+\[v_o=R_fC_i\qty(v_i(0^-)-\int_0^tv_i(\tau)\dd{\tau}).\]
+Laplace domain:
+\[I_i=C_isV_i-C_iv_i(0^-)=I_f=\frac{-V_o}{R_f},\]
+\[V_o=R_fC_i\qty(v_i(0^-)-sV_i).\]
+\sssc{Active filter}
+Given a (passive or active) filter $v_f$ of an input $v_s$ and an inverting amplifier, noninverting amplifier, or unit gain buffer enforcing $v_o=Kv_i$, by connecting the ground and $v_i$ of the amplifier to the two terminals of the $v_f$, the two terminals ground and $v_o$ become an active filter of $v_s$ enforcing $v_o=Kv_f$.
 \end{document}
