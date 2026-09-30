@@ -45,7 +45,7 @@ An electronic device which amplifies an electrical signal by a scale called ampl
 \sssc{Two-port model}
 An amplifier can be modeled as a two port model, where an one input port and one output port is related by the amplifier, which acts as a controlled source controlled by the input port voltage or current which enforces voltage or current on the output port.
 \sssc{Circuit model of voltage amplifier}
-A voltage amplifier draws current from a source $v_s$ with internal resistance $R_s$ with input resistance $R_i$ and voltage $v_{in}$ across it and supplies $v_c=\mu v_{in}$ to a load network with output resistance $R_o$ and load $R_L$, where $\mu$, also denoted $A_{vo}$, is open-circuit voltage gain factor.
+A voltage amplifier draws current from a source $v_s$ with internal resistance $R_s$ with input resistance $R_i$ and voltage $v_{in}$ across it and supplies $v_c=\mu v_{in}$ to a load network with output resistance $R_o$ and load $R_L$, where $\mu$, also denoted $A_{vo}$, is open-loop voltage gain factor.
 \[\frac{v_{in}}{v_s}=\frac{R_i}{R_s+R_i}\]
 \[\frac{v_c}{v_{in}}=\mu\]
 \[\frac{v_{out}}{v_c}=\frac{R_L}{R_o+R_L}\]
@@ -67,7 +67,7 @@ $\abs{A}<\abs{\beta}$ due to loading effects.
 A good amplifier requires small loading effect:
 \[R_i\ll R_s,\quad R_o\gg R_L,\quad A_c\approx\beta.\]
 \sssc{Circuit model of transconductance amplifier}
-A transconductance amplifier draws current from a voltage source $v_s$ with internal resistance $R_s$ in series with input resistance $R_i$ and current $i_{in}$ through it and supplies $i_c=gv_{in}$ by VCCS to a load network with output resistance $R_o$ in parallel and load $R_L$, where $\mu$ is open-circuit transconductance factor.
+A transconductance amplifier draws current from a voltage source $v_s$ with internal resistance $R_s$ in series with input resistance $R_i$ and current $i_{in}$ through it and supplies $i_c=gv_{in}$ by VCCS to a load network with output resistance $R_o$ in parallel and load $R_L$, where $\mu$ is open-loop transconductance factor.
 \[\frac{v_{in}}{v_s}=\frac{R_i}{R_s+R_i}\]
 \[\frac{i_c}{v_{in}}=g\]
 \[\frac{i_{out}}{i_c}=\frac{R_o}{R_o+R_L}\]
@@ -125,14 +125,14 @@ An op amp has five terminals:
 \item $V_{CC-}$ or $-V_{EE}$: negative supply voltage, denoted on the $-$ side of an op-amp or omitted.
 \eit
 \[v_o=A(v_+-v_--v_{os}),\]
-where $A$ is open-circuit gain or open-loop gain, and $v_{os}$ is input offset voltage.
+where $A$ is open-loop gain or open-circuit gain, and $v_{os}$ is input offset voltage.
 \[v_{ld}=v_+-v_-\]
 \[v_{lcm}=\frac{v_++v_-}{2}\]
 \sssc{Ideal op amp}
 \bit
 \item Infinite input impedance: No signal current flowing into $v_+$ and $v_-$.
-\item Infinite open-circuit gain
-\item Infinite bandwidth: Open-circuit gain remains constant in all frequencies.
+\item Infinite open-loop gain
+\item Infinite bandwidth: open-loop gain remains constant in all frequencies.
 \item Zero output impedance: The amplifier is unilateral.
 \item Zero input offset voltage: $v_{os}=0$, which implies zero common-mode gain, i.e., infinite common-mode rejection.
 \eit
@@ -147,7 +147,11 @@ An inverting amplifier consists of an op amp where input voltage $v_i$ is connec
 \[v_o=-\frac{R_f}{R_i}v_i.\]
 The closed-loop gain $G$ is defined as
 \[G=\frac{v_o}{v_-}=-\frac{R_f}{R_i}\]
-When $\abs{\Re(\frac{R_f}{R_i})}<1$, it's called an attenuator.
+When $-G<1$, it's called an attenuator.
+
+Effect of finite open-loop gain:
+\[i_i=\frac{v_i+\frac{v_o}{A}}{R_i}=i_f=\frac{-v_o-\frac{v_o}{A}}{R_f},\]
+
 \sssc{Non-inverting amplifier}
 A non-inverting amplifier consists of an op amp where input voltage $v_i$ is connected to $v_+$, $v_-$ is connected ground through a ground resistance $R_g$, and $v_o$ is fed back to $v_-$ through a feedback resistance $R_f$.
 \[v_i=v_o\frac{R_g}{R_f+R_g},\]
