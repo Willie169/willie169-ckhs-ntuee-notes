@@ -108,11 +108,11 @@ where
 \item $\Sigma$ is an input alphabet.
 \item $S$ is a set of all states.
 \item $s_0\in S$ is the starting state (also called start state).
-\item $\delta\subseteq S\times\Sigma\times S$ is a transition function (also called next-state function), which are triples of current state, input character, and next state, in which each element is denoted as
+\item $\delta\subseteq S\times\Sigma\times S$ is a transition function (also called next-state function), which is a set of triples of current state, input character, and next state, and in which each element is denoted as
 \[(s,\sigma)\to t\quad\tx{or}\quad\delta(s,\sigma)=t\]
 for $(s,\sigma,t)\in\delta$.
 
-A general transition function and a general automaton is called nondeterministic. If $\delta$ satisfies the constraint that
+A general transition function and a general automaton is called non-deterministic (or nondeterministic). If $\delta$ satisfies the constraint that
 \[\forall (s,\sigma)\in S\times\Sigma\colon(s,\sigma,t)\in\delta\land(s,\sigma,u)\in\delta\implies t=u,\]
 the transition function and the automaton is called deterministic. A deterministic transition function can also be written as a partial function
 \[\delta\colon S\times\Sigma\to S\]
@@ -149,7 +149,7 @@ where
 \[(s,\sigma)\to (t,x)\quad\tx{or}\quad\delta(s,\sigma)=(t,x)\]
 for $(s,\sigma,t,x)\in\delta$.
 
-A general transition function with output and a general transducer is called nondeterministic. If $\delta$ satisfies the constraint that
+A general transition function with output and a general transducer is called non-deterministic. If $\delta$ satisfies the constraint that
 \[\forall (s,\sigma)\in S\times\Sigma\colon(s,\sigma,t,x)\in\delta\land(s,\sigma,u,y)\in\delta\implies t=u\land x=y,\]
 the transition function with output and the transducer is called deterministic. A deterministic transition function with output can also be written as a two partial function
 \[\delta\colon S\times\Sigma\to S\]
@@ -174,7 +174,7 @@ where
 \item $\delta\subseteq S\times\Sigma\times S$ is a transition function.
 \item $F\subseteq S$ is the set of accepted final states.
 \eit
-A deterministic finite-state automaton is abbreviated to DFS, DFA, DFSA, or DFSM. A nondeterministic finite-state automaton is abbreviated to NFS, NFA, NFSA, or NFSM.
+A deterministic finite-state automaton is abbreviated to DFS, DFA, DFSA, or DFSM. A non-deterministic finite-state automaton is abbreviated to NFS, NFA, NFSA, or NFSM.
 
 \tb{Theorem.} The collection of all recognizable languages of all finite-state machine is the collection of all regular languages.
 \sssc{Finite-state transducer (FST)}
@@ -189,7 +189,7 @@ where
 \item $\delta\subseteq S\times\Sigma\times S\times\Gamma$ is a transition function with output.
 \item $F\subseteq S$ is the set of accepted final states.
 \eit
-A deterministic finite-state transducer is abbreviated to DFST. A nondeterministic finite-state automaton is abbreviated to NDFST or NFST.
+A deterministic finite-state transducer is abbreviated to DFST. A non-deterministic finite-state automaton is abbreviated to NDFST or NFST.
 \sssc{Mealy machine}
 A Mealy machine is a deterministic FSM without the set of accepted final states (since all final states are accepted) and can be defined as a six-tuple
 \[M=(\Sigma,\Gamma,S,s_0,\delta,G),\]
@@ -231,7 +231,7 @@ where
 \[(s,\sigma,x)\to (t,\gamma)\quad\tx{or}\quad\delta(s,\sigma,x)=(t,\gamma)\]
 for $(s,\sigma,x,t,\gamma)\in\delta$.
 
-A general transition function and a general PDA is called nondeterministic. If $\delta$ satisfies the constraints that
+A general transition function and a general PDA is called non-deterministic. If $\delta$ satisfies the constraints that
 \[\forall (s,\sigma,x)\in S\times(\Sigma\cup\{\varepsilon\})\times\Gamma\colon(s,\sigma,x,t,\gamma)\in\delta\land(s,\sigma,x,u,\rho)\in\delta\implies t=u\land\gamma=\rho,\]
 and that
 \[\forall (s,x)\in S\times\Gamma\colon(\exists(t,\gamma)\in S\times\Gamma^*\colon(s,\varepsilon,x,t,\gamma)\in\delta)\implies(\forall(\sigma,t,\gamma)\in\Sigma\times S\times\Gamma^*\colon(s,\sigma,x,t,\gamma)\notin\delta)\]
@@ -250,7 +250,7 @@ For a pushdown automaton accepting by final state, an input word $w\in\Sigma^*$ 
 
 For a pushdown automaton accepting by empty stack, an input word $w\in\Sigma^*$ is an accepting word if $(s_0,w,Z)\vdash^*(s,\varepsilon,\varepsilon)$ for some $s\in S$. For each pushdown automaton $M$ accepting by empty stack, the set of all accepting words is denoted as $N(M)$.
 
-A deterministic PDA is abbreviated to DPDA. A nondeterministic PDA is abbreviated to NPDA.
+A deterministic PDA is abbreviated to DPDA. A non-deterministic PDA is abbreviated to NPDA.
 
 \tb{Theorem.} For each pushdown automaton $M$ accepting by final state, there exists a pushdown automaton $M'$ accepting by empty stack such that $L(M)=N(M')$. For each pushdown automaton $M$ accepting by empty stack, there exists a pushdown automaton $M'$ accepting by final state such that $N(M)=L(M')$.
 
@@ -269,7 +269,7 @@ where
 \[(s,x)\to (t,y,c)\quad\tx{or}\quad\delta(s,x)=(t,y,c)\]
 for $(s,x,t,y,c)\in\delta$.
 
-A general transition function and a general Turing machine is called nondeterministic. If $\delta$ satisfies the constraint that
+A general transition function and a general Turing machine is called non-deterministic. If $\delta$ satisfies the constraint that
 \[\forall (s,x)\in S\times\Gamma\colon(s,x,t,y,c)\in\delta\land(s,x,u,z,d)\in\delta\implies t=u\land y=z\land c=d,\]
 the transition function and the Turing machine is called deterministic. A deterministic transition function can also be written as a partial function
 \[\delta\colon  S\times\Gamma\to S\times\Gamma\times\{L,S,R\}\]
@@ -282,7 +282,7 @@ For each $i$th step of the computation, the TM reads the tape symbol at the curr
 
 If current state $s$ and current tape symbol at head $x$ is such that $\forall (t,y,c)\in S\times\Gamma\times\{L,S,R\}\colon(s,x,t,y,c)\notin\delta$, the TM is said to halt and $s$ is called the final state. If the final state of a TM is in $F$, the halt is an accepting halt and the input word is an accepting word; otherwise, the halt is a rejecting halt, the final state is a rejecting state, and the input word is a rejecting word.
 
-A deterministic TM is abbreviated to DTM. A nondeterministic TM is abbreviated to NTM.
+A deterministic TM is abbreviated to DTM. A non-deterministic TM is abbreviated to NTM.
 
 \tb{Theorem.} The collection of all recognizable languages of all Turing machine is the collection of all recursively enumerable languages.
 \sssc{Linear bounded automaton (LBA)}
@@ -303,7 +303,7 @@ in which each element is denoted as
 \[(s,x)\to (t,y,c)\quad\tx{or}\quad\delta(s,x)=(t,y,c)\]
 for $(s,x,t,y,c)\in\delta$.
 
-A general transition function and a general LBA is called nondeterministic. If $\delta$ satisfies the constraint that
+A general transition function and a general LBA is called non-deterministic. If $\delta$ satisfies the constraint that
 \[\forall (s,x)\in S\times\Gamma\colon(s,x,t,y,c)\in\delta\land(s,x,u,z,d)\in\delta\implies t=u\land y=z\land c=d,\]
 the transition function and the LBA is called deterministic. A deterministic transition function can also be written as a partial function
 \[\delta\colon S\times\Gamma\to S\times(\Gamma\setminus\{l,r\})\times\{L,S,R\}\]
@@ -319,7 +319,7 @@ For each $i$th step of the computation, the LBA reads the tape symbol at the cur
 
 If current state $s$ and current tape symbol at head $x$ is such that $\forall (t,y,c)\in S\times\Gamma\times\{L,S,R\}\colon(s,x,t,y,c)\notin\delta$, the LBA is said to halt and $s$ is called the final state. If the final state of a LBA is in $F$, the halt is an accepting halt and the input word is an accepting word; otherwise, the halt is a rejecting halt, the final state is a rejecting state, and the input word is a rejecting word.
 
-A deterministic LBA is abbreviated to DLBA. A nondeterministic LBA is abbreviated to NLBA.
+A deterministic LBA is abbreviated to DLBA. A non-deterministic LBA is abbreviated to NLBA.
 
 \tb{Theorem.} The collection of all recognizable languages of all linear bounded automaton is the collection of all context-sensitive languages.
 \sssc{State-transition table for FSM and FST}
