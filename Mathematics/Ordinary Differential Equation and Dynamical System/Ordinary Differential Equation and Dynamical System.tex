@@ -1599,14 +1599,14 @@ Then there exists some $\varepsilon>0$ such that the initial value problem
 \[y'(t)=f(t,y(t)),\quad y(t_0)=y_0\]
 has a unique solution $y(t)$ on the interval $[t_0-\varepsilon,t_0+\varepsilon]$.
 \bpr
-We prove for $n=1$. $n\in\bbN$ case can be proven similarly.
+Let $B_{\leq r}(a)$ denote closed ball of radius $r$ centered at $a$.
 
 We first show that $f$ is continuous at $(t_0,y_0)$. Since $t\mapsto f(t,y)$ is continuous,
 \[\forall (t_0,y_0)\in D,\varepsilon>0\colon\exists\delta>0\colon\abs{t-t_0}<\delta\implies\abs{f(t,y_0)-f(t_0,y_0)}<\frac{\varepsilon}{2}\]
-For any $t\in[t_0-\delta,t_0+\delta]$, $y\in\qty[y_0-\frac{\varepsilon}{2L},y_0+\frac{\varepsilon}{2L}]$,
+For any $t\in B_{\leq\delta}(t_0)$, $y\in B_{\le\frac{\varepsilon}{2L}}(y_0)$,
 \[\abs{f(t,y)-f(t_0,y_0)}\le\abs{f(t,y)-f(t,y_0)}+\abs{f(t,y_0)-f(t_0,y_0)}<\varepsilon.\]
 Fix any such $L>0$ and any $b>0$ such that
-\[C_o\coloneq\qty[t_0-\frac{1}{2L},t_0+\frac{1}{2L}]\times[y_0-b,y_0+b]\subseteq D.\]
+\[C_o\coloneq B_{\leq\frac{1}{2L}}(t_0)\times B_{\le b}(y_0)\subseteq D.\]
 Such set exists because $(t_0,y_0)$ is in the interior of $D$.
 
 Since $C_o$ is compact, there exists a real number
@@ -1614,8 +1614,8 @@ Since $C_o$ is compact, there exists a real number
 Define
 \[a\coloneq\frac{1}{2}\min\qty{\frac{1}{L},\frac{b}{M_o}}\]
 and define
-\[I\coloneq[t_0-a,t_0+a]\]
-\[B\coloneq[y_0-b,y_0+b]\]
+\[I\coloneq B_{\leq a}(t_0)\]
+\[B\coloneq B_{\leq b}(y_0)\]
 \[C\coloneq I\times B\subseteq C_o\]
 \[M=\sup_{(t,y)\in C}\norm{f(t,y)}\le M_o\]
 Consider the function space $\calC(I,B)$ of continuous (and thus bounded since $I$ is closed) function from $I$ to $B$ equipped with uniform norm $\|\cdot\|_{\infty}$ and metric induced by it. We want to prove that $\calC(I,B)$ is complete.
