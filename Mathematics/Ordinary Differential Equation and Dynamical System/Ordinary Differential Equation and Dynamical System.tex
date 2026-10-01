@@ -1593,12 +1593,18 @@ A well-posed problem is a problem whose local solution satisfies the following p
 \item Its behavior changes continuously with the auxiliary conditions, such as initial or boundary values.
 \eit
 \sssc{Picard–Lindelöf theorem, Cauchy–Lipschitz theorem, or existence and uniqueness theorem (local version)}
-Let $D\subseteq\bbR\times\bbR^n$ be a closed rectangle with $(t_0,y_0)$ a point in the interior of $D$. Let $f\colon D\to\bbR^n$ be a function that is continuous in $t$ and Lipschitz continuous in $y$, that is.
-\[\exists L>0\colon\forall (t,y_1),(t,y_2)\in D\colon\norm{f(t,y_1)-f(t,y_2)}\le L\norm{y_1-y_2}.\]
-Then there exists some $\varepsilon>0$ such that the initial value problem
+Let $U$ be an open subset of $\bbR\times\bbR^n$ and $f\colon U\to\bbR^n$ be a function that is continuous in $t$ and locally Lipschitz in $y$, that is, for any $(t_0,y_0)\in U$, there exists a neighborhood $V\subseteq U$ of $(t_0,y_0)$ and a $L>0$ such that for all $(t,y_1),(t,y_2)\in V$, $\norm{f(t,y_1)-f(t,y_2)}\le L\norm{y_1-y_2}$.
+
+For any $(t_0,y_0)\in U$, there exists some $\varepsilon>0$ such that the initial value problem
 \[y'(t)=f(t,y(t)),\quad y(t_0)=y_0\]
 has a unique solution $y(t)$ on the interval $[t_0-\varepsilon,t_0+\varepsilon]$.
+
+Moreover, let $I_1,I_2\subseteq\bbR$ be two open intervals and $y_i\colon I_i\to\bbR^n$ for $i\in\{1,2\}$ two continuously differentiable functions such that $(t,y_i(t))\in U$ and
+\[y_i'(t)=f(t,y_i(t))\]
+for all $t\in I_i$, for $i\in\{1,2\}$. If $y_1(s)=y_2(s)$ for some $s\in I_1\cap I_2$, then $y_1(t)=y_2(t)$ for all $t\in I_1\cap I_2$.
 \bpr
+Let $D\subseteq U$ be a closed rectangle such that $(t_0,y_0)$ is in the interior of $D$. By picking the largest $L$ among the smallest $L$ satisfying the condition, we show that $f$ restricted to $D$ is globally Lipschitz continuous in $y$, that is,
+\[\exists L>0\colon\forall (t,y_1),(t,y_2)\in D\colon\norm{f(t,y_1)-f(t,y_2)}\le L\norm{y_1-y_2}.\]
 Let $B_{\leq r}(a)$ denote closed ball of radius $r$ centered at $a$.
 
 We first show that $f$ is continuous at $(t_0,y_0)$. Since $t\mapsto f(t,y)$ is continuous,
@@ -1652,6 +1658,20 @@ Then, using the definition of $\Gamma$,
                                        &\le aL\norm{y_1-y_2}_{\infty}\\
                                        &=q\norm{y_1-y_2}_{\infty}
 \ea\]
+Now for the second statement, we define
+\[J\coloneq I_1\cap I_2\]
+\[S\coloneq\{t\in J\colon y_1(t)=y_2(t)\}\]
+Since $s\in S$, $S$ is non-empty. Since $y_1,y_2$ are continuous,
+\[g(t)\coloneq y_1(t)-y_2(t)\]
+is continuous. Therefore,
+\[S=g^{-1}(\{\mb{0}\})\]
+is closed in $J$.
+
+Now that $t_0\in J$ be given and write $y_0=y_1(t_0)=y_2(t_0)$. By the fist statement, there exists $\varepsilon>0$ such that the initial value problem
+\[y'(t)=f(t,y(t)),\quad y(t_0)=y_0\]
+has a unique solution $y(t)$ on the interval $[t_0-\varepsilon,t_0+\varepsilon]$, which implies that $\forall t\in [t_0-\varepsilon,t_0+\varepsilon]\cap J$,
+\[y_1(t)=y_2(t)\]
+
 \epr
 \sssc{Peano existence theorem (皮亞諾存在性定理), Peano theorem (皮亞諾定理), or Cauchy–Peano theorem (柯西-皮亞諾定理)}
 Let $D$ be an open subset of $\mathbb{R}\times\mathbb{R}^n$ and $f\colon D\to \mathbb {R}$ be a continuous function, then every initial value problem given by explicit first-order ODE $y'(t)=f\left(t,y(t)\right)$ defined on $D$ and initial condition $y\left(t_{0}\right)=y_{0}$ with $(t_{0},y_{0})\in D$ has a local solution $z\colon I\to \mathbb {R}^n$ where $I$ is a neighbourhood of $t_0$ in $\mathbb {R} $.
