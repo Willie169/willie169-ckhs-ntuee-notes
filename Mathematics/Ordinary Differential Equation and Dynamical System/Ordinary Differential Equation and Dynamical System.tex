@@ -1594,7 +1594,7 @@ A well-posed problem is a problem whose local solution satisfies the following p
 \eit
 \sssc{Picard–Lindelöf theorem, Cauchy–Lipschitz theorem, or existence and uniqueness theorem (local version)}
 Let $D\subseteq\bbR\times\bbR^n$ be a closed rectangle with $(t_0,y_0)$ a point in the interior of $D$. Let $f\colon D\to\bbR^n$ be a function that is continuous in $t$ and Lipschitz continuous in $y$, that is.
-\[\exists L>0\colon\forall (t,y_1),(t,y_2)\in D\colon\abs{f(t,y_1)-f(t,y_2)}\le L\abs{y_1-y_2}.\]
+\[\exists L>0\colon\forall (t,y_1),(t,y_2)\in D\colon\norm{f(t,y_1)-f(t,y_2)}\le L\norm{y_1-y_2}.\]
 Then there exists some $\varepsilon>0$ such that the initial value problem
 \[y'(t)=f(t,y(t)),\quad y(t_0)=y_0\]
 has a unique solution $y(t)$ on the interval $[t_0-\varepsilon,t_0+\varepsilon]$.
@@ -1602,9 +1602,9 @@ has a unique solution $y(t)$ on the interval $[t_0-\varepsilon,t_0+\varepsilon]$
 Let $B_{\leq r}(a)$ denote closed ball of radius $r$ centered at $a$.
 
 We first show that $f$ is continuous at $(t_0,y_0)$. Since $t\mapsto f(t,y)$ is continuous,
-\[\forall (t_0,y_0)\in D,\varepsilon>0\colon\exists\delta>0\colon\abs{t-t_0}<\delta\implies\abs{f(t,y_0)-f(t_0,y_0)}<\frac{\varepsilon}{2}\]
+\[\forall (t_0,y_0)\in D,\varepsilon>0\colon\exists\delta>0\colon\norm{t-t_0}<\delta\implies\norm{f(t,y_0)-f(t_0,y_0)}<\frac{\varepsilon}{2}\]
 For any $t\in B_{\leq\delta}(t_0)$, $y\in B_{\le\frac{\varepsilon}{2L}}(y_0)$,
-\[\abs{f(t,y)-f(t_0,y_0)}\le\abs{f(t,y)-f(t,y_0)}+\abs{f(t,y_0)-f(t_0,y_0)}<\varepsilon.\]
+\[\norm{f(t,y)-f(t_0,y_0)}\le\norm{f(t,y)-f(t,y_0)}+\norm{f(t,y_0)-f(t_0,y_0)}<\varepsilon.\]
 Fix any such $L>0$ and any $b>0$ such that
 \[C_o\coloneq B_{\leq\frac{1}{2L}}(t_0)\times B_{\le b}(y_0)\subseteq D.\]
 Such set exists because $(t_0,y_0)$ is in the interior of $D$.
@@ -1636,7 +1636,7 @@ We first show that $\Gamma(\calC(I,B))\subseteq\calC(I,B)$, that is,
 \[\|y-y_0\|_{\infty}\le b\implies\|\Gamma y-y_0\|\le b.\]
 Let
 \[t_m=\arg\max_{t\in I}\norm{\int_{t_0}^tf(s,y(s))\dd{s}}\]
-\[\|\Gamma y-y_0\|=\norm{\int_{t_0}^tf(s,y(s))\dd{s}}_{\infty}=\norm{\int_{t_0}^{t_m}f(s,y(s))\dd{s}}\le\int_{t_0}^{t_m}\norm{f(s,y(s))}\dd{s}\le\int_{t_0}^{t_m}M\dd{s}\le M\abs{t_m-t_0}\le Ma\le b\]
+\[\|\Gamma y-y_0\|=\norm{\int_{t_0}^tf(s,y(s))\dd{s}}_{\infty}=\norm{\int_{t_0}^{t_m}f(s,y(s))\dd{s}}\le\int_{t_0}^{t_m}\norm{f(s,y(s))}\dd{s}\le\int_{t_0}^{t_m}M\dd{s}\le M\norm{t_m-t_0}\le Ma\le b\]
 Second, we want to show that
 \[\exists q\in[0,1)\colon\forall y_1,y_2\in\calC(I,B)\colon\norm{\Gamma y_1-\Gamma y_2}_{\infty}\le q\norm{y_1-y_2}_{\infty}\]
 We claim that it holds for $q=aL\le\frac{1}{2}$. Fix any $y_1,y_2\in\calC(I,B)$. Let
