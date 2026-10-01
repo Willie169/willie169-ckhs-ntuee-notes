@@ -1621,7 +1621,7 @@ and define
 Consider the function space $\calC(I,B)$ of continuous (and thus bounded since $I$ is closed) function from $I$ to $B$ equipped with uniform norm $\|\cdot\|_{\infty}$ and metric induced by it. We want to prove that $\calC(I,B)$ is complete.
 
 Assume $(y_n)_{n\in\bbN}$ is a Cauchy sequence in $\calC(I,B)$.
-\[\forall\varepsilon>0\colon\exists N\in\bbN\colon m,n\ge N\implies\norm{y_m-y_n}_{\infty}<\varepsilon\imploes\sup_{t\in I}\norm{y_m(t)-y_n(t)}<\varepsilon\]
+\[\forall\varepsilon>0\colon\exists N\in\bbN\colon m,n\ge N\implies\norm{y_m-y_n}_{\infty}<\varepsilon\implies\sup_{t\in I}\norm{y_m(t)-y_n(t)}<\varepsilon\]
 then
 \[\exists y\in\calC(I,\bbR)\colon\forall\varepsilon>0\colon\exists N\in\bbN\colon n\ge N\implies\sup_{t\in I}\norm{y_n(t)-y(t)}<\varepsilon,\]
 that is, $(y_n)$ converges uniformly to some $y\in\calC(I,\bbR)$. Since $B$ is closed, $y(t)\in B$. Hence $y\in\calC(I,B)$.
@@ -1653,10 +1653,6 @@ Then, using the definition of $\Gamma$,
                                        &=q\norm{y_1-y_2}_{\infty}
 \ea\]
 \epr
-
-
-
-
 \sssc{Peano existence theorem (皮亞諾存在性定理), Peano theorem (皮亞諾定理), or Cauchy–Peano theorem (柯西-皮亞諾定理)}
 Let $D$ be an open subset of $\mathbb{R}\times\mathbb{R}^n$ and $f\colon D\to \mathbb {R}$ be a continuous function, then every initial value problem given by explicit first-order ODE $y'(t)=f\left(t,y(t)\right)$ defined on $D$ and initial condition $y\left(t_{0}\right)=y_{0}$ with $(t_{0},y_{0})\in D$ has a local solution $z\colon I\to \mathbb {R}^n$ where $I$ is a neighbourhood of $t_0$ in $\mathbb {R} $.
 \sssc{Carathéodory's existence theorem}
@@ -1677,12 +1673,6 @@ Let $I$ be an open interval of $\mathbb{R}$ and $f(t,y)\colon I\times\mathbb{R}^
 \item such that there is a Lebesgue-integrable function $m\colon I\to [0,\infty )$ such that $|f(t,y)|\leq m(t)$ for all $(t,y)\in I\times\mathbb{R}^n$,
 \end{itemize}
 then every initial value problem given by explicit first-order ODE $y'(t)=f\left(t,y(t)\right)$ defined on $I\times\mathbb{R}^n$ and initial condition $y\left(t_{0}\right)=y_{0}$ with $(t_{0},y_{0})\in I\times\mathbb{R}^n$ has a local solution $z\colon I\to \mathbb {R}^n$ where $I$ is a neighbourhood of $t_0$ in $\mathbb{R}$.
-\sssc{Picard–Lindelöf theorem (皮卡-林德勒夫定理) or Cauchy–Lipschitz theorem (柯西-利普希茨定理) local version}
-Let
-\[D=\{(t,y)\mid|t-T|\leq a\land\forall\tx{\ integer\ }1\leq i\leq n\colon |y_i-Y_i|\leq b_i\}\]
-be a rectangle in $\mathbb{R}\times\mathbb{R}^n$ where $t,T\in\mathbb{R}$, $y=(y_1, y_2,\dots  y_n)\in\mathbb{R}^n$, $Y=(Y_1, Y_2,\dots  Y_n)\in\mathbb{R}^n$, and constant $a,b_i\in\mathbb{R}_{>0}$, and $f(t,y)\colon D\to \mathbb {R}$ be a function that is continuous in $t$ and locally Lipschitz on $D$ in all $y_i$, then every initial value problem given by explicit first-order ODE $y'(t)=f\left(t,y(t)\right)$ defined on $D$ and initial condition $y\left(t_{0}\right)=y_{0}$ with $(t_{0},y_{0})\in D$ has a unique local solution $z\colon I\to \mathbb {R}^n$ where $I$ is a neighbourhood of $t_0$ in $\mathbb {R} $, that is, let $I_1,I_2$ be two neighbourhoods of $t_0$ in $\mathbb{R}$ and $z_i\colon I_i\to\mathbb{R}^n$ for $i\in\{1,2\}$ be two differentiable functions such that $z_i'(t)=f\left(t,z_i(t)\right)$ for all $t\in I_i$, for $i\in\{1,2\}$, then $\exists t_0\in I_1\cap I_2\text{\ s.t.\ }z_1(t_0)=z_2(t_0)\implies\forall t\in I_1\cap I_2\colon z_1(t)=z_2(t)$.
-
-Let $I$ be an open interval of $\mathbb{R}$ and $f(t,y)\colon I\times\mathbb{R}^n\to\mathbb{R}$ where $t\in\mathbb{R}$, $y=(y_1, y_2,\dots  y_n)\in\mathbb{R}^n$ be a function that is continuous in $t$ and locally Lipschitz in all $y_i$, then every initial value problem given by explicit first-order ODE $y'(t)=f\left(t,y(t)\right)$ defined on $I\times\mathbb{R}^n$ and initial condition $y\left(t_{0}\right)=y_{0}$ with $(t_{0},y_{0})\in I\times\mathbb{R}^n$ has a unique solution $z\colon I\to\mathbb {R}^n$, that is, let $I_1,I_2\subseteq\mathbb{R}$ and $z_i\colon I_i\to\mathbb{R}^n$ for $i\in\{1,2\}$ be two differentiable functions such that $z_i'(t)=f\left(t,z_i(t)\right)$ for all $t\in I_i$, for $i\in\{1,2\}$, then $\exists t_0\in I_1\cap I_2\text{\ s.t.\ }z_1(t_0)=z_2(t_0)\implies\forall t\in I_1\cap I_2\colon z_1(t)=z_2(t)$.
 \sssc{Cauchy–Kovalevskaya theorem}
 PLACEHOLDER
 \sssc{Existence of a unique solution of linear ODE}
