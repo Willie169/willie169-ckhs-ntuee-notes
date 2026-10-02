@@ -8,43 +8,104 @@
 \date{\temtoday}
 \titletocdoc
 \section{Topology (拓樸學)}
-\subsection{Topological space (拓樸空間)}
+\subsection{Basics}
+\subsubsection{Topological space (拓樸空間)}
 A topological space consists of a set $X$ and a topology $\mathcal{T}$ on it, denoted as \( (X, \mathcal{T}) \). Where the set \( X \) is the set of points in the space, and the topology \( \mathcal{T} \) is the set of subsets of \( X \) that satisfies:
-\begin{enumerate}
-\item \(\varnothing,X\in\mathcal{T} \)
-\item Closed under arbitrary unions: \(\forall\mathcal{S}\subseteq\mathcal{T}:\,\bigcup_{A\in\mathcal{S}}A\in\mathcal{T}\)
-\item Closed under finite intersection: \(\forall\mathcal{S}\subseteq\mathcal{T}\text{ s.t. }\abs{\mathcal{S}}<\infty:\,\bigcap_{A\in\mathcal{S}}A\in\mathcal{T}\)
-\end{enumerate}
-\ssc{Homeomorphism (同胚) or isomorphism (同構)}
-Topological spaces $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ are called homeomorphic if there exists a mapping $f:\,X\to Y$ between them such that $f$ is bijective and continuous and $f^{-1}$ is continuous, written as \( X \cong Y \), and $f$ is called a homeomorphism between them.
-\subsection{Open set (開集)}
+\bit
+\item Empty set and space itself is open:
+\[\varnothing,X\in\mathcal{T}\]
+\item Closed under arbitrary unions:
+\[\forall\mathcal{S}\subseteq\mathcal{T}\colon\bigcup_{A\in\mathcal{S}}A\in\mathcal{T}\]
+\item Closed under finite intersection:
+\[\forall\mathcal{S}\subseteq\mathcal{T},\abs{\mathcal{S}}\in\bbN\colon\bigcap_{A\in\mathcal{S}}A\in\mathcal{T}\]
+\eit
+\subsubsection{Complement}
+For a subset $A$ of a topological space $(X,\mathcal{T})$, the complement $A^c$ of $A$ is defined as $X\setminus A$.
+\subsubsection{Homeomorphism (同胚) or isomorphism (同構)}
+Topological spaces $(X,\mathcal{T}_X)$ and $(Y,\mathcal{T}_Y)$ are called homeomorphic if there exists a mapping $f\colon X\to Y$ between them such that $f$ is bijective and continuous and $f^{-1}$ is continuous, written as \( X \cong Y \), and $f$ is called a homeomorphism between them.
+\subsubsection{Open set (開集)}
 In a topological space \( (X, \mathcal{T}) \), an open subset \( O \subseteq X \) is defined to be
 \[O\in \mathcal{T}.\]
-\subsection{Open neighborhood (開鄰域)}
+\subsubsection{Open neighborhood (開鄰域)}
 An open neighborhood of a point $P$ in a topological space $X$ is any open subset $O\subseteq X$ such that $P\in O$.
 
 An open neighborhood of a subset $V$ in a topological space $X$ is any open subset $O\subseteq X$ such that $V\subseteq O$.
-\ssc{Interior (內部) of subset}
+\subsubsection{Interior (內部) of subset}
 The interior of a subset $S$ of a topological space $X$, denoted by $\operatorname{int}_XS$, $\operatorname{int}S$, $\operatorname{int}_X(S)$, $\operatorname{int}(S)$, or $S^{\circ}$, is defined as
 \[\operatorname{int}(S) = \{ x \in S \mid \exists \text{\ open\ } U\subseteq X \text{\ s.t.\ } x \in U \subseteq S \}.\]
-\subsection{Neighborhood (鄰域)}
+\subsubsection{Neighborhood (鄰域)}
 A subset $U$ is a neighborhood of a point $P$ if and only if there exists an open set $O$ such that $P\in O\subseteq U$.
 
 A subset $U$ is a neighborhood of a subset $V$ if and only if $V\subseteq\operatorname{int}(U)$.
-\ssc{Subspace topology}
+\subsubsection{A set is open iff all points in it has neighborhood that is a subset of it}
+For a topological space $(X,\mathcal{T})$, a subset $A$ is in $\calT$ iff for all $x\in A$, there exists neighborhood $N$ of $x$ such that $N\subseteq A$.
+\bpr
+If: Since $\calT$ is closed under arbitrary union, pick a such neighborhood for each $x\in A$.
+
+Only if: $A$ is such neighborhood.
+\epr
+\subsubsection{Subspace topology}
 The subspace topology of a topological space $(X,\mathcal{T})$ in a subset $I$ of $X$ is defined as the set 
 \[\mathcal{I}=\{U\cap I | U\in\mathcal{T}\}.\]
-\ssc{Topological embedding}
+\subsubsection{Topological embedding}
 A topological embedding is a homeomorphism onto its image with subspace topology.
-\subsection{Limit point (極限點), cluster point, or accumulation point (集積點)}
-Let $S$ be a subset of a topological space $X$. A point $x$ in $X$ is a limit point, cluster point, or accumulation point of the set $S$ if every neighborhood of $x$ contains at least one point of $S$ different from $x$ itself.
-\subsection{Closure (閉包)}
+\subsubsection{Limit point (極限點), cluster point, or accumulation point (集積點)}
+Let $S$ be a subset of a topological space $X$. A point $x\in X$ is called a limit point, cluster point, or accumulation point of $S$ iff for every neighborhood $N$ of $x$, there exists $y\in N\setminus\{x\}$ such that $y\in S$.
+\subsubsection{Closure (閉包)}
 The closure of a subset $S$ of points in a topological space consists of all points in $S$ together with all limit points of $S$.
-\subsection{Closed set (閉集)}
-A subset $A$ of a topological space $(X,\mathcal{T})$ is called closed if its complement $X\setminus A\in\mathcal{T}$.
+\subsubsection{Open cover}
+For a subset $A$ of a topological space $(X,\mathcal{T})$, an open cover $A$ is a cover $C$ of $A$ such that $C\subseteq\calT$.
+\subsubsection{Having open cover iff open set}
+For a subset $A$ of a topological space $(X,\mathcal{T})$, $A$ has open cover iff $A$ is open.
+\bpr
+If: $\{A\}$ is an open cover.
 
-A topological space is often defined by setting all non-empty subsets whose closure is itself as closed.
-\subsection{Borel set (博雷爾集)}
+Only if: $\calT$ is closed under arbitrary union.
+\epr
+\subsubsection{Closed set (閉集)}
+A subset $A$ of a topological space $(X,\mathcal{T})$ is called closed iff its complement $X\setminus A\in\mathcal{T}$.
+\subsubsection{Set of all closed sets}
+For an topological space $(X,\mathcal{T})$, suppose $\calU$ is the set of all closed subsets $\calU$, then
+\bit
+\item Empty set and space itself is closed:
+\[\varnothing,X\in\mathcal{U}\]
+\item Closed under finite unions:
+\[\forall\mathcal{S}\subseteq\mathcal{U},\abs{\calS}\in\bbN\colon\bigcup_{A\in\mathcal{S}}A\in\mathcal{U}\]
+\item Closed under arbitrary intersection:
+\[\forall\mathcal{S}\subseteq\mathcal{U}\colon\bigcap_{A\in\mathcal{S}}A\in\mathcal{U}\]
+\eit
+\bpr
+Each corresponds to each condition of a topology.
+\epr
+\subsubsection{A subset is a closed set iff its closure is itself}
+A subset $A$ of a topological space $(X,\mathcal{T})$ is closed iff its closure is itself.
+\bpr
+If: Assume for contradiction that a limit point $x$ of $A$ is in $A^c$. Then all neighborhoods $N$ of $x$ is such that
+\[N\cap A\ne\varnothing\]
+Since $x\in A^c$ and $A^c\in\calT$, $A^c$ is a neighborhood of $x$, but
+\[A^c\cap A=\varnothing\]
+
+Only if: For all $x\in A^c$, there exists a neighborhood $N$ of $x$ such that
+\[N\cap A=\varnothing,\]
+that is,
+\[N\subseteq A^c\]
+By that a set is open if all points in it has neighborhood that is a subset of it, $A^c$ is open.
+\epr
+\subsubsection{Closure as smallest intersection of closed superset}
+For a subset $A$ of a topological space $(X,\mathcal{T})$ with set of all closed set $\calU$, the closure of $A$ is
+\[\bigcap_{F\in\calU\land A\subseteq F}F\]
+\bpr
+Let
+\[C\coloneq\bigcap_{F\in\calU\land A\subseteq F}F\]
+and $D$ the closure of $A$.
+
+$C\subseteq D$: By that a closure is closed and the definition of $C$.
+
+$D\subseteq C$: Assume for contradiction that there exists a limit point $x$ of $A$ such that $x\notin C$. Then, $C^c$ is open and contains $x$, which contradicts that $C$ is closed.
+\epr
+\subsubsection{Clopen set}
+A subset $A$ of a topological space $(X,\mathcal{T})$ is called clopen iff it is both open and closed.
+\subsubsection{Borel set (博雷爾集)}
 A Borel set $B$ is any set in a topological space $(X,\mathcal{T})$ that can be formed from open sets through the operations of countable union, countable intersection, and relative complement, that is,
 \ben
 \item Every element of $\calT$ is a Borel set.
@@ -52,7 +113,7 @@ A Borel set $B$ is any set in a topological space $(X,\mathcal{T})$ that can be 
 \item If $B,C$ are Borel sets, then $B\setminus C$ is a Borel set.
 \item Any other set is not a Borel set.
 \een
-\subsection{Filter}
+\subsubsection{Filter}
 A filter on a set $X$ is a family $\mathcal{B}$ of subsets of $X$ such that: 
 \begin{enumerate}
 \item $X\in\mathcal{B}$.
@@ -60,106 +121,19 @@ A filter on a set $X$ is a family $\mathcal{B}$ of subsets of $X$ such that:
 \item $A\in\mathcal{B}\land B\in\mathcal{B}\implies A\cap B\in\mathcal{B}$.
 \item $A\subseteq B\subseteq X\land A\in\mathcal{A}\in\mathcal{B}\implies B\in\mathcal{B}$.
 \end{enumerate}
-\subsection{Base or basis (基)}
+\subsubsection{Base or basis (基)}
 Given a topological space $(X,\mathcal{T})$, a base (or basis) for the topology $\mathcal{T}$ (also called a base for $X$ if the topology is understood) is a family $\mathcal{B}\subseteq\mathcal{T}$ of open sets such that every open set of the topology can be represented as the union of some subfamily of $\mathcal{B}$.
 
 The topology generated by a base $\mathcal{B}$, generally denoted by $\tau(\mathcal{B})$ can be defined to be follows: A subset $O\subseteq X$ is to be declared as open, if for all $x\in O$, there exists some $B\in\mathcal{B}$ such that $x\in B\subseteq O$.
-\subsection{Prefilter or filter base}
+\subsubsection{Prefilter or filter base}
 $\mathcal{B}$ is called a prefilter if its upward closure $\uparrow\mathcal{B}$ is a filter.
-\ssc{Quotient space (商空間)}
+\subsubsection{Quotient space (商空間)}
 Let $X$ be a topological space and $\cong$ be an equivalence relation on it. The quotient space $Y$ of $X$ by $\cong$ is the quotient set of $X$ by $\cong$ equipped with the quotient topology, defined as $U\subseteq Y$ is open in the quotient topology on $Y$ if and only if $\{x\in X\mid[x]\in U\}$ is open in $X$ and $V\subseteq Y$ is closed in the quotient topology on $Y$ if and only if $\{x\in X\mid[x]\in V\}$ is closed in $X$.
-\ssc{Type of topological spaces}
-\sssc{Distinct}
-Point $x$ and point $y$ in a topological space are distinct if and only if they are not the same point.
-\sssc{Kolmogorov space (柯爾莫果洛夫空間) or T$_0$ space}
-Two points in a topological space are topological distinguishable if and only if there exists an open set that contains one of them but not the other.
-
-A topological space is called a Kolmogorov space or T$_0$ space if and only if any two distinct points in it are topological distinguishable. This condition is called the T$_0$ condition or the first separation theorem.
-\sssc{Kolmogorov quotient (space)}
-The Kolmogorov quotient (space) of a topological space is the quotient space of it under the equivalence relation topological indistinguishablity.
-\sssc{Fréchet space (弗蘭歇空間), accessible space, or T$_1$ space}
-Two points $x$ and $y$ in a topological space are separated if and only if there exists open sets $U,V$ such that $x\in U\land y\notin U\land y\in V\land x\notin V$.
-
-A topological space is called a Fréchet space, accessible space, or T$_1$ space if and only if any two distinct points in it are separated. This condition is called the T$_1$ condition or the second separation theorem. A topological space is a $T_1$ space implies it is a $T_0$ space.
-\sssc{Symmetric space or R$_0$ space}
-A topological space is called a symmetric space or R$_0$ space if and only if any two topological distinguishable points in it are separated.
-\sssc{Hausdorff space (郝斯多夫空間), separated space (分離空間), or T$_2$ space}
-Points $x$ and $y$ in a topological space are separated by neighborhoods if and only if there exists a neighborhood $U$ of $x$ and a neighborhood $V$ of $y$ such that $U$ and $V$ are disjointed.
-
-A topological space is called a Hausdorff space, separated space, or T$_2$ space if and only if any two distinct points in it are separated by neighborhoods. This condition is called the T$_2$ condition or the third separation theorem. A topological space is a $T_2$ space implies it is a $T_1$ space.
-\sssc{Urysohn space or T\(_{2\text{\textonehalf}}\) space}
-Points $x$ and $y$ in a topological space are separated by closed neighborhoods if and only if there exists a closed neighborhood $U$ of $x$ and a closed neighborhood $V$ of $y$ such that $U$ and $V$ are disjointed.
-
-A topological space is called a Urysohn space or T\(_{2\text{\textonehalf}}\) space if and only if any two distinct points in it are separated by closed neighborhoods. A topological space is a T\(_{2\text{\textonehalf}}\) space implies it is a $T_2$ space.
-\sssc{Completely Hausdorff space, functionally Hausdorff space, or completely T$_2$ space}
-Points $x$ and $y$ in a topological space $X$ are separated by a (continuous) function if and only if there exists a continuous function $f\colon X\to [0,1]$ such that $f(x)=0$ and $f(y)=1$.
-
-A topological space is called a completely Hausdorff space, functionally Hausdorff space, or completely T$_2$ space if and only if any two distinct points in it are separated by a continuous function. A topological space is a completely T$_2$ space implies it is a T\(_{2\text{\textonehalf}}\) space.
-\sssc{Regular space (正則空間)}
-A topological space $X$ is called a regular space if and only if for any closed set $F$ and any point $x\notin F$, there exists a neighbourhood $U$ of $x$ and a neighbourhood $V$ of $F$ such that $U$ and $V$ are disjointed.
-\sssc{Regular Hausdorff space or T$_3$ space}
-A topological space is called a regular Hausdorff space or T$_3$ space if and only if it is a regular space and a Hausdorff space.
-\sssc{Completely regular space}
-A closed set $F$ and a point $x\notin F$ in a topological space $X$ are separated by a (continuous) function if and only if there exists a continuous function $f\colon X\to [0,1]$ such that $f(x)=0$ and $F\subseteq f^{-1}(\{1\})$.
-
-A topological space $X$ is called a completely regular space if and only if any closed set $F$ and any point $x\notin F$ in it are separated by a (continuous) function. A topological space is a completely regular space implies it is a regular space.
-\sssc{Completely regular Hausdorff space, Tychonoff space, completely T$_3$ space, or T\(_{3\text{\textonehalf}}\) space}
-A topological space $X$ is called a completely regular Hausdorff space, Tychonoff space, completely T$_3$ space, or T\(_{3\text{\textonehalf}}\) space if and only if it is a completely regular space and a Hausdorff space. A topological space is a completely T$_3$ space implies it is a completely T$_2$ space.
-\sssc{Normal space (正規空間)}
-Disjoint closed sets $E$ and $F$ in a topological space are separated by neighborhoods if and only if there exists a neighborhood $U$ of $E$ and a neighborhood $V$ of $F$ such that $U$ and $V$ are disjointed.
-
-A topological space is called a normal space if and only if any two distinct closed sets in it are separated by neighborhoods. A topological space is a normal space implies it is a regular space.
-\sssc{Urysohn's lemma}
-Two closed sets $E$ and $F$ in a topological space $X$ are separated by a (continuous) function if and only if there exists a continuous function $f\colon X\to [0,1]$ such that $\subseteq f^{-1}(\{0\})$ and $F\subseteq f^{-1}(\{1\})$.
-
-The Urysohn's lemma states that, a topological space is a normal space if and only if any two disjoint closed sets in it are separated by a (continuous) function.
-\sssc{Normal Hausdorff space or T$_4$ space}
-A topological space is called a normal Hausdorff space or T$_4$ space if and only if it is a normal space and a $T_1$ space. A topological space is a normal Hausdorff space implies it is a regular Hausdorff space.
-\sssc{Completely normal space or hereditarily normal space}
-A topological space is called a completely normal space or hereditarily normal space if and only if any subspace of it is a normal space.
-\sssc{Completely normal Hausdorff space, T$_5$ space, or completely T$_4$ space}
-A topological space is called a completely normal Hausdorff space, T$_5$ space, or completely T$_4$ space if and only if it is a completely normal space and a T$_1$ space. A topological space is a completely normal Hausdorff space implies it is a normal Hausdorff space and a completely regular Hausdorff space.
-\sssc{Perfectly normal space}
-Two closed sets $E$ and $F$ in a topological space $X$ are precisely separated by a (continuous) function if and only if there exists a continuous function $f\colon X\to [0,1]$ such that $E=f^{-1}(\{0\})$ and $F=f^{-1}(\{1\})$.
-
-A topological space is called a perfectly normal space if and only if any two disjoint closed sets in it are precisely separated by a (continuous) function. A topological space is a perfect normal space implies it is a completely normal space.
-\sssc{Perfectly normal Hausdorff space, T$_6$ space, or perfectly T$_4$ space}
-A topological space is called a perfectly normal Hausdorff space, T$_6$ space, or perfectly T$_4$ space if and only if it is a perfectly normal space and a $T_1$ space. A topological space is a perfectly normal Hausdorff space implies it is a completely normal Hausdorff space.
-\sssc{Connected space (連通空間)}
-A topological space is called disconnected if and only if it can be expressed as the union of two disjoint non-empty open sets; otherwise, it is called connected.
-\sssc{Path-connected space (路徑連通空間)}
-A topological space $X$ is called path-connected if and only if for any two points $x,y\in X$, there existes a continuous function $f\colon[0,1]\to X$ such that $f(0)=x$ and $f(1)=y$. A topological space is path-connected implies it is connected.
-\sssc{Simply connected space or 1-connected space (單連通空間)}
-A topological space is called simply connected if and only if it is path-connected, and that for any two points $x,y\in X$ and any two continuous functions $f\colon[0,1]\to X$ and $g\colon[0,1]\to X$ such that $f(0)=g(0)=x$ and $f(1)=g(1)=y$, there exists a continuous function $F\colon[0,1]\times[0,1]\to X$ such that $F(x,0)=f(x)$ and $F(x,1)=g(x)$.
-\sssc{Compact (緊緻) (subset)}
-A subset $K$ of a topological space $X$ is said to be compact if for every collection $C$ of open subsets of $X$ such that
-\[K\subseteq\bigcup_{S\in C}S,\]
-called a open cover, there is a finite subcollection $F\subseteq C$ such that
-\[K\subseteq\bigcup _{S\in F}S,\]
-called a finite subcover.
-\sssc{Compact space}
-A topological space $X$ is called compact iff for every collection $C$ of open subsets of $X$ such that
-\[X=\bigcup_{S\in C}S,\]
-called a open cover, there is a finite subcollection $F\subseteq C$ such that
-\[X=\bigcup _{S\in F}S,\]
-called a finite subcover.
-\sssc{(Weakly) locally compact space}
-A topological space $X$ is called (weakly) locally compact iff every point in it has a compact neighbourhood.
-\sssc{Strongly locally compact or locally relatively compact space}
-A topological space $X$ is called strongly locally compact or locally relatively compact iff every point in it has a closed compact neighbourhood.
-
-A Hausdorff space is weakly locally compact iff it is strongly locally compact.
-\sssc{\text{\textsigma}-compact space}
-A topological space $X$ is called \text{\textsigma}-compact iff its topology is the union of countably many compact spaces.
-\sssc{\text{\textsigma}-locally compact space}
-A topological space $X$ is called \text{\textsigma}-locally compact iff it is \text{\textsigma}-compact and locally compact.
-\sssc{Second-countable space or completely separable space}
-A topological space is second-countable iff it has a countable basis.
-\subsection{Locally finite cover}
+\subsubsection{Locally finite cover}
 Let $X$ be a topological space, and $\{U_i\mid i\in I\}$ be a cover of $X$. We say that $U$ is locally finite if for all $x\in X$, there exists $V\ni x$ that is open in $X$ such that the set $\{i\in I\mid V\cap U_i\neq\varnothing\}$ is finite.
-\ssc{Dense (稠密) subset}
+\subsubsection{Dense (稠密) subset}
 A subset $A$ of a topological space $X$ is said to be a dense subset of $X$ if for every $x\in X$ and every neighborhood $U$ of $x$, $U\cap A\neq\varnothing$.
-\ssc{Comparison of topologies}
+\subsubsection{Comparison of topologies}
 Let $\tau_1$ and $\tau_2$ be two topologies on a set $X$.
 
 $\tau_1$ is said to be a coarser (weaker or smaller) topology than $\tau_2$, and $\tau_2$ is said to be a finer (stronger or larger) topology than $\tau_1$, iff $\tau_1$ is a subset of $\tau_2$.
@@ -167,11 +141,97 @@ $\tau_1$ is said to be a coarser (weaker or smaller) topology than $\tau_2$, and
 $\tau_1$ is said to be a strictly coarser topology than $\tau_2$, and $\tau_2$ is said to be a strictly finer topology than $\tau_1$, iff $\tau_1$ is a proper subset of $\tau_2$.
 
 The binary relation $\subseteq$ defines a partial ordering relation on the set of all possible topologies on $X$.
-\ssc{Product topology or Tychonoff topology}
+\subsubsection{Product topology or Tychonoff topology}
 The product topology or Tychonoff topology on a set $X=\prod_{i=1}^nX_i$ where $X_i$ are topological spaces and $n>1$ is defined as the coarsest topology on $X$ such that all $i$th projection map are continuous. $X$ with the product topology on $X$ is called a product space. Unless otherwise specified, product topology is assumed on a Cartesian product of topological spaces.
+\subsection{Type of topological spaces}
+\subsubsection{Distinct}
+Point $x$ and point $y$ in a topological space are distinct if and only if they are not the same point.
+\subsubsection{Kolmogorov space (柯爾莫果洛夫空間) or T$_0$ space}
+Two points in a topological space are topological distinguishable if and only if there exists an open set that contains one of them but not the other.
+
+A topological space is called a Kolmogorov space or T$_0$ space if and only if any two distinct points in it are topological distinguishable. This condition is called the T$_0$ condition or the first separation theorem.
+\subsubsection{Kolmogorov quotient (space)}
+The Kolmogorov quotient (space) of a topological space is the quotient space of it under the equivalence relation topological indistinguishablity.
+\subsubsection{Fréchet space (弗蘭歇空間), accessible space, or T$_1$ space}
+Two points $x$ and $y$ in a topological space are separated if and only if there exists open sets $U,V$ such that $x\in U\land y\notin U\land y\in V\land x\notin V$.
+
+A topological space is called a Fréchet space, accessible space, or T$_1$ space if and only if any two distinct points in it are separated. This condition is called the T$_1$ condition or the second separation theorem. A topological space is a $T_1$ space implies it is a $T_0$ space.
+\subsubsection{Symmetric space or R$_0$ space}
+A topological space is called a symmetric space or R$_0$ space if and only if any two topological distinguishable points in it are separated.
+\subsubsection{Hausdorff space (郝斯多夫空間), separated space (分離空間), or T$_2$ space}
+Points $x$ and $y$ in a topological space are separated by neighborhoods if and only if there exists a neighborhood $U$ of $x$ and a neighborhood $V$ of $y$ such that $U$ and $V$ are disjointed.
+
+A topological space is called a Hausdorff space, separated space, or T$_2$ space if and only if any two distinct points in it are separated by neighborhoods. This condition is called the T$_2$ condition or the third separation theorem. A topological space is a $T_2$ space implies it is a $T_1$ space.
+\subsubsection{Urysohn space or T\(_{2\text{\textonehalf}}\) space}
+Points $x$ and $y$ in a topological space are separated by closed neighborhoods if and only if there exists a closed neighborhood $U$ of $x$ and a closed neighborhood $V$ of $y$ such that $U$ and $V$ are disjointed.
+
+A topological space is called a Urysohn space or T\(_{2\text{\textonehalf}}\) space if and only if any two distinct points in it are separated by closed neighborhoods. A topological space is a T\(_{2\text{\textonehalf}}\) space implies it is a $T_2$ space.
+\subsubsection{Completely Hausdorff space, functionally Hausdorff space, or completely T$_2$ space}
+Points $x$ and $y$ in a topological space $X$ are separated by a (continuous) function if and only if there exists a continuous function $f\colon X\to [0,1]$ such that $f(x)=0$ and $f(y)=1$.
+
+A topological space is called a completely Hausdorff space, functionally Hausdorff space, or completely T$_2$ space if and only if any two distinct points in it are separated by a continuous function. A topological space is a completely T$_2$ space implies it is a T\(_{2\text{\textonehalf}}\) space.
+\subsubsection{Regular space (正則空間)}
+A topological space $X$ is called a regular space if and only if for any closed set $F$ and any point $x\notin F$, there exists a neighbourhood $U$ of $x$ and a neighbourhood $V$ of $F$ such that $U$ and $V$ are disjointed.
+\subsubsection{Regular Hausdorff space or T$_3$ space}
+A topological space is called a regular Hausdorff space or T$_3$ space if and only if it is a regular space and a Hausdorff space.
+\subsubsection{Completely regular space}
+A closed set $F$ and a point $x\notin F$ in a topological space $X$ are separated by a (continuous) function if and only if there exists a continuous function $f\colon X\to [0,1]$ such that $f(x)=0$ and $F\subseteq f^{-1}(\{1\})$.
+
+A topological space $X$ is called a completely regular space if and only if any closed set $F$ and any point $x\notin F$ in it are separated by a (continuous) function. A topological space is a completely regular space implies it is a regular space.
+\subsubsection{Completely regular Hausdorff space, Tychonoff space, completely T$_3$ space, or T\(_{3\text{\textonehalf}}\) space}
+A topological space $X$ is called a completely regular Hausdorff space, Tychonoff space, completely T$_3$ space, or T\(_{3\text{\textonehalf}}\) space if and only if it is a completely regular space and a Hausdorff space. A topological space is a completely T$_3$ space implies it is a completely T$_2$ space.
+\subsubsection{Normal space (正規空間)}
+Disjoint closed sets $E$ and $F$ in a topological space are separated by neighborhoods if and only if there exists a neighborhood $U$ of $E$ and a neighborhood $V$ of $F$ such that $U$ and $V$ are disjointed.
+
+A topological space is called a normal space if and only if any two distinct closed sets in it are separated by neighborhoods. A topological space is a normal space implies it is a regular space.
+\subsubsection{Urysohn's lemma}
+Two closed sets $E$ and $F$ in a topological space $X$ are separated by a (continuous) function if and only if there exists a continuous function $f\colon X\to [0,1]$ such that $\subseteq f^{-1}(\{0\})$ and $F\subseteq f^{-1}(\{1\})$.
+
+The Urysohn's lemma states that, a topological space is a normal space if and only if any two disjoint closed sets in it are separated by a (continuous) function.
+\subsubsection{Normal Hausdorff space or T$_4$ space}
+A topological space is called a normal Hausdorff space or T$_4$ space if and only if it is a normal space and a $T_1$ space. A topological space is a normal Hausdorff space implies it is a regular Hausdorff space.
+\subsubsection{Completely normal space or hereditarily normal space}
+A topological space is called a completely normal space or hereditarily normal space if and only if any subspace of it is a normal space.
+\subsubsection{Completely normal Hausdorff space, T$_5$ space, or completely T$_4$ space}
+A topological space is called a completely normal Hausdorff space, T$_5$ space, or completely T$_4$ space if and only if it is a completely normal space and a T$_1$ space. A topological space is a completely normal Hausdorff space implies it is a normal Hausdorff space and a completely regular Hausdorff space.
+\subsubsection{Perfectly normal space}
+Two closed sets $E$ and $F$ in a topological space $X$ are precisely separated by a (continuous) function if and only if there exists a continuous function $f\colon X\to [0,1]$ such that $E=f^{-1}(\{0\})$ and $F=f^{-1}(\{1\})$.
+
+A topological space is called a perfectly normal space if and only if any two disjoint closed sets in it are precisely separated by a (continuous) function. A topological space is a perfect normal space implies it is a completely normal space.
+\subsubsection{Perfectly normal Hausdorff space, T$_6$ space, or perfectly T$_4$ space}
+A topological space is called a perfectly normal Hausdorff space, T$_6$ space, or perfectly T$_4$ space if and only if it is a perfectly normal space and a $T_1$ space. A topological space is a perfectly normal Hausdorff space implies it is a completely normal Hausdorff space.
+\subsubsection{Connected space (連通空間)}
+A topological space is called disconnected if and only if it can be expressed as the union of two disjoint non-empty open sets; otherwise, it is called connected.
+\subsubsection{Connected space iff empty set and space are the only two clopen sets}
+A topological space $(X,\mathcal{T})$ is connected iff $\varnothing$ and $X$ are the only two clopen sets.
+\bpr
+If: Assume for contradiction that a non-empty proper subset $A$ of $X$ is clopen. Then $A^c$ is a non-empty clopen proper subset of $X$ too. Then $X$ can be expressed as the union of two disjointed non-empty open sets $A$ and $A^c$.
+
+Only if: Assume for contradiction that $X$ is disconnected and can be expressed as the union of two disjointed non-empty open sets $A$ and $A^c$. Then $A$ and $A^c$ are both clopen.
+\epr
+\subsubsection{Path-connected space (路徑連通空間)}
+A topological space $X$ is called path-connected if and only if for any two points $x,y\in X$, there existes a continuous function $f\colon[0,1]\to X$ such that $f(0)=x$ and $f(1)=y$. A topological space is path-connected implies it is connected.
+\subsubsection{Simply connected space or 1-connected space (單連通空間)}
+A topological space is called simply connected if and only if it is path-connected, and that for any two points $x,y\in X$ and any two continuous functions $f\colon[0,1]\to X$ and $g\colon[0,1]\to X$ such that $f(0)=g(0)=x$ and $f(1)=g(1)=y$, there exists a continuous function $F\colon[0,1]\times[0,1]\to X$ such that $F(x,0)=f(x)$ and $F(x,1)=g(x)$.
+\subsubsection{Compact (緊緻) (subset)}
+A subset $K$ of a topological space $X$ is called compact iff for every open cover $C$ of $K$, there exists a finite subcover.
+\subsubsection{Compact space}
+A topological space $X$ is called compact iff for every open cover $C$ of $X$, there exists a finite subcover.
+\subsubsection{(Weakly) locally compact space}
+A topological space $X$ is called (weakly) locally compact iff every point in it has a compact neighbourhood.
+\subsubsection{Strongly locally compact or locally relatively compact space}
+A topological space $X$ is called strongly locally compact or locally relatively compact iff every point in it has a closed compact neighbourhood.
+
+A Hausdorff space is weakly locally compact iff it is strongly locally compact.
+\subsubsection{\text{\textsigma}-compact space}
+A topological space $X$ is called \text{\textsigma}-compact iff its topology is the union of countably many compact spaces.
+\subsubsection{\text{\textsigma}-locally compact space}
+A topological space $X$ is called \text{\textsigma}-locally compact iff it is \text{\textsigma}-compact and locally compact.
+\subsubsection{Second-countable space or completely separable space}
+A topological space is second-countable iff it has a countable basis.
 \subsection{Metric space (度量空間 or 賦距空間)}
-\sssc{Metric space}
-Metric space is an ordered pair $(M, d)$ where $M$ is a set and $d$ is a metric on M, i.e., a function $d:\,M\times M\to\mathbb{R}$ satisfying the following axioms for all points $x,y,z\in M$:
+\subsubsection{Metric space}
+Metric space is an ordered pair $(M, d)$ where $M$ is a set and $d$ is a metric on M, i.e., a function $d\colon M\times M\to\mathbb{R}$ satisfying the following axioms for all points $x,y,z\in M$:
 \begin{enumerate}
 \item The distance from a point to itself is zero: $d(x,x)=0$.
 \item (Positivity) The distance between two distinct points is always positive:$x\neq y\implies d(x,y)>0$.
@@ -181,35 +241,35 @@ Metric space is an ordered pair $(M, d)$ where $M$ is a set and $d$ is a metric 
 
 For a normed space $(X,\|\cdot\|)$, unless otherwise specified, it is equipped with a metric $d$ defined as
 \[d(x,y)=\|x-y\|,\quad \forall x,y\in X.\]
-\sssc{Cauchy sequence (柯西序列)}
+\subsubsection{Cauchy sequence (柯西序列)}
 Given a metric space $(x,d)$, a sequence of elements of $X$:
 \[x_1,x_2,x_3,\ldots\]
 is Cauchy if for every positive real number $\varepsilon$ there is a positive integer $N$ such that for all positive integers $m,n>N$:
 \[d\left(x_m,x_n\right)<\varepsilon.\]
-\sssc{Complete metric space (完備度量空間) or Cauchy space (柯西空間)}
+\subsubsection{Complete metric space (完備度量空間) or Cauchy space (柯西空間)}
 A metric space $(X,d)$ is complete if every Cauchy sequence of points in $X$ has a limit that is also in $X$.
-\sssc{Metric induced by norm}
+\subsubsection{Metric induced by norm}
 For a normed space, the metric
 \[d(x,y)\coloneq\|x-y\|\]
 is said to be induced by the norm. Such metric is often assumed to be equipped for normed spaces.
-\sssc{Complete subset or Cauchy subset}
+\subsubsection{Complete subset or Cauchy subset}
 A subset $S$ of a metric space $(X,d)$ is complete if every Cauchy sequence of points in $S$ has a limit that is also in $S$.
-\sssc{(Open) ball (開球)}
+\subsubsection{(Open) ball (開球)}
 In a metric space $(X,d)$, the open ball or ball of radius $r>0$ and centered at the point $a\in X$, denoted as $B_{<r}(a)$, $B_{r}(a)$, or $B(a,r)$, is defined as:
-\[B_{r}(a)\coloneq\left\{p\in X:\, d(a,p)<r\right\}.\]
-\sssc{Closed ball (閉球)}
+\[B_{r}(a)\coloneq\left\{p\in X\colon  d(a,p)<r\right\}.\]
+\subsubsection{Closed ball (閉球)}
 In a metric space $(X,d)$, the closed ball of radius $r\geq 0$ and centered at the point $a\in X$, denoted as $B_{\leq r}(a)$, is defined as:
-\[B_{\leq r}(a)\coloneq\left\{p\in X:\, d(a,p)\leq r\right\}.\]
-\sssc{Bounded (有界) subset}
+\[B_{\leq r}(a)\coloneq\left\{p\in X\colon  d(a,p)\leq r\right\}.\]
+\subsubsection{Bounded (有界) subset}
 A subset $S$ of a metric space $(M, d)$ is called bounded if and only if there exists $r > 0$ such that for all $s,t\in S$, we have $d(s, t) < r$.
-\sssc{Totally bounded or precompact subset}
+\subsubsection{Totally bounded or precompact subset}
 A subset $S$ of a metric space $(M, d)$ is called totally bounded or precompact if and only if there eixsts $r>0$ such that there exists a finite collection of open balls of radius $r$ that is a cover of $S$.
-\sssc{ε-net}
+\subsubsection{ε-net}
 A subset $E$ of a metric space $X$ is an $\varepsilon$-net for another subset $A$ of $X$ if
 \[A\subseteq\bigcup_{x\in E}B(x,\varepsilon).\]
 
 If a finite $\varepsilon$-net exists for every $\varepsilon>0$, then $A$ is totally bounded.
-\sssc{A compact subset of a Hausdorff space is closed}
+\subsubsection{A compact subset of a Hausdorff space is closed}
 \textit{Statement:} If a subset $K$ of a Hausdorff space $X$ is compact, then it must be closed.
 
 \begin{proof}
@@ -226,7 +286,7 @@ For every $a\in X\setminus K$, we found an open neighborhood $V$ of $a$ such tha
 \[V\subseteq X\setminus K\land V\cap K=\varnothing,\]
 so $K$ is closed.
 \end{proof}
-\sssc{A closed subset of a compact set is compact}
+\subsubsection{A closed subset of a compact set is compact}
 \textit{Statement:} If $K$ is a compact subset of a topological space $X$ and $F\subseteq K$ is closed, then $F$ is compact.
 
 \begin{proof}
@@ -236,7 +296,7 @@ is an open cover of $K$.
 
 Since $K$ is compact, there is a finite subcollection $D=C'\cup\{X\setminus F\}$ of $C\cup\{X\setminus F\}$ where $C'\subseteq C$ that is a cover of $K$. Then $C'$ is a finite subcollection of $C$ that is a cover of $F$. Thus $F$ is compact.
 \end{proof}
-\sssc{A compact subset of a metric space is bounded}
+\subsubsection{A compact subset of a metric space is bounded}
 \textit{Statement:} If $K$ is a compact subset of a metric space $(X,d)$, then $K$ is bounded.
 
 \begin{proof}
@@ -244,19 +304,19 @@ Since $K$ is compact, for any point $p\in X$, there exist a finite collection of
 \[\{B(p,n)\mid n\in\bbN\land n\leq m\in\bbN\}\]
 that is a cover of $K$, then $K\subseteq B(p,m)$, so $K$ is bounded.
 \end{proof}
-\sssc{A complete subset of a complete metric space is closed}
+\subsubsection{A complete subset of a complete metric space is closed}
 \Textit{Statement:} If a subset $A$ of a complete metric space is compact, them $A$ is closed.
 
 \begin{proof}
 Since a metric space is necessarily a Hausdorff space, any convergent sequence must have a unique limit. Since $A$ is complete, every Cauchy sequence in $A$ converges to a point in $A$. Thus, $A$ is closed.
 \end{proof}
-\sssc{A closed subset of a complete metric space is complete}
+\subsubsection{A closed subset of a complete metric space is complete}
 \Textit{Statement:} If a subset $A$ of a complete metric space $X$ is closed, them $A$ is compact.
 
 \begin{proof}
 Let $(x_n)$ be a Cauchy sequence in $A$. Since the space is complete, it converges to some $x\in X$. Since $A$ is closed in $X$, any limit of a convergent sequence in $A$ must be in $A$. Thus, $A$ is complete.
 \end{proof}
-\sssc{A closed and bounded subset of an Euclidean space is compact}
+\subsubsection{A closed and bounded subset of an Euclidean space is compact}
 \textit{Statement: }If a subset $A$ of an Euclidean space $\bbR^n$ is closed and bounded, then $A$ is compact.
 
 \begin{proof}
@@ -270,13 +330,13 @@ Since $A$ is bounded, there exists $M>0$ such that
     
     Since $A$ is closed, it is complete. Thus $x\in A$.
 \end{proof}
-\sssc{Heine–Borel Theorem (海涅-博雷爾定理)}
+\subsubsection{Heine–Borel Theorem (海涅-博雷爾定理)}
 For a subset $S$ of an Euclidean space $\bbR^n$, the following two statements are equivalent:
 \bit
 \item $S$ is compact;
 \item $S$ is closed and bounded.
 \eit
-\sssc{A complete and totally bounded subset of a complete metric space is compact}
+\subsubsection{A complete and totally bounded subset of a complete metric space is compact}
 \textit{Statement: }If a subset $A$ of a complete metric space $(x,d)$ is complete and totally bounded, then $A$ it is compact.
 
 \begin{proof}
@@ -296,13 +356,13 @@ For $\varepsilon=1$, since $A$ is totally bounded, there exists a finite cover o
     \[\forall N\in\bbN\colon m,n\geq N\implies d(y_m,y_n)\leq\frac{2}{N}.\]
     Since $A$ is complete, $(y_k)$ must converges to some point $y\in A$.
 \end{proof}
-\sssc{Generalized/general Heine–Borel Theorem}
+\subsubsection{Generalized/general Heine–Borel Theorem}
 For a subset $S$ of a complete metric space $(X,d)$, the following two statements are equivalent:
 \bit
 \item $S$ is compact;
 \item $S$ is complete and totally bounded.
 \eit
-\sssc{A totally bounded subset is bounded}
+\subsubsection{A totally bounded subset is bounded}
 \Textit{Statement:} If a subset $A$ of a metric space $(X,d)$ is totally bounded, them $A$ is bounded.
 
 \begin{proof}
@@ -322,7 +382,7 @@ Thus:
 \[A\subseteq B(x_1,M).\]
 Therefore, $A$ is bounded.
 \end{proof}
-\sssc{All norms on a finite-dimensional vector space are equivalent}
+\subsubsection{All norms on a finite-dimensional vector space are equivalent}
 \textit{Statement: }Let $V$ be a finite-dimensional vector space over $\bbR$ or $\bbC$ and $\dim V=n$. If $\|\cdot\|_a
 $ and $\|\cdot\|_b$ are two norm on $V$, then there exist constants $c,C>0$ such that for all $v\in V$,
 \[c\|v\|_a\leq\|v\|_b\leq C\|v\|_a,\]
@@ -345,7 +405,7 @@ called that the two norms are equivalent, and $c,C$ are called the equivalence c
     \[m\|v\|_a\leq\|v\|_b\leq M\|v\|_a.\]
     Thus $c=m,C=M$ are the equivalence constants.
 \end{proof}
-\sssc{A bounded subset of a finite-dimensional Banach space is totally bounded}
+\subsubsection{A bounded subset of a finite-dimensional Banach space is totally bounded}
 \Textit{Statement:} If a subset $A$ of a $n$-dimensional Banach space $X$ with $n\in\bbN$ is bounded, then $A$ is totally bounded.
 
 \begin{proof}
@@ -364,36 +424,36 @@ called that the two norms are equivalent, and $c,C$ are called the equivalence c
     \[\|T(b)-T(v_i)\|_X=\|b-v_i\|_*\leq C\|b-v_i\|_2<C\delta=\varepsilon.\]
     Therefore the finite set of all $T(v_i)$ is an $\varepsilon$-net for $A$. Since $\varepsilon>0$ was arbitrary, $A$ is totally bounded.
 \end{proof}
-\ssc{Net (網)}
-\sssc{Net (網)}
+\subsection{Net (網)}
+\subsubsection{Net (網)}
 A net in $X$, denoted as $x_{\bullet }=\left(x_{a}\right)_{a\in A}$ or $\left\langle x_{a}\right\rangle _{a\in A}$, is a function of the form $x_{\bullet }\colon A\to X$ whose domain $A$ is some directed set, and whose values are $x_{\bullet }(a)=x_{a}$ in a topological space $X$. Elements of a net's domain are called its indices.
-\sssc{Eventually or residually}
+\subsubsection{Eventually or residually}
 A net $x_{\bullet }=\left(x_{a}\right)_{a\in A}$ in $X$ is said to be eventually or residually in a set $S$ if there exists some $a\in A$ such that for every $b\in A$ with $b\geq a$, the point $x_b\in S$.
-\sssc{Limit of nets}
+\subsubsection{Limit of nets}
 A point $x$ in a topological space $X$ is called a limit point or limit of a net $x_{\bullet }$ in $X$ if, for every open neighborhood $U$ of $x$, the net $x_{\bullet }$ is eventually in $U$, also called that the net converges to/towards $x$, and denoted as $x_{\bullet}\to x$, $x_a\to x$, $\lim x_{\bullet}\to x$, $\lim_{a\in A}x_a\to x$, or $\lim_ax_a\to x$.
 
 If $\lim x_{\bullet}\to x$ and this limit is unique (i.e. $\lim x_{\bullet}\to y$ only if $x=y$), then one writes $\lim x_{\bullet}=x$, $\lim_{a\in A}x_a=x$, or $\lim_ax_a=x$.
-\sssc{Cofinal (共尾) or frequent subset}
+\subsubsection{Cofinal (共尾) or frequent subset}
 A subset $B$ of a directed set $A$ is a cofinal or frequent subset if for all $a\in A$, there exists $b\in B$ such that $b\geq a$.
-\sssc{Cofinally (共尾地) or frequently}
+\subsubsection{Cofinally (共尾地) or frequently}
 A net $x_{\bullet }=\left(x_{a}\right)_{a\in A}$ in $X$ is said to be cofinally or frequently in a set $S$ if for every $a\in A$ there exists $b\in A$ such that $b\geq a\land x_b\in S$.
-\sssc{Cluster point, or accumulation point (集積點)}
+\subsubsection{Cluster point, or accumulation point (集積點)}
 A point $x$ in a topological space $X$ is called a cluster point or accumulation point of a net $x_{\bullet }$ in $X$ if, for every open neighborhood $U$ of $x$, the net $x_{\bullet }$ is cofinally in $U$, also called that the net clusters to/towards $x$.
 
 A limit point of a net is necessary a cluster point of it.
-\sssc{Subnet or Willard-subnet}
+\subsubsection{Subnet or Willard-subnet}
 A net $s_{\bullet }=\left(s_{i}\right)_{i\in I}$ is called a subnet or Willard-subnet of another net $x_{\bullet }=\left(x_{a}\right)_{a\in A}$ if there exists an order-preserving map $h\colon I\to A$ such that $h(I)$ is a cofinal subset of $A$ and 
 \[s_{i}=x_{h(i)}\quad \forall i\in I.\]
-\sssc{Ultranet or universal net}
+\subsubsection{Ultranet or universal net}
 A net $x_{\bullet }$ in $X$ is called an ultranet or a universal net if for every subset $S\subseteq X$, $x_{\bullet }$ is eventually in $S$ or $X\setminus S$.
 
 A point is a limit point of a ultranet if and only if it a cluster point of it.
-\sssc{In Hausdorff spaces}
+\subsubsection{In Hausdorff spaces}
 A net in a Hausdorff space has at most one limit; if it has one, the limit point of it is the only cluster point of it.
 \bpr
 TODO
 \epr
-\sssc{Willard-subnet limit and cluster point theorems}
+\subsubsection{Willard-subnet limit and cluster point theorems}
 For any nonempty net $\langle a_n\rangle_{n\in A}$ and its any Willard-subnet $\langle b_n\rangle_{n\in B}$, if $x$ is a limit point of $a_n$, then $x$ is a limit point of $b_n$.
 \bpr
 Let $h\colon B\to A$ be order-preserving and $h(B)$ be a cofinal subset of $A$. Let $U$ be an open neighborhood of $x$. There exists $a\in A$ such that $n\geq a\implies a_n\in U$. Then, for any $b\in B$ such that $h(b)\geq a$, $m\geq b\implies b_m=a_{h(m)}\in U$.
@@ -403,28 +463,28 @@ For any nonempty net $\langle a_n\rangle_{n\in A}$ and its any Willard-subnet $\
 Let $h\colon B\to A$ be order-preserving and $h(B)$ be a cofinal subset of $A$. Let $U$ be an open neighborhood of $x$. For any $b\in B$, there exists $m\geq b$ such that $a_{h(m)}=b_m\in U$. Also, for any $c\in A$, there exists $d\in B$ such that $h(d)\geq c$. Thus, for any $a\in A$, there exists $n\geq a$ such that $a_n\in U$.
 \epr
 Its special case when $A=B=\bbN_0$ or $\bbN_1$, and $a_n\in\bbR$ is called the subsequence convergence theorem.
-\ssc{Manifold}
-\sssc{Euclidean neighborhood}
+\subsection{Manifold}
+\subsubsection{Euclidean neighborhood}
 An Euclidean neighborhood of a point in a topological space is a neighborhood of it that is homeomorphic to an open subset of $\bbR^n$ for some $n\in\bbN_0$. Such Euclidean neighborhood is called $n$-dimensional.
 
 A Euclidean neighborhood homeomorphic to an open ball in $\bbR^n$ is called a Euclidean ball.
-\sssc{Locally Euclidean space}
+\subsubsection{Locally Euclidean space}
 A topological space $X$ is called locally Euclidean iff it can be covered by $n$-dimensional Euclidean neighborhoods for some $n\in\bbN_0$. Such locally Euclidean space is called $n$-dimensional or an $n$-locally Euclidean space.
 
 Euclidean balls form a basis for the topology of a locally Euclidean space.
-\sssc{(Topological) manifold (流形)}
+\subsubsection{(Topological) manifold (流形)}
 A (topological) manifold is a locally Euclidean space that is a Hausdorff space. An $n$-dimensional (topological) manifold or $n$-manifold is an $n$-dimensional locally Euclidean space that is a Hausdorff space.
 
 An 1D manifold is called curve. A 2D manifold is a called a surface.
-\sssc{(Coordinate) chart}
+\subsubsection{(Coordinate) chart}
 For any Euclidean neighborhood $U$, a homeomorphism $\phi\colon U\to\phi\left(U\right)\subseteq\bbR^n$ is called a (coordinate) chart on $U$.
-\sssc{Atlas}
+\subsubsection{Atlas}
 For a locally Euclidean space $M$, an atlas $\{(U_i,\phi_i)\mid i\in I\}$ on $M$ is a family of ordered pairs of Euclidean neighborhood $U_i$ and coordinate chart $\phi_i$ on $U_i$ such that $\{U_i\mid i\in I\}$ covers $M$.
-\sssc{Transition function or transition map}
+\subsubsection{Transition function or transition map}
 For an atlas $\{(U_i,\phi_i)\mid i\in I\}$ on an $n$-dimensional locally Euclidean space $M$, the transition function $\phi_i\phi_j^{\pht{j}-1}$ for $i,j\in I$ is defined as the function
 \[\phi_i\phi_j^{\pht{j}-1}\colon\phi_i(U_i\cap U_j)\to\phi_j(U_i\cap U_j);\;x\mapsto\phi_i(\phi_j^{\pht{j}-1}(x)).\]
 Such a map is a homeomorphism between open subsets of $\bbR^n$.
-\sssc{Differentiable and smooth}
+\subsubsection{Differentiable and smooth}
 An atlas $\{(U_i,\phi_i)\mid i\in I\}$ is called a differentiable atlas iff for all $i,j\in I$, the transition map $\phi_i\phi_j^{\pht{j}-1}$ is differentiable.
 
 An atlas $\{(U_i,\phi_i)\mid i\in I\}$ is called a ($n$-times) continuously differentiable atlas iff for all $i,j\in I$, the transition map $\phi_i\phi_j^{\pht{j}-1}$ is ($n$-times) continuously differentiable.
@@ -456,25 +516,25 @@ is a $C^k$ function.
 Let $M$ be an $n$-dimensional smooth ($C^\infty$) manifold with smooth ($C^\infty$) atlas $\{(U_i,\phi_i)\mid i\in I\}$. A map $f\colon M\to M$ is a smooth ($C^\infty$) map iff for any charts $(U_i,\phi_i)$ such that $p\in U_i\land i\in I$ and $(U_j,\phi_j)$ such that $f(p)\in U_j\land j\in I$,
 \[\phi_j\circ f\circ\phi_i^{\pht{i}-1}\colon\phi_i(U_i\cap f^{-1}(U_j))\subseteq\bbR^n\to\bbR^n\]
 is a smooth ($C^\infty$) function.
-\sssc{Diffeomorphism}
+\subsubsection{Diffeomorphism}
 Given two differentiable manifolds $X,Y$, a continuously differentiable map $f\colon X\to Y$ is a diffeomorphism iff it is a bijection and its inverse is differentiable. If there exists a diffeomorphism between two differentiable manifolds, they are called diffeomorphic.
 
 Given two $C^k$ manifolds $X,Y$, a $C^k$ map $f\colon X\to Y$ is a $C^k$-diffeomorphism iff it is a bijection and its inverse is $C^k$. If there exists a $C^k$-diffeomorphism between two $C^k$ manifolds, they are called $C^k$-diffeomorphic.
-\sssc{Local diffeomorphism}
+\subsubsection{Local diffeomorphism}
 Given two differentiable manifolds $X,Y$, a map $f\colon X\to Y$ is a local diffeomorphism iff for any point $x\in X$, there exists an open neighborhood $U$ of $X$ such that $f_U\colon U\to f(U)$ is a diffeomorphism. If there exists a local diffeomorphism between two differentiable manifolds, they are called locally diffeomorphic.
 
 Given two $C^k$ manifolds $X,Y$, a map $f\colon X\to Y$ is a local $C^k$-diffeomorphism iff for any point $x\in X$, there exists an open neighborhood $U$ of $X$ such that $f_U\colon U\to f(U)$ is a $C^k$-diffeomorphism. If there exists a local $C^k$-diffeomorphism between two differentiable manifolds, they are called locally $C^k$-diffeomorphic.
-\ssc{Combination with abstract algebra}
-\sssc{Topological group (拓樸群)}
+\subsection{Combination with abstract algebra}
+\subsubsection{Topological group (拓樸群)}
 A topological group is a triple $(X,\tau,*)$ such that $(X,\tau)$ is a topological space, $(X,*)$ is a group, and the maps of $(x,y)\in X^2\mapsto x*y$ and $x\mapsto x^{-1}$ are continuous mapa. Such topology $\tau$ is called a group topology.
-\sssc{Topological field (拓樸域)}
+\subsubsection{Topological field (拓樸域)}
 A topological field is defined with a topological space $(X,\tau)$ and a field $(X,+,*)$ such that the maps of $a\mapsto -a$ and $a\mapsto a^{-1}$ are continuous maps.
-\ssc{Discrete space}
-\sssc{Discrete topology}
+\subsection{Discrete space}
+\subsubsection{Discrete topology}
 A discrete topology on $X$ is a topology such that every subset of $X$ is open.
-\sssc{Discrete (topological) space}
+\subsubsection{Discrete (topological) space}
 A space equipped with discrete topology.
-\sssc{Discrete subspace}
+\subsubsection{Discrete subspace}
 A topological subspace whose subspace topology is a discrete topology.
 \end{document}
 whose subspace topology is a discrete topology.
