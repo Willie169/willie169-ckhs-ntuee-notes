@@ -205,9 +205,11 @@ To make $A_{cm}=0$, we need
 \[\frac{R_f}{R_1}=\frac{R_g}{R_2},\]
 at which
 \[A_d=\frac{R_f}{R_1}=\frac{R_g}{R_2}\]
-Differential input resistance $R_d$, defined by
-\[R_d=\frac{v_d}{i_2}\]
-when $v_2=-v_1=\frac{v_d}{2}$, i.e., $i_2=-i_1$.
+Differential input resistance $R_d$, defined as, when we connect $v_1$ and $v_2$ to a source $v_d$ ($v_d=v_2-v_1$ and $i_d=i_2=-i_1$),
+\[\frac{v_d}{i_d},\]
+is
+\[R_d=R_1+R_2\]
+Thus, high differential gain hurts differential input resistance, which lower the voltage applied to the amplifier since source has internal resistance.
 \bpr
 Use superposition. With $v_1$ enabled and $v_2$ disabled,
 \[v_+=v_-=0\]
@@ -241,9 +243,15 @@ at which
 	&=\frac{R_g}{R_2+R_g}\qty(1+\frac{R_2+2R_g}{R_2})\\
 	&=\frac{R_g}{R_2}
 \ea\]
-When $v_2=-v_1=\frac{v_d}{2}$,
-\[i_2=\frac{v_d}{2(R_2+R_g)}\]
-\[R_d=2(R_2+R_g)\]
+Differential input resistance:
+\[i_d=\frac{v_+}{R_g}=\frac{v_2-v_+}{R_2}=\frac{v_+-v_2+v_d}{R_1}\]
+\[R_2v_+=R_gv_2-R_gv_+\]
+\[R_1v_2-R_1v_+=R_2v_+-R_2v_2+R_2v_d\]
+\[v_2=\qty(\frac{R_2+R_g}{R_g})v_+\]
+\[(R_1+R_2)(v_2-v_+)=R_2v_d\]
+\[v_+=\frac{R_g}{R_1+R_2}v_d\]
+\[i_d=\frac{1}{R_1+R_2}v_d\]
+\[R_d=\frac{v_d}{i_d}=R_1+R_2\]
 \epr
 \sssc{Comparator}
 A comparator is an op amp with $v_+$ and $v_-$ connected to the voltage sources to be compared, in which $v_o$ is high when $v_+>v_-$ and low when $v_+<v_-$.
