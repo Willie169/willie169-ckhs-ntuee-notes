@@ -32,15 +32,15 @@ Their relation is
 \[i_C(t)=i_c(t)+I_C\]
 \[i_c(t)=I_c\sin(\omega t+\varphi)\]
 \sssc{differential and common-mode signal}
-For a component with two input signals, the differential signal (AC signal) $v_{ld}$ is the difference between the two input signals, and the common-mode signal (DC signal) $v_{lcm}$ is the algebraic average of the two input signals.
+For a component with two input signals, the differential signal (AC signal) $v_{d}$ is the difference between the two input signals, and the common-mode signal (DC signal) $v_{cm}$ is the algebraic average of the two input signals.
 \ssc{Amplifier (amp)}
 \sssc{Amplifier}
 An electronic device which amplifies an electrical signal by a scale called amplifier gain $A$ and optionally convert voltage signal to current signal or vice versa.
 \sssc{Diagram}
 \begin{center}
-\begin{circuitikz}
-\draw (0,0) node[op amp] (op amp) {};
-\end{circuitikz}
+	\begin{circuitikz}
+		\draw (0,0) node[op amp] (op amp) {};
+	\end{circuitikz}
 \end{center}
 \sssc{Two-port model}
 An amplifier can be modeled as a two port model, where an one input port and one output port is related by the amplifier, which acts as a controlled source controlled by the input port voltage or current which enforces voltage or current on the output port.
@@ -144,7 +144,7 @@ Note that while $v_+-v_-$, $v_o$ may be any voltage since $A=\infty$ and $0*\inf
 \sssc{Feedback configuration}
 To have stable signal, op amp in a circuit is connected with a negative feedback configuration, which consists of the op amp and a connection from $v_o$ to either of the input terminals with a resistance on it, called feedback connection. When the feedback connection connects to $v_-$, it is called inverting configuration. When the feedback connection connects to $v_+$, it is called non-inverting configuration.
 \sssc{Inverting amplifier}
-An inverting amplifier consists of an op amp where input voltage $v_i$ is connected to $v_-$ through an input resistance $R_i$ (current from source to $v_-$), $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through a feedback resistance $R_f$ (current from $v_-$ to $v_o$).
+An inverting amplifier consists of an op amp where input voltage $v_i$ is connected to $v_-$ through an input resistance $R_i$ (current from $v_i$ to $v_-$), $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through a feedback resistance $R_f$ (current from $v_-$ to $v_o$).
 \[v_+=v_-=0\]
 \[i_i=\frac{v_i}{R_i}=i_f=-\frac{v_o}{R_f}\]
 \[v_o=-\frac{R_f}{R_i}v_i\]
@@ -190,15 +190,61 @@ Effect of finite open-loop gain:
 A unity gain amplifier consist of an op amp where input voltage $v_i$ is connected to $v_+$, and $v_o$ is fed back to $v_-$.
 \[v_o=v_-=v_+=v_i\]
 \sssc{Difference amplifier or differential amplifier}
-A difference amplifier consists of a minuend $v_1$, a subtrahend $v_2$, and four resistors $R_1,R_2,R_3,R_4$ satisfying the condition
-\[\frac{R_1}{R_2}=\frac{R_3}{R_4}\]
-where $v_1,v_2$ are connected to $v_-,v_+$ through $R_1,R_2$ respectively, $v_o$ is fed back to $v_-$ through $R_3$, and $v_+$ is connected to ground through $R_4$.
-\[v_+=v_2\frac{R_4}{R_2+R_4}\]
-\[\frac{v_1-v_-}{R_1}=\frac{v_--v_o}{R_3}\]
-\[\frac{v_1}{R_2}-v_2\frac{R_4}{R_2+R_4}\frac{R_2+R_4}{R_2R_4}+\frac{v_o}{R_4}=0\]
-\[v_o=\frac{R_4}{R_2}\qty(v_2-v_1)\]
-When $R_1=R_2=R_3=R_4$:
-\[v_o=(v_2-v_1)\]
+A difference amplifier consists of an op amp where first input voltage $v_1$ is connected to $v_-$ through an input resistance $R_1$ (current from $v_1$ to $v_-$), second input voltage $v_2$ is connected to $v_+$ through an input resistance $R_2$ (current from $v_2$ to $v_+$), $v_+$ is connected to ground through a ground resistance $R_g$ (current from $v_+$ to ground), and $v_o$ is fed back to $v_-$ through a feedback resistance $R_f$ (current from $v_-$ to $v_o$). Denote common-mode signal $v_{cm}=\frac{v_1+v_2}{2}$ and differential signal $v_d=v_2-v_1$.
+\[v_o=-\frac{R_f}{R_1}v_1+\frac{R_g}{R_2+R_g}\qty(1+\frac{R_f}{R_1})v_2\]
+\[i_1=\frac{1}{R_1}\qty(v_1-\frac{R_g}{R_2+R_g}v_2)\]
+\[i_2=\frac{v_2}{R_2+R_g}\]
+Common-mode gain $A_{cm}$ and differential gain $A_d$, defined by
+\[v_o=v_{cm}A_{cm}+v_dA_d,\]
+are
+\[A_{cm}=\frac{R_g}{R_2+R_g}\qty(1-\frac{R_2}{R_g}\frac{R_f}{R_1})\]
+\[A_d=\frac{R_g}{R_2+R_g}\qty(1+\frac{R_2+2R_g}{R_g}\frac{R_f}{R_1})\]
+Common-mode rejection ratio (CMRR) is defined as
+\[\tx{CMRR}=20\log\abs{\frac{A_d}{A_{cm}}}\]
+To make $A_{cm}=0$, we need
+\[\frac{R_f}{R_1}=\frac{R_g}{R_2},\]
+at which
+\[A_d=\frac{R_f}{R_1}=\frac{R_g}{R_2}\]
+Differential input resistance $R_d$, defined by
+\[R_d=\frac{v_d}{i_2}\]
+when $v_2=-v_1=\frac{v_d}{2}$, i.e., $i_2=-i_1$.
+\bpr
+Use superposition. With $v_1$ enabled and $v_2$ disabled,
+\[v_+=v_-=0\]
+\[i_2=i_g=0\]
+\[i_1=\frac{v_1}{R_1}=i_f\]
+\[v_o=-i_fR_f=-\frac{R_f}{R_1}v_1\]
+With $v_2$ enabled and $v_1$ disabled,
+\[i_2=i_g=\frac{v_2}{R_2+R_g}\]
+\[v_+=v_-=i_gR_g=\frac{R_g}{R_2+R_g}v_2\]
+\[i_1=-\frac{v_-}{R_1}=-\frac{R_g}{R_1(R_2+R_g)}v_2=i_f\]
+\[v_o=v_--i_fR_f=\frac{R_g}{R_2+R_g}v_2+\frac{R_gR_f}{R_1(R_2+R_g)}v_2=\frac{R_g}{R_2+R_g}\qty(1+\frac{R_f}{R_1})v_2\]
+Sum:
+\[v_o=-\frac{R_f}{R_1}v_1+\frac{R_g}{R_2+R_g}\qty(1+\frac{R_f}{R_1})v_2\]
+\[i_1=\frac{v_1}{R_1}-\frac{R_g}{R_1(R_2+R_g)}v_2=\frac{1}{R_1}\qty(v_1-\frac{R_g}{R_2+R_g}v_2)\]
+\[i_2=\frac{v_2}{R_2+R_g}\]
+\[v_1=v_{cm}-\frac{v_d}{2}\]
+\[v_2=v_{cm}+\frac{v_d}{2}\]
+\[\ba
+	v_o&=-\frac{R_f}{R_1}\qty(v_{cm}-\frac{v_d}{2})+\frac{R_g}{R_2+R_g}\qty(1+\frac{R_f}{R_1})\qty(v_{cm}+\frac{v_d}{2})\\
+	&=\frac{R_g}{R_2+R_g}\qty(1-\qty(\frac{R_2+R_g}{R_g}-1)\frac{R_f}{R_1})v_{cm}+\frac{R_g}{R_2+R_g}\qty(1+\qty(\frac{R_2+R_g}{R_g}+1)\frac{R_f}{R_1})v_d\\
+	&=\frac{R_g}{R_2+R_g}\qty(1-\frac{R_2}{R_g}\frac{R_f}{R_1})v_{cm}+\frac{R_g}{R_2+R_g}\qty(1+\frac{R_2+2R_g}{R_g}\frac{R_f}{R_1})v_d
+	\ea\]
+\[A_{cm}=\frac{R_g}{R_2+R_g}\qty(1-\frac{R_2}{R_g}\frac{R_f}{R_1})\]
+\[A_d=\frac{R_g}{R_2+R_g}\qty(1+\frac{R_2+2R_g}{R_g}\frac{R_f}{R_1})\]
+To make $A_{cm}=0$, we need
+\[1=\frac{R_2}{R_g}\frac{R_f}{R_1}\]
+\[\frac{R_f}{R_1}=\frac{R_g}{R_2}\]
+at which
+\[\ba
+	A_d&=\frac{R_g}{R_2+R_g}\qty(1+\frac{R_2+2R_g}{R_g}\frac{R_f}{R_1})\\
+	&=\frac{R_g}{R_2+R_g}\qty(1+\frac{R_2+2R_g}{R_2})\\
+	&=\frac{R_g}{R_2}
+\ea\]
+When $v_2=-v_1=\frac{v_d}{2}$,
+\[i_2=\frac{v_d}{2(R_2+R_g)}\]
+\[R_d=2(R_2+R_g)\]
+\epr
 \sssc{Comparator}
 A comparator is an op amp with $v_+$ and $v_-$ connected to the voltage sources to be compared, in which $v_o$ is high when $v_+>v_-$ and low when $v_+<v_-$.
 \sssc{inverting integrator}
