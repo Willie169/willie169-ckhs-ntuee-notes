@@ -11,12 +11,10 @@
 \ssc{Definition}
 \sssc{Causal continuous-time linear time-invariant (LTI) system}
 A causal continuous-time linear time-invariant (LTI) system of a variable $t\in\bbR$ is a system that accept an input (distribution) (often called function) $x(t)$ and produces a response (distribution) (often called function) $y(t)$ that is the solution of a linear autonomous ODE whose forcing term is $x(t)$, called governing equation, given initial condition $y(0)=0$. It can be completely characterized by a distribution called impulse response (function) $h(t)$, which is the output when the input is the Dirac delta function $\delta(t)$ and is such that $h(t)=0$ for all $t<0$, that
-\[y(t)=(x*h)(t),\]
-where
-\[(x*h)(t)\coloneq\int_0^tx(\tau)h(t-\tau)\dd{\tau}.\]
+\[y(t)=(x*h)(t)\coloneq\int_0^tx(\tau)h(t-\tau)\dd{\tau}.\]
 Applying unilateral Laplace transform
 \[Y(s)=X(s)\cdot H(s),\]
-where $H(s)$ is a rational function called transfer function (轉移函數).
+where $H(s)$ is a rational function called transfer function (轉移函數). Unless otherwise specified, we will discuss casual continuous-time linear time-invariant (LTI) system below.
 \sssc{Non-causal continuous-time linear time-invariant (LTI) system}
 A non-causal continuous-time linear time-invariant (LTI) system of a variable $t\in\bbR$ is a system that accept an input (distribution) (often called function) $x(t)$ and produces a response (distribution) (often called function) $y(t)$ that is the solution of a linear autonomous ODE whose forcing term is $x(t)$, called governing equation. It can be completely characterized by a distribution called impulse response (function) $h(t)$, which is the output when the input is the Dirac delta function $\delta(t)$, that
 \[y(t)=(x*h)(t)\coloneq\int_{-\infty}^{\infty} x(\tau)h(t-\tau)\dd{\tau}.\]
@@ -27,6 +25,7 @@ where $H(s)$ is a rational function called transfer function.
 $\abs{H(s)}$ is called gain (增益), or attenuation (衰減量) if $<1$.
 \sssc{Order}
 The number of poles of $H(s)$ is called the order of the system.
+\ssc{Response}
 \sssc{Poles and zeros}
 Since $H(s)$ is rational, a complex conjugate of a pole is a pole of same order, and a complex conjugate of a zero is a zero of same order.
 
@@ -77,6 +76,9 @@ $\omega$ is called angular frequency and $f\coloneq\frac{\omega}{2\pi}$ is calle
 Assume the system is stable with $m$ LHP poles $a_1,\ldots,a_n$ and $n$ pure imaginary poles $b_1,\ldots,b_n$. When the input is $x(t)=e^{i\omega t}$, $X(s)=\frac{1}{s-i\omega}$, the response is
 \[Y(s)=\frac{H(s)}{s-i\omega}.\]
 \[y(t)=\frac{1}{2\pi i}\lim_{T\to\infty}\int_{\gamma-iT}^{\gamma+iT}Y(s)e^{st}\dd{s},\quad\gamma>0.\]
+Close the contour from $\gamma-iT$ to $\gamma+iT$ with a semicircular contour $C_T$
+\[C_T=\{\gamma+iTe^{i\theta}\colon\theta\in[0,\pi]\}\]
+to form a closed contour $\Gamma_T$.
 
 
 
