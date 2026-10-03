@@ -72,26 +72,56 @@ A LTI system is called unstable iff it is not stable.
 \item $\theta(\omega)\coloneq\arg(H(i\omega))$ is called phase (angle) response/shift.
 \eit
 $\omega$ is called angular frequency and $f\coloneq\frac{\omega}{2\pi}$ is called non-angular frequency. Both can be called frequency and can be differentiated with symbol, and angular frequency is used below.
-
-Assume the system is stable with $m$ LHP poles $a_1,\ldots,a_n$ and $n$ pure imaginary poles $b_1,\ldots,b_n$. When the input is $x(t)=e^{i\omega t}$, $X(s)=\frac{1}{s-i\omega}$, the response is
+\sssc{Steady-state sinusoidal response}
+Assume the system is stable with $m$ LHP poles $a_1,\ldots,a_n$ and $n$ pure imaginary poles $b_1,\ldots,b_n$ and that $H(s)=O(1)$. When the input is $x(t)=e^{i\omega t}$, $X(s)=\frac{1}{s-i\omega}$, the response is
 \[Y(s)=\frac{H(s)}{s-i\omega}.\]
 \[y(t)=\frac{1}{2\pi i}\lim_{T\to\infty}\int_{\gamma-iT}^{\gamma+iT}Y(s)e^{st}\dd{s},\quad\gamma>0.\]
 Close the contour from $\gamma-iT$ to $\gamma+iT$ with a semicircular contour $C_T$
 \[C_T=\{\gamma+iTe^{i\theta}\colon\theta\in[0,\pi]\}\]
 to form a closed contour $\Gamma_T$.
-
-
-
+\[\ba
+\abs{\int_{C_T}Y(s)e^{st}\dd{s}}&=\abs{\int_{C_T}Y(s)e^{(\gamma-T\sin\theta)t}e^{i\Im(s)t}\dd{s}}\\
+                                &=\int_0^{\pi}\abs{Y(\gamma+iTe^{i\theta})e^{(\gamma-T\sin\theta)t}(-Te^{i\theta})}\dd{\theta}\\
+                                &\le Te^{\gamma t}\int_0^{\pi}\abs{Y(\gamma+iTe^{i\theta})}e^{-T\sin\theta t}\dd{\theta}
+\ea\]
+\[Y(s)=O\qty(\frac{1}{s})\]
+Suppose for some $M>0$, for all sufficiently large $|s|$,
+\[\abs{Y(s)}\le\frac{M}{\abs{s}}\]
+For all sufficiently large $T$,
+\[\abs{\gamma+iTe^{i\theta}}\ge T-\gamma\]
+\[\abs{Y(\gamma+iTe^{i\theta})}\le\frac{M}{T-\gamma}=O\qty(\frac{1}{T})\]
+\[Te^{\gamma t}\int_0^{\pi}\abs{Y(\gamma+iTe^{i\theta})}e^{-T\sin\theta t}\dd{\theta}=O\qty(\int_0^{\pi}e^{-T\sin\theta t}\dd{\theta})\]
+\[\int_0^{\pi}e^{-T\sin\theta t}\dd{\theta}=2\int_0^{\frac{\pi}{2}}e^{-T\sin\theta t}\dd{\theta}\]
+\[\sin\theta\ge\frac{2\theta}{\pi}\]
+\[e^{-T\sin\theta t}\le e^{-\frac{2T\theta t}{\pi}}\]
+\[\ba
+2\int_0^{\frac{\pi}{2}}e^{-T\sin\theta t}\dd{\theta}&\le 2\int_0^{\frac{\pi}{2}}e^{-\frac{2T\theta t}{\pi}}\dd{\theta}\\
+                                                    &=2\frac{\pi}{2Tt}\evlp{e^{-\frac{2T\theta t}{\pi}}}_0^{\frac{\pi}{2}}\\
+                                                    &=\frac{\pi}{Tt}\qty(1-e^{-Tt})\\
+                                                    &\le\frac{\pi}{Tt}\\
+\ea\]
+\[2\int_0^{\frac{\pi}{2}}e^{-T\sin\theta t}\dd{\theta}=O\qty(\frac{1}{T})\]
+\[Te^{\gamma t}\int_0^{\pi}\abs{Y(\gamma+iTe^{i\theta})}e^{-T\sin\theta t}\dd{\theta}=O\qty(\frac{1}{T})\]
+Thus,
+\[\lim_{T\to\infty}\int_{C_T}Y(s)e^{st}\dd{s}=0\]
+\[y(t)=\frac{1}{2\pi i}\lim_{T\to\infty}\int_{\Gamma}Y(s)e^{st}\dd{s}\]
 Since $H(s)$ is meromorphic, by residue theorem,
-\[y(t)=\Res(Y(s)e^{st},i\omega)+\sum_{k=1}^n\Res(Y(s)e^{st},a_k)\]
-
-\[\Res(Y,i\omega)=\lim_{s\to i\omega}(s-i\omega)\frac{H(s)e^{st}}{s-i\omega}=H(i\omega)e^{i\omega t}\]
-$\sum_{k=1}^n\Res(Y,a_k)$ is transient response.
-\[H(i\omega)e^{i\omega t}\]
-is called steady-state (sinusoidal) response.
-
-
-
+\[y(t)=\Res(Y(s)e^{st},i\omega)+\sum_{k=1}^m\Res(Y(s)e^{st},a_k)+\sum_{k=1}^n\Res(Y(s)e^{st},b_k)\]
+Use Laurent series:
+\[\Res(Y(s)e^{st},z)=\lim_{s\to z}(s-z)Y(s)e^{st}=e^{zt}\lim_{s\to z}(s-z)Y(s)\]
+$\sum_{k=1}^m\Res(Y(s)e^{st},a_k)$ is transient response.
+\bit
+\item If $n=0$, the system is asymptotically stable, and
+\[\Res(Y(s)e^{st},i\omega)=H(i\omega)e^{i\omega t}\]
+is steady-state sinusoidal response.
+\item If $n>0$, the system is marginally stable, and:
+\bit
+\item If $i\omega$ is not a pole,
+\[\Res(Y(s)e^{st},i\omega)+\sum_{k=1}^n\Res(Y(s)e^{st},b_k)=H(i\omega)e^{i\omega t}+\sum_{k=1}^ne^{b_kt}\lim_{s\to b_k}(s-b_k)Y(s)\]
+is steady-state sinusoidal response and the second term is not transient.
+\item If $i\omega$ is a pole, it is resonant response that grows to infinity over time.
+\eit
+\eit
 \sssc{Logarithmic scale, decibel (dB), and Bode plot (波德圖)}
 Frequency response are often expressed in logarithmic scale:
 \bit
@@ -173,6 +203,15 @@ $n$th-order Butterworth low-pass prototype filter is
 When not specified, a filter of a type usually refers to the lowest-order Butterworth filter of the type.
 \ssc{Transfer function factors}
 Variables after $;$ are parameters, which are positive real numbers unless otherwise specified.
+\sssc{Reciprocal factor}
+This factor is not asymptotically stable but marginally stable.
+\[H_c(s)\coloneq\frac{1}{s}\]
+\[H_c(i\omega)=\frac{1}{i\omega}\]
+\[\abs{H_c(i\omega)}=\frac{1}{\omega}\]
+\[g_c(i\omega)=-20\log_{10}(\omega)\]
+Bode magnitude plot has slope $-20$ dB/dec, $y$ intercept $0$, and $x$ intercept $0$.
+\[\lim_{\omega\to 0}\abs{H_c(i\omega)}=\infty\]
+\[\lim_{\omega\to 0}g_c(i\omega)=\infty\]
 \sssc{Ramp factor}
 \[H_r(s;W)\coloneq\frac{s}{W}\]
 \[H_r(i\omega;W)=\frac{i\omega}{W}\]
