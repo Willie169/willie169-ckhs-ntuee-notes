@@ -67,21 +67,39 @@ A LTI system is called marginally stable iff it is stable but not asymptotically
 A LTI system is called unstable iff it is not stable.
 \ssc{Frequency response}
 \sssc{Frequency response}
-Assume the system is asymptotically stable. When the input is $x(t)=e^{i\omega t}$, $X(s)=\frac{1}{s-i\omega}$, the response is
-\[Y(s)=\frac{H(s)}{s-i\omega}.\]
-\[y(t)=\frac{1}{2\pi i}\lim_{T\to\infty}\int_{\gamma-iT}^{\gamma+iT}\frac{H(s)e^{st}}{s-i\omega}\dd{s},\quad\gamma>0.\]
-Since $H(s)$ is meromorphic, by residue theorem,
-\[y(t)=\Res(Y,i\omega)+\sum_{k=1}^n\Res(Y,a_k)\]
-\[\Res(Y,i\omega)=\lim_{s\to i\omega}(s-i\omega)\frac{H(s)e^{st}}{s-i\omega}=H(i\omega)e^{i\omega t}\]
-The $\sum_{k=1}^n\Res(Y,a_k)$ is the transient response. This does not work for marginally stable systems since $\sum_{k=1}^n\Res(Y,a_k)$ term is not transient for them.
-\[H(i\omega)e^{i\omega t}\]
-is called steady-state (sinusoidal) response.
 \bit
 \item $H(i\omega)$ is called frequency response,
 \item $a(\omega)\coloneq\abs{H(i\omega)}$ is called magnitude/amplitude response/ratio or gain,
 \item $\theta(\omega)\coloneq\arg(H(i\omega))$ is called phase (angle) response/shift.
 \eit
 $\omega$ is called angular frequency and $f\coloneq\frac{\omega}{2\pi}$ is called non-angular frequency. Both can be called frequency and can be differentiated with symbol, and angular frequency is used below.
+\sssc{Asymptotically stable case}
+Assume the system is asymptotically stable with $n$ poles $a_1,\ldots,a_n$. When the input is $x(t)=e^{i\omega t}$, $X(s)=\frac{1}{s-i\omega}$, the response is
+\[Y(s)=\frac{H(s)}{s-i\omega}.\]
+\[y(t)=\frac{1}{2\pi i}\lim_{T\to\infty}\int_{\gamma-iT}^{\gamma+iT}Y(s)e^{st}\dd{s},\quad\gamma>0.\]
+Since $H(s)$ is meromorphic, by residue theorem,
+\[y(t)=\Res(Y(s)e^{st},i\omega)+\sum_{k=1}^n\Res(Y(s)e^{st},a_k)\]
+
+\[\Res(Y,i\omega)=\lim_{s\to i\omega}(s-i\omega)\frac{H(s)e^{st}}{s-i\omega}=H(i\omega)e^{i\omega t}\]
+$\sum_{k=1}^n\Res(Y,a_k)$ is transient response.
+\[H(i\omega)e^{i\omega t}\]
+is called steady-state (sinusoidal) response.
+
+
+
+\sssc{Marginally stable case}
+Assume the system is marginally stable with $m$ LHP poles $a_1,\ldots,a_k$ and $n$ distinct pure imaginary poles $b_1,\ldots,b_n$. When the input is $x(t)=e^{i\omega t}$, $X(s)=\frac{1}{s-i\omega}$, the response is
+\[Y(s)=\frac{H(s)}{s-i\omega}.\]
+\[y(t)=\frac{1}{2\pi i}\lim_{T\to\infty}\int_{\gamma-iT}^{\gamma+iT}\frac{H(s)e^{st}}{s-i\omega}\dd{s},\quad\gamma>0.\]
+Since $H(s)$ is meromorphic, by residue theorem,
+\[y(t)=\Res(Y,i\omega)+\sum_{k=1}^m\Res(Y,a_k)+\sum_{k=1}^n\Res(Y,b_k)\]
+\[\Res(Y,i\omega)=\lim_{s\to i\omega}(s-i\omega)\frac{H(s)e^{st}}{s-i\omega}=H(i\omega)e^{i\omega t}\]
+$\sum_{k=1}^n\Res(Y,a_k)$ is transient response.
+
+\[H(i\omega)e^{i\omega t}\]
+is called steady-state (sinusoidal) response.
+
+
 \sssc{Logarithmic scale, decibel (dB), and Bode plot (波德圖)}
 Frequency response are often expressed in logarithmic scale:
 \bit

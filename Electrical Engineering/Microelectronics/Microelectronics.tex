@@ -262,8 +262,8 @@ Laplace domain:
 \[V_+=V_-=0\]
 \[I_i=\frac{V_i}{Z_i}=I_f=-\frac{V_o}{Z_f}\]
 \[V_o=-\frac{Z_f}{Z_i}V_i\]
-\sssc{Inverting integrator or Miller integrator}
-An inverting integrator consists of an op amp where input voltage $v_i$ is connected to $v_-$ through an input resistance $R$, $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through a feedback capacitance $C$.
+\sssc{Inverting integrator or Miller integrator non-feasible configuration}
+An inverting integrator non-feasible configuration consists of an op amp where input voltage $v_i$ is connected to $v_-$ through an input resistance $R$, $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through a feedback capacitance $C$.
 
 $v_o(0^-)$ is the initial voltage across $C$ ($v_o$ relative to $v_-$).
 
@@ -274,13 +274,34 @@ Time domain:
 Laplace domain:
 \[V_+=V_-=0\]
 \[I_i=\frac{V_i}{R}=I_f=-CsV_o+Cv_o(0^-)\]
-\[V_o=\frac{v_o(0^-)}{s}-\frac{1}{RCs}V_i\]
+\[V_o=\frac{1}{s}v_o(0^-)-\frac{1}{RCs}V_i\]
 Transfer function:
 \[H(s)=-\frac{1}{RCs}\]
 Frequency response:
 \[H(j\omega)=-\frac{1}{j\omega RC}\]
-Magnitude response:
+Magnitude response: Infinite DC gain. Thus, any tiny DC component in the input signal will blow this out.
 \[\abs{H(j\omega)}=\frac{1}{\omega RC}\]
+Bode magnitude plot: $-20$ dB/dec
+\[20\log_{10}|H(j\omega)|=-20\log_{10}(\omega)-20\log_{10}(RC)\]
+Phase response:
+\[\arg(H(j\omega))=\frac{\pi}{2}\]
+\sssc{Inverting integrator or Miller integrator feasible configuration}
+An inverting integrator feasible configuration consists of an op amp where input voltage $v_i$ is connected to $v_-$ through an input resistance $R$, $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through a feedback capacitance $C$ and feedback resistance $R_f$ in parallel connection.
+
+$v_o(0^-)$ is the initial voltage across $C$ ($v_o$ relative to $v_-$).
+
+Laplace domain:
+\[V_+=V_-=0\]
+\[I_i=\frac{V_i}{R}=I_f=-\qty(\frac{1}{R_f}+Cs)V_o+Cv_o(0^-)=-\frac{1+Cs}{R_f}V_o+Cv_o(0^-)\]
+\[V_o=\frac{R_fC}{1+Cs}v_o(0^-)-\frac{\frac{R_f}{R}}{1+Cs}V_i\]
+Transfer function: Butterworth first-order low-pass with cutoff frequency $\frac{1}{RC}$.
+\[H(s)=-\frac{1}{RCs}\]
+Frequency response:
+\[H(j\omega)=-\frac{1}{j\omega RC}\]
+Magnitude response: Infinite DC gain. Thus, any tiny DC component in the input signal will blow this out.
+\[\abs{H(j\omega)}=\frac{1}{\omega RC}\]
+Phase response:
+\[\arg(H(j\omega))=\frac{\pi}{2}\]
 
 
 

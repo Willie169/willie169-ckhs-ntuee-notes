@@ -98,4 +98,33 @@ Let $U$ be a simply connected open subset of the complex plane containing a fini
 \bpr
 By divergence theorem, obviously.
 \epr
+\sssc{Jordan's lemma}
+Consider a semicircular contour
+\[C_R=\{Re^{i\theta}\colon\theta\in[0,\pi]\}\]
+If $f(z)$ is a funtction of the form
+\[f(z)=e^{iaz}g(z),\quad z\in\bbC\]
+with a positive parameter $a>0$, then Jordan's lemma states that
+\[\abs{\int_{C_R}f(z)\dd{z}}\le\frac{\pi}{a}M_R,\]
+where
+\[M_R\coloneq\max_{\theta\in[0,\pi]}\abs{g(Re^{i\theta})}.\]
+\bpr
+\[\ba
+\abs{\int_{C_R}f(z)\dd{z}}&=\abs{\int_0^{\pi}g(Re^{i\theta})e^{iaR(\cos\theta+i\sin\theta)}iRe^{i\theta}\dd{\theta}}\\
+                          &=R\abs{\int_0^{\pi}g(Re^{i\theta})e^{aR(i\cos\theta-\sin\theta)}ie^{i\theta}\dd{\theta}}\\
+                          &\le R\int_0^{\pi}\abs{g(Re^{i\theta})e^{aR(i\cos\theta-\sin\theta)}ie^{i\theta}}\dd{\theta}\\
+                          &=R\int_0^{\pi}\abs{g(Re^{i\theta})}e^{-aR\sin\theta}\dd{\theta}\\
+                          &\le RM_R\int_0^{\pi}e^{-aR\sin\theta}\dd{\theta}\\
+                          &=2RM_R\int_0^{\frac{\pi}{2}}e^{-aR\sin\theta}\dd{\theta}\qc\sin\theta\ge\frac{2\theta}{\pi}\\
+                          &\le 2RM_R\int_0^{\frac{\pi}{2}}e^{-\frac{2aR\theta}{\pi}}\dd{\theta}\\
+                          &=2RM_R\evlp{-\frac{\pi}{2aR}e^{-\frac{2aR\theta}{\pi}}}_0^{\frac{\pi}{2}}\\
+                          &=\frac{\pi}{a}M_R\qty(1-e^{-aR})\\
+                          &\le\frac{\pi}{a}M_R
+\ea\]
+\epr
+If $f$ is integrable on $C_R$ for all sufficiently large $R$ and
+\[\lim_{R\to\infty}M_R=0\]
+then by Jordan's lemma
+\[\lim_{R\to\infty}\int_{C_R}f(z)\dd{z}=0\]
+\sssc{Estimation lemma}
+TODO
 \end{document}
