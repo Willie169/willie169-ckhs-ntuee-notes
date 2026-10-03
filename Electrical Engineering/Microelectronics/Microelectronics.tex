@@ -263,7 +263,7 @@ Laplace domain:
 \[I_i=\frac{V_i}{Z_i}=I_f=-\frac{V_o}{Z_f}\]
 \[V_o=-\frac{Z_f}{Z_i}V_i\]
 \sssc{Inverting integrator or Miller integrator non-feasible configuration}
-An inverting integrator non-feasible configuration consists of an op amp where input voltage $v_i$ is connected to $v_-$ through an input resistance $R$, $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through a feedback capacitance $C$.
+An inverting integrator non-feasible configuration consists of an op amp where input voltage $v_i$ is connected to $v_-$ through an input resistance $R$ (current from $v_i$ to $v_-$), $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through a feedback capacitance $C$ (current from $v_-$ to $v_o$).
 
 $v_o(0^-)$ is the initial voltage across $C$ ($v_o$ relative to $v_-$).
 
@@ -278,7 +278,7 @@ Laplace domain:
 Transfer function: Infinite DC gain. Thus, any tiny DC component in the input signal will blow this out.
 \[H(s)=-\frac{1}{RCs}\]
 \sssc{Inverting integrator or Miller integrator feasible configuration}
-An inverting integrator feasible configuration consists of an op amp where input voltage $v_i$ is connected to $v_-$ through an input resistance $R$, $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through a feedback capacitance $C$ and feedback resistance $R_f$ in parallel connection.
+An inverting integrator feasible configuration consists of an op amp where input voltage $v_i$ is connected to $v_-$ through an input resistance $R$ (current from $v_i$ to $v_-$), $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through a feedback capacitance $C$ and feedback resistance $R_f$ in parallel connection with the sum of their current be $i_f$ (from $v_-$ to $v_o$).
 
 $v_o(0^-)$ is the initial voltage across $C$ ($v_o$ relative to $v_-$).
 
@@ -288,22 +288,31 @@ Laplace domain:
 \[V_o=\frac{R_fC}{1+R_fCs}v_o(0^-)-\frac{\frac{R_f}{R}}{1+R_fCs}V_i\]
 Transfer function: Butterworth first-order low-pass with cutoff frequency $\frac{1}{R_fC}$ and DC gain $\frac{R_f}{R}$.
 \[H(s)=-\frac{\frac{R_f}{R}}{1+R_fCs}\]
+\sssc{Inverting differentiator non-feasible configuration}
+An inverting differentiator non-feasible configuration consists of an op amp where input voltage $v_i$ is connected to $v_-$ through an input capacitor $C$ (current from $v_i$ to $v_-$), $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through a feedback resistor $R$ (current from $v_-$ to $v_o$).
 
-
-
-
-
-
-
-\sssc{inverting differentiator}
-An inverting differentiator consists of an op amp where input voltage $v_i$ is connected to $v_-$ through an input capacitor $C_i$, $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through a feedback resistor $R_f$.
+$v_i(0^-)$ is the initial voltage across $C$ ($v_i$ relative to $v_-$).
 
 Time domain:
-\[i_i=C_i\dv{v_i}{t}=i_f=\frac{-v_o}{R_f}\]
-\[v_o=R_fC_i\qty(v_i(0^-)-\int_0^tv_i(\tau)\dd{\tau})\]
+\[i_i=C\dv{v_i}{t}=i_f=\frac{-v_o}{R}\]
+\[v_o=RC\qty(v_i(0^-)-\int_0^tv_i(\tau)\dd{\tau})\]
 Laplace domain:
-\[i_i=C_isv_i-C_iv_i(0^-)=i_f=\frac{-v_o}{R_f}\]
-\[v_o=R_fC_i\qty(v_i(0^-)-sv_i)\]
-\sssc{Active filter}
-Given a (passive or active) filter $v_f$ of an input $v_s$ and an inverting amplifier, non-inverting amplifier, or unit gain buffer enforcing $v_o=Kv_i$, by connecting the ground and $v_i$ of the amplifier to the two terminals of the $v_f$, the two terminals ground and $v_o$ become an active filter of $v_s$ enforcing $v_o=Kv_f$.
+\[I_i=CsV_i-Cv_i(0^-)=I_f=\frac{-V_o}{R}\]
+\[V_o=-RCsV_i+RCv_i(0^-)\]
+Transfer function: Infinite gain at $\omega=\infty$. Thus, any tiny high frequency component in the input signal will blow this out.
+\[H(s)=-RCs\]
+\sssc{Inverting differentiator feasible configuration}
+An inverting differentiator feasible configuration consists of an op amp where input voltage $v_i$ is connected to $v_-$ through an input capacitor $C$ and a input resistor $R_i$ in series connection (current from $v_i$ to $v_-$), $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through a feedback resistor $R$ (current from $v_-$ to $v_o$).
+
+$v_i(0^-)$ is the initial voltage across $C$ ($v_i$ relative to $v_-$).
+
+Laplace domain:
+\[I_i=\frac{1}{R_i+\frac{1}{Cs}}V_i-Cv_i(0^-)=\frac{\frac{s}{R_i}}{s+\frac{1}{R_iC}}V_i-Cv_i(0^-)=I_f=\frac{-V_o}{R}\]
+\[V_o=-\frac{\frac{R}{R_i}s}{s+\frac{1}{R_iC}}V_i+RCv_i(0^-)\]
+Transfer function: Butterworth first-order high-pass with cutoff frequency $\frac{1}{R_iC}$ and gain $\frac{R}{R_i}$ at $\omega=\infty$.
+\[H(s)=-\frac{\frac{R}{R_i}s}{s+\frac{1}{R_iC}}\]
+\sssc{Effect of finite open-loop gain and bandwidth}
+The
+
+
 \end{document}
