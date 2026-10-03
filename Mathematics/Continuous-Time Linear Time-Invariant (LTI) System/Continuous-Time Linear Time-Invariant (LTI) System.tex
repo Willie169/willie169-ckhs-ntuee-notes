@@ -85,7 +85,7 @@ $\omega$ is called angular frequency and $f\coloneq\frac{\omega}{2\pi}$ is calle
 \sssc{Logarithmic scale, decibel (dB), and Bode plot (波德圖)}
 Frequency response are often expressed in logarithmic scale:
 \bit
-\item Magnitude response, input, and output can be expressed in decibel (dB) as $g(\omega)\coloneq 20\log(\frac{\abs{H(i\omega)}}{\max_{\omega}\abs{H(i\omega)}})$, $20\log(x)$, and $20\log(y)$.
+\item Magnitude response, input, and output can be expressed in decibel (dB) as $g(\omega)\coloneq 20\log_{10}|H(i\omega)|$, $20\log_{10}|x|$, and $20\log_{10}|y|$.
 \item Changing by 2 times is called an octave or oct, and changing by 10 times is called a decade or dec. $k$ dec$^{-1}$ equals to $\log_{10}(2)$ oct$^{-1}$. The most common used is $20$ dB/dec equals to $20\log_{10}(2)\approx 6$ dB/oct.
 \item Bode magnitude plot or dB gain curve: Magnitude response plotted in logarithmic (frequency)-logarithmic (magnitude response) scale.
 \item Bode phase plot or phase curve: Phase response is often plotted in logarithmic (frequency)-linear (phase response) scale.
@@ -95,11 +95,11 @@ We can factor $H(s)$ into
 \[H(s)=G\prod_{k=1}^mH_k(s)\]
 then
 \[\abs{H(i\omega)}=\abs{G}\prod_{k=1}^m\abs{H_k(i\omega)}\]
-\[\log_{10}\abs{H(i\omega)}=\log_{10}\abs{G}+\sum_{k=1}^m\log_{10}\abs{H_k(i\omega)}\]
+\[20\log_{10}\abs{H(i\omega)}=20\log_{10}\abs{G}+20\sum_{k=1}^m\log_{10}\abs{H_k(i\omega)}\]
 \[\arg(H(i\omega))=\arg(G)+\sum_{k=1}^m\arg(H_k(i\omega))\]
 \sssc{Cutoff (截止), break, or corner (angular) frequency}
 For a transfer function, cutoff frequency $\omega_c$ is a frequency such that
-\[\abs{H(i\omega_c)}=\frac{\max_{\omega}\abs{H(i\omega)}}{\sqrt{2}}.\]
+\[\abs{H(i\omega_c)}=\frac{1}{\sqrt{2}}.\]
 $20\log_{10}(\frac{1}{\sqrt{2}})=-10\log_{10}(2)\approx -3$, thus this frequency is also denoted $\omega_{-3\tx{dB}}$ or $\omega_{3\tx{dB}}$.
 \sssc{Normalizing}
 For a transfer function $H(s)$ such that
@@ -121,7 +121,7 @@ $K$ is called high-pass gain.
 
 Ideal normalized high-pass filter is
 \[H(i\omega)=\bcs1,\quad&\omega>\omega_0\\0,\quad&\omega<\omega_0\ecs\]
-\sssc{Band-pass or banetwork.captive-portal-service.enabledndpass (BP) filter (BPF)}
+\sssc{Band-pass or bandpass (BP) filter (BPF)}
 A continuous-time linear time-invariant system is a standard normalized band-pass filter iff $H(i\omega)$ as a function of a real variable $\omega$ is such that
 \[\lim_{\omega\to 0}\abs{H(i\omega)}=0\]
 \[\lim_{\omega\to\infty}\abs{H(i\omega)}=0\]

@@ -255,17 +255,39 @@ Differential input resistance:
 \epr
 \sssc{Instrumentation amplifier}
 An instrumentation amplifier consists of a difference amplifier (second stage) with outputs of two identical non-inverting amplifiers (first stage) as inputs, which behaves the same as the difference amplifier but with both common-mode and differential gains multiplied by the gain of the first stage. It can achieve higher differential gain than difference amplifier under same differential input resistance. However, common-mode signal is also amplified in the first stage, so CMRR of second stage must be good, i.e., the resistances must be precise.
+\sssc{Inverting configuration with general impedance}
+Consider an op amp where input voltage $v_i$ is connected to $v_-$ through an input impedance $Z_i$ (current from $v_i$ to $v_-$), $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through a feedback impedance $Z_f$ (current from $v_-$ to $v_o$).
 
+Laplace domain:
+\[V_+=V_-=0\]
+\[I_i=\frac{V_i}{Z_i}=I_f=-\frac{V_o}{Z_f}\]
+\[V_o=-\frac{Z_f}{Z_i}V_i\]
+\sssc{Inverting integrator or Miller integrator}
+An inverting integrator consists of an op amp where input voltage $v_i$ is connected to $v_-$ through an input resistance $R$, $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through a feedback capacitance $C$.
 
-\sssc{Inverting integrator}
-An inverting integrator consists of an op amp where input voltage $v_i$ is connected to $v_-$ through an input resistor $R_i$, $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through a feedback capacitor $C_f$.
+$v_o(0^-)$ is the initial voltage across $C$ ($v_o$ relative to $v_-$).
 
 Time domain:
-\[i_i=\frac{v_i}{R_i}=i_f=-C_f\dv{v_o}{t}\]
-\[v_o=v_o(0^-)-\int_0^t\frac{v_i(\tau)}{R_iC_f}\dd{\tau}\]
+\[v_+=v_-=0\]
+\[i_i=\frac{v_i}{R}=i_f=-C\dv{v_o}{t}\]
+\[v_o=v_o(0^-)-\frac{1}{RC}\int_0^tv_i(\tau)\dd{\tau}\]
 Laplace domain:
-\[i_i=\frac{v_i}{R_i}=i_f=-C_fsv_o+C_fv_o(0^-)\]
-\[v_o=\frac{v_o(0^-)}{s}-\frac{v_i}{R_iC_fs}\]
+\[V_+=V_-=0\]
+\[I_i=\frac{V_i}{R}=I_f=-CsV_o+Cv_o(0^-)\]
+\[V_o=\frac{v_o(0^-)}{s}-\frac{1}{RCs}V_i\]
+Transfer function:
+\[H(s)=-\frac{1}{RCs}\]
+Frequency response:
+\[H(j\omega)=-\frac{1}{j\omega RC}\]
+Magnitude response:
+\[\abs{H(j\omega)}=\frac{1}{\omega^2R^2C^2}\]
+
+
+
+
+
+
+
 \sssc{inverting differentiator}
 An inverting differentiator consists of an op amp where input voltage $v_i$ is connected to $v_-$ through an input capacitor $C_i$, $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through a feedback resistor $R_f$.
 
