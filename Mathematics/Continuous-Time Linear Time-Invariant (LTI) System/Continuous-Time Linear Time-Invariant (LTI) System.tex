@@ -128,12 +128,6 @@ Frequency response are often expressed in logarithmic scale:
 \item Magnitude response, input, and output can be expressed in decibel (dB) as $g(\omega)\coloneq C\log_{10}|H(i\omega)|$, $C\log_{10}|x|$, and $C\log_{10}|y|$ with some constant $C$. $C=20$ is used here.
 \item Changing by 2 times is called an octave or oct, and changing by 10 times is called a decade or dec. $k$ dec$^{-1}$ equals to $\log_{10}(2)$ oct$^{-1}$. The most common used is $20$ dB/dec equals to $20\log_{10}(2)\approx 6$ dB/oct.
 \eit
-We can factor $H(s)$ into
-\[H(s)=G\prod_{k=1}^mH_k(s)\]
-then
-\[a(\omega)=\abs{G}\prod_{k=1}^m\abs{H_k(i\omega)}\]
-\[g(\omega)=20\log_{10}\abs{G}+20\sum_{k=1}^m\log_{10}\abs{H_k(i\omega)}\]
-\[\theta(\omega)=\arg(G)+\sum_{k=1}^m\arg(H_k(i\omega))\]
 \sssc{Cutoff (截止), break, or corner (angular) frequency}
 For a transfer function, cutoff frequency $\omega_c$ is a frequency such that
 \[\abs{H(i\omega_c)}=\frac{\max_{\omega}a(\omega)}{\sqrt{2}}.\]
@@ -208,7 +202,7 @@ For first-order,
 \[\qty(a(\omega))^2=\frac{1}{1+\omega^2}\]
 \[H(s)=\frac{1}{s+1}\]
 When not specified, a filter of a type usually refers to the lowest-order Butterworth filter of the type.
-\sssc{single-time-constant (STC) filters}
+\sssc{Single-time-constant (STC) filters}
 $\omega_c$ is cutoff frequency, $\tau$ is time constant, $\abs{K}$ is gain at $\omega=0$, and the following form is called standard form.
 
 Low-pass:
@@ -228,7 +222,16 @@ High-pass:
 \[H(i\infty)=K\]
 \[\tau=\frac{1}{\omega_c}\]
 \ssc{Transfer function factors}
-Variables after $;$ are parameters, which are positive real numbers unless otherwise specified. Only positive $\omega$ are considered.
+\sssc{Transfer function factoring}
+We can factor $H(s)$ into
+\[H(s)=G\prod_{k=1}^mH_k(s)\]
+then
+\[a(\omega)=\abs{G}\prod_{k=1}^m\abs{H_k(i\omega)}\]
+\[g(\omega)=20\log_{10}\abs{G}+20\sum_{k=1}^m\log_{10}\abs{H_k(i\omega)}\]
+\[\theta(\omega)=\arg(G)+\sum_{k=1}^m\arg(H_k(i\omega))\]
+If $H$ and all $H_k$ have unity maximum gains, and the cutoff frequency of one $H_k$ is such that all other $H_k$ has approximately unity gain, that frequency is approximately a cutoff frequency of $H$.
+
+For the factors below, variables after $;$ are parameters, which are positive real numbers unless otherwise specified. Only positive $\omega$ are considered.
 \sssc{Reciprocal factor}
 This factor is not asymptotically stable but marginally stable.
 \[H_c(s;W)\coloneq\frac{W}{s}\]
