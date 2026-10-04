@@ -141,6 +141,16 @@ This is a linear element with inputs $v_+$ and $v_-$ and output $v_o$.
 $v_o$ may be any voltage since $A=\infty$ and $0*\infty$ can be any number in $[0,\infty]$ in limit sense.
 
 The open-loop gain of a real op amp is finite and dependent on frequency.
+\sssc{Single-pole / STC low-pass open-loop gain}
+For a STC low-pass behavior, which is to ensure the op amp will be stable,
+\[A(s)=\frac{A_0}{1+\frac{s}{\omega_b}}=\frac{\omega_t}{s+\omega_b}\qc\omega_t=A_0\omega_b,\]
+where $A_0\gg 1$ is DC gain, $\omega_b$ is cutoff frequency, and $\omega_t$ is approximately the frequency of which the gain $\abs{A}$ reach unity (0 dB):
+\[\abs{A(j\omega)}=\frac{A_0}{\sqrt{1+\qty(\frac{\omega}{\omega_b})^2}}=1\]
+\[A_0^{\pht{0}2}=1+\qty(\frac{\omega}{\omega_b})^2\]
+\[\omega=\sqrt{A_0^{\pht{0}2}-1}\omega_b\approx A_0\omega_b\]
+The non-angular frequency $f_t=\frac{\omega_t}{2\pi}$ is usually specified on the op-amp data sheet as the unity-gain bandwidth.
+
+Such op amp is said to have a single-pole model since the single pole dominates the amplifier responses, also called dominant pole.
 \sssc{Feedback configuration}
 To have stable signal, op amp in a circuit is connected with a negative feedback configuration, which consists of the op amp and a connection from $v_o$ to either of the input terminals with a resistance on it, called feedback connection. When the feedback connection connects to $v_-$, it is called inverting configuration. When the feedback connection connects to $v_+$, it is called non-inverting configuration.
 
@@ -158,8 +168,15 @@ Effect of finite open-loop gain:
 \[v_+=0\]
 \[v_o=-Av_-\]
 \[i_i=\frac{v_i-v_-}{R_i}=\frac{v_i+\frac{v_o}{A}}{R_i}=i_f=-\frac{v_o+\frac{v_o}{A}}{R_f}\]
-\[G=\frac{v_o}{v_i}=-\frac{R_f}{R_i\qty(1+\frac{1+\frac{R_f}{R_i}}{A})}=\frac{G_{\tx{ideal}}}{1+\frac{1-G_{\tx{ideal}}}{A}}\]
+\[G=\frac{v_o}{v_i}=\frac{-\frac{R_f}{R_i}}{1+\frac{1+\frac{R_f}{R_i}}{A}}=\frac{G_{\tx{ideal}}}{1+\frac{1-G_{\tx{ideal}}}{A}}\]
 \[\lim_{A\to\infty}G=-\frac{R_f}{R_i}=G_{\tx{ideal}}\]
+For single-pole model $A(s)=\frac{A_0}{1+\frac{s}{\omega_b}}$ with $A_0\gg 1+\frac{R_f}{R_i}$ and $\omega_t=A_0\omega_b$:
+\[\ba
+G&=\frac{-\frac{R_f}{R_i}}{1+\frac{1+\frac{R_f}{R_i}}{A}}\\
+ &=\frac{-\frac{R_f}{R_i}}{1+\frac{1+\frac{R_f}{R_i}}{A_0}+\frac{s}{\frac{\omega_t}{1+\frac{R_f}{R_i}}}}\\
+ &\approx\frac{-\frac{R_f}{R_i}}{1+\frac{s}{\frac{\omega_t}{1+\frac{R_f}{R_i}}}},
+\ea\]
+which is a Butterworth low-pass filter with cutoff frequency $\frac{\omega_t}{1+\frac{R_f}{R_i}}$ and DC gain $-\frac{R_f}{R_i}$.
 \sssc{Transresistance amplifier}
 A transresistance amplifier consists of an op amp where input current $i_i$ is connected to $v_-$, $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through two resistances $R_o$ (current from $x$ to $v_o$) and $R_f$ (current from $v_-$ to $x$) in series connection, with the node $x$ between $R_o$ and $R_f$ connected to ground through a resistance $R_g$ (current from $x$ to ground).
 \[v_x=-R_fi_i\]
@@ -188,6 +205,13 @@ Effect of finite open-loop gain:
 \[i_g=\frac{v_-}{R_g}=\frac{v_i-\frac{v_o}{A}}{R_g}=i_f=\frac{v_o-v_-}{R_f}=\frac{v_o-v_i+\frac{v_o}{A}}{R_f}\]
 \[G=\frac{v_o}{v_i}=\frac{1+\frac{R_f}{R_g}}{1+\frac{1+\frac{R_f}{R_g}}{A}}=\frac{G_{\tx{ideal}}}{1+\frac{G_{\tx{ideal}}}{A}}\]
 \[\lim_{A\to\infty}G=1+\frac{R_f}{R_g}=G_{\tx{ideal}}\]
+For single-pole model $A(s)=\frac{A_0}{1+\frac{s}{\omega_b}}$ with $A_0\gg 1+\frac{R_f}{R_g}$ and $\omega_t=A_0\omega_b$:
+\[\ba
+G&=\frac{1+\frac{R_f}{R_g}}{1+\frac{1+\frac{R_f}{R_g}}{A}}\\
+ &=\frac{1+\frac{R_f}{R_g}}{1+\frac{1+\frac{R_f}{R_g}}{A_0}+\frac{s}{\frac{\omega_t}{1+\frac{R_f}{R_g}}}}\\
+ &\approx\frac{1+\frac{R_f}{R_g}}{1+\frac{s}{\frac{\omega_t}{1+\frac{R_f}{R_g}}}}
+\ea\]
+which is a Butterworth low-pass filter with cutoff frequency $\frac{\omega_t}{1+\frac{R_f}{R_g}}$ and DC gain $1+\frac{R_f}{R_g}$.
 \sssc{Unity gain amplifier, unity gain buffer, buffer amplifier, or voltage follower}
 A unity gain amplifier consist of an op amp where input voltage $v_i$ is connected to $v_+$, and $v_o$ is fed back to $v_-$.
 \[v_o=v_-=v_+=v_i\]
@@ -255,7 +279,7 @@ Differential input resistance:
 \[i_d=\frac{1}{R_1+R_2}v_d\]
 \[R_d=\frac{v_d}{i_d}=R_1+R_2\]
 \epr
-\sssc{Instrumentation amplifier}
+\sssc{Instrumentation amplifier (INA)}
 An instrumentation amplifier consists of a difference amplifier (second stage) with outputs of two identical non-inverting amplifiers (first stage) as inputs, which behaves the same as the difference amplifier but with both common-mode and differential gains multiplied by the gain of the first stage. It can achieve higher differential gain than difference amplifier under same differential input resistance. However, common-mode signal is also amplified in the first stage, so CMRR of second stage must be good, i.e., the resistances must be precise.
 \sssc{Inverting configuration with general impedance}
 Consider an op amp where input voltage $v_i$ is connected to $v_-$ through an input impedance $Z_i$ (current from $v_i$ to $v_-$), $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through a feedback impedance $Z_f$ (current from $v_-$ to $v_o$).
@@ -313,22 +337,17 @@ Laplace domain:
 \[V_o=-\frac{\frac{R}{R_i}s}{s+\frac{1}{R_iC}}V_i+RCv_i(0^-)\]
 Transfer function: Butterworth first-order high-pass with cutoff frequency $\frac{1}{R_iC}$ and gain $\frac{R}{R_i}$ at $\omega=\infty$.
 \[H(s)=-\frac{\frac{R}{R_i}s}{s+\frac{1}{R_iC}}\]
-\sssc{Single-pole / STC low-pass open-loop gain}
-For a STC low-pass behavior, which is to ensure the op amp will be stable,
-\[A(s)=\frac{A_0}{1+\frac{s}{\omega_c}},\]
-where $A_0\gg 1$ is DC gain, $\omega_c$ is cutoff frequency.
+\sssc{Large-signal operation}
+\bit
+\item Output voltage saturation: A real op amp operates linearly over a limited range of output voltages and saturates if the output voltage reaches a saturation voltage, which is related to the positive and negative power supply voltages. An op amp with saturation voltage equal to its power supplies is said to offer rail-to-rail output.
+\item Output current limits: A real op amp's output current is limited to a specified maximum. For 741, its maximum output current is 20 mA.
+\eit
+\sssc{Slew rate (SR)}
+There is a specific maximum rate of change possible at the output voltage of a real op amp, called slew rate (SR),
+\[\tx{SR}=\evlv{\abs{\dv{v_o}{t}}}_{\max},\]
+usually specified on the op-amp data sheet in units of V/\textmu{}s.
 
-The frequency of which the gain $\abs{A}$ reach unity (0 dB) is denoted as $\omega_t$.
-\[\abs{A(j\omega_t)}=\frac{A_0}{\sqrt{1+\qty(\frac{\omega_t}{\omega_c})^2}}=1\]
-\[A_0^{\pht{0}2}=1+\qty(\frac{\omega_t}{\omega_c})^2\]
-\[\omega_t=\sqrt{A_0^{\pht{0}2}-1}\omega_c\approx A_0\omega_c\]
-The non-angular frequency $f_t=\frac{\omega_t}{2\pi}$ is usually specified as the unity-gain bandwidth.
-
-Such op amp is said to have a single-pole model since the single pole dominates the amplifier responses, also called dominant pole.
-
-
-
-
+To measure it, connect $v_o$ to $v_-$ and $v_+$ to a voltage source $v_t$ and measure the rate of change of $v_o$ before it reaches $v_t$. The op amp is then said to be slewing, and the output is slew-rete limited.
 
 
 \end{document}
