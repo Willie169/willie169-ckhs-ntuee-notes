@@ -69,7 +69,7 @@ A LTI system is called unstable iff it is not stable.
 \bit
 \item $H(i\omega)$ is called frequency response,
 \item $a(\omega)\coloneq\abs{H(i\omega)}$ is called magnitude/amplitude response/ratio or gain,
-\item $\theta(\omega)\coloneq\arg(H(i\omega))$ is called phase (angle) response/shift.
+\item $\theta(\omega)\coloneq\arg(H(i\omega))$ (also denoted as $\varphi(\omega)$) is called phase (angle) response/shift.
 \eit
 $\omega$ is called angular frequency and $f\coloneq\frac{\omega}{2\pi}$ is called non-angular frequency. Both can be called frequency and can be differentiated with symbol, and angular frequency is used below.
 \sssc{Steady-state sinusoidal response}
@@ -127,9 +127,6 @@ Frequency response are often expressed in logarithmic scale:
 \bit
 \item Magnitude response, input, and output can be expressed in decibel (dB) as $g(\omega)\coloneq C\log_{10}|H(i\omega)|$, $C\log_{10}|x|$, and $C\log_{10}|y|$ with some constant $C$. $C=20$ is used here.
 \item Changing by 2 times is called an octave or oct, and changing by 10 times is called a decade or dec. $k$ dec$^{-1}$ equals to $\log_{10}(2)$ oct$^{-1}$. The most common used is $20$ dB/dec equals to $20\log_{10}(2)\approx 6$ dB/oct.
-\item Bode magnitude plot or dB gain curve: Magnitude response plotted with frequency in logarithmic scale as horizontal axis and magnitude response in dB as vertical axis.
-\item Bode phase plot or phase curve: Phase response plotted with frequency in logarithmic scale as horizontal axis and phase response as vertical axis.
-\item Asymptotic Bode plot: The asymptotes of Bode plots for low and high frequency is often interested.
 \eit
 We can factor $H(s)$ into
 \[H(s)=G\prod_{k=1}^mH_k(s)\]
@@ -141,6 +138,12 @@ then
 For a transfer function, cutoff frequency $\omega_c$ is a frequency such that
 \[\abs{H(i\omega_c)}=\frac{\max_{\omega}a(\omega)}{\sqrt{2}}.\]
 $20\log_{10}(\frac{1}{\sqrt{2}})=-10\log_{10}(2)\approx -3$, thus this frequency is also denoted $\omega_{-3\tx{dB}}$ or $\omega_{3\tx{dB}}$.
+\sssc{Bode plot}
+\bit
+\item Bode magnitude plot or dB gain curve: Magnitude response plotted with frequency (or frequency divided by cutoff or some other important frequency) in logarithmic scale as horizontal axis and magnitude response (or magnitude response divided by maximum gain) in dB as vertical axis.
+\item Bode phase plot or phase curve: Phase response plotted with frequency (or frequency divided by cutoff or some other important frequency) in logarithmic scale as horizontal axis and phase response as vertical axis.
+\item Asymptotic Bode plot: The asymptotes of Bode plots for low and high frequency is often interested.
+\eit
 \sssc{Normalizing}
 For a transfer function $H(s)$ such that
 \[\max_{\omega}a(\omega)=K\in\bbR_{>0},\]
@@ -200,7 +203,27 @@ To transform an $n$th-order normalized low-pass prototype filter to a $2n$th-ord
 $n$th-order Butterworth low-pass prototype filter is
 \[\qty(a(\omega))^2=\frac{1}{1+\omega^{2n}}\]
 \[H(s)=\prod_{k=1}^n\frac{1}{s-e^{\frac{j(2k+n-1)\pi}{2n}}}\]
+For first-order,
+\[\qty(a(\omega))^2=\frac{1}{1+\omega^2}\]
+\[H(s)=\frac{1}{s+1}\]
 When not specified, a filter of a type usually refers to the lowest-order Butterworth filter of the type.
+\sssc{STC filter standard form}
+$\omega_c$ is cutoff frequency, and $\abs{K}$ is gain at $\omega=0$.
+
+Low-pass:
+\[H(s)=\frac{K}{1+\frac{s}{\omega_c}}\]
+\[H(i\omega)=\frac{K}{1+i\frac{\omega}{\omega_c}}\]
+\[a(\omega)=\frac{\abs{K}}{\sqrt{1+\qty(\frac{\omega}{\omega_c})^2}}\]
+\[\theta(\omega)=-\arg(\frac{\omega}{\omega_c})\]
+\[H(i0)=K\]
+\[H(i\infty)=0\]
+High-pass:
+\[H(s)=\frac{K}{1-\frac{s}{\omega_c}}\]
+\[H(i\omega)=\frac{K}{1-i\frac{\omega}{\omega_c}}\]
+\[a(\omega)=\frac{\abs{K}}{\sqrt{1-\qty(\frac{\omega}{\omega_c})^2}}\]
+\[\theta(\omega)=\arg(\frac{\omega}{\omega_c})\]
+\[H(i0)=0\]
+\[H(i\infty)=K\]
 \ssc{Transfer function factors}
 Variables after $;$ are parameters, which are positive real numbers unless otherwise specified. Only positive $\omega$ are considered.
 \sssc{Reciprocal factor}
