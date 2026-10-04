@@ -340,7 +340,7 @@ Transfer function: Butterworth first-order high-pass with cutoff frequency $\fra
 \sssc{Large-signal operation}
 \bit
 \item Output voltage saturation: A real op amp operates linearly over a limited range of output voltages and saturates if the output voltage reaches a saturation voltage, which is related to the positive and negative power supply voltages. An op amp with saturation voltage equal to its power supplies is said to offer rail-to-rail output.
-\item Output current limits: A real op amp's output current is limited to a specified maximum. For 741, its maximum output current is 20 mA.
+\item Output current limits: A real op amp's output current is limited to a specified maximum. This also imposes a output voltage limit equal to the maximum output current multiplied by the sum of output impedance and load impedance. For 741, its maximum output current is 20 mA.
 \eit
 \sssc{Slew rate (SR)}
 There is a specific maximum rate of change possible at the output voltage of a real op amp, called slew rate (SR),
@@ -348,6 +348,17 @@ There is a specific maximum rate of change possible at the output voltage of a r
 usually specified on the op-amp data sheet in units of V/\textmu{}s.
 
 To measure it, connect $v_o$ to $v_-$ and $v_+$ to a voltage source $v_t$ and measure the rate of change of $v_o$ before it reaches $v_t$. The op amp is then said to be slewing, and the output is slew-rete limited.
+\sssc{Output impedance}
+If an op amp has non-zero output impedance $Z_o$ and drives a load impedance $Z_L$, the output voltage appears across the load $V_L$ is (Laplace domain):
+\[V_L=V_o\frac{Z_L}{Z_o+Z_L}.\]
+If an op amp has open-loop gain $A$ and non-zero output resistance $R_o$ and drives a load resistance $R_L$, the voltage gain as seemed from the load is
+\[A_L=A\frac{R_L}{R_o+R_L}=\frac{v_L}{v_+-v_-}\]
+\sssc{Input resistance}
+A real op amp has a finite input resistance $R_i$, and the power input $P_i$ is
+\[P_i=\frac{(v_+-v_-)^2}{R_i}\]
+Suppose the output resistance is $R_o$ and the voltage gain as seemed from a load resistance $R_L$ is $A_L=A\frac{R_L}{R_o+R_L}$, the power gain $G_P$ is:
+\[P_L=\frac{v_L^{\pht{L}2}}{R_L}\]
+\[G_P=\frac{P_L}{P_i}=A_L^{\pht{L}2}\frac{R_i}{R_L}\]
 
 
 \end{document}
