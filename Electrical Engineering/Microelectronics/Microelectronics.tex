@@ -131,18 +131,20 @@ where $A$ is (differential) open-loop gain or open-circuit gain, and $v_{os}$ is
 \sssc{Ideal op amp}
 \bit
 \item Infinite input impedance: No signal current flowing into $v_+$ and $v_-$.
-\item Infinite open-loop gain
-\item Infinite bandwidth: open-loop gain remains constant in all frequencies.
+\item Infinite open-loop gain.
+\item Infinite bandwidth: The open-loop gain remains constant in all frequencies.
 \item Zero output impedance: The amplifier is unilateral.
 \item Zero input offset voltage: $v_{os}=0$, which implies zero common-mode gain, i.e., infinite common-mode rejection.
 \eit
 This is a linear element with inputs $v_+$ and $v_-$ and output $v_o$.
 
-We can construct a virtual short circuit between $v_+$ and $v_-$ for ideal op amp.
+$v_o$ may be any voltage since $A=\infty$ and $0*\infty$ can be any number in $[0,\infty]$ in limit sense.
 
-Note that while $v_+-v_-$, $v_o$ may be any voltage since $A=\infty$ and $0*\infty$ can be any number in $[0,\infty]$ in limit sense.
+The open-loop gain of a real op amp is finite and dependent on frequency.
 \sssc{Feedback configuration}
 To have stable signal, op amp in a circuit is connected with a negative feedback configuration, which consists of the op amp and a connection from $v_o$ to either of the input terminals with a resistance on it, called feedback connection. When the feedback connection connects to $v_-$, it is called inverting configuration. When the feedback connection connects to $v_+$, it is called non-inverting configuration.
+
+We can construct a virtual short circuit between $v_+$ and $v_-$ since it will becomes $v_+=v_-$ immediately due to the feedback.
 \sssc{Inverting amplifier}
 An inverting amplifier consists of an op amp where input voltage $v_i$ is connected to $v_-$ through an input resistance $R_i$ (current from $v_i$ to $v_-$), $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through a feedback resistance $R_f$ (current from $v_-$ to $v_o$).
 \[v_+=v_-=0\]
@@ -311,8 +313,8 @@ Laplace domain:
 \[V_o=-\frac{\frac{R}{R_i}s}{s+\frac{1}{R_iC}}V_i+RCv_i(0^-)\]
 Transfer function: Butterworth first-order high-pass with cutoff frequency $\frac{1}{R_iC}$ and gain $\frac{R}{R_i}$ at $\omega=\infty$.
 \[H(s)=-\frac{\frac{R}{R_i}s}{s+\frac{1}{R_iC}}\]
-\sssc{Effect of finite open-loop gain and bandwidth}
-The differential open-loop gain of a real op amp is finite and dependent on frequency. For a STC low-pass behavior, which is to ensure the op amp will be stable,
+\sssc{Single-pole / STC low-pass open-loop gain}
+For a STC low-pass behavior, which is to ensure the op amp will be stable,
 \[A(s)=\frac{A_0}{1+\frac{s}{\omega_c}},\]
 where $A_0\gg 1$ is DC gain, $\omega_c$ is cutoff frequency.
 
@@ -321,6 +323,10 @@ The frequency of which the gain $\abs{A}$ reach unity (0 dB) is denoted as $\ome
 \[A_0^{\pht{0}2}=1+\qty(\frac{\omega_t}{\omega_c})^2\]
 \[\omega_t=\sqrt{A_0^{\pht{0}2}-1}\omega_c\approx A_0\omega_c\]
 The non-angular frequency $f_t=\frac{\omega_t}{2\pi}$ is usually specified as the unity-gain bandwidth.
+
+Such op amp is said to have a single-pole model since the single pole dominates the amplifier responses, also called dominant pole.
+
+
 
 
 
