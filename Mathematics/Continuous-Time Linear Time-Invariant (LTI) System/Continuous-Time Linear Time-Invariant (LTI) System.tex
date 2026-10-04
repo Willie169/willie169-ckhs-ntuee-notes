@@ -284,7 +284,7 @@ which is horizontal asymptote $g_{HP}=0$.
 \item For $\omega\ll \omega_c$:
 \[a_{HP}(\omega;\omega_c)\approx\frac{\omega}{\omega_c}\]
 \[g_{HP}(\omega;\omega_c)\approx 20\log_{10}(\omega)-20\log_{10}(\omega_c),\]
-which is slant asymptote slope $20$ dB/dec, $y$ intercept $-20\log_{10}(\omega_c)$, and $x$ intercept $\log_{10}(\omega_c)$.
+which is slant asymptote with slope $20$ dB/dec, $y$ intercept $-20\log_{10}(\omega_c)$, and $x$ intercept $\log_{10}(\omega_c)$.
 \[\theta_{HP}(\omega;\omega_c)\approx\frac{\pi}{2}\]
 \eit
 \sssc{Quadratic low-pass factor}
@@ -303,7 +303,7 @@ which is slant asymptote slope $20$ dB/dec, $y$ intercept $-20\log_{10}(\omega_c
 \[g_{QD}(\omega;\omega,Q)=\infty\]
 \item If $Q<\frac{1}{2}$, it is unstable.
 \eit
-Asymptotic Bode plot, and center and peak frequencies:
+Asymptotic Bode plot and center and peak frequencies:
 \bit
 \item For $\omega\ll\omega_0,\frac{\omega_0}{Q}$:
 \[a_{QD}(\omega;\omega_0,Q)\approx1\]
@@ -316,37 +316,38 @@ which is horizontal asymptote $g_{QD}=0$.
 \[\theta_{QD}(\omega;\omega_0,Q)=-\frac{\pi}{2}\]
 \item If $Q>\frac{1}{2}$, for peak frequency $\omega=\omega_p=\omega_0\sqrt{1-\frac{1}{2Q^2}}$:
 \[a_{QD}(\omega;\omega_0,Q)=\frac{\omega_0^{\pht{0}2}}{\sqrt{\frac{\omega_0^{\pht{0}4}}{Q^2}-\frac{\omega_0^{\pht{0}4}}{2Q^4}+\omega_0^{\pht{0}4}-\frac{\omega_0^{\pht{0}4}}{Q^2}+\frac{\omega_0^{\pht{0}4}}{4Q^4}+\omega_0^{\pht{0}4}-2\omega_0^{\pht{0}4}+\frac{\omega_0^{\pht{0}4}}{Q^2}}}=\frac{Q}{\sqrt{1-\frac{1}{4Q^2}}}\]
-\[g_{QD}(\omega;\omega_0,Q)=20\log_{10}(Q)-10\log_{10}(1-\frac{1}{4Q^2})\]
+\[g_{QD}(\omega;\omega_0,Q)=20\log_{10}(Q)-10\log_{10}(1-\frac{1}{4Q^2}),\]
+which are maxima $a_{QD}=\frac{Q}{\sqrt{1-\frac{1}{4Q^2}}}$ and $g_{QD}=20\log_{10}(Q)-10\log_{10}(1-\frac{1}{4Q^2})$.
 \item For $\omega\gg\omega_0,\frac{\omega_0}{Q}$:
 \[a_{QD}(\omega;\omega_0,Q)\approx\frac{\omega_0^{\pht{0}2}}{\omega^2}\]
 \[g_{QD}(\omega;\omega_0,Q)\approx 40\log_{10}(\omega_0)-40\log_{10}(\omega)\]
-which is slant asymptote slope $-40$ dB/dec, $y$ intercept $40\log_{10}(\omega_0)$, and $x$ intercept $\log_{10}(\omega_0)$.
-\[\theta_{QD}(\omega;\omega_0,Q)=-\pi\]
+which is slant asymptote with slope $-40$ dB/dec, $y$ intercept $40\log_{10}(\omega_0)$, and $x$ intercept $\log_{10}(\omega_0)$.
+\[\theta_{QD}(\omega;\omega_0,Q)\approx-\pi\]
 \eit
 \sssc{Band-pass factor}
 \[H_{BP}(s;B,\omega_0)\coloneq\frac{Bs}{s^2+Bs+\omega_0^{\pht{0}2}}\]
 \[H_{BP}(i\omega;B,\omega_0)=\frac{iB\omega}{-\omega^2+iB\omega+\omega_0^{\pht{0}2}}\]
 \[a_{BP}(\omega;B,\omega_0)=\frac{B\omega}{\sqrt{B^2\omega^2+\omega^4+\omega_0^{\pht{0}4}-2\omega^2\omega_0^{\pht{0}2}}}\]
 \[\dv{}{\omega}\qty(a_{BP}(\omega;B,\omega_0))=\frac{B\qty(\omega^4+\omega_0^{\pht{0}4}-2\omega^2\omega_0^{\pht{0}2}+2\omega^3-2\omega\omega_0^{\pht{0}2})}{\qty(B^2\omega^2+\omega^4+\omega_0^{\pht{0}4}-2\omega^2\omega_0^{\pht{0}2})^{\frac{3}{2}}}\]
-\[\theta_{BP}(\omega;B,\omega_0)=\frac{\pi}{2}-\arg(-\omega^2+iB\omega+\omega_0^{\pht{0}2})\]
-Asymptotic Bode plot and center/peak frequency:
-\bit
-\item For $\omega\ll\omega_0,B$:
-\[a_{BP}(\omega;B,\omega_0)\approx\frac{B\omega}{\omega_0^{\pht{0}2}}\]
-\[g_{BP}(\omega;B,\omega_0)\approx 20\log_{10}(\omega)+20\log_{10}(B)-40\log_{10}(\omega_0)\]
-which has slope $20$ dB/dec, $y$ intercept $20\log_{10}(B)-40\log_{10}(\omega_0)$, and $x$ intercept $2\log_{10}(\omega_0)-\log_{10}(B)$.
-\[\theta_{BP}(\omega;B,\omega_0)\approx\frac{\pi}{2}\]
-\item For $\omega=\omega_0$:
-\[a_{BP}(\omega;B,\omega_0)=1\]
-\[g_{BP}(\omega;B,\omega_0)=0\]
 \[\evlv{\dv{}{\omega}\qty(a_{BP}(\omega;B,\omega_0))}_{\omega=\omega_0}=0\]
-which is maximum $g_{BP}=0$, i.e., $\abs{H_{BP}}=1$.
-\[\theta_{BP}(\omega;B,\omega_0)=0\]
+\[\theta_{BP}(\omega;B,\omega_0)=\frac{\pi}{2}-\arg(-\omega^2+iB\omega+\omega_0^{\pht{0}2})\]
+Asymptotic Bode plot and center and peak frequency:
+\bit
 \item For $\omega\gg\omega_0,B$:
 \[a_{BP}(\omega;B,\omega_0)\approx\frac{B}{\omega}\]
-\[g_{BP}(\omega;B,\omega_0)=-20\log_{10}(\omega)+20\log_{10}(B)\]
-which has slope $-20$ dB/dec, $y$ intercept $20\log_{10}(B)$, and $x$ intercept $\log_{10}(B)$.
-\[\theta_{BP}(\omega;B,\omega_0)=-\frac{\pi}{2}\]
+\[g_{BP}(\omega;B,\omega_0)\approx-20\log_{10}(\omega)+20\log_{10}(B)\]
+which is slant asymptote with slope $-20$ dB/dec, $y$ intercept $20\log_{10}(B)$, and $x$ intercept $\log_{10}(B)$.
+\[\theta_{BP}(\omega;B,\omega_0)\approx-\frac{\pi}{2}\]
+\item For center and peak frequency $\omega=\omega_0$:
+\[a_{BP}(\omega;B,\omega_0)=1\]
+\[g_{BP}(\omega;B,\omega_0)=0\]
+which are maxima $a_{BP}=1$ and $g_{BP}=0$.
+\[\theta_{BP}(\omega;B,\omega_0)=0\]
+\item For $\omega\ll\omega_0,B$:
+\[a_{BP}(\omega;B,\omega_0)\approx\frac{B\omega}{\omega_0^{\pht{0}2}}\]
+\[g_{BP}(\omega;B,\omega_0)\approx 20\log_{10}(\omega)+20\log_{10}(B)-40\log_{10}(\omega_0),\]
+which is slant asymptote with slope $20$ dB/dec, $y$ intercept $20\log_{10}(B)-40\log_{10}(\omega_0)$, and $x$ intercept $2\log_{10}(\omega_0)-\log_{10}(B)$.
+\[\theta_{BP}(\omega;B,\omega_0)\approx\frac{\pi}{2}\]
 \eit
 \sssc{Band-stop factor}
 \[H_{BS}(s;B,\omega_0)\coloneq\frac{s^2+\omega_0^{\pht{0}2}}{s^2+Bs+\omega_0^{\pht{0}2}}\]
@@ -355,19 +356,19 @@ which has slope $-20$ dB/dec, $y$ intercept $20\log_{10}(B)$, and $x$ intercept 
 \[\theta_{BS}(\omega;B,\omega_0)=\arg(\frac{-\omega^2+\omega_0^{\pht{0}2}}{-\omega^2+iB\omega+\omega_0^{\pht{0}2}})\]
 Asymptotic Bode plot and center frequency:
 \bit
-\item For $\omega\ll\omega_0,B$:
+\item For $\omega\gg\omega_0,B$:
 \[a_{BS}(\omega;B,\omega_0)\approx1\]
-\[g_{BS}(\omega;B,\omega_0)\approx0\]
-which is horizontal asymptote $g_{BS}=0$, i.e., $\abs{H_{BS}}=1$.
-\[\theta_{BS}(\omega;B,\omega_0)=0\]
-\item For $\omega=\omega_0$:
+\[g_{BS}(\omega;B,\omega_0)\approx0,\]
+which is horizontal asymptote $g_{BS}=0$.
+\[\theta_{BS}(\omega;B,\omega_0)\approx 0\]
+\item For center frequency $\omega=\omega_0$:
 \[a_{BS}(\omega;B,\omega_0)=0\]
 \[g_{BS}(\omega;B,\omega_0)=-\infty\]
 \[\theta_{BS}(\omega;B,\omega_0)=\arg(0)=\tx{undefined}\]
-\item For $\omega\gg\omega_0,B$:
+\item For $\omega\ll\omega_0,B$:
 \[a_{BS}(\omega;B,\omega_0)\approx1\]
-\[g_{BS}(\omega;B,\omega_0)=0\]
-which is horizontal asymptote $g_{BS}=0$, i.e., $\abs{H_{BS}}=1$.
-\[\theta_{BS}(\omega;B,\omega_0)=0\]
+\[g_{BS}(\omega;B,\omega_0)\approx0\]
+which is horizontal asymptote $g_{BS}=0$.
+\[\theta_{BS}(\omega;B,\omega_0)\approx0\]
 \eit
 \end{document}
