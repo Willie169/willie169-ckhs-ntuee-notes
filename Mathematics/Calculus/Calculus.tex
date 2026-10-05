@@ -862,7 +862,7 @@ Let $V$ be a vector space and function $f\colon J\subseteq V\to\bbR$ be continuo
 \item If for any $x,y\in I$ and $\alpha\in(0,1)$, $f((1-\alpha)x+\alpha y)\leq (1-\alpha)f(x)+\alpha f(y)$, often called "$f$ lies weakly below all of its secant lines on $I$", then $f$ is called to be weakly concave up/upward/upwards (CU), weakly convex, weakly convex up/upward/upwards, or weakly cup-shaped.
 \item If for any $x,y\in I$ and $\alpha\in(0,1)$, $f((1-\alpha)x+\alpha y)\geq (1-\alpha)f(x)+\alpha f(y)$, often called "$f$ lies weakly above all of its secant lines on $I$", then $f$ is called to be weakly concave, weakly concave down/downward/downwards (CD), weakly convex down/downward/downwards, or weakly cap-shaped.
 \eit
-If $f$ is weakly concave upward/downward on an open convex set $I$ and continuous on a limit point $p$ of it, then $f$ is weakly concave upward/downward on $I\cup\{p\}$.
+If $f$ is weakly concave upward/downward on an open convex set $I$, and $f'$ is continuous on a limit point $p$ of $I$, then $f$ is weakly concave upward/downward on $I\cup\{p\}$.
 
 The terms without weakly and strictly are define to be either weakly or strictly in different contexts; here we define them to be strictly.
 \subsubsection{Point of inflection or inflection point (反曲點 or 拐點)}
@@ -2984,11 +2984,11 @@ Let $f\colon I\subseteq\bbR\to\bbR$ be a function and $(a,b)\subseteq I$ be an o
 \subsubsection{Concavity Test Theorem or Second Derivative Test for Concavity Theorem of one variable}
 Let function $f\colon I\subseteq\bbR\to\bbR$ be twice differentiable on an open interval $(a,b)\subseteq I$.
 \bit
-\item If $f''>0$ for any $x\in (a,b)$, then $f$ is strictly concave upward on $(a,b)$.
-\item If $f''<0$ for any $x\in (a,b)$, then $f$ is strictly concave downward on $(a,b)$.
-\item $f''\geq 0$ for any $x\in (a,b)$ iff $f$ is weakly concave upward on $(a,b)$.
-\item $f''\leq 0$ for any $x\in (a,b)$ iff $f$ is weakly concave downward on $(a,b)$.
-\item If $\exists x\in (a,b)\colon f''(x)>0$ and $\exists x\in (a,b)\colon f''(x)<0$, then $f$ is neither concave upward nor concave downward on $(a,b)$.
+\item $K$ is a locally finite subset of $(a,b)$, $f''>0$ for all $x\in (a,b)\setminus K$, and $f''=0$ for all $x\in K$, iff $f$ is strictly concave upward on $(a,b)$.
+\item $K$ is a locally finite subset of $(a,b)$, $f''<0$ for all $x\in (a,b)\setminus K$, and $f''=0$ for all $x\in K$, iff $f$ is strictly concave downward on $(a,b)$.
+\item $f''\geq 0$ for all $x\in (a,b)$ iff $f$ is weakly concave upward on $(a,b)$.
+\item $f''\leq 0$ for all $x\in (a,b)$ iff $f$ is weakly concave downward on $(a,b)$.
+\item $\exists x\in (a,b)\colon f''(x)>0$ and $\exists x\in (a,b)\colon f''(x)<0$, iff $f$ is neither weakly concave upward nor weakly concave downward on $(a,b)$.
 \eit
 \begin{proof}
 By Increasing/Decreasing Test Theorem and First Derivative Test for Concavity Theorem, it is obvious.
@@ -2996,10 +2996,11 @@ By Increasing/Decreasing Test Theorem and First Derivative Test for Concavity Th
 \subsubsection{Concavity Test Theorem or Second Derivative Test for Concavity Theorem of multiple variables}
 Let $f\colon I\subseteq\mathbb{R}^n\to\mathbb{R}$ be a function, and $J\subseteq I$ be an open convex set on which $f$ is twice differentiable, and $H_f$ is the Hessian of $f$.
 \bit
-\item If $H_f(\mb{x})$ is positive definite for any $\mb{x}\in J$, then the graph of $f$ is strictly concave upward on $J$.
-\item If $H_f(\mb{x})$ is negative definite for any $\mb{x}\in J$, then the graph of $f$ is strictly concave downward on $J$.
-\item $H_f(\mb{x})$ is positive semi-definite for any $\mb{x}\in J$ iff the graph of $f$ is weakly concave upward on $J$.
-\item $H_f(\mb{x})$ is negative semi-definite for any $\mb{x}\in J$ iff the graph of $f$ is weakly concave downward on $J$.
+\item $K$ is a locally finite subset of $J$, $H_f(\mb{x})$ is positive definite for all $\mb{x}\in J\setminus K$, and $H_f(\mb{x})$ is both positive semi-definite and negative semi-definite on $K$, iff the graph of $f$ is strictly concave upward on $J$.
+\item $K$ is a locally finite subset of $J$, $H_f(\mb{x})$ is negative definite for all $\mb{x}\in J\setminus K$, and $H_f(\mb{x})$ is both positive semi-definite and negative semi-definite on $K$, iff the graph of $f$ is strictly concave downward on $J$.
+\item $H_f(\mb{x})$ is positive semi-definite for all $\mb{x}\in J$ iff the graph of $f$ is weakly concave upward on $J$.
+\item $H_f(\mb{x})$ is negative semi-definite for all $\mb{x}\in J$ iff the graph of $f$ is weakly concave downward on $J$.
+\item $H_f(\mb{x})$ is indefinite for all $\mb{x}\in J$ iff the graph of $f$ is neither weakly concave upward nor weakly concave downward on $J$.
 \eit
 \subsubsection{Inflection Point Theorem}
 Let $f\colon I\subseteq\bbR\to\bbR$ be a function. If $(c,f(c))$ is an inflection point of $f$ and $f$ is differentiable at $c$, then $c$ is a critical point of $f'$.
