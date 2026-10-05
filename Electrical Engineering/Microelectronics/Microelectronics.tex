@@ -114,6 +114,19 @@ Suppose input and output signals have power $P_I$ and $P_L$.
 where $P_{\tx{dissipated}}$ is the power dissipated.
 \sssc{Classification based on frequency response}
 A band-pass amplifier is also called tuned amplifier. A low-pass amplifier is also called DC amplifier. A amplifier directly coupled with a coupling capacitor, called capacitively coupled, is called AC amplifier.
+\sssc{Output impedance}
+In Laplace domain, for an amplifier with gain $A=\frac{V_o}{V_i}$ and output impedance $Z_o$ driving a load impedance $Z_L$, the output voltage appears across the load $V_L$ is:
+\[V_L=V_o\frac{Z_L}{Z_o+Z_L},\]
+and the gain as seemed from the load $A_L=\frac{V_L}{V_i}$ is:
+\[A_L=A\frac{Z_L}{Z_o+Z_L},\]
+and the power output to the load is
+\[P_L=\frac{V_L^{\pht{L}2}}{Z_L}\]
+\sssc{Input impedance}
+In Laplace domain, for an amplifier with input impedance $Z_i$, the power input is:
+\[P_i=\frac{V_i^{\pht{i}2}}{Z_i}\]
+\sssc{Power gain}
+For an amplifier with gain $A$, input impedance $Z_i$, and output impedance $Z_o$ driving a load impedance $Z_L$, the power gain (Laplace domain) is:
+\[G_P=\frac{P_L}{P_i}=A_L^{\pht{L}2}\frac{Z_i}{Z_L}=\frac{Z_iZ_L}{\qty(Z_o+Z_L)^2}\]
 \ssc{Operational Amplifier (op amp or op-amp)}
 \sssc{Definition}
 An op amp has five terminals:
@@ -348,17 +361,6 @@ There is a specific maximum rate of change possible at the output voltage of a r
 usually specified on the op-amp data sheet in units of V/\textmu{}s.
 
 To measure it, connect $v_o$ to $v_-$ and $v_+$ to a voltage source $v_t$ and measure the rate of change of $v_o$ before it reaches $v_t$. The op amp is then said to be slewing, and the output is slew-rete limited.
-\sssc{Output impedance}
-If an op amp has non-zero output impedance $Z_o$ and drives a load impedance $Z_L$, the output voltage appears across the load $V_L$ is (Laplace domain):
-\[V_L=V_o\frac{Z_L}{Z_o+Z_L}.\]
-If an op amp has open-loop gain $A$ and non-zero output resistance $R_o$ and drives a load resistance $R_L$, the voltage gain as seemed from the load is
-\[A_L=A\frac{R_L}{R_o+R_L}=\frac{v_L}{v_+-v_-}\]
-\sssc{Input resistance}
-A real op amp has a finite input resistance $R_i$, and the power input $P_i$ is
-\[P_i=\frac{(v_+-v_-)^2}{R_i}\]
-Suppose the output resistance is $R_o$ and the voltage gain as seemed from a load resistance $R_L$ is $A_L=A\frac{R_L}{R_o+R_L}$, the power gain $G_P$ is:
-\[P_L=\frac{v_L^{\pht{L}2}}{R_L}\]
-\[G_P=\frac{P_L}{P_i}=A_L^{\pht{L}2}\frac{R_i}{R_L}\]
 
 
 \end{document}
