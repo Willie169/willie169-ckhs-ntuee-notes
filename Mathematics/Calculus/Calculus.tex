@@ -862,8 +862,6 @@ Let $V$ be a vector space and function $f\colon J\subseteq V\to\bbR$ be continuo
 \item If for any $x,y\in I$ and $\alpha\in(0,1)$, $f((1-\alpha)x+\alpha y)\leq (1-\alpha)f(x)+\alpha f(y)$, often called "$f$ lies weakly below all of its secant lines on $I$", then $f$ is called to be weakly concave up/upward/upwards (CU), weakly convex, weakly convex up/upward/upwards, or weakly cup-shaped.
 \item If for any $x,y\in I$ and $\alpha\in(0,1)$, $f((1-\alpha)x+\alpha y)\geq (1-\alpha)f(x)+\alpha f(y)$, often called "$f$ lies weakly above all of its secant lines on $I$", then $f$ is called to be weakly concave, weakly concave down/downward/downwards (CD), weakly convex down/downward/downwards, or weakly cap-shaped.
 \eit
-If $f$ is strictly/weakly concave upward/downward on an open convex set $I$, and $f'$ is continuous on a set $J$ of limit points of $I$ such that $I\cup J$ is convex, then $f$ is strictly/weakly concave upward/downward on $I\cup\{p\}$.
-
 The terms without weakly and strictly are define to be either weakly or strictly in different contexts; here we define them to be strictly.
 \subsubsection{Point of inflection or inflection point (反曲點 or 拐點)}
 Let $V$ be a vector space, $f\colon J\subseteq V\to\bbR$ be a function, and $I\subseteq J$ be a convex set. If $f$ is concave upward on $(a,b)$ and concave downward on $(b,c)$, or, concave downward on $(a,b)$ and concave upward on $(b,c)$, then $(b,f(b))$ is called an inflection point of $f$.
@@ -1239,7 +1237,7 @@ In three dimensions,
 \subsubsection{Frenet-Serret frame}
 $\mb{T},\mb{N},\mb{B}$ are collectively called Frenet-Serret basis or TNB basis, which is a local orthogonal basis. This basis with origin being the point $\mb{r}(t)$ is called Frenet-Serret frame.
 \subsubsection{Curvature (曲率)}
-The curvature $\kappa$ and curvature vector $\mb{K}$ of a curve $\mb{r}$ at $t$ are defined, with unit tagent vector $\mb{T}$ and arc length $s$, as
+The curvature $\kappa$ and curvature vector $\mb{K}$ of a curve $\mb{r}$ at $t$ are defined, with unit tangent vector $\mb{T}$ and arc length $s$, as
 \[\ba
 \mb{K}&\coloneq\dv{\mb{T}}{s}\\
 &=\flatfrac{\dv{\mb{T}}{t}}{\dv{s}{t}}\\
@@ -1329,7 +1327,7 @@ The arc length of differentiable polar curve $r(\theta)$ from $a$ to $b$ is
 \[(x'(\theta))^2+(y'(\theta))^2=\qty(r(\theta))^2+\qty(r'(\theta))^2\]
 \epr
 \subsection{Tangent space}
-\subsubsection{Tagent space (切空間)}
+\subsubsection{tangent space (切空間)}
 Suppose that $M$ is an $n$-dimensional differentiable manifold and $x\in M$. Pick a coordinate chart $\varphi\colon U\to\mathbb{R}^n$, where $U$ is an open subset of $M$ containing $x$. Suppose further that two curves $\gamma_1,\gamma_2\colon (-1,1)\to M$ with $\gamma_1(0)=\gamma_2(0)=x$ are given such that both $\varphi\circ\gamma_1,\varphi\circ\gamma_2\colon (-1,1)\to\mathbb{R}^n$ are differentiable. We call these differentiable curves initialized at $x$. Then $\gamma_1$ and $\gamma_2$ are said to be equivalent at $0$ if and only if the derivatives of $\varphi\circ\gamma_1$ and $\varphi\circ\gamma_2$ at $0$ coincide. This defines an equivalence relation on the set of all differentiable curves initialized at $x$, and equivalence classes of such curves are called tangent vectors (切向量) of $M$ at $x$, sometimes denoted as $\gamma'$ for some curve $\gamma$ in the equivalence class. The tangent space of $M$ at (aka near) $x$, denoted by $T_xM$, is then defined as the set of all tangent vectors at $x$, which does not depend on the choice of coordinate chart $\varphi$.
 \subsubsection{Dimension of tangent space}
 The dimension of $T_xM$ is the same as $M$.
@@ -1337,7 +1335,7 @@ TODO?
 \bpr
 TODO 
 \epr
-\subsubsection{Tagent bundle (切叢)}
+\subsubsection{tangent bundle (切叢)}
 A tangent bundle $TM$ of a smooth manifold $M$ is defined to be
 \[TM=\{(x,v)\colon x\in M\land v\in T_xM\},\]
 where $T_xM$ is the tangent space at $x$.
@@ -2841,21 +2839,17 @@ If $f'(x)\geq g'(x)$ for all $x\in (a,b)$ with $b\in\bbR_{>a}\cup\{\infty\}$, $f
     \[f(x)-g(x)=h(x)=(x-a)h'(c)>0.\]
     The other statements can be proven similarly.
 \end{proof}
+\subsubsection{Increasing/Decreasing and concavity extension}
+If $f$ is strictly/weakly increasing/decreasing on an open interval $I$, and $f$ is continuous on a limit point $p$ of $I$, then $f$ is strictly/weakly increasing/decreasing on $I\cup\{p\}$.
+
+If $f$ is strictly/weakly concave upward/downward on an open convex set $I$, and $f'$ is continuous on a set $J$ of limit points of $I$ such that $I\cup J$ is convex, then $f$ is strictly/weakly concave upward/downward on $I\cup J$.
 \subsubsection{Increasing/Decreasing Test (I/D Test) Theorem}
-Let function $f\colon I\subseteq\bbR\to\bbR$ be differentiable on an open interval $(a,b)\subseteq I$.
+Let function $f\colon I\subseteq\bbR\to\bbR$ be continuous on an open interval $(a,b)\subseteq I$ and differentiable on $(a,b)$ except possibly on a locally finite subset.
 \bit
-\item if $f'(x)>0$ for any $x\in (a,b)$, then $f$ is strictly increasing on $(a,b)$.
-\item If $f'(x)>0$ for any $x\in (a,b)$ and $f$ is continuous on $[a,b)$, then $f$ is strictly increasing on $[a,b)$.
-\item If $f'(x)>0$ for any $x\in (a,b)$ and $f$ is continuous on $(a,b]$, then $f$ is strictly increasing on $(a,b]$.
-\item if $f'(x)<0$ for any $x\in (a,b)$, then $f$ is strictly decreasing on $(a,b)$.
-\item If $f'(x)<0$ for any $x\in (a,b)$ and $f$ is continuous on $[a,b)$, then $f$ is strictly decreasing on $[a,b)$.
-\item If $f'(x)<0$ for any $x\in (a,b)$ and $f$ is continuous on $(a,b]$, then $f$ is strictly decreasing on $(a,b]$.
-\item $f'(x)\geq 0$ for any $x\in (a,b)$ iff $f$ is non-decreasing on $(a,b)$.
-\item If $f'(x)\geq 0$ for any $x\in (a,b)$ and $f$ is continuous on $[a,b)$, then $f$ is non-decreasing on $[a,b)$.
-\item If $f'(x)\geq 0$ for any $x\in (a,b)$ and $f$ is continuous on $(a,b]$, then $f$ is non-decreasing on $(a,b]$.
-\item $f'(x)\leq 0$ for any $x\in (a,b)$ iff $f$ is non-increasing on $(a,b)$.
-\item If $f'(x)\leq 0$ for any $x\in (a,b)$ and $f$ is continuous on $[a,b)$, then $f$ is non-increasing on $[a,b)$.
-\item If $f'(x)\leq 0$ for any $x\in (a,b)$ and $f$ is continuous on $(a,b]$, then $f$ is non-increasing on $(a,b]$.
+\item $f'(x)>0$ on $(a,b)$ except possibly on a locally finite subset iff $f$ is strictly increasing on $(a,b)$.
+\item $f'(x)<0$ on $(a,b)$ except possibly on a locally finite subset iff $f$ is strictly decreasing on $(a,b)$.
+\item $f'(x)\geq 0$ on $(a,b)$ except possibly on a locally finite subset iff $f$ is non-decreasing on $(a,b)$.
+\item $f'(x)\leq 0$ on $(a,b)$ except possibly on a locally finite subset iff $f$ is non-increasing on $(a,b)$.
 \eit
 \begin{proof}
     For the first statement, we want to show that $\forall c,d\in (a,b)\colon c<d\implies f(c)<f(d)$ if $f'(x)>0$ for any $x\in (a,b)$.
@@ -2885,9 +2879,8 @@ Let $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ be a function, $c$ be a critical
 \item If exist $a<c<b$ such that $f'(c)\geq 0$ for any $x\in (a,c)$ and $f'(c)\leq 0$ for any $x\in (c,b)$, then $f$ has a local maximum at $c$.
 \item If exist $a<c<b$ such that $f'(c)<0$ for any $x\in (a,c)$ and $f'(c)>0$ for any $x\in (c,b)$, then $f$ has a strict local minimum at $c$.
 \item If exist $a<c<b$ such that $f'(c)\leq 0$ for any $x\in (a,c)$ and $f'(c)\geq 0$ for any $x\in (c,b)$, then $f$ has a local minimum at $c$.
-\item If exist $a<c<b$ such that $f'(c)>0$ for any $x\in (a,b)$, then $f$ has no local exteme at $c$.
-\item If exist $a<c<b$ such that $f'(c)<0$ for any $x\in (a,b)$, then $f$ has no local ext
-eme at $c$.
+\item If exist $a<c<b$ such that $f'(c)>0$ for any $x\in (a,b)$, then $f$ has no local extreme at $c$.
+\item If exist $a<c<b$ such that $f'(c)<0$ for any $x\in (a,b)$, then $f$ has no local extreme at $c$.
 \eit
 \begin{proof}
     By Increasing/Decreasing Test Theorem, it is obvious.
@@ -2913,26 +2906,18 @@ f_{yx} & f_{yy}
 Let $f\colon I\subseteq\mathbb{R}^n\to\mathbb{R}$ be a function, $c$ be a critical point of $f$, $f$ be twice differentiable at $c$, and $H_f$ be the Hessian of $f$.
 \bit
 \item If $H_f(c)$ is negative definite, then $f$ has a strict local maximum at $c$.
-\item If $H_f(c)$ is postive definite, then $f$ has a strict local minimum at $c$.
+\item If $H_f(c)$ is positive definite, then $f$ has a strict local minimum at $c$.
 \item If $H_f(c)$ is negative semi-definite, then $f$ has a local maximum at $c$.
-\item If $H_f(c)$ is postive semi-definite, then $f$ has a local minimum at $c$.
+\item If $H_f(c)$ is positive semi-definite, then $f$ has a local minimum at $c$.
 \item If $H_f(c)$ is indefinite, then $f$ has a saddle point at $c$.
 \eit
 \subsubsection{First Derivative Test for Concavity Theorem}
-Let $f\colon I\subseteq\bbR\to\bbR$ be a function and $(a,b)\subseteq I$ be an open interval.
+Let $f\colon I\subseteq\bbR\to\bbR$ be a function that is differentiable on an open interval $(a,b)\subseteq I$.
 \bit
-\item If $f'$ is strictly increasing on $(a,b)$, often called "$f$ lies strictly below all its tagent lines on $(a,b)$", then $f$ is strictly concave upward on $(a,b)$.
-\item If $f'$ is strictly increasing on $(a,b)$ and $f$ is continuous on $[a,b)$, then $f$ is strictly concave upward on $[a,b)$.
-\item If $f'$ is strictly increasing on $(a,b)$ and $f$ is continuous on $(a,b]$, then $f$ is strictly concave upward on $(a,b]$.
-\item If $f'$ is strictly decreasing on $I$, often called "$f$ lies strictly above all its tagent lines on $(a,b)$", then $f$ is strictly concave downward on $(a,b)$.
-\item If $f'$ is strictly decreasing on $(a,b)$ and $f$ is continuous on $[a,b)$, then $f$ is strictly concave downward on $[a,b)$.
-\item If $f'$ is strictly decreasing on $(a,b)$ and $f$ is continuous on $(a,b]$, then $f$ is strictly concave downward on $(a,b]$.
-\item $f'$ is non-decreasing on $(a,b)$, often called "$f$ lies weakly below all its tagent lines on $(a,b)$", iff $f$ is weakly concave upward on $(a,b)$.
-\item If $f'$ is non-decreasing on $(a,b)$ and $f$ is continuous on $[a,b)$, then $f$ is weakly concave upward on $[a,b)$.
-\item If $f'$ is non-decreasing on $(a,b)$ and $f$ is continuous on $(a,b]$, then $f$ is weakly concave upward on $(a,b]$.
-\item $f'$ is non-increasing on $(a,b)$, often called "$f$ lies weakly above all its tagent lines on $(a,b)$", iff $f$ is weakly concave downward on $(a,b)$.
-\item If $f'$ is non-increasing on $(a,b)$ and $f$ is continuous on $[a,b)$, then $f$ is weakly concave downward on $[a,b)$.
-\item If $f'$ is non-increasing on $(a,b)$ and $f$ is continuous on $(a,b]$, then $f$ is weakly concave downward on $(a,b]$.
+\item If $f'$ is strictly increasing on $(a,b)$, often called "$f$ lies strictly below all its tangent lines on $(a,b)$", then $f$ is strictly concave upward on $(a,b)$.
+\item If $f'$ is strictly decreasing on $I$, often called "$f$ lies strictly above all its tangent lines on $(a,b)$", then $f$ is strictly concave downward on $(a,b)$.
+\item $f'$ is non-decreasing on $(a,b)$, often called "$f$ lies weakly below all its tangent lines on $(a,b)$", iff $f$ is weakly concave upward on $(a,b)$.
+\item $f'$ is non-increasing on $(a,b)$, often called "$f$ lies weakly above all its tangent lines on $(a,b)$", iff $f$ is weakly concave downward on $(a,b)$.
 \eit
 \begin{proof}
     For the first statement, we want to show that for any $c,d\in (a,b)$ and $\alpha\in(0,1)$, $f((1-\alpha)c+\alpha d)<(1-\alpha)f(c)+\alpha f(d)$ if for any $a\leq A<B\leq b$, $f'(A)<f'(B)$.
@@ -2989,7 +2974,7 @@ Let $f\colon I\subseteq\bbR\to\bbR$ be a function and $(a,b)\subseteq I$ be an o
     The "only if" direction of the tenth statement can be proven similarly.
 \end{proof}
 \subsubsection{Concavity Test Theorem or Second Derivative Test for Concavity Theorem of one variable}
-Let function $f\colon I\subseteq\bbR\to\bbR$ be twice differentiable on an open interval $(a,b)\subseteq I$.
+Let function $f\colon I\subseteq\bbR\to\bbR$ be $C^1$ on an open interval $(a,b)\subseteq I$.
 \bit
 \item $K$ is a locally finite subset of $(a,b)$, $f''>0$ for all $x\in (a,b)\setminus K$, and $f''=0$ for all $x\in K$, iff $f$ is strictly concave upward on $(a,b)$.
 \item $K$ is a locally finite subset of $(a,b)$, $f''<0$ for all $x\in (a,b)\setminus K$, and $f''=0$ for all $x\in K$, iff $f$ is strictly concave downward on $(a,b)$.
