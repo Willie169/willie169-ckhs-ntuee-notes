@@ -761,10 +761,12 @@ Let $f$ be a function with domain being $\bbR$ or $\bbR_{\geq 0}$. If we interpr
 \item $f'(a)$ where defined is called the margin benefit (aka revenue) or cost of $y$ at $a$.
 \eit
 \subsection{Differential}
-For a normed vector-valued function $f$ of an independent variable $x$, we define the differential of it, $\dd{f}$, in terms of the differential of $x$, denoted as $\dd{x}$, as
-\[\dd{f}=f'\dd{x}.\]
+\subsubsection{Differential of independent valuable}
+In $\bbR^n$, an independent variable $x_i$ is a mapping $\bbR^n\to\bbR$ from a point to its $i$th coordinate, the differential $\dd{x}_i$ of $x_i$ is a mapping that takes a function $f$ defined on a subset of $\bbR^n$ defined as
+\[\dd{x}_i(f)=\pdv{f}{x_i}\]
+\subsubsection{Differential of function}
 For a normed vector-valued function $f$ of independent variables $x_1,x_2,\ldots,x_n$, we define the (total) differential of it, $\dd{f}$, in terms of the differentials of $x_1,x_2,\ldots,x_n$, denoted as $\dd{x_1},\dd{x_2},\ldots,\dd{x_n}$, as
-\[\dd{f}=\sum_{k=1}^nf_{x_k}\dd{x_k}.\]
+\[\dd{f}=\sum_{k=1}^n\pdv{f}{x_k}\dd{x_k}.\]
 \subsection{Antiderivative (反導函數), inverse derivative, primitive function, primitive integral, or indefinite integral (不定積分)}
 \subsubsection{Definition}
 An antiderivative (aka inverse derivative, primitive function, primitive integral, or indefinite integral) of a function $f(x)$ on subset $I$ of the domain of $f$ is a differentiable function $F(x)$ such that
@@ -878,6 +880,20 @@ A cusp is a point $x$ on the graph of a real function $f$ such that:
 \item at least one of the left-hand derivative and the right-hand derivative of $f$ at $x$ are $\infty$ or $-\infty$,
 \item $x$ is not a vertical tangent of $f$, and
 \item the left-hand derivative and the right-hand derivative of $f$ at $x$ are both either finite, $\infty$, or $-\infty$.
+\eit
+\subsection{Exterior derivative and differential form}
+Let $U\subseteq\bbR^n$ be open, $f(x_1,\ldots,x_n)\colon U\to\bbR$ be a function,
+\[f(x_1,\ldots,x_n)\]
+is called a differential form of degree 0, differential 0-form, or 0-form, and for any positive integer $m\le n$, let $\mu$ be the set of all permutations of $\bbN\cap [1,m]$,
+\[\sum_{\sigma\in\mu}f(x_1,\ldots,x_n)\dd{x}_{\sigma(1)}\wedge\ldots\wedge\dd{x}_{\sigma(m)}\]
+is called a differential form of degree $k$, differential $n$-form, or $n$-form.
+
+The exterior derivative $\mathrm{d}$ is a mapping from $k$-form to $k+1$-form defined as
+\bit
+\item 1-form $\dd{f}$ is the differential $\dd{f}$ of $f$.
+\item If $\alpha,\beta$ are two $k$-forms and $a,b$ are real numbers, $\dd{a\alpha+b\beta}=a\dd{\alpha}+b\dd{\beta}$.
+\item TODO
+  exterior product, exterior derivative, differential form
 \eit
 
 
@@ -1393,13 +1409,6 @@ A parametric manifold whose image is differentiable is called regular or smooth 
 For an $m$-dimensional differentiable parametric manifold $\mb{r}(\mb{x})$, each $\pdv{\mb{r}}{x_i}$ is a fundamental tangent vector.
 \subsection{Orientation of hypersurface}
 For a hypersurface $S$, if it is possible to choose a unit normal vector for each point on it such that the unit normal vectors as a function of the points is a continuous vector field over $S$, then $S$ is orientable, and an orientation is a choice of such unit normal vectors.
-\subsection{Differential form and exterior derivative}
-For an $n$-dimensional manifold $S$, coordinate differentials $\dd{x}_1,\ldots,\dd{x}_n$, an $n$-dimensional function $f(x_1,\ldots,x_n)$ defined and integrable on $S$,
-\[f(x_1,\ldots,x_n)\]
-is called a differential form of degree 0, differential 0-form, or 0-form, and for any positive integer $m\le n$, if $f$ is $m$ times differentiable on $S$, and $f^{(m)}$ is integrable on $S$, then
-\[f(x_1,\ldots,x_n)\dd{x}_{i_1}\wedge\ldots\wedge\dd{x}_{i_m}\]
-is called a differential form of degree $k$, differential $n$-form, or $n$-form,
-for any indexed set $I\colon\bbN\cap[1,m]\to\bbN\cap[1,n];\;k\mapsto i_k$,
 
 
 
