@@ -166,16 +166,14 @@ This is a linear element with inputs $v_+$ and $v_-$ and output $v_o$.
 $v_o$ may be any voltage since $A=\infty$ and $0*\infty$ can be any number in $[0,\infty]$ in limit sense.
 
 The open-loop gain of a real op amp is finite and dependent on frequency.
-\sssc{Single-pole / STC low-pass open-loop gain}
-For a STC low-pass behavior, which is to ensure the op amp will be stable,
+\sssc{Internally compensated op amp}
+An internally compensated op amp is am op amp whose transfer function $A(s)$ is STC low-pass filter to ensure the op amp is stable,
 \[A(s)=\frac{A_0}{1+\frac{s}{\omega_b}}=\frac{\omega_t}{s+\omega_b}\qc\omega_t=A_0\omega_b,\]
 where $A_0\gg 1$ is DC gain, $\omega_b$ is cutoff frequency, and $\omega_t$ is approximately the frequency of which the gain $\abs{A}$ reach unity (0 dB):
 \[\abs{A(j\omega)}=\frac{A_0}{\sqrt{1+\qty(\frac{\omega}{\omega_b})^2}}=1\]
 \[A_0^{\pht{0}2}=1+\qty(\frac{\omega}{\omega_b})^2\]
 \[\omega=\sqrt{A_0^{\pht{0}2}-1}\omega_b\approx A_0\omega_b\]
-The non-angular frequency $f_t=\frac{\omega_t}{2\pi}$ is usually specified on the op-amp data sheet as the unity-gain bandwidth.
-
-Such op amp is said to have a single-pole model since the single pole dominates the amplifier responses, also called dominant pole.
+The non-angular frequency $f_t=\frac{\omega_t}{2\pi}$ is usually specified on the op-amp data sheet as the unity-gain bandwidth. Such op amp is said to have a single-pole model since the single pole dominates the amplifier responses, also called dominant pole.
 \sssc{Feedback configuration}
 To have stable signal, op amp in a circuit is connected with a negative feedback configuration, which consists of the op amp and a connection from $v_o$ to either of the input terminals with a resistance on it, called feedback connection. When the feedback connection connects to $v_-$, it is called inverting configuration. When the feedback connection connects to $v_+$, it is called non-inverting configuration.
 
