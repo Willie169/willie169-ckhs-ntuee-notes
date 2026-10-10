@@ -1,8 +1,384 @@
-\documentclass[a4paper,12pt]{article}
+\documentclass[a4paper,6pt]{extarticle}
 \input{LaTeX-ToolKit/template.tex}
-\title{}
+\title{Data Structure Midterm Cheat Sheet}
 \author{沈威宇}
 \date{\temtoday}
 \pagestyle{empty}
 \begin{document}
 \temdoc
+\section{Complexity Analysis}
+\subsection{Big O, little o, theta, big Omega, and small omega notation}
+\subsubsection{Definition}
+For real-valued nets $f$ and $g$,
+\bit
+\item $\exists M>0,T\in\bbR\colon x\ge T\implies\abs{f(x)}\le M\abs{g(x)}$ iff $f(x)\in O(g(x))$ and $\abs{g(x)}$ is an asymptotic upper bound of $\abs{f(x)}$.
+\item $\exists M>0,T\in\bbR\colon x\ge T\implies\abs{f(x)}\ge M\abs{g(x)}$ iff $f(x)\in \Omega(g(x))$ and $\abs{g(x)}$ is an asymptotic lower bound of $\abs{f(x)}$.
+\item $\exists M_1,M_2>0,T\in\bbR\colon x\ge T\implies M_1\abs{g(x)}\le\abs{f(x)}\le M_2\abs{g(x)}$ iff $f(x)\in \Theta(g(x))$.
+\item $\forall M>0\colon\exists T\in\bbR\colon x\ge T\implies\abs{f(x)}<M\abs{g(x)}$ iff $f(x)\in o(g(x))$.
+\item $\forall M>0\colon\exists T\in\bbR\colon x\ge T\implies\abs{f(x)}>M\abs{g(x)}$ iff $f(x)\in \omega(g(x))$.
+\eit
+$\in$ is also denoted as $=$ for them.
+\subsubsection{Limit}
+If $\exists k\in\bbR\colon x\ge k\implies g(x)\ne0$,
+\bit
+\item $\limsup\abs{\frac{f(x)}{g(x)}}<\infty$ iff $f(x)\in O(g(x))$.
+\bpr
+\[\abs{f(x)}\le M\abs{g(x)}\qc x\ge T\]
+\[\abs{\frac{f(x)}{g(x)}}\le M\qc x\ge T\]
+\[\sup\abs{\frac{f(x)}{g(x)}}\le M\qc x\ge T\]
+\[\limsup\abs{\frac{f(x)}{g(x)}}\le M<\infty\]
+\epr
+\item $\liminf\abs{\frac{f(x)}{g(x)}}>0$ iff $f(x)\in \Omega(g(x))$.
+\bpr
+\[\abs{f(x)}\ge M\abs{g(x)}\qc x\ge T\]
+\[\abs{\frac{f(x)}{g(x)}}\ge M\qc x\ge T\]
+\[\inf\abs{\frac{f(x)}{g(x)}}\ge M\qc x\ge T\]
+\[\liminf\abs{\frac{f(x)}{g(x)}}\ge M>0\]
+\epr
+\item $\infty>\limsup\abs{\frac{f(x)}{g(x)}}\ge\liminf\abs{\frac{f(x)}{g(x)}}>0$ iff $f(x)\in \Theta(g(x))$.
+\bpr
+\[\abs{f(x)}\ge M_1\abs{g(x)}\qc x\ge T\]
+\[\abs{\frac{f(x)}{g(x)}}\ge M_1\qc x\ge T\]
+\[\inf\abs{\frac{f(x)}{g(x)}}\ge M_1\qc x\ge T\]
+\[\liminf\abs{\frac{f(x)}{g(x)}}\ge M_1>0\]
+\[\abs{f(x)}\le M_2\abs{g(x)}\qc x\ge T\]
+\[\abs{\frac{f(x)}{g(x)}}\le M_2\qc x\ge T\]
+\[\sup\abs{\frac{f(x)}{g(x)}}\le M_2\qc x\ge T\]
+\[\limsup\abs{\frac{f(x)}{g(x)}}\le M_2<\infty\]
+\epr
+\item $\lim_{x\to\infty}\abs{\frac{f(x)}{g(x)}}=0$ iff $f(x)\in o(g(x))$.
+\[\abs{f(x)}<M\abs{g(x)}\]
+\[\abs{\frac{f(x)}{g(x)}}<M\]
+\[\lim_{x\to\infty}\abs{\frac{f(x)}{g(x)}}=0\]
+\item $\lim_{x\to\infty}\abs{\frac{f(x)}{g(x)}}=\infty$ iff $f(x)\in \omega(g(x))$.
+\[\abs{f(x)}>M\abs{g(x)}\]
+\[\abs{\frac{f(x)}{g(x)}}>M\]
+\[\lim_{x\to\infty}\abs{\frac{f(x)}{g(x)}}=\infty\]
+\eit
+\subsubsection{Relation}
+For any fixed $g(x)$, $o(g(x))$, $\Theta(g(x))$, and $\omega(g(x))$ are mutually exclusive.
+\bpr
+Prove by contradiction.
+
+If $f\in o(g(x))\cap\Theta(g(x))$,
+\[\forall M>0\colon\exists T\in\bbR\colon x\ge T\implies\abs{f(x)}<M\abs{g(x)}\]
+\[\exists M_1,M_2>0,U\in\bbR\colon x\ge U\implies M_1\abs{g(x)}\le\abs{f(x)}\le M_2\abs{g(x)}\]
+then set $M=M_1$, for $x\ge\max\{T,U\}$
+\[M_1\abs{g(x)}\le\abs{f(x)}<M_1\abs{g(x)},\]
+which can't happen.
+
+If $f\in \omega(g(x))\cap\Theta(g(x))$,
+\[\forall M>0\colon\exists T\in\bbR\colon x\ge T\implies\abs{f(x)}>M\abs{g(x)}\]
+\[\exists M_1,M_2>0,U\in\bbR\colon x\ge U\implies M_1\abs{g(x)}\le\abs{f(x)}\le M_2\abs{g(x)}\]
+then set $M=M_2$, for $x\ge\max\{T,U\}$
+\[M_2\abs{g(x)}\ge\abs{f(x)}>M_2\abs{g(x)},\]
+which can't happen.
+
+If $f\in o(g(x))\cap\omega(g(x))$,
+\[\forall M>0\colon\exists T\in\bbR\colon x\ge T\implies\abs{f(x)}<M\abs{g(x)}\]
+\[\forall M>0\colon\exists U\in\bbR\colon x\ge U\implies\abs{f(x)}>M\abs{g(x)}\]
+then set any fixed $M$,
+\[M\abs{g(x)}<\abs{f(x)}<M\abs{g(x)},\]
+which can't happen.
+\epr
+For any fixed $g(x)$,
+\[o(g(x))\subseteq O(g(x))\]
+\bpr
+Peak any $M>0$.
+\epr
+For any fixed $g(x)$,
+\[\omega(g(x))\subseteq\Omega(g(x))\]
+\bpr
+Peak any $M>0$.
+\epr
+For any fixed $g(x)$,
+\[\Theta(g(x))=O(g(x))\cap\Omega(g(x))\]
+\bpr
+Prove
+\[\Theta(g(x))\subseteq O(g(x))\cap\Omega(g(x))\]
+\[\exists M>0,T\in\bbR\colon x\ge T\implies\abs{f(x)}\le M\abs{g(x)}\]
+\[\exists N>0,U\in\bbR\colon x\ge U\implies\abs{f(x)}\ge N\abs{g(x)}\]
+then
+\[\exists M,N>0,\max\{T,U\}\in\bbR\colon x\ge \max\{T,U\}\implies N\abs{g(x)}\le\abs{f(x)}\le M\abs{g(x)}\]
+
+Prove
+\[\Theta(g(x))\supseteq O(g(x))\cap\Omega(g(x))\]
+\[\exists M_1,M_2>0,T\in\bbR\colon x\ge T\implies M_1\abs{g(x)}\le\abs{f(x)}\le M_2\abs{g(x)}\]
+then
+\[\exists M_2>0,T\in\bbR\colon x\ge T\implies\abs{f(x)}\le M_2\abs{g(x)}\]
+\[\exists M_1>0,T\in\bbR\colon x\ge T\implies\abs{f(x)}\ge M_1\abs{g(x)}\]
+\epr
+For any fixed $g(x)$,
+\[O(g(x))\setminus (o(g(x))\cup\Theta(g(x)))\ne\varnothing\]
+\bpr
+Counterexample:
+\[f(x)=\bcs 1,\quad & x\in\bbQ\\0,\quad & x\notin\bbQ\ecs\]
+\[g(x)=1\]
+$f\in O(g(x))$:
+\[\exists 1>0,1\in\bbR\colon x\ge 1\implies\abs{f(x)}\le \abs{g(x)}\]
+$f\notin o(g(x))$:
+\[\forall 1>0,T\in\bbR\colon\exists x\ge T,x\in\bbQ\colon\abs{f(x)}=\abs{g(x)}\]
+$f\notin\Theta(g(x))$:
+\[\forall M_1>0,x\in\bbR,x\notin\bbQ\colon M_1\abs{g(x)}=M_1>\abs{f(x)}=0\]
+\epr
+For any fixed $g(x)$,
+\[\Omega(g(x))\setminus (\omega(g(x))\cup\Theta(g(x)))\ne\varnothing\]
+\bpr
+Counterexample:
+\[f(x)=1\]
+\[g(x)=\bcs 1,\quad & x\in\bbQ\\0,\quad & x\notin\bbQ\ecs\]
+$f\in \Omega(g(x))$:
+\[\exists 1>0,1\in\bbR\colon x\ge 1\implies\abs{f(x)}\ge \abs{g(x)}\]
+$f\notin \omega(g(x))$:
+\[\forall 1>0,T\in\bbR\colon\exists x\ge T,x\in\bbQ\colon\abs{f(x)}=\abs{g(x)}\]
+$f\notin\Theta(g(x))$:
+\[\forall M_2>0,x\in\bbR,x\notin\bbQ\colon M_2\abs{g(x)}=0<\abs{f(x)}=1\]
+\epr
+\[f(x)\in O(g(x))\iff g(x)\in\Omega(f(x))\]
+\bpr
+$\implies$:
+\[\exists M>0,T\in\bbR\colon x\ge T\implies\abs{f(x)}\le M\abs{g(x)}\]
+then
+\[\exists \frac{1}{M}>0,T\in\bbR\colon x\ge T\implies\abs{g(x)}\ge \frac{1}{M}\abs{g(x)}\]
+$\Leftarrow$:
+\[\exists M>0,T\in\bbR\colon x\ge T\implies\abs{f(x)}\ge M\abs{g(x)}\]
+then
+\[\exists \frac{1}{M}>0,T\in\bbR\colon x\ge T\implies\abs{g(x)}\le \frac{1}{M}\abs{g(x)}\]
+\epr
+\[f(x)\in o(g(x))\iff g(x)\in\omega(f(x))\]
+\bpr
+$\implies$:
+\[\forall M>0\colon\exists T\in\bbR\colon x\ge T\implies\abs{f(x)}<M\abs{g(x)}\]
+then
+\[\forall \frac{1}{M}>0\colon\exists T\in\bbR\colon x\ge T\implies\abs{g(x)}>\frac{1}{M}\abs{f(x)}\]
+$\Leftarrow$:
+\[\forall M>0\colon\exists T\in\bbR\colon x\ge T\implies\abs{f(x)}>M\abs{g(x)}\]
+then
+\[\forall \frac{1}{M}>0\colon\exists T\in\bbR\colon x\ge T\implies\abs{g(x)}<\frac{1}{M}\abs{f(x)}\]
+\epr
+For any fixed $g(x)$,
+\[\exists f(x)\colon f(x)\notin O(g(x))\cup\Omega(g(x))\]
+\bpr
+\[f(x)=\bcs 1,\quad & x\in\bbQ\\x,\quad & x\notin\bbQ\ecs\]
+\[g(x)=\bcs x,\quad & x\in\bbQ\\1,\quad & x\notin\bbQ\ecs\]
+For $x\in \bbR\setminus\bbQ$,
+\[\nexists M>0,T\in\bbR\colon x\ge T\implies\abs{f(x)}\le M\abs{g(x)}\]
+For $x\in \bbQ$,
+\[\nexists M>0,T\in\bbR\colon x\ge T\implies\abs{f(x)}\ge M\abs{g(x)}\]
+\epr
+\subsubsection{Binary relation}
+\bit
+\item $\Theta(g(x))$ is an equivalence class.
+\bpr
+Transitive:
+\[\exists M_1,M_2>0,T\in\bbR\colon x\ge T\implies M_1\abs{g(x)}\le\abs{f(x)}\le M_2\abs{g(x)}\]
+\[\exists N_1,N_2>0,U\in\bbR\colon x\ge U\implies N_1\abs{h(x)}\le\abs{g(x)}\le N_2\abs{h(x)}\]
+then
+\[\exists M_1N_1,M_2N_2>0,\max\{T,U\}\in\bbR\colon x\ge \max\{T,U\}\implies M_1N_1\abs{h(x)}\le\abs{f(x)}\le M_2N_2\abs{h(x)}\]
+Reflexive:
+\[f(x)\in\Theta(f(x))\]
+\[\exists 1,1>0,a\in\bbR\colon x\in\bbR\implies 1\abs{f(x)}\le\abs{f(x)}\le 1\abs{f(x)}\]
+Symmetric:
+\[\exists M_1,M_2>0,T\in\bbR\colon x\ge T\implies M_1\abs{g(x)}\le\abs{f(x)}\le M_2\abs{g(x)}\]
+then
+\[\exists \frac{1}{M_2},\frac{1}{M_1}>0,T\in\bbR\colon x\ge T\implies \frac{1}{M_2}\abs{f(x)}\le\abs{f(x)}\le\frac{1}{M_1}\abs{f(x)}\]
+\epr
+\item $O(g(x))$ is partial-ordered set with $\Theta$ as $=$.
+\bpr
+Transitive:
+\[\exists M>0,T\in\bbR\colon x\ge T\implies\abs{f(x)}\le M\abs{g(x)}\]
+\[\exists N>0,U\in\bbR\colon x\ge U\implies\abs{g(x)}\le N\abs{h(x)}\]
+then
+\[\exists MN>0,\max\{T,U\}\in\bbR\colon x\ge\max\{T,U\}\implies\abs{f(x)}\le MN\abs{h(x)}\]
+Reflexive:
+\[\exists M>0,T\in\bbR\colon x\ge T\implies\abs{f(x)}\le M\abs{g(x)}\]
+then
+\[\exists \frac{1}{M}>0,T\in\bbR\colon x\ge T\implies\abs{g(x)}\le \frac{1}{M}\abs{f(x)}\]
+Antisymmetric:
+\[\exists M>0,T\in\bbR\colon x\ge T\implies\abs{f(x)}\le M\abs{g(x)}\]
+\[\exists N>0,U\in\bbR\colon x\ge U\implies\abs{g(x)}\le N\abs{f(x)}\]
+then
+\[\exists M,\frac{1}{N}>0,\max\{T,U\}\in\bbR\colon x\ge \max\{T,U\}\implies\frac{1}{N}\abs{g(x)}\le\abs{f(x)}\le M\abs{g(x)}\]
+\epr
+\item $\Omega(g(x))$ is partial-ordered set with $\Theta$ as $=$.
+\bpr
+Similar to that of $O$.
+\epr
+\item $o(g(x))$ is a strictly partially-ordered set.
+\bpr
+Asymmetry:
+\[f(x)\in o(g(x))\iff g(x)\in\omega(f(x))\implies g\notin o(f(x))\]
+Transitivity:
+\[\forall M>0\colon\exists T\in\bbR\colon x\ge T\implies\abs{f(x)}<M\abs{g(x)}\]
+\[\exists U\in\bbR\colon x\ge U\implies\abs{g(x)}<\abs{h(x)}\]
+then
+\[\forall M>0\colon\exists \max\{T,U\}\in\bbR\colon x\ge \max\{T,U\}\implies\abs{f(x)}<M\abs{h(x)}\]
+\epr
+\item $\omega(g(x))$ is a strictly partially-ordered set.
+\bpr
+Similar to that of $o$.
+\epr
+\eit
+\subsection{Master Theorem}
+\subsubsection{Integral test (for convergence) or Maclaurin–Cauchy test}
+Suppose $f(x)\colon[a,\infty)\to\bbR$ for some $a\in\bbN$ is monotone and $\lim_{x\to\infty}f(x)=0$. Then $\int_a^{\infty}f(x)\dd{x}$ is convergent iff $\sum_{k=a}^{\infty}f(k)$ is convergent. And,
+\bit
+\item If $\int_a^{\infty}f(x)\dd{x}$ is convergent and $f(x)$ is monotone decreasing, for any $n\in\bbN_{\ge a}$,
+\[\int_n^{\infty}f(x)\dd{x}\le\sum_{k=n}^{\infty}f(k)\le f(n)+\int_n^{\infty}f(x)\dd{x},\]
+called remainder estimate for integral test. Note that for $n\in\bbN_{>a}$, $f(n)+\int_n^{\infty}f(x)\dd{x}\le\int_{n-1}^{\infty}f(x)\dd{x}$.
+\item If $\int_a^{\infty}f(x)\dd{x}$ is convergent and $f(x)$ is monotone increasing, for any $n\in\bbN_{\ge a}$,
+\[\int_n^{\infty}f(x)\dd{x}\ge\sum_{k=n}^{\infty}f(k)\ge f(n)+\int_n^{\infty}f(x)\dd{x},\]
+called remainder estimate for integral test. Note that for $n\in\bbN_{>a}$, $f(n)+\int_n^{\infty}f(x)\dd{x}\ge\int_{n-1}^{\infty}f(x)\dd{x}$.
+\eit
+\bpr
+Consider the case where $f(x)$ is monotone increasing. The case where $f(x)$ is monotone decreasing can be proven similarly.
+
+First consider the case where $\int_a^{\infty}f(x)\dd{x}$ is convergent. This implies that $f(x)$ is non-positive. Thus, for any fixed $n\in\bbN_{\ge a}$,
+\[\int_n^{n+1}f(x)\dd{x}\ge f(n),\]
+and for any $k\geq n+1$,
+\[\int_k^{k+1}f(x)\dd{x}\ge f(k)\ge\int_{k-1}^kf(x)\dd{x}.\]
+For any $N\in\bbN_{\ge n}$, summing over all $k\in\bbN_{\ge n}$, we obtain, 
+\[\int_n^{N+1}f(x)\dd{x}\ge\sum_{k=n}^Nf(k)\ge f(n)+\int_n^Nf(x)\dd{x}.\]
+Take limit $\lim_{N\to\infty}$, we obtain
+\[\int_n^{\infty}f(x)\dd{x}\ge\sum_{k=n}^{\infty}f(n)\ge f(n)+\int_n^{\infty}f(x)\dd{x}.\]
+Second, consider the case where $\int_a^{\infty}f(x)\dd{x}$ is divergent. Since $f(x)$ is monotone. Either $\int_a^{\infty}f(x)\dd{x}=-\infty$ or $\int_a^{\infty}f(x)\dd{x}=\infty$. For the former, the supremum of $f(x)$ is non-positive, and $\sum_{k=a}^{\infty}f(k)=-\infty$. For the latter, there exists $x_0>a$ such that $f(x)>0$ for all $x\ge x_0$, and thus $\sum_{k=a}^{\infty}f(k)=\infty$.
+\epr
+\subsubsection{p-test (for improper integral)}
+For any fixed $a>0$, $\int_a^{\infty}\frac{1}{x^p}\dd{x}$ converges iff $p>1$, and if so,
+\[\int_a^{\infty}\frac{1}{x^p}\dd{x}=\frac{1}{\qty(p-1)a^{p-1}};\]
+$\int_0^a\frac{1}{x^p}\dd{x}$ converges iff $p<1$, and if so,
+\[\int_0^a\frac{1}{x^p}\dd{x}=-\frac{1}{\qty(p-1)a^{p-1}}.\]
+\begin{proof}
+\[\int\frac{1}{x^p}\dd{x}=\begin{cases}
+-\frac{1}{\qty(p-1)x^{p-1}},\quad&p\neq 1\\
+\ln\qty(x),\quad&p=1
+\end{cases}\]
+\[\forall p<1\colon\nexists\lim_{x\to\infty}-\frac{1}{\qty(p-1)x^{p-1}}\]
+\[\nexists\lim_{x\to\infty}\ln\qty(x)\]
+\[\forall p>1\colon\lim_{x\to\infty}-\frac{1}{\qty(p-1)x^{p-1}}=0\quad\int_a^{\infty}\frac{1}{x^p}\dd{x}=\frac{1}{\qty(p-1)a^{p-1}}\]
+\[\forall p>1\colon\nexists\lim_{x\to 0^+}-\frac{1}{\qty(p-1)x^{p-1}}\]
+\[\nexists\lim_{x\to 0^+}\ln\qty(x)\]
+\[\forall p<1\colon\lim_{x\to 0^+}-\frac{1}{\qty(p-1)x^{p-1}}=0\quad\int_0^a\frac{1}{x^p}\dd{x}=-\frac{1}{\qty(p-1)a^{p-1}}\]
+\end{proof}
+\subsubsection{Generalized p-test (for improper integral)}
+Define iterated logarithmic function $L_n\qty(x)$ as
+\[L_{0}\qty(x)=x,\quad x\in\bbR_{>0}\]
+\[L_{n}\qty(x)=\ln\qty(L_{n-1}\qty(x)),\quad n\in\bbN,x\in\bbR_{>0}.\]
+For any fixed $a>1,k\in\bbN$,
+\[\int_a^{\infty}\frac{1}{\qty(\prod_{i=0}^{k-1}L_{i}\qty(x))\qty(L_{k}\qty(x))^m}\dd{x}\]
+converges iff $m>1$.
+\bpr
+Let
+\[u=L_k\qty(x)\]
+\[\dd{u}=\frac{\dd{x}}{\prod_{i=0}^{k-1}L_{i}\qty(x)}\]
+\[\int\frac{1}{\qty(\prod_{i=0}^{k-1}L_{i}\qty(x))\qty(L_{k}\qty(x))^m}\dd{x}=\int\frac{1}{u^m}\dd{u}\]
+By p-test, the statement holds.
+\epr
+For any fixed $0<a<1$,
+\[\int_0^a\frac{1}{x(\ln x)^m}\dd{x}\]
+converges iff $m<1$.
+\bpr
+By substitution of $u=\ln x$.
+\epr
+\subsubsection{Generalized p-test for series or generalized p-series test}
+Define iterated logarithmic function $L_n\qty(x)$ as
+\[L_{0}\qty(x)=x,\quad x\in\bbR_{>0}\]
+\[L_{n}\qty(x)=\ln\qty(L_{n-1}\qty(x)),\quad n\in\bbN,x\in\bbR_{>0}.\]
+For any fixed $a\in\bbN$,
+\[\sum_{n=a}^{\infty}\frac{1}{\qty(\prod_{i=0}^{k-1}L_{i}\qty(n))\qty(L_{k}\qty(n))^m}\]
+converges iff $m>1$.
+\bpr
+By integral test and generalized p-test for improper integral, the statement holds.
+\epr
+\subsubsection{Generalized Master Theorem}
+For a positive valued net $T\qty(n)$ defined on $n=b^h$ for any $h\in\bbN_0$ as
+\[T\qty(n)=aT\qty(\frac{n}{b})+f\qty(n)\]
+for some constants $a>0$ and $b>1$, and non-negative-valued function $f\qty(n)$,
+\ben
+\item If for some $c<\log_ba$,
+\[f\qty(n)=O\qty(n^c),\]
+then
+\[T\qty(n)=\Theta\qty(n^{\log_ba}).\]
+\item Define iterated logarithmic function $L_n\qty(x)$ as
+\[L_{0}\qty(x)=x,\quad x\in\bbR_{>0}\]
+\[L_{n}\qty(x)=\ln\qty(L_{n-1}\qty(x)),\quad n\in\bbN,x\in\bbR_{>0}.\]
+\ben
+\item If for some positive integers $k$ and positive number $m$, 
+\[f\qty(n)=\Theta\qty(n^{\log_ba}\qty(\prod_{i=1}^{k-1}\qty(L_{i}\qty(n))^{-1})\qty(L_{k}\qty(n))^{m-1}),\]
+then
+\[T\qty(n)=\Theta\qty(n^{\log_ba}\qty(L_{k}\qty(n))^m).\]
+\item If for some positive integer $k$, 
+\[f\qty(n)=\Theta\qty(n^{\log_ba}\prod_{i=1}^k\qty(L_{i}\qty(n))^{-1}),\]
+then
+\[T\qty(n)=\Theta\qty(n^{\log_ba}L_{k-1}\qty(n)).\]
+\item If for some positive integers $k$ and some positive number $m$,
+\[f\qty(n)=\Theta\qty(n^{\log_ba}\qty(\prod_{i=1}^{k-1}\qty(L_{i}\qty(n))^{-1})\qty(L_{k}\qty(n))^{-m-1}),\]
+then
+\[T\qty(n)=\Theta\qty(n^{\log_ba}).\]
+\een
+\item If $f\qty(n)=\Omega\qty(n^c)$ for some $c>\log_ba$, and the regularity condition that $\exists m\in\bbR,k<1$ such that $n\ge m$ implies
+\[af\qty(\frac{n}{b})\le kf\qty(n)\]
+is satisfied, then
+\[T\qty(n)=\Theta\qty(f\qty(n)).\]
+\een
+\bpr
+Let $s=\log_ba$, $n=b^h$, and $f\qty(x)=x^sg\qty(x)$. At level $j$, there are $a^j$ nodes, each of size $\frac{n}{b^j}$. Thus, the total non-recursive work at level $j$ is
+\[a^jf\qty(\frac{n}{b^j}).\]
+Hence
+\[\ba
+T\qty(n)=&\sum_{j=0}^{h-1}a^jf\qty(\frac{n}{b^j})+n^sT\qty(1)\\
+=&\sum_{j=0}^{h-1}b^{sj}f\qty(\frac{b^h}{b^j})+\Theta\qty(n^s)\\
+=&n^s\sum_{j=0}^{h-1}g\qty(b^{h-j})+\Theta\qty(n^s)
+=&n^s\sum_{r=1}^hg\qty(b^r)+\Theta\qty(n^s)
+\ea\]
+Case 1: If for some $c<\log_ba$,
+\[f\qty(n)=O\qty(n^c),\]
+then
+\[T\qty(n)=\Theta\qty(n^{\log_ba}).\]
+Case 2:
+\[L_{k}\qty(b^x)=\Theta\qty(L_{k-1}\qty(x))\]
+\[f\qty(n)=\Theta\qty(n^{\log_ba}\qty(\prod_{i=1}^{k-1}\qty(L_{i}\qty(n))^{-1})\qty(L_{k}\qty(n))^{m-1})\]
+\[g\qty(b^r)=\Theta\qty(\qty(\prod_{i=1}^{k-2}\qty(L_{i}\qty(r))^{-1})\qty(L_{k-1}\qty(r))^{m-1})\]
+By generalized p-test for series:
+
+Sub-case 1 $m>0$:
+\[T\qty(n)=\Theta\qty(n^{\log_ba}\qty(L_{k}\qty(n))^m).\]
+Sub-case 2 $m=0$:
+\[T\qty(n)=\Theta\qty(n^{\log_ba}L_{k-1}\qty(n)).\]
+Sub-case 3 $m=0$:
+\[T\qty(n)=\Theta\qty(n^{\log_ba}).\]
+Case 3: If $f\qty(n)=\Omega\qty(n^c)$ for some $c>\log_ba$, and the regularity condition that $\exists m\in\bbR,0<k<1$ such that $n\ge m$ implies
+\[af\qty(\frac{n}{b})\le kf\qty(n)\]
+is satisfied, then
+\[af\qty(\frac{n}{b})\le kf\qty(n)\]
+\[a^jf\qty(\frac{n}{b^j})\le a^{j-1}kf\qty(\frac{n}{b^{j-1}})\le k^jf\qty(n)\]
+\[\ba
+T\qty(n)=&\sum_{j=0}^{h-1}a^jf\qty(\frac{n}{b^j})+n^sT\qty(1)\\
+=&f\qty(n)+\sum_{j=1}^{h-1}O\qty(k^jf\qty(n))+\Theta\qty(n^s)
+\ea\]
+\[\sum_{j=1}^{\infty}k^jf\qty(n)=\frac{f\qty(n)}{1-k}\]
+\[T\qty(n)=f\qty(n)+O\qty(f\qty(n))+\Theta\qty(n^s)=\Theta\qty(f\qty(n))\]
+\epr
+Terms:
+\bit
+\item $h$ is called recursion level.
+\item $\log_ba$ is called critical exponent $c_{crit}$.
+\item $T\qty(1)$ is called leaf cost.
+\item At each node, the first term is called recursive work, and the second term is called non-recursive work.
+\eit
+For original master theorem, the second case is
+\ben
+\item If for some positive integers $m$, 
+\[f\qty(n)=\Theta\qty(n^{\log_ba}\qty(\ln n)^{m-1}),\]
+then
+\[T\qty(n)=\Theta\qty(n^{\log_ba}\qty(\ln n)^m).\]
+\item If
+\[f\qty(n)=o\qty(n^{\log_ba}\qty(\ln n)^{-1}),\]
+then
+\[T\qty(n)=\Theta\qty(n^{\log_ba}\ln\qty(\ln n)).\]
+\item If for some positive integers $m$,
+\[f\qty(n)=\Theta\qty(n^{\log_ba}\qty(\ln n)^{-m-1}),\]
+then
+\[T\qty(n)=\Theta\qty(n^{\log_ba}).\]
+\een
+\end{document}
