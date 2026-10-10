@@ -10,9 +10,13 @@
 \temdoc
 \fontsize{6pt}{6pt}\selectfont
 \begin{multicols}{3}
-\section{Complexity Analysis}
-\subsection{Big O, little o, theta, big Omega, and small omega notation}
-\subsubsection{Definition}
+
+\tb{Complexity Analysis}
+
+\tb{Big O, little o, theta, big Omega, and small omega notation}
+
+\tb{Definition}
+
 For real-valued nets $f$ and $g$,
 \bit
 \item $\exists M>0,T\in\bbR\colon x\ge T\implies\abs{f(x)}\le M\abs{g(x)}$ iff $f(x)\in O(g(x))$ and $\abs{g(x)}$ is an asymptotic upper bound of $\abs{f(x)}$.
@@ -22,7 +26,9 @@ For real-valued nets $f$ and $g$,
 \item $\forall M>0\colon\exists T\in\bbR\colon x\ge T\implies\abs{f(x)}>M\abs{g(x)}$ iff $f(x)\in \omega(g(x))$.
 \eit
 $\in$ is also denoted as $=$ for them.
-\subsubsection{Limit}
+
+\tb{Limit}
+
 If $\exists k\in\bbR\colon x\ge k\implies g(x)\ne0$,
 \bit
 \item $\limsup\abs{\frac{f(x)}{g(x)}}<\infty$ iff $f(x)\in O(g(x))$.
@@ -59,7 +65,9 @@ If $\exists k\in\bbR\colon x\ge k\implies g(x)\ne0$,
 \(\abs{\frac{f(x)}{g(x)}}>M\); 
 \(\lim_{x\to\infty}\abs{\frac{f(x)}{g(x)}}=\infty\); 
 \eit
-\subsubsection{Relation}
+
+\tb{Relation}
+
 For any fixed $g(x)$, $o(g(x))$, $\Theta(g(x))$, and $\omega(g(x))$ are mutually exclusive.
 \bpr
 Prove by contradiction. If $f\in o(g(x))\cap\Theta(g(x))$,
@@ -164,7 +172,9 @@ For $x\in \bbR\setminus\bbQ$,
 For $x\in \bbQ$,
 \(\nexists M>0,T\in\bbR\colon x\ge T\implies\abs{f(x)}\ge M\abs{g(x)}\); 
 \epr
-\subsubsection{Binary relation}
+
+\tb{Binary relation}
+
 \bit
 \item $\Theta(g(x))$ is an equivalence class.
 \bpr
@@ -217,8 +227,11 @@ then
 Similar to that of $o$.
 \epr
 \eit
-\subsection{Master Theorem}
-\subsubsection{Integral test (for convergence) or Maclaurin–Cauchy test}
+
+\tb{Master Theorem}
+
+\tb{Integral test (for convergence) or Maclaurin–Cauchy test}
+
 Suppose $f(x)\colon[a,\infty)\to\bbR$ for some $a\in\bbN$ is monotone and $\lim_{x\to\infty}f(x)=0$. Then $\int_a^{\infty}f(x)\dd{x}$ is convergent iff $\sum_{k=a}^{\infty}f(k)$ is convergent. And,
 \bit
 \item If $\int_a^{\infty}f(x)\dd{x}$ is convergent and $f(x)$ is monotone decreasing, for any $n\in\bbN_{\ge a}$,
@@ -239,7 +252,9 @@ Take limit $\lim_{N\to\infty}$, we obtain
 \(\int_n^{\infty}f(x)\dd{x}\ge\sum_{k=n}^{\infty}f(n)\ge f(n)+\int_n^{\infty}f(x)\dd{x}.\); 
 Second, consider the case where $\int_a^{\infty}f(x)\dd{x}$ is divergent. Since $f(x)$ is monotone. Either $\int_a^{\infty}f(x)\dd{x}=-\infty$ or $\int_a^{\infty}f(x)\dd{x}=\infty$. For the former, the supremum of $f(x)$ is non-positive, and $\sum_{k=a}^{\infty}f(k)=-\infty$. For the latter, there exists $x_0>a$ such that $f(x)>0$ for all $x\ge x_0$, and thus $\sum_{k=a}^{\infty}f(k)=\infty$.
 \epr
-\subsubsection{p-test (for improper integral)}
+
+\tb{p-test (for improper integral)}
+
 For any fixed $a>0$, $\int_a^{\infty}\frac{1}{x^p}\dd{x}$ converges iff $p>1$, and if so,
 \(\int_a^{\infty}\frac{1}{x^p}\dd{x}=\frac{1}{\qty(p-1)a^{p-1}};\); 
 $\int_0^a\frac{1}{x^p}\dd{x}$ converges iff $p<1$, and if so,
@@ -256,7 +271,9 @@ $\int_0^a\frac{1}{x^p}\dd{x}$ converges iff $p<1$, and if so,
 \(\nexists\lim_{x\to 0^+}\ln\qty(x)\); 
 \(\forall p<1\colon\lim_{x\to 0^+}-\frac{1}{\qty(p-1)x^{p-1}}=0\quad\int_0^a\frac{1}{x^p}\dd{x}=-\frac{1}{\qty(p-1)a^{p-1}}\); 
 \end{proof}
-\subsubsection{Generalized p-test (for improper integral)}
+
+\tb{Generalized p-test (for improper integral)}
+
 Define iterated logarithmic function $L_n\qty(x)$ as
 \(L_{0}\qty(x)=x,\quad x\in\bbR_{>0}\); 
 \(L_{n}\qty(x)=\ln\qty(L_{n-1}\qty(x)),\quad n\in\bbN,x\in\bbR_{>0}.\); 
@@ -276,7 +293,9 @@ converges iff $m<1$.
 \bpr
 By substitution of $u=\ln x$.
 \epr
-\subsubsection{Generalized p-test for series or generalized p-series test}
+
+\tb{Generalized p-test for series or generalized p-series test}
+
 Define iterated logarithmic function $L_n\qty(x)$ as
 \(L_{0}\qty(x)=x,\quad x\in\bbR_{>0}\); 
 \(L_{n}\qty(x)=\ln\qty(L_{n-1}\qty(x)),\quad n\in\bbN,x\in\bbR_{>0}.\); 
@@ -286,7 +305,9 @@ converges iff $m>1$.
 \bpr
 By integral test and generalized p-test for improper integral, the statement holds.
 \epr
-\subsubsection{Generalized Master Theorem}
+
+\tb{Generalized Master Theorem}
+
 For a positive valued net $T\qty(n)$ defined on $n=b^h$ for any $h\in\bbN_0$ as
 \(T\qty(n)=aT\qty(\frac{n}{b})+f\qty(n)\); 
 for some constants $a>0$ and $b>1$, and non-negative-valued function $f\qty(n)$,
