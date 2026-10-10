@@ -117,9 +117,12 @@ class DoublyLinkedList:
             cur = cur.next
 
 
-class StackList:
+class ListStack:
     def __init__(self):
         self.data = []
+
+    def __len__(self):
+        return self.data.__len__()
 
     def push(self, x):
         self.data.append(x)
@@ -135,7 +138,28 @@ class StackList:
         return self.data[-1]
 
     def is_empty(self):
-        return len(self.data) == 0
+        return self.data.__len__() == 0
+
+
+class LinkedStack:
+    def __init__(self):
+        self.data = SinglyLinkedList()
 
     def __len__(self):
-        return len(self.data)
+        return self.data.__len__()
+
+    def push(self, x):
+        self.data.prepend(x)
+
+    def pop(self):
+        if self.is_empty():
+            raise IndexError("pop from empty stack")
+        return self.data.pop_front()
+
+    def peek(self):
+        if self.is_empty():
+            raise IndexError("peek at empty stack")
+        return self.data[0]
+
+    def is_empty(self):
+        return self.data.__len__() == 0
