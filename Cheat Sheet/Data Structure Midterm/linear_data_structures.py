@@ -202,7 +202,7 @@ class ListDequeue:  # Both sides IO amortized O(1)
         self.block_begin = 0
         self.block_end = self.block_begin + 1
         self.in_begin = (self.block_size - 1) // 2
-        self.in_end = self.in_begin + 1
+        self.in_end = self.in_begin
         self.size = 0
 
     def __len__(self):
