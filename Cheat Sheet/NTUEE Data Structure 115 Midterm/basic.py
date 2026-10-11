@@ -18,7 +18,7 @@ float("inf")  # infinite float
 3 // 2  # 1
 -3 // 2  # -2
 3 / 2  # 1.5
-type(3/3) # float
+type(3 / 3)  # float
 divmod(3, 2)  # (1, 1), the pair (x // y, x % y)
 abs(-2)  # 2
 c = complex(1, 2)  # (1+2j), complex(re, im)
