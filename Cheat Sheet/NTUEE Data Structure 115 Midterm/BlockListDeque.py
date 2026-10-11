@@ -68,13 +68,13 @@ class BlockListDeque:  # Both ends IO amortized O(1)
             return
         self.data.extend([[None] * self.block_size for _ in range(blocks)])
 
-    def shrink_front_to_fit(self):  # O(1)
+    def shrink_front_to_fit(self):
         new = self.data[self.block_begin :]
         self.data = new
         self.block_end -= self.block_begin
         self.block_begin = 0
 
-    def shrink_back_to_fit(self):  # amortized O(1)
+    def shrink_back_to_fit(self):
         for _ in range(self.block_end, len(self.data)):
             self.data.pop()
 
