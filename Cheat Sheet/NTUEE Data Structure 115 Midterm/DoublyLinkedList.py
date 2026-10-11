@@ -1,8 +1,8 @@
 class _DNode:
     def __init__(self, data, prev=None, next=None):
         self.data = data
-        self.prev = None
-        self.next = None
+        self.prev = prev
+        self.next = next
 
 
 class DoublyLinkedList:
@@ -11,26 +11,69 @@ class DoublyLinkedList:
         self.tail = None
         self.size = 0
 
-    def __len__(self):
+    def __len__(self):  # O(1)
         return self.size
 
-    def is_empty(self):
+    def is_empty(self):  # O(1)
         return self.size == 0
 
-    def prepend(self, x):
-        self.head = _DNode(x, None, self.head)
-        if self.tail is None:
-            self.tail = self.head
-        self.head.next.prev = self.head
-        self.size += 1
+    def __getitem__(
+        self, num
+    ):  # O(min(n, size - n)), n = num if num > 0 else num + size
+        if not -self.size <= num < self.size:
+            raise IndexError("list assignment index out of range")
+        if num * 2 >= self.size:
+            num -= self.size
+        elif num * 2 < -self.size:
+            num += self.size
+        if num >= 0:
+            cur = self.head
+            for _ in range(0, num):
+                cur = cur.next
+        else:
+            cur = self.tail
+            for _ in range(-1, num, -1):
+                cur = cur.prev
+        return cur.data
 
-    def append(self, x):
-        self.tail = _DNode(x, self.tail, None)
+    def __setitem__(
+        self, num, x
+    ):  # O(min(n, size - n)), n = num if num > 0 else num + size
+        if not -self.size <= num < self.size:
+            raise IndexError("list assignment index out of range")
+        if num * 2 >= self.size:
+            num -= self.size
+        elif num * 2 < -self.size:
+            num += self.size
+        if num >= 0:
+            cur = self.head
+            for _ in range(0, num):
+                cur = cur.next
+        else:
+            cur = self.tail
+            for _ in range(-1, num, -1):
+                cur = cur.prev
+        cur.data = x
+
+    def prepend(self, x):  # O(1)
+        node = _DNode(x, None, self.head)
         if self.head is None:
-            self.head = self.tail
+            self.head = self.tail = node
+        else:
+            self.head.prev = node
+            self.head = node
         self.size += 1
 
-    def pop_front(self):
+    def append(self, x):  # O(1)
+        node = _DNode(x, self.tail, None)
+        if self.tail is None:
+            self.head = self.tail = node
+        else:
+            self.tail.next = node
+            self.tail = node
+        self.size += 1
+
+    def pop_front(self):  # O(1)
         if self.head is None:
             raise IndexError("pop from empty list")
         x = self.head.data
@@ -42,7 +85,7 @@ class DoublyLinkedList:
             self.head.prev = None
         return x
 
-    def pop_back(self):
+    def pop_back(self):  # O(1)
         if self.tail is None:
             raise IndexError("pop from empty list")
         x = self.tail.data
@@ -54,19 +97,20 @@ class DoublyLinkedList:
             self.tail.next = None
         return x
 
-    def peek_front(self):
+    def peek_front(self):  # O(1)
         if self.is_empty():
             raise IndexError("peek at empty list")
         return self.head.data
 
-    def peek_back(self):
+    def peek_back(self):  # O(1)
         if self.is_empty():
             raise IndexError("peek at empty list")
         return self.tail.data
 
-    def clear(self):
-        for _ in range(self.size):
-            self.pop_back()
+    def clear(self):  # O(1)
+        self.head = None
+        self.tail = None
+        self.size = 0
 
     def __iter__(self):
         cur = self.head

@@ -14,3 +14,15 @@ type(True)  # <class 'bool'>
 type(1)  # <class 'int'>
 type(1.0)  # <class 'float'>
 type(complex(1, 1))  # <class 'complex'>
+a = None
+a is None  # True
+a = [1]
+b = a
+a == b  # True
+a != b  # False
+a is b  # True, i.e., id(a) == id(b)
+a is not b  # False
+b = a.copy()
+a == b  # True
+a is b  # False
+3 if 2 > 1 else 2  # 3

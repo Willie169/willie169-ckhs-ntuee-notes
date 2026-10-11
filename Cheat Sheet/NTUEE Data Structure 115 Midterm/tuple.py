@@ -8,7 +8,7 @@ type(a)  # <class 'tuple'>
 a = 1, "a", "a", [0]  # can also be created without the parentheses
 a[0]  # 1
 a[-1]  # [0]
-# a[0] = 0 # TypeError: 'tuple' object does not support item assignment
+# a[0] = 0  # TypeError: 'tuple' object does not support item assignment
 a[3][0] = 1  # allowed
 a = ("a",)  # a == ('a',), a tuple. One-item tuple requires comma
 a = ("a",)  # a == ('a',), a tuple

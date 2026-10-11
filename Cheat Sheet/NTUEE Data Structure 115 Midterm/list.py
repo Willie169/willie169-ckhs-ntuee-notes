@@ -32,6 +32,8 @@ del a[0:5:2]  # a == [1, 1, 4]
 a = [None] * 5  # a == [None, None, None, None, None]
 del a  # a is now not defined
 a = [1, "1", [1], True]  # arbitrary types
+a.__getitem__(0)  # 1, same as a[0]
+a.__setitem__(0, (1,))  # a == [(1,), '1', [1], True], same as a[0] = (1,)
 it = [1, 2, 3].__iter__()
 next(it)  # 1, also it.__next__()
 # Return of __next__ is defined by the yield clause in the method.
@@ -73,5 +75,5 @@ list(
     )
 )  # [(1, 5, 9), (2, 6, 10), (3, 7, 11), (4, 8, 12)]
 list(zip(range(3), ["fee", "fi", "fo", "fum"]))  # [(0, 'fee'), (1, 'fi'), (2, 'fo')]
-# list(zip(range(3), ['fee', 'fi', 'fo', 'fum'], strict=True)) # ValueError: zip() argument 2 is longer than argument 1
+# list(zip(range(3), ['fee', 'fi', 'fo', 'fum'], strict=True))  # ValueError: zip() argument 2 is longer than argument 1
 [0, *[1, 2, 3], 4, 5, 6]  # [0, 1, 2, 3, 4, 5, 6]

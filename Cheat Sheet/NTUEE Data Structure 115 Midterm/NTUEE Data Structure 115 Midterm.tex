@@ -429,9 +429,28 @@ then
 
 \(n!=\sqrt{2\pi n}\qty(\frac{n}{e})^n\qty(1+O\qty(\frac{1}{n}))\);
 
+\tb{特徵方程式}
+
+定義：對一個給定$k$階常係數線性遞迴數列：
+\[<a_n>: a_n=\sum_{i=1}^k c_i \cdot a_{n-i} + f(n)\]
+，其特徵方程式為$x^k-\sum_{i=1}^k c_i \cdot x^{k-i}=0$，特證方程式的根稱其特徵根。
+
+若一個給定$k$階常係數線性齊次遞迴數列$<a_n>$有$a$相異特徵根$q_1, q_2, q_3, \ldots, q_a$，其中第$i$個根（$1\leq i\leq a$）為$m_i$重根，則$<a_n>$之一般式為：
+\(a_n=\sum_{i=1}^{a} \left( \sum_{j=1}^{m_i} \left(A_{i,j}\cdot n^{j-1}\right) \cdot q_i^{\phantom{i}n} \right)\); 
+
+若給定一個$k$階常係數線性非齊次遞迴數列：
+\(<a_n>: a_n=\sum_{i=1}^k c_i \cdot a_{n-i} + f(n)\); 
+則令：
+\(a_n = a'_n+a''_n \); 
+使得$<a'_n>$為$k$階常係數線性齊次遞迴數列，$<a''_n>$為$k$階常係數線性非齊次遞迴數列且一次項同$<a'_n>$且$f(n)$項同$<a_n>$。
+\(a''_n = g(n),\quad\deg(g(n))\leq \deg(f(n))\); 
+解出$k$階常係數線性非齊次遞迴數列$<a'_n>$與$g(n)$ ，即可解出$<a_n>$。
+
 \tb{Python Operator Precedence Order}
 
 \texttt{()} > \texttt{**} > \texttt{+x} \texttt{-x} \texttt{~x} (bitwise NOT) > \texttt{*} \texttt{/} \texttt{//} \texttt{\%} > \texttt{+} \texttt{-} > \texttt{<<} \texttt{>>} (preserve sign) > \texttt{\&} (bitwise AND) > \texttt{\^} (bitwise XOR) > \texttt{|} (bitwise OR) > \texttt{==} \texttt{!=} \texttt{>} \texttt{>=} \texttt{<} \texttt{<=} (value comparison) \texttt{is} \texttt{is not} (identity) \texttt{in} \texttt{not in} > \texttt{not} > \texttt{and} > \texttt{or}
+
+$\subsetneq\supseteq\supsetneq$
 
 \end{multicols}
 
@@ -439,7 +458,7 @@ then
 
 \noindent
 \begin{multicols}{7}
-\lstinputlisting[language=Python]{number.py}
+\lstinputlisting[language=Python]{basic.py}
 \lstinputlisting[language=Python]{str.py}
 \lstinputlisting[language=Python]{list.py}
 \lstinputlisting[language=Python]{tuple.py}

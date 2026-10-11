@@ -10,45 +10,67 @@ class SinglyLinkedList:
         self.tail = None
         self.size = 0
 
-    def __len__(self):
+    def __len__(self):  # O(1)
         return self.size
 
-    def is_empty(self):
+    def is_empty(self):  # O(1)
         return self.head is None
 
-    def prepend(self, x):
+    def __getitem__(self, num):  # O(num)
+        if not 0 <= num < self.size:
+            raise IndexError("list assignment index out of range")
+        cur = self.head
+        for _ in range(0, num):
+            cur = cur.next
+        return cur.data
+
+    def __setitem__(self, num, x):  # O(num)
+        if not 0 <= num < self.size:
+            raise IndexError("list assignment index out of range")
+        cur = self.head
+        for _ in range(0, num):
+            cur = cur.next
+        cur.data = x
+
+    def prepend(self, x):  # O(1)
         self.head = _SNode(x, self.head)
         if self.tail is None:
             self.tail = self.head
         self.size += 1
 
-    def append(self, x):
-        self.tail = _DNode(x, None)
-        if self.head is None:
-            self.head = self.tail
+    def append(self, x):  # O(1)
+        node = _SNode(x)
+        if self.tail is None:
+            self.head = self.tail = node
+        else:
+            self.tail.next = node
+            self.tail = node
         self.size += 1
 
-    def pop_front(self):
+    def pop_front(self):  # O(1)
         if self.head is None:
             raise IndexError("remove from empty list")
         x = self.head.data
         self.head = self.head.next
         self.size -= 1
+        if self.head is None:
+            self.tail = None
         return x
 
-    def peek_front(self):
+    def peek_front(self):  # O(1)
         if self.is_empty():
             raise IndexError("peek at empty list")
         return self.head.data
 
-    def peek_back(self):
+    def peek_back(self):  # O(1)
         if self.is_empty():
             raise IndexError("peek at empty list")
         return self.tail.data
 
-    def clear(self):
-        for _ in range(self.size):
-            self.pop_front()
+    def clear(self):  # O(1)
+        self.head = None
+        self.tail = None
+        self.size = 0
 
     def __iter__(self):
         cur = self.head
