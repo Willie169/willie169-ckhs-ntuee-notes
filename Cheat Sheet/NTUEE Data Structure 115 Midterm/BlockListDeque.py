@@ -9,10 +9,7 @@ class BlockListDeque:  # Both ends IO amortized O(1)
         self.block_size = block_size
         self.front_step = front_step
         self.back_step = back_step
-        self.data = [
-            [None] * self.block_size
-            for _ in range(self.front_step + self.back_step - 1)
-        ]
+        self.data = [[None] * self.block_size for _ in range(self.front_step + self.back_step - 1)]
         self.block_begin = self.front_step - 1
         self.block_end = self.block_begin + 1
         self.in_begin = (self.block_size - 1) // 2
@@ -29,12 +26,7 @@ class BlockListDeque:  # Both ends IO amortized O(1)
         return self.block_size * len(self.data)
 
     def is_valid(self):  # O(1)
-        return (
-            self.size
-            == self.block_size * (self.block_end - self.block_begin - 1)
-            + self.in_end
-            - self.in_begin
-        )
+        return self.size == self.block_size * (self.block_end - self.block_begin - 1) + self.in_end - self.in_begin
 
     def __getitem__(self, index):  # O(1)
         if not -self.size <= index < self.size:
