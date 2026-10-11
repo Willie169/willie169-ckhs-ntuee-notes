@@ -105,4 +105,9 @@ len("Hello")  # 5
 "1,2,,3,".split(",")  # ['1', '2', '', '3', '']
 "1<>2<>3<4".split("<>")  # ['1', '2', '3<4']
 # str.rsplit(sep=None, maxsplit=-1), split but rightmost
-
+# str.swapcase()
+"Hello World".swapcase()  # 'hELLO wORLD'
+# str.title(), Return a titlecased version of the string where words start with an uppercase character and the remaining characters are lowercase. The algorithm uses a simple language-independent definition of a word as groups of consecutive letters.
+"Hello world".title()  # 'Hello World'
+"they're bill's friends from the UK".title()  # "They'Re Bill'S Friends From The Uk"
+# str.upper(), all uppercase
