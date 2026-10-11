@@ -26,3 +26,17 @@ b = a.copy()
 a == b  # True
 a is b  # False
 3 if 2 > 1 else 2  # 3
+sradius = input("Please enter the radius of the circle ")
+# ...
+# Please enter the radius of the circle (input here, say 1)
+# sradius == 1
+# print(obj[, obj ,...], sep=' ', end='\n', file=sys.stdout, flush=False)
+# obj: Arbitrary number of objects that can be converted to str. Will be converted to str and printed.
+# sep: Separator between objects
+# end: What to print at end
+# file: An object with a write method to print to
+# flush: True for flushed, False for buffered
+print("a")  # a
+print(1, [1])  # 1 [1]
+print(1, 2, sep=",", end="1")  # 1,21<no_newline>
+print(1, 2, sep=", ", end="")  # 1, 2<no_newline>

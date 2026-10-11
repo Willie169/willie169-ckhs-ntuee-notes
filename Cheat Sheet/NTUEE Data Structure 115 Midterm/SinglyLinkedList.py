@@ -77,25 +77,3 @@ class SinglyLinkedList:
         while cur is not None:
             yield cur.data
             cur = cur.next
-
-
-class LinkedStack(SinglyLinkedList):  # LIFO O(1)
-    def push(self, x):
-        return self.prepend(x)
-
-    def pop(self):
-        return self.pop_front()
-
-    def top(self):
-        return self.peek_front()
-
-
-class LinkedQueue(SinglyLinkedList):  # FIFO O(1)
-    def enqueue(self, x):
-        return self.append(x)
-
-    def dequeue(self):
-        return self.pop_front()
-
-    def peek(self):
-        return self.peek_front()

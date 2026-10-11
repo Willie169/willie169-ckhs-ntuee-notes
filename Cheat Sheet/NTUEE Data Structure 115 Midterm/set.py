@@ -49,8 +49,6 @@ a.difference_update({1})  # a == {0, 2, 3}, assign a\setminus b to a
 a -= {2}  # a == {0, 3}, assign a\setminus b to a
 a.symmetric_difference({1, 3})  # {0, 1}, a\cup b\setminus(a\cap b)
 a ^ {1, 3}  # {0, 1}, a\cup b\setminus(a\cap b)
-a.symmetric_difference_update(
-    {1, 3}
-)  # a == {0, 1}, assign a\cup b\setminus(a\cap b) to a
+a.symmetric_difference_update({1, 3})  # a == {0, 1}, assign a\cup b\setminus(a\cap b) to a
 a ^= {1, 3}  # a == {0, 3}, assign a\cup b\setminus(a\cap b) to a
 {c for c in "abracadabra" if c not in "abc"}  # {'d', 'r'}, set comprehension

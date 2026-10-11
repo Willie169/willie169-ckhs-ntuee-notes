@@ -6,10 +6,7 @@ class BlockListDeque:  # Both sides IO amortized O(1)
         self.block_size = block_size
         self.front_step = front_step
         self.back_step = back_step
-        self.data = [
-            [None] * self.block_size
-            for _ in range(self.front_step + self.back_step - 1)
-        ]
+        self.data = [[None] * self.block_size for _ in range(self.front_step + self.back_step - 1)]
         self.block_begin = 0
         self.block_end = self.block_begin + 1
         self.in_begin = (self.block_size - 1) // 2
@@ -26,12 +23,7 @@ class BlockListDeque:  # Both sides IO amortized O(1)
         return self.block_size * len(self.data)
 
     def is_valid(self):
-        return (
-            self.size
-            == self.block_size * (self.block_end - self.block_begin - 1)
-            + self.in_end
-            - self.in_begin
-        )
+        return self.size == self.block_size * (self.block_end - self.block_begin - 1) + self.in_end - self.in_begin
 
     def reserve_front(self, blocks=None):
         if blocks is None:
@@ -128,25 +120,3 @@ class BlockListDeque:  # Both sides IO amortized O(1)
             if index == self.block_size:
                 index = 0
                 block += 1
-
-    def push(self, x):
-        return self.prepend(x)
-
-    def enqueue(self, x):
-        return self.append(x)
-
-    def dequeue(self):
-        return self.pop_front()
-
-    def pop(self):
-        return self.pop_front()
-
-    def top(self):
-        return self.peek_front()
-
-    def peek(self):
-        return self.peek_front()
-
-
-class BlockListQueue(BlockListDeque):
-    pass

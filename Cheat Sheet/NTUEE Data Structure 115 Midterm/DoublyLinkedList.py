@@ -17,9 +17,7 @@ class DoublyLinkedList:
     def is_empty(self):  # O(1)
         return self.size == 0
 
-    def __getitem__(
-        self, num
-    ):  # O(min(n, size - n)), n = num if num > 0 else num + size
+    def __getitem__(self, num):  # O(min(n, size - n)), n = num if num > 0 else num + size
         if not -self.size <= num < self.size:
             raise IndexError("list assignment index out of range")
         if num * 2 >= self.size:
@@ -36,9 +34,7 @@ class DoublyLinkedList:
                 cur = cur.prev
         return cur.data
 
-    def __setitem__(
-        self, num, x
-    ):  # O(min(n, size - n)), n = num if num > 0 else num + size
+    def __setitem__(self, num, x):  # O(min(n, size - n)), n = num if num > 0 else num + size
         if not -self.size <= num < self.size:
             raise IndexError("list assignment index out of range")
         if num * 2 >= self.size:
