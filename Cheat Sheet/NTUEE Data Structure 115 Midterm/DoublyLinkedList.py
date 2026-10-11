@@ -19,7 +19,7 @@ class DoublyLinkedList:
 
     def __getitem__(self, num):  # O(min(n, size - n)), n = num if num > 0 else num + size
         if not -self.size <= num < self.size:
-            raise IndexError("list assignment index out of range")
+            raise IndexError("list index out of range")
         if num * 2 >= self.size:
             num -= self.size
         elif num * 2 < -self.size:
@@ -36,7 +36,7 @@ class DoublyLinkedList:
 
     def __setitem__(self, num, x):  # O(min(n, size - n)), n = num if num > 0 else num + size
         if not -self.size <= num < self.size:
-            raise IndexError("list assignment index out of range")
+            raise IndexError("list index out of range")
         if num * 2 >= self.size:
             num -= self.size
         elif num * 2 < -self.size:
@@ -51,7 +51,7 @@ class DoublyLinkedList:
                 cur = cur.prev
         cur.data = x
 
-    def prepend(self, x):  # O(1)
+    def push_front(self, x):  # O(1)
         node = _DNode(x, None, self.head)
         if self.head is None:
             self.head = self.tail = node
@@ -60,7 +60,7 @@ class DoublyLinkedList:
             self.head = node
         self.size += 1
 
-    def append(self, x):  # O(1)
+    def push_back(self, x):  # O(1)
         node = _DNode(x, self.tail, None)
         if self.tail is None:
             self.head = self.tail = node
@@ -93,7 +93,37 @@ class DoublyLinkedList:
             self.tail.next = None
         return x
 
-    def pop_node(self, node):  # O(1)
+    def peek_front(self):  # O(1)
+        if self.is_empty():
+            raise IndexError("peek at empty list")
+        return self.head.data
+
+    def peek_back(self):  # O(1)
+        if self.is_empty():
+            raise IndexError("peek at empty list")
+        return self.tail.data
+
+    def insert_after_node(self, pos, x):  # O(1)
+        if self.is_empty():
+            raise IndexError("insert at empty list")
+        if pos is self.tail:
+            return self.push_back(x)
+        node = _DNode(x, pos, pos.next)
+        pos.next.prev = node
+        pos.next = node
+        self.size += 1
+
+    def insert_before_node(self, pos, x):  # O(1)
+        if self.is_empty():
+            raise IndexError("insert at empty list")
+        if pos is self.head:
+            return self.push_front(x)
+        node = _DNode(x, pos.prev, pos)
+        pos.prev.next = node
+        pos.prev = node
+        self.size += 1
+
+    def remove_node(self, node):  # O(1)
         if self.head is None:
             raise IndexError("remove from empty list")
         if self.head is node:
@@ -104,16 +134,6 @@ class DoublyLinkedList:
         node.next.prev = node.prev
         self.size -= 1
         return node.data
-
-    def peek_front(self):  # O(1)
-        if self.is_empty():
-            raise IndexError("peek at empty list")
-        return self.head.data
-
-    def peek_back(self):  # O(1)
-        if self.is_empty():
-            raise IndexError("peek at empty list")
-        return self.tail.data
 
     def clear(self):  # O(1)
         self.head = None

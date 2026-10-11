@@ -18,7 +18,7 @@ class SinglyLinkedList:
 
     def __getitem__(self, num):  # O(num)
         if not 0 <= num < self.size:
-            raise IndexError("list assignment index out of range")
+            raise IndexError("list index out of range")
         cur = self.head
         for _ in range(0, num):
             cur = cur.next
@@ -26,19 +26,19 @@ class SinglyLinkedList:
 
     def __setitem__(self, num, x):  # O(num)
         if not 0 <= num < self.size:
-            raise IndexError("list assignment index out of range")
+            raise IndexError("list index out of range")
         cur = self.head
         for _ in range(0, num):
             cur = cur.next
         cur.data = x
 
-    def prepend(self, x):  # O(1)
+    def push_front(self, x):  # O(1)
         self.head = _SNode(x, self.head)
         if self.tail is None:
             self.tail = self.head
         self.size += 1
 
-    def append(self, x):  # O(1)
+    def push_back(self, x):  # O(1)
         node = _SNode(x)
         if self.tail is None:
             self.head = self.tail = node
@@ -66,6 +66,15 @@ class SinglyLinkedList:
         if self.is_empty():
             raise IndexError("peek at empty list")
         return self.tail.data
+
+    def insert_after_node(self, pos, x):  # O(1)
+        if self.is_empty():
+            raise IndexError("insert at empty list")
+        if pos is self.tail:
+            return self.push_back(x)
+        node = _SNode(x, pos.next)
+        pos.next = node
+        self.size += 1
 
     def clear(self):  # O(1)
         self.head = None

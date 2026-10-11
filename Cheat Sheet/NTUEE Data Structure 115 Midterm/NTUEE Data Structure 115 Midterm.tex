@@ -448,17 +448,16 @@ then
 
 \tb{Linear Data Structures}
 
-Stack is last-in-first-out (LIFO) O(1) with push as inputting an element, pop as removing and returning the last inputted element, top as peaking the last inputted element, top as the last inputted element, and bottom as the first inputted element. list is a stack with append as push, pop as pop, and [-1] as top. SinglyLinkedList is a stack with prepend as push, pop\_front as pop, and peak\_front as top.
-
-Queue is first-in-first-out (FIFO) O(1) with enqueue as inputting an element, dequeue as removing and returning the first inputted element, peak as peaking the first inputted element, front as the first inputted element, and back or rear as the last inputted element. SinglyLinkedList is a queue with append as enqueue, pop\_front as dequeue, and peak\_front as top.
-
-To keep track of the extreme element of a stack or queue in O(1) time with O(n) extra space. One can maintain the original stack of elements and an extra stack of extrema. When an element is pushed to the original stack, it is compared with the top of the extrema stack and the extreme one is pushed to the extrema stack (for the first element, it is pushed to the extrema stack). When an element is popped from the original stack, an element is popped from the extrema stack. This way, the top of the extrema stack is always the extreme of the elements in the original stack.
-
-Doubly-ended queue (Deque) is both-end-in-out O(1) and is a stack and a queue.
-
-An unordered list is a collection of items where each item holds a relative position with respect to the others, such as SinglyLinkedList and DoublyLinkedList.
-
-An ordered list is a collection of items which are ordered based upon some underlying characteristic of the item, which can be implemented with a stack or a queue if O(1) pop of one end is needed and a deque if O(1) pop of both ends is needed.
+An unordered list is a list where each element holds a relative position with respect to the others. Each element is called node. If applicable, the first node is called head and the last node is called tail.
+An ordered list is a list which are ordered based upon some underlying characteristic of the elements.
+A stack is a last-in-first-out (LIFO) list. Adding an element is called push and is O(1), the last pushed element is called top, and the first pushed element is called bottom. Removing and returning top is called pop and is O(1). Peeking top is called top and is O(1).
+A queue is first-in-first-out (FIFO) list. Adding an element is called enqueue and is O(1), the first enqueued element is called front, and the last enqueued element is called back. Removing and returning front is called dequeue and is O(1). Peeking front is called peek and is O(1).
+A doubly-ended queue (deque) is a list that is simultaneously a stack and a queue, that is, has O(1) peeking, pushing, and popping from both ends.
+A dynamic array is a contiguous array that reserves a new capacity elsewhere and moves to it whenever its size reaches its capacity. It has O(1) random access and popping back, amortized O(1) pushing back, but O(n) removal and insertion. It is a stack with front as bottom and back as top.
+A singly linked list is an unordered list where each node stores only the next node. It has O(1) peeking, pushing, and popping front and insertion after node, but O(n) random access, removal of node, and insertion before node. If the tail is stored, it has O(1) peeking and pushing back. It is a stack with head as top and tail as bottom. If the tail is stored, it is a queue with the tail as front and head as back.
+A doubly linked list is an unordered list where each node stores the previous node and the next node. It has O(1) peeking, pushing, and popping front and back, insertion after and before node, and removal of node, but O(n) random access. It is a deque.
+An implementation of deque is a dynamic array of fixed-size blocks, which has O(1) random access and popping front and back, amortized O(1) pushing front and back, but O(n) removal and insertion.
+To keep track of the minimum element of a stack in O(1) time with O(n) extra space. One can maintain the original stack of elements and an extra stack of extrema. When an element is pushed to the original stack, it is compared with the top of the extrema stack and the minimum one is pushed to the extrema stack (for the first element, it is pushed to the extrema stack). When an element is popped from the original stack, an element is popped from the extrema stack. This way, the top of the extrema stack is always the minimum of the elements in the original stack.
 
 \lstinputlisting[language=Python]{basic.py}
 \lstinputlisting[language=Python]{str.py}

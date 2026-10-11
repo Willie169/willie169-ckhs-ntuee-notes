@@ -9,24 +9,32 @@ class BlockListDeque:  # Both ends IO amortized O(1)
         self.block_size = block_size
         self.front_step = front_step
         self.back_step = back_step
-        self.data = [[None] * self.block_size for _ in range(self.front_step + self.back_step - 1)]
-        self.block_begin = 0
+        self.data = [
+            [None] * self.block_size
+            for _ in range(self.front_step + self.back_step - 1)
+        ]
+        self.block_begin = self.front_step - 1
         self.block_end = self.block_begin + 1
         self.in_begin = (self.block_size - 1) // 2
         self.in_end = self.in_begin
         self.size = 0
 
-    def __len__(self):
+    def __len__(self):  # O(1)
         return self.size
 
-    def is_empty(self):
+    def is_empty(self):  # O(1)
         return self.size == 0
 
-    def capacity(self):
+    def capacity(self):  # O(1)
         return self.block_size * len(self.data)
 
-    def is_valid(self):
-        return self.size == self.block_size * (self.block_end - self.block_begin - 1) + self.in_end - self.in_begin
+    def is_valid(self):  # O(1)
+        return (
+            self.size
+            == self.block_size * (self.block_end - self.block_begin - 1)
+            + self.in_end
+            - self.in_begin
+        )
 
     def __getitem__(self, index):  # O(1)
         if not -self.size <= index < self.size:
@@ -41,41 +49,44 @@ class BlockListDeque:  # Both ends IO amortized O(1)
 
     def __setitem__(self, index, x):  # O(1)
         if not -self.size <= index < self.size:
-            raise IndexError("deque assignment index out of range")
+            raise IndexError("deque index out of range")
         if index < 0:
             index += self.size
-
         block_offset, in_block = divmod(
             self.in_begin + index,
             self.block_size,
         )
         self.data[self.block_begin + block_offset][in_block] = x
 
-    def reserve_front(self, blocks=None):
+    def reserve_front(self, blocks=None):  # O(1)
         if blocks is None:
             blocks = self.front_step
+        if blocks <= self.block_begin:
+            return
         new = [[None] * self.block_size for _ in range(blocks)]
         new.extend(self.data)
         self.data = new
         self.block_begin += blocks
         self.block_end += blocks
 
-    def reserve_back(self, blocks=None):
+    def reserve_back(self, blocks=None):  # O(1)
         if blocks is None:
             blocks = self.back_step
+        if self.block_end + blocks <= len(self.data):
+            return
         self.data.extend([[None] * self.block_size for _ in range(blocks)])
 
-    def shrink_front_to_fit(self):
+    def shrink_front_to_fit(self):  # O(1)
         new = self.data[self.block_begin :]
         self.data = new
         self.block_end -= self.block_begin
         self.block_begin = 0
 
-    def shrink_back_to_fit(self):
-        for i in range(self.block_end, len(self.data)):
+    def shrink_back_to_fit(self):  # amortized O(1)
+        for _ in range(self.block_end, len(self.data)):
             self.data.pop()
 
-    def prepend(self, x):
+    def push_front(self, x):  # amortized O(1)
         if self.in_begin != 0:
             self.in_begin -= 1
         else:
@@ -86,7 +97,7 @@ class BlockListDeque:  # Both ends IO amortized O(1)
         self.data[self.block_begin][self.in_begin] = x
         self.size += 1
 
-    def append(self, x):
+    def push_back(self, x):  # amortized O(1)
         if self.in_end != self.block_size:
             self.in_end += 1
         else:
@@ -97,7 +108,7 @@ class BlockListDeque:  # Both ends IO amortized O(1)
         self.data[self.block_end - 1][self.in_end - 1] = x
         self.size += 1
 
-    def pop_front(self):
+    def pop_front(self):  # O(1)
         if self.is_empty():
             raise IndexError("pop from empty deque")
         x = self.data[self.block_begin][self.in_begin]
@@ -110,7 +121,7 @@ class BlockListDeque:  # Both ends IO amortized O(1)
             self.in_begin = 0
         return x
 
-    def pop_back(self):
+    def pop_back(self):  # O(1)
         if self.is_empty():
             raise IndexError("pop from empty deque")
         x = self.data[self.block_end - 1][self.in_end - 1]
@@ -123,19 +134,24 @@ class BlockListDeque:  # Both ends IO amortized O(1)
             self.in_end = self.block_size
         return x
 
-    def peek_front(self):
+    def peek_front(self):  # O(1)
         if self.is_empty():
             raise IndexError("peek from empty deque")
         return self.data[self.block_begin][self.in_begin]
 
-    def peek_back(self):
+    def peek_back(self):  # O(1)
         if self.is_empty():
             raise IndexError("peek from empty deque")
         return self.data[self.block_end - 1][self.in_end - 1]
 
-    def clear(self):
-        for _ in range(self.size):
-            self.pop_back()
+    def clear(self):  # O(len(self.data))
+        num_blocks = len(self.data)
+        self.data = [[None] * self.block_size for _ in range(num_blocks)]
+        self.block_begin = self.front_step - 1
+        self.block_end = self.block_begin + 1
+        self.in_begin = (self.block_size - 1) // 2
+        self.in_end = self.in_begin
+        self.size = 0
 
     def __iter__(self):
         block = self.block_begin
@@ -147,7 +163,7 @@ class BlockListDeque:  # Both ends IO amortized O(1)
                 index = 0
                 block += 1
 
-    def __reversed__(self):  # O(n)
+    def __reversed__(self):
         block = self.block_end - 1
         index = self.in_end - 1
         for _ in range(self.size):
