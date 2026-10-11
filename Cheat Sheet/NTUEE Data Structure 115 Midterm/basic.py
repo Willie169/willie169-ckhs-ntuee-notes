@@ -3,8 +3,8 @@ a[0]  # 10, O(1)
 a[1]  # 20, O(1)
 a[-1]  # 30, O(1)
 a[-2]  # 20, O(1)
-len(a) # 3, O(1)
-a.__len__() # 3, O(1)
+len(a)  # 3, O(1)
+a.__len__()  # 3, O(1)
 a.append(40)  # a == [10, 20, 30, 40], amortized O(1)
 a.pop()  # a == [10, 20, 30], O(1)
 a.insert(1, 50)  # a == [10, 50, 20, 30], O(n)
@@ -24,6 +24,16 @@ a.extend([0, 4, 3, 4]),  # a == [1, 1, 1, 0, 4, 3, 4], O(k)
 a.remove(4)  # a.pop(a.index(x))
 a.reverse()  # a == [4, 3, 0, 1, 1, 1], O(n)
 a.sort()  # [0, 1, 1, 1, 3, 4], O(n log n) worst-case O(n) best-case, Powersort
-sorted(a) # same as a.sort()
+sorted(a)  # same as a.sort()
+0 in a  # True
+a = [None] * 5 # a == [None, None, None, None, None]
 del a  # a is now not defined
-a = [1, "1", [1]]  # arbitrary types
+a = [1, "1", [1], True]  # arbitrary types
+bool(0) # False, only 0 False, other numbers True
+2**72 # int is of infinite precision
+float("inf") # infinite float
+(1).__add__(2) # 3
+"He".__add__("llo") # 'Hello'
+# range(start, stop, step), all are integers, start + k step, k = [0, (stop - start) / step - 1] integers
+list(range(0, 10, 1)) # [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+list(range(9, -1, -2)) # [9, 7, 5, 3, 1]
