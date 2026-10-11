@@ -1,49 +1,5 @@
-a = [10, 20, 30]  # list is a dynamic array of elements of arbitrary types
-a[0]  # 10, O(1)
-a[1]  # 20, O(1)
-a[-1]  # 30, O(1)
-a[-2]  # 20, O(1)
-len(a)  # 3, O(1)
-a.__len__()  # 3, O(1)
-a.append(40)  # a == [10, 20, 30, 40], amortized O(1)
-a.pop()  # a == [10, 20, 30], O(1)
-a.insert(1, 50)  # a == [10, 50, 20, 30], O(n)
-a.pop(0)  # a == [50, 20, 30], O(n)
-a[0] = 0  # a == [0, 20, 30], O(1)
-b, c, d = a  # b == 0, c == 20, d == 30
-a.clear()  # a == []
-a = [0, 1, 2]
-b = a  # id(a) == id(b)
-b.pop()  # a == b == [0, 1], id(a) == id(b)
-b = [1, 2]  # id(a) != id(b), a == [0, 1]
-a = [1, 1, 1]
-a.count(1)  # 3, O(n)
-b = a.copy()  # a == b but id(a) != id(b)
-a.index(1)  # 0, O(n), first occurrence
-a.extend([0, 4, 3, 4]),  # a == [1, 1, 1, 0, 4, 3, 4], O(k)
-a.remove(4)  # a.pop(a.index(x))
-a.reverse()  # a == [4, 3, 0, 1, 1, 1], O(n)
-a.sort()  # [0, 1, 1, 1, 3, 4], O(n log n) worst-case O(n) best-case, Powersort
-sorted(a)  # same as a.sort()
-del a[0:5:2]  # a == [1, 1, 4]
-1 in a  # True
-0 not in a  # True
-a = [None] * 5  # a == [None, None, None, None, None]
-del a  # a is now not defined
-a = [1, "1", [1], True]  # arbitrary types
-bool(0)  # False, only 0 False, other numbers True
-2**72  # int is of infinite precision
-float("inf")  # infinite float
-(1).__add__(2)  # 3, must use (1). since 1. is treated as decimal
 "He".__add__("llo")  # 'Hello'
-# range(start, stop, step), all are integers, start + k step, k = [0, (stop - start) / step - 1] integers
-list(range(0, 10, 1))  # [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-list(range(9, -1, -2))  # [9, 7, 5, 3, 1]
 str(1)  # '1'
-it = [1, 2, 3].__iter__()
-a = next(
-    it
-)  # a == 1, or a = it.__next__(), return defined by the yield clause in the method
 "g" in "egg"  # True
 "f" in "egg"  # False
 len("Hello")  # 5
