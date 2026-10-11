@@ -22,9 +22,10 @@ a == b  # True
 a != b  # False
 a is b  # True, i.e., id(a) == id(b)
 a is not b  # False
-b = a.copy()
+b = a.copy()  # Shallow copy
 a == b  # True
 a is b  # False
+a[0] is b[0]  # True
 c, d = a, b
 c, d = d, c  # swap
 3 if 2 > 1 else 2  # 3

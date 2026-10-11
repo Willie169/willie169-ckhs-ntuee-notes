@@ -125,3 +125,9 @@ class DoublyLinkedList:
         while cur is not None:
             yield cur.data
             cur = cur.next
+
+    def __reversed__(self):
+        cur = self.tail
+        while cur is not None:
+            yield cur.data
+            cur = cur.prev
