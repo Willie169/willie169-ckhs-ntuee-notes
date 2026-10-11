@@ -93,6 +93,18 @@ class DoublyLinkedList:
             self.tail.next = None
         return x
 
+    def pop_node(self, node):  # O(1)
+        if self.head is None:
+            raise IndexError("remove from empty list")
+        if self.head is node:
+            return self.pop_front()
+        elif self.tail is node:
+            return self.pop_back()
+        node.prev.next = node.next
+        node.next.prev = node.prev
+        self.size -= 1
+        return node.data
+
     def peek_front(self):  # O(1)
         if self.is_empty():
             raise IndexError("peek at empty list")
@@ -113,23 +125,3 @@ class DoublyLinkedList:
         while cur is not None:
             yield cur.data
             cur = cur.next
-
-
-class LinkedDequeue(DoublyLinkedList):  # Both sides IO O(1)
-    def push(self, x):
-        return self.prepend(x)
-
-    def enqueue(self, x):
-        return self.append(x)
-
-    def dequeue(self):
-        return self.pop_front()
-
-    def pop(self):
-        return self.pop_front()
-
-    def top(self):
-        return self.peek_front()
-
-    def peek(self):
-        return self.peek_front()

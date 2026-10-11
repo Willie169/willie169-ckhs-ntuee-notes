@@ -1,8 +1,9 @@
+# A set is an immutable unordered collection of arbitrary number of elements of hashable types with duplicates ignored
 a = {
     1,
     "a",
     "a",
-}  # t == {1, 'a'}, set is an immutable unordered collection of arbitrary number of elements of hashable types with duplicates ignored
+}  # t == {1, 'a'}
 "a".__hash__()  # -8760825294024040742, a hashable type has __hash__ method that returns an int
 # a = {[0]} # TypeError: cannot use 'list' as a set element (unhashable type: 'list')
 type(a)  # <class 'set'>

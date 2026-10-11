@@ -25,6 +25,8 @@ a is not b  # False
 b = a.copy()
 a == b  # True
 a is b  # False
+c, d = a, b
+c, d = d, c  # swap
 3 if 2 > 1 else 2  # 3
 sradius = input("Please enter the radius of the circle ")
 # ...

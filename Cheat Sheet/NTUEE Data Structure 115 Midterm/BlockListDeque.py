@@ -1,4 +1,4 @@
-class BlockListDeque:  # Both sides IO amortized O(1)
+class BlockListDeque:  # Both ends IO amortized O(1)
     def __init__(self, block_size=64, front_step=1, back_step=1):
         assert block_size > 0
         assert front_step > 0

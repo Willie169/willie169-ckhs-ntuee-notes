@@ -1,4 +1,5 @@
-a = [10, 20, 30]  # list is a dynamic array of elements of arbitrary types
+# A list is a dynamic array of elements of arbitrary types
+a = [10, 20, 30]
 type(a)  # <class 'list'>
 a[0]  # 10, O(1)
 a[1]  # 20, O(1)

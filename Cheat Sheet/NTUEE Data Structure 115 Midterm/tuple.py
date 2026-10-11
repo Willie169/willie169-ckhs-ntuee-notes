@@ -1,9 +1,10 @@
+# A tuple is an immutable ordered collection of arbitrary number of elements of arbitrary types
 a = (
     1,
     "a",
     "a",
     [0],
-)  # tuple is an immutable ordered collection of arbitrary number of elements of arbitrary types
+)
 type(a)  # <class 'tuple'>
 a = 1, "a", "a", [0]  # can also be created without the parentheses
 a[0]  # 1

@@ -450,11 +450,17 @@ then
 
 Python operator precedence order: \texttt{()} > \texttt{**} > \texttt{+x} \texttt{-x} \texttt{~x} (bitwise NOT) > \texttt{*} \texttt{/} \texttt{//} \texttt{\%} > \texttt{+} \texttt{-} > \texttt{<<} \texttt{>>} (preserve sign) > \texttt{\&} (bitwise AND) > \texttt{\^} (bitwise XOR) > \texttt{|} (bitwise OR) > \texttt{==} \texttt{!=} \texttt{>} \texttt{>=} \texttt{<} \texttt{<=} (value comparison) \texttt{is} \texttt{is not} (identity) \texttt{in} \texttt{not in} > \texttt{not} > \texttt{and} > \texttt{or}
 
-Stack is last-in-first-out (LIFO) O(1) with push as inputting an element, pop as removing and returning the last inputted element, and top as peaking the last inputted element. list is a stack with append as push, pop as pop, and [-1] as top. SinglyLinkedList is a stack with prepend as push, pop\_front as pop, and peak_front as top.
+Stack is last-in-first-out (LIFO) O(1) with push as inputting an element, pop as removing and returning the last inputted element, top as peaking the last inputted element, top as the last inputted element, and bottom as the first inputted element. list is a stack with append as push, pop as pop, and [-1] as top. SinglyLinkedList is a stack with prepend as push, pop\_front as pop, and peak\_front as top.
 
-Queue is first-in-first-out (FIFO) O(1) with enqueue as inputting an element, dequeue as removing and returning the first inputted element, and peak as peaking the first inputted element. SinglyLinkedList is a queue with append as enqueue, pop\_front as dequeue, and peak_front as top.
+Queue is first-in-first-out (FIFO) O(1) with enqueue as inputting an element, dequeue as removing and returning the first inputted element, peak as peaking the first inputted element, front as the first inputted element, and back or rear as the last inputted element. SinglyLinkedList is a queue with append as enqueue, pop\_front as dequeue, and peak\_front as top.
 
-Doubly-ended queue (Deque) is both-side-in-out O(1) and is a stack and a queue.
+To keep track of the extreme element of a stack or queue in O(1) time with O(n) extra space. One can maintain the original stack of elements and an extra stack of extrema. When an element is pushed to the original stack, it is compared with the top of the extrema stack and the extreme one is pushed to the extrema stack (for the first element, it is pushed to the extrema stack). When an element is popped from the original stack, an element is popped from the extrema stack. This way, the top of the extrema stack is always the extreme of the elements in the original stack.
+
+Doubly-ended queue (Deque) is both-end-in-out O(1) and is a stack and a queue.
+
+An unordered list is a collection of items where each item holds a relative position with respect to the others, such as SinglyLinkedList and DoublyLinkedList.
+
+An ordered list is a collection of items which are ordered based upon some underlying characteristic of the item, which can be implemented with a stack or a queue if O(1) pop of one end is needed and a deque if O(1) pop of both ends is needed.
 
 \end{multicols}
 
@@ -467,6 +473,7 @@ Doubly-ended queue (Deque) is both-side-in-out O(1) and is a stack and a queue.
 \lstinputlisting[language=Python]{list.py}
 \lstinputlisting[language=Python]{tuple.py}
 \lstinputlisting[language=Python]{set.py}
+\lstinputlisting[language=Python]{dict.py}
 \lstinputlisting[language=Python]{SinglyLinkedList.py}
 \lstinputlisting[language=Python]{DoublyLinkedList.py}
 \lstinputlisting[language=Python]{BlockListDeque.py}
