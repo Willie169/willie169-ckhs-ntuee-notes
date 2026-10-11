@@ -49,10 +49,10 @@ len("Hello")  # 5
 )  # ('Monty', ' ', "Python's Flying Circus")
 "Monty Python".partition("-")  # ('Monty Python', '', '')
 # str.rpartition(sep), partition but last occurrence
-#  str.removeprefix(prefix), If the string starts with the prefix string, return string[len(prefix):]. Otherwise, return a copy of the original string:
+# str.removeprefix(prefix), If the string starts with the prefix string, return string[len(prefix):]. Otherwise, return a copy of the original string:
 "Arthur: three!".removeprefix("Arthur: ")  # 'three!'
-#  str.removesuffix(suffix, /), If the string ends with the suffix string and that suffix is not empty, return string[:-len(suffix)]. Otherwise, return a copy of the original string
-#  str.replace(old, new, count=-1), Return a copy of the string with all occurrences of substring old replaced by new. If count is given, only the first count occurrences are replaced. If count is not specified or -1, then all occurrences are replaced.
+# str.removesuffix(suffix, /), If the string ends with the suffix string and that suffix is not empty, return string[:-len(suffix)]. Otherwise, return a copy of the original string
+# str.replace(old, new, count=-1), Return a copy of the string with all occurrences of substring old replaced by new. If count is given, only the first count occurrences are replaced. If count is not specified or -1, then all occurrences are replaced.
 "spam, spam, spam".replace("spam", "eggs")  # 'eggs, eggs, eggs'
 "spam, spam, spam".replace("spam", "eggs", 1)  # 'eggs, spam, spam'
 # str.split(sep=None, maxsplit=-1), Return a list of the words in the string, using sep as the delimiter string. If maxsplit is given, at most maxsplit splits are done, the leftmost ones (thus, the list will have at most maxsplit+1 elements). If maxsplit is not specified or -1, then there is no limit on the number of splits (all possible splits are made). If sep is given, consecutive delimiters are not grouped together and are deemed to delimit empty strings (for example, '1,,2'.split(',') returns ['1', '', '2']). The sep argument may consist of multiple characters as a single delimiter. Splitting an empty string with a specified separator returns ['']. If sep is not specified or is None, a different splitting algorithm is applied: runs of consecutive whitespace are regarded as a single separator, and the result will contain no empty strings at the start or end if the string has leading or trailing whitespace. Consequently, splitting an empty string or a string consisting of just whitespace with a None separator returns [].
