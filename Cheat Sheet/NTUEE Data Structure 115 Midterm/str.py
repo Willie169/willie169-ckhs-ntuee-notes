@@ -1,3 +1,6 @@
+a = "a"
+type(a)  # <class 'str'>
+a += "b"  # a == 'ab'
 "He".__add__("llo")  # 'Hello'
 str(1)  # '1'
 "g" in "egg"  # True

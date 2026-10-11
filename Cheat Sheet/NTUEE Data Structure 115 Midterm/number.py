@@ -9,3 +9,8 @@ divmod(3, 2)  # (1, 1), the pair (x // y, x % y)
 abs(-2)  # 2
 c = complex(1, 2)  # (1+2j), complex(re, im)
 c.conjugate()  # (1-2j)
+a = 0.5  # a == 0.5
+type(True)  # <class 'bool'>
+type(1)  # <class 'int'>
+type(1.0)  # <class 'float'>
+type(complex(1, 1))  # <class 'complex'>
