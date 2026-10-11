@@ -35,7 +35,8 @@ del a  # a is now not defined
 a = [1, "1", [1], True]  # arbitrary types
 a.__getitem__(0)  # 1, same as a[0]
 a.__setitem__(0, (1,))  # a == [(1,), '1', [1], True], same as a[0] = (1,)
-it = [1, 2, 3].__iter__()
+it = iter([1, 2, 3])  # also it = [1, 2, 3].__iter__()
+iter(a) is iter(a)  # False
 next(it)  # 1, also it.__next__()
 # Return of __next__ is defined by the yield clause in the method.
 # __next__ is used by for loop.
@@ -45,9 +46,15 @@ list(range(9, -1, -2))  # [9, 7, 5, 3, 1]
 # List comprehensions provide a concise way to create lists. Common applications are to make new lists where each element is the result of some operations applied to each member of another sequence or iterable, or to create a subsequence of those elements that satisfy a certain condition.
 list(map(lambda x: x**2, range(10)))  # [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
 [x**2 for x in range(10)]  # [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
-[(x, y) for x in [1, 2, 3] for y in [3, 1, 4] if x != y]  # [(1, 3), (1, 4), (2, 3), (2, 1), (2, 4), (3, 1), (3, 4)]
-[w.strip() for w in ["  banana", "  loganberry ", "passion fruit  "]]  # ['banana', 'loganberry', 'passion fruit']
-[num for elem in [[1, 2, 3], [4, 5, 6], [7, 8, 9]] for num in elem]  # [1, 2, 3, 4, 5, 6, 7, 8, 9]
+[
+    (x, y) for x in [1, 2, 3] for y in [3, 1, 4] if x != y
+]  # [(1, 3), (1, 4), (2, 3), (2, 1), (2, 4), (3, 1), (3, 4)]
+[
+    w.strip() for w in ["  banana", "  loganberry ", "passion fruit  "]
+]  # ['banana', 'loganberry', 'passion fruit']
+[
+    num for elem in [[1, 2, 3], [4, 5, 6], [7, 8, 9]] for num in elem
+]  # [1, 2, 3, 4, 5, 6, 7, 8, 9]
 [
     [
         row[i]
