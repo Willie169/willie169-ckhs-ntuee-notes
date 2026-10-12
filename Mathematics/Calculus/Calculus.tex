@@ -2253,35 +2253,37 @@ If $\exists k\in\bbR\colon x\ge k\implies g(x)\ne0$,
 \bpr
 \[\abs{f(x)}\le M\abs{g(x)}\qc x\ge T\]
 \[\abs{\frac{f(x)}{g(x)}}\le M\qc x\ge T\]
-\[\sup\abs{\frac{f(x)}{g(x)}}\le M\qc x\ge T\]
+\[\sup_{x\ge T}\abs{\frac{f(x)}{g(x)}}\le M\]
 \[\limsup\abs{\frac{f(x)}{g(x)}}\le M<\infty\]
 \epr
 \item $\liminf\abs{\frac{f(x)}{g(x)}}>0$ iff $f(x)\in \Omega(g(x))$.
 \bpr
 \[\abs{f(x)}\ge M\abs{g(x)}\qc x\ge T\]
 \[\abs{\frac{f(x)}{g(x)}}\ge M\qc x\ge T\]
-\[\inf\abs{\frac{f(x)}{g(x)}}\ge M\qc x\ge T\]
+\[\inf_{x\ge T}\abs{\frac{f(x)}{g(x)}}\ge M\]
 \[\liminf\abs{\frac{f(x)}{g(x)}}\ge M>0\]
 \epr
 \item $\infty>\limsup\abs{\frac{f(x)}{g(x)}}\ge\liminf\abs{\frac{f(x)}{g(x)}}>0$ iff $f(x)\in \Theta(g(x))$.
 \bpr
 \[\abs{f(x)}\ge M_1\abs{g(x)}\qc x\ge T\]
 \[\abs{\frac{f(x)}{g(x)}}\ge M_1\qc x\ge T\]
-\[\inf\abs{\frac{f(x)}{g(x)}}\ge M_1\qc x\ge T\]
+\[\inf_{x\ge T}\abs{\frac{f(x)}{g(x)}}\ge M_1\]
 \[\liminf\abs{\frac{f(x)}{g(x)}}\ge M_1>0\]
 \[\abs{f(x)}\le M_2\abs{g(x)}\qc x\ge T\]
 \[\abs{\frac{f(x)}{g(x)}}\le M_2\qc x\ge T\]
-\[\sup\abs{\frac{f(x)}{g(x)}}\le M_2\qc x\ge T\]
+\[\sup_{x\ge T}\abs{\frac{f(x)}{g(x)}}\le M_2\]
 \[\limsup\abs{\frac{f(x)}{g(x)}}\le M_2<\infty\]
 \epr
-\item $\lim_{x\to\infty}\abs{\frac{f(x)}{g(x)}}=0$ iff $f(x)\in o(g(x))$.
-\[\abs{f(x)}<M\abs{g(x)}\]
-\[\abs{\frac{f(x)}{g(x)}}<M\]
-\[\lim_{x\to\infty}\abs{\frac{f(x)}{g(x)}}=0\]
+\item $\limsup_{x\to\infty}\abs{\frac{f(x)}{g(x)}}=0$ iff $f(x)\in o(g(x))$.
+\[\forall M>0\colon\exists T\in\bbR\colon x\ge T\implies\abs{f(x)}<M\abs{g(x)}\]
+\[\forall M>0\colon\exists T\in\bbR\colon x\ge T\implies\abs{\frac{f(x)}{g(x)}}<M\]
+\[\forall M>0\colon\exists T\in\bbR\colon\sup_{x\ge T}\abs{\frac{f(x)}{g(x)}}<M\]
+\[\limsup_{x\to\infty}\abs{\frac{f(x)}{g(x)}}=0\]
 \item $\lim_{x\to\infty}\abs{\frac{f(x)}{g(x)}}=\infty$ iff $f(x)\in \omega(g(x))$.
-\[\abs{f(x)}>M\abs{g(x)}\]
-\[\abs{\frac{f(x)}{g(x)}}>M\]
-\[\lim_{x\to\infty}\abs{\frac{f(x)}{g(x)}}=\infty\]
+\[\forall M>0\colon\exists T\in\bbR\colon x\ge T\implies\abs{f(x)}>M\abs{g(x)}\]
+\[\forall M>0\colon\exists T\in\bbR\colon x\ge T\implies\abs{\frac{f(x)}{g(x)}}>M\]
+\[\forall M>0\colon\exists T\in\bbR\colon\inf_{x\ge T}\abs{\frac{f(x)}{g(x)}}>M\]
+\[\liminf_{x\to\infty}\abs{\frac{f(x)}{g(x)}}=\infty\]
 \eit
 \subsubsection{Relation}
 For any fixed $g(x)$, $o(g(x))$, $\Theta(g(x))$, and $\omega(g(x))$ are mutually exclusive.
@@ -4425,7 +4427,7 @@ then
 \[L_{0}\qty(x)=x,\quad x\in\bbR_{>0}\]
 \[L_{n}\qty(x)=\ln\qty(L_{n-1}\qty(x)),\quad n\in\bbN,x\in\bbR_{>0}.\]
 \ben
-\item If for some positive integers $k$ and positive number $m$, 
+\item If for some positive integer $k$ and positive number $m$, 
 \[f\qty(n)=\Theta\qty(n^{\log_ba}\qty(\prod_{i=1}^{k-1}\qty(L_{i}\qty(n))^{-1})\qty(L_{k}\qty(n))^{m-1}),\]
 then
 \[T\qty(n)=\Theta\qty(n^{\log_ba}\qty(L_{k}\qty(n))^m).\]
@@ -4456,6 +4458,8 @@ T\qty(n)=&\sum_{j=0}^{h-1}a^jf\qty(\frac{n}{b^j})+n^sT\qty(1)\\
 Case 1: If for some $c<\log_ba$,
 \[f\qty(n)=O\qty(n^c),\]
 then
+\[g\qty(n)=O\qty(n^{c-s})\]
+\[\sum_{r=1}^hg\qty(b^r)=O(\log_bnn^{c-s})=O(1)\]
 \[T\qty(n)=\Theta\qty(n^{\log_ba}).\]
 Case 2:
 \[L_{k}\qty(b^x)=\Theta\qty(L_{k-1}\qty(x))\]
@@ -4467,7 +4471,7 @@ Sub-case 1 $m>0$:
 \[T\qty(n)=\Theta\qty(n^{\log_ba}\qty(L_{k}\qty(n))^m).\]
 Sub-case 2 $m=0$:
 \[T\qty(n)=\Theta\qty(n^{\log_ba}L_{k-1}\qty(n)).\]
-Sub-case 3 $m=0$:
+Sub-case 3 $m<0$:
 \[T\qty(n)=\Theta\qty(n^{\log_ba}).\]
 Case 3: If $f\qty(n)=\Omega\qty(n^c)$ for some $c>\log_ba$, and the regularity condition that $\exists m\in\bbR,0<k<1$ such that $n\ge m$ implies
 \[af\qty(\frac{n}{b})\le kf\qty(n)\]
@@ -4478,8 +4482,9 @@ is satisfied, then
 T\qty(n)=&\sum_{j=0}^{h-1}a^jf\qty(\frac{n}{b^j})+n^sT\qty(1)\\
 =&f\qty(n)+\sum_{j=1}^{h-1}O\qty(k^jf\qty(n))+\Theta\qty(n^s)
 \ea\]
-\[\sum_{j=1}^{\infty}k^jf\qty(n)=\frac{f\qty(n)}{1-k}\]
-\[T\qty(n)=f\qty(n)+O\qty(f\qty(n))+\Theta\qty(n^s)=\Theta\qty(f\qty(n))\]
+\[\sum_{j=1}^{\infty}k^jf\qty(n)=\frac{f\qty(n)}{1-k}=O(f(n))\]
+\[\Theta\qty(n^s)=O(f(n))\]
+\[T\qty(n)=f\qty(n)+O\qty(f\qty(n))+O(f(n))=\Theta\qty(f\qty(n))\]
 \epr
 Terms:
 \bit
