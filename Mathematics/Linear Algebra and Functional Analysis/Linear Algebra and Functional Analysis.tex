@@ -526,14 +526,57 @@ $\mathbf{A}$ is called a symmetric matrix iff $\mathbf{A}=\mathbf{A}^\top$.
 \subsubsection{Skew-symmetric matrix/antisymmetric matrix (反對稱矩陣)}
 $\mathbf{A}$ is called a skew-symmetric matrix or an antisymmetric matrix if $\mathbf{A}=-\mathbf{A}^\top$.
 \subsubsection{Transpose identities}
-For an index set of matrices $\mathbf{A}\colon[1,n]\cap\bbN\to\bbR^{p\times q};\;i\mapsto\mathbf{A}(i)$
+For an index set of matrices $\mathbf{A}\colon[1,n]\cap\bbN\to\bbF^{p\times q};\;i\mapsto\mathbf{A}(i)$ for some fixed $p,q$,
 \[\qty(\sum_{i=1}^n\mathbf{A}(i))^\top=\sum_{i=1}^n\qty(\mathbf{A}(i))^\top\]
+\bpr
+\[\qty(\sum_{i=1}^n\mathbf{A}(i))_{jk}=\sum_{i=1}^n\mathbf{A}(i)_{jk}\]
+\[\ba
+\qty(\qty(\sum_{i=1}^n\mathbf{A}(i))^{\top})_{jk}&=\sum_{i=1}^n\mathbf{A}(i)_{kj}\\
+                                                 &=\sum_{i=1}^n\qty(\qty(\mathbf{A}(i))^{\top})_{jk}\\
+                                                 &=\qty(\sum_{i=1}^n\qty(\mathbf{A}(i))^{\top})_{jk}
+\ea\]
+\epr
+For two matrices $X\in\bbF^{p\times q},Y\in\bbF^{q\times r}$,
+\[(XY)^{\top}=Y^{\top}X^{\top}\]
+\bpr
+\[(XY)_{jk}=\sum_{i=1}^qX_{ji}Y_{ik}\]
+\[\ba
+((XY)^{\top})_{jk}&=\sum_{i=1}^qX_{ki}Y_{ij}\\
+                  &=\sum_{i=1}^q(X^{\top})_{ik}(Y^{\top})_{ji}\\
+                  &=(Y^{\top}X^{\top})_{jk}
+\ea\]
+\epr
+For an index set of matrices $\mathbf{A}\colon[1,n]\cap\bbN\to\bbF^{\bbN\times\bbN};\;i\mapsto\mathbf{A}(i)$ such that $\mathbf{A}(i)\mathbf{A}(i+1)$ is defined for all $i\in[1,n)\cap\bbN$,
 \[\qty(\prod_{i=1}^n\mathbf{A}(i))^\top=\prod_{i=1}^n\qty(\mathbf{A}(n-i+1))^\top\]
-\subsection{Trace (跡)}
-The trace of a matrix $\mb{A}$ is the sum of all diagonal entries of $\mb{A}$, denoted as $\tr(\mb{A})$.
+\bpr
+Prove by mathematical induction on $n$.
+
+Base case $n=1$:
+\[\qty(\prod_{i=1}^1\mathbf{A}(i))^\top=\prod_{i=1}^1\qty(\mathbf{A}(1-i+1))^\top,\]
+which is true.
+
+Assume the statement holds for $n=k$:
+\[\qty(\prod_{i=1}^k\mathbf{A}(i))^\top=\prod_{i=1}^k\qty(\mathbf{A}(k-i+1))^\top\]
+For $n=k+1$, we have
+\[\ba
+\qty(\prod_{i=1}^{k+1}\mathbf{A}(i))^\top&=\qty(\prod_{i=1}^k\mathbf{A}(i)A(k+1))^\top\\
+                                         &=\qty(A(k+1))^{\top}\qty(\prod_{i=1}^k\mathbf{A}(i))^\top\\
+                                         &=\qty(A(k+1))^{\top}\prod_{i=1}^k\qty(\mathbf{A}(k-i+1))^\top\\
+                                         &=\prod_{i=1}^{k+1}\qty(\mathbf{A}(k-i+1))^\top
+\ea\]
+\epr
 \subsubsection{Conjugate transpose (共軛轉置)/Hermitian conjugate (埃爾米特共軛)/Hermitian transpose (埃爾米特轉置)}
 The conjugate transpose of an $m\times n$ matrix $\mathbf{A}$ is the $n\times m$ matrix $\mathbf{A}*$:
-\[(\mathbf{A}^*)_{i,j}=\ol{a_{j,i}}\]
+\[(\mathbf{A}^*)_{ij}=\ol{a_{ji}}\]
+\subsubsection{Conjugate transpose identities}
+For an index set of matrices $\mathbf{A}\colon[1,n]\cap\bbN\to\bbC^{p\times q};\;i\mapsto\mathbf{A}(i)$ for some fixed $p,q$,
+\[\qty(\sum_{i=1}^n\mathbf{A}(i))^*=\sum_{i=1}^n\qty(\mathbf{A}(i))^*\]
+For two matrices $X\in\bbC^{p\times q},Y\in\bbC^{q\times r}$,
+\[(XY)^{*}=Y^{*}X^{*}\]
+For an index set of matrices $\mathbf{A}\colon[1,n]\cap\bbN\to\bbC^{\bbN\times\bbN};\;i\mapsto\mathbf{A}(i)$ such that $\mathbf{A}(i)\mathbf{A}(i+1)$ is defined for all $i\in[1,n)\cap\bbN$,
+\[\qty(\prod_{i=1}^n\mathbf{A}(i))^*=\prod_{i=1}^n\qty(\mathbf{A}(n-i+1))^*\]
+\subsection{Trace (跡)}
+The trace of a matrix $\mb{A}$ is the sum of all diagonal entries of $\mb{A}$, denoted as $\tr(\mb{A})$.
 \subsection{Cofactor matrix, adjugate matrix, determinant, and inverse}
 Let $\mathbf{M}_{ij}$ of $\mathbf{A}$ be the determinant of the submatrix of $\mathbf{A}$ without the $i$th row and $j$th column.
 \subsubsection{Determinant (行列式或判別式)}
