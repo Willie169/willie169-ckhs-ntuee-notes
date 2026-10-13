@@ -34,12 +34,12 @@ When a vector is an $n$-scalar tuple, we call the scalars components and denote 
 \[(x_1,x_2,\ldots,x_n)\]
 or
 \[\langle x_1,x_2,\ldots,x_n\rangle\]
-\subsubsection{Isomorphism (同構)}
-Vector spaces $X$ and $Y$ are called isomophic if there exists a mapping $f:\,X\to Y$ between them such that $f$ is bijective and continuous and $f^{-1}$ is continuous, written as \( X \cong Y \), and $f$ is called a isomorphism between them.
 \subsubsection{Linear combination (線性組合)}
-A linear combination of a series of vectors $(a_1,a_2,\ldots,a_n)$ in a vector space $V$ over a field $F$ is a vector of the form
-\[\sum_{i=1}^n\alpha_ia_i\]
-where $(\alpha_1,\alpha_2,\ldots,\alpha_n)$ is a series of scalars in $F$ called coefficients.
+A linear combination of a series of vectors $(v_1,\ldots,v_n)$ in a vector space $V$ over a field $F$ is any vector of the form
+\[\sum_{i=1}^nc_iv_i\]
+where $(c_1,\ldots,c_n)$ is a series of scalars in $F$ called coefficients.
+\subsubsection{Isomorphism (同構)}
+Vector spaces $X$ and $Y$ are called isomorphic if there exists a mapping $f:\,X\to Y$ between them such that $f$ is bijective and continuous and $f^{-1}$ is continuous, written as \( X \cong Y \), and $f$ is called a isomorphism between them.
 \subsubsection{Division}
 For nonzero vector $a$ and vector $b$ in a vector space such that for some scalar $s$, $sa=b$, $\frac{b}{a}\coloneq s$.
 \subsubsection{Affine space (仿射空間)}
@@ -69,17 +69,26 @@ A linear transformation is a bijection from an vector space onto itself that is 
 A map $T\colon V\to W$ is Invertible if and only if it is bijective. The unique inverse of $T$, called $T^{-1}$, is defined to be:
 \[T^{-1}\colon W\to V;\,\forall v\in V\colon T(v)\mapsto v=T^{-1}(T(v)).\]
 \subsubsection{Linear subspace, vector subspace, or subspace}
-A linear subspace of a vector space is a subset of it that is a vector space.
+A linear subspace of a vector space is a subset of it that is closed under vector addition and scalar multiplication, and thus a vector space.
 \subsubsection{Linear span, linear hull, or span}
 A span of a subset $S$, denoted as $\operatorname{span}(S)$ or $\langle S\rangle$, of a vector space is the smallest linear subspace containing $S$.
 \subsubsection{Linear independence (線性獨立)}
 A set of non-zero vectors \(\{v_1,\ldots,v_n\}\) is linearly independent iff the equation:
 \[\sum_{i=1}^nc_iv_i=0 \]
 is true only if all coefficients \(c_1,c_2, \dots,c_n\) are zero, then the set of vectors is linearly independent; otherwise the set of vectors is linearly dependent.
+\subsubsection{Linearly dependent vector is a linear combination of others}
+For a linearly dependent set $S$ of non-zero vectors, there exists $v\in S$ such that $v$ is a linear combination of $S\setminus\{v\}$.
+\bpr
+Pick a non-zero $c_k$.
+\epr
 \subsubsection{Linear independent set as minimum by inclusion of span}
 A subset $X$ of a vector space is linearly dependent iff there exists a proper subset of $X$ whose span is the span of $X$.
 \bpr
-TODO
+If: Let $X=\{x_1,\ldots,x_n\}$. There exist not all zero $c_i$ such that
+\[\sum_{i=1}^nc_ix_i=0\]
+Take any $k$ such that $c_k\ne 0$, we can write $x_k$ in terms of other $x_i$, thus $x_k$ is in the span of $X\setminus\{x_k\}$, thus $X\setminus\{x_k\}$ is a proper subset of $X$ whose span is the span of $X$.
+
+Only if: Suppose $Y$ is proper subset of $X$ such that the span of $Y$ is the span of $X$. Choose $x\in X\setminus Y$. By the definition, there exists $y_1,\ldots,y_m\in Y$ such that $x$ is a linear combination of them.
 \epr
 \subsubsection{Basis (基)}
 The basis of a vector space $X$ over a field $F$ is a set of linearly independent vectors $\mathbf{v}=\{v_1,v_2,\dots\}\subseteq X$ such that for any vector $\mathbf{P}\in X$, there exists a unique coefficient vector $(c_1,c_2, \dots)\subseteq F$ such that:
@@ -87,20 +96,14 @@ The basis of a vector space $X$ over a field $F$ is a set of linearly independen
 \subsubsection{Orientation}
 The orientation of a vector space is the arbitrary choice of which ordered bases are "positively" oriented and which are "negatively" oriented.
 \subsubsection{Dimension (維度)}
-The dimension of a vector space is defined as the cardinality of a basis of it, which is unique if a finite basis exists.
+The dimension of a vector space $V$, denoted as $\dim V$, is defined as the cardinality of a basis of it, which is unique (for infinite dimension, if axiom of choice is assumed).
+
+The dimension of an affine space $V$, denoted as $\dim V$, is defined as the dimension of its associated vector space.
+\subsubsection{Basis extension theorem}
+For a vector space $V$ of dimension $n\in\bbN$, for any linearly independent set of $m$ vectors $v_1,\ldots,v_m$ in $V$ with $m\in\bbN_{\le n}$, there exists set of $n-m$ vectors $v_{m+1},\ldots,v_n$ in $V$ such that $\{v_1,\ldots,v_n\}$ is linearly independent. Moreover, any such $v_1,\ldots,v_n$ is a basis of $V$.
 \bpr
-Suppose there are two bases 
-TODO
+For $m=n$, $\span\{v_1,\ldots,v_n\}=V$, thus $\{v_1,\ldots,v_n\}$ is a basis. For $m<n$, since $S\coloneq\span\{v_1,\ldots,v_m\}$ is of dimension $m<n$, choose any $v_{m+1}\in V\setminus S$. Assume for contradiction that $\{v_1,\ldots,v_{m+1}\}$ is linearly dependent, we can write $v_{m+1}$ as a linear combination of $v_1,\ldots,v_m$, which means $v_{m+1}\in S$. Repeat until $n$.
 \epr
-The dimension of an affine space is defined as the dimension of its associated vector space.
-\subsubsection{Basis theorem}
-For a vector space $V$ of dimension $n\in\bbN$, for any $m$ linearly independent vectors $v_1,\ldots,v_m$ in $V$ with $m\in\bbN_{\le n}$, there exists $n-m$ vectors $v_{m+1},\ldots,v_n$ in $V$ such that $v_1,\ldots,v_n$ are linearly independent. Moreover, any such $v_1,\ldots,v_n$ is a basis of $V$.
-TODO
-prove
-\subsubsection{Finite dimension space linear dependence}
-For a vector space $V$ of dimension $n\in\bbN$, for any $m>n$ vectors $v_1,\ldots,v_m$ in $V$, they must be linearly dependent. 
-TODO
-prove
 \subsubsection{Bilinear form (雙線性形式)}
 Let $V$ be a vector space of dimension $n$ over a field $\mathbb{K}$. A map $B\colon V\times V\rightarrow \mathbb{K}$ is a bilinear form on the space if:
 \begin{enumerate}
