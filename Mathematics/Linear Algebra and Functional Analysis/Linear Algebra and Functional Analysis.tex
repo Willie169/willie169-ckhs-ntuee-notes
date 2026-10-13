@@ -30,7 +30,7 @@ To have a vector space, the eight following axioms must be satisfied for every $
 \end{enumerate}
 When the scalar field is the real numbers, the vector space is called a real vector space, and when the scalar field is the complex numbers, the vector space is called a complex vector space. These two cases are the most common ones, but vector spaces with scalars in an arbitrary field $F$ are also commonly considered. Such a vector space is called an $F$-vector space or a vector space over $F$.
 
-When a vector consists of $n$ scalar components, we typically denote it as
+When a vector is an $n$-scalar tuple, we call the scalars components and denote the vector as
 \[(x_1,x_2,\ldots,x_n)\]
 or
 \[\langle x_1,x_2,\ldots,x_n\rangle\]
@@ -60,7 +60,9 @@ that has the following properties.
 \subsubsection{Linear independence (線性獨立)}
 For a set of non-zero vectors \(\{\mathbf{v}_1,\mathbf{v}_2, \dots, \mathbf{v}_n\}\), if the equation:
 \[\sum_{i=1}^nc_i\mathbf{v}_i = 0 \]
-is true only if all coefficients \(c_1,c_2, \dots,c_n\) are zero, then the set of vectors is linearly independent.
+is true only if all coefficients \(c_1,c_2, \dots,c_n\) are zero, then the set of vectors is linearly independent, otherwise the set of vectors is linearly dependent.
+\subsubsection{Span}
+The span of $n$ linearly independent vectors $v_1,\ldots,v_n$ in a vector space $V$ is the set of all linear combinations of it.
 \subsubsection{Linear map (線性映射) or linear operator}
 For vector spaces $V,W$, a map $T\colon V\to W$ between vector spaces $V$ and $W$ over field $F$ is linear if
 \[\forall a,b\in F,v,w\in V\colon T(av+bw)=aT(v)+bT(w),\]
@@ -78,11 +80,17 @@ The basis of a vector space $X$ over a field $F$ is a set of linearly independen
 \subsubsection{Orientation}
 The orientation of a vector space is the arbitrary choice of which ordered bases are "positively" oriented and which are "negatively" oriented.
 \subsubsection{Dimension (維度)}
-The dimension of a vector space is defined as the cardinality of a basis of it.
-
-The dimension of an affine space is defined as the dimension of its associated vector space.
-
-The $n$-dimensional vector space over field $F$ is usually written as $F^n$.
+The dimension of a vector space is defined as the cardinality of a basis of it. The dimension of an affine space is defined as the dimension of its associated vector space.
+TODO
+prove that dimension if unique
+\subsubsection{Basis theorem}
+For a vector space $V$ of dimension $n\in\bbN$, for any $m$ linearly independent vectors $v_1,\ldots,v_m$ in $V$ with $m\in\bbN_{\le n}$, there exists $n-m$ vectors $v_{m+1},\ldots,v_n$ in $V$ such that $v_1,\ldots,v_n$ are linearly independent. Moreover, any such $v_1,\ldots,v_n$ is a basis of $V$.
+TODO
+prove
+\subsubsection{Finite dimension space linear dependence}
+For a vector space $V$ of dimension $n\in\bbN$, for any $m>n$ vectors $v_1,\ldots,v_m$ in $V$, they must be linearly dependent. 
+TODO
+prove
 \subsubsection{Bilinear form (雙線性形式)}
 Let $V$ be a vector space of dimension $n$ over a field $\mathbb{K}$. A map $B\colon V\times V\rightarrow \mathbb{K}$ is a bilinear form on the space if:
 \begin{enumerate}
@@ -203,22 +211,8 @@ Given two affine spaces $A$ and $B$ whose associated vector spaces are $\mathscr
 is a well-defined linear map.
 \subsubsection{Affine transformation (仿射變換)}
 An affine transformation is a bijection from an affine space onto itself that is an affine map.
-\subsubsection{Euclidean vector space}
-A Euclidean vector space $E$ is a finite-dimensional vector space over the real numbers equipped with an inner product
-\[\langle \cdot ,\cdot \rangle \colon E\times E\to\mathbb{R},\]
-and a norm $\|\cdot\|$ defined as:
-\[\|v\|=\sqrt{\langle v,v\rangle},\]
-and a metric, called the Euclidean distance $d(\cdot,\cdot)\colon E\times E\to\mathbb{R}$, defined as:
-\[d(v,w)=\|v-w\|.\]
-\subsubsection{Standard (unit/basis) vector}
-For a Euclidean vector space, the standard (unit/basis) vectors are the unit vectors with one component being 1 and others being 0.
 \subsubsection{Von Neumann bounded or bounded}
 Suppose $X$ is a topological vector space over a field $\mathbb{K}$. A subset $B$ of $X$ is called von Neumann bounded (or bounded) in $X$ if for every neighborhood $V$ of the origin, there exists a real $r>0$ such that $B\subseteq sV$ for all scalars $s$ satisfying $|s|\geq r$.
-\subsubsection{Euclidean affine space (歐幾里德仿射空間) or Euclidean space (歐幾里得空間)}
-A Euclidean space, also known as Euclidean affine space, is an affine space over $\mathbb{R}$ such that the associated vector space is a Euclidean vector space.
-
-A Euclidean space is equipped with a metric, called the Euclidean distance $d(\cdot,\cdot)\colon E\times E\to\mathbb{R}$, defined as:
-\[d(v,w)=\|v-w\|.\]
 \subsubsection{Convex set (凸集)}
 Let $S$ be a vector space or an affine space over some ordered field. A subset $C$ of $S$ is convex if, for all $x$ and $y$ in $C$, the line segment connecting $x$ and $y$ is included in $C$.
 \subsubsection{(Algebraic) dual (對偶) (vector) (space)}
@@ -239,31 +233,12 @@ A strong dual space is a continuous dual space of a TVS equipped with the strong
 The strong dual topology is defined as the topology generated by $T$, and thus $B'$ is a LCTVS.
 \subsubsection{Orthogonal complement (正交補)}
 An orthogonal complement of a subspace $W$ of a vector space $V$ equipped with a bilinear form $B$ is the set $W^{\perp }$ of all vectors in $V$ that are orthogonal to every vector in $W$, of which $v\in V$ is orthogonal to $w\in V$ if and only if $B(v,w)=0$.
-\subsubsection{Affine hull (仿射包)}
+\subsubsection{Affine combination}
 An affine combination is a linear combination of points where all coefficients sum up to 1.
-
-The affine hull $\operatorname{aff} (S)$ of a set of points $S$ in a Euclidean space is the smallest affine space that contains all the points in $S$, namely, the set of all affine combinations of the points in $S$, i.e.:
-\[\operatorname{aff}(S)=\left\{\sum _{i=1}^k\alpha _ix_i\colon k>0,x_i\in S,\alpha _i\in\mathbb{R},\sum _{i=1}^k\alpha _i=1\right\}\]
-\subsubsection{Convex hull (凸包)}
+\subsubsection{Convex combination}
 A convex combination is a linear combination of points where all coefficients are non-negative and sum up to 1.
-
-The convex hull $\operatorname{conv} (S)$ of a set of points $S$ in a Euclidean space is the smallest convex set that contains all the points in $S$, namely, the set of all convex combinations of points in $S$, i.e.:
-\[\operatorname{conv}(S)=\left\{\sum _{i=1}^k\alpha _ix_i\colon k>0,x_i\in S,\alpha _i\in [0,1],\sum _{i=1}^k\alpha _i=1\right\}\]
 \subsubsection{Coordinate system (座標/坐標系統)}
 A coordinate system is a system that uses one or more numbers, or coordinates, to uniquely determine the points on a manifold.
-\subsubsection{Cartesian coordinate system (笛卡爾座標系統) or rectangular coordinate system (直角座標系統)}
-The Cartesian or rectangular coordinate system is a coordinate system in a Euclidean vector space $E$ determined by an orthogonal basis of unit vectors such that the inner product of two vectors in $E$ equals to the dot product of them, and that the norm of $E$ is 2-norm.
-\subsubsection{Lattice points (格子點)}
-In a Cartesian coordinate system, vectors whose components are all integers are called lattice points.
-\subsubsection{Quadrant (象限)}
-In two dimensions,
-\RNum{1}(+, +), \RNum{2}(-, +), \RNum{3}(-, -), \RNum{4}(+, -).
-\subsubsection{Right-hand rule (右手定則)}
-Right-hand rule is a common used orientation for a three-dimensional space. In a right-handed Cartesian coordinate system, if you point the thumb of your right hand in the positive $x$-axis direction and your index finger in the positive $y$-axis direction, then your middle finger (extended perpendicularly from the palm) will point in the positive $z$-axis direction. If not specified otherwise, right-handed Cartesian coordinate system is usually used.
-\subsubsection{Octant (卦限)}
-In three dimensions, \RNum{1}(+, +, +), \RNum{2}(-, +, +), \RNum{3}(-, -, +), \RNum{4}(+, -, +), \RNum{5}(+, +, -), \RNum{6}(-, +, -), \RNum{7}(-, -, -), \RNum{8}(+, -, -).
-\subsubsection{Curvilinear coordinate system}
-A curvilinear coordinate system is a coordinate system for Euclidean space such that there exists an invertible map from a Cartesian coordinate system to it.
 \subsubsection{Projection (投影)}
 A (vector) projection onto a subset $U$ of a vector space $V$ is a linear operator $P\colon V\to U$ such that $P^2=P$, denoted as $\proj_UP$. The property $P^2=P$ is called idempotency (冪等性). Its norm is called scalar projection denoted as $\comp_UP$.
 \subsubsection{Orthographic projection (正射影)}
@@ -295,7 +270,7 @@ denoted as $D\parallel E$.
 \subsubsection{Coplanar}
 Multiple elements of a vector or affine space are called coplanar if they are in the same 2D affine subspace.
 \subsubsection{Elementwise multiplication}
-Fot two vectors $\mb{u}=(u_1,\ldots,u_n)$ and $\mb{v}=(v_1,\ldots,v_n)$, their elementwise multiplication, denoted as $\mb{u}\odot\mb{v}$, is defined as
+For two vectors consists of scalar components $\mb{u}=(u_1,\ldots,u_n)$ and $\mb{v}=(v_1,\ldots,v_n)$, their elementwise multiplication, denoted as $\mb{u}\odot\mb{v}$, is defined as
 \[\mb{u}\odot\mb{v}=(u_1v_1,\ldots,u_nv_n).\]
 \subsubsection{Unit vector (單位向量) or normalized vector}
 A unit vector or a normalized vector in a normed vector space is a vector of norm 1, denoted by a lowercase letter with a circumflex or hat, as in $\hat{\mathbf{v}}$ (pronounced "v-hat"). The unit vector or normalized vector $\hat{\mathbf{u}}$ of a non-zero vector $\mathbf{u}$ in a normed vector space equipped with a norm $\|\cdot\|$ is defined as:
@@ -308,9 +283,6 @@ A $k$-simplex or $k$-dimensional simplex in an affine space $U$ is a set
 where
 \[u_0,u_1,\ldots,u_k\in U\]
 are affine independent and called vertices of the simplex.
-\subsubsection{Standard, unit, or probability simplex}
-The standard, unit, or probability $k$-simplex is the simplex in $\bbR^{k+1}$ whose vertices are the unit vectors of each axis, that is, the set
-\[\{(p_0,p_1,\ldots,p_k)\mid\sum_{i=0}^kp_i=1\land p_0,p_1,\ldots,p_k\in\bbR_{\ge0}\}.\]
 \subsubsection{Gram matrix, Gramian matrix, or Gramian}
 For $n$ vectors $v_1,v_2,\ldots,v_n$ in an inner product space, the Gram matrix, Gramian matrix, or Gramian $G$ is defined as an $n\times n$ matrix where
 \[G_{ij}=\langle v_i,v_j\rangle.\]
@@ -319,12 +291,35 @@ The Gram determinant or Gramian is the determinant of the Gram matrix.
 For a function $f\colon U\subseteq\bbR^n\to\bbR$ (or $\bbC$), the support of it, denoted as $\supp(f)$, is defined as
 \[\supp(f)=\closure(\{x\in U\mid f(x)\neq 0\}).\]
 If $\supp(f)$ is a compact set, $f$ is called with compact support. If $\supp(f)$ is a compact subset of a set $V\subseteq U$, $f$ is called with compact support on $V$.
+\subsection{Euclidean vector space}
+\subsubsection{Euclidean vector space}
+A Euclidean vector space is a finite-dimensional inner product space over the real numbers, denoted as $\bbR^n$ for dimension $n$. The norm-induced metric $d(v,w)=\|v-w\|$ is called the Euclidean distance
+\subsubsection{Standard (unit/basis) vector}
+For a Euclidean vector space, the standard (unit/basis) vectors are the unit vectors with one component being 1 and others being 0.
+\subsubsection{Euclidean affine space (歐幾里德仿射空間) or Euclidean space (歐幾里得空間)}
+A Euclidean space, also known as Euclidean affine space, is an affine space over $\mathbb{R}$ such that the associated vector space is a Euclidean vector space, and is equipped with the same norm and metric as the associated Euclidean vector space.
+\subsubsection{Affine hull (仿射包)}
+The affine hull $\operatorname{aff} (S)$ of a set of points $S$ in a Euclidean space is the smallest affine space that contains all the points in $S$, namely, the set of all affine combinations of the points in $S$, i.e.:
+\[\operatorname{aff}(S)=\left\{\sum _{i=1}^k\alpha _ix_i\colon k>0,x_i\in S,\alpha _i\in\mathbb{R},\sum _{i=1}^k\alpha _i=1\right\}\]
+\subsubsection{Convex hull (凸包)}
+The convex hull $\operatorname{conv} (S)$ of a set of points $S$ in a Euclidean space is the smallest convex set that contains all the points in $S$, namely, the set of all convex combinations of points in $S$, i.e.:
+\[\operatorname{conv}(S)=\left\{\sum _{i=1}^k\alpha _ix_i\colon k>0,x_i\in S,\alpha _i\in [0,1],\sum _{i=1}^k\alpha _i=1\right\}\]
+\subsubsection{Cartesian coordinate system (笛卡爾座標系統) or rectangular coordinate system (直角座標系統)}
+The Cartesian or rectangular coordinate system is a coordinate system in a Euclidean vector space $E$ determined by an orthogonal basis of unit vectors such that the inner product of two vectors in $E$ equals to the dot product of them, and that the norm of $E$ is 2-norm.
+\subsubsection{Lattice points (格子點)}
+In a Cartesian coordinate system, vectors whose components are all integers are called lattice points.
+\subsubsection{Curvilinear coordinate system}
+A curvilinear coordinate system is a coordinate system for Euclidean space such that there exists an invertible map from a Cartesian coordinate system to it.
+\subsubsection{Standard, unit, or probability simplex}
+The standard, unit, or probability $k$-simplex is the simplex in $\bbR^{k+1}$ whose vertices are the unit vectors of each axis, that is, the set
+\[\{(p_0,p_1,\ldots,p_k)\mid\sum_{i=0}^kp_i=1\land p_0,p_1,\ldots,p_k\in\bbR_{\ge0}\}.\]
 \subsubsection{Rectangle}
 An open rectangle in $\mathbb{R}^n$ is the product of $n$ open intervals.
 
 An closed rectangle in $\mathbb{R}^n$ is the product of $n$ closed intervals.
 
 Rectangle may refer to either, or product of $n$ intervals, or product of $n$ intervals satisfying certain constraints, depending on context, and often the case they make no non-trivial difference if not specified.
+\subsection{Tensor}
 \subsubsection{Tensor}
 Let $V$ be a vector space and $V^*$ be its dual. A tensor of type $(r,s)$ is a multilinear map
 \[T\colon (V^*)^r\times V^s\to\bbR,\]
@@ -351,7 +346,14 @@ Each upper index $\mu$ is fixed to a summation $\sum_{\mu=0}^{\dim(V)}$ when it 
 Each lower index $\mu$ is fixed to a summation $\sum_{\mu=0}^{\dim(V)}$ when it takes an input of the same lower index $\mu$, i.e.
 \[T^{\ldots_1}_{\mu\ldots_2}U^{\ldots_3}_{\mu\ldots_4}=\sum_{\mu=0}^{\dim(V)}T^{\ldots_1}_{\mu\ldots_2}U^{\ldots_3}_{\mu\ldots_4}.\]
 The indexing replaces the order of them in a formula and makes the multiplication notation of tensors work without extra notations.
-\subsection{In three dimensions}
+\subsection{Two dimensional Euclidean vector space}
+\subsubsection{Quadrant (象限)}
+\RNum{1}(+, +), \RNum{2}(-, +), \RNum{3}(-, -), \RNum{4}(+, -).
+\subsection{Three dimensional Euclidean vector space}
+\subsubsection{Right-hand rule (右手定則)}
+Right-hand rule is a common used orientation for a three-dimensional space. In a right-handed Cartesian coordinate system, if you point the thumb of your right hand in the positive $x$-axis direction and your index finger in the positive $y$-axis direction, then your middle finger (extended perpendicularly from the palm) will point in the positive $z$-axis direction. If not specified otherwise, right-handed Cartesian coordinate system is usually used.
+\subsubsection{Octant (卦限)}
+\RNum{1}(+, +, +), \RNum{2}(-, +, +), \RNum{3}(-, -, +), \RNum{4}(+, -, +), \RNum{5}(+, +, -), \RNum{6}(-, +, -), \RNum{7}(-, -, -), \RNum{8}(+, -, -).
 \subsubsection{Cross product (叉積), external product (外積), or vector product (向量積)}
 The cross product of vector $\mathbf{a}=(a_1,a_2,a_3)$ and $\mathbf{b}=(b_1,b_2,b_3)$ is defined as:
 \[\mathbf{a}\times\mathbf{b}=\det\begin{pmatrix}\mathbf{i} & \mathbf{j} & \mathbf{k}\\a_1 & a_2 & a_3\\b_1 & b_2 & b_3\end{pmatrix},\]
