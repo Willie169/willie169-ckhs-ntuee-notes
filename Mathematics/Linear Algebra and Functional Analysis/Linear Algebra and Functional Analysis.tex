@@ -430,14 +430,14 @@ A zero matrix $\mathbf{O}$ over a field $F$ is a matrix of which all entries are
 \subsubsection{Identity matrix (單位矩陣)}
 An identity matrix $\mathbf{I}$ over a field $F$ is a square matrix of which all diagonal entries are the multiplicative identity of $F$ and all off-diagonal entries are the multiplicative absorbing element $0_F$ of $F$ (i.e. $\forall x\in F\colon x\times 0_F=0_F$), that is, let $n\times n$ identity matrix over $F$ be $\mathbf{I}_n$, for any $m\times n$ matrices $\mathbf{A}$ over $F$, it satisfies:
 \[\mathbf{A}\mathbf{I}_n=\mathbf{I}_m\mathbf{A}=\mathbf{A}\]
-\subsubsection{Kronecker product (克羅內克積)}
-If $\mathbf{A}$ is an $m\times n$ matrix and $\mathbf{B}$ is a $p\times q$ matrix, then the Kronecker product $\mathbf{A}\otimes\mathbf{B}$ is the $pm\times qn$ block matrix:
-\[(\mathbf{A}\otimes\mathbf{B})_{i,j}=a_{\lceil i/p\rceil ,\lceil j/q\rceil }b_{(i-1)\mod p+1,(j-1)\mod q+1}\]
 \subsubsection{Hadamard product (哈達瑪乘積), Schur product (舒爾乘積), elementwise product, or entrywise product (逐項乘積)}
 For two $m\times n$ matrices $\mb{A}$ and $\mb{B}$, the Hadamard product $ \mb{A}\odot \mb{B}$ or $\mb{A}\circ \mb{B}$ is an $m\times n$ matrix defined as:
 \[(\mb{A}\odot \mb{B})_{ij}=(\mb{A})_{ij}(\mb{B})_{ij}.\]
+\subsubsection{Kronecker product (克羅內克積)}
+If $\mathbf{A}$ is an $m\times n$ matrix and $\mathbf{B}$ is a $p\times q$ matrix, then the Kronecker product $\mathbf{A}\otimes\mathbf{B}$ is the $pm\times qn$ block matrix:
+\[(\mathbf{A}\otimes\mathbf{B})_{i,j}=a_{\ceil{\frac{i}{p}},\ceil{\frac{j}{q}}}b_{((i-1)\mod p)+1,((j-1)\mod q)+1}\]
 \subsubsection{Property}
-For scalars $r$ and $s$, matrices $A$, $B$, $C$, $D$, zero matrix $O$, and identity matrix $I$, assuming that all of the following operations hold, $\neq$ means not necessarily equals:
+For any scalars $r$ and $s$, $m\times n$ matrices $A$, $B$, $C$, $D$, zero matrix $O$, and identity matrix $I$, the following statements are true,
 \[A+B=B+A\]
 \[A+(B+C)=(A+B)+C\]
 \[r(A+B)=rA+rB\]
@@ -448,17 +448,50 @@ For scalars $r$ and $s$, matrices $A$, $B$, $C$, $D$, zero matrix $O$, and ident
 \[A(B+C)=AB+AC\]
 \[(A+B)C=AC+BC\]
 \[(A+B)(C+D)=AC+AD+BC+BD\]
-\[AB\neq BA\]
-\[(AB=AC\land A\neq O)\nRightarrow B=C\]
-\[A^2=O\nRightarrow A=O\]
-\[AB=O\nRightarrow(A=O\lor B=O)\]
-\[A^2=I\iff A=A^{-1}\nRightarrow A=\pm I\]
-\[AB=I\nRightarrow(\exists r\in\mathbb{R}\colon A=rI\land B=\frac{I}{r})\]
-\[AB=B\nRightarrow A=I\]
-\[ACB=ADB\nRightarrow C=D\]
 \[A\odot B=B\odot A\]
 \[A\odot(B\odot C)=(A\odot B)\odot C\]
 \[A\odot(B+C)=A\odot B+A\odot C\]
+the following statements are not necessarily true,
+\[AB=BA\]
+\bpr
+Counterexample:
+\[A=\begin{pmatrix}1&0\\0&0\end{pmatrix}\]
+\[B=\begin{pmatrix}0&1\\1&0\end{pmatrix}\]
+\[AB=\begin{pmatrix}0&1\\0&0\end{pmatrix}\]
+\[BA=\begin{pmatrix}0&0\\1&0\end{pmatrix}\]
+\epr
+\[(AB=AC\land A\neq O)\Rightarrow B=C\]
+\bpr
+Counterexample:
+\[A=\begin{pmatrix}1&0\\0&0\end{pmatrix}\]
+\[B=\begin{pmatrix}1&0\\0&1\end{pmatrix}\]
+\[C=\begin{pmatrix}1&0\\0&2\end{pmatrix}\]
+\[AB=AC=A\]
+\epr
+\[(ACB=ADB\land A\neq O\land B\neq O)\Rightarrow C=D\]
+\bpr
+Counterexample:
+\[A=\begin{pmatrix}1&0\\0&0\end{pmatrix}\]
+\[B=C=\begin{pmatrix}1&0\\0&1\end{pmatrix}\]
+\[D=\begin{pmatrix}1&0\\0&2\end{pmatrix}\]
+\[ACB=AC=ADB=AD=A\]
+\epr
+\[A^2=O\Rightarrow A=O\]
+\bpr
+Counterexample:
+\[A=\begin{pmatrix}0&1\\0&0\end{pmatrix}\]
+\epr
+\[AB=O\Rightarrow(A=O\lor B=O)\]
+\bpr
+Counterexample:
+\[A=\begin{pmatrix}1&0\\0&0\end{pmatrix}\]
+\[B=\begin{pmatrix}0&0\\0&1\end{pmatrix}\]
+\epr
+\[AB=B\Rightarrow A=I\]
+\bpr
+Counterexample:
+\[A=B=AB=\begin{pmatrix}1&0\\0&0\end{pmatrix}\]
+\epr
 \subsubsection{Zero exponent}
 Given an $n\times n$ matrix $\mathbf{A}$ and $n\times n$ identity matrix $\mathbf{I}$, $\mathbf{A}^0$ is defined as $\mathbf{I}$.
 \subsection{Matrix row and column operations}
@@ -489,7 +522,7 @@ If one matrix can be transformed to another through a sequence of column operati
 The transpose of an $m\times n$ matrix $\mathbf{A}$ is the $n\times m$ matrix $\mathbf{A}^\top$:
 \[(\mathbf{A}^\top)_{i,j}=a_{j,i}\]
 \subsubsection{Symmetric matrix (對稱矩陣)}
-$\mathbf{A}$ is called a symmetric matrix if $\mathbf{A}=\mathbf{A}^\top$.
+$\mathbf{A}$ is called a symmetric matrix iff $\mathbf{A}=\mathbf{A}^\top$.
 \subsubsection{Skew-symmetric matrix/antisymmetric matrix (反對稱矩陣)}
 $\mathbf{A}$ is called a skew-symmetric matrix or an antisymmetric matrix if $\mathbf{A}=-\mathbf{A}^\top$.
 \subsubsection{Transpose identities}
@@ -535,6 +568,12 @@ Let $\mathbf{A}$ be an $n\times n$ matrix, the following prepositions are equiva
 &\operatorname{rank}(\mathbf{A})=n\\
 &\mathbf{A}\text{存在非零的特徵值}
 \end{aligned}\]
+
+TOOD
+\[\exists A^{-1}\land A^2=I\iff A=A^{-1}\nRightarrow A=\pm I\]
+\[AB=I\Rightarrow(\exists A^{-1})\]
+
+
 \subsubsection{Non-invertible matrix (不可逆矩陣), non-orthogonal matrix (非正交矩陣), non-orthonormal matrix (非正則矩陣), singular matrix (奇異矩陣), or degenerate matrix (退化矩陣)}
 An non-invertible matrix, non-orthogonal matrix, non-orthonormal matrix, singular matrix, or degenerate matrix is a matrix that is not an invertible matrix.
 \subsubsection{Inverse of a two-by-two matrix}
