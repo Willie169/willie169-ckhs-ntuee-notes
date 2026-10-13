@@ -38,11 +38,11 @@ For a component's input, input impedance is the impedance relative to ground as 
 
 For a component's output, output impedance is the impedance relative to ground as seemed from the input.
 \sssc{Differential and common-mode impedance}
-For two input terminals, the differential input impedance is the input impedance relative to ground as seemed by them when an ideal source connects them directly.
+For two input terminals, the differential input impedance is the input impedance relative to ground as seemed by them when a ideal source connects them directly.
 
 For two input terminals, the common-mode input impedance is the input impedance relative to ground as seemed by them when an ideal source's output connects both of them.
 \sssc{Differential and common-mode transfer function}
-For two input terminals, the differential transfer function is the transfer function when an ideal source connecting them directly is treated as input signal.
+For two input terminals, the differential transfer function is the transfer function when they are connected to $\frac{1}{2}$ differential input signal and $-\frac{1}{2}$ differential input signal respectively.
 
 For two input terminals, the common-mode transfer function is the transfer function when an ideal source's output connecting both of them is treated as input signal.
 \ssc{Amplifier (amp)}
@@ -249,13 +249,13 @@ Common-mode gain $A_{cm}$ and differential gain $A_d$, defined by
 \[v_o=v_{cm}A_{cm}+v_dA_d,\]
 are
 \[A_{cm}=\frac{R_g}{R_2+R_g}\qty(1-\frac{R_2}{R_g}\frac{R_f}{R_1})\]
-\[A_d=\frac{R_g}{R_2+R_g}\qty(1+\frac{R_2+2R_g}{R_g}\frac{R_f}{R_1})\]
+\[A_d=\frac{1}{2}\frac{R_g}{R_2+R_g}\qty(1+\frac{R_2+2R_g}{R_g}\frac{R_f}{R_1})\]
 Common-mode rejection ratio (CMRR) is defined as
 \[\tx{CMRR}=20\log\abs{\frac{A_d}{A_{cm}}}\]
 To make $A_{cm}=0$, we need
 \[\frac{R_f}{R_1}=\frac{R_g}{R_2},\]
 at which
-\[A_d=\frac{R_f}{R_1}=\frac{R_g}{R_2}\]
+\[A_d=\frac{R_f}{2R_1}=\frac{R_g}{2R_2}\]
 Differential input resistance $R_d$ is
 \[R_d=R_1+R_2\]
 Thus, high differential gain hurts differential input resistance, which lower the voltage applied to the amplifier since source has internal resistance.
@@ -278,19 +278,19 @@ Sum:
 \[v_2=v_{cm}+\frac{v_d}{2}\]
 \[\ba
 	v_o&=-\frac{R_f}{R_1}\qty(v_{cm}-\frac{v_d}{2})+\frac{R_g}{R_2+R_g}\qty(1+\frac{R_f}{R_1})\qty(v_{cm}+\frac{v_d}{2})\\
-	&=\frac{R_g}{R_2+R_g}\qty(1-\qty(\frac{R_2+R_g}{R_g}-1)\frac{R_f}{R_1})v_{cm}+\frac{R_g}{R_2+R_g}\qty(1+\qty(\frac{R_2+R_g}{R_g}+1)\frac{R_f}{R_1})v_d\\
-	&=\frac{R_g}{R_2+R_g}\qty(1-\frac{R_2}{R_g}\frac{R_f}{R_1})v_{cm}+\frac{R_g}{R_2+R_g}\qty(1+\frac{R_2+2R_g}{R_g}\frac{R_f}{R_1})v_d
+     &=\frac{R_g}{R_2+R_g}\qty(1-\qty(\frac{R_2+R_g}{R_g}-1)\frac{R_f}{R_1})v_{cm}+\frac{R_g}{R_2+R_g}\qty(1+\qty(\frac{R_2+R_g}{R_g}+1)\frac{R_f}{R_1})\frac{v_d}{2}\\
+     &=\frac{R_g}{R_2+R_g}\qty(1-\frac{R_2}{R_g}\frac{R_f}{R_1})v_{cm}+\frac{R_g}{R_2+R_g}\qty(1+\frac{R_2+2R_g}{R_g}\frac{R_f}{R_1})\frac{v_d}{2}
 	\ea\]
 \[A_{cm}=\frac{R_g}{R_2+R_g}\qty(1-\frac{R_2}{R_g}\frac{R_f}{R_1})\]
-\[A_d=\frac{R_g}{R_2+R_g}\qty(1+\frac{R_2+2R_g}{R_g}\frac{R_f}{R_1})\]
+\[A_d=\frac{1}{2}\frac{R_g}{R_2+R_g}\qty(1+\frac{R_2+2R_g}{R_g}\frac{R_f}{R_1})\]
 To make $A_{cm}=0$, we need
 \[1=\frac{R_2}{R_g}\frac{R_f}{R_1}\]
 \[\frac{R_f}{R_1}=\frac{R_g}{R_2}\]
 at which
 \[\ba
-	A_d&=\frac{R_g}{R_2+R_g}\qty(1+\frac{R_2+2R_g}{R_g}\frac{R_f}{R_1})\\
-	&=\frac{R_g}{R_2+R_g}\qty(1+\frac{R_2+2R_g}{R_2})\\
-	&=\frac{R_g}{R_2}
+  A_d&=\frac{1}{2}\frac{R_g}{R_2+R_g}\qty(1+\frac{R_2+2R_g}{R_g}\frac{R_f}{R_1})\\
+     &=\frac{1}{2}\frac{R_g}{R_2+R_g}\qty(1+\frac{R_2+2R_g}{R_2})\\
+	   &=\frac{R_g}{2R_2}
 \ea\]
 Differential input resistance:
 \[i_d=\frac{v_+}{R_g}=\frac{v_2-v_+}{R_2}=\frac{v_+-v_2+v_d}{R_1}\]
