@@ -740,6 +740,8 @@ A matrix is said to be in reduced row echelon form iff:
 \een
 \subsubsection{Pivot position}
 For a matrix $A$ and its (unique, which will be proven later) reduced row echelon form $R$, the position containing a leading entry of a nonzero row is called pivot position, a column containing a pivot position is called pivot column, and a row containing a pivot position is called pivot row.
+
+The number of pivot positions, the number of pivot columns, and the number of pivot rows are the number of nonzero row of $R$.
 \subsubsection{Gaussian Elimination (高斯消去法)}
 Gaussian elimination is a recursive algorithm to solve a system of linear equations by finding the row-equivalent row echelon form of the augmented matrix.
 \ben
@@ -797,68 +799,56 @@ Similarly, we can obtain that
 Therefore,
 \[\dim(\operatorname{Col}(\mathbf{A}))=\dim(\operatorname{Col}(\mathbf{R}^\top))=\dim(\operatorname{Col}(\mathbf{A}^\top)).\]
 \end{proof}
-\subsubsection{Rank is number of nonzero rows of reduced row echelon form}
-The rank of a matrix is the number of nonzero rows of its row-equivalent reduced row echelon form.
-\bpr
-Since row operations don't change the row space.
-\epr
 \subsubsection{Rank-nullity theorem (秩—零化度定理)}
-For any $n\times n$ matrix $\mathbf{A}$:
-\[\text{rank}(\mathbf{A}) + \dim(\ker(\mathbf{A})) = n\]
+For any $m\times n$ matrix $\mathbf{A}$:
+\[\rank(\mathbf{A})+\dim(\ker(\mathbf{A}))=n\]
 \begin{proof}
-Let \(\mathbf{A}\) be an \(m \times n\) matrix with \(r\) linearly independent columns (i.e., \(\text{rank}(\mathbf{A}) = r\)). We will show that there exists a set of \(n - r\) linearly independent solutions to the homogeneous system \(\mathbf{Ax} = \mathbf{0}\).
+Let \(\mathbf{A}\) be an \(m\times n\) matrix with rank \(r\). We will show that there exists a set of \(n-r\) linearly independent solutions to the homogeneous system \(\mathbf{Ax}=\mathbf{0}_m\) where $\mb{x}$ is an $n$-dimensional column vector.
 
-To do this, we will produce an \(n \times (n-r)\) matrix \(\mathbf{X}\) whose columns form a basis of the null space of \(\mathbf{A}\).
+To do this, we will produce an \(n\times(n-r)\) matrix \(\mathbf{X}\) whose columns form a basis of the null space of \(\mathbf{A}\).
 
 Without loss of generality, assume that the first \(r\) columns of \(\mathbf{A}\) are linearly independent. So, we can write
-\[\mathbf{A} = \begin{pmatrix} \mathbf{A}_1 & \mathbf{A}_2\end{pmatrix},\]
+\[\mathbf{A}=\begin{pmatrix}\mathbf{A}_1&\mathbf{A}_2\end{pmatrix},\]
 where
 \begin{itemize}
 \item \(\mathbf{A}_1\) is an \(m \times r\) matrix with \(r\) linearly independent column vectors, and
-\item \(\mathbf{A}_2\) is an \(m \times (n-r)\) matrix such that each of its \(n-r\) columns is a linear combination of the columns of \(\mathbf{A}_1\).
+\item \(\mathbf{A}_2\) is an \(m\times(n-r)\) matrix such that each of its \(n-r\) columns is a linear combination of the columns of \(\mathbf{A}_1\).
 \end{itemize}
 This means that \(\mathbf{A}_2 = \mathbf{A}_1\mathbf{B}\) for some \(r \times (n-r)\) matrix \(\mathbf{B}\), and hence,
 \[\mathbf{A} = \begin{pmatrix} \mathbf{A}_1 & \mathbf{A}_1\mathbf{B}\end{pmatrix}.\]
 Let
 \[\mathbf{X} = \begin{pmatrix} -\mathbf{B} \\ \mathbf{I}_{n-r} \end{pmatrix},\]
-where \(\mathbf{I}_{n-r}\) is the \((n-r) \times (n-r)\) identity matrix. So, \(\mathbf{X}\) is an \(n \times (n-r)\) matrix such that
+Then,
 \[\mathbf{A}\mathbf{X} = \begin{pmatrix}\mathbf{A}_1 & \mathbf{A}_1\mathbf{B} \end{pmatrix}\begin{pmatrix} -\mathbf{B} \\ \mathbf{I}_{n-r} \end{pmatrix} = -\mathbf{A}_1\mathbf{B} + \mathbf{A}_1\mathbf{B} = \mathbf{0}_{m \times (n-r)}.\]
-Therefore, each of the \(n-r\) columns of \(\mathbf{X}\) are particular solutions of \(\mathbf{Ax} = \mathbf{0}_{\mathbb{F}^m}\).
+Therefore, each of the \(n-r\) columns of \(\mathbf{X}\) is a solution of \(\mathbf{Ax} = \mathbf{0}_m\).
 
-Furthermore, the \(n-r\) columns of \(\mathbf{X}\) are linearly independent because \(\mathbf{Xu} = \mathbf{0}_{\mathbb{F}^n}\) will imply \(\mathbf{u} = \mathbf{0}_{\mathbb{F}^{n-r}}\) for \(\mathbf{u} \in \mathbb{F}^{n-r}\):
-\[\mathbf{X}\mathbf{u} = \mathbf{0}_{\mathbb{F}^n} \implies \begin{pmatrix}
+Furthermore, we claim that the \(n-r\) columns of \(\mathbf{X}\) are linearly independent. We show that $\mathbf{0}_{n-r}$ is the only $(n-r)$-dimensional column vector $\mb{u}$ such that
+\[\mathbf{Xu}=\mathbf{0}_n\]
+\[\begin{pmatrix}
 -\mathbf{B} \\
  \mathbf{I}_{n-r}
-\end{pmatrix}\mathbf{u} = \mathbf{0}_{\mathbb{F}^n} \implies \begin{pmatrix}
+\end{pmatrix}\mathbf{u} = \begin{pmatrix}
 -\mathbf{B}\mathbf{u} \\
  \mathbf{u}
 \end{pmatrix} = \begin{pmatrix}
-\mathbf{0}_{\mathbb{F}^r} \\
- \mathbf{0}_{\mathbb{F}^{n-r}}
-\end{pmatrix} \implies \mathbf{u} = \mathbf{0}_{\mathbb{F}^{n-r}}.\]
+\mathbf{0}_r \\
+ \mathbf{0}_{n-r}
+\end{pmatrix}\]
+We next prove that any solution of \(\mathbf{Ax} = \mathbf{0}_{m}\) must be in the column space of \(\mathbf{X}\). Let the submatrix of the top $r$ rows of $\mb{x}$ be $\mb{x}_1$ and the submatrix of the bottom $n-r$ rows of $\mb{x}$ be $\mb{x}_2$.
+\[\mathbf{A}\mathbf{x} = \begin{pmatrix}\mathbf{A}_1 & \mathbf{A}_1\mathbf{B}\end{pmatrix} \begin{pmatrix} \mathbf{x}_1 \\ \mathbf{x}_2 \end{pmatrix} = \mathbf{A}_1\mathbf{x}_1 + \mathbf{A}_1\mathbf{B}\mathbf{x}_2 = \mathbf{A}_1(\mathbf{x}_1 + \mathbf{B}\mathbf{x}_2) = \mathbf{0}_{m} \]
+Since the columns of \(\mathbf{A}_1\) are linearly independent, \(\mathbf{A}_1\mathbf{u} = \mathbf{0}_{r}\) implies \(\mathbf{u} = \mathbf{0}_{r}\), thus
+\[\mathbf{u}_1 + \mathbf{B}\mathbf{u}_2  = \mathbf{0}_{r} \]
+\[\mathbf{u} = \begin{pmatrix} -\mathbf{B} \\ \mathbf{I}_{n-r} \end{pmatrix}\mathbf{u}_2 = \mathbf{X}\mathbf{u}_2\]
 
-Therefore, the column vectors of \(\mathbf{X}\) constitute a set of \(n-r\) linearly independent solutions for \(\mathbf{Ax} = \mathbf{0}_{\mathbb{F}^m}\).
+This proves that any vector \(\mathbf{u}\) that is a solution of \(\mathbf{Ax} = \mathbf{0}\) must be a linear combination of the \(n-r\) special solutions given by the columns of \(\mathbf{X}\). And we have already seen that the columns of \(\mathbf{X}\) are linearly independent. 
 
-We next prove that any solution of \(\mathbf{Ax} = \mathbf{0}_{\mathbb{F}^m}\) must be a linear combination of the columns of \(\mathbf{X}\).
-
-Let
-\[\mathbf{u} = \begin{pmatrix}
- \mathbf{u}_1 \\
- \mathbf{u}_2
-\end{pmatrix} \in \mathbb{F}^n\]
-be any vector such that \(\mathbf{Au} = \mathbf{0}_{\mathbb{F}^m}\). Since the columns of \(\mathbf{A}_1\) are linearly independent, \(\mathbf{A}_1\mathbf{x} = \mathbf{0}_{\mathbb{F}^m}\) implies \(\mathbf{x} = \mathbf{0}_{\mathbb{F}^r}\).
-
-Therefore,
-\[\begin{aligned}
-& \mathbf{A}\mathbf{u} = \mathbf{0}_{\mathbb{F}^m} \\
-\implies & \begin{pmatrix}\mathbf{A}_1 & \mathbf{A}_1\mathbf{B}\end{pmatrix} \begin{pmatrix} \mathbf{u}_1 \\ \mathbf{u}_2 \end{pmatrix} = \mathbf{A}_1\mathbf{u}_1 + \mathbf{A}_1\mathbf{B}\mathbf{u}_2 = \mathbf{A}_1(\mathbf{u}_1 + \mathbf{B}\mathbf{u}_2) = \mathbf{0}_{\mathbb{F}^m} \\
-\implies & \mathbf{u}_1 + \mathbf{B}\mathbf{u}_2  = \mathbf{0}_{\mathbb{F}^r} \\
-\implies & \mathbf{u}_1  =  -\mathbf{B}\mathbf{u}_2\\
-\implies & \mathbf{u} = \begin{pmatrix} \mathbf{u}_1 \\ \mathbf{u}_2 \end{pmatrix} = \begin{pmatrix} -\mathbf{B} \\ \mathbf{I}_{n-r} \end{pmatrix}\mathbf{u}_2 = \mathbf{X}\mathbf{u}_2.
-\end{aligned}\]
-
-This proves that any vector \(\mathbf{u}\) that is a solution of \(\mathbf{Ax} = \mathbf{0}\) must be a linear combination of the \(n-r\) special solutions given by the columns of \(\mathbf{X}\). And we have already seen that the columns of \(\mathbf{X}\) are linearly independent. Hence, the columns of \(\mathbf{X}\) constitute a basis for the null space of \(\mathbf{A}\). Therefore, the nullity of \(\mathbf{A}\) is \(n - r\). Since \(r\) equals the rank of \(\mathbf{A}\), it follows that \(\text{rank}(\mathbf{A}) + \ker(\mathbf{A}) = n\). This concludes our proof.
+Hence, the column space of \(\mathbf{X}\) is the null space of \(\mathbf{A}\). Therefore, the nullity of \(\mathbf{A}\) is \(n - r\). Since \(r\) is the rank of \(\mathbf{A}\), it follows that \(\text{rank}(\mathbf{A}) + \ker(\mathbf{A}) = n\).
 \end{proof}
+\subsubsection{Rank is number of nonzero rows of reduced row echelon form}
+The rank of a matrix is the number of nonzero rows of its row-equivalent reduced row echelon form.
+\bpr
+Since row operations don't change the row space.
+\epr
 \subsubsection{Full rank (滿秩) and rank deficiency (秩虧)}
 For an $m\times n$ matrix $\mb{A}$, if
 \[\text{rank}(\mathbf{A}) = \min(m, n)\]
