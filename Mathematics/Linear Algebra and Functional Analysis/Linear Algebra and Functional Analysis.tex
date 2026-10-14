@@ -511,14 +511,18 @@ Counterexample:
 \subsubsection{Zero exponent}
 Given an $n\times n$ matrix $\mathbf{A}$ and $n\times n$ identity matrix $\mathbf{I}$, $\mathbf{A}^0$ is defined as $\mathbf{I}$.
 \subsection{Matrix row and column operations}
-\subsubsection{Row operations (zh-hant: 列/zh-hans: 行運算)}
-Including:
+\subsubsection{Row operations (zh-hant: 列/zh-hans: 行運算) and Column operations (zh-hant: 行/zh-hans: 列運算)}
+(Elementary) row operations include:
 \bit
-\item Row addition (zh-hant: 列/zh-hans: 行相加): Adding a row to another.
-\item Row multiplication (zh-hant: 列/zh-hans: 行加倍): Multiplying all entries of a row by a non-zero constant.
-\item Row switching (zh-hant: 列/zh-hans: 行交換): Interchanging two rows of a matrix.
+\item Row addition (zh-hant: 列/zh-hans: 行相加) operation: Adding a row to another.
+\item Row scaling (zh-hant: 列/zh-hans: 行加倍) operation: Multiplying all entries of a row by a non-zero constant.
+\item Row switching/Interchanging (zh-hant: 列/zh-hans: 行交換) operation: Interchanging two rows of a matrix.
 \eit
-If one matrix can be transformed to another through a sequence of row operations, the two matrices are called row-equivalent.
+(Elementary) column operations are the same with row replaced with column.
+
+If one matrix can be transformed to another through a sequence of elementary row operations, the two matrices are called row-equivalent.
+
+If one matrix can be transformed to another through a sequence of elementary column operations, the two matrices are called column-equivalent.
 \subsubsection{(General) row echelon form (（廣義）zh-hant: 列/zh-hans: 行階梯形式)}
 A matrix is in row echelon form if:
 \bit
@@ -526,14 +530,6 @@ A matrix is in row echelon form if:
 \item The leading entry, that is, the left-most non-zero entry, of every non-zero row is on the right of the leading entry of every row above.
 \item Some texts add the condition that the leading coefficient must be 1.
 \eit
-\subsubsection{Column operations (zh-hant: 行/zh-hans: 列運算)}
-Including:
-\bit
-\item Column addition (zh-hant: 行/zh-hans: 列相加): Adding a column to another.
-\item Column multiplication (zh-hant: 行/zh-hans: 列加倍): Multiplying all entries of a column by a non-zero constant.
-\item Column switching (zh-hant: 行/zh-hans: 列交換): Interchanging two columns of a matrix.
-\eit
-If one matrix can be transformed to another through a sequence of column operations, the two matrices are called column-equivalent.
 \subsubsection{Transpose (轉置)}
 The transpose of an $m\times n$ matrix $\mathbf{A}$ is the $n\times m$ matrix $\mathbf{A}^\top$:
 \[(\mathbf{A}^\top)_{i,j}=a_{j,i}\]
@@ -681,20 +677,26 @@ Let $\mathbf{E}$, $\mathbf{F}$ be two $n\times n$ diagonal matrices:
 \[\mathbf{E}\mathbf{F}=[e_{ij}f_{ij}]_{1\leq i,j\leq n}\]
 \subsection{System of Linear Equations (線性方程組)}
 \subsubsection{System of equations (方程組)}
+A solution to a system of equations is a choice of variables such that all equations are satisfied. Two systems of equations are called equivalent if they have exactly the same set of solutions.
 \begin{itemize}
-\item\tb{Consistent system (相容方程組)}: A system of equations is considered consistent if it has at least one solution.
-\item\tb{Inconsistent/contradictory system (相容方程組)}: A system of equations is considered inconsistent or contradictory if it has no solution.
-\item\tb{Dependent system (相依方程組)}: A consistent system of equations is considered dependent if it has infinite solutions.
-\item\tb{Independent system (獨立方程組)}: A consistent system of equations is considered independent if it has finite solutions.
-\end{itemize}
+\item\tb{Consistent system (相容方程組)}: A system of equations is consistent iff it has at least one solution.
+\item\tb{Inconsistent/contradictory system (相容方程組)}: A system of equations is inconsistent or contradictory iff it has no solution.
+\item\tb{Dependent system (相依方程組)}: A consistent system of equations is dependent iff it has infinitely many solutions.
+\item\tb{Independent system (獨立方程組)}: A system of equations is independent iff it has finitely many solutions.
+\end{itemize}`
 \subsubsection{Linear Equation (線性方程)}
 A linear equation is an equation that may be put in the from:
 \[\sum_{k=1}^na_kx_k=c,\]
 where $a_k$ and $c$ are called coefficients.
 
-If $c=0$, the linear equation is called a homogeneous linear equation; otherwise, it is called a heterogeneous linear equation.
+If $c=0$, the linear equation is called a homogeneous linear equation; otherwise, it is called a heterogeneous or non-homogeneous linear equation.
 \subsubsection{System of Linear Equations (線性方程組)}
 A system of linear equations is a collection of two or more linear equations involving the same tuple of variables.
+\subsubsection{Independent system of linear equations has exactly one solution}
+An independent system of linear equations must have exactly one solution.
+\bpr
+If more than one solution exist, their linear combinations form infinitely many solutions.
+\epr
 \subsubsection{Coefficient matrix (係數矩陣)}
 The coefficients of a system of linear equations written as a matrix, with one row for each equation.
 \subsubsection{Augmented matrix (增廣矩陣)}
