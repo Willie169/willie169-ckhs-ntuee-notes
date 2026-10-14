@@ -523,13 +523,22 @@ Given an $n\times n$ matrix $\mathbf{A}$ and $n\times n$ identity matrix $\mathb
 If one matrix can be transformed to another through a sequence of elementary row operations, the two matrices are called row-equivalent.
 
 If one matrix can be transformed to another through a sequence of elementary column operations, the two matrices are called column-equivalent.
-\subsubsection{(General) row echelon form (（廣義）zh-hant: 列/zh-hans: 行階梯形式)}
-A matrix is in row echelon form if:
-\bit
-\item All rows having only zero entries are at the bottom.
-\item The leading entry, that is, the left-most non-zero entry, of every non-zero row is on the right of the leading entry of every row above.
-\item Some texts add the condition that the leading coefficient must be 1.
-\eit
+\subsubsection{Zero row, non-zero row, and leading entry}
+A row whose all entries are zero is called a zero row, otherwise it is called a non-zero row. The left-most non-zero entry of a non-zero row is called leading entry.
+\subsubsection{(General) row echelon form (REF) (（廣義）zh-hant: 列/zh-hans: 行階梯形式)}
+A matrix is said to be in row echelon form iff:
+\ben
+\item Each non-zero lies above every zero row.
+\item The leading entry of every non-zero row lies in a column to the right of the column containing the leading entry of any row above.
+\een
+Thus, for a leading entry of any row, all entries below it in the same column are zero.
+\subsubsection{Reduced row echelon form (RREF)}
+A matrix is said to be in reduced row echelon form iff:
+\ben
+\item It is in row echelon form.
+\item Each leading entry is the only non-zero entry in the column.
+\item The leading entries of all non-zero rows are 1.
+\een
 \subsubsection{Transpose (轉置)}
 The transpose of an $m\times n$ matrix $\mathbf{A}$ is the $n\times m$ matrix $\mathbf{A}^\top$:
 \[(\mathbf{A}^\top)_{i,j}=a_{j,i}\]
@@ -681,7 +690,7 @@ A solution to a system of equations is a choice of variables such that all equat
 \begin{itemize}
 \item\tb{Consistent system (相容方程組)}: A system of equations is consistent iff it has at least one solution.
 \item\tb{Inconsistent/contradictory system (相容方程組)}: A system of equations is inconsistent or contradictory iff it has no solution.
-\item\tb{Dependent system (相依方程組)}: A consistent system of equations is dependent iff it has infinitely many solutions.
+\item\tb{Dependent system (相依方程組)}: A consistent system of equations is dependent iff it has infinitely many solutions. For a dependent system, we can solve some of the variables, called basic variables, in terms of some other variables, called free variables, such that the free variables are independent from each other and that a choice of free variables uniquely determines basic variables, providing a general solution of the system.
 \item\tb{Independent system (獨立方程組)}: A system of equations is independent iff it has finitely many solutions.
 \end{itemize}`
 \subsubsection{Linear Equation (線性方程)}
@@ -702,7 +711,7 @@ The coefficients of a system of linear equations written as a matrix, with one r
 \subsubsection{Augmented matrix (增廣矩陣)}
 Coefficient matrix with the constants on the right side of the equal signs of a system of linear equations augmented to the last column of the matrix.
 \subsubsection{Gaussian Elimination (高斯消去法) or row reduction (zh-hant: 列/zh-hans: 行簡化)}
-An algorithm to solve a system of linear equations by using row operations to modify its argumented matrix to row echelon form. Two systems of linear equations have the same solution if and only if their augmented matrices are row-equivalent.
+An algorithm to solve a system of linear equations by using row operations to modify its augmented matrix to row echelon form. Two systems of linear equations have the same solution if and only if their augmented matrices are row-equivalent.
 \subsubsection{Cramer Rule or Cramer formula (克拉瑪公式)}
 Given a system of linear equations that can be written in the form:
 \[\mathbf{A}\mathbf{X}=\mathbf{C}\]
