@@ -536,18 +536,28 @@ Counterexample:
 \subsubsection{Zero exponent}
 Given an $n\times n$ matrix $\mathbf{A}$ and $n\times n$ identity matrix $\mathbf{I}$, $\mathbf{A}^0$ is defined as $\mathbf{I}$.
 \subsection{Matrix row and column operations}
-\subsubsection{Row operations (zh-hant: 列/zh-hans: 行運算) and Column operations (zh-hant: 行/zh-hans: 列運算)}
-(Elementary) row operations include:
+\subsubsection{Elementary row operations (zh-hant: 列/zh-hans: 行運算) and elementary column operations (zh-hant: 行/zh-hans: 列運算)}
+Elementary row operations include:
 \bit
 \item Row addition (zh-hant: 列/zh-hans: 行相加) operation: Adding a row to another.
-\item Row scaling/multiplication (zh-hant: 列/zh-hans: 行加倍) operation: Multiplying all entries of a row by a nonzero constant.
-\item Row swap/switching/interchange (zh-hant: 列/zh-hans: 行交換) operation: Interchanging two rows of a matrix.
+\item Row multiplication/scaling (zh-hant: 列/zh-hans: 行加倍) operation: Multiplying all entries of a row by a nonzero constant.
+\item Row interchange/swap/switching (zh-hant: 列/zh-hans: 行交換) operation: Interchanging two rows of a matrix.
 \eit
-(Elementary) column operations are the same with row replaced with column.
+Elementary column operations are the same with row replaced with column.
 
 If one matrix can be transformed to another through a sequence of elementary row operations, the two matrices are called row-equivalent.
 
 If one matrix can be transformed to another through a sequence of elementary column operations, the two matrices are called column-equivalent.
+\subsubsection{Row operation as matrix multiplication and elementary matrix}
+Every elementary row operation on a $m\times n$ matrix $A$ can be performed by left-multiplying an appropriate $m\times m$ matrix:
+\bit
+\item Row addition operation: Adding row $i$ to row $j$ can be performed by left-multiplying $I_m$ with the $j,i$th entry replaced with $1$.
+\item Row multiplication operation: Multiplying all entries of the $i$th row by a constant $k\ne0$ can be performed by left-multiplying $I_m$ with the $i,i$th entry replaced with $k$.
+\item Row interchange operation: Interchanging row $i$ and row $j$ can be performed by left-multiplying $I_m$ with row $i$ and row $j$ interchanged.
+\eit
+A square matrix is called elementary matrix if it can be obtained from the identity matrix of its size with a single elementary row operations.
+
+Let $A$ be a $m\times n$ matrix and $E$ be an $m\times m$ elementary matrix that can be obtained by performing an elementary row operation on $I_m$. Then, $EA$ is the matrix obtained by performing the same operation on $A$.
 \subsubsection{Zero row, nonzero row, and leading entry}
 A row whose all entries are zero is called a zero row, otherwise it is called a nonzero row. The left-most nonzero entry of a nonzero row is called leading entry.
 \subsubsection{Transpose (轉置)}
@@ -632,6 +642,7 @@ The adjugate matrix or classical adjoint matrix of an $n\times n$ matrix $\mathb
 \subsubsection{Inverse (反方陣、逆方陣、反矩陣或逆矩陣), multiplicative inverse (乘法反方陣), or reciprocal}
 The inverse of an $n\times n$ matrix $\mathbf{A}$ is an $n\times n$ matrix $\mathbf{A}^{-1}$ such that:
 \[\mathbf{A}\mathbf{A}^{-1}=\mathbf{A}^{-1}\mathbf{A}=\mathbf{I}\]
+If such $\mb{A}^{-1}$ exists, $\mb{A}$ is called invertible.
 \subsubsection{Negative integer exponent}
 Given an invertible matrix $\mathbf{A}$ and a negative integer $n$, $\mathbf{A}^n$ is defined as $(\mathbf{A}^{-1})^n$.
 \subsubsection{Invertible matrix (可逆矩陣), orthogonal matrix (正交矩陣), orthonormal matrix (正則矩陣), non-singular matrix (非奇異矩陣), or non-degenerate matrix (非退化矩陣)}
@@ -667,10 +678,15 @@ An unitary matrix is a square matrix whose inverse equals to its conjugate trans
 Let $\mathbf{A}$ and $\mb{A}_i$ be invertible matrices, $\mathbf{B}$ be a matrix of the same size of $\mathbf{A}$.
 \[\mathbf{A}^{-1}=\frac{\mathrm{adj}\qty(\mathbf{A})}{\det\qty(\mathbf{A})}\]
 \[\qty(\mathbf{A}^\top)^{-1}=\qty(\mathbf{A}^{-1})^\top\]
+\bpr
+\[\mb{A}^{\top}\qty(\mb{A}^{-1})^{\top}=\qty(\mb{A}^{-1}\mb{A})^{\top}=\mb{I}^\top=\mb{I}\]
+\epr
 \[\qty(\prod_{i=1}^n\mathbf{A}_i)^{-1}=\prod_{i=1}^n\qty(\mathbf{A}_{n-i+1})^{-1}\]
 \[(\mathbf{A}^{-1}\mathbf{B}\mathbf{A})^n=\mathbf{A}^{-1}\mathbf{B}^n\mathbf{A},\quad n\in\mathbb{N}\]
 Let $A,B$ be square matrix of same size,
 \[AB=I\Rightarrow(\exists A^{-1}\land A^{-1}=B)\]
+\subsubsection{Inverse of elementary matrix}
+Every elementary matrix is invertible. Moreover, the inverse of an elementary is an elementary matrix.  
 \subsubsection{Vandermonde matrix (范德蒙矩陣)}
 A Vandermonde matrix $\mathbf{V}$ is:
 \[V_{i,j}=\alpha_i^{\pht{i}j-1}\]
@@ -693,7 +709,6 @@ where all $d_i\neq 0$, then:
 0 & \frac{1}{d_2} & \cdots & 0 \\
 \vdots & \vdots & \ddots & \vdots \\
 0 & 0 & \cdots & \frac{1}{d_n}\end{bmatrix}\]
-
 Let $\mathbf{E}$, $\mathbf{F}$ be two $n\times n$ diagonal matrices:
 \[\mathbf{E}\mathbf{F}=[e_{ij}f_{ij}]_{1\leq i,j\leq n}\]
 \subsection{System of Linear Equations (線性方程組)}
@@ -726,11 +741,11 @@ The coefficients of a system of linear equations written as a matrix, with one r
 The column vector of the constant terms on the right side of the equal signs of a system of linear equations.
 \subsubsection{Augmented matrix (增廣矩陣)}
 Coefficient matrix with the constant term vector augmented to the last column of the matrix.
-\subsubsection{Row meanings}
-\bit
-\item Two systems of linear equations have the same set of solutions iff their augmented matrices are row-equivalent.
-\item Whenever an augmented matrix contains a row in which the only nonzero entry lies in the last column, the corresponding system of linear equations has no solution.
-\eit
+\subsubsection{Row equivalent means same solutions}
+Two systems of linear equations with same size of augmented matrix have the same solutions iff their augmented matrices are row-equivalent.
+\bpr
+TODO
+\epr
 \subsubsection{Cramer Rule or Cramer formula (克拉瑪公式)}
 Given a system of linear equations that can be written in the form:
 \[\mathbf{A}\mathbf{X}=\mathbf{C}\]
@@ -821,6 +836,7 @@ The image space of a linear map $T\colon V\to W$, denoted as $\operatorname{im}(
 \subsubsection{Cokernel (餘核)}
 The cokernel of a linear map $T\colon V\to W$, denoted as $\operatorname{coker}(T)$, is defined as,
 \[\operatorname{coker}(T)=W\setminus\operatorname{im}(T).\]
+\subsection{Rank}
 \subsubsection{Rank (秩)}
 The rank of a matrix \(\mathbf{A}\), denoted as \( \operatorname{rank}(\mathbf{A}) \) or $\operatorname{rk}(\mathbf{A})$, is defined as the dimension of its column space (or row space, which are the same by constant rank theorem), that is,
 \[\text{rank}(\mathbf{A})=\dim(\operatorname{Col}(\mathbf{A}))\]
@@ -939,6 +955,8 @@ Zero vector is in all linear subspaces.
 Such matrix's row space is the whole vector space $\bbF^m$, where $m$ is the number of row.
 \epr
 \eit
+\subsubsection{Invertible coefficient matrix}
+For a linear system $Ax=b$ with invertible coefficient matrix $A$ and constant term vector $b$, then $x=A^{-1}b$ is the unique solution to it.
 \subsubsection{Solution space is an affine space with kernel as associated vector space}
 Suppose $y$ is a solution to a linear system $Ax=b$ with coefficient matrix $A$ and constant term vector $b$, then the set of all solutions of it
 \[\{y+k\colon k\in\ker(A)\}\]
