@@ -741,7 +741,9 @@ A matrix is said to be in reduced row echelon form iff:
 \subsubsection{Pivot position}
 For a matrix $A$ and its (unique, which will be proven later) reduced row echelon form $R$, the position containing a leading entry of a nonzero row is called pivot position, a column containing a pivot position is called pivot column, and a row containing a pivot position is called pivot row.
 
-The number of pivot positions, the number of pivot columns, and the number of pivot rows are the number of nonzero row of $R$.
+The number of pivot positions, the number of pivot columns, and the number of pivot rows are the number of nonzero rows of $R$.
+
+The number of non-pivot rows are the number of zero rows of $R$.
 \subsubsection{Gaussian Elimination (高斯消去法)}
 Gaussian elimination is a recursive algorithm to solve a system of linear equations by finding the row-equivalent row echelon form of the augmented matrix.
 \ben
@@ -774,6 +776,8 @@ The kernel of a linear map $L\colon V\to W$, denoted as $\ker(L)$ or $\mathrm{Nu
 $\dim(\ker(\mathbf{A}))$ is called nullity (零化度).
 \subsubsection{Left null space (左零空間), left kernel (左核), or left kernel space (左核空間)}
 The left null space of a linear map $L\colon V\to W$ is defined as $\ker(L^{-1})$.
+
+$\dim(\ker(L^{-1}))$ is called left nullity.
 \subsubsection{Image space (像空間) or range (值域)}
 The image space of a linear map $T\colon V\to W$, denoted as $\operatorname{im}(T)$, is defined as,
 \[\operatorname{im}(T)=\{T(v):\,v\in V\}.\]
@@ -844,11 +848,16 @@ This proves that any vector \(\mathbf{u}\) that is a solution of \(\mathbf{Ax} =
 
 Hence, the column space of \(\mathbf{X}\) is the null space of \(\mathbf{A}\). Therefore, the nullity of \(\mathbf{A}\) is \(n - r\). Since \(r\) is the rank of \(\mathbf{A}\), it follows that \(\text{rank}(\mathbf{A}) + \ker(\mathbf{A}) = n\).
 \end{proof}
-\subsubsection{Rank is number of nonzero rows of reduced row echelon form}
-The rank of a matrix is the number of nonzero rows of its row-equivalent reduced row echelon form.
-\bpr
-Since row operations don't change the row space.
-\epr
+\subsubsection{Rank-left nullity theorem}
+For any $m\times n$ matrix $\mathbf{A}$:
+\[\rank(\mathbf{A})+\dim(\ker(\mathbf{A}^{-1}))=m\]
+\subsubsection{Rank, nullity, left nullity and pivot columns and rows}
+Since row operations to form row-equivalent reduced row echelon form don't change the row space,
+\bit
+\item The rank of a matrix is the number of its pivot columns
+\item The nullity of a matrix is the number of non-pivot columns.
+\item The left nullity of a matrix is the number of non-pivot rows.
+\eit
 \subsubsection{Full rank (滿秩) and rank deficiency (秩虧)}
 For an $m\times n$ matrix $\mb{A}$, if
 \[\text{rank}(\mathbf{A}) = \min(m, n)\]
