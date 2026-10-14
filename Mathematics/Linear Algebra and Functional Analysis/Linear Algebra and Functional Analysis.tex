@@ -71,7 +71,7 @@ A map $T\colon V\to W$ is Invertible if and only if it is bijective. The unique 
 \subsubsection{Linear subspace, vector subspace, or subspace}
 A linear subspace of a vector space is a subset of it that is closed under vector addition and scalar multiplication, and thus a vector space.
 \subsubsection{Linear span, linear hull, or span}
-A span of a subset $S$, denoted as $\span S$ or $\langle S\rangle$, of a vector space is the smallest linear subspace containing $S$, and it is called that $S$ is a generating set of $\span S$ and $S$ generates $\span S$.
+A span of a subset $S$, denoted as $\span S$ or $\langle S\rangle$, of a vector space is the smallest linear subspace containing $S$, and it is called that $S$ is a generating/spanning set of $\span S$ and $S$ generates/spans $\span S$.
 \subsubsection{In the span iff new span unchanged}
 Let $S$ be a set of vectors and $v$ be a vector. $v\in\span S$ iff $\span S=\span(S\cup\{v\})$.
 \bpr
@@ -83,12 +83,12 @@ If: Suppose $v\notin\span S$. Since $v=1v$, $v\in\span(S\cup\{v\})\setminus S$, 
 A set of nonzero vectors \(\{v_1,\ldots,v_n\}\) is linearly independent iff the equation:
 \[\sum_{i=1}^nc_iv_i=0 \]
 is true only if all coefficients \(c_1,c_2, \dots,c_n\) are zero, then the set of vectors is linearly independent; otherwise the set of vectors is linearly dependent.
-\subsubsection{Linearly dependent vector is a linear combination of others}
-For a linearly dependent set $S$ of nonzero vectors, there exists $v\in S$ such that $v$ is a linear combination of $S\setminus\{v\}$.
+\subsubsection{Linearly dependent set condition}
+A set $S$ of vectors is linearly dependent iff either $\mb{0}\in S$ or there exists $v\in S$ such that $v\in\span(S\setminus\{v\})$.
 \bpr
-Pick a nonzero $c_k$.
+If $\mb{0}\in S$, its coefficient can be any. Otherwise, pick a nonzero $c_k$, the corresponding vector can be written as a linear combination of others.
 \epr
-\subsubsection{Linear independent set as minimum by inclusion of span}
+\subsubsection{Linear independent set as minimum span generating set by inclusion of span}
 A subset $X$ of a vector space is linearly dependent iff there exists a proper subset of $X$ whose span is the span of $X$.
 \bpr
 If: Let $X=\{x_1,\ldots,x_n\}$. There exist not all zero $c_i$ such that
@@ -96,6 +96,24 @@ If: Let $X=\{x_1,\ldots,x_n\}$. There exist not all zero $c_i$ such that
 Take any $k$ such that $c_k\ne 0$, we can write $x_k$ in terms of other $x_i$, thus $x_k$ is in the span of $X\setminus\{x_k\}$, thus $X\setminus\{x_k\}$ is a proper subset of $X$ whose span is the span of $X$.
 
 Only if: Suppose $Y$ is proper subset of $X$ such that the span of $Y$ is the span of $X$. Choose $x\in X\setminus Y$. By the definition, there exists $y_1,\ldots,y_m\in Y$ such that $x$ is a linear combination of them.
+\epr
+\subsubsection{Spanning set element exchange theorem}
+Let $S$ be a set of vectors and $v$ a nonzero vector.
+\[v\in\span S\implies\exists w\in S\colon w\in\span((S\setminus\{w\}\cup\{v\}))\]
+\bpr
+Write $v$ as a linear combination of elements of $S$. Choose one of them with nonzero coefficient, $w$, which must exist since $v$ is nonzero, $w$ can be written as a linear combination of elements in $S\setminus\{w\}\cup\{v\}$.
+\epr
+Let $S$ be a set of linearly independent vectors and $v$ a nonzero vector.
+\[v\in\span S\iff\exists w\in S\colon w\in\span((S\setminus\{w\}\cup\{v\}))\]
+\bpr
+Write $w$ as a linear combination of elements of elements in $(S\setminus\{w\}\cup\{v\}$. The $v$ term must have nonzero coefficient since otherwise $w\in\span(S\setminus\{w\})$ and $S$ is not linearly independent. Rearrange the linear combination gives $v$ as a linear combination of elements in $S$.
+\epr
+\subsubsection{Steinitz exchange lemma}
+Let $U$ be a set of $m\in\bbN$ linearly independent vectors and $W$ be a set of $n\in\bbN$ vectors such that $U\subseteq\span W$. Then, $m\le n$, and, there exists a subset $W'$ of $W$ such that $\abs{W'}\le n-m$ and $\span(U\cup W')=\span W$.
+\bpr
+First statement: Write both $U$ and $W$ as column vectors of arbitrary order. By $U\subseteq\span W$, there exists $A\in\bbF^{m\times n}$ such that $U=AW$. Because $U$ is linearly independent, $A$ must have row rank $m$. Since $\rank(A)\le\min(m,n)$, $m\le n$.
+
+Second statement: Let $W_0=W$. For each $u_i\in U$, write $u_i$ as a linear combination of elements of $W_{i-1}$. Choose one of them with nonzero coefficient, $w_i$, which must exist since $U$ is linearly independent, $w_i$ can be written as a linear combination of elements in $W_i\coloneq W_{i-1}\setminus\{w_i\}\cup\{u_i\}$.
 \epr
 \subsubsection{Basis (基)}
 The basis of a vector space $X$ over a field $F$ is a set of linearly independent vectors $\mathbf{v}=\{v_1,v_2,\dots\}\subseteq X$ such that for any vector $\mathbf{P}\in X$, there exists a unique coefficient vector $(c_1,c_2, \dots)\subseteq F$ such that:
@@ -107,7 +125,7 @@ The dimension of a vector space $V$, denoted as $\dim V$, is defined as the card
 
 The dimension of an affine space $V$, denoted as $\dim V$, is defined as the dimension of its associated vector space.
 \subsubsection{Basis extension theorem}
-For a vector space $V$ of dimension $n\in\bbN$, for any linearly independent set of $m$ vectors $v_1,\ldots,v_m$ in $V$ with $m\in\bbN_{\le n}$, there exists set of $n-m$ vectors $v_{m+1},\ldots,v_n$ in $V$ such that $\{v_1,\ldots,v_n\}$ is linearly independent. Moreover, any such $v_1,\ldots,v_n$ is a basis of $V$.
+For a vector space $V$ of dimension $n\in\bbN$, for any linearly independent set of finitely many vectors $\{v_1,\ldots,v_m\}$ in $V$, if $m=n$, it is a basis; otherwise, there exists a set of $n-m$ vectors $\{v_{m+1},\ldots,v_n\}$ in $V$ such that $\{v_1,\ldots,v_n\}$ is linearly independent, and any such $v_1,\ldots,v_n$ is a basis of $V$.
 \bpr
 For $m=n$, $\span\{v_1,\ldots,v_n\}=V$, thus $\{v_1,\ldots,v_n\}$ is a basis. For $m<n$, since $S\coloneq\span\{v_1,\ldots,v_m\}$ is of dimension $m<n$, choose any $v_{m+1}\in V\setminus S$. Assume for contradiction that $\{v_1,\ldots,v_{m+1}\}$ is linearly dependent, we can write $v_{m+1}$ as a linear combination of $v_1,\ldots,v_m$, which means $v_{m+1}\in S$. Repeat until $n$.
 \epr
@@ -921,15 +939,34 @@ Zero vector is in all linear subspaces.
 Such matrix's row space is the whole vector space $\bbF^m$, where $m$ is the number of row.
 \epr
 \eit
-\subsubsection{Kernel as homogeneous linear system solution space}
-The set of all solutions of a homogeneous linear system is the kernel $\ker(A)$ of its coefficient matrix $A$, thus for any set $S$ of solutions to it, $\span S\subseteq\ker(A)$, and any $v\in\span S$ is a solution to it.
-\subsubsection{Property of rank}
+\subsubsection{Solution space is an affine space with kernel as associated vector space}
+Suppose $y$ is a solution to a linear system $Ax=b$ with coefficient matrix $A$ and constant term vector $b$, then the set of all solutions of it
+\[\{y+k\colon k\in\ker(A)\}\]
+\bpr
+Suppose $z-y\in\ker(A)$.
+\[Az=Ay+A(z-y)=Ay=b\]
+Suppose $z-y\notin\ker(A)$.
+\[Az=Ay+A(z-y)=b+A(z-y)\ne b\]
+\epr
+Thus, the solution space is an affine space with kernel as the associated vector space.
+\subsubsection{Zero nullity}
+For a matrix $A\in\bbR^{m\times n}$, the followings are equivalent:
 \bit
-\item For any $m\times n$ matrix $\mb{A}$:
+\item $A$ has zero nullity (i.e., $\rank(A)=n$).
+\item A linear system whose coefficient matrix is $A$ has at most one solution.
+\bpr
+If consistent, since the associated vector space $\ker(A)$ of solution space is $\{\mb{0}\}$, the solution space has only one element.
+\epr
+\item The only solution to the homogeneous linear system whose coefficient matrix is $A$ is $\mb{0}$.
+\item The columns of the row-equivalent reduced row echelon form of $A$ are the $n$ distinct standard vectors of $\bbR^n$.
+\eit
+\subsubsection{Bound of rank}
+For any $m\times n$ matrix $\mb{A}$:
 \[\text{rank}(\mathbf{A}) \leq \min(m, n)\]
-\item A square matrix is invertible if and only if it has full rank.
-\item A matrix is a zero matrix if and only if its rank is zero.
-\end{itemize}
+\subsubsection{Invertible iff full rank}
+A square matrix is invertible iff it has full rank.
+\subsubsection{Zero rank}
+A matrix is a zero matrix iff its rank is zero.
 \section{Matrix Analysis (矩陣分析)}
 \subsection{Eigenvector or characteristic vector (特徵向量) and characteristic polynomial (特徵多項式)}
 \subsubsection{Eigenvector or characteristic vector (特徵向量) and eigenvalue (本徵值、固有值、特徵值或特徵根)}
