@@ -71,7 +71,14 @@ A map $T\colon V\to W$ is Invertible if and only if it is bijective. The unique 
 \subsubsection{Linear subspace, vector subspace, or subspace}
 A linear subspace of a vector space is a subset of it that is closed under vector addition and scalar multiplication, and thus a vector space.
 \subsubsection{Linear span, linear hull, or span}
-A span of a subset $S$, denoted as $\operatorname{span}(S)$ or $\langle S\rangle$, of a vector space is the smallest linear subspace containing $S$.
+A span of a subset $S$, denoted as $\span S$ or $\langle S\rangle$, of a vector space is the smallest linear subspace containing $S$, and it is called that $S$ is a generating set of $\span S$ and $S$ generates $\span S$.
+\subsubsection{In the span iff new span unchanged}
+Let $S$ be a set of vectors and $v$ be a vector. $v\in\span S$ iff $\span S=\span(S\cup\{v\})$.
+\bpr
+Only if: Suppose $v\in\span S$. We can write $v$ as a linear combination of vectors in $S$. For any $w\in\span(S\cup\{v\})$, we can write $w$ as a linear combination of vectors in $S\cup\{S\}$. By replacing $v$ with the linear combination of vectors in $S$, we can write $w$ as a linear combination of vectors in $S$.
+
+If: Suppose $v\notin\span S$. Since $v=1v$, $v\in\span(S\cup\{v\})\setminus S$, thus $\span S\ne\span(S\cup\{v\})$.
+\epr
 \subsubsection{Linear independence (線性獨立)}
 A set of nonzero vectors \(\{v_1,\ldots,v_n\}\) is linearly independent iff the equation:
 \[\sum_{i=1}^nc_iv_i=0 \]
@@ -677,7 +684,7 @@ A solution to a system of equations is a choice of variables such that all equat
 \begin{itemize}
 \item\tb{Consistent system (相容方程組)}: A system of equations is consistent iff it has at least one solution.
 \item\tb{Inconsistent/contradictory system (相容方程組)}: A system of equations is inconsistent or contradictory iff it has no solution.
-\item\tb{Dependent system (相依方程組)}: A consistent system of equations is dependent iff it has infinitely many solutions. For a dependent system, we can solve some of the variables, called basic variables, in terms of some other variables, called free variables, such that the free variables are independent from each other and that a choice of free variables uniquely determines basic variables, providing a general solution of the system.
+\item\tb{Dependent system (相依方程組)}: A consistent system of equations is dependent iff it has infinitely many solutions.
 \item\tb{Independent system (獨立方程組)}: A system of equations is independent iff it has finitely many solutions.
 \end{itemize}`
 \subsubsection{Linear Equation (線性方程)}
@@ -693,6 +700,8 @@ An independent system of linear equations must have exactly one solution.
 \bpr
 If more than one solution exist, their linear combinations form infinitely many solutions.
 \epr
+\subsubsection{Dependent system general solution}
+For a dependent system, we can solve some of the variables, called basic variables, in terms of some other variables, called free variables, such that the free variables are independent from each other and that a choice of free variables uniquely determines basic variables, providing a general solution of the system.
 \subsubsection{Coefficient matrix (係數矩陣)}
 The coefficients of a system of linear equations written as a matrix, with one row for each equation.
 \subsubsection{Constant term vector}
@@ -864,12 +873,13 @@ For any $m\times n$ matrix $\mathbf{A}$:
 \bpr
 Apply rank-nullity theorem on $A^{\top}$.
 \epr
-\subsubsection{Column space test for consistency of linear system}
-A system of linear equations is consistent iff its constant term vector is in the column space of its coefficient matrix.
-\bpr
-By definition, obviously.
-\epr
-Thus, a homogeneous linear system is always consistent.
+\subsubsection{Full rank (滿秩) and rank deficiency (秩虧)}
+For an $m\times n$ matrix $\mb{A}$, if
+\[\text{rank}(\mathbf{A}) = \min(m, n)\]
+$\mathbf{A}$ is called to have full rank; otherwise it is called to be rank-deficient (欠秩或秩虧的).
+
+The rank deficiency of a $m\times n$ matrix $\mb{A}$ is defined as
+\[\min(m, n)-\text{rank}(\mathbf{A}) \]
 \subsubsection{Rank and number of pivot columns}
 For a matrix $A$ and its reduced row echelon form $R$, the followings are equal:
 \bit
@@ -895,13 +905,24 @@ For a matrix $A$ and its reduced row echelon form $R$, the followings are equal:
 \item The number of zero rows of $R$
 \item The number of free variables in the general solution of any consistent system of linear equations whose coefficient matrix is $A^\top$ (or $R^{\top}$)
 \eit
-\subsubsection{Full rank (滿秩) and rank deficiency (秩虧)}
-For an $m\times n$ matrix $\mb{A}$, if
-\[\text{rank}(\mathbf{A}) = \min(m, n)\]
-$\mathbf{A}$ is called to have full rank; otherwise it is called to be rank-deficient (欠秩或秩虧的).
-
-The rank deficiency of a $m\times n$ matrix $\mb{A}$ is defined as
-\[\min(m, n)-\text{rank}(\mathbf{A}) \]
+\subsubsection{Column space test for consistency of linear system}
+A system of linear equations is consistent iff its constant term vector is in the column space of its coefficient matrix.
+\bpr
+By definition, obviously.
+\epr
+Thus,
+\bit
+\item A homogeneous linear system is always consistent.
+\bpr
+Zero vector is in all linear subspaces.
+\epr
+\item A linear system whose coefficient matrix's rank is equal to its the number of rows is always consistent.
+\bpr
+Such matrix's row space is the whole vector space $\bbF^m$, where $m$ is the number of row.
+\epr
+\eit
+\subsubsection{Kernel as homogeneous linear system solution space}
+The set of all solutions of a homogeneous linear system is the kernel $\ker(A)$ of its coefficient matrix $A$, thus for any set $S$ of solutions to it, $\span S\subseteq\ker(A)$, and any $v\in\span S$ is a solution to it.
 \subsubsection{Property of rank}
 \bit
 \item For any $m\times n$ matrix $\mb{A}$:
