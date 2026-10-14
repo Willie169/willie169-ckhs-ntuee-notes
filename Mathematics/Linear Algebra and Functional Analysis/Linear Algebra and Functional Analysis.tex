@@ -528,6 +528,7 @@ A row whose all entries are zero is called a zero row, otherwise it is called a 
 \subsubsection{Transpose (轉置)}
 The transpose of an $m\times n$ matrix $\mathbf{A}$ is the $n\times m$ matrix $\mathbf{A}^\top$:
 \[(\mathbf{A}^\top)_{i,j}=a_{j,i}\]
+Inverse map as linear map is transpose as matrix.
 \subsubsection{Symmetric matrix (對稱矩陣)}
 $\mathbf{A}$ is called a symmetric matrix iff $\mathbf{A}=\mathbf{A}^\top$.
 \subsubsection{Skew-symmetric matrix/antisymmetric matrix (反對稱矩陣)}
@@ -682,10 +683,10 @@ A solution to a system of equations is a choice of variables such that all equat
 \subsubsection{Linear Equation (線性方程)}
 A linear equation is an equation that may be put in the from:
 \[\sum_{k=1}^na_kx_k=c,\]
-where $a_k$ and $c$ are called coefficients.
+where $a_k$ are called coefficients and $c$ is called constant term.
 
 If $c=0$, the linear equation is called a homogeneous linear equation; otherwise, it is called a heterogeneous or non-homogeneous linear equation.
-\subsubsection{System of Linear Equations (線性方程組)}
+\subsubsection{System of Linear Equations (線性方程組) or linear system}
 A system of linear equations is a collection of two or more linear equations involving the same tuple of variables.
 \subsubsection{Independent system of linear equations has exactly one solution}
 An independent system of linear equations must have exactly one solution.
@@ -694,8 +695,10 @@ If more than one solution exist, their linear combinations form infinitely many 
 \epr
 \subsubsection{Coefficient matrix (係數矩陣)}
 The coefficients of a system of linear equations written as a matrix, with one row for each equation.
+\subsubsection{Constant term vector}
+The column vector of the constant terms on the right side of the equal signs of a system of linear equations.
 \subsubsection{Augmented matrix (增廣矩陣)}
-Coefficient matrix with the constants on the right side of the equal signs of a system of linear equations augmented to the last column of the matrix.
+Coefficient matrix with the constant term vector augmented to the last column of the matrix.
 \subsubsection{Row meanings}
 \bit
 \item Two systems of linear equations have the same set of solutions iff their augmented matrices are row-equivalent.
@@ -740,11 +743,7 @@ A matrix is said to be in reduced row echelon form iff:
 \een
 \subsubsection{Pivot position}
 For a matrix $A$ and its (unique, which will be proven later) reduced row echelon form $R$, the position containing a leading entry of a nonzero row is called pivot position, a column containing a pivot position is called pivot column, and a row containing a pivot position is called pivot row.
-
-The number of pivot positions, the number of pivot columns, and the number of pivot rows are the number of nonzero rows of $R$.
-
-The number of non-pivot rows are the number of zero rows of $R$.
-\subsubsection{Gaussian Elimination (高斯消去法)}
+\subsubsection{Gaussian Elimination (高斯消去法) or row reduction}
 Gaussian elimination is a recursive algorithm to solve a system of linear equations by finding the row-equivalent row echelon form of the augmented matrix.
 \ben
 \item Determine the leftmost nonzero column. This is a pivot column, and the topmost position in this column is a pivot position.
@@ -758,6 +757,17 @@ Gaussian-Jordan elimination is an algorithm to solve a system of linear equation
 \item Perform the appropriate row scaling the make the leading entry, which is a pivot position, 1.
 \item Add an appropriate multiple of the row to each upper row in order to change each entry above the pivot position into 0.
 \een
+\subsubsection{Row-equivalent reduced echelon form to general solution}
+Given the row-equivalent reduced row echelon form of the augmented matrix of a linear system, if it has no row with leading entry in the rightmost column, we can obtain the general solution by
+\ben
+\item Assign the variables of non-pivot columns as free variables and variables of pivot columns as basic variables.
+\item For each nonzero row, write an equation of the variable of the leading entry as a linear combination of the variables (constant term for the rightmost column and free variables for others) of other nonzero entries.
+\een
+\subsubsection{Row-equivalent reduced echelon form test for consistency of linear system}
+A system of linear equations is consistent iff the reduced row echelon form of its augmented matrix has no row with leading entry in the rightmost column.
+\bpr
+If the reduced row echelon form of its augmented matrix has row with leading entry in the rightmost column, it is obviously inconsistent. If the reduced row echelon form of its augmented matrix has no row with leading entry in the rightmost column, we can construct a general solution.
+\epr
 \subsubsection{Existence and uniqueness of row-equivalent reduced row echelon form}
 Every matrix can be transformed into one and only one matrix in reduced row echelon form by means of a sequence of elementary row operations.
 \bpr
@@ -850,13 +860,40 @@ Hence, the column space of \(\mathbf{X}\) is the null space of \(\mathbf{A}\). T
 \end{proof}
 \subsubsection{Rank-left nullity theorem}
 For any $m\times n$ matrix $\mathbf{A}$:
-\[\rank(\mathbf{A})+\dim(\ker(\mathbf{A}^{-1}))=m\]
-\subsubsection{Rank, nullity, left nullity and pivot columns and rows}
-Since row operations to form row-equivalent reduced row echelon form don't change the row space,
+\[\rank(\mathbf{A})+\dim(\ker(\mathbf{A}^{\top}))=m\]
+\bpr
+Apply rank-nullity theorem on $A^{\top}$.
+\epr
+\subsubsection{Column space test for consistency of linear system}
+A system of linear equations is consistent iff its constant term vector is in the column space of its coefficient matrix.
+\bpr
+By definition, obviously.
+\epr
+Thus, a homogeneous linear system is always consistent.
+\subsubsection{Rank and number of pivot columns}
+For a matrix $A$ and its reduced row echelon form $R$, the followings are equal:
 \bit
-\item The rank of a matrix is the number of its pivot columns
-\item The nullity of a matrix is the number of non-pivot columns.
-\item The left nullity of a matrix is the number of non-pivot rows.
+\item The rank of $A$ (or $R$)
+\item The number of pivot positions of $A$ (or $R$)
+\item The number of pivot columns of $A$ (or $R$)
+\item The number of pivot rows of $A$ (or $R$)
+\item The number of nonzero rows of $R$
+\item The number of basic variables in the general solution of any consistent system of linear equations whose coefficient matrix is $A$ (or $R$)
+\eit
+\subsubsection{Nullity and number of non-pivot columns}
+For a matrix $A$ and its reduced row echelon form $R$, the followings are equal:
+\bit
+\item The nullity of $A$ (or $R$)
+\item The number of non-pivot columns of $A$ (or $R$)
+\item The number of free variables in the general solution of any consistent system of linear equations whose coefficient matrix is $A$ (or $R$)
+\eit
+\subsubsection{Left nullity and number of non-pivot rows}
+For a matrix $A$ and its reduced row echelon form $R$, the followings are equal:
+\bit
+\item The left nullity of $A$ (or $R$)
+\item The number of non-pivot rows of $A$ (or $R$)
+\item The number of zero rows of $R$
+\item The number of free variables in the general solution of any consistent system of linear equations whose coefficient matrix is $A^\top$ (or $R^{\top}$)
 \eit
 \subsubsection{Full rank (滿秩) and rank deficiency (秩虧)}
 For an $m\times n$ matrix $\mb{A}$, if
