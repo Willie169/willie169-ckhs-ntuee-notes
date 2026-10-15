@@ -129,6 +129,8 @@ For a vector space $V$ of dimension $n\in\bbN$, for any linearly independent set
 \bpr
 For $m=n$, $\span\{v_1,\ldots,v_n\}=V$, thus $\{v_1,\ldots,v_n\}$ is a basis. For $m<n$, since $S\coloneq\span\{v_1,\ldots,v_m\}$ is of dimension $m<n$, choose any $v_{m+1}\in V\setminus S$. Assume for contradiction that $\{v_1,\ldots,v_{m+1}\}$ is linearly dependent, we can write $v_{m+1}$ as a linear combination of $v_1,\ldots,v_m$, which means $v_{m+1}\in S$. Repeat until $n$.
 \epr
+\subsubsection{Standard (unit/basis) vector}
+For a vector space, the standard (unit/basis) vectors are the unit vectors with one component being the multiplicative identity $1_F$ and others being the additive identity $0_F$.
 \subsubsection{Bilinear form (雙線性形式)}
 Let $V$ be a vector space of dimension $n$ over a field $\mathbb{K}$. A map $B\colon V\times V\rightarrow \mathbb{K}$ is a bilinear form on the space if:
 \begin{enumerate}
@@ -329,11 +331,8 @@ The Gram determinant or Gramian is the determinant of the Gram matrix.
 For a function $f\colon U\subseteq\bbR^n\to\bbR$ (or $\bbC$), the support of it, denoted as $\supp(f)$, is defined as
 \[\supp(f)=\closure(\{x\in U\mid f(x)\neq 0\}).\]
 If $\supp(f)$ is a compact set, $f$ is called with compact support. If $\supp(f)$ is a compact subset of a set $V\subseteq U$, $f$ is called with compact support on $V$.
-\subsection{Euclidean vector space}
 \subsubsection{Euclidean vector space}
 A Euclidean vector space is a finite-dimensional inner product space over the real numbers, denoted as $\bbR^n$ for dimension $n$. The norm-induced metric $d(v,w)=\|v-w\|$ is called the Euclidean distance
-\subsubsection{Standard (unit/basis) vector}
-For a Euclidean vector space, the standard (unit/basis) vectors are the unit vectors with one component being 1 and others being 0.
 \subsubsection{Euclidean affine space (歐幾里德仿射空間) or Euclidean space (歐幾里得空間)}
 A Euclidean space, also known as Euclidean affine space, is an affine space over $\mathbb{R}$ such that the associated vector space is a Euclidean vector space, and is equipped with the same norm and metric as the associated Euclidean vector space.
 \subsubsection{Affine hull (仿射包)}
@@ -432,11 +431,11 @@ An $m\times n$ matrix $\mathbf{A}$ is commonly denoted as:
 or
 \[\mathbf{A}=(a_{ij})_{m\times n}.\]
 
-The $i,i$th entries are called diagonal entries (對角線元).
+The $i,i$th entries are called diagonal entries (對角線元), and other entries are called off-diagonal or non-diagonal entry. The diagonal line of diagonal entries is called main diagonal.
 
 A matrix with only one row is called a row matrix or row vector, and a matrix with only one column is called a column matrix or column vector.
 
-The $i$th row of the matrix $\mathbf{A}$ is commonly denoted as $\mathbf{A}_{i,:}$, and the $j$th column is commonly denoted as $\mathbf{A}_{:,j}$.
+The $i$th row of the matrix $\mathbf{A}$ is commonly denoted as $\mathbf{A}_{i,:}$ or $\mb{A}_i$, and the $j$th column is commonly denoted as $\mathbf{A}_{:,j}$.
 
 The set of all $m\times n$ matrices over $\mathbb{F}$ is denoted as $\mathbb{F}^{m\times n}$.
 \subsection{Basic operations}
@@ -451,6 +450,8 @@ The sum of two $m\times n$ matrices $\mathbf{A}$ and $\mathbf{B}$ is calculated 
 The product $c\mathbf{A}$ of a scalar $c$ is calculated by multiplying every entry of $\mathbf{A}$ by $c$.
 \subsubsection{Matrix multiplication (矩陣乘法)}
 Multiplication of two matrices is defined only if the number of columns of the left matrix is the same as the number of rows of the right matrix. The matrix product $\mathbf{A}\mathbf{B}$ of an $m\times n$ matrix $\mathbf{A}$ and $n\times p$ matrix $\mathbf{B}$ is the $m\times p$ matrix whose $ij$th entry is the dot product of the $i$th row of $\mathbf{A}$ and the $j$th column of $\mathbf{B}$.
+\subsubsection{Outer product}
+For two column vectors $u,v$, the outer product $uv^\top$, sometimes denoted as $u\otimes v$, is the matrix product $uv^\top$.
 \subsubsection{Positive integer exponent}
 Given a square matrix $\mathbf{A}$ and a positive integer $n$, $\mathbf{A}^n$ is defined as $\prod_{i=1}^n\mathbf{A}$.
 \subsubsection{Zero matrix (零矩陣)}
@@ -530,15 +531,17 @@ Counterexample:
 \epr
 \subsubsection{Zero exponent}
 Given an $n\times n$ matrix $\mathbf{A}$ and $n\times n$ identity matrix $\mathbf{I}$, $\mathbf{A}^0$ is defined as $\mathbf{I}$.
+\subsubsection{Trace (跡)}
+The trace of a matrix $\mb{A}$ is the sum of all diagonal entries of $\mb{A}$, denoted as $\tr(\mb{A})$.
 \subsection{Matrix row and column operations}
 \subsubsection{Elementary row operations (zh-hant: 列/zh-hans: 行運算) and elementary column operations (zh-hant: 行/zh-hans: 列運算)}
 Elementary row operations include:
 \bit
-\item Row addition (zh-hant: 列/zh-hans: 行相加) operation: Adding a row multiplied by a nonzero constant to another.
-\item Row multiplication/scaling (zh-hant: 列/zh-hans: 行加倍) operation: Multiplying a row by a nonzero constant.
-\item Row interchange/swap/switching (zh-hant: 列/zh-hans: 行交換) operation: Interchanging two rows of a matrix.
+\item Row addition (zh-hant: 列/zh-hans: 行相加): Adding a row multiplied by a nonzero constant to another.
+\item Row multiplication/scaling (zh-hant: 列/zh-hans: 行加倍): Multiplying a row by a nonzero constant.
+\item Row interchange/swap/switch (zh-hant: 列/zh-hans: 行交換): Interchanging two rows of a matrix.
 \eit
-Elementary column operations are the same with row replaced with column.
+Elementary column operations are defined the same with row replaced with column.
 
 If one matrix can be transformed to another through a sequence of elementary row operations, the two matrices are called row-equivalent.
 
@@ -546,9 +549,9 @@ If one matrix can be transformed to another through a sequence of elementary col
 \subsubsection{Row operation as matrix multiplication and elementary matrix}
 Every elementary row operation on a $m\times n$ matrix $A$ can be performed by left-multiplying an appropriate $m\times m$ matrix:
 \bit
-\item Row addition operation: Adding row $i$ multiplied by $k\ne0$ to row $j$ can be performed by left-multiplying $I_m$ with the $j,i$th entry replaced with $k$.
-\item Row multiplication operation: Multiplying row $i$ by a constant $k\ne0$ can be performed by left-multiplying $I_m$ with the $i,i$th entry replaced with $k$.
-\item Row interchange operation: Interchanging row $i$ and row $j$ can be performed by left-multiplying $I_m$ with row $i$ and row $j$ interchanged.
+\item Row addition: Adding row $i$ multiplied by $k\ne0$ to row $j$ can be performed by left-multiplying $I_m$ with the $j,i$th entry replaced with $k$.
+\item Row multiplication: Multiplying row $i$ by a constant $k\ne0$ can be performed by left-multiplying $I_m$ with the $i,i$th entry replaced with $k$.
+\item Row interchange: Interchanging row $i$ and row $j$ can be performed by left-multiplying $I_m$ with row $i$ and row $j$ interchanged.
 \eit
 A square matrix is called elementary matrix if it can be obtained from the identity matrix of its size with a single elementary row operations.
 
@@ -616,8 +619,6 @@ For two matrices $X\in\bbC^{p\times q},Y\in\bbC^{q\times r}$,
 \[(XY)^{*}=Y^{*}X^{*}\]
 For an index set of matrices $\mathbf{A}\colon[1,n]\cap\bbN\to\bbC^{\bbN\times\bbN};\;i\mapsto\mathbf{A}(i)$ such that $\mathbf{A}(i)\mathbf{A}(i+1)$ is defined for all $i\in[1,n)\cap\bbN$,
 \[\qty(\prod_{i=1}^n\mathbf{A}(i))^*=\prod_{i=1}^n\qty(\mathbf{A}(n-i+1))^*\]
-\subsection{Trace (跡)}
-The trace of a matrix $\mb{A}$ is the sum of all diagonal entries of $\mb{A}$, denoted as $\tr(\mb{A})$.
 \subsection{Cofactor matrix, adjugate matrix, determinant, and inverse}
 Let $\mathbf{M}_{ij}$ of $\mathbf{A}$ be the determinant of the submatrix of $\mathbf{A}$ without the $i$th row and $j$th column.
 \subsubsection{Determinant (行列式或判別式)}
@@ -651,9 +652,6 @@ An non-invertible matrix, non-orthogonal matrix, non-orthonormal matrix, singula
 For an invertible $2\times 2$ matrix $\mathbf{A}$:
 \[\mathbf{A}=\begin{bmatrix}a & b \\c & d\end{bmatrix}\implies\mathbf{A}^{-1}=
 \frac{1}{\det\qty(\mathbf{A})}\begin{bmatrix}d & -b \\-c & a\end{bmatrix}\]
-\subsubsection{Computing inverse with row operations}
-Let $\mathbf{A}$ be an $n\times n$ matrix and $\mathbf{I}$ be the $n\times n$ identity matrix. If $\begin{pmatrix}\mathbf{A} & \mathbf{I}\end{pmatrix}$ can become $\begin{pmatrix}\mathbf{I} & \mathbf{B}\end{pmatrix}$ after row operations, then
-\[\mathbf{B}=\mathbf{A}^{-1}\]
 \subsubsection{Unitary matrix (么正矩陣或酉矩陣)}
 An unitary matrix is a square matrix whose inverse equals to its conjugate transpose.
 \subsubsection{Determinant property}
@@ -678,16 +676,20 @@ Let $A,B$ be square matrix of same size,
 \[AB=I\Rightarrow(\exists A^{-1}\land A^{-1}=B)\]
 \subsubsection{Inverse of elementary matrix}
 Every elementary matrix is invertible. Moreover, the inverse of an elementary is an elementary matrix.
-
+\bit
+\item Row addition: The inverse of $I_m$ with the $j,i$th entry replaced with $k$ is $I_m$ with the $j,i$th entry replaced with $-k$.
+\item Row multiplication: The inverse of $I_m$ with the $i,i$th entry replaced with $k$ is $I_m$ with the $i,i$th entry replaced with $\frac{1}{k}$.
+\item Row interchange: The inverse of $I_m$ with row $i$ and row $j$ interchanged is itself.
+\eit
 Thus, for any two row-equivalent $m\times n$ matrices $A,B$, there exists an $m\times m$ invertible matrix $C$, which is the product of a sequence of $m\times m$ elementary matrices, such that $B=CA$.
 \subsubsection{Vandermonde matrix (范德蒙矩陣)}
 A Vandermonde matrix $\mathbf{V}$ is:
 \[V_{i,j}=\alpha_i^{\pht{i}j-1}\]
 An $n\times n$ Vandermonde matrix $\mathbf{V}$ satisfies:
 \[\det(V)=\prod _{1\leq i<j\leq n}(\alpha _{j}-\alpha _{i})\]
-\subsection{Diagonal matrix (對角矩陣)}
-\subsubsection{Diagonal matrix}
-A diagonal matrix over a field $F$ is a square matrix over $F$ of which all non-diagonal entries are the additive identity of $F$.
+\subsection{Diagonal matrix}
+\subsubsection{Diagonal matrix (對角矩陣)}
+A diagonal matrix is a square matrix whose all off-diagonal entries are the additive identity of $0_{F}$.
 \subsubsection{Diagonal matrix identities}
 If:
 \[\mathbf{D} = \begin{bmatrix}
@@ -794,31 +796,30 @@ A matrix is said to be in reduced row echelon form iff:
 \een
 \subsubsection{Pivot position}
 For a matrix $A$ and its (unique, which will be proven later) reduced row echelon form $R$, the position containing a leading entry of a nonzero row is called pivot position, a column containing a pivot position is called pivot column, and a row containing a pivot position is called pivot row.
-\subsubsection{Gaussian Elimination (高斯消去法) or row reduction}
-Gaussian elimination is a recursive algorithm to solve a system of linear equations by finding the row-equivalent row echelon form of the augmented matrix.
+\subsubsection{Gaussian Elimination (高斯消去法), row reduction, Gauss-Jordan Elimination, and reduced row echelon form test for consistency and obtaining general solution}
+Gaussian elimination or row reduction refers to either algorithm, or the forward pass only with Gaussian-Jordan elimination referring to either the entire algorithm or the backward pass only.
+
+To find the row echelon form of a matrix, do the followings, called forward pass:
 \ben
 \item Determine the leftmost nonzero column. This is a pivot column, and the topmost position in this column is a pivot position.
 \item In the pivot column, choose any nonzero entry, and perform the appropriate row interchange to bring this entry into the pivot position.
 \item Add an appropriate multiple of the row containing the pivot position to each lower row in order to change each entry below the pivot position into 0.
-\item Ignore the row containing the pivot position. If there is a nonzero row below it, repeat steps 1–4 (called forward pass) on the submatrix that remains.
+\item Ignore the row containing the pivot position. If there is a nonzero row below it, repeat steps 1–4 on the submatrix that remains.
 \een
-\subsubsection{Gaussian-Jordan Elimination}
-Gaussian-Jordan elimination is an algorithm to solve a system of linear equations by finding the row echelon form of the augmented matrix. First do Gaussian elimination to obtain a row-equivalent row echelon form, and then, from the topmost to bottommost nonzero row, do the following (called backward pass):
+To find the reduced row echelon form of a matrix from a row echelon form of it, from the topmost to bottommost nonzero row, do the followings, called backward pass:
 \ben
 \item Perform the appropriate row scaling to make the leading entry 1.
 \item Add an appropriate multiple of the row to each upper row in order to change each entry above the leading entry into 0.
 \een
-\subsubsection{Reduced echelon form to general solution}
+A system of linear equations is consistent iff the reduced row echelon form of its augmented matrix has no row with leading entry in the rightmost column.
+\bpr
+If the reduced row echelon form of its augmented matrix has row with leading entry in the rightmost column, it is obviously inconsistent. If the reduced row echelon form of its augmented matrix has no row with leading entry in the rightmost column, we can construct a general solution.
+\epr
 Given the reduced row echelon form of the augmented matrix of a linear system, if it has no row with leading entry in the rightmost column, we can obtain the general solution by
 \ben
 \item Assign the variables of non-pivot columns as free variables and variables of pivot columns as basic variables.
 \item For each nonzero row, write an equation of the variable of the leading entry as a linear combination of the variables (constant term for the rightmost column and free variables for others) of other nonzero entries.
 \een
-\subsubsection{Reduced echelon form test for consistency of linear system}
-A system of linear equations is consistent iff the reduced row echelon form of its augmented matrix has no row with leading entry in the rightmost column.
-\bpr
-If the reduced row echelon form of its augmented matrix has row with leading entry in the rightmost column, it is obviously inconsistent. If the reduced row echelon form of its augmented matrix has no row with leading entry in the rightmost column, we can construct a general solution.
-\epr
 \subsection{Subspaces of matrices and linear maps}
 \subsubsection{Four fundamental subspaces of a matrix (矩陣的四大子空間)}
 The four fundamental subspaces of a matrix are the row space, column space, null space, and left null space.
@@ -931,7 +932,7 @@ For complex matrix,
 \subsubsection{Column correspondence property}
 Let $A,B$ be row-equivalent matrices. If a column $j$ of $A$ is a linear combination of other columns of $A$, then column $j$ of $B$ is a linear combination of the corresponding columns of $B$ using the same coefficients.
 \bpr
-There exists an invertible matrix $E$, which is the product of a sequence of $m\times m$ elementary matrices, such that $B=EA$. Then, for every column $j$,
+There exists an invertible matrix $E$, which is the product of a sequence of $m\times m$ elementary matrices, such that $B=EA$. Let a matrix with subscript denote its submatrix of that column. For every column $j$
 \[B_j=EA_j\]
 Suppose
 \[A_j=\sum_{i\ne j}c_iA_i\]
@@ -960,10 +961,14 @@ Counterexample for left kernel:
 \[B=\begin{bmatrix}1&0\\1&0\end{bmatrix}\]
 $B$ is obtained by adding row 1 of $A$ to row 2, but $\ker(A^\top)=\span\qty{\begin{bmatrix}0\\1\end{bmatrix}}$ and $\ker(B^\top)=\span\qty{\begin{bmatrix}1\\-1\end{bmatrix}}$ are different.
 \epr
-\subsubsection{Existence and uniqueness of reduced row echelon form}
-Every matrix can be transformed into one and only one matrix in reduced row echelon form by means of a sequence of elementary row operations.
+\subsubsection{Row-equivalence is an equivalence relation}
+Row-equivalence is an equivalence relation.
 \bpr
-TODO
+Reflexivity: Obviously
+
+Symmetry: Since elementary matrices are invertible
+
+Transitivity: If $B$ is row-equivalent to $A$ with $B=EA$ and $C$ is row-equivalent to $B$ with $C=FB$, then $C=EFA$, thus $C$ is row-equivalent to $A$.
 \epr
 \subsubsection{Rank and number of pivot columns}
 For a matrix $A$ and its reduced row echelon form $R$, the followings are equal:
@@ -990,6 +995,17 @@ For a matrix $A$ and its reduced row echelon form $R$, the followings are equal:
 \item The number of zero rows of $R$
 \item The number of free variables in the general solution of any consistent system of linear equations whose coefficient matrix is $A^\top$ (or $R^{\top}$)
 \eit
+\subsubsection{Existence and uniqueness of reduced row echelon form}
+Every matrix can be transformed into one and only one matrix in reduced row echelon form by means of a sequence of elementary row operations.
+\bpr
+Existence: By Gauss-Jordan elimination.
+
+Uniqueness:
+
+Let $A$ be a matrix and $R$ be any reduced row-equivalent form of it. Since elementary row operation preserves rank, which is the dimension of column space, which is the number of pivot columns of both $A$ and $R$, the pivot columns of $R$ are uniquely determined.
+
+Let a matrix with subscript denote its submatrix of that column. For every non-pivot column $j$, by column correspondence property, since column $j$ of $A$ is a linear combination of pivot columns of $A$, column $j$ of $R$ is a linear combination of the corresponding columns of $A$ using the same coefficients, which is unique.
+\epr
 \subsubsection{Column space test for consistency of linear system}
 A system of linear equations is consistent iff its constant term vector is in the column space of its coefficient matrix.
 \bpr
@@ -1047,6 +1063,110 @@ Let $A$ be an $n\times n$ matrix. Then $A$ is invertible iff its reduced row ech
 Implies: Since $A$ has full rank, elementary row operations preserve rank, and $I_n$ is the only RREF with full rank, $A$ must have reduced row echelon form $I_n$.
 
 Implied by: Since elementary row operations preserve rank and $I_n$ has full rank, $A$ has full rank, thus $A$ is invertible.
+\epr
+\subsubsection{Invertible matrix must be product of elementary matrix}
+Let $A$ be an $n\times n$ matrix. Then $A$ is invertible iff it's a product of $n\times n$ elementary matrices.
+\subsubsection{Algorithm for computing inverse with elementary row operations}
+Let $A$ be an $n\times n$ matrix. Use elementary row operations to transform $[A I_n]$ into the form $[R B]$ where $R$ is the reduced row echelon form of $A$. Then either
+\bit
+\item $R=I_n$, in which case $A$ is invertible and $B=A^{-1}$; or
+\item $R\ne I_n$, in which case $A$ is not invertible.
+\eit
+\subsubsection{Algorithm for computing inverse right multiplied by another matrix with elementary row operations}
+Let $A$ be an $n\times n$ matrix and $B$ be an $n\times p$ matrix. Use elementary row operations to transform $[A B]$ into the form $[R C]$ where $R$ is the reduced row echelon form of $A$. Then either
+\bit
+\item $R=I_n$, in which case $A$ is invertible and $C=A^{-1}$; or
+\item $R\ne I_n$, in which case $A$ is not invertible.
+\eit
+\subsection{Partitioning}
+\subsubsection{Partitioning}
+We can break up any matrix by drawing horizontal and vertical lines within the matrix, which divides the matrix into a two-dimensional array of submatrices called blocks. The resulting array is called a partition of the matrix, and the process of forming these blocks is called partitioning.
+\subsubsection{Block multiplication}
+Suppose two matrices $A$ and $B$ are partitioned into blocks so that the number of blocks in each row of $A$ is the same as the number of blocks in each column of $B$. Then the matrices can be multiplied according to the usual rules for matrix multiplication, treating the blocks as if they were scalars, provided that the individual products are defined.
+\subsubsection{Matrix multiplication by rows}
+Let $A$ be an $m\times n$ matrix and $B$ an $n\times p$ matrix. The $i$th row of $AB$ can be obtained by multiplying the $i$th row of $A$ by $B$.
+\subsubsection{Matrix multiplication by outer product}
+Let $A$ be an $m\times n$ matrix and $B$ an $n\times p$ matrix. The matrix $AB$ is the sum of matrix products of each column of $A$ with the corresponding row of $B$.
+\subsection{Lower-upper (LU) decomposition or factorization}
+\subsubsection{Lower triangular matrix}
+A lower triangular matrix is a matrix whose all entries $a_{ij}$ with $i\le j$ are the additive identity of $0_{F}$.
+\subsubsection{Upper triangular matrix}
+An upper triangular matrix is a matrix whose all entries $a_{ij}$ with $i\ge j$ are the additive identity of $0_{F}$.
+\subsubsection{Lower triangular square matrices product}
+Let $A,B$ be two $n\times n$ lower triangular matrices. Then $AB$ is an $n\times n$ lower triangular matrix.
+\bpr
+\[(AB)_{ij}=\sum_{k=1}^na_{ik}b_{kj}\]
+For $i<j$,
+\bit
+\item If $k>i$, then $a_{ik}=0$.
+\item If $k\le i$, then $k<j$, so $b_{kj}=0$
+\eit
+Thus $(AB)_{ij}=0$.
+\epr
+\subsubsection{Upper triangular square matrices product}
+Let $A,B$ be two $n\times n$ upper triangular matrices. Then $AB$ is an $n\times n$ upper triangular matrix.
+\bpr
+\[(AB)_{ij}=\sum_{k=1}^na_{ik}b_{kj}\]
+For $i>j$,
+\bit
+\item If $k<i$, then $a_{ik}=0$.
+\item If $k\ge i$, then $k>j$, so $b_{kj}=0$
+\eit
+Thus $(AB)_{ij}=0$.
+\epr
+\subsubsection{Lower-upper (LU) decomposition or factorization with partial pivoting}
+LU decomposition with partial pivoting expresses an $m\times n$ matrix $A$ as the product a $m\times m$ lower triangular matrix $L$ whose all diagonal entries being multiplicative identity $1_F$ and an $m\times n$ upper triangular matrix $U$:
+\[A=LU\]
+If Gaussian elimination forward pass on $A$ doesn't need row interchange (i.e., only needs row additions). LU decomposition of $A$ exists. To obtain it, let $L_0$ be $I_m$, and perform Gaussian elimination forward pass on $A$ to obtain a row echelon form $U$ of $A$ with $l$ row additions. For each $k$th operation of adding row $i$ multiplied by $c$ to row $j$ in the process, assign $L_{k-1}$ with the $j,i$th entry replaced with $-c$ to $L_k$. Let $L=L_l$. We obtain the LU decomposition of $A$:
+\[A=LU\]
+\bpr
+Observe that $U$ is an $m\times n$ upper triangular matrix. Let the elementary matrices of the operations be $E_1,\ldots,E_l$.
+\[U=E_l\ldots E_1A\]
+Since all $E_i$ are invertible,
+\[A=E_1^{-1}\ldots E_l^{-1}U\]
+Since all $E_i$ are lower triangular with all diagonal entries being multiplicative identity $1_F$,
+\[L=E_1^{-1}\ldots E_l^{-1}\]
+is lower triangular with all diagonal entries being multiplicative identity $1_F$.
+
+In forward pass, no two same row additions are performed, thus
+\[L_k=E_1^{-1}\ldots E_k^{-1}\]
+\epr
+\subsubsection{Lower-upper (LU) decomposition or factorization with partial pivoting}
+LU decomposition with partial pivoting expresses an $m\times n$ matrix $A$ multiplied by an $m\times m$ permutation matrix $P$ whose columns and rows are standard basis vectors (i.e., each column and each row has exactly one multiplicative identity $1_F$ and $m-1$ additive identity $0_F$), as the product a $m\times m$ lower triangular matrix $L$ whose all diagonal entries being multiplicative identity $1_F$ and an $m\times n$ upper triangular matrix $U$:
+\[PA=LU\]
+Let $L_0=O_m$ and $P_0=I_m$. Perform Gaussian elimination forward pass on $A$ to obtain a row echelon form $U$ of $A$ with $l$ row additions and interchanges. For each elementary row operation $k$ in it,
+\bit
+\item if it is row addition that adds row $i$ multiplied by $c$ to row $j$, assign $L_{k-1}$ with the $j,i$th entry replaced with $-c$ to $L_k$ and assign $P_{k-1}$ to $P_k$;
+\item if it is row interchange that swaps row $i$ and $j$, do the same operation on $L_{k-1}$ and $P_{k-1}$ to obtain $L_k$ and $P_k$.
+\eit
+Let $L=I_m+L_l$ and $P=P_l$. We obtain the LU decomposition with partial pivoting of $A$:
+\[PA=LU\]
+\bpr
+Observe that $LU$ is the LU decomposition of $PA$, and observe the relation of the forward pass of $A$ and $PA$ to construct the algorithm for sequence $L_k$.
+\epr
+\subsubsection{Solving a system of linear equations using an LU decomposition}
+The system $Ax=b$ can be rewritten as $LUx=b$. Set $y=Ux$.
+
+First, solve $Ly=b$, called forward substitution. Let $y=(y_1,\ldots,y_m)^\top$ and $b=(b_1,\ldots,b_m)^\top$. If $m>n$, then
+\bit
+\item if $b_{n+1},\ldots,b_m$ are all zero, then the system is consistent, and we can discard the bottom $m-n$ rows,
+\item otherwise, the system is inconsistent, and there is no solution.
+\eit
+Solve row by row from the top. The top row gives $y_1=b_1$. For each following row $i$, substituting results of rows above gives $y_i$.
+
+Second, solve $Ux=y$, called backward substitution. Let $x=(x_1,\ldots,x_n)^\top$. If $m<n$, $x_{m+1},\ldots,x_n$ are free variables. Solve row by row from the bottom. The bottom row gives $x_m$ as a function of the free variables. For each following row $i$, substituting results of rows below gives $x_i$ as a function of the free variables.
+\subsubsection{Solving a system of linear equations using an LU decomposition with partial pivot}
+The system $Ax=b$ can be rewritten as $LUx=Pb$ since $P=P^{-1}$. Solve it using the LU decomposition $LU$.
+\subsection{Flop count of various procedure}
+Each floating point operation (flop) is an arithmetic operation of floating numbers. Suppose we have a system $Ax=b$ of floating numbers with $A$ being an $n\times n$ invertible matrix. The approximate flop counts are:
+\bit
+\item computing the LU decomposition of $A$: $\frac{2}{3}n^3$.
+\item solving the system using Gaussian elimination: $\frac{2}{3}n^3$.
+\item solving the system given the LU decomposition of $A$: $2n^2$.
+\item calculating the inverse of $A$: $2n^3$
+\eit
+\bpr
+TODO
 \epr
 \section{Matrix Analysis (矩陣分析)}
 \subsection{Eigenvector or characteristic vector (特徵向量) and characteristic polynomial (特徵多項式)}
