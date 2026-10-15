@@ -603,9 +603,12 @@ For $n=k+1$, we have
                                          &=\prod_{i=1}^{k+1}\qty(\mathbf{A}(k-i+1))^\top
 \ea\]
 \epr
+\subsection{Complex matrix}
+\subsubsection{(Complex）conjugate}
+For a complex matrix $A$, its complex conjugate $\bar{A}$ is defined by taking complex conjugate for all its entries.
 \subsubsection{Conjugate transpose (共軛轉置)/Hermitian conjugate (埃爾米特共軛)/Hermitian transpose (埃爾米特轉置)}
-The conjugate transpose of an $m\times n$ matrix $\mathbf{A}$ is the $n\times m$ matrix $\mathbf{A}*$:
-\[(\mathbf{A}^*)_{ij}=\ol{a_{ji}}\]
+For a complex matrix $A$, its conjugate transpose $A^*$ is defined as
+\[A^*=\bar{A}^\top\]
 \subsubsection{Conjugate transpose identities}
 For an index set of matrices $\mathbf{A}\colon[1,n]\cap\bbN\to\bbC^{p\times q};\;i\mapsto\mathbf{A}(i)$ for some fixed $p,q$,
 \[\qty(\sum_{i=1}^n\mathbf{A}(i))^*=\sum_{i=1}^n\qty(\mathbf{A}(i))^*\]
@@ -816,11 +819,6 @@ A system of linear equations is consistent iff the reduced row echelon form of i
 \bpr
 If the reduced row echelon form of its augmented matrix has row with leading entry in the rightmost column, it is obviously inconsistent. If the reduced row echelon form of its augmented matrix has no row with leading entry in the rightmost column, we can construct a general solution.
 \epr
-\subsubsection{Existence and uniqueness of reduced row echelon form}
-Every matrix can be transformed into one and only one matrix in reduced row echelon form by means of a sequence of elementary row operations.
-\bpr
-TODO
-\epr
 \subsection{Subspaces of matrices and linear maps}
 \subsubsection{Four fundamental subspaces of a matrix (矩陣的四大子空間)}
 The four fundamental subspaces of a matrix are the row space, column space, null space, and left null space.
@@ -914,20 +912,59 @@ For any $m\times n$ matrix $\mathbf{A}$:
 Apply rank-nullity theorem on $A^{\top}$.
 \epr
 \subsubsection{Full rank (滿秩) and rank deficiency (秩虧)}
-For an $m\times n$ matrix $\mb{A}$, if
-\[\text{rank}(\mathbf{A}) = \min(m, n)\]
+For any $m\times n$ matrix $\mb{A}$:
+\[\text{rank}(\mathbf{A}) \leq \min(m, n)\]
+Iff
+\[\text{rank}(\mathbf{A}) = \min(m, n),\]
 $\mathbf{A}$ is called to have full rank; otherwise it is called to be rank-deficient (欠秩或秩虧的).
 
 The rank deficiency of a $m\times n$ matrix $\mb{A}$ is defined as
 \[\min(m, n)-\text{rank}(\mathbf{A}) \]
-\subsubsection{Bound of rank}
-For any $m\times n$ matrix $\mb{A}$:
-\[\text{rank}(\mathbf{A}) \leq \min(m, n)\]
-\subsubsection{Invertible iff full rank}
-A square matrix is invertible iff it has full rank.
 \subsubsection{Zero rank}
 A matrix is a zero matrix iff its rank is zero.
+\subsubsection{Rank preservation}
+For real matrix,
+\[\rank(A)=\rank(A^{\top})=\rank(AA^{\top})=\rank(A^{\top}A)\]
+For complex matrix,
+\[\rank(A)=\rank(A^{\top})=\rank(\bar{A})=\rank(A^*)=\rank(AA^*)=\rank(A^*A)\]
 \subsection{Properties}
+\subsubsection{Column correspondence property}
+Let $A,B$ be row-equivalent matrices. If a column $j$ of $A$ is a linear combination of other columns of $A$, then column $j$ of $B$ is a linear combination of the corresponding columns of $B$ using the same coefficients.
+\bpr
+There exists an invertible matrix $E$, which is the product of a sequence of $m\times m$ elementary matrices, such that $B=EA$. Then, for every column $j$,
+\[B_j=EA_j\]
+Suppose
+\[A_j=\sum_{i\ne j}c_iA_i\]
+\[B_j=EA_j=E\sum_{i\ne j}c_iA_i=\sum_{i\ne j}c_iB_i\]
+\epr
+\subsubsection{Elementary row operation preservations}
+Suppose $E$ is an $m\times m$ elementary matrix and $A$ is an $m\times n$ matrix. Then $A$ and $B\coloneq EA$ have the same
+\bit
+\item row space (and thus also rank)
+\item kernel (and thus also nullity)
+\eit
+\bpr
+Since $B=EA$, each row of $B$ is a linear combination of rows of $A$, thus $\rol(B)\subseteq\rol(A)$. Since $A=E^{-1}B$, each row of $A$ is a linear combination of rows of $B$, thus $\rol(A)\subseteq\rol(B)$. Thus $\rol(A)=\rol(B)$.
+
+$Bx=0\iff EAx=0\iff Ax=E^{-1}0=0\iff EAx=Bx=E0=0$, thus $\ker(A)=\ker(B)$.
+\epr
+The statement does not hold for column space and left kernel.
+\bpr
+Counterexample for column space:
+\[A=\begin{bmatrix}1\\0\end{bmatrix}\]
+\[B=\begin{bmatrix}0\\1\end{bmatrix}\]
+$B$ is obtained by row swapping $A$, but $\col(A)=\span\qty{\begin{bmatrix}1\\0\end{bmatrix}}$ and $\col(B)=\span\qty{\begin{bmatrix}0\\1\end{bmatrix}}$ are different.
+
+Counterexample for left kernel:
+\[A=\begin{bmatrix}1&0\\0&0\end{bmatrix}\]
+\[B=\begin{bmatrix}1&0\\1&0\end{bmatrix}\]
+$B$ is obtained by adding row 1 of $A$ to row 2, but $\ker(A^\top)=\span\qty{\begin{bmatrix}0\\1\end{bmatrix}}$ and $\ker(B^\top)=\span\qty{\begin{bmatrix}1\\-1\end{bmatrix}}$ are different.
+\epr
+\subsubsection{Existence and uniqueness of reduced row echelon form}
+Every matrix can be transformed into one and only one matrix in reduced row echelon form by means of a sequence of elementary row operations.
+\bpr
+TODO
+\epr
 \subsubsection{Rank and number of pivot columns}
 For a matrix $A$ and its reduced row echelon form $R$, the followings are equal:
 \bit
@@ -992,19 +1029,24 @@ If consistent, since the associated vector space $\ker(A)$ of solution space is 
 \item The only solution to the homogeneous linear system whose coefficient matrix is $A$ is $\mb{0}$.
 \item The columns of the reduced row echelon form of $A$ are the $n$ distinct standard vectors of $\bbR^n$.
 \eit
-\subsubsection{Column correspondence property}
-Let $A,B$ be row-equivalent matrices. If a column $j$ of $A$ is a linear combination of other columns of $A$, then column $j$ of $B$ is a linear combination of the corresponding columns of $B$ using the same coefficients.
-\bpr
-There exists an invertible matrix $E$, which is the product of a sequence of $m\times m$ elementary matrices, such that $B=EA$. Then, for every column $j$,
-\[B_j=EA_j\]
-Suppose
-\[A_j=\sum_{i\ne j}c_iA_i\]
-\[B_j=EA_j=E\sum_{i\ne j}c_iA_i=\sum_{i\ne j}c_iB_i\]
-\epr
 \subsubsection{Pivot column set is column space basis}
 The set of pivot columns of a matrix is a basis of its column space.
 \bpr
 For reduced row echelon form, obviously. By column correspondence property and unique existence of reduced row echelon form, the statement holds.
+\epr
+\subsubsection{Invertible iff full rank}
+A square matrix is invertible iff it has full rank.
+\bpr
+Implies: If $A$ is invertible $Ax=0$ has the only solution $x=0$, thus $A$ has nullity $0$. By rank-nullity thereom, $A$ has rank $n$.
+
+Implied by: Since $A$ has full rank, elementary row operations preserve rank, and $I_n$ is the only RREF with full rank, there exists an invertible matrix $E$, which is the product of a sequence of elementary matrices, such that $EA=I_n$, then $E=A^{-1}$.
+\epr
+\subsubsection{Invertible matrix reduced row echelon form is identity matrix}
+Let $A$ be an $n\times n$ matrix. Then $A$ is invertible iff its reduced row echelon form is $I_n$.
+\bpr
+Implies: Since $A$ has full rank, elementary row operations preserve rank, and $I_n$ is the only RREF with full rank, $A$ must have reduced row echelon form $I_n$.
+
+Implied by: Since elementary row operations preserve rank and $I_n$ has full rank, $A$ has full rank, thus $A$ is invertible.
 \epr
 \section{Matrix Analysis (矩陣分析)}
 \subsection{Eigenvector or characteristic vector (特徵向量) and characteristic polynomial (特徵多項式)}
