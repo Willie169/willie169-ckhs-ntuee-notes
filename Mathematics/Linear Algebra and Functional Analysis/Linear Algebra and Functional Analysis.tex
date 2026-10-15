@@ -642,15 +642,6 @@ If such $\mb{A}^{-1}$ exists, $\mb{A}$ is called invertible.
 Given an invertible matrix $\mathbf{A}$ and a negative integer $n$, $\mathbf{A}^n$ is defined as $(\mathbf{A}^{-1})^n$.
 \subsubsection{Invertible matrix (可逆矩陣), orthogonal matrix (正交矩陣), orthonormal matrix (正則矩陣), non-singular matrix (非奇異矩陣), or non-degenerate matrix (非退化矩陣)}
 An invertible matrix, orthogonal matrix, orthonormal matrix, non-singular matrix, or non-degenerate matrix is a matrix such that its inverse exists.
-
-Let $\mathbf{A}$ be an $n\times n$ matrix, the following prepositions are equivalent to "$\mathbf{A}$ is an invertible matrix":
-\[\begin{aligned}
-&\exists\mathbf{A}^{-1}\\
-&\exists\qty(\mathbf{A}^\top)^{-1}\\
-&\exists\qty(\mathbf{A}^\top\mathbf{A})^{-1}\\
-&\operatorname{rank}(\mathbf{A})=n\\
-&\mathbf{A}\text{存在非零的特徵值}
-\end{aligned}\]
 \subsubsection{Non-invertible matrix (不可逆矩陣), non-orthogonal matrix (非正交矩陣), non-orthonormal matrix (非正則矩陣), singular matrix (奇異矩陣), or degenerate matrix (退化矩陣)}
 An non-invertible matrix, non-orthogonal matrix, non-orthonormal matrix, singular matrix, or degenerate matrix is a matrix that is not an invertible matrix.
 \subsubsection{Inverse of a two-by-two matrix}
@@ -670,6 +661,8 @@ An unitary matrix is a square matrix whose inverse equals to its conjugate trans
 \item Given matrix $\mb{A}$ and its inverse $\mb{A}^{-1}$, $\det(\mb{A}^{-1})=\frac{1}{\det(\mb{A})}$.
 \eit
 \subsubsection{Inverse identities}
+A matrix is invertible iff its transpose is invertible. Product of invertible matrices is invertible.
+
 Let $\mathbf{A}$ and $\mb{A}_i$ be invertible matrices, $\mathbf{B}$ be a matrix of the same size of $\mathbf{A}$.
 \[\mathbf{A}^{-1}=\frac{\mathrm{adj}\qty(\mathbf{A})}{\det\qty(\mathbf{A})}\]
 \[\qty(\mathbf{A}^\top)^{-1}=\qty(\mathbf{A}^{-1})^\top\]
@@ -681,7 +674,9 @@ Let $\mathbf{A}$ and $\mb{A}_i$ be invertible matrices, $\mathbf{B}$ be a matrix
 Let $A,B$ be square matrix of same size,
 \[AB=I\Rightarrow(\exists A^{-1}\land A^{-1}=B)\]
 \subsubsection{Inverse of elementary matrix}
-Every elementary matrix is invertible. Moreover, the inverse of an elementary is an elementary matrix.  
+Every elementary matrix is invertible. Moreover, the inverse of an elementary is an elementary matrix.
+
+Thus, for any two row-equivalent $m\times n$ matrices $A,B$, there exists an $m\times m$ invertible matrix $C$, which is the product of a sequence of $m\times m$ elementary matrices, such that $B=CA$.
 \subsubsection{Vandermonde matrix (范德蒙矩陣)}
 A Vandermonde matrix $\mathbf{V}$ is:
 \[V_{i,j}=\alpha_i^{\pht{i}j-1}\]
@@ -747,13 +742,13 @@ If: There exists elementary matrices $E_1,\ldots, E_k$ such that
 \[N=E_k\ldots E_1M\]
 We prove that multiplying augmented matrix $E$ by an elementary matrix doesn't change its solution set.
 \[EM=[EA|Eb]\]
-If $b\notin\row(A)$, since elementary row operation doesn't alter row space, $Eb\notin\row(EA)$. Otherwise, since $E$ is invertible, we have
+If $b\notin\row(A)$, since elementary row operation doesn't alter row space, $Eb\notin\row(EA)$. Otherwise, since $E$ is invertible with inverse being elementary matrix, we have
 \[Ax=b\implies EAx=EAb\]
 \[EAx=Eb\implies E^{-1}EAx=E^{-1}EAb\implies Ax=b\]
 
 Only if: By the existence and uniqueness of reduced row echelon form, if they have the same non-empty solution set, they have the same reduced row echelon form $R$, and we can construct sequences of elementary matrices $E_1,\ldots,E_k$ and $F_1,\ldots,F_k$ such that
 \[R=E_k\ldots E_1M=F_k\ldots F_1N\]
-Since elementary matrices are invertible, we have
+Since an elementary matrix is invertible with inverse being elementary matrix, we have
 \[M=E_1^{-1}\ldots E_k^{-1}F_k\ldots F_1N,\]
 and that $M,N$ are row-equivalent.
 \epr
@@ -805,23 +800,23 @@ Gaussian elimination is a recursive algorithm to solve a system of linear equati
 \item Ignore the row containing the pivot position. If there is a nonzero row below it, repeat steps 1–4 (called forward pass) on the submatrix that remains.
 \een
 \subsubsection{Gaussian-Jordan Elimination}
-Gaussian-Jordan elimination is an algorithm to solve a system of linear equations by finding the row-equivalent reduced row echelon form of the augmented matrix. First do Gaussian elimination to obtain a row-equivalent row echelon form, and then, from the topmost to bottommost nonzero row, do the following (called backward pass):
+Gaussian-Jordan elimination is an algorithm to solve a system of linear equations by finding the row echelon form of the augmented matrix. First do Gaussian elimination to obtain a row-equivalent row echelon form, and then, from the topmost to bottommost nonzero row, do the following (called backward pass):
 \ben
 \item Perform the appropriate row scaling to make the leading entry 1.
 \item Add an appropriate multiple of the row to each upper row in order to change each entry above the leading entry into 0.
 \een
-\subsubsection{Row-equivalent reduced echelon form to general solution}
-Given the row-equivalent reduced row echelon form of the augmented matrix of a linear system, if it has no row with leading entry in the rightmost column, we can obtain the general solution by
+\subsubsection{Reduced echelon form to general solution}
+Given the reduced row echelon form of the augmented matrix of a linear system, if it has no row with leading entry in the rightmost column, we can obtain the general solution by
 \ben
 \item Assign the variables of non-pivot columns as free variables and variables of pivot columns as basic variables.
 \item For each nonzero row, write an equation of the variable of the leading entry as a linear combination of the variables (constant term for the rightmost column and free variables for others) of other nonzero entries.
 \een
-\subsubsection{Row-equivalent reduced echelon form test for consistency of linear system}
+\subsubsection{Reduced echelon form test for consistency of linear system}
 A system of linear equations is consistent iff the reduced row echelon form of its augmented matrix has no row with leading entry in the rightmost column.
 \bpr
 If the reduced row echelon form of its augmented matrix has row with leading entry in the rightmost column, it is obviously inconsistent. If the reduced row echelon form of its augmented matrix has no row with leading entry in the rightmost column, we can construct a general solution.
 \epr
-\subsubsection{Existence and uniqueness of row-equivalent reduced row echelon form}
+\subsubsection{Existence and uniqueness of reduced row echelon form}
 Every matrix can be transformed into one and only one matrix in reduced row echelon form by means of a sequence of elementary row operations.
 \bpr
 TODO
@@ -847,7 +842,7 @@ The image space of a linear map $T\colon V\to W$, denoted as $\operatorname{im}(
 \subsubsection{Cokernel (餘核)}
 The cokernel of a linear map $T\colon V\to W$, denoted as $\operatorname{coker}(T)$, is defined as,
 \[\operatorname{coker}(T)=W\setminus\operatorname{im}(T).\]
-\subsection{Rank}
+\subsection{Rank and nullity}
 \subsubsection{Rank (秩)}
 The rank of a matrix \(\mathbf{A}\), denoted as \( \operatorname{rank}(\mathbf{A}) \) or $\operatorname{rk}(\mathbf{A})$, is defined as the dimension of its column space (or row space, which are the same by constant rank theorem), that is,
 \[\text{rank}(\mathbf{A})=\dim(\operatorname{Col}(\mathbf{A}))\]
@@ -925,6 +920,14 @@ $\mathbf{A}$ is called to have full rank; otherwise it is called to be rank-defi
 
 The rank deficiency of a $m\times n$ matrix $\mb{A}$ is defined as
 \[\min(m, n)-\text{rank}(\mathbf{A}) \]
+\subsubsection{Bound of rank}
+For any $m\times n$ matrix $\mb{A}$:
+\[\text{rank}(\mathbf{A}) \leq \min(m, n)\]
+\subsubsection{Invertible iff full rank}
+A square matrix is invertible iff it has full rank.
+\subsubsection{Zero rank}
+A matrix is a zero matrix iff its rank is zero.
+\subsection{Properties}
 \subsubsection{Rank and number of pivot columns}
 For a matrix $A$ and its reduced row echelon form $R$, the followings are equal:
 \bit
@@ -987,15 +990,22 @@ For a matrix $A\in\bbR^{m\times n}$, the followings are equivalent:
 If consistent, since the associated vector space $\ker(A)$ of solution space is $\{\mb{0}\}$, the solution space has only one element.
 \epr
 \item The only solution to the homogeneous linear system whose coefficient matrix is $A$ is $\mb{0}$.
-\item The columns of the row-equivalent reduced row echelon form of $A$ are the $n$ distinct standard vectors of $\bbR^n$.
+\item The columns of the reduced row echelon form of $A$ are the $n$ distinct standard vectors of $\bbR^n$.
 \eit
-\subsubsection{Bound of rank}
-For any $m\times n$ matrix $\mb{A}$:
-\[\text{rank}(\mathbf{A}) \leq \min(m, n)\]
-\subsubsection{Invertible iff full rank}
-A square matrix is invertible iff it has full rank.
-\subsubsection{Zero rank}
-A matrix is a zero matrix iff its rank is zero.
+\subsubsection{Column correspondence property}
+Let $A,B$ be row-equivalent matrices. If a column $j$ of $A$ is a linear combination of other columns of $A$, then column $j$ of $B$ is a linear combination of the corresponding columns of $B$ using the same coefficients.
+\bpr
+There exists an invertible matrix $E$, which is the product of a sequence of $m\times m$ elementary matrices, such that $B=EA$. Then, for every column $j$,
+\[B_j=EA_j\]
+Suppose
+\[A_j=\sum_{i\ne j}c_iA_i\]
+\[B_j=EA_j=E\sum_{i\ne j}c_iA_i=\sum_{i\ne j}c_iB_i\]
+\epr
+\subsubsection{Pivot column set is column space basis}
+The set of pivot columns of a matrix is a basis of its column space.
+\bpr
+For reduced row echelon form, obviously. By column correspondence property and unique existence of reduced row echelon form, the statement holds.
+\epr
 \section{Matrix Analysis (矩陣分析)}
 \subsection{Eigenvector or characteristic vector (特徵向量) and characteristic polynomial (特徵多項式)}
 \subsubsection{Eigenvector or characteristic vector (特徵向量) and eigenvalue (本徵值、固有值、特徵值或特徵根)}
@@ -1011,12 +1021,21 @@ where $\lambda$ is a scalar variable.
 
 A scalar $\lambda$ is an eigenvalue of $\mb{A}$ if and only if
 \[p_\mathbf{A}(\lambda)=0.\]
-\subsubsection{Property}
-\bit
-\item The number of distinct eigenvalues of a square matrix is less than or equal to the number of linearly independent eigenvectors.
-\item The number of distinct eigenvalues of a $n\times n$ matrix is less than or equal to $n$.
-\item The algebraic multiplicity of a root $\lambda$ of the characteristic polynomial of a square matrix is greater than or equal to the number of linearly independent eigenvectors of it whose eigenvalue is $\lambda$.
-\end{itemize}
+\subsubsection{Multiplicity of eigenvalues}
+The algebraic multiplicity of a root $\lambda$ of the characteristic polynomial of a square matrix is greater than or equal to the number of linearly independent eigenvectors of it whose eigenvalue is $\lambda$.
+\bpr
+TODO
+\epr
+\subsubsection{Number of eigenvalues}
+The number of distinct eigenvalues of a square matrix is less than or equal to the number of linearly independent eigenvectors, which less than or equal to $n$.
+\bpr
+TODO
+\epr
+\subsubsection{Invertible iff has nonzero eigenvalue}
+A square matrix is invertible iff it has nonzero eigenvalue.
+\bpr
+TODO
+\epr
 \subsubsection{Cayley–Hamilton theorem (凱萊–哈密頓定理)}
 For a square matrix $\mathbf{A}$ and its characteristic polynomial $p_\mathbf{A}$, the Cayley–Hamilton theorem states that:
 \[p_\mathbf{A}(\mathbf{A})=0\]
