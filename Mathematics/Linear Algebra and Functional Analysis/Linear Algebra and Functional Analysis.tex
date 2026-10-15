@@ -464,14 +464,9 @@ For two $m\times n$ matrices $\mb{A}$ and $\mb{B}$, the Hadamard product $ \mb{A
 If $\mathbf{A}$ is an $m\times n$ matrix and $\mathbf{B}$ is a $p\times q$ matrix, then the Kronecker product $\mathbf{A}\otimes\mathbf{B}$ is the $pm\times qn$ block matrix:
 \[(\mathbf{A}\otimes\mathbf{B})_{i,j}=a_{\ceil{\frac{i}{p}},\ceil{\frac{j}{q}}}b_{((i-1)\mod p)+1,((j-1)\mod q)+1}\]
 \subsubsection{Merging matrices}
-The matrix formed by merging two matrices $\mathbf{A}$ and $\mathbf{B}$ with the same number of rows left and right is denoted as:
-\[\begin{bmatrix}\mathbf{A} & \mathbf{B}\end{bmatrix}\]
-or
-\[\begin{pmatrix}\mathbf{A} & \mathbf{B}\end{pmatrix}\]
-The matrix formed by merging two matrices $\mathbf{A}$ and $\mathbf{B}$ with the same number of columns up and down is denoted as:
-\[\begin{bmatrix}\mathbf{A} \\ \mathbf{B}\end{bmatrix}\]
-or
-\[\begin{pmatrix}\mathbf{A} \\ \mathbf{B}\end{pmatrix}\]
+The matrix formed by merging matrices with the same number of rows left and right is denoted by writing them in columns of a row vector.
+
+The matrix formed by merging matrices with the same number of columns up and down is denoted by writing them in rows of a column vector.
 \subsubsection{Property}
 For any scalars $r$ and $s$, $m\times n$ matrices $A$, $B$, $C$, $D$, zero matrix $O$, and identity matrix $I$, the following statements are true,
 \[A+B=B+A\]
@@ -740,11 +735,27 @@ The coefficients of a system of linear equations written as a matrix, with one r
 \subsubsection{Constant term vector}
 The column vector of the constant terms on the right side of the equal signs of a system of linear equations.
 \subsubsection{Augmented matrix (增廣矩陣)}
-Coefficient matrix with the constant term vector augmented to the last column of the matrix.
+Coefficient matrix with the constant term vector augmented to the last column of the matrix. For coefficient matrix $A$ and constant term vector $b$, we write the augmented matrix as $[A|b]$.
 \subsubsection{Row equivalent means same solutions}
-Two systems of linear equations with same size of augmented matrix have the same solutions iff their augmented matrices are row-equivalent.
+Two systems of linear equations with same size of augmented matrix have the same solutions if their augmented matrices are row-equivalent.
+
+Two consistent systems of linear equations with same size of augmented matrix have the same solutions iff their augmented matrices are row-equivalent.
 \bpr
-TODO
+Let $M=[A|b]$ and $N=[C|d]$ both be with $m$ rows and $n+1$ columns.
+
+If: There exists elementary matrices $E_1,\ldots, E_k$ such that
+\[N=E_k\ldots E_1M\]
+We prove that multiplying augmented matrix $E$ by an elementary matrix doesn't change its solution set.
+\[EM=[EA|Eb]\]
+If $b\notin\row(A)$, since elementary row operation doesn't alter row space, $Eb\notin\row(EA)$. Otherwise, since $E$ is invertible, we have
+\[Ax=b\implies EAx=EAb\]
+\[EAx=Eb\implies E^{-1}EAx=E^{-1}EAb\implies Ax=b\]
+
+Only if: By the existence and uniqueness of reduced row echelon form, if they have the same non-empty solution set, they have the same reduced row echelon form $R$, and we can construct sequences of elementary matrices $E_1,\ldots,E_k$ and $F_1,\ldots,F_k$ such that
+\[R=E_k\ldots E_1M=F_k\ldots F_1N\]
+Since elementary matrices are invertible, we have
+\[M=E_1^{-1}\ldots E_k^{-1}F_k\ldots F_1N,\]
+and that $M,N$ are row-equivalent.
 \epr
 \subsubsection{Cramer Rule or Cramer formula (克拉瑪公式)}
 Given a system of linear equations that can be written in the form:
@@ -796,8 +807,8 @@ Gaussian elimination is a recursive algorithm to solve a system of linear equati
 \subsubsection{Gaussian-Jordan Elimination}
 Gaussian-Jordan elimination is an algorithm to solve a system of linear equations by finding the row-equivalent reduced row echelon form of the augmented matrix. First do Gaussian elimination to obtain a row-equivalent row echelon form, and then, from the topmost to bottommost nonzero row, do the following (called backward pass):
 \ben
-\item Perform the appropriate row scaling the make the leading entry, which is a pivot position, 1.
-\item Add an appropriate multiple of the row to each upper row in order to change each entry above the pivot position into 0.
+\item Perform the appropriate row scaling to make the leading entry 1.
+\item Add an appropriate multiple of the row to each upper row in order to change each entry above the leading entry into 0.
 \een
 \subsubsection{Row-equivalent reduced echelon form to general solution}
 Given the row-equivalent reduced row echelon form of the augmented matrix of a linear system, if it has no row with leading entry in the rightmost column, we can obtain the general solution by
