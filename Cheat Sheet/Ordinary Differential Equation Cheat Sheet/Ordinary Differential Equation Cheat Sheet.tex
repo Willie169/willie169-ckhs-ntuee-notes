@@ -7,5 +7,62 @@
 \begin{document}
 \temdoc
 \section{Ordinary Differential Equation Cheat Sheet}
-\ssc{Autonomous System}
-\[\dv{y}{x}=f(y)\]
+\ssc{Separable equation}
+\[\dv{y}{x}=g(x)h(y)\]
+Family of solutions:
+\[\int\frac{1}{h(y)}\dd{y}=\int g(x)\dd{x}+C\]
+Singular solution:
+\[h(y)=0\]
+\ssc{First-order linear equation}
+\[\dv{y}{x}+P(x)y=Q(x)\]
+Integrating factor:
+\[\mu(x)=e^{\int P(x)\dd{x}}\]
+General solution:
+\[y(x)=\frac{1}{\mu(x)}\qty(\int\mu(x)Q(x)\dd{x}+C)\]
+\ssc{Exact equation}
+On a simply-connected open set,
+\[M(x,y)\dd{x}+N(x,y)\dd{y}=0\]
+where $\frac{\partial^2M}{\partial x\partial y}$ and $\frac{\partial^2N}{\partial x\partial y}$ is continuous and
+\[\pdv{M}{y}=\pdv{N}{x}\]
+There exists a function $F$ such that
+\[\pdv{F}{x}=M,\quad\pdv{F}{y}=N\]
+and that $\frac{\partial^2F}{\partial x\partial y}$ is continuous, called the potential function.
+\[\ba
+F(x,y)&=\int M(x,y)\dd{x}+\int N(x,y)-\pdv{}{y}\qty(\int M(x,y)\dd{x})\dd{y}\\
+      &=\int N(x,y)\dd{y}+\int M(x,y)-\pdv{}{x}\qty(\int N(x,y)\dd{y})\dd{x}
+\ea\]
+Implicit solution:
+\[F(x,y)=C\]
+\ssc{Integrating factors to make inexact equations exact}
+On a simply-connected open set,
+\[M(x,y)\dd{x}+N(x,y)\dd{y}=0\]
+Integrating factor $\mu(x,y)$ such that
+\[\mu(x,y)M(x,y)\dd{x}+\mu(x,y)N(x,y)\dd{y}=0\]
+is exact.
+
+If
+\[\frac{\pdv{M}{y}-\pdv{N}{x}}{N}\]
+depends only on $x$,
+\[\mu(x)=e^{\int\frac{\pdv{M}{y}-\pdv{N}{x}}{N}\dd{x}}\]
+If
+\[\frac{\pdv{N}{x}-\pdv{M}{y}}{M}\]
+depends only on $y$,
+\[\mu(y)=e^{\int\frac{\pdv{N}{x}-\pdv{M}{y}}{M}\dd{x}}\]
+\ssc{Homogeneous equation}
+\[\dv{y}{x}=F(x,y)\]
+\[\forall t\ne0\colon F(tx,ty)=F(x,y)\]
+There exists a function $f$ such that
+\[\forall x\ne0,(x,y)\in D_F\colon F(x,y)=f\qty(\frac{y}{x})\]
+\[v=\frac{y}{x}\]
+Solution:
+\[\int\frac{\dd{v}}{f(v)-v}=\ln|x|+C\]
+If $F$ is defined on $x\ne0$, also implicit solution
+\[F(0,y)=0\]
+\ssc{Bernoulli equation}
+\[\dv{y}{x}+P(x)y=Q(x)y^n,\quad n\in\mathbb{R}\setminus\{0,1\}\]
+\[v=y^{1-n}\]
+\[\mu(x)=e^{\int (1-n)P(x)\dd{x}}\]
+\[v(x)=\frac{1}{\mu(x)}\qty(\int\mu(x)(1-n)Q(x)\dd{x}+C)\]
+\ssc{Riccati equation}
+\[\dv{y}{x}=q_0(x)+q_1(x)y+q_2(x)y^2,\]
+where $q_2(x)$ is nonzero and differentiable.
