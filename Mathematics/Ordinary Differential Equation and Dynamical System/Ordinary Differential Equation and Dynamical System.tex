@@ -481,6 +481,41 @@ e^{-\sin(x)/2}v&=\int-\sin(x)\cos(x)e^{-\sin(x)/2}\dd{x},\quad u=\frac{\sin(x)}{
 \[v=2\sin(x)+4+Ce^{\sin(x)/2}\]
 \[y=v^{-2}=\qty(2\sin(x)+4+Ce^{\sin(x)/2})^{-2}\]
 \end{proof}
+\ssc{Riccati equation}
+\sssc{Definition}
+A first-order ODE in the form
+\[\dv{y}{x}=q_0(x)+q_1(x)y+q_2(x)y^2,\]
+where $q_2(x)$ is nonzero and differentiable, is called a Riccati equation.
+
+If $q_2(x)=1$, it is called canonical form.
+\sssc{Solutions by substitutions}
+First convert to canonical form. Let
+\[v=yq_2\]
+\[\ba
+v'&=y'q_2+yq_2'\\
+  &=(q_0+q_1y+q_2y^2)q_2+v\frac{q_2'}{q_2}\\
+  &=q_0q_2+v\qty(q_1+\frac{q_2'}{q_2})+v^2
+\ea\]
+Define
+\[a(x)=q_0q_2\]
+\[b(x)=q_1+\frac{q_2'}{q_2}\]
+We obtain a canonical form Riccati equation:
+\[\dv{v}{x}=a(x)+b(x)v+v^2\]
+Second, convert it to a second-order homogeneous linear equation. Let
+\[u=\exp(-\int v\dd{x})\]
+\[u'=-uv\]
+\[\ba
+u''&=-u'v-v'u\\
+   &=v^2u-(a+bv+v^2)u\\
+   &=-au-bvu\\
+   &=-au+bu'
+\ea\]
+We obtain a second-order homogeneous linear equation:
+\[u''-bu'+au=0\]
+Solve it to obtain $u$.
+\[y=-q_2^{-1}\qty(\ln|u|)'\]
+If $u_1,u_2$ are two linearly independent solution, the general solution of $y$ is
+\[y=-q_2^{-1}\qty(\ln|c_1u_1+c_2u_2|)'\]
 \ssc{Slope being function of linear function}
 ODE:
 \[\dv{y}{x}=f(u),\quad u=ax+by+c.\]
