@@ -313,54 +313,54 @@ Laplace domain:
 \[I_i=\frac{V_i}{Z_i}=I_f=-\frac{V_o}{Z_f}\]
 \[V_o=-\frac{Z_f}{Z_i}V_i\]
 \sssc{Inverting integrator or Miller integrator}
-An inverting integrator consists of an op amp where input voltage $v_i$ is connected to $v_-$ through an input resistance $R$ (current from $v_i$ to $v_-$), $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through a feedback capacitance $C$ (current from $v_-$ to $v_o$).
+An inverting integrator consists of an op amp where input voltage $v_I$ is connected to $v_-$ through an input resistance $R$ (current from $v_I$ to $v_-$), $v_+$ is connected to ground, and $v_O$ is fed back to $v_-$ through a feedback capacitance $C$ (current from $v_-$ to $v_O$).
 
-$v_o(0^-)$ is the initial voltage across $C$ ($v_o$ relative to $v_-$).
+$v_O(0^-)$ is the initial voltage across $C$ ($v_O$ relative to $v_-$).
 
 Time domain:
 \[v_+=v_-=0\]
-\[i_i=\frac{v_i}{R}=i_f=-C\dv{v_o}{t}\]
-\[v_o=v_o(0^-)-\frac{1}{RC}\int_0^tv_i(\tau)\dd{\tau}\]
+\[i_I=\frac{v_I}{R}=i_C=-C\dv{v_O}{t}\]
+\[v_O=v_O(0^-)-\frac{1}{RC}\int_0^tv_I(\tau)\dd{\tau}\]
 Laplace domain:
 \[V_+=V_-=0\]
-\[I_i=\frac{V_i}{R}=I_f=-CsV_o+Cv_o(0^-)\]
-\[V_o=\frac{1}{s}v_o(0^-)-\frac{1}{RCs}V_i\]
+\[I_I=\frac{V_I}{R}=I_C=-CsV_O+Cv_O(0^-)\]
+\[V_O=\frac{1}{s}v_O(0^-)-\frac{1}{RCs}V_I\]
 Transfer function: Infinite DC gain. Thus, any tiny DC component in the input signal will blow this out.
-\[H(s)=-\frac{1}{RCs}\]
+\[H(s)=\frac{V_o}{V_i}=-\frac{1}{RCs}\]
 \sssc{Inverting integrator or Miller integrator feasible configuration}
-An inverting integrator feasible configuration consists of an op amp where input voltage $v_i$ is connected to $v_-$ through an input resistance $R$ (current from $v_i$ to $v_-$), $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through a feedback capacitance $C$ and feedback resistance $R_f$ in parallel connection with the sum of their current be $i_f$ (from $v_-$ to $v_o$).
+An inverting integrator feasible configuration consists of an op amp where input voltage $v_I$ is connected to $v_-$ through an input resistance $R$ (current from $v_I$ to $v_-$), $v_+$ is connected to ground, and $v_O$ is fed back to $v_-$ through a feedback capacitance $C$ and feedback resistance $R_f$ in parallel connection with the sum of their current be $i_f$ (from $v_-$ to $v_O$).
 
-$v_o(0^-)$ is the initial voltage across $C$ ($v_o$ relative to $v_-$).
+$v_O(0^-)$ is the initial voltage across $C$ ($v_O$ relative to $v_-$).
 
 Laplace domain:
 \[V_+=V_-=0\]
-\[I_i=\frac{V_i}{R}=I_f=-\qty(\frac{1}{R_f}+Cs)V_o+Cv_o(0^-)=-\frac{1+R_fCs}{R_f}V_o+Cv_o(0^-)\]
-\[V_o=\frac{R_fC}{1+R_fCs}v_o(0^-)-\frac{\frac{R_f}{R}}{1+R_fCs}V_i\]
+\[I_I=\frac{V_I}{R}=I_f=-\qty(\frac{1}{R_f}+Cs)V_O+Cv_O(0^-)=-\frac{1+R_fCs}{R_f}V_O+Cv_O(0^-)\]
+\[V_O=\frac{R_fC}{1+R_fCs}v_O(0^-)-\frac{\frac{R_f}{R}}{1+R_fCs}V_I\]
 Transfer function: Butterworth first-order low-pass with cutoff frequency $\frac{1}{R_fC}$ and DC gain $\frac{R_f}{R}$.
-\[H(s)=-\frac{\frac{R_f}{R}}{1+R_fCs}\]
+\[H(s)=\frac{V_o}{V_i}=-\frac{\frac{R_f}{R}}{1+R_fCs}\]
 \sssc{Inverting differentiator}
-An inverting differentiator consists of an op amp where input voltage $v_i$ is connected to $v_-$ through an input capacitor $C$ (current from $v_i$ to $v_-$), $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through a feedback resistor $R$ (current from $v_-$ to $v_o$).
+An inverting differentiator consists of an op amp where input voltage $v_I$ is connected to $v_-$ through an input capacitor $C$ (current from $v_I$ to $v_-$), $v_+$ is connected to ground, and $v_O$ is fed back to $v_-$ through a feedback resistor $R$ (current from $v_-$ to $v_O$).
 
-$v_i(0^-)$ is the initial voltage across $C$ ($v_i$ relative to $v_-$).
+$v_I(0^-)$ is the initial voltage across $C$ ($v_I$ relative to $v_-$).
 
 Time domain:
-\[i_i=C\dv{v_i}{t}=i_f=\frac{-v_o}{R}\]
-\[v_o=RC\qty(v_i(0^-)-\int_0^tv_i(\tau)\dd{\tau})\]
+\[i_I=C\dv{v_I}{t}=i_f=\frac{-v_O}{R}\]
+\[v_O=RC\qty(v_I(0^-)-\int_0^tv_I(\tau)\dd{\tau})\]
 Laplace domain:
-\[I_i=CsV_i-Cv_i(0^-)=I_f=\frac{-V_o}{R}\]
-\[V_o=-RCsV_i+RCv_i(0^-)\]
+\[I_I=CsV_I-Cv_I(0^-)=I_f=\frac{-V_O}{R}\]
+\[V_O=-RCsV_I+RCv_I(0^-)\]
 Transfer function: Infinite gain at $\omega=\infty$.
-\[H(s)=-RCs\]
+\[H(s)=\frac{V_o}{V_i}=-RCs\]
 \sssc{Inverting differentiator feasible configuration}
-An inverting differentiator feasible configuration consists of an op amp where input voltage $v_i$ is connected to $v_-$ through an input capacitor $C$ and a input resistor $R_i$ in series connection (current from $v_i$ to $v_-$), $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through a feedback resistor $R$ (current from $v_-$ to $v_o$).
+An inverting differentiator feasible configuration consists of an op amp where input voltage $v_I$ is connected to $v_-$ through an input capacitor $C$ and a input resistor $R_I$ in series connection (current from $v_I$ to $v_-$), $v_+$ is connected to ground, and $v_O$ is fed back to $v_-$ through a feedback resistor $R$ (current from $v_-$ to $v_O$).
 
-$v_i(0^-)$ is the initial voltage across $C$ ($v_i$ relative to $v_-$).
+$v_I(0^-)$ is the initial voltage across $C$ ($v_I$ relative to $v_-$).
 
 Laplace domain:
-\[I_i=\frac{1}{R_i+\frac{1}{Cs}}V_i-Cv_i(0^-)=\frac{\frac{s}{R_i}}{s+\frac{1}{R_iC}}V_i-Cv_i(0^-)=I_f=\frac{-V_o}{R}\]
-\[V_o=-\frac{\frac{R}{R_i}s}{s+\frac{1}{R_iC}}V_i+RCv_i(0^-)\]
-Transfer function: Butterworth first-order high-pass with cutoff frequency $\frac{1}{R_iC}$ and gain $\frac{R}{R_i}$ at $\omega=\infty$.
-\[H(s)=-\frac{\frac{R}{R_i}s}{s+\frac{1}{R_iC}}\]
+\[I_I=\frac{1}{R_I+\frac{1}{Cs}}V_I-Cv_I(0^-)=\frac{\frac{s}{R_I}}{s+\frac{1}{R_IC}}V_I-Cv_I(0^-)=I_f=\frac{-V_O}{R}\]
+\[V_O=-\frac{\frac{R}{R_I}s}{s+\frac{1}{R_IC}}V_I+RCv_I(0^-)\]
+Transfer function: Butterworth first-order high-pass with cutoff frequency $\frac{1}{R_IC}$ and gain $\frac{R}{R_I}$ at $\omega=\infty$.
+\[H(s)=\frac{V_o}{V_i}=-\frac{\frac{R}{R_I}s}{s+\frac{1}{R_IC}}\]
 \sssc{Large-signal operation}
 \bit
 \item Output voltage saturation: A real op amp operates linearly over a limited range of output voltages and saturates if the output voltage reaches a saturation voltage, which is related to the positive and negative power supply voltages. An op amp with saturation voltage equal to its power supplies is said to offer rail-to-rail output.
