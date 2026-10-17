@@ -7,19 +7,21 @@
 \begin{document}
 \temdoc
 \section{Ordinary Differential Equation Cheat Sheet}
-\ssc{Separable equation}
+\ssc{First-order ODE}
+\[M(x,y)+N(x,y)\dv{y}{x}=0\]
+\sssc{Separable equation}
 \[\dv{y}{x}=g(x)h(y)\]
 Family of solutions:
 \[\int\frac{1}{h(y)}\dd{y}=\int g(x)\dd{x}+C\]
 Singular solution:
 \[h(y)=0\]
-\ssc{First-order linear equation}
+\sssc{First-order linear equation}
 \[\dv{y}{x}+P(x)y=Q(x)\]
 Integrating factor:
 \[\mu(x)=e^{\int P(x)\dd{x}}\]
 General solution:
 \[y(x)=\frac{1}{\mu(x)}\qty(\int\mu(x)Q(x)\dd{x}+C)\]
-\ssc{Exact equation}
+\sssc{Exact equation}
 On a simply-connected open set,
 \[M(x,y)\dd{x}+N(x,y)\dd{y}=0\]
 where $\frac{\partial^2M}{\partial x\partial y}$ and $\frac{\partial^2N}{\partial x\partial y}$ is continuous and
@@ -33,7 +35,7 @@ F(x,y)&=\int M(x,y)\dd{x}+\int N(x,y)-\pdv{}{y}\qty(\int M(x,y)\dd{x})\dd{y}\\
 \ea\]
 Implicit solution:
 \[F(x,y)=C\]
-\ssc{Integrating factors to make inexact equations exact}
+\sssc{Integrating factors to make inexact equations exact}
 On a simply-connected open set,
 \[M(x,y)\dd{x}+N(x,y)\dd{y}=0\]
 Integrating factor $\mu(x,y)$ such that
@@ -48,7 +50,7 @@ If
 \[\frac{\pdv{N}{x}-\pdv{M}{y}}{M}\]
 depends only on $y$,
 \[\mu(y)=e^{\int\frac{\pdv{N}{x}-\pdv{M}{y}}{M}\dd{x}}\]
-\ssc{Homogeneous equation}
+\sssc{Homogeneous equation}
 \[\dv{y}{x}=F(x,y)\]
 \[\forall t\ne0\colon F(tx,ty)=F(x,y)\]
 There exists a function $f$ such that
@@ -58,12 +60,12 @@ Solution:
 \[\int\frac{\dd{v}}{f(v)-v}=\ln|x|+C\]
 If $F$ is defined on $x\ne0$, also implicit solution
 \[F(0,y)=0\]
-\ssc{Bernoulli equation}
+\sssc{Bernoulli equation}
 \[\dv{y}{x}+P(x)y=Q(x)y^n,\quad n\in\mathbb{R}\setminus\{0,1\}\]
 \[v=y^{1-n}\]
 \[\mu(x)=e^{\int (1-n)P(x)\dd{x}}\]
 \[v(x)=\frac{1}{\mu(x)}\qty(\int\mu(x)(1-n)Q(x)\dd{x}+C)\]
-\ssc{Riccati equation}
+\sssc{Riccati equation}
 \[\dv{y}{x}=q_0(x)+q_1(x)y+q_2(x)y^2,\]
 where $q_2(x)$ is nonzero and differentiable.
 
@@ -75,11 +77,54 @@ If $q_2(x)=1$, it is called canonical form.
 \[u=\exp(-\int v\dd{x})\]
 \[u''-bu'+au=0\]
 \[y=-q_2^{-1}\qty(\ln|u|)'\]
-\ssc{Slope being function of linear function}
+\sssc{Slope being function of linear function}
 \[\dv{y}{x}=f(u),\quad u=ax+by+c\]
 \[\int\frac{1}{a+bf(u)}\dd{u}=x+C\]
-\ssc{Slope being function of linear function over linear function}
+\sssc{Slope being function of linear function over linear function}
 \[\dv{y}{x}=F\qty(\frac{ax+by+c}{px+qy+r}),\quad aq-bp\neq 0.\]
-We can find a unique solution of $ax+by+c=px+qy+r=0$ for $x$ and $y$, let it be $x=\alpha$, $y=\beta$, let
+We can find a unique solution of $ax+by+c=px+qy+r=0$, $x=\alpha$ and $y=\beta$. Let
 \[f(t)=F\qty(\frac{a+bt}{p+qt})\]
 \[\dv{y}{x}=f(u),\quad u=\frac{y-\beta}{x-\alpha}\]
+Solutions:
+\[\int\frac{1}{f(u)-u}\dd{u}=\ln|x-\alpha|+C\]
+or
+\[f(u)=u\]
+\ssc{Linear ODE}
+\[\sum_{i=0}^na_i(x)y^{(i)}=f(x),\]
+in which $a_i(x)\colon\Omega_i\subseteq\bbR\to\bbR$ are called coefficients and $f(x)\colon\Omega\subseteq\bbR\to\bbR^m$ is called forcing term.
+\sssc{Linear differential operator}
+A linear differential operator is a polynomial of the differential operators $D$, i.e., $\dv{}{x}$ for independent variable $x$, and its order is the degree of the polynomial.
+\sssc{Linearity}
+Let $L$ be the linear differential operator $L[\mb{y}]=\sum_{i=0}^na_i(x)\mb{y}^{(i)}$. Then $L[\alpha\mb{y}_1+\beta\mb{y}_2]=\alpha L[\mb{y}_1]+\beta L[\mb{y}_2]$.
+\sssc{Homogeneity}
+A linear ODE is called homogeneous iff the forcing term is 0; otherwise, it is called non-homogeneous.
+\sssc{Superposition principle and solutions of homogeneous linear ODE as vector space}
+If $y_1(x)$ and $y_2(x)$ are both solutions to a homogeneous linear ODE on an interval, then $c_1y_1(x)+c_2y_2(x)$ is also a solution to it on the interval for any $c_1,c_2\in\bbR$. Thus, the general solutions to a homogeneous linear ODE is a vector space.
+\sssc{Complementary or associated (homogeneous) equation, natural, complementary, or homogeneous solution or function, particularly solution, and solutions of non-homogeneous linear ODE as affine space}
+Given an $n$th-order linear ODE
+\[\sum_{i=0}^na_i(x)y^{(i)}=f(x),\]
+\[\sum_{i=0}^na_i(x)y^{(i)}=0,\]
+is called its complementary or associated (homogeneous) equation, and the general solutions of the original equation is the sum of the general solutions $y_c$ of the complementary equation, called natural, complementary, or homogeneous solution or function, and a particular solution $y_p$. Thus, the general solutions to a non-homogeneous linear ODE is an affine space whose associated vector space is the vector space of the solutions to its complementary equation.
+\sssc{Wrońskian or Wronskian}
+For $n$ functions $f_i\colon\Omega_i\subseteq\bbR\to\bbR$ for all $i\in\bbN_{\le n}$ that are $(n-1)$ times differentiable on an interval $I$, the Wrońskian (also called Wronskian) of them, $W(f_1,f_2,\ldots,f_n)$, is a function on $I$ defined by
+\[W(f_1,f_2,\ldots,f_n)(x)=\begin{vmatrix}
+f_1(x) & f_2(x) & \cdots & f_n(x) \\
+f_1'(x) & f_2(x) & \cdots & f_n'(x) \\
+\vdots & \vdots & \ddots & \vdots \\
+f_1^{(n-1)}(x) & f_2^{(n-1)}(x) & \cdots & f_n^{(n-1)}(x)
+\end{vmatrix}.\]
+\sssc{Non-zero Wrońskian implies linear independence}
+For $n$ functions $f_i\colon\Omega_i\subseteq\bbR\to\bbR$ for all $i\in\bbN_{\le n}$ that are $(n-1)$ times differentiable on an interval $I$, if $W(f_1,f_2,\ldots,f_n)\ne0$, then they are linearly independent.
+\sssc{General Abel's (differential equation) identity/formula}
+For $n$ $(n-1)$ times differentiable solutions $y_1,y_2,\ldots,y_n$ of $y^{(n)}+\sum_{i=0}^{n-1}p_i(x)y^{(i)}=0$ on an interval $I$ where $p_i(x)$ are continuous for all $i\in[0,n-1]\cap\bbZ$, for any $x_0\in I$,
+\[W(y_1,y_2,\ldots,y_n)(x)=W(y_1,y_2,\ldots,y_n)(x_0)\exp(-\int_{x_0}^Xp_{n-1}(t)\dd{t}).\]
+\sssc{Non-zero Wrońskian of solutions of homogeneous linear equation iff linear independence of them}
+For $n$ $(n-1)$ times differentiable solutions $y_1,y_2,\ldots,y_n$ of $y^{(n)}+\sum_{i=0}^{n-1}p_i(x)y^{(i)}=0$ on an interval $I$ where $p_i(x)$ are continuous for all $i\in[0,n-1]\cap\bbZ$, for any $x_0\in I$, $W(y_1,y_2,\ldots,y_n)(x_0)\ne 0$ iff $y_1,y_2,\ldots,y_n$ are linearly independent.
+\sssc{Annihilator}
+An annihilator of a function $f$ is a linear differential operator $L$ such that $L(f)=0$.
+\sssc{Annihilator multiplication property}
+If $P$ is an annihilator of $f$, then for any linear differential operator $Q$, $PQ$ is an annihilator of $f$.
+
+
+
+\end{document}
