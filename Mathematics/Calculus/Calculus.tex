@@ -5049,17 +5049,24 @@ The rounding half to odd $\operatorname{roundhalftoodd}\colon\bbR\to\bbR$ is def
 \left\lceil x-\frac{1}{2}\right\rceil,\quad & \frac{1}{2}\left\lfloor x+\frac{1}{2}\right\rfloor\in\mathbb{Z}
 \ecs.\]
 \subsubsection{Pulse wave, pulse train, or rectangular wave}
-A pulse wave with period $T$, duty cycle $D$, crest $A_1$, and trough $A_0$ is
-\[f(t)=A_0+\qty(A_1-A_0)\qty(\left\lfloor\frac{t}{T}+D\right\rfloor-\left\lfloor\frac{t}{T}\right\rfloor).\]
-The ratio of the high period to the total period of a pulse wave is called the duty cycle.
-
-When the duty cycle is $50\%$, the pulse wave is called square wave.
-\subsubsection{Triangular wave or triangle wave}
-A triangular wave with period $T$, crest $A_1$, and trough $A_0$ is
-\[f(t)=A_0+2\qty(A_1-A_0)\abs{\frac{t}{T}-\left\lfloor\frac{t}{T}+\frac{1}{2}\right\rfloor}.\]
+A pulse wave with period $T$, duty cycle $D$ (ratio of time at crest), and amplitude $A$ is
+\[\ba
+f(t)&=2A\qty(\floor{\frac{t}{T}}-\floor{\frac{t}{T}+1-D}+\frac{1}{2})\qc A,T>0,D\in(0,1)\\
+    &=\bcs A\qc&nT\le t<(n+D)T,\\-A\qc&(n-1+D)T\le t<nT,\ecs n\in\bbZ
+\ea\]
+When the duty cycle is $0.5$, the pulse wave is called square wave.
+\subsubsection{Triangle wave}
+A triangle wave with period $T$ and amplitude $A$ is
+\[\ba
+f(t)&=4A\qty(\abs{\frac{t}{T}-\floor{\frac{t}{T}+\frac{1}{2}}}-\frac{1}{4})\qc A,T>0\\
+    &=\bcs\frac{4A}{T}\qty(\frac{x}{T}-\floor{\frac{x}{T}}-\frac{1}{4})\qc&nT\le t<\qty(n+\frac{1}{2})T,\\\frac{4A}{T}\qty(-\frac{x}{T}+\floor{\frac{x}{T}}+\frac{3}{4})\qc\qty(n-\frac{1}{2})T\le t<nT,\ecs n\in\bbZ
+\ea\]
 \subsubsection{Sawtooth wave or saw wave}
-A sawtooth wave with period $T$, crest $A_1$, and trough $A_0$ is
-\[f(t)=\frac{A_0+A_1}{2}+\qty(A_1-A_0)\qty(\frac{t}{T}-\left\lfloor\frac{t}{T}+\frac{1}{2}\right\rfloor).\]
+A sawtooth wave with period $T$ and amplitude $A$ is
+\[\ba
+f(t)&=2A\qty(\frac{t}{T}-\floor{\frac{t}{T}+\frac{1}{2}})\qc A,T>0\\
+    &=\frac{2A}{T}\qty(t-T\floor{\frac{t}{T}+\frac{1}{2}})
+\ea\]
 \subsubsection{Heaviside step function (黑維塞階躍函數) or Unit step function (單位階躍函數)}
 The Heaviside step function or unit step function $u(x)\colon\bbR\to\bbR$, also denoted as $H(x)$, is defined as
 \[u(x)=
@@ -5376,6 +5383,31 @@ Define iterated logarithmic function $L_n(x)$ as
 \[\dv{}{x}L_n(x)=\dv{}{x}\ln(L_{n-1}(x))=\frac{1}{L_{n-1}(x)}\dv{}{x}L_{n-1}(x)\]
 \[\dv{}{x}L_0(x)=1\]
 \epr
+\subsubsection{Pulse wave, pulse train, or rectangular wave}
+\[\ba
+f(t)&=2A\qty(\floor{\frac{t}{T}}-\floor{\frac{t}{T}+1-D}+\frac{1}{2})\qc A,T>0,D\in(0,1)\\
+    &=\bcs A\qc&nT\le t<(n+D)T,\\-A\qc&(n-1+D)T\le t<nT,\ecs n\in\bbZ
+\ea\]
+In distributional sense,
+\[f'(t)=2A\sum_{n\in\bbZ}\delta(t-nT)-\delta(t-(n+D)T)\]
+\[f(t)=\int_{0^+}^tf'(\tau)\dd{\tau}+A\]
+\subsubsection{Triangle wave}
+\[\ba
+f(t)&=4A\qty(\abs{\frac{t}{T}-\floor{\frac{t}{T}+\frac{1}{2}}}-\frac{1}{4})\qc A,T>0\\
+    &=\bcs\frac{4A}{T}\qty(\frac{x}{T}-\floor{\frac{x}{T}}-\frac{1}{4})\qc&nT\le t<\qty(n+\frac{1}{2})T,\\\frac{4A}{T}\qty(-\frac{x}{T}+\floor{\frac{x}{T}}+\frac{3}{4})\qc\qty(n-\frac{1}{2})T\le t<nT,\ecs n\in\bbZ
+\ea\]
+Square wave with amplitude $\frac{4A}{T}$ except being undefined on its jump discontinuities
+\[\ba
+  f'(t)&=\frac{4A}{T}\qty(\floor{\frac{t}{T}}-\floor{\frac{t}{T}+1-D}+\frac{1}{2})\qc\frac{t}{T}\notin\bbZ\\
+       &=\bcs\frac{4A}{T}\qc&nT<t<\qty(n+\frac{1}{2})T,\\-\frac{4A}{T}\qc&\qty(n-\frac{1}{2})T<t<nT,\ecs n\in\bbZ
+\ea\]
+\[f(t)=\int_0^t\frac{4A}{T}\qty(\floor{\frac{\tau}{T}}-\floor{\frac{\tau}{T}+1-D}+\frac{1}{2})\dd{\tau}\]
+\subsubsection{Sawtooth wave or saw wave}
+\[\ba
+f(t)&=2A\qty(\frac{t}{T}-\floor{\frac{t}{T}+\frac{1}{2}})\qc A,T>0\\
+    &=\frac{2A}{T}\qty(t-T\floor{\frac{t}{T}+\frac{1}{2}})
+\ea\]
+\[f'(t)=\frac{2A}{T}\qc\frac{t}{T}-\frac{1}{2}\notin\bbZ\]
 \subsection{List of Integrals of Real Functions}
 \subsubsection{Power function}
 \[\int x^{-1}\dd{x}=\ln|x|+C.\]
@@ -5837,6 +5869,25 @@ I^2&=\qty(\int_0^{\infty}e^{-x^2}\dd{x})\qty(\int_0^{\infty}e^{-y^2}\dd{y})\\
 &=\frac{\pi}{4}
 \ea\]
 \end{proof}
+\subsubsection{Square wave}
+\[\ba
+f(t)&=2A\qty(\floor{\frac{t}{T}}-\floor{\frac{t}{T}+\frac{1}{2}}+\frac{1}{2})\qc A,T>0\\
+    &=\bcs A\qc&nT\le t<\qty(n+\frac{1}{2})T,\\-A\qc&\qty(n-\frac{1}{2})T\le t<nT,\ecs n\in\bbZ
+\ea\]
+Triangle wave with amplitude $\frac{AT}{4}$
+\[\int f(t)\dd{t}=AT\qty(\abs{\frac{t}{T}-\floor{\frac{t}{T}+\frac{1}{2}}}-\frac{1}{4})+C\]
+\subsubsection{Triangle wave}
+\[\ba
+f(t)&=4A\qty(\abs{\frac{t}{T}-\floor{\frac{t}{T}+\frac{1}{2}}}-\frac{1}{4})\qc A,T>0\\
+    &=\bcs\frac{4A}{T}\qty(\frac{x}{T}-\floor{\frac{x}{T}}-\frac{1}{4})\qc&nT\le t<\qty(n+\frac{1}{2})T,\\\frac{4A}{T}\qty(-\frac{x}{T}+\floor{\frac{x}{T}}+\frac{3}{4})\qc\qty(n-\frac{1}{2})T\le t<nT,\ecs n\in\bbZ
+\ea\]
+\[\int f(t)\dd{t}=AT\qty(2s\abs{s}-s)+C\qc s=\frac{t}{T}-\floor{\frac{t}{T}+\frac{1}{2}}\]
+\subsubsection{Sawtooth wave or saw wave}
+\[\ba
+f(t)&=2A\qty(\frac{t}{T}-\floor{\frac{t}{T}+\frac{1}{2}})\qc A,T>0\\
+    &=\frac{2A}{T}\qty(t-T\floor{\frac{t}{T}+\frac{1}{2}})
+\ea\]
+\[\int f(t)\dd{t}=AT\qty(\frac{x}{T}-\floor{\frac{x}{T}+\frac{1}{2}})^2+C\]
 \subsection{List of Maclaurin Series and Taylor Series of Real Functions}
 \subsubsection{Power function}
 \[x^n=\sum_{k=0}^{\infty}\binom{n}{k}a^{n-k}(x-a)^k,\quad |x-a|<|a|.\]
