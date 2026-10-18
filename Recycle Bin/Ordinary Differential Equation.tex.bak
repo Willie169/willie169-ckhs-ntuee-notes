@@ -219,3 +219,106 @@ Solutions:
 \[r=\pm\omega i\]
 \[x(t)=A\sin(\omega t)+B\cos(\omega t)=A\sin(\omega t+\phi)\]
 \end{proof}
+\sssc{Example: $y''-2xy'+y=0$}
+ODE:
+\[y''-2xy'+y=0.\]
+Solutions:
+\[y=\sum_{n=0}^{\infty}a_nx^n,\]
+\[a_0,a_1\in\bbR,\quad a_{n+2}=\frac{n-1}{(n+2)(n+1)}a_n.\]
+\begin{proof}
+\[y=\sum_{n=0}^{\infty}a_nx^n\]
+\[y'=\sum_{n=0}^{\infty}a_{n+1}(n+1)x^n\]
+\[y''=\sum_{n=0}^{\infty}a_{n+2}(n+2)(n+1)x^n\]
+\[a_{n+2}(n+2)(n+1)-a_nn+a_n=0\]
+\[a_{n+2}=\frac{n-1}{(n+2)(n+1)}a_n\]
+\end{proof}
+\sssc{Example: $y''+\sin(x)y'+x^2y=0$}
+ODE:
+\[y''+\sin(x)y'+x^2y=0.\]
+Solutions:
+\[y=\sum_{n=0}^{\infty}a_nx^n,\]
+where:
+\[a_{-1}=a_{-2}=0,\quad a_0,a_1\in\bbR,\]
+\[a_{n+2}(n+2)(n+1)+\sum_{k=0}^{\left\lfloor\frac{n-1}{2}\right\rfloor}\frac{(-1)^k}{(2k+1)!}a_{n-2k}(n-2k)+a_{n-2}=0.\]
+\begin{proof}
+\[y=\sum_{n=0}^{\infty}a_nx^n\]
+\[y'=\sum_{n=0}^{\infty}a_{n+1}(n+1)x^n\]
+\[y''=\sum_{n=0}^{\infty}a_{n+2}(n+2)(n+1)x^n\]
+\[\sin(x)=\sum_{n=0}^{\infty}\frac{(-1)^n}{(2n+1)!}x^{2n+1}\]
+\[\sum_{n=0}^{\infty}a_{n+2}(n+2)(n+1)x^n+\sum_{n=0}^{\infty}\frac{(-1)^n}{(2n+1)!}x^{2n+1}\sum_{n=0}^{\infty}a_{n+1}(n+1)x^n+x^2\sum_{n=0}^{\infty}a_nx^n=0.\]
+\[\ba
+\sum_{n=0}^{\infty}\frac{(-1)^n}{(2n+1)!}x^{2n+1}\sum_{n=0}^{\infty}a_{n+1}(n+1)x^n&=\sum_{n=0}^{\infty}\sum_{k=0}^n\frac{(-1)^k}{(2k+1)!}x^{2k+1}a_{n-k+1}(n-k+1)x^{n-k}\\
+&=\sum_{n=0}^{\infty}\sum_{k=0}^n\frac{(-1)^k}{(2k+1)!}a_{n-k+1}(n-k+1)x^{n+k+1}\\
+&=\sum_{n=0}^{\infty}\sum_{k=0}^{\left\lfloor\frac{n-1}{2}\right\rfloor}\frac{(-1)^k}{(2k+1)!}a_{n-2k}(n-2k)x^n
+\ea\]
+\[\sum_{n=0}^{\infty}\qty(a_{n+2}(n+2)(n+1)+\sum_{k=0}^{\left\lfloor\frac{n-1}{2}\right\rfloor}\frac{(-1)^k}{(2k+1)!}a_{n-2k}(n-2k)+a_{n-2})x^n=0,\quad a_{-1}=a_{-2}=0\]
+\[a_{n+2}(n+2)(n+1)+\sum_{k=0}^{\left\lfloor\frac{n-1}{2}\right\rfloor}\frac{(-1)^k}{(2k+1)!}a_{n-2k}(n-2k)+a_{n-2}=0\]
+\end{proof}
+\sssc{Example: $(x-x_0)^2y''+(x-x_0)y'-y=0$}
+ODE:
+\[(x-x_0)^2y''+(x-x_0)y'-y=0.\]
+Solutions:
+\[y(x)=A(x-x_0)+B(x-x_0)^{-1},\quad A,B\in\bbR.\]
+\begin{proof}
+\[y=\sum_{n=0}^{\infty}a_n(x-x_0)^{n+r}\]
+\[y'=\sum_{n=0}^{\infty}a_n(n+r)(x-x_0)^{n+r-1}\]
+\[y''=\sum_{n=0}^{\infty}a_n(n+r)(n+r-1)(x-x_0)^{n+r-2}\]
+\[(x-x_0)^2y''=\sum_{n=0}^{\infty}a_n(n+r)(n+r-1)(x-x_0)^{n+r}\]
+\[(x-x_0)y'=\sum_{n=0}^{\infty}a_n(n+r)(x-x_0)^{n+r}\]
+\[L=a_0r(r-1)(x-x_0)^r+a_0r(x-x_0)^r-a_0(x-x_0)^r\]
+\[I(r)=a_0r(r-1)+a_0r-a_0=a_0(r^2-1)=0\]
+\[r=\pm 1\]
+\[y_1(x)=\sum_{n=0}^{\infty}A_n(x-x_0)^{n+1}\]
+\[y_1'(x)=\sum_{n=0}^{\infty}A_n(n+1)(x-x_0)^n\]
+\[y_1''(x)=\sum_{n=0}^{\infty}A_n(n+1)n(x-x_0)^{n-1}\]
+\[(x-x_0)y_1'(x)=\sum_{n=0}^{\infty}A_n(n+1)(x-x_0)^{n+1}\]
+\[(x-x_0)^2y_1''(x)=\sum_{n=0}^{\infty}A_n(n+1)n(x-x_0)^{n+1}\]
+\[A_n(n+1)n+A_n(n+1)-A_n=0.\]
+\[A_n=0,\quad\forall n\in\bbN\]
+\[y_2(x)=\sum_{n=0}^{\infty}B_n(x-x_0)^{n-1}\]
+\[y_2'(x)=\sum_{n=0}^{\infty}B_n(n-1)(x-x_0)^{n-2}\]
+\[y_2''(x)=\sum_{n=0}^{\infty}B_n(n-1)(n-2)(x-x_0)^{n-3}\]
+\[\sum_{n=0}^{\infty}B_n(n-1)(n-2)(x-x_0)^{n-1}+B_n(n-1)(x-x_0)^{n-1}-B_n(x-x_0)^{n-1}=0\]
+\[\sum_{n=0}^{\infty}B_n(n+1)(n-1)(x-x_0)^n=0\]
+\[B_n(n+1)(n-1)=0\]
+\[B_n=0,\quad\forall n\in\bbN\land n\neq 2\]
+\[y_2(x)=B_0(x-x_0)^{-1}+B_2(x-x_0)\]
+\[y(x)=C_1y_1(x)+C_2y_2(x)=A(x-x_0)+B(x-x_0)^{-1},\quad A,B\in\bbR\]
+\end{proof}
+\sssc{Example: $xy''+(x-1)^2y'+y=0$}
+ODE:
+\[xy''+(x-1)^2y'+y=0.\]
+Solutions:
+\[y(x)=\sum_{n=0}^{\infty}\qty(C_1A_n+C_2B_n)x^n+C_2\ln|x|\sum_{n=0}^{\infty}A_nx^n,\]
+\[A_0=1,\quad A_1=-1,\quad B_0=4,\quad B_1=0,\quad C_1,C_2\in\bbR,\]
+\[A_{n+2}(n+2)^2-A_{n+1}(2n+1)+A_nn=0,\]
+\[2A_{n+2}(n+2)+B_{n+2}(n+2)^2-2A_{n+1}-B_{n+1}(2n+1)+A_n+B_nn=0.\]
+\begin{proof}
+\[y=\sum_{n=0}^{\infty}a_nx^{n+r}\]
+\[y'=\sum_{n=0}^{\infty}a_n(n+r)x^{n+r-1}\]
+\[y''=\sum_{n=0}^{\infty}a_n(n+r)(n+r-1)x^{n+r-2}\]
+\[xy''=\sum_{n=0}^{\infty}a_n(n+r)(n+r-1)x^{n+r-1}\]
+\[(x-1)^2y'=\sum_{n=0}^{\infty}a_n(n+r)x^{n+r+1}-2\sum_{n=0}^{\infty}a_n(n+r)x^{n+r}+\sum_{n=0}^{\infty}a_n(n+r)x^{n+r-1}\]
+\[L=a_0r(r-1)x^{r-1}+a_0rx^{r+1}-2a_0rx^r+a_0rx^{r-1}\]
+\[I(r)=a_0r(r-1)+a_0r=0\]
+\[r_1=r_2=0\]
+\[y_1(x)=\sum_{n=0}^{\infty}A_nx^n\]
+\[\sum_{n=0}^{\infty}A_nn(n-1)x^{n-1}+\sum_{n=0}^{\infty}A_nnx^{n+1}-2\sum_{n=0}^{\infty}A_nnx^n+\sum_{n=0}^{\infty}A_nnx^{n-1}+\sum_{n=0}^{\infty}A_nx^n=0\]
+\[\sum_{n=0}^{\infty}A_{n+1}(n+1)nx^n+\sum_{n=0}^{\infty}A_{n-1}(n-1)x^n-2\sum_{n=0}^{\infty}A_nnx^n+\sum_{n=0}^{\infty}A_{n+1}(n+1)x^n+\sum_{n=0}^{\infty}A_nx^n=0\]
+\[A_{n+1}(n+1)^2-A_n(2n-1)+A_{n-1}(n-1)=0\]
+\[A_1-A_0(-1)=0,\quad A_1=-A_0\]
+\[A_{n+2}(n+2)^2-A_{n+1}(2n+1)+A_nn=0\]
+\[y_2(x)=\ln|x|\sum_{n=0}^{\infty}A_nx^n+\sum_{n=0}^{\infty}B_nx^n\]
+\[y_2'(x)=\ln|x|\sum_{n=0}^{\infty}A_nnx^{n-1}+\sum_{n=0}^{\infty}A_nx^{n-1}+\sum_{n=0}^{\infty}B_nnx^{n-1}\]
+\[y_2''(x)=\ln|x|\sum_{n=0}^{\infty}A_nn(n-1)x^{n-2}+\sum_{n=0}^{\infty}A_nnx^{n-2}+\sum_{n=0}^{\infty}A_n(n-1)x^{n-2}+\sum_{n=0}^{\infty}B_nn(n-1)x^{n-2}\]
+\[xy_2''(x)=\ln|x|\sum_{n=0}^{\infty}A_nn(n-1)x^{n-1}+\sum_{n=0}^{\infty}A_n(2n-1)x^{n-1}+\sum_{n=0}^{\infty}B_nn(n-1)x^{n-1}\]
+\[x^2y_2'(x)=\ln|x|\sum_{n=0}^{\infty}A_nnx^{n+1}+\sum_{n=0}^{\infty}A_nx^{n+1}+\sum_{n=0}^{\infty}B_nnx^{n+1}\]
+\[xy_2'(x)=\ln|x|\sum_{n=0}^{\infty}A_nnx^n+\sum_{n=0}^{\infty}A_nx^n+\sum_{n=0}^{\infty}B_nnx^n\]
+\[\sum_{n=0}^{\infty}A_n(2n-1)x^{n-1}+\sum_{n=0}^{\infty}B_nn(n-1)x^{n-1}+\sum_{n=0}^{\infty}A_nx^{n+1}+\sum_{n=0}^{\infty}B_nnx^{n+1}-2\sum_{n=0}^{\infty}A_nx^n-2\sum_{n=0}^{\infty}B_nnx^n+\sum_{n=0}^{\infty}A_nx^{n-1}+\sum_{n=0}^{\infty}B_nnx^{n-1}+\sum_{n=0}^{\infty}B_nx^n=0\]
+\[\sum_{n=0}^{\infty}A_n2nx^{n-1}+B_nn^2x^{n-1}-2A_nx^n-B_n(2n-1)x^n+A_nx^{n+1}+B_nnx^{n+1}=0\]
+\[-2A_0+B_0+2A_1+B_1=0,\quad B_0+B_1=4A_0\]
+\[2A_{n+2}(n+2)+B_{n+2}(n+2)^2-2A_{n+1}-B_{n+1}(2n+1)+A_n+B_nn=0\]
+Set
+\[A_0=1,\quad A_1=-1,\quad B_0=4,\quad B_1=0\]
+\[y(x)=C_1y_1(x)+C_2y_2(x)=\sum_{n=0}^{\infty}\qty(C_1A_n+C_2B_n)x^n+C_2\ln|x|\sum_{n=0}^{\infty}A_nx^n\]
+\end{proof}
