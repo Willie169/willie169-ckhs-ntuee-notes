@@ -778,13 +778,13 @@ if a nontrivial particular solution $y_1(x)$ has been known, we can reduce the o
 \[u=v'\]
 to an $(n-1)$th-order linear ODE.
 \sssc{Closed-form formula for second-order homogeneous linear ODEs}
-Given a second-order homogeneous linear ODE
-\[y''+p(x)y'+q(x)y=0,\]
-if a nontrivial particular solution $y_1(x)$ has been known, then the substitutions
+Given a second-order linear ODE
+\[y''+p(x)y'+q(x)y=0\]
+and a nontrivial particular solution $y_1(x)$, then the substitutions
 \[y=vy_1\]
 \[u=v'\]
 gives
-\[y_1u'+(2y_1'+py_1)u=0\]
+\[y_1u'+(2y_1'+p(x)y_1)u=0\]
 and another particular solution of the ODE is
 \[y_2=y_1\int\frac{e^{-\int p(x)\dd{x}}}{y_1(x)^2}\dd{x}\]
 and the general solution is
@@ -801,14 +801,50 @@ and the general solution is
 \[y_1v''+(2y_1'+py_1)v'=0\]
 \[u=v'\]
 \[y_1u'+(2y_1'+py_1)u=0\]
-\[u'+\qty(\frac{2y_1'}{y_1}+p)u=0,\]
+\[u'+\qty(\frac{2y_1'}{y_1}+p)u=0\]
 \[\mu(x)=\exp(\int\frac{2y_1'}{y_1}+p\dd{x})=y_1^{\phantom{1}2}e^{\int p\dd{x}}\]
-\[(u\mu'=0\]
-\[u=\frac{C}{\mu}=\frac{Ce^{-\int p\dd{x}}}{y_1^{\phantom{1}2}}\]
-\[v=\int u\dd{x}=C\int\frac{e^{-\int p\dd{x}}}{y_1^{\phantom{1}2}}\dd{x}+D\]
-\[y=vy_1=Cy_1\int\frac{e^{-\int p\dd{x}}}{y_1^{\phantom{1}2}}\dd{x}+Dy_1\]
+\[(u\mu)'=0\]
+\[u=\frac{c_2}{\mu}=\frac{c_2e^{-\int p\dd{x}}}{y_1^{\phantom{1}2}}\]
+\[v=\int u\dd{x}=c_2\int\frac{e^{-\int p\dd{x}}}{y_1^{\phantom{1}2}}\dd{x}+c_1\]
+\[y=vy_1=c_2y_1\int\frac{e^{-\int p\dd{x}}}{y_1^{\phantom{1}2}}\dd{x}+c_1y_1\]
 \[y_2=y_1\int\frac{e^{-\int p(x)\dd{x}}}{y_1(x)^2}\dd{x}\]
-\[y=Cy_2+Dy_1\]
+\[y=c_1y_1+c_2y_2\]
+\end{proof}
+\sssc{Closed-form formula for second-order homogeneous linear ODEs}
+Given a second-order linear ODE
+\[y''+p(x)y'+q(x)y=g(x)\]
+and a nontrivial solution of the associated homogeneous equation $y_1(x)$, then the substitutions
+\[y=vy_1\]
+\[u=v'\]
+gives
+\[y_1u'+(2y_1'+p(x)y_1)u=g(x)\]
+and another solution of the associated homogeneous equation is
+\[y_2=y_1\int\frac{e^{-\int p(x)\dd{x}}}{y_1(x)^2}\dd{x}\]
+and a particular solution is
+\[y_p=y_1\int\frac{e^{-\int p\dd{x}}}{y_1^{\phantom{1}2}}\int g(x)y_1e^{\int p\dd{x}}\dd{x}\dd{x}\]
+and the general solution is
+\[y=c_1y_1+c_2y_2+y_p\]
+\begin{proof}
+\[y=vy_1\]
+\[y'=v'y_1+vy_1'\]
+\[y''=v''y_1+2v'y_1'+vy_1''\]
+\[y_1''=-py_1'-qy_1\]
+\[y''=(v''-qv)y_1+(2v'-pv)y_1'\]
+\[y''=-py'-qy+g\]
+\[y''=(-pv'-qv)y_1-pvy_1'+g\]
+\[(v''+pv')y_1+2v'y_1'=g\]
+\[y_1v''+(2y_1'+py_1)v'=g\]
+\[u=v'\]
+\[y_1u'+(2y_1'+py_1)u=g\]
+\[u'+\qty(\frac{2y_1'}{y_1}+p)u=\frac{g}{y_1}\]
+\[\mu(x)=\exp(\int\frac{2y_1'}{y_1}+p\dd{x})=y_1^{\phantom{1}2}e^{\int p\dd{x}}\]
+\[(u\mu)'=\frac{g\mu}{y_1}\]
+\[u=\frac{\int\frac{g\mu}{y_1}\dd{x}}{\mu}=\frac{e^{-\int p\dd{x}}}{y_1^{\phantom{1}2}}\int g(x)y_1e^{\int p\dd{x}}\dd{x}\]
+\[v=\int u\dd{x}=\int\frac{e^{-\int p\dd{x}}}{y_1^{\phantom{1}2}}\int g(x)y_1e^{\int p\dd{x}}\dd{x}\dd{x}+c_2\int\frac{e^{-\int p\dd{x}}}{y_1^{\phantom{1}2}}\dd{x}+c_1\]
+\[y=vy_1=y_1\int\frac{e^{-\int p\dd{x}}}{y_1^{\phantom{1}2}}\int g(x)y_1e^{\int p\dd{x}}\dd{x}\dd{x}+c_2y_1\int\frac{e^{-\int p\dd{x}}}{y_1^{\phantom{1}2}}\dd{x}+c_1y_1\]
+\[y_2=y_1\int\frac{e^{-\int p(x)\dd{x}}}{y_1(x)^2}\dd{x}\]
+\[y_p=y_1\int\frac{e^{-\int p\dd{x}}}{y_1^{\phantom{1}2}}\int g(x)y_1e^{\int p\dd{x}}\dd{x}\dd{x}\]
+\[y=c_1y_1+c_2y_2+y_p\]
 \end{proof}
 \ssc{(Cauchy-)Euler or equidimensional equation}
 \sssc{Definition} 
