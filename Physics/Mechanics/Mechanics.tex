@@ -605,7 +605,7 @@ By perpendicular axis theorem and the symmetry of the object, $2I=\frac{MR^2}{2}
 \end{proof}
 \sssc{Moment of inertia of a cylinder about its central axis}
 A uniform rigid cylinder of mass $M$ and radius $R$ has moment of inertia $I$ about its central axis:
-\[I=\frac{M}{2}R^2.\]
+\[I=\frac{MR^2}{2}.\]
 \begin{proof}
 \[\ba
 I&=\frac{M}{\pi R^2}\int_0^Rr^22\pi r\dd{r}\\
@@ -617,7 +617,6 @@ I&=\frac{M}{\pi R^2}\int_0^Rr^22\pi r\dd{r}\\
 A uniform rigid cylinder of mass $M$, radius $R$, and length $L$ has moment of inertia $I$ about any axis passing through its center of mass and perpendicular to its central axis:
 \[I=\frac{M}{12}\qty(3R^2+L^2).\]
 \begin{proof}
-For $R>0$:
 \[\ba
 I&=\frac{2M}{\pi R^2L}\int_0^{\frac{L}{2}}\int_0^R\int_0^{2\pi}(r^2\sin^2\theta+l^2)r\dd{\theta}\dd{r}\dd{l}\\
 &=\frac{2M}{\pi R^2L}\int_0^{\frac{L}{2}}\int_0^R\qty(r^3\qty(\frac{\theta}{2}-\frac{\sin(2\theta)}{4})+l^2r\theta)\big\vert_0^{2\pi}\dd{r}\dd{l}\\
@@ -627,13 +626,17 @@ I&=\frac{2M}{\pi R^2L}\int_0^{\frac{L}{2}}\int_0^R\int_0^{2\pi}(r^2\sin^2\theta+
 &=\frac{2M}{L}\qty(\frac{R^2L}{8}+\frac{L^3}{24})\\
 &=\frac{M}{12}\qty(3R^2+L^2)
 \ea\]
-For $R=0$:
+\end{proof}
+\sssc{Moment of inertia of a thin rod about any axis passing through its center of mass and perpendicular to its central axis}
+A uniform thin rod of mass $M$ and length $L$ has moment of inertia $I$ about any axis passing through its center of mass and perpendicular to its central axis:
+\[I=\frac{ML^2}{12}.\]
+\bpr
 \[\ba
 I&=2\int_0^{\frac{L}{2}}l^2\frac{M}{L}\dd{l}\\
 &=\frac{2M}{L}\frac{L^3}{24}\\
 &=\frac{ML^2}{12}
 \ea\]
-\end{proof}
+\epr
 \sssc{Moment of inertia of a spherical shell about any axis passing through its center of mass}
 A uniform rigid spherical shell of mass $M$ and radius $R$ has moment of inertia $I$ about any axis passing through its center of mass:
 \[I=\frac{2MR^2}{3}.\]
@@ -660,7 +663,7 @@ I&=\frac{M}{\frac{4}{3}\pi R^3}\int_0^R\int_0^{\pi}\int_0^{2\pi}r^2\sin^2\theta 
 \ea\]
 \end{proof}
 \sssc{Moment of inertia of a cuboid about axis passing through its center of mass and perpendicular to its surface}
-A $a\times b\times c$ uniform rigid cuboid of mass $M$ has moment of inertia $I$ about the axis passing through its center of mass and perpendicular to the $a\times b$ sufaces of it:
+A $a\times b\times c$ uniform rigid cuboid of mass $M$ has moment of inertia $I$ about the axis passing through its center of mass and perpendicular to the $a\times b$ surfaces of it:
 \[I=\frac{M}{12}\qty(a^2+b^2).\]
 \begin{proof}
 \[\ba
@@ -707,7 +710,7 @@ I&=\frac{M}{\int_0^L2\pi R\frac{l}{L}\dd{l}}\int_0^LR^2\frac{l^2}{L^2}2\pi R\fra
 \ea\]
 \end{proof}
 \sssc{Moment of inertia of a hollow cone about any axis passing through its center of mass and perpendicular to its central axis}
-A uniform rigid hollow cone of mass $M$, radius of bottom $R$, and lenght $L$ has moment of inertia $I$ about any axis passing through its center of mass and perpendicular to its central axis:
+A uniform rigid hollow cone of mass $M$, radius of bottom $R$, and length $L$ has moment of inertia $I$ about any axis passing through its center of mass and perpendicular to its central axis:
 \[I=\frac{M}{36}\qty(9R^2+2L^2).\]
 \begin{proof}
 \[\frac{\int_0^Ll2\pi R\frac{l}{L}\dd{l}}{\int_0^L2\pi R\frac{l}{L}\dd{l}}=\frac{\frac{L^3}{3}}{\frac{L^2}{2}}=\frac{2L}{3}.\]
@@ -735,18 +738,24 @@ I&=\frac{M}{\int_0^L2\pi R\frac{l}{L}\dd{l}}\int_0^L\qty(\frac{1}{2}R^2\qty(\fra
 其中初始相位角$\phi$，相位角$\omega t+\phi$，速率$R\omega$、加速度量值$R\omega^2$。 
 \sssc{Gyroscopic precession (陀螺儀進動)}
 Suppose a top rotating at angular momentum $\mathbf{L}$ is subjected to a constant force $\mathbf{F}$ on a point on its rotational axis at position $\mathbf{r}$ relative to a fixed fulcrum, and another constant force $-\mathbf{F}$ on the fulcrum, which is also on its rotational axis. Then the tip of $\mathbf{L}$ is rotating at an angular velocity $\boldsymbol{\Omega}_p$ given by
-\[\boldsymbol{\Omega}_p=
-\frac{\hat{\mathbf{L}}\times(\mathbf{r}\times\mathbf{F})}{\abs{\mathbf{L}}}.\]
+\[\boldsymbol{\Omega}_p=\frac{\hat{\mathbf{L}}\times(\mathbf{r}\times\mathbf{F})}{\abs{\mathbf{L}}}.\]
 In special case that $\hat{\mathbf{L}}=\hat{\mathbf{r}}$, the tip of $\mathbf{L}$ is rotating at constant angular velocity around a precession axis fixed in the space, called steady precession.
-\sssc{旋轉參考系（Rotating (reference) frame）}
+\sssc{Rotating reference frame}
+We derive the relation between the rotating reference frame and the inertial reference frame with the same origin where the former is rotating with respect to the later with angular velocity $\bOmega(t)$.
+
+Then for any unit vector of the rotating frame $\hat{\mb{u}}$:
+\[\dv{}{t}\hat{\mb{u}}=\bOmega\times\hat{\mb{u}}\]
+
+
+
+
+
+
 令一旋轉參考系相對於慣性參考系以角速度$\boldsymbol{\omega}$繞其原點旋轉，一質量$m$質點在此參考系有位置$\mathbf{x}$和速度$\mathbf{v}$，欲使牛頓第二運動定律在此參考系中成立需施予該質點假想力$\mathbf{F}$，則其服從：
 \[\mathbf{F}=-m\boldsymbol{\omega}\times\qty(\boldsymbol{\omega}\times\mathbf{x})-2m\boldsymbol{\omega}\times\mathbf{v}-m\frac{\mathrm{d}\boldsymbol{\omega}}{\mathrm{d}t}\times\mathbf{x}\]
 其中：$-m\boldsymbol{\omega}\times\qty(\boldsymbol{\omega}\times\mathbf{x})$稱\tb{離心力（Centrifugal force）}，$-2m\boldsymbol{\omega}\times\mathbf{v}$稱\tb{科里奥利力/科氏力（Coriolis force）}，$-m\frac{\mathrm{d}\boldsymbol{\omega}}{\mathrm{d}t}\times\mathbf{x}$稱\tb{歐拉力（Euler force）}。
-\sssc{Euler's rotation equations (歐拉（轉動）方程)}
-Euler's rotation equations are a first-order ordinary differential equation describing the rotation of a rigid body using body-fixed frame, that is, the rotating frame of reference such that any point of the body remains at the same position in the frame.
-\[\mathbf{I}\dot{\boldsymbol{\omega}}+\boldsymbol{\omega}\times(\mathbf{I}\boldsymbol{\omega}=\btau,\]
-that is,
-\[\dv{L}{t}+\boldsymbol{\omega}\times\mathbf{L}=\btau.\]
+
+
 \ssc{Lagrangian Mechanics (拉格朗日力學)}
 \sssc{Configuration space}
 The degrees of freedom, or parameters, that define the configuration, or position of all constituent point particles, of a physical system are called generalized coordinates, and the space defined by these coordinates is called the configuration space of the system. Each unique possible configuration of the system corresponds to a unique point in the space. It is often the case that the set of all actual configurations of the system is a manifold in the configuration space, called the configuration manifold of the system. The number of dimensions of the configuration space is equal to the degrees of freedom of the system.
