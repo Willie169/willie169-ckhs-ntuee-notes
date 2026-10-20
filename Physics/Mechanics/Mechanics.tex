@@ -57,16 +57,16 @@ At $t=k$ is called
 \item\tb{Distance} $\abs{\mb{r}_2-\mb{r}_1}$
 \item\tb{(Inertial (慣性)) mass (質量)} $m$: For a system when the force is applied to, the ratio of the force to the acceleration of the system.
 \item\tb{(Instantaneous) speed (速率)} $\abs{\mb{v}}$
-\item\tb{Path length (路徑長)} $L=\int_{t_1}^{t_2}\abs{\mb{v}}\dd{t}$
-\item\tb{Average speed} $\frac{L}{t_2-t_1}$
+\item\tb{Path length (路徑長)} $\int_{t_1}^{t_2}\abs{\mb{v}}\dd{t}$
+\item\tb{Average speed} $\frac{\int_{t_1}^{t_2}\abs{\mb{v}}\dd{t}}{t_2-t_1}$
 \end{itemize}
 \sssc{Newton's first law of motion (牛頓第一運動定律)/Law of inertia (慣性定律)/Law of conservation of momentum (動量守恆定律)}
-A body remains at rest, called at translational equilibrium, or in motion at a constant speed in a straight line, unless it is acted upon by a force.
+A body remains at rest, called at translational equilibrium, or in motion with a constant momentum, unless it is acted upon by a force.
 \sssc{Newton's second law of motion (牛頓第二運動定律)}
 At any instant of time, the net force on a body is equal to the rate at which the body's momentum is changing with time.
 \sssc{Newton's third law of motion (牛頓第三運動定律)/Law of action force and reaction force (作用力與反作用力定律)}
 If two bodies exert forces on each other, these forces have the same magnitude but opposite directions.
-\sssc{Equilibrium force}
+\sssc{Balanced force}
 A group of external forces acting on the same system whose sum is zero.
 \sssc{Constant acceleration motion}
 \[\mathbf{x}=\mathbf{x}_0+\mathbf{v}_0t+\frac{\mathbf{a}}{2}t^2\]
@@ -97,7 +97,7 @@ A force that is a conservative field with respect to position.
 Potential energy is the energy of an object or system due to the body's position relative to other objects, or the configuration of its particles.
 \sssc{Mechanical energy (力學能)}
 The sum of kinetic and potential energies.
-\sssc{Conservation of Mechanical Energy (力學能守恆)}
+\sssc{Conservation of mechanical energy (力學能守恆)}
 If no non-conservative force does work on  a system, the mechanical energy of the system is a constant.
 \sssc{Equilibrium point}
 Given a differentiable conservative force $\mathbf{F}$, its potential $U$, and an equilibrium point $\mathbf{r}_0$. The behavior of a particle at $\mb{r}_0$ when an infinisimal displacement occurs is governed by the classification of $\mb{r}_0$:
@@ -457,7 +457,7 @@ K_{int}' &= \frac{\mu \qty(v_1'-v_2')^2}{2} = \frac{\mu \qty(e\qty(v_1-v_2))^2}{
 Rotations is a rigid body movement which, unlike a translation, keeps at least one point fixed. We call a rotation to be around/about the point, or axis when all points on a line are fixed, and call such point/axis point/axis of the rotation or rotational/fixed point/axis.
 
 All rigid body movements are rotations, translations, or combinations of the two.
-\sssc{Euler’s rotation theorem and rotational matrix}
+\sssc{Euler's rotation theorem and rotational matrix}
 Any motion of a rigid body such that a point on it remains fixed to the body, is equivalent to a single rotation about some axis that passes through the fixed point.
 
 The sum of finite rotations around a same point or axis is also a rotation. The inverse of a rotation is also a rotation. Thus, the rotations around a point or axis form a group, which is, when expressed in rotational matrices with a fixed point chosen to be the origin of the three-dimensional Euclidean vector space, the special orthogonal group of degree three $\operatorname{SO}(3)$ over $\bbR$.
@@ -468,12 +468,9 @@ Rotations around the $x$, $y$ and $z$ axes are called principal rotations. Rotat
 \sssc{(Instantaneous) angular velocity or angular frequency (（瞬時）角速度/角頻率)}
 If a rigid body is rotating about a fixed point and a point in the rigid body at position $\mathbf{r}$ from the fixed point is at velocity $\dot{\mathbf{r}}$, then the (instantaneous) angular velocity or angular frequency $\boldsymbol{\omega}$ of the body is defined with
 \[\dot{\mathbf{r}}=\boldsymbol{\omega}\times\mathbf{r}.\]
-
 The (instantaneous) angular speed or angular frequency $\omega=\abs{\bomega}$.
 
-The (instantaneous) frequency is angular frequency divided by $2\pi$.
-\sssc{(Instantaneous) angular acceleration (（瞬時）角加速度)}
-The (instantaneous) angular acceleration $\boldsymbol{\alpha}$ is the derivative of angular velocity with respect to time.
+The (instantaneous) angular acceleration $\boldsymbol{\alpha}=\dv{\bomega}{t}$.
 \sssc{Moment of inertia or rotational inertia}
 The moment of inertia or rotational inertia $\mathbf{I}$ of an object of volume $V$ is a measure of the object's resistance to changes to its rotation, defined with the density field $\rho(\mathbf{r})$:
 \[\mathbf{I}=\begin{pmatrix}
@@ -494,7 +491,7 @@ We can find a set of $x$-, $y$-, and $z$-axes such that $I_{xy}=I_{xz}=I_{yz}=0$
 \[I_1=I_{xx},\quad I_2=I_{yy}, \quad I_3=I_{zz}.\]
 \sssc{Angular momentum (角動量)}
 The angular momentum $\mathbf{L}$ is
-\[\mathbf{L}=\mathbf{I}\boldsymbol{\omega}=I\boldsymbol{\omega}=\iint_V\rho{\mathbf{r}}\mathbf{r}\times\dot{\mathbf{r}}\dd{V}.\]
+\[\mathbf{L}=\mathbf{I}\boldsymbol{\omega}=\iint_V\rho{\mathbf{r}}\mathbf{r}\times\dot{\mathbf{r}}\dd{V}.\]
 \sssc{Torque (力矩)}
 The torque $\btau$ is the twisting effect of a force $F$ applied to a rigid body at position $\mathbf{r}$ from a fixed point of rotation given by
 \[\btau=\mathbf{r}\times\mathbf{F},\]
@@ -502,62 +499,57 @@ where $\mathbf{r}$ is called the lever arm (力臂) of the force, and $\mathbf{r
 
 Torque and angular momentum are related according to
 \[\btau=\dv{\mathbf{L}}{t},\]
-called Newton's second law for rotation.
-
-Torque and angular aceleration are related according to
-\[\btau=\mathbf{I}\balpha,\]
-called Newton's second law for rotation.
+called Newton's second law for rotation. Thus, if $\mb{I}$ is a constant, torque and angular acceleration are related according to
+\[\btau=\mathbf{I}\balpha.\]
 \sssc{Power, work, and kinetic energy}
 The power pf $P$ of a torque $\btau$ is
-\[P=\btau\cdot\boldsymbol{\omega}.\]
-
+\[P=\btau\cdot\boldsymbol{\omega}\]
 The work $W$ done by a torque $\btau$ in some time interval $t_0$ to $t_1$ is
 \[W=\int_{t_0}^{t_1}\btau\cdot\boldsymbol{\omega}\dd{t}.\]
-
 The kinetic energy $K_r$ due to the rotation, called rotational kinetic energy, is given by
 \[K_r=\frac{1}{2}\bomega^\top\mathbf{I}\boldsymbol{\omega}.\]
 The translational kinetic energy $K_t$ associated with the motion of the rotation axis is given by
-\[K_t=\frac{1}{2}m|\mathbf{v}|^2\]
-where $m$ is the total mass of the rigid body and $\mathbf{v}$ is the velocity of the axis of rotation.
+\[K_t=\frac{1}{2}mv_r^{\pht{r}2}\]
+where $m$ is the total mass of the rigid body and $v_r$ is the speed of the axis of rotation.
 
 The total kinetic energy $K$ of the rigid body is given by
 \[K=\frac{1}{2}\iint_V\rho{\mathbf{r}}\abs{\dot{\mathbf{r}}}^2\dd{V}=K_r+K_t.\]
-\sssc{Rotations around only one axis}
-For rotations around only one axis, we defined the angular position (角位置) of a point $\mathbf{P}$ about a given reference axis, which is a line oriented along a unit vector $\hat{\mathbf{n}}$, relative to a given polar axis on some plane $F$ perpendicular to the reference axis, which defines a polar coordinate system whose positive sense is determined by looking upward along $\hat{\mathbf{n}}$ (right-hand rule), as the polar angle $\theta$ (one-dimensional) of the projection of $\mathbf{P}$ on $F$ or $\boldsymbol{\theta}=\theta\hat{\mathbf{n}}$ (three-dimensional).
+\sssc{Angular position}
+For rotations around only one axis, we defined the angular position of a point $\mathbf{P}$ about a given reference axis, which is a line oriented along a unit vector $\hat{\mathbf{n}}$, relative to a given polar axis on some plane $F$ perpendicular to the reference axis, which defines a polar coordinate system whose positive sense is determined by looking upward along $\hat{\mathbf{n}}$ (right-hand rule), as the polar angle $\theta$ (one-dimensional) of the projection of $\mathbf{P}$ on $F$ or $\boldsymbol{\theta}=\theta\hat{\mathbf{n}}$ (three-dimensional).
 
-The angular displacement (角位移) $\Delta\theta$ (one-dimensional) or $\Delta\boldsymbol{\theta}$ (three-dimensional) is the angular position at the end subtracted by the angular position at the begining, where the reference axis is the fixed axis in the rotation.
+The angular displacement $\Delta\theta$ (one-dimensional) or $\Delta\boldsymbol{\theta}$ (three-dimensional) is the angular position at the end subtracted by the angular position at the beginning, where the reference axis is the fixed axis in the rotation. Angular displacements are additive for rotations about the same axis. However, they are not additive for rotations about different axes.
 
-Angular displacements are additive for rotations about the same axis. However, they are not additive for finite rotations about different axes.
+The three-dimensional quantities defined here are the same as the ones defined earlier if only rotation about that axis exists, that is, they are parallel to $\hat{\mb{n}}$.
 
-The (instantaneous) angular velocity $\omega$ (one-dimensional) or $\boldsymbol{\omega}$ (three-dimensional) is defined as the derivative of angular displacement with respect to time.
-
-The (instantaneous) angular frequency (角頻率) is angular velocity divided by $2\pi$.
-
-The (instantaneous) angular acceleration $\alpha$ (one-dimensional) or $\boldsymbol{\alpha}$ (three-dimensional) is defined as the derivative of angular velocity with respect to time.
-
-The moment of inertia or rotational inertia as a scalar $I$ of an object of volume $V$ about its rotational axis is defined with the density field $\rho(\mathbf{r})$ over the position space where some point on the axis is origin and the unit vector in the direction of axis is $\hat{\mathbf{n}}$ as:
+The (instantaneous) angular velocity $\omega$ (one-dimensional) and $\boldsymbol{\omega}$ (three-dimensional) are defined as
+\[\omega=\dv{\theta}{t}\]
+\[\bomega=\dv{\btheta}{t}\]
+The (instantaneous) angular acceleration $\alpha$ (one-dimensional) and $\balpha$ (three-dimensional) are defined as
+\[\alpha=\dv{\omega}{t}\]
+\[\balpha=\dv{\bomega}{t}\]
+The moment of inertia or rotational inertia as a scalar $I$ of an object of volume $V$ about its rotational axis is defined, with the density field $\rho(\mathbf{r})$ over the position space where some point on the axis is origin and the unit vector in the direction of axis is $\hat{\mathbf{n}}$, as
 \[I=\iiint_V\rho(\mathbf{r})\abs{\mathbf{r}\times\hat{\mathbf{n}}}^2\dd{V}.\]
-
-The angular momentum $L$ (one-dimensional) or $\mathbf{L}$ (three-dimensional) is defined as the moment of inertia multiplied by the angular velocity.
-
-The torque $\tau$ (one-dimensional) or $\btau$ (three-dimensional) is defined for force perpendicular to the axis by that $\btau$ is the same as in the general case and $\tau=\abs{\btau}$.
-
-The power pf $P$ of a torque $\tau$ is
-\[P=\tau\omega.\]
-
-The work $W$ done by a torque $\tau$ in some time interval $t_0$ to $t_1$, in which the rigid body rotates from angular position $\theta_0$ to $\theta_1$, is
-\[W=\int_{t_0}^{t_1}\tau\omega\dd{t}=\int_{\theta_0}^{\theta_1}\tau\dd{\theta}.\]
-
-The kinetic energy $K_r$ due to the rotation, called rotational kinetic energy, is given by
-\[K_r=\frac{1}{2}I\omega^2.\]
-The translational kinetic energy $K_t$ associated with the motion of the rotation axis is given by
-\[K_t=\frac{1}{2}m|\mathbf{v}|^2\]
-where $m$ is the total mass of the rigid body and $\mathbf{v}$ is the velocity of the axis of rotation.
-
-The total kinetic energy $K$ of the rigid body is given by
-\[K=\frac{1}{2}\iint_V\rho{\mathbf{r}}\abs{\dot{\mathbf{r}}}^2\dd{V}=K_r+K_t.\]
+The angular momentum $L$ (one-dimensional) and $\mathbf{L}$ (three-dimensional) are defined as
+\[L=I\omega\]
+\[\mb{L}=I\bomega\]
+Let $\mb{r}_r$ be the orthogonal projection of $\mb{r}$ on $F$:
+\[\mb{r}_r=\mb{r}-\mb{r}\cdot\hat{\mb{n}}\hat{\mb{n}}\]
+The torque $\tau$ (one-dimensional) and $\btau$ (three-dimensional) for force $\mb{F}$ perpendicular to $\hat{\mb{n}}$ (otherwise the rotation is not purely on this axis) are defined as
+\[\btau=\mathbf{r}_r\times\mathbf{F}\]
+\[\tau=\btau\cdot\hat{\mb{n}}\]
+and satisfy:
+\[\btau=\dv{\mathbf{L}}{t}\]
+\[\tau=\dv{L}{t}\]
+\[\btau=\mathbf{I}\balpha=I\balpha\]
+\[\tau=I\alpha\]
+\[P=\btau\cdot\boldsymbol{\omega}\]
+\[P=\tau\omega\]
+The work $W$ done by a torque $\tau$ is
+\[W=\int_{\theta_1}^{\theta_2}\tau\dd{\theta}\]
+The rotational kinetic energy is
+\[K_r=\frac{1}{2}I\omega^2\]
 \sssc{Planar lamina or plane lamina (薄片)}
-A planar lamina or plane lamina is an object that is infinitely thin.
+A planar lamina or plane lamina is a planar object that is infinitely thin.
 \sssc{Perpendicular axis theorem (垂直軸定理或正交軸定理) or plane figure theorem}
 Define axes $x,y,z$ perpendicular to each other and meet at origin $O$. Suppose a planar lamina rigid body lies on the $xy$ plane. Let $I_x,I_y,I_z$ be moments of inertia about axis $x,y,z$ respectively, then the perpendicular axis theorem states that
 \[I_z=I_x+I_y.\]
@@ -574,14 +566,14 @@ I&=\int\qty((x-D)^2+y^2)\dd{m}\\
 &=I_{cm}+MD^2
 \ea\]
 \end{proof}
-\sssc{角動量守恆定律（Conservation of angular momentum）}
-當一系統受外合力矩為零，其角動量時變率必為零，稱其處於轉動平衡（rotational equilibrium），即該系統轉動靜止或行等角速度運動。
-\sssc{平衡力矩}
-作用在同一系統上且和為零的一組外力矩。
-\sssc{三力轉動平衡}
+\sssc{Law of conservation of angular momentum (角動量守恆定律)}
+A body remains without rotation, called at rotational equilibrium, or in rotation with a constant angular momentum, unless it is acted upon by a torque.
+\sssc{Balanced torque}
+A group of torque forces acting on the same rigid body whose sum is zero.
+\sssc{Rotational equilibrium under three forces}
 一剛體受三力達轉動平衡，則三力延長線必交於一點。
-\sssc{靜力平衡（Static equilibrium）}
-指一系統達移動平衡且轉動平衡。
+\sssc{Static equilibrium}
+A system in both translational and rotational equilibrium is called in static equilibrium.
 \sssc{Fulcrum (支點)}
 A point in a rigid body on which external force is applied such that the position of it is fixed.
 \sssc{Spinning top or top}
@@ -1044,7 +1036,7 @@ R\qty(\frac{v}{\sqrt{2\qty(v^2+gh)}})&=\frac{v}{g}\frac{\sqrt{v^2+2gh}}{2\qty(v^
 \end{proof}
 \ssc{忽略恆星運動的雙星重力運動}
 下星體均視為質點，行星泛指相對於恆星質量極小而可將後者視為不動之小天體。
-\sssc{克卜勒第一行星運動定律（Kepler's First Laws of Planetary Motion）/克卜勒橢圓定律（Kepler’s Law of Ellipses）}
+\sssc{克卜勒第一行星運動定律（Kepler's First Laws of Planetary Motion）/克卜勒橢圓定律（Kepler's Law of Ellipses）}
 星與恆星的系統，行星運動軌跡為以恆星為圓心的圓、以恆星為一焦點的橢圓、以恆星為焦點的拋物線、以恆星為距離該分支頂點較近的焦點的一雙曲線分支，或一通過恆星的直線的一部分。
 \begin{proof}
 以恆星位置為原點，在行星軌跡與恆星所在的平面為建立極座標，令時間$t$，恆星質量$M$，行星質量$m$，位置$(r;\theta)$，$j\coloneq GM$，萬有引力給出：
@@ -1077,12 +1069,12 @@ r&=\frac{1}{C\cos(\theta+\phi)+\frac{j}{h^2}}\\
 
 即：行星軌跡為，以$\ell\coloneq \frac{L^2}{GMm^2}$為半正焦弦（semi-latus rectum）、以$\varepsilon\coloneq \frac{CL^2}{GMm^2}$為離心率（Eccentricity）的，以恆星為圓心的圓、以恆星為一焦點的橢圓、以恆星為焦點的拋物線、以恆星為距離該分支頂點較近的焦點的一雙曲線分支。
 \end{proof}
-\sssc{克卜勒第二行星運動定律（Kepler's Second Laws of Planetary Motion）/克卜勒等面積定律（Kepler’s Law of Equal Areas）}
+\sssc{克卜勒第二行星運動定律（Kepler's Second Laws of Planetary Motion）/克卜勒等面積定律（Kepler's Law of Equal Areas）}
 行星與恆星的系統，行星與恆星連線單位時間掃過的面積恆不變。
 \begin{proof}
 即$\frac{h}{2}=\frac{L}{2m}$，因角動量守恆而不變。
 \end{proof}
-\sssc{克卜勒第三行星運動定律（Kepler's Third Law of Planetary Motion）/克卜勒週期定律（Kepler’s Law of Period）}
+\sssc{克卜勒第三行星運動定律（Kepler's Third Law of Planetary Motion）/克卜勒週期定律（Kepler's Law of Period）}
 忽略所有行星對其他行星的重力效應，繞同一恆星公轉的所有行星其橢圓軌道半長軸或圓軌道半徑$a$的三次方與週期$T$的二次方正比。
 \[\frac{a^3}{T^2}=\frac{GM}{4\pi^2}\]
 \begin{proof}
@@ -1265,7 +1257,7 @@ a&=\frac{\ell}{1-\varepsilon^2}\\
 \sssc{內行星最大視角}
 設行星$A$以半徑$R$的圓軌道繞恆星$S$公轉，同平面上其內行星$B$以半徑$r$的圓軌道繞恆星$S$公轉，則$A$觀察$B$與$S$之夾角最大值為$\arcsin\frac{r}{R}$，發生於$\ol{AB}\perp\ol{BS}$時。
 \ssc{雙星重力運動}
-\sssc{克卜勒第一行星運動定律（Kepler's First Laws of Planetary Motion）/克卜勒橢圓定律（Kepler’s Law of Ellipses）}
+\sssc{克卜勒第一行星運動定律（Kepler's First Laws of Planetary Motion）/克卜勒橢圓定律（Kepler's Law of Ellipses）}
 雙星系統，兩星之運動軌跡各為以雙星質心為圓心的圓、以雙星質心為一焦點的橢圓、以雙星質心為焦點的拋物線、以雙星質心為距離該分支頂點較近的焦點的一雙曲線分支，或一通過雙星質心的直線的一部分，且兩星之運動軌跡離心率相同、半正焦弦與星之質量反比。
 \begin{proof}
 以雙星質心位置為原點，在雙星所在的平面為建立極座標，令時間$t$，雙星質量$m$、$M$，位置$(r;\theta)$、$(R;\tau)$，雙星質心位置給出：
@@ -1338,12 +1330,12 @@ R&=\frac{mr}{M}\\
 \item 質量$M$者軌跡為，以$\ell_M\coloneq \frac{L^2}{GM^2m}$為半正焦弦、以$\varepsilon\coloneq \frac{DL^2}{GM^2m^2}$為離心率的，以質心為圓心的圓、以質心為一焦點的橢圓、以質心為焦點的拋物線、以質心為距離該分支頂點較近的焦點的一雙曲線分支。
 \end{itemize}
 \end{proof}
-\sssc{克卜勒第二行星運動定律（Kepler's Second Laws of Planetary Motion）/克卜勒等面積定律（Kepler’s Law of Equal Areas）}
+\sssc{克卜勒第二行星運動定律（Kepler's Second Laws of Planetary Motion）/克卜勒等面積定律（Kepler's Law of Equal Areas）}
 雙星系統，一星與雙星質心連線單位時間掃過的面積恆不變，雙星連線單位時間掃過的面積亦恆不變。
 \begin{proof}
 即$\frac{h}{2}=\frac{I}{2m}$、$\frac{H}{2}=\frac{J}{2M}$與$\frac{h+H}{2}=\frac{L|m-M|}{2mM}$，均因角動量守恆而不變。
 \end{proof}
-\sssc{克卜勒第三行星運動定律（Kepler's Third Law of Planetary Motion）/克卜勒週期定律（Kepler’s Law of Period）}
+\sssc{克卜勒第三行星運動定律（Kepler's Third Law of Planetary Motion）/克卜勒週期定律（Kepler's Law of Period）}
 質量$m$、$M$雙星互繞，兩者之橢圓軌道半長軸或圓軌道半徑$a$、$q$、週期$T$，則：
 \[\frac{a^3}{T^2}=\frac{GM^3}{(m+M)^24\pi^2}\]
 \[\frac{q^3}{T^2}=\frac{Gm^3}{(m+M)^24\pi^2}\]
