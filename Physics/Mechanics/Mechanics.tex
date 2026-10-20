@@ -1,14 +1,12 @@
 \documentclass[a4paper,12pt]{article}
-\setcounter{secnumdepth}{5}
-\setcounter{tocdepth}{3}
 \input{LaTeX-ToolKit/template.tex}
 \begin{document}
-\title{力學}
+\title{Mechanics}
 \author{沈威宇}
 \date{\temtoday}
 \titletocdoc
 \sct{力學（Mechanics）}
-Unless otherwise stated, objects and systems refer to insulated systems, positions are 3-dimensional and in inertial reference frames, and $t$ is time.
+Unless otherwise stated, objects and systems refer to insulated systems, positions are in inertial reference frames, $t$ is time, and units are SI units.
 \ssc{簡史}
 \begin{itemize}
 \item 150：托勒密（Ptolemy）提出地心模型（Geocentric model）。
@@ -21,28 +19,34 @@ Unless otherwise stated, objects and systems refer to insulated systems, positio
 \item 1687：牛頓出版「自然哲學的數學原理（Philosophiae Naturalis Principia Mathematica）」，發表牛頓運動定律（Newton's Laws of Motion）與牛頓萬有引力定律（Newton's Law of Universal Gravitation）。
 \end{itemize}
 \ssc{時刻與時間}
-\sssc{時刻（Time, moment, or instant）}
-自時間（秒）$t=0$起算，在經過$k\in\mathbb{N}_0$秒的$t=k$，稱在第$k$秒（at $t=k$）或在第$(k+1)$秒初（at the beginning of the $(k+1)$th second），若$k\in\mathbb{N}$又稱在第$k$秒末（at the end of the $k$th second）。
-\sssc{時間（Time interval or duration）}
+\sssc{Time, moment, or instant (時刻)}
+At $t=k$ is called
+\bit
+\item at the $k$th unit of time (在第$k$時間單位),
+\item at the beginning of the $(k+1)$th unit of time (在第$k+1$時間單位初), or
+\item at the end of the $k$th unit of time (在第$k$時間單位末).
+\eit
+\sssc{Time interval or duration (時間)}
 \begin{itemize}
-\item 第$k$秒初到第$k$秒末稱第$k$秒內（during/within the $k$th second）。
-\item 第$1$秒初到第$k$秒末稱$k$秒內（over the $k$-second interval）。
+\item $t=k-1$ to $t=k$ is called during or within the $k$th unit of time (在第$k$時間單位內).
+\item $t=m$ to $t=m+k$ is called over the $k$-unit-of-time interval (since the $m$th unit of time) (在（自第$m$時間單位的）$k$時間單位內).
 \end{itemize}
-\subsection{平移運動（Motion of translation）}
-\subsubsection{向量}
+\subsection{Motion of translation (平移運動)}
+\subsubsection{Vectors}
 \begin{itemize}
-\item\tb{力（Force）$\mathbf{F}$}：系統間的交互作用, satisfying the principle of superposition.
-\item\tb{外力（External force）}：系統外施予系統之力。
-\item\tb{內力（Internal force）}：系統內不同質點間的力。
-\item\tb{(Relative) position (（相對）位置)}: The relative position of a point $\mathbf{Q}$ with respect to a given reference point (參考點) $\mathbf{P}$ is the vector $\mathbf{Q}-\mathbf{P}$, each with respect to the origin (原點), where we usually set $\mathbf{P}$ as origin.
-\item\tb{位移（Displacement）$\Delta\mathbf{r}$}：系統末位置減去初位置。
-\item\tb{（瞬間/瞬時（Instantaneous））速度（Velocity）$\mathbf{v}$}：系統位置對時間的導數。
-\item\tb{平均速度（Average velocity）}：系統位移，與末時刻減去初時刻，的比值。
-\item\tb{（瞬間/瞬時）加速度（Acceleration）$\mathbf{a}$}：系統速度對時間的導數。
-\item\tb{（瞬間/瞬時）加加速度（Jerk or jolt）}：系統加速度對時間的導數。
-\item\tb{平均加速度（Average acceleration）}：系統末速度減去初速度，與末時刻減去初時刻，的比值。
-\item\tb{（線性）動量（(Linear) momentum）$\mathbf{p}$}：系統質量與速度的乘積。
-\item\tb{衝量（Impulse）$\mathbf{J}$}：系統末動量減去初動量。
+\item\tb{Force} $\mathbf{F}$：An interaction between system that satisfies the principle of superposition.
+\item\tb{External force}: A force to a system from outside of it.
+\item\tb{Internal force}: A force between different subsystems in a system.
+\item\tb{Relative position}: The relative position of a point with respect to a given reference point (參考點).
+\item\tb{Position} $\mb{r}$: The position when an origin is chosen.
+\item\tb{Displacement (位移)} $\mb{r}(t_2)-\mb{r}(t_1)$
+\item\tb{(Instantaneous (瞬間/瞬時)) velocity(速度)}: $\mathbf{v}=\dv{\mb{r}}{t}$
+\item\tb{Average velocity}: $\frac{\mb{r}(t_2)-\mb{r}(t_1)}{t_2-t_1}=\frac{\int_{t_1}^{t_2}\mb{v}\dd{t}}{t_2-t_1}$
+\item\tb{(Instantaneous) acceleration} $\mathbf{a}=\dv{\mb{v}}{t}$
+\item\tb{(Instantaneous) jerk or jolt} $\dv{\mb{a}}{t}$
+\item\tb{Average acceleration}: $\frac{\mb{v}(t_2)-\mb{v}(t_1)}{t_2-t_1}=\frac{\int_{t_1}^{t_2}\mb{a}\dd{t}}{t_2-t_1}$
+\item\tb{(Linear) momentum (動量)} $\mathbf{p}=m\mb{v}$
+\item\tb{Impulse (衝量)} $\mathbf{J}=\mb{p}(t_2)-\mb{p}(t_1)$
 \end{itemize}
 \subsubsection{純量}
 \begin{itemize}
