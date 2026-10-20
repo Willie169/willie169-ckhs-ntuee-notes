@@ -31,14 +31,16 @@ At $t=k$ is called
 \item $t=k-1$ to $t=k$ is called during or within the $k$th unit of time (在第$k$時間單位內).
 \item $t=m$ to $t=m+k$ is called over the $k$-unit-of-time interval (since the $m$th unit of time) (在（自第$m$時間單位的）$k$時間單位內).
 \end{itemize}
-\subsection{Motion of translation (平移運動)}
-\subsubsection{Vectors}
+\ssc{Motion of translation (平移運動)}
+\sssc{Vectors}
 \begin{itemize}
 \item\tb{Force} $\mathbf{F}$：An interaction between system that satisfies the principle of superposition.
-\item\tb{External force}: A force to a system from outside of it.
+\item\tb{External force}: A force acting on a system from outside of it.
+\item\tb{Resultant force}: The sum of all forces acting on a system.
 \item\tb{Internal force}: A force between different subsystems in a system.
 \item\tb{Contact Force (接觸力)}: A force that only exists when the two systems contact.
 \item\tb{Non-contact force (非接觸力)/force at a distance (超距力)}: A force that can exist without the two systems to contact.
+\item\tb{Tension (張力)}: Attraction contact forces within a system, which is balanced inside non-deformed materials.
 \item\tb{Relative position}: The relative position of a point with respect to a given reference point (參考點).
 \item\tb{Position} $\mb{r}$: The position when an origin is chosen.
 \item\tb{Displacement (位移)} $\mb{r}(t_2)-\mb{r}(t_1)$
@@ -50,7 +52,7 @@ At $t=k$ is called
 \item\tb{(Linear) momentum (動量)} $\mathbf{p}=m\mb{v}$
 \item\tb{Impulse (衝量)} $\mathbf{J}=\mb{p}(t_2)-\mb{p}(t_1)$
 \end{itemize}
-\subsubsection{Scalars}
+\sssc{Scalars}
 \begin{itemize}
 \item\tb{Distance} $\abs{\mb{r}_2-\mb{r}_1}$
 \item\tb{(Inertial (慣性)) mass (質量)} $m$: For a system when the force is applied to, the ratio of the force to the acceleration of the system.
@@ -79,33 +81,30 @@ Then, all $v_t$ such that
 are terminal velocity, and the terminal velocity $v_t$ for one such system with initial velocity $\mathbf{v}_0$ is
 \[v_t=g^{-1}\qty(\abs{\mathbf{F}_C}),\]
 where $g\colon V\subseteq U\to\bbR$ is defined as a one-to-one function such that $g=f$ for all $v\in V$ and $\mathbf{v}_0\cdot\hat{\mathbf{F}}_c\in V$.
-\ssc{功（Work）與動能（Kinetic energy）}
-\subsubsection{純量}
+\ssc{Work and kinetic energy}
+\sssc{Scalars}
 \bit
-\item\tb{功（Work）$W$}：一力所做的功為其對系統在受力期間行進路徑的路徑積分。
-\item\tb{淨功（Net work）}：多力所做的淨功為其合力對系統在受力期間行進路徑的路徑積分，等於各力對系統在受力期間所做功之和。
-\item\tb{功率（Power）$P$}：一力所做的功率為其與系統速度的內積。
-\item\tb{動能（Kinetic energy）$K$}：二分之一乘以動量的平方再除以質量。
+\item\tb{Work (功)} $W=\int_{\ell}\mb{F}\cdot\dd{\mb{r}}$. The sum of the works done by multiple forces acting on a system equals the work done by the sum of them. The work done by all forces acting on a system is called net force.
+\item\tb{Power (功率)} $P=\dv{W}{t}=\mb{F}\cdot\mb{v}$
+\item\tb{Kinetic energy (動能)} $K=\frac{1}{2}mv^2$
 \eit
-\sssc{功能定理（The Work–Energy Theorem）}
-一系統在一段時間內受外力所做的淨功等於其動能變化。
-\ssc{位能（Potential Energy）與力學能守恆（Conservation of Mechanical Energy）}
-\sssc{保守力（Conservative force）}
-對位置函數為保守之力。
-\ssc{位能（Potential energy）}
-$U$，系統因其相對於其他系統的位置、自身內部的應力、電荷或其他因素所持有的能量。對於保守力，位能只與系統位置有關，而與路徑、時間無關。
-\sssc{力學能（Mechanical energy）}
-系統動能與位能的總和。
-\sssc{力學能守恆（Conservation of Mechanical Energy）}
-不受非保守力做功的系統，其力學能守恆。
-\sssc{Equilibrium points in a conservative force field (保守力場的平衡點)}
-Given a conservative force $\mathbf{F}$ and its potential $U$ dependent on the position $\mathbf{r}$ such that
-\[\mathbf{F}=-\nabla U.\]
-An equilibrium point $\mathbf{r}_0$ is a point where $\mathbf{F}(\mathbf{r}_0)=0$, and can be classified into the following types:
+\sssc{Work–energy principle (功能定理)}
+The work done by all forces acting on a system equals the change in the kinetic energy of the system.
+\ssc{Potential energy and conservation of mechanical energy}
+\sssc{Conservative force (保守力)}
+A force that is a conservative field with respect to position.
+\sssc{Potential energy (位能)}
+Potential energy is the energy of an object or system due to the body's position relative to other objects, or the configuration of its particles.
+\sssc{Mechanical energy (力學能)}
+The sum of kinetic and potential energies.
+\sssc{Conservation of Mechanical Energy (力學能守恆)}
+If no non-conservative force does work on  a system, the mechanical energy of the system is a constant.
+\sssc{Equilibrium point}
+Given a differentiable conservative force $\mathbf{F}$, its potential $U$, and an equilibrium point $\mathbf{r}_0$. The behavior of a particle at $\mb{r}_0$ when an infinisimal displacement occurs is governed by the classification of $\mb{r}_0$:
 \bit
-\item Stable equilibrium: $U$ has a local minimum at $\mathbf{r}_0$, that is, the Hessian of $U$ at $\mathbf{r}_0$ is positive definite. When an infinisimal displacement occurs on the particle at it, $\mathbf{F}$ pushes it back.
-\item Unstable equilibrium: $U$ has a local maximum at $\mathbf{r}_0$, that is, the Hessian of $U$ at $\mathbf{r}_0$ is negative definite. When an infinisimal displacement occurs on the particle at it, $\mathbf{F}$ pushes it away.
-\item Neutral or indifferent equilibrium: $U$ is constant near $\mathbf{r}_0$, that is, the Hessian of $U$ at $\mathbf{r}_0$ is zero semidefinite. When an infinisimal displacement occurs on the particle at it, it stay where it becomes.
+\item Stable equilibrium: $\mathbf{F}$ pushes it back.
+\item Unstable equilibrium: $\mathbf{F}$ pushes it away.
+\item Neutral or indifferent equilibrium: It stay where it becomes.
 \eit
 \ssc{Center of mass (COM or CM) (質心)}
 \sssc{(Mass) density (（質量）密度)}
@@ -179,7 +178,7 @@ where the denominator is the total mass of the system.
 \sssc{兩質點碰撞的恢復係數（coefficient of restitution）}
 兩質點碰撞，令碰撞前質點$1$相對於質點$2$接近速度$\mathbf{v}_{12}$，碰撞後質點$2$相對於質點$1$遠離速度$\mathbf{v}'_{21}$，則恢復係數$e$定義為：
 \[e = \frac{\mathbf{v}'_{21}}{\mathbf{v}_{12}} \]
-\subsubsection{兩質點一維（完全）彈性碰撞（Elastic collision）}
+\sssc{兩質點一維（完全）彈性碰撞（Elastic collision）}
 \begin{itemize}
 \item $e=1$
 \item 碰撞期間作用力均為保守力。
@@ -250,7 +249,7 @@ K_{int}' &= \frac{m_1\qty(v_1'-v_2')^2}{2} = \frac{m_1v_1^{\pht{1}2}}{2} = K_{in
 \frac{K'_1}{K_1} &= \qty(\frac{1-r}{1+r})^2 = \qty(\frac{m_1-m_2}{m_1+m_2})^2
 \end{aligned}\]
 當$r=1$，能量傳遞比率$=1$；當$r=0.5$或$r=2$，能量傳遞比率$=\frac{8}{9}$。
-\subsubsection{兩質點一維完全非彈性碰撞（Completely inelastic collision）}
+\sssc{兩質點一維完全非彈性碰撞（Completely inelastic collision）}
 \begin{itemize}
 \item $e=0$
 \item 碰撞期間作用力有非保守力。
@@ -314,7 +313,7 @@ v_1' &= 0 \\
 v_2' &= 0 \\
 K_{int}' &= \frac{m_1\qty(v_1'-v_2')^2}{2} = 0
 \end{aligned}\]
-\subsubsection{兩質點一維非彈性碰撞（Inelastic collision）}
+\sssc{兩質點一維非彈性碰撞（Inelastic collision）}
 \begin{itemize}
 \item $0\leq e<1$
 \item 碰撞期間作用力有非保守力。
@@ -755,14 +754,12 @@ Euler's rotation equations are a first-order ordinary differential equation desc
 \[\mathbf{I}\dot{\boldsymbol{\omega}}+\boldsymbol{\omega}\times(\mathbf{I}\boldsymbol{\omega}=\btau,\]
 that is,
 \[\dv{L}{t}+\boldsymbol{\omega}\times\mathbf{L}=\btau.\]
-\ssc{Indeterminate}
-Problems with more unknowns than equations are called indeterminate.
 \ssc{Lagrangian Mechanics (拉格朗日力學)}
 \sssc{Configuration space}
 The degrees of freedom, or parameters, that define the configuration, or position of all constituent point particles, of a physical system are called generalized coordinates, and the space defined by these coordinates is called the configuration space of the system. Each unique possible configuration of the system corresponds to a unique point in the space. It is often the case that the set of all actual configurations of the system is a manifold in the configuration space, called the configuration manifold of the system. The number of dimensions of the configuration space is equal to the degrees of freedom of the system.
 \sssc{Lagrangian mechanics}
 Lagrangian mechanics describes a mechanical system as a pair $(M,L)$ consisting of a configuration manifold $M$ and a smooth functional $L\colon TM\to\mathbb{R}$, called a Lagrangian, where $TM$ is the tagent bundle of $M$, that is, $L=L(\mathbf{q},\dot{\mathbf{q}},t)$, where the vector $\mathbf{q}$ is a point in the configuration space of the system, $\dot{\mathbf{q}}=\frac{\mathrm{d}\mathbf{q}}{\mathrm{d}t}$, and $t$ is time.
-\subsection{Non-Relativistic Lagrangian}
+\sssc{Non-Relativistic Lagrangian}
 Let $\mathbf{r}_k$ denote the position of the $k$th particle for $_{k=1}^N$ in the position space $\mathbb{R}^3$ equipped with Cartesian coordinates as function of time, and \[\mathbf{v}_k=\dot{\mathbf{r}_k}=\frac{\mathrm{d}\mathbf{r}_k}{\mathrm{d}t}.\]
 The non-relativistic Lagrangian for a system of $N$ particles is given by
 \[L=T-V,\]
@@ -784,9 +781,10 @@ The vector $\mathbf{q}$ is a point in the configuration space of the system. The
 With these definitions, the Euler–Lagrange equations, or Lagrange's equations of the second kind are
 \[\nabla_{\mathbf{q}}L=\frac{\mathrm{d}}{\mathrm{d}t}\nabla_{\dot{\mathbf{q}}}L.\]
 The number of equations has decreased compared to Newtonian mechanics, from $3N$ to $n = 3N − C$ coupled second-order differential equations in the generalized coordinates. These equations do not include constraint forces at all, only non-constraint forces need to be accounted for.
-\ssc{正向力（Normal Force）}
-垂直於兩系統界面的接觸排斥力，且令界面兩側系統為$A$、$B$，界面指入$A$的單位法向量$\hat{n}$，$\mathbf{A}$相對於$\mathbf{B}$的速度$\mathbf{v}$，則當兩系統間正向力量值大於零時其必足夠小使得$\mathbf{v}\cdot\hat{n}\leq 0$。源自於電磁力。
 \ssc{摩擦力（Frictional force）}
+\sssc{正向力（Normal Force）}
+垂直於兩系統界面的接觸排斥力，且令界面兩側系統為$A$、$B$，界面指入$A$的單位法向量$\hat{n}$，$\mathbf{A}$相對於$\mathbf{B}$的速度$\mathbf{v}$，則當兩系統間正向力量值大於零時其必足夠小使得$\mathbf{v}\cdot\hat{n}\leq 0$。源自於電磁力。
+\sssc{摩擦力（Frictional force）}
 平行於兩系統界面的接觸力，且與受力系統相對於施力系統速度的內積不為正，且與受力系統所受其他外力合的內積不為正。與該界面的正向力與界面粗糙程度有關，與接觸面積無關。源自於電磁力。
 \sssc{靜摩擦力（Static frictional force）}
 界面兩側系統相對速度平行界面的分量為零時的摩擦力，等於受力系統所受其他外力合平行界面的分量乘以負一，其量值不大於最大靜摩擦力。
@@ -794,8 +792,6 @@ The number of equations has decreased compared to Newtonian mechanics, from $3N$
 一界面可能發生的靜摩擦力量值的最大值，其量值正比於該界面的正向力量值，其量值與正向力量值的比值稱靜摩擦（力）係數（Coefficient of static friction）。
 \sssc{（滑）動摩擦力（Kinetic frictional force）}
 界面兩側系統相對速度平行界面的分量不為零時的摩擦力，其量值與兩側系統相對速度平行界面的分量無關，其量值正比於該界面的正向力量值，其量值與正向力量值的比值稱（滑）動摩擦（力）係數（Coefficient of kinetic friction），通常略小於靜摩擦（力）係數。
-\ssc{張力（Tension）}
-系統內部的接觸吸引力，於非正在發生形變之材料內部處處平衡。
 \ssc{Elasticity (彈性)}
 \sssc{Introduction}
 Elasticity is the ability of a body to resist a distorting external force/stress (外力/外應力) and to return to its initial size and shape when that force/stress is removed. Such force and stress are called elastic force/stress, resisting force/stress, or restoring force/stress, and are the negation of the net external force and stress applied when the two achieves static equilibrium.
