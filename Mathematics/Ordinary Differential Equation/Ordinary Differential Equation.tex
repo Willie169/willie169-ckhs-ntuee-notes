@@ -588,10 +588,11 @@ The formation of its general solutions using the characteristic equation (also c
 \ben
 \item The characteristic equation is
 \[\sum_{j=0}^na_jr^j=0.\]
-\item Suppose there are $k$ distinct real roots $r_1,r_2,\ldots,r_k$, each $r_j$ with multiplicity $m_j$, and $h$ distinct pairs of conjugate imaginary roots $\alpha_1\pm\beta_1i,\alpha_2\pm\beta_2i,\ldots,\alpha_h\pm\beta_hi$ ($\beta_j\neq 0$), each $\alpha_j\pm\beta_ji$ with multiplicity $\omega_j$. (Thus, $\sum_{j=1}^km_j+2\sum_{j=1}^h\omega_j=n$.)
-\item The $n$-parameter family of general solutions of the ODE is
-\[y=\sum_{j=1}^k\sum_{u=0}^{m_j-1}A_{ju}x^ue^{r_jx}+\sum_{j=1}^h\sum_{u=0}^{\omega_j-1}\qty(B_{ju}\cos(\beta_jx)+C_{ju}\sin(\beta_jx))x^ue^{\alpha_jx},\]
-with parameters $A_{ju},B_{ju},C_{ju}$.
+\item Suppose there are $k$ distinct real roots $r_1,\ldots,r_k$, each $r_j$ with multiplicity $m_j$, and $h$ distinct pairs of conjugate imaginary roots $r_{k+1}=\alpha_1\pm\beta_1i,\ldots,r_{k+h}=\alpha_h\pm\beta_hi$ ($\beta_j\neq 0\forall j$), each $r_{k+j}=\alpha_j\pm\beta_ji$ with multiplicity $m_{k+j}\omega_j$. (Thus, $\sum_{j=1}^km_j+2\sum_{j=1}^h\omega_j=n$.)
+\item The $n$-parameter family of complex-valued general solution of the ODE is, with $n$ complex parameters $A_{ju}$,
+\[y=\sum_{j=1}^{k+h}\sum_{u=0}^{m_j-1}A_{ju}x^ue^{r_jx}.\]
+The $n$-parameter family of real-valued general solution of the ODE is the real part of the complex-valued general solution, that is, with $n$ real parameters $B_{ju}=\Re(A_{ju})$ for $j\in[1,k]$, $C_{ju}=\Re(A_{(j+h)u})$ for $j\in[1,h]$, and $D_{ju}=\Im(A_{(j+h)u})$ for $j\in[1,h]$,
+\[y=\sum_{j=1}^k\sum_{u=0}^{m_j-1}B_{ju}x^ue^{r_jx}+\sum_{j=1}^h\sum_{u=0}^{\omega_j-1}\qty(C_{ju}\cos(\beta_jx)+D_{ju}\sin(\beta_jx))x^ue^{\alpha_jx}.\]
 \een
 \sssc{Exponential order}
 For any solution $f(t)$ of any homogeneous linear ODE of one variable $t$, there exists some $M,T\geq 0$ and $\alpha\in\bbR$ such that for all $t>T$, $\abs{f(t)}\leq e^{M\alpha t}$, and the smallest such $\alpha$ is the largest real part among all roots of its characteristic equation.
