@@ -1,33 +1,25 @@
 \documentclass[a4paper,12pt]{article}
-\setcounter{secnumdepth}{5}
-\setcounter{tocdepth}{3}
 \input{LaTeX-ToolKit/template.tex}
 \begin{document}
-\title{能帶理論}
+\title{Band Theory}
 \author{沈威宇}
 \date{\temtoday}
 \titletocdoc
-\sct{能帶理論（(Energy) band theory）}
-能帶理論描述固體材料中電子的能量分布和電子在材料中的行為。
-
-TODO many
+\sct{Band Theory (能帶理論)}
 \ssc{Basics}
-\sssc{能帶（Band）}
-多個原子的原子軌域依分子軌域理論產生鍵結、反鍵結等分子軌域，當數目非常巨大（通常數量級 $10^{20}$ 或更多）的原子結合成固體時，分子軌域間的能階能量差將會變的非常小，一群能量相鄰的能階，可以被視為一個連續能帶。
-
-以Li為例，單一原子則電子位於固定能階的2s軌域，Li$_2$分子則兩個2s軌域結合成兩個能量不同的分子軌域，一個較原本高，另一較原本低。若有極多個Li原子時，可視為形成兩個能量幾乎連續的能帶。
-\sssc{費米能階（Fermi level）}
-The Fermi level of a solid-state body is the thermodynamic work required to add one electron to the body.
-
-對於銅，$E_F=7.0$ eV。
-\sssc{功函數（Work function）}
-令材料的費米能階 $E_F$、基本電荷 $e$、電子在無限遠真空處的能量 $E_{\text{vac}}$，則功函數 $W$ 為：
+The electronic band structure (or simply band structure) of a solid describes the range of energy levels that electrons may or may not have within it.
+\sssc{(Energy) band (能帶)}
+Atomic orbitals from multiple atoms combine to form molecular orbitals, such as bonding and antibonding orbitals. When a vast number of atoms—typically on the order of $10^{20}$ or more—come together to form a solid, the energy differences between these molecular orbitals become extremely small. Consequently, a cluster of closely spaced energy levels can be treated as a continuous energy band.
+\sssc{Fermi level (費米能階)}
+The Fermi level of a solid-state body is the thermodynamic work required to add one electron to the body. For Cu, $E_F=7.0$ eV.
+\sssc{Work function (功函數)}
+For a material with Fermi level $E_F$ and energy of an electron infinitely far in vacuum $E_{\tx{vac}}$, the work function is
 \[W=E_{\text{vac}}-E_F.\]
-功函數與光電效應底限頻率關係為：
-\[W= hf_0.\]
-\ssc{Metal}
-\sssc{Energy band}
-A partially filled band exists. 其中電子為自由電子（Free electron），可以自由移動形成電流。
+Work function is related with the threshold frequency $f_0$ of photoelectric effect by
+\[W=hf_0.\]
+\ssc{Metals}
+\sssc{Bands}
+A partially filled band always exist, in which electrons can wander around and conduct current, called free electrons.
 \sssc{Number density of electrons in partially filled band}
 The number density (number per unit volume) of electrons in partially filled band $n$ is the material's mass density multiplied by the material's number of valence electrons per atom multiplied by Avogadro's number divided by the material's molar mass.
 \sssc{Number density of states of the allowed energy level per unit volume per unit energy interval}
@@ -44,31 +36,34 @@ $E_F$ can be found by solving
 \[n=\int_0^{E_F}N_0(E)\dd{E}.\]
 The result is
 \[E_F=\qty(\frac{3}{16\sqrt{2}\pi})^{2/3}\frac{h^2}{m}n^{2/3}\approx\frac{0.121h^2}{m}n^{2/3}.\]
-\sssc{溫度效應}
-熱擾動對費米能階影響幾可忽略。
-\ssc{Semiconductor and insulator}
-\sssc{Valence and conduction band}
+\sssc{Thermal effect}
+The change of Fermi level on temperature change is small and often negligible for metals.
+\ssc{Semiconductors and insulators}
+\sssc{Bands}
 \bit
-\item\tb{價帶（Valence band）}：充滿電子的最高能帶。
-\item\tb{導帶（Conduction band）}：空的或部分填充的能帶。其中電子為自由電子（Free electron），可以自由移動形成電流。
-\item\tb{能隙（Band gap）}$E_g$：導帶底部（Conduction Band Minimum）的能量減去價帶頂部（Valence Band Maximum）的能量。
+\item\tb{Valence band (價帶)}: The lower-energy, filled band, in which electrons are constrained in covalent bonds and can't wander away freely or conduct current.
+\item\tb{Conduction band (導帶)}: The higher-energy band that is empty or partially filled and empty at 0 K, in which electrons, if exist, can wander around and conduct current, called free electrons.
+\item\tb{Band gap (能隙)}: The gap between conduction band minimum and valence band maximum. The energy difference of the gap is called band-gap energy $E_g$.
 \eit
 \sssc{Insulator}
-具有較大能隙，電子不易躍遷到導帶。$E_F$ 位於能隙中，與導帶和價帶相距甚遠。
+A material with empty conduction band and high energy band such that virtually no transition of electron from valence band to conduction band occurs.
 \sssc{Semiconductor}
-具有較小能隙，電子在適當條件下可以激發到導帶。鍺的能隙約 \(0.67\,\text{eV}\)。
-\ssc{有效質量（effective mass）與電洞/空穴（Hole）/電子電洞（Electron hole）}
-\sssc{電子的能量與有效質量}
-電子的能量 \(E\) 並非如自由電子般與波數 \(k\) 成簡單的二次方關係，而是呈現複雜的週期性函數。但在能帶的極值附近，\(E(k)\) 仍可近似為拋物線：
-\[E(k) \approx E_0 + \frac{\hbar^2 k^2}{2m^*}.\]
-其中 \(m^*\) 為有效質量，定義為
-\[\frac{1}{m^*}=\frac{1}{\hbar^2} \frac{\mathrm{d}^2E}{\mathrm{d}k^2}.\]
-有效質量並非電子的真實質量，而是描述電子在晶格作用下，對外加電磁場響應的等效慣性。
-\sssc{不同位置電子的有效質量}
-當電子處於導帶底部時，能帶開口向上，$\frac{\mathrm{d}^2E}{\mathrm{d}k^2}>0$，有效質量為正。這類電子如同自由電子，只是有效質量被修正。
+A material with lower energy band such that transition of electron from valence band to conduction band can occur under room temperature, that is, whose conductivity lies between that of conductors and inductors.
+\ssc{Effective mass and (electron) hole}
+\sssc{Energy and effective mass (有效質量) of electrons}
+The energy of an electron in a semiconductor is not the simple square relation of that of a free electron and wave number but a complicated periodic function. However, near an edge of a band, it can be approximated with:
+\[E(k) \approx E_0 + \frac{\hbar^2 k^2}{2m^*}\]
+where $E_0$ is the energy of the edge, $k$ is wave number, and $m^8$ is a constant called effective mass given by
+\[m^*=\hbar^2\qty(\frac{\mathrm{d}^2E(k))}{\mathrm{d}k^2})^{-1}\]
+where $\dv[2]{E(k)}{k}$ is taken at the edge.
+\sssc{Effective mass of electrons at difference levels}
+\bit
+\item At conduction band minimum, $\dv[2]{E(k)}{k}>0$, $m^*>0$. These electrons behave like free electrons with mass $m^*$.
+\item At valence band maximum, $\dv[2]{E(k)}{k}<0$, $m^*<0$. This indicates that when an external electric field is applied, the electrons go the opposite way, like a positive-charged particle.
+\eit
+\sssc{(Electron) hole (（電子）電洞/空穴)}
+When a covalent bond is broken in a near filled valence band and an electron wander away, a hole is left behind with positive charge, called hole and denoted $h^+$. When an external electric field is applied, an electron may fill the hole, causing the hole to effectively move in the opposite direction.
 
-當電子處於價帶頂部時，能帶開口向下，$\frac{\mathrm{d}^2E}{\mathrm{d}k^2}<0$，有效質量為負。負有效質量意味著當施加一個外加電場時，價帶頂電子的加速度方向與電場力方向相反，使得像是帶有正電荷的粒子在運動。
-\sssc{電洞}
 考慮一個接近填滿的價帶。若其中缺失了一個電子，留下的空缺即稱「電洞」，常記作 $h^+$。當外加電場驅動電子移動時，鄰近電子可能躍入此空缺，導致空缺反方向移動，即等價於一個帶正電荷 \(+e\)、有效質量為正值（\(+|m^*|\)）的粒子。
 \ssc{載子產生（Carrier generation）}
 指一個電子從價帶中被激發到導帶，會在價帶中留下一個電洞，產生兩個等值異號的電荷載子。
