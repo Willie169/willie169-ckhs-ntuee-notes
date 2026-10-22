@@ -5,7 +5,7 @@
 \author{沈威宇}
 \date{\temtoday}
 \titletocdoc
-\sct{Band Theory (能帶理論)}
+\sct{Band Theory (能帶理論) and Semiconductor}
 \ssc{Basics}
 \sssc{Electronic band structure or band structure}
 The electronic band structure (or simply band structure) of a solid describes the range of energy levels that electrons may or may not have within it.
@@ -25,10 +25,11 @@ A partially filled band always exist, in which electrons can wander around and c
 The number density (number per unit volume) of electrons in partially filled band $n$ is the material's mass density multiplied by the material's number of valence electrons per atom multiplied by Avogadro's number divided by the material's molar mass.
 \sssc{Number density of states of the allowed energy level per unit volume per unit energy interval}
 The number density of states of the allowed energy level per unit volume per unit energy interval $N(E)$ is
-\[N(E)=\frac{8\sqrt{2}\pi m_e^{\pht{e}3/2}}{h^3}\sqrt{E}.\]
+\[N(E)=\frac{8\sqrt{2}\pi m_e^{3/2}}{h^3}\sqrt{E}.\]
 \sssc{Occupancy probability}
 The occupancy probability $P(E)$ is the probability that a given available state will be occupied by an electron
 \[P(E)=\frac{1}{e^{\frac{E-E_F}{kT}}+1}\]
+where $T$ is temperature in K and $k$ is Boltzmann's constant $8.62\times 10^{-5}$ eV/K.
 \sssc{Number density of occupied states per unit volume per unit energy interval}
 The number density of occupied states per unit volume per unit energy interval $N_0(E)$ is
 \[N_0(E)=N(E)P(E).\]
@@ -39,20 +40,20 @@ The result is
 \[E_F=\qty(\frac{3}{16\sqrt{2}\pi})^{2/3}\frac{h^2}{m}n^{2/3}\approx\frac{0.121h^2}{m}n^{2/3}.\]
 \sssc{Thermal effect}
 The change of Fermi level on temperature change is small and often negligible for metals.
-\ssc{Semiconductors and Insulators}
+\ssc{Semiconductors}
 \sssc{Bands}
+For semiconductors and insulators,
 \bit
-\item\tb{Valence band (價帶)}: The lower-energy, filled band, in which electrons are constrained in covalent bonds and can't wander away freely or conduct current.
-\item\tb{Conduction band (導帶)}: The higher-energy band that is empty or partially empty, in which electrons, if exist, can wander around and conduct current, called free electrons.
-\item\tb{Band gap (能隙)}: The gap between conduction band minimum and valence band maximum. The energy difference of the gap is called band-gap energy $E_g$. For silicon, $E_g=1.12$ eV.
+\item\tb{Conduction band (導帶)}: The higher-energy band that is empty or slightly filled, in which electrons, if exist, can wander around and conduct current, called free electrons. The energy of conduction band minimum is denoted $E_C$.
+\item\tb{Valence band (價帶)}: The lower-energy, filled band, in which electrons are constrained in covalent bonds and can't wander away freely or conduct current. The energy of valence band maximum is denoted $E_V$.
+\item\tb{Band gap (能隙)}: The gap between conduction band minimum and valence band maximum. The energy difference of the gap is called band-gap energy $E_g=E_C-E_V$. For silicon, $E_g=1.12$ eV.
 \eit
 \sssc{Insulator}
 A material with empty conduction band and high energy band such that virtually no transition of electron from valence band to conduction band occurs.
 \sssc{Semiconductor}
-A material with lower energy band such that transition of electron from valence band to conduction band can occur under room temperature, that is, whose conductivity lies between that of conductors and inductors.
+A material with lower energy band such that transition of electron from valence band to conduction band can occur under room temperature, that is, whose conductivity lies between that of conductors and insulators.
 
 There are two kinds of semiconductors: single-element semiconductors, such as silicon (IV) and germanium (IV), and compound semiconductors, such as gallium arsenide \ce{GaAs} (III-V), aluminium gallium arsenide \ce{AlGaAs} (III-V), indium phosphide \ce{InP} (III-V), Aluminium gallium indium phosphide \ce{AlInGaP} (III-V), zinc oxide \ce{ZnO2} (II-VI), and titanium doxide \ce{TiO2} (II-VI). Compound semiconductors are useful in special electronic circuit applications as well as in applications that involve light, such as light-emitting diodes (LEDs). Germanium was used in the fabrication of very early transistors (late 1940s, early 1950s). It was quickly supplanted by silicon, on which today’s integrated-circuit technology is almost entirely based. For this reason, we will deal mostly with silicon devices.
-\ssc{Effective mass, holes, and carriers of semiconductors}
 \sssc{Energy and effective mass (有效質量) of electrons}
 The energy of an electron in a semiconductor is not the simple square relation of that of a free electron and wave number but a complicated periodic function. However, near an edge of a band, it can be approximated with:
 \[E(k) \approx E_0 + \frac{\hbar^2 k^2}{2m^*}\]
@@ -73,10 +74,14 @@ Thus, we define hole as a quasiparticle with charge $e$ and effective mass $m^*$
 \sssc{Carriers (載子) of semiconductors}
 Thus, there are two types of carriers in semiconductors mathematically:
 \bit
-\item free electron at conduction band minimum with charge $-e$ and a positive effective mass $m_e^*$, and
-\item holes at valence band maximum with charge $e$ and a positive effective mass $m_h^*$.
+\item free electron at conduction band minimum with charge $-e$ and a positive effective mass $m_n^*$, and
+\item holes at valence band maximum with charge $e$ and a positive effective mass $m_p^*$.
 \eit
 The concentration of free electrons is denoted $n$; the concentration of holes is denoted $p$.
+\sssc{Effective densities of states}
+Available electronic states effectively participate in carrier occupation near a band edge at a given temperature, denoted as $N_C$ for conduction band minimum and $N_V$ for valence band maximum. They are governed by
+\[N_C=2\qty(\frac{2\pi m_n^*kT}{h^2})^{\flatfrac{3}{2}}\]
+\[N_V=2\qty(\frac{2\pi m_p^*kT}{h^2})^{\flatfrac{3}{2}}\]
 \sssc{Carrier generation}
 When an electron transits from valence band to conduction band, a free electron in conduction band and a hole in valence band are generated, and an energy of band-gap energy $E_g$ is consumed.
 
@@ -95,28 +100,49 @@ Carrier generation caused by light.
 Similar to the photoelectric effect, if the frequency of the incident light is greater than or equal to the material's threshold frequency $f_h=\frac{E_g}{h}$, electron-hole pairs are generated immediately; if the frequency of the incident light is less than this threshold, such pairs are never produced.
 
 This effect is used in solar cell, photoresistor, and light-controlled relay.
-\sssc{Thermal generation and carrier concentration at thermal equilibrium}
+\sssc{Thermal generation}
 Carrier generation due to thermal energy. The higher the temperature, the more thermal generations occur.
-
+\sssc{Thermal equilibrium}
 Thermal equilibrium is the state where thermal generation rate equals to carrier recombination rate, at which
 \[np=n_i^2\]
 where $n_i$ denotes the number of free electrons and holes in a unit volume at a given temperature given by
-\[n_i=BT^{\frac{3}{2}}e^{-\frac{E_g}{2kT}}\]
-where $B$ is a material-dependent parameter that is $7.3\times 10^{15}$ cm$^{-3}$K$^{-\frac{3}{2}}$ for silicon, $T$ is temperature in K, and $k$ is Boltzmann's constant $8.62\times 10^{-5}$ eV/K.
-
-For intrinsic semiconductor, that is,
+\[n_i=BT^{\flatfrac{3}{2}}e^{-\frac{E_g}{2kT}}\]
+where $B$ is a material-dependent parameter that is $7.3\times 10^{15}$ cm$^{-3}$K$^{-\frac{3}{2}}$ for silicon, and
+\[n=N_C\exp(-\frac{E_C-E_F}{kT})\]
+\[p=N_V\exp(-\frac{E_F-E_V}{kT})\]
+For intrinsic semiconductor at thermal equilibrium,
 \[n=p=n_i\]
-At 0 K, no thermal generation occurs, so an intrinsic semiconductor has no carrier and behaves as an inductor at thermal equilibrium.
-\ssc{Doping}
+\[E_F=\frac{E_C+E_V}{2}+\frac{kT}{2}\ln(\frac{N_V}{N_C})=\frac{E_C+E_V}{2}+\frac{3kT}{4}\ln(\frac{m_p^*}{m_n^*})\]
+At 0 K, no thermal generation occurs, so an intrinsic semiconductor has no carrier and behaves as an insulator at thermal equilibrium.
 \sssc{Doping (摻雜)}
 Doping is the intentional introduction of impurities into an intrinsic/undoped/pure semiconductor in order to change its properties. The doped material is referred to as an extrinsic/doped semiconductor.
 \sssc{n-typed (n 型) semiconductors}
-Semiconductor with doping the 
-摻雜易於失去電子的元素，稱donor，引入更多自由電子。對於類金屬半導體通常是在高純度半導體中加入少量第15族元素，如 P、As。費米能階上移而靠近導帶，導電性增加。電子是major carriers，電洞是minor carriers。
-\sssc{p 型（p-typed）半導體}
-摻雜易於獲得電子的元素，稱acceptor，引入更多電洞。對於類金屬半導體通常是在高純度半導體中加入少量第13族元素，如 B、Al。費米能階下而靠近價帶，導電性增加。電子是minor carriers，電洞是major carriers。
-\ssc{Intrinsic semiconductors}
-\ssc{p–n 接面（p–n junction）}
+Semiconductor with doping of elements that readily lose electrons, called donors, typically elements with valence of 5, such as phosphorus \ce{P} and arsenic \ce{As}, which introduces a substantial increase of the concentration of free electrons, Fermi level, and conductivity.
+
+If the concentration of donor atoms is $N_D$, which is usually far greater than $n_i$, the concentration of free electrons in the n-type semiconductor will be approximately
+\[n_n=N_D\]
+and, at thermal equilibrium,
+\[p_n=\frac{n_i^2}{N_D}\]
+Hence, free electrons are said to be the majority (charge) carriers, while holes are said to be the minority (charge) carriers.
+\sssc{p-typed (p 型) semiconductors}
+Semiconductor with doping of elements that readily get electrons, called acceptors, typically elements with valence of 3, such as boron \ce{B} and aluminium \ce{Al}, which introduces a substantial increase of the concentration of holes and conductivity and decrease of Fermi level.
+
+If the concentration of acceptor atoms is $N_A$, which is usually far greater than $n_i$, the concentration of holes in the p-type semiconductor will be approximately
+\[p_p=N_A\]
+and, at thermal equilibrium,
+\[n_p=\frac{n_i^2}{N_A}\]
+Hence, holes are said to be the majority (charge) carriers, while free electrons are said to be the minority (charge) carriers.
+
+
+
+
+
+
+
+
+
+
+\ssc{p–n junction (p–n 接面)}
 \sssc{Definition}
 A p-n junction is a single semiconducting crystal with one end doped to form p-type material and the other end doped to form n-type material. The two types meet at a junction plane. At thermal equilibrium, the following occur at the junction plane:
 \bit
