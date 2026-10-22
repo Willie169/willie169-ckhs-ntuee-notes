@@ -9,7 +9,7 @@
 \ssc{Basics}
 The electronic band structure (or simply band structure) of a solid describes the range of energy levels that electrons may or may not have within it.
 \sssc{(Energy) band (能帶)}
-Atomic orbitals from multiple atoms combine to form molecular orbitals, such as bonding and antibonding orbitals. When a vast number of atoms—typically on the order of $10^{20}$ or more—come together to form a solid, the energy differences between these molecular orbitals become extremely small. Consequently, a cluster of closely spaced energy levels can be treated as a continuous energy band.
+Atomic orbitals from multiple atoms combine to form molecular orbitals, such as bonding and anti-bonding orbitals. When a vast number of atoms—typically on the order of $10^{20}$ or more—come together to form a solid, the energy differences between these molecular orbitals become extremely small. Consequently, a cluster of closely spaced energy levels can be treated as a continuous energy band.
 \sssc{Fermi level (費米能階)}
 The Fermi level of a solid-state body is the thermodynamic work required to add one electron to the body. For Cu, $E_F=7.0$ eV.
 \sssc{Work function (功函數)}
@@ -49,24 +49,38 @@ The change of Fermi level on temperature change is small and often negligible fo
 A material with empty conduction band and high energy band such that virtually no transition of electron from valence band to conduction band occurs.
 \sssc{Semiconductor}
 A material with lower energy band such that transition of electron from valence band to conduction band can occur under room temperature, that is, whose conductivity lies between that of conductors and inductors.
-\ssc{Effective mass and (electron) hole}
+\ssc{Effective mass, holes, and carriers of semiconductors}
 \sssc{Energy and effective mass (有效質量) of electrons}
 The energy of an electron in a semiconductor is not the simple square relation of that of a free electron and wave number but a complicated periodic function. However, near an edge of a band, it can be approximated with:
 \[E(k) \approx E_0 + \frac{\hbar^2 k^2}{2m^*}\]
 where $E_0$ is the energy of the edge, $k$ is wave number, and $m^8$ is a constant called effective mass given by
 \[m^*=\hbar^2\qty(\frac{\mathrm{d}^2E(k))}{\mathrm{d}k^2})^{-1}\]
-where $\dv[2]{E(k)}{k}$ is taken at the edge.
+where $\dv[2]{E(k)}{k}$ is taken at the edge. Effective mass is usually written as multiple of mass of electron.
 \sssc{Effective mass of electrons at difference levels}
 \bit
-\item At conduction band minimum, $\dv[2]{E(k)}{k}>0$, $m^*>0$. These electrons behave like free electrons with mass $m^*$.
-\item At valence band maximum, $\dv[2]{E(k)}{k}<0$, $m^*<0$. This indicates that when an external electric field is applied, the electrons go the opposite way, like a positive-charged particle.
+\item At conduction band minimum, $\dv[2]{E(k)}{k}>0$ and $m^*>0$. These electrons behave like free electrons but with mass $m^*$.
+\item At valence band maximum, $\dv[2]{E(k)}{k}<0$ and $m^*<0$. These electrons move to the opposite direction of an electromagnetic force acting on it.
 \eit
 \sssc{(Electron) hole (（電子）電洞/空穴)}
-When a covalent bond is broken in a near filled valence band and an electron wander away, a hole is left behind with positive charge, called hole and denoted $h^+$. When an external electric field is applied, an electron may fill the hole, causing the hole to effectively move in the opposite direction.
+A hole $h^+$ is an absence of an electron in valence band.
 
-考慮一個接近填滿的價帶。若其中缺失了一個電子，留下的空缺即稱「電洞」，常記作 $h^+$。當外加電場驅動電子移動時，鄰近電子可能躍入此空缺，導致空缺反方向移動，即等價於一個帶正電荷 \(+e\)、有效質量為正值（\(+|m^*|\)）的粒子。
-\ssc{載子產生（Carrier generation）}
-指一個電子從價帶中被激發到導帶，會在價帶中留下一個電洞，產生兩個等值異號的電荷載子。
+Consider a nearly-filled valence band under a electromagnetic force, the current of it is the current of a filled valence band, which is always zero, subtracting the current that would exist due to the electron that would fill the hole if there's not the hold, which is in the opposite direction of the force. Thus, the current is in the direction of the force. Let the effective mass of electrons be $-m^*$ and the concentration of hole be $C$. The current is mathematically equal to that of particles with charge $e$ and effective mass $m^*$ at concentration $C$.
+
+Thus, we define hole as an imaginary particle with charge $e$ and effective mass $m^*$, which is positive.
+\sssc{Carriers (載子) of semiconductors}
+Thus, there are two types of carriers in semiconductors mathematically:
+\bit
+\item free electron at conduction band minimum with charge $-e$ and a positive effective mass $m_e^*$, and
+\item holes at valence band maximum with charge $e$ and a positive effective mass $m_h^*$.
+\eit
+\sssc{Carrier generation}
+When an electron transits from valence band to conduction band, a free electron in conduction band and a hole in valence band are generated, and an energy of band-gap energy $E_g$ is consumed.
+\sssc{Carrier recombination (載子複合) and electroluminescence (電致發光/電激發光)}
+When an electron transits from conduction band to valence band, a free electron in conduction band and a hole in valence band are cancelled, and an energy of band-gap energy $E_g$ is released in the form of a photon with frequency $\frac{E_g}{h}$, called electroluminescence. Thus, semiconductors with different band-gap energy can release light of different frequency. This effect is used in light emitting diode (LED) (發光二極體).
+
+
+
+
 \ssc{光生伏打效應/光伏效應（Photovoltaic effect）/內光電效應（Internal photoelectric effect）}
 指在光的照射下，物質材料中電子的被激發而自價帶躍遷至導帶，稱光生電子，並在價帶留下電洞，稱光生電洞，即產生光生電子電洞對的現象。有時也被視為光電效應的一種。
 
@@ -74,8 +88,6 @@ When a covalent bond is broken in a near filled valence band and an electron wan
 \[f_0=\frac{E_g}{h}\]
 
 常用於太陽能電池（Solar cell）、電荷耦合元件（Charge coupled device, CCD）、光敏電阻（Photoresistor）、光控繼電器（Light-controlled relay）。
-\ssc{載子複合（Carrier recombination）與電致發光/電激發光（Electroluminescence）}
-指電子和電洞複合，會以光子的形式釋放能量，釋放的能量等於能隙$E_g=hf$，故能隙不同的物質放出不同頻率的光。常用於發光二極體（Light emitting diode, LED）。
 \ssc{激子（Exciton）}
 描述了一對電子與電洞由靜電力相互吸引而構成的束縛態，可視為電中性的准粒子。
 \ssc{半導體}
