@@ -191,8 +191,6 @@ where $\nabla_n,\nabla_p$ are concentration gradients, $D_n,D_p$ are constants c
 called Einstein relationship, where $V_T$ is thermal voltage given by
 \[V_T=\frac{kT}{e}\]
 For $T=300$ K, $V_T$ is 25.9 mV. For intrinsic silicon, $D_n$ is 35 cm$^2$/s and $D_p$ is 12 cm$^2$/s.
-
-
 \ssc{pn or p-n junction}
 \sssc{Physical structure}
 A p-n junction is a single semiconducting crystal with one end doped to form p material and the other end doped to form n material. The two types meet at a junction plane. External wire connections are made to both ends through metal contacts. If the pn junction is used as diode (二極體), these constitute the two terminals, anode, indicated by +, for p-type end and cathode, indicated by -, for n-type end, of the diode.
@@ -208,17 +206,27 @@ Both currents are from the p side to the n side, and their sum is the diffusion 
 \item The free electrons that diffuse across the junction into the p region quickly recombine with some of the majority holes, which results in the disappearance of some holes in the p region. Thus, some bound negative charge will no longer be neutralized by holes, and this charges are said to have been uncovered. Since recombination occurs close to the junction, there will be a region in the p region near the junction that is depleted of holes and contains uncovered bound negative charge.
 \eit
 The region on both sides of the junction, with the n side of this region positively charged and depleted of free electrons and the p side negatively charged and depleted of holes, is called depletion region.
+
+The width of the region on the two sides are not always the same. Rather, to uncover the same amount of charge, the depletion layer will extend deeper into the more lightly doped material, that is, wider into the n material if $N_A>N_D$ and wider into the p material if $N_A<N_D$, where $N_A$ and $N_D$ are the doping concentrations of the p side and n side of the junction respectively.
+\sssc{Carrier concentration}
 \bit
 \item The hole concentration is highest at the p-type edge of the depletion region, at which it is the majority carrier, and drops as the position move in the depletion region towards the n-type region until the n-type edge of the depletion region, at which it is the minority carrier.
 \item The free electron concentration is highest at the n-type edge of the depletion region, at which it is the majority carrier, and drops as the position move in the depletion region towards the p-type region until the p-type edge of the depletion region, at which it is the minority carrier.
 \eit
 Thus, the wider the depletion region is, the smaller the magnitude of the concentration gradients, and thus the smaller the diffusion current $I_D$.
-\sssc{Barrier/junction voltage}
+
+Under no external voltage, which is signified by a subscript $0$,
+\bit
+\item at the p material edge of the depletion and further into the p material, the majority holes have concentration $p_{p0}=N_A$, and the minority free electrons have concentration $n_{p0}=\frac{n_i^2}{N_A}$;
+\item at the n material edge of the depletion and further into the n material, the majority free electrons have concentration $n_{n0}=N_D$, and the minority holes have concentration $p_{n0}=\frac{n_i^2}{N_D}$.
+\eit
+\sssc{Charges in depletion region}
 \bit
 \item In n-type part of the depletion region, the net charge density is positive and whose magnitude is highest at the junction and decreases as the position moves away from the junction into the n region until 0 at the edge of the depletion region.
 \item In p-type part of the depletion region, the net charge density is negative and whose magnitude is highest at the junction and decreases as the position moves away from the junction into the p region until 0 at the edge of the depletion region.
 \eit
-The charges on both sides cause an electric field to be established in the direction from n side to p side, which results in a potential difference across the region, with the n side at a positive voltage relative to the p side, called barrier voltage voltage $V_0$.
+The charges on both sides cause an electric field to be established in the direction from n side to p side, which results in a potential difference across the region, with the n side at a positive voltage relative to the p side, called barrier voltage voltage, which is denoted as $V_0$ under no external voltage.
+
 \sssc{Drift current}
 \bit
 \item Some of the thermally generated minority holes in the n region move toward the junction and reach the edge of the depletion region. There, they are swept across depletion region into the p side by the electric field.
@@ -232,9 +240,11 @@ This equilibrium is stable and maintained by $V_0$. If for some reason $I_D>I_S$
 \sssc{(Junction) built-in voltage}
 With no external voltage applied, $V_0$ is given by
 \[V_0=V_T\ln(\frac{N_AN_T}{n_i^2}),\]
-where $N_A$ and $N_D$ are the doping concentrations of the p side and n side of the junction respectively. Such $V_0$ is called the junction built-in voltage, which is typically in the range of 0.6 V to 0.9 V for silicon at room temperature.
+called the junction built-in voltage, which is typically in the range of 0.6 V to 0.9 V for silicon at room temperature.
 \sssc{Voltage equilibrium with short-circuit terminals}
 At equilibrium, the barrier voltage is balanced out by the voltages across the two metal-semiconductor junctions, whose behavior will be explained in its section. Thus, no voltage can be measured across the terminals, complying with the conservation of energy.
+
+
 
 
 
@@ -273,4 +283,12 @@ In a forward-bias connection connected to a source, there are many electrons in 
 FET 具有四個端子：源極（source）、閘極（gate）和汲極（drain）、體（body）/基（base）/塊體（bulk）/基板（substrate）。通過在閘極施加電壓，可以改變源極與汲極之間的電導率，從而控制電流，分為需加閘極電壓方能導通源極與汲極的增強模式（enhancement-mode），較常見；與預設導通源極與汲極，加閘極電壓可減弱或關閉它的空乏模式/減少模式（depletion-mode）。
 
 下討論 metal-oxide-semiconductor-field-effect transistor (MOSFET)。其僅使用電子與電洞的其中一種作為電荷載子，前者稱 n-通道（n-channel），後者稱 p-通道（p-channel）。源極與汲極下方的摻雜半導體具有該種載子，在增強模式中預設不相連而斷路，但加閘極電壓可以引入載子使相連而導通；在空乏模式中預設相連而導通，但加閘極電壓可以引入相反的載子使變窄增加電阻，繼而不相連而斷路。
+
+
+
+
+\ssc{Metal–semiconductor (MS or M-S) junction}
+% https://en.wikipedia.org/wiki/Metal%E2%80%93semiconductor_junction
+
+
 \end{document}
