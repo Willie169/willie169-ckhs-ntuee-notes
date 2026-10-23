@@ -45,7 +45,7 @@ A partially filled band always exist, in which electrons can wander around and c
 Density of electrons in partially filled band $n$ is the material's mass density multiplied by the material's number of valence electrons per atom multiplied by Avogadro's number divided by the material's molar mass.
 \sssc{Thermal effect}
 The change of Fermi level on temperature change is small and often negligible for metals.
-\sssc{Free electron model or Drude model of drift velocity and drift current}
+\sssc{Drude model of drift velocity and drift current}
 In Drude model, after a typical collision, each free electron completely lose its memory of its previous velocity and moving off in a random direction. In the average time $\tau$ between collisions, the average free electron will acquire a drift speed of
 \[\mathbf{v}_d=-\frac{e\tau}{m}\mb{E}\]
 We define the free electron mobility $\mu_n$ as
@@ -194,55 +194,52 @@ For $T=300$ K, $V_T$ is 25.9 mV. For intrinsic silicon, $D_n$ is 35 cm$^2$/s and
 \ssc{pn or p-n junction}
 \sssc{Physical structure}
 A p-n junction is a single semiconducting crystal with one end doped to form p material and the other end doped to form n material. The two types meet at a junction plane. External wire connections are made to both ends through metal contacts. If the pn junction is used as diode (二極體), these constitute the two terminals, anode, indicated by +, for p-type end and cathode, indicated by -, for n-type end, of the diode.
-\sssc{Diffusion current}
+\sssc{(Carrier-)depletion/space-charge region/layer/zone and diffusion current}
 \bit
-\item Holes diffuse from the p region to the n region.
-\item Free electrons diffuse from the n region to the p region.
-\eit
-Both currents are from the p side to the n side, and their sum is the diffusion current $I_D$.
-\sssc{(Carrier-)depletion/space-charge region/layer/zone}
-\bit
-\item The holes that diffuse across the junction into the n region quickly recombine with some of the majority free electrons, which results in the disappearance of some free electrons in the n region. Thus, some bound positive charge will no longer be neutralized by free electrons, and this charges are said to have been uncovered. Since recombination occurs close to the junction, there will be a region in the n region near the junction that is depleted of free electrons and contains uncovered bound positive charge.
-\item The free electrons that diffuse across the junction into the p region quickly recombine with some of the majority holes, which results in the disappearance of some holes in the p region. Thus, some bound negative charge will no longer be neutralized by holes, and this charges are said to have been uncovered. Since recombination occurs close to the junction, there will be a region in the p region near the junction that is depleted of holes and contains uncovered bound negative charge.
+\item Majority holes diffuse from the p region to the n region. The holes that diffuse across the junction into the n region quickly recombine with some of the majority free electrons, which results in the disappearance of some free electrons in the n region. Thus, some bound positive charge will no longer be neutralized by free electrons, and this charges are said to have been uncovered. Since recombination occurs close to the junction, there will be a region in the n region near the junction that is depleted of free electrons and contains uncovered bound positive charge.
+\item Majority free electrons diffuse from the n region to the p region. The free electrons that diffuse across the junction into the p region quickly recombine with some of the majority holes, which results in the disappearance of some holes in the p region. Thus, some bound negative charge will no longer be neutralized by holes, and this charges are said to have been uncovered. Since recombination occurs close to the junction, there will be a region in the p region near the junction that is depleted of holes and contains uncovered bound negative charge.
 \eit
 The region on both sides of the junction, with the n side of this region positively charged and depleted of free electrons and the p side negatively charged and depleted of holes, is called depletion region.
 
+Due to the depletion, the carrier concentrations of holes and free electrons in the whole depletion region are both negligible.
+
+Thus, the net charge density in the region is the bound charge density.
+\bit
+\item In n-type part of the depletion region, the net charge density is $N_D$.
+\item In p-type part of the depletion region, the net charge density is $-N_A$.
+\eit
 The width of the region on the two sides are not always the same. Rather, to uncover the same amount of charge, the depletion layer will extend deeper into the more lightly doped material, that is, wider into the n material if $N_A>N_D$ and wider into the p material if $N_A<N_D$, where $N_A$ and $N_D$ are the doping concentrations of the p side and n side of the junction respectively.
-\sssc{Carrier concentration}
-\bit
-\item The hole concentration is highest at the p-type edge of the depletion region, at which it is the majority carrier, and drops as the position move in the depletion region towards the n-type region until the n-type edge of the depletion region, at which it is the minority carrier.
-\item The free electron concentration is highest at the n-type edge of the depletion region, at which it is the majority carrier, and drops as the position move in the depletion region towards the p-type region until the p-type edge of the depletion region, at which it is the minority carrier.
-\eit
-Thus, the wider the depletion region is, the smaller the magnitude of the concentration gradients, and thus the smaller the diffusion current $I_D$.
 
-Under no external voltage, which is signified by a subscript $0$,
-\bit
-\item at the p material edge of the depletion and further into the p material, the majority holes have concentration $p_{p0}=N_A$, and the minority free electrons have concentration $n_{p0}=\frac{n_i^2}{N_A}$;
-\item at the n material edge of the depletion and further into the n material, the majority free electrons have concentration $n_{n0}=N_D$, and the minority holes have concentration $p_{n0}=\frac{n_i^2}{N_D}$.
-\eit
-\sssc{Charges in depletion region}
-\bit
-\item In n-type part of the depletion region, the net charge density is positive and whose magnitude is highest at the junction and decreases as the position moves away from the junction into the n region until 0 at the edge of the depletion region.
-\item In p-type part of the depletion region, the net charge density is negative and whose magnitude is highest at the junction and decreases as the position moves away from the junction into the p region until 0 at the edge of the depletion region.
-\eit
-The charges on both sides cause an electric field to be established in the direction from n side to p side, which results in a potential difference across the region, with the n side at a positive voltage relative to the p side, called barrier voltage voltage, which is denoted as $V_0$ under no external voltage.
+The charges on both sides cause an electric field $\mb{E}$ to be established in the direction from n side to p side, which results in a potential difference across the region, with the n side at a positive voltage relative to the p side, called barrier voltage $V_b$.
 
+Both diffusions of majority carriers form currents from the n side to the p side. However, the barrier voltage acts as an energy barrier that only majority carriers with energy no less than $eV_b$ can diffuse pass the depletion region, and the others will be pushed back by the electric field. The pushed back carriers form a drift current density $\rho\mb{E}$ from the p side to the n side, where $\rho$ is the charge density due to the majority carriers. This current decreases the actual current of majority carriers diffusing through the depletion region. Such current is called diffusion current $I_D$. 
 \sssc{Drift current}
 \bit
 \item Some of the thermally generated minority holes in the n region move toward the junction and reach the edge of the depletion region. There, they are swept across depletion region into the p side by the electric field.
 \item Some of the thermally generated minority free electrons in the p region move toward the junction and reach the edge of the depletion region. There, they are swept across depletion region into the n side by the electric field.
 \eit
-Both currents are from the n side to the p side, and their sum is the drift current $I_S$. Since the current is carried by thermally generated minority carriers, its value is dependent on temperature; however, it is independent of barrier voltage because the drift current is determined by the number of minority carriers that make it to the edge of the depletion region; any minority carriers that manage to get to the edge of the depletion region will be swept across.
+Both currents are from the n side to the p side, and their sum is called the drift current $I_S$. Since the current is carried by thermally generated minority carriers, its value is dependent on temperature; however, it is independent of barrier voltage because the drift current is determined by the number of minority carriers that make it to the edge of the depletion region; any minority carriers that manage to get to the edge of the depletion region will be swept across.
 \sssc{Current equilibrium with open-circuit terminals}
 Under open-circuit condition, no external current exists; thus
 \[I_D=I_S\]
-This equilibrium is stable and maintained by $V_0$. If for some reason $I_D>I_S$, more bound charges will be uncovered on both sides of the junction, which widens the depletion layer and thus decreases $I_D$, which in turns shrinks the depletion region since some of the uncovered bound charges are then covered.
-\sssc{(Junction) built-in voltage}
-With no external voltage applied, $V_0$ is given by
-\[V_0=V_T\ln(\frac{N_AN_T}{n_i^2}),\]
-called the junction built-in voltage, which is typically in the range of 0.6 V to 0.9 V for silicon at room temperature.
+This equilibrium is stable and maintained by $V_0$. If for some reason, $I_D>I_S$, more bound charges will be uncovered on both sides of the junction, which increases $V_b$ and thus decreases $I_D$, which in turns shrinks the depletion region since some of the uncovered bound charges are then covered.
 \sssc{Voltage equilibrium with short-circuit terminals}
 At equilibrium, the barrier voltage is balanced out by the voltages across the two metal-semiconductor junctions, whose behavior will be explained in its section. Thus, no voltage can be measured across the terminals, complying with the conservation of energy.
+\sssc{(Junction) built-in voltage}
+The barrier voltage $V_0$ with no external voltage applied is given by
+\[V_0=V_T\ln(\frac{N_AN_T}{n_i^2}),\]
+called the junction built-in voltage, which is typically in the range of 0.6 V to 0.9 V for silicon at room temperature.
+\sssc{Carrier concentration under no external voltage}
+Under no external voltage, which is signified by a subscript $0$,
+\bit
+\item at the p material edge of the depletion and further into the p material, the majority holes have concentration $p_{p0}=N_A$, and the minority free electrons have concentration $n_{p0}=\frac{n_i^2}{N_A}$;
+\item at the n material edge of the depletion and further into the n material, the majority free electrons have concentration $n_{n0}=N_D$, and the minority holes have concentration $p_{n0}=\frac{n_i^2}{N_D}$.
+\eit
+
+
+
+
+
 
 
 
