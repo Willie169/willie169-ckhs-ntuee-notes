@@ -50,10 +50,8 @@ In Drude model, after a typical collision, each free electron completely lose it
 \[\mathbf{v}_d=-\frac{e\tau}{m}\mb{E}\]
 We define the free electron mobility $\mu_n$ as
 \[\mu_n=\frac{e\tau}{m}\]
-Suppose the free electron concentration is $n$. Then, the charge density is
-\[d=-ne\]
-and the drift current density is
-\[\mathbf{J}_d=\rho\mathbf{v}_d=-ne\mb{v}_d=ne\mu_n\mb{E}=\frac{ne^2\tau}{m}\mb{E}\]
+Suppose the free electron concentration is $n$. Then, the charge density is $-ne$ and the drift current density is
+\[\mathbf{J}_d=-ne\mb{v}_d=ne\mu_n\mb{E}=\frac{ne^2\tau}{m}\mb{E}\]
 Thus the resistivity $\rho$ is
 \[\rho=\frac{\abs{\mathbf{E}}}{\abs{\mb{J}}}=\frac{m}{ne^2\tau}\]
 which is a constant, i.e., obeying Ohm's law.
@@ -166,12 +164,9 @@ We define the free electron mobility $\mu_n$ and hole mobility $\mu_p$ as
 \[\mu_p=\frac{e\tau_p}{m_p^*}\]
 For silicon, $\mu_n$ is 1350 cm$^2$V$^{-1}$s$^{-1}$ and $\mu_p$ is 480 cm$^2$V$^{-1}$s$^{-1}$.
 
-The charge densities are
-\[d_n=-ne\]
-\[d_p=pe\]
-The drift current densities are
-\[\mathbf{J}_{S,n}=d_n\mathbf{v}_n=-ne\mb{v}_n=ne\mu_n\mb{E}=\frac{ne^2\tau_n}{m_n^*}\mb{E}\]
-\[\mathbf{J}_{S,p}=d_p\mathbf{v}_p=pe\mb{v}_n=pe\mu_p\mb{E}=\frac{pe^2\tau_p}{m_p^*}\mb{E}\]
+The charge densities are $-ne$ and $pe$ for free electrons and holes respectively, and the drift current densities are
+\[\mathbf{J}_{S,n}=-ne\mb{v}_n=ne\mu_n\mb{E}=\frac{ne^2\tau_n}{m_n^*}\mb{E}\]
+\[\mathbf{J}_{S,p}=pe\mb{v}_n=pe\mu_p\mb{E}=\frac{pe^2\tau_p}{m_p^*}\mb{E}\]
 The total drift current density is
 \[\mb{J}_S=\mb{J}_{S,n}+\mb{J}_{S,n}=e\qty(n\mu_n+p\mu_p)\mb{E}=e^2\qty(\frac{n\tau_n}{m_n^*}+\frac{p\tau_p}{m_p^*})\mb{E}\]
 Thus the resistivity $\rho$ is
@@ -212,7 +207,16 @@ The width of the region on the two sides are not always the same. Rather, to unc
 
 The charges on both sides cause an electric field $\mb{E}$ to be established in the direction from n side to p side, which results in a potential difference across the region, with the n side at a positive voltage relative to the p side, called barrier voltage $V_b$.
 
-Both diffusions of majority carriers form currents from the n side to the p side. However, the barrier voltage acts as an energy barrier that only majority carriers with energy no less than $eV_b$ can diffuse pass the depletion region, and the others will be pushed back by the electric field. The pushed back carriers form a drift current density $\rho\mb{E}$ from the p side to the n side, where $\rho$ is the charge density due to the majority carriers. This current decreases the actual current of majority carriers diffusing through the depletion region. Such current is called diffusion current $I_D$. 
+Both diffusions of majority carriers form currents from the n side to the p side. However, the barrier voltage acts as an energy barrier that only majority carriers with energy no less than $eV_b$ can diffuse pass the depletion region, and the others will be pushed back by the electric field.
+\bit
+\item For the majority holes from the p region, the pushed back holes form a drift current density $pe\mb{E}$, which is from the p side to the n side, and thus the actual current density of majority holes from the p region to the n region through the depletion region is
+\[\mb{J}_{D,p}=eD_p\nabla p+pe\mb{E}\]
+\item For the majority free electrons from the n region, the pushed back free electrons form a drift current density $ne\mb{E}$, which is from the p side to the n side, and thus the actual current density of majority free electrons from the n region to the p region through the depletion region is
+\[\mb{J}_{D,n}=-eD_n\nabla n+ne\mb{E}\]
+\eit
+Their sum is the actual current density of majority carriers, called diffusion current density
+\[\mb{J}_D=\mb{J}_{D,p}+\mb{J}_{D,n}=e(D_p\nabla p-D_n\nabla n+(n+p)\mb{E})\]
+which decreases as $V_b$ increases. We call the actual current of majority carriers through the depletion region diffusion current $I_D$.
 \sssc{Drift current}
 \bit
 \item Some of the thermally generated minority holes in the n region move toward the junction and reach the edge of the depletion region. There, they are swept across depletion region into the p side by the electric field.
@@ -235,7 +239,7 @@ Under no external voltage, which is signified by a subscript $0$,
 \item at the p material edge of the depletion and further into the p material, the majority holes have concentration $p_{p0}=N_A$, and the minority free electrons have concentration $n_{p0}=\frac{n_i^2}{N_A}$;
 \item at the n material edge of the depletion and further into the n material, the majority free electrons have concentration $n_{n0}=N_D$, and the minority holes have concentration $p_{n0}=\frac{n_i^2}{N_D}$.
 \eit
-
+\sssc{Charge and width of depletion region}
 
 
 
