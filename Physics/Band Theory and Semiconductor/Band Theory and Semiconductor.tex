@@ -44,7 +44,7 @@ The change of Fermi level on temperature change is small and often negligible fo
 \sssc{Bands}
 For semiconductors and insulators,
 \bit
-\item\tb{Conduction band (導帶)}: The higher-energy band that is empty or slightly filled, in which electrons, if exist, can wander around and conduct current, called free electrons. The energy of conduction band minimum is denoted $E_C$.
+\item\tb{Conduction band (導帶)}: The higher-energy band that is empty or slightly filled, in which electrons, if exist, can wander around and conduct current, called free electrons (or simply electrons). The energy of conduction band minimum is denoted $E_C$.
 \item\tb{Valence band (價帶)}: The lower-energy, filled band, in which electrons are constrained in covalent bonds and can't wander away freely or conduct current. The energy of valence band maximum is denoted $E_V$.
 \item\tb{Band gap (能隙)}: The gap between conduction band minimum and valence band maximum. The energy difference of the gap is called band-gap energy $E_g=E_C-E_V$. For silicon, $E_g=1.12$ eV.
 \eit
@@ -74,8 +74,8 @@ Thus, we define hole as a quasiparticle with charge $e$ and effective mass $m^*$
 \sssc{Carriers (載子) of semiconductors}
 Thus, there are two types of carriers in semiconductors mathematically:
 \bit
-\item free electron at conduction band minimum with charge $-e$ and a positive effective mass $m_n^*$, and
-\item holes at valence band maximum with charge $e$ and a positive effective mass $m_p^*$.
+\item free electron at conduction band minimum with charge $-e$ and a positive effective mass $m_n^*$, and whose properties are denoted with subscript $n$, and
+\item holes at valence band maximum with charge $e$ and a positive effective mass $m_p^*$, and whose properties are denoted with subscript $p$.
 \eit
 The concentration of free electrons is denoted $n$; the concentration of holes is denoted $p$.
 \sssc{Effective densities of states}
@@ -132,6 +132,26 @@ If the concentration of acceptor atoms is $N_A$, which is usually far greater th
 and, at thermal equilibrium,
 \[n_p=\frac{n_i^2}{N_A}\]
 Hence, holes are said to be the majority (charge) carriers, while free electrons are said to be the minority (charge) carriers.
+\sssc{Drude model of drift velocity and current}
+In Drude model, after a typical collision, each free electron or hole completely lose its memory of its previous velocity and moving off in a random direction. In the average time $\tau_n,\tau_p$ between collisions, the average free electron and hole will acquire a drift speed of
+\[\mathbf{v}_n=-\frac{e\tau_n}{m_n^*}\mb{E}\]
+\[\mathbf{v}_p=\frac{e\tau_p}{m_p^*}\mb{E}\]
+We define the free electron mobility $\mu_n$ and hole mobility $\mu_p$ as
+\[\mu_n=\frac{e\tau_n}{m_n^*}\]
+\[\mu_p=\frac{e\tau_p}{m_p^*}\]
+For silicon, $\mu_n$ is 1350 cm$^2$V$^{-1}$s$^{-1}$ and $\mu_p$ is 480 cm$^2$V$^{-1}$s$^{-1}$.
+
+The charge density are
+\[d_n=-ne\]
+\[d_p=pe\]
+The current density are
+\[\mathbf{J}_n=d_n\mathbf{v}_n=-ne\mb{v}_n=ne\mu_n\mb{E}=\frac{ne^2\tau_n}{m_n^*}\mb{E}\]
+The total drift current density is
+\[\mb{J}=\mb{J}_n+\mb{J}_p=e\qty(n\mu_n+p\mu_p)\mb{E}=e^2\qty(\frac{n\tau_n}{m_n^*}+\frac{p\tau_p}{m_p^*})\mb{E}\]
+Thus the resistivity $\rho$ is
+\[\rho=\frac{\abs{\mathbf{E}}}{\abs{\mb{J}}}=\frac{1}{e\qty(n\mu_n+p\mu_p)}=\frac{1}{e^2\qty(\frac{n\tau_n}{m_n^*}+\frac{p\tau_p}{m_p^*})}\]
+which is a constant, i.e., obeying Ohm's law.
+
 
 
 
