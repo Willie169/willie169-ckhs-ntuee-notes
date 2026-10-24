@@ -191,6 +191,12 @@ For $T=300$ K, $V_T$ is 25.9 mV. For intrinsic silicon, $D_n$ is 35 cm$^2$/s and
 \ssc{pn or p-n junction at equilibrium}
 \sssc{Physical structure}
 A p-n junction is a single semiconducting crystal with one end doped to form p material and the other end doped to form n material. The two types meet at a junction plane. External wire connections are made to both ends through metal contacts. If the pn junction is used as diode (二極體), these constitute the two terminals, anode, indicated by +, for p-type end and cathode, indicated by -, for n-type end, of the diode. A one-dimensional coordinate is established with junction as 0 and towards n region as positive direction.
+\sssc{Abrupt junction}
+A pn junction where the doping concentration is made to change abruptly at the junction boundary is called abrupt junction.
+
+A pn junction where the doping concentration is made to change gradually from one side of the junction to the other is called graded junction.
+
+We will be studying abrupt pn junction unless otherwise specified.
 \sssc{(Carrier-)depletion/space-charge region/layer/zone and diffusion current}
 \bit
 \item Majority holes diffuse from the p region to the n region. The holes that diffuse across the junction into the n region quickly recombine with some of the majority free electrons, which results in the disappearance of some free electrons in the n region. Thus, some bound positive charge will no longer be neutralized by free electrons, and this charges are said to have been uncovered. Since recombination occurs close to the junction, there will be a region in the n region near the junction that is depleted of free electrons and contains uncovered bound positive charge.
@@ -244,7 +250,7 @@ Under no external voltage, which is signified by a subscript $0$,
 \sssc{Width of and charge stored in depletion region}
 Let the materials be cuboid, cross sectional area of the junction be $A$, width of depletion region in $p$ side and $n$ side be $x_p$ and $x_n$ respectively, the total charge stored in depletion region in $p$ side and $n$ side be $Q_-<0$ and $Q_+>0$ respectively. Then,
 \[\abs{Q_+}=qAx_nN_D=\abs{Q_-}=qAx_pN_A\]
-The width of the depletion region $W=x_p+x_n$ is given by
+The width of the depletion region $W=x_p+x_n$ is given by the Poisson's equation
 \[W=\sqrt{\frac{2\varepsilon}{q}\qty(\frac{1}{N_A}+\frac{1}{N_D})V_0}\]
 where $\varepsilon$ is the electrical permittivity of the material, which for silicon is $11.7\varepsilon_0=11.7\times 11.7\times 8.85\times 10^{-14}$ F/cm $=1.04\times 10^{-12}$ F/cm. Typical $W$ ranges from 0.1 \textmu{}m to 1 \textmu{}m.
 \[x_n=W\frac{N_A}{N_A+N_D}\]
@@ -255,20 +261,29 @@ Q_j&=\abs{Q_+}=\abs{Q_-}\\
    &=WAq\frac{N_AN_D}{N_A+N_D}\\
    &=A\sqrt{2\varepsilon q\qty(\frac{1}{N_A}+\frac{1}{N_D})V_0}
 \ea\]
+We denote
+\[\alpha=A\sqrt{2\varepsilon q\qty(\frac{1}{N_A}+\frac{1}{N_D})}\]
+\[Q_j=\alpha\sqrt{V_0}\]
+\sssc{One-sided junction}
+For most practical devices, one side of the pn junction is much more heavily doped than the other, called one-sided junction, that is,
+\[N_A\gg N_D\qc W\approx x_n\gg x_p\]
+or
+\[N_D\gg N_A\qc W\approx x_p\gg x_n\]
 \ssc{pn junction with applied voltage}
 \sssc{Reverse bias and forward bias}
 An external voltage is applied to the pn junction, with the voltage of the p-type, i.e., anode relative to the n-type, i.e., cathode, being $V$.
 
-If $V<0$, it is called reverse bias, and the reverse bias voltage is $V_R=-V$.
-
-If $V>0$, it is called forward bias, and the forward bias voltage is $V_F=V$.
-\sssc{Effective barrier voltage, and width of and charge stored in depletion region}
 The effective barrier voltage is
 \[V_0-V\]
-The depletion region width is
+\bit
+\item If $V<0$, it is called reverse bias, and the reverse bias voltage is $V_R=-V$.
+\item If $V>0$, it is called forward bias, and the forward bias voltage is $V_F=V$.
+\eit
+\sssc{Width of and charge stored in depletion region}
+For $V<V_0$, the width of the depletion region $W=x_p+x_n$ is given by the Poisson's equation
 \[W=\sqrt{\frac{2\varepsilon}{q}\qty(\frac{1}{N_A}+\frac{1}{N_D})(V_0-V)}\]
-The charge stored on either side of the depletion region is
-\[Q_j=A\sqrt{2\varepsilon q\qty(\frac{1}{N_A}+\frac{1}{N_D})(V_0-V)}\]
+and the charge stored on either side of the depletion region is
+\[Q_j=A\sqrt{2\varepsilon q\qty(\frac{1}{N_A}+\frac{1}{N_D})(V_0-V)}=\alpha\sqrt{V_0-V}\]
 \sssc{Current-voltage relationship}
 \bit
 \item The concentration of minority holes in the n region at the edge of the depletion region will increase considerably to
@@ -327,6 +342,22 @@ We conclude that
 \item in reverse bias without junction breakdown, $I$ is negative and $-I$ is at most and often approximately $I_S$, which is very small, and thus the conductivity is very small.
 \item in forward bias, $I$ is positive and often dominated by the exponential term, and thus the conductivity is large and increases rapidly as $V$ increases.
 \eit
+\ssc{Capacitive effects in pn junction}
+\sssc{Depletion or junction capacitance}
+Depletion capacitance predominates in reverse and zero bias and is from the charge stored on the depletion region given by
+\[Q_j=A\sqrt{2\varepsilon q\qty(\frac{1}{N_A}+\frac{1}{N_D})(V_0+V_R)}=\alpha\sqrt{V_0+V_R}\]
+In an ideal capacitor, the stored charge is linearly proportional to the applied voltage. In pn junction, however, the relationship is nonlinear, We can assume that the junction is operating at a voltage such as $V_Q$, and define a caoacitance $C_j$:
+\[C_j=\evlv{\dv{Q_j}{V_R}}_{V_R=V_Q}\]
+Then,
+\[C_j=\frac{\alpha}{2\sqrt{V_0+V_R}}\]
+The value of $C_j$ at zero bias is
+\[C_{j0}=\frac{\alpha}{2\sqrt{V_0}}=A\sqrt{\frac{\varepsilon q}{2}\qty(\frac{1}{N_A}+\frac{1}{N_D})\frac{1}{V_0}}\]
+And
+\[C_j=\frac{C_{j0}}{\sqrt{1+\frac{V_R}{V_0}}}\]
+A more gernal form that also encompasses graded junction is
+\[C_j=\frac{C_{j0}}{\qty(1+\frac{V_R}{V_0})^m}\]
+where $m$ is a constant called grading coefficient, whose value ranges from 1/3 to 1/2 depending on the manner in which the concentration changes from the p to the n side.
+\sssc{Diffusion capacitance}
 
 
 
@@ -334,54 +365,36 @@ We conclude that
 
 
 
-\sssc{One-sided junction}
-For most practical devices, one side of the pn junction is much more heavily doped than the other, called one-sided junction, that is,
-\[N_A\gg N_D\qc W\approx x_n\gg x_p\]
-or
-\[N_D\gg N_A\qc W\approx x_p\gg x_n\]
 
 
 
+% \sssc{發光二極體（Light emitting diode, LED）}
+% 將順向偏壓通入半導體二極體，使depletion zone極窄，使其中大量發生載子複合而電致發光。
+%
+% 早期研發出的紅色和綠色單色發光二極體用途較受限，1992年赤崎勇、天野浩與中村修二以氮化鎵材料發明藍光 LED，始可用光的三原色調配任意所需的顏色，尤其用作照明的白光，較傳統白熾燈泡與日光燈更省電、體積更小、壽命更長，共同獲2014年諾貝爾物理獎。
+% \sssc{Junction laser}
+% In a forward-bias connection connected to a source, there are many electrons in the conduction band of the n-type material and many holes in the valence band of the p-type material. Thus, there is a population inversion for the electrons; that is, there are more electrons in higher energy levels than in lower energy levels. When a single electron moves from the conduction band to the valence band, it can release its energy as a photon. This photon can stimulate a second electron to fall into the valence band, producing a second photon by stimulated emission. In this way, if the current through the junction is great enough, a chain reaction of stimulated emission events can occur and laser light can be generated. To bring this about, opposite faces of the p-n junction crystal must be flat and parallel, so that light can be reflected back and forth within the crystal. Junction lasers are built into compact disc (CD) players, where, by detecting reflections from the rotating disc, they are used to translate microscopic pits in the disc into sound. They are also much used in optical communication systems based on optical fibers.
 
+% \sssc{光伏電池（Photovoltaic cell）/太陽能電池（Solar cell）}
+% 通常由一個或多個 p–n 接面組成，吸收光子並輸出直流電。種類如：
+% \begin{itemize}
+% 	\item 單結晶矽太陽能電池：高效率但成本較高。
+% 	\item 多晶矽太陽能電池：效率較低但成本較低。
+% 	\item 薄膜太陽能電池：輕薄柔軟，適用於特定場景。
+% \end{itemize}
+% 效率提升方法：
+% \begin{itemize}
+% 	\item 減少表面反射：透明導電層和抗反射層減少光子的反射。
+% 	\item 改進材料：新材料如有機太陽能電池和混合鈣鈦礦太陽能電池提高效率。
+% 	\item 多接面結構：提高光吸收和轉換效率。
+% 	\item 雷射細工：提高電池表面光陽極的粗糙度，增加光吸收。
+% \end{itemize}
+% \sssc{場效電晶體（Field-effect transistor, FET）}
+% FET 具有四個端子：源極（source）、閘極（gate）和汲極（drain）、體（body）/基（base）/塊體（bulk）/基板（substrate）。通過在閘極施加電壓，可以改變源極與汲極之間的電導率，從而控制電流，分為需加閘極電壓方能導通源極與汲極的增強模式（enhancement-mode），較常見；與預設導通源極與汲極，加閘極電壓可減弱或關閉它的空乏模式/減少模式（depletion-mode）。
+%
+% 下討論 metal-oxide-semiconductor-field-effect transistor (MOSFET)。其僅使用電子與電洞的其中一種作為電荷載子，前者稱 n-通道（n-channel），後者稱 p-通道（p-channel）。源極與汲極下方的摻雜半導體具有該種載子，在增強模式中預設不相連而斷路，但加閘極電壓可以引入載子使相連而導通；在空乏模式中預設相連而導通，但加閘極電壓可以引入相反的載子使變窄增加電阻，繼而不相連而斷路。
 
-
-
-
-
-
-\sssc{發光二極體（Light emitting diode, LED）}
-將順向偏壓通入半導體二極體，使depletion zone極窄，使其中大量發生載子複合而電致發光。The frequency $f$ of the emitted light is
-\[E_g=hf.\]
-
-早期研發出的紅色和綠色單色發光二極體用途較受限，1992年赤崎勇、天野浩與中村修二以氮化鎵材料發明藍光 LED，始可用光的三原色調配任意所需的顏色，尤其用作照明的白光，較傳統白熾燈泡與日光燈更省電、體積更小、壽命更長，共同獲2014年諾貝爾物理獎。
-\sssc{Photodiode}
-Shining light on a suitably arranged p-n junction can that includes the junction. This is the basis for the photodiode.
-\sssc{Junction laser}
-In a forward-bias connection connected to a source, there are many electrons in the conduction band of the n-type material and many holes in the valence band of the p-type  material. Thus, there is a population inversion for the electrons; that is, there are more electrons in higher energy levels than in lower energy levels. When a single electron moves from the conduction band to the valence band, it can release its energy as a photon. This photon can stimulate a second electron to fall into the valence band, producing a second photon by stimulated emission. In this way, if the current through the junction is great enough, a chain reaction of stimulated emission events can occur and laser light can be generated. To bring this about, opposite faces of the p-n junction crystal must be flat and parallel, so that light can be reflected back and forth within the crystal. Junction lasers are built into compact disc (CD) players, where, by detecting reflections from the rotating disc, they are used to translate microscopic pits in the disc into sound. They are also much used in optical communication systems based on optical fibers.
-\sssc{光伏電池（Photovoltaic cell）/太陽能電池（Solar cell）}
-通常由一個或多個 p–n 接面組成，吸收光子並輸出直流電。種類如：
-\begin{itemize}
-	\item 單結晶矽太陽能電池：高效率但成本較高。
-	\item 多晶矽太陽能電池：效率較低但成本較低。
-	\item 薄膜太陽能電池：輕薄柔軟，適用於特定場景。
-\end{itemize}
-效率提升方法：
-\begin{itemize}
-	\item 減少表面反射：透明導電層和抗反射層減少光子的反射。
-	\item 改進材料：新材料如有機太陽能電池和混合鈣鈦礦太陽能電池提高效率。
-	\item 多接面結構：提高光吸收和轉換效率。
-	\item 雷射細工：提高電池表面光陽極的粗糙度，增加光吸收。
-\end{itemize}
-\sssc{場效電晶體（Field-effect transistor, FET）}
-FET 具有四個端子：源極（source）、閘極（gate）和汲極（drain）、體（body）/基（base）/塊體（bulk）/基板（substrate）。通過在閘極施加電壓，可以改變源極與汲極之間的電導率，從而控制電流，分為需加閘極電壓方能導通源極與汲極的增強模式（enhancement-mode），較常見；與預設導通源極與汲極，加閘極電壓可減弱或關閉它的空乏模式/減少模式（depletion-mode）。
-
-下討論 metal-oxide-semiconductor-field-effect transistor (MOSFET)。其僅使用電子與電洞的其中一種作為電荷載子，前者稱 n-通道（n-channel），後者稱 p-通道（p-channel）。源極與汲極下方的摻雜半導體具有該種載子，在增強模式中預設不相連而斷路，但加閘極電壓可以引入載子使相連而導通；在空乏模式中預設相連而導通，但加閘極電壓可以引入相反的載子使變窄增加電阻，繼而不相連而斷路。
-
-
-
-
-\ssc{Metal–semiconductor (MS or M-S) junction}
+% \ssc{Metal–semiconductor (MS or M-S) junction}
 % https://en.wikipedia.org/wiki/Metal%E2%80%93semiconductor_junction
-
 
 \end{document}
