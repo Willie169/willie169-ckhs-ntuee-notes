@@ -188,9 +188,9 @@ where $\nabla_n,\nabla_p$ are concentration gradients, $D_n,D_p$ are constants c
 called Einstein relationship, where $V_T$ is thermal voltage given by
 \[V_T=\frac{kT}{q}\]
 For $T=300$ K, $V_T$ is 25.9 mV. For intrinsic silicon, $D_n$ is 35 cm$^2$/s and $D_p$ is 12 cm$^2$/s.
-\ssc{pn or p-n junction}
+\ssc{pn or p-n junction at equilibrium}
 \sssc{Physical structure}
-A p-n junction is a single semiconducting crystal with one end doped to form p material and the other end doped to form n material. The two types meet at a junction plane. External wire connections are made to both ends through metal contacts. If the pn junction is used as diode (二極體), these constitute the two terminals, anode, indicated by +, for p-type end and cathode, indicated by -, for n-type end, of the diode.
+A p-n junction is a single semiconducting crystal with one end doped to form p material and the other end doped to form n material. The two types meet at a junction plane. External wire connections are made to both ends through metal contacts. If the pn junction is used as diode (二極體), these constitute the two terminals, anode, indicated by +, for p-type end and cathode, indicated by -, for n-type end, of the diode. A one-dimensional coordinate is established with junction as 0 and towards n region as positive direction.
 \sssc{(Carrier-)depletion/space-charge region/layer/zone and diffusion current}
 \bit
 \item Majority holes diffuse from the p region to the n region. The holes that diffuse across the junction into the n region quickly recombine with some of the majority free electrons, which results in the disappearance of some free electrons in the n region. Thus, some bound positive charge will no longer be neutralized by free electrons, and this charges are said to have been uncovered. Since recombination occurs close to the junction, there will be a region in the n region near the junction that is depleted of free electrons and contains uncovered bound positive charge.
@@ -207,9 +207,9 @@ Thus, the net charge density in the region is the bound charge density.
 \eit
 The width of the region on the two sides are not always the same. Rather, to uncover the same amount of charge, the depletion layer will extend deeper into the more lightly doped material, that is, wider into the n material if $N_A>N_D$ and wider into the p material if $N_A<N_D$, where $N_A$ and $N_D$ are the doping concentrations of the p side and n side of the junction respectively.
 
-The charges on both sides cause an electric field $\mb{E}$ to be established in the direction from n side to p side, which results in a potential difference across the region, with the n side at a positive voltage relative to the p side, called barrier voltage $V_b$.
+The charges on both sides cause an electric field $\mb{E}$ to be established in the direction from n side to p side, which results in a potential difference across the region, with the n side at a positive voltage relative to the p side, called barrier voltage $V_0$.
 
-Both diffusions of majority carriers form currents from the n side to the p side. However, the barrier voltage acts as an energy barrier that only majority carriers with energy no less than $qV_b$ can diffuse pass the depletion region, and the others will be pushed back by the electric field.
+Both diffusions of majority carriers form currents from the n side to the p side. However, the barrier voltage acts as an energy barrier that only majority carriers with energy no less than $qV_0$ can diffuse pass the depletion region, and the others will be pushed back by the electric field.
 \bit
 \item For the majority holes from the p region, the pushed back holes form a drift current density $pq\mb{E}$, which is from the p side to the n side, and thus the net current density due to majority holes from the p region to the n region through the depletion region is
 \[\mb{J}_{D,p}=q\qty(D_p\nabla p+p\mb{E})\]
@@ -228,7 +228,7 @@ Both currents are from the n side to the p side, and their sum is called the dri
 \sssc{Current equilibrium with open-circuit terminals}
 Under open-circuit condition, no external current exists; thus
 \[I_D=I_S\]
-This equilibrium is stable and maintained by $V_0$. If for some reason, $I_D>I_S$, more bound charges will be uncovered on both sides of the junction, which increases $V_b$ and thus decreases $I_D$, which in turns shrinks the depletion region since some of the uncovered bound charges are then covered.
+This equilibrium is stable and maintained by $V_0$. If for some reason, $I_D>I_S$, more bound charges will be uncovered on both sides of the junction, which increases $V_0$ and thus decreases $I_D$, which in turns shrinks the depletion region since some of the uncovered bound charges are then covered.
 \sssc{Voltage equilibrium with short-circuit terminals}
 At equilibrium, the barrier voltage is balanced out by the voltages across the two metal-semiconductor junctions, whose behavior will be explained in its section. Thus, no voltage can be measured across the terminals, complying with the conservation of energy.
 \sssc{(Junction) built-in voltage}
@@ -245,7 +245,7 @@ Under no external voltage, which is signified by a subscript $0$,
 Let the materials be cuboid, cross sectional area of the junction be $A$, width of depletion region in $p$ side and $n$ side be $x_p$ and $x_n$ respectively, the total charge stored in depletion region in $p$ side and $n$ side be $Q_-<0$ and $Q_+>0$ respectively. Then,
 \[\abs{Q_+}=qAx_nN_D=\abs{Q_-}=qAx_pN_A\]
 The width of the depletion region $W=x_p+x_n$ is given by
-\[W=\sqrt{\frac{2\varepsilon}{q}\qty(\frac{1}{N_A}+\frac{1}{N_D})V_b}\]
+\[W=\sqrt{\frac{2\varepsilon}{q}\qty(\frac{1}{N_A}+\frac{1}{N_D})V_0}\]
 where $\varepsilon$ is the electrical permittivity of the material, which for silicon is $11.7\varepsilon_0=11.7\times 11.7\times 8.85\times 10^{-14}$ F/cm $=1.04\times 10^{-12}$ F/cm. Typical $W$ ranges from 0.1 \textmu{}m to 1 \textmu{}m.
 \[x_n=W\frac{N_A}{N_A+N_D}\]
 \[x_p=W\frac{N_D}{N_A+N_D}\]
@@ -253,16 +253,85 @@ The charge stored on either side of the depletion region is
 \[\ba
 Q_j&=\abs{Q_+}=\abs{Q_-}\\
    &=WAq\frac{N_AN_D}{N_A+N_D}\\
-   &=A\sqrt{2\varepsilon q\qty(\frac{1}{N_A}+\frac{1}{N_D})V_b}
+   &=A\sqrt{2\varepsilon q\qty(\frac{1}{N_A}+\frac{1}{N_D})V_0}
 \ea\]
-\sssc{pn junction with applied voltage}
-\bit
-\item Reverse bias: In reverse bias, the p-type, i.e., anode, is connected with a negative electrical terminal and the n-type, i.e., cathode, is connected with a positive terminal of a voltage source $V_R$.
+\ssc{pn junction with applied voltage}
+\sssc{Reverse bias and forward bias}
+An external voltage is applied to the pn junction, with the voltage of the p-type, i.e., anode relative to the n-type, i.e., cathode, being $V$.
 
+If $V<0$, it is called reverse bias, and the reverse bias voltage is $V_R=-V$.
+
+If $V>0$, it is called forward bias, and the forward bias voltage is $V_F=V$.
+\sssc{Effective barrier voltage, and width of and charge stored in depletion region}
 The effective barrier voltage is
-\[V_b=V_0+V_R.\]
-\item Forward bias: In forward bias, the p-type, i.e., anode, is connected with a positive electrical terminal and the n-type, i.e., cathode, is connected with a negative terminal of a voltage source $V_F$.
+\[V_0-V\]
+The depletion region width is
+\[W=\sqrt{\frac{2\varepsilon}{q}\qty(\frac{1}{N_A}+\frac{1}{N_D})(V_0-V)}\]
+The charge stored on either side of the depletion region is
+\[Q_j=A\sqrt{2\varepsilon q\qty(\frac{1}{N_A}+\frac{1}{N_D})(V_0-V)}\]
+\sssc{Current-voltage relationship}
+\bit
+\item The concentration of minority holes in the n region at the edge of the depletion region will increase considerably to
+\[p_n(x_n)=p_{n0}e^{V/V_T}\]
+Excess concentration is defined as
+\[p_n(x_n)-p_{n0}=p_{n0}\qty(e^{V/V_T}-1)\]
+As the injected holes diffuse into the n material, some will recombine with the majority free electrons and disappear. The excess hole concentration decays exponentially with distance. The total hole concentration in the n material is given by
+\[p_n(x)=p_{n0}+p_{n0}\qty(e^{V/V_T}-1)e^{-(x-x_n)/L_p}\qc x\ge x_n,\]
+where $L_p$ is a constant called diffusion length of holes in the n material.
+
+By differentiating $p_n(x)$, we obtain the diffusion current density:
+\[J_p(x)=q\frac{D_p}{L_p}p_{n0}\qty(e^{V/V_T}-1)e^{-(x-x_n)/L_p}\qc x\ge x_n\]
+It does not change inside the depletion region, thus
+\[J_p(x)=q\frac{D_p}{L_p}p_{n0}\qty(e^{V/V_T}-1)\qc -x_p\le x\le x_n\]
+\item The concentration of minority free electrons in the p region at the edge of the depletion region will increase considerably to
+\[n_p(-x_p)=n_{p0}e^{V/V_T}\]
+Excess concentration is defined as
+\[n_p(-x_p)-n_{p0}=n_{p0}\qty(e^{V/V_T}-1)\]
+As the injected free electrons diffuse into the p material, some will recombine with the majority holes and disappear. The excess free electron concentration decays exponentially with distance. The total hole concentration in the p material is given by
+\[n_p(-x)=n_{p0}+n_{p0}\qty(e^{V/V_T}-1)e^{-(x-x_p)/L_n}\qc x\ge x_p,\]
+where $L_n$ is a constant called diffusion length of free electrons in the p material.
+
+By differentiating $n_p(x)$, we obtain the diffusion current density:
+\[J_n(-x)=q\frac{D_n}{L_n}n_{p0}\qty(e^{V/V_T}-1)e^{-(x-x_p)/L_n}\qc x\ge x_p\]
+It does not change inside the depletion region, thus
+\[J_n(-x)=q\frac{D_n}{L_n}n_{p0}\qty(e^{V/V_T}-1)\qc x_p\ge x\ge -x_n\]
 \eit
+The total current inside the depletion region is
+\[I=A(J_p(0)+J_n(0))=Aq\qty(\frac{D_p}{L_p}p_{n0}+\frac{D_n}{L_n}n_{p0})\qty(e^{V/V_T}-1)\]
+Substituting $p_{n0}=\frac{n_i^2}{N_D}$ and $n_{p0}=\frac{n_i^2}{N_A}$ gives
+\[I=Aqn_i^2\qty(\frac{D_p}{L_pN_D}+\frac{D_n}{L_nN_A})\qty(e^{V/V_T}-1)\]
+Taking $T=0$, we obtain a constant current, which must be $-I_S$, thus
+\[I_S=Aqn_i^2\qty(\frac{D_p}{L_pN_D}+\frac{D_n}{L_nN_A})\]
+\[I=I_S\qty(e^{V/V_T}-1)\]
+called Shockley ideal diode equation.
+\sssc{Saturation current or scale current}
+We call $I_S$ saturation current or scale current.
+\bit
+\item It is proportional to cross-sectional area $A$.
+\item It is proportional to $n_i^2$, which strongly depends on $T$.
+\item It is the current in the reverse direction that the reverse bias situation saturates at.
+\item Typical values for $I_S$ range from $10^{-18}$ A to $10^{-12}$ A.
+\eit
+\sssc{Reverse/junction breakdown}
+In reverse bias, as $-V$ reaches a breakdown voltage $V_{BR}\gg V_T$, the reverse current $-I$ will increase from $I_S$ dramatically to a vary large value, and the reverse voltage across the junction remains very close to $V_{BR}$. This phenomenon is called junction breakdown. It is not a destructive phenomenon. That is, the pn junction can be repeatedly operated in the breakdown region without a permanent effect on its characteristics predicated on the assumption that the magnitude of the reverse-breakdown current is limited by the external circuit to a safe value that limits the power dissipated in the junction to a safe, allowable level.
+
+There are two possible mechanisms for pn junction breakdown:
+\bit
+\item Zener effect: It is the usual mechanism when $V_{BR}<5$ V. The electric field in the depletion layer increases to the point of breaking covalent bonds and generating electron–hole pairs. The electrons generated in this way will be swept by the electric field into the n side and the holes into the p side. $V_{BR}$ is often denoted $V_Z$ in this case.
+\item avalanche effect: It is the usual mechanism when $V_{BR}>8$ V. The minority carriers that cross the depletion region under the influence of the electric field gain sufficient kinetic energy to be able to break covalent bonds in atoms with which they collide. The carriers liberated by this process may have sufficiently high energy to be able to cause other carriers to be liberated in another ionizing collision.
+\eit
+When $V_{BR}$ is between 5 V and 8 V, the breakdown mechanism can be either the zener or the avalanche effect or a combination of the two.
+\sssc{Conclusion}
+We conclude that
+\bit
+\item in reverse bias without junction breakdown, $I$ is negative and $-I$ is at most and often approximately $I_S$, which is very small, and thus the conductivity is very small.
+\item in forward bias, $I$ is positive and often dominated by the exponential term, and thus the conductivity is large and increases rapidly as $V$ increases.
+\eit
+
+
+
+
+
 
 
 \sssc{One-sided junction}
@@ -277,12 +346,9 @@ or
 
 
 
-\sssc{Junction rectifier}
-A p-n junction conducts electricity better for one direction of an applied potential difference (forward biased) than for the opposite direction (back biased), and thus the device can serve as a junction rectifier.
 
-In forward-bias connection, the p side becomes more positive and the n side becomes more negative, thus decreasing the height of the potential barrier, increasing the diffusion current, narrowing the depletion zone, and decreasing its resistivity.
 
-In back-bias connection, the p side becomes less positive and the n side becomes less negative, thus increasing the height of the potential barrier, decreasing the diffusion current, widening the depletion zone, and increasing its resistivity.
+
 \sssc{發光二極體（Light emitting diode, LED）}
 將順向偏壓通入半導體二極體，使depletion zone極窄，使其中大量發生載子複合而電致發光。The frequency $f$ of the emitted light is
 \[E_g=hf.\]
