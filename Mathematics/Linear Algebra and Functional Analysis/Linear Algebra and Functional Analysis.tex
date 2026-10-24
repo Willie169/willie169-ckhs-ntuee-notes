@@ -29,17 +29,12 @@ To have a vector space, the eight following axioms must be satisfied for every $
 \item Distributivity of scalar multiplication with respect to field addition: $(a + b)v = av + bv$.
 \end{enumerate}
 When the scalar field is the real numbers, the vector space is called a real vector space, and when the scalar field is the complex numbers, the vector space is called a complex vector space. These two cases are the most common ones, but vector spaces with scalars in an arbitrary field $F$ are also commonly considered. Such a vector space is called an $F$-vector space or a vector space over $F$.
-
-When a vector is an $n$-scalar tuple, we call the scalars components and denote the vector as
-\[(x_1,x_2,\ldots,x_n)\]
-or
-\[\langle x_1,x_2,\ldots,x_n\rangle\]
 \subsubsection{Linear combination (線性組合)}
 A linear combination of a series of vectors $(v_1,\ldots,v_n)$ in a vector space $V$ over a field $F$ is any vector of the form
 \[\sum_{i=1}^nc_iv_i\]
 where $(c_1,\ldots,c_n)$ is a series of scalars in $F$ called coefficients.
 \subsubsection{Isomorphism (同構)}
-Vector spaces $X$ and $Y$ are called isomorphic if there exists a mapping $f:\,X\to Y$ between them such that $f$ is bijective and continuous and $f^{-1}$ is continuous, written as \( X \cong Y \), and $f$ is called a isomorphism between them.
+Vector spaces $X$ and $Y$ are called isomorphic if there exists a mapping $f\colon X\to Y$ between them such that $f$ is bijective and continuous and $f^{-1}$ is continuous, written as \( X \cong Y \), and $f$ is called a isomorphism between them.
 \subsubsection{Division}
 For nonzero vector $a$ and vector $b$ in a vector space such that for some scalar $s$, $sa=b$, $\frac{b}{a}\coloneq s$.
 \subsubsection{Affine space (仿射空間)}
@@ -57,14 +52,15 @@ that has the following properties.
 \item Free and transitive action: \[\forall a\in A\colon \tx{the mapping }\ora{A}\to A\colon v\mapsto a+v\tx{ is a bijection.}\]
 \item Existence of one-to-one translations \[\forall v\in \ora{A} \colon \tx{the mapping }\ora{A}\to A\colon v\mapsto a+v\tx{ is a bijection.}\]
 \end{enumerate}
-\subsubsection{Linear map (線性映射) or linear operator}
-For vector spaces $V,W$, a map $T\colon V\to W$ between vector spaces $V$ and $W$ over field $F$ is linear if
-\[\forall a,b\in F,v,w\in V\colon T(av+bw)=aT(v)+bT(w),\]
-also called linear operator.
-
+\subsubsection{Linear map (線性映射)/operator/transformation}
+A map $T\colon V\to W$ between vector spaces $V$ and $W$ over field $F$ is linear iff for any $u,v\in V$ and scalar $c$, the following two conditions are satisfied:
+\bit
+\item Preservation of vector addition:
+  \[T(u+v)=T(u)+T(v)\]
+\item Preservation of scalar multiplication:
+  \[T(cu)=cT(u)\]
+\eit
 The space of linear operators from $V$ to $W$ is a vector space, denoted as $L(V,W)$.
-\subsubsection{Linear transformation (線性變換)}
-A linear transformation is a bijection from an vector space onto itself that is an linear map.
 \subsubsection{Invertible map (可逆映射)}
 A map $T\colon V\to W$ is Invertible if and only if it is bijective. The unique inverse of $T$, called $T^{-1}$, is defined to be:
 \[T^{-1}\colon W\to V;\,\forall v\in V\colon T(v)\mapsto v=T^{-1}(T(v)).\]
@@ -111,27 +107,35 @@ Write $w$ as a linear combination of elements of elements in $(S\setminus\{w\}\c
 \subsubsection{Steinitz exchange lemma}
 Let $U$ be a set of $m\in\bbN$ linearly independent vectors and $W$ be a set of $n\in\bbN$ vectors such that $U\subseteq\span W$. Then, $m\le n$, and, there exists a subset $W'$ of $W$ such that $\abs{W'}\le n-m$ and $\span(U\cup W')=\span W$.
 \bpr
-First statement: Write both $U$ and $W$ as column vectors of arbitrary order. By $U\subseteq\span W$, there exists $A\in\bbF^{m\times n}$ such that $U=AW$. Because $U$ is linearly independent, $A$ must have row rank $m$. Since $\rank(A)\le\min(m,n)$, $m\le n$.
+First statement: Write both $U$ and $W$ as column vectors of arbitrary order. By $U\subseteq\span W$, there exists $A\in F^{m\times n}$ such that $U=AW$. Because $U$ is linearly independent, $A$ must have row rank $m$. Since $\rank(A)\le\min(m,n)$, $m\le n$.
 
 Second statement: Let $W_0=W$. For each $u_i\in U$, write $u_i$ as a linear combination of elements of $W_{i-1}$. Choose one of them with nonzero coefficient, $w_i$, which must exist since $U$ is linearly independent, $w_i$ can be written as a linear combination of elements in $W_i\coloneq W_{i-1}\setminus\{w_i\}\cup\{u_i\}$.
 \epr
 \subsubsection{Basis (基)}
-The basis of a vector space $X$ over a field $F$ is a set of linearly independent vectors $\mathbf{v}=\{v_1,v_2,\dots\}\subseteq X$ such that for any vector $\mathbf{P}\in X$, there exists a unique coefficient vector $(c_1,c_2, \ldots)\subseteq F$ such that:
-\[\sum_{i=1}c_iv_i=\mathbf{P}.\]
+A basis of a vector space $V$ over a field $F$ is a set of linearly independent vectors $\{v_1,v_2,\ldots\}\subseteq V$ such that for any vector $v\in V$, there exist unique coefficients $c_1,c_2,\ldots\in F$ such that:
+\[\sum_{i=1}c_iv_i=v.\]
 Basis for a vector space containing only zero vector is undefined.
 \subsubsection{Orientation}
 The orientation of a vector space is the arbitrary choice of which ordered bases are "positively" oriented and which are "negatively" oriented.
 \subsubsection{Dimension (維度)}
-The dimension of a vector space $V$, denoted as $\dim V$, is defined as the cardinality of a basis of it, which is unique (for infinite dimension, if axiom of choice is assumed).
-
+The dimension of a vector space $V$, denoted as $\dim V$, is defined as the cardinality of a basis of it, which is unique for finite-dimensional vector space (proven below), and is unique for infinite dimension if axiom of choice is assumed (not proven here).
+\bpr
+Assume that $(u_1,\ldots,u_m)$ and $(v_1,\ldots,v_n)$ are two bases of vector space $V$. Since the existence of the coefficients and the fact that $u_1,\ldots,u_m,v_1,\ldots,v_n$ are nonzero, $u_1,\ldots,u_m\in\span\{v_1,\ldots,v_n\}$ and $v_1,\ldots,v_n\in\span\{u_1,\ldots,u_m\}$. By Steinitz exchange lemma, $m\le n$ and $n\le m$. Thus $m=n$.
+\epr
 The dimension of an affine space $V$, denoted as $\dim V$, is defined as the dimension of its associated vector space.
 \subsubsection{Basis extension theorem}
-For a vector space $V$ of dimension $n\in\bbN$, for any linearly independent set of finitely many vectors $\{v_1,\ldots,v_m\}$ in $V$, if $m=n$, it is a basis; otherwise, there exists a set of $n-m$ vectors $\{v_{m+1},\ldots,v_n\}$ in $V$ such that $\{v_1,\ldots,v_n\}$ is linearly independent, and any such $v_1,\ldots,v_n$ is a basis of $V$.
+Let $V$ be a vector space such that there exists a basis of $V$ that contains $n\in\bbN$ nonzero vectors. For any linearly independent set of finitely many vectors $\{v_1,\ldots,v_m\}$ in $V$, if $m=n$, it is a basis; otherwise, there exists a set of $n-m$ vectors $\{v_{m+1},\ldots,v_n\}$ in $V$ such that $\{v_1,\ldots,v_n\}$ is linearly independent, and any such $v_1,\ldots,v_n$ is a basis of $V$.
 \bpr
-For $m=n$, $\span\{v_1,\ldots,v_n\}=V$, thus $\{v_1,\ldots,v_n\}$ is a basis. For $m<n$, since $S\coloneq\span\{v_1,\ldots,v_m\}$ is of dimension $m<n$, choose any $v_{m+1}\in V\setminus S$. Assume for contradiction that $\{v_1,\ldots,v_{m+1}\}$ is linearly dependent, we can write $v_{m+1}$ as a linear combination of $v_1,\ldots,v_m$, which means $v_{m+1}\in S$, which contradicts $v_{m+1}\in V\notin S$. Thus $\{v_1,\ldots,v_{m+1}\}$ is linearly independent. We can repeat until $n$ such that $\span\{v_1,\ldots,v_n\}=V$.
+For $m=n$, we claim that $\span\{v_1,\ldots,v_n\}=V$, thus $\{v_1,\ldots,v_n\}$ is a basis. For $m<n$, since $S\coloneq\span\{v_1,\ldots,v_m\}$ is of dimension $m<n$, choose any $v_{m+1}\in V\setminus S$. Assume for contradiction that $\{v_1,\ldots,v_{m+1}\}$ is linearly dependent, we can write $v_{m+1}$ as a linear combination of $v_1,\ldots,v_m$, which means $v_{m+1}\in S$, which contradicts $v_{m+1}\in V\notin S$. Thus $\{v_1,\ldots,v_{m+1}\}$ is linearly independent. We can repeat until $n$ such that $\span\{v_1,\ldots,v_n\}=V$.
 \epr
-\subsubsection{Standard (unit/basis) vector}
-For a vector space, the standard (unit/basis) vectors are the unit vectors with one component being the multiplicative identity $1_F$ and others being the additive identity $0_F$.
+\sssc{Coordinate notation}
+For an $n$-dimensional vector space $V$ over field $F$ and a chosen ordered basis $B=(v_1,\ldots,v_n)$, every vector $v\in V$ can be represented as an $n$-scalar ordered tuple $(x_1,x_2,\ldots,x_n)$ where $x_1,\ldots,x_n\in F$ are such that
+\[v=\sum_{j=1}^mx_jv_j\]
+We call $x_1,\ldots,x_n$ components for a vector and coordinates for the vector space relative to $B$, and denote $v$ as
+\[(x_1,x_2,\ldots,x_n)\]
+or
+\[\langle x_1,x_2,\ldots,x_n\rangle\]
+called coordinate notation in terms of $B$.
 \subsubsection{Bilinear form (雙線性形式)}
 Let $V$ be a vector space of dimension $n$ over a field $\mathbb{K}$. A map $B\colon V\times V\rightarrow \mathbb{K}$ is a bilinear form on the space if:
 \begin{enumerate}
@@ -168,6 +172,12 @@ A norm on $X$ is a seminorm $p\colon X\to\mathbb{R}$ with the following properti
 \item Positive definiteness/Positiveness/Point-separating: \[\forall x\in X\colon p(x)=0\implies x=0\]
 \end{itemize}
 A vector $x$ such that $p(x)=1$ is called an unit vector.
+\subsubsection{Standard (unit/basis) vector}
+For a normed finite-dimensional vector space, a basis consisting of unit vectors must exist.
+\bpr
+Take a basis and divide every element with its norm.
+\epr
+When such a basis is chosen, its elements are called standard (unit/basis) vectors.
 \subsubsection{Sublinear function (亞線性函數) or quasi-seminorm (準半範數)}
 Let $p\colon X\to\mathbb{R}$ be a function on a vector space $X$ over the field $\mathbb{K}$, which is either $\mathbb{R}$ or $\mathbb{C}$. $p$ is called a sublinear function or quasi-seminorm if it satisfies the following conditions:
 \begin{enumerate}
@@ -267,11 +277,12 @@ Element in dual is called covector.
 Given any vector space $V$ over a field $F$, the continuous dual space $V'$ is defined as the set of all continuous linear maps $\varphi\colon V\to F$. The continuous dual space $V'$ itself thus becomes a vector space over $F$ when equipped with an addition and scalar multiplication satisfying that for any $\varphi ,\psi \in V'$, for any $x\in V$, for any $a\in F$,
 \[(\varphi+\psi)(x)=\varphi (x)+\psi (x),\]
 \[(a\varphi )(x)=a\left(\varphi (x)\right).\]
-\subsubsection{Transpose, dual map, or adjoint}
-For two vector spaces $X,Y$ and a continuous linear map $A\colon X\to Y$, the transpose, dual map, or adjoint of $A$ is defined as the unique map $^tA\colon Y'\to X'$ such that for all $x\in X$, for all $y\in Y'$,
-\[\langle y,A(x)\rangle=\langle^tA(y),x\rangle.\]
+\subsubsection{Transpose, dual map, or adjoint of linear map}
+For two vector spaces $X,Y$ and a linear map $T\colon X\to Y$, the transpose, dual map, or adjoint of $T$ is defined as the unique map $^tT\colon Y^*\to X^*$, which is a linear map, such that for all $x\in X$, for all $y\in Y^*$,
+\[\langle y,T(x)\rangle=\langle^tT(y),x\rangle.\]
+If $T$ is continuous, the restriction of $^tT$ to $W'$ has range $V'$ and is continuous.
 \subsubsection{Strong dual (space)}
-A strong dual space is a continuous dual space of a TVS equipped with the strong (dual) topology, also called topology of uniform convergence on bounded subsets. Suppose $X$ is a TVS over field $\bbF$ and $\mathcal{B}$ is a family of bounded subsets of $X$ such that every bounded subset of $X$ is a subset of some $B\in\mathcal{B}$. Define the family $T$ of seminorms $\|\cdot\|_B$ on $X'$ for all $x'\in X'$ as
+A strong dual space is a continuous dual space of a TVS equipped with the strong (dual) topology, also called topology of uniform convergence on bounded subsets. Suppose $X$ is a TVS over field $F$ and $\mathcal{B}$ is a family of bounded subsets of $X$ such that every bounded subset of $X$ is a subset of some $B\in\mathcal{B}$. Define the family $T$ of seminorms $\|\cdot\|_B$ on $X'$ for all $x'\in X'$ as
 \[T=\{\|x'\|_B\coloneq\sup_{x\in B}|x'(x)|\mid B\in\mathcal{B}\}.\]
 The strong dual topology is defined as the topology generated by $T$, and thus $B'$ is a LCTVS.
 \subsubsection{Orthogonal complement (正交補)}
@@ -567,13 +578,12 @@ A row whose all entries are zero is called a zero row, otherwise it is called a 
 \subsubsection{Transpose (轉置)}
 The transpose of an $m\times n$ matrix $\mathbf{A}$ is the $n\times m$ matrix $\mathbf{A}^\top$:
 \[(\mathbf{A}^\top)_{i,j}=a_{j,i}\]
-Inverse map as linear map is transpose as matrix.
 \subsubsection{Symmetric matrix (對稱矩陣)}
 $\mathbf{A}$ is called a symmetric matrix iff $\mathbf{A}=\mathbf{A}^\top$.
 \subsubsection{Skew-symmetric matrix/antisymmetric matrix (反對稱矩陣)}
 $\mathbf{A}$ is called a skew-symmetric matrix or an antisymmetric matrix if $\mathbf{A}=-\mathbf{A}^\top$.
 \subsubsection{Transpose identities}
-For an index set of matrices $\mathbf{A}\colon[1,n]\cap\bbN\to\bbF^{p\times q};\;i\mapsto\mathbf{A}(i)$ for some fixed $p,q$,
+For an index set of matrices $\mathbf{A}\colon[1,n]\cap\bbN\to F^{p\times q};\;i\mapsto\mathbf{A}(i)$ for some fixed $p,q$,
 \[\qty(\sum_{i=1}^n\mathbf{A}(i))^\top=\sum_{i=1}^n\qty(\mathbf{A}(i))^\top\]
 \bpr
 \[\qty(\sum_{i=1}^n\mathbf{A}(i))_{jk}=\sum_{i=1}^n\mathbf{A}(i)_{jk}\]
@@ -583,7 +593,7 @@ For an index set of matrices $\mathbf{A}\colon[1,n]\cap\bbN\to\bbF^{p\times q};\
                                                  &=\qty(\sum_{i=1}^n\qty(\mathbf{A}(i))^{\top})_{jk}
 \ea\]
 \epr
-For two matrices $X\in\bbF^{p\times q},Y\in\bbF^{q\times r}$,
+For two matrices $X\in F^{p\times q},Y\in F^{q\times r}$,
 \[(XY)^{\top}=Y^{\top}X^{\top}\]
 \bpr
 \[(XY)_{jk}=\sum_{i=1}^qX_{ji}Y_{ik}\]
@@ -593,7 +603,7 @@ For two matrices $X\in\bbF^{p\times q},Y\in\bbF^{q\times r}$,
                   &=(Y^{\top}X^{\top})_{jk}
 \ea\]
 \epr
-For an index set of matrices $\mathbf{A}\colon[1,n]\cap\bbN\to\bbF^{\bbN\times\bbN};\;i\mapsto\mathbf{A}(i)$ such that $\mathbf{A}(i)\mathbf{A}(i+1)$ is defined for all $i\in[1,n)\cap\bbN$,
+For an index set of matrices $\mathbf{A}\colon[1,n]\cap\bbN\to F^{\bbN\times\bbN};\;i\mapsto\mathbf{A}(i)$ such that $\mathbf{A}(i)\mathbf{A}(i+1)$ is defined for all $i\in[1,n)\cap\bbN$,
 \[\qty(\prod_{i=1}^n\mathbf{A}(i))^\top=\prod_{i=1}^n\qty(\mathbf{A}(n-i+1))^\top\]
 \bpr
 Prove by mathematical induction on $n$.
@@ -717,6 +727,41 @@ where all $d_i\neq 0$, then:
 0 & 0 & \cdots & \frac{1}{d_n}\end{bmatrix}\]
 Let $\mathbf{E}$, $\mathbf{F}$ be two $n\times n$ diagonal matrices:
 \[\mathbf{E}\mathbf{F}=[e_{ij}f_{ij}]_{1\leq i,j\leq n}\]
+\ssc{Linear map and matrix}
+\sssc{Linear map and matrix are isomorphic in finite-dimensional vector spaces with chosen ordered basis}
+Let $V,W$ be finite-dimensional vector spaces of dimensions $m,n$ over a field $F$. Then, $L(V,W)$ and $F^{n\times m}$ are isomorphic.
+
+Moreover, given arbitrary chosen ordered bases $B=(v_1,\ldots,v_m)$ for $V$ and $C=(w_1,\ldots,w_n)$ for $W$, for any $T\in L(V,W)$, each $T(v_j)$ can be represented as
+\[T(v_j)=\sum_{i=1}^na_{ij}w_i\]
+for some unique scalars $a_{ij}\in F$, and an isomorphism $f\colon L(V,W)\to F^{n\times m}$, which is a linear map, can be constructed as
+\[f(T)=\begin{bmatrix}a_{11}&\cdots&a_{1m}\\\vdots&\ddots&\vdots\\a_{n1}&\cdots&a_{mn}\end{bmatrix}\]
+and is such that
+\[T(v)=f(T)v\]
+for all $v\in V$, with vectors in $V$ in coordinate notation in terms of $B$ and vectors in $W$ in coordinate notation in terms of $C$.
+
+And $f^{-1}$, which is a linear map, can be constructed as, for any $A=\begin{bmatrix}a_{11}&\cdots&a_{1m}\\\vdots&\ddots&\vdots\\a_{n1}&\cdots&a_{mn}\end{bmatrix}\in F^{n\times m}$,
+\[(f^{-1}(A))(\sum_{j=1}^mx_jv_j)=\sum_{j=1}^mx_j\sum_{i=1}^na_{ij}w_i\]
+and is such that
+\[Av=(f^{-1}(A))(v)\]
+for all $v\in V$, with vectors in $V$ in coordinate notation in terms of $B$ and vectors in $W$ in coordinate notation in terms of $C$.
+
+Consequently, $L(V,W)$ is a vector space of dimension $mn$.
+\bpr
+Since $C$ is a basis, $a_{ij}$ are unique.
+
+Write $v$ as a linear combination of $v_1,\ldots,v_m$. By linearity of $T$, we have
+\[T(v)=f(T)v\]
+By linearity of matrix multiplication, we have
+\[Av=(f^{-1}(A))(v)\]
+$f$ is injective: If $f(S)=f(T)$, since $a_{ij}$ are unique, $S(v_j)=T(v_j)$ for all $j$. Since $B$ spans $V$ and $S,T$ are linear, $S(v)=T(v)$ for all $v\in V$.
+
+$f^{-1}$ as constructed is the inverse of $f$: Every $v\in V$ has a unique coordinate notation in terms of $B$, so $f^{-1}(A)$ is well-defined for all $A\in F^{n\times m}$. By construction, $f(f(^{-1})(A))=A$. Thus $f$ is surjective and $f^{-1}$ is the inverse of $f$.
+\epr
+Such correspondence as constructed is often assumed once ordered bases are chosen.
+\sssc{Inverse as linear map is inverse as matrix}
+For a bijective linear map $T$ between two finite-dimensional vector spaces with chosen ordered bases, the matrix correspondence of $T^{-1}$ is the inverse of the matrix correspondence of $T$.
+\sssc{Transpose as linear map is transpose as matrix}
+For a linear map $T$ between two finite-dimensional vector spaces with chosen ordered bases, the matrix correspondence of the transpose (aka dual map or adjoint) $^tT$ is the transpose of the matrix correspondence of $T$.
 \subsection{System of Linear Equations (線性方程組)}
 \subsubsection{System of equations (方程組)}
 A solution to a system of equations is a choice of variables such that all equations are satisfied. Two systems of equations are called equivalent if they have exactly the same set of solutions.
@@ -1030,7 +1075,7 @@ Zero vector is in all linear subspaces.
 \epr
 \item A linear system whose coefficient matrix's rank is equal to its the number of rows is always consistent.
 \bpr
-Such matrix's row space is the whole vector space $\bbF^m$, where $m$ is the number of row.
+Such matrix's row space is the whole vector space $F^m$, where $m$ is the number of row.
 \epr
 \eit
 \subsubsection{Invertible coefficient matrix}
