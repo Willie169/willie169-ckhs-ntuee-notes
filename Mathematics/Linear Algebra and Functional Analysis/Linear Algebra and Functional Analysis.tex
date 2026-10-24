@@ -183,7 +183,7 @@ A norm on $X$ is a seminorm $p\colon X\to\mathbb{R}$ with the following properti
 \item Positive definiteness/Positiveness/Point-separating: \[\forall x\in X\colon p(x)=0\implies x=0\]
 \end{itemize}
 A vector $x$ such that $p(x)=1$ is called an unit vector.
-\subsubsection{Standard (unit/basis) vector}
+\subsubsection{Standard basis}
 For a normed finite-dimensional vector space, a basis consisting of unit vectors must exist.
 \bpr
 Take a basis and divide every element with its norm.
@@ -337,7 +337,7 @@ A Hilbert space is a real or complex inner product space that is also a complete
 Given two vectors $u,v$ in an inner product space, the angle $\theta$ between than is defined as
 \[\theta=\arccos(u\cdot v).\]
 \subsubsection{Principal angles (主夾角) between two subspaces}
-Given two subspaces $U,W$ of an inner product space with $\dim(U)=k\leq\dim(W)=m$, there exists then a sequence of $k$ angles $0\leq\theta_1\leq\theta_2\leq\ldots\leq\theta_k\leq\frac{\pi}{2}$ called the principal angles between $U$ and $W$, the first one defined as
+Given two subspaces $U,W$ of an inner product space with $\dim U=k\leq\dim W=m$, there exists then a sequence of $k$ angles $0\leq\theta_1\leq\theta_2\leq\ldots\leq\theta_k\leq\frac{\pi}{2}$ called the principal angles between $U$ and $W$, the first one defined as
 \[\theta_1\coloneq\min\left\{\arccos\left(\frac{|\langle u,w\rangle|}{\|u\|\|w\|}\right)\middle |u\in U\land w\in W\right\}=\angle(u_1\in U,w_1\in W),\]
 The vectors $u_1$ and $w_1$ are the corresponding principal vectors.
 
@@ -424,10 +424,10 @@ Dummy indices such as $\mu$ and $\nu$ are used to indicate contravariant and cov
 
 We use a superscript of $r$ dummy indices and a subscript of $s$ dummy indices to indicate a tensor of type $(r,s)$, i.e., $(V^*)^r\times V^s\to\bbR$ for vector space $V$, such as $T^{\mu_1\ldots\mu_r}_{\nu_1\ldots\nu_s}$. Each $i$th component of each upper index $\mu$ is denoted by replacing $\mu$ with $i$. Each $i$th component of each lower index $\mu$ is denoted by replacing $\mu$ with $i$. For vectors, that is, $A^{\mu}=(A^0,A^1,A^2,A^3)$. For covectors, that is, $A_{\mu}=(A_0,A_1,A_2,A_3)$.
 
-Each upper index $\mu$ is fixed to a summation $\sum_{\mu=0}^{\dim(V)}$ when it takes an input of the same upper index $\mu$, i.e.
-\[T^{\mu\ldots_1}_{\ldots_2}U^{\mu\ldots_3}_{\ldots_4}=\sum_{\mu=0}^{\dim(V)}T^{\mu\ldots_1}_{\ldots_2}U^{\mu\ldots_3}_{\ldots_4}.\]
-Each lower index $\mu$ is fixed to a summation $\sum_{\mu=0}^{\dim(V)}$ when it takes an input of the same lower index $\mu$, i.e.
-\[T^{\ldots_1}_{\mu\ldots_2}U^{\ldots_3}_{\mu\ldots_4}=\sum_{\mu=0}^{\dim(V)}T^{\ldots_1}_{\mu\ldots_2}U^{\ldots_3}_{\mu\ldots_4}.\]
+Each upper index $\mu$ is fixed to a summation $\sum_{\mu=0}^{\dim V}$ when it takes an input of the same upper index $\mu$, i.e.
+\[T^{\mu\ldots_1}_{\ldots_2}U^{\mu\ldots_3}_{\ldots_4}=\sum_{\mu=0}^{\dim V}T^{\mu\ldots_1}_{\ldots_2}U^{\mu\ldots_3}_{\ldots_4}.\]
+Each lower index $\mu$ is fixed to a summation $\sum_{\mu=0}^{\dim V}$ when it takes an input of the same lower index $\mu$, i.e.
+\[T^{\ldots_1}_{\mu\ldots_2}U^{\ldots_3}_{\mu\ldots_4}=\sum_{\mu=0}^{\dim V}T^{\ldots_1}_{\mu\ldots_2}U^{\ldots_3}_{\mu\ldots_4}.\]
 The indexing replaces the order of them in a formula and makes the multiplication notation of tensors work without extra notations.
 \subsection{Two dimensional Euclidean vector space}
 \subsubsection{Quadrant (象限)}
@@ -789,11 +789,13 @@ $f$ is injective: If $f(S)=f(T)$, since $a_{ij}$ are unique, $S(v_j)=T(v_j)$ for
 
 $f^{-1}$ as constructed is the inverse of $f$: Every $v\in V$ has a unique coordinate notation in terms of $B$, so $f^{-1}(A)$ is well-defined for all $A\in F^{n\times m}$. By construction, $f(f(^{-1})(A))=A$. Thus $f$ is surjective and $f^{-1}$ is the inverse of $f$.
 \epr
-$f(T)$ is called the standard matrix of $T$.
+$f(T)$ is called the standard matrix of $T$, and chosen ordered bases are often assumed.
+\sssc{Composition of linear map}
+For two linear maps $S\colon U\to V,T\colon V\to W$ with standard matrix $A,B$, its composition $T\circ S$, often denoted $TS$, has standard matrix $BA$.
 \sssc{Inverse as linear map is inverse as matrix}
-For a bijective linear map $T$ between two finite-dimensional vector spaces with chosen ordered bases, the standard matrix of $T^{-1}$ is the inverse of the standard matrix of $T$.
+A linear map $T$ between two finite-dimensional vector spaces is bijective iff its standard matrix $A$ is injective, in which case the standard matrix of $T^{-1}$ is $A^{-1}$.
 \sssc{Transpose as linear map is transpose as matrix}
-For a linear map $T$ between two finite-dimensional vector spaces with chosen ordered bases, the standard matrix of the transpose (aka dual map or adjoint) $^tT$ is the transpose of the standard matrix of $T$.
+For a linear map $T$ between two finite-dimensional vector spaces with standard matrix $A$, the standard matrix of the transpose (aka dual map or adjoint) $^tT$ is $A^{\top}$.
 \subsection{System of Linear Equations (線性方程組)}
 \subsubsection{System of equations (方程組)}
 A solution to a system of equations is a choice of variables such that all equations are satisfied. Two systems of equations are called equivalent if they have exactly the same set of solutions.
@@ -918,11 +920,11 @@ The row space of $\mathbf{A}$, denoted as \(\operatorname{Row}(\mathbf{A})\), is
 \subsubsection{Null space (零空間), kernel (核), or kernel space (核空間)}
 The kernel of a linear map $L\colon V\to W$, denoted as $\ker(L)$ or $\Null(L)$, is defined as:
 \[\ker(L)=\{v\in V:\,L(v)=0\}.\]
-$\dim(\ker(\mathbf{A}))$ is called nullity (零化度).
+$\dim\ker(\mathbf{A})$ is called nullity (零化度).
 \subsubsection{Left null space (左零空間), left kernel (左核), or left kernel space (左核空間)}
 The left null space of a linear map $L\colon V\to W$ is defined as $\ker(L^{-1})$.
 
-$\dim(\ker(L^{-1}))$ is called left nullity.
+$\dim\ker(L^{-1})$ is called left nullity.
 \subsubsection{Image space (像空間) or range (值域)}
 The image space of a linear map $T\colon V\to W$, denoted as $\operatorname{im}(T)$, is defined as,
 \[\operatorname{im}(T)=\{T(v):\,v\in V\}.\]
@@ -932,22 +934,20 @@ The cokernel of a linear map $T\colon V\to W$, denoted as $\operatorname{coker}(
 \subsection{Rank and nullity}
 \subsubsection{Rank (秩)}
 The rank of a matrix \(\mathbf{A}\), denoted as \( \operatorname{rank}(\mathbf{A}) \) or $\operatorname{rk}(\mathbf{A})$, is defined as the dimension of its column space (or row space, which are the same by constant rank theorem), that is,
-\[\text{rank}(\mathbf{A})=\dim(\operatorname{Col}(\mathbf{A}))\]
+\[\text{rank}(\mathbf{A})=\dim\operatorname{Col}(\mathbf{A})\]
 \subsubsection{Constant rank theorem (常秩定理)}
 For any matrix $\mathbf{A}$:
-\[\dim(\operatorname{Col}(\mathbf{A}))=\dim(\operatorname{Col}(\mathbf{A}^\top))\]
+\[\dim\operatorname{Col}(\mathbf{A})=\dim\operatorname{Row}(\mathbf{A})\]
 \begin{proof}
-Let $\mathbf{A}$ be an $m\times n$ matrix, $r=\dim\qty(\operatorname{Col}\qty(\mathbf{A}))$, $ c_{1},c_{2},\ldots ,c_{r}$ be a basis of $\operatorname{Col}(\mathbf{A})$, matrix $\mathbf{C}=[c_{1},c_{2},\ldots ,c_{r}]$, and $r\times n$ matrix $\mathbf{R}$ such that $\mathbf{A}=\mathbf{C}\mathbf{R}$. 
+Let $\mathbf{A}$ be an $m\times n$ matrix, $r=\dim\operatorname{Col}\qty(\mathbf{A})$, $ c_{1},c_{2},\ldots ,c_{r}$ be a basis of $\operatorname{Col}(\mathbf{A})$, matrix $\mathbf{C}=[c_{1},c_{2},\ldots ,c_{r}]$, and $r\times n$ matrix $\mathbf{R}$ such that $\mathbf{A}=\mathbf{C}\mathbf{R}$. 
 
 Since:
-\[\operatorname{Col}(\mathbf{A}^\top)\subseteq\operatorname{Col}(\mathbf{R}^\top),\]
-\[\dim(\operatorname{Col}(\mathbf{A}^\top))\leq\dim(\operatorname{Col}(\mathbf{R}^\top))\]
-Because there are only $r$ rows in $\mathbf{R}$,
-\[\dim(\operatorname{Col}(\mathbf{R}^\top))\leq\dim(\operatorname{Col}(\mathbf{A}))\]
+\[\operatorname{Row}(\mathbf{A})\subseteq\operatorname{Row}(\mathbf{R})\]
+\[\dim\operatorname{Row}(\mathbf{A})\leq\dim\operatorname{Row}(\mathbf{R})\leq r=\dim\operatorname{Col}(\mathbf{A})\]
 Similarly, we can obtain that
-\[\dim(\operatorname{Col}(\mathbf{A}))\leq\dim(\operatorname{Col}(\mathbf{R}^\top))\leq\dim(\operatorname{Col}(\mathbf{A}^\top)).\]
+\[\dim\operatorname{Col}(\mathbf{A})\leq\dim\operatorname{Row}(\mathbf{A})\]
 Therefore,
-\[\dim(\operatorname{Col}(\mathbf{A}))=\dim(\operatorname{Col}(\mathbf{R}^\top))=\dim(\operatorname{Col}(\mathbf{A}^\top)).\]
+\[\dim\operatorname{Col}(\mathbf{A})=\dim\operatorname{Row}(\mathbf{A})\]
 \end{proof}
 \subsubsection{Rank-nullity theorem (秩—零化度定理)}
 For any $m\times n$ matrix $\mathbf{A}$:
@@ -1002,10 +1002,10 @@ Apply rank-nullity theorem on $A^{\top}$.
 \epr
 \subsubsection{Full rank (滿秩) and rank deficiency (秩虧)}
 For any $m\times n$ matrix $\mb{A}$:
-\[\text{rank}(\mathbf{A}) \leq \min(m, n)\]
-Iff
-\[\text{rank}(\mathbf{A}) = \min(m, n),\]
-$\mathbf{A}$ is called to have full rank; otherwise it is called to be rank-deficient (欠秩或秩虧的).
+\[\text{rank}(\mathbf{A}) \leq \min(m, n).\]
+$\mathbf{A}$ is called to have full rank iff
+\[\text{rank}(\mathbf{A}) = \min(m, n)\]
+otherwise it is called to be rank-deficient (欠秩或秩虧的).
 
 The rank deficiency of a $m\times n$ matrix $\mb{A}$ is defined as
 \[\min(m, n)-\text{rank}(\mathbf{A}) \]
@@ -1095,21 +1095,14 @@ Let $A$ be a matrix and $R$ be any reduced row-equivalent form of it. Since elem
 Let a matrix with subscript denote its submatrix of that column. For every non-pivot column $j$, by column correspondence property, since column $j$ of $A$ is a linear combination of pivot columns of $A$, column $j$ of $R$ is a linear combination of the corresponding columns of $A$ using the same coefficients, which is unique.
 \epr
 \subsubsection{Column space test for consistency of linear system}
-A system of linear equations is consistent iff its constant term vector is in the column space of its coefficient matrix.
+The linear system $Ax=b$ is consistent iff $b\in\Col(A)$.
 \bpr
 By definition, obviously.
 \epr
-Thus,
-\bit
-\item A homogeneous linear system is always consistent.
+Thus, a homogeneous linear system is always consistent.
 \bpr
 Zero vector is in all linear subspaces.
 \epr
-\item A linear system whose coefficient matrix's rank is equal to its the number of rows is always consistent.
-\bpr
-Such matrix's row space is the whole vector space $F^m$, where $m$ is the number of row.
-\epr
-\eit
 \subsubsection{Invertible coefficient matrix}
 For a linear system $Ax=b$ with invertible coefficient matrix $A$ and constant term vector $b$, then $x=A^{-1}b$ is the unique solution to it.
 \subsubsection{Solution space is an affine space with kernel as associated vector space}
@@ -1125,13 +1118,24 @@ Thus, the solution space is an affine space with the kernel of its coefficient m
 \subsubsection{Zero nullity}
 For a matrix $A\in\bbR^{m\times n}$, the followings are equivalent:
 \bit
-\item $A$ has zero nullity (i.e., $\rank(A)=n$).
-\item A linear system whose coefficient matrix is $A$ has at most one solution.
+\item $A$ has zero nullity (i.e., $\rank(A)=\dim\Col(A)=\dim\Row(A)=n$).
+\item The linear system $Ax=b$ has at most one solution.
 \bpr
 If consistent, since the associated vector space $\ker(A)$ of solution space is $\{\mb{0}\}$, the solution space has only one element.
 \epr
 \item The only solution to the homogeneous linear system whose coefficient matrix is $A$ is $\mb{0}$.
 \item The columns of the reduced row echelon form of $A$ are the $n$ distinct standard basis vectors of $F^n$.
+\item The linear map whose standard matrix is $A$ is injective.
+\eit
+\subsubsection{Zero left nullity}
+For a matrix $A\in\bbR^{m\times n}$, the followings are equivalent:
+\bit
+\item $A$ has zero left nullity (i.e., $\rank(A)=\dim\Col(A)=\dim\Row(A)=m$).
+\item The linear system $Ax=b$ is consistent for all $b$.
+\bpr
+Since $\dim\Col(A)=m$, the column space is $\bbR^m$, thus the constant term vector is in the column space. By column space test for consistency of linear system, the system is consistent.
+\epr
+\item The linear map whose standard matrix is $A$ is surjective.
 \eit
 \subsubsection{Pivot column set is column space basis}
 The set of pivot columns of a matrix is a basis of its column space.
