@@ -610,7 +610,9 @@ Both diffusions of majority carriers form currents from the n side to the p side
 \eit
 Their sum is the net current density due to majority carriers from the p region to the n region through the depletion region
 \[\mb{J}_D=\mb{J}_{D,p}+\mb{J}_{D,n}=q(D_p\nabla p-D_n\nabla n+(n+p)\mb{E}),\]
-The net current due to majority carriers from the p region to the n region through the depletion region is called diffusion current $I_D$, which decreases as barrier voltage increases. 
+The net current due to majority carriers from the p region to the n region through the depletion region is called diffusion current $I_D$, which decreases as barrier voltage increases.
+
+The regions of the p and n regions outside the depletion region are called bulk regions.
 \sssc{Drift current}
 \bit
 \item Some of the thermally generated minority holes in the n region move toward the junction and reach the edge of the depletion region. There, they are swept across depletion region into the p side by the electric field.
@@ -651,7 +653,7 @@ We denote
 \[\alpha=A\sqrt{2\varepsilon q\qty(\frac{1}{N_A}+\frac{1}{N_D})}\]
 \[Q_j=\alpha\sqrt{V_0}\]
 \sssc{One-sided junction}
-For most practical devices, one side of the pn junction is much more heavily doped than the other, called one-sided junction, that is,
+For most practical devices, one side of the pn junction is much more heavily doped than the other, called one-sided junction, that is, either
 \[N_A\gg N_D\qc W\approx x_n\gg x_p\]
 or
 \[N_D\gg N_A\qc W\approx x_p\gg x_n\]
@@ -677,28 +679,32 @@ and the charge stored on either side of the depletion region is
 Excess concentration is defined as
 \[p_n(x_n)-p_{n0}=p_{n0}\qty(e^{V/V_T}-1)\]
 As the injected holes diffuse into the n material, some will recombine with the majority free electrons and disappear. The excess hole concentration decays exponentially with distance. The total hole concentration in the n material is given by
-\[p_n(x)=p_{n0}+p_{n0}\qty(e^{V/V_T}-1)e^{-(x-x_n)/L_p}\qc x\ge x_n,\]
+\[p_n(x)=p_{n0}+\qty(p_n(x_n)-p_{n0})e^{-(x-x_n)/L_p}=p_{n0}+p_{n0}\qty(e^{V/V_T}-1)e^{-(x-x_n)/L_p}\qc x\ge x_n,\]
 where $L_p$ is a constant called diffusion length of holes in the n material.
 
 By differentiating $p_n(x)$, we obtain the diffusion current density:
-\[J_p(x)=q\frac{D_p}{L_p}p_{n0}\qty(e^{V/V_T}-1)e^{-(x-x_n)/L_p}\qc x\ge x_n\]
+\[J_p(x)=q\frac{D_p}{L_p}\qty(p_n(x_n)-p_{n0})e^{-(x-x_n)/L_p}=q\frac{D_p}{L_p}p_{n0}\qty(e^{V/V_T}-1)e^{-(x-x_n)/L_p}\qc x\ge x_n\]
 It does not change inside the depletion region, thus
-\[J_p(x)=q\frac{D_p}{L_p}p_{n0}\qty(e^{V/V_T}-1)\qc -x_p\le x\le x_n\]
+\[J_p(x)=q\frac{D_p}{L_p}\qty(p_n(x_n)-p_{n0})=q\frac{D_p}{L_p}p_{n0}\qty(e^{V/V_T}-1)\qc -x_p\le x\le x_n\]
+The current inside the depletion region is
+\[I_p=AJ_p(0)=Aq\frac{D_p}{L_p}\qty(p_n(x_n)-p_{n0})=Aq\frac{D_p}{L_p}p_{n0}\qty(e^{V/V_T}-1)\]
 \item The concentration of minority free electrons in the p region at the edge of the depletion region will increase considerably to
 \[n_p(-x_p)=n_{p0}e^{V/V_T}\]
 Excess concentration is defined as
 \[n_p(-x_p)-n_{p0}=n_{p0}\qty(e^{V/V_T}-1)\]
 As the injected free electrons diffuse into the p material, some will recombine with the majority holes and disappear. The excess free electron concentration decays exponentially with distance. The total hole concentration in the p material is given by
-\[n_p(-x)=n_{p0}+n_{p0}\qty(e^{V/V_T}-1)e^{-(x-x_p)/L_n}\qc x\ge x_p,\]
+\[n_p(-x)=n_{p0}+\qty(n_p(-x_p)-n_{p0})e^{-(x-x_p)/L_n}=n_{p0}+n_{p0}\qty(e^{V/V_T}-1)e^{-(x-x_p)/L_n}\qc x\ge x_p,\]
 where $L_n$ is a constant called diffusion length of free electrons in the p material.
 
 By differentiating $n_p(x)$, we obtain the diffusion current density:
-\[J_n(-x)=q\frac{D_n}{L_n}n_{p0}\qty(e^{V/V_T}-1)e^{-(x-x_p)/L_n}\qc x\ge x_p\]
+\[J_n(-x)=q\frac{D_n}{L_n}\qty(n_p(-x_p)-n_{p0})e^{-(x-x_p)/L_n}=q\frac{D_n}{L_n}n_{p0}\qty(e^{V/V_T}-1)e^{-(x-x_p)/L_n}\qc x\ge x_p\]
 It does not change inside the depletion region, thus
-\[J_n(-x)=q\frac{D_n}{L_n}n_{p0}\qty(e^{V/V_T}-1)\qc x_p\ge x\ge -x_n\]
+\[J_n(-x)=q\frac{D_n}{L_n}\qty(n_p(-x_p)-n_{p0})=q\frac{D_n}{L_n}n_{p0}\qty(e^{V/V_T}-1)\qc x_p\ge x\ge -x_n\]
+The current inside the depletion region is
+\[I_n=AJ_n(0)=Aq\frac{D_n}{L_n}\qty(n_p(-x_p)-n_{p0})=Aq\frac{D_n}{L_n}n_{p0}\qty(e^{V/V_T}-1)\]
 \eit
 The total current inside the depletion region is
-\[I=A(J_p(0)+J_n(0))=Aq\qty(\frac{D_p}{L_p}p_{n0}+\frac{D_n}{L_n}n_{p0})\qty(e^{V/V_T}-1)\]
+\[I=I_p+I_n=Aq\qty(\frac{D_p}{L_p}p_{n0}+\frac{D_n}{L_n}n_{p0})\qty(e^{V/V_T}-1)\]
 Substituting $p_{n0}=\frac{n_i^2}{N_D}$ and $n_{p0}=\frac{n_i^2}{N_A}$ gives
 \[I=Aqn_i^2\qty(\frac{D_p}{L_pN_D}+\frac{D_n}{L_nN_A})\qty(e^{V/V_T}-1)\]
 Taking $T=0$, we obtain a constant current, which must be $-I_S$, thus
@@ -732,7 +738,7 @@ We conclude that
 \sssc{Depletion or junction capacitance}
 Depletion capacitance predominates in reverse and zero bias and is from the charge stored on the depletion region given by
 \[Q_j=A\sqrt{2\varepsilon q\qty(\frac{1}{N_A}+\frac{1}{N_D})(V_0+V_R)}=\alpha\sqrt{V_0+V_R}\]
-In an ideal capacitor, the stored charge is linearly proportional to the applied voltage. In pn junction, however, the relationship is nonlinear, We can assume that the junction is operating at a voltage such as $V_Q$, and define a caoacitance $C_j$:
+In an ideal capacitor, the stored charge is linearly proportional to the applied voltage. In pn junction, however, the relationship is nonlinear. For small changes around a bias point, say $V_R=V_Q$, we can define a depletion capacitance $C_j$ as
 \[C_j=\evlv{\dv{Q_j}{V_R}}_{V_R=V_Q}\]
 Then,
 \[C_j=\frac{\alpha}{2\sqrt{V_0+V_R}}\]
@@ -740,14 +746,45 @@ The value of $C_j$ at zero bias is
 \[C_{j0}=\frac{\alpha}{2\sqrt{V_0}}=A\sqrt{\frac{\varepsilon q}{2}\qty(\frac{1}{N_A}+\frac{1}{N_D})\frac{1}{V_0}}\]
 And
 \[C_j=\frac{C_{j0}}{\sqrt{1+\frac{V_R}{V_0}}}\]
-A more gernal form that also encompasses graded junction is
+A more general form that also encompasses graded junction is
 \[C_j=\frac{C_{j0}}{\qty(1+\frac{V_R}{V_0})^m}\]
 where $m$ is a constant called grading coefficient, whose value ranges from 1/3 to 1/2 depending on the manner in which the concentration changes from the p to the n side.
 \sssc{Diffusion capacitance}
-Diffusion capacitance predominates only in forward bias.
-
-
-
-
-
+Diffusion capacitance predominates only in forward bias. Consider a forward-biased pn junction. In steady state,
+\bit
+\item Some holes injected from the p-side into the n-side become excess minority carriers in the n bulk region, which has charge:
+\[\ba
+  Q_p&=Aq\int_{x_n}^{\infty}p_n(x)-p_{n0}\dd{x}\\
+     &=Aq\int_{x_n}^{\infty}\qty(p_n(x_n)-p_{n0})e^{-(x-x_n)/L_p}\dd{x}\\
+     &=Aq\qty(p_n(x_n)-p_{n0})L_p\evlv{e^{-(x-x_n)/L_p}}_{x_n}^{\infty}\\
+     &=\frac{L_p^2}{D_p}I_p
+\ea\]
+We define the time constant $\tau_p$, called minority-carrier hole lifetime, as
+\[\tau_p=\frac{L_p^2}{D_p}\]
+\[Q_p=\tau_pI_p\]
+\item Some free electrons injected from the n-side into the p-side become excess minority carriers in the p bulk region, which has charge:
+\[\ba
+  Q_n&=Aq\int_{-\infty}^{-x_p}n_p(x)-n_{p0}\dd{x}\\
+  Q_n&=Aq\int_{x_p}^{\infty}n_p(-x)-n_{p0}\dd{-x}\\
+     &=Aq\int_{x_p}^{\infty}\qty(n_p(-x_p)-n_{p0})e^{-(x-x_p)/L_n}\dd{-x}\\
+     &=Aq\qty(n_p(-x_p)-n_{p0})L_n\evlv{e^{-(x-x_p)/L_n}}_{x_p}^{\infty}\\
+     &=\frac{L_n^2}{D_n}I_n
+\ea\]
+We define the time constant $\tau_n$, called minority-carrier electron lifetime, as
+\[\tau_n=\frac{L_n^2}{D_n}\]
+\[Q_n=\tau_nI_n\]
+\eit
+The total excess minority-carrier charge is
+\[Q=Q_p+Q_n=\tau_pI_p+\tau_nI_n\]
+We define the (mean) transit time of the junction $\tau_T$ such that
+\[Q=\tau_TI\]
+For most practical one-sided junction, either
+\[N_A\gg N_D\qc I\approx I_p\gg I_n\qc Q=Q_p\gg Q_n\qc\tau_T\approx\tau_p\]
+or
+\[N_D\gg N_A\qc I\approx I_n\gg I_p\qc Q=Q_n\gg Q_p\qc\tau_T\approx\tau_n\]
+For small changes around a bias point, say $V=V_Q$, we can define an incremental diffusion capacitance $C_d$ as
+\[C_d=\evlv{\dv{Q}{V}}_{V=V_Q}\]
+Using the approximation $e^{V/V_T}\gg 1$, $I=I_S\qty(e^{V/V_T}-1)\approx I_Se^{V/V_T}$, we have
+\[C_d=\frac{\tau_T}{V_T}I\]
+$C_d$ is directly proportional to the forward current $I$ and thus is negligibly small when the diode is reverse biased. Also, to keep $C_d$ small, the transit time $\tau_T$ must be made small, which is important for a pn junction intended for high-speed or high-frequency operation.
 \end{document}
