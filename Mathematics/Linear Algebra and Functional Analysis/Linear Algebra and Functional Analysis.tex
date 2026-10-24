@@ -61,6 +61,17 @@ A map $T\colon V\to W$ between vector spaces $V$ and $W$ over field $F$ is linea
   \[T(cu)=cT(u)\]
 \eit
 The space of linear operators from $V$ to $W$ is a vector space, denoted as $L(V,W)$.
+\sssc{Properties of linear maps}
+For any linear map $T\colon V\to W$,
+\[T(0)=0\]
+\bpr
+\[T(0)=T(0+0)=2T(0)\]
+\epr
+For any linear map $T\colon V\to W$, $u,v\in V$, and scalars $a,b$,
+\[T(au+bv)=aT(u)+bT(v)\]
+\bpr
+\[T(au+bv)=T(au)+T(bv)=aT(u)+bT(v)\]
+\epr
 \subsubsection{Invertible map (可逆映射)}
 A map $T\colon V\to W$ is Invertible if and only if it is bijective. The unique inverse of $T$, called $T^{-1}$, is defined to be:
 \[T^{-1}\colon W\to V;\,\forall v\in V\colon T(v)\mapsto v=T^{-1}(T(v)).\]
@@ -192,9 +203,30 @@ Function $f\colon I\subseteq\mathbb{R}\to\mathbb{R}$ is absolutely continuous on
 \[\sum_{k=1}^N(y_k-x_k)<\delta\implies\sum_{k=1}^N|f(y_k)-f(x_k)|<\varepsilon.\]
 The collection of all absolutely continuous functions on $I$ is denoted $\operatorname {AC} (I)$.
 \subsubsection{Bounded linear operator (有界線性運算子)}
-A bounded linear operator is a linear transformation $L\colon X\to Y$ between topological vector spaces $X$ and $Y$ that maps bounded subsets of $X$ to bounded subsets of $Y$. If $X$ and $Y$ are normed vector spaces, then $L$ is bounded if and only if there exists some $M>0$ such that:
-\[\forall x\in X\colon \|Lx\|_Y\leq M\|x\|_X.\]
-The smallest such $M$ is called the operator norm of $L$ and denoted by $\|L\|$. A bounded operator between normed spaces is continuous and vice versa.
+A linear operator $T\colon X\to Y$ between two normed spaces $X$ and $Y$ is called bounded iff there exists some $M>0$ such that
+\[\forall x\in X\colon\norm{T(x)}_Y\leq M\norm{x}_X.\]
+The smallest such $M$ is called the operator norm of $L$ and denoted by $\norm{T}$.
+\sssc{Linear operator is bounded iff Lipschitz continuous iff continuous iff continuous at 0}
+A linear operator $T\colon X\to Y$ between two normed spaces $X$ and $Y$ is bounded iff Lipschitz continuous iff continuous iff continuous at 0.
+\bpr
+Lipschitz continuous implies continuous, and continuous implies continuous at 0, so we will show that bounded implies Lipschitz continuous, and continuous at 0 implies bounded.
+
+Bounded implies Lipschitz continuous: Since $T$ is linear,
+\[\norm{T(x)-T(y)}_Y=\norm{T(x-y)}_Y\le M\norm{x-y}_X\]
+Continuous at 0 implies bounded: Since $T$ is linear, $T(0)=0$. There exists $\delta>0$ such that
+\[\norm{x}_X<\delta\implies\norm{T(x)}_Y<1\]
+For any $x\ne 0$, define
+\[u=\frac{\delta}{2\norm{x}_X}x\]
+Then
+\[\norm{u}_X=\frac{\delta}{2}<\delta\]
+Since $T$ is linear,
+\[T(u)=\frac{\delta}{2\norm{x}_X}T(x)\]
+Hence,
+\[\frac{\delta}{2\norm{x}_X}\norm{T(x)}_Y=\norm{T(u)}_Y<1\]
+which implies
+\[\norm{T(x)}_Y<\frac{2}{\delta}\norm{x}_X\]
+The same inequality also holds for $x=0$. Hence $T$ is bounded with $M=\frac{2}{\delta}$.
+\epr
 \sssc{Function space as vector space}
 Let $S$ be a set and $V$ be a vector space over some field $F$. Then, the set of all functions with domain $S$ and codomain $V$ is a vector space over $F$.
 \subsubsection{Uniform norm, sup norm, supremum norm, Chebyshev norm, infinity norm, or max norm}
@@ -757,11 +789,11 @@ $f$ is injective: If $f(S)=f(T)$, since $a_{ij}$ are unique, $S(v_j)=T(v_j)$ for
 
 $f^{-1}$ as constructed is the inverse of $f$: Every $v\in V$ has a unique coordinate notation in terms of $B$, so $f^{-1}(A)$ is well-defined for all $A\in F^{n\times m}$. By construction, $f(f(^{-1})(A))=A$. Thus $f$ is surjective and $f^{-1}$ is the inverse of $f$.
 \epr
-Such correspondence as constructed is often assumed once ordered bases are chosen.
+$f(T)$ is called the standard matrix of $T$.
 \sssc{Inverse as linear map is inverse as matrix}
-For a bijective linear map $T$ between two finite-dimensional vector spaces with chosen ordered bases, the matrix correspondence of $T^{-1}$ is the inverse of the matrix correspondence of $T$.
+For a bijective linear map $T$ between two finite-dimensional vector spaces with chosen ordered bases, the standard matrix of $T^{-1}$ is the inverse of the standard matrix of $T$.
 \sssc{Transpose as linear map is transpose as matrix}
-For a linear map $T$ between two finite-dimensional vector spaces with chosen ordered bases, the matrix correspondence of the transpose (aka dual map or adjoint) $^tT$ is the transpose of the matrix correspondence of $T$.
+For a linear map $T$ between two finite-dimensional vector spaces with chosen ordered bases, the standard matrix of the transpose (aka dual map or adjoint) $^tT$ is the transpose of the standard matrix of $T$.
 \subsection{System of Linear Equations (線性方程組)}
 \subsubsection{System of equations (方程組)}
 A solution to a system of equations is a choice of variables such that all equations are satisfied. Two systems of equations are called equivalent if they have exactly the same set of solutions.
