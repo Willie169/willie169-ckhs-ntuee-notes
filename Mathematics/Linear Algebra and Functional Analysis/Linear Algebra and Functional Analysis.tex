@@ -672,25 +672,7 @@ For two matrices $X\in\bbC^{p\times q},Y\in\bbC^{q\times r}$,
 \[(XY)^{*}=Y^{*}X^{*}\]
 For an index set of matrices $\mathbf{A}\colon[1,n]\cap\bbN\to\bbC^{\bbN\times\bbN};\;i\mapsto\mathbf{A}(i)$ such that $\mathbf{A}(i)\mathbf{A}(i+1)$ is defined for all $i\in[1,n)\cap\bbN$,
 \[\qty(\prod_{i=1}^n\mathbf{A}(i))^*=\prod_{i=1}^n\qty(\mathbf{A}(n-i+1))^*\]
-\subsection{Cofactor matrix, adjugate matrix, determinant, and inverse}
-Let $\mathbf{M}_{ij}$ of $\mathbf{A}$ be the determinant of the submatrix of $\mathbf{A}$ without the $i$th row and $j$th column.
-\subsubsection{Determinant (行列式或判別式)}
-The determinant of a $1\times 1$ matrix is the only element of it; the determinant of an $n\times n$ matrix $\mathbf{A}$, denoted $\det(\mathbf{A})$ or 
-\[\begin{vmatrix}a_{11} & a_{12} & \ldots & a_{1n}\\a_{21} & a_{22} & \ldots & a_{2n}\\\vdots & \vdots & \ddots & \vdots\\a_{n1} & a_{n2} & \ldots & a_{nn}\end{vmatrix},\]
-is
-\[\det(\mathbf{A})=\sum_{i=1}^na_{ij}(-1)^{i+j}\mathbf{M}_{ij}\quad j\leq n\in\mathbb{N}\]
-\[\det(\mathbf{A})=\sum_{j=1}^na_{ij}(-1)^{i+j}\mathbf{M}_{ij}\quad i\leq n\in\mathbb{N}\]
-\subsubsection{Determinant identities}
-Let $\mathbf{A}$ and $\mathbf{A}_i$ be square matrices.
-\[\det\qty(\sum_{i=1}^n\mathbf{A}_i)=\sum_{i=1}^n\det\qty(\mathbf{A}_i)\]
-\[\det\qty(\prod_{i=1}^n\mathbf{A}_i)=\prod_{i=1}^n\det\qty(\mathbf{A}_i)\]
-\[\det(\mathbf{A})\neq 0\implies\det(\mathbf{A}^n)\neq 0\]
-\subsubsection{Cofactor matrix (餘因子矩陣)}
-The cofactor matrix of an $n\times n$ matrix $\mathbf{A}$ is the $n\times n$ matrix $\mathrm{cof}(\mathbf{A})$:
-\[[\mathrm{cof}(\mathbf{A})]_{ij}=\left((-1)^{i+j}\mathbf{M}_{ij}\right)\]
-\subsubsection{Adjugate matrix (伴隨矩陣)/classical adjoint (經典伴隨矩陣)}
-The adjugate matrix or classical adjoint matrix of an $n\times n$ matrix $\mathbf{A}$ is the $n\times n$ matrix $\mathrm{adj}(\mathbf{A})$:
-\[\mathrm{adj}(\mathbf{A})=\mathrm{cof}(\mathbf{A})^\top\]
+\ssc{Inverse}
 \subsubsection{Inverse (反方陣、逆方陣、反矩陣或逆矩陣), multiplicative inverse (乘法反方陣), or reciprocal}
 The inverse of an $n\times n$ matrix $\mathbf{A}$ is an $n\times n$ matrix $\mathbf{A}^{-1}$ such that:
 \[\mathbf{A}\mathbf{A}^{-1}=\mathbf{A}^{-1}\mathbf{A}=\mathbf{I}\]
@@ -707,13 +689,6 @@ For an invertible $2\times 2$ matrix $\mathbf{A}$:
 \frac{1}{\det\qty(\mathbf{A})}\begin{bmatrix}d & -b \\-c & a\end{bmatrix}\]
 \subsubsection{Unitary matrix (么正矩陣或酉矩陣)}
 An unitary matrix is a square matrix whose inverse equals to its conjugate transpose.
-\subsubsection{Determinant property}
-\bit
-\item When a row (or column) is added to another, the determinant remains unchanged.
-\item When all entries of a row (or column) is multiplied by a real number $n$, the determinant is multiplied by $n$.
-\item When two rows (or columns) are swapped, the determinant is multiplied by $-1$.
-\item Given matrix $\mb{A}$ and its inverse $\mb{A}^{-1}$, $\det(\mb{A}^{-1})=\frac{1}{\det(\mb{A})}$.
-\eit
 \subsubsection{Inverse identities}
 A matrix is invertible iff its transpose is invertible. Product of invertible matrices is invertible.
 
@@ -735,30 +710,101 @@ Every elementary matrix is invertible. Moreover, the inverse of an elementary is
 \item Row interchange: The inverse of $I_m$ with row $i$ and row $j$ interchanged is itself.
 \eit
 Thus, for any two row-equivalent $m\times n$ matrices $A,B$, there exists an $m\times m$ invertible matrix $C$, which is the product of a sequence of $m\times m$ elementary matrices, such that $B=CA$.
-\subsubsection{Vandermonde matrix (范德蒙矩陣)}
-A Vandermonde matrix $\mathbf{V}$ is:
-\[V_{i,j}=\alpha_i^{\pht{i}j-1}\]
-An $n\times n$ Vandermonde matrix $\mathbf{V}$ satisfies:
-\[\det(V)=\prod _{1\leq i<j\leq n}(\alpha _{j}-\alpha _{i})\]
-\subsection{Diagonal matrix}
+\subsection{Determinant}
+\subsubsection{Determinant (行列式或判別式), cofactor (餘因子), cofactor matrix, and adjugate matrix (伴隨矩陣) or classical adjoint (經典伴隨矩陣)}
+Let $\mathbf{A}_{ij}$ denote the submatrix of $\mathbf{A}$ without the $i$th row and $j$th column.
+
+The determinant of a $1\times 1$ matrix is defined as the only element of it; the determinant of an $n\times n$ matrix $\mathbf{A}$, denoted $\det(\mathbf{A})$ or 
+\[\begin{vmatrix}a_{11} & \ldots & a_{1n}\\\vdots & \ddots & \vdots\\a_{n1} & \ldots & a_{nn}\end{vmatrix},\]
+is defined recursively as, for any $j\in\bbN_{\le n}$,
+\[\det(\mathbf{A})=\sum_{i=1}^na_{ij}(-1)^{i+j}\det(\mathbf{A}_{ij})\]
+or, for any $i\in\bbN_{\le n}$,
+\[\det(\mathbf{A})=\sum_{j=1}^na_{ij}(-1)^{i+j}\det(\mathbf{A}_{ij})\]
+The $(i,j)$-cofactor, denoted $c_{ij}$, of $\mb{A}$, is defined as
+\[c_{ij}=(-1)^{i+j}\det(\mathbf{A}_{ij})\]
+Thus,
+\[\det(\mathbf{A})=\sum_{i=1}^na_{ij}c_{ij},\]
+called the cofactor expansion of $\mb{A}$ along the column $j$; and
+\[\det(\mathbf{A})=\sum_{j=1}^na_{ij}c_{ij},\]
+called the cofactor expansion of $\mb{A}$ along the row $i$.
+
+The cofactor matrix $\mathrm{cof}(\mathbf{A})$ of $\mathbf{A}$ is an $n\times n$ matrix defined as
+\[\mathrm{cof}(\mathbf{A})_{ij}=c_{ij}\]
+The adjugate matrix or classical adjoint matrix $\mathrm{adj}(\mathbf{A})$ of $\mathbf{A}$ is an $n\times n$ matrix defined as
+\[\mathrm{adj}(\mathbf{A})=\mathrm{cof}(\mathbf{A})^\top\]
+\subsubsection{Determinant identities}
+Let $\mathbf{A}$ and $\mathbf{A}_i$ be square matrices.
+\[\det\qty(\sum_{i=1}^n\mathbf{A}_i)=\sum_{i=1}^n\det\qty(\mathbf{A}_i)\]
+\[\det\qty(\prod_{i=1}^n\mathbf{A}_i)=\prod_{i=1}^n\det\qty(\mathbf{A}_i)\]
+\[\det(\mathbf{A})\neq 0\implies\det(\mathbf{A}^n)\neq 0\]
+\subsubsection{Determinant property}
+\bit
+\item When a row (or column) is added to another, the determinant remains unchanged.
+\item When all entries of a row (or column) is multiplied by a real number $n$, the determinant is multiplied by $n$.
+\item When two rows (or columns) are swapped, the determinant is multiplied by $-1$.
+\item Given matrix $\mb{A}$ and its inverse $\mb{A}^{-1}$, $\det(\mb{A}^{-1})=\frac{1}{\det(\mb{A})}$.
+\eit
+\subsection{Special matrix}
 \subsubsection{Diagonal matrix (對角矩陣)}
 A diagonal matrix is a square matrix whose all off-diagonal entries are the additive identity of $0_{F}$.
-\subsubsection{Diagonal matrix identities}
-If:
+\subsubsection{Diagonal matrix inverse}
+Let
 \[\mathbf{D} = \begin{bmatrix}
 d_1 & 0 & \cdots & 0 \\
 0 & d_2 & \cdots & 0 \\
 \vdots & \vdots & \ddots & \vdots \\
 0 & 0 & \cdots & d_n
 \end{bmatrix}\]
-where all $d_i\neq 0$, then:
+where all $d_i\neq 0$. Then:
 \[\mathbf{D}^{-1} = \begin{bmatrix}
 \frac{1}{d_1} & 0 & \cdots & 0 \\
 0 & \frac{1}{d_2} & \cdots & 0 \\
 \vdots & \vdots & \ddots & \vdots \\
 0 & 0 & \cdots & \frac{1}{d_n}\end{bmatrix}\]
-Let $\mathbf{E}$, $\mathbf{F}$ be two $n\times n$ diagonal matrices:
-\[\mathbf{E}\mathbf{F}=[e_{ij}f_{ij}]_{1\leq i,j\leq n}\]
+\subsubsection{Diagonal matrices product}
+Let $\mathbf{E}$, $\mathbf{F}$ be two $n\times n$ diagonal matrices. Then:
+\[\mathbf{E}\mb{F} = \begin{bmatrix}
+e_1f_1 & 0 & \cdots & 0 \\
+0 & e_2f_2 & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & e_nf_n
+\end{bmatrix}\]
+\subsubsection{Lower triangular matrix}
+A lower triangular matrix is a matrix whose all entries $a_{ij}$ with $i\le j$ are the additive identity of $0_{F}$.
+\subsubsection{Upper triangular matrix}
+An upper triangular matrix is a matrix whose all entries $a_{ij}$ with $i\ge j$ are the additive identity of $0_{F}$.
+\subsubsection{Lower triangular square matrices product}
+Let $A,B$ be two $n\times n$ lower triangular matrices. Then $AB$ is an $n\times n$ lower triangular matrix.
+\bpr
+\[(AB)_{ij}=\sum_{k=1}^na_{ik}b_{kj}\]
+For $i<j$,
+\bit
+\item If $k>i$, then $a_{ik}=0$.
+\item If $k\le i$, then $k<j$, so $b_{kj}=0$
+\eit
+Thus $(AB)_{ij}=0$.
+\epr
+\subsubsection{Upper triangular square matrices product}
+Let $A,B$ be two $n\times n$ upper triangular matrices. Then $AB$ is an $n\times n$ upper triangular matrix.
+\bpr
+\[(AB)_{ij}=\sum_{k=1}^na_{ik}b_{kj}\]
+For $i>j$,
+\bit
+\item If $k<i$, then $a_{ik}=0$.
+\item If $k\ge i$, then $k>j$, so $b_{kj}=0$
+\eit
+Thus $(AB)_{ij}=0$.
+\epr
+\sssc{Triangular square matrix determinant}
+The determinant of a diagonal matrix, an upper triangular square matrix, or a lower triangular square matrix equals the product of its diagonal entries.
+\bpr
+Expand over a row or column with only one nonzero entry.
+\epr
+\subsubsection{Vandermonde matrix (范德蒙矩陣)}
+A Vandermonde matrix $\mathbf{V}$ is:
+\[V_{i,j}=\alpha_i^{\pht{i}j-1}\]
+An $n\times n$ Vandermonde matrix $\mathbf{V}$ satisfies:
+\[\det(V)=\prod _{1\leq i<j\leq n}(\alpha _{j}-\alpha _{i})\]
 \ssc{Linear map and matrix}
 \sssc{Linear map and matrix are isomorphic in finite-dimensional vector spaces with chosen ordered basis}
 Let $V,W$ be finite-dimensional vector spaces of dimensions $m,n$ over a field $F$. Then, $L(V,W)$ and $F^{n\times m}$ are isomorphic.
@@ -1180,32 +1226,6 @@ Let $A$ be an $m\times n$ matrix and $B$ an $n\times p$ matrix. The $i$th row of
 \subsubsection{Matrix multiplication by outer product}
 Let $A$ be an $m\times n$ matrix and $B$ an $n\times p$ matrix. The matrix $AB$ is the sum of matrix products of each column of $A$ with the corresponding row of $B$.
 \subsection{Lower-upper (LU) decomposition or factorization}
-\subsubsection{Lower triangular matrix}
-A lower triangular matrix is a matrix whose all entries $a_{ij}$ with $i\le j$ are the additive identity of $0_{F}$.
-\subsubsection{Upper triangular matrix}
-An upper triangular matrix is a matrix whose all entries $a_{ij}$ with $i\ge j$ are the additive identity of $0_{F}$.
-\subsubsection{Lower triangular square matrices product}
-Let $A,B$ be two $n\times n$ lower triangular matrices. Then $AB$ is an $n\times n$ lower triangular matrix.
-\bpr
-\[(AB)_{ij}=\sum_{k=1}^na_{ik}b_{kj}\]
-For $i<j$,
-\bit
-\item If $k>i$, then $a_{ik}=0$.
-\item If $k\le i$, then $k<j$, so $b_{kj}=0$
-\eit
-Thus $(AB)_{ij}=0$.
-\epr
-\subsubsection{Upper triangular square matrices product}
-Let $A,B$ be two $n\times n$ upper triangular matrices. Then $AB$ is an $n\times n$ upper triangular matrix.
-\bpr
-\[(AB)_{ij}=\sum_{k=1}^na_{ik}b_{kj}\]
-For $i>j$,
-\bit
-\item If $k<i$, then $a_{ik}=0$.
-\item If $k\ge i$, then $k>j$, so $b_{kj}=0$
-\eit
-Thus $(AB)_{ij}=0$.
-\epr
 \subsubsection{Lower-upper (LU) decomposition or factorization with partial pivoting}
 LU decomposition with partial pivoting expresses an $m\times n$ matrix $A$ as the product a $m\times m$ lower triangular matrix $L$ whose all diagonal entries being multiplicative identity $1_F$ and an $m\times n$ upper triangular matrix $U$:
 \[A=LU\]
