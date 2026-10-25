@@ -81,11 +81,11 @@ Nonempty and closed under scalar multiplication implies contains the zero vector
 
 A subspace that contains only zero vector is called zero subspace, and a subspace that is not a zero subspace is called a nonzero subspace.
 \subsubsection{Linear span, linear hull, or span}
-A span of a subset $S$, denoted as $\span S$ or $\langle S\rangle$, of a vector space $V$ is the smallest linear subspace containing $S$, and it is called that $S$ is a generating/spanning set of $\span S$ and $S$ generates/spans $\span S$. If $\span S=V$, $S$ is called a generating/spanning set.
+A span of a subset $S$, denoted as $\span(S)$ or $\langle S\rangle$, of a vector space $V$ is the smallest linear subspace containing $S$, and it is called that $S$ is a generating/spanning set of $\span(S)$ and $S$ generates/spans $\span(S)$. If $\span(S)=V$, $S$ is called a generating/spanning set.
 \sssc{Span of nonempty subset is subspace}
-Let $V$ be a vector space over $F$, and $S$ be a nonempty subset of $V$. Then $\span S$ is a linear subspace of $V$.
+Let $V$ be a vector space over $F$, and $S$ be a nonempty subset of $V$. Then $\span(S)$ is a linear subspace of $V$.
 \bpr
-Let $S=\{s_1,\ldots,s_n\}$ and $W=\span S$.
+Let $S=\{s_1,\ldots,s_n\}$ and $W=\span(S)$.
 \bit
 \item Contains the zero vector: Since $S$ is nonempty, choose any $v\in S$, $0=0v\in W$.
 \item Closed under vector addition: For any $u,v\in W$, we have
@@ -100,11 +100,11 @@ Then
 \eit
 \epr
 \subsubsection{In the span iff new span unchanged}
-Let $S$ be a set of vectors and $v$ be a vector. $v\in\span S$ iff $\span S=\span(S\cup\{v\})$.
+Let $S$ be a set of vectors and $v$ be a vector. $v\in\span(S)$ iff $\span(S)=\span(S\cup\{v\})$.
 \bpr
-Only if: Suppose $v\in\span S$. We can write $v$ as a linear combination of vectors in $S$. For any $w\in\span(S\cup\{v\})$, we can write $w$ as a linear combination of vectors in $S\cup\{S\}$. By replacing $v$ with the linear combination of vectors in $S$, we can write $w$ as a linear combination of vectors in $S$.
+Only if: Suppose $v\in\span(S)$. We can write $v$ as a linear combination of vectors in $S$. For any $w\in\span(S\cup\{v\})$, we can write $w$ as a linear combination of vectors in $S\cup\{S\}$. By replacing $v$ with the linear combination of vectors in $S$, we can write $w$ as a linear combination of vectors in $S$.
 
-If: Suppose $v\notin\span S$. Since $v=1v$, $v\in\span(S\cup\{v\})\setminus S$, thus $\span S\ne\span(S\cup\{v\})$.
+If: Suppose $v\notin\span(S)$. Since $v=1v$, $v\in\span(S\cup\{v\})\setminus S$, thus $\span(S)\ne\span(S\cup\{v\})$.
 \epr
 \subsubsection{Linear independence (線性獨立)}
 A set of vectors \(\{v_1,\ldots,v_n\}\) is linearly independent iff the equation:
@@ -126,19 +126,19 @@ Only if: Suppose $Y$ is proper subset of $X$ such that the span of $Y$ is the sp
 \epr
 \subsubsection{Spanning set element exchange theorem}
 Let $S$ be a set of vectors and $v$ be a nonzero vector.
-\[v\in\span S\implies\exists w\in S\colon \span S=\span(S\setminus\{w\}\cup\{v\})\]
+\[v\in\span(S)\implies\exists w\in S\colon \span(S)=\span(S\setminus\{w\}\cup\{v\})\]
 \bpr
 Write $v$ as a linear combination of elements of $S$. Choose one of them with nonzero coefficient, $w$, which must exist since $v$ is nonzero, $w$ can be written as a linear combination of elements in $S\setminus\{w\}\cup\{v\}$.
 \epr
 Let $S$ be a set of linearly independent vectors and $v$ be a nonzero vector.
-\[v\in\span S\iff\exists w\in S\colon \span S=\span(S\setminus\{w\}\cup\{v\})\]
+\[v\in\span(S)\iff\exists w\in S\colon \span(S)=\span(S\setminus\{w\}\cup\{v\})\]
 \bpr
 Write $w$ as a linear combination of elements of elements in $(S\setminus\{w\}\cup\{v\}$. The $v$ term must have nonzero coefficient since otherwise $w\in\span(S\setminus\{w\})$ and $S$ is not linearly independent. Rearrange the linear combination gives $v$ as a linear combination of elements in $S$.
 \epr
 \subsubsection{Steinitz exchange lemma}
-Let $U$ be a set of $m\in\bbN$ linearly independent vectors and $W$ be a set of $n\in\bbN$ vectors such that $U\subseteq\span W$. Then, $m\le n$, and, there exists a subset $W'$ of $W$ such that $\abs{W'}\le n-m$ and $\span(U\cup W')=\span W$.
+Let $U$ be a set of $m\in\bbN$ linearly independent vectors and $W$ be a set of $n\in\bbN$ vectors such that $U\subseteq\span(W)$. Then, $m\le n$, and, there exists a subset $W'$ of $W$ such that $\abs{W'}\le n-m$ and $\span(U\cup W')=\span(W)$.
 \bpr
-First statement: Write both $U$ and $W$ as column vectors of arbitrary order. By $U\subseteq\span W$, there exists $A\in F^{m\times n}$ such that $U=AW$. Because $U$ is linearly independent, $A$ must have row rank $m$. Since $\rank(A)\le\min(m,n)$, $m\le n$.
+First statement: Write both $U$ and $W$ as column vectors of arbitrary order. By $U\subseteq\span(W)$, there exists $A\in F^{m\times n}$ such that $U=AW$. Because $U$ is linearly independent, $A$ must have row rank $m$. Since $\rank(A)\le\min(m,n)$, $m\le n$.
 
 Second statement: Let $W_0=W$. For each $u_i\in U$, write $u_i$ as a linear combination of elements of $W_{i-1}$. Choose one of them with nonzero coefficient, $w_i$, which must exist since $U$ is linearly independent, $w_i$ can be written as a linear combination of elements in $W_i\coloneq W_{i-1}\setminus\{w_i\}\cup\{u_i\}$.
 \epr
@@ -148,29 +148,35 @@ A basis of a vector space $V$ over a field $F$ is a set of linearly independent 
 Thus, basis for a zero vector space is $\varnothing$.
 
 Assuming axiom of choice, a vector space that contains vector other than the zero vector must have bases (not proven here).
-\subsubsection{Dimension (維度) and dimension theorem (for vector spaces)}
-Dimension theorem states that, given a vector space $V$, if there exists a basis $B$ of $V$, and that either $B$ is finite (proven below) or axiom of choice is assumed (not proven here), all bases of $V$ have the same cardinality of $B$, and any linearly independent subset of $V$ with the same cardinality of $B$ is a basis of $V$.
+\subsubsection{Dimension (維度) theorem (for vector spaces)}
+Given a vector space $V$, if there exists a basis $B$ of $V$, and that either $B$ is finite (proven below) or axiom of choice is assumed (not proven here), then all bases of $V$ have the same cardinality of $B$.
 \bpr
-First statement: Assume that $(u_1,\ldots,u_m)$ and $(v_1,\ldots,v_n)$ are two bases of vector space $V$. Since the existence of the coefficients and the fact that $u_1,\ldots,u_m,v_1,\ldots,v_n$ are nonzero, $u_1,\ldots,u_m\in\span\{v_1,\ldots,v_n\}$ and $v_1,\ldots,v_n\in\span\{u_1,\ldots,u_m\}$. By Steinitz exchange lemma, $m\le n$ and $n\le m$. Thus $m=n$.
-
-Second statement: Assume that $S$ is a basis, $T$ is a linear independent set, and $\abs{S}=\abs{T}=n$. Since $S$ is a basis, for every $v\in T$, $v\in\span S=V$. By spanning set element exchange theorem,
-\[v\in\span S\iff\exists w\in S\colon\span S=\span((S\setminus\{w\}\cup\{v\}))\]
-Exchange one-by-one gives
-\[\span S=\span T\]
-Thus, $T$ is a basis.
+Assume that $(u_1,\ldots,u_m)$ and $(v_1,\ldots,v_n)$ are two bases of vector space $V$. Since the existence of the coefficients and the fact that $u_1,\ldots,u_m,v_1,\ldots,v_n$ are nonzero, $u_1,\ldots,u_m\in\span(\{v_1,\ldots,v_n\})$ and $v_1,\ldots,v_n\in\span(\{u_1,\ldots,u_m\})$. By Steinitz exchange lemma, $m\le n$ and $n\le m$. Thus $m=n$.
 \epr
-The dimension of a vector space $V$, denoted as $\dim V$, is defined as the cardinality of the bases of it.
+\sssc{Dimension}
+The dimension of a vector space $V$, denoted as $\dim(V)$, is defined as the cardinality of the bases of it.
 
-The dimension of an affine space $V$, denoted as $\dim V$, is defined as the dimension of its associated vector space.
+The dimension of an affine space $V$, denoted as $\dim(V)$, is defined as the dimension of its associated vector space.
 \subsubsection{(Basis) extension theorem}
 Let $V$ be an $n$-dimensional vector space. For any linearly independent set of finitely many vectors $\{v_1,\ldots,v_m\}$ in $V$, if $m=n$, it is a basis; otherwise, there exists a set of $n-m$ vectors $\{v_{m+1},\ldots,v_n\}$ in $V$ such that $\{v_1,\ldots,v_n\}$ is linearly independent, and any such $v_1,\ldots,v_n$ is a basis of $V$.
 \bpr
-For $m=n$, we claim that $\span\{v_1,\ldots,v_n\}=V$, thus $\{v_1,\ldots,v_n\}$ is a basis. For $m<n$, since $S\coloneq\span\{v_1,\ldots,v_m\}$ is of dimension $m<n$, choose any $v_{m+1}\in V\setminus S$. Assume for contradiction that $\{v_1,\ldots,v_{m+1}\}$ is linearly dependent, we can write $v_{m+1}$ as a linear combination of $v_1,\ldots,v_m$, which means $v_{m+1}\in S$, which contradicts $v_{m+1}\in V\notin S$. Thus $\{v_1,\ldots,v_{m+1}\}$ is linearly independent. We can repeat until $n$ such that $\span\{v_1,\ldots,v_n\}=V$.
+For $m=n$, we claim that $\span(\{v_1,\ldots,v_n\})=V$, thus $\{v_1,\ldots,v_n\}$ is a basis. For $m<n$, since $S\coloneq\span(\{v_1,\ldots,v_m\})$ is of dimension $m<n$, choose any $v_{m+1}\in V\setminus S$. Assume for contradiction that $\{v_1,\ldots,v_{m+1}\}$ is linearly dependent, we can write $v_{m+1}$ as a linear combination of $v_1,\ldots,v_m$, which means $v_{m+1}\in S$, which contradicts $v_{m+1}\in V\notin S$. Thus $\{v_1,\ldots,v_{m+1}\}$ is linearly independent. We can repeat until $n$ such that $\span(\{v_1,\ldots,v_n\})=V$.
+\epr
+\sssc{Linearly independent set of dimension cardinality is a basis}
+Given a vector space $V$, if there exists a basis $B$ of $V$, and that either $B$ is finite (proven below) or axiom of choice is assumed (not proven here), then any linearly independent subset of $V$ with the same cardinality of $B$ is a basis of $V$.
+\bpr
+Assume that $S$ is a basis, $T$ is a linear independent set, and $\abs{S}=\abs{T}=n$. Since $S$ is a basis, for every $v\in T$, $v\in\span(S)=V$. By spanning set element exchange theorem,
+\[v\in\span(S)\iff\exists w\in S\colon\span(S)=\span((S\setminus\{w\}\cup\{v\}))\]
+Exchange one-by-one gives
+\[\span(S)=\span(T)\]
+Thus, $T$ is a basis.
 \epr
 \sssc{Subspace dimension theorem}
-A linear subspace $U$ of an $n$-dimensional vector space $V$ has at most $n$ dimensions.
+A linear subspace $U$ of a finite-dimensional vector space $V$ has at most $\dim(V)$ dimensions. Moreover, if $\dim(U)=\dim(V)$, $U=V$.
 \bpr
-Assume for contradiction that $S$ is a basis for $U$ with cardinality $m>n$. Take $T$ a subset of $S$ with cardinality $n$. By dimension theorem, $\span T=V\supseteq U\supseteq\span S$. Since $S\setminus T\ne\varnothing$ and $S$ is linearly independent, $\span T$ must be a proper subset of $\span S$, contradicting that $\span T$ is a super set of $\span S$.
+First statement: Let $\dim(V)=n$. Assume for contradiction that $S$ is a basis for $U$ with cardinality $m>n$. Take $T$ a subset of $S$ with cardinality $n$. By linearly independent set of dimension cardinality is a basis, $\span(T)=V\supseteq U\supseteq\span(S)$. Since $S\setminus T\ne\varnothing$ and $S$ is linearly independent, $\span(T)$ must be a proper subset of $\span(S)$, contradicting that $\span(T)$ is a super set of $\span(S)$.
+
+Second statement: Let $u$ be basis of $U$. Since $U\subseteq V$, $u\subseteq V$. By linearly independent set of dimension cardinality is a basis, $u$ is a basis of $V$. Therefore $U=\span(u)=V$.
 \epr
 \sssc{Basis equivalences}
 For a subset of a vector space $V$, the followings are equivalent
@@ -185,18 +191,23 @@ By linearly independent set is minimum spanning set, $2\iff 3$.
 
 $1\implie 2$: By the existence of solution for $\sum_{i=1}c_iv_i=v$ for every $v\in V$, a basis is a spanning set. By the uniqueness of solution for $\sum_{i=1}c_iv_i=0$, a basis is linearly independent.
 
-$4\implies 1$: Let $V$ has dimension $n$. By subspace dimension theorem, a linearly independent set of cardinality more than $n$ cannot exist, thus $n$ is the maximum cardinality of linearly independent sets. By dimension theorem, all linearly independent set of dimension $n$ is a basis.
+$4\implies 1$: Let $V$ has dimension $n$. By subspace dimension theorem, a linearly independent set of cardinality more than $n$ cannot exist, thus $n$ is the maximum cardinality of linearly independent sets. By linearly independent set of dimension cardinality is a basis, all linearly independent set of dimension $n$ is a basis.
 
-$2\implies 4$: Let $S$ be a linearly independent spanning set and $\abs{S}=n$. Assume that $T$ is a linearly independent set with cardinality $m\ge n$. By spanning set element exchange theorem and that $T\subseteq\span S=V$, there exists a subset $U$ of $T$ of cardinality $n$ such that $\span U=\span S=V$. By linearly independent set is minimum spanning set, $T=U$. Thus, $m=n$. Thus $n$ is the maximum cardinality of linearly independent set.
+$2\implies 4$: Let $S$ be a linearly independent spanning set and $\abs{S}=n$. Assume that $T$ is a linearly independent set with cardinality $m\ge n$. By spanning set element exchange theorem and that $T\subseteq\span(S)=V$, there exists a subset $U$ of $T$ of cardinality $n$ such that $\span(U)=\span(S)=V$. By linearly independent set is minimum spanning set, $T=U$. Thus, $m=n$. Thus $n$ is the maximum cardinality of linearly independent set.
 \epr
 \sssc{(Basis) reduction theorem}
 Let $V$ be an $n$-dimensional vector space. For any finite generating set $S$ of $V$, if $\abs{S}=n$, it is a basis; otherwise, there exists an $n$-vector subset $T$ of $S$ that is linearly independent, and any such $T$ is a basis of $V$.
 \bpr
 By basis is minimal spanning set, $\abs{S}\ge n$, and $\abs{S}=n$ implies that $S$ is a basis.
 
-Let $S'=S\setminus\{0\}$, and $m=\abs{S'}$. It's obvious that $\span S'=\span S$. If $m=n$, $S'$ is a basis.
+Let $S'=S\setminus\{0\}$, and $m=\abs{S'}$. It's obvious that $\span(S)'=\span(S)$. If $m=n$, $S'$ is a basis.
 
-Case $m>n$: Take a basis $T$. By spanning set element exchange theorem and that $S\subseteq\span T=V$, there exists a subset $U$ of $S$ of cardinality $n$ such that $\span U=\span T=V$. $U$ is a basis.
+Case $m>n$: Take a basis $T$. By spanning set element exchange theorem and that $S\subseteq\span(T)=V$, there exists a subset $U$ of $S$ of cardinality $n$ such that $\span(U)=\span(T)=V$. $U$ is a basis.
+\epr
+\sssc{Spanning of dimension cardinality is a basis}
+Given a vector space $V$, if there exists a basis $B$ of $V$, and that either $B$ is finite (proven below) or axiom of choice is assumed (not proven here), then any spanning set of $V$ with the same cardinality of $B$ is a basis of $V$.
+\bpr
+Let $\abs{B}=n$. By basis is minimal spanning set, a minimal spanning set has dimension $n$ and is a basis.
 \epr
 \sssc{Coordinate notation}
 For an $n$-dimensional vector space $V$ over field $F$ and a chosen ordered basis $B=(v_1,\ldots,v_n)$, every vector $v\in V$ can be represented as an $n$-scalar ordered tuple $(x_1,x_2,\ldots,x_n)$ where $x_1,\ldots,x_n\in F$ are such that
@@ -398,7 +409,7 @@ A Hilbert space is a real or complex inner product space that is also a complete
 Given two vectors $u,v$ in an inner product space, the angle $\theta$ between than is defined as
 \[\theta=\arccos(u\cdot v).\]
 \subsubsection{Principal angles (主夾角) between two subspaces}
-Given two subspaces $U,W$ of an inner product space with $\dim U=k\leq\dim W=m$, there exists then a sequence of $k$ angles $0\leq\theta_1\leq\theta_2\leq\ldots\leq\theta_k\leq\frac{\pi}{2}$ called the principal angles between $U$ and $W$, the first one defined as
+Given two subspaces $U,W$ of an inner product space with $\dim(U)=k\leq\dim(W)=m$, there exists then a sequence of $k$ angles $0\leq\theta_1\leq\theta_2\leq\ldots\leq\theta_k\leq\frac{\pi}{2}$ called the principal angles between $U$ and $W$, the first one defined as
 \[\theta_1\coloneq\min\left\{\arccos\left(\frac{|\langle u,w\rangle|}{\|u\|\|w\|}\right)\middle |u\in U\land w\in W\right\}=\angle(u_1\in U,w_1\in W),\]
 The vectors $u_1$ and $w_1$ are the corresponding principal vectors.
 
@@ -485,10 +496,10 @@ Dummy indices such as $\mu$ and $\nu$ are used to indicate contravariant and cov
 
 We use a superscript of $r$ dummy indices and a subscript of $s$ dummy indices to indicate a tensor of type $(r,s)$, i.e., $(V^*)^r\times V^s\to\bbR$ for vector space $V$, such as $T^{\mu_1\ldots\mu_r}_{\nu_1\ldots\nu_s}$. Each $i$th component of each upper index $\mu$ is denoted by replacing $\mu$ with $i$. Each $i$th component of each lower index $\mu$ is denoted by replacing $\mu$ with $i$. For vectors, that is, $A^{\mu}=(A^0,A^1,A^2,A^3)$. For covectors, that is, $A_{\mu}=(A_0,A_1,A_2,A_3)$.
 
-Each upper index $\mu$ is fixed to a summation $\sum_{\mu=0}^{\dim V}$ when it takes an input of the same upper index $\mu$, i.e.
-\[T^{\mu\ldots_1}_{\ldots_2}U^{\mu\ldots_3}_{\ldots_4}=\sum_{\mu=0}^{\dim V}T^{\mu\ldots_1}_{\ldots_2}U^{\mu\ldots_3}_{\ldots_4}.\]
-Each lower index $\mu$ is fixed to a summation $\sum_{\mu=0}^{\dim V}$ when it takes an input of the same lower index $\mu$, i.e.
-\[T^{\ldots_1}_{\mu\ldots_2}U^{\ldots_3}_{\mu\ldots_4}=\sum_{\mu=0}^{\dim V}T^{\ldots_1}_{\mu\ldots_2}U^{\ldots_3}_{\mu\ldots_4}.\]
+Each upper index $\mu$ is fixed to a summation $\sum_{\mu=0}^{\dim(V)}$ when it takes an input of the same upper index $\mu$, i.e.
+\[T^{\mu\ldots_1}_{\ldots_2}U^{\mu\ldots_3}_{\ldots_4}=\sum_{\mu=0}^{\dim(V)}T^{\mu\ldots_1}_{\ldots_2}U^{\mu\ldots_3}_{\ldots_4}.\]
+Each lower index $\mu$ is fixed to a summation $\sum_{\mu=0}^{\dim(V)}$ when it takes an input of the same lower index $\mu$, i.e.
+\[T^{\ldots_1}_{\mu\ldots_2}U^{\ldots_3}_{\mu\ldots_4}=\sum_{\mu=0}^{\dim(V)}T^{\ldots_1}_{\mu\ldots_2}U^{\ldots_3}_{\mu\ldots_4}.\]
 The indexing replaces the order of them in a formula and makes the multiplication notation of tensors work without extra notations.
 \subsection{Two dimensional Euclidean vector space}
 \subsubsection{Quadrant (象限)}
@@ -1037,28 +1048,28 @@ is $\ker(L)$, and $\ker(L)$ is also denoted as $\ker(\mb{A})$ or $\Null(\mb{A})$
 The left null space of a linear map $L\colon V\to W$ is defined as $\ker(L^{-1})$. The dimension of it is called left nullity.
 \subsubsection{Image space (像空間) or range (值域)}
 The image space of a linear map $T\colon V\to W$, denoted as $\operatorname{im}(T)$, is defined as,
-\[\operatorname{im}(T)=\{T(v):\,v\in V\}.\]
+\[\operatorname{im}(T)=\{T(v)\colon v\in V\}.\]
 \subsubsection{Cokernel (餘核)}
 The cokernel of a linear map $T\colon V\to W$, denoted as $\operatorname{coker}(T)$, is defined as,
 \[\operatorname{coker}(T)=W\setminus\operatorname{im}(T).\]
 \subsection{Rank and nullity}
-\subsubsection{Rank (秩)}
-The rank of a matrix \(\mathbf{A}\), denoted as \( \operatorname{rank}(\mathbf{A}) \) or $\operatorname{rk}(\mathbf{A})$, is defined as the dimension of its column space (or row space, which are the same by constant rank theorem), that is,
-\[\text{rank}(\mathbf{A})=\dim\operatorname{Col}(\mathbf{A})\]
 \subsubsection{Constant rank theorem (常秩定理)}
 For any matrix $\mathbf{A}$:
-\[\dim\operatorname{Col}(\mathbf{A})=\dim\operatorname{Row}(\mathbf{A})\]
+\[\dim(\Col(\mb{A}))=\dim(\Row(\mb{A}))\]
 \begin{proof}
-Let $\mathbf{A}$ be an $m\times n$ matrix, $r=\dim\operatorname{Col}\qty(\mathbf{A})$, $ c_{1},c_{2},\ldots ,c_{r}$ be a basis of $\operatorname{Col}(\mathbf{A})$, matrix $\mathbf{C}=[c_{1},c_{2},\ldots ,c_{r}]$, and $r\times n$ matrix $\mathbf{R}$ such that $\mathbf{A}=\mathbf{C}\mathbf{R}$. 
+Let $\mathbf{A}$ be an $m\times n$ matrix, $r=\dim(\Col(\mb{A}))$, $ c_{1},c_{2},\ldots ,c_{r}$ be a basis of $\operatorname{Col}(\mathbf{A})$, matrix $\mathbf{C}=[c_{1},c_{2},\ldots ,c_{r}]$, and $r\times n$ matrix $\mathbf{R}$ such that $\mathbf{A}=\mathbf{C}\mathbf{R}$. 
 
 Since:
 \[\operatorname{Row}(\mathbf{A})\subseteq\operatorname{Row}(\mathbf{R})\]
-\[\dim\operatorname{Row}(\mathbf{A})\leq\dim\operatorname{Row}(\mathbf{R})\leq r=\dim\operatorname{Col}(\mathbf{A})\]
+\[\dim(\Row(\mb{A}))\leq\dim(\Row(\mb{R}))\leq r=\dim(\Col(\mb{A}))\]
 Similarly, we can obtain that
-\[\dim\operatorname{Col}(\mathbf{A})\leq\dim\operatorname{Row}(\mathbf{A})\]
+\[\dim(\Col(\mb{A}))\leq\dim(\Row(\mb{A}))\]
 Therefore,
-\[\dim\operatorname{Col}(\mathbf{A})=\dim\operatorname{Row}(\mathbf{A})\]
+\[\dim(\Col(\mb{A}))=\dim(\Row(\mb{A}))\]
 \end{proof}
+\subsubsection{Rank (秩)}
+The rank of a matrix \(\mathbf{A}\), denoted as \( \operatorname{rank}(\mathbf{A}) \) or $\operatorname{rk}(\mathbf{A})$, is defined as the dimension of its column space
+\[\text{rank}(\mathbf{A})=\dim(\Col(\mb{A}))\]
 \subsubsection{Rank-nullity theorem (秩—零化度定理)}
 For any $m\times n$ matrix $\mathbf{A}$:
 \[\rank(\mathbf{A})+\dim(\ker(\mathbf{A}))=n\]
@@ -1104,6 +1115,12 @@ This proves that any vector \(\mathbf{u}\) that is a solution of \(\mathbf{Ax} =
 
 Hence, the column space of \(\mathbf{X}\) is the null space of \(\mathbf{A}\). Therefore, the nullity of \(\mathbf{A}\) is \(n - r\). Since \(r\) is the rank of \(\mathbf{A}\), it follows that \(\text{rank}(\mathbf{A}) + \ker(\mathbf{A}) = n\).
 \end{proof}
+\sssc{Kernel extension theorem}
+For a linear map $T\colon U\to V$,
+\[\dim(\im(T))+\dim(\ker(T))=\dim(U)\]
+\bpr
+By isomorphism of linear map and standard matrix, this is equivalent to rank-nullity theorem.
+\epr
 \subsubsection{Rank-left nullity theorem}
 For any $m\times n$ matrix $\mathbf{A}$:
 \[\rank(\mathbf{A})+\dim(\ker(\mathbf{A}^{\top}))=m\]
@@ -1158,6 +1175,11 @@ Counterexample for left kernel:
 \[A=\begin{bmatrix}1&0\\0&0\end{bmatrix}\]
 \[B=\begin{bmatrix}1&0\\1&0\end{bmatrix}\]
 $B$ is obtained by adding row 1 of $A$ to row 2, but $\ker(A^\top)=\span\qty{\begin{bmatrix}0\\1\end{bmatrix}}$ and $\ker(B^\top)=\span\qty{\begin{bmatrix}1\\-1\end{bmatrix}}$ are different.
+\epr
+\sssc{Nonzero row of RREF is basis of row space}
+The nonzero rows of the reduced row echelon form $R$ of a matrix $A$ constitute a basis for the row space of $A$.
+\bpr
+The nonzero rows of $R$ are clearly linaerly independent since their leading entries are the only nonzero entry in the column. And clearly they are also spainng set of $\Row(R)=\Row(A)$.
 \epr
 \subsubsection{Row-equivalence is an equivalence relation}
 Row-equivalence is an equivalence relation.
@@ -1228,7 +1250,7 @@ Thus, the solution space is an affine space with the kernel of its coefficient m
 \subsubsection{Zero nullity}
 For a matrix $A\in\bbR^{m\times n}$, the followings are equivalent:
 \bit
-\item $A$ has zero nullity (i.e., $\rank(A)=\dim\Col(A)=\dim\Row(A)=n$).
+\item $A$ has zero nullity, i.e., $\rank(A)=\dim(\Col(A))=\dim(\Row(A))=n$.
 \item The linear system $Ax=b$ has at most one solution.
 \bpr
 If consistent, since the associated vector space $\ker(A)$ of solution space is $\{\mb{0}\}$, the solution space has only one element.
@@ -1240,10 +1262,10 @@ If consistent, since the associated vector space $\ker(A)$ of solution space is 
 \subsubsection{Zero left nullity}
 For a matrix $A\in\bbR^{m\times n}$, the followings are equivalent:
 \bit
-\item $A$ has zero left nullity (i.e., $\rank(A)=\dim\Col(A)=\dim\Row(A)=m$).
+\item $A$ has zero left nullity, i.e., $\rank(A)=\dim(\Col(A))=\dim(\Row(A))=m$.
 \item The linear system $Ax=b$ is consistent for all $b$.
 \bpr
-Since $\dim\Col(A)=m$, the column space is $\bbR^m$, thus the constant term vector is in the column space. By column space test for consistency of linear system, the system is consistent.
+Since $\dim(\Col(A))=m$, the column space is $\bbR^m$, thus the constant term vector is in the column space. By column space test for consistency of linear system, the system is consistent.
 \epr
 \item The linear map whose standard matrix is $A$ is surjective.
 \eit
