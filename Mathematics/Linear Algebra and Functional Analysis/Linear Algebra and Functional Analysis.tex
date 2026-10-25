@@ -582,25 +582,25 @@ Counterexample:
 Given an $n\times n$ matrix $\mathbf{A}$ and $n\times n$ identity matrix $\mathbf{I}$, $\mathbf{A}^0$ is defined as $\mathbf{I}$.
 \subsubsection{Trace (跡)}
 The trace of a matrix $\mb{A}$ is the sum of all diagonal entries of $\mb{A}$, denoted as $\tr(\mb{A})$.
-\subsection{Matrix row and column operations}
-\subsubsection{Elementary row operations (zh-hant: 列/zh-hans: 行運算) and elementary column operations (zh-hant: 行/zh-hans: 列運算)}
+\subsection{Elementary row operations}
+\subsubsection{Elementary row operations (運算)}
 Elementary row operations include:
 \bit
-\item Row addition (zh-hant: 列/zh-hans: 行相加): Adding a row multiplied by a nonzero constant to another.
-\item Row multiplication/scaling (zh-hant: 列/zh-hans: 行加倍): Multiplying a row by a nonzero constant.
-\item Row interchange/swap/switch (zh-hant: 列/zh-hans: 行交換): Interchanging two rows of a matrix.
+\item Row addition (相加): Adding a row $j$ multiplied by a nonzero constant $c$ to another row $i\ne j$, denoted as $R_i\leftarrow R_i+cR_j$.
+\item Row multiplication/scaling (加倍): Multiplying a row $i$ by a nonzero constant $c$, denoted as $R_i\leftarrow cR_i$.
+\item Row interchange/swap/switch (交換): Interchanging two rows $i,j$, denoted as $R_i\leftrightarrow R_j$.
 \eit
-Elementary column operations are defined the same with row replaced with column.
-
 If one matrix can be transformed to another through a sequence of elementary row operations, the two matrices are called row-equivalent.
+\sssc{Elementary column operations}
+Elementary column operations are defined the same as row replaced with column and $R$ replaced with $C$.
 
 If one matrix can be transformed to another through a sequence of elementary column operations, the two matrices are called column-equivalent.
-\subsubsection{Row operation as matrix multiplication and elementary matrix}
-Every elementary row operation on a $m\times n$ matrix $A$ can be performed by left-multiplying an appropriate $m\times m$ matrix:
+\subsubsection{Elementary ow operation as matrix multiplication and elementary matrix}
+Every elementary row operation on a $m\times n$ matrix $A$ can be performed by left-multiplying an appropriate $m\times m$ matrix $E$:
 \bit
-\item Row addition: Adding row $i$ multiplied by $k\ne0$ to row $j$ can be performed by left-multiplying $I_m$ with the $j,i$th entry replaced with $k$.
-\item Row multiplication: Multiplying row $i$ by a constant $k\ne0$ can be performed by left-multiplying $I_m$ with the $i,i$th entry replaced with $k$.
-\item Row interchange: Interchanging row $i$ and row $j$ can be performed by left-multiplying $I_m$ with row $i$ and row $j$ interchanged.
+\item Row addition $R_i\leftarrow R_i+cR_j$: $E$ is $I_m$ with the $j,i$ entry replaced with $c$. 
+\item Row multiplication $R_i\leftarrow cR_i$: $E$ is $I_m$ with the $i,i$ entry replaced with $c$. 
+\item Row interchange $R_i\leftrightarrow R_j$: $E$ is $I_m$ with the row $i$ and the row $j$ interchanged.
 \eit
 A square matrix is called elementary matrix if it can be obtained from the identity matrix of its size with a single elementary row operations.
 
@@ -709,7 +709,7 @@ Every elementary matrix is invertible. Moreover, the inverse of an elementary is
 \item Row multiplication: The inverse of $I_m$ with the $i,i$th entry replaced with $k$ is $I_m$ with the $i,i$th entry replaced with $\frac{1}{k}$.
 \item Row interchange: The inverse of $I_m$ with row $i$ and row $j$ interchanged is itself.
 \eit
-Thus, for any two row-equivalent $m\times n$ matrices $A,B$, there exists an $m\times m$ invertible matrix $C$, which is the product of a sequence of $m\times m$ elementary matrices, such that $B=CA$.
+Thus, for any two row-equivalent $m\times n$ matrices $A,B$, there \forall n\in\bbZ\colonexists an $m\times m$ invertible matrix $C$, which is the product of a sequence of $m\times m$ elementary matrices, such that $B=CA$.
 \subsection{Determinant}
 \subsubsection{Determinant (行列式或判別式), cofactor (餘因子), cofactor matrix, and adjugate matrix (伴隨矩陣) or classical adjoint (經典伴隨矩陣)}
 Let $\mathbf{A}_{ij}$ denote the submatrix of $\mathbf{A}$ without the $i$th row and $j$th column.
@@ -733,18 +733,18 @@ The cofactor matrix $\mathrm{cof}(\mathbf{A})$ of $\mathbf{A}$ is an $n\times n$
 The adjugate matrix or classical adjoint matrix $\mathrm{adj}(\mathbf{A})$ of $\mathbf{A}$ is an $n\times n$ matrix defined as
 \[\mathrm{adj}(\mathbf{A})=\mathrm{cof}(\mathbf{A})^\top\]
 \subsubsection{Determinant identities}
-Let $\mathbf{A}$ and $\mathbf{A}_i$ be square matrices.
-\[\det\qty(\sum_{i=1}^n\mathbf{A}_i)=\sum_{i=1}^n\det\qty(\mathbf{A}_i)\]
-\[\det\qty(\prod_{i=1}^n\mathbf{A}_i)=\prod_{i=1}^n\det\qty(\mathbf{A}_i)\]
-\[\det(\mathbf{A})\neq 0\implies\det(\mathbf{A}^n)\neq 0\]
-\subsubsection{Determinant property}
+Let $A$ and $A_i$ be square matrices.
+\[\det\qty(\prod_{i=1}^nA_i)=\prod_{i=1}^n\det\qty(A_i)\]
+\[\det(A)\neq 0\iff\exists A^{-1}\implies\det(A^{-1})=\frac{1}{\det(A)}\]
+\[\det(\mb{I}_n)=1\]
+\subsubsection{Determinant under elementary row operations}
+For a square matrix $A$ and an elementary row operation that transforms $A$ to $B$,
 \bit
-\item When a row (or column) is added to another, the determinant remains unchanged.
-\item When all entries of a row (or column) is multiplied by a real number $n$, the determinant is multiplied by $n$.
-\item When two rows (or columns) are swapped, the determinant is multiplied by $-1$.
-\item Given matrix $\mb{A}$ and its inverse $\mb{A}^{-1}$, $\det(\mb{A}^{-1})=\frac{1}{\det(\mb{A})}$.
+\item Row addition $R_i\leftarrow R_i+cR_j$: $\det(B)=\det(A)$.
+\item Row multiplication $R_i\leftarrow cR_i$: $\det(B)=c\det(A)$.
+\item Row interchange $R_i\leftrightarrow R_j$: $\det(B)=\det(A)$.
 \eit
-\subsection{Special matrix}
+\subsection{Special matrices}
 \subsubsection{Diagonal matrix (對角矩陣)}
 A diagonal matrix is a square matrix whose all off-diagonal entries are the additive identity of $0_{F}$.
 \subsubsection{Diagonal matrix inverse}
