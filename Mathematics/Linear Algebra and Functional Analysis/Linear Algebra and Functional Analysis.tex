@@ -81,11 +81,11 @@ Nonempty and closed under scalar multiplication implies contains the zero vector
 
 A subspace that contains only zero vector is called zero subspace, and a subspace that is not a zero subspace is called a nonzero subspace.
 \subsubsection{Linear span, linear hull, or span}
-A span of a subset $S$, denoted as $\span(S)$ or $\langle S\rangle$, of a vector space $V$ is the smallest linear subspace containing $S$, and it is called that $S$ is a generating/spanning set of $\span(S)$ and $S$ generates/spans $\span(S)$. If $\span(S)=V$, $S$ is called a generating/spanning set.
+A span of a subset $S$, denoted as $\Span(S)$ or $\langle S\rangle$, of a vector space $V$ is the smallest linear subspace containing $S$, and it is called that $S$ is a generating/spanning set of $\Span(S)$ and $S$ generates/spans $\Span(S)$. If $\Span(S)=V$, $S$ is called a generating/spanning set.
 \sssc{Span of nonempty subset is subspace}
-Let $V$ be a vector space over $F$, and $S$ be a nonempty subset of $V$. Then $\span(S)$ is a linear subspace of $V$.
+Let $V$ be a vector space over $F$, and $S$ be a nonempty subset of $V$. Then $\Span(S)$ is a linear subspace of $V$.
 \bpr
-Let $S=\{s_1,\ldots,s_n\}$ and $W=\span(S)$.
+Let $S=\{s_1,\ldots,s_n\}$ and $W=\Span(S)$.
 \bit
 \item Contains the zero vector: Since $S$ is nonempty, choose any $v\in S$, $0=0v\in W$.
 \item Closed under vector addition: For any $u,v\in W$, we have
@@ -100,18 +100,18 @@ Then
 \eit
 \epr
 \subsubsection{In the span iff new span unchanged}
-Let $S$ be a set of vectors and $v$ be a vector. $v\in\span(S)$ iff $\span(S)=\span(S\cup\{v\})$.
+Let $S$ be a set of vectors and $v$ be a vector. $v\in\Span(S)$ iff $\Span(S)=\Span(S\cup\{v\})$.
 \bpr
-Only if: Suppose $v\in\span(S)$. We can write $v$ as a linear combination of vectors in $S$. For any $w\in\span(S\cup\{v\})$, we can write $w$ as a linear combination of vectors in $S\cup\{S\}$. By replacing $v$ with the linear combination of vectors in $S$, we can write $w$ as a linear combination of vectors in $S$.
+Only if: Suppose $v\in\Span(S)$. We can write $v$ as a linear combination of vectors in $S$. For any $w\in\Span(S\cup\{v\})$, we can write $w$ as a linear combination of vectors in $S\cup\{S\}$. By replacing $v$ with the linear combination of vectors in $S$, we can write $w$ as a linear combination of vectors in $S$.
 
-If: Suppose $v\notin\span(S)$. Since $v=1v$, $v\in\span(S\cup\{v\})\setminus S$, thus $\span(S)\ne\span(S\cup\{v\})$.
+If: Suppose $v\notin\Span(S)$. Since $v=1v$, $v\in\Span(S\cup\{v\})\setminus S$, thus $\Span(S)\ne\Span(S\cup\{v\})$.
 \epr
 \subsubsection{Linear independence (線性獨立)}
 A set of vectors \(\{v_1,\ldots,v_n\}\) is linearly independent iff the equation:
 \[\sum_{i=1}^nc_iv_i=0 \]
 is true only if all coefficients \(c_1,c_2, \dots,c_n\) are zero, then the set of vectors is linearly independent; otherwise the set of vectors is linearly dependent.
 \subsubsection{Linearly dependent set condition}
-A set $S$ of vectors is linearly dependent iff either $\mb{0}\in S$ or there exists $v\in S$ such that $v\in\span(S\setminus\{v\})$.
+A set $S$ of vectors is linearly dependent iff either $\mb{0}\in S$ or there exists $v\in S$ such that $v\in\Span(S\setminus\{v\})$.
 \bpr
 If $\mb{0}\in S$, its coefficient can be any. Otherwise, pick a nonzero $c_k$, the corresponding vector can be written as a linear combination of others.
 \epr
@@ -126,19 +126,19 @@ Only if: Suppose $Y$ is proper subset of $X$ such that the span of $Y$ is the sp
 \epr
 \subsubsection{Spanning set element exchange theorem}
 Let $S$ be a set of vectors and $v$ be a nonzero vector.
-\[v\in\span(S)\implies\exists w\in S\colon \span(S)=\span(S\setminus\{w\}\cup\{v\})\]
+\[v\in\Span(S)\implies\exists w\in S\colon \Span(S)=\Span(S\setminus\{w\}\cup\{v\})\]
 \bpr
 Write $v$ as a linear combination of elements of $S$. Choose one of them with nonzero coefficient, $w$, which must exist since $v$ is nonzero, $w$ can be written as a linear combination of elements in $S\setminus\{w\}\cup\{v\}$.
 \epr
 Let $S$ be a set of linearly independent vectors and $v$ be a nonzero vector.
-\[v\in\span(S)\iff\exists w\in S\colon \span(S)=\span(S\setminus\{w\}\cup\{v\})\]
+\[v\in\Span(S)\iff\exists w\in S\colon \Span(S)=\Span(S\setminus\{w\}\cup\{v\})\]
 \bpr
-Write $w$ as a linear combination of elements of elements in $(S\setminus\{w\}\cup\{v\}$. The $v$ term must have nonzero coefficient since otherwise $w\in\span(S\setminus\{w\})$ and $S$ is not linearly independent. Rearrange the linear combination gives $v$ as a linear combination of elements in $S$.
+Write $w$ as a linear combination of elements of elements in $(S\setminus\{w\}\cup\{v\}$. The $v$ term must have nonzero coefficient since otherwise $w\in\Span(S\setminus\{w\})$ and $S$ is not linearly independent. Rearrange the linear combination gives $v$ as a linear combination of elements in $S$.
 \epr
 \subsubsection{Steinitz exchange lemma}
-Let $U$ be a set of $m\in\bbN$ linearly independent vectors and $W$ be a set of $n\in\bbN$ vectors such that $U\subseteq\span(W)$. Then, $m\le n$, and, there exists a subset $W'$ of $W$ such that $\abs{W'}\le n-m$ and $\span(U\cup W')=\span(W)$.
+Let $U$ be a set of $m\in\bbN$ linearly independent vectors and $W$ be a set of $n\in\bbN$ vectors such that $U\subseteq\Span(W)$. Then, $m\le n$, and, there exists a subset $W'$ of $W$ such that $\abs{W'}\le n-m$ and $\Span(U\cup W')=\Span(W)$.
 \bpr
-First statement: Write both $U$ and $W$ as column vectors of arbitrary order. By $U\subseteq\span(W)$, there exists $A\in F^{m\times n}$ such that $U=AW$. Because $U$ is linearly independent, $A$ must have row rank $m$. Since $\rank(A)\le\min(m,n)$, $m\le n$.
+First statement: Write both $U$ and $W$ as column vectors of arbitrary order. By $U\subseteq\Span(W)$, there exists $A\in F^{m\times n}$ such that $U=AW$. Because $U$ is linearly independent, $A$ must have row rank $m$. Since $\rank(A)\le\min(m,n)$, $m\le n$.
 
 Second statement: Let $W_0=W$. For each $u_i\in U$, write $u_i$ as a linear combination of elements of $W_{i-1}$. Choose one of them with nonzero coefficient, $w_i$, which must exist since $U$ is linearly independent, $w_i$ can be written as a linear combination of elements in $W_i\coloneq W_{i-1}\setminus\{w_i\}\cup\{u_i\}$.
 \epr
@@ -151,7 +151,7 @@ Assuming axiom of choice, a vector space that contains vector other than the zer
 \subsubsection{Dimension (維度) theorem (for vector spaces)}
 Given a vector space $V$, if there exists a basis $B$ of $V$, and that either $B$ is finite (proven below) or axiom of choice is assumed (not proven here), then all bases of $V$ have the same cardinality of $B$.
 \bpr
-Assume that $(u_1,\ldots,u_m)$ and $(v_1,\ldots,v_n)$ are two bases of vector space $V$. Since the existence of the coefficients and the fact that $u_1,\ldots,u_m,v_1,\ldots,v_n$ are nonzero, $u_1,\ldots,u_m\in\span(\{v_1,\ldots,v_n\})$ and $v_1,\ldots,v_n\in\span(\{u_1,\ldots,u_m\})$. By Steinitz exchange lemma, $m\le n$ and $n\le m$. Thus $m=n$.
+Assume that $(u_1,\ldots,u_m)$ and $(v_1,\ldots,v_n)$ are two bases of vector space $V$. Since the existence of the coefficients and the fact that $u_1,\ldots,u_m,v_1,\ldots,v_n$ are nonzero, $u_1,\ldots,u_m\in\Span(\{v_1,\ldots,v_n\})$ and $v_1,\ldots,v_n\in\Span(\{u_1,\ldots,u_m\})$. By Steinitz exchange lemma, $m\le n$ and $n\le m$. Thus $m=n$.
 \epr
 \sssc{Dimension}
 The dimension of a vector space $V$, denoted as $\dim(V)$, is defined as the cardinality of the bases of it.
@@ -160,23 +160,23 @@ The dimension of an affine space $V$, denoted as $\dim(V)$, is defined as the di
 \subsubsection{(Basis) extension theorem}
 Let $V$ be an $n$-dimensional vector space. For any linearly independent set of finitely many vectors $\{v_1,\ldots,v_m\}$ in $V$, if $m=n$, it is a basis; otherwise, there exists a set of $n-m$ vectors $\{v_{m+1},\ldots,v_n\}$ in $V$ such that $\{v_1,\ldots,v_n\}$ is linearly independent, and any such $v_1,\ldots,v_n$ is a basis of $V$.
 \bpr
-For $m=n$, we claim that $\span(\{v_1,\ldots,v_n\})=V$, thus $\{v_1,\ldots,v_n\}$ is a basis. For $m<n$, since $S\coloneq\span(\{v_1,\ldots,v_m\})$ is of dimension $m<n$, choose any $v_{m+1}\in V\setminus S$. Assume for contradiction that $\{v_1,\ldots,v_{m+1}\}$ is linearly dependent, we can write $v_{m+1}$ as a linear combination of $v_1,\ldots,v_m$, which means $v_{m+1}\in S$, which contradicts $v_{m+1}\in V\notin S$. Thus $\{v_1,\ldots,v_{m+1}\}$ is linearly independent. We can repeat until $n$ such that $\span(\{v_1,\ldots,v_n\})=V$.
+For $m=n$, we claim that $\Span(\{v_1,\ldots,v_n\})=V$, thus $\{v_1,\ldots,v_n\}$ is a basis. For $m<n$, since $S\coloneq\Span(\{v_1,\ldots,v_m\})$ is of dimension $m<n$, choose any $v_{m+1}\in V\setminus S$. Assume for contradiction that $\{v_1,\ldots,v_{m+1}\}$ is linearly dependent, we can write $v_{m+1}$ as a linear combination of $v_1,\ldots,v_m$, which means $v_{m+1}\in S$, which contradicts $v_{m+1}\in V\notin S$. Thus $\{v_1,\ldots,v_{m+1}\}$ is linearly independent. We can repeat until $n$ such that $\Span(\{v_1,\ldots,v_n\})=V$.
 \epr
 \sssc{Linearly independent set of dimension cardinality is a basis}
 Given a vector space $V$, if there exists a basis $B$ of $V$, and that either $B$ is finite (proven below) or axiom of choice is assumed (not proven here), then any linearly independent subset of $V$ with the same cardinality of $B$ is a basis of $V$.
 \bpr
-Assume that $S$ is a basis, $T$ is a linear independent set, and $\abs{S}=\abs{T}=n$. Since $S$ is a basis, for every $v\in T$, $v\in\span(S)=V$. By spanning set element exchange theorem,
-\[v\in\span(S)\iff\exists w\in S\colon\span(S)=\span((S\setminus\{w\}\cup\{v\}))\]
+Assume that $S$ is a basis, $T$ is a linear independent set, and $\abs{S}=\abs{T}=n$. Since $S$ is a basis, for every $v\in T$, $v\in\Span(S)=V$. By spanning set element exchange theorem,
+\[v\in\Span(S)\iff\exists w\in S\colon\Span(S)=\Span((S\setminus\{w\}\cup\{v\}))\]
 Exchange one-by-one gives
-\[\span(S)=\span(T)\]
+\[\Span(S)=\Span(T)\]
 Thus, $T$ is a basis.
 \epr
 \sssc{Subspace dimension theorem}
 A linear subspace $U$ of a finite-dimensional vector space $V$ has at most $\dim(V)$ dimensions. Moreover, if $\dim(U)=\dim(V)$, $U=V$.
 \bpr
-First statement: Let $\dim(V)=n$. Assume for contradiction that $S$ is a basis for $U$ with cardinality $m>n$. Take $T$ a subset of $S$ with cardinality $n$. By linearly independent set of dimension cardinality is a basis, $\span(T)=V\supseteq U\supseteq\span(S)$. Since $S\setminus T\ne\varnothing$ and $S$ is linearly independent, $\span(T)$ must be a proper subset of $\span(S)$, contradicting that $\span(T)$ is a super set of $\span(S)$.
+First statement: Let $\dim(V)=n$. Assume for contradiction that $S$ is a basis for $U$ with cardinality $m>n$. Take $T$ a subset of $S$ with cardinality $n$. By linearly independent set of dimension cardinality is a basis, $\Span(T)=V\supseteq U\supseteq\Span(S)$. Since $S\setminus T\ne\varnothing$ and $S$ is linearly independent, $\Span(T)$ must be a proper subset of $\Span(S)$, contradicting that $\Span(T)$ is a super set of $\Span(S)$.
 
-Second statement: Let $u$ be basis of $U$. Since $U\subseteq V$, $u\subseteq V$. By linearly independent set of dimension cardinality is a basis, $u$ is a basis of $V$. Therefore $U=\span(u)=V$.
+Second statement: Let $u$ be basis of $U$. Since $U\subseteq V$, $u\subseteq V$. By linearly independent set of dimension cardinality is a basis, $u$ is a basis of $V$. Therefore $U=\Span(u)=V$.
 \epr
 \sssc{Basis equivalences}
 For a subset of a vector space $V$, the followings are equivalent
@@ -193,16 +193,16 @@ $1\implies 2$: By the existence of solution for $\sum_{i=1}c_iv_i=v$ for every $
 
 $4\implies 1$: Let $V$ has dimension $n$. By subspace dimension theorem, a linearly independent set of cardinality more than $n$ cannot exist, thus $n$ is the maximum cardinality of linearly independent sets. By linearly independent set of dimension cardinality is a basis, all linearly independent set of dimension $n$ is a basis.
 
-$2\implies 4$: Let $S$ be a linearly independent spanning set and $\abs{S}=n$. Assume that $T$ is a linearly independent set with cardinality $m\ge n$. By spanning set element exchange theorem and that $T\subseteq\span(S)=V$, there exists a subset $U$ of $T$ of cardinality $n$ such that $\span(U)=\span(S)=V$. By linearly independent set is minimum spanning set, $T=U$. Thus, $m=n$. Thus $n$ is the maximum cardinality of linearly independent set.
+$2\implies 4$: Let $S$ be a linearly independent spanning set and $\abs{S}=n$. Assume that $T$ is a linearly independent set with cardinality $m\ge n$. By spanning set element exchange theorem and that $T\subseteq\Span(S)=V$, there exists a subset $U$ of $T$ of cardinality $n$ such that $\Span(U)=\Span(S)=V$. By linearly independent set is minimum spanning set, $T=U$. Thus, $m=n$. Thus $n$ is the maximum cardinality of linearly independent set.
 \epr
 \sssc{(Basis) reduction theorem}
 Let $V$ be an $n$-dimensional vector space. For any finite generating set $S$ of $V$, if $\abs{S}=n$, it is a basis; otherwise, there exists an $n$-vector subset $T$ of $S$ that is linearly independent, and any such $T$ is a basis of $V$.
 \bpr
 By basis is minimal spanning set, $\abs{S}\ge n$, and $\abs{S}=n$ implies that $S$ is a basis.
 
-Let $S'=S\setminus\{0\}$, and $m=\abs{S'}$. It's obvious that $\span(S)'=\span(S)$. If $m=n$, $S'$ is a basis.
+Let $S'=S\setminus\{0\}$, and $m=\abs{S'}$. It's obvious that $\Span(S)'=\Span(S)$. If $m=n$, $S'$ is a basis.
 
-Case $m>n$: Take a basis $T$. By spanning set element exchange theorem and that $S\subseteq\span(T)=V$, there exists a subset $U$ of $S$ of cardinality $n$ such that $\span(U)=\span(T)=V$. $U$ is a basis.
+Case $m>n$: Take a basis $T$. By spanning set element exchange theorem and that $S\subseteq\Span(T)=V$, there exists a subset $U$ of $S$ of cardinality $n$ such that $\Span(U)=\Span(T)=V$. $U$ is a basis.
 \epr
 \sssc{Spanning of dimension cardinality is a basis}
 Given a vector space $V$, if there exists a basis $B$ of $V$, and that either $B$ is finite (proven below) or axiom of choice is assumed (not proven here), then any spanning set of $V$ with the same cardinality of $B$ is a basis of $V$.
@@ -1169,12 +1169,12 @@ The statement does not hold for column space and left kernel.
 Counterexample for column space:
 \[A=\begin{bmatrix}1\\0\end{bmatrix}\]
 \[B=\begin{bmatrix}0\\1\end{bmatrix}\]
-$B$ is obtained by row swapping $A$, but $\Col(A)=\span\qty{\begin{bmatrix}1\\0\end{bmatrix}}$ and $\Col(B)=\span\qty{\begin{bmatrix}0\\1\end{bmatrix}}$ are different.
+$B$ is obtained by row swapping $A$, but $\Col(A)=\Span\qty{\begin{bmatrix}1\\0\end{bmatrix}}$ and $\Col(B)=\Span\qty{\begin{bmatrix}0\\1\end{bmatrix}}$ are different.
 
 Counterexample for left kernel:
 \[A=\begin{bmatrix}1&0\\0&0\end{bmatrix}\]
 \[B=\begin{bmatrix}1&0\\1&0\end{bmatrix}\]
-$B$ is obtained by adding row 1 of $A$ to row 2, but $\ker(A^\top)=\span\qty{\begin{bmatrix}0\\1\end{bmatrix}}$ and $\ker(B^\top)=\span\qty{\begin{bmatrix}1\\-1\end{bmatrix}}$ are different.
+$B$ is obtained by adding row 1 of $A$ to row 2, but $\ker(A^\top)=\Span\qty{\begin{bmatrix}0\\1\end{bmatrix}}$ and $\ker(B^\top)=\Span\qty{\begin{bmatrix}1\\-1\end{bmatrix}}$ are different.
 \epr
 \sssc{Nonzero row of RREF is basis of row space}
 The nonzero rows of the reduced row echelon form $R$ of a matrix $A$ constitute a basis for the row space of $A$.
