@@ -11,13 +11,7 @@
 \section{Vector Space and Functional}
 \subsection{General}
 \subsubsection{Vector space (向量空間) or Linear space (線性空間)}
-A vector space over a field $F$ is a non-empty set $V$ together with a binary operation and a binary function that satisfy the eight axioms listed below. In this context, the elements of $V$ are commonly called vectors, and the elements of $F$ are called scalars.
-
-The binary operation, called vector addition or simply addition assigns to any two vectors $v$ and $w$ in $V$ a third vector in $V$ which is commonly written as $v + w$, and called the sum of these two vectors.
-
-The binary function, called scalar multiplication, assigns to any scalar $a$ in $F$ and any vector $v$ in $V$ another vector in $V$, which is denoted $av$.
-
-To have a vector space, the eight following axioms must be satisfied for every $u$, $v$ and $w$ in $V$, and $a$ and $b$ in $F$.
+A vector space over a field $F$, whose elements are called scalars, is a set $V$, whose elements are called vectors, together with a binary operation over $V\times V$, called (vector) addition and denoted as $+$, and a binary function over $F\times V$, called scalar multiplication and denoted by concatenation, that satisfy the following eight axioms, for every $u,v,w$ in $V$, and $a,b$ in $F$,
 \begin{enumerate}
 \item Associativity of vector addition: $u + (v + w) = (u + v) + w$.
 \item Commutativity of vector addition: $u + v = v + u$.
@@ -28,7 +22,9 @@ To have a vector space, the eight following axioms must be satisfied for every $
 \item Distributivity of scalar multiplication with respect to vector addition: $a(u + v) = au + av$.
 \item Distributivity of scalar multiplication with respect to field addition: $(a + b)v = av + bv$.
 \end{enumerate}
-When the scalar field is the real numbers, the vector space is called a real vector space, and when the scalar field is the complex numbers, the vector space is called a complex vector space. These two cases are the most common ones, but vector spaces with scalars in an arbitrary field $F$ are also commonly considered. Such a vector space is called an $F$-vector space or a vector space over $F$.
+A vector space that contains only zero vector is called zero vector space, and a vector space that is not a zero vector space is called a nonzero vector space.
+
+When the field is the real numbers, the vector space is called a real vector space, and when the scalar field is the complex numbers, the vector space is called a complex vector space.
 \subsubsection{Linear combination (線性組合)}
 A linear combination of a series of vectors $(v_1,\ldots,v_n)$ in a vector space $V$ over a field $F$ is any vector of the form
 \[\sum_{i=1}^nc_iv_i\]
@@ -76,9 +72,33 @@ For any linear map $T\colon V\to W$, $u,v\in V$, and scalars $a,b$,
 A map $T\colon V\to W$ is Invertible if and only if it is bijective. The unique inverse of $T$, called $T^{-1}$, is defined to be:
 \[T^{-1}\colon W\to V;\,\forall v\in V\colon T(v)\mapsto v=T^{-1}(T(v)).\]
 \subsubsection{Linear subspace, vector subspace, or subspace}
-A linear subspace of a vector space is a subset of it that is closed under vector addition and scalar multiplication, and thus a vector space.
+A linear subspace of a vector space $V$ over field $F$ is a nonempty subset $W\subseteq V$ that is
+\bit
+\item closed under vector addition: $u,v\in W\implies u+v\in W$ and
+\item closed under scalar multiplication: $c\in F,u\in W\implies cu\in W$.
+\eit
+Nonempty and closed under scalar multiplication implies contains the zero vector, and thus $W$ is a vector space.
+
+A subspace that contains only zero vector is called zero subspace, and a subspace that is not a zero subspace is called a nonzero subspace.
 \subsubsection{Linear span, linear hull, or span}
-A span of a subset $S$, denoted as $\span S$ or $\langle S\rangle$, of a vector space is the smallest linear subspace containing $S$, and it is called that $S$ is a generating/spanning set of $\span S$ and $S$ generates/spans $\span S$.
+A span of a subset $S$, denoted as $\span S$ or $\langle S\rangle$, of a vector space $V$ is the smallest linear subspace containing $S$, and it is called that $S$ is a generating/spanning set of $\span S$ and $S$ generates/spans $\span S$. If $\span S=V$, $S$ is called a generating/spanning set.
+\sssc{Span of nonempty subset is subspace}
+Let $V$ be a vector space over $F$, and $S$ be a nonempty subset of $V$. Then $\span S$ is a linear subspace of $V$.
+\bpr
+Let $S=\{s_1,\ldots,s_n\}$ and $W=\span S$.
+\bit
+\item Contains the zero vector: Since $S$ is nonempty, choose any $v\in S$, $0=0v\in W$.
+\item Closed under vector addition: For any $u,v\in W$, we have
+\[u=\sum_{i=1}^na_is_i\]
+\[v=\sum_{i=1}^nb_is_i\]
+Then
+\[u+v=\sum_{i=1}^n(a_i+b_i)s_i\in W\]
+\item For any $c\in F,u\in W$, we have
+\[u=\sum_{i=1}^na_is_i\]
+Then
+\[cu=\sum_{i=1}^nca_is_i\in W\]
+\eit
+\epr
 \subsubsection{In the span iff new span unchanged}
 Let $S$ be a set of vectors and $v$ be a vector. $v\in\span S$ iff $\span S=\span(S\cup\{v\})$.
 \bpr
@@ -95,7 +115,7 @@ A set $S$ of vectors is linearly dependent iff either $\mb{0}\in S$ or there exi
 \bpr
 If $\mb{0}\in S$, its coefficient can be any. Otherwise, pick a nonzero $c_k$, the corresponding vector can be written as a linear combination of others.
 \epr
-\subsubsection{Linear independent set as minimum span generating set by order of inclusion}
+\subsubsection{Linearly independent set is minimal spanning set}
 A subset $X$ of a vector space is linearly dependent iff there exists a proper subset of $X$ whose span is the span of $X$.
 \bpr
 If: Let $X=\{x_1,\ldots,x_n\}$. There exist not all zero $c_i$ such that
@@ -106,12 +126,12 @@ Only if: Suppose $Y$ is proper subset of $X$ such that the span of $Y$ is the sp
 \epr
 \subsubsection{Spanning set element exchange theorem}
 Let $S$ be a set of vectors and $v$ be a nonzero vector.
-\[v\in\span S\implies\exists w\in S\colon w\in\span((S\setminus\{w\}\cup\{v\}))\]
+\[v\in\span S\implies\exists w\in S\colon \span S=\span(S\setminus\{w\}\cup\{v\})\]
 \bpr
 Write $v$ as a linear combination of elements of $S$. Choose one of them with nonzero coefficient, $w$, which must exist since $v$ is nonzero, $w$ can be written as a linear combination of elements in $S\setminus\{w\}\cup\{v\}$.
 \epr
 Let $S$ be a set of linearly independent vectors and $v$ be a nonzero vector.
-\[v\in\span S\iff\exists w\in S\colon w\in\span((S\setminus\{w\}\cup\{v\}))\]
+\[v\in\span S\iff\exists w\in S\colon \span S=\span(S\setminus\{w\}\cup\{v\})\]
 \bpr
 Write $w$ as a linear combination of elements of elements in $(S\setminus\{w\}\cup\{v\}$. The $v$ term must have nonzero coefficient since otherwise $w\in\span(S\setminus\{w\})$ and $S$ is not linearly independent. Rearrange the linear combination gives $v$ as a linear combination of elements in $S$.
 \epr
@@ -122,22 +142,61 @@ First statement: Write both $U$ and $W$ as column vectors of arbitrary order. By
 
 Second statement: Let $W_0=W$. For each $u_i\in U$, write $u_i$ as a linear combination of elements of $W_{i-1}$. Choose one of them with nonzero coefficient, $w_i$, which must exist since $U$ is linearly independent, $w_i$ can be written as a linear combination of elements in $W_i\coloneq W_{i-1}\setminus\{w_i\}\cup\{u_i\}$.
 \epr
-\subsubsection{Basis (基)}
+\subsubsection{Basis (基) and existence of basis}
 A basis of a vector space $V$ over a field $F$ is a set of linearly independent vectors $\{v_1,v_2,\ldots\}\subseteq V$ such that for any vector $v\in V$, there exist unique coefficients $c_1,c_2,\ldots\in F$ such that:
 \[\sum_{i=1}c_iv_i=v.\]
-Basis for a vector space containing only zero vector is undefined.
-\subsubsection{Orientation}
-The orientation of a vector space is the arbitrary choice of which ordered bases are "positively" oriented and which are "negatively" oriented.
-\subsubsection{Dimension (維度)}
-The dimension of a vector space $V$, denoted as $\dim V$, is defined as the cardinality of a basis of it, which is unique for finite-dimensional vector space (proven below), and is unique for infinite dimension if axiom of choice is assumed (not proven here).
+Thus, basis for a zero vector space is $\varnothing$.
+
+Assuming axiom of choice, a vector space that contains vector other than the zero vector must have bases (not proven here).
+\subsubsection{Dimension (維度) and dimension theorem (for vector spaces)}
+Dimension theorem states that, given a vector space $V$, if there exists a basis $B$ of $V$, and that either $B$ is finite (proven below) or axiom of choice is assumed (not proven here), all bases of $V$ have the same cardinality of $B$, and any linearly independent subset of $V$ with the same cardinality of $B$ is a basis of $V$.
 \bpr
-Assume that $(u_1,\ldots,u_m)$ and $(v_1,\ldots,v_n)$ are two bases of vector space $V$. Since the existence of the coefficients and the fact that $u_1,\ldots,u_m,v_1,\ldots,v_n$ are nonzero, $u_1,\ldots,u_m\in\span\{v_1,\ldots,v_n\}$ and $v_1,\ldots,v_n\in\span\{u_1,\ldots,u_m\}$. By Steinitz exchange lemma, $m\le n$ and $n\le m$. Thus $m=n$.
+First statement: Assume that $(u_1,\ldots,u_m)$ and $(v_1,\ldots,v_n)$ are two bases of vector space $V$. Since the existence of the coefficients and the fact that $u_1,\ldots,u_m,v_1,\ldots,v_n$ are nonzero, $u_1,\ldots,u_m\in\span\{v_1,\ldots,v_n\}$ and $v_1,\ldots,v_n\in\span\{u_1,\ldots,u_m\}$. By Steinitz exchange lemma, $m\le n$ and $n\le m$. Thus $m=n$.
+
+Second statement: Assume that $S$ is a basis, $T$ is a linear independent set, and $\abs{S}=\abs{T}=n$. Since $S$ is a basis, for every $v\in T$, $v\in\span S=V$. By spanning set element exchange theorem,
+\[v\in\span S\iff\exists w\in S\colon\span S=\span((S\setminus\{w\}\cup\{v\}))\]
+Exchange one-by-one gives
+\[\span S=\span T\]
+Thus, $T$ is a basis.
 \epr
+The dimension of a vector space $V$, denoted as $\dim V$, is defined as the cardinality of the bases of it.
+
 The dimension of an affine space $V$, denoted as $\dim V$, is defined as the dimension of its associated vector space.
-\subsubsection{Basis extension theorem}
-Let $V$ be a vector space such that there exists a basis of $V$ that contains $n\in\bbN$ nonzero vectors. For any linearly independent set of finitely many vectors $\{v_1,\ldots,v_m\}$ in $V$, if $m=n$, it is a basis; otherwise, there exists a set of $n-m$ vectors $\{v_{m+1},\ldots,v_n\}$ in $V$ such that $\{v_1,\ldots,v_n\}$ is linearly independent, and any such $v_1,\ldots,v_n$ is a basis of $V$.
+\subsubsection{(Basis) extension theorem}
+Let $V$ be an $n$-dimensional vector space. For any linearly independent set of finitely many vectors $\{v_1,\ldots,v_m\}$ in $V$, if $m=n$, it is a basis; otherwise, there exists a set of $n-m$ vectors $\{v_{m+1},\ldots,v_n\}$ in $V$ such that $\{v_1,\ldots,v_n\}$ is linearly independent, and any such $v_1,\ldots,v_n$ is a basis of $V$.
 \bpr
 For $m=n$, we claim that $\span\{v_1,\ldots,v_n\}=V$, thus $\{v_1,\ldots,v_n\}$ is a basis. For $m<n$, since $S\coloneq\span\{v_1,\ldots,v_m\}$ is of dimension $m<n$, choose any $v_{m+1}\in V\setminus S$. Assume for contradiction that $\{v_1,\ldots,v_{m+1}\}$ is linearly dependent, we can write $v_{m+1}$ as a linear combination of $v_1,\ldots,v_m$, which means $v_{m+1}\in S$, which contradicts $v_{m+1}\in V\notin S$. Thus $\{v_1,\ldots,v_{m+1}\}$ is linearly independent. We can repeat until $n$ such that $\span\{v_1,\ldots,v_n\}=V$.
+\epr
+\sssc{Subspace dimension theorem}
+A linear subspace $U$ of an $n$-dimensional vector space $V$ has at most $n$ dimensions.
+\bpr
+Assume for contradiction that $S$ is a basis for $U$ with cardinality $m>n$. Take $T$ a subset of $S$ with cardinality $n$. By dimension theorem, $\span T=V\supseteq U\supseteq\span S$. Since $S\setminus T\ne\varnothing$ and $S$ is linearly independent, $\span T$ must be a proper subset of $\span S$, contradicting that $\span T$ is a super set of $\span S$.
+\epr
+\sssc{Basis equivalences}
+For a subset of a vector space $V$, the followings are equivalent
+\ben
+\item It is a basis.
+\item It is a linearly independent spanning set.
+\item It is a minimal spanning set.
+\item It is a maximal linearly independent set.
+\een
+\bpr
+By linearly independent set is minimum spanning set, $2\iff 3$.
+
+$1\implie 2$: By the existence of solution for $\sum_{i=1}c_iv_i=v$ for every $v\in V$, a basis is a spanning set. By the uniqueness of solution for $\sum_{i=1}c_iv_i=0$, a basis is linearly independent.
+
+$4\implies 1$: Let $V$ has dimension $n$. By subspace dimension theorem, a linearly independent set of cardinality more than $n$ cannot exist, thus $n$ is the maximum cardinality of linearly independent sets. By dimension theorem, all linearly independent set of dimension $n$ is a basis.
+
+$2\implies 4$: Let $S$ be a linearly independent spanning set and $\abs{S}=n$. Assume that $T$ is a linearly independent set with cardinality $m\ge n$. By spanning set element exchange theorem and that $T\subseteq\span S=V$, there exists a subset $U$ of $T$ of cardinality $n$ such that $\span U=\span S=V$. By linearly independent set is minimum spanning set, $T=U$. Thus, $m=n$. Thus $n$ is the maximum cardinality of linearly independent set.
+\epr
+\sssc{(Basis) reduction theorem}
+Let $V$ be an $n$-dimensional vector space. For any finite generating set $S$ of $V$, if $\abs{S}=n$, it is a basis; otherwise, there exists an $n$-vector subset $T$ of $S$ that is linearly independent, and any such $T$ is a basis of $V$.
+\bpr
+By basis is minimal spanning set, $\abs{S}\ge n$, and $\abs{S}=n$ implies that $S$ is a basis.
+
+Let $S'=S\setminus\{0\}$, and $m=\abs{S'}$. It's obvious that $\span S'=\span S$. If $m=n$, $S'$ is a basis.
+
+Case $m>n$: Take a basis $T$. By spanning set element exchange theorem and that $S\subseteq\span T=V$, there exists a subset $U$ of $S$ of cardinality $n$ such that $\span U=\span T=V$. $U$ is a basis.
 \epr
 \sssc{Coordinate notation}
 For an $n$-dimensional vector space $V$ over field $F$ and a chosen ordered basis $B=(v_1,\ldots,v_n)$, every vector $v\in V$ can be represented as an $n$-scalar ordered tuple $(x_1,x_2,\ldots,x_n)$ where $x_1,\ldots,x_n\in F$ are such that
@@ -189,6 +248,8 @@ For a normed finite-dimensional vector space, a basis consisting of unit vectors
 Take a basis and divide every element with its norm.
 \epr
 When such a basis is chosen as the standard basis, its elements are called standard (unit/basis) vectors, and are often denoted with $\mb{e}_1,\mb{e}_2,\ldots$ if the basis is ordered.
+\subsubsection{Orientation}
+The orientation of a vector space is the arbitrary choice of which ordered bases are "positively" oriented and which are "negatively" oriented.
 \subsubsection{Sublinear function (亞線性函數) or quasi-seminorm (準半範數)}
 Let $p\colon X\to\mathbb{R}$ be a function on a vector space $X$ over the field $\mathbb{K}$, which is either $\mathbb{R}$ or $\mathbb{C}$. $p$ is called a sublinear function or quasi-seminorm if it satisfies the following conditions:
 \begin{enumerate}
@@ -737,12 +798,13 @@ Let $A$ and $A_i$ be square matrices.
 \[\det\qty(\prod_{i=1}^nA_i)=\prod_{i=1}^n\det\qty(A_i)\]
 \[\det(A)\neq 0\iff\exists A^{-1}\implies\det(A^{-1})=\frac{1}{\det(A)}\]
 \[\det(\mb{I}_n)=1\]
+\[\det(\mb{A}^\top)=\det(A)\]
 \subsubsection{Determinant under elementary row operations}
 For a square matrix $A$ and an elementary row operation that transforms $A$ to $B$,
 \bit
 \item Row addition $R_i\leftarrow R_i+cR_j$: $\det(B)=\det(A)$.
 \item Row multiplication $R_i\leftarrow cR_i$: $\det(B)=c\det(A)$.
-\item Row interchange $R_i\leftrightarrow R_j$: $\det(B)=\det(A)$.
+\item Row interchange $R_i\leftrightarrow R_j$: $\det(B)=-\det(A)$.
 \eit
 \subsection{Special matrices}
 \subsubsection{Diagonal matrix (對角矩陣)}
@@ -893,28 +955,26 @@ Since an elementary matrix is invertible with inverse being elementary matrix, w
 \[M=E_1^{-1}\ldots E_k^{-1}F_k\ldots F_1N,\]
 and that $M,N$ are row-equivalent.
 \epr
-\subsubsection{Cramer Rule or Cramer formula (克拉瑪公式)}
-Given a system of linear equations that can be written in the form:
-\[\mathbf{A}\mathbf{X}=\mathbf{C}\]
-where $\mathbf{A}$ is an $n\times n$ coefficient matrix, $\mathbf{X}$ is a variable matrix:
-\[\mathbf{X}=\begin{pmatrix}x_1, x_2, x_3, \ldots, x_n\end{pmatrix}^\top,\]
-and $\mathbf{C}$ is a coefficient matrix:
-\[\mathbf{C}=\begin{pmatrix}c_1, c_2, c_3, \ldots, c_n\end{pmatrix}^\top.\]
-Let \(\mathbf{A}_i\) be $\mathbf{A}$ with the \(i\)th column replaced by \(\mathbf{C}\). The solution to the system of linear equations is given by:
-\[\begin{cases}
-x_i=\frac{\det\qty(\mathbf{A}_i)}{\det\qty(\mathbf{A})},\quad\det\qty(\mathbf{A})\neq 0\\
-\text{inconsistent},\quad\det\qty(\mathbf{A})=0\land\bigvee_{i=1}^n\det\qty(\mathbf{A}_i)\neq 0\\
-\text{dependent},\quad\det\qty(\mathbf{A})=0\land\bigvee_{i=1}^n\det\qty(\mathbf{A}_i)=0
-\end{cases}\]
-where $x_i=\frac{\det\qty(\mathbf{A}_i)}{\det\qty(\mathbf{A})}$ can be geometrically viewed as the volume of the parallelogram formed by the column vectors of $\mathbf{A}_i$ divided by the volume of the parallelogram formed by the column vectors of $\mathbf{A}$.
-
-Particularly, when $\mathbf{C}$ is a zero matrix, that is,
-\[\mathbf{A}\mathbf{X}=\mathbf{0},\]
-the solution to the system of linear equations is given by:
-\[\begin{cases}
-x_i=0,\quad\det\qty(\mathbf{A})\neq 0\\
-\tx{dependent},\quad\det\qty(\mathbf{A})=0
-\end{cases}\]
+\subsubsection{Cramer's Rule or Cramer's formula (克拉瑪公式)}
+Consider a linear system
+\[Ax=b\]
+where $A\in\bbR^{n\times n}$, $b\in\bbR^n$, and
+\[x=(x_1,\ldots,x_n)^\top\]
+Let \(M_i\) be $A$ with the \(i\)th column replaced by \(b\).
+\bit
+\item Iff $\det(A)\ne 0$, the system is independent, and the unique solution is
+\[x_i=\frac{\det\qty(M_i)}{\det\qty(A)}\quad\forall i\in\bbN_{\le n}\]
+\item Iff $\det(A)=0$ and $\forall i\in\bbN_{\le n}\colon\det(M_i)=0$, the system is dependent.
+\item Iff $\det(A)=0$ and $\exists i\in\bbN_{\le n}\colon\det(M_i)\ne0$, the system is inconsistent.
+\eit
+Particularly, when $b=0$, i.e.,
+\[Ax=0\]
+\bit
+\item Iff $\det(A)\ne 0$, the system is independent, and the unique solution is
+\[x_i=0\quad\forall i\in\bbN_{\le n}\]
+\item Iff $\det(A)=0$, the system is dependent.
+\eit
+$x_i=\frac{\det\qty(M_i)}{\det\qty(A)}$ can be geometrically viewed as the volume of the hyper-parallelogram formed by the column vectors of $M_i$ divided by the volume of the parallelogram formed by the column vectors of $A$.
 \subsection{Row echelon form}
 \subsubsection{(General) row echelon form (REF) (（廣義）zh-hant: 列/zh-hans: 行階梯形式)}
 A matrix is said to be in row echelon form iff:
@@ -961,16 +1021,20 @@ Given the reduced row echelon form of the augmented matrix of a linear system, i
 The four fundamental subspaces of a matrix are the row space, column space, null space, and left null space.
 \subsubsection{Column space (zh-hant: 行/zh-hans: 列空間)}
 The column space of $\mathbf{A}$, denoted as \(\operatorname{Col}(\mathbf{A})\) or $\mathrm{\mathbf{C}}(\mathbf{A})$, is defined as the span of the set of column vectors of $\mathbf{A}$.
+
+If $\mb{A}$ is the standard matrix of a linear map $T$, then the range of $T$ is $\Col(\mb{A})$.
 \subsubsection{Row space (zh-hant: 列/zh-hans: 行空間)}
 The row space of $\mathbf{A}$, denoted as \(\operatorname{Row}(\mathbf{A})\), is defined as the span of the set of the row vectors of $\mathbf{A}$, that is, $\operatorname{Col}(\mathbf{A}^{\top})$.
 \subsubsection{Null space (零空間), kernel (核), or kernel space (核空間)}
 The kernel of a linear map $L\colon V\to W$, denoted as $\ker(L)$ or $\Null(L)$, is defined as:
-\[\ker(L)=\{v\in V:\,L(v)=0\}.\]
-$\dim\ker(\mathbf{A})$ is called nullity (零化度).
-\subsubsection{Left null space (左零空間), left kernel (左核), or left kernel space (左核空間)}
-The left null space of a linear map $L\colon V\to W$ is defined as $\ker(L^{-1})$.
+\[\ker(L)=\{v\in V\colon L(v)=0\}.\]
+The dimension of it is called nullity (零化度).
 
-$\dim\ker(L^{-1})$ is called left nullity.
+If $\mb{A}$ is the standard matrix of $L$, then the solution set of
+\[\mb{A}\mb{x}=\mb{0}\]
+is $\ker(L)$, and $\ker(L)$ is also denoted as $\ker(\mb{A})$ or $\Null(\mb{A})$.
+\subsubsection{Left null space (左零空間), left kernel (左核), or left kernel space (左核空間)}
+The left null space of a linear map $L\colon V\to W$ is defined as $\ker(L^{-1})$. The dimension of it is called left nullity.
 \subsubsection{Image space (像空間) or range (值域)}
 The image space of a linear map $T\colon V\to W$, denoted as $\operatorname{im}(T)$, is defined as,
 \[\operatorname{im}(T)=\{T(v):\,v\in V\}.\]
