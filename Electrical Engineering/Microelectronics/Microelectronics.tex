@@ -644,7 +644,7 @@ or
 \[N_D\gg N_A\qc W\approx x_p\gg x_n\]
 \ssc{pn junction with applied voltage}
 \sssc{Reverse bias and forward bias}
-An external voltage is applied to the pn junction, with the voltage of the p-type, i.e., anode relative to the n-type, i.e., cathode, being $v$.
+An external voltage is applied to the pn junction, with the voltage of the p-type, i.e., anode, i.e., + terminal relative to the n-type, i.e., cathode, i.e., - terminal, being $v$.
 
 The effective barrier voltage is
 \[V_0-v\]
@@ -707,8 +707,6 @@ For an ideal diode:
 \item Reverse-biased: As an negative voltage applied, it acts as an open circuit, called cut off.
 \item Forward-biased: As an positive voltage applied, it acts as a short circuit, called turned on.
 \eit
-\sssc{Rectifier}
-When a sinusoidal AC is applied on an ideal diode, during the positive half-cycles, the response equals the input, and during the negative half-cycles, the response is zero. Thus, the output voltage is unidirectional and has a DC component, which is its RMS value.
 \sssc{Limiting and protection circuit}
 We connect the + terminal of the input $v_I$ to the + terminal of an ideal diode through a resistance $R$, the + terminal of the diode to the + terminal of the output $v_O$, the - terminal of the diode to the + terminal of a voltage source $V_+>0$, and the - terminal of $V_+$ to both the - terminals of input and output.
 \bit
@@ -930,6 +928,29 @@ that is,
 \[\frac{V_s-(V_{Z0}+r_zI_{ZK})}{R}-\frac{V_{Z0}+r_zI_{ZK}}{R_L}\ge I_{ZK}\]
 \ssc{Diode rectifier}
 \sssc{DC power supply}
+A dc power supply delivers a dc voltage, usually in the range of 3 V to 20 V, to a load circuit, from a high-voltage sinusoidal ac power-line circuit, which consists of the following blocks:
+\ben
+\item A transformer to lower the voltage.
+\item A rectifier to convert the input sinusoidal to a unipolar output. Its pulsating nature makes it unsuitable as a dc source for electronic circuits.
+\item A filter to reduce high-frequency component. The output of the filter still contains a time-dependent component called ripple.
+\item A voltage regulator to reduce change.
+\item The load circuit.
+\een
+\sssc{Half-wave rectifier}
+A half-wave rectifier uses alternate half-cycles of the input sinusoidal.
+
+To obtain a positive signal, it consists of a sinusoidal input voltage $v_S=V_S\sin(\omega t+\varphi)$ and a diode, where the - terminal of $v_S$ is grounded, the + terminal of $v_S$ is connected to the + terminal of the diode, and the - terminal of the diode is the output voltage $v_O$. Assuming constant voltage drop $V_D$ for forward bias and cut off for reverse bias,
+\[v_O=\max\{0,v_S-V_D\}\]
+About selecting the diode, it must be able to conduct the largest forward current and withstand the peak inverse voltage (PIV) $V_S$ without breakdown.
+\sssc{Full-wave rectifier with center-tapped transformer}
+A full-wave rectifier uses both halves of the input sinusoidal and consists of a center-tapped secondary winding of the transformer where the center tap is grounded to provide two equal input voltages $v_S=V_S\sin(\omega t+\varphi)$ and two diodes, where the + terminal of one input and the - terminal of the other are connected to the + terminals of the two diodes $D_1,D_2$, and the - terminals of the two diodes are connected together as the output voltage $v_O$. Assuming constant voltage drop $V_D$ for forward bias and cut off for reverse bias,
+\[v_O=\max\{0,\abs{v_S}-V_D\}\]
+At $v_S=V_S$, the reverse voltage across $D_2$ is the peak inverse voltage (PIV) $v_O+V_S=2V_s-V_D$.
+\sssc{(Four-diode) bridge rectifier}
+This circuit is a full-wave rectifier that does not require a center-tapped transformer, but requires four diodes as compared to two in the previous circuit, and is called bridge because of the similarity of its configuration to that of the Wheatstone bridge. It consists of a sinusoidal input voltage $v_S=V_S\sin(\omega t+\varphi)$ and four diodes, where
+
+
+
 
 
 
