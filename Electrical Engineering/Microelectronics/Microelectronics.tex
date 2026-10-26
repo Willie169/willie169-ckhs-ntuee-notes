@@ -556,7 +556,7 @@ where $\nabla_n,\nabla_p$ are concentration gradients, $D_n,D_p$ are constants c
 \[D_p=\mu_pV_T\]
 called Einstein relationship, where $V_T$ is thermal voltage given by
 \[V_T=\frac{kT}{q}\]
-For $T=300$ K, $V_T$ is 25.9 mV. For intrinsic silicon, $D_n$ is 35 cm$^2$/s and $D_p$ is 12 cm$^2$/s.
+For $T=300$ K, $V_T$ is about 25.9 mV; for $T=293$ K (i.e., 20 degrees Celsius), $V_T$ is about 25.3 mV. For intrinsic silicon, $D_n$ is 35 cm$^2$/s and $D_p$ is 12 cm$^2$/s.
 \ssc{pn or p-n junction at equilibrium}
 \sssc{Physical structure}
 A p-n junction is a single semiconducting crystal with one end doped to form p material and the other end doped to form n material. The two types meet at a junction plane. External wire connections are made to both ends through metal contacts. If the pn junction is used as diode (二極體), these constitute the two terminals, anode, indicated by +, for p-type end and cathode, indicated by -, for n-type end, of the diode. A one-dimensional coordinate is established with junction as 0 and towards n region as positive direction.
@@ -642,95 +642,162 @@ or
 \[N_D\gg N_A\qc W\approx x_p\gg x_n\]
 \ssc{pn junction with applied voltage}
 \sssc{Reverse bias and forward bias}
-An external voltage is applied to the pn junction, with the voltage of the p-type, i.e., anode relative to the n-type, i.e., cathode, being $V$.
+An external voltage is applied to the pn junction, with the voltage of the p-type, i.e., anode relative to the n-type, i.e., cathode, being $v$.
 
 The effective barrier voltage is
-\[V_0-V\]
+\[V_0-v\]
 \bit
-\item If $V<0$, it is called reverse bias, and the reverse bias voltage is $V_R=-V$.
-\item If $V>0$, it is called forward bias, and the forward bias voltage is $V_F=V$.
+\item If $v<0$, it is called reverse bias, and the reverse bias voltage is $v_R=-v$.
+\item If $v>0$, it is called forward bias, and the forward bias voltage is $v_F=v$.
 \eit
 \sssc{Width of and charge stored in depletion region}
-For $V<V_0$, the width of the depletion region $W=x_p+x_n$ is given by the Poisson's equation
-\[W=\sqrt{\frac{2\varepsilon}{q}\qty(\frac{1}{N_A}+\frac{1}{N_D})(V_0-V)}\]
+For $v<V_0$, the width of the depletion region $W=x_p+x_n$ is given by the Poisson's equation
+\[W=\sqrt{\frac{2\varepsilon}{q}\qty(\frac{1}{N_A}+\frac{1}{N_D})(V_0-v)}\]
 and the charge stored on either side of the depletion region is
-\[Q_j=A\sqrt{2\varepsilon q\qty(\frac{1}{N_A}+\frac{1}{N_D})(V_0-V)}=\alpha\sqrt{V_0-V}\]
+\[Q_j=A\sqrt{2\varepsilon q\qty(\frac{1}{N_A}+\frac{1}{N_D})(V_0-v)}=\alpha\sqrt{V_0-v}\]
 \sssc{Current-voltage relationship}
 \bit
 \item The concentration of minority holes in the n region at the edge of the depletion region will increase considerably to
-\[p_n(x_n)=p_{n0}e^{V/V_T}\]
+\[p_n(x_n)=p_{n0}e^{v/V_T}\]
 Excess concentration is defined as
-\[p_n(x_n)-p_{n0}=p_{n0}\qty(e^{V/V_T}-1)\]
+\[p_n(x_n)-p_{n0}=p_{n0}\qty(e^{v/V_T}-1)\]
 As the injected holes diffuse into the n material, some will recombine with the majority free electrons and disappear. The excess hole concentration decays exponentially with distance. The total hole concentration in the n material is given by
-\[p_n(x)=p_{n0}+\qty(p_n(x_n)-p_{n0})e^{-(x-x_n)/L_p}=p_{n0}+p_{n0}\qty(e^{V/V_T}-1)e^{-(x-x_n)/L_p}\qc x\ge x_n,\]
+\[p_n(x)=p_{n0}+\qty(p_n(x_n)-p_{n0})e^{-(x-x_n)/L_p}=p_{n0}+p_{n0}\qty(e^{v/V_T}-1)e^{-(x-x_n)/L_p}\qc x\ge x_n,\]
 where $L_p$ is a constant called diffusion length of holes in the n material.
 
 By differentiating $p_n(x)$, we obtain the diffusion current density:
-\[J_p(x)=q\frac{D_p}{L_p}\qty(p_n(x_n)-p_{n0})e^{-(x-x_n)/L_p}=q\frac{D_p}{L_p}p_{n0}\qty(e^{V/V_T}-1)e^{-(x-x_n)/L_p}\qc x\ge x_n\]
+\[J_p(x)=q\frac{D_p}{L_p}\qty(p_n(x_n)-p_{n0})e^{-(x-x_n)/L_p}=q\frac{D_p}{L_p}p_{n0}\qty(e^{v/V_T}-1)e^{-(x-x_n)/L_p}\qc x\ge x_n\]
 It does not change inside the depletion region, thus
-\[J_p(x)=q\frac{D_p}{L_p}\qty(p_n(x_n)-p_{n0})=q\frac{D_p}{L_p}p_{n0}\qty(e^{V/V_T}-1)\qc -x_p\le x\le x_n\]
+\[J_p(x)=q\frac{D_p}{L_p}\qty(p_n(x_n)-p_{n0})=q\frac{D_p}{L_p}p_{n0}\qty(e^{v/V_T}-1)\qc -x_p\le x\le x_n\]
 The current inside the depletion region is
-\[I_p=AJ_p(0)=Aq\frac{D_p}{L_p}\qty(p_n(x_n)-p_{n0})=Aq\frac{D_p}{L_p}p_{n0}\qty(e^{V/V_T}-1)\]
+\[i_p=AJ_p(0)=Aq\frac{D_p}{L_p}\qty(p_n(x_n)-p_{n0})=Aq\frac{D_p}{L_p}p_{n0}\qty(e^{v/V_T}-1)\]
 \item The concentration of minority free electrons in the p region at the edge of the depletion region will increase considerably to
-\[n_p(-x_p)=n_{p0}e^{V/V_T}\]
+\[n_p(-x_p)=n_{p0}e^{v/V_T}\]
 Excess concentration is defined as
-\[n_p(-x_p)-n_{p0}=n_{p0}\qty(e^{V/V_T}-1)\]
+\[n_p(-x_p)-n_{p0}=n_{p0}\qty(e^{v/V_T}-1)\]
 As the injected free electrons diffuse into the p material, some will recombine with the majority holes and disappear. The excess free electron concentration decays exponentially with distance. The total hole concentration in the p material is given by
-\[n_p(-x)=n_{p0}+\qty(n_p(-x_p)-n_{p0})e^{-(x-x_p)/L_n}=n_{p0}+n_{p0}\qty(e^{V/V_T}-1)e^{-(x-x_p)/L_n}\qc x\ge x_p,\]
+\[n_p(-x)=n_{p0}+\qty(n_p(-x_p)-n_{p0})e^{-(x-x_p)/L_n}=n_{p0}+n_{p0}\qty(e^{v/V_T}-1)e^{-(x-x_p)/L_n}\qc x\ge x_p,\]
 where $L_n$ is a constant called diffusion length of free electrons in the p material.
 
 By differentiating $n_p(x)$, we obtain the diffusion current density:
-\[J_n(-x)=q\frac{D_n}{L_n}\qty(n_p(-x_p)-n_{p0})e^{-(x-x_p)/L_n}=q\frac{D_n}{L_n}n_{p0}\qty(e^{V/V_T}-1)e^{-(x-x_p)/L_n}\qc x\ge x_p\]
+\[J_n(-x)=q\frac{D_n}{L_n}\qty(n_p(-x_p)-n_{p0})e^{-(x-x_p)/L_n}=q\frac{D_n}{L_n}n_{p0}\qty(e^{v/V_T}-1)e^{-(x-x_p)/L_n}\qc x\ge x_p\]
 It does not change inside the depletion region, thus
-\[J_n(-x)=q\frac{D_n}{L_n}\qty(n_p(-x_p)-n_{p0})=q\frac{D_n}{L_n}n_{p0}\qty(e^{V/V_T}-1)\qc x_p\ge x\ge -x_n\]
+\[J_n(-x)=q\frac{D_n}{L_n}\qty(n_p(-x_p)-n_{p0})=q\frac{D_n}{L_n}n_{p0}\qty(e^{v/V_T}-1)\qc x_p\ge x\ge -x_n\]
 The current inside the depletion region is
-\[I_n=AJ_n(0)=Aq\frac{D_n}{L_n}\qty(n_p(-x_p)-n_{p0})=Aq\frac{D_n}{L_n}n_{p0}\qty(e^{V/V_T}-1)\]
+\[i_n=AJ_n(0)=Aq\frac{D_n}{L_n}\qty(n_p(-x_p)-n_{p0})=Aq\frac{D_n}{L_n}n_{p0}\qty(e^{v/V_T}-1)\]
 \eit
 The total current inside the depletion region is
-\[I=I_p+I_n=Aq\qty(\frac{D_p}{L_p}p_{n0}+\frac{D_n}{L_n}n_{p0})\qty(e^{V/V_T}-1)\]
+\[i=i_p+i_n=Aq\qty(\frac{D_p}{L_p}p_{n0}+\frac{D_n}{L_n}n_{p0})\qty(e^{v/V_T}-1)\]
 Substituting $p_{n0}=\frac{n_i^2}{N_D}$ and $n_{p0}=\frac{n_i^2}{N_A}$ gives
-\[I=Aqn_i^2\qty(\frac{D_p}{L_pN_D}+\frac{D_n}{L_nN_A})\qty(e^{V/V_T}-1)\]
+\[i=Aqn_i^2\qty(\frac{D_p}{L_pN_D}+\frac{D_n}{L_nN_A})\qty(e^{v/V_T}-1)\]
 Taking $T=0$, we obtain a constant current, which must be $-I_S$, thus
 \[I_S=Aqn_i^2\qty(\frac{D_p}{L_pN_D}+\frac{D_n}{L_nN_A})\]
-\[I=I_S\qty(e^{V/V_T}-1)\]
+\[i=I_S\qty(e^{v/V_T}-1)\]
 called Shockley ideal diode equation.
-\sssc{Saturation current or scale current}
-We call $I_S$ saturation current or scale current.
-\bit
-\item It is proportional to cross-sectional area $A$.
-\item It is proportional to $n_i^2$, which strongly depends on $T$.
-\item It is the current in the reverse direction that the reverse bias situation saturates at.
-\item Typical values for $I_S$ range from $10^{-18}$ A to $10^{-12}$ A.
-\eit
-\sssc{Reverse/junction breakdown}
-In reverse bias, as $-V$ reaches a breakdown voltage $V_{BR}\gg V_T$, the reverse current $-I$ will increase from $I_S$ dramatically to a vary large value, and the reverse voltage across the junction remains very close to $V_{BR}$. This phenomenon is called junction breakdown. It is not a destructive phenomenon. That is, the pn junction can be repeatedly operated in the breakdown region without a permanent effect on its characteristics predicated on the assumption that the magnitude of the reverse-breakdown current is limited by the external circuit to a safe value that limits the power dissipated in the junction to a safe, allowable level.
 
-There are two possible mechanisms for pn junction breakdown:
+And $I_S$ is called saturation current or scale current.
+\ssc{Diode}
+\sssc{Circuit diagram}
+A diode is a two-terminal device, represented with a triangle whose midpoint of one side is the + terminal (also called anode) and whose vertex opposing that side is the midpoint of a line parallel to that side and the - terminal (also called cathode).
+\sssc{Ideal diode}
+For an ideal diode:
 \bit
-\item Zener effect: It is the usual mechanism when $V_{BR}<5$ V. The electric field in the depletion layer increases to the point of breaking covalent bonds and generating electron–hole pairs. The electrons generated in this way will be swept by the electric field into the n side and the holes into the p side. $V_{BR}$ is often denoted $V_Z$ in this case.
-\item avalanche effect: It is the usual mechanism when $V_{BR}>8$ V. The minority carriers that cross the depletion region under the influence of the electric field gain sufficient kinetic energy to be able to break covalent bonds in atoms with which they collide. The carriers liberated by this process may have sufficiently high energy to be able to cause other carriers to be liberated in another ionizing collision.
+\item Reverse-biased: As an negative voltage applied, it acts as an open circuit, called cut off.
+\item Forward-biased: As an positive voltage applied, it acts as a short circuit, called turned on.
 \eit
-When $V_{BR}$ is between 5 V and 8 V, the breakdown mechanism can be either the zener or the avalanche effect or a combination of the two.
-\sssc{Conclusion}
-We conclude that
+\sssc{Rectifier}
+When a sinusoidal AC is applied on an ideal diode, during the positive half-cycles, the response equals the input, and during the negative half-cycles, the response is zero. Thus, the output voltage is unidirectional and has a DC component, which is its RMS value.
+\sssc{Limiting and protection circuit}
+We connect the + terminal of the input $v_I$ to the + terminal of an ideal diode through a resistance $R$, the + terminal of the diode to the + terminal of the output $v_O$, the - terminal of the diode to the + terminal of a voltage source $V_+>0$, and the - terminal of $V_+$ to both the - terminals of input and output.
 \bit
-\item in reverse bias without junction breakdown, $I$ is negative and $-I$ is at most and often approximately $I_S$, which is very small, and thus the conductivity is very small.
-\item in forward bias, $I$ is positive and often dominated by the exponential term, and thus the conductivity is large and increases rapidly as $V$ increases.
+\item If $v_I\le v_+$, no current flows through the diode, and $v_O=v_I$.
+\item If $v_I>v_+$, the current flows through diode is $i_D=\frac{v_I-V_+}{R}$, and $v_O=v_+$.
 \eit
+\sssc{Junction diode}
+The most common implementation of diode is pn junction, called junction diode, whose + and - terminals are thep-type and n-type ends of a pn junction. Diode refers to it unless otherwise specified.
+\ssc{Forward-bias region}
+\sssc{Forward-bias region}
+$v$ and $i$ are positive, and for appreciable current $i$, $e^{v/V_T}\gg 1$ and
+\[i=I_Se^{v/V_T}\]
+\[v=V_T\ln(\frac{i}{I_S})\approx 2.30V_T\log_{10}(\frac{i}{I_S})\approx 60\log_{10}(\frac{i}{I_S})\tx{\ mV}\]
+Thus, the conductivity is large and increases rapidly as $V$ increases. This exponential current-voltage relationship holds over a span of about 7 decades of current. It is important to have an external circuit to limit the forward current.
+
+The current is negligibly small for v less than about 0.5 V, called cut-in voltage. And at a sufficiently large forward current, at which the diode is called fully conducting, the diode has a voltage drop approximately 0.6 V to 0.8 V.
+
+At a given constant diode current, the voltage drop across the diode decreases by about 1 K increase in temperature. Thus a junction diode is a good electronic thermometer.
+\sssc{Exponential model}
+A diode with voltage $v_D$ and current $i_D$ whose + terminal is connected to the + terminal of the input $v_{DD}>0.5$ V through a resistor $R$ and - terminal is connected to the - terminal of the input $v_{DD}$.
+
+The exponential model is the two equations, diode curve:
+\[i_D=I_Se^{v_D/V_T}\]\
+and load line:
+\[i_D=\frac{v_{DD}-v_D}{R}\]
+\bit
+\item Load line analysis: Draw the two equations on $i-v$ graph. Their intersection is the solution for the circuit, called operating point $Q$.
+\item Iterative analysis: Given an initial point $(i_0,v_0)$ on diode curve, apply the iteration:
+  \[i_k=\frac{V_{DD}-v_{k-1}}{R}\qc k\in\bbN\]
+  \[v_k=v_{k-1}+\ln(\frac{i_k}{i_{k-1}})\]
+  until a certain $(i_m,v_m)$ such that $(i_m,v_m)-(i_{m-1},v_{m-1})$ is within the acceptable error range, and take $(i_m,v_m)$ as the estimation for $(i_D,v_D)$.
+\eit
+\sssc{Constant-voltage-drop model}
+A diode with voltage $v_D$ and current $i_D$ whose + terminal is connected to the + terminal of the input $v_{DD}>0.7$ V through a resistor $R$ and - terminal is connected to the - terminal of the input $v_{DD}$.
+
+Constant-voltage-drop model assumes $v_D$ to be a constant $0.7$ V, and
+\[i_D=\frac{v_{DD}-v_D}{R}\]
+\ssc{Reverse-bias region}
+\sssc{Saturation current or scale current}
+\bit
+\item $I_S$ is proportional to cross-sectional area $A$.
+\item $I_S$ is proportional to $n_i^2$, which strongly depends on $T$.
+\item $I_S$ is the current in the reverse direction that the reverse bias situation saturates at.
+\item Typical values for $I_S$ range from $10^{-18}$ A to $10^{-12}$ A and double in value every 5 K rise in temperature. Different semiconductor materials may exhibit values of $I_S$ differing by several orders of magnitude.
+\eit
+\sssc{Reverse-bias region}
+$v$ and $i\approx-I_S$ are negative. A real diode exhibits reverse currents much larger than $I_S$, largely due to leakage effect, and the reverse current doubles in value every 10 K rise in temperature.
+\ssc{Reverse/junction breakdown}
+\sssc{Reverse/junction breakdown}
+As $-v$ reaches a breakdown voltage $V_{BR}\gg V_T$, the reverse current $-i$ will increase from $I_S$ dramatically to a vary large value, and the reverse voltage across the junction remains very close to $V_{BR}$. This phenomenon is called junction breakdown.
+
+It is not a destructive phenomenon. That is, the pn junction can be repeatedly operated in the breakdown region without a permanent effect on its characteristics predicated on the assumption that the magnitude of the reverse-breakdown current is limited by the external circuit to a safe value that limits the power dissipated in the junction to a safe, allowable level.
+
+The very steep $i-v$ curve can be used for amplification and regulation.
+\sssc{Mechanisms}
+There are two possible mechanisms for pn junction breakdown, zener effect and avalanche effect.
+\bit
+\item Avalanche effect is the usual mechanism when $V_{BR}>8$ V.
+\item Zener effect is the usual mechanism when $V_{BR}<5$ V.
+\item When $V_{BR}$ is between 5 V and 8 V, the breakdown mechanism can be either the zener or the avalanche effect or a combination of the two.
+\eit
+\sssc{Avalanche effect}
+The minority carriers that cross the depletion region under the influence of the electric field gain sufficient kinetic energy to be able to break covalent bonds in atoms with which they collide. The carriers liberated by this process may have sufficiently high energy to be able to cause other carriers to be liberated in another ionizing collision.
+
+It can withstand a high reverse voltage without appreciable current. The combination of large reverse current and voltage results in high power dissipation, whose overheating can result in permanent damage to the diode.
+
+The maximum reverse voltage specified by the diode manufacturer is the maximum reverse voltage to avoid avalanche breakdown. In most applications we avoid avalanche breakdown. In some applications, we use avalanche breakdown to amplify small stimuli into large current, such as avalanche photodiodes (APD).
+\sssc{Zener effect}
+The electric field in the depletion layer increases to the point of breaking covalent bonds and generating electron–hole pairs. The electrons generated in this way will be swept by the electric field into the n side and the holes into the p side. Zener diodes maintain a nearly constant reverse voltage, called zener voltage $V_Z$, drop over a wide range of reverse currents.
+
+At the knee current $I_{ZK}$, the zener operation is onset. At the reverse test current $I_{ZT}$ corresponding to the operating point $Q$, let the slope of reverse voltage-reverse current line, called the incremental resistance of the zener, be $r_z$, and the $v$ interception of it be $V_{Z0}$. Then the reverse voltage $V_Z$ under test current $I_Z$ near $Q$ is given by the model
+\[V_Z=V_{Z0}+r_zI_Z,\]
+that is, Thévenin network with open-circuit voltage $V_{Z0}$ and Thévenin resistance $r_z$.
+
+The temperature coefficient (TC) of the zener voltage $V_Z$ is the derivative of $V_Z$ with respect to $T$, which is typically negative at lower reverse voltage, 0 at about 5 V to 6 V reverse voltage, and positive at higher reverse voltage.
+
+A zener diode has a maximum power that it can safely dissipate.
 \ssc{Capacitive effects in pn junction}
 \sssc{Depletion or junction capacitance}
 Depletion capacitance predominates in reverse and zero bias and is from the charge stored on the depletion region given by
-\[Q_j=A\sqrt{2\varepsilon q\qty(\frac{1}{N_A}+\frac{1}{N_D})(V_0+V_R)}=\alpha\sqrt{V_0+V_R}\]
-In an ideal capacitor, the stored charge is linearly proportional to the applied voltage. In pn junction, however, the relationship is nonlinear. For small changes around a bias point, say $V_R=V_Q$, we can define a depletion capacitance $C_j$ as
-\[C_j=\evlv{\dv{Q_j}{V_R}}_{V_R=V_Q}\]
+\[Q_j=A\sqrt{2\varepsilon q\qty(\frac{1}{N_A}+\frac{1}{N_D})(V_0+v_R)}=\alpha\sqrt{V_0+v_R}\]
+In an ideal capacitor, the stored charge is linearly proportional to the applied voltage. In pn junction, however, the relationship is nonlinear. For small changes around a bias point, say $v_R=V_Q$, we can define a depletion capacitance $C_j$ as
+\[C_j=\evlv{\dv{Q_j}{v_R}}_{v_R=V_Q}\]
 Then,
-\[C_j=\frac{\alpha}{2\sqrt{V_0+V_R}}\]
+\[C_j=\frac{\alpha}{2\sqrt{V_0+v_R}}\]
 The value of $C_j$ at zero bias is
 \[C_{j0}=\frac{\alpha}{2\sqrt{V_0}}=A\sqrt{\frac{\varepsilon q}{2}\qty(\frac{1}{N_A}+\frac{1}{N_D})\frac{1}{V_0}}\]
 And
-\[C_j=\frac{C_{j0}}{\sqrt{1+\frac{V_R}{V_0}}}\]
+\[C_j=\frac{C_{j0}}{\sqrt{1+\frac{v_R}{V_0}}}\]
 A more general form that also encompasses graded junction is
-\[C_j=\frac{C_{j0}}{\qty(1+\frac{V_R}{V_0})^m}\]
+\[C_j=\frac{C_{j0}}{\qty(1+\frac{v_R}{V_0})^m}\]
 where $m$ is a constant called grading coefficient, whose value ranges from 1/3 to 1/2 depending on the manner in which the concentration changes from the p to the n side.
 \sssc{Diffusion capacitance}
 Diffusion capacitance predominates only in forward bias. Consider a forward-biased pn junction. In steady state,
@@ -740,34 +807,37 @@ Diffusion capacitance predominates only in forward bias. Consider a forward-bias
   Q_p&=Aq\int_{x_n}^{\infty}p_n(x)-p_{n0}\dd{x}\\
      &=Aq\int_{x_n}^{\infty}\qty(p_n(x_n)-p_{n0})e^{-(x-x_n)/L_p}\dd{x}\\
      &=Aq\qty(p_n(x_n)-p_{n0})L_p\evlv{e^{-(x-x_n)/L_p}}_{x_n}^{\infty}\\
-     &=\frac{L_p^2}{D_p}I_p
+     &=\frac{L_p^2}{D_p}i_p
 \ea\]
 We define the time constant $\tau_p$, called minority-carrier hole lifetime, as
 \[\tau_p=\frac{L_p^2}{D_p}\]
-\[Q_p=\tau_pI_p\]
+\[Q_p=\tau_pi_p\]
 \item Some free electrons injected from the n-side into the p-side become excess minority carriers in the p bulk region, which has charge:
 \[\ba
   Q_n&=Aq\int_{-\infty}^{-x_p}n_p(x)-n_{p0}\dd{x}\\
   Q_n&=Aq\int_{x_p}^{\infty}n_p(-x)-n_{p0}\dd{-x}\\
      &=Aq\int_{x_p}^{\infty}\qty(n_p(-x_p)-n_{p0})e^{-(x-x_p)/L_n}\dd{-x}\\
      &=Aq\qty(n_p(-x_p)-n_{p0})L_n\evlv{e^{-(x-x_p)/L_n}}_{x_p}^{\infty}\\
-     &=\frac{L_n^2}{D_n}I_n
+     &=\frac{L_n^2}{D_n}i_n
 \ea\]
 We define the time constant $\tau_n$, called minority-carrier electron lifetime, as
 \[\tau_n=\frac{L_n^2}{D_n}\]
-\[Q_n=\tau_nI_n\]
+\[Q_n=\tau_ni_n\]
 \eit
 The total excess minority-carrier charge is
-\[Q=Q_p+Q_n=\tau_pI_p+\tau_nI_n\]
+\[Q=Q_p+Q_n=\tau_pi_p+\tau_ni_n\]
 We define the (mean) transit time of the junction $\tau_T$ such that
-\[Q=\tau_TI\]
+\[Q=\tau_Ti\]
 For most practical one-sided junction, either
-\[N_A\gg N_D\qc I\approx I_p\gg I_n\qc Q=Q_p\gg Q_n\qc\tau_T\approx\tau_p\]
+\[N_A\gg N_D\qc i\approx i_p\gg i_n\qc Q=Q_p\gg Q_n\qc\tau_T\approx\tau_p\]
 or
-\[N_D\gg N_A\qc I\approx I_n\gg I_p\qc Q=Q_n\gg Q_p\qc\tau_T\approx\tau_n\]
-For small changes around a bias point, say $V=V_Q$, we can define an incremental diffusion capacitance $C_d$ as
-\[C_d=\evlv{\dv{Q}{V}}_{V=V_Q}\]
-Using the approximation $e^{V/V_T}\gg 1$, $I=I_S\qty(e^{V/V_T}-1)\approx I_Se^{V/V_T}$, we have
-\[C_d=\frac{\tau_T}{V_T}I\]
-$C_d$ is directly proportional to the forward current $I$ and thus is negligibly small when the diode is reverse biased. Also, to keep $C_d$ small, the transit time $\tau_T$ must be made small, which is important for a pn junction intended for high-speed or high-frequency operation.
+\[N_D\gg N_A\qc i\approx i_n\gg i_p\qc Q=Q_n\gg Q_p\qc\tau_T\approx\tau_n\]
+For small changes around a bias point, say $v=V_Q$, we can define an incremental diffusion capacitance $C_d$ as
+\[C_d=\evlv{\dv{Q}{v}}_{v=V_Q}\]
+Using the approximation $e^{v/V_T}\gg 1$, $i=I_S\qty(e^{v/V_T}-1)\approx I_Se^{v/V_T}$, we have
+\[C_d=\frac{\tau_T}{V_T}i\]
+$C_d$ is directly proportional to the forward current $i$ and thus is negligibly small when the diode is reverse biased. Also, to keep $C_d$ small, the transit time $\tau_T$ must be made small, which is important for a pn junction intended for high-speed or high-frequency operation.
+
+
+
 \end{document}
