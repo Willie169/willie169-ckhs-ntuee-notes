@@ -448,7 +448,7 @@ There are two kinds of semiconductors:
 \eit
 Germanium was used in the fabrication of very early transistors (late 1940s, early 1950s). It was quickly supplanted by silicon, on which today’s integrated-circuit technology is almost entirely based.
 
-Compound semiconductors are useful in special electronic circuit applications as well as in applications that involve light, such as light-emitting diodes (LEDs).
+Compound semiconductors are useful in special electronic circuit applications as well as in applications that involve light, such as light-emitting diodes (LEDs) (發光二極體).
 \sssc{Energy and effective mass (有效質量) of electrons}
 The energy of an electron in a semiconductor is not the simple square relation of that of a free electron and wave number but a complicated periodic function. However, near an edge of a band, it can be approximated with:
 \[E(k) \approx E_0 + \frac{\hbar^2 k^2}{2m^*}\]
@@ -868,7 +868,7 @@ For small changes around a bias point, say $v=V_Q$, we can define an incremental
 Using the approximation $e^{v/V_T}\gg 1$, $i=I_S\qty(e^{v/V_T}-1)\approx I_Se^{v/V_T}$, we have
 \[C_d=\frac{\tau_T}{V_T}i\]
 $C_d$ is directly proportional to the forward current $i$ and thus is negligibly small when the diode is reverse biased. Also, to keep $C_d$ small, the transit time $\tau_T$ must be made small, which is important for a pn junction intended for high-speed or high-frequency operation.
-\ssc{Diode circuits}
+\ssc{Diode voltage regulator}
 \sssc{Voltage regulator}
 A voltage regulator is a circuit designed to provide a constant dc voltage between its output terminals.
 \bit
@@ -876,7 +876,7 @@ A voltage regulator is a circuit designed to provide a constant dc voltage betwe
 \item Change in output voltage relative to configuration with no load divided by load current is called load regulation, typically specified in mV/mA.
 \eit
 \sssc{Forward-biased diode voltage regulator}
-Consider a source $V_s>0$ with change range $\Delta v_s$, whose - terminal is grounded and + terminal is connected through a control resistance $R$ to the + terminal of the first diode in a series of $n$ diodes with constant voltage-drop $V_C<\frac{V_s}{n}$ connected + to -, the - terminal of the last diode is grounded, and the + terminal of the first diode is the output voltage $v_O$ connected to a load resistance $R_L$ whose other terminal is grounded.
+Consider a source $V_s>0$ with change $\Delta v_s$, whose - terminal is grounded and + terminal is connected through a control resistance $R$ to the + terminal of the first diode in a series of $n$ diodes with constant voltage-drop $V_C<\frac{V_s}{n}$ connected + to -, the - terminal of the last diode is grounded, and the + terminal of the first diode is the output voltage $v_O$ connected to a load resistance $R_L$ whose other terminal is grounded.
 
 With no load connected, use the constant-voltage-drop model to obtain the bias voltage $V_D=V_O$ and current $I_D$:
 \[V_D=V_O=nV_C\]
@@ -885,30 +885,51 @@ Thus each diode has incremental resistance $r_d$:
 \[r_d=\frac{V_T}{I_D}\]
 And the series of diode has total incremental resistance:
 \[r=nr_d\]
-This resistance and control resistance forms a voltage divider. The change range $\Delta v_O$ is
+This resistance $r$ and control resistance $R_C$ forms a voltage divider. The change $\Delta v_O$ is
 \[\Delta v_O=\Delta v_s\frac{r}{r+R}\]
 The line regulation is
 \[\frac{\Delta v_O}{V_s}=\frac{\Delta v_s}{V_s}\frac{r}{r+R},\]
 that is, $\frac{r}{r+R}$ times the line regulation of the input source.
 
-Under load $R_L$, the current draws by it is approximately:
+Under load $R_L\gg r$, the current draws by it, i.e., the decrease in current through the diode series, is approximately:
 \[I_L=\frac{V_O}{R_L}=\frac{nV_C}{R_L},\]
-which is the decrease in current through the diode series. Thus the change in output voltage $\Delta v_O$ is:
+Thus the change in output voltage $\Delta v_O$ is:
 \[\Delta v_O=-I_Lr=-\frac{nV_Cr}{R_L}\]
 the voltage across each diode decreases by:
 \[\frac{V_Cr}{R_L}\]
 and the load regulation is
 \[\frac{\Delta v_O}{I_L}=-r\]
 \sssc{Zener diode voltage regulator}
-Consider a source $V_s>0$ with change range $\Delta v_s$, whose - terminal is grounded and + terminal is connected through a control resistance $R$ to the - terminal of a zener diode, the + terminal of the zener diode is grounded, and the - terminal of the zener diode is the output voltage $v_O$ connected to a load resistance $R_L$ whose other terminal is grounded. The zener diode is specified to have $V_{ZT}$ at test reverse current $I_{ZT}$ and zener $r_z$ and knee current $I_{ZK}<I_Z$.
+Consider a source $V_s>0$ with change $\Delta v_s$, whose - terminal is grounded and + terminal is connected through a control resistance $R$ to the - terminal of a zener diode, the + terminal of the zener diode is grounded, and the - terminal of the zener diode is the output voltage $v_O$ connected to a load resistance $R_L$ whose other terminal is grounded. The zener diode is specified to have $V_{ZT}$ at test reverse current $I_{ZT}$ and incremental resistance $r_z$ and knee current $I_{ZK}<I_Z$.
 
 First, solve
 \[V_{ZT}=V_{Z0}+r_zI_{ZT}\]
 for $V_{Z0}$.
 
-With no load connected, thus the bias current $I_Z$ through and bias voltage $V_Z$ across the zener diode is given by
+With no load connected, thus the bias current $I_Z$ through and bias voltage $V_Z=V_O$ across the zener diode is given by
 \[I_Z=\frac{V_s-V_{Z0}}{R+r_z}\]
-\[V_Z=V_{Z0}+r_zI_Z\]
+\[V_Z=V_O=V_{Z0}+r_zI_Z\]
+The incremental resistance $r_z$ and control resistance $R$ forms a voltage divider. The change $\Delta v_O$ is
+\[\Delta v_O=\Delta v_s\frac{r_z}{r_z+R}\]
+The line regulation is
+\[\frac{\Delta v_O}{V_s}=\frac{\Delta v_s}{V_s}\frac{r_z}{r_z+R},\]
+that is, $\frac{r_z}{r_z+R}$ times the line regulation of the input source.
+
+Under load $R_L\gg r_z$, the current draws by it, i.e., the decrease in current through the zener diode, is approximately:
+\[I_L=\frac{V_O}{R_L}\]
+Thus the change in output voltage $\Delta v_O$ is:
+\[\Delta v_O=-I_Lr_z=-\frac{V_Or_z}{R_L}\]
+and the load regulation is
+\[\frac{\Delta v_O}{I_L}=-r_z\]
+However, if $I_Z-I_L<I_{ZK}$, the diode must be cut off instead of in the breakdown region, and
+\[V_O=V_s\frac{R_L}{R_L+R}\]
+\[\Delta v_O=\Delta v_s\frac{R_L}{R_L+R}\]
+The condition for the zener diode to operate in the breakdown region assuming the zener model at the knee is
+\[I_Z-I_L\ge I_{ZK}\]
+that is,
+\[\frac{V_s-(V_{Z0}+r_zI_{ZK})}{R}-\frac{V_{Z0}+r_zI_{ZK}}{R_L}\ge I_{ZK}\]
+\ssc{Diode rectifier}
+
 
 
 
