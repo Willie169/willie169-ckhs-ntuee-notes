@@ -263,7 +263,7 @@ A first-order ODE in the form
 is said to be linear.
 \sssc{Solutions by integrating factor}
 Use the integrating factor:
-\[\mu(x)=e^{\int P(x)\dd{x}}.\]
+\[\mu(x)=\exp(\int P(x)\dd{x}).\]
 Multiply both sides with $\mu(x)$:
 \[\mu(x)\dv{y}{x}+\mu(x)P(x)y=\mu(x)Q(x).\]
 The left-hand side is exactly a derivative:
@@ -325,21 +325,21 @@ we define the integrating factor $\mu(x,y)$ such that
 is exact and with potential function $F$ such that
 \[\pdv{F}{x}=\mu(x,y)M(x,y),\quad\pdv{F}{y}=\mu(x,y)N(x,y),\]
 that is,
-\[\pdv{\mu M}{y}=\pdv{\mu N}{x}.\]
+\[\pdv{}{y}(\mu M)=\pdv{}{x}(\mu N).\]
 Solve the PDE to get $\mu$.
 \sssc{Separable case}
 If
 \[\frac{\pdv{M}{y}-\pdv{N}{x}}{N}\]
 depends only on $x$, we can construct integrating factor $\mu(x)$:
-\[\mu(x)=e^{\int\frac{\pdv{M}{y}-\pdv{N}{x}}{N}\dd{x}}\]
+\[\mu(x)=\exp(\int\frac{\pdv{M}{y}-\pdv{N}{x}}{N}\dd{x})\]
 such that
-\[\pdv{\mu M}{y}=\pdv{\mu N}{x}=\mu\pdv{M}{y}.\]
+\[\pdv{}{y}(\mu M)=\pdv{}{x}(\mu N)=\mu\pdv{M}{y}.\]
 If
 \[\frac{\pdv{N}{x}-\pdv{M}{y}}{M}\]
 depends only on $y$, we can construct integrating factor $\mu(y)$:
-\[\mu(y)=e^{\int\frac{\pdv{N}{x}-\pdv{M}{y}}{M}\dd{x}}\]
+\[\mu(y)=\exp(\int\frac{\pdv{N}{x}-\pdv{M}{y}}{M}\dd{x})\]
 such that
-\[\pdv{\mu M}{y}=\pdv{\mu N}{x}=\mu\pdv{N}{x}.\]
+\[\pdv{}{y}(\mu M)=\pdv{}{x}(\mu N)=\mu\pdv{N}{x}.\]
 \begin{proof}
 \[\frac{\mu'(x)}{\mu(x)}=\frac{\pdv{M}{y}-\pdv{N}{x}}{N}.\]
 This is a separable ODE of $\mu$ with respect to $x$.
@@ -348,7 +348,7 @@ Let
 \[P(x)=\frac{\pdv{M}{y}-\pdv{N}{x}}{N}.\]
 \[\mu^{-1}\dd{\mu}=P(x)\dd{x}.\]
 \[\ln|\mu|=\int P(x)\dd{x}.\]
-\[\mu=e^{\int P(x)\dd{x}}.\]
+\[\mu=\exp(\int P(x)\dd{x}).\]
 
 Similarly,
 \[\frac{\mu'(y)}{\mu(y)}=\frac{\pdv{N}{x}-\pdv{M}{y}}{M}\]
@@ -397,7 +397,7 @@ Substitute into the equation:
 which is linear.
 
 Use the integrating factor:
-\[\mu(x)=e^{\int (1-n)P(x)\dd{x}}.\]
+\[\mu(x)=\exp(\int (1-n)P(x)\dd{x}).\]
 Multiply both sides with $\mu(x)$:
 \[\mu(x)\dv{v}{x}+\mu(x)(1-n)P(x)v=\mu(x)(1-n)Q(x).\]
 The left-hand side is exactly a derivative:
@@ -813,7 +813,7 @@ and the general solution is
 \[u=v'\]
 \[y_1u'+(2y_1'+py_1)u=0\]
 \[u'+\qty(\frac{2y_1'}{y_1}+p)u=0\]
-\[\mu(x)=\exp(\int\frac{2y_1'}{y_1}+p\dd{x})=y_1^{\phantom{1}2}e^{\int p\dd{x}}\]
+\[\mu(x)=\exp(\int\frac{2y_1'}{y_1}+p\dd{x})=y_1^{\phantom{1}2}\exp(\int p\dd{x})\]
 \[(u\mu)'=0\]
 \[u=\frac{c_2}{\mu}=\frac{c_2e^{-\int p\dd{x}}}{y_1^{\phantom{1}2}}\]
 \[v=\int u\dd{x}=c_2\int\frac{e^{-\int p\dd{x}}}{y_1^{\phantom{1}2}}\dd{x}+c_1\]
@@ -832,7 +832,7 @@ gives
 and another solution of the associated homogeneous equation is
 \[y_2=y_1\int\frac{e^{-\int p(x)\dd{x}}}{y_1(x)^2}\dd{x}\]
 and a particular solution is
-\[y_p=y_1\int\frac{e^{-\int p\dd{x}}}{y_1^{\phantom{1}2}}\int g(x)y_1e^{\int p\dd{x}}\dd{x}\dd{x}\]
+\[y_p=y_1\int\frac{e^{-\int p\dd{x}}}{y_1^{\phantom{1}2}}\int g(x)y_1\exp(\int p\dd{x})\dd{x}\dd{x}\]
 and the general solution is
 \[y=c_1y_1+c_2y_2+y_p\]
 \begin{proof}
@@ -848,13 +848,13 @@ and the general solution is
 \[u=v'\]
 \[y_1u'+(2y_1'+py_1)u=g\]
 \[u'+\qty(\frac{2y_1'}{y_1}+p)u=\frac{g}{y_1}\]
-\[\mu(x)=\exp(\int\frac{2y_1'}{y_1}+p\dd{x})=y_1^{\phantom{1}2}e^{\int p\dd{x}}\]
+\[\mu(x)=\exp(\int\frac{2y_1'}{y_1}+p\dd{x})=y_1^{\phantom{1}2}\exp(\int p\dd{x})\]
 \[(u\mu)'=\frac{g\mu}{y_1}\]
-\[u=\frac{\int\frac{g\mu}{y_1}\dd{x}}{\mu}=\frac{e^{-\int p\dd{x}}}{y_1^{\phantom{1}2}}\int g(x)y_1e^{\int p\dd{x}}\dd{x}\]
-\[v=\int u\dd{x}=\int\frac{e^{-\int p\dd{x}}}{y_1^{\phantom{1}2}}\int g(x)y_1e^{\int p\dd{x}}\dd{x}\dd{x}+c_2\int\frac{e^{-\int p\dd{x}}}{y_1^{\phantom{1}2}}\dd{x}+c_1\]
-\[y=vy_1=y_1\int\frac{e^{-\int p\dd{x}}}{y_1^{\phantom{1}2}}\int g(x)y_1e^{\int p\dd{x}}\dd{x}\dd{x}+c_2y_1\int\frac{e^{-\int p\dd{x}}}{y_1^{\phantom{1}2}}\dd{x}+c_1y_1\]
+\[u=\frac{\int\frac{g\mu}{y_1}\dd{x}}{\mu}=\frac{e^{-\int p\dd{x}}}{y_1^{\phantom{1}2}}\int g(x)y_1\exp(\int p\dd{x})\dd{x}\]
+\[v=\int u\dd{x}=\int\frac{e^{-\int p\dd{x}}}{y_1^{\phantom{1}2}}\int g(x)y_1\exp(\int p\dd{x})\dd{x}\dd{x}+c_2\int\frac{e^{-\int p\dd{x}}}{y_1^{\phantom{1}2}}\dd{x}+c_1\]
+\[y=vy_1=y_1\int\frac{e^{-\int p\dd{x}}}{y_1^{\phantom{1}2}}\int g(x)y_1\exp(\int p\dd{x})\dd{x}\dd{x}+c_2y_1\int\frac{e^{-\int p\dd{x}}}{y_1^{\phantom{1}2}}\dd{x}+c_1y_1\]
 \[y_2=y_1\int\frac{e^{-\int p(x)\dd{x}}}{y_1(x)^2}\dd{x}\]
-\[y_p=y_1\int\frac{e^{-\int p\dd{x}}}{y_1^{\phantom{1}2}}\int g(x)y_1e^{\int p\dd{x}}\dd{x}\dd{x}\]
+\[y_p=y_1\int\frac{e^{-\int p\dd{x}}}{y_1^{\phantom{1}2}}\int g(x)y_1\exp(\int p\dd{x})\dd{x}\dd{x}\]
 \[y=c_1y_1+c_2y_2+y_p\]
 \end{proof}
 \ssc{(Cauchy-)Euler or equidimensional equation}
