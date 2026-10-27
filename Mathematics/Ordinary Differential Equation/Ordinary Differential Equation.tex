@@ -455,23 +455,27 @@ This is separable.
 ODE:
 \[\dv{y}{x}=F\qty(\frac{ax+by+c}{px+qy+r}),\quad aq-bp\neq 0.\]
 We can find a unique solution of $ax+by+c=px+qy+r=0$, $x=\alpha$ and $y=\beta$. Let
-\[f(t)=F\qty(\frac{a+bt}{p+qt}),\]
-and we can rewrite it as:
-\[\dv{y}{x}=f(u),\quad u=\frac{y-\beta}{x-\alpha}.\]
-\begin{proof}
-\[y=u(x-\alpha)+\beta\]
-\[ax+by+c=(a+bu)(x-\alpha)+a\alpha+b\beta+c=(a+bu)(x-\alpha)\]
-\[px+qy+r=(p+qu)(x-\alpha)+p\alpha+q\beta+r=(p+qu)(x-\alpha)\]
-\[\frac{ax+by+c}{px+qy+r}=\frac{a+bu}{p+qu}\]
-\end{proof}
+\[f(u)=F\qty(\frac{a+bu}{p+qu}).\]
+Use substitution
+\[u=\frac{y-\beta}{x-\alpha}\]
+We have
+\[(x-\alpha)\dv{u}{x}+u=f(u)\]
 Solutions:
 \[\int\frac{1}{f(u)-u}\dd{u}=\ln|x-\alpha|+C,\]
 and possible constant or singular solutions:
 \[f(u)=u.\]
 \begin{proof}
-\[y=(x-\alpha)u+\beta\]
-\[\dv{y}{x}=\pdv{}{x}\qty((x-\alpha)u+\beta)+\pdv{}{u}\qty((x-\alpha)u+\beta)\dv{u}{x}=u+(x-\alpha)\dv{u}{x}\]
-\[u+(x-\alpha)\dv{u}{x}=f(u)\]
+\[y=u(x-\alpha)+\beta\]
+\[ax+by+c=(a+bu)(x-\alpha)+a\alpha+b\beta+c=(a+bu)(x-\alpha)\]
+\[px+qy+r=(p+qu)(x-\alpha)+p\alpha+q\beta+r=(p+qu)(x-\alpha)\]
+\[\frac{ax+by+c}{px+qy+r}=\frac{a+bu}{p+qu}\]
+\[\ba
+\dv{y}{x}&=\pdv{}{u}\qty((x-\alpha)u+\beta)\dv{u}{x}+\pdv{}{x}\qty((x-\alpha)u+\beta)\\
+         &=(x-\alpha)\dv{u}{x}+u\\
+         &=F\qty(\frac{ax+by+c}{px+qy+r})\\
+         &=f(u)
+\ea\]
+\[(x-\alpha)\dv{u}{x}+u=f(u)\]
 \[\frac{1}{f(u)-u}\dd{u}=\frac{1}{x-\alpha}\dd{x}\]
 This is separable.
 \[\int\frac{1}{f(u)-u}\dd{u}=\ln|x-\alpha|+C\]
@@ -485,7 +489,11 @@ in which $a_i(x)\colon\Omega_i\subseteq\bbR\to\bbR$ are called coefficients and 
 \sssc{Linear differential operator}
 A linear differential operator is a polynomial of the differential operators $D$, i.e., $\dv{}{x}$ for independent variable $x$, and its order is the degree of the polynomial.
 \sssc{Linearity}
-Let $L$ be the linear differential operator $L[\mb{y}]=\sum_{i=0}^na_i(x)\mb{y}^{(i)}$. Then $L[\alpha\mb{y}_1+\beta\mb{y}_2]=\alpha L[\mb{y}_1]+\beta L[\mb{y}_2]$. That's why it's called to be linear.
+Let $L$ be a linear differential operator
+\[L=\sum_{j=0}^na_j(x)D^j\]
+Then for any scalars $\alpha,\beta\in\bbR$ and functions $\mb{y}_1,\mb{y}_2\colon\Omega\suhseteq\bbR\to\bbR^m$,
+\[L[\alpha\mb{y}_1+\beta\mb{y}_2]=\alpha L[\mb{y}_1]+\beta L[\mb{y}_2]\]
+That's why it's called to be linear.
 \sssc{Homogeneity}
 A linear ODE is called homogeneous iff the forcing term is 0; otherwise, it is called non-homogeneous.
 \sssc{Superposition principle and solutions of homogeneous linear ODE as vector space}
@@ -517,7 +525,9 @@ f_1^{(n-1)}(x) & f_2^{(n-1)}(x) & \cdots & f_n^{(n-1)}(x)
 All $c_i=0$ if $W(f_1,f_2,\ldots,f_n)(x)\ne 0$ by Cramer's rule, thus $W(f_1,f_2,\ldots,f_n)(x)=0$.
 \end{proof}
 \sssc{General Abel's (differential equation) identity/formula}
-For $n$ $(n-1)$ times differentiable solutions $y_1,y_2,\ldots,y_n$ of $y^{(n)}+\sum_{i=0}^{n-1}p_i(x)y^{(i)}=0$ on an interval $I$ where $p_i(x)$ are continuous for all $i\in[0,n-1]\cap\bbZ$, for any $x_0\in I$,
+For $n$ $(n-1)$ times differentiable solutions $y_1,y_2,\ldots,y_n$ for the homogeneous linear ODE:
+\[y^{(n)}+\sum_{i=0}^{n-1}p_i(x)y^{(i)}=0\]
+on an interval $I$ where $p_i(x)$ are continuous for all $i\in[0,n-1]\cap\bbZ$, for any $x_0\in I$,
 \[W(y_1,y_2,\ldots,y_n)(x)=W(y_1,y_2,\ldots,y_n)(x_0)\exp(-\int_{x_0}^xp_{n-1}(t)\dd{t}).\]
 \bpr
 Let $W$ denote $W(y_1,y_2,\ldots,y_n)$.
@@ -552,7 +562,11 @@ Solve $W'(x)+p_{n-1}(x)W(x)$ using integrating factor $\exp(-\int_{x_0}^xp_{n-1}
 \[W(x)=W(x_0)\exp(-\int_{x_0}^xp_{n-1}(t)\dd{t}).\]
 \epr
 \sssc{Non-zero Wrońskian of solutions of homogeneous linear equation iff linear independence of them}
-For $n$ $(n-1)$ times differentiable solutions $y_1,y_2,\ldots,y_n$ of $y^{(n)}+\sum_{i=0}^{n-1}p_i(x)y^{(i)}=0$ on an interval $I$ where $p_i(x)$ are continuous for all $i\in[0,n-1]\cap\bbZ$, for any $x_0\in I$, $W(y_1,y_2,\ldots,y_n)(x_0)\ne 0$ iff $y_1,y_2,\ldots,y_n$ are linearly independent.
+For $n$ $(n-1)$ times differentiable solutions $y_1,y_2,\ldots,y_n$ for the homogeneous linear ODE:
+\[y^{(n)}+\sum_{i=0}^{n-1}p_i(x)y^{(i)}=0\]
+on an interval $I$ where $p_i(x)$ are continuous for all $i\in[0,n-1]\cap\bbZ$, for any $x_0\in I$,
+\[W(y_1,y_2,\ldots,y_n)(x_0)\ne 0\]
+iff $y_1,y_2,\ldots,y_n$ are linearly independent.
 \bpr
 Abel's identity shows that
 \[W(y_1,y_2,\ldots,y_n)(x)=W(y_1,y_2,\ldots,y_n)(x_0)\exp(-\int_{x_0}^Xp_{n-1}(t)\dd{t}).\]
