@@ -47,6 +47,8 @@ For two input terminals, the differential transfer function is the transfer func
 For two input terminals, the common-mode transfer function is the transfer function when an ideal source's output connecting both of them is treated as input signal.
 \sssc{Operating point, operation point, Q-point, quiescent point, or bias point}
 The steady-state DC voltage and current values that an electronic component processing time-varying signals is set to operate around is called bias point $Q$. Voltage and current at the bias point is called bias (voltage and current). A bias circuit is a portion of the device's circuit that supplies this steady current or voltage. A component in the bias circuit is called biasing.
+\sssc{Incremental resistance}
+The incremental resistance of a device at a bias point is $\dv{v}{i}$ at the point.
 \ssc{Amplifier (amp)}
 \sssc{Amplifier}
 An electronic device which amplifies an electrical signal by a scale called amplifier gain $A$ and optionally convert voltage signal to current signal or vice versa.
@@ -970,15 +972,17 @@ Thus, the output voltage is:
 \item At $v_S=V_S$, the reverse voltages across $D_3$ and $D_4$ are the peak inverse voltage (PIV)
 \[V_D+v_O=V_D+V_S-2V_D=V_S-V_D\]
 \eit
-\ssc{MOSFET (Metal-oxide-semiconductor field-effect transistor)}
+\ssc{Enhance-mode MOSFET (Metal-oxide-semiconductor field-effect transistor)}
 \sssc{Physical structure of NMOS (transistor)/n-channel MOSFET/FET}
-An NMOS consists of a slightly doped p-typr substrate with width $W$, with a metal contact below forming the substrate or body (B) terminal, two heavily doped n-type regions, n$^+$ source and n$^+$ drain regions, embedded onto the substrate in the left and right symmetrically, with the same width as the substrate, and with distance $L$ between the two regions called channel length, each with a metal contact on top forming source (S) and drain (D) terminals respectively, and a silicon dioxide \ce{SiO2} or similar oxide layer of thickness $t_{ox}$ on top of the three region contacting all of them but not their metal contact with the same width as the substrate, with a metal contact on top forming the gate (G) terminal, also called gate electrode. Thus, the FET is symmetrical.
+An NMOS consists of a slightly doped p-typr substrate with width $W$, with a metal contact below forming the substrate, body, or bulk (B) terminal, two heavily doped n-type regions, n$^+$ source and n$^+$ drain regions, embedded onto the substrate in the left and right symmetrically, with the same width as the substrate, and with distance $L$ between the two regions called channel length, each with a metal contact on top forming source (S) and drain (D) terminals respectively, and a silicon dioxide \ce{SiO2} or similar oxide layer of thickness $t_{ox}$ on top of the three region contacting all of them but not their metal contact with the same width as the substrate, with a metal contact on top forming the gate (G) terminal, also called gate electrode. Thus, the FET is symmetrical.
 
 The substrate forms pn junctions with the source and drain regions, which are kept reverse biased at all times. Assume that the body has no effect on the device operation, and we can treat the MOSFET as a three-terminal device, with the terminals being the gate (G), the source (S), and the drain (D). We define the voltage relative to the source: $v_{GS}=v_G-v_S$ is the gate-to-source voltage, and $v_{DS}=v_D-v_S$ is the drain-to-source voltage. The area of the substrate just under the gate is called channel region, which has length $L$ and width $W$.
-\sssc{Operation under zero voltage}
-When $v_{GS}=0$, it acts as two back-to-back diodes in series between drain and source, which prevent current conduction from drain to source when a voltage $v_{DS}$ is applied. The high resistance between source and drain is about $10^{12}$ Ohm.
-\sssc{Inducing a channel}
-When $v_{GS}>V_t$ where $V_t>0$ is the threshold voltage, holes are repelled from the channel region and pushed downward into the substrate, forming a carrier-depletion region, while free electrons from the n$^+$ source and drain regions are attracted and accumulated in the channel region, inverting the substrate surface from p type to n type, which connects the two n$^+$ regions. This n-type channel, under the oxide layer and on top of the carrier-depletion region, is called n-channel or induced channel. Free electrons can flow through it and conduct between source and drain.
+
+We will be referring to NMOS unless otherwise specified.
+\sssc{Cutoff region}
+When $v_{GS}<V_t$ where $V_t>0$ is the threshold voltage, it acts as two back-to-back diodes in series between drain and source, which prevent current conduction from drain to source when a voltage $v_{DS}$ is applied, called cutoff region. The high resistance between source and drain is about $10^{12}$ Ohm.
+\sssc{Inducing n-channel}
+When $v_{GS}\ge V_t$ called turn-on condition, holes are repelled from the channel region and pushed downward into the substrate, forming a carrier-depletion region, while free electrons from the n$^+$ source and drain regions are attracted and accumulated in the channel region, inverting the substrate surface from p type to n type, which connects the two n$^+$ regions. This n-type channel, under the oxide layer and on top of the carrier-depletion region, is called n-channel or induced channel. Free electrons can flow through it and conduct between source and drain. Thus free electrons are called majority carrier of NMOS.
 
 The gate metal and the channel region form a parallel-plate capacitor with the oxide layer acting as the capacitor dielectric. An electric field thus develops downwards. The capacitance is
 \[C_{ox}=\frac{\varepsilon_{ox}}{t_{ox}}\]
@@ -990,13 +994,8 @@ is called the effective voltage or the overdrive voltage. And the free electron 
 \[Q=-C_{ox}WLv_{OV}\]
 and the linear charge density along $L$ is
 \[\frac{Q}{L}=-C_{ox}Wv_{OV}\]
-We will be studying $v_{GS}>V_T$ case unless otherwise specified.
-
-We always choose $v_{DS}\ge 0$ unless otherwise specified, which can be achieved by reversing the role of source and drain if not yet achieved.
-
-The model we study is the ideal long channel model, assuming a sufficiently large $L$.
 \sssc{Linear approximation of triode region under small drain-to-source voltage}
-Apply a small $v_{DS}$ (e.g., 50 mv or so) between drain and source such that $\abs{v_{DS}}\ll v_{OV}$ and that we can assume that the voltage between the gate and any point along the channel region remains approximately constant.
+When $v_{GS}\ge V_t$, apply a small $v_{DS}$ (e.g., 50 mv or so) between drain and source such that $\abs{v_{DS}}\ll v_{OV}$ and that we can assume that the voltage between the gate and any point along the channel region remains approximately constant.
 
 With drain-to-source direction as positive direction, the electric field along $L$ is
 \[E=\frac{v_{DS}}{L}\]
@@ -1022,7 +1021,7 @@ The MOSFET transconductance parameter $k_n$ is defined as
 And the current equation is
 \[i_{DS}=k_nv_{OV}v_{DS}\]
 \sssc{Triode region}
-Apply a $v_{DS}<v_{OV}$, it appears as a voltage drop across the length of the channel. At the source end,
+When $v_{GS}\ge V_t$, apply a $v_{DS}<v_{OV}$, it appears as a voltage drop across the length of the channel. At the source end,
 \[v_{GS}-V_t=v_{OV}\]
 At the drain end
 \[v_{GD}-V_t=v_{OV}-v_{DS}\]
@@ -1034,12 +1033,51 @@ The linear current equation mentioned earlier is an approximation of it using $v
 
 The $0<v_{DS}<v_{OV}$ regions is called triode region.
 \sssc{Saturation region}
-When $v_{DS}\ge v_{OV}$, the channel has zero depth at the drain end, called channel pinch-off, and the current saturates at
+When $v_{GS}\ge V_t$ and $v_{DS}\ge v_{OV}$, the channel has zero depth at the drain end, called channel pinch-off, assuming the zero-depth length is negligible relative to $L$, the current saturates at
 \[i_{DS}=\frac{1}{2}k_nv_{OV}^{\phantom{OV}2}\]
-The voltage $v_{OV}$ is also denoted $v_{DS\tx{sat}}$, called saturation voltage.
+The voltage $v_{OV}$ is also denoted $v_{DS\tx{sat}}$, called saturation voltage. The incremental output resistance is thus infinite when $v_{DS}>v_{OV}$.
 
 Note that channel pinch-off does not mean channel blockage. Current continues to flow through the pinched-off channel. $v_{DS}-v_{DS\tx{sat}}$ appears a voltage drop across the depletion region. Free electrons are swept through the depletion region towards the drain when channel region has zero depth.
+\sssc{Saturation region channel-length modulation}
+When $v_{DS}>v_{OV}$, the channel length is actually less than $L$, with a portion near drain being of zero depth, i.e., depletion region, called channel-length modulation, and the current equation becomes
+\[i_{DS}=\frac{1}{2}k_nv_{OV}^{\phantom{OV}2}(1+\lambda v_{DS}),\]
+where $\lambda\ge 0$ is a device parameter of the dimension of V$^{-1}$ and is inversely proportional to $L$. For device with large $L$, $\lambda$ is often negligible, while for submicron (micron = \textmu{}m) scale, $\lambda$ is often large. We take $V_A=\frac{1}{\lambda}$. The voltage axis interception of the current equation is $-V_A$.  We can isolate the dependence on $L$ with
+\[V_A=V_A'L\]
+The output resistance $r_O$ is
+\[r_O=\frac{V_A}{I_{DS}'}\]
+where
+\[I_{DS}'=\frac{1}{2}k_nv_{OV}^{\phantom{OV}2}\]
+And
+\[i_{DS}=I_{DS}'+\frac{v_{DS}}{r_O}\]
 \sssc{PMOS (transistor)/p-channel MOSFET/FET}
-
-
+\bit
+\item Physical structure: Reverse n and p in the description of NMOS.
+\item Convention: $v_{SD}>0$
+\item Threshold voltage: $V_t<0$
+\item Cutoff region: $v_{SG}<-V_t$, for $v_{SG}>0$, i.e., $\abs{v_{SG}}<\abs{V_t}$
+\item Turn-on condition: $v_{SG}\ge-V_t$, for $v_{SG}>0$, i.e., $\abs{v_{SG}}\ge\abs{V_t}$
+\item Overdrive voltage:
+\[v_{OV}=v_{SG}+V_t\]
+\item Majority carrier: Holes
+\item Channel-region charge:
+\[Q=C_{ox}WLv_{OV}\]
+\item Process transconductance parameter:
+\[k'_p=\mu_pC_{ox}\]
+\item MOSFET Transconductance parameter:
+\[k_p=k'_p\frac{W}{L}\]
+\item Linear triode approximation:
+\[i_{SD}=k_pv_{OV}v_{SD}\]
+\item Triode region:
+\[i_{SD}=k_p\qty(v_{OV}-\frac{1}{2}v_{SD})v_{SD}\]
+\item Saturation region (long-channel):
+\[i_{SD}=\frac{1}{2}k_pv_{OV}^{\phantom{OV}2}\]
+\item Saturation region channel-length modulation:
+\[V_A=\frac{1}{\lambda}>0\]
+\[I_{SD}'=\frac{1}{2}k_pv_{OV}^{\phantom{OV}2}\]
+\[r_O=\frac{V_A}{I_{SD}'}\]
+\[i_{SD}=\frac{1}{2}k_pv_{OV}^{\phantom{OV}2}(1+\lambda v_{SD}=I_{SD}'+\frac{v_{SD}}{r_O}\]
+\eit
+NMOS and PMOS are said to be complementary device.
+\sssc{CMOS (complementary MOS)}
+A technology was developed that permits the fabrication of both NMOS and PMOS transistors on the same chip, called CMOS, where the NMOS transistor is built directly in the p-type substrate, and the PMOS transistor is built in a specially created n region embedded on the p-type substrate, called n well, with a thick oxide between NMOS's n$^+$ region and PMOS's p$^+$ region for isolation.
 \end{document}
