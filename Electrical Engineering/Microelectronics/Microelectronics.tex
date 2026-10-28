@@ -625,7 +625,7 @@ Let the materials be cuboid, cross sectional area of the junction be $A$, width 
 \[\abs{Q_+}=qAx_nN_D=\abs{Q_-}=qAx_pN_A\]
 The width of the depletion region $W=x_p+x_n$ is given by the Poisson's equation
 \[W=\sqrt{\frac{2\varepsilon}{q}\qty(\frac{1}{N_A}+\frac{1}{N_D})V_0}\]
-where $\varepsilon$ is the electrical permittivity of the material, which for silicon is $11.7\varepsilon_0=11.7\times 11.7\times 8.85\times 10^{-14}$ F/cm $=1.04\times 10^{-12}$ F/cm. Typical $W$ ranges from 0.1 \textmu{}m to 1 \textmu{}m.
+where $\varepsilon$ is the permittivity of the material, which for silicon is $11.7\varepsilon_0=11.7\times 8.85\times 10^{-14}$ F/cm $=1.04\times 10^{-12}$ F/cm. Typical $W$ ranges from 0.1 \textmu{}m to 1 \textmu{}m.
 \[x_n=W\frac{N_A}{N_A+N_D}\]
 \[x_p=W\frac{N_D}{N_A+N_D}\]
 The charge stored on either side of the depletion region is
@@ -971,5 +971,47 @@ Thus, the output voltage is:
 \[V_D+v_O=V_D+V_S-2V_D=V_S-V_D\]
 \eit
 \ssc{MOSFET (Metal-oxide-semiconductor field-effect transistor)}
+\sssc{Physical structure of NMOS (transistor)/n-channel MOSFET/FET}
+An NMOS consists of a slightly doped p-typr substrate with width $W$, with a metal contact below forming the substrate or body (B) terminal, two heavily doped n-type regions, n$^+$ source and n$^+$ drain regions, embedded onto the substrate in the left and right symmetrically, with the same width as the substrate, and with distance $L$ between the two regions called channel length, each with a metal contact on top forming source (S) and drain (D) terminals respectively, and a silicon dioxide \ce{SiO2} or similar oxide layer of thickness $t_{ox}$ on top of the three region contacting all of them but not their metal contact with the same width as the substrate, with a metal contact on top forming the gate (G) terminal, also called gate electrode. Thus, the FET is symmetrical.
+
+The substrate forms pn junctions with the source and drain regions, which are kept reverse biased at all times. Assume that the body has no effect on the device operation, and we can treat the MOSFET as a three-terminal device, with the terminals being the gate (G), the source (S), and the drain (D). We define the voltage relative to the source: $v_{GS}=v_G-v_S$ is the gate-to-source voltage, and $v_{DS}=v_D-v_S$ is the drain-to-source voltage. The area of the substrate just under the gate is called channel region, which has length $L$ and width $W$.
+\sssc{Operation under zero voltage}
+When $v_{GS}=0$, it acts as two back-to-back diodes in series between drain and source, which prevent current conduction from drain to source when a voltage $v_{DS}$ is applied. The high resistance between source and drain is about $10^{12}$ Ohm.
+\sssc{Inducing a channel}
+When $v_{GS}>V_t$ where $V_t>0$ is the threshold voltage, holes are repelled from the channel region and pushed downward into the substrate, forming a carrier-depletion region, while free electrons from the n$^+$ source and drain regions are attracted and accumulated in the channel region, inverting the substrate surface from p type to n type, which connects the two n$^+$ regions. This n-type channel, under the oxide layer and on top of the carrier-depletion region, is called n-channel or induced channel. Free electrons can flow through it and conduct between source and drain.
+
+The gate metal and the channel region form a parallel-plate capacitor with the oxide layer acting as the capacitor dielectric. An electric field thus develops downwards. The capacitance is
+\[C_{ox}=\frac{\varepsilon_{ox}}{t_{ox}}\]
+where $\varepsilon_{ox}$ is the permittivity of the oxide, which for \ce{SiO2} is $3.9\varepsilon_0=3.9\times 8.85\times 10^{-12}$ F/m $=3.45\times 10^{-11}$ F/m.
+
+The excess of $v_{GS}$ over $V_t$:
+\[v_{OV}=v_{GS}-V_t\]
+is called the effective voltage or the overdrive voltage. And the free electron charges in the channel region is
+\[Q=-C_{ox}WLv_{OV}\]
+and the linear charge density along $L$ is
+\[\frac{Q}{L}=-C_{ox}Wv_{OV}\]
+\sssc{Applying a small drain-to-source voltage}
+With an induced channel, apply a small $v_{DS}$ between drain and source where $\abs{v_{DS}}\ll v_{GS}$ and that we can assume that the voltage between the gate and any point along the channel region remains approximately constant.
+
+The electric field along $L$ is
+\[E=\frac{v_{DS}}{L}\]
+The drift velocity of free electrons in the channel region is
+\[v_n=-\mu_nE\]
+The (drift) current is
+\[\ba
+i_{DS}&=-\frac{Q}{L}\mu_nE\\
+      &=C_{ox}Wv_{OV}\mu_n\frac{v_{DS}}{L}\\
+      &=\mu_nC_{ox}\frac{W}{L}v_{OV}v_{DS}
+\ea\]
+Thus the channel conductivity $g_{DS}$ and resistance $r_{DS}$ are
+\[g_{DS}=\frac{i_{DS}}{v_{DS}}=\mu_nC_{ox}\frac{W}{L}v_{OV}\]
+\[r_{DS}=\frac{1}{g_{DS}}=\frac{1}{\mu_nC_{ox}\frac{W}{L}v_{OV}}\]
+The process transconductance parameter $k'_n$ is defined as
+\[k'_n=\mu_nC_{ox}\]
+since it's determined by the process technology, which has the dimension of A/V$^2$.
+The transistor aspect ratio is defined as
+\[\frac{W}{L}\]
+The MOSFET transconductance parameter $k_n$ is defined as
+\[k_n=k'_n\frac{W}{L}\]
 
 \end{document}
