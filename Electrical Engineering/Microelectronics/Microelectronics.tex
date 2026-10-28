@@ -414,7 +414,7 @@ The number density of states of the allowed energy level per unit volume per uni
 where $m_e$ is the mass of an electron.
 \sssc{Occupancy probability}
 The occupancy probability, the probability that a given available state will be occupied by an electron, as a function of energy level $E$, is
-\[P(E)=\frac{1}{e^{\frac{E-E_F}{kT}}+1}\]
+\[P(E)=\frac{1}{\exp(\frac{E-E_F}{kT})+1}\]
 where $T$ is temperature in K and $k$ is Boltzmann's constant $8.62\times 10^{-5}$ eV/K.
 \sssc{Number density of occupied states per unit volume per unit energy interval}
 The number density of occupied states per unit volume per unit energy interval $N_0(E)$ is
@@ -837,7 +837,7 @@ Diffusion capacitance predominates only in forward bias. Consider a forward-bias
 \[\ba
   Q_p&=Aq\int_{x_n}^{\infty}p_n(x)-p_{n0}\dd{x}\\
      &=Aq\int_{x_n}^{\infty}\qty(p_n(x_n)-p_{n0})e^{-(x-x_n)/L_p}\dd{x}\\
-     &=Aq\qty(p_n(x_n)-p_{n0})L_p\evlv{e^{-(x-x_n)/L_p}}_{x_n}^{\infty}\\
+     &=Aq\qty(p_n(x_n)-p_{n0})L_p\evlp(e^{-(x-x_n)/L_p})_{x_n}^{\infty}\\
      &=\frac{L_p^2}{D_p}i_p
 \ea\]
 We define the time constant $\tau_p$, called minority-carrier hole lifetime, as
@@ -848,7 +848,7 @@ We define the time constant $\tau_p$, called minority-carrier hole lifetime, as
   Q_n&=Aq\int_{-\infty}^{-x_p}n_p(x)-n_{p0}\dd{x}\\
   Q_n&=Aq\int_{x_p}^{\infty}n_p(-x)-n_{p0}\dd{-x}\\
      &=Aq\int_{x_p}^{\infty}\qty(n_p(-x_p)-n_{p0})e^{-(x-x_p)/L_n}\dd{-x}\\
-     &=Aq\qty(n_p(-x_p)-n_{p0})L_n\evlv{e^{-(x-x_p)/L_n}}_{x_p}^{\infty}\\
+     &=Aq\qty(n_p(-x_p)-n_{p0})L_n\evlp(e^{-(x-x_p)/L_n})_{x_p}^{\infty}\\
      &=\frac{L_n^2}{D_n}i_n
 \ea\]
 We define the time constant $\tau_n$, called minority-carrier electron lifetime, as
@@ -942,7 +942,7 @@ A dc power supply delivers a dc voltage, usually in the range of 3 V to 20 V, to
 A half-wave rectifier uses alternate half-cycles of the input sinusoidal.
 
 To obtain a positive signal, it consists of a sinusoidal input voltage $v_S=V_S\sin(\omega t+\varphi)$ with $V_S>V_D$ and a diode, where the - terminal of $v_S$ is grounded, the + terminal of $v_S$ is connected to the + terminal of the diode, and the - terminal of the diode is the output voltage $v_O$. Assuming constant voltage drop $V_D$ for forward-biased voltage $\ge V_D$ and cut off for forward-biased voltage $<V_D$ or reverse bias, the output voltage is:
-\[v_O=\max\{0,v_S-V_D\}\]
+\[v_O=\max\qty{0,v_S-V_D}\]
 At $v_S=-v_S$, the reverse voltage across the diode is the peak inverse voltage (PIV) $V_S$.
 \sssc{Full-wave rectifier with center-tapped transformer}
 A full-wave rectifier uses both halves of the input sinusoidal and consists of a center-tapped secondary winding of the transformer where the center tap is grounded to provide two equal input voltages $v_S=V_S\sin(\omega t+\varphi)$ with $V_S>V_D$ and two diodes, where the + terminal of one input and the - terminal of the other are connected to the + terminals of the two diodes $D_1,D_2$, and the - terminals of the two diodes are connected together as the output voltage $v_O$. The voltage across $D_1$ (the + terminal relative to the - terminal) is $v_S-v_O$, and the voltage across $D_2$ (the + terminal relative to the - terminal) is $-v_S-v_O$. Assuming constant voltage drop $V_D$ for forward-biased voltage $\ge V_D$ and cut off for forward-biased voltage $<V_D$ or reverse bias,
@@ -951,7 +951,7 @@ A full-wave rectifier uses both halves of the input sinusoidal and consists of a
 \item when $v_S<V_D$, $D_2$ is forward-biased with voltage $V_D$ (the + terminal relative to the - terminal) and $D_1$ is cut off.
 \eit
 Thus, the output voltage is:
-\[v_O=\max\{0,\abs{v_S}-V_D\}\]
+\[v_O=\max\qty{0,\abs{v_S}-V_D}\]
 \bit
 \item At $v_S=V_S$, the reverse voltage across $D_2$ is the peak inverse voltage (PIV)
 \[v_S+v_O=V_S+V_S-V_D=2V_s-V_D\]
