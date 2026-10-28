@@ -990,17 +990,22 @@ is called the effective voltage or the overdrive voltage. And the free electron 
 \[Q=-C_{ox}WLv_{OV}\]
 and the linear charge density along $L$ is
 \[\frac{Q}{L}=-C_{ox}Wv_{OV}\]
-\sssc{Applying a small drain-to-source voltage}
-With an induced channel, apply a small $v_{DS}$ between drain and source where $\abs{v_{DS}}\ll v_{GS}$ and that we can assume that the voltage between the gate and any point along the channel region remains approximately constant.
+We will be studying $v_{GS}>V_T$ case unless otherwise specified.
 
-The electric field along $L$ is
+We always choose $v_{DS}\ge 0$ unless otherwise specified, which can be achieved by reversing the role of source and drain if not yet achieved.
+
+The model we study is the ideal long channel model, assuming a sufficiently large $L$.
+\sssc{Linear approximation of triode region under small drain-to-source voltage}
+Apply a small $v_{DS}$ (e.g., 50 mv or so) between drain and source such that $\abs{v_{DS}}\ll v_{OV}$ and that we can assume that the voltage between the gate and any point along the channel region remains approximately constant.
+
+With drain-to-source direction as positive direction, the electric field along $L$ is
 \[E=\frac{v_{DS}}{L}\]
 The drift velocity of free electrons in the channel region is
 \[v_n=-\mu_nE\]
 The (drift) current is
 \[\ba
-i_{DS}&=-\frac{Q}{L}\mu_nE\\
-      &=C_{ox}Wv_{OV}\mu_n\frac{v_{DS}}{L}\\
+i_{DS}&=\frac{Q}{L}v_n\\
+      &=C_{ox}Wv_{OV}\mu_nE\\
       &=\mu_nC_{ox}\frac{W}{L}v_{OV}v_{DS}
 \ea\]
 Thus the channel conductivity $g_{DS}$ and resistance $r_{DS}$ are
@@ -1009,9 +1014,31 @@ Thus the channel conductivity $g_{DS}$ and resistance $r_{DS}$ are
 The process transconductance parameter $k'_n$ is defined as
 \[k'_n=\mu_nC_{ox}\]
 since it's determined by the process technology, which has the dimension of A/V$^2$.
+
 The transistor aspect ratio is defined as
 \[\frac{W}{L}\]
 The MOSFET transconductance parameter $k_n$ is defined as
 \[k_n=k'_n\frac{W}{L}\]
+And the current equation is
+\[i_{DS}=k_nv_{OV}v_{DS}\]
+\sssc{Triode region}
+Apply a $v_{DS}<v_{OV}$, it appears as a voltage drop across the length of the channel. At the source end,
+\[v_{GS}-V_t=v_{OV}\]
+At the drain end
+\[v_{GD}-V_t=v_{OV}-v_{DS}\]
+The induced channel acquires a tapered shape, and the charge in it is proportional to the channel cross-sectional area
+\[\frac{1}{2}\qty(v_{OV}+(v_{OV}-v_{DS}))=v_{OV}-\frac{1}{2}v_{DS}\]
+The current equation becomes
+\[i_{DS}=k_n\qty(v_{OV}-\frac{1}{2}v_{DS})v_{DS}=k_n\qty(v_{OV}v_{DS}-\frac{1}{2}v_{DS}^{\phantom{DS}2})\]
+The linear current equation mentioned earlier is an approximation of it using $v_{DS}\ll v_{OV}$.
+
+The $0<v_{DS}<v_{OV}$ regions is called triode region.
+\sssc{Saturation region}
+When $v_{DS}\ge v_{OV}$, the channel has zero depth at the drain end, called channel pinch-off, and the current saturates at
+\[i_{DS}=\frac{1}{2}k_nv_{OV}^{\phantom{OV}2}\]
+The voltage $v_{OV}$ is also denoted $v_{DS\tx{sat}}$, called saturation voltage.
+
+Note that channel pinch-off does not mean channel blockage. Current continues to flow through the pinched-off channel, where the free electrons are swept through the carrier-depletion region when channel region has zero depth.
+
 
 \end{document}
