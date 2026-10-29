@@ -697,6 +697,7 @@ and the natural response is critically damped.
 \ssc{Transformer}
 \sssc{Transformer or power transformer}
 A transformer is a passive component that transfers electrical energy from one electrical circuit, called power-line circuit, to another circuit, or multiple circuits and provides electrical isolation between them, using magnetically coupled coils.
+\sssc{Circuit symbol}
 \begin{center}
 \begin{circuitikz}
 \draw (0,0) node[transformer]{Transformer} (3,0);
@@ -708,12 +709,12 @@ An ideal transformer is a two-port, linear, time-invariant, lossless network con
 \[n=\frac{N_1}{N_2}.\]
 Magnetic coupling of same magnetic flux per turn enforces
 \[\frac{v_1}{N_1}=\frac{v_2}{N_2}.\]
-Power consistency enforces 
+Power consistency enforces
 \[v_1i_1=v_2i_2.\]
 Thus
-\[\frac{i_1}{N_2}=\frac{i_2}{N_1}.\]
-That is,
-\[\begin{bmatrix}v_1\\i_1\end{bmatrix}=\begin{bmatrix}n&0\\0&\frac{1}{n}\end{bmatrix}\begin{bmatrix}v_2\\i_2\end{bmatrix}.\]
+\[\frac{v_2}{v_1}=\frac{1}{n}\]
+\[\frac{i_2}{i_1}=n\]
+If $n>1$, the transformer is called an $n$-to-$1$ step-down transformer.
 \sssc{Dot convention}
 On diagram, a dot is drawn on one terminal of each coil. If dots of the two coils are on the same side, the voltages (and currents) of them as measured in the same direction are in-phase; if dots of the two coils are on the opposite side, the voltages (and currents) of them as measured in the same direction are out-of-phase. Equivalently, if the voltage (and current) of one coil is measured from the dotted terminal to the undotted terminal and the voltage (and current) of the other coil is measured from the undotted terminal to the dotted terminal, the measured voltages (and currents) of them in-phase.
 \sssc{Coupled inductors model}
@@ -737,8 +738,6 @@ Primary coil is replaced with a VCVS
 Second coil is replaced with a CCCS
 \[i_2=ni_1.\]
 \sssc{Impedance reflection model}
-Only works if the two coils' circuit are only coupled by the transformer.
-
-If a load impedance $Z_s$ is on secondary coil, seen from primary coil, it's a load impedance
+This model only works if the two coils' circuit are only coupled by the transformer. If a load impedance $Z_s$ is on secondary coil, seen from primary coil, it's a load impedance
 \[Z_p=n^2Z_s.\]
 \end{document}
