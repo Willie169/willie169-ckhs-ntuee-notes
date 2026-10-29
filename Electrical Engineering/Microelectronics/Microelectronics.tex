@@ -192,20 +192,22 @@ An inverting amplifier consists of an op amp where input voltage $v_i$ is connec
 The closed-loop gain $G$ is defined as
 \[G=\frac{v_o}{v_i}=-\frac{R_f}{R_i}\]
 The feedback factor $\beta$ is defined as
-\[\beta=\frac{1}{1+\frac{R_f}{R_i}}\]
+\[\beta=\frac{1}{1+\frac{R_f}{R_i}}=\frac{1}{1-G}\]
 Effect of finite open-loop gain:
 \[v_+=0\]
 \[v_o=-Av_-\]
 \[i_i=\frac{v_i-v_-}{R_i}=\frac{v_i+\frac{v_o}{A}}{R_i}=i_f=-\frac{v_o+\frac{v_o}{A}}{R_f}\]
-\[G=\frac{v_o}{v_i}=\frac{-\frac{R_f}{R_i}}{1+\frac{1+\frac{R_f}{R_i}}{A}}=\frac{G_{\tx{ideal}}}{1+\frac{1-G_{\tx{ideal}}}{A}}\]
+\[G=\frac{v_o}{v_i}=\frac{-\frac{R_f}{R_i}}{1+\frac{1+\frac{R_f}{R_i}}{A}}=\frac{G_{\tx{ideal}}}{1+\frac{1-G_{\tx{ideal}}}{A}}=\frac{G_{\tx{ideal}}}{1+\frac{1}{A\beta}}\]
 \[\lim_{A\to\infty}G=-\frac{R_f}{R_i}=G_{\tx{ideal}}\]
 For single-pole model $A(s)=\frac{A_0}{1+\frac{s}{\omega_b}}$ with $A_0\gg 1+\frac{R_f}{R_i}$ and $\omega_t=A_0\omega_b$:
 \[\ba
 G&=\frac{-\frac{R_f}{R_i}}{1+\frac{1+\frac{R_f}{R_i}}{A}}\\
  &=\frac{-\frac{R_f}{R_i}}{1+\frac{1+\frac{R_f}{R_i}}{A_0}+\frac{s}{\frac{\omega_t}{1+\frac{R_f}{R_i}}}}\\
- &\approx\frac{-\frac{R_f}{R_i}}{1+\frac{s}{\frac{\omega_t}{1+\frac{R_f}{R_i}}}},
+ &\approx\frac{-\frac{R_f}{R_i}}{1+\frac{s}{\frac{\omega_t}{1+\frac{R_f}{R_i}}}}\\
+ &\approx\frac{G_{\tx{ideal}}}{1+\frac{s}{\frac{\omega_t}{1-G_{\tx{ideal}}}}}\\
+ &\approx\frac{G_{\tx{ideal}}}{1+\frac{s}{\omega_t\beta}}
 \ea\]
-which is a low-pass STC filter with 3 dB bandwidth $\frac{\omega_t}{1+\frac{R_f}{R_i}}=\omega_t\beta$ and DC gain $-\frac{R_f}{R_i}$.
+which is a low-pass STC filter with 3 dB bandwidth $\frac{\omega_t}{1+\frac{R_f}{R_i}}=\omega_t\beta$ and DC gain $-\frac{R_f}{R_i}=G_{\tx{ideal}}$.
 \sssc{Transresistance amplifier}
 A transresistance amplifier consists of an op amp where input current $i_i$ is connected to $v_-$, $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through two resistances $R_o$ (current from $x$ to $v_o$) and $R_f$ (current from $v_-$ to $x$) in series connection, with the node $x$ between $R_o$ and $R_f$ connected to ground through a resistance $R_g$ (current from $x$ to ground).
 \[v_x=-R_fi_i\]
@@ -228,21 +230,23 @@ A non-inverting (or noninverting) amplifier consists of an op amp where input vo
 The closed-loop gain $G$ is defined as
 \[G=\frac{v_o}{v_i}=1+\frac{R_f}{R_g}\]
 The feedback factor $\beta$ is defined as
-\[\beta=\frac{1}{1+\frac{R_f}{R_g}}\]
+\[\beta=\frac{1}{1+\frac{R_f}{R_g}}=\frac{1}{G}\]
 Effect of finite open-loop gain:
 \[v_+=v_i\]
 \[v_o=A(v_i-v_-)\]
 \[v_-=v_i-\frac{v_o}{A}\]
 \[i_g=\frac{v_-}{R_g}=\frac{v_i-\frac{v_o}{A}}{R_g}=i_f=\frac{v_o-v_-}{R_f}=\frac{v_o-v_i+\frac{v_o}{A}}{R_f}\]
-\[G=\frac{v_o}{v_i}=\frac{1+\frac{R_f}{R_g}}{1+\frac{1+\frac{R_f}{R_g}}{A}}=\frac{G_{\tx{ideal}}}{1+\frac{G_{\tx{ideal}}}{A}}\]
+\[G=\frac{v_o}{v_i}=\frac{1+\frac{R_f}{R_g}}{1+\frac{1+\frac{R_f}{R_g}}{A}}=\frac{G_{\tx{ideal}}}{1+\frac{G_{\tx{ideal}}}{A}}=\frac{G_{\tx{ideal}}}{1+\frac{1}{A\beta}}\]
 \[\lim_{A\to\infty}G=1+\frac{R_f}{R_g}=G_{\tx{ideal}}\]
 For single-pole model $A(s)=\frac{A_0}{1+\frac{s}{\omega_b}}$ with $A_0\gg 1+\frac{R_f}{R_g}$ and $\omega_t=A_0\omega_b$:
 \[\ba
 G&=\frac{1+\frac{R_f}{R_g}}{1+\frac{1+\frac{R_f}{R_g}}{A}}\\
  &=\frac{1+\frac{R_f}{R_g}}{1+\frac{1+\frac{R_f}{R_g}}{A_0}+\frac{s}{\frac{\omega_t}{1+\frac{R_f}{R_g}}}}\\
- &\approx\frac{1+\frac{R_f}{R_g}}{1+\frac{s}{\frac{\omega_t}{1+\frac{R_f}{R_g}}}}
+ &\approx\frac{1+\frac{R_f}{R_g}}{1+\frac{s}{\frac{\omega_t}{1+\frac{R_f}{R_g}}}}\\
+ &\approx\frac{G_{\tx{ideal}}}{1+\frac{s}{\frac{\omega_t}{G_{\tx{ideal}}}}}\\
+ &\approx\frac{G_{\tx{ideal}}}{1+\frac{s}{\omega_t\beta}}
 \ea\]
-which is a low-pass STC filter with 3 dB bandwidth $\frac{\omega_t}{1+\frac{R_f}{R_g}}=\omega_t\beta$ and DC gain $1+\frac{R_f}{R_g}$.
+which is a low-pass STC filter with 3 dB bandwidth $\frac{\omega_t}{1+\frac{R_f}{R_g}}=\omega_t\beta$ and DC gain $1+\frac{R_f}{R_g}=G_{\tx{ideal}}$.
 \sssc{Unity gain amplifier, unity gain buffer, buffer amplifier, or voltage follower}
 A unity gain amplifier consist of an op amp where input voltage $v_i$ is connected to $v_+$, and $v_o$ is fed back to $v_-$.
 \[v_o=v_-=v_+=v_i\]
