@@ -875,17 +875,27 @@ We define the time constant $\tau_n$, called minority-carrier electron lifetime,
 \eit
 The total excess minority-carrier charge is
 \[Q=Q_p+Q_n=\tau_pi_p+\tau_ni_n\]
+Consider
+\[i_p=Aq\frac{D_p}{L_p}p_{n0}\qty(e^{v/V_T}-1)\]
+\[i_n=Aq\frac{D_n}{L_n}n_{p0}\qty(e^{v/V_T}-1)\]
+Thus,
+\[i_p=\frac{\frac{D_p}{L_p}p_{n0}}{\frac{D_p}{L_p}p_{n0}+\frac{D_n}{L_n}n_{p0}}i\]
+\[i_n=\frac{\frac{D_n}{L_n}n_{p0}}{\frac{D_p}{L_p}p_{n0}+\frac{D_n}{L_n}n_{p0}}i\]
+\[Q=\tau_pi_p+\tau_ni_n=\frac{L_pp_{n0}+L_nn_{p0}}{\frac{D_p}{L_p}p_{n0}+\frac{D_n}{L_n}n_{p0}}i\]
 We define the (mean) transit time of the junction $\tau_T$ such that
-\[Q=\tau_Ti\]
-For most practical one-sided junction, either
-\[N_A\gg N_D\qc i\approx i_p\gg i_n\qc Q=Q_p\gg Q_n\qc\tau_T\approx\tau_p\]
-or
-\[N_D\gg N_A\qc i\approx i_n\gg i_p\qc Q=Q_n\gg Q_p\qc\tau_T\approx\tau_n\]
+\[Q=\tau_Ti,\]
+which has the value
+\[\tau_T=\frac{L_pp_{n0}+L_nn_{p0}}{\frac{D_p}{L_p}p_{n0}+\frac{D_n}{L_n}n_{p0}}\]
 For small changes around a bias point, say $v=V_Q$, we can define an incremental diffusion capacitance $C_d$ as
 \[C_d=\evlv{\dv{Q}{v}}_{v=V_Q}\]
 Using the approximation $e^{v/V_T}\gg 1$, $i=I_S\qty(e^{v/V_T}-1)\approx I_Se^{v/V_T}$, we have
 \[C_d=\frac{\tau_T}{V_T}i\]
 $C_d$ is directly proportional to the forward current $i$ and thus is negligibly small when the diode is reverse biased. Also, to keep $C_d$ small, the transit time $\tau_T$ must be made small, which is important for a pn junction intended for high-speed or high-frequency operation.
+
+For most practical one-sided junction, either
+\[N_A\gg N_D\qc i\approx i_p\gg i_n\qc Q=Q_p\gg Q_n\qc\tau_T\approx\tau_p\]
+or
+\[N_D\gg N_A\qc i\approx i_n\gg i_p\qc Q=Q_n\gg Q_p\qc\tau_T\approx\tau_n\]
 \ssc{Diode voltage regulator}
 \sssc{Voltage regulator}
 A voltage regulator is a circuit designed to provide a constant dc voltage between its output terminals.
