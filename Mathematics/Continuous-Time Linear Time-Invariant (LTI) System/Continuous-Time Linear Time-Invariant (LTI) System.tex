@@ -122,68 +122,56 @@ is steady-state sinusoidal response and the second term is not transient.
 \item If $i\omega$ is a pole, it is resonant response that grows to infinity over time.
 \eit
 \eit
-\sssc{Logarithmic scale, decibel (dB), and Bode plot (波德圖)}
+\sssc{Logarithmic scale and decibel (dB)}
 Frequency response are often expressed in logarithmic scale:
 \bit
 \item Magnitude response, input, and output can be expressed in decibel (dB) as $g(\omega)\coloneq C\log_{10}|H(i\omega)|$, $C\log_{10}|x|$, and $C\log_{10}|y|$ with some constant $C$. $C=20$ is used here.
 \item Changing by 2 times is called an octave, oct or 8ve, and changing by 10 times is called a decade or dec. $k$ dec$^{-1}$ equals to $\log_{10}(2)$ oct$^{-1}$. The most common used is $20$ dB/dec equals to $20\log_{10}(2)\approx 6$ dB/oct.
 \item Gradually reducing gain at either end of the frequency range is called roll-off.
 \eit
-\sssc{Cutoff (截止), break, or corner (angular) frequency}
-For a transfer function, cutoff frequency $\omega_c$ is a frequency such that
-\[\abs{H(i\omega_c)}=\frac{\max_{\omega}a(\omega)}{\sqrt{2}}.\]
-$20\log_{10}(\frac{1}{\sqrt{2}})=-10\log_{10}(2)\approx -3$, thus this frequency is also denoted $\omega_{-3\tx{dB}}$ or $\omega_{3\tx{dB}}$.
-\sssc{Normalizing}
+\sssc{Midband gain and normalizing}
 For a transfer function $H(s)$ such that
-\[\max_{\omega}a(\omega)=K\in\bbR_{>0},\]
-normalizing means dividing $H(s)$ by $K$. The following filter definitions are normalized. Non-normalized definition is defined as any filter whose normalized form complies with the definition.
-\sssc{Bode plot}
+\[\sup_{\omega}a(\omega)=K\in\bbR_{>0},\]
+$K$ is called midband gain, and normalizing means dividing $H(s)$ by $K$.
+\sssc{Bode plot (波德圖)}
 \bit
-\item Bode magnitude plot or dB gain curve: Magnitude response plotted with frequency (or frequency divided by cutoff or some other important frequency) in logarithmic scale as horizontal axis and magnitude response (or, normalized magnitude response, that is, divided by maximum gain, where the Bode magnitude plot is called normalized) in dB as vertical axis.
-\item Bode phase plot or phase curve: Phase response plotted with frequency (or frequency divided by cutoff or some other important frequency) in logarithmic scale as horizontal axis and phase response as vertical axis.
+\item Bode magnitude plot or dB gain curve: Magnitude response plotted with frequency in logarithmic scale as horizontal axis and magnitude response (or, normalized magnitude response, where the Bode magnitude plot is called normalized) in dB as vertical axis.
+\item Bode phase plot or phase curve: Phase response plotted with frequency in logarithmic scale as horizontal axis and phase response as vertical axis.
 \item Asymptotic Bode plot: The asymptotes of Bode plots for low and high frequency is often interested.
 \eit
+\sssc{Cutoff (截止), break, or corner (angular) frequency}
+For a frequency response with finite midband gain $K$, a cutoff frequency $\omega_c$ is a frequency such that
+\[\abs{H(i\omega_c)}=\frac{K}{\sqrt{2}}.\]
+$20\log_{10}(\frac{1}{\sqrt{2}})=-10\log_{10}(2)\approx -3$, thus this frequency is also denoted $\omega_{-3\tx{dB}}$ or $\omega_{3\tx{dB}}$.
+\sssc{Bandwidth}
+Bandwidth (or -3 dB bandwidth) of a frequency response with finite midband gain is the set of frequencies over which the normalized gain is no less than $\frac{1}{\sqrt{2}}$, or the length of it if it is connected. $k$ dB bandwidth of a frequency response with finite midband gain is the set of frequencies over which the normalized gain in dB is no less than $k$ dB, or the length of it if it is connected. 0 dB bandwidth is also called unity-gain bandwidth.
 \ssc{Filters}
 \sssc{Low-pass or lowpass (低通) (LP), high-cut, or bass-cut filter (LPF)}
-A continuous-time linear time-invariant system is a normalized low-pass filter iff $H(i\omega)$ as a function of a real variable $\omega$ is such that
-\[\lim_{\omega\to 0}a(\omega)=1\]
+A continuous-time linear time-invariant system is a low-pass filter iff
+\[\lim_{\omega\to 0}a(\omega)=K\]
 \[\lim_{\omega\to\infty}a(\omega)=0\]
-$K$ is called low-pass gain.
-
-Ideal normalized low-pass filter is
-\[H(i\omega)=\bcs1,\quad&\omega<\omega_0\\0,\quad&\omega>\omega_0\ecs\]
+where $K$ is midband gain, also called low-pass gain.
 \sssc{High-pass or highpass (高通) (HP), low-cut, or treble-cut filter (HPF)}
-A continuous-time linear time-invariant system is a normalized high-pass filter iff $H(i\omega)$ as a function of a real variable $\omega$ is such that
+A continuous-time linear time-invariant system is a normalized high-pass filter iff
 \[\lim_{\omega\to 0}a(\omega)=0\]
-\[\lim_{\omega\to\infty}a(\omega)=1\]
-$K$ is called high-pass gain.
-
-Ideal normalized high-pass filter is
-\[H(i\omega)=\bcs1,\quad&\omega>\omega_0\\0,\quad&\omega<\omega_0\ecs\]
+\[\lim_{\omega\to\infty}a(\omega)=K\]
+where $K$ is midband gain, also called high-pass gain.
 \sssc{Band-pass or bandpass (BP) filter (BPF)}
-A continuous-time linear time-invariant system is a standard normalized band-pass filter iff $H(i\omega)$ as a function of a real variable $\omega$ is such that
+A continuous-time linear time-invariant system is a standard normalized band-pass filter iff
 \[\lim_{\omega\to 0}a(\omega)=0\]
 \[\lim_{\omega\to\infty}a(\omega)=0\]
-\[\arg_{\omega}\left\{a(\omega)=\frac{1}{\sqrt{2}}\right\}=\omega_L,\omega_H\]
-\[\abs{H(\sqrt{\omega_L\omega_H})}=1\]
-where $\omega_L<\omega_H$ are called band edge, $\omega_H-\omega_L$ is called bandwidth, and $\omega_0=\sqrt{\omega_L\omega_H}$ is called central passed frequency or center frequency. $\omega_0\gg B$ is called narrow band-pass filter.
+\[\arg_{\omega}\left\{a(\omega)=\frac{K}{\sqrt{2}}\right\}=\omega_L,\omega_H\]
+\[\abs{H(\sqrt{\omega_L\omega_H})}=K\]
+where $K$ is midband gain, also called band-pass gain, $\omega_L,\omega_H$ are called band edge, $B=\omega_H-\omega_L$ is bandwidth, and $\omega_0=\sqrt{\omega_L\omega_H}$ is called central/center frequency.
 
-$K$ is called band-pass or midband gain.
-
-Ideal normalized band-pass filter is
-\[H(i\omega)=\bcs1,\quad&\omega_H>\omega>\omega_L\\0,\quad&\omega<\omega_L\lor\omega>\omega_H\ecs\]
+If $\omega_0\gg B$, the filter is called narrow.
 \sssc{Band-stop or bandstop (BS), band-reject, or notch filter (BSF)}
-A continuous-time linear time-invariant system is a standard normalized band-stop filter iff $H(i\omega)$ as a function of a real variable $\omega$ is such that
-\[\arg_{\omega}\left\{a(\omega)=\frac{1}{\sqrt{2}}\right\}=\omega_L,\omega_H\]
+A continuous-time linear time-invariant system is a standard normalized band-stop filter iff
+\[\arg_{\omega}\left\{a(\omega)=\frac{K}{\sqrt{2}}\right\}=\omega_L,\omega_H\]
 \[\abs{H(\sqrt{\omega_L\omega_H})}=0\]
-where $\omega_L<\omega_H$ are called band edge, $\omega_H-\omega_L$ is called bandwidth, and $\omega_0=\sqrt{\omega_L\omega_H}$ is called central rejected frequency or center frequency. $\omega_0\gg B$ is called narrow band-stop filter.
+where $K$ is midband gain, also called band-stop gain or notch gain, $\omega_L,\omega_H$ are called band edge, $B=\omega_H-\omega_L$ is bandwidth, and $\omega_0=\sqrt{\omega_L\omega_H}$ is called central/center frequency.
 
-$K$ is called notch gain.
-
-Ideal normalized band-stop filter is
-\[H(i\omega)=\bcs0,\quad&\omega_H>\omega>\omega_L\\1,\quad&\omega<\omega_L\lor\omega>\omega_H\ecs\]
-\sssc{Bandwidth}
-The band of frequencies over which the gain is no less than 3 dB (or other value if specified, such as 0 dB for unity gain bandwidth), or the length of it if it is connected.
+If $\omega_0\gg B$, the filter is called narrow.
 \sssc{Normalized low-pass prototype filter}
 A normalized low-pass prototype filter is a low-pass filter with cutoff frequency $\omega_c=1$. Suppose the transfer function of it is $H_P(s)$. A normalized low-pass prototype filter is usually defined with $\qty(a(\omega))^2=H(i\omega)H(-i\omega)$ or $H(s)$.
 
