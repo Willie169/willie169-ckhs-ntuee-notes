@@ -47,7 +47,7 @@ A complete $n$-ary tree where all leaves are of the same depth is called perfect
 A perfect $n$-ary tree with height $k$ has $\sum_{j=0}^kn^j$ nodes.
 \ssc{Binary tree}
 \sssc{Binary tree}
-In a binary tree, the leftmost children of an internal node is called its left child, and a node to the right of it is called its right child.
+In a binary tree, the two possible children of a node are called left child and right child. A child is either left or right but not both even if it has no sibling.
 \ssss{Complete binary tree}
 For a complete binary tree with $n$ nodes:
 \bit
@@ -57,6 +57,8 @@ For a complete binary tree with $n$ nodes:
 \eit
 \sssc{Perfect binary tree}
 A perfect binary tree with height $k$ has $2^{k+1}-1$ nodes.
+\sssc{Balanced tree}
+A type of binary tree with height $O(\log n)$ where $n$ is the number of nodes is called balanced.
 \ssc{Tree traversal}
 They are defined recursively. Suppose the root is $r$.
 \sssc{Preorder}
@@ -80,6 +82,21 @@ The time complexity is $O(\tx{height of tree})$.
 To find the node containing the smallest key, start at root and go to the left child as long as there is one, and the leaf we stop at is the smallest key. Similarly for find the largest key.
 
 The time complexity is $O(\tx{height of tree})$.
-
-
+\sssc{Insertion}
+Suppose we want to insert $x$. First search for it, if we found it, do noting (or update something); otherwise, if we stop at $y$,
+\bit
+\item if $x>y$, insert $x$ as the right child of $y$ if $x>y$, and
+\item if $x<y$, insert $x$ as the left child of $y$.
+\eit
+The time complexity is $O(\tx{height of tree})$.
+\sssc{Deletion}
+Suppose we want to delete $x$. First search for it, if we don't found it, do noting (or update something); otherwise,
+\bit
+\item if it is a leaf, delete it,
+\item if it has one child $y$, adjust $y$ as a child of the parent of $x$ of the same position as $x$ and delete $x$, and
+\item if it has two children, replace it with the minimum element $y$ in the subtree whose root is the right child of $x$ and delete node $y$, which is a leaf.
+\eit
+The time complexity is $O(\tx{height of tree})$.
+\ssc{AVL tree (Adelson-Velsky and Landis tree)}
+A
 \end{document}
