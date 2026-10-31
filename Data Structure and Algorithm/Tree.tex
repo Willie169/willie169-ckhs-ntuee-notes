@@ -1,0 +1,85 @@
+\documentclass[a4paper,12pt]{article}
+\input{LaTeX-ToolKit/template.tex}
+\begin{document}
+\title{Tree} 
+\author{沈威宇}
+\date{\temtoday}
+\titledoc
+\sct{Tree}
+\ssc{Tree}
+\sssc{Tree}
+A tree is an abstract data type of a set of nodes. A relationship between two nodes $i,j$ is defined with
+\bit
+\item $i$ is called a child of $j$ and
+\item $j$ is called a parent of $i$; and
+\item a node can have at most one parent.
+\eit
+If not empty, a tree is recursively defined as a distinguished node $r$ called root and zero or more nonempty trees called subtrees, where the root of each substree is a child of $r$.
+\bit
+\item Nodes sharing the same parent are called siblings. Children of a node are defined with a left to right order.
+\item A node with no children is called a leaf, external node, or exterior node.
+\item A node that is not a leaf is called an internal node or interior node.
+\item The number of edges from the root to a node is called the depth of the node, while the root has depth $0$.
+\item The maximum depth of the nodes is called the height or depth of the tree.
+\item The ancestors of a node is recursively defined as itself for root and itself and the ancestors of its parent for non-root nodes.
+\item The descendants of a node is recursively defined as itself for leaves and itself and the descendants of its children for internal nodes.
+\item Nodes of the same depth are called a level. Levels are ordered by depth. The left-to-right order of nodes in a level is defined recursively to, if they are siblings, follow that of siblings; otherwise follow that of their parents.
+\item A tree consisting of all descendants of a node is called a subtree. The left-to-right order of subtrees whose roots are of the same depth are defined as that of their roots.
+\eit
+\sssc{Tree representation}
+A representation of tree where each pair of parent and child is connected with a edge.
+\sssc{Left child, right sibling representation}
+A representation of tree where each internal node and its leftmost child is connected with a edge, and each sibling that is not the leftmost one is called to the sibling at its left.
+\ssc{$n$-ary tree}
+\sssc{$n$-ary tree}
+A tree in which no node can have more than $n$ children is called an $n$-ary tree.
+\sssc{Full, proper, or plane}
+An $n$-ary tree where each internal node has exactly $n$ children is called full, proper, or plane.
+\sssc{Filled}
+A level of depth $k\in\bbN$ of an $n$-ary tree is called filled iff each node in the level of depth $k-1$ has exactly $n$ children. The level of depth 0 is called filled iff the tree is nonempty.
+\sssc{Complete}
+An $n$-ary tree where every level, except possibly the last, is filled and whose nodes in the last level are as far left as possible, is called complete.
+
+A complete $n$-ary tree is indexed from top to bottom and then from left to right, with the root as node $1$.
+\sssc{Perfect}
+A complete $n$-ary tree where all leaves are of the same depth is called perfect.
+
+A perfect $n$-ary tree with height $k$ has $\sum_{j=0}^kn^j$ nodes.
+\ssc{Binary tree}
+\sssc{Binary tree}
+In a binary tree, the leftmost children of an internal node is called its left child, and a node to the right of it is called its right child.
+\ssss{Complete binary tree}
+For a complete binary tree with $n$ nodes:
+\bit
+\item Parent of node $i$ is node $\floor{\frac{i}{2}}$ for all integers $i>1$.
+\item The left child of node $i$ is $2i+1$ for all integers $i\le\frac{n-1}{2}$.
+\item The right child of node $i$ is $2i$ for all integers $i\le\frac{n}{2}$.
+\eit
+\sssc{Perfect binary tree}
+A perfect binary tree with height $k$ has $2^{k+1}-1$ nodes.
+\ssc{Tree traversal}
+They are defined recursively. Suppose the root is $r$.
+\sssc{Preorder}
+First visit $r$, and then visit the subtrees whose roots are children of $r$ from left to right.
+\sssc{Postorder}
+Visit the subtrees whose roots are children of $r$ from left to right, and finally visit $r$.
+\sssc{Inorder (binary tree)}
+Among the subtrees whose roots are children of $r$, first visit the left subtree, and then visit $r$, and then visit the right subtree.
+\ssc{Binary search tree (BST)}
+\sssc{Binary search tree (BST)}
+Stores keys in the nodes of a binary tree so that searching, insertion and deletion can be done efficiently. For every node $x$, all the keys in its left subtree are smaller than $x$ and all keys in its right subtree are larger than $x$.
+\sssc{Searching}
+Suppose we are searching for $x$ and the root is $r$.
+\bit
+\item If $x=r$, then we are done.
+\item If $x<r$, then we search in the left subtree.
+\item If $x>r$, then we search in the right subtree.
+\eit
+The time complexity is $O(\tx{height of tree})$.
+\sssc{Finding minimum and maximum}
+To find the node containing the smallest key, start at root and go to the left child as long as there is one, and the leaf we stop at is the smallest key. Similarly for find the largest key.
+
+The time complexity is $O(\tx{height of tree})$.
+
+
+\end{document}
