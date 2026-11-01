@@ -61,11 +61,11 @@ A perfect binary tree with height $k$ has $2^{k+1}-1$ nodes.
 A type of binary tree with height $O(\log n)$ where $n$ is the number of nodes is called balanced.
 \ssc{Tree traversal}
 They are defined recursively. Suppose the root is $r$.
-\sssc{Preorder}
+\sssc{Preorder traversal}
 First visit $r$, and then visit the subtrees of $r$ from left to right.
-\sssc{Postorder}
+\sssc{Postorder traversal}
 Visit the subtrees of $r$ from left to right, and finally visit $r$.
-\sssc{Inorder (binary tree)}
+\sssc{Inorder traversal (binary tree)}
 First visit the left subtree of $r$, and then visit $r$, and then visit the right subtree of $r$.
 \ssc{Binary search tree (BST)}
 \sssc{Binary search tree (BST)}
@@ -97,6 +97,18 @@ Suppose we want to delete $x$. First search for it, if we don't found it, do not
 \item if it has two children, replace it with the minimum element $y$ in the right subtree of $x$ and delete the node $y$, which is a leaf.
 \eit
 The time complexity is $O(\tx{height of tree})$.
+\sssc{Uniqueness given preorder traversal}
+A BST with distinct values is uniquely determined by its preorder traversal.
+\bpr
+A BST with one node is obviously unique. The first element must be root, the second element to the last element smaller than root must be the left subtree, and the rest must be the right subtree. Recursively partition into the subtrees. We uniquely obtained the BST.
+\epr
+\sssc{Uniqueness given postorder traversal}
+A BST with distinct values is uniquely determined by its postorder traversal.
+\bpr
+A BST with one node is obviously unique. The last element must be root, the first element to the last element smaller than root must be the left subtree, and the rest must be the right subtree. Recursively partition into the subtrees. We uniquely obtained the BST.
+\epr
+\sssc{Inorder traversal is in ascending order}
+Inorder traversal of a BST always produces values in ascending order.
 \ssc{AVL tree (Adelson-Velsky and Landis tree)}
 \sssc{AVL tree (Adelson-Velsky and Landis tree)}
 An AVL tree is a self-balancing binary search tree (BST). The height for AVL trees is defined differing from that of a tree:
