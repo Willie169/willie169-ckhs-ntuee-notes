@@ -139,12 +139,12 @@ Suppose we want to delete $x$. First search for it, if we don't found it, do not
 \eit
 The time complexity is $O(\tx{height of tree})$.
 \sssc{Uniqueness given preorder traversal}
-A BST with distinct values is uniquely determined by its preorder traversal.
+A BST is uniquely determined by its preorder traversal.
 \bpr
 A BST with one node is obviously unique. The first element must be root, the second element to the last element smaller than root must be the left subtree, and the rest must be the right subtree. Recursively partition into the subtrees. We uniquely obtained the BST.
 \epr
 \sssc{Uniqueness given postorder traversal}
-A BST with distinct values is uniquely determined by its postorder traversal.
+A BST is uniquely determined by its postorder traversal.
 \bpr
 A BST with one node is obviously unique. The last element must be root, the first element to the last element smaller than root must be the left subtree, and the rest must be the right subtree. Recursively partition into the subtrees. We uniquely obtained the BST.
 \epr
@@ -155,8 +155,8 @@ Only if: Prove by mathematical induction. The inorder traversal of a BST with on
 
 If: Prove by mathematical induction. A binary tree with one node is a BST. Assume that any binary tree with fewer than $n$ nodes of distinct values whose inorder traversal is sorted in ascending order is a BST. Consider any binary tree with $n$ nodes of distinct values and root $r$ whose inorder traversal is sorted in ascending order. The subsequence before $r$ is a binary tree with fewer than $n$ nodes of distinct values whose inorder traversal is sorted in ascending order whose values of nodes are smaller than $r$. The subsequence after $r$ is a binary tree with fewer than $n$ nodes of distinct values whose inorder traversal is sorted in ascending order whose values of nodes are larger than $r$. Since the left subtree is a BST and smaller than root and the right subtree is a BST and larger than root, we conclude that any binary tree with $n$ nodes of distinct values whose inorder traversal is sorted in ascending order is a BST. By mathematical induction, the statement holds.
 \epr
-\sssc{Number of possible BSTs given distinct values}
-Given $n$ distinct values, the number $T_n$ of distinct BSTs built from them is:
+\sssc{Number of distinct BST shapes}
+The number $T_n$ of distinct shapes of BSTs with $n$ nodes is:
 \[T_0=1\]
 \[T_n=\sum_{i=0}^{n-1}T_iT_{n-1-i},\quad n\in\bbN\]
 \[T_n=\frac{1}{(n+1)!}\binom{2n}{n},\quad n\in\bbN_0\]
@@ -202,34 +202,37 @@ Let the minimum number of nodes in an AVL tree of height $h$ be $N_h$. Since the
 \[N_{-1}=0\]
 \[N_0=1\]
 \[N_h=N_{h-1}+N_{h-2}+1,\quad h\in\bbN\]
-Let $\varphi=\frac{1+\sqrt{5}}{2}$ denote the golden ratio.
-\[N_h=\frac{1}{\varphi+2}\qty(\varphi^{h+4}+\qty(-\frac{1}{\varphi})^{h+2})-1,\quad h+1\in\bbN_0\]
+\[N_h=\frac{1}{\sqrt{5}}\qty(\qty(\frac{1+\sqrt{5}}{2})^{h+3}-\qty(\frac{1-\sqrt{5}}{2})^{h+3})-1,\quad h+1\in\bbN_0\]
 \bpr
+Use characteristic equation:
+\[x^2-x-1=0 \]
+Let
+\[\varphi=\frac{1+\sqrt{5}}{2}\]
 Note that
 \[\frac{3+\sqrt{5}}{2}=\varphi^2=\varphi+1\]
 \[2+\sqrt{5}=\varphi^3=2\varphi+1\]
 \[\frac{7+3\sqrt{5}}{2}=\varphi^4=3\varphi+2\]
 \[\frac{1-\sqrt{5}}{2}=-\frac{1}{\varphi}=1-\varphi\]
 \[\frac{3-\sqrt{5}}{2}=\frac{1}{\varphi^2}=1-\frac{1}{\varphi}=2-\varphi\]
-Use characteristic equation:
-\[x^2-x-1=0 \]
 \[x=\frac{1\pm\sqrt{5}}{2}=\varphi,-\frac{1}{\varphi}\]
 \[N_h=a\varphi^h+b\qty(-\frac{1}{\varphi})^h+c\]
 \[N_0=a+b+c=1\]
 \[N_1=a\varphi-\frac{b}{\varphi}+c=0+1+1=2\]
 \[N_2=a\varphi^2+\frac{b}{\varphi^2}+c=1+2+1=4\]
 \[N_2=a\qty(\varphi+1)-b\qty(\frac{1}{\varphi}-1)+c=4\]
-\[N_2-N_1=a+b=2\]
+\[N_2-N_1=a+b=4-2=2\]
 \[c=N_0-(a+b)=1-2=-1\]
-\[N_1-c=a\varphi-\frac{2-a}{\varphi}=3\]
+\[N_1-c=a\varphi-\frac{2-a}{\varphi}=2+1=3\]
 \[a\qty(\varphi^2+1)=3\varphi+2\]
 \[a=\frac{3\varphi+2}{\varphi+2}=\frac{\varphi^4}{\varphi+2}\]
 \[b=2-a=\frac{2-\varphi}{\varphi+2}=\frac{1}{\varphi^2\qty(\varphi+2)}\]
 \[N_h=\frac{1}{\varphi+2}\qty(\varphi^{h+4}+\qty(-\frac{1}{\varphi})^{h+2})-1\]
+\[\frac{1}{\varphi+2}=\frac{2}{5+\sqrt{5}}=\frac{1}{\sqrt{5}\varphi}\]
+\[N_h=\frac{1}{\sqrt{5}}\qty(\qty(\frac{1+\sqrt{5}}{2})^{h+3}-\qty(\frac{1-\sqrt{5}}{2})^{h+3})-1\]
 \epr
 So
-\[N_h=\Theta(\varphi^h)\]
-\[h=\log_{\varphi}N_h+O(1)\approx 1.44\log_2N_h+O(1)\]
+\[N_h=\Theta(\qty(\frac{1+\sqrt{5}}{2})^h)\]
+\[h=\log_{\frac{1+\sqrt{5}}{2}}N_h+O(1)\approx 1.44\log_2N_h+O(1)\]
 Let the maximum number of nodes in an AVL tree of height $h$ be $M_h$. Since the maximum numbers of subtrees height of the root of an AVL tree of height $h$ are $h-1$, we have:
 \[M_{-1}=0\]
 \[M_h=2M_{h-1}+1,\quad h\in\bbN_0\]
@@ -239,7 +242,7 @@ So
 \[h=\log_2M_h+O(1)\]
 Let the number of nodes be $n$.
 \[N_h\le n\le M_h\]
-\[\log_2n+O(1)\le h\le\log_{\varphi}n+O(1)\approx 1.44\log_2N_h+O(1)\]
+\[\log_2n+O(1)\le h\le\log_{\frac{1+\sqrt{5}}{2}}n+O(1)\approx 1.44\log_2N_h+O(1)\]
 Thus
 \[h\in\Theta(\log n)\]
 \sssc{Searching and finding minimum/maximum}
@@ -268,8 +271,8 @@ Deletion in AVL tree involves first doing deletion the same as in BST, and then 
 \item if not, we say the AVL tree property is violated at $x$ and perform rotations to restore it, and then proceed to the parent of $x$ since violation may propagate upwards for deletion.
 \eit
 The time complexity is $O(\tx{height of tree})=O(\log\tx{number of nodes})$.
-\sssc{Number of possible AVL trees given height and number of nodes}
-Given $n$ distinct values, the number $A_{h,n}$ of distinct AVL trees with height $h$ built from them is:
+\sssc{Number of distinct AVL tree shapes}
+The number $A_{h,n}$ of distinct shapes of AVL trees with $n$ nodes and height $h$ is:
 \[A_{-1,0}=1\]
 \[A_{-1,n}=0,\quad n\ne0\]
 \[A_{0,1}=1\]
@@ -278,5 +281,47 @@ Given $n$ distinct values, the number $A_{h,n}$ of distinct AVL trees with heigh
 \bpr
 The root uses one node, leaving $n-1$ nodes for the two subtrees. Since the whole tree has height $h$, the two trees must either have heights $h-1,h-2$ or both have height $h-1$. Thus,
 \[A_{h,n}=\sum_{i=0}^{n-1}A_{h-1,i}A_{h-1,n-1-i}+A_{h-1,i}A_{h-2,n-1-i}+A_{h-2,i}A_{h-1,n-1-i}\]
+\epr
+\sssc{Number of distinct AVL tree shapes with minimum number of nodes given height}
+The number $B_h$ of distinct shapes of AVL trees with height $h$ and minimum number of nodes is:
+\[B_{-1}=1\]
+\[B_0=1\]
+\[B_h=2B_{h-1}B_{h-2},\quad h\in\bbN\]
+\[B_h=2^{\frac{1}{\sqrt{5}}\qty(\qty(\frac{1+\sqrt{5}}{2})^{h+2}-\qty(\frac{1-\sqrt{5}}{2})^{h+2})-1},\quad h+1\in\bbN_0\]
+\bpr
+To minimize the number of nodes, the two subtrees of root must be the AVL tree with height $h-1,h-2$ and minimum number of nodes, which have $B_{h-1},B_{h-2}$ distinct shapes respectively. There are two possible arrangements:
+\bit
+\item Left subtree has height $h-1$, and right subtree has height $h-2$.
+\item Left subtree has height $h-2$, and right subtree has height $h-1$.
+\eit
+Thus,
+\[B_h=2B_{h-1}B_{h-2}\]
+Let
+\[C_h=\log_2B_h\]
+\[C_h=C_{h-1}+C_{h-2}+1\]
+Use characteristic equation:
+\[x^2-x-1=0\]
+Let
+\[\varphi=\frac{1+\sqrt{5}}{2}\]
+Note that
+\[\frac{3+\sqrt{5}}{2}=\varphi^2=\varphi+1\]
+\[2+\sqrt{5}=\varphi^3=2\varphi+1\]
+\[\frac{1-\sqrt{5}}{2}=-\frac{1}{\varphi}=1-\varphi\]
+\[x=\frac{1\pm\sqrt{5}}{2}=\varphi,-\frac{1}{\varphi}\]
+\[C_h=a\varphi^h+b\qty(-\frac{1}{\varphi})^h+c\]
+\[C_0=a+b+c=\log_21=0\]
+\[C_1=a\varphi-\frac{b}{\varphi}+c=\log_2(2*1*1)=1\]
+\[C_2=a\varphi^2+\frac{b}{\varphi^2}+c=0+1+1=2\]
+\[C_2=a\qty(\varphi+1)-b\qty(\frac{1}{\varphi}-1)+c=2\]
+\[C_2-C_1=a+b=2-1=1\]
+\[c=C_0-(a+b)=0-1=-1\]
+\[C_1-c=a\varphi-\frac{1-a}{\varphi}=1+1=2\]
+\[a\qty(\varphi^2+1)=2\varphi+1\]
+\[a=\frac{2\varphi+1}{\varphi+2}=\frac{\varphi^3}{\varphi+2}\]
+\[b=1-a=\frac{1-\varphi}{\varphi+2}=-\frac{1}{\varphi\qty(\varphi+2)}\]
+\[C_h=\frac{1}{\varphi+2}\qty(\varphi^{h+3}+\qty(-\frac{1}{\varphi})^{h+1})-1\]
+\[\frac{1}{\varphi+2}=\frac{2}{5+\sqrt{5}}=\frac{1}{\sqrt{5}\varphi}\]
+\[C_h=\frac{1}{\sqrt{5}}\qty(\qty(\frac{1+\sqrt{5}}{2})^{h+2}-\qty(\frac{1-\sqrt{5}}{2})^{h+2})-1\]
+\[B_h=2^{\frac{1}{\sqrt{5}}\qty(\qty(\frac{1+\sqrt{5}}{2})^{h+2}-\qty(\frac{1-\sqrt{5}}{2})^{h+2})-1}\]
 \epr
 \end{document}
