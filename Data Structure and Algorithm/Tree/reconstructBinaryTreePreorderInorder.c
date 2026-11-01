@@ -25,12 +25,12 @@ Node *construct(int *P, int *I, int num) {
     return NULL;
   if (num == 1)
     return createNode(P[0]);
-  Node *root = createNode(P[0]);
-  int leftRootVal = P[1];
+  int rootVal = P[0];
+  Node *root = createNode(rootVal);
   int k = 0;
-  while (I[k] != leftRootVal)
+  while (I[k] != rootVal)
     k++;
-  int leftSize = k + 1;
+  int leftSize = k;
   int rightSize = num - 1 - leftSize;
   root->left = construct(P + 1, I, leftSize);
   root->right = construct(P + 1 + leftSize, I + leftSize + 1, rightSize);
