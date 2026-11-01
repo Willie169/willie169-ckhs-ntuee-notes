@@ -15,16 +15,17 @@ A tree is an abstract data type of a set of nodes. A relationship between two no
 \item a node can have at most one parent.
 \eit
 If not empty, a tree is recursively defined as a distinguished node $r$ called root and zero or more nonempty trees called subtrees, where the root of each substree is a child of $r$.
+\sssc{Terminology}
 \bit
-\item Nodes sharing the same parent are called siblings. Children of a node are defined with a left to right order.
-\item A node with no children is called a leaf, external node, or exterior node.
-\item A node that is not a leaf is called an internal node or interior node.
-\item The number of edges from the root to a node is called the depth of the node, while the root has depth $0$.
-\item The maximum depth of the nodes is called the height or depth of the tree.
-\item The ancestors of a node is recursively defined as itself for root and itself and the ancestors of its parent for non-root nodes.
-\item The descendants of a node is recursively defined as itself for leaves and itself and the descendants of its children for internal nodes.
-\item Nodes of the same depth are called a level. Levels are ordered by depth. The left-to-right order of nodes in a level is defined recursively to, if they are siblings, follow that of siblings; otherwise follow that of their parents.
-\item A tree consisting of all descendants of a node is called a subtree. The left-to-right order of subtrees whose roots are of the same depth are defined as that of their roots. A subtree whose root is a child of a node is called a subtree of the node.
+\item Siblings: Nodes sharing the same parent are called siblings. Children of a node are defined with a left to right order.
+\item Leaf: A node with no children is called a leaf, external node, or exterior node.
+\item Internal node: A node that is not a leaf is called an internal node or interior node.
+\item Depth: The number of edges from the root to a node is called the depth of the node, while the root has depth $0$.
+\item Height: The height of a leaf is defined as 0. The height of an internal node is defined as the maximum height of its children plus 1. The maximum depth of the nodes, i.e., the height of its root, is called the height or depth of the tree. The height or depth of an empty tree is defined as -1. Some define heights of nodes and trees as the definition here plus 1, which is not used here.
+\item Ancestors: The ancestors of a node is recursively defined as itself for root and itself and the ancestors of its parent for non-root nodes.
+\item Descendants: The descendants of a node is recursively defined as itself for leaves and itself and the descendants of its children for internal nodes.
+\item Level: Nodes of the same depth are called a level. Levels are ordered by depth. The left-to-right order of nodes in a level is defined recursively to, if they are siblings, follow that of siblings; otherwise follow that of their parents.
+\item Subtree: A tree consisting of all descendants of a node is called a subtree. The left-to-right order of subtrees whose roots are of the same depth are defined as that of their roots. A subtree whose root is a child of a node is called a subtree of the node.
 \eit
 \sssc{Tree representation}
 A representation of tree where each pair of parent and child is connected with a edge.
@@ -191,20 +192,16 @@ C(x)&=\frac{1-\sqrt{1-4x}}{2x}\\
 \epr
 \ssc{AVL tree (Adelson-Velsky and Landis tree)}
 \sssc{AVL tree (Adelson-Velsky and Landis tree)}
-An AVL tree is a self-balancing binary search tree (BST). The height for AVL trees is defined differing from that of a tree:
-\bit
-\item The height of a leaf is defined as 1.
-\item The height of an internal node is defined as the maximum height of its children plus 1.
-\item The height of an AVL tree is defined as the height of its root, which is thus one more than the earlier definition for general tree.
-\eit
-An AVL tree needs to comply with the property that for every node with two children in the tree, the height of its left and right subtrees differ by at most 1.
-\sssc{Minimum and maximum numbers of nodes}
+An AVL tree is a self-balancing binary search tree (BST). An AVL tree needs to comply with the property that for every node with two children in the tree, the height of its left and right subtrees differ by at most 1.
+
+Some define heights of nodes and AVL trees as the definition used here plus 1, which is not used here.
+\sssc{Relation of height and numbers of nodes}
 Let the minimum number of nodes in an AVL tree of height $h$ be $N_h$. Since the minimum numbers of subtrees height of the root of an AVL tree of height $h$ are $h-1$ and $h-2$, we have:
-\[N_0=0\]
-\[N_1=1\]
-\[N_h=N_{h-1}+N_{h-2}+1,\quad h-2\in\bbN_0\]
+\[N_{-1}=0\]
+\[N_0=1\]
+\[N_h=N_{h-1}+N_{h-2}+1,\quad h\in\bbN\]
 Let $\varphi=\frac{1+\sqrt{5}}{2}$ denote the golden ratio.
-\[N_h=\frac{1}{\varphi+2}\qty(\varphi^{h+3}+\qty(-\frac{1}{\varphi})^{h+1})-1\]
+\[N_h=\frac{1}{\varphi+2}\qty(\varphi^{h+3}+\qty(-\frac{1}{\varphi})^{h+1})-2,\quad h+1\in\bbN_0\]
 \bpr
 Note that
 \[\frac{1-\sqrt{5}}{2}=1-\varphi=-\frac{1}{\varphi}\]
@@ -214,28 +211,26 @@ Use characteristic equation:
 \[x^2-x-1=0 \]
 \[x=\frac{1\pm\sqrt{5}}{2}=\varphi,-\frac{1}{\varphi}\]
 \[N_h=a\varphi^h+b\qty(-\frac{1}{\varphi})^h+c\]
-\[N_0=a+b+c=0\]
-\[N_1=a\varphi-\frac{b}{\varphi}+c=1\]
-\[N_2=a\varphi^2+\frac{b}{\varphi^2}+c=0+1+1=2\]
-\[a(\varphi-1)-b\qty(\frac{1}{\varphi}+1)=1\]
-\[\frac{a}{\varphi}-b\varphi=1\]
-\[a-b(\varphi+1)=\varphi\]
-\[a\qty(\varphi^2-1)+b\qty(\frac{1}{\varphi^2}-1)=2\]
-\[a\varphi-\frac{b}{\varphi}=2\]
-\[b(\varphi+1)\varphi+\varphi^2-\frac{b}{\varphi}=2\]
-\[b(\varphi+2)+\varphi=1\]
-\[b=\frac{1-\varphi}{\varphi+2}=-\frac{1}{\varphi}\frac{1}{\varphi+2}\]
+\[N_0=a+b+c=1\]
+\[N_1=a\varphi-\frac{b}{\varphi}+c=0+1+1=2\]
+\[N_2=a\varphi^2+\frac{b}{\varphi^2}+c=1+2+1=4\]
+\[N_2=a\qty(\varphi+1)-b\qty(\frac{1}{\varphi}-1)+c=4\]
+\[N_2-N_1=a+b=2\]
+\[c=N_0-(a+b)=1-2=-1\]
+\[N_1-N_0=a(\varphi-1)-b\qty(\frac{1}{\varphi}+1)=1=\frac{a}{\varphi}-b\varphi\]
+\[a=b(\varphi+1)+\varphi\]
+\[a+b=b(\varphi+2)+\varphi=2\]
+\[b=\frac{2-\varphi}{\varphi+2}=-\frac{1}{\varphi}\frac{1}{\varphi+2}\]
 \[a=-\frac{\varphi}{\varphi+2}+\varphi=\frac{\varphi^2+\varphi}{\varphi+2}=\frac{\varphi^3}{\varphi+2}\]
-\[c=\frac{-\varpi^2-\varphi-1+\varphi}{\varphi+2}=-1\]
-\[N_h=\frac{1}{\varphi+2}\qty(\varphi^{h+3}+\qty(-\frac{1}{\varphi})^{h+1})-1\]
+\[N_h=\frac{1}{\varphi+2}\qty(\varphi^{h+3}+\qty(-\frac{1}{\varphi})^{h+1})-2\]
 \epr
 So
 \[N_h=\Theta(\varphi^h)\]
 \[h=\log_{\varphi}N_h+O(1)\approx 1.44\log_2N_h+O(1)\]
 Let the maximum number of nodes in an AVL tree of height $h$ be $M_h$. Since the maximum numbers of subtrees height of the root of an AVL tree of height $h$ are $h-1$, we have:
-\[M_0=0\]
-\[M_h=2M_{h-1}+1,\quad h\in\bbN\]
-\[M_h=2^h-1,\quad h\in\bbN_0\]
+\[M_{-1}=0\]
+\[M_h=2M_{h-1}+1,\quad h\in\bbN_0\]
+\[M_h=2^h-1,\quad h+1\in\bbN_0\]
 So
 \[M_h\in\Theta(\log_2M_h)\]
 \[h=\log_2M_h+O(1)\]
