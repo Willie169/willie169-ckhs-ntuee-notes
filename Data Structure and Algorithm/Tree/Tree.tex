@@ -61,6 +61,8 @@ For a complete binary tree with $n$ nodes:
 A perfect binary tree with height $k$ has $2^{k+1}-1$ nodes.
 \sssc{Balanced tree}
 A type of binary tree with height $O(\log n)$ where $n$ is the number of nodes is called balanced.
+\sssc{Balance factor}
+The height of the left subtree minus the height of the right subtree of a node in a binary tree is called the balance factor of the node.
 \sssc{Left-skewed and right-skewed}
 A binary tree whose every internal node has left child and does not have right child is called left-skewed.
 
@@ -132,7 +134,7 @@ Suppose we want to delete $x$. First search for it, if we don't found it, do not
 \bit
 \item if it is a leaf, delete it,
 \item if it has one child $y$, adjust $y$ as a child of the parent of $x$ of the same position as $x$ and delete $x$, and
-\item if it has two children, replace it with the minimum element $y$ in the right subtree of $x$ and delete the node $y$, which is a leaf; alternatively, replace it with the maximum element $y$ in the left subtree of $x$ and delete the node $y$, which is a leaf.
+\item if it has two children, replace it with the minimum element $y$ in the right subtree of $x$, i.e. inorder successor, and delete the node $y$, which is a leaf; alternatively, replace it with the maximum element $y$ in the left subtree of $x$, i.e. inorder predecessor, and delete the node $y$, which is a leaf.
 \eit
 The time complexity is $O(\tx{height of tree})$.
 \sssc{Uniqueness given preorder traversal}
