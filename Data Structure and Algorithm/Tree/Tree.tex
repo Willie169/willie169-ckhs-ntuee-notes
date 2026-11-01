@@ -138,6 +138,41 @@ Only if: Prove by mathematical induction. The inorder traversal of a BST with on
 
 If: Prove by mathematical induction. A binary tree with one node is a BST. Assume that any binary tree with fewer than $n$ nodes of distinct values whose inorder traversal is sorted in ascending order is a BST. Consider any binary tree with $n$ nodes of distinct values and root $r$ whose inorder traversal is sorted in ascending order. The subsequence before $r$ is a binary tree with fewer than $n$ nodes of distinct values whose inorder traversal is sorted in ascending order whose values of nodes are smaller than $r$. The subsequence after $r$ is a binary tree with fewer than $n$ nodes of distinct values whose inorder traversal is sorted in ascending order whose values of nodes are larger than $r$. Since the left subtree is a BST and smaller than root and the right subtree is a BST and larger than root, we conclude that any binary tree with $n$ nodes of distinct values whose inorder traversal is sorted in ascending order is a BST. By mathematical induction, the statement holds.
 \epr
+\sssc{Possible BST given distinct values}
+Given $n$ distinct values $k_1<k_2<\ldots<k_n$, the number of distinct BSTs built from them $T_n$ is:
+\[T_0=1\]
+\[T_n=\sum_{i=0}^{n-1}T_iT_{n-1-i},\quad n\in\bbN\]
+\[T_n=\frac{1}{(n+1)!}\binom{2n}{n},\quad n\in\bbN_0\]
+\bpr
+Obviously
+\[T_0=T_1=1\]
+Suppose we choose $k_i$ as root, where $1\le i\le n$. The left subtree contains $k_1,\ldots,k_{i-1}$, so it has $i-1$ nodes and $T_{i-1}$ possible combinations. The right subtree contains $k_{i+1},\ldots,k_n$, so it has $n-1$ nodes and $T_{n-i}$ possible combinations.
+
+Summing over all choices gives
+\[T_n=\sum_{i=1}^nT_{i-1}T_{n-i}=\sum_{i=0}^{n-1}T_iT_{n-1-i}\]
+Using generating function:
+\[C(x)=\sum_{n=0}^{\infty}T_nx^n\]
+\[C(x)=1+xC(x)^2\]
+\[C(x)=\frac{1\pm\sqrt{1-4x}}{2x}\]
+\[C(0)=\mp\frac{1}{\sqrt{1-4x}}=T(0)=1\]
+\[C(x)=\frac{1-\sqrt{1-4x}}{2x}\]
+\[\ba
+\sqrt{1-4x}&=\sum_{k=0}^{\infty}\binom{0.5}{k}(-4x)^k\\
+           &=1+\sum_{k=1}^{\infty}\frac{\prod_{i=0}^{k-1}(0.5-i)}{k!}(-4x)^k\\
+           &=1+\sum_{k=1}^{\infty}\frac{2^k\prod_{i=0}^{k-1}(2i-1)}{k!}x^k\\
+           &=1+\sum_{k=1}^{\infty}-\frac{2^k\prod_{i=1}^{k-1}(2i-1)}{k!}x^k\\
+           &=1+\sum_{k=1}^{\infty}-\frac{2^k\prod_{i=1}^{2k-2}i}{k!\prod_{i=1}^{k-1}2i}x^k\\
+           &=1+\sum_{k=1}^{\infty}-\frac{2^k(2k-2)!}{k!2^{k-1}(k-1)!}x^k\\
+           &=1+\sum_{k=1}^{\infty}-\frac{2(2k-2)!}{k!(k-1)!}x^k
+\ea\]
+\[\ba
+C(x)&=\frac{1-\sqrt{1-4x}}{2x}\\
+    &=\sum_{k=1}^{\infty}\frac{(2k-2)!}{k!(k-1)!}x^{k-1}\\
+    &=\sum_{n=0}^{\infty}\frac{(2n)!}{(n+1)!n!}x^n\\
+    &=\sum_{n=0}^{\infty}\frac{1}{(n+1)!}\binom{2n}{n}x^n
+\ea\]
+\[T_n=\frac{1}{(n+1)!}\binom{2n}{n},\quad n\in\bbN_0\]
+\epr
 \ssc{AVL tree (Adelson-Velsky and Landis tree)}
 \sssc{AVL tree (Adelson-Velsky and Landis tree)}
 An AVL tree is a self-balancing binary search tree (BST). The height for AVL trees is defined differing from that of a tree:
