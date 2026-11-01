@@ -30,6 +30,8 @@ If not empty, a tree is recursively defined as a distinguished node $r$ called r
 A representation of tree where each pair of parent and child is connected with a edge.
 \sssc{Left child, right sibling representation}
 A representation of tree where each internal node and its leftmost child is connected with a edge, and each sibling that is not the leftmost one is called to the sibling at its left.
+\sssc{Skewed}
+A tree whose every level contains only one node is called skewed.
 \ssc{$n$-ary tree}
 \sssc{$n$-ary tree}
 A tree in which no node can have more than $n$ children is called an $n$-ary tree.
@@ -59,6 +61,10 @@ For a complete binary tree with $n$ nodes:
 A perfect binary tree with height $k$ has $2^{k+1}-1$ nodes.
 \sssc{Balanced tree}
 A type of binary tree with height $O(\log n)$ where $n$ is the number of nodes is called balanced.
+\sssc{Left-skewed and right-skewed}
+A binary tree whose every internal node has left child and does not have right child is called left-skewed.
+
+A binary tree whose every internal node has right child and does not have left child is called right-skewed.
 \ssc{Tree traversal}
 They are defined recursively. Suppose the root is $r$.
 \sssc{Preorder traversal}
@@ -67,9 +73,27 @@ First visit $r$, and then visit the subtrees of $r$ from left to right.
 Visit the subtrees of $r$ from left to right, and finally visit $r$.
 \sssc{Inorder traversal (binary tree)}
 First visit the left subtree of $r$, and then visit $r$, and then visit the right subtree of $r$.
+\sssc{Full binary tree with distinct values can be uniquely determined by its preorder and postorder traversals}
+A full binary tree with distinct values can be uniquely determined by its preorder and postorder traversals.
+\bpr
+The following C code provides an algorithm to reconstruct the tree recursively:
+\lstinputlisting[language=C]{reconstructFullBinaryTreePreorderPostorder.c}
+\epr
+\sssc{Binary tree with distinct values can be uniquely determined by its preorder and inorder traversals}
+A binary tree with distinct values can be uniquely determined by its preorder and inorder traversals.
+\bpr
+The following C code provides an algorithm to reconstruct the tree recursively:
+\lstinputlisting[language=C]{reconstructBinaryTreePreorderInorder.c}
+\epr
+\sssc{Binary tree with distinct values can be uniquely determined by its postorder and inorder traversals}
+A binary tree with distinct values can be uniquely determined by its postorder and inorder traversals.
+\bpr
+The following C code provides an algorithm to reconstruct the tree recursively:
+\lstinputlisting[language=C]{reconstructBinaryTreePostorderInorder.c}
+\epr
 \ssc{Binary search tree (BST)}
 \sssc{Binary search tree (BST)}
-A binary search tree stores keys in the nodes of a binary tree so that searching, insertion and deletion can be done efficiently. For every node $x$, all the keys in its left subtree are smaller than $x$ and all keys in its right subtree are larger than $x$.
+A binary search tree stores keys in the nodes of a binary tree so that searching, insertion and deletion can be done efficiently. For every node $x$, all the keys in its left subtree are smaller than $x$ and all keys in its right subtree are larger than $x$. Thus, the values are distinct.
 \sssc{Searching}
 Suppose we are searching for $x$ and the root is $r$.
 \bit
@@ -107,8 +131,13 @@ A BST with distinct values is uniquely determined by its postorder traversal.
 \bpr
 A BST with one node is obviously unique. The last element must be root, the first element to the last element smaller than root must be the left subtree, and the rest must be the right subtree. Recursively partition into the subtrees. We uniquely obtained the BST.
 \epr
-\sssc{Inorder traversal is in ascending order}
-Inorder traversal of a BST always produces values in ascending order.
+\sssc{Binary tree is BST iff inorder traversal is in ascending order}
+A binary tree with distinct values is a binary search tree iff its inorder traversal is sorted in ascending order.
+\bpr
+Only if: Prove by mathematical induction. The inorder traversal of a BST with one node is sorted in ascending order. Assume the inorder traversal of any BST with fewer than $n$ nodes of distinct values is sorted in ascending order. Consider any BST with $n$ nodes, the inorder traversal visits the left subtree, which is smaller than root and itself sorted in ascending order since it's a BST with $n-1$ nodes, and then root, and then the right subtree, which is larger than root and itself sorted in ascending order since it's a BST with $n-1$ nodes. Thus, we conclude that the inorder traversal of any BST with $n$ nodes is sorted in ascending order. By mathematical induction, the statement holds.
+
+If: Prove by mathematical induction. A binary tree with one node is a BST. Assume that any binary tree with fewer than $n$ nodes of distinct values whose inorder traversal is sorted in ascending order is a BST. Consider any binary tree with $n$ nodes of distinct values and root $r$ whose inorder traversal is sorted in ascending order. The subsequence before $r$ is a binary tree with fewer than $n$ nodes of distinct values whose inorder traversal is sorted in ascending order whose values of nodes are smaller than $r$. The subsequence after $r$ is a binary tree with fewer than $n$ nodes of distinct values whose inorder traversal is sorted in ascending order whose values of nodes are larger than $r$. Since the left subtree is a BST and smaller than root and the right subtree is a BST and larger than root, we conclude that any binary tree with $n$ nodes of distinct values whose inorder traversal is sorted in ascending order is a BST. By mathematical induction, the statement holds.
+\epr
 \ssc{AVL tree (Adelson-Velsky and Landis tree)}
 \sssc{AVL tree (Adelson-Velsky and Landis tree)}
 An AVL tree is a self-balancing binary search tree (BST). The height for AVL trees is defined differing from that of a tree:
