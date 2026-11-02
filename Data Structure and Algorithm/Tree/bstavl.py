@@ -32,7 +32,7 @@ class BST:
                 return None
 
     # Time complexity: O(height)
-    def find(self, x):
+    def search(self, x):
         if self.root == None:
             return None
         node = self.root
@@ -46,7 +46,7 @@ class BST:
         return None
 
     # Time complexity: O(height)
-    def lower_bound(self, x):
+    def upper_bound(self, x):
         r = None
         node = self.root
         while node != None:
@@ -58,7 +58,7 @@ class BST:
         return r
 
     # Time complexity: O(height)
-    def upper_bound(self, x):
+    def lower_bound(self, x):
         r = None
         node = self.root
         while node != None:
@@ -82,7 +82,7 @@ class BST:
 
     # Time complexity: O(height)
     def remove(self, x):
-        node = self.find(x)
+        node = self.search(x)
         if node == None:
             return None
         if node.right_child == None and node.left_child == None:
@@ -98,7 +98,38 @@ class BST:
         return self._transplant(succ, succ.right_child)
 
     # Time complexity: O(n)
-    def print_tree(self):
+    def preorder(self):
+        result, stack = [], []
+        if self.root != None:
+            stack.append(self.root)
+        while stack != []:
+            node = stack.pop()
+            result.append(node.value)
+            if node.right_child != None:
+                stack.append(node.right_child)
+            if node.left_child != None:
+                stack.append(node.left_child)
+        return result
+
+    # Time complexity: O(n)
+    def postorder(self):
+        result, stack, node = [], [], self.root
+        last_visited = None
+        while stack != [] or node != None:
+            if node != None:
+                stack.append(node)
+                node = node.left_child
+            else:
+                right = stack[-1].right_child
+                if right != None and last_visited is not right:
+                    node = right
+                else:
+                    result.append(stack[-1].value)
+                    last_visited = stack.pop()
+        return result
+
+    # Time complexity: O(n)
+    def inorder(self):
         result, stack, node = [], [], self.root
         while stack != [] or node != None:
             while node != None:
