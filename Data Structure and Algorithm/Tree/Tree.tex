@@ -268,7 +268,13 @@ Let $x$ be the first node encountered when traversing upward from the newly inse
 \epr
 The time complexity is $O(\tx{height of tree})=O(\log\tx{number of nodes})$.
 \sssc{Deletion}
-Deletion in AVL tree involves first doing deletion the same as in BST, and then tracing the path from the parent of the deleted node to the root: For each node $x$ encountered, check if heights of its left and right subtrees differ by at most 1,
+Deletion in AVL tree involves first doing deletion the same as in BST, and then tracing the path from
+\bit
+\item the original parent of the deleted node if the deleted node was a leaf,
+\item the position of the deleted node if it had one child, and
+\item the original parent of the inorder successor or inorder predecessor that was moved if it had two children,
+\eit
+to the root: For each node $x$ encountered, check if heights of its left and right subtrees differ by at most 1,
 \bit
 \item if yes, proceed to the parent of $x$;
 \item if not, we say the AVL property is violated at $x$ and perform rotations to restore it, and then proceed to the parent of $x$ since violation may propagate upwards.
