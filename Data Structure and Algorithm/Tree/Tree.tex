@@ -135,7 +135,19 @@ Suppose we want to delete $x$. First search for it, if we don't found it, do not
 \bit
 \item if it is a leaf, delete it,
 \item if it has one child $y$, adjust $y$ as a child of the parent of $x$ of the same position as $x$ and delete $x$, and
-\item if it has two children, replace it with the minimum element $y$ in the right subtree of $x$, i.e. inorder successor, and delete the node $y$, which is a leaf; alternatively, replace it with the maximum element $y$ in the left subtree of $x$, i.e. inorder predecessor, and delete the node $y$, which is a leaf.
+\item if it has two children, choose either of the policies:
+\bit
+\item inorder successor: replace $x$ with the minimum element $y$ in the right subtree of $x$, i.e. inorder successor, which has no left child but may have right child, and
+\bit
+\item remove node $y$ if it has no child, and
+\item replace node $y$ with its right child if it has one;
+\eit
+\item inorder predecessor: replace $x$ with the maximum element $y$ in the left subtree of $x$, i.e. inorder predecessor, which has no right child but may have left child, and
+\bit
+\item remove node $y$ if it has no child, and
+\item replace node $y$ with its left child if it has one;
+\eit
+\eit
 \eit
 The time complexity is $O(\tx{height of tree})$.
 \sssc{Uniqueness given preorder traversal}
