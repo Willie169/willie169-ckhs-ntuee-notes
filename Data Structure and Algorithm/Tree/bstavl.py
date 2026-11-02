@@ -12,26 +12,6 @@ class BST:
         self.root = None
 
     # Time complexity: O(height)
-    def insert(self, x):
-        if self.root == None:
-            self.root = Node(x)
-            return self.root
-        node = self.root
-        while True:
-            if node.value > x:
-                if node.left_child == None:
-                    node.left_child = Node(x, node)
-                    return node.left_child
-                node = node.left_child
-            elif node.value < x:
-                if node.right_child == None:
-                    node.right_child = Node(x, node)
-                    return node.right_child
-                node = node.right_child
-            else:
-                return None
-
-    # Time complexity: O(height)
     def search(self, x):
         if self.root == None:
             return None
@@ -44,6 +24,24 @@ class BST:
             else:
                 return node
         return None
+
+    # Time complexity: O(height)
+    def find_min(self):
+        if self.root == None:
+            return None
+        node = self.root
+        while node.left_child != None:
+            node = node.left_child
+        return node.value
+
+    # Time complexity: O(height)
+    def find_max(self):
+        if self.root == None:
+            return None
+        node = self.root
+        while node.right_child != None:
+            node = node.right_child
+        return node.value
 
     # Time complexity: O(height)
     def upper_bound(self, x):
@@ -68,6 +66,26 @@ class BST:
             else:
                 node = node.right_child
         return r
+
+    # Time complexity: O(height)
+    def insert(self, x):
+        if self.root == None:
+            self.root = Node(x)
+            return self.root
+        node = self.root
+        while True:
+            if node.value > x:
+                if node.left_child == None:
+                    node.left_child = Node(x, node)
+                    return node.left_child
+                node = node.left_child
+            elif node.value < x:
+                if node.right_child == None:
+                    node.right_child = Node(x, node)
+                    return node.right_child
+                node = node.right_child
+            else:
+                return None
 
     def _transplant(self, node, new):
         if node.parent == None:
