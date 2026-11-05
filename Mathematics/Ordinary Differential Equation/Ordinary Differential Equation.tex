@@ -483,9 +483,9 @@ This is separable.
 \sssc{Linear ODE}
 An $n$th-order linear ODE of a unknown function or dependent variable $y\colon\bbR\to\bbR$ with respect to an independent variable $x\in\bbR$ can be written in the form, called normal form,
 \[\sum_{i=0}^na_i(x)y^{(i)}=f(x),\]
-in which $a_i(x)\colon\Omega_i\subseteq\bbR\to\bbR$ are called coefficients and $f(x)\colon\Omega\subseteq\bbR\to\bbR^m$ is called forcing term.
-\[y^{(n)}+\sum_{i=1}^np_i(x)y^{(i)}=g(x)\]
-is called standard form.
+in which $a_n(x)$ is nonzero on an interval of solution, $a_i(x)\colon\Omega_i\subseteq\bbR\to\bbR$ are called coefficients, and $f(x)\colon\Omega\subseteq\bbR\to\bbR^m$ is called forcing term.
+\[y^{(n)}+\sum_{i=1}^np_i(x)y^{(i)}=q(x)\]
+is called standard form, in which $p_i(x)\colon\Omega_i\subseteq\bbR\to\bbR$ are called coefficients and $q(x)\colon\Omega\subseteq\bbR\to\bbR^m$ is called forcing term.
 \sssc{Linear differential operator}
 A linear differential operator is a polynomial of the differential operators $D$, i.e., $\dv{}{x}$ for independent variable $x$, and its order is the degree of the polynomial.
 \sssc{Linearity}
@@ -744,50 +744,64 @@ where $p_i(x)$ for all $i\in [0,n-1]\cap\bbZ$ are continuous on An interval $I$.
 \ben
 \item Let $y_1(x),y_2(x),\ldots,y_n(x)$ be a basis of the vector space of the solutions of the complementary equation,
 \[y^{(n)}+\sum_{i=0}^{n-1}p_i(x)y^{(i)}=0.\]
-\item The particular solution $y_p$ is given by:
-\[y_p=\sum_{i=1}^ny_i(x)\int_{x_0}^x\frac{W_i(t)}{W(t)}\dd{t},\]
-where
-\bit
-\item $x_0$ is an arbitrary point in $I$,
-\item $W(x)$ is the Wrońskian of $y_1(x),y_2(x),\ldots,y_n(x)$,
-\item $W_i(x)$ is $W(x)$ with the $i$th column replaced by $(0,0,\ldots,0,q(x))$.
-\eit
+\item The particular solution $y_p$ (or family of general solutions with the integral constants being parameters) is given by:
+\[y_p=\sum_{i=1}^nu_i(x)y_i(x)=\sum_{i=1}^n\int_{x_0}^x\frac{W_i(t)}{W(t)}\dd{t}y_i(x),\]
+where $x_0$ is an arbitrary point in $I$, $W(x)$ is the Wrońskian of $y_1(x),y_2(x),\ldots,y_n(x)$:
+\[W(x)=\begin{vmatrix}
+y_1(x) & y_2(x) & \cdots & y_n(x) \\
+y_1'(x) & y_2(x) & \cdots & y_n'(x) \\
+\vdots & \vdots & \ddots & \vdots \\
+y_1^{(n-1)}(x) & y_2^{(n-1)}(x) & \cdots & y_n^{(n-1)}(x)
+\end{vmatrix},\]
+$W_i(x)$ is $W(x)$ with the $i$th column replaced by $(0,0,\ldots,0,q(x))$, e.g.,
+\[W_1(x)=\begin{vmatrix}
+0 & y_2(x) & \cdots & y_n(x) \\
+0 & y_2(x) & \cdots & y_n'(x) \\
+\vdots & \vdots & \ddots & \vdots \\
+q(x) & y_2^{(n-1)}(x) & \cdots & y_n^{(n-1)}(x)
+\end{vmatrix},\]
+and
+\[u_i(x)=\int_{x_0}^x\frac{W_i(t)}{W(t)}\dd{t}\]
+\[u_i'(x)=\frac{W_i(x)}{W(x)}\]
 \item The general solutions are given by
 \[y=y_c+y_p.\]
 \een
 \begin{proof}
-The particular solution is given by
-\[y_p=\sum_{i=1}^nc_i(x)y_i(x),\]
-where $c_i(x)$ are differentiable functions which are assumed to satisfy the $n-1$ conditions
-\[\sum_{i=1}^nc_i'(x)y_i^{(j)}(x)=0\]
+The particular solution is assumed to be given by
+\[y_p=\sum_{i=1}^nu_i(x)y_i(x),\]
+where $u_i(x)$ are differentiable functions which satisfy the $n-1$ conditions
+\[\sum_{i=1}^nu_i'(x)y_i^{(j)}(x)=0\]
 for all $j\in\bbN_0\land j\leq n-2$.
 
 By repeated differentiation, we obtain:
-\[y_p^{(j)}=\sum_{i=1}^nc_i(x)y_i^{(j)}(x)\]
+\[y_p^{(j)}=\sum_{i=1}^nu_i(x)y_i^{(j)}(x)\]
 for all $j\in\bbN_0\land j\leq n-1$.
 
 One last differentiation gives
-\[y_p^{(n)}=\sum_{i=1}^nc_i(x)y_i^{(n)}(x)+\sum_{i=1}^nc_i'(x)y_i^{(n-1)}(x).\]
+\[y_p^{(n)}=\sum_{i=1}^nu_i(x)y_i^{(n)}(x)+\sum_{i=1}^nu_i'(x)y_i^{(n-1)}(x).\]
 
 Substituting $y_p$ into the original ODE gives:
 \[y_p^{(n)}+\sum_{i=0}^{n-1}p_i(x)y_p^{(i)}=q(x),\]
-\[\sum_{i=1}^nc_i(x)y_i^{(n)}(x)+\sum_{i=1}^nc_i'(x)y_i^{(n-1)}(x)+\sum_{i=0}^{n-1}p_i(x)\sum_{i=1}^nc_i(x)y_i^{(j)}(x)=q(x),\]
-\[\sum_{i=1}^nc_i'(x)y_i^{(n-1)}(x)+\sum_{i=1}^nc_i(x)\qty(y_i^{(n)}(x)+\sum_{i=0}^{n-1}p_i(x)y_i^{(j)}(x))=q(x),\]
-\[\sum_{i=1}^nc_i'(x)y_i^{(n-1)}(x)=q(x).\]
+\[\sum_{i=1}^nu_i(x)y_i^{(n)}(x)+\sum_{i=1}^nu_i'(x)y_i^{(n-1)}(x)+\sum_{i=0}^{n-1}p_i(x)\sum_{i=1}^nu_i(x)y_i^{(j)}(x)=q(x),\]
+\[\sum_{i=1}^nu_i'(x)y_i^{(n-1)}(x)+\sum_{i=1}^nu_i(x)\qty(y_i^{(n)}(x)+\sum_{i=0}^{n-1}p_i(x)y_i^{(j)}(x))=q(x),\]
+\[\sum_{i=1}^nu_i'(x)y_i^{(n-1)}(x)=q(x).\]
 We obtain a system of linear equations
-\[\sum_{i=1}^nc_i'(x)y_i^{(j)}(x)=0\]
+\[\sum_{i=1}^nu_i'(x)y_i^{(j)}(x)=0\]
 for all $j\in\bbN_0\land j\leq n-2$, and
-\[\sum_{i=1}^nc_i'(x)y_i^{(n-1)}(x)=q(x).\]
+\[\sum_{i=1}^nu_i'(x)y_i^{(n-1)}(x)=q(x).\]
 By Cramer's rule, we have
-\[c_i'(x)=\frac{W_i(x)}{W(x)},\quad i\in\bbN\land i\leq n.\]
+\[u_i'(x)=\frac{W_i(x)}{W(x)},\quad i\in\bbN\land i\leq n.\]
 \end{proof}
 \sssc{For second-order equation, Green's function}
 For second-order equation
 \[y''+p_1(x)y'+p_0(x)y=q(x).\]
 Let $y_1(x),y_2(x)$ be two linearly independent solutions of its complementary equation
 \[y''+p_1(x)y'+p_0(x)y=0.\]
-The particular solution (or family of general solutions with the integral constants being parameters) is given by
-\[y_p(x)=-y_1(x)\int_{x_0}^x\frac{y_2(t)q(t)}{y_1(t)y_2'(t)-y_2(t)y_1'(t)}\dd{t}+y_2(x)\int_{x_0}^x\frac{y_1(t)q(t)}{y_1(t)y_2'(t)-y_2(t)y_1'(t)}\dd{t}.\]
+The particular solution $y_p$ (or family of general solutions with the integral constants being parameters) is given by
+\[y_p(x)=u_1(x)y_1(x)+u_2(x)y_2(x)=-\int_{x_0}^x\frac{y_2(t)q(t)}{y_1(t)y_2'(t)-y_2(t)y_1'(t)}\dd{t}y_1(x)+\int_{x_0}^x\frac{y_1(t)q(t)}{y_1(t)y_2'(t)-y_2(t)y_1'(t)}\dd{t}y_2(x),\]
+where
+\[u_1'(x)=-\frac{y_2(x)q(x)}{W}\]
+\[u_2'(x)=-\frac{y_1(x)q(x)}{W}\]
 This can be written as
 \[y_p(x)=\int_{x_0}^xG(x,t)q(t)\dd{t},\]
 where
