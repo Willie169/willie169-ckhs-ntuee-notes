@@ -487,7 +487,7 @@ in which $a_n(x)$ is nonzero on an interval of solution, $a_i(x)\colon\Omega_i\s
 \[y^{(n)}+\sum_{i=1}^np_i(x)y^{(i)}=q(x)\]
 is called standard form, in which $p_i(x)\colon\Omega_i\subseteq\bbR\to\bbR$ are called coefficients and $q(x)\colon\Omega\subseteq\bbR\to\bbR^m$ is called forcing term.
 \sssc{Linear differential operator}
-A linear differential operator is a polynomial of the differential operators $D$, i.e., $\dv{}{x}$ for independent variable $x$, and its order is the degree of the polynomial.
+A linear differential operator is a polynomial $P(D)$ of the differential operators $D$, i.e., $\dv{}{x}$ for independent variable $x$, and its order is the degree of the polynomial.
 \sssc{Linearity}
 Let $L$ be a linear differential operator
 \[L=\sum_{j=0}^na_j(x)D^j\]
@@ -667,18 +667,41 @@ Case $\zeta=0$:
 \[r_{1,2}=\pm\omega_0i\]
 \epr
 \ssc{Method of undetermined coefficients (MUC) for constant coefficient non-homogeneous linear ODE}
-\sssc{Superposition approach}
-Consider an $n$th-order constant coefficient non-homogeneous linear ODE
-\[\sum_{j=0}^na_jy^{(j)}=g(x),\quad a_n\neq 0,\]
-with $g(x)$ being able to be written in the form
-\[g(x)=\sum_{j=1}^pk_jx^{m_j}e^{\alpha_jx}+\sum_{j=p+1}^{p+q}x^{m_j}e^{\alpha_jx}\qty(k_j\cos(\beta_jx)+l_j\sin(\beta_jx)),\]
-for some constants $p,q,m_j\in\bbN_0$ and $\alpha_j,\beta_j,k_j,l_j\in\bbR$.
+\sssc{Superposition approach - complex-valued solution}
+Consider a constant coefficient non-homogeneous linear ODE
+\[P(D)y=g(x)=\sum_{j=1}^pk_jx^{m_j}e^{\alpha_jx}\]
+where $P(D)$ is a linear differential operator (thus $P$ is the characteristic equation of the complementary equation) and $p,m_j\in\bbN_0$ and $k_j,\alpha_j\in\bbC$ are given constants.
 
-The formation of its general solutions using the method of undetermined coefficients is as follows:
+The formation of its general solution using the method of undetermined coefficients is as follows:
 \ben
 \item Solve the complementary equation
-\[\sum_{j=0}^na_jy^{(j)}=0,\quad a_n\neq 0\]
-to obtain its general solutions $y_c$.
+\[P(D)y=0\]
+to obtain its complex-valued general solutions $y_c$.
+\item For each term $k_jx^{m_j}e^{\alpha_jx}$ of $g(x)$ for $j\in\bbN\land j\leq p$, construct a particular solution $y_j$:
+\ben
+\item If $\alpha_j$ is not a root of the characteristic equation of the complementary equation, let $s_j=0$; otherwise, let $s_j$ be the multiplicity of $\alpha_j$ as a root of the characteristic equation of the complementary equation.
+\item The ansatz is
+\[y_j=x^{s_j}e^{\alpha_jx}\sum_{k=0}^{m_j}C_{jk}x^k,\]
+with constants $C_{jk}\in\bbC$.
+\item Solve for $C_{jk}$ such that $y_j$ is a particular solution of the constant coefficient non-homogeneous linear ODE
+\[\sum_{j=0}^na_jy^{(j)}=k_jx^{m_j}e^{\alpha_jx}.\]
+\een
+\item A particular solution of the origin ODE is
+\[y_p=\sum_{j=1}^{p+q}y_j,\]
+and the general solution of the origin ODE is
+\[y=y_c+y_p.\]
+A real-valued particular solution of the ODE is the real part of $y_p$ and the real-valued general solution of the ODE is the real part of $y$.
+\een
+\sssc{Superposition approach - real-valued solution}
+Consider a constant coefficient non-homogeneous linear ODE
+\[P(D)y=g(x)=\sum_{j=1}^pk_jx^{m_j}e^{\alpha_jx}+\sum_{j=p+1}^{p+q}x^{m_j}e^{\alpha_jx}\qty(k_j\cos(\beta_jx)+l_j\sin(\beta_jx))\]
+where $P(D)$ is a linear differential operator (thus $P$ is the characteristic equation of the complementary equation) and $p,q,m_j\in\bbN_0$ and $k_j,\alpha_j,l_j,\beta_j\in\bbR$ are given constants.
+
+The formation of its general solution using the method of undetermined coefficients is as follows:
+\ben
+\item Solve the complementary equation
+\[P(D)y=0\]
+to obtain its real-valued general solutions $y_c$.
 \item For each term $k_jx^{m_j}e^{\alpha_jx}$ of $g(x)$ for $j\in\bbN\land j\leq p$, construct a particular solution $y_j$:
 \ben
 \item If $\alpha_j$ is not a root of the characteristic equation of the complementary equation, let $s_j=0$; otherwise, let $s_j$ be the multiplicity of $\alpha_j$ as a root of the characteristic equation of the complementary equation.
@@ -699,29 +722,48 @@ with constants $C_{jk},D_{jk}\in\bbR$.
 \een
 \item A particular solution of the origin ODE is
 \[y_p=\sum_{j=1}^{p+q}y_j,\]
-and the general solutions of the origin ODE is
+and the general solution of the origin ODE is
 \[y=y_c+y_p.\]
 \een
-\sssc{Annihilator approach}
-Consider an $n$th-order constant coefficient non-homogeneous linear ODE
-\[\sum_{j=0}^na_jy^{(j)}=g(x),\quad a_n\neq 0,\]
-with $g(x)$ being able to be written in the form
-\[g(x)=\sum_{j=1}^pk_jx^{m_j}e^{\alpha_jx}+\sum_{j=p+1}^{p+q}x^{m_j}e^{\alpha_jx}\qty(k_j\cos(\beta_jx)+l_j\sin(\beta_jx)),\]
-for some constants $p,q,m_j\in\bbN_0$ and $\alpha_j,\beta_j,k_j,l_j\in\bbR$.
+\sssc{Annihilator approach - complex-valued solution}
+Consider a constant coefficient non-homogeneous linear ODE
+\[P(D)y=g(x)=\sum_{j=1}^pk_jx^{m_j}e^{\alpha_jx}\]
+where $P(D)$ is a linear differential operator (thus $P$ is the characteristic equation of the complementary equation) and $p,m_j\in\bbN_0$ and $k_j,\alpha_j\in\bbC$ are given constants.
 
-The formation of its general solutions using the method of undetermined coefficients is as follows:
+The formation of its general solution using the method of undetermined coefficients is as follows:
 \ben
 \item Solve the complementary equation
-\[\sum_{j=0}^na_jy^{(j)}=0,\quad a_n\neq 0\]
-to obtain its general solutions $y_c$.
-\item For each term $k_jx^{m_j}e^{\alpha_jx}$ of $g(x)$, a lowest-order annihilator is
-\[(D-\alpha_j)^{m_j+1}\]
+\[P(D)y=0\]
+to obtain its complex-valued general solutions $y_c$.
+\item For each term $k_jx^{m_j}e^{\alpha_jx}$ of $g(x)$ for $j\in\bbN\land j\leq p$, a lowest-order annihilator is
+\[Q_j(D)=(D-\alpha_j)^{m_j+1}\]
 \bpr
 Prove by Laplace transform.
 \[\mathcal{L}\{k_jx^{m_j}e^{\alpha_jx}\}=\frac{k_jm_j!}{(s-\alpha_j)^{m_j+1}}\]
 \epr
-\item For each term $x^{m_j}e^{\alpha_jx}\qty(k_j\cos(\beta_jx)+l_j\sin(\beta_jx))$ of $g(x)$, a lowest-order annihilator is
-\[(D^2-2\alpha_jD+\alpha_j^{\pht{j}2}+\beta_j^{\pht{j}2})^{m_j+1}=((D-\alpha_j+\beta_ji)(D-\alpha_j-\beta_ji))^{m_j+1}\]
+\item A lowest-order annihilator $Q(D)$ of $g(x)$ is:
+\[Q(D)=\prod_{j=1}^pQ_j(D)\]
+Apply it on both sides to obtain a homogeneous linear ODE
+\[Q(D)P(D)y=0.\]
+\item Solve it to obtain its complex-valued general solutions $y_d$. Note that its characteristic equation is $Q(r)P(r)$.
+\item Removes the terms that are also in $y_c$ from $y_d$ and substitute it into the ODE. Solve it to obtain a particular solution $y_p$ of the ODE. And the general solution of the origin ODE is
+\[y=y_c+y_p.\]
+A real-valued particular solution of the ODE is the real part of $y_p$ and the real-valued general solution of the ODE is the real part of $y$.
+\een
+\sssc{Annihilator approach - real-valued solution}
+Consider a constant coefficient non-homogeneous linear ODE
+\[P(D)y=g(x)=\sum_{j=1}^pk_jx^{m_j}e^{\alpha_jx}+\sum_{j=p+1}^{p+q}x^{m_j}e^{\alpha_jx}\qty(k_j\cos(\beta_jx)+l_j\sin(\beta_jx))\]
+where $P(D)$ is a linear differential operator (thus $P$ is the characteristic equation of the complementary equation) and $p,q,m_j\in\bbN_0$ and $k_j,\alpha_j,l_j,\beta_j\in\bbR$ are given constants.
+
+The formation of its general solution using the method of undetermined coefficients is as follows:
+\ben
+\item Solve the complementary equation
+\[P(D)y=0\]
+to obtain its real-valued general solutions $y_c$.
+\item For each term $k_jx^{m_j}e^{\alpha_jx}$ of $g(x)$ for $j\in\bbN\land j\leq p$, a lowest-order annihilator is
+\[Q_j(D)=(D-\alpha_j)^{m_j+1}\]
+\item For each term $x^{m_j}e^{\alpha_jx}\qty(k_j\cos(\beta_jx)+l_j\sin(\beta_jx))$ of $g(x)$ for $j\in\bbN\land p<j\leq p+q$, a lowest-order annihilator is
+\[Q_j(D)=(D^2-2\alpha_jD+\alpha_j^{\pht{j}2}+\beta_j^{\pht{j}2})^{m_j+1}=((D-\alpha_j+\beta_ji)(D-\alpha_j-\beta_ji))^{m_j+1}\]
 \bpr
 Prove by Laplace transform.
 \[\ba
@@ -730,12 +772,31 @@ Prove by Laplace transform.
 &=\frac{(k_j+l_j)m_j!}{(s-\alpha_j-i\beta_j)^{m_j+1}}-\frac{(k_j-l_j)im_j!}{(s-\alpha_j+i\beta_j)^{m_j+1}}
 \ea\]
 \epr
-\item Find a lowest-order annihilator of $g(x)$, $L$, and apply it on both sides to obtain a homogeneous linear ODE
-\[((L)(\sum_{j=0}^na_jD^j))y=0.\]
-\item Solve and obtain its general solutions. Note that the characteristic equation is $(L)(\sum_{j=0}^na_jD^j)$ with $D$ replaced with $r$.
-\item Removes the terms in $y_c$ from the general solution and substitute it into the original ODE to obtain an explicit particular solution $y_p$, then the general solutions of the origin ODE is
+\item A lowest-order annihilator $Q(D)$ of $g(x)$ is:
+\[Q(D)=\prod_{j=1}^{p+q}Q_j(D)\]
+Apply it on both sides to obtain a homogeneous linear ODE
+\[Q(D)P(D)y=0.\]
+\item Solve it to obtain its real-valued general solutions $y_d$. Note that its characteristic equation is $Q(r)P(r)$.
+\item Removes the terms that are also in $y_c$ from $y_d$ and substitute it into the ODE. Solve it to obtain a particular solution $y_p$ of the ODE. And the general solution of the origin ODE is
 \[y=y_c+y_p.\]
 \een
+\sssc{Exponential response formula (ERF) or exponential forcing formula}
+Consider a constant coefficient non-homogeneous linear ODE
+\[P(D)y=\sum_{j=1}^pk_je^{\alpha_jx}\]
+where $P(D)$ is a linear differential operator (thus $P$ is the characteristic equation of the complementary equation) and $p\in\bbN_0$ and $k_j,\alpha_j\in\bbC$ are given constants.
+
+The formation of its general solution using the method of exponential response formula is as follows:
+\ben
+\item Solve the complementary equation
+\[P(D)y=0\]
+to obtain its complex-valued general solutions $y_c$.
+\item If $\alpha_j$ is not a root of $P$, let $s_j=0$; otherwise, let $s_j$ be the multiplicity of $\alpha_j$ as a root of $P$.
+\item A complex-valued particular solution $y_p$ of the ODE is
+\[y_p=\sum_{j=1}^p\frac{k_jx^{s_j}e^{\alpha_jx}}{P^{(s_j)}(\alpha_j)},\]
+and the complex-valued general solution of the ODE is
+\[y=y_c+y_p,\]
+A real-valued particular solution of the ODE is the real part of $y_p$ and the real-valued general solution of the ODE is the real part of $y$.
+\eem
 \ssc{Variation of parameters or variation of constants method of solution of non-homogeneous linear equation}
 \sssc{Method of solution}
 Given an $n$th-order non-homogeneous linear ODE
@@ -892,7 +953,7 @@ An $n$th order Cauchy-Euler equation has the form
 \sssc{Method of solution}
 Consider an $n$th-order Cauchy-Euler equation
 \[\sum_{i=0}^na_ix^iy^{(i)}=g(x),\quad a_n\ne 0.\]
-The formation of its general solutions using the characteristic equation (also called auxiliary equation) is as follows:
+The formation of its general solution using the characteristic equation (also called auxiliary equation) is as follows:
 \ben
 \item The complementary equation is
 \[\sum_{i=0}^na_ix^iy^{(i)}=0\]
