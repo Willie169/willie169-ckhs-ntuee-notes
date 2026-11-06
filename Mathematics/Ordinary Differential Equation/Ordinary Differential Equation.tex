@@ -970,16 +970,24 @@ A (Cauchy-)Euler or equidimensional equation has the form
 \[\sum_{j=0}^na_jx^jy^{(j)}=g(x),\quad a_n\ne 0,\]
 i.e.,
 \[P(xD)y=\qty(\sum_{j=0}^na_jx^jD^j)y=0\]
-\sssc{Stirling number of the second kind}
-The Stirling number of the second kind, denoted as $S(n,k)$ or $\left\{n\atop k\right\}$, counts the number of different equivalence relations with exactly $k$ equivalence classes that can be defined on an $n$ element set, for $n,k\in\bbN_0\land n\ge k$, with
-\[S(n,n)=1,\quad n\in\bbN_0\]
-\[S(n,0)=0,\quad n\in\bbN\]
 \sssc{Theorem}
 Let
 \[Y(t)=y(e^t)\]
 Then
-\[Y^{(n)}(t)=\sum_{k=1}^nS(n,k)e^{kt}y^{(k)}(e^t)\]
+\[Y^{(n)}(t)=\sum_{k=1}^nS(n,k)e^{kt}y^{(k)}(e^t),\]
+where $S(n,k)$ is the Stirling number of the second kind.
 \bpr
+Use mathematical induction. For $n=1$,
+\[Y'(t)=e^ty'(e^t)=S(1,1)e^ty'(e^t)\]
+Assume
+\[Y^{(n)}(t)=\sum_{k=1}^nS(n,k)e^{kt}y^{(k)}(e^t)\]
+Differentiate both sides
+\[\ba
+Y^{(n+1)}(t)
+&=\sum_{k=1}^nkS(n,k)e^{kt}y^{(k)}(e^t)+S(n,k)e^{(k+1)t}y^{(k+1)}(e^t)\\
+&=\sum_{k=1}^nkS(n,k)e^{kt}y^{(k)}(e^t)+\sum_{k=2}^{n+1}S(n,k-1)e^{kt}y^{(k)}(e^t)\\
+\ea\]
+
 
 \epr
 \sssc{Method of solution}
