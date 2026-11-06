@@ -981,14 +981,18 @@ Use mathematical induction. For $n=1$,
 \[Y'(t)=e^ty'(e^t)=S(1,1)e^ty'(e^t)\]
 Assume
 \[Y^{(n)}(t)=\sum_{k=1}^nS(n,k)e^{kt}y^{(k)}(e^t)\]
+Recall
+\[S(n+1,k)=kS(n,k)+S(n,k-1)\]
+\[S(n,1)=S(n,n)=1,\quad n\in\bbN\]
 Differentiate both sides
 \[\ba
 Y^{(n+1)}(t)
 &=\sum_{k=1}^nkS(n,k)e^{kt}y^{(k)}(e^t)+S(n,k)e^{(k+1)t}y^{(k+1)}(e^t)\\
 &=\sum_{k=1}^nkS(n,k)e^{kt}y^{(k)}(e^t)+\sum_{k=2}^{n+1}S(n,k-1)e^{kt}y^{(k)}(e^t)\\
+&=S(n,1)e^ty'(e^t)+\sum_{k=2}^nkS(n,k)e^{kt}y^{(k)}(e^t)+S(n,k-1)e^{kt}y^{(k)}(e^t)+S(n,n)e^{(n+1)t}y^{(n+1)}(e^t)\\
+&=S(n+1,1)e^ty'(e^t)+\sum_{k=2}^nS(n+1,k)e^{kt}y^{(k)}(e^t)+S(n+1,n+1)e^{(n+1)t}y^{(n+1)}(e^t)\\
+&=\sum_{k=1}^{n+1}S(n+1,k)e^{kt}y^{(k)}(e^t)
 \ea\]
-
-
 \epr
 \sssc{Method of solution}
 Consider an $n$th-order Cauchy-Euler equation
