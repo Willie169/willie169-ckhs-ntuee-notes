@@ -865,9 +865,27 @@ where
 This can be written as
 \[y_p(x)=\int_{x_0}^xG(x,t)q(t)\dd{t},\]
 where
-\[G(x,t)=\frac{y_1(t)y_2(x)-y_1(x)y_2(t)}{y_1(t)y_2'(t)-y_2(t)y_1'(t)}\]
+\[G(x,t)=\frac{y_1(t)y_2(x)-y_1(x)y_2(t)}{y_1(t)y_2'(t)-y_2(t)y_1'(t)},\quad t\le x\]
 and is called the Green's function or kernel for the ODE or the linear differential operator
 \[D^2+p_1(x)D+p_0(x).\]
+Some special cases are listed below.
+
+If
+\[y_1=\cos(bx)\]
+\[y_2=\sin(bx)\]
+then
+\[\ba
+G(x,t)&=\frac{\cos(bt)\sin(bx)-\cos(bx)\sin(bt)}{\cos(bt)b\cos(bt)-\cos(bx)(-b\cos(bt))}\\
+      &=\frac{1}{b}\sin(b(x-t)),\quad t\le x
+\ea\]
+If
+\[y_1=e^{ax}\]
+\[y_2=xe^{ax}\]
+then
+\[\ba
+G(x,t)&=\frac{e^{at}xe^{ax}-te^{at}e^{ax}}{e^{at}e^{at}(1+at)-te^{at}ae^{at}}\\
+      &=(x-t)e^{a(x-t)},\quad t\le x
+\ea\]
 \ssc{Reduction of order}
 \sssc{Method}
 Given an $n$th-order homogeneous linear ODE
