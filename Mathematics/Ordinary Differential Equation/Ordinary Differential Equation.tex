@@ -800,13 +800,17 @@ A real-valued particular solution of the ODE is the real part of $y_p$ and the r
 \ssc{Variation of parameters or variation of constants method of solution of non-homogeneous linear equation}
 \sssc{Method of solution}
 Given an $n$th-order non-homogeneous linear ODE
-\[y^{(n)}+\sum_{i=0}^{n-1}p_i(x)y^{(i)}=q(x),\]
-where $p_i(x)$ for all $i\in [0,n-1]\cap\bbZ$ are continuous on An interval $I$.
+\[y^{(n)}+\sum_{j=0}^{n-1}p_j(x)y^{(j)}=q(x),\]
+where $p_j(x)$ for all $j\in [0,n-1]\cap\bbZ$ are continuous on an interval $I$.
 \ben
 \item Let $y_1(x),y_2(x),\ldots,y_n(x)$ be a basis of the vector space of the solutions of the complementary equation,
-\[y^{(n)}+\sum_{i=0}^{n-1}p_i(x)y^{(i)}=0.\]
+\[y^{(n)}+\sum_{j=0}^{n-1}p_j(x)y^{(j)}=0\]
 \item The particular solution $y_p$ (or family of general solutions with the integral constants being parameters) is given by:
-\[y_p=\sum_{i=1}^ny_i(x)u_i(x)=\sum_{i=1}^ny_i(x)\int_{x_0}^x\frac{W_i(t)}{W(t)}\dd{t},\]
+\[\ba
+y_p&=\sum_{j=1}^ny_j(x)u_j(x)\\
+   &=\sum_{j=1}^ny_j(x)\int_{x_0}^x\frac{W_j(t)}{W(t)}\dd{t}\\
+   &=\int_{x_0}^x\sum_{j=1}^ny_j(x)\frac{W_j(t)}{W(t)}\dd{t}
+\ea\]
 where $x_0$ is an arbitrary point in $I$ called base point, $W(x)$ is the Wrońskian of $y_1(x),y_2(x),\ldots,y_n(x)$:
 \[W(x)=\begin{vmatrix}
 y_1(x) & y_2(x) & \cdots & y_n(x) \\
@@ -814,7 +818,7 @@ y_1'(x) & y_2(x) & \cdots & y_n'(x) \\
 \vdots & \vdots & \ddots & \vdots \\
 y_1^{(n-1)}(x) & y_2^{(n-1)}(x) & \cdots & y_n^{(n-1)}(x)
 \end{vmatrix},\]
-$W_i(x)$ is $W(x)$ with the $i$th column replaced by $(0,0,\ldots,0,q(x))$, e.g.,
+$W_j(x)$ is $W(x)$ with the $j$th column replaced by $(0,0,\ldots,0,q(x))$, e.g.,
 \[W_1(x)=\begin{vmatrix}
 0 & y_2(x) & \cdots & y_n(x) \\
 0 & y_2(x) & \cdots & y_n'(x) \\
@@ -822,36 +826,39 @@ $W_i(x)$ is $W(x)$ with the $i$th column replaced by $(0,0,\ldots,0,q(x))$, e.g.
 q(x) & y_2^{(n-1)}(x) & \cdots & y_n^{(n-1)}(x)
 \end{vmatrix},\]
 and
-\[u_i(x)=\int_{x_0}^x\frac{W_i(t)}{W(t)}\dd{t}\]
-\[u_i'(x)=\frac{W_i(x)}{W(x)}\]
+\[u_j(x)=\int_{x_0}^x\frac{W_j(t)}{W(t)}\dd{t}\]
+\[u_j'(x)=\frac{W_j(x)}{W(x)}\]
+and
+\[G(x,t)=\sum_{j=1}^ny_j(x)\frac{W_j(t)}{W(t)}\]
+is called the kernel for the ODE or the linear differential operator
+\[D^n+\sum_{j=0}^{n-1}p_j(x)D^j.\]
 \item The general solutions are given by
 \[y=y_c+y_p.\]
 \een
 \begin{proof}
 The particular solution is assumed to be given by
-\[y_p=\sum_{i=1}^nu_i(x)y_i(x),\]
-where $u_i(x)$ are differentiable functions which satisfy the $n-1$ conditions
-\[\sum_{i=1}^nu_i'(x)y_i^{(j)}(x)=0\]
-for all $j\in\bbN_0\land j\leq n-2$.
+\[y_p=\sum_{j=1}^nu_j(x)y_j(x),\]
+where $u_j(x)$ are differentiable functions which satisfy the $n-1$ conditions
+\[\sum_{j=1}^nu_j'(x)y_j^{(k)}(x)=0\]
+for all $k\in\bbN_0\land k\leq n-2$.
 
 By repeated differentiation, we obtain:
-\[y_p^{(j)}=\sum_{i=1}^nu_i(x)y_i^{(j)}(x)\]
-for all $j\in\bbN_0\land j\leq n-1$.
+\[y_p^{(k)}=\sum_{j=1}^nu_j(x)y_j^{(k)}(x)\]
+for all $k\in\bbN_0\land k\leq n-1$.
 
 One last differentiation gives
-\[y_p^{(n)}=\sum_{i=1}^nu_i(x)y_i^{(n)}(x)+\sum_{i=1}^nu_i'(x)y_i^{(n-1)}(x).\]
-
+\[y_p^{(n)}=\sum_{j=1}^nu_j(x)y_j^{(n)}(x)+\sum_{j=1}^nu_j'(x)y_j^{(n-1)}(x).\]
 Substituting $y_p$ into the original ODE gives:
-\[y_p^{(n)}+\sum_{i=0}^{n-1}p_i(x)y_p^{(i)}=q(x),\]
-\[\sum_{i=1}^nu_i(x)y_i^{(n)}(x)+\sum_{i=1}^nu_i'(x)y_i^{(n-1)}(x)+\sum_{i=0}^{n-1}p_i(x)\sum_{i=1}^nu_i(x)y_i^{(j)}(x)=q(x),\]
-\[\sum_{i=1}^nu_i'(x)y_i^{(n-1)}(x)+\sum_{i=1}^nu_i(x)\qty(y_i^{(n)}(x)+\sum_{i=0}^{n-1}p_i(x)y_i^{(j)}(x))=q(x),\]
-\[\sum_{i=1}^nu_i'(x)y_i^{(n-1)}(x)=q(x).\]
+\[y_p^{(n)}+\sum_{j=0}^{n-1}p_j(x)y_p^{(j)}=q(x),\]
+\[\sum_{j=1}^nu_j(x)y_j^{(n)}(x)+\sum_{j=1}^nu_j'(x)y_j^{(n-1)}(x)+\sum_{j=0}^{n-1}p_j(x)\sum_{j=1}^nu_j(x)y_j^{(k)}(x)=q(x),\]
+\[\sum_{j=1}^nu_j'(x)y_j^{(n-1)}(x)+\sum_{j=1}^nu_j(x)\qty(y_j^{(n)}(x)+\sum_{j=0}^{n-1}p_j(x)y_j^{(k)}(x))=q(x),\]
+\[\sum_{j=1}^nu_j'(x)y_j^{(n-1)}(x)=q(x).\]
 We obtain a system of linear equations
-\[\sum_{i=1}^nu_i'(x)y_i^{(j)}(x)=0\]
-for all $j\in\bbN_0\land j\leq n-2$, and
-\[\sum_{i=1}^nu_i'(x)y_i^{(n-1)}(x)=q(x).\]
+\[\sum_{j=1}^nu_j'(x)y_j^{(k)}(x)=0\]
+for all $k\in\bbN_0\land k\leq n-2$, and
+\[\sum_{j=1}^nu_j'(x)y_j^{(n-1)}(x)=q(x).\]
 By Cramer's rule, we have
-\[u_i'(x)=\frac{W_i(x)}{W(x)},\quad i\in\bbN\land i\leq n.\]
+\[u_j'(x)=\frac{W_j(x)}{W(x)},\quad j\in\bbN\land j\leq n.\]
 \end{proof}
 \sssc{For second-order equation, Green's function}
 For second-order equation
@@ -867,7 +874,7 @@ This can be written as
 \[y_p(x)=\int_{x_0}^xG(x,t)q(t)\dd{t},\]
 where
 \[G(x,t)=\frac{y_1(t)y_2(x)-y_1(x)y_2(t)}{y_1(t)y_2'(t)-y_2(t)y_1'(t)}\]
-and is called the Green's function for the ODE or the Green's function for the linear differential operator
+and is called the Green's function or kernel for the ODE or the linear differential operator
 \[D^2+p_1(x)D+p_0(x).\]
 \ssc{Reduction of order}
 \sssc{Method}
