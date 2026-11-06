@@ -2735,17 +2735,18 @@ Use mathematical induction. For $n=1$,
 Assume
 \[e^{nt}y^{(n)}(e^t)=\sum_{k=1}^ns(n,k)Y^{(k)}(t)\]
 Recall
-\[s(n+1,k)=ns(n,k)+s(n,k-1)\]
-\[s(n,1)=n!,\quad n\in\bbN\]
+\[s(n+1,k)=-ns(n,k)+s(n,k-1)\]
+\[s(n+1,1)=-ns(n,1)\]
 \[s(n,n)=1,\quad n\in\bbN\]
 Differentiate both sides
 \[\ba
 e^{(n+1)t}y^{(n+1)}(e^t)
 &=-ne^{nt}y^{(n)}(e^t)+\sum_{k=1}^ns(n,k)Y^{(k+1)}(t)\\
-&=-\sum_{k=1}^nns(n,k)Y^{(k)}(t)+\sum_{k=2}^ns(n,k-1)Y^{(k)}(t)\\
-&=-s(1,1)Y'(t)+\sum_{k=2}^ns(n,k-1)Y^{(k)}(t)\\
+&=-\sum_{k=1}^nns(n,k)Y^{(k)}(t)+\sum_{k=2}^{n+1}s(n,k-1)Y^{(k)}(t)\\
+&=-ns(n,1)Y'(t)+\sum_{k=2}^n-ns(n,k)Y^{(k)}(t)+s(n,k-1)Y^{(k)}(t)+s(n,n)Y^{(n+1)}(t)\\
+&=s(n+1,1)Y'(t)+\sum_{k=2}^ns(n,k)Y^{(k)}(t)+s(n+1,n+1)Y^{(n+1)}(t)\\
+&=\sum_{k=1}^{n+1}s(n+1,k)Y^{(k)}(t)
 \ea\]
-
 \epr
 \subsection{Existence}
 \subsubsection{Monotone function is differentiable a.e.}
