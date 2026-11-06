@@ -2727,11 +2727,23 @@ Y^{(n+1)}(t)
 Let
 \[Y(t)=y(e^t)\]
 Then
-\[x^ny^{(n)}(e^t)=\sum_{k=1}^ns(n,k)Y^{(k)}(t),\]
+\[e^{nt}y^{(n)}(e^t)=\sum_{k=1}^ns(n,k)Y^{(k)}(t),\]
 where $s(n,k)$ is the Stirling number of the first kind.
 \bpr
 Use mathematical induction. For $n=1$,
-\[Y'(t)=e^ty'(e^t)=S(1,1)e^ty'(e^t)\]
+\[e^ty'(e^t)=Y'(t)=s(1,1)Y'(t)\]
+Assume
+\[e^{nt}y^{(n)}(e^t)=\sum_{k=1}^ns(n,k)Y^{(k)}(t)\]
+Recall
+\[s(n+1,k)=ns(n,k)+s(n,k-1)\]
+\[s(n,1)=n!,\quad n\in\bbN\]
+\[s(n,n)=1,\quad n\in\bbN\]
+Differentiate both sides
+\[\ba
+e^{(n+1)t}y^{(n+1)}(e^t)
+&=-ne^{nt}y^{(n)}(e^t)+\sum_{k=1}^ns(n,k)Y^{(k+1)}(t)\\
+&=\sum_{k=2}^ns(n,k-1)Y^{(k)}(t)-\sum_{k=1}^nns(n,k)Y^{(k)}(t)\\
+\ea\]
 
 \epr
 \subsection{Existence}
