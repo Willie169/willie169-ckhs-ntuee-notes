@@ -299,32 +299,54 @@ C_n^{n+k}-C_{n-1}^{n+k} & \quad\text{（當\protect\ }n \leq k\text{）}
 \]
 \ssc{Stirling number of the first kind}
 \sssc{Definition}
-The (signed) Stirling number of the first kind, denoted as $s(n,k)$, is defined for all $n,k\in\bbN_0\land n\ge k$ such that
-\[\prod_{j=0}^{n-1}(x-j)=\sum_{k=0}^ns(n,k)x^k\]
-for all $n\in\bbN$.
-
+The (signed) Stirling number of the first kind, denoted as $s(n,k)$, is defined for all $n,k\in\bbN_0$ such that
+\[\prod_{j=0}^{n-1}(x-j)=\sum_{k=0}^{\infty}s(n,k)x^k\]
 The unsigned Stirling number of the first kind, denoted as $\left[n\atop k\right]$, is the absolute value of the signed one.
+\sssc{Signs}
+\[s(n,k)=(-1)^{n-k}\left[n\atop k\right]\]
+\bpr
+PLACEHOLDER
+\epr
+\sssc{Rising factorial}
+For all $n,k\in\bbN_0\land n\ge k$
+\[\prod_{j=0}^{n-1}(x+j)=\sum_{k=0}^n\left[n\atop k\right]x^k\]
+\bpr
+PLACEHOLDER
+\epr
 \sssc{Recurrence relation}
 \[s(n+1,k)=-ns(n,k)+s(n,k-1)\]
 with base case
-\[s(n,n)=1,\quad n\in\bbN_0\]
-\[s(n,0)=0,\quad n\in\bbN\]
+\[s(0,0)=1\]
+\[s(n,0)=s(0,n)=0,\quad n\in\bbN\]
 \bpr
 PLACEHOLDER
 \epr
 \[\left[n+1\atop k\right]=n\left[n\atop k\right]+\left[n\atop k-1\right]\]
 with base case
-\[s(n,n)=1,\quad n\in\bbN_0\]
-\[s(n,0)=0,\quad n\in\bbN\]
-\ssc{Stirling number of the second kind}
-\sssc{Definition}
-The Stirling number of the second kind, denoted as $S(n,k)$ or $\left\{n\atop k\right\}$, counts the number of different equivalence relations with exactly $k$ equivalence classes that can be defined on an $n$ element set, for all $n,k\in\bbN_0\land n\ge k$.
-\sssc{Recurrence relation}
-\[S(n+1,k)=kS(n,k)+S(n,k-1)\]
-with base case
-\[S(n,n)=1,\quad n\in\bbN_0\]
-\[S(n,0)=0,\quad n\in\bbN\]
+\[\left[0\atop 0\right]=1\]
+\[\left[n\atop 0\right]=\left[0\atop n\right]=0,\quad n\in\bbN\]
 \bpr
 PLACEHOLDER
 \epr
+\sssc{Properties}
+\[s(n,k)=0,\quad n<k\]
+\[s(n,1)=(-1)^{n-1}(n-1)!,\quad n\in\bbN\]
+\[s(n,n)=1\]
+\[s(n,n-1)=-\sum_{j=1}^{n-1}j=-\frac{n(n-1)}{2}=-\binom{n}{2},\quad n\in\bbN\]
+\ssc{Stirling number of the second kind}
+\sssc{Definition}
+The Stirling number of the second kind, denoted as $S(n,k)$ or $\left\{n\atop k\right\}$, counts the number of different equivalence relations with exactly $k$ equivalence classes that can be defined on an $n$ element set, for all $n,k\in\bbN_0$.
+\sssc{Recurrence relation}
+\[S(n+1,k)=kS(n,k)+S(n,k-1)\]
+with base case
+\[S(0,0)=1\]
+\[S(n,0)=S(0,n)=0,\quad n\in\bbN\]
+\bpr
+PLACEHOLDER
+\epr
+\sssc{Properties}
+\[S(n,k)=0,\quad n<k\]
+\[S(n,1)=1,\quad n\in\bbN\]
+\[S(n,n)=1\]
+\[S(n,n-1)=\sum_{j=1}^{n-1}j=\frac{n(n-1)}{2}=\binom{n}{2},\quad n\in\bbN\]
 \end{document}
