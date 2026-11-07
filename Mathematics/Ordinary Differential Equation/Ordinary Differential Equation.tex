@@ -970,18 +970,25 @@ A (Cauchy-)Euler or equidimensional equation has the form
 \[\sum_{j=0}^na_jx^jy^{(j)}=0\]
 \sssc{Method of solution}
 Let
-\[Y(t)=y(e^t)\]
 \[t=\ln x\]
-\[P(r)=x^{-r}\sum_{j=0}^na_jx^j\dv[j]{}{x}x^r\]
-The ODE is equivalent to
+\[Y(t)=y(e^t)=y(x)\]
+The indical equation, characteristic equation, or auxiliary equation is obtained by substituting $y=x^m$ and divide the equation by $x^m$
 \[\ba
-P(D)Y(t)&=\sum_{j=0}^na_j\sum_{k=0}^js(j,k)Y^{(k)}(t)\\
-        &=\sum_{k=0}^n\sum_{j=k}^na_js(j,k)Y^{(k)}(t)\\
-        &=0
+P(m)&=x^{-m}\sum_{j=0}^na_jx^j\dv[j]{}{x}x^m\\
+    &=\sum_{j=0}^na_j\sum_{k=0}^js(j,k)m^k\\
+    &=\sum_{k=0}^n\sum_{j=k}^na_js(j,k)m^k\\
+    &=0
 \ea\]
 where $s(n,k)$ is the signed Stirling number of the first kind.
 
-This is a constant-coefficient linear homogeneous equation of $Y$. We can solve for $Y(t)$ with characteristic equation $P(r)=0$ and obtain the general solution of $y(x)$ using $Y(t)=y(x)$. $P(r)=0$ is called the indical equation, characteristic equation, or auxiliary equation of the original Cauchy-Euler equation. The solution is either complex-value with complex $x$ or real-valued with $x\in(0,\infty)$.
+And the ODE is equivalent to
+\[P(D)Y(t)=0,\]
+which is a constant-coefficient linear homogeneous equation of $Y$. We solve for the general solution $Y(t)$ using characteristic equation, and substituting
+\[t^a=(\ln x)^a\]
+\[e^{at}=x^a\]
+\[\cos(at)=\cos(a\ln x)\]
+\[\sin(at)=\sin(a\ln x)\]
+to obtain $y(x)=Y(t)$, where the solution is either complex-value with complex $x$ or real-valued with $x\in(0,\infty)$.
 \bpr
 \[x^jy^{(j)}(x)=e^{jt}y^{(j)}(e^t)=\sum_{k=0}^js(j,k)Y^{(k)}(t)\]
 \[\ba
