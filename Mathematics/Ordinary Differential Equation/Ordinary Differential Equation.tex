@@ -967,28 +967,31 @@ and the general solution is
 \ssc{(Cauchy-)Euler or equidimensional equation}
 \sssc{Definition} 
 A (Cauchy-)Euler or equidimensional equation has the form
-\[\sum_{j=0}^na_jx^jy^{(j)}=g(x),\quad a_n\ne 0,\]
-i.e.,
-\[P(xD)y=\qty(\sum_{j=0}^na_jx^jD^j)y=0\]
-\sssc{Reasoning}
-Let
-\[t=\ln x\]
-\[x^ny^{(n)}(x)=\]
-\[\ba
-P(xD)y
-&=\sum_{j=0}^na_jx^jy^{(j)}\\
-&=\sum_{j=0}^na_je^{jt}y^{(j)}\\
-
-&=\sum_{k=1}^{n+1}S(n+1,k)e^{kt}y^{(k)}(e^t)
-
-\ea\]
-TODO
-
-
+\[\sum_{j=0}^na_jx^jy^{(j)}=g(x)\]
 \sssc{Method of solution}
-Consider an $n$th-order Cauchy-Euler equation
-\[\sum_{j=0}^na_jx^jy^{(j)}=g(x),\quad a_n\ne 0.\]
+Let
+\[Y(t)=y(e^t)\]
+The ODE is equivalent to
+\[\sum_{k=0}^n\sum_{j=k}^na_js(j,k)Y^{(k)}(\ln x)=g(x),\]
+which is a constant-coefficient linear equation of $Y$ with respect to $t$.
 
+
+
+\[x^jy^{(j)}(x)=e^{jt}y^{(j)}(e^t)=\sum_{k=0}^js(j,k)Y^{(k)}(t)\]
+\[\ba
+\sum_{j=0}^na_jx^jy^{(j)}
+&=\sum_{j=0}^na_j\sum_{k=0}^js(j,k)Y^{(k)}(t)\\
+&=\sum_{k=0}^n\sum_{j=k}^na_js(j,k)Y^{(k)}(t)
+\ea\]
+
+Let
+\[P(D)=\sum_{k=0}^n\sum_{j=k}^na_js(j,k)D^k\]
+The ODE of $Y$ is
+\[P(D)Y=g(e^t)\]
+Solve
+\[P(D)Y=0\]
+with characteristic equation $P(r)=0$ and then solve
+\[P(D)Y=g(e^t)\]
 
 
 The formation of its general solution using the characteristic equation (also called auxiliary equation) is as follows:
