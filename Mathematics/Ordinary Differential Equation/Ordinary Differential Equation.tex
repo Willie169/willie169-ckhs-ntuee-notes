@@ -972,9 +972,16 @@ A (Cauchy-)Euler or equidimensional equation has the form
 Let
 \[Y(t)=y(e^t)\]
 \[t=\ln x\]
+\[P(r)=x^{-r}\sum_{j=0}^na_jx^j\dv[j]{}{x}x^r\]
 The ODE is equivalent to
-\[\sum_{k=0}^n\sum_{j=k}^na_js(j,k)Y^{(k)}(t)=0\]
+\[\ba
+P(D)Y(t)&=\sum_{j=0}^na_j\sum_{k=0}^js(j,k)Y^{(k)}(t)\\
+        &=\sum_{k=0}^n\sum_{j=k}^na_js(j,k)Y^{(k)}(t)\\
+        &=0
+\ea\]
 where $s(n,k)$ is the signed Stirling number of the first kind.
+
+This is a constant-coefficient linear homogeneous equation of $Y$. We can solve for $Y(t)$ with characteristic equation $P(r)=0$ and obtain the general solution of $y(x)$ using $Y(t)=y(x)$. $P(r)=0$ is called the indical equation, characteristic equation, or auxiliary equation of the original Cauchy-Euler equation.
 \bpr
 \[x^jy^{(j)}(x)=e^{jt}y^{(j)}(e^t)=\sum_{k=0}^js(j,k)Y^{(k)}(t)\]
 \[\ba
@@ -982,24 +989,8 @@ where $s(n,k)$ is the signed Stirling number of the first kind.
 &=\sum_{j=0}^na_j\sum_{k=0}^js(j,k)Y^{(k)}(t)\\
 &=\sum_{k=0}^n\sum_{j=k}^na_js(j,k)Y^{(k)}(t)
 \ea\]
+\[\sum_{k=0}^js(j,k)r^k=\sum_{m=0}^{j-1}(r-m)=x^{j-r}\dv[j]{}{x}x^r\]
 \epr
-This is a constant-coefficient linear homogeneous equation of $Y$.
-
-Let
-\[P(D)=\sum_{k=0}^n\sum_{j=k}^na_js(j,k)D^k\]
-We can solve for $Y(t)$ with characteristic equation $P(r)=0$. Since $Y(t)=y(x)$, we obtain the general solution of $y(x)$. Thus $P(r)=0$ is called the indical equation, characteristic equation, or auxiliary equation of the original Cauchy-Euler equation.
-
-For an equation of the form
-\[\sum_{j=0}^na_jx^jy^{(j)}=g(x)\]
-We can solve the complementary equation and then use variation of parameters to obtain the particular solution.
-\sssc{Second-order case}
-\[x^2y''+axy'+by=0\]
-\[s(2,2)Y''(t)+(s(2,1)+as(1,1))Y'(t)+(s(2,0)+as(1,0)+bs(0,0))Y(t)=Y''(t)+(a-1)Y'(t)+bY(t)=0\]
-\[P(r)=r^2+(a-1)r+b=0\]
-\sssc{Third-order case}
-\[x^3y'''+ax^2y''+by'+cy=0\]
-\[s(3,3)Y'''(t)+(s(3,2)+as(2,2))Y''(t)+(s(3,1)+as(2,1)+bs(1,1))Y'(t)+(s(3,0)+as(2,0)+bs(1,0)+cs(0,0))Y(t)=Y'''(t)+(a-3)Y''(t)+(b-a+2)Y'(t)+cY(t)=0\]
-\[P(r)=r^3+(a-3)r^2+(b-a+2)r+c=0\]
 \ssc{Power series solutions and Frobenius method for second-order homogeneous linear ODE}
 \sssc{Type of Points}
 Consider a second-order homogeneous linear ODE
