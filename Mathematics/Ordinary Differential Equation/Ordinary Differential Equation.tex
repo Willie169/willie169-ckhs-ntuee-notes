@@ -967,56 +967,35 @@ and the general solution is
 \ssc{(Cauchy-)Euler or equidimensional equation}
 \sssc{Definition} 
 A (Cauchy-)Euler or equidimensional equation has the form
-\[\sum_{j=0}^na_jx^jy^{(j)}=g(x)\]
+\[\sum_{j=0}^na_jx^jy^{(j)}=g(x),\quad a_j\in\bbC\]
 \sssc{Method of solution}
 Let
 \[Y(t)=y(e^t)\]
 The ODE is equivalent to
-\[\sum_{k=0}^n\sum_{j=k}^na_js(j,k)Y^{(k)}(\ln x)=g(x),\]
-which is a constant-coefficient linear equation of $Y$ with respect to $t$.
-
-
-
+\[\sum_{k=0}^n\sum_{j=k}^na_js(j,k)Y^{(k)}(\ln x)=g(x)\]
+where $s(n,k)$ is the signed Stirling number of the first kind.
+\bpr
+Let
+\[t=\ln x\]
 \[x^jy^{(j)}(x)=e^{jt}y^{(j)}(e^t)=\sum_{k=0}^js(j,k)Y^{(k)}(t)\]
 \[\ba
 \sum_{j=0}^na_jx^jy^{(j)}
 &=\sum_{j=0}^na_j\sum_{k=0}^js(j,k)Y^{(k)}(t)\\
 &=\sum_{k=0}^n\sum_{j=k}^na_js(j,k)Y^{(k)}(t)
 \ea\]
+\epr
+This is a constant-coefficient linear equation of $Y$ with respect to $\ln x$.
 
 Let
 \[P(D)=\sum_{k=0}^n\sum_{j=k}^na_js(j,k)D^k\]
-The ODE of $Y$ is
-\[P(D)Y=g(e^t)\]
-Solve
-\[P(D)Y=0\]
-with characteristic equation $P(r)=0$ and then solve
-\[P(D)Y=g(e^t)\]
+We can solve the complementary equation of ODE of $Y$ with characteristic equation $P(r)=0$ with respect to $\ln x$. Applying
+\[Y(\ln x)=y(x)\]
+We obtain the general solution of he complementary equation of the original Cauchy-Euler equation. $P(r)=0$ is called the indical equation, characteristic equation, or auxiliary equation of the original Cauchy-Euler equation.
+
+We can use variation of parameters to obtain the particular solution of the original Cauchy-Euler equation.
+\sssc{Second-order case}
 
 
-The formation of its general solution using the characteristic equation (also called auxiliary equation) is as follows:
-\ben
-\item The complementary equation is
-\[\sum_{i=0}^na_ix^iy^{(i)}=0\]
-\item The characteristic equation is
-\[\sum_{j=0}^na_jr^j=0.\]
-\item Suppose there are $k$ distinct real roots $r_1,r_2,\ldots,r_k$, each $r_j$ with multiplicity $m_j$, and $h$ distinct pairs of conjugate imaginary roots $\alpha_1\pm\beta_1i,\alpha_2\pm\beta_2i,\ldots,\alpha_h\pm\beta_hi$ ($\beta_j\neq 0$), each $\alpha_j\pm\beta_ji$ with multiplicity $\omega_j$. (Thus, $\sum_{j=1}^km_j+2\sum_{j=1}^h\omega_j=n$.)
-\item The $n$-parameter family of solutions of the complementary equation is
-\[y_c=\sum_{j=1}^k\sum_{u=0}^{m_j-1}A_{ju}(\ln x)^ux^{r_j}+\sum_{j=1}^h\sum_{u=0}^{\omega_j-1}\qty(B_{ju}\cos(\beta_j\ln x)+C_{ju}\sin(\beta_j\ln x))(\ln x)^ux^{\alpha_j},\]
-with parameters $A_{ju},B_{ju},C_{ju}$.
-\item Then, we use variation of parameters. Let $y_1(x),y_2(x),\ldots,y_n(x)$ be a basis of the vector space of $y_c$.
-
-The particular solution $y_p$ is given by:
-\[y_p=\sum_{i=1}^ny_i(x)\int_{x_0}^x\frac{W_i(t)}{W(t)}\dd{t},\]
-where
-\bit
-\item $x_0$ is an arbitraty point in the interval of interest,
-\item $W(x)$ is the Wrońskian of $y_1(x),y_2(x),\ldots,y_n(x)$,
-\item $W_i(x)$ is the Wrońskian of $W(x)$ but with the $i$th column replaced by $(0,0,\ldots,0,g(x))$.
-\eit
-\item The general solutions are given by
-\[y=y_c+y_p.\]
-\een
 \ssc{Power series solutions and Frobenius method for second-order homogeneous linear ODE}
 \sssc{Type of Points}
 Consider a second-order homogeneous linear ODE
