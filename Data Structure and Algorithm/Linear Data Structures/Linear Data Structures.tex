@@ -6,4 +6,33 @@
 \date{\temtoday}
 \titledoc
 \sct{Linear Data Structures}
+\ssc{Unordered list}
+An unordered list is a list where each element holds a relative position with respect to the others. Each element is called a node. If applicable, the first node is called head and the last node is called tail.
+\ssc{Ordered list}
+An ordered list is a list which are ordered based upon some underlying characteristic of the elements.
+\ssc{Stack}
+A stack is a last-in-first-out (LIFO) list. Adding an element is called push and is of time complexity O(1), the last pushed element is called top, and the first pushed element is called bottom. Removing and returning top is called pop and is of time complexity O(1). Peeking top is called top and is of time complexity O(1).
+
+To keep track of the minimum element of a stack in O(1) time with O(n) extra space. One can maintain the original stack of elements and an extra stack of extrema. When an element is pushed to the original stack, it is compared with the top of the extrema stack and the minimum one is pushed to the extrema stack (for the first element, it is pushed to the extrema stack). When an element is popped from the original stack, an element is popped from the extrema stack. This way, the top of the extrema stack is always the minimum of the elements in the original stack.
+\ssc{Queue}
+A queue is first-in-first-out (FIFO) list. Adding an element is called enqueue and is of time complexity O(1), the first enqueued element is called front, and the last enqueued element is called back. Removing and returning front is called dequeue and is of time complexity O(1). Peeking front is called peek and is of time complexity O(1).
+\ssc{Array}
+An array is a fixed-size list of elements of the same memory size, each identified by at least one index, stored contiguously such that the position (memory address) of each element can be computed from its index in O(1) time, i.e., random access in O(1) time.
+\ssc{Dynamic array, growable array, resizable array, dynamic table, mutable array, or array list}
+A dynamic array is a variable-size list that stores elements in an array of a capacity and reserves an array of new capacity elsewhere and moves to it whenever its size reaches its capacity. It has random access and popping back in O(1) time, pushing back in amortized O(1) time, but removal and insertion in O(n) time. It is a stack with front as bottom and back as top.
+\ssc{Singly linked list}
+A singly linked list is an unordered list where each node stores only the next node. It has O(1) peeking, pushing, and popping front and insertion after node in O(1) time, but random access, removal of node, and insertion before node in O(n) time. If the tail is stored, it has peeking and pushing back in O(1) time. It is a stack with head as top and tail as bottom. If the tail is stored, it is a queue with the tail as front and head as back.
+
+An implementation in Python:
+\lstinputlisting[language=Python]{SinglyLinkedList.py}
+\ssc{Doubly linked list}
+A doubly linked list is an unordered list where each node stores the previous node and the next node. It has peeking, pushing, and popping front and back, insertion after and before node, and removal of node in O(1) time, but random access in O(n) time. It is a deque.
+
+An implementation in Python:
+\lstinputlisting[language=Python]{DoublyLinkedList.py}
+\ssc{Deque}
+A doubly-ended queue (deque) is a list that is simultaneously a stack and a queue, that is, has peeking, pushing, and popping from both ends in O(1) time.
+
+An implementation of deque is a dynamic array of fixed-size blocks, which has random access and popping front and back in O(1) time, pushing front and back in amortized O(1) time, but removal and insertion in O(n) time. A such implementation in Python:
+\lstinputlisting[language=Python]{BlockListDeque.py}
 \end{document}
