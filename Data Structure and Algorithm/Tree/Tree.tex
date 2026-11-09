@@ -292,7 +292,7 @@ When insertion/deletion, the AVL property may be violated, called unbalanced. Si
 \[\operatorname{left}(z)=x\]
 \eit
 \sssc{Insertion}
-Insertion in AVL tree involves first doing insertion the same as in BST, and then tracing the path from the new leaf to the root: For each node $x$ encountered, check if heights of its left and right subtrees differ by at most 1,
+Insertion in AVL tree involves first doing insertion as with a normal BST, and then tracing the path from the new leaf to the root: For each node $x$ encountered, check if heights of its left and right subtrees differ by at most 1,
 \bit
 \item if yes, proceed to the parent of $x$;
 \item if not, we say the AVL property is violated at $x$ and perform rotations to restore it, and then break the loop since no second violation may exist.
@@ -372,12 +372,56 @@ Note that
 \sssc{Splay tree}
 A splay tree is a self-adjusting binary search tree (BST) that keeps no info of height and in which every access operation moves the accessed node to the root through an operation called splaying, invented by Daniel Dominic Sleator and Robert Endre Tarjan.
 \sssc{Splaying}
-When a node $x$ is accessed, a splay operation consisting of a sequence of splay steps is performed on $x$ to move it to the root. Let the parent of $x$ be $p$ and the parent of $p$ be $g$. There are three types of splay steps, each of which has two symmetric variants:
+When a node $x$ is accessed, a splay operation consisting of a sequence of splay steps is performed on $x$ to move it to the root, called splaying $x$. Let the parent of $x$ be $p$ and the parent of $p$ be $g$. There are three types of splay steps, each of which has two symmetric variants:
 \bit
 \item Zig step / simple rotation: This is done if $x$ is a child of the root. We perform a rotation on the edge between $x$ and root. This only happens as the last step and only happens when $x$ originally has odd depth.
 \item Zig-zig step: This is done either when $x$ is a left child of $p$ and $p$ is a left child of $g$, or when $x$ is a right child of $p$ and $p$ is a right child of $g$. We perform a rotation on the edge between $p$ and $g$ and then a rotation on the edge between $x$ and $p$.
 \item Zig-zag step: This is done either when $x$ is a left child of $p$ and $p$ is a right child of $g$, or when $x$ is a right child of $p$ and $p$ is a left child of $g$. We perform a rotation on the edge between $x$ and $p$ and then a rotation on the edge between $x$, now at the original position of $p$, and $g$.
 \eit
+\sssc{Searching and finding minimum/maximum}
+Searching and finding minimum/maximum in splay tree involves first doing the operation as with a normal BST and then splay the found node if found.
+\sssc{Join}
+Given two BSTs $S$ and $T$ such that all elements of $S$ are smaller than all elements of $T$, the following steps can be used to join them to a single BST: either
+\ben
+\item Splay the largest item in $S$. Now this item is in the root $r$ of $S$ and has no right child.
+\item Set the right child of the new root $r$ of $S$ to the root of $T$.
+\een
+or
+\ben
+\item Splay the smallest item in $T$. Now this item is in the root $r$ of $T$ and has no left child.
+\item Set the left child of the new root $r$ of $T$ to the root of $S$.
+\een
+\sssc{Split}
+Given a BST and a value $x$, splitting the BST at $x$ returns two new BSTs, one containing all elements less than or equal to $x$, $L$, and the other containing all elements greater than $x$, $R$. This can be done with:
+\ben
+\item Search for $x$ in the tree. If we found it, let $y$ be that node; otherwise let $y$ be the node we stop at.
+\item Splay $y$.
+\item Split its right subtree, which is $R$, from the rest of the tree, which is $L$.
+\een
+\sssc{Insertion}
+To insert a value $x$ into a splay tree, there are two ways: either
+\ben
+\item Insert $x$ as with a normal BST.
+\item Splay $x$.
+\een
+or
+\ben
+\item Split at $x$. However, if $x$ is found in the tree, stop after splaying $x$.
+\item Create a new tree with $x$ as root and the two split trees as its subtrees.
+\een
+\sssc{Deletion}
+To delete a node $x$ from a splay tree: either
+\ben
+\item Search for $x$.
+\item Splay $x$.
+\item Delete $x$ and join the two subtrees of $x$.
+\een
+or
+\ben
+\item Delete $x$ as with a normal BST.
+\item Splay the original parent of the deleted $x$.
+\een
+
 
 
 \end{document}
