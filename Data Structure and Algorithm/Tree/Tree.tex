@@ -50,7 +50,7 @@ A complete $n$-ary tree where all leaves are of the same depth is called perfect
 A perfect $n$-ary tree with height $k$ has $\sum_{j=0}^kn^j$ nodes.
 \ssc{Binary tree}
 \sssc{Binary tree}
-In a binary tree, the two possible children of a node are called left child and right child. A child is either left or right but not both even if it has no sibling.
+In a binary tree, the two possible children of a node are called left child and right child. A child is either left or right but not both even if it has no sibling. The left and right subtrees of a node $x$ are denoted $\operatorname{left}(x)$ and $\operatorname{right}(x)$ respectively.
 \sssc{Complete binary tree}
 For a complete binary tree with $n$ nodes:
 \bit
@@ -150,6 +150,16 @@ Suppose we want to delete $x$. First search for it, if we don't found it, do not
 \eit
 \eit
 The worst-case and amortized time complexities are $O(\tx{height of tree})$.
+\sssc{Rotation}
+A (simple) rotation on an edge between a node $x$ and its parent $p$ is a tree operation on BST and has the following two symmetric variants:
+\bit
+\item Right rotation: This is done when $x$ is a left child of $p$. We perform the following assignments:
+\[\operatorname{left}(p)=\operatorname{right}(x)\]
+\[\operatorname{right}(x)=p\]
+\item Left rotation: This is done when $x$ is a right child of $p$. We perform the following assignments:
+\[\operatorname{right}(p)=\operatorname{left}(x)\]
+\[\operatorname{left}(x)=p\]
+\eit
 \sssc{Uniqueness given preorder traversal}
 A BST is uniquely determined by its preorder traversal.
 \bpr
@@ -206,7 +216,7 @@ C(x)&=\frac{1-\sqrt{1-4x}}{2x}\\
 \epr
 \ssc{AVL tree (Adelson-Velsky and Landis tree)}
 \sssc{AVL tree (Adelson-Velsky and Landis tree)}
-An AVL tree is a self-balancing binary search tree (BST). An AVL tree needs to comply with the property that for every node with two children in the tree, the height of its left and right subtrees differ by at most 1.
+An AVL tree is a self-balancing binary search tree (BST) that keeps info of height, invented by Georgy Adelson-Velsky and Evgenii Landis. An AVL tree needs to comply with the property that for every node with two children in the tree, the height of its left and right subtrees differ by at most 1.
 
 Some define heights of nodes and AVL trees as the definition used here plus 1, which is not used here.
 \sssc{Relation of height and numbers of nodes}
@@ -262,12 +272,24 @@ Searching and finding minimum/maximum in AVL tree is the same as in BST.
 
 The worst-case and amortized time complexities are $O(\tx{height of tree})=O(\log\tx{number of nodes})$.
 \sssc{Rotation}
-When insertion/deletion, the AVL property may be violated, called unbalanced. Since an insertion/deletion involves adding/deleting a single node, this can only increase/decrease the height of some subtree by 1. Thus, if the AVL property is violated at a node $x$, it means that the heights of left and right subtrees of it differ by exactly 2. We need to transform the tree to restore the AVL property, called rebalancing, using a single or double rotation.
+When insertion/deletion, the AVL property may be violated, called unbalanced. Since an insertion/deletion involves adding/deleting a single node, this can only increase/decrease the height of some subtree by 1. Thus, if the AVL property is violated at a node $x$, it means that the heights of left and right subtrees of it differ by exactly 2. We need to transform the tree to restore the AVL property, called rebalancing, using a single/simple rotation or a double rotation, each has two symmetric variants:
 \bit
-\item LL case: Let the left child of $x$ be $y$. The LL case is where the left subtree of $y$ has height $h+1$, while the right subtree of $y$ and the right subtree of $x$ have height $h$. We perform a right single rotation at $x$ by moving $y$ to the position of $x$, moving $x$ as the right child of $y$, and moving the original right subtree of $y$ as the left subtree of $x$.
-\item RR case: Let the right child of $x$ be $y$. The RR case is where the right tree of $y$ has height $h+1$, while the left subtree of $y$ and the left subtree of $x$ have height $h$. We perform a left single rotation at $x$ by moving $y$ to the position of $x$, moving $x$ as the left child of $y$, and moving the original left subtree of $y$ as the right subtree of $x$.
-\item LR case: Let the left child of $x$ be $y$, and the right child of $y$ be $z$. The LR case is where the right subtree of $y$ has height $h+1$, while the left subtree of $y$ and the right subtree of $x$ have height $h$. We perform a left-then-right double rotation at $x$ by doing a left single rotation at $y$ (i.e., moving $z$ to the position of $y$, moving $y$ as the left child of $z$, and moving the original left subtree of $z$ as the right subtree of $y$) and then a right single rotation at $x$ (i.e., moving $y$ to the position of $x$, moving $x$ as the right child of $y$, and moving the original right subtree of $y$ as the left subtree of $x$).
-\item RL case: Let the right child of $x$ be $y$, and the left child of $y$ be $z$. The RL case is where the left subtree of $y$ has height $h+1$, while the right subtree of $y$ and the left subtree of $x$ have height $h$. We perform a right-then-left double rotation at $x$ by doing a right single rotation at $y$ (i.e., moving $z$ to the position of $y$, moving $y$ as the right child of $z$, and moving the original right subtree of $z$ as the left subtree of $y$) and then a left single rotation at $x$ (i.e., moving $y$ to the position of $x$, moving $x$ as the left child of $y$, and moving the original left subtree of $y$ as the right subtree of $x$).
+\item LL case / right single rotation: Let the left child of $x$ be $y$. The LL case is where the left subtree of $y$ has height $h+1$, while the right subtree of $y$ and the right subtree of $x$ have height $h$. We perform a right rotation on the edge between $y$ and $x$, i.e.,
+\[\operatorname{left}(x)=\operatorname{right}(y)\]
+\[\operatorname{right}(y)=x\]
+\item RR case / left single rotation: Let the right child of $x$ be $y$. The RR case is where the right tree of $y$ has height $h+1$, while the left subtree of $y$ and the left subtree of $x$ have height $h$. We perform a left rotation on the edge between $y$ and $x$, i.e.,
+\[\operatorname{right}(x)=\operatorname{left}(y)\]
+\[\operatorname{left}(y)=x\]
+\item LR case / left-then-right double rotation: Let the left child of $x$ be $y$ and the right child of $y$ be $z$. The LR case is where the right subtree of $y$ has height $h+1$, while the left subtree of $y$ and the right subtree of $x$ have height $h$. We perform a left rotation on the edge between $z$ and $y$ and then a right rotation on the edge between $z$, now at the original position of $y$, and $x$, i.e.,
+\[\operatorname{right}(y)=\operatorname{left}(z)\]
+\[\operatorname{left}(z)=y\]
+\[\operatorname{left}(x)=\operatorname{right}(z)\]
+\[\operatorname{right}(z)=x\]
+\item RL case / right-then-left double rotation: Let the right child of $x$ be $y$ and the left child of $y$ be $z$. The RL case is where the left subtree of $y$ has height $h+1$, while the right subtree of $y$ and the left subtree of $x$ have height $h$. We perform a right rotation on the edge between $z$ and $y$ and then a left rotation on the edge between $z$, now at the original position of $y$, and $x$, i.e.,
+\[\operatorname{left}(y)=\operatorname{right}(z)\]
+\[\operatorname{right}(z)=y\]
+\[\operatorname{right}(x)=\operatorname{left}(z)\]
+\[\operatorname{left}(z)=x\]
 \eit
 \sssc{Insertion}
 Insertion in AVL tree involves first doing insertion the same as in BST, and then tracing the path from the new leaf to the root: For each node $x$ encountered, check if heights of its left and right subtrees differ by at most 1,
@@ -348,5 +370,14 @@ Note that
 \lstinputlisting[language=Python]{bstavl.py}
 \ssc{Splay tree}
 \sssc{Splay tree}
+A splay tree is a self-adjusting binary search tree (BST) that keeps no info of height and in which every access operation moves the accessed node to the root through an operation called splaying, invented by Daniel Dominic Sleator and Robert Endre Tarjan.
+\sssc{Splaying}
+When a node $x$ is accessed, a splay operation consisting of a sequence of splay steps is performed on $x$ to move it to the root. Let the parent of $x$ be $p$ and the parent of $p$ be $g$. There are three types of splay steps, each of which has two symmetric variants:
+\bit
+\item Zig step / simple rotation: This is done if $x$ is a child of the root. We perform a rotation on the edge between $x$ and root. This only happens as the last step and only happens when $x$ originally has odd depth.
+\item Zig-zig step: This is done either when $x$ is a left child of $p$ and $p$ is a left child of $g$, or when $x$ is a right child of $p$ and $p$ is a right child of $g$. We perform a rotation on the edge between $p$ and $g$ and then a rotation on the edge between $x$ and $p$.
+\item Zig-zag step: This is done either when $x$ is a left child of $p$ and $p$ is a right child of $g$, or when $x$ is a right child of $p$ and $p$ is a left child of $g$. We perform a rotation on the edge between $x$ and $p$ and then a rotation on the edge between $x$, now at the original position of $p$, and $g$.
+\eit
+
 
 \end{document}
