@@ -118,18 +118,18 @@ Suppose we are searching for $x$ and the root is $r$.
 \item If $x<r$, then we search in the left subtree.
 \item If $x>r$, then we search in the right subtree.
 \eit
-The time complexity is $O(\tx{height of tree})$.
+The worst-case and amortized time complexities are $O(\tx{height of tree})$.
 \sssc{Finding minimum and maximum}
 To find the node containing the smallest key, start at root and go to the left child as long as there is one, and the leaf we stop at is the smallest key. Similarly for find the largest key.
 
-The time complexity is $O(\tx{height of tree})$.
+The worst-case and amortized time complexities are $O(\tx{height of tree})$.
 \sssc{Insertion}
 Suppose we want to insert $x$. First search for it, if we found it, do noting (or update something); otherwise, if we stop at $y$,
 \bit
 \item if $x>y$, insert $x$ as the right child of $y$ if $x>y$, and
 \item if $x<y$, insert $x$ as the left child of $y$.
 \eit
-The time complexity is $O(\tx{height of tree})$.
+The worst-case and amortized time complexities are $O(\tx{height of tree})$.
 \sssc{Deletion}
 Suppose we want to delete $x$. First search for it, if we don't found it, do noting (or update something); otherwise,
 \bit
@@ -149,7 +149,7 @@ Suppose we want to delete $x$. First search for it, if we don't found it, do not
 \eit
 \eit
 \eit
-The time complexity is $O(\tx{height of tree})$.
+The worst-case and amortized time complexities are $O(\tx{height of tree})$.
 \sssc{Uniqueness given preorder traversal}
 A BST is uniquely determined by its preorder traversal.
 \bpr
@@ -260,7 +260,7 @@ Thus
 \sssc{Searching and finding minimum/maximum}
 Searching and finding minimum/maximum in AVL tree is the same as in BST.
 
-The time complexity is $O(\tx{height of tree})=O(\log\tx{number of nodes})$.
+The worst-case and amortized time complexities are $O(\tx{height of tree})=O(\log\tx{number of nodes})$.
 \sssc{Rotation}
 When insertion/deletion, the AVL property may be violated, called unbalanced. Since an insertion/deletion involves adding/deleting a single node, this can only increase/decrease the height of some subtree by 1. Thus, if the AVL property is violated at a node $x$, it means that the heights of left and right subtrees of it differ by exactly 2. We need to transform the tree to restore the AVL property, called rebalancing, using a single or double rotation.
 \bit
@@ -278,7 +278,7 @@ Insertion in AVL tree involves first doing insertion the same as in BST, and the
 \bpr
 Let $x$ be the first node encountered when traversing upward from the newly inserted node toward the root that violates the AVL property. Since an insertion involves adding a single node, this can only increase the height of some subtree by 1. Thus, the heights of the left and right subtrees differ by exactly 2. For any of the four cases (LL, RR, LR, RL), since the inserted node must be in the subtree of height $h+1$ of $y$, the height of the subtree whose root is $x$ has height $h+2$ both before insertion and after rotation. Thus, the fact that the AVL property is satisfied for all ancestors of $x$ before insertion implies that the AVL property is satisfied for all ancestors of $x$ after rotation.
 \epr
-The time complexity is $O(\tx{height of tree})=O(\log\tx{number of nodes})$.
+The worst-case and amortized time complexities are $O(\tx{height of tree})=O(\log\tx{number of nodes})$.
 \sssc{Deletion}
 Deletion in AVL tree involves first doing deletion the same as in BST, and then tracing the path from
 \bit
@@ -290,7 +290,7 @@ to the root: For each node $x$ encountered, check if heights of its left and rig
 \item if yes, proceed to the parent of $x$;
 \item if not, we say the AVL property is violated at $x$ and perform rotations to restore it, and then proceed to the parent of $x$ since violation may propagate upwards.
 \eit
-The time complexity is $O(\tx{height of tree})=O(\log\tx{number of nodes})$.
+The worst-case and amortized time complexities are $O(\tx{height of tree})=O(\log\tx{number of nodes})$.
 \sssc{Number of distinct AVL tree shapes}
 The number $A_{h,n}$ of distinct shapes of AVL trees with $n$ nodes and height $h$ is:
 \[A_{-1,0}=1\]
@@ -346,4 +346,7 @@ Note that
 \epr
 \sssc{An implementation of BST and ASL tree in Python}
 \lstinputlisting[language=Python]{bstavl.py}
+\ssc{Splay tree}
+\sssc{Splay tree}
+
 \end{document}
