@@ -491,7 +491,8 @@ Thus the change of rank $\Delta r(x)$ of a node $x$ is
 Thus the change of potential function is
 \[P(T_0)-P(T_m)\le\sum_{x\in T}\log_2(\frac{W}{w(x)})=O\qty(\sum_{x\in T}\log(\frac{W}{w(x)}))\]
 \sssc{Balance theorem}
-The cost of performing a sequence of $m$ access in a splay tree containing $n$ nodes is $O(m\log n+n\log n)$.
+The cost of performing a sequence of $m$ accesses in a splay tree containing $n$ nodes is
+\[O(m\log n+n\log n)\]
 \bpr
 Take a constant weight, e.g.,
 \[w(x)=1\]
@@ -502,7 +503,8 @@ Then
 \epr
 This theorem implies that splay trees perform at least as well as AVL trees on sequences of at least $n$ accesses.
 \sssc{Static optimality theorem}
-The cost of performing a sequence of $m$ access in a splay tree $T$ containing $n$ nodes with each node accessed at least once and $q_x$ being the number of times node $x$ is accessed is $O\qty(m+\sum_{x\in T}q_x\log(\frac{m}{q_x}))$.
+The cost of performing a sequence of $m$ accesses in a splay tree $T$ containing $n$ nodes, with each node accessed at least once and $q_x$ being the number of times node $x$ is accessed, is
+\[O\qty(m+\sum_{x\in T}q_x\log(\frac{m}{q_x}))\]
 \bpr
 Let
 \[w(x)=q_x\]
@@ -512,6 +514,18 @@ Then
 \[\sum_{i=1}^mA_i=O\qty(\sum_{x\in T}q_x\log(\frac{m}{q_x})+m)\]
 \[q_x\ge 1\]
 \[P(T_0)-P(T_m)=O\qty(\sum_{x\in T}\log(\frac{m}{q_x}))=O\qty(\sum_{x\in T}q_x\log(\frac{m}{q_x}))\]
+\epr
+\sssc{Working set theorem}
+The cost of performing a sequence $S$ of $m$ accesses in a splay tree $T$ containing $n$ nodes, with $t(x)$ being the number of distinct nodes accessed before the previous time node $x$ was accessed for each $x\in S$, is
+\[O\qty(m+n\log n+\sum_{x\in S}\log(t(x)+1))\]
+\bpr
+Let
+\[w(x)=(t(x)+1)^{-2}\]
+Then
+\[W=O(1)\]
+\[A_i=O\qty(\log(t(x)+1)+1)\]
+\[\sum_{i=1}^mA_i=O\qty(\sum_{x\in S}\log(t(x)+1)+m)\]
+\[P(T_0)-P(T_m)=O\qty(n\log n)\]
 \epr
 \sssc{Top-down splay}
 An alternative implementation of splay that is done together with searching. Suppose we want to splay $x$. We start at the root and maintain two trees which are initially empty, left tree $L$ of nodes smaller than $x$ and right tree $R$ of nodes larger than $x$, during the traversal. In each step with current node $c$, there are three cases, each with two symmetric variants, where we will describe the former and the latter is the former with left and right exchanged and $L$ and $R$ exchanged:
