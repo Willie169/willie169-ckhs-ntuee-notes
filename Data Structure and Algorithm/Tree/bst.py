@@ -100,11 +100,8 @@ class BST:
             new.parent = node.parent
         return node.parent
 
-    # Time complexity: O(height)
-    def remove(self, x) -> BST.Node | None:
-        node, found = self.search(x)
-        if found == False or node == None:
-            return None
+    # Time complexity: O(1)
+    def remove_node(self, node) -> BST.Node | None:
         if node.right == None and node.left == None:
             return self._transplant(node, None)
         if node.right == None:
@@ -116,6 +113,13 @@ class BST:
             succ = succ.left
         node.value = succ.value
         return self._transplant(succ, succ.right)
+
+    # Time complexity: O(height)
+    def remove(self, x) -> BST.Node | None:
+        node, found = self.search(x)
+        if found == False or node == None:
+            return None
+        return self.remove_node(node)
 
     # Time complexity: O(n)
     def preorder(self) -> list:
