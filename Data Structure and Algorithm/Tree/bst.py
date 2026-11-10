@@ -10,7 +10,7 @@ class BST:
         self.root = None
 
     # Time complexity: O(height)
-    def search(self, x):
+    def find(self, x):
         if self.root == None:
             return None
         node = self.root
@@ -98,7 +98,7 @@ class BST:
 
     # Time complexity: O(height)
     def remove(self, x):
-        node = self.search(x)
+        node = self.find(x)
         if node == None:
             return None
         if node.right_child == None and node.left_child == None:
@@ -235,3 +235,7 @@ class AVL(BST):
         node = super().remove(x)
         while node != None:
             node = self._rebalance(node).parent
+
+
+class Splay(BST):
+    pass
