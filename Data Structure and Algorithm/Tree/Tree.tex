@@ -421,15 +421,6 @@ or
 \item Delete $x$ as with a normal BST.
 \item Splay the original parent of the deleted $x$.
 \een
-\sssc{Top-down splay}
-An alternative implementation of splay that is done together with searching. Suppose we want to splay $x$. We start at the root and maintain two trees which are initially empty, left tree $L$ of nodes smaller than $x$ and right tree $R$ of nodes larger than $x$, during the traversal. In each step with current node $c$, there are three cases, each with two symmetric variants, where we will describe the former and the latter is the former with left and right exchanged and $L$ and $R$ exchanged:
-\bit
-\item $x<\operatorname{left}(c)$: We perform a rotation on the edge between $c$ and $\operatorname{left}(c)$ and then a rotation one the edge $\operatorname{left}(\operatorname{left}(c))$ and $\operatorname{left}(c)$, and then assign $\operatorname{left}(c)$ to $c$.
-\item $x>\operatorname{right}(c)$: We perform a rotation on the edge between $c$ and $\operatorname{right}(c)$ and then a rotation one the edge $\operatorname{right}(\operatorname{right}(c))$ and $\operatorname{right}(c)$, and then assign $\operatorname{right}(c)$ to $c$.
-\item $\operatorname{left}(c)<x<c$: We connect $c$ into $R$, and then assign $\operatorname{left}(c)$ to $c$.
-\item $\operatorname{right}(c)>x>c$: We connect $c$ into $L$, and then assign $\operatorname{right}(c)$ to $c$.
-\item $x=c$, $x<c$ and $c$ has no left child, or $x>c$ and $c$ has no right child: The traversal stops at $c$. We take $c$ as the new root, and $L$ and $R$ as left and right subtrees of $c$.
-\eit
 \sssc{Amortized analysis}
 We define size of a node $s(x)$ as the number of nodes in the subtree whose root is node $x$, rank of a node as
 \[r(x)=\log_2s(x)\]
@@ -481,6 +472,21 @@ A&\le 1+r_f(x)-r_2(x)+3(r_2(x)-r(x))\\
 The above analysis can be generalized by assigning each node $x$ a weight $w(x)>0$ and defining $s(x)$ as the sum of weights of nodes in the subtree whose root is node $x$. Note that the previous analysis corresponds to the special case $w(x)=1$. The weighted analysis results in
 \[A\le 1+3(\log_2n-r(x))=O(\log_2(\frac{W}{w(x)})+1)\]
 where $W$ is the sum of all weights, i.e., the size of root.
+
+
+
+
+\sssc{Top-down splay}
+An alternative implementation of splay that is done together with searching. Suppose we want to splay $x$. We start at the root and maintain two trees which are initially empty, left tree $L$ of nodes smaller than $x$ and right tree $R$ of nodes larger than $x$, during the traversal. In each step with current node $c$, there are three cases, each with two symmetric variants, where we will describe the former and the latter is the former with left and right exchanged and $L$ and $R$ exchanged:
+\bit
+\item $x<\operatorname{left}(c)$: We perform a rotation on the edge between $c$ and $\operatorname{left}(c)$ and then a rotation one the edge $\operatorname{left}(\operatorname{left}(c))$ and $\operatorname{left}(c)$, and then assign $\operatorname{left}(c)$ to $c$.
+\item $x>\operatorname{right}(c)$: We perform a rotation on the edge between $c$ and $\operatorname{right}(c)$ and then a rotation one the edge $\operatorname{right}(\operatorname{right}(c))$ and $\operatorname{right}(c)$, and then assign $\operatorname{right}(c)$ to $c$.
+\item $\operatorname{left}(c)<x<c$: We connect $c$ into $R$, and then assign $\operatorname{left}(c)$ to $c$.
+\item $\operatorname{right}(c)>x>c$: We connect $c$ into $L$, and then assign $\operatorname{right}(c)$ to $c$.
+\item $x=c$, $x<c$ and $c$ has no left child, or $x>c$ and $c$ has no right child: The traversal stops at $c$. We take $c$ as the new root, and $L$ and $R$ as left and right subtrees of $c$.
+\eit
+
+
 
 \ssc{An implementation of BST, ASL tree, and splay tree in Python}
 \lstinputlisting[language=Python]{bst.py}
