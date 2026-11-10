@@ -527,6 +527,14 @@ Then
 \[\sum_{i=1}^mA_i=O\qty(\sum_{x\in S}\log(t(x)+1)+m)\]
 \[P(T_0)-P(T_m)=O\qty(n\log n)\]
 \epr
+\sssc{Locality property or strong balance theorem}
+The cost of performing a sequence of $m$ accesses in a splay tree containing $n$ nodes, with $k$ distinct nodes accessed, is
+\[O(m+m\log k+n\log n)\]
+\bpr
+Use working set theorem.
+\[t(x)=O(k)\]
+\[O\qty(m+n\log n+\sum_{x\in S}\log(t(x)+1))=O(m+n\log n+m\log k)\]
+\epr
 \sssc{Top-down splay}
 An alternative implementation of splay that is done together with searching. Suppose we want to splay $x$. We start at the root and maintain two trees which are initially empty, left tree $L$ of nodes smaller than $x$ and right tree $R$ of nodes larger than $x$, during the traversal. In each step with current node $c$, there are three cases, each with two symmetric variants, where we will describe the former and the latter is the former with left and right exchanged and $L$ and $R$ exchanged:
 \bit
