@@ -423,11 +423,11 @@ or
 \item Splay the original parent of the deleted $x$.
 \een
 \sssc{Amortized analysis}
-We define size of a node $s(x)$ as the number of nodes in the subtrees of node $x$, rank of a node as
+We define size of a node $s(x)$ as the number of nodes in the subtree whose root is node $x$, rank of a node as
 \[r(x)=\log_2s(x)\]
 and potential function of a tree $P(T)$ is
 \[P(T)=\sum_{x\in T}r(x)\]
-The actual cost $C_i$ of an operation $i$ is defined as the number of rotations in the operation. Let the state before operation $i$ be denoted by the original functions and the state after operation $i$ be denoted with a prime symbol. The amortized cost $A_i$ of an operation $i$ with actual cost $C_i$ that transforms the tree from $T_{i-1}$ to $T_i$ is defined as
+The actual cost $C_i$ of an operation $i$ is defined as the number of rotations in the operation. Let the state before operation $i$ be denoted by the original functions and the state after operation $i$ be denoted with a prime symbol. The amortized cost $A_i$ of an operation $i$ with actual cost $C_i$ is defined as
 \[A_i=C_i+\Delta P=C_i+P'(T)-P(T)\]
 \bit
 \item Zig step:
@@ -437,10 +437,19 @@ The actual cost $C_i$ of an operation $i$ is defined as the number of rotations 
 \[A_i\le 1+r'(x)-r(x)\]
 \item Zig-zig step:
 \[C_i=2\]
+\[r'(p)\le r(g)\]
+\[r(x)\le r(p)\]
 The log function is concave, i.e.,
 \[\frac{\log_2a+\log_2b}{2}\le\log_2(\frac{a+b}{2})\]
 Hence
+\[\frac{r(x)+r'(g)}{2}=\frac{\log_2s(x)+\log_2s'(g)}{2}\le\log_2(\frac{s(x)+s'(g)}{2})=\log_2(\frac{s'(x)-2}{2})\le\log_2(\frac{s'(x)}{2})=r'(x)-1\]
+\[r'(g)\le 2r'(x)-r(x)-2\]
+\[\Delta P=r'(x)+r'(p)+r'(g)-r(x)-r(p)-r(g)\le r'(x)+r'(g)-2r(x)\le 3(r'(x)-r(x))-2\]
+\[A_i\le 3(r'(x)-r(x))\]
 \item Zig-zag step:
+\[C_i=2\]
+TODO
+\[\Delta P=r'(x)+r'(p)+r'(g)-r(x)-r(p)-r(g)\le 2(r'(x)-r(x))-2\]
 \eit
 
 \end{document}
