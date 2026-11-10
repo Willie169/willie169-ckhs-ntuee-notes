@@ -160,6 +160,9 @@ class BST:
             node = node.right
         return result
 
+    def __repr__(self) -> str:
+        return repr(self.inorder())
+
     def is_left_child(self, node) -> bool | None:
         if node.parent == None:
             return None
