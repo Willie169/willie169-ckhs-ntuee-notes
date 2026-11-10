@@ -426,8 +426,8 @@ We define size of a node $s(x)$ as the number of nodes in the subtree whose root
 \[r(x)=\log_2s(x)\]
 and potential function of a tree $P(T)$ is
 \[P(T)=\sum_{x\in T}r(x)\]
-The actual cost $C_i$ of an operation $i$ is defined as the number of rotations in the operation. Let the state before operation $i$ be denoted by the original functions and the state after operation $i$ be denoted with a prime symbol. The amortized cost $A_i$ of an operation $i$ with actual cost $C_i$ is defined as
-\[A_i=C_i+\Delta P=C_i+P'(T)-P(T)\]
+The actual cost $C_i$ of an operation $i$ is defined as the number of rotations in the operation. Let the state before operation $i$ be denoted by the original functions and the state after operation $i$ be denoted with a prime symbol. The amortized cost $A_i$ of an operation $i$ with actual cost $C_i$ that transforms the tree $T_{i-1}$ to $T_i$ is defined as
+\[A_i=C_i+\Delta P=C_i+P(T_i)-P(T_{i-1})\]
 \bit
 \item Zig step:
 \[C_i=1\]
@@ -469,13 +469,51 @@ A&\le 1+r_f(x)-r_2(x)+3(r_2(x)-r(x))\\
  &\le 1+3(\log_2n-r(x))\\
  &=O(\log n)
 \ea\]
-The above analysis can be generalized by assigning each node $x$ a weight $w(x)>0$ and defining $s(x)$ as the sum of weights of nodes in the subtree whose root is node $x$. Note that the previous analysis corresponds to the special case $w(x)=1$. The weighted analysis results in
-\[A\le 1+3(\log_2n-r(x))=O(\log_2(\frac{W}{w(x)})+1)\]
-where $W$ is the sum of all weights, i.e., the size of root.
-
-
-
-
+For a sequence of $m$ accesses in a splay tree $T$, we can bound the total actual cost with
+\[\sum_{i=1}^mC_i=P(T_0)-P(T_m)+\sum_{i=1}^mA_i\]
+Moreover, for every node $x$,
+\[1\le s(x)\le n\]
+\[0\le r(x)\le\log_2n\]
+Thus the change of rank $\Delta r(x)$ of a node $x$ is
+\[\Delta r(x)\le\log_2n\]
+Thus the change of potential function is
+\[P(T_0)-P(T_m)\le\sum_{x\in T}\log_2n=O\qty(n\log n)\]
+\sssc{Weighted analysis}
+The above analysis can be generalized by assigning each node $x$ a weight $w(x)\ge 1$ and defining $s(x)$ as the sum of weights of nodes in the subtree whose root is node $x$, called weighted analysis. Note that the previous analysis corresponds to the special case $w(x)=1$. The sum of all weights is denoted $W$. The same analysis gives:
+\[A\le 1+3(\log_2n-r(x))=O(\log(\frac{W}{w(x)})+1)\]
+\sssc{Bound of total actual cost}
+For a sequence of $m$ accesses in a splay tree $T$, we can bound the total actual cost with
+\[\sum_{i=1}^mC_i=P(T_0)-P(T_m)+\sum_{i=1}^mA_i\]
+Moreover, for every node $x$,
+\[w(x)\le s(x)\le W\]
+\[\log_2(w(x))\le r(x)\le\log_2W\]
+Thus the change of rank $\Delta r(x)$ of a node $x$ is
+\[\Delta r(x)\le\log_2(\frac{W}{w(x)})\]
+Thus the change of potential function is
+\[P(T_0)-P(T_m)\le\sum_{x\in T}\log_2(\frac{W}{w(x)})=O\qty(\sum_{x\in T}\log(\frac{W}{w(x)}))\]
+\sssc{Balance theorem}
+The cost of performing a sequence of $m$ access in a splay tree containing $n$ nodes is $O(m\log n+n\log n)$.
+\bpr
+Take a constant weight, e.g.,
+\[w(x)=1\]
+Then
+\[W=n\]
+\[A_i=O(\log n)\]
+\[P(T_0)-P(T_m)=O(n\log n)\]
+\epr
+This theorem implies that splay trees perform at least as well as AVL trees on sequences of at least $n$ accesses.
+\sssc{Static optimality theorem}
+The cost of performing a sequence of $m$ access in a splay tree $T$ containing $n$ nodes with each node accessed at least once and $q_x$ being the number of times node $x$ is accessed is $O\qty(m+\sum_{x\in T}q_x\log(\frac{m}{q_x}))$.
+\bpr
+Let
+\[w(x)=q_x\]
+Then
+\[W=m\]
+\[A_i=O\qty(\log(\frac{m}{q_x})+1)\]
+\[\sum_{i=1}^mA_i=O\qty(\sum_{x\in T}q_x\log(\frac{m}{q_x})+m)\]
+\[q_x\ge 1\]
+\[P(T_0)-P(T_m)=O\qty(\sum_{x\in T}\log(\frac{m}{q_x}))=O\qty(\sum_{x\in T}q_x\log(\frac{m}{q_x}))\]
+\epr
 \sssc{Top-down splay}
 An alternative implementation of splay that is done together with searching. Suppose we want to splay $x$. We start at the root and maintain two trees which are initially empty, left tree $L$ of nodes smaller than $x$ and right tree $R$ of nodes larger than $x$, during the traversal. In each step with current node $c$, there are three cases, each with two symmetric variants, where we will describe the former and the latter is the former with left and right exchanged and $L$ and $R$ exchanged:
 \bit
