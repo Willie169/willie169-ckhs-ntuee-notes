@@ -89,6 +89,7 @@ class BST:
             else:
                 return node, False
 
+    # Time complexity: O(1)
     def _transplant(self, node, new) -> BST.Node | None:
         if node.parent == None:
             self.root = new
