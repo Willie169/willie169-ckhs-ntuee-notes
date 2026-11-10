@@ -369,7 +369,7 @@ Note that
 \epr
 \ssc{Splay tree}
 \sssc{Splay tree}
-A splay tree is a self-adjusting binary search tree (BST) that keeps no info of height and in which every access operation moves the accessed node to the root through an operation called splaying, invented by Daniel Dominic Sleator and Robert Endre Tarjan.
+A splay tree is a self-adjusting binary search tree (BST) that keeps no info of height and in which every access operation moves the accessed node to the root through an operation called splaying, invented by Daniel Dominic Sleator and Robert Endre Tarjan. The idea is locality, that is,  if an item is accessed, it is likely to be accessed again soon. The worst-case searching, insertion, and deletion time complexities are as with a normal BST, while the amortized time complexities are $O(\log n)$.
 \sssc{Splay}
 When a node $x$ is accessed, a (bottom-up) splay operation consisting of a sequence of splay steps is performed on $x$ to move it to the root, called splaying $x$. Let the parent of $x$ be $p$ and the parent of $p$ be $g$. There are three types of splay steps, each of which has two symmetric variants:
 \bit
@@ -485,9 +485,7 @@ An alternative implementation of splay that is done together with searching. Sup
 \item $\operatorname{right}(c)>x>c$: We connect $c$ into $L$, and then assign $\operatorname{right}(c)$ to $c$.
 \item $x=c$, $x<c$ and $c$ has no left child, or $x>c$ and $c$ has no right child: The traversal stops at $c$. We take $c$ as the new root, and $L$ and $R$ as left and right subtrees of $c$.
 \eit
-
-
-
+Top-down splay has the same worst-case and amortized searching, insertion, and deletion time complexities as bottom-up splay and $O(1)$ extra space.
 \ssc{An implementation of BST, ASL tree, and splay tree in Python}
 \lstinputlisting[language=Python]{bst.py}
 \end{document}
