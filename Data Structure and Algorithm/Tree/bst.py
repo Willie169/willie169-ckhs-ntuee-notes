@@ -1,13 +1,11 @@
-class Node:
-    def __init__(self, value=None, parent=None):
-        self.value = value
-        self.parent = parent
-        self.left_child = None
-        self.right_child = None
-        self.height = 1  # only used in AVL, leaf 1
-
-
 class BST:
+    class Node:
+        def __init__(self, value=None, parent=None):
+            self.value = value
+            self.parent = parent
+            self.left_child = None
+            self.right_child = None
+
     def __init__(self):
         self.root = None
 
@@ -70,18 +68,18 @@ class BST:
     # Time complexity: O(height)
     def insert(self, x):
         if self.root == None:
-            self.root = Node(x)
+            self.root = self.Node(x)
             return self.root, True
         node = self.root
         while True:
             if node.value > x:
                 if node.left_child == None:
-                    node.left_child = Node(x, node)
+                    node.left_child = self.Node(x, node)
                     return node.left_child, True
                 node = node.left_child
             elif node.value < x:
                 if node.right_child == None:
-                    node.right_child = Node(x, node)
+                    node.right_child = self.Node(x, node)
                     return node.right_child, True
                 node = node.right_child
             else:
@@ -158,18 +156,6 @@ class BST:
             node = node.right_child
         return result
 
-    @staticmethod
-    def height(node):
-        return node.height if node != None else -1
-
-    @staticmethod
-    def _update(node):
-        node.height = 1 + max(BST.height(node.left_child), BST.height(node.right_child))
-
-    @staticmethod
-    def bf(node):
-        return BST.height(node.left_child) - BST.height(node.right_child)
-
     def rotate_right(self, node):
         child = node.left_child
         self._transplant(node, child)
@@ -178,8 +164,6 @@ class BST:
         node.left_child = child.right_child
         child.right_child = node
         node.parent = child
-        self._update(node)
-        self._update(child)
         return child
 
     def rotate_left(self, node):
@@ -190,13 +174,40 @@ class BST:
         node.right_child = child.left_child
         child.left_child = node
         node.parent = child
-        self._update(node)
-        self._update(child)
         return child
 
 
 # height = Theta(log n)
 class AVL(BST):
+    class Node(BST.Node):
+        def __init__(self, value=None, parent=None):
+            super().__init__(value, parent)
+            self.height = 1  # leaf 1
+
+    @staticmethod
+    def height(node):
+        return node.height if node != None else 0
+
+    @staticmethod
+    def _update(node):
+        node.height = 1 + max(AVL.height(node.left_child), AVL.height(node.right_child))
+
+    @staticmethod
+    def bf(node):
+        return AVL.height(node.left_child) - AVL.height(node.right_child)
+
+    def rotate_right(self, node):
+        child = super().rotate_right(node)
+        self._update(node)
+        self._update(child)
+        return child
+
+    def rotate_left(self, node):
+        child = super().rotate_left(node)
+        self._update(node)
+        self._update(child)
+        return child
+
     def _rebalance(self, node):
         self._update(node)
         bf = self.bf(node)
@@ -218,6 +229,7 @@ class AVL(BST):
         node, inserted = super().insert(x)
         if inserted == True and node.parent != None:
             self._rebalance(node.parent)
+        return node, inserted
 
     def remove(self, x):
         node = super().remove(x)

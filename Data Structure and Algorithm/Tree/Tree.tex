@@ -370,13 +370,14 @@ Note that
 \ssc{Splay tree}
 \sssc{Splay tree}
 A splay tree is a self-adjusting binary search tree (BST) that keeps no info of height and in which every access operation moves the accessed node to the root through an operation called splaying, invented by Daniel Dominic Sleator and Robert Endre Tarjan.
-\sssc{Splaying}
-When a node $x$ is accessed, a splay operation consisting of a sequence of splay steps is performed on $x$ to move it to the root, called splaying $x$. Let the parent of $x$ be $p$ and the parent of $p$ be $g$. There are three types of splay steps, each of which has two symmetric variants:
+\sssc{Splay}
+When a node $x$ is accessed, a (bottom-up) splay operation consisting of a sequence of splay steps is performed on $x$ to move it to the root, called splaying $x$. Let the parent of $x$ be $p$ and the parent of $p$ be $g$. There are three types of splay steps, each of which has two symmetric variants:
 \bit
 \item Zig step / simple rotation: This is done if $x$ is a child of the root. We perform a rotation on the edge between $x$ and root. This only happens as the last step and only happens when $x$ originally has odd depth.
 \item Zig-zig step: This is done either when $x$ is a left child of $p$ and $p$ is a left child of $g$, or when $x$ is a right child of $p$ and $p$ is a right child of $g$. We perform a rotation on the edge between $p$ and $g$ and then a rotation on the edge between $x$ and $p$.
 \item Zig-zag step: This is done either when $x$ is a left child of $p$ and $p$ is a right child of $g$, or when $x$ is a right child of $p$ and $p$ is a left child of $g$. We perform a rotation on the edge between $x$ and $p$ and then a rotation on the edge between $x$, now at the original position of $p$, and $g$.
 \eit
+A zig step is a 1-level splay step while a zig-zig or zig-zag step is a 2-level splay step.
 \sssc{Searching and finding minimum/maximum}
 Searching and finding minimum/maximum in splay tree involves first doing the operation as with a normal BST and then splay the found node if found.
 \sssc{Join}
@@ -420,6 +421,15 @@ or
 \item Delete $x$ as with a normal BST.
 \item Splay the original parent of the deleted $x$.
 \een
+\sssc{Top-down splay}
+An alternative implementation of splay that is done together with searching. Suppose we want to splay $x$. We start at the root and maintain two trees which are initially empty, left tree $L$ of nodes smaller than $x$ and right tree $R$ of nodes larger than $x$, during the traversal. In each step with current node $c$, there are three cases, each with two symmetric variants, where we will describe the former and the latter is the former with left and right exchanged and $L$ and $R$ exchanged:
+\bit
+\item $x<\operatorname{left}(c)$: We perform a rotation on the edge between $c$ and $\operatorname{left}(c)$ and then a rotation one the edge $\operatorname{left}(\operatorname{left}(c))$ and $\operatorname{left}(c)$, and then assign $\operatorname{left}(c)$ to $c$.
+\item $x>\operatorname{right}(c)$: We perform a rotation on the edge between $c$ and $\operatorname{right}(c)$ and then a rotation one the edge $\operatorname{right}(\operatorname{right}(c))$ and $\operatorname{right}(c)$, and then assign $\operatorname{right}(c)$ to $c$.
+\item $\operatorname{left}(c)<x<c$: We connect $c$ into $R$, and then assign $\operatorname{left}(c)$ to $c$.
+\item $\operatorname{right}(c)>x>c$: We connect $c$ into $L$, and then assign $\operatorname{right}(c)$ to $c$.
+\item $x=c$, $x<c$ and $c$ has no left child, or $x>c$ and $c$ has no right child: The traversal stops at $c$. We take $c$ as the new root, and $L$ and $R$ as left and right subtrees of $c$.
+\eit
 \sssc{Amortized analysis}
 We define size of a node $s(x)$ as the number of nodes in the subtree whose root is node $x$, rank of a node as
 \[r(x)=\log_2s(x)\]
@@ -460,9 +470,18 @@ Hence
 \[\Delta P=r'(x)+r'(p)+r'(g)-r(x)-r(p)-r(g)\le 3(r'(x)-r(x))-2\]
 \[A_i\le 3(r'(x)-r(x))\]
 \eit
+When splaying a node $x$, zero or more 2-level splay steps followed by zero or one 1-level splay step is conducted. Let $r_2(x)$ be the rank of $x$ just after the last 2-level splay step and $r_f(x)$ be the final rank of $x$. The amortized cost $A$ of splaying $x$ is
+\[\ba
+A&\le 1+r_f(x)-r_2(x)+3(r_2(x)-r(x))\\
+ &\le 1+3(r_f(x)-r_2(x))+3(r_2(x)-r(x))\\
+ &=1+3(r_f(x)-r(x))\\
+ &\le 1+3(\log_2n-r(x))\\
+ &=O(\log n)
+\ea\]
+The above analysis can be generalized by assigning each node $x$ a weight $w(x)>0$ and defining $s(x)$ as the sum of weights of nodes in the subtree whose root is node $x$. Note that the previous analysis corresponds to the special case $w(x)=1$. The weighted analysis results in
+\[A\le 1+3(\log_2n-r(x))=O(\log_2(\frac{W}{w(x)})+1)\]
+where $W$ is the sum of all weights, i.e., the size of root.
 
-
-
-\ssc{An implementation of BST, ASL tree, and Splay tree in Python}
+\ssc{An implementation of BST, ASL tree, and splay tree in Python}
 \lstinputlisting[language=Python]{bst.py}
 \end{document}
