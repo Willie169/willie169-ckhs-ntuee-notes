@@ -558,7 +558,17 @@ public:
   }
 
   pair<Node *, bool> search(const T &x) override {
-    auto [node, found] = Base::search(x);
-    return {splay(node), found};
+    auto [result, found] = Base::search(x);
+    return {splay(result), found};
+  }
+
+  virtual Node *find_min(Node *node) const {
+    auto result = Base::find_min(node);
+    return splay(result);
+  }
+
+  virtual Node *find_max(Node *node) const {
+    auto result = Base::find_max(node);
+    return splay(result);
   }
 };
