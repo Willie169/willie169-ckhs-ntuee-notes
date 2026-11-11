@@ -5,18 +5,18 @@
 #include <vector>
 using namespace std;
 
-template <class T> class BST_Node {
+template <class T, class Node> class Base_BST_Node {
 public:
   using value_type = T;
   T value;
-  BST_Node<T> *parent;
-  BST_Node<T> *left;
-  BST_Node<T> *right;
+  Node *parent;
+  Node *left;
+  Node *right;
 
-  BST_Node(const T &value, BST_Node<T> *parent = nullptr)
+  Base_BST_Node(const T &value, Node *parent = nullptr)
       : value(value), parent(parent), left(nullptr), right(nullptr) {}
 
-  friend void swap(BST_Node &lhs, BST_Node &rhs) {
+  friend void swap(Node &lhs, Node &rhs) {
     if (lhs.left != nullptr)
       lhs.left->parent = rhs;
     if (lhs.right != nullptr)
@@ -46,6 +46,9 @@ public:
     swap(lhs.right, rhs.right);
   }
 };
+
+template <class T>
+class BST_Node : public Base_BST_Node<T, class BST_Node<T>> {};
 
 template <class T, class Node = BST_Node<T>> class BST {
 public:
@@ -446,9 +449,9 @@ public:
   }
 };
 
-template <class T> class AVL_Node : public BST_Node<T> {
+template <class T> class AVL_Node : public Base_BST_Node<T, AVL_Node<T>> {
 public:
-  using Base = BST_Node<T>;
+  using Base = Base_BST_Node<T, AVL_Node<T>>;
   unsigned int height = 1; // leaf 1
 
   friend void swap(AVL_Node &lhs, AVL_Node &rhs) {
