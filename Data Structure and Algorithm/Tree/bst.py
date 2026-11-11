@@ -47,27 +47,41 @@ class BST:
 
     # Time complexity: O(height)
     def upper_bound(self, x) -> BST.Node | None:
-        r = None
+        result = None
         node = self.root
         while node != None:
             if node.value <= x:
-                r = node
+                result = node
                 node = node.right
             else:
                 node = node.left
-        return r
+        return result
 
     # Time complexity: O(height)
     def lower_bound(self, x) -> BST.Node | None:
-        r = None
+        result = None
         node = self.root
         while node != None:
             if node.value >= x:
-                r = node
+                result = node
                 node = node.left
             else:
                 node = node.right
-        return r
+        return result
+
+    # Time complexity: O(height)
+    def inorder_successor(self, node) -> BST.Node:
+        result = node.right
+        while result.left != None:
+            result = result.left
+        return result
+
+    # Time complexity: O(height)
+    def inorder_predecessor(self, node) -> BST.Node:
+        result = node.left
+        while result.right != None:
+            result = result.right
+        return result
 
     # Time complexity: O(height)
     def insert(self, x) -> tuple[BST.Node, bool]:
@@ -92,11 +106,13 @@ class BST:
     # Time complexity: O(1)
     def _transplant(self, node, new) -> BST.Node | None:
         if node.parent == None:
-            self.root = new
+            pass
         elif node.parent.left == node:
             node.parent.left = new
         elif node.parent.right == node:
             node.parent.right = new
+        if self.root is node:
+            self.root = new
         if new != None:
             new.parent = node.parent
         return node.parent
@@ -109,9 +125,7 @@ class BST:
             return self._transplant(node, node.left)
         if node.left == None:
             return self._transplant(node, node.right)
-        succ = node.right
-        while succ.left != None:
-            succ = succ.left
+        succ = self.inorder_successor(node)
         node.value = succ.value
         return self._transplant(succ, succ.right)
 
@@ -169,7 +183,7 @@ class BST:
         return repr(self.inorder())
 
     def is_left_child(self, node) -> bool | None:
-        if node.parent == None:
+        if self.root is node:
             return None
         if node.parent.left is node:
             return True
@@ -240,7 +254,7 @@ class AVL(BST):
             if self.bf(child) > 0:
                 self._rotate_right(child.left)
             return self._rotate_left(child)
-        if node.parent == None:
+        if self.root is node:
             return node
         return self._rebalance(node.parent)
 
@@ -260,7 +274,7 @@ class Splay(BST):
     def splay(self, node) -> BST.Node | None:
         if node == None:
             return None
-        if node.parent == None:
+        if self.root is node:
             return node
         if node.parent == self.root:  # zig
             return self.rotate(node)
