@@ -70,14 +70,18 @@ class BST:
         return result
 
     # Time complexity: O(height)
-    def inorder_successor(self, node) -> BST.Node:
+    def inorder_successor(self, node: BST.Node) -> BST.Node | None:
+        if node.right == None:
+            return None
         result = node.right
         while result.left != None:
             result = result.left
         return result
 
     # Time complexity: O(height)
-    def inorder_predecessor(self, node) -> BST.Node:
+    def inorder_predecessor(self, node: BST.Node) -> BST.Node | None:
+        if node.left == None:
+            return None
         result = node.left
         while result.right != None:
             result = result.right
@@ -182,14 +186,16 @@ class BST:
     def __repr__(self) -> str:
         return repr(self.inorder())
 
-    def is_left_child(self, node) -> bool | None:
-        if self.root is node:
+    def is_left_child(self, node: BST.Node) -> bool | None:
+        if self.root is node or node.parent == None:
             return None
         if node.parent.left is node:
             return True
         return False
 
-    def _rotate_right(self, child) -> BST.Node:
+    def _rotate_right(self, child: BST.Node) -> BST.Node | None:
+        if child.parent == None:
+            return None
         parent = child.parent
         self._transplant(parent, child)
         if child.right != None:
@@ -199,7 +205,9 @@ class BST:
         parent.parent = child
         return child
 
-    def _rotate_left(self, child) -> BST.Node:
+    def _rotate_left(self, child: BST.Node) -> BST.Node | None:
+        if child.parent == None:
+            return None
         parent = child.parent
         self._transplant(parent, child)
         if child.left != None:
@@ -209,7 +217,9 @@ class BST:
         parent.parent = child
         return child
 
-    def rotate(self, child) -> BST.Node:
+    def rotate(self, child: BST.Node) -> BST.Node | None:
+        if child.parent == None:
+            return None
         if self.is_left_child(child):
             return self._rotate_right(child.parent)
         return self._rotate_left(child.parent)
@@ -218,30 +228,30 @@ class BST:
 # height = Theta(log n)
 class AVL(BST):
     @staticmethod
-    def height(node) -> int:
+    def height(node: BST.Node | None) -> int:
         return node.height if node != None else 0
 
     @staticmethod
-    def _update(node):
+    def _update(node: BST.Node):
         node.height = 1 + max(AVL.height(node.left), AVL.height(node.right))
 
     @staticmethod
-    def bf(node) -> int:
+    def bf(node: BST.Node) -> int:
         return AVL.height(node.left) - AVL.height(node.right)
 
-    def _rotate_right(self, child) -> BST.Node:
+    def _rotate_right(self, child: BST.Node) -> BST.Node | None:
         super()._rotate_right(child)
         self._update(child.parent)
         self._update(child)
         return child
 
-    def _rotate_left(self, child) -> BST.Node:
+    def _rotate_left(self, child: BST.Node) -> BST.Node | None:
         super()._rotate_left(child)
         self._update(child.parent)
         self._update(child)
         return child
 
-    def _rebalance(self, node) -> BST.Node:
+    def _rebalance(self, node: BST.Node) -> BST.Node | None:
         self._update(node)
         bf = self.bf(node)
         if bf > 1:
@@ -254,7 +264,7 @@ class AVL(BST):
             if self.bf(child) > 0:
                 self._rotate_right(child.left)
             return self._rotate_left(child)
-        if self.root is node:
+        if self.root is node or node.parent == None:
             return node
         return self._rebalance(node.parent)
 
@@ -271,10 +281,10 @@ class AVL(BST):
 
 
 class Splay(BST):
-    def splay(self, node) -> BST.Node | None:
+    def splay(self, node: BST.Node) -> BST.Node | None:
         if node == None:
             return None
-        if self.root is node:
+        if self.root is node or node.parent == None:
             return node
         if node.parent == self.root:  # zig
             return self.rotate(node)
