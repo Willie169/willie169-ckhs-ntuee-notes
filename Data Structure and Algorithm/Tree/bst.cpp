@@ -1,5 +1,8 @@
 #include <algorithm>
+#include <functional>
+#include <utility>
 #include <vector>
+#include <stdexcept>
 using namespace std;
 
 template <class T> struct BST_Node {
@@ -9,7 +12,7 @@ template <class T> struct BST_Node {
   BST_Node<T> *left;
   BST_Node<T> *right;
 
-  BST_Node(T value, BST_Node<T> *parent = nullptr)
+  BST_Node(const T &value, BST_Node<T> *parent = nullptr)
       : value(value), parent(parent), left(nullptr), right(nullptr) {}
 };
 
@@ -19,18 +22,141 @@ public:
 
   Node *root = nullptr; // Allow root->parent != nullptr
 
-  virtual void clear(Node *node) {
+  BST(const BST &) = delete;
+  BST &operator=(const BST &) = delete;
+
+  vector<T> preorder(Node *node) const {
     if (node == nullptr)
-      return;
-    clear(node->left);
-    clear(node->right);
-    delete node;
+      throw invalid_argument("Node is nullptr");
+    vector<T> result;
+    vector<Node *> stack;
+    stack.push_back(node);
+    while (!stack.empty()) {
+      Node *node = stack.back();
+      stack.pop_back();
+      result.push_back(node->value);
+      if (node->right != nullptr)
+        stack.push_back(node->right);
+      if (node->left != nullptr)
+        stack.push_back(node->left);
+    }
+    return result;
+  }
+
+  vector<Node *> preorder_node(Node *node) const {
+    vector<Node *> result, stack;
+    stack.push_back(node);
+    while (!stack.empty()) {
+      Node *node = stack.back();
+      stack.pop_back();
+      result.push_back(node);
+      if (node->right != nullptr)
+        stack.push_back(node->right);
+      if (node->left != nullptr)
+        stack.push_back(node->left);
+    }
+    return result;
   }
 
   // O(n)
-  virtual void clear() { clear(root); }
+  vector<T> preorder() const { return preorder(root); }
+  vector<Node *> preorder_node() const { return preorder_node(root); }
 
-  ~BST() { clear(); }
+  vector<T> inorder(Node *node) const {
+    vector<T> result;
+    vector<Node *> stack;
+    while (!stack.empty() || node != nullptr) {
+      while (node != nullptr) {
+        stack.push_back(node);
+        node = node->left;
+      }
+      node = stack.back();
+      stack.pop_back();
+      result.push_back(node->value);
+      node = node->right;
+    }
+    return result;
+  }
+
+  vector<Node *> inorder_node(Node *node) const {
+    vector<Node *> result, stack;
+    while (!stack.empty() || node != nullptr) {
+      while (node != nullptr) {
+        stack.push_back(node);
+        node = node->left;
+      }
+      node = stack.back();
+      stack.pop_back();
+      result.push_back(node);
+      node = node->right;
+    }
+    return result;
+  }
+
+  // O(n)
+  vector<T> inorder() const { return inorder(root); }
+  vector<Node *> inorder_node() const { return inorder_node(root); }
+
+  vector<T> postorder(Node *node) const {
+    vector<T> result;
+    vector<Node *> stack;
+    Node *last_visited = nullptr;
+    while (!stack.empty() || node != nullptr) {
+      if (node != nullptr) {
+        stack.push_back(node);
+        node = node->left;
+      } else {
+        Node *right = stack.back()->right;
+        if (right != nullptr && last_visited != right) {
+          node = right;
+        } else {
+          result.push_back(stack.back()->value);
+          last_visited = stack.back();
+          stack.pop_back();
+        }
+      }
+    }
+    return result;
+  }
+
+  vector<Node *> postorder_node(Node *node) const {
+    vector<Node *> result, stack;
+    Node *last_visited = nullptr;
+    while (!stack.empty() || node != nullptr) {
+      if (node != nullptr) {
+        stack.push_back(node);
+        node = node->left;
+      } else {
+        Node *right = stack.back()->right;
+        if (right != nullptr && last_visited != right) {
+          node = right;
+        } else {
+          result.push_back(stack.back());
+          last_visited = stack.back();
+          stack.pop_back();
+        }
+      }
+    }
+    return result;
+  }
+
+  // O(n)
+  vector<T> postorder() const { return postorder(root); }
+  vector<Node *> postorder_node() const { return postorder_node(root); }
+
+  virtual void clear(Node *node) {
+    vector<Node *> stack = preorder_node(node);
+    for (i = stack.end() - 1; i >= stack.begpost(); i--)
+      delete *i;
+  }
+
+  // O(n)
+  virtual void clear() {
+    clear(root);
+    root = nullptr;
+  }
+
+  virtual ~BST() { clear(); }
 
   // Return node, found
   // O(h)
@@ -39,11 +165,11 @@ public:
     if (node == nullptr)
       return {nullptr, false};
     while (true) {
-      if (node->value > x) {
+      if (std::less<T>{}(x, node->value)) {
         if (node->left == nullptr)
           return {node, false};
         node = node->left;
-      } else if (node->value < x) {
+      } else if (std::less<T>{}(node->value, x)) {
         if (node->right == nullptr)
           return {node, false};
         node = node->right;
@@ -54,8 +180,6 @@ public:
   }
 
   virtual Node *find_min(Node *node) const {
-    if (node == nullptr)
-      return nullptr;
     while (node->left != nullptr)
       node = node->left;
     return node;
@@ -65,8 +189,6 @@ public:
   virtual Node *find_min() const { return find_min(root); }
 
   virtual Node *find_max(Node *node) const {
-    if (node == nullptr)
-      return nullptr;
     while (node->right != nullptr)
       node = node->right;
     return node;
@@ -75,17 +197,41 @@ public:
   // O(h)
   virtual Node *find_max() const { return find_max(root); }
 
-  // Return largest node <= x
+  // O(h)
+  Node *inorder_successor(Node *node) const {
+    if (node->right != nullptr)
+      return find_min(node->right);
+    Node *p = node->parent;
+    while (p != nullptr && node == p->right) {
+      node = p;
+      p = p->parent;
+    }
+    return p;
+  }
+
+  // O(h)
+  Node *inorder_predecessor(Node *node) const {
+    if (node->left != nullptr)
+      return find_max(node->left);
+    Node *p = node->parent;
+    while (p != nullptr && node == p->left) {
+      node = p;
+      p = p->parent;
+    }
+    return p;
+  }
+
+  // Return smallest node > x
   // O(h)
   Node *upper_bound(const T &x) const {
     Node *result = nullptr;
     Node *node = root;
     while (node != nullptr) {
-      if (node->value <= x) {
+      if (std::less<T>{}(x, node->value)) {
         result = node;
-        node = node->right;
-      } else {
         node = node->left;
+      } else {
+        node = node->right;
       }
     }
     return result;
@@ -97,33 +243,13 @@ public:
     Node *result = nullptr;
     Node *node = root;
     while (node != nullptr) {
-      if (node->value >= x) {
+      if (!std::less<T>{}(node->value, x)) {
         result = node;
         node = node->left;
       } else {
         node = node->right;
       }
     }
-    return result;
-  }
-
-  // O(h)
-  Node *inorder_successor(Node *node) const {
-    if (node == nullptr || node->right == nullptr)
-      return nullptr;
-    Node *result = node->right;
-    while (result->left != nullptr)
-      result = result->left;
-    return result;
-  }
-
-  // O(h)
-  Node *inorder_predecessor(Node *node) const {
-    if (node == nullptr || node->left == nullptr)
-      return nullptr;
-    Node *result = node->left;
-    while (result->right != nullptr)
-      result = result->right;
     return result;
   }
 
@@ -136,13 +262,13 @@ public:
     }
     Node *node = root;
     while (true) {
-      if (node->value > x) {
+      if (std::less<T>{}(x, node->value)) {
         if (node->left == nullptr) {
           node->left = new Node(x, node);
           return {node->left, true};
         }
         node = node->left;
-      } else if (node->value < x) {
+      } else if (std::less<T>{}(node->value, x)) {
         if (node->right == nullptr) {
           node->right = new Node(x, node);
           return {node->right, true};
@@ -168,22 +294,26 @@ public:
     }
     if (replacement != nullptr)
       replacement->parent = parent;
+    delete node;
     return parent;
+  }
+
+  // O(1)
+  virtual void swap_position(Node *a, Node *b) {
+    swap(a->parent, b->parent);
+    swap(a->left, b->left);
+    swap(a->right, b->right);
   }
 
   // O(h)
   virtual Node *remove_node(Node *node) {
-    if (node->left == nullptr && node->right == nullptr)
-      return transplant(node, nullptr);
     if (node->left == nullptr)
       return transplant(node, node->right);
     if (node->right == nullptr)
       return transplant(node, node->left);
     Node *succ = inorder_successor(node);
-    node->value = succ->value;
-    Node *parent = transplant(succ, succ->right);
-    delete succ;
-    return parent;
+    swap_position(node, succ);
+    return transplant(node, node->right);
   }
 
   // Return parent, removed
@@ -191,68 +321,8 @@ public:
   virtual pair<Node *, bool> remove(const T &x) {
     auto [node, found] = search(x);
     if (!found)
-      return {nullptr, false};
+      return {node, false};
     return {remove_node(node), true};
-  }
-
-  // O(n)
-  vector<T> preorder() const {
-    vector<T> result;
-    vector<Node *> stack;
-    if (root != nullptr)
-      stack.push_back(root);
-    while (!stack.empty()) {
-      Node *node = stack.back();
-      stack.pop_back();
-      result.push_back(node->value);
-      if (node->right != nullptr)
-        stack.push_back(node->right);
-      if (node->left != nullptr)
-        stack.push_back(node->left);
-    }
-    return result;
-  }
-
-  // O(n)
-  vector<T> inorder() const {
-    vector<T> result;
-    vector<Node *> stack;
-    Node *node = root;
-    while (!stack.empty() || node != nullptr) {
-      while (node != nullptr) {
-        stack.push_back(node);
-        node = node->left;
-      }
-      node = stack.back();
-      stack.pop_back();
-      result.push_back(node->value);
-      node = node->right;
-    }
-    return result;
-  }
-
-  // O(n)
-  vector<T> postorder() const {
-    vector<T> result;
-    vector<Node *> stack;
-    Node *node = root;
-    Node *last_visited = nullptr;
-    while (!stack.empty() || node != nullptr) {
-      if (node != nullptr) {
-        stack.push_back(node);
-        node = node->left;
-      } else {
-        Node *right = stack.back()->right;
-        if (right != nullptr && last_visited != right) {
-          node = right;
-        } else {
-          result.push_back(stack.back()->value);
-          last_visited = stack.back();
-          stack.pop_back();
-        }
-      }
-    }
-    return result;
   }
 
   // 1: left child
@@ -307,7 +377,7 @@ template <class T> struct AVL_Node {
   AVL_Node<T> *right;
   unsigned int height; // leaf 1
 
-  AVL_Node(T value, AVL_Node<T> *parent = nullptr)
+  AVL_Node(const T &value, AVL_Node<T> *parent = nullptr)
       : value(value), parent(parent), left(nullptr), right(nullptr), height(1) {
   }
 };
@@ -373,8 +443,8 @@ public:
 
   pair<Node *, bool> remove(const T &x) override {
     auto [parent, removed] = Base::remove(x);
-    if (parent == nullptr)
-      return {nullptr, removed};
+    if (!removed)
+      return {parent, removed};
     Node *node = parent;
     while (node != nullptr) {
       node = rebalance(node)->parent;
