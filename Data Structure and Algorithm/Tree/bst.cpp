@@ -1,25 +1,21 @@
 #include <algorithm>
-#include <iostream>
-#include <memory>
 #include <vector>
 using namespace std;
 
-template <typename T> struct binary_tree_node {
+template <class T> struct BST_Node {
   using value_type = T;
   T value;
-  binary_tree_node *parent;
-  binary_tree_node *left;
-  binary_tree_node *right;
-  int height;
+  BST_Node<T> *parent;
+  BST_Node<T> *left;
+  BST_Node<T> *right;
 
-  binary_tree_node(T value, binary_tree_node *parent = nullptr)
-      : value(value), parent(parent), left(nullptr), right(nullptr), height(1) {
-  } // only used in AVL, leaf 1
+  BST_Node(T value, BST_Node<T> *parent = nullptr)
+      : value(value), parent(parent), left(nullptr), right(nullptr) {}
 };
 
-template <class T, class Node = binary_tree_node<T>> class BST {
+template <class T, class Node = BST_Node<T>> class BST {
 public:
-  using value_type = typename Node::value_type;
+  using value_type = T;
 
   Node *root = nullptr;
 
@@ -268,66 +264,58 @@ public:
     return char(node->parent->left == node);
   }
 
-  // Rotate right around parent of child
-  Node *rotate_right(Node *child) {
-    if (child == nullptr || child->parent == nullptr)
+  Node *rotate_right(Node *parent) {
+    if (parent == nullptr || parent->left == nullptr)
       return nullptr;
-
-    Node *parent = child->parent;
-
+    Node *child = parent->left;
     transplant(parent, child);
-
     parent->left = child->right;
-
     if (child->right != nullptr)
       child->right->parent = parent;
-
     child->right = parent;
     parent->parent = child;
-
     return child;
   }
 
-  // Rotate left around parent of child
-  Node *rotate_left(Node *child) {
-    if (child == nullptr || child->parent == nullptr)
+  Node *rotate_left(Node *parent) {
+    if (parent == nullptr || parent->right == nullptr)
       return nullptr;
-
-    Node *parent = child->parent;
-
+    Node *child = parent->right;
     transplant(parent, child);
-
     parent->right = child->left;
-
     if (child->left != nullptr)
       child->left->parent = parent;
-
     child->left = parent;
     parent->parent = child;
-
     return child;
   }
 
-  Node *rotate(Node *child) {
+  Node *rotate_parent(Node *child) {
     if (child == nullptr || child->parent == nullptr)
       return nullptr;
-
-    if (is_left_child(child).value())
-      return rotate_right(child);
-
-    return rotate_left(child);
+    if (is_left_child(child) == 1)
+      return rotate_right(child->parent);
+    return rotate_left(child->parent);
   }
 };
 
-// ============================================================
-// AVL TREE
-// ============================================================
+template <class T> struct AVL_Node {
+  using value_type = T;
+  T value;
+  AVL_Node<T> *parent;
+  AVL_Node<T> *left;
+  AVL_Node<T> *right;
+  unsigned int height; // leaf 1
 
-template <typename T> class AVL : public BST<T> {
-  using Base = BST<T>;
-  using Node = typename Base::Node;
+  AVL_Node(T value, AVL_Node<T> *parent = nullptr)
+      : value(value), parent(parent), left(nullptr), right(nullptr), height(1) {
+  }
+};
 
+template <class T, class Node = AVL_Node<T>> class AVL : public BST<T, Node> {
 public:
+  using Base = BST<T, Node>;
+
   static int height(Node *node) { return node == nullptr ? 0 : node->height; }
 
   static void update(Node *node) {
