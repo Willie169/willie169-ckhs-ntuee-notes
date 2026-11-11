@@ -5,7 +5,8 @@
 #include <vector>
 using namespace std;
 
-template <class T> struct BST_Node {
+template <class T> class BST_Node {
+public:
   using value_type = T;
   T value;
   BST_Node<T> *parent;
@@ -14,6 +15,36 @@ template <class T> struct BST_Node {
 
   BST_Node(const T &value, BST_Node<T> *parent = nullptr)
       : value(value), parent(parent), left(nullptr), right(nullptr) {}
+
+  friend void swap(BST_Node &lhs, BST_Node &rhs) {
+    if (lhs.left != nullptr)
+      lhs.left->parent = rhs;
+    if (lhs.right != nullptr)
+      lhs.right->parent = rhs;
+    switch (is_left_child(lhs)) {
+    case 1:
+      lhs.parent->left = rhs;
+      break;
+    case 0:
+      lhs.parent->right = rhs;
+      break;
+    }
+    if (rhs.left != nullptr)
+      rhs.left->parent = lhs;
+    if (rhs.right != nullptr)
+      rhs.right->parent = lhs;
+    switch (is_left_child(rhs)) {
+    case 1:
+      rhs.parent->left = lhs;
+      break;
+    case 0:
+      rhs.parent->right = lhs;
+      break;
+    }
+    swap(lhs.parent, rhs.parent);
+    swap(lhs.left, rhs.left);
+    swap(lhs.right, rhs.right);
+  }
 };
 
 template <class T, class Node = BST_Node<T>> class BST {
@@ -26,13 +57,16 @@ public:
 
   BST(const BST &) = delete;
 
-  BST(BST &&other) { root = other.root; }
-
   BST &operator=(const BST &) = delete;
 
-  BST &operator=(BST &&other) {
-    clear();
-    root = other.root;
+  BST(BST &&other) noexcept : root(other.root) { other.root = nullptr; }
+
+  BST &operator=(BST &&other) noexcept {
+    if (this != &other) {
+      clear();
+      root = other.root;
+      other.root = nullptr;
+    }
     return *this;
   }
 
@@ -177,11 +211,14 @@ public:
   virtual void clear(Node *node) {
     if (node == nullptr)
       throw invalid_argument("Node is nullptr");
-    char iln = is_left_child(node);
-    if (iln == 1)
+    switch (is_left_child(node)) {
+    case 1:
       node->parent->left = nullptr;
-    else if (iln == 0)
+      break;
+    case 0:
       node->parent->right = nullptr;
+      break;
+    }
     vector<Node *> stack = preorder_node(node);
     for (auto it = stack.rbegin(); it != stack.rend(); ++it)
       delete *it;
@@ -189,9 +226,10 @@ public:
 
   // O(n)
   virtual void clear() {
-    if (root == nullptr)
-      return clear(root);
-    root = nullptr;
+    if (root != nullptr) {
+      clear(root);
+      root = nullptr;
+    }
   }
 
   virtual ~BST() { clear(); }
@@ -346,27 +384,10 @@ public:
   }
 
   // O(1)
-  Node *replace_remove(Node *node, Node *replacement) {
+  Node *replace_delete(Node *node, Node *replacement) {
     Node *result = replace(node, replacement);
     delete node;
     return result;
-  }
-
-  // O(1)
-  static void swap_position(Node *a, Node *b) {
-    if (a == nullptr || b == nullptr)
-      throw invalid_argument("Node is nullptr");
-    swap(a->parent, b->parent);
-    swap(a->left, b->left);
-    swap(a->right, b->right);
-    if (a->left != nullptr)
-      a->left->parent = b;
-    if (a->right != nullptr)
-      a->right->parent = b;
-    if (b->left != nullptr)
-      b->left->parent = a;
-    if (b->right != nullptr)
-      b->right->parent = a;
   }
 
   // O(h)
@@ -377,8 +398,7 @@ public:
       return replace_delete(node, node->right);
     if (node->right == nullptr)
       return replace_delete(node, node->left);
-    Node *succ = inorder_successor(node);
-    swap_position(node, succ);
+    node->swap(*inorder_successor(node));
     return replace_delete(node, node->right);
   }
 
@@ -426,40 +446,20 @@ public:
   }
 };
 
-template <class T> struct AVL_Node {
-  using value_type = T;
-  T value;
-  AVL_Node<T> *parent;
-  AVL_Node<T> *left;
-  AVL_Node<T> *right;
-  unsigned int height; // leaf 1
+template <class T> class AVL_Node : public BST_Node<T> {
+public:
+  using Base = BST_Node<T>;
+  unsigned int height = 1; // leaf 1
 
-  AVL_Node(const T &value, AVL_Node<T> *parent = nullptr)
-      : value(value), parent(parent), left(nullptr), right(nullptr), height(1) {
+  friend void swap(AVL_Node &lhs, AVL_Node &rhs) {
+    Base::swap(lhs, rhs);
+    swap(lhs.height, rhs.height);
   }
 };
 
 template <class T, class Node = AVL_Node<T>> class AVL : public BST<T, Node> {
 public:
   using Base = BST<T, Node>;
-
-  // O(1)
-  static void swap_position(Node *a, Node *b) {
-    if (a == nullptr || b == nullptr)
-      throw invalid_argument("Node is nullptr");
-    swap(a->parent, b->parent);
-    swap(a->left, b->left);
-    swap(a->right, b->right);
-    swap(a->height, b->height);
-    if (a->left != nullptr)
-      a->left->parent = b;
-    if (a->right != nullptr)
-      a->right->parent = b;
-    if (b->left != nullptr)
-      b->left->parent = a;
-    if (b->right != nullptr)
-      b->right->parent = a;
-  }
 
   static int height(Node *node) { return node == nullptr ? 0 : node->height; }
 
