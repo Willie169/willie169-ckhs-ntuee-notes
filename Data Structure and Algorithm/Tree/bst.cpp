@@ -17,7 +17,7 @@ template <class T, class Node = BST_Node<T>> class BST {
 public:
   using value_type = T;
 
-  Node *root = nullptr;
+  Node *root = nullptr; // Allow root->parent != nullptr
 
   virtual void clear(Node *node) {
     if (node == nullptr)
@@ -32,7 +32,7 @@ public:
 
   ~BST() { clear(); }
 
-  // node, found
+  // Return node, found
   // O(h)
   virtual pair<Node *, bool> search(const T &x) const {
     Node *node = root;
@@ -75,7 +75,7 @@ public:
   // O(h)
   virtual Node *find_max() const { return find_max(root); }
 
-  // largest node <= x
+  // Return largest node <= x
   // O(h)
   Node *upper_bound(const T &x) const {
     Node *result = nullptr;
@@ -91,7 +91,7 @@ public:
     return result;
   }
 
-  // smallest node >= x
+  // Return smallest node >= x
   // O(h)
   Node *lower_bound(const T &x) const {
     Node *result = nullptr;
@@ -127,7 +127,7 @@ public:
     return result;
   }
 
-  // node, inserted
+  // Return node, inserted
   // O(h)
   virtual pair<Node *, bool> insert(const T &x) {
     if (root == nullptr) {
@@ -157,12 +157,14 @@ public:
   // O(1)
   Node *transplant(Node *node, Node *replacement) {
     Node *parent = node->parent;
-    if (parent == nullptr) {
+    if (root == node)
       root = replacement;
-    } else if (parent->left == node) {
-      parent->left = replacement;
-    } else {
-      parent->right = replacement;
+    if (parent != nullptr) {
+      if (parent->left == node) {
+        parent->left = replacement;
+      } else {
+        parent->right = replacement;
+      }
     }
     if (replacement != nullptr)
       replacement->parent = parent;
@@ -171,15 +173,12 @@ public:
 
   // O(h)
   virtual Node *remove_node(Node *node) {
-    if (node->left == nullptr && node->right == nullptr) {
+    if (node->left == nullptr && node->right == nullptr)
       return transplant(node, nullptr);
-    }
-    if (node->left == nullptr) {
+    if (node->left == nullptr)
       return transplant(node, node->right);
-    }
-    if (node->right == nullptr) {
+    if (node->right == nullptr)
       return transplant(node, node->left);
-    }
     Node *succ = inorder_successor(node);
     node->value = succ->value;
     Node *parent = transplant(succ, succ->right);
@@ -187,12 +186,13 @@ public:
     return parent;
   }
 
+  // Return parent, removed
   // O(h)
-  virtual Node *remove(const T &x) {
+  virtual pair<Node *, bool> remove(const T &x) {
     auto [node, found] = search(x);
     if (!found)
-      return nullptr;
-    return remove_node(node);
+      return {nullptr, false};
+    return {remove_node(node), true};
   }
 
   // O(n)
@@ -324,136 +324,96 @@ public:
 
   static int bf(Node *node) { return height(node->left) - height(node->right); }
 
-  Node *rotate_right(Node *child) {
-    Node *result = Base::rotate_right(child);
-
+  Node *rotate_right(Node *parent) override {
+    Node *result = Base::rotate_right(parent);
     if (result != nullptr) {
       update(result->right);
       update(result);
     }
-
     return result;
   }
 
-  Node *rotate_left(Node *child) {
-    Node *result = Base::rotate_left(child);
-
+  Node *rotate_left(Node *parent) override {
+    Node *result = Base::rotate_left(parent);
     if (result != nullptr) {
       update(result->left);
       update(result);
     }
-
     return result;
   }
 
   Node *rebalance(Node *node) {
     if (node == nullptr)
       return nullptr;
-
     update(node);
-
-    int balance = bf(node);
-
-    if (balance > 1) {
+    int bf = bf(node);
+    if (bf > 1) {
       Node *child = node->left;
-
-      if (bf(child) < 0)
-        rotate_left(child->right);
-
-      return rotate_right(child);
+      if (bf(child) < 0) // LR
+        rotate_left(child);
+      return rotate_right(node); // LL, LR
     }
-
-    if (balance < -1) {
+    if (bf < -1) {
       Node *child = node->right;
-
-      if (bf(child) > 0)
-        rotate_right(child->left);
-
-      return rotate_left(child);
+      if (bf(child) > 0) // RL
+        rotate_right(child);
+      return rotate_left(node); // RL, RR
     }
-
     if (node->parent == nullptr)
       return node;
-
     return rebalance(node->parent);
   }
 
   pair<Node *, bool> insert(const T &x) override {
     auto [node, inserted] = Base::insert(x);
-
     if (inserted && node->parent != nullptr)
       rebalance(node->parent);
-
     return {node, inserted};
   }
 
-  Node *remove(const T &x) override {
-    Node *node = Base::remove(x);
-
+  pair<Node *, bool> remove(const T &x) override {
+    auto [parent, removed] = Base::remove(x);
+    if (parent == nullptr)
+      return {nullptr, removed};
+    Node *node = parent;
     while (node != nullptr) {
-      Node *new_root = rebalance(node);
-      node = new_root->parent;
+      node = rebalance(node)->parent;
     }
-
-    return nullptr;
+    return {parent, removed};
   }
 };
 
-// ============================================================
-// SPLAY TREE
-// ============================================================
-
-template <typename T> class Splay : public BST<T> {
-  using Base = BST<T>;
-  using Node = typename Base::Node;
-
+template <class T, class Node = BST_Node<T>> class Splay : public BST<T, Node> {
 public:
+  using Base = BST<T>;
+
   Node *splay(Node *node) {
     if (node == nullptr)
       return nullptr;
-
     while (node->parent != nullptr) {
       Node *parent = node->parent;
       Node *grandparent = parent->parent;
-
       // Zig
       if (grandparent == nullptr) {
         this->rotate(node);
       }
-
       // Zig-zig
       else if ((parent->left == node && grandparent->left == parent) ||
                (parent->right == node && grandparent->right == parent)) {
         this->rotate(parent);
         this->rotate(node);
       }
-
       // Zig-zag
       else {
         this->rotate(node);
         this->rotate(node);
       }
     }
-
     return node;
   }
 
   pair<Node *, bool> search(const T &x) override {
     auto [node, found] = Base::search(x);
     return {splay(node), found};
-  }
-
-  Node *find_min() const override {
-    Node *node = Base::find_min();
-
-    // The original Python implementation splays this node.
-    // const_cast is needed because splaying modifies the tree.
-    return const_cast<Splay *>(this)->splay(node);
-  }
-
-  Node *find_max() const override {
-    Node *node = Base::find_max();
-
-    return const_cast<Splay *>(this)->splay(node);
   }
 };
