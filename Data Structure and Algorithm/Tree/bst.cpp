@@ -20,10 +20,21 @@ template <class T, class Node = BST_Node<T>> class BST {
 public:
   using value_type = T;
 
-  Node *root = nullptr; // Allow root->parent != nullptr
+  Node *root; // Allow root->parent != nullptr
+
+  BST(Node *root = nullptr) : root(root) {}
 
   BST(const BST &) = delete;
+
+  BST(BST &&other) { root = other.root; }
+
   BST &operator=(const BST &) = delete;
+
+  BST &operator=(BST &&other) {
+    clear();
+    root = other.root;
+    return *this;
+  }
 
   // 1: left child
   // 0: right child
