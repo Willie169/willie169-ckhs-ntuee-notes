@@ -257,7 +257,7 @@ public:
 
   // 1: left child
   // 0: right child
-  // -1: nullptr or no parent
+  // -1: node or its parent is nullptr
   char is_left_child(Node *node) const {
     if (node == nullptr || node->parent == nullptr)
       return -1;
