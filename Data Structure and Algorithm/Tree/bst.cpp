@@ -173,9 +173,9 @@ public:
         node = node->left;
       } else {
         Node *right = stack.back()->right;
-        if (right != nullptr && last_visited != right) {
+        if (right != nullptr && last_visited != right)
           node = right;
-        } else {
+        else {
           result.push_back(stack.back()->value);
           last_visited = stack.back();
           stack.pop_back();
@@ -196,9 +196,9 @@ public:
         node = node->left;
       } else {
         Node *right = stack.back()->right;
-        if (right != nullptr && last_visited != right) {
+        if (right != nullptr && last_visited != right)
           node = right;
-        } else {
+        else {
           result.push_back(stack.back());
           last_visited = stack.back();
           stack.pop_back();
@@ -253,9 +253,8 @@ public:
         if (node->right == nullptr)
           return {node, false};
         node = node->right;
-      } else {
+      } else
         return {node, true};
-      }
     }
   }
 
@@ -318,9 +317,8 @@ public:
       if (std::less<>{}(x, node->value)) {
         result = node;
         node = node->left;
-      } else {
+      } else
         node = node->right;
-      }
     }
     return result;
   }
@@ -334,9 +332,8 @@ public:
       if (!std::less<>{}(node->value, x)) {
         result = node;
         node = node->left;
-      } else {
+      } else
         node = node->right;
-      }
     }
     return result;
   }
@@ -362,9 +359,8 @@ public:
           return {node->right, true};
         }
         node = node->right;
-      } else {
+      } else
         return {node, false};
-      }
     }
   }
 
@@ -376,11 +372,10 @@ public:
     if (root == node)
       root = replacement;
     if (parent != nullptr) {
-      if (parent->left == node) {
+      if (parent->left == node)
         parent->left = replacement;
-      } else {
+      else
         parent->right = replacement;
-      }
     }
     if (replacement != nullptr)
       replacement->parent = parent;
@@ -545,9 +540,8 @@ public:
       Node *parent = node->parent;
       Node *grandparent = parent->parent;
       // Zig
-      if (grandparent == nullptr) {
+      if (grandparent == nullptr)
         this->rotate(node);
-      }
       // Zig-zig
       else if ((parent->left == node && grandparent->left == parent) ||
                (parent->right == node && grandparent->right == parent)) {
