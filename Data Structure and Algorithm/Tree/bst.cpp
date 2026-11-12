@@ -8,140 +8,20 @@ using namespace std;
 
 template <class T, class Node> class _Base_Binary_Tree_Node {
 public:
-  using value_type = T;
   T value;
   Node *parent;
-  Node *left;
-  Node *right;
+  Node *left = nullptr;
+  Node *right = nullptr;
 
   _Base_Binary_Tree_Node(const T &value, Node *parent = nullptr)
-      : value(value), parent(parent), left(nullptr), right(nullptr) {}
+      : value(value), parent(parent) {}
+
+  virtual void _swap_position_helper(Node *other) {}
 };
 
-// 1: left child
-// 0: right child
-// -1: node's parent is nullptr
-// -2: node is nullptr
-template <class T, class Node>
-char is_left_child(_Base_Binary_Tree_Node<T, Node> *node) {
-  if (node == nullptr)
-    return -2;
-  if (node->parent == nullptr)
-    return -1;
-  return char(node->parent->left == node);
-}
-
-// O(1)
-template <class T, class Node>
-void swap(_Base_Binary_Tree_Node<T, Node> *lhs,
-          _Base_Binary_Tree_Node<T, Node> *rhs) {
-  if (lhs == rhs)
-    return;
-  if (lhs == nullptr)
-    return swap(rhs, lhs);
-  if (rhs == nullptr) {
-    switch (is_left_child(lhs)) {
-    case 1:
-      lhs->parent->left = nullptr;
-      break;
-    case 0:
-      lhs->parent->right = nullptr;
-      break;
-    }
-    return;
-  }
-  if (rhs->parent == lhs)
-    return swap(rhs, lhs);
-  if (lhs->parent == rhs) {
-    switch (is_left_child(lhs)) {
-    case 1:
-      swap(lhs->right, rhs->right);
-      rhs->left = lhs->left;
-      lhs->left->parent = rhs;
-      break;
-    case 0:
-      swap(lhs->left, rhs->left);
-      rhs->right = lhs->right;
-      lhs->right->parent = rhs;
-      break;
-    }
-    lhs->parent = rhs->parent;
-    switch (is_left_child(rhs)) {
-    case 1:
-      rhs->parent->left = lhs;
-      break;
-    case 0:
-      rhs->parent->right = lhs;
-      break;
-    }
-    return;
-  }
-  if (lhs->left != nullptr)
-    lhs->left->parent = rhs;
-  if (lhs->right != nullptr)
-    lhs->right->parent = rhs;
-  if (rhs->left != nullptr)
-    rhs->left->parent = lhs;
-  if (rhs->right != nullptr)
-    rhs->right->parent = lhs;
-  if (lhs->parent != rhs->parent) {
-    switch (is_left_child(lhs)) {
-    case 1:
-      lhs->parent->left = rhs;
-      break;
-    case 0:
-      lhs->parent->right = rhs;
-      break;
-    }
-    switch (is_left_child(rhs)) {
-    case 1:
-      rhs->parent->left = lhs;
-      break;
-    case 0:
-      rhs->parent->right = lhs;
-      break;
-    }
-    swap(lhs->parent, rhs->parent);
-  }
-  swap(lhs->left, rhs->left);
-  swap(lhs->right, rhs->right);
-}
-
-template <class T>
-concept LessCallable = requires(T a, T b) {
-  { std::less<T>{}(a, b) } -> std::convertible_to<bool>;
-};
-
-template <LessCallable T>
-class BST_Node : public _Base_Binary_Tree_Node<T, BST_Node<T>> {
-  using Base = _Base_Binary_Tree_Node<T, BST_Node<T>>;
-  using Base::Base;
-};
-
-template <LessCallable T, class Node = BST_Node<T>> class BST {
+template <class T, class Node> class _Binary_Tree_Static {
 public:
-  using value_type = T;
-
-  Node *root; // Allow root->parent != nullptr
-
-  BST(Node *root = nullptr) : root(root) {}
-
-  BST(const BST &) = delete;
-
-  BST &operator=(const BST &) = delete;
-
-  BST(BST &&other) noexcept : root(other.root) { other.root = nullptr; }
-
-  BST &operator=(BST &&other) noexcept {
-    if (this != &other) {
-      clear();
-      root = other.root;
-      other.root = nullptr;
-    }
-    return *this;
-  }
-
-  vector<T> preorder(Node *node) const {
+  static vector<T> preorder(Node *node) {
     if (node == nullptr)
       return vector<T>();
     vector<T> result;
@@ -159,7 +39,7 @@ public:
     return result;
   }
 
-  vector<Node *> preorder_node(Node *node) const {
+  static vector<Node *> preorder_node(Node *node) {
     if (node == nullptr)
       return vector<Node *>();
     vector<Node *> result, stack;
@@ -176,11 +56,7 @@ public:
     return result;
   }
 
-  // O(n)
-  vector<T> preorder() const { return preorder(root); }
-  vector<Node *> preorder_node() const { return preorder_node(root); }
-
-  vector<T> inorder(Node *node) const {
+  static vector<T> inorder(Node *node) {
     if (node == nullptr)
       return vector<T>();
     vector<T> result;
@@ -198,7 +74,7 @@ public:
     return result;
   }
 
-  vector<Node *> inorder_node(Node *node) const {
+  static vector<Node *> inorder_node(Node *node) {
     if (node == nullptr)
       return vector<Node *>();
     vector<Node *> result, stack;
@@ -215,11 +91,7 @@ public:
     return result;
   }
 
-  // O(n)
-  vector<T> inorder() const { return inorder(root); }
-  vector<Node *> inorder_node() const { return inorder_node(root); }
-
-  vector<T> postorder(Node *node) const {
+  static vector<T> postorder(Node *node) {
     if (node == nullptr)
       return vector<T>();
     vector<T> result;
@@ -243,7 +115,7 @@ public:
     return result;
   }
 
-  vector<Node *> postorder_node(Node *node) const {
+  static vector<Node *> postorder_node(Node *node) {
     if (node == nullptr)
       return vector<Node *>();
     vector<Node *> result, stack;
@@ -266,15 +138,9 @@ public:
     return result;
   }
 
-  // O(n)
-  vector<T> postorder() const { return postorder(root); }
-  vector<Node *> postorder_node() const { return postorder_node(root); }
-
-  virtual void clear(Node *node) {
+  static void clear(Node *node) {
     if (node == nullptr)
       return;
-    if (node == root)
-      root = nullptr;
     switch (is_left_child(node)) {
     case 1:
       node->parent->left = nullptr;
@@ -288,10 +154,182 @@ public:
       delete *it;
   }
 
-  // O(n)
-  virtual void clear() { clear(root); }
+  // 1: left child
+  // 0: right child
+  // -1: node's parent is nullptr
+  // -2: node is nullptr
+  static char is_left_child(Node *node) {
+    if (node == nullptr)
+      return -2;
+    if (node->parent == nullptr)
+      return -1;
+    return char(node->parent->left == node);
+  }
 
-  virtual ~BST() { clear(); }
+  // O(1)
+  static Node *swap_position(Node *lhs, Node *rhs) {
+    if (lhs == nullptr) {
+      throw invalid_argument("Node is nullptr");
+    }
+    Node *result = lhs->parent;
+    if (rhs == nullptr) {
+      switch (is_left_child(lhs)) {
+      case 1:
+        lhs->parent->left = nullptr;
+        break;
+      case 0:
+        lhs->parent->right = nullptr;
+        break;
+      }
+      return lhs->parent;
+    }
+    if (lhs == rhs)
+      return lhs->parent;
+    if (rhs->parent == lhs)
+      return swap_position(rhs, lhs);
+    if (lhs->parent == rhs) {
+      switch (is_left_child(lhs)) {
+      case 1:
+        swap(lhs->right, rhs->right);
+        rhs->left = lhs->left;
+        lhs->left->parent = rhs;
+        break;
+      case 0:
+        swap(lhs->left, rhs->left);
+        rhs->right = lhs->right;
+        lhs->right->parent = rhs;
+        break;
+      }
+      lhs->parent = rhs->parent;
+      switch (is_left_child(rhs)) {
+      case 1:
+        rhs->parent->left = lhs;
+        break;
+      case 0:
+        rhs->parent->right = lhs;
+        break;
+      }
+      return;
+    }
+    if (lhs->left != nullptr)
+      lhs->left->parent = rhs;
+    if (lhs->right != nullptr)
+      lhs->right->parent = rhs;
+    if (rhs->left != nullptr)
+      rhs->left->parent = lhs;
+    if (rhs->right != nullptr)
+      rhs->right->parent = lhs;
+    if (lhs->parent != rhs->parent) {
+      switch (is_left_child(lhs)) {
+      case 1:
+        lhs->parent->left = rhs;
+        break;
+      case 0:
+        lhs->parent->right = rhs;
+        break;
+      }
+      switch (is_left_child(rhs)) {
+      case 1:
+        rhs->parent->left = lhs;
+        break;
+      case 0:
+        rhs->parent->right = lhs;
+        break;
+      }
+      swap(lhs->parent, rhs->parent);
+    }
+    swap(lhs->left, rhs->left);
+    swap(lhs->right, rhs->right);
+    lhs->_swap_position_helper(rhs);
+    return result;
+  }
+
+  static Node *rotate_right(Node *node) {
+    if (node == nullptr || node->left == nullptr)
+      throw invalid_argument("Node is nullptr");
+    Node *child = node->left;
+    swap_position(node, child);
+    node->left = child->right;
+    if (child->right != nullptr)
+      child->right->parent = node;
+    child->right = node;
+    node->parent = child;
+    return child;
+  }
+
+  static Node *rotate_left(Node *node) {
+    if (node == nullptr || node->right == nullptr)
+      throw invalid_argument("Node is nullptr");
+    Node *child = node->right;
+    swap_position(node, child);
+    node->right = child->left;
+    if (child->left != nullptr)
+      child->left->parent = node;
+    child->left = node;
+    node->parent = child;
+    return child;
+  }
+
+  static Node *rotate_parent(Node *child) {
+    if (child == nullptr || child->parent == nullptr)
+      throw invalid_argument("Node is nullptr");
+    if (is_left_child(child) == 1)
+      return rotate_right(child->parent);
+    return rotate_left(child->parent);
+  }
+};
+
+template <class T>
+concept LessCallable = requires(T a, T b) {
+  { std::less<T>{}(a, b) } -> std::convertible_to<bool>;
+};
+
+template <LessCallable T>
+class BST_Node : public _Base_Binary_Tree_Node<T, BST_Node<T>> {
+  using Base = _Base_Binary_Tree_Node<T, BST_Node<T>>;
+  using Base::Base;
+};
+
+template <LessCallable T, class Node = BST_Node<T>>
+class BST : public _Binary_Tree_Static<T, Node> {
+public:
+  Node *root; // Allow root->parent != nullptr
+
+  BST(Node *root = nullptr) : root(root) {}
+
+  BST(const BST &) = delete;
+
+  BST(BST &&other) noexcept : root(other.root) { other.root = nullptr; }
+
+  // O(n)
+  vector<T> preorder() const { return preorder(root); }
+  vector<Node *> preorder_node() const { return preorder_node(root); }
+  vector<T> inorder() const { return inorder(root); }
+  vector<Node *> inorder_node() const { return inorder_node(root); }
+  vector<T> postorder() const { return postorder(root); }
+  vector<Node *> postorder_node() const { return postorder_node(root); }
+
+  // O(n)
+  virtual void clear() {
+    clear(root);
+    root = nullptr;
+  }
+
+  BST &operator=(const BST &other) {
+    if (this != &other) {
+      swap(root, other.root);
+    }
+    return *this;
+  }
+
+  BST &operator=(BST &&other) noexcept {
+    if (this != &other) {
+      clear();
+      root = other.root;
+      other.root = nullptr;
+    }
+    return *this;
+  }
 
   // Return node, found
   // O(h)
@@ -419,35 +457,28 @@ public:
     }
   }
 
-  // O(1)
-  Node *replace(Node *node, Node *replacement) {
-    if (node == nullptr)
-      throw invalid_argument("Node is nullptr");
-    Node *parent = node->parent;
-    swap(node, replacement);
-    return parent;
-  }
-
-  // O(1)
-  Node *replace_delete(Node *node, Node *replacement) {
-    Node *result = replace(node, replacement);
-    delete node;
-    return result;
-  }
-
   // O(h)
   virtual Node *remove_node(Node *node) {
     if (node == nullptr)
       throw invalid_argument("Node is nullptr");
-    if (node->left == nullptr)
-      return replace_delete(node, node->right);
-    if (node->right == nullptr)
-      return replace_delete(node, node->left);
+    Node *result;
+    if (node->left == nullptr) {
+      result = swap(node, node->right);
+      delete node;
+      return result;
+    }
+    if (node->right == nullptr) {
+      result = swap(node, node->left);
+      delete node;
+      return result;
+    }
     Node *succ = inorder_successor(node);
     if (root == node)
       root = succ;
-    swap(*node, *succ);
-    return replace_delete(node, node->right);
+    swap_position(*node, *succ);
+    result = swap(node, node->right);
+    delete node;
+    return result;
   }
 
   // Return parent, removed
@@ -457,40 +488,6 @@ public:
     if (!found)
       return {node, false};
     return {remove_node(node), true};
-  }
-
-  Node *rotate_right(Node *node) {
-    if (node == nullptr || node->left == nullptr)
-      throw invalid_argument("Node is nullptr");
-    Node *child = node->left;
-    replace(node, child);
-    node->left = child->right;
-    if (child->right != nullptr)
-      child->right->parent = node;
-    child->right = node;
-    node->parent = child;
-    return child;
-  }
-
-  Node *rotate_left(Node *node) {
-    if (node == nullptr || node->right == nullptr)
-      throw invalid_argument("Node is nullptr");
-    Node *child = node->right;
-    replace(node, child);
-    node->right = child->left;
-    if (child->left != nullptr)
-      child->left->parent = node;
-    child->left = node;
-    node->parent = child;
-    return child;
-  }
-
-  Node *rotate_parent(Node *child) {
-    if (child == nullptr || child->parent == nullptr)
-      throw invalid_argument("Node is nullptr");
-    if (is_left_child(child) == 1)
-      return rotate_right(child->parent);
-    return rotate_left(child->parent);
   }
 };
 
@@ -502,9 +499,12 @@ public:
 
   unsigned int height = 1; // leaf 1
 
-  friend void swap(AVL_Node &lhs, AVL_Node &rhs) {
-    Base::swap(lhs, rhs);
-    swap(lhs.height, rhs.height);
+  void _swap_position_helper(AVL_Node *other) override {
+    if (other == nullptr) {
+      height = 0;
+      return;
+    }
+    swap(height, other->height);
   }
 };
 
