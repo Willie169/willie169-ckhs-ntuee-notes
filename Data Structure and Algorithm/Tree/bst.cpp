@@ -279,18 +279,19 @@ public:
   }
 };
 
-template <class T>
-concept LessCallable = requires(T a, T b) {
-  { std::less<T>{}(a, b) } -> std::convertible_to<bool>;
+template <class T, class Compare = less<T>>
+concept CompareCallable = requires(T a, T b) {
+  { Compare(a, b) } -> std::convertible_to<bool>;
 };
 
-template <LessCallable T>
+template <class T>
 class BST_Node : public _Base_Binary_Tree_Node<T, BST_Node<T>> {
   using Base = _Base_Binary_Tree_Node<T, BST_Node<T>>;
   using Base::Base;
 };
 
-template <LessCallable T, class Node = BST_Node<T>>
+template <class T, class Node = BST_Node<T>, class Compare = less<T>>
+  requires CompareCallable<T, Compare>
 class BST : public _Binary_Tree_Static<T, Node> {
 public:
   Node *root; // Allow root->parent != nullptr
@@ -315,14 +316,14 @@ public:
     root = nullptr;
   }
 
-  BST &operator=(const BST &other) {
+  virtual BST &operator=(const BST &other) {
     if (this != &other) {
       swap(root, other.root);
     }
     return *this;
   }
 
-  BST &operator=(BST &&other) noexcept {
+  virtual BST &operator=(BST &&other) noexcept {
     if (this != &other) {
       clear();
       root = other.root;
@@ -338,11 +339,11 @@ public:
       return {nullptr, false};
     Node *node = root;
     while (true) {
-      if (less<>{}(x, node->value)) {
+      if (Compare(x, node->value)) {
         if (node->left == nullptr)
           return {node, false};
         node = node->left;
-      } else if (less<>{}(node->value, x)) {
+      } else if (Compare(node->value, x)) {
         if (node->right == nullptr)
           return {node, false};
         node = node->right;
@@ -407,7 +408,7 @@ public:
     Node *result = nullptr;
     Node *node = root;
     while (node != nullptr) {
-      if (less<>{}(x, node->value)) {
+      if (Compare(x, node->value)) {
         result = node;
         node = node->left;
       } else
@@ -422,7 +423,7 @@ public:
     Node *result = nullptr;
     Node *node = root;
     while (node != nullptr) {
-      if (!less<>{}(node->value, x)) {
+      if (!Compare(node->value, x)) {
         result = node;
         node = node->left;
       } else
@@ -440,13 +441,13 @@ public:
     }
     Node *node = root;
     while (true) {
-      if (less<>{}(x, node->value)) {
+      if (Compare(x, node->value)) {
         if (node->left == nullptr) {
           node->left = new Node(x, node);
           return {node->left, true};
         }
         node = node->left;
-      } else if (less<>{}(node->value, x)) {
+      } else if (Compare(node->value, x)) {
         if (node->right == nullptr) {
           node->right = new Node(x, node);
           return {node->right, true};
@@ -491,7 +492,7 @@ public:
   }
 };
 
-template <LessCallable T>
+template <class T>
 class AVL_Node : public _Base_Binary_Tree_Node<T, AVL_Node<T>> {
 public:
   using Base = _Base_Binary_Tree_Node<T, AVL_Node<T>>;
@@ -508,10 +509,10 @@ public:
   }
 };
 
-template <LessCallable T, class Node = AVL_Node<T>>
-class AVL : public BST<T, Node> {
+template <class T, class Node = AVL_Node<T>, class Compare = less<T>>
+class AVL : public BST<T, Node, Compare> {
 public:
-  using Base = BST<T, Node>;
+  using Base = BST<T, Node, Compare>;
   using Base::Base;
 
   static int height(Node *node) { return node == nullptr ? 0 : node->height; }
