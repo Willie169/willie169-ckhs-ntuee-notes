@@ -5,7 +5,7 @@
 #include <vector>
 using namespace std;
 
-template <class T, class Node> class Base_BST_Node {
+template <class T, class Node> class _Base_Binary_Tree_Node {
 public:
   using value_type = T;
   T value;
@@ -13,7 +13,7 @@ public:
   Node *left;
   Node *right;
 
-  Base_BST_Node(const T &value, Node *parent = nullptr)
+  _Base_Binary_Tree_Node(const T &value, Node *parent = nullptr)
       : value(value), parent(parent), left(nullptr), right(nullptr) {}
 
   friend void swap(Node &lhs, Node &rhs) {
@@ -48,9 +48,10 @@ public:
 };
 
 template <class T>
-class BST_Node : public Base_BST_Node<T, class BST_Node<T>> {};
+class Binary_Tree_Node
+    : public _Base_Binary_Tree_Node<T, class Binary_Tree_Node<T>> {};
 
-template <class T, class Node = BST_Node<T>> class BST {
+template <class T, class Node = Binary_Tree_Node<T>> class BST {
 public:
   using value_type = T;
 
@@ -449,9 +450,10 @@ public:
   }
 };
 
-template <class T> class AVL_Node : public Base_BST_Node<T, AVL_Node<T>> {
+template <class T>
+class AVL_Node : public _Base_Binary_Tree_Node<T, AVL_Node<T>> {
 public:
-  using Base = Base_BST_Node<T, AVL_Node<T>>;
+  using Base = _Base_Binary_Tree_Node<T, AVL_Node<T>>;
   unsigned int height = 1; // leaf 1
 
   friend void swap(AVL_Node &lhs, AVL_Node &rhs) {
@@ -531,7 +533,8 @@ public:
   }
 };
 
-template <class T, class Node = BST_Node<T>> class Splay : public BST<T, Node> {
+template <class T, class Node = Binary_Tree_Node<T>>
+class Splay : public BST<T, Node> {
 public:
   using Base = BST<T>;
 
