@@ -6,30 +6,30 @@
 #include <vector>
 using namespace std;
 
-template <class T, class Node> class _Base_Binary_Tree_Node {
+template <class T, class Node> class BaseBinaryTreeNode {
 public:
   T value;
   Node *parent;
   Node *left = nullptr;
   Node *right = nullptr;
 
-  _Base_Binary_Tree_Node(const T &value = T(), Node *parent = nullptr)
+  BaseBinaryTreeNode(const T &value = T(), Node *parent = nullptr)
       : value(value), parent(parent) {}
 
   virtual void _swap_position_helper(Node *other) {}
 
   virtual void update() {}
 
-  virtual ~_Base_Binary_Tree_Node() = default;
+  virtual ~BaseBinaryTreeNode() = default;
 };
 
 template <class T>
-class Binary_Tree_Node : public _Base_Binary_Tree_Node<T, Binary_Tree_Node<T>> {
-  using Base = _Base_Binary_Tree_Node<T, Binary_Tree_Node<T>>;
+class BinaryTreeNode : public BaseBinaryTreeNode<T, BinaryTreeNode<T>> {
+  using Base = BaseBinaryTreeNode<T, BinaryTreeNode<T>>;
   using Base::Base;
 };
 
-template <class T, class Node = Binary_Tree_Node<T>> class _Binary_Tree_Static {
+template <class T, class Node = BinaryTreeNode<T>> class BinaryTreeStatic {
 public:
   static vector<T> preorder(Node *node) {
     if (node == nullptr)
@@ -177,16 +177,16 @@ public:
   }
 };
 
-template <class T, class Node = Binary_Tree_Node<T>>
-class Binary_Tree : public _Binary_Tree_Static<T, Node> {
+template <class T, class Node = BinaryTreeNode<T>>
+class BinaryTree : public BinaryTreeStatic<T, Node> {
 public:
   Node *root; // Allow root->parent != nullptr
 
-  Binary_Tree(Node *root = nullptr) : root(root) {}
+  BinaryTree(Node *root = nullptr) : root(root) {}
 
-  Binary_Tree(const Binary_Tree &) = delete;
+  BinaryTree(const BinaryTree &) = delete;
 
-  Binary_Tree(Binary_Tree &&other) noexcept : root(other.root) {
+  BinaryTree(BinaryTree &&other) noexcept : root(other.root) {
     other.root = nullptr;
   }
 
@@ -221,11 +221,11 @@ public:
       delete *it;
   }
 
-  virtual ~Binary_Tree() { clear(); }
+  virtual ~BinaryTree() { clear(); }
 
-  virtual Binary_Tree &operator=(const Binary_Tree &) = delete;
+  virtual BinaryTree &operator=(const BinaryTree &) = delete;
 
-  virtual Binary_Tree &operator=(Binary_Tree &&other) noexcept {
+  virtual BinaryTree &operator=(BinaryTree &&other) noexcept {
     if (this != &other) {
       clear();
       root = other.root;
@@ -236,7 +236,7 @@ public:
 
   // Detach the other if one == nullptr
   // O(1)
-  void swap_position(Node *lhs, Node *rhs) noexcept {
+  void swap_position(Node *lhs, Node *rhs) {
     if (lhs == rhs)
       return;
     if (lhs == nullptr) {
@@ -388,11 +388,11 @@ concept CompareCallable = requires(const T &a, const T &b) {
   { Compare{}(a, b) } -> std::convertible_to<bool>;
 };
 
-template <class T, class Node = Binary_Tree_Node<T>, class Compare = less<T>>
+template <class T, class Node = BinaryTreeNode<T>, class Compare = less<T>>
   requires CompareCallable<T, Compare>
-class BST : public Binary_Tree<T, Node> {
+class BST : public BinaryTree<T, Node> {
 public:
-  using Base = Binary_Tree<T, Node>;
+  using Base = BinaryTree<T, Node>;
   using Base::Base;
   using Base::clear;
   using Base::inorder;
@@ -525,7 +525,6 @@ public:
   virtual Node *remove_node(Node *node) {
     if (node == nullptr)
       throw invalid_argument("Node is nullptr");
-    Node *result;
     if (node->left == nullptr) {
       return replace(node, node->right, true);
     }
@@ -548,16 +547,16 @@ public:
 };
 
 template <class T>
-class AVL_Node : public _Base_Binary_Tree_Node<T, AVL_Node<T>> {
+class AVLNode : public BaseBinaryTreeNode<T, AVLNode<T>> {
 public:
-  using Base = _Base_Binary_Tree_Node<T, AVL_Node<T>>;
+  using Base = BaseBinaryTreeNode<T, AVLNode<T>>;
   using Base::Base;
   using Base::left;
   using Base::right;
 
   int height = 1; // leaf 1
 
-  void _swap_position_helper(AVL_Node *other) override {
+  void _swap_position_helper(AVLNode *other) override {
     if (other == nullptr) {
       height = 0;
       return;
@@ -565,11 +564,11 @@ public:
     swap(height, other->height);
   }
 
-  static int get_height(AVL_Node *node) noexcept {
+  static int get_height(AVLNode *node) noexcept {
     return node == nullptr ? 0 : node->height;
   }
 
-  static int bf(AVL_Node *node) {
+  static int bf(AVLNode *node) {
     return get_height(node->left) - get_height(node->right);
   }
 
@@ -578,7 +577,7 @@ public:
   }
 };
 
-template <class T, class Node = AVL_Node<T>, class Compare = less<T>>
+template <class T, class Node = AVLNode<T>, class Compare = less<T>>
 class AVL : public BST<T, Node, Compare> {
 public:
   using Base = BST<T, Node, Compare>;
@@ -628,7 +627,7 @@ public:
   }
 };
 
-template <class T, class Node = Binary_Tree_Node<T>>
+template <class T, class Node = BinaryTreeNode<T>>
 class Splay : public BST<T, Node> {
 public:
   using Base = BST<T>;
