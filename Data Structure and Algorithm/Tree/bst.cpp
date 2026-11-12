@@ -54,7 +54,7 @@ concept LessCallable = requires(T a, T b) {
 };
 
 template <LessCallable T>
-class BST_Node : public _Base_Binary_Tree_Node<T, class BST_Node<T>> {};
+class BST_Node : public _Base_Binary_Tree_Node<T, BST_Node<T>> {};
 
 template <LessCallable T, class Node = BST_Node<T>> class BST {
 public:
