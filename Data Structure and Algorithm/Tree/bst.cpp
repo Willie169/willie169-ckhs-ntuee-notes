@@ -17,44 +17,83 @@ public:
   _Base_Binary_Tree_Node(const T &value, Node *parent = nullptr)
       : value(value), parent(parent), left(nullptr), right(nullptr) {}
 
-  friend void swap(Node &lhs, Node &rhs) {
-    if (lhs.left != nullptr)
-      lhs.left->parent = rhs;
-    if (lhs.right != nullptr)
-      lhs.right->parent = rhs;
+  // 1: left child
+  // 0: right child
+  // -1: node or its parent is nullptr
+  friend char is_left_child(Node *node) {
+    if (node == nullptr || node->parent == nullptr)
+      return -1;
+    return char(node->parent->left == node);
+  }
+
+  friend void swap(Node *lhs, Node *rhs) {
+    if (lhs == rhs)
+      return;
+    if (lhs->parent == rhs) {
+      switch (is_left_child(lhs)) {
+      case 1:
+        swap(lhs->right, rhs->right);
+        rhs->left = lhs->left;
+        lhs->left->left->parent = rhs;
+        break;
+      case 0:
+        swap(lhs->left, rhs->left);
+        rhs->right = lhs->right;
+        lhs->right->right->parent = rhs;
+        break;
+      }
+      lhs->parent = rhs->parent;
+      switch (is_left_child(rhs)) {
+      case 1:
+        rhs->parent->left = lhs;
+        break;
+      case 0:
+        rhs->parent->right = lhs;
+        break;
+      }
+      return;
+    } else if (rhs->parent == lhs)
+      return swap(rhs, lhs);
+    if (lhs->left != nullptr)
+      lhs->left->parent = rhs;
+    if (lhs->right != nullptr)
+      lhs->right->parent = rhs;
+    if (rhs->left != nullptr)
+      rhs->left->parent = lhs;
+    if (rhs->right != nullptr)
+      rhs->right->parent = lhs;
     switch (is_left_child(lhs)) {
     case 1:
-      lhs.parent->left = rhs;
+      lhs->parent->left = rhs;
       break;
     case 0:
-      lhs.parent->right = rhs;
+      lhs->parent->right = rhs;
       break;
     }
-    if (rhs.left != nullptr)
-      rhs.left->parent = lhs;
-    if (rhs.right != nullptr)
-      rhs.right->parent = lhs;
     switch (is_left_child(rhs)) {
     case 1:
-      rhs.parent->left = lhs;
+      rhs->parent->left = lhs;
       break;
     case 0:
-      rhs.parent->right = lhs;
+      rhs->parent->right = lhs;
       break;
     }
-    swap(lhs.parent, rhs.parent);
-    swap(lhs.left, rhs.left);
-    swap(lhs.right, rhs.right);
+    swap(lhs->parent, rhs->parent);
+    swap(lhs->left, rhs->left);
+    swap(lhs->right, rhs->right);
   }
 };
 
 template <class T>
 concept LessCallable = requires(T a, T b) {
-    { std::less<T>{}(a, b) } -> std::convertible_to<bool>;
+  { std::less<T>{}(a, b) } -> std::convertible_to<bool>;
 };
 
 template <LessCallable T>
-class BST_Node : public _Base_Binary_Tree_Node<T, BST_Node<T>> {};
+class BST_Node : public _Base_Binary_Tree_Node<T, BST_Node<T>> {
+  using Base = _Base_Binary_Tree_Node<T, BST_Node<T>>;
+  using Base::Base;
+};
 
 template <LessCallable T, class Node = BST_Node<T>> class BST {
 public:
@@ -77,15 +116,6 @@ public:
       other.root = nullptr;
     }
     return *this;
-  }
-
-  // 1: left child
-  // 0: right child
-  // -1: node or its parent is nullptr
-  static char is_left_child(Node *node) {
-    if (node == nullptr || node->parent == nullptr)
-      return -1;
-    return char(node->parent->left == node);
   }
 
   vector<T> preorder(Node *node) const {
@@ -399,7 +429,10 @@ public:
       return replace_delete(node, node->right);
     if (node->right == nullptr)
       return replace_delete(node, node->left);
-    node->swap(*inorder_successor(node));
+    Node *succ = inorder_successor(node);
+    if (root == node)
+      root = succ;
+    swap(*node, *succ);
     return replace_delete(node, node->right);
   }
 
@@ -451,6 +484,8 @@ template <LessCallable T>
 class AVL_Node : public _Base_Binary_Tree_Node<T, AVL_Node<T>> {
 public:
   using Base = _Base_Binary_Tree_Node<T, AVL_Node<T>>;
+  using Base::Base;
+
   unsigned int height = 1; // leaf 1
 
   friend void swap(AVL_Node &lhs, AVL_Node &rhs) {
@@ -459,9 +494,11 @@ public:
   }
 };
 
-template <LessCallable T, class Node = AVL_Node<T>> class AVL : public BST<T, Node> {
+template <LessCallable T, class Node = AVL_Node<T>>
+class AVL : public BST<T, Node> {
 public:
   using Base = BST<T, Node>;
+  using Base::Base;
 
   static int height(Node *node) { return node == nullptr ? 0 : node->height; }
 
