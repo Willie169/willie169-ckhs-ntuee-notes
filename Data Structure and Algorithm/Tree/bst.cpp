@@ -35,13 +35,13 @@ public:
     std::vector<Node *> stack;
     stack.push_back(node);
     while (!stack.empty()) {
-      Node *node = stack.back();
+      Node *cur = stack.back();
       stack.pop_back();
-      result.push_back(node->value);
-      if (node->right != nullptr)
-        stack.push_back(node->right);
-      if (node->left != nullptr)
-        stack.push_back(node->left);
+      result.push_back(cur->value);
+      if (cur->right != nullptr)
+        stack.push_back(cur->right);
+      if (cur->left != nullptr)
+        stack.push_back(cur->left);
     }
     return result;
   }
@@ -52,13 +52,13 @@ public:
     std::vector<Node *> result, stack;
     stack.push_back(node);
     while (!stack.empty()) {
-      Node *node = stack.back();
+      Node *cur = stack.back();
       stack.pop_back();
-      result.push_back(node);
-      if (node->right != nullptr)
-        stack.push_back(node->right);
-      if (node->left != nullptr)
-        stack.push_back(node->left);
+      result.push_back(cur);
+      if (cur->right != nullptr)
+        stack.push_back(cur->right);
+      if (cur->left != nullptr)
+        stack.push_back(cur->left);
     }
     return result;
   }
