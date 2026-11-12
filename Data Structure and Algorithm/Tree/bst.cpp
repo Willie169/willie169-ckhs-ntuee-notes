@@ -17,9 +17,19 @@ public:
       : value(value), parent(parent) {}
 
   virtual void _swap_position_helper(Node *other) {}
+
+  virtual void update() {}
+
+  virtual ~_Base_Binary_Tree_Node() = default;
 };
 
-template <class T, class Node> class _Binary_Tree_Static {
+template <class T>
+class Binary_Tree_Node : public _Base_Binary_Tree_Node<T, Binary_Tree_Node<T>> {
+  using Base = _Base_Binary_Tree_Node<T, Binary_Tree_Node<T>>;
+  using Base::Base;
+};
+
+template <class T, class Node = Binary_Tree_Node<T>> class _Binary_Tree_Static {
 public:
   static vector<T> preorder(Node *node) {
     if (node == nullptr)
@@ -39,7 +49,7 @@ public:
     return result;
   }
 
-  static vector<Node *> preorder_node(Node *node) {
+  static vector<Node *> preorder_node(Node *node) noexcept {
     if (node == nullptr)
       return vector<Node *>();
     vector<Node *> result, stack;
@@ -74,7 +84,7 @@ public:
     return result;
   }
 
-  static vector<Node *> inorder_node(Node *node) {
+  static vector<Node *> inorder_node(Node *node) noexcept {
     if (node == nullptr)
       return vector<Node *>();
     vector<Node *> result, stack;
@@ -115,7 +125,7 @@ public:
     return result;
   }
 
-  static vector<Node *> postorder_node(Node *node) {
+  static vector<Node *> postorder_node(Node *node) noexcept {
     if (node == nullptr)
       return vector<Node *>();
     vector<Node *> result, stack;
@@ -138,9 +148,59 @@ public:
     return result;
   }
 
-  static void clear(Node *node) {
+  // 1: left child
+  // 0: right child
+  // -1: node's parent is nullptr
+  // -2: node is nullptr
+  static char is_left_child(Node *node) noexcept {
+    if (node == nullptr)
+      return -2;
+    if (node->parent == nullptr)
+      return -1;
+    return char(node->parent->left == node);
+  }
+};
+
+template <class T, class Node = Binary_Tree_Node<T>>
+class Binary_Tree : public _Binary_Tree_Static<T, Node> {
+public:
+  Node *root; // Allow root->parent != nullptr
+
+  Binary_Tree(Node *root = nullptr) : root(root) {}
+
+  Binary_Tree(const Binary_Tree &) = delete;
+
+  Binary_Tree(Binary_Tree &&other) noexcept : root(other.root) {
+    other.root = nullptr;
+  }
+
+  // O(n)
+  vector<T> preorder() const { return preorder(root); }
+  vector<Node *> preorder_node() const { return preorder_node(root); }
+  vector<T> inorder() const { return inorder(root); }
+  vector<Node *> inorder_node() const { return inorder_node(root); }
+  vector<T> postorder() const { return postorder(root); }
+  vector<Node *> postorder_node() const { return postorder_node(root); }
+  void clear() { clear(root); }
+
+  virtual Binary_Tree &operator=(const Binary_Tree &) = delete;
+
+  virtual Binary_Tree &operator=(Binary_Tree &&other) noexcept {
+    if (this != &other) {
+      clear();
+      root = other.root;
+      other.root = nullptr;
+    }
+    return *this;
+  }
+
+  virtual ~Binary_Tree() { clear(); }
+
+  void clear(Node *node) {
     if (node == nullptr)
       return;
+    if (root == node)
+      root = nullptr;
     switch (is_left_child(node)) {
     case 1:
       node->parent->left = nullptr;
@@ -154,25 +214,18 @@ public:
       delete *it;
   }
 
-  // 1: left child
-  // 0: right child
-  // -1: node's parent is nullptr
-  // -2: node is nullptr
-  static char is_left_child(Node *node) {
-    if (node == nullptr)
-      return -2;
-    if (node->parent == nullptr)
-      return -1;
-    return char(node->parent->left == node);
-  }
-
+  // Detach the other if one == nullptr
   // O(1)
-  static Node *swap_position(Node *lhs, Node *rhs) {
+  void swap_position(Node *lhs, Node *rhs) noexcept {
+    if (lhs == rhs)
+      return;
     if (lhs == nullptr) {
-      throw invalid_argument("Node is nullptr");
+      return swap_position(rhs, lhs, root);
     }
-    Node *result = lhs->parent;
+    lhs->_swap_position_helper(rhs);
     if (rhs == nullptr) {
+      if (root == lhs)
+        root = rhs;
       switch (is_left_child(lhs)) {
       case 1:
         lhs->parent->left = nullptr;
@@ -181,26 +234,31 @@ public:
         lhs->parent->right = nullptr;
         break;
       }
-      return lhs->parent;
+      return;
     }
-    if (lhs == rhs)
-      return lhs->parent;
     if (rhs->parent == lhs)
-      return swap_position(rhs, lhs);
+      return swap_position(rhs, lhs, root);
+    if (root == lhs)
+      root = rhs;
+    else if (root == rhs)
+      root = lhs;
     if (lhs->parent == rhs) {
       switch (is_left_child(lhs)) {
       case 1:
         swap(lhs->right, rhs->right);
         rhs->left = lhs->left;
-        lhs->left->parent = rhs;
+        if (lhs->left != nullptr)
+          lhs->left->parent = rhs;
+        lhs->left = rhs;
         break;
       case 0:
         swap(lhs->left, rhs->left);
         rhs->right = lhs->right;
-        lhs->right->parent = rhs;
+        if (lhs->right != nullptr)
+          lhs->right->parent = rhs;
+        lhs->right = rhs;
         break;
       }
-      lhs->parent = rhs->parent;
       switch (is_left_child(rhs)) {
       case 1:
         rhs->parent->left = lhs;
@@ -209,6 +267,8 @@ public:
         rhs->parent->right = lhs;
         break;
       }
+      lhs->parent = rhs->parent;
+      rhs->parent = lhs;
       return;
     }
     if (lhs->left != nullptr)
@@ -237,40 +297,64 @@ public:
         break;
       }
       swap(lhs->parent, rhs->parent);
-    }
+    } else
+      swap(lhs->parent->left, lhs->parent->right);
     swap(lhs->left, rhs->left);
     swap(lhs->right, rhs->right);
-    lhs->_swap_position_helper(rhs);
-    return result;
   }
 
-  static Node *rotate_right(Node *node) {
+  // O(1)
+  Node *replace(Node *node, Node *replacement, bool deleting = false) {
+    if (node == nullptr)
+      throw invalid_argument("Node is nullptr");
+    Node *parent = node->parent;
+    if (root == node)
+      root = replacement;
+    if (parent != nullptr) {
+      if (parent->left == node) {
+        parent->left = replacement;
+      } else {
+        parent->right = replacement;
+      }
+    }
+    if (replacement != nullptr)
+      replacement->parent = parent;
+    if (deleting)
+      delete node;
+    return parent;
+  }
+
+  Node *rotate_right(Node *node) {
     if (node == nullptr || node->left == nullptr)
       throw invalid_argument("Node is nullptr");
     Node *child = node->left;
-    swap_position(node, child);
+    replace(node, child);
     node->left = child->right;
     if (child->right != nullptr)
       child->right->parent = node;
     child->right = node;
     node->parent = child;
+    node->update();
+    child->update();
     return child;
   }
 
-  static Node *rotate_left(Node *node) {
+  Node *rotate_left(Node *node) {
     if (node == nullptr || node->right == nullptr)
       throw invalid_argument("Node is nullptr");
     Node *child = node->right;
-    swap_position(node, child);
+    replace(node, child);
     node->right = child->left;
     if (child->left != nullptr)
       child->left->parent = node;
     child->left = node;
     node->parent = child;
+    node->update();
+    child->update();
     return child;
   }
 
-  static Node *rotate_parent(Node *child) {
+  Node *rotate_parent(Node *child) {
     if (child == nullptr || child->parent == nullptr)
       throw invalid_argument("Node is nullptr");
     if (is_left_child(child) == 1)
@@ -280,57 +364,30 @@ public:
 };
 
 template <class T, class Compare = less<T>>
-concept CompareCallable = requires(T a, T b) {
-  { Compare(a, b) } -> std::convertible_to<bool>;
+concept CompareCallable = requires(const T &a, const T &b) {
+  { Compare{}(a, b) } -> std::convertible_to<bool>;
 };
 
-template <class T>
-class BST_Node : public _Base_Binary_Tree_Node<T, BST_Node<T>> {
-  using Base = _Base_Binary_Tree_Node<T, BST_Node<T>>;
-  using Base::Base;
-};
-
-template <class T, class Node = BST_Node<T>, class Compare = less<T>>
+template <class T, class Node = Binary_Tree_Node<T>, class Compare = less<T>>
   requires CompareCallable<T, Compare>
-class BST : public _Binary_Tree_Static<T, Node> {
+class BST : public Binary_Tree<T, Node> {
 public:
-  Node *root; // Allow root->parent != nullptr
+  using Base = Binary_Tree<T, Node>;
+  using Base::Base;
+  using Base::clear;
+  using Base::inorder;
+  using Base::inorder_node;
+  using Base::postorder;
+  using Base::postorder_node;
+  using Base::preorder;
+  using Base::preorder_node;
+  using Base::replace;
+  using Base::root;
+  using Base::rotate_left;
+  using Base::rotate_right;
+  using Base::swap_position;
 
-  BST(Node *root = nullptr) : root(root) {}
-
-  BST(const BST &) = delete;
-
-  BST(BST &&other) noexcept : root(other.root) { other.root = nullptr; }
-
-  // O(n)
-  vector<T> preorder() const { return preorder(root); }
-  vector<Node *> preorder_node() const { return preorder_node(root); }
-  vector<T> inorder() const { return inorder(root); }
-  vector<Node *> inorder_node() const { return inorder_node(root); }
-  vector<T> postorder() const { return postorder(root); }
-  vector<Node *> postorder_node() const { return postorder_node(root); }
-
-  // O(n)
-  virtual void clear() {
-    clear(root);
-    root = nullptr;
-  }
-
-  virtual BST &operator=(const BST &other) {
-    if (this != &other) {
-      swap(root, other.root);
-    }
-    return *this;
-  }
-
-  virtual BST &operator=(BST &&other) noexcept {
-    if (this != &other) {
-      clear();
-      root = other.root;
-      other.root = nullptr;
-    }
-    return *this;
-  }
+  [[no_unique_address]] Compare comp{};
 
   // Return node, found
   // O(h)
@@ -339,11 +396,11 @@ public:
       return {nullptr, false};
     Node *node = root;
     while (true) {
-      if (Compare(x, node->value)) {
+      if (comp(x, node->value)) {
         if (node->left == nullptr)
           return {node, false};
         node = node->left;
-      } else if (Compare(node->value, x)) {
+      } else if (comp(node->value, x)) {
         if (node->right == nullptr)
           return {node, false};
         node = node->right;
@@ -404,11 +461,11 @@ public:
 
   // Return smallest node > x
   // O(h)
-  Node *upper_bound(const T &x) const {
+  virtual Node *upper_bound(const T &x) const {
     Node *result = nullptr;
     Node *node = root;
     while (node != nullptr) {
-      if (Compare(x, node->value)) {
+      if (comp(x, node->value)) {
         result = node;
         node = node->left;
       } else
@@ -419,11 +476,11 @@ public:
 
   // Return smallest node >= x
   // O(h)
-  Node *lower_bound(const T &x) const {
+  virtual Node *lower_bound(const T &x) const {
     Node *result = nullptr;
     Node *node = root;
     while (node != nullptr) {
-      if (!Compare(node->value, x)) {
+      if (!comp(node->value, x)) {
         result = node;
         node = node->left;
       } else
@@ -441,13 +498,13 @@ public:
     }
     Node *node = root;
     while (true) {
-      if (Compare(x, node->value)) {
+      if (comp(x, node->value)) {
         if (node->left == nullptr) {
           node->left = new Node(x, node);
           return {node->left, true};
         }
         node = node->left;
-      } else if (Compare(node->value, x)) {
+      } else if (comp(node->value, x)) {
         if (node->right == nullptr) {
           node->right = new Node(x, node);
           return {node->right, true};
@@ -464,22 +521,14 @@ public:
       throw invalid_argument("Node is nullptr");
     Node *result;
     if (node->left == nullptr) {
-      result = swap(node, node->right);
-      delete node;
-      return result;
+      return replace(node, node->right, true);
     }
     if (node->right == nullptr) {
-      result = swap(node, node->left);
-      delete node;
-      return result;
+      return replace(node, node->left, true);
     }
     Node *succ = inorder_successor(node);
-    if (root == node)
-      root = succ;
-    swap_position(*node, *succ);
-    result = swap(node, node->right);
-    delete node;
-    return result;
+    swap_position(node, succ);
+    return replace(node, node->right, true);
   }
 
   // Return parent, removed
@@ -497,8 +546,10 @@ class AVL_Node : public _Base_Binary_Tree_Node<T, AVL_Node<T>> {
 public:
   using Base = _Base_Binary_Tree_Node<T, AVL_Node<T>>;
   using Base::Base;
+  using Base::left;
+  using Base::right;
 
-  unsigned int height = 1; // leaf 1
+  int height = 1; // leaf 1
 
   void _swap_position_helper(AVL_Node *other) override {
     if (other == nullptr) {
@@ -506,6 +557,18 @@ public:
       return;
     }
     swap(height, other->height);
+  }
+
+  static int get_height(AVL_Node *node) noexcept {
+    return node == nullptr ? 0 : node->height;
+  }
+
+  static int bf(AVL_Node *node) {
+    return get_height(node->left) - get_height(node->right);
+  }
+
+  void update() override {
+    height = 1 + max(get_height(left), get_height(right));
   }
 };
 
@@ -515,46 +578,20 @@ public:
   using Base = BST<T, Node, Compare>;
   using Base::Base;
 
-  static int height(Node *node) { return node == nullptr ? 0 : node->height; }
-
-  static void update(Node *node) {
-    node->height = 1 + max(height(node->left), height(node->right));
-  }
-
-  static int bf(Node *node) { return height(node->left) - height(node->right); }
-
-  Node *rotate_right(Node *parent) override {
-    Node *result = Base::rotate_right(parent);
-    if (result != nullptr) {
-      update(result->right);
-      update(result);
-    }
-    return result;
-  }
-
-  Node *rotate_left(Node *parent) override {
-    Node *result = Base::rotate_left(parent);
-    if (result != nullptr) {
-      update(result->left);
-      update(result);
-    }
-    return result;
-  }
-
   Node *rebalance(Node *node) {
     if (node == nullptr)
       return nullptr;
-    update(node);
-    int bf = bf(node);
+    node->update();
+    int bf = node->bf();
     if (bf > 1) {
       Node *child = node->left;
-      if (bf(child) < 0) // LR
+      if (child->bf() < 0) // LR
         rotate_left(child);
       return rotate_right(node); // LL, LR
     }
     if (bf < -1) {
       Node *child = node->right;
-      if (bf(child) > 0) // RL
+      if (child->bf() > 0) // RL
         rotate_right(child);
       return rotate_left(node); // RL, RR
     }
@@ -582,7 +619,8 @@ public:
   }
 };
 
-template <class T, class Node = BST_Node<T>> class Splay : public BST<T, Node> {
+template <class T, class Node = Binary_Tree_Node<T>>
+class Splay : public BST<T, Node> {
 public:
   using Base = BST<T>;
 
@@ -625,5 +663,3 @@ public:
     return splay(result);
   }
 };
-
-int main() {}
