@@ -1,10 +1,8 @@
-#include <algorithm>
 #include <concepts>
 #include <functional>
 #include <stdexcept>
 #include <utility>
 #include <vector>
-using namespace std;
 
 template <class T, class Node> class BaseBinaryTreeNode {
 public:
@@ -29,11 +27,11 @@ class BinaryTreeNode : public BaseBinaryTreeNode<T, BinaryTreeNode<T>> {
 
 template <class T, class Node = BinaryTreeNode<T>> class BinaryTreeStatic {
 public:
-  static vector<T> preorder(Node *node) {
+  static std::vector<T> preorder(Node *node) {
     if (node == nullptr)
-      return vector<T>();
-    vector<T> result;
-    vector<Node *> stack;
+      return std::vector<T>();
+    std::vector<T> result;
+    std::vector<Node *> stack;
     stack.push_back(node);
     while (!stack.empty()) {
       Node *node = stack.back();
@@ -47,10 +45,10 @@ public:
     return result;
   }
 
-  static vector<Node *> preorder_node(Node *node) {
+  static std::vector<Node *> preorder_node(Node *node) {
     if (node == nullptr)
-      return vector<Node *>();
-    vector<Node *> result, stack;
+      return std::vector<Node *>();
+    std::vector<Node *> result, stack;
     stack.push_back(node);
     while (!stack.empty()) {
       Node *node = stack.back();
@@ -64,11 +62,11 @@ public:
     return result;
   }
 
-  static vector<T> inorder(Node *node) {
+  static std::vector<T> inorder(Node *node) {
     if (node == nullptr)
-      return vector<T>();
-    vector<T> result;
-    vector<Node *> stack;
+      return std::vector<T>();
+    std::vector<T> result;
+    std::vector<Node *> stack;
     while (!stack.empty() || node != nullptr) {
       while (node != nullptr) {
         stack.push_back(node);
@@ -82,10 +80,10 @@ public:
     return result;
   }
 
-  static vector<Node *> inorder_node(Node *node) {
+  static std::vector<Node *> inorder_node(Node *node) {
     if (node == nullptr)
-      return vector<Node *>();
-    vector<Node *> result, stack;
+      return std::vector<Node *>();
+    std::vector<Node *> result, stack;
     while (!stack.empty() || node != nullptr) {
       while (node != nullptr) {
         stack.push_back(node);
@@ -99,11 +97,11 @@ public:
     return result;
   }
 
-  static vector<T> postorder(Node *node) {
+  static std::vector<T> postorder(Node *node) {
     if (node == nullptr)
-      return vector<T>();
-    vector<T> result;
-    vector<Node *> stack;
+      return std::vector<T>();
+    std::vector<T> result;
+    std::vector<Node *> stack;
     Node *last_visited = nullptr;
     while (!stack.empty() || node != nullptr) {
       if (node != nullptr) {
@@ -123,10 +121,10 @@ public:
     return result;
   }
 
-  static vector<Node *> postorder_node(Node *node) {
+  static std::vector<Node *> postorder_node(Node *node) {
     if (node == nullptr)
-      return vector<Node *>();
-    vector<Node *> result, stack;
+      return std::vector<Node *>();
+    std::vector<Node *> result, stack;
     Node *last_visited = nullptr;
     while (!stack.empty() || node != nullptr) {
       if (node != nullptr) {
@@ -200,12 +198,12 @@ public:
   }
 
   // O(n)
-  vector<T> preorder() const { return preorder(root); }
-  vector<Node *> preorder_node() const { return preorder_node(root); }
-  vector<T> inorder() const { return inorder(root); }
-  vector<Node *> inorder_node() const { return inorder_node(root); }
-  vector<T> postorder() const { return postorder(root); }
-  vector<Node *> postorder_node() const { return postorder_node(root); }
+  std::vector<T> preorder() const { return preorder(root); }
+  std::vector<Node *> preorder_node() const { return preorder_node(root); }
+  std::vector<T> inorder() const { return inorder(root); }
+  std::vector<Node *> inorder_node() const { return inorder_node(root); }
+  std::vector<T> postorder() const { return postorder(root); }
+  std::vector<Node *> postorder_node() const { return postorder_node(root); }
 
   // O(h)
   Node *leftmost_child() const { return leftmost_child(root); }
@@ -215,7 +213,7 @@ protected:
   // O(1)
   virtual Node *replace(Node *node, Node *replacement, bool deleting = false) {
     if (node == nullptr)
-      throw invalid_argument("Node is nullptr");
+      throw std::invalid_argument("Node is nullptr");
     Node *parent = node->parent;
     if (root == node)
       root = replacement;
@@ -247,7 +245,7 @@ public:
       node->parent->right = nullptr;
       break;
     }
-    vector<Node *> stack = preorder_node(node);
+    std::vector<Node *> stack = preorder_node(node);
     for (auto it = stack.rbegin(); it != stack.rend(); ++it)
       delete *it;
   }
@@ -270,7 +268,7 @@ public:
   // O(1)
   virtual Node *rotate_right(Node *node) {
     if (node == nullptr || node->left == nullptr)
-      throw invalid_argument("Node is nullptr");
+      throw std::invalid_argument("Node is nullptr");
     Node *child = node->left;
     replace(node, child);
     node->left = child->right;
@@ -286,7 +284,7 @@ public:
   // O(1)
   virtual Node *rotate_left(Node *node) {
     if (node == nullptr || node->right == nullptr)
-      throw invalid_argument("Node is nullptr");
+      throw std::invalid_argument("Node is nullptr");
     Node *child = node->right;
     replace(node, child);
     node->right = child->left;
@@ -302,19 +300,19 @@ public:
   // O(1)
   virtual Node *rotate_parent(Node *child) {
     if (child == nullptr || child->parent == nullptr)
-      throw invalid_argument("Node is nullptr");
+      throw std::invalid_argument("Node is nullptr");
     if (is_left_child(child) == 1)
       return rotate_right(child->parent);
     return rotate_left(child->parent);
   }
 };
 
-template <class T, class Compare = less<T>>
+template <class T, class Compare = std::less<T>>
 concept CompareCallable = requires(const T &a, const T &b) {
   { Compare{}(a, b) } -> std::convertible_to<bool>;
 };
 
-template <class T, class Node = BinaryTreeNode<T>, class Compare = less<T>>
+template <class T, class Node = BinaryTreeNode<T>, class Compare = std::less<T>>
   requires CompareCallable<T, Compare>
 class BST : public BinaryTree<T, Node> {
 public:
@@ -344,7 +342,7 @@ public:
 
   // Return node, found
   // O(h)
-  virtual pair<Node *, bool> search(const T &x) const {
+  virtual std::pair<Node *, bool> search(const T &x) const {
     if (root == nullptr)
       return {nullptr, false};
     Node *node = root;
@@ -365,7 +363,7 @@ public:
   // O(h)
   Node *inorder_successor(Node *node) const {
     if (node == nullptr)
-      throw invalid_argument("Node is nullptr");
+      throw std::invalid_argument("Node is nullptr");
     if (node->right != nullptr)
       return leftmost_child(node->right);
     if (node == root)
@@ -383,7 +381,7 @@ public:
   // O(h)
   Node *inorder_predecessor(Node *node) const {
     if (node == nullptr)
-      throw invalid_argument("Node is nullptr");
+      throw std::invalid_argument("Node is nullptr");
     if (node->left != nullptr)
       return rightmost_child(node->left);
     if (node == root)
@@ -430,7 +428,7 @@ public:
 
   // Return node, inserted
   // O(h)
-  virtual pair<Node *, bool> insert(const T &x) {
+  virtual std::pair<Node *, bool> insert(const T &x) {
     if (root == nullptr) {
       root = new Node(x);
       return {root, true};
@@ -457,7 +455,7 @@ public:
   // O(h)
   virtual Node *remove_node(Node *node) {
     if (node == nullptr)
-      throw invalid_argument("Node is nullptr");
+      throw std::invalid_argument("Node is nullptr");
     if (node->left == nullptr) {
       return replace(node, node->right, true);
     }
@@ -482,7 +480,7 @@ public:
 
   // Return parent, removed
   // O(h)
-  virtual pair<Node *, bool> remove(const T &x) {
+  virtual std::pair<Node *, bool> remove(const T &x) {
     auto [node, found] = search(x);
     if (!found)
       return {node, false};
@@ -512,7 +510,7 @@ public:
   }
 };
 
-template <class T, class Node = AVLNode<T>, class Compare = less<T>>
+template <class T, class Node = AVLNode<T>, class Compare = std::less<T>>
 class AVL : public BST<T, Node, Compare> {
 public:
   using Base = BST<T, Node, Compare>;
@@ -541,7 +539,7 @@ public:
     return rebalance(node->parent);
   }
 
-  pair<Node *, bool> insert(const T &x) override {
+  std::pair<Node *, bool> insert(const T &x) override {
     auto [node, inserted] = Base::insert(x);
     if (inserted && node->parent != nullptr)
       rebalance(node->parent);
@@ -599,7 +597,7 @@ public:
     return splay(result);
   }
 
-  pair<Node *, bool> search(const T &x) override {
+  std::pair<Node *, bool> search(const T &x) override {
     auto [result, found] = Base::search(x);
     return {splay(result), found};
   }
