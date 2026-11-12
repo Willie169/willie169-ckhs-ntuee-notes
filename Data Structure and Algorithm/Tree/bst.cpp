@@ -188,15 +188,14 @@ public:
   using Base::preorder_node;
   using Base::rightmost_child;
 
-  Node *root; // Allow root->parent != nullptr
+  mutable Node *root; // Allow root->parent != nullptr
 
   BinaryTree(Node *root = nullptr) : root(root) {}
 
   BinaryTree(const BinaryTree &) = delete;
 
-  BinaryTree(BinaryTree &&other) noexcept : root(other.root) {
-    other.root = nullptr;
-  }
+  BinaryTree(BinaryTree &&other) noexcept
+      : root(std::exchange(other.root, nullptr)) {}
 
   // O(n)
   std::vector<T> preorder() const { return preorder(root); }
@@ -273,8 +272,7 @@ public:
   BinaryTree &operator=(BinaryTree &&other) noexcept {
     if (this != &other) {
       clear();
-      root = other.root;
-      other.root = nullptr;
+      root = std::exchange(other.root, nullptr);
     }
     return *this;
   }
@@ -335,19 +333,32 @@ public:
   using Base::postorder_node;
   using Base::preorder;
   using Base::preorder_node;
-  using Base::replace;
   using Base::rightmost_child;
   using Base::root;
   using Base::rotate_left;
   using Base::rotate_right;
 
-  [[no_unique_address]] Compare comp{};
+  [[no_unique_address]] Compare comp;
+
+protected:
+  using Base::replace;
+
+public:
+  BST(Node *root = nullptr, const Compare &comp = Compare())
+      : Base(root), comp(comp) {}
+  explicit BST(Compare comp = Compare()) : Base(nullptr), comp(comp) {}
+
+  BST(const BST &) = delete;
+  BST &operator=(const BST &) = delete;
+
+  BST(BST &&) = default;
+  BST &operator=(BST &&) = default;
 
   // O(h)
   virtual Node *find_min(Node *node) const { return leftmost_child(node); }
-  virtual Node *find_min() const { return leftmost_child(); }
   virtual Node *find_max(Node *node) const { return rightmost_child(node); }
-  virtual Node *find_max() const { return rightmost_child(); }
+  virtual Node *find_min() const { return find_min(root); }
+  virtual Node *find_max() const { return find_max(root); }
 
   // Return node, found
   // O(h)
@@ -452,7 +463,7 @@ public:
     Node *result = nullptr;
     Node *node = root;
     while (node != nullptr) {
-      if (!comp(x, node->valux)) {
+      if (!comp(x, node->value)) {
         result = node;
         node = node->right;
       } else
@@ -531,7 +542,7 @@ public:
   using Base::left;
   using Base::right;
 
-  int height = 1; // leaf 1
+  mutable int height = 1; // leaf 1
 
   static int get_height(AVLNode *node) noexcept {
     return node == nullptr ? 0 : node->height;
@@ -554,6 +565,12 @@ public:
   using Base::root;
   using Base::rotate_left;
   using Base::rotate_right;
+
+  AVL(const AVL &) = delete;
+  AVL &operator=(const AVL &) = delete;
+
+  AVL(AVL &&) = default;
+  AVL &operator=(AVL &&) = default;
 
   // Rebalance until rebalanced once or parent == nullptr
   virtual Node *rebalance(Node *node) {
@@ -603,7 +620,13 @@ public:
   using Base::root;
   using Base::rotate_parent;
 
-  virtual Node *splay(Node *node) {
+  Splay(const Splay &) = delete;
+  Splay &operator=(const Splay &) = delete;
+
+  Splay(Splay &&) = default;
+  Splay &operator=(Splay &&) = default;
+
+  virtual Node *splay(Node *node) const {
     if (node == nullptr)
       return nullptr;
     while (node != root) {
@@ -635,20 +658,23 @@ public:
     return splay(Base::find_max(node));
   }
 
-  Node *ordered_after(Node *node) const override {
-    return splay(Base::ordered_after(node));
+  virtual Node *find_min() const { return find_min(root); }
+  virtual Node *find_max() const { return find_max(root); }
+
+  Node *ordered_after(const T &x) const override {
+    return splay(Base::ordered_after(x));
   }
 
-  Node *ordered_not_before(Node *node) const override {
-    return splay(Base::ordered_not_before(node));
+  Node *ordered_not_before(const T &x) const override {
+    return splay(Base::ordered_not_before(x));
   }
 
-  Node *ordered_not_after(Node *node) const override {
-    return splay(Base::ordered_not_after(node));
+  Node *ordered_not_after(const T &x) const override {
+    return splay(Base::ordered_not_after(x));
   }
 
-  Node *ordered_before(Node *node) const override {
-    return splay(Base::ordered_before(node));
+  Node *ordered_before(const T &x) const override {
+    return splay(Base::ordered_before(x));
   }
 
   std::pair<Node *, bool> search(const T &x) const override {
@@ -700,12 +726,28 @@ public:
   Node *remove_node(Node *node) override {
     splay(node);
     if (root->left == nullptr) {
+      switch (is_left_chilld(root)) {
+      case 1:
+        root->parent->left = root->right;
+        break;
+      case 0:
+        root->parent->right = root->right;
+        break;
+      }
       root->right->parent = root->parent;
       root = root->right;
       delete node;
       return nullptr;
     }
     Node *other = root->right;
+    switch (is_left_chilld(root)) {
+    case 1:
+      root->parent->left = root->left;
+      break;
+    case 0:
+      root->parent->right = root->left;
+      break;
+    }
     root->left->parent = root->parent;
     root = root->left;
     delete node;
