@@ -12,10 +12,10 @@ public:
   Node *left = nullptr;
   Node *right = nullptr;
 
-  BaseBinaryTreeNode(const T &value = T(), Node *parent = nullptr)
-      : value(value), parent(parent) {}
+  BaseBinaryTreeNode(const T &_value = T(), Node *_parent = nullptr)
+      : value(_value), parent(_parent) {}
 
-  virtual void update() {}
+  virtual void update() const {}
 
   virtual ~BaseBinaryTreeNode() = default;
 };
@@ -190,7 +190,7 @@ public:
 
   mutable Node *root; // Allow root->parent != nullptr
 
-  BinaryTree(Node *root = nullptr) : root(root) {}
+  BinaryTree(Node *_root = nullptr) : root(_root) {}
 
   BinaryTree(const BinaryTree &) = delete;
 
@@ -212,26 +212,28 @@ public:
 protected:
   // O(1)
   virtual Node *replace(Node *node, Node *replacement, bool deleting = false) {
-    if (node == nullptr)
+    switch (is_left_child(node)) {
+    case -2:
       throw std::invalid_argument("Node is nullptr");
-    Node *parent = node->parent;
+      break;
+    case 1:
+      node->parent->left = replacement;
+      break;
+    case 0:
+      node->parent->right = replacement;
+      break;
+    }
     if (root == node)
       root = replacement;
-    if (parent != nullptr) {
-      if (parent->left == node) {
-        parent->left = replacement;
-      } else {
-        parent->right = replacement;
-      }
-    }
     if (replacement != nullptr)
-      replacement->parent = parent;
+      replacement->parent = node->parent;
+    Node *parent = node->parent;
     if (deleting)
       delete node;
     return parent;
   }
 
-  void recursive_clear(Node *node) {
+  void recursive_clear(Node *node) noexcept {
     if (node == nullptr)
       return;
     recursive_clear(node->left);
@@ -240,7 +242,7 @@ protected:
   }
 
 public:
-  void clear(Node *node) {
+  void clear(Node *node) noexcept {
     if (node == nullptr)
       return;
     if (root == node)
@@ -253,17 +255,16 @@ public:
       node->parent->right = nullptr;
       break;
     }
-    std::vector<Node *> stack;
     try {
-      stack = preorder_node(node);
+      std::vector<Node *> stack = preorder_node(node);
+      for (auto it = stack.rbegin(); it != stack.rend(); ++it)
+        delete *it;
     } catch (...) {
       recursive_clear(node);
     }
-    for (auto it = stack.rbegin(); it != stack.rend(); ++it)
-      delete *it;
   }
 
-  void clear() { clear(root); }
+  void clear() noexcept { clear(root); }
 
   virtual ~BinaryTree() { clear(); }
 
@@ -278,7 +279,7 @@ public:
   }
 
   // O(1)
-  virtual Node *rotate_right(Node *node) {
+  virtual Node *rotate_right(Node *node) const {
     if (node == nullptr || node->left == nullptr)
       throw std::invalid_argument("Node is nullptr");
     Node *child = node->left;
@@ -294,7 +295,7 @@ public:
   }
 
   // O(1)
-  virtual Node *rotate_left(Node *node) {
+  virtual Node *rotate_left(Node *node) const {
     if (node == nullptr || node->right == nullptr)
       throw std::invalid_argument("Node is nullptr");
     Node *child = node->right;
@@ -310,7 +311,7 @@ public:
   }
 
   // O(1)
-  virtual Node *rotate_parent(Node *child) {
+  virtual Node *rotate_parent(Node *child) const {
     if (child == nullptr || child->parent == nullptr)
       throw std::invalid_argument("Node is nullptr");
     if (is_left_child(child) == 1)
@@ -324,7 +325,6 @@ template <class T, class Node = BinaryTreeNode<T>, class Compare = std::less<T>>
 class BST : public BinaryTree<T, Node> {
 public:
   using Base = BinaryTree<T, Node>;
-  using Base::Base;
   using Base::clear;
   using Base::inorder;
   using Base::inorder_node;
@@ -344,9 +344,9 @@ protected:
   using Base::replace;
 
 public:
-  BST(Node *root = nullptr, const Compare &comp = Compare())
-      : Base(root), comp(comp) {}
-  explicit BST(Compare comp = Compare()) : Base(nullptr), comp(comp) {}
+  BST() : BST(nullptr, Compare()) {}
+  explicit BST(const Compare &_comp) : BST(nullptr, _comp) {}
+  BST(Node *_root, const Compare &_comp) : Base(_root), comp(_comp) {}
 
   BST(const BST &) = delete;
   BST &operator=(const BST &) = delete;
@@ -552,7 +552,7 @@ public:
     return get_height(node->left) - get_height(node->right);
   }
 
-  void update() override {
+  void update() const override {
     height = 1 + std::max(get_height(left), get_height(right));
   }
 };
@@ -573,7 +573,7 @@ public:
   AVL &operator=(AVL &&) = default;
 
   // Rebalance until rebalanced once or parent == nullptr
-  virtual Node *rebalance(Node *node) {
+  virtual Node *rebalance(Node *node) const {
     node->update();
     int bf = Node::bf(node);
     if (bf > 1) {
@@ -602,8 +602,6 @@ public:
 
   Node *remove_node(Node *node) override {
     Node *rebalance_start = Base::remove_node(node);
-    if (rebalance_start == root)
-      return rebalance_start;
     Node *cur = rebalance_start;
     while (cur != nullptr) {
       cur = rebalance(cur)->parent;
@@ -617,9 +615,14 @@ class Splay : public BST<T, Node, Compare> {
 public:
   using Base = BST<T, Node, Compare>;
   using Base::Base;
+  using Base::is_left_child;
   using Base::root;
   using Base::rotate_parent;
 
+protected:
+  using Base::replace;
+
+public:
   Splay(const Splay &) = delete;
   Splay &operator=(const Splay &) = delete;
 
@@ -683,23 +686,34 @@ public:
   }
 
   virtual void join_right(Node *other) {
+    if (other == nullptr)
+      return;
+    if (root == nullptr) {
+      root = other;
+      other->parent = nullptr;
+      return;
+    }
     find_max();
     root->right = other;
-    if (other != nullptr)
-      other->parent = root;
+    other->parent = root;
   }
 
   virtual void join_left(Node *other) {
+    if (other == nullptr)
+      return;
+    if (root == nullptr) {
+      root = other;
+      other->parent = nullptr;
+      return;
+    }
     find_min();
     root->left = other;
-    if (other != nullptr)
-      other->parent = root;
+    other->parent = root;
   }
 
   virtual Splay<T, Node> split_right(const T &x) {
-    if (root == nullptr)
+    if (root == nullptr || ordered_after(x) == nullptr)
       return Splay(nullptr);
-    search(x);
     Node *right_root = root->right;
     if (right_root != nullptr)
       right_root->parent = nullptr;
@@ -708,11 +722,11 @@ public:
   }
 
   virtual Splay<T, Node> split_left(const T &x) {
-    if (root == nullptr)
+    if (root == nullptr || ordered_not_before(x) == nullptr)
       return Splay(nullptr);
-    search(x);
     Node *left_root = root->left;
-    left_root->parent = nullptr;
+    if (left_root != nullptr)
+      left_root->parent = nullptr;
     root->left = nullptr;
     return Splay(left_root);
   }
@@ -724,34 +738,17 @@ public:
 
   // Not return rebalance_start but always return nullptr
   Node *remove_node(Node *node) override {
-    splay(node);
-    if (root->left == nullptr) {
-      switch (is_left_chilld(root)) {
-      case 1:
-        root->parent->left = root->right;
-        break;
-      case 0:
-        root->parent->right = root->right;
-        break;
-      }
-      root->right->parent = root->parent;
-      root = root->right;
-      delete node;
-      return nullptr;
-    }
-    Node *other = root->right;
-    switch (is_left_chilld(root)) {
-    case 1:
-      root->parent->left = root->left;
-      break;
-    case 0:
-      root->parent->right = root->left;
-      break;
-    }
-    root->left->parent = root->parent;
-    root = root->left;
-    delete node;
-    join_right(other);
+    if (node == nullptr)
+      throw std::invalid_argument("Node is nullptr");
+    Node *victim = splay(node);
+    Node *right = victim->right;
+    if (victim->left != nullptr) {
+      replace(victim, victim->left, true);
+      if (right != nullptr)
+        right->parent = nullptr;
+      join_right(right);
+    } else
+      replace(victim, right, true);
     return nullptr;
   }
 };
