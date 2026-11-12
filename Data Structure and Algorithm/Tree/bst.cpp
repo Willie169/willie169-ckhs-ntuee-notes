@@ -16,52 +16,75 @@ public:
 
   _Base_Binary_Tree_Node(const T &value, Node *parent = nullptr)
       : value(value), parent(parent), left(nullptr), right(nullptr) {}
+};
 
-  // 1: left child
-  // 0: right child
-  // -1: node or its parent is nullptr
-  friend char is_left_child(Node *node) {
-    if (node == nullptr || node->parent == nullptr)
-      return -1;
-    return char(node->parent->left == node);
+// 1: left child
+// 0: right child
+// -1: node's parent is nullptr
+// -2: node is nullptr
+template <class T, class Node>
+char is_left_child(_Base_Binary_Tree_Node<T, Node> *node) {
+  if (node == nullptr)
+    return -2;
+  if (node->parent == nullptr)
+    return -1;
+  return char(node->parent->left == node);
+}
+
+// O(1)
+template <class T, class Node>
+void swap(_Base_Binary_Tree_Node<T, Node> *lhs,
+          _Base_Binary_Tree_Node<T, Node> *rhs) {
+  if (lhs == rhs)
+    return;
+  if (lhs == nullptr)
+    return swap(rhs, lhs);
+  if (rhs == nullptr) {
+    switch (is_left_child(lhs)) {
+    case 1:
+      lhs->parent->left = nullptr;
+      break;
+    case 0:
+      lhs->parent->right = nullptr;
+      break;
+    }
+    return;
   }
-
-  friend void swap(Node *lhs, Node *rhs) {
-    if (lhs == rhs)
-      return;
-    if (lhs->parent == rhs) {
-      switch (is_left_child(lhs)) {
-      case 1:
-        swap(lhs->right, rhs->right);
-        rhs->left = lhs->left;
-        lhs->left->left->parent = rhs;
-        break;
-      case 0:
-        swap(lhs->left, rhs->left);
-        rhs->right = lhs->right;
-        lhs->right->right->parent = rhs;
-        break;
-      }
-      lhs->parent = rhs->parent;
-      switch (is_left_child(rhs)) {
-      case 1:
-        rhs->parent->left = lhs;
-        break;
-      case 0:
-        rhs->parent->right = lhs;
-        break;
-      }
-      return;
-    } else if (rhs->parent == lhs)
-      return swap(rhs, lhs);
-    if (lhs->left != nullptr)
+  if (rhs->parent == lhs)
+    return swap(rhs, lhs);
+  if (lhs->parent == rhs) {
+    switch (is_left_child(lhs)) {
+    case 1:
+      swap(lhs->right, rhs->right);
+      rhs->left = lhs->left;
       lhs->left->parent = rhs;
-    if (lhs->right != nullptr)
+      break;
+    case 0:
+      swap(lhs->left, rhs->left);
+      rhs->right = lhs->right;
       lhs->right->parent = rhs;
-    if (rhs->left != nullptr)
-      rhs->left->parent = lhs;
-    if (rhs->right != nullptr)
-      rhs->right->parent = lhs;
+      break;
+    }
+    lhs->parent = rhs->parent;
+    switch (is_left_child(rhs)) {
+    case 1:
+      rhs->parent->left = lhs;
+      break;
+    case 0:
+      rhs->parent->right = lhs;
+      break;
+    }
+    return;
+  }
+  if (lhs->left != nullptr)
+    lhs->left->parent = rhs;
+  if (lhs->right != nullptr)
+    lhs->right->parent = rhs;
+  if (rhs->left != nullptr)
+    rhs->left->parent = lhs;
+  if (rhs->right != nullptr)
+    rhs->right->parent = lhs;
+  if (lhs->parent != rhs->parent) {
     switch (is_left_child(lhs)) {
     case 1:
       lhs->parent->left = rhs;
@@ -79,10 +102,10 @@ public:
       break;
     }
     swap(lhs->parent, rhs->parent);
-    swap(lhs->left, rhs->left);
-    swap(lhs->right, rhs->right);
   }
-};
+  swap(lhs->left, rhs->left);
+  swap(lhs->right, rhs->right);
+}
 
 template <class T>
 concept LessCallable = requires(T a, T b) {
@@ -401,16 +424,7 @@ public:
     if (node == nullptr)
       throw invalid_argument("Node is nullptr");
     Node *parent = node->parent;
-    if (root == node)
-      root = replacement;
-    if (parent != nullptr) {
-      if (parent->left == node)
-        parent->left = replacement;
-      else
-        parent->right = replacement;
-    }
-    if (replacement != nullptr)
-      replacement->parent = parent;
+    swap(node, replacement);
     return parent;
   }
 
