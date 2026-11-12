@@ -211,7 +211,8 @@ public:
 
 protected:
   // O(1)
-  virtual Node *replace(Node *node, Node *replacement, bool deleting = false) {
+  virtual Node *replace(Node *node, Node *replacement,
+                        bool deleting = false) const {
     switch (is_left_child(node)) {
     case -2:
       throw std::invalid_argument("Node is nullptr");
@@ -615,6 +616,7 @@ class Splay : public BST<T, Node, Compare> {
 public:
   using Base = BST<T, Node, Compare>;
   using Base::Base;
+  using Base::cmp;
   using Base::is_left_child;
   using Base::root;
   using Base::rotate_parent;
@@ -711,31 +713,6 @@ public:
     other->parent = root;
   }
 
-  virtual Splay<T, Node> split_right(const T &x) {
-    if (root == nullptr || ordered_after(x) == nullptr)
-      return Splay(nullptr);
-    Node *right_root = root->right;
-    if (right_root != nullptr)
-      right_root->parent = nullptr;
-    root->right = nullptr;
-    return Splay(right_root);
-  }
-
-  virtual Splay<T, Node> split_left(const T &x) {
-    if (root == nullptr || ordered_not_before(x) == nullptr)
-      return Splay(nullptr);
-    Node *left_root = root->left;
-    if (left_root != nullptr)
-      left_root->parent = nullptr;
-    root->left = nullptr;
-    return Splay(left_root);
-  }
-
-  std::pair<Node *, bool> insert(const T &x) override {
-    auto [result, second] = Base::insert(x);
-    return {splay(result), second};
-  }
-
   // Not return rebalance_start but always return nullptr
   Node *remove_node(Node *node) override {
     if (node == nullptr)
@@ -750,5 +727,53 @@ public:
     } else
       replace(victim, right, true);
     return nullptr;
+  }
+
+  virtual Splay split_after(const T &x) {
+    Node *other_root = ordered_after(x);
+    if (other_root == nullptr)
+      return Splay(nullptr, cmp);
+    root = root->left;
+    if (root != nullptr)
+      root->parent = other_root->parent;
+    other_root->parent = nullptr;
+    other_root->left = nullptr;
+    return Splay(other_root, cmp);
+  }
+
+  virtual Splay split_not_before(const T &x) {
+    Node *other_root = ordered_not_before(x);
+    if (other_root == nullptr)
+      return Splay(nullptr, cmp);
+    root = root->left;
+    if (root != nullptr)
+      root->parent = other_root->parent;
+    other_root->parent = nullptr;
+    other_root->left = nullptr;
+    return Splay(other_root, cmp);
+  }
+
+  virtual Splay split_before(const T &x) {
+    Node *other_root = ordered_before(x);
+    if (other_root == nullptr)
+      return Splay(nullptr, cmp);
+    root = root->right;
+    if (root != nullptr)
+      root->parent = other_root->parent;
+    other_root->parent = nullptr;
+    other_root->right = nullptr;
+    return Splay(other_root, cmp);
+  }
+
+  virtual Splay split_not_after(const T &x) {
+    Node *other_root = ordered_not_after(x);
+    if (other_root == nullptr)
+      return Splay(nullptr, cmp);
+    root = root->right;
+    if (root != nullptr)
+      root->parent = other_root->parent;
+    other_root->parent = nullptr;
+    other_root->right = nullptr;
+    return Splay(other_root, cmp);
   }
 };
