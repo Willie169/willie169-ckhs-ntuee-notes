@@ -562,15 +562,17 @@ template <class T, class Node = BinaryTreeNode<T>>
 class Splay : public BST<T, Node> {
 public:
   using Base = BST<T>;
+  using Base::Base;
+  using Base::root;
 
   virtual Node *splay(Node *node) {
     if (node == nullptr)
       return nullptr;
-    while (node->parent != nullptr) {
+    while (node != root) {
       Node *parent = node->parent;
       Node *grandparent = parent->parent;
       // Zig
-      if (grandparent == nullptr)
+      if (parent == root)
         this->rotate(node);
       // Zig-zig
       else if ((parent->left == node && grandparent->left == parent) ||
@@ -598,7 +600,55 @@ public:
   }
 
   std::pair<Node *, bool> search(const T &x) override {
-    auto [result, found] = Base::search(x);
-    return {splay(result), found};
+    auto [result, second] = Base::search(x);
+    return {splay(result), second};
+  }
+
+  virtual void join_right(Node *other) {
+    find_max();
+    root->right = other;
+    if (other != nullptr)
+      other->parent = root;
+  }
+
+  virtual void join_left(Node *other) {
+    find_min();
+    root->left = other;
+    if (other != nullptr)
+      other->parent = root;
+  }
+
+  virtual Splay<T, Node> split_right(const T &x) {
+    if (root == nullptr)
+      return Splay(nullptr);
+    search(x);
+    Node *right_root = root->right;
+    right_root->parent = nullptr;
+    root->right = nullptr;
+    return Splay(right_root);
+  }
+
+  virtual Splay<T, Node> split_left(const T &x) {
+    if (root == nullptr)
+      return Splay(nullptr);
+    search(x);
+    Node *left_root = root->left;
+    left_root->parent = nullptr;
+    root->left = nullptr;
+    return Splay(left_root);
+  }
+
+  std::pair<Node *, bool> insert(const T &x) override {
+    auto [result, second] = Base::insert(x);
+    return {splay(result), second};
+  }
+
+  Node *remove_node(Node *node) override {
+    splay(node);
+    Node *other = root->right;
+    root->left->parent = root->parent;
+    root = root->left;
+    delete node;
+    join_right(other);
   }
 };
