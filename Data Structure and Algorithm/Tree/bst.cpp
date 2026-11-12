@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <concepts>
 #include <functional>
 #include <stdexcept>
 #include <utility>
@@ -48,10 +49,14 @@ public:
 };
 
 template <class T>
-class Binary_Tree_Node
-    : public _Base_Binary_Tree_Node<T, class Binary_Tree_Node<T>> {};
+concept LessCallable = requires(T a, T b) {
+    { std::less<T>{}(a, b) } -> std::convertible_to<bool>;
+};
 
-template <class T, class Node = Binary_Tree_Node<T>> class BST {
+template <LessCallable T>
+class BST_Node : public _Base_Binary_Tree_Node<T, class BST_Node<T>> {};
+
+template <LessCallable T, class Node = BST_Node<T>> class BST {
 public:
   using value_type = T;
 
@@ -214,7 +219,9 @@ public:
 
   virtual void clear(Node *node) {
     if (node == nullptr)
-      throw invalid_argument("Node is nullptr");
+      return;
+    if (node == root)
+      root = nullptr;
     switch (is_left_child(node)) {
     case 1:
       node->parent->left = nullptr;
@@ -229,12 +236,7 @@ public:
   }
 
   // O(n)
-  virtual void clear() {
-    if (root != nullptr) {
-      clear(root);
-      root = nullptr;
-    }
-  }
+  virtual void clear() { clear(root); }
 
   virtual ~BST() { clear(); }
 
@@ -245,11 +247,11 @@ public:
       return {nullptr, false};
     Node *node = root;
     while (true) {
-      if (std::less<>{}(x, node->value)) {
+      if (less<>{}(x, node->value)) {
         if (node->left == nullptr)
           return {node, false};
         node = node->left;
-      } else if (std::less<>{}(node->value, x)) {
+      } else if (less<>{}(node->value, x)) {
         if (node->right == nullptr)
           return {node, false};
         node = node->right;
@@ -314,7 +316,7 @@ public:
     Node *result = nullptr;
     Node *node = root;
     while (node != nullptr) {
-      if (std::less<>{}(x, node->value)) {
+      if (less<>{}(x, node->value)) {
         result = node;
         node = node->left;
       } else
@@ -329,7 +331,7 @@ public:
     Node *result = nullptr;
     Node *node = root;
     while (node != nullptr) {
-      if (!std::less<>{}(node->value, x)) {
+      if (!less<>{}(node->value, x)) {
         result = node;
         node = node->left;
       } else
@@ -347,13 +349,13 @@ public:
     }
     Node *node = root;
     while (true) {
-      if (std::less<>{}(x, node->value)) {
+      if (less<>{}(x, node->value)) {
         if (node->left == nullptr) {
           node->left = new Node(x, node);
           return {node->left, true};
         }
         node = node->left;
-      } else if (std::less<>{}(node->value, x)) {
+      } else if (less<>{}(node->value, x)) {
         if (node->right == nullptr) {
           node->right = new Node(x, node);
           return {node->right, true};
@@ -445,7 +447,7 @@ public:
   }
 };
 
-template <class T>
+template <LessCallable T>
 class AVL_Node : public _Base_Binary_Tree_Node<T, AVL_Node<T>> {
 public:
   using Base = _Base_Binary_Tree_Node<T, AVL_Node<T>>;
@@ -457,7 +459,7 @@ public:
   }
 };
 
-template <class T, class Node = AVL_Node<T>> class AVL : public BST<T, Node> {
+template <LessCallable T, class Node = AVL_Node<T>> class AVL : public BST<T, Node> {
 public:
   using Base = BST<T, Node>;
 
@@ -528,8 +530,7 @@ public:
   }
 };
 
-template <class T, class Node = Binary_Tree_Node<T>>
-class Splay : public BST<T, Node> {
+template <class T, class Node = BST_Node<T>> class Splay : public BST<T, Node> {
 public:
   using Base = BST<T>;
 
@@ -572,3 +573,5 @@ public:
     return splay(result);
   }
 };
+
+int main() {}
