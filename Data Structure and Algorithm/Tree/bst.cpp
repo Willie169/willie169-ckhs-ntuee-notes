@@ -13,7 +13,7 @@ public:
   Node *left = nullptr;
   Node *right = nullptr;
 
-  _Base_Binary_Tree_Node(const T &value, Node *parent = nullptr)
+  _Base_Binary_Tree_Node(const T &value = T(), Node *parent = nullptr)
       : value(value), parent(parent) {}
 
   virtual void _swap_position_helper(Node *other) {}
@@ -49,7 +49,7 @@ public:
     return result;
   }
 
-  static vector<Node *> preorder_node(Node *node) noexcept {
+  static vector<Node *> preorder_node(Node *node) {
     if (node == nullptr)
       return vector<Node *>();
     vector<Node *> result, stack;
@@ -84,7 +84,7 @@ public:
     return result;
   }
 
-  static vector<Node *> inorder_node(Node *node) noexcept {
+  static vector<Node *> inorder_node(Node *node) {
     if (node == nullptr)
       return vector<Node *>();
     vector<Node *> result, stack;
@@ -125,7 +125,7 @@ public:
     return result;
   }
 
-  static vector<Node *> postorder_node(Node *node) noexcept {
+  static vector<Node *> postorder_node(Node *node) {
     if (node == nullptr)
       return vector<Node *>();
     vector<Node *> result, stack;
@@ -152,12 +152,28 @@ public:
   // 0: right child
   // -1: node's parent is nullptr
   // -2: node is nullptr
-  static char is_left_child(Node *node) noexcept {
+  static signed char is_left_child(Node *node) noexcept {
     if (node == nullptr)
       return -2;
     if (node->parent == nullptr)
       return -1;
-    return char(node->parent->left == node);
+    return node->parent->left == node;
+  }
+
+  static Node *find_min(Node *node) {
+    if (node == nullptr)
+      return nullptr;
+    while (node->left != nullptr)
+      node = node->left;
+    return node;
+  }
+
+  static Node *find_max(Node *node) {
+    if (node == nullptr)
+      return nullptr;
+    while (node->right != nullptr)
+      node = node->right;
+    return node;
   }
 };
 
@@ -183,18 +199,9 @@ public:
   vector<Node *> postorder_node() const { return postorder_node(root); }
   void clear() { clear(root); }
 
-  virtual Binary_Tree &operator=(const Binary_Tree &) = delete;
-
-  virtual Binary_Tree &operator=(Binary_Tree &&other) noexcept {
-    if (this != &other) {
-      clear();
-      root = other.root;
-      other.root = nullptr;
-    }
-    return *this;
-  }
-
-  virtual ~Binary_Tree() { clear(); }
+  // O(h)
+  virtual Node *find_min() const { return find_min(root); }
+  virtual Node *find_max() const { return find_max(root); }
 
   void clear(Node *node) {
     if (node == nullptr)
@@ -212,6 +219,19 @@ public:
     vector<Node *> stack = preorder_node(node);
     for (auto it = stack.rbegin(); it != stack.rend(); ++it)
       delete *it;
+  }
+
+  virtual ~Binary_Tree() { clear(); }
+
+  virtual Binary_Tree &operator=(const Binary_Tree &) = delete;
+
+  virtual Binary_Tree &operator=(Binary_Tree &&other) noexcept {
+    if (this != &other) {
+      clear();
+      root = other.root;
+      other.root = nullptr;
+    }
+    return *this;
   }
 
   // Detach the other if one == nullptr
@@ -409,36 +429,18 @@ public:
     }
   }
 
-  virtual Node *find_min(Node *node) const {
-    if (node == nullptr)
-      return nullptr;
-    while (node->left != nullptr)
-      node = node->left;
-    return node;
-  }
-
-  // O(h)
-  virtual Node *find_min() const { return find_min(root); }
-
-  virtual Node *find_max(Node *node) const {
-    if (node == nullptr)
-      return nullptr;
-    while (node->right != nullptr)
-      node = node->right;
-    return node;
-  }
-
-  // O(h)
-  virtual Node *find_max() const { return find_max(root); }
-
   // O(h)
   Node *inorder_successor(Node *node) const {
     if (node == nullptr)
       throw invalid_argument("Node is nullptr");
     if (node->right != nullptr)
       return find_min(node->right);
+    if (node == root)
+      return nullptr;
     Node *p = node->parent;
     while (p != nullptr && node == p->right) {
+      if (p == root)
+        return nullptr;
       node = p;
       p = p->parent;
     }
@@ -451,8 +453,12 @@ public:
       throw invalid_argument("Node is nullptr");
     if (node->left != nullptr)
       return find_max(node->left);
+    if (node == root)
+      return nullptr;
     Node *p = node->parent;
     while (p != nullptr && node == p->left) {
+      if (p == root)
+        return nullptr;
       node = p;
       p = p->parent;
     }
@@ -577,9 +583,10 @@ class AVL : public BST<T, Node, Compare> {
 public:
   using Base = BST<T, Node, Compare>;
   using Base::Base;
+  using Base::root;
 
   Node *rebalance(Node *node) {
-    if (node == nullptr)
+    if (node == root)
       return nullptr;
     node->update();
     int bf = node->bf();
@@ -610,6 +617,8 @@ public:
   pair<Node *, bool> remove(const T &x) override {
     auto [parent, removed] = Base::remove(x);
     if (!removed)
+      return {parent, removed};
+    if (parent == root)
       return {parent, removed};
     Node *node = parent;
     while (node != nullptr) {
