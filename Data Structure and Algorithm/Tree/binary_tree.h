@@ -36,7 +36,7 @@ public:
   using Base = BaseBinaryTreeNode<T, BinaryTreeNode<T>>;
   using Base::Base;
   using value_type = T;
-  using node_type = Base::Node;
+  using node_type = Base::node_type;
 };
 
 template <class T, class Node = BinaryTreeNode<T>> class BinaryTreeStatic {
@@ -215,7 +215,7 @@ public:
 // Take LaTeX forest representation: [value[left][right]]
 // Output root node
 template <class T, class Node = BinaryTreeNode<T>>
-  requires requires(std::istream &is, T &value) {
+  requires requires { T{}; } && requires(std::istream &is, T &value) {
     { is >> value } -> std::same_as<std::istream &>;
   }
 Node *from_latex_forest(std::string s) {
@@ -686,7 +686,7 @@ public:
   using Base::left;
   using Base::right;
   using value_type = T;
-  using node_type = Base::Node;
+  using node_type = Base::node_type;
 
   mutable int height = 1; // leaf 1
 
