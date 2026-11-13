@@ -10,7 +10,6 @@
 #include <stdexcept>
 #include <string>
 #include <string_view>
-#include <type_traits>
 #include <utility>
 #include <vector>
 
@@ -215,9 +214,10 @@ public:
 // Take LaTeX forest representation: [value[left][right]]
 // Output root node
 template <class T, class Node = BinaryTreeNode<T>>
-  requires requires { T{}; } && requires(std::istream &is, T &value) {
-    { is >> value } -> std::same_as<std::istream &>;
-  }
+  requires std::default_initializable<T> &&
+           requires(std::istream &is, T &value) {
+             { is >> value } -> std::same_as<std::istream &>;
+           }
 Node *from_latex_forest(std::string s) {
   std::erase_if(s, [](unsigned char c) { return std::isspace(c); });
   if (s.empty())
