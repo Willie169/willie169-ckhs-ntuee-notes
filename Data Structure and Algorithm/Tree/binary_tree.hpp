@@ -2,7 +2,9 @@
 #include <algorithm>
 #include <concepts>
 #include <functional>
+#include <ostream>
 #include <stdexcept>
+#include <string_view>
 #include <utility>
 #include <vector>
 
@@ -173,6 +175,25 @@ public:
       node = node->right;
     return node;
   }
+
+  // LaTeX forest representation: [value[left][right]]
+  // A missing child whose sibling exists is emitted as [,phantom]
+  static void latex_forest(Node *node, std::ostream *oss) {
+    if (node == nullptr || oss == nullptr)
+      return;
+    *oss << "\\begin{center}\n\\begin{forest}\n[" << node->value;
+    bool has_left = (node->left != nullptr);
+    bool has_right = (node->right != nullptr);
+    if (has_left)
+      latex_forest(node->left, oss);
+    else if (has_right)
+      *oss << "[,phantom]";
+    if (has_right)
+      latex_forest(node->right, oss);
+    else if (has_left)
+      *oss << "[,phantom]";
+    *oss << "]\\end{forest}\n\\end{center}\n";
+  }
 };
 
 template <class T, class Node = BinaryTreeNode<T>>
@@ -183,6 +204,7 @@ public:
   using Base::inorder;
   using Base::inorder_node;
   using Base::is_left_child;
+  using Base::latex_forest;
   using Base::leftmost_child;
   using Base::postorder;
   using Base::postorder_node;
@@ -191,13 +213,17 @@ public:
   using Base::rightmost_child;
 
   mutable Node *root; // Allow root->parent != nullptr
+  std::ostream *oss;  // latex_forest logger
 
-  BinaryTree(Node *_root = nullptr) : root(_root) {}
+  BinaryTree(Node *_root = nullptr, std::ostream *_oss = nullptr)
+      : root(_root), oss(_oss) {}
 
   BinaryTree(const BinaryTree &) = delete;
 
   BinaryTree(BinaryTree &&other) noexcept
       : root(std::exchange(other.root, nullptr)) {}
+
+  void set_logger(std::ostream *_oss) { oss = _oss; }
 
   // O(n)
   std::vector<T> preorder() const { return preorder(root); }
@@ -210,6 +236,19 @@ public:
   // O(h)
   Node *leftmost_child() const { return leftmost_child(root); }
   Node *rightmost_child() const { return rightmost_child(root); }
+
+  virtual void log(std::string_view msg) const {
+    if (oss != nullptr)
+      *oss << msg << '\n';
+  }
+
+  virtual void log_forest(Node *node) const {
+    if (oss != nullptr)
+      latex_forest(node, oss);
+  }
+
+  // O(n)
+  virtual void log_forest() const { return log_forest(root); }
 
 protected:
   // O(1)
@@ -304,6 +343,8 @@ public:
       child->right->parent = node;
     child->right = node;
     node->parent = child;
+    log("Rotate right:\n");
+    log_forest();
     return child;
   }
 
@@ -318,6 +359,8 @@ public:
       child->left->parent = node;
     child->left = node;
     node->parent = child;
+    log("Rotate left:\n");
+    log_forest();
     return child;
   }
 
@@ -341,6 +384,8 @@ public:
   using Base::inorder;
   using Base::inorder_node;
   using Base::leftmost_child;
+  using Base::log;
+  using Base::log_forest;
   using Base::postorder;
   using Base::postorder_node;
   using Base::preorder;
@@ -356,9 +401,11 @@ protected:
   using Base::replace;
 
 public:
-  BST() : BST(nullptr, Compare()) {}
-  explicit BST(const Compare &_comp) : BST(nullptr, _comp) {}
-  BST(Node *_root, const Compare &_comp) : Base(_root), comp(_comp) {}
+  BST() : BST(nullptr, Compare(), nullptr) {}
+  explicit BST(const Compare &_comp, std::ostream *_oss = nullptr)
+      : BST(nullptr, _comp, _oss) {}
+  BST(Node *_root, const Compare &_comp, std::ostream *_oss = nullptr)
+      : Base(_root, _oss), comp(_comp) {}
 
   BST(const BST &) = delete;
   BST &operator=(const BST &) = delete;
@@ -508,6 +555,8 @@ public:
       } else
         return {node, false};
     }
+    log("Insert:\n");
+    log_forest();
   }
 
   // Return rebalance_start
@@ -534,6 +583,8 @@ public:
     succ->left = node->left;
     succ->left->parent = succ;
     delete node;
+    log("Remove:\n");
+    log_forest();
     return rebalance_start;
   }
 
@@ -575,6 +626,8 @@ public:
   using node_type = Node;
   using Base = BST<T, Node, Compare>;
   using Base::Base;
+  using Base::log;
+  using Base::log_forest;
   using Base::root;
 
   AVL() : Base() {};
@@ -605,14 +658,20 @@ public:
     int bf = Node::bf(node);
     if (bf > 1) {
       Node *child = node->left;
-      if (Node::bf(child) < 0) // LR
+      if (Node::bf(child) < 0) { // LR
+        log("LR case left-then-right double rotation:\n\n");
         rotate_left(child);
+      } else // LL
+        log("LL case right single rotation:\n\n");
       return rotate_right(node); // LL, LR
     }
     if (bf < -1) {
       Node *child = node->right;
-      if (Node::bf(child) > 0) // RL
+      if (Node::bf(child) > 0) { // RL
+        log("RL case right-then-left double rotation:\n\n");
         rotate_right(child);
+      } else // RR
+        log("RR case left single rotation:\n\n");
       return rotate_left(node); // RL, RR
     }
     if (node->parent == nullptr)
@@ -645,6 +704,9 @@ public:
   using Base::Base;
   using Base::comp;
   using Base::is_left_child;
+  using Base::log;
+  using Base::log_forest;
+  using Base::oss;
   using Base::root;
   using Base::rotate_parent;
 
@@ -666,16 +728,19 @@ public:
       Node *parent = node->parent;
       Node *grandparent = parent->parent;
       // Zig
-      if (parent == root)
+      if (parent == root) {
+        log("Zig step:\n\n");
         rotate_parent(node);
-      // Zig-zig
-      else if ((parent->left == node && grandparent->left == parent) ||
-               (parent->right == node && grandparent->right == parent)) {
+        // Zig-zig
+      } else if ((parent->left == node && grandparent->left == parent) ||
+                 (parent->right == node && grandparent->right == parent)) {
+        log("Zig-zig step:\n\n");
         rotate_parent(parent);
         rotate_parent(node);
       }
       // Zig-zag
       else {
+        log("Zig-zag step:\n\n");
         rotate_parent(node);
         rotate_parent(node);
       }
@@ -726,11 +791,13 @@ public:
     if (root == nullptr) {
       root = other;
       other->parent = nullptr;
-      return;
+    } else {
+      find_max();
+      root->right = other;
+      other->parent = root;
     }
-    find_max();
-    root->right = other;
-    other->parent = root;
+    log("Join right:\n");
+    log_forest();
   }
 
   virtual void join_left(Node *other) {
@@ -739,11 +806,13 @@ public:
     if (root == nullptr) {
       root = other;
       other->parent = nullptr;
-      return;
+    } else {
+      find_min();
+      root->left = other;
+      other->parent = root;
     }
-    find_min();
-    root->left = other;
-    other->parent = root;
+    log("Join left:\n");
+    log_forest();
   }
 
   // Not return rebalance_start but always return nullptr
@@ -765,36 +834,46 @@ public:
 protected:
   virtual Splay split_right(Node *other_root) {
     if (other_root == nullptr)
-      return Splay(nullptr, comp);
+      return Splay(nullptr, comp, oss);
     replace(other_root, other_root->left);
     other_root->parent = nullptr;
     other_root->left = nullptr;
-    return Splay(other_root, comp);
+    Splay result = Splay(other_root, comp, oss);
+    log_forest();
+    result.log_forest();
+    return result;
   }
 
   virtual Splay split_left(Node *other_root) {
     if (other_root == nullptr)
-      return Splay(nullptr, comp);
+      return Splay(nullptr, comp, oss);
     replace(other_root, other_root->right);
     other_root->parent = nullptr;
     other_root->right = nullptr;
-    return Splay(other_root, comp);
+    Splay result = Splay(other_root, comp, oss);
+    log_forest();
+    result.log_forest();
+    return result;
   }
 
 public:
   virtual Splay split_after(const T &x) {
+    log("Split after:\n\n");
     return split_right(ordered_after(x));
   }
 
   virtual Splay split_not_before(const T &x) {
+    log("Split not before:\n\n");
     return split_right(ordered_not_before(x));
   }
 
   virtual Splay split_before(const T &x) {
+    log("Split before:\n\n");
     return split_left(ordered_before(x));
   }
 
   virtual Splay split_not_after(const T &x) {
+    log("Split not after:\n\n");
     return split_left(ordered_not_after(x));
   }
 };
