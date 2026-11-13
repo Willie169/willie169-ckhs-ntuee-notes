@@ -579,6 +579,7 @@ public:
   using Base::rotate_left;
   using Base::rotate_right;
 
+  AVL() : Base() {};
   AVL(const AVL &) = delete;
   AVL &operator=(const AVL &) = delete;
 
@@ -628,7 +629,7 @@ class Splay : public BST<T, Node, Compare> {
 public:
   using Base = BST<T, Node, Compare>;
   using Base::Base;
-  using Base::cmp;
+  using Base::comp;
   using Base::is_left_child;
   using Base::root;
   using Base::rotate_parent;
@@ -744,48 +745,48 @@ public:
   virtual Splay split_after(const T &x) {
     Node *other_root = ordered_after(x);
     if (other_root == nullptr)
-      return Splay(nullptr, cmp);
+      return Splay(nullptr, comp);
     root = root->left;
     if (root != nullptr)
       root->parent = other_root->parent;
     other_root->parent = nullptr;
     other_root->left = nullptr;
-    return Splay(other_root, cmp);
+    return Splay(other_root, comp);
   }
 
   virtual Splay split_not_before(const T &x) {
     Node *other_root = ordered_not_before(x);
     if (other_root == nullptr)
-      return Splay(nullptr, cmp);
+      return Splay(nullptr, comp);
     root = root->left;
     if (root != nullptr)
       root->parent = other_root->parent;
     other_root->parent = nullptr;
     other_root->left = nullptr;
-    return Splay(other_root, cmp);
+    return Splay(other_root, comp);
   }
 
   virtual Splay split_before(const T &x) {
     Node *other_root = ordered_before(x);
     if (other_root == nullptr)
-      return Splay(nullptr, cmp);
+      return Splay(nullptr, comp);
     root = root->right;
     if (root != nullptr)
       root->parent = other_root->parent;
     other_root->parent = nullptr;
     other_root->right = nullptr;
-    return Splay(other_root, cmp);
+    return Splay(other_root, comp);
   }
 
   virtual Splay split_not_after(const T &x) {
     Node *other_root = ordered_not_after(x);
     if (other_root == nullptr)
-      return Splay(nullptr, cmp);
+      return Splay(nullptr, comp);
     root = root->right;
     if (root != nullptr)
       root->parent = other_root->parent;
     other_root->parent = nullptr;
     other_root->right = nullptr;
-    return Splay(other_root, cmp);
+    return Splay(other_root, comp);
   }
 };
