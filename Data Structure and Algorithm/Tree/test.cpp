@@ -59,7 +59,7 @@ struct SAVLNode : BaseBinaryTreeNode<T, SAVLNode<T>> { // augmented
   static int bf(SAVLNode *n) {
     return get_height(n->left) - get_height(n->right);
   }
-  void update() const override {
+  void update_height() const override {
     height = 1 + std::max(get_height(this->left), get_height(this->right));
     size = 1 + get_size(this->left) + get_size(this->right);
   }
@@ -738,7 +738,7 @@ void test_avl_subtree_untouched_by_rebalance() {
       t.insert(dir ? 200 + i : 500 - i); // grows height a lot
       CHECK(host.intact(t));
     }
-    CHECK(host.top->height == 777); // outer node was never "updated"
+    CHECK(host.top->height == 777); // outer node was never "update_heightd"
     for (int i = 0; i < 200; ++i) {
       t.remove(dir ? 200 + i : 500 - i);
       CHECK(host.intact(t));
@@ -775,10 +775,10 @@ void test_splay_specifics() {
   int c = 0;
   S sh(shape<Node>(200, g, c), std::less<int>());
   for (auto *x : sh.preorder_node())
-    x->update(); // heights/sizes were not set
+    x->update_height(); // heights/sizes were not set
   // fix augmented data bottom-up
   for (auto *x : sh.postorder_node())
-    x->update();
+    x->update_height();
   host.attach(sh);
   for (int i = 0; i < 500; ++i) {
     auto nodes = sh.preorder_node();

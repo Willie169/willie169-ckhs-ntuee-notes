@@ -16,8 +16,6 @@ public:
   BaseBinaryTreeNode(const T &_value = T(), Node *_parent = nullptr)
       : value(_value), parent(_parent) {}
 
-  virtual void update() const {}
-
   virtual ~BaseBinaryTreeNode() = default;
 };
 
@@ -29,6 +27,8 @@ class BinaryTreeNode : public BaseBinaryTreeNode<T, BinaryTreeNode<T>> {
 
 template <class T, class Node = BinaryTreeNode<T>> class BinaryTreeStatic {
 public:
+  using node_type = Node;
+
   static std::vector<T> preorder(Node *node) {
     if (node == nullptr)
       return std::vector<T>();
@@ -178,6 +178,7 @@ public:
 template <class T, class Node = BinaryTreeNode<T>>
 class BinaryTree : public BinaryTreeStatic<T, Node> {
 public:
+  using node_type = Node;
   using Base = BinaryTreeStatic<T, Node>;
   using Base::inorder;
   using Base::inorder_node;
@@ -303,8 +304,6 @@ public:
       child->right->parent = node;
     child->right = node;
     node->parent = child;
-    node->update();
-    child->update();
     return child;
   }
 
@@ -319,8 +318,6 @@ public:
       child->left->parent = node;
     child->left = node;
     node->parent = child;
-    node->update();
-    child->update();
     return child;
   }
 
@@ -338,6 +335,7 @@ template <class T, class Node = BinaryTreeNode<T>, class Compare = std::less<T>>
   requires std::strict_weak_order<const Compare &, const T &, const T &>
 class BST : public BinaryTree<T, Node> {
 public:
+  using node_type = Node;
   using Base = BinaryTree<T, Node>;
   using Base::clear;
   using Base::inorder;
@@ -566,7 +564,7 @@ public:
     return get_height(node->left) - get_height(node->right);
   }
 
-  void update() const override {
+  void update_height() const {
     height = 1 + std::max(get_height(left), get_height(right));
   }
 };
@@ -574,11 +572,10 @@ public:
 template <class T, class Node = AVLNode<T>, class Compare = std::less<T>>
 class AVL : public BST<T, Node, Compare> {
 public:
+  using node_type = Node;
   using Base = BST<T, Node, Compare>;
   using Base::Base;
   using Base::root;
-  using Base::rotate_left;
-  using Base::rotate_right;
 
   AVL() : Base() {};
   AVL(const AVL &) = delete;
@@ -587,9 +584,22 @@ public:
   AVL(AVL &&) = default;
   AVL &operator=(AVL &&) = default;
 
+  Node *rotate_left(Node *node) const override {
+    Node *child = Base::rotate_left(node);
+    node->update_height();
+    child->update_height();
+  }
+
+  Node *rotate_right(Node *node) const override {
+    Node *child = Base::rotate_right(node);
+    node->update_height();
+    child->update_height();
+  }
+
   // Rebalance until rebalanced once or parent == nullptr
+  // up to outer tree if root->parent != nullptr
   virtual Node *rebalance(Node *node) const {
-    node->update();
+    node->update_height();
     int bf = Node::bf(node);
     if (bf > 1) {
       Node *child = node->left;
@@ -628,6 +638,7 @@ public:
 template <class T, class Node = BinaryTreeNode<T>, class Compare = std::less<T>>
 class Splay : public BST<T, Node, Compare> {
 public:
+  using node_type = Node;
   using Base = BST<T, Node, Compare>;
   using Base::Base;
   using Base::comp;
@@ -755,7 +766,6 @@ public:
     replace(other_root, other_root->left);
     other_root->parent = nullptr;
     other_root->left = nullptr;
-    other_root->update();
     return Splay(other_root, comp);
   }
 
@@ -765,7 +775,6 @@ public:
     replace(other_root, other_root->right);
     other_root->parent = nullptr;
     other_root->right = nullptr;
-    other_root->update();
     return Splay(other_root, comp);
   }
 
