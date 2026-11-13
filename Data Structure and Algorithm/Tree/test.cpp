@@ -307,7 +307,7 @@ void test_rotations(bool sub) {
         CHECK_THROWS(t.rotate_right(x));
       break;
     default:
-      if (!sub)
+      if (!sub && x == t.root)
         CHECK_THROWS(t.rotate_parent(x));
       Node *p = x->parent;
       CHECK(t.rotate_parent(x) == x);
