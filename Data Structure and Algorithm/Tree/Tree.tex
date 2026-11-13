@@ -536,7 +536,15 @@ Use working set theorem.
 \[O\qty(m+n\log n+\sum_{x\in S}\log(t(x)+1))=O(m+n\log n+m\log k)\]
 \epr
 \sssc{Top-down splay}
-An alternative implementation of splay that is done together with searching. Suppose we want to splay $x$. We start at the root and maintain two trees which are initially empty, left tree $L$ of nodes smaller than $x$ with current node $r$ and right tree $R$ of nodes larger than $x$ with current node $l$, during the traversal with current node $m$, which is initially the root of the tree, where the subtree whose root is $m$ is called middle tree $M$. In each step, there are three cases, each with two symmetric variants:
+An alternative implementation of splay that is done together with traversal from root to the node $x$ to be accessed. Top-down splay also consists of a sequence of splay steps. We start at the root and maintain two trees, left tree $L$ of nodes smaller than $x$ and right tree $R$ of nodes larger than $x$. The original tree is called middle or center tree. In each step, with current node in the middle tree $m$, which is root of the original tree, current node in the left tree $l$, and current node of the right tree $r$, there are three types of splay steps, each of which has two symmetric variants:
+\bit
+\item Zig-zig step:
+\item Zig-zag step:
+\eit
+
+
+Old:
+In each step, there are three cases, each with two symmetric variants:
 \bit
 \item $x<=\operatorname{left}(m)$: We perform a rotation on the edge between $m$ and $\operatorname{left}(m)$, and assign the latter, node the parent of $m$, to $m$, and then remove the parent relation of $m$.
 \item $x>=\operatorname{right}(m)$: We perform a rotation on the edge between $m$ and $\operatorname{right}(m)$, and assign the latter, node the parent of $m$, to $m$.
