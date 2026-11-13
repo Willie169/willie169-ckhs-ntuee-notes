@@ -598,20 +598,20 @@ public:
   }
 };
 
-template <class T> class AVLNode : public BaseBinaryTreeNode<T, AVLNode<T>> {
+template <class T> class AVLTreeNode : public BaseBinaryTreeNode<T, AVLTreeNode<T>> {
 public:
-  using Base = BaseBinaryTreeNode<T, AVLNode<T>>;
+  using Base = BaseBinaryTreeNode<T, AVLTreeNode<T>>;
   using Base::Base;
   using Base::left;
   using Base::right;
 
   mutable int height = 1; // leaf 1
 
-  static int get_height(AVLNode *node) noexcept {
+  static int get_height(AVLTreeNode *node) noexcept {
     return node == nullptr ? 0 : node->height;
   }
 
-  static int bf(AVLNode *node) {
+  static int bf(AVLTreeNode *node) {
     return get_height(node->left) - get_height(node->right);
   }
 
@@ -620,8 +620,8 @@ public:
   }
 };
 
-template <class T, class Node = AVLNode<T>, class Compare = std::less<T>>
-class AVL : public BST<T, Node, Compare> {
+template <class T, class Node = AVLTreeNode<T>, class Compare = std::less<T>>
+class AVLTree : public BST<T, Node, Compare> {
 public:
   using node_type = Node;
   using Base = BST<T, Node, Compare>;
@@ -630,12 +630,12 @@ public:
   using Base::log_forest;
   using Base::root;
 
-  AVL() : Base() {};
-  AVL(const AVL &) = delete;
-  AVL &operator=(const AVL &) = delete;
+  AVLTree() : Base() {};
+  AVLTree(const AVLTree &) = delete;
+  AVLTree &operator=(const AVLTree &) = delete;
 
-  AVL(AVL &&) = default;
-  AVL &operator=(AVL &&) = default;
+  AVLTree(AVLTree &&) = default;
+  AVLTree &operator=(AVLTree &&) = default;
 
   Node *rotate_left(Node *node) const override {
     Node *child = Base::rotate_left(node);
@@ -697,7 +697,7 @@ public:
 };
 
 template <class T, class Node = BinaryTreeNode<T>, class Compare = std::less<T>>
-class Splay : public BST<T, Node, Compare> {
+class SplayTree : public BST<T, Node, Compare> {
 public:
   using node_type = Node;
   using Base = BST<T, Node, Compare>;
@@ -714,12 +714,12 @@ protected:
   using Base::replace;
 
 public:
-  Splay() : Base() {};
-  Splay(const Splay &) = delete;
-  Splay &operator=(const Splay &) = delete;
+  SplayTree() : Base() {};
+  SplayTree(const SplayTree &) = delete;
+  SplayTree &operator=(const SplayTree &) = delete;
 
-  Splay(Splay &&) = default;
-  Splay &operator=(Splay &&) = default;
+  SplayTree(SplayTree &&) = default;
+  SplayTree &operator=(SplayTree &&) = default;
 
   // O(h) worst case, O(log n) amortized
   virtual Node *splay(Node *node) const {
@@ -833,47 +833,47 @@ public:
   }
 
 protected:
-  virtual Splay split_right(Node *other_root) {
+  virtual SplayTree split_right(Node *other_root) {
     if (other_root == nullptr)
-      return Splay(nullptr, comp, oss);
+      return SplayTree(nullptr, comp, oss);
     replace(other_root, other_root->left);
     other_root->parent = nullptr;
     other_root->left = nullptr;
-    Splay result = Splay(other_root, comp, oss);
+    SplayTree result = SplayTree(other_root, comp, oss);
     log_forest();
     result.log_forest();
     return result;
   }
 
-  virtual Splay split_left(Node *other_root) {
+  virtual SplayTree split_left(Node *other_root) {
     if (other_root == nullptr)
-      return Splay(nullptr, comp, oss);
+      return SplayTree(nullptr, comp, oss);
     replace(other_root, other_root->right);
     other_root->parent = nullptr;
     other_root->right = nullptr;
-    Splay result = Splay(other_root, comp, oss);
+    SplayTree result = SplayTree(other_root, comp, oss);
     log_forest();
     result.log_forest();
     return result;
   }
 
 public:
-  virtual Splay split_after(const T &x) {
+  virtual SplayTree split_after(const T &x) {
     log("Split after:\n\n");
     return split_right(ordered_after(x));
   }
 
-  virtual Splay split_not_before(const T &x) {
+  virtual SplayTree split_not_before(const T &x) {
     log("Split not before:\n\n");
     return split_right(ordered_not_before(x));
   }
 
-  virtual Splay split_before(const T &x) {
+  virtual SplayTree split_before(const T &x) {
     log("Split before:\n\n");
     return split_left(ordered_before(x));
   }
 
-  virtual Splay split_not_after(const T &x) {
+  virtual SplayTree split_not_after(const T &x) {
     log("Split not after:\n\n");
     return split_left(ordered_not_after(x));
   }
