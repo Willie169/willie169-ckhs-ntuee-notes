@@ -936,5 +936,17 @@ public:
       log_forest(R);
       m->right = R;
     }
+    switch (old_side) {
+    case 1:
+      root->parent = old_parent;
+      old_parent->left = root;
+      break;
+    case 0:
+      root->parent = old_parent;
+      old_parent->right = root;
+      break;
+    default:
+      root->parent = nullptr;
+    }
   }
 };
