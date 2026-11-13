@@ -243,7 +243,11 @@ protected:
   }
 
 public:
-  void clear(Node *node) noexcept {
+  // recursive:
+  // >0: stack
+  // 0: try stack catch recursive
+  // <0: recursive
+  void clear(Node *node, signed char recursive = 0) noexcept {
     if (node == nullptr)
       return;
     if (root == node)
@@ -256,13 +260,21 @@ public:
       node->parent->right = nullptr;
       break;
     }
-    try {
+    auto stack_clear = [](Node *node) {
       std::vector<Node *> stack = preorder_node(node);
       for (auto it = stack.rbegin(); it != stack.rend(); ++it)
         delete *it;
-    } catch (...) {
+    };
+    if (recursive > 0)
+      stack_clear(node);
+    else if (recursive == 0) {
+      try {
+        stack_clear(node);
+      } catch (...) {
+        recursive_clear(node);
+      }
+    } else
       recursive_clear(node);
-    }
   }
 
   void clear() noexcept { clear(root); }
