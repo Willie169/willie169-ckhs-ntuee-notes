@@ -3,6 +3,7 @@
 #include <concepts>
 #include <cstddef>
 #include <functional>
+#include <istream>
 #include <ostream>
 #include <sstream>
 #include <stdexcept>
@@ -14,6 +15,9 @@
 
 template <class T, class Node> class BaseBinaryTreeNode {
 public:
+  using value_type = T;
+  using node_type = Node;
+
   T value;
   Node *parent;
   Node *left = nullptr;
@@ -27,8 +31,11 @@ public:
 
 template <class T>
 class BinaryTreeNode : public BaseBinaryTreeNode<T, BinaryTreeNode<T>> {
+public:
   using Base = BaseBinaryTreeNode<T, BinaryTreeNode<T>>;
   using Base::Base;
+  using value_type = T;
+  using node_type = Base::Node;
 };
 
 template <class T, class Node = BinaryTreeNode<T>> class BinaryTreeStatic {
@@ -202,12 +209,18 @@ public:
     if (outer)
       *oss << "\n\\end{forest}\n\\end{center}\n";
   }
-
-  // Take LaTeX forest representation: [value[left][right]]
-  // Output root node
-  // TODO
-  // static Node from_latex_forest(std::string_view s) {}
 };
+
+// Take LaTeX forest representation: [value[left][right]]
+// Output root node
+template <class T, class Node = BinaryTreeNode<T>>
+  requires requires(std::istream &is, T &value) {
+    { is >> value } -> std::same_as<std::istream &>;
+  }
+Node from_latex_forest(std::string s) {
+  std::erase_if(s, [](unsigned char c) { return std::isspace(c); });
+  // construct binary tree
+}
 
 template <class T, class Node = BinaryTreeNode<T>>
 class BinaryTree : public BinaryTreeStatic<T, Node> {
@@ -622,6 +635,8 @@ public:
   using Base::Base;
   using Base::left;
   using Base::right;
+  using value_type = T;
+  using node_type = Base::Node;
 
   mutable int height = 1; // leaf 1
 
