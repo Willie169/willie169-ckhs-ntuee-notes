@@ -1,10 +1,14 @@
 #pragma once
 #include <algorithm>
 #include <concepts>
+#include <cstddef>
 #include <functional>
 #include <ostream>
+#include <sstream>
 #include <stdexcept>
+#include <string>
 #include <string_view>
+#include <type_traits>
 #include <utility>
 #include <vector>
 
@@ -198,6 +202,11 @@ public:
     if (outer)
       *oss << "\n\\end{forest}\n\\end{center}\n";
   }
+
+  // Take LaTeX forest representation: [value[left][right]]
+  // Output root node
+  // TODO
+  // static Node from_latex_forest(std::string_view s) {}
 };
 
 template <class T, class Node = BinaryTreeNode<T>>
@@ -540,6 +549,8 @@ public:
   virtual std::pair<Node *, bool> insert(const T &x) {
     if (root == nullptr) {
       root = new Node(x);
+      log("Insert:\n");
+      log_forest();
       return {root, true};
     }
     Node *node = root;
@@ -547,20 +558,22 @@ public:
       if (comp(x, node->value)) {
         if (node->left == nullptr) {
           node->left = new Node(x, node);
+          log("Insert:\n");
+          log_forest();
           return {node->left, true};
         }
         node = node->left;
       } else if (comp(node->value, x)) {
         if (node->right == nullptr) {
           node->right = new Node(x, node);
+          log("Insert:\n");
+          log_forest();
           return {node->right, true};
         }
         node = node->right;
       } else
         return {node, false};
     }
-    log("Insert:\n");
-    log_forest();
   }
 
   // Return rebalance_start
