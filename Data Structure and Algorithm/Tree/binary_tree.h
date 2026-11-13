@@ -1084,7 +1084,8 @@ public:
   virtual std::pair<Node *, bool> top_down_insert(const T &x) {
     if (root == nullptr) {
       root = new Node(x);
-      log("Top-down insert:");
+      log("Top-down insert:\n");
+      log("Insert:");
       log_forest();
       return {root, true};
     }
@@ -1104,6 +1105,8 @@ public:
     }
     root->parent = node->parent;
     node->parent = root;
+    log("Insert:");
+    log_forest();
     return {root, false};
   }
 
