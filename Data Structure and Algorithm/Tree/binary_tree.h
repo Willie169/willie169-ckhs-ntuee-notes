@@ -895,32 +895,44 @@ public:
         if (m->left == nullptr)
           break;
         if (comp(m->left->value, x)) {
-          if (R == nullptr)
+          if (R == nullptr) {
             R = m;
-          else {
+            r = m;
+            m = m->left;
+            R->left = nullptr;
+            m->parent = nullptr;
+          } else {
             r->left = m;
+            m->parent = r;
+            r = m;
+            m = m->left;
+            m->parent = nullptr;
             log("Right tree:\n");
             log_forest(R);
           }
-          r = m;
-          m = m->left;
         } else
-          rotate_parent(m->left);
+          m = rotate_parent(m->left);
       } else if (comp(m->value, x)) {
         if (m->right == nullptr)
           break;
         if (comp(x, m->right->value)) {
-          if (L == nullptr)
+          if (L == nullptr) {
             L = m;
-          else {
+            l = m;
+            m = m->right;
+            L->right = nullptr;
+            m->parent = nullptr;
+          } else {
             l->right = m;
+            m->parent = l;
+            l = m;
+            m = m->right;
+            m->parent = nullptr;
             log("left tree:\n");
-            log_forest(l);
+            log_forest(L);
           }
-          l = m;
-          l = l->right;
         } else
-          rotate_parent(m->right);
+          m = rotate_parent(m->right);
       } else {
         found = true;
         break;
@@ -928,28 +940,33 @@ public:
     }
     root = m;
     if (L != nullptr) {
-      l->right = m->left;
-      log("left tree:\n");
-      log_forest(l);
+      if (m->left != nullptr) {
+        l->right = m->left;
+        m->left->parent = l;
+        log("left tree:\n");
+        log_forest(L);
+      }
       m->left = L;
+      L->parent = m;
     }
     if (R != nullptr) {
-      r->left = m->right;
-      log("Right tree:\n");
-      log_forest(R);
+      if (m->right != nullptr) {
+        r->left = m->right;
+        m->right->parent = r;
+        log("Right tree:\n");
+        log_forest(R);
+      }
       m->right = R;
+      R->parent = m;
     }
+    root->parent = old_parent;
     switch (old_side) {
     case 1:
-      root->parent = old_parent;
       old_parent->left = root;
       break;
     case 0:
-      root->parent = old_parent;
       old_parent->right = root;
       break;
-    default:
-      root->parent = nullptr;
     }
     return {root, found};
   }

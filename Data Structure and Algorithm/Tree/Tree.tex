@@ -538,11 +538,11 @@ Use working set theorem.
 \sssc{Top-down splay}
 An alternative implementation of splay that is done together with searching. Suppose we want to splay $x$. We start at the root and maintain two trees which are initially empty, left tree $L$ of nodes smaller than $x$ with current node $r$ and right tree $R$ of nodes larger than $x$ with current node $l$, during the traversal with current node $m$, which is initially the root of the tree, where the subtree whose root is $m$ is called middle tree $M$. In each step, there are three cases, each with two symmetric variants:
 \bit
-\item $x<=\operatorname{left}(m)$: We perform a rotation on the edge between $m$ and $\operatorname{left}(m)$.
-\item $x>=\operatorname{right}(m)$: We perform a rotation on the edge between $m$ and $\operatorname{right}(m)$.
-\item $\operatorname{left}(m)<x<m$: We connect $m$ as $\operatorname{left}(r)$ (or the root of $R$ if $R$ is empty), assign $m$ to $r$, and assign $\operatorname{left}(m)$ to $m$.
-\item $\operatorname{right}(m)>x>m$: We connect $m$ as $\operatorname{right}(l)$ (or the root of $L$ if $L$ is empty), assign $m$ to $l$, and assign $\operatorname{right}(m)$ to $m$.
-\item $x=m$, $x<m$ and $m$ has no left child, or $x>m$ and $m$ has no right child: The traversal stops at $m$. We take $m$ as the new root, and
+\item $x<=\operatorname{left}(m)$: We perform a rotation on the edge between $m$ and $\operatorname{left}(m)$, and assign the latter, node the parent of $m$, to $m$, and then remove the parent relation of $m$.
+\item $x>=\operatorname{right}(m)$: We perform a rotation on the edge between $m$ and $\operatorname{right}(m)$, and assign the latter, node the parent of $m$, to $m$.
+\item $\operatorname{left}(m)<x<m$: We connect $m$ as $\operatorname{left}(r)$ (or, if $R$ is empty, the root of $R$ and remove the left child relation of $R$ at the end of this step), assign $m$ to $r$, and assign $\operatorname{left}(m)$ to $m$, and then remove the parent relation of $m$.
+\item $\operatorname{right}(m)>x>m$: We connect $m$ as $\operatorname{right}(l)$ (or, if $L$ is empty, the root of $L$ and remove the right child relation of $L$ at the end of this step), assign $m$ to $l$, and assign $\operatorname{right}(m)$ to $m$, and then remove the parent relation of $m$.
+\item $x=m$, $x<m$ and $m$ has no left child, or $x>m$ and $m$ has no right child: The traversal stops at $m$. We take $m$ as the new root, and then
 \bit
 \item if $L$ is nonempty, connect $\operatorname{left}(m)$ as $\operatorname{right}(l)$, and connect the root of $L$ as $\operatorname{left}(m)$;
 \item if $R$ is nonempty, connect $\operatorname{right}(m)$ as $\operatorname{left}(r)$, and connect the root of $R$ as $\operatorname{right}(m)$.
