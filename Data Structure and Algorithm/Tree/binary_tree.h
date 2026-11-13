@@ -293,6 +293,7 @@ public:
 
   BinaryTree(Node *_root = nullptr, std::ostream *_oss = nullptr)
       : root(_root), oss(_oss) {}
+  explicit BinaryTree(std::ostream *_oss) : BinaryTree(nullptr, _oss) {}
 
   BinaryTree(const BinaryTree &) = delete;
 
@@ -419,7 +420,7 @@ public:
       child->right->parent = node;
     child->right = node;
     node->parent = child;
-    log("Rotate right:\n");
+    log("Rotate right:");
     log_forest();
     return child;
   }
@@ -435,7 +436,7 @@ public:
       child->left->parent = node;
     child->left = node;
     node->parent = child;
-    log("Rotate left:\n");
+    log("Rotate left:");
     log_forest();
     return child;
   }
@@ -477,11 +478,10 @@ protected:
   using Base::replace;
 
 public:
-  BST() : BST(nullptr, Compare(), nullptr) {}
-  explicit BST(const Compare &_comp, std::ostream *_oss = nullptr)
-      : BST(nullptr, _comp, _oss) {}
-  BST(Node *_root, const Compare &_comp, std::ostream *_oss = nullptr)
+  BST(Node *_root = nullptr, std::ostream *_oss = nullptr,
+      const Compare &_comp = Compare())
       : Base(_root, _oss), comp(_comp) {}
+  explicit BST(const Compare &_comp) : BST(nullptr, nullptr, _comp) {}
 
   BST(const BST &) = delete;
   BST &operator=(const BST &) = delete;
@@ -500,6 +500,7 @@ public:
   virtual std::pair<Node *, bool> search(const T &x) const {
     if (root == nullptr)
       return {nullptr, false};
+    log("Search:");
     Node *node = root;
     while (true) {
       if (comp(x, node->value)) {
@@ -612,7 +613,7 @@ public:
   virtual std::pair<Node *, bool> insert(const T &x) {
     if (root == nullptr) {
       root = new Node(x);
-      log("Insert:\n");
+      log("Insert:");
       log_forest();
       return {root, true};
     }
@@ -621,7 +622,7 @@ public:
       if (comp(x, node->value)) {
         if (node->left == nullptr) {
           node->left = new Node(x, node);
-          log("Insert:\n");
+          log("Insert:");
           log_forest();
           return {node->left, true};
         }
@@ -629,7 +630,7 @@ public:
       } else if (comp(node->value, x)) {
         if (node->right == nullptr) {
           node->right = new Node(x, node);
-          log("Insert:\n");
+          log("Insert:");
           log_forest();
           return {node->right, true};
         }
@@ -663,7 +664,7 @@ public:
     succ->left = node->left;
     succ->left->parent = succ;
     delete node;
-    log("Remove:\n");
+    log("Delete:");
     log_forest();
     return rebalance_start;
   }
@@ -742,19 +743,19 @@ public:
     if (bf > 1) {
       Node *child = node->left;
       if (Node::bf(child) < 0) { // LR
-        log("LR case left-then-right double rotation:\n\n");
+        log("LR case left-then-right double rotation:\n");
         rotate_left(child);
       } else // LL
-        log("LL case right single rotation:\n\n");
+        log("LL case right single rotation:\n");
       return rotate_right(node); // LL, LR
     }
     if (bf < -1) {
       Node *child = node->right;
       if (Node::bf(child) > 0) { // RL
-        log("RL case right-then-left double rotation:\n\n");
+        log("RL case right-then-left double rotation:\n");
         rotate_right(child);
       } else // RR
-        log("RR case left single rotation:\n\n");
+        log("RR case left single rotation:\n");
       return rotate_left(node); // RL, RR
     }
     if (node->parent == nullptr)
@@ -797,7 +798,6 @@ protected:
   using Base::replace;
 
 public:
-  SplayTree() : Base() {};
   SplayTree(const SplayTree &) = delete;
   SplayTree &operator=(const SplayTree &) = delete;
 
@@ -813,18 +813,18 @@ public:
       Node *grandparent = parent->parent;
       // Zig
       if (parent == root) {
-        log("Zig step:\n\n");
+        log("Zig step:\n");
         rotate_parent(node);
         // Zig-zig
       } else if ((parent->left == node && grandparent->left == parent) ||
                  (parent->right == node && grandparent->right == parent)) {
-        log("Zig-zig step:\n\n");
+        log("Zig-zig step:\n");
         rotate_parent(parent);
         rotate_parent(node);
       }
       // Zig-zag
       else {
-        log("Zig-zag step:\n\n");
+        log("Zig-zag step:\n");
         rotate_parent(node);
         rotate_parent(node);
       }
@@ -880,7 +880,7 @@ public:
       root->right = other;
       other->parent = root;
     }
-    log("Join right:\n");
+    log("Join right:");
     log_forest();
   }
 
@@ -895,12 +895,13 @@ public:
       root->left = other;
       other->parent = root;
     }
-    log("Join left:\n");
+    log("Join left:");
     log_forest();
   }
 
-  // Not return rebalance_start but always return nullptr
+  // Not return rebalance_start but always return nullptr if node != nullptr
   Node *remove_node(Node *node) override {
+    log("Delete:\n");
     if (node == nullptr)
       throw std::invalid_argument("Node is nullptr");
     Node *victim = splay(node);
@@ -918,11 +919,11 @@ public:
 protected:
   virtual SplayTree split_right(Node *other_root) {
     if (other_root == nullptr)
-      return SplayTree(nullptr, comp, oss);
+      return SplayTree(nullptr, oss, comp);
     replace(other_root, other_root->left);
     other_root->parent = nullptr;
     other_root->left = nullptr;
-    SplayTree result = SplayTree(other_root, comp, oss);
+    SplayTree result = SplayTree(other_root, oss, comp);
     log_forest();
     result.log_forest();
     return result;
@@ -930,11 +931,11 @@ protected:
 
   virtual SplayTree split_left(Node *other_root) {
     if (other_root == nullptr)
-      return SplayTree(nullptr, comp, oss);
+      return SplayTree(nullptr, oss, comp);
     replace(other_root, other_root->right);
     other_root->parent = nullptr;
     other_root->right = nullptr;
-    SplayTree result = SplayTree(other_root, comp, oss);
+    SplayTree result = SplayTree(other_root, oss, comp);
     log_forest();
     result.log_forest();
     return result;
@@ -942,29 +943,30 @@ protected:
 
 public:
   virtual SplayTree split_after(const T &x) {
-    log("Split after:\n\n");
+    log("Split after:\n");
     return split_right(ordered_after(x));
   }
 
   virtual SplayTree split_not_before(const T &x) {
-    log("Split not before:\n\n");
+    log("Split not before:\n");
     return split_right(ordered_not_before(x));
   }
 
   virtual SplayTree split_before(const T &x) {
-    log("Split before:\n\n");
+    log("Split before:\n");
     return split_left(ordered_before(x));
   }
 
   virtual SplayTree split_not_after(const T &x) {
-    log("Split not after:\n\n");
+    log("Split not after:\n");
     return split_left(ordered_not_after(x));
   }
 
   // O(h) worst case, O(log n) amortized
-  virtual std::pair<Node *, bool> top_down_splay_search(const T &x) const {
+  virtual std::pair<Node *, bool> top_down_search(const T &x) const {
     if (root == nullptr)
       return {nullptr, false};
+    log("Top-down search:\n");
     bool found = false;
     Node *old_parent = root->parent;
     signed char old_side = is_left_child(root);
@@ -990,7 +992,7 @@ public:
             r = m;
             m = m->left;
             m->parent = nullptr;
-            log("Right tree:\n");
+            log("Right tree:");
             log_forest(R);
           }
         } else
@@ -1011,7 +1013,7 @@ public:
             l = m;
             m = m->right;
             m->parent = nullptr;
-            log("left tree:\n");
+            log("left tree:");
             log_forest(L);
           }
         } else
@@ -1026,7 +1028,7 @@ public:
       if (m->left != nullptr) {
         l->right = m->left;
         m->left->parent = l;
-        log("left tree:\n");
+        log("left tree:");
         log_forest(L);
       }
       m->left = L;
@@ -1036,7 +1038,7 @@ public:
       if (m->right != nullptr) {
         r->left = m->right;
         m->right->parent = r;
-        log("Right tree:\n");
+        log("Right tree:");
         log_forest(R);
       }
       m->right = R;
@@ -1052,5 +1054,103 @@ public:
       break;
     }
     return {root, found};
+  }
+
+  virtual Node *top_down_find_min(Node *node) const {
+    if (node == nullptr)
+      return nullptr;
+    while (node->left != nullptr)
+      node = rotate_parent(node->left);
+    return root;
+  }
+
+  virtual Node *top_down_find_max(Node *node) const {
+    if (node == nullptr)
+      return nullptr;
+    while (node->right != nullptr)
+      node = rotate_parent(node->right);
+    return root;
+  }
+
+  // O(h) worst case, O(log n) amortized
+  virtual Node *top_down_find_min() const { return top_down_find_min(root); }
+  virtual Node *top_down_find_max() const { return top_down_find_max(root); }
+
+  // TODO: top_down_ordered ...
+
+  // TODO
+  // Return node, inserted
+  // O(h)
+  virtual std::pair<Node *, bool> top_down_insert(const T &x) {
+    if (root == nullptr) {
+      root = new Node(x);
+      log("Top-down insert:");
+      log_forest();
+      return {root, true};
+    }
+    log("Top-down insert:\n");
+    auto [node, found] = top_down_search(x);
+    if (found)
+      return {root, false};
+    root = new Node(x);
+    if (comp(x, node->value)) {
+      root->left = node->left;
+      node->left = nullptr;
+      root->right = node;
+    } else {
+      root->right = node->right;
+      node->right = nullptr;
+      root->left = node;
+    }
+    root->parent = node->parent;
+    node->parent = root;
+    return {root, false};
+  }
+
+  virtual void top_down_join_right(Node *other) {
+    if (other == nullptr)
+      return;
+    if (root == nullptr) {
+      root = other;
+      other->parent = nullptr;
+    } else {
+      top_down_find_max();
+      root->right = other;
+      other->parent = root;
+    }
+    log("Top-down join right:");
+    log_forest();
+  }
+
+  virtual void top_down_join_left(Node *other) {
+    if (other == nullptr)
+      return;
+    if (root == nullptr) {
+      root = other;
+      other->parent = nullptr;
+    } else {
+      top_down_find_min();
+      root->left = other;
+      other->parent = root;
+    }
+    log("Top-dowm join left:");
+    log_forest();
+  }
+
+  // O(h) worst case, O(log n) amortized
+  virtual std::pair<Node *, bool> top_down_remove(const T &x) {
+    log("Top-down delete:\n");
+    auto [victim, found] = top_down_search(x);
+    if (found == false)
+      return {victim, false};
+    Node *right = victim->right;
+    if (victim->left != nullptr) {
+      replace(victim, victim->left, true);
+      if (right != nullptr)
+        right->parent = nullptr;
+      top_down_join_right(right);
+    } else
+      replace(victim, right, true);
+    return {nullptr, true};
   }
 };
