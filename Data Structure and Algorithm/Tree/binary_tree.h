@@ -1,5 +1,6 @@
 #pragma once
 #include <algorithm>
+#include <cctype>
 #include <concepts>
 #include <cstddef>
 #include <functional>
@@ -217,9 +218,58 @@ template <class T, class Node = BinaryTreeNode<T>>
   requires requires(std::istream &is, T &value) {
     { is >> value } -> std::same_as<std::istream &>;
   }
-Node from_latex_forest(std::string s) {
+Node *from_latex_forest(std::string s) {
   std::erase_if(s, [](unsigned char c) { return std::isspace(c); });
-  // construct binary tree
+  if (s.empty())
+    return nullptr;
+  std::size_t pos = 0;
+  std::vector<Node *> owned;
+  auto consume = [&](char expected) {
+    if (pos >= s.size() || s[pos] != expected)
+      throw std::invalid_argument(std::string("from_latex_forest: expected '") +
+                                  expected + "'");
+    ++pos;
+  };
+  auto parse_node = [&](auto &&self) -> Node * {
+    consume('[');
+    if (pos + 9 <= s.size() && s[pos] == ',' &&
+        s.compare(pos + 1, 7, "phantom") == 0 && s[pos + 8] == ']') {
+      pos += 9;
+      return nullptr;
+    }
+    std::size_t start = pos;
+    while (pos < s.size() && s[pos] != '[' && s[pos] != ']')
+      ++pos;
+    std::string value_str = s.substr(start, pos - start);
+    std::istringstream vs(value_str);
+    T value{};
+    if (!(vs >> value))
+      throw std::invalid_argument("from_latex_forest: bad value '" + value_str +
+                                  "'");
+    Node *node = new Node(value);
+    owned.push_back(node);
+    if (pos < s.size() && s[pos] == '[') {
+      node->left = self(self);
+      if (node->left)
+        node->left->parent = node;
+      node->right = self(self);
+      if (node->right)
+        node->right->parent = node;
+    }
+    consume(']');
+    return node;
+  };
+  Node *root = nullptr;
+  try {
+    root = parse_node(parse_node);
+    if (pos != s.size())
+      throw std::invalid_argument("from_latex_forest: trailing characters");
+  } catch (...) {
+    for (Node *n : owned)
+      delete n;
+    throw;
+  }
+  return root;
 }
 
 template <class T, class Node = BinaryTreeNode<T>>
