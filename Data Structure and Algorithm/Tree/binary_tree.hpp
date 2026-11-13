@@ -721,6 +721,7 @@ public:
   Splay(Splay &&) = default;
   Splay &operator=(Splay &&) = default;
 
+  // O(h) worst case, O(log n) amortized
   virtual Node *splay(Node *node) const {
     if (node == nullptr)
       return nullptr;
@@ -875,5 +876,18 @@ public:
   virtual Splay split_not_after(const T &x) {
     log("Split not after:\n\n");
     return split_left(ordered_not_after(x));
+  }
+
+  // O(h) worst case, O(log n) amortized
+  virtual Node *topdown_splay(const T &x) const {
+    if (root == nullptr)
+      return nullptr;
+    Node *old_parent = root->parent;
+    signed char old_side = is_left_child(root);
+    Node *L_root = nullptr;
+    Node *l = nullptr;
+    Node *R_root = nullptr;
+    Node *r = nullptr;
+    Node *m = root;
   }
 };

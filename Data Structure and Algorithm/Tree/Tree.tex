@@ -25,7 +25,7 @@ If not empty, a tree is recursively defined as a distinguished node $r$ called r
 \item Ancestors: The ancestors of a node is recursively defined as itself for root and itself and the ancestors of its parent for non-root nodes.
 \item Descendants: The descendants of a node is recursively defined as itself for leaves and itself and the descendants of its children for internal nodes.
 \item Level: Nodes of the same depth are called a level. Levels are ordered by depth. The left-to-right order of nodes in a level is defined recursively to, if they are siblings, follow that of siblings; otherwise follow that of their parents.
-\item Subtree: A tree consisting of all descendants of a node is called a subtree. The left-to-right order of subtrees whose roots are of the same depth are defined as that of their roots. A subtree whose root is a child of a node is called a subtree of the node.
+\item Subtree: A tree consisting of all descendants of a node is called a subtree. The left-to-right order of subtrees whose roots are of the same depth are defined as that of their roots. A subtree whose root is a child of a node is called a subtree of the node or rooted at the node.
 \item The umber of nodes in a tree is denoted $n$.
 \eit
 \sssc{Tree representation}
@@ -88,12 +88,12 @@ The statement that a binary tree with distinct values can be uniquely determined
 \bpr
 No. A counterexample is the following two binary trees
 \begin{center}
-\begin{forest}
-[1[2][,phantom]]
-\end{forest}
-\begin{forest}
-[1[,phantom][2]]
-\end{forest}
+	\begin{forest}
+		[1[2][,phantom]]
+	\end{forest}
+	\begin{forest}
+		[1[,phantom][2]]
+	\end{forest}
 \end{center}
 Both trees have preorder traversal 1, 2, and postorder traversal 2, 1, but they are different.
 \epr
@@ -199,20 +199,20 @@ Using generating function:
 \[C(0)=\mp\frac{1}{\sqrt{1-4x}}=T(0)=1\]
 \[C(x)=\frac{1-\sqrt{1-4x}}{2x}\]
 \[\ba
-\sqrt{1-4x}&=\sum_{k=0}^{\infty}\binom{0.5}{k}(-4x)^k\\
-           &=1+\sum_{k=1}^{\infty}\frac{\prod_{i=0}^{k-1}(0.5-i)}{k!}(-4x)^k\\
-           &=1+\sum_{k=1}^{\infty}\frac{2^k\prod_{i=0}^{k-1}(2i-1)}{k!}x^k\\
-           &=1+\sum_{k=1}^{\infty}-\frac{2^k\prod_{i=1}^{k-1}(2i-1)}{k!}x^k\\
-           &=1+\sum_{k=1}^{\infty}-\frac{2^k\prod_{i=1}^{2k-2}i}{k!\prod_{i=1}^{k-1}2i}x^k\\
-           &=1+\sum_{k=1}^{\infty}-\frac{2^k(2k-2)!}{k!2^{k-1}(k-1)!}x^k\\
-           &=1+\sum_{k=1}^{\infty}-\frac{2(2k-2)!}{k!(k-1)!}x^k
-\ea\]
+	\sqrt{1-4x}&=\sum_{k=0}^{\infty}\binom{0.5}{k}(-4x)^k\\
+	&=1+\sum_{k=1}^{\infty}\frac{\prod_{i=0}^{k-1}(0.5-i)}{k!}(-4x)^k\\
+	&=1+\sum_{k=1}^{\infty}\frac{2^k\prod_{i=0}^{k-1}(2i-1)}{k!}x^k\\
+	&=1+\sum_{k=1}^{\infty}-\frac{2^k\prod_{i=1}^{k-1}(2i-1)}{k!}x^k\\
+	&=1+\sum_{k=1}^{\infty}-\frac{2^k\prod_{i=1}^{2k-2}i}{k!\prod_{i=1}^{k-1}2i}x^k\\
+	&=1+\sum_{k=1}^{\infty}-\frac{2^k(2k-2)!}{k!2^{k-1}(k-1)!}x^k\\
+	&=1+\sum_{k=1}^{\infty}-\frac{2(2k-2)!}{k!(k-1)!}x^k
+	\ea\]
 \[\ba
-C(x)&=\frac{1-\sqrt{1-4x}}{2x}\\
-    &=\sum_{k=1}^{\infty}\frac{(2k-2)!}{k!(k-1)!}x^{k-1}\\
-    &=\sum_{n=0}^{\infty}\frac{(2n)!}{(n+1)!n!}x^n\\
-    &=\sum_{n=0}^{\infty}\frac{1}{(n+1)}\binom{2n}{n}x^n
-\ea\]
+	C(x)&=\frac{1-\sqrt{1-4x}}{2x}\\
+	&=\sum_{k=1}^{\infty}\frac{(2k-2)!}{k!(k-1)!}x^{k-1}\\
+	&=\sum_{n=0}^{\infty}\frac{(2n)!}{(n+1)!n!}x^n\\
+	&=\sum_{n=0}^{\infty}\frac{1}{(n+1)}\binom{2n}{n}x^n
+	\ea\]
 \[T_n=\frac{1}{(n+1)}\binom{2n}{n},\quad n\in\bbN_0\]
 \epr
 \ssc{AVL tree (Adelson-Velsky and Landis tree)}
@@ -463,12 +463,12 @@ Hence
 \eit
 When splaying a node $x$, zero or more 2-level splay steps followed by zero or one 1-level splay step is conducted. Let $r_2(x)$ be the rank of $x$ just after the last 2-level splay step and $r_f(x)$ be the final rank of $x$. The amortized cost $A$ of splaying $x$ is
 \[\ba
-A&\le 1+r_f(x)-r_2(x)+3(r_2(x)-r(x))\\
- &\le 1+3(r_f(x)-r_2(x))+3(r_2(x)-r(x))\\
- &=1+3(r_f(x)-r(x))\\
- &\le 1+3(\log_2n-r(x))\\
- &=O(\log n)
-\ea\]
+	A&\le 1+r_f(x)-r_2(x)+3(r_2(x)-r(x))\\
+	&\le 1+3(r_f(x)-r_2(x))+3(r_2(x)-r(x))\\
+	&=1+3(r_f(x)-r(x))\\
+	&\le 1+3(\log_2n-r(x))\\
+	&=O(\log n)
+	\ea\]
 For a sequence of $m$ accesses in a splay tree $T$, we can bound the total actual cost with
 \[\sum_{i=1}^mC_i=P(T_0)-P(T_m)+\sum_{i=1}^mA_i\]
 For every node $x$,
@@ -536,13 +536,13 @@ Use working set theorem.
 \[O\qty(m+n\log n+\sum_{x\in S}\log(t(x)+1))=O(m+n\log n+m\log k)\]
 \epr
 \sssc{Top-down splay}
-An alternative implementation of splay that is done together with searching. Suppose we want to splay $x$. We start at the root and maintain two trees which are initially empty, left tree $L$ of nodes smaller than $x$ and right tree $R$ of nodes larger than $x$, during the traversal. In each step with current node $c$, there are three cases, each with two symmetric variants, where we will describe the former and the latter is the former with left and right exchanged and $L$ and $R$ exchanged:
+An alternative implementation of splay that is done together with searching. Suppose we want to splay $x$. We start at the root and maintain two trees which are initially empty, left tree $L$ of nodes smaller than $x$ with current node $r$ and right tree $R$ of nodes larger than $x$ with current node $l$, during the traversal with current node $m$, which is initially the root of the tree, where the subtree whose root is $m$ is called middle tree $M$. In each step, there are three cases, each with two symmetric variants:
 \bit
-\item $x<\operatorname{left}(c)$: We perform a rotation on the edge between $c$ and $\operatorname{left}(c)$ and then a rotation one the edge $\operatorname{left}(\operatorname{left}(c))$ and $\operatorname{left}(c)$, and then assign $\operatorname{left}(c)$ to $c$.
-\item $x>\operatorname{right}(c)$: We perform a rotation on the edge between $c$ and $\operatorname{right}(c)$ and then a rotation one the edge $\operatorname{right}(\operatorname{right}(c))$ and $\operatorname{right}(c)$, and then assign $\operatorname{right}(c)$ to $c$.
-\item $\operatorname{left}(c)<x<c$: We connect $c$ into $R$, and then assign $\operatorname{left}(c)$ to $c$.
-\item $\operatorname{right}(c)>x>c$: We connect $c$ into $L$, and then assign $\operatorname{right}(c)$ to $c$.
-\item $x=c$, $x<c$ and $c$ has no left child, or $x>c$ and $c$ has no right child: The traversal stops at $c$. We take $c$ as the new root, and $L$ and $R$ as left and right subtrees of $c$.
+\item $x<\operatorname{left}(m)$: We perform a rotation on the edge between $m$ and $\operatorname{left}(m)$.
+\item $x>\operatorname{right}(m)$: We perform a rotation on the edge between $m$ and $\operatorname{right}(m)$.
+\item $\operatorname{left}(m)<x<m$: We connect $m$ as $\operatorname{left}(r)$, assign $m$ to $r$, and assign $\operatorname{left}(m)$ to $m$.
+\item $\operatorname{right}(m)>x>m$: We connect $m$ as $\operatorname{right}(l)$, assign $m$ to $l$, and assign $\operatorname{right}(m)$ to $m$.
+\item $x=m$, $x<m$ and $m$ has no left child, or $x>m$ and $m$ has no right child: The traversal stops at $m$. We take $m$ as the new root, connect $\operatorname{left}(m)$ as $\operatorname{right}(l)$, connect $\operatorname{right}(m)$ as $\operatorname{left}(r)$, connect the root of $L$ as $\operatorname{left}(m)$, and connect the root of $R$ as $\operatorname{right}(m)$.
 \eit
 Top-down splay has the same worst-case and amortized searching, insertion, and deletion time complexities as bottom-up splay and $O(1)$ extra space.
 \ssc{An implementation of binary tree, BST, ASL tree, and splay tree in C++}
