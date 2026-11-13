@@ -879,15 +879,62 @@ public:
   }
 
   // O(h) worst case, O(log n) amortized
-  virtual Node *topdown_splay(const T &x) const {
+  virtual Node *top_down_splay(const T &x) const {
     if (root == nullptr)
       return nullptr;
     Node *old_parent = root->parent;
     signed char old_side = is_left_child(root);
-    Node *L_root = nullptr;
+    Node *L = nullptr;
     Node *l = nullptr;
-    Node *R_root = nullptr;
+    Node *R = nullptr;
     Node *r = nullptr;
     Node *m = root;
+    while (true) {
+      if (comp(x, m->value)) {
+        if (m->left == nullptr)
+          break;
+        if (comp(m->left->value, x)) {
+          if (R == nullptr)
+            R = m;
+          else {
+            r->left = m;
+            log("Right tree:\n");
+            log_forest(R);
+          }
+          r = m;
+          m = m->left;
+        } else
+          rotate_parent(m->left);
+      } else if (comp(m->value, x)) {
+        if (m->right == nullptr)
+          break;
+        if (comp(x, m->right->value)) {
+          if (L == nullptr)
+            L = m;
+          else {
+            l->right = m;
+            log("left tree:\n");
+            log_forest(l);
+          }
+          l = m;
+          l = l->right;
+        } else
+          rotate_parent(m->right);
+      } else
+        break;
+    }
+    root = m;
+    if (L != nullptr) {
+      l->right = m->left;
+      log("left tree:\n");
+      log_forest(l);
+      m->left = L;
+    }
+    if (R != nullptr) {
+      r->left = m->right;
+      log("Right tree:\n");
+      log_forest(R);
+      m->right = R;
+    }
   }
 };
