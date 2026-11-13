@@ -638,6 +638,7 @@ protected:
   using Base::replace;
 
 public:
+  Splay() : Base() {};
   Splay(const Splay &) = delete;
   Splay &operator=(const Splay &) = delete;
 
@@ -676,8 +677,8 @@ public:
     return splay(Base::find_max(node));
   }
 
-  virtual Node *find_min() const { return find_min(root); }
-  virtual Node *find_max() const { return find_max(root); }
+  Node *find_min() const override { return find_min(root); }
+  Node *find_max() const override { return find_max(root); }
 
   Node *ordered_after(const T &x) const override {
     return splay(Base::ordered_after(x));
@@ -697,6 +698,11 @@ public:
 
   std::pair<Node *, bool> search(const T &x) const override {
     auto [result, second] = Base::search(x);
+    return {splay(result), second};
+  }
+
+  std::pair<Node *, bool> insert(const T &x) override {
+    auto [result, second] = Base::insert(x);
     return {splay(result), second};
   }
 
