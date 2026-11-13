@@ -588,12 +588,14 @@ public:
     Node *child = Base::rotate_left(node);
     node->update_height();
     child->update_height();
+    return child;
   }
 
   Node *rotate_right(Node *node) const override {
     Node *child = Base::rotate_right(node);
     node->update_height();
     child->update_height();
+    return child;
   }
 
   // Rebalance until rebalanced once or parent == nullptr
