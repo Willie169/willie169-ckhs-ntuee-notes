@@ -879,9 +879,10 @@ public:
   }
 
   // O(h) worst case, O(log n) amortized
-  virtual Node *top_down_splay(const T &x) const {
+  virtual std::pair<Node *, bool> top_down_splay_search(const T &x) const {
     if (root == nullptr)
-      return nullptr;
+      return {nullptr, false};
+    bool found = false;
     Node *old_parent = root->parent;
     signed char old_side = is_left_child(root);
     Node *L = nullptr;
@@ -920,8 +921,10 @@ public:
           l = l->right;
         } else
           rotate_parent(m->right);
-      } else
+      } else {
+        found = true;
         break;
+      }
     }
     root = m;
     if (L != nullptr) {
@@ -948,5 +951,6 @@ public:
     default:
       root->parent = nullptr;
     }
+    return {root, found};
   }
 };
