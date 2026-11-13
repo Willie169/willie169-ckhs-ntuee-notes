@@ -178,21 +178,25 @@ public:
 
   // LaTeX forest representation: [value[left][right]]
   // A missing child whose sibling exists is emitted as [,phantom]
-  static void latex_forest(Node *node, std::ostream *oss) {
+  static void latex_forest(Node *node, std::ostream *oss, bool outer = true) {
     if (node == nullptr || oss == nullptr)
       return;
-    *oss << "\\begin{center}\n\\begin{forest}\n[" << node->value;
+    if (outer)
+      *oss << "\\begin{center}\n\\begin{forest}\n";
+    *oss << "[" << node->value;
     bool has_left = (node->left != nullptr);
     bool has_right = (node->right != nullptr);
     if (has_left)
-      latex_forest(node->left, oss);
+      latex_forest(node->left, oss, false);
     else if (has_right)
       *oss << "[,phantom]";
     if (has_right)
-      latex_forest(node->right, oss);
+      latex_forest(node->right, oss, false);
     else if (has_left)
       *oss << "[,phantom]";
-    *oss << "]\\end{forest}\n\\end{center}\n";
+    *oss << "]";
+    if (outer)
+      *oss << "\n\\end{forest}\n\\end{center}\n";
   }
 };
 
@@ -598,7 +602,8 @@ public:
   }
 };
 
-template <class T> class AVLTreeNode : public BaseBinaryTreeNode<T, AVLTreeNode<T>> {
+template <class T>
+class AVLTreeNode : public BaseBinaryTreeNode<T, AVLTreeNode<T>> {
 public:
   using Base = BaseBinaryTreeNode<T, AVLTreeNode<T>>;
   using Base::Base;
