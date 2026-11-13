@@ -760,6 +760,7 @@ public:
     return nullptr;
   }
 
+protected:
   virtual Splay split_right(Node *other_root) {
     if (other_root == nullptr)
       return Splay(nullptr, comp);
@@ -778,6 +779,7 @@ public:
     return Splay(other_root, comp);
   }
 
+public:
   virtual Splay split_after(const T &x) {
     return split_right(ordered_after(x));
   }
