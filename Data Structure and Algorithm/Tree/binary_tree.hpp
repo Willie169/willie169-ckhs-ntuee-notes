@@ -1,3 +1,4 @@
+#pragma once
 #include <algorithm>
 #include <concepts>
 #include <functional>
@@ -748,51 +749,39 @@ public:
     return nullptr;
   }
 
-  virtual Splay split_after(const T &x) {
-    Node *other_root = ordered_after(x);
+  virtual Splay split_right(Node *other_root) {
     if (other_root == nullptr)
       return Splay(nullptr, comp);
-    root = root->left;
-    if (root != nullptr)
-      root->parent = other_root->parent;
+    replace(other_root, other_root->left);
     other_root->parent = nullptr;
     other_root->left = nullptr;
+    other_root->update();
     return Splay(other_root, comp);
+  }
+
+  virtual Splay split_left(Node *other_root) {
+    if (other_root == nullptr)
+      return Splay(nullptr, comp);
+    replace(other_root, other_root->right);
+    other_root->parent = nullptr;
+    other_root->right = nullptr;
+    other_root->update();
+    return Splay(other_root, comp);
+  }
+
+  virtual Splay split_after(const T &x) {
+    return split_right(ordered_after(x));
   }
 
   virtual Splay split_not_before(const T &x) {
-    Node *other_root = ordered_not_before(x);
-    if (other_root == nullptr)
-      return Splay(nullptr, comp);
-    root = root->left;
-    if (root != nullptr)
-      root->parent = other_root->parent;
-    other_root->parent = nullptr;
-    other_root->left = nullptr;
-    return Splay(other_root, comp);
+    return split_right(ordered_not_before(x));
   }
 
   virtual Splay split_before(const T &x) {
-    Node *other_root = ordered_before(x);
-    if (other_root == nullptr)
-      return Splay(nullptr, comp);
-    root = root->right;
-    if (root != nullptr)
-      root->parent = other_root->parent;
-    other_root->parent = nullptr;
-    other_root->right = nullptr;
-    return Splay(other_root, comp);
+    return split_left(ordered_before(x));
   }
 
   virtual Splay split_not_after(const T &x) {
-    Node *other_root = ordered_not_after(x);
-    if (other_root == nullptr)
-      return Splay(nullptr, comp);
-    root = root->right;
-    if (root != nullptr)
-      root->parent = other_root->parent;
-    other_root->parent = nullptr;
-    other_root->right = nullptr;
-    return Splay(other_root, comp);
+    return split_left(ordered_not_after(x));
   }
 };

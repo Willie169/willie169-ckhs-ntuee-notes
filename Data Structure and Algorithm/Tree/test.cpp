@@ -309,9 +309,11 @@ void test_rotations(bool sub) {
     default:
       if (!sub && x == t.root)
         CHECK_THROWS(t.rotate_parent(x));
-      Node *p = x->parent;
-      CHECK(t.rotate_parent(x) == x);
-      CHECK(p->parent == x);
+      else {
+        Node *p = x->parent;
+        CHECK(t.rotate_parent(x) == x);
+        CHECK(p->parent == x);
+      }
     }
     validate(t, expected);
     if (sub)
