@@ -294,16 +294,16 @@ public:
 
   BinaryTree(Node *_root = nullptr, std::ostream *_oss = nullptr)
       : root(_root), oss(_oss) {}
-  explicit BinaryTree(std::ostream *_oss) : BinaryTree(nullptr, _oss) {}
 
   BinaryTree(const BinaryTree &) = delete;
 
   BinaryTree(BinaryTree &&other) noexcept
-      : root(std::exchange(other.root, nullptr)) {}
+      : root(std::exchange(other.root, nullptr)),
+        oss(std::exchange(other.oss, nullptr)) {}
 
   void set_logger(std::ostream *_oss) { oss = _oss; }
 
-  bool is_empty() { return root == nullptr; }
+  bool is_empty() const { return root == nullptr; }
 
   // O(n)
   std::vector<T> preorder() const { return preorder(root); }
@@ -646,10 +646,16 @@ public:
     if (node == nullptr)
       throw std::invalid_argument("Node is nullptr");
     if (node->left == nullptr) {
-      return replace(node, node->right, true);
+      log("Delete:");
+      Node *result = replace(node, node->right, true);
+      log_forest();
+      return result;
     }
     if (node->right == nullptr) {
-      return replace(node, node->left, true);
+      log("Delete:");
+      Node *result = replace(node, node->left, true);
+      log_forest();
+      return result;
     }
     Node *succ = inorder_successor(node);
     Node *rebalance_start;
@@ -988,9 +994,11 @@ public:
         } else
           log("LR zig-zag step:\n");
         log("Link right:\n");
-        if (R != nullptr)
+        if (R != nullptr) {
           r->left = root;
-        else {
+          root->parent = r;
+          r = r->left;
+        } else {
           R = root;
           r = R;
         }
@@ -1078,9 +1086,11 @@ public:
       if (root->left == nullptr)
         break;
       log("Link right:\n");
-      if (R != nullptr)
+      if (R != nullptr) {
         r->left = root;
-      else {
+        root->parent = r;
+        r = r->left;
+      } else {
         R = root;
         r = R;
       }
@@ -1132,9 +1142,11 @@ public:
       if (root->right == nullptr)
         break;
       log("Link left:\n");
-      if (L != nullptr)
+      if (L != nullptr) {
         l->right = root;
-      else {
+        root->parent = l;
+        l = l->right;
+      } else {
         L = root;
         l = L;
       }
@@ -1193,10 +1205,18 @@ public:
       root->left = node;
     }
     root->parent = node->parent;
+    switch (is_left_child(node)) {
+    case 1:
+      node->parent->left = root;
+      break;
+    case 0:
+      node->parent->right = root;
+      break;
+    }
     node->parent = root;
     log("Insert:");
     log_forest();
-    return {root, false};
+    return {root, true};
   }
 
   virtual void top_down_join_right(Node *other) {

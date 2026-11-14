@@ -538,8 +538,8 @@ Use working set theorem.
 \sssc{Top-down splay}
 An alternative implementation of splay that is done together with traversal from root to the node $x$ to be accessed. Top-down splay also consists of a sequence of splay steps. We start at the root and maintain two trees, left tree $L$ of nodes smaller than $x$ and right tree $R$ of nodes larger than $x$. The original tree is called middle or center tree. In each step, the current node in the middle tree is denoted $m$, which is root of the original tree, the current node in the left tree is denoted $l$, and the current node of the right tree is denoted $r$. We first define linking, which has two symmetric variants:
 \bit
-\item Right linking: If $R$ is nonempty, connect $m$ as the left child of $r$; if $R$ is empty, assign $m$ as both the root of $R$ and $r$; and then detach the left child of $m$ and assign it as the new $m$.
-\item Left linking: If $L$ is nonempty, connect $m$ as the right child of $l$; if $L$ is empty, assign $m$ as both the root of $L$ and $l$; and then detach the right child of $m$ and assign it as the new $m$.
+\item Right linking: If $R$ is nonempty, connect $m$ as the left child of $r$ and then assign $r$ as it; if $R$ is empty, assign $m$ as both the root of $R$ and $r$; and then detach the left child of $m$ and assign it as the new $m$.
+\item Left linking: If $L$ is nonempty, connect $m$ as the right child of $l$ and then assign $l$ as it; if $L$ is empty, assign $m$ as both the root of $L$ and $l$; and then detach the right child of $m$ and assign it as the new $m$.
 \eit
 There are three types of splay steps, each of which has two symmetric variants:
 \bit
