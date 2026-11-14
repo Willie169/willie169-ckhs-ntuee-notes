@@ -26,15 +26,15 @@ It has random access and popping back in $O(1)$ time, pushing back in amortized 
 \sssc{Amortized analysis}
 Let the number of elements be $n$, the capacity be $c$, and the doubling factor be $k>1$. Let the dynamic array start at $c=1$. Let the cost of inserting an element without resizing and the cost of moving each element to a new location both be 1.
 
-Define potential function $P(n,c)$ as
+Define the potential function $P(n,c)$ as
 \[P(n,c)=-\frac{1}{k-1}c\]
 For an insertion $i$, let the potential function before and after be $P_{i-1}$ and $P_i$, the actual cost be $C_i$, and amortized cost be $A_i$.
 
-For an insertion without resizing is
+For an insertion without resizing,
 \[C_i=1\]
 \[P_i-P_{i-1}=0\]
 \[A_i=1\]
-For an insertion with resizing is
+For an insertion with resizing,
 \[C_i=n+1\]
 \[P_i-P_{i-1}=-\frac{kn-n}{k-1}=-n\]
 \[A_i=1\]
