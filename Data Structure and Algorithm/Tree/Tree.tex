@@ -537,34 +537,28 @@ Use working set theorem.
 \epr
 \sssc{Top-down splay}
 An alternative implementation of splay that is done together with traversal from root to the node $x$ to be accessed. Top-down splay also consists of a sequence of splay steps. We start at the root and maintain two trees, left tree $L$ of nodes smaller than $x$ and right tree $R$ of nodes larger than $x$. The original tree is called middle or center tree. In each step, the current node in the middle tree is denoted $m$, which is root of the original tree, the current node in the left tree is denoted $l$, and the current node of the right tree is denoted $r$. We first define linking, which has two symmetric variants:
-
-
+\bit
+\item Right linking: If $R$ is nonempty, connect $m$ as the left child of $r$; if $R$ is empty, assign $m$ as both the root of $R$ and $r$; and then detach the left child of $m$ and assign it as the new $m$.
+\item Left linking: If $L$ is nonempty, connect $m$ as the right child of $l$; if $L$ is empty, assign $m$ as both the root of $L$ and $l$; and then detach the right child of $m$ and assign it as the new $m$.
+\eit
 There are three types of splay steps, each of which has two symmetric variants:
 \bit
 \item LL case zig-zig step: This is done when $x$ is in $\operatorname{left}(\operatorname{left})(m)$, i.e., $x<m.\operatorname{left}$. We perform a right rotation on the edge between $m$ and its left child, and assign its original left child, now parent, as the new $m$, and then,
 \bit
-\item if $m$ has left child, we connect $m$ as the left child of $r$ (or, if $R$ is empty, the root of $R$, and assign $r$ as it), and detach its left child and assign as the new $m$, called right linking.
-\item if $m$ has no left child, go to the last step.
+\item if $m$ has left child, we perform a right linking.
+\item if $m$ has no left child, we stop the traversal and go to the last step.
 \eit
 \item RR case zig-zig step: This is done when $x$ is in $\operatorname{right}(\operatorname{right})(m)$, i.e., $x>m.\operatorname{right}$. We perform a left rotation on the edge between $m$ and its right child, and assign its original right child, now parent, as the new $m$, and then,
 \bit
-\item if $m$ has right child, we connect $m$ as the right child of $l$ (or, if $L$ is empty, the root of $L$, and assign $l$ as it), and detach its right child and assign as the new $m$, called left linking.
-\item if $m$ has no right child, go to the last step.
+\item if $m$ has right child, we perform a left linking.
+\item if $m$ has no right child, we stop the traversal and go to the last step.
 \eit
-\item LR case zig-zag step: This is done when $x$ is in $\operatorname{right}(\operatorname{left})(m)$, i.e., $m>x\ge m.\operatorname{left}$. We perform a 
-\eit
-
-
-Old:
-In each step, there are three cases, each with two symmetric variants:
+\item LR case zig-zag step: This is done when $x$ is in $\operatorname{right}(\operatorname{left})(m)$, i.e., $m>x\ge m.\operatorname{left}$. We perform a right linking.
+\item RL case zig-zag step: This is done when $x$ is in $\operatorname{left}(\operatorname{right})(m)$, i.e., $m<x\le m.\operatorname{right}$. We perform a left linking.
+\item $x=m$, $x<m$ and $m$ has no left child, or $x>m$ and $m$ has no right child: We stop the traversal and go to the last step.
+\item Last step:
 \bit
-\item $x<=\operatorname{left}(m)$: We perform a rotation on the edge between $m$ and $\operatorname{left}(m)$, and assign the latter, node the parent of $m$, to $m$, and then remove the parent relation of $m$.
-\item $x>=\operatorname{right}(m)$: We perform a rotation on the edge between $m$ and $\operatorname{right}(m)$, and assign the latter, node the parent of $m$, to $m$.
-\item $\operatorname{left}(m)<x<m$: We connect $m$ as $\operatorname{left}(r)$ , assign $m$ to $r$, and assign $\operatorname{left}(m)$ to $m$, and then remove the parent relation of $m$.
-\item $\operatorname{right}(m)>x>m$: We connect $m$ as $\operatorname{right}(l)$ (or, if $L$ is empty, the root of $L$ and remove the right child relation of $L$ at the end of this step), assign $m$ to $l$, and assign $\operatorname{right}(m)$ to $m$, and then remove the parent relation of $m$.
-\item $x=m$, $x<m$ and $m$ has no left child, or $x>m$ and $m$ has no right child: The traversal stops at $m$. We take $m$ as the new root, and then
-\bit
-\item if $L$ is nonempty, connect $\operatorname{left}(m)$ as $\operatorname{right}(l)$, and connect the root of $L$ as $\operatorname{left}(m)$;
+\item If $L$ is nonempty, connect $\operatorname{left}(m)$ as $\operatorname{right}(l)$, and connect the root of $L$ as $\operatorname{left}(m)$;
 \item if $R$ is nonempty, connect $\operatorname{right}(m)$ as $\operatorname{left}(r)$, and connect the root of $R$ as $\operatorname{right}(m)$.
 \eit
 \eit
