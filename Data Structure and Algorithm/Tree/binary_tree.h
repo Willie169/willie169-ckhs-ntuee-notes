@@ -1059,9 +1059,11 @@ public:
         } else
           log("RL zig-zag step:\n");
         log("Link left:\n");
-        if (L != nullptr)
+        if (L != nullptr) {
           l->right = root;
-        else {
+          root->parent = l;
+          l = l->right;
+        } else {
           L = root;
           l = L;
         }
