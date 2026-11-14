@@ -492,15 +492,9 @@ public:
   BST(BST &&) = default;
   BST &operator=(BST &&) = default;
 
-  virtual Node *find_min(Node *node) const {
-    log("Find min:");
-    return leftmost_child(node);
-  }
+  virtual Node *find_min(Node *node) const { return leftmost_child(node); }
 
-  virtual Node *find_max(Node *node) const {
-    log("Find max:");
-    return rightmost_child(node);
-  }
+  virtual Node *find_max(Node *node) const { return rightmost_child(node); }
 
   // O(h)
   virtual Node *find_min() const { return find_min(root); }
@@ -803,7 +797,9 @@ public:
   using Base::log_forest;
   using Base::oss;
   using Base::root;
+  using Base::rotate_left;
   using Base::rotate_parent;
+  using Base::rotate_right;
 
 protected:
   using Base::replace;
@@ -1018,7 +1014,7 @@ public:
             break;
         } else
           log("RL zig-zag step:\n");
-        log("Link left:");
+        log("Link left:\n");
         if (L != nullptr)
           l->right = root;
         else {
@@ -1030,8 +1026,10 @@ public:
         root->parent = nullptr;
         log("Left tree:");
         log_forest(L);
-      } else
+      } else {
+        found = true;
         break;
+      }
     }
     if (L != nullptr) {
       if (root->left != nullptr) {
@@ -1138,7 +1136,7 @@ public:
       root = rotate_left(root);
       if (root->right == nullptr)
         break;
-      log("Link left:");
+      log("Link left:\n");
       if (L != nullptr)
         l->right = root;
       else {
@@ -1213,6 +1211,7 @@ public:
   virtual void top_down_join_right(Node *other) {
     if (other == nullptr)
       return;
+    log("Top-down join right:");
     if (root == nullptr) {
       root = other;
       other->parent = nullptr;
@@ -1221,13 +1220,14 @@ public:
       root->right = other;
       other->parent = root;
     }
-    log("Top-down join right:");
+    log("Join right:");
     log_forest();
   }
 
   virtual void top_down_join_left(Node *other) {
     if (other == nullptr)
       return;
+    log("Top-dowm join left:");
     if (root == nullptr) {
       root = other;
       other->parent = nullptr;
@@ -1236,7 +1236,7 @@ public:
       root->left = other;
       other->parent = root;
     }
-    log("Top-dowm join left:");
+    log("Join left:");
     log_forest();
   }
 
@@ -1246,14 +1246,16 @@ public:
     auto [victim, found] = top_down_search(x);
     if (found == false)
       return {victim, false};
-    Node *right = victim->right;
-    if (victim->left != nullptr) {
-      replace(victim, victim->left, true);
+    Node *right = root->right;
+    if (root->left != nullptr) {
+      replace(root, root->left, true);
       if (right != nullptr)
         right->parent = nullptr;
       top_down_join_right(right);
     } else
-      replace(victim, right, true);
+      replace(root, right, true);
+    log("Delete:\n");
+    log_forest();
     return {nullptr, true};
   }
 };
