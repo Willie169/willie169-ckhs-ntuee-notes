@@ -20,17 +20,25 @@ A queue is first-in-first-out (FIFO) list. Adding an element is called enqueue a
 An array is a fixed-size list of elements of the same memory size, each identified by at least one index, stored contiguously such that the position (memory address) of each element can be computed from its index in $O(1)$ time, i.e., random access in $O(1)$ time.
 \ssc{Dynamic array, growable array, resizable array, dynamic table, mutable array, or array list}
 \sssc{Dynamic array, growable array, resizable array, dynamic table, mutable array, or array list}
-A dynamic array is a variable-size list that stores elements in an array of a capacity, i.e., the allocated size of space of the array divided by the size of an element, and reserves an array of new capacity elsewhere and moves to it, called resizing, whenever its size reaches its capacity. It has random access and popping back in $O(1)$ time, pushing back in amortized $O(1)$ time, but removal and insertion in $O(n)$ time. It is a stack with front as bottom and back as top.
+A dynamic array is a variable-size list where the elements are stored in array of a size called capacity. The number of elements is called size. Whenever its size reaches its capacity, it reserves an array of a new capacity elsewhere and moves all elements to it, called resizing. The new capacity reserved when resizing is typically (an integer approximation of) a constant, called doubling factor, and which is more than one, times of the size.
+
+It has random access and popping back in $O(1)$ time, pushing back in amortized $O(1)$ time, but removal and insertion in $O(n)$ time. It is a stack with front as bottom and back as top.
 \sssc{Amortized analysis}
-Let the number of elements be $n$ and the capacity be $c$, the newly reserved capacity each time $n$ reach $c$ be $kn$ where $k>1$. Let the dynamic array start at $c=1$. Let the cost of inserting an element without resizing and the cost of moving each element to a new location both be 1.
+Let the number of elements be $n$, the capacity be $c$, and the doubling factor be $k>1$. Let the dynamic array start at $c=1$. Let the cost of inserting an element without resizing and the cost of moving each element to a new location both be 1.
 
 Define potential function $P(n,c)$ as
-\[P(n,c)=kn-c\]
-The actual cost of an insertion
+\[P(n,c)=-\frac{1}{k-1}c\]
+For an insertion $i$, let the potential function before and after be $P_{i-1}$ and $P_i$, the actual cost be $C_i$, and amortized cost be $A_i$.
 
-
-
-
+For an insertion without resizing is
+\[C_i=1\]
+\[P_i-P_{i-1}=0\]
+\[A_i=1\]
+For an insertion with resizing is
+\[C_i=n+1\]
+\[P_i-P_{i-1}=-\frac{kn-n}{k-1}=-n\]
+\[A_i=1\]
+In both cases, $A_i=1$. Thus the amortized cost is $O(1)$.
 \sssc{An implementation in C++}
 \lstinputlisting[language=C++]{vector.hpp}
 \ssc{Singly linked list}
