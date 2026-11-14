@@ -28,6 +28,8 @@ public:
       : value(_value), parent(_parent) {}
 
   virtual ~BaseBinaryTreeNode() = default;
+
+  virtual void _clone_helper(Node *) const {}
 };
 
 template <class T>
@@ -210,6 +212,19 @@ public:
     if (outer)
       *oss << "\n\\end{forest}\n\\end{center}\n";
   }
+
+  // O(n)
+  // Deep-clones the subtree rooted at `node` with given parent of new root used
+  // Return the new root
+  static Node *clone_subtree(const Node *node, Node *parent = nullptr) {
+    if (node == nullptr)
+      return nullptr;
+    Node *copy = new Node(node->value, parent);
+    node->_clone_helper(copy);
+    copy->left = clone_subtree(node->left, copy);
+    copy->right = clone_subtree(node->right, copy);
+    return copy;
+  }
 };
 
 // Take LaTeX forest representation: [value[left][right]]
@@ -278,6 +293,7 @@ class BinaryTree : public BinaryTreeStatic<T, Node> {
 public:
   using node_type = Node;
   using Base = BinaryTreeStatic<T, Node>;
+  using Base::clone_subtree;
   using Base::inorder;
   using Base::inorder_node;
   using Base::is_left_child;
@@ -295,7 +311,10 @@ public:
   BinaryTree(Node *_root = nullptr, std::ostream *_oss = nullptr)
       : root(_root), oss(_oss) {}
 
-  BinaryTree(const BinaryTree &) = delete;
+  BinaryTree(const BinaryTree &other)
+      : root(clone_subtree(other.root,
+                           other.root ? other.root->parent : nullptr)),
+        oss(other.oss) {}
 
   BinaryTree(BinaryTree &&other) noexcept
       : root(std::exchange(other.root, nullptr)),
@@ -402,13 +421,21 @@ public:
 
   virtual ~BinaryTree() { clear(); }
 
-  BinaryTree &operator=(const BinaryTree &) = delete;
+  BinaryTree &operator=(const BinaryTree &other) {
+    if (this == &other)
+      return *this;
+    clear();
+    root = clone_subtree(other.root, other.root ? other.root->parent : nullptr);
+    oss = other.oss;
+    return *this;
+  }
 
   BinaryTree &operator=(BinaryTree &&other) noexcept {
-    if (this != &other) {
-      clear();
-      root = std::exchange(other.root, nullptr);
-    }
+    if (this == &other)
+      return *this;
+    clear();
+    root = std::exchange(other.root, nullptr);
+    oss = std::exchange(other.oss, nullptr);
     return *this;
   }
 
@@ -486,11 +513,24 @@ public:
       : Base(_root, _oss), comp(_comp) {}
   explicit BST(const Compare &_comp) : BST(nullptr, nullptr, _comp) {}
 
-  BST(const BST &) = delete;
-  BST &operator=(const BST &) = delete;
+  BST(const BST &other) : Base(other), comp(other.comp) {}
+  BST(BST &&other) : Base(other), comp(other.comp) {}
 
-  BST(BST &&) = default;
-  BST &operator=(BST &&) = default;
+  BST &operator=(const BST &other) {
+    if (this != &other) {
+      Base::operator=(other);
+      comp = other.comp;
+    }
+    return *this;
+  }
+
+  BST &operator=(BST &&other) {
+    if (this != &other) {
+      Base::operator=(other);
+      comp = std::exchange(other.comp, nullptr);
+    }
+    return *this;
+  }
 
   // O(h)
   virtual Node *find_min() const { return leftmost_child(root); }
@@ -697,6 +737,10 @@ public:
 
   mutable int height = 1; // leaf 1
 
+  void _clone_helper(AVLTreeNode *other) const override {
+    other->height = height;
+  }
+
   static int get_height(AVLTreeNode *node) noexcept {
     return node == nullptr ? 0 : node->height;
   }
@@ -720,11 +764,9 @@ public:
   using Base::log_forest;
   using Base::root;
 
-  AVLTree() : Base() {};
-  AVLTree(const AVLTree &) = delete;
-  AVLTree &operator=(const AVLTree &) = delete;
-
+  AVLTree(const AVLTree &) = default;
   AVLTree(AVLTree &&) = default;
+  AVLTree &operator=(const AVLTree &) = default;
   AVLTree &operator=(AVLTree &&) = default;
 
   Node *rotate_left(Node *node) const override {
@@ -806,10 +848,9 @@ protected:
   using Base::replace;
 
 public:
-  SplayTree(const SplayTree &) = delete;
-  SplayTree &operator=(const SplayTree &) = delete;
-
+  SplayTree(const SplayTree &) = default;
   SplayTree(SplayTree &&) = default;
+  SplayTree &operator=(const SplayTree &) = default;
   SplayTree &operator=(SplayTree &&) = default;
 
   // O(h) worst case, O(log n) amortized
