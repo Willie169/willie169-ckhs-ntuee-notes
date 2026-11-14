@@ -815,12 +815,18 @@ public:
       if (parent == root) {
         log("Zig step:\n");
         rotate_parent(node);
-        // Zig-zig
-      } else if ((parent->left == node && grandparent->left == parent) ||
-                 (parent->right == node && grandparent->right == parent)) {
+      }
+      // LL zig-zig
+      else if (parent->left == node && grandparent->left == parent) {
         log("Zig-zig step:\n");
-        rotate_parent(parent);
-        rotate_parent(node);
+        rotate_right(grandparent);
+        rotate_right(parent);
+      }
+      // RR zig-zig
+      else if (parent->right == node && grandparent->right == parent) {
+        log("Zig-zig step:\n");
+        rotate_left(grandparent);
+        rotate_left(parent);
       }
       // Zig-zag
       else {
@@ -970,79 +976,80 @@ public:
     bool found = false;
     Node *old_parent = root->parent;
     signed char old_side = is_left_child(root);
+    root->parent = nullptr;
     Node *L = nullptr;
     Node *l = nullptr;
     Node *R = nullptr;
     Node *r = nullptr;
-    Node *m = root;
     while (true) {
-      if (comp(x, m->value)) {
-        if (m->left == nullptr)
+      if (comp(x, root->value)) {
+        if (root->left == nullptr)
           break;
-        if (comp(m->left->value, x)) {
-          if (R == nullptr) {
-            R = m;
-            r = m;
-            m = m->left;
-            R->left = nullptr;
-            m->parent = nullptr;
-          } else {
-            r->left = m;
-            m->parent = r;
-            r = m;
-            m = m->left;
-            m->parent = nullptr;
-            log("Right tree:");
-            log_forest(R);
-          }
+        if (comp(x, root->left->value)) { // LL zig-zig
+          log("LL zig-zig step:\n");
+          root = rotate_right(root);
+          if (root->left == nullptr)
+            break;
         } else
-          m = rotate_parent(m->left);
-      } else if (comp(m->value, x)) {
-        if (m->right == nullptr)
+          log("LR zig-zag step:\n");
+        // LL zig-zig, LR zig-zag: link right
+        log("Link right:\n");
+        if (R != nullptr)
+          r->left = root;
+        else {
+          R = root;
+          r = R;
+        }
+        root = root->left;
+        root->parent->left = nullptr;
+        root->parent = nullptr;
+        log("Right tree:");
+        log_forest(R);
+      } else if (comp(root->value, x)) {
+        if (root->right == nullptr)
           break;
-        if (comp(x, m->right->value)) {
-          if (L == nullptr) {
-            L = m;
-            l = m;
-            m = m->right;
-            L->right = nullptr;
-            m->parent = nullptr;
-          } else {
-            l->right = m;
-            m->parent = l;
-            l = m;
-            m = m->right;
-            m->parent = nullptr;
-            log("left tree:");
-            log_forest(L);
-          }
+        if (comp(root - right->value)) { // RR zig-zig
+          log("RR zig-zig step\n");
+          root = rotate_left(root);
+          if (root->right == nullptr)
+            break;
         } else
-          m = rotate_parent(m->right);
-      } else {
-        found = true;
+          log("RL zig-zag step\n");
+        // RR zig-zig, RL zig-zag
+        log("Link left:");
+        if (L != nullptr)
+          l->right = root;
+        else {
+          L = root;
+          l = L;
+        }
+        root = root->right;
+        root->parent->right = nullptr;
+        root->parent = nullptr;
+        log("Left tree:");
+        log_forest(L);
+      } else
         break;
-      }
     }
-    root = m;
     if (L != nullptr) {
-      if (m->left != nullptr) {
-        l->right = m->left;
-        m->left->parent = l;
-        log("left tree:");
+      if (root->left != nullptr) {
+        l->right = root->left;
+        root->left->parent = l;
+        log("Left tree:");
         log_forest(L);
       }
-      m->left = L;
-      L->parent = m;
+      root->left = L;
+      L->parent = root;
     }
     if (R != nullptr) {
-      if (m->right != nullptr) {
-        r->left = m->right;
-        m->right->parent = r;
+      if (root->right != nullptr) {
+        r->left = root->right;
+        root->right->parent = r;
         log("Right tree:");
         log_forest(R);
       }
-      m->right = R;
-      R->parent = m;
+      root->right = R;
+      R->parent = root;
     }
     root->parent = old_parent;
     switch (old_side) {
@@ -1053,6 +1060,8 @@ public:
       old_parent->right = root;
       break;
     }
+    log("Link back:");
+    log_forest();
     return {root, found};
   }
 
@@ -1060,7 +1069,7 @@ public:
     if (node == nullptr)
       return nullptr;
     while (node->left != nullptr)
-      node = rotate_parent(node->left);
+      node = rotate_right(node);
     return root;
   }
 
@@ -1068,7 +1077,7 @@ public:
     if (node == nullptr)
       return nullptr;
     while (node->right != nullptr)
-      node = rotate_parent(node->right);
+      node = rotate_left(node);
     return root;
   }
 
