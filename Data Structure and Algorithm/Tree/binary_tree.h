@@ -1012,12 +1012,12 @@ public:
         if (root->right == nullptr)
           break;
         if (comp(root->right->value, x)) {
-          log("RR zig-zig step\n");
+          log("RR zig-zig step:\n");
           root = rotate_left(root);
           if (root->right == nullptr)
             break;
         } else
-          log("RL zig-zag step\n");
+          log("RL zig-zag step:\n");
         log("Link left:");
         if (L != nullptr)
           l->right = root;
@@ -1134,7 +1134,7 @@ public:
     while (true) {
       if (root->right == nullptr)
         break;
-      log("RR zig-zig step\n");
+      log("RR zig-zig step:\n");
       root = rotate_left(root);
       if (root->right == nullptr)
         break;
@@ -1178,220 +1178,6 @@ public:
   // O(h) worst case, O(log n) amortized
   virtual Node *top_down_find_min() const { return top_down_find_min(root); }
   virtual Node *top_down_find_max() const { return top_down_find_max(root); }
-
-  // O(h) worst case, O(log n) amortized
-  virtual Node *top_down_ordered_after(const T &x) const {
-    if (root == nullptr)
-      return nullptr;
-    log("Top-down ordered after:\n");
-    Node *old_parent = root->parent;
-    signed char old_side = is_left_child(root);
-    root->parent = nullptr;
-    Node *L = nullptr;
-    Node *l = nullptr;
-    Node *R = nullptr;
-    Node *r = nullptr;
-    while (true) {
-      if (comp(x, root->value)) {
-        if (root->left == nullptr)
-          break;
-        if (comp(x, root->left->value)) {
-          log("LL zig-zig step\n");
-          root = rotate_right(root);
-          if (root->left == nullptr)
-            break;
-          log("Link right:\n");
-          if (R != nullptr)
-            r->left = root;
-          else {
-            R = root;
-            r = R;
-          }
-          root = root->left;
-          root->parent->left = nullptr;
-          root->parent = nullptr;
-          log("Right tree:");
-          log_forest(R);
-        } else
-          break;
-      } else {
-        if (root->right == nullptr)
-          break;
-        if (!comp(x, root->right->value)) {
-          log("RR zig-zig step\n");
-          root = rotate_left(root);
-          if (root->right == nullptr)
-            break;
-        } else
-          log("RL zig-zag step\n");
-        log("Link left:");
-        if (L != nullptr)
-          l->right = root;
-        else {
-          L = root;
-          l = L;
-        }
-        root = root->right;
-        root->parent->right = nullptr;
-        root->parent = nullptr;
-        log("Left tree:");
-        log_forest(L);
-      }
-    }
-    if (L != nullptr) {
-      if (root->left != nullptr) {
-        l->right = root->left;
-        root->left->parent = l;
-        log("Left tree:");
-        log_forest(L);
-      }
-      root->left = L;
-      L->parent = root;
-    }
-    if (R != nullptr) {
-      if (root->right != nullptr) {
-        r->left = root->right;
-        root->right->parent = r;
-        log("Right tree:");
-        log_forest(R);
-      }
-      root->right = R;
-      R->parent = root;
-    }
-    root->parent = old_parent;
-    switch (old_side) {
-    case 1:
-      old_parent->left = root;
-      break;
-    case 0:
-      old_parent->right = root;
-      break;
-    }
-    log("Link back:");
-    log_forest();
-    return comp(x, root->left->value) ? root : nullptr;
-  }
-
-  // O(h) worst case, O(log n) amortized
-  virtual Node *top_down_ordered_after(const T &x) const {
-    if (root == nullptr)
-      return nullptr;
-    log("Top-down ordered not before:\n");
-    Node *old_parent = root->parent;
-    signed char old_side = is_left_child(root);
-    root->parent = nullptr;
-    Node *L = nullptr;
-    Node *l = nullptr;
-    Node *R = nullptr;
-    Node *r = nullptr;
-    while (true) {
-      if (!comp(root->value, x)) {
-        if (root->left == nullptr)
-          break;
-        if (!comp(root->left->value, x)) {
-          log("LL zig-zig step\n");
-          root = rotate_right(root);
-          if (root->left == nullptr)
-            break;
-          log("Link right:\n");
-          if (R != nullptr)
-            r->left = root;
-          else {
-            R = root;
-            r = R;
-          }
-          root = root->left;
-          root->parent->left = nullptr;
-          root->parent = nullptr;
-          log("Right tree:");
-          log_forest(R);
-        } else
-          break;
-      } else {
-        if (root->right == nullptr)
-          break;
-        if (comp(root->right->value, x)) {
-          log("RR zig-zig step\n");
-          root = rotate_left(root);
-          if (root->right == nullptr)
-            break;
-        } else
-          log("RL zig-zag step\n");
-        log("Link left:");
-        if (L != nullptr)
-          l->right = root;
-        else {
-          L = root;
-          l = L;
-        }
-        root = root->right;
-        root->parent->right = nullptr;
-        root->parent = nullptr;
-        log("Left tree:");
-        log_forest(L);
-      }
-    }
-    if (L != nullptr) {
-      if (root->left != nullptr) {
-        l->right = root->left;
-        root->left->parent = l;
-        log("Left tree:");
-        log_forest(L);
-      }
-      root->left = L;
-      L->parent = root;
-    }
-    if (R != nullptr) {
-      if (root->right != nullptr) {
-        r->left = root->right;
-        root->right->parent = r;
-        log("Right tree:");
-        log_forest(R);
-      }
-      root->right = R;
-      R->parent = root;
-    }
-    root->parent = old_parent;
-    switch (old_side) {
-    case 1:
-      old_parent->left = root;
-      break;
-    case 0:
-      old_parent->right = root;
-      break;
-    }
-    log("Link back:");
-    log_forest();
-    return comp(root->left->value, x) ? nullptr : root;
-  }
-
-  // O(h) worst case, O(log n) amortized
-  virtual Node *top_down_ordered_before(const T &x) const {
-    Node *result = nullptr;
-    Node *node = root;
-    while (node != nullptr) {
-      if (comp(node->value, x)) {
-        result = node;
-        node = node->right;
-      } else
-        node = node->left;
-    }
-    return result;
-  }
-
-  // O(h) worst case, O(log n) amortized
-  virtual Node *top_down_ordered_not_after(const T &x) const {
-    Node *result = nullptr;
-    Node *node = root;
-    while (node != nullptr) {
-      if (!comp(x, node->value)) {
-        result = node;
-        node = node->right;
-      } else
-        node = node->left;
-    }
-    return result;
-  }
 
   // Return node, inserted
   // O(h)
