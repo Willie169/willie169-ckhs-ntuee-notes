@@ -492,20 +492,15 @@ public:
   BST(BST &&) = default;
   BST &operator=(BST &&) = default;
 
-  virtual Node *find_min(Node *node) const { return leftmost_child(node); }
-
-  virtual Node *find_max(Node *node) const { return rightmost_child(node); }
-
   // O(h)
-  virtual Node *find_min() const { return find_min(root); }
-  virtual Node *find_max() const { return find_max(root); }
+  virtual Node *find_min() const { return leftmost_child(root); }
+  virtual Node *find_max() const { return rightmost_child(root); }
 
   // Return node, found
   // O(h)
   virtual std::pair<Node *, bool> search(const T &x) const {
     if (root == nullptr)
       return {nullptr, false};
-    log("Search:");
     Node *node = root;
     while (true) {
       if (comp(x, node->value)) {
@@ -838,16 +833,8 @@ public:
     return node;
   }
 
-  Node *find_min(Node *node) const override {
-    return splay(Base::find_min(node));
-  }
-
-  Node *find_max(Node *node) const override {
-    return splay(Base::find_max(node));
-  }
-
-  Node *find_min() const override { return find_min(root); }
-  Node *find_max() const override { return find_max(root); }
+  Node *find_min() const override { return splay(Base::find_min()); }
+  Node *find_max() const override { return splay(Base::find_max()); }
 
   Node *ordered_after(const T &x) const override {
     return splay(Base::ordered_after(x));
@@ -878,6 +865,9 @@ public:
   virtual void join_right(Node *other) {
     if (other == nullptr)
       return;
+    log("Join right:\n");
+    log("To join:");
+    log_forest(other);
     if (root == nullptr) {
       root = other;
       other->parent = nullptr;
@@ -886,13 +876,16 @@ public:
       root->right = other;
       other->parent = root;
     }
-    log("Join right:");
+    log("Join:");
     log_forest();
   }
 
   virtual void join_left(Node *other) {
     if (other == nullptr)
       return;
+    log("Join left:\n");
+    log("To join:");
+    log_forest(other);
     if (root == nullptr) {
       root = other;
       other->parent = nullptr;
@@ -901,7 +894,7 @@ public:
       root->left = other;
       other->parent = root;
     }
-    log("Join left:");
+    log("Join:");
     log_forest();
   }
 
@@ -910,15 +903,17 @@ public:
     log("Delete:\n");
     if (node == nullptr)
       throw std::invalid_argument("Node is nullptr");
-    Node *victim = splay(node);
-    Node *right = victim->right;
-    if (victim->left != nullptr) {
-      replace(victim, victim->left, true);
+    splay(node);
+    Node *right = root->right;
+    if (root->left != nullptr) {
+      replace(root, root->left, true);
       if (right != nullptr)
         right->parent = nullptr;
       join_right(right);
-    } else
-      replace(victim, right, true);
+    } else {
+      replace(root, right, true);
+      log_forest();
+    }
     return nullptr;
   }
 
@@ -1065,14 +1060,14 @@ public:
     return {root, found};
   }
 
-  virtual Node *top_down_find_min(Node *node) const {
-    if (node == nullptr)
+  // O(h) worst case, O(log n) amortized
+  virtual Node *top_down_find_min() const {
+    if (root == nullptr)
       return nullptr;
     log("Top-down find min:\n");
-    Node *old_parent = node->parent;
-    signed char old_side = is_left_child(node);
-    node->parent = nullptr;
-    Node *real_root = std::exchange(root, node);
+    Node *old_parent = root->parent;
+    signed char old_side = is_left_child(root);
+    root->parent = nullptr;
     Node *R = nullptr;
     Node *r = nullptr;
     while (true) {
@@ -1116,17 +1111,17 @@ public:
     }
     log("Link back:");
     log_forest();
-    return std::exchange(root, real_root);
+    return root;
   }
 
-  virtual Node *top_down_find_max(Node *node) const {
-    if (node == nullptr)
+  // O(h) worst case, O(log n) amortized
+  virtual Node *top_down_find_max() const {
+    if (root == nullptr)
       return nullptr;
     log("Top-down find max:\n");
-    Node *old_parent = node->parent;
-    signed char old_side = is_left_child(node);
-    node->parent = nullptr;
-    Node *real_root = std::exchange(root, node);
+    Node *old_parent = root->parent;
+    signed char old_side = is_left_child(root);
+    root->parent = nullptr;
     Node *L = nullptr;
     Node *l = nullptr;
     while (true) {
@@ -1170,12 +1165,8 @@ public:
     }
     log("Link back:");
     log_forest();
-    return std::exchange(root, real_root);
+    return root;
   }
-
-  // O(h) worst case, O(log n) amortized
-  virtual Node *top_down_find_min() const { return top_down_find_min(root); }
-  virtual Node *top_down_find_max() const { return top_down_find_max(root); }
 
   // Return node, inserted
   // O(h)
@@ -1211,7 +1202,9 @@ public:
   virtual void top_down_join_right(Node *other) {
     if (other == nullptr)
       return;
-    log("Top-down join right:");
+    log("Top-down join right:\n");
+    log("To join:");
+    log_forest(other);
     if (root == nullptr) {
       root = other;
       other->parent = nullptr;
@@ -1220,14 +1213,16 @@ public:
       root->right = other;
       other->parent = root;
     }
-    log("Join right:");
+    log("Join:");
     log_forest();
   }
 
   virtual void top_down_join_left(Node *other) {
     if (other == nullptr)
       return;
-    log("Top-dowm join left:");
+    log("Top-dowm join left:\n");
+    log("To join:");
+    log_forest(other);
     if (root == nullptr) {
       root = other;
       other->parent = nullptr;
@@ -1236,7 +1231,7 @@ public:
       root->left = other;
       other->parent = root;
     }
-    log("Join left:");
+    log("Join:");
     log_forest();
   }
 
@@ -1246,16 +1241,17 @@ public:
     auto [victim, found] = top_down_search(x);
     if (found == false)
       return {victim, false};
+    log("Delete:\n");
     Node *right = root->right;
     if (root->left != nullptr) {
       replace(root, root->left, true);
       if (right != nullptr)
         right->parent = nullptr;
       top_down_join_right(right);
-    } else
+    } else {
       replace(root, right, true);
-    log("Delete:\n");
-    log_forest();
+      log_forest();
+    }
     return {nullptr, true};
   }
 };
