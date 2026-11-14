@@ -373,7 +373,7 @@ A splay tree is a self-adjusting binary search tree (BST) that keeps no info of 
 \sssc{(Bottom-up) splay}
 When a node $x$ is accessed, a (bottom-up) splay operation consisting of a sequence of splay steps is performed on $x$ to move it to the root, called splaying $x$. Let the parent of $x$ be $p$ and the parent of $p$ be $g$. There are three types of splay steps, each of which has two symmetric variants:
 \bit
-\item Zig step / simple rotation: This is done if $x$ is a child of the root. We perform a rotation on the edge between root and $x$. This only happens as the last step and only happens when $x$ originally has odd depth.
+\item Zig / simple rotation step: This is done if $x$ is a child of the root. We perform a rotation on the edge between root and $x$. This only happens as the last step and only happens when $x$ originally has odd depth.
 \item Zig-zig step: This is done either when $x$ is a left child of $p$ and $p$ is a left child of $g$, or when $x$ is a right child of $p$ and $p$ is a right child of $g$. We perform a rotation on the edge between $g$ and $p$ and then a rotation on the edge between $p$ and $x$.
 \item Zig-zag step: This is done either when $x$ is a left child of $p$ and $p$ is a right child of $g$, or when $x$ is a right child of $p$ and $p$ is a left child of $g$. We perform a rotation on the edge between $p$ and $x$, and then a rotation on the edge between $g$ and $x$, now at the original position of $p$.
 \eit
@@ -543,16 +543,11 @@ An alternative implementation of splay that is done together with traversal from
 \eit
 There are three types of splay steps, each of which has two symmetric variants:
 \bit
-\item LL case zig-zig step: This is done when $x$ is in $\operatorname{left}(\operatorname{left})(m)$, i.e., $x<m.\operatorname{left}$. We perform a right rotation on the edge between $m$ and its left child, and assign its original left child, now parent, as the new $m$, and then,
-\bit
-\item if $m$ has left child, we perform a right linking.
-\item if $m$ has no left child, we stop the traversal and go to the last step.
-\eit
-\item RR case zig-zig step: This is done when $x$ is in $\operatorname{right}(\operatorname{right})(m)$, i.e., $x>m.\operatorname{right}$. We perform a left rotation on the edge between $m$ and its right child, and assign its original right child, now parent, as the new $m$, and then,
-\bit
-\item if $m$ has right child, we perform a left linking.
-\item if $m$ has no right child, we stop the traversal and go to the last step.
-\eit
+\item LL case zig-zig step: This is done when $x<m.\operatorname{left}$ and $m.\operatorname{left}.\operatorname{left}$ exists. We perform a right rotation on the edge between $m$ and its left child, and assign its original left child, now parent, as the new $m$, and then perform a right linking.
+\item RR case zig-zig step: This is done when $x>m.\operatorname{right}$ and $m.\operatorname{right}.\operatorname{right}$ exists. We perform a left rotation on the edge between $m$ and its right child, and assign its original right child, now parent, as the new $m$, and then a left linking.
+
+\item Left zig / simple rotation step: This is done when $x<m.\operatorname{left}$ and $m.\operatorname{left}.\operatorname{left}$ does not exist. We perform a right rotation on the edge between $m$ and its left child, and assign its original left child, now parent, as the new $m$, and then go to the last step.
+\item Right zig / simple rotation step: This is done when $x>m.\operatorname{right}$ and $m.\operatorname{right}.\operatorname{right}$ does not exist. We perform a left rotation on the edge between $m$ and its right child, and assign its original right child, now parent, as the new $m$, and then go to the last step.
 \item LR case zig-zag step: This is done when $x$ is in $\operatorname{right}(\operatorname{left})(m)$, i.e., $m>x\ge m.\operatorname{left}$. We perform a right linking.
 \item RL case zig-zag step: This is done when $x$ is in $\operatorname{left}(\operatorname{right})(m)$, i.e., $m<x\le m.\operatorname{right}$. We perform a left linking.
 \item $x=m$, $x<m$ and $m$ has no left child, or $x>m$ and $m$ has no right child: We stop the traversal and go to the last step.

@@ -1028,10 +1028,14 @@ public:
         if (root->left == nullptr)
           break;
         if (comp(x, root->left->value)) {
-          log("LL zig-zig step:\n");
-          root = rotate_right(root);
-          if (root->left == nullptr)
+          if (root->left->left == nullptr) {
+            log("Left zig step:\n");
+            root = rotate_right(root);
             break;
+          } else {
+            log("LL zig-zig step:\n");
+            root = rotate_right(root);
+          }
         } else
           log("LR zig-zag step:\n");
         log("Link right:\n");
@@ -1052,10 +1056,14 @@ public:
         if (root->right == nullptr)
           break;
         if (comp(root->right->value, x)) {
-          log("RR zig-zig step:\n");
-          root = rotate_left(root);
-          if (root->right == nullptr)
+          if (root->right->right == nullptr) {
+            log("Right zig step:\n");
+            root = rotate_left(root);
             break;
+          } else {
+            log("RR zig-zig step:\n");
+            root = rotate_left(root);
+          }
         } else
           log("RL zig-zag step:\n");
         log("Link left:\n");
@@ -1077,6 +1085,7 @@ public:
         break;
       }
     }
+    log("Last step:\n");
     if (L != nullptr) {
       if (root->left != nullptr) {
         l->right = root->left;
@@ -1124,10 +1133,14 @@ public:
     while (true) {
       if (root->left == nullptr)
         break;
-      log("LL zig-zig step:\n");
-      root = rotate_right(root);
-      if (root->left == nullptr)
+      if (root->left->left == nullptr) {
+        log("Left zig step:\n");
+        root = rotate_right(root);
         break;
+      } else {
+        log("LL zig-zig step:\n");
+        root = rotate_right(root);
+      }
       log("Link right:\n");
       if (R != nullptr) {
         r->left = root;
@@ -1143,6 +1156,7 @@ public:
       log("Right tree:");
       log_forest(R);
     }
+    log("Last step:\n");
     if (R != nullptr) {
       if (root->right != nullptr) {
         r->left = root->right;
@@ -1180,10 +1194,14 @@ public:
     while (true) {
       if (root->right == nullptr)
         break;
-      log("RR zig-zig step:\n");
-      root = rotate_left(root);
-      if (root->right == nullptr)
+      if (root->right->right == nullptr) {
+        log("Right zig step:\n");
+        root = rotate_left(root);
         break;
+      } else {
+        log("RR zig-zig step:\n");
+        root = rotate_left(root);
+      }
       log("Link left:\n");
       if (L != nullptr) {
         l->right = root;
@@ -1199,6 +1217,7 @@ public:
       log("Left tree:");
       log_forest(L);
     }
+    log("Last step:\n");
     if (L != nullptr) {
       if (root->left != nullptr) {
         l->right = root->left;

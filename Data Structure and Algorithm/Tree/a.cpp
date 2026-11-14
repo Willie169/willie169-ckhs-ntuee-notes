@@ -8,17 +8,17 @@ int main() {
       &std::cout);
   sp.log_forest();
   SplayTree<int> tp;
-  // tp = sp;
-  // tp.log("(a) Insert 67 using bottom-up splaying.\n");
-  // tp.insert(67);
+  tp = sp;
+  tp.log("(a) Insert 67 using bottom-up splaying.\n");
+  tp.insert(67);
   tp = sp;
   tp.log("(b) Delete 62 using top-down splaying.\n");
   tp.top_down_remove(62);
-  // tp = sp;
-  // tp.log("(c) Insert 60 using top-down splaying.\n");
-  // tp.top_down_insert(60);
-  // tp.set_logger(&std::cout);
-  // tp = sp;
-  // tp.log("(d) Delete 30 using bottom-up splaying.\n");
-  // tp.remove(30);
+  tp = sp;
+  tp.log("(c) Insert 60 using top-down splaying.\n");
+  tp.top_down_insert(60);
+  tp.set_logger(&std::cout);
+  tp = sp;
+  tp.log("(d) Delete 30 using bottom-up splaying.\n");
+  tp.remove(30);
 }
