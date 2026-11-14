@@ -1197,10 +1197,12 @@ public:
     root = new Node(x);
     if (comp(x, node->value)) {
       root->left = node->left;
+      node->left->parent = root;
       node->left = nullptr;
       root->right = node;
     } else {
       root->right = node->right;
+      node->right->parent = root;
       node->right = nullptr;
       root->left = node;
     }
