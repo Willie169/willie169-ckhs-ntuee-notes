@@ -44,7 +44,7 @@ For two input terminals, the differential transfer function is the transfer func
 
 For two input terminals, the common-mode transfer function is the transfer function when an ideal source's output connecting both of them is treated as input signal.
 \sssc{Operating point, operation point, Q-point, quiescent point, or bias point}
-The steady-state DC voltage and current values that an electronic component processing time-varying signals is set to operate around is called bias point $Q$. Voltage and current at the bias point is called bias (voltage and current). A bias circuit is a portion of the device's circuit that supplies this steady current or voltage. A component in the bias circuit is called biasing.
+The steady-state DC voltage and current values that an electronic component processing time-varying signals is set to operate around is called bias point $Q$. Voltage and current at the bias point is called bias (voltage and current). A bias circuit is a portion of the device's circuit that supplies this steady current or voltage. A component in the bias circuit is called biasing. A bias voltage/current of a bias point $Q$ can be denoted by adding $\vert_Q$.
 \sssc{Incremental resistance}
 The incremental resistance of a device at a bias point is $\dv{v}{i}$ at the point.
 \ssc{Amplifier (amp)}
@@ -1140,30 +1140,41 @@ To have a voltage output, ground source S terminal, flow the output current $i_D
 \eit
 In the active region:
 \[v_{DS}=V_{DD}-\frac{1}{2}k_nR_D\qty(v_{OV})^2\]
-\sssc{Small-signal linear amplification at a bias point}
-For bias point $Q$ where
+\sssc{Bias point}
+A bias point $Q$ is an ordered triple
+\[(V_{GS},V_{DS},I_D)\]
+of bias dc voltages/currents such that
 \[v_{GS}(t)=V_{GS}+v_{gs}(t)\]
 \[v_{DS}(t)=V_{DS}+v_{ds}(t)\]
 \[i_D(t)=I_D+i_d(t)\]
-where the first terms are bias voltages/currents and second terms are small signals.
-\[I_D=\frac{1}{2}k_n\qty(V_{GS}-V_t)^2\]
+where the second terms are small signals.
+
+Thus,
+\[I_D=\frac{V_{DD}-V_{DS}}{R_D}=\frac{1}{2}k_n\qty(V_{GS}-V_t)^2\]
 \[V_{DS}=V_{DD}-I_DR_D\]
 \[v_{ds}=-i_dR_D\]
-\[V_{OV}=V_{GS}-V_t\]
 \[v_{OV}(t)=V_{OV}+v_{gs}(t)\]
-The transconductance $g_m$ is
-\[g_m=\frac{i_d}{v_{gs}}=\evlv{\pdv{i_D}{v_{GS}}}_{v_{GS}=V_{GS}}=k_n(V_{GS}-V_t)=k_nV_{OV}\]
-The voltage amplification $A_v$ is
-\[A_v=\frac{v_{ds}}{v_{gs}}=-g_mR_D=-k_nV_{OV}R_D\]
-Thus, the voltage amplifier is inverting.
+where
+\[V_{OV}=V_{GS}-V_t\]
+We denote
+\bit
+\item $A=(V_t,V_{DD},0)$;
+\item $B$ the bias point such that $V_{DS}=V_{OV}$, which is
+\[B=\qty(V_t+\frac{\sqrt{2k_nR_DV_{DD}+1}-1}{k_nR_D},\frac{\sqrt{2k_nR_DV_{DD}+1}-1}{k_nR_D},\frac{V_{DD}}{R_D}-\frac{\sqrt{2k_nR_DV_{DD}+1}-1}{k_nR_D^{\phantom{D}2}})\]
+\bpr
+\[V_{OV}=V_{DD}-\frac{1}{2}k_nR_DV_{OV}^2\]
+\[\frac{1}{2}k_nR_DV_{OV}^2+V_{OV}-V_{DD}=0\]
+\[V_{OV}=\frac{\sqrt{2k_nR_DV_{DD}+1}-1}{k_nR_D}=V_{DS}=V_{GS}-V_t\]
+\[V_{GS}=V_t+\frac{\sqrt{2k_nR_DV_{DD}+1}-1}{k_nR_D}\]
+\[I_D=\frac{V_{DD}-V_{DS}}{R_D}=\frac{V_{DD}}{R_D}-\frac{\sqrt{2k_nR_DV_{DD}+1}-1}{k_nR_D^{\phantom{D}2}}\]
+\epr
+\item $C$ the bias point such that $V_{GS}=V_{DD}$, which is
 
-Given an allowable signal swing at output $\max\abs{v_{ds}}$, the allowable signal swing at input $\max\abs{v_{gs}}$ differs across different bias point.
+\bpr
 
-The bias point of $V_{DS}=V_{OV}$ is denoted $B$, which is the edge of saturation.
-\[V_{OV}\vert_B=V_{DD}-\frac{1}{2}k_nR_D\qty(V_{OV}\vert_B)^2\]
-\[\frac{1}{2}k_nR_D\qty(V_{OV}\vert_B)^2+V_{OV}\vert_B-V_{DD}=0\]
-\[V_{OV}\vert_B=\frac{\sqrt{2k_nR_DV_{DD}+1}-1}{k_nR_D}=V_{DS}\vert_B=V_{GS}\vert_B-V_t\]
-\[V_{GS}\vert_B=V_t+\frac{\sqrt{2k_nR_DV_{DD}+1}-1}{k_nR_D}\]
+\epr
+
+
 We can write $k_n$ in terms of $V_{OV}\vert_B$:
 \[k_n=\frac{2(V_{DD}-V_{OV}\vert_B)}{R_D\qty(V_{OV}\vert_B)^2}\]
 \bpr
@@ -1173,6 +1184,16 @@ We can write $k_n$ in terms of $V_{OV}\vert_B$:
 \[R_D\qty(V_{OV}\vert_B)^2k_n=2(V_{DD}-V_{OV}\vert_B)\]
 \[k_n=\frac{2(V_{DD}-V_{OV}\vert_B)}{R_D\qty(V_{OV}\vert_B)^2}\]
 \epr
+
+\sssc{Small-signal linear amplification at a bias point}
+The transconductance $g_m$ is
+\[g_m=\frac{i_d}{v_{gs}}=\evlv{\pdv{i_D}{v_{GS}}}_{v_{GS}=V_{GS}}=k_n(V_{GS}-V_t)=k_nV_{OV}\]
+The voltage amplification $A_v$ is
+\[A_v=\frac{v_{ds}}{v_{gs}}=-g_mR_D=-k_nV_{OV}R_D\]
+Thus, the voltage amplifier is inverting.
+
+Given an allowable signal swing at output $\max\abs{v_{ds}}$, the allowable signal swing at input $\max\abs{v_{gs}}$ differs across different bias point.
+
 The maximum magnitudes of $g_m$ and $A_v$ occur at the bias point $B$, where
 \[g_m\vert_B=\frac{2(V_{DD}-V_{OV}\vert_B)}{R_DV_{OV}\vert_B}\]
 \[A_v\vert_B=-\frac{2(V_{DD}-V_{OV}\vert_B)}{V_{OV}\vert_B}\]
