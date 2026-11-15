@@ -96,7 +96,7 @@ is the family of solutions of the first-order ODE
 \[N(x,y)\dd{x}-M(x,y)\dd{y}=0.\]
 \ssc{Existence and Uniqueness of Solution}
 \sssc{Picard–Lindelöf theorem, Cauchy–Lipschitz theorem, or existence and uniqueness theorem (local version)}
-Let $U$ be an open subset of $\bbR\times\bbR^n$ and $f\colon U\to\bbR^n$ be a function that is continuous in $t$ and locally Lipschitz in $y$, that is, for any $(t_0,y_0)\in U$, there exists a neighborhood $V\subseteq U$ of $(t_0,y_0)$ and a $L>0$ such that for all $(t,y_1),(t,y_2)\in V$, $\norm{f(t,y_1)-f(t,y_2)}\le L\norm{y_1-y_2}$.
+Let $U$ be an open subset of $\bbR\times\bbR^n$ and $f(t,y)\colon U\to\bbR^n$ be a function that is continuous in $t$, and locally Lipschitz in $y$, that is, for any $(t_0,y_0)\in U$, there exists a neighborhood $V\subseteq U$ of $(t_0,y_0)$ and a $L>0$ such that for all $(t,y_1),(t,y_2)\in V$, $\norm{f(t,y_1)-f(t,y_2)}\le L\norm{y_1-y_2}$.
 
 For any $(t_0,y_0)\in U$, there exists some $\varepsilon>0$ such that the initial value problem
 \[y'(t)=f(t,y(t)),\quad y(t_0)=y_0\]
@@ -1592,6 +1592,24 @@ Given an $n$th-order linear first-order system
 is called its complementary or associated (homogeneous) function, and the general solutions of the original equation is the sum of the general solutions $\mb{y}_c$ of the complementary function, called natural, complementary, or homogeneous solution or function, and a particular solution $\mb{y}_p$.
 \sssc{Superposition principle}
 If $\mb{y}_1(x)$ and $\mb{y}_2(x)$ are both solutions to a linear first-order system on an interval, then $c_1\mb{y}_1(x)+c_2\mb{y}_2(x)$ is also a solution to it on the interval for any $c_1,c_2\in\bbR$.
+\sssc{Existence and uniqueness theorem for initial-value problem of linear first-order system}
+Consider the initial-value problem
+\[\mb{x}'=A(t)\mb{x}+\mb{b}(t)\]
+\[\mb{x}(t_0)=\mb{x}_0\]
+where $A$ is an $n\times n$ matrix, $\mb{x},\mb{b},\mb{x}_0$ are $n\times 1$ matrices, and $A,\mb{b}$ are continuous on an open interval $I$ containing $t_0$. Then, there exists a unique solution on $I$.
+\bpr
+We want to apply Picard–Lindelöf theorem. Define
+\[\mb{f}(t,\mb{x})=A(t)\mb{x}+\mb{b}(t)\]
+The theorem requires $\mb{f}(t,\mb{x})$ to be
+\bit
+\item continuous on a neighborhood of $(t_0,x_0)$ (obvious), and
+\item locally Lipschitz continuous in $\mb{x}$.
+\eit
+\[\norm{\mb{f}(t,\mb{x}_1)-\mb{f}(t,\mb{x}_2)}=\norm{A(t)(\mb{x}_1-\mb{x}_2)}\le\norm{A(t)}\norm{\mb{x}_1-\mb{x}_2}\]
+Since $A(t)$ is continuous on $I$, for any $t_1\in I$, there exists a neighborhood $J\subseteq I$ of $t_1$ and a $L>0$ such that for all $t\in J$,
+\[\norm{A(t)}\le L\]
+Thus $\mb{f}$ is locally Lipschitz continuous in $\mb{x}$.
+\epr
 \sssc{Rewrite linear ODE to linear first-order system}
 Consider an $n$th-order linear ODE
 \[y^{(n)}+\sum_{i=0}^{n-1}a_i(x)y^{(i)}=f(x)\]
@@ -1611,18 +1629,8 @@ and $n\times n$ matrix
 called companion matrix.
 
 The ODE is equivalent to
-\[\mb{u}'=A(x)u+\mb{f}(x)\]
+\[\mb{u}'=A(x)\mb{u}+\mb{f}(x)\]
 where $A,\mb{f}$ are continuous on $I$.
-\sssc{Existence and uniqueness theorem for initial-value problem of linear first-order system}
-Consider the initial-value problem
-\[\mb{u}'=A(x)u+\mb{f}(x)\]
-\[\mb{u}(x_0)=\mb{b}\]
-where $A$ is an $n\times n$ matrix, $\mb{u},\mb{f},\mb{b}$ are $n\times 1$ matrices, and $A,\mb{f}$ are continuous on an open interval $I$ containing $x_0$. Then, there exists a unique solution on $I$.
-
-
-
-
-
 \sssc{Existence and uniqueness theorem for initial-value problem of linear ODE}
 Consider the initial-value problem
 \[y^{(n)}+\sum_{i=0}^{n-1}a_i(x)y^{(i)}=f(x)\]
@@ -1642,7 +1650,7 @@ and $n\times n$ matrix
 -a_0(x)&-a_1(x)&-a_2(x)&\cdots&-a_{n-1}(x)
 }\]
 The IVP is equivalent to
-\[\mb{u}'=A(x)u+\mb{f}(x)\]
+\[\mb{u}'=A(x)\mb{u}+\mb{f}(x)\]
 \[\mb{u}(x_0)=\mb{b}\]
 which has a unique solution on $I$.
 \epr
