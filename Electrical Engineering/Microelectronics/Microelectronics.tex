@@ -1034,7 +1034,7 @@ i_D&=\frac{Q}{L}v_n\\
       &=C_{ox}Wv_{OV}\mu_nE\\
       &=\mu_nC_{ox}\frac{W}{L}v_{OV}v_{DS}
 \ea\]
-Thus the channel conductivity $g_{DS}$ and resistance $r_{DS}$ are
+Thus the channel incremental conductivity $g_{DS}$ and incremental resistance $r_{DS}$ are
 \[g_{DS}=\frac{i_D}{v_{DS}}=\mu_nC_{ox}\frac{W}{L}v_{OV}\]
 \[r_{DS}=\frac{1}{g_{DS}}=\frac{1}{\mu_nC_{ox}\frac{W}{L}v_{OV}}\]
 The process transconductance parameter $k'_n$ is defined as
@@ -1158,8 +1158,8 @@ where
 \[V_{OV}=V_{GS}-V_t\]
 We denote
 \bit
-\item $A=(V_t,V_{DD},0)$;
-\item $B$ the bias point such that $V_{DS}=V_{OV}$, which is
+\item $A=(V_t,V_{DD},0)$, where the minimum $V_{GS}$ in saturation region occurs;
+\item $B$ the bias point such that $V_{DS}=V_{OV}$, where the maximum $V_{GS}$ in saturation region occurs, which is
 \[B=\qty(V_t+\frac{\sqrt{2k_nR_DV_{DD}+1}-1}{k_nR_D},\frac{\sqrt{2k_nR_DV_{DD}+1}-1}{k_nR_D},\frac{V_{DD}}{R_D}-\frac{\sqrt{2k_nR_DV_{DD}+1}-1}{k_nR_D^{\phantom{D}2}})\]
 \bpr
 \[V_{OV}=V_{DD}-\frac{1}{2}k_nR_DV_{OV}^2\]
@@ -1168,15 +1168,39 @@ We denote
 \[V_{GS}=V_t+\frac{\sqrt{2k_nR_DV_{DD}+1}-1}{k_nR_D}\]
 \[I_D=\frac{V_{DD}-V_{DS}}{R_D}=\frac{V_{DD}}{R_D}-\frac{\sqrt{2k_nR_DV_{DD}+1}-1}{k_nR_D^{\phantom{D}2}}\]
 \epr
-\item $C$ the bias point such that $V_{GS}=V_{DD}$, which is
-
+\item $C$ the bias point such that $V_{GS}=V_{DD}$, which is in triode region and is
+\[C=\qty(V_{DD},V_{DD}-\frac{1}{2}k_nR_D\qty(V_{DD}-V_t)^2,\frac{1}{2}k_n\qty(V_{DD}-V_t)^2)\]
 \bpr
-
+\[I_D=\frac{1}{2}k_n\qty(V_{DD}-V_t)^2\]
+\[V_{DS}=V_{DD}-I_DR_D=V_{DD}-\frac{1}{2}k_nR_D\qty(V_{DD}-V_t)^2\]
 \epr
+The incremental output resistance $r_{DS}$ at $C$
+\[r_{DS}\verb_C=\frac{1}{k_nV_{OV}\vert_C}=\frac{1}{k_n\qty(V_{DD}-V_t)}\]
+is called closure resistance.
+\eit
+\sssc{Small-signal linear amplification at a bias point}
+The transconductance $g_m$ is
+\[g_m=\frac{i_d}{v_{gs}}=\evlv{\pdv{i_D}{v_{GS}}}_{v_{GS}=V_{GS}}=k_n(V_{GS}-V_t)=k_nV_{OV}\]
+The voltage amplification $A_v$ is
+\[A_v=\frac{v_{ds}}{v_{gs}}=-g_mR_D=-k_nV_{OV}R_D\]
+Thus, the voltage amplifier is inverting.
+\sssc{Allowable signal swing}
 
 
+
+
+\sssc{Graphical analysis}
+We may analyze by plotting on $i_D$-$v_{DS}$ graph the MOSFET current equation corresponding to each fixed $v_{GS}$ and resistance line
+\[i_D=\frac{V_{DD}}{R_D}-\frac{v_{DS}}{R_D},\]
+which has $v_{DS}$ interception $V_{DD}$ and $i_D$ interception $\frac{V_{DD}}{R_D}$.
+
+The circuit will be operating on their intersection.
+\sssc{Maximum gain}
 We can write $k_n$ in terms of $V_{OV}\vert_B$:
 \[k_n=\frac{2(V_{DD}-V_{OV}\vert_B)}{R_D\qty(V_{OV}\vert_B)^2}\]
+The maximum magnitudes of $g_m$ and $A_v$ occur at the bias point $B$, where
+\[g_m\vert_B=\frac{2(V_{DD}-V_{OV}\vert_B)}{R_DV_{OV}\vert_B}\]
+\[A_v\vert_B=-\frac{2(V_{DD}-V_{OV}\vert_B)}{V_{OV}\vert_B}\]
 \bpr
 \[k_nR_DV_{OV}\vert_B+1=\sqrt{2k_nR_DV_{DD}+1}\]
 \[R_D^2\qty(V_{OV}\vert_B)^2k_n^2+2R_DV_{OV}\vert_Bk_n+1=2R_DV_{DD}k_n+1\]
@@ -1184,24 +1208,6 @@ We can write $k_n$ in terms of $V_{OV}\vert_B$:
 \[R_D\qty(V_{OV}\vert_B)^2k_n=2(V_{DD}-V_{OV}\vert_B)\]
 \[k_n=\frac{2(V_{DD}-V_{OV}\vert_B)}{R_D\qty(V_{OV}\vert_B)^2}\]
 \epr
-
-\sssc{Small-signal linear amplification at a bias point}
-The transconductance $g_m$ is
-\[g_m=\frac{i_d}{v_{gs}}=\evlv{\pdv{i_D}{v_{GS}}}_{v_{GS}=V_{GS}}=k_n(V_{GS}-V_t)=k_nV_{OV}\]
-The voltage amplification $A_v$ is
-\[A_v=\frac{v_{ds}}{v_{gs}}=-g_mR_D=-k_nV_{OV}R_D\]
-Thus, the voltage amplifier is inverting.
-
-Given an allowable signal swing at output $\max\abs{v_{ds}}$, the allowable signal swing at input $\max\abs{v_{gs}}$ differs across different bias point.
-
-The maximum magnitudes of $g_m$ and $A_v$ occur at the bias point $B$, where
-\[g_m\vert_B=\frac{2(V_{DD}-V_{OV}\vert_B)}{R_DV_{OV}\vert_B}\]
-\[A_v\vert_B=-\frac{2(V_{DD}-V_{OV}\vert_B)}{V_{OV}\vert_B}\]
-We may analyze by plotting on $i_D$-$v_{DS}$ graph the MOSFET current equation corresponding to each fixed $v_{GS}$ and resistance line
-\[i_D=\frac{V_{DD}}{R_D}-\frac{v_{DS}}{R_D},\]
-which has $v_{DS}$ interception $V_{DD}$ and $i_D$ interception $\frac{V_{DD}}{R_D}$.
-
-The circuit will be operating on their intersection.
 
 
 
