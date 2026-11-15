@@ -43,6 +43,7 @@ public:
 
 template <class T, class Node = BinaryTreeNode<T>> class BinaryTreeStatic {
 public:
+  using value_type = T;
   using node_type = Node;
 
   static std::vector<T> preorder(Node *node) {
@@ -291,7 +292,6 @@ Node *from_latex_forest(std::string s) {
 template <class T, class Node = BinaryTreeNode<T>>
 class BinaryTree : public BinaryTreeStatic<T, Node> {
 public:
-  using node_type = Node;
   using Base = BinaryTreeStatic<T, Node>;
   using Base::clone_subtree;
   using Base::inorder;
@@ -304,6 +304,8 @@ public:
   using Base::preorder;
   using Base::preorder_node;
   using Base::rightmost_child;
+  using value_type = T;
+  using node_type = Node;
 
   mutable Node *root; // Allow root->parent != nullptr
   std::ostream *oss;  // latex_forest logger
@@ -485,7 +487,6 @@ template <class T, class Node = BinaryTreeNode<T>, class Compare = std::less<T>>
   requires std::strict_weak_order<const Compare &, const T &, const T &>
 class BST : public BinaryTree<T, Node> {
 public:
-  using node_type = Node;
   using Base = BinaryTree<T, Node>;
   using Base::clear;
   using Base::inorder;
@@ -501,6 +502,8 @@ public:
   using Base::root;
   using Base::rotate_left;
   using Base::rotate_right;
+  using value_type = T;
+  using node_type = Node;
 
   [[no_unique_address]] Compare comp;
 
@@ -757,12 +760,13 @@ public:
 template <class T, class Node = AVLTreeNode<T>, class Compare = std::less<T>>
 class AVLTree : public BST<T, Node, Compare> {
 public:
-  using node_type = Node;
   using Base = BST<T, Node, Compare>;
   using Base::Base;
   using Base::log;
   using Base::log_forest;
   using Base::root;
+  using value_type = T;
+  using node_type = Node;
 
   AVLTree(const AVLTree &) = default;
   AVLTree(AVLTree &&) = default;
@@ -831,7 +835,6 @@ public:
 template <class T, class Node = BinaryTreeNode<T>, class Compare = std::less<T>>
 class SplayTree : public BST<T, Node, Compare> {
 public:
-  using node_type = Node;
   using Base = BST<T, Node, Compare>;
   using Base::Base;
   using Base::comp;
@@ -843,6 +846,8 @@ public:
   using Base::rotate_left;
   using Base::rotate_parent;
   using Base::rotate_right;
+  using value_type = T;
+  using node_type = Node;
 
 protected:
   using Base::replace;
