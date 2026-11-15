@@ -4905,6 +4905,48 @@ It's unknown whether $\gamma$ is irrational.
 &=\sum_{n=1}^\infty\frac{(-1)^{n+1}}{n}
 \ea\]
 \epr
+\subsection{Wallis product}
+\[\ba
+\frac{\pi}{2}&=\prod_{n=1}^{\infty}\frac{4n^2}{4n^2-1}\\
+             &=\prod_{n=1}^{\infty}\frac{2n}{2n-1}\frac{2n}{2n+1}\\
+             &=\lim_{n\to\infty}\frac{1}{2n+1}\frac{2^{4n}(n!)^4}{\qty((2n)!)^2}
+\ea\]
+\bpr
+Let
+\[I(n)=\int_0^{\pi}\sin^nx\dd{x}\]
+Use sine product integral:
+\[\int\sin^n(x)\dd{x}=-\frac{1}{n}\sin^{n-1}(x)\cos(x)+\frac{n-1}{n}\int\sin^{n-2}(x)\dd{x},\quad n\in\bbN_{>2}\]
+\[\evlp(-\frac{1}{n}\sin^{n-1}(x)\cos(x))_0^{\pi}=0\]
+We obtain the recursive relation:
+\[I(n)=\frac{n-1}{n}I(n-2),\quad n\in\bbN_{>2}\]
+with initial conditions:
+\[I(0)=\int_0^{\pi}\dd{x}=\pi\]
+\[I(1)=\int_0^{\pi}\sin x\dd{x}=\evlp(-\cos x)_0^{\pi}=2\]
+Separately compute closed forms for even and odd cases. For $n\in\bbN_0$:
+\[\ba
+I(2n)&=\frac{2n-1}{2n}I(2n-2)\\
+     &=\pi\prod_{k=1}^n\frac{2k-1}{2k}
+\ea\]
+\[\ba
+I(2n+1)&=\frac{2n}{2n+1}I(2n-1)\\
+       &=2\prod_{k=1}^n\frac{2k}{2k+1}
+\ea\]
+For any $n\in\bbN$, observe that
+\[\forall x\in[0,\pi]\colon\sin^{2n+1}x\le\sin^{2n}x\le\sin^{2n-1}x\]
+\[I(2n+1)\le I(2n)\le I(2n-1)\]
+\[1\le\frac{I(2n)}{I(2n+1)}\le\frac{I(2n-1)}{I(2n+1)}=\frac{2n}{2n+1}\]
+By the squeeze theorem, since
+\[\lim_{n\to\infty}\frac{2n}{2n+1}=1\]
+\[\lim_{n\to\infty}\frac{I(2n)}{I(2n+1)}=1\]
+\[\pi\prod_{k=1}^{\infty}\frac{2k-1}{2k}=2\prod_{k=1}^{\infty}\frac{2k}{2k+1}\]
+\[\frac{\pi}{2}=\prod_{k=1}^{\infty}\frac{2k}{2k-1}\frac{2k}{2k+1}\]
+Prove the last form. Let:
+\[\ba
+p_n=&\prod_{m=1}^n\frac{2m}{2m-1}\frac{2m}{2m+1}\\
+=&\frac{1}{2n+1}\prod_{m=1}^n\frac{(2m)^4}{\qty((2m)(2m-1))^2}\\
+=&\frac{1}{2n+1}\frac{2^{4n}(n!)^4}{\qty((2n)!)^2}
+\ea\]
+\epr
 \subsection{Stirling's approximation}
 \[n!=\sqrt{2\pi n}\qty(\frac{n}{e})^n\qty(1+O\qty(\frac{1}{n}))\]
 \bpr
@@ -4926,7 +4968,35 @@ a_{n+1}-a_n&=1-\qty(n+\frac{1}{2})\ln(1+\frac{1}{n})\\
            &=-\frac{1}{12n^2}+O\qty(n^{-3})\\
            &=O\qty(n^{-2})
 \ea\]
-\[\sum_{n=1}^{\infty}\abs{a_{n+1}-a_n}
+\[\sum_{n=1}^{\infty}\abs{a_{n+1}-a_n}<\infty\]
+The sequence $a_n$ converges to some finite constant $C$.
+\[\ba
+  \abs{a_n-C}=&\abs{\sum_{k=n}^{\infty}(a_k-a_{k+1})}\\
+  =&\sum_{k=n}^{\infty}O\qty(k^{-2})\\
+  =&O\qty(n^{-1})
+\ea\]
+\[a_n=C+O\qty(n^{-1})\]
+\[e^{a_n}=n!n^{-n-\frac{1}{2}}e^n=e^Ce^{O\qty(n^{-1})}\]
+\[n!=e^C\sqrt{n}\qty(\frac{n}{e})^ne^{O\qty(n^{-1})}\]
+Use Taylor expansion
+\[e^x=\sum_{j=0}^{\infty}\frac{x^j}{j!}\]
+\[e^{O\qty(n^{-1})}=\sum_{j=0}^{\infty}\frac{O\qty(n^{-j})}{j!}=1+O\qty(n^{-1})\]
+\[n!=e^C\sqrt{n}\qty(\frac{n}{e})^n\qty(1+O\qty(n^{-1}))\]
+Now compute $e^C$ using Wallis product:
+\[\frac{\pi}{2}=\lim_{n\to\infty}\frac{1}{2n+1}\frac{2^{4n}(n!)^4}{\qty((2n)!)^2}\]
+Let
+\[p_n=\frac{1}{2n+1}\frac{2^{4n}(n!)^4}{\qty((2n)!)^2}\]
+Consider
+\[n!=e^C\sqrt{n}\qty(\frac{n}{e})^n\]
+\[(2n)!=e^C\sqrt{2n}\qty(\frac{2n}{e})^{2n}\qty(1+O\qty(n^{-1}))\]
+\[\ba
+p_n&=\frac{1}{2n+1}\frac{2^{4n}(n!)^4}{\qty((2n)!)^2}\\
+   &=\frac{1}{2n+1}\frac{2^{4n}\qty(e^C\sqrt{n}\qty(\frac{n}{e})^n)^4}{\qty(e^C\sqrt{2n}\qty(\frac{2n}{e})^{2n})^2}\qty(1+O\qty(n^{-1}))\\
+   &=\frac{1}{2n+1}\frac{2^{4n}e^{2C}n^2\qty(\frac{n}{e})^{4n}}{2n\qty(\frac{2n}{e})^{4n}}\qty(1+O\qty(n^{-1}))\\
+   &=\frac{e^{2C}n}{2(2n+1)}\qty(1+O\qty(n^{-1}))
+\ea\]
+\[\lim_{n\to\infty}p_n=\frac{\pi}{2}=e^{2C}\lim_{n\to\infty}\frac{n}{2(2n+1)}=\frac{e^{2C}}{4}\]
+\[e^C=\sqrt{2\pi}\]
 \epr
 \subsection{Riemann zeta function or Euler–Riemann zeta function}
 \subsubsection{Definition}
@@ -6330,4 +6400,3 @@ or in polar coordinates
 
 
 \end{document}
-
