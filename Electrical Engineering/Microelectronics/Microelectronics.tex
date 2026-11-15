@@ -44,7 +44,15 @@ For two input terminals, the differential transfer function is the transfer func
 
 For two input terminals, the common-mode transfer function is the transfer function when an ideal source's output connecting both of them is treated as input signal.
 \sssc{Operating point, operation point, Q-point, quiescent point, or bias point}
-The steady-state DC voltage and current values that an electronic component processing time-varying signals is set to operate around is called bias point $Q$. Voltage and current at the bias point is called bias (voltage and current). A bias circuit is a portion of the device's circuit that supplies this steady current or voltage. A component in the bias circuit is called biasing. A bias voltage/current of a bias point $Q$ can be denoted by adding $\vert_Q$.
+The steady-state dc voltage and current values that an electronic component processing time-varying signals is set to operate around is called bias point $Q$. Voltage and current at the bias point is called bias (voltage and current). A bias circuit is a portion of the device's circuit that supplies this steady current or voltage. A component in the bias circuit is called biasing. A (dc) bias voltage/current of a bias point $Q$ can be denoted by adding $\vert_Q$. The total signal is the bias signal plus a time-varying signal.
+\sssc{Procedure of solving for the small-signal response of a device at a bias point}
+\bit
+\item Eliminate the signal source and determine the dc bias point.
+\item Calculate the values of parameters of the small-signal model at the bias point.
+\item Eliminate the dc sources by replacing each dc voltage source by a short circuit and each dc current source with an open circuit.
+\item Replace the device with its small-signal equivalent circuit model, which is often LTI to simplify the analysis.
+\item Solve for the response of the resulting circuit to small time-varying signal.
+\eit
 \sssc{Incremental resistance}
 The incremental resistance of a device at a bias point is $\dv{v}{i}$ at the point.
 \ssc{Amplifier (amp)}
@@ -765,7 +773,7 @@ For $V_{DD}>0.7$ V, the constant-voltage-drop model assumes $v_D$ to be a consta
 \sssc{Ideal-diode model}
 For voltages much larger than the diode voltage drop, the ideal diode model assumes $v_D$ to be $0$ V, and
 \[i_D=\frac{v_{DD}}{R}\]
-\sssc{Small signal model}
+\sssc{Small-signal model}
 Express the total diode voltage signal $v_D$ as the sum of the dc voltage $V_D$ and the time-varying signal $v_d$:
 \[v_D=V_D+v_d\]
 Consider the situation that $v_D$ is kept sufficiently small $v_D\ll V_T$, which we take about $v_D<5$ mV, and $V_{DD}$ undergoes a small change.
@@ -1038,8 +1046,8 @@ Thus the channel incremental conductivity $g_{DS}$ and incremental resistance $r
 \[g_{DS}=\frac{i_D}{v_{DS}}=\mu_nC_{ox}\frac{W}{L}v_{OV}\]
 \[r_{DS}=\frac{1}{g_{DS}}=\frac{1}{\mu_nC_{ox}\frac{W}{L}v_{OV}}\]
 The process transconductance parameter $k'_n$ is defined as
-\[k'_n=\mu_nC_{ox}\]
-since it's determined by the process technology, which has the dimension of A/V$^2$.
+\[k'_n=\mu_nC_{ox},\]
+which has the dimension of A/V$^2$ and is determined by the process technology.
 
 The transistor aspect ratio is defined as
 \[\frac{W}{L}\]
@@ -1065,10 +1073,12 @@ When $v_{GS}\ge V_t$ and $v_{DS}\ge v_{OV}$, the channel has zero depth at the d
 The voltage $v_{OV}$ is also denoted $v_{DS\tx{sat}}$, called saturation voltage. The incremental output resistance is thus infinite when $v_{DS}>v_{OV}$.
 
 Note that channel pinch-off does not mean channel blockage. Current continues to flow through the pinched-off channel. $v_{DS}-v_{DS\tx{sat}}$ appears a voltage drop across the depletion region. Free electrons are swept through the depletion region towards the drain when channel region has zero depth.
+
+The NMOS in saturation region can be modeled by a voltage-controlled current source with input $v_{GS}$ and output $i_D$. And the voltage across it is $v_{DS}$.
 \sssc{Saturation region channel-length modulation}
 When $v_{DS}>v_{OV}$, the channel length is actually less than $L$, with a portion near drain being of zero depth, i.e., depletion region, called channel-length modulation, and the current equation becomes
 \[i_D=\frac{1}{2}k_nv_{OV}^{\phantom{OV}2}(1+\lambda v_{DS}),\]
-where $\lambda\ge 0$ is a device parameter of the dimension of V$^{-1}$ and is inversely proportional to $L$. For device with large $L$, $\lambda$ is often negligible, while for submicron (micron = \textmu{}m) scale, $\lambda$ is often large. We take $V_A=\frac{1}{\lambda}$. The voltage axis interception of the current equation is $-V_A$.  We can isolate the dependence on $L$ with
+where $\lambda\ge 0$ is a device parameter of the dimension of V$^{-1}$ and is inversely proportional to $L$. For device with large $L$, $\lambda$ is often negligible, while for submicron (micron = \textmu{}m) scale, $\lambda$ is often large. We take $V_A=\frac{1}{\lambda}$, called early voltage. The voltage axis interception of the current equation is $-V_A$.  We can isolate the dependence on $L$ with
 \[V_A=V_A'L\]
 The output resistance $r_O$ is
 \[r_O=\frac{V_A}{I_D'}\]
@@ -1076,6 +1086,9 @@ where
 \[I_D'=\frac{1}{2}k_nv_{OV}^{\phantom{OV}2}\]
 And
 \[i_D=I_D'+\frac{v_{DS}}{r_O}\]
+The NMOS in saturation region can be modeled by a voltage-controlled current source with input $v_{GS}$ and output $I_D'$ in parallel with a resistance $r_O$. And the voltage across them is $v_{DS}$.
+
+$r_O$ is typically in the range of 10k to 1000k Ohm.
 \sssc{PMOS (transistor)/p-channel MOSFET/FET}
 \bit
 \item Physical structure: Reverse n and p in the description of NMOS.
@@ -1154,7 +1167,7 @@ Thus
 \[V_{DS}=V_{DD}-I_DR_D\]
 \[v_{ds}=-i_dR_D\]
 \[v_{OV}(t)=V_{OV}+v_{gs}(t)\]
-\[V_{OV}=V_{GS}-V_t\]
+\[V_{OV}=V_{GS}-V_t=\sqrt{\frac{2I_D}{k_n}}\]
 The small signal current is
 \[\ba
 i_d&=i_D-I_D\\
@@ -1190,10 +1203,10 @@ The incremental output resistance $r_{DS}$ at $C$
 \[r_{DS}\verb_C=\frac{1}{k_nV_{OV}\vert_C}=\frac{1}{k_n\qty(V_{DD}-V_t)}\]
 is called closure resistance.
 \eit
-\sssc{Allowable signal swing in output}
+\sssc{Allowable signal swing at drain}
 To have a voltage amplifier, we must have the limits
 \[V_{DD}\ge v_{DS}\ge v_{GS}-V_t>0\]
-Assume $v_{GS}-V_t>0$. For a given bias point $(V_{GS},V_{DS},I_D)$, the allowable signal swing in output is the maximum allowed $V_{ds}$ such that the device is always within the limits, that is,
+Assume $v_{GS}-V_t>0$. For a given bias point $(V_{GS},V_{DS},I_D)$, the allowable signal swing at the drain (i.e. in output for voltage amplifier) is the maximum allowed $V_{ds}$ such that the device is always within the limits, that is,
 \bit
 \item Upper limit:
 \[\max v_{DS}=V_{DS}+V_{ds}\le V_{DD}\]
@@ -1202,11 +1215,33 @@ If the upper limit is not satisfied, the positive peaks of the signal will be cl
 \[\min v_{DS}=V_{DS}-V_{ds}\ge V_{GS}-V_t\]
 If the lower limit is not satisfied, the transistor will enter the triode region for part of each cycle near negative peaks. We say that the circuit does not have sufficient legroom.
 \eit
-\sssc{Small-signal linear amplification at a bias point}
+\sssc{Small-signal linear amplification model for transconductance amplifier}
+The transconductance amplifier can be modeled as a linear VCCS for small signal that enforces
+\[i_d=g_mv_{gs}\]
 The transconductance $g_m$ is
-\[g_m=\frac{i_d}{v_{gs}}=\evlv{\pdv{i_D}{v_{GS}}}_{v_{GS}=V_{GS}}=k_n(V_{GS}-V_t)=k_nV_{OV}\]
-The voltage amplification $A_v$ is
-\[A_v=\frac{v_{ds}}{v_{gs}}=-g_mR_D=-k_nV_{OV}R_D\]
+\[\ba
+g_m&\coloneq\frac{i_d}{v_{gs}}\\
+   &=\evlv{\pdv{i_D}{v_{GS}}}_{v_{GS}=V_{GS}}\\
+   &=k_n(V_{GS}-V_t)\\
+   &=k_nV_{OV}\\
+   &=\frac{2I_D}{V_{OV}}\\
+   &=\sqrt{2k_nI_D}
+\ea\]
+\bit
+\item For a given bias point, $g_m$ is proportional to $k_n$, which is proportional to $\frac{W}{L}$ for a given $k'_n$.
+\item For a given MOSFET, $g_m$ is proportional to $V_{OV}$. Thus, we can increase $g_m$ by biasing the device at a large $V_{GS}$. However, this reduces the allowable signal swing at the drain.
+\item For a given MOSFET, $g_m$ is proportional to the square root of the bias current.
+\item For a given $k'_n$ and bias current $I_D$, $g_m$ is proportional to $\sqrt{\frac{W}{L}}$. For a typical MOSFET, $k'_n$ is 500 \textmu{}A/V$^2$ and $I_D=0.2$ mA, at which $\sqrt{2k_n'I_D}$ is about 0.45 mA/V.
+\eit
+\sssc{Small-signal linear amplification model for voltage amplifier}
+The voltage amplifier can be modeled as a linear VCVS for small signal that enforces
+\[v_{ds}=A_vv_{gs}\]
+The voltage gain $A_v$ is
+\[\ba
+A_v&\coloneq\frac{v_{ds}}{v_{gs}}\\
+   &=-g_mR_D\\
+   &=-k_nV_{OV}R_D
+\ea\]
 Thus, the voltage amplifier is inverting.
 \sssc{Graphical analysis}
 We may analyze by plotting on $i_D$-$v_{DS}$ graph the MOSFET current equation corresponding to each fixed $v_{GS}$ and resistance line
@@ -1227,9 +1262,22 @@ The maximum magnitudes of $g_m$ and $A_v$ occur at the bias point $B$, where
 \[R_D\qty(V_{OV}\vert_B)^2k_n=2(V_{DD}-V_{OV}\vert_B)\]
 \[k_n=\frac{2(V_{DD}-V_{OV}\vert_B)}{R_D\qty(V_{OV}\vert_B)^2}\]
 \epr
-\sssc{Small-signal equivalent circuit model}
+\sssc{Channel-length modulation}
+Consider the output resistance $r_O$ of the NMOS due to channel-length modulation in saturation region:
+\[r_O=\frac{V_A}{I_D}\]
+where $V_A$ is its early voltage and $I_D$ is the $I_D$ above.
 
+We model it by replacing $R_D$ with the equivalent resistance of $R_D$ and $r_O$ in parallel:
+\[\frac{R_Dr_O}{R_D+r_O},\]
+which reduces the magnitudes of transconductance and voltage gain, and adding a resistance $r_O$ in parallel with the VCCS in the small-signal model.
+\sssc{T equivalent circuit models}
+Consider the VCCS small-signal model without $r_O$.
+\ben
+\item Replace the VCCS with two same VCCS in series, with the node in between being X.
+\item Set the voltage of X relative S to $v_{gs}$, and thus connect G to X.
+\item Replace the VCCS between X and S with a resistance $\frac{1}{g_m}$.
+\een
+This is the T equivalent circuit model, where D, S, G are the three vertices of letter T and X is the intersection point.
 
-
-
+Now consider $r_O$, we can model it by adding a resistance $r_O$ connecting D and S.
 \end{document}
