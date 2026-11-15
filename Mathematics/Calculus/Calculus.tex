@@ -4908,8 +4908,25 @@ It's unknown whether $\gamma$ is irrational.
 \subsection{Stirling's approximation}
 \[n!=\sqrt{2\pi n}\qty(\frac{n}{e})^n\qty(1+O\qty(\frac{1}{n}))\]
 \bpr
-Laplace method, higher order, Stirling series
-TODO
+Define
+\[a_n=\ln(n!)-\qty(n+\frac{1}{2})\ln n+n,\quad n\in\bbN\]
+\[\ba
+a_{n+1}-a_n&=\ln(n+1)-\qty(n+\frac{3}{2})\ln(n+1)+\qty(n+\frac{1}{2})\ln +1\\
+           &=1-\qty(n+\frac{1}{2})\qty(\ln(n+1)-\ln n)\\
+           &=1-\qty(n+\frac{1}{2})\ln(1+\frac{1}{n})
+\ea\]
+Use Taylor expansion
+\[\ln(1+x)=-\sum_{j=1}^{\infty}\frac{1}{j}(-x)^j,\quad -1<x\le 1\]
+\[\ba
+a_{n+1}-a_n&=1-\qty(n+\frac{1}{2})\ln(1+\frac{1}{n})\\
+           &=1+\qty(n+\frac{1}{2})\sum_{j=1}^{\infty}\frac{1}{j}(-1)^jn^{-j}\\
+           &=\sum_{j=2}^{\infty}\frac{1}{j}(-1)^jn^{-j+1}+\frac{1}{2}\sum_{j=1}^{\infty}\frac{1}{j}(-1)^jn^{-j}\\
+           &=\sum_{j=1}^{\infty}\frac{1}{j+1}(-1)^{j+1}n^{-j}+\frac{1}{2}\sum_{j=1}^{\infty}\frac{1}{j}(-1)^jn^{-j}\\
+           &=\sum_{j=1}^{\infty}\qty(\frac{1}{j+1}(-1)^{j+1}+\frac{1}{2}\frac{1}{j}(-1)^j)n^{-j}\\
+           &=-\frac{1}{12n^2}+O\qty(n^{-3})\\
+           &=O\qty(n^{-2})
+\ea\]
+\[\sum_{n=1}^{\infty}\abs{a_{n+1}-a_n}
 \epr
 \subsection{Riemann zeta function or Euler–Riemann zeta function}
 \subsubsection{Definition}
