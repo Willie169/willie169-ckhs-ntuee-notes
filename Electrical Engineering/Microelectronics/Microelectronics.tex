@@ -109,6 +109,8 @@ A voltage gain $A_v$ in dB is defined as
 \[G_v=20\log_{10}(A_v)\]
 A current gain $A_c$ in dB is defined as
 \[G_c=20\log_{10}(A_c)\]
+\sssc{Voltage-transfer characteristic (VTC)}
+A plot of output voltage (vertical axis) versus inout voltage (horizontal axis) of a voltage amplifier.
 \sssc{Saturation}
 The linear characteristic only remains within a range. A positive and negative saturation levels can be observed.
 \sssc{S parameter}
@@ -1001,9 +1003,9 @@ Thus, the output voltage is:
 \sssc{Physical structure of NMOS (transistor)/n-channel MOSFET/FET}
 An NMOS consists of a slightly doped p-typr substrate with width $W$, with a metal contact below forming the substrate, body, or bulk (B) terminal, two heavily doped n-type regions, n$^+$ source and n$^+$ drain regions, embedded onto the substrate in the left and right symmetrically, with the same width as the substrate, and with distance $L$ between the two regions called channel length, each with a metal contact on top forming source (S) and drain (D) terminals respectively, and a silicon dioxide \ce{SiO2} or similar oxide layer of thickness $t_{ox}$ on top of the three region contacting all of them but not their metal contact with the same width as the substrate, with a metal contact on top forming the gate (G) terminal, also called gate electrode. Thus, the FET is symmetrical.
 
-The substrate forms pn junctions with the source and drain regions, which are kept reverse biased at all times. Assume that the body has no effect on the device operation, and we can treat the MOSFET as a three-terminal device, with the terminals being the gate (G), the source (S), and the drain (D). We define the voltage relative to the source: $v_{GS}=v_G-v_S$ is the gate-to-source voltage, and $v_{DS}=v_D-v_S$ is the drain-to-source voltage. The area of the substrate just under the gate is called channel region, which has length $L$ and width $W$.
+The substrate forms pn junctions with the source and drain regions, which are kept reverse biased at all times. Assume that the body has no effect on the device operation, and we can treat the MOSFET as a three-terminal device, with the terminals being the gate (G), the source (S), and the drain (D). We define the voltage relative to the source: $v_{GS}=v_G-v_S$ is the gate-to-source voltage, and $v_{DS}=v_D-v_S$ is the drain-to-source voltage. The area of the substrate just under the gate is called channel region, which has length $L$ and width $W$. $i_{DS}$ is denoted $i_D$.
 
-We will be referring to NMOS unless otherwise specified.
+MOS will be referring to NMOS unless otherwise specified.
 \sssc{Cutoff region}
 When $v_{GS}<V_t$ where $V_t>0$ is the threshold voltage, it acts as two back-to-back diodes in series between drain and source, which prevent current conduction from drain to source when a voltage $v_{DS}$ is applied, called cutoff region. The high resistance between source and drain is about $10^{12}$ Ohm.
 \sssc{Inducing n-channel}
@@ -1028,12 +1030,12 @@ The drift velocity of free electrons in the channel region is
 \[v_n=-\mu_nE\]
 The (drift) current is
 \[\ba
-i_{DS}&=\frac{Q}{L}v_n\\
+i_D&=\frac{Q}{L}v_n\\
       &=C_{ox}Wv_{OV}\mu_nE\\
       &=\mu_nC_{ox}\frac{W}{L}v_{OV}v_{DS}
 \ea\]
 Thus the channel conductivity $g_{DS}$ and resistance $r_{DS}$ are
-\[g_{DS}=\frac{i_{DS}}{v_{DS}}=\mu_nC_{ox}\frac{W}{L}v_{OV}\]
+\[g_{DS}=\frac{i_D}{v_{DS}}=\mu_nC_{ox}\frac{W}{L}v_{OV}\]
 \[r_{DS}=\frac{1}{g_{DS}}=\frac{1}{\mu_nC_{ox}\frac{W}{L}v_{OV}}\]
 The process transconductance parameter $k'_n$ is defined as
 \[k'_n=\mu_nC_{ox}\]
@@ -1044,7 +1046,7 @@ The transistor aspect ratio is defined as
 The MOSFET transconductance parameter $k_n$ is defined as
 \[k_n=k'_n\frac{W}{L}\]
 And the current equation is
-\[i_{DS}=k_nv_{OV}v_{DS}\]
+\[i_D=k_nv_{OV}v_{DS}\]
 \sssc{Triode region}
 When $v_{GS}\ge V_t$, apply a $v_{DS}<v_{OV}$, it appears as a voltage drop across the length of the channel. At the source end,
 \[v_{GS}-V_t=v_{OV}\]
@@ -1053,27 +1055,27 @@ At the drain end
 The induced channel acquires a tapered shape, and the charge in it is proportional to the channel cross-sectional area
 \[\frac{1}{2}\qty(v_{OV}+(v_{OV}-v_{DS}))=v_{OV}-\frac{1}{2}v_{DS}\]
 The current equation becomes
-\[i_{DS}=k_n\qty(v_{OV}-\frac{1}{2}v_{DS})v_{DS}=k_n\qty(v_{OV}v_{DS}-\frac{1}{2}v_{DS}^{\phantom{DS}2})\]
+\[i_D=k_n\qty(v_{OV}-\frac{1}{2}v_{DS})v_{DS}=k_n\qty(v_{OV}v_{DS}-\frac{1}{2}v_{DS}^{\phantom{DS}2})\]
 The linear current equation mentioned earlier is an approximation of it using $v_{DS}\ll v_{OV}$.
 
 The $0<v_{DS}<v_{OV}$ regions is called triode region.
 \sssc{Saturation region}
 When $v_{GS}\ge V_t$ and $v_{DS}\ge v_{OV}$, the channel has zero depth at the drain end, called channel pinch-off, assuming the zero-depth length is negligible relative to $L$, the current saturates at
-\[i_{DS}=\frac{1}{2}k_nv_{OV}^{\phantom{OV}2}\]
+\[i_D=\frac{1}{2}k_nv_{OV}^{\phantom{OV}2}\]
 The voltage $v_{OV}$ is also denoted $v_{DS\tx{sat}}$, called saturation voltage. The incremental output resistance is thus infinite when $v_{DS}>v_{OV}$.
 
 Note that channel pinch-off does not mean channel blockage. Current continues to flow through the pinched-off channel. $v_{DS}-v_{DS\tx{sat}}$ appears a voltage drop across the depletion region. Free electrons are swept through the depletion region towards the drain when channel region has zero depth.
 \sssc{Saturation region channel-length modulation}
 When $v_{DS}>v_{OV}$, the channel length is actually less than $L$, with a portion near drain being of zero depth, i.e., depletion region, called channel-length modulation, and the current equation becomes
-\[i_{DS}=\frac{1}{2}k_nv_{OV}^{\phantom{OV}2}(1+\lambda v_{DS}),\]
+\[i_D=\frac{1}{2}k_nv_{OV}^{\phantom{OV}2}(1+\lambda v_{DS}),\]
 where $\lambda\ge 0$ is a device parameter of the dimension of V$^{-1}$ and is inversely proportional to $L$. For device with large $L$, $\lambda$ is often negligible, while for submicron (micron = \textmu{}m) scale, $\lambda$ is often large. We take $V_A=\frac{1}{\lambda}$. The voltage axis interception of the current equation is $-V_A$.  We can isolate the dependence on $L$ with
 \[V_A=V_A'L\]
 The output resistance $r_O$ is
-\[r_O=\frac{V_A}{I_{DS}'}\]
+\[r_O=\frac{V_A}{I_D'}\]
 where
-\[I_{DS}'=\frac{1}{2}k_nv_{OV}^{\phantom{OV}2}\]
+\[I_D'=\frac{1}{2}k_nv_{OV}^{\phantom{OV}2}\]
 And
-\[i_{DS}=I_{DS}'+\frac{v_{DS}}{r_O}\]
+\[i_D=I_D'+\frac{v_{DS}}{r_O}\]
 \sssc{PMOS (transistor)/p-channel MOSFET/FET}
 \bit
 \item Physical structure: Reverse n and p in the description of NMOS.
@@ -1122,4 +1124,61 @@ A technology was developed that permits the fabrication of both NMOS and PMOS tr
 ;
 \end{tikzpicture}
 \end{center}
+\ssc{MOSFET amplifier}
+\sssc{Transconductance amplifier}
+To operate MOSFET as an amplifier, it should be in the saturation region, which is a nonlinear voltage-controlled current source.
+\[i_D=\frac{1}{2}k_n\qty(v_{GS}-V_t)^2\]
+\sssc{Voltage amplifier}
+To have a voltage output, ground source S terminal, flow the output current $i_D$ through a resistor $R_D$ between drain D terminal and a supply voltage $V_{DD}$, and take drain D terminal as output terminal, i.e., output voltage $v_O=v_{DS}$.
+\[v_{DS}=V_{DD}-i_DR_D\]
+\[i_D=\frac{V_{DD}}{R_D}-\frac{v_{DS}}{R_D}\]
+\sssc{Voltage-transfer characteristic (VTC)}
+\bit
+\item As $v_{OV}<0$, the transistor is cut off, $v_{DS}=V_DD$.
+\item As $v_{DS}>v_{OV}>0$, the transistor is in saturation region, and $v_{DS}$ decreases as $v_{GS}$ increases (since $i_D$ increases), also called active region for the amplifier. We confine the operating point $Q$ within this region to have a MOSFET amplifier.
+\item As $v_{DS}<v_{OV}$, the transistors is in triode region.
+\eit
+In the active region:
+\[v_{DS}=V_{DD}-\frac{1}{2}k_nR_D\qty(v_{OV})^2\]
+\sssc{Small-signal linear amplification at a bias point}
+At a bias point $Q$, let
+\[v_{GS}(t)=V_{GS}+v_{gs}(t)\]
+\[v_{OV}(t)=V_{OV}+v_{gs}(t)\]
+\[v_{DS}(t)=V_{DS}+v_{ds}(t)\]
+\[i_D(t)=I_D+i_d(t)\]
+where the first terms are bias point and second terms are small signals, and
+\[V_{OV}=V_{GS}-V_t\]
+\[I_D=\frac{1}{2}k_n\qty(V_{GS}-V_t)^2\]
+\[V_{DS}=V_{DD}-I_DR_D\]
+\[v_{ds}=-i_dR_D\]
+The transconductance $g_m$ is
+\[g_m=\frac{i_d}{v_{gs}}=\evlv{\pdv{i_D}{v_{GS}}}_{v_{GS}=V_{GS}}=k_n(V_{GS}-V_t)=k_nV_{OV}\]
+The voltage amplification $A_v$ is
+\[A_v=\frac{v_{ds}}{v_{gs}}=-g_mR_D=-k_nV_{OV}R_D\]
+Thus, the voltage amplifier is inverting.
+
+Given an allowable signal swing at output $\max\abs{v_{ds}}$, the allowable signal swing at input $\max\abs{v_{gs}}$ differs across different bias point.
+
+The bias point of $V_{DS}=V_{OV}$ is denoted $B$, which is the edge of saturation.
+\[V_{OV}\vert_B=V_{DD}-\frac{1}{2}k_nR_D\qty(V_{OV}\vert_B)^2\]
+\[\frac{1}{2}k_nR_D\qty(V_{OV}\vert_B)^2+V_{OV}\vert_B-V_{DD}=0\]
+\[V_{OV}\vert_B=\frac{\sqrt{2k_nR_DV_{DD}+1}-1}{k_nR_D}=V_{DS}\vert_B=V_{GS}\vert_B-V_t\]
+\[V_{GS}\vert_B=V_t+\frac{\sqrt{2k_nR_DV_{DD}+1}-1}{k_nR_D}\]
+We can write $k_n$ in terms of $V_{OV}\vert_B$:
+\[k_n=\frac{2(V_{DD}-V_{OV}\vert_B)}{R_D\qty(V_{OV}\vert_B)^2}\]
+\bpr
+\[k_nR_DV_{OV}\vert_B+1=\sqrt{2k_nR_DV_{DD}+1}\]
+\[R_D^2\qty(V_{OV}\vert_B)^2k_n^2+2R_DV_{OV}\vert_Bk_n+1=2R_DV_{DD}k_n+1\]
+\[R_D^2\qty(V_{OV}\vert_B)^2k_n^2+2R_D(V_{OV}\vert_B-V_{DD})k_n=0\]
+\[R_D\qty(V_{OV}\vert_B)^2k_n=2(V_{DD}-V_{OV}\vert_B)\]
+\[k_n=\frac{2(V_{DD}-V_{OV}\vert_B)}{R_D\qty(V_{OV}\vert_B)^2}\]
+\epr
+The maximum magnitudes of $g_m$ and $A_v$ occur at the bias point $B$, where
+\[g_m\vert_B=\frac{2(V_{DD}-V_{OV}\vert_B)}{R_DV_{OV}\vert_B}\]
+\[A_v\vert_B=-\frac{2(V_{DD}-V_{OV}\vert_B)}{V_{OV}\vert_B}\]
+
+
+
+
+
 \end{document}
