@@ -1126,10 +1126,10 @@ A technology was developed that permits the fabrication of both NMOS and PMOS tr
 \end{center}
 \ssc{MOSFET amplifier}
 \sssc{Transconductance amplifier}
-To operate MOSFET as an amplifier, it should be in the saturation region, which is a nonlinear voltage-controlled current source.
+To operate MOSFET as an amplifier, it should be in the saturation region, which is a nonlinear voltage-controlled current source with input $v_{GS}$ and output $i_D$, where
 \[i_D=\frac{1}{2}k_n\qty(v_{GS}-V_t)^2\]
 \sssc{Voltage amplifier}
-To have a voltage output, ground source S terminal, flow the output current $i_D$ through a resistor $R_D$ between drain D terminal and a supply voltage $V_{DD}$, and take drain D terminal as output terminal, i.e., output voltage $v_O=v_{DS}$.
+To have a voltage output, flow the output current $i_D$ through a resistor $R_D$ between drain and a supply voltage $V_{DD}$, and take $v_{DS}$ as output, where
 \[v_{DS}=V_{DD}-i_DR_D\]
 \[i_D=\frac{V_{DD}}{R_D}-\frac{v_{DS}}{R_D}\]
 \sssc{Voltage-transfer characteristic (VTC)}
@@ -1149,17 +1149,29 @@ of bias dc voltages/currents such that
 \[i_D(t)=I_D+i_d(t)\]
 where the second terms are small signals.
 
-Thus,
+Thus
 \[I_D=\frac{V_{DD}-V_{DS}}{R_D}=\frac{1}{2}k_n\qty(V_{GS}-V_t)^2\]
 \[V_{DS}=V_{DD}-I_DR_D\]
 \[v_{ds}=-i_dR_D\]
 \[v_{OV}(t)=V_{OV}+v_{gs}(t)\]
-where
 \[V_{OV}=V_{GS}-V_t\]
+The small signal current is
+\[\ba
+i_d&=i_D-I_D\\
+   &=\frac{1}{2}k_n\qty(V_{GS}+v_{gs}-V_t)^2-\frac{1}{2}k_n\qty(V_{GS}-V_t)^2\\
+   &=\frac{1}{2}(2V_{GS}+v_{gs}-2V_t)v_{gs}\\
+   &=k_n(V_{GS}-V_t)v_{gs}+\frac{1}{2}k_nv_{gs}^{\phantom{gs}2}
+\ea\]
+The input signal is kept sufficiently small such that
+\[\frac{1}{2}k_nv_{gs}^{\phantom{gs}2}\ll k_n(V_{GS}-V_t)v_{gs}\]
+that is
+\[v_{gs}\ll 2(V_{GS}-V_t)=2V_{OV}\]
+As so,
+\[i_d=k_n(V_{GS}-V_t)v_{gs}\]
 We denote
 \bit
 \item $A=(V_t,V_{DD},0)$, where the minimum $V_{GS}$ in saturation region occurs;
-\item $B$ the bias point such that $V_{DS}=V_{OV}$, where the maximum $V_{GS}$ in saturation region occurs, which is
+\item $B$ the bias point such that $V_{DS}=V_{OV}$, where the maximum $V_{GS}$ in saturation region occurs, which is the edge between saturation and triode region and is
 \[B=\qty(V_t+\frac{\sqrt{2k_nR_DV_{DD}+1}-1}{k_nR_D},\frac{\sqrt{2k_nR_DV_{DD}+1}-1}{k_nR_D},\frac{V_{DD}}{R_D}-\frac{\sqrt{2k_nR_DV_{DD}+1}-1}{k_nR_D^{\phantom{D}2}})\]
 \bpr
 \[V_{OV}=V_{DD}-\frac{1}{2}k_nR_DV_{OV}^2\]
@@ -1178,17 +1190,24 @@ The incremental output resistance $r_{DS}$ at $C$
 \[r_{DS}\verb_C=\frac{1}{k_nV_{OV}\vert_C}=\frac{1}{k_n\qty(V_{DD}-V_t)}\]
 is called closure resistance.
 \eit
+\sssc{Allowable signal swing in output}
+To have a voltage amplifier, we must have the limits
+\[V_{DD}\ge v_{DS}\ge v_{GS}-V_t>0\]
+Assume $v_{GS}-V_t>0$. For a given bias point $(V_{GS},V_{DS},I_D)$, the allowable signal swing in output is the maximum allowed $V_{ds}$ such that the device is always within the limits, that is,
+\bit
+\item Upper limit:
+\[\max v_{DS}=V_{DS}+V_{ds}\le V_{DD}\]
+If the upper limit is not satisfied, the positive peaks of the signal will be clipped off. We say that the circuit does not have sufficient headroom.
+\item Lower limit:
+\[\min v_{DS}=V_{DS}-V_{ds}\ge V_{GS}-V_t\]
+If the lower limit is not satisfied, the transistor will enter the triode region for part of each cycle near negative peaks. We say that the circuit does not have sufficient legroom.
+\eit
 \sssc{Small-signal linear amplification at a bias point}
 The transconductance $g_m$ is
 \[g_m=\frac{i_d}{v_{gs}}=\evlv{\pdv{i_D}{v_{GS}}}_{v_{GS}=V_{GS}}=k_n(V_{GS}-V_t)=k_nV_{OV}\]
 The voltage amplification $A_v$ is
 \[A_v=\frac{v_{ds}}{v_{gs}}=-g_mR_D=-k_nV_{OV}R_D\]
 Thus, the voltage amplifier is inverting.
-\sssc{Allowable signal swing}
-
-
-
-
 \sssc{Graphical analysis}
 We may analyze by plotting on $i_D$-$v_{DS}$ graph the MOSFET current equation corresponding to each fixed $v_{GS}$ and resistance line
 \[i_D=\frac{V_{DD}}{R_D}-\frac{v_{DS}}{R_D},\]
@@ -1208,7 +1227,7 @@ The maximum magnitudes of $g_m$ and $A_v$ occur at the bias point $B$, where
 \[R_D\qty(V_{OV}\vert_B)^2k_n=2(V_{DD}-V_{OV}\vert_B)\]
 \[k_n=\frac{2(V_{DD}-V_{OV}\vert_B)}{R_D\qty(V_{OV}\vert_B)^2}\]
 \epr
-
+\sssc{Small-signal equivalent circuit model}
 
 
 
