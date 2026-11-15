@@ -20,11 +20,11 @@ A queue is first-in-first-out (FIFO) list. Adding an element is called enqueue a
 An array is a fixed-size list of elements of the same memory size, each identified by at least one index, stored contiguously such that the position (memory address) of each element can be computed from its index in $O(1)$ time, i.e., random access in $O(1)$ time.
 \ssc{Dynamic array, growable array, resizable array, dynamic table, mutable array, or array list}
 \sssc{Dynamic array, growable array, resizable array, dynamic table, mutable array, or array list}
-A dynamic array is a variable-size list where the elements are stored in array of a size called capacity. The number of elements is called size. Whenever its size reaches its capacity, it reserves an array of a new capacity elsewhere and moves all elements to it, called resizing. The new capacity reserved when resizing is typically (an integer approximation of) a constant, called doubling factor, and which is more than one, times of the size.
+A dynamic array is a variable-size list where the elements are stored in array of a size called capacity. The number of elements is called size. Whenever its size reaches its capacity, it reserves an array of a new capacity elsewhere and moves all elements to it, called resizing. The new capacity reserved when resizing is typically (an integer approximation of) a constant, called growing factor, and which is more than one, times of the size.
 
 It has random access and popping back in $O(1)$ time, pushing back in amortized $O(1)$ time, but removal and insertion in $O(n)$ time. It is a stack with front as bottom and back as top.
 \sssc{Amortized analysis}
-Let the number of elements be $n$, the capacity be $c$, and the doubling factor be $k>1$. Let the dynamic array start at $c=1$. Let the cost of pushing back an element without resizing and the cost of moving each element to a new location both be 1.
+Let the number of elements be $n$, the capacity be $c$, and the growing factor be $k>1$. Let the dynamic array start at $c=1$. Let the cost of pushing back an element without resizing and the cost of moving each element to a new location both be 1.
 
 Define the potential function $P(n,c)$ as
 \[P(n,c)=-\frac{1}{k-1}c\]
