@@ -31,18 +31,6 @@ Their relation is
 \[i_c(t)=I_c\sin(\omega t+\varphi)\]
 \sssc{Differential and common-mode signal}
 For two input signals, the differential signal (AC signal) is the difference between them, and the common-mode signal (DC signal) is the algebraic average of them.
-\sssc{Input and output impedance}
-For a component's input, input impedance is the impedance relative to ground as seemed from the input.
-
-For a component's output, output impedance is the impedance relative to ground as seemed from the input.
-\sssc{Differential and common-mode impedance}
-For two input terminals, the differential input impedance is the input impedance relative to ground as seemed by them when a ideal source connects them directly.
-
-For two input terminals, the common-mode input impedance is the input impedance relative to ground as seemed by them when an ideal source's output connects both of them.
-\sssc{Differential and common-mode transfer function}
-For two input terminals, the differential transfer function is the transfer function when they are connected to $\frac{1}{2}$ differential input signal and $-\frac{1}{2}$ differential input signal respectively.
-
-For two input terminals, the common-mode transfer function is the transfer function when an ideal source's output connecting both of them is treated as input signal.
 \sssc{Operating point, operation point, Q-point, quiescent point, or bias point}
 The steady-state dc voltage and current values that an electronic component processing time-varying signals is set to operate around is called bias point $Q$. Voltage and current at the bias point is called bias (voltage and current). A bias circuit is a portion of the device's circuit that supplies this steady current or voltage. A component in the bias circuit is called biasing. A (dc) bias voltage/current of a bias point $Q$ can be denoted by adding $\vert_Q$. The total signal is the bias signal plus a time-varying signal.
 \sssc{Procedure of solving for the small-signal response of a device at a bias point}
@@ -57,15 +45,53 @@ The steady-state dc voltage and current values that an electronic component proc
 The incremental resistance of a device at a bias point is $\dv{v}{i}$ at the point.
 \ssc{Amplifier (amp)}
 \sssc{Amplifier}
-An electronic device which amplifies an electrical signal by a scale called amplifier gain $A$ and optionally convert voltage signal to current signal or vice versa.
+An electronic device which amplifies an electrical signal by a scale called amplifier gain and optionally convert voltage signal to current signal or vice versa.
 \sssc{Circuit symbol}
+For an amplifier with an input terminal and an output terminal, we denote it amplifier as a triangle with one vertex as the output terminal and the midpoint of its opposite side as the input terminal. Power supplies and reference ground of amplifier (if any) are usually indicated with connections from the midpoints of the other two sides. Load, often denoted with $R_L$ for resistance or $Z_L$ for impedance, is to be connected between the output terminal and ground, which can be a normal resistance or the input resistance of a succeeding.
 \begin{center}
 \begin{circuitikz}[]
 \draw (0,0) node[op amp, anchor=+]{};
 \end{circuitikz}
 \end{center}
+\sssc{Input impedance}
+The input impedance $Z_i$ of an amplifier is the load effect of the amplifier input on the signal source, i.e., the input voltage (relative to ground) divided by the input current.
+\sssc{Output impedance}
+The output impedance $Z_o$ of an amplifier is the load effect of the amplifier seen looking back into the output terminal when input signal is set to zero, i.e., when the input signal is set to zero and an independent source is connected to the output terminal, the output voltage (relative to ground) divided by the current into it.
+\sssc{Open-circuit/short-circuit gain}
+The open-circuit gain $A_o$ for amplifier with voltage output is the gain when the output terminal is not connected to anything, i.e., $R_L=\infty$.
+
+The short-circuit gain $A_s$ for amplifier with current output is the gain when the output terminal is connected to ground, i.e., $R_L=0$.
+
+TODO: relation
 \sssc{Two-port model}
-An amplifier can be modeled as a two port model, where an one input port and one output port is related by the amplifier, which acts as a controlled source controlled by the input port voltage or current which enforces voltage or current on the output port.
+An amplifier of one input signal and one output signal can be modeled as a two port model, where an one input port and one output port is related by the amplifier, which acts as a controlled source controlled by the input port voltage or current and enforces voltage or current on the output port. The input port is an impedance of amplifier input impedance connecting the input terminal and ground, where the input signal is the voltage across or current through this impedance. The output port is, for current output, a controlled current source of the amplifier short-circuit gain in parallel with an impedance of amplifier output impedance connecting the output terminal and ground; and for voltage output, a controlled voltage source of the amplifier open-circuit gain in series with an impedance of amplifier output impedance connecting the output terminal and ground.
+\sssc{Amplifier characterizing}
+An amplifier of one input signal and one output signal is charactered by its input impedance, output impedance, and open-circuit/short-circuit gain.
+
+The closed-loop gain $A$ with a load $Z_L$ is the gain with output taken on $Z_L$, and is, for voltage output,
+\[A=A_o\frac{Z_L}{Z_L+Z_O}\]
+for current output,
+\[A=A_s\frac{Z_O}{Z_L+Z_O}\]
+The overall gain $G$ with input source impedance $Z_s$ and a load $Z_L$ is the gain with input taken on input source and output taken on $Z_L$, and is, for voltage input,
+\[G=A\frac{Z_i}{Z_i+Z_s}\]
+for current input,
+\[G=A\frac{Z_s}{Z_i+Z_s}\]
+\sssc{Differential and common-mode impedance}
+For two input terminals, the differential input impedance is the input impedance as seemed by them when a ideal source connects them directly.
+
+For two input terminals, the common-mode input impedance is the input impedance as seemed by them when an ideal source's output connects both of them.
+\sssc{Differential and common-mode gain}
+For two input terminals, the differential gain is the gain when they are connected to $\frac{1}{2}$ differential input signal and $-\frac{1}{2}$ differential input signal respectively.
+
+For two input terminals, the common-mode gain is the gain when an ideal source's output connecting both of them is treated as input signal.
+\sssc{Voltage-transfer characteristic (VTC)}
+A plot of output voltage (vertical axis) versus input voltage (horizontal axis) of a voltage amplifier.
+\sssc{S parameter}
+If the energy enters through port $i$ and emerges from port $j$, the S parameter is named $S_{ji}$.
+\sssc{Unilateral amplifier}
+An unilateral amplifier is an amplifier in which the signal transfer is effectively one-way, that is, the output signal is only dependent on the input signal but not what is connected to the output terminal. That is for each output port $j$ and each input port $i$, $S_{ij}=0$.
+\sssc{Saturation}
+For some device, some linear characteristic only remains within a range. A positive and negative saturation levels can be observed.
 \sssc{Circuit model of voltage amplifier}
 A voltage amplifier draws current from a source $v_s$ with internal resistance $R_s$ with input resistance $R_i$ and voltage $v_{in}$ across it and supplies $v_c=\mu v_{in}$ to a load network with output resistance $R_o$ and load $R_L$, where $\mu$, also denoted $A_{vo}$, is open-loop voltage gain factor.
 \[\frac{v_{in}}{v_s}=\frac{R_i}{R_s+R_i}\]
@@ -117,14 +143,6 @@ A voltage gain $A_v$ in dB is defined as
 \[G_v=20\log_{10}(A_v)\]
 A current gain $A_c$ in dB is defined as
 \[G_c=20\log_{10}(A_c)\]
-\sssc{Voltage-transfer characteristic (VTC)}
-A plot of output voltage (vertical axis) versus inout voltage (horizontal axis) of a voltage amplifier.
-\sssc{Saturation}
-The linear characteristic only remains within a range. A positive and negative saturation levels can be observed.
-\sssc{S parameter}
-If the energy enters through port $i$ and emerges from port $j$, the S parameter is named $S_{ji}$.
-\sssc{Unilateral amplifier}
-An unilateral amplifier is an amplifier in which the signal transfer is effectively one-way, that is, the output signal is only dependent on the input signal but not what is connected to the output terminal. That is for each output port $j$ and each input port $i$, $S_{ij}=0$.
 \sssc{Power supply}
 To amplify signal, power supplies are needed, but often omitted in the diagram.
 \bit
@@ -1332,4 +1350,17 @@ For that with channel-length modulation with finite output resistance $r_O$, the
 \item For a given MOSFET, $g_m$ is proportional to the square root of the bias current.
 \item For a given $k'_n$ and bias current $I_D$, $g_m$ is proportional to $\sqrt{\frac{W}{L}}$. For a typical MOSFET, $k'_n$ is 500 \textmu{}A/V$^2$ and $I_D=0.2$ mA, at which $\sqrt{2k_n'I_D}$ is about 0.45 mA/V.
 \eit
+\ssc{Common-source (CS), Common-gate (CG), and Common-drain (CD) amplifier}
+\sssc{Amplifier characterizing}
+There are three basic configurations of single-MOSFET amplifier. Each of these configurations is obtained by connecting one of the device terminals to ground. Thus creating a two-port network with the grounded terminal being common to the input and output ports. In circuit symbol, we indicate the common ground with a connection to ground from the midpoint of a side other than that of input terminal.
+\sssc{Common-source (CS) amplifier}
+Connect the source terminal to ground, apply input voltage signal $v_i$ between the gate terminal and ground, connect the drain terminal and ground through a resistance $R_D$, and take the output voltage signal $v_o$ between the drain terminal and ground.
+\sssc{Common-gate (CG) amplifier}
+Connect the gate terminal to ground, apply input voltage signal $v_i$ between the source terminal and ground, connect the drain terminal and ground through a resistance $R_D$, and take the output voltage signal $v_o$ between the drain terminal and ground.
+\sssc{Common-drain (CD) amplifier or source follower}
+Connect the drain terminal to ground, apply input voltage signal $v_i$ between the gate terminal and ground, connect the source terminal and ground through a resistance $R_L$, and take the output voltage signal $v_o$ between the source terminal and ground.
+
+
+
+
 \end{document}
