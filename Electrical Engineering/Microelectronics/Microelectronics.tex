@@ -1081,12 +1081,12 @@ When $v_{DS}>v_{OV}$, the channel length is actually less than $L$, with a porti
 where $\lambda\ge 0$ is a device parameter of the dimension of V$^{-1}$ and is inversely proportional to $L$. For device with large $L$, $\lambda$ is often negligible, while for submicron (micron = \textmu{}m) scale, $\lambda$ is often large. We take $V_A=\frac{1}{\lambda}$, called early voltage. The voltage axis interception of the current equation is $-V_A$.  We can isolate the dependence on $L$ with
 \[V_A=V_A'L\]
 The output resistance $r_O$ is
-\[r_O=\frac{V_A}{I_D'}\]
+\[r_O=\frac{V_A}{I'_D}\]
 where
-\[I_D'=\frac{1}{2}k_nv_{OV}^{\phantom{OV}2}\]
+\[I'_D=\frac{1}{2}k_nv_{OV}^{\phantom{OV}2}\]
 And
-\[i_D=I_D'+\frac{v_{DS}}{r_O}\]
-The NMOS in saturation region can be modeled by a voltage-controlled current source with input $v_{GS}$ and output $I_D'$ in parallel with a resistance $r_O$. And the voltage across them is $v_{DS}$.
+\[i_D=I'_D+\frac{v_{DS}}{r_O}\]
+The NMOS in saturation region can be modeled by a voltage-controlled current source with input $v_{GS}$ and output $I'_D$ in parallel with a resistance $r_O$. And the voltage across them is $v_{DS}$.
 
 $r_O$ is typically in the range of 10k to 1000k Ohm.
 \sssc{PMOS (transistor)/p-channel MOSFET/FET}
@@ -1113,9 +1113,9 @@ $r_O$ is typically in the range of 10k to 1000k Ohm.
 \[i_{SD}=\frac{1}{2}k_pv_{OV}^{\phantom{OV}2}\]
 \item Saturation region channel-length modulation:
 \[V_A=\frac{1}{\lambda}>0\]
-\[I_{SD}'=\frac{1}{2}k_pv_{OV}^{\phantom{OV}2}\]
-\[r_O=\frac{V_A}{I_{SD}'}\]
-\[i_{SD}=\frac{1}{2}k_pv_{OV}^{\phantom{OV}2}(1+\lambda v_{SD}=I_{SD}'+\frac{v_{SD}}{r_O}\]
+\[I'_{SD}=\frac{1}{2}k_pv_{OV}^{\phantom{OV}2}\]
+\[r_O=\frac{V_A}{I'_{SD}}\]
+\[i_{SD}=\frac{1}{2}k_pv_{OV}^{\phantom{OV}2}(1+\lambda v_{SD}=I'_{SD}+\frac{v_{SD}}{r_O}\]
 \eit
 NMOS and PMOS are said to be complementary device.
 \sssc{CMOS (complementary MOS)}
@@ -1147,14 +1147,14 @@ To operate MOSFET as an amplifier, it should be in the saturation region, which 
 \[i_D=\frac{1}{2}k_n\qty(v_{GS}-V_t)^2+\frac{v_{DS}}{r_O}\]
 \eit
 \sssc{Voltage amplifier}
-To have a voltage output, flow the output current $i_D$ through a resistor $R_D$ between drain and a supply voltage $V_{DD}$, and take $v_{DS}$ as output, where
+To have a voltage output, flow the output current $i_D$ through a resistor $R_D$ between drain and a supply voltage $V_{DD}$, and take $v_{DS}$ as output, where for open circuit:
 \[v_{DS}=V_{DD}-i_DR_D\]
 \[i_D=\frac{V_{DD}}{R_D}-\frac{v_{DS}}{R_D}\]
 \bit
 \item No channel-length modulation:
 \[v_{DS}=V_{DD}-\frac{1}{2}k_nR_D\qty(v_{GS}-V_t)^2\]
 \item Channel-length modulation with finite output resistance $r_O$:
-\[v_{DS}\frac{R_D+r_O}{R_Dr_O}=\frac{V_{DD}}{R_D}-\frac{1}{2}k_n\qty(v_{GS}-V_t)^2\]
+\[\frac{v_{DS}}{R_D\parallel r_O}=\frac{V_{DD}}{R_D}-\frac{1}{2}k_n\qty(v_{GS}-V_t)^2\]
 \eit
 \sssc{Voltage-transfer characteristic (VTC)}
 \bit
@@ -1170,39 +1170,91 @@ of bias dc voltages/currents such that
 \[v_{DS}(t)=V_{DS}+v_{ds}(t)\]
 \[i_D(t)=I_D+i_d(t)\]
 where the second terms are small signals.
+\[v_{OV}(t)=V_{OV}+v_{gs}(t)\]
+\[V_{OV}=V_{GS}-V_t\]
+Open-circuit output voltage:
+\bit
+\item No channel-length modulation:
 
-Thus
-\[I_D=\frac{V_{DD}-V_{DS}}{R_D}=\frac{1}{2}k_n\qty(V_{GS}-V_t)^2\]
+The dc bias point equivalent circuit model is a VCCS with input $V_{GS}$ and output $I_D$ enforcing
+\[I_D=\frac{1}{2}k_nV_{OV}^{\phantom{OV}2}\]
+between S and D in series with resistance $R_D$ between D and $V_{DD}$ with $V_{DS}$ as output voltage and infinite output resistance.
+\[V_{OV}=\sqrt{\frac{2I_D}{k_n}}\]
+\bit
+\item Open-circuit:
 \[V_{DS}=V_{DD}-I_DR_D\]
 \[v_{ds}=-i_dR_D\]
-\[v_{OV}(t)=V_{OV}+v_{gs}(t)\]
-\[V_{OV}=V_{GS}-V_t=\sqrt{\frac{2I_D}{k_n}}\]
+\item With load resistance $R_L$:
+\[V_{DS}=V_{DD}-I_D(R_D\parallel R_L)\]
+\[v_{ds}=-i_d(R_D\parallel R_L)\]
+\eit
+\item Channel-length modulation with finite output resistance $r_O$:
+
+The dc bias point equivalent circuit model is, a VCCS with input $V_{GS}$ and output $I'_D$ enforcing
+\[I'_D=\frac{1}{2}k_nV_{OV}^{\phantom{OV}2}\]
+in parallel with a resistance $r_O$, both between S and D, and then in series with resistance $R_D$ between D and $V_{DD}$, with $V_{DS}$ as output voltage and output resistance $r_O$.
+\bpr
+\[I_D=\frac{V_{DD}-V_{DS}}{R_D}=\frac{1}{2}k_nV_{OV}^{\phantom{OV}2}+\frac{V_{DS}}{r_O}\]
+\[V_{DS}=\frac{V_{DD}r_O}{R_D+r_O}-\frac{1}{2}k_nV_{OV}^{\phantom{OV}2}\qty(R_D\parallel r_O)\]
+\[I_D=\frac{1}{2}k_nV_{OV}^{\phantom{OV}2}\frac{r_O}{R_D+r_O}+\frac{V_{DD}}{R_D+r_O}\]
+\epr
+\[V_{OV}=\sqrt{\frac{2}{k_n}I'_D}\]
+\bit
+\item Open-circuit:
+\[V_{DS}=\frac{V_{DD}r_O}{R_D+r_O}-I'_D\qty(R_D\parallel r_O)\]
+\[v_{ds}=-i_d\qty(R_D\parallel r_O)\]
+\item With load resistance $R_L$:
+\[V_{DS}=\frac{V_{DD}r_O}{R_D+r_O}-I'_D\qty(R_D\parallel r_O\parallel R_L)\]
+\[v_{ds}=-i_d\qty(R_D\parallel r_O\parallel R_L)\]
+\eit
+\eit
 The small signal current is
+\bit
+\item No channel-length modulation:
 \[\ba
 i_d&=i_D-I_D\\
    &=\frac{1}{2}k_n\qty(V_{GS}+v_{gs}-V_t)^2-\frac{1}{2}k_n\qty(V_{GS}-V_t)^2\\
    &=\frac{1}{2}(2V_{GS}+v_{gs}-2V_t)v_{gs}\\
    &=k_n(V_{GS}-V_t)v_{gs}+\frac{1}{2}k_nv_{gs}^{\phantom{gs}2}
 \ea\]
+\item Channel-length modulation with finite output resistance $r_O$:
+\[\ba
+i_d&=i_D-I_D\\
+   &=\frac{1}{2}k_n\qty(V_{GS}+v_{gs}-V_t)^2-\frac{1}{2}k_n\qty(V_{GS}-V_t)^2+\frac{v_{ds}}{r_O}\\
+   &=\frac{1}{2}(2V_{GS}+v_{gs}-2V_t)v_{gs}-\frac{i_dR_D}{r_O}\\
+   &=\qty(k_n(V_{GS}-V_t)v_{gs}+\frac{1}{2}k_nv_{gs}^{\phantom{gs}2})\frac{r_O}{R_D+r_O}
+\ea\]
+\eit
 The input signal is kept sufficiently small such that
 \[\frac{1}{2}k_nv_{gs}^{\phantom{gs}2}\ll k_n(V_{GS}-V_t)v_{gs}\]
 that is
 \[v_{gs}\ll 2(V_{GS}-V_t)=2V_{OV}\]
-As so,
-\[i_d=k_n(V_{GS}-V_t)v_{gs}\]
+\sssc{Some particular bias points}
 We denote
 \bit
 \item $A=(V_t,V_{DD},0)$, where the minimum $V_{GS}$ in saturation region occurs;
 \item $B$ the bias point such that $V_{DS}=V_{OV}$, where the maximum $V_{GS}$ in saturation region occurs, which is the edge between saturation and triode region and is
+\bit
+\item No channel-length modulation:
 \[B=\qty(V_t+\frac{\sqrt{2k_nR_DV_{DD}+1}-1}{k_nR_D},\frac{\sqrt{2k_nR_DV_{DD}+1}-1}{k_nR_D},\frac{V_{DD}}{R_D}-\frac{\sqrt{2k_nR_DV_{DD}+1}-1}{k_nR_D^{\phantom{D}2}})\]
 \bpr
-\[V_{OV}=V_{DD}-\frac{1}{2}k_nR_DV_{OV}^2\]
+\[V_{DS}=V_{OV}=V_{DD}-\frac{1}{2}k_nR_DV_{OV}^2\]
 \[\frac{1}{2}k_nR_DV_{OV}^2+V_{OV}-V_{DD}=0\]
 \[V_{OV}=\frac{\sqrt{2k_nR_DV_{DD}+1}-1}{k_nR_D}=V_{DS}=V_{GS}-V_t\]
 \[V_{GS}=V_t+\frac{\sqrt{2k_nR_DV_{DD}+1}-1}{k_nR_D}\]
 \[I_D=\frac{V_{DD}-V_{DS}}{R_D}=\frac{V_{DD}}{R_D}-\frac{\sqrt{2k_nR_DV_{DD}+1}-1}{k_nR_D^{\phantom{D}2}}\]
 \epr
-\item $C$ the bias point such that $V_{GS}=V_{DD}$, which is in triode region and is
+\item Channel-length modulation with finite output resistance $r_O$:
+\[B=\qty(V_t+\frac{\sqrt{2k_nR_D\qty(\frac{r_O}{R_D+r_O})^2V_{DD}+1}-1}{k_n\qty(R_D\parallel r_O)},\frac{\sqrt{2k_nR_D\qty(\frac{r_O}{R_D+r_O})^2V_{DD}+1}-1}{k_n\qty(R_D\parallel r_O)},\frac{V_{DD}}{R_D}-\frac{\sqrt{2k_n\qty(\frac{r_O}{R_D+r_O})^2V_{DD}+1}-1}{k_n\qty(R_D\parallel r_O)})\]
+\bpr
+\[V_{DS}=V_{OV}=\frac{V_{DD}r_O}{R_D+r_O}-\frac{1}{2}k_nV_{OV}^{\phantom{OV}2}\qty(R_D\parallel r_O)\]
+\[\frac{1}{2}k_n\qty(R_D\parallel r_O)V_{OV}^{\phantom{OV}2}+V_{OV}-\frac{V_{DD}r_O}{R_D+r_O}=0\]
+\[V_{OV}=\frac{\sqrt{2k_nR_D\qty(\frac{r_O}{R_D+r_O})^2V_{DD}+1}-1}{k_n\qty(R_D\parallel r_O)}=V_{DS}=V_{GS}-V_t\]
+\[V_{GS}=V_t+\frac{\sqrt{2k_nR_D\qty(\frac{r_O}{R_D+r_O})^2V_{DD}+1}-1}{k_n\qty(R_D\parallel r_O)}\]
+\[I_D=\frac{V_{DD}-V_{DS}}{R_D}=\frac{V_{DD}}{R_D}-\frac{\sqrt{2k_n\qty(\frac{r_O}{R_D+r_O})^2V_{DD}+1}-1}{k_n\qty(R_D\parallel r_O)}\]
+\epr
+\eit
+\item $C$ the bias point such that $V_{GS}=V_{DD}$, which is in triode region (thus not amplifier) and is
 \[C=\qty(V_{DD},V_{DD}-\frac{1}{2}k_nR_D\qty(V_{DD}-V_t)^2,\frac{1}{2}k_n\qty(V_{DD}-V_t)^2)\]
 \bpr
 \[I_D=\frac{1}{2}k_n\qty(V_{DD}-V_t)^2\]
@@ -1224,10 +1276,11 @@ If the upper limit is not satisfied, the positive peaks of the signal will be cl
 \[\min v_{DS}=V_{DS}-V_{ds}\ge V_{GS}-V_t\]
 If the lower limit is not satisfied, the transistor will enter the triode region for part of each cycle near negative peaks. We say that the circuit does not have sufficient legroom.
 \eit
-\sssc{Small-signal linear amplification model for transconductance amplifier}
-The transconductance amplifier can be modeled as a linear VCCS for small signal that enforces
-\[i_d=g_mv_{gs}\]
-The transconductance $g_m$ is
+\sssc{Small-signal hybrid-$\pi$ model for transconductance amplifier}
+\bit
+\item No channel-length modulation: The transconductance amplifier can be modeled for small signal as a linear VCCS between D and S that enforces
+\[i_d=g_mv_{gs},\]
+where the transconductance $g_m$ is
 \[\ba
 g_m&\coloneq\frac{i_d}{v_{gs}}\\
    &=\evlv{\pdv{i_D}{v_{GS}}}_{v_{GS}=V_{GS}}\\
@@ -1236,24 +1289,31 @@ g_m&\coloneq\frac{i_d}{v_{gs}}\\
    &=\frac{2I_D}{V_{OV}}\\
    &=\sqrt{2k_nI_D}
 \ea\]
-\bit
-\item For a given bias point, $g_m$ is proportional to $k_n$, which is proportional to $\frac{W}{L}$ for a given $k'_n$.
-\item For a given MOSFET, $g_m$ is proportional to $V_{OV}$. Thus, we can increase $g_m$ by biasing the device at a large $V_{GS}$. However, this reduces the allowable signal swing at the drain.
-\item For a given MOSFET, $g_m$ is proportional to the square root of the bias current.
-\item For a given $k'_n$ and bias current $I_D$, $g_m$ is proportional to $\sqrt{\frac{W}{L}}$. For a typical MOSFET, $k'_n$ is 500 \textmu{}A/V$^2$ and $I_D=0.2$ mA, at which $\sqrt{2k_n'I_D}$ is about 0.45 mA/V.
-\eit
-\sssc{Small-signal linear amplification model for voltage amplifier}
-The voltage amplifier can be modeled as a linear VCVS for small signal that enforces
-\[v_{ds}=A_vv_{gs}\]
-The voltage gain $A_v$ is
+\item Channel-length modulation with finite output resistance $r_O$: The transconductance amplifier can be modeled for small signal as a linear VCCS between D and S that enforces
+\[i_d=G_mv_{gs},\]
+in parallel with a resistance $r_O$, where the transconductance $G_m$ is
 \[\ba
-A_v&\coloneq\frac{v_{ds}}{v_{gs}}\\
-   &=-g_mR_D\\
-   &=-k_nV_{OV}R_D
+G_m&\coloneq\frac{i_d}{v_{gs}}\\
+   &=\evlv{\pdv{i_D}{v_{GS}}}_{v_{GS}=V_{GS}}\\
+   &=k_n(V_{GS}-V_t)\frac{r_O}{R_D+r_O}\\
+   &=g_m\frac{r_O}{R_D+r_O}\\
+   &=k_nV_{OV}\frac{r_O}{R_D+r_O}\\
+   &=\frac{2I'_D}{V_{OV}}\\
+   &=\sqrt{2k_nI'_D}\frac{r_O}{R_D+r_O}
 \ea\]
+\eit
+\sssc{Small-signal hybrid-$\pi$ model for voltage amplifier}
+\bit
+\item No channel-length modulation: The voltage amplifier can be modeled for small signal as a linear VCCS between D and S that enforces $i_d=g_mv_{gs}$ in parallel with a resistance $R_D$. Thus, the voltage gain $A_v$ is
+\[A_v\coloneq\frac{v_{ds}}{v_{gs}}=-g_mR_D\]
+TODO
+\item Channel-length modulation with finite output resistance $r_O$: The transconductance amplifier can be modeled for small signal as a linear VCCS between D and S that enforces $i_d=G_mv_{gs}$ in parallel with a resistance $r_O$ and a resistance $R_D$. Thus, the voltage gain $A_v$ is
+\[A_v\coloneq\frac{v_{ds}}{v_{gs}}=-g_mR_D\]
+TODO
+\eit
 Thus, the voltage amplifier is inverting.
 \sssc{Graphical analysis}
-We may analyze by plotting on $i_D$-$v_{DS}$ graph the MOSFET current equation corresponding to each fixed $v_{GS}$ and resistance line
+We may analyze by plotting on $i_D$-$v_{DS}$ graph the NMOS current equations corresponding to each fixed $v_{GS}$ and the resistance line
 \[i_D=\frac{V_{DD}}{R_D}-\frac{v_{DS}}{R_D},\]
 which has $v_{DS}$ interception $V_{DD}$ and $i_D$ interception $\frac{V_{DD}}{R_D}$.
 
@@ -1289,4 +1349,12 @@ Consider the VCCS small-signal model without $r_O$.
 This is the T equivalent circuit model, where D, S, G are the three vertices of letter T and X is the intersection point.
 
 Now consider $r_O$, we can model it by adding a resistance $r_O$ connecting D and S.
+\sssc{Properties of transconductance}
+Without channel-length modulation:
+\bit
+\item For a given bias point, $g_m$ is proportional to $k_n$, which is proportional to $\frac{W}{L}$ for a given $k'_n$.
+\item For a given MOSFET, $g_m$ is proportional to $V_{OV}$. Thus, we can increase $g_m$ by biasing the device at a large $V_{GS}$. However, this reduces the allowable signal swing at the drain.
+\item For a given MOSFET, $g_m$ is proportional to the square root of the bias current.
+\item For a given $k'_n$ and bias current $I_D$, $g_m$ is proportional to $\sqrt{\frac{W}{L}}$. For a typical MOSFET, $k'_n$ is 500 \textmu{}A/V$^2$ and $I_D=0.2$ mA, at which $\sqrt{2k_n'I_D}$ is about 0.45 mA/V.
+\eit
 \end{document}
