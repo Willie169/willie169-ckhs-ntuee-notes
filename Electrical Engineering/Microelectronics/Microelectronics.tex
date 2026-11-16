@@ -1139,20 +1139,29 @@ A technology was developed that permits the fabrication of both NMOS and PMOS tr
 \end{center}
 \ssc{MOSFET amplifier}
 \sssc{Transconductance amplifier}
-To operate MOSFET as an amplifier, it should be in the saturation region, which is a nonlinear voltage-controlled current source with input $v_{GS}$ and output $i_D$, where
+To operate MOSFET as an amplifier, it should be in the saturation region, which is a nonlinear VCCS with input $v_{GS}$ and output $i_D$, where
+\bit
+\item No channel-length modulation:
 \[i_D=\frac{1}{2}k_n\qty(v_{GS}-V_t)^2\]
+\item Channel-length modulation with finite output resistance $r_O$:
+\[i_D=\frac{1}{2}k_n\qty(v_{GS}-V_t)^2+\frac{v_{DS}}{r_O}\]
+\eit
 \sssc{Voltage amplifier}
 To have a voltage output, flow the output current $i_D$ through a resistor $R_D$ between drain and a supply voltage $V_{DD}$, and take $v_{DS}$ as output, where
 \[v_{DS}=V_{DD}-i_DR_D\]
 \[i_D=\frac{V_{DD}}{R_D}-\frac{v_{DS}}{R_D}\]
+\bit
+\item No channel-length modulation:
+\[v_{DS}=V_{DD}-\frac{1}{2}k_nR_D\qty(v_{GS}-V_t)^2\]
+\item Channel-length modulation with finite output resistance $r_O$:
+\[v_{DS}\frac{R_D+r_O}{R_Dr_O}=\frac{V_{DD}}{R_D}-\frac{1}{2}k_n\qty(v_{GS}-V_t)^2\]
+\eit
 \sssc{Voltage-transfer characteristic (VTC)}
 \bit
-\item As $v_{OV}<0$, the transistor is cut off, $v_{DS}=V_DD$.
+\item As $v_{OV}<0$, the transistor is cut off, $i_D=0$, $v_{DS}=V_{DD}$.
 \item As $v_{DS}>v_{OV}>0$, the transistor is in saturation region, and $v_{DS}$ decreases as $v_{GS}$ increases (since $i_D$ increases), also called active region for the amplifier. We confine the operating point $Q$ within this region to have a MOSFET amplifier.
 \item As $v_{DS}<v_{OV}$, the transistors is in triode region.
 \eit
-In the active region:
-\[v_{DS}=V_{DD}-\frac{1}{2}k_nR_D\qty(v_{OV})^2\]
 \sssc{Bias point}
 A bias point $Q$ is an ordered triple
 \[(V_{GS},V_{DS},I_D)\]
