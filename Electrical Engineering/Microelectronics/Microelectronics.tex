@@ -1151,7 +1151,7 @@ in parallel with a resistance $r_O$. Thus the sum of their currents, $i_{D,clm}$
 To have a voltage output, flow the output current $i_D$ through a resistor $R_D$ between drain and a supply voltage $V_{DD}$, and take $v_{DS}$ as output, where for open circuit:
 \bit
 \item Ideal:
-\[i_D=\frac{V_{DD}}{R_D}-\frac{v_{DS}}{R_D}\]
+\[i_D=\frac{V_{DD}-v_{DS}}{R_D}\]
 \[v_{DS}=V_{DD}-i_DR_D=V_{DD}-\frac{1}{2}k_nR_D\qty(v_{GS}-V_t)^2\]
 \item Channel-length modulation with finite output resistance $r_O$:
 \[i_{D,clm}=\frac{V_{DD}}{R_D}-\frac{v_{DS}}{R_D}\]
@@ -1172,6 +1172,8 @@ of bias dc voltages/currents such that
 \[v_{DS}(t)=V_{DS}+v_{ds}(t)\]
 \[i_D(t)=I_D+i_d(t)\]
 where the second terms are small signals.
+
+Overdrive voltage:
 \[v_{OV}(t)=V_{OV}+v_{gs}(t)\]
 \[V_{OV}=V_{GS}-V_t\]
 \bit
@@ -1180,57 +1182,99 @@ where the second terms are small signals.
 The dc bias point equivalent circuit model is a VCCS with input $V_{GS}$ and output $I_D$ enforcing
 \[I_D=\frac{1}{2}k_nV_{OV}^{\phantom{OV}2}\]
 between S and D in series with resistance $R_D$ between D and $V_{DD}$ with $V_{DS}$ as output voltage and infinite output resistance.
+
+Overdrive voltage:
 \[V_{OV}=\sqrt{\frac{2I_D}{k_n}}\]
+Output voltage:
 \bit
 \item Open-circuit:
 \[V_{DS}=V_{DD}-I_DR_D\]
 \[v_{ds}=-i_dR_D\]
+\[I_D=\frac{V_{DD}-V_{DS}}{R_D}\]
 \item With load resistance $R_L$:
 \[V_{DS}=V_{DD}-I_D(R_D\parallel R_L)\]
 \[v_{ds}=-i_d(R_D\parallel R_L)\]
+\[I_D=\frac{V_{DD}-V_{DS}}{R_D\parallel R_L}\]
 \eit
 \item Channel-length modulation with finite output resistance $r_O$:
 
 The dc bias point equivalent circuit model is, a VCCS with input $V_{GS}$ and output $I_D$ enforcing
 \[I_D=\frac{1}{2}k_nV_{OV}^{\phantom{OV}2}\]
 in parallel with a resistance $r_O$, both between S and D, and then in series with resistance $R_D$ between D and $V_{DD}$, with $V_{DS}$ as output voltage and output resistance $r_O$.
+
+Overdrive voltage:
 \[V_{OV}=\sqrt{\frac{2I_D}{k_n}}\]
+Output voltage:
 \bit
 \item Open-circuit:
 \[V_{DS}=V_{DD}\frac{r_O}{R_D+r_O}-I_D(R_D\parallel r_O)\]
-\[v_{ds}=-i_d(R_D\parallel r_O)\]
+\[v_{ds}=-i_d(R_D\parallel r_O)\\[i_D=\frac{V_{DD}-v_{DS}}{R_D}\]
+\[I_D=\frac{V_{DD}}{R_D}-\frac{V_{DS}}{R_D\parallel r_O}\]
 \item With load resistance $R_L$:
-\[V_{DS}=V_{DD}\frac{r_O}{R_D+r_O}-I_D(R_D\parallel r_O\parallel R_L)\]
+\[V_{DS}=\qty(\frac{V_{DD}}{R_D}-I_D)(R_D\parallel r_O\parallel R_L)\]
 \[v_{ds}=-i_d(R_D\parallel r_O\parallel R_L)\]
+\[I_D=\frac{V_{DD}}{R_D}-\frac{V_{DS}}{R_D\parallel r_O\parallel R_L}\]
 \eit
 \eit
-The small signal current is
-\bit
-\item Ideal:
+Small-signal current:
 \[\ba
 i_d&=i_D-I_D\\
    &=\frac{1}{2}k_n\qty(V_{GS}+v_{gs}-V_t)^2-\frac{1}{2}k_n\qty(V_{GS}-V_t)^2\\
    &=\frac{1}{2}(2V_{GS}+v_{gs}-2V_t)v_{gs}\\
    &=k_n(V_{GS}-V_t)v_{gs}+\frac{1}{2}k_nv_{gs}^{\phantom{gs}2}
 \ea\]
-\item Channel-length modulation with finite output resistance $r_O$:
-\[\ba
-i_d&=i_D-I_D\\
-   &=\frac{1}{2}k_n\qty(V_{GS}+v_{gs}-V_t)^2-\frac{1}{2}k_n\qty(V_{GS}-V_t)^2+\frac{v_{ds}}{r_O}\\
-   &=\frac{1}{2}(2V_{GS}+v_{gs}-2V_t)v_{gs}-\frac{i_d(R_D\parallel r_O)}{r_O}\\
-   &=\qty(k_n(V_{GS}-V_t)v_{gs}+\frac{1}{2}k_nv_{gs}^{\phantom{gs}2})\frac{R_D}{R_D+r_O}
-\ea\]
-\eit
 The input signal is kept sufficiently small such that
 \[\frac{1}{2}k_nv_{gs}^{\phantom{gs}2}\ll k_n(V_{GS}-V_t)v_{gs}\]
 that is
 \[v_{gs}\ll 2(V_{GS}-V_t)=2V_{OV}\]
-\bit
-\item Ideal:
 \[i_d=k_n(V_{GS}-V_t)v_{gs}\]
-\item Channel-length modulation with finite output resistance $r_O$:
-\[i_d=k_n(V_{GS}-V_t)v_{gs}\frac{R_D}{R_D+r_O}\]
+\sssc{Allowable signal swing at drain}
+To have a voltage amplifier, we must have the limits
+\[V_{DD}\ge v_{DS}\ge v_{GS}-V_t>0\]
+Assume $v_{GS}-V_t>0$. For a given bias point $(V_{GS},V_{DS},I_D)$, the allowable signal swing at the drain (i.e. in output for voltage amplifier) is the maximum allowed $V_{ds}$ such that the device is always within the limits, that is,
+\bit
+\item Upper limit:
+\[\max v_{DS}=V_{DS}+V_{ds}\le V_{DD}\]
+If the upper limit is not satisfied, the positive peaks of the signal will be clipped off. We say that the circuit does not have sufficient headroom.
+\item Lower limit:
+\[\min v_{DS}=V_{DS}-V_{ds}\ge V_{GS}-V_t\]
+If the lower limit is not satisfied, the transistor will enter the triode region for part of each cycle near negative peaks. We say that the circuit does not have sufficient legroom.
 \eit
+\sssc{Small-signal hybrid-$\pi$ model for transconductance amplifier}
+\bit
+\item Ideal: The transconductance amplifier can be modeled for small signal as a linear VCCS between D and S that enforces
+\[i_d=g_mv_{gs}.\]
+\item Channel-length modulation with finite output resistance $r_O$: The transconductance amplifier can be modeled for small signal as a linear VCCS between D and S that enforces
+\[i_d=g_mv_{gs}.\]
+in parallel with a resistance $r_O$.
+\eit
+In both cases, the transconductance $g_m$ is
+\[\ba
+g_m&\coloneq\frac{i_d}{v_{gs}}\\
+   &=\evlv{\pdv{i_D}{v_{GS}}}_{v_{GS}=V_{GS}}\\
+   &=k_n(V_{GS}-V_t)\\
+   &=k_nV_{OV}\\
+   &=\frac{2I_D}{V_{OV}}\\
+   &=\sqrt{2k_nI_D}
+\ea\]
+\sssc{Small-signal hybrid-$\pi$ model for voltage amplifier}
+\bit
+\item Ideal: The voltage amplifier can be modeled for small signal as a linear VCCS between D and S that enforces $i_d=g_mv_{gs}$ in parallel with a resistance $R_D$.
+\bit
+\item Open-circuit voltage gain $A_v$:
+\[A_v\coloneq\frac{v_{ds}}{v_{gs}}=-g_mR_D\]
+\item Closed-circuit voltage gain $G_v$ with load $R_L$:
+\[G_v\coloneq\frac{v_{ds}}{v_{gs}}=-g_m\qty(R_D\parallel R_L)=A_v\frac{R_L}{R_D+R_L}\]
+\eit
+\item Channel-length modulation with finite output resistance $r_O$: The transconductance amplifier can be modeled for small signal as a linear VCCS between D and S that enforces $i_d=g_mv_{gs}$ in parallel with a resistance $r_O$ and a resistance $R_D$.
+\bit
+\item Open-circuit voltage gain $A_v$:
+\[A_v\coloneq\frac{v_{ds}}{v_{gs}}=-g_m(R_D\parallel r_O)\]
+\item Closed-circuit voltage gain $G_v$ with load $R_L$:
+\[G_v\coloneq\frac{v_{ds}}{v_{gs}}=-g_m\qty(R_D\parallel r_O\parallel R_L)=A_v\frac{R_L}{R_D\parallel r_O+R_L}\]
+\eit
+\eit
+Thus, the voltage amplifier is inverting, and the existence of $r_O$ will reduce the magnitudes of voltage gain
 \sssc{Some particular bias points}
 We denote
 \bit
@@ -1249,11 +1293,12 @@ We denote
 \item Channel-length modulation with finite output resistance $r_O$:
 \[B=\qty(V_t+\frac{\sqrt{2k_nR_D\qty(\frac{r_O}{R_D+r_O})^2V_{DD}+1}-1}{k_n\qty(R_D\parallel r_O)},\frac{\sqrt{2k_nR_D\qty(\frac{r_O}{R_D+r_O})^2V_{DD}+1}-1}{k_n\qty(R_D\parallel r_O)},\frac{V_{DD}}{R_D}-\frac{\sqrt{2k_n\qty(\frac{r_O}{R_D+r_O})^2V_{DD}+1}-1}{k_n\qty(R_D\parallel r_O)})\]
 \bpr
-\[V_{DS}=V_{OV}=\frac{V_{DD}r_O}{R_D+r_O}-\frac{1}{2}k_nV_{OV}^{\phantom{OV}2}\qty(R_D\parallel r_O)\]
+\[V_{DS}=V_{OV}=V_{DD}\frac{r_O}{R_D+r_O}-\frac{1}{2}k_nV_{OV}^{\phantom{OV}2}\qty(R_D\parallel r_O)\]
 \[\frac{1}{2}k_n\qty(R_D\parallel r_O)V_{OV}^{\phantom{OV}2}+V_{OV}-\frac{V_{DD}r_O}{R_D+r_O}=0\]
 \[V_{OV}=\frac{\sqrt{2k_nR_D\qty(\frac{r_O}{R_D+r_O})^2V_{DD}+1}-1}{k_n\qty(R_D\parallel r_O)}=V_{DS}=V_{GS}-V_t\]
 \[V_{GS}=V_t+\frac{\sqrt{2k_nR_D\qty(\frac{r_O}{R_D+r_O})^2V_{DD}+1}-1}{k_n\qty(R_D\parallel r_O)}\]
 \[I_D=\frac{V_{DD}-V_{DS}}{R_D}=\frac{V_{DD}}{R_D}-\frac{\sqrt{2k_n\qty(\frac{r_O}{R_D+r_O})^2V_{DD}+1}-1}{k_n\qty(R_D\parallel r_O)}\]
+\[I_D=\frac{V_{DD}}{R_D}-\frac{V_{DS}}{R_D\parallel r_O}=\frac{v_{DD}}{R_D}-\frac{\sqrt{2k_nR_D\qty(\frac{r_O}{R_D+r_O})^2V_{DD}+1}-1}{k_n\qty(R_D\parallel r_O)^2}\]\]
 \epr
 \eit
 \item $C$ the bias point such that $V_{GS}=V_{DD}$, which is in triode region (thus not amplifier) and is
@@ -1266,58 +1311,6 @@ The incremental output resistance $r_{DS}$ at $C$
 \[r_{DS}\vert_C=\frac{1}{k_nV_{OV}\vert_C}=\frac{1}{k_n\qty(V_{DD}-V_t)}\]
 is called closure resistance.
 \eit
-\sssc{Allowable signal swing at drain}
-To have a voltage amplifier, we must have the limits
-\[V_{DD}\ge v_{DS}\ge v_{GS}-V_t>0\]
-Assume $v_{GS}-V_t>0$. For a given bias point $(V_{GS},V_{DS},I_D)$, the allowable signal swing at the drain (i.e. in output for voltage amplifier) is the maximum allowed $V_{ds}$ such that the device is always within the limits, that is,
-\bit
-\item Upper limit:
-\[\max v_{DS}=V_{DS}+V_{ds}\le V_{DD}\]
-If the upper limit is not satisfied, the positive peaks of the signal will be clipped off. We say that the circuit does not have sufficient headroom.
-\item Lower limit:
-\[\min v_{DS}=V_{DS}-V_{ds}\ge V_{GS}-V_t\]
-If the lower limit is not satisfied, the transistor will enter the triode region for part of each cycle near negative peaks. We say that the circuit does not have sufficient legroom.
-\eit
-\sssc{Small-signal hybrid-$\pi$ model for transconductance amplifier}
-\bit
-\item Ideal: The transconductance amplifier can be modeled for small signal as a linear VCCS between D and S that enforces
-\[i_d=g_mv_{gs},\]
-where the transconductance $g_m$ is
-\[\ba
-g_m&\coloneq\frac{i_d}{v_{gs}}\\
-   &=\evlv{\pdv{i_D}{v_{GS}}}_{v_{GS}=V_{GS}}\\
-   &=k_n(V_{GS}-V_t)\\
-   &=k_nV_{OV}\\
-   &=\frac{2I_D}{V_{OV}}\\
-   &=\sqrt{2k_nI_D}
-\ea\]
-\item Channel-length modulation with finite output resistance $r_O$: The transconductance amplifier can be modeled for small signal as a linear VCCS between D and S that enforces
-\[i_d=g_{m,clm}v_{gs},\]
-in parallel with a resistance $r_O$, where the transconductance $g_{m,clm}$ is
-\[\ba
-g_m{m,clm}&\coloneq\frac{i_d}{v_{gs}}\\
-   &=\evlv{\pdv{i_D}{v_{GS}}}_{v_{GS}=V_{GS}}\\
-   &=k_n(V_{GS}-V_t)\frac{R_D}{R_D+r_O}\\
-   &=g_m\frac{R_D}{R_D+r_O}\\
-   &=k_nV_{OV}\frac{R_D}{R_D+r_O}\\
-   &=\frac{2I'_D}{V_{OV}}\frac{R_D}{R_D+r_O}\\
-   &=\sqrt{2k_nI'_D}\frac{R_D}{R_D+r_O}
-\ea\]
-\eit
-\sssc{Small-signal hybrid-$\pi$ model for voltage amplifier}
-\bit
-\item Ideal: The voltage amplifier can be modeled for small signal as a linear VCCS between D and S that enforces $i_d=g_mv_{gs}$ in parallel with a resistance $R_D$. Thus, the open-circuit voltage gain $A_v$ is
-\[A_v\coloneq\frac{v_{ds}}{v_{gs}}=-g_mR_D\]
-closed-circuit voltage gain $G_v$ with load $R_L$ is
-\[G_v\coloneq\frac{v_{ds}}{v_{gs}}=-g_m\qty(R_D\parallel R_L)\]
-\item Channel-length modulation with finite output resistance $r_O$: The transconductance amplifier can be modeled for small signal as a linear VCCS between D and S that enforces $i_d=G_mv_{gs}$ in parallel with a resistance $r_O$ and a resistance $R_D$. Thus, the open-circuit voltage gain $A_v$ is
-\[\ba
-A_{v,clm}&\coloneq\frac{v_{ds}}{v_{gs}}\\
-         &=-g_{m,clm}(R_D\parallel r_O)\\
-         &=-g_m\frac{R_D}{R_D+r_O}\frac{R_Dr_O}{R_D+r_O}\\
-\ea\]
-\eit
-Thus, the voltage amplifier is inverting.
 \sssc{Graphical analysis}
 We may analyze by plotting on $i_D$-$v_{DS}$ graph the NMOS current equations corresponding to each fixed $v_{GS}$ and the resistance line
 \[i_D=\frac{V_{DD}}{R_D}-\frac{v_{DS}}{R_D},\]
@@ -1337,14 +1330,9 @@ The maximum magnitudes of $g_m$ and $A_v$ occur at the bias point $B$, where
 \[R_D\qty(V_{OV}\vert_B)^2k_n=2(V_{DD}-V_{OV}\vert_B)\]
 \[k_n=\frac{2(V_{DD}-V_{OV}\vert_B)}{R_D\qty(V_{OV}\vert_B)^2}\]
 \epr
-\sssc{Channel-length modulation}
-Consider the output resistance $r_O$ of the NMOS due to channel-length modulation in saturation region:
-\[r_O=\frac{V_A}{I_D}\]
-where $V_A$ is its early voltage and $I_D$ is the $I_D$ above.
 
-We model it by replacing $R_D$ with the equivalent resistance of $R_D$ and $r_O$ in parallel:
-\[\frac{R_Dr_O}{R_D+r_O},\]
-which reduces the magnitudes of transconductance and voltage gain, and adding a resistance $r_O$ in parallel with the VCCS in the small-signal model.
+
+
 \sssc{T equivalent circuit models}
 Consider the VCCS small-signal model without $r_O$.
 \ben
@@ -1356,7 +1344,6 @@ This is the T equivalent circuit model, where D, S, G are the three vertices of 
 
 Now consider $r_O$, we can model it by adding a resistance $r_O$ connecting D and S.
 \sssc{Properties of transconductance}
-Without channel-length modulation:
 \bit
 \item For a given bias point, $g_m$ is proportional to $k_n$, which is proportional to $\frac{W}{L}$ for a given $k'_n$.
 \item For a given MOSFET, $g_m$ is proportional to $V_{OV}$. Thus, we can increase $g_m$ by biasing the device at a large $V_{GS}$. However, this reduces the allowable signal swing at the drain.
