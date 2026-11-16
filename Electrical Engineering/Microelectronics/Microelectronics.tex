@@ -61,8 +61,6 @@ The output impedance $Z_o$ of an amplifier is the load effect of the amplifier s
 The open-circuit gain $A_o$ for amplifier with voltage output is the gain when the output terminal is not connected to anything, i.e., $R_L=\infty$.
 
 The short-circuit gain $A_s$ for amplifier with current output is the gain when the output terminal is connected to ground, i.e., $R_L=0$.
-
-TODO: relation
 \sssc{Two-port model}
 An amplifier of one input signal and one output signal can be modeled as a two port model, where an one input port and one output port is related by the amplifier, which acts as a controlled source controlled by the input port voltage or current and enforces voltage or current on the output port. The input port is an impedance of amplifier input impedance connecting the input terminal and ground, where the input signal is the voltage across or current through this impedance. The output port is, for current output, a controlled current source of the amplifier short-circuit gain in parallel with an impedance of amplifier output impedance connecting the output terminal and ground; and for voltage output, a controlled voltage source of the amplifier open-circuit gain in series with an impedance of amplifier output impedance connecting the output terminal and ground.
 \sssc{Amplifier characterizing}
@@ -76,6 +74,16 @@ The overall gain $G$ with input source impedance $Z_s$ and a load $Z_L$ is the g
 \[G=A\frac{Z_i}{Z_i+Z_s}\]
 for current input,
 \[G=A\frac{Z_s}{Z_i+Z_s}\]
+\sssc{Converting current output to voltage output}
+An amplifier with current output with zero output impedance and short-circuit gain $A_s$ with a load impedance $Z_L$ is an amplifier with voltage output with output impedance $Z_o$ and open-circuit gain:
+\[A_o=-A_sZ_L\]
+An amplifier with current output with output impedance $Z_o$ and short-circuit gain $A_s$ with a load impedance $Z_L$ is an amplifier with voltage output with output impedance $Z_o$ and open-circuit gain:
+\[A_o=-A_s(Z_o\parallel Z_L)\]
+\sssc{Converting voltage output to current output}
+An amplifier with voltage output with zero output impedance and open-circuit gain $A_o$ with a load impedance $Z_L$ is an amplifier with current output with output impedance $Z_o$ and short-circuit gain:
+\[A_s=-\frac{A_o}{Z_L}\]
+An amplifier with voltage output with output impedance $Z_o$ and open-circuit gain $A_o$ with a load impedance $Z_L$ is an amplifier with current output with output impedance $Z_o$ and short-circuit gain:
+\[A_s=-\frac{A_o}{Z_o\parallel Z_L}\]
 \sssc{Differential and common-mode impedance}
 For two input terminals, the differential input impedance is the input impedance as seemed by them when a ideal source connects them directly.
 
