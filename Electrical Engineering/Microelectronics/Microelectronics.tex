@@ -1341,7 +1341,7 @@ The maximum magnitudes of $g_m$ and $A_v$ occur at the bias point $B$, where
 \[R_D\qty(V_{OV}\vert_B)^2k_n=2(V_{DD}-V_{OV}\vert_B)\]
 \[k_n=\frac{2(V_{DD}-V_{OV}\vert_B)}{R_D\qty(V_{OV}\vert_B)^2}\]
 \epr
-\sssc{T equivalent circuit models}
+\sssc{T equivalent circuit model}
 Start from hybrid-$\pi$ model.
 \ben
 \item Replace the VCCS with two same VCCS in series, with the node in between being X.
@@ -1351,6 +1351,8 @@ Start from hybrid-$\pi$ model.
 This is the T equivalent circuit model, where D, S, G are the three vertices of letter T and X is the intersection point.
 
 For that with channel-length modulation with finite output resistance $r_O$, the resistance $r_O$ between D and S remains.
+
+Whenever a resistance is connected between S and ground, T equivalent circuit model is preferred.
 \sssc{Properties of transconductance}
 \bit
 \item For a given bias point, $g_m$ is proportional to $k_n$, which is proportional to $\frac{W}{L}$ for a given $k'_n$.
@@ -1363,6 +1365,16 @@ For that with channel-length modulation with finite output resistance $r_O$, the
 There are three basic configurations of single-MOSFET amplifier. Each of these configurations is obtained by connecting one of the device terminals to ground. Thus creating a two-port network with the grounded terminal being common to the input and output ports. In circuit symbol, we indicate the common ground with a connection to ground from the midpoint of a side other than that of input terminal.
 \sssc{Common-source (CS) amplifier}
 Connect the source terminal to ground, apply input voltage signal $v_i$ between the gate terminal and ground, connect the drain terminal and ground through a resistance $R_D$, and take the output voltage signal $v_o$ between the drain terminal and ground.
+\[R_i=\infty\]
+\bit
+\item Ideal:
+\[A_{vo}=\frac{v_o}{v_i}=-g_mR_D\]
+\[R_o=R_D\]
+\item Channel-length modulation with finite output resistance $r_O$:
+\[A_{vo}=\frac{v_o}{v_i}=-g_m(R_D\parallel r_O)\]
+\[R_o=R_D\parallel r_O\]
+\eit
+The common-source is the most widely used and often with a number of stages in cascade. It has a moderate to high output resistance (k to 10k Ohm order of magnitude). It has a high open-circuit voltage gain and limited bandwidth.
 \sssc{Common-gate (CG) amplifier}
 Connect the gate terminal to ground, apply input voltage signal $v_i$ between the source terminal and ground, connect the drain terminal and ground through a resistance $R_D$, and take the output voltage signal $v_o$ between the drain terminal and ground.
 \sssc{Common-drain (CD) amplifier or source follower}
