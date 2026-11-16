@@ -1067,7 +1067,7 @@ The current equation becomes
 The linear current equation mentioned earlier is an approximation of it using $v_{DS}\ll v_{OV}$.
 
 The $0<v_{DS}<v_{OV}$ regions is called triode region.
-\sssc{Saturation region}
+\sssc{Saturation region - ideal}
 When $v_{GS}\ge V_t$ and $v_{DS}\ge v_{OV}$, the channel has zero depth at the drain end, called channel pinch-off, assuming the zero-depth length is negligible relative to $L$, the current saturates at
 \[i_D=\frac{1}{2}k_nv_{OV}^{\phantom{OV}2}\]
 The voltage $v_{OV}$ is also denoted $v_{DS\tx{sat}}$, called saturation voltage. The incremental output resistance is thus infinite when $v_{DS}>v_{OV}$.
@@ -1075,18 +1075,18 @@ The voltage $v_{OV}$ is also denoted $v_{DS\tx{sat}}$, called saturation voltage
 Note that channel pinch-off does not mean channel blockage. Current continues to flow through the pinched-off channel. $v_{DS}-v_{DS\tx{sat}}$ appears a voltage drop across the depletion region. Free electrons are swept through the depletion region towards the drain when channel region has zero depth.
 
 The NMOS in saturation region can be modeled by a voltage-controlled current source with input $v_{GS}$ and output $i_D$. And the voltage across it is $v_{DS}$.
-\sssc{Saturation region channel-length modulation}
+\sssc{Saturation region - channel-length modulation (CLM)}
 When $v_{DS}>v_{OV}$, the channel length is actually less than $L$, with a portion near drain being of zero depth, i.e., depletion region, called channel-length modulation, and the current equation becomes
-\[i_D=\frac{1}{2}k_nv_{OV}^{\phantom{OV}2}(1+\lambda v_{DS}),\]
+\[i_{D,clm}=\frac{1}{2}k_nv_{OV}^{\phantom{OV}2}(1+\lambda v_{DS}),\]
 where $\lambda\ge 0$ is a device parameter of the dimension of V$^{-1}$ and is inversely proportional to $L$. For device with large $L$, $\lambda$ is often negligible, while for submicron (micron = \textmu{}m) scale, $\lambda$ is often large. We take $V_A=\frac{1}{\lambda}$, called early voltage. The voltage axis interception of the current equation is $-V_A$.  We can isolate the dependence on $L$ with
 \[V_A=V_A'L\]
 The output resistance $r_O$ is
-\[r_O=\frac{V_A}{I'_D}\]
-where
-\[I'_D=\frac{1}{2}k_nv_{OV}^{\phantom{OV}2}\]
+\[r_O=\frac{V_A}{i_D}\]
+where $i_D$ is that in the ideal case, i.e.,
+\[i_D=\frac{1}{2}k_nv_{OV}^{\phantom{OV}2}\]
 And
-\[i_D=I'_D+\frac{v_{DS}}{r_O}\]
-The NMOS in saturation region can be modeled by a voltage-controlled current source with input $v_{GS}$ and output $I'_D$ in parallel with a resistance $r_O$. And the voltage across them is $v_{DS}$.
+\[i_{D,clm}=I_D+\frac{v_{DS}}{r_O}\]
+The NMOS in saturation region can be modeled by a voltage-controlled current source with input $v_{GS}$ and output $i_D$ in parallel with a resistance $r_O$. And the voltage across them is $v_{DS}$.
 
 $r_O$ is typically in the range of 10k to 1000k Ohm.
 \sssc{PMOS (transistor)/p-channel MOSFET/FET}
@@ -1109,13 +1109,12 @@ $r_O$ is typically in the range of 10k to 1000k Ohm.
 \[i_{SD}=k_pv_{OV}v_{SD}\]
 \item Triode region:
 \[i_{SD}=k_p\qty(v_{OV}-\frac{1}{2}v_{SD})v_{SD}\]
-\item Saturation region (long-channel):
+\item Saturation region - ideal:
 \[i_{SD}=\frac{1}{2}k_pv_{OV}^{\phantom{OV}2}\]
-\item Saturation region channel-length modulation:
+\item Saturation region - channel-length modulation:
 \[V_A=\frac{1}{\lambda}>0\]
-\[I'_{SD}=\frac{1}{2}k_pv_{OV}^{\phantom{OV}2}\]
-\[r_O=\frac{V_A}{I'_{SD}}\]
-\[i_{SD}=\frac{1}{2}k_pv_{OV}^{\phantom{OV}2}(1+\lambda v_{SD}=I'_{SD}+\frac{v_{SD}}{r_O}\]
+\[r_O=\frac{V_A}{i_{SD}}\]
+\[i_{SD,clm}=i_{SD}+\frac{v_{SD}}{r_O}\]
 \eit
 NMOS and PMOS are said to be complementary device.
 \sssc{CMOS (complementary MOS)}
@@ -1139,22 +1138,25 @@ A technology was developed that permits the fabrication of both NMOS and PMOS tr
 \end{center}
 \ssc{MOSFET amplifier}
 \sssc{Transconductance amplifier}
-To operate MOSFET as an amplifier, it should be in the saturation region, which is a nonlinear VCCS with input $v_{GS}$ and output $i_D$, where
+To operate MOSFET as an amplifier, it should be in the saturation region, which is equivalent to
 \bit
-\item No channel-length modulation:
+\item Ideal: a nonlinear VCCS with input $v_{GS}$, output $i_D$, and cross voltage $v_{DS}$ enforcing
 \[i_D=\frac{1}{2}k_n\qty(v_{GS}-V_t)^2\]
-\item Channel-length modulation with finite output resistance $r_O$:
-\[i_D=\frac{1}{2}k_n\qty(v_{GS}-V_t)^2+\frac{v_{DS}}{r_O}\]
+\item Channel-length modulation with finite output resistance $r_O$: a nonlinear VCCS with input $v_{GS}$, output $i_D$, and cross voltage $v_{DS}$ enforcing
+\[i_D=\frac{1}{2}k_n\qty(v_{GS}-V_t)^2\]
+in parallel with a resistance $r_O$. Thus the sum of their currents, $i_{D,clm}$ is
+\[i_{D,clm}=i_D+\frac{v_{DS}}{r_O}\]
 \eit
 \sssc{Voltage amplifier}
 To have a voltage output, flow the output current $i_D$ through a resistor $R_D$ between drain and a supply voltage $V_{DD}$, and take $v_{DS}$ as output, where for open circuit:
-\[v_{DS}=V_{DD}-i_DR_D\]
-\[i_D=\frac{V_{DD}}{R_D}-\frac{v_{DS}}{R_D}\]
 \bit
-\item No channel-length modulation:
-\[v_{DS}=V_{DD}-\frac{1}{2}k_nR_D\qty(v_{GS}-V_t)^2\]
+\item Ideal:
+\[i_D=\frac{V_{DD}}{R_D}-\frac{v_{DS}}{R_D}\]
+\[v_{DS}=V_{DD}-i_DR_D=V_{DD}-\frac{1}{2}k_nR_D\qty(v_{GS}-V_t)^2\]
 \item Channel-length modulation with finite output resistance $r_O$:
-\[\frac{v_{DS}}{R_D\parallel r_O}=\frac{V_{DD}}{R_D}-\frac{1}{2}k_n\qty(v_{GS}-V_t)^2\]
+\[i_{D,clm}=\frac{V_{DD}}{R_D}-\frac{v_{DS}}{R_D}\]
+\[i_D=\frac{V_{DD}}{R_D}-\frac{v_{DS}}{R_D\parallel r_O}\]
+\[v_{DS}=V_{DD}\frac{r_O}{R_D+r_O}-i_D(R_D\parallel r_O)=V_{DD}\frac{r_O}{R_D+r_O}-\frac{1}{2}k_n(R_D\parallel r_O)\qty(v_{GS}-V_t)^2\]
 \eit
 \sssc{Voltage-transfer characteristic (VTC)}
 \bit
@@ -1172,9 +1174,8 @@ of bias dc voltages/currents such that
 where the second terms are small signals.
 \[v_{OV}(t)=V_{OV}+v_{gs}(t)\]
 \[V_{OV}=V_{GS}-V_t\]
-Open-circuit output voltage:
 \bit
-\item No channel-length modulation:
+\item Ideal:
 
 The dc bias point equivalent circuit model is a VCCS with input $V_{GS}$ and output $I_D$ enforcing
 \[I_D=\frac{1}{2}k_nV_{OV}^{\phantom{OV}2}\]
@@ -1190,27 +1191,22 @@ between S and D in series with resistance $R_D$ between D and $V_{DD}$ with $V_{
 \eit
 \item Channel-length modulation with finite output resistance $r_O$:
 
-The dc bias point equivalent circuit model is, a VCCS with input $V_{GS}$ and output $I'_D$ enforcing
-\[I'_D=\frac{1}{2}k_nV_{OV}^{\phantom{OV}2}\]
+The dc bias point equivalent circuit model is, a VCCS with input $V_{GS}$ and output $I_D$ enforcing
+\[I_D=\frac{1}{2}k_nV_{OV}^{\phantom{OV}2}\]
 in parallel with a resistance $r_O$, both between S and D, and then in series with resistance $R_D$ between D and $V_{DD}$, with $V_{DS}$ as output voltage and output resistance $r_O$.
-\bpr
-\[I_D=\frac{V_{DD}-V_{DS}}{R_D}=\frac{1}{2}k_nV_{OV}^{\phantom{OV}2}+\frac{V_{DS}}{r_O}\]
-\[V_{DS}=\frac{V_{DD}r_O}{R_D+r_O}-\frac{1}{2}k_nV_{OV}^{\phantom{OV}2}\qty(R_D\parallel r_O)\]
-\[I_D=\frac{1}{2}k_nV_{OV}^{\phantom{OV}2}\frac{r_O}{R_D+r_O}+\frac{V_{DD}}{R_D+r_O}\]
-\epr
-\[V_{OV}=\sqrt{\frac{2}{k_n}I'_D}\]
+\[V_{OV}=\sqrt{\frac{2I_D}{k_n}}\]
 \bit
 \item Open-circuit:
-\[V_{DS}=\frac{V_{DD}r_O}{R_D+r_O}-I'_D\qty(R_D\parallel r_O)\]
-\[v_{ds}=-i_d\qty(R_D\parallel r_O)\]
+\[V_{DS}=V_{DD}\frac{r_O}{R_D+r_O}-I_D(R_D\parallel r_O)\]
+\[v_{ds}=-i_d(R_D\parallel r_O)\]
 \item With load resistance $R_L$:
-\[V_{DS}=\frac{V_{DD}r_O}{R_D+r_O}-I'_D\qty(R_D\parallel r_O\parallel R_L)\]
-\[v_{ds}=-i_d\qty(R_D\parallel r_O\parallel R_L)\]
+\[V_{DS}=V_{DD}\frac{r_O}{R_D+r_O}-I_D(R_D\parallel r_O\parallel R_L)\]
+\[v_{ds}=-i_d(R_D\parallel r_O\parallel R_L)\]
 \eit
 \eit
 The small signal current is
 \bit
-\item No channel-length modulation:
+\item Ideal:
 \[\ba
 i_d&=i_D-I_D\\
    &=\frac{1}{2}k_n\qty(V_{GS}+v_{gs}-V_t)^2-\frac{1}{2}k_n\qty(V_{GS}-V_t)^2\\
@@ -1221,21 +1217,27 @@ i_d&=i_D-I_D\\
 \[\ba
 i_d&=i_D-I_D\\
    &=\frac{1}{2}k_n\qty(V_{GS}+v_{gs}-V_t)^2-\frac{1}{2}k_n\qty(V_{GS}-V_t)^2+\frac{v_{ds}}{r_O}\\
-   &=\frac{1}{2}(2V_{GS}+v_{gs}-2V_t)v_{gs}-\frac{i_dR_D}{r_O}\\
-   &=\qty(k_n(V_{GS}-V_t)v_{gs}+\frac{1}{2}k_nv_{gs}^{\phantom{gs}2})\frac{r_O}{R_D+r_O}
+   &=\frac{1}{2}(2V_{GS}+v_{gs}-2V_t)v_{gs}-\frac{i_d(R_D\parallel r_O)}{r_O}\\
+   &=\qty(k_n(V_{GS}-V_t)v_{gs}+\frac{1}{2}k_nv_{gs}^{\phantom{gs}2})\frac{R_D}{R_D+r_O}
 \ea\]
 \eit
 The input signal is kept sufficiently small such that
 \[\frac{1}{2}k_nv_{gs}^{\phantom{gs}2}\ll k_n(V_{GS}-V_t)v_{gs}\]
 that is
 \[v_{gs}\ll 2(V_{GS}-V_t)=2V_{OV}\]
+\bit
+\item Ideal:
+\[i_d=k_n(V_{GS}-V_t)v_{gs}\]
+\item Channel-length modulation with finite output resistance $r_O$:
+\[i_d=k_n(V_{GS}-V_t)v_{gs}\frac{R_D}{R_D+r_O}\]
+\eit
 \sssc{Some particular bias points}
 We denote
 \bit
 \item $A=(V_t,V_{DD},0)$, where the minimum $V_{GS}$ in saturation region occurs;
 \item $B$ the bias point such that $V_{DS}=V_{OV}$, where the maximum $V_{GS}$ in saturation region occurs, which is the edge between saturation and triode region and is
 \bit
-\item No channel-length modulation:
+\item Ideal:
 \[B=\qty(V_t+\frac{\sqrt{2k_nR_DV_{DD}+1}-1}{k_nR_D},\frac{\sqrt{2k_nR_DV_{DD}+1}-1}{k_nR_D},\frac{V_{DD}}{R_D}-\frac{\sqrt{2k_nR_DV_{DD}+1}-1}{k_nR_D^{\phantom{D}2}})\]
 \bpr
 \[V_{DS}=V_{OV}=V_{DD}-\frac{1}{2}k_nR_DV_{OV}^2\]
@@ -1278,7 +1280,7 @@ If the lower limit is not satisfied, the transistor will enter the triode region
 \eit
 \sssc{Small-signal hybrid-$\pi$ model for transconductance amplifier}
 \bit
-\item No channel-length modulation: The transconductance amplifier can be modeled for small signal as a linear VCCS between D and S that enforces
+\item Ideal: The transconductance amplifier can be modeled for small signal as a linear VCCS between D and S that enforces
 \[i_d=g_mv_{gs},\]
 where the transconductance $g_m$ is
 \[\ba
@@ -1290,26 +1292,30 @@ g_m&\coloneq\frac{i_d}{v_{gs}}\\
    &=\sqrt{2k_nI_D}
 \ea\]
 \item Channel-length modulation with finite output resistance $r_O$: The transconductance amplifier can be modeled for small signal as a linear VCCS between D and S that enforces
-\[i_d=G_mv_{gs},\]
-in parallel with a resistance $r_O$, where the transconductance $G_m$ is
+\[i_d=g_{m,clm}v_{gs},\]
+in parallel with a resistance $r_O$, where the transconductance $g_{m,clm}$ is
 \[\ba
-G_m&\coloneq\frac{i_d}{v_{gs}}\\
+g_m{m,clm}&\coloneq\frac{i_d}{v_{gs}}\\
    &=\evlv{\pdv{i_D}{v_{GS}}}_{v_{GS}=V_{GS}}\\
-   &=k_n(V_{GS}-V_t)\frac{r_O}{R_D+r_O}\\
-   &=g_m\frac{r_O}{R_D+r_O}\\
-   &=k_nV_{OV}\frac{r_O}{R_D+r_O}\\
-   &=\frac{2I'_D}{V_{OV}}\\
-   &=\sqrt{2k_nI'_D}\frac{r_O}{R_D+r_O}
+   &=k_n(V_{GS}-V_t)\frac{R_D}{R_D+r_O}\\
+   &=g_m\frac{R_D}{R_D+r_O}\\
+   &=k_nV_{OV}\frac{R_D}{R_D+r_O}\\
+   &=\frac{2I'_D}{V_{OV}}\frac{R_D}{R_D+r_O}\\
+   &=\sqrt{2k_nI'_D}\frac{R_D}{R_D+r_O}
 \ea\]
 \eit
 \sssc{Small-signal hybrid-$\pi$ model for voltage amplifier}
 \bit
-\item No channel-length modulation: The voltage amplifier can be modeled for small signal as a linear VCCS between D and S that enforces $i_d=g_mv_{gs}$ in parallel with a resistance $R_D$. Thus, the voltage gain $A_v$ is
+\item Ideal: The voltage amplifier can be modeled for small signal as a linear VCCS between D and S that enforces $i_d=g_mv_{gs}$ in parallel with a resistance $R_D$. Thus, the open-circuit voltage gain $A_v$ is
 \[A_v\coloneq\frac{v_{ds}}{v_{gs}}=-g_mR_D\]
-TODO
-\item Channel-length modulation with finite output resistance $r_O$: The transconductance amplifier can be modeled for small signal as a linear VCCS between D and S that enforces $i_d=G_mv_{gs}$ in parallel with a resistance $r_O$ and a resistance $R_D$. Thus, the voltage gain $A_v$ is
-\[A_v\coloneq\frac{v_{ds}}{v_{gs}}=-g_mR_D\]
-TODO
+closed-circuit voltage gain $G_v$ with load $R_L$ is
+\[G_v\coloneq\frac{v_{ds}}{v_{gs}}=-g_m\qty(R_D\parallel R_L)\]
+\item Channel-length modulation with finite output resistance $r_O$: The transconductance amplifier can be modeled for small signal as a linear VCCS between D and S that enforces $i_d=G_mv_{gs}$ in parallel with a resistance $r_O$ and a resistance $R_D$. Thus, the open-circuit voltage gain $A_v$ is
+\[\ba
+A_{v,clm}&\coloneq\frac{v_{ds}}{v_{gs}}\\
+         &=-g_{m,clm}(R_D\parallel r_O)\\
+         &=-g_m\frac{R_D}{R_D+r_O}\frac{R_Dr_O}{R_D+r_O}\\
+\ea\]
 \eit
 Thus, the voltage amplifier is inverting.
 \sssc{Graphical analysis}
