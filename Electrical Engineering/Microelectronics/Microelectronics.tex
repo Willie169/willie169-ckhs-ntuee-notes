@@ -1089,6 +1089,8 @@ And
 The NMOS in saturation region can be modeled by a voltage-controlled current source with input $v_{GS}$ and output $i_D$ in parallel with a resistance $r_O$. And the voltage across them is $v_{DS}$.
 
 $r_O$ is typically in the range of 10k to 1000k Ohm.
+
+Note that using the triode current equation and the $i_{D,clm}$ here is not continuous at $v_{DS}=v_{OV}$.
 \sssc{PMOS (transistor)/p-channel MOSFET/FET}
 \bit
 \item Physical structure: Reverse n and p in the description of NMOS.
@@ -1220,9 +1222,9 @@ i_d&=i_D-I_D\\
    &=k_n(V_{GS}-V_t)v_{gs}+\frac{1}{2}k_nv_{gs}^{\phantom{gs}2}
 \ea\]
 The input signal is kept sufficiently small such that
-\[\frac{1}{2}k_nv_{gs}^{\phantom{gs}2}\ll k_n(V_{GS}-V_t)v_{gs}\]
+\[\frac{1}{2}k_nv_{gs}^{\phantom{gs}2}\ll k_n(V_{GS}-V_t)\abs{v_{gs}}\]
 that is
-\[v_{gs}\ll 2(V_{GS}-V_t)=2V_{OV}\]
+\[\abs{v_{gs}}\ll 2(V_{GS}-V_t)=2V_{OV}\]
 \[i_d=k_n(V_{GS}-V_t)v_{gs}\]
 \sssc{Allowable signal swing at drain}
 To have a voltage amplifier, we must have the limits
@@ -1275,7 +1277,7 @@ Thus, the voltage amplifier is inverting, and channel-length modulation will red
 We denote
 \bit
 \item $A=(V_t,V_{DD},0)$, where the minimum $V_{GS}$ in saturation region occurs;
-\item $B$ the bias point such that $V_{DS}=V_{OV}$, where the maximum $V_{GS}$ in saturation region occurs, which is the edge between saturation and triode region and is
+\item $B$ the bias point such that $V_{DS}=V_{OV}$, where the maximum $V_{GS}$ in saturation region occurs, which is the edge between saturation and triode region and, assuming no channel-length modulation, is
 \[B=\qty(V_t+\frac{\sqrt{2k_nR_DV_{DD}+1}-1}{k_nR_D},\frac{\sqrt{2k_nR_DV_{DD}+1}-1}{k_nR_D},\frac{V_{DD}}{R_D}-\frac{\sqrt{2k_nR_DV_{DD}+1}-1}{k_nR_D^{\phantom{D}2}})\]
 \bpr
 \[V_{DS}=V_{OV}=V_{DD}-\frac{1}{2}k_nR_DV_{OV}^2\]
