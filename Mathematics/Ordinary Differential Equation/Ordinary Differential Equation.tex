@@ -1042,17 +1042,32 @@ Let
 \[p(x)=\frac{g(x)}{f(x)},\quad q(x)=\frac{h(x)}{f(x)}.\]
 \ben
 \item We seek a solution, called Frobenius series, of
-\[(x-x_0)^2y''+(x-x_0)r(x)y'+s(x)y=0\]
+\[(x-x_0)^2y''+(x-x_0)s(x)y'+t(x)y=0\]
 in the form:
 \[y=\sum_{n=0}^{\infty}a_n(x-x_0)^{n+r},\quad a_0\neq 0,\]
-where $x_0$ is a fixed regular singular point called expansion point, $r(x)=(x-x_0)p(x)$ and $s(x)=(x-x_0)^2q(x)$ are analytic at $x_0$, and $a_n$ are constants to be determined.
+where $x_0$ is a fixed regular singular point called expansion point, $s(x)$ is $(x-x_0)p(x)$ analytically extended to $x_0$, $t(x)$ is $(x-x_0)^2q(x)$ analytically extended to $x_0$, and $a_n$ are constants to be determined.
+\item The indicial polynomial $I(r)$ is
+\[I(r)=r(r-1)+s(x_0)r+t(x_0)\]
+and the indicial equation is
+\[I(r)=0\]
+This indical polynomial is defined by,
+\bit
 \item Differentiate the series term by term:
 \[y'=\sum_{n=0}^{\infty}a_n(n+r)(x-x_0)^{n+r-1},\]
 \[y''=\sum_{n=0}^{\infty}a_n(n+r)(n+r-1)(x-x_0)^{n+r-2}.\]
-\item Substitute into the ODE, rewrite $(x-x_0)r(x)$ and $s(x)$ into Taylor expansion at $x_0$, rewrite the infinite series products (if any) into Cauchy products, and let the sum of all terms involving $a_0$ of the three be $L$.
-\item The indicial polynomial $I(r)$ is defined as the coefficient of the lowest power term of $\frac{L}{a_0}$, and the indicial equation is defined as
-\[I(r)=0,\]
-which is a quadratic equation for $r$.
+\item Substitute into the ODE, rewrite $(x-x_0)s(x)$ and $t(x)$ into Taylor expansion at $x_0$, rewrite the infinite series products (if any) into Cauchy products, and let the sum of all terms involving $a_0$ of the three be $L$.
+\item The indicial polynomial $I(r)$ is the coefficient of the lowest power term (i.e., $(x-x_0)^r$ term) of $\frac{L}{a_0}$
+\eit
+\bpr
+Term with $a_0$:
+\[y\colon a_0(x-x_0)^r\]
+\[y'\colon a_0r(x-x_0)^{r-1}\]
+\[y''\colon a_0r(r-1)(x-x_0)^{r-2}\]
+\[(x-x_0)^2y''=a_0r(r-1)(x-x_0)^r\]
+\[(x-x_0)y'=a_0r(x-x_0)^r\]
+Constant term of the Taylor expansion of $s(x)$ and $t(x)$ at $x_0$ are $s(x_0)$ and $t(x_0)$.
+\[L=a_0(r(r-1)+s(x_0)r+t(x_0))(x-x_0)^r\]
+\epr
 \item Solve the indicial equation for $r$. Let the roots be $r_1\geq r_2$, called indical roots or exponents.
 \item Let $R$ be the distance between $x_0$ and the nearest singular point if there is one or $\infty$ if there is none. Depending on the relation of $r_1$ and $r_2$:
 \bit
@@ -1069,7 +1084,7 @@ If they are linearly independent, no modification is needed; otherwise, $y_2$ is
 \[y_2(x)=\ln|x-x_0|y_1(x)+(x-x_0)^{r_2}\sum_{n=0}^{\infty}B_n(x-x_0)^n,\quad B_0\neq 0\land B_n\in\bbR,\]
 where $B_n$ is different from the original one.
 \eit 
-\item Substitute into the ODE, rewrite $(x-x_0)r(x)$ and $s(x)$ into Taylor expansion at $x_0$, rewrite the infinite series products (if any) into Cauchy products, and rewrite the LHS as a power series in $x^n$.
+\item Substitute into the ODE, rewrite $(x-x_0)s(x)$ and $t(x)$ into Taylor expansion at $x_0$, rewrite the infinite series products (if any) into Cauchy products, and rewrite the LHS as a power series in $x^n$.
 \item Solve for the recurrence relations of $A_n$ and $B_n$.
 \bit
 \item Case $(r_1-r_2\notin\bbZ\land r_1,r_2\in\bbR)\lor (r_1,r_2=\alpha\pm\beta i,\quad\beta\ne0)$: We may set $A_0$ and $B_0$ as any nonzero constants (typically 1).
