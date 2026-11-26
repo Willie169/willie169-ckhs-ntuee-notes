@@ -1209,36 +1209,23 @@ between S and D in series with resistance $R_D$ between D and $V_{DD}$ with $V_{
 
 Overdrive voltage:
 \[V_{OV}=\sqrt{\frac{2I_D}{k_n}}\]
-Output voltage:
-\bit
-\item Open-circuit:
+Open-circuit output:
 \[V_{DS}=V_{DD}-I_DR_D\]
-\[v_{ds}=-i_dR_D\]
 \[I_D=\frac{V_{DD}-V_{DS}}{R_D}\]
-\item With load resistance $R_L$:
-\[V_{DS}=V_{DD}-I_D(R_D\parallel R_L)\]
-\[v_{ds}=-i_d(R_D\parallel R_L)\]
-\[I_D=\frac{V_{DD}-V_{DS}}{R_D\parallel R_L}\]
-\eit
+When a load resistance $R_L$ is applied, replace $R_D$ with $R_D\parallel R_L$.
 \item Channel-length modulation with finite output resistance $r_O$: The dc bias point equivalent circuit model is, a VCCS with input $V_{GS}$ and output $I_D$ enforcing
 \[I_D=\frac{1}{2}k_nV_{OV}^{\phantom{OV}2}\]
 in parallel with a resistance $r_O$, both between S and D, and then in series with resistance $R_D$ between D and $V_{DD}$, with $V_{DS}$ as output voltage and output resistance $r_O$.
 
 Overdrive voltage:
 \[V_{OV}=\sqrt{\frac{2I_D}{k_n}}\]
-Output voltage:
-\bit
-\item Open-circuit:
+Open-circuit output:
 \[V_{DS}=V_{DD}\frac{r_O}{R_D+r_O}-I_D(R_D\parallel r_O)\]
-\[v_{ds}=-i_d(R_D\parallel r_O)\]
 \[I_D=\frac{V_{DD}}{R_D}-\frac{V_{DS}}{R_D\parallel r_O}\]
-\item With load resistance $R_L$:
-\[V_{DS}=\qty(\frac{V_{DD}}{R_D}-I_D)(R_D\parallel r_O\parallel R_L)\]
-\[v_{ds}=-i_d(R_D\parallel r_O\parallel R_L)\]
-\[I_D=\frac{V_{DD}}{R_D}-\frac{V_{DS}}{R_D\parallel r_O\parallel R_L}\]
+\[I_{D,clm}=I_D+\frac{V_{DS}}{r_O}=\frac{V_{DD}-V_{DS}}{R_D}-\]
 \eit
-\eit
-Small-signal current:
+When a load resistance $R_L$ is applied, replace $R_D$ with $R_D\parallel R_L$.
+\sssc{Small-signal current}
 \[\ba
 i_d&=i_D-I_D\\
    &=\frac{1}{2}k_n\qty(V_{GS}+v_{gs}-V_t)^2-\frac{1}{2}k_n\qty(V_{GS}-V_t)^2\\
@@ -1250,6 +1237,13 @@ The input signal is kept sufficiently small such that
 that is
 \[\abs{v_{gs}}\ll 2(V_{GS}-V_t)=2V_{OV}\]
 \[i_d=k_n(V_{GS}-V_t)v_{gs}\]
+\bit
+\item Ideal:
+\[v_{ds}=-i_dR_D\]
+\item Channel-length modulation with finite output resistance $r_O$:
+\[v_{ds}=-i_d(R_D\parallel r_O)\]
+\[i_{d,clm}=i_d+\frac{v_{ds}}{r_O}=i_d\frac{r_O}{R_D+r_O}\]
+\eit
 \sssc{Allowable signal swing at drain}
 To have a voltage amplifier, we must have the limits
 \[V_{DD}\ge v_{DS}\ge v_{GS}-V_t>0\]
@@ -1265,10 +1259,11 @@ If the lower limit is not satisfied, the transistor will enter the triode region
 \sssc{Small-signal hybrid-\textpi model for transconductance amplifier}
 \bit
 \item Ideal: The transconductance amplifier can be modeled for small signal as a linear VCCS between D and S that enforces
-\[i_d=g_mv_{gs}.\]
+\[i_d=g_mv_{gs}\]
 \item Channel-length modulation with finite output resistance $r_O$: The transconductance amplifier can be modeled for small signal as a linear VCCS between D and S that enforces
-\[i_d=g_mv_{gs}.\]
-in parallel with a resistance $r_O$.
+\[i_d=g_mv_{gs}\]
+in parallel with a resistance $r_O$. And
+\[i_{d,clm}=i_d+\frac{v_{ds}}{r_O}\]
 \eit
 In both cases, the transconductance $g_m$ is
 \[\ba
@@ -1281,14 +1276,18 @@ g_m&\coloneq\frac{i_d}{v_{gs}}\\
 \ea\]
 \sssc{Small-signal hybrid-\textpi model for voltage amplifier}
 \bit
-\item Ideal: The voltage amplifier can be modeled for small signal as a linear VCCS between D and S that enforces $i_d=g_mv_{gs}$ in parallel with a resistance $R_D$.
+\item Ideal: The voltage amplifier can be modeled for small signal as a linear VCCS between D and S that enforces
+\[i_d=g_mv_{gs}\]
+in parallel with a resistance $R_D$.
 \bit
 \item Open-circuit voltage gain $A_v$:
 \[A_v\coloneq\frac{v_{ds}}{v_{gs}}=-g_mR_D\]
 \item Closed-circuit voltage gain $G_v$ with load $R_L$:
 \[G_v\coloneq\frac{v_{ds}}{v_{gs}}=-g_m\qty(R_D\parallel R_L)=A_v\frac{R_L}{R_D+R_L}\]
 \eit
-\item Channel-length modulation with finite output resistance $r_O$: The transconductance amplifier can be modeled for small signal as a linear VCCS between D and S that enforces $i_d=g_mv_{gs}$ in parallel with a resistance $r_O$ and a resistance $R_D$.
+\item Channel-length modulation with finite output resistance $r_O$: The transconductance amplifier can be modeled for small signal as a linear VCCS between D and S that enforces
+\[i_d=g_mv_{gs}\]
+in parallel with a resistance $r_O$ and a resistance $R_D$.
 \bit
 \item Open-circuit voltage gain $A_v$:
 \[A_v\coloneq\frac{v_{ds}}{v_{gs}}=-g_m(R_D\parallel r_O)\]
@@ -1339,14 +1338,14 @@ The maximum magnitudes of $g_m$ and $A_v$ occur at the bias point $B$, where
 \[R_D\qty(V_{OV}\vert_B)^2k_n=2(V_{DD}-V_{OV}\vert_B)\]
 \[k_n=\frac{2(V_{DD}-V_{OV}\vert_B)}{R_D\qty(V_{OV}\vert_B)^2}\]
 \epr
-\sssc{T equivalent circuit model}
+\sssc{Small-signal T equivalent circuit model}
 Start from hybrid-$\pi$ model.
 \ben
 \item Replace the VCCS with two same VCCS in series, with the node in between being X.
 \item Set the voltage of X relative S to $v_{gs}$, and thus connect G to X.
 \item Replace the VCCS between X and S with a resistance $\frac{1}{g_m}$.
 \een
-This is the T equivalent circuit model, where D, S, G are the three vertices of letter T and X is the intersection point. We denote the current of the remaining VCCS from D to S as $i$.
+This is the T equivalent circuit model, where D, S, G are the three vertices of letter T and X is the intersection point.
 
 For that with channel-length modulation with finite output resistance $r_O$, the resistance $r_O$ between D and S remains.
 
@@ -1367,7 +1366,7 @@ Connect the source terminal to ground, apply input voltage signal $v_i$ between 
 \[v_s=0\]
 \[v_d=v_o\]
 \[v_g=v_{gs}=v_i\]
-\[i_d=g_mv_{gs}=g_mv_i\]
+\[i_d=g_mv_i\]
 \bit
 \item Ideal:
 \[v_o=-i_dR_D=-g_mR_Dv_i\]
@@ -1377,6 +1376,7 @@ $A_{vo}$ is the negation of total resistance on drain $R_D$ divided by total res
 \item Channel-length modulation with finite output resistance $r_O$:
 \[v_o=-i_d(R_D\parallel r_O)=-g_m(R_D\parallel r_O)v_i\]
 \[A_{vo}=-g_m(R_D\parallel r_O)\]
+\[i_{d,clm}=\frac{r_O}{R_D+r_O}i_d=\frac{g_mr_O}{R_D+r_O}v_i\]
 \[R_o=R_D\parallel r_O\]
 \eit
 When a load resistance $R_L$ is applied, replace $R_D$ with $R_D\parallel R_L$.
@@ -1390,7 +1390,7 @@ Common-source amplifier with the connection between source and ground replaced w
 \bit
 \iten Ideal:
 \[v_{gs}=\frac{\frac{1}{g_m}}{\frac{1}{g_m}+R_s}v_i=\frac{1}{1+g_mR_s}v_i\]
-\[i_d=g_mv_{gs}=\frac{g_m}{1+g_mR_s}v_i\]
+\[i_d=\frac{g_m}{1+g_mR_s}v_i\]
 \[v_s=i_dR_s=\frac{g_mR_s}{1+g_mR_s}v_i\]
 \[v_o=-i_dR_D=-\frac{g_mR_D}{1+g_mR_s}v_i\]
 \[A_{vo}=-\frac{g_mR_D}{1+g_mR_s}=-\frac{R_D}{\frac{1}{g_m}+R_S}\]
@@ -1401,11 +1401,11 @@ $A_{vo}$ is the negation of total resistance on drain $R_D$ divided by total res
 \[v_o=-\frac{g_mr_OR_D}{r_O+R_S+R_D+g_mr_OR_S}v_i\]
 \[A_{vo}=-\frac{g_mr_OR_D}{r_O+R_S+R_D+g_mr_OR_S}\]
 \[v_{gs}=\frac{r_O+R_S+R_D}{r_O+R_S+R_D+g_mr_OR_S}v_i\]
-\[i_d=\frac{g_mr_O}{r_O+R_S+R_D+g_mr_OR_S}v_i\]
+\[i_d=\frac{g_m(r_O+R_S+R_D)}{r_O+R_S+R_D+g_mr_OR_S}v_i\]
+\[i_{d.clm}=\frac{g_mr_O}{r_O+R_S+R_D+g_mr_OR_S}v_i\]
 \bpr
 \[v_{gs}=v_i-v_s\]
-\[v_o=-i_dR_D\]
-\[i_d=\frac{v_{ds}}{r_O}+g_mv_{gs}=\frac{v_o-v_s}{r_O}+g_m(v_i-v_s)=\frac{v_s}{R_S}=-\frac{v_o}{R_D}\]
+\[i_{d.clm}=\frac{v_{ds}}{r_O}+g_mv_{gs}=\frac{v_o-v_s}{r_O}+g_m(v_i-v_s)=\frac{v_s}{R_S}=-\frac{v_o}{R_D}\]
 \[v_o=-\frac{R_D}{R_S}v_s\]
 \[-\frac{v_s}{r_O}\qty(1+\frac{R_D}{R_S})+g_m\qty(v_i-v_s)=\frac{v_s}{R_S}\]
 \[v_s\qty(\frac{1}{r_O}+\frac{R_D}{r_OR_S}+\frac{1}{R_S}+g_m)=g_mv_i\]
@@ -1415,11 +1415,11 @@ $A_{vo}$ is the negation of total resistance on drain $R_D$ divided by total res
 \bpr
 Set $v_i=0$ and apply a test voltage at $v_o$.
 \[v_{gs}=-v_s\]
-\[i_d=\frac{v_{ds}}{r_O}+g_mv_{gs}=\frac{v_o-v_s}{r_O}-g_mv_s=\frac{v_s}{R_S}\]
+\[i_{d,clm}=\frac{v_{ds}}{r_O}+g_mv_{gs}=\frac{v_o-v_s}{r_O}-g_mv_s=\frac{v_s}{R_S}\]
 \[v_s\qty(\frac{1}{r_O}+\frac{1}{R_S}+g_m)=\frac{v_o}{r_O}\]
 \[v_s=\frac{R_S}{r_O+R_S+g_mr_OR_S}v_o\]
-\[i_d=\frac{1}{r_O+R_S+g_mr_OR_S}v_o\]
-\[R_o=R_D\parallel\frac{v_o}{i_d}=R_D\parallel(r_O+R_S+g_mr_OR_S)\]
+\[i_{d,clm}=\frac{1}{r_O+R_S+g_mr_OR_S}v_o\]
+\[R_o=R_D\parallel\frac{v_o}{i_{d,clm}}=R_D\parallel(r_O+R_S+g_mr_OR_S)\]
 \epr
 \eit
 When a load resistance $R_L$ is applied, replace $R_D$ with $R_D\parallel R_L$.
@@ -1429,25 +1429,25 @@ Connect the gate terminal to ground, apply input voltage signal $v_i$ between th
 \[v_s=v_i\]
 \[v_d=v_o\]
 \[v_{gs}=-v_i\]
-\[R_i=\frac{1}{g_m}\]
+\[i_d=-g_mv_i\]
 \bit
 \itm Ideal:
-\[i_d=g_mv_{gs}=-g_mv_i\]
 \[v_o=-i_dR_D=g_mR_Dv_i\]
 \[A_{vo}=g_mR_D=\frac{R_D}{\frac{1}{g_m}}\]
 $A_{vo}$ is the total resistance on drain $R_D$ divided by total resistance on source $\frac{1}{g_m}$. 
+\[R_i=\frac{1}{g_m}\]
 \[R_o=R_D\]
 \itm Channel-length modulation with finite output resistance $r_O$:
-\[v_o=\frac{(1+g_mr_O)R_D}{r_O+R_D}v_i\]
+\[v_o=-i_{d,clm}R_D=\frac{(1+g_mr_O)R_D}{r_O+R_D}v_i\]
 \[A_{vo}=\frac{(1+g_mr_O)R_D}{r_O+R_D}\]
-\[i_d=-\frac{1+g_mr_O}{r_O+R_D}v_i\]
+\[i_{d,clm}=-\frac{1+g_mr_O}{r_O+R_D}v_i\]
 \[R_i=\frac{r_O+R_D}{1+g_mr_O}\]
 \bpr
-\[i_d=g_mv_{gs}+\frac{v_o-v_i}{r_O}=-g_mv_i+\frac{v_o-v_i}{r_O}=-\frac{v_o}{R_D}\]
+\[i_{d,clm}=g_mv_{gs}+\frac{v_o-v_i}{r_O}=-g_mv_i+\frac{v_o-v_i}{r_O}=-\frac{v_o}{R_D}\]
 \[v_o\qty(\frac{1}{R_D}+\frac{r_O})=v_i\qty(g_m+\frac{1}{r_O})\]
 \[v_o=\frac{(1+g_mr_O)R_D}{r_O+R_D}v_i\]
-\[i_d=-\frac{1+g_mr_O}{r_O+R_D}v_i\]
-\[R_i=\frac{v_i}{-i_d}=\frac{r_O+R_D}{1+g_mr_O}\]
+\[i_{d,clm}=-\frac{1+g_mr_O}{r_O+R_D}v_i\]
+\[R_i=\frac{v_i}{-i_{d,clm}}=\frac{r_O+R_D}{1+g_mr_O}\]
 \epr
 \[R_o=R_D\parallel r_O\]
 \eit
@@ -1460,7 +1460,7 @@ Connect the drain terminal to ground, apply input voltage signal $v_i$ between t
 \[v_s=v_o\]
 \[v_{gs}=v_i-v_o\]
 \[R_i=\infty\]
-$v_o$ can be obtaind from the voltage divider.
+$v_o$ can be obtained from the voltage divider.
 \bit
 \itm Ideal:
 \[v_o=\frac{R_L}{\frac{1}{g_m}+R_L}v_i\]
