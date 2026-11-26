@@ -1099,8 +1099,8 @@ The voltage $v_{OV}$ is also denoted $v_{DS\tx{sat}}$, called saturation voltage
 Note that channel pinch-off does not mean channel blockage. Current continues to flow through the pinched-off channel. $v_{DS}-v_{DS\tx{sat}}$ appears a voltage drop across the depletion region. Free electrons are swept through the depletion region towards the drain when channel region has zero depth.
 
 The NMOS in saturation region can be modeled by a voltage-controlled current source with input $v_{GS}$ and output $i_D$. And the voltage across it is $v_{DS}$.
-\sssc{Saturation region - channel-length modulation (CLM)}
-When $v_{DS}>v_{OV}$, the channel length is actually less than $L$, with a portion near drain being of zero depth, i.e., depletion region, called channel-length modulation, and the current equation becomes
+\sssc{Saturation region - channel-length modulation (CLM) or early effect}
+When $v_{DS}>v_{OV}$, the channel length is actually less than $L$, with a portion near drain being of zero depth, i.e., depletion region, called channel-length modulation or early effect, and the current equation becomes
 \[i_{D,clm}=\frac{1}{2}k_nv_{OV}^{\phantom{OV}2}(1+\lambda v_{DS}),\]
 where $\lambda\ge 0$ is a device parameter of the dimension of V$^{-1}$ and is inversely proportional to $L$. For device with large $L$, $\lambda$ is often negligible, while for submicron (micron = \textmu{}m) scale, $\lambda$ is often large. We take $V_A=\frac{1}{\lambda}$, called early voltage. The voltage axis interception of the current equation is $-V_A$.  We can isolate the dependence on $L$ with
 \[V_A=V_A'L\]
@@ -1212,7 +1212,7 @@ Overdrive voltage:
 Open-circuit output:
 \[V_{DS}=V_{DD}-I_DR_D\]
 \[I_D=\frac{V_{DD}-V_{DS}}{R_D}\]
-When a load resistance $R_L$ is applied, replace $R_D$ with $R_D\parallel R_L$.
+When a load resistance $R_L$ is applied, replace $R_D$ with $R_D\parallel R_L$ to obtain closed-loop gain.
 \item Channel-length modulation with finite output resistance $r_O$: The dc bias point equivalent circuit model is, a VCCS with input $V_{GS}$ and output $I_D$ enforcing
 \[I_D=\frac{1}{2}k_nV_{OV}^{\phantom{OV}2}\]
 in parallel with a resistance $r_O$, both between S and D, and then in series with resistance $R_D$ between D and $V_{DD}$, with $V_{DS}$ as output voltage and output resistance $r_O$.
@@ -1224,7 +1224,7 @@ Open-circuit output:
 \[I_D=\frac{V_{DD}}{R_D}-\frac{V_{DS}}{R_D\parallel r_O}\]
 \[I_{D,clm}=I_D+\frac{V_{DS}}{r_O}=\frac{V_{DD}-V_{DS}}{R_D}-\]
 \eit
-When a load resistance $R_L$ is applied, replace $R_D$ with $R_D\parallel R_L$.
+When a load resistance $R_L$ is applied, replace $R_D$ with $R_D\parallel R_L$ to obtain closed-loop gain.
 \sssc{Small-signal current}
 \[\ba
 i_d&=i_D-I_D\\
@@ -1379,7 +1379,7 @@ $A_{vo}$ is the negation of total resistance on drain $R_D$ divided by total res
 \[i_{d,clm}=\frac{r_O}{R_D+r_O}i_d=\frac{g_mr_O}{R_D+r_O}v_i\]
 \[R_o=R_D\parallel r_O\]
 \eit
-When a load resistance $R_L$ is applied, replace $R_D$ with $R_D\parallel R_L$.
+When a load resistance $R_L$ is applied, replace $R_D$ with $R_D\parallel R_L$ to obtain closed-loop gain. Since $R_i=\infty$, overall gain considering source resistance of the input is unchanged.
 
 The common-source has inverting gain and is the most widely used and is often with a number of stages in cascade. It has a moderate to high output resistance (k to 10k Ohm order of magnitude). It has a high open-circuit voltage gain and limited bandwidth.
 \sssc{Common-source (CS) amplifier with a source resistance}
@@ -1422,7 +1422,7 @@ Set $v_i=0$ and apply a test voltage at $v_o$.
 \[R_o=R_D\parallel\frac{v_o}{i_{d,clm}}=R_D\parallel(r_O+R_S+g_mr_OR_S)\]
 \epr
 \eit
-When a load resistance $R_L$ is applied, replace $R_D$ with $R_D\parallel R_L$.
+When a load resistance $R_L$ is applied, replace $R_D$ with $R_D\parallel R_L$ to obtain closed-loop gain. Since $R_i=\infty$, overall gain considering source resistance of the input is unchanged.
 \sssc{Common-gate (CG) amplifier}
 Connect the gate terminal to ground, apply input voltage signal $v_i$ between the source terminal and ground, connect the drain terminal and ground through a resistance $R_D$, and take the output voltage signal $v_o$ between the drain terminal and ground.
 \[v_g=0\]
@@ -1437,11 +1437,15 @@ Connect the gate terminal to ground, apply input voltage signal $v_i$ between th
 $A_{vo}$ is the total resistance on drain $R_D$ divided by total resistance on source $\frac{1}{g_m}$. 
 \[R_i=\frac{1}{g_m}\]
 \[R_o=R_D\]
+The overall open-circuit gain considering source resistance $R_{sig}$ of the input is:
+\[G_{vo}=A_{vo}\frac{R_i}{R_{sig}+R_i}=\frac{R_D}{R_{sig}+R_i}\]
 \itm Channel-length modulation with finite output resistance $r_O$:
 \[v_o=-i_{d,clm}R_D=\frac{(1+g_mr_O)R_D}{r_O+R_D}v_i\]
 \[A_{vo}=\frac{(1+g_mr_O)R_D}{r_O+R_D}\]
 \[i_{d,clm}=-\frac{1+g_mr_O}{r_O+R_D}v_i\]
 \[R_i=\frac{r_O+R_D}{1+g_mr_O}\]
+The overall open-circuit gain considering source resistance $R_{sig}$ of the input is:
+\[G_{vo}=A_{vo}\frac{R_i}{R_{sig}+R_i}=\frac{R_D}{R_{sig}+R_i}\]
 \bpr
 \[i_{d,clm}=g_mv_{gs}+\frac{v_o-v_i}{r_O}=-g_mv_i+\frac{v_o-v_i}{r_O}=-\frac{v_o}{R_D}\]
 \[v_o\qty(\frac{1}{R_D}+\frac{r_O})=v_i\qty(g_m+\frac{1}{r_O})\]
@@ -1451,10 +1455,10 @@ $A_{vo}$ is the total resistance on drain $R_D$ divided by total resistance on s
 \epr
 \[R_o=R_D\parallel r_O\]
 \eit
-When a load resistance $R_L$ is applied, replace $R_D$ with $R_D\parallel R_L$.
+When a load resistance $R_L$ is applied, replace $R_D$ with $R_D\parallel R_L$ to obtain closed-loop gain.
 
 The CG amplifier has noninverting gain and very low input resistance that can cause the input signal to be severely attenuated and thus might not be a good voltage amplifier and has a good high-frequency performance.
-\sssc{Common-drain (CD) amplifier or source follower}
+\sssc{Common-drain (CD) amplifier, source follower, or emitter follower}
 Connect the drain terminal to ground, apply input voltage signal $v_i$ between the gate terminal and ground, connect the source terminal and ground through the load resistance $R_L$, and take the output voltage signal $v_o$ between the source terminal and ground.
 \[v_g=v_i\]
 \[v_s=v_o\]
@@ -1474,17 +1478,18 @@ $v_o$ can be obtained from the voltage divider.
 \itm Channel-length modulation with finite output resistance $r_O$:
 \[v_o=\frac{R_L\parallel r_O}{\frac{1}{g_m}+(R_L\parallel r_O)}v_i\]
 \[A_{vo}=\frac{R_L\parallel r_O}{\frac{1}{g_m}+(R_L\parallel r_O)}\]
-\[i_d=\frac{v_o}{R_L}=\frac{\frac{r_O}{R_L+r_O}}{\frac{1}{g_m}+(R_L\parallel r_O)}v_i\]
+\[i_d=\frac{v_o}{R_L\parallel r_O}=\frac1{\frac{1}{g_m}+(R_L\parallel r_O)}v_i\]
+\[i_{d,clm}=\frac{v_o}{R_L}=\frac{g_mr_O}{(1+g_m)R_L+r_O}v_i\]
 \[R_o=\frac{1}{g_m}\parallel R_L\parallel r_O\]
 \[\lim_{R_L\to\infty}v_o=\frac{r_O}{\frac{1}{g_m}+r_O}v_i\]
 \[\lim_{R_L\to\infty}A_{vo}=\frac{r_O}{\frac{1}{g_m}+r_O}\]
 \[\lim_{R_L\to\infty}i_d=0\]
+\[\lim_{R_L\to\infty}i_{d.clm}=0\]
 \[\lim_{R_L\to\infty}R_o=\frac{1}{g_m}\parallel r_O\]
 \eit
+Since $R_i=\infty$, overall gain considering source resistance of the input is unchanged. Since $\frac{1}{g_m}$ is usually small, $A_{vo}$ can be close to 1.
 
-
-
-If connect $v_i$ directly to $v_o$, source resistance in $v_i$ will cause a severe attenuation of the signal. Thus we need an amplifier with a unity voltage gain and very large input resistance and low output resistance. This is where CD amplifier suits.
+If connect $v_i$ directly to $v_o$, source resistance in $v_i$ will cause a severe attenuation of the signal. Thus we need an amplifier with near unity voltage gain and very large input resistance and low output resistance. This is where CD amplifier suits. It's used as unity-gain voltage buffer and output stage in a multistage amplifier.
 
 
 
