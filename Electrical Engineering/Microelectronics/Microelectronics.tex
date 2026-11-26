@@ -18,7 +18,9 @@ A transducer is a device that convert a signal to a voltage or current signal or
 \sssc{Signal processing}
 Signal processing includes analog signal processing (ASP), analog-to-digital converter (ADC), digital signal processor (DSP), digital-to-analog converter (DAC), amplifier, etc.
 \sssc{Coupling capacitor}
-A capacitor connected in series between stages to pass AC signal while blocking DC.
+To prevent the dc component of signal source, amplifier bias point, and the dc component of load circuit from disturbing each other, we add a capacitor $C_{C1}$ between input signal and AC input terminal of the amplifier and a capacitor $C_{C2}$ between load and AC output terminal of the amplifier. The capacitors must be large enough to approximate a short circuit at all signal frequencies of interest and are called coupling capacitor. And the amplifier is called capacitively coupled amplifier.
+\sssc{Gain-bandwidth product (GBW, GBWP, GBP, or GB)}
+For an amplifier with a finite band over which the gain is almost constant, the product of the gain magnitude and the (3-dB) bandwidth, called gain-bandwidth product (GBW, GBWP, GBP, or GB), is a figure of merit for the amplifier that is often specified in the data sheet.
 \sssc{Symbol convention}
 \bit
 \item Lowercase character with uppercase subscript means total signal, e.g. $i_C(t)$.
@@ -1390,8 +1392,6 @@ The feedback connection provides negative feedback, which stabilize the bias cur
 \sssc{Biasing by constant current source}
 Connect the source terminal to a constant current source that enforces $I_D$, possibly source any finite resistance that the ac configuration wants. This way, $I_D$ can't be changed.
 \ssc{MOSFET amplifier}
-\sssc{Capacitively coupled amplifier}
-To prevent the dc component of signal source, MOSFET bias point, and the dc component of load circuit from disturbing each other, we add a capacitor $C_{C1}$ between input signal and AC input terminal of the MOSFET and a capacitor $C_{C2}$ between load and AC output terminal of the MOSFET. The capacitors must be large enough to approximate a short circuit at all signal frequencies of interest and are called coupling capacitor or bypass capacitor. And the amplifier is called capacitively coupled amplifier.
 \sssc{General}
 In the definition of each configurations, signals are AC signal and ground means AC ground. Biasing are dealt separately, independent from what type of amplifier it is.
 
@@ -1528,4 +1528,6 @@ $v_o$ can be obtained from the voltage divider.
 Since $R_i=\infty$, overall gain considering source resistance of the input is unchanged. Since $\frac{1}{g_m}$ is usually small, $A_{vo}$ can be close to 1.
 
 If connect $v_i$ directly to $v_o$, source resistance in $v_i$ will cause a severe attenuation of the signal. Thus we need an amplifier with near unity voltage gain and very large input resistance and low output resistance. This is where CD amplifier suits. It's used as unity-gain voltage buffer and output stage in a multistage amplifier.
+\sssc{Amplifier frequency response}
+A transistor amplifier's gain falls off at low frequency due to coupling capacitors and falls off at high frequency due to the internal capacitive effect of transistor. Typically, there is a finite band over which the gain is almost constant and a lower and a higher 3-dB frequencies $f_L$ and $f_H$, Usually, $f_L\ll f_H$, thus the (3-dB) bandwidth is approximately $f_H$.
 \end{document}
