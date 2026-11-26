@@ -43,6 +43,8 @@ The steady-state dc voltage and current values that an electronic component proc
 \eit
 \sssc{Incremental resistance}
 The incremental resistance of a device at a bias point is $\dv{v}{i}$ at the point.
+\sssc{AC ground or signal ground}
+In small-signal analysis, an AC ground or signal ground is a node whose signal is fixed across time. It can be achieved by connecting to dc reference node (i.e. dc ground or dc supply) through a capacitor, called bypass capacitor, that is large enough to approximate a short circuit at all signal frequencies of interest.
 \ssc{Amplifier (amp)}
 \sssc{Amplifier}
 An electronic device which amplifies an electrical signal by a scale called amplifier gain and optionally convert voltage signal to current signal or vice versa.
@@ -1357,11 +1359,47 @@ Whenever a resistance is connected between S and ground, T equivalent circuit mo
 \item For a given MOSFET, $g_m$ is proportional to the square root of the bias current.
 \item For a given $k'_n$ and bias current $I_D$, $g_m$ is proportional to $\sqrt{\frac{W}{L}}$. For a typical MOSFET, $k'_n$ is 500 \textmu{}A/V$^2$ and $I_D=0.2$ mA, at which $\sqrt{2k_n'I_D}$ is about 0.45 mA/V.
 \eit
-\ssc{Common-source (CS), Common-gate (CG), and Common-drain (CD) amplifier}
+\ssc{Biasing MOSFET}
+\sssc{Biasing without source resistance by fixing bias gate voltage}
+This is the most straightforward approach. $V_G$ is fixed and S is grounded.
+\[V_{GS}=V_G\]
+\[I_D=\frac{1}{2}k_n\qty(V_{GS}-V_t)^2\]
+However, this is not a good design for the following reason:
+\bit
+\itm Both $\mu_n$ and $V_t$ depend on temperature, which makes $I_D$ very much dependent on temperature.
+\itm $I_D$ varies a lot across different devices.
+\eit
+\sssc{Biasing with source resistance by fixing bias gate voltage}
+$V_G$ is fixed and S is connected to ground through a source (degeneration) resistance $R_S$. This configuration is called source degeneration.
+\[I_D=\frac{V_G-V_{GS}}{R_S}=\frac{1}{2}k_n\qty(V_{GS}-V_t)^2\]
+The resistance $R_S$ provides negative feedback, which stabilize the bias current $I_D$: As $I_D$ increases, $V_{GS}$ will have to decrease because $V_G$ is constant, which in turn results in a decrease in $I_D$.
+
+On $I_D$-$V_{GS}$ graph, the former equation has slope $-\frac{1}{R_S}$ and $V_{GS}$ axis interception $V_G$. Compared to without source resistance, the variability across different devices is much smaller and decreases as $R_S$ increases.
+\sssc{Fixing bias gate voltage}
+Connect gate to supply $V_{DD}$ through a resistance $R_{G1}$, connect gate to ground through a resistance $R_{G2}$.
+\[V_G=\frac{R_{G2}}{R_{G1}+R_{G2}}\]
+When the gate terminal is used as input terminal in ac amplifier, these resistances make the input resistance of the amplifier become
+\[R_{G1}\parallel R_{G2}\]
+since both resistances are connected to ac ground in ac analysis.
+\sssc{Biasing by a drain-to-gate feedback resistor}
+Connect drain and gate with a feedback resistance $R_G$ and connect source to ground. It forces $V_G=V_D$.
+\[V_{GS}=V_{DS}=V_{DD}-R_DI_D\]
+In ideal model, $R_G$ can be any finite value and even 0, but in practice a large $R_G$, usually in the M Ohm range, is used.
+
+The feedback connection provides negative feedback, which stabilize the bias current $I_D$: As $I_D$ increases, $V_{GS}$ will have to decrease because $V_{DD}$ is constant, which in turn results in a decrease in $I_D$.
+\sssc{Biasing by constant current source}
+Connect the source terminal to a constant current source that enforces $I_D$, possibly source any finite resistance that the ac configuration wants. This way, $I_D$ can't be changed.
+\ssc{MOSFET amplifier}
+\sssc{Capacitively coupled amplifier}
+To prevent the dc component of signal source, MOSFET bias point, and the dc component of load circuit from disturbing each other, we add a capacitor $C_{C1}$ between input signal and AC input terminal of the MOSFET and a capacitor $C_{C2}$ between load and AC output terminal of the MOSFET. The capacitors must be large enough to approximate a short circuit at all signal frequencies of interest and are called coupling capacitor or bypass capacitor. And the amplifier is called capacitively coupled amplifier.
 \sssc{General}
-There are three basic configurations of single-MOSFET amplifier. Each of these configurations is obtained by connecting one of the device terminals to ground. Thus creating a two-port network with the grounded terminal being common to the input and output ports. In circuit symbol, we indicate the common ground with a connection to ground from the midpoint of a side other than that of input terminal. If S terminal is connected to ground through a resistance, it is called source degeneration and the resistance is called source resistance $R_S$.
+In the definition of each configurations, signals are AC signal and ground means AC ground. Biasing are dealt separately, independent from what type of amplifier it is.
+
+When we say a terminal $K$ of MOSFET is connected to ac ground through a resistance $R_k$, the resistance is also (part of) the dc resistance between terminal $K$ and dc reference node (i.e. dc ground or dc supply) where $K$ is connected to in the bias circuit. Suppose we want dc resistance between terminal $K$ and dc reference node $R_K$ and ac resistance $R_k$. If $R_k=R_K$, which is usually the case for convenience, we connect terminal $K$ to dc reference node through resistance $R_k=R_K$. If $R_k<R_K$, we connect terminal $K$ to a node A through $R_k$, and connect $A$ to a dc reference node through a bypass capacitor, forming an ac ground at $A$, and connect $A$ to dc reference node through resistance $R_K-R_k$.
+\sssc{Three basic configurations of single-MOSFET amplifier}
+There are three basic configurations of single-MOSFET amplifier, common-source (CS), common-gate (CG), and common-drain (CD). Each of these configurations is obtained by connecting one of the device terminals to AC ground. Thus creating a two-port network with the AC-grounded terminal being common to the input and output ports.
 \sssc{Common-source (CS) amplifier}
-Connect the source terminal to ground, apply input voltage signal $v_i$ between the gate terminal and ground, connect the drain terminal and ground through a resistance $R_D$, and take the output voltage signal $v_o$ between the drain terminal and ground.
+Connect the source terminal to ground, apply input voltage signal $v_i$ between the gate terminal and ground, connect the drain terminal and ground through a drain resistance $R_d$, and take the output voltage signal $v_o$ between the drain terminal and ground.
 \[R_i=\infty\]
 \[v_s=0\]
 \[v_d=v_o\]
@@ -1369,21 +1407,21 @@ Connect the source terminal to ground, apply input voltage signal $v_i$ between 
 \[i_d=g_mv_i\]
 \bit
 \item Ideal:
-\[v_o=-i_dR_D=-g_mR_Dv_i\]
-\[A_{vo}=-g_mR_D=-\frac{R_D}{\frac{1}{g_m}}\]
-$A_{vo}$ is the negation of total resistance on drain $R_D$ divided by total resistance on source $\frac{1}{g_m}$. 
-\[R_o=R_D\]
+\[v_o=-i_dR_d=-g_mR_dv_i\]
+\[A_{vo}=-g_mR_d=-\frac{R_d}{\frac{1}{g_m}}\]
+$A_{vo}$ is the negation of total resistance on drain $R_d$ divided by total resistance on source $\frac{1}{g_m}$. 
+\[R_o=R_d\]
 \item Channel-length modulation with finite output resistance $r_O$:
-\[v_o=-i_d(R_D\parallel r_O)=-g_m(R_D\parallel r_O)v_i\]
-\[A_{vo}=-g_m(R_D\parallel r_O)\]
-\[i_{d,clm}=\frac{r_O}{R_D+r_O}i_d=\frac{g_mr_O}{R_D+r_O}v_i\]
-\[R_o=R_D\parallel r_O\]
+\[v_o=-i_d(R_d\parallel r_O)=-g_m(R_d\parallel r_O)v_i\]
+\[A_{vo}=-g_m(R_d\parallel r_O)\]
+\[i_{d,clm}=\frac{r_O}{R_d+r_O}i_d=\frac{g_mr_O}{R_d+r_O}v_i\]
+\[R_o=R_d\parallel r_O\]
 \eit
-When a load resistance $R_L$ is applied, replace $R_D$ with $R_D\parallel R_L$ to obtain closed-loop gain. Since $R_i=\infty$, overall gain considering source resistance of the input is unchanged.
+When a load resistance $R_L$ is applied, replace $R_d$ with $R_d\parallel R_L$ to obtain closed-loop gain. Since $R_i=\infty$, overall gain considering source resistance of the input is unchanged.
 
 The common-source has inverting gain and is the most widely used and is often with a number of stages in cascade. It has a moderate to high output resistance (k to 10k Ohm order of magnitude). It has a high open-circuit voltage gain and limited bandwidth.
 \sssc{Common-source (CS) amplifier with a source resistance}
-Common-source amplifier with the connection between source and ground replaced with a resistance $R_s$.
+Replace the connection between source and ground of CS amplifier with a resistance $R_s$.
 \[R_i=\infty\]
 \[v_d=v_o\]
 \[v_g=v_i\]
@@ -1392,26 +1430,26 @@ Common-source amplifier with the connection between source and ground replaced w
 \[v_{gs}=\frac{\frac{1}{g_m}}{\frac{1}{g_m}+R_s}v_i=\frac{1}{1+g_mR_s}v_i\]
 \[i_d=\frac{g_m}{1+g_mR_s}v_i\]
 \[v_s=i_dR_s=\frac{g_mR_s}{1+g_mR_s}v_i\]
-\[v_o=-i_dR_D=-\frac{g_mR_D}{1+g_mR_s}v_i\]
-\[A_{vo}=-\frac{g_mR_D}{1+g_mR_s}=-\frac{R_D}{\frac{1}{g_m}+R_S}\]
-$A_{vo}$ is the negation of total resistance on drain $R_D$ divided by total resistance on source $\frac{1}{g_m}+R_S$. 
-\[R_o=R_D\]
+\[v_o=-i_dR_d=-\frac{g_mR_d}{1+g_mR_s}v_i\]
+\[A_{vo}=-\frac{g_mR_d}{1+g_mR_s}=-\frac{R_d}{\frac{1}{g_m}+R_S}\]
+$A_{vo}$ is the negation of total resistance on drain $R_d$ divided by total resistance on source $\frac{1}{g_m}+R_S$. 
+\[R_o=R_d\]
 \iten Channel-length modulation with finite output resistance $r_O$:
-\[v_s=\frac{g_mr_OR_S}{r_O+R_S+R_D+g_mr_OR_S}v_i\]
-\[v_o=-\frac{g_mr_OR_D}{r_O+R_S+R_D+g_mr_OR_S}v_i\]
-\[A_{vo}=-\frac{g_mr_OR_D}{r_O+R_S+R_D+g_mr_OR_S}\]
-\[v_{gs}=\frac{r_O+R_S+R_D}{r_O+R_S+R_D+g_mr_OR_S}v_i\]
-\[i_d=\frac{g_m(r_O+R_S+R_D)}{r_O+R_S+R_D+g_mr_OR_S}v_i\]
-\[i_{d.clm}=\frac{g_mr_O}{r_O+R_S+R_D+g_mr_OR_S}v_i\]
+\[v_s=\frac{g_mr_OR_S}{r_O+R_S+R_d+g_mr_OR_S}v_i\]
+\[v_o=-\frac{g_mr_OR_d}{r_O+R_S+R_d+g_mr_OR_S}v_i\]
+\[A_{vo}=-\frac{g_mr_OR_d}{r_O+R_S+R_d+g_mr_OR_S}\]
+\[v_{gs}=\frac{r_O+R_S+R_d}{r_O+R_S+R_d+g_mr_OR_S}v_i\]
+\[i_d=\frac{g_m(r_O+R_S+R_d)}{r_O+R_S+R_d+g_mr_OR_S}v_i\]
+\[i_{d.clm}=\frac{g_mr_O}{r_O+R_S+R_d+g_mr_OR_S}v_i\]
 \bpr
 \[v_{gs}=v_i-v_s\]
-\[i_{d.clm}=\frac{v_{ds}}{r_O}+g_mv_{gs}=\frac{v_o-v_s}{r_O}+g_m(v_i-v_s)=\frac{v_s}{R_S}=-\frac{v_o}{R_D}\]
-\[v_o=-\frac{R_D}{R_S}v_s\]
-\[-\frac{v_s}{r_O}\qty(1+\frac{R_D}{R_S})+g_m\qty(v_i-v_s)=\frac{v_s}{R_S}\]
-\[v_s\qty(\frac{1}{r_O}+\frac{R_D}{r_OR_S}+\frac{1}{R_S}+g_m)=g_mv_i\]
-\[v_s=\frac{g_mr_OR_S}{r_O+R_S+R_D+g_mr_OR_S}v_i\]
+\[i_{d.clm}=\frac{v_{ds}}{r_O}+g_mv_{gs}=\frac{v_o-v_s}{r_O}+g_m(v_i-v_s)=\frac{v_s}{R_S}=-\frac{v_o}{R_d}\]
+\[v_o=-\frac{R_d}{R_S}v_s\]
+\[-\frac{v_s}{r_O}\qty(1+\frac{R_d}{R_S})+g_m\qty(v_i-v_s)=\frac{v_s}{R_S}\]
+\[v_s\qty(\frac{1}{r_O}+\frac{R_d}{r_OR_S}+\frac{1}{R_S}+g_m)=g_mv_i\]
+\[v_s=\frac{g_mr_OR_S}{r_O+R_S+R_d+g_mr_OR_S}v_i\]
 \epr
-\[R_o=R_D\parallel (r_O+R_S+g_mr_OR_S)\]
+\[R_o=R_d\parallel (r_O+R_S+g_mr_OR_S)\]
 \bpr
 Set $v_i=0$ and apply a test voltage at $v_o$.
 \[v_{gs}=-v_s\]
@@ -1419,12 +1457,12 @@ Set $v_i=0$ and apply a test voltage at $v_o$.
 \[v_s\qty(\frac{1}{r_O}+\frac{1}{R_S}+g_m)=\frac{v_o}{r_O}\]
 \[v_s=\frac{R_S}{r_O+R_S+g_mr_OR_S}v_o\]
 \[i_{d,clm}=\frac{1}{r_O+R_S+g_mr_OR_S}v_o\]
-\[R_o=R_D\parallel\frac{v_o}{i_{d,clm}}=R_D\parallel(r_O+R_S+g_mr_OR_S)\]
+\[R_o=R_d\parallel\frac{v_o}{i_{d,clm}}=R_d\parallel(r_O+R_S+g_mr_OR_S)\]
 \epr
 \eit
-When a load resistance $R_L$ is applied, replace $R_D$ with $R_D\parallel R_L$ to obtain closed-loop gain. Since $R_i=\infty$, overall gain considering source resistance of the input is unchanged.
-\sssc{Common-gate (CG) amplifier without source resistance}
-Connect the gate terminal to ground, apply input voltage signal $v_i$ between the source terminal and ground, connect the drain terminal and ground through a resistance $R_D$, and take the output voltage signal $v_o$ between the drain terminal and ground.
+When a load resistance $R_L$ is applied, replace $R_d$ with $R_d\parallel R_L$ to obtain closed-loop gain. Since $R_i=\infty$, overall gain considering source resistance of the input is unchanged.
+\sssc{Common-gate (CG) amplifier}
+Connect the gate terminal to ground, apply input voltage signal $v_i$ at the source terminal, connect the drain terminal and ground through a drain resistance $R_d$, and take the output voltage signal $v_o$ between the drain terminal and ground.
 \[v_g=0\]
 \[v_s=v_i\]
 \[v_d=v_o\]
@@ -1432,30 +1470,30 @@ Connect the gate terminal to ground, apply input voltage signal $v_i$ between th
 \[i_d=-g_mv_i\]
 \bit
 \itm Ideal:
-\[v_o=-i_dR_D=g_mR_Dv_i\]
-\[A_{vo}=g_mR_D=\frac{R_D}{\frac{1}{g_m}}\]
-$A_{vo}$ is the total resistance on drain $R_D$ divided by total resistance on source $\frac{1}{g_m}$. 
+\[v_o=-i_dR_d=g_mR_dv_i\]
+\[A_{vo}=g_mR_d=\frac{R_d}{\frac{1}{g_m}}\]
+$A_{vo}$ is the total resistance on drain $R_d$ divided by total resistance on source $\frac{1}{g_m}$. 
 \[R_i=\frac{1}{g_m}\]
-\[R_o=R_D\]
+\[R_o=R_d\]
 The overall open-circuit gain considering source resistance $R_{\tx{sig}}$ of the input is:
-\[G_{vo}=A_{vo}\frac{R_i}{R_{\tx{sig}}+R_i}=\frac{R_D}{R_{\tx{sig}}+R_i}\]
+\[G_{vo}=A_{vo}\frac{R_i}{R_{\tx{sig}}+R_i}=\frac{R_d}{R_{\tx{sig}}+R_i}\]
 \itm Channel-length modulation with finite output resistance $r_O$:
-\[v_o=-i_{d,clm}R_D=\frac{(1+g_mr_O)R_D}{r_O+R_D}v_i\]
-\[A_{vo}=\frac{(1+g_mr_O)R_D}{r_O+R_D}\]
-\[i_{d,clm}=-\frac{1+g_mr_O}{r_O+R_D}v_i\]
-\[R_i=\frac{r_O+R_D}{1+g_mr_O}\]
+\[v_o=-i_{d,clm}R_d=\frac{(1+g_mr_O)R_d}{r_O+R_d}v_i\]
+\[A_{vo}=\frac{(1+g_mr_O)R_d}{r_O+R_d}\]
+\[i_{d,clm}=-\frac{1+g_mr_O}{r_O+R_d}v_i\]
+\[R_i=\frac{r_O+R_d}{1+g_mr_O}\]
 The overall open-circuit gain considering source resistance $R_{\tx{sig}}$ of the input is:
-\[G_{vo}=A_{vo}\frac{R_i}{R_{\tx{sig}}+R_i}=\frac{R_D}{R_{\tx{sig}}+R_i}\]
+\[G_{vo}=A_{vo}\frac{R_i}{R_{\tx{sig}}+R_i}=\frac{R_d}{R_{\tx{sig}}+R_i}\]
 \bpr
-\[i_{d,clm}=g_mv_{gs}+\frac{v_o-v_i}{r_O}=-g_mv_i+\frac{v_o-v_i}{r_O}=-\frac{v_o}{R_D}\]
-\[v_o\qty(\frac{1}{R_D}+\frac1{r_O})=v_i\qty(g_m+\frac{1}{r_O})\]
-\[v_o=\frac{(1+g_mr_O)R_D}{r_O+R_D}v_i\]
-\[i_{d,clm}=-\frac{1+g_mr_O}{r_O+R_D}v_i\]
-\[R_i=\frac{v_i}{-i_{d,clm}}=\frac{r_O+R_D}{1+g_mr_O}\]
+\[i_{d,clm}=g_mv_{gs}+\frac{v_o-v_i}{r_O}=-g_mv_i+\frac{v_o-v_i}{r_O}=-\frac{v_o}{R_d}\]
+\[v_o\qty(\frac{1}{R_d}+\frac1{r_O})=v_i\qty(g_m+\frac{1}{r_O})\]
+\[v_o=\frac{(1+g_mr_O)R_d}{r_O+R_d}v_i\]
+\[i_{d,clm}=-\frac{1+g_mr_O}{r_O+R_d}v_i\]
+\[R_i=\frac{v_i}{-i_{d,clm}}=\frac{r_O+R_d}{1+g_mr_O}\]
 \epr
-\[R_o=R_D\parallel r_O\]
+\[R_o=R_d\parallel r_O\]
 \eit
-When a load resistance $R_L$ is applied, replace $R_D$ with $R_D\parallel R_L$ to obtain closed-loop gain.
+When a load resistance $R_L$ is applied, replace $R_d$ with $R_d\parallel R_L$ to obtain closed-loop gain.
 
 The CG amplifier has noninverting gain and very low input resistance that can cause the input signal to be severely attenuated and thus might not be a good voltage amplifier and has a good high-frequency performance.
 \sssc{Common-drain (CD) amplifier, source follower, or emitter follower}
@@ -1490,26 +1528,4 @@ $v_o$ can be obtained from the voltage divider.
 Since $R_i=\infty$, overall gain considering source resistance of the input is unchanged. Since $\frac{1}{g_m}$ is usually small, $A_{vo}$ can be close to 1.
 
 If connect $v_i$ directly to $v_o$, source resistance in $v_i$ will cause a severe attenuation of the signal. Thus we need an amplifier with near unity voltage gain and very large input resistance and low output resistance. This is where CD amplifier suits. It's used as unity-gain voltage buffer and output stage in a multistage amplifier.
-\ssc{Biasing CS amplifier}
-\sssc{Biasing without source resistance by fixing bias gate voltage}
-This is the most straightforward approach. $V_G$ is fixed and S is grounded. $V_{GS}$ is fixed.
-\[I_D=\frac{1}{2}k_n\qty(V_{GS}-V_t)^2\]
-However, this is not a good design for the following reason:
-\bit
-\itm Both $\mu_n$ and $V_t$ depend on temperature, which makes $I_D$ very much dependent on temperature.
-\itm $I_D$ varies a lot across different devices.
-\eit
-\sssc{Biasing with source resistance by fixing bias gate voltage}
-$V_G$ is fixed and S is connected to ground through a source resistance $R_S$.
-\[I_D=\frac{V_G-V_{GS}}{R_S}=\frac{1}{2}k_n\qty(V_{GS}-V_t)^2\]
-The resistance $R_S$ provides negative feedback, which stabilize the bias current $I_D$: As ID increases, VGS will have to decrease because $V_G$ is constant, which in turn results in a decrease in $I_D$.
-
-On $I_D$-$V_{GS}$ graph, the former equation has slope $-\frac{1}{R_S}$ and $V_{GS}$ axis interception $V_G$. Compared to without source resistance, the variability across different devices is much smaller and decreases as $R_S$ increases.
-\sssc{Fixing bias gate voltage}
-Connect gate to supply $V_{DD}$ through a resistance $R_{G1}$, connect gate to ground through a resistance $R_{G2}$, and, to prevent dc component from input disturbing the MOSFET bias point, add a capacitor $C_1$ between input and gate. $C_1$ must be large enough to approximate a short circuit at all signal frequencies of interest.
-\[V_G=\frac{R_{G2}}{R_{G1}+R_{G2}}\]
-\sssc{Biasing by a drain-to-gate feedback resistor}
-Connect drain and gate with a large feedback resistance $R_G$ (usually in the M Ohm range) and connect source to ground. It forces $V_G=V_D$.
-\[V_{GS}=V_{DS}\]
-
 \end{document}
