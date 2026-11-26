@@ -164,17 +164,15 @@ Suppose input and output signals have power $P_I$ and $P_L$.
 where $P_{\tx{dissipated}}$ is the power dissipated.
 \sssc{Classification based on frequency response}
 A band-pass amplifier is also called tuned amplifier. A low-pass amplifier is also called DC amplifier. A amplifier directly coupled with a coupling capacitor, called capacitively coupled, is called AC amplifier.
-\sssc{Output impedance}
+\sssc{Power gain}
 In Laplace domain, for an amplifier with gain $A=\frac{V_o}{V_i}$ and output impedance $Z_o$ driving a load impedance $Z_L$, the output voltage appears across the load $V_L$ is:
 \[V_L=V_o\frac{Z_L}{Z_o+Z_L},\]
 and the gain as seemed from the load $A_L=\frac{V_L}{V_i}$ is:
 \[A_L=A\frac{Z_L}{Z_o+Z_L},\]
 and the power output to the load is
 \[P_L=\frac{V_L^{\pht{L}2}}{Z_L}\]
-\sssc{Input impedance}
 In Laplace domain, for an amplifier with input impedance $Z_i$, the power input is:
 \[P_i=\frac{V_i^{\pht{i}2}}{Z_i}\]
-\sssc{Power gain}
 For an amplifier with gain $A$, input impedance $Z_i$, and output impedance $Z_o$ driving a load impedance $Z_L$, the power gain (Laplace domain) is:
 \[G_P=\frac{P_L}{P_i}=A_L^{\pht{L}2}\frac{Z_i}{Z_L}=\frac{Z_iZ_L}{\qty(Z_o+Z_L)^2}\]
 \ssc{Operational Amplifier (op amp or op-amp)}
@@ -1348,7 +1346,7 @@ Start from hybrid-$\pi$ model.
 \item Set the voltage of X relative S to $v_{gs}$, and thus connect G to X.
 \item Replace the VCCS between X and S with a resistance $\frac{1}{g_m}$.
 \een
-This is the T equivalent circuit model, where D, S, G are the three vertices of letter T and X is the intersection point.
+This is the T equivalent circuit model, where D, S, G are the three vertices of letter T and X is the intersection point. We denote the current of the remaining VCCS from D to S as $i$.
 
 For that with channel-length modulation with finite output resistance $r_O$, the resistance $r_O$ between D and S remains.
 
@@ -1367,29 +1365,36 @@ There are three basic configurations of single-MOSFET amplifier. Each of these c
 Connect the source terminal to ground, apply input voltage signal $v_i$ between the gate terminal and ground, connect the drain terminal and ground through a resistance $R_D$, and take the output voltage signal $v_o$ between the drain terminal and ground.
 \[R_i=\infty\]
 \[v_s=0\]
-\[v_{gs}=v_i\]
-\[i_d=g_mv_i\]
+\[v_d=v_o\]
+\[v_g=v_{gs}=v_i\]
+\[i_d=g_mv_{gs}=g_mv_i\]
 \bit
 \item Ideal:
 \[v_o=-i_dR_D=-g_mR_Dv_i\]
-\[A_{vo}=-g_mR_D\]
+\[A_{vo}=-g_mR_D=-\frac{R_D}{\frac{1}{g_m}}\]
+$A_{vo}$ is the negation of total resistance on drain $R_D$ divided by total resistance on source $\frac{1}{g_m}$. 
 \[R_o=R_D\]
 \item Channel-length modulation with finite output resistance $r_O$:
 \[v_o=-i_d(R_D\parallel r_O)=-g_m(R_D\parallel r_O)v_i\]
 \[A_{vo}=-g_m(R_D\parallel r_O)\]
 \[R_o=R_D\parallel r_O\]
 \eit
-The common-source is the most widely used and often with a number of stages in cascade. It has a moderate to high output resistance (k to 10k Ohm order of magnitude). It has a high open-circuit voltage gain and limited bandwidth.
+When a load resistance $R_L$ is applied, replace $R_D$ with $R_D\parallel R_L$.
+
+The common-source has inverting gain and is the most widely used and is often with a number of stages in cascade. It has a moderate to high output resistance (k to 10k Ohm order of magnitude). It has a high open-circuit voltage gain and limited bandwidth.
 \sssc{Common-source (CS) amplifier with a source resistance}
 Common-source amplifier with the connection between source and ground replaced with a resistance $R_s$.
 \[R_i=\infty\]
+\[v_d=v_o\]
+\[v_g=v_i\]
 \bit
 \iten Ideal:
 \[v_{gs}=\frac{\frac{1}{g_m}}{\frac{1}{g_m}+R_s}v_i=\frac{1}{1+g_mR_s}v_i\]
 \[i_d=g_mv_{gs}=\frac{g_m}{1+g_mR_s}v_i\]
 \[v_s=i_dR_s=\frac{g_mR_s}{1+g_mR_s}v_i\]
 \[v_o=-i_dR_D=-\frac{g_mR_D}{1+g_mR_s}v_i\]
-\[A_{vo}=-\frac{g_mR_D}{1+g_mR_s}\]
+\[A_{vo}=-\frac{g_mR_D}{1+g_mR_s}=-\frac{R_D}{\frac{1}{g_m}+R_S}\]
+$A_{vo}$ is the negation of total resistance on drain $R_D$ divided by total resistance on source $\frac{1}{g_m}+R_S$. 
 \[R_o=R_D\]
 \iten Channel-length modulation with finite output resistance $r_O$:
 \[v_s=\frac{g_mr_OR_S}{r_O+R_S+R_D+g_mr_OR_S}v_i\]
@@ -1417,10 +1422,69 @@ Set $v_i=0$ and apply a test voltage at $v_o$.
 \[R_o=R_D\parallel\frac{v_o}{i_d}=R_D\parallel(r_O+R_S+g_mr_OR_S)\]
 \epr
 \eit
+When a load resistance $R_L$ is applied, replace $R_D$ with $R_D\parallel R_L$.
 \sssc{Common-gate (CG) amplifier}
 Connect the gate terminal to ground, apply input voltage signal $v_i$ between the source terminal and ground, connect the drain terminal and ground through a resistance $R_D$, and take the output voltage signal $v_o$ between the drain terminal and ground.
+\[v_g=0\]
+\[v_s=v_i\]
+\[v_d=v_o\]
+\[v_{gs}=-v_i\]
+\[R_i=\frac{1}{g_m}\]
+\bit
+\itm Ideal:
+\[i_d=g_mv_{gs}=-g_mv_i\]
+\[v_o=-i_dR_D=g_mR_Dv_i\]
+\[A_{vo}=g_mR_D=\frac{R_D}{\frac{1}{g_m}}\]
+$A_{vo}$ is the total resistance on drain $R_D$ divided by total resistance on source $\frac{1}{g_m}$. 
+\[R_o=R_D\]
+\itm Channel-length modulation with finite output resistance $r_O$:
+\[v_o=\frac{(1+g_mr_O)R_D}{r_O+R_D}v_i\]
+\[A_{vo}=\frac{(1+g_mr_O)R_D}{r_O+R_D}\]
+\[i_d=-\frac{1+g_mr_O}{r_O+R_D}v_i\]
+\[R_i=\frac{r_O+R_D}{1+g_mr_O}\]
+\bpr
+\[i_d=g_mv_{gs}+\frac{v_o-v_i}{r_O}=-g_mv_i+\frac{v_o-v_i}{r_O}=-\frac{v_o}{R_D}\]
+\[v_o\qty(\frac{1}{R_D}+\frac{r_O})=v_i\qty(g_m+\frac{1}{r_O})\]
+\[v_o=\frac{(1+g_mr_O)R_D}{r_O+R_D}v_i\]
+\[i_d=-\frac{1+g_mr_O}{r_O+R_D}v_i\]
+\[R_i=\frac{v_i}{-i_d}=\frac{r_O+R_D}{1+g_mr_O}\]
+\epr
+\[R_o=R_D\parallel r_O\]
+\eit
+When a load resistance $R_L$ is applied, replace $R_D$ with $R_D\parallel R_L$.
+
+The CG amplifier has noninverting gain and very low input resistance that can cause the input signal to be severely attenuated and thus might not be a good voltage amplifier and has a good high-frequency performance.
 \sssc{Common-drain (CD) amplifier or source follower}
-Connect the drain terminal to ground, apply input voltage signal $v_i$ between the gate terminal and ground, connect the source terminal and ground through a resistance $R_L$, and take the output voltage signal $v_o$ between the source terminal and ground.
+Connect the drain terminal to ground, apply input voltage signal $v_i$ between the gate terminal and ground, connect the source terminal and ground through the load resistance $R_L$, and take the output voltage signal $v_o$ between the source terminal and ground.
+\[v_g=v_i\]
+\[v_s=v_o\]
+\[v_{gs}=v_i-v_o\]
+\[R_i=\infty\]
+$v_o$ can be obtaind from the voltage divider.
+\bit
+\itm Ideal:
+\[v_o=\frac{R_L}{\frac{1}{g_m}+R_L}v_i\]
+\[A_{vo}=\frac{R_L}{\frac{1}{g_m}+R_L}\]
+\[i_d=\frac{v_o}{R_L}=\frac{1}{\frac{1}{g_m}+R_L}v_i\]
+\[R_o=\frac{1}{g_m}\parallel R_L\]
+\[\lim_{R_L\to\infty}v_o=v_i\]
+\[\lim_{R_L\to\infty}A_{vo}=1\]
+\[\lim_{R_L\to\infty}i_d=0\]
+\[\lim_{R_L\to\infty}R_o=\frac{1}{g_m}\]
+\itm Channel-length modulation with finite output resistance $r_O$:
+\[v_o=\frac{R_L\parallel r_O}{\frac{1}{g_m}+(R_L\parallel r_O)}v_i\]
+\[A_{vo}=\frac{R_L\parallel r_O}{\frac{1}{g_m}+(R_L\parallel r_O)}\]
+\[i_d=\frac{v_o}{R_L}=\frac{\frac{r_O}{R_L+r_O}}{\frac{1}{g_m}+(R_L\parallel r_O)}v_i\]
+\[R_o=\frac{1}{g_m}\parallel R_L\parallel r_O\]
+\[\lim_{R_L\to\infty}v_o=\frac{r_O}{\frac{1}{g_m}+r_O}v_i\]
+\[\lim_{R_L\to\infty}A_{vo}=\frac{r_O}{\frac{1}{g_m}+r_O}\]
+\[\lim_{R_L\to\infty}i_d=0\]
+\[\lim_{R_L\to\infty}R_o=\frac{1}{g_m}\parallel r_O\]
+\eit
+
+
+
+If connect $v_i$ directly to $v_o$, source resistance in $v_i$ will cause a severe attenuation of the signal. Thus we need an amplifier with a unity voltage gain and very large input resistance and low output resistance. This is where CD amplifier suits.
 
 
 
