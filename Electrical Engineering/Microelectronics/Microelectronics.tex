@@ -1,11 +1,12 @@
-\documentclass[a4paper,12pt]{article}
+\documentclass[a4paper,12pt]{report}
 \input{LaTeX-ToolKit/template.tex}
 \begin{document}
 \title{Microelectronics}
 \author{沈威宇}
 \date{\temtoday}
 \titletocdoc
-\sct{Microelectronics}
+\ch{Microelectronics}
+\sct{Signal and Amplifier}
 \ssc{Signal}
 \sssc{Signal}
 A signal is a function that conveys information about a phenomenon. Signal processing is usually most conveniently performed by electronic systems on voltage or current signals, especially the former. Only voltage and current signals are studied here.
@@ -179,6 +180,7 @@ In Laplace domain, for an amplifier with input impedance $Z_i$, the power input 
 \[P_i=\frac{V_i^{\pht{i}2}}{Z_i}\]
 For an amplifier with gain $A$, input impedance $Z_i$, and output impedance $Z_o$ driving a load impedance $Z_L$, the power gain (Laplace domain) is:
 \[G_P=\frac{P_L}{P_i}=A_L^{\pht{L}2}\frac{Z_i}{Z_L}=\frac{Z_iZ_L}{\qty(Z_o+Z_L)^2}\]
+\sct{Operational Amplifier}
 \ssc{Operational Amplifier (op amp or op-amp)}
 \sssc{Definition}
 An op amp has five terminals:
@@ -220,6 +222,7 @@ The non-angular frequency $f_t=\frac{\omega_t}{2\pi}$ is usually specified on th
 To have stable signal, op amp in a circuit is connected with a negative feedback configuration, which consists of the op amp and a connection from $v_o$ to either of the input terminals with a resistance on it, called feedback connection. When the feedback connection connects to $v_-$, it is called inverting configuration. When the feedback connection connects to $v_+$, it is called non-inverting configuration.
 
 We can construct a virtual short circuit between $v_+$ and $v_-$ since it will becomes $v_+=v_-$ immediately due to the feedback.
+\ssc{Operational amplifier circuits}
 \sssc{Inverting amplifier}
 An inverting amplifier consists of an op amp where input voltage $v_i$ is connected to $v_-$ through an input resistance $R_i$ (current from $v_i$ to $v_-$), $v_+$ is connected to ground, and $v_o$ is fed back to $v_-$ through a feedback resistance $R_f$ (current from $v_-$ to $v_o$).
 \[v_+=v_-=0\]
@@ -432,7 +435,8 @@ Transfer function: STC high-pass with cutoff angular frequency $\frac{1}{R_IC}$ 
 There is a specific maximum magnitude of rate of change possible at the output voltage of a real op amp, called slew rate (SR), usually specified on the op-amp data sheet in units of V/\textmu{}s.
 
 To measure it, connect $v_o$ to $v_-$ and $v_+$ to a voltage source $v_t$ and measure the rate of change of $v_o$ before it reaches $v_t$. The op amp is then said to be slewing, and the output is slew-rete limited.
-\ssc{Band Theory (能帶理論) and Semiconductor}
+\sct{Semiconductor}
+\ssc{Band Theory (能帶理論)}
 \sssc{Electronic band structure or band structure}
 The electronic band structure (or simply band structure) of a solid describes the range of energy levels that electrons may or may not have within it.
 \sssc{(Energy) band (能帶)}
@@ -569,7 +573,7 @@ If the concentration of acceptor atoms is $N_A$, which is usually far greater th
 and, at thermal equilibrium,
 \[n_p=\frac{n_i^2}{N_A}\]
 Hence, holes are said to be the majority (charge) carriers, while free electrons are said to be the minority (charge) carriers. The minority free electrons are often not shown in diagrams for simplicity.
-\ssc{Current flow in semiconductors}
+\ssc{Current flow}
 \sssc{Drude model of drift velocity and drift current}
 In Drude model, after a typical collision, each free electron or hole completely lose its memory of its previous velocity and moving off in a random direction. In the average time $t_n,t_p$ between collisions, the average free electron and hole will acquire a drift speed of
 \[\mathbf{v}_n=-\mu_n\mb{E}=-\frac{qt_n}{m_n^*}\mb{E}\]
@@ -602,9 +606,10 @@ where $\nabla_n,\nabla_p$ are concentration gradients, $D_n,D_p$ are constants c
 called Einstein relationship, where $V_T$ is thermal voltage given by
 \[V_T=\frac{kT}{q}\]
 For $T=300$ K, $V_T$ is about 25.9 mV; for $T=293$ K (i.e., 20 degrees Celsius), $V_T$ is about 25.3 mV. For intrinsic silicon, $D_n$ is 35 cm$^2$/s and $D_p$ is 12 cm$^2$/s.
-\ssc{pn or p-n junction at equilibrium}
+\sct{pn junction and diode}
+\ssc{pn junction at equilibrium}
 \sssc{Physical structure}
-A p-n junction is a single semiconducting crystal with one end doped to form p material and the other end doped to form n material. The two types meet at a junction plane. External wire connections are made to both ends through metal contacts. If the pn junction is used as diode (二極體), these constitute the two terminals,
+A pn junction or p-n junction is a single semiconducting crystal with one end doped to form p material and the other end doped to form n material. The two types meet at a junction plane. External wire connections are made to both ends through metal contacts. If the pn junction is used as diode (二極體), these constitute the two terminals,
 \bit
 \item anode, indicated by +, for p-type end, and
 \item cathode, indicated by -, for n-type end, of the diode.
@@ -1035,6 +1040,7 @@ Thus, the output voltage is:
 \item At $v_S=V_S$, the reverse voltages across $D_3$ and $D_4$ are the peak inverse voltage (PIV)
 \[V_D+v_O=V_D+V_S-2V_D=V_S-V_D\]
 \eit
+\sct{MOSFET}
 \ssc{(Enhance-mode) MOSFET (Metal-oxide-semiconductor field-effect transistor)}
 \sssc{Physical structure of NMOS (transistor)/n-channel MOSFET/FET}
 An NMOS consists of a slightly doped p-typr substrate with width $W$, with a metal contact below forming the substrate, body, or bulk (B) terminal, two heavily doped n-type regions, n$^+$ source and n$^+$ drain regions, embedded onto the substrate in the left and right symmetrically, with the same width as the substrate, and with distance $L$ between the two regions called channel length, each with a metal contact on top forming source (S) and drain (D) terminals respectively, and a silicon dioxide \ce{SiO2} or similar oxide layer of thickness $t_{ox}$ on top of the three region contacting all of them but not their metal contact with the same width as the substrate, with a metal contact on top forming the gate (G) terminal, also called gate electrode. Thus, the FET is symmetrical.
@@ -1166,7 +1172,7 @@ A technology was developed that permits the fabrication of both NMOS and PMOS tr
 ;
 \end{tikzpicture}
 \end{center}
-\ssc{MOSFET amplifier}
+\ssc{MOSFET as amplifier}
 \sssc{Transconductance amplifier}
 To operate MOSFET as an amplifier, it should be in the saturation region, which is equivalent to
 \bit
@@ -1391,7 +1397,7 @@ In ideal model, $R_G$ can be any finite value and even 0, but in practice a larg
 The feedback connection provides negative feedback, which stabilize the bias current $I_D$: As $I_D$ increases, $V_{GS}$ will have to decrease because $V_{DD}$ is constant, which in turn results in a decrease in $I_D$.
 \sssc{Biasing by constant current source}
 Connect the source terminal to a constant current source that enforces $I_D$, possibly source any finite resistance that the ac configuration wants. This way, $I_D$ can't be changed.
-\ssc{MOSFET amplifier}
+\ssc{Single-MOSFET amplifiers}
 \sssc{General}
 In the definition of each configurations, signals are AC signal and ground means AC ground. Biasing are dealt separately, independent from what type of amplifier it is.
 
@@ -1528,6 +1534,6 @@ $v_o$ can be obtained from the voltage divider.
 Since $R_i=\infty$, overall gain considering source resistance of the input is unchanged. Since $\frac{1}{g_m}$ is usually small, $A_{vo}$ can be close to 1.
 
 If connect $v_i$ directly to $v_o$, source resistance in $v_i$ will cause a severe attenuation of the signal. Thus we need an amplifier with near unity voltage gain and very large input resistance and low output resistance. This is where CD amplifier suits. It's used as unity-gain voltage buffer and output stage in a multistage amplifier.
-\sssc{Amplifier frequency response}
+\sssc{Frequency response}
 A transistor amplifier's gain falls off at low frequency due to coupling capacitors and falls off at high frequency due to the internal capacitive effect of transistor. Typically, there is a finite band over which the gain is almost constant and a lower and a higher 3-dB frequencies $f_L$ and $f_H$, Usually, $f_L\ll f_H$, thus the (3-dB) bandwidth is approximately $f_H$.
 \end{document}
