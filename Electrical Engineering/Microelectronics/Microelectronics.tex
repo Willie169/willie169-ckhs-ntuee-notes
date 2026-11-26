@@ -1039,7 +1039,7 @@ The substrate forms pn junctions with the source and drain regions, which are ke
 
 MOS will be referring to NMOS unless otherwise specified.
 \sssc{Cutoff region}
-When $v_{GS}<V_t$ where $V_t>0$ is the threshold voltage, it acts as two back-to-back diodes in series between drain and source, which prevent current conduction from drain to source when a voltage $v_{DS}$ is applied, called cutoff region. The high resistance between source and drain is about $10^{12}$ Ohm.
+When $v_{GS}<V_t$ where $V_t>0$ is the threshold voltage, it acts as two back-to-back diodes in series between drain and source, which prevent current conduction from drain to source when a voltage $v_{DS}$ is applied, called cutoff region. The high resistance between source and drain is about $10^{12}$ Ohm. $V_t$ is dependent on temperature and devices.
 \sssc{Inducing n-channel}
 When $v_{GS}\ge V_t$ called turn-on condition, holes are repelled from the channel region and pushed downward into the substrate, forming a carrier-depletion region, while free electrons from the n$^+$ source and drain regions are attracted and accumulated in the channel region, inverting the substrate surface from p type to n type, which connects the two n$^+$ regions. This n-type channel, under the oxide layer and on top of the carrier-depletion region, is called n-channel or induced channel. Free electrons can flow through it and conduct between source and drain. Thus free electrons are called majority carrier of NMOS.
 
@@ -1358,8 +1358,8 @@ Whenever a resistance is connected between S and ground, T equivalent circuit mo
 \item For a given $k'_n$ and bias current $I_D$, $g_m$ is proportional to $\sqrt{\frac{W}{L}}$. For a typical MOSFET, $k'_n$ is 500 \textmu{}A/V$^2$ and $I_D=0.2$ mA, at which $\sqrt{2k_n'I_D}$ is about 0.45 mA/V.
 \eit
 \ssc{Common-source (CS), Common-gate (CG), and Common-drain (CD) amplifier}
-\sssc{Amplifier characterizing}
-There are three basic configurations of single-MOSFET amplifier. Each of these configurations is obtained by connecting one of the device terminals to ground. Thus creating a two-port network with the grounded terminal being common to the input and output ports. In circuit symbol, we indicate the common ground with a connection to ground from the midpoint of a side other than that of input terminal.
+\sssc{General}
+There are three basic configurations of single-MOSFET amplifier. Each of these configurations is obtained by connecting one of the device terminals to ground. Thus creating a two-port network with the grounded terminal being common to the input and output ports. In circuit symbol, we indicate the common ground with a connection to ground from the midpoint of a side other than that of input terminal. If S terminal is connected to ground through a resistance, it is called source degeneration and the resistance is called source resistance $R_S$.
 \sssc{Common-source (CS) amplifier}
 Connect the source terminal to ground, apply input voltage signal $v_i$ between the gate terminal and ground, connect the drain terminal and ground through a resistance $R_D$, and take the output voltage signal $v_o$ between the drain terminal and ground.
 \[R_i=\infty\]
@@ -1490,6 +1490,21 @@ $v_o$ can be obtained from the voltage divider.
 Since $R_i=\infty$, overall gain considering source resistance of the input is unchanged. Since $\frac{1}{g_m}$ is usually small, $A_{vo}$ can be close to 1.
 
 If connect $v_i$ directly to $v_o$, source resistance in $v_i$ will cause a severe attenuation of the signal. Thus we need an amplifier with near unity voltage gain and very large input resistance and low output resistance. This is where CD amplifier suits. It's used as unity-gain voltage buffer and output stage in a multistage amplifier.
+\sssc{Biasing by fixing gate without source resistance}
+This is the most straightforward approach. $V_G$ is fixed and S is grounded, thus $V_{GS}$ is fixed.
+\[I_D=\frac{1}{2}k_n\qty(V_{GS}-V_t)^2\]
+Thus the bias point is the intersection of the device dependent $I_D$-$V_{GS}$ curve and the fixed $V_{GS}$ on the $I_D$-$V_{GS}$ graph.
+
+However, this is not a good design for the following reason:
+\bit
+\itm Both $\mu_n$ and $V_t$ depend on temperature, which makes $I_D$ very much dependent on temperature.
+\itm $I_D$ varies a lot across different device.
+\eit
+\sssc{Biasing by fixing gate with source resistance}
+$V_G$ is fixed and S is connected to ground through a source resistance $R_S$.
+\[V_G=V_{GS}+R_SI_D\]
+\[I_D=\frac{1}{2}k_n\qty(V_{GS}-V_t)^2\]
+The resistance $R_S$ provides negative feedback, which stabilize the bias current $I_D$:
 
 
 
