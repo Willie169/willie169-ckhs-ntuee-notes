@@ -716,7 +716,9 @@ and the charge stored on either side of the depletion region is
 \bit
 \item The concentration of minority holes in the n region at the edge of the depletion region will increase considerably to
 \[p_n(x_n)=p_{n0}e^{v/V_T}\]
-Excess concentration is defined as
+Excess (hole) concentration at $x$ is defined as
+\[p_n(x)-p_{n0}\]
+At $x_n$,
 \[p_n(x_n)-p_{n0}=p_{n0}\qty(e^{v/V_T}-1)\]
 As the injected holes diffuse into the n material, some will recombine with the majority free electrons and disappear. The excess hole concentration decays exponentially with distance. The total hole concentration in the n material is given by
 \[p_n(x)=p_{n0}+\qty(p_n(x_n)-p_{n0})e^{-(x-x_n)/L_p}=p_{n0}+p_{n0}\qty(e^{v/V_T}-1)e^{-(x-x_n)/L_p}\qc x\ge x_n,\]
@@ -730,7 +732,9 @@ The current inside the depletion region is
 \[i_p=AJ_p(0)=Aq\frac{D_p}{L_p}\qty(p_n(x_n)-p_{n0})=Aq\frac{D_p}{L_p}p_{n0}\qty(e^{v/V_T}-1)\]
 \item The concentration of minority free electrons in the p region at the edge of the depletion region will increase considerably to
 \[n_p(-x_p)=n_{p0}e^{v/V_T}\]
-Excess concentration is defined as
+Excess (electron) concentration at $-x$ is defined as
+\[n_p(-x)-n_{p0}\]
+At $-x_p$,
 \[n_p(-x_p)-n_{p0}=n_{p0}\qty(e^{v/V_T}-1)\]
 As the injected free electrons diffuse into the p material, some will recombine with the majority holes and disappear. The excess free electron concentration decays exponentially with distance. The total hole concentration in the p material is given by
 \[n_p(-x)=n_{p0}+\qty(n_p(-x_p)-n_{p0})e^{-(x-x_p)/L_n}=n_{p0}+n_{p0}\qty(e^{v/V_T}-1)e^{-(x-x_p)/L_n}\qc x\ge x_p,\]
@@ -775,8 +779,8 @@ We connect the + terminal of the input $v_I$ to the + terminal of an ideal diode
 \eit
 \sssc{Junction diode}
 The most common implementation of diode is pn junction, called junction diode, whose + and - terminals are the p-type and n-type ends of a pn junction. Diode refers to it unless otherwise specified. The typical values given below are for Si-based junction diode.
-\ssc{Forward-bias region}
-\sssc{Forward-bias region}
+\ssc{Forward-bias region/mode}
+\sssc{Forward-bias region/mode}
 For appreciable diode current $i$, $e^{v/V_T}\gg 1$ and
 \[i=I_Se^{v/V_T}\]
 \[v=V_T\ln(\frac{i}{I_S})\approx 2.30V_T\log_{10}(\frac{i}{I_S})\approx 60\log_{10}(\frac{i}{I_S})\tx{\ mV}\]
@@ -834,7 +838,7 @@ Either use the exponential model, or
 \item solve the linear circuit to find the time-varying signal components, and
 \item combine the dc component and the time-varying signal components to complete solution.
 \eit
-\ssc{Reverse-bias region without breakdown}
+\ssc{Reverse-bias region/mode without breakdown}
 \sssc{Saturation current or scale current}
 \bit
 \item $I_S$ is proportional to cross-sectional area $A$.
@@ -1043,12 +1047,12 @@ Thus, the output voltage is:
 \sct{Metal-oxide-semiconductor field-effect transistor (MOSFET)}
 \ssc{(Enhance-mode) Metal-oxide-semiconductor field-effect transistor (MOSFET) }
 \sssc{Physical structure of NMOS (transistor)/n-channel MOSFET/FET}
-An NMOS consists of a slightly doped p-type substrate with width $W$, with a metal contact below forming the substrate, body, or bulk (B) terminal, two heavily doped n-type regions, n$^+$ source and n$^+$ drain regions, embedded onto the substrate in the left and right symmetrically, with the same width as the substrate, and with distance $L$ between the two regions called channel length, each with a metal contact on top forming source (S) and drain (D) terminals respectively, and a silicon dioxide \ce{SiO2} or similar oxide layer of thickness $t_{ox}$ on top of the three region contacting all of them but not their metal contact with the same width as the substrate, with a metal contact on top forming the gate (G) terminal, also called gate electrode. Thus, an ideal MOSFET can be symmetrical.
+An NMOS consists of a slightly doped p-type substrate with width $W$, with a metal contact below forming the substrate, body, or bulk (B) terminal, two heavily doped n-type regions, n$^+$ source and n$^+$ drain regions, embedded onto the substrate in the left and right symmetrically, with the same width as the substrate, and with distance $L$ between the two regions called channel length, each with a metal contact on top forming source (S) and drain (D) terminals respectively, and a silicon dioxide \ce{SiO2} or similar oxide layer of thickness $t_{ox}$ on top of the three region contacting all of them but not their metal contact with the same width as the substrate, with a metal contact on top forming the gate (G) terminal, also called gate electrode. Thus, the definition of NMOS is symmetrical.
 
 The substrate forms pn junctions with the source and drain regions, which are kept reverse biased at all times. Assume that the body has no effect on the device operation, and we can treat the MOSFET as a three-terminal device, with the terminals being the gate (G), the source (S), and the drain (D). We define the voltage relative to the source: $v_{GS}=v_G-v_S$ is the gate-to-source voltage, and $v_{DS}=v_D-v_S$ is the drain-to-source voltage. The area of the substrate just under the gate is called channel region, which has length $L$ and width $W$. $i_{DS}$ is denoted $i_D$.
 
 MOS will be referring to NMOS unless otherwise specified.
-\sssc{Cutoff region}
+\sssc{Cutoff region/mode}
 When $v_{GS}<V_t$ where $V_t>0$ is the threshold voltage, it acts as two back-to-back diodes in series between drain and source, which prevent current conduction from drain to source when a voltage $v_{DS}$ is applied, called cutoff region. The high resistance between source and drain is about $10^{12}$ Ohm. $V_t$ is dependent on temperature and devices.
 \sssc{Inducing n-channel}
 When $v_{GS}\ge V_t$ called turn-on condition, holes are repelled from the channel region and pushed downward into the substrate, forming a carrier-depletion region, while free electrons from the n$^+$ source and drain regions are attracted and accumulated in the channel region, inverting the substrate surface from p type to n type, which connects the two n$^+$ regions. This n-type channel, under the oxide layer and on top of the carrier-depletion region, is called n-channel or induced channel. Free electrons can flow through it and conduct between source and drain. Thus free electrons are called majority carrier of NMOS.
@@ -1063,7 +1067,7 @@ is called the effective voltage or the overdrive voltage. And the free electron 
 \[Q=-C_{ox}WLv_{OV}\]
 and the linear charge density along $L$ is
 \[\frac{Q}{L}=-C_{ox}Wv_{OV}\]
-\sssc{Linear approximation of triode region under small drain-to-source voltage}
+\sssc{Linear approximation of triode region/mode under small drain-to-source voltage}
 When $v_{GS}\ge V_t$, apply a small $v_{DS}$ (e.g., 50 mv or so) between drain and source such that $\abs{v_{DS}}\ll v_{OV}$ and that we can assume that the voltage between the gate and any point along the channel region remains approximately constant.
 
 With drain-to-source direction as positive direction, the electric field along $L$ is
@@ -1089,7 +1093,7 @@ The MOSFET transconductance parameter $k_n$ is defined as
 \[k_n=k'_n\frac{W}{L}\]
 And the current equation is
 \[i_D=k_nv_{OV}v_{DS}\]
-\sssc{Triode region}
+\sssc{Triode region/mode}
 When $v_{GS}\ge V_t$, apply a $v_{DS}<v_{OV}$, it appears as a voltage drop across the length of the channel. At the source end,
 \[v_{GS}-V_t=v_{OV}\]
 At the drain end
@@ -1101,7 +1105,7 @@ The current equation becomes
 The linear current equation mentioned earlier is an approximation of it using $v_{DS}\ll v_{OV}$.
 
 The $0<v_{DS}<v_{OV}$ regions is called triode region.
-\sssc{Saturation region - ideal}
+\sssc{Saturation region/mode - ideal}
 When $v_{GS}\ge V_t$ and $v_{DS}\ge v_{OV}$, the channel has zero depth at the drain end, called channel pinch-off, assuming the zero-depth length is negligible relative to $L$, the current saturates at
 \[i_D=\frac{1}{2}k_nv_{OV}^{\phantom{OV}2}\]
 The voltage $v_{OV}$ is also denoted $v_{DS\tx{sat}}$, called saturation voltage. The incremental output resistance is thus infinite when $v_{DS}>v_{OV}$.
@@ -1109,8 +1113,8 @@ The voltage $v_{OV}$ is also denoted $v_{DS\tx{sat}}$, called saturation voltage
 Note that channel pinch-off does not mean channel blockage. Current continues to flow through the pinched-off channel. $v_{DS}-v_{DS\tx{sat}}$ appears a voltage drop across the depletion region. Free electrons are swept through the depletion region towards the drain when channel region has zero depth.
 
 The NMOS in saturation region can be modeled by a voltage-controlled current source with input $v_{GS}$ and output $i_D$. And the voltage across it is $v_{DS}$.
-\sssc{Saturation region - channel-length modulation (CLM) or early effect}
-When $v_{DS}>v_{OV}$, the channel length is actually less than $L$, with a portion near drain being of zero depth, i.e., depletion region, called channel-length modulation or early effect, and the current equation becomes
+\sssc{Saturation region/mode - channel-length modulation (CLM)}
+When $v_{DS}>v_{OV}$, the channel length is actually less than $L$, with a portion near drain being of zero depth, i.e., depletion region, called channel-length modulation, and the current equation becomes
 \[i_{D,clm}=\frac{1}{2}k_nv_{OV}^{\phantom{OV}2}(1+\lambda v_{DS}),\]
 where $\lambda\ge 0$ is a device parameter of the dimension of V$^{-1}$ and is inversely proportional to $L$. For device with large $L$, $\lambda$ is often negligible, while for submicron (micron = \textmu{}m) scale, $\lambda$ is often large. We take $V_A=\frac{1}{\lambda}$, called early voltage. The voltage axis interception of the current equation is $-V_A$.  We can isolate the dependence on $L$ with
 \[V_A=V_A'L\]
@@ -1539,7 +1543,81 @@ A transistor amplifier's gain falls off at low frequency due to coupling capacit
 \sct{Bipolar Junction Transistor (BJT)}
 \ssc{Bipolar Junction Transistor (BJT)}
 \sssc{Physical structure of NPN BJT}
-An NPN BJT consists of three regions, n-type emitter region, p-type base region, and n-type collector region, each with an metal contact forming emitter (E) terminal, base (B) terminal, and collector (C) terminal. They form two pn conjunctions back-to-back sharing the same p-type region, called emitter-base junction (EBJ) or base-emitter junction (BEJ), and collector-base junction (CBJ) or base-collector junction (BCJ). Thus, an ideal BJT can be symmetrical.
-\sssc{Cutoff region}
+An NPN BJT consists of three regions, a heavily doped n-type emitter region, very thin and slightly doped p-type base region, and a heavily doped n-type collector region, each with an metal contact forming emitter (E) terminal, base (B) terminal, and collector (C) terminal. They form two pn conjunctions back-to-back sharing the same p-type region, called emitter-base junction (EBJ) or base-emitter junction (BEJ), and collector-base junction (CBJ) or base-collector junction (BCJ). Thus, the definition of NPN BJT is symmetrical. We consider the case where $v_C>v_E$; otherwise, reverse the definition of C and E.
+
+An actual NPN BJT is usually structured as an n-type collector region with a p-type base region embedded on top which is with an n-type emitter region embedded on top.
+
+BJT will be referring to NPN BJT unless otherwise specified.
+\sssc{Cutoff region/mode}
+Both $v_{BE}$ and $v_{BC}$ are less than forward threshold voltage. Both junctions are cutoff. The transistor is effectively open circuit.
+\sssc{(Forward-)active region/mode}
+$v_{BE}$ is larger than BEJ forward threshold voltage, while $v_{BC}$ is smaller than BCJ forward threshold voltage, which is typically 0.4 V. This is where a BJT can be used as an amplifier.
+\ben
+\itm The current $i_E$ in the direction of B to E in BEJ composed of two components:
+\bit
+\itm Electrons injected from emitter into base.
+\itm Holes injected from base into emitter.
+\eit
+\itm The minority electron concentration in base at BEJ edge is
+\[n_p(0)=n_{p0}e^{\frac{v_{BE}}{V_T}}\]
+\itm Because emitter is much more heavily doped than base, the minority hole concentration in emitter at BEJ edge $p_n(0)\ll n_p(0)$.
+\itm Some injected electrons will recombine with holes in the base region. Most will reach the depletion region of BCJ. Because the base is very thin, the excess electron concentration $n_p-n_{p0}$ decays almost linearly in distance. The tapered minority-carrier concentration profile drives minority electrons to diffuse through the base region, forming current $i_n$ in the direction of C to E:
+\[i_n=-A_EqD_n\dv{n_p(x)}{x}\approx-A_EqD_n\qty(\frac{n_p(0)}{W})=\frac{A_EqD_nn_p(0)}{W}=\frac{A_EqD_nn_{p0}}{W}e^{\frac{v_{BE}}{V_T}}=I_Se^{\frac{v_{BE}}{V_T}}\]
+where $A_E$ is the cross-sectional area of BEJ, $W$ is the effective width of the base, which is the diffusion length of electrons in base, and $I_S$ is the saturation current of BEJ.
+\itm Those electrons will then be swept across the depletion region of BCJ into collector, forming a current flow $i_C=i_n$ in BCJ in the direction of C to B.
+\itm The base current $i_B$ in the direction of external circuit into B composed of two components:
+\bit
+\itm Holes injected from base into emitter.
+\itm Holes recombined with electrons injected from emitter into base.
+\eit
+Both are proportional to $e^{\frac{v_{BE}}{V_T}}$ and
+\[i_B=\frac{i_C}{\beta}=\frac{I_S}{\beta}e^{\frac{v_{BE}}{V_T}}\]
+where $\beta$ is called the common-emitter current gain and is much large than 1 and typically 100. Thus $i_B$ is much smaller than $i_C$.
+\itm Applying KCL, we obtain $i_E$:
+\[i_E=i_B+i_C=\frac{\beta+1}{\beta}I_Se^{\frac{v_{BE}}{V_T}}=\frac{I_S}{\alpha}e^{\frac{v_{BE}}{V_T}}\]
+where
+\[\alpha=\frac{\beta}{\beta+1}\]
+and is called common-base current gain, which is approximately 1 since $\beta\gg1$.
+\een
+Note that the currents are independent of $v_{CB}$ given that $v_{CB}\ge0$. The collector terminal behaves as an ideal VCCS controlled by $v_{BE}$. We will discuss equivalent circuit of the first-order model in the active mode BJT, often referred to as large-signal model, below.
+\sssc{Large-signal equivalent circuit model of active mode - VCCS-$D_E$}
+An equivalent circuit model of active mode BJT is a VCCS connecting C and B enforcing current from C to B
+\[i_C=I_Se^{\frac{v_{BE}}{V_T}}\]
+in series connection with a forward-biased diode $D_E$ with + terminal connected to B and - terminal connected to E with saturation current
+\[I_{SE}=\frac{I_S}{\alpha}\]
+Thus,
+\[i_E=I_{SE}e^{\frac{v_{BE}}{V_T}}=\frac{I_S}{\alpha}e^{\frac{v_{BE}}{V_T}}\]
+\[i_B=i_E-i_C=\frac{I_S}{\beta}e^{\frac{v_{BE}}{V_T}}\]
+\sssc{Large-signal equivalent circuit model of active mode - VCCS-$D_B$}
+An equivalent circuit model of active mode BJT is a VCCS connecting C and E enforcing current from C to E
+\[i_C=I_Se^{\frac{v_{BE}}{V_T}}\]
+in series connection with a forward-biased diode $D_B$ with + terminal connected to B and - terminal connected to E with saturation current
+\[I_{SB}=\frac{I_S}{\beta}\]
+Thus,
+\[i_B=I_{SB}e^{\frac{v_{BE}}{V_T}}=\frac{I_S}{\beta}e^{\frac{v_{BE}}{V_T}}\]
+\[i_E=i_C+i_B=\frac{I_S}{\alpha}e^{\frac{v_{BE}}{V_T}}\]
+\sssc{Large-signal equivalent circuit model of active mode - CCCS-$D_E$}
+An equivalent circuit model of active mode BJT is a CCCS connecting C and B enforcing current from C to B
+\[i_C=\alpha i_E\]
+in series connection with a forward-biased diode $D_E$ with + terminal connected to B and - terminal connected to E with saturation current
+\[I_{SE}=\frac{I_S}{\alpha}\]
+Thus,
+\[i_E=I_{SE}e^{\frac{v_{BE}}{V_T}}=\frac{I_S}{\alpha}e^{\frac{v_{BE}}{V_T}}\]
+\[i_C=\alpha i_E=I_Se^{\frac{v_{BE}}{V_T}}\]
+\[i_B=i_E-i_C=\frac{I_S}{\beta}e^{\frac{v_{BE}}{V_T}}\]
+\sssc{Large-signal equivalent circuit model of active mode - CCCS-$D_B$}
+An equivalent circuit model of active mode BJT is a CCCS connecting C and E enforcing current from C to E
+\[i_C=\beta i_B\]
+in series connection with a forward-biased diode $D_B$ with + terminal connected to B and - terminal connected to E with saturation current
+\[I_{SB}=\frac{I_S}{\beta}\]
+Thus,
+\[i_B=I_{SB}e^{\frac{v_{BE}}{V_T}}=\frac{I_S}{\beta}e^{\frac{v_{BE}}{V_T}}\]
+\[i_C=\beta i_B=I_Se^{\frac{v_{BE}}{V_T}}\]
+\[i_E=i_C+i_B=\frac{I_S}{\alpha}e^{\frac{v_{BE}}{V_T}}\]
+\sssc{Saturation mode}
+Both $v_{BE}$ and $v_{BC}$ are larger than their respective forward threshold voltages.
+
+
+
 
 \end{document}
