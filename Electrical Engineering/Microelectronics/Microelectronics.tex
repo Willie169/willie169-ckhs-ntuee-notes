@@ -1541,8 +1541,8 @@ If connect $v_i$ directly to $v_o$, source resistance in $v_i$ will cause a seve
 A transistor amplifier's gain falls off at low frequency due to coupling capacitors and falls off at high frequency due to the internal capacitive effect of transistor. Typically, there is a finite band over which the gain is almost constant and a lower and a higher 3-dB frequencies $f_L$ and $f_H$, Usually, $f_L\ll f_H$, thus the (3-dB) bandwidth is approximately $f_H$.
 \sct{Bipolar Junction Transistor (BJT)}
 \ssc{Bipolar Junction Transistor (BJT)}
-\sssc{Physical structure of NPN/npn BJT}
-An NPN BJT consists of three regions, a heavily doped n-type emitter region, very thin and slightly doped p-type base region, and a heavily doped n-type collector region, each with an metal contact forming emitter (E) terminal, base (B) terminal, and collector (C) terminal. They form two pn conjunctions back-to-back sharing the same p-type region, called emitter-base junction (EBJ) or base-emitter junction (BEJ), and collector-base junction (CBJ) or base-collector junction (BCJ). Thus, the definition of NPN BJT is symmetrical. We consider the case where $v_C>v_E$; otherwise, reverse the definition of C and E. $i_C$ and $i_B$ are defined in the direction of input into the BJT, and $i_E$ is defined in the direction of output from the BJT. Define relative voltages $v_{BC}=v_B-v_C$, $v_{BE}=v_B-v_E$.
+\sssc{Physical structure of NPN/npn (BJT)}
+An NPN BJT consists of three regions, a heavily doped n-type emitter region, very thin and slightly doped p-type base region, and a heavily doped n-type collector region, each with an metal contact forming emitter (E) terminal, base (B) terminal, and collector (C) terminal. They form two pn conjunctions back-to-back sharing the same p-type region, called emitter-base junction (EBJ) or base-emitter junction (BEJ), and collector-base junction (CBJ) or base-collector junction (BCJ). Thus, the definition of NPN BJT is symmetrical. We consider the case where $v_C>v_E$; otherwise, reverse the definition of C and E. $i_C$ and $i_B$ are oriented in the direction of input into the BJT, and $i_E$ is oriented in the direction of output from the BJT. Define relative voltages $v_{BC}=v_B-v_C$, $v_{BE}=v_B-v_E$.
 
 Let the cross-sectional area of BEJ be $A_E$, diffusion length of electrons in base, i.e., the effective width of the base, be $W$, the saturation current of BEJ and BCj be $I_S$ and $I_{SC}$ respectively, the forward threshold voltage of BEJ and BCj be $V_{th,BE}$ and $V_{th,BC}$ respectively, where $V_{th,BE}$ is typically 0.7 V and $V_{th,BC}$ is typically 0.4 V.
 
@@ -1642,18 +1642,20 @@ Thus,
 \[i_C=i_{CE}-i_{BC}=I_Se^{\frac{v_{BE}}{V_T}}-I_{SC}e^{\frac{v_{BC}}{V_T}}\]
 \[i_B=i_{BC}+i_{BE}=\frac{I_S}{\beta_{\tx{sat}}}e^{\frac{v_{BE}}{V_T}}+I_{SC}e^{\frac{v_{BC}}{V_T}}\]
 \[i_E=i_{CE}+i_{BE}=\frac{I_S}{\alpha_{\tx{sat}}}e^{\frac{v_{BE}}{V_T}}\]
-\sssc{PNP/pnp BJT}
+\sssc{PNP/pnp (BJT)}
 \bit
-\itm Physical structure: Reverse n and p in the description of NPN BJT. $V_{th,EB}$ is typically 0.7 V and $V_{th,CB}$ is typically 0.4 V.
+\itm Physical structure: Reverse n and p in the description of NPN BJT. Different from NPN, for PNP, $i_C$ and $i_B$ are oriented in the direction of output from the BJT, and $i_E$ is oriented in the direction of input into the BJT. $V_{th,EB}$ is typically 0.7 V and $V_{th,CB}$ is typically 0.4 V.
 \itm Cutoff region:
 \[v_{EB}<V_{th,EB},v_{CB}<V_{th,CB}\]
 \itm Active region:
 \[v_{EB}>V_{th,EB},v_{CB}<V_{th,CB}\]
 \itm Saturation region:
 \[v_{EB}>V_{th,EB},v_{CB}>V_{th,CB}\]
-\itm Current equations are the same as NPN BJT with $v_{BE}$ and $v_{BC}$ replaced with $v_{EB}$ and $v_{CB}$, but the carriers of the components of currents are with electrons and holes reversed.
+\itm Current equations are the ones of NPN BJT with $v_{BE}$ and $v_{BC}$ replaced with $v_{EB}$ and $v_{CB}$. The carriers of the components of currents are with electrons and holes reversed.
 \eit
 \sssc{Circuit symbol}
+NPN symbol has arrow pointing out at emitter, while PNP symbol has arrow pointing in at emitter. A mnemonic is, Not Pointing iN for NPN and Pointing iN for PNP. A circle is optionally added around BJT symbol.
+\begin{center}
 \begin{tikzpicture}[]
 \draw (0,0) node[npn](N){\texttt{NPN BJT}}
 (N.B) to[short, l={\texttt{base}}] ++(0,0.5) coordinate(N-B)
