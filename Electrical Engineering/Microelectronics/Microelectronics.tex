@@ -1119,11 +1119,11 @@ When $v_{DS}>v_{OV}$, the channel length is actually less than $L$, with a porti
 where $\lambda\ge 0$ is a device parameter of the dimension of V$^{-1}$ and is inversely proportional to $L$. For device with large $L$, $\lambda$ is often negligible, while for submicron (micron = \textmu{}m) scale, $\lambda$ is often large. We take $V_A=\frac{1}{\lambda}$, called early voltage. The voltage axis interception of the current equation is $-V_A$.  We can isolate the dependence on $L$ with
 \[V_A=V_A'L\]
 The output resistance $r_O$ is
-\[r_O=\frac{V_A}{i_D}\]
-where $i_D$ is that in the ideal case, i.e.,
+\[r_O=\qty(\evlp(\pdv{i_{D,clm}}{v_{DS}})_{v_{GS}})^{-1}=\frac{V_A}{i_D}\]
+where $i_D$ is the output current at that $v_{GS}$ in the ideal case without channel-length modulation
 \[i_D=\frac{1}{2}k_nv_{OV}^{\phantom{OV}2}\]
 And
-\[i_{D,clm}=I_D+\frac{v_{DS}}{r_O}\]
+\[i_{D,clm}=i_D+\frac{v_{DS}}{r_O}\]
 The NMOS in saturation region can be modeled by a voltage-controlled current source with input $v_{GS}$ and output $i_D$ in parallel with a resistance $r_O$. And the voltage across them is $v_{DS}$.
 
 $r_O$ is typically in the range of 10k to 1000k Ohm.
@@ -1542,9 +1542,9 @@ A transistor amplifier's gain falls off at low frequency due to coupling capacit
 \sct{Bipolar Junction Transistor (BJT)}
 \ssc{Bipolar Junction Transistor (BJT)}
 \sssc{Physical structure of NPN/npn (BJT)}
-An NPN BJT consists of three regions, a heavily doped n-type emitter region, very thin and slightly doped p-type base region, and a heavily doped n-type collector region, each with an metal contact forming emitter (E) terminal, base (B) terminal, and collector (C) terminal. They form two pn conjunctions back-to-back sharing the same p-type region, called emitter-base junction (EBJ) or base-emitter junction (BEJ), and collector-base junction (CBJ) or base-collector junction (BCJ). Thus, the definition of NPN BJT is symmetrical. We consider the case where $v_C>v_E$; otherwise, reverse the definition of C and E. $i_C$ and $i_B$ are oriented in the direction of input into the BJT, and $i_E$ is oriented in the direction of output from the BJT. Define relative voltages $v_{BC}=v_B-v_C$, $v_{BE}=v_B-v_E$.
+An NPN BJT consists of three regions, a heavily doped n-type emitter region, very thin and slightly doped p-type base region, and a heavily doped n-type collector region, each with an metal contact forming emitter (E) terminal, base (B) terminal, and collector (C) terminal. They form two pn conjunctions back-to-back sharing the same p-type region, called emitter-base junction (EBJ) or base-emitter junction (BEJ), and collector-base junction (CBJ) or base-collector junction (BCJ). Thus, the definition of NPN BJT is symmetrical. We consider the case where $v_C>v_E$; otherwise, reverse the definition of C and E. $i_C$ and $i_B$ are oriented in the direction of input into the BJT, and $i_E$ is oriented in the direction of output from the BJT. Define relative voltages of two terminals, say A and B, as $v_{AB}=v_A-v_B$.
 
-Let the cross-sectional area of BEJ be $A_E$, diffusion length of electrons in base, i.e., the effective width of the base, be $W$, the saturation current of BEJ and BCj be $I_S$ and $I_{SC}$ respectively, the forward threshold voltage of BEJ and BCj be $V_{th,BE}$ and $V_{th,BC}$ respectively, where $V_{th,BE}$ is typically 0.7 V and $V_{th,BC}$ is typically 0.4 V.
+Let the cross-sectional area of BEJ be $A_E$, the effective (neutral) width of the base be $W$, the saturation current of BEJ and BCj be $I_S$ and $I_{SC}$ respectively, the forward threshold voltage of BEJ and BCj be $V_{th,BE}$ and $V_{th,BC}$ respectively, where $V_{th,BE}$ is typically 0.7 V and $V_{th,BC}$ is typically 0.4 V.
 
 An actual NPN BJT is usually structured as an n-type collector region with a p-type base region embedded on top which is with an n-type emitter region embedded on top.
 
@@ -1566,9 +1566,14 @@ This is where a BJT can be used as an amplifier.
 \itm The minority electron concentration in base at BEJ edge is
 \[n_p(0)=n_{p0}e^{\frac{v_{BE}}{V_T}}\]
 \itm Because emitter is much more heavily doped than base, the minority hole concentration in emitter at BEJ edge $p_n(0)\ll n_p(0)$.
-\itm Some injected electrons will recombine with holes in the base region. Most will reach the depletion region of BCJ. Because the base is very thin, the excess electron concentration $n_p-n_{p0}$ decays almost linearly in distance. The tapered minority-carrier concentration profile drives minority electrons to diffuse through the base region, forming current $i_n$ in the direction of C to E:
-\[i_n=-A_EqD_n\dv{n_p(x)}{x}\approx-A_EqD_n\qty(\frac{n_p(0)}{W})=\frac{A_EqD_nn_p(0)}{W}=\frac{A_EqD_nn_{p0}}{W}e^{\frac{v_{BE}}{V_T}}=I_Se^{\frac{v_{BE}}{V_T}}\]
-\itm Those electrons will then be swept across the depletion region of BCJ into collector, forming a current flow $i_C=i_n$ in BCJ in the direction of C to B.
+\itm Some injected electrons will recombine with holes in the base region. Most will reach the depletion region of BCJ. Because the base is very thin, the excess electron concentration $n_p-n_{p0}$ decays almost linearly in distance. The tapered minority-carrier concentration profile drives minority electrons to diffuse through the base region. Those electrons diffused to base-side BCJ depletion region edge will then be swept across the depletion region of BCJ into collector, forming current flow $i_C$:
+\[\ba
+i_C&=-A_EqD_n\evlp(\dv{n_p(x)}{x})_{\tx{base-side BCJ depletion region edge}}\\
+   &\approx-A_EqD_n\qty(\frac{n_p(0)}{W})\\
+   &=\frac{A_EqD_nn_p(0)}{W}\\
+   &=\frac{A_EqD_nn_{p0}}{W}e^{\frac{v_{BE}}{V_T}}\\
+   &\approx I_Se^{\frac{v_{BE}}{V_T}}
+\ea\]
 \itm The base current $i_B$ in the direction of external circuit into B composed of two components:
 \bit
 \itm Holes injected from base into emitter.
@@ -1576,7 +1581,7 @@ This is where a BJT can be used as an amplifier.
 \eit
 Both are proportional to $e^{\frac{v_{BE}}{V_T}}$ and
 \[i_B=\frac{i_C}{\beta}=\frac{I_S}{\beta}e^{\frac{v_{BE}}{V_T}}\]
-where $\beta$ is a constant called the common-emitter current gain and is much large than 1 and typically 100. Thus $i_B$ is much smaller than $i_C$.
+where $\beta$ is a parameter of a particular BJT called the common-emitter current gain and is much large than 1 and typically 100. Thus $i_B$ is much smaller than $i_C$.
 \itm Applying KCL, we obtain $i_E$:
 \[i_E=i_B+i_C=\frac{\beta+1}{\beta}I_Se^{\frac{v_{BE}}{V_T}}=\frac{I_S}{\alpha}e^{\frac{v_{BE}}{V_T}}\]
 where
@@ -1618,30 +1623,69 @@ Thus,
 \[i_B=I_{SB}e^{\frac{v_{BE}}{V_T}}=\frac{I_S}{\beta}e^{\frac{v_{BE}}{V_T}}\]
 \[i_C=\beta i_B=I_Se^{\frac{v_{BE}}{V_T}}\]
 \[i_E=i_C+i_B=\frac{I_S}{\alpha}e^{\frac{v_{BE}}{V_T}}\]
+\sssc{Collector-Based Reverse Current}
+For both cutoff and active region, we ignored the small reverse currents carried by thermally generated minority carriers in BCJ. This current, denoted $i_{CBO}$ is the reverse current flowing from collector to base with the emitter open-circuited. This current is usually in the nanoampere range and whose value depends on $v_{BC}$ and strongly depends on temperature, approximately doubling for every 10 K rise.
+\sssc{(Forward) active region/mode - Early effect or base-width modulation (BWM)}
+In practical BJT, however, $i_C$ is dependent on $v_{BC}$ due to Early effect or base-width modulation. At a given value of $v_{BE}$, decreasing $v_{BC}$, i.e., increasing $v_{CE}$, increases the reverse-bias voltage on BCJ, which increases the width of the depletion region of BCJ, which decrease the effective (neutral) width of width $W$. The collector current considering the effect $i_{C,bwm}$ is
+\[i_{C,bwm}=I_Se^{\frac{v_{BE}}{V_T}}\qty(1+\frac{v_{CE}}{V_A})\]
+where $V_A$ is a parameter of a particular BJT called Early voltage.
+
+We can define an incremental resistance
+\[r_O=\qty(\evlp(\pdv{i_{C,bwm}}{v_{CE}})_{v_{BE}})^{-1}=\frac{V_A}{i_C}\]
+where $i_C$ is the collector current at that $v_{BE}$ in the ideal case without Early effect
+\[i_C=I_Se^{\frac{v_{BE}}{V_T}}\]
+And
+\[i_{C,bwm}=i_C+\frac{v_{CE}}{r_O}\]
+\sssc{Large-signal equivalent circuit model of active mode with Early effect - VCCS-$D_B$}
+An equivalent circuit model of active mode BJT is a VCCS connecting C and E enforcing
+\[i_C=I_Se^{\frac{v_{BE}}{V_T}}\]
+in parallel with a resistance $r_O$, together in series connection with a forward-biased diode $D_B$ with + terminal connected to B and - terminal connected to E with saturation current
+\[I_{SB}=\frac{I_S}{\beta}\]
+Thus,
+\[i_{C,clm}=i_C+\frac{v_{CE}}{r_O}\]
+\[i_B=I_{SB}e^{\frac{v_{BE}}{V_T}}=\frac{I_S}{\beta}e^{\frac{v_{BE}}{V_T}}\]
+\[i_E=i_{C,clm}+i_B=\frac{I_S}{\alpha}e^{\frac{v_{BE}}{V_T}}+\frac{v_{CE}}{r_O}\]
+\sssc{Large-signal equivalent circuit model of active mode with Early effect - CCCS-$D_B$}
+An equivalent circuit model of active mode BJT is a CCCS connecting C and E enforcing
+\[i_C=\beta i_B\]
+in parallel with a resistance $r_O$, together in series connection with a forward-biased diode $D_B$ with + terminal connected to B and - terminal connected to E with saturation current
+\[I_{SB}=\frac{I_S}{\beta}\]
+Thus,
+\[i_B=I_{SB}e^{\frac{v_{BE}}{V_T}}=\frac{I_S}{\beta}e^{\frac{v_{BE}}{V_T}}\]
+\[i_C=\beta i_B=I_Se^{\frac{v_{BE}}{V_T}}\]
+\[i_{C,clm}=i_C+\frac{v_{CE}}{r_O}\]
+\[i_E=i_{C,clm}+i_B=\frac{I_S}{\alpha}e^{\frac{v_{BE}}{V_T}}+\frac{v_{CE}}{r_O}\]
 \sssc{Saturation region/mode}
 Saturation region is the region that
 \[v_{BE}>V_{th,BE},v_{BC}>V_{th,BC}\]
-Define $\beta_{\tx{sat}}$, also named $\beta_{\tx{forced}}$, as
-\[\beta_{\tx{sat}}=\frac{i_C}{i_B}<\beta\]
-which, unlike $\beta$, is not a constant but will decrease as $v_{BC}$ increases. Let
-\[\alpha_{\tx{sat}}=\frac{\beta_{\tx{sat}}}{\beta_{\tx{sat}}+1}\]
+Define the common-emitter current gain in saturation $\beta_{\tx{forced}}$, also named $\beta_{\tx{sat}}$, as
+\[\beta_{\tx{forced}}=\frac{i_C}{i_B}<\beta\]
+which, unlike $\beta$, is not a constant but will decrease as $v_{BC}$ increases, and common-base current gain in saturation
+\[\alpha_{\tx{forced}}=\frac{\beta_{\tx{forced}}}{\beta_{\tx{forced}}+1}\]
 \[i_C=I_Se^{\frac{v_{BE}}{V_T}}-I_{SC}e^{\frac{v_{BC}}{V_T}}\]
-\[i_B=\frac{I_S}{\beta_{\tx{sat}}}e^{\frac{v_{BE}}{V_T}}+I_{SC}e^{\frac{v_{BC}}{V_T}}\]
-\[i_E=i_C+i_B=\frac{I_S}{\alpha_{\tx{sat}}}e^{\frac{v_{BE}}{V_T}}\]
-To test whether a BJT is in saturation mode, either test for $v_{BC}>V_{th,BC}$ or test for $\frac{i_C}{i_B}<\beta$.
+\[i_B=\frac{I_S}{\beta_{\tx{forced}}}e^{\frac{v_{BE}}{V_T}}+I_{SC}e^{\frac{v_{BC}}{V_T}}\]
+\[i_E=i_C+i_B=\frac{I_S}{\alpha_{\tx{forced}}}e^{\frac{v_{BE}}{V_T}}\]
+To test whether a BJT is in saturation mode, either test for $v_{BC}>V_{th,BC}$ or test for $\frac{i_C}{i_B}<\beta$. The region is called saturation because increasing $i_B$ has little effect on $i_C$ and $v_{CE}$. We may define an incremental resistance $r_{CE,sat}$ as $\pdv{v_{CE}}{i_C}$ given $i_B$ and $i_C$.
 
-Take $V_{th,BE}=$ 0.7 V and $V_{th,BC}=$ 0.4 V, $v_{CE,\tx{sat}}$ is at the edge is 0.3 V, and the deeper in saturation region, $v_{CE,\tx{sat}}$ is smaller.
+Take $V_{th,BE}=$ 0.7 V and $V_{th,BC}=$ 0.4 V, $v_{CE}$ at the edge is 0.3 V, and the deeper in saturation region, $v_{CE}$ is smaller, which we often take 0.2 V $v_{CE}$ as the deep-in-saturation bias point.
 \sssc{Large-signal equivalent circuit model of saturation mode - VCCS-$D_C$-$D_B$}
 An equivalent circuit model of saturation mode BJT is a VCCS connecting C and E enforcing
 \[i_{CE}=I_Se^{\frac{v_{BE}}{V_T}}\]
 a forward-biased diode $D_C$ with + terminal connected to B and - terminal connected to C with saturation current $I_{SC}$, and a forward-biased diode $D_B$ with + terminal connected to B and - terminal connected to E with saturation current
-\[I_{SB}=\frac{I_S}{\beta_{\tx{sat}}}\]
+\[I_{SB}=\frac{I_S}{\beta_{\tx{forced}}}\]
 Thus,
 \[i_{BC}=I_{SC}e^{\frac{v_{BE}}{V_T}}\]
-\[i_{BE}=I_{SB}e^{\frac{v_{BE}}{V_T}}=\frac{I_S}{\beta_{\tx{sat}}}e^{\frac{v_{BE}}{V_T}}\]
+\[i_{BE}=I_{SB}e^{\frac{v_{BE}}{V_T}}=\frac{I_S}{\beta_{\tx{forced}}}e^{\frac{v_{BE}}{V_T}}\]
 \[i_C=i_{CE}-i_{BC}=I_Se^{\frac{v_{BE}}{V_T}}-I_{SC}e^{\frac{v_{BC}}{V_T}}\]
-\[i_B=i_{BC}+i_{BE}=\frac{I_S}{\beta_{\tx{sat}}}e^{\frac{v_{BE}}{V_T}}+I_{SC}e^{\frac{v_{BC}}{V_T}}\]
-\[i_E=i_{CE}+i_{BE}=\frac{I_S}{\alpha_{\tx{sat}}}e^{\frac{v_{BE}}{V_T}}\]
+\[i_B=i_{BC}+i_{BE}=\frac{I_S}{\beta_{\tx{forced}}}e^{\frac{v_{BE}}{V_T}}+I_{SC}e^{\frac{v_{BC}}{V_T}}\]
+\[i_E=i_{CE}+i_{BE}=\frac{I_S}{\alpha_{\tx{forced}}}e^{\frac{v_{BE}}{V_T}}\]
+\sssc{Incremental common-emitter current gain}
+Alternatively, we may observe the incremental common-emitter current gain $\pdv{i_C}{i_B}$ under constant $v_{CE}$.
+
+In active mode, since $\beta$ is constant, the incremental $\beta$ is
+\[\pdv{i_C}{i_B}=\beta\]
+In saturation mode near the edge with active mode,
+\[\pdv{i_C}{i_B}<\beta\]
 \sssc{PNP/pnp (BJT)}
 \bit
 \itm Physical structure: Reverse n and p in the description of NPN BJT. Different from NPN, for PNP, $i_C$ and $i_B$ are oriented in the direction of output from the BJT, and $i_E$ is oriented in the direction of input into the BJT. $V_{th,EB}$ is typically 0.7 V and $V_{th,CB}$ is typically 0.4 V.
