@@ -1168,7 +1168,6 @@ A technology was developed that permits the fabrication of both NMOS and PMOS tr
 (N.S) to[short, l={\texttt{source}}] ++(0,-0.5) coordinate(N-S)
 (N.G) to[short, l={\texttt{gate}}] ++(-0.5,0) coordinate(N-G)
 ;
-\ctikzset{tripoles/mos style=arrows}
 \draw (10,0) node[pmos](P){\texttt{PMOS}}
 (P.S) to[short, l={\texttt{source}}] ++(0,0.5) coordinate(P-S)
 (P.D) to[short, l={\texttt{drain}}] ++(0,-0.5) coordinate(P-D)
@@ -1655,11 +1654,18 @@ Thus,
 \itm Current equations are the same as NPN BJT with $v_{BE}$ and $v_{BC}$ replaced with $v_{EB}$ and $v_{CB}$, but the carriers of the components of currents are with electrons and holes reversed.
 \eit
 \sssc{Circuit symbol}
-\begin{center}
-\begin{circuitikz}[]
-\draw (0,0) node[npn]{NPN BJT};
-\draw (10,0) node[pnp]{PNP BJT};
-\end{circuitikz}
+\begin{tikzpicture}[]
+\draw (0,0) node[npn](N){\texttt{NPN BJT}}
+(N.B) to[short, l={\texttt{base}}] ++(0,0.5) coordinate(N-B)
+(N.C) to[short, l={\texttt{collector}}] ++(0,-0.5) coordinate(N-C)
+(N.E) to[short, l={\texttt{emitter}}] ++(-0.5,0) coordinate(N-E)
+;
+\draw (10,0) node[pnp](P){\texttt{PNP BJT}}
+(N.B) to[short, l={\texttt{base}}] ++(0,0.5) coordinate(N-B)
+(N.C) to[short, l={\texttt{collector}}] ++(0,-0.5) coordinate(N-C)
+(N.E) to[short, l={\texttt{emitter}}] ++(-0.5,0) coordinate(N-E)
+;
+\end{tikzpicture}
 \end{center}
 
 \end{document}
